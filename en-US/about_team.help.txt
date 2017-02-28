@@ -1,0 +1,20 @@
+TOPIC
+    about_team
+
+SHORT DESCRIPTION
+    Provides access to your Visual Studio Team Services (VSTS) and Team Foundation Server (TFS) from Mac, Linux and PC.
+
+LONG DESCRIPTION
+    Add an account using Add-TeamAccount and then you can call the rest of the functions.
+
+EXAMPLES
+    Get-Project
+
+    This will return all the WellFormed team projects.
+
+KEYWORDS
+    Team Services, VSTS, TFS, VSO, TFS, DevOps
+
+SEE ALSO
+    Add-TeamAccount
+    Get-Project
