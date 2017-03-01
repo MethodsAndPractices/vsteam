@@ -3220,7 +3220,7 @@ entire URL.  Just the portion before visualstudio.com. For example in the
 following url mydemos is the account name.
 https://mydemos.visualstudio.com
 or
-The ful Team Foundation Server (TFS) url including the collection.
+The full Team Foundation Server (TFS) url including the collection.
 http://localhost:8080/tfs/DefaultCollection</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
@@ -3245,7 +3245,7 @@ entire URL.  Just the portion before visualstudio.com. For example in the
 following url mydemos is the account name.
 https://mydemos.visualstudio.com
 or
-The ful Team Foundation Server (TFS) url including the collection.
+The full Team Foundation Server (TFS) url including the collection.
 http://localhost:8080/tfs/DefaultCollection</maml:para>
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
