@@ -91,8 +91,12 @@ function Get-BuildDefinition {
             }
 
             # Call the REST API
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-
+			if (_useWindowsAuthenticationOnPremise) {
+	          $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+            } else {
+              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+			}
+            
             _applyTypes -item $resp
 
             Write-Output $resp
@@ -110,8 +114,12 @@ function Get-BuildDefinition {
          }
 
          # Call the REST API
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-
+		 if (_useWindowsAuthenticationOnPremise) {
+	       $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         } else {
+		   $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	     }
+         
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach($item in $resp.value) {
             _applyTypes -item $item
@@ -141,7 +149,11 @@ function Add-BuildDefinition {
       $url = _buildURL -projectName $projectName
 
       # Call the REST API
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
+	  if (_useWindowsAuthenticationOnPremise) {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
+      } else {
+  	    $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
+	  }
 
       return $resp
    }
@@ -170,7 +182,11 @@ function Remove-BuildDefinition {
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build Definition")) {
             # Call the REST API
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+			if (_useWindowsAuthenticationOnPremise) {
+			  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+            } else {
+	          $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	        }
 
             Write-Output "Deleted build defintion $item"
          }

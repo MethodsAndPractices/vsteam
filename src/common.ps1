@@ -79,6 +79,10 @@ function _getUserAgent {
    return "Team Module/$($versionData.ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
 }
 
+function _useWindowsAuthenticationOnPremise {
+  return _isOnWindows -and (!$env:TEAM_PAT) -and -not ($env:TEAM_ACCT -like "*visualstudio.com")
+}
+
 function _getProjects {
    if(-not $env:TEAM_ACCT) {
       Write-Output @()
@@ -95,7 +99,11 @@ function _getProjects {
 
    # Call the REST API
    try {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  if (_useWindowsAuthenticationOnPremise) {
+	    $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+      } else {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  }
 
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
