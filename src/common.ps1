@@ -15,6 +15,10 @@ function _handleException {
    Write-Warning (ConvertFrom-Json $ex.ToString()).message
 }
 
+function _isOnWindows {
+   ($env:os -ne $null) -and ($env:os).StartsWith("Windows")
+}
+
 # The url for release is special and used in more than one
 # module so I moved it here.
 function _buildReleaseURL {
@@ -64,7 +68,7 @@ function _getUserAgent {
 
    $os = 'unknown'
 
-   if ($PSVersionTable.PSVersion.Major -lt 6 -or $IsWindows) {
+   if ($PSVersionTable.PSVersion.Major -lt 6 -or _isOnWindows) {
       $os = 'Windows'
    } elseif ($IsOSX) {
       $os = 'OSX'
