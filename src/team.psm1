@@ -123,7 +123,13 @@ function Add-TeamAccount {
          $Account = "https://$($Account).visualstudio.com"
       }
 
-      $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
+	  $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
+
+	  # If no PAT is entered, and on windows, assume we will be using default credentials for REST calls
+	  if ((!$_pat) -and (_isOnWindows)) {
+		Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token provided"
+		$encodedPat = ""
+	  }
 
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
    }
