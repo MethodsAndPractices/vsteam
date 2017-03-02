@@ -68,7 +68,7 @@ function _getUserAgent {
 
    $os = 'unknown'
 
-   if ($PSVersionTable.PSVersion.Major -lt 6 -or _isOnWindows) {
+   if ($PSVersionTable.PSVersion.Major -lt 6 -or (_isOnWindows)) {
       $os = 'Windows'
    } elseif ($IsOSX) {
       $os = 'OSX'
