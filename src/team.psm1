@@ -46,6 +46,7 @@ function Get-TeamInfo {
 function Add-TeamAccount {
    [CmdletBinding(DefaultParameterSetName='Secure')]
    param(
+      [parameter(ParameterSetName='Windows', Mandatory=$true, Position=1)]
       [parameter(ParameterSetName='Secure', Mandatory=$true, Position=1)]
       [Parameter(ParameterSetName='Plain')]
       [string] $Account,
@@ -56,7 +57,7 @@ function Add-TeamAccount {
    )
 
    DynamicParam {
-      # Only add this option on Windows Machines
+      # Only add these options on Windows Machines
       if(_isOnWindows) {
          Write-Verbose 'On a Windows machine'
 
@@ -88,9 +89,28 @@ function Add-TeamAccount {
          # Add the ValidateSet to the attributes collection
          $AttributeCollection.Add($ValidateSetAttribute)
 
+		 $ParameterName2 = 'UseWindowsAuthentication'
+
+         # Create the dictionary
+         $RuntimeParameterDictionary2 = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+         # Create the collection of attributes
+         $AttributeCollection2 = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+
+         # Create and set the parameters' attributes
+         $ParameterAttribute2 = New-Object System.Management.Automation.ParameterAttribute
+         $ParameterAttribute2.Mandatory = $true
+		 $ParameterAttribute2.ParameterSetName = "Windows"
+         $ParameterAttribute2.HelpMessage = "On Windows machines allows you to use the active user identity for authentication. Not available on other platforms."
+
+         # Add the attributes to the attributes collection
+         $AttributeCollection2.Add($ParameterAttribute2)
+
          # Create and return the dynamic parameter
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
+		 $RuntimeParameter2 = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName2, [switch], $AttributeCollection2)
+         $RuntimeParameterDictionary.Add($ParameterName2, $RuntimeParameter2)
          return $RuntimeParameterDictionary
       } else {
          Write-Verbose 'Not on a Windows machine'
@@ -98,6 +118,24 @@ function Add-TeamAccount {
    }
 
    process {
+      if(_isOnWindows) {
+         # Bind the parameter to a friendly variable
+         $Level = $PSBoundParameters[$ParameterName]
+
+         if(-not $Level) {
+            $Level = "Process"
+         }
+
+		 $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
+		 if (!($PAT) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
+			Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
+		 }
+
+      } else {
+         $Level = "Process"
+      }
+      
+
       if ($PAT) {
          # Convert the securestring to a normal string
          # this was the one technique that worked on Mac, Linux and Windows
@@ -107,16 +145,7 @@ function Add-TeamAccount {
          $_pat = $PersonalAccessToken
       }
 
-      if(_isOnWindows) {
-         # Bind the parameter to a friendly variable
-         $Level = $PSBoundParameters[$ParameterName]
-
-         if(-not $Level) {
-            $Level = "Process"
-         }
-      } else {
-         $Level = "Process"
-      }
+      
 
       # If they only gave an account name add visualstudio.com
       if($Account.ToLower().Contains('http') -eq $false) {
@@ -125,9 +154,9 @@ function Add-TeamAccount {
 
 	  $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
 
-	  # If no PAT is entered, and on windows, assume we will be using default credentials for REST calls
-	  if ((!$_pat) -and (_isOnWindows)) {
-		Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token provided"
+	  # If no PAT is entered, and on windows, are we using default credentials for REST calls
+	  if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
+		Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
 		$encodedPat = ""
 	  }
 

@@ -3234,6 +3234,32 @@ http://localhost:8080/tfs/DefaultCollection</maml:para>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 			</command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-TeamAccount</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Account</maml:name>
+          <maml:description>
+            <maml:para>
+              The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the
+              entire URL.  Just the portion before visualstudio.com. For example in the
+              following url mydemos is the account name.
+              https://mydemos.visualstudio.com
+              or
+              The full Team Foundation Server (TFS) url including the collection.
+              http://localhost:8080/tfs/DefaultCollection
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <!--Dynamic-->
+          <maml:name>UseWindowsAuthentication</maml:name>
+          <maml:description>
+            <maml:para/>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>      
+      
 		</command:syntax>
 		<command:parameters>
 			<!-- All Parameters-->
@@ -3295,6 +3321,14 @@ To use pat</maml:para>
 				</dev:type>
 				<dev:defaultValue/>
 			</command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <!--Dynamic-->
+        <maml:name>UseWindowsAuthentication</maml:name>
+        <maml:description>
+          <maml:para/>
+        </maml:description>
+        <dev:defaultValue/>
+      </command:parameter>
 		</command:parameters>
 		<command:examples>
 			<!-- Examples-->
@@ -3318,6 +3352,16 @@ To use pat</maml:para>
 					<maml:para>Allows you to provide all the information on the command line.</maml:para>
 				</dev:remarks>
 			</command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:introduction>
+          <maml:para>PS C:\&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>Add-TeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
+        <dev:remarks>
+          <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
+        </dev:remarks>
+      </command:example>
 		</command:examples>
 		<maml:relatedLinks>
 			<!-- Links-->
