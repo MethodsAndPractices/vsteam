@@ -45,7 +45,11 @@ function _checkStatus {
    )
 
    # Call the REST API
-   $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   if (_useWindowsAuthenticationOnPremise) {
+     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -UseDefaultCredentials
+   } else {
+     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
 
    return $resp
 }
@@ -114,7 +118,11 @@ function Get-Project {
          }
 
          # Call the REST API
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         if (_useWindowsAuthenticationOnPremise) {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         } else {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          _applyTypes -item $resp
@@ -126,7 +134,11 @@ function Get-Project {
 
          try {
             # Call the REST API
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            if (_useWindowsAuthenticationOnPremise) {
+              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+            } else {
+              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach($item in $resp.value) {
@@ -191,7 +203,11 @@ function Update-Project {
       Write-Verbose $body
 
       # Call the REST API
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  if (_useWindowsAuthenticationOnPremise) {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+	  } else {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  }
 
       _trackProgress -resp $resp -title 'Updating team project' -msg $msg
 
@@ -242,7 +258,11 @@ function Add-Project {
 
    try {
       # Call the REST API
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  if (_useWindowsAuthenticationOnPremise) {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+	  } else {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  }
 
       _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($Name), Template: $($processTemplate), Src: $($srcCtrl)"
 
@@ -277,7 +297,11 @@ function Remove-Project {
 
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	     if (_useWindowsAuthenticationOnPremise) {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+	     } else {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	     }
 
          _trackProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 

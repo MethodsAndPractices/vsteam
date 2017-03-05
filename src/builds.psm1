@@ -107,7 +107,11 @@ function Get-Build {
             $listurl = _buildURL -projectName $ProjectName -id $item
 
             # Call the REST API
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+			if (_useWindowsAuthenticationOnPremise) {
+              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+            } else {
+              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	        }
 
             _applyTypes -item $resp
 
@@ -130,7 +134,11 @@ function Get-Build {
          $listurl += _appendQueryString -name "definitions" -value ($definitions -join ',')
 
          # Call the REST API
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	     if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         } else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	     }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach($item in $resp.value) {
@@ -199,7 +207,11 @@ function Add-Build {
       Write-Verbose $body
 
       # Call the REST API
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  if (_useWindowsAuthenticationOnPremise) {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+      } else {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  }
 
       _applyTypes -item $resp
 
@@ -231,7 +243,11 @@ function Remove-Build {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
                # Call the REST API
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	           if (_useWindowsAuthenticationOnPremise) {
+                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+               } else {
+                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	           }
 
                Write-Output "Deleted build $item"
             }

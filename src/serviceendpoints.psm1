@@ -61,7 +61,11 @@ function _checkStatus {
    )
 
    # Call the REST API
-   $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   if (_useWindowsAuthenticationOnPremise) {
+     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -UseDefaultCredentials
+   } else {
+     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
 
    return $resp
 }
@@ -117,7 +121,11 @@ function Remove-ServiceEndpoint {
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Service Endpoint")) {
             # Call the REST API
-            Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	        if (_useWindowsAuthenticationOnPremise) {
+              Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -UseDefaultCredentials
+            } else {
+              Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
 
             Write-Output "Deleted service endpoint $item"
          }
@@ -174,7 +182,11 @@ function Add-AzureRMServiceEndpoint {
       $body = $obj | ConvertTo-Json
 
       # Call the REST API
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  if (_useWindowsAuthenticationOnPremise) {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
+      } else {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      }
 
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
@@ -201,7 +213,11 @@ function Get-ServiceEndpoint {
          $url = _buildURL -projectName $projectName -id $id
 
          # Call the REST API
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	     if (_useWindowsAuthenticationOnPremise) {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
+         } else {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
 
          _applyTypes -item $resp
 
@@ -211,7 +227,11 @@ function Get-ServiceEndpoint {
          $url = _buildURL -projectName $projectName
 
          # Call the REST API
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	     if (_useWindowsAuthenticationOnPremise) {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
+         } else {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach($item in $resp.value) {

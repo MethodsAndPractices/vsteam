@@ -32,7 +32,11 @@ function Get-CloudSubscription {
    $url = _buildURL
 
    # Call the REST API
-   $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   if (_useWindowsAuthenticationOnPremise) {
+     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
+    } else {
+     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	}
 
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach($item in $resp.value) {

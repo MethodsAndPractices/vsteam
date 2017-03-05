@@ -42,8 +42,12 @@ function Get-Approval {
 
       try {
          # Call the REST API
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-
+		 if (_useWindowsAuthenticationOnPremise) {
+	       $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         } else {
+           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	     }
+        
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach($item in $resp.value) {
             _applyTypes -item $item
@@ -96,8 +100,12 @@ function Set-Approval {
 
             try {
                # Call the REST API
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
-
+			   if (_useWindowsAuthenticationOnPremise) {
+	             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json"  -Body $body -UseDefaultCredentials
+               } else {
+                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
+	           }
+               
                Write-Output "Approval $item status changed to $status"
             }
             catch {

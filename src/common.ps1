@@ -15,6 +15,10 @@ function _handleException {
    Write-Warning (ConvertFrom-Json $ex.ToString()).message
 }
 
+function _isOnWindows {
+   ($env:os -ne $null) -and ($env:os).StartsWith("Windows")
+}
+
 # The url for release is special and used in more than one
 # module so I moved it here.
 function _buildReleaseURL {
@@ -64,7 +68,7 @@ function _getUserAgent {
 
    $os = 'unknown'
 
-   if ($PSVersionTable.PSVersion.Major -lt 6 -or $IsWindows) {
+   if ($PSVersionTable.PSVersion.Major -lt 6 -or (_isOnWindows)) {
       $os = 'Windows'
    } elseif ($IsOSX) {
       $os = 'OSX'
@@ -73,6 +77,10 @@ function _getUserAgent {
    }
 
    return "Team Module/$($versionData.ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
+}
+
+function _useWindowsAuthenticationOnPremise {
+  return _isOnWindows -and (!$env:TEAM_PAT) -and -not ($env:TEAM_ACCT -like "*visualstudio.com")
 }
 
 function _getProjects {
@@ -91,7 +99,11 @@ function _getProjects {
 
    # Call the REST API
    try {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  if (_useWindowsAuthenticationOnPremise) {
+	    $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+      } else {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+	  }
 
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name

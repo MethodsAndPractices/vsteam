@@ -3179,28 +3179,32 @@ entire URL.  Just the portion before visualstudio.com. For example in the
 following url mydemos is the account name.
 https://mydemos.visualstudio.com
 or
-The ful Team Foundation Server (TFS) url including the collection.
+The full Team Foundation Server (TFS) url including the collection.
 http://localhost:8080/tfs/DefaultCollection</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
-				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<maml:name>PAT</maml:name>
 					<maml:description>
 						<maml:para>A secured string to capture your personal access token.  This will allow you
 to provide your personal access token without displaying it in plain text.
 
-To use pat</maml:para>
+To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
+					<dev:defaultValue>
+					</dev:defaultValue>
 				</command:parameter>
-				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<!--Dynamic-->
 					<maml:name>Level</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:defaultValue>
+					</dev:defaultValue>
 				</command:parameter>
 			</command:syntaxItem>
 			<command:syntaxItem>
@@ -3220,18 +3224,48 @@ entire URL.  Just the portion before visualstudio.com. For example in the
 following url mydemos is the account name.
 https://mydemos.visualstudio.com
 or
-The ful Team Foundation Server (TFS) url including the collection.
+The full Team Foundation Server (TFS) url including the collection.
 http://localhost:8080/tfs/DefaultCollection</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
-				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<!--Dynamic-->
 					<maml:name>Level</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:defaultValue>
+					</dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+			<command:syntaxItem>
+				<maml:name>Add-TeamAccount</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+					<maml:name>Account</maml:name>
+					<maml:description>
+						<maml:para>
+              The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the
+              entire URL.  Just the portion before visualstudio.com. For example in the
+              following url mydemos is the account name.
+              https://mydemos.visualstudio.com
+              or
+              The full Team Foundation Server (TFS) url including the collection.
+              http://localhost:8080/tfs/DefaultCollection
+						</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
+					<!--Dynamic-->
+					<maml:name>UseWindowsAuthentication</maml:name>
+					<maml:description>
+						<maml:para>Allows the use of the current user&apos;s Windows credentials to authenticate against a local TFS.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false">SwitchParameter</command:parameterValue>
+					<dev:defaultValue>
+					</dev:defaultValue>
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -3245,7 +3279,7 @@ entire URL.  Just the portion before visualstudio.com. For example in the
 following url mydemos is the account name.
 https://mydemos.visualstudio.com
 or
-The ful Team Foundation Server (TFS) url including the collection.
+The full Team Foundation Server (TFS) url including the collection.
 http://localhost:8080/tfs/DefaultCollection</maml:para>
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -3255,33 +3289,35 @@ http://localhost:8080/tfs/DefaultCollection</maml:para>
 				</dev:type>
 				<dev:defaultValue/>
 			</command:parameter>
-			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>PAT</maml:name>
 				<maml:description>
 					<maml:para>A secured string to capture your personal access token.  This will allow you
 to provide your personal access token without displaying it in plain text.
 
-To use pat</maml:para>
+To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
 				<dev:type>
 					<maml:name>SecureString</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue>
+				</dev:defaultValue>
 			</command:parameter>
-			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<!--Dynamic-->
 				<maml:name>Level</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue>
+				</dev:defaultValue>
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2">
 				<maml:name>PersonalAccessToken</maml:name>
@@ -3294,6 +3330,16 @@ To use pat</maml:para>
 					<maml:uri/>
 				</dev:type>
 				<dev:defaultValue/>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
+				<!--Dynamic-->
+				<maml:name>UseWindowsAuthentication</maml:name>
+				<maml:description>
+					<maml:para>Allows the use of the current user&apos;s Windows credentials to authenticate against a local TFS.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false">SwitchParameter</command:parameterValue>
+				<dev:defaultValue>
+				</dev:defaultValue>
 			</command:parameter>
 		</command:parameters>
 		<command:examples>
@@ -3316,6 +3362,16 @@ To use pat</maml:para>
 				<dev:code>Add-TeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga</dev:code>
 				<dev:remarks>
 					<maml:para>Allows you to provide all the information on the command line.</maml:para>
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para>PS C:\&gt;</maml:para>
+				</maml:introduction>
+				<dev:code>Add-TeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
+				<dev:remarks>
+					<maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
 				</dev:remarks>
 			</command:example>
 		</command:examples>
@@ -4333,8 +4389,7 @@ the Pipeline by Property Name</maml:para>
 						<maml:para>Name of the project to remove.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue/>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Force</maml:name>
@@ -4374,8 +4429,7 @@ the project.</maml:para>
 					<maml:name>String</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue/>
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -4985,8 +5039,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<maml:para>Get all the repositories in your Visual Studio Team Services or Team Founcation Server account, or a specific project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para>
-				</maml:para>
+				<maml:para/>
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>GitRepository</command:noun>
@@ -5011,8 +5064,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">String</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue/>
 				</command:parameter>
 				<command:parameter required="false" pipelineinput="True (ByPropertyName)" globbing="false" position="named" aliases="RepositoryID">
 					<maml:name>Id</maml:name>
@@ -5022,8 +5074,7 @@ commas to separate the IDs. To find the ID of a repository, type
 Get-Repository.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">Guid[]</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue/>
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -5045,8 +5096,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<maml:name>String</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue/>
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="RepositoryID">
 				<maml:name>Id</maml:name>
@@ -5060,8 +5110,7 @@ Get-Repository.</maml:para>
 					<maml:name>Int32[]</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue/>
 			</command:parameter>
 		</command:parameters>
 		<command:examples>
@@ -5139,8 +5188,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>Specifies the name of the repository.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">System.String</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue/>
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -5174,8 +5222,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<maml:name>Int32[]</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue/>
 			</command:parameter>
 		</command:parameters>
 		<command:examples>
