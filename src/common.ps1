@@ -80,7 +80,7 @@ function _getUserAgent {
 }
 
 function _useWindowsAuthenticationOnPremise {
-  return _isOnWindows -and (!$env:TEAM_PAT) -and -not ($env:TEAM_ACCT -like "*visualstudio.com")
+  return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($env:TEAM_ACCT -like "*visualstudio.com")
 }
 
 function _getProjects {
