@@ -89,10 +89,7 @@ function Add-TeamAccount {
          # Add the ValidateSet to the attributes collection
          $AttributeCollection.Add($ValidateSetAttribute)
 
-		 $ParameterName2 = 'UseWindowsAuthentication'
-
-         # Create the dictionary
-         $RuntimeParameterDictionary2 = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+         $ParameterName2 = 'UseWindowsAuthentication'
 
          # Create the collection of attributes
          $AttributeCollection2 = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
@@ -100,7 +97,7 @@ function Add-TeamAccount {
          # Create and set the parameters' attributes
          $ParameterAttribute2 = New-Object System.Management.Automation.ParameterAttribute
          $ParameterAttribute2.Mandatory = $true
-		 $ParameterAttribute2.ParameterSetName = "Windows"
+         $ParameterAttribute2.ParameterSetName = "Windows"
          $ParameterAttribute2.HelpMessage = "On Windows machines allows you to use the active user identity for authentication. Not available on other platforms."
 
          # Add the attributes to the attributes collection
@@ -109,7 +106,7 @@ function Add-TeamAccount {
          # Create and return the dynamic parameter
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
-		 $RuntimeParameter2 = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName2, [switch], $AttributeCollection2)
+         $RuntimeParameter2 = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName2, [switch], $AttributeCollection2)
          $RuntimeParameterDictionary.Add($ParameterName2, $RuntimeParameter2)
          return $RuntimeParameterDictionary
       } else {
@@ -126,10 +123,10 @@ function Add-TeamAccount {
             $Level = "Process"
          }
 
-		 $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
-		 if (!($PAT) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
-			Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
-		 }
+         $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
+         if (!($PAT) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
+            Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
+         }
 
       } else {
          $Level = "Process"
@@ -152,13 +149,13 @@ function Add-TeamAccount {
          $Account = "https://$($Account).visualstudio.com"
       }
 
-	  $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
+      $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
 
-	  # If no PAT is entered, and on windows, are we using default credentials for REST calls
-	  if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
-		Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
-		$encodedPat = ""
-	  }
+      # If no PAT is entered, and on windows, are we using default credentials for REST calls
+      if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
+         Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
+         $encodedPat = ""
+      }
 
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
    }
@@ -279,17 +276,73 @@ function Set-DefaultProject {
    [CmdletBinding()]
    param()
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterName "Project"
+      $dp = _buildProjectNameDynamicParam -ParameterName "Project"
+
+      # Only add these options on Windows Machines
+      if(_isOnWindows) {
+         Write-Verbose 'On a Windows machine'
+
+         $ParameterName = 'Level'
+
+         # Create the dictionary
+         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+         # Create the collection of attributes
+         $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+
+         # Create and set the parameters' attributes
+         $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
+         $ParameterAttribute.Mandatory = $false
+         $ParameterAttribute.HelpMessage = "On Windows machines allows you to store the default project at the process, user or machine level. Not available on other platforms."
+
+         # Add the attributes to the attributes collection
+         $AttributeCollection.Add($ParameterAttribute)
+
+         # Generate and set the ValidateSet
+         if (_testAdministrator) {
+            $arrSet = "Process", "User", "Machine"
+         } else {
+            $arrSet = "Process", "User"
+         }
+
+         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
+
+         # Add the ValidateSet to the attributes collection
+         $AttributeCollection.Add($ValidateSetAttribute)
+
+         # Create and return the dynamic parameter
+         $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
+         $dp.Add($ParameterName, $RuntimeParameter)
+         return $dp
+      } else {
+         Write-Verbose 'Not on a Windows machine'
+      }
    }
 
    begin {
       # Bind the parameter to a friendly variable
       $Project = $PSBoundParameters["Project"]
+      $Level = $PSBoundParameters[$ParameterName]
    }
 
    process {
+      if(_isOnWindows) {
+         if(-not $Level) {
+            $Level = "Process"
+         }
+
+         # You always have to set at the process level or they will Not
+         # be seen in your current session.
+         $env:TEAM_PROJECT = $Project
+
+         [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
+      }
+
       $Global:PSDefaultParameterValues["*:projectName"] = $Project
    }
 }
 
 Export-ModuleMember -Alias * -Function Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Clear-DefaultProject, Set-DefaultProject
+
+# Check to see if the user stored the default project in an environment variable
+Set-DefaultProject -Project $env:TEAM_PROJECT
