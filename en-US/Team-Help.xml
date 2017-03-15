@@ -3193,8 +3193,7 @@ to provide your personal access token without displaying it in plain text.
 To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue/>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<!--Dynamic-->
@@ -3203,8 +3202,7 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 						<maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue/>
 				</command:parameter>
 			</command:syntaxItem>
 			<command:syntaxItem>
@@ -3236,8 +3234,7 @@ http://localhost:8080/tfs/DefaultCollection</maml:para>
 						<maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue/>
 				</command:parameter>
 			</command:syntaxItem>
 			<command:syntaxItem>
@@ -3264,8 +3261,7 @@ http://localhost:8080/tfs/DefaultCollection</maml:para>
 						<maml:para>Allows the use of the current user&apos;s Windows credentials to authenticate against a local TFS.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">SwitchParameter</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue/>
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -3302,8 +3298,7 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 					<maml:name>SecureString</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue/>
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<!--Dynamic-->
@@ -3316,8 +3311,7 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 					<maml:name>String</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue/>
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2">
 				<maml:name>PersonalAccessToken</maml:name>
@@ -3338,8 +3332,7 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 					<maml:para>Allows the use of the current user&apos;s Windows credentials to authenticate against a local TFS.</maml:para>
 				</maml:description>
 				<command:parameterValue required="false">SwitchParameter</command:parameterValue>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue/>
 			</command:parameter>
 		</command:parameters>
 		<command:examples>
@@ -3404,10 +3397,34 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 			<!-- Parameter Sets-->
 			<command:syntaxItem>
 				<maml:name>Clear-DefaultProject</maml:name>
+				<command:parameter required="false" pipelineinput="false" globbing="false" position="named" aliases="">
+					<!--Dynamic-->
+					<maml:name>Level</maml:name>
+					<maml:description>
+						<maml:para>On Windows allows you to clear your default project at the Process, User or Machine levels.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false">String</command:parameterValue>
+					<dev:defaultValue>
+					</dev:defaultValue>
+				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
 		<command:parameters>
 			<!-- All Parameters-->
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
+				<!--Dynamic-->
+				<maml:name>Level</maml:name>
+				<maml:description>
+					<maml:para>On Windows allows you to clear your default project at the Process, User or Machine levels.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue>
+				</dev:defaultValue>
+			</command:parameter>
 		</command:parameters>
 		<command:examples>
 			<!-- Examples-->
@@ -4704,7 +4721,7 @@ System.String
 		<command:details>
 			<command:name>Remove-TeamAccount</command:name>
 			<maml:description>
-				<maml:para>Clears your account name and personal access token.</maml:para>
+				<maml:para>Clears your default project, account name and personal access token.</maml:para>
 			</maml:description>
 			<maml:copyright>
 				<maml:para/>
@@ -4714,7 +4731,7 @@ System.String
 			<dev:version/>
 		</command:details>
 		<maml:description>
-			<maml:para>Clears the environment variables that hold your account and personal access token.
+			<maml:para>Clears the environment variables that hold your default project, account and personal access token.
 You have to run Add-TeamAccount again before calling any other functions.
 
 To remove from the Machine level you must be running PowerShell as administrator.</maml:para>
@@ -4730,30 +4747,33 @@ To remove from the Machine level you must be running PowerShell as administrator
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				</command:parameter>
-				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<!--Dynamic-->
 					<maml:name>Level</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para>On Windows allows you to clear your account information at the Process, User or Machine levels.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:defaultValue>
+					</dev:defaultValue>
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
 		<command:parameters>
 			<!-- All Parameters-->
-			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<!--Dynamic-->
 				<maml:name>Level</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para>On Windows allows you to clear your account information at the Process, User or Machine levels.</maml:para>
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
 					<maml:uri/>
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue>
+				</dev:defaultValue>
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Force</maml:name>
@@ -4961,6 +4981,14 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 					<dev:defaultValue/>
 				</command:parameter>
+				<command:parameter required="false" pipelineinput="false" globbing="false" position="named">
+					<!--Dynamic-->
+					<maml:name>Level</maml:name>
+					<maml:description>
+						<maml:para>On Windows allows you to store your default project at the Process, User or Machine levels.  When saved at the User or Machine level your default project will be in any future PowerShell processes.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false">String</command:parameterValue>
+				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
 		<command:parameters>
@@ -4982,6 +5010,20 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<maml:uri/>
 				</dev:type>
 				<dev:defaultValue/>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
+				<!--Dynamic-->
+				<maml:name>Level</maml:name>
+				<maml:description>
+					<maml:para>On Windows allows you to store your default project at the Process, User or Machine levels.  When saved at the User or Machine level your default project will be in any future PowerShell processes.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue>
+				</dev:defaultValue>
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
