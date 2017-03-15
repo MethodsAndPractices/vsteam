@@ -28,10 +28,19 @@ function _setEnvironmentVariables {
    }
 }
 
+# If you remove an account the current default project needs to be cleared as well.
 function _clearEnvironmentVariables {
    param (
       [string] $Level = "Process"
    )
+
+   $env:TEAM_PROJECT = $null
+   $Global:PSDefaultParameterValues.Remove("*:projectName")
+
+   # This is so it can be loaded by default in the next session
+   if($Level -ne "Process") {
+      [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
+   }
 
    _setEnvironmentVariables -Level $Level -Pat $null -Acct $null
 }
@@ -261,15 +270,80 @@ function Remove-TeamAccount {
             }
          }
 
-         Write-Output "Removed team account information"
+         Write-Output "Removed default project and team account information"
       }
    }
 }
 
 function Clear-DefaultProject {
-   $Global:PSDefaultParameterValues.Remove("*:projectName")
+   [CmdletBinding()]
+   param()
+   DynamicParam {
+      # Only add these options on Windows Machines
+      if(_isOnWindows) {
+         Write-Verbose 'On a Windows machine'
 
-   Write-Output "Removed default project"
+         $ParameterName = 'Level'
+
+         # Create the dictionary
+         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+         # Create the collection of attributes
+         $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+
+         # Create and set the parameters' attributes
+         $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
+         $ParameterAttribute.Mandatory = $false
+         $ParameterAttribute.HelpMessage = "On Windows machines allows you to store the default project at the process, user or machine level. Not available on other platforms."
+
+         # Add the attributes to the attributes collection
+         $AttributeCollection.Add($ParameterAttribute)
+
+         # Generate and set the ValidateSet
+         if (_testAdministrator) {
+            $arrSet = "Process", "User", "Machine"
+         } else {
+            $arrSet = "Process", "User"
+         }
+
+         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
+
+         # Add the ValidateSet to the attributes collection
+         $AttributeCollection.Add($ValidateSetAttribute)
+
+         # Create and return the dynamic parameter
+         $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
+         $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
+         return $RuntimeParameterDictionary
+      } else {
+         Write-Verbose 'Not on a Windows machine'
+      }
+   }
+
+   begin {
+      # Bind the parameter to a friendly variable
+      $Level = $PSBoundParameters[$ParameterName]
+   }
+
+   process {
+      if(_isOnWindows) {
+         if(-not $Level) {
+            $Level = "Process"
+         }
+      } else {
+         $Level = "Process"
+      }
+
+      # You always have to set at the process level or they will Not
+      # be seen in your current session.
+      $env:TEAM_PROJECT = $null
+
+      [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
+
+      $Global:PSDefaultParameterValues.Remove("*:projectName")
+
+      Write-Output "Removed default project"
+   }
 }
 
 function Set-DefaultProject {
@@ -283,9 +357,6 @@ function Set-DefaultProject {
          Write-Verbose 'On a Windows machine'
 
          $ParameterName = 'Level'
-
-         # Create the dictionary
-         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
          # Create the collection of attributes
          $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
@@ -345,4 +416,6 @@ function Set-DefaultProject {
 Export-ModuleMember -Alias * -Function Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Clear-DefaultProject, Set-DefaultProject
 
 # Check to see if the user stored the default project in an environment variable
-Set-DefaultProject -Project $env:TEAM_PROJECT
+if($env:TEAM_PROJECT -ne $null) {
+   Set-DefaultProject -Project $env:TEAM_PROJECT
+}
