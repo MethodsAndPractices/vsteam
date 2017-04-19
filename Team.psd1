@@ -86,6 +86,7 @@
       'Add-BuildDefinition',
       'Add-Project',
       'Add-Release',
+	  'Add-ReleaseEnvironment',
       'Add-ReleaseDefinition',
       'Add-TeamAccount',
       'Clear-DefaultProject',

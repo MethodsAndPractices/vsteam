@@ -320,4 +320,105 @@ function Set-ReleaseStatus {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Release, Add-Release, Remove-Release, Set-ReleaseStatus
+function Add-ReleaseEnvironment {
+   [CmdletBinding(DefaultParameterSetName='ById', SupportsShouldProcess=$true, ConfirmImpact="Medium")]
+   param(
+      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [int] $ReleaseId,   
+
+      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [string] $EnvironmentId,
+
+      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [string] $EnvironmentStatus,
+
+      # Forces the command without confirmation
+      [switch] $Force
+   )
+
+   DynamicParam {
+      $dp = _buildProjectNameDynamicParam
+
+      # If they have not set the default project you can't find the
+      # validateset so skip that check. However, we still need to give
+      # the option to pass by name.
+      if ($Global:PSDefaultParameterValues["*:projectName"]) {
+         $defs = Get-ReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
+         $arrSet = $defs.name
+      } else {
+         Write-Verbose 'Call Set-DefaultProject for Tab Complete of DefinitionName'
+         $defs = $null
+         $arrSet = $null
+      }
+
+      $ParameterName = 'DefinitionName'
+      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName' -Mandatory $true
+      $dp.Add($ParameterName, $rp)
+
+      if($Global:PSDefaultParameterValues["*:projectName"]) {
+         $builds = Get-Build -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $arrSet = $builds.name
+      } else {
+         Write-Verbose 'Call Set-DefaultProject for Tab Complete of BuildName'
+         $builds = $null
+         $arrSet = $null
+      }
+
+      $ParameterName = 'BuildNumber'
+      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName' -Mandatory $true
+      $dp.Add($ParameterName, $rp)
+
+      $dp
+   }
+
+   process {
+      Write-Debug 'Add-ReleaseEnvironment Process'
+
+      # Bind the parameter to a friendly variable
+      $BuildNumber = $PSBoundParameters["BuildNumber"]
+      $ProjectName = $PSBoundParameters["ProjectName"]
+      $DefinitionName = $PSBoundParameters["DefinitionName"]
+
+      #Write-Verbose $builds
+
+      if ($builds -and -not $buildId) {
+         $buildId = $builds | Where-Object {$_.name -eq $BuildNumber} | Select-Object -ExpandProperty id
+      }
+
+      if ($defs -and -not $artifactAlias) {
+         $def = $defs | Where-Object {$_.name -eq $DefinitionName}
+         $definitionId = $def | Select-Object -ExpandProperty id
+
+         $artifactAlias = $def.artifacts[0].alias
+      }
+
+      # Build the url
+      $url = _buildReleaseURL -resource "releases/$ReleaseId/environments/$EnvironmentId" -version '3.0-preview.2' -projectName $projectName
+
+      $body = '{"status": "' + $EnvironmentStatus + '"}'       
+
+      Write-Verbose $body
+
+      # Call the REST API
+      if ($force -or $pscmdlet.ShouldProcess("Add ReleaseEnvironment")) {
+
+         try {
+            Write-Debug 'Add-ReleaseEnvironment Call the REST API'
+            if (_useWindowsAuthenticationOnPremise) {
+              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $url -ContentType "application/json" -UseDefaultCredentials -Body $body
+            } else {
+              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
+            }
+
+            # _applyTypes $resp
+
+            Write-Output $resp
+         }
+         catch {
+            _handleException $_
+         }
+      }
+   }
+}
+
+Export-ModuleMember -Alias * -Function Get-Release, Add-Release, Remove-Release, Set-ReleaseStatus, Add-ReleaseEnvironment
