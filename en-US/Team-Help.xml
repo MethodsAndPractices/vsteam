@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <helpItems xmlns="http://msh" schema="maml">
-	<!-- Edited with: SAPIEN PowerShell HelpWriter 2016 v1.1.20-->
+	<!-- Edited with: SAPIEN PowerShell HelpWriter 2017 v2.1.34-->
 	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
 		<!-- Command-->
 		<command:details>
@@ -9,11 +9,11 @@
 				<maml:para>Gets a list of approvals for all releases for a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>Approval</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Get-Approval function gets the approvals for all releases for a team
@@ -39,7 +39,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="0" aliases="">
 					<maml:name>StatusFilter</maml:name>
@@ -47,7 +47,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>By default the function returns Pending approvals.  Using this filter you can return Approved, ReAssigned or Rejected approvals.  There is a custom table view for each status.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="">
 					<maml:name>ReleaseIdFilter</maml:name>
@@ -55,7 +55,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>Onlt approvals for the release ids provided will be returned.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">Int32[]</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="">
 					<maml:name>AssignedToFilter</maml:name>
@@ -63,7 +63,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>Approvals are filtered to only those assigned to this user.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -77,9 +77,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="">
 				<maml:name>ReleaseIdFilter</maml:name>
@@ -89,9 +89,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="">
 				<maml:name>AssignedToFilter</maml:name>
@@ -101,9 +101,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -119,9 +119,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -129,10 +129,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>You can pipe build defintion IDs to this function.</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -141,16 +141,16 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>Team.BuildDefinition</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets build definitions.
@@ -201,7 +201,7 @@ to pass the ProjectName with each call.</maml:para>
 Set-DefaultProject
 Add-BuildDefinition
 Remove-BuildDefinition</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -210,17 +210,17 @@ Remove-BuildDefinition</maml:linkText>
 		<command:details>
 			<command:name>Add-AzureRMServiceEndpoint</command:name>
 			<maml:description>
-				<maml:para/>
+				<maml:para />
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Add</command:verb>
 			<command:noun>AzureRMServiceEndpoint</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
-			<maml:para/>
+			<maml:para />
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
@@ -238,33 +238,33 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 					<maml:name>DisplayName</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="1">
 					<maml:name>SubscriptionId</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="2">
 					<maml:name>SubscriptionTenantId</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3">
 					<maml:name>EndpointName</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -275,50 +275,50 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 				<maml:name>DisplayName</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="1">
 				<maml:name>SubscriptionId</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="2">
 				<maml:name>SubscriptionTenantId</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3">
 				<maml:name>EndpointName</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -334,9 +334,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -345,10 +345,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<dev:type>
 					<maml:name>System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -357,10 +357,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -370,20 +370,19 @@ you do not have to pass the ProjectName with each call.</maml:para>
 		<command:details>
 			<command:name>Add-Release</command:name>
 			<maml:description>
-				<maml:para>Creates a new release defintion from a JSON file.</maml:para>
+				<maml:para>Queues a new release</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Add</command:verb>
 			<command:noun>Release</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
-			<maml:para>Reads a JSON file off disk and uses that file to create a new release defintion
-in the provided project.
-
-You must call Add-TeamAccount before calling this function.</maml:para>
+			<maml:para>Add-Release will queue a new release. The environments will deploy according to how the 
+release definition is configured in the Triggers tab.</maml:para>
+			<maml:para>You must call Add-TeamAccount before calling this function.</maml:para>
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
@@ -401,47 +400,47 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Description</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Name</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>SourceBranch</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>ArtifactAlias</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>DefinitionId</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>BuildId</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -467,26 +466,26 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Description</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Name</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>SourceBranch</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -501,7 +500,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<!--Dynamic-->
 					<maml:name>DefinitionName</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -509,7 +508,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<!--Dynamic-->
 					<maml:name>BuildNumber</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -520,62 +519,62 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>DefinitionId</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>0</dev:defaultValue>
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Description</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>ArtifactAlias</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Name</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>BuildId</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -591,34 +590,34 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named">
 				<!--Dynamic-->
 				<maml:name>DefinitionName</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>SourceBranch</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Force</maml:name>
@@ -628,7 +627,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -636,14 +635,14 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<!--Dynamic-->
 				<maml:name>BuildNumber</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -651,16 +650,16 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>System.String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release s.
@@ -685,7 +684,7 @@ id name
 44 Demo-CI-44
 
 
-PS C:\&gt;Get-ReleaseDefinition -Expand artifacts | ft id,name,@{l=&apos;Alais&apos;;e={$_.artifacts[0].alias}}
+PS C:\&gt;Get-ReleaseDefinition -Expand artifacts | ft id,name,@{l='Alais';e={$_.artifacts[0].alias}}
 
 id name    Alais
 -- ----    -----
@@ -720,11 +719,11 @@ You must set a default project to tab complete DefinitionName and BuildNumber.</
 				<maml:para>Sets the status of approval to Approved, Rejected, Pending, or ReAssigned.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Set</command:verb>
 			<command:noun>Approval</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Set-Approval sets the status of approval to Approved, Rejected, Pending, or ReAssigned.</maml:para>
@@ -745,7 +744,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 					<maml:name>Id</maml:name>
@@ -753,14 +752,14 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>Specifies the approval IDs of the approvals to set.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="">
 					<maml:name>Status</maml:name>
 					<maml:description>
 						<maml:para>Specifies the status to set for the approval.
 
-Valid values: &apos;Approved&apos;, &apos;Rejected&apos;, &apos;Pending&apos;, &apos;ReAssigned&apos;</maml:para>
+Valid values: 'Approved', 'Rejected', 'Pending', 'ReAssigned'</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 					<dev:defaultValue>Approved</dev:defaultValue>
@@ -772,7 +771,7 @@ Valid values: &apos;Approved&apos;, &apos;Rejected&apos;, &apos;Pending&apos;, &
 Alias of the user. chuckreinhart@outlook.com, for example.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="">
 					<maml:name>Comment</maml:name>
@@ -780,7 +779,7 @@ Alias of the user. chuckreinhart@outlook.com, for example.</maml:para>
 						<maml:para>Specifies the comment to be stored with this approval.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<maml:name>Force</maml:name>
@@ -788,7 +787,7 @@ Alias of the user. chuckreinhart@outlook.com, for example.</maml:para>
 						<maml:para>Sets the status without prompting for confirmation.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -808,9 +807,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<maml:name>Id</maml:name>
@@ -820,21 +819,21 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="">
 				<maml:name>Status</maml:name>
 				<maml:description>
 					<maml:para>Specifies the status to set for the approval.
 
-Valid values: &apos;Approved&apos;, &apos;Rejected&apos;, &apos;Pending&apos;, &apos;ReAssigned&apos;</maml:para>
+Valid values: 'Approved', 'Rejected', 'Pending', 'ReAssigned'</maml:para>
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>Approved</dev:defaultValue>
 			</command:parameter>
@@ -847,9 +846,9 @@ Alias of the user. chuckreinhart@outlook.com, for example.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="">
 				<maml:name>Comment</maml:name>
@@ -859,9 +858,9 @@ Alias of the user. chuckreinhart@outlook.com, for example.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>Force</maml:name>
@@ -871,9 +870,9 @@ Alias of the user. chuckreinhart@outlook.com, for example.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -883,10 +882,10 @@ Alias of the user. chuckreinhart@outlook.com, for example.</maml:para>
 					<maml:name>System.Int32[]
 System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -895,10 +894,10 @@ System.String
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -938,11 +937,11 @@ System.String
 				<maml:para>Creates a new build defintion from a JSON file.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Add</command:verb>
 			<command:noun>BuildDefinition</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Reads a JSON file off disk and uses that file to create a new build defintion
@@ -966,7 +965,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 					<maml:name>InFile</maml:name>
@@ -989,9 +988,9 @@ a path and file name.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -1007,9 +1006,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -1017,16 +1016,16 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>System.String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets build definitions.
@@ -1060,11 +1059,11 @@ on the demo team project.</maml:para>
 				<maml:para>Gets the build defintions for a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>BuildDefinition</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Get-BuildDefinition function gets the build defintions for a team
@@ -1091,7 +1090,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Filter</maml:name>
@@ -1124,7 +1123,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="BuildDefinitionID">
 					<maml:name>Id</maml:name>
@@ -1155,9 +1154,9 @@ definitions whose names start with this value. For example: MS*.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Type</maml:name>
@@ -1168,7 +1167,7 @@ specified, all types will be returned.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>All</dev:defaultValue>
 			</command:parameter>
@@ -1186,9 +1185,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="BuildDefinitionID">
 				<maml:name>Id</maml:name>
@@ -1200,9 +1199,9 @@ Get-BuildDefinition.</maml:para>
 				<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Revision</maml:name>
@@ -1212,7 +1211,7 @@ Get-BuildDefinition.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>-1</dev:defaultValue>
 			</command:parameter>
@@ -1222,10 +1221,10 @@ Get-BuildDefinition.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>You can pipe build defintion IDs to this function.</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -1234,10 +1233,10 @@ Get-BuildDefinition.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>Team.BuildDefinition</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -1266,7 +1265,7 @@ displays all available properties (*) of the build defintion objects.</maml:para
 Set-DefaultProject
 Add-BuildDefinition
 Remove-BuildDefinition</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -1278,11 +1277,11 @@ Remove-BuildDefinition</maml:linkText>
 				<maml:para>Removes the build defintions for a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Remove</command:verb>
 			<command:noun>BuildDefinition</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Remove-BuildDefinition function removes the build defintions for a
@@ -1305,7 +1304,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 					<maml:name>Id</maml:name>
@@ -1339,9 +1338,9 @@ Get-BuildDefinition.</maml:para>
 				<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Force</maml:name>
@@ -1353,7 +1352,7 @@ removing any build defintion.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -1371,9 +1370,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -1381,10 +1380,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>You can pipe build defintion IDs to this function.</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -1393,16 +1392,16 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>None</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets build definitions.
@@ -1435,7 +1434,7 @@ function, which removes each build defintion object.</maml:para>
 Set-DefaultProject
 Add-BuildDefinition
 Get-BuildDefinition</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -1447,11 +1446,11 @@ Get-BuildDefinition</maml:linkText>
 				<maml:para>Gets the builds for a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>Build</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Get-Build function gets the builds for a team project.
@@ -1475,7 +1474,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Top</maml:name>
@@ -1491,7 +1490,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 Failed, or Canceled.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<maml:name>ReasonFilter</maml:name>
@@ -1501,7 +1500,7 @@ IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveset,
 CheckInShelveset, Triggered, or All.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<maml:name>StatusFilter</maml:name>
@@ -1510,7 +1509,7 @@ CheckInShelveset, Triggered, or All.</maml:para>
 Cancelling, Postponed, NotStarted, or All.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Queues</maml:name>
@@ -1534,7 +1533,7 @@ to return.</maml:para>
 with search i.e. 2015* will return all build numbers that start with 2015.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Type</maml:name>
@@ -1573,7 +1572,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="BuildID">
 					<maml:name>Id</maml:name>
@@ -1595,7 +1594,7 @@ separate the IDs. To find the ID of a build, type Get-Build.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>0</dev:defaultValue>
 			</command:parameter>
@@ -1608,9 +1607,9 @@ Failed, or Canceled.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>ReasonFilter</maml:name>
@@ -1622,9 +1621,9 @@ CheckInShelveset, Triggered, or All.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>StatusFilter</maml:name>
@@ -1635,9 +1634,9 @@ Cancelling, Postponed, NotStarted, or All.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Queues</maml:name>
@@ -1647,9 +1646,9 @@ Cancelling, Postponed, NotStarted, or All.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Definitions</maml:name>
@@ -1660,9 +1659,9 @@ to return.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="true" pipelineInput="false" position="named" aliases="">
 				<maml:name>BuildNumber</maml:name>
@@ -1673,9 +1672,9 @@ with search i.e. 2015* will return all build numbers that start with 2015.</maml
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Type</maml:name>
@@ -1685,9 +1684,9 @@ with search i.e. 2015* will return all build numbers that start with 2015.</maml
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>MaxBuildsPerDefinition</maml:name>
@@ -1698,7 +1697,7 @@ valid when definitions is also specified.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>0</dev:defaultValue>
 			</command:parameter>
@@ -1710,9 +1709,9 @@ valid when definitions is also specified.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String[]</command:parameterValue>
 				<dev:type>
 					<maml:name>String[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -1728,9 +1727,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="BuildID">
 				<maml:name>Id</maml:name>
@@ -1741,9 +1740,9 @@ separate the IDs. To find the ID of a build, type Get-Build.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -1751,10 +1750,10 @@ separate the IDs. To find the ID of a build, type Get-Build.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>You can pipe build IDs to this function.</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -1763,16 +1762,16 @@ separate the IDs. To find the ID of a build, type Get-Build.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>Team.Build</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets builds.
@@ -1835,7 +1834,7 @@ displays all available properties (*) of the build objects.</maml:para>
 Set-DefaultProject
 Add-Build
 Remove-Build</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -1847,11 +1846,11 @@ Remove-Build</maml:linkText>
 				<maml:para>Queues a new build.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Add</command:verb>
 			<command:noun>Build</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Add-Build will queue a new build. You can override the queue in the build defintion by using the QueueName parameter.
@@ -1874,7 +1873,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="">
 					<!--Dynamic-->
@@ -1883,7 +1882,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>The name of the build defintion to use to queue to build.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="">
 					<!--Dynamic-->
@@ -1892,7 +1891,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>The name of the queue to use for this build.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -1912,9 +1911,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="">
 				<!--Dynamic-->
@@ -1925,9 +1924,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="">
 				<!--Dynamic-->
@@ -1938,9 +1937,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -1948,7 +1947,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>System.String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
 					<maml:para>Build Defintion Name</maml:para>
@@ -1957,7 +1956,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>System.String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
 					<maml:para>Queue Name</maml:para>
@@ -1969,7 +1968,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>Team-Build</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
 					<maml:para>The team build just created.
@@ -2007,17 +2006,17 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
 		<command:details>
 			<command:name>Remove-Build</command:name>
 			<maml:description>
-				<maml:para/>
+				<maml:para />
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Remove</command:verb>
 			<command:noun>Build</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
-			<maml:para/>
+			<maml:para />
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
@@ -2035,7 +2034,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="">
 					<maml:name>Id</maml:name>
@@ -2045,7 +2044,7 @@ use commas to separate the IDs. To find the ID of a build,
 type Get-Build.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<maml:name>Force</maml:name>
@@ -2055,7 +2054,7 @@ By default, Remove-Build prompts for confirmation before removing
 any build.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -2071,9 +2070,9 @@ type Get-Build.</maml:para>
 				<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>Force</maml:name>
@@ -2085,9 +2084,9 @@ any build.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -2103,9 +2102,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -2115,10 +2114,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<maml:name>System.Int32[]
 System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -2127,10 +2126,10 @@ System.String
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -2156,11 +2155,11 @@ System.String
 				<maml:para>Gets the Azure subscriptions associated with the Team Services account.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>CloudSubscription</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Get-CloudSubscription function gets the Azure subscriptions
@@ -2180,10 +2179,10 @@ associated with the Team Services account.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>None</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -2192,10 +2191,10 @@ associated with the Team Services account.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>Team.AzureSubscription</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -2224,7 +2223,7 @@ Team Services account.</maml:para>
 			<!-- Links-->
 			<maml:navigationLink>
 				<maml:linkText>Add-TeamAccount</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -2233,17 +2232,17 @@ Team Services account.</maml:para>
 		<command:details>
 			<command:name>Get-Pool</command:name>
 			<maml:description>
-				<maml:para/>
+				<maml:para />
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>Pool</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
-			<maml:para/>
+			<maml:para />
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
@@ -2252,14 +2251,14 @@ Team Services account.</maml:para>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>PoolName</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>ActionFilter</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -2269,7 +2268,7 @@ Team Services account.</maml:para>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="PoolID">
 					<maml:name>Id</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -2280,38 +2279,38 @@ Team Services account.</maml:para>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>PoolName</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>ActionFilter</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="PoolID">
 				<maml:name>Id</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -2320,10 +2319,10 @@ Team Services account.</maml:para>
 				<dev:type>
 					<maml:name>System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -2332,10 +2331,10 @@ Team Services account.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -2348,11 +2347,11 @@ Team Services account.</maml:para>
 				<maml:para>Returns a list of projects in the Team Services or Team Foundation Server account.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>Project</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The list of projects returned can be controlled by using the stateFilter, top
@@ -2412,7 +2411,7 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 					<!--Dynamic-->
 					<maml:name>Name</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -2429,7 +2428,7 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>WellFormed</dev:defaultValue>
 			</command:parameter>
@@ -2441,7 +2440,7 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>100</dev:defaultValue>
 			</command:parameter>
@@ -2453,7 +2452,7 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>0</dev:defaultValue>
 			</command:parameter>
@@ -2465,9 +2464,9 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>IncludeCapabilites</maml:name>
@@ -2477,7 +2476,7 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -2485,14 +2484,14 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 				<!--Dynamic-->
 				<maml:name>Name</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -2500,10 +2499,10 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>System.String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -2536,7 +2535,7 @@ or All. If you do not provide a value the default is WellFormed.</maml:para>
 				<maml:linkText>Add-TeamAccount
 Add-Project
 Remove-Project</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -2553,11 +2552,11 @@ Remove-Project</maml:linkText>
 				<maml:para>Creates a new release defintion from a JSON file.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Add</command:verb>
 			<command:noun>ReleaseDefinition</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Reads a JSON file off disk and uses that file to create a new release defintion
@@ -2581,7 +2580,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 					<maml:name>InFile</maml:name>
@@ -2604,9 +2603,9 @@ a path and file name.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -2622,9 +2621,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -2632,16 +2631,16 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>System.String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release definitions.
@@ -2675,11 +2674,11 @@ on the demo team project.</maml:para>
 				<maml:para>Gets the releases for a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>Release</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Get-Release function gets the releases for a team
@@ -2706,7 +2705,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Expand</maml:name>
@@ -2719,56 +2718,56 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>StatusFilter</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>DefinitionId</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Top</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>CreatedBy</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>MinCreatedTime</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">DateTime</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>MaxCreatedTime</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">DateTime</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>QueryOrder</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>ContinuationToken</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -2787,7 +2786,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="ReleaseID">
 					<maml:name>Id</maml:name>
@@ -2811,105 +2810,105 @@ Get-Release.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>StatusFilter</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>DefinitionId</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>0</dev:defaultValue>
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Top</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>0</dev:defaultValue>
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>CreatedBy</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>MinCreatedTime</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">DateTime</command:parameterValue>
 				<dev:type>
 					<maml:name>DateTime</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>MaxCreatedTime</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">DateTime</command:parameterValue>
 				<dev:type>
 					<maml:name>DateTime</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>QueryOrder</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>ContinuationToken</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -2925,9 +2924,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="ReleaseID">
 				<maml:name>Id</maml:name>
@@ -2939,9 +2938,9 @@ Get-Release.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -2949,10 +2948,10 @@ Get-Release.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>You can pipe release defintion IDs to this function.</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -2961,16 +2960,16 @@ Get-Release.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>Team.Release</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release s.
@@ -3003,7 +3002,7 @@ displays all available properties (*) of the release defintion objects.</maml:pa
 Set-DefaultProject
 Add-Release
 Remove-Release</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -3015,11 +3014,11 @@ Remove-Release</maml:linkText>
 				<maml:para>Adds a Team Project to your Team Services account.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Add</command:verb>
 			<command:noun>Project</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>This will create a new Team Project in your Team Services
@@ -3035,7 +3034,7 @@ account.</maml:para>
 						<maml:para>The name of the project to create.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
 					<maml:name>ProcessTemplate</maml:name>
@@ -3071,9 +3070,9 @@ Agile, Scrum or CMMI.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
 				<maml:name>ProcessTemplate</maml:name>
@@ -3084,7 +3083,7 @@ Agile, Scrum or CMMI.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>Scrum</dev:defaultValue>
 			</command:parameter>
@@ -3096,9 +3095,9 @@ Agile, Scrum or CMMI.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>TFVC</maml:name>
@@ -3108,7 +3107,7 @@ Agile, Scrum or CMMI.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -3120,7 +3119,7 @@ Agile, Scrum or CMMI.</maml:para>
 				<maml:introduction>
 					<maml:para>PS C:\&gt;</maml:para>
 				</maml:introduction>
-				<dev:code>Add-Project &#39;MyProject&#39;</dev:code>
+				<dev:code>Add-Project 'MyProject'</dev:code>
 				<dev:remarks>
 					<maml:para>This will add a project name MyProject with no description using the Scrum process
 template and Git source control.</maml:para>
@@ -3131,7 +3130,7 @@ template and Git source control.</maml:para>
 				<maml:introduction>
 					<maml:para>PS C:\&gt;</maml:para>
 				</maml:introduction>
-				<dev:code>Add-Project &#39;MyProject&#39; -TFVC -ProcessTemplate Agile</dev:code>
+				<dev:code>Add-Project 'MyProject' -TFVC -ProcessTemplate Agile</dev:code>
 				<dev:remarks>
 					<maml:para>This will add a project name MyProject with no description using the Agile process
 template and TFVC source control.</maml:para>
@@ -3143,7 +3142,7 @@ template and TFVC source control.</maml:para>
 			<maml:navigationLink>
 				<maml:linkText>Add-TeamAccount
 Remove-Project</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -3156,11 +3155,11 @@ Remove-Project</maml:linkText>
 functions in this module.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Add</command:verb>
 			<command:noun>TeamAccount</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>On Windows you have to option to store the information at the process, user
@@ -3193,7 +3192,7 @@ to provide your personal access token without displaying it in plain text.
 To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<!--Dynamic-->
@@ -3202,7 +3201,7 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 						<maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 			<command:syntaxItem>
@@ -3234,7 +3233,7 @@ http://localhost:8080/tfs/DefaultCollection</maml:para>
 						<maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 			<command:syntaxItem>
@@ -3258,10 +3257,10 @@ http://localhost:8080/tfs/DefaultCollection</maml:para>
 					<!--Dynamic-->
 					<maml:name>UseWindowsAuthentication</maml:name>
 					<maml:description>
-						<maml:para>Allows the use of the current user&apos;s Windows credentials to authenticate against a local TFS.</maml:para>
+						<maml:para>Allows the use of the current user's Windows credentials to authenticate against a local TFS.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">SwitchParameter</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -3281,9 +3280,9 @@ http://localhost:8080/tfs/DefaultCollection</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>PAT</maml:name>
@@ -3296,9 +3295,9 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 				<command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
 				<dev:type>
 					<maml:name>SecureString</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<!--Dynamic-->
@@ -3309,9 +3308,9 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2">
 				<maml:name>PersonalAccessToken</maml:name>
@@ -3321,18 +3320,18 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<!--Dynamic-->
 				<maml:name>UseWindowsAuthentication</maml:name>
 				<maml:description>
-					<maml:para>Allows the use of the current user&apos;s Windows credentials to authenticate against a local TFS.</maml:para>
+					<maml:para>Allows the use of the current user's Windows credentials to authenticate against a local TFS.</maml:para>
 				</maml:description>
 				<command:parameterValue required="false">SwitchParameter</command:parameterValue>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:examples>
@@ -3372,7 +3371,7 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 			<!-- Links-->
 			<maml:navigationLink>
 				<maml:linkText>Add-TeamAccount</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -3384,11 +3383,11 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 				<maml:para>Clears the value stored in the default project parameter value.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Clear</command:verb>
 			<command:noun>DefaultProject</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Clears the value stored in the default project parameter value.</maml:para>
@@ -3397,15 +3396,14 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 			<!-- Parameter Sets-->
 			<command:syntaxItem>
 				<maml:name>Clear-DefaultProject</maml:name>
-				<command:parameter required="false" pipelineinput="false" globbing="false" position="named" aliases="">
+				<command:parameter required="false" globbing="false" position="named" aliases="" pipelineInput="false">
 					<!--Dynamic-->
 					<maml:name>Level</maml:name>
 					<maml:description>
 						<maml:para>On Windows allows you to clear your default project at the Process, User or Machine levels.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">String</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue></dev:defaultValue>
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -3420,10 +3418,9 @@ To use pat simply omit it from the Add-TeamAccount command.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue></dev:defaultValue>
 			</command:parameter>
 		</command:parameters>
 		<command:examples>
@@ -3445,7 +3442,7 @@ provide a project for any functions that require a project.</maml:para>
 			<maml:navigationLink>
 				<maml:linkText>Set-Project
 Add-TeamAccount</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -3454,17 +3451,17 @@ Add-TeamAccount</maml:linkText>
 		<command:details>
 			<command:name>Get-Queue</command:name>
 			<maml:description>
-				<maml:para/>
+				<maml:para />
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>Queue</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
-			<maml:para/>
+			<maml:para />
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
@@ -3482,19 +3479,19 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>QueueName</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>ActionFilter</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -3513,12 +3510,12 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="QueueID">
 					<maml:name>Id</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -3529,26 +3526,26 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>QueueName</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>ActionFilter</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -3564,21 +3561,21 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="QueueID">
 				<maml:name>Id</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -3587,10 +3584,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<dev:type>
 					<maml:name>System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -3599,10 +3596,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -3615,11 +3612,11 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<maml:para>Gets the release defintions for a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>ReleaseDefinition</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Get-ReleaseDefinition function gets the release defintions for a team
@@ -3646,7 +3643,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<maml:name>Expand</maml:name>
@@ -3655,7 +3652,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 Definition (environments, artifacts, none).</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 			<command:syntaxItem>
@@ -3672,7 +3669,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="ReleaseDefinitionID">
 					<maml:name>Id</maml:name>
@@ -3701,9 +3698,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>Expand</maml:name>
@@ -3714,9 +3711,9 @@ Definition (environments, artifacts, none).</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="ReleaseDefinitionID">
 				<maml:name>Id</maml:name>
@@ -3728,9 +3725,9 @@ Get-ReleaseDefinition.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -3738,10 +3735,10 @@ Get-ReleaseDefinition.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>Int[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -3750,10 +3747,10 @@ Get-ReleaseDefinition.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>Team.ReleaseDefinition</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -3780,7 +3777,7 @@ displays all available properties (*) of the release defintion objects.</maml:pa
 			<maml:navigationLink>
 				<maml:linkText>Add-TeamAccount
 				</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 			<maml:navigationLink>
 				<maml:linkText>Set-DefaultProject</maml:linkText>
@@ -3798,17 +3795,17 @@ displays all available properties (*) of the release defintion objects.</maml:pa
 		<command:details>
 			<command:name>Get-ServiceEndpoint</command:name>
 			<maml:description>
-				<maml:para/>
+				<maml:para />
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>ServiceEndpoint</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
-			<maml:para/>
+			<maml:para />
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
@@ -3826,7 +3823,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 			<command:syntaxItem>
@@ -3843,12 +3840,12 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named">
 					<maml:name>Id</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				</command:parameter>
@@ -3870,21 +3867,21 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named">
 				<maml:name>Id</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -3893,10 +3890,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<dev:type>
 					<maml:name>System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -3905,10 +3902,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -3921,11 +3918,11 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<maml:para>Removes the releases for a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Remove</command:verb>
 			<command:noun>Release</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Remove-Release function removes the releases for a
@@ -3948,7 +3945,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 					<maml:name>Id</maml:name>
@@ -3982,9 +3979,9 @@ Get-Release.</maml:para>
 				<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Force</maml:name>
@@ -3996,7 +3993,7 @@ removing any release defintion.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -4014,9 +4011,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -4024,10 +4021,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>You can pipe release defintion IDs to this function.</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -4036,16 +4033,16 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>None</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release s.
@@ -4078,7 +4075,7 @@ function, which removes each release defintion object.</maml:para>
 Set-DefaultProject
 Add-Release
 Get-Release</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -4090,11 +4087,11 @@ Get-Release</maml:linkText>
 				<maml:para>Removes the release defintions for a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Remove</command:verb>
 			<command:noun>ReleaseDefinition</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The Remove-ReleaseDefinition function removes the release defintions for a
@@ -4117,7 +4114,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 					<maml:name>Id</maml:name>
@@ -4151,9 +4148,9 @@ Get-ReleaseDefinition.</maml:para>
 				<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Force</maml:name>
@@ -4165,7 +4162,7 @@ removing any release defintion.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -4183,9 +4180,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -4193,10 +4190,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>You can pipe release defintion IDs to this function.</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -4205,16 +4202,16 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>None</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
 		<maml:alertSet>
 			<!-- Notes-->
-			<maml:title/>
+			<maml:title />
 			<maml:alert>
 				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release definitions.
@@ -4247,7 +4244,7 @@ function, which removes each release defintion object.</maml:para>
 Set-DefaultProject
 Add-ReleaseDefinition
 Get-ReleaseDefinition</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -4256,17 +4253,17 @@ Get-ReleaseDefinition</maml:linkText>
 		<command:details>
 			<command:name>Remove-ServiceEndpoint</command:name>
 			<maml:description>
-				<maml:para/>
+				<maml:para />
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Remove</command:verb>
 			<command:noun>ServiceEndpoint</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
-			<maml:para/>
+			<maml:para />
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
@@ -4284,19 +4281,19 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 					<maml:name>Id</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Force</maml:name>
 					<maml:description>
-						<maml:para/>
+						<maml:para />
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				</command:parameter>
@@ -4307,26 +4304,26 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0">
 				<maml:name>Id</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
 				<dev:type>
 					<maml:name>String[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Force</maml:name>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -4342,9 +4339,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -4354,10 +4351,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<maml:name>System.String[]
 System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -4366,10 +4363,10 @@ System.String
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -4382,11 +4379,11 @@ System.String
 				<maml:para>Deletes the Team Project from your Team Services account.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Remove</command:verb>
 			<command:noun>Project</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>This will permanently delete your Team Project from your Team Services
@@ -4406,7 +4403,7 @@ the Pipeline by Property Name</maml:para>
 						<maml:para>Name of the project to remove.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 					<maml:name>Force</maml:name>
@@ -4431,7 +4428,7 @@ the project.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -4444,9 +4441,9 @@ the project.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -4454,10 +4451,10 @@ the project.</maml:para>
 			<command:inputType>
 				<dev:type>
 					<maml:name>System.String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -4468,7 +4465,7 @@ the project.</maml:para>
 				<maml:introduction>
 					<maml:para>PS C:\&gt;</maml:para>
 				</maml:introduction>
-				<dev:code>Remove-Project &#39;MyProject&#39;</dev:code>
+				<dev:code>Remove-Project 'MyProject'</dev:code>
 				<dev:remarks>
 					<maml:para>You will be prompted for confirmation and the project will be deleted.</maml:para>
 				</dev:remarks>
@@ -4478,7 +4475,7 @@ the project.</maml:para>
 				<maml:introduction>
 					<maml:para>PS C:\&gt;</maml:para>
 				</maml:introduction>
-				<dev:code>Remove-Project &#39;MyProject&#39; -Force</dev:code>
+				<dev:code>Remove-Project 'MyProject' -Force</dev:code>
 				<dev:remarks>
 					<maml:para>You will NOT be prompted for confirmation and the project will be deleted.</maml:para>
 				</dev:remarks>
@@ -4499,7 +4496,7 @@ the project.</maml:para>
 			<maml:navigationLink>
 				<maml:linkText>Add-TeamAccount
 Add-Project</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -4511,14 +4508,14 @@ Add-Project</maml:linkText>
 				<maml:para>Displays your current account and default project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>TeamInfo</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
-			<maml:para/>
+			<maml:para />
 		</maml:description>
 		<command:syntax>
 			<!-- Parameter Sets-->
@@ -4546,7 +4543,7 @@ Add-Project</maml:linkText>
 			<!-- Links-->
 			<maml:navigationLink>
 				<maml:linkText>Add-TeamAccount</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -4558,11 +4555,11 @@ Add-Project</maml:linkText>
 				<maml:para>Sets the status of a release to Active or Abandoned.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Set</command:verb>
 			<command:noun>ReleaseStatus</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Set-ReleaseStatus lets you set the status of the release to Acitve or Abandoned.</maml:para>
@@ -4583,7 +4580,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 					<maml:name>Id</maml:name>
@@ -4593,7 +4590,7 @@ use commas to separate the IDs. To find the ID of a release
 type Get-Release.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="">
 					<maml:name>Status</maml:name>
@@ -4601,7 +4598,7 @@ type Get-Release.</maml:para>
 						<maml:para>The status to set for the release Active or Abandoned.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 					<maml:name>Force</maml:name>
@@ -4611,7 +4608,7 @@ By default, Set-ReleaseStatus prompts for confirmation before
 changing the status.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -4627,9 +4624,9 @@ type Get-Release.</maml:para>
 				<command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="">
 				<maml:name>Status</maml:name>
@@ -4639,9 +4636,9 @@ type Get-Release.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>Force</maml:name>
@@ -4653,9 +4650,9 @@ changing the status.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -4671,9 +4668,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -4683,10 +4680,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 					<maml:name>System.Int32[]
 System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -4695,10 +4692,10 @@ System.String
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -4724,11 +4721,11 @@ System.String
 				<maml:para>Clears your default project, account name and personal access token.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Remove</command:verb>
 			<command:noun>TeamAccount</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Clears the environment variables that hold your default project, account and personal access token.
@@ -4754,8 +4751,7 @@ To remove from the Machine level you must be running PowerShell as administrator
 						<maml:para>On Windows allows you to clear your account information at the Process, User or Machine levels.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue>
-					</dev:defaultValue>
+					<dev:defaultValue></dev:defaultValue>
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -4770,10 +4766,9 @@ To remove from the Machine level you must be running PowerShell as administrator
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue></dev:defaultValue>
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
 				<maml:name>Force</maml:name>
@@ -4783,7 +4778,7 @@ To remove from the Machine level you must be running PowerShell as administrator
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -4805,7 +4800,7 @@ To remove from the Machine level you must be running PowerShell as administrator
 			<!-- Links-->
 			<maml:navigationLink>
 				<maml:linkText>Add-TeamAccount</maml:linkText>
-				<maml:uri/>
+				<maml:uri />
 			</maml:navigationLink>
 		</maml:relatedLinks>
 	</command:command>
@@ -4817,11 +4812,11 @@ To remove from the Machine level you must be running PowerShell as administrator
 				<maml:para>Updates the name and/or description of a team project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Update</command:verb>
 			<command:noun>Project</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>You can pass just name, description or both.</maml:para>
@@ -4842,7 +4837,7 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="0" aliases="">
 					<maml:name>NewName</maml:name>
@@ -4850,7 +4845,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>The new name for the project.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="">
 					<maml:name>NewDescription</maml:name>
@@ -4858,7 +4853,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 						<maml:para>The new description for the project.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -4872,9 +4867,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="">
 				<maml:name>NewDescription</maml:name>
@@ -4884,9 +4879,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
 				<!--Dynamic-->
@@ -4902,9 +4897,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -4913,10 +4908,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<dev:type>
 					<maml:name>System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -4925,10 +4920,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -4954,11 +4949,11 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<maml:para>Sets the default project to be used with other calls in the module.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Set</command:verb>
 			<command:noun>DefaultProject</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>The majority of the functions in this module require a project name. By setting a default project you can omit that parameter from your function calls and this default will be used instead.</maml:para>
@@ -4979,9 +4974,9 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
-				<command:parameter required="false" pipelineinput="false" globbing="false" position="named">
+				<command:parameter required="false" globbing="false" position="named" pipelineInput="false">
 					<!--Dynamic-->
 					<maml:name>Level</maml:name>
 					<maml:description>
@@ -5007,9 +5002,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<!--Dynamic-->
@@ -5020,10 +5015,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue>
-				</dev:defaultValue>
+				<dev:defaultValue></dev:defaultValue>
 			</command:parameter>
 		</command:parameters>
 		<command:inputTypes>
@@ -5032,10 +5026,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<dev:type>
 					<maml:name>System.String
 					</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:inputType>
 		</command:inputTypes>
@@ -5044,10 +5038,10 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<command:returnValue>
 				<dev:type>
 					<maml:name>System.Object</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<maml:description>
-					<maml:para/>
+					<maml:para />
 				</maml:description>
 			</command:returnValue>
 		</command:returnValues>
@@ -5081,11 +5075,11 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<maml:para>Get all the repositories in your Visual Studio Team Services or Team Founcation Server account, or a specific project.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Get</command:verb>
 			<command:noun>GitRepository</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Get-GitRepository gets all the repositories in your Visual Studio Team Services or Team Founcation Server account, or a specific project.</maml:para>
@@ -5094,7 +5088,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<!-- Parameter Sets-->
 			<command:syntaxItem>
 				<maml:name>Get-GitRepository</maml:name>
-				<command:parameter required="false" pipelineinput="True (ByPropertyName)" globbing="false" position="named" aliases="">
+				<command:parameter required="false" globbing="false" position="named" aliases="" pipelineInput="True (ByPropertyName)">
 					<!--Dynamic-->
 					<maml:name>ProjectName</maml:name>
 					<maml:description>
@@ -5106,9 +5100,9 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
-				<command:parameter required="false" pipelineinput="True (ByPropertyName)" globbing="false" position="named" aliases="RepositoryID">
+				<command:parameter required="false" globbing="false" position="named" aliases="RepositoryID" pipelineInput="True (ByPropertyName)">
 					<maml:name>Id</maml:name>
 					<maml:description>
 						<maml:para>Specifies one or more repositories by ID. To specify multiple IDs, use
@@ -5116,7 +5110,7 @@ commas to separate the IDs. To find the ID of a repository, type
 Get-Repository.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">Guid[]</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -5136,9 +5130,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="RepositoryID">
 				<maml:name>Id</maml:name>
@@ -5150,9 +5144,9 @@ Get-Repository.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Guid[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:examples>
@@ -5197,11 +5191,11 @@ Get-Repository.</maml:para>
 				<maml:para>Adds a Git repository to your Visual Studio Team Services or Team Founcation Server account.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Add</command:verb>
 			<command:noun>GitRepository</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Add-GitRepository adds a Git repository to your Visual Studio Team Services or Team Founcation Server account.</maml:para>
@@ -5210,7 +5204,7 @@ Get-Repository.</maml:para>
 			<!-- Parameter Sets-->
 			<command:syntaxItem>
 				<maml:name>Add-GitRepository</maml:name>
-				<command:parameter required="false" pipelineinput="True (ByPropertyName)" globbing="false" position="named" aliases="">
+				<command:parameter required="false" globbing="false" position="named" aliases="" pipelineInput="True (ByPropertyName)">
 					<!--Dynamic-->
 					<maml:name>ProjectName</maml:name>
 					<maml:description>
@@ -5222,15 +5216,15 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
-				<command:parameter required="false" pipelineinput="True (ByPropertyName)" globbing="false" position="named" aliases="RepositoryID">
+				<command:parameter required="false" globbing="false" position="named" aliases="RepositoryID" pipelineInput="True (ByPropertyName)">
 					<maml:name>Name</maml:name>
 					<maml:description>
 						<maml:para>Specifies the name of the repository.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">System.String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
 			</command:syntaxItem>
 		</command:syntax>
@@ -5250,9 +5244,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="RepositoryID">
 				<maml:name>Name</maml:name>
@@ -5262,9 +5256,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 		</command:parameters>
 		<command:examples>
@@ -5289,11 +5283,11 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<maml:para>Removes the Git repository from your Visual Studio Team Services or Team Founcation Server account.</maml:para>
 			</maml:description>
 			<maml:copyright>
-				<maml:para/>
+				<maml:para />
 			</maml:copyright>
 			<command:verb>Remove</command:verb>
 			<command:noun>GitRepository</command:noun>
-			<dev:version/>
+			<dev:version />
 		</command:details>
 		<maml:description>
 			<maml:para>Remove-GitRepository removes the Git repository from your Visual Studio Team Services or Team Founcation Server account.</maml:para>
@@ -5302,7 +5296,7 @@ you do not have to pass the ProjectName with each call.</maml:para>
 			<!-- Parameter Sets-->
 			<command:syntaxItem>
 				<maml:name>Remove-GitRepository</maml:name>
-				<command:parameter required="false" pipelineinput="True (ByPropertyName)" globbing="false" position="named" aliases="">
+				<command:parameter required="false" globbing="false" position="named" aliases="" pipelineInput="True (ByPropertyName)">
 					<!--Dynamic-->
 					<maml:name>ProjectName</maml:name>
 					<maml:description>
@@ -5314,9 +5308,9 @@ You can use Set-DefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">String</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
-				<command:parameter required="false" pipelineinput="True (ByPropertyName)" globbing="false" position="named" aliases="RepositoryID">
+				<command:parameter required="false" globbing="false" position="named" aliases="RepositoryID" pipelineInput="True (ByPropertyName)">
 					<maml:name>Id</maml:name>
 					<maml:description>
 						<maml:para>Specifies one or more repositories by ID. To specify multiple IDs, use
@@ -5324,9 +5318,9 @@ commas to separate the IDs. To find the ID of a repository, type
 Get-Repository.</maml:para>
 					</maml:description>
 					<command:parameterValue required="false">Guid[]</command:parameterValue>
-					<dev:defaultValue/>
+					<dev:defaultValue />
 				</command:parameter>
-				<command:parameter required="false" pipelineinput="false" globbing="false" position="named">
+				<command:parameter required="false" globbing="false" position="named" pipelineInput="false">
 					<maml:name>Force</maml:name>
 					<maml:description>
 						<maml:para>Removes the specified repository without prompting for confirmation.
@@ -5353,9 +5347,9 @@ you do not have to pass the ProjectName with each call.</maml:para>
 				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
 				<dev:type>
 					<maml:name>String</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="RepositoryID">
 				<maml:name>Id</maml:name>
@@ -5367,9 +5361,9 @@ Get-Repository.</maml:para>
 				<command:parameterValue required="false" variableLength="false">Guid[]</command:parameterValue>
 				<dev:type>
 					<maml:name>Int32[]</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
-				<dev:defaultValue/>
+				<dev:defaultValue />
 			</command:parameter>
 			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="">
 				<maml:name>Force</maml:name>
@@ -5381,7 +5375,7 @@ removing any repository.</maml:para>
 				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
 				<dev:type>
 					<maml:name>SwitchParameter</maml:name>
-					<maml:uri/>
+					<maml:uri />
 				</dev:type>
 				<dev:defaultValue>False</dev:defaultValue>
 			</command:parameter>
@@ -5400,5 +5394,167 @@ removing any repository.</maml:para>
 			</command:example>
 		</command:examples>
 	</command:command>
-	<!-- Edited with: SAPIEN PowerShell HelpWriter 2016 v1.1.20-->
+	<!-- Edited with: SAPIEN PowerShell HelpWriter 2017 v2.1.34-->
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<!-- Command-->
+		<command:details>
+			<command:name>Add-ReleaseEnvironment</command:name>
+			<maml:description>
+				<maml:para>Starts the deployment of an environment in an existing release.</maml:para>
+			</maml:description>
+			<maml:copyright>
+				<maml:para />
+			</maml:copyright>
+			<command:verb>Add</command:verb>
+			<command:noun>ReleaseEnvironment</command:noun>
+			<dev:version />
+		</command:details>
+		<maml:description>
+			<maml:para>Add-ReleaseEnvironment will start the deployment of an environment
+within an existing release.</maml:para>
+			<maml:para>You must call Add-TeamAccount before calling this function.</maml:para>
+		</maml:description>
+		<command:syntax>
+			<!-- Parameter Sets-->
+			<command:syntaxItem>
+				<maml:name>Add-ReleaseEnvironment</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
+					<!--Dynamic-->
+					<maml:name>ProjectName</maml:name>
+					<maml:description>
+						<maml:para>Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-DefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+					<dev:defaultValue />
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+					<maml:name>Force</maml:name>
+					<maml:description>
+						<maml:para>Forces the command without confirmation</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="false" variableLength="false" position="named" dynamic="true">
+					<maml:name>ReleaseId</maml:name>
+					<maml:description>
+						<maml:para>Specifies the Id of an existing Release in which you want to deploy
+to a particular environment.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:defaultValue></dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="false" variableLength="false" position="named" dynamic="true">
+					<maml:name>EnvironmentId</maml:name>
+					<maml:description>
+						<maml:para>Specifies the Id of the Environment you wish to deploy to.
+The Environment Ids are unique for each environment and in each release.</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:defaultValue></dev:defaultValue>
+				</command:parameter>
+				<command:parameter required="false" globbing="false" pipelineInput="false" variableLength="false" position="named" dynamic="true">
+					<maml:name>EnvironmentStatus</maml:name>
+					<maml:description>
+						<maml:para>Specifies the status in which to set the environment.
+The deployment of an environment is triggered by changing the status of the environment.</maml:para>
+						<maml:para>The currently supported status change is from 'notStarted' to 'inProgress'</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+					<dev:defaultValue></dev:defaultValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<!-- All Parameters-->
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="">
+				<!--Dynamic-->
+				<maml:name>ProjectName</maml:name>
+				<maml:description>
+					<maml:para>Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-DefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.</maml:para>
+				</maml:description>
+				<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue />
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+				<maml:name>Force</maml:name>
+				<maml:description>
+					<maml:para>Forces the command without confirmation</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+				<dev:type>
+					<maml:name>SwitchParameter</maml:name>
+					<maml:uri />
+				</dev:type>
+				<dev:defaultValue>False</dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="false" variableLength="false" position="named" dynamic="true">
+				<maml:name>ReleaseId</maml:name>
+				<maml:description>
+					<maml:para>Specifies the Id of an existing Release in which you want to deploy
+to a particular environment.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="false" variableLength="false" position="named" dynamic="true">
+				<maml:name>EnvironmentId</maml:name>
+				<maml:description>
+					<maml:para>Specifies the Id of the Environment you wish to deploy to.
+The Environment Ids are unique for each environment and in each release.</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" globbing="false" pipelineInput="false" variableLength="false" position="named" dynamic="true">
+				<maml:name>EnvironmentStatus</maml:name>
+				<maml:description>
+					<maml:para>Specifies the status in which to set the environment.
+The deployment of an environment is triggered by changing the status of the environment.</maml:para>
+					<maml:para>The currently supported status change is from 'notStarted' to 'inProgress'</maml:para>
+				</maml:description>
+				<command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<!-- Inputs-->
+			<command:inputType>
+				<dev:type>
+					<maml:name>System.String</maml:name>
+					<maml:uri />
+				</dev:type>
+				<maml:description>
+					<maml:para />
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<maml:alertSet>
+			<!-- Notes-->
+			<maml:title />
+			<maml:alert>
+				<maml:para>This function has a Dynamic Parameter for ProjectName that specifies the
+project for which this function gets release s.
+
+You can tab complete from a list of avaiable projects.
+
+You can use Set-DefaultProject to set a default project so you do not have
+to pass the ProjectName with each call.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+	</command:command>
+	<!-- Edited with: SAPIEN PowerShell HelpWriter 2017 v2.1.34-->
 </helpItems>
