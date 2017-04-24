@@ -85,8 +85,8 @@ function _trackProgress {
    $url = _buildURL -projectName $projectName -id $resp.id
 
    # Track status
-   while ($status -ne 'Failed' -and $status -ne 'Ready') {
-      $status = (_checkStatus $url).operationStatus.state
+   while ($status -ne '$true') {
+      $status = (_checkStatus $url).isReady
 
       # oscillate back a forth to show progress
       $i += $x
@@ -142,7 +142,9 @@ function Add-AzureRMServiceEndpoint {
       [string] $subscriptionId,
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
       [string] $subscriptionTenantId,
-      [string] $endpointName
+      [string] $endpointName,
+      [string] $servicePrincipalId,
+      [string] $servicePrincipalKey
    )
 
    DynamicParam {
@@ -160,11 +162,20 @@ function Add-AzureRMServiceEndpoint {
          $endpointName = $displayName
       }
 
+      if (-not $servicePrincipalId) {
+          $creationMode = "Automatic"
+          $servicePrincipalId=""
+          $servicePrincipalKey=""
+      }
+      else {
+        $creationMode = "Manual"
+      }
+
       $obj = @{
          authorization=@{
             parameters=@{
-               serviceprincipalid='';
-               serviceprincipalkey='';
+               serviceprincipalid=$servicePrincipalId;
+               serviceprincipalkey=$servicePrincipalKey;
                tenantid=$subscriptionTenantId
             };
             scheme='ServicePrincipal'
@@ -172,11 +183,11 @@ function Add-AzureRMServiceEndpoint {
          data=@{
             subscriptionId=$subscriptionId;
             subscriptionName=$displayName;
-            creationMode='Automatic'
+            creationMode=$creationMode
          };
          name=$endpointName;
          type='azurerm';
-         url='https://management.core.windows.net/'
+         url='https://management.azure.com/'
       }
 
       $body = $obj | ConvertTo-Json
