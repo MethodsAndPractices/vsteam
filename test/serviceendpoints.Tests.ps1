@@ -50,10 +50,14 @@ InModuleScope serviceendpoints {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {
-               return @{operationStatus=@{state='Ready'}}
+               return @{
+                  isReady=$true
+                  operationStatus=@{state='Ready'}
+               }
             }
 
             return @{
+               isReady=$false
                createdBy=@{}
                authorization=@{}
                data=@{}
