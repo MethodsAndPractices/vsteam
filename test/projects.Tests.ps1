@@ -171,12 +171,12 @@ InModuleScope projects {
          } -ParameterFilter { $Uri -eq 'https://someplace.com'}
 
          # Get-Project
-         Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/123-5464-dee43?api-version=1.0' }
+         Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
 
          It 'Should create project with tfvc' {
             Add-Project -Name Test -tfvc
 
-            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/123-5464-dee43?api-version=1.0' }
+            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Post' -and $Uri -eq 'https://test.visualstudio.com/_apis/projects/?api-version=1.0' -and $Body -eq '{"name": "Test", "description": "", "capabilities": {"versioncontrol": { "sourceControlType": "Tfvc"}, "processTemplate":{"templateTypeId": "6b724908-ef14-45cf-84f8-768b5384da45"}}}'}
          }
       }
@@ -185,12 +185,12 @@ InModuleScope projects {
 
          Mock Invoke-RestMethod { return @{status='inProgress'; id=1; url='https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq 'https://test.visualstudio.com/_apis/projects/?api-version=1.0'}
          Mock _trackProgress
-         Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/1?api-version=1.0' }
+         Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
 
          It 'Should create project with Agile' {
             Add-Project -Name Test -processTemplate Agile
 
-            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/1?api-version=1.0' }
+            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Post' -and $Uri -eq 'https://test.visualstudio.com/_apis/projects/?api-version=1.0'}
          }
       }
@@ -199,12 +199,12 @@ InModuleScope projects {
 
          Mock Invoke-RestMethod { return @{status='inProgress'; id=1; url='https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq 'https://test.visualstudio.com/_apis/projects/?api-version=1.0'}
          Mock _trackProgress
-         Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/1?api-version=1.0' }
+         Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
 
          It 'Should create project with CMMI' {
             Add-Project -Name Test -processTemplate CMMI
 
-            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/1?api-version=1.0' }
+            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Post' -and $Uri -eq 'https://test.visualstudio.com/_apis/projects/?api-version=1.0'}
          }
       }
