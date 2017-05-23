@@ -266,7 +266,7 @@ function Add-Project {
 
       _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($Name), Template: $($processTemplate), Src: $($srcCtrl)"
 
-      return Get-Project -ProjectID $resp.id
+      return Get-Project -Name $Name
    }
    catch {
       # Dig into the exception to get the Response details.
