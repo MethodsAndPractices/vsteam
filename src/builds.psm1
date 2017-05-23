@@ -168,7 +168,8 @@ function Get-BuildLog {
    param (
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
-      [int[]] $Id
+      [int[]] $Id,
+      [int] $Index
    )
 
    DynamicParam {
@@ -181,18 +182,22 @@ function Get-BuildLog {
 
       if ($id) {
          foreach ($item in $id) {
-            # Build the url to return the logs of the build
-            $listurl = _buildURL -projectName $ProjectName -id $item -Logs
+            if (-not $Index) {
+               # Build the url to return the logs of the build
+               $listurl = _buildURL -projectName $ProjectName -id $item -Logs
 
-            # Call the REST API to get the number of logs for the build
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+               # Call the REST API to get the number of logs for the build
+               if (_useWindowsAuthenticationOnPremise) {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+               }
+               else {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+               }
 
-            $fullLogIndex = $($resp.count - 1)
+               $fullLogIndex = $($resp.count - 1)
+            } else {
+               $fullLogIndex = $Index
+            }
 
             # Now call REST API with the index for the fullLog
             # Build the url to return the single build
