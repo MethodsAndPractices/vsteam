@@ -321,8 +321,10 @@ function Clear-DefaultProject {
    }
 
    begin {
-      # Bind the parameter to a friendly variable
-      $Level = $PSBoundParameters[$ParameterName]
+       if(_isOnWindows) {
+           # Bind the parameter to a friendly variable
+           $Level = $PSBoundParameters[$ParameterName]
+       }
    }
 
    process {
@@ -338,7 +340,9 @@ function Clear-DefaultProject {
       # be seen in your current session.
       $env:TEAM_PROJECT = $null
 
-      [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
+      if(_isOnWindows) {
+        [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
+      }
 
       $Global:PSDefaultParameterValues.Remove("*:projectName")
 
@@ -384,16 +388,20 @@ function Set-DefaultProject {
          # Create and return the dynamic parameter
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $dp.Add($ParameterName, $RuntimeParameter)
-         return $dp
       } else {
          Write-Verbose 'Not on a Windows machine'
       }
+      
+      return $dp
    }
 
    begin {
       # Bind the parameter to a friendly variable
       $Project = $PSBoundParameters["Project"]
-      $Level = $PSBoundParameters[$ParameterName]
+
+      if(_isOnWindows) {
+        $Level = $PSBoundParameters[$ParameterName]
+      }
    }
 
    process {
