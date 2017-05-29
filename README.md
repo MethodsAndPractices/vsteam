@@ -7,6 +7,9 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 0.1.22
+- Fixed bug in Set-DefaultProject on Mac and Linux
+
 ## 0.1.21
 - Added Get-BuildLog that returns the logs of the provided build
 
