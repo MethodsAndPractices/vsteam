@@ -8,6 +8,8 @@ The cases of every file is very important. This module is to be used on Windows,
 
 # Release Notes
 ## 0.1.21
+- Added Get-BuildLog that returns the logs of the provided build
+
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Added serviceEndpoint parameters to Add-AzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
