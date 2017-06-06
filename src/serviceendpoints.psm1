@@ -133,6 +133,59 @@ function Remove-ServiceEndpoint {
    }
 }
 
+function Add-SonarQubeEndpoint {
+   [CmdletBinding()]
+   param(
+      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [string] $endpointName,
+      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [string] $url,
+     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [string] $token
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      # Build the url
+      $url = _buildURL -projectName $projectName
+
+      $obj = @{
+         authorization=@{
+            parameters=@{
+               username=$token;
+               password=''
+            };
+            scheme='UsernamePassword'
+         };
+         data=@{
+         };
+         name=$endpointName;
+         type='sonarqube';
+         url=$url
+      }
+
+      $body = $obj | ConvertTo-Json
+
+      # Call the REST API
+	  if (_useWindowsAuthenticationOnPremise) {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
+      } else {
+        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      }
+
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      return Get-ServiceEndpoint -projectName $projectName -id $resp.id
+   }
+}
+
+
 function Add-AzureRMServiceEndpoint {
    [CmdletBinding()]
    param(
@@ -254,4 +307,4 @@ function Get-ServiceEndpoint {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint
+Export-ModuleMember -Alias * -Function Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint
