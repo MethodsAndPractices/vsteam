@@ -139,7 +139,7 @@ function Add-SonarQubeEndpoint {
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
       [string] $endpointName,
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-      [string] $url,
+      [string] $sonarqubeUrl,
      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
       [string] $token
    )
@@ -167,7 +167,7 @@ function Add-SonarQubeEndpoint {
          };
          name=$endpointName;
          type='sonarqube';
-         url=$url
+         url=$sonarqubeUrl
       }
 
       $body = $obj | ConvertTo-Json
