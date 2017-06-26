@@ -97,7 +97,7 @@ InModuleScope serviceendpoints {
             }
 
             It 'should create a new SonarQube Serviceendpoint' {
-                Add-SonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -token '72f988bf-86f1-41af-91ab-2d7cd011db47'
+                Add-SonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -personalAccessToken '72f988bf-86f1-41af-91ab-2d7cd011db47'
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
             }

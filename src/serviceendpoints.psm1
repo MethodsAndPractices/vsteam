@@ -134,56 +134,82 @@ function Remove-ServiceEndpoint {
 }
 
 function Add-SonarQubeEndpoint {
-   [CmdletBinding()]
-   param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-      [string] $endpointName,
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-      [string] $sonarqubeUrl,
-     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-      [string] $token
-   )
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [string] $endpointName,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [string] $sonarqubeUrl,
+        [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
+        [string] $personalAccessToken,
+        [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
+        [securestring] $securePersonalAccessToken
+    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
+    DynamicParam {
+        _buildProjectNameDynamicParam
+    }
 
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
+    Process {
+    
+       
+        if ($personalAccessToken) {
+            $token = $personalAccessToken 
+        }
+        else {
+            $credential = New-Object System.Management.Automation.PSCredential "nologin", $securePersonalAccessToken
+            $token = $credential.GetNetworkCredential().Password
+        }
+        # Bind the parameter to a friendly variable
+        $ProjectName = $PSBoundParameters["ProjectName"]
 
-      # Build the url
-      $url = _buildURL -projectName $projectName
+        # Build the url
+        $url = _buildURL -projectName $projectName
 
-      $obj = @{
-         authorization=@{
-            parameters=@{
-               username=$token;
-               password=''
+        $obj = @{
+            authorization = @{
+                parameters = @{
+                    username = $token;
+                    password = ''
+                };
+                scheme     = 'UsernamePassword'
             };
-            scheme='UsernamePassword'
-         };
-         data=@{
-         };
-         name=$endpointName;
-         type='sonarqube';
-         url=$sonarqubeUrl
-      }
+            data          = @{
+            };
+            name          = $endpointName;
+            type          = 'sonarqube';
+            url           = $sonarqubeUrl
+        }
 
-      $body = $obj | ConvertTo-Json
+        $body = $obj | ConvertTo-Json
 
-      # Call the REST API
-	  if (_useWindowsAuthenticationOnPremise) {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
-      } else {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
+        try {
+    
+            # Call the REST API
+            if (_useWindowsAuthenticationOnPremise) {
+                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
+            }
+            else {
+                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
+      
+        }
+        catch [System.Net.WebException] {
+            if ($_.Exception.status -eq "ProtocolError") {
+                $errorDetails = ConvertFrom-Json $_.ErrorDetails
+                [string] $message = $errorDetails.message
+                if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'")) {
+                        Write-Error -Message "The Sonarqube extension not installed"
+                        return
+                    }
+                }
+                throw
+            }
+            _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
-
-      return Get-ServiceEndpoint -projectName $projectName -id $resp.id
-   }
-}
+            return Get-ServiceEndpoint -projectName $projectName -id $resp.id
+        }
+    }
 
 
 function Add-AzureRMServiceEndpoint {
