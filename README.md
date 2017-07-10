@@ -7,6 +7,11 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 0.1.23
+Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/8) from [Michel Perfetti](https://github.com/miiitch) which included the following:
+
+- Support for the [SonarQube extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube)
+
 ## 0.1.22
 - Fixed bug in Set-DefaultProject on Mac and Linux
 
