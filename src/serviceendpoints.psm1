@@ -134,7 +134,7 @@ function Remove-ServiceEndpoint {
 }
 
 function Add-SonarQubeEndpoint {
-    [CmdletBinding()]
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
     param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [string] $endpointName,
@@ -199,7 +199,7 @@ function Add-SonarQubeEndpoint {
                 $errorDetails = ConvertFrom-Json $_.ErrorDetails
                 [string] $message = $errorDetails.message
                 if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'")) {
-                        Write-Error -Message "The Sonarqube extension not installed"
+                        Write-Error -Message "The Sonarqube extension not installed. Please install from https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube"
                         return
                     }
                 }
