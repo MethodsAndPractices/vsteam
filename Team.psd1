@@ -13,7 +13,7 @@
    RootModule = ''
 
    # Version number of this module.
-   ModuleVersion = '0.1.22'
+   ModuleVersion = '0.1.23'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -82,6 +82,7 @@
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-AzureRMServiceEndpoint',
+      'Add-SonarQubeEndpoint',
       'Add-Build',
       'Add-BuildDefinition',
       'Add-Project',

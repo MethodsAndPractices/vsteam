@@ -133,6 +133,85 @@ function Remove-ServiceEndpoint {
    }
 }
 
+function Add-SonarQubeEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+    param(
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [string] $endpointName,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [string] $sonarqubeUrl,
+        [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
+        [string] $personalAccessToken,
+        [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
+        [securestring] $securePersonalAccessToken
+    )
+
+    DynamicParam {
+        _buildProjectNameDynamicParam
+    }
+
+    Process {
+    
+       
+        if ($personalAccessToken) {
+            $token = $personalAccessToken 
+        }
+        else {
+            $credential = New-Object System.Management.Automation.PSCredential "nologin", $securePersonalAccessToken
+            $token = $credential.GetNetworkCredential().Password
+        }
+        # Bind the parameter to a friendly variable
+        $ProjectName = $PSBoundParameters["ProjectName"]
+
+        # Build the url
+        $url = _buildURL -projectName $projectName
+
+        $obj = @{
+            authorization = @{
+                parameters = @{
+                    username = $token;
+                    password = ''
+                };
+                scheme     = 'UsernamePassword'
+            };
+            data          = @{
+            };
+            name          = $endpointName;
+            type          = 'sonarqube';
+            url           = $sonarqubeUrl
+        }
+
+        $body = $obj | ConvertTo-Json
+
+        try {
+    
+            # Call the REST API
+            if (_useWindowsAuthenticationOnPremise) {
+                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
+            }
+            else {
+                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
+      
+        }
+        catch [System.Net.WebException] {
+            if ($_.Exception.status -eq "ProtocolError") {
+                $errorDetails = ConvertFrom-Json $_.ErrorDetails
+                [string] $message = $errorDetails.message
+                if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'")) {
+                        Write-Error -Message "The Sonarqube extension not installed. Please install from https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube"
+                        return
+                    }
+                }
+                throw
+            }
+            _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+            return Get-ServiceEndpoint -projectName $projectName -id $resp.id
+        }
+    }
+
+
 function Add-AzureRMServiceEndpoint {
    [CmdletBinding()]
    param(
@@ -254,4 +333,4 @@ function Get-ServiceEndpoint {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint
+Export-ModuleMember -Alias * -Function Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint

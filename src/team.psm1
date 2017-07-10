@@ -62,7 +62,7 @@ function Add-TeamAccount {
       [parameter(ParameterSetName='Plain', Mandatory=$true, Position=2, HelpMessage='Personal Access Token')]
       [string] $PersonalAccessToken,
       [parameter(ParameterSetName='Secure', Mandatory=$true, HelpMessage='Personal Access Token')]
-      [securestring] $PAT
+      [securestring] $SecurePersonalAccessToken
    )
 
    DynamicParam {
@@ -133,25 +133,22 @@ function Add-TeamAccount {
          }
 
          $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
-         if (!($PAT) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
+         if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
             Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
          }
 
       } else {
          $Level = "Process"
       }
-      
 
-      if ($PAT) {
+      if ($SecurePersonalAccessToken) {
          # Convert the securestring to a normal string
          # this was the one technique that worked on Mac, Linux and Windows
-         $credential = New-Object System.Management.Automation.PSCredential $account,$PAT
+         $credential = New-Object System.Management.Automation.PSCredential $account,$SecurePersonalAccessToken
          $_pat = $credential.GetNetworkCredential().Password
       } else {
          $_pat = $PersonalAccessToken
       }
-
-      
 
       # If they only gave an account name add visualstudio.com
       if($Account.ToLower().Contains('http') -eq $false) {
@@ -160,7 +157,7 @@ function Add-TeamAccount {
 
       $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
 
-      # If no PAT is entered, and on windows, are we using default credentials for REST calls
+      # If no SecurePersonalAccessToken is entered, and on windows, are we using default credentials for REST calls
       if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
          Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
          $encodedPat = ""
