@@ -123,7 +123,7 @@ function Add-Release {
       [Parameter(ParameterSetName='ById', Mandatory=$true)]
       [int] $DefinitionId,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory=$false)]
       [string] $Description,
 
       [Parameter(ParameterSetName='ById', Mandatory=$true)]
@@ -201,7 +201,7 @@ function Add-Release {
       # Build the url
       $url = _buildReleaseURL -resource 'releases' -version '3.0-preview.2' -projectName $projectName
 
-      $body = '{"definitionId": ' + $definitionId + ', "description": "' + $description + '", "artifacts": [{"alias": "' + $artifactAlias + '", "instanceReference": {"id": "' + $buildId + '"}}]}'
+      $body = '{"definitionId": ' + $definitionId + ', "description": "' + $description + '", "artifacts": [{"alias": "' + $artifactAlias + '", "instanceReference": {"id": "' + $buildId + '", "name": "' + $Name + '", "sourceBranch":"' + $SourceBranch + '"}}]}'
 
       Write-Verbose $body
 
