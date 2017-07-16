@@ -25,7 +25,6 @@ function _applyTypes {
 function Get-Release {
    [CmdletBinding(DefaultParameterSetName='List')]
    param(
-      [Parameter(ParameterSetName='List')]
       [ValidateSet('environments','artifacts', 'approvals', 'none')]
       [string] $expand,
 

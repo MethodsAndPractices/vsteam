@@ -7,6 +7,9 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 0.1.25
+- Moved -Expand parameter of Get-Release to all parameter sets.
+
 ## 0.1.24
 - Added support so you can start a release from a Git commit
 
