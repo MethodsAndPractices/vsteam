@@ -48,7 +48,7 @@ function _applyTypes {
    $item.authorization.PSObject.TypeNames.Insert(0, 'Team.authorization')
    $item.data.PSObject.TypeNames.Insert(0, 'Team.ServiceEndpoint.Details')
 
-   if($item.PSObject.Properties.Match('operationStatus').count -gt 0 -and $item.operationStatus -ne $null) {
+   if ($item.PSObject.Properties.Match('operationStatus').count -gt 0 -and $null -ne $item.operationStatus) {
       # This is VSTS
       $item.operationStatus.PSObject.TypeNames.Insert(0, 'Team.OperationStatus')
    }

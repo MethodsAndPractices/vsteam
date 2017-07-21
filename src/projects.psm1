@@ -29,11 +29,11 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.Project')
 
    # Only returned for a single item
-   if($item.PSObject.Properties.Match('defaultTeam').count -gt 0 -and $item.defaultTeam -ne $null) {
+   if ($item.PSObject.Properties.Match('defaultTeam').count -gt 0 -and $null -ne $item.defaultTeam) {
       $item.defaultTeam.PSObject.TypeNames.Insert(0, 'Team.Team')
    }
 
-   if($item.PSObject.Properties.Match('_links').count -gt 0 -and $item._links -ne $null) {
+   if ($item.PSObject.Properties.Match('_links').count -gt 0 -and $null -ne $item._links) {
       $item._links.PSObject.TypeNames.Insert(0, 'Team.Links')
    }
 }

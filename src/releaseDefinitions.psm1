@@ -18,15 +18,15 @@ function _applyTypes {
    $item.modifiedBy.PSObject.TypeNames.Insert(0, 'Team.User')
 
    # This is not always returned depends on expand flag
-   if($item.PSObject.Properties.Match('artifacts').count -gt 0 -and $item.artifacts -ne $null) {
+   if ($item.PSObject.Properties.Match('artifacts').count -gt 0 -and $null -ne $item.artifacts) {
       $item.artifacts.PSObject.TypeNames.Insert(0, 'Team.Artifacts')
    }
 
-   if($item.PSObject.Properties.Match('retentionPolicy').count -gt 0 -and $item.retentionPolicy -ne $null) {
+   if ($item.PSObject.Properties.Match('retentionPolicy').count -gt 0 -and $null -ne $item.retentionPolicy) {
       $item.retentionPolicy.PSObject.TypeNames.Insert(0, 'Team.RetentionPolicy')
    }
 
-   if($item.PSObject.Properties.Match('lastRelease').count -gt 0 -and $item.lastRelease -ne $null) {
+   if ($item.PSObject.Properties.Match('lastRelease').count -gt 0 -and $null -ne $item.lastRelease) {
       # This is VSTS
       $item.lastRelease.PSObject.TypeNames.Insert(0, 'Team.Release')
    }

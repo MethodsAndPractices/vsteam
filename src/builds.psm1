@@ -52,11 +52,11 @@ function _applyTypes {
    $item.repository.PSObject.TypeNames.Insert(0, 'Team.Repository')
    $item.definition.PSObject.TypeNames.Insert(0, 'Team.BuildDefinition')
 
-   if ($item.PSObject.Properties.Match('queue').count -gt 0 -and $item.queue -ne $null) {
+   if ($item.PSObject.Properties.Match('queue').count -gt 0 -and $null -ne $item.queue) {
       $item.queue.PSObject.TypeNames.Insert(0, 'Team.Queue')
    }
 
-   if ($item.PSObject.Properties.Match('orchestrationPlan').count -gt 0 -and $item.orchestrationPlan -ne $null) {
+   if ($item.PSObject.Properties.Match('orchestrationPlan').count -gt 0 -and $null -ne $item.orchestrationPlan) {
       $item.orchestrationPlan.PSObject.TypeNames.Insert(0, 'Team.OrchestrationPlan')
    }
 }

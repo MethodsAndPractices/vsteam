@@ -9,7 +9,9 @@ function _testAdministrator {
    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
+
 function _setEnvironmentVariables {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    param (
       [string] $Level = "Process",
       [string] $Pat,
@@ -22,7 +24,7 @@ function _setEnvironmentVariables {
    $env:TEAM_ACCT = $Acct
 
    # This is so it can be loaded by default in the next session
-   if($Level -ne "Process") {
+   if ($Level -ne "Process") {
       [System.Environment]::SetEnvironmentVariable("TEAM_PAT", $Pat, $Level)
       [System.Environment]::SetEnvironmentVariable("TEAM_ACCT", $Acct, $Level)
    }
@@ -30,6 +32,7 @@ function _setEnvironmentVariables {
 
 # If you remove an account the current default project needs to be cleared as well.
 function _clearEnvironmentVariables {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    param (
       [string] $Level = "Process"
    )
@@ -38,7 +41,7 @@ function _clearEnvironmentVariables {
    $Global:PSDefaultParameterValues.Remove("*:projectName")
 
    # This is so it can be loaded by default in the next session
-   if($Level -ne "Process") {
+   if ($Level -ne "Process") {
       [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
    }
 
@@ -47,27 +50,27 @@ function _clearEnvironmentVariables {
 
 function Get-TeamInfo {
    return @{
-      Account=$env:TEAM_ACCT
-      DefaultProject=$Global:PSDefaultParameterValues['*:projectName']
+      Account        = $env:TEAM_ACCT
+      DefaultProject = $Global:PSDefaultParameterValues['*:projectName']
    }
 }
 
 function Add-TeamAccount {
-   [CmdletBinding(DefaultParameterSetName='Secure')]
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
-      [parameter(ParameterSetName='Windows', Mandatory=$true, Position=1)]
-      [parameter(ParameterSetName='Secure', Mandatory=$true, Position=1)]
-      [Parameter(ParameterSetName='Plain')]
+      [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
+      [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
+      [Parameter(ParameterSetName = 'Plain')]
       [string] $Account,
-      [parameter(ParameterSetName='Plain', Mandatory=$true, Position=2, HelpMessage='Personal Access Token')]
+      [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
       [string] $PersonalAccessToken,
-      [parameter(ParameterSetName='Secure', Mandatory=$true, HelpMessage='Personal Access Token')]
+      [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken
    )
 
    DynamicParam {
       # Only add these options on Windows Machines
-      if(_isOnWindows) {
+      if (_isOnWindows) {
          Write-Verbose 'On a Windows machine'
 
          $ParameterName = 'Level'
@@ -89,7 +92,8 @@ function Add-TeamAccount {
          # Generate and set the ValidateSet
          if (_testAdministrator) {
             $arrSet = "Process", "User", "Machine"
-         } else {
+         }
+         else {
             $arrSet = "Process", "User"
          }
 
@@ -118,17 +122,18 @@ function Add-TeamAccount {
          $RuntimeParameter2 = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName2, [switch], $AttributeCollection2)
          $RuntimeParameterDictionary.Add($ParameterName2, $RuntimeParameter2)
          return $RuntimeParameterDictionary
-      } else {
+      }
+      else {
          Write-Verbose 'Not on a Windows machine'
       }
    }
 
    process {
-      if(_isOnWindows) {
+      if (_isOnWindows) {
          # Bind the parameter to a friendly variable
          $Level = $PSBoundParameters[$ParameterName]
 
-         if(-not $Level) {
+         if (-not $Level) {
             $Level = "Process"
          }
 
@@ -137,21 +142,23 @@ function Add-TeamAccount {
             Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
          }
 
-      } else {
+      }
+      else {
          $Level = "Process"
       }
 
       if ($SecurePersonalAccessToken) {
          # Convert the securestring to a normal string
          # this was the one technique that worked on Mac, Linux and Windows
-         $credential = New-Object System.Management.Automation.PSCredential $account,$SecurePersonalAccessToken
+         $credential = New-Object System.Management.Automation.PSCredential $account, $SecurePersonalAccessToken
          $_pat = $credential.GetNetworkCredential().Password
-      } else {
+      }
+      else {
          $_pat = $PersonalAccessToken
       }
 
       # If they only gave an account name add visualstudio.com
-      if($Account.ToLower().Contains('http') -eq $false) {
+      if ($Account.ToLower().Contains('http') -eq $false) {
          $Account = "https://$($Account).visualstudio.com"
       }
 
@@ -168,7 +175,7 @@ function Add-TeamAccount {
 }
 
 function Remove-TeamAccount {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       # Forces the command without confirmation
       [switch] $Force
@@ -176,7 +183,7 @@ function Remove-TeamAccount {
 
    DynamicParam {
       # Only add this option on Windows Machines
-      if(_isOnWindows) {
+      if (_isOnWindows) {
          Write-Verbose 'On a Windows machine'
 
          $ParameterName = 'Level'
@@ -198,7 +205,8 @@ function Remove-TeamAccount {
          # Generate and set the ValidateSet
          if (_testAdministrator) {
             $arrSet = "All", "Process", "User", "Machine"
-         } else {
+         }
+         else {
             $arrSet = "All", "Process", "User"
          }
 
@@ -211,20 +219,22 @@ function Remove-TeamAccount {
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
          return $RuntimeParameterDictionary
-      } else {
+      }
+      else {
          Write-Verbose 'Not on a Windows machine'
       }
    }
 
    process {
-      if(_isOnWindows) {
+      if (_isOnWindows) {
          # Bind the parameter to a friendly variable
          $Level = $PSBoundParameters[$ParameterName]
 
-         if(-not $Level) {
+         if (-not $Level) {
             $Level = "Process"
          }
-      } else {
+      }
+      else {
          $Level = "Process"
       }
 
@@ -257,7 +267,8 @@ function Remove-TeamAccount {
                if (_testAdministrator) {
                   Write-Verbose "Removing from machine level."
                   _clearEnvironmentVariables "Machine"
-               } else {
+               }
+               else {
                   Write-Warning "Must run as administrator to clear machine level."
                }
             }
@@ -273,11 +284,12 @@ function Remove-TeamAccount {
 }
 
 function Clear-DefaultProject {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding()]
    param()
    DynamicParam {
       # Only add these options on Windows Machines
-      if(_isOnWindows) {
+      if (_isOnWindows) {
          Write-Verbose 'On a Windows machine'
 
          $ParameterName = 'Level'
@@ -299,7 +311,8 @@ function Clear-DefaultProject {
          # Generate and set the ValidateSet
          if (_testAdministrator) {
             $arrSet = "Process", "User", "Machine"
-         } else {
+         }
+         else {
             $arrSet = "Process", "User"
          }
 
@@ -312,24 +325,26 @@ function Clear-DefaultProject {
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
          return $RuntimeParameterDictionary
-      } else {
+      }
+      else {
          Write-Verbose 'Not on a Windows machine'
       }
    }
 
    begin {
-       if(_isOnWindows) {
-           # Bind the parameter to a friendly variable
-           $Level = $PSBoundParameters[$ParameterName]
-       }
+      if (_isOnWindows) {
+         # Bind the parameter to a friendly variable
+         $Level = $PSBoundParameters[$ParameterName]
+      }
    }
 
    process {
-      if(_isOnWindows) {
-         if(-not $Level) {
+      if (_isOnWindows) {
+         if (-not $Level) {
             $Level = "Process"
          }
-      } else {
+      }
+      else {
          $Level = "Process"
       }
 
@@ -337,8 +352,8 @@ function Clear-DefaultProject {
       # be seen in your current session.
       $env:TEAM_PROJECT = $null
 
-      if(_isOnWindows) {
-        [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
+      if (_isOnWindows) {
+         [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
       }
 
       $Global:PSDefaultParameterValues.Remove("*:projectName")
@@ -348,13 +363,14 @@ function Clear-DefaultProject {
 }
 
 function Set-DefaultProject {
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding()]
    param()
    DynamicParam {
       $dp = _buildProjectNameDynamicParam -ParameterName "Project"
 
       # Only add these options on Windows Machines
-      if(_isOnWindows) {
+      if (_isOnWindows) {
          Write-Verbose 'On a Windows machine'
 
          $ParameterName = 'Level'
@@ -373,7 +389,8 @@ function Set-DefaultProject {
          # Generate and set the ValidateSet
          if (_testAdministrator) {
             $arrSet = "Process", "User", "Machine"
-         } else {
+         }
+         else {
             $arrSet = "Process", "User"
          }
 
@@ -385,7 +402,8 @@ function Set-DefaultProject {
          # Create and return the dynamic parameter
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $dp.Add($ParameterName, $RuntimeParameter)
-      } else {
+      }
+      else {
          Write-Verbose 'Not on a Windows machine'
       }
       
@@ -396,14 +414,14 @@ function Set-DefaultProject {
       # Bind the parameter to a friendly variable
       $Project = $PSBoundParameters["Project"]
 
-      if(_isOnWindows) {
-        $Level = $PSBoundParameters[$ParameterName]
+      if (_isOnWindows) {
+         $Level = $PSBoundParameters[$ParameterName]
       }
    }
 
    process {
-      if(_isOnWindows) {
-         if(-not $Level) {
+      if (_isOnWindows) {
+         if (-not $Level) {
             $Level = "Process"
          }
 
@@ -421,6 +439,6 @@ function Set-DefaultProject {
 Export-ModuleMember -Alias * -Function Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Clear-DefaultProject, Set-DefaultProject
 
 # Check to see if the user stored the default project in an environment variable
-if($env:TEAM_PROJECT -ne $null) {
+if ($null -ne $env:TEAM_PROJECT) {
    Set-DefaultProject -Project $env:TEAM_PROJECT
 }

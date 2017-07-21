@@ -36,24 +36,24 @@ function _applyTypes {
 
    $item.project.PSObject.TypeNames.Insert(0, 'Team.Project')
 
-   if($item.PSObject.Properties.Match('authoredBy').count -gt 0 -and $item.authoredBy -ne $null) {
+   if ($item.PSObject.Properties.Match('authoredBy').count -gt 0 -and $null -ne $item.authoredBy) {
       $item.authoredBy.PSObject.TypeNames.Insert(0, 'Team.User')
    }
 
-   if($item.PSObject.Properties.Match('_links').count -gt 0 -and $item._links -ne $null) {
+   if ($item.PSObject.Properties.Match('_links').count -gt 0 -and $null -ne $item._links) {
       $item._links.PSObject.TypeNames.Insert(0, 'Team.Links')
    }
 
-   if($item.PSObject.Properties.Match('queue').count -gt 0 -and $item.queue -ne $null) {
+   if ($item.PSObject.Properties.Match('queue').count -gt 0 -and $null -ne $item.queue) {
       $item.queue.PSObject.TypeNames.Insert(0, 'Team.Queue')
    }
 
    # Only returned for a single item
-   if($item.PSObject.Properties.Match('variables').count -gt 0 -and $item.variables -ne $null) {
+   if ($item.PSObject.Properties.Match('variables').count -gt 0 -and $null -ne $item.variables) {
       $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')
    }
 
-   if($item.PSObject.Properties.Match('repository').count -gt 0 -and $item.repository -ne $null) {
+   if ($item.PSObject.Properties.Match('repository').count -gt 0 -and $null -ne $item.repository) {
       $item.repository.PSObject.TypeNames.Insert(0, 'Team.Repository')
    }
 }

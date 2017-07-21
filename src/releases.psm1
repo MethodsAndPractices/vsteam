@@ -11,7 +11,7 @@ function _applyTypes {
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Release')
 
-   if($item.PSObject.Properties.Match('environments').count -gt 0 -and $item.environments -ne $null) {
+   if ($item.PSObject.Properties.Match('environments').count -gt 0 -and $null -ne $item.environments) {
       foreach ($e in $item.environments) {
          $e.PSObject.TypeNames.Insert(0, 'Team.Environment')
       }
@@ -192,7 +192,7 @@ function Add-Release {
 
       if ($defs -and -not $artifactAlias) {
          $def = $defs | Where-Object {$_.name -eq $DefinitionName}
-         $definitionId = $def | Select-Object -ExpandProperty id
+         $DefinitionId = $def | Select-Object -ExpandProperty id
 
          $artifactAlias = $def.artifacts[0].alias
       }
@@ -200,7 +200,7 @@ function Add-Release {
       # Build the url
       $url = _buildReleaseURL -resource 'releases' -version '3.0-preview.2' -projectName $projectName
 
-      $body = '{"definitionId": ' + $definitionId + ', "description": "' + $description + '", "artifacts": [{"alias": "' + $artifactAlias + '", "instanceReference": {"id": "' + $buildId + '", "name": "' + $Name + '", "sourceBranch":"' + $SourceBranch + '"}}]}'
+      $body = '{"definitionId": ' + $DefinitionId + ', "description": "' + $description + '", "artifacts": [{"alias": "' + $artifactAlias + '", "instanceReference": {"id": "' + $buildId + '", "name": "' + $Name + '", "sourceBranch":"' + $SourceBranch + '"}}]}'
 
       Write-Verbose $body
 
@@ -386,13 +386,14 @@ function Add-ReleaseEnvironment {
 
       if ($defs -and -not $artifactAlias) {
          $def = $defs | Where-Object {$_.name -eq $DefinitionName}
-         $definitionId = $def | Select-Object -ExpandProperty id
-
+         
          $artifactAlias = $def.artifacts[0].alias
       }
 
       # Build the url
-      $url = _buildReleaseURL -resource "releases/$ReleaseId/environments/$EnvironmentId" -version '3.0-preview.2' -projectName $projectName
+      $url = _buildReleaseURL -resource "releases/$ReleaseId/environments/$EnvironmentId"
+                              -version '3.0-preview.2'
+                              -projectName $projectName
 
       $body = '{"status": "' + $EnvironmentStatus + '"}'       
 

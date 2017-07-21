@@ -16,7 +16,7 @@ function _handleException {
 }
 
 function _isOnWindows {
-   ($env:os -ne $null) -and ($env:os).StartsWith("Windows")
+   ($null -ne $env:os) -and ($env:os).StartsWith("Windows")
 }
 
 # The url for release is special and used in more than one

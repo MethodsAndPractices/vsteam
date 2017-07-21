@@ -69,7 +69,7 @@ function Set-Approval {
 
       [Parameter(Mandatory=$true)]
       [ValidateSet('Approved', 'Rejected', 'Pending', 'ReAssigned')]
-      [string] $Status = 'Approved',
+      [string] $Status,
 
       [string] $Approver,
 
