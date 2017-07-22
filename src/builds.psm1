@@ -195,7 +195,8 @@ function Get-BuildLog {
                }
 
                $fullLogIndex = $($resp.count - 1)
-            } else {
+            }
+            else {
                $fullLogIndex = $Index
             }
 
@@ -302,7 +303,15 @@ function Add-Build {
          Where-Object { $_.name -eq $BuildDefinition } |
          Select-Object -ExpandProperty id
 
-      $body = '{"definition": {"id": ' + $id + '}}'
+      $queueSection = $null
+      if ($QueueName) {
+         $queueId = Get-Queue -ProjectName "$ProjectName" -queueName "$QueueName" |
+            Select-Object -ExpandProperty Id
+
+         $queueSection = ', "queue": {"id": ' + $queueId + '}'
+      }
+
+      $body = '{"definition": {"id": ' + $id + '}' + $queueSection + '}'
 
       Write-Verbose $body
 
