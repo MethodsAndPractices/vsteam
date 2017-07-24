@@ -7,6 +7,11 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 0.1.26
+Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/10) from [Roberto Peña](https://github.com/eulesv) which included the following:
+
+- Adding a regular expression to validate VSTS account
+
 ## 0.1.25
 - Moved -Expand parameter of Get-Release to all parameter sets.
 
