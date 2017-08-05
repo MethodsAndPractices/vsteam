@@ -25,6 +25,9 @@ REMAINS WITH THE USER.
          <TableControl>
             <TableHeaders>
                <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
                   <Label>Status</Label>
                </TableColumnHeader>
                <TableColumnHeader>
@@ -34,7 +37,7 @@ REMAINS WITH THE USER.
                   <Label>Environment</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>Approval Type</Label>
+                  <Label>Type</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Approver Name</Label>
@@ -46,6 +49,9 @@ REMAINS WITH THE USER.
             <TableRowEntries>
                <TableRowEntry>
                   <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>id</PropertyName>
+                     </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>status</PropertyName>
                      </TableColumnItem>
