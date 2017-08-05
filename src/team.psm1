@@ -158,8 +158,10 @@ function Add-TeamAccount {
       }
 
       # If they only gave an account name add visualstudio.com
-      if($Account -match  "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
-         $Account = "https://$($matches.account).visualstudio.com"
+      if ($Account -notlike "*/*") {
+        if($Account -match  "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
+           $Account = "https://$($matches.account).visualstudio.com"
+        }
       }
 
       $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
