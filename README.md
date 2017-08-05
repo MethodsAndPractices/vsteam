@@ -1,3 +1,4 @@
+![build status](https://loecda.visualstudio.com/_apis/public/build/definitions/3e857acd-880f-4056-a46b-1de672ca55cc/5/badge "Build status")
 # Team
 Home of PowerShell module for accessing TFS and VSTS
 
