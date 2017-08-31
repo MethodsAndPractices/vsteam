@@ -1,171 +1,191 @@
-﻿# Get-Release
+---
+external help file: Team-Help.xml
+Module Name: 
+online version: 
+schema: 2.0.0
+---
+
+# Get-Release
 
 ## SYNOPSIS
 Gets the releases for a team project.
 
 ## SYNTAX
 
-### Parameter Set 1
+### UNNAMED_PARAMETER_SET_1
 ```
-Get-Release [-ProjectName] <String> [-Expand <String>] [-StatusFilter <String>] [-DefinitionId <Int32>] [-Top <Int32>] [-CreatedBy <String>] [-MinCreatedTime <DateTime>] [-MaxCreatedTime <DateTime>] [-QueryOrder <String>] [-ContinuationToken <String>]
+Get-Release [-ProjectName] <String> [-Expand <String>] [-StatusFilter <String>] [-DefinitionId <Int32>]
+ [-Top <Int32>] [-CreatedBy <String>] [-MinCreatedTime <DateTime>] [-MaxCreatedTime <DateTime>]
+ [-QueryOrder <String>] [-ContinuationToken <String>]
 ```
 
-### Parameter Set 2
+### UNNAMED_PARAMETER_SET_2
 ```
 Get-Release [-ProjectName] <String> [-Id <Int32[]>]
 ```
 
 ## DESCRIPTION
 The Get-Release function gets the releases for a team
-project. The project name is a Dynamic Parameter which may not be displayed
+project.
+The project name is a Dynamic Parameter which may not be displayed
 in the syntax above but is mandatory.
 
 With just a project name, this function gets all of the release s
-for that team project. You can also specify a particular release defintion
+for that team project.
+You can also specify a particular release defintion
 by ID.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-PS C:\\\>
-```powershell
+```
 Get-Release -ProjectName demo | Format-List *
 ```
 
-This command gets a list of all release s in the demo project. The
-pipeline operator (\|) passes the data to the Format-List cmdlet, which
-displays all available properties (\*) of the release defintion objects.
+This command gets a list of all release s in the demo project.
+The
+pipeline operator (|) passes the data to the Format-List cmdlet, which
+displays all available properties (*) of the release defintion objects.
 
 ## PARAMETERS
 
-### Expand
+### -Expand
 Specifies which property should be expanded in the list of Release
  (environments, artifacts, none).
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### StatusFilter
-
+### -StatusFilter
+@{Text=}
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### DefinitionId
-
+### -DefinitionId
+@{Text=}
 
 ```yaml
 Type: Int32
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 0
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### Top
-
+### -Top
+@{Text=}
 
 ```yaml
 Type: Int32
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 0
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### CreatedBy
-
+### -CreatedBy
+@{Text=}
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### MinCreatedTime
-
+### -MinCreatedTime
+@{Text=}
 
 ```yaml
 Type: DateTime
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### MaxCreatedTime
-
+### -MaxCreatedTime
+@{Text=}
 
 ```yaml
 Type: DateTime
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### QueryOrder
-
+### -QueryOrder
+@{Text=}
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### ContinuationToken
-
+### -ContinuationToken
+@{Text=}
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### ProjectName
+### -ProjectName
 Specifies the team project for which this function operates.
 
 You can tab complete from a list of available projects.
@@ -178,41 +198,41 @@ Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: true
+Required: True
 Position: 0
-Default Value: 
-Pipeline Input: True (ByPropertyName)
-Dynamic: true
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
 ```
 
-### Id
-Specifies one or more releases by ID. To specify multiple IDs, use
-commas to separate the IDs. To find the ID of a release defintion, type
+### -Id
+Specifies one or more releases by ID.
+To specify multiple IDs, use
+commas to separate the IDs.
+To find the ID of a release defintion, type
 Get-Release.
 
 ```yaml
 Type: Int32[]
-Parameter Sets: Parameter Set 2
+Parameter Sets: UNNAMED_PARAMETER_SET_2
 Aliases: ReleaseID
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: True (ByPropertyName)
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
 ```
 
 ## INPUTS
 
 ### You can pipe release defintion IDs to this function.
 
-
 ## OUTPUTS
 
 ### Team.Release
 
-
 ## NOTES
-
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release s.
 
@@ -223,10 +243,8 @@ to pass the ProjectName with each call.
 
 ## RELATED LINKS
 
-[Add-TeamAccount
-Set-DefaultProject
-Add-Release
-Remove-Release]()
+[Add-TeamAccount](Add-TeamAccount.md)
+[Set-DefaultProject](Set-DefaultProject.md)
+[Add-Release](Add-Release.md)
+[Remove-Release](Remove-Release.md)
 
-
-*Generated by: PowerShell HelpWriter 2017 v2.1.36*

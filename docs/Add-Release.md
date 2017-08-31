@@ -1,22 +1,32 @@
-﻿# Add-Release
+---
+external help file: Team-Help.xml
+Module Name: 
+online version: 
+schema: 2.0.0
+---
+
+# Add-Release
 
 ## SYNOPSIS
 Queues a new release
 
 ## SYNTAX
 
-### Parameter Set 1
+### UNNAMED_PARAMETER_SET_1
 ```
-Add-Release [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>] -ArtifactAlias <String> -DefinitionId <Int32> -BuildId <String> [-Force]
+Add-Release [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>]
+ -ArtifactAlias <String> -DefinitionId <Int32> -BuildId <String> [-Force]
 ```
 
-### Parameter Set 2
+### UNNAMED_PARAMETER_SET_2
 ```
-Add-Release [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>] [-Force] [-DefinitionName <String>] [-BuildNumber <String>]
+Add-Release [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>] [-Force]
+ [-DefinitionName <String>] [-BuildNumber <String>]
 ```
 
 ## DESCRIPTION
-Add-Release will queue a new release. The environments will deploy according to how the 
+Add-Release will queue a new release.
+The environments will deploy according to how the 
 release definition is configured in the Triggers tab.
 
 You must call Add-TeamAccount before calling this function.
@@ -24,8 +34,7 @@ You must call Add-TeamAccount before calling this function.
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-PS C:\\\>
-```powershell
+```
 get-build | ft id,name
 
 id name
@@ -43,11 +52,11 @@ id name    Alais
 PS C:\>Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
 ```
 
-This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release.  If you call Set-DefaultProject you can use Example 2 which is much easier.
+This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release. 
+If you call Set-DefaultProject you can use Example 2 which is much easier.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-PS C:\\\>
-```powershell
+```
 Add-Release -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
 ```
 
@@ -57,77 +66,82 @@ You must set a default project to tab complete DefinitionName and BuildNumber.
 
 ## PARAMETERS
 
-### DefinitionId
-
+### -DefinitionId
+@{Text=}
 
 ```yaml
 Type: Int32
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: true
-Position: named
-Default Value: 0
-Pipeline Input: false
+Required: True
+Position: Named
+Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### Description
-
+### -Description
+@{Text=}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: true
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### ArtifactAlias
-
+### -ArtifactAlias
+@{Text=}
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: true
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### Name
-
+### -Name
+@{Text=}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### BuildId
-
+### -BuildId
+@{Text=}
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 1
+Parameter Sets: UNNAMED_PARAMETER_SET_1
 Aliases: 
 
-Required: true
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### ProjectName
+### -ProjectName
 Specifies the team project for which this function operates.
 
 You can tab complete from a list of available projects.
@@ -140,43 +154,44 @@ Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: true
+Required: True
 Position: 0
-Default Value: 
-Pipeline Input: True (ByPropertyName)
-Dynamic: true
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
 ```
 
-### DefinitionName
-
+### -DefinitionName
+@{Text=}
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 2
+Parameter Sets: UNNAMED_PARAMETER_SET_2
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: True (ByPropertyName)
-Dynamic: true
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
 ```
 
-### SourceBranch
-
+### -SourceBranch
+@{Text=}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### Force
+### -Force
 Forces the command without confirmation
 
 ```yaml
@@ -184,36 +199,35 @@ Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: 
 
-Required: false
-Position: named
-Default Value: False
-Pipeline Input: false
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
 ```
 
-### BuildNumber
-
+### -BuildNumber
+@{Text=}
 
 ```yaml
 Type: String
-Parameter Sets: Parameter Set 2
+Parameter Sets: UNNAMED_PARAMETER_SET_2
 Aliases: 
 
-Required: false
-Position: named
-Default Value: 
-Pipeline Input: True (ByPropertyName)
-Dynamic: true
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
 ```
 
 ## INPUTS
 
 ### System.String
 
-
 ## OUTPUTS
 
 ## NOTES
-
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release s.
 
@@ -224,5 +238,3 @@ to pass the ProjectName with each call.
 
 ## RELATED LINKS
 
-
-*Generated by: PowerShell HelpWriter 2017 v2.1.36*
