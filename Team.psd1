@@ -78,7 +78,8 @@
       'src\queues.psm1',
       'src\releaseDefinitions.psm1',
       'src\releases.psm1',
-      'src\serviceendpoints.psm1')
+      'src\serviceendpoints.psm1',
+      '.\src\teams.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-AzureRMServiceEndpoint',
@@ -90,6 +91,7 @@
 	  'Add-ReleaseEnvironment',
       'Add-ReleaseDefinition',
       'Add-TeamAccount',
+      'Add-Team',
       'Clear-DefaultProject',
       'Get-Approval',
       'Get-Build',
@@ -102,6 +104,8 @@
       'Get-ReleaseDefinition',
       'Get-ServiceEndpoint',
       'Get-TeamInfo',
+      'Get-Team',
+      'Get-TeamMembers',
       'Remove-Build',
       'Remove-BuildDefinition',
       'Remove-Project',
@@ -109,10 +113,12 @@
       'Remove-ReleaseDefinition',
       'Remove-ServiceEndpoint',
       'Remove-TeamAccount',
+      'Remove-Team',
       'Set-Approval',
       'Set-DefaultProject',
       'Set-ReleaseStatus',
       'Update-Project',
+      'Update-Team',
       'Get-GitRepository',
       'Add-GitRepository',
       'Remove-GitRepository',
