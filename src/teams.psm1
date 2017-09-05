@@ -192,10 +192,10 @@ function Remove-Team {
 
         # Call the REST API
         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method DELETE -Uri $listurl -UseDefaultCredentials
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
         }
         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method DELETE -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
         }
 
         return $resp

@@ -73,6 +73,99 @@ InModuleScope teams {
                 }
             }
         }
+
+        Context 'Add-Team with team name only' {
+            Mock Invoke-RestMethod { return @{value='teams'}}
+
+            It 'Should create a team' {
+                Add-Team -ProjectName Test -TeamName "TestTeam"
+
+                $expectedBody = '{ "name": "TestTeam", "description": "" }'
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams?api-version=1.0' -and
+                    $Method -eq "Post" -and
+                    $Body -eq $expectedBody
+                }
+            }
+        }
+
+        Context 'Add-Team with team name and description' {
+            Mock Invoke-RestMethod { return @{value='teams'}}
+            
+            It 'Should create a team' {
+                Add-Team -ProjectName Test -TeamName "TestTeam" -Description "Test Description"
+
+                $expectedBody = '{ "name": "TestTeam", "description": "Test Description" }'
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams?api-version=1.0' -and
+                    $Method -eq "Post" -and
+                    $Body -eq $expectedBody
+                }
+            }
+        }
+
+        Context 'Update-Team with new team name' {
+            Mock Invoke-RestMethod { return @{value='teams'}}
+            
+            It 'Should update the team' {
+                Update-Team -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
+
+                $expectedBody = '{ "name": "NewTeamName" }'
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=1.0' -and
+                    $Method -eq "Patch" -and
+                    $Body -eq $expectedBody
+                }
+            }
+        }
+
+        Context 'Update-Team with new description' {
+            Mock Invoke-RestMethod { return @{value='teams'}}
+            
+            It 'Should update the team' {
+                Update-Team -ProjectName Test -TeamToUpdate "OldTeamName" -Description "New Description"
+
+                $expectedBody = '{"description": "New Description" }'
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=1.0' -and
+                    $Method -eq "Patch" -and
+                    $Body -eq $expectedBody
+                }
+            }
+        }
+
+        Context 'Update-Team with new team name and description' {
+            Mock Invoke-RestMethod { return @{value='teams'}}
+            
+            It 'Should update the team' {
+                Update-Team -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName" -Description "New Description"
+
+                $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=1.0' -and
+                    $Method -eq "Patch" -and
+                    $Body -eq $expectedBody
+                }
+            }
+        }
+
+        Context 'Remove-Team' {
+            Mock Invoke-RestMethod { return @{value='teams'}}
+            
+            It 'Should remove the team' {
+                Remove-Team -ProjectName Test -TeamId "TestTeam"
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/TestTeam?api-version=1.0' -and
+                    $Method -eq "Delete"
+                }
+            }
+        }
     }
 
 }
