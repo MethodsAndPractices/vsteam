@@ -8,8 +8,7 @@ function _buildURL {
     param(
         [parameter(Mandatory = $true)]
         [string] $ProjectName,
-        [string] $TeamId,
-        [switch] $GetMembers
+        [string] $TeamId
     )
 
     if(-not $env:TEAM_ACCT) {
@@ -24,13 +23,6 @@ function _buildURL {
         $resource += "/$TeamId"
     }
 
-    if ($GetMembers.IsPresent) {
-        if(-not $TeamID) {
-            throw 'You must provide $TeamId when getting team members.'
-        }
-        $resource += "/members"
-    }
-
     # Build the url to list the projects
     return $instance + '/_apis' + $resource + '?api-version=' + $version
 }
@@ -39,7 +31,6 @@ function _buildURL {
 # identify the object and act on it.
 function _applyTypes {
    param($item)
-
    $item.PSObject.TypeNames.Insert(0, 'Team.Team')
 }
 
@@ -103,54 +94,6 @@ function Get-Team {
 
             Write-Output $resp.value
         }
-    } 
-}
-
-function Get-TeamMembers {
-    [CmdletBinding(DefaultParameterSetName = 'List')]
-    param (
-       [Parameter(ParameterSetName = 'List')]
-       [int] $Top,
- 
-       [Parameter(ParameterSetName = 'List')]
-       [int] $Skip,
- 
-       [Parameter(Mandatory = $true, ParameterSetName = 'List', ValueFromPipeline = $true)]
-       [string] $TeamId
-    )
-
-    DynamicParam {
-        _buildProjectNameDynamicParam
-     }
-
-     process {
-        # Bind the parameter to a friendly variable
-        $ProjectName = $PSBoundParameters["ProjectName"]
-
-
-        # Build the url to list the builds
-        $listurl = _buildURL -projectName $ProjectName -teamId $TeamId -GetMembers
-        
-        $listurl += _appendQueryString -name "`$top" -value $top
-        $listurl += _appendQueryString -name "`$skip" -value $skip
-
-        Write-Output $listurl
-
-        # Call the REST API
-        if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-        }
-        else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-        }
-
-        # Apply a Type Name so we can use custom format view and custom type extensions
-        foreach ($item in $resp.value) {
-            # HOW DOES THIS WORK?!?!
-            #_applyTypes -item $item
-        }
-
-        Write-Output $resp.value
     } 
 }
 
@@ -259,4 +202,4 @@ function Remove-Team {
     }
 }
 
-Export-ModuleMember -Alias * -Function Get-Team, Get-TeamMembers, Add-Team, Update-Team, Remove-Team
+Export-ModuleMember -Alias * -Function Get-Team, Add-Team, Update-Team, Remove-Team
