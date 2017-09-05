@@ -40,16 +40,7 @@ function _buildURL {
 function _applyTypes {
    param($item)
 
-   $item.PSObject.TypeNames.Insert(0, 'Team.Project')
-
-   # Only returned for a single item
-   if ($item.PSObject.Properties.Match('defaultTeam').count -gt 0 -and $null -ne $item.defaultTeam) {
-      $item.defaultTeam.PSObject.TypeNames.Insert(0, 'Team.Team')
-   }
-
-   if ($item.PSObject.Properties.Match('_links').count -gt 0 -and $null -ne $item._links) {
-      $item._links.PSObject.TypeNames.Insert(0, 'Team.Links')
-   }
+   $item.PSObject.TypeNames.Insert(0, 'Team.Team')
 }
 
 function Get-Team {
@@ -86,13 +77,12 @@ function Get-Team {
                    $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
                 }
 
-                # HOW DOES THIS WORK?!?
-                # _applyTypes -item $resp
+                _applyTypes -item $resp
 
                 Write-Output $resp
             }
         } else {
-            # Build the url to list the builds
+            # Build the url to list the teams
             $listurl = _buildURL -projectName $ProjectName
             
             $listurl += _appendQueryString -name "`$top" -value $top
@@ -189,40 +179,7 @@ function Add-Team {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
         }
 
-        # HOW DOES THIS WORK?!?
-        #_applyTypes -item $resp
-
-        return $resp
-    }
-}
-
-function Add-Team {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$TeamName,
-        [string]$Description = ""
-    )
-    DynamicParam {
-        _buildProjectNameDynamicParam
-    }
-
-    process { 
-        # Bind the parameter to a friendly variable
-        $ProjectName = $PSBoundParameters["ProjectName"]
-
-        $listurl = _buildURL -ProjectName $ProjectName
-        $body = '{ "name": "' + $TeamName + '", "description": "' + $Description + '" }'
-
-        # Call the REST API
-        if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-        }
-        else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-        }
-
-        # HOW DOES THIS WORK?!?
-        #_applyTypes -item $resp
+        _applyTypes -item $resp
 
         return $resp
     }
@@ -269,8 +226,7 @@ function Update-Team {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
         }
 
-        # HOW DOES THIS WORK?!?
-        #_applyTypes -item $resp
+        _applyTypes -item $resp
 
         return $resp
     }
@@ -298,9 +254,6 @@ function Remove-Team {
         else {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method DELETE -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
         }
-
-        # HOW DOES THIS WORK?!?
-        #_applyTypes -item $resp
 
         return $resp
     }
