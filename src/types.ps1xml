@@ -51,6 +51,10 @@ REMAINS WITH THE USER.
                </PropertySet>
             </Members>
          </MemberSet>
+         <AliasProperty>
+            <Name>projectname</Name>
+            <ReferencedMemberName>name</ReferencedMemberName>
+         </AliasProperty>
       </Members>
    </Type>
    <!-- Team.Team -->
