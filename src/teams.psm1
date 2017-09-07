@@ -30,8 +30,16 @@ function _buildURL {
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
-   param($item)
-   $item.PSObject.TypeNames.Insert(0, 'Team.Team')
+   param(
+       [Parameter(Mandatory = $true)]
+       $item,
+       [Parameter(Mandatory = $true)]
+       $ProjectName
+    )
+
+    # Add the ProjectName as a NoteProperty so we can use it further down the pipeline (it's not returned from the REST call)
+    $item | Add-Member -MemberType NoteProperty -Name ProjectName -Value $ProjectName
+    $item.PSObject.TypeNames.Insert(0, 'Team.Team')
 }
 
 function Get-Team {
@@ -43,7 +51,7 @@ function Get-Team {
        [Parameter(ParameterSetName = 'List')]
        [int] $Skip,
  
-       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true)]
+       [Parameter(ParameterSetName = 'ByID')]
        [string[]] $TeamId
     )
 
@@ -68,7 +76,7 @@ function Get-Team {
                    $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
                 }
 
-                _applyTypes -item $resp
+                _applyTypes -item $resp -ProjectName $ProjectName
 
                 Write-Output $resp
             }
@@ -89,7 +97,7 @@ function Get-Team {
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
-                _applyTypes -item $item
+                _applyTypes -item $item -ProjectName $ProjectName
             }
 
             Write-Output $resp.value
@@ -98,6 +106,7 @@ function Get-Team {
 }
 
 function Add-Team {
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
         [string]$TeamName,
@@ -122,15 +131,17 @@ function Add-Team {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
         }
 
-        _applyTypes -item $resp
+        _applyTypes -item $resp -ProjectName $ProjectName
 
         return $resp
     }
 }
 
 function Update-Team {
+    [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $True)]
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [Alias('name')]
         [string]$TeamToUpdate,
         [string]$NewTeamName,
         [string]$Description
@@ -169,16 +180,20 @@ function Update-Team {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
         }
 
-        _applyTypes -item $resp
+        _applyTypes -item $resp -ProjectName $ProjectName
 
         return $resp
     }
 }
 
 function Remove-Team {
+    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
     param(
-        [Parameter(Mandatory = $True)]
-        [string]$TeamId
+        [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+        [Alias('name')]
+        [string]$TeamId,
+
+        [switch]$Force
     )
     DynamicParam {
         _buildProjectNameDynamicParam
@@ -190,15 +205,17 @@ function Remove-Team {
 
         $listurl = _buildURL -ProjectName $ProjectName -TeamId $TeamId
 
-        # Call the REST API
-        if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-        }
-        else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-        }
+        if ($Force -or $PSCmdlet.ShouldProcess($TeamId, "Delete team")) {
+            # Call the REST API
+            if (_useWindowsAuthenticationOnPremise) {
+                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+            }
+            else {
+                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
 
-        return $resp
+            Write-Output "Deleted team $TeamId"
+        }
     }
 }
 

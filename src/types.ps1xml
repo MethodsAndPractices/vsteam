@@ -67,6 +67,7 @@ REMAINS WITH THE USER.
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
+                     <Name>projectname</Name>
                      <Name>name</Name>
                      <Name>id</Name>
                      <Name>description</Name>
@@ -86,6 +87,7 @@ REMAINS WITH THE USER.
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
+                     <Name>team</Name>
                      <Name>displayName</Name>
                      <Name>id</Name>
                      <Name>uniqueName</Name>

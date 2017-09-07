@@ -154,14 +154,45 @@ InModuleScope teams {
             }
         }
 
+        Context 'Update-Team, fed through pipeline' {
+            Mock Get-Team { return New-Object -TypeName PSObject -Prop @{projectname="TestProject"; name="OldTeamName"} }
+            Mock Invoke-RestMethod { return @{value='teams'}}
+
+            It 'Should update the team' {
+                Get-Team -ProjectName TestProject -TeamId "OldTeamName" | Update-Team -NewTeamName "NewTeamName" -Description "New Description"
+
+                $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/OldTeamName?api-version=1.0' -and
+                    $Method -eq "Patch" -and
+                    $Body -eq $expectedBody
+                }
+            }
+        }
+
         Context 'Remove-Team' {
             Mock Invoke-RestMethod { return @{value='teams'}}
             
             It 'Should remove the team' {
-                Remove-Team -ProjectName Test -TeamId "TestTeam"
+                Remove-Team -ProjectName Test -TeamId "TestTeam" -Force
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                     $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/TestTeam?api-version=1.0' -and
+                    $Method -eq "Delete"
+                }
+            }
+        }
+
+        Context 'Remove-Team, fed through pipeline' {
+            Mock Get-Team { return New-Object -TypeName PSObject -Prop @{projectname="TestProject"; name="TestTeam"} }
+            Mock Invoke-RestMethod { return @{value='teams'}}
+
+            It 'Should remove the team' {
+                Get-Team -ProjectName TestProject -TeamId "TestTeam" | Remove-Team -Force
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam?api-version=1.0' -and
                     $Method -eq "Delete"
                 }
             }

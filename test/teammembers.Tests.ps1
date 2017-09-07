@@ -2,6 +2,7 @@ Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
 Import-Module $PSScriptRoot\..\src\teammembers.psm1 -Force
+Import-Module $PSScriptRoot\..\src\teams.psm1 -Force
 
 InModuleScope teammembers {
    $env:TEAM_ACCT = 'https://test.visualstudio.com'
@@ -55,6 +56,19 @@ InModuleScope teammembers {
                     $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0&$top=10&$skip=5'
                 }
             }            
+        }
+
+        Context 'Get-Teammember for specific team, fed through pipeline' {
+            Mock Get-Team { return New-Object -TypeName PSObject -Prop @{projectname="TestProject"; name="TestTeam"} }
+            Mock Invoke-RestMethod { return @{value='teammembers'}}
+
+            It 'Should return teammembers' {
+                Get-Team -ProjectName TestProject -TeamId "TestTeam" | Get-TeamMember
+
+                Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0'                    
+                }
+            }
         }
     }
 

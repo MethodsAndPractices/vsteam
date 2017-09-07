@@ -27,20 +27,29 @@ function _buildURL {
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
-   param($item)
-   $item.PSObject.TypeNames.Insert(0, 'Team.TeamMember')
+    param(
+        [Parameter(Mandatory = $true)]
+        $item,
+        [Parameter(Mandatory = $true)]
+        $team
+    )
+    
+    # Add the team name as a NoteProperty so we can use it further down the pipeline (it's not returned from the REST call)
+    $item | Add-Member -MemberType NoteProperty -Name Team -Value $team
+    $item.PSObject.TypeNames.Insert(0, 'Team.TeamMember')
 }
 
 function Get-TeamMember {
-    [CmdletBinding(DefaultParameterSetName = 'List')]
+    [CmdletBinding()]
     param (
-       [Parameter(ParameterSetName = 'List')]
+       [Parameter()]
        [int] $Top,
  
-       [Parameter(ParameterSetName = 'List')]
+       [Parameter()]
        [int] $Skip,
  
-       [Parameter(Mandatory = $true, ParameterSetName = 'List', ValueFromPipeline = $true)]
+       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName=$true)]
+       [Alias('name')]
        [string] $TeamId
     )
 
@@ -59,8 +68,6 @@ function Get-TeamMember {
         $listurl += _appendQueryString -name "`$top" -value $top
         $listurl += _appendQueryString -name "`$skip" -value $skip
 
-        Write-Output $listurl
-
         # Call the REST API
         if (_useWindowsAuthenticationOnPremise) {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
@@ -71,7 +78,7 @@ function Get-TeamMember {
 
         # Apply a Type Name so we can use custom format view and custom type extensions
         foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypes -item $item -team $TeamId
         }
 
         Write-Output $resp.value
