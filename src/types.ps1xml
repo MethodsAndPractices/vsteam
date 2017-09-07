@@ -51,6 +51,50 @@ REMAINS WITH THE USER.
                </PropertySet>
             </Members>
          </MemberSet>
+         <AliasProperty>
+            <Name>projectname</Name>
+            <ReferencedMemberName>name</ReferencedMemberName>
+         </AliasProperty>
+      </Members>
+   </Type>
+   <!-- Team.Team -->
+   <Type>
+      <Name>Team.Team</Name>
+      <Members>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>projectname</Name>
+                     <Name>name</Name>
+                     <Name>id</Name>
+                     <Name>description</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+   <!-- Team.TeamMember -->
+   <Type>
+      <Name>Team.TeamMember</Name>
+      <Members>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>team</Name>
+                     <Name>displayName</Name>
+                     <Name>id</Name>
+                     <Name>uniqueName</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
       </Members>
    </Type>
    <!--Team.Build-->
