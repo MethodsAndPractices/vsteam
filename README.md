@@ -8,6 +8,11 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 0.1.30
+Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/15) from [Kees Verhaar](https://github.com/KeesV) which included the following:
+
+- Add support for teams
+
 ## 0.1.29
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/12) from [Andy Neillans](https://github.com/aneillans) which included the following:
 
