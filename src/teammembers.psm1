@@ -31,7 +31,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.TeamMember')
 }
 
-function Get-TeamMembers {
+function Get-TeamMember {
     [CmdletBinding(DefaultParameterSetName = 'List')]
     param (
        [Parameter(ParameterSetName = 'List')]
@@ -78,4 +78,4 @@ function Get-TeamMembers {
     } 
 }
 
-Export-ModuleMember -Alias * -Function Get-TeamMembers
+Export-ModuleMember -Alias * -Function Get-TeamMember

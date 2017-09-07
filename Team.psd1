@@ -106,7 +106,7 @@
       'Get-ServiceEndpoint',
       'Get-TeamInfo',
       'Get-Team',
-      'Get-TeamMembers',
+      'Get-TeamMember',
       'Remove-Build',
       'Remove-BuildDefinition',
       'Remove-Project',

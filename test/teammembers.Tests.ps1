@@ -9,11 +9,11 @@ InModuleScope teammembers {
    Describe "TeamMembers" {
         . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
         
-        Context 'Get-Teammembers for specific project and team' {
+        Context 'Get-Teammember for specific project and team' {
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teammembers' {
-                Get-TeamMembers -ProjectName TestProject -TeamId TestTeam
+                Get-Teammember -ProjectName TestProject -TeamId TestTeam
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                     $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0'
@@ -21,11 +21,11 @@ InModuleScope teammembers {
             }
         }
 
-        Context 'Get-Teammembers for specific project and team, with top' {
+        Context 'Get-Teammember for specific project and team, with top' {
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teammembers' {
-                Get-TeamMembers -ProjectName TestProject -TeamId TestTeam -Top 10
+                Get-Teammember -ProjectName TestProject -TeamId TestTeam -Top 10
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                     $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0&$top=10'
@@ -33,11 +33,11 @@ InModuleScope teammembers {
             }            
         }
 
-        Context 'Get-Teammembers for specific project and team, with skip' {
+        Context 'Get-Teammember for specific project and team, with skip' {
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teammembers' {                
-                Get-TeamMembers -ProjectName TestProject -TeamId TestTeam -Skip 5
+                Get-Teammember -ProjectName TestProject -TeamId TestTeam -Skip 5
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                     $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0&$skip=5'
@@ -45,11 +45,11 @@ InModuleScope teammembers {
             }
         }
 
-        Context 'Get-Teammembers for specific project and team, with top and skip' {
+        Context 'Get-Teammember for specific project and team, with top and skip' {
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teammembers' {                
-                Get-TeamMembers -ProjectName TestProject -TeamId TestTeam -Top 10 -Skip 5
+                Get-Teammember -ProjectName TestProject -TeamId TestTeam -Top 10 -Skip 5
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                     $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0&$top=10&$skip=5'
