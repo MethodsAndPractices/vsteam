@@ -4,6 +4,8 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
+$apiVersionQueryString = '?api-version=2.0'
+
 function _buildURL {
    param(
       [parameter(Mandatory = $true)]
@@ -13,28 +15,69 @@ function _buildURL {
       [int] $LogIndex
    )
 
-   if (-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+   if ($Logs.IsPresent -eq $true) {
+       $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -Logs $Logs -LogIndex $LogIndex
+   }
+   else {
+    $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
    }
 
-   $version = '2.0'
-   $resource = "/build/builds"
-   $instance = $env:TEAM_ACCT
-
-   if ($id) {
-      $resource += "/$id"
-   }
-
-   if ($Logs.IsPresent) {
-      $resource += "/logs"
-
-      if ($LogIndex) {
-         $resource += "/$LogIndex"
-      }
-   }
 
    # Build the url to list the projects
-   return $instance + "/$projectName/_apis" + $resource + '?api-version=' + $version
+   return $rootUrl + $apiVersionQueryString
+}
+
+function _buildChildUrl {
+    param(
+        [parameter(Mandatory = $true)]
+        [string] $ProjectName,
+        [int] $Id,
+        [Switch] $Logs,
+        [int] $LogIndex,
+        [string] $Child
+     )
+
+    if ($Logs.IsPresent -eq $true) {
+        $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -Logs $Logs -LogIndex $LogIndex
+    }
+    else {
+     $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
+    }
+ 
+    # Build the url to list the projects
+    return $rootUrl + "/$Child" + $apiVersionQueryString
+}
+
+function _buildRootURL {
+    param(
+        [parameter(Mandatory = $true)]
+        [string] $ProjectName,
+        [int] $Id,
+        [Switch] $Logs,
+        [int] $LogIndex
+     )
+  
+     if (-not $env:TEAM_ACCT) {
+        throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+     }
+  
+     $resource = "/build/builds"
+     $instance = $env:TEAM_ACCT
+  
+     if ($id) {
+        $resource += "/$id"
+     }
+  
+     if ($Logs.IsPresent) {
+        $resource += "/logs"
+  
+        if ($LogIndex) {
+           $resource += "/$LogIndex"
+        }
+     }
+  
+     # Build the url to list the projects
+     return $instance + "/$projectName/_apis" + $resource
 }
 
 # Apply types to the returned objects so format and type files can
@@ -58,6 +101,15 @@ function _applyTypes {
 
    if ($item.PSObject.Properties.Match('orchestrationPlan').count -gt 0 -and $null -ne $item.orchestrationPlan) {
       $item.orchestrationPlan.PSObject.TypeNames.Insert(0, 'Team.OrchestrationPlan')
+   }
+}
+
+function _applyArtifactTypes {
+    $item.PSObject.TypeNames.Insert(0, "Team.Build.Artifact")
+    
+   if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource) {
+    $item.resource.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource')
+    $item.resource.properties.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource.Properties')
    }
 }
 
@@ -370,4 +422,202 @@ function Remove-Build {
    }
 }
 
-Export-ModuleMember -Alias * -Function Add-Build, Get-Build, Remove-Build, Get-BuildLog
+function Update-Build {
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+    param(
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Int] $Id,
+
+        [parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [bool] $KeepForever,
+
+        [parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [string] $BuildNumber,
+
+        [switch] $Force
+    )
+
+    DynamicParam {
+        _buildProjectNameDynamicParam
+    }
+
+    Process {
+        $ProjectName = $PSBoundParameters["ProjectName"]
+
+        if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-Build")) {
+
+            $updateUrl = _buildURL -ProjectName $ProjectName -Id $Id
+
+            $body = '{'
+            
+            $items = New-Object System.Collections.ArrayList
+
+            if ($KeepForever -ne $null) {
+                $items.Add("`"keepForever`": $($KeepForever.ToString().ToLower())") > $null
+            }
+
+            if ($buildNumber -ne $null -and $buildNumber.Length -gt 0) {
+                $items.Add("`"buildNumber`": `"$BuildNumber`"") > $null
+            }
+
+            if ($items -ne $null -and $items.count -gt 0) {
+                $body += ($items -join ", ")
+            }
+                
+            $body += '}'
+
+            # Call the REST API
+            if (_useWindowsAuthenticationOnPremise) {
+                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $updateUrl -UseDefaultCredentials
+            }
+            else {
+                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $updateUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
+        }
+    }
+
+}
+
+function Get-BuildTag {
+    param(
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [int] $Id
+    )
+    
+    DynamicParam {
+        _buildProjectNameDynamicParam
+    }
+
+    Process {
+        $ProjectName = $PSBoundParameters["ProjectName"]
+        
+        $rootUrl = _buildChildUrl -projectName $ProjectName -id $Id -child "tags"
+
+        # Call the REST API
+        if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -UseDefaultCredentials
+        }
+        else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+        }
+
+        return $resp.value
+    }
+}
+
+function Add-BuildTag {
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+	param(
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
+        [string[]] $Tags,
+
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [int[]] $Id,
+
+        [switch] $Force
+    )
+    
+    DynamicParam {
+        _buildProjectNameDynamicParam
+    }
+
+    Process {
+        $ProjectName = $PSBoundParameters["ProjectName"]
+        
+        foreach ($item in $id) {
+            if ($Force -or $pscmdlet.ShouldProcess($item, "Add-BuildTag")) {
+                
+                $rootUrl = _buildChildUrl -projectName $ProjectName -id $item -child "tags"
+
+                foreach ($tag in $tags) {
+
+                    $tagUrl = $rootUrl + "&tag=$tag"
+
+                    # Call the REST API
+                    if (_useWindowsAuthenticationOnPremise) {
+                        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $tagUrl -UseDefaultCredentials
+                    }
+                    else {
+                        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $tagUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+                    }
+                }
+            }
+        }
+    }
+}
+
+function Remove-BuildTag {
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+	param(
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
+        [string[]] $Tags,
+        
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [int[]] $Id,
+
+        [switch] $Force
+    )
+    
+    DynamicParam {
+        _buildProjectNameDynamicParam
+    }
+
+    Process {
+        $ProjectName = $PSBoundParameters["ProjectName"]
+
+        foreach ($item in $id) {
+            if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-BuildTag")) {
+
+                $rootUrl = _buildChildUrl -projectName $ProjectName -id $item -child "tags"
+
+                foreach ($tag in $tags)
+                {
+                    $tagUrl = $rootUrl + "&tag=$tag"
+
+                    # Call the REST API
+                    if (_useWindowsAuthenticationOnPremise) {
+                        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $tagUrl -UseDefaultCredentials
+                    }
+                    else {
+                        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $tagUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+                    }
+                }
+            }
+        }
+    }
+}
+
+function Get-BuildArtifact {
+    param(
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [int] $Id
+    )
+    
+    DynamicParam {
+        _buildProjectNameDynamicParam
+    }
+
+    Process {
+        $ProjectName = $PSBoundParameters["ProjectName"]
+        
+        $rootUrl = _buildChildUrl -projectName $ProjectName -id $Id -child "artifacts"
+
+        # Call the REST API
+        if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -UseDefaultCredentials
+        }
+        else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+        }
+
+        foreach ($item in $resp.value) {
+            _applyArtifactTypes -item $item
+         }
+
+         Write-Output $resp.value
+    }
+}
+
+Export-ModuleMember -Alias * -Function Add-Build, Get-Build, Remove-Build, Get-BuildLog, 
+    Add-BuildTag, Get-BuildTag, Remove-BuildTag, 
+    Get-BuildArtifact, Update-Build

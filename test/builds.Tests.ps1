@@ -9,7 +9,7 @@ InModuleScope builds {
 
    # Just a shell for the nest dynamic parameters
    # Used as Mock for calls below. We can't use normal
-   # Mock because the module where is lives is not loaded.
+   # Mock because the module where it lives is not loaded.
    function Get-BuildDefinition {
       return new-object psobject -Property @{
          id=2
@@ -127,5 +127,88 @@ InModuleScope builds {
             }
          }
       }
-   }
+
+      Context 'Add-BuildTag' {
+            Mock Invoke-RestMethod -UserAgent(_getUserAgent)
+            $inputTags = "Test1", "Test2", "Test3"
+
+            It 'should add tags to Build' {
+                  Add-BuildTag -ProjectName project -id 2 -Tags $inputTags
+
+                  foreach ($inputTag in $inputTags) {
+                        Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                              $Method -eq 'Put' -and
+                              $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=2.0' + "&tag=$inputTag"
+                           }
+                  }
+            }
+      }
+
+      Context 'Remove-BuildTag' {
+            Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+                  return @{ value=$null }
+            }
+            [string[]] $inputTags = "Test1", "Test2", "Test3"
+      
+            It 'should add tags to Build' {
+                  Remove-BuildTag -ProjectName project -id 2 -Tags $inputTags
+
+                  foreach ($inputTag in $inputTags) {
+                        Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                              $Method -eq 'Delete' -and
+                              $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=2.0' + "&tag=$inputTag"
+                              }
+                  }
+            }            
+      }
+
+      Context 'Get-BuildTag calls correct Url' {
+            Mock Invoke-RestMethod {
+                  return @{ value='Tag1', 'Tag2'}
+            }
+            
+            It 'should get all Build Tags for the Build.' {
+                  Get-BuildTag -projectName project -id 2
+                  
+                  Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                        $Method -eq 'Get' -and
+                        $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=2.0'
+                     }
+            }
+      }
+
+      Context 'Get-BuildTag returns correct data' {
+            $tags = 'Tag1', 'Tag2'
+            Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+                  return @{ value=$tags}
+            }
+            
+            It 'should get all Build Tags for the Build.' {
+                  $returndata = Get-BuildTag -projectName project -id 2
+                  
+                  Compare-Object $tags  $returndata |
+                        Should Be $null
+            }
+      }
+
+      Context "Get-BuildArtifact calls correct Url" {
+            Mock Invoke-RestMethod -UserAgent(_getUserAgent) { return @{ 
+                  value = @{
+                        id = 150;
+                        name = "Drop";
+                        resource = @{type="filepath"; data="C:\Test"}
+                        }
+                  }
+            }
+
+            It 'should return the build artifact data' {
+                  Get-BuildArtifact -projectName project -id 2
+
+                  Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                        $Method -eq 'Get' -and
+                        $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2/artifacts?api-version=2.0'
+                     }
+            }
+      }
+  }
 }
