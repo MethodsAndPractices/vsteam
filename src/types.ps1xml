@@ -139,6 +139,40 @@ REMAINS WITH THE USER.
          </ScriptProperty>
       </Members>
    </Type>
+   <!-- Team.Build.Artifact -->
+   <Type>
+    <Name>Team.Build.Artifact</Name>
+    <Members>
+        <ScriptProperty>
+            <Name>type</Name>
+            <GetScriptBlock>$this.resource.type</GetScriptBlock>
+        </ScriptProperty>
+        <ScriptProperty>
+            <Name>data</Name>
+            <GetScriptBlock>$this.resource.data</GetScriptBlock>
+        </ScriptProperty> 
+        <ScriptProperty>
+            <Name>url</Name>
+            <GetScriptBlock>$this.resource.url</GetScriptBlock>
+        </ScriptProperty>    
+        <ScriptProperty>
+            <Name>downloadUrl</Name>
+            <GetScriptBlock>$this.resource.downloadUrl</GetScriptBlock>
+        </ScriptProperty>   
+        <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+                <PropertySet>
+                    <Name>DefaultDisplayPropertySet</Name>
+                    <ReferencedProperties>
+                        <Name>id</Name>
+                        <Name>name</Name>
+                    </ReferencedProperties>
+                </PropertySet>
+            </Members>
+        </MemberSet>
+    </Members>
+   </Type>
    <!--Team.Release-->
    <Type>
       <Name>Team.Release</Name>
