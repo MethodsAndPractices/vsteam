@@ -1,0 +1,1 @@
+Removes the build defintions for a team project.

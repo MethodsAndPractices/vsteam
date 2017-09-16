@@ -1,0 +1,1 @@
+Gets the Azure subscriptions associated with the Team Services account.

@@ -1,0 +1,1 @@
+Displays your current account and default project.

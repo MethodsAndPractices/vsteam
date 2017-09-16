@@ -1,0 +1,1 @@
+Adds a new Azure Resource Manager service endpoint.

@@ -1,0 +1,1 @@
+Deletes the Team Project from your Team Services account.

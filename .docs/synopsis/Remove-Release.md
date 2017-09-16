@@ -1,0 +1,1 @@
+Removes the releases for a team project.

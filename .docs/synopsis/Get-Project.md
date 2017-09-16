@@ -1,0 +1,1 @@
+Returns a list of projects in the Team Services or Team Foundation Server account.

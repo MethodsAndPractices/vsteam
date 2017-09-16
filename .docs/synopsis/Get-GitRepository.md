@@ -1,0 +1,1 @@
+Get all the repositories in your Visual Studio Team Services or Team Founcation Server account, or a specific project.
