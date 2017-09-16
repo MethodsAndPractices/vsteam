@@ -20,13 +20,6 @@ Get-Queue [-ProjectName] <String> [-Id <String>]
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
-
 ## PARAMETERS
 
 ### -QueueName

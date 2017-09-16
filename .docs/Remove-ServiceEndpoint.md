@@ -15,13 +15,6 @@ Remove-ServiceEndpoint [-ProjectName] <String> [-Id] <String[]> [-Force]
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
-
 ## PARAMETERS
 
 ### -Id

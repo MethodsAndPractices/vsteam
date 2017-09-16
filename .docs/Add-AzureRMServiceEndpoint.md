@@ -17,13 +17,6 @@ The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure Reso
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
-
 ## PARAMETERS
 
 ### -DisplayName

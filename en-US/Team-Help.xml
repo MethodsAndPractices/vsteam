@@ -168,15 +168,7 @@
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -437,7 +429,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Add-GitRepository</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
@@ -466,7 +458,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
@@ -1301,15 +1293,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1456,15 +1440,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -2638,7 +2614,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-GitRepository</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
@@ -2667,7 +2643,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
@@ -2845,15 +2821,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -3234,15 +3202,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -3867,15 +3827,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -4213,7 +4165,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-GitRepository</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
@@ -4253,7 +4205,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
@@ -4844,15 +4796,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -5273,7 +5217,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Set-ReleaseStatus lets you set the status of the release to Acitve or Abandoned.</maml:para>
+      <maml:para>Sets the status of a release to Active or Abandoned.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -5423,7 +5367,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Update</command:verb>
       <command:noun>Project</command:noun>
       <maml:description>
-        <maml:para>Updates the name and/or description of a team project.</maml:para>
+        <maml:para></maml:para>
       </maml:description>
     </command:details>
     <maml:description>

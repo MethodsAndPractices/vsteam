@@ -19,13 +19,6 @@ Using SonarQube with the Maven tasks uses a Generic Connection type.
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
-
 ## PARAMETERS
 
 ### -SonarQubeUrl
