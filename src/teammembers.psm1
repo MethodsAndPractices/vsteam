@@ -31,11 +31,14 @@ function _applyTypes {
         [Parameter(Mandatory = $true)]
         $item,
         [Parameter(Mandatory = $true)]
-        $team
+        $team,
+        [Parameter(Mandatory = $true)]
+        $ProjectName
     )
     
     # Add the team name as a NoteProperty so we can use it further down the pipeline (it's not returned from the REST call)
     $item | Add-Member -MemberType NoteProperty -Name Team -Value $team
+    $item | Add-Member -MemberType NoteProperty -Name ProjectName -Value $ProjectName
     $item.PSObject.TypeNames.Insert(0, 'Team.TeamMember')
 }
 
@@ -78,7 +81,7 @@ function Get-TeamMember {
 
         # Apply a Type Name so we can use custom format view and custom type extensions
         foreach ($item in $resp.value) {
-            _applyTypes -item $item -team $TeamId
+            _applyTypes -item $item -team $TeamId -ProjectName $ProjectName
         }
 
         Write-Output $resp.value
