@@ -64,7 +64,8 @@
    TypesToProcess = @('src\types.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
-   FormatsToProcess = @('src\TeamTypes.format.ps1xml')
+   FormatsToProcess = @('src\TeamTypes.format.ps1xml',
+        'src\TeamTypes.Artifacts.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules = @('src\team.psm1',
@@ -123,7 +124,12 @@
       'Get-GitRepository',
       'Add-GitRepository',
       'Remove-GitRepository',
-      'Get-BuildLog')
+      'Get-BuildLog',
+      'Add-BuildTag',
+      'Get-BuildTag',
+      'Remove-BuildTag',
+      'Get-BuildArtifact',
+      'Update-Build')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
