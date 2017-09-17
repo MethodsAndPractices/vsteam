@@ -369,7 +369,7 @@ function Set-DefaultProject {
    [CmdletBinding()]
    param()
    DynamicParam {
-      $dp = _buildProjectNameDynamicParam -ParameterName "Project"
+      $dp = _buildProjectNameDynamicParam -AliasName "Project"
 
       # Only add these options on Windows Machines
       if (_isOnWindows) {

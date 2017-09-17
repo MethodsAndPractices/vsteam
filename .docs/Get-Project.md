@@ -7,19 +7,19 @@ Returns a list of projects in the Team Services or Team Foundation Server accoun
 
 ## SYNTAX
 
-### UNNAMED_PARAMETER_SET_1
+### List Parameter Set
 ```
 Get-Project [-StateFilter <String>] [-Top <Int32>] [-Skip <Int32>]
 ```
 
-### UNNAMED_PARAMETER_SET_2
+### ByID Parameter Set
 ```
-Get-Project [-Id <String>] [-IncludeCapabilites]
+Get-Project [-Id <String>] [-IncludeCapabilities]
 ```
 
-### UNNAMED_PARAMETER_SET_3
+### ByName Parameter Set
 ```
-Get-Project [-Name] <String>
+Get-Project [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
@@ -55,7 +55,7 @@ If you do not provide a value the default is WellFormed.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -71,7 +71,7 @@ The default value is 100
 
 ```yaml
 Type: Int32
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -87,7 +87,7 @@ The default value is 0
 
 ```yaml
 Type: Int32
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -102,7 +102,7 @@ The id of the project to return
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: ByID
 Aliases: ProjectID
 
 Required: False
@@ -112,12 +112,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -IncludeCapabilites
+### -IncludeCapabilities
 Will return additional information about the project
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: ByID
 Aliases: 
 
 Required: False
@@ -127,20 +127,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Name
-@{Text=}
-
-```yaml
-Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_3
-Aliases: 
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
+#include "./params/projectName.md"
 
 ## INPUTS
 

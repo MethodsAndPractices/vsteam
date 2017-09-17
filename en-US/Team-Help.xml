@@ -2893,7 +2893,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>IncludeCapabilites</maml:name>
+          <maml:name>IncludeCapabilities</maml:name>
           <maml:Description>
             <maml:para>Will return additional information about the project</maml:para>
           </maml:Description>
@@ -2970,7 +2970,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>IncludeCapabilites</maml:name>
+        <maml:name>IncludeCapabilities</maml:name>
         <maml:Description>
           <maml:para>Will return additional information about the project</maml:para>
         </maml:Description>

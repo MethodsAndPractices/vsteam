@@ -118,7 +118,8 @@ function _buildProjectNameDynamicParam {
    param(
       [string] $ParameterName = 'ProjectName',
       [string] $ParameterSetName,
-      [bool] $Mandatory = $true
+      [bool] $Mandatory = $true,
+      [string] $AliasName
    )
 
    # Create the dictionary
@@ -141,6 +142,11 @@ function _buildProjectNameDynamicParam {
 
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
+
+   if($AliasName) {
+      $AliasAttribute = New-Object System.Management.Automation.AliasAttribute(@($AliasName))
+      $AttributeCollection.Add($AliasAttribute)
+   }
 
    # Generate and set the ValidateSet
    $arrSet = _getProjects

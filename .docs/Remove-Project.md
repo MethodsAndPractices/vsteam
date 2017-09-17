@@ -8,7 +8,7 @@
 ## SYNTAX
 
 ```
-Remove-Project [-Name] <String> [-Force]
+Remove-Project [-ProjectName] <String> [-Force]
 ```
 
 ## DESCRIPTION
@@ -60,20 +60,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Name
-Name of the project to remove.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
+#include "./params/projectName.md"
 
 ## INPUTS
 
@@ -87,4 +74,3 @@ Accept wildcard characters: False
 
 [Add-TeamAccount](Add-TeamAccount.md)
 [Add-Project](Add-Project.md)
-

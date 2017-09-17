@@ -59,7 +59,7 @@ InModuleScope projects {
          }
       }
 
-      Context 'Get-Project with no Capabilites' {
+      Context 'Get-Project with no Capabilities' {
 
          Mock Invoke-RestMethod { return @{value='projects'}}
 
@@ -71,12 +71,12 @@ InModuleScope projects {
          }
       }
 
-      Context 'Get-Project with Capabilites' {
+      Context 'Get-Project with Capabilities' {
 
          Mock Invoke-RestMethod { return 'project'}
 
-         It 'Should return the project with capabilites' {
-            Get-Project -projectId Test -includeCapabilites
+         It 'Should return the project with capabilities' {
+            Get-Project -projectId Test -includeCapabilities
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0&includeCapabilities=true' }

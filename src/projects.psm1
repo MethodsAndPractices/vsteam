@@ -94,11 +94,11 @@ function Get-Project {
       [Alias('ProjectID')]
       [string] $Id,
       [Parameter(ParameterSetName='ByID')]
-      [switch] $IncludeCapabilites
+      [switch] $IncludeCapabilities
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name'
+      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -AliasName 'Name'
    }
 
    process {
@@ -113,7 +113,7 @@ function Get-Project {
          # Build the url to list the projects
          $listurl = _buildURL -ProjectName $ProjectName
 
-         if ($includeCapabilites.IsPresent) {
+         if ($includeCapabilities.IsPresent) {
             $listurl += '&includeCapabilities=true'
          }
 
@@ -165,7 +165,7 @@ function Update-Project {
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterName 'Name'
+      _buildProjectNameDynamicParam -AliasName 'Name'
    }
 
    process {
@@ -285,7 +285,7 @@ function Remove-Project {
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterName 'Name'
+      _buildProjectNameDynamicParam -AliasName 'Name'
    }
 
    Process {
