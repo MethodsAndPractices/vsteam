@@ -20,7 +20,7 @@ The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure Reso
 ## PARAMETERS
 
 ### -DisplayName
-@{Text=}
+The display name of the service endpoint.
 
 ```yaml
 Type: String
@@ -35,7 +35,7 @@ Accept wildcard characters: False
 ```
 
 ### -SubscriptionId
-@{Text=}
+The id of the Azure subscription to use.
 
 ```yaml
 Type: String
@@ -50,7 +50,7 @@ Accept wildcard characters: False
 ```
 
 ### -SubscriptionTenantId
-@{Text=}
+The id of the Azure tenant to use.
 
 ```yaml
 Type: String

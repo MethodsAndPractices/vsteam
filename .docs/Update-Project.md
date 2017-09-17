@@ -8,7 +8,7 @@
 ## SYNTAX
 
 ```
-Update-Project [-Name] <String> [[-NewName] <String>] [[-NewDescription] <String>]
+Update-Project [[-NewName] <String>] [[-NewDescription] <String>] [-Name] <String>
 ```
 
 ## DESCRIPTION
