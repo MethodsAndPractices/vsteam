@@ -3,7 +3,7 @@
 # Get-Build
 
 ## SYNOPSIS
-#include "./synopsis/Add-Get-Build.md"
+#include "./synopsis/Get-Build.md"
 
 ## SYNTAX
 

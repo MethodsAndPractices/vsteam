@@ -10,7 +10,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure Resource Manager connection type.</maml:para>
+      <maml:para>The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure  Resource Manager connection type.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -165,7 +165,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -285,29 +285,25 @@
         </maml:description>
       </command:inputType>
     </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>Team-Build</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para>The team build just created.</maml:para>
-          <maml:para>Build Definition Build Number  Status     Result ---------------- ------------  ------     ------ Demo-CI           Demo-CI-45   notStarted</maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>BuildDefinition and QueueName are dynamic parameters and use the default project value to query their validate set.  If you do not set the default project by called Set-DefaultProject before calling Add-Build you will have to type in the names.</maml:para>
+        <maml:para>BuildDefinition and QueueName are dynamic parameters and use the default  project value to query their validate set. </maml:para>
+        <maml:para>If you do not set the default project by called Set-DefaultProject before calling Add-Build you will have to type in the names.</maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Set-DefaultProject Demo
-PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
+        <dev:code>PS C:\&gt; Set-DefaultProject Demo
+PS C:\&gt; Add-Build -BuildDefinition Demo-CI
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:remarks>
-          <maml:para>This exmaple sets the default project so you can tab complete the BuildDefinition parameter.</maml:para>
+          <maml:para>This example sets the default project so you can tab complete the BuildDefinition parameter.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -399,14 +395,15 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Add-BuildDefinition -ProjectName Demo -InFile build.json</dev:code>
+        <dev:code>PS C:\&gt; Add-BuildDefinition -ProjectName Demo -InFile build.json</dev:code>
         <dev:remarks>
           <maml:para>This command reads build.json and creates a new build defintion from it on the demo team project.</maml:para>
         </dev:remarks>
@@ -420,11 +417,11 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:verb>Add</command:verb>
       <command:noun>BuildTag</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Adds a tag to a build.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Adds a tag to a build.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -446,7 +443,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
           <maml:name>Tags</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Tags Description}}</maml:para>
+            <maml:para>One or more tags. To specify multiple, use commas to separate.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -469,7 +466,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Adds a tag to the specified build without prompting for confirmation. By default, Add-BuildTag prompts for confirmation before tagging the build when the $ConfirmPreference system variable is set to Low.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -477,10 +474,12 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Id Description}}</maml:para>
+            <maml:para>Specifies one or more builds by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a build, type Get-Build.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -518,7 +517,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Adds a tag to the specified build without prompting for confirmation. By default, Add-BuildTag prompts for confirmation before tagging the build when the $ConfirmPreference system variable is set to Low.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -527,10 +526,12 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Id Description}}</maml:para>
+          <maml:para>Specifies one or more builds by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a build, type Get-Build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -556,7 +557,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
         <maml:name>Tags</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Tags Description}}</maml:para>
+          <maml:para>One or more tags. To specify multiple, use commas to separate.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -600,18 +601,10 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -689,13 +682,13 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Add-GitRepository -ProjectName Demo -Name Temp</dev:code>
+        <dev:code>PS C:\&gt; Add-GitRepository -ProjectName Demo -Name Temp</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new repository named Temp to the Demo project.</maml:para>
         </dev:remarks>
@@ -713,13 +706,13 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This will create a new Team Project in your Team Services account.</maml:para>
+      <maml:para>This will create a new Team Project in your Team Foundation Server or Team Services account.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Add-Project</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Name</maml:name>
+          <maml:name>ProjectName</maml:name>
           <maml:Description>
             <maml:para>The name of the project to create.</maml:para>
           </maml:Description>
@@ -769,7 +762,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Name</maml:name>
+        <maml:name>ProjectName</maml:name>
         <maml:Description>
           <maml:para>The name of the project to create.</maml:para>
         </maml:Description>
@@ -827,14 +820,14 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Add-Project 'MyProject'</dev:code>
+        <dev:code>PS C:\&gt; Add-Project 'MyProject'</dev:code>
         <dev:remarks>
           <maml:para>This will add a project name MyProject with no description using the Scrum process template and Git source control.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Add-Project 'MyProject' -TFVC -ProcessTemplate Agile</dev:code>
+        <dev:code>PS C:\&gt; Add-Project 'MyProject' -TFVC -ProcessTemplate Agile</dev:code>
         <dev:remarks>
           <maml:para>This will add a project name MyProject with no description using the Agile process template and TFVC source control.</maml:para>
         </dev:remarks>
@@ -861,7 +854,8 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Add-Release will queue a new release. The environments will deploy according to how the  release definition is configured in the Triggers tab.</maml:para>
+      <maml:para>Add-Release will queue a new release.</maml:para>
+      <maml:para>The environments will deploy according to how the release definition is  configured in the Triggers tab.</maml:para>
       <maml:para>You must call Add-TeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
@@ -884,7 +878,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DefinitionId</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The id of the release defintion to use.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -896,7 +890,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Description</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The description to use on the release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -908,7 +902,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ArtifactAlias</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The alias of the artifact to use with this release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -920,7 +914,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The name of this release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -932,7 +926,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>BuildId</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The id of the build to use with this release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -944,7 +938,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>SourceBranch</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The branch of the artifact</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -984,7 +978,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Description</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The description to use on the release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -996,7 +990,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The name of this release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1008,7 +1002,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DefinitionName</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The name of the release defintion to use.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1020,7 +1014,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>SourceBranch</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The branch of the artifact</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1043,7 +1037,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>BuildNumber</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>The number of the build to use.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1058,7 +1052,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DefinitionId</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>The id of the release defintion to use.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -1070,7 +1064,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Description</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>The description to use on the release.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1082,7 +1076,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ArtifactAlias</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>The alias of the artifact to use with this release.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1094,7 +1088,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>The name of this release.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1106,7 +1100,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>BuildId</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>The id of the build to use with this release.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1132,7 +1126,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DefinitionName</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>The name of the release defintion to use.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1144,7 +1138,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>SourceBranch</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>The branch of the artifact</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1168,7 +1162,7 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>BuildNumber</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>The number of the build to use.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1192,35 +1186,35 @@ PS C:\&gt;Add-Build -BuildDefinition Demo-CI</dev:code>
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>get-build | ft id,name
+        <dev:code>PS C:\&gt; Get-Build | ft id,name
 
 id name
 -- ----
 44 Demo-CI-44
 
 
-PS C:\&gt;Get-ReleaseDefinition -Expand artifacts | ft id,name,@{l='Alais';e={$_.artifacts[0].alias}}
+PS C:\&gt; Get-ReleaseDefinition -Expand artifacts | ft id,name,@{l='Alias';e={$_.artifacts[0].alias}}
 
-id name    Alais
+id name    Alias
 -- ----    -----
  1 Demo-CD Demo-CI
 
 
-PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44</dev:code>
+PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44</dev:code>
         <dev:remarks>
           <maml:para>This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release.  If you call Set-DefaultProject you can use Example 2 which is much easier.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Add-Release -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44</dev:code>
+        <dev:code>PS C:\&gt; Add-Release -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44</dev:code>
         <dev:remarks>
           <maml:para>This command starts a new release using the Demo-CD release defintion and the build with build number Demo-CI-44.</maml:para>
           <maml:para>You must set a default project to tab complete DefinitionName and BuildNumber.</maml:para>
@@ -1315,14 +1309,14 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Add-ReleaseDefinition -ProjectName demo -inFile release.json</dev:code>
+        <dev:code>PS C:\&gt; Add-ReleaseDefinition -ProjectName demo -inFile release.json</dev:code>
         <dev:remarks>
           <maml:para>This command reads release.json and creates a new release defintion from it on the demo team project.</maml:para>
         </dev:remarks>
@@ -1489,7 +1483,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
@@ -1506,7 +1500,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using the SonarQube connection type.  This is only used when using the SonarQube tasks. Using SonarQube with the Maven tasks uses a Generic Connection type.</maml:para>
+      <maml:para>The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using the SonarQube connection type. </maml:para>
+      <maml:para>This is only used when using the SonarQube tasks.</maml:para>
+      <maml:para>Using SonarQube with the Maven tasks uses a Generic Connection type.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1649,7 +1645,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Add</command:verb>
       <command:noun>Team</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Adds a team to a team project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1763,15 +1759,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1784,7 +1772,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>On Windows you have to option to store the information at the process, user or machine (you must be running PowerShell as administrator) level. On Linux and Mac you can only store at the process level.</maml:para>
+      <maml:para>On Windows you have to option to store the information at the process, user or machine (you must be running PowerShell as administrator) level.</maml:para>
+      <maml:para>On Linux and Mac you can only store at the process level.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1792,7 +1781,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.  Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL. </maml:para>
+            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1814,25 +1804,14 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Level</maml:name>
-          <maml:Description>
-            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-TeamAccount</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.  Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL. </maml:para>
+            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1853,25 +1832,14 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Level</maml:name>
-          <maml:Description>
-            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-TeamAccount</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.  Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL. </maml:para>
+            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1892,12 +1860,43 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-TeamAccount</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Level</maml:name>
+          <maml:Description>
+            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-TeamAccount</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Level</maml:name>
+          <maml:Description>
+            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Account</maml:name>
         <maml:Description>
-          <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.  Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
+          <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL. </maml:para>
+          <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1966,21 +1965,21 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Add-TeamAccount</dev:code>
+        <dev:code>PS C:\&gt; Add-TeamAccount</dev:code>
         <dev:remarks>
           <maml:para>You will be prompted for the account name and personal access token.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Add-TeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga</dev:code>
+        <dev:code>PS C:\&gt; Add-TeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga</dev:code>
         <dev:remarks>
           <maml:para>Allows you to provide all the information on the command line.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Add-TeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
+        <dev:code>PS C:\&gt; Add-TeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
         <dev:remarks>
           <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
         </dev:remarks>
@@ -2046,7 +2045,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Clear-Project</dev:code>
+        <dev:code>PS C:\&gt; Clear-Project</dev:code>
         <dev:remarks>
           <maml:para>This will clear the default project parameter value. You will now have to provide a project for any functions that require a project.</maml:para>
         </dev:remarks>
@@ -2073,7 +2072,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-Approval function gets the approvals for all releases for a team project. The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
+      <maml:para>The Get-Approval function gets the approvals for all releases for a team project.</maml:para>
+      <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
       <maml:para>With just a project name, this function gets all of the pending approvals for that team project.</maml:para>
     </maml:description>
     <command:syntax>
@@ -2082,7 +2082,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>StatusFilter</maml:name>
           <maml:Description>
-            <maml:para>By default the function returns Pending approvals.  Using this filter you can return Approved, ReAssigned or Rejected approvals.  There is a custom table view for each status.</maml:para>
+            <maml:para>By default the function returns Pending approvals. </maml:para>
+            <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals. </maml:para>
+            <maml:para>There is a custom table view for each status.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2108,7 +2110,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ReleaseIdFilter</maml:name>
           <maml:Description>
-            <maml:para>Onlt approvals for the release ids provided will be returned.</maml:para>
+            <maml:para>Only approvals for the release ids provided will be returned.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -2135,7 +2137,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>StatusFilter</maml:name>
         <maml:Description>
-          <maml:para>By default the function returns Pending approvals.  Using this filter you can return Approved, ReAssigned or Rejected approvals.  There is a custom table view for each status.</maml:para>
+          <maml:para>By default the function returns Pending approvals. </maml:para>
+          <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals. </maml:para>
+          <maml:para>There is a custom table view for each status.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2147,7 +2151,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>ReleaseIdFilter</maml:name>
         <maml:Description>
-          <maml:para>Onlt approvals for the release ids provided will be returned.</maml:para>
+          <maml:para>Only approvals for the release ids provided will be returned.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -2206,28 +2210,28 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-Approval -ProjectName Demo</dev:code>
+        <dev:code>PS C:\&gt; Get-Approval -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all pending approvals.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-Approval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved</dev:code>
+        <dev:code>PS C:\&gt; Get-Approval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all approved approvals using a custom table format.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-Approval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected</dev:code>
+        <dev:code>PS C:\&gt; Get-Approval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all approvals rejected by Administrator using a custom table format.</maml:para>
         </dev:remarks>
@@ -2263,7 +2267,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:details>
     <maml:description>
       <maml:para>The Get-Build function gets the builds for a team project.</maml:para>
-      <maml:para>With just a project name, this function gets all of the builds for that team project. You can also specify a particular build by ID.</maml:para>
+      <maml:para>With just a project name, this function gets all of the builds for that team project.</maml:para>
+      <maml:para>You can also specify a particular build by ID.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2285,7 +2290,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Top</maml:name>
           <maml:Description>
-            <maml:para>Specifies the maximum number of builds to return.</maml:para>
+            <maml:para>Specifies the maximum number to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -2357,7 +2362,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="named" aliases="none">
           <maml:name>BuildNumber</maml:name>
           <maml:Description>
-            <maml:para>Returns the build with this build number. You can also use * for a starts with search i.e. 2015* will return all build numbers that start with 2015.</maml:para>
+            <maml:para>Returns the build with this build number.</maml:para>
+            <maml:para>You can also use * for a starts with search i.e. 2015* will return all build numbers that start with 2015.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2381,7 +2387,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>MaxBuildsPerDefinition</maml:name>
           <maml:Description>
-            <maml:para>The maximum number of builds to retrieve for each definition. This is only valid when definitions is also specified.</maml:para>
+            <maml:para>The maximum number of builds to retrieve for each definition.</maml:para>
+            <maml:para>This is only valid when definitions is also specified.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -2402,27 +2409,12 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-Build</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>ProjectName</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the team project for which this function operates.</maml:para>
-            <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="BuildID">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more builds by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a build, type Get-Build.</maml:para>
+            <maml:para>Specifies one or more builds by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a build, type Get-Build.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -2437,7 +2429,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Top</maml:name>
         <maml:Description>
-          <maml:para>Specifies the maximum number of builds to return.</maml:para>
+          <maml:para>Specifies the maximum number to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -2509,7 +2501,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="named" aliases="none">
         <maml:name>BuildNumber</maml:name>
         <maml:Description>
-          <maml:para>Returns the build with this build number. You can also use * for a starts with search i.e. 2015* will return all build numbers that start with 2015.</maml:para>
+          <maml:para>Returns the build with this build number.</maml:para>
+          <maml:para>You can also use * for a starts with search i.e. 2015* will return all build numbers that start with 2015.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2533,7 +2526,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>MaxBuildsPerDefinition</maml:name>
         <maml:Description>
-          <maml:para>The maximum number of builds to retrieve for each definition. This is only valid when definitions is also specified.</maml:para>
+          <maml:para>The maximum number of builds to retrieve for each definition.</maml:para>
+          <maml:para>This is only valid when definitions is also specified.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -2568,10 +2562,12 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="BuildID">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more builds by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a build, type Get-Build.</maml:para>
+          <maml:para>Specifies one or more builds by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a build, type Get-Build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -2604,35 +2600,36 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets builds.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-Build -ProjectName demo | Format-List *</dev:code>
+        <dev:code>PS C:\&gt; Get-Build -ProjectName demo | Format-List *</dev:code>
         <dev:remarks>
-          <maml:para>This command gets a list of all builds in the demo project. The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the build objects.</maml:para>
+          <maml:para>This command gets a list of all builds in the demo project.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the build objects.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-Build -ProjectName demo -top 5 -resultFilter failed</dev:code>
+        <dev:code>PS C:\&gt; Get-Build -ProjectName demo -top 5 -resultFilter failed</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of 5 failed builds in the demo project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>1203,1204 | Get-Build -ProjectName demo</dev:code>
+        <dev:code>PS C:\&gt; 1203,1204 | Get-Build -ProjectName demo</dev:code>
         <dev:remarks>
           <maml:para>This command gets builds with IDs 1203 and 1204 by using the pipeline.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>Get-Build -ProjectName demo -ID 1203,1204</dev:code>
+        <dev:code>PS C:\&gt; Get-Build -ProjectName demo -ID 1203,1204</dev:code>
         <dev:remarks>
           <maml:para>This command gets builds with IDs 1203 and 1204 by using the ID parameter.</maml:para>
         </dev:remarks>
@@ -2663,27 +2660,15 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Get</command:verb>
       <command:noun>BuildArtifact</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Returns the artifacts of a build.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Returns the artifacts of a build.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-BuildArtifact</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
-          <maml:name>Id</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Id Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
@@ -2698,13 +2683,25 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>The id of the build.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Id Description}}</maml:para>
+          <maml:para>The id of the build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -2750,18 +2747,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -2770,12 +2759,14 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Get</command:verb>
       <command:noun>BuildDefinition</command:noun>
       <maml:description>
-        <maml:para>Gets the build defintions for a team project.</maml:para>
+        <maml:para>Gets the build definitions for a team project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-BuildDefinition function gets the build defintions for a team project. The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
-      <maml:para>With just a project name, this function gets all of the build definitions for that team project. You can also specify a particular build defintion by ID.</maml:para>
+      <maml:para>The Get-BuildDefinition function gets the build definitions for a team project.</maml:para>
+      <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
+      <maml:para>With just a project name, this function gets all of the build definitions for that team project.</maml:para>
+      <maml:para>You can also specify a particular build defintion by ID.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2809,7 +2800,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Type</maml:name>
           <maml:Description>
-            <maml:para>The type of the build definitions to retrieve (build, xaml). If not specified, all types will be returned.</maml:para>
+            <maml:para>The type of the build definitions to retrieve (build, xaml).</maml:para>
+            <maml:para>If not specified, all types will be returned.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2838,7 +2830,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="BuildDefinitionID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more build defintions by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a build defintion, type Get-BuildDefinition.</maml:para>
+            <maml:para>Specifies one or more build definitions by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a build defintion, type Get-BuildDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -2877,7 +2871,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Type</maml:name>
         <maml:Description>
-          <maml:para>The type of the build definitions to retrieve (build, xaml). If not specified, all types will be returned.</maml:para>
+          <maml:para>The type of the build definitions to retrieve (build, xaml).</maml:para>
+          <maml:para>If not specified, all types will be returned.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2903,7 +2898,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="BuildDefinitionID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more build defintions by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a build defintion, type Get-BuildDefinition.</maml:para>
+          <maml:para>Specifies one or more build definitions by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a build defintion, type Get-BuildDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -2953,9 +2950,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-BuildDefinition -ProjectName Demo | Format-List *</dev:code>
+        <dev:code>PS C:\&gt; Get-BuildDefinition -ProjectName Demo | Format-List *</dev:code>
         <dev:remarks>
-          <maml:para>This command gets a list of all build definitions in the demo project. The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the build defintion objects.</maml:para>
+          <maml:para>This command gets a list of all build definitions in the demo project.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the build defintion objects.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2984,11 +2982,11 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Get</command:verb>
       <command:noun>BuildLog</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Displays the logs for the build.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Displays the logs for the build.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -3010,7 +3008,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Id Description}}</maml:para>
+            <maml:para>Specifies one or more builds by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a build, type Get-Build.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -3022,7 +3022,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Index</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Index Description}}</maml:para>
+            <maml:para>Each task stores its logs in an array. If you know the index of a specific task you can return just its logs. If you do not provide a value all the logs are displayed.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -3037,7 +3037,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Id Description}}</maml:para>
+          <maml:para>Specifies one or more builds by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a build, type Get-Build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -3049,7 +3051,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Index</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Index Description}}</maml:para>
+          <maml:para>Each task stores its logs in an array. If you know the index of a specific task you can return just its logs. If you do not provide a value all the logs are displayed.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -3095,15 +3097,16 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-Build -Top 1 | Get-BuildLog</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>This command displays the logs of the first build.</maml:para>
+          <maml:para>The pipeline operator (|) passes the build id to the Get-BuildLog cmdlet, which displays the logs.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3115,27 +3118,15 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Get</command:verb>
       <command:noun>BuildTag</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Returns all the tags of a build.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Returns all the tags of a build.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-BuildTag</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
-          <maml:name>Id</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Id Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
@@ -3150,13 +3141,25 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>The id of the build.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Id Description}}</maml:para>
+          <maml:para>The id of the build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -3202,18 +3205,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -3262,7 +3257,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CloudSubscription</dev:code>
+        <dev:code>PS C:\&gt; Get-CloudSubscription</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all Azure subscriptions associated with the Team Services account.</maml:para>
         </dev:remarks>
@@ -3356,21 +3351,21 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-GitRepository</dev:code>
+        <dev:code>PS C:\&gt; Get-GitRepository</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the Git repositories for your TFS or Team Services account.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-GitRepository -ProjectName Demo</dev:code>
+        <dev:code>PS C:\&gt; Get-GitRepository -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the Git repositories for the Demo team project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>git clone (Get-GitRepository | select -ExpandProperty remoteurl)</dev:code>
+        <dev:code>PS C:\&gt; git clone (Get-GitRepository | select -ExpandProperty remoteurl)</dev:code>
         <dev:remarks>
           <maml:para>This command gets the remote URL and passes it to git clone command.</maml:para>
         </dev:remarks>
@@ -3384,11 +3379,11 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Get</command:verb>
       <command:noun>Pool</command:noun>
       <maml:description>
-        <maml:para></maml:para>
+        <maml:para>Returns the agent pools.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para>Returns the agent pools.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -3396,7 +3391,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PoolName</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Name of the pool to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3408,7 +3403,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ActionFilter</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>None, Manage or Use.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3423,7 +3418,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="PoolID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Id of the pool to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3438,7 +3433,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PoolName</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Name of the pool to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3450,7 +3445,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ActionFilter</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>None, Manage or Use.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3462,7 +3457,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="PoolID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Id of the pool to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3494,7 +3489,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -3546,7 +3541,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Top</maml:name>
           <maml:Description>
-            <maml:para>Defines the number of team projects to return.  The default value is 100</maml:para>
+            <maml:para>Specifies the maximum number to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -3587,7 +3582,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="ProjectID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>The id of the project to return</maml:para>
+            <maml:para>The id of the project to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3599,7 +3594,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>IncludeCapabilities</maml:name>
           <maml:Description>
-            <maml:para>Will return additional information about the project</maml:para>
+            <maml:para>Will return additional information about the project.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3625,7 +3620,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Top</maml:name>
         <maml:Description>
-          <maml:para>Defines the number of team projects to return.  The default value is 100</maml:para>
+          <maml:para>Specifies the maximum number to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -3649,7 +3644,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="ProjectID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>The id of the project to return</maml:para>
+          <maml:para>The id of the project to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3661,7 +3656,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>IncludeCapabilities</maml:name>
         <maml:Description>
-          <maml:para>Will return additional information about the project</maml:para>
+          <maml:para>Will return additional information about the project.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -3704,14 +3699,14 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-Project</dev:code>
+        <dev:code>PS C:\&gt; Get-Project</dev:code>
         <dev:remarks>
           <maml:para>This will return all the WellFormed team projects.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-Project -top 5 | Format-Wide</dev:code>
+        <dev:code>PS C:\&gt; Get-Project -top 5 | Format-Wide</dev:code>
         <dev:remarks>
           <maml:para>This will return the top five WellFormed team projects only showing their name</maml:para>
         </dev:remarks>
@@ -3764,7 +3759,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>QueueName</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Name of the queue to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3776,7 +3771,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ActionFilter</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>None, Manage or Use.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3805,7 +3800,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="QueueID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Id of the queue to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3820,7 +3815,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>QueueName</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Name of the queue to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3832,7 +3827,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ActionFilter</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>None, Manage or Use.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3858,7 +3853,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="QueueID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Id of the queue to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3890,7 +3885,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -3906,8 +3901,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-Release function gets the releases for a team project. The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
-      <maml:para>With just a project name, this function gets all of the release s for that team project. You can also specify a particular release defintion by ID.</maml:para>
+      <maml:para>The Get-Release function gets the releases for a team project.</maml:para>
+      <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
+      <maml:para>With just a project name, this function gets all of the release s for that team project.</maml:para>
+      <maml:para>You can also specify a particular release defintion by ID.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -3941,7 +3938,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>StatusFilter</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Draft, Active or Abandoned.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3953,7 +3950,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DefinitionId</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Id of the release definition</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -3965,7 +3962,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Top</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Specifies the maximum number to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -3977,7 +3974,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>CreatedBy</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para></maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3989,7 +3986,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>MinCreatedTime</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para></maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
           <dev:type>
@@ -4001,7 +3998,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>MaxCreatedTime</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para></maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
           <dev:type>
@@ -4013,7 +4010,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>QueryOrder</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para></maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4025,7 +4022,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ContinuationToken</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para></maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4054,7 +4051,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="ReleaseID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more releases by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a release defintion, type Get-Release.</maml:para>
+            <maml:para>Specifies one or more releases by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a release defintion, type Get-Release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -4081,7 +4080,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>StatusFilter</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Draft, Active or Abandoned.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4093,7 +4092,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DefinitionId</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Id of the release definition</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -4105,7 +4104,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Top</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Specifies the maximum number to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -4117,7 +4116,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>CreatedBy</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para></maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4129,7 +4128,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>MinCreatedTime</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para></maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
         <dev:type>
@@ -4141,7 +4140,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>MaxCreatedTime</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para></maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
         <dev:type>
@@ -4153,7 +4152,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>QueryOrder</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para></maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4165,7 +4164,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ContinuationToken</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para></maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4191,7 +4190,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="ReleaseID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more releases by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a release defintion, type Get-Release.</maml:para>
+          <maml:para>Specifies one or more releases by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a release defintion, type Get-Release.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -4224,16 +4225,17 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-Release -ProjectName demo | Format-List *</dev:code>
+        <dev:code>PS C:\&gt; Get-Release -ProjectName demo | Format-List *</dev:code>
         <dev:remarks>
-          <maml:para>This command gets a list of all release s in the demo project. The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release defintion objects.</maml:para>
+          <maml:para>This command gets a list of all release s in the demo project.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release defintion objects.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -4262,12 +4264,14 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Get</command:verb>
       <command:noun>ReleaseDefinition</command:noun>
       <maml:description>
-        <maml:para>Gets the release defintions for a team project.</maml:para>
+        <maml:para>Gets the release definitions for a team project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-ReleaseDefinition function gets the release defintions for a team project. The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
-      <maml:para>With just a project name, this function gets all of the release definitions for that team project. You can also specify a particular release defintion by ID.</maml:para>
+      <maml:para>The Get-ReleaseDefinition function gets the release definitions for a team project.</maml:para>
+      <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
+      <maml:para>With just a project name, this function gets all of the release definitions for that team project.</maml:para>
+      <maml:para>You can also specify a particular release defintion by ID.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4318,7 +4322,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="ReleaseDefinitionID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more release defintions by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a release defintion, type Get-ReleaseDefinition.</maml:para>
+            <maml:para>Specifies one or more release definitions by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a release defintion, type Get-ReleaseDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -4359,7 +4365,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="ReleaseDefinitionID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more release defintions by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a release defintion, type Get-ReleaseDefinition.</maml:para>
+          <maml:para>Specifies one or more release definitions by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a release defintion, type Get-ReleaseDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -4397,7 +4405,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-ReleaseDefinition -ProjectName demo | Format-List *</dev:code>
+        <dev:code>PS C:\&gt; Get-ReleaseDefinition -ProjectName demo | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all release definitions in the demo project. The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release defintion objects.</maml:para>
         </dev:remarks>
@@ -4454,7 +4462,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Id of the service endpoint</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4483,7 +4491,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Id of the service endpoint</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4515,7 +4523,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -4527,11 +4535,11 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Get</command:verb>
       <command:noun>Team</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Returns a team.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Returns a team.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4553,7 +4561,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Skip</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Skip Description}}</maml:para>
+            <maml:para>The number of items to skip.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -4565,7 +4573,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Top</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Top Description}}</maml:para>
+            <maml:para>Specifies the maximum number to return.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -4594,7 +4602,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>TeamId</maml:name>
           <maml:Description>
-            <maml:para>{{Fill TeamId Description}}</maml:para>
+            <maml:para>The id of the team to retrieve.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -4623,7 +4631,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Skip</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Skip Description}}</maml:para>
+          <maml:para>The number of items to skip.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -4635,7 +4643,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>TeamId</maml:name>
         <maml:Description>
-          <maml:para>{{Fill TeamId Description}}</maml:para>
+          <maml:para>The id of the team to retrieve.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -4647,7 +4655,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Top</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Top Description}}</maml:para>
+          <maml:para>Specifies the maximum number to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -4679,18 +4687,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -4703,7 +4703,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para>Displays your current account and default project.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4721,7 +4721,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-TeamInfo</dev:code>
+        <dev:code>PS C:\&gt; Get-TeamInfo</dev:code>
         <dev:remarks>
           <maml:para>This will display your current account and default project</maml:para>
         </dev:remarks>
@@ -4740,11 +4740,11 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Get</command:verb>
       <command:noun>TeamMember</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Returns a team member.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Returns a team member.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4763,22 +4763,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Top</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Top Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Skip</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Skip Description}}</maml:para>
+            <maml:para>The number of items to skip.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -4790,11 +4778,23 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="name">
           <maml:name>TeamId</maml:name>
           <maml:Description>
-            <maml:para>{{Fill TeamId Description}}</maml:para>
+            <maml:para>The id of the team to search.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the maximum number to return.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4819,7 +4819,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Skip</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Skip Description}}</maml:para>
+          <maml:para>The number of items to skip.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -4831,7 +4831,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="name">
         <maml:name>TeamId</maml:name>
         <maml:Description>
-          <maml:para>{{Fill TeamId Description}}</maml:para>
+          <maml:para>The id of the team to search.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4840,10 +4840,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Top</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Top Description}}</maml:para>
+          <maml:para>Specifies the maximum number to return.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -4875,18 +4875,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -4895,27 +4887,15 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Remove</command:verb>
       <command:noun>Build</command:noun>
       <maml:description>
-        <maml:para></maml:para>
+        <maml:para>Deletes the build.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para>Deletes the build.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-Build</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
-          <maml:name>Id</maml:name>
-          <maml:Description>
-            <maml:para>Specifies one or more builds by ID. To specify multiple IDs,  use commas to separate the IDs. To find the ID of a build, type Get-Build.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
@@ -4930,10 +4910,24 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Specifies one or more builds by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a build, type Get-Build.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Sets the status without prompting for confirmation. By default, Remove-Build prompts for confirmation before removing any build.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4944,10 +4938,12 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more builds by ID. To specify multiple IDs,  use commas to separate the IDs. To find the ID of a build, type Get-Build.</maml:para>
+          <maml:para>Specifies one or more builds by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a build, type Get-Build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -4959,7 +4955,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Sets the status without prompting for confirmation. By default, Remove-Build prompts for confirmation before removing any build.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5005,13 +5001,13 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-Build | Remove-Build -Force</dev:code>
+        <dev:code>PS C:\&gt; Get-Build | Remove-Build -Force</dev:code>
         <dev:remarks>
           <maml:para>This command will delete all builds that are not marked retain indefinitely.</maml:para>
         </dev:remarks>
@@ -5025,11 +5021,12 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Remove</command:verb>
       <command:noun>BuildDefinition</command:noun>
       <maml:description>
-        <maml:para>Removes the build defintions for a team project.</maml:para>
+        <maml:para>Removes the build definitions for a team project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Remove-BuildDefinition function removes the build defintions for a team project. The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
+      <maml:para>The Remove-BuildDefinition function removes the build definitions for a team project.</maml:para>
+      <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -5037,7 +5034,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more build defintions by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a build defintion, type Get-BuildDefinition.</maml:para>
+            <maml:para>Specifies one or more build definitions by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a build defintion, type Get-BuildDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -5063,7 +5062,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Removes the specified build defintion without prompting for confirmation. By default, Remove-BuildDefinition prompts for confirmation before removing any build defintion.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5077,7 +5076,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more build defintions by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a build defintion, type Get-BuildDefinition.</maml:para>
+          <maml:para>Specifies one or more build definitions by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a build defintion, type Get-BuildDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -5089,7 +5090,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Removes the specified build defintion without prompting for confirmation. By default, Remove-BuildDefinition prompts for confirmation before removing any build defintion.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5136,16 +5137,17 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-BuildDefinition -ProjectName Demo | Remove-BuildDefinition</dev:code>
+        <dev:code>PS C:\&gt; Get-BuildDefinition -ProjectName Demo | Remove-BuildDefinition</dev:code>
         <dev:remarks>
-          <maml:para>This command gets a list of all build definitions in the demo project. The pipeline operator (|) passes the data to the Remove-BuildDefinition function, which removes each build defintion object.</maml:para>
+          <maml:para>This command gets a list of all build definitions in the demo project.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Remove-BuildDefinition function, which removes each build defintion object.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -5174,11 +5176,11 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Remove</command:verb>
       <command:noun>BuildTag</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Removes the tag from a build.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Removes the tag from a build.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -5200,7 +5202,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
           <maml:name>Tags</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Tags Description}}</maml:para>
+            <maml:para>One or more tags. To specify multiple, use commas to separate.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -5223,7 +5225,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Force Description}}</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5231,10 +5233,12 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Id Description}}</maml:para>
+            <maml:para>Specifies one or more builds by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a build, type Get-Build.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -5272,7 +5276,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Force Description}}</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5281,10 +5285,12 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Id Description}}</maml:para>
+          <maml:para>Specifies one or more builds by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a build, type Get-Build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -5310,7 +5316,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
         <maml:name>Tags</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Tags Description}}</maml:para>
+          <maml:para>One or more tags. To specify multiple, use commas to separate.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -5354,18 +5360,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -5400,7 +5398,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="RepositoryID">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more repositories by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a repository, type Get-Repository.</maml:para>
+            <maml:para>Specifies one or more repositories by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a repository, type Get-Repository.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Guid[]</command:parameterValue>
           <dev:type>
@@ -5412,7 +5412,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Removes the specified repository without prompting for confirmation. By default, Remove-GitRepository prompts for confirmation before removing any repository.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5440,7 +5440,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="RepositoryID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more repositories by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a repository, type Get-Repository.</maml:para>
+          <maml:para>Specifies one or more repositories by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a repository, type Get-Repository.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Guid[]</command:parameterValue>
         <dev:type>
@@ -5452,7 +5454,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Removes the specified repository without prompting for confirmation. By default, Remove-GitRepository prompts for confirmation before removing any repository.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5466,13 +5468,13 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Remove-GitRepository -Id 687c53f8-1a82-4e89-9a86-13d51bc4a8d5</dev:code>
+        <dev:code>PS C:\&gt; Remove-GitRepository -Id 687c53f8-1a82-4e89-9a86-13d51bc4a8d5</dev:code>
         <dev:remarks>
           <maml:para>This command removes all the Git repositories for your TFS or Team Services account.</maml:para>
         </dev:remarks>
@@ -5513,8 +5515,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Deletes the specified project without prompting for confirmation.</maml:para>
-            <maml:para>By default, Remove-Project prompts for confirmation before deleting the project.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5528,8 +5529,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Deletes the specified project without prompting for confirmation.</maml:para>
-          <maml:para>By default, Remove-Project prompts for confirmation before deleting the project.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5572,21 +5572,21 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Remove-Project 'MyProject'</dev:code>
+        <dev:code>PS C:\&gt; Remove-Project 'MyProject'</dev:code>
         <dev:remarks>
           <maml:para>You will be prompted for confirmation and the project will be deleted.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Remove-Project 'MyProject' -Force</dev:code>
+        <dev:code>PS C:\&gt; Remove-Project 'MyProject' -Force</dev:code>
         <dev:remarks>
           <maml:para>You will NOT be prompted for confirmation and the project will be deleted.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-Project | Remove-Project -Force</dev:code>
+        <dev:code>PS C:\&gt; Get-Project | Remove-Project -Force</dev:code>
         <dev:remarks>
           <maml:para>This will remove all projects</maml:para>
         </dev:remarks>
@@ -5613,7 +5613,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Remove-Release function removes the releases for a team project. The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
+      <maml:para>The Remove-Release function removes the releases for a team project.</maml:para>
+      <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -5621,7 +5622,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more releases by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a release defintion, type Get-Release.</maml:para>
+            <maml:para>Specifies one or more releases by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a release defintion, type Get-Release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -5647,7 +5650,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Removes the specified release defintion without prompting for confirmation. By default, Remove-Release prompts for confirmation before removing any release defintion.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5661,7 +5664,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more releases by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a release defintion, type Get-Release.</maml:para>
+          <maml:para>Specifies one or more releases by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a release defintion, type Get-Release.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -5673,7 +5678,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Removes the specified release defintion without prompting for confirmation. By default, Remove-Release prompts for confirmation before removing any release defintion.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5720,16 +5725,17 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-Release -ProjectName demo | Remove-Release</dev:code>
+        <dev:code>PS C:\&gt; Get-Release -ProjectName demo | Remove-Release</dev:code>
         <dev:remarks>
-          <maml:para>This command gets a list of all release s in the demo project. The pipeline operator (|) passes the data to the Remove-Release function, which removes each release defintion object.</maml:para>
+          <maml:para>This command gets a list of all release s in the demo project.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Remove-Release function, which removes each release defintion object.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -5758,11 +5764,11 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Remove</command:verb>
       <command:noun>ReleaseDefinition</command:noun>
       <maml:description>
-        <maml:para>Removes the release defintions for a team project.</maml:para>
+        <maml:para>Removes the release definitions for a team project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Remove-ReleaseDefinition function removes the release defintions for a team project. The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
+      <maml:para>The Remove-ReleaseDefinition function removes the release definitions for a team project. The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -5770,7 +5776,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more release defintions by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a release defintion, type Get-ReleaseDefinition.</maml:para>
+            <maml:para>Specifies one or more release definitions by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a release defintion, type Get-ReleaseDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -5796,7 +5804,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Removes the specified release defintion without prompting for confirmation. By default, Remove-ReleaseDefinition prompts for confirmation before removing any release defintion.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5810,7 +5818,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more release defintions by ID. To specify multiple IDs, use commas to separate the IDs. To find the ID of a release defintion, type Get-ReleaseDefinition.</maml:para>
+          <maml:para>Specifies one or more release definitions by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a release defintion, type Get-ReleaseDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -5822,7 +5832,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Removes the specified release defintion without prompting for confirmation. By default, Remove-ReleaseDefinition prompts for confirmation before removing any release defintion.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -5869,14 +5879,14 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <maml:alertSet>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.</maml:para>
-        <maml:para>You can tab complete from a list of avaiable projects.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-ReleaseDefinition -ProjectName demo | Remove-ReleaseDefinition</dev:code>
+        <dev:code>PS C:\&gt; Get-ReleaseDefinition -ProjectName demo | Remove-ReleaseDefinition</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all release definitions in the demo project. The pipeline operator (|) passes the data to the Remove-ReleaseDefinition function, which removes each release defintion object.</maml:para>
         </dev:remarks>
@@ -5919,7 +5929,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Id of the service endpoint</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
@@ -5945,7 +5955,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>@{Text=}</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -5959,7 +5969,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Id of the service endpoint</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
@@ -5971,7 +5981,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>@{Text=}</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -6017,7 +6027,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -6029,11 +6039,11 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:verb>Remove</command:verb>
       <command:noun>Team</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Removes a team from a project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Removes a team from a project.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -6055,7 +6065,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="name">
           <maml:name>TeamId</maml:name>
           <maml:Description>
-            <maml:para>{{Fill TeamId Description}}</maml:para>
+            <maml:para>The id of the team to remove.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6078,7 +6088,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Force Description}}</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -6115,7 +6125,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Force Description}}</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -6141,7 +6151,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="name">
         <maml:name>TeamId</maml:name>
         <maml:Description>
-          <maml:para>{{Fill TeamId Description}}</maml:para>
+          <maml:para>The id of the team to remove.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6185,18 +6195,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
-        <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -6218,7 +6220,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
-            <maml:para>On Windows allows you to clear your account information at the Process, User or Machine levels.</maml:para>
+            <maml:para>On Windows allows you to clear your account information at the Process, User or  Machine levels.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6244,7 +6246,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Level</maml:name>
         <maml:Description>
-          <maml:para>On Windows allows you to clear your account information at the Process, User or Machine levels.</maml:para>
+          <maml:para>On Windows allows you to clear your account information at the Process, User or  Machine levels.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6276,7 +6278,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Remove-TeamAccount</dev:code>
+        <dev:code>PS C:\&gt; Remove-TeamAccount</dev:code>
         <dev:remarks>
           <maml:para>This will clear your account name and personal access token.</maml:para>
         </dev:remarks>
@@ -6370,7 +6372,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Sets the status without prompting for confirmation.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -6447,7 +6449,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Sets the status without prompting for confirmation.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -6479,20 +6481,20 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-Approval | Set-Approval</dev:code>
+        <dev:code>PS C:\&gt; Get-Approval | Set-Approval</dev:code>
         <dev:remarks>
           <maml:para>This command sets all pending approvals to approved.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Set-Approval -Id 1 -Status Rejected</dev:code>
+        <dev:code>PS C:\&gt; Set-Approval -Id 1 -Status Rejected</dev:code>
         <dev:remarks>
           <maml:para>This command rejects approval with Id of 1.</maml:para>
         </dev:remarks>
@@ -6510,7 +6512,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The majority of the functions in this module require a project name. By setting a default project you can omit that parameter from your function calls and this default will be used instead.</maml:para>
+      <maml:para>The majority of the functions in this module require a project name.</maml:para>
+      <maml:para>By setting a default project you can omit that parameter from your function  calls and this default will be used instead.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -6532,7 +6535,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
-            <maml:para>On Windows allows you to store your default project at the Process, User or Machine levels.  When saved at the User or Machine level your default project will be in any future PowerShell processes.</maml:para>
+            <maml:para>On Windows allows you to store your default project at the Process, User or  Machine levels. </maml:para>
+            <maml:para>When saved at the User or Machine level your default project will be in any  future PowerShell processes.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6561,7 +6565,8 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Level</maml:name>
         <maml:Description>
-          <maml:para>On Windows allows you to store your default project at the Process, User or Machine levels.  When saved at the User or Machine level your default project will be in any future PowerShell processes.</maml:para>
+          <maml:para>On Windows allows you to store your default project at the Process, User or  Machine levels. </maml:para>
+          <maml:para>When saved at the User or Machine level your default project will be in any  future PowerShell processes.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6593,15 +6598,16 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Setting a default project also enables tab completeion of dynamic parameters when you call Add-Build.</maml:para>
+        <maml:para>Setting a default project also enables tab completion of dynamic parameters  when you call Add-Build.</maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Set-DefaultProject Demo</dev:code>
+        <dev:code>PS C:\&gt; Set-DefaultProject Demo</dev:code>
         <dev:remarks>
-          <maml:para>This command sets Demo as the default project. You can now call other functions that require a project name without passing the project.</maml:para>
+          <maml:para>This command sets Demo as the default project. You can now call other functions that require a project name without passing  the project.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -6625,7 +6631,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more releases by ID. To specify multiple IDs,  use commas to separate the IDs. To find the ID of a release type Get-Release.</maml:para>
+            <maml:para>Specifies one or more releases by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a release type Get-Release.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -6663,7 +6671,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Removes the specified build without prompting for confirmation. By default, Set-ReleaseStatus prompts for confirmation before  changing the status.</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -6677,7 +6685,9 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more releases by ID. To specify multiple IDs,  use commas to separate the IDs. To find the ID of a release type Get-Release.</maml:para>
+          <maml:para>Specifies one or more releases by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a release type Get-Release.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -6701,7 +6711,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Removes the specified build without prompting for confirmation. By default, Set-ReleaseStatus prompts for confirmation before  changing the status.</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -6747,13 +6757,13 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Set-ReleaseStatus -Id 5 -status Abandoned</dev:code>
+        <dev:code>PS C:\&gt; Set-ReleaseStatus -Id 5 -status Abandoned</dev:code>
         <dev:remarks>
           <maml:para>This command will set the status of release with id 5 to Abandoned.</maml:para>
         </dev:remarks>
@@ -6771,23 +6781,11 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{Fill in the Description}}</maml:para>
+      <maml:para>Allows you to set the keep forever flag and build number.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Update-Build</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
-          <maml:name>Id</maml:name>
-          <maml:Description>
-            <maml:para>{{Fill Id Description}}</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
@@ -6805,7 +6803,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
           <maml:name>KeepForever</maml:name>
           <maml:Description>
-            <maml:para>{{Fill KeepForever Description}}</maml:para>
+            <maml:para>$True or $False to set the keep forever property of the build.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
           <dev:type>
@@ -6817,7 +6815,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
           <maml:name>BuildNumber</maml:name>
           <maml:Description>
-            <maml:para>{{Fill BuildNumber Description}}</maml:para>
+            <maml:para>The value you want to set as the build number.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6840,13 +6838,25 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>{{Fill Force Description}}</maml:para>
+            <maml:para>Forces the command without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>The id of the build.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
           <maml:name>WhatIf</maml:name>
@@ -6865,7 +6875,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
         <maml:name>BuildNumber</maml:name>
         <maml:Description>
-          <maml:para>{{Fill BuildNumber Description}}</maml:para>
+          <maml:para>The value you want to set as the build number.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6889,7 +6899,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Force Description}}</maml:para>
+          <maml:para>Forces the command without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -6898,10 +6908,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>{{Fill Id Description}}</maml:para>
+          <maml:para>The id of the build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -6913,7 +6923,7 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
         <maml:name>KeepForever</maml:name>
         <maml:Description>
-          <maml:para>{{Fill KeepForever Description}}</maml:para>
+          <maml:para>$True or $False to set the keep forever property of the build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
         <dev:type>
@@ -6976,10 +6986,10 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>Example 1</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-Build | Update-Build -KeepForever $false</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Sets the keep forever property of every build to false.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -7102,13 +7112,13 @@ PS C:\&gt;Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Update-Project -Name Demo -NewName aspDemo</dev:code>
+        <dev:code>PS C:\&gt; Update-Project -Name Demo -NewName aspDemo</dev:code>
         <dev:remarks>
           <maml:para>This command changes the name of your project from Demo to aspDemo.</maml:para>
         </dev:remarks>
