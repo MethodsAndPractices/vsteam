@@ -53,12 +53,22 @@ Describe 'Project Items' {
 
       It 'Get-Team ById Should return Teams' {
          $id = (Get-Team -ProjectName 'TeamModuleIntegration').Id
-         Get-Team -ProjectName 'TeamModuleIntegration' -TeamId $id | Should Not Be $null
+         Get-Team -ProjectName 'TeamModuleIntegration' -Id $id | Should Not Be $null
       }
 
       It 'Add-Team should add a team' {
-         Add-Team -ProjectName 'TeamModuleIntegration' -TeamName 'testing' | Should Not Be $null
+         Add-Team -ProjectName 'TeamModuleIntegration' -Name 'testing' | Should Not Be $null
          (Get-Team -ProjectName 'TeamModuleIntegration').Count | Should Be 2
+      }
+
+      It 'Update-Team should update a team' {
+         Update-Team -ProjectName 'TeamModuleIntegration' -Name 'testing' -NewTeamName 'testing123'
+         Get-Team -ProjectName 'TeamModuleIntegration' -Name 'testing123' | Should Not Be $null
+      }
+
+      It 'Remove-Team should delete the team' {
+         Remove-Team -ProjectName 'TeamModuleIntegration' -Name 'testing123' -Force
+         Get-Team -ProjectName 'TeamModuleIntegration' | Where-Object { $_.Name -eq 'testing123'} | Should Be $null
       }
    }
 

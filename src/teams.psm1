@@ -8,7 +8,7 @@ function _buildURL {
    param(
       [parameter(Mandatory = $true)]
       [string] $ProjectName,
-      [string] $TeamId,
+      [string] $Id,
       [string] $Name
    )
 
@@ -20,8 +20,8 @@ function _buildURL {
    $resource = "/projects/$ProjectName/teams"
    $instance = $env:TEAM_ACCT
 
-   if ($TeamId) {
-      $resource += "/$TeamId"
+   if ($Id) {
+      $resource += "/$Id"
    } elseif ($Name) {
       $resource += "/$Name"
    }
@@ -55,8 +55,8 @@ function Get-Team {
       [int] $Skip,
  
       [Parameter(ParameterSetName = 'ByID')]
-      [Alias('id')]
-      [string[]] $TeamId,
+      [Alias('TeamId')]
+      [string[]] $Id,
 
       [Parameter(ParameterSetName = 'ByName')]
       [Alias('TeamName')]
@@ -71,10 +71,10 @@ function Get-Team {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if ($TeamId) {
-         foreach ($item in $TeamId) {
+      if ($Id) {
+         foreach ($item in $Id) {
             # Build the url to return the single build
-            $listurl = _buildURL -projectName $ProjectName -teamId $item
+            $listurl = _buildURL -projectName $ProjectName -Id $item
 
             # Call the REST API
             if (_useWindowsAuthenticationOnPremise) {
@@ -136,7 +136,8 @@ function Add-Team {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true)]
-      [string]$TeamName,
+      [Alias('TeamName')]     
+      [string]$Name,
       [string]$Description = ""
    )
    DynamicParam {
@@ -148,7 +149,7 @@ function Add-Team {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $listurl = _buildURL -ProjectName $ProjectName
-      $body = '{ "name": "' + $TeamName + '", "description": "' + $Description + '" }'
+      $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
       # Call the REST API
       if (_useWindowsAuthenticationOnPremise) {
@@ -168,8 +169,11 @@ function Update-Team {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
-      [Alias('name')]
-      [string]$TeamToUpdate,
+      [Alias('TeamName')]     
+      [Alias('TeamId')]
+      [Alias('TeamToUpdate')]
+      [Alias('Id')]
+      [string]$Name,
       [string]$NewTeamName,
       [string]$Description
    )
@@ -181,7 +185,7 @@ function Update-Team {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $listurl = _buildURL -ProjectName $ProjectName -TeamId $TeamToUpdate
+      $listurl = _buildURL -ProjectName $ProjectName -Id $Name
       if (-not $NewTeamName -and -not $Description) {
          throw 'You must provide a new team name or description, or both.'
       }
@@ -214,9 +218,10 @@ function Remove-Team {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
-      [Alias('name')]
-      [Alias('id')]
-      [string]$TeamId,
+      [Alias('Name')]
+      [Alias('TeamId')]
+      [Alias('TeamName')]
+      [string]$Id,
 
       [switch]$Force
    )
@@ -228,9 +233,9 @@ function Remove-Team {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $listurl = _buildURL -ProjectName $ProjectName -TeamId $TeamId
+      $listurl = _buildURL -ProjectName $ProjectName -Id $Id
 
-      if ($Force -or $PSCmdlet.ShouldProcess($TeamId, "Delete team")) {
+      if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API
          if (_useWindowsAuthenticationOnPremise) {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
@@ -239,7 +244,7 @@ function Remove-Team {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
          }
 
-         Write-Output "Deleted team $TeamId"
+         Write-Output "Deleted team $Id"
       }
    }
 }
