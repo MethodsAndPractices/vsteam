@@ -1,8 +1,8 @@
 Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
-Import-Module $PSScriptRoot\..\src\queues.psm1 -Force
-Import-Module $PSScriptRoot\..\src\builds.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\queues.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\builds.psm1 -Force
 
 InModuleScope builds {
    $env:TEAM_ACCT = 'https://test.visualstudio.com'

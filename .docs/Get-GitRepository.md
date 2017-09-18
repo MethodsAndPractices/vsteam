@@ -7,8 +7,14 @@
 
 ## SYNTAX
 
+### ByID (Default)
 ```
 Get-GitRepository [-ProjectName <String>] [-Id <Guid[]>]
+```
+
+### ByName
+```
+Get-GitRepository [-ProjectName <String>] [-Name <String[]>]
 ```
 
 ## DESCRIPTION
@@ -43,15 +49,33 @@ This command gets the remote URL and passes it to git clone command.
 
 ### -Id
 Specifies one or more repositories by ID.
-To specify multiple IDs, use
-commas to separate the IDs.
-To find the ID of a repository, type
-Get-Repository.
+
+To specify multiple IDs, use commas to separate the IDs.
+
+To find the ID of a repository, type Get-GitRepository.
 
 ```yaml
 Type: Guid[]
-Parameter Sets: (All)
+Parameter Sets: ByID
 Aliases: RepositoryID
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Name
+Specifies one or more repositories by name.
+
+To specify multiple names, use commas to separate the names.
+
+To find the name of a repository, type Get-GitRepository.
+
+```yaml
+Type: String[]
+Parameter Sets: ByName
 
 Required: False
 Position: Named
@@ -67,4 +91,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

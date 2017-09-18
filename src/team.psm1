@@ -141,7 +141,6 @@ function Add-TeamAccount {
          if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
             Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
          }
-
       }
       else {
          $Level = "Process"
@@ -172,6 +171,7 @@ function Add-TeamAccount {
          $encodedPat = ""
       }
 
+      Clear-DefaultProject
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
    }
 }
@@ -369,7 +369,7 @@ function Set-DefaultProject {
    [CmdletBinding()]
    param()
    DynamicParam {
-      $dp = _buildProjectNameDynamicParam -AliasName "Project"
+      $dp = _buildProjectNameDynamicParam -ParameterName "Project"
 
       # Only add these options on Windows Machines
       if (_isOnWindows) {

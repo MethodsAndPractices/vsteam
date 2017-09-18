@@ -1,6 +1,6 @@
 #Set-StrictMode -Version Latest
 
-. "$PSScriptRoot\..\src\common.ps1"
+. "$PSScriptRoot\..\..\src\common.ps1"
 
 Describe 'Common' {
    Context '_buildProjectNameDynamicParam' {

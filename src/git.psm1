@@ -7,10 +7,11 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 function _buildURL {
    param(
       [string] $ProjectName,
-      [guid] $Id
+      [guid] $Id,
+      [string] $Name
    )
 
-   if(-not $env:TEAM_ACCT) {
+   if (-not $env:TEAM_ACCT) {
       throw 'You must call Add-TeamAccount before calling any other functions in this module.'
    }
 
@@ -18,12 +19,15 @@ function _buildURL {
    $resource = "/git/repositories"
    $instance = $env:TEAM_ACCT
 
-   if($ProjectName) {
+   if ($ProjectName) {
       $instance += "/$ProjectName"
    }
 
-   if($id) {
+   if ($id) {
       $resource += "/$id"
+   }
+   elseif ($Name) {
+      $resource += "/$Name"
    }
 
    # Build the url to list the projects
@@ -39,9 +43,9 @@ function _applyTypes {
 }
 
 function Remove-GitRepository {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
-      [parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [guid[]] $Id,
 
       [switch] $Force
@@ -56,10 +60,11 @@ function Remove-GitRepository {
             try {
                # Call the REST API
                if (_useWindowsAuthenticationOnPremise) {
-                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-               } else {
-                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	           }
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+               }
+               else {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+               }
 
                Write-Output "Deleted repository $item"
             }
@@ -82,7 +87,7 @@ function Remove-GitRepository {
 function Add-GitRepository {
    [CmdletBinding()]
    param(
-      [parameter(Mandatory=$true)]
+      [parameter(Mandatory = $true)]
       [string] $Name
    )
 
@@ -96,17 +101,18 @@ function Add-GitRepository {
       # Build the url to list the projects
       $listurl = _buildURL -ProjectName $ProjectName
 
-      $body = '{"name": "'+ $Name +'"}'
+      $body = '{"name": "' + $Name + '"}'
 
       Write-Verbose $body
 
       try {
          # Call the REST API
          if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}		   
-		 }
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}		   
+         }
 
          Write-Output $resp
       }
@@ -125,11 +131,14 @@ function Add-GitRepository {
 }
 
 function Get-GitRepository {
-   [CmdletBinding()]
+   [CmdletBinding(DefaultParameterSetName='ByID')]
    param (
-      [Parameter(ParameterSetName='ByID', ValueFromPipeline=$true)]
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true)]
       [Alias('RepositoryID')]
-      [guid[]] $Id
+      [guid[]] $Id,
+
+      [Parameter(ParameterSetName = 'ByName', ValueFromPipeline = $true)]
+      [string[]] $Name
    )
 
    DynamicParam {
@@ -147,28 +156,49 @@ function Get-GitRepository {
 
             # Call the REST API
             if (_useWindowsAuthenticationOnPremise) {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            } else {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-		    }
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+            }
+            else {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
 
             _applyTypes -item $resp
 
             Write-Output $resp
          }
-      } else {
-         # Build the url to list the builds
+      }
+      elseif ($Name) {
+         foreach ($item in $Name) {
+            # Build the url to return the single build
+            $listurl = _buildURL -projectName $ProjectName -Name $item
+
+            # Call the REST API
+            if (_useWindowsAuthenticationOnPremise) {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+            }
+            else {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
+
+            _applyTypes -item $resp
+
+            Write-Output $resp
+         }
+      }
+      else {
+         # Build the url to list the repos
          $listurl = _buildURL -projectName $ProjectName
 
          # Call the REST API
          if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
          }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach($item in $resp.value) {
+         foreach ($item in $resp.value) {
             _applyTypes -item $item
          }
 

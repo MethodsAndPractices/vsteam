@@ -24,9 +24,12 @@ Add-TeamAccount [[-Account] <String>] [-UseWindowsAuthentication]
 
 ## DESCRIPTION
 On Windows you have to option to store the information at the process, user
-or machine (you must be running PowerShell as administrator) level.
+or machine (you must be running PowerShell as administrator to store at the
+machine level) level.
 
 On Linux and Mac you can only store at the process level.
+
+Calling Add-TeamAccount will clear any default project.
 
 ## EXAMPLES
 
@@ -161,5 +164,5 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-[Add-TeamAccount]()
-
+[Add-TeamAccount](Add-TeamAccount.md)
+[Set-DefaultProject](Set-DefaultProject.md)

@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
-Import-Module $PSScriptRoot\..\src\projects.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 
 InModuleScope projects {
    $env:TEAM_ACCT = 'https://test.visualstudio.com'

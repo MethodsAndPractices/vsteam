@@ -2,7 +2,7 @@ Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
 # Required for the dynamic parameter
-Import-Module $PSScriptRoot\..\src\Approvals.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\Approvals.psm1 -Force
 
 InModuleScope Approvals {
    $env:TEAM_ACCT = 'https://test.visualstudio.com'

@@ -9,7 +9,7 @@ function _buildURL {
       [int] $d
    )
 
-   if(-not $env:TEAM_ACCT) {
+   if (-not $env:TEAM_ACCT) {
       throw 'You must call Add-TeamAccount before calling any other functions in this module.'
    }
 
@@ -17,7 +17,7 @@ function _buildURL {
    $resource = "/distributedtask/pools"
    $instance = $env:TEAM_ACCT
 
-   if($id) {
+   if ($id) {
       $resource += "/$id"
    }
 
@@ -31,9 +31,13 @@ function _applyTypes {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Pool')
-   $item.createdBy.PSObject.TypeNames.Insert(0, 'Team.User')
 
-   if($item.PSObject.Properties.Match('administratorsGroup').count -gt 0) {
+   # The hosted pools in VSTS do not have a createdBy value
+   if ($item.createdBy -ne $null) {
+      $item.createdBy.PSObject.TypeNames.Insert(0, 'Team.User')
+   }
+
+   if ($item.PSObject.Properties.Match('administratorsGroup').count -gt 0) {
       # This is VSTS
       $item.administratorsGroup.PSObject.TypeNames.Insert(0, 'Team.Group')
       $item.serviceAccountsGroup.PSObject.TypeNames.Insert(0, 'Team.Group')
@@ -41,46 +45,49 @@ function _applyTypes {
 }
 
 function Get-Pool {
-   [CmdletBinding(DefaultParameterSetName='List')]
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [string] $PoolName,
-      [Parameter(ParameterSetName='List')]
-      [ValidateSet('None','Manage', 'Use')]
+      [Parameter(ParameterSetName = 'List')]
+      [ValidateSet('None', 'Manage', 'Use')]
       [string] $ActionFilter,
-      [Parameter(ParameterSetName='ByID', Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('PoolID')]
       [string] $Id
    )
 
    process {
 
-      if($id) {
+      if ($id) {
          # Build the url
          $url = _buildURL -id $id
 
          # Call the REST API
-	     if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-		 }
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
 
          _applyTypes -item $resp
 
          Write-Output $resp
-      } else {
+      }
+      else {
          # Build the url
          $url = _buildURL
 
-	     if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-		 }
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach($item in $resp.value) {
+         foreach ($item in $resp.value) {
             _applyTypes -item $item
          }
 
