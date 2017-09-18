@@ -8,18 +8,18 @@
 ## SYNTAX
 
 ```
-Add-Project [-Name] <String> [[-ProcessTemplate] <String>] [[-Description] <String>] [-TFVC]
+Add-Project [-ProjectName] <String> [[-ProcessTemplate] <String>] [[-Description] <String>] [-TFVC]
 ```
 
 ## DESCRIPTION
-This will create a new Team Project in your Team Services
+This will create a new Team Project in your Team Foundation Server or Team Services
 account.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Add-Project 'MyProject'
+PS C:\> Add-Project 'MyProject'
 ```
 
 This will add a project name MyProject with no description using the Scrum process
@@ -27,7 +27,7 @@ template and Git source control.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Add-Project 'MyProject' -TFVC -ProcessTemplate Agile
+PS C:\> Add-Project 'MyProject' -TFVC -ProcessTemplate Agile
 ```
 
 This will add a project name MyProject with no description using the Agile process
@@ -35,7 +35,7 @@ template and TFVC source control.
 
 ## PARAMETERS
 
-### -Name
+### -ProjectName
 The name of the project to create.
 
 ```yaml
@@ -107,4 +107,3 @@ Accept wildcard characters: False
 
 [Add-TeamAccount](Add-TeamAccount.md)
 [Remove-Project](Remove-Project.md)
-

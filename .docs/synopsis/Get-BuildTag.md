@@ -1,0 +1,1 @@
+Returns all the tags of a build.

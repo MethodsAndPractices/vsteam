@@ -3,18 +3,18 @@
 # Get-Build
 
 ## SYNOPSIS
-Gets the builds for a team project.
+#include "./synopsis/Add-Get-Build.md"
 
 ## SYNTAX
 
-### UNNAMED_PARAMETER_SET_1
+### List (Default)
 ```
 Get-Build [-ProjectName] <String> [-Top <Int32>] [-ResultFilter <String>] [-ReasonFilter <String>]
  [-StatusFilter <String>] [-Queues <Int32[]>] [-Definitions <Int32[]>] [-BuildNumber <String>] [-Type <String>]
  [-MaxBuildsPerDefinition <Int32>] [-Properties <String[]>]
 ```
 
-### UNNAMED_PARAMETER_SET_2
+### ByID
 ```
 Get-Build [-ProjectName] <String> [-Id <Int32[]>]
 ```
@@ -24,37 +24,38 @@ The Get-Build function gets the builds for a team project.
 
 With just a project name, this function gets all of the builds for that team
 project.
+
 You can also specify a particular build by ID.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-Build -ProjectName demo | Format-List *
+PS C:\> Get-Build -ProjectName demo | Format-List *
 ```
 
 This command gets a list of all builds in the demo project.
-The
-pipeline operator (|) passes the data to the Format-List cmdlet, which
+
+The pipeline operator (|) passes the data to the Format-List cmdlet, which
 displays all available properties (*) of the build objects.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-Build -ProjectName demo -top 5 -resultFilter failed
+PS C:\> Get-Build -ProjectName demo -top 5 -resultFilter failed
 ```
 
 This command gets a list of 5 failed builds in the demo project.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-1203,1204 | Get-Build -ProjectName demo
+PS C:\> 1203,1204 | Get-Build -ProjectName demo
 ```
 
 This command gets builds with IDs 1203 and 1204 by using the pipeline.
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-Get-Build -ProjectName demo -ID 1203,1204
+PS C:\> Get-Build -ProjectName demo -ID 1203,1204
 ```
 
 This command gets builds with IDs 1203 and 1204 by using the ID parameter.
@@ -62,11 +63,11 @@ This command gets builds with IDs 1203 and 1204 by using the ID parameter.
 ## PARAMETERS
 
 ### -Top
-Specifies the maximum number of builds to return.
+Specifies the maximum number to return.
 
 ```yaml
 Type: Int32
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -82,7 +83,7 @@ Failed, or Canceled.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -99,7 +100,7 @@ CheckInShelveset, Triggered, or All.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -115,7 +116,7 @@ Cancelling, Postponed, NotStarted, or All.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -130,7 +131,7 @@ A comma-delimited list of queue IDs that specifies the builds to return.
 
 ```yaml
 Type: Int32[]
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -146,7 +147,7 @@ to return.
 
 ```yaml
 Type: Int32[]
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -158,13 +159,13 @@ Accept wildcard characters: False
 
 ### -BuildNumber
 Returns the build with this build number.
-You can also use * for a starts
-with search i.e.
+
+You can also use * for a starts with search i.e.
 2015* will return all build numbers that start with 2015.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -179,7 +180,7 @@ The type of builds to retrieve.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -191,12 +192,12 @@ Accept wildcard characters: False
 
 ### -MaxBuildsPerDefinition
 The maximum number of builds to retrieve for each definition.
-This is only
-valid when definitions is also specified.
+
+This is only valid when definitions is also specified.
 
 ```yaml
 Type: Int32
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -211,7 +212,7 @@ A comma-delimited list of extended properties to retrieve.
 
 ```yaml
 Type: String[]
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -223,23 +224,7 @@ Accept wildcard characters: False
 
 #include "./params/projectName.md"
 
-### -Id
-Specifies one or more builds by ID.
-To specify multiple IDs, use commas to
-separate the IDs.
-To find the ID of a build, type Get-Build.
-
-```yaml
-Type: Int32[]
-Parameter Sets: UNNAMED_PARAMETER_SET_2
-Aliases: BuildID
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
+#include "./params/BuildIds.md"
 
 ## INPUTS
 
@@ -253,7 +238,7 @@ Accept wildcard characters: False
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets builds.
 
-You can tab complete from a list of avaiable projects.
+You can tab complete from a list of available projects.
 
 You can use Set-DefaultProject to set a default project so you do not have
 to pass the ProjectName with each call.
@@ -264,4 +249,3 @@ to pass the ProjectName with each call.
 [Set-DefaultProject](Set-DefaultProject.md)
 [Add-Build](Add-Build.md)
 [Remove-Build](Remove-Build.md)
-

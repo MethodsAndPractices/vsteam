@@ -19,14 +19,14 @@ Set-Approval sets the status of approval to Approved, Rejected, Pending, or ReAs
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-Approval | Set-Approval
+PS C:\> Get-Approval | Set-Approval
 ```
 
 This command sets all pending approvals to approved.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Set-Approval -Id 1 -Status Rejected
+PS C:\> Set-Approval -Id 1 -Status Rejected
 ```
 
 This command rejects approval with Id of 1.
@@ -99,20 +99,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
-Sets the status without prompting for confirmation.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/force.md"
 
 ## INPUTS
 
@@ -126,4 +113,3 @@ System.String
 ## NOTES
 
 ## RELATED LINKS
-

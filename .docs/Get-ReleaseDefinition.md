@@ -3,28 +3,30 @@
 # Get-ReleaseDefinition
 
 ## SYNOPSIS
-Gets the release defintions for a team project.
+#include "./synopsis/Get-ReleaseDefinition.md"
 
 ## SYNTAX
 
-### UNNAMED_PARAMETER_SET_1
+### List (Default)
 ```
 Get-ReleaseDefinition [-ProjectName] <String> [-Expand <String>]
 ```
 
-### UNNAMED_PARAMETER_SET_2
+### ByID
 ```
 Get-ReleaseDefinition [-ProjectName] <String> [-Id <Int32[]>]
 ```
 
 ## DESCRIPTION
-The Get-ReleaseDefinition function gets the release defintions for a team
+The Get-ReleaseDefinition function gets the release definitions for a team
 project.
+
 The project name is a Dynamic Parameter which may not be displayed
 in the syntax above but is mandatory.
 
 With just a project name, this function gets all of the release definitions
 for that team project.
+
 You can also specify a particular release defintion
 by ID.
 
@@ -32,7 +34,7 @@ by ID.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-ReleaseDefinition -ProjectName demo | Format-List *
+PS C:\> Get-ReleaseDefinition -ProjectName demo | Format-List *
 ```
 
 This command gets a list of all release definitions in the demo project.
@@ -50,7 +52,7 @@ Definition (environments, artifacts, none).
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -61,15 +63,15 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-Specifies one or more release defintions by ID.
-To specify multiple IDs, use
-commas to separate the IDs.
-To find the ID of a release defintion, type
-Get-ReleaseDefinition.
+Specifies one or more release definitions by ID.
+
+To specify multiple IDs, use commas to separate the IDs.
+
+To find the ID of a release defintion, type Get-ReleaseDefinition.
 
 ```yaml
 Type: Int32[]
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: ByID
 Aliases: ReleaseDefinitionID
 
 Required: False
@@ -91,11 +93,7 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-[Add-TeamAccount]()
-
-[Set-DefaultProject]()
-
-[Add-ReleaseDefinition]()
-
-[Remove-ReleaseDefinition]()
-
+[Add-TeamAccount](Add-TeamAccount.md)
+[Set-DefaultProject](Set-DefaultProject.md)
+[Add-ReleaseDefinition](Add-ReleaseDefinition.md)
+[Remove-ReleaseDefinition](Remove-ReleaseDefinition.md)

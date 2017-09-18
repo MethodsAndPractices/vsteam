@@ -3,7 +3,7 @@
 # Get-Approval
 
 ## SYNOPSIS
-Gets a list of approvals for all releases for a team project.
+#include "./synopsis/Get-Approval.md"
 
 ## SYNTAX
 
@@ -15,6 +15,7 @@ Get-Approval [-ProjectName] <String> [[-StatusFilter] <String>] [[-ReleaseIdFilt
 ## DESCRIPTION
 The Get-Approval function gets the approvals for all releases for a team
 project.
+
 The project name is a Dynamic Parameter which may not be displayed
 in the syntax above but is mandatory.
 
@@ -25,21 +26,21 @@ for that team project.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-Approval -ProjectName Demo
+PS C:\> Get-Approval -ProjectName Demo
 ```
 
 This command gets a list of all pending approvals.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-Approval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
+PS C:\> Get-Approval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
 ```
 
 This command gets a list of all approved approvals using a custom table format.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-Approval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
+PS C:\> Get-Approval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
 ```
 
 This command gets a list of all approvals rejected by Administrator using a custom table format.
@@ -48,7 +49,9 @@ This command gets a list of all approvals rejected by Administrator using a cust
 
 ### -StatusFilter
 By default the function returns Pending approvals. 
+
 Using this filter you can return Approved, ReAssigned or Rejected approvals. 
+
 There is a custom table view for each status.
 
 ```yaml
@@ -64,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReleaseIdFilter
-Onlt approvals for the release ids provided will be returned.
+Only approvals for the release ids provided will be returned.
 
 ```yaml
 Type: Int32[]
@@ -107,7 +110,7 @@ Accept wildcard characters: False
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets build definitions.
 
-You can tab complete from a list of avaiable projects.
+You can tab complete from a list of available projects.
 
 You can use Set-DefaultProject to set a default project so you do not have
 to pass the ProjectName with each call.
@@ -118,4 +121,3 @@ to pass the ProjectName with each call.
 [Set-DefaultProject](Set-DefaultProject.md)
 [Add-BuildDefinition](Add-BuildDefinition.md)
 [Remove-BuildDefinition](Remove-BuildDefinition.md)
-

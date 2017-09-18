@@ -1,1 +1,1 @@
-Removes the release defintions for a team project.
+Removes the release definitions for a team project.

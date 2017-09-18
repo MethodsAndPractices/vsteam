@@ -3,7 +3,7 @@
 # Add-ReleaseDefinition
 
 ## SYNOPSIS
-Creates a new release defintion from a JSON file.
+#include "./synopsis/Add-ReleaseDefinition.md"
 
 ## SYNTAX
 
@@ -21,7 +21,7 @@ You must call Add-TeamAccount before calling this function.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Add-ReleaseDefinition -ProjectName demo -inFile release.json
+PS C:\> Add-ReleaseDefinition -ProjectName demo -inFile release.json
 ```
 
 This command reads release.json and creates a new release defintion from it
@@ -58,7 +58,7 @@ Accept wildcard characters: False
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release definitions.
 
-You can tab complete from a list of avaiable projects.
+You can tab complete from a list of available projects.
 
 You can use Set-DefaultProject to set a default project so you do not have
 to pass the ProjectName with each call.

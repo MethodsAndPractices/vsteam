@@ -21,7 +21,7 @@ You must call Add-TeamAccount before calling this function.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Add-BuildDefinition -ProjectName Demo -InFile build.json
+PS C:\> Add-BuildDefinition -ProjectName Demo -InFile build.json
 ```
 
 This command reads build.json and creates a new build defintion from it
@@ -31,8 +31,7 @@ on the demo team project.
 
 ### -InFile
 Specifies the JSON file that contains the build defintion to be created.
-Enter
-a path and file name.
+Enter a path and file name.
 
 ```yaml
 Type: String
@@ -58,10 +57,9 @@ Accept wildcard characters: False
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets build definitions.
 
-You can tab complete from a list of avaiable projects.
+You can tab complete from a list of available projects.
 
 You can use Set-DefaultProject to set a default project so you do not have
 to pass the ProjectName with each call.
 
 ## RELATED LINKS
-

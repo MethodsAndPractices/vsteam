@@ -3,20 +3,22 @@
 # Get-ServiceEndpoint
 
 ## SYNOPSIS
+#include "./synopsis/Get-ServiceEndpoint.md"
 
 ## SYNTAX
 
-### UNNAMED_PARAMETER_SET_1
+### List (Default)
 ```
 Get-ServiceEndpoint [-ProjectName] <String>
 ```
 
-### UNNAMED_PARAMETER_SET_2
+### ByID
 ```
 Get-ServiceEndpoint [-ProjectName] <String> -Id <String>
 ```
 
 ## DESCRIPTION
+#include "./synopsis/Get-ServiceEndpoint.md"
 
 ## EXAMPLES
 
@@ -25,11 +27,11 @@ Get-ServiceEndpoint [-ProjectName] <String> -Id <String>
 #include "./params/projectName.md"
 
 ### -Id
-@{Text=}
+Id of the service endpoint
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: ByID
 Aliases: 
 
 Required: True
@@ -50,4 +52,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

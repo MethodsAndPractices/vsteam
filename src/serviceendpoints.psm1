@@ -11,12 +11,12 @@ $status = $null
 
 function _buildURL {
    param(
-      [parameter(Mandatory=$true)]
+      [parameter(Mandatory = $true)]
       [string] $projectName,
       [string] $id
    )
 
-   if(-not $env:TEAM_ACCT) {
+   if (-not $env:TEAM_ACCT) {
       throw 'You must call Add-TeamAccount before calling any other functions in this module.'
    }
 
@@ -25,11 +25,11 @@ function _buildURL {
    $instance = $env:TEAM_ACCT
 
    # For VSTS add defaultcollection
-   if($env:TEAM_ACCT.ToLower().Contains('visualstudio.com')) {
+   if ($env:TEAM_ACCT.ToLower().Contains('visualstudio.com')) {
       $instance = "$env:TEAM_ACCT/DefaultCollection"
    }
 
-   if($id) {
+   if ($id) {
       $resource += "/$id"
    }
 
@@ -56,15 +56,16 @@ function _applyTypes {
 
 function _checkStatus {
    param(
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [string] $uri
    )
 
    # Call the REST API
    if (_useWindowsAuthenticationOnPremise) {
-     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -UseDefaultCredentials
-   } else {
-     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
    }
 
    return $resp
@@ -72,8 +73,8 @@ function _checkStatus {
 
 function _trackProgress {
    param(
-      [Parameter(Mandatory=$true)] [string] $projectName,
-      [Parameter(Mandatory=$true)] $resp,
+      [Parameter(Mandatory = $true)] [string] $projectName,
+      [Parameter(Mandatory = $true)] $resp,
       [string] $title,
       [string] $msg
    )
@@ -90,18 +91,18 @@ function _trackProgress {
 
       # oscillate back a forth to show progress
       $i += $x
-      Write-Progress -Activity $title -Status $msg -PercentComplete ($i/$y*100)
+      Write-Progress -Activity $title -Status $msg -PercentComplete ($i / $y * 100)
 
-      if($i -eq $y -or $i -eq 0) {
+      if ($i -eq $y -or $i -eq 0) {
          $x *= -1
       }
    }
 }
 
 function Remove-ServiceEndpoint {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $id,
 
       [switch] $Force
@@ -121,10 +122,11 @@ function Remove-ServiceEndpoint {
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Service Endpoint")) {
             # Call the REST API
-	        if (_useWindowsAuthenticationOnPremise) {
-              Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -UseDefaultCredentials
-            } else {
-              Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            if (_useWindowsAuthenticationOnPremise) {
+               Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -UseDefaultCredentials
+            }
+            else {
+               Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
             }
 
             Write-Output "Deleted service endpoint $item"
@@ -135,91 +137,90 @@ function Remove-ServiceEndpoint {
 
 function Add-SonarQubeEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
-    param(
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-        [string] $endpointName,
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-        [string] $sonarqubeUrl,
-        [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
-        [string] $personalAccessToken,
-        [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
-        [securestring] $securePersonalAccessToken
-    )
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointName,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $sonarqubeUrl,
+      [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
+      [string] $personalAccessToken,
+      [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
+      [securestring] $securePersonalAccessToken
+   )
 
-    DynamicParam {
-        _buildProjectNameDynamicParam
-    }
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
 
-    Process {
+   Process {
     
        
-        if ($personalAccessToken) {
-            $token = $personalAccessToken 
-        }
-        else {
-            $credential = New-Object System.Management.Automation.PSCredential "nologin", $securePersonalAccessToken
-            $token = $credential.GetNetworkCredential().Password
-        }
-        # Bind the parameter to a friendly variable
-        $ProjectName = $PSBoundParameters["ProjectName"]
+      if ($personalAccessToken) {
+         $token = $personalAccessToken 
+      }
+      else {
+         $credential = New-Object System.Management.Automation.PSCredential "nologin", $securePersonalAccessToken
+         $token = $credential.GetNetworkCredential().Password
+      }
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
 
-        # Build the url
-        $url = _buildURL -projectName $projectName
+      # Build the url
+      $url = _buildURL -projectName $projectName
 
-        $obj = @{
-            authorization = @{
-                parameters = @{
-                    username = $token;
-                    password = ''
-                };
-                scheme     = 'UsernamePassword'
+      $obj = @{
+         authorization = @{
+            parameters = @{
+               username = $token;
+               password = ''
             };
-            data          = @{
-            };
-            name          = $endpointName;
-            type          = 'sonarqube';
-            url           = $sonarqubeUrl
-        }
+            scheme     = 'UsernamePassword'
+         };
+         data          = @{
+         };
+         name          = $endpointName;
+         type          = 'sonarqube';
+         url           = $sonarqubeUrl
+      }
 
-        $body = $obj | ConvertTo-Json
+      $body = $obj | ConvertTo-Json
 
-        try {
+      try {
     
-            # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
-            }
-            else {
-                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+         # Call the REST API
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
       
-        }
-        catch [System.Net.WebException] {
-            if ($_.Exception.status -eq "ProtocolError") {
-                $errorDetails = ConvertFrom-Json $_.ErrorDetails
-                [string] $message = $errorDetails.message
-                if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'")) {
-                        Write-Error -Message "The Sonarqube extension not installed. Please install from https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube"
-                        return
-                    }
-                }
-                throw
+      }
+      catch [System.Net.WebException] {
+         if ($_.Exception.status -eq "ProtocolError") {
+            $errorDetails = ConvertFrom-Json $_.ErrorDetails
+            [string] $message = $errorDetails.message
+            if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'")) {
+               Write-Error -Message "The Sonarqube extension not installed. Please install from https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube"
+               return
             }
-            _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+         }
+         throw
+      }
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
-            return Get-ServiceEndpoint -projectName $projectName -id $resp.id
-        }
-    }
-
+      return Get-ServiceEndpoint -projectName $projectName -id $resp.id
+   }
+}
 
 function Add-AzureRMServiceEndpoint {
    [CmdletBinding()]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $displayName,
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $subscriptionId,
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $subscriptionTenantId,
       [string] $endpointName,
       [string] $servicePrincipalId,
@@ -237,45 +238,46 @@ function Add-AzureRMServiceEndpoint {
       # Build the url
       $url = _buildURL -projectName $projectName
 
-      if(-not $endpointName) {
+      if (-not $endpointName) {
          $endpointName = $displayName
       }
 
       if (-not $servicePrincipalId) {
-          $creationMode = "Automatic"
-          $servicePrincipalId=""
-          $servicePrincipalKey=""
+         $creationMode = "Automatic"
+         $servicePrincipalId = ""
+         $servicePrincipalKey = ""
       }
       else {
-        $creationMode = "Manual"
+         $creationMode = "Manual"
       }
 
       $obj = @{
-         authorization=@{
-            parameters=@{
-               serviceprincipalid=$servicePrincipalId;
-               serviceprincipalkey=$servicePrincipalKey;
-               tenantid=$subscriptionTenantId
+         authorization = @{
+            parameters = @{
+               serviceprincipalid  = $servicePrincipalId;
+               serviceprincipalkey = $servicePrincipalKey;
+               tenantid            = $subscriptionTenantId
             };
-            scheme='ServicePrincipal'
+            scheme     = 'ServicePrincipal'
          };
-         data=@{
-            subscriptionId=$subscriptionId;
-            subscriptionName=$displayName;
-            creationMode=$creationMode
+         data          = @{
+            subscriptionId   = $subscriptionId;
+            subscriptionName = $displayName;
+            creationMode     = $creationMode
          };
-         name=$endpointName;
-         type='azurerm';
-         url='https://management.azure.com/'
+         name          = $endpointName;
+         type          = 'azurerm';
+         url           = 'https://management.azure.com/'
       }
 
       $body = $obj | ConvertTo-Json
 
       # Call the REST API
-	  if (_useWindowsAuthenticationOnPremise) {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
-      } else {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      if (_useWindowsAuthenticationOnPremise) {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
+      }
+      else {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
       }
 
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
@@ -285,9 +287,9 @@ function Add-AzureRMServiceEndpoint {
 }
 
 function Get-ServiceEndpoint {
-   [CmdletBinding(DefaultParameterSetName='List')]
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(ParameterSetName='ByID', Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $id
    )
 
@@ -299,32 +301,35 @@ function Get-ServiceEndpoint {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if($id) {
+      if ($id) {
          $url = _buildURL -projectName $projectName -id $id
 
          # Call the REST API
-	     if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
          }
 
          _applyTypes -item $resp
 
          Write-Output $resp
-      } else {
+      }
+      else {
          # Build the url
          $url = _buildURL -projectName $projectName
 
          # Call the REST API
-	     if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
          }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach($item in $resp.value) {
+         foreach ($item in $resp.value) {
             _applyTypes -item $item
          }
 

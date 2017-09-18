@@ -3,7 +3,7 @@
 # Add-SonarQubeEndpoint
 
 ## SYNOPSIS
-Adds a new SonarQube service endpoint.
+#include "./synopsis/Add-SonarQubeEndpoint.md"
 
 ## SYNTAX
 
@@ -13,8 +13,11 @@ Add-SonarQubeEndpoint [-ProjectName] <String> [-Token] <String> [-SonarQubeUrl] 
 ```
 
 ## DESCRIPTION
-The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using the SonarQube connection type. 
+The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using
+the SonarQube connection type. 
+
 This is only used when using the SonarQube tasks.
+
 Using SonarQube with the Maven tasks uses a Generic Connection type.
 
 ## EXAMPLES

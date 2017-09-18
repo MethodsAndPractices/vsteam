@@ -1,1 +1,1 @@
-Adds a Git repository to your Visual Studio Team Services or Team Founcation Server account.
+Adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.

@@ -3,31 +3,33 @@
 # Get-Pool
 
 ## SYNOPSIS
+#include "./synopsis/Get-Pool.md"
 
 ## SYNTAX
 
-### UNNAMED_PARAMETER_SET_1
+### List (Default)
 ```
 Get-Pool [-PoolName <String>] [-ActionFilter <String>]
 ```
 
-### UNNAMED_PARAMETER_SET_2
+### ByID
 ```
 Get-Pool -Id <String>
 ```
 
 ## DESCRIPTION
+#include "./synopsis/Get-Pool.md"
 
 ## EXAMPLES
 
 ## PARAMETERS
 
 ### -PoolName
-@{Text=}
+Name of the pool to return.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -38,11 +40,11 @@ Accept wildcard characters: False
 ```
 
 ### -ActionFilter
-@{Text=}
+None, Manage or Use.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -53,11 +55,11 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-@{Text=}
+Id of the pool to return.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: ByID
 Aliases: PoolID
 
 Required: True
@@ -78,4 +80,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

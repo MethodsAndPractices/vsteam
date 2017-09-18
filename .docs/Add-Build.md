@@ -13,19 +13,25 @@ Add-Build [-ProjectName] <String> [-BuildDefinition <String>] [-QueueName <Strin
 
 ## DESCRIPTION
 Add-Build will queue a new build.
-You can override the queue in the build defintion by using the QueueName parameter.
+You can override the queue in the build defintion by using the QueueName
+parameter.
 
-To have the BuildDefinition and QueueNames tab complete you must set a default project by calling Set-DefaultProject before you call Add-Build.
+To have the BuildDefinition and QueueNames tab complete you must set a default
+project by calling Set-DefaultProject before you call Add-Build.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Set-DefaultProject Demo
-PS C:\>Add-Build -BuildDefinition Demo-CI
+PS C:\> Set-DefaultProject Demo
+PS C:\> Add-Build -BuildDefinition Demo-CI
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted
 ```
 
-This exmaple sets the default project so you can tab complete the BuildDefinition parameter.
+This example sets the default project so you can tab complete the BuildDefinition parameter.
 
 ## PARAMETERS
 
@@ -71,16 +77,11 @@ Queue Name
 
 ## OUTPUTS
 
-### Team-Build
-The team build just created.
-
-Build Definition Build Number  Status     Result
----------------- ------------  ------     ------
-Demo-CI           Demo-CI-45   notStarted
-
 ## NOTES
-BuildDefinition and QueueName are dynamic parameters and use the default project value to query their validate set. 
-If you do not set the default project by called Set-DefaultProject before calling Add-Build you will have to type in the names.
+BuildDefinition and QueueName are dynamic parameters and use the default 
+project value to query their validate set. 
+
+If you do not set the default project by called Set-DefaultProject before
+calling Add-Build you will have to type in the names.
 
 ## RELATED LINKS
-

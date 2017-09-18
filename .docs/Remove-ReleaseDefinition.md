@@ -12,7 +12,7 @@ Remove-ReleaseDefinition [-ProjectName] <String> [-Id] <Int32[]> [-Force]
 ```
 
 ## DESCRIPTION
-The Remove-ReleaseDefinition function removes the release defintions for a
+The Remove-ReleaseDefinition function removes the release definitions for a
 team project.
 The project name is a Dynamic Parameter which may not be
 displayed in the syntax above but is mandatory.
@@ -21,7 +21,7 @@ displayed in the syntax above but is mandatory.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-ReleaseDefinition -ProjectName demo | Remove-ReleaseDefinition
+PS C:\> Get-ReleaseDefinition -ProjectName demo | Remove-ReleaseDefinition
 ```
 
 This command gets a list of all release definitions in the demo project.
@@ -32,11 +32,11 @@ function, which removes each release defintion object.
 ## PARAMETERS
 
 ### -Id
-Specifies one or more release defintions by ID.
-To specify multiple IDs, use
-commas to separate the IDs.
-To find the ID of a release defintion, type
-Get-ReleaseDefinition.
+Specifies one or more release definitions by ID.
+
+To specify multiple IDs, use commas to separate the IDs.
+
+To find the ID of a release defintion, type Get-ReleaseDefinition.
 
 ```yaml
 Type: Int32[]
@@ -50,22 +50,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Force
-Removes the specified release defintion without prompting for confirmation.
-By default, Remove-ReleaseDefinition prompts for confirmation before
-removing any release defintion.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/force.md"
 
 #include "./params/projectName.md"
 
@@ -81,7 +66,7 @@ Accept wildcard characters: False
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release definitions.
 
-You can tab complete from a list of avaiable projects.
+You can tab complete from a list of available projects.
 
 You can use Set-DefaultProject to set a default project so you do not have
 to pass the ProjectName with each call.
@@ -92,4 +77,3 @@ to pass the ProjectName with each call.
 [Set-DefaultProject](Set-DefaultProject.md)
 [Add-ReleaseDefinition](Add-ReleaseDefinition.md)
 [Get-ReleaseDefinition](Get-ReleaseDefinition.md)
-

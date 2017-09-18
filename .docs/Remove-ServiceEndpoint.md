@@ -12,13 +12,14 @@ Remove-ServiceEndpoint [-ProjectName] <String> [-Id] <String[]> [-Force]
 ```
 
 ## DESCRIPTION
+#include "./synopsis/Remove-ServiceEndpoint.md"
 
 ## EXAMPLES
 
 ## PARAMETERS
 
 ### -Id
-@{Text=}
+Id of the service endpoint
 
 ```yaml
 Type: String[]
@@ -32,20 +33,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Force
-@{Text=}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/force.md"
 
 #include "./params/projectName.md"
 
@@ -61,4 +49,3 @@ System.String
 ## NOTES
 
 ## RELATED LINKS
-

@@ -3,7 +3,7 @@
 # Clear-DefaultProject
 
 ## SYNOPSIS
-Clears the value stored in the default project parameter value.
+#include "./synopsis/Clear-DefaultProject.md"
 
 ## SYNTAX
 
@@ -18,12 +18,11 @@ Clears the value stored in the default project parameter value.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Clear-Project
+PS C:\> Clear-Project
 ```
 
 This will clear the default project parameter value.
-You will now have to
-provide a project for any functions that require a project.
+You will now have to provide a project for any functions that require a project.
 
 ## PARAMETERS
 

@@ -3,31 +3,33 @@
 # Get-Queue
 
 ## SYNOPSIS
+#include "./synopsis/Get-Queue.md"
 
 ## SYNTAX
 
-### UNNAMED_PARAMETER_SET_1
+### List (Default)
 ```
 Get-Queue [-ProjectName] <String> [-QueueName <String>] [-ActionFilter <String>]
 ```
 
-### UNNAMED_PARAMETER_SET_2
+### ByID
 ```
 Get-Queue [-ProjectName] <String> [-Id <String>]
 ```
 
 ## DESCRIPTION
+#include "./synopsis/Get-Queue.md"
 
 ## EXAMPLES
 
 ## PARAMETERS
 
 ### -QueueName
-@{Text=}
+Name of the queue to return.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -38,11 +40,11 @@ Accept wildcard characters: False
 ```
 
 ### -ActionFilter
-@{Text=}
+None, Manage or Use.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -55,11 +57,11 @@ Accept wildcard characters: False
 #include "./params/projectName.md"
 
 ### -Id
-@{Text=}
+Id of the queue to return.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: ByID
 Aliases: QueueID
 
 Required: False
@@ -80,4 +82,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

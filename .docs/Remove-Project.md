@@ -22,43 +22,28 @@ the Pipeline by Property Name
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Remove-Project 'MyProject'
+PS C:\> Remove-Project 'MyProject'
 ```
 
 You will be prompted for confirmation and the project will be deleted.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Remove-Project 'MyProject' -Force
+PS C:\> Remove-Project 'MyProject' -Force
 ```
 
 You will NOT be prompted for confirmation and the project will be deleted.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Get-Project | Remove-Project -Force
+PS C:\> Get-Project | Remove-Project -Force
 ```
 
 This will remove all projects
 
 ## PARAMETERS
 
-### -Force
-Deletes the specified project without prompting for confirmation.
-By default, Remove-Project prompts for confirmation before deleting
-the project.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/force.md"
 
 #include "./params/projectName.md"
 

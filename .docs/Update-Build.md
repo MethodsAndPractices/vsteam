@@ -13,21 +13,21 @@ Update-Build [-Id] <Int32> [[-KeepForever] <Boolean>] [[-BuildNumber] <String>] 
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Allows you to set the keep forever flag and build number.
 
 ## EXAMPLES
 
-### Example 1
+### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Get-Build | Update-Build -KeepForever $false
 ```
 
-{{ Add example description here }}
+Sets the keep forever property of every build to false.
 
 ## PARAMETERS
 
 ### -BuildNumber
-{{Fill BuildNumber Description}}
+The value you want to set as the build number.
 
 ```yaml
 Type: String
@@ -41,53 +41,14 @@ Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+#include "./params/confirm.md"
 
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
+#include "./params/force.md"
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-{{Fill Force Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-{{Fill Id Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
+#include "./params/BuildId.md"
 
 ### -KeepForever
-{{Fill KeepForever Description}}
+$True or $False to set the keep forever property of the build.
 
 ```yaml
 Type: Boolean
@@ -103,21 +64,7 @@ Accept wildcard characters: False
 
 #include "./params/projectName.md"
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/whatIf.md"
 
 ## INPUTS
 

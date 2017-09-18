@@ -1,0 +1,1 @@
+Returns the artifacts of a build.

@@ -1,14 +1,9 @@
----
-external help file: teammembers-help.xml
-Module Name: Team
-online version: 
-schema: 2.0.0
----
+#include "./common/header.md"
 
 # Get-TeamMember
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+#include "./synopsis/Get-TeamMember.md"
 
 ## SYNTAX
 
@@ -17,23 +12,16 @@ Get-TeamMember [[-Top] <Int32>] [[-Skip] <Int32>] [-TeamId] <String> [-ProjectNa
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+#include "./synopsis/Get-TeamMember.md"
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 #include "./params/projectName.md"
 
 ### -Skip
-{{Fill Skip Description}}
+The number of items to skip.
 
 ```yaml
 Type: Int32
@@ -48,7 +36,7 @@ Accept wildcard characters: False
 ```
 
 ### -TeamId
-{{Fill TeamId Description}}
+The id of the team to search.
 
 ```yaml
 Type: String
@@ -63,7 +51,7 @@ Accept wildcard characters: False
 ```
 
 ### -Top
-{{Fill Top Description}}
+Specifies the maximum number to return.
 
 ```yaml
 Type: Int32
@@ -71,7 +59,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -89,4 +77,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

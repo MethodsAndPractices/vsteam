@@ -191,6 +191,7 @@ function Remove-Team {
     param(
         [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
         [Alias('name')]
+        [Alias('id')]
         [string]$TeamId,
 
         [switch]$Force

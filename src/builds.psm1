@@ -385,6 +385,7 @@ function Remove-Build {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
       [int[]] $Id,
 
       [switch] $Force
@@ -426,6 +427,7 @@ function Update-Build {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
       [Int] $Id,
 
       [parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -475,12 +477,12 @@ function Update-Build {
          }
       }
    }
-
 }
 
 function Get-BuildTag {
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
       [int] $Id
    )
     
@@ -512,6 +514,7 @@ function Add-BuildTag {
       [string[]] $Tags,
 
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
       [int[]] $Id,
 
       [switch] $Force
@@ -553,6 +556,7 @@ function Remove-BuildTag {
       [string[]] $Tags,
         
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
       [int[]] $Id,
 
       [switch] $Force
@@ -589,6 +593,7 @@ function Remove-BuildTag {
 function Get-BuildArtifact {
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
       [int] $Id
    )
     

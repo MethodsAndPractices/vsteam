@@ -3,7 +3,7 @@
 # Add-ReleaseEnvironment
 
 ## SYNOPSIS
-Starts the deployment of an environment in an existing release.
+#include "./synopsis/Add-ReleaseEnvironment.md"
 
 ## SYNTAX
 
@@ -24,20 +24,7 @@ You must call Add-TeamAccount before calling this function.
 
 #include "./params/projectName.md"
 
-### -Force
-Forces the command without confirmation
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/force.md"
 
 ### -ReleaseId
 Specifies the Id of an existing Release in which you want to deploy
@@ -99,7 +86,7 @@ Accept wildcard characters: False
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets release s.
 
-You can tab complete from a list of avaiable projects.
+You can tab complete from a list of available projects.
 
 You can use Set-DefaultProject to set a default project so you do not have
 to pass the ProjectName with each call.

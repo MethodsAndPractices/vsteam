@@ -3,7 +3,7 @@
 # Get-TeamInfo
 
 ## SYNOPSIS
-Displays your current account and default project.
+#include "./synopsis/Get-TeamInfo.md"
 
 ## SYNTAX
 
@@ -12,12 +12,13 @@ Get-TeamInfo
 ```
 
 ## DESCRIPTION
+#include "./synopsis/Get-TeamInfo.md"
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-TeamInfo
+PS C:\> Get-TeamInfo
 ```
 
 This will display your current account and default project
@@ -32,5 +33,4 @@ This will display your current account and default project
 
 ## RELATED LINKS
 
-[Add-TeamAccount]()
-
+[Add-TeamAccount](Add-TeamAccount.md)

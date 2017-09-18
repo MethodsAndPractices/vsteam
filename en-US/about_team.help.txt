@@ -2,15 +2,26 @@ TOPIC
     about_team
 
 SHORT DESCRIPTION
-    Provides access to your Visual Studio Team Services (VSTS) and Team Foundation Server (TFS) from Mac, Linux and PC.
+    Provides access to your Visual Studio Team Services (VSTS) and Team 
+    Foundation Server (TFS) from Mac, Linux and PC.
 
 LONG DESCRIPTION
-    Add an account using Add-TeamAccount and then you can call the rest of the functions.
+    Add an account using Add-TeamAccount and then you can call the rest of the 
+    functions.
+
+    Use Set-DefaultProject so you do not have to provide the -ProjectName 
+    parameter with the rest of the calls in the module. However, the 
+    -ProjectName parameter is dynamic and you can use tab completion to cycle
+    through all the projects.
 
 EXAMPLES
     Get-Project
 
     This will return all the WellFormed team projects.
+
+    Get-Project | Remove-Project -Force
+
+    This will delete all the projects in your VSTS for TFS. Use with caution.
 
 KEYWORDS
     Team Services, VSTS, TFS, VSO, TFS, DevOps

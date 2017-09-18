@@ -13,7 +13,8 @@ Add-AzureRMServiceEndpoint [-ProjectName] <String> [-DisplayName] <String> [-Sub
 ```
 
 ## DESCRIPTION
-The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure Resource Manager connection type.
+The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure 
+Resource Manager connection type.
 
 ## EXAMPLES
 
@@ -93,4 +94,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

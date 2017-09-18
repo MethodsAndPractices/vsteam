@@ -1,0 +1,1 @@
+Removes a team from a project.

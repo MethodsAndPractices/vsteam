@@ -3,7 +3,7 @@
 # Remove-Team
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+#include "./synopsis/Remove-Team.md"
 
 ## SYNTAX
 
@@ -12,53 +12,20 @@ Remove-Team [-TeamId] <String> [-Force] [-WhatIf] [-Confirm] [-ProjectName] <Str
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+#include "./synopsis/Remove-Team.md"
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
-
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+#include "./params/confirm.md"
 
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-{{Fill Force Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/force.md"
 
 #include "./params/projectName.md"
 
 ### -TeamId
-{{Fill TeamId Description}}
+The id of the team to remove.
 
 ```yaml
 Type: String
@@ -72,26 +39,11 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/whatIf.md"
 
 ## INPUTS
 
 ### System.String
-
 
 ## OUTPUTS
 
@@ -100,4 +52,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

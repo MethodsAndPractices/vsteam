@@ -3,7 +3,7 @@
 # Add-BuildTag
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+#include "./synopsis/Add-BuildTag.md"
 
 ## SYNTAX
 
@@ -12,98 +12,23 @@ Add-BuildTag [-Tags] <String[]> -Id <Int32[]> [-Force] [-WhatIf] [-Confirm] [-Pr
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+Adds a tag to a build.
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
-
 ## PARAMETERS
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+#include "./params/confirm.md"
 
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
+#include "./params/force.md"
 
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-Adds a tag to the specified build without prompting for confirmation.
-By default, Add-BuildTag prompts for confirmation before tagging
-the build when the $ConfirmPreference system variable is set to Low.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-{{Fill Id Description}}
-
-```yaml
-Type: Int32[]
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
+#include "./params/BuildIds.md"
 
 #include "./params/projectName.md"
 
-### -Tags
-{{Fill Tags Description}}
+#include "./params/buildTags.md"
 
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+#include "./params/whatIf.md"
 
 ## INPUTS
 
@@ -119,4 +44,3 @@ System.String
 ## NOTES
 
 ## RELATED LINKS
-

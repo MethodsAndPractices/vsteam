@@ -1,1 +1,1 @@
-Gets the build defintions for a team project.
+Gets the build definitions for a team project.

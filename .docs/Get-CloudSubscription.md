@@ -3,7 +3,7 @@
 # Get-CloudSubscription
 
 ## SYNOPSIS
-Gets the Azure subscriptions associated with the Team Services account.
+#include "./synopsis/Get-CloudSubscription.md"
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ associated with the Team Services account.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-CloudSubscription
+PS C:\> Get-CloudSubscription
 ```
 
 This command gets a list of all Azure subscriptions associated with the
@@ -41,4 +41,3 @@ This function currently is not supported in TFS.
 ## RELATED LINKS
 
 [Add-TeamAccount](Add-TeamAccount.md)
-

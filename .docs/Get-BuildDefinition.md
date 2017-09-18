@@ -3,28 +3,30 @@
 # Get-BuildDefinition
 
 ## SYNOPSIS
-Gets the build defintions for a team project.
+#include "./synopsis/Get-BuildDefinition.md"
 
 ## SYNTAX
 
-### UNNAMED_PARAMETER_SET_1
+### List (Default)
 ```
 Get-BuildDefinition [-ProjectName] <String> [-Filter <String>] [-Type <String>]
 ```
 
-### UNNAMED_PARAMETER_SET_2
+### ByID
 ```
 Get-BuildDefinition [-ProjectName] <String> -Id <Int32[]> [-Revision <Int32>]
 ```
 
 ## DESCRIPTION
-The Get-BuildDefinition function gets the build defintions for a team
+The Get-BuildDefinition function gets the build definitions for a team
 project.
+
 The project name is a Dynamic Parameter which may not be displayed
 in the syntax above but is mandatory.
 
 With just a project name, this function gets all of the build definitions
 for that team project.
+
 You can also specify a particular build defintion
 by ID.
 
@@ -32,25 +34,24 @@ by ID.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-BuildDefinition -ProjectName Demo | Format-List *
+PS C:\> Get-BuildDefinition -ProjectName Demo | Format-List *
 ```
 
 This command gets a list of all build definitions in the demo project.
-The
-pipeline operator (|) passes the data to the Format-List cmdlet, which
+
+The pipeline operator (|) passes the data to the Format-List cmdlet, which
 displays all available properties (*) of the build defintion objects.
 
 ## PARAMETERS
 
 ### -Filter
 Filters to definitions whose names equal this value.
-Append a * to filter to
-definitions whose names start with this value.
+Append a * to filter to definitions whose names start with this value.
 For example: MS*.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -62,12 +63,12 @@ Accept wildcard characters: False
 
 ### -Type
 The type of the build definitions to retrieve (build, xaml).
-If not
-specified, all types will be returned.
+
+If not specified, all types will be returned.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: List
 Aliases: 
 
 Required: False
@@ -80,15 +81,15 @@ Accept wildcard characters: False
 #include "./params/projectName.md"
 
 ### -Id
-Specifies one or more build defintions by ID.
-To specify multiple IDs, use
-commas to separate the IDs.
-To find the ID of a build defintion, type
-Get-BuildDefinition.
+Specifies one or more build definitions by ID.
+
+To specify multiple IDs, use commas to separate the IDs.
+
+To find the ID of a build defintion, type Get-BuildDefinition.
 
 ```yaml
 Type: Int32[]
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: ByID
 Aliases: BuildDefinitionID
 
 Required: True
@@ -103,7 +104,7 @@ Specifies the specific revision number of the definition to retrieve.
 
 ```yaml
 Type: Int32
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: ByID
 Aliases: 
 
 Required: False
@@ -129,4 +130,3 @@ Accept wildcard characters: False
 [Set-DefaultProject](Set-DefaultProject.md)
 [Add-BuildDefinition](Add-BuildDefinition.md)
 [Remove-BuildDefinition](Remove-BuildDefinition.md)
-

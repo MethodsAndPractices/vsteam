@@ -3,7 +3,7 @@
 # Get-BuildLog
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+#include "./synopsis/Get-BuildLog.md"
 
 ## SYNTAX
 
@@ -12,36 +12,28 @@ Get-BuildLog [-Id <Int32[]>] [-Index <Int32>] [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+#include "./synopsis/Get-BuildLog.md"
 
 ## EXAMPLES
 
-### Example 1
+### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Get-Build -Top 1 | Get-BuildLog
 ```
 
-{{ Add example description here }}
+This command displays the logs of the first build.
+
+The pipeline operator (|) passes the build id to the Get-BuildLog cmdlet, which
+displays the logs.
 
 ## PARAMETERS
 
-### -Id
-{{Fill Id Description}}
-
-```yaml
-Type: Int32[]
-Parameter Sets: (All)
-Aliases: BuildID
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
+#include "./params/BuildIds.md"
 
 ### -Index
-{{Fill Index Description}}
+Each task stores its logs in an array. If you know the index of a specific task
+you can return just its logs. If you do not provide a value all the logs are
+displayed.
 
 ```yaml
 Type: Int32
@@ -62,7 +54,6 @@ Accept wildcard characters: False
 ### System.Int32[]
 System.String
 
-
 ## OUTPUTS
 
 ### System.Object
@@ -70,4 +61,3 @@ System.String
 ## NOTES
 
 ## RELATED LINKS
-

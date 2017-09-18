@@ -3,7 +3,7 @@
 # Get-Team
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+#include "./synopsis/Get-Team.md"
 
 ## SYNTAX
 
@@ -18,23 +18,16 @@ Get-Team [-TeamId <String[]>] [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+#include "./synopsis/Get-Team.md"
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 #include "./params/projectName.md"
 
 ### -Skip
-{{Fill Skip Description}}
+The number of items to skip.
 
 ```yaml
 Type: Int32
@@ -49,7 +42,7 @@ Accept wildcard characters: False
 ```
 
 ### -TeamId
-{{Fill TeamId Description}}
+The id of the team to retrieve.
 
 ```yaml
 Type: String[]
@@ -64,7 +57,7 @@ Accept wildcard characters: False
 ```
 
 ### -Top
-{{Fill Top Description}}
+Specifies the maximum number to return.
 
 ```yaml
 Type: Int32
@@ -90,4 +83,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

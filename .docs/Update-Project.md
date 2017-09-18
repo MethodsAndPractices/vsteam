@@ -18,7 +18,7 @@ You can pass just name, description or both.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Update-Project -Name Demo -NewName aspDemo
+PS C:\> Update-Project -Name Demo -NewName aspDemo
 ```
 
 This command changes the name of your project from Demo to aspDemo.
@@ -68,4 +68,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

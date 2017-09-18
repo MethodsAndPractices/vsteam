@@ -3,7 +3,7 @@
 # Get-BuildArtifact
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+#include "./synopsis/Get-BuildArtifact.md"
 
 ## SYNTAX
 
@@ -12,33 +12,13 @@ Get-BuildArtifact [-Id] <Int32> [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+#include "./synopsis/Get-BuildArtifact.md"
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
-
 ## PARAMETERS
 
-### -Id
-{{Fill Id Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
+#include "./params/buildId.md"
 
 #include "./params/projectName.md"
 
@@ -47,7 +27,6 @@ Accept wildcard characters: False
 ### System.Int32
 System.String
 
-
 ## OUTPUTS
 
 ### System.Object
@@ -55,4 +34,3 @@ System.String
 ## NOTES
 
 ## RELATED LINKS
-

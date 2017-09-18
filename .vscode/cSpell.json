@@ -6,8 +6,14 @@
     "language": "en",
     // words - list of words to be always considered correct
     "words": [
+        "CMMI",
+        "Cmdlets",
+        "Qube",
+        "TFVC",
         "VSTS",
-        "cmdlet"
+        "cmdlet",
+        "params",
+        "sonarqube"
     ],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.

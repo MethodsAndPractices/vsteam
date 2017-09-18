@@ -3,22 +3,21 @@
 # Add-TeamAccount
 
 ## SYNOPSIS
-Stores your account name and personal access token for use with the other
-functions in this module.
+#include "./synopsis/Add-TeamAccount.md"
 
 ## SYNTAX
 
-### UNNAMED_PARAMETER_SET_1
+### Secure (Default)
 ```
 Add-TeamAccount [-Account] <String> -PAT <SecureString> [-Level <String>]
 ```
 
-### UNNAMED_PARAMETER_SET_2
+### Plain
 ```
 Add-TeamAccount [-PersonalAccessToken] <String> [[-Account] <String>] [-Level <String>]
 ```
 
-### UNNAMED_PARAMETER_SET_3
+### Windows
 ```
 Add-TeamAccount [[-Account] <String>] [-UseWindowsAuthentication]
 ```
@@ -26,28 +25,28 @@ Add-TeamAccount [[-Account] <String>] [-UseWindowsAuthentication]
 ## DESCRIPTION
 On Windows you have to option to store the information at the process, user
 or machine (you must be running PowerShell as administrator) level.
-On Linux
-and Mac you can only store at the process level.
+
+On Linux and Mac you can only store at the process level.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Add-TeamAccount
+PS C:\> Add-TeamAccount
 ```
 
 You will be prompted for the account name and personal access token.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Add-TeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
+PS C:\> Add-TeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
 ```
 
 Allows you to provide all the information on the command line.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-Add-TeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
+PS C:\> Add-TeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
 ```
 
 On Windows, allows you use to use Windows authentication against a local TFS server.
@@ -56,10 +55,9 @@ On Windows, allows you use to use Windows authentication against a local TFS ser
 
 ### -Account
 The Visual Studio Team Services (VSTS) account name to use.
-DO NOT enter the
-entire URL. 
-Just the portion before visualstudio.com.
-For example in the
+DO NOT enter the entire URL. 
+
+Just the portion before visualstudio.com. For example in the
 following url mydemos is the account name.
 https://mydemos.visualstudio.com
 or
@@ -68,7 +66,7 @@ http://localhost:8080/tfs/DefaultCollection
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: Secure (Default)
 Aliases: 
 
 Required: True
@@ -80,7 +78,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_2, UNNAMED_PARAMETER_SET_3
+Parameter Sets: Plain, Windows
 Aliases: 
 
 Required: False
@@ -99,7 +97,7 @@ To use pat simply omit it from the Add-TeamAccount command.
 
 ```yaml
 Type: SecureString
-Parameter Sets: UNNAMED_PARAMETER_SET_1
+Parameter Sets: Secure (Default)
 Aliases: 
 
 Required: True
@@ -115,7 +113,7 @@ When saved at the User or Machine level your account information will be in any 
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_1, UNNAMED_PARAMETER_SET_2
+Parameter Sets: Secure, Plain (Default)
 Aliases: 
 
 Required: False
@@ -130,7 +128,7 @@ The personal access token from VSTS/TFS to use to access this account.
 
 ```yaml
 Type: String
-Parameter Sets: UNNAMED_PARAMETER_SET_2
+Parameter Sets: Plain
 Aliases: 
 
 Required: True
@@ -145,7 +143,7 @@ Allows the use of the current user's Windows credentials to authenticate against
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: UNNAMED_PARAMETER_SET_3
+Parameter Sets: Windows
 Aliases: 
 
 Required: False

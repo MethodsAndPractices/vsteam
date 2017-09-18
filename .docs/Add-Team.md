@@ -3,7 +3,7 @@
 # Add-Team
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+#include "./synopsis/Add-Team.md"
 
 ## SYNTAX
 
@@ -15,13 +15,6 @@ Add-Team [-TeamName] <String> [[-Description] <String>] [-ProjectName] <String>
 {{Fill in the Description}}
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 

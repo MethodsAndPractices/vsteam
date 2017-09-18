@@ -103,7 +103,7 @@ function Get-Project {
 
    process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["Name"]
+      $ProjectName = $PSBoundParameters["ProjectName"]
 
       if($id) {
          $ProjectName = $id
@@ -170,7 +170,7 @@ function Update-Project {
 
    process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["Name"]
+      $ProjectName = $PSBoundParameters["ProjectName"]
 
       if($newName -eq '' -and $newDescription -eq '') {
          # There is nothing to do
@@ -212,14 +212,15 @@ function Update-Project {
       _trackProgress -resp $resp -title 'Updating team project' -msg $msg
 
       # Return the project now that it has been updated
-      return Get-Project -Name $finalName
+      return Get-Project -ProjectName $finalName
    }
 }
 
 function Add-Project {
    param(
       [parameter(Mandatory=$true)]
-      [string] $Name,
+      [Alias('Name')]
+      [string] $ProjectName,
 
       [ValidateSet('Agile','CMMI', 'Scrum')]
       [string] $ProcessTemplate = 'Scrum',
@@ -252,7 +253,7 @@ function Add-Project {
    # Build the url to list the projects
    $listurl = _buildURL
 
-   $body = '{"name": "'+ $Name +'", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
+   $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
 
    Write-Verbose $body
 
@@ -264,9 +265,9 @@ function Add-Project {
         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
 	  }
 
-      _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($Name), Template: $($processTemplate), Src: $($srcCtrl)"
+      _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
-      return Get-Project -Name $Name
+      return Get-Project -ProjectName $ProjectName
    }
    catch {
       # Dig into the exception to get the Response details.
@@ -290,7 +291,7 @@ function Remove-Project {
 
    Process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["Name"]
+      $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url to list the projects
       $listurl = _buildURL -ProjectName (Get-Project $ProjectName).id

@@ -3,21 +3,21 @@
 # Get-Project
 
 ## SYNOPSIS
-Returns a list of projects in the Team Services or Team Foundation Server account.
+#include "./synopsis/Get-Project.md"
 
 ## SYNTAX
 
-### List Parameter Set
+### List (Default)
 ```
 Get-Project [-StateFilter <String>] [-Top <Int32>] [-Skip <Int32>]
 ```
 
-### ByID Parameter Set
+### ByID
 ```
 Get-Project [-Id <String>] [-IncludeCapabilities]
 ```
 
-### ByName Parameter Set
+### ByName
 ```
 Get-Project [-ProjectName] <String>
 ```
@@ -34,14 +34,14 @@ You must call Add-TeamAccount before calling this function.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-Project
+PS C:\> Get-Project
 ```
 
 This will return all the WellFormed team projects.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-Get-Project -top 5 | Format-Wide
+PS C:\> Get-Project -top 5 | Format-Wide
 ```
 
 This will return the top five WellFormed team projects only showing their name
@@ -66,8 +66,7 @@ Accept wildcard characters: False
 ```
 
 ### -Top
-Defines the number of team projects to return. 
-The default value is 100
+Specifies the maximum number to return.
 
 ```yaml
 Type: Int32
@@ -98,7 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-The id of the project to return
+The id of the project to return.
 
 ```yaml
 Type: String
@@ -113,8 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -IncludeCapabilities
-Will return additional information about the project
-
+Will return additional information about the project.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: ByID
@@ -142,4 +140,3 @@ Accept wildcard characters: False
 [Add-TeamAccount](Add-TeamAccount.md)
 [Add-Project](Add-Project.md)
 [Remove-Project](Remove-Project.md)
-

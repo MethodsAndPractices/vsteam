@@ -12,13 +12,13 @@ Add-GitRepository [-ProjectName <String>] [-Name <System.String>]
 ```
 
 ## DESCRIPTION
-Add-GitRepository adds a Git repository to your Visual Studio Team Services or Team Founcation Server account.
+Add-GitRepository adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Add-GitRepository -ProjectName Demo -Name Temp
+PS C:\> Add-GitRepository -ProjectName Demo -Name Temp
 ```
 
 This command adds a new repository named Temp to the Demo project.
@@ -49,4 +49,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

@@ -1,1 +1,1 @@
-Gets the release defintions for a team project.
+Gets the release definitions for a team project.

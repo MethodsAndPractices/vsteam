@@ -3,7 +3,7 @@
 # Get-BuildTag
 
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+#include "./synopsis/Get-BuildTag.md"
 
 ## SYNTAX
 
@@ -12,33 +12,13 @@ Get-BuildTag [-Id] <Int32> [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+#include "./synopsis/Get-BuildTag.md"
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
-
 ## PARAMETERS
 
-### -Id
-{{Fill Id Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
+#include "./params/BuildId.md"
 
 #include "./params/projectName.md"
 
@@ -55,4 +35,3 @@ System.String
 ## NOTES
 
 ## RELATED LINKS
-
