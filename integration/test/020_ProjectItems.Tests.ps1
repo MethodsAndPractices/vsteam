@@ -6,8 +6,9 @@ Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\git.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\pools.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\Queues.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
 
-Describe 'Git, Pool and Queue' {
+Describe 'Project Items' {
    BeforeAll {
       $pat = $env:PAT
       $acct = $env:ACCT
@@ -42,6 +43,22 @@ Describe 'Git, Pool and Queue' {
    Context 'Queue Full exercise' {
       It 'Get-Queue Should return agent Queues' {
          (Get-Queue -ProjectName 'TeamModuleIntegration').Count | Should Be 4
+      }
+   }
+
+   Context 'Teams Full exercise' {
+      It 'Get-Team ByName Should return Teams' {
+         Get-Team -ProjectName 'TeamModuleIntegration' -Name 'TeamModuleIntegration Team' | Should Not Be $null
+      }
+
+      It 'Get-Team ById Should return Teams' {
+         $id = (Get-Team -ProjectName 'TeamModuleIntegration').Id
+         Get-Team -ProjectName 'TeamModuleIntegration' -TeamId $id | Should Not Be $null
+      }
+
+      It 'Add-Team should add a team' {
+         Add-Team -ProjectName 'TeamModuleIntegration' -TeamName 'testing' | Should Not Be $null
+         (Get-Team -ProjectName 'TeamModuleIntegration').Count | Should Be 2
       }
    }
 

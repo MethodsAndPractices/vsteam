@@ -17,6 +17,11 @@ Get-Team [-Top <Int32>] [-Skip <Int32>] [-ProjectName] <String>
 Get-Team [-TeamId <String[]>] [-ProjectName] <String>
 ```
 
+### ByName
+```
+Get-Team [-Name <String[]>] [-ProjectName] <String>
+```
+
 ## DESCRIPTION
 #include "./synopsis/Get-Team.md"
 
@@ -62,6 +67,21 @@ Specifies the maximum number to return.
 ```yaml
 Type: Int32
 Parameter Sets: List
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+The name of the team to retrieve.
+
+```yaml
+Type: String[]
+Parameter Sets: ByName
 Aliases: 
 
 Required: False
