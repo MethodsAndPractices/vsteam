@@ -1,0 +1,48 @@
+#include "./common/header.md"
+
+# Get-TeamOption
+
+## SYNOPSIS
+#include "./synopsis/Get-TeamOption.md"
+
+## SYNTAX
+
+```
+Get-TeamOption
+```
+
+## DESCRIPTION
+#include "./synopsis/Get-TeamOption.md"
+There are two table formats defined for the Team.Option type, Default and Versions.
+
+Default view contains Name, Area, Max Version and URI Template.
+
+Version view contains Name, Area, Min Version, Max Version, Released Version and Resource Version.
+
+## EXAMPLES
+
+### -------------------------- EXAMPLE 1 --------------------------
+```
+PS C:\> Get-TeamOption
+```
+
+This will display all the versions of supported APIs for your account using the 'Default' table format.
+
+### -------------------------- EXAMPLE 2 --------------------------
+```
+PS C:\> Get-TeamOption | Format-Table -View Versions
+```
+
+This will display all the versions of supported APIs for your account using the 'Versions' custom table format.
+
+## PARAMETERS
+
+## INPUTS
+
+## OUTPUTS
+
+## NOTES
+
+## RELATED LINKS
+
+[Add-TeamAccount](Add-TeamAccount.md)

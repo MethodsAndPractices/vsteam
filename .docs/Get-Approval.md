@@ -16,11 +16,16 @@ Get-Approval [-ProjectName] <String> [[-StatusFilter] <String>] [[-ReleaseIdFilt
 The Get-Approval function gets the approvals for all releases for a team
 project.
 
-The project name is a Dynamic Parameter which may not be displayed
-in the syntax above but is mandatory.
-
 With just a project name, this function gets all of the pending approvals
 for that team project.
+
+The Team.Approval type has three custom table formats:
+
+Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions
+
+Approved: Release Name, Environment, Is Automated, Approval Type, Approver Name, Release Definitions, Comments
+
+Rejected: Release Name, Environment, Approval Type, Approver Name, Release Definition, Comments
 
 ## EXAMPLES
 

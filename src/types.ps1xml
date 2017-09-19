@@ -15,6 +15,26 @@ OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE AND INFORMATION
 REMAINS WITH THE USER.
 ******************************************************************** -->
 <Types>
+<!--Team.Option-->
+   <Type>
+      <Name>Team.Option</Name>
+      <Members>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>resourceName</Name>
+                     <Name>minVersion</Name>
+                     <Name>maxVersion</Name>
+                     <Name>routeTemplate</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
    <!--Team.Environment-->
    <Type>
       <Name>Team.Environment</Name>

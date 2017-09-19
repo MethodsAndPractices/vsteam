@@ -4978,6 +4978,56 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-TeamOption</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>TeamOption</command:noun>
+      <maml:description>
+        <maml:para>Returns all the versions of supported APIs of your TFS or VSTS.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Returns all the versions of supported APIs of your TFS or VSTS. There are two table formats defined for the Team.Option type, Default and Versions.</maml:para>
+      <maml:para>Default view contains Name, Area, Max Version and URI Template.</maml:para>
+      <maml:para>Version view contains Name, Area, Min Version, Max Version, Released Version and Resource Version.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-TeamOption</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-TeamOption</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the versions of supported APIs for your account using the 'Default' table format.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-TeamOption | Format-Table -View Versions</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the versions of supported APIs for your account using the 'Versions' custom table format.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Remove-Build</command:name>
       <command:verb>Remove</command:verb>
       <command:noun>Build</command:noun>

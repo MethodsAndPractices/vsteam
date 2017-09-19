@@ -10,28 +10,28 @@
 @{
 
    # Script module or binary module file associated with this manifest.
-   RootModule = ''
+   RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion = '0.1.32'
+   ModuleVersion     = '0.1.32'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
 
    # ID used to uniquely identify this module
-   GUID = '22fe5207-1749-4832-9648-e939fe074b7f'
+   GUID              = '22fe5207-1749-4832-9648-e939fe074b7f'
 
    # Author of this module
-   Author = '@DonovanBrown'
+   Author            = '@DonovanBrown'
 
    # Company or vendor of this module
-   CompanyName = ''
+   CompanyName       = ''
 
    # Copyright statement for this module
-   Copyright = '(c) 2016 Donovan Brown. All rights reserved.'
+   Copyright         = '(c) 2016 Donovan Brown. All rights reserved.'
 
    # Description of the functionality provided by this module
-   Description = 'Adds functionality for working with Visual Studio Team Services and Team Foundation Server.'
+   Description       = 'Adds functionality for working with Visual Studio Team Services and Team Foundation Server.'
 
    # Minimum version of the Windows PowerShell engine required by this module
    # PowerShellVersion = ''
@@ -61,14 +61,16 @@
    # ScriptsToProcess = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
-   TypesToProcess = @('src\types.ps1xml')
+   TypesToProcess    = @('src\types.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
-   FormatsToProcess = @('src\TeamTypes.format.ps1xml',
-        'src\TeamTypes.Artifacts.format.ps1xml')
+   FormatsToProcess  = @('src\Approvals.format.ps1xml',
+      'src\TeamTypes.format.ps1xml',
+      'src\builds.format.ps1xml',
+      'src\team.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-   NestedModules = @('src\team.psm1',
+   NestedModules     = @('src\team.psm1',
       'src\git.psm1',
       'src\Approvals.psm1',
       'src\buildDefinitions.psm1',
@@ -90,7 +92,7 @@
       'Add-BuildDefinition',
       'Add-Project',
       'Add-Release',
-	   'Add-ReleaseEnvironment',
+      'Add-ReleaseEnvironment',
       'Add-ReleaseDefinition',
       'Add-TeamAccount',
       'Add-Team',
@@ -129,7 +131,8 @@
       'Get-BuildTag',
       'Remove-BuildTag',
       'Get-BuildArtifact',
-      'Update-Build')
+      'Update-Build',
+      'Get-TeamOption')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -138,7 +141,7 @@
    VariablesToExport = '*'
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-   AliasesToExport = '*'
+   AliasesToExport   = '*'
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
@@ -150,7 +153,7 @@
    # FileList = @()
 
    # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-   PrivateData = @{
+   PrivateData       = @{
 
       PSData = @{
 

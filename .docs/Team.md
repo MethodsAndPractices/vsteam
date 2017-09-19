@@ -100,6 +100,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-TeamMember](Get-TeamMember.md)
 #include "./synopsis/Get-TeamMember.md"
 
+### [Get-TeamOption](Get-TeamOption.md)
+#include "./synopsis/Get-TeamOption.md"
+
 ### [Remove-Build](Remove-Build.md)
 #include "./synopsis/Remove-Build.md"
 

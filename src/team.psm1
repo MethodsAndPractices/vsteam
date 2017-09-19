@@ -4,11 +4,30 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
+function _buildURL {
+   param()
+
+   if (-not $env:TEAM_ACCT) {
+      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+   }
+   
+   $instance = $env:TEAM_ACCT
+
+   return $instance + '/_apis'
+}
+
+# Apply types to the returned objects so format and type files can
+# identify the object and act on it.
+function _applyTypes {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.Option')
+}
+
 function _testAdministrator {
    $user = [Security.Principal.WindowsIdentity]::GetCurrent()
    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
-
 
 function _setEnvironmentVariables {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
@@ -53,6 +72,26 @@ function Get-TeamInfo {
       Account        = $env:TEAM_ACCT
       DefaultProject = $Global:PSDefaultParameterValues['*:projectName']
    }
+}
+
+function Get-TeamOption {
+   # Build the url to list the projects
+   $url = _buildURL
+
+   # Call the REST API
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   # Apply a Type Name so we can use custom format view and custom type extensions
+   foreach($item in $resp.value) {
+      _applyTypes -item $item
+   }
+
+   Write-Output $resp.value
 }
 
 function Add-TeamAccount {
@@ -158,9 +197,9 @@ function Add-TeamAccount {
 
       # If they only gave an account name add visualstudio.com
       if ($Account -notlike "*/*") {
-        if($Account -match  "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
-           $Account = "https://$($matches.account).visualstudio.com"
-        }
+         if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
+            $Account = "https://$($matches.account).visualstudio.com"
+         }
       }
 
       $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
@@ -438,7 +477,7 @@ function Set-DefaultProject {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Clear-DefaultProject, Set-DefaultProject
+Export-ModuleMember -Alias * -Function Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Clear-DefaultProject, Set-DefaultProject, Get-TeamOption
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {
