@@ -2078,8 +2078,11 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:details>
     <maml:description>
       <maml:para>The Get-Approval function gets the approvals for all releases for a team project.</maml:para>
-      <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
       <maml:para>With just a project name, this function gets all of the pending approvals for that team project.</maml:para>
+      <maml:para>The Team.Approval type has three custom table formats:</maml:para>
+      <maml:para>Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions</maml:para>
+      <maml:para>Approved: Release Name, Environment, Is Automated, Approval Type, Approver Name, Release Definitions, Comments</maml:para>
+      <maml:para>Rejected: Release Name, Environment, Approval Type, Approver Name, Release Definition, Comments</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -6650,6 +6653,17 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
             <maml:para>On Windows allows you to store your default project at the Process, User or  Machine levels. </maml:para>
@@ -6665,6 +6679,18 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>Project</maml:name>
         <maml:Description>

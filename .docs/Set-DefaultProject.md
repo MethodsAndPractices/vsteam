@@ -8,7 +8,7 @@
 ## SYNTAX
 
 ```
-Set-DefaultProject [-Project] <String> [-Level <String>]
+Set-DefaultProject [-Project] <String> [-Level <String>] [-Force]
 ```
 
 ## DESCRIPTION
@@ -29,6 +29,8 @@ You can now call other functions that require a project name without passing
 the project.
 
 ## PARAMETERS
+
+#include "./params/force.md"
 
 ### -Project
 Specifies the team project for which this function operates.

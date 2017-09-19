@@ -87,7 +87,7 @@ function Get-TeamOption {
    }
 
    # Apply a Type Name so we can use custom format view and custom type extensions
-   foreach($item in $resp.value) {
+   foreach ($item in $resp.value) {
       _applyTypes -item $item
    }
 
@@ -405,8 +405,8 @@ function Clear-DefaultProject {
 
 function Set-DefaultProject {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
-   [CmdletBinding()]
-   param()
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   param([switch] $Force)
    DynamicParam {
       $dp = _buildProjectNameDynamicParam -ParameterName "Project"
 
@@ -461,19 +461,21 @@ function Set-DefaultProject {
    }
 
    process {
-      if (_isOnWindows) {
-         if (-not $Level) {
-            $Level = "Process"
+      if ($Force -or $pscmdlet.ShouldProcess($Project, "Set-DefaultProject")) {
+         if (_isOnWindows) {
+            if (-not $Level) {
+               $Level = "Process"
+            }
+
+            # You always have to set at the process level or they will Not
+            # be seen in your current session.
+            $env:TEAM_PROJECT = $Project
+
+            [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
          }
 
-         # You always have to set at the process level or they will Not
-         # be seen in your current session.
-         $env:TEAM_PROJECT = $Project
-
-         [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
+         $Global:PSDefaultParameterValues["*:projectName"] = $Project
       }
-
-      $Global:PSDefaultParameterValues["*:projectName"] = $Project
    }
 }
 
