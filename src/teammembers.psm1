@@ -52,7 +52,7 @@ function Get-TeamMember {
        [int] $Skip,
  
        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName=$true)]
-       [Alias('name')]
+       [Alias('Name')]
        [string] $TeamId
     )
 

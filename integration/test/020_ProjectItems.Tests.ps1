@@ -7,6 +7,7 @@ Import-Module $PSScriptRoot\..\..\src\git.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\pools.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\Queues.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\teammembers.psm1 -Force
 
 Describe 'Project Items' {
    BeforeAll {
