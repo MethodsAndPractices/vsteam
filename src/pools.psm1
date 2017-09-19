@@ -33,7 +33,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.Pool')
 
    # The hosted pools in VSTS do not have a createdBy value
-   if ($item.createdBy -ne $null) {
+   if ($null -ne $item.createdBy) {
       $item.createdBy.PSObject.TypeNames.Insert(0, 'Team.User')
    }
 
