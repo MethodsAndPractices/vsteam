@@ -9,16 +9,16 @@ The cases of every file is very important. This module is to be used on Windows,
 
 # Release Notes
 ## 0.1.32
-Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/16) from [Kees Verhaar](https://github.com/KeesV) which included the following:
+Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/16) from [Fergal](https://github.com/ObsidianPhoenix) which included the following:
 
-- Added Support for Build Tags.
+- Added Support for Build Tags
 - Added the ability to update KeepForever, and the Build Number
-- Added the ability to pull artifact data from the build.
+- Added the ability to pull artifact data from the build
 
 ## 0.1.31
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/17) from [Kees Verhaar](https://github.com/KeesV) which included the following:
 
-- Add ProjectName as a property on team member so it can be used further down the pipeline.
+- Add ProjectName as a property on team member so it can be used further down the pipeline
 
 ## 0.1.30
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/15) from [Kees Verhaar](https://github.com/KeesV) which included the following:
@@ -32,10 +32,10 @@ Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/12) from [Andy N
 - Fixed for projects validation if you have more than 100 projects
 
 ## 0.1.28
-Added ID to approval default output.
+Added ID to approval default output
 
 ## 0.1.27
-Clearing code analysis warnings.
+Clearing code analysis warnings
 
 ## 0.1.26
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/10) from [Roberto Peña](https://github.com/eulesv) which included the following:
