@@ -7,12 +7,18 @@
 
 ## SYNTAX
 
+### ByName (Default)
 ```
-Update-Project [[-NewName] <String>] [[-NewDescription] <String>] [-Name] <String>
+Update-Project [[-NewName] <String>] [[-NewDescription] <String>] [-Name] <String>  [-Force]
+```
+
+### ByID
+```
+Update-Project [[-NewName] <String>] [[-NewDescription] <String>] [-Id] <String>  [-Force]
 ```
 
 ## DESCRIPTION
-You can pass just name, description or both.
+You can pass just new name, new description or both.
 
 ## EXAMPLES
 
@@ -54,6 +60,23 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### -Id
+The id of the project to update.
+
+```yaml
+Type: String
+Parameter Sets: (ByID)
+Aliases: ProjectId
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+#include "./params/force.md"
 
 #include "./params/projectName.md"
 

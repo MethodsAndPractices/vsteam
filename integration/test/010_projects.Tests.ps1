@@ -22,13 +22,13 @@ Describe 'Project' {
       }
 
       It 'Update-Project Should update description' {
-         Update-Project -ProjectName 'TeamModuleIntegration' -NewDescription 'Test Description'
+         Update-Project -ProjectName 'TeamModuleIntegration' -NewDescription 'Test Description' -Force
 
          Get-Project -ProjectName 'TeamModuleIntegration' | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
       }
 
       It 'Update-Project Should update name' {
-         Update-Project -ProjectName 'TeamModuleIntegration' -NewName 'TeamModuleIntegration1'
+         Update-Project -ProjectName 'TeamModuleIntegration' -NewName 'TeamModuleIntegration1' -Force
 
          Get-Project -ProjectName 'TeamModuleIntegration1' | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
       }

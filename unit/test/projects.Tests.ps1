@@ -84,12 +84,12 @@ InModuleScope projects {
       }
 
       Context 'Update-Project with no op' {
-         Mock Invoke-RestMethod
+         Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } 
 
-         It 'Should not call Invoke-RestMethod' {
+         It 'Should call Invoke-RestMethod only once' {
             Update-Project -ProjectName Test
 
-            Assert-MockCalled Invoke-RestMethod -Times 0
+            Assert-MockCalled Invoke-RestMethod -Exactly 1
          }
       }
 
@@ -101,7 +101,7 @@ InModuleScope projects {
          Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Testing123?api-version=1.0' }
 
          It 'Should change name' {
-            Update-Project -ProjectName Test -newName Testing123
+            Update-Project -ProjectName Test -newName Testing123 -Force
 
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"name": "Testing123"}'}
@@ -116,7 +116,7 @@ InModuleScope projects {
          Mock _trackProgress
 
          It 'Should change description' {
-            Update-Project -ProjectName Test -newDescription Testing123
+            Update-Project -ProjectName Test -newDescription Testing123 -Force
 
             Assert-MockCalled Invoke-RestMethod -Times 2 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"description": "Testing123"}' }
@@ -131,7 +131,7 @@ InModuleScope projects {
          Mock Invoke-RestMethod { return @{id='123-5464-dee43'} } -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Testing123?api-version=1.0' }
 
          It 'Should not call Invoke-RestMethod' {
-            Update-Project -ProjectName Test -newName Testing123 -newDescription Testing123
+            Update-Project -ProjectName Test -newName Testing123 -newDescription Testing123 -Force
 
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test?api-version=1.0' }
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Patch'}
