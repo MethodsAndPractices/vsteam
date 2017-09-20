@@ -8,6 +8,9 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 0.1.33
+The variable to test if you are on Mac OS changed from IsOSX to IsMacOS. Because I have Set-StrictMode -Version Latest trying to access a variable that is not set will crash.
+
 ## 0.1.32
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/16) from [Fergal](https://github.com/ObsidianPhoenix) which included the following:
 
