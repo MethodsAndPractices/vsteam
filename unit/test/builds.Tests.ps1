@@ -14,6 +14,7 @@ InModuleScope builds {
       return new-object psobject -Property @{
          id=2
          name='MyBuildDef'
+         fullName='folder\MyBuildDef'
       }
    }
 
@@ -90,7 +91,7 @@ InModuleScope builds {
          }
       }
 
-      Context 'Add-Build with no parameters' {
+      Context 'Add-Build by name' {
          Mock Invoke-RestMethod { return @{
                logs=@{}
                queue=@{}
@@ -106,8 +107,35 @@ InModuleScope builds {
          }
 
          It 'should add build' {
-            Add-Build -ProjectName project -BuildDefinition 'MyBuildDef'
+            Add-Build -ProjectName project -BuildDefinitionName 'folder\MyBuildDef'
 
+            # Call to queue build.
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Body -eq '{"definition": {"id": 2}}' -and
+               $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds?api-version=2.0'
+            }
+         }
+      }
+
+      Context 'Add-Build by id' {
+         Mock Invoke-RestMethod { return @{
+               logs=@{}
+               queue=@{}
+               _links=@{}
+               project=@{}
+               repository=@{}
+               requestedFor=@{}
+               orchestrationPlan=@{}
+               definition=@{}
+               lastChangedBy=@{}
+               requestedBy=@{}
+            }
+         }
+
+         It 'should add build' {
+            Add-Build -ProjectName project -BuildDefinitionId 2
+
+            # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Body -eq '{"definition": {"id": 2}}' -and
                $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds?api-version=2.0'
