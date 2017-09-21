@@ -302,28 +302,17 @@ function Get-BuildLog {
 }
 
 function Add-Build {
-   [CmdletBinding()]
-   param()
+   [CmdletBinding(DefaultParameterSetName = 'ByName')]
+   param(
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+      [Int32] $BuildDefinitionId
+   )
    DynamicParam {
       $dp = _buildProjectNameDynamicParam
 
       # If they have not set the default project you can't find the
       # validateset so skip that check. However, we still need to give
       # the option to pass a QueueName to use.
-      if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $buildDefs = Get-BuildDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
-         $arrSet = $buildDefs.name
-      }
-      else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of BuildDefinition'
-         $buildDefs = $null
-         $arrSet = $null
-      }
-
-      $ParameterName = 'BuildDefinition'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet
-      $dp.Add($ParameterName, $rp)
-
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
          $queues = Get-Queue -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $queues.name
@@ -338,6 +327,20 @@ function Add-Build {
       $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet
       $dp.Add($ParameterName, $rp)
 
+      if ($Global:PSDefaultParameterValues["*:projectName"]) {
+         $buildDefs = Get-BuildDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $arrSet = $buildDefs.fullname
+      }
+      else {
+         Write-Verbose 'Call Set-DefaultProject for Tab Complete of BuildDefinition'
+         $buildDefs = $null
+         $arrSet = $null
+      }
+
+      $ParameterName = 'BuildDefinitionName'
+      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName'
+      $dp.Add($ParameterName, $rp)
+
       $dp
    }
 
@@ -345,15 +348,20 @@ function Add-Build {
       # Bind the parameter to a friendly variable
       $QueueName = $PSBoundParameters["QueueName"]
       $ProjectName = $PSBoundParameters["ProjectName"]
-      $BuildDefinition = $PSBoundParameters["BuildDefinition"]
+      $BuildDefinition = $PSBoundParameters["BuildDefinitionName"]
 
-      # Build the url to list the projects
+      # Build the url
       $listurl = _buildURL -ProjectName $ProjectName
 
-      # Find the BuildDefinition id from the name
-      $id = Get-BuildDefinition -ProjectName "$ProjectName" -Type All |
-         Where-Object { $_.name -eq $BuildDefinition } |
-         Select-Object -ExpandProperty id
+      if ($BuildDefinitionId) {
+         $id = $BuildDefinitionId
+      }
+      else {
+         # Find the BuildDefinition id from the name
+         $id = Get-BuildDefinition -ProjectName "$ProjectName" -Type All |
+            Where-Object { $_.fullname -eq $BuildDefinition } |
+            Select-Object -ExpandProperty id
+      }
 
       $queueSection = $null
       if ($QueueName) {

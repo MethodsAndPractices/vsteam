@@ -7,12 +7,19 @@
 
 ## SYNTAX
 
+### ByName (Default)
 ```
-Add-Build [-ProjectName] <String> [-BuildDefinition <String>] [-QueueName <String>]
+Add-Build [-ProjectName] <String> [-BuildDefinitionName <String>] [-QueueName <String>]
+```
+
+### ByID
+```
+Add-Build [-ProjectName] <String> [-BuildDefinitionId <Int32>] [-QueueName <String>]
 ```
 
 ## DESCRIPTION
 Add-Build will queue a new build.
+
 You can override the queue in the build defintion by using the QueueName
 parameter.
 
@@ -37,13 +44,13 @@ This example sets the default project so you can tab complete the BuildDefinitio
 
 #include "./params/projectName.md"
 
-### -BuildDefinition
+### -BuildDefinitionName
 The name of the build defintion to use to queue to build.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
+Parameter Sets: ByName
+Aliases: BuildDefinition
 
 Required: False
 Position: Named
@@ -59,6 +66,21 @@ The name of the queue to use for this build.
 Type: String
 Parameter Sets: (All)
 Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -BuildDefinitionId
+The Id of the build defintion to use to queue to build.
+
+```yaml
+Type: Int32
+Parameter Sets: ByID
+Aliases: Id
 
 Required: False
 Position: Named

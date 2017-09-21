@@ -30,10 +30,12 @@ REMAINS WITH THE USER.
             <Name>fullName</Name>
             <GetScriptBlock>
             if($this.path -eq "\") {
-               $this.path + $this.name
+               $temp = $this.path + $this.name
             } else {
-               $this.path + "\" + $this.name
+               $temp = $this.path + "\" + $this.name
             }
+
+            $temp.SubString(1)
             </GetScriptBlock>
          </ScriptProperty>
          <MemberSet>
