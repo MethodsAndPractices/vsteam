@@ -61,10 +61,12 @@
    # ScriptsToProcess = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
-   TypesToProcess    = @('src\types.ps1xml')
+   TypesToProcess    = @('src\types.ps1xml', 
+      'src\buildDefinitions.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('src\Approvals.format.ps1xml',
+      'src\buildDefinitions.format.ps1xml',
       'src\TeamTypes.format.ps1xml',
       'src\builds.format.ps1xml',
       'src\team.format.ps1xml')
@@ -158,13 +160,13 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         # Tags = @()
+         Tags       = @('VSTS', 'TFS', 'DevOps', 'Visual Studio', 'Team Services')
 
          # A URL to the license for this module.
          # LicenseUri = ''
 
          # A URL to the main website for this project.
-         # ProjectUri = ''
+         ProjectUri = 'https://github.com/DarqueWarrior/team'
 
          # A URL to an icon representing this module.
          # IconUri = ''

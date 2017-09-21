@@ -276,34 +276,6 @@ REMAINS WITH THE USER.
          </MemberSet>
       </Members>
    </Type>
-   <!--Team.BuildDefinition-->
-   <Type>
-      <Name>Team.BuildDefinition</Name>
-      <Members>
-         <ScriptProperty>
-            <Name>authoredByUser</Name>
-            <GetScriptBlock>$this.authoredBy.displayName</GetScriptBlock>
-         </ScriptProperty>
-         <ScriptProperty>
-            <Name>queueName</Name>
-            <GetScriptBlock>$this.queue.name</GetScriptBlock>
-         </ScriptProperty>
-         <MemberSet>
-            <Name>PSStandardMembers</Name>
-            <Members>
-               <PropertySet>
-                  <Name>DefaultDisplayPropertySet</Name>
-                  <ReferencedProperties>
-                     <Name>id</Name>
-                     <Name>name</Name>
-                     <Name>queueName</Name>
-                     <Name>authoredByUser</Name>
-                  </ReferencedProperties>
-               </PropertySet>
-            </Members>
-         </MemberSet>
-      </Members>
-   </Type>
    <!--Team.Pool-->
    <Type>
       <Name>Team.Pool</Name>
