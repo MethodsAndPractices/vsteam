@@ -8,6 +8,12 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 0.1.34
+Added support to queue a build by ID using the Add-Build function. The Add-Build function also fully qualifies the names of build definitions when you tab complete from command line.
+
+I added new fullname extended property to build definition type.
+
+Added support so you can update a project by ID as well as by Name.
 ## 0.1.33
 The variable to test if you are on Mac OS changed from IsOSX to IsMacOS. Because I have Set-StrictMode -Version Latest trying to access a variable that is not set will crash.
 
