@@ -1,25 +1,25 @@
 #include "./common/header.md"
 
-# Get-CloudSubscription
+# Get-VSTeamCloudSubscription
 
 ## SYNOPSIS
-#include "./synopsis/Get-CloudSubscription.md"
+#include "./synopsis/Get-VSTeamCloudSubscription.md"
 
 ## SYNTAX
 
 ```
-Get-CloudSubscription
+Get-VSTeamCloudSubscription
 ```
 
 ## DESCRIPTION
-The Get-CloudSubscription function gets the Azure subscriptions
+The Get-VSTeamCloudSubscription function gets the Azure subscriptions
 associated with the Team Services account.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-CloudSubscription
+PS C:\> Get-VSTeamCloudSubscription
 ```
 
 This command gets a list of all Azure subscriptions associated with the

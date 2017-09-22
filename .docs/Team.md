@@ -67,8 +67,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamBuildTag](Get-VSTeamBuildTag.md)
 #include "./synopsis/Get-VSTeamBuildTag.md"
 
-### [Get-CloudSubscription](Get-CloudSubscription.md)
-#include "./synopsis/Get-CloudSubscription.md"
+### [Get-VSTeamCloudSubscription](Get-VSTeamCloudSubscription.md)
+#include "./synopsis/Get-VSTeamCloudSubscription.md"
 
 ### [Get-GitRepository](Get-GitRepository.md)
 #include "./synopsis/Get-GitRepository.md"

@@ -24,7 +24,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.AzureSubscription')
 }
 
-function Get-CloudSubscription {
+function Get-VSTeamCloudSubscription {
    [CmdletBinding()]
    param()
 
@@ -46,4 +46,6 @@ function Get-CloudSubscription {
    Write-Output $resp.value
 }
 
-Export-ModuleMember -Alias * -Function Get-CloudSubscription
+Set-Alias Get-CloudSubscription Get-VSTeamCloudSubscription
+
+Export-ModuleMember -Alias * -Function Get-VSTeamCloudSubscription
