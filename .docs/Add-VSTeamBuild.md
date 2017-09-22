@@ -1,37 +1,37 @@
 #include "./common/header.md"
 
-# Add-Build
+# Add-VSTeamBuild
 
 ## SYNOPSIS
-#include "./synopsis/Add-Build.md"
+#include "./synopsis/Add-VSTeamBuild.md"
 
 ## SYNTAX
 
 ### ByName (Default)
 ```
-Add-Build [-ProjectName] <String> [-BuildDefinitionName <String>] [-QueueName <String>]
+Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionName <String>] [-QueueName <String>]
 ```
 
 ### ByID
 ```
-Add-Build [-ProjectName] <String> [-BuildDefinitionId <Int32>] [-QueueName <String>]
+Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionId <Int32>] [-QueueName <String>]
 ```
 
 ## DESCRIPTION
-Add-Build will queue a new build.
+Add-VSTeamBuild will queue a new build.
 
 You can override the queue in the build defintion by using the QueueName
 parameter.
 
 To have the BuildDefinition and QueueNames tab complete you must set a default
-project by calling Set-VSTeamDefaultProject before you call Add-Build.
+project by calling Set-VSTeamDefaultProject before you call Add-VSTeamBuild.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
 PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-Build -BuildDefinition Demo-CI
+PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI
 
 Build Definition Build Number  Status     Result
 ---------------- ------------  ------     ------
@@ -104,6 +104,6 @@ BuildDefinition and QueueName are dynamic parameters and use the default
 project value to query their validate set. 
 
 If you do not set the default project by called Set-VSTeamDefaultProject before
-calling Add-Build you will have to type in the names.
+calling Add-VSTeamBuild you will have to type in the names.
 
 ## RELATED LINKS

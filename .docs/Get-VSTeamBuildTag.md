@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Get-BuildTag
+# Get-VSTeamBuildTag
 
 ## SYNOPSIS
-#include "./synopsis/Get-BuildTag.md"
+#include "./synopsis/Get-VSTeamBuildTag.md"
 
 ## SYNTAX
 
 ```
-Get-BuildTag [-Id] <Int32> [-ProjectName] <String>
+Get-VSTeamBuildTag [-Id] <Int32> [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-BuildTag.md"
+#include "./synopsis/Get-VSTeamBuildTag.md"
 
 ## EXAMPLES
 

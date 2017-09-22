@@ -13,14 +13,14 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-AzureRMServiceEndpoint](Add-AzureRMServiceEndpoint.md)
 #include "./synopsis/Add-AzureRMServiceEndpoint.md"
 
-### [Add-Build](Add-Build.md)
-#include "./synopsis/Add-Build.md"
+### [Add-VSTeamBuild](Add-VSTeamBuild.md)
+#include "./synopsis/Add-VSTeamBuild.md"
 
 ### [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 #include "./synopsis/Add-VSTeamBuildDefinition.md"
 
-### [Add-BuildTag](Add-BuildTag.md)
-#include "./synopsis/Add-BuildTag.md"
+### [Add-VSTeamBuildTag](Add-VSTeamBuildTag.md)
+#include "./synopsis/Add-VSTeamBuildTag.md"
 
 ### [Add-GitRepository](Add-GitRepository.md)
 #include "./synopsis/Add-GitRepository.md"
@@ -52,20 +52,20 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamApproval](Get-VSTeamApproval.md)
 #include "./synopsis/Get-VSTeamApproval.md"
 
-### [Get-Build](Get-Build.md)
-#include "./synopsis/Get-Build.md"
+### [Get-VSTeamBuild](Get-VSTeamBuild.md)
+#include "./synopsis/Get-VSTeamBuild.md"
 
-### [Get-BuildArtifact](Get-BuildArtifact.md)
-#include "./synopsis/Get-BuildArtifact.md"
+### [Get-VSTeamBuildArtifact](Get-VSTeamBuildArtifact.md)
+#include "./synopsis/Get-VSTeamBuildArtifact.md"
 
 ### [Get-VSTeamBuildDefinition](Get-VSTeamBuildDefinition.md)
 #include "./synopsis/Get-VSTeamBuildDefinition.md"
 
-### [Get-BuildLog](Get-BuildLog.md)
-#include "./synopsis/Get-BuildLog.md"
+### [Get-VSTeamBuildLog](Get-VSTeamBuildLog.md)
+#include "./synopsis/Get-VSTeamBuildLog.md"
 
-### [Get-BuildTag](Get-BuildTag.md)
-#include "./synopsis/Get-BuildTag.md"
+### [Get-VSTeamBuildTag](Get-VSTeamBuildTag.md)
+#include "./synopsis/Get-VSTeamBuildTag.md"
 
 ### [Get-CloudSubscription](Get-CloudSubscription.md)
 #include "./synopsis/Get-CloudSubscription.md"
@@ -103,14 +103,14 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamOption](Get-VSTeamOption.md)
 #include "./synopsis/Get-VSTeamOption.md"
 
-### [Remove-Build](Remove-Build.md)
-#include "./synopsis/Remove-Build.md"
+### [Remove-VSTeamBuild](Remove-VSTeamBuild.md)
+#include "./synopsis/Remove-VSTeamBuild.md"
 
 ### [Remove-VSTeamBuildDefinition](Remove-VSTeamBuildDefinition.md)
 #include "./synopsis/Remove-VSTeamBuildDefinition.md"
 
-### [Remove-BuildTag](Remove-BuildTag.md)
-#include "./synopsis/Remove-BuildTag.md"
+### [Remove-VSTeamBuildTag](Remove-VSTeamBuildTag.md)
+#include "./synopsis/Remove-VSTeamBuildTag.md"
 
 ### [Remove-GitRepository](Remove-GitRepository.md)
 #include "./synopsis/Remove-GitRepository.md"
@@ -142,8 +142,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Set-ReleaseStatus](Set-ReleaseStatus.md)
 #include "./synopsis/Set-ReleaseStatus.md"
 
-### [Update-Build](Update-Build.md)
-#include "./synopsis/Update-Build.md"
+### [Update-VSTeamBuild](Update-VSTeamBuild.md)
+#include "./synopsis/Update-VSTeamBuild.md"
 
 ### [Update-Project](Update-Project.md)
 #include "./synopsis/Update-Project.md"

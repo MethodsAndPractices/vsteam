@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Update-Build
+# Update-VSTeamBuild
 
 ## SYNOPSIS
-#include "./synopsis/Update-Build.md"
+#include "./synopsis/Update-VSTeamBuild.md"
 
 ## SYNTAX
 
 ```
-Update-Build [-Id] <Int32> [[-KeepForever] <Boolean>] [[-BuildNumber] <String>] [-Force] [-WhatIf] [-Confirm]
+Update-VSTeamBuild [-Id] <Int32> [[-KeepForever] <Boolean>] [[-BuildNumber] <String>] [-Force] [-WhatIf] [-Confirm]
  [-ProjectName] <String>
 ```
 
@@ -19,7 +19,7 @@ Allows you to set the keep forever flag and build number.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Build | Update-Build -KeepForever $false
+PS C:\> Get-VSTeamBuild | Update-VSTeamBuild -KeepForever $false
 ```
 
 Sets the keep forever property of every build to false.

@@ -39,7 +39,7 @@ InModuleScope builds {
          }
 
          It 'should return builds' {
-            Get-Build -projectName project
+            Get-VSTeamBuild -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds?api-version=2.0' }
          }
@@ -63,7 +63,7 @@ InModuleScope builds {
          }
 
          It 'should return top builds' {
-            Get-Build -projectName project -top 1
+            Get-VSTeamBuild -projectName project -top 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds?api-version=2.0&$top=1' }
          }
@@ -85,13 +85,13 @@ InModuleScope builds {
          }
 
          It 'should return top builds' {
-            Get-Build -projectName project -id 1
+            Get-VSTeamBuild -projectName project -id 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/1?api-version=2.0' }
          }
       }
 
-      Context 'Add-Build by name' {
+      Context 'Add-VSTeamBuild by name' {
          Mock Invoke-RestMethod { return @{
                logs=@{}
                queue=@{}
@@ -107,7 +107,7 @@ InModuleScope builds {
          }
 
          It 'should add build' {
-            Add-Build -ProjectName project -BuildDefinitionName 'folder\MyBuildDef'
+            Add-VSTeamBuild -ProjectName project -BuildDefinitionName 'folder\MyBuildDef'
 
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -117,7 +117,7 @@ InModuleScope builds {
          }
       }
 
-      Context 'Add-Build by id' {
+      Context 'Add-VSTeamBuild by id' {
          Mock Invoke-RestMethod { return @{
                logs=@{}
                queue=@{}
@@ -133,7 +133,7 @@ InModuleScope builds {
          }
 
          It 'should add build' {
-            Add-Build -ProjectName project -BuildDefinitionId 2
+            Add-VSTeamBuild -ProjectName project -BuildDefinitionId 2
 
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -143,11 +143,11 @@ InModuleScope builds {
          }
       }
 
-      Context 'Remove-Build' {
+      Context 'Remove-VSTeamBuild' {
          Mock Invoke-RestMethod -UserAgent (_getUserAgent)
 
          It 'should delete build' {
-            Remove-Build -projectName project -id 2 -Force
+            Remove-VSTeamBuild -projectName project -id 2 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
@@ -156,12 +156,12 @@ InModuleScope builds {
          }
       }
 
-      Context 'Add-BuildTag' {
+      Context 'Add-VSTeamBuildTag' {
             Mock Invoke-RestMethod -UserAgent(_getUserAgent)
             $inputTags = "Test1", "Test2", "Test3"
 
             It 'should add tags to Build' {
-                  Add-BuildTag -ProjectName project -id 2 -Tags $inputTags
+                  Add-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
 
                   foreach ($inputTag in $inputTags) {
                         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -172,14 +172,14 @@ InModuleScope builds {
             }
       }
 
-      Context 'Remove-BuildTag' {
+      Context 'Remove-VSTeamBuildTag' {
             Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
                   return @{ value=$null }
             }
             [string[]] $inputTags = "Test1", "Test2", "Test3"
       
             It 'should add tags to Build' {
-                  Remove-BuildTag -ProjectName project -id 2 -Tags $inputTags
+                  Remove-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
 
                   foreach ($inputTag in $inputTags) {
                         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -190,13 +190,13 @@ InModuleScope builds {
             }            
       }
 
-      Context 'Get-BuildTag calls correct Url' {
+      Context 'Get-VSTeamBuildTag calls correct Url' {
             Mock Invoke-RestMethod {
                   return @{ value='Tag1', 'Tag2'}
             }
             
             It 'should get all Build Tags for the Build.' {
-                  Get-BuildTag -projectName project -id 2
+                  Get-VSTeamBuildTag -projectName project -id 2
                   
                   Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                         $Method -eq 'Get' -and
@@ -205,21 +205,21 @@ InModuleScope builds {
             }
       }
 
-      Context 'Get-BuildTag returns correct data' {
+      Context 'Get-VSTeamBuildTag returns correct data' {
             $tags = 'Tag1', 'Tag2'
             Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
                   return @{ value=$tags}
             }
             
             It 'should get all Build Tags for the Build.' {
-                  $returndata = Get-BuildTag -projectName project -id 2
+                  $returndata = Get-VSTeamBuildTag -projectName project -id 2
                   
                   Compare-Object $tags  $returndata |
                         Should Be $null
             }
       }
 
-      Context "Get-BuildArtifact calls correct Url" {
+      Context "Get-VSTeamBuildArtifact calls correct Url" {
             Mock Invoke-RestMethod -UserAgent(_getUserAgent) { return @{ 
                   value = @{
                         id = 150;
@@ -230,7 +230,7 @@ InModuleScope builds {
             }
 
             It 'should return the build artifact data' {
-                  Get-BuildArtifact -projectName project -id 2
+                  Get-VSTeamBuildArtifact -projectName project -id 2
 
                   Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                         $Method -eq 'Get' -and

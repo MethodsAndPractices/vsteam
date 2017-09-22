@@ -1,29 +1,29 @@
 #include "./common/header.md"
 
-# Get-BuildLog
+# Get-VSTeamBuildLog
 
 ## SYNOPSIS
-#include "./synopsis/Get-BuildLog.md"
+#include "./synopsis/Get-VSTeamBuildLog.md"
 
 ## SYNTAX
 
 ```
-Get-BuildLog [-Id <Int32[]>] [-Index <Int32>] [-ProjectName] <String>
+Get-VSTeamBuildLog [-Id <Int32[]>] [-Index <Int32>] [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-BuildLog.md"
+#include "./synopsis/Get-VSTeamBuildLog.md"
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Build -Top 1 | Get-BuildLog
+PS C:\> Get-VSTeamBuild -Top 1 | Get-VSTeamBuildLog
 ```
 
 This command displays the logs of the first build.
 
-The pipeline operator (|) passes the build id to the Get-BuildLog cmdlet, which
+The pipeline operator (|) passes the build id to the Get-VSTeamBuildLog cmdlet, which
 displays the logs.
 
 ## PARAMETERS

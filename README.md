@@ -9,7 +9,7 @@ The cases of every file is very important. This module is to be used on Windows,
 
 # Release Notes
 ## 0.1.34
-Added support to queue a build by ID using the Add-Build function. The Add-Build function also fully qualifies the names of build definitions when you tab complete from command line.
+Added support to queue a build by ID using the Add-VSTeamBuild function. The Add-VSTeamBuild function also fully qualifies the names of build definitions when you tab complete from command line.
 
 I added new fullname extended property to build definition type.
 
@@ -66,7 +66,7 @@ Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/8) from [Michel 
 - Fixed bug in Set-VSTeamDefaultProject on Mac and Linux
 
 ## 0.1.21
-- Added Get-BuildLog that returns the logs of the provided build
+- Added Get-VSTeamBuildLog that returns the logs of the provided build
 
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 

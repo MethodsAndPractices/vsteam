@@ -161,7 +161,7 @@ function Add-Release {
       $dp.Add($ParameterName, $rp)
 
       if($Global:PSDefaultParameterValues["*:projectName"]) {
-         $builds = Get-Build -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $builds = Get-VSTeamBuild -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $builds.name
       } else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildName'
@@ -355,7 +355,7 @@ function Add-ReleaseEnvironment {
       $dp.Add($ParameterName, $rp)
 
       if($Global:PSDefaultParameterValues["*:projectName"]) {
-         $builds = Get-Build -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $builds = Get-VSTeamBuild -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $builds.name
       } else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildName'

@@ -31,7 +31,7 @@ You must call Add-VSTeamAccount before calling this function.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Build | ft id,name
+PS C:\> Get-VSTeamBuild | ft id,name
 
 id name
 -- ----

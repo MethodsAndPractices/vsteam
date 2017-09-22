@@ -81,6 +81,6 @@ Accept wildcard characters: False
 
 ## NOTES
 Setting a default project also enables tab completion of dynamic parameters 
-when you call Add-Build.
+when you call Add-VSTeamBuild.
 
 ## RELATED LINKS

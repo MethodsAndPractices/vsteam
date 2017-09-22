@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Remove-BuildTag
+# Remove-VSTeamBuildTag
 
 ## SYNOPSIS
-#include "./synopsis/Remove-BuildTag.md"
+#include "./synopsis/Remove-VSTeamBuildTag.md"
 
 ## SYNTAX
 
 ```
-Remove-BuildTag [-Tags] <String[]> -Id <Int32[]> [-Force] [-WhatIf] [-Confirm] [-ProjectName] <String>
+Remove-VSTeamBuildTag [-Tags] <String[]> -Id <Int32[]> [-Force] [-WhatIf] [-Confirm] [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Remove-BuildTag.md"
+#include "./synopsis/Remove-VSTeamBuildTag.md"
 
 ## EXAMPLES
 

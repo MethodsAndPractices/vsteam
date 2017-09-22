@@ -199,5 +199,6 @@ function Remove-VSTeamBuildDefinition {
 
 Set-Alias Get-BuildDefinition Get-VSTeamBuildDefinition
 Set-Alias Add-BuildDefinition Add-VSTeamBuildDefinition
+Set-Alias Remove-BuildDefinition Remove-VSTeamBuildDefinition
 
 Export-ModuleMember -Alias * -Function Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition, Remove-VSTeamBuildDefinition

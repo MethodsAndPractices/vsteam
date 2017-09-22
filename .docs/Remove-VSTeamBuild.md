@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Remove-Build
+# Remove-VSTeamBuild
 
 ## SYNOPSIS
-#include "./synopsis/Remove-Build.md"
+#include "./synopsis/Remove-VSTeamBuild.md"
 
 ## SYNTAX
 
 ```
-Remove-Build [-ProjectName] <String> [-Id] <Int32[]> [-Force]
+Remove-VSTeamBuild [-ProjectName] <String> [-Id] <Int32[]> [-Force]
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Remove-Build.md"
+#include "./synopsis/Remove-VSTeamBuild.md"
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Build | Remove-Build -Force
+PS C:\> Get-VSTeamBuild | Remove-VSTeamBuild -Force
 ```
 
 This command will delete all builds that are not marked retain indefinitely.

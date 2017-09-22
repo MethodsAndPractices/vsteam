@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Add-BuildTag
+# Add-VSTeamBuildTag
 
 ## SYNOPSIS
-#include "./synopsis/Add-BuildTag.md"
+#include "./synopsis/Add-VSTeamBuildTag.md"
 
 ## SYNTAX
 
 ```
-Add-BuildTag [-Tags] <String[]> -Id <Int32[]> [-Force] [-WhatIf] [-Confirm] [-ProjectName] <String>
+Add-VSTeamBuildTag [-Tags] <String[]> -Id <Int32[]> [-Force] [-WhatIf] [-Confirm] [-ProjectName] <String>
 ```
 
 ## DESCRIPTION

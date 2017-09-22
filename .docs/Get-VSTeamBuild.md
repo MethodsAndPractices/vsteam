@@ -1,26 +1,26 @@
 #include "./common/header.md"
 
-# Get-Build
+# Get-VSTeamBuild
 
 ## SYNOPSIS
-#include "./synopsis/Get-Build.md"
+#include "./synopsis/Get-VSTeamBuild.md"
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-Build [-ProjectName] <String> [-Top <Int32>] [-ResultFilter <String>] [-ReasonFilter <String>]
+Get-VSTeamBuild [-ProjectName] <String> [-Top <Int32>] [-ResultFilter <String>] [-ReasonFilter <String>]
  [-StatusFilter <String>] [-Queues <Int32[]>] [-Definitions <Int32[]>] [-BuildNumber <String>] [-Type <String>]
  [-MaxBuildsPerDefinition <Int32>] [-Properties <String[]>]
 ```
 
 ### ByID
 ```
-Get-Build [-ProjectName] <String> [-Id <Int32[]>]
+Get-VSTeamBuild [-ProjectName] <String> [-Id <Int32[]>]
 ```
 
 ## DESCRIPTION
-The Get-Build function gets the builds for a team project.
+The Get-VSTeamBuild function gets the builds for a team project.
 
 With just a project name, this function gets all of the builds for that team
 project.
@@ -31,7 +31,7 @@ You can also specify a particular build by ID.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Build -ProjectName demo | Format-List *
+PS C:\> Get-VSTeamBuild -ProjectName demo | Format-List *
 ```
 
 This command gets a list of all builds in the demo project.
@@ -41,21 +41,21 @@ displays all available properties (*) of the build objects.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Get-Build -ProjectName demo -top 5 -resultFilter failed
+PS C:\> Get-VSTeamBuild -ProjectName demo -top 5 -resultFilter failed
 ```
 
 This command gets a list of 5 failed builds in the demo project.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-PS C:\> 1203,1204 | Get-Build -ProjectName demo
+PS C:\> 1203,1204 | Get-VSTeamBuild -ProjectName demo
 ```
 
 This command gets builds with IDs 1203 and 1204 by using the pipeline.
 
 ### -------------------------- EXAMPLE 4 --------------------------
 ```
-PS C:\> Get-Build -ProjectName demo -ID 1203,1204
+PS C:\> Get-VSTeamBuild -ProjectName demo -ID 1203,1204
 ```
 
 This command gets builds with IDs 1203 and 1204 by using the ID parameter.
@@ -247,5 +247,5 @@ to pass the ProjectName with each call.
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
-[Add-Build](Add-Build.md)
-[Remove-Build](Remove-Build.md)
+[Add-VSTeamBuild](Add-VSTeamBuild.md)
+[Remove-VSTeamBuild](Remove-VSTeamBuild.md)

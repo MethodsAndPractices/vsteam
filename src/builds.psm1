@@ -113,7 +113,7 @@ function _applyArtifactTypes {
    }
 }
 
-function Get-Build {
+function Get-VSTeamBuild {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param (
       [Parameter(ParameterSetName = 'List')]
@@ -215,7 +215,7 @@ function Get-Build {
    }
 }
 
-function Get-BuildLog {
+function Get-VSTeamBuildLog {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param (
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -302,7 +302,7 @@ function Get-BuildLog {
    }
 }
 
-function Add-Build {
+function Add-VSTeamBuild {
    [CmdletBinding(DefaultParameterSetName = 'ByName')]
    param(
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
@@ -390,7 +390,7 @@ function Add-Build {
    }
 }
 
-function Remove-Build {
+function Remove-VSTeamBuild {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -432,7 +432,7 @@ function Remove-Build {
    }
 }
 
-function Update-Build {
+function Update-VSTeamBuild {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -455,7 +455,7 @@ function Update-Build {
    Process {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-Build")) {
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-VSTeamBuild")) {
 
          $updateUrl = _buildURL -ProjectName $ProjectName -Id $Id
 
@@ -488,7 +488,7 @@ function Update-Build {
    }
 }
 
-function Get-BuildTag {
+function Get-VSTeamBuildTag {
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
@@ -516,7 +516,7 @@ function Get-BuildTag {
    }
 }
 
-function Add-BuildTag {
+function Add-VSTeamBuildTag {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
@@ -537,7 +537,7 @@ function Add-BuildTag {
       $ProjectName = $PSBoundParameters["ProjectName"]
         
       foreach ($item in $id) {
-         if ($Force -or $pscmdlet.ShouldProcess($item, "Add-BuildTag")) {
+         if ($Force -or $pscmdlet.ShouldProcess($item, "Add-VSTeamBuildTag")) {
                 
             $rootUrl = _buildChildUrl -projectName $ProjectName -id $item -child "tags"
 
@@ -558,7 +558,7 @@ function Add-BuildTag {
    }
 }
 
-function Remove-BuildTag {
+function Remove-VSTeamBuildTag {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
@@ -579,7 +579,7 @@ function Remove-BuildTag {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       foreach ($item in $id) {
-         if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-BuildTag")) {
+         if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-VSTeamBuildTag")) {
 
             $rootUrl = _buildChildUrl -projectName $ProjectName -id $item -child "tags"
 
@@ -599,7 +599,7 @@ function Remove-BuildTag {
    }
 }
 
-function Get-BuildArtifact {
+function Get-VSTeamBuildArtifact {
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
@@ -631,6 +631,16 @@ function Get-BuildArtifact {
    }
 }
 
-Export-ModuleMember -Alias * -Function Add-Build, Get-Build, Remove-Build, Get-BuildLog, 
-Add-BuildTag, Get-BuildTag, Remove-BuildTag, 
-Get-BuildArtifact, Update-Build
+Set-Alias Get-Build Get-VSTeamBuild
+Set-Alias Get-BuildLog Get-VSTeamBuildLog
+Set-Alias Get-BuildTag Get-VSTeamBuildTag
+Set-Alias Get-BuildArtifact Get-VSTeamBuildArtifact
+Set-Alias Add-Build Add-VSTeamBuild
+Set-Alias Add-BuildTag Add-VSTeamBuildTag
+Set-Alias Remove-Build Remove-VSTeamBuild
+Set-Alias Remove-BuildTag Remove-VSTeamBuildTag
+Set-Alias Update-Build Update-VSTeamBuild
+
+Export-ModuleMember -Alias * -Function Add-VSTeamBuild, Get-VSTeamBuild, Remove-VSTeamBuild, Get-VSTeamBuildLog, 
+Add-VSTeamBuildTag, Get-VSTeamBuildTag, Remove-VSTeamBuildTag, 
+Get-VSTeamBuildArtifact, Update-VSTeamBuild

@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Get-BuildArtifact
+# Get-VSTeamBuildArtifact
 
 ## SYNOPSIS
-#include "./synopsis/Get-BuildArtifact.md"
+#include "./synopsis/Get-VSTeamBuildArtifact.md"
 
 ## SYNTAX
 
 ```
-Get-BuildArtifact [-Id] <Int32> [-ProjectName] <String>
+Get-VSTeamBuildArtifact [-Id] <Int32> [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-BuildArtifact.md"
+#include "./synopsis/Get-VSTeamBuildArtifact.md"
 
 ## EXAMPLES
 
