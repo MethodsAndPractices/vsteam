@@ -1,44 +1,44 @@
 #include "./common/header.md"
 
-# Get-GitRepository
+# Get-VSTeamGitRepository
 
 ## SYNOPSIS
-#include "./synopsis/Get-GitRepository.md"
+#include "./synopsis/Get-VSTeamGitRepository.md"
 
 ## SYNTAX
 
 ### ByID (Default)
 ```
-Get-GitRepository [-ProjectName <String>] [-Id <Guid[]>]
+Get-VSTeamGitRepository [-ProjectName <String>] [-Id <Guid[]>]
 ```
 
 ### ByName
 ```
-Get-GitRepository [-ProjectName <String>] [-Name <String[]>]
+Get-VSTeamGitRepository [-ProjectName <String>] [-Name <String[]>]
 ```
 
 ## DESCRIPTION
-Get-GitRepository gets all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.
+Get-VSTeamGitRepository gets all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-GitRepository
+PS C:\> Get-VSTeamGitRepository
 ```
 
 This command returns all the Git repositories for your TFS or Team Services account.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Get-GitRepository -ProjectName Demo
+PS C:\> Get-VSTeamGitRepository -ProjectName Demo
 ```
 
 This command returns all the Git repositories for the Demo team project.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-PS C:\> git clone (Get-GitRepository | select -ExpandProperty remoteurl)
+PS C:\> git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteurl)
 ```
 
 This command gets the remote URL and passes it to git clone command.
@@ -52,7 +52,7 @@ Specifies one or more repositories by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a repository, type Get-GitRepository.
+To find the ID of a repository, type Get-VSTeamGitRepository.
 
 ```yaml
 Type: Guid[]
@@ -71,7 +71,7 @@ Specifies one or more repositories by name.
 
 To specify multiple names, use commas to separate the names.
 
-To find the name of a repository, type Get-GitRepository.
+To find the name of a repository, type Get-VSTeamGitRepository.
 
 ```yaml
 Type: String[]

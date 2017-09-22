@@ -19,19 +19,19 @@ Describe 'Project Items' {
    }
 
    Context 'Git Full exercise' {
-      It 'Get-GitRepository Should return repository' {
-         Get-GitRepository -ProjectName 'TeamModuleIntegration' | Select-Object -ExpandProperty Name | Should Be 'TeamModuleIntegration'
+      It 'Get-VSTeamGitRepository Should return repository' {
+         Get-VSTeamGitRepository -ProjectName 'TeamModuleIntegration' | Select-Object -ExpandProperty Name | Should Be 'TeamModuleIntegration'
       }
 
-      It 'Add-GitRepository Should create repository' {
-         Add-GitRepository -ProjectName 'TeamModuleIntegration' -Name 'testing'
-         (Get-GitRepository -ProjectName 'TeamModuleIntegration').Count | Should Be 2
-         Get-GitRepository -ProjectName 'TeamModuleIntegration' -Name 'testing' | Select-Object -ExpandProperty Name | Should Be 'testing'
+      It 'Add-VSTeamGitRepository Should create repository' {
+         Add-VSTeamGitRepository -ProjectName 'TeamModuleIntegration' -Name 'testing'
+         (Get-VSTeamGitRepository -ProjectName 'TeamModuleIntegration').Count | Should Be 2
+         Get-VSTeamGitRepository -ProjectName 'TeamModuleIntegration' -Name 'testing' | Select-Object -ExpandProperty Name | Should Be 'testing'
       }
 
-      It 'Remove-GitRepository Should delete repository' {
-         Get-GitRepository -ProjectName 'TeamModuleIntegration' -Name 'testing' | Select-Object -ExpandProperty Id | Remove-GitRepository -Force
-         Get-GitRepository -ProjectName 'TeamModuleIntegration' | Where-Object { $_.Name -eq 'testing' } | Should Be $null
+      It 'Remove-VSTeamGitRepository Should delete repository' {
+         Get-VSTeamGitRepository -ProjectName 'TeamModuleIntegration' -Name 'testing' | Select-Object -ExpandProperty Id | Remove-VSTeamGitRepository -Force
+         Get-VSTeamGitRepository -ProjectName 'TeamModuleIntegration' | Where-Object { $_.Name -eq 'testing' } | Should Be $null
       }
    }
 

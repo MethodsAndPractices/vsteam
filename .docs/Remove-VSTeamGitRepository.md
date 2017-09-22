@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Remove-GitRepository
+# Remove-VSTeamGitRepository
 
 ## SYNOPSIS
-#include "./synopsis/Remove-GitRepository.md"
+#include "./synopsis/Remove-VSTeamGitRepository.md"
 
 ## SYNTAX
 
 ```
-Remove-GitRepository [-ProjectName <String>] [-Id <Guid[]>] [-Force]
+Remove-VSTeamGitRepository [-ProjectName <String>] [-Id <Guid[]>] [-Force]
 ```
 
 ## DESCRIPTION
-Remove-GitRepository removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.
+Remove-VSTeamGitRepository removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Remove-GitRepository -Id 687c53f8-1a82-4e89-9a86-13d51bc4a8d5
+PS C:\> Remove-VSTeamGitRepository -Id 687c53f8-1a82-4e89-9a86-13d51bc4a8d5
 ```
 
 This command removes all the Git repositories for your TFS or Team Services account.

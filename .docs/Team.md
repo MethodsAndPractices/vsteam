@@ -22,8 +22,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-VSTeamBuildTag](Add-VSTeamBuildTag.md)
 #include "./synopsis/Add-VSTeamBuildTag.md"
 
-### [Add-GitRepository](Add-GitRepository.md)
-#include "./synopsis/Add-GitRepository.md"
+### [Add-VSTeamGitRepository](Add-VSTeamGitRepository.md)
+#include "./synopsis/Add-VSTeamGitRepository.md"
 
 ### [Add-Project](Add-Project.md)
 #include "./synopsis/Add-Project.md"
@@ -70,8 +70,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamCloudSubscription](Get-VSTeamCloudSubscription.md)
 #include "./synopsis/Get-VSTeamCloudSubscription.md"
 
-### [Get-GitRepository](Get-GitRepository.md)
-#include "./synopsis/Get-GitRepository.md"
+### [Get-VSTeamGitRepository](Get-VSTeamGitRepository.md)
+#include "./synopsis/Get-VSTeamGitRepository.md"
 
 ### [Get-Pool](Get-Pool.md)
 #include "./synopsis/Get-Pool.md"
@@ -112,8 +112,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-VSTeamBuildTag](Remove-VSTeamBuildTag.md)
 #include "./synopsis/Remove-VSTeamBuildTag.md"
 
-### [Remove-GitRepository](Remove-GitRepository.md)
-#include "./synopsis/Remove-GitRepository.md"
+### [Remove-VSTeamGitRepository](Remove-VSTeamGitRepository.md)
+#include "./synopsis/Remove-VSTeamGitRepository.md"
 
 ### [Remove-Project](Remove-Project.md)
 #include "./synopsis/Remove-Project.md"

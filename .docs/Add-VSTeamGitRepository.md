@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Add-GitRepository
+# Add-VSTeamGitRepository
 
 ## SYNOPSIS
-#include "./synopsis/Add-GitRepository.md"
+#include "./synopsis/Add-VSTeamGitRepository.md"
 
 ## SYNTAX
 
 ```
-Add-GitRepository [-ProjectName <String>] [-Name <System.String>]
+Add-VSTeamGitRepository [-ProjectName <String>] [-Name <System.String>]
 ```
 
 ## DESCRIPTION
-Add-GitRepository adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
+Add-VSTeamGitRepository adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Add-GitRepository -ProjectName Demo -Name Temp
+PS C:\> Add-VSTeamGitRepository -ProjectName Demo -Name Temp
 ```
 
 This command adds a new repository named Temp to the Demo project.

@@ -42,7 +42,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.GitRepository')
 }
 
-function Remove-GitRepository {
+function Remove-VSTeamGitRepository {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -84,7 +84,7 @@ function Remove-GitRepository {
    }
 }
 
-function Add-GitRepository {
+function Add-VSTeamGitRepository {
    [CmdletBinding()]
    param(
       [parameter(Mandatory = $true)]
@@ -130,7 +130,7 @@ function Add-GitRepository {
    }
 }
 
-function Get-GitRepository {
+function Get-VSTeamGitRepository {
    [CmdletBinding(DefaultParameterSetName='ByID')]
    param (
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true)]
@@ -207,4 +207,8 @@ function Get-GitRepository {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-GitRepository, Add-GitRepository, Remove-GitRepository
+Set-Alias Get-GitRepository Get-VSTeamGitRepository
+Set-Alias Add-GitRepository Add-VSTeamGitRepository
+Set-Alias Remove-GitRepository Remove-VSTeamGitRepository
+
+Export-ModuleMember -Alias * -Function Get-VSTeamGitRepository, Add-VSTeamGitRepository, Remove-VSTeamGitRepository
