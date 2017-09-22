@@ -160,7 +160,7 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags       = @('VSTS', 'TFS', 'DevOps', 'Visual Studio', 'Team Services')
+         Tags       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices')
 
          # A URL to the license for this module.
          # LicenseUri = ''
