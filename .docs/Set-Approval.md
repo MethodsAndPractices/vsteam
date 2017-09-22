@@ -19,7 +19,7 @@ Set-Approval sets the status of approval to Approved, Rejected, Pending, or ReAs
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Approval | Set-Approval
+PS C:\> Get-VSTeamApproval | Set-Approval
 ```
 
 This command sets all pending approvals to approved.

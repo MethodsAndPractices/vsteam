@@ -12,7 +12,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.Approval')
 }
 
-function Get-Approval {
+function Get-VSTeamApproval {
    [CmdletBinding()]
    param(
       [Parameter()]
@@ -29,7 +29,7 @@ function Get-Approval {
    }
 
    Process {
-      Write-Debug 'Get-Approval Process'
+      Write-Debug 'Get-VSTeamApproval Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -116,4 +116,6 @@ function Set-Approval {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Approval, Set-Approval
+Set-Alias Get-Approval Get-VSTeamApproval
+
+Export-ModuleMember -Alias * -Function Get-VSTeamApproval, Set-Approval

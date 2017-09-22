@@ -2123,7 +2123,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-Approval</command:name>
+      <command:name>Get-VSTeamApproval</command:name>
       <command:verb>Get</command:verb>
       <command:noun>Approval</command:noun>
       <maml:description>
@@ -2131,7 +2131,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Get-Approval function gets the approvals for all releases for a team project.</maml:para>
+      <maml:para>The Get-VSTeamApproval function gets the approvals for all releases for a team project.</maml:para>
       <maml:para>With just a project name, this function gets all of the pending approvals for that team project.</maml:para>
       <maml:para>The Team.Approval type has three custom table formats:</maml:para>
       <maml:para>Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions</maml:para>
@@ -2140,7 +2140,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-Approval</maml:name>
+        <maml:name>Get-VSTeamApproval</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>StatusFilter</maml:name>
           <maml:Description>
@@ -2279,21 +2279,21 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Approval -ProjectName Demo</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all pending approvals.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Approval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all approved approvals using a custom table format.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Approval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all approvals rejected by Administrator using a custom table format.</maml:para>
         </dev:remarks>
@@ -6661,7 +6661,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-Approval | Set-Approval</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval | Set-Approval</dev:code>
         <dev:remarks>
           <maml:para>This command sets all pending approvals to approved.</maml:para>
         </dev:remarks>

@@ -99,7 +99,7 @@
       'Add-VSTeamAccount',
       'Add-Team',
       'Clear-VSTeamDefaultProject',
-      'Get-Approval',
+      'Get-VSTeamApproval',
       'Get-Build',
       'Get-BuildDefinition',
       'Get-CloudSubscription',

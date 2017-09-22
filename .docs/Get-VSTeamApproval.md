@@ -1,19 +1,19 @@
 #include "./common/header.md"
 
-# Get-Approval
+# Get-VSTeamApproval
 
 ## SYNOPSIS
-#include "./synopsis/Get-Approval.md"
+#include "./synopsis/Get-VSTeamApproval.md"
 
 ## SYNTAX
 
 ```
-Get-Approval [-ProjectName] <String> [[-StatusFilter] <String>] [[-ReleaseIdFilter] <Int32[]>]
+Get-VSTeamApproval [-ProjectName] <String> [[-StatusFilter] <String>] [[-ReleaseIdFilter] <Int32[]>]
  [[-AssignedToFilter] <String>]
 ```
 
 ## DESCRIPTION
-The Get-Approval function gets the approvals for all releases for a team
+The Get-VSTeamApproval function gets the approvals for all releases for a team
 project.
 
 With just a project name, this function gets all of the pending approvals
@@ -31,21 +31,21 @@ Rejected: Release Name, Environment, Approval Type, Approver Name, Release Defin
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Approval -ProjectName Demo
+PS C:\> Get-VSTeamApproval -ProjectName Demo
 ```
 
 This command gets a list of all pending approvals.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Get-Approval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
+PS C:\> Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
 ```
 
 This command gets a list of all approved approvals using a custom table format.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-PS C:\> Get-Approval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
+PS C:\> Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
 ```
 
 This command gets a list of all approvals rejected by Administrator using a custom table format.

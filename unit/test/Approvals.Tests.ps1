@@ -10,7 +10,7 @@ InModuleScope Approvals {
    Describe 'Approvals' {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
-      Context 'Get-Approval with no parameters' {
+      Context 'Get-VSTeamApproval with no parameters' {
          Mock Invoke-RestMethod { return @{
                count=1
                value=@(
@@ -26,7 +26,7 @@ InModuleScope Approvals {
             }}
 
          It 'should return approvals' {
-            Get-Approval -projectName project
+            Get-VSTeamApproval -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.vsrm.visualstudio.com/project/_apis/release/approvals?api-version=3.0-preview.1' }
          }

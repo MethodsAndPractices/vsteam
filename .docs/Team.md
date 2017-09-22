@@ -49,8 +49,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Clear-VSTeamDefaultProject](Clear-VSTeamDefaultProject.md)
 #include "./synopsis/Clear-VSTeamDefaultProject.md"
 
-### [Get-Approval](Get-Approval.md)
-#include "./synopsis/Get-Approval.md"
+### [Get-VSTeamApproval](Get-VSTeamApproval.md)
+#include "./synopsis/Get-VSTeamApproval.md"
 
 ### [Get-Build](Get-Build.md)
 #include "./synopsis/Get-Build.md"
