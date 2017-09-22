@@ -315,7 +315,7 @@ function Add-VSTeamBuild {
       # validateset so skip that check. However, we still need to give
       # the option to pass a QueueName to use.
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $queues = Get-Queue -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $queues = Get-VSTeamQueue -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $queues.name
       }
       else {
@@ -366,7 +366,7 @@ function Add-VSTeamBuild {
 
       $queueSection = $null
       if ($QueueName) {
-         $queueId = Get-Queue -ProjectName "$ProjectName" -queueName "$QueueName" |
+         $queueId = Get-VSTeamQueue -ProjectName "$ProjectName" -queueName "$QueueName" |
             Select-Object -ExpandProperty Id
 
          $queueSection = ', "queue": {"id": ' + $queueId + '}'

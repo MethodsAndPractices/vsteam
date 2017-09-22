@@ -79,8 +79,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamProject](Get-VSTeamProject.md)
 #include "./synopsis/Get-VSTeamProject.md"
 
-### [Get-Queue](Get-Queue.md)
-#include "./synopsis/Get-Queue.md"
+### [Get-VSTeamQueue](Get-VSTeamQueue.md)
+#include "./synopsis/Get-VSTeamQueue.md"
 
 ### [Get-Release](Get-Release.md)
 #include "./synopsis/Get-Release.md"

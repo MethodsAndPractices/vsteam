@@ -105,7 +105,7 @@
       'Get-VSTeamCloudSubscription',
       'Get-VSTeamPool',
       'Get-VSTeamProject',
-      'Get-Queue',
+      'Get-VSTeamQueue',
       'Get-Release',
       'Get-ReleaseDefinition',
       'Get-ServiceEndpoint',

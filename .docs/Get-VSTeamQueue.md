@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Get-Queue
+# Get-VSTeamQueue
 
 ## SYNOPSIS
-#include "./synopsis/Get-Queue.md"
+#include "./synopsis/Get-VSTeamQueue.md"
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-Queue [-ProjectName] <String> [-QueueName <String>] [-ActionFilter <String>]
+Get-VSTeamQueue [-ProjectName] <String> [-QueueName <String>] [-ActionFilter <String>]
 ```
 
 ### ByID
 ```
-Get-Queue [-ProjectName] <String> [-Id <String>]
+Get-VSTeamQueue [-ProjectName] <String> [-Id <String>]
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-Queue.md"
+#include "./synopsis/Get-VSTeamQueue.md"
 
 ## EXAMPLES
 

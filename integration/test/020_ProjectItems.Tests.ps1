@@ -42,8 +42,8 @@ Describe 'Project Items' {
    }
 
    Context 'Queue Full exercise' {
-      It 'Get-Queue Should return agent Queues' {
-         (Get-Queue -ProjectName 'TeamModuleIntegration').Count | Should Be 4
+      It 'Get-VSTeamQueue Should return agent Queues' {
+         (Get-VSTeamQueue -ProjectName 'TeamModuleIntegration').Count | Should Be 4
       }
    }
 

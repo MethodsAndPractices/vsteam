@@ -9,7 +9,7 @@ InModuleScope queues {
    Describe 'Queues' {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
-      Context 'Get-Queue with no parameters' {
+      Context 'Get-VSTeamQueue with no parameters' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   pool=@{}
@@ -17,7 +17,7 @@ InModuleScope queues {
             }}
 
          it 'Should return all the queues' {
-            Get-Queue -ProjectName project
+            Get-VSTeamQueue -ProjectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=3.0-preview.1'
@@ -25,7 +25,7 @@ InModuleScope queues {
          }
       }
 
-      Context 'Get-Queue with queueName parameter' {
+      Context 'Get-VSTeamQueue with queueName parameter' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   pool=@{}
@@ -33,7 +33,7 @@ InModuleScope queues {
             }}
 
          it 'Should return all the queues' {
-            Get-Queue -projectName project -queueName 'Hosted'
+            Get-VSTeamQueue -projectName project -queueName 'Hosted'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=3.0-preview.1&queueName=Hosted'
@@ -41,7 +41,7 @@ InModuleScope queues {
          }
       }
 
-      Context 'Get-Queue with actionFilter parameter' {
+      Context 'Get-VSTeamQueue with actionFilter parameter' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   pool=@{}
@@ -49,7 +49,7 @@ InModuleScope queues {
             }}
 
          it 'Should return all the queues' {
-            Get-Queue -projectName project -actionFilter 'None'
+            Get-VSTeamQueue -projectName project -actionFilter 'None'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=3.0-preview.1&actionFilter=None'
@@ -57,7 +57,7 @@ InModuleScope queues {
          }
       }
 
-      Context 'Get-Queue with actionFilter & queueName parameter' {
+      Context 'Get-VSTeamQueue with actionFilter & queueName parameter' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   pool=@{}
@@ -65,7 +65,7 @@ InModuleScope queues {
             }}
 
          it 'Should return all the queues' {
-            Get-Queue -projectName project -actionFilter 'None' -queueName 'Hosted'
+            Get-VSTeamQueue -projectName project -actionFilter 'None' -queueName 'Hosted'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=3.0-preview.1&queueName=Hosted&actionFilter=None'
@@ -73,13 +73,13 @@ InModuleScope queues {
          }
       }
 
-      Context 'Get-Queue' {
+      Context 'Get-VSTeamQueue' {
          Mock Invoke-RestMethod { return @{
                pool=@{}
             }}
 
          It 'should return requested queue' {
-            Get-Queue -projectName project -queueId 3
+            Get-VSTeamQueue -projectName project -queueId 3
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues/3?api-version=3.0-preview.1'
