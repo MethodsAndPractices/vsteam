@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Get-Pool
+# Get-VSTeamPool
 
 ## SYNOPSIS
-#include "./synopsis/Get-Pool.md"
+#include "./synopsis/Get-VSTeamPool.md"
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-Pool [-PoolName <String>] [-ActionFilter <String>]
+Get-VSTeamPool [-PoolName <String>] [-ActionFilter <String>]
 ```
 
 ### ByID
 ```
-Get-Pool -Id <String>
+Get-VSTeamPool -Id <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-Pool.md"
+#include "./synopsis/Get-VSTeamPool.md"
 
 ## EXAMPLES
 

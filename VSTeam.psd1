@@ -103,7 +103,7 @@
       'Get-VSTeamBuild',
       'Get-VSTeamBuildDefinition',
       'Get-VSTeamCloudSubscription',
-      'Get-Pool',
+      'Get-VSTeamPool',
       'Get-Project',
       'Get-Queue',
       'Get-Release',

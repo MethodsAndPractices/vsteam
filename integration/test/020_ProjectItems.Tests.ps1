@@ -36,8 +36,8 @@ Describe 'Project Items' {
    }
 
    Context 'Pool Full exercise' {
-      It 'Get-Pool Should return agent pools' {
-         (Get-Pool).Count | Should Be 4
+      It 'Get-VSTeamPool Should return agent pools' {
+         (Get-VSTeamPool).Count | Should Be 4
       }
    }
 

@@ -44,7 +44,7 @@ function _applyTypes {
    }
 }
 
-function Get-Pool {
+function Get-VSTeamPool {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'List')]
@@ -99,4 +99,6 @@ function Get-Pool {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Pool
+Set-Alias Get-Pool Get-VSTeamPool
+
+Export-ModuleMember -Alias * -Function Get-VSTeamPool

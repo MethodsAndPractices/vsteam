@@ -73,8 +73,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamGitRepository](Get-VSTeamGitRepository.md)
 #include "./synopsis/Get-VSTeamGitRepository.md"
 
-### [Get-Pool](Get-Pool.md)
-#include "./synopsis/Get-Pool.md"
+### [Get-VSTeamPool](Get-VSTeamPool.md)
+#include "./synopsis/Get-VSTeamPool.md"
 
 ### [Get-Project](Get-Project.md)
 #include "./synopsis/Get-Project.md"
