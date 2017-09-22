@@ -1,0 +1,1 @@
+Updates the project name, description or both.

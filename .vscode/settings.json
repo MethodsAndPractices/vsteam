@@ -1,7 +1,7 @@
 {
-  "files.exclude": {
-    "**/.vscode": true,
-    "**/docs": true,
-    "**/package-lock.json": true
-  }
+"files.exclude": {
+   "**/.vscode": true,
+   "**/docs": true,
+   "**/package-lock.json": true
+}
 }

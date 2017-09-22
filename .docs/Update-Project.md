@@ -18,7 +18,7 @@ Update-Project [[-NewName] <String>] [[-NewDescription] <String>] [-Id] <String>
 ```
 
 ## DESCRIPTION
-You can pass just new name, new description or both.
+#include "./synopsis/Update-Project.md"
 
 ## EXAMPLES
 
