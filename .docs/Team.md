@@ -28,14 +28,14 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-VSTeamProject](Add-VSTeamProject.md)
 #include "./synopsis/Add-VSTeamProject.md"
 
-### [Add-Release](Add-Release.md)
-#include "./synopsis/Add-Release.md"
+### [Add-VSTeamRelease](Add-VSTeamRelease.md)
+#include "./synopsis/Add-VSTeamRelease.md"
 
 ### [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
 #include "./synopsis/Add-VSTeamReleaseDefinition.md"
 
-### [Add-ReleaseEnvironment](Add-ReleaseEnvironment.md)
-#include "./synopsis/Add-ReleaseEnvironment.md"
+### [Add-VSTeamReleaseEnvironment](Add-VSTeamReleaseEnvironment.md)
+#include "./synopsis/Add-VSTeamReleaseEnvironment.md"
 
 ### [Add-SonarQubeEndpoint](Add-SonarQubeEndpoint.md)
 #include "./synopsis/Add-SonarQubeEndpoint.md"
@@ -82,8 +82,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamQueue](Get-VSTeamQueue.md)
 #include "./synopsis/Get-VSTeamQueue.md"
 
-### [Get-Release](Get-Release.md)
-#include "./synopsis/Get-Release.md"
+### [Get-VSTeamRelease](Get-VSTeamRelease.md)
+#include "./synopsis/Get-VSTeamRelease.md"
 
 ### [Get-VSTeamReleaseDefinition](Get-VSTeamReleaseDefinition.md)
 #include "./synopsis/Get-VSTeamReleaseDefinition.md"
@@ -118,8 +118,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-VSTeamProject](Remove-VSTeamProject.md)
 #include "./synopsis/Remove-VSTeamProject.md"
 
-### [Remove-Release](Remove-Release.md)
-#include "./synopsis/Remove-Release.md"
+### [Remove-VSTeamRelease](Remove-VSTeamRelease.md)
+#include "./synopsis/Remove-VSTeamRelease.md"
 
 ### [Remove-VSTeamReleaseDefinition](Remove-VSTeamReleaseDefinition.md)
 #include "./synopsis/Remove-VSTeamReleaseDefinition.md"
@@ -139,8 +139,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 #include "./synopsis/Set-VSTeamDefaultProject.md"
 
-### [Set-ReleaseStatus](Set-ReleaseStatus.md)
-#include "./synopsis/Set-ReleaseStatus.md"
+### [Set-VSTeamReleaseStatus](Set-VSTeamReleaseStatus.md)
+#include "./synopsis/Set-VSTeamReleaseStatus.md"
 
 ### [Update-VSTeamBuild](Update-VSTeamBuild.md)
 #include "./synopsis/Update-VSTeamBuild.md"

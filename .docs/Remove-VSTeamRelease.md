@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Remove-Release
+# Remove-VSTeamRelease
 
 ## SYNOPSIS
-#include "./synopsis/Remove-Release.md"
+#include "./synopsis/Remove-VSTeamRelease.md"
 
 ## SYNTAX
 
 ```
-Remove-Release [-ProjectName] <String> [-Id] <Int32[]> [-Force]
+Remove-VSTeamRelease [-ProjectName] <String> [-Id] <Int32[]> [-Force]
 ```
 
 ## DESCRIPTION
-The Remove-Release function removes the releases for a
+The Remove-VSTeamRelease function removes the releases for a
 team project.
 
 The project name is a Dynamic Parameter which may not be
@@ -22,12 +22,12 @@ displayed in the syntax above but is mandatory.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Release -ProjectName demo | Remove-Release
+PS C:\> Get-VSTeamRelease -ProjectName demo | Remove-VSTeamRelease
 ```
 
 This command gets a list of all release s in the demo project.
 
-The pipeline operator (|) passes the data to the Remove-Release
+The pipeline operator (|) passes the data to the Remove-VSTeamRelease
 function, which removes each release defintion object.
 
 ## PARAMETERS
@@ -37,7 +37,7 @@ Specifies one or more releases by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a release defintion, type Get-Release.
+To find the ID of a release defintion, type Get-VSTeamRelease.
 
 ```yaml
 Type: Int32[]
@@ -76,5 +76,5 @@ to pass the ProjectName with each call.
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
-[Add-Release](Add-Release.md)
-[Get-Release](Get-Release.md)
+[Add-VSTeamRelease](Add-VSTeamRelease.md)
+[Get-VSTeamRelease](Get-VSTeamRelease.md)

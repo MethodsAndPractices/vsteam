@@ -52,7 +52,7 @@ Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/10) from [Robert
 - Adding a regular expression to validate VSTS account
 
 ## 0.1.25
-- Moved -Expand parameter of Get-Release to all parameter sets.
+- Moved -Expand parameter of Get-VSTeamRelease to all parameter sets.
 
 ## 0.1.24
 - Added support so you can start a release from a Git commit
@@ -79,7 +79,7 @@ Removed test folder from module
 
 ## 0.1.18
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/5) from [Christopher Mank](https://github.com/ChristopherMank) which included the following:
-- Created new function in the release module named 'Add-ReleaseEnvironment'. New function deploys an environment from an existing release.
+- Created new function in the release module named 'Add-VSTeamReleaseEnvironment'. New function deploys an environment from an existing release.
 
 ## 0.1.16
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/4) from [Andy Neillans](https://github.com/aneillans) which included the following:

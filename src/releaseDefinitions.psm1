@@ -165,8 +165,8 @@ function Remove-VSTeamReleaseDefinition {
 }
 
 
-Set-Alias Get-ReleaseDefinition Get-VSTeamReleaseDefinition
-Set-Alias Add-ReleaseDefinition Add-VSTeamReleaseDefinition
-Set-Alias Remove-ReleaseDefinition Remove-VSTeamReleaseDefinition
+Set-Alias Get-VSTeamReleaseDefinition Get-VSTeamReleaseDefinition
+Set-Alias Add-VSTeamReleaseDefinition Add-VSTeamReleaseDefinition
+Set-Alias Remove-VSTeamReleaseDefinition Remove-VSTeamReleaseDefinition
 
 Export-ModuleMember -Alias * -Function Get-VSTeamReleaseDefinition, Add-VSTeamReleaseDefinition, Remove-VSTeamReleaseDefinition

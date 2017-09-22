@@ -22,7 +22,7 @@ function _applyTypes {
    $item._links.web.PSObject.TypeNames.Insert(0, 'Team.Link')
 }
 
-function Get-Release {
+function Get-VSTeamRelease {
    [CmdletBinding(DefaultParameterSetName='List')]
    param(
       [ValidateSet('environments','artifacts', 'approvals', 'none')]
@@ -64,7 +64,7 @@ function Get-Release {
    }
 
    process {
-      Write-Debug 'Get-Release Process'
+      Write-Debug 'Get-VSTeamRelease Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -74,7 +74,7 @@ function Get-Release {
             $listurl = _buildReleaseURL -resource 'releases' -version '3.0-preview.3' -projectName $projectName -id $item
 
             # Call the REST API
-            Write-Debug 'Get-Release Call the REST API'
+            Write-Debug 'Get-VSTeamRelease Call the REST API'
             if (_useWindowsAuthenticationOnPremise) {
               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
             } else {
@@ -116,7 +116,7 @@ function Get-Release {
    }
 }
 
-function Add-Release {
+function Add-VSTeamRelease {
    [CmdletBinding(DefaultParameterSetName='ById', SupportsShouldProcess=$true, ConfirmImpact="Medium")]
    param(
       [Parameter(ParameterSetName='ById', Mandatory=$true)]
@@ -177,7 +177,7 @@ function Add-Release {
    }
 
    process {
-      Write-Debug 'Add-Release Process'
+      Write-Debug 'Add-VSTeamRelease Process'
 
       # Bind the parameter to a friendly variable
       $BuildNumber = $PSBoundParameters["BuildNumber"]
@@ -208,7 +208,7 @@ function Add-Release {
       if ($force -or $pscmdlet.ShouldProcess($description, "Add Release")) {
 
          try {
-            Write-Debug 'Add-Release Call the REST API'
+            Write-Debug 'Add-VSTeamRelease Call the REST API'
             if (_useWindowsAuthenticationOnPremise) {
               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -Body $body
             } else {
@@ -226,7 +226,7 @@ function Add-Release {
    }
 }
 
-function Remove-Release {
+function Remove-VSTeamRelease {
    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -241,7 +241,7 @@ function Remove-Release {
    }
 
    Process {
-      Write-Debug 'Remove-Release Process'
+      Write-Debug 'Remove-VSTeamRelease Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -250,7 +250,7 @@ function Remove-Release {
          $listurl = _buildReleaseURL -resource 'releases' -version '3.0-preview.3' -projectName $ProjectName -id $item
 
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
-            Write-Debug 'Remove-Release Call the REST API'
+            Write-Debug 'Remove-VSTeamRelease Call the REST API'
 
             try {
                # Call the REST API
@@ -270,7 +270,7 @@ function Remove-Release {
    }
 }
 
-function Set-ReleaseStatus {
+function Set-VSTeamReleaseStatus {
    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="Medium")]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -288,7 +288,7 @@ function Set-ReleaseStatus {
    }
 
    Process {
-      Write-Debug 'Set-ReleaseStatus Process'
+      Write-Debug 'Set-VSTeamReleaseStatus Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -299,7 +299,7 @@ function Set-ReleaseStatus {
          $listurl = _buildReleaseURL -resource 'releases' -version '3.0-preview.3' -projectName $ProjectName -id $item
 
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
-            Write-Debug 'Remove-Release Call the REST API'
+            Write-Debug 'Remove-VSTeamRelease Call the REST API'
 
             try {
                # Call the REST API
@@ -319,7 +319,7 @@ function Set-ReleaseStatus {
    }
 }
 
-function Add-ReleaseEnvironment {
+function Add-VSTeamReleaseEnvironment {
    [CmdletBinding(DefaultParameterSetName='ById', SupportsShouldProcess=$true, ConfirmImpact="Medium")]
    param(
       [Parameter(ParameterSetName='ById', Mandatory=$true)]
@@ -371,7 +371,7 @@ function Add-ReleaseEnvironment {
    }
 
    process {
-      Write-Debug 'Add-ReleaseEnvironment Process'
+      Write-Debug 'Add-VSTeamReleaseEnvironment Process'
 
       # Bind the parameter to a friendly variable
       $BuildNumber = $PSBoundParameters["BuildNumber"]
@@ -403,7 +403,7 @@ function Add-ReleaseEnvironment {
       if ($force -or $pscmdlet.ShouldProcess("Add ReleaseEnvironment")) {
 
          try {
-            Write-Debug 'Add-ReleaseEnvironment Call the REST API'
+            Write-Debug 'Add-VSTeamReleaseEnvironment Call the REST API'
             if (_useWindowsAuthenticationOnPremise) {
               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $url -ContentType "application/json" -UseDefaultCredentials -Body $body
             } else {
@@ -421,4 +421,10 @@ function Add-ReleaseEnvironment {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Release, Add-Release, Remove-Release, Set-ReleaseStatus, Add-ReleaseEnvironment
+Set-Alias Get-Release Get-VSTeamRelease
+Set-Alias Add-Release Add-VSTeamRelease
+Set-Alias Remove-Release Remove-VSTeamRelease
+Set-Alias Set-ReleaseStatus Set-VSTeamReleaseStatus
+Set-Alias Add-ReleaseEnvironment Add-VSTeamReleaseEnvironment
+
+Export-ModuleMember -Alias * -Function Get-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment

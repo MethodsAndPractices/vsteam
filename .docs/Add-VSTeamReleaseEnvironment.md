@@ -1,19 +1,19 @@
 #include "./common/header.md"
 
-# Add-ReleaseEnvironment
+# Add-VSTeamReleaseEnvironment
 
 ## SYNOPSIS
-#include "./synopsis/Add-ReleaseEnvironment.md"
+#include "./synopsis/Add-VSTeamReleaseEnvironment.md"
 
 ## SYNTAX
 
 ```
-Add-ReleaseEnvironment [-ProjectName] <String> [-Force] [-ReleaseId <String>] [-EnvironmentId <String>]
+Add-VSTeamReleaseEnvironment [-ProjectName] <String> [-Force] [-ReleaseId <String>] [-EnvironmentId <String>]
  [-EnvironmentStatus <String>]
 ```
 
 ## DESCRIPTION
-Add-ReleaseEnvironment will start the deployment of an environment
+Add-VSTeamReleaseEnvironment will start the deployment of an environment
 within an existing release.
 
 You must call Add-VSTeamAccount before calling this function.

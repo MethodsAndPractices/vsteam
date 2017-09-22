@@ -1,6 +1,6 @@
 #include "./common/header.md"
 
-# Get-Release
+# Get-VSTeamRelease
 
 ## SYNOPSIS
 Gets the releases for a team project.
@@ -9,18 +9,18 @@ Gets the releases for a team project.
 
 ### List (Default)
 ```
-Get-Release [-ProjectName] <String> [-Expand <String>] [-StatusFilter <String>] [-DefinitionId <Int32>]
+Get-VSTeamRelease [-ProjectName] <String> [-Expand <String>] [-StatusFilter <String>] [-DefinitionId <Int32>]
  [-Top <Int32>] [-CreatedBy <String>] [-MinCreatedTime <DateTime>] [-MaxCreatedTime <DateTime>]
  [-QueryOrder <String>] [-ContinuationToken <String>]
 ```
 
 ### ByID
 ```
-Get-Release [-ProjectName] <String> [-Id <Int32[]>]
+Get-VSTeamRelease [-ProjectName] <String> [-Id <Int32[]>]
 ```
 
 ## DESCRIPTION
-The Get-Release function gets the releases for a team
+The Get-VSTeamRelease function gets the releases for a team
 project.
 
 The project name is a Dynamic Parameter which may not be displayed
@@ -36,7 +36,7 @@ by ID.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Release -ProjectName demo | Format-List *
+PS C:\> Get-VSTeamRelease -ProjectName demo | Format-List *
 ```
 
 This command gets a list of all release s in the demo project.
@@ -184,7 +184,7 @@ Specifies one or more releases by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a release defintion, type Get-Release.
+To find the ID of a release defintion, type Get-VSTeamRelease.
 
 ```yaml
 Type: Int32[]
@@ -219,5 +219,5 @@ to pass the ProjectName with each call.
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
-[Add-Release](Add-Release.md)
-[Remove-Release](Remove-Release.md)
+[Add-VSTeamRelease](Add-VSTeamRelease.md)
+[Remove-VSTeamRelease](Remove-VSTeamRelease.md)

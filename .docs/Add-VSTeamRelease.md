@@ -1,26 +1,26 @@
 #include "./common/header.md"
 
-# Add-Release
+# Add-VSTeamRelease
 
 ## SYNOPSIS
-#include "./synopsis/Add-Release.md"
+#include "./synopsis/Add-VSTeamRelease.md"
 
 ## SYNTAX
 
 ### ById (Default)
 ```
-Add-Release [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>]
+Add-VSTeamRelease [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>]
  -ArtifactAlias <String> -DefinitionId <Int32> -BuildId <String> [-Force]
 ```
 
 ### ByName
 ```
-Add-Release [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>] [-Force]
+Add-VSTeamRelease [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>] [-Force]
  [-DefinitionName <String>] [-BuildNumber <String>]
 ```
 
 ## DESCRIPTION
-Add-Release will queue a new release.
+Add-VSTeamRelease will queue a new release.
 
 The environments will deploy according to how the release definition is 
 configured in the Triggers tab.
@@ -45,7 +45,7 @@ id name    Alias
  1 Demo-CD Demo-CI
 
 
-PS C:\> Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
+PS C:\> Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
 ```
 
 This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release. 
@@ -53,7 +53,7 @@ If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Add-Release -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
+PS C:\> Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
 ```
 
 This command starts a new release using the Demo-CD release defintion and the build with build number Demo-CI-44.

@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Set-ReleaseStatus
+# Set-VSTeamReleaseStatus
 
 ## SYNOPSIS
-#include "./synopsis/Set-ReleaseStatus.md"
+#include "./synopsis/Set-VSTeamReleaseStatus.md"
 
 ## SYNTAX
 
 ```
-Set-ReleaseStatus [-ProjectName] <String> [-Id] <Int32[]> [[-Status] <String>] [-Force]
+Set-VSTeamReleaseStatus [-ProjectName] <String> [-Id] <Int32[]> [[-Status] <String>] [-Force]
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Set-ReleaseStatus.md"
+#include "./synopsis/Set-VSTeamReleaseStatus.md"
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Set-ReleaseStatus -Id 5 -status Abandoned
+PS C:\> Set-VSTeamReleaseStatus -Id 5 -status Abandoned
 ```
 
 This command will set the status of release with id 5 to Abandoned.
@@ -30,7 +30,7 @@ Specifies one or more releases by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a release type Get-Release.
+To find the ID of a release type Get-VSTeamRelease.
 
 ```yaml
 Type: Int32[]
