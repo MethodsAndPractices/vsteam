@@ -1,25 +1,25 @@
 #include "./common/header.md"
 
-# Get-Project
+# Get-VSTeamProject
 
 ## SYNOPSIS
-#include "./synopsis/Get-Project.md"
+#include "./synopsis/Get-VSTeamProject.md"
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-Project [-StateFilter <String>] [-Top <Int32>] [-Skip <Int32>]
+Get-VSTeamProject [-StateFilter <String>] [-Top <Int32>] [-Skip <Int32>]
 ```
 
 ### ByID
 ```
-Get-Project [-Id <String>] [-IncludeCapabilities]
+Get-VSTeamProject [-Id <String>] [-IncludeCapabilities]
 ```
 
 ### ByName
 ```
-Get-Project [-ProjectName] <String>
+Get-VSTeamProject [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
@@ -34,14 +34,14 @@ You must call Add-VSTeamAccount before calling this function.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-Project
+PS C:\> Get-VSTeamProject
 ```
 
 This will return all the WellFormed team projects.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Get-Project -top 5 | Format-Wide
+PS C:\> Get-VSTeamProject -top 5 | Format-Wide
 ```
 
 This will return the top five WellFormed team projects only showing their name
@@ -138,5 +138,5 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
-[Add-Project](Add-Project.md)
-[Remove-Project](Remove-Project.md)
+[Add-VSTeamProject](Add-VSTeamProject.md)
+[Remove-VSTeamProject](Remove-VSTeamProject.md)

@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Add-Project
+# Add-VSTeamProject
 
 ## SYNOPSIS
-#include "./synopsis/Add-Project.md"
+#include "./synopsis/Add-VSTeamProject.md"
 
 ## SYNTAX
 
 ```
-Add-Project [-ProjectName] <String> [[-ProcessTemplate] <String>] [[-Description] <String>] [-TFVC]
+Add-VSTeamProject [-ProjectName] <String> [[-ProcessTemplate] <String>] [[-Description] <String>] [-TFVC]
 ```
 
 ## DESCRIPTION
@@ -19,7 +19,7 @@ account.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Add-Project 'MyProject'
+PS C:\> Add-VSTeamProject 'MyProject'
 ```
 
 This will add a project name MyProject with no description using the Scrum process
@@ -27,7 +27,7 @@ template and Git source control.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Add-Project 'MyProject' -TFVC -ProcessTemplate Agile
+PS C:\> Add-VSTeamProject 'MyProject' -TFVC -ProcessTemplate Agile
 ```
 
 This will add a project name MyProject with no description using the Agile process
@@ -106,4 +106,4 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
-[Remove-Project](Remove-Project.md)
+[Remove-VSTeamProject](Remove-VSTeamProject.md)

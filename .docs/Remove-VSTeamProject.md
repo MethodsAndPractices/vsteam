@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Remove-Project
+# Remove-VSTeamProject
 
 ## SYNOPSIS
-#include "./synopsis/Remove-Project.md"
+#include "./synopsis/Remove-VSTeamProject.md"
 
 ## SYNTAX
 
 ```
-Remove-Project [-ProjectName] <String> [-Force]
+Remove-VSTeamProject [-ProjectName] <String> [-Force]
 ```
 
 ## DESCRIPTION
@@ -22,21 +22,21 @@ the Pipeline by Property Name
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Remove-Project 'MyProject'
+PS C:\> Remove-VSTeamProject 'MyProject'
 ```
 
 You will be prompted for confirmation and the project will be deleted.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Remove-Project 'MyProject' -Force
+PS C:\> Remove-VSTeamProject 'MyProject' -Force
 ```
 
 You will NOT be prompted for confirmation and the project will be deleted.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-PS C:\> Get-Project | Remove-Project -Force
+PS C:\> Get-VSTeamProject | Remove-VSTeamProject -Force
 ```
 
 This will remove all projects
@@ -58,4 +58,4 @@ This will remove all projects
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
-[Add-Project](Add-Project.md)
+[Add-VSTeamProject](Add-VSTeamProject.md)

@@ -13,35 +13,35 @@ Describe 'Project' {
    }
 
    Context 'Full exercise' {
-      It 'Add-Project Should create project' {
-         Add-Project -ProjectName 'TeamModuleIntegration' | Should Not Be $null
+      It 'Add-VSTeamProject Should create project' {
+         Add-VSTeamProject -ProjectName 'TeamModuleIntegration' | Should Not Be $null
       }
 
-      It 'Get-Project Should return projects' {
-         Get-Project -ProjectName 'TeamModuleIntegration'  | Should Not Be $null
+      It 'Get-VSTeamProject Should return projects' {
+         Get-VSTeamProject -ProjectName 'TeamModuleIntegration'  | Should Not Be $null
       }
 
-      It 'Update-Project Should update description' {
-         Update-Project -ProjectName 'TeamModuleIntegration' -NewDescription 'Test Description' -Force
+      It 'Update-VSTeamProject Should update description' {
+         Update-VSTeamProject -ProjectName 'TeamModuleIntegration' -NewDescription 'Test Description' -Force
 
-         Get-Project -ProjectName 'TeamModuleIntegration' | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
+         Get-VSTeamProject -ProjectName 'TeamModuleIntegration' | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
       }
 
-      It 'Update-Project Should update name' {
-         Update-Project -ProjectName 'TeamModuleIntegration' -NewName 'TeamModuleIntegration1' -Force
+      It 'Update-VSTeamProject Should update name' {
+         Update-VSTeamProject -ProjectName 'TeamModuleIntegration' -NewName 'TeamModuleIntegration1' -Force
 
-         Get-Project -ProjectName 'TeamModuleIntegration1' | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
+         Get-VSTeamProject -ProjectName 'TeamModuleIntegration1' | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
       }
 
-      It 'Remove-Project Should delete project' {
-         Remove-Project -ProjectName 'TeamModuleIntegration1' -Force
+      It 'Remove-VSTeamProject Should delete project' {
+         Remove-VSTeamProject -ProjectName 'TeamModuleIntegration1' -Force
 
-         Get-Project | Where-Object { $_.Name -eq 'TeamModuleIntegration1' } | Should Be $null
+         Get-VSTeamProject | Where-Object { $_.Name -eq 'TeamModuleIntegration1' } | Should Be $null
       }
    }
 
    AfterAll {
-      Get-Project | Remove-Project -Force
+      Get-VSTeamProject | Remove-VSTeamProject -Force
 
       Remove-TeamAccount
    } 

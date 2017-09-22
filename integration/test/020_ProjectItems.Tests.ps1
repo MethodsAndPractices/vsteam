@@ -15,7 +15,7 @@ Describe 'Project Items' {
       $acct = $env:ACCT
 
       Add-VSTeamAccount -a $acct -pe $pat
-      Add-Project -ProjectName 'TeamModuleIntegration'
+      Add-VSTeamProject -ProjectName 'TeamModuleIntegration'
    }
 
    Context 'Git Full exercise' {
@@ -74,7 +74,7 @@ Describe 'Project Items' {
    }
 
    AfterAll {
-      Get-Project | Remove-Project -Force
+      Get-VSTeamProject | Remove-VSTeamProject -Force
 
       Remove-TeamAccount
    } 

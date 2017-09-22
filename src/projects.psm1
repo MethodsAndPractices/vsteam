@@ -81,7 +81,7 @@ function _trackProgress {
    }
 }
 
-function Get-Project {
+function Get-VSTeamProject {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'List')]
@@ -165,7 +165,7 @@ function Get-Project {
    }
 }
 
-function Update-Project {
+function Update-VSTeamProject {
    [CmdletBinding(DefaultParameterSetName = 'ByName', SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [string] $NewName = '',
@@ -187,7 +187,7 @@ function Update-Project {
          $ProjectName = $id
       }
       else {
-         $id = (Get-Project $ProjectName).id
+         $id = (Get-VSTeamProject $ProjectName).id
       }
 
       if ($newName -eq '' -and $newDescription -eq '') {
@@ -234,16 +234,16 @@ function Update-Project {
 
          # Return the project now that it has been updated
          if ($Id) {
-            return Get-Project -Id $finalName
+            return Get-VSTeamProject -Id $finalName
          }
          else {
-            return Get-Project -ProjectName $finalName         
+            return Get-VSTeamProject -ProjectName $finalName         
          }
       }
    }
 }
 
-function Add-Project {
+function Add-VSTeamProject {
    param(
       [parameter(Mandatory = $true)]
       [Alias('Name')]
@@ -295,7 +295,7 @@ function Add-Project {
 
       _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
-      return Get-Project -ProjectName $ProjectName
+      return Get-VSTeamProject -ProjectName $ProjectName
    }
    catch {
       # Dig into the exception to get the Response details.
@@ -307,7 +307,7 @@ function Add-Project {
    }
 }
 
-function Remove-Project {
+function Remove-VSTeamProject {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [switch] $Force
@@ -322,7 +322,7 @@ function Remove-Project {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url to list the projects
-      $listurl = _buildURL -ProjectName (Get-Project $ProjectName).id
+      $listurl = _buildURL -ProjectName (Get-VSTeamProject $ProjectName).id
 
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API
@@ -340,4 +340,9 @@ function Remove-Project {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Project, Update-Project, Add-Project, Remove-Project
+Set-Alias Get-Project Get-VSTeamProject
+Set-Alias Update-Project Update-VSTeamProject
+Set-Alias Add-Project Add-VSTeamProject
+Set-Alias Remove-Project Remove-VSTeamProject
+
+Export-ModuleMember -Alias * -Function Get-VSTeamProject, Update-VSTeamProject, Add-VSTeamProject, Remove-VSTeamProject

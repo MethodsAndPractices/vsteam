@@ -25,8 +25,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-VSTeamGitRepository](Add-VSTeamGitRepository.md)
 #include "./synopsis/Add-VSTeamGitRepository.md"
 
-### [Add-Project](Add-Project.md)
-#include "./synopsis/Add-Project.md"
+### [Add-VSTeamProject](Add-VSTeamProject.md)
+#include "./synopsis/Add-VSTeamProject.md"
 
 ### [Add-Release](Add-Release.md)
 #include "./synopsis/Add-Release.md"
@@ -76,8 +76,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamPool](Get-VSTeamPool.md)
 #include "./synopsis/Get-VSTeamPool.md"
 
-### [Get-Project](Get-Project.md)
-#include "./synopsis/Get-Project.md"
+### [Get-VSTeamProject](Get-VSTeamProject.md)
+#include "./synopsis/Get-VSTeamProject.md"
 
 ### [Get-Queue](Get-Queue.md)
 #include "./synopsis/Get-Queue.md"
@@ -115,8 +115,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-VSTeamGitRepository](Remove-VSTeamGitRepository.md)
 #include "./synopsis/Remove-VSTeamGitRepository.md"
 
-### [Remove-Project](Remove-Project.md)
-#include "./synopsis/Remove-Project.md"
+### [Remove-VSTeamProject](Remove-VSTeamProject.md)
+#include "./synopsis/Remove-VSTeamProject.md"
 
 ### [Remove-Release](Remove-Release.md)
 #include "./synopsis/Remove-Release.md"
@@ -145,5 +145,5 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Update-VSTeamBuild](Update-VSTeamBuild.md)
 #include "./synopsis/Update-VSTeamBuild.md"
 
-### [Update-Project](Update-Project.md)
-#include "./synopsis/Update-Project.md"
+### [Update-VSTeamProject](Update-VSTeamProject.md)
+#include "./synopsis/Update-VSTeamProject.md"

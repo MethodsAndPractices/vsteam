@@ -1,30 +1,30 @@
 #include "./common/header.md"
 
-# Update-Project
+# Update-VSTeamProject
 
 ## SYNOPSIS
-#include "./synopsis/Update-Project.md"
+#include "./synopsis/Update-VSTeamProject.md"
 
 ## SYNTAX
 
 ### ByName (Default)
 ```
-Update-Project [[-NewName] <String>] [[-NewDescription] <String>] [-Name] <String>  [-Force]
+Update-VSTeamProject [[-NewName] <String>] [[-NewDescription] <String>] [-Name] <String>  [-Force]
 ```
 
 ### ByID
 ```
-Update-Project [[-NewName] <String>] [[-NewDescription] <String>] [-Id] <String>  [-Force]
+Update-VSTeamProject [[-NewName] <String>] [[-NewDescription] <String>] [-Id] <String>  [-Force]
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Update-Project.md"
+#include "./synopsis/Update-VSTeamProject.md"
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Update-Project -Name Demo -NewName aspDemo
+PS C:\> Update-VSTeamProject -Name Demo -NewName aspDemo
 ```
 
 This command changes the name of your project from Demo to aspDemo.

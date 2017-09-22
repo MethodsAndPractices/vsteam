@@ -194,7 +194,7 @@ function _buildProjectNameDynamicParam {
 
       DynamicParam {
          # Generate and set the ValidateSet
-         $arrSet = Get-Projects | Select-Object -ExpandProperty Name
+         $arrSet = Get-VSTeamProjects | Select-Object -ExpandProperty Name
 
          _buildProjectNameDynamicParam -arrSet $arrSet
       }
