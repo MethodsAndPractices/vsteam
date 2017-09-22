@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Add-AzureRMServiceEndpoint
+# Add-VSTeamAzureRMServiceEndpoint
 
 ## SYNOPSIS
-#include "./synopsis/Add-AzureRMServiceEndpoint.md"
+#include "./synopsis/Add-VSTeamAzureRMServiceEndpoint.md"
 
 ## SYNTAX
 
 ```
-Add-AzureRMServiceEndpoint [-ProjectName] <String> [-DisplayName] <String> [-SubscriptionId] <String>
+Add-VSTeamAzureRMServiceEndpoint [-ProjectName] <String> [-DisplayName] <String> [-SubscriptionId] <String>
  [-SubscriptionTenantId] <String> [[-EndpointName] <String>]
 ```
 

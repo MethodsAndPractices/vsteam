@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Get-ServiceEndpoint
+# Get-VSTeamServiceEndpoint
 
 ## SYNOPSIS
-#include "./synopsis/Get-ServiceEndpoint.md"
+#include "./synopsis/Get-VSTeamServiceEndpoint.md"
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-ServiceEndpoint [-ProjectName] <String>
+Get-VSTeamServiceEndpoint [-ProjectName] <String>
 ```
 
 ### ByID
 ```
-Get-ServiceEndpoint [-ProjectName] <String> -Id <String>
+Get-VSTeamServiceEndpoint [-ProjectName] <String> -Id <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-ServiceEndpoint.md"
+#include "./synopsis/Get-VSTeamServiceEndpoint.md"
 
 ## EXAMPLES
 

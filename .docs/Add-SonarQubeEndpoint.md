@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Add-SonarQubeEndpoint
+# Add-VSTeamSonarQubeEndpoint
 
 ## SYNOPSIS
-#include "./synopsis/Add-SonarQubeEndpoint.md"
+#include "./synopsis/Add-VSTeamSonarQubeEndpoint.md"
 
 ## SYNTAX
 
 ```
-Add-SonarQubeEndpoint [-ProjectName] <String> [-Token] <String> [-SonarQubeUrl] <String>
+Add-VSTeamSonarQubeEndpoint [-ProjectName] <String> [-Token] <String> [-SonarQubeUrl] <String>
  [[-EndpointName] <String>]
 ```
 

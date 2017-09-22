@@ -99,7 +99,7 @@ function _trackProgress {
    }
 }
 
-function Remove-ServiceEndpoint {
+function Remove-VSTeamServiceEndpoint {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -135,7 +135,7 @@ function Remove-ServiceEndpoint {
    }
 }
 
-function Add-SonarQubeEndpoint {
+function Add-VSTeamSonarQubeEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -209,11 +209,11 @@ function Add-SonarQubeEndpoint {
       }
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
-      return Get-ServiceEndpoint -projectName $projectName -id $resp.id
+      return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
    }
 }
 
-function Add-AzureRMServiceEndpoint {
+function Add-VSTeamAzureRMServiceEndpoint {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -282,11 +282,11 @@ function Add-AzureRMServiceEndpoint {
 
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
-      return Get-ServiceEndpoint -projectName $projectName -id $resp.id
+      return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
    }
 }
 
-function Get-ServiceEndpoint {
+function Get-VSTeamServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -338,4 +338,10 @@ function Get-ServiceEndpoint {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint
+
+Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
+Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
+Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Add-SonarQubeEndpoint Add-VSTeamSonarQubeEndpoint
+
+Export-ModuleMember -Alias * -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, Add-VSTeamSonarQubeEndpoint

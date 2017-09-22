@@ -10,8 +10,8 @@ Locale: en-US
 Provides access to your Visual Studio Team Services (VSTS) and Team Foundation Server (TFS) from Mac, Linux and PC.
 
 ## Team Cmdlets
-### [Add-AzureRMServiceEndpoint](Add-AzureRMServiceEndpoint.md)
-#include "./synopsis/Add-AzureRMServiceEndpoint.md"
+### [Add-VSTeamAzureRMServiceEndpoint](Add-VSTeamAzureRMServiceEndpoint.md)
+#include "./synopsis/Add-VSTeamAzureRMServiceEndpoint.md"
 
 ### [Add-VSTeamBuild](Add-VSTeamBuild.md)
 #include "./synopsis/Add-VSTeamBuild.md"
@@ -37,8 +37,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-VSTeamReleaseEnvironment](Add-VSTeamReleaseEnvironment.md)
 #include "./synopsis/Add-VSTeamReleaseEnvironment.md"
 
-### [Add-SonarQubeEndpoint](Add-SonarQubeEndpoint.md)
-#include "./synopsis/Add-SonarQubeEndpoint.md"
+### [Add-VSTeamSonarQubeEndpoint](Add-VSTeamSonarQubeEndpoint.md)
+#include "./synopsis/Add-VSTeamSonarQubeEndpoint.md"
 
 ### [Add-Team](Add-Team.md)
 #include "./synopsis/Add-Team.md"
@@ -88,8 +88,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamReleaseDefinition](Get-VSTeamReleaseDefinition.md)
 #include "./synopsis/Get-VSTeamReleaseDefinition.md"
 
-### [Get-ServiceEndpoint](Get-ServiceEndpoint.md)
-#include "./synopsis/Get-ServiceEndpoint.md"
+### [Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
+#include "./synopsis/Get-VSTeamServiceEndpoint.md"
 
 ### [Get-Team](Get-Team.md)
 #include "./synopsis/Get-Team.md"
@@ -124,8 +124,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-VSTeamReleaseDefinition](Remove-VSTeamReleaseDefinition.md)
 #include "./synopsis/Remove-VSTeamReleaseDefinition.md"
 
-### [Remove-ServiceEndpoint](Remove-ServiceEndpoint.md)
-#include "./synopsis/Remove-ServiceEndpoint.md"
+### [Remove-VSTeamServiceEndpoint](Remove-VSTeamServiceEndpoint.md)
+#include "./synopsis/Remove-VSTeamServiceEndpoint.md"
 
 ### [Remove-Team](Remove-Team.md)
 #include "./synopsis/Remove-Team.md"

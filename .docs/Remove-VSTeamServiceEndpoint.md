@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Remove-ServiceEndpoint
+# Remove-VSTeamServiceEndpoint
 
 ## SYNOPSIS
-#include "./synopsis/Remove-ServiceEndpoint.md"
+#include "./synopsis/Remove-VSTeamServiceEndpoint.md"
 
 ## SYNTAX
 
 ```
-Remove-ServiceEndpoint [-ProjectName] <String> [-Id] <String[]> [-Force]
+Remove-VSTeamServiceEndpoint [-ProjectName] <String> [-Id] <String[]> [-Force]
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Remove-ServiceEndpoint.md"
+#include "./synopsis/Remove-VSTeamServiceEndpoint.md"
 
 ## EXAMPLES
 

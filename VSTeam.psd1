@@ -88,8 +88,8 @@
       'src\teammembers.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-   FunctionsToExport = @('Add-AzureRMServiceEndpoint',
-      'Add-SonarQubeEndpoint',
+   FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
+      'Add-VSTeamSonarQubeEndpoint',
       'Add-VSTeamBuild',
       'Add-VSTeamBuildDefinition',
       'Add-VSTeamProject',
@@ -108,7 +108,7 @@
       'Get-VSTeamQueue',
       'Get-VSTeamRelease',
       'Get-VSTeamReleaseDefinition',
-      'Get-ServiceEndpoint',
+      'Get-VSTeamServiceEndpoint',
       'Get-VSTeamInfo',
       'Get-Team',
       'Get-TeamMember',
@@ -117,7 +117,7 @@
       'Remove-VSTeamProject',
       'Remove-VSTeamRelease',
       'Remove-VSTeamReleaseDefinition',
-      'Remove-ServiceEndpoint',
+      'Remove-VSTeamServiceEndpoint',
       'Remove-VSTeamAccount',
       'Remove-Team',
       'Set-VSTeamApproval',
