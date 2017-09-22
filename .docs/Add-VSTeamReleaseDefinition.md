@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Add-ReleaseDefinition
+# Add-VSTeamReleaseDefinition
 
 ## SYNOPSIS
-#include "./synopsis/Add-ReleaseDefinition.md"
+#include "./synopsis/Add-VSTeamReleaseDefinition.md"
 
 ## SYNTAX
 
 ```
-Add-ReleaseDefinition [-ProjectName] <String> [-InFile] <String>
+Add-VSTeamReleaseDefinition [-ProjectName] <String> [-InFile] <String>
 ```
 
 ## DESCRIPTION
@@ -21,7 +21,7 @@ You must call Add-VSTeamAccount before calling this function.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Add-ReleaseDefinition -ProjectName demo -inFile release.json
+PS C:\> Add-VSTeamReleaseDefinition -ProjectName demo -inFile release.json
 ```
 
 This command reads release.json and creates a new release defintion from it

@@ -148,7 +148,7 @@ function Add-Release {
       # validateset so skip that check. However, we still need to give
       # the option to pass by name.
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $defs = Get-ReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
+         $defs = Get-VSTeamReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
          $arrSet = $defs.name
       } else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of DefinitionName'
@@ -342,7 +342,7 @@ function Add-ReleaseEnvironment {
       # validateset so skip that check. However, we still need to give
       # the option to pass by name.
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $defs = Get-ReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
+         $defs = Get-VSTeamReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
          $arrSet = $defs.name
       } else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of DefinitionName'

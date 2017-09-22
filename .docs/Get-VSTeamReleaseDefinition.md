@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Get-ReleaseDefinition
+# Get-VSTeamReleaseDefinition
 
 ## SYNOPSIS
-#include "./synopsis/Get-ReleaseDefinition.md"
+#include "./synopsis/Get-VSTeamReleaseDefinition.md"
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-ReleaseDefinition [-ProjectName] <String> [-Expand <String>]
+Get-VSTeamReleaseDefinition [-ProjectName] <String> [-Expand <String>]
 ```
 
 ### ByID
 ```
-Get-ReleaseDefinition [-ProjectName] <String> [-Id <Int32[]>]
+Get-VSTeamReleaseDefinition [-ProjectName] <String> [-Id <Int32[]>]
 ```
 
 ## DESCRIPTION
-The Get-ReleaseDefinition function gets the release definitions for a team
+The Get-VSTeamReleaseDefinition function gets the release definitions for a team
 project.
 
 The project name is a Dynamic Parameter which may not be displayed
@@ -34,7 +34,7 @@ by ID.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-ReleaseDefinition -ProjectName demo | Format-List *
+PS C:\> Get-VSTeamReleaseDefinition -ProjectName demo | Format-List *
 ```
 
 This command gets a list of all release definitions in the demo project.
@@ -67,7 +67,7 @@ Specifies one or more release definitions by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a release defintion, type Get-ReleaseDefinition.
+To find the ID of a release defintion, type Get-VSTeamReleaseDefinition.
 
 ```yaml
 Type: Int32[]
@@ -95,5 +95,5 @@ Accept wildcard characters: False
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
-[Add-ReleaseDefinition](Add-ReleaseDefinition.md)
-[Remove-ReleaseDefinition](Remove-ReleaseDefinition.md)
+[Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
+[Remove-VSTeamReleaseDefinition](Remove-VSTeamReleaseDefinition.md)

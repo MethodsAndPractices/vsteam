@@ -32,7 +32,7 @@ function _applyTypes {
    }
 }
 
-function Get-ReleaseDefinition {
+function Get-VSTeamReleaseDefinition {
    [CmdletBinding(DefaultParameterSetName='List')]
    param(
       [Parameter(ParameterSetName='List')]
@@ -48,7 +48,7 @@ function Get-ReleaseDefinition {
    }
 
    process {
-      Write-Debug 'Get-ReleaseDefinition Process'
+      Write-Debug 'Get-VSTeamReleaseDefinition Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -58,7 +58,7 @@ function Get-ReleaseDefinition {
             $listurl = _buildReleaseURL -resource 'definitions' -version '3.0-preview.1' -projectName $projectName -id $item
 
             # Call the REST API
-            Write-Debug 'Get-ReleaseDefinition Call the REST API'
+            Write-Debug 'Get-VSTeamReleaseDefinition Call the REST API'
 	        if (_useWindowsAuthenticationOnPremise) {
               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
 	        } else {
@@ -94,7 +94,7 @@ function Get-ReleaseDefinition {
    }
 }
 
-function Add-ReleaseDefinition {
+function Add-VSTeamReleaseDefinition {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -106,7 +106,7 @@ function Add-ReleaseDefinition {
    }
 
    process {
-      Write-Debug 'Add-ReleaseDefinition Process'
+      Write-Debug 'Add-VSTeamReleaseDefinition Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -115,7 +115,7 @@ function Add-ReleaseDefinition {
       $url = _buildReleaseURL -resource 'definitions' -version '3.0-preview.1' -projectName $projectName
 
       # Call the REST API
-      Write-Debug 'Add-ReleaseDefinition Call the REST API'
+      Write-Debug 'Add-VSTeamReleaseDefinition Call the REST API'
 	  if (_useWindowsAuthenticationOnPremise) {
         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
 	  } else {
@@ -126,7 +126,7 @@ function Add-ReleaseDefinition {
    }
 }
 
-function Remove-ReleaseDefinition {
+function Remove-VSTeamReleaseDefinition {
    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -141,7 +141,7 @@ function Remove-ReleaseDefinition {
    }
 
    Process {
-      Write-Debug 'Remove-ReleaseDefinition Process'
+      Write-Debug 'Remove-VSTeamReleaseDefinition Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -151,7 +151,7 @@ function Remove-ReleaseDefinition {
 
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release Definition")) {
             # Call the REST API
-            Write-Debug 'Remove-ReleaseDefinition Call the REST API'
+            Write-Debug 'Remove-VSTeamReleaseDefinition Call the REST API'
 	        if (_useWindowsAuthenticationOnPremise) {
               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
 	        } else {
@@ -164,4 +164,9 @@ function Remove-ReleaseDefinition {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-ReleaseDefinition, Add-ReleaseDefinition, Remove-ReleaseDefinition
+
+Set-Alias Get-ReleaseDefinition Get-VSTeamReleaseDefinition
+Set-Alias Add-ReleaseDefinition Add-VSTeamReleaseDefinition
+Set-Alias Remove-ReleaseDefinition Remove-VSTeamReleaseDefinition
+
+Export-ModuleMember -Alias * -Function Get-VSTeamReleaseDefinition, Add-VSTeamReleaseDefinition, Remove-VSTeamReleaseDefinition

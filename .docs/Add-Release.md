@@ -38,7 +38,7 @@ id name
 44 Demo-CI-44
 
 
-PS C:\> Get-ReleaseDefinition -Expand artifacts | ft id,name,@{l='Alias';e={$_.artifacts[0].alias}}
+PS C:\> Get-VSTeamReleaseDefinition -Expand artifacts | ft id,name,@{l='Alias';e={$_.artifacts[0].alias}}
 
 id name    Alias
 -- ----    -----

@@ -31,8 +31,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-Release](Add-Release.md)
 #include "./synopsis/Add-Release.md"
 
-### [Add-ReleaseDefinition](Add-ReleaseDefinition.md)
-#include "./synopsis/Add-ReleaseDefinition.md"
+### [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
+#include "./synopsis/Add-VSTeamReleaseDefinition.md"
 
 ### [Add-ReleaseEnvironment](Add-ReleaseEnvironment.md)
 #include "./synopsis/Add-ReleaseEnvironment.md"
@@ -85,8 +85,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-Release](Get-Release.md)
 #include "./synopsis/Get-Release.md"
 
-### [Get-ReleaseDefinition](Get-ReleaseDefinition.md)
-#include "./synopsis/Get-ReleaseDefinition.md"
+### [Get-VSTeamReleaseDefinition](Get-VSTeamReleaseDefinition.md)
+#include "./synopsis/Get-VSTeamReleaseDefinition.md"
 
 ### [Get-ServiceEndpoint](Get-ServiceEndpoint.md)
 #include "./synopsis/Get-ServiceEndpoint.md"
@@ -121,8 +121,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-Release](Remove-Release.md)
 #include "./synopsis/Remove-Release.md"
 
-### [Remove-ReleaseDefinition](Remove-ReleaseDefinition.md)
-#include "./synopsis/Remove-ReleaseDefinition.md"
+### [Remove-VSTeamReleaseDefinition](Remove-VSTeamReleaseDefinition.md)
+#include "./synopsis/Remove-VSTeamReleaseDefinition.md"
 
 ### [Remove-ServiceEndpoint](Remove-ServiceEndpoint.md)
 #include "./synopsis/Remove-ServiceEndpoint.md"
