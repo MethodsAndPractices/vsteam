@@ -76,8 +76,10 @@ function _appendQueryString {
 }
 
 function _getUserAgent {
-   $content = (Get-Content "$here\..\Team.psd1" | Out-String)
-   $versionData = Invoke-Expression $content
+   # Read the version from the psd1 file.
+   $content = (Get-Content -Raw "$here\..\Team.psd1" | Out-String)
+   $r = [regex]"ModuleVersion += +'([^']+)'"
+   $d = $r.Match($content)
 
    $os = 'unknown'
 
@@ -91,7 +93,7 @@ function _getUserAgent {
       $os = 'Linux'
    }
 
-   return "Team Module/$($versionData.ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
+   return "Team Module/$($d.Groups[1].Value) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
 }
 
 function _useWindowsAuthenticationOnPremise {
