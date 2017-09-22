@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Add-Team
+# Add-VSTeam
 
 ## SYNOPSIS
-#include "./synopsis/Add-Team.md"
+#include "./synopsis/Add-VSTeam.md"
 
 ## SYNTAX
 
 ```
-Add-Team [-TeamName] <String> [[-Description] <String>] [-ProjectName] <String>
+Add-VSTeam [-TeamName] <String> [[-Description] <String>] [-ProjectName] <String>
 ```
 
 ## DESCRIPTION

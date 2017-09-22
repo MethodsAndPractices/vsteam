@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Update-Team
+# Update-VSTeam
 
 ## SYNOPSIS
-#include "./synopsis/Update-Team.md"
+#include "./synopsis/Update-VSTeam.md"
 
 ## SYNTAX
 
 ```
-Update-Team [-Name] <String> [[-NewTeamName] <String>] [[-Description] <String>] [-ProjectName] <String> [-Force] [-WhatIf] [-Confirm]
+Update-VSTeam [-Name] <String> [[-NewTeamName] <String>] [[-Description] <String>] [-ProjectName] <String> [-Force] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Update-Team.md"
+#include "./synopsis/Update-VSTeam.md"
 
 ## EXAMPLES
 

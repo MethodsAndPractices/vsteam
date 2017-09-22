@@ -40,8 +40,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-VSTeamSonarQubeEndpoint](Add-VSTeamSonarQubeEndpoint.md)
 #include "./synopsis/Add-VSTeamSonarQubeEndpoint.md"
 
-### [Add-Team](Add-Team.md)
-#include "./synopsis/Add-Team.md"
+### [Add-VSTeam](Add-VSTeam.md)
+#include "./synopsis/Add-VSTeam.md"
 
 ### [Add-VSTeamAccount](Add-VSTeamAccount.md)
 #include "./synopsis/Add-VSTeamAccount.md"
@@ -91,14 +91,14 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
 #include "./synopsis/Get-VSTeamServiceEndpoint.md"
 
-### [Get-Team](Get-Team.md)
-#include "./synopsis/Get-Team.md"
+### [Get-VSTeam](Get-VSTeam.md)
+#include "./synopsis/Get-VSTeam.md"
 
 ### [Get-VSTeamInfo](Get-VSTeamInfo.md)
 #include "./synopsis/Get-VSTeamInfo.md"
 
-### [Get-TeamMember](Get-TeamMember.md)
-#include "./synopsis/Get-TeamMember.md"
+### [Get-VSTeamMember](Get-VSTeamMember.md)
+#include "./synopsis/Get-VSTeamMember.md"
 
 ### [Get-VSTeamOption](Get-VSTeamOption.md)
 #include "./synopsis/Get-VSTeamOption.md"
@@ -127,8 +127,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-VSTeamServiceEndpoint](Remove-VSTeamServiceEndpoint.md)
 #include "./synopsis/Remove-VSTeamServiceEndpoint.md"
 
-### [Remove-Team](Remove-Team.md)
-#include "./synopsis/Remove-Team.md"
+### [Remove-VSTeam](Remove-VSTeam.md)
+#include "./synopsis/Remove-VSTeam.md"
 
 ### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
 #include "./synopsis/Remove-VSTeamAccount.md"

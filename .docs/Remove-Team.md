@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Remove-Team
+# Remove-VSTeam
 
 ## SYNOPSIS
-#include "./synopsis/Remove-Team.md"
+#include "./synopsis/Remove-VSTeam.md"
 
 ## SYNTAX
 
 ```
-Remove-Team [-TeamId] <String> [-Force] [-WhatIf] [-Confirm] [-ProjectName] <String>
+Remove-VSTeam [-TeamId] <String> [-Force] [-WhatIf] [-Confirm] [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Remove-Team.md"
+#include "./synopsis/Remove-VSTeam.md"
 
 ## EXAMPLES
 

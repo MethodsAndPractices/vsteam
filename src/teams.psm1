@@ -46,7 +46,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.Team')
 }
 
-function Get-Team {
+function Get-VSTeam {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param (
       [Parameter(ParameterSetName = 'List')]
@@ -133,7 +133,7 @@ function Get-Team {
    } 
 }
 
-function Add-Team {
+function Add-VSTeam {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true)]
@@ -166,7 +166,7 @@ function Add-Team {
    }
 }
 
-function Update-Team {
+function Update-VSTeam {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
@@ -189,7 +189,7 @@ function Update-Team {
          throw 'You must provide a new team name or description, or both.'
       }
 
-      if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-Team")) {
+      if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-VSTeam")) {
          if (-not $NewTeamName) { 
             $body = '{"description": "' + $Description + '" }'
          }
@@ -215,7 +215,7 @@ function Update-Team {
    }
 }
 
-function Remove-Team {
+function Remove-VSTeam {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
@@ -248,4 +248,9 @@ function Remove-Team {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Team, Add-Team, Update-Team, Remove-Team
+Set-Alias Get-Team Get-VSTeam
+Set-Alias Add-Team Add-VSTeam
+Set-Alias Update-Team Update-VSTeam
+Set-Alias Remove-Team Remove-VSTeam
+
+Export-ModuleMember -Alias * -Function Get-VSTeam, Add-VSTeam, Update-VSTeam, Remove-VSTeam

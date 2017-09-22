@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Get-TeamMember
+# Get-VSTeamMember
 
 ## SYNOPSIS
-#include "./synopsis/Get-TeamMember.md"
+#include "./synopsis/Get-VSTeamMember.md"
 
 ## SYNTAX
 
 ```
-Get-TeamMember [[-Top] <Int32>] [[-Skip] <Int32>] [-TeamId] <String> [-ProjectName] <String>
+Get-VSTeamMember [[-Top] <Int32>] [[-Skip] <Int32>] [-TeamId] <String> [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-TeamMember.md"
+#include "./synopsis/Get-VSTeamMember.md"
 
 ## EXAMPLES
 

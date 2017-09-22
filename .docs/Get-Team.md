@@ -1,29 +1,29 @@
 #include "./common/header.md"
 
-# Get-Team
+# Get-VSTeam
 
 ## SYNOPSIS
-#include "./synopsis/Get-Team.md"
+#include "./synopsis/Get-VSTeam.md"
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-Team [-Top <Int32>] [-Skip <Int32>] [-ProjectName] <String>
+Get-VSTeam [-Top <Int32>] [-Skip <Int32>] [-ProjectName] <String>
 ```
 
 ### ByID
 ```
-Get-Team [-TeamId <String[]>] [-ProjectName] <String>
+Get-VSTeam [-TeamId <String[]>] [-ProjectName] <String>
 ```
 
 ### ByName
 ```
-Get-Team [-Name <String[]>] [-ProjectName] <String>
+Get-VSTeam [-Name <String[]>] [-ProjectName] <String>
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-Team.md"
+#include "./synopsis/Get-VSTeam.md"
 
 ## EXAMPLES
 

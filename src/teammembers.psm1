@@ -42,7 +42,7 @@ function _applyTypes {
     $item.PSObject.TypeNames.Insert(0, 'Team.TeamMember')
 }
 
-function Get-TeamMember {
+function Get-VSTeamMember {
     [CmdletBinding()]
     param (
        [Parameter()]
@@ -88,4 +88,6 @@ function Get-TeamMember {
     } 
 }
 
-Export-ModuleMember -Alias * -Function Get-TeamMember
+Set-Alias Get-TeamMember Get-VSTeamMember
+
+Export-ModuleMember -Alias * -Function Get-VSTeamMember

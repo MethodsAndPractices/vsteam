@@ -9,11 +9,11 @@ InModuleScope teams {
    Describe "Teams" {
         . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
         
-        Context 'Get-Team with project name' {  
+        Context 'Get-VSTeam with project name' {  
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teams' {
-                Get-Team -ProjectName Test
+                Get-VSTeam -ProjectName Test
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -22,11 +22,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Get-Team with project name, with top' {  
+        Context 'Get-VSTeam with project name, with top' {  
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teams' {
-                Get-Team -ProjectName Test -Top 10
+                Get-VSTeam -ProjectName Test -Top 10
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -35,11 +35,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Get-Team with project name, with skip' {  
+        Context 'Get-VSTeam with project name, with skip' {  
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teams' {
-                Get-Team -ProjectName Test -Skip 10
+                Get-VSTeam -ProjectName Test -Skip 10
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -48,11 +48,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Get-Team with project name, with top and skip' {  
+        Context 'Get-VSTeam with project name, with top and skip' {  
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teams' {
-                Get-Team -ProjectName Test -Top 10 -Skip 5
+                Get-VSTeam -ProjectName Test -Top 10 -Skip 5
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -61,11 +61,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Get-Team with specific project and specific team' {  
+        Context 'Get-VSTeam with specific project and specific team' {  
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should return teams' {
-                Get-Team -ProjectName Test -TeamId TestTeam
+                Get-VSTeam -ProjectName Test -TeamId TestTeam
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -74,11 +74,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Add-Team with team name only' {
+        Context 'Add-VSTeam with team name only' {
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should create a team' {
-                Add-Team -ProjectName Test -TeamName "TestTeam"
+                Add-VSTeam -ProjectName Test -TeamName "TestTeam"
 
                 $expectedBody = '{ "name": "TestTeam", "description": "" }'
 
@@ -90,11 +90,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Add-Team with team name and description' {
+        Context 'Add-VSTeam with team name and description' {
             Mock Invoke-RestMethod { return @{value='teams'}}
             
             It 'Should create a team' {
-                Add-Team -ProjectName Test -TeamName "TestTeam" -Description "Test Description"
+                Add-VSTeam -ProjectName Test -TeamName "TestTeam" -Description "Test Description"
 
                 $expectedBody = '{ "name": "TestTeam", "description": "Test Description" }'
 
@@ -106,11 +106,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Update-Team with new team name' {
+        Context 'Update-VSTeam with new team name' {
             Mock Invoke-RestMethod { return @{value='teams'}}
             
             It 'Should update the team' {
-                Update-Team -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
+                Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
 
                 $expectedBody = '{ "name": "NewTeamName" }'
 
@@ -122,11 +122,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Update-Team with new description' {
+        Context 'Update-VSTeam with new description' {
             Mock Invoke-RestMethod { return @{value='teams'}}
             
             It 'Should update the team' {
-                Update-Team -ProjectName Test -TeamToUpdate "OldTeamName" -Description "New Description"
+                Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -Description "New Description"
 
                 $expectedBody = '{"description": "New Description" }'
 
@@ -138,11 +138,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Update-Team with new team name and description' {
+        Context 'Update-VSTeam with new team name and description' {
             Mock Invoke-RestMethod { return @{value='teams'}}
             
             It 'Should update the team' {
-                Update-Team -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName" -Description "New Description"
+                Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName" -Description "New Description"
 
                 $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
 
@@ -154,12 +154,12 @@ InModuleScope teams {
             }
         }
 
-        Context 'Update-Team, fed through pipeline' {
-            Mock Get-Team { return New-Object -TypeName PSObject -Prop @{projectname="TestProject"; name="OldTeamName"} }
+        Context 'Update-VSTeam, fed through pipeline' {
+            Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{projectname="TestProject"; name="OldTeamName"} }
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should update the team' {
-                Get-Team -ProjectName TestProject -TeamId "OldTeamName" | Update-Team -NewTeamName "NewTeamName" -Description "New Description"
+                Get-VSTeam -ProjectName TestProject -TeamId "OldTeamName" | Update-VSTeam -NewTeamName "NewTeamName" -Description "New Description"
 
                 $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
 
@@ -171,11 +171,11 @@ InModuleScope teams {
             }
         }
 
-        Context 'Remove-Team' {
+        Context 'Remove-VSTeam' {
             Mock Invoke-RestMethod { return @{value='teams'}}
             
             It 'Should remove the team' {
-                Remove-Team -ProjectName Test -TeamId "TestTeam" -Force
+                Remove-VSTeam -ProjectName Test -TeamId "TestTeam" -Force
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                     $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/TestTeam?api-version=1.0' -and
@@ -184,12 +184,12 @@ InModuleScope teams {
             }
         }
 
-        Context 'Remove-Team, fed through pipeline' {
-            Mock Get-Team { return New-Object -TypeName PSObject -Prop @{projectname="TestProject"; name="TestTeam"} }
+        Context 'Remove-VSTeam, fed through pipeline' {
+            Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{projectname="TestProject"; name="TestTeam"} }
             Mock Invoke-RestMethod { return @{value='teams'}}
 
             It 'Should remove the team' {
-                Get-Team -ProjectName TestProject -TeamId "TestTeam" | Remove-Team -Force
+                Get-VSTeam -ProjectName TestProject -TeamId "TestTeam" | Remove-VSTeam -Force
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                     $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam?api-version=1.0' -and
