@@ -1,32 +1,32 @@
 #include "./common/header.md"
 
-# Set-Approval
+# Set-VSTeamApproval
 
 ## SYNOPSIS
-#include "./synopsis/Set-Approval.md"
+#include "./synopsis/Set-VSTeamApproval.md"
 
 ## SYNTAX
 
 ```
-Set-Approval [-ProjectName] <String> [-Id] <Int32[]> [-Status] <String> [[-Approver] <String>]
+Set-VSTeamApproval [-ProjectName] <String> [-Id] <Int32[]> [-Status] <String> [[-Approver] <String>]
  [[-Comment] <String>] [-Force]
 ```
 
 ## DESCRIPTION
-Set-Approval sets the status of approval to Approved, Rejected, Pending, or ReAssigned.
+Set-VSTeamApproval sets the status of approval to Approved, Rejected, Pending, or ReAssigned.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-VSTeamApproval | Set-Approval
+PS C:\> Get-VSTeamApproval | Set-VSTeamApproval
 ```
 
 This command sets all pending approvals to approved.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Set-Approval -Id 1 -Status Rejected
+PS C:\> Set-VSTeamApproval -Id 1 -Status Rejected
 ```
 
 This command rejects approval with Id of 1.

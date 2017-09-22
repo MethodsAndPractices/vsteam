@@ -133,8 +133,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
 #include "./synopsis/Remove-VSTeamAccount.md"
 
-### [Set-Approval](Set-Approval.md)
-#include "./synopsis/Set-Approval.md"
+### [Set-VSTeamApproval](Set-VSTeamApproval.md)
+#include "./synopsis/Set-VSTeamApproval.md"
 
 ### [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 #include "./synopsis/Set-VSTeamDefaultProject.md"

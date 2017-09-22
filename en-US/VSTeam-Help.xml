@@ -2123,203 +2123,6 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-VSTeamApproval</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>Approval</command:noun>
-      <maml:description>
-        <maml:para>Gets a list of approvals for all releases for a team project.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>The Get-VSTeamApproval function gets the approvals for all releases for a team project.</maml:para>
-      <maml:para>With just a project name, this function gets all of the pending approvals for that team project.</maml:para>
-      <maml:para>The Team.Approval type has three custom table formats:</maml:para>
-      <maml:para>Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions</maml:para>
-      <maml:para>Approved: Release Name, Environment, Is Automated, Approval Type, Approver Name, Release Definitions, Comments</maml:para>
-      <maml:para>Rejected: Release Name, Environment, Approval Type, Approver Name, Release Definition, Comments</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-VSTeamApproval</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>StatusFilter</maml:name>
-          <maml:Description>
-            <maml:para>By default the function returns Pending approvals. </maml:para>
-            <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals. </maml:para>
-            <maml:para>There is a custom table view for each status.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>ProjectName</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the team project for which this function operates.</maml:para>
-            <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>ReleaseIdFilter</maml:name>
-          <maml:Description>
-            <maml:para>Only approvals for the release ids provided will be returned.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>AssignedToFilter</maml:name>
-          <maml:Description>
-            <maml:para>Approvals are filtered to only those assigned to this user.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>StatusFilter</maml:name>
-        <maml:Description>
-          <maml:para>By default the function returns Pending approvals. </maml:para>
-          <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals. </maml:para>
-          <maml:para>There is a custom table view for each status.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>ReleaseIdFilter</maml:name>
-        <maml:Description>
-          <maml:para>Only approvals for the release ids provided will be returned.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-        <dev:type>
-          <maml:name>Int32[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>AssignedToFilter</maml:name>
-        <maml:Description>
-          <maml:para>Approvals are filtered to only those assigned to this user.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-        <maml:name>ProjectName</maml:name>
-        <maml:Description>
-          <maml:para>Specifies the team project for which this function operates.</maml:para>
-          <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>You can pipe build defintion IDs to this function.</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>Team.BuildDefinition</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
-        <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo</dev:code>
-        <dev:remarks>
-          <maml:para>This command gets a list of all pending approvals.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved</dev:code>
-        <dev:remarks>
-          <maml:para>This command gets a list of all approved approvals using a custom table format.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected</dev:code>
-        <dev:remarks>
-          <maml:para>This command gets a list of all approvals rejected by Administrator using a custom table format.</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Add-BuildDefinition</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Remove-BuildDefinition</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Get-Build</command:name>
       <command:verb>Get</command:verb>
       <command:noun>Build</command:noun>
@@ -4994,6 +4797,203 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamApproval</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamApproval</command:noun>
+      <maml:description>
+        <maml:para>Gets a list of approvals for all releases for a team project.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-VSTeamApproval function gets the approvals for all releases for a team project.</maml:para>
+      <maml:para>With just a project name, this function gets all of the pending approvals for that team project.</maml:para>
+      <maml:para>The Team.Approval type has three custom table formats:</maml:para>
+      <maml:para>Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions</maml:para>
+      <maml:para>Approved: Release Name, Environment, Is Automated, Approval Type, Approver Name, Release Definitions, Comments</maml:para>
+      <maml:para>Rejected: Release Name, Environment, Approval Type, Approver Name, Release Definition, Comments</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamApproval</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>StatusFilter</maml:name>
+          <maml:Description>
+            <maml:para>By default the function returns Pending approvals. </maml:para>
+            <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals. </maml:para>
+            <maml:para>There is a custom table view for each status.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>ReleaseIdFilter</maml:name>
+          <maml:Description>
+            <maml:para>Only approvals for the release ids provided will be returned.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>AssignedToFilter</maml:name>
+          <maml:Description>
+            <maml:para>Approvals are filtered to only those assigned to this user.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>StatusFilter</maml:name>
+        <maml:Description>
+          <maml:para>By default the function returns Pending approvals. </maml:para>
+          <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals. </maml:para>
+          <maml:para>There is a custom table view for each status.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>ReleaseIdFilter</maml:name>
+        <maml:Description>
+          <maml:para>Only approvals for the release ids provided will be returned.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>AssignedToFilter</maml:name>
+        <maml:Description>
+          <maml:para>Approvals are filtered to only those assigned to this user.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>You can pipe build defintion IDs to this function.</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Team.BuildDefinition</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of all pending approvals.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of all approved approvals using a custom table format.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of all approvals rejected by Administrator using a custom table format.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-BuildDefinition</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-BuildDefinition</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamInfo</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamInfo</command:noun>
@@ -6467,19 +6467,177 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Set-Approval</command:name>
+      <command:name>Set-ReleaseStatus</command:name>
       <command:verb>Set</command:verb>
-      <command:noun>Approval</command:noun>
+      <command:noun>ReleaseStatus</command:noun>
+      <maml:description>
+        <maml:para>Sets the status of a release to Active or Abandoned.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Sets the status of a release to Active or Abandoned.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-ReleaseStatus</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Specifies one or more releases by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of a release type Get-Release.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Status</maml:name>
+          <maml:Description>
+            <maml:para>The status to set for the release Active or Abandoned.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>Specifies one or more releases by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of a release type Get-Release.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Status</maml:name>
+        <maml:Description>
+          <maml:para>The status to set for the release Active or Abandoned.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Int32[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>System.String</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>## RELATED LINKS</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-ReleaseStatus -Id 5 -status Abandoned</dev:code>
+        <dev:remarks>
+          <maml:para>This command will set the status of release with id 5 to Abandoned.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-VSTeamApproval</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>VSTeamApproval</command:noun>
       <maml:description>
         <maml:para>Sets the status of approval to Approved, Rejected, Pending, or ReAssigned.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Set-Approval sets the status of approval to Approved, Rejected, Pending, or ReAssigned.</maml:para>
+      <maml:para>Set-VSTeamApproval sets the status of approval to Approved, Rejected, Pending, or ReAssigned.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Set-Approval</maml:name>
+        <maml:name>Set-VSTeamApproval</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
@@ -6661,174 +6819,16 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamApproval | Set-Approval</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval | Set-VSTeamApproval</dev:code>
         <dev:remarks>
           <maml:para>This command sets all pending approvals to approved.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Set-Approval -Id 1 -Status Rejected</dev:code>
+        <dev:code>PS C:\&gt; Set-VSTeamApproval -Id 1 -Status Rejected</dev:code>
         <dev:remarks>
           <maml:para>This command rejects approval with Id of 1.</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks />
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Set-ReleaseStatus</command:name>
-      <command:verb>Set</command:verb>
-      <command:noun>ReleaseStatus</command:noun>
-      <maml:description>
-        <maml:para>Sets the status of a release to Active or Abandoned.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>Sets the status of a release to Active or Abandoned.</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Set-ReleaseStatus</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>Id</maml:name>
-          <maml:Description>
-            <maml:para>Specifies one or more releases by ID.</maml:para>
-            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-            <maml:para>To find the ID of a release type Get-Release.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>ProjectName</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the team project for which this function operates.</maml:para>
-            <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>Status</maml:name>
-          <maml:Description>
-            <maml:para>The status to set for the release Active or Abandoned.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-        <maml:name>Id</maml:name>
-        <maml:Description>
-          <maml:para>Specifies one or more releases by ID.</maml:para>
-          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-          <maml:para>To find the ID of a release type Get-Release.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-        <dev:type>
-          <maml:name>Int32[]</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>Status</maml:name>
-        <maml:Description>
-          <maml:para>The status to set for the release Active or Abandoned.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Force</maml:name>
-        <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-        <maml:name>ProjectName</maml:name>
-        <maml:Description>
-          <maml:para>Specifies the team project for which this function operates.</maml:para>
-          <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>System.Int32[]</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para>System.String</maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Set-ReleaseStatus -Id 5 -status Abandoned</dev:code>
-        <dev:remarks>
-          <maml:para>This command will set the status of release with id 5 to Abandoned.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

@@ -120,7 +120,7 @@
       'Remove-ServiceEndpoint',
       'Remove-VSTeamAccount',
       'Remove-Team',
-      'Set-Approval',
+      'Set-VSTeamApproval',
       'Set-VSTeamDefaultProject',
       'Set-ReleaseStatus',
       'Update-Project',

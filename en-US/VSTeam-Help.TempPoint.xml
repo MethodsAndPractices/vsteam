@@ -6467,7 +6467,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Set-Approval</command:name>
+      <command:name>Set-VSTeamApproval</command:name>
       <command:verb>Set</command:verb>
       <command:noun>Approval</command:noun>
       <maml:description>
@@ -6475,11 +6475,11 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Set-Approval sets the status of approval to Approved, Rejected, Pending, or ReAssigned.</maml:para>
+      <maml:para>Set-VSTeamApproval sets the status of approval to Approved, Rejected, Pending, or ReAssigned.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Set-Approval</maml:name>
+        <maml:name>Set-VSTeamApproval</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
@@ -6661,14 +6661,14 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamApproval | Set-Approval</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamApproval | Set-VSTeamApproval</dev:code>
         <dev:remarks>
           <maml:para>This command sets all pending approvals to approved.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Set-Approval -Id 1 -Status Rejected</dev:code>
+        <dev:code>PS C:\&gt; Set-VSTeamApproval -Id 1 -Status Rejected</dev:code>
         <dev:remarks>
           <maml:para>This command rejects approval with Id of 1.</maml:para>
         </dev:remarks>

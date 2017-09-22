@@ -32,7 +32,7 @@ InModuleScope Approvals {
          }
       }
 
-      Context 'Set-Approval' {
+      Context 'Set-VSTeamApproval' {
          Mock Invoke-RestMethod { return @{
                id=1
                revision=1
@@ -43,7 +43,7 @@ InModuleScope Approvals {
             }}
 
          It 'should set approval' {
-            Set-Approval -projectName project -Id 1 -Status Rejected -Force
+            Set-VSTeamApproval -projectName project -Id 1 -Status Rejected -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=3.0-preview.1' }
          }
