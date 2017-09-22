@@ -22,7 +22,8 @@ function _buildURL {
 
    if ($Id) {
       $resource += "/$Id"
-   } elseif ($Name) {
+   }
+   elseif ($Name) {
       $resource += "/$Name"
    }
 
@@ -166,7 +167,7 @@ function Add-Team {
 }
 
 function Update-Team {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Alias('TeamName')]     
@@ -175,7 +176,8 @@ function Update-Team {
       [Alias('Id')]
       [string]$Name,
       [string]$NewTeamName,
-      [string]$Description
+      [string]$Description,
+      [switch] $Force
    )
    DynamicParam {
       _buildProjectNameDynamicParam
@@ -190,27 +192,29 @@ function Update-Team {
          throw 'You must provide a new team name or description, or both.'
       }
 
-      if (-not $NewTeamName) { 
-         $body = '{"description": "' + $Description + '" }'
-      }
-      if (-not $Description) {
-         $body = '{ "name": "' + $NewTeamName + '" }'
-      }
-      if ($NewTeamName -and $Description) {
-         $body = '{ "name": "' + $NewTeamName + '", "description": "' + $Description + '" }'            
-      }
+      if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-Team")) {
+         if (-not $NewTeamName) { 
+            $body = '{"description": "' + $Description + '" }'
+         }
+         if (-not $Description) {
+            $body = '{ "name": "' + $NewTeamName + '" }'
+         }
+         if ($NewTeamName -and $Description) {
+            $body = '{ "name": "' + $NewTeamName + '", "description": "' + $Description + '" }'            
+         }
 
-      # Call the REST API
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
+         # Call the REST API
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
 
-      _applyTypes -item $resp -ProjectName $ProjectName
+         _applyTypes -item $resp -ProjectName $ProjectName
 
-      return $resp
+         return $resp
+      }
    }
 }
 
