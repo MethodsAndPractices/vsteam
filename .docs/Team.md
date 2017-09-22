@@ -16,8 +16,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-Build](Add-Build.md)
 #include "./synopsis/Add-Build.md"
 
-### [Add-BuildDefinition](Add-BuildDefinition.md)
-#include "./synopsis/Add-BuildDefinition.md"
+### [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
+#include "./synopsis/Add-VSTeamBuildDefinition.md"
 
 ### [Add-BuildTag](Add-BuildTag.md)
 #include "./synopsis/Add-BuildTag.md"
@@ -58,8 +58,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-BuildArtifact](Get-BuildArtifact.md)
 #include "./synopsis/Get-BuildArtifact.md"
 
-### [Get-BuildDefinition](Get-BuildDefinition.md)
-#include "./synopsis/Get-BuildDefinition.md"
+### [Get-VSTeamBuildDefinition](Get-VSTeamBuildDefinition.md)
+#include "./synopsis/Get-VSTeamBuildDefinition.md"
 
 ### [Get-BuildLog](Get-BuildLog.md)
 #include "./synopsis/Get-BuildLog.md"
@@ -106,8 +106,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-Build](Remove-Build.md)
 #include "./synopsis/Remove-Build.md"
 
-### [Remove-BuildDefinition](Remove-BuildDefinition.md)
-#include "./synopsis/Remove-BuildDefinition.md"
+### [Remove-VSTeamBuildDefinition](Remove-VSTeamBuildDefinition.md)
+#include "./synopsis/Remove-VSTeamBuildDefinition.md"
 
 ### [Remove-BuildTag](Remove-BuildTag.md)
 #include "./synopsis/Remove-BuildTag.md"

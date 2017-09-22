@@ -10,7 +10,7 @@ InModuleScope builds {
    # Just a shell for the nest dynamic parameters
    # Used as Mock for calls below. We can't use normal
    # Mock because the module where it lives is not loaded.
-   function Get-BuildDefinition {
+   function Get-VSTeamBuildDefinition {
       return new-object psobject -Property @{
          id=2
          name='MyBuildDef'

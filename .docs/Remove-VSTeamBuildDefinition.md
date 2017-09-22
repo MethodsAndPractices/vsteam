@@ -1,18 +1,18 @@
 #include "./common/header.md"
 
-# Remove-BuildDefinition
+# Remove-VSTeamBuildDefinition
 
 ## SYNOPSIS
-#include "./synopsis/Remove-BuildDefinition.md"
+#include "./synopsis/Remove-VSTeamBuildDefinition.md"
 
 ## SYNTAX
 
 ```
-Remove-BuildDefinition [-ProjectName] <String> [-Id] <Int32[]> [-Force]
+Remove-VSTeamBuildDefinition [-ProjectName] <String> [-Id] <Int32[]> [-Force]
 ```
 
 ## DESCRIPTION
-The Remove-BuildDefinition function removes the build definitions for a
+The Remove-VSTeamBuildDefinition function removes the build definitions for a
 team project.
 
 The project name is a Dynamic Parameter which may not be
@@ -22,12 +22,12 @@ displayed in the syntax above but is mandatory.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-BuildDefinition -ProjectName Demo | Remove-BuildDefinition
+PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo | Remove-VSTeamBuildDefinition
 ```
 
 This command gets a list of all build definitions in the demo project.
 
-The pipeline operator (|) passes the data to the Remove-BuildDefinition
+The pipeline operator (|) passes the data to the Remove-VSTeamBuildDefinition
 function, which removes each build defintion object.
 
 ## PARAMETERS
@@ -37,7 +37,7 @@ Specifies one or more build definitions by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a build defintion, type Get-BuildDefinition.
+To find the ID of a build defintion, type Get-VSTeamBuildDefinition.
 
 ```yaml
 Type: Int32[]
@@ -76,5 +76,5 @@ to pass the ProjectName with each call.
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
-[Add-BuildDefinition](Add-BuildDefinition.md)
-[Get-BuildDefinition](Get-BuildDefinition.md)
+[Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
+[Get-VSTeamBuildDefinition](Get-VSTeamBuildDefinition.md)

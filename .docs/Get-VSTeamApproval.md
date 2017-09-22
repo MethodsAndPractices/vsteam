@@ -124,5 +124,5 @@ to pass the ProjectName with each call.
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
-[Add-BuildDefinition](Add-BuildDefinition.md)
-[Remove-BuildDefinition](Remove-BuildDefinition.md)
+[Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
+[Remove-VSTeamBuildDefinition](Remove-VSTeamBuildDefinition.md)

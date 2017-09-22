@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Add-BuildDefinition
+# Add-VSTeamBuildDefinition
 
 ## SYNOPSIS
-#include "./synopsis/Add-BuildDefinition.md"
+#include "./synopsis/Add-VSTeamBuildDefinition.md"
 
 ## SYNTAX
 
 ```
-Add-BuildDefinition [-ProjectName] <String> [-InFile] <String>
+Add-VSTeamBuildDefinition [-ProjectName] <String> [-InFile] <String>
 ```
 
 ## DESCRIPTION
@@ -21,7 +21,7 @@ You must call Add-VSTeamAccount before calling this function.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Add-BuildDefinition -ProjectName Demo -InFile build.json
+PS C:\> Add-VSTeamBuildDefinition -ProjectName Demo -InFile build.json
 ```
 
 This command reads build.json and creates a new build defintion from it

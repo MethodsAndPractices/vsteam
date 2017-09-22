@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Get-BuildDefinition
+# Get-VSTeamBuildDefinition
 
 ## SYNOPSIS
-#include "./synopsis/Get-BuildDefinition.md"
+#include "./synopsis/Get-VSTeamBuildDefinition.md"
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-BuildDefinition [-ProjectName] <String> [-Filter <String>] [-Type <String>]
+Get-VSTeamBuildDefinition [-ProjectName] <String> [-Filter <String>] [-Type <String>]
 ```
 
 ### ByID
 ```
-Get-BuildDefinition [-ProjectName] <String> -Id <Int32[]> [-Revision <Int32>]
+Get-VSTeamBuildDefinition [-ProjectName] <String> -Id <Int32[]> [-Revision <Int32>]
 ```
 
 ## DESCRIPTION
-The Get-BuildDefinition function gets the build definitions for a team
+The Get-VSTeamBuildDefinition function gets the build definitions for a team
 project.
 
 The project name is a Dynamic Parameter which may not be displayed
@@ -34,7 +34,7 @@ by ID.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-BuildDefinition -ProjectName Demo | Format-List *
+PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo | Format-List *
 ```
 
 This command gets a list of all build definitions in the demo project.
@@ -85,7 +85,7 @@ Specifies one or more build definitions by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a build defintion, type Get-BuildDefinition.
+To find the ID of a build defintion, type Get-VSTeamBuildDefinition.
 
 ```yaml
 Type: Int32[]
@@ -128,5 +128,5 @@ Accept wildcard characters: False
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
-[Add-BuildDefinition](Add-BuildDefinition.md)
-[Remove-BuildDefinition](Remove-BuildDefinition.md)
+[Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
+[Remove-VSTeamBuildDefinition](Remove-VSTeamBuildDefinition.md)

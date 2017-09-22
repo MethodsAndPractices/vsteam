@@ -329,7 +329,7 @@ function Add-Build {
       $dp.Add($ParameterName, $rp)
 
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $buildDefs = Get-BuildDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $buildDefs.fullname
       }
       else {
@@ -359,7 +359,7 @@ function Add-Build {
       }
       else {
          # Find the BuildDefinition id from the name
-         $id = Get-BuildDefinition -ProjectName "$ProjectName" -Type All |
+         $id = Get-VSTeamBuildDefinition -ProjectName "$ProjectName" -Type All |
             Where-Object { $_.fullname -eq $BuildDefinition } |
             Select-Object -ExpandProperty id
       }

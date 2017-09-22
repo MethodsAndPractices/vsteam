@@ -10,7 +10,7 @@ InModuleScope buildDefinitions {
    Describe 'BuildDefinitions' {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
-      Context 'Get-BuildDefinition with no parameters' {
+      Context 'Get-VSTeamBuildDefinition with no parameters' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   queue=@{}
@@ -21,13 +21,13 @@ InModuleScope buildDefinitions {
             }}
 
          It 'should return build definitions' {
-            Get-BuildDefinition -projectName project
+            Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/definitions?api-version=2.0' }
          }
       }
 
-      Context 'Get-BuildDefinition with type parameter' {
+      Context 'Get-VSTeamBuildDefinition with type parameter' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   queue=@{}
@@ -38,13 +38,13 @@ InModuleScope buildDefinitions {
             }}
 
          It 'should return build definitions by type' {
-            Get-BuildDefinition -projectName project -type build
+            Get-VSTeamBuildDefinition -projectName project -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/definitions?api-version=2.0&type=build' }
          }
       }
 
-      Context 'Get-BuildDefinition with filter parameter' {
+      Context 'Get-VSTeamBuildDefinition with filter parameter' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   queue=@{}
@@ -55,13 +55,13 @@ InModuleScope buildDefinitions {
             }}
 
          It 'should return build definitions by filter' {
-            Get-BuildDefinition -projectName project -filter 'click*'
+            Get-VSTeamBuildDefinition -projectName project -filter 'click*'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/definitions?api-version=2.0&name=click*' }
          }
       }
 
-      Context 'Get-BuildDefinition with both parameters' {
+      Context 'Get-VSTeamBuildDefinition with both parameters' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   queue=@{}
@@ -72,13 +72,13 @@ InModuleScope buildDefinitions {
             }}
 
          It 'should return build definitions by filter' {
-            Get-BuildDefinition -projectName project -filter 'click*' -type build
+            Get-VSTeamBuildDefinition -projectName project -filter 'click*' -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/definitions?api-version=2.0&type=build&name=click*' }
          }
       }
 
-      Context 'Add-BuildDefinition' {
+      Context 'Add-VSTeamBuildDefinition' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   queue=@{}
@@ -89,7 +89,7 @@ InModuleScope buildDefinitions {
             }}
 
          it 'Should add build' {
-            Add-BuildDefinition -projectName project -inFile 'builddef.json'
+            Add-VSTeamBuildDefinition -projectName project -inFile 'builddef.json'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq 'https://test.visualstudio.com/project/_apis/build/definitions?api-version=2.0' -and `
@@ -99,7 +99,7 @@ InModuleScope buildDefinitions {
          }
       }
 
-      Context 'Get-BuildDefinition by ID' {
+      Context 'Get-VSTeamBuildDefinition by ID' {
          Mock Invoke-RestMethod { return @{
                queue=@{}
                _links=@{}
@@ -110,7 +110,7 @@ InModuleScope buildDefinitions {
             }}
 
          It 'should return build definition' {
-            Get-BuildDefinition -projectName project -id 15
+            Get-VSTeamBuildDefinition -projectName project -id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq 'https://test.visualstudio.com/project/_apis/build/definitions/15?api-version=2.0'
@@ -118,7 +118,7 @@ InModuleScope buildDefinitions {
          }
       }
 
-      Context 'Get-BuildDefinition with revision parameter' {
+      Context 'Get-VSTeamBuildDefinition with revision parameter' {
          Mock Invoke-RestMethod { return @{
                queue=@{}
                _links=@{}
@@ -127,13 +127,13 @@ InModuleScope buildDefinitions {
             }}
 
          It 'should return build definitions by revision' {
-            Get-BuildDefinition -projectName project -id 16 -revision 1
+            Get-VSTeamBuildDefinition -projectName project -id 16 -revision 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/definitions/16?api-version=2.0&revision=1' }
          }
       }
 
-      Context 'Remove-BuildDefinition' {
+      Context 'Remove-VSTeamBuildDefinition' {
          Mock Invoke-RestMethod { return @{
                value=@{
                   queue=@{}
@@ -144,7 +144,7 @@ InModuleScope buildDefinitions {
             }}
 
          It 'should delete build definition' {
-            Remove-BuildDefinition -projectName project -id 2 -Force
+            Remove-VSTeamBuildDefinition -projectName project -id 2 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Delete' -and $Uri -eq 'https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=2.0' }
          }

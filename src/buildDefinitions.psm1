@@ -58,7 +58,7 @@ function _applyTypes {
    }
 }
 
-function Get-BuildDefinition {
+function Get-VSTeamBuildDefinition {
    [CmdletBinding(DefaultParameterSetName='List')]
    param(
       [Parameter(ParameterSetName='List')]
@@ -133,7 +133,7 @@ function Get-BuildDefinition {
    }
 }
 
-function Add-BuildDefinition {
+function Add-VSTeamBuildDefinition {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -162,7 +162,7 @@ function Add-BuildDefinition {
    }
 }
 
-function Remove-BuildDefinition {
+function Remove-VSTeamBuildDefinition {
    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -197,4 +197,7 @@ function Remove-BuildDefinition {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-BuildDefinition, Add-BuildDefinition, Remove-BuildDefinition
+Set-Alias Get-BuildDefinition Get-VSTeamBuildDefinition
+Set-Alias Add-BuildDefinition Add-VSTeamBuildDefinition
+
+Export-ModuleMember -Alias * -Function Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition, Remove-VSTeamBuildDefinition
