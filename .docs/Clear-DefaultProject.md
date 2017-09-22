@@ -50,5 +50,5 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Set-Project](Set-Project.md)
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
 

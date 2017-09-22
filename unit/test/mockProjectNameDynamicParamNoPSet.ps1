@@ -24,8 +24,6 @@ Mock _buildDynamicParam {
       $ParameterName
    )
 
-   # Create the dictionary 
-   $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
    # Create the collection of attributes
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
    # Create and set the parameters' attributes

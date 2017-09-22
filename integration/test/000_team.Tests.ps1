@@ -4,25 +4,25 @@ Get-Module team | Remove-Module -Force
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 
 Describe 'Team' {
-   Context 'Get-TeamInfo' {
+   Context 'Get-VSTeamInfo' {
       It 'should return account and default project' {
          $env:TEAM_ACCT = "mydemos"
          $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
-         $info = Get-TeamInfo
+         $info = Get-VSTeamInfo
 
          $info.Account | Should Be "mydemos"
          $info.DefaultProject | Should Be "MyProject"
       }
    }
 
-   Context 'Add-TeamAccount vsts' {
+   Context 'Add-VSTeamAccount vsts' {
       It 'should set env at process level' {
          $pat = $env:PAT
          $acct = $env:ACCT
-         Add-TeamAccount -a $acct -pe $pat
+         Add-VSTeamAccount -a $acct -pe $pat
 
-         $info = Get-TeamInfo
+         $info = Get-VSTeamInfo
          
          $info.DefaultProject | Should Be $null
          $info.Account | Should Be "https://$acct.visualstudio.com"
@@ -35,7 +35,7 @@ Describe 'Team' {
          Remove-TeamAccount
 
          # Assert
-         $info = Get-TeamInfo
+         $info = Get-VSTeamInfo
          
          $info.Account | Should Be $null
          $info.DefaultProject | Should Be $null

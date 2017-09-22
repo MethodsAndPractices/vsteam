@@ -245,7 +245,7 @@ to pass the ProjectName with each call.
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-DefaultProject](Set-DefaultProject.md)
 [Add-Build](Add-Build.md)
 [Remove-Build](Remove-Build.md)

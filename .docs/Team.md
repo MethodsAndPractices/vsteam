@@ -43,8 +43,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-Team](Add-Team.md)
 #include "./synopsis/Add-Team.md"
 
-### [Add-TeamAccount](Add-TeamAccount.md)
-#include "./synopsis/Add-TeamAccount.md"
+### [Add-VSTeamAccount](Add-VSTeamAccount.md)
+#include "./synopsis/Add-VSTeamAccount.md"
 
 ### [Clear-DefaultProject](Clear-DefaultProject.md)
 #include "./synopsis/Clear-DefaultProject.md"
@@ -94,8 +94,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-Team](Get-Team.md)
 #include "./synopsis/Get-Team.md"
 
-### [Get-TeamInfo](Get-TeamInfo.md)
-#include "./synopsis/Get-TeamInfo.md"
+### [Get-VSTeamInfo](Get-VSTeamInfo.md)
+#include "./synopsis/Get-VSTeamInfo.md"
 
 ### [Get-TeamMember](Get-TeamMember.md)
 #include "./synopsis/Get-TeamMember.md"
@@ -130,8 +130,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-Team](Remove-Team.md)
 #include "./synopsis/Remove-Team.md"
 
-### [Remove-TeamAccount](Remove-TeamAccount.md)
-#include "./synopsis/Remove-TeamAccount.md"
+### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
+#include "./synopsis/Remove-VSTeamAccount.md"
 
 ### [Set-Approval](Set-Approval.md)
 #include "./synopsis/Set-Approval.md"

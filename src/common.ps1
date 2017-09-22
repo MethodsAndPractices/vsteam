@@ -45,7 +45,7 @@ function _buildReleaseURL {
    )
 
    if (-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $resource = "release/$resource"
@@ -77,7 +77,7 @@ function _appendQueryString {
 
 function _getUserAgent {
    # Read the version from the psd1 file.
-   $content = (Get-Content -Raw "$here\..\Team.psd1" | Out-String)
+   $content = (Get-Content -Raw "$here\..\VSTeam.psd1" | Out-String)
    $r = [regex]"ModuleVersion += +'([^']+)'"
    $d = $r.Match($content)
 
@@ -185,7 +185,7 @@ function _buildProjectNameDynamicParam {
    <#
    Builds a dynamic parameter that can be used to tab complete the ProjectName
    parameter of functions from a list of projects from the added TFS Account.
-   You must call Add-TeamAccount before trying to use any function that relies
+   You must call Add-VSTeamAccount before trying to use any function that relies
    on this dynamic parameter or you will get an error.
 
    This can only be used in Advanced Fucntion with the [CmdletBinding()] attribute.

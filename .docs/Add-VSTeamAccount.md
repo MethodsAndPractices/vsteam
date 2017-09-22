@@ -1,25 +1,25 @@
 #include "./common/header.md"
 
-# Add-TeamAccount
+# Add-VSTeamAccount
 
 ## SYNOPSIS
-#include "./synopsis/Add-TeamAccount.md"
+#include "./synopsis/Add-VSTeamAccount.md"
 
 ## SYNTAX
 
 ### Secure (Default)
 ```
-Add-TeamAccount [-Account] <String> -PAT <SecureString> [-Level <String>]
+Add-VSTeamAccount [-Account] <String> -PAT <SecureString> [-Level <String>]
 ```
 
 ### Plain
 ```
-Add-TeamAccount [-PersonalAccessToken] <String> [[-Account] <String>] [-Level <String>]
+Add-VSTeamAccount [-PersonalAccessToken] <String> [[-Account] <String>] [-Level <String>]
 ```
 
 ### Windows
 ```
-Add-TeamAccount [[-Account] <String>] [-UseWindowsAuthentication]
+Add-VSTeamAccount [[-Account] <String>] [-UseWindowsAuthentication]
 ```
 
 ## DESCRIPTION
@@ -29,27 +29,27 @@ machine level) level.
 
 On Linux and Mac you can only store at the process level.
 
-Calling Add-TeamAccount will clear any default project.
+Calling Add-VSTeamAccount will clear any default project.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Add-TeamAccount
+PS C:\> Add-VSTeamAccount
 ```
 
 You will be prompted for the account name and personal access token.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Add-TeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
+PS C:\> Add-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
 ```
 
 Allows you to provide all the information on the command line.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-PS C:\> Add-TeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
+PS C:\> Add-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
 ```
 
 On Windows, allows you use to use Windows authentication against a local TFS server.
@@ -96,7 +96,7 @@ A secured string to capture your personal access token.
 This will allow you
 to provide your personal access token without displaying it in plain text.
 
-To use pat simply omit it from the Add-TeamAccount command.
+To use pat simply omit it from the Add-VSTeamAccount command.
 
 ```yaml
 Type: SecureString
@@ -164,5 +164,5 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-DefaultProject](Set-DefaultProject.md)

@@ -10,7 +10,7 @@ function _buildURL {
    )
 
    if (-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $version = '1.0'
@@ -87,13 +87,17 @@ function Get-Project {
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('WellFormed', 'CreatePending', 'Deleting', 'New', 'All')]
       [string] $StateFilter = 'WellFormed',
+      
       [Parameter(ParameterSetName = 'List')]
       [int] $Top = 100,
+      
       [Parameter(ParameterSetName = 'List')]
       [int] $Skip = 0,
+      
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id,
+      
       [Parameter(ParameterSetName = 'ByID')]
       [switch] $IncludeCapabilities
    )

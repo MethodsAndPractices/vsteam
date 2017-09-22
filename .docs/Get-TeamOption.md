@@ -45,4 +45,4 @@ This will display all the versions of supported APIs for your account using the 
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)

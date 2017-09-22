@@ -105,5 +105,5 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Remove-Project](Remove-Project.md)

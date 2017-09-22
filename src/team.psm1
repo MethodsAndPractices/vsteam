@@ -8,7 +8,7 @@ function _buildURL {
    param()
 
    if (-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
    
    $instance = $env:TEAM_ACCT
@@ -67,7 +67,7 @@ function _clearEnvironmentVariables {
    _setEnvironmentVariables -Level $Level -Pat $null -Acct $null
 }
 
-function Get-TeamInfo {
+function Get-VSTeamInfo {
    return @{
       Account        = $env:TEAM_ACCT
       DefaultProject = $Global:PSDefaultParameterValues['*:projectName']
@@ -94,7 +94,7 @@ function Get-TeamOption {
    Write-Output $resp.value
 }
 
-function Add-TeamAccount {
+function Add-VSTeamAccount {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
@@ -215,7 +215,7 @@ function Add-TeamAccount {
    }
 }
 
-function Remove-TeamAccount {
+function Remove-VSTeamAccount {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       # Forces the command without confirmation
@@ -479,7 +479,11 @@ function Set-DefaultProject {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Clear-DefaultProject, Set-DefaultProject, Get-TeamOption
+Set-Alias Get-TeamInfo Get-VSTeamInfo
+Set-Alias Add-TeamAccount Add-VSTeamAccount
+Set-Alias Remove-TeamAccount Remove-VSTeamAccount
+
+Export-ModuleMember -Alias * -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-DefaultProject, Set-DefaultProject, Get-TeamOption
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {

@@ -13,7 +13,7 @@ function _buildURL {
    )
 
    if (-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $version = '1.0'
@@ -170,10 +170,7 @@ function Update-Team {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
-      [Alias('TeamName')]     
-      [Alias('TeamId')]
-      [Alias('TeamToUpdate')]
-      [Alias('Id')]
+      [Alias('TeamName', 'TeamId', 'TeamToUpdate', 'Id')]
       [string]$Name,
       [string]$NewTeamName,
       [string]$Description,
@@ -222,9 +219,7 @@ function Remove-Team {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
-      [Alias('Name')]
-      [Alias('TeamId')]
-      [Alias('TeamName')]
+      [Alias('Name', 'TeamId', 'TeamName')]
       [string]$Id,
 
       [switch]$Force

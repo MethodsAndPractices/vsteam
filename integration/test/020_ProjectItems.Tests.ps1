@@ -14,7 +14,7 @@ Describe 'Project Items' {
       $pat = $env:PAT
       $acct = $env:ACCT
 
-      Add-TeamAccount -a $acct -pe $pat
+      Add-VSTeamAccount -a $acct -pe $pat
       Add-Project -ProjectName 'TeamModuleIntegration'
    }
 

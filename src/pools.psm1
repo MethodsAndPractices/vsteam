@@ -10,7 +10,7 @@ function _buildURL {
    )
 
    if (-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $version = '3.0-preview.1'
@@ -49,9 +49,11 @@ function Get-Pool {
    param(
       [Parameter(ParameterSetName = 'List')]
       [string] $PoolName,
+      
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('None', 'Manage', 'Use')]
       [string] $ActionFilter,
+      
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('PoolID')]
       [string] $Id

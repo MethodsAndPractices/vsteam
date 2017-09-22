@@ -7,24 +7,24 @@ InModuleScope team {
    Describe 'Team' {
       . "$PSScriptRoot\mockProjectDynamicParam.ps1"
 
-      Context 'Get-TeamInfo' {
+      Context 'Get-VSTeamInfo' {
          It 'should return account and default project' {
             $env:TEAM_ACCT = "mydemos"
             $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
-            $info = Get-TeamInfo
+            $info = Get-VSTeamInfo
 
             $info.Account | Should Be "mydemos"
             $info.DefaultProject | Should Be "MyProject"
          }
       }
 
-      Context 'Add-TeamAccount vsts' {
+      Context 'Add-VSTeamAccount vsts' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-TeamAccount -a mydemos -pe 12345
+            Add-VSTeamAccount -a mydemos -pe 12345
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -33,7 +33,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-TeamAccount run as administrator' {
+      Context 'Add-VSTeamAccount run as administrator' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -44,7 +44,7 @@ InModuleScope team {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-TeamAccount -a mydemos -pe 12345
+            Add-VSTeamAccount -a mydemos -pe 12345
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -53,7 +53,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-TeamAccount run as normal user' {
+      Context 'Add-VSTeamAccount run as normal user' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -64,7 +64,7 @@ InModuleScope team {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-TeamAccount -a mydemos -pe 12345
+            Add-VSTeamAccount -a mydemos -pe 12345
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -73,7 +73,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-TeamAccount at user level on Windows machine' {
+      Context 'Add-VSTeamAccount at user level on Windows machine' {
          # This is only supported on a Windows machine. So we have
          # to Mock the call to _isOnWindows so you can develop on a
          # Mac or Linux machine.
@@ -86,7 +86,7 @@ InModuleScope team {
          Mock _setEnvironmentVariables
 
          It 'should set env at user level' {
-            Add-TeamAccount -a mydemos -pe 12345 -Level User
+            Add-VSTeamAccount -a mydemos -pe 12345 -Level User
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {

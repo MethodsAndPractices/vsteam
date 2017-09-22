@@ -28,7 +28,7 @@ and skip parameters.
 
 You can also get a single project by name or id.
 
-You must call Add-TeamAccount before calling this function.
+You must call Add-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
@@ -137,6 +137,6 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Add-Project](Add-Project.md)
 [Remove-Project](Remove-Project.md)

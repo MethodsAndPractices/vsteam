@@ -43,8 +43,7 @@ InModuleScope serviceendpoints {
 
       Context 'Add-AzureRMServiceEndpoint' {
          Mock Write-Progress
-         Mock Invoke-RestMethod { $returnObject = $false
-            return @{id='23233-2342'} } -ParameterFilter { $Method -eq 'Post'}
+         Mock Invoke-RestMethod { return @{id='23233-2342'} } -ParameterFilter { $Method -eq 'Post'}
          Mock Invoke-RestMethod {
 
             # This $i is in the module. Because we use InModuleScope
@@ -74,8 +73,7 @@ InModuleScope serviceendpoints {
 
         Context 'Add-SonarQubeEndpoint' {
             Mock Write-Progress
-            Mock Invoke-RestMethod { $returnObject = $false
-                return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Post'}
+            Mock Invoke-RestMethod { return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Post'}
             Mock Invoke-RestMethod {
 
                 # This $i is in the module. Because we use InModuleScope

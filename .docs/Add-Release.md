@@ -25,7 +25,7 @@ Add-Release will queue a new release.
 The environments will deploy according to how the release definition is 
 configured in the Triggers tab.
 
-You must call Add-TeamAccount before calling this function.
+You must call Add-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 

@@ -74,7 +74,7 @@ to pass the ProjectName with each call.
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-DefaultProject](Set-DefaultProject.md)
 [Add-Release](Add-Release.md)
 [Get-Release](Get-Release.md)

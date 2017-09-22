@@ -16,7 +16,7 @@ Add-ReleaseEnvironment [-ProjectName] <String> [-Force] [-ReleaseId <String>] [-
 Add-ReleaseEnvironment will start the deployment of an environment
 within an existing release.
 
-You must call Add-TeamAccount before calling this function.
+You must call Add-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 

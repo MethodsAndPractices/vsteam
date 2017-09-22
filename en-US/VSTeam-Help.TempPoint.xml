@@ -374,7 +374,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:details>
     <maml:description>
       <maml:para>Reads a JSON file off disk and uses that file to create a new build defintion in the provided project.</maml:para>
-      <maml:para>You must call Add-TeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -889,7 +889,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -910,7 +910,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <maml:description>
       <maml:para>Add-Release will queue a new release.</maml:para>
       <maml:para>The environments will deploy according to how the release definition is  configured in the Triggers tab.</maml:para>
-      <maml:para>You must call Add-TeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1288,7 +1288,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:details>
     <maml:description>
       <maml:para>Reads a JSON file off disk and uses that file to create a new release defintion in the provided project.</maml:para>
-      <maml:para>You must call Add-TeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1389,7 +1389,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:details>
     <maml:description>
       <maml:para>Add-ReleaseEnvironment will start the deployment of an environment within an existing release.</maml:para>
-      <maml:para>You must call Add-TeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1818,9 +1818,9 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Add-TeamAccount</command:name>
+      <command:name>Add-VSTeamAccount</command:name>
       <command:verb>Add</command:verb>
-      <command:noun>TeamAccount</command:noun>
+      <command:noun>VSTeamAccount</command:noun>
       <maml:description>
         <maml:para>Stores your account name and personal access token for use with the other functions in this module.</maml:para>
       </maml:description>
@@ -1828,11 +1828,11 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <maml:description>
       <maml:para>On Windows you have to option to store the information at the process, user or machine (you must be running PowerShell as administrator to store at the machine level) level.</maml:para>
       <maml:para>On Linux and Mac you can only store at the process level.</maml:para>
-      <maml:para>Calling Add-TeamAccount will clear any default project.</maml:para>
+      <maml:para>Calling Add-VSTeamAccount will clear any default project.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Add-TeamAccount</maml:name>
+        <maml:name>Add-VSTeamAccount</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
@@ -1850,7 +1850,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:name>PAT</maml:name>
           <maml:Description>
             <maml:para>A secured string to capture your personal access token.  This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
-            <maml:para>To use pat simply omit it from the Add-TeamAccount command.</maml:para>
+            <maml:para>To use pat simply omit it from the Add-VSTeamAccount command.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
           <dev:type>
@@ -1861,7 +1861,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Add-TeamAccount</maml:name>
+        <maml:name>Add-VSTeamAccount</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
@@ -1889,7 +1889,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Add-TeamAccount</maml:name>
+        <maml:name>Add-VSTeamAccount</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
@@ -1916,7 +1916,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Add-TeamAccount</maml:name>
+        <maml:name>Add-VSTeamAccount</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
@@ -1931,7 +1931,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Add-TeamAccount</maml:name>
+        <maml:name>Add-VSTeamAccount</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
@@ -1964,7 +1964,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:name>PAT</maml:name>
         <maml:Description>
           <maml:para>A secured string to capture your personal access token.  This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
-          <maml:para>To use pat simply omit it from the Add-TeamAccount command.</maml:para>
+          <maml:para>To use pat simply omit it from the Add-VSTeamAccount command.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
         <dev:type>
@@ -2020,21 +2020,21 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-TeamAccount</dev:code>
+        <dev:code>PS C:\&gt; Add-VSTeamAccount</dev:code>
         <dev:remarks>
           <maml:para>You will be prompted for the account name and personal access token.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-TeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga</dev:code>
+        <dev:code>PS C:\&gt; Add-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga</dev:code>
         <dev:remarks>
           <maml:para>Allows you to provide all the information on the command line.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-TeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
+        <dev:code>PS C:\&gt; Add-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
         <dev:remarks>
           <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
         </dev:remarks>
@@ -2042,7 +2042,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -2116,7 +2116,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -2301,7 +2301,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -2699,7 +2699,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -3021,7 +3021,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -3327,7 +3327,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -3618,7 +3618,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <maml:description>
       <maml:para>The list of projects returned can be controlled by using the stateFilter, top and skip parameters.</maml:para>
       <maml:para>You can also get a single project by name or id.</maml:para>
-      <maml:para>You must call Add-TeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -3825,7 +3825,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -3844,11 +3844,11 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <command:verb>Get</command:verb>
       <command:noun>Queue</command:noun>
       <maml:description>
-        <maml:para></maml:para>
+        <maml:para>Gets a agent queue.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para>Gets a agent queue.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4352,7 +4352,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -4524,7 +4524,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -4547,11 +4547,11 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <command:verb>Get</command:verb>
       <command:noun>ServiceEndpoint</command:noun>
       <maml:description>
-        <maml:para></maml:para>
+        <maml:para>Gets a service endpoint.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para>Gets a service endpoint.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4847,47 +4847,6 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-TeamInfo</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>TeamInfo</command:noun>
-      <maml:description>
-        <maml:para>Displays your current account and default project.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>Displays your current account and default project.</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-TeamInfo</maml:name>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters />
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-TeamInfo</dev:code>
-        <dev:remarks>
-          <maml:para>This will display your current account and default project</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Get-TeamMember</command:name>
       <command:verb>Get</command:verb>
       <command:noun>TeamMember</command:noun>
@@ -5078,7 +5037,48 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-VSTeamInfo</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamInfo</command:noun>
+      <maml:description>
+        <maml:para>Displays your current account and default project.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Displays your current account and default project.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamInfo</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>You can also use the alias Get-TeamInfo</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamInfo</dev:code>
+        <dev:remarks>
+          <maml:para>This will display your current account and default project</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -5355,7 +5355,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -5768,7 +5768,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -5915,7 +5915,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -6068,7 +6068,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -6091,11 +6091,11 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <command:verb>Remove</command:verb>
       <command:noun>ServiceEndpoint</command:noun>
       <maml:description>
-        <maml:para></maml:para>
+        <maml:para>Removes a service endpoint.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para></maml:para>
+      <maml:para>Removes a service endpoint.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -6377,20 +6377,20 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Remove-TeamAccount</command:name>
+      <command:name>Remove-VSTeamAccount</command:name>
       <command:verb>Remove</command:verb>
-      <command:noun>TeamAccount</command:noun>
+      <command:noun>VSTeamAccount</command:noun>
       <maml:description>
         <maml:para>Clears your default project, account name and personal access token.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Clears the environment variables that hold your default project, account and personal access token. You have to run Add-TeamAccount again before calling any other functions.</maml:para>
+      <maml:para>Clears the environment variables that hold your default project, account and personal access token. You have to run Add-VSTeamAccount again before calling any other functions.</maml:para>
       <maml:para>To remove from the Machine level you must be running PowerShell as administrator.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Remove-TeamAccount</maml:name>
+        <maml:name>Remove-VSTeamAccount</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
@@ -6452,7 +6452,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Remove-TeamAccount</dev:code>
+        <dev:code>PS C:\&gt; Remove-VSTeamAccount</dev:code>
         <dev:remarks>
           <maml:para>This will clear your account name and personal access token.</maml:para>
         </dev:remarks>
@@ -6460,7 +6460,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-TeamAccount</maml:linkText>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -6974,7 +6974,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <command:verb>Update</command:verb>
       <command:noun>Build</command:noun>
       <maml:description>
-        <maml:para></maml:para>
+        <maml:para>Allows you to set the keep forever flag and build number.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -7198,11 +7198,11 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <command:verb>Update</command:verb>
       <command:noun>Project</command:noun>
       <maml:description>
-        <maml:para></maml:para>
+        <maml:para>Updates the project name, description or both.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>You can pass just new name, new description or both.</maml:para>
+      <maml:para>Updates the project name, description or both.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -7368,6 +7368,222 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         </dev:remarks>
       </command:example>
     </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-Team</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>Team</command:noun>
+      <maml:description>
+        <maml:para>Updates the team name, description or both.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Updates the team name, description or both.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-Team</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="Id, TeamToUpdate, TeamId, TeamName">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>The name of the team to update</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>NewTeamName</maml:name>
+          <maml:Description>
+            <maml:para>The new name of the team</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Description</maml:name>
+          <maml:Description>
+            <maml:para>The new description of the team</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Description</maml:name>
+        <maml:Description>
+          <maml:para>The new description of the team</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="Id, TeamToUpdate, TeamId, TeamName">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>The name of the team to update</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>NewTeamName</maml:name>
+        <maml:Description>
+          <maml:para>The new name of the team</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>## RELATED LINKS</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
 </helpItems>

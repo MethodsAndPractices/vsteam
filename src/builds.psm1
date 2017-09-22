@@ -58,7 +58,7 @@ function _buildRootURL {
    )
   
    if (-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
   
    $resource = "/build/builds"
@@ -221,6 +221,7 @@ function Get-BuildLog {
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
       [int[]] $Id,
+      
       [int] $Index
    )
 

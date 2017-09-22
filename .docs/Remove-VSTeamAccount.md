@@ -1,19 +1,19 @@
 #include "./common/header.md"
 
-# Remove-TeamAccount
+# Remove-VSTeamAccount
 
 ## SYNOPSIS
-#include "./synopsis/Remove-TeamAccount.md"
+#include "./synopsis/Remove-VSTeamAccount.md"
 
 ## SYNTAX
 
 ```
-Remove-TeamAccount [-Force] [-Level <String>]
+Remove-VSTeamAccount [-Force] [-Level <String>]
 ```
 
 ## DESCRIPTION
 Clears the environment variables that hold your default project, account and personal access token.
-You have to run Add-TeamAccount again before calling any other functions.
+You have to run Add-VSTeamAccount again before calling any other functions.
 
 To remove from the Machine level you must be running PowerShell as administrator.
 
@@ -21,7 +21,7 @@ To remove from the Machine level you must be running PowerShell as administrator
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Remove-TeamAccount
+PS C:\> Remove-VSTeamAccount
 ```
 
 This will clear your account name and personal access token.
@@ -54,4 +54,4 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)

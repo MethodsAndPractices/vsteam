@@ -57,5 +57,5 @@ This will remove all projects
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Add-Project](Add-Project.md)

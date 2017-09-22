@@ -15,7 +15,7 @@ Add-BuildDefinition [-ProjectName] <String> [-InFile] <String>
 Reads a JSON file off disk and uses that file to create a new build defintion
 in the provided project.
 
-You must call Add-TeamAccount before calling this function.
+You must call Add-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 

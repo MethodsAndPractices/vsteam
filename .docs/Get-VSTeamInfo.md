@@ -1,24 +1,24 @@
 #include "./common/header.md"
 
-# Get-TeamInfo
+# Get-VSTeamInfo
 
 ## SYNOPSIS
-#include "./synopsis/Get-TeamInfo.md"
+#include "./synopsis/Get-VSTeamInfo.md"
 
 ## SYNTAX
 
 ```
-Get-TeamInfo
+Get-VSTeamInfo
 ```
 
 ## DESCRIPTION
-#include "./synopsis/Get-TeamInfo.md"
+#include "./synopsis/Get-VSTeamInfo.md"
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Get-TeamInfo
+PS C:\> Get-VSTeamInfo
 ```
 
 This will display your current account and default project
@@ -33,4 +33,4 @@ This will display your current account and default project
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)

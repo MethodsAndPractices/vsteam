@@ -126,7 +126,7 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-[Add-TeamAccount](Add-TeamAccount.md)
+[Add-VSTeamAccount](Add-VSTeamAccount.md)
 [Set-DefaultProject](Set-DefaultProject.md)
 [Add-BuildDefinition](Add-BuildDefinition.md)
 [Remove-BuildDefinition](Remove-BuildDefinition.md)

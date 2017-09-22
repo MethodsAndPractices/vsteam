@@ -9,7 +9,7 @@ Describe 'Project' {
       $pat = $env:PAT
       $acct = $env:ACCT
 
-      Add-TeamAccount -a $acct -pe $pat
+      Add-VSTeamAccount -a $acct -pe $pat
    }
 
    Context 'Full exercise' {
