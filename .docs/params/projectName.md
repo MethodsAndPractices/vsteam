@@ -3,7 +3,7 @@ Specifies the team project for which this function operates.
 
 You can tab complete from a list of available projects.
 
-You can use Set-DefaultProject to set a default project so
+You can use Set-VSTeamDefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.
 
 ```yaml

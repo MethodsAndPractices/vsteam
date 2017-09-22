@@ -32,7 +32,7 @@
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -133,7 +133,7 @@
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -183,7 +183,7 @@
     <maml:description>
       <maml:para>Add-Build will queue a new build.</maml:para>
       <maml:para>You can override the queue in the build defintion by using the QueueName parameter.</maml:para>
-      <maml:para>To have the BuildDefinition and QueueNames tab complete you must set a default project by calling Set-DefaultProject before you call Add-Build.</maml:para>
+      <maml:para>To have the BuildDefinition and QueueNames tab complete you must set a default project by calling Set-VSTeamDefaultProject before you call Add-Build.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -193,7 +193,7 @@
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -234,7 +234,7 @@
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -275,7 +275,7 @@
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -343,14 +343,14 @@
     <maml:alertSet>
       <maml:alert>
         <maml:para>BuildDefinition and QueueName are dynamic parameters and use the default  project value to query their validate set. </maml:para>
-        <maml:para>If you do not set the default project by called Set-DefaultProject before calling Add-Build you will have to type in the names.</maml:para>
+        <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-Build you will have to type in the names.</maml:para>
         <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Set-DefaultProject Demo
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-Build -BuildDefinition Demo-CI
 
 Build Definition Build Number  Status     Result
@@ -396,7 +396,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -425,7 +425,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -450,7 +450,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
@@ -485,7 +485,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -599,7 +599,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -681,7 +681,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -710,7 +710,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -920,7 +920,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1020,7 +1020,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1168,7 +1168,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1241,7 +1241,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1263,7 +1263,7 @@ id name    Alias
 
 PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44</dev:code>
         <dev:remarks>
-          <maml:para>This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release.  If you call Set-DefaultProject you can use Example 2 which is much easier.</maml:para>
+          <maml:para>This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release.  If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -1310,7 +1310,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1339,7 +1339,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1364,7 +1364,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1399,7 +1399,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1464,7 +1464,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1538,7 +1538,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -1566,7 +1566,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1655,7 +1655,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1713,7 +1713,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1766,7 +1766,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2046,14 +2046,14 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Clear-DefaultProject</command:name>
+      <command:name>Clear-VSTeamDefaultProject</command:name>
       <command:verb>Clear</command:verb>
       <command:noun>DefaultProject</command:noun>
       <maml:description>
@@ -2065,7 +2065,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Clear-DefaultProject</maml:name>
+        <maml:name>Clear-VSTeamDefaultProject</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
@@ -2160,7 +2160,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2239,7 +2239,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2273,7 +2273,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2305,7 +2305,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -2340,7 +2340,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2615,7 +2615,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2663,7 +2663,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets builds.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2703,7 +2703,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -2736,7 +2736,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2777,7 +2777,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2838,7 +2838,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2880,7 +2880,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2948,7 +2948,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3025,7 +3025,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -3058,7 +3058,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3127,7 +3127,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3194,7 +3194,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3235,7 +3235,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3352,7 +3352,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3383,7 +3383,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3414,7 +3414,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3628,7 +3628,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3681,7 +3681,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3781,7 +3781,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3858,7 +3858,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3899,7 +3899,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3952,7 +3952,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4025,7 +4025,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4150,7 +4150,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4289,7 +4289,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4337,7 +4337,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -4356,7 +4356,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -4392,7 +4392,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4421,7 +4421,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4452,7 +4452,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4528,7 +4528,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -4561,7 +4561,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4590,7 +4590,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4660,7 +4660,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4701,7 +4701,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4730,7 +4730,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4759,7 +4759,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4865,7 +4865,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4918,7 +4918,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4994,7 +4994,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-TeamOption</command:name>
+      <command:name>Get-VSTeamOption</command:name>
       <command:verb>Get</command:verb>
       <command:noun>TeamOption</command:noun>
       <maml:description>
@@ -5008,7 +5008,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-TeamOption</maml:name>
+        <maml:name>Get-VSTeamOption</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
@@ -5022,14 +5022,14 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-TeamOption</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamOption</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for your account using the 'Default' table format.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-TeamOption | Format-Table -View Versions</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamOption | Format-Table -View Versions</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for your account using the 'Versions' custom table format.</maml:para>
         </dev:remarks>
@@ -5103,7 +5103,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -5171,7 +5171,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -5252,7 +5252,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -5306,7 +5306,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -5340,7 +5340,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5359,7 +5359,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -5392,7 +5392,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -5506,7 +5506,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -5677,7 +5677,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -5717,7 +5717,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -5812,7 +5812,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -5866,7 +5866,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -5900,7 +5900,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5919,7 +5919,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -5966,7 +5966,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6020,7 +6020,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6054,7 +6054,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
       <maml:alert>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -6072,7 +6072,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-DefaultProject</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -6117,7 +6117,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6169,7 +6169,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6227,7 +6227,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6313,7 +6313,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6485,7 +6485,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6562,7 +6562,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6678,7 +6678,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Set-DefaultProject</command:name>
+      <command:name>Set-VSTeamDefaultProject</command:name>
       <command:verb>Set</command:verb>
       <command:noun>DefaultProject</command:noun>
       <maml:description>
@@ -6691,13 +6691,13 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Set-DefaultProject</maml:name>
+        <maml:name>Set-VSTeamDefaultProject</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
           <maml:name>Project</maml:name>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6750,7 +6750,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6802,7 +6802,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Set-DefaultProject Demo</dev:code>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo</dev:code>
         <dev:remarks>
           <maml:para>This command sets Demo as the default project. You can now call other functions that require a project name without passing  the project.</maml:para>
         </dev:remarks>
@@ -6844,7 +6844,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6922,7 +6922,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6988,7 +6988,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7134,7 +7134,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7224,7 +7224,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7324,7 +7324,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7402,7 +7402,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
             <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7536,7 +7536,7 @@ PS C:\&gt; Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI 
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
           <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-DefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

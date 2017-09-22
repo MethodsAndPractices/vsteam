@@ -42,9 +42,9 @@ Describe 'Team' {
       }
    }
 
-   Context 'Set-DefaultProject' {
+   Context 'Set-VSTeamDefaultProject' {
       It 'should set default project' {
-         Set-DefaultProject 'MyProject'
+         Set-VSTeamDefaultProject 'MyProject'
 
          $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
       }
@@ -52,17 +52,17 @@ Describe 'Team' {
       It 'should update default project' {
          $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
-         Set-DefaultProject -Project 'NextProject'
+         Set-VSTeamDefaultProject -Project 'NextProject'
 
          $Global:PSDefaultParameterValues['*:projectName'] | Should be 'NextProject'
       }
    }
 
-   Context 'Clear-DefaultProject' {
+   Context 'Clear-VSTeamDefaultProject' {
       It 'should clear default project' {
          $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
-         Clear-DefaultProject
+         Clear-VSTeamDefaultProject
 
          $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
       }

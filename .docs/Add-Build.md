@@ -24,13 +24,13 @@ You can override the queue in the build defintion by using the QueueName
 parameter.
 
 To have the BuildDefinition and QueueNames tab complete you must set a default
-project by calling Set-DefaultProject before you call Add-Build.
+project by calling Set-VSTeamDefaultProject before you call Add-Build.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Set-DefaultProject Demo
+PS C:\> Set-VSTeamDefaultProject Demo
 PS C:\> Add-Build -BuildDefinition Demo-CI
 
 Build Definition Build Number  Status     Result
@@ -103,7 +103,7 @@ Queue Name
 BuildDefinition and QueueName are dynamic parameters and use the default 
 project value to query their validate set. 
 
-If you do not set the default project by called Set-DefaultProject before
+If you do not set the default project by called Set-VSTeamDefaultProject before
 calling Add-Build you will have to type in the names.
 
 ## RELATED LINKS

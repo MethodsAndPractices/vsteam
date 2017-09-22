@@ -165,4 +165,4 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
-[Set-DefaultProject](Set-DefaultProject.md)
+[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)

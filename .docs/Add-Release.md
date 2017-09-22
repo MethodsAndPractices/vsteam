@@ -49,7 +49,7 @@ PS C:\> Add-Release -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -Bu
 ```
 
 This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release. 
-If you call Set-DefaultProject you can use Example 2 which is much easier.
+If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
@@ -198,7 +198,7 @@ project for which this function gets release s.
 
 You can tab complete from a list of available projects.
 
-You can use Set-DefaultProject to set a default project so you do not have
+You can use Set-VSTeamDefaultProject to set a default project so you do not have
 to pass the ProjectName with each call.
 
 ## RELATED LINKS

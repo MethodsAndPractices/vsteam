@@ -74,7 +74,7 @@ function Get-VSTeamInfo {
    }
 }
 
-function Get-TeamOption {
+function Get-VSTeamOption {
    # Build the url to list the projects
    $url = _buildURL
 
@@ -210,7 +210,7 @@ function Add-VSTeamAccount {
          $encodedPat = ""
       }
 
-      Clear-DefaultProject
+      Clear-VSTeamDefaultProject
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
    }
 }
@@ -324,7 +324,7 @@ function Remove-VSTeamAccount {
    }
 }
 
-function Clear-DefaultProject {
+function Clear-VSTeamDefaultProject {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding()]
    param()
@@ -403,7 +403,7 @@ function Clear-DefaultProject {
    }
 }
 
-function Set-DefaultProject {
+function Set-VSTeamDefaultProject {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param([switch] $Force)
@@ -461,7 +461,7 @@ function Set-DefaultProject {
    }
 
    process {
-      if ($Force -or $pscmdlet.ShouldProcess($Project, "Set-DefaultProject")) {
+      if ($Force -or $pscmdlet.ShouldProcess($Project, "Set-VSTeamDefaultProject")) {
          if (_isOnWindows) {
             if (-not $Level) {
                $Level = "Process"
@@ -482,10 +482,13 @@ function Set-DefaultProject {
 Set-Alias Get-TeamInfo Get-VSTeamInfo
 Set-Alias Add-TeamAccount Add-VSTeamAccount
 Set-Alias Remove-TeamAccount Remove-VSTeamAccount
+Set-Alias Get-TeamOption Get-VSTeamOption
+Set-Alias Clear-DefaultProject Clear-VSTeamDefaultProject
+Set-Alias Set-DefaultProject Set-VSTeamDefaultProject
 
-Export-ModuleMember -Alias * -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-DefaultProject, Set-DefaultProject, Get-TeamOption
+Export-ModuleMember -Alias * -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject, Set-VSTeamDefaultProject, Get-VSTeamOption
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {
-   Set-DefaultProject -Project $env:TEAM_PROJECT
+   Set-VSTeamDefaultProject -Project $env:TEAM_PROJECT
 }

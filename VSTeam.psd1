@@ -98,7 +98,7 @@
       'Add-ReleaseDefinition',
       'Add-VSTeamAccount',
       'Add-Team',
-      'Clear-DefaultProject',
+      'Clear-VSTeamDefaultProject',
       'Get-Approval',
       'Get-Build',
       'Get-BuildDefinition',
@@ -121,7 +121,7 @@
       'Remove-VSTeamAccount',
       'Remove-Team',
       'Set-Approval',
-      'Set-DefaultProject',
+      'Set-VSTeamDefaultProject',
       'Set-ReleaseStatus',
       'Update-Project',
       'Update-Team',
@@ -134,7 +134,7 @@
       'Remove-BuildTag',
       'Get-BuildArtifact',
       'Update-Build',
-      'Get-TeamOption')
+      'Get-VSTeamOption')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()

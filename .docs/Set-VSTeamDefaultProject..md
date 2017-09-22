@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Set-DefaultProject
+# Set-VSTeamDefaultProject
 
 ## SYNOPSIS
-#include "./synopsis/Set-DefaultProject.md"
+#include "./synopsis/Set-VSTeamDefaultProject.md"
 
 ## SYNTAX
 
 ```
-Set-DefaultProject [-Project] <String> [-Level <String>] [-Force]
+Set-VSTeamDefaultProject [-Project] <String> [-Level <String>] [-Force]
 ```
 
 ## DESCRIPTION
@@ -21,7 +21,7 @@ calls and this default will be used instead.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Set-DefaultProject Demo
+PS C:\> Set-VSTeamDefaultProject Demo
 ```
 
 This command sets Demo as the default project.
@@ -37,7 +37,7 @@ Specifies the team project for which this function operates.
 
 You can tab complete from a list of available projects.
 
-You can use Set-DefaultProject to set a default project so
+You can use Set-VSTeamDefaultProject to set a default project so
 you do not have to pass the ProjectName with each call.
 
 ```yaml

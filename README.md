@@ -63,7 +63,7 @@ Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/8) from [Michel 
 - Support for the [SonarQube extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube)
 
 ## 0.1.22
-- Fixed bug in Set-DefaultProject on Mac and Linux
+- Fixed bug in Set-VSTeamDefaultProject on Mac and Linux
 
 ## 0.1.21
 - Added Get-BuildLog that returns the logs of the provided build

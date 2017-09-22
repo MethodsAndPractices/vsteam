@@ -151,7 +151,7 @@ function Add-Release {
          $defs = Get-ReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
          $arrSet = $defs.name
       } else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of DefinitionName'
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of DefinitionName'
          $defs = $null
          $arrSet = $null
       }
@@ -164,7 +164,7 @@ function Add-Release {
          $builds = Get-Build -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $builds.name
       } else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of BuildName'
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildName'
          $builds = $null
          $arrSet = $null
       }
@@ -345,7 +345,7 @@ function Add-ReleaseEnvironment {
          $defs = Get-ReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
          $arrSet = $defs.name
       } else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of DefinitionName'
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of DefinitionName'
          $defs = $null
          $arrSet = $null
       }
@@ -358,7 +358,7 @@ function Add-ReleaseEnvironment {
          $builds = Get-Build -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $builds.name
       } else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of BuildName'
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildName'
          $builds = $null
          $arrSet = $null
       }

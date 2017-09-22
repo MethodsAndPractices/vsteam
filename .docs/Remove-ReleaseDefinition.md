@@ -68,12 +68,12 @@ project for which this function gets release definitions.
 
 You can tab complete from a list of available projects.
 
-You can use Set-DefaultProject to set a default project so you do not have
+You can use Set-VSTeamDefaultProject to set a default project so you do not have
 to pass the ProjectName with each call.
 
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
-[Set-DefaultProject](Set-DefaultProject.md)
+[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 [Add-ReleaseDefinition](Add-ReleaseDefinition.md)
 [Get-ReleaseDefinition](Get-ReleaseDefinition.md)

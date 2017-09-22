@@ -1,14 +1,14 @@
 #include "./common/header.md"
 
-# Clear-DefaultProject
+# Clear-VSTeamDefaultProject
 
 ## SYNOPSIS
-#include "./synopsis/Clear-DefaultProject.md"
+#include "./synopsis/Clear-VSTeamDefaultProject.md"
 
 ## SYNTAX
 
 ```
-Clear-DefaultProject [-Level <String>]
+Clear-VSTeamDefaultProject [-Level <String>]
 ```
 
 ## DESCRIPTION

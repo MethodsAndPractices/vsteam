@@ -319,7 +319,7 @@ function Add-Build {
          $arrSet = $queues.name
       }
       else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of QueueName'
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of QueueName'
          $queues = $null
          $arrSet = $null
       }
@@ -333,7 +333,7 @@ function Add-Build {
          $arrSet = $buildDefs.fullname
       }
       else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of BuildDefinition'
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildDefinition'
          $buildDefs = $null
          $arrSet = $null
       }
