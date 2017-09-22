@@ -117,5 +117,6 @@ function Set-VSTeamApproval {
 }
 
 Set-Alias Get-Approval Get-VSTeamApproval
+Set-Alias Set-Approval Set-VSTeamApproval
 
 Export-ModuleMember -Alias * -Function Get-VSTeamApproval, Set-VSTeamApproval
