@@ -97,6 +97,25 @@ REMAINS WITH THE USER.
          </MemberSet>
       </Members>
    </Type>
+   <Type>
+    <Name>Team.UserAccount</Name>
+    <Members>
+        <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+                <PropertySet>
+                    <Name>DefaultDisplayPropertySet</Name>
+                    <ReferencedProperties>
+                        <Name>name</Name>
+                        <Name>LicenseType</Name>
+                        <Name>SignInAddress</Name>
+                        <Name>LastAccessed</Name>
+                    </ReferencedProperties>
+                </PropertySet>
+            </Members>
+        </MemberSet>
+    </Members>
+   </Type>
    <!--Team.Build-->
    <Type>
       <Name>Team.Build</Name>

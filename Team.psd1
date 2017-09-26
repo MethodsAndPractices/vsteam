@@ -80,7 +80,8 @@
       'src\releases.psm1',
       'src\serviceendpoints.psm1',
       'src\teams.psm1',
-      'src\teammembers.psm1')
+      'src\teammembers.psm1',
+      '.\src\usermanagement.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-AzureRMServiceEndpoint',
@@ -107,6 +108,7 @@
       'Get-TeamInfo',
       'Get-Team',
       'Get-TeamMember',
+      'Get-AccountUser',
       'Remove-Build',
       'Remove-BuildDefinition',
       'Remove-Project',
