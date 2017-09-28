@@ -1,0 +1,36 @@
+#include "./common/header.md"
+
+# Get-VSTeamInfo
+
+## SYNOPSIS
+#include "./synopsis/Get-VSTeamInfo.md"
+
+## SYNTAX
+
+```
+Get-VSTeamInfo
+```
+
+## DESCRIPTION
+#include "./synopsis/Get-VSTeamInfo.md"
+
+## EXAMPLES
+
+### -------------------------- EXAMPLE 1 --------------------------
+```
+PS C:\> Get-VSTeamInfo
+```
+
+This will display your current account and default project
+
+## PARAMETERS
+
+## INPUTS
+
+## OUTPUTS
+
+## NOTES
+
+## RELATED LINKS
+
+[Add-VSTeamAccount](Add-VSTeamAccount.md)

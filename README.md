@@ -8,6 +8,32 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 0.1.34
+Added support to queue a build by ID using the Add-VSTeamBuild function. The Add-VSTeamBuild function also fully qualifies the names of build definitions when you tab complete from command line.
+
+I added new fullname extended property to build definition type.
+
+Added support so you can update a project by ID as well as by Name.
+## 0.1.33
+The variable to test if you are on Mac OS changed from IsOSX to IsMacOS. Because I have Set-StrictMode -Version Latest trying to access a variable that is not set will crash.
+
+## 0.1.32
+Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/16) from [Fergal](https://github.com/ObsidianPhoenix) which included the following:
+
+- Added Support for Build Tags
+- Added the ability to update KeepForever, and the Build Number
+- Added the ability to pull artifact data from the build
+
+## 0.1.31
+Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/17) from [Kees Verhaar](https://github.com/KeesV) which included the following:
+
+- Add ProjectName as a property on team member so it can be used further down the pipeline
+
+## 0.1.30
+Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/15) from [Kees Verhaar](https://github.com/KeesV) which included the following:
+
+- Add support for teams
+
 ## 0.1.29
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/12) from [Andy Neillans](https://github.com/aneillans) which included the following:
 
@@ -15,10 +41,10 @@ Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/12) from [Andy N
 - Fixed for projects validation if you have more than 100 projects
 
 ## 0.1.28
-Added ID to approval default output.
+Added ID to approval default output
 
 ## 0.1.27
-Clearing code analysis warnings.
+Clearing code analysis warnings
 
 ## 0.1.26
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/10) from [Roberto Peña](https://github.com/eulesv) which included the following:
@@ -26,7 +52,7 @@ Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/10) from [Robert
 - Adding a regular expression to validate VSTS account
 
 ## 0.1.25
-- Moved -Expand parameter of Get-Release to all parameter sets.
+- Moved -Expand parameter of Get-VSTeamRelease to all parameter sets.
 
 ## 0.1.24
 - Added support so you can start a release from a Git commit
@@ -37,14 +63,14 @@ Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/8) from [Michel 
 - Support for the [SonarQube extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube)
 
 ## 0.1.22
-- Fixed bug in Set-DefaultProject on Mac and Linux
+- Fixed bug in Set-VSTeamDefaultProject on Mac and Linux
 
 ## 0.1.21
-- Added Get-BuildLog that returns the logs of the provided build
+- Added Get-VSTeamBuildLog that returns the logs of the provided build
 
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
-- Added serviceEndpoint parameters to Add-AzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
+- Added serviceEndpoint parameters to Add-VSTeamAzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
 - The _trackProgress function was changed too to reflect the return code of the api (https://www.visualstudio.com/en-us/docs/integrate/api/endpoints/endpoints)
 - The URL in the payload changed to https://management.azure.com
 
@@ -53,7 +79,7 @@ Removed test folder from module
 
 ## 0.1.18
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/5) from [Christopher Mank](https://github.com/ChristopherMank) which included the following:
-- Created new function in the release module named 'Add-ReleaseEnvironment'. New function deploys an environment from an existing release.
+- Created new function in the release module named 'Add-VSTeamReleaseEnvironment'. New function deploys an environment from an existing release.
 
 ## 0.1.16
 Merge [Pull Request](https://github.com/DarqueWarrior/team/pull/4) from [Andy Neillans](https://github.com/aneillans) which included the following:

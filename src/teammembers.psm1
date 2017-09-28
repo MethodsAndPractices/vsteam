@@ -13,7 +13,7 @@ function _buildURL {
     )
 
     if(-not $env:TEAM_ACCT) {
-        throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+        throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
     }
 
     $version = '1.0'
@@ -42,7 +42,7 @@ function _applyTypes {
     $item.PSObject.TypeNames.Insert(0, 'Team.TeamMember')
 }
 
-function Get-TeamMember {
+function Get-VSTeamMember {
     [CmdletBinding()]
     param (
        [Parameter()]
@@ -52,7 +52,7 @@ function Get-TeamMember {
        [int] $Skip,
  
        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName=$true)]
-       [Alias('name')]
+       [Alias('Name')]
        [string] $TeamId
     )
 
@@ -88,4 +88,6 @@ function Get-TeamMember {
     } 
 }
 
-Export-ModuleMember -Alias * -Function Get-TeamMember
+Set-Alias Get-TeamMember Get-VSTeamMember
+
+Export-ModuleMember -Alias * -Function Get-VSTeamMember

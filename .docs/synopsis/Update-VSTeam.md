@@ -1,0 +1,1 @@
+Updates the team name, description or both.

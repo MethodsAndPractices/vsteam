@@ -1,0 +1,1 @@
+Gets a list of approvals for all releases for a team project.

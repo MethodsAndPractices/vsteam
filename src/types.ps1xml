@@ -15,6 +15,26 @@ OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE AND INFORMATION
 REMAINS WITH THE USER.
 ******************************************************************** -->
 <Types>
+<!--Team.Option-->
+   <Type>
+      <Name>Team.Option</Name>
+      <Members>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>resourceName</Name>
+                     <Name>minVersion</Name>
+                     <Name>maxVersion</Name>
+                     <Name>routeTemplate</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
    <!--Team.Environment-->
    <Type>
       <Name>Team.Environment</Name>
@@ -158,6 +178,40 @@ REMAINS WITH THE USER.
          </ScriptProperty>
       </Members>
    </Type>
+   <!-- Team.Build.Artifact -->
+   <Type>
+    <Name>Team.Build.Artifact</Name>
+    <Members>
+        <ScriptProperty>
+            <Name>type</Name>
+            <GetScriptBlock>$this.resource.type</GetScriptBlock>
+        </ScriptProperty>
+        <ScriptProperty>
+            <Name>data</Name>
+            <GetScriptBlock>$this.resource.data</GetScriptBlock>
+        </ScriptProperty> 
+        <ScriptProperty>
+            <Name>url</Name>
+            <GetScriptBlock>$this.resource.url</GetScriptBlock>
+        </ScriptProperty>    
+        <ScriptProperty>
+            <Name>downloadUrl</Name>
+            <GetScriptBlock>$this.resource.downloadUrl</GetScriptBlock>
+        </ScriptProperty>   
+        <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+                <PropertySet>
+                    <Name>DefaultDisplayPropertySet</Name>
+                    <ReferencedProperties>
+                        <Name>id</Name>
+                        <Name>name</Name>
+                    </ReferencedProperties>
+                </PropertySet>
+            </Members>
+        </MemberSet>
+    </Members>
+   </Type>
    <!--Team.Release-->
    <Type>
       <Name>Team.Release</Name>
@@ -235,34 +289,6 @@ REMAINS WITH THE USER.
                      <Name>displayName</Name>
                      <Name>subscriptionId</Name>
                      <Name>subscriptionTenantId</Name>
-                  </ReferencedProperties>
-               </PropertySet>
-            </Members>
-         </MemberSet>
-      </Members>
-   </Type>
-   <!--Team.BuildDefinition-->
-   <Type>
-      <Name>Team.BuildDefinition</Name>
-      <Members>
-         <ScriptProperty>
-            <Name>authoredByUser</Name>
-            <GetScriptBlock>$this.authoredBy.displayName</GetScriptBlock>
-         </ScriptProperty>
-         <ScriptProperty>
-            <Name>queueName</Name>
-            <GetScriptBlock>$this.queue.name</GetScriptBlock>
-         </ScriptProperty>
-         <MemberSet>
-            <Name>PSStandardMembers</Name>
-            <Members>
-               <PropertySet>
-                  <Name>DefaultDisplayPropertySet</Name>
-                  <ReferencedProperties>
-                     <Name>id</Name>
-                     <Name>name</Name>
-                     <Name>queueName</Name>
-                     <Name>authoredByUser</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

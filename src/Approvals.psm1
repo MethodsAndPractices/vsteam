@@ -12,7 +12,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.Approval')
 }
 
-function Get-Approval {
+function Get-VSTeamApproval {
    [CmdletBinding()]
    param(
       [Parameter()]
@@ -29,7 +29,7 @@ function Get-Approval {
    }
 
    Process {
-      Write-Debug 'Get-Approval Process'
+      Write-Debug 'Get-VSTeamApproval Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -61,7 +61,7 @@ function Get-Approval {
    }
 }
 
-function Set-Approval {
+function Set-VSTeamApproval {
    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="Medium")]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -84,7 +84,7 @@ function Set-Approval {
    }
 
    Process {
-      Write-Debug 'Set-Approval Process'
+      Write-Debug 'Set-VSTeamApproval Process'
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
@@ -96,7 +96,7 @@ function Set-Approval {
          $listurl = _buildReleaseURL -resource 'approvals' -version '3.0-preview.1' -projectName $ProjectName -id $item
 
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Approval Status")) {
-            Write-Debug 'Set-Approval Call the REST API'
+            Write-Debug 'Set-VSTeamApproval Call the REST API'
 
             try {
                # Call the REST API
@@ -116,4 +116,7 @@ function Set-Approval {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Approval, Set-Approval
+Set-Alias Get-Approval Get-VSTeamApproval
+Set-Alias Set-Approval Set-VSTeamApproval
+
+Export-ModuleMember -Alias * -Function Get-VSTeamApproval, Set-VSTeamApproval

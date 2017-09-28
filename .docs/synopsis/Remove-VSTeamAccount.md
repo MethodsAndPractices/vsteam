@@ -1,0 +1,1 @@
+Clears your default project, account name and personal access token.

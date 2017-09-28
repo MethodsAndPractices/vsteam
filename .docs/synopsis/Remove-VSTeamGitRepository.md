@@ -1,0 +1,1 @@
+Removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.

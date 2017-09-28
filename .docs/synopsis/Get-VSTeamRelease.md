@@ -1,0 +1,1 @@
+Gets the releases for a team project.

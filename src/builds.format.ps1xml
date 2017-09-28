@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- *******************************************************************
+These sample files contain formatting information used by the Windows
+PowerShell engine. Do not edit or change the contents of this file
+directly. Please see the Windows PowerShell documentation or type
+Get-Help Update-FormatData for more information.
+
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+THIS SAMPLE CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY
+OF ANY KIND,WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+PURPOSE. IF THIS CODE AND INFORMATION IS MODIFIED, THE ENTIRE RISK OF USE
+OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE AND INFORMATION
+REMAINS WITH THE USER.
+******************************************************************** -->
+<Configuration>
+    <ViewDefinitions>
+        <!--Team.Build.Artifact.TableView-->
+        <View>
+            <Name>Team.Build.Artifact.TableView</Name>
+            <ViewSelectedBy>
+                <TypeName>Team.Build.Artifact</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                <TableColumnHeader>
+                    <Label>Name</Label>
+                </TableColumnHeader>                
+                <TableColumnHeader>
+                    <Label>Type</Label>
+                </TableColumnHeader> 
+                 <TableColumnHeader>
+                    <Label>Download Url</Label>
+                </TableColumnHeader>                
+                </TableHeaders>
+                <TableRowEntries>
+                <TableRowEntry>
+                    <TableColumnItems>
+                        <TableColumnItem>
+                            <PropertyName>name</PropertyName>
+                        </TableColumnItem>
+                        <TableColumnItem>
+                            <PropertyName>type</PropertyName>
+                        </TableColumnItem> 
+                        <TableColumnItem>
+                            <PropertyName>downloadUrl</PropertyName>
+                        </TableColumnItem>                       
+                    </TableColumnItems>
+                </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+        <!--Team.Build.Artifact.WideView -->
+        <View>
+            <Name>Team.Build.Artifact.WideView</Name>
+            <ViewSelectedBy>
+                <TypeName>Team.Build.Artifact</TypeName>
+            </ViewSelectedBy>
+            <WideControl>
+                <WideEntries>
+                <WideEntry>
+                    <WideItem>
+                        <PropertyName>downloadUrl</PropertyName>
+                    </WideItem>
+                </WideEntry>
+                </WideEntries>
+            </WideControl>
+        </View>
+        <!--Team.Build.Artifact.ListView-->
+        <View>
+            <Name>Team.Build.Artifact.ListView</Name>
+            <ViewSelectedBy>
+                <TypeName>Team.Build.Artifact</TypeName>
+            </ViewSelectedBy>
+            <ListControl>
+                <ListEntries>
+                <ListEntry>
+                    <ListItems>
+                        <ListItem>
+                            <PropertyName>id</PropertyName>
+                        </ListItem>
+                        <ListItem>
+                            <PropertyName>name</PropertyName>
+                        </ListItem>
+                        <ListItem>
+                            <PropertyName>type</PropertyName>
+                        </ListItem>
+                        <ListItem>
+                            <PropertyName>data</PropertyName>
+                        </ListItem>
+                         <ListItem>
+                            <PropertyName>downloadUrl</PropertyName>
+                        </ListItem>
+                    </ListItems>
+                </ListEntry>
+                </ListEntries>
+            </ListControl>
+        </View>
+        <!--Team.Build.Artifact.Resource.TableView-->
+        <View>
+            <Name>Team.Build.Artifact.Resource.TableView</Name>
+            <ViewSelectedBy>
+                <TypeName>Team.Build.Artifact.Resource</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                <TableColumnHeader>
+                    <Label>Type</Label>
+                </TableColumnHeader>
+                <TableColumnHeader>
+                    <Label>Data</Label>
+                </TableColumnHeader>                
+                <TableColumnHeader>
+                    <Label>Url</Label>
+                </TableColumnHeader>
+                <TableColumnHeader>
+                    <Label>Download Url</Label>
+                </TableColumnHeader>
+                <TableColumnHeader>
+                    <Label>Properties</Label>
+                </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                <TableRowEntry>
+                    <TableColumnItems>
+                        <TableColumnItem>
+                            <PropertyName>type</PropertyName>
+                        </TableColumnItem>
+                        <TableColumnItem>
+                            <PropertyName>data</PropertyName>
+                        </TableColumnItem>
+                        <TableColumnItem>
+                            <PropertyName>url</PropertyName>
+                        </TableColumnItem>
+                        <TableColumnItem>
+                            <PropertyName>downloadUrl</PropertyName>
+                        </TableColumnItem>
+                        <TableColumnItem>
+                            <PropertyName>properties</PropertyName>
+                        </TableColumnItem>
+                    </TableColumnItems>
+                </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+        <!--Team.Build.Artifact.Resource-->
+        <View>
+            <Name>Team.Build.Artifact.Resource.WideView</Name>
+            <ViewSelectedBy>
+                <TypeName>Team.Build.Artifact.Resource</TypeName>
+            </ViewSelectedBy>
+            <WideControl>
+                <WideEntries>
+                <WideEntry>
+                    <WideItem>
+                        <PropertyName>properties</PropertyName>
+                    </WideItem>
+                </WideEntry>
+                </WideEntries>
+            </WideControl>
+        </View>
+        <!--Team.Build.Artifact.Resource.ListView-->
+        <View>
+            <Name>Team.Build.Artifact.Resource.ListView</Name>
+            <ViewSelectedBy>
+                <TypeName>Team.Build.Artifact.Resource</TypeName>
+            </ViewSelectedBy>
+            <ListControl>
+                <ListEntries>
+                <ListEntry>
+                    <ListItems>
+                        <ListItem>
+                            <PropertyName>type</PropertyName>
+                        </ListItem>
+                        <ListItem>
+                            <PropertyName>data</PropertyName>
+                        </ListItem>
+                        <ListItem>
+                            <PropertyName>url</PropertyName>
+                        </ListItem>
+                        <ListItem>
+                            <PropertyName>downloadUrl</PropertyName>
+                        </ListItem>
+                        <ListItem>
+                            <PropertyName>properties</PropertyName>
+                        </ListItem>
+                    </ListItems>
+                </ListEntry>
+                </ListEntries>
+            </ListControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

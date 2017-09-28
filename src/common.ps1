@@ -3,7 +3,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 function _handleException {
    param(
-      [Parameter(Position=1)]
+      [Parameter(Position = 1)]
       $ex
    )
 
@@ -19,31 +19,44 @@ function _isOnWindows {
    ($null -ne $env:os) -and ($env:os).StartsWith("Windows")
 }
 
+function _IsOnMac {
+   # The variable to test if you are on Mac OS changed from
+   # IsOSX to IsMacOS. Because I have Set-StrictMode -Version Latest
+   # trying to access a variable that is not set will crash.
+   # So I use Test-Path to determine which exist and which to use.
+   if (Test-Path variable:global:IsMacOS) {
+      $IsMacOS
+   }
+   else {
+      $IsOSX
+   }
+}
+
 # The url for release is special and used in more than one
 # module so I moved it here.
 function _buildReleaseURL {
    param(
-      [parameter(Mandatory=$true)]
+      [parameter(Mandatory = $true)]
       [string] $projectName,
-      [parameter(Mandatory=$true)]
+      [parameter(Mandatory = $true)]
       [string] $resource,
       [string] $version = '3.0-preview.1',
       [int] $id
    )
 
-   if(-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+   if (-not $env:TEAM_ACCT) {
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $resource = "release/$resource"
    $instance = $env:TEAM_ACCT
 
    # For VSTS Release is under .vsrm
-   if($env:TEAM_ACCT.ToLower().Contains('visualstudio.com')) {
+   if ($env:TEAM_ACCT.ToLower().Contains('visualstudio.com')) {
       $instance = $env:TEAM_ACCT.ToLower().Replace('visualstudio.com', 'vsrm.visualstudio.com')
    }
 
-   if($id) {
+   if ($id) {
       $resource += "/$id"
    }
 
@@ -63,28 +76,32 @@ function _appendQueryString {
 }
 
 function _getUserAgent {
-   $content = (Get-Content "$here\..\Team.psd1" | Out-String)
-   $versionData = Invoke-Expression $content
+   # Read the version from the psd1 file.
+   $content = (Get-Content -Raw "$here\..\VSTeam.psd1" | Out-String)
+   $r = [regex]"ModuleVersion += +'([^']+)'"
+   $d = $r.Match($content)
 
    $os = 'unknown'
 
    if ($PSVersionTable.PSVersion.Major -lt 6 -or (_isOnWindows)) {
       $os = 'Windows'
-   } elseif ($IsOSX) {
+   }
+   elseif (_IsOnMac) {
       $os = 'OSX'
-   } elseif ($IsLinux) {
+   }
+   elseif ($IsLinux) {
       $os = 'Linux'
    }
 
-   return "Team Module/$($versionData.ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
+   return "Team Module/$($d.Groups[1].Value) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
 }
 
 function _useWindowsAuthenticationOnPremise {
-  return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($env:TEAM_ACCT -like "*visualstudio.com")
+   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($env:TEAM_ACCT -like "*visualstudio.com")
 }
 
 function _getProjects {
-   if(-not $env:TEAM_ACCT) {
+   if (-not $env:TEAM_ACCT) {
       Write-Output @()
       return
    }
@@ -99,11 +116,12 @@ function _getProjects {
 
    # Call the REST API
    try {
-	  if (_useWindowsAuthenticationOnPremise) {
-	    $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-      } else {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	  }
+      if (_useWindowsAuthenticationOnPremise) {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+      }
+      else {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      }
 
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
@@ -118,7 +136,8 @@ function _buildProjectNameDynamicParam {
    param(
       [string] $ParameterName = 'ProjectName',
       [string] $ParameterSetName,
-      [bool] $Mandatory = $true
+      [bool] $Mandatory = $true,
+      [string] $AliasName
    )
 
    # Create the dictionary
@@ -132,7 +151,7 @@ function _buildProjectNameDynamicParam {
    $ParameterAttribute.Mandatory = $Mandatory
    $ParameterAttribute.Position = 0
 
-   if($ParameterSetName) {
+   if ($ParameterSetName) {
       $ParameterAttribute.ParameterSetName = $ParameterSetName
    }
 
@@ -141,6 +160,11 @@ function _buildProjectNameDynamicParam {
 
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
+
+   if ($AliasName) {
+      $AliasAttribute = New-Object System.Management.Automation.AliasAttribute(@($AliasName))
+      $AttributeCollection.Add($AliasAttribute)
+   }
 
    # Generate and set the ValidateSet
    $arrSet = _getProjects
@@ -161,7 +185,7 @@ function _buildProjectNameDynamicParam {
    <#
    Builds a dynamic parameter that can be used to tab complete the ProjectName
    parameter of functions from a list of projects from the added TFS Account.
-   You must call Add-TeamAccount before trying to use any function that relies
+   You must call Add-VSTeamAccount before trying to use any function that relies
    on this dynamic parameter or you will get an error.
 
    This can only be used in Advanced Fucntion with the [CmdletBinding()] attribute.
@@ -170,7 +194,7 @@ function _buildProjectNameDynamicParam {
 
       DynamicParam {
          # Generate and set the ValidateSet
-         $arrSet = Get-Projects | Select-Object -ExpandProperty Name
+         $arrSet = Get-VSTeamProjects | Select-Object -ExpandProperty Name
 
          _buildProjectNameDynamicParam -arrSet $arrSet
       }
@@ -197,7 +221,7 @@ function _buildDynamicParam {
    $ParameterAttribute.Mandatory = $Mandatory
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true
 
-   if($ParameterSetName) {
+   if ($ParameterSetName) {
       $ParameterAttribute.ParameterSetName = $ParameterSetName
    }
 

@@ -4,6 +4,8 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
+$version = '2.0'
+
 function _buildURL {
    param(
       [parameter(Mandatory = $true)]
@@ -13,28 +15,69 @@ function _buildURL {
       [int] $LogIndex
    )
 
-   if (-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+   if ($Logs.IsPresent) {
+      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex -Logs
+   }
+   else {
+      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
    }
 
-   $version = '2.0'
+
+   # Build the url to list the projects
+   return $rootUrl + '?api-version=' + $version
+}
+
+function _buildChildUrl {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $ProjectName,
+      [int] $Id,
+      [Switch] $Logs,
+      [int] $LogIndex,
+      [string] $Child
+   )
+
+   if ($Logs.IsPresent) {
+      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex -Logs
+   }
+   else {
+      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
+   }
+ 
+   # Build the url to list the projects
+   return $rootUrl + "/$Child" + '?api-version=' + $version
+}
+
+function _buildRootURL {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $ProjectName,
+      [int] $Id,
+      [Switch] $Logs,
+      [int] $LogIndex
+   )
+  
+   if (-not $env:TEAM_ACCT) {
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
+   }
+  
    $resource = "/build/builds"
    $instance = $env:TEAM_ACCT
-
+  
    if ($id) {
       $resource += "/$id"
    }
-
+  
    if ($Logs.IsPresent) {
       $resource += "/logs"
-
+  
       if ($LogIndex) {
          $resource += "/$LogIndex"
       }
    }
-
+  
    # Build the url to list the projects
-   return $instance + "/$projectName/_apis" + $resource + '?api-version=' + $version
+   return $instance + "/$projectName/_apis" + $resource
 }
 
 # Apply types to the returned objects so format and type files can
@@ -61,7 +104,16 @@ function _applyTypes {
    }
 }
 
-function Get-Build {
+function _applyArtifactTypes {
+   $item.PSObject.TypeNames.Insert(0, "Team.Build.Artifact")
+    
+   if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource) {
+      $item.resource.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource')
+      $item.resource.properties.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource.Properties')
+   }
+}
+
+function Get-VSTeamBuild {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param (
       [Parameter(ParameterSetName = 'List')]
@@ -163,12 +215,13 @@ function Get-Build {
    }
 }
 
-function Get-BuildLog {
+function Get-VSTeamBuildLog {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param (
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
       [int[]] $Id,
+      
       [int] $Index
    )
 
@@ -249,9 +302,12 @@ function Get-BuildLog {
    }
 }
 
-function Add-Build {
-   [CmdletBinding()]
-   param()
+function Add-VSTeamBuild {
+   [CmdletBinding(DefaultParameterSetName = 'ByName')]
+   param(
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+      [Int32] $BuildDefinitionId
+   )
    DynamicParam {
       $dp = _buildProjectNameDynamicParam
 
@@ -259,31 +315,31 @@ function Add-Build {
       # validateset so skip that check. However, we still need to give
       # the option to pass a QueueName to use.
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $buildDefs = Get-BuildDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
-         $arrSet = $buildDefs.name
-      }
-      else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of BuildDefinition'
-         $buildDefs = $null
-         $arrSet = $null
-      }
-
-      $ParameterName = 'BuildDefinition'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet
-      $dp.Add($ParameterName, $rp)
-
-      if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $queues = Get-Queue -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $queues = Get-VSTeamQueue -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $queues.name
       }
       else {
-         Write-Verbose 'Call Set-DefaultProject for Tab Complete of QueueName'
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of QueueName'
          $queues = $null
          $arrSet = $null
       }
 
       $ParameterName = 'QueueName'
       $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet
+      $dp.Add($ParameterName, $rp)
+
+      if ($Global:PSDefaultParameterValues["*:projectName"]) {
+         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $arrSet = $buildDefs.fullname
+      }
+      else {
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildDefinition'
+         $buildDefs = $null
+         $arrSet = $null
+      }
+
+      $ParameterName = 'BuildDefinitionName'
+      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName'
       $dp.Add($ParameterName, $rp)
 
       $dp
@@ -293,19 +349,24 @@ function Add-Build {
       # Bind the parameter to a friendly variable
       $QueueName = $PSBoundParameters["QueueName"]
       $ProjectName = $PSBoundParameters["ProjectName"]
-      $BuildDefinition = $PSBoundParameters["BuildDefinition"]
+      $BuildDefinition = $PSBoundParameters["BuildDefinitionName"]
 
-      # Build the url to list the projects
+      # Build the url
       $listurl = _buildURL -ProjectName $ProjectName
 
-      # Find the BuildDefinition id from the name
-      $id = Get-BuildDefinition -ProjectName "$ProjectName" -Type All |
-         Where-Object { $_.name -eq $BuildDefinition } |
-         Select-Object -ExpandProperty id
+      if ($BuildDefinitionId) {
+         $id = $BuildDefinitionId
+      }
+      else {
+         # Find the BuildDefinition id from the name
+         $id = Get-VSTeamBuildDefinition -ProjectName "$ProjectName" -Type All |
+            Where-Object { $_.fullname -eq $BuildDefinition } |
+            Select-Object -ExpandProperty id
+      }
 
       $queueSection = $null
       if ($QueueName) {
-         $queueId = Get-Queue -ProjectName "$ProjectName" -queueName "$QueueName" |
+         $queueId = Get-VSTeamQueue -ProjectName "$ProjectName" -queueName "$QueueName" |
             Select-Object -ExpandProperty Id
 
          $queueSection = ', "queue": {"id": ' + $queueId + '}'
@@ -329,10 +390,11 @@ function Add-Build {
    }
 }
 
-function Remove-Build {
+function Remove-VSTeamBuild {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
       [int[]] $Id,
 
       [switch] $Force
@@ -370,4 +432,215 @@ function Remove-Build {
    }
 }
 
-Export-ModuleMember -Alias * -Function Add-Build, Get-Build, Remove-Build, Get-BuildLog
+function Update-VSTeamBuild {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   param(
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
+      [Int] $Id,
+
+      [parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [bool] $KeepForever,
+
+      [parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $BuildNumber,
+
+      [switch] $Force
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-VSTeamBuild")) {
+
+         $updateUrl = _buildURL -ProjectName $ProjectName -Id $Id
+
+         $body = '{'
+            
+         $items = New-Object System.Collections.ArrayList
+
+         if ($KeepForever -ne $null) {
+            $items.Add("`"keepForever`": $($KeepForever.ToString().ToLower())") > $null
+         }
+
+         if ($buildNumber -ne $null -and $buildNumber.Length -gt 0) {
+            $items.Add("`"buildNumber`": `"$BuildNumber`"") > $null
+         }
+
+         if ($items -ne $null -and $items.count -gt 0) {
+            $body += ($items -join ", ")
+         }
+                
+         $body += '}'
+
+         # Call the REST API
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $updateUrl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $updateUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
+      }
+   }
+}
+
+function Get-VSTeamBuildTag {
+   param(
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
+      [int] $Id
+   )
+    
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      $ProjectName = $PSBoundParameters["ProjectName"]
+        
+      $rootUrl = _buildChildUrl -projectName $ProjectName -id $Id -child "tags"
+
+      # Call the REST API
+      if (_useWindowsAuthenticationOnPremise) {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -UseDefaultCredentials
+      }
+      else {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      }
+
+      return $resp.value
+   }
+}
+
+function Add-VSTeamBuildTag {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   param(
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
+      [string[]] $Tags,
+
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
+      [int[]] $Id,
+
+      [switch] $Force
+   )
+    
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      $ProjectName = $PSBoundParameters["ProjectName"]
+        
+      foreach ($item in $id) {
+         if ($Force -or $pscmdlet.ShouldProcess($item, "Add-VSTeamBuildTag")) {
+                
+            $rootUrl = _buildChildUrl -projectName $ProjectName -id $item -child "tags"
+
+            foreach ($tag in $tags) {
+
+               $tagUrl = $rootUrl + "&tag=$tag"
+
+               # Call the REST API
+               if (_useWindowsAuthenticationOnPremise) {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $tagUrl -UseDefaultCredentials
+               }
+               else {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $tagUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+               }
+            }
+         }
+      }
+   }
+}
+
+function Remove-VSTeamBuildTag {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   param(
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
+      [string[]] $Tags,
+        
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
+      [int[]] $Id,
+
+      [switch] $Force
+   )
+    
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      foreach ($item in $id) {
+         if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-VSTeamBuildTag")) {
+
+            $rootUrl = _buildChildUrl -projectName $ProjectName -id $item -child "tags"
+
+            foreach ($tag in $tags) {
+               $tagUrl = $rootUrl + "&tag=$tag"
+
+               # Call the REST API
+               if (_useWindowsAuthenticationOnPremise) {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $tagUrl -UseDefaultCredentials
+               }
+               else {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $tagUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+               }
+            }
+         }
+      }
+   }
+}
+
+function Get-VSTeamBuildArtifact {
+   param(
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
+      [int] $Id
+   )
+    
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      $ProjectName = $PSBoundParameters["ProjectName"]
+        
+      $rootUrl = _buildChildUrl -projectName $ProjectName -id $Id -child "artifacts"
+
+      # Call the REST API
+      if (_useWindowsAuthenticationOnPremise) {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -UseDefaultCredentials
+      }
+      else {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      }
+
+      foreach ($item in $resp.value) {
+         _applyArtifactTypes -item $item
+      }
+
+      Write-Output $resp.value
+   }
+}
+
+Set-Alias Get-Build Get-VSTeamBuild
+Set-Alias Get-BuildLog Get-VSTeamBuildLog
+Set-Alias Get-BuildTag Get-VSTeamBuildTag
+Set-Alias Get-BuildArtifact Get-VSTeamBuildArtifact
+Set-Alias Add-Build Add-VSTeamBuild
+Set-Alias Add-BuildTag Add-VSTeamBuildTag
+Set-Alias Remove-Build Remove-VSTeamBuild
+Set-Alias Remove-BuildTag Remove-VSTeamBuildTag
+Set-Alias Update-Build Update-VSTeamBuild
+
+Export-ModuleMember -Alias * -Function Add-VSTeamBuild, Get-VSTeamBuild, Remove-VSTeamBuild, Get-VSTeamBuildLog, 
+Add-VSTeamBuildTag, Get-VSTeamBuildTag, Remove-VSTeamBuildTag, 
+Get-VSTeamBuildArtifact, Update-VSTeamBuild

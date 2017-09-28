@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 function _buildURL {
    if(-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $resource = "/distributedtask/serviceendpointproxy/azurermsubscriptions"
@@ -24,7 +24,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.AzureSubscription')
 }
 
-function Get-CloudSubscription {
+function Get-VSTeamCloudSubscription {
    [CmdletBinding()]
    param()
 
@@ -46,4 +46,6 @@ function Get-CloudSubscription {
    Write-Output $resp.value
 }
 
-Export-ModuleMember -Alias * -Function Get-CloudSubscription
+Set-Alias Get-CloudSubscription Get-VSTeamCloudSubscription
+
+Export-ModuleMember -Alias * -Function Get-VSTeamCloudSubscription

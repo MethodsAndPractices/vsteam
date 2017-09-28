@@ -4,3 +4,6 @@
 /pub.ps1
 test/sample.txt
 /src/.vs
+/node_modules
+/docs
+integration/prime.ps1

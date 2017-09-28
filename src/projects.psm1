@@ -9,8 +9,8 @@ function _buildURL {
       [string] $ProjectName
    )
 
-   if(-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+   if (-not $env:TEAM_ACCT) {
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $version = '1.0'
@@ -40,15 +40,16 @@ function _applyTypes {
 
 function _checkStatus {
    param(
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [string] $Uri
    )
 
    # Call the REST API
    if (_useWindowsAuthenticationOnPremise) {
-     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -UseDefaultCredentials
-   } else {
-     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
    }
 
    return $resp
@@ -56,7 +57,7 @@ function _checkStatus {
 
 function _trackProgress {
    param(
-      [Parameter(Mandatory=$true)] $Resp,
+      [Parameter(Mandatory = $true)] $Resp,
       [string] $Title,
       [string] $Msg
    )
@@ -72,76 +73,83 @@ function _trackProgress {
 
       # oscillate back a forth to show progress
       $i += $x
-      Write-Progress -Activity $title -Status $msg -PercentComplete ($i/$y*100)
+      Write-Progress -Activity $title -Status $msg -PercentComplete ($i / $y * 100)
 
-      if($i -eq $y -or $i -eq 0) {
+      if ($i -eq $y -or $i -eq 0) {
          $x *= -1
       }
    }
 }
 
-function Get-Project {
-   [CmdletBinding(DefaultParameterSetName='List')]
+function Get-VSTeamProject {
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(ParameterSetName='List')]
-      [ValidateSet('WellFormed','CreatePending', 'Deleting', 'New', 'All')]
+      [Parameter(ParameterSetName = 'List')]
+      [ValidateSet('WellFormed', 'CreatePending', 'Deleting', 'New', 'All')]
       [string] $StateFilter = 'WellFormed',
-      [Parameter(ParameterSetName='List')]
+      
+      [Parameter(ParameterSetName = 'List')]
       [int] $Top = 100,
-      [Parameter(ParameterSetName='List')]
+      
+      [Parameter(ParameterSetName = 'List')]
       [int] $Skip = 0,
-      [Parameter(ParameterSetName='ByID')]
+      
+      [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id,
-      [Parameter(ParameterSetName='ByID')]
-      [switch] $IncludeCapabilites
+      
+      [Parameter(ParameterSetName = 'ByID')]
+      [switch] $IncludeCapabilities
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name'
+      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -AliasName 'Name'
    }
 
    process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["Name"]
+      $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if($id) {
+      if ($id) {
          $ProjectName = $id
       }
 
-      if($ProjectName) {
+      if ($ProjectName) {
          # Build the url to list the projects
          $listurl = _buildURL -ProjectName $ProjectName
 
-         if ($includeCapabilites.IsPresent) {
+         if ($includeCapabilities.IsPresent) {
             $listurl += '&includeCapabilities=true'
          }
 
          # Call the REST API
          if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
          }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          _applyTypes -item $resp
 
          Write-Output $resp
-      } else {
+      }
+      else {
          # Build the url to list the projects
          $listurl = "$(_buildURL)&stateFilter=$($stateFilter)&`$top=$($top)&`$skip=$($skip)"
 
          try {
             # Call the REST API
             if (_useWindowsAuthenticationOnPremise) {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            } else {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+            }
+            else {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
             }
 
             # Apply a Type Name so we can use custom format view and custom type extensions
-            foreach($item in $resp.value) {
+            foreach ($item in $resp.value) {
                _applyTypes -item $item
             }
 
@@ -157,71 +165,91 @@ function Get-Project {
    }
 }
 
-function Update-Project {
-   [CmdletBinding()]
+function Update-VSTeamProject {
+   [CmdletBinding(DefaultParameterSetName = 'ByName', SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [string] $NewName = '',
-      [string] $NewDescription = ''
+      [string] $NewDescription = '',
+      [switch] $Force,
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+      [string] $Id
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterName 'Name'
+      _buildProjectNameDynamicParam -AliasName 'Name' -ParameterSetName 'ByName' -Mandatory $false
    }
 
    process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["Name"]
+      $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if($newName -eq '' -and $newDescription -eq '') {
+      if ($id) {
+         $ProjectName = $id
+      }
+      else {
+         $id = (Get-VSTeamProject $ProjectName).id
+      }
+
+      if ($newName -eq '' -and $newDescription -eq '') {
          # There is nothing to do
          Write-Verbose 'Nothing to update'
          return
       }
 
-      # At the end we return the project and need it's name
-      # this is used to track the final name.
-      $finalName = $ProjectName
+      if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Update Project")) {
 
-      # Build the url to list the projects
-      $listurl = _buildURL -ProjectName (Get-Project $ProjectName).id
+         # At the end we return the project and need it's name
+         # this is used to track the final name.
+         $finalName = $ProjectName
 
-      if($newName -ne '' -and $newDescription -ne '') {
-         $finalName = $newName
-         $msg = "Changing name and description"
-         $body = '{"name": "' + $newName + '", "description": "' + $newDescription + '"}'
+         # Build the url to list the projects
+         $listurl = _buildURL -ProjectName $id
+
+         if ($newName -ne '' -and $newDescription -ne '') {
+            $finalName = $newName
+            $msg = "Changing name and description"
+            $body = '{"name": "' + $newName + '", "description": "' + $newDescription + '"}'
+         }
+         elseif ($newName -ne '') {
+            $finalName = $newName
+            $msg = "Changing name"
+            $body = '{"name": "' + $newName + '"}'
+         }
+         else {
+            $msg = "Changing description"
+            $body = '{"description": "' + $newDescription + '"}'
+         }
+
+         Write-Verbose $body
+
+         # Call the REST API
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
+
+         _trackProgress -resp $resp -title 'Updating team project' -msg $msg
+
+         # Return the project now that it has been updated
+         if ($Id) {
+            return Get-VSTeamProject -Id $finalName
+         }
+         else {
+            return Get-VSTeamProject -ProjectName $finalName         
+         }
       }
-      elseif ($newName -ne '') {
-         $finalName = $newName
-         $msg = "Changing name"
-         $body = '{"name": "'+ $newName +'"}'
-      }
-      else {
-         $msg = "Changing description"
-         $body = '{"description": "'+ $newDescription +'"}'
-      }
-
-      Write-Verbose $body
-
-      # Call the REST API
-	  if (_useWindowsAuthenticationOnPremise) {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-	  } else {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	  }
-
-      _trackProgress -resp $resp -title 'Updating team project' -msg $msg
-
-      # Return the project now that it has been updated
-      return Get-Project -Name $finalName
    }
 }
 
-function Add-Project {
+function Add-VSTeamProject {
    param(
-      [parameter(Mandatory=$true)]
-      [string] $Name,
+      [parameter(Mandatory = $true)]
+      [Alias('Name')]
+      [string] $ProjectName,
 
-      [ValidateSet('Agile','CMMI', 'Scrum')]
+      [ValidateSet('Agile', 'CMMI', 'Scrum')]
       [string] $ProcessTemplate = 'Scrum',
 
       [string] $Description,
@@ -236,7 +264,7 @@ function Add-Project {
       'Agile' {
          $templateTypeId = 'adcc42ab-9882-485e-a3ed-7678f01f66bc'
       }
-      'CMMI'  {
+      'CMMI' {
          $templateTypeId = '27450541-8e31-4150-9947-dc59f998fc01'
       }
       # The default is Scrum
@@ -245,28 +273,29 @@ function Add-Project {
       }
    }
 
-   if($TFVC.IsPresent) {
+   if ($TFVC.IsPresent) {
       $srcCtrl = "Tfvc"
    }
 
    # Build the url to list the projects
    $listurl = _buildURL
 
-   $body = '{"name": "'+ $Name +'", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
+   $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
 
    Write-Verbose $body
 
    try {
       # Call the REST API
-	  if (_useWindowsAuthenticationOnPremise) {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-	  } else {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	  }
+      if (_useWindowsAuthenticationOnPremise) {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+      }
+      else {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      }
 
-      _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($Name), Template: $($processTemplate), Src: $($srcCtrl)"
+      _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
-      return Get-Project -Name $Name
+      return Get-VSTeamProject -ProjectName $ProjectName
    }
    catch {
       # Dig into the exception to get the Response details.
@@ -278,30 +307,31 @@ function Add-Project {
    }
 }
 
-function Remove-Project {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
+function Remove-VSTeamProject {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [switch] $Force
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterName 'Name'
+      _buildProjectNameDynamicParam -AliasName 'Name'
    }
 
    Process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["Name"]
+      $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url to list the projects
-      $listurl = _buildURL -ProjectName (Get-Project $ProjectName).id
+      $listurl = _buildURL -ProjectName (Get-VSTeamProject $ProjectName).id
 
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API
-	     if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-	     } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	     }
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
 
          _trackProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
@@ -310,4 +340,9 @@ function Remove-Project {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Project, Update-Project, Add-Project, Remove-Project
+Set-Alias Get-Project Get-VSTeamProject
+Set-Alias Update-Project Update-VSTeamProject
+Set-Alias Add-Project Add-VSTeamProject
+Set-Alias Remove-Project Remove-VSTeamProject
+
+Export-ModuleMember -Alias * -Function Get-VSTeamProject, Update-VSTeamProject, Add-VSTeamProject, Remove-VSTeamProject

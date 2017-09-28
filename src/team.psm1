@@ -4,11 +4,30 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
+function _buildURL {
+   param()
+
+   if (-not $env:TEAM_ACCT) {
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
+   }
+   
+   $instance = $env:TEAM_ACCT
+
+   return $instance + '/_apis'
+}
+
+# Apply types to the returned objects so format and type files can
+# identify the object and act on it.
+function _applyTypes {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.Option')
+}
+
 function _testAdministrator {
    $user = [Security.Principal.WindowsIdentity]::GetCurrent()
    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
-
 
 function _setEnvironmentVariables {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
@@ -48,14 +67,34 @@ function _clearEnvironmentVariables {
    _setEnvironmentVariables -Level $Level -Pat $null -Acct $null
 }
 
-function Get-TeamInfo {
+function Get-VSTeamInfo {
    return @{
       Account        = $env:TEAM_ACCT
       DefaultProject = $Global:PSDefaultParameterValues['*:projectName']
    }
 }
 
-function Add-TeamAccount {
+function Get-VSTeamOption {
+   # Build the url to list the projects
+   $url = _buildURL
+
+   # Call the REST API
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   # Apply a Type Name so we can use custom format view and custom type extensions
+   foreach ($item in $resp.value) {
+      _applyTypes -item $item
+   }
+
+   Write-Output $resp.value
+}
+
+function Add-VSTeamAccount {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
@@ -141,7 +180,6 @@ function Add-TeamAccount {
          if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
             Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
          }
-
       }
       else {
          $Level = "Process"
@@ -159,9 +197,9 @@ function Add-TeamAccount {
 
       # If they only gave an account name add visualstudio.com
       if ($Account -notlike "*/*") {
-        if($Account -match  "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
-           $Account = "https://$($matches.account).visualstudio.com"
-        }
+         if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
+            $Account = "https://$($matches.account).visualstudio.com"
+         }
       }
 
       $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
@@ -172,11 +210,12 @@ function Add-TeamAccount {
          $encodedPat = ""
       }
 
+      Clear-VSTeamDefaultProject
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
    }
 }
 
-function Remove-TeamAccount {
+function Remove-VSTeamAccount {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       # Forces the command without confirmation
@@ -285,7 +324,7 @@ function Remove-TeamAccount {
    }
 }
 
-function Clear-DefaultProject {
+function Clear-VSTeamDefaultProject {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding()]
    param()
@@ -364,10 +403,10 @@ function Clear-DefaultProject {
    }
 }
 
-function Set-DefaultProject {
+function Set-VSTeamDefaultProject {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
-   [CmdletBinding()]
-   param()
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   param([switch] $Force)
    DynamicParam {
       $dp = _buildProjectNameDynamicParam -ParameterName "Project"
 
@@ -422,25 +461,34 @@ function Set-DefaultProject {
    }
 
    process {
-      if (_isOnWindows) {
-         if (-not $Level) {
-            $Level = "Process"
+      if ($Force -or $pscmdlet.ShouldProcess($Project, "Set-VSTeamDefaultProject")) {
+         if (_isOnWindows) {
+            if (-not $Level) {
+               $Level = "Process"
+            }
+
+            # You always have to set at the process level or they will Not
+            # be seen in your current session.
+            $env:TEAM_PROJECT = $Project
+
+            [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
          }
 
-         # You always have to set at the process level or they will Not
-         # be seen in your current session.
-         $env:TEAM_PROJECT = $Project
-
-         [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
+         $Global:PSDefaultParameterValues["*:projectName"] = $Project
       }
-
-      $Global:PSDefaultParameterValues["*:projectName"] = $Project
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Clear-DefaultProject, Set-DefaultProject
+Set-Alias Get-TeamInfo Get-VSTeamInfo
+Set-Alias Add-TeamAccount Add-VSTeamAccount
+Set-Alias Remove-TeamAccount Remove-VSTeamAccount
+Set-Alias Get-TeamOption Get-VSTeamOption
+Set-Alias Clear-DefaultProject Clear-VSTeamDefaultProject
+Set-Alias Set-DefaultProject Set-VSTeamDefaultProject
+
+Export-ModuleMember -Alias * -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject, Set-VSTeamDefaultProject, Get-VSTeamOption
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {
-   Set-DefaultProject -Project $env:TEAM_PROJECT
+   Set-VSTeamDefaultProject -Project $env:TEAM_PROJECT
 }

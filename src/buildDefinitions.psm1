@@ -12,7 +12,7 @@ function _buildURL {
    )
 
    if(-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $version = '2.0'
@@ -58,17 +58,20 @@ function _applyTypes {
    }
 }
 
-function Get-BuildDefinition {
+function Get-VSTeamBuildDefinition {
    [CmdletBinding(DefaultParameterSetName='List')]
    param(
       [Parameter(ParameterSetName='List')]
       [string] $Filter,
+      
       [Parameter(ParameterSetName='List')]
       [ValidateSet('build','xaml', 'All')]
       [string] $Type = 'All',
+      
       [Parameter(ParameterSetName='ByID', Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
       [Alias('BuildDefinitionID')]
       [int[]] $Id,
+      
       [Parameter(ParameterSetName='ByID')]
       [int] $Revision
    )
@@ -130,7 +133,7 @@ function Get-BuildDefinition {
    }
 }
 
-function Add-BuildDefinition {
+function Add-VSTeamBuildDefinition {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -159,7 +162,7 @@ function Add-BuildDefinition {
    }
 }
 
-function Remove-BuildDefinition {
+function Remove-VSTeamBuildDefinition {
    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
    param(
       [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
@@ -194,4 +197,8 @@ function Remove-BuildDefinition {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-BuildDefinition, Add-BuildDefinition, Remove-BuildDefinition
+Set-Alias Get-BuildDefinition Get-VSTeamBuildDefinition
+Set-Alias Add-BuildDefinition Add-VSTeamBuildDefinition
+Set-Alias Remove-BuildDefinition Remove-VSTeamBuildDefinition
+
+Export-ModuleMember -Alias * -Function Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition, Remove-VSTeamBuildDefinition

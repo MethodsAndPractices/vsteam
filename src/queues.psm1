@@ -12,7 +12,7 @@ function _buildURL {
    )
 
    if(-not $env:TEAM_ACCT) {
-      throw 'You must call Add-TeamAccount before calling any other functions in this module.'
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $version = '3.0-preview.1'
@@ -36,7 +36,7 @@ function _applyTypes {
    $item.pool.PSObject.TypeNames.Insert(0, 'Team.Pool')
 }
 
-function Get-Queue {
+function Get-VSTeamQueue {
    [CmdletBinding(DefaultParameterSetName='List')]
    param(
       [Parameter(ParameterSetName='List')]
@@ -99,4 +99,6 @@ function Get-Queue {
    }
 }
 
-Export-ModuleMember -Alias * -Function Get-Queue
+Set-Alias Get-Queue Get-VSTeamQueue
+
+Export-ModuleMember -Alias * -Function Get-VSTeamQueue
