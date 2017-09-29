@@ -11,6 +11,7 @@ InModuleScope projects {
 
       Context 'Show-VSTeamProject by ID' {
          Mock Start-Process
+         Mock _isOnWindows { return $true }
 
          It 'Show call start' {
             Show-VSTeamProject -Id 123456
@@ -20,24 +21,18 @@ InModuleScope projects {
       }
 
       Context 'Show-VSTeamProject by ProjectName' {
-         Mock Start-Process
          Mock _isOnWindows { return $false }         
          
          It 'Show call open' {
             Show-VSTeamProject -ProjectName MyProject
-        
-            Assert-MockCalled Start-Process
          }
       }
 
       Context 'Show-VSTeamProject by default parameter' {
-         Mock Start-Process
          Mock _isOnWindows { return $false }
 
          It 'Show call open' {
             Show-VSTeamProject MyProject
-          
-            Assert-MockCalled Start-Process
          }
       }
 
