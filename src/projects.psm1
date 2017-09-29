@@ -188,15 +188,8 @@ function Show-VSTeamProject {
       if ($id) {
          $ProjectName = $id
       }
-      
-      if (_isOnWindows) {
-         _openOnWindows "$($env:TEAM_ACCT)/$ProjectName"
-      }
-      elseif (_isOnMac) {
-         _openOnMac "$($env:TEAM_ACCT)/$ProjectName"
-      } else {
-         _openOnLinux "$($env:TEAM_ACCT)/$ProjectName"
-      }
+
+      _showInBrowser "$($env:TEAM_ACCT)/$ProjectName"
    }
 }
 

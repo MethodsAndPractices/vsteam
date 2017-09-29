@@ -59,6 +59,22 @@ function _openOnLinux {
    xdg-open $command
 }
 
+function _showInBrowser {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $url
+   )
+         
+   if (_isOnWindows) {
+      _openOnWindows $url
+   }
+   elseif (_isOnMac) {
+      _openOnMac $url
+   } else {
+      _openOnLinux $url
+   }
+}
+
 
 # The url for release is special and used in more than one
 # module so I moved it here.
