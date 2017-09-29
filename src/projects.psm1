@@ -189,7 +189,12 @@ function Show-VSTeamProject {
          $ProjectName = $id
       }
       
-      Start-Process "$($env:TEAM_ACCT)/$ProjectName"
+      if (_isOnWindows) {
+         Start-Process "$($env:TEAM_ACCT)/$ProjectName"
+      }
+      else {
+         open "$($env:TEAM_ACCT)/$ProjectName"
+      }
    }
 }
 
