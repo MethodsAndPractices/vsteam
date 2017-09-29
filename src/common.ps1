@@ -32,6 +32,34 @@ function _isOnMac {
    }
 }
 
+function _openOnWindows {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $command
+   )
+
+   Start-Process $command
+}
+
+function _openOnMac {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $command
+   )
+
+   open $command
+}
+
+function _openOnLinux {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $command
+   )
+
+   xdg-open $command
+}
+
+
 # The url for release is special and used in more than one
 # module so I moved it here.
 function _buildReleaseURL {

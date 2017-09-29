@@ -1,4 +1,4 @@
-00Set-StrictMode -Version Latest
+Set-StrictMode -Version Latest
 
 # Load common code
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -190,12 +190,12 @@ function Show-VSTeamProject {
       }
       
       if (_isOnWindows) {
-         Start-Process "$($env:TEAM_ACCT)/$ProjectName"
+         _openOnWindows "$($env:TEAM_ACCT)/$ProjectName"
       }
       elseif (_isOnMac) {
-         open "$($env:TEAM_ACCT)/$ProjectName"
+         _openOnMac "$($env:TEAM_ACCT)/$ProjectName"
       } else {
-         xdg-open "$($env:TEAM_ACCT)/$ProjectName"
+         _openOnLinux "$($env:TEAM_ACCT)/$ProjectName"
       }
    }
 }
