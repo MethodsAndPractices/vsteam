@@ -19,7 +19,7 @@ function _isOnWindows {
    ($null -ne $env:os) -and ($env:os).StartsWith("Windows")
 }
 
-function _IsOnMac {
+function _isOnMac {
    # The variable to test if you are on Mac OS changed from
    # IsOSX to IsMacOS. Because I have Set-StrictMode -Version Latest
    # trying to access a variable that is not set will crash.
