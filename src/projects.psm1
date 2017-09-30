@@ -189,6 +189,8 @@ function Show-VSTeamProject {
          $ProjectName = $id
       }
 
+      Write-Verbose "$($env:TEAM_ACCT)/$ProjectName"
+
       _showInBrowser "$($env:TEAM_ACCT)/$ProjectName"
    }
 }
