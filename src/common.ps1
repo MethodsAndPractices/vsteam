@@ -38,7 +38,7 @@ function _openOnWindows {
       [string] $command
    )
 
-   Start-Process -FilePath start -Args "$command"
+   Start-Process "$command"
 }
 
 function _openOnMac {

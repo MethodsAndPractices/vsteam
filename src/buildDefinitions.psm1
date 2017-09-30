@@ -193,9 +193,9 @@ function Show-VSTeamBuildDefinition {
          $url += [System.Web.HttpUtility]::UrlEncode($Path)
       }
 
-      Write-Verbose "$url"
+      Write-Verbose $url
 
-      _showInBrowser "$url"
+      _showInBrowser $url
    }
 }
 

@@ -62,6 +62,7 @@
 
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('src\types.ps1xml', 
+      'src\Approvals.ps1xml',
       'src\buildDefinitions.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
@@ -136,7 +137,8 @@
       'Update-VSTeamBuild',
       'Get-VSTeamOption',
       'Show-VSTeamProject',
-      'Show-VSTeamBuildDefinition')
+      'Show-VSTeamBuildDefinition',
+      'Show-VSTeamApproval')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()

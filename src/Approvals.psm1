@@ -61,6 +61,33 @@ function Get-VSTeamApproval {
    }
 }
 
+function Show-VSTeamApproval {
+   [CmdletBinding()]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('Id')]
+      [int] $ReleaseDefinitionId
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      Write-Debug 'Show-VSTeamApproval Process'
+
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      # Build the url
+      $url = "$($env:TEAM_ACCT)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
+
+      Write-Verbose $url
+
+      _showInBrowser $url
+   }
+}
+
 function Set-VSTeamApproval {
    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="Medium")]
    param(
@@ -116,7 +143,8 @@ function Set-VSTeamApproval {
    }
 }
 
+Set-Alias Show-Approval Show-VSTeamApproval
 Set-Alias Get-Approval Get-VSTeamApproval
 Set-Alias Set-Approval Set-VSTeamApproval
 
-Export-ModuleMember -Alias * -Function Get-VSTeamApproval, Set-VSTeamApproval
+Export-ModuleMember -Alias * -Function Get-VSTeamApproval, Set-VSTeamApproval, Show-VSTeamApproval
