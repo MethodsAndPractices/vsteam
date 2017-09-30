@@ -38,7 +38,7 @@ function _openOnWindows {
       [string] $command
    )
 
-   Start-Process $command
+   Start-Process -FilePath start -Args "$command"
 }
 
 function _openOnMac {
@@ -47,7 +47,7 @@ function _openOnMac {
       [string] $command
    )
 
-   open $command
+   Start-Process -FilePath open -Args "$command"
 }
 
 function _openOnLinux {
@@ -56,7 +56,7 @@ function _openOnLinux {
       [string] $command
    )
 
-   xdg-open $command
+   Start-Process -FilePath xdg-open -Args "$command"
 }
 
 function _showInBrowser {
