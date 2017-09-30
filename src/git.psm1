@@ -131,7 +131,7 @@ function Add-VSTeamGitRepository {
 }
 
 function Get-VSTeamGitRepository {
-   [CmdletBinding(DefaultParameterSetName='ByID')]
+   [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param (
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true)]
       [Alias('RepositoryID')]
@@ -207,8 +207,33 @@ function Get-VSTeamGitRepository {
    }
 }
 
+function Show-VSTeamGitRepository {
+   [CmdletBinding()]
+   param (
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [string] $RemoteUrl
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam -mandatory $false
+   }
+
+   process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      if ($RemoteUrl) {
+         _showInBrowser $RemoteUrl
+      }
+      else {
+         _showInBrowser "$($env:TEAM_ACCT)/_git/$ProjectName"
+      }
+   }
+}
+
 Set-Alias Get-GitRepository Get-VSTeamGitRepository
+Set-Alias Show-GitRepository Show-VSTeamGitRepository
 Set-Alias Add-GitRepository Add-VSTeamGitRepository
 Set-Alias Remove-GitRepository Remove-VSTeamGitRepository
 
-Export-ModuleMember -Alias * -Function Get-VSTeamGitRepository, Add-VSTeamGitRepository, Remove-VSTeamGitRepository
+Export-ModuleMember -Alias * -Function Get-VSTeamGitRepository, Show-VSTeamGitRepository, Add-VSTeamGitRepository, Remove-VSTeamGitRepository

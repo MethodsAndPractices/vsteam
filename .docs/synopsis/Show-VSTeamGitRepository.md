@@ -1,0 +1,1 @@
+Opens the Git repository in the default browser.
