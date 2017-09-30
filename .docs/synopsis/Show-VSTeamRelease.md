@@ -1,0 +1,1 @@
+Opens the release summary in the default browser.

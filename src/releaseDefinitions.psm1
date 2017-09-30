@@ -198,7 +198,6 @@ function Remove-VSTeamReleaseDefinition {
    }
 }
 
-
 Set-Alias Get-ReleaseDefinition Get-VSTeamReleaseDefinition
 Set-Alias Show-ReleaseDefinition Show-VSTeamReleaseDefinition
 Set-Alias Add-ReleaseDefinition Add-VSTeamReleaseDefinition

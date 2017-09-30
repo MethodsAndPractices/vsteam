@@ -142,8 +142,26 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Set-VSTeamReleaseStatus](Set-VSTeamReleaseStatus.md)
 #include "./synopsis/Set-VSTeamReleaseStatus.md"
 
+### [Show-VSTeamApproval](Show-VSTeamApproval.md)
+#include "./synopsis/Show-VSTeamApproval.md"
+
+### [Show-VSTeamBuild](Show-VSTeamBuild.md)
+#include "./synopsis/Show-VSTeamBuild.md"
+
+### [Show-VSTeamBuildDefinition](Show-VSTeamBuildDefinition.md)
+#include "./synopsis/Show-VSTeamBuildDefinition.md"
+
+### [Show-VSTeamGitRepository](Show-VSTeamGitRepository.md)
+#include "./synopsis/Show-VSTeamGitRepository.md"
+
 ### [Show-VSTeamProject](Show-VSTeamProject.md)
 #include "./synopsis/Show-VSTeamProject.md"
+
+### [Show-VSTeamRelease](Show-VSTeamRelease.md)
+#include "./synopsis/Show-VSTeamRelease.md"
+
+### [Show-VSTeamReleaseDefinition](Show-VSTeamReleaseDefinition.md)
+#include "./synopsis/Show-VSTeamReleaseDefinition.md"
 
 ### [Update-VSTeamBuild](Update-VSTeamBuild.md)
 #include "./synopsis/Update-VSTeamBuild.md"

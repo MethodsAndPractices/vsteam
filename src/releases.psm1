@@ -116,6 +116,33 @@ function Get-VSTeamRelease {
    }
 }
 
+function Show-VSTeamRelease {
+   [CmdletBinding(DefaultParameterSetName='ById')]
+   param(
+      [Parameter(ParameterSetName='ByID', ValueFromPipelineByPropertyName=$true, Mandatory=$true, Position = 1)]
+      [Alias('ReleaseID')]
+      [int] $id
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   process {
+      Write-Debug 'Show-VSTeamRelease Process'
+
+      if($id -lt 1) {
+         Throw "$id is not a valid id. Value must be greater than 0."
+      }
+
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      # Build the url
+      _showInBrowser "$($env:TEAM_ACCT)/$ProjectName/_release?releaseId=$id"
+   }
+}
+
 function Add-VSTeamRelease {
    [CmdletBinding(DefaultParameterSetName='ById', SupportsShouldProcess=$true, ConfirmImpact="Medium")]
    param(
@@ -422,9 +449,10 @@ function Add-VSTeamReleaseEnvironment {
 }
 
 Set-Alias Get-Release Get-VSTeamRelease
+Set-Alias Show-Release Show-VSTeamRelease
 Set-Alias Add-Release Add-VSTeamRelease
 Set-Alias Remove-Release Remove-VSTeamRelease
 Set-Alias Set-ReleaseStatus Set-VSTeamReleaseStatus
 Set-Alias Add-ReleaseEnvironment Add-VSTeamReleaseEnvironment
 
-Export-ModuleMember -Alias * -Function Get-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment
+Export-ModuleMember -Alias * -Function Get-VSTeamRelease, Show-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment
