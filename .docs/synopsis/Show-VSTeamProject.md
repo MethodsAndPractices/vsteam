@@ -1,1 +1,1 @@
-Will open the project in the default browser.
+Opens the project in the default browser.

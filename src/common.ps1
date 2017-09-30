@@ -64,6 +64,8 @@ function _showInBrowser {
       [parameter(Mandatory = $true)]
       [string] $url
    )
+
+   Write-Verbose $url
          
    if (_isOnWindows) {
       _openOnWindows $url

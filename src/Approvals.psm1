@@ -79,12 +79,7 @@ function Show-VSTeamApproval {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      # Build the url
-      $url = "$($env:TEAM_ACCT)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
-
-      Write-Verbose $url
-
-      _showInBrowser $url
+      _showInBrowser "$($env:TEAM_ACCT)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
    }
 }
 

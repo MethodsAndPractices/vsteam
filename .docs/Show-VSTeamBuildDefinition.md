@@ -9,7 +9,7 @@
 
 ### List (Default)
 ```
-Show-VSTeamBuildDefinition [-ProjectName] <String> [-Filter <String>] [-Type <String>]
+Show-VSTeamBuildDefinition [-ProjectName] <String> [-Filter <String>] [-Type <String>] [-Path <String>]
 ```
 
 ### ByID
@@ -53,6 +53,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: All
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Path
+The folder of the build definitions to retrieve.
+
+```yaml
+Type: String
+Parameter Sets: List
+Aliases: 
+
+Required: False
+Position: Named
+Default value: \
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

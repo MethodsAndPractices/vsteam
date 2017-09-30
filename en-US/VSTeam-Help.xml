@@ -6974,11 +6974,11 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:verb>Show</command:verb>
       <command:noun>VSTeamApproval</command:noun>
       <maml:description>
-        <maml:para>Shows the release associated with the waiting approval in a web browser.</maml:para>
+        <maml:para>Opens the release associated with the waiting approval in the default browser.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Shows the release associated with the waiting approval in a web browser.</maml:para>
+      <maml:para>Opens the release associated with the waiting approval in the default browser.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -6997,7 +6997,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="Id">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="Id">
           <maml:name>ReleaseDefinitionId</maml:name>
           <maml:Description>
             <maml:para>Only approvals for the release id provided will be returned</maml:para>
@@ -7012,7 +7012,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="Id">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="Id">
         <maml:name>ReleaseDefinitionId</maml:name>
         <maml:Description>
           <maml:para>Only approvals for the release id provided will be returned</maml:para>
@@ -7096,15 +7096,111 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Show-VSTeamBuild</command:name>
+      <command:verb>Show</command:verb>
+      <command:noun>VSTeamBuild</command:noun>
+      <maml:description>
+        <maml:para>Opens the build summary in the default browser.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Opens the build summary in the default browser.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Show-VSTeamBuild</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="BuildID">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Specifies build by ID.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="BuildID">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>Specifies build by ID.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>You can pipe the build ID to this function.</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Team.Build</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Show-VSTeamBuild -ProjectName Demo -Id 3</dev:code>
+        <dev:remarks>
+          <maml:para>This command will open a web browser with the summary of build 3.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamBuild</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamBuild</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Show-VSTeamBuildDefinition</command:name>
       <command:verb>Show</command:verb>
       <command:noun>VSTeamBuildDefinition</command:noun>
       <maml:description>
-        <maml:para>The Show-VSTeamBuildDefinition function opens a web browser on the  build definitions for a team project.</maml:para>
+        <maml:para>Opens the build definitions for a team project in the default browser.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The Show-VSTeamBuildDefinition function opens a web browser on the  build definitions for a team project.</maml:para>
+      <maml:para>Opens the build definitions for a team project in the default browser.</maml:para>
       <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
       <maml:para>With just a project name, this function shows all of the build definitions for that team project.</maml:para>
       <maml:para>You can also specify a particular build defintion by ID.</maml:para>
@@ -7138,6 +7234,18 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
             <maml:uri />
           </dev:type>
           <dev:defaultValue>All</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:Description>
+            <maml:para>The folder of the build definitions to retrieve.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>\</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -7183,6 +7291,18 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
           <maml:uri />
         </dev:type>
         <dev:defaultValue>All</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:Description>
+          <maml:para>The folder of the build definitions to retrieve.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>\</dev:defaultValue>
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
         <maml:name>ProjectName</maml:name>
@@ -7270,7 +7390,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:verb>Show</command:verb>
       <command:noun>VSTeamProject</command:noun>
       <maml:description>
-        <maml:para>Will open the project in the default browser.</maml:para>
+        <maml:para>Opens the project in the default browser.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
