@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 function _buildURL {
    param(
-      [int] $d
+      [int] $id
    )
 
    if (-not $env:TEAM_ACCT) {
@@ -46,15 +46,8 @@ function _applyTypes {
 
 function Get-VSTeamPool {
    [CmdletBinding(DefaultParameterSetName = 'List')]
-   param(
-      [Parameter(ParameterSetName = 'List')]
-      [string] $PoolName,
-      
-      [Parameter(ParameterSetName = 'List')]
-      [ValidateSet('None', 'Manage', 'Use')]
-      [string] $ActionFilter,
-      
-      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+   param(      
+      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Alias('PoolID')]
       [string] $Id
    )

@@ -33,12 +33,12 @@ function _applyTypes {
 }
 
 function Get-VSTeamReleaseDefinition {
-   [CmdletBinding(DefaultParameterSetName='List')]
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(ParameterSetName='List')]
-      [ValidateSet('environments','artifacts', 'none')]
+      [Parameter(ParameterSetName = 'List')]
+      [ValidateSet('environments', 'artifacts', 'none')]
       [string] $Expand = 'none',
-      [Parameter(ParameterSetName='ByID', ValueFromPipelineByPropertyName=$true)]
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseDefinitionID')]
       [int[]] $Id
    )
@@ -53,24 +53,26 @@ function Get-VSTeamReleaseDefinition {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if($id) {
+      if ($id) {
          foreach ($item in $id) {
             $listurl = _buildReleaseURL -resource 'definitions' -version '3.0-preview.1' -projectName $projectName -id $item
 
             # Call the REST API
             Write-Debug 'Get-VSTeamReleaseDefinition Call the REST API'
-	        if (_useWindowsAuthenticationOnPremise) {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-	        } else {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	        }
+            if (_useWindowsAuthenticationOnPremise) {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+            }
+            else {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             _applyTypes -item $resp
 
             Write-Output $resp
          }
-      } else {
+      }
+      else {
          $listurl = _buildReleaseURL -resource 'definitions' -version '3.0-preview.1' -projectName $ProjectName
 
          if ($expand -ne 'none') {
@@ -78,14 +80,15 @@ function Get-VSTeamReleaseDefinition {
          }
 
          # Call the REST API
-	     if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-	     } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	     }
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach($item in $resp.value) {
+         foreach ($item in $resp.value) {
             _applyTypes -item $item
          }
 
@@ -94,10 +97,39 @@ function Get-VSTeamReleaseDefinition {
    }
 }
 
+function Show-VSTeamReleaseDefinition {
+   [CmdletBinding()]
+   param(
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+      [Alias('ReleaseDefinitionID')]
+      [int] $Id
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   process {
+      Write-Debug 'Show-VSTeamReleaseDefinition Process'
+
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      # Build the url
+      $url = "$($env:TEAM_ACCT)/$ProjectName/_release"
+      
+      if ($id) {
+         $url += "?definitionId=$id"
+      }
+      
+      _showInBrowser $url
+   }
+}
+
 function Add-VSTeamReleaseDefinition {
    [CmdletBinding()]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $inFile
    )
 
@@ -116,20 +148,21 @@ function Add-VSTeamReleaseDefinition {
 
       # Call the REST API
       Write-Debug 'Add-VSTeamReleaseDefinition Call the REST API'
-	  if (_useWindowsAuthenticationOnPremise) {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
-	  } else {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
-	  }
+      if (_useWindowsAuthenticationOnPremise) {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
+      }
+      else {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
+      }
 
       Write-Output $resp
    }
 }
 
 function Remove-VSTeamReleaseDefinition {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
       # Forces the command without confirmation
@@ -152,11 +185,12 @@ function Remove-VSTeamReleaseDefinition {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release Definition")) {
             # Call the REST API
             Write-Debug 'Remove-VSTeamReleaseDefinition Call the REST API'
-	        if (_useWindowsAuthenticationOnPremise) {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-	        } else {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	        }
+            if (_useWindowsAuthenticationOnPremise) {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+            }
+            else {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
 
             Write-Output "Deleted release defintion $item"
          }
@@ -165,8 +199,9 @@ function Remove-VSTeamReleaseDefinition {
 }
 
 
-Set-Alias Get-VSTeamReleaseDefinition Get-VSTeamReleaseDefinition
-Set-Alias Add-VSTeamReleaseDefinition Add-VSTeamReleaseDefinition
-Set-Alias Remove-VSTeamReleaseDefinition Remove-VSTeamReleaseDefinition
+Set-Alias Get-ReleaseDefinition Get-VSTeamReleaseDefinition
+Set-Alias Show-ReleaseDefinition Show-VSTeamReleaseDefinition
+Set-Alias Add-ReleaseDefinition Add-VSTeamReleaseDefinition
+Set-Alias Remove-ReleaseDefinition Remove-VSTeamReleaseDefinition
 
-Export-ModuleMember -Alias * -Function Get-VSTeamReleaseDefinition, Add-VSTeamReleaseDefinition, Remove-VSTeamReleaseDefinition
+Export-ModuleMember -Alias * -Function Get-VSTeamReleaseDefinition, Show-VSTeamReleaseDefinition, Add-VSTeamReleaseDefinition, Remove-VSTeamReleaseDefinition
