@@ -268,4 +268,7 @@ Set-Alias Add-BuildDefinition Add-VSTeamBuildDefinition
 Set-Alias Show-BuildDefinition Show-VSTeamBuildDefinition
 Set-Alias Remove-BuildDefinition Remove-VSTeamBuildDefinition
 
-Export-ModuleMember -Alias * -Function Show-VSTeamBuildDefinition, Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition, Remove-VSTeamBuildDefinition
+Export-ModuleMember `
+ -Function Show-VSTeamBuildDefinition, Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition,
+  Remove-VSTeamBuildDefinition `
+ -Alias Get-BuildDefinition, Add-BuildDefinition, Show-BuildDefinition, Remove-BuildDefinition

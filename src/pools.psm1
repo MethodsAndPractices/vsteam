@@ -94,4 +94,6 @@ function Get-VSTeamPool {
 
 Set-Alias Get-Pool Get-VSTeamPool
 
-Export-ModuleMember -Alias * -Function Get-VSTeamPool
+Export-ModuleMember `
+ -Function Get-VSTeamPool `
+ -Alias Get-Pool

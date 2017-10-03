@@ -236,4 +236,6 @@ Set-Alias Show-GitRepository Show-VSTeamGitRepository
 Set-Alias Add-GitRepository Add-VSTeamGitRepository
 Set-Alias Remove-GitRepository Remove-VSTeamGitRepository
 
-Export-ModuleMember -Alias * -Function Get-VSTeamGitRepository, Show-VSTeamGitRepository, Add-VSTeamGitRepository, Remove-VSTeamGitRepository
+Export-ModuleMember `
+ -Function Get-VSTeamGitRepository, Show-VSTeamGitRepository, Add-VSTeamGitRepository, Remove-VSTeamGitRepository `
+ -Alias Get-GitRepository, Show-GitRepository, Add-GitRepository, Remove-GitRepository

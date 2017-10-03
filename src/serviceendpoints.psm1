@@ -344,4 +344,14 @@ Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
 Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Add-SonarQubeEndpoint Add-VSTeamSonarQubeEndpoint
 
-Export-ModuleMember -Alias * -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, Add-VSTeamSonarQubeEndpoint
+Set-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
+
+Export-ModuleMember `
+ -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
+  Add-VSTeamSonarQubeEndpoint `
+ -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint,
+  Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
+  Remove-SonarQubeEndpoint

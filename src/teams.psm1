@@ -253,4 +253,6 @@ Set-Alias Add-Team Add-VSTeam
 Set-Alias Update-Team Update-VSTeam
 Set-Alias Remove-Team Remove-VSTeam
 
-Export-ModuleMember -Alias * -Function Get-VSTeam, Add-VSTeam, Update-VSTeam, Remove-VSTeam
+Export-ModuleMember `
+ -Function Get-VSTeam, Add-VSTeam, Update-VSTeam, Remove-VSTeam `
+ -Alias Get-Team, Add-Team, Update-Team, Remove-Team

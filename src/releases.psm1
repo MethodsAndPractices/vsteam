@@ -455,4 +455,8 @@ Set-Alias Remove-Release Remove-VSTeamRelease
 Set-Alias Set-ReleaseStatus Set-VSTeamReleaseStatus
 Set-Alias Add-ReleaseEnvironment Add-VSTeamReleaseEnvironment
 
-Export-ModuleMember -Alias * -Function Get-VSTeamRelease, Show-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment
+Export-ModuleMember `
+ -Function Get-VSTeamRelease, Show-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, 
+  Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment `
+ -Alias Get-Release, Show-Release, Add-Release, Remove-Release, Set-ReleaseStatus,
+  Add-ReleaseEnvironment

@@ -90,4 +90,6 @@ function Get-VSTeamMember {
 
 Set-Alias Get-TeamMember Get-VSTeamMember
 
-Export-ModuleMember -Alias * -Function Get-VSTeamMember
+Export-ModuleMember `
+ -Function Get-VSTeamMember `
+ -Alias Get-TeamMember

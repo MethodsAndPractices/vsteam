@@ -374,4 +374,6 @@ Set-Alias Update-Project Update-VSTeamProject
 Set-Alias Add-Project Add-VSTeamProject
 Set-Alias Remove-Project Remove-VSTeamProject
 
-Export-ModuleMember -Alias * -Function Get-VSTeamProject, Show-VSTeamProject, Update-VSTeamProject, Add-VSTeamProject, Remove-VSTeamProject
+Export-ModuleMember `
+ -Function Get-VSTeamProject, Show-VSTeamProject, Update-VSTeamProject, Add-VSTeamProject, Remove-VSTeamProject `
+ -Alias Get-Project, Show-Project, Update-Project, Add-Project, Remove-Project

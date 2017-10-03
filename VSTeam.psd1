@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '1.0.2'
+   ModuleVersion     = '1.0.3'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -151,7 +151,64 @@
    VariablesToExport = '*'
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-   AliasesToExport   = '*'
+   AliasesToExport   = @('Get-ServiceEndpoint',
+      'Add-AzureRMServiceEndpoint',
+      'Remove-ServiceEndpoint', 
+      'Add-SonarQubeEndpoint',
+      'Remove-VSTeamAzureRMServiceEndpoint',
+      'Remove-VSTeamSonarQubeEndpoint',
+      'Remove-AzureRMServiceEndpoint',
+      'Remove-SonarQubeEndpoint',
+      'Get-Build',
+      'Show-Build',
+      'Get-BuildLog',
+      'Get-BuildTag',
+      'Get-BuildArtifact',
+      'Add-Build',
+      'Add-BuildTag',
+      'Remove-Build',
+      'Remove-BuildTag',
+      'Update-Build',
+      'Get-BuildDefinition',
+      'Add-BuildDefinition',
+      'Show-BuildDefinition',
+      'Remove-BuildDefinition',
+      'Show-Approval',
+      'Get-Approval',
+      'Set-Approval', 
+      'Get-CloudSubscription',
+      'Get-GitRepository',
+      'Show-GitRepository',
+      'Add-GitRepository',
+      'Remove-GitRepository',
+      'Get-Pool',
+      'Get-Project',
+      'Show-Project',
+      'Update-Project',
+      'Add-Project',
+      'Remove-Project',
+      'Get-Queue',
+      'Get-ReleaseDefinition',
+      'Show-ReleaseDefinition',
+      'Add-ReleaseDefinition',
+      'Remove-ReleaseDefinition',
+      'Get-Release',
+      'Show-Release',
+      'Add-Release',
+      'Remove-Release',
+      'Set-ReleaseStatus',
+      'Add-ReleaseEnvironment',
+      'Get-TeamInfo',
+      'Add-TeamAccount',
+      'Remove-TeamAccount',
+      'Get-TeamOption',
+      'Clear-DefaultProject',
+      'Set-DefaultProject',
+      'Get-TeamMember',
+      'Get-Team',
+      'Add-Team',
+      'Update-Team',
+      'Remove-Team')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

@@ -486,7 +486,11 @@ Set-Alias Get-TeamOption Get-VSTeamOption
 Set-Alias Clear-DefaultProject Clear-VSTeamDefaultProject
 Set-Alias Set-DefaultProject Set-VSTeamDefaultProject
 
-Export-ModuleMember -Alias * -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject, Set-VSTeamDefaultProject, Get-VSTeamOption
+Export-ModuleMember `
+ -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject,
+  Set-VSTeamDefaultProject, Get-VSTeamOption `
+ -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Clear-DefaultProject, 
+  Set-DefaultProject
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {

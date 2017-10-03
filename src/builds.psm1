@@ -662,6 +662,9 @@ Set-Alias Remove-Build Remove-VSTeamBuild
 Set-Alias Remove-BuildTag Remove-VSTeamBuildTag
 Set-Alias Update-Build Update-VSTeamBuild
 
-Export-ModuleMember -Alias * -Function Add-VSTeamBuild, Get-VSTeamBuild, Remove-VSTeamBuild, Get-VSTeamBuildLog, 
-Add-VSTeamBuildTag, Get-VSTeamBuildTag, Remove-VSTeamBuildTag, 
-Get-VSTeamBuildArtifact, Update-VSTeamBuild, Show-VSTeamBuild
+Export-ModuleMember `
+ -Function Add-VSTeamBuild, Get-VSTeamBuild, Remove-VSTeamBuild, Get-VSTeamBuildLog, 
+  Add-VSTeamBuildTag, Get-VSTeamBuildTag, Remove-VSTeamBuildTag, 
+  Get-VSTeamBuildArtifact, Update-VSTeamBuild, Show-VSTeamBuild `
+ -Alias Get-Build, Show-Build, Get-BuildLog, Get-BuildTag, Get-BuildArtifact, Add-Build, Add-BuildTag,
+  Remove-Build, Remove-BuildTag, Update-Build

@@ -48,4 +48,6 @@ function Get-VSTeamCloudSubscription {
 
 Set-Alias Get-CloudSubscription Get-VSTeamCloudSubscription
 
-Export-ModuleMember -Alias * -Function Get-VSTeamCloudSubscription
+Export-ModuleMember `
+ -Function Get-VSTeamCloudSubscription `
+ -Alias Get-CloudSubscription
