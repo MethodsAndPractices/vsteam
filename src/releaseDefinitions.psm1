@@ -204,6 +204,6 @@ Set-Alias Add-ReleaseDefinition Add-VSTeamReleaseDefinition
 Set-Alias Remove-ReleaseDefinition Remove-VSTeamReleaseDefinition
 
 Export-ModuleMember `
- -Function Get-VSTeamReleaseDeinition, Show-VSTeamReleaseDefinition, Add-VSTeamReleaseDefinition,
+ -Function Get-VSTeamReleaseDefinition, Show-VSTeamReleaseDefinition, Add-VSTeamReleaseDefinition,
   Remove-VSTeamReleaseDefinition `
  -Alias Get-ReleaseDefinition, Show-ReleaseDefinition, Add-ReleaseDefinition, Remove-ReleaseDefinition
