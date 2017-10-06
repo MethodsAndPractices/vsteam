@@ -157,7 +157,7 @@ function _getProjects {
    $instance = $env:TEAM_ACCT
 
    # Build the url to list the projects
-   $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&$top=9999'
+   $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
    Write-Verbose "listurl = $listurl"
 
    # Call the REST API
