@@ -74,6 +74,19 @@ function Get-VSTeamInfo {
    }
 }
 
+function Show-VSTeam {
+   [CmdletBinding()]
+   param ()
+
+   process {
+      if (-not $env:TEAM_ACCT) {
+         throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
+      }
+      
+      _showInBrowser "$($env:TEAM_ACCT)"
+   }
+}
+
 function Get-VSTeamOption {
    # Build the url to list the projects
    $url = _buildURL
@@ -488,7 +501,7 @@ Set-Alias Set-DefaultProject Set-VSTeamDefaultProject
 
 Export-ModuleMember `
  -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject,
-  Set-VSTeamDefaultProject, Get-VSTeamOption `
+  Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam `
  -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Clear-DefaultProject, 
   Set-DefaultProject
 

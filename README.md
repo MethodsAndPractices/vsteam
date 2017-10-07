@@ -8,6 +8,9 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 1.0.4
+Added support for Show-VSTeam that opens the configured TFS or VSTS in default browser.
+
 ## 1.0.3
 Explicit export of alias
 Fixed typo in help

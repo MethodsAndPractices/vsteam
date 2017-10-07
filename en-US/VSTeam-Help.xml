@@ -6919,6 +6919,47 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Show-VSTeam</command:name>
+      <command:verb>Show</command:verb>
+      <command:noun>VSTeam</command:noun>
+      <maml:description>
+        <maml:para>Opens TFS or VSTS site in the default browser.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Opens TFS or VSTS site in the default browser.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Show-VSTeam</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Show-VSTeam</dev:code>
+        <dev:remarks>
+          <maml:para>This will open a browser to the TFS or VSTS site</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Show-VSTeamApproval</command:name>
       <command:verb>Show</command:verb>
       <command:noun>VSTeamApproval</command:noun>
@@ -7636,11 +7677,11 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:verb>Show</command:verb>
       <command:noun>VSTeamReleaseDefinition</command:noun>
       <maml:description>
-        <maml:para>Opens the build definitions for a team project in the default browser.</maml:para>
+        <maml:para>Opens the release definitions for a team project in the default browser.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Opens the build definitions for a team project in the default browser.</maml:para>
+      <maml:para>Opens the release definitions for a team project in the default browser.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
