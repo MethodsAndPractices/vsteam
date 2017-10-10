@@ -24,36 +24,6 @@ Get-VSTeamPool -Id <String>
 
 ## PARAMETERS
 
-### -PoolName
-Name of the pool to return.
-
-```yaml
-Type: String
-Parameter Sets: List
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ActionFilter
-None, Manage or Use.
-
-```yaml
-Type: String
-Parameter Sets: List
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Id
 Id of the pool to return.
 

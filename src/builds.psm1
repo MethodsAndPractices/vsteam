@@ -215,6 +215,26 @@ function Get-VSTeamBuild {
    }
 }
 
+function Show-VSTeamBuild {
+   [CmdletBinding(DefaultParameterSetName = 'ByID')]
+   param (
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildID')]
+      [int[]] $Id
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      _showInBrowser "$($env:TEAM_ACCT)/$ProjectName/_build/index?buildId=$Id"
+   }
+}
+
 function Get-VSTeamBuildLog {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param (
@@ -632,6 +652,7 @@ function Get-VSTeamBuildArtifact {
 }
 
 Set-Alias Get-Build Get-VSTeamBuild
+Set-Alias Show-Build Show-VSTeamBuild
 Set-Alias Get-BuildLog Get-VSTeamBuildLog
 Set-Alias Get-BuildTag Get-VSTeamBuildTag
 Set-Alias Get-BuildArtifact Get-VSTeamBuildArtifact
@@ -641,6 +662,9 @@ Set-Alias Remove-Build Remove-VSTeamBuild
 Set-Alias Remove-BuildTag Remove-VSTeamBuildTag
 Set-Alias Update-Build Update-VSTeamBuild
 
-Export-ModuleMember -Alias * -Function Add-VSTeamBuild, Get-VSTeamBuild, Remove-VSTeamBuild, Get-VSTeamBuildLog, 
-Add-VSTeamBuildTag, Get-VSTeamBuildTag, Remove-VSTeamBuildTag, 
-Get-VSTeamBuildArtifact, Update-VSTeamBuild
+Export-ModuleMember `
+ -Function Add-VSTeamBuild, Get-VSTeamBuild, Remove-VSTeamBuild, Get-VSTeamBuildLog, 
+  Add-VSTeamBuildTag, Get-VSTeamBuildTag, Remove-VSTeamBuildTag, 
+  Get-VSTeamBuildArtifact, Update-VSTeamBuild, Show-VSTeamBuild `
+ -Alias Get-Build, Show-Build, Get-BuildLog, Get-BuildTag, Get-BuildArtifact, Add-Build, Add-BuildTag,
+  Remove-Build, Remove-BuildTag, Update-Build

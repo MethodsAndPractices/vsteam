@@ -19,7 +19,7 @@ function _isOnWindows {
    ($null -ne $env:os) -and ($env:os).StartsWith("Windows")
 }
 
-function _IsOnMac {
+function _isOnMac {
    # The variable to test if you are on Mac OS changed from
    # IsOSX to IsMacOS. Because I have Set-StrictMode -Version Latest
    # trying to access a variable that is not set will crash.
@@ -31,6 +31,52 @@ function _IsOnMac {
       $IsOSX
    }
 }
+
+function _openOnWindows {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $command
+   )
+
+   Start-Process "$command"
+}
+
+function _openOnMac {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $command
+   )
+
+   Start-Process -FilePath open -Args "$command"
+}
+
+function _openOnLinux {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $command
+   )
+
+   Start-Process -FilePath xdg-open -Args "$command"
+}
+
+function _showInBrowser {
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $url
+   )
+
+   Write-Verbose $url
+         
+   if (_isOnWindows) {
+      _openOnWindows $url
+   }
+   elseif (_isOnMac) {
+      _openOnMac $url
+   } else {
+      _openOnLinux $url
+   }
+}
+
 
 # The url for release is special and used in more than one
 # module so I moved it here.
@@ -111,7 +157,7 @@ function _getProjects {
    $instance = $env:TEAM_ACCT
 
    # Build the url to list the projects
-   $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&$top=9999'
+   $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
    Write-Verbose "listurl = $listurl"
 
    # Call the REST API

@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '1.0.1'
+   ModuleVersion     = '1.0.3'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -62,6 +62,7 @@
 
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('src\types.ps1xml', 
+      'src\Approvals.ps1xml',
       'src\buildDefinitions.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
@@ -136,7 +137,14 @@
       'Remove-VSTeamBuildTag',
       'Get-VSTeamBuildArtifact',
       'Update-VSTeamBuild',
-      'Get-VSTeamOption')
+      'Get-VSTeamOption',
+      'Show-VSTeamProject',
+      'Show-VSTeamBuildDefinition',
+      'Show-VSTeamApproval',
+      'Show-VSTeamBuild',
+      'Show-VSTeamGitRepository',
+      'Show-VSTeamReleaseDefinition',
+      'Show-VSTeamRelease')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -145,7 +153,64 @@
    VariablesToExport = '*'
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-   AliasesToExport   = '*'
+   AliasesToExport   = @('Get-ServiceEndpoint',
+      'Add-AzureRMServiceEndpoint',
+      'Remove-ServiceEndpoint', 
+      'Add-SonarQubeEndpoint',
+      'Remove-VSTeamAzureRMServiceEndpoint',
+      'Remove-VSTeamSonarQubeEndpoint',
+      'Remove-AzureRMServiceEndpoint',
+      'Remove-SonarQubeEndpoint',
+      'Get-Build',
+      'Show-Build',
+      'Get-BuildLog',
+      'Get-BuildTag',
+      'Get-BuildArtifact',
+      'Add-Build',
+      'Add-BuildTag',
+      'Remove-Build',
+      'Remove-BuildTag',
+      'Update-Build',
+      'Get-BuildDefinition',
+      'Add-BuildDefinition',
+      'Show-BuildDefinition',
+      'Remove-BuildDefinition',
+      'Show-Approval',
+      'Get-Approval',
+      'Set-Approval', 
+      'Get-CloudSubscription',
+      'Get-GitRepository',
+      'Show-GitRepository',
+      'Add-GitRepository',
+      'Remove-GitRepository',
+      'Get-Pool',
+      'Get-Project',
+      'Show-Project',
+      'Update-Project',
+      'Add-Project',
+      'Remove-Project',
+      'Get-Queue',
+      'Get-ReleaseDefinition',
+      'Show-ReleaseDefinition',
+      'Add-ReleaseDefinition',
+      'Remove-ReleaseDefinition',
+      'Get-Release',
+      'Show-Release',
+      'Add-Release',
+      'Remove-Release',
+      'Set-ReleaseStatus',
+      'Add-ReleaseEnvironment',
+      'Get-TeamInfo',
+      'Add-TeamAccount',
+      'Remove-TeamAccount',
+      'Get-TeamOption',
+      'Clear-DefaultProject',
+      'Set-DefaultProject',
+      'Get-TeamMember',
+      'Get-Team',
+      'Add-Team',
+      'Update-Team',
+      'Remove-Team')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

@@ -101,4 +101,6 @@ function Get-VSTeamQueue {
 
 Set-Alias Get-Queue Get-VSTeamQueue
 
-Export-ModuleMember -Alias * -Function Get-VSTeamQueue
+Export-ModuleMember `
+ -Function Get-VSTeamQueue `
+ -Alias Get-Queue

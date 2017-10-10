@@ -1,0 +1,1 @@
+Opens the build summary in the default browser.

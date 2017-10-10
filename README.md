@@ -8,6 +8,20 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 1.0.3
+Explicit export of alias
+Fixed typo in help
+Fixed typo in export of function
+Changed projectName dynamic parameter to return projects in any state instead of just well-formed.
+
+## 1.0.2
+Added Show-VSTeam* functions
+
+Fixed ReleaseDefinition functions not recognized bug
+
+## 1.0.1
+Renamed from Team to VSTeam. An alias for every function with it's original name is provided. 
+
 ## 0.1.34
 Added support to queue a build by ID using the Add-VSTeamBuild function. The Add-VSTeamBuild function also fully qualifies the names of build definitions when you tab complete from command line.
 

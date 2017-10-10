@@ -6,12 +6,12 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 function _buildURL {
    param(
-      [parameter(Mandatory=$true)]
+      [parameter(Mandatory = $true)]
       [string] $ProjectName,
       [int] $Id
    )
 
-   if(-not $env:TEAM_ACCT) {
+   if (-not $env:TEAM_ACCT) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
@@ -19,7 +19,7 @@ function _buildURL {
    $resource = "/build/definitions"
    $instance = $env:TEAM_ACCT
 
-   if($id) {
+   if ($id) {
       $resource += "/$id"
    }
 
@@ -59,20 +59,20 @@ function _applyTypes {
 }
 
 function Get-VSTeamBuildDefinition {
-   [CmdletBinding(DefaultParameterSetName='List')]
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [string] $Filter,
       
-      [Parameter(ParameterSetName='List')]
-      [ValidateSet('build','xaml', 'All')]
+      [Parameter(ParameterSetName = 'List')]
+      [ValidateSet('build', 'xaml', 'All')]
       [string] $Type = 'All',
       
-      [Parameter(ParameterSetName='ByID', Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildDefinitionID')]
       [int[]] $Id,
       
-      [Parameter(ParameterSetName='ByID')]
+      [Parameter(ParameterSetName = 'ByID')]
       [int] $Revision
    )
 
@@ -84,7 +84,7 @@ function Get-VSTeamBuildDefinition {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if($id) {
+      if ($id) {
          foreach ($item in $id) {
             # Build the url to list the projects
             $listurl = _buildURL -projectName $projectName -id $item
@@ -94,17 +94,19 @@ function Get-VSTeamBuildDefinition {
             }
 
             # Call the REST API
-			if (_useWindowsAuthenticationOnPremise) {
-	          $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            } else {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-			}
+            if (_useWindowsAuthenticationOnPremise) {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+            }
+            else {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
             
             _applyTypes -item $resp
 
             Write-Output $resp
          }
-      } else {
+      }
+      else {
          # Build the url
          $listurl = _buildURL -projectName $ProjectName
 
@@ -112,19 +114,20 @@ function Get-VSTeamBuildDefinition {
             $listurl += "&type=$type"
          }
 
-         if($filter) {
+         if ($filter) {
             $listurl += "&name=$filter"
          }
 
          # Call the REST API
-		 if (_useWindowsAuthenticationOnPremise) {
-	       $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         } else {
-		   $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	     }
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
          
          # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach($item in $resp.value) {
+         foreach ($item in $resp.value) {
             _applyTypes -item $item
          }
 
@@ -133,10 +136,71 @@ function Get-VSTeamBuildDefinition {
    }
 }
 
+function Show-VSTeamBuildDefinition {
+   [CmdletBinding(DefaultParameterSetName = 'List')]
+   param(
+      [Parameter(ParameterSetName = 'List')]
+      [string] $Filter,
+      
+      [Parameter(ParameterSetName = 'List')]
+      [ValidateSet('Mine', 'All', 'Queued', 'XAML')]
+      [string] $Type = 'All',
+      
+      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('BuildDefinitionID')]
+      [int[]] $Id,
+
+      [Parameter(ParameterSetName = 'List')]
+      [string] $Path = '\'
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      # Build the url
+      $url = "$($env:TEAM_ACCT)/$ProjectName/_build"
+
+      if ($id) {
+         $url += "/index?definitionId=$id"
+      }
+      else {
+         switch ($type) {
+            'Mine' {
+               $url += '/index?_a=mine&path='
+            }
+            'XAML' {
+               $url += '/xaml&path='
+            }
+            'Queued' {
+               $url += '/index?_a=queued&path='
+            }
+            Default {
+               # All
+               $url += '/index?_a=allDefinitions&path='
+            }
+         }
+
+         # Make sure path starts with \
+         if ($Path[0] -ne '\') {
+            $Path = '\' + $Path
+         }
+
+         $url += [System.Web.HttpUtility]::UrlEncode($Path)
+      }
+
+      _showInBrowser $url
+   }
+}
+
 function Add-VSTeamBuildDefinition {
    [CmdletBinding()]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $InFile
    )
 
@@ -152,20 +216,21 @@ function Add-VSTeamBuildDefinition {
       $url = _buildURL -projectName $projectName
 
       # Call the REST API
-	  if (_useWindowsAuthenticationOnPremise) {
-        $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
-      } else {
-  	    $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
-	  }
+      if (_useWindowsAuthenticationOnPremise) {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
+      }
+      else {
+         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
+      }
 
       return $resp
    }
 }
 
 function Remove-VSTeamBuildDefinition {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
       # Forces the command without confirmation
@@ -185,11 +250,12 @@ function Remove-VSTeamBuildDefinition {
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build Definition")) {
             # Call the REST API
-			if (_useWindowsAuthenticationOnPremise) {
-			  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-            } else {
-	          $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	        }
+            if (_useWindowsAuthenticationOnPremise) {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+            }
+            else {
+               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+            }
 
             Write-Output "Deleted build defintion $item"
          }
@@ -199,6 +265,10 @@ function Remove-VSTeamBuildDefinition {
 
 Set-Alias Get-BuildDefinition Get-VSTeamBuildDefinition
 Set-Alias Add-BuildDefinition Add-VSTeamBuildDefinition
+Set-Alias Show-BuildDefinition Show-VSTeamBuildDefinition
 Set-Alias Remove-BuildDefinition Remove-VSTeamBuildDefinition
 
-Export-ModuleMember -Alias * -Function Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition, Remove-VSTeamBuildDefinition
+Export-ModuleMember `
+ -Function Show-VSTeamBuildDefinition, Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition,
+  Remove-VSTeamBuildDefinition `
+ -Alias Get-BuildDefinition, Add-BuildDefinition, Show-BuildDefinition, Remove-BuildDefinition

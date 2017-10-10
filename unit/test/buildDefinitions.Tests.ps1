@@ -10,6 +10,50 @@ InModuleScope buildDefinitions {
    Describe 'BuildDefinitions' {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
+      Context 'Show-VSTeamBuildDefinition by ID' {
+         Mock _openOnWindows { }
+         Mock _isOnWindows { return $true }
+
+         it 'should return url for mine' {
+            Show-VSTeamBuildDefinition -projectName project -Id 15
+
+            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter { $command -eq 'https://test.visualstudio.com/project/_build/index?definitionId=15' }
+         }
+      }
+
+      Context 'Show-VSTeamBuildDefinition Mine' {
+         Mock _openOnWindows { }
+         Mock _isOnWindows { return $true }
+
+         it 'should return url for mine' {
+            Show-VSTeamBuildDefinition -projectName project -Type Mine
+
+            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter { $command -eq 'https://test.visualstudio.com/project/_build/index?_a=mine&path=%5c' }
+         }
+      }
+
+      Context 'Show-VSTeamBuildDefinition Mine with path' {
+         Mock _openOnWindows { }
+         Mock _isOnWindows { return $true }
+
+         it 'should return url for mine' {
+            Show-VSTeamBuildDefinition -projectName project -path '\test'
+
+            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter { $command -like 'https://test.visualstudio.com/project/_Build/index?_a=allDefinitions&path=%5Ctest' }
+         }
+      }
+
+      Context 'Show-VSTeamBuildDefinition Mine with path missing \' {
+         Mock _openOnWindows { }
+         Mock _isOnWindows { return $true }
+
+         it 'should return url for mine with \ added' {
+            Show-VSTeamBuildDefinition -projectName project -path 'test'
+
+            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter { $command -like 'https://test.visualstudio.com/project/_Build/index?_a=allDefinitions&path=%5Ctest' }
+         }
+      }
+
       Context 'Get-VSTeamBuildDefinition with no parameters' {
          Mock Invoke-RestMethod { return @{
                value=@{

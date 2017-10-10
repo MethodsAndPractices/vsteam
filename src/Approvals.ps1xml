@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- *******************************************************************
+These sample files contain formatting information used by the Windows
+PowerShell engine. Do not edit or change the contents of this file
+directly. Please see the Windows PowerShell documentation or type
+Get-Help Update-TypeData for more information.
+
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+THIS SAMPLE CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY
+OF ANY KIND,WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+PURPOSE. IF THIS CODE AND INFORMATION IS MODIFIED, THE ENTIRE RISK OF USE
+OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE AND INFORMATION
+REMAINS WITH THE USER.
+******************************************************************** -->
+<Types>
+   <Type>
+      <Name>Team.Approval</Name>
+      <Members>
+         <ScriptProperty>
+            <Name>approverName</Name>
+            <GetScriptBlock>$this.approver.displayName</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>releaseName</Name>
+            <GetScriptBlock>$this.release.name</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>releaseDefinitionId</Name>
+            <GetScriptBlock>$this.releaseDefinition.id</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>releaseDefinitionName</Name>
+            <GetScriptBlock>$this.releaseDefinition.name</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>releaseEnvironmentName</Name>
+            <GetScriptBlock>$this.releaseEnvironment.name</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>shortApprovalType</Name>
+            <GetScriptBlock>$this.approvalType.Replace('Deploy', '').Replace('p', 'P')</GetScriptBlock>
+         </ScriptProperty>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>id</Name>
+                     <Name>approverName</Name>
+                     <Name>status</Name>
+                     <Name>comments</Name>
+                     <Name>releaseDefinitionName</Name>
+                     <Name>releaseEnvironmentName</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>

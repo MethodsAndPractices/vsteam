@@ -1,0 +1,1 @@
+Opens the release associated with the waiting approval in the default browser.

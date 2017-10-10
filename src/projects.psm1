@@ -165,6 +165,34 @@ function Get-VSTeamProject {
    }
 }
 
+function Show-VSTeamProject {
+   [CmdletBinding(DefaultParameterSetName = 'ByName')]
+   param(      
+      [Parameter(ParameterSetName = 'ByID')]
+      [Alias('ProjectID')]
+      [string] $Id
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -AliasName 'Name'
+   }
+
+   process {
+      if (-not $env:TEAM_ACCT) {
+         throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
+      }
+
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      if ($id) {
+         $ProjectName = $id
+      }
+
+      _showInBrowser "$($env:TEAM_ACCT)/$ProjectName"
+   }
+}
+
 function Update-VSTeamProject {
    [CmdletBinding(DefaultParameterSetName = 'ByName', SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
@@ -341,8 +369,11 @@ function Remove-VSTeamProject {
 }
 
 Set-Alias Get-Project Get-VSTeamProject
+Set-Alias Show-Project Show-VSTeamProject
 Set-Alias Update-Project Update-VSTeamProject
 Set-Alias Add-Project Add-VSTeamProject
 Set-Alias Remove-Project Remove-VSTeamProject
 
-Export-ModuleMember -Alias * -Function Get-VSTeamProject, Update-VSTeamProject, Add-VSTeamProject, Remove-VSTeamProject
+Export-ModuleMember `
+ -Function Get-VSTeamProject, Show-VSTeamProject, Update-VSTeamProject, Add-VSTeamProject, Remove-VSTeamProject `
+ -Alias Get-Project, Show-Project, Update-Project, Add-Project, Remove-Project
