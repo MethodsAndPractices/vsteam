@@ -4,8 +4,13 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
+$VSTeamAccount = @{
+   "Account"        = $env:TEAM_ACCT;
+   "DefaultProject" = $env:TEAM_PROJECT
+}
+
 function _buildURL {
-   param()
+   param($resource)
 
    if (-not $env:TEAM_ACCT) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
@@ -13,15 +18,18 @@ function _buildURL {
    
    $instance = $env:TEAM_ACCT
 
-   return $instance + '/_apis'
+   return $instance + '/_apis/' + $resource
 }
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
-   param($item)
+   param(
+      $item,
+      $type
+   )
 
-   $item.PSObject.TypeNames.Insert(0, 'Team.Option')
+   $item.PSObject.TypeNames.Insert(0, $type)
 }
 
 function _testAdministrator {
@@ -88,6 +96,9 @@ function Show-VSTeam {
 }
 
 function Get-VSTeamOption {
+   [CmdletBinding()]
+   param()
+
    # Build the url to list the projects
    $url = _buildURL
 
@@ -101,7 +112,30 @@ function Get-VSTeamOption {
 
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
-      _applyTypes -item $item
+      _applyTypes -item $item -type 'Team.Option'
+   }
+
+   Write-Output $resp.value
+}
+
+function Get-VSTeamResourceArea {
+   [CmdletBinding()]
+   param()
+
+   # Build the url to list the projects
+   $url = _buildURL -resource 'resourceareas'
+
+   # Call the REST API
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   # Apply a Type Name so we can use custom format view and custom type extensions
+   foreach ($item in $resp.value) {
+      _applyTypes -item $item -type 'Team.ResourceArea'
    }
 
    Write-Output $resp.value
@@ -496,14 +530,16 @@ Set-Alias Get-TeamInfo Get-VSTeamInfo
 Set-Alias Add-TeamAccount Add-VSTeamAccount
 Set-Alias Remove-TeamAccount Remove-VSTeamAccount
 Set-Alias Get-TeamOption Get-VSTeamOption
+Set-Alias Get-TeamResourceArea Get-VSTeamResourceArea
 Set-Alias Clear-DefaultProject Clear-VSTeamDefaultProject
 Set-Alias Set-DefaultProject Set-VSTeamDefaultProject
 
 Export-ModuleMember `
- -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject,
-  Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam `
- -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Clear-DefaultProject, 
-  Set-DefaultProject
+   -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject,
+Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea `
+   -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Clear-DefaultProject, 
+Set-DefaultProject, Get-TeamResourceArea `
+   -Variable VSTeamAccount
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {

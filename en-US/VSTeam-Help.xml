@@ -4935,6 +4935,60 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamResourceArea</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamResourceArea</command:noun>
+      <maml:description>
+        <maml:para>List all the areas supported by this instance of TFS/VSTS.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>List all the areas supported by this instance of TFS/VSTS. There are two table formats defined for the Team.ResourceArea type, Default and Versions.</maml:para>
+      <maml:para>Default view contains Name, Area, Max Version and URI Template.</maml:para>
+      <maml:para>Location view contains Name and Url.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamResourceArea</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamResourceArea</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the areas of supported APIs for your account using the 'Default' table format.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamResourceArea | Format-Table -View Location</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the areas of supported APIs for your account using the 'Location' custom table format.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamOption</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamServiceEndpoint</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamServiceEndpoint</command:noun>

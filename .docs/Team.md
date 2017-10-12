@@ -88,6 +88,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamReleaseDefinition](Get-VSTeamReleaseDefinition.md)
 #include "./synopsis/Get-VSTeamReleaseDefinition.md"
 
+### [Get-VSTeamResourceArea](Get-VSTeamResourceArea.md)
+#include "./synopsis/Get-VSTeamResourceArea.md"
+
 ### [Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
 #include "./synopsis/Get-VSTeamServiceEndpoint.md"
 
