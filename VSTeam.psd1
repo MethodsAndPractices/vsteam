@@ -150,7 +150,7 @@
    # CmdletsToExport = @()
 
    # Variables to export from this module
-   VariablesToExport = 'VSTeamAccount'
+   VariablesToExport = 'VSTeamVersionTable'
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
    AliasesToExport   = @('Get-ServiceEndpoint',
