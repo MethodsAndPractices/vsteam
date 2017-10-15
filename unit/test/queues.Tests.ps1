@@ -1,10 +1,11 @@
 Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
+Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\queues.psm1 -Force
 
 InModuleScope queues {
-   $env:TEAM_ACCT = 'https://test.visualstudio.com'
+   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'Queues' {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"

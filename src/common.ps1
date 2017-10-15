@@ -79,11 +79,11 @@ function _showInBrowser {
 }
 
 function _getReleaseBase {
-    $instance = $env:TEAM_ACCT
+    $instance = $VSTeamVersionTable.Account
     
     # For VSTS Release is under .vsrm
-    if ($env:TEAM_ACCT.ToLower().Contains('visualstudio.com')) {
-        $instance = $env:TEAM_ACCT.ToLower().Replace('visualstudio.com', 'vsrm.visualstudio.com')
+    if ($VSTeamVersionTable.Account.ToLower().Contains('visualstudio.com')) {
+        $instance = $VSTeamVersionTable.Account.ToLower().Replace('visualstudio.com', 'vsrm.visualstudio.com')
     }
 
     return $instance
@@ -101,7 +101,7 @@ function _buildReleaseURL {
         [int] $id
     )
 
-    if (-not $env:TEAM_ACCT) {
+    if (-not $VSTeamVersionTable.Account) {
         throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
     }
 
@@ -149,18 +149,18 @@ function _getUserAgent {
 }
 
 function _useWindowsAuthenticationOnPremise {
-    return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($env:TEAM_ACCT -like "*visualstudio.com")
+    return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($VSTeamVersionTable.Account -like "*visualstudio.com")
 }
 
 function _getProjects {
-    if (-not $env:TEAM_ACCT) {
+    if (-not $VSTeamVersionTable.Account) {
         Write-Output @()
         return
     }
 
-    $version = '1.0'
     $resource = "/projects"
-    $instance = $env:TEAM_ACCT
+    $instance = $VSTeamVersionTable.Account
+    $version = $VSTeamVersionTable.Core
 
     # Build the url to list the projects
     $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'

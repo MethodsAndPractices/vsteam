@@ -14,6 +14,24 @@ LONG DESCRIPTION
     -ProjectName parameter is dynamic and you can use tab completion to cycle
     through all the projects.
 
+    Using the $VSTeamVersionTable varible you can control which version of the APIs are used.
+    
+    PS C:\> $VSTeamVersionTable
+
+    Name             Value
+    ----             -----
+    Account          https://test.visualstudio.com
+    Build            2.0
+    DefaultProject
+    Core             1.0
+    Release          3.0-preview.1
+    Git              1.0
+    DistributedTask  3.0-preview.1
+
+    To use different API versions you can update the version in the version table.
+
+    PS C:\> $VSTeamVersionTable.Build = '4.0'
+
 EXAMPLES
     Get-VSTeamProject
 

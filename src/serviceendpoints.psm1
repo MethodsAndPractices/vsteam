@@ -16,17 +16,17 @@ function _buildURL {
       [string] $id
    )
 
-   if (-not $env:TEAM_ACCT) {
+   if (-not $VSTeamVersionTable.Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
-   $version = '3.0-preview.1'
+   $version = $VSTeamVersionTable.DistributedTask
    $resource = "distributedtask/serviceendpoints"
-   $instance = $env:TEAM_ACCT
+   $instance = $VSTeamVersionTable.Account
 
    # For VSTS add defaultcollection
-   if ($env:TEAM_ACCT.ToLower().Contains('visualstudio.com')) {
-      $instance = "$env:TEAM_ACCT/DefaultCollection"
+   if ($VSTeamVersionTable.Account.ToLower().Contains('visualstudio.com')) {
+      $instance = "$($VSTeamVersionTable.Account)/DefaultCollection"
    }
 
    if ($id) {

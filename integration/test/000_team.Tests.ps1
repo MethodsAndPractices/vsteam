@@ -6,7 +6,7 @@ Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Describe 'Team' {
    Context 'Get-VSTeamInfo' {
       It 'should return account and default project' {
-         $env:TEAM_ACCT = "mydemos"
+         $VSTeamVersionTable.Account = "mydemos"
          $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
          $info = Get-VSTeamInfo
