@@ -84,19 +84,29 @@ function _trackProgress {
    $y = 10
 
    $url = _buildURL -projectName $projectName -id $resp.id
-
+  $isReady = $false
    # Track status
-   while ($status -ne '$true') {
-      $status = (_checkStatus $url).isReady
+    while (-not $isReady) {
+        $status = _checkStatus $url
+        $isReady = $status.isReady;
+        if (-not $isReady) {
+            $operationStatus = $status.operationStatus.state
+      
+            if ($operationStatus -eq "Failed") {
+                Write-Error $status.operationStatus.statusMessage
+                return $false
+            }
+        }
+       
+        # oscillate back a forth to show progress
+        $i += $x
+        Write-Progress -Activity $title -Status $msg -PercentComplete ($i / $y * 100)
 
-      # oscillate back a forth to show progress
-      $i += $x
-      Write-Progress -Activity $title -Status $msg -PercentComplete ($i / $y * 100)
-
-      if ($i -eq $y -or $i -eq 0) {
-         $x *= -1
-      }
-   }
+        if ($i -eq $y -or $i -eq 0) {
+            $x *= -1
+        }
+    }
+    return $true
 }
 
 function Remove-VSTeamServiceEndpoint {
@@ -207,9 +217,10 @@ function Add-VSTeamSonarQubeEndpoint {
          }
          throw
       }
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
-
-      return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
+      $success=_trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+      if ($success) {
+          return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
+      }
    }
 }
 
@@ -280,9 +291,11 @@ function Add-VSTeamAzureRMServiceEndpoint {
          $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
       }
 
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+      $success= _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
-      return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
+      if ($success) {
+          return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
+      }
    }
 }
 
