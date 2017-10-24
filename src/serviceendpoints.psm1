@@ -84,29 +84,32 @@ function _trackProgress {
    $y = 10
 
    $url = _buildURL -projectName $projectName -id $resp.id
-  $isReady = $false
-   # Track status
-    while (-not $isReady) {
-        $status = _checkStatus $url
-        $isReady = $status.isReady;
-        if (-not $isReady) {
-            $operationStatus = $status.operationStatus.state
-      
-            if ($operationStatus -eq "Failed") {
-                Write-Error $status.operationStatus.statusMessage
-                return $false
-            }
-        }
-       
-        # oscillate back a forth to show progress
-        $i += $x
-        Write-Progress -Activity $title -Status $msg -PercentComplete ($i / $y * 100)
+   $isReady = $false
 
-        if ($i -eq $y -or $i -eq 0) {
-            $x *= -1
-        }
-    }
-    return $true
+   # Track status
+   while (-not $isReady) {
+      $status = _checkStatus $url
+      $isReady = $status.isReady;
+
+      if (-not $isReady) {
+         $operationStatus = $status.operationStatus.state
+      
+         if ($operationStatus -eq "Failed") {
+            Write-Error $status.operationStatus.statusMessage
+            return $false
+         }
+      }
+       
+      # oscillate back a forth to show progress
+      $i += $x
+      Write-Progress -Activity $title -Status $msg -PercentComplete ($i / $y * 100)
+
+      if ($i -eq $y -or $i -eq 0) {
+         $x *= -1
+      }
+   }
+   
+   return $true
 }
 
 function Remove-VSTeamServiceEndpoint {
@@ -217,9 +220,11 @@ function Add-VSTeamSonarQubeEndpoint {
          }
          throw
       }
-      $success=_trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      $success = _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+      
       if ($success) {
-          return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
+         return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
       }
    }
 }
@@ -291,10 +296,10 @@ function Add-VSTeamAzureRMServiceEndpoint {
          $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
       }
 
-      $success= _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+      $success = _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
       if ($success) {
-          return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
+         return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
       }
    }
 }
@@ -363,8 +368,8 @@ Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 
 Export-ModuleMember `
- -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-  Add-VSTeamSonarQubeEndpoint `
- -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint,
-  Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
-  Remove-SonarQubeEndpoint
+   -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
+Add-VSTeamSonarQubeEndpoint `
+   -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint,
+Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
+Remove-SonarQubeEndpoint
