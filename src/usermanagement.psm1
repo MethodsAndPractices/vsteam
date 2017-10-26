@@ -31,7 +31,7 @@ function _applyTypes {
     $item.PSObject.TypeNames.Insert(0, 'Team.UserAccount')
 }
 
-function Get-VSAccountUser {
+function Get-VSTeamAccountUser {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName=$true)]
@@ -69,4 +69,4 @@ function Get-VSAccountUser {
     } 
 }
 
-Export-ModuleMember -Alias * -Function Get-VSAccountUser
+Export-ModuleMember -Alias * -Function Get-VSTeamAccountUser

@@ -114,7 +114,7 @@
       'Get-VSTeamInfo',
       'Get-VSTeam',
       'Get-VSTeamMember',
-      'Get-VSAccountUser',
+      'Get-VSTeamAccountUser',
       'Remove-VSTeamBuild',
       'Remove-VSTeamBuildDefinition',
       'Remove-VSTeamProject',
