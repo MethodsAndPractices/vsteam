@@ -69,4 +69,8 @@ function Get-VSTeamAccountUser {
     } 
 }
 
-Export-ModuleMember -Alias * -Function Get-VSTeamAccountUser
+Set-Alias Get-VSAccountUser Get-VSTeamAccountUser
+
+Export-ModuleMember `
+    -Function Get-VSTeamAccountUser `
+    -Alias Get-VSAccountUser

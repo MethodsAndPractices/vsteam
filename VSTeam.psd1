@@ -207,6 +207,7 @@
       'Clear-DefaultProject',
       'Set-DefaultProject',
       'Get-TeamMember',
+      'Get-VSAccountUser',
       'Get-Team',
       'Add-Team',
       'Update-Team',
