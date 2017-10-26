@@ -100,5 +100,40 @@ InModuleScope serviceendpoints {
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
             }
         }
+
+
+
+        Context 'Add-VSTeamAzureRMServiceEndpoint-With-Failure' {
+            Mock Write-Progress
+            Mock Invoke-RestMethod { return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Post'}
+            Mock Invoke-RestMethod {
+
+                # This $i is in the module. Because we use InModuleScope
+                # we can see it
+                if ($i -gt 9) {
+                    return @{
+                        isReady         = $false
+                        operationStatus = @{
+                            state = 'Failed'
+                            statusMessage = 'Simulated failed request'
+                        }
+                    }
+                }
+
+                return @{
+                    isReady         = $false
+                    createdBy       = @{}
+                    authorization   = @{}
+                    data            = @{}
+                    operationStatus = @{state = 'InProgress'}
+                }
+            }
+
+            It 'should not create a new AzureRM Serviceendpoint' {
+                Add-VSTeamAzureRMServiceEndpoint -projectName 'project' -displayName 'PM_DonovanBrown' -subscriptionId '121d7d3b-2911-4154-9aa8-65132fe82e74' -subscriptionTenantId '72f988bf-86f1-41af-91ab-2d7cd011db47'
+
+                Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
+            }
+        }
    }
 }

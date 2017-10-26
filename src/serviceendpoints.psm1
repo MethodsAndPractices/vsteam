@@ -92,9 +92,9 @@ function _trackProgress {
       $isReady = $status.isReady;
 
       if (-not $isReady) {
-         $operationStatus = $status.operationStatus.state
+         $state = $status.operationStatus.state
       
-         if ($operationStatus -eq "Failed") {
+         if ($state -eq "Failed") {
             Write-Error $status.operationStatus.statusMessage
             return $false
          }
