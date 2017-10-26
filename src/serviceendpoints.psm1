@@ -95,8 +95,7 @@ function _trackProgress {
          $state = $status.operationStatus.state
       
          if ($state -eq "Failed") {
-            Write-Error $status.operationStatus.statusMessage
-            return $false
+            throw $status.operationStatus.statusMessage
          }
       }
        
@@ -108,8 +107,6 @@ function _trackProgress {
          $x *= -1
       }
    }
-   
-   return $true
 }
 
 function Remove-VSTeamServiceEndpoint {
@@ -221,11 +218,9 @@ function Add-VSTeamSonarQubeEndpoint {
          throw
       }
 
-      $success = _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
       
-      if ($success) {
-         return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
-      }
+      return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
    }
 }
 
@@ -296,11 +291,9 @@ function Add-VSTeamAzureRMServiceEndpoint {
          $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
       }
 
-      $success = _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
-      if ($success) {
-         return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
-      }
+      return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
    }
 }
 
