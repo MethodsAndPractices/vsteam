@@ -61,6 +61,14 @@ InModuleScope usermanagement {
             }
         }
 
+        Context 'Get-VSTeamAccountUser for TFS on premise' {
+            $env:TEAM_ACCT = "http://test.tfs.local:8080/tfs/DefaultCollection"
+            $users = Get-VSTeamAccountUser
+            It 'Should return an error message' {
+                $users | Should Be "This call is not supported on your account."
+            }
+        }
+
     }
 
 }
