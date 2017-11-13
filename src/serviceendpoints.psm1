@@ -84,11 +84,21 @@ function _trackProgress {
    $y = 10
 
    $url = _buildURL -projectName $projectName -id $resp.id
+   $isReady = $false
 
    # Track status
-   while ($status -ne '$true') {
-      $status = (_checkStatus $url).isReady
+   while (-not $isReady) {
+      $status = _checkStatus $url
+      $isReady = $status.isReady;
 
+      if (-not $isReady) {
+         $state = $status.operationStatus.state
+      
+         if ($state -eq "Failed") {
+            throw $status.operationStatus.statusMessage
+         }
+      }
+       
       # oscillate back a forth to show progress
       $i += $x
       Write-Progress -Activity $title -Status $msg -PercentComplete ($i / $y * 100)
@@ -207,8 +217,9 @@ function Add-VSTeamSonarQubeEndpoint {
          }
          throw
       }
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+      
       return Get-VSTeamServiceEndpoint -projectName $projectName -id $resp.id
    }
 }
@@ -350,8 +361,8 @@ Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 
 Export-ModuleMember `
- -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-  Add-VSTeamSonarQubeEndpoint `
- -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint,
-  Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
-  Remove-SonarQubeEndpoint
+   -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
+Add-VSTeamSonarQubeEndpoint `
+   -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint,
+Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
+Remove-SonarQubeEndpoint
