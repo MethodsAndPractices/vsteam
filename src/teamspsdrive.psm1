@@ -1,26 +1,36 @@
 <#
     Modeling a VSTeam for example:
 
-    Project 
+    Account 
           - Project1
           - Project2
-                - Build
+                - Builds
                     - Build1
                     - Build2
-                - Release
+                - Releases
                     - Release1
                     - Release2
+                - Teams
+                    - Team1
+                    - Team2
 
 
 
-    Assuming you have done git clone and run build.ps1, cd to your git clone folder and try the following.
+#region Add-TeamAccount 
+Add-VSTeamAccount -Account '[accountname]' -PersonalAccessToken '[VSTS Tokenvalue]'
+#endregion
 
-    Import-Module  SHiPS                         
-    Import-Module  .\VSTeamPSDrive.psm1
+#region Create new VSTeam Drive
+New-PSDrive -Name VSAccount -PSProvider SHiPS -Root 'VSTeam#VSAccount'
+#endregion
 
-    new-psdrive -name VSTeam -psprovider SHiPS -root VSTeamPSDrive#VSTeam
-    cd VSTeam:
-    dir
+#region change directory
+Set-Location VSAccount:
+#region
+
+#region list Projects
+Get-ChildItem
+#endregion
 #>
 using namespace Microsoft.PowerShell.SHiPS
 
