@@ -1,5 +1,5 @@
 TOPIC
-    about_vsteam
+    VSTeam
 
 SHORT DESCRIPTION
     Provides access to your Visual Studio Team Services (VSTS) and Team 

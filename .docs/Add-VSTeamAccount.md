@@ -93,8 +93,9 @@ Accept wildcard characters: False
 
 ### -PAT
 A secured string to capture your personal access token. 
-This will allow you
-to provide your personal access token without displaying it in plain text.
+
+This will allow you to provide your personal access token
+without displaying it in plain text.
 
 To use pat simply omit it from the Add-VSTeamAccount command.
 
