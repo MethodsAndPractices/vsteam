@@ -7,14 +7,49 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 function Get-VSTeamProfile {
    if (Test-Path "$HOME/profiles.json") {
       try {
-         Get-Content "$HOME/profiles.json" | ConvertFrom-Json  
+         # We needed to add ForEach-Object to unroll and show the inner type
+         $result = Get-Content "$HOME/profiles.json" | ConvertFrom-Json
+
+         if ($result) {
+            return ($result | ForEach-Object { $_ })
+         }
       }
-      catch {
-         return '[]' | ConvertFrom-Json   
+      catch {         
+         # Catch any error and fail to the return empty array below
       }
    }
-   else {
-      return '[]' | ConvertFrom-Json
+      
+   return '[]' | ConvertFrom-Json
+}
+
+function Remove-VSTeamProfile {
+   [CmdletBinding()]
+   param(
+      # Name is an array so I can pass an array after -Name 
+      # I can also use pipe
+      [parameter(Mandatory = $true, Position = 1, ValueFromPipelineByPropertyName = $true)]
+      [string[]] $Name
+   )
+
+   begin {
+      [System.Collections.ArrayList]$profiles = Get-VSTeamProfile
+   }
+
+   process {
+      foreach ($item in $Name) {
+         # See if this item is already in there
+         $profile = $profiles | Where-Object Name -eq $item
+
+         if ($profile) {
+            $profiles.Remove($profile) | Out-Null
+         }     
+      }
+   }
+
+   end {
+      $contents = ConvertTo-Json $profiles
+      
+      Set-Content -Path "$HOME/profiles.json" -Value $contents
    }
 }
 
@@ -67,18 +102,21 @@ function Add-VSTeamProfile {
       [System.Collections.ArrayList]$profiles = Get-VSTeamProfile
 
       # See if this item is already in there
+      # I am testing URL because the user may provide a different
+      # name and I don't want two with the same URL.
       $profile = $profiles | Where-Object URL -eq $Account
 
-      if($profile) {
+      if ($profile) {
          $profiles.Remove($profile)
       }
 
+      # Without the Out-Null the original size is showing in output.
       $profiles.Add([PSCustomObject]@{
-         Name = $Name
-         URL  = $Account
-         Type = $authType
-         Pat  = $encodedPat
-      })
+            Name = $Name
+            URL  = $Account
+            Type = $authType
+            Pat  = $encodedPat
+         }) | Out-Null
 
       $contents = ConvertTo-Json $profiles
 

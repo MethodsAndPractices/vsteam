@@ -5,7 +5,46 @@ Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope profile {
    Describe 'Profile' {
+      Context 'Remove-VSTeamProfile' {
+         $expectedPath = "$HOME/profiles.json"
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [String]$Value -eq "[`r`n`r`n]" }
+         Mock Set-Content { }
+         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json }
+
+         Remove-VSTeamProfile mydemos
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMocks
+         }
+      }
+
+      Context 'Remove-VSTeamProfile entry does not exist' {
+         $expectedPath = "$HOME/profiles.json"
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://mydemos.visualstudio.com*" }
+         Mock Set-Content { }
+         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json }
+
+         Remove-VSTeamProfile demonstrations
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMocks
+         }
+      }
+
       Context 'Add-VSTeamProfile with PAT to empty file' {
+         $expectedPath = "$HOME/profiles.json"
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" }
+         Mock Set-Content { }
+         Mock Get-VSTeamProfile { return $null }
+
+         Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMocks
+         }
+      }
+
+      Context 'Add-VSTeamProfile with PAT to empty array' {
          $expectedPath = "$HOME/profiles.json"
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" }
          Mock Set-Content { }
@@ -44,6 +83,17 @@ InModuleScope profile {
          }
       }
 
+      Context 'Get-VSTeamProfile empty profiles file' {
+         Mock Test-Path { return $true }
+         Mock Get-Content { return '' }
+
+         $actual = Get-VSTeamProfile
+      
+         It 'Should return 0 profiles' {
+            $actual.Count | Should be 0
+         }
+      }
+
       Context 'Get-VSTeamProfile invalid profiles file' {
          Mock Test-Path { return $true }
          Mock Get-Content { return 'Not Valid JSON. This might happen if someone touches the file.' }
@@ -67,7 +117,7 @@ InModuleScope profile {
 
       Context 'Get-VSTeamProfile' {
 
-$contents = @"
+         $contents = @"
          [
             {
                "Name": "http://localhost:8080/tfs/defaultcollection",
@@ -95,7 +145,7 @@ $contents = @"
          $actual = Get-VSTeamProfile
       
          It 'Should return 3 profiles' {
-            $actual.Count | Should be 3
+            $actual.Length | Should be 3
          }
 
          It '1st profile Should by OnPremise' {
