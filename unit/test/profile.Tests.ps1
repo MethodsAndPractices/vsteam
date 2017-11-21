@@ -5,6 +5,45 @@ Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope profile {
    Describe 'Profile' {
+      Context 'Add-VSTeamProfile with PAT to empty file' {
+         $expectedPath = "$HOME/profiles.json"
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" }
+         Mock Set-Content { }
+         Mock Get-VSTeamProfile { return '[]' | ConvertFrom-Json }
+
+         Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMocks
+         }
+      }
+
+      Context 'Add-VSTeamProfile with PAT exisiting entry' {
+         $expectedPath = "$HOME/profiles.json"
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" -and $Value -like "*https://mydemos.visualstudio.com*" }
+         Mock Set-Content { }
+         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json }
+
+         Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMocks
+         }
+      }
+
+      Context 'Add-VSTeamProfile with PAT replace exisiting entry' {
+         $expectedPath = "$HOME/profiles.json"
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://mydemos.visualstudio.com*" }
+         Mock Set-Content { }
+         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com/","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json }
+
+         Add-VSTeamProfile -Account mydemos -PersonalAccessToken 678910
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMocks
+         }
+      }
+
       Context 'Get-VSTeamProfile invalid profiles file' {
          Mock Test-Path { return $true }
          Mock Get-Content { return 'Not Valid JSON. This might happen if someone touches the file.' }
@@ -27,6 +66,7 @@ InModuleScope profile {
       }
 
       Context 'Get-VSTeamProfile' {
+
 $contents = @"
          [
             {
