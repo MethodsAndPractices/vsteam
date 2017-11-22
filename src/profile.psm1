@@ -84,10 +84,49 @@ function Add-VSTeamProfile {
       [securestring] $SecurePersonalAccessToken,
       [string] $Name,
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
-      [string] $version = 'TFS2017'
+      [string] $Version = 'TFS2017'
    )
 
+   DynamicParam {
+      # Only add these options on Windows Machines
+      if (_isOnWindows) {
+         Write-Verbose 'On a Windows machine'
+         # Create the dictionary
+         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+         $ParameterName2 = 'UseWindowsAuthentication'
+
+         # Create the collection of attributes
+         $AttributeCollection2 = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+
+         # Create and set the parameters' attributes
+         $ParameterAttribute2 = New-Object System.Management.Automation.ParameterAttribute
+         $ParameterAttribute2.Mandatory = $true
+         $ParameterAttribute2.ParameterSetName = "Windows"
+         $ParameterAttribute2.HelpMessage = "On Windows machines allows you to use the active user identity for authentication. Not available on other platforms."
+
+         # Add the attributes to the attributes collection
+         $AttributeCollection2.Add($ParameterAttribute2)
+
+         # Create and return the dynamic parameter
+         $RuntimeParameter2 = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName2, [switch], $AttributeCollection2)
+         $RuntimeParameterDictionary.Add($ParameterName2, $RuntimeParameter2)
+         return $RuntimeParameterDictionary
+      }
+      else {
+         Write-Verbose 'Not on a Windows machine'
+      }
+   }
+
    process {
+      if (_isOnWindows) {
+         # Bind the parameter to a friendly variable
+         $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
+         if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
+            Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
+         }
+      }
+
       if ($SecurePersonalAccessToken) {
          # Convert the securestring to a normal string
          # this was the one technique that worked on Mac, Linux and Windows

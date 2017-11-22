@@ -178,18 +178,17 @@ function Add-VSTeamAccount {
       [Parameter(ParameterSetName = 'Profile')]
       [string] $Profile,
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
-      [string] $version = 'TFS2017'
+      [string] $Version = 'TFS2017'
    )
 
    DynamicParam {
       # Only add these options on Windows Machines
       if (_isOnWindows) {
          Write-Verbose 'On a Windows machine'
-
-         $ParameterName = 'Level'
-
          # Create the dictionary
          $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+         $ParameterName = 'Level'
 
          # Create the collection of attributes
          $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
@@ -569,7 +568,7 @@ function Set-VSTeamAPIVersion {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(   
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
-      [string] $version = 'TFS2017',
+      [string] $Version = 'TFS2017',
       [switch] $Force
    )
    
