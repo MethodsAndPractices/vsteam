@@ -37,7 +37,7 @@ Describe 'Team' {
          # Assert
          $info = Get-VSTeamInfo
          
-         $info.Account | Should Be $null
+         $info.Account | Should Be ''
          $info.DefaultProject | Should Be $null
       }
    }

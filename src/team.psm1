@@ -87,7 +87,7 @@ function _clearEnvironmentVariables {
       [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
    }
 
-   _setEnvironmentVariables -Level $Level -Pat $null -Acct $null
+   _setEnvironmentVariables -Level $Level -Pat '' -Acct ''
 }
 
 function Get-VSTeamInfo {
