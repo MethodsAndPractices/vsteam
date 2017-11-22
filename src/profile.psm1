@@ -5,17 +5,31 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
 function Get-VSTeamProfile {
-   if (Test-Path "$HOME/profiles.json") {
-      try {
-         # We needed to add ForEach-Object to unroll and show the inner type
-         $result = Get-Content "$HOME/profiles.json" | ConvertFrom-Json
+   [CmdletBinding()]
+   param(
+      # Name is an array so I can pass an array after -Name 
+      # I can also use pipe
+      [parameter(Mandatory = $false, Position = 1, ValueFromPipelineByPropertyName = $true)]
+      [string] $Name
+   )
 
-         if ($result) {
-            $result | ForEach-Object { $_ }
+   process {
+      if (Test-Path "$HOME/profiles.json") {
+         try {
+            # We needed to add ForEach-Object to unroll and show the inner type
+            $result = Get-Content "$HOME/profiles.json" | ConvertFrom-Json
+
+            if($Name) {
+               $result = $result | Where-Object Name -eq $Name 
+            }
+
+            if ($result) {
+               $result | ForEach-Object { $_ }
+            }
          }
-      }
-      catch {         
-         # Catch any error and fail to the return empty array below
+         catch {         
+            # Catch any error and fail to the return empty array below
+         }
       }
    }
 }
@@ -43,7 +57,7 @@ function Remove-VSTeamProfile {
    end {
       $contents = ConvertTo-Json $profiles
 
-      if([string]::isnullorempty($contents)) {
+      if ([string]::isnullorempty($contents)) {
          $contents = ''
       }
       

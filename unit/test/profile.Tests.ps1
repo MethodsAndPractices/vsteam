@@ -5,6 +5,29 @@ Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope profile {
    Describe 'Profile' {
+$contents = @"
+      [
+         {
+            "Name": "http://localhost:8080/tfs/defaultcollection",
+            "URL": "http://localhost:8080/tfs/defaultcollection",
+            "Pat": "",
+            "Type": "OnPremise"
+         },
+         {
+            "Name": "http://192.168.1.3:8080/tfs/defaultcollection",
+            "URL": "http://192.168.1.3:8080/tfs/defaultcollection",
+            "Pat": "OnE2cXpseHk0YXp3dHpzNXhubnpneXcyNXdkdmpwaWdiMmhyaGl3bTNjeDN5d296cjVqeXE=",
+            "Type": "Pat"
+         },
+         {
+            "Name": "demonstrations",
+            "URL": "https://demonstrations.visualstudio.com",
+            "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hmb3RwcWI2bG9sbHkzdzY2a2x5am13YWtkcXVwYmg0emE=",
+            "Type": "Pat"
+         }
+      ]
+"@
+
       Context 'Remove-VSTeamProfile' {
          $expectedPath = "$HOME/profiles.json"
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [string]$Value -eq '' }
@@ -115,30 +138,23 @@ InModuleScope profile {
          }
       }
 
-      Context 'Get-VSTeamProfile' {
+      Context 'Get-VSTeamProfile by name' {         
+                  
+         Mock Test-Path { return $true }
+         Mock Get-Content { return $contents }
+         
+         $actual = Get-VSTeamProfile demonstrations
+               
+         It 'Should return 1 profile' {
+            $actual.URL | Should be 'https://demonstrations.visualstudio.com'
+         }
+         
+         It 'Profile Should by Pat' {
+            $actual.Type | Should be 'Pat'
+         }
+      }
 
-         $contents = @"
-         [
-            {
-               "Name": "http://localhost:8080/tfs/defaultcollection",
-               "URL": "http://localhost:8080/tfs/defaultcollection",
-               "Pat": "",
-               "Type": "OnPremise"
-            },
-            {
-               "Name": "http://192.168.1.3:8080/tfs/defaultcollection",
-               "URL": "http://192.168.1.3:8080/tfs/defaultcollection",
-               "Pat": "OnE2cXpseHk0YXp3dHpzNXhubnpneXcyNXdkdmpwaWdiMmhyaGl3bTNjeDN5d296cjVqeXE=",
-               "Type": "Pat"
-            },
-            {
-               "Name": "demonstrations",
-               "URL": "https://demonstrations.visualstudio.com",
-               "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hmb3RwcWI2bG9sbHkzdzY2a2x5am13YWtkcXVwYmg0emE=",
-               "Type": "Pat"
-            }
-         ]
-"@
+      Context 'Get-VSTeamProfile' {
          Mock Test-Path { return $true }
          Mock Get-Content { return $contents }
 
