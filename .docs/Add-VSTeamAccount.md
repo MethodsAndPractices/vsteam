@@ -22,6 +22,11 @@ Add-VSTeamAccount [-PersonalAccessToken] <String> [[-Account] <String>] [-Level 
 Add-VSTeamAccount [[-Account] <String>] [-UseWindowsAuthentication]
 ```
 
+### Profile
+```
+Add-VSTeamAccount [[-Profile] <String>] [-Level <String>]
+```
+
 ## DESCRIPTION
 On Windows you have to option to store the information at the process, user
 or machine (you must be running PowerShell as administrator to store at the
@@ -53,6 +58,13 @@ PS C:\> Add-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -U
 ```
 
 On Windows, allows you use to use Windows authentication against a local TFS server.
+
+### -------------------------- EXAMPLE 4 --------------------------
+```
+PS C:\> Add-VSTeamAccount -Profile demonstrations
+```
+
+Will add the account from the profile provide.
 
 ## PARAMETERS
 
@@ -157,6 +169,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Profile
+The profile name stored using Add-VSTeamProfile function.
+
+```yaml
+Type: String
+Parameter Sets: Profile
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ## INPUTS
 
 ## OUTPUTS
@@ -166,4 +193,5 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Add-VSTeamProfile](Add-VSTeamProfile.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)

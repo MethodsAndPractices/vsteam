@@ -171,7 +171,9 @@ function Add-VSTeamAccount {
       [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
       [string] $PersonalAccessToken,
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
-      [securestring] $SecurePersonalAccessToken
+      [securestring] $SecurePersonalAccessToken,
+      [Parameter(ParameterSetName = 'Profile')]
+      [string] $Profile
    )
 
    DynamicParam {
@@ -244,7 +246,7 @@ function Add-VSTeamAccount {
          }
 
          $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
-         if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
+         if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth) -and !($Profile)) {
             Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
          }
       }
@@ -252,29 +254,36 @@ function Add-VSTeamAccount {
          $Level = "Process"
       }
 
-      if ($SecurePersonalAccessToken) {
-         # Convert the securestring to a normal string
-         # this was the one technique that worked on Mac, Linux and Windows
-         $credential = New-Object System.Management.Automation.PSCredential $account, $SecurePersonalAccessToken
-         $_pat = $credential.GetNetworkCredential().Password
+      if ($Profile) {
+         $info = Get-VSTeamProfile | Where-Object Name -eq $Profile
+         $encodedPat = $info.Pat
+         $account = $info.URL
       }
-      else {
-         $_pat = $PersonalAccessToken
-      }
-
-      # If they only gave an account name add visualstudio.com
-      if ($Account -notlike "*/*") {
-         if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
-            $Account = "https://$($matches.account).visualstudio.com"
+      else {         
+         if ($SecurePersonalAccessToken) {
+            # Convert the securestring to a normal string
+            # this was the one technique that worked on Mac, Linux and Windows
+            $credential = New-Object System.Management.Automation.PSCredential $account, $SecurePersonalAccessToken
+            $_pat = $credential.GetNetworkCredential().Password
          }
-      }
-
-      $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
-
-      # If no SecurePersonalAccessToken is entered, and on windows, are we using default credentials for REST calls
-      if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
-         Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
-         $encodedPat = ""
+         else {
+            $_pat = $PersonalAccessToken
+         }
+         
+         # If they only gave an account name add visualstudio.com
+         if ($Account -notlike "*/*") {
+            if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
+               $Account = "https://$($matches.account).visualstudio.com"
+            }
+         }
+         
+         $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
+         
+         # If no SecurePersonalAccessToken is entered, and on windows, are we using default credentials for REST calls
+         if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
+            Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
+            $encodedPat = ""
+         }
       }
 
       Clear-VSTeamDefaultProject

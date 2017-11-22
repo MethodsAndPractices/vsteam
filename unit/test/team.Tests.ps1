@@ -7,6 +7,29 @@ InModuleScope team {
    Describe 'Team' {
       . "$PSScriptRoot\mockProjectDynamicParam.ps1"
 
+$contents = @"
+      [
+         {
+            "Name": "http://localhost:8080/tfs/defaultcollection",
+            "URL": "http://localhost:8080/tfs/defaultcollection",
+            "Pat": "",
+            "Type": "OnPremise"
+         },
+         {
+            "Name": "mydemos",
+            "URL": "https://mydemos.visualstudio.com",
+            "Pat": "OjEyMzQ1",
+            "Type": "Pat"
+         },
+         {
+            "Name": "demonstrations",
+            "URL": "https://demonstrations.visualstudio.com",
+            "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hmb3RwcWI2bG9sbHkzdzY2a2x5am13YWtkcXVwYmg0emE=",
+            "Type": "Pat"
+         }
+      ]
+"@      
+
       Context 'Get-VSTeamInfo' {
          It 'should return account and default project' {
             $VSTeamVersionTable.Account = "mydemos"
@@ -16,6 +39,21 @@ InModuleScope team {
 
             $info.Account | Should Be "mydemos"
             $info.DefaultProject | Should Be "MyProject"
+         }
+      }
+
+      Context 'Add-VSTeamAccount profile' {
+         Mock _isOnWindows { return $false }
+         Mock _setEnvironmentVariables
+         Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
+
+         It 'should set env at process level' {
+            Add-VSTeamAccount -Profile mydemos
+
+            # Make sure set env vars was called with the correct parameters
+            Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+            }
          }
       }
 
