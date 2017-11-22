@@ -7,9 +7,9 @@ InModuleScope profile {
    Describe 'Profile' {
       Context 'Remove-VSTeamProfile' {
          $expectedPath = "$HOME/profiles.json"
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [String]$Value -eq "[`r`n`r`n]" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [string]$Value -eq '' }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json }
+         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Remove-VSTeamProfile mydemos
 
@@ -22,7 +22,7 @@ InModuleScope profile {
          $expectedPath = "$HOME/profiles.json"
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://mydemos.visualstudio.com*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json }
+         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Remove-VSTeamProfile demonstrations
 
@@ -35,7 +35,7 @@ InModuleScope profile {
          $expectedPath = "$HOME/profiles.json"
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return $null }
+         Mock Get-VSTeamProfile { }
 
          Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
 
@@ -48,7 +48,7 @@ InModuleScope profile {
          $expectedPath = "$HOME/profiles.json"
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[]' | ConvertFrom-Json }
+         Mock Get-VSTeamProfile { }
 
          Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
 
@@ -61,7 +61,7 @@ InModuleScope profile {
          $expectedPath = "$HOME/profiles.json"
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" -and $Value -like "*https://mydemos.visualstudio.com*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json }
+         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
 
@@ -74,7 +74,7 @@ InModuleScope profile {
          $expectedPath = "$HOME/profiles.json"
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://mydemos.visualstudio.com*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com/","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json }
+         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com/","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Add-VSTeamProfile -Account mydemos -PersonalAccessToken 678910
 
@@ -90,7 +90,7 @@ InModuleScope profile {
          $actual = Get-VSTeamProfile
       
          It 'Should return 0 profiles' {
-            $actual.Count | Should be 0
+            $actual | Should BeNullOrEmpty
          }
       }
 
@@ -101,7 +101,7 @@ InModuleScope profile {
          $actual = Get-VSTeamProfile
       
          It 'Should return 0 profiles' {
-            $actual.Count | Should be 0
+            $actual | Should BeNullOrEmpty
          }
       }
 
@@ -111,7 +111,7 @@ InModuleScope profile {
          $actual = Get-VSTeamProfile
       
          It 'Should return 0 profiles' {
-            $actual.Count | Should be 0
+            $actual | Should BeNullOrEmpty
          }
       }
 

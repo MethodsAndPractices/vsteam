@@ -11,15 +11,13 @@ function Get-VSTeamProfile {
          $result = Get-Content "$HOME/profiles.json" | ConvertFrom-Json
 
          if ($result) {
-            return ($result | ForEach-Object { $_ })
+            $result | ForEach-Object { $_ }
          }
       }
       catch {         
          # Catch any error and fail to the return empty array below
       }
    }
-      
-   return '[]' | ConvertFrom-Json
 }
 
 function Remove-VSTeamProfile {
@@ -32,22 +30,22 @@ function Remove-VSTeamProfile {
    )
 
    begin {
-      [System.Collections.ArrayList]$profiles = Get-VSTeamProfile
+      $profiles = Get-VSTeamProfile
    }
 
    process {
       foreach ($item in $Name) {
          # See if this item is already in there
-         $profile = $profiles | Where-Object Name -eq $item
-
-         if ($profile) {
-            $profiles.Remove($profile) | Out-Null
-         }     
+         $profiles = $profiles | Where-Object Name -ne $item    
       }
    }
 
    end {
       $contents = ConvertTo-Json $profiles
+
+      if([string]::isnullorempty($contents)) {
+         $contents = ''
+      }
       
       Set-Content -Path "$HOME/profiles.json" -Value $contents
    }
@@ -99,24 +97,19 @@ function Add-VSTeamProfile {
          $Name = $Account
       }
 
-      [System.Collections.ArrayList]$profiles = Get-VSTeamProfile
-
       # See if this item is already in there
       # I am testing URL because the user may provide a different
       # name and I don't want two with the same URL.
-      $profile = $profiles | Where-Object URL -eq $Account
-
-      if ($profile) {
-         $profiles.Remove($profile)
-      }
+      # The @() forces even 1 item to an array
+      $profiles = @(Get-VSTeamProfile | Where-Object URL -ne $Account)
 
       # Without the Out-Null the original size is showing in output.
-      $profiles.Add([PSCustomObject]@{
-            Name = $Name
-            URL  = $Account
-            Type = $authType
-            Pat  = $encodedPat
-         }) | Out-Null
+      $profiles += [PSCustomObject]@{
+         Name = $Name
+         URL  = $Account
+         Type = $authType
+         Pat  = $encodedPat
+      }
 
       $contents = ConvertTo-Json $profiles
 
