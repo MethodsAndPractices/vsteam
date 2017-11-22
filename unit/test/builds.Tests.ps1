@@ -42,7 +42,7 @@ InModuleScope builds {
          It 'should return builds' {
             Get-VSTeamBuild -projectName project
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds?api-version=2.0' }
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)" }
          }
       }
 
@@ -66,7 +66,7 @@ InModuleScope builds {
          It 'should return top builds' {
             Get-VSTeamBuild -projectName project -top 1
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds?api-version=2.0&$top=1' }
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)&`$top=1" }
          }
       }
 
@@ -88,7 +88,7 @@ InModuleScope builds {
          It 'should return top builds' {
             Get-VSTeamBuild -projectName project -id 1
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/1?api-version=2.0' }
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1?api-version=$($VSTeamVersionTable.Build)" }
          }
       }
 
@@ -113,7 +113,7 @@ InModuleScope builds {
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Body -eq '{"definition": {"id": 2}}' -and
-               $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds?api-version=2.0'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)"
             }
          }
       }
@@ -139,7 +139,7 @@ InModuleScope builds {
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Body -eq '{"definition": {"id": 2}}' -and
-               $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds?api-version=2.0'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)"
             }
          }
       }
@@ -152,7 +152,7 @@ InModuleScope builds {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2?api-version=2.0'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2?api-version=$($VSTeamVersionTable.Build)"
             }
          }
       }
@@ -167,7 +167,7 @@ InModuleScope builds {
                   foreach ($inputTag in $inputTags) {
                         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                               $Method -eq 'Put' -and
-                              $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=2.0' + "&tag=$inputTag"
+                              $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
                            }
                   }
             }
@@ -185,7 +185,7 @@ InModuleScope builds {
                   foreach ($inputTag in $inputTags) {
                         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                               $Method -eq 'Delete' -and
-                              $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=2.0' + "&tag=$inputTag"
+                              $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
                               }
                   }
             }            
@@ -201,7 +201,7 @@ InModuleScope builds {
                   
                   Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                         $Method -eq 'Get' -and
-                        $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=2.0'
+                        $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=$($VSTeamVersionTable.Build)"
                      }
             }
       }
@@ -235,7 +235,7 @@ InModuleScope builds {
 
                   Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                         $Method -eq 'Get' -and
-                        $Uri -eq 'https://test.visualstudio.com/project/_apis/build/builds/2/artifacts?api-version=2.0'
+                        $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/artifacts?api-version=$($VSTeamVersionTable.Build)"
                      }
             }
       }

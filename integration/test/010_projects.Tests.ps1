@@ -4,12 +4,15 @@ Get-Module team | Remove-Module -Force
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 
+Set-VSTeamAPIVersion -Version $env:API_VERSION
+
 Describe 'Project' {
    BeforeAll {
       $pat = $env:PAT
       $acct = $env:ACCT
+      $api = $env:API_VERSION
 
-      Add-VSTeamAccount -a $acct -pe $pat
+      Add-VSTeamAccount -a $acct -pe $pat -version $api
    }
 
    Context 'Full exercise' {

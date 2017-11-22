@@ -9,12 +9,15 @@ Import-Module $PSScriptRoot\..\..\src\Queues.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teammembers.psm1 -Force
 
+Set-VSTeamAPIVersion -Version $env:API_VERSION -Verbose
+
 Describe 'Project Items' {
    BeforeAll {
       $pat = $env:PAT
       $acct = $env:ACCT
-
-      Add-VSTeamAccount -a $acct -pe $pat
+      $api = $env:API_VERSION
+      
+      Add-VSTeamAccount -a $acct -pe $pat -version $api
       Add-VSTeamProject -ProjectName 'TeamModuleIntegration'
    }
 

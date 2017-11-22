@@ -18,7 +18,7 @@ InModuleScope teammembers {
                 Get-VSTeamMember -ProjectName TestProject -TeamId TestTeam
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)"
                 }
             }
         }
@@ -30,7 +30,7 @@ InModuleScope teammembers {
                 Get-VSTeamMember -ProjectName TestProject -TeamId TestTeam -Top 10
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0&$top=10'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)&`$top=10"
                 }
             }            
         }
@@ -42,7 +42,7 @@ InModuleScope teammembers {
                 Get-VSTeamMember -ProjectName TestProject -TeamId TestTeam -Skip 5
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0&$skip=5'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)&`$skip=5"
                 }
             }
         }
@@ -54,7 +54,7 @@ InModuleScope teammembers {
                 Get-VSTeamMember -ProjectName TestProject -TeamId TestTeam -Top 10 -Skip 5
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0&$top=10&$skip=5'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)&`$top=10&`$skip=5"
                 }
             }            
         }
@@ -67,7 +67,7 @@ InModuleScope teammembers {
                 Get-VSTeam -ProjectName TestProject -TeamId "TestTeam" | Get-VSTeamMember
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=1.0'                    
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)"                    
                 }
             }
         }

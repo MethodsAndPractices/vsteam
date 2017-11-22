@@ -572,6 +572,7 @@ function Set-VSTeamAPIVersion {
       [string] $version = 'TFS2017',
       [switch] $Force
    )
+   
    if ($Force -or $pscmdlet.ShouldProcess($version, "Set-VSTeamAPIVersion")) {
       switch ($version) {         
          'TFS2018' {
@@ -600,6 +601,13 @@ function Set-VSTeamAPIVersion {
          }
       }
    }
+
+   Write-Verbose $VSTeamVersionTable.Version
+   Write-Verbose "Git: $($VSTeamVersionTable.Git)"
+   Write-Verbose "Core: $($VSTeamVersionTable.Core)"
+   Write-Verbose "Build: $($VSTeamVersionTable.Build)"
+   Write-Verbose "Release: $($VSTeamVersionTable.Release)"
+   Write-Verbose "DistributedTask: $($VSTeamVersionTable.DistributedTask)"
 }
 
 Set-Alias gti Get-VSTeamInfo

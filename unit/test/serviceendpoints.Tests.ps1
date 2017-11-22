@@ -24,7 +24,7 @@ InModuleScope serviceendpoints {
             Get-VSTeamServiceEndpoint -projectName project -Verbose
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints?api-version=3.0-preview.1'
+               $Uri -eq "https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints?api-version=$($VSTeamVersionTable.DistributedTask)"
             }
          }
       }
@@ -36,7 +36,7 @@ InModuleScope serviceendpoints {
             Remove-VSTeamServiceEndpoint -projectName project -id 5 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints/5?api-version=3.0-preview.1' -and `
+               $Uri -eq "https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints/5?api-version=$($VSTeamVersionTable.DistributedTask)" -and `
                   $Method -eq 'Delete'
             }
          }
