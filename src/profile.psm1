@@ -4,6 +4,8 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
+$profilesPath = "$HOME/vsteam_profiles.json"
+
 function Get-VSTeamProfile {
    [CmdletBinding()]
    param(
@@ -14,17 +16,21 @@ function Get-VSTeamProfile {
    )
 
    process {
-      if (Test-Path "$HOME/profiles.json") {
+      if (Test-Path $profilesPath) {
          try {
             # We needed to add ForEach-Object to unroll and show the inner type
-            $result = Get-Content "$HOME/profiles.json" | ConvertFrom-Json
+            $result = Get-Content $profilesPath | ConvertFrom-Json
 
-            if($Name) {
+            if ($Name) {
                $result = $result | Where-Object Name -eq $Name 
             }
 
             if ($result) {
-               $result | ForEach-Object { $_ }
+               $result | ForEach-Object {
+                  # Setting the type lets me format it
+                  $_.PSObject.TypeNames.Insert(0, 'Team.Profile')
+                  $_ 
+               }
             }
          }
          catch {         
@@ -61,7 +67,7 @@ function Remove-VSTeamProfile {
          $contents = ''
       }
       
-      Set-Content -Path "$HOME/profiles.json" -Value $contents
+      Set-Content -Path $profilesPath -Value $contents
    }
 }
 
@@ -76,7 +82,9 @@ function Add-VSTeamProfile {
       [string] $PersonalAccessToken,
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
-      [string] $Name
+      [string] $Name,
+      [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
+      [string] $version = 'TFS2017'
    )
 
    process {
@@ -123,11 +131,12 @@ function Add-VSTeamProfile {
          URL  = $Account
          Type = $authType
          Pat  = $encodedPat
+         Version = $version
       }
 
       $contents = ConvertTo-Json $profiles
 
-      Set-Content -Path "$HOME/profiles.json" -Value $contents
+      Set-Content -Path $profilesPath -Value $contents
    }
 }
 

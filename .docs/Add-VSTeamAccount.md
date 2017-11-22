@@ -9,22 +9,22 @@
 
 ### Secure (Default)
 ```
-Add-VSTeamAccount [-Account] <String> -PAT <SecureString> [-Level <String>]
+Add-VSTeamAccount [-Account] <String> -PAT <SecureString> [-Level <String>] [[-Version] <String>]
 ```
 
 ### Plain
 ```
-Add-VSTeamAccount [-PersonalAccessToken] <String> [[-Account] <String>] [-Level <String>]
+Add-VSTeamAccount [-PersonalAccessToken] <String> [[-Account] <String>] [-Level <String>] [[-Version] <String>]
 ```
 
 ### Windows
 ```
-Add-VSTeamAccount [[-Account] <String>] [-UseWindowsAuthentication]
+Add-VSTeamAccount [[-Account] <String>] [-UseWindowsAuthentication] [[-Version] <String>]
 ```
 
 ### Profile
 ```
-Add-VSTeamAccount [[-Profile] <String>] [-Level <String>]
+Add-VSTeamAccount [[-Profile] <String>] [-Level <String>] [[-Version] <String>]
 ```
 
 ## DESCRIPTION
@@ -183,7 +183,22 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+### -Version
+Specifies the version to use.
 
+Valid values: 'TFS2017', 'TFS2018', 'VSTS'
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: 1
+Default value: TFS2017
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 ## INPUTS
 
 ## OUTPUTS

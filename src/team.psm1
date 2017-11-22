@@ -7,11 +7,12 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $VSTeamVersionTable = @{
    'Account'         = $env:TEAM_ACCT;
    'DefaultProject'  = $env:TEAM_PROJECT;
-   'Build'           = '2.0'
-   'Release'         = '3.0-preview.1'
-   'Core'            = '1.0'
-   'Git'             = '1.0'
-   'DistributedTask' = '3.0-preview.1'
+   'Version'         = 'TFS2017'
+   'Build'           = '3.0'
+   'Release'         = '3.0-preview'
+   'Core'            = '3.0'
+   'Git'             = '3.0'
+   'DistributedTask' = '3.0-preview'
 }
 
 function _buildURL {
@@ -80,6 +81,7 @@ function _clearEnvironmentVariables {
    )
 
    $env:TEAM_PROJECT = $null
+   $VSTeamVersionTable.DefaultProject = ''
    $Global:PSDefaultParameterValues.Remove("*:projectName")
 
    # This is so it can be loaded by default in the next session
@@ -93,6 +95,7 @@ function _clearEnvironmentVariables {
 function Get-VSTeamInfo {
    return @{
       Account        = $VSTeamVersionTable.Account
+      Version        = $VSTeamVersionTable.Version
       DefaultProject = $Global:PSDefaultParameterValues['*:projectName']
    }
 }
@@ -173,7 +176,9 @@ function Add-VSTeamAccount {
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
       [Parameter(ParameterSetName = 'Profile')]
-      [string] $Profile
+      [string] $Profile,
+      [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
+      [string] $version = 'TFS2017'
    )
 
    DynamicParam {
@@ -258,6 +263,7 @@ function Add-VSTeamAccount {
          $info = Get-VSTeamProfile | Where-Object Name -eq $Profile
          $encodedPat = $info.Pat
          $account = $info.URL
+         $version = $info.Version
       }
       else {         
          if ($SecurePersonalAccessToken) {
@@ -288,6 +294,8 @@ function Add-VSTeamAccount {
 
       Clear-VSTeamDefaultProject
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
+
+      Set-VSTeamAPIVersion -Version $version
    }
 }
 
@@ -473,6 +481,7 @@ function Clear-VSTeamDefaultProject {
          [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
       }
 
+      $VSTeamVersionTable.DefaultProject = ''
       $Global:PSDefaultParameterValues.Remove("*:projectName")
 
       Write-Output "Removed default project"
@@ -556,6 +565,44 @@ function Set-VSTeamDefaultProject {
    }
 }
 
+function Set-VSTeamAPIVersion {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   param(   
+      [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
+      [string] $version = 'TFS2017',
+      [switch] $Force
+   )
+   if ($Force -or $pscmdlet.ShouldProcess($version, "Set-VSTeamAPIVersion")) {
+      switch ($version) {         
+         'TFS2018' {
+            $VSTeamVersionTable.Version = 'TFS2018'
+            $VSTeamVersionTable.Git = '3.2'
+            $VSTeamVersionTable.Core = '3.2'
+            $VSTeamVersionTable.Build = '3.2'
+            $VSTeamVersionTable.Release = '4.0-preview'
+            $VSTeamVersionTable.DistributedTask = '4.0-preview'
+         }
+         'VSTS' { 
+            $VSTeamVersionTable.Version = 'VSTS'
+            $VSTeamVersionTable.Git = '4.0'
+            $VSTeamVersionTable.Core = '4.0'
+            $VSTeamVersionTable.Build = '4.0'
+            $VSTeamVersionTable.Release = '4.1-preview'
+            $VSTeamVersionTable.DistributedTask = '4.1-preview'            
+         }
+         Default {
+            $VSTeamVersionTable.Version = 'TFS2017'
+            $VSTeamVersionTable.Git = '3.0'
+            $VSTeamVersionTable.Core = '3.0'
+            $VSTeamVersionTable.Build = '3.0'
+            $VSTeamVersionTable.Release = '3.0-preview'
+            $VSTeamVersionTable.DistributedTask = '3.0-preview'            
+         }
+      }
+   }
+}
+
+Set-Alias gti Get-VSTeamInfo
 Set-Alias Get-TeamInfo Get-VSTeamInfo
 Set-Alias Add-TeamAccount Add-VSTeamAccount
 Set-Alias Remove-TeamAccount Remove-VSTeamAccount
@@ -563,12 +610,13 @@ Set-Alias Get-TeamOption Get-VSTeamOption
 Set-Alias Get-TeamResourceArea Get-VSTeamResourceArea
 Set-Alias Clear-DefaultProject Clear-VSTeamDefaultProject
 Set-Alias Set-DefaultProject Set-VSTeamDefaultProject
+Set-Alias Set-APIVersion Set-VSTeamAPIVersion
 
 Export-ModuleMember `
    -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject,
-Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea `
+Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion `
    -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Clear-DefaultProject, 
-Set-DefaultProject, Get-TeamResourceArea `
+Set-DefaultProject, Get-TeamResourceArea, Set-APIVersion, gti `
    -Variable VSTeamVersionTable
 
 # Check to see if the user stored the default project in an environment variable

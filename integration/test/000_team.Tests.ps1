@@ -25,7 +25,13 @@ Describe 'Team' {
          $info = Get-VSTeamInfo
          
          $info.DefaultProject | Should Be $null
-         $info.Account | Should Be "https://$acct.visualstudio.com"
+
+         if ($acct -like "http://*") {
+            $info.Account | Should Be $acct
+         }
+         else {
+            $info.Account | Should Be "https://$acct.visualstudio.com"
+         }
       }
    }
 

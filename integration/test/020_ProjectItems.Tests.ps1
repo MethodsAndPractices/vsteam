@@ -37,13 +37,27 @@ Describe 'Project Items' {
 
    Context 'Pool Full exercise' {
       It 'Get-VSTeamPool Should return agent pools' {
-         (Get-VSTeamPool).Count | Should Be 5
+         $actual = Get-VSTeamPool
+
+         if ($acct -like "http://*") {
+            $actual.name | Should Be 'Default'
+         }
+         else {
+            $actual.Count | Should Be 5
+         }
       }
    }
 
    Context 'Queue Full exercise' {
       It 'Get-VSTeamQueue Should return agent Queues' {
-         (Get-VSTeamQueue -ProjectName 'TeamModuleIntegration').Count | Should Be 5
+         $actual = Get-VSTeamQueue -ProjectName 'TeamModuleIntegration'
+
+         if ($acct -like "http://*") {
+            $actual.name | Should Be 'Default'
+         }
+         else {
+            $actual.Count | Should Be 5
+         }
       }
    }
 

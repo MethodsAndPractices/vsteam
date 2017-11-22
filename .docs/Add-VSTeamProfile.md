@@ -9,17 +9,17 @@
 
 ### Secure (Default)
 ```
-Add-VSTeamProfile [-Account] <String> -PAT <SecureString> [[-Name] <String>]
+Add-VSTeamProfile [-Account] <String> -PAT <SecureString> [[-Name] <String>] [[-Version] <String>]
 ```
 
 ### Plain
 ```
-Add-VSTeamProfile [-PersonalAccessToken] <String> [[-Account] <String>] [[-Name] <String>]
+Add-VSTeamProfile [-PersonalAccessToken] <String> [[-Account] <String>] [[-Name] <String>] [[-Version] <String>]
 ```
 
 ### TFS
 ```
-Add-VSTeamProfile [[-Account] <String>] [-UseWindowsAuthentication] [[-Name] <String>]
+Add-VSTeamProfile [[-Account] <String>] [-UseWindowsAuthentication] [[-Name] <String>] [[-Version] <String>]
 ```
 
 ## DESCRIPTION
@@ -35,7 +35,7 @@ You will be prompted for the account name and personal access token.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
+PS C:\> Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version TFS2018
 ```
 
 Allows you to provide all the information on the command line.
@@ -146,6 +146,22 @@ Aliases:
 Required: True
 Position: 2
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+### -Version
+Specifies the version to use.
+
+Valid values: 'TFS2017', 'TFS2018', 'VSTS'
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: 1
+Default value: TFS2017
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -61,16 +61,17 @@
    # ScriptsToProcess = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
-   TypesToProcess    = @('src\types.ps1xml', 
-      'src\Approvals.ps1xml',
-      'src\buildDefinitions.ps1xml')
+   TypesToProcess    = @('types\types.ps1xml', 
+      'types\Approvals.ps1xml',
+      'types\buildDefinitions.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
-   FormatsToProcess  = @('src\Approvals.format.ps1xml',
-      'src\buildDefinitions.format.ps1xml',
-      'src\TeamTypes.format.ps1xml',
-      'src\builds.format.ps1xml',
-      'src\team.format.ps1xml')
+   FormatsToProcess  = @('formats\Approvals.format.ps1xml',
+      'formats\buildDefinitions.format.ps1xml',
+      'formats\TeamTypes.format.ps1xml',
+      'formats\builds.format.ps1xml',
+      'formats\team.profile.ps1xml',
+      'formats\team.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
@@ -148,7 +149,8 @@
       'Show-VSTeam',
       'Add-VSTeamProfile',
       'Remove-VSTeamProfile',
-      'Get-VSTeamProfile')
+      'Get-VSTeamProfile',
+      'Set-VSTeamAPIVersion')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -218,7 +220,9 @@
       'Remove-Team',
       'Add-Profile',
       'Remove-Profile',
-      'Get-Profile')
+      'Get-Profile',
+      'Set-APIVersion',
+      'gti')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

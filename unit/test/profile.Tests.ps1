@@ -5,36 +5,39 @@ Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope profile {
    Describe 'Profile' {
+      $expectedPath = "$HOME/vsteam_profiles.json"
 $contents = @"
       [
          {
             "Name": "http://localhost:8080/tfs/defaultcollection",
             "URL": "http://localhost:8080/tfs/defaultcollection",
             "Pat": "",
-            "Type": "OnPremise"
+            "Type": "OnPremise",
+            "Version": "TFS2017"
          },
          {
             "Name": "http://192.168.1.3:8080/tfs/defaultcollection",
             "URL": "http://192.168.1.3:8080/tfs/defaultcollection",
-            "Pat": "OnE2cXpseHk0YXp3dHpzNXhubnpneXcyNXdkdmpwaWdiMmhyaGl3bTNjeDN5d296cjVqeXE=",
-            "Type": "Pat"
+            "Pat": "OnE2cXpseHk0YXp3dHpz",
+            "Type": "Pat",
+            "Version": "TFS2017"
          },
          {
-            "Name": "demonstrations",
-            "URL": "https://demonstrations.visualstudio.com",
-            "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hmb3RwcWI2bG9sbHkzdzY2a2x5am13YWtkcXVwYmg0emE=",
-            "Type": "Pat"
+            "Name": "test",
+            "URL": "https://test.visualstudio.com",
+            "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hm",
+            "Type": "Pat",
+            "Version": "VSTS"
          }
       ]
 "@
 
       Context 'Remove-VSTeamProfile' {
-         $expectedPath = "$HOME/profiles.json"
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [string]$Value -eq '' }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
-         Remove-VSTeamProfile mydemos
+         Remove-VSTeamProfile test
 
          It 'Should save profile to disk' {
             Assert-VerifiableMocks
@@ -42,12 +45,11 @@ $contents = @"
       }
 
       Context 'Remove-VSTeamProfile entry does not exist' {
-         $expectedPath = "$HOME/profiles.json"
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://mydemos.visualstudio.com*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://test.visualstudio.com*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
-         Remove-VSTeamProfile demonstrations
+         Remove-VSTeamProfile demos
 
          It 'Should save profile to disk' {
             Assert-VerifiableMocks
@@ -55,12 +57,11 @@ $contents = @"
       }
 
       Context 'Add-VSTeamProfile with PAT to empty file' {
-         $expectedPath = "$HOME/profiles.json"
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*TFS2017*" }
          Mock Set-Content { }
          Mock Get-VSTeamProfile { }
 
-         Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
+         Add-VSTeamProfile -Account demos -PersonalAccessToken 12345
 
          It 'Should save profile to disk' {
             Assert-VerifiableMocks
@@ -68,12 +69,11 @@ $contents = @"
       }
 
       Context 'Add-VSTeamProfile with PAT to empty array' {
-         $expectedPath = "$HOME/profiles.json"
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
          Mock Get-VSTeamProfile { }
 
-         Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
+         Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version VSTS
 
          It 'Should save profile to disk' {
             Assert-VerifiableMocks
@@ -81,12 +81,11 @@ $contents = @"
       }
 
       Context 'Add-VSTeamProfile with PAT exisiting entry' {
-         $expectedPath = "$HOME/profiles.json"
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demonstrations.visualstudio.com*" -and $Value -like "*https://mydemos.visualstudio.com*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*https://test.visualstudio.com*" -and $Value -like "*TFS2018*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
-         Add-VSTeamProfile -Account demonstrations -PersonalAccessToken 12345
+         Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version TFS2018
 
          It 'Should save profile to disk' {
             Assert-VerifiableMocks
@@ -94,12 +93,11 @@ $contents = @"
       }
 
       Context 'Add-VSTeamProfile with PAT replace exisiting entry' {
-         $expectedPath = "$HOME/profiles.json"
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://mydemos.visualstudio.com*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://test.visualstudio.com*" -and $Value -like "*TFS2017*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"mydemos","URL":"https://mydemos.visualstudio.com/","Type":"Pat","Pat":"12345"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
-         Add-VSTeamProfile -Account mydemos -PersonalAccessToken 678910
+         Add-VSTeamProfile -Account test -PersonalAccessToken 678910
 
          It 'Should save profile to disk' {
             Assert-VerifiableMocks
@@ -143,10 +141,10 @@ $contents = @"
          Mock Test-Path { return $true }
          Mock Get-Content { return $contents }
          
-         $actual = Get-VSTeamProfile demonstrations
+         $actual = Get-VSTeamProfile test
                
          It 'Should return 1 profile' {
-            $actual.URL | Should be 'https://demonstrations.visualstudio.com'
+            $actual.URL | Should be 'https://test.visualstudio.com'
          }
          
          It 'Profile Should by Pat' {

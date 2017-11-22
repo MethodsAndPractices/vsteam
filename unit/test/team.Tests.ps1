@@ -13,19 +13,22 @@ $contents = @"
             "Name": "http://localhost:8080/tfs/defaultcollection",
             "URL": "http://localhost:8080/tfs/defaultcollection",
             "Pat": "",
-            "Type": "OnPremise"
+            "Type": "OnPremise",
+            "Version": "TFS2017"
          },
          {
             "Name": "mydemos",
             "URL": "https://mydemos.visualstudio.com",
             "Pat": "OjEyMzQ1",
-            "Type": "Pat"
+            "Type": "Pat",
+            "Version": "VSTS"
          },
          {
             "Name": "demonstrations",
             "URL": "https://demonstrations.visualstudio.com",
-            "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hmb3RwcWI2bG9sbHkzdzY2a2x5am13YWtkcXVwYmg0emE=",
-            "Type": "Pat"
+            "Pat": "dzY2a2x5am13YWtkcXVwYmg0emE=",
+            "Type": "Pat",
+            "Version": "VSTS"
          }
       ]
 "@      
@@ -62,7 +65,7 @@ $contents = @"
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345
+            Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {

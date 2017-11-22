@@ -71,7 +71,7 @@ function Get-VSTeamRelease {
 
       if($id) {
          foreach ($item in $id) {
-            $listurl = _buildReleaseURL -resource 'releases' -version '3.0-preview.3' -projectName $projectName -id $item
+            $listurl = _buildReleaseURL -resource 'releases' -projectName $projectName -id $item
 
             # Call the REST API
             Write-Debug 'Get-VSTeamRelease Call the REST API'
@@ -87,7 +87,7 @@ function Get-VSTeamRelease {
             Write-Output $resp
          }
       } else {
-         $listurl = _buildReleaseURL -resource 'releases' -version '3.0-preview.3' -projectName $ProjectName
+         $listurl = _buildReleaseURL -resource 'releases' -projectName $ProjectName
 
          $listurl += _appendQueryString -name "`$top" -value $top
          $listurl += _appendQueryString -name "`$expand" -value $expand
@@ -225,7 +225,7 @@ function Add-VSTeamRelease {
       }
 
       # Build the url
-      $url = _buildReleaseURL -resource 'releases' -version '3.0-preview.3' -projectName $projectName
+      $url = _buildReleaseURL -resource 'releases' -projectName $projectName
 
       $body = '{"definitionId": ' + $DefinitionId + ', "description": "' + $description + '", "artifacts": [{"alias": "' + $artifactAlias + '", "instanceReference": {"id": "' + $buildId + '", "name": "' + $Name + '", "sourceBranch":"' + $SourceBranch + '"}}]}'
 
@@ -274,7 +274,7 @@ function Remove-VSTeamRelease {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       foreach ($item in $id) {
-         $listurl = _buildReleaseURL -resource 'releases' -version '3.0-preview.3' -projectName $ProjectName -id $item
+         $listurl = _buildReleaseURL -resource 'releases' -projectName $ProjectName -id $item
 
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
             Write-Debug 'Remove-VSTeamRelease Call the REST API'
@@ -323,7 +323,7 @@ function Set-VSTeamReleaseStatus {
       $body = '{ "status": "' + $status + '" }'
 
       foreach ($item in $id) {
-         $listurl = _buildReleaseURL -resource 'releases' -version '3.0-preview.3' -projectName $ProjectName -id $item
+         $listurl = _buildReleaseURL -resource 'releases' -projectName $ProjectName -id $item
 
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
             Write-Debug 'Remove-VSTeamRelease Call the REST API'
@@ -419,7 +419,6 @@ function Add-VSTeamReleaseEnvironment {
 
       # Build the url
       $url = _buildReleaseURL -resource "releases/$ReleaseId/environments/$EnvironmentId"
-                              -version '3.0-preview.3'
                               -projectName $projectName
 
       $body = '{"status": "' + $EnvironmentStatus + '"}'       

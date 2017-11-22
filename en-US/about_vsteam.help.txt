@@ -21,16 +21,43 @@ LONG DESCRIPTION
     Name             Value
     ----             -----
     Account          https://test.visualstudio.com
-    Build            2.0
     DefaultProject
-    Core             1.0
-    Release          3.0-preview.1
-    Git              1.0
-    DistributedTask  3.0-preview.1
+    Version          VSTS
+    Build            3.0
+    Core             3.0
+    Release          3.0-Preview
+    Git              3.0
+    DistributedTask  3.0-Preview
+
+    The following list shows the version name and where it is used.
+    · Build
+      · Build
+      · Build Definitions
+    · Core
+      · Projects
+      · Team Members
+      · Teams
+    · DistributedTask
+      · Pools
+      · Queues
+      · Service Endpoints
+    · Git
+      · Git  
+    · Release
+      · Approvals
+      · Release
+      · Release Definitions
+    
 
     To use different API versions you can update the version in the version table.
 
     PS C:\> $VSTeamVersionTable.Build = '4.0'
+
+    You can also use Set-VSTeamAPIVersion to set all the API versions for either 
+    TFS2017, TFS2018 or VSTS. TFS2017 is the default. 
+
+    PS C:\> Set-VSTeamAPIVersion TFS2018
+    
 
 EXAMPLES
     Get-VSTeamProject
