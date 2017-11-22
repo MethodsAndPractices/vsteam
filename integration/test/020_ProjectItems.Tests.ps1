@@ -37,13 +37,13 @@ Describe 'Project Items' {
 
    Context 'Pool Full exercise' {
       It 'Get-VSTeamPool Should return agent pools' {
-         (Get-VSTeamPool).Count | Should Be 4
+         (Get-VSTeamPool).Count | Should Be 5
       }
    }
 
    Context 'Queue Full exercise' {
       It 'Get-VSTeamQueue Should return agent Queues' {
-         (Get-VSTeamQueue -ProjectName 'TeamModuleIntegration').Count | Should Be 4
+         (Get-VSTeamQueue -ProjectName 'TeamModuleIntegration').Count | Should Be 5
       }
    }
 

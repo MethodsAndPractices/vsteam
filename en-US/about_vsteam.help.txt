@@ -1,5 +1,5 @@
 TOPIC
-    about_vsteam
+    VSTeam
 
 SHORT DESCRIPTION
     Provides access to your Visual Studio Team Services (VSTS) and Team 
@@ -14,7 +14,7 @@ LONG DESCRIPTION
     -ProjectName parameter is dynamic and you can use tab completion to cycle
     through all the projects.
 
-    Using the $VSTeamVersionTable varible you can control which version of the APIs are used.
+    Using the $VSTeamVersionTable variable you can control which version of the APIs are used.
     
     PS C:\> $VSTeamVersionTable
 

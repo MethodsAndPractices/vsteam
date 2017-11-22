@@ -1,0 +1,37 @@
+TOPIC
+    VSTeam Profiles
+
+SHORT DESCRIPTION
+    Profiles allow you to store account information so you do not have to 
+    remember your Personal Access Token (PAT). Simply create a profile for
+    the desired account and use the profile name to switch to that account
+    using the Add-VSTeamAccount function. 
+
+LONG DESCRIPTION
+   Using profiles makes it easier to switch from one account to another. 
+   Profiles store the URL to the account and authentication information.
+
+   To use a profile with the Add-VSTeamAccount function use the -Profile
+   parameter.
+
+   Calling Add-VSTeamProfile with the same account as an existing entry will
+   overwrite that entry.
+
+EXAMPLES
+    Add-VSTeamProfile -Account demonstrations -Name demonstrations -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
+
+    This will add a profile named demonstrations for use with Add-VSTeamAccount.
+
+    Get-VSTeamProfiles | Remove-VSTeamProfiles -Force
+
+    This will delete all the profiles.
+
+    Add-VSTeamAccount -Profile demonstrations
+
+    This will add the account https://demonstrations.visualstudio.com/
+
+KEYWORDS
+    Team Services, VSTS, TFS, VSO, TFS, DevOps
+
+SEE ALSO
+    Add-VSTeamAccount

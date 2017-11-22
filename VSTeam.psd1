@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '1.0.4'
+   ModuleVersion     = '1.0.5'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -86,6 +86,7 @@
       'src\releases.psm1',
       'src\serviceendpoints.psm1',
       'src\teams.psm1',
+      'src\profile.psm1',
       'src\teammembers.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
@@ -144,7 +145,10 @@
       'Show-VSTeamGitRepository',
       'Show-VSTeamReleaseDefinition',
       'Show-VSTeamRelease',
-      'Show-VSTeam')
+      'Show-VSTeam',
+      'Add-VSTeamProfile',
+      'Remove-VSTeamProfile',
+      'Get-VSTeamProfile')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -211,7 +215,10 @@
       'Get-Team',
       'Add-Team',
       'Update-Team',
-      'Remove-Team')
+      'Remove-Team',
+      'Add-Profile',
+      'Remove-Profile',
+      'Get-Profile')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
