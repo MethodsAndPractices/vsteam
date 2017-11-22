@@ -18,9 +18,9 @@ LONG DESCRIPTION
    overwrite that entry.
 
 EXAMPLES
-    Add-VSTeamProfile -Account demonstrations -Name demonstrations -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
+    Add-VSTeamProfile -Account demonstrations -Name demonstrations -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrmgap3mziwnga -Version VSTS
 
-    This will add a profile named demonstrations for use with Add-VSTeamAccount.
+    This will add a profile named demonstrations for use with Add-VSTeamAccount using the VSTS API.
 
     Get-VSTeamProfiles | Remove-VSTeamProfiles -Force
 
@@ -35,3 +35,4 @@ KEYWORDS
 
 SEE ALSO
     Add-VSTeamAccount
+    Set-VSTeamAPIVersion
