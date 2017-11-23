@@ -198,10 +198,13 @@ function Add-VSTeamAccount {
       $profileAttributeCollection.Add($profileParameterAttribute)
 
       $profileArrSet = Get-VSTeamProfile | Select-Object -ExpandProperty Name
-      $profileValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($profileArrSet)
 
-      # Add the ValidateSet to the attributes collection
-      $profileAttributeCollection.Add($profileValidateSetAttribute)
+      if ($profileArrSet) {
+         $profileValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($profileArrSet)
+
+         # Add the ValidateSet to the attributes collection
+         $profileAttributeCollection.Add($profileValidateSetAttribute)
+      }
 
       $profileRuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($profileParam, [string], $profileAttributeCollection)
       $RuntimeParameterDictionary.Add($profileParam, $profileRuntimeParameter)
@@ -277,6 +280,7 @@ function Add-VSTeamAccount {
          $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
          if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth) -and !($Profile)) {
             Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
+            return
          }
       }
       else {
@@ -285,9 +289,16 @@ function Add-VSTeamAccount {
 
       if ($Profile) {
          $info = Get-VSTeamProfile | Where-Object Name -eq $Profile
-         $encodedPat = $info.Pat
-         $account = $info.URL
-         $version = $info.Version
+
+         if ($info) {
+            $encodedPat = $info.Pat
+            $account = $info.URL
+            $version = $info.Version
+         }
+         else {
+            Write-Error "The profile provided was not found."
+            return
+         }
       }
       else {         
          if ($SecurePersonalAccessToken) {
