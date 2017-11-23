@@ -175,19 +175,40 @@ function Add-VSTeamAccount {
       [string] $PersonalAccessToken,
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
-      [Parameter(ParameterSetName = 'Profile')]
-      [string] $Profile,
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
       [string] $Version = 'TFS2017'
    )
 
    DynamicParam {
+      # Create the dictionary
+      $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+      $profileParam = 'Profile'
+
+      # Create the collection of attributes
+      $profileAttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+       
+      # Create and set the parameters' attributes
+      $profileParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
+      $profileParameterAttribute.Mandatory = $false
+      $profileParameterAttribute.ParameterSetName = "Profile"
+      $profileParameterAttribute.HelpMessage = "Name of profile to load."
+
+      # Add the attributes to the attributes collection
+      $profileAttributeCollection.Add($profileParameterAttribute)
+
+      $profileArrSet = Get-VSTeamProfile | Select-Object -ExpandProperty Name
+      $profileValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($profileArrSet)
+
+      # Add the ValidateSet to the attributes collection
+      $profileAttributeCollection.Add($profileValidateSetAttribute)
+
+      $profileRuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($profileParam, [string], $profileAttributeCollection)
+      $RuntimeParameterDictionary.Add($profileParam, $profileRuntimeParameter)
+
       # Only add these options on Windows Machines
       if (_isOnWindows) {
          Write-Verbose 'On a Windows machine'
-         # Create the dictionary
-         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
-
          $ParameterName = 'Level'
 
          # Create the collection of attributes
@@ -233,14 +254,18 @@ function Add-VSTeamAccount {
          $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
          $RuntimeParameter2 = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName2, [switch], $AttributeCollection2)
          $RuntimeParameterDictionary.Add($ParameterName2, $RuntimeParameter2)
-         return $RuntimeParameterDictionary
       }
       else {
          Write-Verbose 'Not on a Windows machine'
       }
+
+      return $RuntimeParameterDictionary
    }
 
    process {
+      # Bind the parameter to a friendly variable
+      $Profile = $PSBoundParameters[$profileParam]
+
       if (_isOnWindows) {
          # Bind the parameter to a friendly variable
          $Level = $PSBoundParameters[$ParameterName]
