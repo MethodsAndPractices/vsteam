@@ -35,18 +35,20 @@ function Get-VSTeamProfile {
          }
          catch {         
             # Catch any error and fail to the return empty array below
+            Write-Error "Error ready Profiles file. Use Add-VSTeamProfile to generate new file."
          }
       }
    }
 }
 
 function Remove-VSTeamProfile {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
       # Name is an array so I can pass an array after -Name 
       # I can also use pipe
       [parameter(Mandatory = $true, Position = 1, ValueFromPipelineByPropertyName = $true)]
-      [string[]] $Name
+      [string[]] $Name,
+      [switch] $Force
    )
 
    begin {
@@ -55,8 +57,10 @@ function Remove-VSTeamProfile {
 
    process {
       foreach ($item in $Name) {
-         # See if this item is already in there
-         $profiles = $profiles | Where-Object Name -ne $item    
+         if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-VSTeamProfile")) {
+            # See if this item is already in there
+            $profiles = $profiles | Where-Object Name -ne $item
+         }
       }
    }
 
@@ -166,10 +170,10 @@ function Add-VSTeamProfile {
 
       # Without the Out-Null the original size is showing in output.
       $profiles += [PSCustomObject]@{
-         Name = $Name
-         URL  = $Account
-         Type = $authType
-         Pat  = $encodedPat
+         Name    = $Name
+         URL     = $Account
+         Type    = $authType
+         Pat     = $encodedPat
          Version = $version
       }
 
