@@ -117,11 +117,13 @@ $contents = @"
 
       Context 'Get-VSTeamProfile invalid profiles file' {
          Mock Test-Path { return $true }
+         Mock Write-Error { } -Verifiable
          Mock Get-Content { return 'Not Valid JSON. This might happen if someone touches the file.' }
 
          $actual = Get-VSTeamProfile
       
          It 'Should return 0 profiles' {
+            Assert-VerifiableMocks
             $actual | Should BeNullOrEmpty
          }
       }
