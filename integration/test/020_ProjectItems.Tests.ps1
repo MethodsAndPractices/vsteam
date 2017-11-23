@@ -2,6 +2,7 @@ Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\git.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\pools.psm1 -Force
@@ -9,7 +10,7 @@ Import-Module $PSScriptRoot\..\..\src\Queues.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teammembers.psm1 -Force
 
-Set-VSTeamAPIVersion -Version $env:API_VERSION -Verbose
+Set-VSTeamAPIVersion -Version $env:API_VERSION
 
 Describe 'Project Items' {
    BeforeAll {
