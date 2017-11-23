@@ -485,7 +485,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Profile</maml:name>
           <maml:Description>
-            <maml:para>The profile name stored using Add-VSTeamProfile function.</maml:para>
+            <maml:para>The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -563,7 +563,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Profile</maml:name>
         <maml:Description>
-          <maml:para>The profile name stored using Add-VSTeamProfile function.</maml:para>
+          <maml:para>The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

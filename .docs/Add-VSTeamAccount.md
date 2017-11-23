@@ -170,7 +170,7 @@ Accept wildcard characters: False
 ```
 
 ### -Profile
-The profile name stored using Add-VSTeamProfile function.
+The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.
 
 ```yaml
 Type: String
