@@ -1,0 +1,1 @@
+Opens TFS or VSTS site in the default browser.

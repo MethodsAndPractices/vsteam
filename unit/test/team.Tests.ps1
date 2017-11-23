@@ -7,9 +7,35 @@ InModuleScope team {
    Describe 'Team' {
       . "$PSScriptRoot\mockProjectDynamicParam.ps1"
 
+$contents = @"
+      [
+         {
+            "Name": "http://localhost:8080/tfs/defaultcollection",
+            "URL": "http://localhost:8080/tfs/defaultcollection",
+            "Pat": "",
+            "Type": "OnPremise",
+            "Version": "TFS2017"
+         },
+         {
+            "Name": "mydemos",
+            "URL": "https://mydemos.visualstudio.com",
+            "Pat": "OjEyMzQ1",
+            "Type": "Pat",
+            "Version": "VSTS"
+         },
+         {
+            "Name": "demonstrations",
+            "URL": "https://demonstrations.visualstudio.com",
+            "Pat": "dzY2a2x5am13YWtkcXVwYmg0emE=",
+            "Type": "Pat",
+            "Version": "VSTS"
+         }
+      ]
+"@      
+
       Context 'Get-VSTeamInfo' {
          It 'should return account and default project' {
-            $env:TEAM_ACCT = "mydemos"
+            $VSTeamVersionTable.Account = "mydemos"
             $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
             $info = Get-VSTeamInfo
@@ -19,12 +45,27 @@ InModuleScope team {
          }
       }
 
+      Context 'Add-VSTeamAccount profile' {
+         Mock _isOnWindows { return $false }
+         Mock _setEnvironmentVariables
+         Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
+
+         It 'should set env at process level' {
+            Add-VSTeamAccount -Profile mydemos
+
+            # Make sure set env vars was called with the correct parameters
+            Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+            }
+         }
+      }
+
       Context 'Add-VSTeamAccount vsts' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345
+            Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {

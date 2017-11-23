@@ -12,13 +12,13 @@ function _buildURL {
         [string] $TeamId
     )
 
-    if(-not $env:TEAM_ACCT) {
+    if(-not $VSTeamVersionTable.Account) {
         throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
     }
 
-    $version = '1.0'
+    $instance = $VSTeamVersionTable.Account
+    $version = $VSTeamVersionTable.Core
     $resource = "/projects/$ProjectName/teams/$TeamId/members"
-    $instance = $env:TEAM_ACCT
 
     # Build the url to list the projects
     return $instance + '/_apis' + $resource + '?api-version=' + $version

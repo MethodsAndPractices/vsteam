@@ -1,10 +1,11 @@
 Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
+Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\serviceendpoints.psm1 -Force
 
 InModuleScope serviceendpoints {
-   $env:TEAM_ACCT = 'https://test.visualstudio.com'
+   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'ServiceEndpoints' {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
@@ -20,10 +21,10 @@ InModuleScope serviceendpoints {
             }}
 
          It 'Should return all service endpoints' {
-            Get-VSTeamServiceEndpoint -projectName project
+            Get-VSTeamServiceEndpoint -projectName project -Verbose
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints?api-version=3.0-preview.1'
+               $Uri -eq "https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints?api-version=$($VSTeamVersionTable.DistributedTask)"
             }
          }
       }
@@ -35,7 +36,7 @@ InModuleScope serviceendpoints {
             Remove-VSTeamServiceEndpoint -projectName project -id 5 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints/5?api-version=3.0-preview.1' -and `
+               $Uri -eq "https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints/5?api-version=$($VSTeamVersionTable.DistributedTask)" -and `
                   $Method -eq 'Delete'
             }
          }

@@ -302,10 +302,24 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PAT</maml:name>
           <maml:Description>
-            <maml:para>A secured string to capture your personal access token.  This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
+            <maml:para>A secured string to capture your personal access token. </maml:para>
+            <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
             <maml:para>To use pat simply omit it from the Add-VSTeamAccount command.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
@@ -330,6 +344,19 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>PersonalAccessToken</maml:name>
@@ -359,6 +386,19 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>UseWindowsAuthentication</maml:name>
           <maml:Description>
@@ -373,6 +413,19 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-VSTeamAccount</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
@@ -388,10 +441,51 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-VSTeamAccount</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
             <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels.  When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamAccount</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Profile</maml:name>
+          <maml:Description>
+            <maml:para>The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -419,7 +513,8 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>PAT</maml:name>
         <maml:Description>
-          <maml:para>A secured string to capture your personal access token.  This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
+          <maml:para>A secured string to capture your personal access token. </maml:para>
+          <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
           <maml:para>To use pat simply omit it from the Add-VSTeamAccount command.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
@@ -465,6 +560,31 @@
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Profile</maml:name>
+        <maml:Description>
+          <maml:para>The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Version</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the version to use.</maml:para>
+          <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>TFS2017</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes />
     <command:returnValues />
@@ -495,10 +615,21 @@
           <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
         </dev:remarks>
       </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Add-VSTeamAccount -Profile demonstrations</dev:code>
+        <dev:remarks>
+          <maml:para>Will add the account from the profile provide.</maml:para>
+        </dev:remarks>
+      </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamProfile</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -1256,6 +1387,291 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Add-VSTeamProfile</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamProfile</command:noun>
+      <maml:description>
+        <maml:para>Stores your account name and personal access token as a profile for use with the Add-TeamAccount function in this module.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para></maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamProfile</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Account</maml:name>
+          <maml:Description>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL. </maml:para>
+            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PAT</maml:name>
+          <maml:Description>
+            <maml:para>A secured string to capture your personal access token. </maml:para>
+            <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
+            <maml:para>To use pat simply omit it from the Add-VSTeamProfile command.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
+          <dev:type>
+            <maml:name>SecureString</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamProfile</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Account</maml:name>
+          <maml:Description>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL. </maml:para>
+            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>PersonalAccessToken</maml:name>
+          <maml:Description>
+            <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamProfile</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Account</maml:name>
+          <maml:Description>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL. </maml:para>
+            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>UseWindowsAuthentication</maml:name>
+          <maml:Description>
+            <maml:para>Allows the use of the current user's Windows credentials to authenticate against a local TFS.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamProfile</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>Optional name for the profile. If this parameter is not provided the account will also serve as the name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Account</maml:name>
+        <maml:Description>
+          <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL. </maml:para>
+          <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. https://mydemos.visualstudio.com or The full Team Foundation Server (TFS) url including the collection. http://localhost:8080/tfs/DefaultCollection</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PAT</maml:name>
+        <maml:Description>
+          <maml:para>A secured string to capture your personal access token. </maml:para>
+          <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
+          <maml:para>To use pat simply omit it from the Add-VSTeamProfile command.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
+        <dev:type>
+          <maml:name>SecureString</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>PersonalAccessToken</maml:name>
+        <maml:Description>
+          <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>UseWindowsAuthentication</maml:name>
+        <maml:Description>
+          <maml:para>Allows the use of the current user's Windows credentials to authenticate against a local TFS.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Optional name for the profile. If this parameter is not provided the account will also serve as the name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Version</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the version to use.</maml:para>
+          <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>TFS2017</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Add-VSTeamProfile</dev:code>
+        <dev:remarks>
+          <maml:para>You will be prompted for the account name and personal access token.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version TFS2018</dev:code>
+        <dev:remarks>
+          <maml:para>Allows you to provide all the information on the command line.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Add-VSTeamProfile -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
+        <dev:remarks>
+          <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -3894,9 +4310,33 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-VSTeamOption</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Release</maml:name>
+          <maml:Description>
+            <maml:para>Returns options for Release Management APIs</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
-    <command:parameters />
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Release</maml:name>
+        <maml:Description>
+          <maml:para>Returns options for Release Management APIs</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
     <command:inputTypes />
     <command:returnValues />
     <maml:alertSet>
@@ -3997,6 +4437,83 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     </maml:alertSet>
     <command:examples />
     <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-VSTeamProfile</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamProfile</command:noun>
+      <maml:description>
+        <maml:para>Returns the saved profiles.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Returns the saved profiles.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamProfile</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>Optional name for the profile.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Optional name for the profile.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamProfile</dev:code>
+        <dev:remarks>
+          <maml:para>Return the list of saved profiles</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamProfile -Name mydemos</dev:code>
+        <dev:remarks>
+          <maml:para>Will return details of the profile provided</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamProfile</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -4935,6 +5452,51 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamResourceArea</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamResourceArea</command:noun>
+      <maml:description>
+        <maml:para>List all the areas supported by this instance of TFS/VSTS.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>List all the areas supported by this instance of TFS/VSTS.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamResourceArea</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamResourceArea</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the areas of supported APIs for your account.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamOption</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamServiceEndpoint</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamServiceEndpoint</command:noun>
@@ -5865,6 +6427,95 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Remove-VSTeamProfile</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>VSTeamProfile</command:noun>
+      <maml:description>
+        <maml:para>Removes the profile.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Removes the profile.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-VSTeamProfile</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>Name of profile to remove.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Name of profile to remove.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamProfile | Remove-VSTeamProfile -Force</dev:code>
+        <dev:remarks>
+          <maml:para>This will remove all the profiles on your system.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamProfile</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Remove-VSTeamProject</command:name>
       <command:verb>Remove</command:verb>
       <command:noun>VSTeamProject</command:noun>
@@ -6416,6 +7067,92 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Set-VSTeamAPIVersion</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>VSTeamAPIVersion</command:noun>
+      <maml:description>
+        <maml:para>Sets the API versions to support either TFS2017, TFS2018 or VSTS.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Set-VSTeamAPIVersion sets the versions of APIs used.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-VSTeamAPIVersion</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use.</maml:para>
+            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Version</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the version to use.</maml:para>
+          <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>TFS2017</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>## RELATED LINKS</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAPIVersion VSTS</dev:code>
+        <dev:remarks>
+          <maml:para>This command sets the API versions to support VSTS.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Set-VSTeamApproval</command:name>
       <command:verb>Set</command:verb>
       <command:noun>VSTeamApproval</command:noun>
@@ -6916,6 +7653,47 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       </command:example>
     </command:examples>
     <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Show-VSTeam</command:name>
+      <command:verb>Show</command:verb>
+      <command:noun>VSTeam</command:noun>
+      <maml:description>
+        <maml:para>Opens TFS or VSTS site in the default browser.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Opens TFS or VSTS site in the default browser.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Show-VSTeam</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Show-VSTeam</dev:code>
+        <dev:remarks>
+          <maml:para>This will open a browser to the TFS or VSTS site</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -7636,11 +8414,11 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:verb>Show</command:verb>
       <command:noun>VSTeamReleaseDefinition</command:noun>
       <maml:description>
-        <maml:para>Opens the build definitions for a team project in the default browser.</maml:para>
+        <maml:para>Opens the release definitions for a team project in the default browser.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Opens the build definitions for a team project in the default browser.</maml:para>
+      <maml:para>Opens the release definitions for a team project in the default browser.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>

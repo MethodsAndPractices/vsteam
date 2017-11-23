@@ -1,10 +1,11 @@
 Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
+Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
 
 InModuleScope teams {
-   $env:TEAM_ACCT = 'https://test.visualstudio.com'
+   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe "Teams" {
         . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
@@ -17,7 +18,7 @@ InModuleScope teams {
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams?api-version=1.0'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams?api-version=$($VSTeamVersionTable.Core)"
                 }
             }
         }
@@ -30,7 +31,7 @@ InModuleScope teams {
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams?api-version=1.0&$top=10'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams?api-version=$($VSTeamVersionTable.Core)&`$top=10"
                 }
             }
         }
@@ -43,7 +44,7 @@ InModuleScope teams {
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams?api-version=1.0&$skip=10'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams?api-version=$($VSTeamVersionTable.Core)&`$skip=10"
                 }
             }
         }
@@ -56,7 +57,7 @@ InModuleScope teams {
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams?api-version=1.0&$top=10&$skip=5'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams?api-version=$($VSTeamVersionTable.Core)&`$top=10&`$skip=5"
                 }
             }
         }
@@ -69,7 +70,7 @@ InModuleScope teams {
 
                 # Make sure it was called with the correct URI
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/TestTeam?api-version=1.0'
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/TestTeam?api-version=$($VSTeamVersionTable.Core)"
                 }
             }
         }
@@ -83,7 +84,7 @@ InModuleScope teams {
                 $expectedBody = '{ "name": "TestTeam", "description": "" }'
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams?api-version=1.0' -and
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams?api-version=$($VSTeamVersionTable.Core)" -and
                     $Method -eq "Post" -and
                     $Body -eq $expectedBody
                 }
@@ -99,7 +100,7 @@ InModuleScope teams {
                 $expectedBody = '{ "name": "TestTeam", "description": "Test Description" }'
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams?api-version=1.0' -and
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams?api-version=$($VSTeamVersionTable.Core)" -and
                     $Method -eq "Post" -and
                     $Body -eq $expectedBody
                 }
@@ -115,7 +116,7 @@ InModuleScope teams {
                 $expectedBody = '{ "name": "NewTeamName" }'
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=1.0' -and
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=$($VSTeamVersionTable.Core)" -and
                     $Method -eq "Patch" -and
                     $Body -eq $expectedBody
                 }
@@ -131,7 +132,7 @@ InModuleScope teams {
                 $expectedBody = '{"description": "New Description" }'
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=1.0' -and
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=$($VSTeamVersionTable.Core)" -and
                     $Method -eq "Patch" -and
                     $Body -eq $expectedBody
                 }
@@ -147,7 +148,7 @@ InModuleScope teams {
                 $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=1.0' -and
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=$($VSTeamVersionTable.Core)" -and
                     $Method -eq "Patch" -and
                     $Body -eq $expectedBody
                 }
@@ -164,7 +165,7 @@ InModuleScope teams {
                 $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/OldTeamName?api-version=1.0' -and
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/OldTeamName?api-version=$($VSTeamVersionTable.Core)" -and
                     $Method -eq "Patch" -and
                     $Body -eq $expectedBody
                 }
@@ -178,7 +179,7 @@ InModuleScope teams {
                 Remove-VSTeam -ProjectName Test -TeamId "TestTeam" -Force
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/Test/teams/TestTeam?api-version=1.0' -and
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/TestTeam?api-version=$($VSTeamVersionTable.Core)" -and
                     $Method -eq "Delete"
                 }
             }
@@ -192,11 +193,10 @@ InModuleScope teams {
                 Get-VSTeam -ProjectName TestProject -TeamId "TestTeam" | Remove-VSTeam -Force
 
                 Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                    $Uri -eq 'https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam?api-version=1.0' -and
+                    $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam?api-version=$($VSTeamVersionTable.Core)" -and
                     $Method -eq "Delete"
                 }
             }
         }
     }
-
 }

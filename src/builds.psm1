@@ -4,8 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-$version = '2.0'
-
 function _buildURL {
    param(
       [parameter(Mandatory = $true)]
@@ -24,7 +22,7 @@ function _buildURL {
 
 
    # Build the url to list the projects
-   return $rootUrl + '?api-version=' + $version
+   return $rootUrl + '?api-version=' + $VSTeamVersionTable.Build
 }
 
 function _buildChildUrl {
@@ -45,7 +43,7 @@ function _buildChildUrl {
    }
  
    # Build the url to list the projects
-   return $rootUrl + "/$Child" + '?api-version=' + $version
+   return $rootUrl + "/$Child" + '?api-version=' + $VSTeamVersionTable.Build
 }
 
 function _buildRootURL {
@@ -57,12 +55,12 @@ function _buildRootURL {
       [int] $LogIndex
    )
   
-   if (-not $env:TEAM_ACCT) {
+   if (-not $VSTeamVersionTable.Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
   
    $resource = "/build/builds"
-   $instance = $env:TEAM_ACCT
+   $instance = $VSTeamVersionTable.Account
   
    if ($id) {
       $resource += "/$id"
@@ -231,7 +229,7 @@ function Show-VSTeamBuild {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      _showInBrowser "$($env:TEAM_ACCT)/$ProjectName/_build/index?buildId=$Id"
+      _showInBrowser "$($VSTeamVersionTable.Account)/$ProjectName/_build/index?buildId=$Id"
    }
 }
 

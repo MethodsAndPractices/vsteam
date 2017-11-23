@@ -1,10 +1,11 @@
 Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
+Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\queues.psm1 -Force
 
 InModuleScope queues {
-   $env:TEAM_ACCT = 'https://test.visualstudio.com'
+   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'Queues' {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
@@ -20,7 +21,7 @@ InModuleScope queues {
             Get-VSTeamQueue -ProjectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=3.0-preview.1'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=$($VSTeamVersionTable.DistributedTask)"
             }
          }
       }
@@ -36,7 +37,7 @@ InModuleScope queues {
             Get-VSTeamQueue -projectName project -queueName 'Hosted'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=3.0-preview.1&queueName=Hosted'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=$($VSTeamVersionTable.DistributedTask)&queueName=Hosted"
             }
          }
       }
@@ -52,7 +53,7 @@ InModuleScope queues {
             Get-VSTeamQueue -projectName project -actionFilter 'None'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=3.0-preview.1&actionFilter=None'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=$($VSTeamVersionTable.DistributedTask)&actionFilter=None"
             }
          }
       }
@@ -68,7 +69,7 @@ InModuleScope queues {
             Get-VSTeamQueue -projectName project -actionFilter 'None' -queueName 'Hosted'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=3.0-preview.1&queueName=Hosted&actionFilter=None'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues?api-version=$($VSTeamVersionTable.DistributedTask)&queueName=Hosted&actionFilter=None"
             }
          }
       }
@@ -82,7 +83,7 @@ InModuleScope queues {
             Get-VSTeamQueue -projectName project -queueId 3
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'https://test.visualstudio.com/project/_apis/distributedtask/queues/3?api-version=3.0-preview.1'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/3?api-version=$($VSTeamVersionTable.DistributedTask)"
             }
          }
       }

@@ -2,11 +2,14 @@ Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
+
+Set-VSTeamAPIVersion -Version $env:API_VERSION
 
 Describe 'Team' {
    Context 'Get-VSTeamInfo' {
       It 'should return account and default project' {
-         $env:TEAM_ACCT = "mydemos"
+         $VSTeamVersionTable.Account = "mydemos"
          $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
          $info = Get-VSTeamInfo
@@ -20,12 +23,19 @@ Describe 'Team' {
       It 'should set env at process level' {
          $pat = $env:PAT
          $acct = $env:ACCT
-         Add-VSTeamAccount -a $acct -pe $pat
+         $api = $env:API_VERSION
+         Add-VSTeamAccount -a $acct -pe $pat -version $api
 
          $info = Get-VSTeamInfo
          
          $info.DefaultProject | Should Be $null
-         $info.Account | Should Be "https://$acct.visualstudio.com"
+
+         if ($acct -like "http://*") {
+            $info.Account | Should Be $acct
+         }
+         else {
+            $info.Account | Should Be "https://$acct.visualstudio.com"
+         }
       }
    }
 
@@ -37,7 +47,7 @@ Describe 'Team' {
          # Assert
          $info = Get-VSTeamInfo
          
-         $info.Account | Should Be $null
+         $info.Account | Should Be ''
          $info.DefaultProject | Should Be $null
       }
    }

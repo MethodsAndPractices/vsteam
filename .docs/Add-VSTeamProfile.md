@@ -1,70 +1,51 @@
 #include "./common/header.md"
 
-# Add-VSTeamAccount
+# Add-VSTeamProfile
 
 ## SYNOPSIS
-#include "./synopsis/Add-VSTeamAccount.md"
+#include "./synopsis/Add-VSTeamProfile.md"
 
 ## SYNTAX
 
 ### Secure (Default)
 ```
-Add-VSTeamAccount [-Account] <String> -PAT <SecureString> [-Level <String>] [[-Version] <String>]
+Add-VSTeamProfile [-Account] <String> -PAT <SecureString> [[-Name] <String>] [[-Version] <String>]
 ```
 
 ### Plain
 ```
-Add-VSTeamAccount [-PersonalAccessToken] <String> [[-Account] <String>] [-Level <String>] [[-Version] <String>]
+Add-VSTeamProfile [-PersonalAccessToken] <String> [[-Account] <String>] [[-Name] <String>] [[-Version] <String>]
 ```
 
-### Windows
+### TFS
 ```
-Add-VSTeamAccount [[-Account] <String>] [-UseWindowsAuthentication] [[-Version] <String>]
-```
-
-### Profile
-```
-Add-VSTeamAccount [[-Profile] <String>] [-Level <String>] [[-Version] <String>]
+Add-VSTeamProfile [[-Account] <String>] [-UseWindowsAuthentication] [[-Name] <String>] [[-Version] <String>]
 ```
 
 ## DESCRIPTION
-On Windows you have to option to store the information at the process, user
-or machine (you must be running PowerShell as administrator to store at the
-machine level) level.
-
-On Linux and Mac you can only store at the process level.
-
-Calling Add-VSTeamAccount will clear any default project.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-PS C:\> Add-VSTeamAccount
+PS C:\> Add-VSTeamProfile
 ```
 
 You will be prompted for the account name and personal access token.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-PS C:\> Add-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
+PS C:\> Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version TFS2018
 ```
 
 Allows you to provide all the information on the command line.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-PS C:\> Add-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
+PS C:\> Add-VSTeamProfile -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
 ```
 
 On Windows, allows you use to use Windows authentication against a local TFS server.
-
-### -------------------------- EXAMPLE 4 --------------------------
-```
-PS C:\> Add-VSTeamAccount -Profile demonstrations
-```
-
-Will add the account from the profile provide.
 
 ## PARAMETERS
 
@@ -109,7 +90,7 @@ A secured string to capture your personal access token.
 This will allow you to provide your personal access token
 without displaying it in plain text.
 
-To use pat simply omit it from the Add-VSTeamAccount command.
+To use pat simply omit it from the Add-VSTeamProfile command.
 
 ```yaml
 Type: SecureString
@@ -117,22 +98,6 @@ Parameter Sets: Secure (Default)
 Aliases: 
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Level
-On Windows allows you to store your account information at the Process, User or Machine levels. 
-When saved at the User or Machine level your account information will be in any future PowerShell processes.
-
-```yaml
-Type: String
-Parameter Sets: Secure, Plain (Default)
-Aliases: 
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -169,16 +134,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Profile
-The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.
+### -Name
+Optional name for the profile. If this parameter is not provided the account will also
+serve as the name.
 
 ```yaml
 Type: String
-Parameter Sets: Profile
+Parameter Sets: All
 Aliases: 
 
 Required: True
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -199,6 +165,7 @@ Default value: TFS2017
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
 ## INPUTS
 
 ## OUTPUTS
@@ -208,5 +175,4 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
-[Add-VSTeamProfile](Add-VSTeamProfile.md)
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)

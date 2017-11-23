@@ -2,6 +2,7 @@ Set-StrictMode -Version Latest
 
 Get-Module team | Remove-Module -Force
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\git.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\pools.psm1 -Force
@@ -9,12 +10,15 @@ Import-Module $PSScriptRoot\..\..\src\Queues.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teammembers.psm1 -Force
 
+Set-VSTeamAPIVersion -Version $env:API_VERSION
+
 Describe 'Project Items' {
    BeforeAll {
       $pat = $env:PAT
       $acct = $env:ACCT
-
-      Add-VSTeamAccount -a $acct -pe $pat
+      $api = $env:API_VERSION
+      
+      Add-VSTeamAccount -a $acct -pe $pat -version $api
       Add-VSTeamProject -ProjectName 'TeamModuleIntegration'
    }
 
@@ -37,13 +41,27 @@ Describe 'Project Items' {
 
    Context 'Pool Full exercise' {
       It 'Get-VSTeamPool Should return agent pools' {
-         (Get-VSTeamPool).Count | Should Be 4
+         $actual = Get-VSTeamPool
+
+         if ($acct -like "http://*") {
+            $actual.name | Should Be 'Default'
+         }
+         else {
+            $actual.Count | Should Be 5
+         }
       }
    }
 
    Context 'Queue Full exercise' {
       It 'Get-VSTeamQueue Should return agent Queues' {
-         (Get-VSTeamQueue -ProjectName 'TeamModuleIntegration').Count | Should Be 4
+         $actual = Get-VSTeamQueue -ProjectName 'TeamModuleIntegration'
+
+         if ($acct -like "http://*") {
+            $actual.name | Should Be 'Default'
+         }
+         else {
+            $actual.Count | Should Be 5
+         }
       }
    }
 

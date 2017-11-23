@@ -34,7 +34,7 @@ function Get-VSTeamApproval {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $listurl = _buildReleaseURL -resource 'approvals' -version '3.0-preview.1' -projectName $ProjectName
+      $listurl = _buildReleaseURL -resource 'approvals' -version $VSTeamVersionTable.Release -projectName $ProjectName
 
       $listurl += _appendQueryString -name "statusFilter" -value $StatusFilter
       $listurl += _appendQueryString -name "assignedtoFilter" -value $AssignedToFilter
@@ -79,7 +79,7 @@ function Show-VSTeamApproval {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      _showInBrowser "$($env:TEAM_ACCT)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
+      _showInBrowser "$($VSTeamVersionTable.Account)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
    }
 }
 
@@ -115,7 +115,7 @@ function Set-VSTeamApproval {
       Write-Verbose $body
 
       foreach ($item in $id) {
-         $listurl = _buildReleaseURL -resource 'approvals' -version '3.0-preview.1' -projectName $ProjectName -id $item
+         $listurl = _buildReleaseURL -resource 'approvals' -version $VSTeamVersionTable.Release -projectName $ProjectName -id $item
 
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Approval Status")) {
             Write-Debug 'Set-VSTeamApproval Call the REST API'

@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '1.0.4'
+   ModuleVersion     = '1.0.6'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -61,16 +61,17 @@
    # ScriptsToProcess = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
-   TypesToProcess    = @('src\types.ps1xml', 
-      'src\Approvals.ps1xml',
-      'src\buildDefinitions.ps1xml')
+   TypesToProcess    = @('types\types.ps1xml', 
+      'types\Approvals.ps1xml',
+      'types\buildDefinitions.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
-   FormatsToProcess  = @('src\Approvals.format.ps1xml',
-      'src\buildDefinitions.format.ps1xml',
-      'src\TeamTypes.format.ps1xml',
-      'src\builds.format.ps1xml',
-      'src\team.format.ps1xml')
+   FormatsToProcess  = @('formats\Approvals.format.ps1xml',
+      'formats\buildDefinitions.format.ps1xml',
+      'formats\TeamTypes.format.ps1xml',
+      'formats\builds.format.ps1xml',
+      'formats\team.profile.ps1xml',
+      'formats\team.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
@@ -87,7 +88,8 @@
       'src\serviceendpoints.psm1',
       'src\teams.psm1',
       'src\teammembers.psm1',
-      'src\usermanagement.psm1')
+      'src\usermanagement.psm1',
+      'src\profile.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -138,19 +140,25 @@
       'Get-VSTeamBuildArtifact',
       'Update-VSTeamBuild',
       'Get-VSTeamOption',
+      'Get-VSTeamResourceArea',
       'Show-VSTeamProject',
       'Show-VSTeamBuildDefinition',
       'Show-VSTeamApproval',
       'Show-VSTeamBuild',
       'Show-VSTeamGitRepository',
       'Show-VSTeamReleaseDefinition',
-      'Show-VSTeamRelease')
+      'Show-VSTeamRelease',
+      'Show-VSTeam',
+      'Add-VSTeamProfile',
+      'Remove-VSTeamProfile',
+      'Get-VSTeamProfile',
+      'Set-VSTeamAPIVersion')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
 
    # Variables to export from this module
-   VariablesToExport = '*'
+   VariablesToExport = 'VSTeamVersionTable'
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
    AliasesToExport   = @('Get-ServiceEndpoint',
@@ -204,6 +212,7 @@
       'Add-TeamAccount',
       'Remove-TeamAccount',
       'Get-TeamOption',
+      'Get-TeamResourceArea',
       'Clear-DefaultProject',
       'Set-DefaultProject',
       'Get-TeamMember',
@@ -211,7 +220,12 @@
       'Get-Team',
       'Add-Team',
       'Update-Team',
-      'Remove-Team')
+      'Remove-Team',
+      'Add-Profile',
+      'Remove-Profile',
+      'Get-Profile',
+      'Set-APIVersion',
+      'gti')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

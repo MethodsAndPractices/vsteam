@@ -11,13 +11,13 @@ function _buildURL {
       [int] $Id
    )
 
-   if (-not $env:TEAM_ACCT) {
+   if (-not $VSTeamVersionTable.Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
-   $version = '2.0'
+   $instance = $VSTeamVersionTable.Account
    $resource = "/build/definitions"
-   $instance = $env:TEAM_ACCT
+   $version = $VSTeamVersionTable.Build
 
    if ($id) {
       $resource += "/$id"
@@ -163,7 +163,7 @@ function Show-VSTeamBuildDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url
-      $url = "$($env:TEAM_ACCT)/$ProjectName/_build"
+      $url = "$($VSTeamVersionTable.Account)/$ProjectName/_build"
 
       if ($id) {
          $url += "/index?definitionId=$id"
