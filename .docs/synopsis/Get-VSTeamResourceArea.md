@@ -1,0 +1,1 @@
+List all the areas supported by this instance of TFS/VSTS.

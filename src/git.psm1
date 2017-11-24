@@ -11,13 +11,13 @@ function _buildURL {
       [string] $Name
    )
 
-   if (-not $env:TEAM_ACCT) {
+   if (-not $VSTeamVersionTable.Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
-   $version = '1.0'
+   $instance = $VSTeamVersionTable.Account
    $resource = "/git/repositories"
-   $instance = $env:TEAM_ACCT
+   $version = $VSTeamVersionTable.Git
 
    if ($ProjectName) {
       $instance += "/$ProjectName"
@@ -226,7 +226,7 @@ function Show-VSTeamGitRepository {
          _showInBrowser $RemoteUrl
       }
       else {
-         _showInBrowser "$($env:TEAM_ACCT)/_git/$ProjectName"
+         _showInBrowser "$($VSTeamVersionTable.Account)/_git/$ProjectName"
       }
    }
 }

@@ -9,13 +9,13 @@ function _buildURL {
       [string] $ProjectName
    )
 
-   if (-not $env:TEAM_ACCT) {
+   if (-not $VSTeamVersionTable.Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
-   $version = '1.0'
+   $version = $VSTeamVersionTable.Core
    $resource = "/projects/$ProjectName"
-   $instance = $env:TEAM_ACCT
+   $instance = $VSTeamVersionTable.Account
 
    # Build the url to list the projects
    return $instance + '/_apis' + $resource + '?api-version=' + $version
@@ -178,7 +178,7 @@ function Show-VSTeamProject {
    }
 
    process {
-      if (-not $env:TEAM_ACCT) {
+      if (-not $VSTeamVersionTable.Account) {
          throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
       }
 
@@ -189,7 +189,7 @@ function Show-VSTeamProject {
          $ProjectName = $id
       }
 
-      _showInBrowser "$($env:TEAM_ACCT)/$ProjectName"
+      _showInBrowser "$($VSTeamVersionTable.Account)/$ProjectName"
    }
 }
 

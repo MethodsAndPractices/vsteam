@@ -5,12 +5,12 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
 function _buildURL {
-   if(-not $env:TEAM_ACCT) {
+   if(-not $VSTeamVersionTable.Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
    $resource = "/distributedtask/serviceendpointproxy/azurermsubscriptions"
-   $instance = $env:TEAM_ACCT
+   $instance = $VSTeamVersionTable.Account
 
    # Build the url to list the projects
    return $instance + '/_apis' + $resource

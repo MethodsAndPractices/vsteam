@@ -25,6 +25,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-VSTeamGitRepository](Add-VSTeamGitRepository.md)
 #include "./synopsis/Add-VSTeamGitRepository.md"
 
+### [Add-VSTeamProfile](Add-VSTeamProfile.md)
+#include "./synopsis/Add-VSTeamProfile.md"
+
 ### [Add-VSTeamProject](Add-VSTeamProject.md)
 #include "./synopsis/Add-VSTeamProject.md"
 
@@ -76,6 +79,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Get-VSTeamPool](Get-VSTeamPool.md)
 #include "./synopsis/Get-VSTeamPool.md"
 
+### [Get-VSTeamProfile](Get-VSTeamProfile.md)
+#include "./synopsis/Get-VSTeamProfile.md"
+
 ### [Get-VSTeamProject](Get-VSTeamProject.md)
 #include "./synopsis/Get-VSTeamProject.md"
 
@@ -87,6 +93,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 
 ### [Get-VSTeamReleaseDefinition](Get-VSTeamReleaseDefinition.md)
 #include "./synopsis/Get-VSTeamReleaseDefinition.md"
+
+### [Get-VSTeamResourceArea](Get-VSTeamResourceArea.md)
+#include "./synopsis/Get-VSTeamResourceArea.md"
 
 ### [Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
 #include "./synopsis/Get-VSTeamServiceEndpoint.md"
@@ -133,6 +142,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
 #include "./synopsis/Remove-VSTeamAccount.md"
 
+### [Set-VSTeamAPIVersion](Set-VSTeamAPIVersion.md)
+#include "./synopsis/Set-VSTeamAPIVersion.md"
+
 ### [Set-VSTeamApproval](Set-VSTeamApproval.md)
 #include "./synopsis/Set-VSTeamApproval.md"
 
@@ -141,6 +153,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 
 ### [Set-VSTeamReleaseStatus](Set-VSTeamReleaseStatus.md)
 #include "./synopsis/Set-VSTeamReleaseStatus.md"
+
+### [Show-VSTeam](Show-VSTeam.md)
+#include "./synopsis/Show-VSTeam.md"
 
 ### [Show-VSTeamApproval](Show-VSTeamApproval.md)
 #include "./synopsis/Show-VSTeamApproval.md"

@@ -8,7 +8,24 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 1.0.6
+You can now tab complete your profiles.
+
+## 1.0.5
+Added support for Profiles. Now you can store different accounts and PATS as a profile using Add-VSTeamProfile. Then you can call Add-VSTeamAccount with the -Profile parameter and the PAT will be read from the profile. This prevents you having to remember the PAT to switch between accounts. Profiles also store the API version to use with the account. 
+
+Added $VSTeamVersionTable so you can experiment with different versions of the VSTS/TFS APIs. The variable contains the following:
+- 'Build'           = '3.0'
+- 'Release'         = '3.0-preview'
+- 'Core'            = '3.0'
+- 'Git'             = '3.0'
+- 'DistributedTask' = '3.0-preview'
+
+You can update the version so try new versions of APIs. See Set-VSTeamAPIVersion.
+
 ## 1.0.4
+Added support for Show-VSTeam that opens the configured TFS or VSTS in default browser.
+
 Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/26) from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Remove deadlock when endpoint creation failed 

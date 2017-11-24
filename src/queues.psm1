@@ -11,13 +11,13 @@ function _buildURL {
       [int] $id
    )
 
-   if(-not $env:TEAM_ACCT) {
+   if(-not $VSTeamVersionTable.Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 
-   $version = '3.0-preview.1'
+   $version = $VSTeamVersionTable.DistributedTask
    $resource = "/distributedtask/queues"
-   $instance = $env:TEAM_ACCT
+   $instance = $VSTeamVersionTable.Account
 
    if($id) {
       $resource += "/$id"
