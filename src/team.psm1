@@ -176,7 +176,8 @@ function Add-VSTeamAccount {
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
-      [string] $Version = 'TFS2017'
+      [string] $Version = 'TFS2017',
+      [string] $Drive
    )
 
    DynamicParam {
@@ -331,6 +332,11 @@ function Add-VSTeamAccount {
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
 
       Set-VSTeamAPIVersion -Version $version
+
+      if($Drive) {
+         # Assign to null so nothing is writen to output.
+         $null = New-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSAccount' -Scope Global
+      }
    }
 }
 

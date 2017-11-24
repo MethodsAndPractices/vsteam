@@ -9,6 +9,8 @@ The cases of every file is very important. This module is to be used on Windows,
 
 # Release Notes
 ## 1.0.6
+Added drive support created by [Stefan Stranger](https://github.com/stefanstranger). You can now use the -Drive parameter of Add-VSTeamAccount to mount a PSDrive to your account.
+
 You can now tab complete your profiles.
 
 ## 1.0.5
