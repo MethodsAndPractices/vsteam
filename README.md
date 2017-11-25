@@ -8,7 +8,12 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
-## 1.0.6
+## 2.0.0
+The module now has a dependency on SHiPS for PSDrive support.
+
+You must be running 6.0.0-rc or later on Mac and Linux.
+You must be running 5.1.16299.64 or later on Windows.
+
 Added drive support created by [Stefan Stranger](https://github.com/stefanstranger). You can now use the -Drive parameter of Add-VSTeamAccount to mount a PSDrive to your account.
 
 You can now tab complete your profiles.

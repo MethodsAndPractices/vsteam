@@ -38,7 +38,7 @@ using namespace Microsoft.PowerShell.SHiPS
 class VSAccount : SHiPSDirectory {
     
     # Default constructor
-    VSAccount([string]$name):base($name) {
+    VSAccount([string]$name) : base($name) {
     }
 
     [object[]] GetChildItem() {
@@ -59,7 +59,7 @@ class Project : SHiPSDirectory {
     [string]$ProjectId = $null
     [string]$ProjectDescription = $null
 
-    Project ([string]$ProjectName, [string]$ProjectId, [string]$ProjectDescription): base($ProjectName) {
+    Project ([string]$ProjectName, [string]$ProjectId, [string]$ProjectDescription) : base($ProjectName) {
         $this.ProjectName = $ProjectName
         $this.ProjectId = $ProjectId
         $this.ProjectDescription = $ProjectDescription
@@ -80,7 +80,7 @@ class Builds : SHiPSDirectory {
     [string]$ProjectName = $null
     
     # Default constructor
-    Builds([string]$name, [string]$ProjectName):base($name) {
+    Builds([string]$name, [string]$ProjectName) : base($name) {
         $this.ProjectName = $ProjectName
     }
 
@@ -102,7 +102,7 @@ class Build : SHiPSLeaf {
     [string]$BuildStartTime = $null
     [string]$BuildRequestedByUser = $null
 
-    Build ([string]$BuildDefinition, [string]$BuildNumber, [string]$BuildStatus, [string]$BuildResult, [string]$BuildStartTime, [string]$BuildRequestedByUser): base($BuildNumber) {
+    Build ([string]$BuildDefinition, [string]$BuildNumber, [string]$BuildStatus, [string]$BuildResult, [string]$BuildStartTime, [string]$BuildRequestedByUser) : base($BuildNumber) {
         $this.BuildDefinition = $BuildDefinition
         $this.BuildNumber = $BuildNumber
         $this.BuildStatus = $BuildStatus
@@ -118,7 +118,7 @@ class Releases : SHiPSDirectory {
     [string]$ProjectName = $null
     
     # Default constructor
-    Releases([string]$name, [string]$ProjectName):base($name) {
+    Releases([string]$name, [string]$ProjectName) : base($name) {
         $this.ProjectName = $ProjectName
     }
 
@@ -143,7 +143,7 @@ class Release : SHiPSLeaf {
     [string]$CreatedOn = $null
     [string[]]$Environments = $null
 
-    Release ([string]$ReleaseId, [string]$ReleaseName, [string]$ReleaseStatus, [string]$CreatedByUser, [string]$CreatedOn, [array]$Environments): base($ReleaseName) {
+    Release ([string]$ReleaseId, [string]$ReleaseName, [string]$ReleaseStatus, [string]$CreatedByUser, [string]$CreatedOn, [array]$Environments) : base($ReleaseName) {
         $this.ReleaseId = $ReleaseId
         $this.ReleaseName = $ReleaseName
         $this.ReleaseStatus = $ReleaseStatus
@@ -159,7 +159,7 @@ class Teams : SHiPSDirectory {
     [string]$ProjectName = $null
     
     # Default constructor
-    Teams([string]$name, [string]$ProjectName):base($name) {
+    Teams([string]$name, [string]$ProjectName) : base($name) {
         $this.ProjectName = $ProjectName
     }
 
@@ -180,7 +180,7 @@ class Team : SHiPSLeaf {
     [string]$TeamName = $null    
     [string]$TeamDescription = $null
 
-    Team ([string]$TeamId, [string]$TeamName, [string]$TeamProjectName, [string]$TeamDescription): base($TeamName) {
+    Team ([string]$TeamId, [string]$TeamName, [string]$TeamProjectName, [string]$TeamDescription) : base($TeamName) {
         $this.TeamId = $TeamId
         $this.TeamName = $TeamName
         $this.TeamProjectName = $TeamProjectName
