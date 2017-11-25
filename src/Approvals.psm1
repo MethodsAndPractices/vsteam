@@ -42,14 +42,15 @@ function Get-VSTeamApproval {
 
       try {
          # Call the REST API
-		 if (_useWindowsAuthenticationOnPremise) {
-	       $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	     }
+         if (_useWindowsAuthenticationOnPremise) {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+         }
+         else {
+            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+         }
         
          # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach($item in $resp.value) {
+         foreach ($item in $resp.value) {
             _applyTypes -item $item
          }
 
@@ -84,12 +85,12 @@ function Show-VSTeamApproval {
 }
 
 function Set-VSTeamApproval {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [ValidateSet('Approved', 'Rejected', 'Pending', 'ReAssigned')]
       [string] $Status,
 
@@ -111,7 +112,7 @@ function Set-VSTeamApproval {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $body = '{ "status": "' + $status + '", "approver": "'+ $approver +'", "comments": "' + $comment + '" }'
+      $body = '{ "status": "' + $status + '", "approver": "' + $approver + '", "comments": "' + $comment + '" }'
       Write-Verbose $body
 
       foreach ($item in $id) {
@@ -122,11 +123,12 @@ function Set-VSTeamApproval {
 
             try {
                # Call the REST API
-			   if (_useWindowsAuthenticationOnPremise) {
-	             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json"  -Body $body -UseDefaultCredentials
-               } else {
-                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
-	           }
+               if (_useWindowsAuthenticationOnPremise) {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json"  -Body $body -UseDefaultCredentials
+               }
+               else {
+                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
+               }
                
                Write-Output "Approval $item status changed to $status"
             }
@@ -143,5 +145,5 @@ Set-Alias Get-Approval Get-VSTeamApproval
 Set-Alias Set-Approval Set-VSTeamApproval
 
 Export-ModuleMember `
- -Function Get-VSTeamApproval, Set-VSTeamApproval, Show-VSTeamApproval `
- -Alias Show-Approval, Get-Approval, Set-Approval
+   -Function Get-VSTeamApproval, Set-VSTeamApproval, Show-VSTeamApproval `
+   -Alias Show-Approval, Get-Approval, Set-Approval
