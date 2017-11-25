@@ -10,4 +10,18 @@ Describe 'Common' {
          _buildProjectNameDynamicParam | Should Not BeNullOrEmpty
       }
    }
+
+   Context '_isVSTS' {     
+      It 'should return true' {
+         _isVSTS 'https://test.visualstudio.com' | Should Be $true
+      }
+
+      It 'with / should return true' {
+         _isVSTS 'https://test.visualstudio.com/' | Should Be $true
+      }
+
+      It 'should return false' {
+         _isVSTS 'http://localhost:8080/tfs/defaultcollection' | Should Be $false
+      }
+   }
 }

@@ -176,7 +176,7 @@ function Add-VSTeamAccount {
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
-      [string] $Version = 'TFS2017',
+      [string] $Version,
       [string] $Drive
    )
 
@@ -331,7 +331,7 @@ function Add-VSTeamAccount {
       Clear-VSTeamDefaultProject
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
 
-      Set-VSTeamAPIVersion -Version $version
+      Set-VSTeamAPIVersion -Version (_getVSTeamAPIVersion -Instance $account -Version $Version)
 
       if($Drive) {
          # Assign to null so nothing is writen to output.
