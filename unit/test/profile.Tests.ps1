@@ -57,7 +57,7 @@ $contents = @"
       }
 
       Context 'Add-VSTeamProfile with PAT to empty file' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*TFS2017*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
          Mock Get-VSTeamProfile { }
 
@@ -92,8 +92,20 @@ $contents = @"
          }
       }
 
+      Context 'Add-VSTeamProfile TFS default to TFS2017' {
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*http://localhost:8080/tfs/defaultcollection*" -and $Value -like "*TFS2017*" }
+         Mock Set-Content { }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+
+         Add-VSTeamProfile -Account http://localhost:8080/tfs/defaultcollection -PersonalAccessToken 678910
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMocks
+         }
+      }
+
       Context 'Add-VSTeamProfile with PAT replace exisiting entry' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://test.visualstudio.com*" -and $Value -like "*TFS2017*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://test.visualstudio.com*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
