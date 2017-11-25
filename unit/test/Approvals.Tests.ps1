@@ -15,9 +15,9 @@ InModuleScope Approvals {
          Mock Invoke-RestMethod { throw 'testing error handling' }
          Mock _handleException -Verifiable
 
+         Get-VSTeamApproval -projectName project
+         
          It 'should return approvals' {
-            Get-VSTeamApproval -projectName project
-
             Assert-VerifiableMocks
          }
       }
@@ -37,10 +37,10 @@ InModuleScope Approvals {
                )
             }}
 
+         Get-VSTeamApproval -projectName project
+         
          It 'should return approvals' {
-            Get-VSTeamApproval -projectName project
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 `
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals?api-version=$($VSTeamVersionTable.Release)"
             }
@@ -63,11 +63,11 @@ InModuleScope Approvals {
                   }
                )
             }}
-
+        
+         Get-Approval -projectName project
+        
          It 'should return approvals' {
-            Get-Approval -projectName project
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 `
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals?api-version=$($VSTeamVersionTable.Release)"
             }
@@ -84,10 +84,10 @@ InModuleScope Approvals {
                }
             }}
 
-         It 'should set approval' {
-            Set-VSTeamApproval -projectName project -Id 1 -Status Rejected -Force
+         Set-VSTeamApproval -projectName project -Id 1 -Status Rejected -Force
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 `
+         It 'should set approval' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$($VSTeamVersionTable.Release)"
             }
@@ -98,10 +98,10 @@ InModuleScope Approvals {
          Mock _handleException -Verifiable
          Mock Invoke-RestMethod { throw 'testing error handling' }
 
-         It 'should set approval' {
-            Set-VSTeamApproval -projectName project -Id 1 -Status Rejected -Force
+         Set-VSTeamApproval -projectName project -Id 1 -Status Rejected -Force
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 `
+         It 'should set approval' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$($VSTeamVersionTable.Release)"
             }
@@ -119,10 +119,10 @@ InModuleScope Approvals {
                }
             }}
 
+         Set-Approval -projectName project -Id 1 -Status Rejected -Force
+            
          It 'should set approval' {
-            Set-Approval -projectName project -Id 1 -Status Rejected -Force
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 `
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$($VSTeamVersionTable.Release)"
             }
