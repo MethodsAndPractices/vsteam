@@ -1,23 +1,38 @@
 Set-StrictMode -Version Latest
 
-Get-Module team | Remove-Module -Force
-# Required for the dynamic parameter
+# Remove any loaded version of this module so only the files
+# imported below are being tested.
+Get-Module VSTeam | Remove-Module -Force
+
+# Load the modules we want to test and any dependencies
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\Approvals.psm1 -Force
 
+# The InModuleScope command allows you to perform white-box unit testing on the 
+# internal (non-exported) code of a Script Module.
 InModuleScope Approvals {
+
+   # Set the account to use for testing. A normal user would do this
+   # using the Add-VSTeamAccount function.
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'Approvals' {
+
+      # Load the mocks to create the project name dynamic parameter
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamApproval handles exception' {
-         Mock Invoke-RestMethod { throw 'testing error handling' }
+         
+         # Arrange
          Mock _handleException -Verifiable
+         Mock Invoke-RestMethod { throw 'testing error handling' }
 
-         Get-VSTeamApproval -projectName project
+         # Act
+         Get-VSTeamApproval -ProjectName project
          
          It 'should return approvals' {
+
+            # Assert
             Assert-VerifiableMocks
          }
       }

@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Get-Module team | Remove-Module -Force
+Get-Module VSTeam | Remove-Module -Force
 # Required for the dynamic parameter
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\buildDefinitions.psm1 -Force

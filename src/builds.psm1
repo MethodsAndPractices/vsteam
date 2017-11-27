@@ -30,17 +30,11 @@ function _buildChildUrl {
       [parameter(Mandatory = $true)]
       [string] $ProjectName,
       [int] $Id,
-      [Switch] $Logs,
       [int] $LogIndex,
       [string] $Child
    )
 
-   if ($Logs.IsPresent) {
-      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex -Logs
-   }
-   else {
-      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
-   }
+   $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
  
    # Build the url to list the projects
    return $rootUrl + "/$Child" + '?api-version=' + $VSTeamVersionTable.Build

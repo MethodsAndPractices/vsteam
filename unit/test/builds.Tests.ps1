@@ -1,13 +1,19 @@
 Set-StrictMode -Version Latest
 
-Get-Module team | Remove-Module -Force
+# Remove any loaded version of this module so only the files
+# imported below are being tested.
+Get-Module VSTeam | Remove-Module -Force
+
+# Load the modules we want to test and any dependencies
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\queues.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\builds.psm1 -Force
 
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal (non-exported) code of a Script Module.
 InModuleScope builds {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
+   # Sample result of a single build
    $singleResult = [PSCustomObject]@{
       logs              = [PSCustomObject]@{}
       queue             = [PSCustomObject]@{}
@@ -21,6 +27,7 @@ InModuleScope builds {
       requestedBy       = [PSCustomObject]@{}
    }
 
+   # Sample result for list of builds
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
          logs              = [PSCustomObject]@{}
@@ -47,8 +54,23 @@ InModuleScope builds {
       }
    }
 
-   Describe 'Builds' {
+   Describe 'Builds VSTS' {
+      # Load the mocks to create the project name dynamic parameter
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+
+      # Set the account to use for testing. A normal user would do this
+      # using the Add-VSTeamAccount function.
+      $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+
+      Context 'Update Build keep forever' {
+         Mock Invoke-RestMethod
+
+         Update-VSTeamBuild -projectName project -id 1 -KeepForever $true -Force
+
+         It 'should post changes' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"keepForever": true}' -and $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1?api-version=$($VSTeamVersionTable.Build)" }
+         }
+      }
 
       Context 'Show-VSTeamBuild by ID' {
          Mock _openOnWindows { }
@@ -75,7 +97,7 @@ InModuleScope builds {
       Context 'Get Build Log with build id and index' {
          Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter { $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1/logs/2?api-version=$($VSTeamVersionTable.Build)" }
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
- 
+
          Get-VSTeamBuildLog -projectName project -Id 1 -Index 2
 
          It 'Should return full log' {
@@ -142,12 +164,17 @@ InModuleScope builds {
       }
 
       Context 'Remove-VSTeamBuild' {
+
+         # Arrange
          Mock Invoke-RestMethod -UserAgent (_getUserAgent)
 
-         It 'should delete build' {
-            Remove-VSTeamBuild -projectName project -id 2 -Force
+         # Act
+         Remove-VSTeamBuild -projectName project -id 2 -Force
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         It 'should delete build' {
+
+            # Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
                $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2?api-version=$($VSTeamVersionTable.Build)"
             }
@@ -175,7 +202,7 @@ InModuleScope builds {
             return @{ value = $null }
          }
          [string[]] $inputTags = "Test1", "Test2", "Test3"
-      
+
          It 'should add tags to Build' {
             Remove-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
 
@@ -185,17 +212,17 @@ InModuleScope builds {
                   $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
                }
             }
-         }            
+         }
       }
 
       Context 'Get-VSTeamBuildTag calls correct Url' {
          Mock Invoke-RestMethod {
             return @{ value = 'Tag1', 'Tag2'}
          }
-            
+
          It 'should get all Build Tags for the Build.' {
             Get-VSTeamBuildTag -projectName project -id 2
-                  
+
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Get' -and
                $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags?api-version=$($VSTeamVersionTable.Build)"
@@ -208,44 +235,51 @@ InModuleScope builds {
          Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
             return @{ value = $tags}
          }
-            
+
          It 'should get all Build Tags for the Build.' {
             $returndata = Get-VSTeamBuildTag -projectName project -id 2
-                  
+
             Compare-Object $tags  $returndata |
                Should Be $null
          }
       }
 
       Context "Get-VSTeamBuildArtifact calls correct Url" {
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent) { return @{ 
-               value = @{
-                  id       = 150;
-                  name     = "Drop";
-                  resource = @{type = "filepath"; data = "C:\Test"}
+         Mock Invoke-RestMethod -UserAgent(_getUserAgent) { return [PSCustomObject]@{
+               value = [PSCustomObject]@{
+                  id       = 150
+                  name     = "Drop"
+                  resource = [PSCustomObject]@{
+                     type       = "filepath"
+                     data       = "C:\Test"
+                     properties = [PSCustomObject]@{ }
+                  }
                }
             }
          }
 
-         It 'should return the build artifact data' {
-            Get-VSTeamBuildArtifact -projectName project -id 2
+         Get-VSTeamBuildArtifact -projectName project -id 2
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         It 'should return the build artifact data' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Get' -and
                $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/artifacts?api-version=$($VSTeamVersionTable.Build)"
             }
          }
       }
+   }
 
-      # Make sure these test run last as the need differnt 
-      # $VSTeamVersionTable.Account values
+   Describe 'Builds TFS' {
+      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+
+      Mock _useWindowsAuthenticationOnPremise { return $true }
+
+      $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+
       Context 'Get Build Log with index on TFS local Auth' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
-
          Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/2?api-version=$($VSTeamVersionTable.Build)" }
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
- 
+
          Get-VSTeamBuildLog -projectName project -Id 1 -Index 2
 
          It 'Should return full log' {
@@ -254,8 +288,6 @@ InModuleScope builds {
       }
 
       Context 'Get Builds with no parameters on TFS local Auth' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
          Mock Invoke-RestMethod { return $results }
 
          It 'should return builds' {
@@ -266,8 +298,6 @@ InModuleScope builds {
       }
 
       Context 'Get Build by id on TFS local Auth' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
          Mock Invoke-RestMethod { return $singleResult }
 
          It 'should return builds' {
@@ -278,9 +308,6 @@ InModuleScope builds {
       }
 
       Context 'Get Build Log on TFS local Auth' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
-
          Mock Invoke-RestMethod { return @{ count = 4 } } -Verifiable -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs?api-version=$($VSTeamVersionTable.Build)" }
          Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/3?api-version=$($VSTeamVersionTable.Build)" }
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
@@ -292,18 +319,82 @@ InModuleScope builds {
          }
       }
 
-      Context 'Add-VSTeamBuild by id on TFS local Auth' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+      Context "Get-VSTeamBuildArtifact calls correct Url on TFS local Auth" {
+         Mock Invoke-RestMethod -UserAgent(_getUserAgent) { return [PSCustomObject]@{
+               value = [PSCustomObject]@{
+                  id       = 150
+                  name     = "Drop"
+                  resource = [PSCustomObject]@{
+                     type       = "filepath"
+                     data       = "C:\Test"
+                     properties = [PSCustomObject]@{ }
+                  }
+               }
+            }
+         }
 
-         Mock Get-VSTeamQueue { return [PSCustomObject]@{ 
-            name = "MyQueue" 
-            id = 3
-         } }
+         Get-VSTeamBuildArtifact -projectName project -id 2
+
+         It 'should return the build artifact data' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Method -eq 'Get' -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/artifacts?api-version=$($VSTeamVersionTable.Build)"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamBuildTag returns correct data on TFS local Auth' {
+         $tags = 'Tag1', 'Tag2'
+         Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+            return @{ value = $tags}
+         }
+
+         It 'should get all Build Tags for the Build.' {
+            $returndata = Get-VSTeamBuildTag -projectName project -id 2
+
+            Compare-Object $tags  $returndata |
+               Should Be $null
+         }
+      }
+
+      Context 'Add-VSTeamBuildTag on TFS local Auth' {
+         Mock Invoke-RestMethod -UserAgent(_getUserAgent)
+         $inputTags = "Test1", "Test2", "Test3"
+
+         It 'should add tags to Build' {
+            Add-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
+
+            foreach ($inputTag in $inputTags) {
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Method -eq 'Put' -and
+                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
+               }
+            }
+         }
+      }
+
+      Context 'Remove-VSTeamBuild on TFS local Auth' {
+         Mock Invoke-RestMethod -UserAgent (_getUserAgent)
+
+         It 'should delete build' {
+            Remove-VSTeamBuild -projectName project -id 2 -Force
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Delete' -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$($VSTeamVersionTable.Build)"
+            }
+         }
+      }
+
+      Context 'Add-VSTeamBuild by id on TFS local Auth' {
+         Mock Get-VSTeamQueue { return [PSCustomObject]@{
+               name = "MyQueue"
+               id   = 3
+            }
+         }
          Mock Get-VSTeamBuildDefinition { return @{ fullname = "MyBuildDef" } }
 
-         Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter { 
+         Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             $Body -eq '{"definition": {"id": 2}, "queue": {"id": 3}}' -and
             $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)"
          }
@@ -321,6 +412,65 @@ InModuleScope builds {
 
          AfterAll {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+      }
+
+      Context 'Remove-VSTeamBuildTag' {
+         Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+            return @{ value = $null }
+         }
+         [string[]] $inputTags = "Test1", "Test2", "Test3"
+
+         It 'should add tags to Build' {
+            Remove-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
+
+            foreach ($inputTag in $inputTags) {
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Method -eq 'Delete' -and
+                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
+               }
+            }
+         }
+      }
+
+      Context 'Remove-VSTeamBuild on TFS local Auth handles exception' {
+
+         #    # Arrange
+         Mock _handleException -Verifiable
+         Mock Invoke-RestMethod { throw 'Testing error handling.' }
+
+         [string[]] $inputTags = "Test1", "Test2", "Test3"
+
+         #    # Act
+         Remove-VSTeamBuild -ProjectName project -id 2 -Force
+
+         It 'should add tags to Build' {
+
+            # Assert
+            Assert-VerifiableMocks
+         }
+      }
+
+      Context 'Update Build number' {
+         Mock Invoke-RestMethod
+
+         Update-VSTeamBuild -projectName project -id 1 -BuildNumber 'TestNumber' -KeepForever $true -Force
+
+         It 'should post changes' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"keepForever": true, "buildNumber": "TestNumber"}' -and $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1?api-version=$($VSTeamVersionTable.Build)" }
+         }
+      }
+
+      # Must be last because it sets $VSTeamVersionTable.Account to $null
+      Context '_buildRootURL handles exception' {
+
+         # Arrange
+         $VSTeamVersionTable.Account = $null
+
+         It 'should return approvals' {
+
+            # Act
+            { _buildRootURL -ProjectName project } | Should Throw
          }
       }
    }

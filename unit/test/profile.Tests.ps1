@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Get-Module team | Remove-Module -Force
+Get-Module VSTeam | Remove-Module -Force
 Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope profile {
