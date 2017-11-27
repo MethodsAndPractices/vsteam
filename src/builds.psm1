@@ -30,17 +30,11 @@ function _buildChildUrl {
       [parameter(Mandatory = $true)]
       [string] $ProjectName,
       [int] $Id,
-      [Switch] $Logs,
       [int] $LogIndex,
       [string] $Child
    )
 
-   if ($Logs.IsPresent) {
-      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex -Logs
-   }
-   else {
-      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
-   }
+   $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
  
    # Build the url to list the projects
    return $rootUrl + "/$Child" + '?api-version=' + $VSTeamVersionTable.Build
@@ -236,10 +230,9 @@ function Show-VSTeamBuild {
 function Get-VSTeamBuildLog {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param (
-      [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
-      [int[]] $Id,
-      
+      [int[]] $Id,      
       [int] $Index
    )
 
@@ -251,29 +244,10 @@ function Get-VSTeamBuildLog {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if ($id) {
-         foreach ($item in $id) {
-            if (-not $Index) {
-               # Build the url to return the logs of the build
-               $listurl = _buildURL -projectName $ProjectName -id $item -Logs
-
-               # Call the REST API to get the number of logs for the build
-               if (_useWindowsAuthenticationOnPremise) {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-               }
-               else {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-               }
-
-               $fullLogIndex = $($resp.count - 1)
-            }
-            else {
-               $fullLogIndex = $Index
-            }
-
-            # Now call REST API with the index for the fullLog
-            # Build the url to return the single build
-            $listurl = _buildURL -projectName $ProjectName -id $item -Logs -LogIndex $fullLogIndex
+      foreach ($item in $id) {
+         if (-not $Index) {
+            # Build the url to return the logs of the build
+            $listurl = _buildURL -projectName $ProjectName -id $item -Logs
 
             # Call the REST API to get the number of logs for the build
             if (_useWindowsAuthenticationOnPremise) {
@@ -283,26 +257,17 @@ function Get-VSTeamBuildLog {
                $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
             }
 
-            Write-Output $resp.value
+            $fullLogIndex = $($resp.count - 1)
          }
-      }
-      else {
-         # Build the url to list the builds
-         $listurl = _buildURL -projectName $ProjectName
+         else {
+            $fullLogIndex = $Index
+         }
 
-         $listurl += _appendQueryString -name "`$top" -value $top
-         $listurl += _appendQueryString -name "type" -value $type
-         $listurl += _appendQueryString -name "buildNumber" -value $buildNumber
-         $listurl += _appendQueryString -name "resultFilter" -value $resultFilter
-         $listurl += _appendQueryString -name "statusFilter" -value $statusFilter
-         $listurl += _appendQueryString -name "reasonFilter" -value $reasonFilter
-         $listurl += _appendQueryString -name "maxBuildsPerDefinition" -value $maxBuildsPerDefinition
+         # Now call REST API with the index for the fullLog
+         # Build the url to return the single build
+         $listurl = _buildURL -projectName $ProjectName -id $item -Logs -LogIndex $fullLogIndex
 
-         $listurl += _appendQueryString -name "queues" -value ($queues -join ',')
-         $listurl += _appendQueryString -name "properties" -value ($properties -join ',')
-         $listurl += _appendQueryString -name "definitions" -value ($definitions -join ',')
-
-         # Call the REST API
+         # Call the REST API to get the number of logs for the build
          if (_useWindowsAuthenticationOnPremise) {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
          }
@@ -310,13 +275,8 @@ function Get-VSTeamBuildLog {
             $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
          }
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypes -item $item
-         }
-
          Write-Output $resp.value
-      }
+      }     
    }
 }
 
@@ -661,8 +621,8 @@ Set-Alias Remove-BuildTag Remove-VSTeamBuildTag
 Set-Alias Update-Build Update-VSTeamBuild
 
 Export-ModuleMember `
- -Function Add-VSTeamBuild, Get-VSTeamBuild, Remove-VSTeamBuild, Get-VSTeamBuildLog, 
-  Add-VSTeamBuildTag, Get-VSTeamBuildTag, Remove-VSTeamBuildTag, 
-  Get-VSTeamBuildArtifact, Update-VSTeamBuild, Show-VSTeamBuild `
- -Alias Get-Build, Show-Build, Get-BuildLog, Get-BuildTag, Get-BuildArtifact, Add-Build, Add-BuildTag,
-  Remove-Build, Remove-BuildTag, Update-Build
+   -Function Add-VSTeamBuild, Get-VSTeamBuild, Remove-VSTeamBuild, Get-VSTeamBuildLog, 
+Add-VSTeamBuildTag, Get-VSTeamBuildTag, Remove-VSTeamBuildTag, 
+Get-VSTeamBuildArtifact, Update-VSTeamBuild, Show-VSTeamBuild `
+   -Alias Get-Build, Show-Build, Get-BuildLog, Get-BuildTag, Get-BuildArtifact, Add-Build, Add-BuildTag,
+Remove-Build, Remove-BuildTag, Update-Build

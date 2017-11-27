@@ -66,6 +66,15 @@ PS C:\> Add-VSTeamAccount -Profile demonstrations
 
 Will add the account from the profile provide.
 
+### -------------------------- EXAMPLE 4 --------------------------
+```
+PS C:\> Add-VSTeamAccount -Profile demonstrations -Drive demo
+PS C:\> Set-Location demo:
+PS demo:\> Get-ChildItem
+```
+
+Will add the account from the profile provided and mount a drive named demo that you can navigate like a file system.
+
 ## PARAMETERS
 
 ### -Account
@@ -183,19 +192,20 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-### -Version
-Specifies the version to use.
 
-Valid values: 'TFS2017', 'TFS2018', 'VSTS'
+#include "./params/version.md"
+
+### -Drive
+The name of the drive you want to mount to this account. To use the drive run Set-Location <driveName>:
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: True
-Position: 1
-Default value: TFS2017
+Required: false
+Position: Named
+Default value:
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -88,7 +88,7 @@ function Add-VSTeamProfile {
       [securestring] $SecurePersonalAccessToken,
       [string] $Name,
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
-      [string] $Version = 'TFS2017'
+      [string] $Version
    )
 
    DynamicParam {
@@ -174,7 +174,7 @@ function Add-VSTeamProfile {
          URL     = $Account
          Type    = $authType
          Pat     = $encodedPat
-         Version = $version
+         Version = (_getVSTeamAPIVersion -Instance $Account -Version $Version)
       }
 
       $contents = ConvertTo-Json $profiles

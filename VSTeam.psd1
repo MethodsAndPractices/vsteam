@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '1.0.6'
+   ModuleVersion     = '2.0.0'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -52,7 +52,7 @@
    # ProcessorArchitecture = ''
 
    # Modules that must be imported into the global environment prior to importing this module
-   # RequiredModules = @()
+   RequiredModules = @('SHiPS')
 
    # Assemblies that must be loaded prior to importing this module
    # RequiredAssemblies = @()
@@ -88,7 +88,8 @@
       'src\serviceendpoints.psm1',
       'src\teams.psm1',
       'src\profile.psm1',
-      'src\teammembers.psm1')
+      'src\teammembers.psm1',
+      'src\teamspsdrive.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',

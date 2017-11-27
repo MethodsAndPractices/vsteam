@@ -329,6 +329,18 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-VSTeamAccount</maml:name>
@@ -370,6 +382,18 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-VSTeamAccount</maml:name>
@@ -410,6 +434,18 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-VSTeamAccount</maml:name>
@@ -438,6 +474,18 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-VSTeamAccount</maml:name>
@@ -465,6 +513,18 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -493,6 +553,18 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -585,6 +657,18 @@
         </dev:type>
         <dev:defaultValue>TFS2017</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Drive</maml:name>
+        <maml:Description>
+          <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>TFS2017</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes />
     <command:returnValues />
@@ -620,6 +704,15 @@
         <dev:code>PS C:\&gt; Add-VSTeamAccount -Profile demonstrations</dev:code>
         <dev:remarks>
           <maml:para>Will add the account from the profile provide.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Add-VSTeamAccount -Profile demonstrations -Drive demo
+PS C:\&gt; Set-Location demo:
+PS demo:\&gt; Get-ChildItem</dev:code>
+        <dev:remarks>
+          <maml:para>Will add the account from the profile provided and mount a drive named demo that you can navigate like a file system.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
