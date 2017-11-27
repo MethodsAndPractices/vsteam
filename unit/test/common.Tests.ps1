@@ -11,7 +11,7 @@ Describe 'Common' {
       }
    }
 
-   Context '_openOnWindows'{
+   Context '_openOnWindows' {
       Mock Start-Process -Verifiable -ParameterFilter { $FilePath -eq 'http://test.visualstudio.com' }
       Mock Start-Process { throw "Start-Process called incorrectly: $Args" }
 
@@ -22,7 +22,7 @@ Describe 'Common' {
       }
    }
 
-   Context '_openOnMac'{
+   Context '_openOnMac' {
       Mock Start-Process -Verifiable -ParameterFilter { $FilePath -eq 'open' -and $ArgumentList -eq 'http://test.visualstudio.com' }
       Mock Start-Process { throw "Start-Process called incorrectly: $Args" }
 
@@ -33,7 +33,7 @@ Describe 'Common' {
       }
    }
 
-   Context '_openOnLinux'{
+   Context '_openOnLinux' {
       Mock Start-Process -Verifiable -ParameterFilter { $FilePath -eq 'xdg-open' -and $ArgumentList -eq 'http://test.visualstudio.com' }
       Mock Start-Process { throw "Start-Process called incorrectly: $Args" }
 
@@ -46,13 +46,21 @@ Describe 'Common' {
 
    Context '_isOnMac' {
       It 'using IsOSX should return false' {
-         Remove-Item variable:IsMacOS
+         
+         if (Test-Path variable:IsMacOS) {
+            Remove-Item variable:IsMacOS
+         }         
+         
          $global:IsOSX = $false
          _isOnMac | Should Be $false
       }
 
       It 'using IsMacOS should return false' {
-         Remove-Item variable:IsOSX
+         
+         if (Test-Path variable:IsOSX) {
+            Remove-Item variable:IsOSX
+         }
+
          $global:IsMacOS = $false
          _isOnMac | Should Be $false
       }

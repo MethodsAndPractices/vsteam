@@ -64,7 +64,7 @@ InModuleScope Projects {
 
       Context 'Build' {
          
-         $target = [Build]::new('TestBuildDef', 'TestBuildNumber', 'TestBuildStatus', 'TestBuildResult', 'StartTime', 'TestUser')
+         $target = [Build]::new('TestBuildDef', 'TestBuildNumber', 'TestBuildStatus', 'TestBuildResult', 'StartTime', 'TestUser', 'TestUser', 'TestProject', 1)
          
          It 'Should create Build' {
             $target | Should Not Be $null
