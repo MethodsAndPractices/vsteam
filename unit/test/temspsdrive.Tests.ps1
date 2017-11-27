@@ -62,6 +62,24 @@ InModuleScope Projects {
          }
       }
 
+      Context 'Build' {
+         
+         $target = [Build]::new('TestBuildDef', 'TestBuildNumber', 'TestBuildStatus', 'TestBuildResult', 'StartTime', 'TestUser')
+         
+         It 'Should create Build' {
+            $target | Should Not Be $null
+         }
+      }
+
+      Context 'Releases' {
+         
+         $target = [Releases]::new('TestReleasesName', 'TestProject')
+         
+         It 'Should create Releases' {
+            $target | Should Not Be $null
+         }
+      }
+
       Context 'Release' {
          
          $target = [Release]::new('TestReleaseId', 'TestReleaseName', 'TestReleaseStatus', 'TestUser', '1/1/2017', @())
