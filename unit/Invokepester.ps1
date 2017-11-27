@@ -51,6 +51,6 @@ function Invoke-PesterJob {
 
    $params = $PSBoundParameters
 
-   Start-Job -ScriptBlock { Set-Location $using:pwd; Invoke-Pester @using:params *> output.txt } |
+   Start-Job -ScriptBlock { Set-Location $using:pwd; Invoke-Pester @using:params } |
       Receive-Job -Wait -AutoRemoveJob
 }

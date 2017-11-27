@@ -8,23 +8,24 @@ Import-Module SHiPS
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 
-InModuleScope Projects {
+# https://info.sapien.com/index.php/scripting/scripting-classes/import-powershell-classes-from-modules
+$scriptBody = "using module $PSScriptRoot\..\..\src\teamspsdrive.psm1"
+$script = [ScriptBlock]::Create($scriptBody)
+. $script
+
+InModuleScope teamspsdrive {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe "TeamsPSDrive" {
-
-      # Load the mocks to create the project name dynamic parameter
-      . "$PSScriptRoot\mockProjectDynamicParamMandatoryFalse.ps1"
-
-      Mock Invoke-RestMethod { return @{ value = @{} } }
-
-      # https://info.sapien.com/index.php/scripting/scripting-classes/import-powershell-classes-from-modules
-      $scriptBody = "using module $PSScriptRoot\..\..\src\teamspsdrive.psm1"
-      $script = [ScriptBlock]::Create($scriptBody)
-      . $script
+      Mock Get-VSTeamProject { return [PSCustomObject]@{ 
+            name        = 'Project' 
+            id          = 1
+            description = ''
+         } 
+      }
 
       Context 'VSAccount' {
 
