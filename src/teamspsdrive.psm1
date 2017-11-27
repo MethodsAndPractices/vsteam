@@ -88,7 +88,15 @@ class Builds : SHiPSDirectory {
         $obj = @()
         $Builds = Get-VSTeamBuild -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
         foreach ($Build in $Builds) {                 
-            $obj += [Build]::new($Build.definition.fullname, $Build.buildnumber, $Build.status, $Build.result, $Build.starttime, $Build.requestedByUser)
+            $obj += [Build]::new($Build.definition.fullname, 
+                                 $Build.buildnumber, 
+                                 $Build.status, 
+                                 $Build.result, 
+                                 $Build.starttime, 
+                                 $Build.requestedByUser,
+                                 $Build.requestedForUser, 
+                                 $Build.projectname,
+                                 $Build.id)
         }
         return $obj;
     }
@@ -96,19 +104,33 @@ class Builds : SHiPSDirectory {
 
 class Build : SHiPSLeaf {
     [string]$BuildDefinition = $null
-    [string]$BuildNumber = $null
-    [string]$BuildStatus = $null
-    [string]$BuildResult = $null
-    [string]$BuildStartTime = $null
-    [string]$BuildRequestedByUser = $null
+    [string]$buildNumber = $null
+    [string]$status = $null
+    [string]$result = $null
+    [string]$starttime = $null
+    [string]$requestedByUser = $null
+    [string]$requestedForUser = $null
+    [string]$projectname = $null
+    [string]$id = $null
 
-    Build ([string]$BuildDefinition, [string]$BuildNumber, [string]$BuildStatus, [string]$BuildResult, [string]$BuildStartTime, [string]$BuildRequestedByUser) : base($BuildNumber) {
+    Build ([string]$BuildDefinition, 
+          [string]$buildNumber, 
+          [string]$status, 
+          [string]$result, 
+          [string]$starttime, 
+          [string]$requestedByUser,
+          [string]$requestedForUser,
+          [string]$projectname,
+          [int]$id) : base($buildNumber) {
         $this.BuildDefinition = $BuildDefinition
-        $this.BuildNumber = $BuildNumber
-        $this.BuildStatus = $BuildStatus
-        $this.BuildResult = $BuildResult
-        $this.BuildStartTime = $BuildStartTime
-        $this.BuildRequestedByUser = $BuildRequestedByUser
+        $this.buildNumber = $buildNumber
+        $this.status = $status
+        $this.result = $result
+        $this.starttime = $starttime
+        $this.requestedByUser = $requestedByUser
+        $this.requestedForUser = $requestedForUser
+        $this.projectname = $projectname
+        $this.id = $id
     }
 }
 
