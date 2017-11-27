@@ -1,24 +1,17 @@
 Set-StrictMode -Version Latest
 
+Get-Module Team | Remove-Module -Force
 Get-Module VSTeam | Remove-Module -Force
 Get-Module Projects | Remove-Module -Force
+Get-Module teamspsdrive | Remove-Module -Force
 
 Import-Module SHiPS
 
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
-
-# https://info.sapien.com/index.php/scripting/scripting-classes/import-powershell-classes-from-modules
-$scriptBody = "using module $PSScriptRoot\..\..\src\teamspsdrive.psm1"
-$script = [ScriptBlock]::Create($scriptBody)
-. $script
+Import-Module $PSScriptRoot\..\..\src\teamspsdrive.psm1 -Force
 
 InModuleScope teamspsdrive {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Add-VSTeamAccount function.
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
-
    Describe "TeamsPSDrive" {
       Mock Get-VSTeamProject { return [PSCustomObject]@{ 
             name        = 'Project' 
@@ -36,12 +29,7 @@ InModuleScope teamspsdrive {
          }
 
          It 'Should return projects' {
-            #Set-PSDebug -Trace 1
             $target.GetChildItem() | Should Not Be $null
-         }
-
-         AfterAll {
-            Set-PSDebug -Off
          }
       }
 
@@ -89,7 +77,6 @@ InModuleScope teamspsdrive {
             $target | Should Not Be $null
          }
       }
-
 
       Context 'Teams' {
          
