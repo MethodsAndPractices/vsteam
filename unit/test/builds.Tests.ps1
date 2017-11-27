@@ -43,7 +43,7 @@ InModuleScope builds {
       }
    }
 
-   # Just a shell for the nest dynamic parameters
+   # Just a shell for the nested dynamic parameters
    # Used as Mock for calls below. We can't use normal
    # Mock because the module where it lives is not loaded.
    function Get-VSTeamBuildDefinition {
