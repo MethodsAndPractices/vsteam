@@ -435,13 +435,13 @@ InModuleScope builds {
 
       Context 'Remove-VSTeamBuild on TFS local Auth handles exception' {
 
-         #    # Arrange
+         # Arrange
          Mock _handleException -Verifiable
          Mock Invoke-RestMethod { throw 'Testing error handling.' }
 
          [string[]] $inputTags = "Test1", "Test2", "Test3"
 
-         #    # Act
+         # Act
          Remove-VSTeamBuild -ProjectName project -id 2 -Force
 
          It 'should add tags to Build' {
