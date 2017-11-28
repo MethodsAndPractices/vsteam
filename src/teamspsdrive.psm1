@@ -89,14 +89,14 @@ class Builds : SHiPSDirectory {
         $Builds = Get-VSTeamBuild -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
         foreach ($Build in $Builds) {                 
             $obj += [Build]::new($Build.definition.fullname, 
-                                 $Build.buildnumber, 
-                                 $Build.status, 
-                                 $Build.result, 
-                                 $Build.starttime, 
-                                 $Build.requestedByUser,
-                                 $Build.requestedForUser, 
-                                 $Build.projectname,
-                                 $Build.id)
+                $Build.buildnumber, 
+                $Build.status, 
+                $Build.result, 
+                $Build.starttime, 
+                $Build.requestedByUser,
+                $Build.requestedForUser, 
+                $Build.projectname,
+                $Build.id)
         }
         return $obj;
     }
@@ -114,14 +114,14 @@ class Build : SHiPSLeaf {
     [string]$id = $null
 
     Build ([string]$BuildDefinition, 
-          [string]$buildNumber, 
-          [string]$status, 
-          [string]$result, 
-          [string]$starttime, 
-          [string]$requestedByUser,
-          [string]$requestedForUser,
-          [string]$projectname,
-          [int]$id) : base($buildNumber) {
+        [string]$buildNumber, 
+        [string]$status, 
+        [string]$result, 
+        [string]$starttime, 
+        [string]$requestedByUser,
+        [string]$requestedForUser,
+        [string]$projectname,
+        [int]$id) : base($buildNumber) {
         $this.BuildDefinition = $BuildDefinition
         $this.buildNumber = $buildNumber
         $this.status = $status
@@ -146,12 +146,24 @@ class Releases : SHiPSDirectory {
 
     [object[]] GetChildItem() {
         $obj = @()
-        $Releases = Get-VSTeamRelease -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+        $Releases = Get-VSTeamRelease -ProjectName $this.ProjectName -Expand environments -ErrorAction SilentlyContinue
         foreach ($Release in $Releases) {
             #$CreatedOn = [DateTime]::ParseExact($Release.createdOn, "yyyy-MM-ddTHH:mm:ss.ffK", $null).ToUniversalTime()  
             #Create array with status info from Environments.
-            $EnvironmentStatus = @($Release.Environments.status.environments.status -join ',')          
-            $obj += [Release]::new($Release.id, $Release.name, $Release.status, $Release.createdByUser, $Release.createdOn, $EnvironmentStatus)
+            #$EnvironmentStatus = @($Release.Environments.status.environments.status -join ',')
+            <#
+            $Environments = @{
+                'id'     = $Release.Environments.id
+                'name'   = $Release.Environments.name
+                'status' = $Release.Environments.status
+            } 
+            #>    
+            $obj += [Release]::new($Release.id, 
+                $Release.name, 
+                $Release.status, 
+                $Release.createdByUser, 
+                $Release.createdOn, 
+                $Release.environments)
         }
         return $obj;
     }
@@ -163,9 +175,14 @@ class Release : SHiPSLeaf {
     [string]$ReleaseStatus = $null
     [string]$CreatedByUser = $null
     [string]$CreatedOn = $null
-    [string[]]$Environments = $null
+    [object]$Environments = $null
 
-    Release ([string]$ReleaseId, [string]$ReleaseName, [string]$ReleaseStatus, [string]$CreatedByUser, [string]$CreatedOn, [array]$Environments) : base($ReleaseName) {
+    Release ([string]$ReleaseId, 
+        [string]$ReleaseName, 
+        [string]$ReleaseStatus, 
+        [string]$CreatedByUser, 
+        [string]$CreatedOn, 
+        [object]$Environments) : base($ReleaseName) {
         $this.ReleaseId = $ReleaseId
         $this.ReleaseName = $ReleaseName
         $this.ReleaseStatus = $ReleaseStatus
