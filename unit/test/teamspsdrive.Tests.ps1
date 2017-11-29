@@ -65,7 +65,7 @@ InModuleScope teamspsdrive {
             buildnumber      = ''
             status           = ''
             result           = ''
-            starttime        = ''
+            starttime        = Get-Date
             requestedByUser  = ''
             requestedForUser = ''
             projectname      = ''
@@ -88,7 +88,7 @@ InModuleScope teamspsdrive {
 
       Context 'Build' {
          
-         $target = [Build]::new('TestBuildDef', 'TestBuildNumber', 'TestBuildStatus', 'TestBuildResult', 'StartTime', 'TestUser', 'TestUser', 'TestProject', 1)
+         $target = [Build]::new('TestBuildDef', 'TestBuildNumber', 'TestBuildStatus', 'TestBuildResult', $(Get-Date), 'TestUser', 'TestUser', 'TestProject', 1)
          
          It 'Should create Build' {
             $target | Should Not Be $null
@@ -106,7 +106,7 @@ InModuleScope teamspsdrive {
             name          = ''
             status        = ''
             createdByUser = ''
-            createdOn     = ''
+            createdOn     = Get-Date
             id            = 1
          } 
       }
@@ -126,7 +126,7 @@ InModuleScope teamspsdrive {
 
       Context 'Release' {
          
-         $target = [Release]::new('TestReleaseId', 'TestReleaseName', 'TestReleaseStatus', 'TestUser', '1/1/2017', @())
+         $target = [Release]::new(1, 'TestReleaseName', 'TestReleaseStatus', $(Get-Date), @(), 'TestUser')
          
          It 'Should create Release' {
             $target | Should Not Be $null

@@ -73,7 +73,7 @@ $contents = @"
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
-         Mock New-PSDrive -Verifiable
+         Mock Write-Host -Verifiable
          Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
 
          It 'should set env at process level' {
