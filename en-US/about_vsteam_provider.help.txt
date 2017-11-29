@@ -1,0 +1,45 @@
+TOPIC
+    VSTeam Provider
+
+SHORT DESCRIPTION
+    The VSAccount SHiPS provider allows you to navigate your TFS/VSTS
+    as a file system using the following tree:
+
+        Account 
+          - Project1
+          - Project2
+                - Builds
+                    - Build1
+                    - Build2
+                - Releases
+                    - Release1
+                    - Release2
+                - Teams
+                    - Team1
+                    - Team2
+
+LONG DESCRIPTION
+   You use the New-PSDrive cmdlet to mount a drive to your account. 
+
+   You can also use the -Drive parameter of Add-VSTeamAccount to have
+   the required command written to the console so you can copy and 
+   paste the command.
+
+EXAMPLES
+    Add-VSTeamAccount -Account '[accountname]' -PersonalAccessToken '[VSTS Tokenvalue]'
+    New-PSDrive -Name VSAccount -PSProvider SHiPS -Root 'VSTeam#VSAccount'
+    Set-Location VSAccount:
+    Get-ChildItem
+
+
+    Add-VSTeamAccount -Profile '[profileName]' -Drive '[driveName]'
+   
+    To map a drive run the following command:
+    New-PSDrive -Name driveName -PSProvider SHiPS -Root 'VSTeam#VSAccount'
+
+KEYWORDS
+    Team Services, VSTS, TFS, VSO, TFS, DevOps
+
+SEE ALSO
+    Add-VSTeamAccount
+    Set-VSTeamAPIVersion
