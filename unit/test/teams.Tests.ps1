@@ -350,7 +350,7 @@ InModuleScope teams {
       }
 
       # Must be last because it sets $VSTeamVersionTable.Account to $null
-      Context '_buildRootURL handles exception' {
+      Context '_buildURL handles exception' {
          
          # Arrange
          $VSTeamVersionTable.Account = $null

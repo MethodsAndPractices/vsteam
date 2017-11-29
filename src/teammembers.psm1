@@ -72,12 +72,7 @@ function Get-VSTeamMember {
         $listurl += _appendQueryString -name "`$skip" -value $skip
 
         # Call the REST API
-        if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-        }
-        else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-        }
+        $resp = _get -listurl $listurl
 
         # Apply a Type Name so we can use custom format view and custom type extensions
         foreach ($item in $resp.value) {
