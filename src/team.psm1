@@ -335,7 +335,7 @@ function Add-VSTeamAccount {
 
       if($Drive) {
          # Assign to null so nothing is writen to output.
-         $null = New-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSAccount' -Scope Global
+         Write-Host "`nTo map a drive run the following command:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSAccount'`n" -ForegroundColor Black -BackgroundColor Yellow
       }
    }
 }

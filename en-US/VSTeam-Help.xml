@@ -307,13 +307,14 @@
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PAT</maml:name>
@@ -332,14 +333,14 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Drive</maml:name>
           <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -362,13 +363,14 @@
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>PersonalAccessToken</maml:name>
@@ -385,14 +387,14 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Drive</maml:name>
           <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -415,13 +417,14 @@
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>UseWindowsAuthentication</maml:name>
@@ -437,14 +440,14 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Drive</maml:name>
           <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -454,13 +457,14 @@
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
@@ -477,14 +481,14 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Drive</maml:name>
           <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -494,13 +498,14 @@
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
@@ -517,14 +522,14 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Drive</maml:name>
           <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -534,13 +539,14 @@
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Profile</maml:name>
@@ -557,14 +563,14 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Drive</maml:name>
           <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -649,25 +655,26 @@
         <maml:Description>
           <maml:para>Specifies the version to use.</maml:para>
           <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>TFS2017</dev:defaultValue>
+        <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Drive</maml:name>
         <maml:Description>
-          <maml:para>The name of the drive you want to mount to this account. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
+          <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location &lt;driveName&gt;:</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>TFS2017</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -1514,13 +1521,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>PAT</maml:name>
@@ -1557,13 +1565,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>PersonalAccessToken</maml:name>
@@ -1598,13 +1607,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>UseWindowsAuthentication</maml:name>
@@ -1625,13 +1635,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use.</maml:para>
             <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>TFS2017</dev:defaultValue>
+          <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Name</maml:name>
@@ -1716,13 +1727,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies the version to use.</maml:para>
           <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>TFS2017</dev:defaultValue>
+        <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
