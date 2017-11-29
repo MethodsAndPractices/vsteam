@@ -89,14 +89,14 @@ class Builds : SHiPSDirectory {
         $Builds = Get-VSTeamBuild -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
         foreach ($Build in $Builds) {                 
             $obj += [Build]::new($Build.definition.fullname, 
-                                 $Build.buildnumber, 
-                                 $Build.status, 
-                                 $Build.result, 
-                                 $Build.starttime, 
-                                 $Build.requestedByUser,
-                                 $Build.requestedForUser, 
-                                 $Build.projectname,
-                                 $Build.id)
+                $Build.buildnumber, 
+                $Build.status, 
+                $Build.result, 
+                $Build.starttime, 
+                $Build.requestedByUser,
+                $Build.requestedForUser, 
+                $Build.projectname,
+                $Build.id)
         }
         return $obj;
     }
@@ -107,21 +107,21 @@ class Build : SHiPSLeaf {
     [string]$buildNumber = $null
     [string]$status = $null
     [string]$result = $null
-    [string]$starttime = $null
+    [datetime]$starttime
     [string]$requestedByUser = $null
     [string]$requestedForUser = $null
     [string]$projectname = $null
-    [string]$id = $null
+    [int]$id = $null
 
     Build ([string]$BuildDefinition, 
-          [string]$buildNumber, 
-          [string]$status, 
-          [string]$result, 
-          [string]$starttime, 
-          [string]$requestedByUser,
-          [string]$requestedForUser,
-          [string]$projectname,
-          [int]$id) : base($buildNumber) {
+        [string]$buildNumber, 
+        [string]$status, 
+        [string]$result, 
+        [datetime]$starttime, 
+        [string]$requestedByUser,
+        [string]$requestedForUser,
+        [string]$projectname,
+        [int]$id) : base($buildNumber) {
         $this.BuildDefinition = $BuildDefinition
         $this.buildNumber = $buildNumber
         $this.status = $status
@@ -146,32 +146,39 @@ class Releases : SHiPSDirectory {
 
     [object[]] GetChildItem() {
         $obj = @()
-        $Releases = Get-VSTeamRelease -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+        $Releases = Get-VSTeamRelease -ProjectName $this.ProjectName -Expand environments -ErrorAction SilentlyContinue
         foreach ($Release in $Releases) {
-            #$CreatedOn = [DateTime]::ParseExact($Release.createdOn, "yyyy-MM-ddTHH:mm:ss.ffK", $null).ToUniversalTime()  
-            #Create array with status info from Environments.
-            $EnvironmentStatus = @($Release.Environments.status.environments.status -join ',')          
-            $obj += [Release]::new($Release.id, $Release.name, $Release.status, $Release.createdByUser, $Release.createdOn, $EnvironmentStatus)
+            $obj += [Release]::new($Release.id, 
+                $Release.name, 
+                $Release.status,
+                $Release.createdOn, 
+                $Release.environments,
+                $Release.createdByUser)
         }
         return $obj;
     }
 }
 
 class Release : SHiPSLeaf {
-    [string]$ReleaseId = $null
-    [string]$ReleaseName = $null
-    [string]$ReleaseStatus = $null
-    [string]$CreatedByUser = $null
-    [string]$CreatedOn = $null
-    [string[]]$Environments = $null
+    [string]$id = $null
+    [string]$releasename = $null
+    [string]$status = $null
+    [datetime]$createdOn #DateTime is not nullable
+    [object]$environments = $null
+    [string]$createdByUser = $null
 
-    Release ([string]$ReleaseId, [string]$ReleaseName, [string]$ReleaseStatus, [string]$CreatedByUser, [string]$CreatedOn, [array]$Environments) : base($ReleaseName) {
-        $this.ReleaseId = $ReleaseId
-        $this.ReleaseName = $ReleaseName
-        $this.ReleaseStatus = $ReleaseStatus
-        $this.CreatedByUser = $CreatedByUser
-        $this.CreatedOn = $CreatedOn
-        $this.Environments = $Environments
+    Release ([int]$id, 
+        [string]$releasename, 
+        [string]$status,
+        [datetime]$createdOn,
+        [object]$environments, 
+        [string]$createdByUser) : base($releasename) {
+        $this.id = $id
+        $this.releasename = $releasename
+        $this.status = $status
+        $this.createdOn = $createdOn
+        $this.environments = $environments
+        $this.createdByUser = $createdByUser       
     }
 }
 
