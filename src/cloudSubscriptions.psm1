@@ -5,9 +5,8 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
 function _buildURL {
-   if(-not $VSTeamVersionTable.Account) {
-      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
-   }
+   
+   _hasAccount
 
    $resource = "/distributedtask/serviceendpointproxy/azurermsubscriptions"
    $instance = $VSTeamVersionTable.Account

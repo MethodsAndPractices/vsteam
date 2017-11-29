@@ -21,9 +21,7 @@ function _buildURL {
       [switch] $release
    )
 
-   if (-not $VSTeamVersionTable.Account) {
-      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
-   }
+   _hasAccount
    
    if ($release.IsPresent) {
       $instance = _getReleaseBase
@@ -105,9 +103,7 @@ function Show-VSTeam {
    param ()
 
    process {
-      if (-not $VSTeamVersionTable.Account) {
-         throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
-      }
+      _hasAccount
       
       _showInBrowser "$($VSTeamVersionTable.Account)"
    }

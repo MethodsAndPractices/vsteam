@@ -49,9 +49,7 @@ function _buildRootURL {
       [int] $LogIndex
    )
   
-   if (-not $VSTeamVersionTable.Account) {
-      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
-   }
+   _hasAccount
   
    $resource = "/build/builds"
    $instance = $VSTeamVersionTable.Account

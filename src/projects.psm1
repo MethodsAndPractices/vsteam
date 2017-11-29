@@ -9,9 +9,7 @@ function _buildURL {
       [string] $ProjectName
    )
 
-   if (-not $VSTeamVersionTable.Account) {
-      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
-   }
+   _hasAccount
 
    $version = $VSTeamVersionTable.Core
    $resource = "/projects/$ProjectName"
@@ -151,9 +149,7 @@ function Show-VSTeamProject {
    }
 
    process {
-      if (-not $VSTeamVersionTable.Account) {
-         throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
-      }
+      _hasAccount
 
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]

@@ -1,6 +1,12 @@
 Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
+function _hasAccount {
+   if (-not $VSTeamVersionTable.Account) {
+      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
+   }
+}
+
 function _handleException {
    param(
       [Parameter(Position = 1)]
@@ -129,9 +135,7 @@ function _buildReleaseURL {
       [int] $id
    )
 
-   if (-not $VSTeamVersionTable.Account) {
-      throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
-   }
+   _hasAccount
 
    $resource = "release/$resource"
    $instance = _getReleaseBase
