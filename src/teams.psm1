@@ -78,7 +78,7 @@ function Get-VSTeam {
             $listurl = _buildURL -projectName $ProjectName -Id $item
 
             # Call the REST API
-            $resp = _get -listurl $listurl
+            $resp = _get -url $listurl
             
             _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -91,7 +91,7 @@ function Get-VSTeam {
             $listurl = _buildURL -projectName $ProjectName -Name $item
 
             # Call the REST API
-            $resp = _get -listurl $listurl
+            $resp = _get -url $listurl
 
             _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -106,7 +106,7 @@ function Get-VSTeam {
          $listurl += _appendQueryString -name "`$skip" -value $skip
 
          # Call the REST API
-         $resp = _get -listurl $listurl
+         $resp = _get -url $listurl
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -138,7 +138,7 @@ function Add-VSTeam {
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
       # Call the REST API
-      $resp = _post -listurl $listurl -Body $body
+      $resp = _post -url $listurl -Body $body
 
       _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -181,7 +181,7 @@ function Update-VSTeam {
          }
 
          # Call the REST API
-         $resp = _patch -listurl $listurl -Body $body
+         $resp = _patch -url $listurl -Body $body
          
          _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -211,7 +211,7 @@ function Remove-VSTeam {
 
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API
-         $resp = _delete -listurl $listurl
+         $resp = _delete -url $listurl
 
          Write-Output "Deleted team $Id"
       }

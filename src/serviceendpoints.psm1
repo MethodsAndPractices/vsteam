@@ -54,23 +54,6 @@ function _applyTypes {
    }
 }
 
-function _checkStatus {
-   param(
-      [Parameter(Mandatory = $true)]
-      [string] $uri
-   )
-
-   # Call the REST API
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
-   return $resp
-}
-
 function _trackProgress {
    param(
       [Parameter(Mandatory = $true)] [string] $projectName,
@@ -88,7 +71,7 @@ function _trackProgress {
 
    # Track status
    while (-not $isReady) {
-      $status = _checkStatus $url
+      $status = _get $url
       $isReady = $status.isReady;
 
       if (-not $isReady) {
@@ -132,12 +115,7 @@ function Remove-VSTeamServiceEndpoint {
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Service Endpoint")) {
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -UseDefaultCredentials
-            }
-            else {
-               Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            _delete -url $url
 
             Write-Output "Deleted service endpoint $item"
          }
@@ -198,13 +176,7 @@ function Add-VSTeamSonarQubeEndpoint {
       try {
     
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-      
+         $resp = _post -url $url -body $body 
       }
       catch [System.Net.WebException] {
          if ($_.Exception.status -eq "ProtocolError") {
@@ -284,12 +256,7 @@ function Add-VSTeamAzureRMServiceEndpoint {
       $body = $obj | ConvertTo-Json
 
       # Call the REST API
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -UseDefaultCredentials
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Body $body -ContentType "application/json" -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
+      $resp = _post -url $url -body $body
 
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
@@ -316,12 +283,7 @@ function Get-VSTeamServiceEndpoint {
          $url = _buildURL -projectName $projectName -id $id
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _get -url $url
 
          _applyTypes -item $resp
 
@@ -331,14 +293,10 @@ function Get-VSTeamServiceEndpoint {
          # Build the url
          $url = _buildURL -projectName $projectName
 
-         # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
 
+         # Call the REST API
+         $resp = _get -url $url
+         
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
             _applyTypes -item $item

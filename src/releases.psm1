@@ -75,12 +75,8 @@ function Get-VSTeamRelease {
 
             # Call the REST API
             Write-Debug 'Get-VSTeamRelease Call the REST API'
-            if (_useWindowsAuthenticationOnPremise) {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            } else {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
-
+            $resp = _get -url $listurl
+            
             # Apply a Type Name so we can use custom format view and custom type extensions
             _applyTypes -item $resp
 
@@ -100,11 +96,7 @@ function Get-VSTeamRelease {
          $listurl += _appendQueryString -name "continuationToken" -value $continuationToken
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _get -url $listurl
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach($item in $resp.value) {
@@ -236,11 +228,7 @@ function Add-VSTeamRelease {
 
          try {
             Write-Debug 'Add-VSTeamRelease Call the REST API'
-            if (_useWindowsAuthenticationOnPremise) {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -Body $body
-            } else {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
-            }
+            $resp = _post -url $url -body $body
 
             _applyTypes $resp
 
@@ -281,11 +269,7 @@ function Remove-VSTeamRelease {
 
             try {
                # Call the REST API
-               if (_useWindowsAuthenticationOnPremise) {
-                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-               } else {
-                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-               }
+               $resp = _delete -url $listurl
 
                Write-Output "Deleted release $item"
             }
@@ -330,11 +314,7 @@ function Set-VSTeamReleaseStatus {
 
             try {
                # Call the REST API
-               if (_useWindowsAuthenticationOnPremise) {
-                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json" -UseDefaultCredentials -Body $body
-               } else {
-                 $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
-               }
+               $resp = _patch -url $listurl -body $body
 
                Write-Output "Release $item status changed to $status"
             }
@@ -430,11 +410,7 @@ function Add-VSTeamReleaseEnvironment {
 
          try {
             Write-Debug 'Add-VSTeamReleaseEnvironment Call the REST API'
-            if (_useWindowsAuthenticationOnPremise) {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $url -ContentType "application/json" -UseDefaultCredentials -Body $body
-            } else {
-              $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
-            }
+            $resp = _patch -url $url -body $body
 
             # _applyTypes $resp
 

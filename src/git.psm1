@@ -59,13 +59,8 @@ function Remove-VSTeamGitRepository {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Repository")) {
             try {
                # Call the REST API
-               if (_useWindowsAuthenticationOnPremise) {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-               }
-               else {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-               }
-
+               $resp = _delete -url $listurl
+               
                Write-Output "Deleted repository $item"
             }
             catch [System.Net.WebException] {
@@ -107,12 +102,7 @@ function Add-VSTeamGitRepository {
 
       try {
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}		   
-         }
+         $resp = _post -url $listurl -body $body
 
          Write-Output $resp
       }
@@ -155,12 +145,7 @@ function Get-VSTeamGitRepository {
             $listurl = _buildURL -projectName $ProjectName -id $item
 
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            $resp = _get -url $listurl
 
             _applyTypes -item $resp
 
@@ -173,12 +158,7 @@ function Get-VSTeamGitRepository {
             $listurl = _buildURL -projectName $ProjectName -Name $item
 
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            $resp = _get -url $listurl
 
             _applyTypes -item $resp
 
@@ -190,12 +170,7 @@ function Get-VSTeamGitRepository {
          $listurl = _buildURL -projectName $ProjectName
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _get -url $listurl
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

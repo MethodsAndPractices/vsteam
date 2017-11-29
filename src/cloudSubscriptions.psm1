@@ -32,11 +32,7 @@ function Get-VSTeamCloudSubscription {
    $url = _buildURL
 
    # Call the REST API
-   if (_useWindowsAuthenticationOnPremise) {
-     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-    } else {
-     $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-	}
+   $resp = _get -url $url
 
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach($item in $resp.value) {

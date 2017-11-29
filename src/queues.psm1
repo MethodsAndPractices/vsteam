@@ -60,12 +60,9 @@ function Get-VSTeamQueue {
       if($id) {
          # Build the url
          $url = _buildURL -projectName $projectName -id $id
-         if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         
+         $resp = _get -url $url
+         
          _applyTypes -item $resp
 
          # Call the REST API
@@ -83,12 +80,8 @@ function Get-VSTeamQueue {
          }
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         } else {
-           $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         $resp = _get -url $url
+         
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach($item in $resp.value) {
             _applyTypes -item $item

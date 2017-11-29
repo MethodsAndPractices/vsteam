@@ -59,13 +59,8 @@ function Get-VSTeamPool {
          $url = _buildURL -id $id
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         $resp = _get -url $url
+         
          _applyTypes -item $resp
 
          Write-Output $resp
@@ -74,12 +69,7 @@ function Get-VSTeamPool {
          # Build the url
          $url = _buildURL
 
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _get -url $url
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

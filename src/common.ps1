@@ -196,13 +196,8 @@ function _getProjects {
 
    # Call the REST API
    try {
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
-
+      $resp = _get -url $listurl
+      
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
       }
@@ -322,14 +317,30 @@ function _buildDynamicParam {
 
 function _get {
    param(
-      [string] $listurl
+      [string] $url
    )
 
    if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $url -UseDefaultCredentials
    }
    else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   return $resp
+}
+
+function _postFile {
+   param(
+      [string] $url,
+      [string] $inFile
+   )
+
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
    }
 
    return $resp
@@ -337,15 +348,15 @@ function _get {
 
 function _post {
    param(
-      [string] $listurl,
+      [string] $url,
       [string] $body
    )
 
    if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $url -UseDefaultCredentials
    }
    else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
    }
 
    return $resp
@@ -353,15 +364,15 @@ function _post {
 
 function _patch {
    param(
-      [string] $listurl,
+      [string] $url,
       [string] $body
    )
 
    if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $url -UseDefaultCredentials
    }
    else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
    }
 
    return $resp
@@ -369,14 +380,44 @@ function _patch {
 
 function _delete {
    param(
-      [string] $listurl
+      [string] $url
    )
 
    if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -UseDefaultCredentials
    }
    else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   return $resp
+}
+
+function _put {
+   param(
+      [string] $url
+   )
+
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $url -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   return $resp
+}
+
+function _options {
+   param(
+      [string] $url
+   )
+
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
    }
 
    return $resp

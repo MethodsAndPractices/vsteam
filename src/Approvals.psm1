@@ -42,13 +42,8 @@ function Get-VSTeamApproval {
 
       try {
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-        
+         $resp = _get -url $listurl
+         
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
             _applyTypes -item $item
@@ -123,12 +118,7 @@ function Set-VSTeamApproval {
 
             try {
                # Call the REST API
-               if (_useWindowsAuthenticationOnPremise) {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json"  -Body $body -UseDefaultCredentials
-               }
-               else {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -Uri $listurl -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -Body $body
-               }
+               _patch -url $listurl -body $body
                
                Write-Output "Approval $item status changed to $status"
             }

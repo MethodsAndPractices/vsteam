@@ -38,23 +38,6 @@ function _applyTypes {
    }
 }
 
-function _checkStatus {
-   param(
-      [Parameter(Mandatory = $true)]
-      [string] $Uri
-   )
-
-   # Call the REST API
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $uri -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
-   return $resp
-}
-
 function _trackProgress {
    param(
       [Parameter(Mandatory = $true)] $Resp,
@@ -69,7 +52,7 @@ function _trackProgress {
 
    # Track status
    while ($status -ne 'failed' -and $status -ne 'succeeded') {
-      $status = (_checkStatus $resp.url).status
+      $status = (_get $resp.url).status
 
       # oscillate back a forth to show progress
       $i += $x
@@ -123,13 +106,8 @@ function Get-VSTeamProject {
          }
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         $resp = _get -url $listurl
+         
          # Apply a Type Name so we can use custom format view and custom type extensions
          _applyTypes -item $resp
 
@@ -141,12 +119,7 @@ function Get-VSTeamProject {
 
          try {
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            $resp = _get -url $listurl
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
@@ -251,13 +224,8 @@ function Update-VSTeamProject {
          Write-Verbose $body
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         $resp = _patch -url $listurl -body $body
+         
          _trackProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Return the project now that it has been updated
@@ -314,13 +282,8 @@ function Add-VSTeamProject {
 
    try {
       # Call the REST API
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
-
+      $resp = _post -url $listurl -body $body
+      
       _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
       return Get-VSTeamProject -ProjectName $ProjectName
@@ -354,13 +317,8 @@ function Remove-VSTeamProject {
 
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         $resp = _delete -url $listurl
+         
          _trackProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
          Write-Output "Deleted $ProjectName"

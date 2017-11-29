@@ -72,7 +72,7 @@ function Get-VSTeamMember {
         $listurl += _appendQueryString -name "`$skip" -value $skip
 
         # Call the REST API
-        $resp = _get -listurl $listurl
+        $resp = _get -url $listurl
 
         # Apply a Type Name so we can use custom format view and custom type extensions
         foreach ($item in $resp.value) {

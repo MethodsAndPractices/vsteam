@@ -94,12 +94,7 @@ function Get-VSTeamBuildDefinition {
             }
 
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            $resp = _get -url $listurl
             
             _applyTypes -item $resp
 
@@ -119,12 +114,7 @@ function Get-VSTeamBuildDefinition {
          }
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _get -url $listurl
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -216,12 +206,7 @@ function Add-VSTeamBuildDefinition {
       $url = _buildURL -projectName $projectName
 
       # Call the REST API
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
-      }
+      $resp = _postFile -url $url -infile $InFile
 
       return $resp
    }
@@ -250,12 +235,7 @@ function Remove-VSTeamBuildDefinition {
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build Definition")) {
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            $resp = _delete -url $listurl
 
             Write-Output "Deleted build defintion $item"
          }

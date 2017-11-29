@@ -102,8 +102,6 @@ InModuleScope serviceendpoints {
          }
       }
 
-
-
       Context 'Add-VSTeamAzureRMServiceEndpoint-With-Failure' {
          Mock Write-Progress
          Mock Invoke-RestMethod { return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Post'}

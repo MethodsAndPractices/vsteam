@@ -161,13 +161,8 @@ function Get-VSTeamBuild {
             $listurl = _buildURL -projectName $ProjectName -id $item
 
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
-
+            $resp = _get -url $listurl
+            
             _applyTypes -item $resp
 
             Write-Output $resp
@@ -190,13 +185,8 @@ function Get-VSTeamBuild {
          $listurl += _appendQueryString -name "definitions" -value ($definitions -join ',')
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         $resp = _get -url $listurl
+         
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
             _applyTypes -item $item
@@ -250,12 +240,7 @@ function Get-VSTeamBuildLog {
             $listurl = _buildURL -projectName $ProjectName -id $item -Logs
 
             # Call the REST API to get the number of logs for the build
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            $resp = _get -url $listurl
 
             $fullLogIndex = $($resp.count - 1)
          }
@@ -268,12 +253,7 @@ function Get-VSTeamBuildLog {
          $listurl = _buildURL -projectName $ProjectName -id $item -Logs -LogIndex $fullLogIndex
 
          # Call the REST API to get the number of logs for the build
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _get -url $listurl
 
          Write-Output $resp.value
       }     
@@ -355,13 +335,8 @@ function Add-VSTeamBuild {
       Write-Verbose $body
 
       # Call the REST API
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
-
+      $resp = _post -url $listurl -Body $body
+      
       _applyTypes -item $resp
 
       return $resp
@@ -393,13 +368,8 @@ function Remove-VSTeamBuild {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
                # Call the REST API
-               if (_useWindowsAuthenticationOnPremise) {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-               }
-               else {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-               }
-
+               $resp = _delete -url $listurl
+               
                Write-Output "Deleted build $item"
             }
             catch {
@@ -456,12 +426,7 @@ function Update-VSTeamBuild {
          $body += '}'
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $updateUrl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $updateUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _patch -url $updateUrl -body $body
       }
    }
 }
@@ -483,12 +448,7 @@ function Get-VSTeamBuildTag {
       $rootUrl = _buildChildUrl -projectName $ProjectName -id $Id -child "tags"
 
       # Call the REST API
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -UseDefaultCredentials
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
+      $resp = _get -url $rootUrl
 
       return $resp.value
    }
@@ -524,12 +484,7 @@ function Add-VSTeamBuildTag {
                $tagUrl = $rootUrl + "&tag=$tag"
 
                # Call the REST API
-               if (_useWindowsAuthenticationOnPremise) {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $tagUrl -UseDefaultCredentials
-               }
-               else {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $tagUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-               }
+               _put -url $tagUrl
             }
          }
       }
@@ -565,12 +520,7 @@ function Remove-VSTeamBuildTag {
                $tagUrl = $rootUrl + "&tag=$tag"
 
                # Call the REST API
-               if (_useWindowsAuthenticationOnPremise) {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $tagUrl -UseDefaultCredentials
-               }
-               else {
-                  $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $tagUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-               }
+               _delete -url $tagUrl
             }
          }
       }
@@ -594,12 +544,7 @@ function Get-VSTeamBuildArtifact {
       $rootUrl = _buildChildUrl -projectName $ProjectName -id $Id -child "artifacts"
 
       # Call the REST API
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -UseDefaultCredentials
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $rootUrl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
+      $resp = _get -url $rootUrl
 
       foreach ($item in $resp.value) {
          _applyArtifactTypes -item $item

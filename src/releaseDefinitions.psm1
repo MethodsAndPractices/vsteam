@@ -59,12 +59,7 @@ function Get-VSTeamReleaseDefinition {
 
             # Call the REST API
             Write-Debug 'Get-VSTeamReleaseDefinition Call the REST API'
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            $resp = _get -url $listurl            
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             _applyTypes -item $resp
@@ -80,13 +75,8 @@ function Get-VSTeamReleaseDefinition {
          }
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         $resp = _get -url $listurl
+         
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
             _applyTypes -item $item
@@ -148,12 +138,7 @@ function Add-VSTeamReleaseDefinition {
 
       # Call the REST API
       Write-Debug 'Add-VSTeamReleaseDefinition Call the REST API'
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
-      }
+      $resp = _postFile -url $url -inFile $inFile
 
       Write-Output $resp
    }
@@ -185,13 +170,8 @@ function Remove-VSTeamReleaseDefinition {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release Definition")) {
             # Call the REST API
             Write-Debug 'Remove-VSTeamReleaseDefinition Call the REST API'
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
-
+            $resp = _delete -url $listurl
+            
             Write-Output "Deleted release defintion $item"
          }
       }

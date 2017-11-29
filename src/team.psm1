@@ -126,13 +126,8 @@ function Get-VSTeamOption {
    }
 
    # Call the REST API
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
+   $resp = _options -url $url
+   
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
       _applyTypes -item $item -type 'Team.Option'
@@ -149,13 +144,8 @@ function Get-VSTeamResourceArea {
    $url = _buildURL -resource 'resourceareas'
 
    # Call the REST API
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
+   $resp = _get -url $uri
+   
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
       _applyTypes -item $item -type 'Team.ResourceArea'
