@@ -107,17 +107,17 @@ class Build : SHiPSLeaf {
     [string]$buildNumber = $null
     [string]$status = $null
     [string]$result = $null
-    [string]$starttime = $null
+    [datetime]$starttime
     [string]$requestedByUser = $null
     [string]$requestedForUser = $null
     [string]$projectname = $null
-    [string]$id = $null
+    [int]$id = $null
 
     Build ([string]$BuildDefinition, 
         [string]$buildNumber, 
         [string]$status, 
         [string]$result, 
-        [string]$starttime, 
+        [datetime]$starttime, 
         [string]$requestedByUser,
         [string]$requestedForUser,
         [string]$projectname,
@@ -148,47 +148,37 @@ class Releases : SHiPSDirectory {
         $obj = @()
         $Releases = Get-VSTeamRelease -ProjectName $this.ProjectName -Expand environments -ErrorAction SilentlyContinue
         foreach ($Release in $Releases) {
-            #$CreatedOn = [DateTime]::ParseExact($Release.createdOn, "yyyy-MM-ddTHH:mm:ss.ffK", $null).ToUniversalTime()  
-            #Create array with status info from Environments.
-            #$EnvironmentStatus = @($Release.Environments.status.environments.status -join ',')
-            <#
-            $Environments = @{
-                'id'     = $Release.Environments.id
-                'name'   = $Release.Environments.name
-                'status' = $Release.Environments.status
-            } 
-            #>    
             $obj += [Release]::new($Release.id, 
                 $Release.name, 
-                $Release.status, 
-                $Release.createdByUser, 
+                $Release.status,
                 $Release.createdOn, 
-                $Release.environments)
+                $Release.environments,
+                $Release.createdByUser)
         }
         return $obj;
     }
 }
 
 class Release : SHiPSLeaf {
-    [string]$ReleaseId = $null
-    [string]$ReleaseName = $null
-    [string]$ReleaseStatus = $null
-    [string]$CreatedByUser = $null
-    [string]$CreatedOn = $null
-    [object]$Environments = $null
+    [string]$id = $null
+    [string]$releasename = $null
+    [string]$status = $null
+    [datetime]$createdOn #DateTime is not nullable
+    [object]$environments = $null
+    [string]$createdByUser = $null
 
-    Release ([string]$ReleaseId, 
-        [string]$ReleaseName, 
-        [string]$ReleaseStatus, 
-        [string]$CreatedByUser, 
-        [string]$CreatedOn, 
-        [object]$Environments) : base($ReleaseName) {
-        $this.ReleaseId = $ReleaseId
-        $this.ReleaseName = $ReleaseName
-        $this.ReleaseStatus = $ReleaseStatus
-        $this.CreatedByUser = $CreatedByUser
-        $this.CreatedOn = $CreatedOn
-        $this.Environments = $Environments
+    Release ([int]$id, 
+        [string]$releasename, 
+        [string]$status,
+        [datetime]$createdOn,
+        [object]$environments, 
+        [string]$createdByUser) : base($releasename) {
+        $this.id = $id
+        $this.releasename = $releasename
+        $this.status = $status
+        $this.createdOn = $createdOn
+        $this.environments = $environments
+        $this.createdByUser = $createdByUser       
     }
 }
 
