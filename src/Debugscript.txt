@@ -1,1 +1,0 @@
-ipmo Github:\vsteam\VSTeam.psd1; add-vsteamaccount -profile cbsp-abnamro -drive vsteam; ls vsteam:\azure\releases | select -first 1 | select -ExpandProperty environments
