@@ -78,13 +78,8 @@ function Get-VSTeam {
             $listurl = _buildURL -projectName $ProjectName -Id $item
 
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
-
+            $resp = _get -listurl $listurl
+            
             _applyTypes -item $resp -ProjectName $ProjectName
 
             Write-Output $resp
@@ -96,12 +91,7 @@ function Get-VSTeam {
             $listurl = _buildURL -projectName $ProjectName -Name $item
 
             # Call the REST API
-            if (_useWindowsAuthenticationOnPremise) {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-            }
-            else {
-               $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-            }
+            $resp = _get -listurl $listurl
 
             _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -116,12 +106,7 @@ function Get-VSTeam {
          $listurl += _appendQueryString -name "`$skip" -value $skip
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _get -listurl $listurl
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -153,12 +138,7 @@ function Add-VSTeam {
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
       # Call the REST API
-      if (_useWindowsAuthenticationOnPremise) {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-      }
-      else {
-         $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-      }
+      $resp = _post -listurl $listurl -Body $body
 
       _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -201,13 +181,8 @@ function Update-VSTeam {
          }
 
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
-
+         $resp = _patch -listurl $listurl -Body $body
+         
          _applyTypes -item $resp -ProjectName $ProjectName
 
          return $resp
@@ -236,12 +211,7 @@ function Remove-VSTeam {
 
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API
-         if (_useWindowsAuthenticationOnPremise) {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
-         }
-         else {
-            $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-         }
+         $resp = _delete -listurl $listurl
 
          Write-Output "Deleted team $Id"
       }

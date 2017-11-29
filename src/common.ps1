@@ -319,3 +319,65 @@ function _buildDynamicParam {
    # Create and return the dynamic parameter
    return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
 }
+
+function _get {
+   param(
+      [string] $listurl
+   )
+
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   return $resp
+}
+
+function _post {
+   param(
+      [string] $listurl,
+      [string] $body
+   )
+
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   return $resp
+}
+
+function _patch {
+   param(
+      [string] $listurl,
+      [string] $body
+   )
+
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   return $resp
+}
+
+function _delete {
+   param(
+      [string] $listurl
+   )
+
+   if (_useWindowsAuthenticationOnPremise) {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -UseDefaultCredentials
+   }
+   else {
+      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $listurl -Headers @{Authorization = "Basic $env:TEAM_PAT"}
+   }
+
+   return $resp
+}
