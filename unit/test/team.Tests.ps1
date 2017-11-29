@@ -1,7 +1,11 @@
 Set-StrictMode -Version Latest
 
 Get-Module VSTeam | Remove-Module -Force
+Get-Module team | Remove-Module -Force
+Get-Module profile | Remove-Module -Force
+
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope team {
    Describe 'Team' {
@@ -53,6 +57,29 @@ $contents = @"
 
          It 'should set env at process level' {
             Add-VSTeamAccount -Profile mydemos
+
+            Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Version -eq 'VSTS'
+            }
+
+            # Make sure set env vars was called with the correct parameters
+            Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+            }
+         }
+      }
+
+      Context 'Add-VSTeamAccount profile and drive' {
+         Mock _isOnWindows { return $false }
+         Mock _setEnvironmentVariables
+         Mock Set-VSTeamAPIVersion
+         Mock Invoke-Expression -Verifiable
+         Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
+
+         It 'should set env at process level' {
+            Add-VSTeamAccount -Profile mydemos -Drive mydemos
+
+            Assert-VerifiableMocks
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Version -eq 'VSTS'

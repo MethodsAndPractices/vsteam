@@ -335,7 +335,7 @@ function Add-VSTeamAccount {
 
       if($Drive) {
          # Assign to null so nothing is writen to output.
-         $null = New-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSAccount' -Scope Global
+         Invoke-Expression "`$null = New-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSAccount' -Scope Global"
       }
    }
 }
