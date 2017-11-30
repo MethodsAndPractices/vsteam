@@ -449,7 +449,8 @@ InModuleScope team {
          }
       }
 
-      Context 'Set-VSTeamDefaultProject As Admin' {
+      Context 'Set-VSTeamDefaultProject As Admin on Windows' {
+         Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $true } -Verifiable
 
          It 'should set default project' {

@@ -73,12 +73,12 @@ InModuleScope builds {
       }
 
       Context 'Show-VSTeamBuild by ID' {
-         Mock _openOnWindows { }
+         Mock _showInBrowser { }
 
          it 'should return url for mine' {
             Show-VSTeamBuild -projectName project -Id 15
 
-            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter { $command -eq 'https://test.visualstudio.com/project/_build/index?buildId=15' }
+            Assert-MockCalled _showInBrowser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://test.visualstudio.com/project/_build/index?buildId=15' }
          }
       }
 
