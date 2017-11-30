@@ -45,24 +45,33 @@ Describe 'Common' {
    }
 
    Context '_isOnMac' {
-      It 'using IsOSX should return false' {
+      It 'on PowerShell 5.* should return false' {
+         Mock Test-Path { return $false }
          
-         if (Test-Path variable:IsMacOS) {
-            Remove-Item variable:IsMacOS
-         }         
-         
-         $global:IsOSX = $false
          _isOnMac | Should Be $false
       }
 
-      It 'using IsMacOS should return false' {
-         
-         if (Test-Path variable:IsOSX) {
-            Remove-Item variable:IsOSX
-         }
+      It 'using IsMacOS should return true' {
+         Mock Test-Path { return $true } -ParameterFilter { $Path -eq 'variable:global:IsMacOS'} -Verifiable
+         Mock Get-Content { return $true } -ParameterFilter { $Path -eq 'variable:global:IsMacOS'} -Verifiable
 
-         $global:IsMacOS = $false
+         Mock Test-Path { throw "Wrong call to Test-Path: $args" }
+         Mock Get-Content { throw "Wrong call to Get-Content: $args" }
+
+         _isOnMac | Should Be $true
+         Assert-VerifiableMocks
+      }
+
+      It 'using IsMacOS should return false' {
+         Mock Test-Path { return $false } -ParameterFilter { $Path -eq 'variable:global:IsMacOS'} -Verifiable
+         Mock Test-Path { return $true } -ParameterFilter { $Path -eq 'variable:global:IsOSX'} -Verifiable
+         Mock Get-Content { return $false } -ParameterFilter { $Path -eq 'variable:global:IsOSX'} -Verifiable
+
+         Mock Test-Path { throw "Wrong call to Test-Path: $args" }
+         Mock Get-Content { throw "Wrong call to Get-Content: $args" }
+
          _isOnMac | Should Be $false
+         Assert-VerifiableMocks
       }
    }
 
