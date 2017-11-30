@@ -8,10 +8,10 @@ Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope team {
-   Describe 'Team' {
+   Describe 'Team VSTS' {
       . "$PSScriptRoot\mockProjectDynamicParam.ps1"
 
-$contents = @"
+      $contents = @"
       [
          {
             "Name": "http://localhost:8080/tfs/defaultcollection",
@@ -46,6 +46,75 @@ $contents = @"
 
             $info.Account | Should Be "mydemos"
             $info.DefaultProject | Should Be "MyProject"
+         }
+      }
+
+      Context 'Get-VSTeamResourceArea' {
+         Mock _get { return @{
+               value = @{
+               
+               }
+            } 
+         }
+
+         $actual = Get-VSTeamResourceArea
+
+         It 'Should return resources' {
+            $actual | Should Not Be $null
+         }
+      }
+
+      Context 'Show-VSTeam' {
+         Mock _ShowInBrowser -Verifiable
+
+         Show-VSTeam
+
+         It 'Should open browser' {
+            Assert-VerifiableMocks
+         }
+      }
+
+      Context 'Get-VSTeamOption' {
+         # Set the account to use for testing. A normal user would do this
+         # using the Add-VSTeamAccount function.
+         $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   
+         Mock _options { return @{
+               count = 1
+               value = @(
+                  @{
+                     id           = '5e8a8081-3851-4626-b677-9891cc04102e'
+                     area         = 'git'
+                     resourceName = 'annotatedTags'
+                  }
+               )
+            }
+         }
+         
+         It 'Should return all options' {
+            Get-VSTeamOption | Should Not Be $null
+            Assert-MockCalled _options -ParameterFilter { 
+               $Url -eq "https://test.visualstudio.com/_apis/"
+            }
+         }
+
+         It 'Should return release options' {
+            Get-VSTeamOption -Release | Should Not Be $null
+            Assert-MockCalled _options -ParameterFilter { 
+               $Url -eq "https://test.vsrm.visualstudio.com/_apis/"
+            }
+         }
+      }
+
+      Context 'Add-VSTeamAccount invalid profile' {
+         Mock _isOnWindows { return $false }
+         Mock Write-Error -Verifiable
+         Mock Get-VSTeamProfile { return "[]" | ConvertFrom-Json | ForEach-Object { $_ } }
+         
+         Add-VSTeamAccount -Profile notFound
+
+         It 'should write error' {
+            Assert-VerifiableMocks
          }
       }
 
@@ -157,6 +226,31 @@ $contents = @"
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
                $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+            }
+         }
+      }
+
+      Context 'Add-VSTeamAccount TFS from windows' {
+         # I have to write both test just in case the actually
+         # start the PowerShell window as Admin or not. If I
+         # don't write both of these I will get different code
+         # coverage depending on if I started the PowerShell session
+         # as admin or not.
+         Mock _isOnWindows { return $true }
+         Mock _testAdministrator { return $false }
+         Mock Set-VSTeamAPIVersion
+         Mock _setEnvironmentVariables
+
+         It 'should set env at process level' {
+            Add-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
+
+            Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Version -eq 'TFS2017'
+            }
+
+            # Make sure set env vars was called with the correct parameters
+            Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Level -eq 'Process' -and $Acct -eq 'http://localhost:8080/tfs/defaultcollection'
             }
          }
       }
@@ -344,6 +438,28 @@ $contents = @"
          }
       }
 
+      Context 'Set-VSTeamDefaultProject on Non Windows' {
+         Mock _isOnWindows { return $false } -Verifiable
+
+         It 'should set default project' {
+            Set-VSTeamDefaultProject 'MyProject'
+
+            Assert-VerifiableMocks
+            $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
+         }
+      }
+
+      Context 'Set-VSTeamDefaultProject As Admin' {
+         Mock _testAdministrator { return $true } -Verifiable
+
+         It 'should set default project' {
+            Set-VSTeamDefaultProject 'MyProject'
+
+            Assert-VerifiableMocks
+            $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
+         }
+      }
+
       Context 'Clear-VSTeamDefaultProject' {
          It 'should clear default project' {
             $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
@@ -351,6 +467,27 @@ $contents = @"
             Clear-VSTeamDefaultProject
 
             $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
+         }
+      }
+
+      Context 'Set-VSTeamAPIVersion' {
+         It 'Should default to TFS2017' {
+            Set-VSTeamAPIVersion
+            $VSTeamVersionTable.Version | Should Be 'TFS2017'
+         }
+
+         It 'Should return TFS2018' {
+            Set-VSTeamAPIVersion -Version TFS2018
+            $VSTeamVersionTable.Version | Should Be 'TFS2018'
+         }
+
+         It 'Should VSTS' {
+            Set-VSTeamAPIVersion -Version VSTS
+            $VSTeamVersionTable.Version | Should Be 'VSTS'
+         }
+
+         BeforeEach {
+            $VSTeamVersionTable.Version = ''
          }
       }
    }

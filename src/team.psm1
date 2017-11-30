@@ -140,7 +140,7 @@ function Get-VSTeamResourceArea {
    $url = _buildURL -resource 'resourceareas'
 
    # Call the REST API
-   $resp = _get -url $uri
+   $resp = _get -url $url
    
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
@@ -170,80 +170,32 @@ function Add-VSTeamAccount {
       # Create the dictionary
       $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
-      $profileParam = 'Profile'
-
-      # Create the collection of attributes
-      $profileAttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-       
-      # Create and set the parameters' attributes
-      $profileParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-      $profileParameterAttribute.Mandatory = $false
-      $profileParameterAttribute.ParameterSetName = "Profile"
-      $profileParameterAttribute.HelpMessage = "Name of profile to load."
-
-      # Add the attributes to the attributes collection
-      $profileAttributeCollection.Add($profileParameterAttribute)
-
       $profileArrSet = Get-VSTeamProfile | Select-Object -ExpandProperty Name
-
+      
       if ($profileArrSet) {
-         $profileValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($profileArrSet)
-
-         # Add the ValidateSet to the attributes collection
-         $profileAttributeCollection.Add($profileValidateSetAttribute)
+         $profileParam = _buildDynamicParam -ParameterName 'Profile' -ParameterSetName 'Profile' -arrSet $profileArrSet
+      }
+      else {
+         $profileParam = _buildDynamicParam -ParameterName 'Profile' -ParameterSetName 'Profile'
       }
 
-      $profileRuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($profileParam, [string], $profileAttributeCollection)
-      $RuntimeParameterDictionary.Add($profileParam, $profileRuntimeParameter)
+      $RuntimeParameterDictionary.Add('Profile', $profileParam)
 
       # Only add these options on Windows Machines
       if (_isOnWindows) {
          Write-Verbose 'On a Windows machine'
-         $ParameterName = 'Level'
-
-         # Create the collection of attributes
-         $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-
-         # Create and set the parameters' attributes
-         $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-         $ParameterAttribute.Mandatory = $false
-         $ParameterAttribute.HelpMessage = "On Windows machines allows you to store the account information at the process, user or machine level. Not available on other platforms."
-
-         # Add the attributes to the attributes collection
-         $AttributeCollection.Add($ParameterAttribute)
-
          # Generate and set the ValidateSet
+         $arrSet = "Process", "User"
+
          if (_testAdministrator) {
-            $arrSet = "Process", "User", "Machine"
-         }
-         else {
-            $arrSet = "Process", "User"
+            $arrSet += "Machine"
          }
 
-         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
+         $levelParam = _buildDynamicParam -ParameterName 'Level' -arrSet $arrSet
+         $RuntimeParameterDictionary.Add('Level', $levelParam)
 
-         # Add the ValidateSet to the attributes collection
-         $AttributeCollection.Add($ValidateSetAttribute)
-
-         $ParameterName2 = 'UseWindowsAuthentication'
-
-         # Create the collection of attributes
-         $AttributeCollection2 = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-
-         # Create and set the parameters' attributes
-         $ParameterAttribute2 = New-Object System.Management.Automation.ParameterAttribute
-         $ParameterAttribute2.Mandatory = $true
-         $ParameterAttribute2.ParameterSetName = "Windows"
-         $ParameterAttribute2.HelpMessage = "On Windows machines allows you to use the active user identity for authentication. Not available on other platforms."
-
-         # Add the attributes to the attributes collection
-         $AttributeCollection2.Add($ParameterAttribute2)
-
-         # Create and return the dynamic parameter
-         $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
-         $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
-         $RuntimeParameter2 = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName2, [switch], $AttributeCollection2)
-         $RuntimeParameterDictionary.Add($ParameterName2, $RuntimeParameter2)
+         $winAuthParam = _buildDynamicSwitchParam -ParameterName 'UseWindowsAuthentication' -Mandatory $true -ParameterSetName 'Windows'
+         $RuntimeParameterDictionary.Add('UseWindowsAuthentication', $winAuthParam)
       }
       else {
          Write-Verbose 'Not on a Windows machine'
@@ -254,21 +206,17 @@ function Add-VSTeamAccount {
 
    process {
       # Bind the parameter to a friendly variable
-      $Profile = $PSBoundParameters[$profileParam]
+      $Profile = $PSBoundParameters['Profile']
 
       if (_isOnWindows) {
          # Bind the parameter to a friendly variable
-         $Level = $PSBoundParameters[$ParameterName]
+         $Level = $PSBoundParameters['Level']
 
          if (-not $Level) {
             $Level = "Process"
          }
 
-         $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
-         if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth) -and !($Profile)) {
-            Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
-            return
-         }
+         $UsingWindowsAuth = $PSBoundParameters['UseWindowsAuthentication']
       }
       else {
          $Level = "Process"
@@ -319,7 +267,7 @@ function Add-VSTeamAccount {
 
       Set-VSTeamAPIVersion -Version (_getVSTeamAPIVersion -Instance $account -Version $Version)
 
-      if($Drive) {
+      if ($Drive) {
          # Assign to null so nothing is writen to output.
          Write-Host "`nTo map a drive run the following command:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSAccount'`n" -ForegroundColor Black -BackgroundColor Yellow
       }

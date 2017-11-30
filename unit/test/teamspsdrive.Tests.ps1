@@ -58,7 +58,6 @@ InModuleScope teamspsdrive {
             $actual[2].ProjectName | Should Be 'TestProject'
          }
       }
-
       
       Mock Get-VSTeamBuild { return [PSCustomObject]@{ 
             definition       = [PSCustomObject]@{fullname = 'BuildDef' }

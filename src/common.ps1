@@ -319,6 +319,40 @@ function _buildDynamicParam {
    return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
 }
 
+function _buildDynamicSwitchParam {
+   param(
+      [string] $ParameterName = 'QueueName',
+      [array] $arrSet,
+      [bool] $Mandatory = $false,
+      [string] $ParameterSetName
+   )
+   # Create the collection of attributes
+   $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+
+   # Create and set the parameters' attributes
+   $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
+   $ParameterAttribute.Mandatory = $Mandatory
+   $ParameterAttribute.ValueFromPipelineByPropertyName = $true
+
+   if ($ParameterSetName) {
+      $ParameterAttribute.ParameterSetName = $ParameterSetName
+   }
+
+   # Add the attributes to the attributes collection
+   $AttributeCollection.Add($ParameterAttribute)
+
+   if ($arrSet) {
+      # Generate and set the ValidateSet
+      $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
+
+      # Add the ValidateSet to the attributes collection
+      $AttributeCollection.Add($ValidateSetAttribute)
+   }
+
+   # Create and return the dynamic parameter
+   return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [switch], $AttributeCollection)
+}
+
 function _get {
    param(
       [string] $url
