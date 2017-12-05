@@ -253,7 +253,7 @@ function Get-VSTeamBuildLog {
          # Call the REST API to get the number of logs for the build
          $resp = _get -url $listurl
 
-         Write-Output $resp.value
+         Write-Output $resp
       }     
    }
 }
