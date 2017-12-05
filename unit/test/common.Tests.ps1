@@ -11,6 +11,21 @@ Describe 'Common' {
       }
    }
 
+   Context '_handleException' {
+      $obj = "{Message: 'Top Message', Exception: {Message: 'Test Exception', Response: { StatusCode: '401'}}}"
+      $ex = ConvertFrom-Json $obj
+
+      It 'Should Write two warnings' {
+         Mock ConvertFrom-Json { return $ex }
+         Mock Write-Warning -ParameterFilter { $Message -eq 'An error occurred: Test Exception'} -Verifiable
+         Mock Write-Warning -ParameterFilter { $Message -eq 'Top Message' } -Verifiable
+
+         _handleException $ex
+
+         Assert-VerifiableMocks
+      }
+   }
+
    Context '_openOnWindows' {
       Mock Start-Process -Verifiable -ParameterFilter { $FilePath -eq 'http://test.visualstudio.com' }
       Mock Start-Process { throw "Start-Process called incorrectly: $Args" }
@@ -44,6 +59,62 @@ Describe 'Common' {
       }
    }
 
+   Context '_isOnLinux' {
+      It 'on PowerShell 5.* should return false' {
+         Mock Test-Path { return $false }
+         
+         _isOnLinux | Should Be $false
+      }
+
+      It 'using IsLinux should return true' {
+         Mock Test-Path { return $true } -ParameterFilter { $Path -eq 'variable:global:IsLinux'} -Verifiable
+         Mock Get-Content { return $true } -ParameterFilter { $Path -eq 'variable:global:IsLinux'} -Verifiable
+
+         Mock Test-Path { throw "Wrong call to Test-Path: $args" }
+         Mock Get-Content { throw "Wrong call to Get-Content: $args" }
+
+         _isOnLinux | Should Be $true
+         Assert-VerifiableMocks
+      }
+   }
+
+   Context '_isOnWindows on PowerShell 5.* ' {
+      Mock Test-Path { return $false } { $Path -eq 'variable:global:IsWindows'} -Verifiable
+      Mock Test-Path { return $true } { $Path -eq 'env:os'} -Verifiable
+      Mock Get-Content { return 'Windows_NT' } -ParameterFilter { $Path -eq 'env:os'} -Verifiable
+
+      Mock Test-Path { throw "Wrong call to Test-Path: $args" }
+      Mock Get-Content { throw "Wrong call to Get-Content: $args" }
+
+      It 'should return true' {
+         _isOnWindows | Should Be $true
+         Assert-VerifiableMocks
+      }
+   }
+
+   Context '_isOnWindows using IsWindows ' {
+      Mock Test-Path { return $true } -ParameterFilter { $Path -eq 'variable:global:IsWindows'} -Verifiable
+      Mock Get-Content { return $true } -ParameterFilter { $Path -eq 'variable:global:IsWindows'} -Verifiable
+
+      Mock Test-Path { throw "Wrong call to Test-Path: $args" }
+      Mock Get-Content { throw "Wrong call to Get-Content: $args" }
+      
+      It 'should return true' {
+         _isOnWindows | Should Be $true
+         Assert-VerifiableMocks
+      }
+   }
+
+   Context '_isOnWindows' {
+      Mock Test-Path { return $false } -Verifiable
+      Mock Get-Content { throw "Wrong call to Get-Content: $args" }
+
+      It 'using IsWindows should return false' {
+         _isOnWindows | Should Be $false
+         Assert-VerifiableMocks
+      }
+   }
+
    Context '_isOnMac' {
       It 'on PowerShell 5.* should return false' {
          Mock Test-Path { return $false }
@@ -62,7 +133,7 @@ Describe 'Common' {
          Assert-VerifiableMocks
       }
 
-      It 'using IsMacOS should return false' {
+      It 'using IsOSX should return false' {
          Mock Test-Path { return $false } -ParameterFilter { $Path -eq 'variable:global:IsMacOS'} -Verifiable
          Mock Test-Path { return $true } -ParameterFilter { $Path -eq 'variable:global:IsOSX'} -Verifiable
          Mock Get-Content { return $false } -ParameterFilter { $Path -eq 'variable:global:IsOSX'} -Verifiable

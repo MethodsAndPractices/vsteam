@@ -65,7 +65,7 @@ function _isOnWindows {
    }
 }
 
-function _isLinux {
+function _isOnLinux {
    if (Test-Path -Path 'variable:global:IsLinux') {
       return Get-Content -Path 'variable:global:IsLinux'
    }
@@ -196,7 +196,7 @@ function _getUserAgent {
    elseif (_isOnMac) {
       $os = 'OSX'
    }
-   elseif (_isLinux) {
+   elseif (_isOnLinux) {
       $os = 'Linux'
    }
    else {
