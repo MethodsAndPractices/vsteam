@@ -1,3 +1,6 @@
+[System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Scope='Function', Target='Add-VSTeamAccount')]
+param()
+
 Set-StrictMode -Version Latest
 
 # Load common code
@@ -150,8 +153,7 @@ function Get-VSTeamResourceArea {
 }
 
 function Add-VSTeamAccount {
-   [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost')]
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]   
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
