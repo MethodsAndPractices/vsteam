@@ -8,7 +8,7 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
-## 2.0.0
+## 2.0.1
 The module now has a dependency on SHiPS for PSDrive support.
 
 You must be running 6.0.0-rc or later on Mac and Linux.
