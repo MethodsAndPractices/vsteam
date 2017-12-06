@@ -57,7 +57,7 @@ function Remove-VSTeamGitRepository {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Repository")) {
             try {
                # Call the REST API
-               $resp = _delete -url $listurl
+               _delete -url $listurl
                
                Write-Output "Deleted repository $item"
             }

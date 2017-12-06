@@ -209,7 +209,7 @@ function Remove-VSTeam {
 
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API
-         $resp = _delete -url $listurl
+         _delete -url $listurl
 
          Write-Output "Deleted team $Id"
       }

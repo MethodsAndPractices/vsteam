@@ -269,7 +269,7 @@ function Remove-VSTeamRelease {
 
             try {
                # Call the REST API
-               $resp = _delete -url $listurl
+               _delete -url $listurl
 
                Write-Output "Deleted release $item"
             }
@@ -314,7 +314,7 @@ function Set-VSTeamReleaseStatus {
 
             try {
                # Call the REST API
-               $resp = _patch -url $listurl -body $body
+               _patch -url $listurl -body $body
 
                Write-Output "Release $item status changed to $status"
             }

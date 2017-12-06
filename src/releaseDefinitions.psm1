@@ -170,7 +170,7 @@ function Remove-VSTeamReleaseDefinition {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release Definition")) {
             # Call the REST API
             Write-Debug 'Remove-VSTeamReleaseDefinition Call the REST API'
-            $resp = _delete -url $listurl
+            _delete -url $listurl
             
             Write-Output "Deleted release defintion $item"
          }

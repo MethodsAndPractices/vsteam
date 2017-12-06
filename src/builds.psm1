@@ -366,7 +366,7 @@ function Remove-VSTeamBuild {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
                # Call the REST API
-               $resp = _delete -url $listurl
+               _delete -url $listurl
                
                Write-Output "Deleted build $item"
             }
@@ -424,7 +424,7 @@ function Update-VSTeamBuild {
          $body += '}'
 
          # Call the REST API
-         $resp = _patch -url $updateUrl -body $body
+         _patch -url $updateUrl -body $body
       }
    }
 }

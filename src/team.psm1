@@ -150,6 +150,7 @@ function Get-VSTeamResourceArea {
 }
 
 function Add-VSTeamAccount {
+   [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost')]
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]

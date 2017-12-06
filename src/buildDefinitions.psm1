@@ -233,7 +233,7 @@ function Remove-VSTeamBuildDefinition {
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build Definition")) {
             # Call the REST API
-            $resp = _delete -url $listurl
+            _delete -url $listurl
 
             Write-Output "Deleted build defintion $item"
          }
