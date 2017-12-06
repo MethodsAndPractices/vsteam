@@ -4,15 +4,13 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-$VSTeamVersionTable = @{
-   'Account'         = $env:TEAM_ACCT;
-   'DefaultProject'  = $env:TEAM_PROJECT;
-   'Version'         = 'TFS2017'
-   'Build'           = '3.0'
-   'Release'         = '3.0-preview'
-   'Core'            = '3.0'
-   'Git'             = '3.0'
-   'DistributedTask' = '3.0-preview'
+function _getModuleVersion {
+   # Read the version from the psd1 file.
+   $content = (Get-Content -Raw "$here\..\VSTeam.psd1" | Out-String)
+   $r = [regex]"ModuleVersion += +'([^']+)'"
+   $d = $r.Match($content)
+
+   return $d.Groups[1].Value
 }
 
 function _buildURL {
@@ -94,6 +92,7 @@ function Get-VSTeamInfo {
    return @{
       Account        = $VSTeamVersionTable.Account
       Version        = $VSTeamVersionTable.Version
+      ModuleVersion  = $VSTeamVersionTable.ModuleVersion
       DefaultProject = $Global:PSDefaultParameterValues['*:projectName']
    }
 }
@@ -583,6 +582,18 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "Build: $($VSTeamVersionTable.Build)"
    Write-Verbose "Release: $($VSTeamVersionTable.Release)"
    Write-Verbose "DistributedTask: $($VSTeamVersionTable.DistributedTask)"
+}
+
+$VSTeamVersionTable = @{
+   'Account'         = $env:TEAM_ACCT
+   'DefaultProject'  = $env:TEAM_PROJECT
+   'Version'         = 'TFS2017'
+   'Build'           = '3.0'
+   'Release'         = '3.0-preview'
+   'Core'            = '3.0'
+   'Git'             = '3.0'
+   'DistributedTask' = '3.0-preview'
+   'ModuleVersion'   = _getModuleVersion
 }
 
 Set-Alias gti Get-VSTeamInfo
