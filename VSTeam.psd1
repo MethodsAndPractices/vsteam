@@ -89,7 +89,8 @@
       'src\teams.psm1',
       'src\profile.psm1',
       'src\teammembers.psm1',
-      'src\teamspsdrive.psm1')
+      'src\teamspsdrive.psm1',
+      'src\users.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -116,6 +117,7 @@
       'Get-VSTeamInfo',
       'Get-VSTeam',
       'Get-VSTeamMember',
+      'Get-VSTeamUser',
       'Remove-VSTeamBuild',
       'Remove-VSTeamBuildDefinition',
       'Remove-VSTeamProject',
@@ -223,7 +225,8 @@
       'Remove-Profile',
       'Get-Profile',
       'Set-APIVersion',
-      'gti')
+      'gti',
+      'Get-User')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

@@ -1,4 +1,4 @@
-[System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Scope='Function', Target='Add-VSTeamAccount')]
+[System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Scope = 'Function', Target = 'Add-VSTeamAccount')]
 param()
 
 Set-StrictMode -Version Latest
@@ -559,6 +559,7 @@ function Set-VSTeamAPIVersion {
             $VSTeamVersionTable.Build = '3.2'
             $VSTeamVersionTable.Release = '4.0-preview'
             $VSTeamVersionTable.DistributedTask = '4.0-preview'
+            $VSTeamVersionTable.MemberEntitlementManagement = ''
          }
          'VSTS' { 
             $VSTeamVersionTable.Version = 'VSTS'
@@ -566,7 +567,8 @@ function Set-VSTeamAPIVersion {
             $VSTeamVersionTable.Core = '4.0'
             $VSTeamVersionTable.Build = '4.0'
             $VSTeamVersionTable.Release = '4.1-preview'
-            $VSTeamVersionTable.DistributedTask = '4.1-preview'            
+            $VSTeamVersionTable.DistributedTask = '4.1-preview'
+            $VSTeamVersionTable.MemberEntitlementManagement = '4.1-preview'
          }
          Default {
             $VSTeamVersionTable.Version = 'TFS2017'
@@ -575,6 +577,7 @@ function Set-VSTeamAPIVersion {
             $VSTeamVersionTable.Build = '3.0'
             $VSTeamVersionTable.Release = '3.0-preview'
             $VSTeamVersionTable.DistributedTask = '3.0-preview'            
+            $VSTeamVersionTable.MemberEntitlementManagement = ''
          }
       }
    }
@@ -585,18 +588,20 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "Build: $($VSTeamVersionTable.Build)"
    Write-Verbose "Release: $($VSTeamVersionTable.Release)"
    Write-Verbose "DistributedTask: $($VSTeamVersionTable.DistributedTask)"
+   Write-Verbose "MemberEntitlementManagement: $($VSTeamVersionTable.MemberEntitlementManagement)"
 }
 
 $VSTeamVersionTable = @{
-   'Account'         = $env:TEAM_ACCT
-   'DefaultProject'  = $env:TEAM_PROJECT
-   'Version'         = 'TFS2017'
-   'Build'           = '3.0'
-   'Release'         = '3.0-preview'
-   'Core'            = '3.0'
-   'Git'             = '3.0'
-   'DistributedTask' = '3.0-preview'
-   'ModuleVersion'   = _getModuleVersion
+   'Account'                     = $env:TEAM_ACCT
+   'DefaultProject'              = $env:TEAM_PROJECT
+   'Version'                     = 'TFS2017'
+   'Build'                       = '3.0'
+   'Release'                     = '3.0-preview'
+   'Core'                        = '3.0'
+   'Git'                         = '3.0'
+   'DistributedTask'             = '3.0-preview'
+   'MemberEntitlementManagement' = ''
+   'ModuleVersion'               = _getModuleVersion
 }
 
 Set-Alias gti Get-VSTeamInfo

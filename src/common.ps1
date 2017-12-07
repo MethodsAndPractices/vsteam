@@ -134,6 +134,17 @@ function _showInBrowser {
    }
 }
 
+function _getEntitlementBase {
+   $instance = $VSTeamVersionTable.Account
+    
+   # For VSTS Entitlements is under .vsaex
+   if ($VSTeamVersionTable.Account.ToLower().Contains('visualstudio.com')) {
+      $instance = $VSTeamVersionTable.Account.ToLower().Replace('visualstudio.com', 'vsaex.visualstudio.com')
+   }
+
+   return $instance
+}
+
 function _getReleaseBase {
    $instance = $VSTeamVersionTable.Account
     
@@ -176,7 +187,7 @@ function _appendQueryString {
       $value
    )
 
-   if ($value) {
+   if ($value -ne $null) {
       return "&$name=$value"
    }
 }

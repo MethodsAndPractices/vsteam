@@ -18,16 +18,17 @@ LONG DESCRIPTION
     
     PS C:\> $VSTeamVersionTable
 
-    Name             Value
-    ----             -----
-    Account          https://test.visualstudio.com
-    DefaultProject
-    Version          VSTS
-    Build            3.0
-    Core             3.0
-    Release          3.0-Preview
-    Git              3.0
-    DistributedTask  3.0-Preview
+    Name                         Value
+    ----                         -----
+    Account                      https://test.visualstudio.com
+    DefaultProject            
+    Version                      TFS2017
+    Build                        3.0
+    Core                         3.0
+    Release                      3.0-Preview
+    Git                          3.0
+    DistributedTask              3.0-Preview
+    MemberEntitlementManagement
 
     The following list shows the version name and where it is used.
     · Build
