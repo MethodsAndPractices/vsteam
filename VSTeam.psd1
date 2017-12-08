@@ -63,7 +63,8 @@
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('types\types.ps1xml', 
       'types\Approvals.ps1xml',
-      'types\buildDefinitions.ps1xml')
+      'types\buildDefinitions.ps1xml',
+      'types\users.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -71,7 +72,8 @@
       'formats\TeamTypes.format.ps1xml',
       'formats\builds.format.ps1xml',
       'formats\team.profile.ps1xml',
-      'formats\team.format.ps1xml')
+      'formats\team.format.ps1xml',
+      'formats\users.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
