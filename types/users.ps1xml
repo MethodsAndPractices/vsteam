@@ -26,9 +26,14 @@ REMAINS WITH THE USER.
             <Name>userName</Name>
             <GetScriptBlock>$this.user.displayName</GetScriptBlock>
          </ScriptProperty>
-          <ScriptProperty>
+         <ScriptProperty>
             <Name>email</Name>
             <GetScriptBlock>$this.user.mailAddress</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>projects</Name>
+            <GetScriptBlock>[string]::Join(", ", $this.projectEntitlements.projectRef.name)</GetScriptBlock>
+            <!-- <GetScriptBlock>[string]::Join(", ", $this.user.projectEntitlements.projectRef.name)</GetScriptBlock> -->
          </ScriptProperty>
          <MemberSet>
             <Name>PSStandardMembers</Name>

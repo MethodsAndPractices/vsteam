@@ -21,19 +21,36 @@ InModuleScope users {
       # Must be defined or call will throw error
       $VSTeamVersionTable.MemberEntitlementManagement = '4.1-preview'
 
-      Context 'Get-VSTeamUser' {  
+      Context 'Get-VSTeamUser no parameters' {  
          Mock  _get { return [PSCustomObject]@{ 
                count = 1
                value = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } }
             } 
          }
 
-         It 'Should throw' {
+         It 'Should return users' {
             Get-VSTeamUser 
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _get -Exactly 1 -ParameterFilter {
                $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamUser with select for projects' {  
+         Mock  _get { return [PSCustomObject]@{ 
+               count = 1
+               value = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } }
+            } 
+         }
+
+         It 'Should return users with projects' {
+            Get-VSTeamUser -Select Projects
+
+            # Make sure it was called with the correct URI
+            Assert-MockCalled _get -Exactly 1 -ParameterFilter {
+               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
             }
          }
       }
