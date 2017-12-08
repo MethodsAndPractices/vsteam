@@ -9,7 +9,7 @@
 
 ### List (Default)
 ```
-Get-VSTeamUser [-Top <Int32>] [-Skip <Int32>]
+Get-VSTeamUser [-Top <Int32>] [-Skip <Int32>] [-Select <String>]
 ```
 
 ### ByID
@@ -63,6 +63,23 @@ Parameter Sets: List
 Aliases: 
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Select
+Comma (",") separated list of properties to select in the result entitlements.
+
+Valid values: 'Projects, 'Extensions', 'Grouprules'
+
+```yaml
+Type: String
+Parameter Sets: List
+Aliases: 
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
