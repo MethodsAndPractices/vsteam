@@ -38,6 +38,23 @@ InModuleScope users {
          }
       }
 
+      Context 'Get-VSTeamUser By ID' {  
+         Mock  _get { return [PSCustomObject]@{
+               accessLevel = [PSCustomObject]@{ }
+               email       = 'fake@email.com'
+            } 
+         }
+
+         It 'Should return users with projects' {
+            Get-VSTeamUser -Id '00000000-0000-0000-0000-000000000000'
+
+            # Make sure it was called with the correct URI
+            Assert-MockCalled _get -Exactly 1 -ParameterFilter {
+               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/00000000-0000-0000-0000-000000000000?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)"
+            }
+         }
+      }
+
       Context 'Get-VSTeamUser with select for projects' {  
          Mock  _get { return [PSCustomObject]@{ 
                count = 1
