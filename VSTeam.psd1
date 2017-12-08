@@ -128,6 +128,7 @@
       'Remove-VSTeamServiceEndpoint',
       'Remove-VSTeamAccount',
       'Remove-VSTeam',
+      'Remove-VSTeamUser',
       'Set-VSTeamApproval',
       'Set-VSTeamDefaultProject',
       'Set-VSTeamReleaseStatus',
@@ -228,6 +229,7 @@
       'Get-Profile',
       'Set-APIVersion',
       'gti',
+      'Remove-User',
       'Get-User')
 
    # DSC resources to export from this module

@@ -1,0 +1,1 @@
+Removes a user from the account.

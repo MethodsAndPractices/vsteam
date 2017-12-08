@@ -53,7 +53,7 @@ function Get-VSTeamUser {
       [string[]] $Select,
  
       [Parameter(ParameterSetName = 'ByID')]
-      [Alias('TeamId')]
+      [Alias('UserId')]
       [string[]] $Id
    )
 
@@ -96,18 +96,12 @@ function Add-VSTeamUser {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true)]
-      [Alias('TeamName')]     
-      [string]$Name,
+      [Alias('UserEmail')]     
+      [string]$Email,
       [string]$Description = ""
    )
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
 
-   process { 
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       $listurl = _buildURL -ProjectName $ProjectName
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
@@ -120,74 +114,39 @@ function Add-VSTeamUser {
    }
 }
 
-function Update-VSTeamUser {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
-   param(
-      [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
-      [Alias('TeamName', 'TeamId', 'TeamToUpdate', 'Id')]
-      [string]$Name,
-      [string]$NewTeamName,
-      [string]$Description,
-      [switch] $Force
-   )
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   process { 
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      $listurl = _buildURL -ProjectName $ProjectName -Id $Name
-      if (-not $NewTeamName -and -not $Description) {
-         throw 'You must provide a new team name or description, or both.'
-      }
-
-      if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-VSTeamUser")) {
-         if (-not $NewTeamName) { 
-            $body = '{"description": "' + $Description + '" }'
-         }
-         if (-not $Description) {
-            $body = '{ "name": "' + $NewTeamName + '" }'
-         }
-         if ($NewTeamName -and $Description) {
-            $body = '{ "name": "' + $NewTeamName + '", "description": "' + $Description + '" }'            
-         }
-
-         # Call the REST API
-         $resp = _patch -url $listurl -Body $body
-         
-         _applyTypes -item $resp -ProjectName $ProjectName
-
-         return $resp
-      }
-   }
-}
-
 function Remove-VSTeamUser {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ById')]
    param(
-      [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
-      [Alias('Name', 'TeamId', 'TeamName')]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+      [Alias('UserId')]
       [string]$Id,
+
+      [Parameter(ParameterSetName = 'ByEmail', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+      [Alias('UserEmail')]
+     [string]$Email,
 
       [switch]$Force
    )
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
 
    process { 
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
+      if ($email) {
+         # We have to go find the id
+         $user = Get-VSTeamUser | ? email -eq $email
 
-      $listurl = _buildURL -ProjectName $ProjectName -Id $Id
+         if(-not $user) {
+            throw "Could not find user with an email equal to $email"
+         }
 
-      if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
+         $id = $user.id
+      }
+
+      $listurl = _buildURL -Id $Id
+
+      if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete user")) {
          # Call the REST API
          _delete -url $listurl
 
-         Write-Output "Deleted team $Id"
+         Write-Output "Deleted user $Id"
       }
    }
 }
@@ -198,5 +157,5 @@ Set-Alias Update-User Update-VSTeamUser
 Set-Alias Remove-User Remove-VSTeamUser
 
 Export-ModuleMember `
- -Function Get-VSTeamUser, Add-VSTeamUser, Update-VSTeamUser, Remove-VSTeamUser `
- -Alias Get-User, Add-User, Update-User, Remove-User
+   -Function Get-VSTeamUser, Add-VSTeamUser, Update-VSTeamUser, Remove-VSTeamUser `
+   -Alias Get-User, Add-User, Update-User, Remove-User
