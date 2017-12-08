@@ -51,6 +51,8 @@ Every new function must have help that explains how to use it. The help can be a
 
 I have found writing the help before I start to write the function saves me a lot of time. This forces me to think of all the use cases of the function and which parameters I plan to support. It also allows me to get the boring part out of the way so I end on a high note writing the code. 
 
+You can run gen-help.ps1 from the .docs folder to make sure you can generate the help file.
+
 ### Write Unit Test
 
 Using [Pester](https://github.com/pester/Pester) write unit test for the new function. I am a firm believer if I cannot write a test before I write the code I am not clear on what I expect the code to do. After writing the help first writing the unit tests should be pretty straight forward. 
