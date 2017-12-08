@@ -119,7 +119,6 @@
       'Get-VSTeamInfo',
       'Get-VSTeam',
       'Get-VSTeamMember',
-      'Get-VSTeamUser',
       'Remove-VSTeamBuild',
       'Remove-VSTeamBuildDefinition',
       'Remove-VSTeamProject',
@@ -128,7 +127,6 @@
       'Remove-VSTeamServiceEndpoint',
       'Remove-VSTeamAccount',
       'Remove-VSTeam',
-      'Remove-VSTeamUser',
       'Set-VSTeamApproval',
       'Set-VSTeamDefaultProject',
       'Set-VSTeamReleaseStatus',
@@ -156,7 +154,8 @@
       'Add-VSTeamProfile',
       'Remove-VSTeamProfile',
       'Get-VSTeamProfile',
-      'Set-VSTeamAPIVersion')
+      'Set-VSTeamAPIVersion',
+      'Invoke-VSTeamRequest')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -228,9 +227,7 @@
       'Remove-Profile',
       'Get-Profile',
       'Set-APIVersion',
-      'gti',
-      'Remove-User',
-      'Get-User')
+      'gti')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

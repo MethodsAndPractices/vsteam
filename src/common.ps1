@@ -134,26 +134,27 @@ function _showInBrowser {
    }
 }
 
-function _getEntitlementBase {
+function _addSubDomain {
+   param(
+      $subDomain
+   )
+
    $instance = $VSTeamVersionTable.Account
-    
+   
    # For VSTS Entitlements is under .vsaex
-   if ($VSTeamVersionTable.Account.ToLower().Contains('visualstudio.com')) {
-      $instance = $VSTeamVersionTable.Account.ToLower().Replace('visualstudio.com', 'vsaex.visualstudio.com')
+   if ($subDomain -and $VSTeamVersionTable.Account.ToLower().Contains('visualstudio.com')) {
+      $instance = $VSTeamVersionTable.Account.ToLower().Replace('visualstudio.com', "$subDomain.visualstudio.com")
    }
 
    return $instance
 }
 
-function _getReleaseBase {
-   $instance = $VSTeamVersionTable.Account
-    
-   # For VSTS Release is under .vsrm
-   if ($VSTeamVersionTable.Account.ToLower().Contains('visualstudio.com')) {
-      $instance = $VSTeamVersionTable.Account.ToLower().Replace('visualstudio.com', 'vsrm.visualstudio.com')
-   }
+function _getEntitlementBase {
+   return _addSubDomain -subDomain 'vsaex'
+}
 
-   return $instance
+function _getReleaseBase {
+   return _addSubDomain -subDomain 'vsrm'
 }
 
 # The url for release is special and used in more than one

@@ -591,6 +591,45 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "MemberEntitlementManagement: $($VSTeamVersionTable.MemberEntitlementManagement)"
 }
 
+function Invoke-VSTeamRequest {
+   [CmdletBinding(DefaultParameterSetName = 'Get')]
+   param(
+      [string]$resource,
+      [string]$id,
+      [string]$version,
+      [string]$queryString,
+      [string]$subDomain,
+      [ValidateSet('Get', 'Post', 'Patch','Delete', 'Options', 'Put')]
+      [string]$method,
+      [string]$body
+   )
+   DynamicParam {
+      _buildProjectNameDynamicParam -Mandatory $false
+   }
+
+   process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $instance = _addSubDomain -subDomain $subDomain
+
+      if ($id) {
+         $resource += "/$id"
+      }
+
+      if($ProjectName) {
+         $url = $instance + "/$projectName/_apis" + $resource + '?api-version=' + $version
+      } else {
+         $url =  $instance + "/_apis/" + $resource + '?api-version=' + $version
+      }
+
+      switch ($method) {
+         'Delete' { _get -url $url }
+         Default { _get -url $url }
+      }
+   }
+}
+
 $VSTeamVersionTable = @{
    'Account'                     = $env:TEAM_ACCT
    'DefaultProject'              = $env:TEAM_PROJECT
@@ -616,7 +655,7 @@ Set-Alias Set-APIVersion Set-VSTeamAPIVersion
 
 Export-ModuleMember `
    -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject,
-Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion `
+Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion, Invoke-VSTeamRequest `
    -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Clear-DefaultProject, 
 Set-DefaultProject, Get-TeamResourceArea, Set-APIVersion, gti `
    -Variable VSTeamVersionTable
