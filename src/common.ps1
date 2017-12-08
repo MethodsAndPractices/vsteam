@@ -184,11 +184,22 @@ function _buildReleaseURL {
 function _appendQueryString {
    param(
       $name,
-      $value
+      $value,
+      # When provided =0 will be outputed otherwise zeros will not be
+      # added. I had to add this for the userentitlements that is the only
+      # VSTS API I have found that requires Top and Skip to be passed in.
+      [Switch]$retainZero
    )
 
-   if ($value -ne $null) {
-      return "&$name=$value"
+   if ($retainZero.IsPresent) {
+      if ($value -ne $null) {
+         return "&$name=$value"
+      }
+   }
+   else {
+      if ($value) {
+         return "&$name=$value"
+      }
    }
 }
 

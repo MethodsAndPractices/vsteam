@@ -11,6 +11,7 @@ InModuleScope serviceendpoints {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamServiceEndpoint' {
+         Mock Write-Verbose
          Mock Invoke-RestMethod { return @{
                value = @{
                   createdBy       = @{}

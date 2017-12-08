@@ -32,14 +32,11 @@ function _buildURL {
 function _applyTypes {
    param(
       [Parameter(Mandatory = $true)]
-      $item,
-      [Parameter(Mandatory = $true)]
-      $ProjectName
+      $item
    )
 
-   # Add the ProjectName as a NoteProperty so we can use it further down the pipeline (it's not returned from the REST call)
-   $item | Add-Member -MemberType NoteProperty -Name ProjectName -Value $ProjectName
-   $item.PSObject.TypeNames.Insert(0, 'Team.Team')
+   $item.PSObject.TypeNames.Insert(0, 'Team.UserEntitlement')
+   $item.accessLevel.PSObject.TypeNames.Insert(0, 'Team.AccessLevel')
 }
 
 function Get-VSTeamUser {
@@ -50,6 +47,10 @@ function Get-VSTeamUser {
  
       [Parameter(ParameterSetName = 'List')]
       [int] $Skip = 0,
+
+      [Parameter(ParameterSetName = 'List')]
+      [ValidateSet('Projects', 'Extensions', 'Grouprules')]
+      [string[]] $Select,
  
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('TeamId')]
@@ -60,12 +61,12 @@ function Get-VSTeamUser {
       if ($Id) {
          foreach ($item in $Id) {
             # Build the url to return the single build
-            $listurl = _buildURL -projectName $ProjectName -Id $item
+            $listurl = _buildURL -Id $item
 
             # Call the REST API
             $resp = _get -url $listurl
             
-            #_applyTypes -item $resp -ProjectName $ProjectName
+            _applyTypes -item $resp
 
             Write-Output $resp
          }
@@ -74,16 +75,17 @@ function Get-VSTeamUser {
          # Build the url to list the teams
          $listurl = _buildURL
             
-         $listurl += _appendQueryString -name "top" -value $top
-         $listurl += _appendQueryString -name "skip" -value $skip
+         $listurl += _appendQueryString -name "top" -value $top -retainZero
+         $listurl += _appendQueryString -name "skip" -value $skip -retainZero
+         $listurl += _appendQueryString -name "select" -value ($select -join ",")
 
          # Call the REST API
          $resp = _get -url $listurl
 
          # Apply a Type Name so we can use custom format view and custom type extensions
-         # foreach ($item in $resp.value) {
-         #    _applyTypes -item $item -ProjectName $ProjectName
-         # }
+         foreach ($item in $resp.value) {
+            _applyTypes -item $item
+         }
 
          Write-Output $resp.value
       }
