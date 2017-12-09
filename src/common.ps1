@@ -491,18 +491,3 @@ function _put {
 
    return $resp
 }
-
-function _options {
-   param(
-      [string] $url
-   )
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Options -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
-   return $resp
-}

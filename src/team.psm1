@@ -116,15 +116,22 @@ function Get-VSTeamOption {
    param([switch] $Release)
 
    # Build the url to list the projects
+   $params = @{"Method" = "Options"}
+
    if ($Release.IsPresent) {
-      $url = _buildURL -release
+      $params.Add("SubDomain", "vsrm")
+      # $url = _buildURL -release
+      # $resp = Invoke-VSTeamRequest -subDomain vsrm -method Options
    }
    else {
-      $url = _buildURL
+      # $resp = Invoke-VSTeamRequest -subDomain vsrm -method Options
+      # $url = _buildURL
    }
 
+   $resp = Invoke-VSTeamRequest @params
+
    # Call the REST API
-   $resp = _options -url $url
+   #$resp = _options -url $url
    
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {

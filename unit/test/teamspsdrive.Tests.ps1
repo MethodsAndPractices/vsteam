@@ -18,6 +18,10 @@ Import-Module $PSScriptRoot\..\..\src\releases.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\teamspsdrive.psm1 -Force
 
 InModuleScope teamspsdrive {
+   # Just in case it was loaded. If we don't do 
+   # this some test may fail
+   Remove-VSTeamAccount | Out-Null
+
    Describe "TeamsPSDrive" {
       Mock Get-VSTeamProject { return [PSCustomObject]@{ 
             name        = 'Project' 

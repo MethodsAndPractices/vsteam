@@ -9,20 +9,33 @@ Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope team {
    Describe 'Invoke-VSTeamRequest' {
-      . "$PSScriptRoot\mockProjectDynamicParamMandatoryFalse.ps1"
+      Mock Write-Host
 
-      Context 'Invoke-VSTeamRequest' {
+      Context 'Invoke-VSTeamRequest Options' {
          $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
          Mock Invoke-RestMethod { Write-Host $args }
+         
+         Invoke-VSTeamRequest -Method Options 
 
          It 'Should call API' {
-            Invoke-VSTeamRequest -Method Options 
+            Assert-VerifiableMocks
+         }
+      }
+
+      Context 'Invoke-VSTeamRequest Release' {
+         $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+         Mock Invoke-RestMethod { Write-Host $args } -Verifiable
+
+         Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON
+
+         It 'Should call API' {
+            Assert-VerifiableMocks
          }
       }
    }
 
    Describe 'Team VSTS' {
-      . "$PSScriptRoot\mockProjectDynamicParam.ps1"
+      . "$PSScriptRoot\mockProjectDynamicParamMandatoryFalse.ps1"
 
       $contents = @"
       [
@@ -91,8 +104,8 @@ InModuleScope team {
          # Set the account to use for testing. A normal user would do this
          # using the Add-VSTeamAccount function.
          $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
-   
-         Mock _options { return @{
+
+         Mock Invoke-RestMethod { return @{
                count = 1
                value = @(
                   @{
@@ -106,15 +119,15 @@ InModuleScope team {
          
          It 'Should return all options' {
             Get-VSTeamOption | Should Not Be $null
-            Assert-MockCalled _options -ParameterFilter { 
-               $Url -eq "https://test.visualstudio.com/_apis/"
+            Assert-MockCalled Invoke-RestMethod -ParameterFilter { 
+               $Uri -eq "https://test.visualstudio.com/_apis/"
             }
          }
 
          It 'Should return release options' {
             Get-VSTeamOption -Release | Should Not Be $null
-            Assert-MockCalled _options -ParameterFilter { 
-               $Url -eq "https://test.vsrm.visualstudio.com/_apis/"
+            Assert-MockCalled Invoke-RestMethod -ParameterFilter { 
+               $Uri -eq "https://test.vsrm.visualstudio.com/_apis/"
             }
          }
       }
