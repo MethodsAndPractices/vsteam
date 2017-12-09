@@ -6,6 +6,7 @@ Import-Module $PSScriptRoot\..\..\src\users.psm1 -Force
 
 InModuleScope users {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   
    Describe "Users TFS Errors" {
       Context 'Get-VSTeamUser' {  
          Mock  _get { throw 'Should not be called' }

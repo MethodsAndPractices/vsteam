@@ -1,0 +1,1 @@
+Allows you to call any TFS/VSTS REST API.

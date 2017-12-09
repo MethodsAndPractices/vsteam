@@ -23,44 +23,44 @@ function _applyTypes {
 }
 
 function Get-VSTeamRelease {
-   [CmdletBinding(DefaultParameterSetName='List')]
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [ValidateSet('environments','artifacts', 'approvals', 'none')]
+      [ValidateSet('environments', 'artifacts', 'approvals', 'none')]
       [string] $expand,
 
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [ValidateSet('Draft', 'Active', 'Abandoned')]
       [string] $statusFilter,
 
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [int] $definitionId,
 
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [int] $top,
 
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [string] $createdBy,
 
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [DateTime] $minCreatedTime,
 
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [DateTime] $maxCreatedTime,
 
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [ValidateSet('ascending', 'descending')]
       [string] $queryOrder,
 
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [string] $continuationToken,
 
-      [Parameter(ParameterSetName='ByID', ValueFromPipelineByPropertyName=$true)]
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseID')]
       [int[]] $id
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam
+      _buildProjectNameDynamicParam -Mandatory $false
    }
 
    process {
@@ -69,7 +69,7 @@ function Get-VSTeamRelease {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if($id) {
+      if ($id) {
          foreach ($item in $id) {
             $listurl = _buildReleaseURL -resource 'releases' -projectName $projectName -id $item
 
@@ -82,8 +82,14 @@ function Get-VSTeamRelease {
 
             Write-Output $resp
          }
-      } else {
-         $listurl = _buildReleaseURL -resource 'releases' -projectName $ProjectName
+      }
+      else {
+         if ($ProjectName) {
+            $listurl = _buildReleaseURL -resource 'releases' -projectName $ProjectName
+         }
+         else {
+            $listurl = _buildReleaseURL -resource 'releases'
+         }
 
          $listurl += _appendQueryString -name "`$top" -value $top
          $listurl += _appendQueryString -name "`$expand" -value $expand
@@ -99,7 +105,7 @@ function Get-VSTeamRelease {
          $resp = _get -url $listurl
 
          # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach($item in $resp.value) {
+         foreach ($item in $resp.value) {
             _applyTypes -item $item
          }
 
@@ -109,9 +115,9 @@ function Get-VSTeamRelease {
 }
 
 function Show-VSTeamRelease {
-   [CmdletBinding(DefaultParameterSetName='ById')]
+   [CmdletBinding(DefaultParameterSetName = 'ById')]
    param(
-      [Parameter(ParameterSetName='ByID', ValueFromPipelineByPropertyName=$true, Mandatory=$true, Position = 1)]
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 1)]
       [Alias('ReleaseID')]
       [int] $id
    )
@@ -123,7 +129,7 @@ function Show-VSTeamRelease {
    process {
       Write-Debug 'Show-VSTeamRelease Process'
 
-      if($id -lt 1) {
+      if ($id -lt 1) {
          Throw "$id is not a valid id. Value must be greater than 0."
       }
 
@@ -136,21 +142,21 @@ function Show-VSTeamRelease {
 }
 
 function Add-VSTeamRelease {
-   [CmdletBinding(DefaultParameterSetName='ById', SupportsShouldProcess=$true, ConfirmImpact="Medium")]
+   [CmdletBinding(DefaultParameterSetName = 'ById', SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
-      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
       [int] $DefinitionId,
 
-      [Parameter(Mandatory=$false)]
+      [Parameter(Mandatory = $false)]
       [string] $Description,
 
-      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
       [string] $ArtifactAlias,
 
       [Parameter()]
       [string] $Name,
 
-      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
       [string] $BuildId,
 
       [Parameter()]
@@ -169,7 +175,8 @@ function Add-VSTeamRelease {
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
          $defs = Get-VSTeamReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
          $arrSet = $defs.name
-      } else {
+      }
+      else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of DefinitionName'
          $defs = $null
          $arrSet = $null
@@ -179,10 +186,11 @@ function Add-VSTeamRelease {
       $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName' -Mandatory $true
       $dp.Add($ParameterName, $rp)
 
-      if($Global:PSDefaultParameterValues["*:projectName"]) {
+      if ($Global:PSDefaultParameterValues["*:projectName"]) {
          $builds = Get-VSTeamBuild -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $builds.name
-      } else {
+      }
+      else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildName'
          $builds = $null
          $arrSet = $null
@@ -242,9 +250,9 @@ function Add-VSTeamRelease {
 }
 
 function Remove-VSTeamRelease {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
       # Forces the command without confirmation
@@ -282,9 +290,9 @@ function Remove-VSTeamRelease {
 }
 
 function Set-VSTeamReleaseStatus {
-   [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact="Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
-      [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
       [ValidateSet('Active', 'Abandoned')]
@@ -327,15 +335,15 @@ function Set-VSTeamReleaseStatus {
 }
 
 function Add-VSTeamReleaseEnvironment {
-   [CmdletBinding(DefaultParameterSetName='ById', SupportsShouldProcess=$true, ConfirmImpact="Medium")]
+   [CmdletBinding(DefaultParameterSetName = 'ById', SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
-      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
       [int] $ReleaseId,   
 
-      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
       [string] $EnvironmentId,
 
-      [Parameter(ParameterSetName='ById', Mandatory=$true)]
+      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
       [string] $EnvironmentStatus,
 
       # Forces the command without confirmation
@@ -351,7 +359,8 @@ function Add-VSTeamReleaseEnvironment {
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
          $defs = Get-VSTeamReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
          $arrSet = $defs.name
-      } else {
+      }
+      else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of DefinitionName'
          $defs = $null
          $arrSet = $null
@@ -361,10 +370,11 @@ function Add-VSTeamReleaseEnvironment {
       $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName' -Mandatory $true
       $dp.Add($ParameterName, $rp)
 
-      if($Global:PSDefaultParameterValues["*:projectName"]) {
+      if ($Global:PSDefaultParameterValues["*:projectName"]) {
          $builds = Get-VSTeamBuild -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
          $arrSet = $builds.name
-      } else {
+      }
+      else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildName'
          $builds = $null
          $arrSet = $null
@@ -399,7 +409,7 @@ function Add-VSTeamReleaseEnvironment {
 
       # Build the url
       $url = _buildReleaseURL -resource "releases/$ReleaseId/environments/$EnvironmentId"
-                              -projectName $projectName
+      -projectName $projectName
 
       $body = '{"status": "' + $EnvironmentStatus + '"}'       
 
@@ -431,7 +441,7 @@ Set-Alias Set-ReleaseStatus Set-VSTeamReleaseStatus
 Set-Alias Add-ReleaseEnvironment Add-VSTeamReleaseEnvironment
 
 Export-ModuleMember `
- -Function Get-VSTeamRelease, Show-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, 
-  Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment `
- -Alias Get-Release, Show-Release, Add-Release, Remove-Release, Set-ReleaseStatus,
-  Add-ReleaseEnvironment
+   -Function Get-VSTeamRelease, Show-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, 
+Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment `
+   -Alias Get-Release, Show-Release, Add-Release, Remove-Release, Set-ReleaseStatus,
+Add-ReleaseEnvironment

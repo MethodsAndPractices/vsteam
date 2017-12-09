@@ -8,6 +8,19 @@ Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 
 InModuleScope team {
+   Describe 'Invoke-VSTeamRequest' {
+      . "$PSScriptRoot\mockProjectDynamicParamMandatoryFalse.ps1"
+
+      Context 'Invoke-VSTeamRequest' {
+         $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+         Mock Invoke-RestMethod { Write-Host $args }
+
+         It 'Should call API' {
+            Invoke-VSTeamRequest -Method Options 
+         }
+      }
+   }
+
    Describe 'Team VSTS' {
       . "$PSScriptRoot\mockProjectDynamicParam.ps1"
 

@@ -227,7 +227,8 @@
       'Remove-Profile',
       'Get-Profile',
       'Set-APIVersion',
-      'gti')
+      'gti',
+      'ivr')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

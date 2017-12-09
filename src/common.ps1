@@ -161,7 +161,6 @@ function _getReleaseBase {
 # module so I moved it here.
 function _buildReleaseURL {
    param(
-      [parameter(Mandatory = $true)]
       [string] $projectName,
       [parameter(Mandatory = $true)]
       [string] $resource,

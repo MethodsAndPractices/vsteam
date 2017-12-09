@@ -592,16 +592,20 @@ function Set-VSTeamAPIVersion {
 }
 
 function Invoke-VSTeamRequest {
-   [CmdletBinding(DefaultParameterSetName = 'Get')]
+   [CmdletBinding()]
    param(
       [string]$resource,
+      [string]$area,
       [string]$id,
       [string]$version,
-      [string]$queryString,
       [string]$subDomain,
-      [ValidateSet('Get', 'Post', 'Patch','Delete', 'Options', 'Put')]
+      [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
       [string]$method,
-      [string]$body
+      [Parameter(ValueFromPipeline = $true)]
+      [object]$body,
+      [string]$InFile,
+      [string]$OutFile,
+      [switch]$JSON
    )
    DynamicParam {
       _buildProjectNameDynamicParam -Mandatory $false
@@ -611,21 +615,61 @@ function Invoke-VSTeamRequest {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $instance = _addSubDomain -subDomain $subDomain
+      $sb = New-Object System.Text.StringBuilder      
+
+      $sb.Append($(_addSubDomain -subDomain $subDomain)) | Out-Null
+
+      if ($ProjectName) {
+         $sb.Append("/$projectName") | Out-Null
+      }
+
+      $sb.Append("/_apis/") | Out-Null
+
+      if ($area) {
+         $sb.Append("$area/") | Out-Null
+      }
+
+      if ($resource) {
+         $sb.Append("$resource/") | Out-Null
+      }
 
       if ($id) {
-         $resource += "/$id"
+         $sb.Append($id) | Out-Null
       }
 
-      if($ProjectName) {
-         $url = $instance + "/$projectName/_apis" + $resource + '?api-version=' + $version
-      } else {
-         $url =  $instance + "/_apis/" + $resource + '?api-version=' + $version
+      if ($version) {
+         $sb.Append("?api-version=$version") | Out-Null
       }
 
-      switch ($method) {
-         'Delete' { _get -url $url }
-         Default { _get -url $url }
+      $url = $sb.ToString();
+
+      $params = $PSBoundParameters
+      $params.Add('Uri', $url)
+      $params.Add('UserAgent', (_getUserAgent))      
+
+      if (_useWindowsAuthenticationOnPremise) {
+         $params.Add('UseDefaultCredentials', $true)
+      }
+      else {
+         $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT"})
+      }
+
+      # We have to remove any extra parameters not used by Invoke-RestMethod
+      $params.Remove('Area') | Out-Null
+      $params.Remove('Resource') | Out-Null
+      $params.Remove('SubDomain') | Out-Null
+      $params.Remove('Id') | Out-Null
+      $params.Remove('Version') | Out-Null
+      $params.Remove('JSON') | Out-Null
+      $params.Remove('ProjectName') | Out-Null
+
+      $output = Invoke-RestMethod @params
+
+      if ($JSON.IsPresent) {
+         $output | ConvertTo-Json         
+      }
+      else {   
+         $output
       }
    }
 }
@@ -644,6 +688,7 @@ $VSTeamVersionTable = @{
 }
 
 Set-Alias gti Get-VSTeamInfo
+Set-Alias ivr Invoke-VSTeamRequest
 Set-Alias Get-TeamInfo Get-VSTeamInfo
 Set-Alias Add-TeamAccount Add-VSTeamAccount
 Set-Alias Remove-TeamAccount Remove-VSTeamAccount
@@ -657,7 +702,7 @@ Export-ModuleMember `
    -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject,
 Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion, Invoke-VSTeamRequest `
    -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Clear-DefaultProject, 
-Set-DefaultProject, Get-TeamResourceArea, Set-APIVersion, gti `
+Set-DefaultProject, Get-TeamResourceArea, Set-APIVersion, gti, ivr `
    -Variable VSTeamVersionTable
 
 # Check to see if the user stored the default project in an environment variable
