@@ -98,19 +98,43 @@ function Add-VSTeamUser {
       [Parameter(Mandatory = $true)]
       [Alias('UserEmail')]     
       [string]$Email,
-      [string]$Description = ""
+      [ValidateSet('Advanced', 'EarlyAdopter', 'Express', 'None', 'Professional', 'StakeHolder')]
+      [string]$License = 'EarlyAdopter',
+      [ValidateSet('Custom', 'ProjectAdministrator', 'ProjectContributor', 'ProjectReader', 'ProjectStakeholder')]
+      [string]$Group = 'ProjectContributor'
    )
+   
+   DynamicParam {
+      _buildProjectNameDynamicParam -Mandatory $false
+   }
 
    process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
       $listurl = _buildURL -ProjectName $ProjectName
-      $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
+      $obj = @{
+         accessLevel = @{
+            accountLicenseType = $License
+         }
+         user = @{
+            principalName = $email
+            subjectKind = 'user'
+         }
+         projectEntitlements = @{
+            group = @{
+               groupType = $Group
+            }
+            projectRef = @{
+               id = $ProjectName
+            }
+         }
+      }
+
+      $body = $obj | ConvertTo-Json
 
       # Call the REST API
-      $resp = _post -url $listurl -Body $body
-
-      _applyTypes -item $resp -ProjectName $ProjectName
-
-      return $resp
+      _post -url $listurl -Body $body
    }
 }
 

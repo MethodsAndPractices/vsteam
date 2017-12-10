@@ -155,7 +155,10 @@
       'Remove-VSTeamProfile',
       'Get-VSTeamProfile',
       'Set-VSTeamAPIVersion',
-      'Invoke-VSTeamRequest')
+      'Invoke-VSTeamRequest',
+      'Get-VSTeamUser',
+      'Remove-VSTeamUser',
+      'Add-VSTeamUser')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -228,7 +231,10 @@
       'Get-Profile',
       'Set-APIVersion',
       'gti',
-      'ivr')
+      'ivr',
+      'Add-User',
+      'Remove-User',
+      'Get-User')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

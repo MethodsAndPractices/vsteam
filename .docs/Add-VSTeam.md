@@ -12,14 +12,14 @@ Add-VSTeam [-TeamName] <String> [[-Description] <String>] [-ProjectName] <String
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+#include "./synopsis/Add-VSTeam.md"
 
 ## EXAMPLES
 
 ## PARAMETERS
 
 ### -Description
-{{Fill Description Description}}
+The description of the team.
 
 ```yaml
 Type: String
@@ -36,7 +36,7 @@ Accept wildcard characters: False
 #include "./params/projectName.md"
 
 ### -TeamName
-{{Fill TeamName Description}}
+The name of the team
 
 ```yaml
 Type: String
@@ -54,7 +54,6 @@ Accept wildcard characters: False
 
 ### System.String
 
-
 ## OUTPUTS
 
 ### System.Object
@@ -62,4 +61,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-

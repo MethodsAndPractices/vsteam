@@ -125,5 +125,17 @@ InModuleScope users {
             { Remove-VSTeamUser -Email 'not@found.com' -Force } | Should Throw
          }
       }
+
+      Context 'Add-VSTeamUser' {
+         Mock _post -Verifiable -ParameterFilter {
+            $Body -eq ''
+         }
+
+         Add-VSTeamUser -LicenseType earlyAdopter 
+
+         It 'Should add a user' {
+            Assert-VerifiableMocks
+         }
+      }
    }
 }
