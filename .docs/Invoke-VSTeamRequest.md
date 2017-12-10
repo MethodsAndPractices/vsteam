@@ -31,6 +31,25 @@ This command will return the releases for a project.
 
 #include "./params/projectName.md"
 
+### -ContentType
+Specifies the content type of the request.
+
+If this parameter is omitted and the request method is POST, the content type will be set to application/json.
+
+Otherwise, the content type is not specified in the call.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: Get
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Method
 Specifies the method used for the request. The acceptable values for this parameter are:
 

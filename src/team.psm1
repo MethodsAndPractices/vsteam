@@ -612,7 +612,8 @@ function Invoke-VSTeamRequest {
       [object]$body,
       [string]$InFile,
       [string]$OutFile,
-      [switch]$JSON
+      [switch]$JSON,
+      [string]$ContentType = 'application/json'
    )
    DynamicParam {
       _buildProjectNameDynamicParam -Mandatory $false
