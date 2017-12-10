@@ -127,11 +127,31 @@ InModuleScope users {
       }
 
       Context 'Add-VSTeamUser' {
+         $obj = @{
+            accessLevel = @{
+               accountLicenseType = 'earlyAdopter'
+            }
+            user = @{
+               principalName = 'test@user.com'
+               subjectKind = 'user'
+            }
+            projectEntitlements = @{
+               group = @{
+                  groupType = 'ProjectContributor'
+               }
+               projectRef = @{
+                  id = $null
+               }
+            }
+         }
+   
+         $expected = $obj | ConvertTo-Json
+
          Mock _post -Verifiable -ParameterFilter {
-            $Body -eq ''
+            $Body -eq $expected
          }
 
-         Add-VSTeamUser -LicenseType earlyAdopter 
+         Add-VSTeamUser -License earlyAdopter -Email 'test@user.com'
 
          It 'Should add a user' {
             Assert-VerifiableMocks

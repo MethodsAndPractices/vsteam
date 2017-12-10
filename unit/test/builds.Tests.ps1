@@ -13,6 +13,10 @@ Import-Module $PSScriptRoot\..\..\src\builds.psm1 -Force
 # internal (non-exported) code of a Script Module.
 InModuleScope builds {
 
+   # Just in case it was loaded. If we don't do 
+   # this some test may fail
+   Remove-VSTeamAccount | Out-Null
+
    # Sample result of a single build
    $singleResult = [PSCustomObject]@{
       logs              = [PSCustomObject]@{}
@@ -136,29 +140,29 @@ InModuleScope builds {
       }
 
       Context 'Add-VSTeamBuild by name' {
-         Mock Invoke-RestMethod { return $singleResult }
+         Mock _post { return $singleResult }
 
          It 'should add build' {
             Add-VSTeamBuild -ProjectName project -BuildDefinitionName 'folder\MyBuildDef'
 
             # Call to queue build.
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            Assert-MockCalled _post -Exactly -Scope It -Times 1 -ParameterFilter {
                $Body -eq '{"definition": {"id": 2}}' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)"
+               $Url -eq "https://test.visualstudio.com/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)"
             }
          }
       }
 
       Context 'Add-VSTeamBuild by id' {
-         Mock Invoke-RestMethod { return $singleResult }
+         Mock _post { return $singleResult }
 
          It 'should add build' {
             Add-VSTeamBuild -ProjectName project -BuildDefinitionId 2
 
             # Call to queue build.
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            Assert-MockCalled _post -Exactly -Scope It -Times 1 -ParameterFilter {
                $Body -eq '{"definition": {"id": 2}}' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)"
+               $Url -eq "https://test.visualstudio.com/project/_apis/build/builds?api-version=$($VSTeamVersionTable.Build)"
             }
          }
       }
