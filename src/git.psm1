@@ -4,34 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
-   param(
-      [string] $ProjectName,
-      [guid] $Id,
-      [string] $Name
-   )
-
-   _hasAccount
-
-   $instance = $VSTeamVersionTable.Account
-   $resource = "/git/repositories"
-   $version = $VSTeamVersionTable.Git
-
-   if ($ProjectName) {
-      $instance += "/$ProjectName"
-   }
-
-   if ($id) {
-      $resource += "/$id"
-   }
-   elseif ($Name) {
-      $resource += "/$Name"
-   }
-
-   # Build the url to list the projects
-   return $instance + '/_apis' + $resource + '?api-version=' + $version
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
@@ -52,7 +24,7 @@ function Remove-VSTeamGitRepository {
    Process {
       foreach ($item in $id) {
          # Build the url to delete the build
-         $listurl = _buildURL -id $item
+         $listurl = _buildRequestURI -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Repository")) {
             try {
@@ -92,7 +64,7 @@ function Add-VSTeamGitRepository {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url to list the projects
-      $listurl = _buildURL -ProjectName $ProjectName
+      $listurl = _buildRequestURI -ProjectName $ProjectName -Area git -Resource repositories -Version $VSTeamVersionTable.Git 
 
       $body = '{"name": "' + $Name + '"}'
 
@@ -139,43 +111,46 @@ function Get-VSTeamGitRepository {
 
       if ($id) {
          foreach ($item in $id) {
-            # Build the url to return the single build
-            $listurl = _buildURL -projectName $ProjectName -id $item
-
-            # Call the REST API
-            $resp = _get -url $listurl
-
-            _applyTypes -item $resp
-
-            Write-Output $resp
+            try {
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
+               
+               _applyTypes -item $resp
+               
+               Write-Output $resp   
+            }
+            catch {
+               throw $_
+            }            
          }
       }
       elseif ($Name) {
          foreach ($item in $Name) {
-            # Build the url to return the single build
-            $listurl = _buildURL -projectName $ProjectName -Name $item
+            try {
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
 
-            # Call the REST API
-            $resp = _get -url $listurl
+               _applyTypes -item $resp
 
-            _applyTypes -item $resp
-
-            Write-Output $resp
+               Write-Output $resp
+            }
+            catch {
+               throw $_
+            }    
          }
       }
       else {
-         # Build the url to list the repos
-         $listurl = _buildURL -projectName $ProjectName
+         try {
+            $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version $VSTeamVersionTable.Git
 
-         # Call the REST API
-         $resp = _get -url $listurl
+            # Apply a Type Name so we can use custom format view and custom type extensions
+            foreach ($item in $resp.value) {
+               _applyTypes -item $item
+            }
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            Write-Output $resp.value
          }
-
-         Write-Output $resp.value
+         catch {
+            throw $_
+         }    
       }
    }
 }
@@ -210,5 +185,5 @@ Set-Alias Add-GitRepository Add-VSTeamGitRepository
 Set-Alias Remove-GitRepository Remove-VSTeamGitRepository
 
 Export-ModuleMember `
- -Function Get-VSTeamGitRepository, Show-VSTeamGitRepository, Add-VSTeamGitRepository, Remove-VSTeamGitRepository `
- -Alias Get-GitRepository, Show-GitRepository, Add-GitRepository, Remove-GitRepository
+   -Function Get-VSTeamGitRepository, Show-VSTeamGitRepository, Add-VSTeamGitRepository, Remove-VSTeamGitRepository `
+   -Alias Get-GitRepository, Show-GitRepository, Add-GitRepository, Remove-GitRepository

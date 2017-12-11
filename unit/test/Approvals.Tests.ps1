@@ -38,7 +38,10 @@ InModuleScope Approvals {
       }
 
       Context 'Get-VSTeamApproval' {
-         Mock Invoke-RestMethod { return @{
+         Mock Invoke-RestMethod {
+            throw "test $args"
+            
+            return @{
                count = 1
                value = @(
                   @{
@@ -57,7 +60,7 @@ InModuleScope Approvals {
          It 'should return approvals' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)"
             }
          }
       }
@@ -84,7 +87,7 @@ InModuleScope Approvals {
          It 'should return approvals' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)"
             }
          }
       }
@@ -104,6 +107,7 @@ InModuleScope Approvals {
          It 'should set approval' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
+               $Method -eq 'Patch' -and
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$($VSTeamVersionTable.Release)"
             }
          }
@@ -139,6 +143,7 @@ InModuleScope Approvals {
          It 'should set approval' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
+               $Method -eq 'Patch' -and
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$($VSTeamVersionTable.Release)"
             }
          }

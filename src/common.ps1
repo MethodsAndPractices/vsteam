@@ -6,6 +6,65 @@ function _hasAccount {
    }
 }
 
+
+function _buildRequestURI {
+   [CmdletBinding()]
+   param(
+      [string]$resource,
+      [string]$area,
+      [string]$id,
+      [string]$version,
+      [string]$subDomain,
+      [object]$queryString
+   )
+   DynamicParam {
+      _buildProjectNameDynamicParam -Mandatory $false
+   }
+
+   process {
+      _hasAccount
+
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $sb = New-Object System.Text.StringBuilder      
+
+      $sb.Append($(_addSubDomain -subDomain $subDomain)) | Out-Null
+
+      if ($ProjectName) {
+         $sb.Append("/$projectName") | Out-Null
+      }
+
+      $sb.Append("/_apis/") | Out-Null
+
+      if ($area) {
+         $sb.Append("$area/") | Out-Null
+      }
+
+      if ($resource) {
+         $sb.Append("$resource/") | Out-Null
+      }
+
+      if ($id) {
+         $sb.Append($id) | Out-Null
+      }
+
+      if ($version) {
+         $sb.Append("?api-version=$version") | Out-Null
+      }
+
+      $url = $sb.ToString()
+
+      if($queryString){
+         $queryString.keys | ForEach-Object {
+            $url += _appendQueryString -name $_ -value $queryString[$_]
+         }
+      }
+
+      return $url
+   }
+}
+
 function _handleException {
    param(
       [Parameter(Position = 1)]
@@ -17,7 +76,19 @@ function _handleException {
       Write-Warning $msg
    }
 
-   Write-Warning (ConvertFrom-Json $ex.ToString()).message
+   try {
+      $e = (ConvertFrom-Json $ex.ToString())
+      
+      if ($e.PSObject.Properties.Match('value') -ne $null) {
+         Write-Warning $e.value.message
+      }
+      else {
+         Write-Warning $e.message
+      }    
+   }
+   catch {
+      $msg = "An error occurred: $($ex.Exception.Message)"
+   } 
 }
 
 function _isVSTS {
@@ -242,7 +313,6 @@ function _getProjects {
 
    # Build the url to list the projects
    $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
-   Write-Verbose "listurl = $listurl"
 
    # Call the REST API
    try {
@@ -397,6 +467,51 @@ function _buildDynamicSwitchParam {
 
    # Create and return the dynamic parameter
    return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [switch], $AttributeCollection)
+}
+
+function _callAPI {
+   param(
+      [string]$resource,
+      [string]$area,
+      [string]$id,
+      [string]$version,
+      [string]$subDomain,
+      [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
+      [string]$method,
+      [Parameter(ValueFromPipeline = $true)]
+      [object]$body,
+      [string]$InFile,
+      [string]$OutFile,
+      [string]$ContentType = 'application/json',
+      [string]$ProjectName,
+      [string]$Url,
+      [object]$QueryString
+   )
+
+   # If the caller did not provide a Url build it.
+   if (-not $Url) {
+      $buildUriParams = @{} + $PSBoundParameters;
+      $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType'
+      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null}
+      $Url = _buildRequestURI @buildUriParams
+   }
+   
+   $params = $PSBoundParameters
+   $params.Add('Uri', $Url)
+   $params.Add('UserAgent', (_getUserAgent))      
+   
+   if (_useWindowsAuthenticationOnPremise) {
+      $params.Add('UseDefaultCredentials', $true)
+   }
+   else {
+      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT"})
+   }
+   
+   # We have to remove any extra parameters not used by Invoke-RestMethod
+   $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Url', 'QueryString'
+   foreach ($e in $extra) { $params.Remove($e) | Out-Null }
+         
+   Invoke-RestMethod @params
 }
 
 function _get {

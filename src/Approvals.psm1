@@ -29,20 +29,13 @@ function Get-VSTeamApproval {
    }
 
    Process {
-      Write-Debug 'Get-VSTeamApproval Process'
-
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $listurl = _buildReleaseURL -resource 'approvals' -version $VSTeamVersionTable.Release -projectName $ProjectName
-
-      $listurl += _appendQueryString -name "statusFilter" -value $StatusFilter
-      $listurl += _appendQueryString -name "assignedtoFilter" -value $AssignedToFilter
-      $listurl += _appendQueryString -name "releaseIdFilter" -value ($ReleaseIdFilter -join ',')
-
       try {
          # Call the REST API
-         $resp = _get -url $listurl
+         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $VSTeamVersionTable.Release `
+            -QueryString @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdFilter = ($ReleaseIdFilter -join ',')}
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -111,14 +104,13 @@ function Set-VSTeamApproval {
       Write-Verbose $body
 
       foreach ($item in $id) {
-         $listurl = _buildReleaseURL -resource 'approvals' -version $VSTeamVersionTable.Release -projectName $ProjectName -id $item
-
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Approval Status")) {
             Write-Debug 'Set-VSTeamApproval Call the REST API'
 
             try {
                # Call the REST API
-               _patch -url $listurl -body $body
+               _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource approvals `
+                  -Id $item -Version $VSTeamVersionTable.Release -body $body
                
                Write-Output "Approval $item status changed to $status"
             }

@@ -4,27 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
-   param(
-      [parameter(Mandatory = $true)]
-      [string] $ProjectName,
-      [int] $Id
-   )
-
-   _hasAccount
-
-   $instance = $VSTeamVersionTable.Account
-   $resource = "/build/definitions"
-   $version = $VSTeamVersionTable.Build
-
-   if ($id) {
-      $resource += "/$id"
-   }
-
-   # Build the url to list the projects
-   return $instance + "/$projectName/_apis" + $resource + '?api-version=' + $version
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
@@ -84,15 +63,8 @@ function Get-VSTeamBuildDefinition {
 
       if ($id) {
          foreach ($item in $id) {
-            # Build the url to list the projects
-            $listurl = _buildURL -projectName $projectName -id $item
-
-            if ($revision) {
-               $listurl += "&revision=$revision"
-            }
-
-            # Call the REST API
-            $resp = _get -url $listurl
+            $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $VSTeamVersionTable.Build `
+               -QueryString @{revision = $revision}
             
             _applyTypes -item $resp
 
@@ -100,19 +72,8 @@ function Get-VSTeamBuildDefinition {
          }
       }
       else {
-         # Build the url
-         $listurl = _buildURL -projectName $ProjectName
-
-         if ($type -ne 'All') {
-            $listurl += "&type=$type"
-         }
-
-         if ($filter) {
-            $listurl += "&name=$filter"
-         }
-
-         # Call the REST API
-         $resp = _get -url $listurl
+         $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $VSTeamVersionTable.Build `
+            -QueryString @{type = $type; name = $filter}
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -200,11 +161,7 @@ function Add-VSTeamBuildDefinition {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      # Build the url
-      $url = _buildURL -projectName $projectName
-
-      # Call the REST API
-      $resp = _postFile -url $url -infile $InFile
+      $resp = _callAPI -Method Post -ProjectName $ProjectName -Area build -Resource definitions -Version $VSTeamVersionTable.Build -infile $InFile
 
       return $resp
    }
@@ -229,11 +186,9 @@ function Remove-VSTeamBuildDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       foreach ($item in $id) {
-         $listurl = _buildURL -projectName $ProjectName -id $item
-
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build Definition")) {
             # Call the REST API
-            _delete -url $listurl
+            _callAPI -Method Delete -ProjectName $ProjectName -Area build -Resource definitions -Id $item -Version $VSTeamVersionTable.Build
 
             Write-Output "Deleted build defintion $item"
          }
@@ -247,6 +202,6 @@ Set-Alias Show-BuildDefinition Show-VSTeamBuildDefinition
 Set-Alias Remove-BuildDefinition Remove-VSTeamBuildDefinition
 
 Export-ModuleMember `
- -Function Show-VSTeamBuildDefinition, Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition,
-  Remove-VSTeamBuildDefinition `
- -Alias Get-BuildDefinition, Add-BuildDefinition, Show-BuildDefinition, Remove-BuildDefinition
+   -Function Show-VSTeamBuildDefinition, Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition,
+Remove-VSTeamBuildDefinition `
+   -Alias Get-BuildDefinition, Add-BuildDefinition, Show-BuildDefinition, Remove-BuildDefinition

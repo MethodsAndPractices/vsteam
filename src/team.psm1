@@ -16,24 +16,6 @@ function _getModuleVersion {
    return $d.Groups[1].Value
 }
 
-function _buildURL {
-   param(
-      [string] $resource,
-      [switch] $release
-   )
-
-   _hasAccount
-   
-   if ($release.IsPresent) {
-      $instance = _getReleaseBase
-   }
-   else {
-      $instance = $VSTeamVersionTable.Account
-   }
-
-   return $instance + '/_apis/' + $resource
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
@@ -120,19 +102,11 @@ function Get-VSTeamOption {
 
    if ($Release.IsPresent) {
       $params.Add("SubDomain", "vsrm")
-      # $url = _buildURL -release
-      # $resp = Invoke-VSTeamRequest -subDomain vsrm -method Options
    }
-   else {
-      # $resp = Invoke-VSTeamRequest -subDomain vsrm -method Options
-      # $url = _buildURL
-   }
-
-   $resp = Invoke-VSTeamRequest @params
 
    # Call the REST API
-   #$resp = _options -url $url
-   
+   $resp = _callAPI @params
+
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
       _applyTypes -item $item -type 'Team.Option'
@@ -146,7 +120,7 @@ function Get-VSTeamResourceArea {
    param()
 
    # Build the url to list the projects
-   $url = _buildURL -resource 'resourceareas'
+   $url = _buildRequestURI -resource 'resourceareas'
 
    # Call the REST API
    $resp = _get -url $url
@@ -620,58 +594,12 @@ function Invoke-VSTeamRequest {
    }
 
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      $sb = New-Object System.Text.StringBuilder      
-
-      $sb.Append($(_addSubDomain -subDomain $subDomain)) | Out-Null
-
-      if ($ProjectName) {
-         $sb.Append("/$projectName") | Out-Null
-      }
-
-      $sb.Append("/_apis/") | Out-Null
-
-      if ($area) {
-         $sb.Append("$area/") | Out-Null
-      }
-
-      if ($resource) {
-         $sb.Append("$resource/") | Out-Null
-      }
-
-      if ($id) {
-         $sb.Append($id) | Out-Null
-      }
-
-      if ($version) {
-         $sb.Append("?api-version=$version") | Out-Null
-      }
-
-      $url = $sb.ToString();
-
       $params = $PSBoundParameters
-      $params.Add('Uri', $url)
-      $params.Add('UserAgent', (_getUserAgent))      
-
-      if (_useWindowsAuthenticationOnPremise) {
-         $params.Add('UseDefaultCredentials', $true)
-      }
-      else {
-         $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT"})
-      }
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
-      $params.Remove('Area') | Out-Null
-      $params.Remove('Resource') | Out-Null
-      $params.Remove('SubDomain') | Out-Null
-      $params.Remove('Id') | Out-Null
-      $params.Remove('Version') | Out-Null
       $params.Remove('JSON') | Out-Null
-      $params.Remove('ProjectName') | Out-Null
-
-      $output = Invoke-RestMethod @params
+      
+      $output = _callAPI @params
 
       if ($JSON.IsPresent) {
          $output | ConvertTo-Json         

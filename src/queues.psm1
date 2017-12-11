@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 function _buildURL {
    param(
-      [parameter(Mandatory=$true)]
+      [parameter(Mandatory = $true)]
       [string] $projectName,
       [int] $id
    )
@@ -17,7 +17,7 @@ function _buildURL {
    $resource = "/distributedtask/queues"
    $instance = $VSTeamVersionTable.Account
 
-   if($id) {
+   if ($id) {
       $resource += "/$id"
    }
 
@@ -35,14 +35,14 @@ function _applyTypes {
 }
 
 function Get-VSTeamQueue {
-   [CmdletBinding(DefaultParameterSetName='List')]
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(ParameterSetName='List')]
+      [Parameter(ParameterSetName = 'List')]
       [string] $queueName,
-      [Parameter(ParameterSetName='List')]
-      [ValidateSet('None','Manage', 'Use')]
+      [Parameter(ParameterSetName = 'List')]
+      [ValidateSet('None', 'Manage', 'Use')]
       [string] $actionFilter,
-      [Parameter(ParameterSetName='ByID')]
+      [Parameter(ParameterSetName = 'ByID')]
       [Alias('QueueID')]
       [string] $id
    )
@@ -55,33 +55,25 @@ function Get-VSTeamQueue {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if($id) {
-         # Build the url
-         $url = _buildURL -projectName $projectName -id $id
+      if ($id) {
+         try {
+            $resp = _callAPI -ProjectName $ProjectName -Id $id -Area distributedtask -Resource queues `
+               -Version $VSTeamVersionTable.DistributedTask
          
-         $resp = _get -url $url
-         
-         _applyTypes -item $resp
+            _applyTypes -item $resp
 
-         # Call the REST API
-         Write-Output $resp
-      } else {
-         # Build the url
-         $url = _buildURL -projectName $projectName
-
-         if ($queueName) {
-            $url += "&queueName=$queueName"
+            Write-Output $resp  
          }
-
-         if ($actionFilter) {
-            $url += "&actionFilter=$actionFilter"
+         catch {
+            throw $_
          }
-
-         # Call the REST API
-         $resp = _get -url $url
+      }
+      else {        
+         $resp = _callAPI -ProjectName $projectName -Area distributedtask -Resource queues `
+            -QueryString @{ queueName = $queueName; actionFilter = $actionFilter } -Version $VSTeamVersionTable.DistributedTask
          
          # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach($item in $resp.value) {
+         foreach ($item in $resp.value) {
             _applyTypes -item $item
          }
 
@@ -93,5 +85,5 @@ function Get-VSTeamQueue {
 Set-Alias Get-Queue Get-VSTeamQueue
 
 Export-ModuleMember `
- -Function Get-VSTeamQueue `
- -Alias Get-Queue
+   -Function Get-VSTeamQueue `
+   -Alias Get-Queue
