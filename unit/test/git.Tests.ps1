@@ -73,6 +73,19 @@ InModuleScope git {
             Assert-VerifiableMocks
          }
       }
+
+      Context 'Remove-VSTeamGitRepository by id' {
+         Mock Invoke-RestMethod
+
+         Remove-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000 -Force
+
+         It 'Should create VSAccount' {
+            Assert-MockCalled Invoke-RestMethod -ParameterFilter {
+               $Method -eq 'Delete' -and
+               $Uri -eq "https://test.visualstudio.com/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$($VSTeamVersionTable.Git)"
+            }
+         }
+      }
    }
 
    Describe "Git TFS" {
@@ -111,16 +124,13 @@ InModuleScope git {
          }
       }
 
-      # Must be last because it sets $VSTeamVersionTable.Account to $null
-      Context '_buildURL handles exception' {
-         
-         # Arrange
-         $VSTeamVersionTable.Account = $null
-         
-         It 'should return approvals' {
-         
-            # Act
-            { _buildURL } | Should Throw
+      Context 'Add-VSTeamGitRepository by name' {
+         Mock Invoke-RestMethod { return $singleResult } -Verifiable
+      
+         Add-VSTeamGitRepository -Name 'test' -ProjectName 'test'
+      
+         It 'Should create VSAccount' {
+            Assert-VerifiableMocks
          }
       }
    }

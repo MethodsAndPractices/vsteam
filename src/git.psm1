@@ -17,19 +17,14 @@ function Remove-VSTeamGitRepository {
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [guid[]] $Id,
-
       [switch] $Force
    )
 
    Process {
       foreach ($item in $id) {
-         # Build the url to delete the build
-         $listurl = _buildRequestURI -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
-
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Repository")) {
             try {
-               # Call the REST API
-               _delete -url $listurl
+               _callAPI -Method Delete -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
                
                Write-Output "Deleted repository $item"
             }
