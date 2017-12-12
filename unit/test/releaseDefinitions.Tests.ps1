@@ -58,6 +58,21 @@ InModuleScope ReleaseDefinitions {
          }
       }
 
+      Context 'Get-VSTeamReleaseDefinition with expand environments' {
+         Mock _useWindowsAuthenticationOnPremise { return $true }
+         Mock Invoke-RestMethod {
+            return $results 
+         }
+
+         It 'should return Release definitions' {
+            Get-VSTeamReleaseDefinition -projectName project -expand environments
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$($VSTeamVersionTable.Release)&`$expand=environments"
+            }
+         }
+      }
+
       Context 'Add-VSTeamReleaseDefinition' {
          Mock Invoke-RestMethod {
             return $results 
