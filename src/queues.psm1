@@ -4,30 +4,9 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
-   param(
-      [parameter(Mandatory = $true)]
-      [string] $projectName,
-      [int] $id
-   )
-
-   _hasAccount
-
-   $version = $VSTeamVersionTable.DistributedTask
-   $resource = "/distributedtask/queues"
-   $instance = $VSTeamVersionTable.Account
-
-   if ($id) {
-      $resource += "/$id"
-   }
-
-   # Build the url to list the projects
-   return $instance + "/$projectName" + '/_apis' + $resource + '?api-version=' + $version
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToQueue {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Queue')
@@ -56,17 +35,12 @@ function Get-VSTeamQueue {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       if ($id) {
-         try {
-            $resp = _callAPI -ProjectName $ProjectName -Id $id -Area distributedtask -Resource queues `
-               -Version $VSTeamVersionTable.DistributedTask
+         $resp = _callAPI -ProjectName $ProjectName -Id $id -Area distributedtask -Resource queues `
+            -Version $VSTeamVersionTable.DistributedTask
          
-            _applyTypes -item $resp
+         _applyTypesToQueue -item $resp
 
-            Write-Output $resp  
-         }
-         catch {
-            throw $_
-         }
+         Write-Output $resp  
       }
       else {        
          $resp = _callAPI -ProjectName $projectName -Area distributedtask -Resource queues `
@@ -74,7 +48,7 @@ function Get-VSTeamQueue {
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToQueue -item $item
          }
 
          Write-Output $resp.value
