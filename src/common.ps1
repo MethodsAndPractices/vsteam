@@ -55,7 +55,7 @@ function _buildRequestURI {
 
       $url = $sb.ToString()
 
-      if($queryString){
+      if ($queryString) {
          $queryString.keys | ForEach-Object {
             $url += _appendQueryString -name $_ -value $queryString[$_]
          }
@@ -494,6 +494,13 @@ function _callAPI {
       $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType'
       foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null}
       $Url = _buildRequestURI @buildUriParams
+   }
+   elseif ($QueryString) {
+      # If the caller provided the URL and QueryString we need
+      # to add the querystring now
+      $QueryString.keys | ForEach-Object {
+         $url += _appendQueryString -name $_ -value $QueryString[$_]
+      }
    }
    
    $params = $PSBoundParameters

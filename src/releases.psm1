@@ -71,11 +71,7 @@ function Get-VSTeamRelease {
 
       if ($id) {
          foreach ($item in $id) {
-            $listurl = _buildReleaseURL -resource 'releases' -projectName $projectName -id $item
-
-            # Call the REST API
-            Write-Debug 'Get-VSTeamRelease Call the REST API'
-            $resp = _get -url $listurl
+            $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $VSTeamVersionTable.Release
             
             # Apply a Type Name so we can use custom format view and custom type extensions
             _applyTypes -item $resp
@@ -85,24 +81,26 @@ function Get-VSTeamRelease {
       }
       else {
          if ($ProjectName) {
-            $listurl = _buildReleaseURL -resource 'releases' -projectName $ProjectName
+            $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $VSTeamVersionTable.Release
          }
          else {
-            $listurl = _buildReleaseURL -resource 'releases'
+            $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $VSTeamVersionTable.Release
          }
 
-         $listurl += _appendQueryString -name "`$top" -value $top
-         $listurl += _appendQueryString -name "`$expand" -value $expand
-         $listurl += _appendQueryString -name "createdBy" -value $createdBy
-         $listurl += _appendQueryString -name "queryOrder" -value $queryOrder
-         $listurl += _appendQueryString -name "statusFilter" -value $statusFilter
-         $listurl += _appendQueryString -name "definitionId" -value $definitionId
-         $listurl += _appendQueryString -name "minCreatedTime" -value $minCreatedTime
-         $listurl += _appendQueryString -name "maxCreatedTime" -value $maxCreatedTime
-         $listurl += _appendQueryString -name "continuationToken" -value $continuationToken
+         $QueryString = @{
+            '$top'              = $top
+            '$expand'           = $expand
+            'createdBy'         = $createdBy
+            'queryOrder'        = $queryOrder
+            'statusFilter'      = $statusFilter
+            'definitionId'      = $definitionId
+            'minCreatedTime'    = $minCreatedTime
+            'maxCreatedTime'    = $maxCreatedTime
+            'continuationToken' = $continuationToken
+         }
 
          # Call the REST API
-         $resp = _get -url $listurl
+         $resp = _callAPI -url $listurl -QueryString $QueryString
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -278,6 +276,7 @@ function Remove-VSTeamRelease {
             try {
                # Call the REST API
                _delete -url $listurl
+               # _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item
 
                Write-Output "Deleted release $item"
             }
@@ -315,14 +314,13 @@ function Set-VSTeamReleaseStatus {
       $body = '{ "status": "' + $status + '" }'
 
       foreach ($item in $id) {
-         $listurl = _buildReleaseURL -resource 'releases' -projectName $ProjectName -id $item
-
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
             Write-Debug 'Remove-VSTeamRelease Call the REST API'
 
             try {
                # Call the REST API
-               _callAPI -Method Patch -url $listurl -body $body -ContentType 'application/json'
+               _callAPI -Method Patch -SubDomain vsrm -Area release -Resource releases -projectName $ProjectName -id $item `
+                  -body $body -ContentType 'application/json' -Version $VSTeamVersionTable.Release
 
                Write-Output "Release $item status changed to $status"
             }

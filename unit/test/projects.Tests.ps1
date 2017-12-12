@@ -47,7 +47,13 @@ InModuleScope projects {
 
       Context 'Get-VSTeamProject with no parameters' {
 
-         Mock Invoke-RestMethod { return @{value = 'projects'}}
+         Mock Invoke-RestMethod { return [PSCustomObject]@{
+               value = [PSCustomObject]@{
+                  defaultTeam = [PSCustomObject]@{}
+                  _links      = [PSCustomObject]@{}
+               }
+            }
+         }
 
          It 'Should return projects' {
             Get-VSTeamProject

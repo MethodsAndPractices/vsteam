@@ -3,6 +3,48 @@
 . "$PSScriptRoot\..\..\src\common.ps1"
 
 Describe 'Common' {
+   Context '_getUserAgent on Mac' {
+      Mock _isOnWindows { return $false }
+      Mock _isOnMac { return $true }
+      Mock _isOnLinux { return $false }
+      $VSTeamVersionTable.ModuleVersion = '0.0.0'
+
+      $actual = _getUserAgent
+
+      It 'Should return User Agent for OSx' {
+         $actual | Should BeLike '*OSX*'
+      }
+
+      It 'Should return User Agent for Module Version' {
+         $actual | Should BeLike '*0.0.0*'
+      }
+
+      It 'Should return User Agent for PowerShell Version' {
+         $actual | Should BeLike "*$($PSVersionTable.PSVersion.ToString())*"
+      }
+   }
+
+   Context '_getUserAgent on Linux' {
+      Mock _isOnWindows { return $false }
+      Mock _isOnMac { return $false }
+      Mock _isOnLinux { return $true }
+      $VSTeamVersionTable.ModuleVersion = '0.0.0'
+
+      $actual = _getUserAgent
+
+      It 'Should return User Agent for Linux' {
+         $actual | Should BeLike '*Linux*'
+      }
+
+      It 'Should return User Agent for Module Version' {
+         $actual | Should BeLike '*0.0.0*'
+      }
+
+      It 'Should return User Agent for PowerShell Version' {
+         $actual | Should BeLike "*$($PSVersionTable.PSVersion.ToString())*"
+      }
+   }
+
    Context '_buildProjectNameDynamicParam' {
       Mock _getProjects { return  ConvertFrom-Json '["Demo", "Universal"]' }
      
