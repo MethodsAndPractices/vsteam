@@ -10,11 +10,11 @@ InModuleScope pools {
 
    Describe 'pools' {
       Context 'Get-VSTeamPool with no parameters' {
-         Mock Invoke-RestMethod { return @{
-               value = @{
-                  createdBy            = @{}
-                  administratorsGroup  = @{}
-                  serviceAccountsGroup = @{}
+         Mock Invoke-RestMethod { return [PSCustomObject]@{
+               value = [PSCustomObject]@{
+                  createdBy            = [PSCustomObject]@{}
+                  administratorsGroup  = [PSCustomObject]@{}
+                  serviceAccountsGroup = [PSCustomObject]@{}
                }
             }}
 
@@ -22,16 +22,16 @@ InModuleScope pools {
             Get-VSTeamPool
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools?api-version=$($VSTeamVersionTable.DistributedTask)"
+               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools/?api-version=$($VSTeamVersionTable.DistributedTask)"
             }
          }
       }
 
       Context 'Get-VSTeamPool with id parameter' {
-         Mock Invoke-RestMethod { return @{
-               createdBy            = @{}
-               administratorsGroup  = @{}
-               serviceAccountsGroup = @{}
+         Mock Invoke-RestMethod { return [PSCustomObject]@{
+               createdBy            = [PSCustomObject]@{}
+               administratorsGroup  = [PSCustomObject]@{}
+               serviceAccountsGroup = [PSCustomObject]@{}
             }}
 
          it 'Should return all the pools' {

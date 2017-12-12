@@ -4,28 +4,9 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
-   param(
-      [int] $id
-   )
-
-   _hasAccount
-
-   $version = $VSTeamVersionTable.DistributedTask
-   $resource = "/distributedtask/pools"
-   $instance = $VSTeamVersionTable.Account
-
-   if ($id) {
-      $resource += "/$id"
-   }
-
-   # Build the url to list the projects
-   return $instance + '/_apis' + $resource + '?api-version=' + $version
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToPools {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Pool')
@@ -53,25 +34,18 @@ function Get-VSTeamPool {
    process {
 
       if ($id) {
-         # Build the url
-         $url = _buildURL -id $id
-
-         # Call the REST API
-         $resp = _get -url $url
+         $resp = _callAPI -Area distributedtask -Resource pools -Id $id -Version $VSTeamVersionTable.DistributedTask
          
-         _applyTypes -item $resp
+         _applyTypesToPools -item $resp
 
          Write-Output $resp
       }
       else {
-         # Build the url
-         $url = _buildURL
-
-         $resp = _get -url $url
+         $resp = _callAPI -Area distributedtask -Resource pools -Version $VSTeamVersionTable.DistributedTask
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToPools -item $item
          }
 
          # Call the REST API
