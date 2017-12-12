@@ -529,22 +529,6 @@ function _get {
    return $resp
 }
 
-function _postFile {
-   param(
-      [string] $url,
-      [string] $inFile
-   )
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -UseDefaultCredentials -InFile $inFile
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -Uri $url -ContentType "application/json" -Headers @{Authorization = "Basic $env:TEAM_PAT"} -InFile $inFile
-   }
-
-   return $resp
-}
-
 function _post {
    param(
       [string] $url,
