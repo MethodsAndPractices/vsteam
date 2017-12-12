@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToReleaseDefinition {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.ReleaseDefinition')
@@ -55,31 +55,27 @@ function Get-VSTeamReleaseDefinition {
 
       if ($id) {
          foreach ($item in $id) {
-            $listurl = _buildReleaseURL -resource 'definitions' -version '3.0-preview.1' -projectName $projectName -id $item
-
-            # Call the REST API
-            Write-Debug 'Get-VSTeamReleaseDefinition Call the REST API'
-            $resp = _get -url $listurl            
+            $resp = _callAPI -subDomain vsrm -Area release -resource definitions -version $VSTeamVersionTable.Release -projectName $projectName -id $item
 
             # Apply a Type Name so we can use custom format view and custom type extensions
-            _applyTypes -item $resp
+            _applyTypesToReleaseDefinition -item $resp
 
             Write-Output $resp
          }
       }
       else {
-         $listurl = _buildReleaseURL -resource 'definitions' -version '3.0-preview.1' -projectName $ProjectName
+         $listurl = _buildRequestURI -subDomain vsrm -Area release -resource 'definitions' -version $VSTeamVersionTable.Release -projectName $ProjectName
 
          if ($expand -ne 'none') {
             $listurl += "&`$expand=$($expand)"
          }
 
          # Call the REST API
-         $resp = _get -url $listurl
+         $resp = _callAPI -url $listurl
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToReleaseDefinition -item $item
          }
 
          Write-Output $resp.value
@@ -133,12 +129,8 @@ function Add-VSTeamReleaseDefinition {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      # Build the url
-      $url = _buildReleaseURL -resource 'definitions' -version '3.0-preview.1' -projectName $projectName
-
-      # Call the REST API
-      Write-Debug 'Add-VSTeamReleaseDefinition Call the REST API'
-      $resp = _postFile -url $url -inFile $inFile
+      $resp = _callAPI -Method Post -subDomain vsrm -Area release -Resource definitions -ProjectName $ProjectName `
+         -version $VSTeamVersionTable.Release -inFile $inFile
 
       Write-Output $resp
    }
@@ -165,12 +157,8 @@ function Remove-VSTeamReleaseDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       foreach ($item in $id) {
-         $listurl = _buildReleaseURL -resource 'definitions' -version '3.0-preview.1' -projectName $ProjectName -id $item
-
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release Definition")) {
-            # Call the REST API
-            Write-Debug 'Remove-VSTeamReleaseDefinition Call the REST API'
-            _delete -url $listurl
+            _callAPI -Method Delete -subDomain vsrm -Area release -Resource definitions -Version $VSTeamVersionTable.Release -projectName $ProjectName -id $item
             
             Write-Output "Deleted release defintion $item"
          }
@@ -184,6 +172,6 @@ Set-Alias Add-ReleaseDefinition Add-VSTeamReleaseDefinition
 Set-Alias Remove-ReleaseDefinition Remove-VSTeamReleaseDefinition
 
 Export-ModuleMember `
- -Function Get-VSTeamReleaseDefinition, Show-VSTeamReleaseDefinition, Add-VSTeamReleaseDefinition,
-  Remove-VSTeamReleaseDefinition `
- -Alias Get-ReleaseDefinition, Show-ReleaseDefinition, Add-ReleaseDefinition, Remove-ReleaseDefinition
+   -Function Get-VSTeamReleaseDefinition, Show-VSTeamReleaseDefinition, Add-VSTeamReleaseDefinition,
+Remove-VSTeamReleaseDefinition `
+   -Alias Get-ReleaseDefinition, Show-ReleaseDefinition, Add-ReleaseDefinition, Remove-ReleaseDefinition
