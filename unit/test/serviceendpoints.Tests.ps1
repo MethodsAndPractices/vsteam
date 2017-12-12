@@ -103,6 +103,38 @@ InModuleScope serviceendpoints {
          }
       }
 
+      Context 'Add-VSTeamSonarQubeEndpoint with securePersonalAccessToken' {
+         Mock Write-Progress
+         Mock Invoke-RestMethod { return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Post'}
+         Mock Invoke-RestMethod {
+
+            # This $i is in the module. Because we use InModuleScope
+            # we can see it
+            if ($i -gt 9) {
+               return [PSCustomObject]@{
+                  isReady         = $true
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
+               }
+            }
+
+            return [PSCustomObject]@{
+               isReady         = $false
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
+            }
+         }
+
+         It 'should create a new SonarQube Serviceendpoint' {
+            $password = '72f988bf-86f1-41af-91ab-2d7cd011db47' | ConvertTo-SecureString -AsPlainText -Force
+
+            Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -securePersonalAccessToken $password
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
+         }
+      }
+
       Context 'Add-VSTeamAzureRMServiceEndpoint-With-Failure' {
          Mock Write-Progress
          Mock Invoke-RestMethod { return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Post'}

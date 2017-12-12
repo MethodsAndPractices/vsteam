@@ -206,6 +206,27 @@ InModuleScope team {
          }
       }
 
+      Context 'Add-VSTeamAccount vsts with securePersonalAccessToken' {
+         Mock _isOnWindows { return $false }
+         Mock _setEnvironmentVariables
+         Mock Set-VSTeamAPIVersion
+
+         It 'should set env at process level' {
+            $password = '12345' | ConvertTo-SecureString -AsPlainText -Force
+
+            Add-VSTeamAccount -a mydemos -SecurePersonalAccessToken $password -Version VSTS
+
+            Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Version -eq 'VSTS'
+            }
+
+            # Make sure set env vars was called with the correct parameters
+            Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+            }
+         }
+      }
+
       Context 'Add-VSTeamAccount run as administrator' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
