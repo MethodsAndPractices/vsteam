@@ -322,7 +322,7 @@ function Set-VSTeamReleaseStatus {
 
             try {
                # Call the REST API
-               _patch -url $listurl -body $body
+               _callAPI -Method Patch -url $listurl -body $body -ContentType 'application/json'
 
                Write-Output "Release $item status changed to $status"
             }
@@ -420,7 +420,7 @@ function Add-VSTeamReleaseEnvironment {
 
          try {
             Write-Debug 'Add-VSTeamReleaseEnvironment Call the REST API'
-            $resp = _patch -url $url -body $body
+            $resp = _callAPI -Method Patch -url $url -body $body -ContentType 'application/json'
 
             # _applyTypes $resp
 

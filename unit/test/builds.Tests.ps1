@@ -72,7 +72,10 @@ InModuleScope builds {
          Update-VSTeamBuild -projectName project -id 1 -KeepForever $true -Force
 
          It 'should post changes' {
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"keepForever": true}' -and $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1?api-version=$($VSTeamVersionTable.Build)" }
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter { 
+               $Method -eq 'Patch' -and 
+               $Body -eq '{"keepForever": true}' -and 
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1?api-version=$($VSTeamVersionTable.Build)" }
          }
       }
 

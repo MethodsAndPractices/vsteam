@@ -130,7 +130,7 @@ function Add-VSTeamReleaseDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $resp = _callAPI -Method Post -subDomain vsrm -Area release -Resource definitions -ProjectName $ProjectName `
-         -version $VSTeamVersionTable.Release -inFile $inFile
+         -version $VSTeamVersionTable.Release -inFile $inFile -ContentType 'application/json'
 
       Write-Output $resp
    }

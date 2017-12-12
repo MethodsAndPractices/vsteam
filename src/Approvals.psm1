@@ -110,7 +110,7 @@ function Set-VSTeamApproval {
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource approvals `
-                  -Id $item -Version $VSTeamVersionTable.Release -body $body
+                  -Id $item -Version $VSTeamVersionTable.Release -body $body -ContentType 'application/json'
                
                Write-Output "Approval $item status changed to $status"
             }

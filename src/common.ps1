@@ -482,7 +482,7 @@ function _callAPI {
       [object]$body,
       [string]$InFile,
       [string]$OutFile,
-      [string]$ContentType = 'application/json',
+      [string]$ContentType,
       [string]$ProjectName,
       [string]$Url,
       [object]$QueryString
@@ -545,22 +545,6 @@ function _post {
    return $resp
 }
 
-function _patch {
-   param(
-      [string] $url,
-      [string] $body
-   )
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $url -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Patch -ContentType "application/json" -Body $body -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
-   return $resp
-}
-
 function _delete {
    param(
       [string] $url
@@ -571,21 +555,6 @@ function _delete {
    }
    else {
       $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
-   return $resp
-}
-
-function _put {
-   param(
-      [string] $url
-   )
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $url -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Put -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
    }
 
    return $resp

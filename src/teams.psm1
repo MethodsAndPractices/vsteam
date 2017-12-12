@@ -179,7 +179,7 @@ function Update-VSTeam {
          }
 
          # Call the REST API
-         $resp = _patch -url $listurl -Body $body
+         $resp = _callAPI -Method Patch -url $listurl -Body $body -ContentType 'application/json'
          
          _applyTypes -item $resp -ProjectName $ProjectName
 

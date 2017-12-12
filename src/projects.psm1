@@ -220,7 +220,7 @@ function Update-VSTeamProject {
          Write-Verbose $body
 
          # Call the REST API
-         $resp = _patch -url $listurl -body $body
+         $resp = _callAPI -Method Patch -url $listurl -body $body -ContentType 'application/json'
          
          _trackProgress -resp $resp -title 'Updating team project' -msg $msg
 
