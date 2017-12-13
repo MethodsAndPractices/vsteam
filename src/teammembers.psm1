@@ -51,6 +51,7 @@ function Get-VSTeamMember {
  
        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName=$true)]
        [Alias('Name')]
+       [Alias('Id')]
        [string] $TeamId
     )
 

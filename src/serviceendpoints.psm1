@@ -224,35 +224,35 @@ function Add-VSTeamAzureRMServiceEndpoint {
       }
 
       if (-not $servicePrincipalId) {
-         $creationMode = "Automatic"
-         $servicePrincipalId = ""
-         $servicePrincipalKey = ""
+         $creationMode = 'Automatic'
+         $servicePrincipalId = ''
+         $servicePrincipalKey = ''
       }
       else {
-         $creationMode = "Manual"
+         $creationMode = 'Manual'
       }
 
       $obj = @{
          authorization = @{
             parameters = @{
-               serviceprincipalid  = $servicePrincipalId;
-               serviceprincipalkey = $servicePrincipalKey;
+               serviceprincipalid  = $servicePrincipalId
+               serviceprincipalkey = $servicePrincipalKey
                tenantid            = $subscriptionTenantId
-            };
+            }
             scheme     = 'ServicePrincipal'
-         };
+         }
          data          = @{
-            subscriptionId   = $subscriptionId;
-            subscriptionName = $displayName;
+            subscriptionId   = $subscriptionId
+            subscriptionName = $displayName
             creationMode     = $creationMode
-         };
-         name          = $endpointName;
-         type          = 'azurerm';
+         }
+         name          = $endpointName
+         type          = 'azurerm'
          url           = 'https://management.azure.com/'
       }
 
       $body = $obj | ConvertTo-Json
-
+      
       # Call the REST API
       $resp = _post -url $url -body $body
 
