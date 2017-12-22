@@ -1,1 +1,1 @@
-Returns a list of users for your account.
+Returns a list of users for the account.

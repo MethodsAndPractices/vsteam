@@ -1,0 +1,1 @@
+Adds a user to the account.
