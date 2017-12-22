@@ -292,7 +292,7 @@ function Set-VSTeamReleaseStatus {
       [int[]] $Id,
 
       [ValidateSet('Active', 'Abandoned')]
-      [string] $status,
+      [string] $Status,
 
       # Forces the command without confirmation
       [switch] $Force
@@ -311,8 +311,8 @@ function Set-VSTeamReleaseStatus {
       $body = '{ "status": "' + $status + '" }'
 
       foreach ($item in $id) {
-         if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
-            Write-Debug 'Remove-VSTeamRelease Call the REST API'
+         if ($force -or $pscmdlet.ShouldProcess($item, "Set status on Release")) {
+            Write-Debug 'Set-VSTeamReleaseStatus Call the REST API'
 
             try {
                # Call the REST API
@@ -428,15 +428,68 @@ function Add-VSTeamReleaseEnvironment {
    }
 }
 
+function Set-VSTeamEnvironmentStatus {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('EnvironmentID')]
+      [int[]] $Id,
+
+      [Parameter(Mandatory = $true)]
+      [int[]] $ReleaseId,
+
+      [ValidateSet('canceled', 'inProgress', 'notStarted', 'partiallySucceeded', 'queued', 'rejected', 'scheduled', 'succeeded', 'undefined')]
+      [string] $Status,
+
+      [string] $Comment,
+
+      [datetime] $ScheduledDeploymentTime,
+
+      # Forces the command without confirmation
+      [switch] $Force
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      Write-Debug 'Set-VSTeamEnvironmentStatus Process'
+
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $body = ConvertTo-Json ([PSCustomObject]@{status = $Status; comment = $Comment; scheduledDeploymentTime = $ScheduledDeploymentTime})
+
+      foreach ($item in $id) {
+         if ($force -or $pscmdlet.ShouldProcess($item, "Set Status on Environment")) {
+            Write-Debug 'Set-VSTeamEnvironmentStatus Call the REST API'
+
+            try {
+               # Call the REST API
+               _callAPI -Method Patch -SubDomain vsrm -Area release -Resource "releases/$ReleaseId/environments" -projectName $ProjectName -id $item `
+                  -body $body -ContentType 'application/json' -Version $VSTeamVersionTable.Release | Out-Null
+
+               Write-Output "Environment $item status changed to $status"
+            }
+            catch {
+               _handleException $_
+            }
+         }
+      }
+   }
+}
+
 Set-Alias Get-Release Get-VSTeamRelease
 Set-Alias Show-Release Show-VSTeamRelease
 Set-Alias Add-Release Add-VSTeamRelease
 Set-Alias Remove-Release Remove-VSTeamRelease
 Set-Alias Set-ReleaseStatus Set-VSTeamReleaseStatus
+Set-Alias Set-EnvironmentStatus Set-VSTeamEnvironmentStatus
 Set-Alias Add-ReleaseEnvironment Add-VSTeamReleaseEnvironment
 
 Export-ModuleMember `
    -Function Get-VSTeamRelease, Show-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, 
-Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment `
+Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment, Set-VSTeamEnvironmentStatus `
    -Alias Get-Release, Show-Release, Add-Release, Remove-Release, Set-ReleaseStatus,
-Add-ReleaseEnvironment
+Add-ReleaseEnvironment, Set-EnvironmentStatus

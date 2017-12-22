@@ -8479,6 +8479,236 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Set-VSTeamEnvironmentStatus</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>VSTeamEnvironmentStatus</command:noun>
+      <maml:description>
+        <maml:para>Sets the status of a environment to canceled, inProgress, notStarted, partiallySucceeded, queued, rejected, scheduled, succeeded or undefined.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Sets the status of a environment to canceled, inProgress, notStarted, partiallySucceeded, queued, rejected, scheduled, succeeded or undefined.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-VSTeamEnvironmentStatus</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="EnvironmentId">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Specifies one or more environments by ID.</maml:para>
+            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+            <maml:para>To find the ID of an environment type Get-VSTeamRelease -expand environments.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ReleaseId</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the release by ID.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Status</maml:name>
+          <maml:Description>
+            <maml:para>The status to set for the environment to canceled, inProgress, notStarted, partiallySucceeded, queued, rejected, scheduled, succeeded or undefined.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Comment</maml:name>
+          <maml:Description>
+            <maml:para>The comment to set for the status change.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ScheduledDeploymentTime</maml:name>
+          <maml:Description>
+            <maml:para>The date and time to schedule when setting the status to scheduled.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="EnvironmentId">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>Specifies one or more environments by ID.</maml:para>
+          <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
+          <maml:para>To find the ID of an environment type Get-VSTeamRelease -expand environments.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ReleaseId</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the release by ID.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Status</maml:name>
+        <maml:Description>
+          <maml:para>The status to set for the environment to canceled, inProgress, notStarted, partiallySucceeded, queued, rejected, scheduled, succeeded or undefined.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Comment</maml:name>
+        <maml:Description>
+          <maml:para>The comment to set for the status change.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ScheduledDeploymentTime</maml:name>
+        <maml:Description>
+          <maml:para>The date and time to schedule when setting the status to scheduled.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Int32[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>System.String</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>## RELATED LINKS</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamEnvironmentStatus -ReleaseId 54 -Id 5 -status inProgress</dev:code>
+        <dev:remarks>
+          <maml:para>This command will set the status of environment with id 5 of release 54 to inProgress. You can use this call to redeploy an environment.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Set-VSTeamReleaseStatus</command:name>
       <command:verb>Set</command:verb>
       <command:noun>VSTeamReleaseStatus</command:noun>
