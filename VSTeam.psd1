@@ -158,7 +158,8 @@
       'Invoke-VSTeamRequest',
       'Get-VSTeamUser',
       'Remove-VSTeamUser',
-      'Add-VSTeamUser')
+      'Add-VSTeamUser',
+      'Set-VSTeamEnvironmentStatus')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -234,7 +235,9 @@
       'ivr',
       'Add-User',
       'Remove-User',
-      'Get-User')
+      'Get-User',
+      'ata',
+      'Set-EnvironmentStatus')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
