@@ -499,7 +499,7 @@ function _callAPI {
       # If the caller provided the URL and QueryString we need
       # to add the querystring now
       $QueryString.keys | ForEach-Object {
-         $url += _appendQueryString -name $_ -value $QueryString[$_]
+         $Url += _appendQueryString -name $_ -value $QueryString[$_]
       }
    }
    
