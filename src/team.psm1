@@ -27,11 +27,6 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, $type)
 }
 
-function _testAdministrator {
-   $user = [Security.Principal.WindowsIdentity]::GetCurrent()
-   (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
-}
-
 function _setEnvironmentVariables {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    param (
@@ -366,163 +361,6 @@ function Remove-VSTeamAccount {
    }
 }
 
-function Clear-VSTeamDefaultProject {
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
-   [CmdletBinding()]
-   param()
-   DynamicParam {
-      # Only add these options on Windows Machines
-      if (_isOnWindows) {
-         Write-Verbose 'On a Windows machine'
-
-         $ParameterName = 'Level'
-
-         # Create the dictionary
-         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
-
-         # Create the collection of attributes
-         $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-
-         # Create and set the parameters' attributes
-         $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-         $ParameterAttribute.Mandatory = $false
-         $ParameterAttribute.HelpMessage = "On Windows machines allows you to store the default project at the process, user or machine level. Not available on other platforms."
-
-         # Add the attributes to the attributes collection
-         $AttributeCollection.Add($ParameterAttribute)
-
-         # Generate and set the ValidateSet
-         if (_testAdministrator) {
-            $arrSet = "Process", "User", "Machine"
-         }
-         else {
-            $arrSet = "Process", "User"
-         }
-
-         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
-
-         # Add the ValidateSet to the attributes collection
-         $AttributeCollection.Add($ValidateSetAttribute)
-
-         # Create and return the dynamic parameter
-         $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
-         $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
-         return $RuntimeParameterDictionary
-      }
-      else {
-         Write-Verbose 'Not on a Windows machine'
-      }
-   }
-
-   begin {
-      if (_isOnWindows) {
-         # Bind the parameter to a friendly variable
-         $Level = $PSBoundParameters[$ParameterName]
-      }
-   }
-
-   process {
-      if (_isOnWindows) {
-         if (-not $Level) {
-            $Level = "Process"
-         }
-      }
-      else {
-         $Level = "Process"
-      }
-
-      # You always have to set at the process level or they will Not
-      # be seen in your current session.
-      $env:TEAM_PROJECT = $null
-
-      if (_isOnWindows) {
-         [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
-      }
-
-      $VSTeamVersionTable.DefaultProject = ''
-      $Global:PSDefaultParameterValues.Remove("*:projectName")
-
-      Write-Output "Removed default project"
-   }
-}
-
-function Set-VSTeamDefaultProject {
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
-   param([switch] $Force)
-   DynamicParam {
-      $dp = _buildProjectNameDynamicParam -ParameterName "Project"
-
-      # Only add these options on Windows Machines
-      if (_isOnWindows) {
-         Write-Verbose 'On a Windows machine'
-
-         $ParameterName = 'Level'
-
-         # Create the collection of attributes
-         $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-
-         # Create and set the parameters' attributes
-         $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-         $ParameterAttribute.Mandatory = $false
-         $ParameterAttribute.HelpMessage = "On Windows machines allows you to store the default project at the process, user or machine level. Not available on other platforms."
-
-         # Add the attributes to the attributes collection
-         $AttributeCollection.Add($ParameterAttribute)
-
-         # Generate and set the ValidateSet
-         if (_testAdministrator) {
-            $arrSet = "Process", "User", "Machine"
-         }
-         else {
-            $arrSet = "Process", "User"
-         }
-
-         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
-
-         # Add the ValidateSet to the attributes collection
-         $AttributeCollection.Add($ValidateSetAttribute)
-
-         # Create and return the dynamic parameter
-         $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
-         $dp.Add($ParameterName, $RuntimeParameter)
-      }
-      else {
-         Write-Verbose 'Not on a Windows machine'
-      }
-      
-      return $dp
-   }
-
-   begin {
-      # Bind the parameter to a friendly variable
-      $Project = $PSBoundParameters["Project"]
-
-      if (_isOnWindows) {
-         $Level = $PSBoundParameters[$ParameterName]
-      }
-   }
-
-   process {
-      if ($Force -or $pscmdlet.ShouldProcess($Project, "Set-VSTeamDefaultProject")) {
-         if (_isOnWindows) {
-            if (-not $Level) {
-               $Level = "Process"
-            }
-
-            # You always have to set at the process level or they will Not
-            # be seen in your current session.
-            $env:TEAM_PROJECT = $Project
-            $VSTeamVersionTable.DefaultProject = $Project
-
-            [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
-         }
-
-         $Global:PSDefaultParameterValues["*:projectName"] = $Project
-      }
-   }
-}
-
 function Set-VSTeamAPIVersion {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(   
@@ -630,18 +468,10 @@ Set-Alias Add-TeamAccount Add-VSTeamAccount
 Set-Alias Remove-TeamAccount Remove-VSTeamAccount
 Set-Alias Get-TeamOption Get-VSTeamOption
 Set-Alias Get-TeamResourceArea Get-VSTeamResourceArea
-Set-Alias Clear-DefaultProject Clear-VSTeamDefaultProject
-Set-Alias Set-DefaultProject Set-VSTeamDefaultProject
 Set-Alias Set-APIVersion Set-VSTeamAPIVersion
 
 Export-ModuleMember `
-   -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Clear-VSTeamDefaultProject,
-Set-VSTeamDefaultProject, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion, Invoke-VSTeamRequest `
-   -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Clear-DefaultProject, 
-Set-DefaultProject, Get-TeamResourceArea, Set-APIVersion, gti, ivr `
+   -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion, Invoke-VSTeamRequest `
+   -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Get-TeamResourceArea, Set-APIVersion, gti, ivr `
    -Variable VSTeamVersionTable
 
-# Check to see if the user stored the default project in an environment variable
-if ($null -ne $env:TEAM_PROJECT) {
-   Set-VSTeamDefaultProject -Project $env:TEAM_PROJECT
-}

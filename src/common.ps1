@@ -1,11 +1,15 @@
 Set-StrictMode -Version Latest
 
+function _testAdministrator {
+   $user = [Security.Principal.WindowsIdentity]::GetCurrent()
+   (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+}
+
 function _hasAccount {
    if (-not $VSTeamVersionTable.Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 }
-
 
 function _buildRequestURI {
    [CmdletBinding()]

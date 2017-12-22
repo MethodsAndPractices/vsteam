@@ -469,55 +469,6 @@ InModuleScope team {
          }
       }
 
-      Context 'Set-VSTeamDefaultProject' {
-         It 'should set default project' {
-            Set-VSTeamDefaultProject 'MyProject'
-
-            $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
-         }
-
-         It 'should update default project' {
-            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
-
-            Set-VSTeamDefaultProject -Project 'NextProject'
-
-            $Global:PSDefaultParameterValues['*:projectName'] | Should be 'NextProject'
-         }
-      }
-
-      Context 'Set-VSTeamDefaultProject on Non Windows' {
-         Mock _isOnWindows { return $false } -Verifiable
-
-         It 'should set default project' {
-            Set-VSTeamDefaultProject 'MyProject'
-
-            Assert-VerifiableMocks
-            $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
-         }
-      }
-
-      Context 'Set-VSTeamDefaultProject As Admin on Windows' {
-         Mock _isOnWindows { return $true }
-         Mock _testAdministrator { return $true } -Verifiable
-
-         It 'should set default project' {
-            Set-VSTeamDefaultProject 'MyProject'
-
-            Assert-VerifiableMocks
-            $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
-         }
-      }
-
-      Context 'Clear-VSTeamDefaultProject' {
-         It 'should clear default project' {
-            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
-
-            Clear-VSTeamDefaultProject
-
-            $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
-         }
-      }
-
       Context 'Set-VSTeamAPIVersion' {
          It 'Should default to TFS2017' {
             Set-VSTeamAPIVersion
