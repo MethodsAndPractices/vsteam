@@ -197,6 +197,10 @@ REMAINS WITH THE USER.
    <Type>
       <Name>Team.Release</Name>
       <Members>
+      <ScriptProperty>
+            <Name>releaseId</Name>
+            <GetScriptBlock>$this.id</GetScriptBlock>
+         </ScriptProperty>
          <ScriptProperty>
             <Name>definitionName</Name>
             <GetScriptBlock>$this.releaseDefinition.name</GetScriptBlock>

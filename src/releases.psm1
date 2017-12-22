@@ -432,8 +432,8 @@ function Set-VSTeamEnvironmentStatus {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [Alias('EnvironmentID')]
-      [int[]] $Id,
+      [Alias('Id')]
+      [int[]] $EnvironmentId,
 
       [Parameter(Mandatory = $true)]
       [int[]] $ReleaseId,
@@ -461,7 +461,7 @@ function Set-VSTeamEnvironmentStatus {
 
       $body = ConvertTo-Json ([PSCustomObject]@{status = $Status; comment = $Comment; scheduledDeploymentTime = $ScheduledDeploymentTime})
 
-      foreach ($item in $id) {
+      foreach ($item in $EnvironmentId) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Status on Environment")) {
             Write-Debug 'Set-VSTeamEnvironmentStatus Call the REST API'
 
