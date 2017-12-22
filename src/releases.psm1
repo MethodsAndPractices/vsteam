@@ -268,15 +268,12 @@ function Remove-VSTeamRelease {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       foreach ($item in $id) {
-         $listurl = _buildReleaseURL -resource 'releases' -projectName $ProjectName -id $item
-
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
             Write-Debug 'Remove-VSTeamRelease Call the REST API'
 
             try {
                # Call the REST API
-               _delete -url $listurl
-               # _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item
+               _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item -Version $VSTeamVersionTable.Release | Out-Null
 
                Write-Output "Deleted release $item"
             }
@@ -320,7 +317,7 @@ function Set-VSTeamReleaseStatus {
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -Area release -Resource releases -projectName $ProjectName -id $item `
-                  -body $body -ContentType 'application/json' -Version $VSTeamVersionTable.Release
+                  -body $body -ContentType 'application/json' -Version $VSTeamVersionTable.Release | Out-Null
 
                Write-Output "Release $item status changed to $status"
             }

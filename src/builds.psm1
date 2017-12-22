@@ -362,7 +362,7 @@ function Remove-VSTeamBuild {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
-               _callAPI -Method Delete -ProjectName $ProjectName -id $item -Area build -Resource builds -Version $VSTeamVersionTable.Build
+               _callAPI -Method Delete -ProjectName $ProjectName -id $item -Area build -Resource builds -Version $VSTeamVersionTable.Build | Out-Null
                
                Write-Output "Deleted build $item"
             }
@@ -420,7 +420,7 @@ function Update-VSTeamBuild {
          $body += '}'
 
          # Call the REST API
-         _callAPI -Method Patch -url $updateUrl -body $body -ContentType 'application/json'
+         _callAPI -Method Patch -url $updateUrl -body $body -ContentType 'application/json' | Out-Null
       }
    }
 }
@@ -478,7 +478,7 @@ function Add-VSTeamBuildTag {
                $tagUrl = $rootUrl + "&tag=$tag"
 
                # Call the REST API
-               _callAPI -Method Put -url $tagUrl
+               _callAPI -Method Put -url $tagUrl | Out-Null
             }
          }
       }
