@@ -1,8 +1,10 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
+if ($null -eq $env:TEAM_CIBUILD) {
+   Get-Module VSTeam | Remove-Module -Force
+   Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
+   Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
+}
 
 Set-VSTeamAPIVersion -Version $env:API_VERSION
 
