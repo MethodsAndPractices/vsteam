@@ -1,5 +1,12 @@
 #Set-StrictMode -Version Latest
 
+# Remove any loaded version of this module so only the files
+# imported below are being tested.
+Get-Module VSTeam | Remove-Module -Force
+
+# Load the modules we want to test and any dependencies
+Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
+
 . "$PSScriptRoot\..\..\src\common.ps1"
 
 Describe 'Common' {

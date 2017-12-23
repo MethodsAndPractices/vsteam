@@ -83,7 +83,7 @@ function _handleException {
    try {
       $e = (ConvertFrom-Json $ex.ToString())
       
-      if ($null -ne $e.PSObject.Properties.Match('value')) {
+      if ($e.PSObject.Properties.Match('value') -ne $null) {
          Write-Warning $e.value.message
       }
       else {

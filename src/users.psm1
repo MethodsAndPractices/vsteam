@@ -155,7 +155,7 @@ function Remove-VSTeamUser {
    process { 
       if ($email) {
          # We have to go find the id
-         $user = Get-VSTeamUser | ? email -eq $email
+         $user = Get-VSTeamUser | Where-Object email -eq $email
 
          if(-not $user) {
             throw "Could not find user with an email equal to $email"
