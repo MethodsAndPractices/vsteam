@@ -18,6 +18,7 @@ Describe 'VSTeam Integration Tests' {
 
       $originalLocation = Get-Location
 
+      $oAcct = $null
       $profile = Get-Profile | Where-Object url -like "*$acct*"
 
       if ($profile) {
@@ -269,6 +270,10 @@ Describe 'VSTeam Integration Tests' {
          $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
       }
 
+      It 'Remove-VSTeamProject Should remove Project' {
+         Remove-VSTeamProject -ProjectName $newProjectName -Force
+      }
+
       It 'Remove-VSTeamAccount Should remove account' {
          Remove-VSTeamAccount
       }
@@ -280,12 +285,7 @@ Describe 'VSTeam Integration Tests' {
  
       if ($oAcct) { 
          Add-VSTeamProfile -Account $oAcct -PersonalAccessToken $pat -Version $oVersion -Name $oName
+         Add-VSTeamAccount -Profile $oName
       }
-
-      Add-VSTeamAccount -Profile $oName
-
-      Get-VSTeamProject | Remove-VSTeamProject -Force
-
-      Remove-TeamAccount
    } 
 }
