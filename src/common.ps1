@@ -267,7 +267,7 @@ function _appendQueryString {
    )
 
    if ($retainZero.IsPresent) {
-      if ($null -ne $value) {
+      if ($value -ne $null) {
          return "&$name=$value"
       }
    }

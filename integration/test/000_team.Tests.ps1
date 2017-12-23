@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 if ($null -eq $env:TEAM_CIBUILD) {
    Get-Module VSTeam | Remove-Module -Force
-   Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-   Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
+   Import-Module $PSScriptRoot\..\..\vsteam.psd1 -Force
 }
 
 Set-VSTeamAPIVersion -Version $env:API_VERSION
@@ -51,32 +50,6 @@ Describe 'Team' {
          
          $info.Account | Should Be ''
          $info.DefaultProject | Should Be $null
-      }
-   }
-
-   Context 'Set-VSTeamDefaultProject' {
-      It 'should set default project' {
-         Set-VSTeamDefaultProject 'MyProject'
-
-         $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
-      }
-
-      It 'should update default project' {
-         $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
-
-         Set-VSTeamDefaultProject -Project 'NextProject'
-
-         $Global:PSDefaultParameterValues['*:projectName'] | Should be 'NextProject'
-      }
-   }
-
-   Context 'Clear-VSTeamDefaultProject' {
-      It 'should clear default project' {
-         $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
-
-         Clear-VSTeamDefaultProject
-
-         $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
       }
    }
 }
