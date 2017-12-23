@@ -448,7 +448,7 @@ function Invoke-VSTeamRequest {
    }
 }
 
-$VSTeamVersionTable = @{
+$Global:VSTeamVersionTable = @{
    'Account'                     = $env:TEAM_ACCT
    'DefaultProject'              = $env:TEAM_PROJECT
    'Version'                     = 'TFS2017'
@@ -473,6 +473,4 @@ Set-Alias Set-APIVersion Set-VSTeamAPIVersion
 
 Export-ModuleMember `
    -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion, Invoke-VSTeamRequest `
-   -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Get-TeamResourceArea, Set-APIVersion, gti, ivr, ata `
-   -Variable VSTeamVersionTable
-
+   -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Get-TeamResourceArea, Set-APIVersion, gti, ivr, ata
