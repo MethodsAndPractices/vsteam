@@ -83,7 +83,7 @@ function _handleException {
    try {
       $e = (ConvertFrom-Json $ex.ToString())
       
-      if ($e.PSObject.Properties.Match('value') -ne $null) {
+      if ($null -ne $e.PSObject.Properties.Match('value')) {
          Write-Warning $e.value.message
       }
       else {
@@ -267,7 +267,7 @@ function _appendQueryString {
    )
 
    if ($retainZero.IsPresent) {
-      if ($value -ne $null) {
+      if ($null -ne $value) {
          return "&$name=$value"
       }
    }
