@@ -230,7 +230,7 @@ Describe 'VSTeam Integration Tests' {
       }
 
       It 'Get-VSTeamMembers Should return TeamMembers' {
-         Get-VSTeamMember -ProjectName $newProjectName -Id $global:id | Should Not Be $null
+         Get-VSTeamMember -ProjectName $newProjectName -TeamId $global:id | Should Not Be $null
       }
 
       It 'Add-VSTeam should add a team' {
