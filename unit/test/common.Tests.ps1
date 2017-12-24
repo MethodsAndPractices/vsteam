@@ -61,7 +61,7 @@ Describe 'Common' {
    }
 
    Context '_handleException' {
-      $obj = "{Message: 'Top Message', Exception: {Message: 'Test Exception', Response: { StatusCode: '401'}}}"
+      $obj = "{Value: {Message: 'Top Message'}, Exception: {Message: 'Test Exception', Response: { StatusCode: '401'}}}"
       $ex = ConvertFrom-Json $obj
 
       It 'Should Write two warnings' {

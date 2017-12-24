@@ -60,8 +60,8 @@ function _buildRequestURI {
       $url = $sb.ToString()
 
       if ($queryString) {
-         $queryString.keys | ForEach-Object {
-            $url += _appendQueryString -name $_ -value $queryString[$_]
+         foreach ($key in $queryString.keys) {
+            $Url += _appendQueryString -name $key -value $queryString[$key]
          }
       }
 
@@ -83,7 +83,7 @@ function _handleException {
    try {
       $e = (ConvertFrom-Json $ex.ToString())
       
-      if ($e.PSObject.Properties.Match('value') -ne $null) {
+      if ($null -ne $e.PSObject.Properties.Match('value')) {
          Write-Warning $e.value.message
       }
       else {
@@ -267,7 +267,7 @@ function _appendQueryString {
    )
 
    if ($retainZero.IsPresent) {
-      if ($value -ne $null) {
+      if ($null -ne $value) {
          return "&$name=$value"
       }
    }
@@ -502,8 +502,8 @@ function _callAPI {
    elseif ($QueryString) {
       # If the caller provided the URL and QueryString we need
       # to add the querystring now
-      $QueryString.keys | ForEach-Object {
-         $Url += _appendQueryString -name $_ -value $QueryString[$_]
+      foreach ($key in $QueryString.keys) {
+         $Url += _appendQueryString -name $key -value $QueryString[$key]
       }
    }
    
