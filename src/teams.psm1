@@ -4,31 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
-   param(
-      [parameter(Mandatory = $true)]
-      [string] $ProjectName,
-      [string] $Id,
-      [string] $Name
-   )
-
-   _hasAccount
-
-   $instance = $VSTeamVersionTable.Account
-   $version = $VSTeamVersionTable.Core
-   $resource = "/projects/$ProjectName/teams"
-
-   if ($Id) {
-      $resource += "/$Id"
-   }
-   elseif ($Name) {
-      $resource += "/$Name"
-   }
-
-   # Build the url to list the projects
-   return $instance + '/_apis' + $resource + '?api-version=' + $version
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
@@ -72,11 +47,9 @@ function Get-VSTeam {
 
       if ($Id) {
          foreach ($item in $Id) {
-            # Build the url to return the single build
-            $listurl = _buildURL -projectName $ProjectName -Id $item
-
             # Call the REST API
-            $resp = _get -url $listurl
+            $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
+               -Version $VSTeamVersionTable.Core
             
             _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -85,11 +58,9 @@ function Get-VSTeam {
       }
       elseif ($Name) {
          foreach ($item in $Name) {
-            # Build the url to return the single build
-            $listurl = _buildURL -projectName $ProjectName -Name $item
-
             # Call the REST API
-            $resp = _get -url $listurl
+            $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
+               -Version $VSTeamVersionTable.Core
 
             _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -97,14 +68,13 @@ function Get-VSTeam {
          }
       }
       else {
-         # Build the url to list the teams
-         $listurl = _buildURL -projectName $ProjectName
-            
-         $listurl += _appendQueryString -name "`$top" -value $top
-         $listurl += _appendQueryString -name "`$skip" -value $skip
-
          # Call the REST API
-         $resp = _callAPI -url $listurl
+         $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
+            -Version $VSTeamVersionTable.Core `
+            -QueryString @{
+            '$top'  = $top
+            '$skip' = $skip
+         }
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -132,11 +102,11 @@ function Add-VSTeam {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $listurl = _buildURL -ProjectName $ProjectName
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
       # Call the REST API
-      $resp = _post -url $listurl -Body $body
+      $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
+         -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
 
       _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -162,7 +132,6 @@ function Update-VSTeam {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $listurl = _buildURL -ProjectName $ProjectName -Id $Name
       if (-not $NewTeamName -and -not $Description) {
          throw 'You must provide a new team name or description, or both.'
       }
@@ -179,7 +148,8 @@ function Update-VSTeam {
          }
 
          # Call the REST API
-         $resp = _callAPI -Method Patch -url $listurl -Body $body -ContentType 'application/json'
+         $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Name `
+            -Method Patch -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
          
          _applyTypes -item $resp -ProjectName $ProjectName
 
@@ -205,11 +175,10 @@ function Remove-VSTeam {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $listurl = _buildURL -ProjectName $ProjectName -Id $Id
-
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API
-         _delete -url $listurl
+         _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Id `
+            -Method Delete -Version $VSTeamVersionTable.Core | Out-Null
 
          Write-Output "Deleted team $Id"
       }
@@ -222,5 +191,5 @@ Set-Alias Update-Team Update-VSTeam
 Set-Alias Remove-Team Remove-VSTeam
 
 Export-ModuleMember `
- -Function Get-VSTeam, Add-VSTeam, Update-VSTeam, Remove-VSTeam `
- -Alias Get-Team, Add-Team, Update-Team, Remove-Team
+   -Function Get-VSTeam, Add-VSTeam, Update-VSTeam, Remove-VSTeam `
+   -Alias Get-Team, Add-Team, Update-Team, Remove-Team
