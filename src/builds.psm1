@@ -4,72 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
-   param(
-      [parameter(Mandatory = $true)]
-      [string] $ProjectName,
-      [int] $Id,
-      [Switch] $Logs,
-      [int] $LogIndex
-   )
-
-   if ($Logs.IsPresent) {
-      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex -Logs
-   }
-   else {
-      $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
-   }
-
-
-   # Build the url to list the projects
-   return $rootUrl + '?api-version=' + $VSTeamVersionTable.Build
-}
-
-function _buildChildUrl {
-   param(
-      [parameter(Mandatory = $true)]
-      [string] $ProjectName,
-      [int] $Id,
-      [int] $LogIndex,
-      [string] $Child
-   )
-
-   $rootUrl = _buildRootURL -ProjectName $ProjectName -Id $Id -LogIndex $LogIndex
- 
-   # Build the url to list the projects
-   return $rootUrl + "/$Child" + '?api-version=' + $VSTeamVersionTable.Build
-}
-
-function _buildRootURL {
-   param(
-      [parameter(Mandatory = $true)]
-      [string] $ProjectName,
-      [int] $Id,
-      [Switch] $Logs,
-      [int] $LogIndex
-   )
-  
-   _hasAccount
-  
-   $resource = "/build/builds"
-   $instance = $VSTeamVersionTable.Account
-  
-   if ($id) {
-      $resource += "/$id"
-   }
-  
-   if ($Logs.IsPresent) {
-      $resource += "/logs"
-  
-      if ($LogIndex) {
-         $resource += "/$LogIndex"
-      }
-   }
-  
-   # Build the url to list the projects
-   return $instance + "/$projectName/_apis" + $resource
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
@@ -156,10 +90,8 @@ function Get-VSTeamBuild {
       if ($id) {
          foreach ($item in $id) {
             # Build the url to return the single build
-            $listurl = _buildURL -projectName $ProjectName -id $item
-
-            # Call the REST API
-            $resp = _get -url $listurl
+            $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' -id $item `
+               -Version $VSTeamVersionTable.Build
             
             _applyTypes -item $resp
 
@@ -168,22 +100,20 @@ function Get-VSTeamBuild {
       }
       else {
          # Build the url to list the builds
-         $listurl = _buildURL -projectName $ProjectName
-
-         $listurl += _appendQueryString -name "`$top" -value $top
-         $listurl += _appendQueryString -name "type" -value $type
-         $listurl += _appendQueryString -name "buildNumber" -value $buildNumber
-         $listurl += _appendQueryString -name "resultFilter" -value $resultFilter
-         $listurl += _appendQueryString -name "statusFilter" -value $statusFilter
-         $listurl += _appendQueryString -name "reasonFilter" -value $reasonFilter
-         $listurl += _appendQueryString -name "maxBuildsPerDefinition" -value $maxBuildsPerDefinition
-
-         $listurl += _appendQueryString -name "queues" -value ($queues -join ',')
-         $listurl += _appendQueryString -name "properties" -value ($properties -join ',')
-         $listurl += _appendQueryString -name "definitions" -value ($definitions -join ',')
-
-         # Call the REST API
-         $resp = _get -url $listurl
+         $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' `
+            -Version $VSTeamVersionTable.Build `
+            -Querystring @{
+            '$top'                   = $top
+            'type'                   = $type
+            'buildNumber'            = $buildNumber
+            'resultFilter'           = $resultFilter
+            'statusFilter'           = $statusFilter
+            'reasonFilter'           = $reasonFilter
+            'maxBuildsPerDefinition' = $maxBuildsPerDefinition
+            'queues'                 = ($queues -join ',')
+            'properties'             = ($properties -join ',')
+            'definitions'            = ($definitions -join ',')
+         }
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -235,10 +165,9 @@ function Get-VSTeamBuildLog {
       foreach ($item in $id) {
          if (-not $Index) {
             # Build the url to return the logs of the build
-            $listurl = _buildURL -projectName $ProjectName -id $item -Logs
-
             # Call the REST API to get the number of logs for the build
-            $resp = _get -url $listurl
+            $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$item/logs" `
+               -Version $VSTeamVersionTable.Build
 
             $fullLogIndex = $($resp.count - 1)
          }
@@ -248,10 +177,9 @@ function Get-VSTeamBuildLog {
 
          # Now call REST API with the index for the fullLog
          # Build the url to return the single build
-         $listurl = _buildURL -projectName $ProjectName -id $item -Logs -LogIndex $fullLogIndex
-
          # Call the REST API to get the number of logs for the build
-         $resp = _get -url $listurl
+         $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$item/logs" -id $fullLogIndex `
+            -Version $VSTeamVersionTable.Build
 
          Write-Output $resp
       }     
@@ -307,9 +235,6 @@ function Add-VSTeamBuild {
       $ProjectName = $PSBoundParameters["ProjectName"]
       $BuildDefinition = $PSBoundParameters["BuildDefinitionName"]
 
-      # Build the url
-      $listurl = _buildURL -ProjectName $ProjectName
-
       if ($BuildDefinitionId) {
          $id = $BuildDefinitionId
       }
@@ -330,10 +255,9 @@ function Add-VSTeamBuild {
 
       $body = '{"definition": {"id": ' + $id + '}' + $queueSection + '}'
 
-      Write-Verbose $body
-
       # Call the REST API
-      $resp = _post -url $listurl -Body $body
+      $resp = _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' `
+         -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Build
       
       _applyTypes -item $resp
 
@@ -362,7 +286,8 @@ function Remove-VSTeamBuild {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
-               _callAPI -Method Delete -ProjectName $ProjectName -id $item -Area build -Resource builds -Version $VSTeamVersionTable.Build | Out-Null
+               _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -id $item `
+                  -Method Delete  -Version $VSTeamVersionTable.Build | Out-Null
                
                Write-Output "Deleted build $item"
             }
@@ -399,8 +324,6 @@ function Update-VSTeamBuild {
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-VSTeamBuild")) {
 
-         $updateUrl = _buildURL -ProjectName $ProjectName -Id $Id
-
          $body = '{'
             
          $items = New-Object System.Collections.ArrayList
@@ -420,7 +343,8 @@ function Update-VSTeamBuild {
          $body += '}'
 
          # Call the REST API
-         _callAPI -Method Patch -url $updateUrl -body $body -ContentType 'application/json' | Out-Null
+         _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -Id $Id `
+            -Method Patch -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Build | Out-Null
       }
    }
 }
@@ -438,11 +362,10 @@ function Get-VSTeamBuildTag {
 
    Process {
       $ProjectName = $PSBoundParameters["ProjectName"]
-        
-      $rootUrl = _buildChildUrl -projectName $ProjectName -id $Id -child "tags"
 
       # Call the REST API
-      $resp = _get -url $rootUrl
+      $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
+         -Version $VSTeamVersionTable.Build
 
       return $resp.value
    }
@@ -470,15 +393,10 @@ function Add-VSTeamBuildTag {
         
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Add-VSTeamBuildTag")) {
-                
-            $rootUrl = _buildChildUrl -projectName $ProjectName -id $item -child "tags"
-
             foreach ($tag in $tags) {
-
-               $tagUrl = $rootUrl + "&tag=$tag"
-
                # Call the REST API
-               _callAPI -Method Put -url $tagUrl | Out-Null
+               _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
+                  -Method Put -Querystring @{tag = $tag} -Version $VSTeamVersionTable.Build | Out-Null
             }
          }
       }
@@ -507,14 +425,10 @@ function Remove-VSTeamBuildTag {
 
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-VSTeamBuildTag")) {
-
-            $rootUrl = _buildChildUrl -projectName $ProjectName -id $item -child "tags"
-
             foreach ($tag in $tags) {
-               $tagUrl = $rootUrl + "&tag=$tag"
-
                # Call the REST API
-               _delete -url $tagUrl
+               _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
+                  -Method Delete -Querystring @{tag = $tag} -Version $VSTeamVersionTable.Build | Out-Null
             }
          }
       }
@@ -534,11 +448,9 @@ function Get-VSTeamBuildArtifact {
 
    Process {
       $ProjectName = $PSBoundParameters["ProjectName"]
-        
-      $rootUrl = _buildChildUrl -projectName $ProjectName -id $Id -child "artifacts"
 
-      # Call the REST API
-      $resp = _get -url $rootUrl
+      $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/artifacts" `
+         -Version $VSTeamVersionTable.Build
 
       foreach ($item in $resp.value) {
          _applyArtifactTypes -item $item
