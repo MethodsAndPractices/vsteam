@@ -2,7 +2,8 @@ Mock _buildProjectNameDynamicParam {
    param(
       # Set the dynamic parameters' name
       $ParameterName = 'ProjectName',
-      $ParameterSetName
+      $ParameterSetName,
+      $Mandatory = $true
    )
 
    # Create the dictionary
@@ -11,7 +12,7 @@ Mock _buildProjectNameDynamicParam {
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
    # Create and set the parameters' attributes
    $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-   $ParameterAttribute.Mandatory = $true
+   $ParameterAttribute.Mandatory = $Mandatory
    $ParameterAttribute.Position = 0
    $ParameterAttribute.ParameterSetName = $ParameterSetName
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true

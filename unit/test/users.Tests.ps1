@@ -23,7 +23,7 @@ InModuleScope users {
       $VSTeamVersionTable.MemberEntitlementManagement = '4.1-preview'
 
       Context 'Get-VSTeamUser no parameters' {  
-         Mock  _get { return [PSCustomObject]@{ 
+         Mock  _callAPI { return [PSCustomObject]@{ 
                count = 1
                value = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } }
             } 
@@ -33,14 +33,15 @@ InModuleScope users {
             Get-VSTeamUser 
 
             # Make sure it was called with the correct URI
-            Assert-MockCalled _get -Exactly 1 -ParameterFilter {
+            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
                $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0"
             }
          }
       }
 
       Context 'Get-VSTeamUser By ID' {  
-         Mock  _get { return [PSCustomObject]@{
+         Mock  _callAPI {
+            return [PSCustomObject]@{
                accessLevel = [PSCustomObject]@{ }
                email       = 'fake@email.com'
             } 
@@ -50,14 +51,17 @@ InModuleScope users {
             Get-VSTeamUser -Id '00000000-0000-0000-0000-000000000000'
 
             # Make sure it was called with the correct URI
-            Assert-MockCalled _get -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/00000000-0000-0000-0000-000000000000?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)"
+            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
+               $subDomain -eq 'vsaex' -and
+               $id -eq '00000000-0000-0000-0000-000000000000' -and
+               $resource -eq 'userentitlements'
             }
          }
       }
 
       Context 'Get-VSTeamUser with select for projects' {  
-         Mock  _get { return [PSCustomObject]@{ 
+         Mock  _callAPI {
+            return [PSCustomObject]@{ 
                count = 1
                value = [PSCustomObject]@{ 
                   accessLevel = [PSCustomObject]@{ }
@@ -70,27 +74,38 @@ InModuleScope users {
             Get-VSTeamUser -Select Projects
 
             # Make sure it was called with the correct URI
-            Assert-MockCalled _get -Exactly 1 -ParameterFilter {
+            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
                $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
             }
          }
       }
 
       Context 'Remove-VSTeamUser by Id' {
-         Mock _delete
+         Mock _callAPI
 
          Remove-VSTeamUser -UserId '00000000-0000-0000-0000-000000000000' -Force
 
          It 'Should remmove user' {
-            Assert-MockCalled _delete -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/00000000-0000-0000-0000-000000000000?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)"
+            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
+               $subDomain -eq 'vsaex' -and
+               $id -eq '00000000-0000-0000-0000-000000000000' -and
+               $resource -eq 'userentitlements' -and
+               $method -eq 'Delete' -and
+               $version -eq $VSTeamVersionTable.MemberEntitlementManagement
             }
          }
       }
 
       Context 'Remove-VSTeamUser by email' {
-         Mock _delete
-         Mock  _get { return [PSCustomObject]@{ 
+         Mock _callAPI -ParameterFilter {
+            $Method -eq 'Delete' -and
+            $subDomain -eq 'vsaex' -and
+            $id -eq '00000000-0000-0000-0000-000000000000' -and
+            $resource -eq 'userentitlements' -and
+            $version -eq $VSTeamVersionTable.MemberEntitlementManagement
+         }
+         Mock  _callAPI {
+            return [PSCustomObject]@{ 
                count = 1
                value = [PSCustomObject]@{ 
                   accessLevel = [PSCustomObject]@{ }
@@ -103,8 +118,12 @@ InModuleScope users {
          Remove-VSTeamUser -Email 'test@user.com' -Force
 
          It 'Should remmove user' {
-            Assert-MockCalled _delete -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/00000000-0000-0000-0000-000000000000?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)"
+            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
+               $Method -eq 'Delete' -and
+               $subDomain -eq 'vsaex' -and
+               $id -eq '00000000-0000-0000-0000-000000000000' -and
+               $resource -eq 'userentitlements' -and
+               $version -eq $VSTeamVersionTable.MemberEntitlementManagement
             }
          }
       }
@@ -128,15 +147,15 @@ InModuleScope users {
 
       Context 'Add-VSTeamUser' {
          $obj = @{
-            accessLevel = @{
+            accessLevel         = @{
                accountLicenseType = 'earlyAdopter'
             }
-            user = @{
+            user                = @{
                principalName = 'test@user.com'
-               subjectKind = 'user'
+               subjectKind   = 'user'
             }
             projectEntitlements = @{
-               group = @{
+               group      = @{
                   groupType = 'ProjectContributor'
                }
                projectRef = @{
@@ -147,7 +166,8 @@ InModuleScope users {
    
          $expected = $obj | ConvertTo-Json
 
-         Mock _post -Verifiable -ParameterFilter {
+         Mock _callAPI -Verifiable -ParameterFilter {
+            $Method -eq 'Post' -and
             $Body -eq $expected
          }
 

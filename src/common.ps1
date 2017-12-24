@@ -506,6 +506,10 @@ function _callAPI {
          $Url += _appendQueryString -name $key -value $QueryString[$key]
       }
    }
+
+   if ($body) {
+      Write-Verbose "Body $body"
+   }
    
    $params = $PSBoundParameters
    $params.Add('Uri', $Url)
@@ -545,6 +549,8 @@ function _post {
       [string] $url,
       [string] $body
    )
+
+   Write-Verbose "Body $Body"
 
    if (_useWindowsAuthenticationOnPremise) {
       $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $url -UseDefaultCredentials

@@ -8,6 +8,15 @@ if ($null -eq $env:TEAM_CIBUILD) {
 Set-VSTeamAPIVersion -Version $env:API_VERSION
 
 Describe 'Team' {
+   BeforeAll {
+      $pat = $env:PAT
+      $acct = $env:ACCT
+      $api = $env:API_VERSION
+      Add-VSTeamAccount -a $acct -pe $pat -version $api
+         
+      Get-VSTeamProject | Remove-VSTeamProject -Force
+   }
+
    Context 'Get-VSTeamInfo' {
       It 'should return account and default project' {
          $VSTeamVersionTable.Account = "mydemos"

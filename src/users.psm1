@@ -4,7 +4,7 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
+function _buildUserURL {
    param(
       [string] $Id
    )
@@ -61,10 +61,8 @@ function Get-VSTeamUser {
       if ($Id) {
          foreach ($item in $Id) {
             # Build the url to return the single build
-            $listurl = _buildURL -Id $item
-
             # Call the REST API
-            $resp = _get -url $listurl
+            $resp = _callAPI -SubDomain 'vsaex' -Version $VSTeamVersionTable.MemberEntitlementManagement -Resource 'userentitlements' -id $item
             
             _applyTypes -item $resp
 
@@ -73,14 +71,14 @@ function Get-VSTeamUser {
       }
       else {
          # Build the url to list the teams
-         $listurl = _buildURL
+         $listurl = _buildUserURL
             
          $listurl += _appendQueryString -name "top" -value $top -retainZero
          $listurl += _appendQueryString -name "skip" -value $skip -retainZero
          $listurl += _appendQueryString -name "select" -value ($select -join ",")
 
          # Call the REST API
-         $resp = _get -url $listurl
+         $resp = _callAPI -url $listurl
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -112,7 +110,6 @@ function Add-VSTeamUser {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $listurl = _buildURL -ProjectName $ProjectName
       $obj = @{
          accessLevel = @{
             accountLicenseType = $License
@@ -134,7 +131,7 @@ function Add-VSTeamUser {
       $body = $obj | ConvertTo-Json
 
       # Call the REST API
-      _post -url $listurl -Body $body
+      _callAPI  -Method Post -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Version $VSTeamVersionTable.MemberEntitlementManagement -ContentType "application/json"
    }
 }
 
@@ -164,11 +161,9 @@ function Remove-VSTeamUser {
          $id = $user.id
       }
 
-      $listurl = _buildURL -Id $Id
-
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete user")) {
          # Call the REST API
-         _delete -url $listurl
+         _callAPI -Method Delete -SubDomain 'vsaex' -Resource 'userentitlements' -Id $Id -Version $VSTeamVersionTable.MemberEntitlementManagement | Out-Null
 
          Write-Output "Deleted user $Id"
       }
