@@ -129,7 +129,7 @@ InModuleScope users {
       }
 
       Context 'Remove-VSTeamUser by invalid email' {
-         Mock _delete
+         Mock _callAPI
          Mock  _get { return [PSCustomObject]@{ 
                count = 1
                value = [PSCustomObject]@{ 

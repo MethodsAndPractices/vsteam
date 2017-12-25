@@ -4,21 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
-   param(
-      [string] $ProjectName
-   )
-
-   _hasAccount
-
-   $version = $VSTeamVersionTable.Core
-   $resource = "/projects/$ProjectName"
-   $instance = $VSTeamVersionTable.Account
-
-   # Build the url to list the projects
-   return $instance + '/_apis' + $resource + '?api-version=' + $version
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
@@ -96,15 +81,15 @@ function Get-VSTeamProject {
       }
 
       if ($ProjectName) {
-         # Build the url to list the projects
-         $listurl = _buildURL -ProjectName $ProjectName
-
+         $queryString = @{}
          if ($includeCapabilities.IsPresent) {
-            $listurl += '&includeCapabilities=true'
+            $queryString.includeCapabilities = $true
          }
 
          # Call the REST API
-         $resp = _get -url $listurl
+         $resp = _callAPI -Area 'projects' -id $ProjectName `
+            -Version $VSTeamVersionTable.Core `
+            -QueryString $queryString
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          _applyTypes -item $resp
@@ -112,12 +97,15 @@ function Get-VSTeamProject {
          Write-Output $resp
       }
       else {
-         # Build the url to list the projects
-         $listurl = "$(_buildURL)&stateFilter=$($stateFilter)&`$top=$($top)&`$skip=$($skip)"
-
          try {
             # Call the REST API
-            $resp = _get -url $listurl
+            $resp = _callAPI -Area 'projects' `
+               -Version $VSTeamVersionTable.Core `
+               -QueryString @{
+               stateFilter = $stateFilter
+               '$top'      = $top
+               '$skip'     = $skip
+            }
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
@@ -199,9 +187,6 @@ function Update-VSTeamProject {
          # this is used to track the final name.
          $finalName = $ProjectName
 
-         # Build the url to list the projects
-         $listurl = _buildURL -ProjectName $id
-
          if ($newName -ne '' -and $newDescription -ne '') {
             $finalName = $newName
             $msg = "Changing name and description"
@@ -217,10 +202,9 @@ function Update-VSTeamProject {
             $body = '{"description": "' + $newDescription + '"}'
          }
 
-         Write-Verbose $body
-
          # Call the REST API
-         $resp = _callAPI -Method Patch -url $listurl -body $body -ContentType 'application/json'
+         $resp = _callAPI -Area 'projects' -id $id `
+            -Method Patch -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Core
          
          _trackProgress -resp $resp -title 'Updating team project' -msg $msg
 
@@ -269,16 +253,12 @@ function Add-VSTeamProject {
       $srcCtrl = "Tfvc"
    }
 
-   # Build the url to list the projects
-   $listurl = _buildURL
-
    $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
-
-   Write-Verbose $body
 
    try {
       # Call the REST API
-      $resp = _post -url $listurl -body $body
+      $resp = _callAPI -Area 'projects' `
+         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Core
       
       _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
@@ -308,12 +288,10 @@ function Remove-VSTeamProject {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      # Build the url to list the projects
-      $listurl = _buildURL -ProjectName (Get-VSTeamProject $ProjectName).id
-
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API
-         $resp = _delete -url $listurl
+         $resp = _callAPI -Area 'projects' -Id (Get-VSTeamProject $ProjectName).id `
+           -Method Delete -Version $VSTeamVersionTable.Core
          
          _trackProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
@@ -489,10 +467,10 @@ Set-Alias Clear-DefaultProject Clear-VSTeamDefaultProject
 Set-Alias Set-DefaultProject Set-VSTeamDefaultProject
 
 Export-ModuleMember `
- -Function Get-VSTeamProject, Show-VSTeamProject, Update-VSTeamProject, Add-VSTeamProject, Remove-VSTeamProject, Clear-VSTeamDefaultProject, Set-VSTeamDefaultProject `
- -Alias Get-Project, Show-Project, Update-Project, Add-Project, Remove-Project, Clear-DefaultProject, Set-DefaultProject
+   -Function Get-VSTeamProject, Show-VSTeamProject, Update-VSTeamProject, Add-VSTeamProject, Remove-VSTeamProject, Clear-VSTeamDefaultProject, Set-VSTeamDefaultProject `
+   -Alias Get-Project, Show-Project, Update-Project, Add-Project, Remove-Project, Clear-DefaultProject, Set-DefaultProject
 
- # Check to see if the user stored the default project in an environment variable
+# Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {
    # Make sure the value in the environment variable still exisits. 
    if (Get-VSTeamProject | Where-Object ProjectName -eq $env:TEAM_PROJECT) {
