@@ -115,7 +115,9 @@ InModuleScope projects {
             Get-VSTeamProject -ProjectName Test
 
             # Make sure it was called with the correct URI
-            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
+            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" 
+            }
          }
       }
 

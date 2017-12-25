@@ -8,7 +8,7 @@
 ## SYNTAX
 
 ```
-Set-VSTeamEnvironmentStatus [-ProjectName] <String> [-ReleaseId] <Int32> [-Id] <Int32[]> [-Status] <String> [[-Comment] <String>] [[-ScheduledDeploymentTime] <DateTime>]  [-Force]
+Set-VSTeamEnvironmentStatus [-ProjectName] <String> [-ReleaseId] <Int32> [-EnvironmentId] <Int32[]> [-Status] <String> [[-Comment] <String>] [[-ScheduledDeploymentTime] <DateTime>]  [-Force]
 ```
 
 ## DESCRIPTION
@@ -25,8 +25,9 @@ This command will set the status of environment with id 5 of release 54 to inPro
 
 ## PARAMETERS
 
-### -Id
-Specifies one or more environments by ID.
+### -EnvironmentId
+Specifies one or more environments by ID you wish to deploy.
+The Environment Ids are unique for each environment and in each release.
 
 To specify multiple IDs, use commas to separate the IDs.
 
@@ -35,7 +36,7 @@ To find the ID of an environment type Get-VSTeamRelease -expand environments.
 ```yaml
 Type: Int32[]
 Parameter Sets: (All)
-Aliases: EnvironmentId
+Aliases: Id
 
 Required: True
 Position: 0
@@ -118,5 +119,12 @@ System.String
 ### System.Object
 
 ## NOTES
+This function has a Dynamic Parameter for ProjectName that specifies the
+project for which this function gets release s.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so you do not have
+to pass the ProjectName with each call.
 
 ## RELATED LINKS

@@ -326,106 +326,6 @@ function Set-VSTeamReleaseStatus {
       }
    }
 }
-
-function Add-VSTeamReleaseEnvironment {
-   [CmdletBinding(DefaultParameterSetName = 'ById', SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
-   param(
-      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
-      [int] $ReleaseId,   
-
-      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
-      [string] $EnvironmentId,
-
-      [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
-      [string] $EnvironmentStatus,
-
-      # Forces the command without confirmation
-      [switch] $Force
-   )
-
-   DynamicParam {
-      $dp = _buildProjectNameDynamicParam
-
-      # If they have not set the default project you can't find the
-      # validateset so skip that check. However, we still need to give
-      # the option to pass by name.
-      if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $defs = Get-VSTeamReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"] -expand artifacts
-         $arrSet = $defs.name
-      }
-      else {
-         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of DefinitionName'
-         $defs = $null
-         $arrSet = $null
-      }
-
-      $ParameterName = 'DefinitionName'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName' -Mandatory $true
-      $dp.Add($ParameterName, $rp)
-
-      if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $builds = Get-VSTeamBuild -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
-         $arrSet = $builds.name
-      }
-      else {
-         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildName'
-         $builds = $null
-         $arrSet = $null
-      }
-
-      $ParameterName = 'BuildNumber'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName' -Mandatory $true
-      $dp.Add($ParameterName, $rp)
-
-      $dp
-   }
-
-   process {
-      Write-Debug 'Add-VSTeamReleaseEnvironment Process'
-
-      # Bind the parameter to a friendly variable
-      $BuildNumber = $PSBoundParameters["BuildNumber"]
-      $ProjectName = $PSBoundParameters["ProjectName"]
-      $DefinitionName = $PSBoundParameters["DefinitionName"]
-
-      #Write-Verbose $builds
-
-      if ($builds -and -not $buildId) {
-         $buildId = $builds | Where-Object {$_.name -eq $BuildNumber} | Select-Object -ExpandProperty id
-      }
-
-      if ($defs -and -not $artifactAlias) {
-         $def = $defs | Where-Object {$_.name -eq $DefinitionName}
-         
-         $artifactAlias = $def.artifacts[0].alias
-      }
-
-      # Build the url
-      $url = _buildReleaseURL -resource "releases/$ReleaseId/environments/$EnvironmentId"
-      -projectName $projectName
-
-      $body = '{"status": "' + $EnvironmentStatus + '"}'       
-
-      Write-Verbose $body
-
-      # Call the REST API
-      if ($force -or $pscmdlet.ShouldProcess("Add ReleaseEnvironment")) {
-
-         try {
-            Write-Debug 'Add-VSTeamReleaseEnvironment Call the REST API'
-            $resp = _callAPI -Method Patch -url $url -body $body -ContentType 'application/json'
-
-            # _applyTypes $resp
-
-            Write-Output $resp
-         }
-         catch {
-            _handleException $_
-         }
-      }
-   }
-}
-
 function Set-VSTeamEnvironmentStatus {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
@@ -434,9 +334,10 @@ function Set-VSTeamEnvironmentStatus {
       [int[]] $EnvironmentId,
 
       [Parameter(Mandatory = $true)]
-      [int[]] $ReleaseId,
+      [int] $ReleaseId,
 
       [ValidateSet('canceled', 'inProgress', 'notStarted', 'partiallySucceeded', 'queued', 'rejected', 'scheduled', 'succeeded', 'undefined')]
+      [Alias('EnvironmentStatus')]
       [string] $Status,
 
       [string] $Comment,
@@ -484,10 +385,11 @@ Set-Alias Add-Release Add-VSTeamRelease
 Set-Alias Remove-Release Remove-VSTeamRelease
 Set-Alias Set-ReleaseStatus Set-VSTeamReleaseStatus
 Set-Alias Set-EnvironmentStatus Set-VSTeamEnvironmentStatus
-Set-Alias Add-ReleaseEnvironment Add-VSTeamReleaseEnvironment
+Set-Alias Add-ReleaseEnvironment Set-VSTeamEnvironmentStatus
+Set-Alias Add-VSTeamReleaseEnvironment Set-VSTeamEnvironmentStatus
 
 Export-ModuleMember `
    -Function Get-VSTeamRelease, Show-VSTeamRelease, Add-VSTeamRelease, Remove-VSTeamRelease, 
-Set-VSTeamReleaseStatus, Add-VSTeamReleaseEnvironment, Set-VSTeamEnvironmentStatus `
+Set-VSTeamReleaseStatus, Set-VSTeamEnvironmentStatus `
    -Alias Get-Release, Show-Release, Add-Release, Remove-Release, Set-ReleaseStatus,
-Add-ReleaseEnvironment, Set-EnvironmentStatus
+Add-ReleaseEnvironment, Set-EnvironmentStatus, Add-VSTeamReleaseEnvironment

@@ -344,7 +344,6 @@ InModuleScope builds {
 
       Context "Get-VSTeamBuildArtifact calls correct Url on TFS local Auth" {
          Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
-            Write-host "$args"
              return [PSCustomObject]@{
                value = [PSCustomObject]@{
                   id       = 150

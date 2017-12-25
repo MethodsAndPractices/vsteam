@@ -69,12 +69,12 @@ function Get-VSTeamProject {
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -AliasName 'Name'
+      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name' -AliasName 'ProjectName' 
    }
 
    process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
+      $ProjectName = $PSBoundParameters["Name"]
 
       if ($id) {
          $ProjectName = $id
@@ -133,14 +133,14 @@ function Show-VSTeamProject {
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -AliasName 'Name'
+      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name' -AliasName 'ProjectName'
    }
 
    process {
       _hasAccount
 
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
+      $ProjectName = $PSBoundParameters["Name"]
 
       if ($id) {
          $ProjectName = $id
@@ -161,12 +161,12 @@ function Update-VSTeamProject {
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -AliasName 'Name' -ParameterSetName 'ByName' -Mandatory $false
+      _buildProjectNameDynamicParam -ParameterName 'Name' -AliasName 'ProjectName' -ParameterSetName 'ByName' -Mandatory $false
    }
 
    process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
+      $ProjectName = $PSBoundParameters["Name"]
 
       if ($id) {
          $ProjectName = $id
@@ -281,12 +281,12 @@ function Remove-VSTeamProject {
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -AliasName 'Name'
+      _buildProjectNameDynamicParam -ParameterName 'Name' -AliasName 'ProjectName'
    }
 
    Process {
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
+      $ProjectName = $PSBoundParameters["Name"]
 
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API

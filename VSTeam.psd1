@@ -101,7 +101,6 @@
       'Add-VSTeamBuildDefinition',
       'Add-VSTeamProject',
       'Add-VSTeamRelease',
-      'Add-VSTeamReleaseEnvironment',
       'Add-VSTeamReleaseDefinition',
       'Add-VSTeamAccount',
       'Add-VSTeam',
@@ -237,7 +236,8 @@
       'Remove-User',
       'Get-User',
       'ata',
-      'Set-EnvironmentStatus')
+      'Set-EnvironmentStatus',
+      'Add-VSTeamReleaseEnvironment')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

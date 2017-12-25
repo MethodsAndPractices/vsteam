@@ -228,34 +228,6 @@ function _getEntitlementBase {
    return _addSubDomain -subDomain 'vsaex'
 }
 
-function _getReleaseBase {
-   return _addSubDomain -subDomain 'vsrm'
-}
-
-# The url for release is special and used in more than one
-# module so I moved it here.
-function _buildReleaseURL {
-   param(
-      [string] $projectName,
-      [parameter(Mandatory = $true)]
-      [string] $resource,
-      [string] $version = $VSTeamVersionTable.Release,
-      [int] $id
-   )
-
-   _hasAccount
-
-   $resource = "release/$resource"
-   $instance = _getReleaseBase
-
-   if ($id) {
-      $resource += "/$id"
-   }
-
-   # elease the url to list the projects
-   return "$instance/$projectName/_apis/$($resource)?api-version=$version"
-}
-
 function _appendQueryString {
    param(
       $name,

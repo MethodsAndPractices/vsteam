@@ -3,6 +3,7 @@ Mock _buildProjectNameDynamicParam {
       # Set the dynamic parameters' name
       $ParameterName = 'ProjectName',
       $ParameterSetName,
+      $AliasName,
       $Mandatory = $true
    )
 
@@ -16,6 +17,12 @@ Mock _buildProjectNameDynamicParam {
    $ParameterAttribute.Position = 0
    $ParameterAttribute.ParameterSetName = $ParameterSetName
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true
+
+   if ($AliasName) {
+      $AliasAttribute = New-Object System.Management.Automation.AliasAttribute(@($AliasName))
+      $AttributeCollection.Add($AliasAttribute)
+   }
+   
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
    # Create and return the dynamic parameter
