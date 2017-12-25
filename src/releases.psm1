@@ -222,9 +222,6 @@ function Add-VSTeamRelease {
          $artifactAlias = $def.artifacts[0].alias
       }
 
-      # Build the url
-      $url = _buildReleaseURL -resource 'releases' -projectName $projectName
-
       $body = '{"definitionId": ' + $DefinitionId + ', "description": "' + $description + '", "artifacts": [{"alias": "' + $artifactAlias + '", "instanceReference": {"id": "' + $buildId + '", "name": "' + $Name + '", "sourceBranch":"' + $SourceBranch + '"}}]}'
 
       Write-Verbose $body
@@ -234,7 +231,8 @@ function Add-VSTeamRelease {
 
          try {
             Write-Debug 'Add-VSTeamRelease Call the REST API'
-            $resp = _post -url $url -body $body
+            $resp = _callAPI -SubDomain 'vsrm' -ProjectName $ProjectName -Area 'release' -Resource 'releases' `
+               -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Release
 
             _applyTypes $resp
 

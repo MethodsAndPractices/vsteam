@@ -58,16 +58,12 @@ function Add-VSTeamGitRepository {
    process {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      # Build the url to list the projects
-      $listurl = _buildRequestURI -ProjectName $ProjectName -Area git -Resource repositories -Version $VSTeamVersionTable.Git 
-
       $body = '{"name": "' + $Name + '"}'
-
-      Write-Verbose $body
 
       try {
          # Call the REST API
-         $resp = _post -url $listurl -body $body
+         $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' `
+            -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Git
 
          Write-Output $resp
       }

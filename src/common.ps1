@@ -543,21 +543,3 @@ function _get {
 
    return $resp
 }
-
-function _post {
-   param(
-      [string] $url,
-      [string] $body
-   )
-
-   Write-Verbose "Body $Body"
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $url -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Post -ContentType "application/json" -Body $body -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
-   return $resp
-}
