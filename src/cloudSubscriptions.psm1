@@ -4,17 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildURL {
-   
-   _hasAccount
-
-   $resource = "/distributedtask/serviceendpointproxy/azurermsubscriptions"
-   $instance = $VSTeamVersionTable.Account
-
-   # Build the url to list the projects
-   return $instance + '/_apis' + $resource
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
@@ -27,14 +16,12 @@ function Get-VSTeamCloudSubscription {
    [CmdletBinding()]
    param()
 
-   # Build the url
-   $url = _buildURL
-
    # Call the REST API
-   $resp = _get -url $url
+   $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointproxy/azurermsubscriptions' `
+      -Version $VSTeamVersionTable.DistributedTask
 
    # Apply a Type Name so we can use custom format view and custom type extensions
-   foreach($item in $resp.value) {
+   foreach ($item in $resp.value) {
       _applyTypes -item $item
    }
 
@@ -44,5 +31,5 @@ function Get-VSTeamCloudSubscription {
 Set-Alias Get-CloudSubscription Get-VSTeamCloudSubscription
 
 Export-ModuleMember `
- -Function Get-VSTeamCloudSubscription `
- -Alias Get-CloudSubscription
+   -Function Get-VSTeamCloudSubscription `
+   -Alias Get-CloudSubscription
