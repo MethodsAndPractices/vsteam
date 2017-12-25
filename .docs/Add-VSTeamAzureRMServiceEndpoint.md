@@ -7,9 +7,14 @@
 
 ## SYNTAX
 
+### Automatic (Default)
 ```
-Add-VSTeamAzureRMServiceEndpoint [-ProjectName] <String> [-DisplayName] <String> [-SubscriptionId] <String>
- [-SubscriptionTenantId] <String> [[-EndpointName] <String>]
+Add-VSTeamAzureRMServiceEndpoint [-ProjectName] <String> [-SubscriptionName] <String>  [-SubscriptionId] <String> [-SubscriptionTenantId] <String> [[-EndpointName] <String>]
+```
+
+### Manual
+```
+Add-VSTeamAzureRMServiceEndpoint [-ProjectName] <String> [-SubscriptionName] <String> [-SubscriptionId] <String> [-SubscriptionTenantId] <String> [[-EndpointName] <String>]
 ```
 
 ## DESCRIPTION
@@ -20,13 +25,13 @@ Resource Manager connection type.
 
 ## PARAMETERS
 
-### -DisplayName
-The display name of the service endpoint.
+### -SubscriptionName
+The name of the Azure Subscription.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases: displayName
 
 Required: True
 Position: 0
@@ -60,6 +65,36 @@ Aliases:
 
 Required: True
 Position: 2
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ServicePrincipalId
+The ID of the Azure Service Principal to use with this service endpoint.
+
+```yaml
+Type: String
+Parameter Sets: Manual
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ServicePrincipalKey
+The key of the Azure Service Principal to use with this service endpoint.
+
+```yaml
+Type: String
+Parameter Sets: Manual
+Aliases: 
+
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

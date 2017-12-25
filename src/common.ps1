@@ -561,18 +561,3 @@ function _post {
 
    return $resp
 }
-
-function _delete {
-   param(
-      [string] $url
-   )
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Delete -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
-   return $resp
-}

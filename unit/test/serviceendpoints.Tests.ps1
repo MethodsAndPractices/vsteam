@@ -12,7 +12,8 @@ InModuleScope serviceendpoints {
 
       Context 'Get-VSTeamServiceEndpoint' {
          Mock Write-Verbose
-         Mock Invoke-RestMethod { return @{
+         Mock Invoke-RestMethod {
+            return @{
                value = @{
                   createdBy       = @{}
                   authorization   = @{}
@@ -25,7 +26,7 @@ InModuleScope serviceendpoints {
             Get-VSTeamServiceEndpoint -projectName project -Verbose
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints?api-version=$($VSTeamVersionTable.DistributedTask)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$($VSTeamVersionTable.DistributedTask)"
             }
          }
       }
@@ -37,8 +38,8 @@ InModuleScope serviceendpoints {
             Remove-VSTeamServiceEndpoint -projectName project -id 5 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/DefaultCollection/project/_apis/distributedtask/serviceendpoints/5?api-version=$($VSTeamVersionTable.DistributedTask)" -and `
-                  $Method -eq 'Delete'
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/5?api-version=$($VSTeamVersionTable.DistributedTask)" -and
+               $Method -eq 'Delete'
             }
          }
       }
@@ -67,7 +68,7 @@ InModuleScope serviceendpoints {
          }
 
          It 'should create a new AzureRM Serviceendpoint' {
-            Add-VSTeamAzureRMServiceEndpoint -projectName 'project' -displayName 'PM_DonovanBrown' -subscriptionId '121d7d3b-2911-4154-9aa8-65132fe82e74' -subscriptionTenantId '72f988bf-86f1-41af-91ab-2d7cd011db47'
+            Add-VSTeamAzureRMServiceEndpoint -projectName 'project' -displayName 'PM_DonovanBrown' -subscriptionId '00000000-0000-0000-0000-000000000000' -subscriptionTenantId '00000000-0000-0000-0000-000000000000'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
          }
@@ -97,7 +98,7 @@ InModuleScope serviceendpoints {
          }
 
          It 'should create a new SonarQube Serviceendpoint' {
-            Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -personalAccessToken '72f988bf-86f1-41af-91ab-2d7cd011db47'
+            Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -personalAccessToken '00000000-0000-0000-0000-000000000000'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
          }
@@ -127,7 +128,7 @@ InModuleScope serviceendpoints {
          }
 
          It 'should create a new SonarQube Serviceendpoint' {
-            $password = '72f988bf-86f1-41af-91ab-2d7cd011db47' | ConvertTo-SecureString -AsPlainText -Force
+            $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
 
             Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -securePersonalAccessToken $password
 
@@ -164,8 +165,8 @@ InModuleScope serviceendpoints {
          It 'should not create a new AzureRM Serviceendpoint' {
             {
                Add-VSTeamAzureRMServiceEndpoint -projectName 'project' `
-                  -displayName 'PM_DonovanBrown' -subscriptionId '121d7d3b-2911-4154-9aa8-65132fe82e74' `
-                  -subscriptionTenantId '72f988bf-86f1-41af-91ab-2d7cd011db47'
+                  -displayName 'PM_DonovanBrown' -subscriptionId '00000000-0000-0000-0000-000000000000' `
+                  -subscriptionTenantId '00000000-0000-0000-0000-000000000000'
             } | Should Throw
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
