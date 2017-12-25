@@ -75,7 +75,10 @@ function _handleException {
       $ex
    )
 
+   $handled = $false
+
    if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and $ex.Exception.Response.StatusCode -ne "BadRequest") {
+      $handled = $true
       $msg = "An error occurred: $($ex.Exception.Message)"
       Write-Warning $msg
    }
@@ -84,15 +87,21 @@ function _handleException {
       $e = (ConvertFrom-Json $ex.ToString())
       
       if ($null -ne $e.PSObject.Properties.Match('value')) {
+         $handled = $true
          Write-Warning $e.value.message
       }
       else {
+         $handled = $true
          Write-Warning $e.message
       }    
    }
    catch {
       $msg = "An error occurred: $($ex.Exception.Message)"
    } 
+
+   if(-not $handled) {
+      throw $ex
+   }
 }
 
 function _isVSTS {

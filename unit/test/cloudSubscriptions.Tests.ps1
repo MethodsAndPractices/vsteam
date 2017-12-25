@@ -35,7 +35,7 @@ InModuleScope cloudSubscriptions {
             Get-VSTeamCloudSubscription
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq 'http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions'
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions/?api-version=$($VSTeamVersionTable.DistributedTask)"
             }
          }
       }

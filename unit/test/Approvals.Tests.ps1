@@ -38,9 +38,7 @@ InModuleScope Approvals {
       }
 
       Context 'Get-VSTeamApproval' {
-         Mock Invoke-RestMethod {
-            throw "test $args"
-            
+         Mock Invoke-RestMethod {            
             return @{
                count = 1
                value = @(

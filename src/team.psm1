@@ -113,12 +113,9 @@ function Get-VSTeamOption {
 function Get-VSTeamResourceArea {
    [CmdletBinding()]
    param()
-
-   # Build the url to list the projects
-   $url = _buildRequestURI -resource 'resourceareas'
-
+   
    # Call the REST API
-   $resp = _get -url $url
+   $resp = _callAPI -Resource 'resourceareas'
    
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {

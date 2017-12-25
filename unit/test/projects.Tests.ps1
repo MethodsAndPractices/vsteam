@@ -112,7 +112,7 @@ InModuleScope projects {
          Mock Invoke-RestMethod { return @{value = 'projects'}}
 
          It 'Should return the project' {
-            Get-VSTeamProject -ProjectName Test
+            Get-VSTeamProject -Name Test
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -149,7 +149,7 @@ InModuleScope projects {
 
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
          Mock Invoke-RestMethod { return @{status = 'inProgress'; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Patch'}
-         Mock _trackProgress
+         Mock _trackProjectProgress
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Testing123?api-version=$($VSTeamVersionTable.Core)" }
 
          It 'Should change name' {
@@ -165,7 +165,7 @@ InModuleScope projects {
 
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
          Mock Invoke-RestMethod { return @{status = 'inProgress'; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Patch'}
-         Mock _trackProgress
+         Mock _trackProjectProgress
 
          It 'Should change description' {
             Update-VSTeamProject -ProjectName Test -newDescription Testing123 -Force
@@ -179,7 +179,7 @@ InModuleScope projects {
 
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
          Mock Invoke-RestMethod { return @{status = 'inProgress'; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Patch'}
-         Mock _trackProgress
+         Mock _trackProjectProgress
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Testing123?api-version=$($VSTeamVersionTable.Core)" }
 
          It 'Should not call Invoke-RestMethod' {
@@ -194,7 +194,7 @@ InModuleScope projects {
       Context 'Remove-VSTeamProject with Force' {
 
          Mock Write-Progress
-         Mock _trackProgress
+         Mock _trackProjectProgress
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
          Mock Invoke-RestMethod { return @{status = 'inProgress'; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Delete' -and $Uri -eq "https://test.visualstudio.com/_apis/projects/123-5464-dee43?api-version=$($VSTeamVersionTable.Core)"}
 
@@ -209,7 +209,10 @@ InModuleScope projects {
       Context 'Add-VSTeamProject with tfvc' {
          Mock Write-Progress
          # Add Project
-         Mock Invoke-RestMethod { return @{status = 'inProgress'; id = '123-5464-dee43'; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)"}
+         Mock Invoke-RestMethod { return @{status = 'inProgress'; id = '123-5464-dee43'; url = 'https://someplace.com'} } -ParameterFilter {
+            $Method -eq 'Post' -and
+            $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)"
+         }
 
          # Track Progress
          Mock Invoke-RestMethod {
@@ -220,23 +223,33 @@ InModuleScope projects {
             }
 
             return @{status = 'inProgress' }
-         } -ParameterFilter { $Uri -eq 'https://someplace.com'}
+         } -ParameterFilter { 
+            $Uri -eq 'https://someplace.com'
+         }
 
          # Get-VSTeamProject
-         Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
+         Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { 
+            $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)"
+         }
 
          It 'Should create project with tfvc' {
-            Add-VSTeamProject -ProjectName Test -tfvc
+            Add-VSTeamProject -Name Test -tfvc
 
-            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
-            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)" -and $Body -eq '{"name": "Test", "description": "", "capabilities": {"versioncontrol": { "sourceControlType": "Tfvc"}, "processTemplate":{"templateTypeId": "6b724908-ef14-45cf-84f8-768b5384da45"}}}'}
+            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { 
+               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" 
+            }
+            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { 
+               $Method -eq 'Post' -and
+               $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)" -and 
+               $Body -eq '{"name": "Test", "description": "", "capabilities": {"versioncontrol": { "sourceControlType": "Tfvc"}, "processTemplate":{"templateTypeId": "6b724908-ef14-45cf-84f8-768b5384da45"}}}'
+            }
          }
       }
 
       Context 'Add-VSTeamProject with Agile' {
 
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)"}
-         Mock _trackProgress
+         Mock _trackProjectProgress
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
 
          It 'Should create project with Agile' {
@@ -250,7 +263,7 @@ InModuleScope projects {
       Context 'Add-VSTeamProject with CMMI' {
 
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)"}
-         Mock _trackProgress
+         Mock _trackProjectProgress
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
 
          It 'Should create project with CMMI' {
@@ -265,7 +278,7 @@ InModuleScope projects {
 
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)"}
          Mock Write-Error
-         Mock _trackProgress { throw 'Test error' }
+         Mock _trackProjectProgress { throw 'Test error' }
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } -ParameterFilter { $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)" }
 
          It 'Should throw' { { Add-VSTeamProject -projectName Test -processTemplate CMMI } | Should throw

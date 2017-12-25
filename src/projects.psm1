@@ -21,7 +21,7 @@ function _applyTypes {
    }
 }
 
-function _trackProgress {
+function _trackProjectProgress {
    param(
       [Parameter(Mandatory = $true)] $Resp,
       [string] $Title,
@@ -35,7 +35,7 @@ function _trackProgress {
 
    # Track status
    while ($status -ne 'failed' -and $status -ne 'succeeded') {
-      $status = (_get $resp.url).status
+      $status = (_callAPI -Url $resp.url).status
 
       # oscillate back a forth to show progress
       $i += $x
@@ -69,7 +69,7 @@ function Get-VSTeamProject {
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name' -AliasName 'ProjectName' 
+      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name'
    }
 
    process {
@@ -118,7 +118,7 @@ function Get-VSTeamProject {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod
             # was still running the foreach after and reporting useless errors.
             # This casuses the first error to terminate this execution.
-            throw $_
+            _handleException $_
          }
       }
    }
@@ -206,14 +206,14 @@ function Update-VSTeamProject {
          $resp = _callAPI -Area 'projects' -id $id `
             -Method Patch -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Core
          
-         _trackProgress -resp $resp -title 'Updating team project' -msg $msg
+         _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Return the project now that it has been updated
          if ($Id) {
             return Get-VSTeamProject -Id $finalName
          }
          else {
-            return Get-VSTeamProject -ProjectName $finalName         
+            return Get-VSTeamProject $finalName         
          }
       }
    }
@@ -260,17 +260,12 @@ function Add-VSTeamProject {
       $resp = _callAPI -Area 'projects' `
          -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Core
       
-      _trackProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
+      _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
-      return Get-VSTeamProject -ProjectName $ProjectName
+      return Get-VSTeamProject $ProjectName
    }
    catch {
-      # Dig into the exception to get the Response details.
-      # Note that value__ is not a typo.
-      $errMsg = "Failed`nStatusCode: $($_.Exception.Response.StatusCode.value__)`nStatusDescription: $($_.Exception.Response.StatusDescription)"
-      Write-Error $errMsg
-
-      throw $_
+      _handleException $_
    }
 }
 
@@ -291,9 +286,9 @@ function Remove-VSTeamProject {
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API
          $resp = _callAPI -Area 'projects' -Id (Get-VSTeamProject $ProjectName).id `
-           -Method Delete -Version $VSTeamVersionTable.Core
+            -Method Delete -Version $VSTeamVersionTable.Core
          
-         _trackProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
+         _trackProjectProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
          Write-Output "Deleted $ProjectName"
       }

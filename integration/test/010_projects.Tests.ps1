@@ -70,23 +70,23 @@ Describe 'VSTeam Integration Tests' {
 
    Context 'Project full exercise' {
       It 'Add-VSTeamProject Should create project' {
-         Add-VSTeamProject -ProjectName $projectName | Should Not Be $null
+         Add-VSTeamProject -Name $projectName | Should Not Be $null
       }
 
       It 'Get-VSTeamProject Should return projects' {
-         Get-VSTeamProject -ProjectName $projectName  | Should Not Be $null
+         Get-VSTeamProject -Name $projectName  | Should Not Be $null
       }
 
       It 'Update-VSTeamProject Should update description' {
-         Update-VSTeamProject -ProjectName $projectName -NewDescription 'Test Description' -Force
+         Update-VSTeamProject -Name $projectName -NewDescription 'Test Description' -Force
 
-         Get-VSTeamProject -ProjectName $projectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
+         Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
       }
 
       It 'Update-VSTeamProject Should update name' {
-         Update-VSTeamProject -ProjectName $projectName -NewName $newProjectName -Force
+         Update-VSTeamProject -Name $projectName -NewName $newProjectName -Force
 
-         Get-VSTeamProject -ProjectName $newProjectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
+         Get-VSTeamProject -Name $newProjectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
       }
    }
 

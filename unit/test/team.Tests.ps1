@@ -76,10 +76,8 @@ InModuleScope team {
       }
 
       Context 'Get-VSTeamResourceArea' {
-         Mock _get { return @{
-               value = @{
-               
-               }
+         Mock _callAPI { return @{
+               value = @{}
             } 
          }
 
