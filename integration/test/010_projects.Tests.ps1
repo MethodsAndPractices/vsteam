@@ -207,7 +207,7 @@ Describe 'VSTeam Integration Tests' {
          }
       
          It 'Remove-VSTeamUser should delete the team' {
-            Remove-VSTeamUser -Email $email -Force -Verbose
+            Remove-VSTeamUser -Email $email -Force
             Get-VSTeamUser | Where-Object Email -eq $email | Should Be $null
          }
 
