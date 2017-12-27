@@ -9,7 +9,7 @@ InModuleScope users {
    
    Describe "Users TFS Errors" {
       Context 'Get-VSTeamUser' {  
-         Mock  _get { throw 'Should not be called' }
+         Mock _callAPI { throw 'Should not be called' }
 
          It 'Should throw' {
             { Get-VSTeamUser } | Should Throw
@@ -129,8 +129,7 @@ InModuleScope users {
       }
 
       Context 'Remove-VSTeamUser by invalid email' {
-         Mock _callAPI
-         Mock  _get { return [PSCustomObject]@{ 
+         Mock _callAPI { return [PSCustomObject]@{ 
                count = 1
                value = [PSCustomObject]@{ 
                   accessLevel = [PSCustomObject]@{ }

@@ -301,7 +301,7 @@ function _getProjects {
 
    # Call the REST API
    try {
-      $resp = _get -url $listurl
+      $resp = _callAPI -url $listurl
       
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
@@ -508,19 +508,4 @@ function _callAPI {
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
          
    Invoke-RestMethod @params
-}
-
-function _get {
-   param(
-      [string] $url
-   )
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $url -UseDefaultCredentials
-   }
-   else {
-      $resp = Invoke-RestMethod -UserAgent (_getUserAgent) -Method Get -Uri $url -Headers @{Authorization = "Basic $env:TEAM_PAT"}
-   }
-
-   return $resp
 }

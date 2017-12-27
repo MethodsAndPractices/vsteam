@@ -256,6 +256,8 @@
          # Tags applied to this module. These help with module discovery in online galleries.
          Tags       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team')
 
+         ExternalModuleDependencies = @('SHiPS') 
+
          # A URL to the license for this module.
          # LicenseUri = ''
 
