@@ -81,9 +81,10 @@
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
       'formats\buildDefinitions.format.ps1xml',
       'formats\builds.format.ps1xml',
+      'formats\profile.format.ps1xml',
+      'formats\queues.format.ps1xml',
+      'formats\serviceendpoints.format.ps1xml',
       'formats\team.format.ps1xml',
-      'formats\team.profile.ps1xml',
-      'formats\TeamTypes.format.ps1xml',
       'formats\users.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess

@@ -34,7 +34,7 @@ InModuleScope users {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0"
+               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0"
             }
          }
       }
@@ -75,7 +75,7 @@ InModuleScope users {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
+               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
             }
          }
       }

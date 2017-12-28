@@ -74,7 +74,7 @@ InModuleScope Releases {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Patch' -and
-               $Body -eq '{ "status": "Abandoned" }' -and
+               $Body -eq '{ "id": 15, "status": "Abandoned" }' -and
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/15?api-version=$($VSTeamVersionTable.Release)"
             }
          }

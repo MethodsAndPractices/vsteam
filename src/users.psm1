@@ -4,29 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-function _buildUserURL {
-   param(
-      [string] $Id
-   )
-
-   _hasAccount
-
-   if (-not $VSTeamVersionTable.MemberEntitlementManagement) {
-      throw 'This account does not support Member Entitlement.'
-   }
-
-   $instance = _getEntitlementBase
-   $version = $VSTeamVersionTable.MemberEntitlementManagement
-   $resource = '/userentitlements'
-
-   if ($Id) {
-      $resource += "/$Id"
-   }
-
-   # Build the url to list the projects
-   return $instance + '/_apis' + $resource + '?api-version=' + $version
-}
-
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
@@ -71,7 +48,9 @@ function Get-VSTeamUser {
       }
       else {
          # Build the url to list the teams
-         $listurl = _buildUserURL
+         # $listurl = _buildUserURL
+         $listurl = _buildRequestURI -SubDomain 'vsaex' -Resource 'userentitlements' `
+            -Version $VSTeamVersionTable.MemberEntitlementManagement
             
          $listurl += _appendQueryString -name "top" -value $top -retainZero
          $listurl += _appendQueryString -name "skip" -value $skip -retainZero
@@ -111,15 +90,15 @@ function Add-VSTeamUser {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $obj = @{
-         accessLevel = @{
+         accessLevel         = @{
             accountLicenseType = $License
          }
-         user = @{
+         user                = @{
             principalName = $email
-            subjectKind = 'user'
+            subjectKind   = 'user'
          }
          projectEntitlements = @{
-            group = @{
+            group      = @{
                groupType = $Group
             }
             projectRef = @{
@@ -144,7 +123,7 @@ function Remove-VSTeamUser {
 
       [Parameter(ParameterSetName = 'ByEmail', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Alias('UserEmail')]
-     [string]$Email,
+      [string]$Email,
 
       [switch]$Force
    )
@@ -154,7 +133,7 @@ function Remove-VSTeamUser {
          # We have to go find the id
          $user = Get-VSTeamUser | Where-Object email -eq $email
 
-         if(-not $user) {
+         if (-not $user) {
             throw "Could not find user with an email equal to $email"
          }
 

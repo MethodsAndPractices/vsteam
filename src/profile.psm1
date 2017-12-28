@@ -94,7 +94,6 @@ function Add-VSTeamProfile {
    DynamicParam {
       # Only add these options on Windows Machines
       if (_isOnWindows) {
-         Write-Verbose 'On a Windows machine'
          # Create the dictionary
          $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
@@ -116,9 +115,6 @@ function Add-VSTeamProfile {
          $RuntimeParameter2 = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName2, [switch], $AttributeCollection2)
          $RuntimeParameterDictionary.Add($ParameterName2, $RuntimeParameter2)
          return $RuntimeParameterDictionary
-      }
-      else {
-         Write-Verbose 'Not on a Windows machine'
       }
    }
 

@@ -5,6 +5,13 @@ if ($null -eq $env:TEAM_CIBUILD) {
    Import-Module $PSScriptRoot\..\..\vsteam.psd1 -Force
 }
 
+# Before running these tests you must set the following
+# Environment variables.
+# $env:API_VERSION = TFS2017, TFS2018 or VSTS depending on the value used for ACCT
+# $env:EMAIL = Email of user to remove and re-add to account
+# $env:ACCT = VSTS Account Name or full TFS URL including collection
+# $env:PAT = Personal Access token of ACCT
+
 Set-VSTeamAPIVersion -Version $env:API_VERSION
 
 Describe 'VSTeam Integration Tests' {

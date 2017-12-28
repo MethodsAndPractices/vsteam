@@ -235,10 +235,6 @@ function _addSubDomain {
    return $instance
 }
 
-function _getEntitlementBase {
-   return _addSubDomain -subDomain 'vsaex'
-}
-
 function _appendQueryString {
    param(
       $name,
@@ -299,6 +295,8 @@ function _getProjects {
    $version = $VSTeamVersionTable.Core
 
    # Build the url to list the projects
+   # You CANNOT use _buildRequestURI here or you will end up
+   # in an infinite loop.
    $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
 
    # Call the REST API
@@ -456,6 +454,8 @@ function _buildDynamicSwitchParam {
    return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [switch], $AttributeCollection)
 }
 
+# This is the main function for calling TFS and VSTS. It handels the auth and format of the route. 
+# If you need to call TFS or VSTS this is the function to use. 
 function _callAPI {
    param(
       [string]$resource,

@@ -18,7 +18,10 @@ InModuleScope serviceendpoints {
                   createdBy       = @{}
                   authorization   = @{}
                   data            = @{}
-                  operationStatus = @{}
+                  operationStatus = @{
+                     state         = 'Failed'
+                     statusMessage = 'Bad things!'
+                  }
                }
             }}
 

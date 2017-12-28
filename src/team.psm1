@@ -158,7 +158,6 @@ function Add-VSTeamAccount {
 
       # Only add these options on Windows Machines
       if (_isOnWindows) {
-         Write-Verbose 'On a Windows machine'
          # Generate and set the ValidateSet
          $arrSet = "Process", "User"
 
@@ -171,9 +170,6 @@ function Add-VSTeamAccount {
 
          $winAuthParam = _buildDynamicSwitchParam -ParameterName 'UseWindowsAuthentication' -Mandatory $true -ParameterSetName 'Windows'
          $RuntimeParameterDictionary.Add('UseWindowsAuthentication', $winAuthParam)
-      }
-      else {
-         Write-Verbose 'Not on a Windows machine'
       }
 
       return $RuntimeParameterDictionary
