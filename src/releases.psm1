@@ -334,7 +334,7 @@ function Set-VSTeamEnvironmentStatus {
       [Alias('Id')]
       [int[]] $EnvironmentId,
 
-      [Parameter(Mandatory = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int] $ReleaseId,
 
       [ValidateSet('canceled', 'inProgress', 'notStarted', 'partiallySucceeded', 'queued', 'rejected', 'scheduled', 'succeeded', 'undefined')]

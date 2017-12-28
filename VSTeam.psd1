@@ -61,18 +61,29 @@
    # ScriptsToProcess = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
-   TypesToProcess    = @('types\types.ps1xml', 
-      'types\Approvals.ps1xml',
+   TypesToProcess    = @('types\Approvals.ps1xml',
       'types\buildDefinitions.ps1xml',
+      'types\builds.ps1xml',
+      'types\cloudSubscriptions.ps1xml',
+      'types\git.ps1xml',
+      'types\pools.ps1xml',
+      'types\projects.ps1xml',
+      'types\queues.ps1xml',
+      'types\releaseDefinitions.ps1xml',
+      'types\releases.ps1xml',
+      'types\serviceendpoints.ps1xml',
+      'types\team.ps1xml',
+      'types\teammembers.ps1xml',
+      'types\teams.ps1xml',
       'types\users.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
       'formats\buildDefinitions.format.ps1xml',
-      'formats\TeamTypes.format.ps1xml',
       'formats\builds.format.ps1xml',
-      'formats\team.profile.ps1xml',
       'formats\team.format.ps1xml',
+      'formats\team.profile.ps1xml',
+      'formats\TeamTypes.format.ps1xml',
       'formats\users.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
@@ -169,7 +180,7 @@
    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
    AliasesToExport   = @('Get-ServiceEndpoint',
       'Add-AzureRMServiceEndpoint',
-      'Remove-ServiceEndpoint', 
+      'Remove-ServiceEndpoint',
       'Add-SonarQubeEndpoint',
       'Remove-VSTeamAzureRMServiceEndpoint',
       'Remove-VSTeamSonarQubeEndpoint',
@@ -191,7 +202,7 @@
       'Remove-BuildDefinition',
       'Show-Approval',
       'Get-Approval',
-      'Set-Approval', 
+      'Set-Approval',
       'Get-CloudSubscription',
       'Get-GitRepository',
       'Show-GitRepository',
@@ -254,15 +265,15 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team')
+         Tags                       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team')
 
-         ExternalModuleDependencies = @('SHiPS') 
+         ExternalModuleDependencies = @('SHiPS')
 
          # A URL to the license for this module.
          # LicenseUri = ''
 
          # A URL to the main website for this project.
-         ProjectUri = 'https://github.com/DarqueWarrior/vsteam'
+         ProjectUri                 = 'https://github.com/DarqueWarrior/vsteam'
 
          # A URL to an icon representing this module.
          # IconUri = ''
