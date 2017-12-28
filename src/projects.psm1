@@ -303,8 +303,6 @@ function Clear-VSTeamDefaultProject {
    DynamicParam {
       # Only add these options on Windows Machines
       if (_isOnWindows) {
-         Write-Verbose 'On a Windows machine'
-
          $ParameterName = 'Level'
 
          # Create the dictionary
@@ -338,9 +336,6 @@ function Clear-VSTeamDefaultProject {
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
          return $RuntimeParameterDictionary
-      }
-      else {
-         Write-Verbose 'Not on a Windows machine'
       }
    }
 
@@ -385,8 +380,6 @@ function Set-VSTeamDefaultProject {
 
       # Only add these options on Windows Machines
       if (_isOnWindows) {
-         Write-Verbose 'On a Windows machine'
-
          $ParameterName = 'Level'
 
          # Create the collection of attributes
@@ -416,9 +409,6 @@ function Set-VSTeamDefaultProject {
          # Create and return the dynamic parameter
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $dp.Add($ParameterName, $RuntimeParameter)
-      }
-      else {
-         Write-Verbose 'Not on a Windows machine'
       }
       
       return $dp

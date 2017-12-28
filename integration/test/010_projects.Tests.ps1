@@ -81,7 +81,7 @@ Describe 'VSTeam Integration Tests' {
       }
 
       It 'Get-VSTeamProject Should return projects' {
-         Get-VSTeamProject -Name $projectName  | Should Not Be $null
+         Get-VSTeamProject -Name $projectName -IncludeCapabilities | Should Not Be $null
       }
 
       It 'Update-VSTeamProject Should update description' {
