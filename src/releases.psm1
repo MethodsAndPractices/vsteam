@@ -306,7 +306,7 @@ function Set-VSTeamReleaseStatus {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $body = '{ "status": "' + $status + '" }'
+      $body = '{ "id": ' + $id + ', "status": "' + $status + '" }'
 
       foreach ($item in $id) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set status on Release")) {
@@ -326,6 +326,7 @@ function Set-VSTeamReleaseStatus {
       }
    }
 }
+
 function Set-VSTeamEnvironmentStatus {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(

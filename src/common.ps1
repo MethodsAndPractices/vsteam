@@ -86,20 +86,22 @@ function _handleException {
    try {
       $e = (ConvertFrom-Json $ex.ToString())
       
-      if ($null -ne $e.PSObject.Properties.Match('value')) {
+      $hasValueProp = $e.PSObject.Properties.Match('value')
+
+      if (0 -eq $hasValueProp.count) {
          $handled = $true
-         Write-Warning $e.value.message
+         Write-Warning $e.message
       }
       else {
          $handled = $true
-         Write-Warning $e.message
+         Write-Warning $e.value.message
       }    
    }
    catch {
       $msg = "An error occurred: $($ex.Exception.Message)"
    } 
 
-   if(-not $handled) {
+   if (-not $handled) {
       throw $ex
    }
 }
