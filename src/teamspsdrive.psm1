@@ -9,8 +9,8 @@
                     - Build2
                 - Releases
                     - Release1
-                        - Environments
-                            - Environment
+                       - Environment 1
+                           - Attempt 1
                     - Release2
                 - Teams
                     - Team1
@@ -213,30 +213,7 @@ class Release : SHiPSDirectory {
    } 
 
    [object[]] GetChildItem() {
-      $obj = @()
-
-      $obj += [Environments]::new('Environments', $this.ProjectName, $this.id);
-      
-      return $obj;
-   }
-}
-
-[SHiPSProvider(UseCache = $true)]
-class Environments : SHiPSDirectory {
-    
-   [int]$releaseId = $null
-   [string]$projectName = $null
-
-   Environments (
-      [string]$name,
-      [string]$projectName,
-      [int]$releaseId) : base($name) {
-      $this.releaseId = $releaseId
-      $this.projectName = $projectName
-   }   
-   
-   [object[]] GetChildItem() {
-      $Envs = Get-VSTeamRelease -ProjectName $this.projectName -Id $this.releaseId -Expand Environments | Select-Object -ExpandProperty Environments
+      $Envs = Get-VSTeamRelease -ProjectName $this.projectName -Id $this.id -Expand Environments | Select-Object -ExpandProperty Environments
       
       $obj = @()
 
@@ -244,7 +221,8 @@ class Environments : SHiPSDirectory {
          $obj += [Environment]::new(
             $Env.name,
             $Env.status,
-            $Env.projectname, 
+            $this.projectname, 
+            $this.id,
             $Env.Id)
       }      
 
@@ -252,8 +230,10 @@ class Environments : SHiPSDirectory {
    }
 }
 
-class Environment : SHiPSLeaf {
+[SHiPSProvider(UseCache = $true)]
+class Environment : SHiPSDirectory {
    [string]$status = $null
+   [int]$releaseId = $null
    [int]$environmentid = $null
    [string]$projectname = $null
 
@@ -261,10 +241,94 @@ class Environment : SHiPSLeaf {
       [string]$name,
       [string]$status,
       [string]$projectname,
+      [int]$releaseId,
       [int]$environmentid) : base($name) {
       $this.status = $status
+      $this.releaseId = $releaseId
       $this.projectname = $projectname
       $this.environmentid = $environmentid
+   }
+
+   [object[]] GetChildItem() {
+      $Attempts = Get-VSTeamRelease -ProjectName $this.projectName -Id $this.releaseId -Expand Environments `
+         | Select-Object -ExpandProperty environments `
+         | Where-Object id -eq $this.environmentid `
+         | Select-Object -ExpandProperty deploysteps
+      
+      $obj = @()
+      
+      foreach ($Attempt in $Attempts) {       
+         $obj += [Attempt]::new(
+            "Attempt $($Attempt.Attempt)",
+            $Attempt.status,
+            $this.projectname,
+            $this.releaseId,
+            $this.environmentid,
+            $Attempt.id)
+      }
+      
+      return $obj;
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+class Attempt: SHiPSDirectory {
+   [string]$status = $null
+   [int]$releaseId = $null
+   [int]$attemptid = $null
+   [int]$environmentid = $null
+   [string]$projectname = $null
+
+   Attempt ( 
+      [string]$name,
+      [string]$status,
+      [string]$projectname,
+      [int]$releaseId,
+      [int]$environmentid,
+      [int]$attemptid) : base($name) {
+      $this.status = $status
+      $this.attemptid = $attemptid
+      $this.releaseId = $releaseId
+      $this.projectname = $projectname
+      $this.environmentid = $environmentid
+   }
+
+   [object[]] GetChildItem() {
+      $Tasks = Get-VSTeamRelease -ProjectName $this.projectName -Id $this.releaseId -Expand Environments `
+         | Select-Object -ExpandProperty environments `
+         | Where-Object id -eq $this.environmentid `
+         | Select-Object -ExpandProperty deploysteps `
+         | Where-Object id -eq $this.attemptid `
+         | Select-Object @{Name="Tasks"; Expression={ $_.releaseDeployPhases.deploymentJobs.tasks}} `
+         | Select-Object -ExpandProperty tasks
+      
+      $obj = @()
+      
+      foreach ($Task in $Tasks) {       
+         $obj += [Task]::new(
+            $Task.id,
+            $Task.name,
+            $Task.status,
+            $Task.logUrl)
+      }
+      
+      return $obj;
+   }
+}
+
+class Task : SHiPSLeaf {
+   [string]$id = $null
+   [string]$logUrl = $null
+   [string]$status = $null
+
+   Task (
+      [string]$id,
+      [string]$name,
+      [string]$status,
+      [string]$logUrl) : base($name) {
+      $this.id = $id
+      $this.logUrl = $logUrl
+      $this.status = $status
    }
 }
 

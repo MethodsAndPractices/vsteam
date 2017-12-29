@@ -753,10 +753,10 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Add-VSTeamAzureRMServiceEndpoint</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>DisplayName</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="displayName">
+          <maml:name>SubscriptionName</maml:name>
           <maml:Description>
-            <maml:para>The display name of the service endpoint.</maml:para>
+            <maml:para>The name of the Azure Subscription.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -815,13 +815,37 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>ServicePrincipalId</maml:name>
+          <maml:Description>
+            <maml:para>The ID of the Azure Service Principal to use with this service endpoint.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>ServicePrincipalKey</maml:name>
+          <maml:Description>
+            <maml:para>The key of the Azure Service Principal to use with this service endpoint.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-        <maml:name>DisplayName</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="displayName">
+        <maml:name>SubscriptionName</maml:name>
         <maml:Description>
-          <maml:para>The display name of the service endpoint.</maml:para>
+          <maml:para>The name of the Azure Subscription.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -846,6 +870,30 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <maml:name>SubscriptionTenantId</maml:name>
         <maml:Description>
           <maml:para>The id of the Azure tenant to use.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>ServicePrincipalId</maml:name>
+        <maml:Description>
+          <maml:para>The ID of the Azure Service Principal to use with this service endpoint.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>ServicePrincipalKey</maml:name>
+        <maml:Description>
+          <maml:para>The key of the Azure Service Principal to use with this service endpoint.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2404,172 +2452,6 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Add-VSTeamReleaseEnvironment</command:name>
-      <command:verb>Add</command:verb>
-      <command:noun>VSTeamReleaseEnvironment</command:noun>
-      <maml:description>
-        <maml:para>Starts the deployment of an environment in an existing release.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>Add-VSTeamReleaseEnvironment will start the deployment of an environment within an existing release.</maml:para>
-      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Add-VSTeamReleaseEnvironment</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>ProjectName</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the team project for which this function operates.</maml:para>
-            <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ReleaseId</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the Id of an existing Release in which you want to deploy to a particular environment.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>EnvironmentId</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the Id of the Environment you wish to deploy to. The Environment Ids are unique for each environment and in each release.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>EnvironmentStatus</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the status in which to set the environment. The deployment of an environment is triggered by changing the status of the environment.</maml:para>
-            <maml:para>The currently supported status change is from 'notStarted' to 'inProgress'</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-        <maml:name>ProjectName</maml:name>
-        <maml:Description>
-          <maml:para>Specifies the team project for which this function operates.</maml:para>
-          <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Force</maml:name>
-        <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ReleaseId</maml:name>
-        <maml:Description>
-          <maml:para>Specifies the Id of an existing Release in which you want to deploy to a particular environment.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>EnvironmentId</maml:name>
-        <maml:Description>
-          <maml:para>Specifies the Id of the Environment you wish to deploy to. The Environment Ids are unique for each environment and in each release.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>EnvironmentStatus</maml:name>
-        <maml:Description>
-          <maml:para>Specifies the status in which to set the environment. The deployment of an environment is triggered by changing the status of the environment.</maml:para>
-          <maml:para>The currently supported status change is from 'notStarted' to 'inProgress'</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>System.String</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
-        <maml:para>You can tab complete from a list of available projects.</maml:para>
-        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -5998,7 +5880,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:verb>Invoke</command:verb>
       <command:noun>VSTeamRequest</command:noun>
       <maml:description>
-        <maml:para>Allows you to call any TFS/VSTS REST API.</maml:para>
+        <maml:para>Allows you to call any TFS/VSTS REST API. All the Auth and Route Structure is taken care of for you. Just provide the parts of the API call you need.  If you need to send a non-standard URL use the -Url parameter.  If the -Url is used the Url is not changed but the header and UserAgent are added for you.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -6367,7 +6249,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code />
+        <dev:code></dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -8492,10 +8374,10 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Set-VSTeamEnvironmentStatus</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="EnvironmentId">
-          <maml:name>Id</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="Id">
+          <maml:name>EnvironmentId</maml:name>
           <maml:Description>
-            <maml:para>Specifies one or more environments by ID.</maml:para>
+            <maml:para>Specifies one or more environments by ID you wish to deploy. The Environment Ids are unique for each environment and in each release.</maml:para>
             <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
             <maml:para>To find the ID of an environment type Get-VSTeamRelease -expand environments.</maml:para>
           </maml:Description>
@@ -8582,10 +8464,10 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="EnvironmentId">
-        <maml:name>Id</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="Id">
+        <maml:name>EnvironmentId</maml:name>
         <maml:Description>
-          <maml:para>Specifies one or more environments by ID.</maml:para>
+          <maml:para>Specifies one or more environments by ID you wish to deploy. The Environment Ids are unique for each environment and in each release.</maml:para>
           <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
           <maml:para>To find the ID of an environment type Get-VSTeamRelease -expand environments.</maml:para>
         </maml:Description>
@@ -8693,6 +8575,9 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
+        <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release s.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>

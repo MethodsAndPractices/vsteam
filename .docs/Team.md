@@ -37,9 +37,6 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
 #include "./synopsis/Add-VSTeamReleaseDefinition.md"
 
-### [Add-VSTeamReleaseEnvironment](Add-VSTeamReleaseEnvironment.md)
-#include "./synopsis/Add-VSTeamReleaseEnvironment.md"
-
 ### [Add-VSTeamSonarQubeEndpoint](Add-VSTeamSonarQubeEndpoint.md)
 #include "./synopsis/Add-VSTeamSonarQubeEndpoint.md"
 
@@ -150,6 +147,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 
 ### [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 #include "./synopsis/Set-VSTeamDefaultProject.md"
+
+### [Set-VSTeamEnvironmentStatus](Set-VSTeamEnvironmentStatus.md)
+#include "./synopsis/Set-VSTeamEnvironmentStatus.md"
 
 ### [Set-VSTeamReleaseStatus](Set-VSTeamReleaseStatus.md)
 #include "./synopsis/Set-VSTeamReleaseStatus.md"

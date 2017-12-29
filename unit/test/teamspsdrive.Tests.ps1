@@ -130,7 +130,7 @@ InModuleScope teamspsdrive {
 
       Context 'Release' {
          
-         $target = [Release]::new(1, 'TestReleaseName', 'TestReleaseStatus', $(Get-Date), @(), 'TestUser')
+         $target = [Release]::new(1, 'TestReleaseName', 'TestReleaseStatus', $(Get-Date), @(), 'TestUser', 'TestProject')
          
          It 'Should create Release' {
             $target | Should Not Be $null
