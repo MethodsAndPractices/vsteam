@@ -337,6 +337,7 @@ function Set-VSTeamEnvironmentStatus {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int] $ReleaseId,
 
+      [Parameter(Mandatory = $true, Position = 0)]      
       [ValidateSet('canceled', 'inProgress', 'notStarted', 'partiallySucceeded', 'queued', 'rejected', 'scheduled', 'succeeded', 'undefined')]
       [Alias('EnvironmentStatus')]
       [string] $Status,
@@ -350,7 +351,7 @@ function Set-VSTeamEnvironmentStatus {
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam
+      _buildProjectNameDynamicParam -Position 1
    }
 
    Process {

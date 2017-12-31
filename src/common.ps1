@@ -317,7 +317,8 @@ function _buildProjectNameDynamicParam {
       [string] $ParameterName = 'ProjectName',
       [string] $ParameterSetName,
       [bool] $Mandatory = $true,
-      [string] $AliasName
+      [string] $AliasName, 
+      [int] $Position = 0
    )
 
    # Create the dictionary
@@ -329,7 +330,7 @@ function _buildProjectNameDynamicParam {
    # Create and set the parameters' attributes
    $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
    $ParameterAttribute.Mandatory = $Mandatory
-   $ParameterAttribute.Position = 0
+   $ParameterAttribute.Position = $Position
 
    if ($ParameterSetName) {
       $ParameterAttribute.ParameterSetName = $ParameterSetName

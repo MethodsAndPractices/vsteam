@@ -37,6 +37,7 @@ Get-ChildItem
 using namespace Microsoft.PowerShell.SHiPS
 
 [SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class VSAccount : SHiPSDirectory {
     
    # Default constructor
@@ -61,6 +62,7 @@ class VSAccount : SHiPSDirectory {
 }
 
 [SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class Project : SHiPSDirectory {
     
    [string]$ProjectId = $null
@@ -88,6 +90,7 @@ class Project : SHiPSDirectory {
 }
 
 [SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class Builds : SHiPSDirectory {
 
    [string]$ProjectName = $null
@@ -154,6 +157,7 @@ class Build : SHiPSLeaf {
 }
 
 [SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class Releases : SHiPSDirectory {
 
    [string]$ProjectName = $null
@@ -186,6 +190,7 @@ class Releases : SHiPSDirectory {
 }
 
 [SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class Release : SHiPSDirectory {
    [string]$id = $null
    [string]$status = $null
@@ -230,7 +235,8 @@ class Release : SHiPSDirectory {
    }
 }
 
-[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(UseCache = $false)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class Environment : SHiPSDirectory {
    [string]$status = $null
    [int]$releaseId = $null
@@ -271,7 +277,8 @@ class Environment : SHiPSDirectory {
    }
 }
 
-[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(UseCache = $false)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class Attempt: SHiPSDirectory {
    [string]$status = $null
    [int]$releaseId = $null

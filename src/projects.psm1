@@ -64,7 +64,6 @@ function Get-VSTeamProject {
       [Alias('ProjectID')]
       [string] $Id,
       
-      [Parameter(ParameterSetName = 'ByID')]
       [switch] $IncludeCapabilities
    )
 
@@ -294,7 +293,6 @@ function Remove-VSTeamProject {
       }
    }
 }
-
 
 function Clear-VSTeamDefaultProject {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
