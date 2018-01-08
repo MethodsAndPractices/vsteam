@@ -9,10 +9,14 @@ InModuleScope users {
    
    Describe "Users TFS Errors" {
       Context 'Get-VSTeamUser' {  
-         Mock _callAPI { throw 'Should not be called' }
+         Mock _callAPI { throw 'Should not be called' } -Verifiable
 
          It 'Should throw' {
             { Get-VSTeamUser } | Should Throw
+         }
+
+         It '_callAPI should not be called' {
+            Assert-MockCalled _callAPI -Exactly 0
          }
       }
    }
