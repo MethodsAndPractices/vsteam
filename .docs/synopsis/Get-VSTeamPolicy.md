@@ -1,0 +1,1 @@
+Get the code policies in the specified Visual Studio Team Services or Team Foundation Server project.
