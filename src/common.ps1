@@ -351,7 +351,16 @@ function _buildProjectNameDynamicParam {
    $arrSet = _getProjects
 
    if ($arrSet) {
+      # If $Mandatory is false we need to add '' to the arrSet or they will not be able
+      # to omit this parameter
+      if($Mandatory -eq $false){
+         # We can't use .Add("") because the collection is of a fixed size. But we can
+         # use += because a new array is created that contains everything we want.  
+         $arrSet += "";
+      }
+
       Write-Verbose "arrSet = $arrSet"
+
       $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
 
       # Add the ValidateSet to the attributes collection

@@ -49,7 +49,7 @@ InModuleScope git {
 
          Get-VSTeamGitRepository
 
-         It 'Should create VSAccount' {
+         It 'Should return all repos for all projects' {
             Assert-VerifiableMocks
          }
       }
@@ -59,7 +59,7 @@ InModuleScope git {
 
          Get-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000
 
-         It 'Should create VSAccount' {
+         It 'Should return a single repo by id' {
             Assert-VerifiableMocks
          }
       }
@@ -69,7 +69,7 @@ InModuleScope git {
 
          Get-VSTeamGitRepository -Name 'test'
 
-         It 'Should create VSAccount' {
+         It 'Should return a single repo by name' {
             Assert-VerifiableMocks
          }
       }
