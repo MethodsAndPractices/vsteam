@@ -35,7 +35,7 @@ function Get-VSTeamApproval {
       try {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $VSTeamVersionTable.Release `
-            -QueryString @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdFilter = ($ReleaseIdFilter -join ',')}
+            -QueryString @{includeMyGroupApprovals = 'true'; statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdFilter = ($ReleaseIdFilter -join ',')}
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

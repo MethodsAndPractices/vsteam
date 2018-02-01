@@ -8,6 +8,9 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 2.1.4
+Added support for assigner to be a group, when requesting approvals for a group.
+
 ## 2.1.3
 Added support for Service Endpoint Types
 
