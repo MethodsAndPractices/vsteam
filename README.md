@@ -10,6 +10,7 @@ The cases of every file is very important. This module is to be used on Windows,
 # Release Notes
 ## 2.1.3
 Added support for Service Endpoint Types
+Updated the ValidateSet for StatusFilter of Approvals
 
 ## 2.1.2
 Fixed issue [#36](https://github.com/DarqueWarrior/vsteam/issues/36) so all git repositories are returned when you do not provide an project. 
