@@ -58,10 +58,36 @@ InModuleScope Approvals {
          It 'should return approvals' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&includeMyGroupApprovals=true"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)"
             }
          }
       }
+
+      Context 'Get-VSTeamApproval with AssignedToFilter' {
+            Mock Invoke-RestMethod {            
+               return @{
+                  count = 1
+                  value = @(
+                     @{
+                        id       = 1
+                        revision = 1
+                        approver = @{
+                           id          = 'c1f4b9a6-aee1-41f9-a2e0-070a79973ae9'
+                           displayName = 'Test User'
+                        }
+                     }
+                  )
+               }}
+   
+            Get-VSTeamApproval -projectName project -AssignedToFilter 'Chuck Reinhart'
+            
+            It 'should return approvals' {
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
+                  -ParameterFilter { 
+                  $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
+               }
+            }
+         }
 
       # This makes sure the alias is working
       Context 'Get-Approval' {
@@ -85,7 +111,7 @@ InModuleScope Approvals {
          It 'should return approvals' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&includeMyGroupApprovals=true"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)"
             }
          }
       }
