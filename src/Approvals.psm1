@@ -33,9 +33,14 @@ function Get-VSTeamApproval {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       try {
+        # Build query string and determine if the includeMyGroupApprovals should be added.
+        $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdFilter = ($ReleaseIdFilter -join ',')}
+        if($AssignedToFilter -ne $null -and $AssignedToFilter -ne ""){
+            $queryString.includeMyGroupApprovals = 'true';
+        }
+
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $VSTeamVersionTable.Release `
-            -QueryString @{includeMyGroupApprovals = 'true'; statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdFilter = ($ReleaseIdFilter -join ',')}
+         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $VSTeamVersionTable.Release -QueryString $queryString
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
