@@ -13,6 +13,7 @@ Added support for assigner to be a group, when requesting approvals for a group.
 
 ## 2.1.3
 Added support for Service Endpoint Types
+Updated the ValidateSet for StatusFilter of Approvals
 
 ## 2.1.2
 Fixed issue [#36](https://github.com/DarqueWarrior/vsteam/issues/36) so all git repositories are returned when you do not provide an project. 

@@ -16,7 +16,7 @@ function Get-VSTeamApproval {
    [CmdletBinding()]
    param(
       [Parameter()]
-      [ValidateSet('Approved', 'ReAssigned', 'Rejected')]
+      [ValidateSet('Approved', 'ReAssigned', 'Rejected', 'Canceled', 'Pending', 'Rejected', 'Skipped', 'Undefined')]
       [string] $StatusFilter,
 
       [int[]] $ReleaseIdFilter,
