@@ -85,6 +85,7 @@
       'formats\profile.format.ps1xml',
       'formats\queues.format.ps1xml',
       'formats\serviceendpoints.format.ps1xml',
+      'formats\serviceendpointTypes.format.ps1xml',
       'formats\team.format.ps1xml',
       'formats\users.format.ps1xml',
       'formats\policies.ps1xml')
@@ -103,6 +104,7 @@
       'src\releaseDefinitions.psm1',
       'src\releases.psm1',
       'src\serviceendpoints.psm1',
+      'src\serviceendpointTypes.psm1',
       'src\teams.psm1',
       'src\profile.psm1',
       'src\teammembers.psm1',
@@ -178,7 +180,8 @@
       'Get-VSTeamUser',
       'Remove-VSTeamUser',
       'Add-VSTeamUser',
-      'Set-VSTeamEnvironmentStatus')
+      'Set-VSTeamEnvironmentStatus',
+      'Get-VSTeamServiceEndpointType')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -257,7 +260,8 @@
       'Get-User',
       'ata',
       'Set-EnvironmentStatus',
-      'Add-VSTeamReleaseEnvironment')
+      'Add-VSTeamReleaseEnvironment',
+      'Get-ServiceEndpointType')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

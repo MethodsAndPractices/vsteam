@@ -8,6 +8,30 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 2.1.3
+Added support for Service Endpoint Types
+Updated the ValidateSet for StatusFilter of Approvals
+
+## 2.1.2
+Fixed issue [#36](https://github.com/DarqueWarrior/vsteam/issues/36) so all git repositories are returned when you do not provide an project. 
+
+## 2.1.1
+Removed the External Module Dependencies so SHiPS is installed with the module. 
+
+## 2.1.0
+Lots of code refactorying and clean up.
+
+Replaced Add-VSTeamReleaseEnvironment with Set-VSTeamEnvironmentStatus.
+
+## 2.0.2
+Pushed VSTeamVersionTable to global scope.
+
+Added ReleaseId to release 
+
+Added Add-VSTeamUser 
+
+Added Invoke-VSTeamRequest. You can now call any REST API supported by TFS2017, TFS2018 or VSTS.
+
 ## 2.0.1
 The module now has a dependency on SHiPS for PSDrive support.
 

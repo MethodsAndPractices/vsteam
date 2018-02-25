@@ -171,6 +171,16 @@ Describe 'VSTeam Integration Tests' {
       }
    }
 
+   Context 'Get Service Endpoint types' {
+      It 'Get-VSTeamServiceEndpointType' {
+         Get-VSTeamServiceEndpointType | Should Not Be $null
+      }
+
+      It 'Get-ServiceEndpointType' {
+         Get-ServiceEndpointType | Should Not Be $null
+      }
+   }
+
    Context 'Service Endpoints full exercise' {
       It 'Add-VSTeamSonarQubeEndpoint Should add servcie endpoint' {
          { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `
