@@ -14,8 +14,12 @@ function _applyTypes {
       $ProjectName
    )
 
-   # Add the ProjectName as a NoteProperty so we can use it further down the pipeline (it's not returned from the REST call)
-   $item | Add-Member -MemberType NoteProperty -Name ProjectName -Value $ProjectName
+   if ($item.PSObject.Properties.Match('ProjectName').count -eq 0) {
+      # Add the ProjectName as a NoteProperty so we can use it further down the pipeline.
+      # It's not returned from the REST call 
+      $item | Add-Member -MemberType NoteProperty -Name ProjectName -Value $ProjectName
+   }
+  
    $item.PSObject.TypeNames.Insert(0, 'Team.Team')
 }
 
