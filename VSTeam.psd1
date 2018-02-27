@@ -75,7 +75,8 @@
       'types\team.ps1xml',
       'types\teammembers.ps1xml',
       'types\teams.ps1xml',
-      'types\users.ps1xml')
+      'types\users.ps1xml',
+      'types\policies.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -86,7 +87,8 @@
       'formats\serviceendpoints.format.ps1xml',
       'formats\serviceendpointTypes.format.ps1xml',
       'formats\team.format.ps1xml',
-      'formats\users.format.ps1xml')
+      'formats\users.format.ps1xml',
+      'formats\policies.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
@@ -95,6 +97,7 @@
       'src\buildDefinitions.psm1',
       'src\builds.psm1',
       'src\cloudSubscriptions.psm1',
+      'src\policies.psm1',
       'src\pools.psm1',
       'src\projects.psm1',
       'src\queues.psm1',
@@ -118,11 +121,14 @@
       'Add-VSTeamReleaseDefinition',
       'Add-VSTeamAccount',
       'Add-VSTeam',
+      'Add-VSTeamPolicy',
       'Clear-VSTeamDefaultProject',
       'Get-VSTeamApproval',
       'Get-VSTeamBuild',
       'Get-VSTeamBuildDefinition',
       'Get-VSTeamCloudSubscription',
+      'Get-VSTeamPolicy',
+      'Get-VSTeamPolicyType',
       'Get-VSTeamPool',
       'Get-VSTeamProject',
       'Get-VSTeamQueue',
@@ -132,6 +138,7 @@
       'Get-VSTeamInfo',
       'Get-VSTeam',
       'Get-VSTeamMember',
+      'Update-VSTeamPolicy',
       'Remove-VSTeamBuild',
       'Remove-VSTeamBuildDefinition',
       'Remove-VSTeamProject',
@@ -140,6 +147,7 @@
       'Remove-VSTeamServiceEndpoint',
       'Remove-VSTeamAccount',
       'Remove-VSTeam',
+      'Remove-VSTeamPolicy',
       'Set-VSTeamApproval',
       'Set-VSTeamDefaultProject',
       'Set-VSTeamReleaseStatus',
