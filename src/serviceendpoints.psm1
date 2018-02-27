@@ -120,6 +120,7 @@ function Add-VSTeamSonarQubeEndpoint {
          $credential = New-Object System.Management.Automation.PSCredential "nologin", $securePersonalAccessToken
          $token = $credential.GetNetworkCredential().Password
       }
+      
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
@@ -157,6 +158,8 @@ function Add-VSTeamSonarQubeEndpoint {
       }
 
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
    }
 }
 
@@ -224,6 +227,8 @@ function Add-VSTeamAzureRMServiceEndpoint {
          -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
 
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
    }
 }
 
@@ -245,7 +250,7 @@ function Get-VSTeamServiceEndpoint {
       if ($id) {
          # Call the REST API
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
-            -Version $VSTeamVersionTable.DistributedTask
+            -Version $VSTeamVersionTable.DistributedTask -ProjectName $ProjectName
          
          _applyTypes -item $resp
 
