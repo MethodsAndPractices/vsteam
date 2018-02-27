@@ -8,7 +8,7 @@
 ## SYNTAX
 
 ```
-Get-VSTeamApproval [-ProjectName] <String> [[-StatusFilter] <String>] [[-ReleaseIdFilter] <Int32[]>]
+Get-VSTeamApproval [-ProjectName] <String> [[-StatusFilter] <String>] [[-ReleaseIdsFilter] <Int32[]>]
  [[-AssignedToFilter] <String>]
 ```
 
@@ -71,13 +71,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ReleaseIdFilter
+### -ReleaseIdsFilter
 Only approvals for the release ids provided will be returned.
 
 ```yaml
 Type: Int32[]
 Parameter Sets: (All)
-Aliases: 
+Aliases: ReleaseIdFilter
 
 Required: False
 Position: 1

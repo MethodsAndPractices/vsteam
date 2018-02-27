@@ -8,6 +8,17 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 # Release Notes
+## 2.1.6
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/39) from [Francisco Cabral](https://github.com/franciscocabral) which included the following:
+- Fix GET Approval filter by release ids
+
+## 2.1.5
+Fixed issue [#40](https://github.com/DarqueWarrior/vsteam/issues/40) so adding a SonarQube or AzureRM Service Endpoint returns the endpoint. 
+
+## 2.1.4
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/37) from [David Roberts](https://github.com/davidroberts63) which included the following:
+- Add functions to get/edit code policies
+
 ## 2.1.3
 Added support for Service Endpoint Types
 Updated the ValidateSet for StatusFilter of Approvals
@@ -57,7 +68,7 @@ You can update the version so try new versions of APIs. See Set-VSTeamAPIVersion
 ## 1.0.4
 Added support for Show-VSTeam that opens the configured TFS or VSTS in default browser.
 
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/26) from [Michel Perfetti](https://github.com/miiitch) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/26) from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Remove deadlock when endpoint creation failed 
 ## 1.0.3
@@ -84,24 +95,24 @@ Added support so you can update a project by ID as well as by Name.
 The variable to test if you are on Mac OS changed from IsOSX to IsMacOS. Because I have Set-StrictMode -Version Latest trying to access a variable that is not set will crash.
 
 ## 0.1.32
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/16) from [Fergal](https://github.com/ObsidianPhoenix) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/16) from [Fergal](https://github.com/ObsidianPhoenix) which included the following:
 
 - Added Support for Build Tags
 - Added the ability to update KeepForever, and the Build Number
 - Added the ability to pull artifact data from the build
 
 ## 0.1.31
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/17) from [Kees Verhaar](https://github.com/KeesV) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/17) from [Kees Verhaar](https://github.com/KeesV) which included the following:
 
 - Add ProjectName as a property on team member so it can be used further down the pipeline
 
 ## 0.1.30
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/15) from [Kees Verhaar](https://github.com/KeesV) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/15) from [Kees Verhaar](https://github.com/KeesV) which included the following:
 
 - Add support for teams
 
 ## 0.1.29
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/12) from [Andy Neillans](https://github.com/aneillans) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/12) from [Andy Neillans](https://github.com/aneillans) which included the following:
 
 - Fixed for on-premise URLS being incorrectly classed as VSTS accounts
 - Fixed for projects validation if you have more than 100 projects
@@ -113,7 +124,7 @@ Added ID to approval default output
 Clearing code analysis warnings
 
 ## 0.1.26
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/10) from [Roberto Peña](https://github.com/eulesv) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/10) from [Roberto Peña](https://github.com/eulesv) which included the following:
 
 - Adding a regular expression to validate VSTS account
 
@@ -124,7 +135,7 @@ Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/10) from [Robe
 - Added support so you can start a release from a Git commit
 
 ## 0.1.23
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/8) from [Michel Perfetti](https://github.com/miiitch) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/8) from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Support for the [SonarQube extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube)
 
@@ -134,7 +145,7 @@ Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/8) from [Miche
 ## 0.1.21
 - Added Get-VSTeamBuildLog that returns the logs of the provided build
 
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Added serviceEndpoint parameters to Add-VSTeamAzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
 - The _trackProgress function was changed too to reflect the return code of the api (https://www.visualstudio.com/en-us/docs/integrate/api/endpoints/endpoints)
@@ -144,15 +155,15 @@ Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/6)from [Michel
 Removed test folder from module
 
 ## 0.1.18
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/5) from [Christopher Mank](https://github.com/ChristopherMank) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/5) from [Christopher Mank](https://github.com/ChristopherMank) which included the following:
 - Created new function in the release module named 'Add-VSTeamReleaseEnvironment'. New function deploys an environment from an existing release.
 
 ## 0.1.16
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/4) from [Andy Neillans](https://github.com/aneillans) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/4) from [Andy Neillans](https://github.com/aneillans) which included the following:
 - Bug fix for broken PAT code handling.
 
 ## 0.1.15
-Merge [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/3) from [Andy Neillans](https://github.com/aneillans) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/3) from [Andy Neillans](https://github.com/aneillans) which included the following:
 - Corrected typos in help files.
 - Refactored location of common methods.
 - Implemented using DefaultCredentials when using TFS.  This removes the need to create a PAT.
