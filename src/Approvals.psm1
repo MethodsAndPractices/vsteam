@@ -19,6 +19,7 @@ function Get-VSTeamApproval {
       [ValidateSet('Approved', 'ReAssigned', 'Rejected', 'Canceled', 'Pending', 'Rejected', 'Skipped', 'Undefined')]
       [string] $StatusFilter,
 
+      [Alias('ReleaseIdFilter')]
       [int[]] $ReleaseIdsFilter,
 
       [string] $AssignedToFilter
