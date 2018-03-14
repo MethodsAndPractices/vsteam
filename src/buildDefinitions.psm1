@@ -219,9 +219,7 @@ function Update-VSTeamBuildDefinition {
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Build Definition")) {
          # Call the REST API
-         $resp = _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $VSTeamVersionTable.Build -InFile $InFile -ContentType 'application/json'
-
-         return $resp
+         _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $VSTeamVersionTable.Build -InFile $InFile -ContentType 'application/json' | Out-Null
       }
    }
 }
