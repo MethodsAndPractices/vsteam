@@ -181,5 +181,8 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Update-VSTeamBuild](Update-VSTeamBuild.md)
 #include "./synopsis/Update-VSTeamBuild.md"
 
+### [Update-VSTeamBuildDefinition](Update-VSTeamBuildDefinition.md)
+#include "./synopsis/Update-VSTeamBuildDefinition.md"
+
 ### [Update-VSTeamProject](Update-VSTeamProject.md)
 #include "./synopsis/Update-VSTeamProject.md"
