@@ -247,7 +247,6 @@ InModuleScope buildDefinitions {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
-               $Id -eq '2' -and
                $InFile -eq 'builddef.json' -and
                $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
             }
@@ -305,7 +304,6 @@ InModuleScope buildDefinitions {
          It 'should update build definition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
-               $Id -eq '2' -and
                $InFile -eq 'builddef.json' -and
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
             }
