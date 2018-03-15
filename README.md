@@ -14,7 +14,7 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ### 2.1.7
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/42) from [karpis](https://github.com/karpis) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/42) from [Michal Karpinski](https://github.com/karpis) which included the following:
 
 - Added a function for updating an existing build definition from an input json file
 
