@@ -3131,10 +3131,12 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     <maml:description>
       <maml:para>The Get-VSTeamApproval function gets the approvals for all releases for a team project.</maml:para>
       <maml:para>With just a project name, this function gets all of the pending approvals for that team project.</maml:para>
+      <maml:para>When using with VSTS "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter is not empty.</maml:para>
+      <maml:para>When using with TFS "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter, Release Id Filter are not empty and Status Filter equals Pending.</maml:para>
       <maml:para>The Team.Approval type has three custom table formats:</maml:para>
-      <maml:para>Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions</maml:para>
-      <maml:para>Approved: Release Name, Environment, Is Automated, Approval Type, Approver Name, Release Definitions, Comments</maml:para>
-      <maml:para>Rejected: Release Name, Environment, Approval Type, Approver Name, Release Definition, Comments</maml:para>
+      <maml:para>- Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions</maml:para>
+      <maml:para>- Approved: Release Name, Environment, Is Automated, Approval Type, Approver Name, Release Definitions, Comments</maml:para>
+      <maml:para>- Rejected: Release Name, Environment, Approval Type, Approver Name, Release Definition, Comments</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -3142,8 +3144,8 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>StatusFilter</maml:name>
           <maml:Description>
-            <maml:para>By default the function returns Pending approvals. </maml:para>
-            <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals. </maml:para>
+            <maml:para>By default the function returns Pending approvals.</maml:para>
+            <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals.</maml:para>
             <maml:para>There is a custom table view for each status.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -3197,8 +3199,8 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>StatusFilter</maml:name>
         <maml:Description>
-          <maml:para>By default the function returns Pending approvals. </maml:para>
-          <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals. </maml:para>
+          <maml:para>By default the function returns Pending approvals.</maml:para>
+          <maml:para>Using this filter you can return Approved, ReAssigned or Rejected approvals.</maml:para>
           <maml:para>There is a custom table view for each status.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
