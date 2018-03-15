@@ -239,6 +239,20 @@ InModuleScope buildDefinitions {
          }
       }
 
+      Context 'Update-VSTeamBuildDefinition' {
+         Mock Invoke-RestMethod { return $results }
+
+         It 'should update build definition' {
+            Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'builddef.json' -Force
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Put' -and
+               $InFile -eq 'builddef.json' -and
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
+            }
+         }
+      }
+
       # Make sure these test run last as the need differnt 
       # $VSTeamVersionTable.Account values
       Context 'Get-VSTeamBuildDefinition with no account' {
@@ -275,6 +289,22 @@ InModuleScope buildDefinitions {
          It 'should delete build definition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and 
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
+            }
+         }
+      }
+
+      Context 'Update-VSTeamBuildDefinition on TFS local Auth' {
+         Mock Invoke-RestMethod { return $results }
+         Mock _useWindowsAuthenticationOnPremise { return $true }
+         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+
+         Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'builddef.json' -Force
+         
+         It 'should update build definition' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Method -eq 'Put' -and
+               $InFile -eq 'builddef.json' -and
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
             }
          }

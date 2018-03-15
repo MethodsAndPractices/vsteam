@@ -3167,8 +3167,8 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>ReleaseIdFilter</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ReleaseIdFilter">
+          <maml:name>ReleaseIdsFilter</maml:name>
           <maml:Description>
             <maml:para>Only approvals for the release ids provided will be returned.</maml:para>
           </maml:Description>
@@ -3208,8 +3208,8 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>ReleaseIdFilter</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="ReleaseIdFilter">
+        <maml:name>ReleaseIdsFilter</maml:name>
         <maml:Description>
           <maml:para>Only approvals for the release ids provided will be returned.</maml:para>
         </maml:Description>
@@ -10655,6 +10655,151 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <dev:code>PS C:\&gt; Get-VSTeamBuild | Update-VSTeamBuild -KeepForever $false</dev:code>
         <dev:remarks>
           <maml:para>Sets the keep forever property of every build to false.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-VSTeamBuildDefinition</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>VSTeamBuildDefinition</command:noun>
+      <maml:description>
+        <maml:para>Updates a build definition for a team project.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Reads a JSON file off disk and uses that file to update an existing build defintion in the provided project.</maml:para>
+      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamBuildDefinition</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the build definition to update by ID.</maml:para>
+            <maml:para>To find the ID of a build defintion, type Get-VSTeamBuildDefinition.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>InFile</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the JSON file that contains the updated build defintion. Enter a path and file name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the build definition to update by ID.</maml:para>
+          <maml:para>To find the ID of a build defintion, type Get-VSTeamBuildDefinition.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>InFile</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the JSON file that contains the updated build defintion. Enter a path and file name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json</dev:code>
+        <dev:remarks>
+          <maml:para>This command reads build.json and updates existing build defintion with id 123 from it on the demo team project.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
