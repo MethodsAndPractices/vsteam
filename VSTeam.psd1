@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '2.1.6'
+   ModuleVersion     = '2.1.7'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -181,7 +181,8 @@
       'Remove-VSTeamUser',
       'Add-VSTeamUser',
       'Set-VSTeamEnvironmentStatus',
-      'Get-VSTeamServiceEndpointType')
+      'Get-VSTeamServiceEndpointType',
+      'Update-VSTeamBuildDefinition')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -261,7 +262,8 @@
       'ata',
       'Set-EnvironmentStatus',
       'Add-VSTeamReleaseEnvironment',
-      'Get-ServiceEndpointType')
+      'Get-ServiceEndpointType',
+      'Update-BuildDefinition')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
