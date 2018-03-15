@@ -434,7 +434,7 @@ function Invoke-VSTeamRequest {
       $output = _callAPI @params
 
       if ($JSON.IsPresent) {
-         $output | ConvertTo-Json         
+         $output | ConvertTo-Json -Depth 99         
       }
       else {   
          $output
