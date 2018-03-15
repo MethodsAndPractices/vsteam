@@ -1,4 +1,10 @@
 Write-Output 'Clearing old files'
+
+if ((Test-Path ..\docs) -eq $false) {
+   New-Item -ItemType Directory -Name ..\docs
+}
+
+
 Get-ChildItem ..\docs | Remove-Item
 Write-Output 'Merging Markdown files'
 markdown-include $PSScriptRoot $PSScriptRoot\..\docs

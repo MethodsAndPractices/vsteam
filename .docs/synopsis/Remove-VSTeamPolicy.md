@@ -1,0 +1,1 @@
+Removes the specified policy from the specified project.

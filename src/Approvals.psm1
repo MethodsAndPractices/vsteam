@@ -19,7 +19,8 @@ function Get-VSTeamApproval {
       [ValidateSet('Approved', 'ReAssigned', 'Rejected', 'Canceled', 'Pending', 'Rejected', 'Skipped', 'Undefined')]
       [string] $StatusFilter,
 
-      [int[]] $ReleaseIdFilter,
+      [Alias('ReleaseIdFilter')]
+      [int[]] $ReleaseIdsFilter,
 
       [string] $AssignedToFilter
    )
@@ -33,11 +34,24 @@ function Get-VSTeamApproval {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       try {
-        # Build query string and determine if the includeMyGroupApprovals should be added.
-        $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdFilter = ($ReleaseIdFilter -join ',')}
-        if($AssignedToFilter -ne $null -and $AssignedToFilter -ne ""){
-            $queryString.includeMyGroupApprovals = 'true';
-        }
+         # Build query string and determine if the includeMyGroupApprovals should be added.
+         $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseIdsFilter -join ',')}
+
+         # The support in TFS and VSTS are not the same.
+         if (_isVSTS $VSTeamVersionTable.Account) {
+            if ($AssignedToFilter -ne $null -and $AssignedToFilter -ne "") {
+               $queryString.includeMyGroupApprovals = 'true';
+            }
+         }
+         else {
+            # For TFS all three parameters must be set before you can add
+            # includeMyGroupApprovals.
+            if ($AssignedToFilter -ne $null -and $AssignedToFilter -ne "" -and
+                $ReleaseIdsFilter -ne $null -and $ReleaseIdsFilter -ne "" -and
+                $StatusFilter -eq 'Pending') {
+               $queryString.includeMyGroupApprovals = 'true';
+            }
+         }
 
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $VSTeamVersionTable.Release -QueryString $queryString

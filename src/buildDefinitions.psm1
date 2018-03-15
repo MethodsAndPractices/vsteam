@@ -196,12 +196,42 @@ function Remove-VSTeamBuildDefinition {
    }
 }
 
+function Update-VSTeamBuildDefinition {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   Param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [int] $Id,
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $InFile,
+
+      # Forces the command without confirmation
+      [switch] $Force
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Build Definition")) {
+         # Call the REST API
+         _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $VSTeamVersionTable.Build -InFile $InFile -ContentType 'application/json' | Out-Null
+      }
+   }
+}
+
 Set-Alias Get-BuildDefinition Get-VSTeamBuildDefinition
 Set-Alias Add-BuildDefinition Add-VSTeamBuildDefinition
 Set-Alias Show-BuildDefinition Show-VSTeamBuildDefinition
 Set-Alias Remove-BuildDefinition Remove-VSTeamBuildDefinition
+Set-Alias Update-BuildDefinition Update-VSTeamBuildDefinition
 
 Export-ModuleMember `
    -Function Show-VSTeamBuildDefinition, Get-VSTeamBuildDefinition, Add-VSTeamBuildDefinition,
-Remove-VSTeamBuildDefinition `
-   -Alias Get-BuildDefinition, Add-BuildDefinition, Show-BuildDefinition, Remove-BuildDefinition
+Remove-VSTeamBuildDefinition, Update-VSTeamBuildDefinition `
+   -Alias Get-BuildDefinition, Add-BuildDefinition, Show-BuildDefinition, Remove-BuildDefinition, 
+Update-BuildDefinition
