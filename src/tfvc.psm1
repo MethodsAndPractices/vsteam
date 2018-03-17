@@ -68,13 +68,12 @@ function Get-VSTeamTfvcBranch {
       foreach ($item in $Path)
       {
          $queryString = [ordered]@{
-            path = $item;
             includeChildren = $IncludeChildren;
             includeParent = $IncludeParent;
             includeDeleted = $IncludeDeleted;
          }
 
-         $resp = _callAPI -ProjectName $ProjectName -Area tfvc -Resource branches -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
+         $resp = _callAPI -ProjectName $ProjectName -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
 
          _applyTypes -item $resp
             
