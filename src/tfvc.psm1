@@ -16,13 +16,7 @@ function Get-VSTeamTfvcBranches {
    [CmdletBinding()]
    param(
       [parameter(Mandatory = $false)]
-      [switch] $IncludeDeleted = $false,
-
-      [parameter(Mandatory = $false)]
-      [switch] $IncludeChildren = $false,
-
-      [parameter(Mandatory = $false)]
-      [switch] $IncludeParent = $false
+      [switch] $IncludeDeleted = $false
    )
 
    DynamicParam {
@@ -35,8 +29,6 @@ function Get-VSTeamTfvcBranches {
 
       $queryString = @{
          includeDeleted = $IncludeDeleted;
-         includeChildren = $IncludeChildren;
-         includeParent = $IncludeParent;
       }
 
       $resp = _callAPI -ProjectName $ProjectName -Area tfvc -Resource branches -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
@@ -75,7 +67,7 @@ function Get-VSTeamTfvcBranch {
 
       foreach ($item in $Path)
       {
-         $queryString = @{
+         $queryString = [ordered]@{
             path = $item;
             includeDeleted = $IncludeDeleted;
             includeChildren = $IncludeChildren;
@@ -91,6 +83,7 @@ function Get-VSTeamTfvcBranch {
    }
 }
 
+Set-Alias Get-TfvcBranches Get-VSTeamTfvcBranches
 Set-Alias Get-TfvcBranch Get-VSTeamTfvcBranch
 
 Export-ModuleMember `
