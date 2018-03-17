@@ -139,18 +139,6 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcBranch with IncludeDeleted' {
-         Mock Invoke-RestMethod { return $singleResult } -Verifiable
-
-         Get-VSTeamTfvcBranch -ProjectName MyProject -Path $/MyProject/Master -IncludeDeleted
-
-         It 'should call the REST endpoint with correct parameters' {
-            Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
-               $Uri -eq "$($VSTeamVersionTable.Account)/MyProject/_apis/tfvc/branches/?api-version=$($VSTeamVersionTable.Tfvc)&path=$/MyProject/Master&includeDeleted=True"
-            }
-         }
-      }
-
       Context 'Get-VSTeamTfvcBranch with IncludeChildren' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
@@ -175,14 +163,26 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcBranch with all switches' {
+      Context 'Get-VSTeamTfvcBranch with IncludeDeleted' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         Get-VSTeamTfvcBranch -ProjectName MyProject -Path $/MyProject/Master -IncludeDeleted -IncludeChildren -IncludeParent
+         Get-VSTeamTfvcBranch -ProjectName MyProject -Path $/MyProject/Master -IncludeDeleted
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
-               $Uri -eq "$($VSTeamVersionTable.Account)/MyProject/_apis/tfvc/branches/?api-version=$($VSTeamVersionTable.Tfvc)&path=$/MyProject/Master&includeDeleted=True&includeChildren=True&includeParent=True"
+               $Uri -eq "$($VSTeamVersionTable.Account)/MyProject/_apis/tfvc/branches/?api-version=$($VSTeamVersionTable.Tfvc)&path=$/MyProject/Master&includeDeleted=True"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamTfvcBranch with all switches' {
+         Mock Invoke-RestMethod { return $singleResult } -Verifiable
+
+         Get-VSTeamTfvcBranch -ProjectName MyProject -Path $/MyProject/Master -IncludeChildren -IncludeParent -IncludeDeleted
+
+         It 'should call the REST endpoint with correct parameters' {
+            Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
+               $Uri -eq "$($VSTeamVersionTable.Account)/MyProject/_apis/tfvc/branches/?api-version=$($VSTeamVersionTable.Tfvc)&path=$/MyProject/Master&includeChildren=True&includeParent=True&includeDeleted=True"
             }
          }
       }

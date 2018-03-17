@@ -48,13 +48,13 @@ function Get-VSTeamTfvcBranch {
       [string[]] $Path,
       
       [parameter(Mandatory = $false)]
-      [switch] $IncludeDeleted = $false,
-
-      [parameter(Mandatory = $false)]
       [switch] $IncludeChildren = $false,
 
       [parameter(Mandatory = $false)]
-      [switch] $IncludeParent = $false
+      [switch] $IncludeParent = $false,
+
+      [parameter(Mandatory = $false)]
+      [switch] $IncludeDeleted = $false
    )
 
    DynamicParam {
@@ -69,9 +69,9 @@ function Get-VSTeamTfvcBranch {
       {
          $queryString = [ordered]@{
             path = $item;
-            includeDeleted = $IncludeDeleted;
             includeChildren = $IncludeChildren;
             includeParent = $IncludeParent;
+            includeDeleted = $IncludeDeleted;
          }
 
          $resp = _callAPI -ProjectName $ProjectName -Area tfvc -Resource branches -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
