@@ -12,9 +12,12 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.TfvcBranch')
 }
 
-function Get-VSTeamTfvcBranches {
+function Get-VSTeamTfvcRootBranches {
    [CmdletBinding()]
    param(
+      [parameter(Mandatory = $false)]
+      [switch] $IncludeChildren = $false,
+
       [parameter(Mandatory = $false)]
       [switch] $IncludeDeleted = $false
    )
@@ -27,7 +30,8 @@ function Get-VSTeamTfvcBranches {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $queryString = @{
+      $queryString = [ordered]@{
+         includeChildren = $IncludeChildren;
          includeDeleted = $IncludeDeleted;
       }
 
@@ -82,9 +86,9 @@ function Get-VSTeamTfvcBranch {
    }
 }
 
-Set-Alias Get-TfvcBranches Get-VSTeamTfvcBranches
+Set-Alias Get-TfvcRootBranches Get-VSTeamTfvcRootBranches
 Set-Alias Get-TfvcBranch Get-VSTeamTfvcBranch
 
 Export-ModuleMember `
-   -Function Get-VSTeamTfvcBranches, Get-VSTeamTfvcBranch `
-   -Alias Get-TfvcBranches, Get-TfvcBranch
+   -Function Get-VSTeamTfvcRootBranches, Get-VSTeamTfvcBranch `
+   -Alias Get-TfvcRootBranches, Get-TfvcBranch
