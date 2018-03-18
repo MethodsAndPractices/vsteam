@@ -1,0 +1,1 @@
+Gets a branch for a given path from TFVC source control.
