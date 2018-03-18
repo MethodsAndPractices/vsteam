@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '2.1.8'
+   ModuleVersion     = '2.1.9'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -66,6 +66,7 @@
       'types\builds.ps1xml',
       'types\cloudSubscriptions.ps1xml',
       'types\git.ps1xml',
+      'types\policies.ps1xml',
       'types\pools.ps1xml',
       'types\projects.ps1xml',
       'types\queues.ps1xml',
@@ -75,20 +76,20 @@
       'types\team.ps1xml',
       'types\teammembers.ps1xml',
       'types\teams.ps1xml',
-      'types\users.ps1xml',
-      'types\policies.ps1xml')
+      'types\tfvc.ps1xml',
+      'types\users.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
       'formats\buildDefinitions.format.ps1xml',
       'formats\builds.format.ps1xml',
+      'formats\policies.ps1xml',
       'formats\profile.format.ps1xml',
       'formats\queues.format.ps1xml',
       'formats\serviceendpoints.format.ps1xml',
       'formats\serviceendpointTypes.format.ps1xml',
       'formats\team.format.ps1xml',
-      'formats\users.format.ps1xml',
-      'formats\policies.ps1xml')
+      'formats\users.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
@@ -109,6 +110,7 @@
       'src\profile.psm1',
       'src\teammembers.psm1',
       'src\teamspsdrive.psm1',
+      'src\tfvc.psm1',
       'src\users.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
@@ -182,7 +184,9 @@
       'Add-VSTeamUser',
       'Set-VSTeamEnvironmentStatus',
       'Get-VSTeamServiceEndpointType',
-      'Update-VSTeamBuildDefinition')
+      'Update-VSTeamBuildDefinition',
+      'Get-VSTeamTfvcRootBranches',
+      'Get-VSTeamTfvcBranch')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -263,7 +267,9 @@
       'Set-EnvironmentStatus',
       'Add-VSTeamReleaseEnvironment',
       'Get-ServiceEndpointType',
-      'Update-BuildDefinition')
+      'Update-BuildDefinition',
+      'Get-TfvcRootBranches',
+      'Get-TfvcBranch')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
