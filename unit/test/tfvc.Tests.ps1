@@ -23,7 +23,7 @@ InModuleScope tfvc {
             children = @();
          },
          [PSCustomObject]@{
-            path = '$/MyProject/Feature';
+            path = '$/AnotherProject/Master';
             description = 'desc';
             children = @();
          }
