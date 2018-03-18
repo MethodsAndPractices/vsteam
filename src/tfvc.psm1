@@ -22,26 +22,26 @@ function Get-VSTeamTfvcRootBranches {
       [switch] $IncludeDeleted = $false
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $queryString = [ordered]@{
          includeChildren = $IncludeChildren;
          includeDeleted = $IncludeDeleted;
       }
 
-      $resp = _callAPI -ProjectName $ProjectName -Area tfvc -Resource branches -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
+      $resp = _callAPI -Area tfvc -Resource branches -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
 
-      foreach ($item in $resp.value) {
-         _applyTypes -item $item
+      if ($resp | Get-Member -Name value -MemberType Properties) {
+         foreach ($item in $resp.value) {
+            _applyTypes -item $item
+         }
+
+         Write-Output $resp.value
       }
-
-      Write-Output $resp.value
+      else {
+         _applyTypes -item $resp
+         
+         Write-Output $resp
+      }
    }
 }
 
@@ -61,23 +61,15 @@ function Get-VSTeamTfvcBranch {
       [switch] $IncludeDeleted = $false
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      foreach ($item in $Path)
-      {
+      foreach ($item in $Path) {
          $queryString = [ordered]@{
             includeChildren = $IncludeChildren;
             includeParent = $IncludeParent;
             includeDeleted = $IncludeDeleted;
          }
 
-         $resp = _callAPI -ProjectName $ProjectName -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
+         $resp = _callAPI -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
 
          _applyTypes -item $resp
             
