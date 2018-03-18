@@ -190,7 +190,10 @@ function Add-VSTeamBuild {
    [CmdletBinding(DefaultParameterSetName = 'ByName')]
    param(
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
-      [Int32] $BuildDefinitionId
+      [Int32] $BuildDefinitionId,
+
+      [Parameter(Mandatory = $false)]
+      [hashtable] $BuildParameters
    )
    DynamicParam {
       $dp = _buildProjectNameDynamicParam
@@ -253,7 +256,12 @@ function Add-VSTeamBuild {
          $queueSection = ', "queue": {"id": ' + $queueId + '}'
       }
 
-      $body = '{"definition": {"id": ' + $id + '}' + $queueSection + '}'
+      $parameterSection = $null
+      if ($BuildParameters) {
+         $parameterSection = ', "parameters":' + ($BuildParameters | ConvertTo-Json -Depth 99 -Compress)
+      }
+
+      $body = '{"definition": {"id": ' + $id + '}' + $queueSection + $parameterSection + '}'
 
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' `
