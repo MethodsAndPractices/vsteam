@@ -435,7 +435,8 @@ InModuleScope builds {
          Mock Get-VSTeamBuildDefinition { return @{ fullname = "MyBuildDef" } }
 
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
-            $Body -eq '{"definition": {"id": 2}, "queue": {"id": 3}}' -and
+            ($Body | ConvertFrom-Json).definition.id -eq 2 -and
+            ($Body | ConvertFrom-Json).queue.id -eq 3 -and
             $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
          }
 
