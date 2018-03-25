@@ -193,7 +193,7 @@ InModuleScope builds {
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               ($Body | ConvertFrom-Json).parameters.'system.debug' -eq 'true' -and
+               (($Body | ConvertFrom-Json).parameters | ConvertFrom-Json).'system.debug' -eq 'true' -and
                $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
             }
          }
@@ -466,7 +466,7 @@ InModuleScope builds {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             ($Body | ConvertFrom-Json).definition.id -eq 2 -and
             ($Body | ConvertFrom-Json).queue.id -eq 3 -and
-            ($Body | ConvertFrom-Json).parameters.'system.debug' -eq 'true' -and
+            (($Body | ConvertFrom-Json).parameters | ConvertFrom-Json).'system.debug' -eq 'true' -and
             $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
          }
 
