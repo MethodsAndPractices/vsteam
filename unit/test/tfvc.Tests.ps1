@@ -30,14 +30,14 @@ InModuleScope tfvc {
       )
    }
 
-   Describe "Get-VSTeamTfvcRootBranches VSTS" {
+   Describe "Get-VSTeamTfvcRootBranch VSTS" {
 
       $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
-      Context 'Get-VSTeamTfvcRootBranches with no parameters and single result' {
+      Context 'Get-VSTeamTfvcRootBranch with no parameters and single result' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         $res = Get-VSTeamTfvcRootBranches
+         $res = Get-VSTeamTfvcRootBranch
 
          It 'should get 1 branch' {
             $res.path | Should -Be $singleResult.path
@@ -50,10 +50,10 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcRootBranches with no parameters and multiple results' {
+      Context 'Get-VSTeamTfvcRootBranch with no parameters and multiple results' {
          Mock Invoke-RestMethod { return $multipleResults } -Verifiable
 
-         $res = Get-VSTeamTfvcRootBranches
+         $res = Get-VSTeamTfvcRootBranch
 
          It 'should get 2 branches' {
             $res.Count | Should -Be 2
@@ -68,10 +68,10 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcRootBranches with IncludeChildren' {
+      Context 'Get-VSTeamTfvcRootBranch with IncludeChildren' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         Get-VSTeamTfvcRootBranches -IncludeChildren
+         Get-VSTeamTfvcRootBranch -IncludeChildren
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
@@ -80,10 +80,10 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcRootBranches with IncludeDeleted' {
+      Context 'Get-VSTeamTfvcRootBranch with IncludeDeleted' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         Get-VSTeamTfvcRootBranches -IncludeDeleted
+         Get-VSTeamTfvcRootBranch -IncludeDeleted
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
@@ -92,10 +92,10 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcRootBranches with all switches' {
+      Context 'Get-VSTeamTfvcRootBranch with all switches' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         Get-VSTeamTfvcRootBranches -IncludeChildren -IncludeDeleted
+         Get-VSTeamTfvcRootBranch -IncludeChildren -IncludeDeleted
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
@@ -105,15 +105,15 @@ InModuleScope tfvc {
       }
    }
 
-   Describe "Get-VSTeamTfvcRootBranches TFS" {
+   Describe "Get-VSTeamTfvcRootBranch TFS" {
 
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
       Mock _useWindowsAuthenticationOnPremise { return $true }
       
-      Context 'Get-VSTeamTfvcRootBranches with no parameters and single result' {
+      Context 'Get-VSTeamTfvcRootBranch with no parameters and single result' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         $res = Get-VSTeamTfvcRootBranches
+         $res = Get-VSTeamTfvcRootBranch
 
          It 'should get 1 branch' {
             $res.path | Should -Be $singleResult.path
@@ -126,10 +126,10 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcRootBranches with no parameters and multiple results' {
+      Context 'Get-VSTeamTfvcRootBranch with no parameters and multiple results' {
          Mock Invoke-RestMethod { return $multipleResults } -Verifiable
 
-         $res = Get-VSTeamTfvcRootBranches
+         $res = Get-VSTeamTfvcRootBranch
 
          It 'should get 2 branches' {
             $res.Count | Should -Be 2
@@ -144,10 +144,10 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcRootBranches with IncludeChildren' {
+      Context 'Get-VSTeamTfvcRootBranch with IncludeChildren' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         Get-VSTeamTfvcRootBranches -IncludeChildren
+         Get-VSTeamTfvcRootBranch -IncludeChildren
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
@@ -156,10 +156,10 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcRootBranches with IncludeDeleted' {
+      Context 'Get-VSTeamTfvcRootBranch with IncludeDeleted' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         Get-VSTeamTfvcRootBranches -IncludeDeleted
+         Get-VSTeamTfvcRootBranch -IncludeDeleted
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
@@ -168,10 +168,10 @@ InModuleScope tfvc {
          }
       }
 
-      Context 'Get-VSTeamTfvcRootBranches with all switches' {
+      Context 'Get-VSTeamTfvcRootBranch with all switches' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
-         Get-VSTeamTfvcRootBranches -IncludeChildren -IncludeDeleted
+         Get-VSTeamTfvcRootBranch -IncludeChildren -IncludeDeleted
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {

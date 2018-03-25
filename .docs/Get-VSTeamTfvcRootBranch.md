@@ -1,37 +1,43 @@
 #include "./common/header.md"
 
-# Get-VSTeamTfvcRootBranches
+# Get-VSTeamTfvcRootBranch
 
 ## SYNOPSIS
-#include "./synopsis/Get-VSTeamTfvcRootBranches.md"
+
+#include "./synopsis/Get-VSTeamTfvcRootBranch.md"
 
 ## SYNTAX
-```
-Get-VSTeamTfvcRootBranches [-IncludeChildren] [-IncludeDeleted]
+
+```powershell
+Get-VSTeamTfvcRootBranch [-IncludeChildren] [-IncludeDeleted]
 ```
 
 ## DESCRIPTION
-Get-VSTeamTfvcRootBranches gets root branches for all projects with TFVC source control.
+
+Get-VSTeamTfvcRootBranch gets root branches for all projects with TFVC source control.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
-PS C:\> Get-VSTeamTfvcRootBranches
+
+```powershell
+PS C:\> Get-VSTeamTfvcRootBranch
 ```
 
 This command returns root branches for all projects.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-```
-PS C:\> Get-VSTeamTfvcRootBranches -IncludeChildren
+
+```powershell
+PS C:\> Get-VSTeamTfvcRootBranch -IncludeChildren
 ```
 
-This command returns root branches for all projects and their respective child branches. 
+This command returns root branches for all projects and their respective child branches.
 
 ### -------------------------- EXAMPLE 3 --------------------------
-```
-PS C:\> Get-VSTeamTfvcRootBranches -IncludeDeleted
+
+```powershell
+PS C:\> Get-VSTeamTfvcRootBranch -IncludeDeleted
 ```
 
 This command returns root branches for all projects, also those marked as deleted. 
@@ -45,7 +51,7 @@ Return the child branches for each root branch.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -61,7 +67,7 @@ Return deleted branches.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named

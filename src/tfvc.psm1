@@ -12,7 +12,7 @@ function _applyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.TfvcBranch')
 }
 
-function Get-VSTeamTfvcRootBranches {
+function Get-VSTeamTfvcRootBranch {
    [CmdletBinding()]
    param(
       [parameter(Mandatory = $false)]
@@ -78,9 +78,9 @@ function Get-VSTeamTfvcBranch {
    }
 }
 
-Set-Alias Get-TfvcRootBranches Get-VSTeamTfvcRootBranches
+Set-Alias Get-TfvcRootBranch Get-VSTeamTfvcRootBranch
 Set-Alias Get-TfvcBranch Get-VSTeamTfvcBranch
 
 Export-ModuleMember `
-   -Function Get-VSTeamTfvcRootBranches, Get-VSTeamTfvcBranch `
-   -Alias Get-TfvcRootBranches, Get-TfvcBranch
+   -Function Get-VSTeamTfvcRootBranch, Get-VSTeamTfvcBranch `
+   -Alias Get-TfvcRootBranch, Get-TfvcBranch
