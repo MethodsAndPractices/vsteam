@@ -33,7 +33,7 @@ InModuleScope Approvals {
          It 'should return approvals' {
 
             # Assert
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -179,7 +179,7 @@ InModuleScope Approvals {
          Show-VSTeamApproval -projectName project -ReleaseDefinitionId 1
 
          It 'should open in browser' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
    }

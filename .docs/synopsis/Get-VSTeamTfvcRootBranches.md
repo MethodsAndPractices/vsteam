@@ -1,0 +1,1 @@
+Gets root branches for all projects with TFVC source control.

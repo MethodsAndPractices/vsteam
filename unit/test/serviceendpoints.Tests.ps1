@@ -35,7 +35,7 @@ InModuleScope serviceendpoints {
       }
 
       Context 'Remove-VSTeamServiceEndpoint' {
-         Mock Invoke-RestMethod -UserAgent (_getUserAgent)
+         Mock Invoke-RestMethod
 
          It 'should delete service endpoint' {
             Remove-VSTeamServiceEndpoint -projectName project -id 5 -Force

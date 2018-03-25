@@ -371,6 +371,7 @@ function Set-VSTeamAPIVersion {
             $VSTeamVersionTable.Build = '3.2'
             $VSTeamVersionTable.Release = '4.0-preview'
             $VSTeamVersionTable.DistributedTask = '4.0-preview'
+            $VSTeamVersionTable.Tfvc = '3.2'
             $VSTeamVersionTable.MemberEntitlementManagement = ''
          }
          'VSTS' { 
@@ -380,6 +381,7 @@ function Set-VSTeamAPIVersion {
             $VSTeamVersionTable.Build = '4.0'
             $VSTeamVersionTable.Release = '4.1-preview'
             $VSTeamVersionTable.DistributedTask = '4.1-preview'
+            $VSTeamVersionTable.Tfvc = '4.0'
             $VSTeamVersionTable.MemberEntitlementManagement = '4.1-preview'
          }
          Default {
@@ -388,7 +390,8 @@ function Set-VSTeamAPIVersion {
             $VSTeamVersionTable.Core = '3.0'
             $VSTeamVersionTable.Build = '3.0'
             $VSTeamVersionTable.Release = '3.0-preview'
-            $VSTeamVersionTable.DistributedTask = '3.0-preview'            
+            $VSTeamVersionTable.DistributedTask = '3.0-preview'
+            $VSTeamVersionTable.Tfvc = '3.0'
             $VSTeamVersionTable.MemberEntitlementManagement = ''
          }
       }
@@ -400,6 +403,7 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "Build: $($VSTeamVersionTable.Build)"
    Write-Verbose "Release: $($VSTeamVersionTable.Release)"
    Write-Verbose "DistributedTask: $($VSTeamVersionTable.DistributedTask)"
+   Write-Verbose "Tfvc: $($VSTeamVersionTable.Tfvc)"
    Write-Verbose "MemberEntitlementManagement: $($VSTeamVersionTable.MemberEntitlementManagement)"
 }
 
@@ -451,6 +455,7 @@ $Global:VSTeamVersionTable = @{
    'Core'                        = '3.0'
    'Git'                         = '3.0'
    'DistributedTask'             = '3.0-preview'
+   'Tfvc'                        = '3.0'
    'MemberEntitlementManagement' = ''
    'ModuleVersion'               = _getModuleVersion
 }

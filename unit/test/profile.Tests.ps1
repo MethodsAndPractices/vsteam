@@ -40,7 +40,7 @@ $contents = @"
          Remove-VSTeamProfile test
 
          It 'Should save profile to disk' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -52,7 +52,7 @@ $contents = @"
          Remove-VSTeamProfile demos
 
          It 'Should save profile to disk' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -64,7 +64,7 @@ $contents = @"
          Add-VSTeamProfile -Account demos -PersonalAccessToken 12345
 
          It 'Should save profile to disk' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -76,7 +76,7 @@ $contents = @"
          Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version VSTS
 
          It 'Should save profile to disk' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -88,7 +88,7 @@ $contents = @"
          Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version TFS2018
 
          It 'Should save profile to disk' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -100,7 +100,7 @@ $contents = @"
          Add-VSTeamProfile -Account http://localhost:8080/tfs/defaultcollection -PersonalAccessToken 678910
 
          It 'Should save profile to disk' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -112,7 +112,7 @@ $contents = @"
          Add-VSTeamProfile -Account test -PersonalAccessToken 678910
 
          It 'Should save profile to disk' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -136,7 +136,7 @@ $contents = @"
       
          It 'Should return 0 profiles' {
             $actual | Should BeNullOrEmpty
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 

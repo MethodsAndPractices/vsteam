@@ -29,7 +29,7 @@ InModuleScope git {
          Show-VSTeamGitRepository -projectName project
 
          it 'should return url for mine' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -40,7 +40,7 @@ InModuleScope git {
          Show-VSTeamGitRepository -RemoteUrl 'https://test.visualstudio.com/_git/project'
 
          it 'should return url for mine' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -50,7 +50,7 @@ InModuleScope git {
          Get-VSTeamGitRepository
 
          It 'Should return all repos for all projects' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -60,7 +60,7 @@ InModuleScope git {
          Get-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000
 
          It 'Should return a single repo by id' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -70,7 +70,7 @@ InModuleScope git {
          Get-VSTeamGitRepository -Name 'test'
 
          It 'Should return a single repo by name' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -100,7 +100,7 @@ InModuleScope git {
          Get-VSTeamGitRepository
       
          It 'Should create VSAccount' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
       
@@ -110,7 +110,7 @@ InModuleScope git {
          Get-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000
       
          It 'Should create VSAccount' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
       
@@ -120,7 +120,7 @@ InModuleScope git {
          Get-VSTeamGitRepository -Name 'test'
       
          It 'Should create VSAccount' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -130,7 +130,7 @@ InModuleScope git {
          Add-VSTeamGitRepository -Name 'test' -ProjectName 'test'
       
          It 'Should create VSAccount' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
    }
