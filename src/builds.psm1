@@ -258,7 +258,7 @@ function Add-VSTeamBuild {
 
       $parameterSection = $null
       if ($BuildParameters) {
-         $parameterSection = ', "parameters":' + ($BuildParameters | ConvertTo-Json -Depth 99 -Compress)
+         $parameterSection = ', "parameters":' + ($BuildParameters | ConvertTo-Json | ConvertTo-Json -Compress)
       }
 
       $body = '{"definition": {"id": ' + $id + '}' + $queueSection + $parameterSection + '}'
