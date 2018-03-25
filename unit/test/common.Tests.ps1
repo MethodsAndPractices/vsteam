@@ -71,7 +71,7 @@ Describe 'Common' {
 
          _handleException $ex
 
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 
@@ -82,7 +82,7 @@ Describe 'Common' {
       _openOnWindows 'http://test.visualstudio.com'
 
       It 'should call start process' {
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 
@@ -93,7 +93,7 @@ Describe 'Common' {
       _openOnMac 'http://test.visualstudio.com'
 
       It 'should call start process' {
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 
@@ -104,7 +104,7 @@ Describe 'Common' {
       _openOnLinux 'http://test.visualstudio.com'
 
       It 'should call start process' {
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 
@@ -123,7 +123,7 @@ Describe 'Common' {
          Mock Get-Content { throw "Wrong call to Get-Content: $args" }
 
          _isOnLinux | Should Be $true
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 
@@ -137,7 +137,7 @@ Describe 'Common' {
 
       It 'should return true' {
          _isOnWindows | Should Be $true
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 
@@ -150,7 +150,7 @@ Describe 'Common' {
       
       It 'should return true' {
          _isOnWindows | Should Be $true
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 
@@ -160,7 +160,7 @@ Describe 'Common' {
 
       It 'using IsWindows should return false' {
          _isOnWindows | Should Be $false
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 
@@ -179,7 +179,7 @@ Describe 'Common' {
          Mock Get-Content { throw "Wrong call to Get-Content: $args" }
 
          _isOnMac | Should Be $true
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
 
       It 'using IsOSX should return false' {
@@ -191,7 +191,7 @@ Describe 'Common' {
          Mock Get-Content { throw "Wrong call to Get-Content: $args" }
 
          _isOnMac | Should Be $false
-         Assert-VerifiableMocks
+         Assert-VerifiableMock
       }
    }
 

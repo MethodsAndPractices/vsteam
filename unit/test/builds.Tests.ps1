@@ -101,7 +101,7 @@ InModuleScope builds {
          Get-VSTeamBuildLog -projectName project -Id 1
 
          It 'Should return full log' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -112,7 +112,7 @@ InModuleScope builds {
          Get-VSTeamBuildLog -projectName project -Id 1 -Index 2
 
          It 'Should return full log' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -185,7 +185,7 @@ InModuleScope builds {
       Context 'Remove-VSTeamBuild' {
 
          # Arrange
-         Mock Invoke-RestMethod -UserAgent (_getUserAgent)
+         Mock Invoke-RestMethod
 
          # Act
          Remove-VSTeamBuild -projectName project -id 2 -Force
@@ -201,7 +201,7 @@ InModuleScope builds {
       }
 
       Context 'Add-VSTeamBuildTag' {
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent)
+         Mock Invoke-RestMethod
          $inputTags = "Test1", "Test2", "Test3"
 
          It 'should add tags to Build' {
@@ -217,7 +217,7 @@ InModuleScope builds {
       }
 
       Context 'Remove-VSTeamBuildTag' {
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+         Mock Invoke-RestMethod {
             return @{ value = $null }
          }
          [string[]] $inputTags = "Test1", "Test2", "Test3"
@@ -250,7 +250,7 @@ InModuleScope builds {
 
       Context 'Get-VSTeamBuildTag returns correct data' {
          $tags = 'Tag1', 'Tag2'
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+         Mock Invoke-RestMethod {
             return @{ value = $tags}
          }
 
@@ -263,7 +263,7 @@ InModuleScope builds {
       }
 
       Context "Get-VSTeamBuildArtifact calls correct Url" {
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent) { return [PSCustomObject]@{
+         Mock Invoke-RestMethod { return [PSCustomObject]@{
                value = [PSCustomObject]@{
                   id       = 150
                   name     = "Drop"
@@ -300,7 +300,7 @@ InModuleScope builds {
          Get-VSTeamBuildLog -projectName project -Id 1 -Index 2
 
          It 'Should return full log' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -338,12 +338,12 @@ InModuleScope builds {
          Get-VSTeamBuildLog -projectName project -Id 1
 
          It 'Should return full log' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
       Context "Get-VSTeamBuildArtifact calls correct Url on TFS local Auth" {
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+         Mock Invoke-RestMethod {
              return [PSCustomObject]@{
                value = [PSCustomObject]@{
                   id       = 150
@@ -368,7 +368,7 @@ InModuleScope builds {
 
       Context 'Get-VSTeamBuildTag returns correct data on TFS local Auth' {
          $tags = 'Tag1', 'Tag2'
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+         Mock Invoke-RestMethod {
             return @{ value = $tags}
          }
 
@@ -381,7 +381,7 @@ InModuleScope builds {
       }
 
       Context 'Add-VSTeamBuildTag on TFS local Auth' {
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent)
+         Mock Invoke-RestMethod
          $inputTags = "Test1", "Test2", "Test3"
 
          It 'should add tags to Build' {
@@ -397,7 +397,7 @@ InModuleScope builds {
       }
 
       Context 'Remove-VSTeamBuild on TFS local Auth' {
-         Mock Invoke-RestMethod -UserAgent (_getUserAgent)
+         Mock Invoke-RestMethod
 
          It 'should delete build' {
             Remove-VSTeamBuild -projectName project -id 2 -Force
@@ -430,7 +430,7 @@ InModuleScope builds {
 
          It 'should add build' {
             # Call to queue build.
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
 
          AfterAll {
@@ -439,7 +439,7 @@ InModuleScope builds {
       }
 
       Context 'Remove-VSTeamBuildTag' {
-         Mock Invoke-RestMethod -UserAgent(_getUserAgent) {
+         Mock Invoke-RestMethod {
             return @{ value = $null }
          }
          [string[]] $inputTags = "Test1", "Test2", "Test3"
@@ -470,7 +470,7 @@ InModuleScope builds {
          It 'should add tags to Build' {
 
             # Assert
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 

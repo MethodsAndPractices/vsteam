@@ -18,7 +18,7 @@ InModuleScope team {
          Invoke-VSTeamRequest -Method Options 
 
          It 'Should call API' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -29,7 +29,7 @@ InModuleScope team {
          Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON
 
          It 'Should call API' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
    }
@@ -94,7 +94,7 @@ InModuleScope team {
          Show-VSTeam
 
          It 'Should open browser' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -138,7 +138,7 @@ InModuleScope team {
          Add-VSTeamAccount -Profile notFound
 
          It 'should write error' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
 
@@ -172,7 +172,7 @@ InModuleScope team {
          It 'should set env at process level' {
             Add-VSTeamAccount -Profile mydemos -Drive mydemos
 
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Version -eq 'VSTS'
