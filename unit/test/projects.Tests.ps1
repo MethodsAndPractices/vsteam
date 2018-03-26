@@ -308,7 +308,7 @@ InModuleScope projects {
          It 'should set default project' {
             Set-VSTeamDefaultProject 'MyProject'
 
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
             $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
          }
       }
@@ -320,7 +320,7 @@ InModuleScope projects {
          It 'should set default project' {
             Set-VSTeamDefaultProject 'MyProject'
 
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
             $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
          }
       }

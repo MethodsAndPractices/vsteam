@@ -177,7 +177,7 @@ InModuleScope users {
          Add-VSTeamUser -License earlyAdopter -Email 'test@user.com'
 
          It 'Should add a user' {
-            Assert-VerifiableMocks
+            Assert-VerifiableMock
          }
       }
    }

@@ -6195,6 +6195,262 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamTfvcBranch</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamTfvcBranch</command:noun>
+      <maml:description>
+        <maml:para>Gets a branch for a given path from TFVC source control.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-VSTeamTfvcBranch gets a branch for a given path from TFVC source control.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamTfvcBranch</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:Description>
+            <maml:para>Full path to the branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeChildren</maml:name>
+          <maml:Description>
+            <maml:para>Return child branches, if there are any.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeParent</maml:name>
+          <maml:Description>
+            <maml:para>Return the parent branch, if there is one.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeDeleted</maml:name>
+          <maml:Description>
+            <maml:para>Return branches marked as deleted.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:Description>
+          <maml:para>Full path to the branch.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludeChildren</maml:name>
+        <maml:Description>
+          <maml:para>Return child branches, if there are any.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludeParent</maml:name>
+        <maml:Description>
+          <maml:para>Return the parent branch, if there is one.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludeDeleted</maml:name>
+        <maml:Description>
+          <maml:para>Return branches marked as deleted.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>You can pipe paths to this function.</maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the branch object for the path $/MyProject/MyBranch</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the branch object for the path $/MyProject/MyBranch and its child branches.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the branch object for the path $/MyProject/MyBranch and its parent.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the branch object for the path $/MyProject/MyBranch, even if it's marked as deleted.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; '$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvcBranch</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the branch objects for the paths $/MyProject/MyBranch and $/AnotherProject/AnotherBranch by using the pipeline.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-VSTeamTfvcRootBranches</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamTfvcRootBranches</command:noun>
+      <maml:description>
+        <maml:para>Gets root branches for all projects with TFVC source control.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-VSTeamTfvcRootBranches gets root branches for all projects with TFVC source control.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamTfvcRootBranches</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeChildren</maml:name>
+          <maml:Description>
+            <maml:para>Return the child branches for each root branch.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeDeleted</maml:name>
+          <maml:Description>
+            <maml:para>Return deleted branches.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludeChildren</maml:name>
+        <maml:Description>
+          <maml:para>Return the child branches for each root branch.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludeDeleted</maml:name>
+        <maml:Description>
+          <maml:para>Return deleted branches.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>## RELATED LINKS</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranches</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns root branches for all projects.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranches -IncludeChildren</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns root branches for all projects and their respective child branches.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranches -IncludeDeleted</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns root branches for all projects, also those marked as deleted.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamUser</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamUser</command:noun>

@@ -12,6 +12,14 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 2.1.9
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/44) from [Michal Karpinski](https://github.com/karpis) which included the following:
+
+- Added functions for querying TFVC branches:
+  - Get-VSTeamTfvcRootBranch
+  - Get-VSTeamTfvcBranch
+
 ### 2.1.8
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/38) from [Jeffrey Opdam](https://github.com/jeffrey-opdam) which included the following:
