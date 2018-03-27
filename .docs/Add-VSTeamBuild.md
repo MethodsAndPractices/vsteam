@@ -3,21 +3,25 @@
 # Add-VSTeamBuild
 
 ## SYNOPSIS
+
 #include "./synopsis/Add-VSTeamBuild.md"
 
 ## SYNTAX
 
 ### ByName (Default)
-```
+
+```powershell
 Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionName <String>] [-QueueName <String>] [-BuildParameters <System.Collections.Hashtable>]
 ```
 
 ### ByID
-```
+
+```powershell
 Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionId <Int32>] [-QueueName <String>] [-BuildParameters <System.Collections.Hashtable>]
 ```
 
 ## DESCRIPTION
+
 Add-VSTeamBuild will queue a new build.
 
 You can override the queue in the build defintion by using the QueueName
@@ -30,7 +34,8 @@ project by calling Set-VSTeamDefaultProject before you call Add-VSTeamBuild.
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```powershell
 PS C:\> Set-VSTeamDefaultProject Demo
 PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI
 
@@ -42,22 +47,24 @@ Demo-CI           Demo-CI-45   notStarted
 This example sets the default project so you can tab complete the BuildDefinition parameter.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-```
+
+```powershell
 PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{'system.debug'='true'}
+PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
 
 Build Definition Build Number  Status     Result
 ---------------- ------------  ------     ------
 Demo-CI           Demo-CI-45   notStarted
 ```
 
-This example queues the build and sets the system.debug variable to true.
+This example queues the build and sets the system.debug variable to true and msg to 'hello world!'.
 
 ## PARAMETERS
 
 #include "./params/projectName.md"
 
 ### -BuildDefinitionName
+
 The name of the build defintion to use to queue to build.
 
 ```yaml
@@ -73,6 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### -QueueName
+
 The name of the queue to use for this build.
 
 ```yaml
@@ -88,6 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -BuildDefinitionId
+
 The Id of the build defintion to use to queue to build.
 
 ```yaml
@@ -103,6 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -BuildParameters
+
 A hashtable with build parameters.
 
 ```yaml
@@ -120,22 +130,27 @@ Accept wildcard characters: False
 ## INPUTS
 
 ### System.String
+
 Build Defintion Name
 
 ### System.Int32
+
 Build Defintion ID
 
 ### System.String
+
 Queue Name
 
 ### System.Collections.Hashtable
+
 Build Parameters
 
 ## OUTPUTS
 
 ## NOTES
-BuildDefinition and QueueName are dynamic parameters and use the default 
-project value to query their validate set. 
+
+BuildDefinition and QueueName are dynamic parameters and use the default
+project value to query their validate set.
 
 If you do not set the default project by called Set-VSTeamDefaultProject before
 calling Add-VSTeamBuild you will have to type in the names.

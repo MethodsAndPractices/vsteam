@@ -20,6 +20,10 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/44) from [Mic
   - Get-VSTeamTfvcRootBranch
   - Get-VSTeamTfvcBranch
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/45) from [Michal Karpinski](https://github.com/karpis) which included the following:
+
+- Added ability to pass parameters when queueing builds
+
 ### 2.1.8
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/38) from [Jeffrey Opdam](https://github.com/jeffrey-opdam) which included the following:
