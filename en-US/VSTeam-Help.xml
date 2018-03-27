@@ -1037,7 +1037,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </command:details>
     <maml:description>
       <maml:para>Add-VSTeamBuild will queue a new build.</maml:para>
-      <maml:para>You can override the queue in the build defintion by using the QueueName parameter.</maml:para>
+      <maml:para>You can override the queue in the build defintion by using the QueueName parameter. You can also set specific build parameters by using the BuildParameters parameter.</maml:para>
       <maml:para>To have the BuildDefinition and QueueNames tab complete you must set a default project by calling Set-VSTeamDefaultProject before you call Add-VSTeamBuild.</maml:para>
     </maml:description>
     <command:syntax>
@@ -1123,6 +1123,47 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamBuild</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>QueueName</maml:name>
+          <maml:Description>
+            <maml:para>The name of the queue to use for this build.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>BuildParameters</maml:name>
+          <maml:Description>
+            <maml:para>A hashtable with build parameters.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">System.Collection.Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Collection.Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
@@ -1175,6 +1216,18 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>BuildParameters</maml:name>
+        <maml:Description>
+          <maml:para>A hashtable with build parameters.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">System.Collection.Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Collection.Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -1187,17 +1240,33 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       </command:inputType>
       <command:inputType>
         <dev:type>
+          <maml:name>System.Int32</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>Build Defintion ID</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
           <maml:name>System.String</maml:name>
         </dev:type>
         <maml:description>
           <maml:para>Queue Name</maml:para>
         </maml:description>
       </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Collections.Hashtable</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>Build Parameters</maml:para>
+        </maml:description>
+      </command:inputType>
     </command:inputTypes>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>BuildDefinition and QueueName are dynamic parameters and use the default  project value to query their validate set. </maml:para>
+        <maml:para>BuildDefinition and QueueName are dynamic parameters and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamBuild you will have to type in the names.</maml:para>
         <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
@@ -1213,6 +1282,18 @@ Build Definition Build Number  Status     Result
 Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:remarks>
           <maml:para>This example sets the default project so you can tab complete the BuildDefinition parameter.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
+PS C:\&gt; Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted</dev:code>
+        <dev:remarks>
+          <maml:para>This example queues the build and sets the system.debug variable to true and msg to 'hello world!'.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -6354,19 +6435,19 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-VSTeamTfvcRootBranches</command:name>
+      <command:name>Get-VSTeamTfvcRootBranch</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>VSTeamTfvcRootBranches</command:noun>
+      <command:noun>VSTeamTfvcRootBranch</command:noun>
       <maml:description>
         <maml:para>Gets root branches for all projects with TFVC source control.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get-VSTeamTfvcRootBranches gets root branches for all projects with TFVC source control.</maml:para>
+      <maml:para>Get-VSTeamTfvcRootBranch gets root branches for all projects with TFVC source control.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-VSTeamTfvcRootBranches</maml:name>
+        <maml:name>Get-VSTeamTfvcRootBranch</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>IncludeChildren</maml:name>
           <maml:Description>
@@ -6427,21 +6508,21 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranches</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranch</dev:code>
         <dev:remarks>
           <maml:para>This command returns root branches for all projects.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranches -IncludeChildren</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranch -IncludeChildren</dev:code>
         <dev:remarks>
           <maml:para>This command returns root branches for all projects and their respective child branches.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranches -IncludeDeleted</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranch -IncludeDeleted</dev:code>
         <dev:remarks>
           <maml:para>This command returns root branches for all projects, also those marked as deleted.</maml:para>
         </dev:remarks>
