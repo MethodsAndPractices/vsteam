@@ -24,7 +24,7 @@ Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionId <Int32>] [-QueueName
 
 Add-VSTeamBuild will queue a new build.
 
-You can override the default queue in the build defintion by using the QueueName
+You can override the queue in the build defintion by using the QueueName
 parameter. You can override the default source branch by using the SourceBranch
 parameter. You can also set specific build parameters by using the BuildParameters
 parameter.
