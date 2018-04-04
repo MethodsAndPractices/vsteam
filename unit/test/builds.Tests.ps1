@@ -182,6 +182,23 @@ InModuleScope builds {
          }
       }
 
+      Context 'Add-VSTeamBuild with source branch' {
+         Mock Invoke-RestMethod { 
+            return $singleResult 
+         }
+
+         It 'should add build' {
+            Add-VSTeamBuild -ProjectName project -BuildDefinitionId 2 -SourceBranch 'refs/heads/dev'
+
+            # Call to queue build.
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               ($Body | ConvertFrom-Json).definition.id -eq 2 -and
+               ($Body | ConvertFrom-Json).sourceBranch -eq 'refs/heads/dev' -and
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+            }
+         }
+      }
+
       Context 'Add-VSTeamBuild with parameters' {
          Mock Invoke-RestMethod { 
             return $singleResult 
@@ -468,6 +485,37 @@ InModuleScope builds {
             ($Body | ConvertFrom-Json).definition.id -eq 2 -and
             ($Body | ConvertFrom-Json).queue.id -eq 3 -and
             (($Body | ConvertFrom-Json).parameters | ConvertFrom-Json).'system.debug' -eq 'true' -and
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+         }
+
+         Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
+
+         $Global:PSDefaultParameterValues["*:projectName"] = 'Project'
+
+         Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -BuildParameters @{'system.debug'='true'}
+
+         It 'should add build' {
+            # Call to queue build.
+            Assert-VerifiableMock
+         }
+
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+      }
+
+      Context 'Add-VSTeamBuild with source branch on TFS local auth' {
+         Mock Get-VSTeamQueue { return [PSCustomObject]@{
+               name = "MyQueue"
+               id   = 3
+            }
+         }
+         Mock Get-VSTeamBuildDefinition { return @{ fullname = "MyBuildDef" } }
+
+         Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
+            ($Body | ConvertFrom-Json).definition.id -eq 2 -and
+            ($Body | ConvertFrom-Json).queue.id -eq 3 -and
+            ($Body | ConvertFrom-Json).sourceBranch -eq 'refs/heads/dev' -and
             $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
          }
 

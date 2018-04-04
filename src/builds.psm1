@@ -193,6 +193,9 @@ function Add-VSTeamBuild {
       [Int32] $BuildDefinitionId,
 
       [Parameter(Mandatory = $false)]
+      [string] $SourceBranch,
+
+      [Parameter(Mandatory = $false)]
       [hashtable] $BuildParameters
    )
    DynamicParam {
@@ -259,6 +262,10 @@ function Add-VSTeamBuild {
             Select-Object -ExpandProperty Id
 
          $body.Add('queue', @{ id = $queueId })
+      }
+
+      if ($SourceBranch) {
+         $body.Add('sourceBranch', $SourceBranch)
       }
 
       if ($BuildParameters) {

@@ -11,20 +11,21 @@
 ### ByName (Default)
 
 ```powershell
-Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionName <String>] [-QueueName <String>] [-BuildParameters <System.Collections.Hashtable>]
+Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionName <String>] [-QueueName <String>] [-SourceBranch <String>] [-BuildParameters <System.Collections.Hashtable>]
 ```
 
 ### ByID
 
 ```powershell
-Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionId <Int32>] [-QueueName <String>] [-BuildParameters <System.Collections.Hashtable>]
+Add-VSTeamBuild [-ProjectName] <String> [-BuildDefinitionId <Int32>] [-QueueName <String>] [-SourceBranch <String>] [-BuildParameters <System.Collections.Hashtable>]
 ```
 
 ## DESCRIPTION
 
 Add-VSTeamBuild will queue a new build.
 
-You can override the queue in the build defintion by using the QueueName
+You can override the default queue in the build defintion by using the QueueName
+parameter. You can override the default source branch by using the SourceBranch
 parameter. You can also set specific build parameters by using the BuildParameters
 parameter.
 
@@ -47,6 +48,19 @@ Demo-CI           Demo-CI-45   notStarted
 This example sets the default project so you can tab complete the BuildDefinition parameter.
 
 ### -------------------------- EXAMPLE 2 --------------------------
+
+```powershell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch 'refs/heads/develop'
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted
+```
+
+This example queues the build for the 'develop' branch, overriding the default branch in the build definition.
+
+### -------------------------- EXAMPLE 3 --------------------------
 
 ```powershell
 PS C:\> Set-VSTeamDefaultProject Demo
@@ -111,6 +125,22 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -SourceBranch
+
+Which source branch to use for this build. Overrides default branch in build definition.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -BuildParameters
 
 A hashtable with build parameters.
@@ -140,6 +170,10 @@ Build Defintion ID
 ### System.String
 
 Queue Name
+
+### System.String
+
+Source Branch
 
 ### System.Collections.Hashtable
 
