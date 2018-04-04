@@ -523,7 +523,7 @@ InModuleScope builds {
 
          $Global:PSDefaultParameterValues["*:projectName"] = 'Project'
 
-         Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -BuildParameters @{'system.debug'='true'}
+         Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -SourceBranch refs/heads/dev
 
          It 'should add build' {
             # Call to queue build.

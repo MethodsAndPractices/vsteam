@@ -51,7 +51,7 @@ This example sets the default project so you can tab complete the BuildDefinitio
 
 ```powershell
 PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch 'refs/heads/develop'
+PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch refs/heads/develop
 
 Build Definition Build Number  Status     Result
 ---------------- ------------  ------     ------
