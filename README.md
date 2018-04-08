@@ -12,6 +12,12 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 2.1.10
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/46) from [Michal Karpinski](https://github.com/karpis) which included the following:
+
+- Added -SourceBranch parameter to Add-VSTeamBuild
+
 ### 2.1.9
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/44) from [Michal Karpinski](https://github.com/karpis) which included the following:
@@ -44,7 +50,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/39) from [Fra
 
 ### 2.1.5
 
-Fixed issue [#40](https://github.com/DarqueWarrior/vsteam/issues/40) so adding a SonarQube or AzureRM Service Endpoint returns the endpoint. 
+Fixed issue [#40](https://github.com/DarqueWarrior/vsteam/issues/40) so adding a SonarQube or AzureRM Service Endpoint returns the endpoint.
 
 ### 2.1.4
 
@@ -94,7 +100,7 @@ You can now tab complete your profiles.
 
 ### 1.0.5
 
-Added support for Profiles. Now you can store different accounts and PATS as a profile using Add-VSTeamProfile. Then you can call Add-VSTeamAccount with the -Profile parameter and the PAT will be read from the profile. This prevents you having to remember the PAT to switch between accounts. Profiles also store the API version to use with the account. 
+Added support for Profiles. Now you can store different accounts and PATS as a profile using Add-VSTeamProfile. Then you can call Add-VSTeamAccount with the -Profile parameter and the PAT will be read from the profile. This prevents you having to remember the PAT to switch between accounts. Profiles also store the API version to use with the account.
 
 Added $VSTeamVersionTable so you can experiment with different versions of the VSTS/TFS APIs. The variable contains the following:
 
@@ -112,7 +118,7 @@ Added support for Show-VSTeam that opens the configured TFS or VSTS in default b
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/26) from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
-- Remove deadlock when endpoint creation failed 
+- Remove deadlock when endpoint creation failed
 
 ### 1.0.3
 
@@ -129,7 +135,7 @@ Fixed ReleaseDefinition functions not recognized bug
 
 ### 1.0.1
 
-Renamed from Team to VSTeam. An alias for every function with it's original name is provided. 
+Renamed from Team to VSTeam. An alias for every function with it's original name is provided.
 
 ### 0.1.34
 

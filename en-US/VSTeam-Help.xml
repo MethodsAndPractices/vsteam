@@ -1037,7 +1037,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </command:details>
     <maml:description>
       <maml:para>Add-VSTeamBuild will queue a new build.</maml:para>
-      <maml:para>You can override the queue in the build defintion by using the QueueName parameter. You can also set specific build parameters by using the BuildParameters parameter.</maml:para>
+      <maml:para>You can override the queue in the build defintion by using the QueueName parameter. You can override the default source branch by using the SourceBranch parameter. You can also set specific build parameters by using the BuildParameters parameter.</maml:para>
       <maml:para>To have the BuildDefinition and QueueNames tab complete you must set a default project by calling Set-VSTeamDefaultProject before you call Add-VSTeamBuild.</maml:para>
     </maml:description>
     <command:syntax>
@@ -1073,6 +1073,18 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:name>QueueName</maml:name>
           <maml:Description>
             <maml:para>The name of the queue to use for this build.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SourceBranch</maml:name>
+          <maml:Description>
+            <maml:para>Which source branch to use for this build. Overrides default branch in build definition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1122,6 +1134,18 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SourceBranch</maml:name>
+          <maml:Description>
+            <maml:para>Which source branch to use for this build. Overrides default branch in build definition.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Add-VSTeamBuild</maml:name>
@@ -1143,6 +1167,18 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:name>QueueName</maml:name>
           <maml:Description>
             <maml:para>The name of the queue to use for this build.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SourceBranch</maml:name>
+          <maml:Description>
+            <maml:para>Which source branch to use for this build. Overrides default branch in build definition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1217,6 +1253,18 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SourceBranch</maml:name>
+        <maml:Description>
+          <maml:para>Which source branch to use for this build. Overrides default branch in build definition.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>BuildParameters</maml:name>
         <maml:Description>
           <maml:para>A hashtable with build parameters.</maml:para>
@@ -1256,6 +1304,14 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       </command:inputType>
       <command:inputType>
         <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>Source Branch</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
           <maml:name>System.Collections.Hashtable</maml:name>
         </dev:type>
         <maml:description>
@@ -1286,6 +1342,18 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
+PS C:\&gt; Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch refs/heads/develop
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted</dev:code>
+        <dev:remarks>
+          <maml:para>This example queues the build for the 'develop' branch, overriding the default branch in the build definition.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
 
