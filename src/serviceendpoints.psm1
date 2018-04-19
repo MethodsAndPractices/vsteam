@@ -353,7 +353,7 @@ function Add-VSTeamServiceEndpoint {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $object['name'] = $endpointName
-      $object['type'] = endpointType
+      $object['type'] = $endpointType
 
       $body = $object | ConvertTo-Json
 
