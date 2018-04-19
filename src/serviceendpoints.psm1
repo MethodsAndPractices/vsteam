@@ -326,6 +326,45 @@ function Get-VSTeamServiceEndpoint {
    }
 }
 
+function Add-VSTeamServiceEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointName,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointType,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [hashtable] $object
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $object['name'] = $endpointName
+      $object['type'] = endpointType
+
+      $body = $object | ConvertTo-Json
+
+      try {    
+         # Call the REST API
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
+            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      }
+      catch [System.Net.WebException] {
+         throw
+      }
+
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+   }
+}
+
 function Update-VSTeamServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
@@ -343,8 +382,7 @@ function Update-VSTeamServiceEndpoint {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $obj = $object
-      $body = $obj | ConvertTo-Json
+      $body = $object | ConvertTo-Json
 
       try {    
          # Call the REST API
@@ -373,11 +411,12 @@ Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 
+Set-Alias Add-ServiceEndpoint Add-VSTeamServiceEndpoint
 Set-Alias Update-ServiceEndpoint Update-VSTeamServiceEndpoint
 
 Export-ModuleMember `
    -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-Add-VSTeamSonarQubeEndpoint, Add-VSTeamKubernetesEndpoint,  Update-VSTeamServiceEndpoint `
+Add-VSTeamSonarQubeEndpoint, Add-VSTeamKubernetesEndpoint,  Add-VSTeamServiceEndpoint, Update-VSTeamServiceEndpoint `
    -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint, Add-KubernetesEndpoint,
 Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
-Remove-SonarQubeEndpoint, Update-ServiceEndpoint
+Remove-SonarQubeEndpoint, Add-ServiceEndpoint, Update-ServiceEndpoint
