@@ -326,6 +326,41 @@ function Get-VSTeamServiceEndpoint {
    }
 }
 
+function Update-VSTeamServiceEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpoint,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [hashtable] $object
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $obj = $object
+      $body = $obj | ConvertTo-Json
+
+      try {    
+         # Call the REST API
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $endpoint  `
+            -Method Put -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      }
+      catch [System.Net.WebException] {
+         throw
+      }
+
+      _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $endpoint"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $endpoint
+   }
+}
+
 
 Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
 Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
@@ -338,9 +373,11 @@ Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 
+Set-Alias Update-ServiceEndpoint Update-VSTeamServiceEndpoint
+
 Export-ModuleMember `
    -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-Add-VSTeamSonarQubeEndpoint, Add-VSTeamKubernetesEndpoint`
+Add-VSTeamSonarQubeEndpoint, Add-VSTeamKubernetesEndpoint,  Update-VSTeamServiceEndpoint `
    -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint, Add-KubernetesEndpoint,
 Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
-Remove-SonarQubeEndpoint
+Remove-SonarQubeEndpoint, Update-ServiceEndpoint
