@@ -242,7 +242,14 @@ function Add-VSTeamKubernetesEndpoint {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $kubernetesUrl,
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [bool] $acceptUntrustedCerts
+      [string] $clientCertificateData,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $clientKeyData,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [bool] $acceptUntrustedCerts,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [bool] $generatePfx
+
    )
 
    DynamicParam {
@@ -256,15 +263,15 @@ function Add-VSTeamKubernetesEndpoint {
       $obj = @{
          authorization = @{
             parameters = @{
-               clientCertificateData = 'sdf'
-               clientKeyData = 'wer'
-               generatePfx = 'false'
+               clientCertificateData = $clientCertificateData
+               clientKeyData = $clientKeyData
+               generatePfx = $generatePfx
                kubeconfig = $Kubeconfig
             };
             scheme     = 'None'
          };
          data          = @{
-            acceptUntrustedCerts = $AcceptUntrustedCerts
+            acceptUntrustedCerts = $acceptUntrustedCerts
          };
          name          = $endpointName;
          type          = 'kubernetes';
