@@ -232,6 +232,61 @@ function Add-VSTeamAzureRMServiceEndpoint {
    }
 }
 
+function Add-VSTeamKubernetesEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointName,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $kubeconfig,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $kubernetesUrl,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [bool] $acceptUntrustedCerts
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $obj = @{
+         authorization = @{
+            parameters = @{
+               clientCertificateData = 'sdf'
+               clientKeyData = 'wer'
+               generatePfx = 'false'
+               kubeconfig = $Kubeconfig
+            };
+            scheme     = 'None'
+         };
+         data          = @{
+            acceptUntrustedCerts = $AcceptUntrustedCerts
+         };
+         name          = $endpointName;
+         type          = 'kubernetes';
+         url           = $kubernetesUrl
+      }
+      $body = $obj | ConvertTo-Json
+
+      try {    
+         # Call the REST API
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
+            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      }
+      catch [System.Net.WebException] {
+         throw
+      }
+
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+   }
+}
+
 function Get-VSTeamServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
@@ -276,6 +331,7 @@ Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
 Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
 Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Add-SonarQubeEndpoint Add-VSTeamSonarQubeEndpoint
+Set-Alias Add-KubernetesEndpoint Add-VSTeamKubernetesEndpoint
 
 Set-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
@@ -284,7 +340,7 @@ Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 
 Export-ModuleMember `
    -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-Add-VSTeamSonarQubeEndpoint `
-   -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint,
+Add-VSTeamSonarQubeEndpoint, Add-VSTeamKubernetesEndpoint`
+   -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint, Add-KubernetesEndpoint,
 Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
 Remove-SonarQubeEndpoint
