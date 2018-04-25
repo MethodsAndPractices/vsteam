@@ -10,7 +10,7 @@
 ### Plain
 ```
 Update-VSTeamServiceEndpoint [-ProjectName] <String> [-Object] <hashtable>
- [[-Endpoint] <String>]
+ [[-Id] <String>]
 ```
 
 ## DESCRIPTION
@@ -36,7 +36,7 @@ Accept wildcard characters: False
 ```
 
 
-### -Endpoint
+### -Id
 UUID of existing services endpoint from VSTS
 
 ```yaml

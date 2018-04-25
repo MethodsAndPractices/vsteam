@@ -376,7 +376,7 @@ function Update-VSTeamServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $endpoint,
+      [string] $id,
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [hashtable] $object
    )
