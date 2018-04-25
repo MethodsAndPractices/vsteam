@@ -138,12 +138,11 @@ function Add-VSTeamSonarQubeEndpoint {
          url           = $sonarqubeUrl
       }
 
-      $body = $obj | ConvertTo-Json
-
-      try {    
-         # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      try {
+         return Add-VSTeamServiceEndpoint `
+            -endpointName $endpointName `
+            -endpointType 'azurerm' `
+            -object $obj
       }
       catch [System.Net.WebException] {
          if ($_.Exception.status -eq "ProtocolError") {
@@ -156,10 +155,6 @@ function Add-VSTeamSonarQubeEndpoint {
          }
          throw
       }
-
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
-
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
    }
 }
 
@@ -215,20 +210,13 @@ function Add-VSTeamAzureRMServiceEndpoint {
             subscriptionName = $subscriptionName
             creationMode     = $creationMode
          }
-         name          = $endpointName
-         type          = 'azurerm'
          url           = 'https://management.azure.com/'
       }
 
-      $body = $obj | ConvertTo-Json
-      
-      # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
-
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
-
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+      return Add-VSTeamServiceEndpoint `
+         -endpointName $endpointName `
+         -endpointType 'azurerm' `
+         -object $obj
    }
 }
 
@@ -273,24 +261,13 @@ function Add-VSTeamKubernetesEndpoint {
          data          = @{
             acceptUntrustedCerts = $acceptUntrustedCerts
          };
-         name          = $endpointName;
-         type          = 'kubernetes';
          url           = $kubernetesUrl
       }
-      $body = $obj | ConvertTo-Json
 
-      try {    
-         # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
-      }
-      catch [System.Net.WebException] {
-         throw
-      }
-
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
-
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+      return Add-VSTeamServiceEndpoint `
+         -endpointName $endpointName `
+         -endpointType 'kubernetes' `
+         -object $obj
    }
 }
 
