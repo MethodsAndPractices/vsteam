@@ -370,7 +370,7 @@ function Update-VSTeamServiceEndpoint {
 
       try {    
          # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $endpoint  `
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
             -Method Put -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
       }
       catch [System.Net.WebException] {
@@ -379,7 +379,7 @@ function Update-VSTeamServiceEndpoint {
 
       _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $endpoint"
 
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $endpoint
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
    }
 }
 
