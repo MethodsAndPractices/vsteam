@@ -377,7 +377,7 @@ function Update-VSTeamServiceEndpoint {
          throw
       }
 
-      _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $endpoint"
+      _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
 
       return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
    }
