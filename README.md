@@ -1,6 +1,6 @@
 # Team
 
-![build status](https://loecda.visualstudio.com/_apis/public/build/definitions/3e857acd-880f-4056-a46b-1de672ca55cc/5/badge "Build status")
+[![Build status](https://loecda.visualstudio.com/_apis/public/build/definitions/3e857acd-880f-4056-a46b-1de672ca55cc/5/badge)](https://loecda.visualstudio.com/Team%20Module/_build/index?context=mine&path=%5C&definitionId=5&_a=completed) 
 
 Home of PowerShell module for accessing TFS and VSTS
 
