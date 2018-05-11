@@ -153,13 +153,15 @@ function Remove-VSTeamUser {
             }
 
             $id = $user.id
+        } else {
+            $user = Get-VSTeamUser -Id $id
         }
 
-        if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete user")) {
+        if ($Force -or $PSCmdlet.ShouldProcess("$($user.userName) ($($user.email))", "Delete user")) {
             # Call the REST API
             _callAPI -Method Delete -SubDomain 'vsaex' -Resource 'userentitlements' -Id $Id -Version $VSTeamVersionTable.MemberEntitlementManagement | Out-Null
 
-            Write-Output "Deleted user $Id"
+            Write-Output "Deleted user $($user.userName) ($($user.email))"
         }
     }
 }
