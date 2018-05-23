@@ -193,6 +193,11 @@ Describe 'VSTeam Integration Tests' {
                -servicePrincipalId '00000000-0000-0000-0000-000000000000' -servicePrincipalKey 'fakekey' } | Should Not Throw
       }
 
+      It 'Add-VSTeamServiceFabricEndpoint Should add servcie endpoint' {
+            { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -displayName 'ServiceFabricTestEndoint' `
+            -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Throw
+      }
+      
       It 'Get-VSTeamServiceEndpoint Should return service endpoints' {
          $actual = Get-VSTeamServiceEndpoint -ProjectName $newProjectName
 

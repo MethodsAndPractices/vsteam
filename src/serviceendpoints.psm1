@@ -232,6 +232,97 @@ function Add-VSTeamAzureRMServiceEndpoint {
    }
 }
 
+function Add-VSTeamServiceFabricEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Certificate')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('displayName')]
+      [string] $endpointName,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $url,
+      [parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $certificate,
+      [Parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [securestring] $certificatePassword,
+      [parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $serverCertThumbprint,
+      [Parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $username,
+      [Parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [securestring] $password,
+      [Parameter(ParameterSetName = 'None', Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+      [string] $clusterSpn,
+      [Parameter(ParameterSetName = 'None', Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+      [bool] $useWindowsSecurity
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      switch ($PSCmdlet.ParameterSetName) {
+         "Certificate" { 
+            # copied securestring usage from Add-VSTeamAccount
+            # while we don't actually have a username here, PSCredential requires that a non empty string is provided
+            $credential = New-Object System.Management.Automation.PSCredential $serverCertThumbprint, $certificatePassword
+            $certPass = $credential.GetNetworkCredential().Password
+            $authorization = @{
+               parameters = @{
+                  certificate          = $certificate
+                  certificatepassword  = $certPass
+                  servercertthumbprint = $serverCertThumbprint
+               }
+               scheme     = 'Certificate'
+            }
+         }
+         "AzureAd" {
+            # copied securestring usage from Add-VSTeamAccount
+            $credential = New-Object System.Management.Automation.PSCredential $username, $password
+            $pass = $credential.GetNetworkCredential().Password
+            $authorization = @{
+               parameters = @{
+                  password             = $pass
+                  servercertthumbprint = $serverCertThumbprint
+                  username             = $username
+               }
+               scheme     = 'UsernamePassword'
+            }
+         }
+         Default {
+            $authorization = @{
+               parameters = @{
+                  ClusterSpn         = $clusterSpn
+                  UseWindowsSecurity = $useWindowsSecurity
+               }
+               scheme     = 'None'
+            }
+         }
+      }
+      $obj = @{
+         authorization = $authorization
+         data          = @{}
+         name          = $endpointName
+         type          = 'servicefabric'
+         url           = $url
+      }
+
+      $body = $obj | ConvertTo-Json
+            
+      # Call the REST API
+      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
+         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+   }
+}
+
 function Get-VSTeamServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
@@ -276,15 +367,18 @@ Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
 Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
 Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Add-SonarQubeEndpoint Add-VSTeamSonarQubeEndpoint
+Set-Alias Add-ServiceFabricEndpoint Add-VSTeamServiceFabricEndpoint
 
 Set-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-VSTeamServiceFabricEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-ServiceFabricEndpoint Remove-VSTeamServiceEndpoint
 
 Export-ModuleMember `
    -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-Add-VSTeamSonarQubeEndpoint `
+Add-VSTeamSonarQubeEndpoint, Add-VSTeamServiceFabricEndpoint `
    -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint,
 Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
-Remove-SonarQubeEndpoint
+Remove-SonarQubeEndpoint, Add-ServiceFabricEndpoint, Remove-ServiceFabricEndpoint, Remove-VSTeamServiceFabricEndpoint

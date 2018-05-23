@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '2.1.11'
+   ModuleVersion     = '2.1.12'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -116,6 +116,7 @@
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
       'Add-VSTeamSonarQubeEndpoint',
+      'Add-VSTeamServiceFabricEndpoint',
       'Add-VSTeamBuild',
       'Add-VSTeamBuildDefinition',
       'Add-VSTeamProject',
@@ -199,6 +200,9 @@
       'Add-AzureRMServiceEndpoint',
       'Remove-ServiceEndpoint',
       'Add-SonarQubeEndpoint',
+      'Add-ServiceFabricEndpoint',
+      'Remove-ServiceFabricEndpoint',
+      'Remove-VSTeamServiceFabricEndpoint',
       'Remove-VSTeamAzureRMServiceEndpoint',
       'Remove-VSTeamSonarQubeEndpoint',
       'Remove-AzureRMServiceEndpoint',

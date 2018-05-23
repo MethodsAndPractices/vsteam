@@ -1,0 +1,1 @@
+Adds a new Service Fabric service endpoint.

@@ -12,7 +12,14 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 2.1.12
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/51) from [Steve Croxford](https://github.com/CodedBeard) which included the following:
+
+- Added support for creating service fabric endpoints.
+
 ### 2.1.11
+
 Updated the delete confirmation message for Remove-VSTeamUser to show the user name and email instead of ID.
 
 ### 2.1.10
