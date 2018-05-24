@@ -65,6 +65,12 @@ function _trackProgress {
    }
 }
 
+function _supportsServiceFabricEndpoint {
+   if (-not $VSTeamVersionTable.ServiceFabricEndpoint) {
+       throw 'This account does not support Service Fabric endpoints.'
+   } 
+}
+
 function Remove-VSTeamServiceEndpoint {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
@@ -262,6 +268,10 @@ function Add-VSTeamServiceFabricEndpoint {
    }
 
    Process {
+
+      # This will throw if this account does not support ServiceFabricEndpoint
+      _supportsServiceFabricEndpoint
+
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
@@ -315,7 +325,7 @@ function Add-VSTeamServiceFabricEndpoint {
             
       # Call the REST API
       $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.ServiceFabricEndpoint
 
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
