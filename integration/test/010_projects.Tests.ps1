@@ -195,7 +195,7 @@ Describe 'VSTeam Integration Tests' {
 
       It 'Add-VSTeamServiceFabricEndpoint Should add servcie endpoint' {
             { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
-            -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Throw
+            -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Be $null 
       }
       
       It 'Get-VSTeamServiceEndpoint Should return service endpoints' {
