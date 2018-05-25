@@ -192,11 +192,6 @@ Describe 'VSTeam Integration Tests' {
                -subscriptionId '00000000-0000-0000-0000-000000000000' -subscriptionTenantId '00000000-0000-0000-0000-000000000000' `
                -servicePrincipalId '00000000-0000-0000-0000-000000000000' -servicePrincipalKey 'fakekey' } | Should Not Throw
       }
-
-      It 'Add-VSTeamServiceFabricEndpoint Should add servcie endpoint' {
-            { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
-            -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Be $null 
-      }
       
       It 'Get-VSTeamServiceEndpoint Should return service endpoints' {
          $actual = Get-VSTeamServiceEndpoint -ProjectName $newProjectName
@@ -208,6 +203,19 @@ Describe 'VSTeam Integration Tests' {
          Get-VSTeamServiceEndpoint -ProjectName $newProjectName | Remove-VSTeamServiceEndpoint -ProjectName $newProjectName -Force
 
          Get-VSTeamServiceEndpoint -ProjectName $newProjectName | Should Be $null
+      }
+
+      # Not supported on TFS 2017
+      if ($api -ne 'TFS2017') {
+         It 'Add-VSTeamServiceFabricEndpoint Should add servcie endpoint' {
+            { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
+                  -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Be $null 
+         }
+      } else {
+         It 'Add-VSTeamServiceFabricEndpoint not supported on TFS2017 Should throw' {
+            { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
+                  -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Throw
+         }
       }
    }
 
