@@ -67,7 +67,7 @@ function _trackProgress {
 
 function _supportsServiceFabricEndpoint {
    if (-not $VSTeamVersionTable.ServiceFabricEndpoint) {
-       throw 'This account does not support Service Fabric endpoints.'
+      throw 'This account does not support Service Fabric endpoints.'
    } 
 }
 
@@ -139,17 +139,15 @@ function Add-VSTeamSonarQubeEndpoint {
             scheme     = 'UsernamePassword'
          };
          data          = @{};
-         name          = $endpointName;
-         type          = 'sonarqube';
          url           = $sonarqubeUrl
       }
 
-      $body = $obj | ConvertTo-Json
-
-      try {    
-         # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      try {
+         return Add-VSTeamServiceEndpoint `
+            -ProjectName $ProjectName `
+            -endpointName $endpointName `
+            -endpointType 'sonarqube' `
+            -object $obj
       }
       catch [System.Net.WebException] {
          if ($_.Exception.status -eq "ProtocolError") {
@@ -162,10 +160,6 @@ function Add-VSTeamSonarQubeEndpoint {
          }
          throw
       }
-
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
-
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
    }
 }
 
@@ -221,20 +215,66 @@ function Add-VSTeamAzureRMServiceEndpoint {
             subscriptionName = $subscriptionName
             creationMode     = $creationMode
          }
-         name          = $endpointName
-         type          = 'azurerm'
          url           = 'https://management.azure.com/'
       }
 
-      $body = $obj | ConvertTo-Json
-      
-      # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      return Add-VSTeamServiceEndpoint `
+         -ProjectName $ProjectName `
+         -endpointName $endpointName `
+         -endpointType 'azurerm' `
+         -object $obj
+   }
+}
 
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+function Add-VSTeamKubernetesEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointName,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $kubeconfig,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $kubernetesUrl,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $clientCertificateData,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $clientKeyData,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [bool] $acceptUntrustedCerts,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [bool] $generatePfx
 
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $obj = @{
+         authorization = @{
+            parameters = @{
+               clientCertificateData = $clientCertificateData
+               clientKeyData         = $clientKeyData
+               generatePfx           = $generatePfx
+               kubeconfig            = $Kubeconfig
+            };
+            scheme     = 'None'
+         };
+         data          = @{
+            acceptUntrustedCerts = $acceptUntrustedCerts
+         };
+         url           = $kubernetesUrl
+      }
+
+      return Add-VSTeamServiceEndpoint `
+         -ProjectName $ProjectName `
+         -endpointName $endpointName `
+         -endpointType 'kubernetes' `
+         -object $obj
    }
 }
 
@@ -313,23 +353,18 @@ function Add-VSTeamServiceFabricEndpoint {
             }
          }
       }
+      
       $obj = @{
          authorization = $authorization
          data          = @{}
-         name          = $endpointName
-         type          = 'servicefabric'
          url           = $url
       }
 
-      $body = $obj | ConvertTo-Json
-            
-      # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.ServiceFabricEndpoint
-
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
-
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+      return Add-VSTeamServiceEndpoint `
+         -ProjectName $ProjectName `
+         -endpointName $endpointName `
+         -endpointType 'servicefabric' `
+         -object $obj
    }
 }
 
@@ -372,12 +407,86 @@ function Get-VSTeamServiceEndpoint {
    }
 }
 
+function Add-VSTeamServiceEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointName,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointType,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [hashtable] $object
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $object['name'] = $endpointName
+      $object['type'] = $endpointType
+
+      $body = $object | ConvertTo-Json
+
+      try {    
+         # Call the REST API
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
+            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      }
+      catch [System.Net.WebException] {
+         throw
+      }
+
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+   }
+}
+
+function Update-VSTeamServiceEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $id,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [hashtable] $object
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $body = $object | ConvertTo-Json
+
+      try {    
+         # Call the REST API
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
+            -Method Put -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      }
+      catch [System.Net.WebException] {
+         throw
+      }
+
+      _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
+   }
+}
+
 
 Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
 Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
 Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Add-SonarQubeEndpoint Add-VSTeamSonarQubeEndpoint
 Set-Alias Add-ServiceFabricEndpoint Add-VSTeamServiceFabricEndpoint
+Set-Alias Add-KubernetesEndpoint Add-VSTeamKubernetesEndpoint
 
 Set-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
@@ -386,9 +495,12 @@ Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-ServiceFabricEndpoint Remove-VSTeamServiceEndpoint
 
+Set-Alias Add-ServiceEndpoint Add-VSTeamServiceEndpoint
+Set-Alias Update-ServiceEndpoint Update-VSTeamServiceEndpoint
+
 Export-ModuleMember `
    -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-Add-VSTeamSonarQubeEndpoint, Add-VSTeamServiceFabricEndpoint `
-   -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint,
+Add-VSTeamSonarQubeEndpoint, Add-VSTeamServiceFabricEndpoint, Add-VSTeamKubernetesEndpoint, Add-VSTeamServiceEndpoint, Update-VSTeamServiceEndpoint `
+   -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint, Add-KubernetesEndpoint,
 Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
-Remove-SonarQubeEndpoint, Add-ServiceFabricEndpoint, Remove-ServiceFabricEndpoint, Remove-VSTeamServiceFabricEndpoint
+Remove-SonarQubeEndpoint, Add-ServiceFabricEndpoint, Remove-ServiceFabricEndpoint, Remove-VSTeamServiceFabricEndpoint, Add-ServiceEndpoint, Update-ServiceEndpoint

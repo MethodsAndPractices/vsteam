@@ -12,6 +12,15 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 2.1.13
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/50) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
+
+- Added functions for handling of service endpoints:
+  - Add-VSTeamKubernetesEndpoint
+  - Add-VSTeamServiceEndpoint
+  - Update-VSTeamServiceEndpoint
+  
 ### 2.1.12
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/51) from [Steve Croxford](https://github.com/CodedBeard) which included the following:
