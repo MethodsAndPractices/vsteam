@@ -353,7 +353,7 @@ function _buildProjectNameDynamicParam {
    if ($arrSet) {
       # If $Mandatory is false we need to add '' to the arrSet or they will not be able
       # to omit this parameter
-      if($Mandatory -eq $false){
+      if ($Mandatory -eq $false) {
          # We can't use .Add("") because the collection is of a fixed size. But we can
          # use += because a new array is created that contains everything we want.  
          $arrSet += "";
@@ -519,5 +519,10 @@ function _callAPI {
    $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Url', 'QueryString'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
          
-   Invoke-RestMethod @params
+   $resp = Invoke-RestMethod @params
+
+   Write-Verbose "return type: $($resp.gettype())"
+   Write-Verbose $resp
+
+   return $resp
 }
