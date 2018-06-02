@@ -12,7 +12,7 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
-### 2.x.xx
+### 2.1.13
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/xx) from [Markus Blaschke](https://github.com/mblaschke) which included the following:
 
