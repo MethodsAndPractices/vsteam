@@ -89,7 +89,8 @@
       'formats\serviceendpoints.format.ps1xml',
       'formats\serviceendpointTypes.format.ps1xml',
       'formats\team.format.ps1xml',
-      'formats\users.format.ps1xml')
+      'formats\users.format.ps1xml',
+      'formats\workitemTypes.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
@@ -111,7 +112,8 @@
       'src\teammembers.psm1',
       'src\teamspsdrive.psm1',
       'src\tfvc.psm1',
-      'src\users.psm1')
+      'src\users.psm1',
+      'src\workitemTypes.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -190,7 +192,8 @@
       'Get-VSTeamServiceEndpointType',
       'Update-VSTeamBuildDefinition',
       'Get-VSTeamTfvcRootBranch',
-      'Get-VSTeamTfvcBranch')
+      'Get-VSTeamTfvcBranch',
+      'Get-VSTeamWorkItemType')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -279,7 +282,8 @@
       'Get-ServiceEndpointType',
       'Update-BuildDefinition',
       'Get-TfvcRootBranch',
-      'Get-TfvcBranch')
+      'Get-TfvcBranch',
+      'Get-WorkItemType')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

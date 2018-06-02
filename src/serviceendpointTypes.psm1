@@ -40,7 +40,6 @@ function Get-VSTeamServiceEndpointType {
       # Call the REST API
       $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointtypes'  `
          -Version $VSTeamVersionTable.DistributedTask
-         
       
       # Apply a Type Name so we can use custom format view and custom type extensions
       foreach ($item in $resp.value) {
@@ -51,10 +50,8 @@ function Get-VSTeamServiceEndpointType {
    }
 }
 
-
 Set-Alias Get-ServiceEndpointType Get-VSTeamServiceEndpointType
 
 Export-ModuleMember `
-   -Function Get-VSTeamServiceEndpointType, 
-Add-VSTeamSonarQubeEndpoint `
+   -Function Get-VSTeamServiceEndpointType `
    -Alias Get-ServiceEndpointType
