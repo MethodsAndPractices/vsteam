@@ -1,6 +1,6 @@
 # Team
 
-![build status](https://loecda.visualstudio.com/_apis/public/build/definitions/3e857acd-880f-4056-a46b-1de672ca55cc/5/badge "Build status")
+[![Build status](https://loecda.visualstudio.com/_apis/public/build/definitions/3e857acd-880f-4056-a46b-1de672ca55cc/5/badge)](https://loecda.visualstudio.com/Team%20Module/_build/index?context=mine&path=%5C&definitionId=5&_a=completed) 
 
 Home of PowerShell module for accessing TFS and VSTS
 
@@ -20,6 +20,16 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/xx) from [Mar
   - Add-VSTeamKubernetesEndpoint
   - Add-VSTeamServiceEndpoint
   - Update-VSTeamServiceEndpoint
+  
+### 2.1.12
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/51) from [Steve Croxford](https://github.com/CodedBeard) which included the following:
+
+- Added support for creating service fabric endpoints.
+
+### 2.1.11
+
+Updated the delete confirmation message for Remove-VSTeamUser to show the user name and email instead of ID.
 
 ### 2.1.10
 

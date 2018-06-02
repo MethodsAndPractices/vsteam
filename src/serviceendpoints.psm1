@@ -65,6 +65,12 @@ function _trackProgress {
    }
 }
 
+function _supportsServiceFabricEndpoint {
+   if (-not $VSTeamVersionTable.ServiceFabricEndpoint) {
+      throw 'This account does not support Service Fabric endpoints.'
+   } 
+}
+
 function Remove-VSTeamServiceEndpoint {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
@@ -133,15 +139,14 @@ function Add-VSTeamSonarQubeEndpoint {
             scheme     = 'UsernamePassword'
          };
          data          = @{};
-         name          = $endpointName;
-         type          = 'sonarqube';
          url           = $sonarqubeUrl
       }
 
       try {
          return Add-VSTeamServiceEndpoint `
+            -ProjectName $ProjectName `
             -endpointName $endpointName `
-            -endpointType 'azurerm' `
+            -endpointType 'sonarqube' `
             -object $obj
       }
       catch [System.Net.WebException] {
@@ -214,6 +219,7 @@ function Add-VSTeamAzureRMServiceEndpoint {
       }
 
       return Add-VSTeamServiceEndpoint `
+         -ProjectName $ProjectName `
          -endpointName $endpointName `
          -endpointType 'azurerm' `
          -object $obj
@@ -252,9 +258,9 @@ function Add-VSTeamKubernetesEndpoint {
          authorization = @{
             parameters = @{
                clientCertificateData = $clientCertificateData
-               clientKeyData = $clientKeyData
-               generatePfx = $generatePfx
-               kubeconfig = $Kubeconfig
+               clientKeyData         = $clientKeyData
+               generatePfx           = $generatePfx
+               kubeconfig            = $Kubeconfig
             };
             scheme     = 'None'
          };
@@ -265,8 +271,99 @@ function Add-VSTeamKubernetesEndpoint {
       }
 
       return Add-VSTeamServiceEndpoint `
+         -ProjectName $ProjectName `
          -endpointName $endpointName `
          -endpointType 'kubernetes' `
+         -object $obj
+   }
+}
+
+function Add-VSTeamServiceFabricEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Certificate')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('displayName')]
+      [string] $endpointName,
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $url,
+      [parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $certificate,
+      [Parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [securestring] $certificatePassword,
+      [parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $serverCertThumbprint,
+      [Parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $username,
+      [Parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [securestring] $password,
+      [Parameter(ParameterSetName = 'None', Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+      [string] $clusterSpn,
+      [Parameter(ParameterSetName = 'None', Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
+      [bool] $useWindowsSecurity
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+
+      # This will throw if this account does not support ServiceFabricEndpoint
+      _supportsServiceFabricEndpoint
+
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      switch ($PSCmdlet.ParameterSetName) {
+         "Certificate" { 
+            # copied securestring usage from Add-VSTeamAccount
+            # while we don't actually have a username here, PSCredential requires that a non empty string is provided
+            $credential = New-Object System.Management.Automation.PSCredential $serverCertThumbprint, $certificatePassword
+            $certPass = $credential.GetNetworkCredential().Password
+            $authorization = @{
+               parameters = @{
+                  certificate          = $certificate
+                  certificatepassword  = $certPass
+                  servercertthumbprint = $serverCertThumbprint
+               }
+               scheme     = 'Certificate'
+            }
+         }
+         "AzureAd" {
+            # copied securestring usage from Add-VSTeamAccount
+            $credential = New-Object System.Management.Automation.PSCredential $username, $password
+            $pass = $credential.GetNetworkCredential().Password
+            $authorization = @{
+               parameters = @{
+                  password             = $pass
+                  servercertthumbprint = $serverCertThumbprint
+                  username             = $username
+               }
+               scheme     = 'UsernamePassword'
+            }
+         }
+         Default {
+            $authorization = @{
+               parameters = @{
+                  ClusterSpn         = $clusterSpn
+                  UseWindowsSecurity = $useWindowsSecurity
+               }
+               scheme     = 'None'
+            }
+         }
+      }
+      
+      $obj = @{
+         authorization = $authorization
+         data          = @{}
+         url           = $url
+      }
+
+      return Add-VSTeamServiceEndpoint `
+         -ProjectName $ProjectName `
+         -endpointName $endpointName `
+         -endpointType 'servicefabric' `
          -object $obj
    }
 }
@@ -388,19 +485,22 @@ Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
 Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
 Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Add-SonarQubeEndpoint Add-VSTeamSonarQubeEndpoint
+Set-Alias Add-ServiceFabricEndpoint Add-VSTeamServiceFabricEndpoint
 Set-Alias Add-KubernetesEndpoint Add-VSTeamKubernetesEndpoint
 
 Set-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-VSTeamServiceFabricEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-ServiceFabricEndpoint Remove-VSTeamServiceEndpoint
 
 Set-Alias Add-ServiceEndpoint Add-VSTeamServiceEndpoint
 Set-Alias Update-ServiceEndpoint Update-VSTeamServiceEndpoint
 
 Export-ModuleMember `
    -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-Add-VSTeamSonarQubeEndpoint, Add-VSTeamKubernetesEndpoint,  Add-VSTeamServiceEndpoint, Update-VSTeamServiceEndpoint `
+Add-VSTeamSonarQubeEndpoint, Add-VSTeamServiceFabricEndpoint, Add-VSTeamKubernetesEndpoint, Add-VSTeamServiceEndpoint, Update-VSTeamServiceEndpoint `
    -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint, Add-KubernetesEndpoint,
 Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
-Remove-SonarQubeEndpoint, Add-ServiceEndpoint, Update-ServiceEndpoint
+Remove-SonarQubeEndpoint, Add-ServiceFabricEndpoint, Remove-ServiceFabricEndpoint, Remove-VSTeamServiceFabricEndpoint, Add-ServiceEndpoint, Update-ServiceEndpoint
