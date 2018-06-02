@@ -10,26 +10,6 @@ function _applyTypes {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.WorkItemType')
-
-   # $item.inputDescriptors.PSObject.TypeNames.Insert(0, 'Team.InputDescriptor[]')
-
-   # foreach ($inputDescriptor in $item.inputDescriptors) {
-   #    $inputDescriptor.PSObject.TypeNames.Insert(0, 'Team.InputDescriptor')
-   # }
-   
-   # $item.authenticationSchemes.PSObject.TypeNames.Insert(0, 'Team.AuthenticationScheme[]')
-
-   # foreach ($authenticationScheme in $item.authenticationSchemes) {
-   #    $authenticationScheme.PSObject.TypeNames.Insert(0, 'Team.AuthenticationScheme')
-   # }
-
-   # if ($item.PSObject.Properties.Match('dataSources').count -gt 0 -and $null -ne $item.dataSources) {
-   #    $item.dataSources.PSObject.TypeNames.Insert(0, 'Team.DataSource[]')
-
-   #    foreach ($dataSource in $item.dataSources) {
-   #       $dataSource.PSObject.TypeNames.Insert(0, 'Team.DataSource')
-   #    }
-   # }
 }
 
 function Get-VSTeamWorkItemType {

@@ -89,7 +89,8 @@
       'formats\serviceendpoints.format.ps1xml',
       'formats\serviceendpointTypes.format.ps1xml',
       'formats\team.format.ps1xml',
-      'formats\users.format.ps1xml')
+      'formats\users.format.ps1xml',
+      'formats\workitemTypes.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
