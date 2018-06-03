@@ -27,7 +27,7 @@ function Get-VSTeamWorkItemType {
          $arrSet = $wittypes
       }
       else {
-         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of QueueName'
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of WorkItemType'
          $wittypes = $null
          $arrSet = $null
       }

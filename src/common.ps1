@@ -560,8 +560,10 @@ function _callAPI {
          
    $resp = Invoke-RestMethod @params
 
-   Write-Verbose "return type: $($resp.gettype())"
-   Write-Verbose $resp
+   if ($resp) {
+      Write-Verbose "return type: $($resp.gettype())"
+      Write-Verbose $resp
+   }
 
    return $resp
 }
