@@ -17,27 +17,61 @@ function Get-VSTeamWorkItemType {
    param()
 
    DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $false
+      $dp = _buildProjectNameDynamicParam -mandatory $true
+
+      # If they have not set the default project you can't find the
+      # validateset so skip that check. However, we still need to give
+      # the option to pass a WorkItemType to use.
+      if ($Global:PSDefaultParameterValues["*:projectName"]) {
+         $wittypes = _getWorkItemTypes -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
+         $arrSet = $wittypes
+      }
+      else {
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of QueueName'
+         $wittypes = $null
+         $arrSet = $null
+      }
+
+      $ParameterName = 'WorkItemType'
+      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet
+      $dp.Add($ParameterName, $rp)
+
+      $dp
    }
 
    Process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
+      $WorkItemType = $PSBoundParameters["WorkItemType"]
 
       # Call the REST API
-      $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
-         -Version $VSTeamVersionTable.Core
+      if ($WorkItemType) {
+         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
+            -Version $VSTeamVersionTable.Core -id $WorkItemType
 
-      # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
-      # To replace all the "": with "_end":
-      $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
-      
-      # Apply a Type Name so we can use custom format view and custom type extensions
-      foreach ($item in $resp.value) {
-         _applyTypes -item $item
+         # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
+         # To replace all the "": with "_end":
+         $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
+
+         _applyTypes -item $resp
+
+         return $resp
       }
+      else {      
+         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
+            -Version $VSTeamVersionTable.Core
 
-      return $resp.value
+         # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
+         # To replace all the "": with "_end":
+         $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
+      
+         # Apply a Type Name so we can use custom format view and custom type extensions
+         foreach ($item in $resp.value) {
+            _applyTypes -item $item
+         }
+
+         return $resp.value
+      }
    }
 }
 

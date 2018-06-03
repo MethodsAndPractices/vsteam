@@ -284,6 +284,45 @@ function _useWindowsAuthenticationOnPremise {
    return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($VSTeamVersionTable.Account -like "*visualstudio.com")
 }
 
+function _getWorkItemTypes {
+   param(
+      [Parameter(Mandatory = $true)]
+      [string] $ProjectName
+   )
+
+   if (-not $VSTeamVersionTable.Account) {
+      Write-Output @()
+      return
+   }
+
+   $area = "/wit"
+   $resource = "/workitemtypes"
+   $instance = $VSTeamVersionTable.Account
+   $version = $VSTeamVersionTable.Core
+
+   # Build the url to list the projects
+   # You CANNOT use _buildRequestURI here or you will end up
+   # in an infinite loop.
+   $listurl = $instance + '/' + $ProjectName + '/_apis' + $area + $resource + '?api-version=' + $version
+
+   # Call the REST API
+   try {
+      $resp = _callAPI -url $listurl
+
+      # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
+      # To replace all the "": with "_end":
+      $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
+      
+      if ($resp.count -gt 0) {
+         Write-Output ($resp.value).name
+      }
+   }
+   catch {
+      Write-Verbose $_
+      Write-Output @()
+   }
+}
+
 function _getProjects {
    if (-not $VSTeamVersionTable.Account) {
       Write-Output @()
