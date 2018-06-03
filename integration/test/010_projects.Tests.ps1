@@ -181,6 +181,16 @@ Describe 'VSTeam Integration Tests' {
       }
    }
 
+   Context 'Get Work Item Types' {
+      It 'Get-VSTeamWorkItemType' {
+         Get-VSTeamWorkItemType -ProjectName $newProjectName  | Should Not Be $null
+      }
+
+      It 'Get-VSTeamWorkItemType By Type' {
+         Get-VSTeamWorkItemType -ProjectName $newProjectName -WorkItemType Bug  | Should Not Be $null
+      }
+   }
+
    Context 'Service Endpoints full exercise' {
       It 'Add-VSTeamSonarQubeEndpoint Should add servcie endpoint' {
          { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `
@@ -211,7 +221,8 @@ Describe 'VSTeam Integration Tests' {
             { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
                   -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Be $null 
          }
-      } else {
+      }
+      else {
          It 'Add-VSTeamServiceFabricEndpoint not supported on TFS2017 Should throw' {
             { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
                   -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Throw
