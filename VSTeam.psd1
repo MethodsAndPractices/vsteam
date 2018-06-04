@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '2.1.13'
+   ModuleVersion     = '2.1.14'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -113,7 +113,8 @@
       'src\teamspsdrive.psm1',
       'src\tfvc.psm1',
       'src\users.psm1',
-      'src\workitemTypes.psm1')
+      'src\workitemTypes.psm1',
+      'src\workitems.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -193,7 +194,8 @@
       'Update-VSTeamBuildDefinition',
       'Get-VSTeamTfvcRootBranch',
       'Get-VSTeamTfvcBranch',
-      'Get-VSTeamWorkItemType')
+      'Get-VSTeamWorkItemType',
+      'Add-VSTeamWorkItem')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -283,7 +285,8 @@
       'Update-BuildDefinition',
       'Get-TfvcRootBranch',
       'Get-TfvcBranch',
-      'Get-WorkItemType')
+      'Get-WorkItemType',
+      'Add-WorkItem')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

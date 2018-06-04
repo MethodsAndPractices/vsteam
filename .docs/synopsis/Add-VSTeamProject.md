@@ -1,1 +1,1 @@
-Adds a Team Project to your Team Services account.
+Adds a Team Project to your account.
