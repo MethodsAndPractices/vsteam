@@ -1,6 +1,6 @@
 # Team
 
-[![Build status](https://loecda.visualstudio.com/_apis/public/build/definitions/3e857acd-880f-4056-a46b-1de672ca55cc/5/badge)](https://loecda.visualstudio.com/Team%20Module/_build/index?context=mine&path=%5C&definitionId=5&_a=completed) 
+[![Build status](https://loecda.visualstudio.com/_apis/public/build/definitions/3e857acd-880f-4056-a46b-1de672ca55cc/5/badge)](https://loecda.visualstudio.com/Team%20Module/_build/index?context=mine&path=%5C&definitionId=5&_a=completed)
 
 Home of PowerShell module for accessing TFS and VSTS
 
@@ -11,6 +11,12 @@ To get started you can visit this blog [PowerShell I would like you to meet TFS 
 The cases of every file is very important. This module is to be used on Windows, Linux and OSx so case is important.  If the casing does not match Linux and OSx might fail.
 
 ## Release Notes
+
+### 2.1.14
+
+- Started adding support for work items.
+  - List work item types
+  - Get a single work item type
 
 ### 2.1.13
 

@@ -46,6 +46,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 ### [Add-VSTeamAccount](Add-VSTeamAccount.md)
 #include "./synopsis/Add-VSTeamAccount.md"
 
+### [Add-VSTeamWorkItem](Add-VSTeamWorkItem.md)
+#include "./synopsis/Add-VSTeamWorkItem.md"
+
 ### [Clear-VSTeamDefaultProject](Clear-VSTeamDefaultProject.md)
 #include "./synopsis/Clear-VSTeamDefaultProject.md"
 
@@ -108,6 +111,9 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 
 ### [Get-VSTeamOption](Get-VSTeamOption.md)
 #include "./synopsis/Get-VSTeamOption.md"
+
+### [Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)
+#include "./synopsis/Get-VSTeamWorkItemType.md"
 
 ### [Remove-VSTeamBuild](Remove-VSTeamBuild.md)
 #include "./synopsis/Remove-VSTeamBuild.md"
