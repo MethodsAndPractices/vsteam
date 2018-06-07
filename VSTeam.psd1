@@ -77,7 +77,8 @@
       'types\teammembers.ps1xml',
       'types\teams.ps1xml',
       'types\tfvc.ps1xml',
-      'types\users.ps1xml')
+      'types\users.ps1xml',
+      'types\workitems.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -90,7 +91,8 @@
       'formats\serviceendpointTypes.format.ps1xml',
       'formats\team.format.ps1xml',
       'formats\users.format.ps1xml',
-      'formats\workitemTypes.format.ps1xml')
+      'formats\workitemTypes.format.ps1xml',
+      'formats\workitems.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
@@ -195,7 +197,8 @@
       'Get-VSTeamTfvcRootBranch',
       'Get-VSTeamTfvcBranch',
       'Get-VSTeamWorkItemType',
-      'Add-VSTeamWorkItem')
+      'Add-VSTeamWorkItem',
+      'Get-VSTeamWorkItem')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -286,7 +289,8 @@
       'Get-TfvcRootBranch',
       'Get-TfvcBranch',
       'Get-WorkItemType',
-      'Add-WorkItem')
+      'Add-WorkItem',
+      'Get-WorkItem')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

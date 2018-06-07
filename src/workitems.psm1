@@ -62,8 +62,49 @@ function Add-VSTeamWorkItem {
    }
 }
 
+function Get-VSTeamWorkItem {
+   [CmdletBinding()]
+   param(
+      [Parameter(Mandatory = $true)]
+      [int[]] $Id
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam -mandatory $true
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      # Call the REST API
+      if ($Id.Count -gt 1) {
+         $a = @{
+            ids = $id -join ','
+         }
+
+         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems'  `
+            -Version $VSTeamVersionTable.Core -Body $a
+
+         foreach ($item in $resp.value) {
+            _applyTypes -item $item
+         }
+      }
+      else {
+         $a = $id[0]
+         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems'  `
+            -Version $VSTeamVersionTable.Core -id "$a"
+
+         _applyTypes -item $resp
+      }
+
+      return $resp
+   }
+}
+
 Set-Alias Add-WorkItem Add-VSTeamWorkItem
+Set-Alias Get-WorkItem Get-VSTeamWorkItem
 
 Export-ModuleMember `
-   -Function Add-VSTeamWorkItem `
-   -Alias Add-WorkItem
+   -Function Add-VSTeamWorkItem, Get-VSTeamWorkItem `
+   -Alias Add-WorkItem, Get-WorkItem
