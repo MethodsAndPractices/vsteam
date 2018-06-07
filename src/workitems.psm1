@@ -45,14 +45,16 @@ function Add-VSTeamWorkItem {
    Process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
-      $WorkItemType = $PSBoundParameters["WorkItemType"]
+
+      # The type has to start with a $
+      $WorkItemType = "`$$($PSBoundParameters["WorkItemType"])"
 
       $body = '[{"op": "add", "path": "/fields/System.Title", "from": null, "value": "' + $Title + '"}]'
 
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems'  `
          -Version $VSTeamVersionTable.Core -id $WorkItemType -Method Post `
-         -ContentType 'application/json' -Body $body
+         -ContentType 'application/json-patch+json' -Body $body
 
       _applyTypes -item $resp
 

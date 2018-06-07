@@ -1,14 +1,26 @@
 Set-StrictMode -Version Latest
 
+# Remove any loaded version of this module so only the files
+# imported below are being tested.
 Get-Module VSTeam | Remove-Module -Force
+
+# Load the modules we want to test and any dependencies
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\workitemTypes.psm1 -Force
 
+# The InModuleScope command allows you to perform white-box unit testing on the 
+# internal (non-exported) code of a Script Module.
 InModuleScope workitemTypes {
+
+   # Set the account to use for testing. A normal user would do this
+   # using the Add-VSTeamAccount function.
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'workitemTypes' {
+      
+      # Load the mocks to create the project name dynamic parameter
+      . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"      
+
       Context 'Get-WorkItemTypes' {
          $obj = @{
             count = 1
@@ -23,7 +35,7 @@ InModuleScope workitemTypes {
          Mock Invoke-RestMethod {
             return ConvertTo-Json $obj
          }
-
+         
          It 'Should return all work item types' {
             Get-VSTeamWorkItemType -ProjectName test
 
@@ -46,9 +58,9 @@ InModuleScope workitemTypes {
          }
 
          It 'Should return 1 work item type' {
-            Set-DefaultProject test
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
             Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
-
+         
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/bug?api-version=$($VSTeamVersionTable.Core)"
             }
@@ -68,9 +80,9 @@ InModuleScope workitemTypes {
          }
 
          It 'Should return 1 work item type' {
-            Clear-DefaultProject
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
             Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
-
+         
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/bug?api-version=$($VSTeamVersionTable.Core)"
             }

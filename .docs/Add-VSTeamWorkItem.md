@@ -8,8 +8,6 @@
 
 ## SYNTAX
 
-### ByName (Default)
-
 ```powershell
 Add-VSTeamWorkItem [-ProjectName] <String> -Tite <String> -WorkItemType <string>
 ```
@@ -38,9 +36,14 @@ Demo-CI           Demo-CI-45   notStarted
 ### -WorkItemType
 The type of work item to add.
 
+You can tab complete from a list of available work item types.
+
+You must use Set-VSTeamDefaultProject to set a default project to 
+enable the tab completion.
+
 ```yaml
 Type: String
-Parameter Sets:
+Parameter Sets: (All)
 Aliases:
 
 Required: True
