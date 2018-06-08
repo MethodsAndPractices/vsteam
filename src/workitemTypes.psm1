@@ -13,11 +13,11 @@ function _applyTypes {
 }
 
 function Get-VSTeamWorkItemType {
-   [CmdletBinding()]
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param()
 
    DynamicParam {
-      $dp = _buildProjectNameDynamicParam -mandatory $true
+      $dp = _buildProjectNameDynamicParam
 
       # If they have not set the default project you can't find the
       # validateset so skip that check. However, we still need to give
@@ -33,7 +33,7 @@ function Get-VSTeamWorkItemType {
       }
 
       $ParameterName = 'WorkItemType'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet
+      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByType'
       $dp.Add($ParameterName, $rp)
 
       $dp

@@ -49,21 +49,31 @@ InModuleScope workitems {
          }
       }
 
+      Context 'Show-VSTeamWorkItem' {
+         Mock _showInBrowser { }
+
+         it 'should return url for mine' {
+            Show-VSTeamWorkItem -projectName project -Id 15
+
+            Assert-MockCalled _showInBrowser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://test.visualstudio.com/project/_workitems/edit/15' }
+         }
+      }
+
       Context 'Get-WorkItem' {       
 
          It 'Without Default Project should add work item' {
             Mock Invoke-RestMethod {
-               Write-Host $args
-               Write-Host $args[0]
+               # If this test fails uncomment the line below to see how the mock was called.
+               # Write-Host $args
                
                return $collection
             }
 
             $Global:PSDefaultParameterValues.Remove("*:projectName")
-            Get-VSTeamWorkItem -ProjectName test -Id 47,48
+            Get-VSTeamWorkItem -ProjectName test -Ids 47,48
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/?api-version=$($VSTeamVersionTable.Core)&ids=47,48&`$Expand=None&errorPolicy=Fail"
             }
          }
 
@@ -78,7 +88,7 @@ InModuleScope workitems {
             Get-VSTeamWorkItem -ProjectName test -Id 47
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/47?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/47?api-version=$($VSTeamVersionTable.Core)&`$Expand=None"
             }
          }
       }

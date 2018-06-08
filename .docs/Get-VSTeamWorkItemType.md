@@ -7,16 +7,6 @@
 
 ## SYNTAX
 
-### List (Default)
-```PowerShell
-Get-VSTeamWorkItemType -ProjectName <String>
-```
-
-### ByType
-```PowerShell
-Get-VSTeamWorkItemType -ProjectName <String> -WorkItemType <String>
-```
-
 ## Description
 #include "./synopsis/Get-VSTeamWorkItemType.md"
 

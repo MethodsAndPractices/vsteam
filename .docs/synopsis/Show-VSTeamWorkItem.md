@@ -1,0 +1,1 @@
+Opens the work item in the default browser.

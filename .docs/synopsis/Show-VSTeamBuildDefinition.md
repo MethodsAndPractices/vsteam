@@ -1,1 +1,1 @@
-Opens the build definitions for a team project in the default browser.
+Opens the build definition in the default browser.
