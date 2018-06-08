@@ -21,6 +21,7 @@ InModuleScope git {
    $singleResult = [PSCustomObject]@{ }
 
    Describe "Git VSTS" {
+      . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
 
       Context 'Show-VSTeamGitRepository by project' {
          Mock _showInBrowser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
@@ -54,6 +55,14 @@ InModuleScope git {
          }
       }
 
+      Context 'Get-VSTeamGitRepository no parameters throws' {
+         Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
+
+         It 'Should return all repos for all projects' {
+            { Get-VSTeamGitRepository } | Should Throw
+         }
+      }
+
       Context 'Get-VSTeamGitRepository by id' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
@@ -61,6 +70,14 @@ InModuleScope git {
 
          It 'Should return a single repo by id' {
             Assert-VerifiableMock
+         }
+      }
+
+      Context 'Get-VSTeamGitRepository by id throws' {
+         Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
+
+         It 'Should return a single repo by id' {
+            { Get-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000 } | Should Throw
          }
       }
 
@@ -74,6 +91,14 @@ InModuleScope git {
          }
       }
 
+      Context 'Get-VSTeamGitRepository by name throws' {
+         Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
+
+         It 'Should return a single repo by name' {
+            { Get-VSTeamGitRepository -Name 'test' } | Should Throw
+         }
+      }
+
       Context 'Remove-VSTeamGitRepository by id' {
          Mock Invoke-RestMethod
 
@@ -84,6 +109,14 @@ InModuleScope git {
                $Method -eq 'Delete' -and
                $Uri -eq "https://test.visualstudio.com/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$($VSTeamVersionTable.Git)"
             }
+         }
+      }
+
+      Context 'Remove-VSTeamGitRepository throws ' {
+         Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
+
+         It 'Should create VSAccount' {
+            {Remove-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000 -Force} | Should Throw
          }
       }
    }
@@ -131,6 +164,14 @@ InModuleScope git {
       
          It 'Should create VSAccount' {
             Assert-VerifiableMock
+         }
+      }
+
+      Context 'Add-VSTeamGitRepository throws' {
+         Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
+      
+         It 'Should create VSAccount' {
+            { Add-VSTeamGitRepository -Name 'test' -ProjectName 'test' } | Should Throw
          }
       }
    }
