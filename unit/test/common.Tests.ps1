@@ -10,6 +10,16 @@ Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 . "$PSScriptRoot\..\..\src\common.ps1"
 
 Describe 'Common' {
+   Context '_buildProjectNameDynamicParam set Alias' {
+      Mock _getProjects
+
+      $actual = _buildProjectNameDynamicParam -AliasName TestAlias
+
+      It 'Should set the alias of dynamic parameter' {
+         $actual["ProjectName"].Attributes[1].AliasNames | Should Be 'TestAlias'
+      }
+   }
+
    Context '_getUserAgent on Mac' {
       Mock _isOnWindows { return $false }
       Mock _isOnMac { return $true }
@@ -60,6 +70,14 @@ Describe 'Common' {
       }
    }
 
+   Context '_getWorkItemTypes' {
+      $VSTeamVersionTable.Account = $null
+
+      It 'should return empty array' {
+         _getWorkItemTypes -ProjectName test | Should be @()
+      }
+   }
+
    Context '_handleException' {
       $obj = "{Value: {Message: 'Top Message'}, Exception: {Message: 'Test Exception', Response: { StatusCode: '401'}}}"
       $ex = ConvertFrom-Json $obj
@@ -68,6 +86,20 @@ Describe 'Common' {
          Mock ConvertFrom-Json { return $ex }
          Mock Write-Warning -ParameterFilter { $Message -eq 'An error occurred: Test Exception'} -Verifiable
          Mock Write-Warning -ParameterFilter { $Message -eq 'Top Message' } -Verifiable
+
+         _handleException $ex
+
+         Assert-VerifiableMock
+      }
+   }
+
+   Context '_handleException message only' {
+      $obj = "{Exception: {Message: 'Test Exception'}, Message: 'Test Exception'}"
+      $ex = ConvertFrom-Json $obj
+
+      It 'Should Write one warnings' {
+         Mock ConvertFrom-Json { return $ex }
+         Mock Write-Warning -ParameterFilter { $Message -eq 'Test Exception' } -Verifiable
 
          _handleException $ex
 

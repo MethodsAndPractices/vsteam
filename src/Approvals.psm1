@@ -47,8 +47,8 @@ function Get-VSTeamApproval {
             # For TFS all three parameters must be set before you can add
             # includeMyGroupApprovals.
             if ($AssignedToFilter -ne $null -and $AssignedToFilter -ne "" -and
-                $ReleaseIdsFilter -ne $null -and $ReleaseIdsFilter -ne "" -and
-                $StatusFilter -eq 'Pending') {
+               $ReleaseIdsFilter -ne $null -and $ReleaseIdsFilter -ne "" -and
+               $StatusFilter -eq 'Pending') {
                $queryString.includeMyGroupApprovals = 'true';
             }
          }

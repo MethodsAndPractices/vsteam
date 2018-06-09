@@ -491,14 +491,6 @@ function _buildDynamicSwitchParam {
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
 
-   if ($arrSet) {
-      # Generate and set the ValidateSet
-      $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
-
-      # Add the ValidateSet to the attributes collection
-      $AttributeCollection.Add($ValidateSetAttribute)
-   }
-
    # Create and return the dynamic parameter
    return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [switch], $AttributeCollection)
 }

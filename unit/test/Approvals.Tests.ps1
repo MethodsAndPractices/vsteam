@@ -182,5 +182,33 @@ InModuleScope Approvals {
             Assert-VerifiableMock
          }
       }
+
+      Context 'Get-VSTeamApproval TFS' {
+         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+         
+         Mock Invoke-RestMethod {     
+            return @{
+               count = 1
+               value = @(
+                  @{
+                     id       = 1
+                     revision = 1
+                     approver = @{
+                        id          = 'c1f4b9a6-aee1-41f9-a2e0-070a79973ae9'
+                        displayName = 'Test User'
+                     }
+                  }
+               )
+            }}
+
+         Get-VSTeamApproval -projectName project -ReleaseIdsFilter 1 -AssignedToFilter 'Test User' -StatusFilter Pending
+         
+         It 'should return approvals' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
+               -ParameterFilter { 
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
+            }
+         }
+      }
    }
 }

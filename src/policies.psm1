@@ -106,16 +106,8 @@ function Add-VSTeamPolicy {
 
          Write-Output $resp
       }
-      catch [System.Net.WebException] {
-         _handleException $_
-      }
       catch {
-         # Dig into the exception to get the Response details.
-         # Note that value__ is not a typo.
-         $errMsg = "Failed`nStatusCode: $($_.Exception.Response.StatusCode.value__)`nStatusDescription: $($_.Exception.Response.StatusDescription)"
-         Write-Error $errMsg
-
-         throw $_
+         _handleException $_
       }
    }
 }
@@ -170,19 +162,12 @@ function Update-VSTeamPolicy {
 
          Write-Output $resp
       }
-      catch [System.Net.WebException] {
-         _handleException $_
-      }
       catch {
-         # Dig into the exception to get the Response details.
-         # Note that value__ is not a typo.
-         $errMsg = "Failed`nStatusCode: $($_.Exception.Response.StatusCode.value__)`nStatusDescription: $($_.Exception.Response.StatusDescription)"
-         Write-Error $errMsg
-
-         throw $_
+         _handleException $_
       }
    }
 }
+
 function Get-VSTeamPolicyType {
    [CmdletBinding()]
    param (
@@ -252,16 +237,8 @@ function Remove-VSTeamPolicy {
 
                Write-Output "Deleted policy $item"
             }
-            catch [System.Net.WebException] {
-               _handleException $_
-            }
             catch {
-               # Dig into the exception to get the Response details.
-               # Note that value__ is not a typo.
-               $errMsg = "Failed`nStatusCode: $($_.Exception.Response.StatusCode.value__)`nStatusDescription: $($_.Exception.Response.StatusDescription)"
-               Write-Error $errMsg
-
-               throw $_
+               _handleException $_
             }
          }
       }

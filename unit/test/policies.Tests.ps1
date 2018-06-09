@@ -43,6 +43,22 @@ InModuleScope policies {
          }
       }
 
+      Context 'Get-VSTeamPolicy by project throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
+
+         It 'Should throw' {
+            { Get-VSTeamPolicy -ProjectName Demo } | Should Throw
+         }
+      }
+
+      Context 'Get-VSTeamPolicy by project and id throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
+
+         It 'Should throw' {
+            { Get-VSTeamPolicy -ProjectName Demo -Id 4 } | Should Throw
+         }
+      }
+
       Context 'Remove-VSTeamPolicy by id' {
          Mock Invoke-RestMethod
 
@@ -53,6 +69,14 @@ InModuleScope policies {
                $Method -eq 'Delete' -and
                $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/4?api-version=$($VSTeamVersionTable.Core)"
             }
+         }
+      }
+
+      Context 'Remove-VSTeamPolicy by id throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
+
+         It 'Should throw' {
+            { Remove-VSTeamPolicy -ProjectName Demo -id 4 -Force } | Should Throw
          }
       }
 
@@ -77,6 +101,21 @@ InModuleScope policies {
          }
       }
 
+      Context 'Add-VSTeamPolicy throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
+
+         It 'Should throw' {
+            { Add-VSTeamPolicy -ProjectName Demo -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
+               MinimumApproverCount = 1;
+               scope = @(@{
+                  refName = "refs/heads/master";
+                  matchKind = "Exact";
+                  repositoryId = "10000000-0000-0000-0000-0000000000001"
+               })
+            } } | Should Throw
+         }
+      }
+
       Context 'Update-VSTeamPolicy' {
          Mock Invoke-RestMethod
 
@@ -98,6 +137,21 @@ InModuleScope policies {
          }
       }
 
+      Context 'Update-VSTeamPolicy throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
+
+         It 'Should add the policy' {
+            { Update-VSTeamPolicy -ProjectName Demo -id 1 -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
+               MinimumApproverCount = 1;
+               scope = @(@{
+                  refName = "refs/heads/release";
+                  matchKind = "Exact";
+                  repositoryId = "20000000-0000-0000-0000-0000000000002"
+               })
+            } } | Should Throw
+         }
+      }
+
       Context 'Get-VSTeamPolicyType by project' {
          Mock Invoke-RestMethod { return $results } -Verifiable
 
@@ -107,6 +161,34 @@ InModuleScope policies {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/types/?api-version=$($VSTeamVersionTable.Core)"
             }
+         }
+      }
+
+      Context 'Get-VSTeamPolicyType by project throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
+
+         It 'Should throw' {
+            { Get-VSTeamPolicyType -ProjectName Demo } | Should Throw
+         }
+      }
+
+      Context 'Get-VSTeamPolicyType by id' {
+         Mock Invoke-RestMethod { return $singleResult } -Verifiable
+
+         Get-VSTeamPolicyType -ProjectName Demo -id 90a51335-0c53-4a5f-b6ce-d9aff3ea60e0
+
+         It 'Should return policies' {
+            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/types/90a51335-0c53-4a5f-b6ce-d9aff3ea60e0?api-version=$($VSTeamVersionTable.Core)"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamPolicyType by id throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
+
+         It 'Should return policies' {
+            { Get-VSTeamPolicyType -ProjectName Demo -id 90a51335-0c53-4a5f-b6ce-d9aff3ea60e0 } | Should Throw
          }
       }
    }
