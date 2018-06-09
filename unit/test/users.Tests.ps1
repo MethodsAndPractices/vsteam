@@ -23,6 +23,8 @@ InModuleScope users {
 
     Describe "Users VSTS" {
 
+      . "$PSScriptRoot\mockProjectDynamicParamMandatoryFalse.ps1"
+
         # Must be defined or call will throw error
         $VSTeamVersionTable.MemberEntitlementManagement = '4.1-preview'
 

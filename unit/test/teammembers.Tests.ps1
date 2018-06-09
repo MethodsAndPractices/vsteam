@@ -60,12 +60,11 @@ InModuleScope teammembers {
       }
 
       Context 'Get-VSTeamMember for specific team, fed through pipeline' {
-         Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{projectname = "TestProject"; name = "TestTeam"} }
          Mock Invoke-RestMethod { return @{value = 'teammembers'}}
 
          It 'Should return teammembers' {
-            Get-VSTeam -ProjectName TestProject -TeamId "TestTeam" | Get-VSTeamMember
-
+            New-Object -TypeName PSObject -Prop @{projectname = "TestProject"; name = "TestTeam"} | Get-VSTeamMember
+            
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)"                    
             }

@@ -205,7 +205,7 @@ InModuleScope builds {
          }
 
          It 'should add build' {
-            Add-VSTeamBuild -ProjectName project -BuildDefinitionId 2 -BuildParameters @{'system.debug'='true'}
+            Add-VSTeamBuild -ProjectName project -BuildDefinitionId 2 -BuildParameters @{'system.debug' = 'true'}
 
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -321,7 +321,7 @@ InModuleScope builds {
    }
 
    Describe 'Builds TFS' {
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
 
@@ -378,7 +378,7 @@ InModuleScope builds {
 
       Context "Get-VSTeamBuildArtifact calls correct Url on TFS local Auth" {
          Mock Invoke-RestMethod {
-             return [PSCustomObject]@{
+            return [PSCustomObject]@{
                value = [PSCustomObject]@{
                   id       = 150
                   name     = "Drop"
@@ -444,12 +444,16 @@ InModuleScope builds {
       }
 
       Context 'Add-VSTeamBuild by id on TFS local Auth' {
-         Mock Get-VSTeamQueue { return [PSCustomObject]@{
+         Mock Get-VSTeamQueue {
+            return [PSCustomObject]@{
                name = "MyQueue"
                id   = 3
             }
          }
-         Mock Get-VSTeamBuildDefinition { return @{ fullname = "MyBuildDef" } }
+
+         Mock Get-VSTeamBuildDefinition { 
+            return @{ fullname = "MyBuildDef" }
+         }
 
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             ($Body | ConvertFrom-Json).definition.id -eq 2 -and
@@ -492,7 +496,7 @@ InModuleScope builds {
 
          $Global:PSDefaultParameterValues["*:projectName"] = 'Project'
 
-         Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -BuildParameters @{'system.debug'='true'}
+         Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -BuildParameters @{'system.debug' = 'true'}
 
          It 'should add build' {
             # Call to queue build.
