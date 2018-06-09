@@ -8,10 +8,6 @@
 
 ## SYNTAX
 
-```powershell
-Add-VSTeamWorkItem [-ProjectName] <String> -Tite <String> -WorkItemType <string>
-```
-
 ## DESCRIPTION
 
 Add-VSTeamWorkItem will add a new work item to your project.
