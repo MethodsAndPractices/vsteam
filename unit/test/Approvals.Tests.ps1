@@ -64,30 +64,42 @@ InModuleScope Approvals {
       }
 
       Context 'Get-VSTeamApproval with AssignedToFilter' {
-            Mock Invoke-RestMethod {            
-               return @{
-                  count = 1
-                  value = @(
-                     @{
-                        id       = 1
-                        revision = 1
-                        approver = @{
-                           id          = 'c1f4b9a6-aee1-41f9-a2e0-070a79973ae9'
-                           displayName = 'Test User'
-                        }
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            # Write-Host $args
+
+            return @{
+               count = 1
+               value = @(
+                  @{
+                     id       = 1
+                     revision = 1
+                     approver = @{
+                        id          = 'c1f4b9a6-aee1-41f9-a2e0-070a79973ae9'
+                        displayName = 'Test User'
                      }
-                  )
-               }}
+                  }
+               )
+            }}
    
-            Get-VSTeamApproval -projectName project -AssignedToFilter 'Chuck Reinhart'
+         Get-VSTeamApproval -projectName project -AssignedToFilter 'Chuck Reinhart'
             
-            It 'should return approvals' {
-               Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
-                  -ParameterFilter { 
-                  $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
-               }
+         It 'should return approvals' {
+            # With PowerShell core the order of the query string is not the 
+            # same from run to run!  So instead of testing the entire string
+            # matches I have to search for the portions I expect but can't
+            # assume the order. 
+            # The general string should look like this:
+            # "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
+               -ParameterFilter { 
+               $Uri -like "*https://test.vsrm.visualstudio.com/project/_apis/release/approvals/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Release)*" -and
+               $Uri -like "*assignedtoFilter=Chuck Reinhart*" -and
+               $Uri -like "*includeMyGroupApprovals=true*"
             }
          }
+      }
 
       # This makes sure the alias is working
       Context 'Get-Approval' {
@@ -186,7 +198,10 @@ InModuleScope Approvals {
       Context 'Get-VSTeamApproval TFS' {
          $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
          
-         Mock Invoke-RestMethod {     
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            #Write-Host $args
+
             return @{
                count = 1
                value = @(
@@ -204,9 +219,20 @@ InModuleScope Approvals {
          Get-VSTeamApproval -projectName project -ReleaseIdsFilter 1 -AssignedToFilter 'Test User' -StatusFilter Pending
          
          It 'should return approvals' {
+            # With PowerShell core the order of the query string is not the 
+            # same from run to run!  So instead of testing the entire string
+            # matches I have to search for the portions I expect but can't
+            # assume the order. 
+            # The general string should look like this:
+            # "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Release)*" -and
+               $Uri -like "*statusFilter=Pending*" -and
+               $Uri -like "*assignedtoFilter=Test User*" -and
+               $Uri -like "*includeMyGroupApprovals=true*" -and
+               $Uri -like "*releaseIdsFilter=1*"
             }
          }
       }

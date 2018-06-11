@@ -72,8 +72,18 @@ InModuleScope workitems {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             Get-VSTeamWorkItem -ProjectName test -Ids 47,48
 
+            # With PowerShell core the order of the query string is not the 
+            # same from run to run!  So instead of testing the entire string
+            # matches I have to search for the portions I expect but can't
+            # assume the order. 
+            # The general string should look like this:
+            # https://test.visualstudio.com/test/_apis/wit/workitems/?api-version=$($VSTeamVersionTable.Core)&ids=47,48&`$Expand=None&errorPolicy=Fail
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/?api-version=$($VSTeamVersionTable.Core)&ids=47,48&`$Expand=None&errorPolicy=Fail"
+               $Uri -like "*https://test.visualstudio.com/test/_apis/wit/workitems/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*ids=47,48*" -and
+               $Uri -like "*`$Expand=None*" -and
+               $Uri -like "*errorPolicy=Fail*"
             }
          }
 

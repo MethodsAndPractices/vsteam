@@ -30,7 +30,9 @@ InModuleScope teammembers {
             Get-VSTeamMember -ProjectName TestProject -TeamId TestTeam -Top 10
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)&`$top=10"
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$top=10*"
             }
          }            
       }
@@ -42,7 +44,9 @@ InModuleScope teammembers {
             Get-VSTeamMember -ProjectName TestProject -TeamId TestTeam -Skip 5
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)&`$skip=5"
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$skip=5*"
             }
          }
       }
@@ -54,7 +58,10 @@ InModuleScope teammembers {
             Get-VSTeamMember -ProjectName TestProject -TeamId TestTeam -Top 10 -Skip 5
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)&`$top=10&`$skip=5"
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$top=10*" -and
+               $Uri -like "*`$skip=5*"
             }
          }            
       }

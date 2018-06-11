@@ -81,7 +81,10 @@ InModuleScope policies {
       }
 
       Context 'Add-VSTeamPolicy' {
-         Mock Invoke-RestMethod
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            #Write-Host $args
+         }
 
          Add-VSTeamPolicy -ProjectName Demo -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
             MinimumApproverCount = 1;
@@ -93,10 +96,24 @@ InModuleScope policies {
          }
 
          It 'Should add the policy' {
+            # With PowerShell core the order of the boty string is not the 
+            # same from run to run!  So instead of testing the entire string
+            # matches I have to search for the portions I expect but can't
+            # assume the order. 
+            # The general string should look like this:
+            # '{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"10000000-0000-0000-0000-0000000000001","matchKind":"Exact","refName":"refs/heads/master"}],"MinimumApproverCount":1}}'
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { 
                $Method -eq 'Post' -and
                $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/?api-version=$($VSTeamVersionTable.Core)" -and 
-               $Body -eq '{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"10000000-0000-0000-0000-0000000000001","matchKind":"Exact","refName":"refs/heads/master"}],"MinimumApproverCount":1}}'
+               $Body -like '*"isBlocking":true*' -and
+               $Body -like '*"isEnabled":true*' -and
+               $Body -like '*"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"}*' -and
+               $Body -like '*"MinimumApproverCount":1*' -and
+               $Body -like '*"settings":*' -and
+               $Body -like '*"scope":*' -and
+               $Body -like '*"repositoryId":"10000000-0000-0000-0000-0000000000001"*' -and
+               $Body -like '*"matchKind":"Exact"*' -and
+               $Body -like '*"refName":"refs/heads/master"*'
             }
          }
       }
@@ -129,10 +146,25 @@ InModuleScope policies {
          }
 
          It 'Should add the policy' {
+            # With PowerShell core the order of the boty string is not the 
+            # same from run to run!  So instead of testing the entire string
+            # matches I have to search for the portions I expect but can't
+            # assume the order. 
+            # The general string should look like this:
+            #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { 
                $Method -eq 'Put' -and
                $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/1?api-version=$($VSTeamVersionTable.Core)" -and 
-               $Body -eq '{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
+               $Body -like '*"isBlocking":true*' -and
+               $Body -like '*"isEnabled":true*' -and
+               $Body -like '*"type":*' -and
+               $Body -like '*"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"*' -and
+               $Body -like '*"settings":*' -and
+               $Body -like '*"scope":*' -and
+               $Body -like '*"repositoryId":"20000000-0000-0000-0000-0000000000002"*' -and
+               $Body -like '*"matchKind":"Exact"*' -and
+               $Body -like '*"refName":"refs/heads/release"*' -and
+               $Body -like '*"MinimumApproverCount":1*'
             }
          }
       }

@@ -60,7 +60,10 @@ InModuleScope projects {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)&`$top=100&stateFilter=WellFormed"
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$top=100*" -and
+               $Uri -like "*stateFilter=WellFormed*"
             }
          }
       }
@@ -74,7 +77,9 @@ InModuleScope projects {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter { 
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)&`$top=10&stateFilter=WellFormed" 
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/*" -and
+               $Uri -like "*`$top=10*" -and
+               $Uri -like "*stateFilter=WellFormed*"
             }
          }
       }
@@ -88,7 +93,11 @@ InModuleScope projects {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter { 
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)&`$skip=1&`$top=100&stateFilter=WellFormed" 
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$skip=1*" -and
+               $Uri -like "*`$top=100*" -and
+               $Uri -like "*stateFilter=WellFormed*"
             }
          }
       }
@@ -102,7 +111,10 @@ InModuleScope projects {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter { 
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/?api-version=$($VSTeamVersionTable.Core)&`$top=100&stateFilter=All" 
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$top=100*" -and
+               $Uri -like "*stateFilter=All*"
             }
          }
       }
@@ -130,7 +142,9 @@ InModuleScope projects {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter { 
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test?api-version=$($VSTeamVersionTable.Core)&includeCapabilities=True" 
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/Test*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*includeCapabilities=True*"
             }
          }
       }

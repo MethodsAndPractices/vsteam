@@ -29,9 +29,16 @@ InModuleScope teams {
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Top 10
 
-            # Make sure it was called with the correct URI
+            # With PowerShell core the order of the query string is not the 
+            # same from run to run!  So instead of testing the entire string
+            # matches I have to search for the portions I expect but can't
+            # assume the order. 
+            # The general string should look like this:
+            # "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$($VSTeamVersionTable.Core)&`$top=10"
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$($VSTeamVersionTable.Core)&`$top=10"
+               $Uri -like "https://test.visualstudio.com/_apis/projects/Test/teams/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$top=10*"
             }
          }
       }
@@ -44,7 +51,9 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$($VSTeamVersionTable.Core)&`$skip=10"
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/Test/teams/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$skip=10*"
             }
          }
       }
@@ -57,7 +66,10 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$($VSTeamVersionTable.Core)&`$top=10&`$skip=5"
+               $Uri -like "*https://test.visualstudio.com/_apis/projects/Test/teams/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$top=10*" -and
+               $Uri -like "*`$skip=5*"
             }
          }
       }
@@ -247,7 +259,9 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/?api-version=$($VSTeamVersionTable.Core)&`$top=10"
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/?*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$top=10*"
             }
          }
       }
@@ -260,7 +274,9 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/?api-version=$($VSTeamVersionTable.Core)&`$skip=10"
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$skip=10*"
             }
          }
       }
@@ -273,7 +289,10 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/?api-version=$($VSTeamVersionTable.Core)&`$top=10&`$skip=5"
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*`$top=10*" -and
+               $Uri -like "*`$skip=5*"
             }
          }
       }

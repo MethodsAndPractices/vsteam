@@ -139,7 +139,10 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/?api-version=$($VSTeamVersionTable.Build)&name=click*&type=All"
+               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Build)*" -and
+               $Uri -like "*name=click*" -and
+               $Uri -like "*type=All*"
             }
          }
       }
@@ -151,7 +154,10 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*' -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/?api-version=$($VSTeamVersionTable.Build)&name=click*&type=build"
+               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*api-version=$($VSTeamVersionTable.Build)*" -and
+               $Uri -like "*name=click*" -and
+               $Uri -like "*type=build*"
             }
          }
       }
