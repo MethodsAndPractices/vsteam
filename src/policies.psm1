@@ -12,12 +12,6 @@ function _applyPolicyTypes {
    $item.PSObject.TypeNames.Insert(0, 'Team.Policy')
 }
 
-function _applyPolicyTypeTypes {
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'Team.PolicyType')
-}
-
 function Get-VSTeamPolicy {
    [CmdletBinding()]
    param (
@@ -32,7 +26,7 @@ function Get-VSTeamPolicy {
    process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
-      if($id) {
+      if ($id) {
          foreach ($item in $id) {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource configurations -Version $VSTeamVersionTable.Git
@@ -88,16 +82,13 @@ function Add-VSTeamPolicy {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $body = @{
-         isEnabled = $enabled.IsPresent;
+         isEnabled  = $enabled.IsPresent;
          isBlocking = $blocking.IsPresent;
-         type = @{
+         type       = @{
             id = $type
          };
-         settings = $settings
+         settings   = $settings
       } | ConvertTo-Json -Depth 10 -Compress
-
-      Write-Debug "Body value:"
-      Write-Debug $body
 
       try {
          # Call the REST API
@@ -113,7 +104,7 @@ function Add-VSTeamPolicy {
 }
 
 function Update-VSTeamPolicy {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $true)]
       [int] $id,
@@ -128,7 +119,10 @@ function Update-VSTeamPolicy {
       $blocking,
 
       [Parameter(Mandatory = $true)]
-      $settings
+      $settings,
+
+      [switch]
+      $Force
    )
 
    DynamicParam {
@@ -138,79 +132,31 @@ function Update-VSTeamPolicy {
    process {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if(-not $type) {
+      if (-not $type) {
          $policy = Get-VSTeamPolicy -ProjectName $ProjectName -Id $id | Select-Object -First 1
          $type = $policy.type.id
       }
 
       $body = @{
-         isEnabled = $enabled.IsPresent;
+         isEnabled  = $enabled.IsPresent;
          isBlocking = $blocking.IsPresent;
-         type = @{
+         type       = @{
             id = $type
          }
-         settings = $settings
+         settings   = $settings
       } | ConvertTo-Json -Depth 10 -Compress
 
-      Write-Debug "Body value:"
-      Write-Debug $body
-
       try {
-         # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -id $id -Resource 'configurations' `
-            -Method Put -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Git
+         if ($Force -or $pscmdlet.ShouldProcess($id, "Update Policy")) {
+            # Call the REST API
+            $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -id $id -Resource 'configurations' `
+               -Method Put -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Git
 
-         Write-Output $resp
+            Write-Output $resp
+         }
       }
       catch {
          _handleException $_
-      }
-   }
-}
-
-function Get-VSTeamPolicyType {
-   [CmdletBinding()]
-   param (
-      [Parameter(ValueFromPipeline = $true)]
-      [guid[]] $Id
-   )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
-   process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-      
-      if ($id) {
-         foreach ($item in $id) {
-            try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource types -Version $VSTeamVersionTable.Git
-               
-               _applyPolicyTypeTypes -item $resp
-               
-               Write-Output $resp 
-            }
-            catch {
-               throw $_
-            }
-         }
-      }
-      else {
-         try {
-            $resp = _callAPI -ProjectName $ProjectName -Area policy -Resource types -Version $VSTeamVersionTable.Git
-
-            # Apply a Type Name so we can use custom format view and custom type extensions
-            foreach ($item in $resp.value) {
-               _applyPolicyTypeTypes -item $item
-            }
-
-            Write-Output $resp.value
-         }
-         catch {
-            throw $_
-         }
       }
    }
 }
@@ -219,8 +165,11 @@ function Remove-VSTeamPolicy {
    [CmdletBinding(SupportsShouldProcess = $true)]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-      [int[]] $Id,
-      [switch] $Force
+      [int[]]
+      $Id,
+      
+      [switch]
+      $Force
    )
 
    DynamicParam {
@@ -245,5 +194,11 @@ function Remove-VSTeamPolicy {
    }
 }
 
+Set-Alias Get-Policy Get-VSTeamPolicy
+Set-Alias Add-Policy Add-VSTeamPolicy
+Set-Alias Remove-Policy Remove-VSTeamPolicy
+Set-Alias Update-Policy Update-VSTeamPolicy
+
 Export-ModuleMember `
-   -Function Get-VSTeamPolicy, Get-VSTeamPolicyType, Add-VSTeamPolicy, Update-VSTeamPolicy, Remove-VSTeamPolicy
+   -Function Get-VSTeamPolicy, Add-VSTeamPolicy, Update-VSTeamPolicy, Remove-VSTeamPolicy `
+   -Alias Get-Policy, Add-Policy, Update-Policy, Remove-Policy 

@@ -84,7 +84,7 @@
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
       'formats\buildDefinitions.format.ps1xml',
       'formats\builds.format.ps1xml',
-      'formats\policies.ps1xml',
+      'formats\policyTypes.ps1xml',
       'formats\profile.format.ps1xml',
       'formats\queues.format.ps1xml',
       'formats\serviceendpoints.format.ps1xml',
@@ -102,6 +102,7 @@
       'src\builds.psm1',
       'src\cloudSubscriptions.psm1',
       'src\policies.psm1',
+      'src\policyTypes.psm1'
       'src\pools.psm1',
       'src\projects.psm1',
       'src\queues.psm1',
@@ -292,7 +293,12 @@
       'Get-WorkItemType',
       'Add-WorkItem',
       'Get-WorkItem',
-      'Show-WorkItem')
+      'Show-WorkItem',
+      'Get-Policy', 
+      'Get-PolicyType', 
+      'Add-Policy', 
+      'Update-Policy', 
+      'Remove-Policy')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

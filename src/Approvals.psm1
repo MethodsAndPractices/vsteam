@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyApprovalTypes {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Approval')
@@ -58,7 +58,7 @@ function Get-VSTeamApproval {
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyApprovalTypes -item $item
          }
 
          Write-Output $resp.value

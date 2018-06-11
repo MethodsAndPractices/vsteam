@@ -6,7 +6,7 @@ Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\policies.psm1 -Force
 
 InModuleScope policies {
-   
+
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
@@ -15,10 +15,8 @@ InModuleScope policies {
       value = [PSCustomObject]@{ }
    }
 
-   $singleResult = [PSCustomObject]@{ }
+   Describe 'Policies VSTS' {
 
-   Describe "Policies VSTS" {
-      
       Context 'Get-VSTeamPolicy by project' {
          Mock Invoke-RestMethod { return $results } -Verifiable
 
@@ -87,24 +85,25 @@ InModuleScope policies {
          }
 
          Add-VSTeamPolicy -ProjectName Demo -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
-            MinimumApproverCount = 1;
-            scope = @(@{
-               refName = "refs/heads/master";
-               matchKind = "Exact";
-               repositoryId = "10000000-0000-0000-0000-0000000000001"
-            })
+            MinimumApproverCount = 1
+            scope                = @(
+               @{
+                  refName      = 'refs/heads/master'
+                  matchKind    = 'Exact'
+                  repositoryId = '10000000-0000-0000-0000-0000000000001'
+               })
          }
 
          It 'Should add the policy' {
-            # With PowerShell core the order of the boty string is not the 
+            # With PowerShell core the order of the boty string is not the
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
-            # assume the order. 
+            # assume the order.
             # The general string should look like this:
             # '{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"10000000-0000-0000-0000-0000000000001","matchKind":"Exact","refName":"refs/heads/master"}],"MinimumApproverCount":1}}'
-            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/?api-version=$($VSTeamVersionTable.Core)" -and 
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/?api-version=$($VSTeamVersionTable.Core)" -and
                $Body -like '*"isBlocking":true*' -and
                $Body -like '*"isEnabled":true*' -and
                $Body -like '*"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"}*' -and
@@ -123,38 +122,85 @@ InModuleScope policies {
 
          It 'Should throw' {
             { Add-VSTeamPolicy -ProjectName Demo -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
-               MinimumApproverCount = 1;
-               scope = @(@{
-                  refName = "refs/heads/master";
-                  matchKind = "Exact";
-                  repositoryId = "10000000-0000-0000-0000-0000000000001"
-               })
-            } } | Should Throw
+                  MinimumApproverCount = 1
+                  scope                = @(
+                     @{
+                        refName      = 'refs/heads/master'
+                        matchKind    = 'Exact'
+                        repositoryId = '10000000-0000-0000-0000-0000000000001'
+                     })
+               }
+            } | Should Throw
          }
       }
 
-      Context 'Update-VSTeamPolicy' {
+      Context 'Update-VSTeamPolicy with type' {
          Mock Invoke-RestMethod
 
          Update-VSTeamPolicy -ProjectName Demo -id 1 -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
-            MinimumApproverCount = 1;
-            scope = @(@{
-               refName = "refs/heads/release";
-               matchKind = "Exact";
-               repositoryId = "20000000-0000-0000-0000-0000000000002"
-            })
+            MinimumApproverCount = 1
+            scope                = @(
+               @{
+                  refName      = 'refs/heads/release'
+                  matchKind    = 'Exact'
+                  repositoryId = '20000000-0000-0000-0000-0000000000002'
+               })
          }
 
          It 'Should add the policy' {
-            # With PowerShell core the order of the boty string is not the 
+            # With PowerShell core the order of the boty string is not the
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
-            # assume the order. 
+            # assume the order.
             # The general string should look like this:
             #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
-            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/1?api-version=$($VSTeamVersionTable.Core)" -and 
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/1?api-version=$($VSTeamVersionTable.Core)" -and
+               $Body -like '*"isBlocking":true*' -and
+               $Body -like '*"isEnabled":true*' -and
+               $Body -like '*"type":*' -and
+               $Body -like '*"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"*' -and
+               $Body -like '*"settings":*' -and
+               $Body -like '*"scope":*' -and
+               $Body -like '*"repositoryId":"20000000-0000-0000-0000-0000000000002"*' -and
+               $Body -like '*"matchKind":"Exact"*' -and
+               $Body -like '*"refName":"refs/heads/release"*' -and
+               $Body -like '*"MinimumApproverCount":1*'
+            }
+         }
+      }
+
+      Context 'Update-VSTeamPolicy without type' {
+         Mock Invoke-RestMethod
+         Mock Get-VSTeamPolicy {
+            return @{
+               type = @{
+                  id = 'babcf51f-d853-43a2-9b05-4a64ca577be0'
+               }
+            }
+         }
+
+         Update-VSTeamPolicy -ProjectName Demo -id 1 -enabled -blocking -settings @{
+            MinimumApproverCount = 1
+            scope                = @(
+               @{
+                  refName      = 'refs/heads/release'
+                  matchKind    = 'Exact'
+                  repositoryId = '20000000-0000-0000-0000-0000000000002'
+               })
+         }
+
+         It 'Should add the policy' {
+            # With PowerShell core the order of the boty string is not the
+            # same from run to run!  So instead of testing the entire string
+            # matches I have to search for the portions I expect but can't
+            # assume the order.
+            # The general string should look like this:
+            #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
+            Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter {
+               $Method -eq 'Put' -and
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/1?api-version=$($VSTeamVersionTable.Core)" -and
                $Body -like '*"isBlocking":true*' -and
                $Body -like '*"isEnabled":true*' -and
                $Body -like '*"type":*' -and
@@ -174,53 +220,15 @@ InModuleScope policies {
 
          It 'Should add the policy' {
             { Update-VSTeamPolicy -ProjectName Demo -id 1 -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
-               MinimumApproverCount = 1;
-               scope = @(@{
-                  refName = "refs/heads/release";
-                  matchKind = "Exact";
-                  repositoryId = "20000000-0000-0000-0000-0000000000002"
-               })
-            } } | Should Throw
-         }
-      }
-
-      Context 'Get-VSTeamPolicyType by project' {
-         Mock Invoke-RestMethod { return $results } -Verifiable
-
-         Get-VSTeamPolicyType -ProjectName Demo
-
-         It 'Should return policies' {
-            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/types/?api-version=$($VSTeamVersionTable.Core)"
-            }
-         }
-      }
-
-      Context 'Get-VSTeamPolicyType by project throws' {
-         Mock Invoke-RestMethod { throw 'Error' }
-
-         It 'Should throw' {
-            { Get-VSTeamPolicyType -ProjectName Demo } | Should Throw
-         }
-      }
-
-      Context 'Get-VSTeamPolicyType by id' {
-         Mock Invoke-RestMethod { return $singleResult } -Verifiable
-
-         Get-VSTeamPolicyType -ProjectName Demo -id 90a51335-0c53-4a5f-b6ce-d9aff3ea60e0
-
-         It 'Should return policies' {
-            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/types/90a51335-0c53-4a5f-b6ce-d9aff3ea60e0?api-version=$($VSTeamVersionTable.Core)"
-            }
-         }
-      }
-
-      Context 'Get-VSTeamPolicyType by id throws' {
-         Mock Invoke-RestMethod { throw 'Error' }
-
-         It 'Should return policies' {
-            { Get-VSTeamPolicyType -ProjectName Demo -id 90a51335-0c53-4a5f-b6ce-d9aff3ea60e0 } | Should Throw
+                  MinimumApproverCount = 1
+                  scope                = @(
+                     @{
+                        refName      = 'refs/heads/release'
+                        matchKind    = 'Exact'
+                        repositoryId = '20000000-0000-0000-0000-0000000000002'
+                     })
+               }
+            } | Should Throw
          }
       }
    }

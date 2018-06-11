@@ -26,16 +26,22 @@ REMAINS WITH THE USER.
             <TableHeaders>
                <TableColumnHeader>
                   <Label>Name</Label>
+               </TableColumnHeader>               
+               <TableColumnHeader>
+                  <Label>Description</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Id</Label>
-               </TableColumnHeader>              
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
                   <TableColumnItems>
                      <TableColumnItem>
                         <PropertyName>displayName</PropertyName>
+                     </TableColumnItem>                     
+                      <TableColumnItem>
+                        <PropertyName>description</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>id</PropertyName>
