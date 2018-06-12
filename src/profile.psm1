@@ -119,22 +119,26 @@ function Add-VSTeamProfile {
    }
 
    process {
-      if (_isOnWindows) {
-         # Bind the parameter to a friendly variable
-         $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
-         if (!($SecurePersonalAccessToken) -and !($PersonalAccessToken) -and !($UsingWindowsAuth)) {
-            Write-Error "Personal Access Token must be provided if you are not using Windows Authentication; please see the help."
-         }
-      }
 
       if ($SecurePersonalAccessToken) {
+         # Even when promoted for a Secure Personal Access Token you can just
+         # press enter. This leads to an empty PAT so error below. 
+      
          # Convert the securestring to a normal string
          # this was the one technique that worked on Mac, Linux and Windows
-         $credential = New-Object System.Management.Automation.PSCredential $account, $SecurePersonalAccessToken
-         $_pat = $credential.GetNetworkCredential().Password
+         $_pat = _convertSecureStringTo_PlainText -SecureString $SecurePersonalAccessToken
       }
       else {
          $_pat = $PersonalAccessToken
+      }
+
+      if (_isOnWindows) {
+         # Bind the parameter to a friendly variable
+         $UsingWindowsAuth = $PSBoundParameters[$ParameterName2]
+         if (!($_pat) -and !($UsingWindowsAuth)) {
+            Write-Error 'Personal Access Token must be provided if you are not using Windows Authentication; please see the help.'
+            return
+         }
       }
 
       # If they only gave an account name add visualstudio.com

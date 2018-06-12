@@ -10,6 +10,16 @@ Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 . "$PSScriptRoot\..\..\src\common.ps1"
 
 Describe 'Common' {
+   Context '_convertSecureStringTo_PlainText' {
+      $emptySecureString = ConvertTo-SecureString 'Test String' -AsPlainText -Force
+
+      $actual = _convertSecureStringTo_PlainText -SecureString $emptySecureString
+
+      It 'Should return plain text' {
+         $actual | Should Be 'Test String'
+      }
+   }
+
    Context '_buildProjectNameDynamicParam set Alias' {
       Mock _getProjects
 

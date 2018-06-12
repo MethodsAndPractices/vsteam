@@ -6,7 +6,7 @@ Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
 InModuleScope profile {
    Describe 'Profile' {
       $expectedPath = "$HOME/vsteam_profiles.json"
-$contents = @"
+      $contents = @"
       [
          {
             "Name": "http://localhost:8080/tfs/defaultcollection",
@@ -56,6 +56,26 @@ $contents = @"
          }
       }
 
+      Context 'Add-VSTeamProfile on Windows no data provided' {
+         Mock Set-Content { }
+         Mock Write-Error { }
+         Mock Get-VSTeamProfile { }
+         Mock _isOnWindows { return $true }
+         Mock _convertSecureStringTo_PlainText { return '' }
+
+         $emptySecureString = ConvertTo-SecureString 'does not matter because mock is going to return empty string' -AsPlainText -Force
+
+         Add-VSTeamProfile -Account testing -SecurePersonalAccessToken $emptySecureString
+
+         It 'Should save profile to disk' {
+            Assert-MockCalled Set-Content -Exactly -Scope Context -Times 0
+            Assert-MockCalled Write-Error -Exactly -Scope Context -Times 1 `
+               -ParameterFilter { 
+               $Message -eq 'Personal Access Token must be provided if you are not using Windows Authentication; please see the help.'
+            }
+         }
+      }
+
       Context 'Add-VSTeamProfile with PAT to empty file' {
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
@@ -86,6 +106,19 @@ $contents = @"
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version TFS2018
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Add-VSTeamProfile TFS default to TFS2017 with Windows Auth' {
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OnPremise*" -and $Value -like "*http://localhost:8080/tfs/defaultcollection*" -and $Value -like "*TFS2017*" }
+         Mock Set-Content { }
+         Mock _isOnWindows { return $true }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+
+         Add-VSTeamProfile -Account http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
 
          It 'Should save profile to disk' {
             Assert-VerifiableMock

@@ -495,6 +495,19 @@ function _buildDynamicSwitchParam {
    return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [switch], $AttributeCollection)
 }
 
+function _convertSecureStringTo_PlainText {
+   [CmdletBinding()]
+   param(
+      [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Secure String')]
+      [securestring] $SecureString
+   )
+
+   # Convert the securestring to a normal string
+   # this was the one technique that worked on Mac, Linux and Windows
+   $credential = New-Object System.Management.Automation.PSCredential 'unknown', $SecureString
+   return $credential.GetNetworkCredential().Password
+}
+
 # This is the main function for calling TFS and VSTS. It handels the auth and format of the route. 
 # If you need to call TFS or VSTS this is the function to use. 
 function _callAPI {

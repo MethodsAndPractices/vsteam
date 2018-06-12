@@ -149,13 +149,22 @@ InModuleScope projects {
          }
       }
 
-      Context 'Update-VSTeamProject with no op' {
+      Context 'Get-VSTeamProject with no parameters throws' {
+
+         Mock Invoke-RestMethod { throw 'error' }
+
+         It 'Should return projects' {
+            { Get-VSTeamProject } | Should Throw
+         }
+      }
+
+      Context 'Update-VSTeamProject with no op by id' {
          Mock Invoke-RestMethod { return @{id = '123-5464-dee43'} } 
 
-         It 'Should call Invoke-RestMethod only once' {
-            Update-VSTeamProject -ProjectName Test
+         It 'Should not call Invoke-RestMethod' {
+            Update-VSTeamProject -id '123-5464-dee43'
 
-            Assert-MockCalled Invoke-RestMethod -Exactly 1
+            Assert-MockCalled Invoke-RestMethod -Exactly 0
          }
       }
 
@@ -298,7 +307,6 @@ InModuleScope projects {
          It 'Should throw' { { Add-VSTeamProject -projectName Test -processTemplate CMMI } | Should throw
          }
       }
-
       
       Context 'Set-VSTeamDefaultProject' {
          It 'should set default project' {
@@ -339,7 +347,35 @@ InModuleScope projects {
          }
       }
 
-      Context 'Clear-VSTeamDefaultProject' {
+      Context 'Clear-VSTeamDefaultProject on Non Windows' {
+         Mock _isOnWindows { return $false } -Verifiable
+
+         It 'should clear default project' {
+            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+
+            Clear-VSTeamDefaultProject
+
+            $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
+         }
+      }
+
+      Context 'Clear-VSTeamDefaultProject as Non-Admin on Windows' {
+         Mock _isOnWindows { return $true }
+         Mock _testAdministrator { return $false }
+
+         It 'should clear default project' {
+            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+
+            Clear-VSTeamDefaultProject
+
+            $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
+         }
+      }
+
+      Context 'Clear-VSTeamDefaultProject as Admin on Windows' {
+         Mock _isOnWindows { return $true }
+         Mock _testAdministrator { return $true } -Verifiable
+
          It 'should clear default project' {
             $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 

@@ -208,12 +208,7 @@ function Update-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Return the project now that it has been updated
-         if ($Id) {
-            return Get-VSTeamProject -Id $finalName
-         }
-         else {
-            return Get-VSTeamProject $finalName         
-         }
+         return Get-VSTeamProject -Id $finalName
       }
    }
 }
