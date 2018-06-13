@@ -3,12 +3,12 @@ Set-StrictMode -Version Latest
 Get-Module VSTeam | Remove-Module -Force
 # Required for the dynamic parameter
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\ReleaseDefinitions.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\releaseDefinitions.psm1 -Force
 
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
 
-InModuleScope ReleaseDefinitions {
+InModuleScope releaseDefinitions {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
    $VSTeamVersionTable.Release = '1.0-unittest'
 
