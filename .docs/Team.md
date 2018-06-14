@@ -192,3 +192,6 @@ Provides access to your Visual Studio Team Services (VSTS) and Team Foundation S
 
 ### [Update-VSTeamProject](Update-VSTeamProject.md)
 #include "./synopsis/Update-VSTeamProject.md"
+
+### [Get-VSTeamServiceEndpointType](Get-VSTeamServiceEndpointType.md)
+#include "./synopsis/Get-VSTeamServiceEndpointType.md"

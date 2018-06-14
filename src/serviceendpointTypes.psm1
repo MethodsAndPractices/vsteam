@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyServiceEndpointTypeTypes {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.ServiceEndpointType')
@@ -34,16 +34,49 @@ function _applyTypes {
 
 function Get-VSTeamServiceEndpointType {
    [CmdletBinding()]
-   param()
+   param(
+      [Parameter(ParameterSetName = 'ByType')]
+      [string] $Type,
+
+      [Parameter(ParameterSetName = 'ByType')]
+      [string] $Scheme
+   )
 
    Process {
-      # Call the REST API
-      $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointtypes'  `
-         -Version $VSTeamVersionTable.DistributedTask
+
+      if ($Type -ne '' -or $Scheme -ne '') {
+
+         if ($Type -ne '' -and $Scheme -ne '') {
+            $body = @{
+               type   = $Type
+               scheme = $Scheme
+            }
+         }
+         elseif ($Type -ne '') {
+            $body = @{
+               type = $Type
+            }
+         }
+         else {
+            $body = @{
+               scheme = $Scheme
+            }
+         }
+
+         # Call the REST API
+         $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointtypes'  `
+            -Version $VSTeamVersionTable.DistributedTask -body $body
+      }
+      else {
+         # Call the REST API
+         $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointtypes'  `
+            -Version $VSTeamVersionTable.DistributedTask
+      }
+      
       
       # Apply a Type Name so we can use custom format view and custom type extensions
       foreach ($item in $resp.value) {
-         _applyTypes -item $item
+         _applyServiceEndpointTypeTypes -item $item
       }
 
       return $resp.value
