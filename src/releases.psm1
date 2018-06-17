@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToRelease {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Release')
@@ -74,7 +74,7 @@ function Get-VSTeamRelease {
             $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $VSTeamVersionTable.Release
             
             # Apply a Type Name so we can use custom format view and custom type extensions
-            _applyTypes -item $resp
+            _applyTypesToRelease -item $resp
 
             Write-Output $resp
          }
@@ -104,7 +104,7 @@ function Get-VSTeamRelease {
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToRelease -item $item
          }
 
          Write-Output $resp.value
@@ -234,7 +234,7 @@ function Add-VSTeamRelease {
             $resp = _callAPI -SubDomain 'vsrm' -ProjectName $ProjectName -Area 'release' -Resource 'releases' `
                -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Release
 
-            _applyTypes $resp
+            _applyTypesToRelease $resp
 
             Write-Output $resp
          }

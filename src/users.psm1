@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToUser {
     param(
         [Parameter(Mandatory = $true)]
         $item
@@ -50,7 +50,7 @@ function Get-VSTeamUser {
                 # Call the REST API
                 $resp = _callAPI -SubDomain 'vsaex' -Version $VSTeamVersionTable.MemberEntitlementManagement -Resource 'userentitlements' -id $item
             
-                _applyTypes -item $resp
+                _applyTypesToUser -item $resp
 
                 Write-Output $resp
             }
@@ -70,7 +70,7 @@ function Get-VSTeamUser {
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
-                _applyTypes -item $item
+                _applyTypesToUser -item $item
             }
 
             Write-Output $resp.value

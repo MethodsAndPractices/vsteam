@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToWorkItem {
    param($item)
 
    # If there are ids in the list that don't map to a work item and empty
@@ -60,7 +60,7 @@ function Add-VSTeamWorkItem {
          -Version $VSTeamVersionTable.Core -id $WorkItemType -Method Post `
          -ContentType 'application/json-patch+json' -Body $body
 
-      _applyTypes -item $resp
+      _applyTypesToWorkItem -item $resp
 
       return $resp
    }
@@ -125,7 +125,7 @@ function Get-VSTeamWorkItem {
          }
 
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToWorkItem -item $item
          }
       }
       else {
@@ -137,7 +137,7 @@ function Get-VSTeamWorkItem {
             fields      = ($Fields -join ',')
          }
 
-         _applyTypes -item $resp
+         _applyTypesToWorkItem -item $resp
       }
 
       return $resp

@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToProject {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Project')
@@ -91,7 +91,7 @@ function Get-VSTeamProject {
             -QueryString $queryString
          
          # Apply a Type Name so we can use custom format view and custom type extensions
-         _applyTypes -item $resp
+         _applyTypesToProject -item $resp
 
          Write-Output $resp
       }
@@ -108,7 +108,7 @@ function Get-VSTeamProject {
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
-               _applyTypes -item $item
+               _applyTypesToProject -item $item
             }
 
             Write-Output $resp.value

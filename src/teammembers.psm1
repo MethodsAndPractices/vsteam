@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToTeamMember {
    param(
       [Parameter(Mandatory = $true)]
       $item,
@@ -50,7 +50,7 @@ function Get-VSTeamMember {
 
       # Apply a Type Name so we can use custom format view and custom type extensions
       foreach ($item in $resp.value) {
-         _applyTypes -item $item -team $TeamId -ProjectName $ProjectName
+         _applyTypesToTeamMember -item $item -team $TeamId -ProjectName $ProjectName
       }
 
       Write-Output $resp.value

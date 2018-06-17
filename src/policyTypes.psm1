@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyPolicyTypeTypes {
+function _applyTypesToPolicyType {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.PolicyType')
@@ -32,7 +32,7 @@ function Get-VSTeamPolicyType {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource types -Version $VSTeamVersionTable.Git
                
-               _applyPolicyTypeTypes -item $resp
+               _applyTypesToPolicyType -item $resp
                
                Write-Output $resp 
             }
@@ -47,7 +47,7 @@ function Get-VSTeamPolicyType {
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
-               _applyPolicyTypeTypes -item $item
+               _applyTypesToPolicyType -item $item
             }
 
             Write-Output $resp.value

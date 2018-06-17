@@ -11,7 +11,7 @@ $status = $null
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToServiceEndpoint {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.ServiceEndpoint')
@@ -388,7 +388,7 @@ function Get-VSTeamServiceEndpoint {
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
             -Version $VSTeamVersionTable.DistributedTask -ProjectName $ProjectName
          
-         _applyTypes -item $resp
+         _applyTypesToServiceEndpoint -item $resp
 
          Write-Output $resp
       }
@@ -399,7 +399,7 @@ function Get-VSTeamServiceEndpoint {
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToServiceEndpoint -item $item
          }
 
          return $resp.value

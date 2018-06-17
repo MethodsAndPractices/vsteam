@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypesToPools {
+function _applyTypesToPool {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Pool')
@@ -36,7 +36,7 @@ function Get-VSTeamPool {
       if ($id) {
          $resp = _callAPI -Area distributedtask -Resource pools -Id $id -Version $VSTeamVersionTable.DistributedTask
          
-         _applyTypesToPools -item $resp
+         _applyTypesToPool -item $resp
 
          Write-Output $resp
       }
@@ -45,7 +45,7 @@ function Get-VSTeamPool {
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypesToPools -item $item
+            _applyTypesToPool -item $item
          }
 
          # Call the REST API

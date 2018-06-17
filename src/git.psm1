@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToGitRepository {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.GitRepository')
@@ -89,7 +89,7 @@ function Get-VSTeamGitRepository {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
                
-               _applyTypes -item $resp
+               _applyTypesToGitRepository -item $resp
                
                Write-Output $resp   
             }
@@ -103,7 +103,7 @@ function Get-VSTeamGitRepository {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
 
-               _applyTypes -item $resp
+               _applyTypesToGitRepository -item $resp
 
                Write-Output $resp
             }
@@ -118,7 +118,7 @@ function Get-VSTeamGitRepository {
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
-               _applyTypes -item $item
+               _applyTypesToGitRepository -item $item
             }
 
             Write-Output $resp.value

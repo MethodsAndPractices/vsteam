@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToAzureSubscription {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.AzureSubscription')
@@ -22,7 +22,7 @@ function Get-VSTeamCloudSubscription {
 
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
-      _applyTypes -item $item
+      _applyTypesToAzureSubscription -item $item
    }
 
    Write-Output $resp.value

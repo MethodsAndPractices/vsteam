@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesWorkItemType {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.WorkItemType')
@@ -53,7 +53,7 @@ function Get-VSTeamWorkItemType {
          # To replace all the "": with "_end":
          $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
 
-         _applyTypes -item $resp
+         _applyTypesWorkItemType -item $resp
 
          return $resp
       }
@@ -67,7 +67,7 @@ function Get-VSTeamWorkItemType {
       
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesWorkItemType -item $item
          }
 
          return $resp.value

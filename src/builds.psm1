@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToBuild {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.Build')
@@ -93,7 +93,7 @@ function Get-VSTeamBuild {
             $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' -id $item `
                -Version $VSTeamVersionTable.Build
             
-            _applyTypes -item $resp
+            _applyTypesToBuild -item $resp
 
             Write-Output $resp
          }
@@ -117,7 +117,7 @@ function Get-VSTeamBuild {
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToBuild -item $item
          }
 
          Write-Output $resp.value
@@ -277,7 +277,7 @@ function Add-VSTeamBuild {
          -Method Post -ContentType 'application/json' -Body ($body | ConvertTo-Json) `
          -Version $VSTeamVersionTable.Build
       
-      _applyTypes -item $resp
+      _applyTypesToBuild -item $resp
 
       return $resp
    }

@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToTeam {
    param(
       [Parameter(Mandatory = $true)]
       $item,
@@ -55,7 +55,7 @@ function Get-VSTeam {
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
                -Version $VSTeamVersionTable.Core
             
-            _applyTypes -item $resp -ProjectName $ProjectName
+            _applyTypesToTeam -item $resp -ProjectName $ProjectName
 
             Write-Output $resp
          }
@@ -66,7 +66,7 @@ function Get-VSTeam {
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
                -Version $VSTeamVersionTable.Core
 
-            _applyTypes -item $resp -ProjectName $ProjectName
+            _applyTypesToTeam -item $resp -ProjectName $ProjectName
 
             Write-Output $resp
          }
@@ -82,7 +82,7 @@ function Get-VSTeam {
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item -ProjectName $ProjectName
+            _applyTypesToTeam -item $item -ProjectName $ProjectName
          }
 
          Write-Output $resp.value
@@ -112,7 +112,7 @@ function Add-VSTeam {
       $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
          -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
 
-      _applyTypes -item $resp -ProjectName $ProjectName
+      _applyTypesToTeam -item $resp -ProjectName $ProjectName
 
       return $resp
    }
@@ -155,7 +155,7 @@ function Update-VSTeam {
          $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Name `
             -Method Patch -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
          
-         _applyTypes -item $resp -ProjectName $ProjectName
+         _applyTypesToTeam -item $resp -ProjectName $ProjectName
 
          return $resp
       }

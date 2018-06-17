@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToTfvcBranch {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.TfvcBranch')
@@ -32,13 +32,13 @@ function Get-VSTeamTfvcRootBranch {
 
       if ($resp | Get-Member -Name value -MemberType Properties) {
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToTfvcBranch -item $item
          }
 
          Write-Output $resp.value
       }
       else {
-         _applyTypes -item $resp
+         _applyTypesToTfvcBranch -item $resp
          
          Write-Output $resp
       }
@@ -71,7 +71,7 @@ function Get-VSTeamTfvcBranch {
 
          $resp = _callAPI -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
 
-         _applyTypes -item $resp
+         _applyTypesToTfvcBranch -item $resp
             
          Write-Output $resp
       }

@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToBuildDefinition {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.BuildDefinition')
@@ -66,7 +66,7 @@ function Get-VSTeamBuildDefinition {
             $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $VSTeamVersionTable.Build `
                -QueryString @{revision = $revision}
             
-            _applyTypes -item $resp
+            _applyTypesToBuildDefinition -item $resp
 
             Write-Output $resp
          }
@@ -77,7 +77,7 @@ function Get-VSTeamBuildDefinition {
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-            _applyTypes -item $item
+            _applyTypesToBuildDefinition -item $item
          }
 
          Write-Output $resp.value

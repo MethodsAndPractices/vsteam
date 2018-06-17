@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyServiceEndpointTypeTypes {
+function _applyTypesToServiceEndpointType {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'Team.ServiceEndpointType')
@@ -76,7 +76,7 @@ function Get-VSTeamServiceEndpointType {
       
       # Apply a Type Name so we can use custom format view and custom type extensions
       foreach ($item in $resp.value) {
-         _applyServiceEndpointTypeTypes -item $item
+         _applyTypesToServiceEndpointType -item $item
       }
 
       return $resp.value
