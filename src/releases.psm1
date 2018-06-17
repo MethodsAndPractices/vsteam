@@ -222,7 +222,7 @@ function Add-VSTeamRelease {
          $artifactAlias = $def.artifacts[0].alias
       }
 
-      $body = '{"definitionId": ' + $DefinitionId + ', "description": "' + $description + '", "artifacts": [{"alias": "' + $artifactAlias + '", "instanceReference": {"id": "' + $buildId + '", "name": "' + $Name + '", "sourceBranch":"' + $SourceBranch + '"}}]}'
+      $body = '{"definitionId": ' + $DefinitionId + ', "description": "' + $description + '", "artifacts": [{"alias": "' + $artifactAlias + '", "instanceReference": {"id": "' + $buildId + '", "name": "' + $Name + '", "sourceBranch": "' + $SourceBranch + '"}}]}'
 
       Write-Verbose $body
 
