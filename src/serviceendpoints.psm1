@@ -128,7 +128,7 @@ function Add-VSTeamSonarQubeEndpoint {
       }
       
       # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
+      $ProjectName = $PSBoundParameters['ProjectName']
 
       $obj = @{
          authorization = @{
@@ -150,11 +150,14 @@ function Add-VSTeamSonarQubeEndpoint {
             -object $obj
       }
       catch [System.Net.WebException] {
-         if ($_.Exception.status -eq "ProtocolError") {
+         if ($_.Exception.status -eq 'ProtocolError') {
             $errorDetails = ConvertFrom-Json $_.ErrorDetails
-            [string] $message = $errorDetails.message
-            if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'")) {
-               Write-Error -Message "The Sonarqube extension not installed. Please install from https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube"
+            $message = $errorDetails.message
+
+            # The error message is different on TFS and VSTS
+            if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'") -or
+                $message.StartsWith("Unable to find service endpoint type 'sonarqube'")) {
+               Write-Error -Message 'The Sonarqube extension not installed. Please install from https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube'
                return
             }
          }
