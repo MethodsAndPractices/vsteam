@@ -12,6 +12,30 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 3.0.0
+
+There is a breaking change with calls to Add-VSTeamKubernetesEndpoint. The acceptUntrustedCerts and generatePfx parameters have been changed from boolean to switch. So any calls that contained:
+
+```powershell
+-acceptUntrustedCerts $true -generatePfx $true
+```
+
+can be replaced with:
+
+```powershell
+-acceptUntrustedCerts -generatePfx
+```
+
+There is no need to pass $true.  For calls where you passed $false simply remove the parameter from the call.
+
+This release also contains functions to add a work item and query the work item types. You can not edit the work items yet.
+
+```powershell
+Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test
+```
+
+Additional change in this release include more until test which resulted in much higher code coverage.
+
 ### 2.1.14
 
 - Started adding support for work items.

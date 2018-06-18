@@ -28,9 +28,14 @@ function _applyTypesToServiceEndpoint {
 
 function _trackProgress {
    param(
-      [Parameter(Mandatory = $true)] [string] $projectName,
-      [Parameter(Mandatory = $true)] $resp,
+      [Parameter(Mandatory = $true)]
+      [string] $projectName,
+
+      [Parameter(Mandatory = $true)]
+      $resp,
+      
       [string] $title,
+     
       [string] $msg
    )
 
@@ -71,44 +76,18 @@ function _supportsServiceFabricEndpoint {
    } 
 }
 
-function Remove-VSTeamServiceEndpoint {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
-   param(
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string[]] $id,
-
-      [switch] $Force
-   )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      foreach ($item in $id) {
-         if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Service Endpoint")) {
-            # Call the REST API
-            _callAPI -projectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $item  `
-               -Method Delete -Version $VSTeamVersionTable.DistributedTask | Out-Null
-
-            Write-Output "Deleted service endpoint $item"
-         }
-      }
-   }
-}
-
 function Add-VSTeamSonarQubeEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $endpointName,
+    
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $sonarqubeUrl,
+    
       [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
       [string] $personalAccessToken,
+    
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $securePersonalAccessToken
    )
@@ -156,7 +135,7 @@ function Add-VSTeamSonarQubeEndpoint {
 
             # The error message is different on TFS and VSTS
             if ($message.StartsWith("Endpoint type couldn't be recognized 'sonarqube'") -or
-                $message.StartsWith("Unable to find service endpoint type 'sonarqube'")) {
+               $message.StartsWith("Unable to find service endpoint type 'sonarqube'")) {
                Write-Error -Message 'The Sonarqube extension not installed. Please install from https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarqube'
                return
             }
@@ -172,16 +151,19 @@ function Add-VSTeamAzureRMServiceEndpoint {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]
       [string] $subscriptionName,
-      [Parameter(ParameterSetName = 'Automatic', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [parameter(ParameterSetName = 'Manual', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+    
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $subscriptionId,
-      [Parameter(ParameterSetName = 'Automatic', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [parameter(ParameterSetName = 'Manual', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+    
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $subscriptionTenantId,
+    
       [Parameter(ParameterSetName = 'Manual', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $servicePrincipalId,
+      
       [Parameter(ParameterSetName = 'Manual', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $servicePrincipalKey,
+      
       [string] $endpointName
    )
 
@@ -230,23 +212,26 @@ function Add-VSTeamAzureRMServiceEndpoint {
 }
 
 function Add-VSTeamKubernetesEndpoint {
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $endpointName,
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $kubeconfig,
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $kubernetesUrl,
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $clientCertificateData,
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $clientKeyData,
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [bool] $acceptUntrustedCerts,
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [bool] $generatePfx
 
+      [switch] $acceptUntrustedCerts,
+
+      [switch] $generatePfx
    )
 
    DynamicParam {
@@ -257,18 +242,29 @@ function Add-VSTeamKubernetesEndpoint {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
+      # Process switch parameters
+      $untrustedCerts = $false
+      if($acceptUntrustedCerts.IsPresent){
+         $untrustedCerts = $true
+      }
+
+      $pfx = $false
+      if($generatePfx.IsPresent) {
+         $pfx = $true
+      }
+
       $obj = @{
          authorization = @{
             parameters = @{
                clientCertificateData = $clientCertificateData
                clientKeyData         = $clientKeyData
-               generatePfx           = $generatePfx
+               generatePfx           = $pfx
                kubeconfig            = $Kubeconfig
             };
             scheme     = 'None'
          };
          data          = @{
-            acceptUntrustedCerts = $acceptUntrustedCerts
+            acceptUntrustedCerts = $untrustedCerts
          };
          url           = $kubernetesUrl
       }
@@ -287,21 +283,29 @@ function Add-VSTeamServiceFabricEndpoint {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]
       [string] $endpointName,
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $url,
+
       [parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $certificate,
+      
       [Parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [securestring] $certificatePassword,
+      
       [parameter(ParameterSetName = 'Certificate', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]      
       [string] $serverCertThumbprint,
+      
       [Parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $username,
+      
       [Parameter(ParameterSetName = 'AzureAd', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [securestring] $password,
+      
       [Parameter(ParameterSetName = 'None', Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
       [string] $clusterSpn,
+      
       [Parameter(ParameterSetName = 'None', Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
       [bool] $useWindowsSecurity
    )
@@ -311,7 +315,6 @@ function Add-VSTeamServiceFabricEndpoint {
    }
 
    Process {
-
       # This will throw if this account does not support ServiceFabricEndpoint
       _supportsServiceFabricEndpoint
 
@@ -371,6 +374,47 @@ function Add-VSTeamServiceFabricEndpoint {
    }
 }
 
+function Add-VSTeamServiceEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointName,
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $endpointType,
+      
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [hashtable] $object
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $object['name'] = $endpointName
+      $object['type'] = $endpointType
+
+      $body = $object | ConvertTo-Json
+
+      try {    
+         # Call the REST API
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
+            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      }
+      catch [System.Net.WebException] {
+         throw
+      }
+
+      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+
+      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
+   }
+}
+
 function Get-VSTeamServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
@@ -410,50 +454,12 @@ function Get-VSTeamServiceEndpoint {
    }
 }
 
-function Add-VSTeamServiceEndpoint {
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]
-   param(
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $endpointName,
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $endpointType,
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [hashtable] $object
-   )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      $object['name'] = $endpointName
-      $object['type'] = $endpointType
-
-      $body = $object | ConvertTo-Json
-
-      try {    
-         # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
-      }
-      catch [System.Net.WebException] {
-         throw
-      }
-
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
-
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
-   }
-}
-
 function Update-VSTeamServiceEndpoint {
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $id,
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [hashtable] $object
    )
@@ -483,20 +489,48 @@ function Update-VSTeamServiceEndpoint {
    }
 }
 
+function Remove-VSTeamServiceEndpoint {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string[]] $id,
+
+      [switch] $Force
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      foreach ($item in $id) {
+         if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Service Endpoint")) {
+            # Call the REST API
+            _callAPI -projectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $item  `
+               -Method Delete -Version $VSTeamVersionTable.DistributedTask | Out-Null
+
+            Write-Output "Deleted service endpoint $item"
+         }
+      }
+   }
+}
 
 Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
-Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
-Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Add-SonarQubeEndpoint Add-VSTeamSonarQubeEndpoint
-Set-Alias Add-ServiceFabricEndpoint Add-VSTeamServiceFabricEndpoint
 Set-Alias Add-KubernetesEndpoint Add-VSTeamKubernetesEndpoint
+Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Add-ServiceFabricEndpoint Add-VSTeamServiceFabricEndpoint
+Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
 
-Set-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
-Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
-Set-Alias Remove-VSTeamServiceFabricEndpoint Remove-VSTeamServiceEndpoint
-Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-ServiceFabricEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-VSTeamServiceFabricEndpoint Remove-VSTeamServiceEndpoint
+Set-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 
 Set-Alias Add-ServiceEndpoint Add-VSTeamServiceEndpoint
 Set-Alias Update-ServiceEndpoint Update-VSTeamServiceEndpoint

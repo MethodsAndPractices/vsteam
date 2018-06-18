@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '2.1.14'
+   ModuleVersion     = '3.0.0'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -52,7 +52,7 @@
    # ProcessorArchitecture = ''
 
    # Modules that must be imported into the global environment prior to importing this module
-   RequiredModules   = @('ships')
+   RequiredModules   = @('SHiPS')
 
    # Assemblies that must be loaded prior to importing this module
    # RequiredAssemblies = @()

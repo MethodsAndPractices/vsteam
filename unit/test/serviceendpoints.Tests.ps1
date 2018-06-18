@@ -7,7 +7,6 @@ Import-Module $PSScriptRoot\..\..\src\serviceendpoints.psm1 -Force
 InModuleScope serviceendpoints {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
-
    Describe 'ServiceEndpoints TFS2017 Errors' {
       
       Context 'Add-VSTeamServiceFabricEndpoint' {  
@@ -23,7 +22,7 @@ InModuleScope serviceendpoints {
       }
    }
 
-   Describe 'ServiceEndpoints' {
+   Describe 'ServiceEndpoints TFS' {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamServiceEndpoint' {
@@ -123,33 +122,6 @@ InModuleScope serviceendpoints {
          }
       }
 
-      Context 'Add-VSTeamSonarQubeEndpoint throws on VSTS' {
-         Mock Write-Error -Verifiable
-         Mock Invoke-RestMethod {
-            $e = [System.Management.Automation.ErrorRecord]::new(
-               [System.Net.WebException]::new("Endpoint type couldn't be recognized 'sonarqube'", [System.Net.WebExceptionStatus]::ProtocolError),
-               "Endpoint type couldn't be recognized 'sonarqube'",
-               [System.Management.Automation.ErrorCategory]::ProtocolError,
-               $null)
-            
-            # The error message is different on TFS and VSTS
-            $msg = ConvertTo-Json @{
-               '$id'   = 1
-               message = "Unable to find service endpoint type 'sonarqube' using authentication scheme 'UsernamePassword'."
-            }
-
-            $e.ErrorDetails = [System.Management.Automation.ErrorDetails]::new($msg)
-
-            $PSCmdlet.ThrowTerminatingError($e)
-         }
-         
-         It 'should create a new SonarQube Serviceendpoint' {
-            Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -personalAccessToken '00000000-0000-0000-0000-000000000000'
-
-            Assert-VerifiableMock
-         }
-      }
-
       Context 'Add-VSTeamSonarQubeEndpoint throws on TFS' {
          Mock Write-Error -Verifiable
          Mock Invoke-RestMethod {
@@ -239,7 +211,7 @@ InModuleScope serviceendpoints {
             {
                Add-VSTeamAzureRMServiceEndpoint -projectName 'project' `
                   -displayName 'PM_DonovanBrown' -subscriptionId '00000000-0000-0000-0000-000000000000' `
-                  -subscriptionTenantId '00000000-0000-0000-0000-000000000000'
+                  -subscriptionTenantId '00000000-0000-0000-0000-000000000000' -servicePrincipalKey '00000000-0000-0000-0000-000000000000' -servicePrincipalId '00000000-0000-0000-0000-000000000000'
             } | Should Throw
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
@@ -279,6 +251,33 @@ InModuleScope serviceendpoints {
             Add-VSTeamServiceFabricEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -url "tcp://0.0.0.0:19000" -useWindowsSecurity $false
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
+         }
+      }
+
+      Context 'Add-VSTeamSonarQubeEndpoint throws on VSTS' {
+         Mock Write-Error -Verifiable
+         Mock Invoke-RestMethod {
+            $e = [System.Management.Automation.ErrorRecord]::new(
+               [System.Net.WebException]::new("Endpoint type couldn't be recognized 'sonarqube'", [System.Net.WebExceptionStatus]::ProtocolError),
+               "Endpoint type couldn't be recognized 'sonarqube'",
+               [System.Management.Automation.ErrorCategory]::ProtocolError,
+               $null)
+            
+            # The error message is different on TFS and VSTS
+            $msg = ConvertTo-Json @{
+               '$id'   = 1
+               message = "Unable to find service endpoint type 'sonarqube' using authentication scheme 'UsernamePassword'."
+            }
+
+            $e.ErrorDetails = [System.Management.Automation.ErrorDetails]::new($msg)
+
+            $PSCmdlet.ThrowTerminatingError($e)
+         }
+         
+         It 'should create a new SonarQube Serviceendpoint' {
+            Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -personalAccessToken '00000000-0000-0000-0000-000000000000'
+
+            Assert-VerifiableMock
          }
       }
 
@@ -345,6 +344,83 @@ InModuleScope serviceendpoints {
             Add-VSTeamServiceFabricEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -url "tcp://0.0.0.0:19000" -serverCertThumbprint $serverCertThumbprint -certificate $base64Cert -certificatePassword $password
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
+         }
+      }
+
+      Context 'Add-VSTeamKubernetesEndpoint not accepting untrusted certs and not generating a pfx' {
+         Mock Write-Progress
+         Mock Invoke-RestMethod { 
+            return @{id = '23233-2342'}
+         } -ParameterFilter { $Method -eq 'Post'}
+
+         Mock Invoke-RestMethod {
+
+            # This $i is in the module. Because we use InModuleScope
+            # we can see it
+            if ($i -gt 9) {
+               return @{
+                  isReady         = $true
+                  operationStatus = @{state = 'Ready'}
+               }
+            }
+
+            return @{
+               isReady         = $false
+               createdBy       = @{}
+               authorization   = @{}
+               data            = @{}
+               operationStatus = @{state = 'InProgress'}
+            }
+         }
+
+         It 'should create a new Kubernetes Serviceendpoint' {
+            Add-VSTeamKubernetesEndpoint -projectName 'project' -endpointName 'KubTest' `
+               -kubernetesUrl 'http://myK8s.local' -clientKeyData '00000000-0000-0000-0000-000000000000' `
+               -kubeconfig '{name: "myConfig"}' -clientCertificateData 'someClientCertData'
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Post' -and
+               $Body -like '*"acceptUntrustedCerts":  false*' -and
+               $Body -like '*"generatePfx":  false*'
+            }
+         }
+      }
+
+      Context 'Add-VSTeamKubernetesEndpoint accepting untrusted certs and generating a pfx' {
+         Mock Write-Progress
+         Mock Invoke-RestMethod {
+            return @{id = '23233-2342'}
+         } -ParameterFilter { $Method -eq 'Post'}
+         Mock Invoke-RestMethod {
+
+            # This $i is in the module. Because we use InModuleScope
+            # we can see it
+            if ($i -gt 9) {
+               return @{
+                  isReady         = $true
+                  operationStatus = @{state = 'Ready'}
+               }
+            }
+
+            return @{
+               isReady         = $false
+               createdBy       = @{}
+               authorization   = @{}
+               data            = @{}
+               operationStatus = @{state = 'InProgress'}
+            }
+         }
+
+         It 'should create a new Kubernetes Serviceendpoint' {
+            Add-VSTeamKubernetesEndpoint -projectName 'project' -endpointName 'KubTest' `
+               -kubernetesUrl 'http://myK8s.local' -clientKeyData '00000000-0000-0000-0000-000000000000' `
+               -kubeconfig '{name: "myConfig"}' -clientCertificateData 'someClientCertData' -acceptUntrustedCerts -generatePfx
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Post' -and
+               $Body -like '*"acceptUntrustedCerts":  true*' -and
+               $Body -like '*"generatePfx":  true*'
+            }
          }
       }
    }
