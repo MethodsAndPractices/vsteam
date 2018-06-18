@@ -7,13 +7,15 @@ Import-Module $PSScriptRoot\..\..\src\serviceendpoints.psm1 -Force
 InModuleScope serviceendpoints {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
-   Describe 'ServiceEndpoints TFS2017 Errors' {
+   Describe 'ServiceEndpoints TFS2017 throws' {
       
       Context 'Add-VSTeamServiceFabricEndpoint' {  
          Mock ConvertTo-Json { throw 'Should not be called' } -Verifiable
          
          It 'Should throw' {
-            { Add-VSTeamServiceFabricEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -url "tcp://0.0.0.0:19000" -useWindowsSecurity $false } | Should Throw
+            { Add-VSTeamServiceFabricEndpoint -projectName 'project' `
+                  -endpointName 'PM_DonovanBrown' -url "tcp://0.0.0.0:19000" `
+                  -useWindowsSecurity $false } | Should Throw
          }
          
          It 'ConvertTo-Json should not be called' {
@@ -28,12 +30,12 @@ InModuleScope serviceendpoints {
       Context 'Get-VSTeamServiceEndpoint' {
          Mock Write-Verbose
          Mock Invoke-RestMethod {
-            return @{
-               value = @{
-                  createdBy       = @{}
-                  authorization   = @{}
-                  data            = @{}
-                  operationStatus = @{
+            return [PSCustomObject]@{
+               value = [PSCustomObject]@{
+                  createdBy       = [PSCustomObject]@{}
+                  authorization   = [PSCustomObject]@{}
+                  data            = [PSCustomObject]@{}
+                  operationStatus = [PSCustomObject]@{
                      state         = 'Failed'
                      statusMessage = 'Bad things!'
                   }
@@ -70,18 +72,18 @@ InModuleScope serviceendpoints {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {
-               return @{
+               return [PSCustomObject]@{
                   isReady         = $true
-                  operationStatus = @{state = 'Ready'}
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
                }
             }
 
-            return @{
+            return [PSCustomObject]@{
                isReady         = $false
-               createdBy       = @{}
-               authorization   = @{}
-               data            = @{}
-               operationStatus = @{state = 'InProgress'}
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
             }
          }
 
@@ -100,18 +102,18 @@ InModuleScope serviceendpoints {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {
-               return @{
+               return [PSCustomObject]@{
                   isReady         = $true
-                  operationStatus = @{state = 'Ready'}
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
                }
             }
 
-            return @{
+            return [PSCustomObject]@{
                isReady         = $false
-               createdBy       = @{}
-               authorization   = @{}
-               data            = @{}
-               operationStatus = @{state = 'InProgress'}
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
             }
          }
 
@@ -143,7 +145,9 @@ InModuleScope serviceendpoints {
          }
          
          It 'should create a new SonarQube Serviceendpoint' {
-            Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -personalAccessToken '00000000-0000-0000-0000-000000000000'
+            Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' `
+               -sonarqubeUrl 'http://mysonarserver.local' `
+               -personalAccessToken '00000000-0000-0000-0000-000000000000'
 
             Assert-VerifiableMock
          }
@@ -189,21 +193,21 @@ InModuleScope serviceendpoints {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {
-               return @{
+               return [PSCustomObject]@{
                   isReady         = $false
-                  operationStatus = @{
+                  operationStatus = [PSCustomObject]@{
                      state         = 'Failed'
                      statusMessage = 'Simulated failed request'
                   }
                }
             }
 
-            return @{
+            return [PSCustomObject]@{
                isReady         = $false
-               createdBy       = @{}
-               authorization   = @{}
-               data            = @{}
-               operationStatus = @{state = 'InProgress'}
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
             }
          }
 
@@ -232,18 +236,18 @@ InModuleScope serviceendpoints {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {
-               return @{
+               return [PSCustomObject]@{
                   isReady         = $true
-                  operationStatus = @{state = 'Ready'}
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
                }
             }
 
-            return @{
+            return [PSCustomObject]@{
                isReady         = $false
-               createdBy       = @{}
-               authorization   = @{}
-               data            = @{}
-               operationStatus = @{state = 'InProgress'}
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
             }
          }
 
@@ -358,18 +362,18 @@ InModuleScope serviceendpoints {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {
-               return @{
+               return [PSCustomObject]@{
                   isReady         = $true
-                  operationStatus = @{state = 'Ready'}
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
                }
             }
 
-            return @{
+            return [PSCustomObject]@{
                isReady         = $false
-               createdBy       = @{}
-               authorization   = @{}
-               data            = @{}
-               operationStatus = @{state = 'InProgress'}
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
             }
          }
 
@@ -396,18 +400,18 @@ InModuleScope serviceendpoints {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {
-               return @{
+               return [PSCustomObject]@{
                   isReady         = $true
-                  operationStatus = @{state = 'Ready'}
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
                }
             }
 
-            return @{
+            return [PSCustomObject]@{
                isReady         = $false
-               createdBy       = @{}
-               authorization   = @{}
-               data            = @{}
-               operationStatus = @{state = 'InProgress'}
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
             }
          }
 
@@ -420,6 +424,40 @@ InModuleScope serviceendpoints {
                $Method -eq 'Post' -and
                $Body -like '*"acceptUntrustedCerts":  true*' -and
                $Body -like '*"generatePfx":  true*'
+            }
+         }
+      }
+
+      Context 'Update-VSTeamServiceEndpoint' {
+         Mock Write-Progress
+         Mock Invoke-RestMethod { return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Get'}
+         Mock Invoke-RestMethod { return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Put'}
+         Mock Invoke-RestMethod {
+
+            # This $i is in the module. Because we use InModuleScope
+            # we can see it
+            if ($i -gt 9) {
+               return [PSCustomObject]@{
+                  isReady         = $true
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
+               }
+            }
+
+            return [PSCustomObject]@{
+               isReady         = $false
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
+            }
+         }
+
+         It 'should update Serviceendpoint' {
+            Update-VSTeamServiceEndpoint -projectName 'project' -id '23233-2342' `
+               -object @{ key = 'value' }
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Put' 
             }
          }
       }

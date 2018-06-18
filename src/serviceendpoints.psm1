@@ -140,6 +140,7 @@ function Add-VSTeamSonarQubeEndpoint {
                return
             }
          }
+         
          throw
       }
    }
@@ -244,12 +245,12 @@ function Add-VSTeamKubernetesEndpoint {
 
       # Process switch parameters
       $untrustedCerts = $false
-      if($acceptUntrustedCerts.IsPresent){
+      if ($acceptUntrustedCerts.IsPresent) {
          $untrustedCerts = $true
       }
 
       $pfx = $false
-      if($generatePfx.IsPresent) {
+      if ($generatePfx.IsPresent) {
          $pfx = $true
       }
 
@@ -400,15 +401,10 @@ function Add-VSTeamServiceEndpoint {
 
       $body = $object | ConvertTo-Json
 
-      try {    
-         # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-            -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
-      }
-      catch [System.Net.WebException] {
-         throw
-      }
-
+      # Call the REST API
+      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
+         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
       return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
@@ -474,15 +470,10 @@ function Update-VSTeamServiceEndpoint {
 
       $body = $object | ConvertTo-Json
 
-      try {    
-         # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
-            -Method Put -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
-      }
-      catch [System.Net.WebException] {
-         throw
-      }
-
+      # Call the REST API
+      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
+         -Method Put -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      
       _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
 
       return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
