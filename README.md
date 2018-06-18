@@ -34,7 +34,7 @@ This release also contains functions to add a work item and query the work item 
 Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test
 ```
 
-Additional change in this release include more until test which resulted in much higher code coverage.
+Additional change in this release include more unit tests which resulted in much higher code coverage.
 
 ### 2.1.14
 
