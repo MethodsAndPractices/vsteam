@@ -353,7 +353,7 @@ InModuleScope serviceendpoints {
 
       Context 'Add-VSTeamKubernetesEndpoint not accepting untrusted certs and not generating a pfx' {
          Mock Write-Progress
-         Mock Invoke-RestMethod { 
+         Mock Invoke-RestMethod {
             return @{id = '23233-2342'}
          } -ParameterFilter { $Method -eq 'Post'}
 
@@ -382,10 +382,12 @@ InModuleScope serviceendpoints {
                -kubernetesUrl 'http://myK8s.local' -clientKeyData '00000000-0000-0000-0000-000000000000' `
                -kubeconfig '{name: "myConfig"}' -clientCertificateData 'someClientCertData'
 
+            # On PowerShell 5 the JSON has two spaces but on PowerShell 6 it only has one so 
+            # test for both.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
-               $Body -like '*"acceptUntrustedCerts":  false*' -and
-               $Body -like '*"generatePfx":  false*'
+               ($Body -like '*"acceptUntrustedCerts":  false*' -or $Body -like '*"acceptUntrustedCerts": false*') -and
+               ($Body -like '*"generatePfx":  false*' -or $Body -like '*"generatePfx": false*')
             }
          }
       }
@@ -420,10 +422,12 @@ InModuleScope serviceendpoints {
                -kubernetesUrl 'http://myK8s.local' -clientKeyData '00000000-0000-0000-0000-000000000000' `
                -kubeconfig '{name: "myConfig"}' -clientCertificateData 'someClientCertData' -acceptUntrustedCerts -generatePfx
 
+            # On PowerShell 5 the JSON has two spaces but on PowerShell 6 it only has one so 
+            # test for both.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
-               $Body -like '*"acceptUntrustedCerts":  true*' -and
-               $Body -like '*"generatePfx":  true*'
+               ($Body -like '*"acceptUntrustedCerts":  true*' -or $Body -like '*"acceptUntrustedCerts": true*') -and
+               ($Body -like '*"generatePfx":  true*' -or $Body -like '*"generatePfx": true*')
             }
          }
       }
