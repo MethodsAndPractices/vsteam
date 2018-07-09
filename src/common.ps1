@@ -284,6 +284,10 @@ function _useWindowsAuthenticationOnPremise {
    return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($VSTeamVersionTable.Account -like "*visualstudio.com")
 }
 
+function _useBearerToken {
+   return (!$env:TEAM_PAT) -and ($env:TEAM_TOKEN)
+}
+
 function _getWorkItemTypes {
    param(
       [Parameter(Mandatory = $true)]
@@ -554,6 +558,9 @@ function _callAPI {
    
    if (_useWindowsAuthenticationOnPremise) {
       $params.Add('UseDefaultCredentials', $true)
+   }
+   elseif (_useBearerToken) {
+      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN"})
    }
    else {
       $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT"})

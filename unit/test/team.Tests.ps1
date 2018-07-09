@@ -6,6 +6,7 @@ Get-Module profile | Remove-Module -Force
 
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 
 InModuleScope team {
    Describe 'Invoke-VSTeamRequest' {
@@ -44,13 +45,15 @@ InModuleScope team {
             "URL": "http://localhost:8080/tfs/defaultcollection",
             "Pat": "",
             "Type": "OnPremise",
-            "Version": "TFS2017"
+            "Version": "TFS2017",
+            "Token": ""
          },
          {
             "Name": "mydemos",
             "URL": "https://mydemos.visualstudio.com",
             "Pat": "OjEyMzQ1",
             "Type": "Pat",
+            "Token": "",
             "Version": "VSTS"
          },
          {
@@ -58,6 +61,7 @@ InModuleScope team {
             "URL": "https://demonstrations.visualstudio.com",
             "Pat": "dzY2a2x5am13YWtkcXVwYmg0emE=",
             "Type": "Pat",
+            "Token": "",
             "Version": "VSTS"
          }
       ]

@@ -82,13 +82,19 @@ function Add-VSTeamProfile {
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
       [Parameter(ParameterSetName = 'Plain')]
       [string] $Account,
+   
       [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
       [string] $PersonalAccessToken,
+   
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
+   
       [string] $Name,
+   
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
-      [string] $Version
+      [string] $Version,
+
+      [switch] $UseBearerToken
    )
 
    DynamicParam {
@@ -148,14 +154,22 @@ function Add-VSTeamProfile {
          }
       }
 
-      $authType = "Pat"
-      $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
+      if ($UseBearerToken.IsPresent) {
+         $authType = 'Bearer'
+         $token = $_pat
+      }
+      else {
+         $token = ''
+         $authType = 'Pat'
+         $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
+      }
 
       # If no SecurePersonalAccessToken is entered, and on windows, are we using default credentials for REST calls
       if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
-         Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
-         $encodedPat = ""
-         $authType = "OnPremise"
+         Write-Verbose 'Using Default Windows Credentials for authentication; no Personal Access Token required'
+         $encodedPat = ''
+         $token = ''
+         $authType = 'OnPremise'
       }
 
       if (-not $Name) {
@@ -174,6 +188,7 @@ function Add-VSTeamProfile {
          URL     = $Account
          Type    = $authType
          Pat     = $encodedPat
+         Token   = $token
          Version = (_getVSTeamAPIVersion -Instance $Account -Version $Version)
       }
 

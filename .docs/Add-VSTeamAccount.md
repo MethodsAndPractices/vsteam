@@ -72,6 +72,14 @@ Will add the account from the profile provided and store the information at the 
 
 Note: You must run PowerShell as an Adminstrator to store at the Machine level.
 
+### -------------------------- EXAMPLE 7 --------------------------
+
+```PowerShell
+PS C:\> Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -BearerToken
+```
+
+Will add the account and use the OAuth Token provided by VSTS when you check the *Allow scripts to access OAuth token* checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.  
+
 ## PARAMETERS
 
 ### -Account
@@ -90,7 +98,6 @@ The full Team Foundation Server (TFS) url including the collection.
 Type: String
 Parameter Sets: Secure (Default)
 Aliases:
-
 Required: True
 Position: 1
 Default value: None
@@ -102,7 +109,6 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: Plain, Windows
 Aliases:
-
 Required: False
 Position: 1
 Default value: None
@@ -123,7 +129,6 @@ To use pat simply omit it from the Add-VSTeamAccount command.
 Type: SecureString
 Parameter Sets: Secure (Default)
 Aliases:
-
 Required: True
 Position: Named
 Default value: None
@@ -142,7 +147,6 @@ To store at the Machine level you must be running PowerShell as an Administrator
 Type: String
 Parameter Sets: Secure, Plain (Default)
 Aliases:
-
 Required: False
 Position: Named
 Default value: None
@@ -152,13 +156,12 @@ Accept wildcard characters: False
 
 ### -PersonalAccessToken
 
-The personal access token from VSTS/TFS to use to access this account.
+The personal access token from VSTS/TFS to use to access this account.  If you use 
 
 ```yaml
 Type: String
 Parameter Sets: Plain
-Aliases:
-
+Aliases: Token
 Required: True
 Position: 2
 Default value: None
@@ -174,7 +177,21 @@ Allows the use of the current user's Windows credentials to authenticate against
 Type: SwitchParameter
 Parameter Sets: Windows
 Aliases:
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
+### -BearerToken
+
+Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Windows
+Aliases:
 Required: False
 Position: Named
 Default value: None
@@ -190,7 +207,6 @@ The profile name stored using Add-VSTeamProfile function. You can tab complete t
 Type: String
 Parameter Sets: Profile
 Aliases:
-
 Required: True
 Position: Named
 Default value: None
@@ -208,7 +224,6 @@ The name of the drive you want to mount to this account. The command you need to
 Type: String
 Parameter Sets: (All)
 Aliases:
-
 Required: false
 Position: Named
 Default value:
