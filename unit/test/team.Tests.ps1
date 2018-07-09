@@ -467,7 +467,11 @@ InModuleScope team {
          }
       }
 
-      Context 'Set-VSTeamAPIVersion' {
+      Context 'Set-VSTeamAPIVersion' {         
+         BeforeEach {
+            $VSTeamVersionTable.Version = ''
+         }
+
          It 'Should default to TFS2017' {
             Set-VSTeamAPIVersion
             $VSTeamVersionTable.Version | Should Be 'TFS2017'
@@ -481,10 +485,6 @@ InModuleScope team {
          It 'Should VSTS' {
             Set-VSTeamAPIVersion -Version VSTS
             $VSTeamVersionTable.Version | Should Be 'VSTS'
-         }
-
-         BeforeEach {
-            $VSTeamVersionTable.Version = ''
          }
       }
    }

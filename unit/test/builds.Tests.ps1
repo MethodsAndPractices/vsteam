@@ -444,6 +444,10 @@ InModuleScope builds {
       }
 
       Context 'Add-VSTeamBuild by id on TFS local Auth' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+
          Mock Get-VSTeamQueue {
             return [PSCustomObject]@{
                name = "MyQueue"
@@ -470,14 +474,14 @@ InModuleScope builds {
          It 'should add build' {
             # Call to queue build.
             Assert-VerifiableMock
-         }
-
-         AfterAll {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
-         }
+         }        
       }
 
       Context 'Add-VSTeamBuild with parameters on TFS local Auth' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+
          Mock Get-VSTeamQueue { return [PSCustomObject]@{
                name = "MyQueue"
                id   = 3
@@ -502,18 +506,19 @@ InModuleScope builds {
             # Call to queue build.
             Assert-VerifiableMock
          }
-
-         AfterAll {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
-         }
       }
 
       Context 'Add-VSTeamBuild with source branch on TFS local auth' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+
          Mock Get-VSTeamQueue { return [PSCustomObject]@{
                name = "MyQueue"
                id   = 3
             }
          }
+         
          Mock Get-VSTeamBuildDefinition { return @{ fullname = "MyBuildDef" } }
 
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
@@ -532,10 +537,6 @@ InModuleScope builds {
          It 'should add build' {
             # Call to queue build.
             Assert-VerifiableMock
-         }
-
-         AfterAll {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
          }
       }
 

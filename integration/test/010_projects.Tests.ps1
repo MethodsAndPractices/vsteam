@@ -14,7 +14,7 @@ if ($null -eq $env:TEAM_CIBUILD) {
 
 Set-VSTeamAPIVersion -Version $env:API_VERSION
 
-Describe 'VSTeam Integration Tests' {
+Describe 'VSTeam Integration Tests' -Tag 'integration' {
    BeforeAll {
       $pat = $env:PAT
       $acct = $env:ACCT
@@ -38,6 +38,16 @@ Describe 'VSTeam Integration Tests' {
       Add-VSTeamProfile -Account $acct -PersonalAccessToken $pat -Version $api -Name intTests
       Add-VSTeamAccount -Profile intTests -Drive int
    }
+   
+   AfterAll {
+      # Put everything back
+      Set-Location $originalLocation
+ 
+      if ($oAcct) { 
+         Add-VSTeamProfile -Account $oAcct -PersonalAccessToken $pat -Version $oVersion -Name $oName
+         Add-VSTeamAccount -Profile $oName
+      }
+   } 
 
    Context 'Set-VSTeamDefaultProject' {
       It 'should set default project' {
@@ -319,14 +329,4 @@ Describe 'VSTeam Integration Tests' {
          Remove-VSTeamAccount
       }
    }
-
-   AfterAll {
-      # Put everything back
-      Set-Location $originalLocation
- 
-      if ($oAcct) { 
-         Add-VSTeamProfile -Account $oAcct -PersonalAccessToken $pat -Version $oVersion -Name $oName
-         Add-VSTeamAccount -Profile $oName
-      }
-   } 
 }

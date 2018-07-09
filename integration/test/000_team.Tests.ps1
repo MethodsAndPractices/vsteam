@@ -14,7 +14,7 @@ if ($null -eq $env:TEAM_CIBUILD) {
 
 Set-VSTeamAPIVersion -Version $env:API_VERSION
 
-Describe 'Team' {
+Describe 'Team' -Tag 'integration' {
    BeforeAll {
       $pat = $env:PAT
       $acct = $env:ACCT

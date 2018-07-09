@@ -16,21 +16,19 @@ InModuleScope Approvals {
    # using the Add-VSTeamAccount function.
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
-   Describe 'Approvals' {
+   Describe 'Approvals' -Tag 'unit', 'approvals' {
 
       # Load the mocks to create the project name dynamic parameter
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
-      Context 'Get-VSTeamApproval handles exception' {
-         
+      Context 'Get-VSTeamApproval' {         
          # Arrange
          Mock _handleException -Verifiable
          Mock Invoke-RestMethod { throw 'testing error handling' }
 
-         # Act
-         Get-VSTeamApproval -ProjectName project
-         
-         It 'should return approvals' {
+         It 'should pass exception to _handleException' {
+            # Act
+            Get-VSTeamApproval -ProjectName project
 
             # Assert
             Assert-VerifiableMock
@@ -38,6 +36,7 @@ InModuleScope Approvals {
       }
 
       Context 'Get-VSTeamApproval' {
+         # Arrange
          Mock Invoke-RestMethod {            
             return @{
                count = 1
@@ -51,11 +50,14 @@ InModuleScope Approvals {
                      }
                   }
                )
-            }}
-
-         Get-VSTeamApproval -projectName project
-         
+            }
+         }
+            
          It 'should return approvals' {
+            # Act
+            Get-VSTeamApproval -projectName project
+
+            # Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)"
@@ -64,6 +66,7 @@ InModuleScope Approvals {
       }
 
       Context 'Get-VSTeamApproval with AssignedToFilter' {
+         # Arrange
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
@@ -80,11 +83,14 @@ InModuleScope Approvals {
                      }
                   }
                )
-            }}
-   
-         Get-VSTeamApproval -projectName project -AssignedToFilter 'Chuck Reinhart'
+            }
+         }
             
-         It 'should return approvals' {
+         It 'should return approvals only for value passed into AssignedToFilter' {
+            # Act
+            Get-VSTeamApproval -projectName project -AssignedToFilter 'Chuck Reinhart'
+            
+            # Assert
             # With PowerShell core the order of the query string is not the 
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
