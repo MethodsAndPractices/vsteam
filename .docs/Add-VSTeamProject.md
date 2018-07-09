@@ -3,22 +3,25 @@
 # Add-VSTeamProject
 
 ## SYNOPSIS
+
 #include "./synopsis/Add-VSTeamProject.md"
 
 ## SYNTAX
 
-```
+```PowerShell
 Add-VSTeamProject [-ProjectName] <String> [[-ProcessTemplate] <String>] [[-Description] <String>] [-TFVC]
 ```
 
 ## DESCRIPTION
+
 This will create a new Team Project in your Team Foundation Server or Team Services
 account.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```PowerShell
 PS C:\> Add-VSTeamProject 'MyProject'
 ```
 
@@ -26,7 +29,8 @@ This will add a project name MyProject with no description using the Scrum proce
 template and Git source control.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-```
+
+```PowerShell
 PS C:\> Add-VSTeamProject 'MyProject' -TFVC -ProcessTemplate Agile
 ```
 
@@ -36,12 +40,13 @@ template and TFVC source control.
 ## PARAMETERS
 
 ### -ProjectName
+
 The name of the project to create.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases: Name
 
 Required: True
 Position: 0
@@ -51,6 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProcessTemplate
+
 The name of the process template to use for the project.
 The valid values are
 Agile, Scrum or CMMI.
@@ -58,7 +64,7 @@ Agile, Scrum or CMMI.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 1
@@ -68,12 +74,13 @@ Accept wildcard characters: False
 ```
 
 ### -Description
+
 The description of the team project.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 2
@@ -83,12 +90,13 @@ Accept wildcard characters: False
 ```
 
 ### -TFVC
+
 Switches the source control from Git to TFVC.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
