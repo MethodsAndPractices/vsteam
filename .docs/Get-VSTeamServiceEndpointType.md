@@ -1,21 +1,24 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Get-VSTeamServiceEndpointType
 
 ## SYNOPSIS
-#include "./synopsis/Get-VSTeamServiceEndpointType.md"
+
+<!-- #include "./synopsis/Get-VSTeamServiceEndpointType.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
-#include "./synopsis/Get-VSTeamServiceEndpointType.md"
+
+<!-- #include "./synopsis/Get-VSTeamServiceEndpointType.md" -->
 
 ## EXAMPLES
 
 ## PARAMETERS
 
 ### -Type
-Name of service endpoint type to return 
+
+Name of service endpoint type to return.
 
 ```yaml
 Type: String
@@ -24,11 +27,12 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: true (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -Scheme
+
 Scheme of service endpoint
 
 ```yaml
@@ -38,7 +42,7 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: true (ByPropertyName)
 Accept wildcard characters: False
 ```
 

@@ -15,7 +15,6 @@ function _applyTypesToApproval {
 function Get-VSTeamApproval {
    [CmdletBinding()]
    param(
-      [Parameter()]
       [ValidateSet('Approved', 'ReAssigned', 'Rejected', 'Canceled', 'Pending', 'Rejected', 'Skipped', 'Undefined')]
       [string] $StatusFilter,
 

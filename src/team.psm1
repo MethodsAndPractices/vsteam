@@ -132,7 +132,7 @@ function Add-VSTeamAccount {
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
-      [Parameter(ParameterSetName = 'Plain')]
+      [Parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 1)]
       [string] $Account,
      
       [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access or Bearer Token')]
@@ -142,11 +142,16 @@ function Add-VSTeamAccount {
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access or Bearer Token')]
       [securestring] $SecurePersonalAccessToken,
      
+      [parameter(ParameterSetName = 'Windows')]
+      [parameter(ParameterSetName = 'Secure')]
+      [Parameter(ParameterSetName = 'Plain')]
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
       [string] $Version,
      
       [string] $Drive,
 
+      [parameter(ParameterSetName = 'Secure')]
+      [Parameter(ParameterSetName = 'Plain')]
       [switch] $UseBearerToken
    )
 

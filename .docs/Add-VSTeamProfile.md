@@ -52,24 +52,9 @@ The full Team Foundation Server (TFS) url including the collection.
 
 ```yaml
 Type: String
-Parameter Sets: Secure (Default)
-Aliases:
+Parameter Sets: Secure, Plain, Windows
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String
-Parameter Sets: Plain, Windows
-Aliases:
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -PAT
@@ -83,13 +68,8 @@ To use pat simply omit it from the Add-VSTeamProfile command.
 
 ```yaml
 Type: SecureString
-Parameter Sets: Secure (Default)
-Aliases:
+Parameter Sets: Secure
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -PersonalAccessToken
@@ -99,12 +79,8 @@ The personal access token from VSTS/TFS to use to access this account.
 ```yaml
 Type: String
 Parameter Sets: Plain
-Aliases:
 Required: True
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -UseWindowsAuthentication
@@ -114,12 +90,6 @@ Allows the use of the current user's Windows credentials to authenticate against
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Windows
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -BearerToken
@@ -128,13 +98,7 @@ Switches the authorzation from Basic to Bearer.  You still use the PAT for Perso
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Windows
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Parameter Sets: Secure, Plain
 ```
 
 ### -Name
@@ -143,13 +107,8 @@ Optional name for the profile. If this parameter is not provided the account wil
 
 ```yaml
 Type: String
-Parameter Sets: All
-Aliases:
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Position: 3
 ```
 
 <!-- #include "./params/version.md" -->
@@ -163,4 +122,5 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
+
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)

@@ -64,14 +64,12 @@ function Add-VSTeamPolicy {
       [Parameter(Mandatory = $true)]
       [guid] $type,
       
-      [switch]
-      $enabled,
+      [switch] $enabled,
 
-      [switch]
-      $blocking,
+      [switch] $blocking,
 
       [Parameter(Mandatory = $true)]
-      $settings
+      [hashtable] $settings
    )
 
    DynamicParam {
@@ -112,17 +110,14 @@ function Update-VSTeamPolicy {
       [Parameter(Mandatory = $false)]
       [guid] $type,
 
-      [switch]
-      $enabled,
+      [switch] $enabled,
 
-      [switch]
-      $blocking,
+      [switch] $blocking,
 
       [Parameter(Mandatory = $true)]
-      $settings,
+      [hashtable] $settings,
 
-      [switch]
-      $Force
+      [switch] $Force
    )
 
    DynamicParam {
@@ -165,11 +160,9 @@ function Remove-VSTeamPolicy {
    [CmdletBinding(SupportsShouldProcess = $true)]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-      [int[]]
-      $Id,
+      [int[]] $Id,
       
-      [switch]
-      $Force
+      [switch] $Force
    )
 
    DynamicParam {

@@ -1,17 +1,15 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Add-VSTeamBuildDefinition
 
 ## SYNOPSIS
-#include "./synopsis/Add-VSTeamBuildDefinition.md"
+
+<!-- #include "./synopsis/Add-VSTeamBuildDefinition.md" -->
 
 ## SYNTAX
 
-```
-Add-VSTeamBuildDefinition [-ProjectName] <String> [-InFile] <String>
-```
-
 ## DESCRIPTION
+
 Reads a JSON file off disk and uses that file to create a new build defintion
 in the provided project.
 
@@ -20,7 +18,8 @@ You must call Add-VSTeamAccount before calling this function.
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```PowerShell
 PS C:\> Add-VSTeamBuildDefinition -ProjectName Demo -InFile build.json
 ```
 
@@ -29,23 +28,18 @@ on the demo team project.
 
 ## PARAMETERS
 
+<!-- #include "./params/projectName.md" -->
+
 ### -InFile
-Specifies the JSON file that contains the build defintion to be created.
-Enter a path and file name.
+
+Path and file name to the JSON file that contains the defintion to be created. If the path is omitted, the default is the current location.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
-
 Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Position: 1
+Accept pipeline input: true (ByPropertyName)
 ```
-
-#include "./params/projectName.md"
 
 ## INPUTS
 
@@ -54,6 +48,7 @@ Accept wildcard characters: False
 ## OUTPUTS
 
 ## NOTES
+
 This function has a Dynamic Parameter for ProjectName that specifies the
 project for which this function gets build definitions.
 

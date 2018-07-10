@@ -1,50 +1,38 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Remove-VSTeamServiceEndpoint
 
 ## SYNOPSIS
-#include "./synopsis/Remove-VSTeamServiceEndpoint.md"
+
+<!-- #include "./synopsis/Remove-VSTeamServiceEndpoint.md" -->
 
 ## SYNTAX
 
-```
-Remove-VSTeamServiceEndpoint [-ProjectName] <String> [-Id] <String[]> [-Force]
-```
-
 ## DESCRIPTION
-#include "./synopsis/Remove-VSTeamServiceEndpoint.md"
+
+<!-- #include "./synopsis/Remove-VSTeamServiceEndpoint.md" -->
 
 ## EXAMPLES
 
 ## PARAMETERS
 
+<!-- #include "./params/projectName.md" -->
+
 ### -Id
+
 Id of the service endpoint
 
 ```yaml
 Type: String[]
-Parameter Sets: (All)
-Aliases: 
-
 Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept pipeline input: true (ByPropertyName)
 ```
 
-#include "./params/force.md"
-
-#include "./params/projectName.md"
+<!-- #include "./params/force.md" -->
 
 ## INPUTS
 
-### System.String[]
-System.String
-
 ## OUTPUTS
-
-### System.Object
 
 ## NOTES
 

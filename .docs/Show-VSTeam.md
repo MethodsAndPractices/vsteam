@@ -1,22 +1,22 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Show-VSTeam
 
 ## SYNOPSIS
-#include "./synopsis/Show-VSTeam.md"
+
+<!-- #include "./synopsis/Show-VSTeam.md" -->
 
 ## SYNTAX
-```
-Show-VSTeam
-```
 
 ## DESCRIPTION
-#include "./synopsis/Show-VSTeam.md"
+
+<!-- #include "./synopsis/Show-VSTeam.md" -->
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```PowerShell
 PS C:\> Show-VSTeam
 ```
 

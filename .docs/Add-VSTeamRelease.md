@@ -1,42 +1,31 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Add-VSTeamRelease
 
 ## SYNOPSIS
-#include "./synopsis/Add-VSTeamRelease.md"
+
+<!-- #include "./synopsis/Add-VSTeamRelease.md" -->
 
 ## SYNTAX
 
-### ById (Default)
-```
-Add-VSTeamRelease [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>]
- -ArtifactAlias <String> -DefinitionId <Int32> -BuildId <String> [-Force]
-```
-
-### ByName
-```
-Add-VSTeamRelease [-ProjectName] <String> -Description <String> [-Name <String>] [-SourceBranch <String>] [-Force]
- [-DefinitionName <String>] [-BuildNumber <String>]
-```
-
 ## DESCRIPTION
+
 Add-VSTeamRelease will queue a new release.
 
-The environments will deploy according to how the release definition is 
-configured in the Triggers tab.
+The environments will deploy according to how the release definition is configured in the Triggers tab.
 
 You must call Add-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```PowerShell
 PS C:\> Get-VSTeamBuild | ft id,name
 
 id name
 -- ----
 44 Demo-CI-44
-
 
 PS C:\> Get-VSTeamReleaseDefinition -Expand artifacts | ft id,name,@{l='Alias';e={$_.artifacts[0].alias}}
 
@@ -44,15 +33,14 @@ id name    Alias
 -- ----    -----
  1 Demo-CD Demo-CI
 
-
 PS C:\> Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
 ```
 
-This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release. 
-If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.
+This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release. If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-```
+
+```PowerShell
 PS C:\> Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
 ```
 
@@ -62,144 +50,95 @@ You must set a default project to tab complete DefinitionName and BuildNumber.
 
 ## PARAMETERS
 
+<!-- #include "./params/projectName.md" -->
+
 ### -DefinitionId
+
 The id of the release defintion to use.
 
 ```yaml
 Type: Int32
 Parameter Sets: ById
-Aliases: 
-
 Required: True
-Position: Named
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Description
+
 The description to use on the release.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
-
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -ArtifactAlias
+
 The alias of the artifact to use with this release.
 
 ```yaml
 Type: String
 Parameter Sets: ById
-Aliases: 
-
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Name
+
 The name of this release.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -BuildId
+
 The id of the build to use with this release.
 
 ```yaml
 Type: String
 Parameter Sets: ById
-Aliases: 
-
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
-#include "./params/projectName.md"
-
 ### -DefinitionName
+
 The name of the release defintion to use.
 
 ```yaml
 Type: String
 Parameter Sets: ByName
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept pipeline input: true (ByPropertyName)
 ```
 
 ### -SourceBranch
+
 The branch of the artifact
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
-#include "./params/force.md"
-
 ### -BuildNumber
+
 The number of the build to use.
 
 ```yaml
 Type: String
 Parameter Sets: ByName
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept pipeline input: true (ByPropertyName)
 ```
 
-## INPUTS
+<!-- #include "./params/force.md" -->
 
-### System.String
+## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
-This function has a Dynamic Parameter for ProjectName that specifies the
-project for which this function gets release s.
+
+This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.
 
 You can tab complete from a list of available projects.
 
-You can use Set-VSTeamDefaultProject to set a default project so you do not have
-to pass the ProjectName with each call.
+You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
 
 ## RELATED LINKS
-

@@ -1,10 +1,10 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Add-VSTeamWorkItem
 
 ## SYNOPSIS
 
-#include "./synopsis/Add-VSTeamWorkItem.md"
+<!-- #include "./synopsis/Add-VSTeamWorkItem.md" -->
 
 ## SYNTAX
 
@@ -16,7 +16,7 @@ Add-VSTeamWorkItem will add a new work item to your project.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 
-```powershell
+```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo
 PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task
 
@@ -27,21 +27,20 @@ Demo-CI           Demo-CI-45   notStarted
 
 ## PARAMETERS
 
-#include "./params/projectName.md"
+<!-- #include "./params/projectName.md" -->
 
 ### -WorkItemType
+
 The type of work item to add.
 
 You can tab complete from a list of available work item types.
 
-You must use Set-VSTeamDefaultProject to set a default project to 
-enable the tab completion.
+You must use Set-VSTeamDefaultProject to set a default project to enable the tab completion.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
-
 Required: True
 Position: Named
 Default value: None
@@ -53,11 +52,9 @@ Accept wildcard characters: False
 
 ### System.String
 
-Project Name
+ProjectName
 
-### System.String
-
-Work Item Type
+WorkItemType
 
 ## OUTPUTS
 

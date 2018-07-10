@@ -1,28 +1,16 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Get-VSTeamPolicyType
 
 ## SYNOPSIS
 
-#include "./synopsis/Get-VSTeamPolicyType.md"
+<!-- #include "./synopsis/Get-VSTeamPolicyType.md" -->
 
 ## SYNTAX
 
-### All in project (Default)
-
-```PowerShell
-Get-VSTeamPolicyType -ProjectName <String>
-```
-
-### ById
-
-```PowerShell
-Get-VSTeamPolicyType -ProjectName <String> [-Id <Guid>]
-```
-
 ## DESCRIPTION
 
-#include "./synopsis/Get-VSTeamPolicyType.md"
+<!-- #include "./synopsis/Get-VSTeamPolicyType.md" -->
 
 ## EXAMPLES
 
@@ -44,7 +32,7 @@ This command gets the policy type by the specified id within the Demo project.
 
 ## PARAMETERS
 
-#include "./params/projectName.md"
+<!-- #include "./params/projectName.md" -->
 
 ### -Id
 
@@ -53,11 +41,10 @@ Specifies one policy type by id.
 ```yaml
 Type: Guid[]
 Parameter Sets: ByID
-
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: true (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -70,5 +57,7 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamPolicy](Add-VSTeamPolicy.md)
+
 [Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
+
 [Get-VSTeamPolicy](Get-VSTeamPolicy.md)

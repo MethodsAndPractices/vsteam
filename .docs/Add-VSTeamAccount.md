@@ -1,18 +1,16 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Add-VSTeamAccount
 
 ## SYNOPSIS
 
-#include "./synopsis/Add-VSTeamAccount.md"
+<!-- #include "./synopsis/Add-VSTeamAccount.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-On Windows you have to option to store the information at the process, user
-or machine (you must be running PowerShell as administrator to store at the
-machine level) level.
+On Windows you have to option to store the information at the process, user or machine (you must be running PowerShell as administrator to store at the machine level) level.
 
 On Linux and Mac you can only store at the process level.
 
@@ -96,44 +94,23 @@ The full Team Foundation Server (TFS) url including the collection.
 
 ```yaml
 Type: String
-Parameter Sets: Secure (Default)
-Aliases:
+Parameter Sets: Secure, Plain, Windows
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String
-Parameter Sets: Plain, Windows
-Aliases:
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -PAT
 
 A secured string to capture your personal access token.
 
-This will allow you to provide your personal access token
-without displaying it in plain text.
+This will allow you to provide your personal access token without displaying it in plain text.
 
 To use pat simply omit it from the Add-VSTeamAccount command.
 
 ```yaml
 Type: SecureString
-Parameter Sets: Secure (Default)
-Aliases:
+Parameter Sets: Secure
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Level
@@ -145,18 +122,12 @@ To store at the Machine level you must be running PowerShell as an Administrator
 
 ```yaml
 Type: String
-Parameter Sets: Secure, Plain (Default)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Parameter Sets: Secure, Plain, Windows
 ```
 
 ### -PersonalAccessToken
 
-The personal access token from VSTS/TFS to use to access this account.  If you use 
+The personal access token from VSTS/TFS to use to access this account.
 
 ```yaml
 Type: String
@@ -164,9 +135,6 @@ Parameter Sets: Plain
 Aliases: Token
 Required: True
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -UseWindowsAuthentication
@@ -176,12 +144,6 @@ Allows the use of the current user's Windows credentials to authenticate against
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Windows
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -BearerToken
@@ -190,13 +152,7 @@ Switches the authorzation from Basic to Bearer.  You still use the PAT for Perso
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Windows
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Parameter Sets: Secure, Plain
 ```
 
 ### -Profile
@@ -206,29 +162,17 @@ The profile name stored using Add-VSTeamProfile function. You can tab complete t
 ```yaml
 Type: String
 Parameter Sets: Profile
-Aliases:
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
-#include "./params/version.md"
+<!-- #include "./params/version.md" -->
 
 ### -Drive
 
-The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location *driveName*:
+The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: false
-Position: Named
-Default value:
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS
@@ -240,5 +184,7 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
+
 [Add-VSTeamProfile](Add-VSTeamProfile.md)
+
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)

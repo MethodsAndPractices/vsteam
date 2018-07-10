@@ -1,1 +1,1 @@
-Updates an existing VSTS service connection
+Updates an existing service connection

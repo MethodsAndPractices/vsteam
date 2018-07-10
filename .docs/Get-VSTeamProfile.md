@@ -1,16 +1,16 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Get-VSTeamProfile
 
 ## SYNOPSIS
 
-#include "./synopsis/Get-VSTeamProfile.md"
+<!-- #include "./synopsis/Get-VSTeamProfile.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-#include "./synopsis/Get-VSTeamProfile.md"
+<!-- #include "./synopsis/Get-VSTeamProfile.md" -->
 
 ## EXAMPLES
 
@@ -56,4 +56,5 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
+
 [Add-VSTeamProfile](Add-VSTeamProfile.md)

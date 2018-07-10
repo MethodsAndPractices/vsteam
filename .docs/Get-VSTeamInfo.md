@@ -1,23 +1,22 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Get-VSTeamInfo
 
 ## SYNOPSIS
-#include "./synopsis/Get-VSTeamInfo.md"
+
+<!-- #include "./synopsis/Get-VSTeamInfo.md" -->
 
 ## SYNTAX
 
-```
-Get-VSTeamInfo
-```
-
 ## DESCRIPTION
-#include "./synopsis/Get-VSTeamInfo.md"
+
+<!-- #include "./synopsis/Get-VSTeamInfo.md" -->
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```PowerShell
 PS C:\> Get-VSTeamInfo
 ```
 

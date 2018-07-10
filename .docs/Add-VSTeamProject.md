@@ -1,16 +1,12 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Add-VSTeamProject
 
 ## SYNOPSIS
 
-#include "./synopsis/Add-VSTeamProject.md"
+<!-- #include "./synopsis/Add-VSTeamProject.md" -->
 
 ## SYNTAX
-
-```PowerShell
-Add-VSTeamProject [-ProjectName] <String> [[-ProcessTemplate] <String>] [[-Description] <String>] [-TFVC]
-```
 
 ## DESCRIPTION
 
@@ -65,7 +61,6 @@ Agile, Scrum or CMMI.
 Type: String
 Parameter Sets: (All)
 Aliases:
-
 Required: False
 Position: 1
 Default value: Scrum
@@ -81,7 +76,6 @@ The description of the team project.
 Type: String
 Parameter Sets: (All)
 Aliases:
-
 Required: False
 Position: 2
 Default value: None
@@ -97,7 +91,6 @@ Switches the source control from Git to TFVC.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
-
 Required: False
 Position: Named
 Default value: False
@@ -114,4 +107,5 @@ Accept wildcard characters: False
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
+
 [Remove-VSTeamProject](Remove-VSTeamProject.md)

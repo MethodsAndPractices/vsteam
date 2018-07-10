@@ -1,41 +1,33 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Get-VSTeamPool
 
 ## SYNOPSIS
-#include "./synopsis/Get-VSTeamPool.md"
+
+<!-- #include "./synopsis/Get-VSTeamPool.md" -->
 
 ## SYNTAX
 
-### List (Default)
-```
-Get-VSTeamPool [-PoolName <String>] [-ActionFilter <String>]
-```
-
-### ByID
-```
-Get-VSTeamPool -Id <String>
-```
-
 ## DESCRIPTION
-#include "./synopsis/Get-VSTeamPool.md"
+
+<!-- #include "./synopsis/Get-VSTeamPool.md" -->
 
 ## EXAMPLES
 
 ## PARAMETERS
 
 ### -Id
+
 Id of the pool to return.
 
 ```yaml
 Type: String
 Parameter Sets: ByID
 Aliases: PoolID
-
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: true (ByPropertyName)
 Accept wildcard characters: False
 ```
 
