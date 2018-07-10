@@ -29,6 +29,14 @@ function Get-VSTeamProfile {
                $result | ForEach-Object {
                   # Setting the type lets me format it
                   $_.PSObject.TypeNames.Insert(0, 'Team.Profile')
+
+                  if ($_.PSObject.Properties.Match('Token').count -eq 0) {
+                     # This is a profile that was created before the module supported
+                     # bearer tokens. The rest of the module expects there to be a Token
+                     # property.  Add one with a value of ''
+                     $_ | Add-Member NoteProperty 'Token' ''
+                  }
+
                   $_ 
                }
             }

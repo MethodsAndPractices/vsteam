@@ -197,6 +197,13 @@ InModuleScope profile {
          It 'Profile Should by Pat' {
             $actual.Type | Should be 'Pat'
          }
+
+         It 'Token Should be empty string' {
+            # This is testing that the Token property is added
+            # to existing profiles loaded from file created before
+            # the bearer token support was added.
+            $actual.Token | Should be ''
+         }
       }
 
       Context 'Get-VSTeamProfile' {
