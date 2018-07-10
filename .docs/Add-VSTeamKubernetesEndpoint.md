@@ -1,20 +1,16 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Add-VSTeamKubernetesEndpoint
 
 ## SYNOPSIS
-#include "./synopsis/Add-VSTeamKubernetesEndpoint.md"
+
+<!-- #include "./synopsis/Add-VSTeamKubernetesEndpoint.md" -->
 
 ## SYNTAX
 
-### Plain
-```
-Add-VSTeamKubernetesEndpoint [-ProjectName] <String> [-Kubeconfig] <String> [-KubernetesUrl] <String> [-ClientCertificateData] <String> [-ClientKeyData] <String> [-AcceptUntrustedCerts] [-GeneratePfx]
- [[-EndpointName] <String>]
-```
-
 ## DESCRIPTION
-The cmdlet adds a new connection between TFS/VSTS and a Kubernetes cluster using kubeconfig json. 
+
+The cmdlet adds a new connection between TFS/VSTS and a Kubernetes cluster using kubeconfig json.
 
 This is only used when using the Kubernetes tasks.
 
@@ -22,114 +18,72 @@ This is only used when using the Kubernetes tasks.
 
 ## PARAMETERS
 
+<!-- #include "./params/projectName.md" -->
+
 ### -Kubeconfig
+
 kubeconfig as JSON string
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
-
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept pipeline input: true (ByPropertyName)
 ```
 
 ### -KubernetesUrl
+
 URL of Kubernetes cluster
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
-
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept pipeline input: true (ByPropertyName)
 ```
 
 ### -EndpointName
-The name displayed on the services page. 
+
+The name displayed on the services page.
 In VSTS this is the Connection Name.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
 Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
-
 ### -ClientCertificateData
+
 Client certificate from Kubeconfig
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
-
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -ClientKeyData
+
 Client private key from Kubeconfig
 
 ```yaml
 Type: String
 Parameter Sets: Plain
-Aliases: 
-
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -AcceptUntrustedCerts
+
 Accept untrusted certificates for cluster
 
 ```yaml
 Type: Switch
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -GeneratePfx
+
 Generate pfx file
 
 ```yaml
 Type: Switch
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
-
-#include "./params/projectName.md"
 
 ## INPUTS
 
@@ -143,3 +97,8 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
+[Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
+
+[Get-VSTeamServiceEndpointType](Get-VSTeamServiceEndpointType.md)
+
+[Remove-VSTeamServiceEndpoint](Remove-VSTeamServiceEndpoint.md)

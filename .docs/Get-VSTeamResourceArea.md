@@ -1,23 +1,22 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Get-VSTeamResourceArea
 
 ## SYNOPSIS
-#include "./synopsis/Get-VSTeamResourceArea.md"
+
+<!-- #include "./synopsis/Get-VSTeamResourceArea.md" -->
 
 ## SYNTAX
 
-```
-Get-VSTeamResourceArea
-```
-
 ## DESCRIPTION
-#include "./synopsis/Get-VSTeamResourceArea.md"
+
+<!-- #include "./synopsis/Get-VSTeamResourceArea.md" -->
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```PowerShell
 PS C:\> Get-VSTeamResourceArea
 ```
 
@@ -34,4 +33,5 @@ This will display all the areas of supported APIs for your account.
 ## RELATED LINKS
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
+
 [Add-VSTeamOption](Add-VSTeamOption.md)

@@ -1,18 +1,17 @@
-#include "./common/header.md"
+<!-- #include "./common/header.md" -->
 
 # Get-VSTeamOption
 
 ## SYNOPSIS
-#include "./synopsis/Get-VSTeamOption.md"
+
+<!-- #include "./synopsis/Get-VSTeamOption.md" -->
 
 ## SYNTAX
 
-```
-Get-VSTeamOption
-```
-
 ## DESCRIPTION
-#include "./synopsis/Get-VSTeamOption.md"
+
+<!-- #include "./synopsis/Get-VSTeamOption.md" -->
+
 There are two table formats defined for the Team.Option type, Default and Versions.
 
 Default view contains Name, Area, Max Version and URI Template.
@@ -22,14 +21,16 @@ Version view contains Name, Area, Min Version, Max Version, Released Version and
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```PowerShell
 PS C:\> Get-VSTeamOption
 ```
 
 This will display all the versions of supported APIs for your account using the 'Default' table format.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-```
+
+```PowerShell
 PS C:\> Get-VSTeamOption | Format-Table -View Versions
 ```
 
@@ -38,18 +39,11 @@ This will display all the versions of supported APIs for your account using the 
 ## PARAMETERS
 
 ### -Release
+
 Returns options for Release Management APIs
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

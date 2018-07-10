@@ -6,6 +6,7 @@ Get-Module profile | Remove-Module -Force
 
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
 
 InModuleScope team {
    Describe 'Invoke-VSTeamRequest' {
@@ -44,13 +45,15 @@ InModuleScope team {
             "URL": "http://localhost:8080/tfs/defaultcollection",
             "Pat": "",
             "Type": "OnPremise",
-            "Version": "TFS2017"
+            "Version": "TFS2017",
+            "Token": ""
          },
          {
             "Name": "mydemos",
             "URL": "https://mydemos.visualstudio.com",
             "Pat": "OjEyMzQ1",
             "Type": "Pat",
+            "Token": "",
             "Version": "VSTS"
          },
          {
@@ -58,10 +61,11 @@ InModuleScope team {
             "URL": "https://demonstrations.visualstudio.com",
             "Pat": "dzY2a2x5am13YWtkcXVwYmg0emE=",
             "Type": "Pat",
+            "Token": "",
             "Version": "VSTS"
          }
       ]
-"@      
+"@    
 
       Context 'Get-VSTeamInfo' {
          It 'should return account and default project' {
@@ -467,7 +471,11 @@ InModuleScope team {
          }
       }
 
-      Context 'Set-VSTeamAPIVersion' {
+      Context 'Set-VSTeamAPIVersion' {         
+         BeforeEach {
+            $VSTeamVersionTable.Version = ''
+         }
+
          It 'Should default to TFS2017' {
             Set-VSTeamAPIVersion
             $VSTeamVersionTable.Version | Should Be 'TFS2017'
@@ -481,10 +489,6 @@ InModuleScope team {
          It 'Should VSTS' {
             Set-VSTeamAPIVersion -Version VSTS
             $VSTeamVersionTable.Version | Should Be 'VSTS'
-         }
-
-         BeforeEach {
-            $VSTeamVersionTable.Version = ''
          }
       }
    }

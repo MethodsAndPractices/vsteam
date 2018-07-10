@@ -32,13 +32,15 @@ function _setEnvironmentVariables {
    param (
       [string] $Level = "Process",
       [string] $Pat,
-      [string] $Acct
+      [string] $Acct,
+      [string] $BearerToken
    )
 
    # You always have to set at the process level or they will Not
    # be seen in your current session.
    $env:TEAM_PAT = $Pat
    $env:TEAM_ACCT = $Acct
+   $env:TEAM_TOKEN = $BearerToken
 
    $VSTeamVersionTable.Account = $Acct    
 
@@ -65,7 +67,7 @@ function _clearEnvironmentVariables {
       [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
    }
 
-   _setEnvironmentVariables -Level $Level -Pat '' -Acct ''
+   _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -BearerToken ''
 }
 
 function Get-VSTeamInfo {
@@ -130,15 +132,27 @@ function Add-VSTeamAccount {
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
-      [Parameter(ParameterSetName = 'Plain')]
+      [Parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 1)]
       [string] $Account,
-      [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
+     
+      [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access or Bearer Token')]
+      [Alias('Token')]
       [string] $PersonalAccessToken,
-      [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
+     
+      [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access or Bearer Token')]
       [securestring] $SecurePersonalAccessToken,
+     
+      [parameter(ParameterSetName = 'Windows')]
+      [parameter(ParameterSetName = 'Secure')]
+      [Parameter(ParameterSetName = 'Plain')]
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
       [string] $Version,
-      [string] $Drive
+     
+      [string] $Drive,
+
+      [parameter(ParameterSetName = 'Secure')]
+      [Parameter(ParameterSetName = 'Plain')]
+      [switch] $UseBearerToken
    )
 
    DynamicParam {
@@ -200,6 +214,7 @@ function Add-VSTeamAccount {
             $encodedPat = $info.Pat
             $account = $info.URL
             $version = $info.Version
+            $token = $info.Token
          }
          else {
             Write-Error "The profile provided was not found."
@@ -223,18 +238,25 @@ function Add-VSTeamAccount {
                $Account = "https://$($matches.account).visualstudio.com"
             }
          }
-         
-         $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
+
+         if ($UseBearerToken.IsPresent) {
+            $token = $_pat
+         }
+         else {
+            $token = ''
+            $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
+         }
          
          # If no SecurePersonalAccessToken is entered, and on windows, are we using default credentials for REST calls
          if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
             Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
-            $encodedPat = ""
+            $encodedPat = ''
+            $token = ''
          }
       }
 
       Clear-VSTeamDefaultProject
-      _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account
+      _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account -BearerToken $token
 
       Set-VSTeamAPIVersion -Version (_getVSTeamAPIVersion -Instance $account -Version $Version)
 

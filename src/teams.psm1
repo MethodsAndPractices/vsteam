@@ -93,10 +93,11 @@ function Get-VSTeam {
 function Add-VSTeam {
    [CmdletBinding()]
    param(
-      [Parameter(Mandatory = $true)]
-      [Alias('TeamName')]     
+      [Parameter(Mandatory = $true, Position = 1)]
+      [Alias('TeamName')]
       [string]$Name,
-      [string]$Description = ""
+
+      [string]$Description = ''
    )
    DynamicParam {
       _buildProjectNameDynamicParam

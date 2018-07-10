@@ -10,27 +10,27 @@ Import-Module $PSScriptRoot\..\..\src\tfvc.psm1 -Force
 InModuleScope tfvc {
    
    $singleResult = [PSCustomObject]@{
-      path = "$/MyProject/Master";
+      path        = "$/MyProject/Master";
       description = 'desc';
-      children = @();
+      children    = @();
    }
 
    $multipleResults = [PSCustomObject]@{
       value = @(
          [PSCustomObject]@{
-            path = '$/MyProject/Master';
+            path        = '$/MyProject/Master';
             description = 'desc';
-            children = @();
+            children    = @();
          },
          [PSCustomObject]@{
-            path = '$/AnotherProject/Master';
+            path        = '$/AnotherProject/Master';
             description = 'desc';
-            children = @();
+            children    = @();
          }
       )
    }
 
-   Describe "Get-VSTeamTfvcRootBranch VSTS" {
+   Describe 'Get-VSTeamTfvcRootBranch VSTS' -Tag 'unit', 'tfvc', 'vsts' {
 
       $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
@@ -105,7 +105,7 @@ InModuleScope tfvc {
       }
    }
 
-   Describe "Get-VSTeamTfvcRootBranch TFS" {
+   Describe 'Get-VSTeamTfvcRootBranch TFS' -Tag 'unit', 'tfvc', 'tfs' {
 
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
       Mock _useWindowsAuthenticationOnPremise { return $true }
@@ -180,8 +180,29 @@ InModuleScope tfvc {
          }
       }
    }
+
+   Describe 'Get-VSTeamTfvcBranch' -Tag 'unit','multi' {
+      $testCases = @(
+         @{ a = 'https://test.visualstudio.com'; t = 'vsts' }
+         @{ a = 'http://localhost:8080/tfs/defaultcollection'; t = 'tfs' }
+      )
+
+      Mock Invoke-RestMethod { return $singleResult } -Verifiable
+
+      It 'should call the REST endpoint with correct parameters for <t>' -TestCases $testCases {
+         param ($a)
+
+         $VSTeamVersionTable.Account = $a
+
+         Get-VSTeamTfvcBranch -Path $/MyProject/Master 
+
+         Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
+            $Uri -eq "$($VSTeamVersionTable.Account)/_apis/tfvc/branches/$/MyProject/Master?api-version=$($VSTeamVersionTable.Tfvc)"
+         }
+      }
+   }
   
-   Describe "Get-VSTeamTfvcBranch VSTS" {
+   Describe 'Get-VSTeamTfvcBranch VSTS' -Tag 'unit', 'tfvc', 'vsts' {
 
       $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
       
@@ -212,7 +233,7 @@ InModuleScope tfvc {
       Context 'Get-VSTeamTfvcBranch with two paths' {
          Mock Invoke-RestMethod { return $multipleResults } -Verifiable
 
-         Get-VSTeamTfvcBranch -Path $/MyProject/Master,$/MyProject/Feature
+         Get-VSTeamTfvcBranch -Path $/MyProject/Master, $/MyProject/Feature
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
@@ -273,7 +294,7 @@ InModuleScope tfvc {
       }
    }
 
-   Describe "Get-VSTeamTfvcBranch TFS" {
+   Describe 'Get-VSTeamTfvcBranch TFS' -Tag 'unit', 'tfvc', 'tfs' {
 
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
       Mock _useWindowsAuthenticationOnPremise { return $true }
@@ -305,7 +326,7 @@ InModuleScope tfvc {
       Context 'Get-VSTeamTfvcBranch with two paths' {
          Mock Invoke-RestMethod { return $multipleResults } -Verifiable
 
-         Get-VSTeamTfvcBranch -Path $/MyProject/Master,$/MyProject/Feature
+         Get-VSTeamTfvcBranch -Path $/MyProject/Master, $/MyProject/Feature
 
          It 'should call the REST endpoint with correct parameters' {
             Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
