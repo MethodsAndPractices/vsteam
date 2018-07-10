@@ -12,13 +12,50 @@
 
 Add-VSTeamBuild will queue a new build.
 
-You can override the queue in the build defintion by using the QueueName
-parameter. You can override the default source branch by using the SourceBranch
-parameter. You can also set specific build parameters by using the BuildParameters
-parameter.
+You can override the queue in the build defintion by using the QueueName parameter. You can override the default source branch by using the SourceBranch parameter. You can also set specific build parameters by using the BuildParameters parameter.
 
-To have the BuildDefinition and QueueNames tab complete you must set a default
-project by calling Set-VSTeamDefaultProject before you call Add-VSTeamBuild.
+To have the BuildDefinition and QueueNames tab complete you must set a default project by calling Set-VSTeamDefaultProject before you call Add-VSTeamBuild.
+
+## EXAMPLES
+
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted
+```
+
+This example sets the default project so you can tab complete the BuildDefinition parameter.
+
+### -------------------------- EXAMPLE 2 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch refs/heads/develop
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted
+```
+
+This example queues the build for the 'develop' branch, overriding the default branch in the build definition.
+
+### -------------------------- EXAMPLE 3 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted
+```
+
+This example queues the build and sets the system.debug variable to true and msg to 'hello world!'.
 
 ## PARAMETERS
 
@@ -95,51 +132,10 @@ Build Parameters
 
 ### Team.Build
 
-## RELATED LINKS
-
 ## NOTES
 
 BuildDefinition and QueueName are dynamic parameters and use the default project value to query their validate set.
 
 If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamBuild you will have to type in the names.
 
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```PowerShell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI
-
-Build Definition Build Number  Status     Result
----------------- ------------  ------     ------
-Demo-CI           Demo-CI-45   notStarted
-```
-
-This example sets the default project so you can tab complete the BuildDefinition parameter.
-
-### -------------------------- EXAMPLE 2 --------------------------
-
-```PowerShell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch refs/heads/develop
-
-Build Definition Build Number  Status     Result
----------------- ------------  ------     ------
-Demo-CI           Demo-CI-45   notStarted
-```
-
-This example queues the build for the 'develop' branch, overriding the default branch in the build definition.
-
-### -------------------------- EXAMPLE 3 --------------------------
-
-```PowerShell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
-
-Build Definition Build Number  Status     Result
----------------- ------------  ------     ------
-Demo-CI           Demo-CI-45   notStarted
-```
-
-This example queues the build and sets the system.debug variable to true and msg to 'hello world!'.
+## RELATED LINKS

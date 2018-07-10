@@ -10,8 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure
-Resource Manager connection type.
+The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure Resource Manager connection type.
 
 ## EXAMPLES
 

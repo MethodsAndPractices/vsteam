@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Update-VSTeamServiceEndpoint
 
@@ -11,13 +7,11 @@ schema: 2.0.0
 
 Updates an existing service connection
 
-
 ## SYNTAX
 
 ## DESCRIPTION
 
 Updates an existing service connection
-
 
 ## EXAMPLES
 

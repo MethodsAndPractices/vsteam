@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Get-VSTeamApproval
 
@@ -15,11 +11,9 @@ Gets a list of approvals for all releases for a team project.
 
 ## DESCRIPTION
 
-The Get-VSTeamApproval function gets the approvals for all releases for a team
-project.
+The Get-VSTeamApproval function gets the approvals for all releases for a team project.
 
-With just a project name, this function gets all of the pending approvals
-for that team project.
+With just a project name, this function gets all of the pending approvals for that team project.
 
 When using with VSTS "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter is not empty.
 

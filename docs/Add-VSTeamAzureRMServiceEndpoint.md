@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Add-VSTeamAzureRMServiceEndpoint
 
@@ -15,8 +11,7 @@ Adds a new Azure Resource Manager service endpoint.
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure
-Resource Manager connection type.
+The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure Resource Manager connection type.
 
 ## EXAMPLES
 

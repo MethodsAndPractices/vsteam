@@ -53,8 +53,6 @@ Default value: ProjectContributor
 
 ## INPUTS
 
-### System.String
-
 ## OUTPUTS
 
 ### System.Object

@@ -12,14 +12,11 @@
 
 <!-- #include "./synopsis/Show-VSTeamBuildDefinition.md" -->
 
-The project name is a Dynamic Parameter which may not be displayed
-in the syntax above but is mandatory.
+The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.
 
-With just a project name, this function shows all of the build definitions
-for that team project.
+With just a project name, this function shows all of the build definitions for that team project.
 
-You can also specify a particular build defintion
-by ID.
+You can also specify a particular build defintion by ID.
 
 ## EXAMPLES
 

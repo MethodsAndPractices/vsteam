@@ -5,13 +5,22 @@ Help Version: 1.0.0.0
 Locale: en-US
 ---
 
-# Team Module
+# VSTeam Module
 
 ## Description
 
-Provides access to your Visual Studio Team Services (VSTS) and Team Foundation Server (TFS) from Mac, Linux and PC.
+Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery.com/packages/VSTeam/) that wraps the [REST API provided by Team Foundation Server and Visual Studio Team Services](https://cda.ms/ys). This allows you to access the power of TFS and VSTS from [PowerShell on Windows, MacOS and Linux](https://github.com/PowerShell/PowerShell).
 
-## Team Cmdlets
+## VSTeam Functions
+
+### [Add-VSTeam](Add-VSTeam.md)
+
+Adds a team to a team project.
+
+### [Add-VSTeamAccount](Add-VSTeamAccount.md)
+
+Stores your account name and personal access token for use with the other
+functions in this module.
 
 ### [Add-VSTeamAzureRMServiceEndpoint](Add-VSTeamAzureRMServiceEndpoint.md)
 
@@ -33,6 +42,14 @@ Adds a tag to a build.
 
 Adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
 
+### [Add-VSTeamKubernetesEndpoint](Add-VSTeamKubernetesEndpoint.md)
+
+Adds connections to Kubernetes clusters
+
+### [Add-VSTeamPolicy](Add-VSTeamPolicy.md)
+
+Adds a new policy to the specified project.
+
 ### [Add-VSTeamProfile](Add-VSTeamProfile.md)
 
 Stores your account name and personal access token as a profile for use with
@@ -50,18 +67,21 @@ Queues a new release
 
 Creates a new release defintion from a JSON file.
 
+### [Add-VSTeamServiceEndpoint](Add-VSTeamServiceEndpoint.md)
+
+Adds a generic service connection
+
+### [Add-VSTeamServiceFabricEndpoint](Add-VSTeamServiceFabricEndpoint.md)
+
+Adds a new Service Fabric service endpoint.
+
 ### [Add-VSTeamSonarQubeEndpoint](Add-VSTeamSonarQubeEndpoint.md)
 
 Adds a new SonarQube service endpoint.
 
-### [Add-VSTeam](Add-VSTeam.md)
+### [Add-VSTeamUser](Add-VSTeamUser.md)
 
-Adds a team to a team project.
-
-### [Add-VSTeamAccount](Add-VSTeamAccount.md)
-
-Stores your account name and personal access token for use with the other
-functions in this module.
+Adds a user to the account.
 
 ### [Add-VSTeamWorkItem](Add-VSTeamWorkItem.md)
 
@@ -70,6 +90,10 @@ Adds a work item to your project.
 ### [Clear-VSTeamDefaultProject](Clear-VSTeamDefaultProject.md)
 
 Clears the value stored in the default project parameter value.
+
+### [Get-VSTeam](Get-VSTeam.md)
+
+Returns a team.
 
 ### [Get-VSTeamApproval](Get-VSTeamApproval.md)
 
@@ -103,6 +127,26 @@ Gets the Azure subscriptions associated with the Team Services account.
 
 Get all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.
 
+### [Get-VSTeamInfo](Get-VSTeamInfo.md)
+
+Displays your current account and default project.
+
+### [Get-VSTeamMember](Get-VSTeamMember.md)
+
+Returns a team member.
+
+### [Get-VSTeamOption](Get-VSTeamOption.md)
+
+Returns all the versions of supported APIs of your TFS or VSTS.
+
+### [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
+
+Get the code policies in the specified Visual Studio Team Services or Team Foundation Server project.
+
+### [Get-VSTeamPolicyType](Get-VSTeamPolicyType.md)
+
+Get the policy types in the specified Visual Studio Team Services or Team Foundation Server project.
+
 ### [Get-VSTeamPool](Get-VSTeamPool.md)
 
 Returns the agent pools.
@@ -135,25 +179,41 @@ List all the areas supported by this instance of TFS/VSTS.
 
 Gets a service endpoint.
 
-### [Get-VSTeam](Get-VSTeam.md)
+### [Get-VSTeamServiceEndpointType](Get-VSTeamServiceEndpointType.md)
 
-Returns a team.
+Get service endpoint types.
 
-### [Get-VSTeamInfo](Get-VSTeamInfo.md)
+### [Get-VSTeamTfvcBranch](Get-VSTeamTfvcBranch.md)
 
-Displays your current account and default project.
+Gets a branch for a given path from TFVC source control.
 
-### [Get-VSTeamMember](Get-VSTeamMember.md)
+### [Get-VSTeamTfvcRootBranch](Get-VSTeamTfvcRootBranch.md)
 
-Returns a team member.
+Gets root branches for all projects with TFVC source control.
 
-### [Get-VSTeamOption](Get-VSTeamOption.md)
+### [Get-VSTeamUser](Get-VSTeamUser.md)
 
-Returns all the versions of supported APIs of your TFS or VSTS.
+Returns a list of users for the account.
+
+### [Get-VSTeamWorkItem](Get-VSTeamWorkItem.md)
+
+Returns one or more a work items from your project.
 
 ### [Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)
 
 Gets a list of all Work Item Types or a single work item type.
+
+### [Invoke-VSTeamRequest](Invoke-VSTeamRequest.md)
+
+Allows you to call any TFS/VSTS REST API. All the Auth and Route Structure is taken care of for you. Just provide the parts of the API call you need.  If you need to send a non-standard URL use the -Url parameter.  If the -Url is used the Url is not changed but the header and UserAgent are added for you.
+
+### [Remove-VSTeam](Remove-VSTeam.md)
+
+Removes a team from a project.
+
+### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
+
+Clears your default project, account name and personal access token.
 
 ### [Remove-VSTeamBuild](Remove-VSTeamBuild.md)
 
@@ -171,6 +231,14 @@ Removes the tag from a build.
 
 Removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.
 
+### [Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
+
+Removes the specified policy from the specified project.
+
+### [Remove-VSTeamProfile](Remove-VSTeamProfile.md)
+
+Removes the profile.
+
 ### [Remove-VSTeamProject](Remove-VSTeamProject.md)
 
 Deletes the Team Project from your Team Services account.
@@ -187,13 +255,9 @@ Removes the release definitions for a team project.
 
 Removes a service endpoint.
 
-### [Remove-VSTeam](Remove-VSTeam.md)
+### [Remove-VSTeamUser](Remove-VSTeamUser.md)
 
-Removes a team from a project.
-
-### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
-
-Clears your default project, account name and personal access token.
+Removes a user from the account.
 
 ### [Set-VSTeamAPIVersion](Set-VSTeamAPIVersion.md)
 
@@ -203,9 +267,9 @@ Sets the API versions to support either TFS2017, TFS2018 or VSTS.
 
 Sets the status of approval to Approved, Rejected, Pending, or ReAssigned.
 
-### [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+### [Set-VSTeamDefaultProject.](Set-VSTeamDefaultProject..md)
 
-Sets the default project to be used with other calls in the module.
+<!-- #include "./synopsis/Set-VSTeamDefaultProject..md" -->
 
 ### [Set-VSTeamEnvironmentStatus](Set-VSTeamEnvironmentStatus.md)
 
@@ -247,6 +311,14 @@ Opens the release summary in the default browser.
 
 Opens the release definitions for a team project in the default browser.
 
+### [Show-VSTeamWorkItem](Show-VSTeamWorkItem.md)
+
+Opens the work item in the default browser.
+
+### [Update-VSTeam](Update-VSTeam.md)
+
+Updates the team name, description or both.
+
 ### [Update-VSTeamBuild](Update-VSTeamBuild.md)
 
 Allows you to set the keep forever flag and build number.
@@ -255,10 +327,16 @@ Allows you to set the keep forever flag and build number.
 
 Updates a build definition for a team project.
 
+### [Update-VSTeamPolicy](Update-VSTeamPolicy.md)
+
+Updates an existing policy in the specified project.
+
 ### [Update-VSTeamProject](Update-VSTeamProject.md)
 
 Updates the project name, description or both.
 
-### [Get-VSTeamServiceEndpointType](Get-VSTeamServiceEndpointType.md)
+### [Update-VSTeamServiceEndpoint](Update-VSTeamServiceEndpoint.md)
 
-Get service endpoint types.
+Updates an existing service connection
+
+

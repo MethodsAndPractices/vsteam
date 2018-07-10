@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Update-VSTeamBuildDefinition
 
@@ -15,8 +11,7 @@ Updates a build definition for a team project.
 
 ## DESCRIPTION
 
-Reads a JSON file off disk and uses that file to update an existing
-build defintion in the provided project.
+Reads a JSON file off disk and uses that file to update an existing build defintion in the provided project.
 
 You must call Add-VSTeamAccount before calling this function.
 

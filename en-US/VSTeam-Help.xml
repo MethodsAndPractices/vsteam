@@ -1077,6 +1077,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <maml:alert>
         <maml:para>BuildDefinition and QueueName are dynamic parameters and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamBuild you will have to type in the names.</maml:para>
+        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3772,16 +3773,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         <dev:defaultValue>ProjectContributor</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>System.String</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
+    <command:inputTypes />
     <command:returnValues>
       <command:returnValue>
         <dev:type>

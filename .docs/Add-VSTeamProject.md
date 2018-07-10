@@ -10,8 +10,7 @@
 
 ## DESCRIPTION
 
-This will create a new Team Project in your Team Foundation Server or Team Services
-account.
+This will create a new Team Project in your Team Foundation Server or Team Services account.
 
 ## EXAMPLES
 

@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Show-VSTeamBuildDefinition
 
@@ -17,14 +13,11 @@ Opens the build definition in the default browser.
 
 Opens the build definition in the default browser.
 
-The project name is a Dynamic Parameter which may not be displayed
-in the syntax above but is mandatory.
+The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.
 
-With just a project name, this function shows all of the build definitions
-for that team project.
+With just a project name, this function shows all of the build definitions for that team project.
 
-You can also specify a particular build defintion
-by ID.
+You can also specify a particular build defintion by ID.
 
 ## EXAMPLES
 

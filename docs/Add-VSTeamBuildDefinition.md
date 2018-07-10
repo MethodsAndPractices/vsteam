@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Add-VSTeamBuildDefinition
 
@@ -15,8 +11,7 @@ Creates a new build defintion from a JSON file.
 
 ## DESCRIPTION
 
-Reads a JSON file off disk and uses that file to create a new build defintion
-in the provided project.
+Reads a JSON file off disk and uses that file to create a new build defintion in the provided project.
 
 You must call Add-VSTeamAccount before calling this function.
 

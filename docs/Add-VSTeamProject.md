@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Add-VSTeamProject
 
@@ -15,8 +11,7 @@ Adds a Team Project to your account.
 
 ## DESCRIPTION
 
-This will create a new Team Project in your Team Foundation Server or Team Services
-account.
+This will create a new Team Project in your Team Foundation Server or Team Services account.
 
 ## EXAMPLES
 

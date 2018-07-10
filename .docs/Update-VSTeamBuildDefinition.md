@@ -10,8 +10,7 @@
 
 ## DESCRIPTION
 
-Reads a JSON file off disk and uses that file to update an existing
-build defintion in the provided project.
+Reads a JSON file off disk and uses that file to update an existing build defintion in the provided project.
 
 You must call Add-VSTeamAccount before calling this function.
 

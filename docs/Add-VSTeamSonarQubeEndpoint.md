@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Add-VSTeamSonarQubeEndpoint
 
@@ -15,8 +11,7 @@ Adds a new SonarQube service endpoint.
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using
-the SonarQube connection type.
+The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using the SonarQube connection type.
 
 This is only used when using the SonarQube tasks.
 

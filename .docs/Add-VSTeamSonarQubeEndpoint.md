@@ -10,8 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using
-the SonarQube connection type.
+The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using the SonarQube connection type.
 
 This is only used when using the SonarQube tasks.
 
