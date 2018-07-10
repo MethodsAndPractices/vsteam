@@ -37,7 +37,12 @@ This command will open a web browser with All Definitions for this project showi
 
 ### -Type
 
-The type of the build definitions to retrieve (Mine, All, Queued, XAML).
+The type of the build definitions to retrieve.  The acceptable values for this parameter are:
+
+- Mine
+- All
+- Queued
+- XAML
 
 If not specified, all types will be returned.
 

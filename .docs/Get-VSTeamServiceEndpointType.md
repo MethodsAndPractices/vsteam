@@ -23,12 +23,7 @@ Name of service endpoint type to return.
 ```yaml
 Type: String
 Parameter Sets: ByType
-Aliases:
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ### -Scheme
@@ -38,12 +33,7 @@ Scheme of service endpoint
 ```yaml
 Type: String
 Parameter Sets: ByType
-Aliases:
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ## INPUTS

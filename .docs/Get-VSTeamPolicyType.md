@@ -41,11 +41,6 @@ Specifies one policy type by id.
 ```yaml
 Type: Guid[]
 Parameter Sets: ByID
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ## INPUTS

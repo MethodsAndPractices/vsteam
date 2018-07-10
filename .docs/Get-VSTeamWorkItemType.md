@@ -33,12 +33,6 @@ The type of work item to retrieve.
 ```yaml
 Type: String
 Parameter Sets: ByType
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

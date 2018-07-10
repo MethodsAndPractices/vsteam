@@ -40,13 +40,8 @@ You can use Set-VSTeamDefaultProject to set a default project so you do not have
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
 Required: True
-Position: 0
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ### -Level
@@ -57,13 +52,6 @@ When saved at the User or Machine level your default project will be in any futu
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

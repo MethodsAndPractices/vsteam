@@ -32,14 +32,8 @@ The RemoteUrl of the Git repository to open.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-
 Required: True
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ## INPUTS

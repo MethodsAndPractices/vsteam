@@ -151,3 +151,9 @@ Accept pipeline input: true (ByPropertyName)
 ## NOTES
 
 ## RELATED LINKS
+
+[Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
+
+[Get-VSTeamServiceEndpointType](Get-VSTeamServiceEndpointType.md)
+
+[Remove-VSTeamServiceEndpoint](Remove-VSTeamServiceEndpoint.md)

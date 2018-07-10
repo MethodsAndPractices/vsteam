@@ -33,12 +33,8 @@ The id of the work item.
 ```yaml
 Type: Int32
 Parameter Sets: ByID
-Aliases:
 Required: True
-Position: 0
-Default value: None
 Accept pipeline input: true (ByPropertyName, ByValue)
-Accept wildcard characters: False
 ```
 
 ### -Ids
@@ -48,29 +44,22 @@ The id of the work item.
 ```yaml
 Type: Int32[]
 Parameter Sets: List
-Aliases:
 Required: True
-Position: 0
-Default value: None
 Accept pipeline input: true (ByPropertyName, ByValue)
-Accept wildcard characters: False
 ```
 
 ### -ErrorPolicy
 
-The flag to control error policy in a bulk get work items request.
+The flag to control error policy in a bulk get work items request.  The acceptable values for this parameter are:
 
-Valid values: Fail, Omit
+- Fail
+- Omit
 
 ```yaml
 Type: String
 Parameter Sets: List
-Aliases:
 Required: True
-Position: 1
 Default value: Fail
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Fields
@@ -79,43 +68,26 @@ Comma-separated list of requested fields.
 
 ```yaml
 Type: String[]
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Expand
 
-Comma-separated list of requested fields.
+Comma-separated list of requested fields.  The acceptable values for this parameter are:
 
-Valid values: None, Relations, Fields, Links, All
+- None
+- Relations
+- Fields
+- Links
+- All
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -AsOf
 
 ```yaml
 Type: DateTime
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

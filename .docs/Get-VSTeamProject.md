@@ -40,9 +40,13 @@ This will return the top five WellFormed team projects only showing their name
 
 ### -StateFilter
 
-Returns team projects in a specific team project state of WellFormed, CreatePending, Deleting, New, or All.
+Returns team projects in a specific team project state.  The acceptable values for this parameter are:
 
-If you do not provide a value the default is WellFormed.
+- WellFormed
+- CreatePending
+- Deleting
+- New
+- All
 
 ```yaml
 Type: String

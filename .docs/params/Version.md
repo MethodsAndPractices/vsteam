@@ -1,8 +1,10 @@
 ### -Version
 
-Specifies the version to use.
+Specifies the version to use. The acceptable values for this parameter are:
 
-Valid values: 'TFS2017', 'TFS2018', 'VSTS'
+- TFS2017
+- TFS2018
+- VSTS
 
 If you are on VSTS it will default to VSTS otherwise it will default to TFS2017
 

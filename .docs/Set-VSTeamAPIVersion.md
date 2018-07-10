@@ -26,19 +26,16 @@ This command sets the API versions to support VSTS.
 
 ### -Version
 
-Specifies the version to use.
+Specifies the version to use. The acceptable values for this parameter are:
 
-Valid values: 'TFS2017', 'TFS2018', 'VSTS'
+- TFS2017
+- TFS2018
+- VSTS
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
 Required: True
-Position: 1
 Default value: TFS2017
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 <!-- #include "./params/force.md" -->

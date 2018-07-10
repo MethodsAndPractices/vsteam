@@ -39,13 +39,7 @@ You must use Set-VSTeamDefaultProject to set a default project to enable the tab
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

@@ -31,13 +31,8 @@ Type of Account License. The acceptable values for this parameter are:
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
 Required: True
-Position: Named
 Default value: EarlyAdopter
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Group
@@ -52,13 +47,8 @@ The acceptable values for this parameter are:
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
 Required: True
-Position: Named
 Default value: ProjectContributor
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

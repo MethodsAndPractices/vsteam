@@ -30,13 +30,7 @@ Name of profile to remove.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 <!-- #include "./params/force.md" -->

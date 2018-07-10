@@ -25,12 +25,8 @@ Id of the service endpoint
 ```yaml
 Type: String
 Parameter Sets: ByID
-Aliases:
 Required: True
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ## INPUTS

@@ -29,10 +29,7 @@ Type: String
 Parameter Sets: ByID
 Aliases: name
 Required: True
-Position: 0
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ### -Email
@@ -44,10 +41,7 @@ Type: String
 Parameter Sets: ByEmail
 Aliases: name
 Required: True
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 <!-- #include "./params/whatIf.md" -->

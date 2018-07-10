@@ -44,13 +44,7 @@ Otherwise, the content type is not specified in the call.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: Get
-Accept pipeline input: False
-Accept wildcard characters: False
+Default value: application/json
 ```
 
 ### -Method
@@ -70,13 +64,7 @@ Specifies the method used for the request. The acceptable values for this parame
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
 Default value: Get
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Body
@@ -89,13 +77,7 @@ When the input is a GET request and the body is an IDictionary (typically, a has
 
 ```yaml
 Type: Object
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: true (ByValue)
-Accept wildcard characters: False
 ```
 
 ### -InFile
@@ -104,13 +86,6 @@ Path and file name to the file that contains the contents of the request. If the
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -OutFile
@@ -119,13 +94,6 @@ Specifies the output file for which this function saves the response body. Enter
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Area
@@ -134,13 +102,6 @@ The area to find the resource.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Resource
@@ -149,13 +110,6 @@ The name of the feature you want to manipulate.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Id
@@ -164,13 +118,6 @@ The unique value of the item you want to work with.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Version
@@ -179,13 +126,6 @@ The version of the API you wish to target.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -SubDomain
@@ -194,13 +134,6 @@ The SubDomain between your account and visualstudio.com. For example, to target 
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -JSON
@@ -209,13 +142,6 @@ Converts the PowerShell object into JSON and displays in the console.
 
 ```yaml
 Type: Switch
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

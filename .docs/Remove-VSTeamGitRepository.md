@@ -34,13 +34,8 @@ To find the ID of a repository, type Get-Repository.
 
 ```yaml
 Type: Guid[]
-Parameter Sets: (All)
 Aliases: RepositoryID
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 <!-- #include "./params/force.md" -->

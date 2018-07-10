@@ -45,3 +45,11 @@ Position: 1
 ## NOTES
 
 ## RELATED LINKS
+
+[Get-VSTeam](Get-VSTeam.md)
+
+[Remove-VSTeam](Remove-VSTeam.md)
+
+[Show-VSTeam](Show-VSTeam.md)
+
+[Update-VSTeam](pda-VSTeam.md)

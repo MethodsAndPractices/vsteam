@@ -30,13 +30,6 @@ On Windows allows you to clear your default project at the Process, User or Mach
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS
@@ -47,6 +40,6 @@ Accept wildcard characters: False
 
 ## RELATED LINKS
 
-[Set-Project](Set-Project.md)
+[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 
 [Add-VSTeamAccount](Add-VSTeamAccount.md)

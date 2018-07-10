@@ -54,11 +54,7 @@ To find the ID of a repository, type Get-VSTeamGitRepository.
 Type: Guid[]
 Parameter Sets: ByID
 Aliases: RepositoryID
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ### -Name
@@ -72,11 +68,7 @@ To find the name of a repository, type Get-VSTeamGitRepository.
 ```yaml
 Type: String[]
 Parameter Sets: ByName
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ## INPUTS

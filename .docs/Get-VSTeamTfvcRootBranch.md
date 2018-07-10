@@ -46,13 +46,6 @@ Return the child branches for each root branch.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -IncludeDeleted
@@ -61,13 +54,6 @@ Return deleted branches.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

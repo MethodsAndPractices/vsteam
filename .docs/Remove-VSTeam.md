@@ -24,7 +24,6 @@ The id of the team to remove.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
 Aliases: name
 Required: True
 Accept pipeline input: true (ByPropertyName)

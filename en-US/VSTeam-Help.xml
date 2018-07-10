@@ -99,11 +99,28 @@
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeam</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeam</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Show-VSTeam</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeam</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -138,8 +155,11 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>Version</maml:name>
           <maml:Description>
-            <maml:para>Specifies the version to use.</maml:para>
-            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para></maml:para>
             <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -230,8 +250,11 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>Version</maml:name>
           <maml:Description>
-            <maml:para>Specifies the version to use.</maml:para>
-            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para></maml:para>
             <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -296,8 +319,11 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>Version</maml:name>
           <maml:Description>
-            <maml:para>Specifies the version to use.</maml:para>
-            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para></maml:para>
             <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -464,8 +490,11 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
         <maml:name>Version</maml:name>
         <maml:Description>
-          <maml:para>Specifies the version to use.</maml:para>
-          <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- TFS2017</maml:para>
+          <maml:para>- TFS2018</maml:para>
+          <maml:para>- VSTS</maml:para>
+          <maml:para></maml:para>
           <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -557,6 +586,10 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Add-VSTeamProfile</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -760,11 +793,24 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpointType</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -1687,11 +1733,24 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpointType</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -1910,8 +1969,11 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>Version</maml:name>
           <maml:Description>
-            <maml:para>Specifies the version to use.</maml:para>
-            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para></maml:para>
             <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -1989,8 +2051,11 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>Version</maml:name>
           <maml:Description>
-            <maml:para>Specifies the version to use.</maml:para>
-            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para></maml:para>
             <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2042,8 +2107,11 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>Version</maml:name>
           <maml:Description>
-            <maml:para>Specifies the version to use.</maml:para>
-            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para></maml:para>
             <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2145,8 +2213,11 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
         <maml:name>Version</maml:name>
         <maml:Description>
-          <maml:para>Specifies the version to use.</maml:para>
-          <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- TFS2017</maml:para>
+          <maml:para>- TFS2018</maml:para>
+          <maml:para>- VSTS</maml:para>
+          <maml:para></maml:para>
           <maml:para>If you are on VSTS it will default to VSTS otherwise it will default to TFS2017</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2213,7 +2284,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Add-VSTeamProject</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="Name">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="Name">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
             <maml:para>The name of the project to create.</maml:para>
@@ -2225,10 +2296,13 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>ProcessTemplate</maml:name>
           <maml:Description>
-            <maml:para>The name of the process template to use for the project. The valid values are Agile, Scrum or CMMI.</maml:para>
+            <maml:para>The name of the process template to use for the project. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Agile</maml:para>
+            <maml:para>- Scrum</maml:para>
+            <maml:para>- CMMI</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2237,7 +2311,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>Scrum</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Description</maml:name>
           <maml:Description>
             <maml:para>The description of the team project.</maml:para>
@@ -2249,7 +2323,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>TFVC</maml:name>
           <maml:Description>
             <maml:para>Switches the source control from Git to TFVC.</maml:para>
@@ -2263,7 +2337,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="Name">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="Name">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
           <maml:para>The name of the project to create.</maml:para>
@@ -2275,10 +2349,13 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>ProcessTemplate</maml:name>
         <maml:Description>
-          <maml:para>The name of the process template to use for the project. The valid values are Agile, Scrum or CMMI.</maml:para>
+          <maml:para>The name of the process template to use for the project. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- Agile</maml:para>
+          <maml:para>- Scrum</maml:para>
+          <maml:para>- CMMI</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2287,7 +2364,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>Scrum</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Description</maml:name>
         <maml:Description>
           <maml:para>The description of the team project.</maml:para>
@@ -2299,7 +2376,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>TFVC</maml:name>
         <maml:Description>
           <maml:para>Switches the source control from Git to TFVC.</maml:para>
@@ -2948,11 +3025,24 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpointType</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -3307,7 +3397,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3337,7 +3427,20 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpointType</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -3533,11 +3636,24 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamServiceEndpointType</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -3568,7 +3684,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>License</maml:name>
           <maml:Description>
             <maml:para>Type of Account License. The acceptable values for this parameter are:</maml:para>
@@ -3586,7 +3702,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
           </dev:type>
           <dev:defaultValue>EarlyAdopter</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Group</maml:name>
           <maml:Description>
             <maml:para>The acceptable values for this parameter are:</maml:para>
@@ -3620,7 +3736,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>License</maml:name>
         <maml:Description>
           <maml:para>Type of Account License. The acceptable values for this parameter are:</maml:para>
@@ -3638,7 +3754,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>EarlyAdopter</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Group</maml:name>
         <maml:Description>
           <maml:para>The acceptable values for this parameter are:</maml:para>
@@ -3713,7 +3829,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>WorkItemType</maml:name>
           <maml:Description>
             <maml:para>The type of work item to add.</maml:para>
@@ -3744,7 +3860,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>WorkItemType</maml:name>
         <maml:Description>
           <maml:para>The type of work item to add.</maml:para>
@@ -3809,7 +3925,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Clear-VSTeamDefaultProject</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
             <maml:para>On Windows allows you to clear your default project at the Process, User or Machine levels.</maml:para>
@@ -3824,7 +3940,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Level</maml:name>
         <maml:Description>
           <maml:para>On Windows allows you to clear your default project at the Process, User or Machine levels.</maml:para>
@@ -3855,7 +3971,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Set-Project</maml:linkText>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -3893,7 +4009,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Skip</maml:name>
           <maml:Description>
             <maml:para>The number of items to skip.</maml:para>
@@ -3905,7 +4021,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Top</maml:name>
           <maml:Description>
             <maml:para>Specifies the maximum number to return.</maml:para>
@@ -3934,7 +4050,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>TeamId</maml:name>
           <maml:Description>
             <maml:para>The id of the team to retrieve.</maml:para>
@@ -3963,7 +4079,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>The name of the team to retrieve.</maml:para>
@@ -3992,7 +4108,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Skip</maml:name>
         <maml:Description>
           <maml:para>The number of items to skip.</maml:para>
@@ -4004,7 +4120,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>TeamId</maml:name>
         <maml:Description>
           <maml:para>The id of the team to retrieve.</maml:para>
@@ -4016,7 +4132,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Top</maml:name>
         <maml:Description>
           <maml:para>Specifies the maximum number to return.</maml:para>
@@ -4028,7 +4144,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>The name of the team to retrieve.</maml:para>
@@ -4041,20 +4157,11 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>System.String</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
+    <command:inputTypes />
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>Team.Team</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -4787,8 +4894,10 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Type</maml:name>
           <maml:Description>
-            <maml:para>The type of the build definitions to retrieve (build, xaml).</maml:para>
-            <maml:para>If not specified, all types will be returned.</maml:para>
+            <maml:para>The type of the build definitions to retrieve. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- build</maml:para>
+            <maml:para>- xaml</maml:para>
+            <maml:para>- All</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4872,8 +4981,10 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Type</maml:name>
         <maml:Description>
-          <maml:para>The type of the build definitions to retrieve (build, xaml).</maml:para>
-          <maml:para>If not specified, all types will be returned.</maml:para>
+          <maml:para>The type of the build definitions to retrieve. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- build</maml:para>
+          <maml:para>- xaml</maml:para>
+          <maml:para>- All</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -5579,7 +5690,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-VSTeamOption</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Release</maml:name>
           <maml:Description>
             <maml:para>Returns options for Release Management APIs</maml:para>
@@ -5593,7 +5704,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Release</maml:name>
         <maml:Description>
           <maml:para>Returns options for Release Management APIs</maml:para>
@@ -5776,7 +5887,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>Specifies one policy type by id.</maml:para>
@@ -5805,7 +5916,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>Specifies one policy type by id.</maml:para>
@@ -5942,7 +6053,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-VSTeamProfile</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>Optional name for the profile.</maml:para>
@@ -5957,7 +6068,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>Optional name for the profile.</maml:para>
@@ -6038,8 +6149,12 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>StateFilter</maml:name>
           <maml:Description>
-            <maml:para>Returns team projects in a specific team project state of WellFormed, CreatePending, Deleting, New, or All.</maml:para>
-            <maml:para>If you do not provide a value the default is WellFormed.</maml:para>
+            <maml:para>Returns team projects in a specific team project state.  The acceptable values for this parameter are:</maml:para>
+            <maml:para>- WellFormed</maml:para>
+            <maml:para>- CreatePending</maml:para>
+            <maml:para>- Deleting</maml:para>
+            <maml:para>- New</maml:para>
+            <maml:para>- All</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6132,8 +6247,12 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>StateFilter</maml:name>
         <maml:Description>
-          <maml:para>Returns team projects in a specific team project state of WellFormed, CreatePending, Deleting, New, or All.</maml:para>
-          <maml:para>If you do not provide a value the default is WellFormed.</maml:para>
+          <maml:para>Returns team projects in a specific team project state.  The acceptable values for this parameter are:</maml:para>
+          <maml:para>- WellFormed</maml:para>
+          <maml:para>- CreatePending</maml:para>
+          <maml:para>- Deleting</maml:para>
+          <maml:para>- New</maml:para>
+          <maml:para>- All</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -6775,7 +6894,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Expand</maml:name>
           <maml:Description>
             <maml:para>Specifies which property should be expanded in the list of Release Definition (environments, artifacts, none).</maml:para>
@@ -6835,7 +6954,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Expand</maml:name>
         <maml:Description>
           <maml:para>Specifies which property should be expanded in the list of Release Definition (environments, artifacts, none).</maml:para>
@@ -7182,7 +7301,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>IncludeChildren</maml:name>
           <maml:Description>
             <maml:para>Return child branches, if there are any.</maml:para>
@@ -7193,7 +7312,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>IncludeParent</maml:name>
           <maml:Description>
             <maml:para>Return the parent branch, if there is one.</maml:para>
@@ -7204,7 +7323,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>IncludeDeleted</maml:name>
           <maml:Description>
             <maml:para>Return branches marked as deleted.</maml:para>
@@ -7230,7 +7349,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>IncludeChildren</maml:name>
         <maml:Description>
           <maml:para>Return child branches, if there are any.</maml:para>
@@ -7242,7 +7361,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>IncludeParent</maml:name>
         <maml:Description>
           <maml:para>Return the parent branch, if there is one.</maml:para>
@@ -7254,7 +7373,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>IncludeDeleted</maml:name>
         <maml:Description>
           <maml:para>Return branches marked as deleted.</maml:para>
@@ -7329,7 +7448,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-VSTeamTfvcRootBranch</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>IncludeChildren</maml:name>
           <maml:Description>
             <maml:para>Return the child branches for each root branch.</maml:para>
@@ -7340,7 +7459,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>IncludeDeleted</maml:name>
           <maml:Description>
             <maml:para>Return deleted branches.</maml:para>
@@ -7354,7 +7473,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>IncludeChildren</maml:name>
         <maml:Description>
           <maml:para>Return the child branches for each root branch.</maml:para>
@@ -7366,7 +7485,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>IncludeDeleted</maml:name>
         <maml:Description>
           <maml:para>Return deleted branches.</maml:para>
@@ -7426,7 +7545,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-VSTeamUser</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Skip</maml:name>
           <maml:Description>
             <maml:para>The number of items to skip.</maml:para>
@@ -7438,7 +7557,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Top</maml:name>
           <maml:Description>
             <maml:para>Specifies the maximum number to return.</maml:para>
@@ -7450,11 +7569,13 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Select</maml:name>
           <maml:Description>
-            <maml:para>Comma (",") separated list of properties to select in the result entitlements.</maml:para>
-            <maml:para>Valid values: 'Projects, 'Extensions', 'Grouprules'</maml:para>
+            <maml:para>Comma (",") separated list of properties to select in the result entitlements.  The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Projects</maml:para>
+            <maml:para>- Extensions</maml:para>
+            <maml:para>- Grouprules</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7466,7 +7587,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-VSTeamUser</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>UserId</maml:name>
           <maml:Description>
             <maml:para>The id of the user to retrieve.</maml:para>
@@ -7481,7 +7602,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Skip</maml:name>
         <maml:Description>
           <maml:para>The number of items to skip.</maml:para>
@@ -7493,7 +7614,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>UserId</maml:name>
         <maml:Description>
           <maml:para>The id of the user to retrieve.</maml:para>
@@ -7505,7 +7626,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Top</maml:name>
         <maml:Description>
           <maml:para>Specifies the maximum number to return.</maml:para>
@@ -7517,11 +7638,13 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Select</maml:name>
         <maml:Description>
-          <maml:para>Comma (",") separated list of properties to select in the result entitlements.</maml:para>
-          <maml:para>Valid values: 'Projects, 'Extensions', 'Grouprules'</maml:para>
+          <maml:para>Comma (",") separated list of properties to select in the result entitlements.  The acceptable values for this parameter are:</maml:para>
+          <maml:para>- Projects</maml:para>
+          <maml:para>- Extensions</maml:para>
+          <maml:para>- Grouprules</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7531,26 +7654,8 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>System.String</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
         <maml:para>## RELATED LINKS</maml:para>
@@ -7588,7 +7693,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>The id of the work item.</maml:para>
@@ -7600,7 +7705,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Fields</maml:name>
           <maml:Description>
             <maml:para>Comma-separated list of requested fields.</maml:para>
@@ -7612,11 +7717,15 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Expand</maml:name>
           <maml:Description>
-            <maml:para>Comma-separated list of requested fields.</maml:para>
-            <maml:para>Valid values: None, Relations, Fields, Links, All</maml:para>
+            <maml:para>Comma-separated list of requested fields.  The acceptable values for this parameter are:</maml:para>
+            <maml:para>- None</maml:para>
+            <maml:para>- Relations</maml:para>
+            <maml:para>- Fields</maml:para>
+            <maml:para>- Links</maml:para>
+            <maml:para>- All</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7625,7 +7734,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>AsOf</maml:name>
           <maml:Description>
             <maml:para></maml:para>
@@ -7654,7 +7763,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Ids</maml:name>
           <maml:Description>
             <maml:para>The id of the work item.</maml:para>
@@ -7666,11 +7775,12 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>ErrorPolicy</maml:name>
           <maml:Description>
-            <maml:para>The flag to control error policy in a bulk get work items request.</maml:para>
-            <maml:para>Valid values: Fail, Omit</maml:para>
+            <maml:para>The flag to control error policy in a bulk get work items request.  The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Fail</maml:para>
+            <maml:para>- Omit</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7679,7 +7789,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>Fail</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Fields</maml:name>
           <maml:Description>
             <maml:para>Comma-separated list of requested fields.</maml:para>
@@ -7691,11 +7801,15 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Expand</maml:name>
           <maml:Description>
-            <maml:para>Comma-separated list of requested fields.</maml:para>
-            <maml:para>Valid values: None, Relations, Fields, Links, All</maml:para>
+            <maml:para>Comma-separated list of requested fields.  The acceptable values for this parameter are:</maml:para>
+            <maml:para>- None</maml:para>
+            <maml:para>- Relations</maml:para>
+            <maml:para>- Fields</maml:para>
+            <maml:para>- Links</maml:para>
+            <maml:para>- All</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7704,7 +7818,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>AsOf</maml:name>
           <maml:Description>
             <maml:para></maml:para>
@@ -7733,7 +7847,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>The id of the work item.</maml:para>
@@ -7745,7 +7859,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>Ids</maml:name>
         <maml:Description>
           <maml:para>The id of the work item.</maml:para>
@@ -7757,11 +7871,12 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>ErrorPolicy</maml:name>
         <maml:Description>
-          <maml:para>The flag to control error policy in a bulk get work items request.</maml:para>
-          <maml:para>Valid values: Fail, Omit</maml:para>
+          <maml:para>The flag to control error policy in a bulk get work items request.  The acceptable values for this parameter are:</maml:para>
+          <maml:para>- Fail</maml:para>
+          <maml:para>- Omit</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7770,7 +7885,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>Fail</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Fields</maml:name>
         <maml:Description>
           <maml:para>Comma-separated list of requested fields.</maml:para>
@@ -7782,11 +7897,15 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Expand</maml:name>
         <maml:Description>
-          <maml:para>Comma-separated list of requested fields.</maml:para>
-          <maml:para>Valid values: None, Relations, Fields, Links, All</maml:para>
+          <maml:para>Comma-separated list of requested fields.  The acceptable values for this parameter are:</maml:para>
+          <maml:para>- None</maml:para>
+          <maml:para>- Relations</maml:para>
+          <maml:para>- Fields</maml:para>
+          <maml:para>- Links</maml:para>
+          <maml:para>- All</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7795,7 +7914,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>AsOf</maml:name>
         <maml:Description>
           <maml:para></maml:para>
@@ -7867,7 +7986,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>WorkItemType</maml:name>
           <maml:Description>
             <maml:para>The type of work item to retrieve.</maml:para>
@@ -7896,7 +8015,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>WorkItemType</maml:name>
         <maml:Description>
           <maml:para>The type of work item to retrieve.</maml:para>
@@ -7979,7 +8098,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>ContentType</maml:name>
           <maml:Description>
             <maml:para>Specifies the content type of the request.</maml:para>
@@ -7991,9 +8110,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Get</dev:defaultValue>
+          <dev:defaultValue>application/json</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Method</maml:name>
           <maml:Description>
             <maml:para>Specifies the method used for the request. The acceptable values for this parameter are:</maml:para>
@@ -8029,7 +8148,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>InFile</maml:name>
           <maml:Description>
             <maml:para>Path and file name to the file that contains the contents of the request. If the path is omitted, the default is the current location.</maml:para>
@@ -8041,7 +8160,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>OutFile</maml:name>
           <maml:Description>
             <maml:para>Specifies the output file for which this function saves the response body. Enter a path and file name. If you omit the path, the default is the current location.</maml:para>
@@ -8053,7 +8172,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Area</maml:name>
           <maml:Description>
             <maml:para>The area to find the resource.</maml:para>
@@ -8065,7 +8184,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Resource</maml:name>
           <maml:Description>
             <maml:para>The name of the feature you want to manipulate.</maml:para>
@@ -8077,7 +8196,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>The unique value of the item you want to work with.</maml:para>
@@ -8089,7 +8208,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Version</maml:name>
           <maml:Description>
             <maml:para>The version of the API you wish to target.</maml:para>
@@ -8101,7 +8220,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>SubDomain</maml:name>
           <maml:Description>
             <maml:para>The SubDomain between your account and visualstudio.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
@@ -8113,7 +8232,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>JSON</maml:name>
           <maml:Description>
             <maml:para>Converts the PowerShell object into JSON and displays in the console.</maml:para>
@@ -8141,7 +8260,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>ContentType</maml:name>
         <maml:Description>
           <maml:para>Specifies the content type of the request.</maml:para>
@@ -8153,9 +8272,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Get</dev:defaultValue>
+        <dev:defaultValue>application/json</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Method</maml:name>
         <maml:Description>
           <maml:para>Specifies the method used for the request. The acceptable values for this parameter are:</maml:para>
@@ -8191,7 +8310,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>InFile</maml:name>
         <maml:Description>
           <maml:para>Path and file name to the file that contains the contents of the request. If the path is omitted, the default is the current location.</maml:para>
@@ -8203,7 +8322,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>OutFile</maml:name>
         <maml:Description>
           <maml:para>Specifies the output file for which this function saves the response body. Enter a path and file name. If you omit the path, the default is the current location.</maml:para>
@@ -8215,7 +8334,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Area</maml:name>
         <maml:Description>
           <maml:para>The area to find the resource.</maml:para>
@@ -8227,7 +8346,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Resource</maml:name>
         <maml:Description>
           <maml:para>The name of the feature you want to manipulate.</maml:para>
@@ -8239,7 +8358,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>The unique value of the item you want to work with.</maml:para>
@@ -8251,7 +8370,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Version</maml:name>
         <maml:Description>
           <maml:para>The version of the API you wish to target.</maml:para>
@@ -8263,7 +8382,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>SubDomain</maml:name>
         <maml:Description>
           <maml:para>The SubDomain between your account and visualstudio.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
@@ -8275,7 +8394,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>JSON</maml:name>
         <maml:Description>
           <maml:para>Converts the PowerShell object into JSON and displays in the console.</maml:para>
@@ -8498,17 +8617,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:syntaxItem>
         <maml:name>Remove-VSTeamAccount</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
             <maml:para>On Windows allows you to clear your account information at the Process, User or Machine levels.</maml:para>
@@ -8520,10 +8628,21 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Level</maml:name>
         <maml:Description>
           <maml:para>On Windows allows you to clear your account information at the Process, User or Machine levels.</maml:para>
@@ -9036,17 +9155,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-VSTeamGitRepository</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="RepositoryID">
           <maml:name>Id</maml:name>
           <maml:Description>
@@ -9060,6 +9168,17 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -9138,18 +9257,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="None">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>Specifies one or more policies by ID.</maml:para>
@@ -9161,6 +9269,17 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -9179,7 +9298,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="None">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>Specifies one or more policies by ID.</maml:para>
@@ -9251,18 +9370,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-VSTeamProfile</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>Name of profile to remove.</maml:para>
@@ -9274,10 +9382,21 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>Name of profile to remove.</maml:para>
@@ -9850,18 +9969,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-VSTeamUser</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="name">
-          <maml:name>UserId</maml:name>
-          <maml:Description>
-            <maml:para>The id of the user to remove.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
@@ -9883,6 +9990,18 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="name">
+          <maml:name>UserId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the user to remove.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
           <maml:name>WhatIf</maml:name>
@@ -9920,17 +10039,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
-          <maml:name>WhatIf</maml:name>
-          <maml:Description>
-            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="name">
           <maml:name>Email</maml:name>
           <maml:Description>
@@ -9942,6 +10050,17 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -9970,7 +10089,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="name">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="name">
         <maml:name>UserId</maml:name>
         <maml:Description>
           <maml:para>The id of the user to remove.</maml:para>
@@ -10050,11 +10169,13 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Set-VSTeamAPIVersion</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Version</maml:name>
           <maml:Description>
-            <maml:para>Specifies the version to use.</maml:para>
-            <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -10077,11 +10198,13 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Version</maml:name>
         <maml:Description>
-          <maml:para>Specifies the version to use.</maml:para>
-          <maml:para>Valid values: 'TFS2017', 'TFS2018', 'VSTS'</maml:para>
+          <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- TFS2017</maml:para>
+          <maml:para>- TFS2018</maml:para>
+          <maml:para>- VSTS</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -10150,7 +10273,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>Specifies the approval IDs of the approvals to set.</maml:para>
@@ -10162,11 +10285,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Status</maml:name>
           <maml:Description>
-            <maml:para>Specifies the status to set for the approval.</maml:para>
-            <maml:para>Valid values: 'Approved', 'Rejected', 'Pending', 'ReAssigned'</maml:para>
+            <maml:para>Specifies the status to set for the approval. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Approved</maml:para>
+            <maml:para>- Rejected</maml:para>
+            <maml:para>- Pending</maml:para>
+            <maml:para>- ReAssigned</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -10175,7 +10301,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>Approved</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Approver</maml:name>
           <maml:Description>
             <maml:para>Specifies the user to whom the approval has been re-assigned to Alias of the user chuckreinhart@outlook.com, for example.</maml:para>
@@ -10187,7 +10313,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Comment</maml:name>
           <maml:Description>
             <maml:para>Specifies the comment to be stored with this approval.</maml:para>
@@ -10227,7 +10353,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>Specifies the approval IDs of the approvals to set.</maml:para>
@@ -10239,11 +10365,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Status</maml:name>
         <maml:Description>
-          <maml:para>Specifies the status to set for the approval.</maml:para>
-          <maml:para>Valid values: 'Approved', 'Rejected', 'Pending', 'ReAssigned'</maml:para>
+          <maml:para>Specifies the status to set for the approval. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- Approved</maml:para>
+          <maml:para>- Rejected</maml:para>
+          <maml:para>- Pending</maml:para>
+          <maml:para>- ReAssigned</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -10252,7 +10381,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>Approved</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Approver</maml:name>
         <maml:Description>
           <maml:para>Specifies the user to whom the approval has been re-assigned to Alias of the user chuckreinhart@outlook.com, for example.</maml:para>
@@ -10264,7 +10393,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Comment</maml:name>
         <maml:Description>
           <maml:para>Specifies the comment to be stored with this approval.</maml:para>
@@ -10330,7 +10459,18 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Set-VSTeamDefaultProject</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>Project</maml:name>
           <maml:Description>
             <maml:para>Specifies the team project for which this function operates.</maml:para>
@@ -10345,17 +10485,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Force</maml:name>
-          <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Level</maml:name>
           <maml:Description>
             <maml:para>On Windows allows you to store your default project at the Process, User or Machine levels.</maml:para>
@@ -10383,7 +10512,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
         <maml:name>Project</maml:name>
         <maml:Description>
           <maml:para>Specifies the team project for which this function operates.</maml:para>
@@ -10397,7 +10526,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Level</maml:name>
         <maml:Description>
           <maml:para>On Windows allows you to store your default project at the Process, User or Machine levels.</maml:para>
@@ -11087,7 +11216,12 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Type</maml:name>
           <maml:Description>
-            <maml:para>The type of the build definitions to retrieve (Mine, All, Queued, XAML).</maml:para>
+            <maml:para>The type of the build definitions to retrieve.  The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Mine</maml:para>
+            <maml:para>- All</maml:para>
+            <maml:para>- Queued</maml:para>
+            <maml:para>- XAML</maml:para>
+            <maml:para></maml:para>
             <maml:para>If not specified, all types will be returned.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -11158,7 +11292,12 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Type</maml:name>
         <maml:Description>
-          <maml:para>The type of the build definitions to retrieve (Mine, All, Queued, XAML).</maml:para>
+          <maml:para>The type of the build definitions to retrieve.  The acceptable values for this parameter are:</maml:para>
+          <maml:para>- Mine</maml:para>
+          <maml:para>- All</maml:para>
+          <maml:para>- Queued</maml:para>
+          <maml:para>- XAML</maml:para>
+          <maml:para></maml:para>
           <maml:para>If not specified, all types will be returned.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -12308,7 +12447,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>Specifies the policy to update.</maml:para>
@@ -12320,7 +12459,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>type</maml:name>
           <maml:Description>
             <maml:para>Specifies the id of the type of policy to be update. This must match the original policy, it cannot be changed via this call.</maml:para>
@@ -12332,31 +12471,29 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>enabled</maml:name>
           <maml:Description>
             <maml:para>Enables the policy</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
           <dev:type>
-            <maml:name>Boolean</maml:name>
+            <maml:name>SwitchParameter</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>blocking</maml:name>
           <maml:Description>
             <maml:para>Determines if the policy will block pushes to the branch if the policy is not adheared to.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
           <dev:type>
-            <maml:name>Boolean</maml:name>
+            <maml:name>SwitchParameter</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>settings</maml:name>
           <maml:Description>
             <maml:para>The settings for the policy.</maml:para>
@@ -12386,7 +12523,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>Specifies the policy to update.</maml:para>
@@ -12398,7 +12535,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>type</maml:name>
         <maml:Description>
           <maml:para>Specifies the id of the type of policy to be update. This must match the original policy, it cannot be changed via this call.</maml:para>
@@ -12410,31 +12547,31 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>enabled</maml:name>
         <maml:Description>
           <maml:para>Enables the policy</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
-          <maml:name>Boolean</maml:name>
+          <maml:name>SwitchParameter</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>blocking</maml:name>
         <maml:Description>
           <maml:para>Determines if the policy will block pushes to the branch if the policy is not adheared to.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
-          <maml:name>Boolean</maml:name>
+          <maml:name>SwitchParameter</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>settings</maml:name>
         <maml:Description>
           <maml:para>The settings for the policy.</maml:para>

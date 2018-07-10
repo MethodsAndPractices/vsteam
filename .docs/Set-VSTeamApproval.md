@@ -40,30 +40,23 @@ Specifies the approval IDs of the approvals to set.
 
 ```yaml
 Type: Int32[]
-Parameter Sets: (All)
-Aliases:
 Required: True
-Position: 0
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ### -Status
 
-Specifies the status to set for the approval.
+Specifies the status to set for the approval. The acceptable values for this parameter are:
 
-Valid values: 'Approved', 'Rejected', 'Pending', 'ReAssigned'
+- Approved
+- Rejected
+- Pending
+- ReAssigned
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
 Required: True
-Position: 1
 Default value: Approved
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Approver
@@ -72,13 +65,6 @@ Specifies the user to whom the approval has been re-assigned to Alias of the use
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Comment
@@ -87,13 +73,6 @@ Specifies the comment to be stored with this approval.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 <!-- #include "./params/force.md" -->

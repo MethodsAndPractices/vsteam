@@ -46,9 +46,11 @@ Parameter Sets: List
 
 ### -Type
 
-The type of the build definitions to retrieve (build, xaml).
+The type of the build definitions to retrieve. The acceptable values for this parameter are:
 
-If not specified, all types will be returned.
+- build
+- xaml
+- All
 
 ```yaml
 Type: String

@@ -34,13 +34,8 @@ To find the ID of a policy see [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
 
 ```yaml
 Type: Int[]
-Parameter Sets: (All)
-Aliases: None
 Required: True
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 <!-- #include "./params/force.md" -->

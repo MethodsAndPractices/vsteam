@@ -43,12 +43,7 @@ The id is an integer. Unique within each project.
 ```yaml
 Type: Int
 Parameter Sets: ByID
-Aliases:
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ## INPUTS

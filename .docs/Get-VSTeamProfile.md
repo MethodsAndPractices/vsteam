@@ -39,12 +39,7 @@ Optional name for the profile.
 ```yaml
 Type: String
 Parameter Sets: All
-Aliases:
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

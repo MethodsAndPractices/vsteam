@@ -62,14 +62,7 @@ Full path to the branch.
 
 ```yaml
 Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value:
 Accept pipeline input: true
-Accept wildcard characters: False
 ```
 
 ### -IncludeChildren
@@ -78,14 +71,6 @@ Return child branches, if there are any.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -IncludeParent
@@ -94,14 +79,6 @@ Return the parent branch, if there is one.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -IncludeDeleted
@@ -110,13 +87,6 @@ Return branches marked as deleted.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ## INPUTS

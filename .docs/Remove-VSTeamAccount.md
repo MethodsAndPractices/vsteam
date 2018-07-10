@@ -32,13 +32,6 @@ On Windows allows you to clear your account information at the Process, User or 
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 <!-- #include "./params/force.md" -->

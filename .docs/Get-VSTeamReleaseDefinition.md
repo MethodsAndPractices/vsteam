@@ -41,12 +41,6 @@ Specifies which property should be expanded in the list of Release Definition (e
 ```yaml
 Type: String
 Parameter Sets: List
-Aliases:
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Id
@@ -61,11 +55,7 @@ To find the ID of a release defintion, type Get-VSTeamReleaseDefinition.
 Type: Int32[]
 Parameter Sets: ByID
 Aliases: ReleaseDefinitionID
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ## INPUTS

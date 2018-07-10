@@ -187,4 +187,6 @@ Type: String
 
 [Add-VSTeamProfile](Add-VSTeamProfile.md)
 
+[Clear-VSTeamDefaultProject](Clear-VSTeamDefaultProject.md)
+
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)

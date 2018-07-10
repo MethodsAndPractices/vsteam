@@ -33,10 +33,7 @@ Type: Int32
 Parameter Sets: ByID
 Aliases: WorkItemID
 Required: True
-Position: Named
-Default value: None
 Accept pipeline input: true (ByPropertyName)
-Accept wildcard characters: False
 ```
 
 ## INPUTS
