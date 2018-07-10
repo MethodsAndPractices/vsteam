@@ -2,6 +2,20 @@
 
 Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery.com/packages/VSTeam/) that wraps the [REST API provided by Team Foundation Server and Visual Studio Team Services](https://cda.ms/ys). This allows you to access the power of TFS and VSTS from [PowerShell on Windows, MacOS and Linux](https://github.com/PowerShell/PowerShell).
 
+## About files
+
+[VSTeam](../en-US/about_vsteam.help.txt)
+
+Learn about the goals of VSTeam.
+
+[Profiles](../en-US/about_vsteam_profiles.help.txt)
+
+Profiles allow you to store your account information for easy switching of accounts.
+
+[Provider](../en-US/about_vsteam_provider.help.txt)
+
+The provider allows you to navigate your TFS or VSTS as a file system.
+
 ## VSTeam Functions
 
 ### [Add-VSTeam](Add-VSTeam.md)
@@ -331,8 +345,3 @@ Updates the project name, description or both.
 Updates an existing service connection
 
 
-
-
-## About files
-
-[Profiles](../en-US/about_vsteam_profiles.help.txt)

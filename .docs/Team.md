@@ -9,4 +9,6 @@ Locale: en-US
 
 ## Description
 
+<!-- #include "./common/description.md" -->
+
 <!-- #include "./index.md" -->
