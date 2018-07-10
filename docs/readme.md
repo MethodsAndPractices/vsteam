@@ -331,3 +331,8 @@ Updates the project name, description or both.
 Updates an existing service connection
 
 
+
+
+## About files
+
+[Profiles](../en-US/about_vsteam_profiles.help.txt)
