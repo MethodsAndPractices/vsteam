@@ -67,7 +67,7 @@ function _clearEnvironmentVariables {
       [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
    }
 
-   _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -BearerToken ''
+   _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken ''
 }
 
 function Get-VSTeamInfo {
@@ -241,6 +241,7 @@ function Add-VSTeamAccount {
 
          if ($UseBearerToken.IsPresent) {
             $token = $_pat
+            $encodedPat = ''
          }
          else {
             $token = ''

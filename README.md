@@ -12,6 +12,16 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 3.0.1
+
+Huge review of the docs and added support for bearer auth.
+
+Bearer auth will allow you to use the OAuth token created by VSTS during your build and release and not have to create a PAT. Just check the 'Allow scripts to access OAuth token' option on your phase. Then you can add an account by using the -UseBearerToken switch and passing in the $(System.AccessToken) variable.
+
+```PowerShell
+Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+```
+
 ### 3.0.0
 
 There is a breaking change with calls to Add-VSTeamKubernetesEndpoint. The acceptUntrustedCerts and generatePfx parameters have been changed from boolean to switch. So any calls that contained:
