@@ -65,36 +65,7 @@ InModuleScope team {
             "Version": "VSTS"
          }
       ]
-"@      
-
-      # This is what a file will look like for those that upgrade to the version
-      # that supports bearer but created the profile before it.
-      # The Token entry will be missing.
-      $existingContent = @"
-      [
-         {
-            "Name": "http://localhost:8080/tfs/defaultcollection",
-            "URL": "http://localhost:8080/tfs/defaultcollection",
-            "Pat": "",
-            "Type": "OnPremise",
-            "Version": "TFS2017"
-         },
-         {
-            "Name": "mydemos",
-            "URL": "https://mydemos.visualstudio.com",
-            "Pat": "OjEyMzQ1",
-            "Type": "Pat",
-            "Version": "VSTS"
-         },
-         {
-            "Name": "demonstrations",
-            "URL": "https://demonstrations.visualstudio.com",
-            "Pat": "dzY2a2x5am13YWtkcXVwYmg0emE=",
-            "Type": "Pat",
-            "Version": "VSTS"
-         }
-      ]
-"@      
+"@    
 
       Context 'Get-VSTeamInfo' {
          It 'should return account and default project' {
@@ -180,26 +151,6 @@ InModuleScope team {
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
          Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
-
-         It 'should set env at process level' {
-            Add-VSTeamAccount -Profile mydemos
-
-            Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
-            }
-
-            # Make sure set env vars was called with the correct parameters
-            Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
-            }
-         }
-      }
-
-      Context 'Add-VSTeamAccount profile from old file before bearer support' {
-         Mock _isOnWindows { return $false }
-         Mock _setEnvironmentVariables
-         Mock Set-VSTeamAPIVersion
-         Mock Get-VSTeamProfile { return $existingContent | ConvertFrom-Json | ForEach-Object { $_ } }
 
          It 'should set env at process level' {
             Add-VSTeamAccount -Profile mydemos
