@@ -92,7 +92,7 @@ Type: SwitchParameter
 Parameter Sets: Windows
 ```
 
-### -BearerToken
+### -UseBearerToken
 
 Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
 

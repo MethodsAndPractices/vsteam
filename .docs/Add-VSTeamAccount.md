@@ -73,10 +73,10 @@ Note: You must run PowerShell as an Adminstrator to store at the Machine level.
 ### -------------------------- EXAMPLE 7 --------------------------
 
 ```PowerShell
-PS C:\> Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -BearerToken
+PS C:\> Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 ```
 
-Will add the account and use the OAuth Token provided by VSTS when you check the *Allow scripts to access OAuth token* checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.  
+Will add the account and use the OAuth Token provided by VSTS when you check the *Allow scripts to access OAuth token* checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.
 
 ## PARAMETERS
 
@@ -146,7 +146,7 @@ Type: SwitchParameter
 Parameter Sets: Windows
 ```
 
-### -BearerToken
+### -UseBearerToken
 
 Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
 
