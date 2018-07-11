@@ -22,6 +22,8 @@ Bearer auth will allow you to use the OAuth token created by VSTS during your bu
 Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 ```
 
+The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.
+
 ### 3.0.0
 
 There is a breaking change with calls to Add-VSTeamKubernetesEndpoint. The acceptUntrustedCerts and generatePfx parameters have been changed from boolean to switch. So any calls that contained:
