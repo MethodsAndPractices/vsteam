@@ -65,7 +65,7 @@
       'types\buildDefinitions.ps1xml',
       'types\builds.ps1xml',
       'types\cloudSubscriptions.ps1xml',
-      'types\git.ps1xml',
+      'types\repositories.ps1xml',
       'types\policies.ps1xml',
       'types\pools.ps1xml',
       'types\projects.ps1xml',
@@ -96,7 +96,7 @@
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
-      'src\git.psm1',
+      'src\repositories.psm1',
       'src\Approvals.psm1',
       'src\buildDefinitions.psm1',
       'src\builds.psm1',

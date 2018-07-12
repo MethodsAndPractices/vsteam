@@ -2,13 +2,13 @@ Set-StrictMode -Version Latest
 
 Get-Module VSTeam | Remove-Module -Force
 Get-Module Team | Remove-Module -Force
-Get-Module Git | Remove-Module -Force
+Get-Module Repositories | Remove-Module -Force
 
 
 Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\git.psm1 -Force
+Import-Module $PSScriptRoot\..\..\src\repositories.psm1 -Force
 
-InModuleScope git {
+InModuleScope repositories {
    
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
