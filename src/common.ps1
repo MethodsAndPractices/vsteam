@@ -31,7 +31,7 @@ function _buildRequestURI {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $sb = New-Object System.Text.StringBuilder      
+      $sb = New-Object System.Text.StringBuilder
 
       $sb.Append($(_addSubDomain -subDomain $subDomain)) | Out-Null
 
@@ -85,7 +85,7 @@ function _handleException {
 
    try {
       $e = (ConvertFrom-Json $ex.ToString())
-      
+
       $hasValueProp = $e.PSObject.Properties.Match('value')
 
       if (0 -eq $hasValueProp.count) {
@@ -95,11 +95,11 @@ function _handleException {
       else {
          $handled = $true
          Write-Warning $e.value.message
-      }    
+      }
    }
    catch {
       $msg = "An error occurred: $($ex.Exception.Message)"
-   } 
+   }
 
    if (-not $handled) {
       throw $ex
@@ -208,7 +208,7 @@ function _showInBrowser {
    )
 
    Write-Verbose $url
-         
+
    if (_isOnWindows) {
       _openOnWindows $url
    }
@@ -226,7 +226,7 @@ function _addSubDomain {
    )
 
    $instance = $VSTeamVersionTable.Account
-   
+
    # For VSTS Entitlements is under .vsaex
    if ($subDomain -and $VSTeamVersionTable.Account.ToLower().Contains('visualstudio.com')) {
       $instance = $VSTeamVersionTable.Account.ToLower().Replace('visualstudio.com', "$subDomain.visualstudio.com")
@@ -316,7 +316,7 @@ function _getWorkItemTypes {
       # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
       # To replace all the "": with "_end":
       $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
-      
+
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
       }
@@ -345,7 +345,7 @@ function _getProjects {
    # Call the REST API
    try {
       $resp = _callAPI -url $listurl
-      
+
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
       }
@@ -360,7 +360,7 @@ function _buildProjectNameDynamicParam {
       [string] $ParameterName = 'ProjectName',
       [string] $ParameterSetName,
       [bool] $Mandatory = $true,
-      [string] $AliasName, 
+      [string] $AliasName,
       [int] $Position = 0
    )
 
@@ -398,7 +398,7 @@ function _buildProjectNameDynamicParam {
       # to omit this parameter
       if ($Mandatory -eq $false) {
          # We can't use .Add("") because the collection is of a fixed size. But we can
-         # use += because a new array is created that contains everything we want.  
+         # use += because a new array is created that contains everything we want.
          $arrSet += "";
       }
 
@@ -512,8 +512,8 @@ function _convertSecureStringTo_PlainText {
    return $credential.GetNetworkCredential().Password
 }
 
-# This is the main function for calling TFS and VSTS. It handels the auth and format of the route. 
-# If you need to call TFS or VSTS this is the function to use. 
+# This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
+# If you need to call TFS or VSTS this is the function to use.
 function _callAPI {
    param(
       [string]$resource,
@@ -551,11 +551,11 @@ function _callAPI {
    if ($body) {
       Write-Verbose "Body $body"
    }
-   
+
    $params = $PSBoundParameters
    $params.Add('Uri', $Url)
-   $params.Add('UserAgent', (_getUserAgent))      
-   
+   $params.Add('UserAgent', (_getUserAgent))
+
    if (_useWindowsAuthenticationOnPremise) {
       $params.Add('UseDefaultCredentials', $true)
    }
@@ -565,11 +565,11 @@ function _callAPI {
    else {
       $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT"})
    }
-   
+
    # We have to remove any extra parameters not used by Invoke-RestMethod
    $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Url', 'QueryString'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
-         
+
    $resp = Invoke-RestMethod @params
 
    if ($resp) {

@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '3.0.1'
+   ModuleVersion     = '3.0.2'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -58,7 +58,7 @@
    # RequiredAssemblies = @()
 
    # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-   # ScriptsToProcess = @()
+   ScriptsToProcess = @('src\teamspsdrive.ps1')
 
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('types\Approvals.ps1xml',
@@ -84,7 +84,7 @@
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
       'formats\buildDefinitions.format.ps1xml',
       'formats\builds.format.ps1xml',
-      'formats\policyTypes.ps1xml',
+      'formats\policyTypes.format.ps1xml',
       'formats\profile.format.ps1xml',
       'formats\queues.format.ps1xml',
       'formats\serviceendpoints.format.ps1xml',
@@ -92,10 +92,12 @@
       'formats\team.format.ps1xml',
       'formats\users.format.ps1xml',
       'formats\workitemTypes.format.ps1xml',
-      'formats\workitems.format.ps1xml')
+      'formats\workitems.format.ps1xml',
+      'formats\vsteamPSDrive.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    NestedModules     = @('src\team.psm1',
+      'src\refs.psm1',
       'src\repositories.psm1',
       'src\Approvals.psm1',
       'src\buildDefinitions.psm1',
@@ -113,7 +115,6 @@
       'src\teams.psm1',
       'src\profile.psm1',
       'src\teammembers.psm1',
-      'src\teamspsdrive.psm1',
       'src\tfvc.psm1',
       'src\users.psm1',
       'src\workitemTypes.psm1',
@@ -200,7 +201,8 @@
       'Get-VSTeamWorkItemType',
       'Add-VSTeamWorkItem',
       'Get-VSTeamWorkItem',
-      'Show-VSTeamWorkItem')
+      'Show-VSTeamWorkItem',
+      'Get-VSTeamGitRef')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -298,7 +300,8 @@
       'Get-PolicyType', 
       'Add-Policy', 
       'Update-Policy', 
-      'Remove-Policy')
+      'Remove-Policy',
+      'Get-GitRef')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

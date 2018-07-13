@@ -128,6 +128,10 @@ Returns all the tags of a build.
 
 Gets the Azure subscriptions associated with the Team Services account.
 
+### [Get-VSTeamGitRef](Get-VSTeamGitRef.md)
+
+Queries the provided repository for its refs and returns them.
+
 ### [Get-VSTeamGitRepository](Get-VSTeamGitRepository.md)
 
 Get all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.

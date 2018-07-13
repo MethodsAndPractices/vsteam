@@ -70,7 +70,7 @@ InModuleScope profile {
          It 'Should save profile to disk' {
             Assert-MockCalled Set-Content -Exactly -Scope Context -Times 0
             Assert-MockCalled Write-Error -Exactly -Scope Context -Times 1 `
-               -ParameterFilter { 
+               -ParameterFilter {
                $Message -eq 'Personal Access Token must be provided if you are not using Windows Authentication; please see the help.'
             }
          }
@@ -94,6 +94,18 @@ InModuleScope profile {
          Mock Get-VSTeamProfile { }
 
          Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version VSTS
+
+         It 'Should save profile to disk' {
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Add-VSTeamProfile with OAuth to empty array' {
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { }
+         Mock Get-VSTeamProfile { }
+
+         Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version VSTS -UseBearerToken
 
          It 'Should save profile to disk' {
             Assert-VerifiableMock
@@ -154,7 +166,7 @@ InModuleScope profile {
          Mock Get-Content { return '' }
 
          $actual = Get-VSTeamProfile
-      
+
          It 'Should return 0 profiles' {
             $actual | Should BeNullOrEmpty
          }
@@ -166,7 +178,7 @@ InModuleScope profile {
          Mock Write-Error { } -Verifiable
 
          $actual = Get-VSTeamProfile
-      
+
          It 'Should return 0 profiles' {
             $actual | Should BeNullOrEmpty
             Assert-VerifiableMock
@@ -177,23 +189,23 @@ InModuleScope profile {
          Mock Test-Path { return $false }
 
          $actual = Get-VSTeamProfile
-      
+
          It 'Should return 0 profiles' {
             $actual | Should BeNullOrEmpty
          }
       }
 
-      Context 'Get-VSTeamProfile by name' {         
-                  
+      Context 'Get-VSTeamProfile by name' {
+
          Mock Test-Path { return $true }
          Mock Get-Content { return $contents }
-         
+
          $actual = Get-VSTeamProfile test
-               
+
          It 'Should return 1 profile' {
             $actual.URL | Should be 'https://test.visualstudio.com'
          }
-         
+
          It 'Profile Should by Pat' {
             $actual.Type | Should be 'Pat'
          }
@@ -211,7 +223,7 @@ InModuleScope profile {
          Mock Get-Content { return $contents }
 
          $actual = Get-VSTeamProfile
-      
+
          It 'Should return 3 profiles' {
             $actual.Length | Should be 3
          }

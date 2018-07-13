@@ -4,34 +4,15 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-# Apply types to the returned objects so format and type files can
-# identify the object and act on it.
-function _applyTypesToTeam {
-   param(
-      [Parameter(Mandatory = $true)]
-      $item,
-      [Parameter(Mandatory = $true)]
-      $ProjectName
-   )
-
-   if ($item.PSObject.Properties.Match('ProjectName').count -eq 0) {
-      # Add the ProjectName as a NoteProperty so we can use it further down the pipeline.
-      # It's not returned from the REST call 
-      $item | Add-Member -MemberType NoteProperty -Name ProjectName -Value $ProjectName
-   }
-  
-   $item.PSObject.TypeNames.Insert(0, 'Team.Team')
-}
-
 function Get-VSTeam {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param (
       [Parameter(ParameterSetName = 'List')]
       [int] $Top,
- 
+
       [Parameter(ParameterSetName = 'List')]
       [int] $Skip,
- 
+
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('TeamId')]
       [string[]] $Id,
@@ -54,10 +35,8 @@ function Get-VSTeam {
             # Call the REST API
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
                -Version $VSTeamVersionTable.Core
-            
-            _applyTypesToTeam -item $resp -ProjectName $ProjectName
 
-            Write-Output $resp
+            Write-Output [VSTeamTeam]::new($resp, $ProjectName)
          }
       }
       elseif ($Name) {
@@ -66,9 +45,7 @@ function Get-VSTeam {
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
                -Version $VSTeamVersionTable.Core
 
-            _applyTypesToTeam -item $resp -ProjectName $ProjectName
-
-            Write-Output $resp
+            Write-Output [VSTeamTeam]::new($resp, $ProjectName)
          }
       }
       else {
@@ -80,14 +57,16 @@ function Get-VSTeam {
             '$skip' = $skip
          }
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
+         $obj = @()
+
+         # Create an instance for each one
          foreach ($item in $resp.value) {
-            _applyTypesToTeam -item $item -ProjectName $ProjectName
+            $obj += [VSTeamTeam]::new($item, $ProjectName)
          }
 
-         Write-Output $resp.value
+         Write-Output $obj
       }
-   } 
+   }
 }
 
 function Add-VSTeam {
@@ -103,7 +82,7 @@ function Add-VSTeam {
       _buildProjectNameDynamicParam
    }
 
-   process { 
+   process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
@@ -113,9 +92,7 @@ function Add-VSTeam {
       $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
          -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
 
-      _applyTypesToTeam -item $resp -ProjectName $ProjectName
-
-      return $resp
+      return [VSTeamTeam]::new($resp, $ProjectName)
    }
 }
 
@@ -133,7 +110,7 @@ function Update-VSTeam {
       _buildProjectNameDynamicParam
    }
 
-   process { 
+   process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
@@ -142,23 +119,21 @@ function Update-VSTeam {
       }
 
       if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-VSTeam")) {
-         if (-not $NewTeamName) { 
+         if (-not $NewTeamName) {
             $body = '{"description": "' + $Description + '" }'
          }
          if (-not $Description) {
             $body = '{ "name": "' + $NewTeamName + '" }'
          }
          if ($NewTeamName -and $Description) {
-            $body = '{ "name": "' + $NewTeamName + '", "description": "' + $Description + '" }'            
+            $body = '{ "name": "' + $NewTeamName + '", "description": "' + $Description + '" }'
          }
 
          # Call the REST API
          $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Name `
             -Method Patch -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
-         
-         _applyTypesToTeam -item $resp -ProjectName $ProjectName
 
-         return $resp
+         return [VSTeamTeam]::new($resp, $ProjectName)
       }
    }
 }
@@ -176,7 +151,7 @@ function Remove-VSTeam {
       _buildProjectNameDynamicParam
    }
 
-   process { 
+   process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 

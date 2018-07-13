@@ -9,19 +9,54 @@ Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
 Import-Module $PSScriptRoot\..\..\src\repositories.psm1 -Force
 
 InModuleScope repositories {
-   
+
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{ }
+      value = [PSCustomObject]@{
+         id            = ''
+         url           = ''
+         sshUrl        = ''
+         remoteUrl     = ''
+         defaultBranch = ''
+         size          = 0
+         name          = ''
+         project       = [PSCustomObject]@{
+            name        = 'Project'
+            id          = 1
+            description = ''
+            url         = ''
+            state       = ''
+            revision    = ''
+            visibility  = ''
+         }
+      }
    }
 
-   $singleResult = [PSCustomObject]@{ }
+   $singleResult = [PSCustomObject]@{
+      id            = ''
+      url           = ''
+      sshUrl        = ''
+      remoteUrl     = ''
+      defaultBranch = ''
+      size          = 0
+      name          = ''
+      project       = [PSCustomObject]@{
+         name        = 'Project'
+         id          = 1
+         description = ''
+         url         = ''
+         state       = ''
+         revision    = ''
+         visibility  = ''
+      }
+   }
 
    Describe "Git VSTS" {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
+      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
 
       Context 'Show-VSTeamGitRepository by project' {
          Mock _showInBrowser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
@@ -104,7 +139,7 @@ InModuleScope repositories {
 
          Remove-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000 -Force
 
-         It 'Should create VSAccount' {
+         It 'Should remove Git repo' {
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Method -eq 'Delete' -and
                $Uri -eq "https://test.visualstudio.com/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$($VSTeamVersionTable.Git)"
@@ -115,7 +150,7 @@ InModuleScope repositories {
       Context 'Remove-VSTeamGitRepository throws ' {
          Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
 
-         It 'Should create VSAccount' {
+         It 'Should throw trying to remove Git repo' {
             {Remove-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000 -Force} | Should Throw
          }
       }
@@ -124,53 +159,54 @@ InModuleScope repositories {
    Describe "Git TFS" {
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
-      
+      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
+
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
-      
+
       Context 'Get-VSTeamGitRepository no parameters' {
          Mock Invoke-RestMethod { return $results } -Verifiable
-      
+
          Get-VSTeamGitRepository
-      
-         It 'Should create VSAccount' {
+
+         It 'Should return Git repo' {
             Assert-VerifiableMock
          }
       }
-      
+
       Context 'Get-VSTeamGitRepository by id' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
-      
+
          Get-VSTeamGitRepository -id 00000000-0000-0000-0000-000000000000
-      
-         It 'Should create VSAccount' {
+
+         It 'Should return Git repo' {
             Assert-VerifiableMock
          }
       }
-      
+
       Context 'Get-VSTeamGitRepository by name' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
-      
+
          Get-VSTeamGitRepository -Name 'test'
-      
-         It 'Should create VSAccount' {
+
+         It 'Should return Git repo' {
             Assert-VerifiableMock
          }
       }
 
       Context 'Add-VSTeamGitRepository by name' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
-      
+
          Add-VSTeamGitRepository -Name 'test' -ProjectName 'test'
-      
-         It 'Should create VSAccount' {
+
+         It 'Should add Git repo' {
             Assert-VerifiableMock
          }
       }
 
       Context 'Add-VSTeamGitRepository throws' {
          Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
-      
-         It 'Should create VSAccount' {
+
+         It 'Should add Git repo' {
             { Add-VSTeamGitRepository -Name 'test' -ProjectName 'test' } | Should Throw
          }
       }

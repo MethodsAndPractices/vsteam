@@ -108,7 +108,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
    }
 
    Context 'PS Drive full exercise' {
-      New-PSDrive -Name int -PSProvider SHiPS -Root 'VSTeam#VSAccount'
+      New-PSDrive -Name int -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
       $actual = Set-Location int: -PassThru
 
       It 'Should be able to mount drive' {
