@@ -36,7 +36,9 @@ function Get-VSTeam {
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
                -Version $VSTeamVersionTable.Core
 
-            Write-Output [VSTeamTeam]::new($resp, $ProjectName)
+            $team = [VSTeamTeam]::new($resp, $ProjectName)
+
+            Write-Output $team
          }
       }
       elseif ($Name) {
@@ -45,7 +47,9 @@ function Get-VSTeam {
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
                -Version $VSTeamVersionTable.Core
 
-            Write-Output [VSTeamTeam]::new($resp, $ProjectName)
+            $team = [VSTeamTeam]::new($resp, $ProjectName)
+
+            Write-Output $team
          }
       }
       else {
@@ -92,7 +96,9 @@ function Add-VSTeam {
       $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
          -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
 
-      return [VSTeamTeam]::new($resp, $ProjectName)
+      $team = [VSTeamTeam]::new($resp, $ProjectName)
+
+      Write-Output $team
    }
 }
 
@@ -133,7 +139,12 @@ function Update-VSTeam {
          $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Name `
             -Method Patch -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
 
-         return [VSTeamTeam]::new($resp, $ProjectName)
+         # Storing the object before you return it cleaned up the pipeline.
+         # When I just write the object from the constructor each property
+         # seemed to be written
+         $team = [VSTeamTeam]::new($resp, $ProjectName)
+
+         Write-Output $team
       }
    }
 }

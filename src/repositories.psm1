@@ -49,7 +49,12 @@ function Add-VSTeamGitRepository {
          $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' `
             -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Git
 
-         Write-Output [VSTeamRepository]::new($resp, $ProjectName)
+         # Storing the object before you return it cleaned up the pipeline.
+         # When I just write the object from the constructor each property
+         # seemed to be written
+         $repo = [VSTeamRepository]::new($resp, $ProjectName)
+
+         Write-Output $repo
       }
       catch {
          _handleException $_
@@ -81,7 +86,12 @@ function Get-VSTeamGitRepository {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
 
-               Write-Output [VSTeamRepository]::new($resp, $ProjectName)
+               # Storing the object before you return it cleaned up the pipeline.
+               # When I just write the object from the constructor each property
+               # seemed to be written
+               $item = [VSTeamRepository]::new($resp, $ProjectName)
+
+               Write-Output $item
             }
             catch {
                throw $_
@@ -93,7 +103,12 @@ function Get-VSTeamGitRepository {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
 
-               Write-Output [VSTeamRepository]::new($resp, $ProjectName)
+               # Storing the object before you return it cleaned up the pipeline.
+               # When I just write the object from the constructor each property
+               # seemed to be written
+               $item = [VSTeamRepository]::new($resp, $ProjectName)
+
+               Write-Output $item
             }
             catch {
                throw $_

@@ -11,6 +11,7 @@ Describe 'VSTeam Classes' {
          id          = '1'
          uniqueName  = 'test@email.com'
       }
+      
       $target = [VSTeamUser]::new($obj, 'Test Project')
 
       It 'should return displayname' {

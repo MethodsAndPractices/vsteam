@@ -203,7 +203,11 @@ class VSTeamProject : VSTeamDirectory {
       $this.State = $obj.state
       $this.Revision = $obj.revision
       $this.Visibility = $obj.visibility
-      $this.Description = $obj.description
+
+      # The description is not always returned so protect yourself.
+      if ($obj.PSObject.Properties.Match('description').count -gt 0) {
+         $this.Description = $obj.description
+      }
 
       $this._internalObj = $obj
 
@@ -524,10 +528,21 @@ class VSTeamRepository : VSTeamDirectory {
    ) : base($obj.name, $ProjectName) {
       $this.ID = $obj.id
       $this.URL = $obj.Url
-      $this.Size = $obj.size
-      $this.sshURL = $obj.sshUrl
+
+      # Depending on TFS/VSTS these might not be returned
+      if ($obj.PSObject.Properties.Match('size').count -gt 0) {
+         $this.Size = $obj.size
+      }
+
+      if ($obj.PSObject.Properties.Match('sshUrl').count -gt 0) {
+         $this.sshURL = $obj.sshUrl
+      }
+      
+      if ($obj.PSObject.Properties.Match('defaultBranch').count -gt 0) {
+         $this.DefaultBranch = $obj.defaultBranch
+      }
+
       $this.RemoteURL = $obj.remoteURL
-      $this.DefaultBranch = $obj.defaultBranch
       $this.Project = [VSTeamProject]::new($obj.project)
 
       $this._internalObj = $obj

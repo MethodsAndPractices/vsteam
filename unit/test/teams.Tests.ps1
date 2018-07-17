@@ -90,7 +90,7 @@ InModuleScope teams {
       }
 
       Context 'Get-VSTeam with specific project and specific team id' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -TeamId TestTeamId
@@ -103,7 +103,7 @@ InModuleScope teams {
       }
 
       Context 'Get-VSTeam with specific project and specific team Name' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -TeamName TestTeamName
@@ -314,7 +314,7 @@ InModuleScope teams {
       }
 
       Context 'Get-VSTeam with specific project and specific team Name on TFS local Auth' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Name TestTeamName
@@ -327,7 +327,7 @@ InModuleScope teams {
       }
 
       Context 'Get-VSTeam with specific project and specific team ID on TFS local Auth' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -TeamId TestTeamId

@@ -73,12 +73,12 @@ function Get-VSTeamProject {
             -Version $VSTeamVersionTable.Core `
             -QueryString $queryString
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         # _applyTypesToProject -item $resp
+         # Storing the object before you return it cleaned up the pipeline.
+         # When I just write the object from the constructor each property
+         # seemed to be written
+         $project = [VSTeamProject]::new($resp)
 
-         $temp = [VSTeamProject]::new($resp)
-
-         Write-Output $temp
+         Write-Output $project
       }
       else {
          try {
@@ -93,7 +93,6 @@ function Get-VSTeamProject {
 
             $objs = @()
 
-            # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
                $objs += [VSTeamProject]::new($item)
             }
