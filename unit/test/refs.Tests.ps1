@@ -2,7 +2,7 @@ Set-StrictMode -Version Latest
 
 Get-Module VSTeam | Remove-Module -Force
 
-Import-Module $PSScriptRoot\..\..\vsteam.psd1 -Force
+Import-Module $PSScriptRoot\..\..\VSTeam.psd1 -Force
 
 InModuleScope Refs {
 
