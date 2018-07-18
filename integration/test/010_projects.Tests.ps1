@@ -132,19 +132,23 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
    Context 'Git full exercise' {
 
-      $Modules = [System.AppDomain]::CurrentDomain.GetAssemblies() |
-         Where-Object { $_.ManifestModule.ScopeName.StartsWith( [char]10745 ) }
+      It 'Should load types' {
+         $Modules = [System.AppDomain]::CurrentDomain.GetAssemblies() |
+            Where-Object { $_.ManifestModule.ScopeName.StartsWith( [char]10745 ) }
 
-      $Modules = [System.AppDomain]::CurrentDomain.GetAssemblies() |
-         Where-Object { $_.ManifestModule.ScopeName.StartsWith( [char]10745 ) }
+         $Modules = [System.AppDomain]::CurrentDomain.GetAssemblies() |
+            Where-Object { $_.ManifestModule.ScopeName.StartsWith( [char]10745 ) }
 
-      ForEach ( $Module in $Modules ) {
-         ForEach ( $Type in $Module.DefinedTypes.Where{ $_.IsPublic } ) {
-            [pscustomobject]@{
-               Module = $Module.ManifestModule.ScopeName.Trim( [char]10745 )
-               Type   = $Type.Name
+         $LoadedTypes = ForEach ( $Module in $Modules ) {
+            ForEach ( $Type in $Module.DefinedTypes.Where{ $_.IsPublic } ) {
+               [pscustomobject]@{
+                  Module = $Module.ManifestModule.ScopeName.Trim( [char]10745 )
+                  Type   = $Type.Name
+               }
             }
          }
+
+         $LoadedTypes | Where-Object {$_.type -like 'VSTeamRepository'} | should not be $null
       }
 
       It 'Get-VSTeamGitRepository Should return repository' {

@@ -537,7 +537,7 @@ class VSTeamRepository : VSTeamDirectory {
       if ($obj.PSObject.Properties.Match('sshUrl').count -gt 0) {
          $this.sshURL = $obj.sshUrl
       }
-      
+
       if ($obj.PSObject.Properties.Match('defaultBranch').count -gt 0) {
          $this.DefaultBranch = $obj.defaultBranch
       }
