@@ -41,6 +41,7 @@ Set-Location VSTeamAccount:
 Get-ChildItem
 #endregion
 #>
+
 using namespace Microsoft.PowerShell.SHiPS
 
 class VSTeamDirectory : SHiPSDirectory {
@@ -247,15 +248,8 @@ class VSTeamBuilds : VSTeamDirectory {
 
       foreach ($build in $builds) {
          $item = [VSTeamBuild]::new(
-            $build.definition.name,
-            $build.buildnumber,
-            $build.status,
-            $build.result,
-            $build.starttime,
-            $build.requestedBy.displayName,
-            $build.requestedFor.displayName,
-            $build.project.name,
-            $build.id)
+            $build,
+            $build.project.name)
 
          $item.AddTypeName('Team.Provider.Build')
 
@@ -272,27 +266,24 @@ class VSTeamBuild : VSTeamLeaf {
    [string]$Result = $null
    [string]$BuildNumber = $null
    [string]$BuildDefinition = $null
-   [string]$RequestedByUser = $null
-   [string]$RequestedForUser = $null
+   [VSTeamUser]$RequestedBy = $null
+   [VSTeamUser]$RequestedFor = $null
+   [VSTeamUser]$LastChangedBy = $null
 
    VSTeamBuild (
-      [string]$BuildDefinition,
-      [string]$BuildNumber,
-      [string]$Status,
-      [string]$Result,
-      [datetime]$StartTime,
-      [string]$RequestedByUser,
-      [string]$RequestedForUser,
-      [string]$Projectname,
-      [int]$ID
-   ) : base($BuildNumber, $ID.ToString(), $Projectname) {
-      $this.Status = $Status
-      $this.Result = $Result
-      $this.StartTime = $StartTime
-      $this.BuildNumber = $BuildNumber
-      $this.BuildDefinition = $BuildDefinition
-      $this.RequestedByUser = $RequestedByUser
-      $this.RequestedForUser = $RequestedForUser
+      [object]$obj,
+      [string]$Projectname
+   ) : base($obj.buildNumber, $obj.id.ToString(), $Projectname) {
+      $this.Status = $obj.status
+      $this.Result = $obj.result
+      $this.StartTime = $obj.startTime
+      $this.BuildNumber = $obj.buildNumber
+      $this.BuildDefinition = $obj.definition.name
+      $this.RequestedBy = [VSTeamUser]::new($obj.requestedBy, $Projectname)
+      $this.RequestedFor = [VSTeamUser]::new($obj.requestedFor, $Projectname)
+      $this.LastChangedBy = [VSTeamUser]::new($obj.lastChangedBy, $Projectname)
+
+      $this._internalObj = $obj
 
       $this.AddTypeName('Team.Build')
    }
@@ -512,7 +503,7 @@ class VSTeamRepositories : VSTeamDirectory {
 }
 
 [SHiPSProvider(UseCache = $true)]
-class VSTeamRepository : VSTeamDirectory {
+class VSTeamGitRepository : VSTeamDirectory {
 
    [int]$Size = 0
    [string]$ID = $null
@@ -522,7 +513,7 @@ class VSTeamRepository : VSTeamDirectory {
    [string]$DefaultBranch = $null
    [VSTeamProject]$Project = $null
 
-   VSTeamRepository(
+   VSTeamGitRepository(
       [object]$obj,
       [string]$ProjectName
    ) : base($obj.name, $ProjectName) {
@@ -537,7 +528,7 @@ class VSTeamRepository : VSTeamDirectory {
       if ($obj.PSObject.Properties.Match('sshUrl').count -gt 0) {
          $this.sshURL = $obj.sshUrl
       }
-      
+
       if ($obj.PSObject.Properties.Match('defaultBranch').count -gt 0) {
          $this.DefaultBranch = $obj.defaultBranch
       }

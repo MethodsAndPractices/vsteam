@@ -11,7 +11,7 @@ Describe 'VSTeam Classes' {
          id          = '1'
          uniqueName  = 'test@email.com'
       }
-      
+
       $target = [VSTeamUser]::new($obj, 'Test Project')
 
       It 'should return displayname' {
@@ -83,25 +83,32 @@ Describe 'TeamsPSDrive' {
 
    Context 'Builds' {
       Mock Get-VSTeamBuild { return @([PSCustomObject]@{
-               id           = 1
-               description  = ''
-               buildNumber  = '1'
-               status       = 'completed'
-               result       = 'succeeded'
-               startTime    = Get-Date
-               requestedBy  = [PSCustomObject]@{
+               id            = 1
+               description   = ''
+               buildNumber   = '1'
+               status        = 'completed'
+               result        = 'succeeded'
+               startTime     = Get-Date
+               lastChangedBy = [PSCustomObject]@{
+                  id          = ''
                   displayName = 'Test User'
                   uniqueName  = 'test@email.com'
                }
-               requestedFor = [PSCustomObject]@{
+               requestedBy   = [PSCustomObject]@{
+                  id          = ''
                   displayName = 'Test User'
                   uniqueName  = 'test@email.com'
                }
-               definition   = [PSCustomObject]@{
+               requestedFor  = [PSCustomObject]@{
+                  id          = ''
+                  displayName = 'Test User'
+                  uniqueName  = 'test@email.com'
+               }
+               definition    = [PSCustomObject]@{
                   name     = 'Test CI'
                   fullname = 'Test CI'
                }
-               project      = [PSCustomObject]@{
+               project       = [PSCustomObject]@{
                   name = 'Test Project'
                }
             }
@@ -211,7 +218,7 @@ Describe 'TeamsPSDrive' {
    }
 
    Context 'Repositories' {
-      Mock Get-VSTeamGitRepository { return [VSTeamRepository]::new(@{
+      Mock Get-VSTeamGitRepository { return [VSTeamGitRepository]::new(@{
                id            = "fa7b6ac1-0d4c-46cb-8565-8fd49e2031ad"
                name          = ''
                url           = ''
@@ -230,7 +237,7 @@ Describe 'TeamsPSDrive' {
                   defaultTeam = [PSCustomObject]@{}
                   _links      = [PSCustomObject]@{}
                }
-            }, 'TestProject') 
+            }, 'TestProject')
       }
 
       Mock Get-VSTeamGitRef { return [VSTeamRef]::new([PSCustomObject]@{

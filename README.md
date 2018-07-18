@@ -40,9 +40,9 @@ Account
          - Ref1
          - Ref2
 
-Polished the classes defined for the provider. Also updated some of the fucntions to return the same classes as the provider.  The classes all have a hidden _internalObj property that wholes the raw object returned from the REST API call. Not all the properties of the object are exposed via properties of the class. This property will provide access to them if you need them.
+Polished the classes defined for the provider. Also updated some of the fucntions to return the same classes as the provider.  The classes all have a hidden _internalObj property that contains the raw object returned from the REST API call. Not all the properties of the object are exposed via properties of the class. This property will provide access to them if you need them.
 
-Updated the format.ps1xml files show more data when the provider is used and to format the provider output to be more consistent with a normal file system. The + and . modes were replaced with d----- and ----- for directories and leafs.
+Updated the format.ps1xml files to show more data when the provider is used and to format the provider output to be more consistent with a normal file system. The + and . modes were replaced with d----- and ----- for directories and leafs.
 
 Added a lot of new tests that pushed th code coverage to 99.69%.
 

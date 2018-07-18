@@ -131,6 +131,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
    }
 
    Context 'Git full exercise' {
+
       It 'Get-VSTeamGitRepository Should return repository' {
          Get-VSTeamGitRepository -ProjectName $newProjectName | Select-Object -ExpandProperty Name | Should Be $newProjectName
       }

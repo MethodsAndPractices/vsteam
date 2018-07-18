@@ -9,3 +9,4 @@ test/sample.txt
 integration/prime.ps1
 /Debugscript.txt
 .docs/files.md
+.vs/slnx.sqlite
