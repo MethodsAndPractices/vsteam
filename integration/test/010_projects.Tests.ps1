@@ -131,6 +131,22 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
    }
 
    Context 'Git full exercise' {
+
+      $Modules = [System.AppDomain]::CurrentDomain.GetAssemblies() |
+         Where-Object { $_.ManifestModule.ScopeName.StartsWith( [char]10745 ) }
+
+      $Modules = [System.AppDomain]::CurrentDomain.GetAssemblies() |
+         Where-Object { $_.ManifestModule.ScopeName.StartsWith( [char]10745 ) }
+
+      ForEach ( $Module in $Modules ) {
+         ForEach ( $Type in $Module.DefinedTypes.Where{ $_.IsPublic } ) {
+            [pscustomobject]@{
+               Module = $Module.ManifestModule.ScopeName.Trim( [char]10745 )
+               Type   = $Type.Name
+            }
+         }
+      }
+
       It 'Get-VSTeamGitRepository Should return repository' {
          Get-VSTeamGitRepository -ProjectName $newProjectName | Select-Object -ExpandProperty Name | Should Be $newProjectName
       }
