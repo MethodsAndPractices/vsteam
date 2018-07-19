@@ -387,7 +387,7 @@
          <Name>Team.RepositoryTable</Name>
          <ViewSelectedBy>
             <TypeName>Team.Repository</TypeName>
-            <TypeName>VSTeamRepo</TypeName>
+            <TypeName>VSTeamGitRepository</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>
@@ -431,7 +431,7 @@
          <Name>Team.Provider.RepositoryTable</Name>
          <ViewSelectedBy>
             <TypeName>Team.Provider.Repository</TypeName>
-            <TypeName>VSTeamRepo</TypeName>
+            <TypeName>VSTeamGitRepository</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>
@@ -481,7 +481,7 @@
          <ViewSelectedBy>
             <TypeName>Team.Repository</TypeName>
             <TypeName>Team.Provider.Repository</TypeName>
-            <TypeName>VSTeamRepo</TypeName>
+            <TypeName>VSTeamGitRepository</TypeName>
          </ViewSelectedBy>
          <ListControl>
             <ListEntries>

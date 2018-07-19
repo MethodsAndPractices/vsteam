@@ -52,7 +52,7 @@ function Add-VSTeamGitRepository {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $repo = [VSTeamRepo]::new($resp, $ProjectName)
+         $repo = [VSTeamGitRepository]::new($resp, $ProjectName)
 
          Write-Output $repo
       }
@@ -89,7 +89,7 @@ function Get-VSTeamGitRepository {
                # Storing the object before you return it cleaned up the pipeline.
                # When I just write the object from the constructor each property
                # seemed to be written
-               $item = [VSTeamRepo]::new($resp, $ProjectName)
+               $item = [VSTeamGitRepository]::new($resp, $ProjectName)
 
                Write-Output $item
             }
@@ -106,7 +106,7 @@ function Get-VSTeamGitRepository {
                # Storing the object before you return it cleaned up the pipeline.
                # When I just write the object from the constructor each property
                # seemed to be written
-               $item = [VSTeamRepo]::new($resp, $ProjectName)
+               $item = [VSTeamGitRepository]::new($resp, $ProjectName)
 
                Write-Output $item
             }
@@ -122,7 +122,7 @@ function Get-VSTeamGitRepository {
             $objs = @()
 
             foreach ($item in $resp.value) {
-               $objs += [VSTeamRepo]::new($item, $ProjectName)
+               $objs += [VSTeamGitRepository]::new($item, $ProjectName)
             }
 
             Write-Output $objs

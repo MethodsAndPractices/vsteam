@@ -503,7 +503,7 @@ class VSTeamRepositories : VSTeamDirectory {
 }
 
 [SHiPSProvider(UseCache = $true)]
-class VSTeamRepo : VSTeamDirectory {
+class VSTeamGitRepository : VSTeamDirectory {
 
    [int]$Size = 0
    [string]$ID = $null
@@ -513,7 +513,7 @@ class VSTeamRepo : VSTeamDirectory {
    [string]$DefaultBranch = $null
    [VSTeamProject]$Project = $null
 
-   VSTeamRepo(
+   VSTeamGitRepository(
       [object]$obj,
       [string]$ProjectName
    ) : base($obj.name, $ProjectName) {

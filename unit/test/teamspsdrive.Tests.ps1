@@ -218,7 +218,7 @@ Describe 'TeamsPSDrive' {
    }
 
    Context 'Repositories' {
-      Mock Get-VSTeamGitRepository { return [VSTeamRepo]::new(@{
+      Mock Get-VSTeamGitRepository { return [VSTeamGitRepository]::new(@{
                id            = "fa7b6ac1-0d4c-46cb-8565-8fd49e2031ad"
                name          = ''
                url           = ''
