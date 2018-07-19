@@ -5,18 +5,26 @@ SHORT DESCRIPTION
     The VSTeamAccount SHiPS provider allows you to navigate your TFS/VSTS
     as a file system using the following tree:
 
-        Account 
-          - Project1
-          - Project2
-                - Builds
-                    - Build1
-                    - Build2
-                - Releases
-                    - Release1
-                    - Release2
-                - Teams
-                    - Team1
-                    - Team2
+   Account
+      - Project1
+      - Project2
+         - Builds
+            - Build1
+            - Build2
+         - Releases
+            - Release1
+               - Environment 1
+                  - Attempt 1
+                     - Task1
+                     - Task2
+            - Release2
+               - Teams
+                  - Team1
+                  - Team2
+         - VSTeamRepositories
+            - Repo1
+               - Ref1
+               - Ref2
 
 LONG DESCRIPTION
    You use the New-PSDrive cmdlet to mount a drive to your account. 
@@ -25,17 +33,19 @@ LONG DESCRIPTION
    the required command written to the console so you can copy and 
    paste the command.
 
+   The provider caches the results. To force a round trip to skip the
+   cache use -Force switch with Get-ChildItem
+
 EXAMPLES
-    Add-VSTeamAccount -Account '[accountname]' -PersonalAccessToken '[VSTS Tokenvalue]'
-    New-PSDrive -Name VSTeamAccount -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
-    Set-Location VSTeamAccount:
-    Get-ChildItem
+   Add-VSTeamAccount -Account '[accountname]' -PersonalAccessToken '[VSTS Tokenvalue]'
+   New-PSDrive -Name VSTeamAccount -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
+   Set-Location VSTeamAccount:
+   Get-ChildItem
 
-
-    Add-VSTeamAccount -Profile '[profileName]' -Drive '[driveName]'
-   
-    To map a drive run the following command:
-    New-PSDrive -Name driveName -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
+   Add-VSTeamAccount -Profile '[profileName]' -Drive '[driveName]'
+  
+   To map a drive run the following command:
+   New-PSDrive -Name driveName -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
 
 KEYWORDS
     Team Services, VSTS, TFS, VSO, TFS, DevOps
