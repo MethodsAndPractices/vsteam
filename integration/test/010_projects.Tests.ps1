@@ -132,6 +132,8 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
    Context 'Git full exercise' {
 
+      Import-Module VSTeam -Force -Verbose
+
       It 'Should load types' {
          $Modules = [System.AppDomain]::CurrentDomain.GetAssemblies() |
             Where-Object { $_.ManifestModule.ScopeName.StartsWith( [char]10745 ) }
