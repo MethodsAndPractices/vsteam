@@ -7,14 +7,27 @@ I am truly grateful for all the support developing VSTeam. It means a lot that y
 1. Visit [docs.microsoft.com](http://cda.ms/4j) and find the API you want to wrap.
 2. Explore the API and get familiar with it.
 3. Fork this repository and create a branch for your work.
-4. Write help. **It is important that you do this before you start adding the function.**
-5. Write unit tests.
-6. Code the function.
-7. Add type file.
-8. Add format file.
-9. Update the psd1 file.
-10. Update the Readme.md file.
-11. Goto 4 for next function.
+4. Install the SHiPS PowerShell module
+5. Write help. **It is important that you do this before you start adding the function.**
+6. Write unit tests.
+7. Code the function.
+8. Add type file.
+9. Add format file.
+10. Update the psd1 file.
+11. Update the Readme.md file.
+12. Goto 4 for next function.
+
+## Running Integration tests
+
+**THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.**
+
+- Install SonarQube extension
+- Use an empty account to run the integration tests
+- Set the following Environment variables.
+   - $env:ACCT = VSTS Account Name or full TFS URL including collection
+   - $env:API_VERSION = TFS2017, TFS2018 or VSTS depending on the value used for ACCT
+   - $env:EMAIL = Email of user to remove and re-add to account
+   - $env:PAT = Personal Access token of ACCT
 
 ### Housekeeping
 

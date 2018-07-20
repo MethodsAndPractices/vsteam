@@ -5,12 +5,18 @@ if ($null -eq $env:TEAM_CIBUILD) {
    Import-Module $PSScriptRoot\..\..\VSTeam.psd1 -Force
 }
 
+##############################################################
+#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
+##############################################################
 # Before running these tests you must set the following
 # Environment variables.
 # $env:API_VERSION = TFS2017, TFS2018 or VSTS depending on the value used for ACCT
 # $env:EMAIL = Email of user to remove and re-add to account
 # $env:ACCT = VSTS Account Name or full TFS URL including collection
 # $env:PAT = Personal Access token of ACCT
+##############################################################
+#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
+##############################################################
 
 Set-VSTeamAPIVersion -Version $env:API_VERSION
 

@@ -1,7 +1,10 @@
 {
-"files.exclude": {
-   "**/.vscode": true,
-   "**/docs": true,
-   "**/package-lock.json": true
-}
+   "files.exclude": {
+      "**/.vscode": true,
+      "**/docs": true,
+      "**/package-lock.json": true
+   },
+   "editor.tabSize": 3,
+   "editor.detectIndentation": false,
+   "editor.insertSpaces": true
 }
