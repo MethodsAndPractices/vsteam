@@ -1,170 +1,293 @@
 Set-StrictMode -Version Latest
 
-Get-Module Team | Remove-Module -Force
-Get-Module Teams | Remove-Module -Force
 Get-Module VSTeam | Remove-Module -Force
-Get-Module Builds | Remove-Module -Force
-Get-Module Projects | Remove-Module -Force
-Get-Module Releases | Remove-Module -Force
-Get-Module teamspsdrive | Remove-Module -Force
 
-Import-Module SHiPS
+Import-Module $PSScriptRoot\..\..\VSTeam.psd1 -Force
 
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\builds.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\releases.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\teamspsdrive.psm1 -Force
-
-InModuleScope teamspsdrive {
-   
-   # Just in case it was loaded. If we don't do 
-   # this some test may fail
-   Remove-VSTeamAccount | Out-Null
-
-   Describe "TeamsPSDrive" {
-      Mock Get-VSTeamProject { return [PSCustomObject]@{ 
-            name        = 'Project' 
-            id          = 1
-            description = ''
-         } 
+Describe 'VSTeam Classes' {
+   Context 'VSTeamUser ToString' {
+      $obj = [PSCustomObject]@{
+         displayName = 'Test User'
+         id          = '1'
+         uniqueName  = 'test@email.com'
       }
 
-      Context 'VSAccount' {
+      $target = [VSTeamUser]::new($obj, 'Test Project')
 
-         $target = [VSAccount]::new('TestAccount')
+      It 'should return displayname' {
+         $target.ToString() | Should Be 'Test User'
+      }
+   }
 
-         It 'Should create VSAccount' {
-            $target | Should Not Be $null
-         }
-
-         It 'Should return projects' {
-            $target.GetChildItem() | Should Not Be $null
-         }
+   Context 'VSTeamProject ToString' {
+      $obj = @{
+         name        = 'Test Project'
+         id          = 1
+         description = ''
+         url         = ''
+         state       = ''
+         revision    = ''
+         visibility  = ''
       }
 
-      Context 'Project' {
+      $target = [VSTeamProject]::new($obj)
 
-         $target = [Project]::new('TestProject', '123', '')
-
-         It 'Should create Project' {
-            $target | Should Not Be $null
-         }
-
-         It 'Should return builds, releases and teams' {
-            $actual = $target.GetChildItem()
-            $actual | Should Not Be $null
-            $actual[0].Name | Should Be 'Builds'
-            $actual[0].ProjectName | Should Be 'TestProject'
-            $actual[1].Name | Should Be 'Releases'
-            $actual[1].ProjectName | Should Be 'TestProject'
-            $actual[2].Name | Should Be 'Teams'
-            $actual[2].ProjectName | Should Be 'TestProject'
-         }
+      It 'should return name' {
+         $target.ToString() | Should Be 'Test Project'
       }
-      
-      Mock Get-VSTeamBuild { return [PSCustomObject]@{ 
-            definition       = [PSCustomObject]@{fullname = 'BuildDef' }
-            buildnumber      = ''
-            status           = ''
-            result           = ''
-            starttime        = Get-Date
-            requestedByUser  = ''
-            requestedForUser = ''
-            projectname      = ''
-            id               = 1
-         } 
+   }
+}
+
+Describe 'TeamsPSDrive' {
+   Context 'VSTeamAccount & Projects' {
+      Mock Get-VSTeamProject { return [VSTeamProject]::new([PSCustomObject]@{
+               name        = 'TestProject'
+               description = ''
+               url         = ''
+               id          = '123-5464-dee43'
+               state       = ''
+               visibility  = ''
+               revision    = 0
+               defaultTeam = [PSCustomObject]@{}
+               _links      = [PSCustomObject]@{}
+            }
+         )
       }
 
-      Context 'Builds' {
+      $account = [VSTeamAccount]::new('TestAccount')
 
-         $target = [Builds]::new('TestBuild', 'TestProject')
-
-         It 'Should create Builds' {
-            $target | Should Not Be $null
-         }
-
-         It 'Should return build' {
-            $target.GetChildItem() | Should Not Be $null
-         }
+      It 'Should create VSTeamAccount' {
+         $account | Should Not Be $null
       }
 
-      Context 'Build' {
-         
-         $target = [Build]::new('TestBuildDef', 'TestBuildNumber', 'TestBuildStatus', 'TestBuildResult', $(Get-Date), 'TestUser', 'TestUser', 'TestProject', 1)
-         
-         It 'Should create Build' {
-            $target | Should Not Be $null
-         }
+      $project = $account.GetChildItem()[0]
+
+      It 'Should return projects' {
+         $project | Should Not Be $null
       }
 
-      Mock Get-VSTeamRelease { return [PSCustomObject]@{ 
-            Environments  = [PSCustomObject]@{
-               status = [PSCustomObject]@{
-                  environments = [PSCustomObject]@{
-                     status = 'Succeeded'
-                  } 
+      $actual = $project.GetChildItem()
+
+      It 'Should return builds, releases, repositories and teams' {
+         $actual | Should Not Be $null
+         $actual[0].Name | Should Be 'Builds'
+         $actual[0].ProjectName | Should Be 'TestProject'
+         $actual[1].Name | Should Be 'Releases'
+         $actual[1].ProjectName | Should Be 'TestProject'
+         $actual[2].Name | Should Be 'Repositories'
+         $actual[2].ProjectName | Should Be 'TestProject'
+         $actual[3].Name | Should Be 'Teams'
+         $actual[3].ProjectName | Should Be 'TestProject'
+      }
+   }
+
+   Context 'Builds' {
+      Mock Get-VSTeamBuild { return @([PSCustomObject]@{
+               id            = 1
+               description   = ''
+               buildNumber   = '1'
+               status        = 'completed'
+               result        = 'succeeded'
+               startTime     = Get-Date
+               lastChangedBy = [PSCustomObject]@{
+                  id          = ''
+                  displayName = 'Test User'
+                  uniqueName  = 'test@email.com'
+               }
+               requestedBy   = [PSCustomObject]@{
+                  id          = ''
+                  displayName = 'Test User'
+                  uniqueName  = 'test@email.com'
+               }
+               requestedFor  = [PSCustomObject]@{
+                  id          = ''
+                  displayName = 'Test User'
+                  uniqueName  = 'test@email.com'
+               }
+               definition    = [PSCustomObject]@{
+                  name     = 'Test CI'
+                  fullname = 'Test CI'
+               }
+               project       = [PSCustomObject]@{
+                  name = 'Test Project'
                }
             }
-            name          = ''
-            status        = ''
-            createdByUser = ''
-            createdOn     = Get-Date
-            id            = 1
-         } 
+         )
       }
 
-      Context 'Releases' {
-         
-         $target = [Releases]::new('TestReleasesName', 'TestProject')
-         
-         It 'Should create Releases' {
-            $target | Should Not Be $null
-         }
+      $builds = [VSTeamBuilds]::new('TestBuild', 'TestProject')
 
-         It 'Should return release' {
-            $target.GetChildItem() | Should Not Be $null
+      It 'Should create Builds' {
+         $builds | Should Not Be $null
+      }
+
+      $build = $builds.GetChildItem()
+
+      It 'Should return build' {
+         $build | Should Not Be $null
+      }
+   }
+
+   Context 'Releases' {
+      Mock Get-VSTeamRelease { return [PSCustomObject]@{
+            id                = 1
+            name              = 'Release-007'
+            status            = 'active'
+            createdBy         = [PSCustomObject]@{
+               displayname = 'Test User'
+               uniqueName  = 'test@email.com'
+               id          = '1'
+            }
+            modifiedBy        = [PSCustomObject]@{
+               displayname = 'Test User'
+               uniqueName  = 'test@email.com'
+               id          = '1'
+            }
+            requestedFor      = [PSCustomObject]@{
+               displayname = ''
+               uniqueName  = ''
+               id          = ''
+            }
+            createdOn         = Get-Date
+            releaseDefinition = [PSCustomObject]@{
+               name = 'Test Release Def'
+            }
+            environments      = @([PSCustomObject]@{
+                  id          = 1
+                  name        = 'Dev'
+                  status      = 'Succeeded'
+                  deploySteps = @([PSCustomObject]@{
+                        id                  = 963
+                        deploymentId        = 350
+                        attempt             = 1
+                        reason              = 'automated'
+                        status              = 'succeeded'
+                        releaseDeployPhases = @([PSCustomObject]@{
+                              deploymentJobs = @([PSCustomObject]@{
+                                    tasks = @([PSCustomObject]@{
+                                          name   = 'Initialize Job'
+                                          status = 'succeeded'
+                                          id     = 1
+                                          logUrl = ''
+                                       }
+                                    )
+                                 }
+                              )
+                           }
+                        )
+                     }
+                  )
+               }
+            )
          }
       }
 
-      Context 'Release' {
-         
-         $target = [Release]::new(1, 'TestReleaseName', 'TestReleaseStatus', $(Get-Date), @(), 'TestUser', 'TestProject')
-         
-         It 'Should create Release' {
-            $target | Should Not Be $null
-         }
+      $releases = [VSTeamReleases]::new('Releases', 'TestProject')
+
+      It 'Should create Releases directory' {
+         $releases | Should Not Be $null
       }
 
-      Mock Get-VSTeam { return [PSCustomObject]@{             
-            name        = ''
-            ProjectName = ''
-            description = ''
-            id          = 1
-         } 
+      It 'Should be named Releases' {
+         $releases.Name | Should Be 'Releases'
       }
 
-      Context 'Teams' {
-         
-         $target = [Teams]::new('TestTeamsName', 'TestProject')
-         
-         It 'Should create Teams' {
-            $target | Should Not Be $null
-         }
+      $release = $releases.GetChildItem()[0]
 
-         It 'Should return team' {
-            $target.GetChildItem() | Should Not Be $null
-         }
+      It 'Should return releases' {
+         $release | Should Not Be $null
       }
 
-      Context 'Team' {
-         
-         $target = [Team]::new('TestTeamId', 'TestTeamName', 'TestProject', '')
-         
-         It 'Should create Team' {
-            $target | Should Not Be $null
-         }
+      $env = $release.GetChildItem()[0]
+
+      It 'Should return environments' {
+         $env | Should Not Be $null
+      }
+
+      $attempt = $env.GetChildItem()[0]
+
+      It 'Should return attempts' {
+         $attempt | Should Not Be $null
+      }
+
+      $task = $attempt.GetChildItem()[0]
+
+      It 'Should return tasks' {
+         $task | Should Not Be $null
+      }
+   }
+
+   Context 'Repositories' {
+      Mock Get-VSTeamGitRepository { return [VSTeamGitRepository]::new(@{
+               id            = "fa7b6ac1-0d4c-46cb-8565-8fd49e2031ad"
+               name          = ''
+               url           = ''
+               defaultBranch = ''
+               size          = ''
+               remoteUrl     = ''
+               sshUrl        = ''
+               project       = [PSCustomObject]@{
+                  name        = 'TestProject'
+                  description = ''
+                  url         = ''
+                  id          = '123-5464-dee43'
+                  state       = ''
+                  visibility  = ''
+                  revision    = 0
+                  defaultTeam = [PSCustomObject]@{}
+                  _links      = [PSCustomObject]@{}
+               }
+            }, 'TestProject')
+      }
+
+      Mock Get-VSTeamGitRef { return [VSTeamRef]::new([PSCustomObject]@{
+               objectId = '6f365a7143e492e911c341451a734401bcacadfd'
+               name     = 'refs/heads/master'
+               creator  = [PSCustomObject]@{
+                  displayName = 'Microsoft.VisualStudio.Services.TFS'
+                  id          = '1'
+                  uniqueName  = 'some@email.com'
+               }
+            }, 'TestProject')
+      }
+
+      $repositories = [VSTeamRepositories]::new('Repositories', 'TestProject')
+
+      It 'Should create Repositories' {
+         $repositories | Should Not Be $null
+      }
+
+      $repository = $repositories.GetChildItem()[0]
+
+      It 'Should return repository' {
+         $repository | Should Not Be $null
+      }
+
+      $ref = $repository.GetChildItem()[0]
+
+      It 'Should return ref' {
+         $ref | Should Not Be $null
+      }
+   }
+
+   Context 'Teams' {
+      Mock Get-VSTeam { return [VSTeamTeam]::new(@{
+               name        = ''
+               ProjectName = ''
+               description = ''
+               id          = 1
+            }, 'TestProject') }
+
+      $teams = [VSTeamTeams]::new('Teams', 'TestProject')
+
+      It 'Should create Teams' {
+         $teams | Should Not Be $null
+      }
+
+      $team = $teams.GetChildItem()[0]
+
+      It 'Should return team' {
+         $team | Should Not Be $null
       }
    }
 }

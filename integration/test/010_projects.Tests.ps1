@@ -2,7 +2,7 @@ Set-StrictMode -Version Latest
 
 if ($null -eq $env:TEAM_CIBUILD) {
    Get-Module VSTeam | Remove-Module -Force
-   Import-Module $PSScriptRoot\..\..\vsteam.psd1 -Force
+   Import-Module $PSScriptRoot\..\..\VSTeam.psd1 -Force
 }
 
 # Before running these tests you must set the following
@@ -38,16 +38,16 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       Add-VSTeamProfile -Account $acct -PersonalAccessToken $pat -Version $api -Name intTests
       Add-VSTeamAccount -Profile intTests -Drive int
    }
-   
+
    AfterAll {
       # Put everything back
       Set-Location $originalLocation
- 
-      if ($oAcct) { 
+
+      if ($oAcct) {
          Add-VSTeamProfile -Account $oAcct -PersonalAccessToken $pat -Version $oVersion -Name $oName
          Add-VSTeamAccount -Profile $oName
       }
-   } 
+   }
 
    Context 'Set-VSTeamDefaultProject' {
       It 'should set default project' {
@@ -108,7 +108,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
    }
 
    Context 'PS Drive full exercise' {
-      New-PSDrive -Name int -PSProvider SHiPS -Root 'VSTeam#VSAccount'
+      New-PSDrive -Name int -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
       $actual = Set-Location int: -PassThru
 
       It 'Should be able to mount drive' {
@@ -129,8 +129,9 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          Get-ChildItem | Should Not Be $null
       }
    }
-   
+
    Context 'Git full exercise' {
+
       It 'Get-VSTeamGitRepository Should return repository' {
          Get-VSTeamGitRepository -ProjectName $newProjectName | Select-Object -ExpandProperty Name | Should Be $newProjectName
       }
@@ -176,7 +177,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Get-VSTeamQueue By Id Should return agent Queue' {
          $actual = Get-VSTeamQueue -ProjectName $newProjectName -Id $global:queueId
-         
+
          $actual | Should Not Be $null
       }
    }
@@ -212,7 +213,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
                -subscriptionId '00000000-0000-0000-0000-000000000000' -subscriptionTenantId '00000000-0000-0000-0000-000000000000' `
                -servicePrincipalId '00000000-0000-0000-0000-000000000000' -servicePrincipalKey 'fakekey' } | Should Not Throw
       }
-      
+
       It 'Get-VSTeamServiceEndpoint Should return service endpoints' {
          $actual = Get-VSTeamServiceEndpoint -ProjectName $newProjectName
 
@@ -229,7 +230,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       if ($api -ne 'TFS2017') {
          It 'Add-VSTeamServiceFabricEndpoint Should add servcie endpoint' {
             { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
-                  -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Be $null 
+                  -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Be $null
          }
       }
       else {
@@ -243,9 +244,9 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
    # Not supported on TFS
    if (-not ($acct -like "http://*")) {
       Context 'Users exercise' {
-    
+
          It 'Get-VSTeamUser Should return all usrs' {
-            Get-VSTeamUser | Should Not Be $null         
+            Get-VSTeamUser | Should Not Be $null
          }
 
          It 'Get-VSTeamUser ById Should return Teams' {
@@ -256,7 +257,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          It 'Remove-VSTeamUser should fail' {
             { Remove-VSTeamUser -Email fake@NoteReal.foo -Force } | Should Throw
          }
-      
+
          It 'Remove-VSTeamUser should delete the team' {
             Remove-VSTeamUser -Email $email -Force
             Get-VSTeamUser | Where-Object Email -eq $email | Should Be $null
@@ -315,9 +316,9 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Clear-VSTeamDefaultProject should clear project' {
          $Global:PSDefaultParameterValues['*:projectName'] = $newProjectName
-         
+
          Clear-VSTeamDefaultProject
-         
+
          $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
       }
 

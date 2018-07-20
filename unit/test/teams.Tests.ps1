@@ -7,11 +7,26 @@ Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
 InModuleScope teams {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
+   $results = [PSCustomObject]@{
+      value = [PSCustomObject]@{
+         id          = '6f365a7143e492e911c341451a734401bcacadfd'
+         name        = 'refs/heads/master'
+         description = 'team description'
+      }
+   }
+
+   $singleResult = [PSCustomObject]@{
+      id          = '6f365a7143e492e911c341451a734401bcacadfd'
+      name        = 'refs/heads/master'
+      description = 'team description'
+   }
+
    Describe "Teams VSTS" {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
-        
-      Context 'Get-VSTeam with project name' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
+
+      Context 'Get-VSTeam with project name' {
+         Mock Invoke-RestMethod { return $results }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test
@@ -23,16 +38,16 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with project name, with top' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with project name, with top' {
+         Mock Invoke-RestMethod { return $results }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Top 10
 
-            # With PowerShell core the order of the query string is not the 
+            # With PowerShell core the order of the query string is not the
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
-            # assume the order. 
+            # assume the order.
             # The general string should look like this:
             # "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$($VSTeamVersionTable.Core)&`$top=10"
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -43,8 +58,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with project name, with skip' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with project name, with skip' {
+         Mock Invoke-RestMethod { return $results }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Skip 10
@@ -58,8 +73,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with project name, with top and skip' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with project name, with top and skip' {
+         Mock Invoke-RestMethod { return $results }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Top 10 -Skip 5
@@ -74,8 +89,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with specific project and specific team id' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with specific project and specific team id' {
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -TeamId TestTeamId
@@ -87,8 +102,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with specific project and specific team Name' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with specific project and specific team Name' {
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -TeamName TestTeamName
@@ -101,7 +116,7 @@ InModuleScope teams {
       }
 
       Context 'Add-VSTeam with team name only' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should create a team' {
             Add-VSTeam -ProjectName Test -TeamName "TestTeam"
@@ -117,8 +132,8 @@ InModuleScope teams {
       }
 
       Context 'Add-VSTeam with team name and description' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
-            
+         Mock Invoke-RestMethod { return $singleResult }
+
          It 'Should create a team' {
             Add-VSTeam -ProjectName Test -TeamName "TestTeam" -Description "Test Description"
 
@@ -132,15 +147,15 @@ InModuleScope teams {
          }
       }
 
-      Context 'Update-VSTeam without name or description' {            
+      Context 'Update-VSTeam without name or description' {
          It 'Should throw' {
             { Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" } | Should Throw
          }
       }
 
       Context 'Update-VSTeam with new team name' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
-            
+         Mock Invoke-RestMethod { return $singleResult }
+
          It 'Should update the team' {
             Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
 
@@ -155,8 +170,8 @@ InModuleScope teams {
       }
 
       Context 'Update-VSTeam with new description' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
-            
+         Mock Invoke-RestMethod { return $singleResult }
+
          It 'Should update the team' {
             Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -Description "New Description"
 
@@ -171,8 +186,8 @@ InModuleScope teams {
       }
 
       Context 'Update-VSTeam with new team name and description' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
-            
+         Mock Invoke-RestMethod { return $singleResult }
+
          It 'Should update the team' {
             Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName" -Description "New Description"
 
@@ -188,7 +203,7 @@ InModuleScope teams {
 
       Context 'Update-VSTeam, fed through pipeline' {
          Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{projectname = "TestProject"; name = "OldTeamName"} }
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should update the team' {
             Get-VSTeam -ProjectName TestProject -TeamId "OldTeamName" | Update-VSTeam -NewTeamName "NewTeamName" -Description "New Description"
@@ -204,8 +219,8 @@ InModuleScope teams {
       }
 
       Context 'Remove-VSTeam' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
-            
+         Mock Invoke-RestMethod { return $singleResult }
+
          It 'Should remove the team' {
             Remove-VSTeam -ProjectName Test -TeamId "TestTeam" -Force
 
@@ -218,7 +233,7 @@ InModuleScope teams {
 
       Context 'Remove-VSTeam, fed through pipeline' {
          Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{projectname = "TestProject"; name = "TestTeam"} }
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should remove the team' {
             Get-VSTeam -ProjectName TestProject -TeamId "TestTeam" | Remove-VSTeam -Force
@@ -233,13 +248,14 @@ InModuleScope teams {
 
    Describe "Teams TFS" {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
+      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
-      
+
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
 
-      Context 'Get-VSTeam with project name on TFS local Auth' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with project name on TFS local Auth' {
+         Mock Invoke-RestMethod { return $results }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test
@@ -251,8 +267,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with project name, with top on TFS local Auth' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with project name, with top on TFS local Auth' {
+         Mock Invoke-RestMethod { return $results }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Top 10
@@ -266,8 +282,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with project name, with skip on TFS local Auth' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with project name, with skip on TFS local Auth' {
+         Mock Invoke-RestMethod { return $results }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Skip 10
@@ -281,8 +297,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with project name, with top and skip on TFS local Auth' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with project name, with top and skip on TFS local Auth' {
+         Mock Invoke-RestMethod { return $results }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Top 10 -Skip 5
@@ -297,8 +313,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with specific project and specific team Name on TFS local Auth' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with specific project and specific team Name on TFS local Auth' {
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -Name TestTeamName
@@ -310,8 +326,8 @@ InModuleScope teams {
          }
       }
 
-      Context 'Get-VSTeam with specific project and specific team ID on TFS local Auth' {  
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+      Context 'Get-VSTeam with specific project and specific team ID on TFS local Auth' {
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should return teams' {
             Get-VSTeam -ProjectName Test -TeamId TestTeamId
@@ -324,7 +340,7 @@ InModuleScope teams {
       }
 
       Context 'Add-VSTeam with team name only on TFS local Auth' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should create a team' {
             Add-VSTeam -ProjectName Test -TeamName "TestTeam"
@@ -340,8 +356,8 @@ InModuleScope teams {
       }
 
       Context 'Update-VSTeam with new team name on TFS local Auth' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
-            
+         Mock Invoke-RestMethod { return $singleResult }
+
          It 'Should update the team' {
             Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
 
@@ -356,8 +372,8 @@ InModuleScope teams {
       }
 
       Context 'Remove-VSTeam on TFS local Auth' {
-         Mock Invoke-RestMethod { return @{value = 'teams'}}
-         
+         Mock Invoke-RestMethod { return $singleResult }
+
          It 'Should remove the team' {
             Remove-VSTeam -ProjectName Test -TeamId "TestTeam" -Force
 
@@ -370,12 +386,12 @@ InModuleScope teams {
 
       # Must be last because it sets $VSTeamVersionTable.Account to $null
       Context '_buildURL handles exception' {
-         
+
          # Arrange
          $VSTeamVersionTable.Account = $null
-         
+
          It 'should return approvals' {
-         
+
             # Act
             { _buildURL -ProjectName project } | Should Throw
          }

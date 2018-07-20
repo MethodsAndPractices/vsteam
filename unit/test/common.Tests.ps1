@@ -74,7 +74,7 @@ Describe 'Common' {
 
    Context '_buildProjectNameDynamicParam' {
       Mock _getProjects { return  ConvertFrom-Json '["Demo", "Universal"]' }
-     
+
       It 'should return dynamic parameter' {
          _buildProjectNameDynamicParam | Should Not BeNullOrEmpty
       }
@@ -153,7 +153,7 @@ Describe 'Common' {
    Context '_isOnLinux' {
       It 'on PowerShell 5.* should return false' {
          Mock Test-Path { return $false }
-         
+
          _isOnLinux | Should Be $false
       }
 
@@ -189,7 +189,7 @@ Describe 'Common' {
 
       Mock Test-Path { throw "Wrong call to Test-Path: $args" }
       Mock Get-Content { throw "Wrong call to Get-Content: $args" }
-      
+
       It 'should return true' {
          _isOnWindows | Should Be $true
          Assert-VerifiableMock
@@ -209,7 +209,7 @@ Describe 'Common' {
    Context '_isOnMac' {
       It 'on PowerShell 5.* should return false' {
          Mock Test-Path { return $false }
-         
+
          _isOnMac | Should Be $false
       }
 
@@ -237,7 +237,7 @@ Describe 'Common' {
       }
    }
 
-   Context '_isVSTS' {     
+   Context '_isVSTS' {
       It 'should return true' {
          _isVSTS 'https://test.visualstudio.com' | Should Be $true
       }

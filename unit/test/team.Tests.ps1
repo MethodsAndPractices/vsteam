@@ -15,8 +15,8 @@ InModuleScope team {
       Context 'Invoke-VSTeamRequest Options' {
          $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
          Mock Invoke-RestMethod { Write-Host $args }
-         
-         Invoke-VSTeamRequest -Method Options 
+
+         Invoke-VSTeamRequest -Method Options
 
          It 'Should call API' {
             Assert-VerifiableMock
@@ -65,7 +65,7 @@ InModuleScope team {
             "Version": "VSTS"
          }
       ]
-"@    
+"@
 
       Context 'Get-VSTeamInfo' {
          It 'should return account and default project' {
@@ -82,7 +82,7 @@ InModuleScope team {
       Context 'Get-VSTeamResourceArea' {
          Mock _callAPI { return @{
                value = @{}
-            } 
+            }
          }
 
          $actual = Get-VSTeamResourceArea
@@ -118,17 +118,17 @@ InModuleScope team {
                )
             }
          }
-         
+
          It 'Should return all options' {
             Get-VSTeamOption | Should Not Be $null
-            Assert-MockCalled Invoke-RestMethod -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Uri -eq "https://test.visualstudio.com/_apis/"
             }
          }
 
          It 'Should return release options' {
             Get-VSTeamOption -Release | Should Not Be $null
-            Assert-MockCalled Invoke-RestMethod -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Uri -eq "https://test.vsrm.visualstudio.com/_apis/"
             }
          }
@@ -138,7 +138,7 @@ InModuleScope team {
          Mock _isOnWindows { return $false }
          Mock Write-Error -Verifiable
          Mock Get-VSTeamProfile { return "[]" | ConvertFrom-Json | ForEach-Object { $_ } }
-         
+
          Add-VSTeamAccount -Profile notFound
 
          It 'should write error' {
@@ -204,6 +204,25 @@ InModuleScope team {
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
                $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+            }
+         }
+      }
+
+      Context 'Add-VSTeamAccount vsts OAuth' {
+         Mock _isOnWindows { return $false }
+         Mock _setEnvironmentVariables
+         Mock Set-VSTeamAPIVersion
+
+         It 'should set env at process level' {
+            Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS -UseBearerToken
+
+            Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Version -eq 'VSTS'
+            }
+
+            # Make sure set env vars was called with the correct parameters
+            Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Level -eq 'Process' -and $Pat -eq '' -and $BearerToken -eq 12345 -and $Acct -eq 'https://mydemos.visualstudio.com'
             }
          }
       }
@@ -471,7 +490,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Set-VSTeamAPIVersion' {         
+      Context 'Set-VSTeamAPIVersion' {
          BeforeEach {
             $VSTeamVersionTable.Version = ''
          }

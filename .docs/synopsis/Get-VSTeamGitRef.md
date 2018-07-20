@@ -1,0 +1,1 @@
+Queries the provided repository for its refs and returns them.

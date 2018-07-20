@@ -9,7 +9,7 @@ $profilesPath = "$HOME/vsteam_profiles.json"
 function Get-VSTeamProfile {
    [CmdletBinding()]
    param(
-      # Name is an array so I can pass an array after -Name 
+      # Name is an array so I can pass an array after -Name
       # I can also use pipe
       [parameter(Mandatory = $false, Position = 1, ValueFromPipelineByPropertyName = $true)]
       [string] $Name
@@ -22,7 +22,7 @@ function Get-VSTeamProfile {
             $result = Get-Content $profilesPath | ConvertFrom-Json
 
             if ($Name) {
-               $result = $result | Where-Object Name -eq $Name 
+               $result = $result | Where-Object Name -eq $Name
             }
 
             if ($result) {
@@ -37,11 +37,11 @@ function Get-VSTeamProfile {
                      $_ | Add-Member NoteProperty 'Token' ''
                   }
 
-                  $_ 
+                  $_
                }
             }
          }
-         catch {         
+         catch {
             # Catch any error and fail to the return empty array below
             Write-Error "Error ready Profiles file. Use Add-VSTeamProfile to generate new file."
          }
@@ -52,7 +52,7 @@ function Get-VSTeamProfile {
 function Remove-VSTeamProfile {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
-      # Name is an array so I can pass an array after -Name 
+      # Name is an array so I can pass an array after -Name
       # I can also use pipe
       [parameter(Mandatory = $true, Position = 1, ValueFromPipelineByPropertyName = $true)]
       [string[]] $Name,
@@ -78,7 +78,7 @@ function Remove-VSTeamProfile {
       if ([string]::isnullorempty($contents)) {
          $contents = ''
       }
-      
+
       Set-Content -Path $profilesPath -Value $contents
    }
 }
@@ -90,15 +90,15 @@ function Add-VSTeamProfile {
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
       [Parameter(ParameterSetName = 'Plain')]
       [string] $Account,
-   
+
       [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
       [string] $PersonalAccessToken,
-   
+
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
-   
+
       [string] $Name,
-   
+
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
       [string] $Version,
 
@@ -136,8 +136,8 @@ function Add-VSTeamProfile {
 
       if ($SecurePersonalAccessToken) {
          # Even when promoted for a Secure Personal Access Token you can just
-         # press enter. This leads to an empty PAT so error below. 
-      
+         # press enter. This leads to an empty PAT so error below.
+
          # Convert the securestring to a normal string
          # this was the one technique that worked on Mac, Linux and Windows
          $_pat = _convertSecureStringTo_PlainText -SecureString $SecurePersonalAccessToken
@@ -165,6 +165,7 @@ function Add-VSTeamProfile {
       if ($UseBearerToken.IsPresent) {
          $authType = 'Bearer'
          $token = $_pat
+         $encodedPat = ''
       }
       else {
          $token = ''

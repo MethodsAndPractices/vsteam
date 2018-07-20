@@ -4,14 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-# Apply types to the returned objects so format and type files can
-# identify the object and act on it.
-function _applyTypesToGitRepository {
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'Team.GitRepository')
-}
-
 function Remove-VSTeamGitRepository {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
@@ -25,7 +17,7 @@ function Remove-VSTeamGitRepository {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Repository")) {
             try {
                _callAPI -Method Delete -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git | Out-Null
-               
+
                Write-Output "Deleted repository $item"
             }
             catch {
@@ -57,7 +49,12 @@ function Add-VSTeamGitRepository {
          $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' `
             -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Git
 
-         Write-Output $resp
+         # Storing the object before you return it cleaned up the pipeline.
+         # When I just write the object from the constructor each property
+         # seemed to be written
+         $repo = [VSTeamGitRepository]::new($resp, $ProjectName)
+
+         Write-Output $repo
       }
       catch {
          _handleException $_
@@ -88,14 +85,17 @@ function Get-VSTeamGitRepository {
          foreach ($item in $id) {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
-               
-               _applyTypesToGitRepository -item $resp
-               
-               Write-Output $resp   
+
+               # Storing the object before you return it cleaned up the pipeline.
+               # When I just write the object from the constructor each property
+               # seemed to be written
+               $item = [VSTeamGitRepository]::new($resp, $ProjectName)
+
+               Write-Output $item
             }
             catch {
                throw $_
-            }            
+            }
          }
       }
       elseif ($Name) {
@@ -103,29 +103,33 @@ function Get-VSTeamGitRepository {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
 
-               _applyTypesToGitRepository -item $resp
+               # Storing the object before you return it cleaned up the pipeline.
+               # When I just write the object from the constructor each property
+               # seemed to be written
+               $item = [VSTeamGitRepository]::new($resp, $ProjectName)
 
-               Write-Output $resp
+               Write-Output $item
             }
             catch {
                throw $_
-            }    
+            }
          }
       }
       else {
          try {
             $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version $VSTeamVersionTable.Git
 
-            # Apply a Type Name so we can use custom format view and custom type extensions
+            $objs = @()
+
             foreach ($item in $resp.value) {
-               _applyTypesToGitRepository -item $item
+               $objs += [VSTeamGitRepository]::new($item, $ProjectName)
             }
 
-            Write-Output $resp.value
+            Write-Output $objs
          }
          catch {
             throw $_
-         }    
+         }
       }
    }
 }

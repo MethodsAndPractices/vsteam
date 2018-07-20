@@ -197,7 +197,7 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>BearerToken</maml:name>
+          <maml:name>UseBearerToken</maml:name>
           <maml:Description>
             <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
           </maml:Description>
@@ -278,7 +278,7 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>BearerToken</maml:name>
+          <maml:name>UseBearerToken</maml:name>
           <maml:Description>
             <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
           </maml:Description>
@@ -464,7 +464,7 @@
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>BearerToken</maml:name>
+        <maml:name>UseBearerToken</maml:name>
         <maml:Description>
           <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
         </maml:Description>
@@ -572,10 +572,9 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -BearerToken</dev:code>
+        <dev:code>PS C:\&gt; Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken</dev:code>
         <dev:remarks>
-          <maml:para>Will add the account and use the OAuth Token provided by VSTS when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.
-</maml:para>
+          <maml:para>Will add the account and use the OAuth Token provided by VSTS when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1999,7 +1998,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>BearerToken</maml:name>
+          <maml:name>UseBearerToken</maml:name>
           <maml:Description>
             <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
           </maml:Description>
@@ -2067,7 +2066,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <dev:defaultValue>TFS2017 for TFS and VSTS for VSTS</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>BearerToken</maml:name>
+          <maml:name>UseBearerToken</maml:name>
           <maml:Description>
             <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
           </maml:Description>
@@ -2188,7 +2187,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>BearerToken</maml:name>
+        <maml:name>UseBearerToken</maml:name>
         <maml:Description>
           <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
         </maml:Description>
@@ -5332,6 +5331,95 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-VSTeamGitRef</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamGitRef</command:noun>
+      <maml:description>
+        <maml:para>Queries the provided repository for its refs and returns them.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-VSTeamGitRef gets all the refs for the provided repository..</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGitRef</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="ID">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the ID of the repository.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="ID">
+        <maml:name>RepositoryId</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the ID of the repository.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>## RELATED LINKS</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamGitRef -ProjectName Demo</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all the Git refs for the Demo team project.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>

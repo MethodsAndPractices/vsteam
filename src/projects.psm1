@@ -4,23 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-# Apply types to the returned objects so format and type files can
-# identify the object and act on it.
-function _applyTypesToProject {
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'Team.Project')
-
-   # Only returned for a single item
-   if ($item.PSObject.Properties.Match('defaultTeam').count -gt 0 -and $null -ne $item.defaultTeam) {
-      $item.defaultTeam.PSObject.TypeNames.Insert(0, 'Team.Team')
-   }
-
-   if ($item.PSObject.Properties.Match('_links').count -gt 0 -and $null -ne $item._links) {
-      $item._links.PSObject.TypeNames.Insert(0, 'Team.Links')
-   }
-}
-
 function _trackProjectProgress {
    param(
       [Parameter(Mandatory = $true)] $Resp,
@@ -53,17 +36,17 @@ function Get-VSTeamProject {
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('WellFormed', 'CreatePending', 'Deleting', 'New', 'All')]
       [string] $StateFilter = 'WellFormed',
-      
+
       [Parameter(ParameterSetName = 'List')]
       [int] $Top = 100,
-      
+
       [Parameter(ParameterSetName = 'List')]
       [int] $Skip = 0,
-      
+
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id,
-      
+
       [switch] $IncludeCapabilities
    )
 
@@ -89,11 +72,13 @@ function Get-VSTeamProject {
          $resp = _callAPI -Area 'projects' -id $ProjectName `
             -Version $VSTeamVersionTable.Core `
             -QueryString $queryString
-         
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         _applyTypesToProject -item $resp
 
-         Write-Output $resp
+         # Storing the object before you return it cleaned up the pipeline.
+         # When I just write the object from the constructor each property
+         # seemed to be written
+         $project = [VSTeamProject]::new($resp)
+
+         Write-Output $project
       }
       else {
          try {
@@ -106,12 +91,13 @@ function Get-VSTeamProject {
                '$skip'     = $skip
             }
 
-            # Apply a Type Name so we can use custom format view and custom type extensions
+            $objs = @()
+
             foreach ($item in $resp.value) {
-               _applyTypesToProject -item $item
+               $objs += [VSTeamProject]::new($item)
             }
 
-            Write-Output $resp.value
+            Write-Output $objs
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod
@@ -125,7 +111,7 @@ function Get-VSTeamProject {
 
 function Show-VSTeamProject {
    [CmdletBinding(DefaultParameterSetName = 'ByName')]
-   param(      
+   param(
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id
@@ -204,7 +190,7 @@ function Update-VSTeamProject {
          # Call the REST API
          $resp = _callAPI -Area 'projects' -id $id `
             -Method Patch -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Core
-         
+
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Return the project now that it has been updated
@@ -253,7 +239,7 @@ function Add-VSTeamProject {
       # Call the REST API
       $resp = _callAPI -Area 'projects' `
          -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Core
-      
+
       _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
       return Get-VSTeamProject $ProjectName
@@ -281,7 +267,7 @@ function Remove-VSTeamProject {
          # Call the REST API
          $resp = _callAPI -Area 'projects' -Id (Get-VSTeamProject $ProjectName).id `
             -Method Delete -Version $VSTeamVersionTable.Core
-         
+
          _trackProjectProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
          Write-Output "Deleted $ProjectName"
@@ -403,7 +389,7 @@ function Set-VSTeamDefaultProject {
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $dp.Add($ParameterName, $RuntimeParameter)
       }
-      
+
       return $dp
    }
 
@@ -450,7 +436,7 @@ Export-ModuleMember `
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {
-   # Make sure the value in the environment variable still exisits. 
+   # Make sure the value in the environment variable still exisits.
    if (Get-VSTeamProject | Where-Object ProjectName -eq $env:TEAM_PROJECT) {
       Set-VSTeamDefaultProject -Project $env:TEAM_PROJECT
    }

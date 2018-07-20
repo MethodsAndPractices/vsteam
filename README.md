@@ -12,6 +12,40 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 3.0.2
+
+Added Get-VSTeamGitRef to retrieve the branches for adding Pull Request support in the future.
+
+Also added Git Repositories and Git Refs to the Provider so you can now navigate repositories and refs with Get-ChildItem (ls, dir).
+
+Account
+- Project1
+- Project2
+   - Builds
+      - Build1
+      - Build2
+   - Releases
+      - Release1
+         - Environment 1
+            - Attempt 1
+               - Task1
+               - Task2
+               - Task3
+      - Release2
+   - Teams
+      - Team1
+      - Team2
+   - Repositories
+      - Repo1
+         - Ref1
+         - Ref2
+
+Polished the classes defined for the provider. Also updated some of the fucntions to return the same classes as the provider.  The classes all have a hidden _internalObj property that contains the raw object returned from the REST API call. Not all the properties of the object are exposed via properties of the class. This property will provide access to them if you need them.
+
+Updated the format.ps1xml files to show more data when the provider is used and to format the provider output to be more consistent with a normal file system. The + and . modes were replaced with d----- and ----- for directories and leafs.
+
+Added a lot of new tests that pushed th code coverage to 99.69%.
+
 ### 3.0.1
 
 Huge review of the docs and added support for bearer auth.

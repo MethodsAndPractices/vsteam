@@ -42,7 +42,7 @@ function _setEnvironmentVariables {
    $env:TEAM_ACCT = $Acct
    $env:TEAM_TOKEN = $BearerToken
 
-   $VSTeamVersionTable.Account = $Acct    
+   $VSTeamVersionTable.Account = $Acct
 
    # This is so it can be loaded by default in the next session
    if ($Level -ne "Process") {
@@ -85,7 +85,7 @@ function Show-VSTeam {
 
    process {
       _hasAccount
-      
+
       _showInBrowser "$($VSTeamVersionTable.Account)"
    }
 }
@@ -115,10 +115,10 @@ function Get-VSTeamOption {
 function Get-VSTeamResourceArea {
    [CmdletBinding()]
    param()
-   
+
    # Call the REST API
    $resp = _callAPI -Resource 'resourceareas'
-   
+
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
       _applyTypes -item $item -type 'Team.ResourceArea'
@@ -128,26 +128,26 @@ function Get-VSTeamResourceArea {
 }
 
 function Add-VSTeamAccount {
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]   
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]
       [Parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 1)]
       [string] $Account,
-     
+
       [parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access or Bearer Token')]
       [Alias('Token')]
       [string] $PersonalAccessToken,
-     
+
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access or Bearer Token')]
       [securestring] $SecurePersonalAccessToken,
-     
+
       [parameter(ParameterSetName = 'Windows')]
       [parameter(ParameterSetName = 'Secure')]
       [Parameter(ParameterSetName = 'Plain')]
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
       [string] $Version,
-     
+
       [string] $Drive,
 
       [parameter(ParameterSetName = 'Secure')]
@@ -160,7 +160,7 @@ function Add-VSTeamAccount {
       $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
       $profileArrSet = Get-VSTeamProfile | Select-Object -ExpandProperty Name
-      
+
       if ($profileArrSet) {
          $profileParam = _buildDynamicParam -ParameterName 'Profile' -ParameterSetName 'Profile' -arrSet $profileArrSet
       }
@@ -221,7 +221,7 @@ function Add-VSTeamAccount {
             return
          }
       }
-      else {         
+      else {
          if ($SecurePersonalAccessToken) {
             # Convert the securestring to a normal string
             # this was the one technique that worked on Mac, Linux and Windows
@@ -231,7 +231,7 @@ function Add-VSTeamAccount {
          else {
             $_pat = $PersonalAccessToken
          }
-         
+
          # If they only gave an account name add visualstudio.com
          if ($Account -notlike "*/*") {
             if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
@@ -247,7 +247,7 @@ function Add-VSTeamAccount {
             $token = ''
             $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
          }
-         
+
          # If no SecurePersonalAccessToken is entered, and on windows, are we using default credentials for REST calls
          if ((!$_pat) -and (_isOnWindows) -and ($UsingWindowsAuth)) {
             Write-Verbose "Using Default Windows Credentials for authentication; no Personal Access Token required"
@@ -263,7 +263,7 @@ function Add-VSTeamAccount {
 
       if ($Drive) {
          # Assign to null so nothing is writen to output.
-         Write-Host "`nTo map a drive run the following command:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSAccount'`n" -ForegroundColor Black -BackgroundColor Yellow
+         Write-Host "`nTo map a drive run the following command:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'`n" -ForegroundColor Black -BackgroundColor Yellow
       }
    }
 }
@@ -379,14 +379,14 @@ function Remove-VSTeamAccount {
 
 function Set-VSTeamAPIVersion {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
-   param(   
+   param(
       [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
       [string] $Version = 'TFS2017',
       [switch] $Force
    )
-   
+
    if ($Force -or $pscmdlet.ShouldProcess($version, "Set-VSTeamAPIVersion")) {
-      switch ($version) {         
+      switch ($version) {
          'TFS2018' {
             $VSTeamVersionTable.Version = 'TFS2018'
             $VSTeamVersionTable.Git = '3.2'
@@ -398,7 +398,7 @@ function Set-VSTeamAPIVersion {
             $VSTeamVersionTable.MemberEntitlementManagement = ''
             $VSTeamVersionTable.ServiceFabricEndpoint = '3.2'
          }
-         'VSTS' { 
+         'VSTS' {
             $VSTeamVersionTable.Version = 'VSTS'
             $VSTeamVersionTable.Git = '4.0'
             $VSTeamVersionTable.Core = '4.0'
@@ -461,13 +461,13 @@ function Invoke-VSTeamRequest {
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
       $params.Remove('JSON') | Out-Null
-      
+
       $output = _callAPI @params
 
       if ($JSON.IsPresent) {
-         $output | ConvertTo-Json -Depth 99         
+         $output | ConvertTo-Json -Depth 99
       }
-      else {   
+      else {
          $output
       }
    }
