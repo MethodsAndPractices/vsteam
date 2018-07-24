@@ -1076,7 +1076,6 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <maml:alert>
         <maml:para>BuildDefinition and QueueName are dynamic parameters and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamBuild you will have to type in the names.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1207,7 +1206,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1402,7 +1400,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -1483,7 +1481,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2758,7 +2756,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3785,7 +3782,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -3882,7 +3879,6 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
       <maml:alert>
         <maml:para>WorkItemType is a dynamic parameter and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamWorkItem you will have to type in the names.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -4161,7 +4157,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -4832,7 +4828,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -5168,7 +5164,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5267,7 +5263,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -5407,7 +5403,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5545,7 +5541,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5746,7 +5742,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -6112,7 +6108,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -6577,7 +6573,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -7253,7 +7249,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -7348,7 +7344,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -7471,7 +7467,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <maml:alertSet>
       <maml:alert>
         <maml:para>You can pipe paths to this function.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -7582,7 +7577,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -7738,7 +7733,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -8023,7 +8018,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <maml:alert>
         <maml:para>WorkItemType is a dynamic parameter and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Get-VSTeamWorkItem you will have to type in the names.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -8509,7 +8503,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -8674,7 +8668,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -8881,7 +8875,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -9214,7 +9208,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -9294,7 +9288,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -10028,7 +10022,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -10228,7 +10222,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -10310,7 +10304,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -10502,7 +10496,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -10643,7 +10637,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <maml:alertSet>
       <maml:alert>
         <maml:para>Setting a default project also enables tab completion of dynamic parameters when you call Add-VSTeamBuild.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -10861,7 +10854,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -11001,7 +10993,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -11531,7 +11523,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -12149,7 +12141,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -12356,7 +12348,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -12484,7 +12476,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>## RELATED LINKS</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -12860,7 +12851,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>## RELATED LINKS</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>

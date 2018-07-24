@@ -21,7 +21,8 @@ foreach ($file in $files) {
 Set-Content -Path files.md -Value $sb.ToString()
 
 Write-Output 'Merging Markdown files'
-markdown-include $PSScriptRoot $PSScriptRoot\..\docs
+Install-Module markdownmerge -Scope CurrentUser -Force
+merge-markdown $PSScriptRoot $PSScriptRoot\..\docs
 
 Write-Output 'Creating new file'
 Import-Module platyPS -Force

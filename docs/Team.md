@@ -271,9 +271,9 @@ Sets the API versions to support either TFS2017, TFS2018 or VSTS.
 
 Sets the status of approval to Approved, Rejected, Pending, or ReAssigned.
 
-### [Set-VSTeamDefaultProject.](Set-VSTeamDefaultProject..md)
+### [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 
-<!-- #include "./synopsis/Set-VSTeamDefaultProject..md" -->
+Sets the default project to be used with other calls in the module.
 
 ### [Set-VSTeamEnvironmentStatus](Set-VSTeamEnvironmentStatus.md)
 
