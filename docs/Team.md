@@ -95,6 +95,10 @@ Clears the value stored in the default project parameter value.
 
 Returns a team.
 
+### [Get-VSTeamAgent](Get-VSTeamAgent.md)
+
+Returns the agents in a pool.
+
 ### [Get-VSTeamApproval](Get-VSTeamApproval.md)
 
 Gets a list of approvals for all releases for a team project.
@@ -342,5 +346,6 @@ Updates the project name, description or both.
 ### [Update-VSTeamServiceEndpoint](Update-VSTeamServiceEndpoint.md)
 
 Updates an existing service connection
+
 
 
