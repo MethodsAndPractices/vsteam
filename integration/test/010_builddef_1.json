@@ -1,0 +1,96 @@
+{
+   "options": [],
+   "variables": {
+      "system.debug": {
+         "value": "false",
+         "allowOverride": true
+      }
+   },
+   "retentionRules": [{
+      "branches": ["+refs/heads/*"],
+      "artifacts": [],
+      "artifactTypesToDelete": ["FilePath", "SymbolStore"],
+      "daysToKeep": 10,
+      "minimumToKeep": 1,
+      "deleteBuildRecord": true,
+      "deleteTestResults": true
+   }],
+   "properties": {},
+   "tags": [],
+   "jobAuthorizationScope": 1,
+   "jobTimeoutInMinutes": 60,
+   "jobCancelTimeoutInMinutes": 5,
+   "process": {
+      "phases": [{
+         "steps": [{
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "PowerShell Script",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "task": {
+               "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+               "versionSpec": "2.*",
+               "definitionType": "task"
+            },
+            "inputs": {
+               "targetType": "inline",
+               "filePath": "",
+               "arguments": "",
+               "script": "Write-Host \"Hello World\"",
+               "errorActionPreference": "stop",
+               "failOnStderr": "false",
+               "ignoreLASTEXITCODE": "false",
+               "workingDirectory": ""
+            }
+         }],
+         "name": "Phase 1",
+         "refName": "Phase_1",
+         "condition": "succeeded()",
+         "target": {
+            "executionOptions": {
+               "type": 0
+            },
+            "allowScriptsAuthAccessOption": false,
+            "type": 1
+         },
+         "jobAuthorizationScope": "projectCollection",
+         "jobCancelTimeoutInMinutes": 1
+      }],
+      "type": 1
+   },
+   "repository": {
+      "properties": {
+         "cleanOptions": "0",
+         "labelSources": "0",
+         "labelSourcesFormat": "$(build.buildNumber)",
+         "reportBuildStatus": "true",
+         "gitLfsSupport": "false",
+         "skipSyncSource": "false",
+         "checkoutNestedSubmodules": "false",
+         "fetchDepth": "0"
+      },
+      "id": "1c78f0c9-82a4-4444-955b-ce0def7e2399",
+      "type": "TfsGit",
+      "name": "CI",
+      "defaultBranch": "refs/heads/master",
+      "clean": "false",
+      "checkoutSubmodules": false
+   },
+   "processParameters": {},
+   "quality": 1,
+   "drafts": [],
+   "queue": {
+      "id": 231
+   },
+   "name": "TeamModuleIntegrationfd41f186cd1-CI",
+   "path": "\\",
+   "type": 2,
+   "queueStatus": 0,
+   "revision": 1,
+   "project": {
+      "id": "a4513ce5-464e-4a57-82ec-8bcfd4a671c7"
+   }
+}
