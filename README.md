@@ -12,6 +12,12 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 3.0.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/66) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+Updated integration tests to account for the new hosted agent pool.
+
 ### 3.0.2
 
 Added Get-VSTeamGitRef to retrieve the branches for adding Pull Request support in the future.
