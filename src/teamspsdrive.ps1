@@ -286,8 +286,12 @@ class VSTeamPool : VSTeamDirectory {
       $this.id = $obj.id
       $this.count = $obj.size
       $this.isHosted = $obj.isHosted
-      $this.owner = [VSTeamUser]::new($obj.owner, $null)
       $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
+
+      # Depending on TFS/VSTS this might not be returned
+      if ($obj.PSObject.Properties.Match('owner').count -gt 0) {
+         $this.owner = [VSTeamUser]::new($obj.owner, $null)
+      }
 
       $this.AddTypeName('Team.Pool')
 
@@ -328,8 +332,12 @@ class VSTeamAgent : VSTeamLeaf {
 
       $this.status = $obj.status
       $this.version = $obj.version
-      $this.os = $obj.osDescription
       $this.systemCapabilities = $obj.systemCapabilities
+
+      # Depending on TFS/VSTS this might not be returned
+      if ($obj.PSObject.Properties.Match('osDescription').count -gt 0) {
+         $this.os = $obj.osDescription
+      }
 
       $this._internalObj = $obj
 
