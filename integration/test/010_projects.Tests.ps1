@@ -162,7 +162,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $actual.name | Should Be 'Default'
          }
          else {
-            $actual.Count | Should Be 5
+            $actual.Count | Should Be 6
          }
       }
    }
@@ -177,7 +177,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          }
          else {
             $global:queueId = $actual[0].id
-            $actual.Count | Should Be 5
+            $actual.Count | Should Be 6
          }
       }
 
@@ -234,7 +234,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       # Not supported on TFS 2017
       if ($api -ne 'TFS2017') {
-         It 'Add-VSTeamServiceFabricEndpoint Should add servcie endpoint' {
+         It 'Add-VSTeamServiceFabricEndpoint Should add service endpoint' {
             { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
                   -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should Not Be $null
          }
