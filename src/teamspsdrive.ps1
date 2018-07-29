@@ -2,27 +2,31 @@
    The formatting of the results are controlled in .\formats\vsteamPSDrive.format.ps1xml
 
    Modeling a VSTeam for example:
-
+   
    Account
-      - Project1
-      - Project2
-         - Builds
-            - Build1
-            - Build2
-         - Releases
-            - Release1
-               - Environment 1
-                  - Attempt 1
-                     - Task1
-                     - Task2
-            - Release2
-               - Teams
-                  - Team1
-                  - Team2
-         - VSTeamRepositories
-            - Repo1
-               - Ref1
-               - Ref2
+   - Agent Pools
+     - Pool1
+       - Agent1
+   - Project1
+   - Project2
+   - Builds
+      - Build1
+      - Build2
+   - Releases
+      - Release1
+         - Environment 1
+         - Attempt 1
+            - Task1
+            - Task2
+            - Task3
+      - Release2
+   - Teams
+      - Team1
+      - Team2
+   - Repositories
+      - Repo1
+         - Ref1
+         - Ref2
 
 
 #region Add-TeamAccount
@@ -160,13 +164,18 @@ class VSTeamAccount : SHiPSDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamProject
+      $poolsAndProjects = @(
+         [VSTeamPools]::new('Agent Pools')
+      )
+      
+      $items = Get-VSTeamProject | Sort-Object Name
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Project')
+         $poolsAndProjects += $item
       }
 
-      return $items
+      return $poolsAndProjects
    }
 
    [void] hidden AddTypeName(
@@ -226,6 +235,113 @@ class VSTeamProject : VSTeamDirectory {
          [VSTeamRepositories]::new('Repositories', $this.Name),
          [VSTeamTeams]::new('Teams', $this.Name)
       )
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamPools : VSTeamDirectory {
+
+   # Default constructor
+   VSTeamPools(
+      [string]$Name
+   ) : base($Name, $null) {
+      $this.AddTypeName('Team.Pools')
+
+      $this.DisplayMode = 'd-r-s-'
+   }
+
+   [object[]] GetChildItem() {
+      $pools = Get-VSTeamPool -ErrorAction SilentlyContinue | Sort-Object name
+
+      $objs = @()
+
+      foreach ($pool in $pools) {
+         $pool.AddTypeName('Team.Provider.Pool')
+
+         $objs += $pool
+      }
+
+      return $objs
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamPool : VSTeamDirectory {
+
+   [int]$id
+   [bool]$isHosted = $false
+   [VSTeamUser]$owner = $null
+   [VSTeamUser]$createdBy = $null
+
+   # The number of agents in the pool
+   [int]$count
+
+   # Default constructor
+   VSTeamPool(
+      [object]$obj
+   ) : base($obj.Name, $null) {
+
+      $this.id = $obj.id
+      $this.count = $obj.size
+      $this.isHosted = $obj.isHosted
+      $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
+
+      # Depending on TFS/VSTS this might not be returned
+      if ($obj.PSObject.Properties.Match('owner').count -gt 0) {
+         $this.owner = [VSTeamUser]::new($obj.owner, $null)
+      }
+
+      $this.AddTypeName('Team.Pool')
+
+      if ($this.isHosted) {
+         $this.DisplayMode = 'd-r-s-'
+      }
+      else {
+         $this.DisplayMode = 'd-----'        
+      }
+
+      $this._internalObj = $obj
+   }
+
+   [object[]] GetChildItem() {
+      $agents = Get-VSTeamAgent -PoolId $this.id -ErrorAction SilentlyContinue
+
+      $objs = @()
+
+      foreach ($agent in $agents) {
+         $agent.AddTypeName('Team.Provider.Agent')
+
+         $objs += $agent
+      }
+
+      return $objs
+   }
+}
+
+class VSTeamAgent : VSTeamLeaf {
+   [string]$version
+   [string]$status
+   [string]$os
+   [PSCustomObject]$systemCapabilities
+
+   VSTeamAgent (
+      [object]$obj
+   ) : base($obj.name, $obj.Id, $null) {
+
+      $this.status = $obj.status
+      $this.version = $obj.version
+      $this.systemCapabilities = $obj.systemCapabilities
+
+      # Depending on TFS/VSTS this might not be returned
+      if ($obj.PSObject.Properties.Match('osDescription').count -gt 0) {
+         $this.os = $obj.osDescription
+      }
+
+      $this._internalObj = $obj
+
+      $this.AddTypeName('Team.Agent')
    }
 }
 

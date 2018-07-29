@@ -67,7 +67,6 @@
       'types\cloudSubscriptions.ps1xml',
       'types\repositories.ps1xml',
       'types\policies.ps1xml',
-      'types\pools.ps1xml',
       'types\projects.ps1xml',
       'types\queues.ps1xml',
       'types\releaseDefinitions.ps1xml',
@@ -99,6 +98,7 @@
    NestedModules     = @('src\team.psm1',
       'src\refs.psm1',
       'src\repositories.psm1',
+      'src\agents.psm1',
       'src\Approvals.psm1',
       'src\buildDefinitions.psm1',
       'src\builds.psm1',
@@ -202,7 +202,8 @@
       'Add-VSTeamWorkItem',
       'Get-VSTeamWorkItem',
       'Show-VSTeamWorkItem',
-      'Get-VSTeamGitRef')
+      'Get-VSTeamGitRef',
+      'Get-VSTeamAgent')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -301,7 +302,8 @@
       'Add-Policy', 
       'Update-Policy', 
       'Remove-Policy',
-      'Get-GitRef')
+      'Get-GitRef',
+      'Get-Agent')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

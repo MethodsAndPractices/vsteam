@@ -35,7 +35,7 @@ Rename-Item -Path .\common\header.md -NewName header.txt
 Set-Content -Path .\common\header.md -Value ''
 
 # Docs now don't have headers
-markdown-include $PSScriptRoot $PSScriptRoot\..\docs
+merge-markdown $PSScriptRoot $PSScriptRoot\..\docs
 
 # Put header back
 Remove-Item .\common\header.md

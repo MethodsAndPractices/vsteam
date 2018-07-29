@@ -1,6 +1,8 @@
 {
    "files.exclude": {
       "**/.vscode": true,
+      "**/.vs": true,
+      "**/.github": true,
       "**/docs": true,
       "**/package-lock.json": true
    },

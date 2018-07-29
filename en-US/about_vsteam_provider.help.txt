@@ -6,25 +6,29 @@ SHORT DESCRIPTION
     as a file system using the following tree:
 
    Account
-      - Project1
-      - Project2
-         - Builds
-            - Build1
-            - Build2
-         - Releases
-            - Release1
-               - Environment 1
-                  - Attempt 1
-                     - Task1
-                     - Task2
-            - Release2
-               - Teams
-                  - Team1
-                  - Team2
-         - VSTeamRepositories
-            - Repo1
-               - Ref1
-               - Ref2
+   - Agent Pools
+     - Pool1
+       - Agent1
+   - Project1
+   - Project2
+   - Builds
+      - Build1
+      - Build2
+   - Releases
+      - Release1
+         - Environment 1
+         - Attempt 1
+            - Task1
+            - Task2
+            - Task3
+      - Release2
+   - Teams
+      - Team1
+      - Team2
+   - Repositories
+      - Repo1
+         - Ref1
+         - Ref2
 
 LONG DESCRIPTION
    You use the New-PSDrive cmdlet to mount a drive to your account. 
