@@ -93,6 +93,59 @@ Describe 'TeamsPSDrive' {
       }
    }
 
+   Context 'Agent Pools' {
+      Mock Get-VSTeamPool { return [VSTeamPool]::new(@{
+               owner     = [PSCustomObject]@{
+                  displayName = 'Test User'
+                  id          = '1'
+                  uniqueName  = 'test@email.com'
+               }
+               createdBy = [PSCustomObject]@{
+                  displayName = 'Test User'
+                  id          = '1'
+                  uniqueName  = 'test@email.com'
+               }
+               id        = 1
+               size      = 1
+               isHosted  = $false
+               Name      = 'Default'
+            }
+         )
+      }
+
+      Mock Get-VSTeamAgent { return [VSTeamAgent]::new(@{
+               _links             = [PSCustomObject]@{}
+               createdOn          = '2018-03-28T16:48:58.317Z'
+               maxParallelism     = 1
+               id                 = 102
+               status             = 'Online'
+               version            = '1.336.1'
+               osDescription      = 'Linux'
+               name               = 'Test_Agent'
+               systemCapabilities = [PSCustomObject]@{}
+            }
+         )
+      }
+
+      $target = [VSTeamPools]::new('Agent Pools')
+
+      It 'Should create Agent Pools' {
+         $target | Should Not Be $null
+      }
+
+      $pool = $target.GetChildItem()[0]
+
+      It 'Should return pool' {
+         $pool | Should Not Be $null
+      }
+
+      $agent = $pool.GetChildItem()[0]
+
+      It 'Should return agent' {
+         $agent | Should Not Be $null
+      }
+   }
+
    Context 'Builds' {
       Mock Get-VSTeamBuild { return @([PSCustomObject]@{
                id            = 1

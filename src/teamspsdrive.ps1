@@ -2,31 +2,31 @@
    The formatting of the results are controlled in .\formats\vsteamPSDrive.format.ps1xml
 
    Modeling a VSTeam for example:
-
+   
    Account
-      - Agent Pools
-         - Pool1
-            - Agent1
-            - Agent2
-      - Project1
-      - Project2
-         - Builds
-            - Build1
-            - Build2
-         - Releases
-            - Release1
-               - Environment 1
-                  - Attempt 1
-                     - Task1
-                     - Task2
-            - Release2
-               - Teams
-                  - Team1
-                  - Team2
-         - VSTeamRepositories
-            - Repo1
-               - Ref1
-               - Ref2
+   - Agent Pools
+     - Pool1
+       - Agent1
+   - Project1
+   - Project2
+   - Builds
+      - Build1
+      - Build2
+   - Releases
+      - Release1
+         - Environment 1
+         - Attempt 1
+            - Task1
+            - Task2
+            - Task3
+      - Release2
+   - Teams
+      - Team1
+      - Team2
+   - Repositories
+      - Repo1
+         - Ref1
+         - Ref2
 
 
 #region Add-TeamAccount
@@ -163,20 +163,19 @@ class VSTeamAccount : SHiPSDirectory {
       $this.AddTypeName('Team.Account')
    }
 
-   $poolsAndProjects = @(
-      [VSTeamPools]::new('Agent Pools')
-   )
-
    [object[]] GetChildItem() {
+      $poolsAndProjects = @(
+         [VSTeamPools]::new('Agent Pools')
+      )
       
       $items = Get-VSTeamProject | Sort-Object Name
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Project')
-         $this.poolsAndProjects += $item
+         $poolsAndProjects += $item
       }
 
-      return $this.poolsAndProjects
+      return $poolsAndProjects
    }
 
    [void] hidden AddTypeName(
