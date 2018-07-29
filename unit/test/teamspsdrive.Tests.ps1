@@ -54,13 +54,25 @@ Describe 'TeamsPSDrive' {
          )
       }
 
+      Mock Get-VSTeamPool {
+         return [PSCustomObject]@{
+            name                 = 'Default'
+            id                   = 1
+            size                 = 1
+            createdBy            = [PSCustomObject]@{}
+            administratorsGroup  = [PSCustomObject]@{}
+            serviceAccountsGroup = [PSCustomObject]@{}
+         }
+      }
+
       $account = [VSTeamAccount]::new('TestAccount')
 
       It 'Should create VSTeamAccount' {
          $account | Should Not Be $null
       }
 
-      $project = $account.GetChildItem()[0]
+      # Skip 0 because that will be Agent Pools
+      $project = $account.GetChildItem()[1]
 
       It 'Should return projects' {
          $project | Should Not Be $null

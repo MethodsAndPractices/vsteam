@@ -9,19 +9,21 @@ InModuleScope agents {
    $VSTeamVersionTable.DistributedTask = '1.0-unitTest'
 
    $testAgent = [PSCustomObject]@{
-      _links               = [PSCustomObject]@{}
-      createdOn            = '2018-03-28T16:48:58.317Z'
-      maxParallelism       = 1
-      id                   = 102
-      status               = 'Online'
-      version              = '1.336.1'
-      osDescription        = 'Linux'
-      name                 = 'Test_Agent'
-      authorization        = [PSCustomObject]@{}
-      serviceAccountsGroup = [PSCustomObject]@{}
+      _links             = [PSCustomObject]@{}
+      createdOn          = '2018-03-28T16:48:58.317Z'
+      maxParallelism     = 1
+      id                 = 102
+      status             = 'Online'
+      version            = '1.336.1'
+      osDescription      = 'Linux'
+      name               = 'Test_Agent'
+      authorization      = [PSCustomObject]@{}
+      systemCapabilities = [PSCustomObject]@{}
    }
 
    Describe 'agents' {
+      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
+
       Context 'Get-VSTeamAgents' {
          Mock Invoke-RestMethod { return [PSCustomObject]@{
                count = 1
