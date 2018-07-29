@@ -8,15 +8,23 @@ InModuleScope pools {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
    $VSTeamVersionTable.DistributedTask = '1.0-unitTest'
 
+   $testPool = [PSCustomObject]@{
+      owner     = [PSCustomObject]@{}
+      createdBy = [PSCustomObject]@{}
+      id        = 1
+      size      = 1
+      isHosted  = $true
+      Name      = 'Hosted'
+   }
+
    Describe 'pools' {
+
       Context 'Get-VSTeamPool with no parameters' {
          Mock Invoke-RestMethod { return [PSCustomObject]@{
-               value = [PSCustomObject]@{
-                  createdBy            = [PSCustomObject]@{}
-                  administratorsGroup  = [PSCustomObject]@{}
-                  serviceAccountsGroup = [PSCustomObject]@{}
-               }
-            }}
+               count = 1
+               value = $testPool
+            }
+         }
 
          it 'Should return all the pools' {
             Get-VSTeamPool
@@ -28,11 +36,7 @@ InModuleScope pools {
       }
 
       Context 'Get-VSTeamPool with id parameter' {
-         Mock Invoke-RestMethod { return [PSCustomObject]@{
-               createdBy            = [PSCustomObject]@{}
-               administratorsGroup  = [PSCustomObject]@{}
-               serviceAccountsGroup = [PSCustomObject]@{}
-            }}
+         Mock Invoke-RestMethod { return $testPool }
 
          it 'Should return all the pools' {
             Get-VSTeamPool -id '1'

@@ -258,11 +258,9 @@ class VSTeamPools : VSTeamDirectory {
       $objs = @()
 
       foreach ($pool in $pools) {
-         $item = [VSTeamPool]::new($pool)
+         $pool.AddTypeName('Team.Provider.Pool')
 
-         $item.AddTypeName('Team.Provider.Pool')
-
-         $objs += $item
+         $objs += $pool
       }
 
       return $objs
@@ -274,6 +272,9 @@ class VSTeamPools : VSTeamDirectory {
 class VSTeamPool : VSTeamDirectory {
 
    [int]$id
+   [bool]$isHosted = $false
+   [VSTeamUser]$owner = $null
+   [VSTeamUser]$createdBy = $null
 
    # The number of agents in the pool
    [int]$count
@@ -285,10 +286,13 @@ class VSTeamPool : VSTeamDirectory {
 
       $this.id = $obj.id
       $this.count = $obj.size
+      $this.isHosted = $obj.isHosted
+      $this.owner = [VSTeamUser]::new($obj.owner, $null)
+      $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
 
       $this.AddTypeName('Team.Pool')
 
-      if ($this.Name -like '*Hosted*') {
+      if ($this.isHosted) {
          $this.DisplayMode = 'd-r-s-'
       }
       else {
