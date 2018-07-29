@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
-   <!-- 
-   Make sure the table views are listed before the list views. 
+   <!--
+   Make sure the table views are listed before the list views.
    If not when Get-ChildItem is called the list format will be used
    instead of the table.
    -->
@@ -24,7 +24,7 @@
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Creator</Label>
-               </TableColumnHeader>               
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
@@ -60,7 +60,7 @@
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Creator</Label>
-               </TableColumnHeader>               
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
@@ -71,6 +71,95 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Creator</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Agent-->
+      <!-- This is the format when used with functions -->
+       <View>
+         <Name>Team.Agent.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Agent</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Version</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>OS</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>version</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>os</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>id</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+       <!--Team.Provider.Agent.Table-->
+       <View>
+         <Name>Team.Provider.Agent.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.Agent</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Version</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>OS</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>version</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>os</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>
@@ -255,7 +344,7 @@
             </TableRowEntries>
          </TableControl>
       </View>
-      
+
       <!--BuildTable-->
       <View>
          <Name>BuildTable</Name>
@@ -304,7 +393,7 @@
             </TableRowEntries>
          </TableControl>
       </View>
-    
+
       <!--BuildList-->
       <View>
          <Name>BuildList</Name>
@@ -345,7 +434,7 @@
             </ListEntries>
          </ListControl>
       </View>
-      
+
       <!--ReleaseTable-->
       <View>
          <Name>ReleaseTable</Name>
@@ -381,7 +470,7 @@
             </TableRowEntries>
          </TableControl>
       </View>
-      
+
       <!--Team.Repository-->
       <View>
          <Name>Team.RepositoryTable</Name>
@@ -604,12 +693,91 @@
 
       <!-- Put the defaults last because the first matching format is used. -->
 
+      <!--Team.Pool.Table-->
+      <View>
+         <Name>Team.Pool.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Pool</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Count</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Count</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Provider.Pool.Table-->
+      <View>
+         <Name>Team.Provider.Pool.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.Pool</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Count</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Count</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
       <!--VSTeamPSDriveDirectoryDefaultTable-->
       <View>
          <Name>VSTeamPSDriveDefaultTable</Name>
          <ViewSelectedBy>
             <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
             <TypeName>Team.Account</TypeName>
+            <TypeName>Team.Pool</TypeName>
+            <TypeName>Team.Pools</TypeName>
+            <TypeName>Team.Provider.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
             <TypeName>Team.Releases</TypeName>
             <TypeName>Team.Repositories</TypeName>
@@ -647,6 +815,8 @@
          <ViewSelectedBy>
             <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
             <TypeName>Team.Account</TypeName>
+            <TypeName>Team.Pool</TypeName>
+            <TypeName>Team.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
             <TypeName>Team.Releases</TypeName>
             <TypeName>Team.Repositories</TypeName>

@@ -4,6 +4,10 @@
    Modeling a VSTeam for example:
 
    Account
+      - Agent Pools
+         - Pool1
+            - Agent1
+            - Agent2
       - Project1
       - Project2
          - Builds
@@ -159,14 +163,20 @@ class VSTeamAccount : SHiPSDirectory {
       $this.AddTypeName('Team.Account')
    }
 
+   $poolsAndProjects = @(
+      [VSTeamPools]::new('Agent Pools')
+   )
+
    [object[]] GetChildItem() {
-      $items = Get-VSTeamProject
+      
+      $items = Get-VSTeamProject | Sort-Object Name
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Project')
+         $this.poolsAndProjects += $item
       }
 
-      return $items
+      return $this.poolsAndProjects
    }
 
    [void] hidden AddTypeName(
@@ -226,6 +236,101 @@ class VSTeamProject : VSTeamDirectory {
          [VSTeamRepositories]::new('Repositories', $this.Name),
          [VSTeamTeams]::new('Teams', $this.Name)
       )
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamPools : VSTeamDirectory {
+
+   # Default constructor
+   VSTeamPools(
+      [string]$Name
+   ) : base($Name, $null) {
+      $this.AddTypeName('Team.Pools')
+
+      $this.DisplayMode = 'd-r-s-'
+   }
+
+   [object[]] GetChildItem() {
+      $pools = Get-VSTeamPool -ErrorAction SilentlyContinue | Sort-Object name
+
+      $objs = @()
+
+      foreach ($pool in $pools) {
+         $item = [VSTeamPool]::new($pool)
+
+         $item.AddTypeName('Team.Provider.Pool')
+
+         $objs += $item
+      }
+
+      return $objs
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamPool : VSTeamDirectory {
+
+   [int]$id
+
+   # The number of agents in the pool
+   [int]$count
+
+   # Default constructor
+   VSTeamPool(
+      [object]$obj
+   ) : base($obj.Name, $null) {
+
+      $this.id = $obj.id
+      $this.count = $obj.size
+
+      $this.AddTypeName('Team.Pool')
+
+      if ($this.Name -like '*Hosted*') {
+         $this.DisplayMode = 'd-r-s-'
+      }
+      else {
+         $this.DisplayMode = 'd-----'        
+      }
+
+      $this._internalObj = $obj
+   }
+
+   [object[]] GetChildItem() {
+      $agents = Get-VSTeamAgent -PoolId $this.id -ErrorAction SilentlyContinue
+
+      $objs = @()
+
+      foreach ($agent in $agents) {
+         $agent.AddTypeName('Team.Provider.Agent')
+
+         $objs += $agent
+      }
+
+      return $objs
+   }
+}
+
+class VSTeamAgent : VSTeamLeaf {
+   [string]$version
+   [string]$status
+   [string]$os
+   [PSCustomObject]$systemCapabilities
+
+   VSTeamAgent (
+      [object]$obj
+   ) : base($obj.name, $obj.Id, $null) {
+
+      $this.status = $obj.status
+      $this.version = $obj.version
+      $this.os = $obj.osDescription
+      $this.systemCapabilities = $obj.systemCapabilities
+
+      $this._internalObj = $obj
+
+      $this.AddTypeName('Team.Agent')
    }
 }
 
