@@ -31,11 +31,17 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       $originalLocation = Get-Location
 
+      # The way we search for the account is different for VSTS and TFS
+      $search = "*$acct*"
+      if($api -eq 'VSTS') {
+         $search = "*//$acct.*"  
+      }
+
       $oAcct = $null
-      $profile = Get-Profile | Where-Object url -like "*$acct*"
+      $profile = Get-Profile | Where-Object url -like $search
 
       if ($profile) {
-         # Save current profile data
+         # Save original profile data
          $oAcct = $profile.URL
          $oVersion = $profile.Version
          $oName = $profile.Name
@@ -209,12 +215,22 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Get-VSTeamPool Should return agent pools' {
          $actual = Get-VSTeamPool
 
+         # Test differently for TFS and VSTS
          if ($acct -like "http://*") {
             $actual.name | Should Be 'Default'
          }
          else {
             $actual.Count | Should Be 6
          }
+      }
+   }
+
+   Context 'Agent full exercise' {
+      It 'Get-VSTeamAgent Should return agents' {
+         $pool = (Get-VSTeamPool)[0]
+         $actual = Get-VSTeamAgent -PoolId $pool.Id
+
+         $actual | Should Not Be $null
       }
    }
 

@@ -54,13 +54,25 @@ Describe 'TeamsPSDrive' {
          )
       }
 
+      Mock Get-VSTeamPool {
+         return [PSCustomObject]@{
+            name                 = 'Default'
+            id                   = 1
+            size                 = 1
+            createdBy            = [PSCustomObject]@{}
+            administratorsGroup  = [PSCustomObject]@{}
+            serviceAccountsGroup = [PSCustomObject]@{}
+         }
+      }
+
       $account = [VSTeamAccount]::new('TestAccount')
 
       It 'Should create VSTeamAccount' {
          $account | Should Not Be $null
       }
 
-      $project = $account.GetChildItem()[0]
+      # Skip 0 because that will be Agent Pools
+      $project = $account.GetChildItem()[1]
 
       It 'Should return projects' {
          $project | Should Not Be $null
@@ -78,6 +90,59 @@ Describe 'TeamsPSDrive' {
          $actual[2].ProjectName | Should Be 'TestProject'
          $actual[3].Name | Should Be 'Teams'
          $actual[3].ProjectName | Should Be 'TestProject'
+      }
+   }
+
+   Context 'Agent Pools' {
+      Mock Get-VSTeamPool { return [VSTeamPool]::new(@{
+               owner     = [PSCustomObject]@{
+                  displayName = 'Test User'
+                  id          = '1'
+                  uniqueName  = 'test@email.com'
+               }
+               createdBy = [PSCustomObject]@{
+                  displayName = 'Test User'
+                  id          = '1'
+                  uniqueName  = 'test@email.com'
+               }
+               id        = 1
+               size      = 1
+               isHosted  = $false
+               Name      = 'Default'
+            }
+         )
+      }
+
+      Mock Get-VSTeamAgent { return [VSTeamAgent]::new(@{
+               _links             = [PSCustomObject]@{}
+               createdOn          = '2018-03-28T16:48:58.317Z'
+               maxParallelism     = 1
+               id                 = 102
+               status             = 'Online'
+               version            = '1.336.1'
+               osDescription      = 'Linux'
+               name               = 'Test_Agent'
+               systemCapabilities = [PSCustomObject]@{}
+            }
+         )
+      }
+
+      $target = [VSTeamPools]::new('Agent Pools')
+
+      It 'Should create Agent Pools' {
+         $target | Should Not Be $null
+      }
+
+      $pool = $target.GetChildItem()[0]
+
+      It 'Should return pool' {
+         $pool | Should Not Be $null
+      }
+
+      $agent = $pool.GetChildItem()[0]
+
+      It 'Should return agent' {
+         $agent | Should Not Be $null
       }
    }
 
