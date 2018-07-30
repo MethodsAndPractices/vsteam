@@ -391,17 +391,16 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   $arrSet = _getProjects
+   if($VSTeamProjectCache.timestamp -ne (Get-Date).Minute) {
+      $arrSet = _getProjects
+      $VSTeamProjectCache.projects = $arrSet
+      $VSTeamProjectCache.timestamp = (Get-Date).Minute
+   }
+   else {
+      $arrSet = $VSTeamProjectCache.projects
+   }
 
    if ($arrSet) {
-      # If $Mandatory is false we need to add '' to the arrSet or they will not be able
-      # to omit this parameter
-      if ($Mandatory -eq $false) {
-         # We can't use .Add("") because the collection is of a fixed size. But we can
-         # use += because a new array is created that contains everything we want.
-         $arrSet += "";
-      }
-
       Write-Verbose "arrSet = $arrSet"
 
       $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
