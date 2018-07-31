@@ -25,6 +25,15 @@ function _applyTypesToBuildDefinition {
       $item.queue.PSObject.TypeNames.Insert(0, 'Team.Queue')
    }
 
+   if ($item.PSObject.Properties.Match('process').count -gt 0 -and $null -ne $item.process) {
+      $item.process.PSObject.TypeNames.Insert(0, 'Team.Process')
+      if ($item.process.PSObject.Properties.Match('phases').count -gt 0 -and $null -ne $item.process.phases) {
+         foreach($phase in $item.process.phases) {
+            $phase.PSObject.TypeNames.Insert(0, 'Team.Phase')
+         }
+      }
+   }
+
    # Only returned for a single item
    if ($item.PSObject.Properties.Match('variables').count -gt 0 -and $null -ne $item.variables) {
       $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')

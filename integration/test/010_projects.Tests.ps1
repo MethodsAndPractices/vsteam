@@ -160,6 +160,57 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
+   Context 'BuildDefinition full exercise' {
+
+      Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
+      $project = $repo = Get-VSTeamProject -Name $newProjectName
+      $repo = Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
+      $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Hosted"}
+
+      $srcBuildDef = Get-Content $(Join-Path $PSScriptRoot "010_builddef_1.json") | ConvertFrom-Json
+      $srcBuildDef.project.id = $project.Id
+      $srcBuildDef.queue.id = $defaultQueue.Id
+      $srcBuildDef.repository.id = $repo.Id
+      $srcBuildDef.name = $newProjectName + "-CI1"
+      $tmpBuildDef1 = (New-TemporaryFile).FullName
+      $srcBuildDef | ConvertTo-Json -Depth 10 | Set-Content -Path $tmpBuildDef1
+
+      $srcBuildDef = Get-Content $(Join-Path $PSScriptRoot "010_builddef_2.json") | ConvertFrom-Json
+      $srcBuildDef.project.id = $project.Id
+      $srcBuildDef.queue.id = $defaultQueue.Id
+      $srcBuildDef.repository.id = $repo.Id
+      $srcBuildDef.name = $newProjectName + "-CI2"
+      $tmpBuildDef2 = (New-TemporaryFile).FullName
+      $srcBuildDef | ConvertTo-Json -Depth 10 | Set-Content -Path $tmpBuildDef2
+
+      It 'Add-VSTeamBuildDefinition should add a build definition' {
+         Add-VSTeamBuildDefinition -ProjectName $newProjectName -InFile $tmpBuildDef1
+         $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName
+         $buildDef | Should Not Be $null
+      }
+
+      It 'Add-VSTeamBuildDefinition should add another build definition' {
+         Add-VSTeamBuildDefinition -ProjectName $newProjectName -InFile $tmpBuildDef2
+         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName
+         $buildDefs.Count | Should Be 2
+      }
+
+      It 'Get-VSTeamBuildDefinition by Id should return 1 phase for 1st build definition' {
+         $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI1"}).Id
+         ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 1
+      }
+
+      It 'Get-VSTeamBuildDefinition by Id should return 2 phasea for 2ns build definition' {
+         $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI2"}).Id
+         ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 2
+      }
+
+      It 'Remove-VSTeamBuildDefinition should delete build definition' {
+         Get-VSTeamBuildDefinition -ProjectName $newProjectName | Remove-VSTeamBuildDefinition -ProjectName $newProjectName -Force
+         Get-VSTeamBuildDefinition -ProjectName $newProjectName | Should Be $null
+      }
+   }
+
    Context 'Pool full exercise' {
       It 'Get-VSTeamPool Should return agent pools' {
          $actual = Get-VSTeamPool
