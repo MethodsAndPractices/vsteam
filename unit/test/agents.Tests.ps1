@@ -72,7 +72,7 @@ InModuleScope agents {
          Mock Invoke-RestMethod
 
          It 'should remove the agent with passed in Id' {
-            Remove-VSTeamAgent -Pool 36 -Id 950
+            Remove-VSTeamAgent -Pool 36 -Id 950 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and

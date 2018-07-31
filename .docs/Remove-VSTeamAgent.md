@@ -31,11 +31,13 @@ Accept pipeline input: true (ByValue)
 Id of the agent to remove.
 
 ```yaml
-Type: String
+Type: int
 Aliases: AgentID
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/force.md" -->
 
 ## INPUTS
 

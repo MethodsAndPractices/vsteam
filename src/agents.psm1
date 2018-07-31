@@ -44,25 +44,31 @@ function Get-VSTeamAgent {
 }
 
 function Remove-VSTeamAgent {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(      
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int] $PoolId,
 
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Alias('AgentID')]
-      [string] $Id
+      [int[]] $Id,
+
+      # Forces the command without confirmation
+      [switch] $Force
    )
 
    process {
-
-      try {
-         _callAPI -Method Delete -Area "distributedtask/pools/$PoolId" -Resource agents -Id $Id -Version $VSTeamVersionTable.DistributedTask | Out-Null
-         Write-Output "Deleted agent $Id"
+      foreach ($item in $Id) {
+         if ($force -or $pscmdlet.ShouldProcess($item,"Delete agent")) {
+            try {
+               _callAPI -Method Delete -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask | Out-Null
+               Write-Output "Deleted agent $item"
+            }
+            catch {
+               _handleException $_
+            }
+         }
       }
-      catch {
-         _handleException $_
-      }
-      
    }
 }
 
