@@ -67,7 +67,6 @@
       'types\cloudSubscriptions.ps1xml',
       'types\repositories.ps1xml',
       'types\policies.ps1xml',
-      'types\projects.ps1xml',
       'types\queues.ps1xml',
       'types\releaseDefinitions.ps1xml',
       'types\releases.ps1xml',

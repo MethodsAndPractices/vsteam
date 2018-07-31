@@ -1,9 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-
-Import-Module $PSScriptRoot\..\..\VSTeam.psd1 -Force
-
 InModuleScope Refs {
 
    # Set the account to use for testing. A normal user would do this
@@ -23,8 +19,12 @@ InModuleScope Refs {
    }
 
    Describe "Git VSTS" {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+   
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
-      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
 
       Context 'Get-VSTeamGitRef' {
          Mock Invoke-RestMethod { return $results } -Verifiable

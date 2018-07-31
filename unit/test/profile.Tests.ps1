@@ -1,8 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
-
 InModuleScope profile {
    Describe 'Profile' {
       $expectedPath = "$HOME/vsteam_profiles.json"
