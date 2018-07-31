@@ -43,8 +43,32 @@ function Get-VSTeamAgent {
    }
 }
 
+function Remove-VSTeamAgent {
+   param(      
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
+      [int] $PoolId,
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [Alias('AgentID')]
+      [string] $Id
+   )
+
+   process {
+
+      try {
+         _callAPI -Method Delete -Area "distributedtask/pools/$PoolId" -Resource agents -Id $Id -Version $VSTeamVersionTable.DistributedTask | Out-Null
+         Write-Output "Deleted agent $Id"
+      }
+      catch {
+         _handleException $_
+      }
+      
+   }
+}
+
 Set-Alias Get-Agent Get-VSTeamAgent
+Set-Alias Remove-Agent Remove-VSTeamAgent
 
 Export-ModuleMember `
-   -Function Get-VSTeamAgent `
-   -Alias Get-Agent
+   -Function Get-VSTeamAgent, Remove-VSTeamAgent `
+   -Alias Get-Agent, Remove-Agent
