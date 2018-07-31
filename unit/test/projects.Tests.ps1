@@ -1,15 +1,10 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-
-Import-Module $PSScriptRoot\..\..\VSTeam.psd1 -Force
-
 InModuleScope projects {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'Project' {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
-      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
 
       Context 'Show-VSTeamProject by ID on Windows' {
          Mock _openOnWindows
