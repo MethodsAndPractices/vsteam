@@ -1,9 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
-
 InModuleScope teams {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
@@ -23,7 +19,6 @@ InModuleScope teams {
 
    Describe "Teams VSTS" {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
-      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
 
       Context 'Get-VSTeam with project name' {
          Mock Invoke-RestMethod { return $results }
@@ -248,7 +243,6 @@ InModuleScope teams {
 
    Describe "Teams TFS" {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
-      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
 

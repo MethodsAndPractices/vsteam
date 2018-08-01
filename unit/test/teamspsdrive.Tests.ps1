@@ -1,9 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-
-Import-Module $PSScriptRoot\..\..\VSTeam.psd1 -Force
-
 Describe 'VSTeam Classes' {
    Context 'VSTeamUser ToString' {
       $obj = [PSCustomObject]@{
@@ -39,6 +35,11 @@ Describe 'VSTeam Classes' {
 }
 
 Describe 'TeamsPSDrive' {
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter {
+      $Uri -like "*_apis/projects*" 
+   }
+   
    Context 'VSTeamAccount & Projects' {
       Mock Get-VSTeamProject { return [VSTeamProject]::new([PSCustomObject]@{
                name        = 'TestProject'

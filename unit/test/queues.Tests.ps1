@@ -1,13 +1,14 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\queues.psm1 -Force
-
 InModuleScope queues {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'Queues' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+   
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamQueue with no parameters' {

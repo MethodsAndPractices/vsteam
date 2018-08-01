@@ -1,14 +1,5 @@
 Set-StrictMode -Version Latest
 
-# Remove any loaded version of this module so only the files
-# imported below are being tested.
-Get-Module VSTeam | Remove-Module -Force
-
-# Load the modules we want to test and any dependencies
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\queues.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\builds.psm1 -Force
-
 # The InModuleScope command allows you to perform white-box unit testing on the
 # internal (non-exported) code of a Script Module.
 InModuleScope builds {
@@ -65,6 +56,11 @@ InModuleScope builds {
       # Set the account to use for testing. A normal user would do this
       # using the Add-VSTeamAccount function.
       $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
 
       Context 'Update Build keep forever' {
          Mock Invoke-RestMethod
@@ -324,6 +320,14 @@ InModuleScope builds {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
+
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+
+      # Remove any previously loaded accounts
+      Remove-VSTeamAccount
 
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
 

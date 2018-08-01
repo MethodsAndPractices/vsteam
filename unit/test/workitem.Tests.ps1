@@ -1,13 +1,14 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\workitems.psm1 -Force
-
 InModuleScope workitems {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'workitems' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+   
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
       $obj = @{
@@ -70,7 +71,7 @@ InModuleScope workitems {
             }
 
             $Global:PSDefaultParameterValues.Remove("*:projectName")
-            Get-VSTeamWorkItem -ProjectName test -Ids 47,48
+            Get-VSTeamWorkItem -ProjectName test -Ids 47, 48
 
             # With PowerShell core the order of the query string is not the 
             # same from run to run!  So instead of testing the entire string
