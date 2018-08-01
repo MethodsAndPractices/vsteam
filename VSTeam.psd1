@@ -83,7 +83,6 @@
       'formats\buildDefinitions.format.ps1xml',
       'formats\builds.format.ps1xml',
       'formats\policyTypes.format.ps1xml',
-      'formats\process.format.ps1xml',
       'formats\profile.format.ps1xml',
       'formats\queues.format.ps1xml',
       'formats\serviceendpoints.format.ps1xml',
