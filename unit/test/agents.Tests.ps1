@@ -66,5 +66,26 @@ InModuleScope agents {
             }
          }
       }
+
+      Context 'Remove-VSTeamAgent by ID' {
+         Mock Invoke-RestMethod
+
+         It 'should remove the agent with passed in Id' {
+            Remove-VSTeamAgent -Pool 36 -Id 950 -Force
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Delete' -and
+               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools/36/agents/950?api-version=$($VSTeamVersionTable.DistributedTask)"
+            }
+         }
+      }
+
+      Context 'Remove-VSTeamAgent throws' {
+         Mock Invoke-RestMethod { throw 'boom' }
+
+         It 'should remove the agent with passed in Id' {
+            { Remove-VSTeamAgent -Pool 36 -Id 950 -Force } | Should Throw
+         }
+      }
    }
 }

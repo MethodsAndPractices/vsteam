@@ -10,9 +10,11 @@ if ($null -eq $env:TEAM_CIBUILD) {
 ##############################################################
 # Before running these tests you must set the following
 # Environment variables.
-# $env:API_VERSION = TFS2017, TFS2018 or VSTS depending on the value used for ACCT
+# $env:API_VERSION = TFS2017, TFS2018 or VSTS depending on
+#                    the value used for ACCT
 # $env:EMAIL = Email of user to remove and re-add to account
-# $env:ACCT = VSTS Account Name or full TFS URL including collection
+# $env:ACCT = VSTS Account Name or full TFS URL including
+#             collection
 # $env:PAT = Personal Access token of ACCT
 ##############################################################
 #     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
@@ -169,7 +171,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $actual.name | Should Be 'Default'
          }
          else {
-            $actual.Count | Should Be 6
+            $actual.Count | Should -Not -Be 0
          }
       }
    }
@@ -193,7 +195,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          }
          else {
             $global:queueId = $actual[0].id
-            $actual.Count | Should Be 6
+            $actual.Count | Should -Not -Be 0
          }
       }
 
