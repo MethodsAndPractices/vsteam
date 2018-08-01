@@ -1,9 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-
-Import-Module $PSScriptRoot\..\..\VSTeam.psd1 -Force
-
 InModuleScope agents {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
    $VSTeamVersionTable.DistributedTask = '1.0-unitTest'
@@ -22,8 +18,11 @@ InModuleScope agents {
    }
 
    Describe 'agents' {
-      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
-
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+   
       Context 'Get-VSTeamAgents' {
          Mock Invoke-RestMethod { return [PSCustomObject]@{
                count = 1

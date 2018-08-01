@@ -1,15 +1,16 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\serviceendpointTypes.psm1 -Force
-
 InModuleScope serviceendpointTypes {
    $sampleFile = "$PSScriptRoot\serviceEndpointTypeSample.json"
 
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'serviceendpointTypes' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+   
       Context 'Get-VSTeamServiceEndpointTypes' {
          Mock Invoke-RestMethod {
             return Get-Content $sampleFile | ConvertFrom-Json

@@ -1,18 +1,20 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\serviceendpoints.psm1 -Force
-
 InModuleScope serviceendpoints {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'ServiceEndpoints TFS2017 throws' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
       
       Context 'Add-VSTeamServiceFabricEndpoint' {  
          Mock ConvertTo-Json { throw 'Should not be called' } -Verifiable
          
          It 'Should throw' {
+            Set-VSTeamAPIVersion TFS2017
+
             { Add-VSTeamServiceFabricEndpoint -projectName 'project' `
                   -endpointName 'PM_DonovanBrown' -url "tcp://0.0.0.0:19000" `
                   -useWindowsSecurity $false } | Should Throw
@@ -25,6 +27,11 @@ InModuleScope serviceendpoints {
    }
 
    Describe 'ServiceEndpoints TFS' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+   
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamServiceEndpoint' {

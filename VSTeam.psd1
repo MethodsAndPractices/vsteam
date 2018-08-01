@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '3.0.3'
+   ModuleVersion     = '3.0.4'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -67,8 +67,6 @@
       'types\cloudSubscriptions.ps1xml',
       'types\repositories.ps1xml',
       'types\policies.ps1xml',
-      'types\process.ps1xml',
-      'types\projects.ps1xml',
       'types\queues.ps1xml',
       'types\releaseDefinitions.ps1xml',
       'types\releases.ps1xml',

@@ -1,13 +1,5 @@
 Set-StrictMode -Version Latest
 
-# Remove any loaded version of this module so only the files
-# imported below are being tested.
-Get-Module VSTeam | Remove-Module -Force
-
-# Load the modules we want to test and any dependencies
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\workitemTypes.psm1 -Force
-
 # The InModuleScope command allows you to perform white-box unit testing on the 
 # internal (non-exported) code of a Script Module.
 InModuleScope workitemTypes {
@@ -17,7 +9,11 @@ InModuleScope workitemTypes {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
    Describe 'workitemTypes' {
-      
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+         
       # Load the mocks to create the project name dynamic parameter
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"      
 
