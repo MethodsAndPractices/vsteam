@@ -200,7 +200,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 1
       }
 
-      It 'Get-VSTeamBuildDefinition by Id should return 2 phase for 2ns build definition' {
+      It 'Get-VSTeamBuildDefinition by Id should return 2 phase for 2nd build definition' {
          $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI2"}).Id
          ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 2
       }
