@@ -80,5 +80,13 @@ InModuleScope agents {
             }
          }
       }
+
+      Context 'Remove-VSTeamAgent throws' {
+         Mock Invoke-RestMethod { throw 'boom' }
+
+         It 'should remove the agent with passed in Id' {
+            { Remove-VSTeamAgent -Pool 36 -Id 950 -Force } | Should Throw
+         }
+      }
    }
 }
