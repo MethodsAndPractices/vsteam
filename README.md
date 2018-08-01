@@ -12,6 +12,12 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ## Release Notes
 
+### 3.0.5
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/70) from [Geert van der Cruijsen](https://github.com/Geertvdc) which included the following:
+
+Added a function to remove vsts agents from a pool. by calling Remove-Agent or Remove-VSTeamAgent
+
 ### 3.0.4
 
 The ProjectName dynamic parameter that enables Tab Complete of project names was getting called approximately 20 times when tab completing a function name. To reduce the number of calls a rudimentary cache was put in place.   
