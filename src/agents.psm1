@@ -44,7 +44,7 @@ function Get-VSTeamAgent {
 }
 
 function Remove-VSTeamAgent {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(      
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int] $PoolId,
