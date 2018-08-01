@@ -171,7 +171,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $actual.name | Should Be 'Default'
          }
          else {
-            $actual.Count | Should -Not Be 0
+            $actual.Count | Should -Not -Be 0
          }
       }
    }
@@ -195,7 +195,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          }
          else {
             $global:queueId = $actual[0].id
-            $actual.Count | Should -Not Be 0
+            $actual.Count | Should -Not -Be 0
          }
       }
 
