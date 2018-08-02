@@ -1,0 +1,1 @@
+Removes an agent from a pool.

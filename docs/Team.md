@@ -223,6 +223,10 @@ Removes a team from a project.
 
 Clears your default project, account name and personal access token.
 
+### [Remove-VSTeamAgent](Remove-VSTeamAgent.md)
+
+Removes an agent from a pool.
+
 ### [Remove-VSTeamBuild](Remove-VSTeamBuild.md)
 
 Deletes the build.
