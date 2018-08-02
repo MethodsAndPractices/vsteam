@@ -203,7 +203,9 @@
       'Show-VSTeamWorkItem',
       'Get-VSTeamGitRef',
       'Get-VSTeamAgent',
-      'Remove-VSTeamAgent')
+      'Remove-VSTeamAgent',
+      'Enable-VSTeamAgent',
+      'Disable-VSTeamAgent')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -304,7 +306,9 @@
       'Remove-Policy',
       'Get-GitRef',
       'Get-Agent',
-      'Remove-Agent')
+      'Remove-Agent',
+      'Enable-Agent',
+      'Disable-Agent')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

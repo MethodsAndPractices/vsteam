@@ -324,6 +324,7 @@ class VSTeamAgent : VSTeamLeaf {
    [string]$version
    [string]$status
    [string]$os
+   [bool]$enabled
    [PSCustomObject]$systemCapabilities
 
    VSTeamAgent (
@@ -331,6 +332,7 @@ class VSTeamAgent : VSTeamLeaf {
    ) : base($obj.name, $obj.Id, $null) {
 
       $this.status = $obj.status
+      $this.enabled = $obj.enabled
       $this.version = $obj.version
       $this.systemCapabilities = $obj.systemCapabilities
 

@@ -9,7 +9,7 @@ function Get-VSTeamPool {
    param(      
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Alias('PoolID')]
-      [string] $Id
+      [int] $Id
    )
 
    process {

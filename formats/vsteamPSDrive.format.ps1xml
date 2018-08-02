@@ -92,6 +92,9 @@
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
+                  <Label>Enabled</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
                   <Label>Version</Label>
                </TableColumnHeader>
                <TableColumnHeader>
@@ -107,6 +110,9 @@
                   <TableColumnItems>
                      <TableColumnItem>
                         <PropertyName>name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>enabled</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>version</PropertyName>
@@ -139,6 +145,9 @@
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
+                  <Label>Enabled</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
                   <Label>Version</Label>
                </TableColumnHeader>
                <TableColumnHeader>
@@ -154,6 +163,9 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>enabled</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>version</PropertyName>

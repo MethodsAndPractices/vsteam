@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Remove-VSTeamAgent
+# Enable-VSTeamAgent
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Remove-VSTeamAgent.md" -->
+<!-- #include "./synopsis/Enable-VSTeamAgent.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Remove-VSTeamAgent.md" -->
+<!-- #include "./synopsis/Enable-VSTeamAgent.md" -->
 
 ## EXAMPLES
 
@@ -28,7 +28,7 @@ Accept pipeline input: true (ByValue)
 
 ### -Id
 
-Id of the agent to remove.
+Id of the agent to enable.
 
 ```yaml
 Type: int[]
@@ -36,8 +36,6 @@ Aliases: AgentID
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
-
-<!-- #include "./params/force.md" -->
 
 ## INPUTS
 
