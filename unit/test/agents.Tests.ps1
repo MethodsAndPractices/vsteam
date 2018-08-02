@@ -87,5 +87,47 @@ InModuleScope agents {
             { Remove-VSTeamAgent -Pool 36 -Id 950 -Force } | Should Throw
          }
       }
+
+      Context 'Enable-VSTeamAgent by ID' {
+         Mock Invoke-RestMethod
+
+         It 'should enable the agent with passed in Id' {
+            Enable-VSTeamAgent -Pool 36 -Id 950
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Patch' -and
+               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools/36/agents/950?api-version=$($VSTeamVersionTable.DistributedTask)"
+            }
+         }
+      }
+
+      Context 'Enable-VSTeamAgent throws' {
+         Mock Invoke-RestMethod { throw 'boom' }
+
+         It 'should enable the agent with passed in Id' {
+            { Enable-VSTeamAgent -Pool 36 -Id 950 } | Should Throw
+         }
+      }
+
+      Context 'Disable-VSTeamAgent by ID' {
+         Mock Invoke-RestMethod
+
+         It 'should disable the agent with passed in Id' {
+            Disable-VSTeamAgent -Pool 36 -Id 950
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Patch' -and
+               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools/36/agents/950?api-version=$($VSTeamVersionTable.DistributedTask)"
+            }
+         }
+      }
+
+      Context 'Disable-VSTeamAgent throws' {
+         Mock Invoke-RestMethod { throw 'boom' }
+
+         It 'should disable the agent with passed in Id' {
+            { Disable-VSTeamAgent -Pool 36 -Id 950 } | Should Throw
+         }
+      }
    }
 }

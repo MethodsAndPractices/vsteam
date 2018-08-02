@@ -72,9 +72,57 @@ function Remove-VSTeamAgent {
    }
 }
 
+function Enable-VSTeamAgent {
+   param(      
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
+      [int] $PoolId,
+
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [Alias('AgentID')]
+      [int[]] $Id
+   )
+
+   process {
+      foreach ($item in $Id) {
+         try {
+            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask -ContentType "application/json" -Body "{'enabled':true,'id':$item}" | Out-Null
+            Write-Output "Enabled agent $item"
+         }
+         catch {
+            _handleException $_
+         }
+      }
+   }
+}
+
+function Disable-VSTeamAgent {
+   param(      
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
+      [int] $PoolId,
+
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [Alias('AgentID')]
+      [int[]] $Id
+   )
+
+   process {
+      foreach ($item in $Id) {
+         try {
+            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask -ContentType "application/json" -Body "{'enabled':false,'id':$item}" | Out-Null
+            Write-Output "Disabled agent $item"
+         }
+         catch {
+            _handleException $_
+         }
+      }
+   }
+}
+
 Set-Alias Get-Agent Get-VSTeamAgent
 Set-Alias Remove-Agent Remove-VSTeamAgent
+Set-Alias Enable-Agent Enable-VSTeamAgent
+Set-Alias Disable-Agent Disable-VSTeamAgent
 
 Export-ModuleMember `
-   -Function Get-VSTeamAgent, Remove-VSTeamAgent `
-   -Alias Get-Agent, Remove-Agent
+   -Function Get-VSTeamAgent, Remove-VSTeamAgent, Enable-VSTeamAgent, Disable-VSTeamAgent `
+   -Alias Get-Agent, Remove-Agent, Enable-Agent, Disable-Agent
