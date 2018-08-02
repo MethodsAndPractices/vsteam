@@ -12,7 +12,7 @@ function Get-VSTeamAgent {
 
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Alias('AgentID')]
-      [string] $Id
+      [int] $Id
    )
 
    process {

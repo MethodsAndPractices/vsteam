@@ -3987,9 +3987,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Id of the pool.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>int</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -3999,9 +3999,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Id of the agent to disable.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">int[]</command:parameterValue>
           <dev:type>
-            <maml:name>int</maml:name>
+            <maml:name>int[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4014,9 +4014,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Id of the pool.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>int</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -4026,9 +4026,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Id of the agent to disable.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">int[]</command:parameterValue>
         <dev:type>
-          <maml:name>int</maml:name>
+          <maml:name>int[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -4073,9 +4073,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Id of the pool.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>int</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4085,9 +4085,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Id of the agent to enable.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">int[]</command:parameterValue>
           <dev:type>
-            <maml:name>int</maml:name>
+            <maml:name>int[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4100,9 +4100,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Id of the pool.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>int</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -4112,9 +4112,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Id of the agent to enable.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">int[]</command:parameterValue>
         <dev:type>
-          <maml:name>int</maml:name>
+          <maml:name>int[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -6331,9 +6331,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Id of the pool to return.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>int</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -6346,9 +6346,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Id of the pool to return.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>int</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -9052,9 +9052,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Id of the pool.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>int</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -9064,9 +9064,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Id of the agent to remove.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">int[]</command:parameterValue>
           <dev:type>
-            <maml:name>int</maml:name>
+            <maml:name>int[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -9090,9 +9090,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Id of the pool.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>int</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -9102,9 +9102,9 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Id of the agent to remove.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">int[]</command:parameterValue>
         <dev:type>
-          <maml:name>int</maml:name>
+          <maml:name>int[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>

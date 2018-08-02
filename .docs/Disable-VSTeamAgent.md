@@ -21,7 +21,7 @@
 Id of the pool.
 
 ```yaml
-Type: String
+Type: int
 Required: True
 Accept pipeline input: true (ByValue)
 ```
@@ -31,7 +31,7 @@ Accept pipeline input: true (ByValue)
 Id of the agent to disable.
 
 ```yaml
-Type: int
+Type: int[]
 Aliases: AgentID
 Required: True
 Accept pipeline input: true (ByPropertyName)
