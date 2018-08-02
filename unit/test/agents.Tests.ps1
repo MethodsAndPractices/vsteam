@@ -11,6 +11,7 @@ InModuleScope agents {
       id                 = 102
       status             = 'Online'
       version            = '1.336.1'
+      enabled            = $true
       osDescription      = 'Linux'
       name               = 'Test_Agent'
       authorization      = [PSCustomObject]@{}
