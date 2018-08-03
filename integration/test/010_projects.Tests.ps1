@@ -35,7 +35,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       # The way we search for the account is different for VSTS and TFS
       $search = "*$acct*"
-      if($api -eq 'VSTS') {
+      if ($api -eq 'VSTS') {
          $search = "*//$acct.*"  
       }
 
@@ -167,7 +167,13 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
       $project = $repo = Get-VSTeamProject -Name $newProjectName
       $repo = Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
-      $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Hosted"}
+      
+      if ($acct -like "http://*") {
+         $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Default"}
+      }
+      else {
+         $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Hosted"}
+      } 
 
       $srcBuildDef = Get-Content $(Join-Path $PSScriptRoot "010_builddef_1.json") | ConvertFrom-Json
       $srcBuildDef.project.id = $project.Id
@@ -197,14 +203,17 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $buildDefs.Count | Should Be 2
       }
 
-      It 'Get-VSTeamBuildDefinition by Id should return 1 phase for 1st build definition' {
-         $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI1"}).Id
-         ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 1
-      }
+      # Only run for VSTS
+      if ($api -eq 'VSTS') {
+         It 'Get-VSTeamBuildDefinition by Id should return 1 phase for 1st build definition' {
+            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI1"}).Id
+            ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 1
+         }
 
-      It 'Get-VSTeamBuildDefinition by Id should return 2 phase for 2nd build definition' {
-         $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI2"}).Id
-         ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 2
+         It 'Get-VSTeamBuildDefinition by Id should return 2 phase for 2nd build definition' {
+            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI2"}).Id
+            ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 2
+         }
       }
 
       It 'Remove-VSTeamBuildDefinition should delete build definition' {

@@ -14,9 +14,14 @@ The cases of every file is very important. This module is to be used on Windows,
 
 ### 3.0.5
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/70) from [Geert van der Cruijsen](https://github.com/Geertvdc) which included the following:
+Merged [Pull Request 70](https://github.com/DarqueWarrior/vsteam/pull/70) and [Pull Request 72](https://github.com/DarqueWarrior/vsteam/pull/72) from [Geert van der Cruijsen](https://github.com/Geertvdc) which included the following:
 
-Added a function to remove vsts agents from a pool. by calling Remove-Agent or Remove-VSTeamAgent
+- Added a function to remove vsts agents from a pool by calling Remove-Agent or Remove-VSTeamAgent
+- Disable & Enable agents in pool
+
+Add [Pull Request 70](https://github.com/DarqueWarrior/vsteam/pull/71) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+Integration tests for Build Definitions
 
 ### 3.0.4
 
@@ -24,7 +29,7 @@ The ProjectName dynamic parameter that enables Tab Complete of project names was
 
 ### 3.0.3
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/66) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+Merged [Pull Request 66](https://github.com/DarqueWarrior/vsteam/pull/66) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
 Updated integration tests to account for the new hosted agent pool.
 
