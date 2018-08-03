@@ -119,6 +119,7 @@ Describe 'TeamsPSDrive' {
                createdOn          = '2018-03-28T16:48:58.317Z'
                maxParallelism     = 1
                id                 = 102
+               enabled            = $false
                status             = 'Online'
                version            = '1.336.1'
                osDescription      = 'Linux'

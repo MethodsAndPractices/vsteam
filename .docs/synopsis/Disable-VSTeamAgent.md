@@ -1,0 +1,1 @@
+Disables an agent in a pool.
