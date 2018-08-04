@@ -1,15 +1,12 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Get-Module team | Remove-Module -Force
-Get-Module profile | Remove-Module -Force
-
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\profile.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\projects.psm1 -Force
-
 InModuleScope team {
    Describe 'Invoke-VSTeamRequest' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+
       Mock Write-Host
 
       Context 'Invoke-VSTeamRequest Options' {
@@ -36,6 +33,11 @@ InModuleScope team {
    }
 
    Describe 'Team VSTS' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+      
       . "$PSScriptRoot\mockProjectDynamicParamMandatoryFalse.ps1"
 
       $contents = @"

@@ -21,7 +21,7 @@
 Id of the pool to return.
 
 ```yaml
-Type: String
+Type: int
 Parameter Sets: ByID
 Aliases: PoolID
 Required: True

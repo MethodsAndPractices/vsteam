@@ -1,12 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Get-Module Team | Remove-Module -Force
-Get-Module Tfvc | Remove-Module -Force
-
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\tfvc.psm1 -Force
-
 InModuleScope tfvc {
    
    $singleResult = [PSCustomObject]@{
@@ -31,6 +24,10 @@ InModuleScope tfvc {
    }
 
    Describe 'Get-VSTeamTfvcRootBranch VSTS' -Tag 'unit', 'tfvc', 'vsts' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
 
       $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
@@ -106,6 +103,10 @@ InModuleScope tfvc {
    }
 
    Describe 'Get-VSTeamTfvcRootBranch TFS' -Tag 'unit', 'tfvc', 'tfs' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
 
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
       Mock _useWindowsAuthenticationOnPremise { return $true }
@@ -181,7 +182,12 @@ InModuleScope tfvc {
       }
    }
 
-   Describe 'Get-VSTeamTfvcBranch' -Tag 'unit','multi' {
+   Describe 'Get-VSTeamTfvcBranch' -Tag 'unit', 'multi' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+   
       $testCases = @(
          @{ a = 'https://test.visualstudio.com'; t = 'vsts' }
          @{ a = 'http://localhost:8080/tfs/defaultcollection'; t = 'tfs' }
@@ -203,6 +209,10 @@ InModuleScope tfvc {
    }
   
    Describe 'Get-VSTeamTfvcBranch VSTS' -Tag 'unit', 'tfvc', 'vsts' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }   
 
       $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
       
@@ -295,6 +305,10 @@ InModuleScope tfvc {
    }
 
    Describe 'Get-VSTeamTfvcBranch TFS' -Tag 'unit', 'tfvc', 'tfs' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
 
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
       Mock _useWindowsAuthenticationOnPremise { return $true }

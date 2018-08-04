@@ -1,13 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Get-Module Team | Remove-Module -Force
-Get-Module Repositories | Remove-Module -Force
-
-
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\repositories.psm1 -Force
-
 InModuleScope repositories {
 
    # Set the account to use for testing. A normal user would do this
@@ -55,8 +47,12 @@ InModuleScope repositories {
    }
 
    Describe "Git VSTS" {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
-      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
 
       Context 'Show-VSTeamGitRepository by project' {
          Mock _showInBrowser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
@@ -157,9 +153,12 @@ InModuleScope repositories {
    }
 
    Describe "Git TFS" {
-
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+      
       Mock _useWindowsAuthenticationOnPremise { return $true }
-      . "$PSScriptRoot\..\..\src\teamspsdrive.ps1"
 
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
 

@@ -1,12 +1,13 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\cloudSubscriptions.psm1 -Force
-
 InModuleScope cloudSubscriptions {
    
    Describe 'CloudSubscriptions vsts' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+
       $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
       Context 'Get-VSTeamCloudSubscription' {
@@ -25,6 +26,11 @@ InModuleScope cloudSubscriptions {
    }
 
    Describe 'CloudSubscriptions TFS' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
+   
       Mock _useWindowsAuthenticationOnPremise { return $true }
       $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
       

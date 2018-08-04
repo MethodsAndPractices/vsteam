@@ -12,7 +12,7 @@ function Get-VSTeamAgent {
 
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Alias('AgentID')]
-      [string] $Id
+      [int] $Id
    )
 
    process {
@@ -43,8 +43,86 @@ function Get-VSTeamAgent {
    }
 }
 
+function Remove-VSTeamAgent {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   param(      
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
+      [int] $PoolId,
+
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [Alias('AgentID')]
+      [int[]] $Id,
+
+      # Forces the command without confirmation
+      [switch] $Force
+   )
+
+   process {
+      foreach ($item in $Id) {
+         if ($force -or $pscmdlet.ShouldProcess($item,"Delete agent")) {
+            try {
+               _callAPI -Method Delete -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask | Out-Null
+               Write-Output "Deleted agent $item"
+            }
+            catch {
+               _handleException $_
+            }
+         }
+      }
+   }
+}
+
+function Enable-VSTeamAgent {
+   param(      
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
+      [int] $PoolId,
+
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [Alias('AgentID')]
+      [int[]] $Id
+   )
+
+   process {
+      foreach ($item in $Id) {
+         try {
+            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask -ContentType "application/json" -Body "{'enabled':true,'id':$item}" | Out-Null
+            Write-Output "Enabled agent $item"
+         }
+         catch {
+            _handleException $_
+         }
+      }
+   }
+}
+
+function Disable-VSTeamAgent {
+   param(      
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
+      [int] $PoolId,
+
+      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
+      [Alias('AgentID')]
+      [int[]] $Id
+   )
+
+   process {
+      foreach ($item in $Id) {
+         try {
+            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask -ContentType "application/json" -Body "{'enabled':false,'id':$item}" | Out-Null
+            Write-Output "Disabled agent $item"
+         }
+         catch {
+            _handleException $_
+         }
+      }
+   }
+}
+
 Set-Alias Get-Agent Get-VSTeamAgent
+Set-Alias Remove-Agent Remove-VSTeamAgent
+Set-Alias Enable-Agent Enable-VSTeamAgent
+Set-Alias Disable-Agent Disable-VSTeamAgent
 
 Export-ModuleMember `
-   -Function Get-VSTeamAgent `
-   -Alias Get-Agent
+   -Function Get-VSTeamAgent, Remove-VSTeamAgent, Enable-VSTeamAgent, Disable-VSTeamAgent `
+   -Alias Get-Agent, Remove-Agent, Enable-Agent, Disable-Agent

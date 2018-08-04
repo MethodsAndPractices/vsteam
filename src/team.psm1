@@ -488,6 +488,14 @@ $Global:VSTeamVersionTable = @{
    'ModuleVersion'               = _getModuleVersion
 }
 
+# Dynamic parameters get called alot. This can cause
+# multiple calls to TFS/VSTS for a single function call
+# so I am going to try and cache the values.
+$Global:VSTeamProjectCache = @{
+   'projects'  = $null
+   'timestamp' = -1
+}
+
 Set-Alias gti Get-VSTeamInfo
 Set-Alias ata Add-VSTeamAccount
 Set-Alias ivr Invoke-VSTeamRequest

@@ -1,10 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\policyTypes.psm1 -Force
-
 InModuleScope policyTypes {
    
    # Set the account to use for testing. A normal user would do this
@@ -18,6 +13,11 @@ InModuleScope policyTypes {
    $singleResult = [PSCustomObject]@{ }
 
    Describe "Policies VSTS" {
+
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*" 
+      }
       
       Context 'Get-VSTeamPolicyType by project' {
          Mock Invoke-RestMethod { return $results } -Verifiable

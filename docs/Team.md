@@ -91,6 +91,14 @@ Adds a work item to your project.
 
 Clears the value stored in the default project parameter value.
 
+### [Disable-VSTeamAgent](Disable-VSTeamAgent.md)
+
+Disables an agent in a pool.
+
+### [Enable-VSTeamAgent](Enable-VSTeamAgent.md)
+
+Enables an agent in a pool.
+
 ### [Get-VSTeam](Get-VSTeam.md)
 
 Returns a team.
@@ -222,6 +230,10 @@ Removes a team from a project.
 ### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
 
 Clears your default project, account name and personal access token.
+
+### [Remove-VSTeamAgent](Remove-VSTeamAgent.md)
+
+Removes an agent from a pool.
 
 ### [Remove-VSTeamBuild](Remove-VSTeamBuild.md)
 

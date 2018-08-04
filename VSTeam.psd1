@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '3.0.3'
+   ModuleVersion     = '3.0.5'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -67,7 +67,6 @@
       'types\cloudSubscriptions.ps1xml',
       'types\repositories.ps1xml',
       'types\policies.ps1xml',
-      'types\projects.ps1xml',
       'types\queues.ps1xml',
       'types\releaseDefinitions.ps1xml',
       'types\releases.ps1xml',
@@ -203,7 +202,10 @@
       'Get-VSTeamWorkItem',
       'Show-VSTeamWorkItem',
       'Get-VSTeamGitRef',
-      'Get-VSTeamAgent')
+      'Get-VSTeamAgent',
+      'Remove-VSTeamAgent',
+      'Enable-VSTeamAgent',
+      'Disable-VSTeamAgent')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -303,7 +305,10 @@
       'Update-Policy', 
       'Remove-Policy',
       'Get-GitRef',
-      'Get-Agent')
+      'Get-Agent',
+      'Remove-Agent',
+      'Enable-Agent',
+      'Disable-Agent')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

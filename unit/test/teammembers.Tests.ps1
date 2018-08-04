@@ -1,10 +1,5 @@
 Set-StrictMode -Version Latest
 
-Get-Module VSTeam | Remove-Module -Force
-Import-Module $PSScriptRoot\..\..\src\team.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\teammembers.psm1 -Force
-Import-Module $PSScriptRoot\..\..\src\teams.psm1 -Force
-
 InModuleScope teammembers {
    $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
 
