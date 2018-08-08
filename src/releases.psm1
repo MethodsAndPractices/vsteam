@@ -135,7 +135,7 @@ function Show-VSTeamRelease {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url
-      _showInBrowser "$($VSTeamVersionTable.Account)/$ProjectName/_release?releaseId=$id"
+      Show-Browser "$($VSTeamVersionTable.Account)/$ProjectName/_release?releaseId=$id"
    }
 }
 

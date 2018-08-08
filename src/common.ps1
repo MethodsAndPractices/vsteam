@@ -201,25 +201,6 @@ function _openOnLinux {
    Start-Process -FilePath xdg-open -Args "$command"
 }
 
-function _showInBrowser {
-   param(
-      [parameter(Mandatory = $true)]
-      [string] $url
-   )
-
-   Write-Verbose $url
-
-   if (_isOnWindows) {
-      _openOnWindows $url
-   }
-   elseif (_isOnMac) {
-      _openOnMac $url
-   }
-   else {
-      _openOnLinux $url
-   }
-}
-
 function _addSubDomain {
    param(
       $subDomain

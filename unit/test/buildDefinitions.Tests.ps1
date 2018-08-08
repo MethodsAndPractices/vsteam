@@ -26,79 +26,73 @@ InModuleScope buildDefinitions {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Show-VSTeamBuildDefinition by ID' {
-         Mock _openOnWindows { }
-         Mock _isOnWindows { return $true }
-
+         Mock Show-Browser { }
+         
          it 'should return url for mine' {
             Show-VSTeamBuildDefinition -projectName project -Id 15
 
-            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter {
-               $command -eq 'https://test.visualstudio.com/project/_build/index?definitionId=15'
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
+               $url -eq 'https://test.visualstudio.com/project/_build/index?definitionId=15'
             }
          }
       }
 
       Context 'Show-VSTeamBuildDefinition Mine' {
-         Mock _openOnWindows { }
-         Mock _isOnWindows { return $true }
-
+         Mock Show-Browser { }
+         
          it 'should return url for mine' {
             Show-VSTeamBuildDefinition -projectName project -Type Mine
 
-            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter {
-               $command -eq 'https://test.visualstudio.com/project/_build/index?_a=mine&path=%5c'
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
+               $url -eq 'https://test.visualstudio.com/project/_build/index?_a=mine&path=%5c'
             }
          }
       }
 
       Context 'Show-VSTeamBuildDefinition XAML' {
-         Mock _openOnWindows { }
-         Mock _isOnWindows { return $true }
-
+         Mock Show-Browser { }
+         
          it 'should return url for XAML' {
             Show-VSTeamBuildDefinition -projectName project -Type XAML
 
-            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter {
-               $command -eq 'https://test.visualstudio.com/project/_build/xaml&path=%5c'
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
+               $url -eq 'https://test.visualstudio.com/project/_build/xaml&path=%5c'
             }
          }
       }
 
       Context 'Show-VSTeamBuildDefinition Queued' {
-         Mock _openOnWindows { }
-         Mock _isOnWindows { return $true }
+         Mock Show-Browser { }
 
          it 'should return url for Queued' {
             Show-VSTeamBuildDefinition -projectName project -Type Queued
 
-            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter {
-               $command -eq 'https://test.visualstudio.com/project/_build/index?_a=queued&path=%5c'
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
+               $url -eq 'https://test.visualstudio.com/project/_build/index?_a=queued&path=%5c'
             }
          }
       }
 
       Context 'Show-VSTeamBuildDefinition Mine with path' {
-         Mock _openOnWindows { }
-         Mock _isOnWindows { return $true }
+         Mock Show-Browser { }
 
          it 'should return url for mine' {
             Show-VSTeamBuildDefinition -projectName project -path '\test'
 
-            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter {
-               $command -like 'https://test.visualstudio.com/project/_Build/index?_a=allDefinitions&path=%5Ctest'
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
+               $url -like 'https://test.visualstudio.com/project/_Build/index?_a=allDefinitions&path=%5Ctest'
             }
          }
       }
 
       Context 'Show-VSTeamBuildDefinition Mine with path missing \' {
-         Mock _openOnWindows { }
-         Mock _isOnWindows { return $true }
+         Mock Show-Browser { }
 
          it 'should return url for mine with \ added' {
             Show-VSTeamBuildDefinition -projectName project -path 'test'
 
-            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter {
-               $command -like 'https://test.visualstudio.com/project/_Build/index?_a=allDefinitions&path=%5Ctest'
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
+               $url -like 'https://test.visualstudio.com/project/_Build/index?_a=allDefinitions&path=%5Ctest'
             }
          }
       }

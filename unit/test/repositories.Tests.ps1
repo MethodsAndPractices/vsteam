@@ -55,8 +55,8 @@ InModuleScope repositories {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
 
       Context 'Show-VSTeamGitRepository by project' {
-         Mock _showInBrowser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
-         Mock _showInBrowser { throw "_showInBrowser called incorrectly: $Args" }
+         Mock Show-Browser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
+         Mock Show-Browser { throw "Show-Browser called incorrectly: $Args" }
 
          Show-VSTeamGitRepository -projectName project
 
@@ -66,8 +66,8 @@ InModuleScope repositories {
       }
 
       Context 'Show-VSTeamGitRepository by remote url' {
-         Mock _showInBrowser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
-         Mock _showInBrowser { throw "_showInBrowser called incorrectly: $Args" }
+         Mock Show-Browser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
+         Mock Show-Browser { throw "Show-Browser called incorrectly: $Args" }
 
          Show-VSTeamGitRepository -RemoteUrl 'https://test.visualstudio.com/_git/project'
 

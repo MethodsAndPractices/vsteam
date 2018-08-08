@@ -51,12 +51,12 @@ InModuleScope workitems {
       }
 
       Context 'Show-VSTeamWorkItem' {
-         Mock _showInBrowser { }
+         Mock Show-Browser { }
 
          it 'should return url for mine' {
             Show-VSTeamWorkItem -projectName project -Id 15
 
-            Assert-MockCalled _showInBrowser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://test.visualstudio.com/project/_workitems/edit/15' }
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://test.visualstudio.com/project/_workitems/edit/15' }
          }
       }
 

@@ -6,38 +6,33 @@ InModuleScope projects {
    Describe 'Project' {
       . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
 
-      Context 'Show-VSTeamProject by ID on Windows' {
-         Mock _openOnWindows
-         Mock _isOnWindows { return $true }
-
+      Context 'Show-VSTeamProject by ID' {
+         Mock Show-Browser
+         
          It 'Show call start' {
             Show-VSTeamProject -Id 123456
 
-            Assert-MockCalled _openOnWindows
+            Assert-MockCalled Show-Browser
          }
       }
 
-      Context 'Show-VSTeamProject by ProjectName on Mac' {
-         Mock _isOnMac { return $true }
-         Mock _isOnWindows { return $false }
-         Mock _openOnMac
+      Context 'Show-VSTeamProject by ProjectName' {
+         Mock Show-Browser
 
          It 'Show call open' {
             Show-VSTeamProject -ProjectName MyProject
 
-            Assert-MockCalled _openOnMac
+            Assert-MockCalled Show-Browser
          }
       }
 
-      Context 'Show-VSTeamProject by default parameter on Linux' {
-         Mock _isOnMac { return $false }
-         Mock _isOnWindows { return $false }
-         Mock _openOnLinux
+      Context 'Show-VSTeamProject by default parameter' {
+         Mock Show-Browser
 
          It 'Show call open' {
             Show-VSTeamProject MyProject
 
-            Assert-MockCalled _openOnLinux
+            Assert-MockCalled Show-Browser
          }
       }
 

@@ -31,14 +31,13 @@ InModuleScope releaseDefinitions {
       . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Show-VSTeamReleaseDefinition by ID' {
-         Mock _openOnWindows { }
-         Mock _isOnWindows { return $true }
-
+         Mock Show-Browser { }
+         
          it 'should return Release definitions' {
             Show-VSTeamReleaseDefinition -projectName project -Id 15
 
-            Assert-MockCalled _openOnWindows -Exactly -Scope It -Times 1 -ParameterFilter {
-               $command -eq 'https://test.visualstudio.com/project/_release?definitionId=15'
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
+               $url -eq 'https://test.visualstudio.com/project/_release?definitionId=15'
             }
          }
       }
