@@ -1,5 +1,24 @@
 # Changelog
 
+## 3.0.6
+
+Added Update-VSTeamProfile to allow easy updating of the PAT for each profile.
+
+## 3.0.5
+
+Merged [Pull Request 70](https://github.com/DarqueWarrior/vsteam/pull/70) and [Pull Request 72](https://github.com/DarqueWarrior/vsteam/pull/72) from [Geert van der Cruijsen](https://github.com/Geertvdc) which included the following:
+
+- Added a function to remove vsts agents from a pool by calling Remove-Agent or Remove-VSTeamAgent
+- Disable & Enable agents in pool
+
+Add [Pull Request 70](https://github.com/DarqueWarrior/vsteam/pull/71) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+Integration tests for Build Definitions
+
+## 3.0.4
+
+The ProjectName dynamic parameter that enables Tab Complete of project names was getting called approximately 20 times when tab completing a function name. To reduce the number of calls a rudimentary cache was put in place.
+
 ## 3.0.3
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/66) from [Kai Walter](https://github.com/KaiWalter) which included the following:
@@ -63,7 +82,7 @@ Account
       - Ref1
       - Ref2
 
-Polished the classes defined for the provider. Also updated some of the fucntions to return the same classes as the provider.  The classes all have a hidden _internalObj property that contains the raw object returned from the REST API call. Not all the properties of the object are exposed via properties of the class. This property will provide access to them if you need them.
+Polished the classes defined for the provider. Also updated some of the functions to return the same classes as the provider.  The classes all have a hidden _internalObj property that contains the raw object returned from the REST API call. Not all the properties of the object are exposed via properties of the class. This property will provide access to them if you need them.
 
 Updated the format.ps1xml files to show more data when the provider is used and to format the provider output to be more consistent with a normal file system. The + and . modes were replaced with d----- and ----- for directories and leafs.
 
@@ -191,7 +210,7 @@ Removed the External Module Dependencies so SHiPS is installed with the module.
 
 ## 2.1.0
 
-Lots of code refactorying and clean up.
+Lots of code refactoring and clean up.
 
 Replaced Add-VSTeamReleaseEnvironment with Set-VSTeamEnvironmentStatus.
 

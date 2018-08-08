@@ -1,0 +1,1 @@
+Allows you to update the Personal Access Token for your profile.
