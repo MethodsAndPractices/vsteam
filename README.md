@@ -53,3 +53,11 @@ During the release the module is installed on macOS, Linux and Window and tested
 ## Change Log
 
 [Change Log](CHANGELOG.md)
+
+## Maintainers
+
+- [Donovan Brown](https://github.com/darquewarrior) - [@DonovanBrown](https://twitter.com/DonovanBrown)
+
+## License
+
+This project is [licensed under the MIT License](LICENSE).
