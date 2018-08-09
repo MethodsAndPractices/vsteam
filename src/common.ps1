@@ -443,7 +443,8 @@ function _buildDynamicParam {
       [string] $ParameterName = 'QueueName',
       [array] $arrSet,
       [bool] $Mandatory = $false,
-      [string] $ParameterSetName
+      [string] $ParameterSetName,
+      [int] $Position = -1
    )
    # Create the collection of attributes
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
@@ -452,6 +453,10 @@ function _buildDynamicParam {
    $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
    $ParameterAttribute.Mandatory = $Mandatory
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true
+   
+   if($Position -ne -1) {
+      $ParameterAttribute.Position = $Position
+   }
 
    if ($ParameterSetName) {
       $ParameterAttribute.ParameterSetName = $ParameterSetName

@@ -351,6 +351,10 @@ Updates a build definition for a team project.
 
 Updates an existing policy in the specified project.
 
+### [Update-VSTeamProfile](Update-VSTeamProfile.md)
+
+Allows you to update the Personal Access Token for your profile.
+
 ### [Update-VSTeamProject](Update-VSTeamProject.md)
 
 Updates the project name, description or both.
