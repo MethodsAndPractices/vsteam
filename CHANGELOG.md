@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.7
+
+Removed some common code and took dependency on Trackyon.Utils that did the same things.
+
 ## 3.0.6
 
 Added Update-VSTeamProfile to allow easy updating of the PAT for each profile.

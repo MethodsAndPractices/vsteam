@@ -131,7 +131,7 @@ function Show-VSTeamProject {
          $ProjectName = $id
       }
 
-      _showInBrowser "$($VSTeamVersionTable.Account)/$ProjectName"
+      Show-Browser "$($VSTeamVersionTable.Account)/$ProjectName"
    }
 }
 

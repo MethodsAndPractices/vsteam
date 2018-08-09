@@ -188,7 +188,7 @@ InModuleScope Approvals {
       }
 
       Context 'Show-VSTeamApproval' {
-         Mock _showInBrowser -Verifiable
+         Mock Show-Browser -Verifiable
          
          Show-VSTeamApproval -projectName project -ReleaseDefinitionId 1
 

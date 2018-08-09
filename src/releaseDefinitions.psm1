@@ -108,7 +108,7 @@ function Show-VSTeamReleaseDefinition {
          $url += "?definitionId=$id"
       }
       
-      _showInBrowser $url
+      Show-Browser $url
    }
 }
 

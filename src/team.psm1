@@ -86,7 +86,7 @@ function Show-VSTeam {
    process {
       _hasAccount
 
-      _showInBrowser "$($VSTeamVersionTable.Account)"
+      Show-Browser "$($VSTeamVersionTable.Account)"
    }
 }
 

@@ -142,7 +142,7 @@ function Show-VSTeamBuildDefinition {
          $url += [System.Web.HttpUtility]::UrlEncode($Path)
       }
 
-      _showInBrowser $url
+      Show-Browser $url
    }
 }
 

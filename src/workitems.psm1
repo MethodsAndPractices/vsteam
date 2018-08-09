@@ -82,7 +82,7 @@ function Show-VSTeamWorkItem {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      _showInBrowser "$($VSTeamVersionTable.Account)/$ProjectName/_workitems/edit/$Id"
+      Show-Browser "$($VSTeamVersionTable.Account)/$ProjectName/_workitems/edit/$Id"
    }
 }
 

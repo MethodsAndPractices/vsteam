@@ -150,10 +150,10 @@ function Show-VSTeamGitRepository {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       if ($RemoteUrl) {
-         _showInBrowser $RemoteUrl
+         Show-Browser $RemoteUrl
       }
       else {
-         _showInBrowser "$($VSTeamVersionTable.Account)/_git/$ProjectName"
+         Show-Browser "$($VSTeamVersionTable.Account)/_git/$ProjectName"
       }
    }
 }

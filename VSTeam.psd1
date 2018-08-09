@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '3.0.6'
+   ModuleVersion     = '3.0.7'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -52,7 +52,7 @@
    # ProcessorArchitecture = ''
 
    # Modules that must be imported into the global environment prior to importing this module
-   RequiredModules   = @('SHiPS')
+   RequiredModules   = @('SHiPS', 'Trackyon.Utils')
 
    # Assemblies that must be loaded prior to importing this module
    # RequiredAssemblies = @()
