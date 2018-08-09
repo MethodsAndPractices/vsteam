@@ -238,7 +238,7 @@ InModuleScope profile {
          }
       }
 
-      Context 'Add-VSTeamProfile with PAT to empty file' {
+      Context 'Update-VSTeamProfile with PAT to empty file' {
          Mock Set-Content { }
          Mock Write-Warning -Verifiable
          Mock Get-VSTeamProfile { }
