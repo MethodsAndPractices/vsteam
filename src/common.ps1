@@ -135,7 +135,8 @@ function _getVSTeamAPIVersion {
 }
 
 function _isOnWindows {
-   return Get-OperatingSystem -eq 'Windows'
+   $os = Get-OperatingSystem
+   return $os -eq 'Windows'
 }
 
 function _addSubDomain {
