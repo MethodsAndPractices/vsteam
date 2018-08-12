@@ -95,7 +95,7 @@ InModuleScope team {
       }
 
       Context 'Show-VSTeam' {
-         Mock _ShowInBrowser -Verifiable
+         Mock Show-Browser -Verifiable
 
          Show-VSTeam
 

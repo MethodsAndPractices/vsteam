@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '3.0.5'
+   ModuleVersion     = '3.0.7'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -52,7 +52,7 @@
    # ProcessorArchitecture = ''
 
    # Modules that must be imported into the global environment prior to importing this module
-   RequiredModules   = @('SHiPS')
+   RequiredModules   = @('SHiPS', 'Trackyon.Utils')
 
    # Assemblies that must be loaded prior to importing this module
    # RequiredAssemblies = @()
@@ -205,7 +205,8 @@
       'Get-VSTeamAgent',
       'Remove-VSTeamAgent',
       'Enable-VSTeamAgent',
-      'Disable-VSTeamAgent')
+      'Disable-VSTeamAgent',
+      'Update-VSTeamProfile')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -308,7 +309,8 @@
       'Get-Agent',
       'Remove-Agent',
       'Enable-Agent',
-      'Disable-Agent')
+      'Disable-Agent',
+      'Update-Profile')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
