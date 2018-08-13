@@ -212,6 +212,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $buildDef.Name | Should Be $($newProjectName + "-CI1")
             $buildDef.Process.Phases[0].Name | Should Be "Phase 1"
             $buildDef.Process.Phases[0].Steps[0].Name | Should Be "PowerShell Script"
+            $buildDef.Process.Phases[0].Steps[0].Inputs.targetType | Should Be "inline"
          }
          It 'Get-VSTeamBuildDefinition by Id should return 1 phase for 1st build definition' {
             $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI1")}).Id

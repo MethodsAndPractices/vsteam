@@ -436,11 +436,23 @@ class VSTeamBuildDefinitions : VSTeamDirectory {
 }
 
 class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
+   [bool]$Enabled = $true
+   [bool]$ContinueOnError = $false
+   [bool]$AlwaysRun = $true
+   [int]$TimeoutInMinutes = 0
+   [string]$Condition = $null
+   [PSCustomObject]$Inputs = $null
    VSTeamBuildDefinitionProcessPhaseStep(
       [object]$obj,
       [int]$stepNo,
       [string]$Projectname
    ) : base($obj.displayName, $stepNo.ToString(), $Projectname) {
+      $this.Enabled = $obj.enabled
+      $this.ContinueOnError = $obj.continueOnError
+      $this.AlwaysRun = $obj.alwaysRun
+      $this.TimeoutInMinutes = $obj.timeoutInMinutes
+      $this.Condition = $obj.condition
+      $this.Inputs = $obj.inputs
    }
 }
 
