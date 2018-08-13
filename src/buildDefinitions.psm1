@@ -4,37 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-# Apply types to the returned objects so format and type files can
-# identify the object and act on it.
-function _applyTypesToBuildDefinition {
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'Team.BuildDefinition')
-
-   $item.project.PSObject.TypeNames.Insert(0, 'Team.Project')
-
-   if ($item.PSObject.Properties.Match('authoredBy').count -gt 0 -and $null -ne $item.authoredBy) {
-      $item.authoredBy.PSObject.TypeNames.Insert(0, 'Team.User')
-   }
-
-   if ($item.PSObject.Properties.Match('_links').count -gt 0 -and $null -ne $item._links) {
-      $item._links.PSObject.TypeNames.Insert(0, 'Team.Links')
-   }
-
-   if ($item.PSObject.Properties.Match('queue').count -gt 0 -and $null -ne $item.queue) {
-      $item.queue.PSObject.TypeNames.Insert(0, 'Team.Queue')
-   }
-
-   # Only returned for a single item
-   if ($item.PSObject.Properties.Match('variables').count -gt 0 -and $null -ne $item.variables) {
-      $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')
-   }
-
-   if ($item.PSObject.Properties.Match('repository').count -gt 0 -and $null -ne $item.repository) {
-      $item.repository.PSObject.TypeNames.Insert(0, 'Team.Repository')
-   }
-}
-
 function Get-VSTeamBuildDefinition {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(

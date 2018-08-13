@@ -62,7 +62,6 @@
 
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('types\Approvals.ps1xml',
-      'types\buildDefinitions.ps1xml',
       'types\builds.ps1xml',
       'types\cloudSubscriptions.ps1xml',
       'types\repositories.ps1xml',
@@ -80,7 +79,6 @@
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
-      'formats\buildDefinitions.format.ps1xml',
       'formats\builds.format.ps1xml',
       'formats\policyTypes.format.ps1xml',
       'formats\profile.format.ps1xml',

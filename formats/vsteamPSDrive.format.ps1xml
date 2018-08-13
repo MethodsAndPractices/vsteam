@@ -447,6 +447,64 @@
          </ListControl>
       </View>
 
+      <!--Team.BuildDefinition.Table-->
+      <View>
+         <Name>Team.BuildDefinition.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinition</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.BuildDefinition.List-->
+      <View>
+         <Name>Team.BuildDefinition.List</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinition</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>ID</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Name</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>AuthoredBy</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+
+
       <!--ReleaseTable-->
       <View>
          <Name>ReleaseTable</Name>
@@ -791,6 +849,7 @@
             <TypeName>Team.Pools</TypeName>
             <TypeName>Team.Provider.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
+            <TypeName>Team.BuildDefinitions</TypeName>
             <TypeName>Team.Releases</TypeName>
             <TypeName>Team.Repositories</TypeName>
             <TypeName>Team.Teams</TypeName>
@@ -830,6 +889,7 @@
             <TypeName>Team.Pool</TypeName>
             <TypeName>Team.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
+            <TypeName>Team.BuildDefinitions</TypeName>
             <TypeName>Team.Releases</TypeName>
             <TypeName>Team.Repositories</TypeName>
             <TypeName>Team.Teams</TypeName>

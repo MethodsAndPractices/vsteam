@@ -440,10 +440,32 @@ class VSTeamBuildDefinitions : VSTeamDirectory {
             $buildDefinition,
             $buildDefinition.project.name)
 
+         $item.AddTypeName('Team.BuildDefinition')            
+
          $objs += $item
       }
 
       return $objs
+   }
+}
+
+class VSTeamBuildDefinition : VSTeamLeaf {
+   [VSTeamUser]$AuthoredBy = $null
+   [VSTeamBuildDefinitionProcess]$Process = $null
+   
+   VSTeamBuildDefinition (
+      [object]$obj,
+      [string]$Projectname
+   ) : base($obj.name, $obj.id.ToString(), $Projectname) {
+      $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
+      
+      if ($obj.PSObject.Properties.Match('process').count -gt 0) {
+         $this.Process = [VSTeamBuildDefinitionProcess]::new($obj.process, $Projectname)
+      }      
+
+      $this._internalObj = $obj
+
+      $this.AddTypeName('Team.BuildDefinition')
    }
 }
 
@@ -473,12 +495,13 @@ class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
    }
 }
 
-class VSTeamBuildDefinitionProcessPhase : VSTeamLeaf {
-   [VSTeamBuildDefinitionProcessPhaseStep[]] $Steps = @()
+class VSTeamBuildDefinitionProcessPhase : VSTeamDirectory {
+   [VSTeamBuildDefinitionProcessPhaseStep[]] $Steps
+
    VSTeamBuildDefinitionProcessPhase(
       [object]$obj,
       [string]$Projectname
-   ) : base($obj.name, $obj.refName, $Projectname) {
+   ) : base($obj.name, $Projectname) {
       $stepNo = 0
       foreach ($step in $obj.steps) {
          $stepNo++
@@ -489,33 +512,16 @@ class VSTeamBuildDefinitionProcessPhase : VSTeamLeaf {
    }
 }
 
-class VSTeamBuildDefinitionProcess : VSTeamLeaf {
-   [VSTeamBuildDefinitionProcessPhase[]] $Phases = @()
+class VSTeamBuildDefinitionProcess : VSTeamDirectory {
+   [VSTeamBuildDefinitionProcessPhase[]] $Phases
+
    VSTeamBuildDefinitionProcess (
       [object]$obj,
       [string]$Projectname
-   ) : base("Process", "Process", $Projectname) {
+   ) : base("Process", $Projectname) {
       foreach ($phase in $obj.phases) {
          $this.Phases += [VSTeamBuildDefinitionProcessPhase]::new($phase, $Projectname)
       }
-
-      $this._internalObj = $obj
-   }
-}
-
-class VSTeamBuildDefinition : VSTeamLeaf {
-   [VSTeamUser]$AuthoredBy = $null
-   [VSTeamBuildDefinitionProcess]$Process = $null
-   
-   VSTeamBuildDefinition (
-      [object]$obj,
-      [string]$Projectname
-   ) : base($obj.name, $obj.id.ToString(), $Projectname) {
-      $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
-      
-      if ($obj.PSObject.Properties.Match('process').count -gt 0) {
-         $this.Process = [VSTeamBuildDefinitionProcess]::new($obj.process, $Projectname)
-      }      
 
       $this._internalObj = $obj
    }
