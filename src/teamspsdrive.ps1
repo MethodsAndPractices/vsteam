@@ -493,6 +493,8 @@ class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
       $this.Task = $obj.task
 
       $this._internalObj = $obj
+
+      $this.AddTypeName('Team.BuildDefinitionProcessPhaseStep')
    }
 }
 
@@ -510,6 +512,8 @@ class VSTeamBuildDefinitionProcessPhase : VSTeamDirectory {
       }
 
       $this._internalObj = $obj
+
+      $this.AddTypeName('Team.BuildDefinitionProcessPhase')
    }
 }
 
@@ -525,6 +529,8 @@ class VSTeamBuildDefinitionProcess : VSTeamDirectory {
       }
 
       $this._internalObj = $obj
+
+      $this.AddTypeName('Team.BuildDefinitionProcess')
    }
 }
 
