@@ -409,6 +409,87 @@ class VSTeamBuild : VSTeamLeaf {
 
 [SHiPSProvider(UseCache = $true)]
 [SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamBuildDefinitions : VSTeamDirectory {
+
+   # Default constructor
+   VSTeamBuildDefinitions(
+      [string]$Name,
+      [string]$ProjectName
+   ) : base($Name, $ProjectName) {
+   }
+
+   [object[]] GetChildItem() {
+      $buildDefinitions = Get-VSTeamBuildDefinition -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+
+      $objs = @()
+
+      foreach ($buildDefinition in $buildDefinitions) {
+         $item = [VSTeamBuildDefinition]::new(
+            $buildDefinition,
+            $buildDefinition.project.name)
+
+         $objs += $item
+      }
+
+      return $objs
+   }
+}
+
+class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
+   VSTeamBuildDefinitionProcessPhaseStep(
+      [object]$obj,
+      [int]$stepNo,
+      [string]$Projectname
+   ) : base($obj.displayName, $stepNo.ToString(), $Projectname) {
+   }
+}
+
+class VSTeamBuildDefinitionProcessPhase : VSTeamLeaf {
+   [VSTeamBuildDefinitionProcessPhaseStep[]] $Steps = @()
+   VSTeamBuildDefinitionProcessPhase(
+      [object]$obj,
+      [string]$Projectname
+   ) : base($obj.name, $obj.refName, $Projectname) {
+      $stepNo = 0
+      foreach ($step in $obj.steps) {
+         $stepNo++
+         $this.Steps += [VSTeamBuildDefinitionProcessPhaseStep]::new($step, $stepNo, $Projectname)
+      }
+   }
+}
+
+class VSTeamBuildDefinitionProcess : VSTeamLeaf {
+   [VSTeamBuildDefinitionProcessPhase[]] $Phases = @()
+   VSTeamBuildDefinitionProcess (
+      [object]$obj,
+      [string]$Projectname
+   ) : base("Process", "Process", $Projectname) {
+      foreach ($phase in $obj.phases) {
+         $this.Phases += [VSTeamBuildDefinitionProcessPhase]::new($phase, $Projectname)
+      }
+   }
+}
+
+class VSTeamBuildDefinition : VSTeamLeaf {
+   [VSTeamUser]$AuthoredBy = $null
+   [VSTeamBuildDefinitionProcess]$Process = $null
+   
+   VSTeamBuildDefinition (
+      [object]$obj,
+      [string]$Projectname
+   ) : base($obj.name, $obj.id.ToString(), $Projectname) {
+      $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
+      
+      if ($obj.PSObject.Properties.Match('process').count -gt 0) {
+         $this.Process = [VSTeamBuildDefinitionProcess]::new($obj.process, $Projectname)
+      }      
+
+      $this._internalObj = $obj
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class VSTeamReleases : VSTeamDirectory {
 
    VSTeamReleases(

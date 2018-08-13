@@ -205,13 +205,21 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       # Only run for VSTS
       if ($api -eq 'VSTS') {
+         It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st build definition' {
+            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI1")}).Id
+            $buildDefId | Should Not Be $null
+            $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId
+            $buildDef.Name | Should Be $($newProjectName + "-CI1")
+            $buildDef.Process.Phases[0].Name | Should Be "Phase 1"
+            $buildDef.Process.Phases[0].Steps[0].Name | Should Be "PowerShell Script"
+         }
          It 'Get-VSTeamBuildDefinition by Id should return 1 phase for 1st build definition' {
-            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI1"}).Id
+            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI1")}).Id
             ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 1
          }
 
          It 'Get-VSTeamBuildDefinition by Id should return 2 phase for 2nd build definition' {
-            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI2"}).Id
+            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI2")}).Id
             ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 2
          }
       }

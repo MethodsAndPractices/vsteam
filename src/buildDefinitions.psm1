@@ -66,21 +66,22 @@ function Get-VSTeamBuildDefinition {
             $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $VSTeamVersionTable.Build `
                -QueryString @{revision = $revision}
             
-            _applyTypesToBuildDefinition -item $resp
+            $item = [VSTeamBuildDefinition]::new($resp,$ProjectName)
 
-            Write-Output $resp
+            Write-Output $item
          }
       }
       else {
          $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $VSTeamVersionTable.Build `
             -QueryString @{type = $type; name = $filter}
          
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypesToBuildDefinition -item $item
-         }
+         $objs = @()
 
-         Write-Output $resp.value
+         foreach ($item in $resp.value) {
+            $objs += [VSTeamBuildDefinition]::new($item,$ProjectName)
+         }
+   
+         Write-Output $objs
       }
    }
 }
