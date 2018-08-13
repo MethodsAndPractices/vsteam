@@ -8,12 +8,14 @@ InModuleScope buildDefinitions {
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
+         id         = 42
+         name       = 'builddef'
          queue      = [PSCustomObject]@{ name = 'Default' }
          _links     = [PSCustomObject]@{}
          variables  = [PSCustomObject]@{}
          repository = [PSCustomObject]@{}
          project    = [PSCustomObject]@{ name = 'project' }
-         authoredBy = [PSCustomObject]@{ name = 'test'}
+         authoredBy = [PSCustomObject]@{ id = 1; name = 'test'; uniqueName = 'test'; displayName = 'Test' }
       }
    }
 
@@ -172,12 +174,14 @@ InModuleScope buildDefinitions {
 
       Context 'Get-VSTeamBuildDefinition by ID' {
          Mock Invoke-RestMethod { return @{
+               id         = 0
+               name       = ''
                queue      = @{}
                _links     = @{}
                project    = @{}
                variables  = @{}
                repository = @{}
-               authoredBy = @{}
+               authoredBy = @{ id = 0; uniqueName = ''; displayName = ''; name = '' }
             }}
 
          It 'should return build definition' {
@@ -192,12 +196,14 @@ InModuleScope buildDefinitions {
       Context 'Get-VSTeamBuildDefinition by ID local auth' {
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod { return [PSCustomObject]@{
+               id         = 0
+               name       = ''
                queue      = [PSCustomObject]@{}
                _links     = [PSCustomObject]@{}
                project    = [PSCustomObject]@{}
                variables  = [PSCustomObject]@{}
                repository = [PSCustomObject]@{}
-               authoredBy = [PSCustomObject]@{}
+               authoredBy = [PSCustomObject]@{ id = 0; uniqueName = ''; displayName = ''; name = '' }
             }}
 
          It 'should return build definition' {
@@ -211,10 +217,12 @@ InModuleScope buildDefinitions {
 
       Context 'Get-VSTeamBuildDefinition with revision parameter' {
          Mock Invoke-RestMethod { return @{
+               id         = 0
+               name       = ''
                queue      = @{}
                _links     = @{}
                project    = @{}
-               authoredBy = @{}
+               authoredBy = @{ id = 0; uniqueName = ''; displayName = ''; name = '' }
             }}
 
          It 'should return build definitions by revision' {

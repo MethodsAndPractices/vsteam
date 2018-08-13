@@ -12,6 +12,18 @@
    - Builds
       - Build1
       - Build2
+   - Build Definitions
+      - Build Definition 1
+         - Process
+            - Phases
+               - Phase 1
+                  - Step 1a
+                  - Step 1b
+                  - Step 1c
+               - Phase 2
+                  - Step 2a
+                  - Step 2b
+      - Build Definition 2
    - Releases
       - Release1
          - Environment 1
@@ -441,7 +453,9 @@ class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
    [bool]$AlwaysRun = $true
    [int]$TimeoutInMinutes = 0
    [string]$Condition = $null
-   [PSCustomObject]$Inputs = $null
+   [object]$Inputs = $null
+   [object]$Task = $null
+   
    VSTeamBuildDefinitionProcessPhaseStep(
       [object]$obj,
       [int]$stepNo,
@@ -453,6 +467,9 @@ class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
       $this.TimeoutInMinutes = $obj.timeoutInMinutes
       $this.Condition = $obj.condition
       $this.Inputs = $obj.inputs
+      $this.Task = $obj.task
+
+      $this._internalObj = $obj
    }
 }
 
@@ -467,6 +484,8 @@ class VSTeamBuildDefinitionProcessPhase : VSTeamLeaf {
          $stepNo++
          $this.Steps += [VSTeamBuildDefinitionProcessPhaseStep]::new($step, $stepNo, $Projectname)
       }
+
+      $this._internalObj = $obj
    }
 }
 
@@ -479,6 +498,8 @@ class VSTeamBuildDefinitionProcess : VSTeamLeaf {
       foreach ($phase in $obj.phases) {
          $this.Phases += [VSTeamBuildDefinitionProcessPhase]::new($phase, $Projectname)
       }
+
+      $this._internalObj = $obj
    }
 }
 
