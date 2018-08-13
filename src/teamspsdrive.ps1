@@ -243,6 +243,7 @@ class VSTeamProject : VSTeamDirectory {
    [object[]] GetChildItem() {
       return @(
          [VSTeamBuilds]::new('Builds', $this.Name),
+         [VSTeamBuildDefinitions]::new('Build Definitions', $this.Name),
          [VSTeamReleases]::new('Releases', $this.Name),
          [VSTeamRepositories]::new('Repositories', $this.Name),
          [VSTeamTeams]::new('Teams', $this.Name)
