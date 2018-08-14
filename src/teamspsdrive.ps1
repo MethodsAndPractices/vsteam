@@ -452,6 +452,22 @@ class VSTeamBuildDefinitions : VSTeamDirectory {
 
 class VSTeamBuildDefinition : VSTeamLeaf {
    [VSTeamUser]$AuthoredBy = $null
+   [int]$Revision = -1
+   [datetime]$CreatedOn = [datetime]::MinValue
+   [string]$Path = $null
+
+   [object]$Options = $null
+   [object]$Queue = $null
+   [object]$Repository = $null
+   [object]$RetentionRules = $null
+   [object]$Tags = $null
+   [object]$Triggers = $null
+   [object]$Variables = $null
+
+   [string]$BuildNumberFormat = $null
+   [string]$JobAuthorizationScope = $null
+   [int]$JobTimeoutInMinutes = -1
+   [int]$JobCancelTimeoutInMinutes = -1
    [VSTeamBuildDefinitionProcess]$Process = $null
    
    VSTeamBuildDefinition (
@@ -459,6 +475,22 @@ class VSTeamBuildDefinition : VSTeamLeaf {
       [string]$Projectname
    ) : base($obj.name, $obj.id.ToString(), $Projectname) {
       $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
+      $this.Revision = $obj.revision
+      $this.CreatedOn = $obj.createdDate
+      $this.Path = $obj.path
+
+      $this.Options = $obj.options
+      $this.Queue = $obj.queue
+      $this.Repository = $obj.repository
+      $this.RetentionRules = $obj.retentionRules
+      $this.Tags = $obj.tags
+      $this.Triggers = $obj.triggers
+      $this.Variables = $obj.variables
+
+      $this.BuildNumberFormat = $obj.buildNumberFormat
+      $this.JobAuthorizationScope = $obj.jobAuthorizationScope
+      $this.JobTimeoutInMinutes = $obj.jobTimeoutInMinutes
+      $this.JobCancelTimeoutInMinutes = $obj.jobCancelTimeoutInMinutes
       
       if ($obj.PSObject.Properties.Match('process').count -gt 0) {
          $this.Process = [VSTeamBuildDefinitionProcess]::new($obj.process, $Projectname)
@@ -499,12 +531,21 @@ class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
 }
 
 class VSTeamBuildDefinitionProcessPhase : VSTeamDirectory {
+   [string]$Condition = $null
+   [object]$Target = $null
+   [string]$JobAuthorizationScope = $null
+   [int]$JobCancelTimeoutInMinutes = -1
    [VSTeamBuildDefinitionProcessPhaseStep[]] $Steps
 
    VSTeamBuildDefinitionProcessPhase(
       [object]$obj,
       [string]$Projectname
    ) : base($obj.name, $Projectname) {
+      $this.Condition = $obj.condition
+      $this.Target = $obj.target
+      $this.JobAuthorizationScope = $obj.jobAuthorizationScope
+      $this.JobCancelTimeoutInMinutes = $obj.jobCancelTimeoutInMinutes
+
       $stepNo = 0
       foreach ($step in $obj.steps) {
          $stepNo++
