@@ -542,11 +542,69 @@
          </ListControl>
       </View>
 
-      <!--Team.BuildDefinitionProcess.Table-->
+      <!--Team.BuildDefinitionYamlProcess.Table-->
       <View>
-         <Name>Team.BuildDefinitionProcess.Table</Name>
+         <Name>Team.BuildDefinitionYamlProcess.Table</Name>
          <ViewSelectedBy>
-            <TypeName>Team.BuildDefinitionProcess</TypeName>
+            <TypeName>Team.BuildDefinitionYamlProcess</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Filename</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>yamlFilename</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+       <!--Team.Provider.BuildDefinitionYamlProcess.Table-->
+      <View>
+         <Name>Team.Provider.BuildDefinitionYamlProcess.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.BuildDefinitionYamlProcess</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Filename</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>yamlFilename</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.BuildDefinitionPhasedProcess.Table-->
+      <View>
+         <Name>Team.BuildDefinitionPhasedProcess.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinitionPhasedProcess</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize/>

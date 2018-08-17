@@ -466,9 +466,8 @@ class VSTeamBuildDefinitions : VSTeamDirectory {
          # This has to be done here becuase this is the only point
          # we know if the object graph is for the provider or not.
          if ($item._internalObj.PSObject.Properties.Match('process').count -gt 0) {
-            $item.Process.AddTypeName('Team.Provider.BuildDefinitionProcess')
-
             if ($item.Process.type -eq 1) {
+               $item.Process.AddTypeName('Team.Provider.BuildDefinitionPhasedProcess')
                foreach ($phase in $item.Process.phases) {
                   $phase.AddTypeName('Team.Provider.BuildDefinitionProcessPhase')
 
@@ -476,6 +475,9 @@ class VSTeamBuildDefinitions : VSTeamDirectory {
                      $step.AddTypeName('Team.Provider.BuildDefinitionProcessPhaseStep')
                   }
                }
+            }
+            else {
+               $item.Process.AddTypeName('Team.Provider.BuildDefinitionProcess')
             }
          }
 
@@ -602,14 +604,17 @@ class VSTeamBuildDefinitionProcess : VSTeamDirectory {
          foreach ($phase in $obj.phases) {
             $this.Phases += [VSTeamBuildDefinitionProcessPhase]::new($phase, $Projectname)
          }
+
+         $this.AddTypeName('Team.BuildDefinitionPhasedProcess')
       }
       else {
          $this.yamlFilename = $obj.yamlFilename
+
+         $this.DisplayMode = '------'
+         $this.AddTypeName('Team.BuildDefinitionYamlProcess')
       }
 
       $this._internalObj = $obj
-
-      $this.AddTypeName('Team.BuildDefinitionProcess')
    }
 
    [string]ToString() {
