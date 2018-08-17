@@ -92,16 +92,26 @@ Describe 'VSTS Build Definition' {
          $buildDefinitions | Should Not be $null
       }
 
-      $hasPhases = $buildDefinitions.GetChildItem()[0]
+      $VSTeamBuildDefinitionWithPhases = $buildDefinitions.GetChildItem()[0]
 
       It 'Should parse phases' {
-         $hasPhases.Process.Phases.Length | Should Be 1
+         $VSTeamBuildDefinitionWithPhases.Process.Phases.Length | Should Be 1
       }
 
-      $phases = $hasPhases.GetChildItem()[0]
+      It 'Should show steps in tostring' {
+         $VSTeamBuildDefinitionWithPhases.Process.ToString() | Should Be 'Number of phases: 1'
+      }
+
+      $process = $VSTeamBuildDefinitionWithPhases.GetChildItem()[0]
+
+      It 'Should return process' {
+         $process | Should Not Be $null
+      }
+
+      $steps = $process.GetChildItem()
 
       It 'Should parse steps' {
-         $phases.Steps.Length | Should Be 9
+         $steps.Length | Should Be 9
       }
 
       $yamlBuild = $buildDefinitions.GetChildItem()[1]
@@ -289,7 +299,7 @@ Describe 'TeamsPSDrive' {
          $buildDefinitions | Should Not be $null
       }
 
-      # $hasPhases = $buildDefinitions.GetChildItem()[0]
+      # $VSTeamBuildDefinitionWithPhases = $buildDefinitions.GetChildItem()[0]
 
       # $yamlBuild = $buildDefinitions.GetChildItem()[1]
    }

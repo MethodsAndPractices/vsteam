@@ -29,13 +29,10 @@ function Get-VSTeamBuildDefinition {
    process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
-      $ApiVersion = [VSTeamVersions]::Build
-
-      Write-Verbose "API Version = $ApiVersion"
-
+      
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $ApiVersion `
+            $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $([VSTeamVersions]::Build) `
                -QueryString @{revision = $revision}
             
             Write-Verbose $resp
@@ -45,7 +42,7 @@ function Get-VSTeamBuildDefinition {
          }
       }
       else {
-         $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $ApiVersion `
+         $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $([VSTeamVersions]::Build) `
             -QueryString @{type = $type; name = $filter; includeAllProperties = $true}
          
          $objs = @()
