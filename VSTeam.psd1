@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '3.0.7'
+   ModuleVersion     = '4.0.0'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -204,7 +204,8 @@
       'Remove-VSTeamAgent',
       'Enable-VSTeamAgent',
       'Disable-VSTeamAgent',
-      'Update-VSTeamProfile')
+      'Update-VSTeamProfile',
+      'Get-VSTeamAPIVersion')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -308,7 +309,8 @@
       'Remove-Agent',
       'Enable-Agent',
       'Disable-Agent',
-      'Update-Profile')
+      'Update-Profile',
+      'Get-APIVersion')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

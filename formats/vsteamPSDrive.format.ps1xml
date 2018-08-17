@@ -47,7 +47,7 @@
 
       <!--Team.GitRef-->
       <!-- This is the format when used with functions -->
-       <View>
+      <View>
          <Name>RefTable</Name>
          <ViewSelectedBy>
             <TypeName>Team.GitRef</TypeName>
@@ -80,7 +80,7 @@
 
       <!--Team.Agent-->
       <!-- This is the format when used with functions -->
-       <View>
+      <View>
          <Name>Team.Agent.Table</Name>
          <ViewSelectedBy>
             <TypeName>Team.Agent</TypeName>
@@ -129,8 +129,8 @@
          </TableControl>
       </View>
 
-       <!--Team.Provider.Agent.Table-->
-       <View>
+      <!--Team.Provider.Agent.Table-->
+      <View>
          <Name>Team.Provider.Agent.Table</Name>
          <ViewSelectedBy>
             <TypeName>Team.Provider.Agent</TypeName>
@@ -278,7 +278,7 @@
          </ListControl>
       </View>
 
-       <View>
+      <View>
          <Name>StatusTable</Name>
          <ViewSelectedBy>
             <TypeName>Team.Provider.Release</TypeName>
@@ -479,6 +479,44 @@
          </TableControl>
       </View>
 
+      <!--Team.Provider.BuildDefinition.Table-->
+      <View>
+         <Name>Team.BuildDefinition.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.BuildDefinition</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
       <!--Team.BuildDefinition.List-->
       <View>
          <Name>Team.BuildDefinition.List</Name>
@@ -582,7 +620,45 @@
                         <PropertyName>Name</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>Steps</PropertyName>
+                        <PropertyName>StepCount</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Provider.BuildDefinitionProcessPhase.Table-->
+      <View>
+         <Name>Team.Provider.BuildDefinitionProcessPhase.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.BuildDefinitionProcessPhase</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Steps</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>StepCount</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>
@@ -637,6 +713,44 @@
                   <TableColumnItems>
                      <TableColumnItem>
                         <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Enabled</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Provider.BuildDefinitionProcessPhaseStep.Table-->
+      <View>
+         <Name>Team.Provider.BuildDefinitionProcessPhaseStep.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.BuildDefinitionProcessPhaseStep</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Enabled</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Name</PropertyName>
@@ -753,7 +867,6 @@
             </TableRowEntries>
          </TableControl>
       </View>
-
 
       <!--Team.Provider.RepositoryTable-->
       <View>

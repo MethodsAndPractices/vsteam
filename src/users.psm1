@@ -17,7 +17,7 @@ function _applyTypesToUser {
 }
 
 function _supportsMemberEntitlementManagement {
-    if (-not $VSTeamVersionTable.MemberEntitlementManagement) {
+    if (-not [VSTeamVersions]::MemberEntitlementManagement) {
         throw 'This account does not support Member Entitlement.'
     } 
 }
@@ -48,7 +48,7 @@ function Get-VSTeamUser {
             foreach ($item in $Id) {
                 # Build the url to return the single build
                 # Call the REST API
-                $resp = _callAPI -SubDomain 'vsaex' -Version $VSTeamVersionTable.MemberEntitlementManagement -Resource 'userentitlements' -id $item
+                $resp = _callAPI -SubDomain 'vsaex' -Version $([VSTeamVersions]::MemberEntitlementManagement) -Resource 'userentitlements' -id $item
             
                 _applyTypesToUser -item $resp
 
@@ -59,7 +59,7 @@ function Get-VSTeamUser {
             # Build the url to list the teams
             # $listurl = _buildUserURL
             $listurl = _buildRequestURI -SubDomain 'vsaex' -Resource 'userentitlements' `
-                -Version $VSTeamVersionTable.MemberEntitlementManagement
+                -Version $([VSTeamVersions]::MemberEntitlementManagement)
             
             $listurl += _appendQueryString -name "top" -value $top -retainZero
             $listurl += _appendQueryString -name "skip" -value $skip -retainZero
@@ -122,7 +122,7 @@ function Add-VSTeamUser {
         $body = $obj | ConvertTo-Json
 
         # Call the REST API
-        _callAPI  -Method Post -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Version $VSTeamVersionTable.MemberEntitlementManagement -ContentType "application/json"
+        _callAPI  -Method Post -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Version $([VSTeamVersions]::MemberEntitlementManagement) -ContentType "application/json"
     }
 }
 
@@ -159,7 +159,7 @@ function Remove-VSTeamUser {
 
         if ($Force -or $PSCmdlet.ShouldProcess("$($user.userName) ($($user.email))", "Delete user")) {
             # Call the REST API
-            _callAPI -Method Delete -SubDomain 'vsaex' -Resource 'userentitlements' -Id $Id -Version $VSTeamVersionTable.MemberEntitlementManagement | Out-Null
+            _callAPI -Method Delete -SubDomain 'vsaex' -Resource 'userentitlements' -Id $Id -Version $([VSTeamVersions]::MemberEntitlementManagement) | Out-Null
 
             Write-Output "Deleted user $($user.userName) ($($user.email))"
         }

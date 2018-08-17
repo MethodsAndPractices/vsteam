@@ -34,7 +34,7 @@ Describe 'Team' -Tag 'integration' {
 
    Context 'Get-VSTeamInfo' {
       It 'should return account and default project' {
-         $VSTeamVersionTable.Account = "mydemos"
+         [VSTeamVersions]::Account = "mydemos"
          $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
          $info = Get-VSTeamInfo

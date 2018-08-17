@@ -21,7 +21,7 @@ function Get-VSTeamGitRef {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       try {
-         $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/refs" -Area git -Resource repositories -Version $VSTeamVersionTable.Git
+         $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/refs" -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
 
          $obj = @()
 

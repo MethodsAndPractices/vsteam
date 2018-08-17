@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope users {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
    
    Describe "Users TFS Errors" {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -30,10 +30,10 @@ InModuleScope users {
          $Uri -like "*_apis/projects*" 
       }
 
-      . "$PSScriptRoot\mockProjectDynamicParamMandatoryFalse.ps1"
+      . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
 
       # Must be defined or call will throw error
-      $VSTeamVersionTable.MemberEntitlementManagement = '4.1-preview'
+      [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
 
       Context 'Get-VSTeamUser no parameters' {  
          Mock  _callAPI { return [PSCustomObject]@{ 
@@ -47,7 +47,7 @@ InModuleScope users {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0"
+               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0"
             }
          }
       }
@@ -88,7 +88,7 @@ InModuleScope users {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/?api-version=$($VSTeamVersionTable.MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
+               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
             }
          }
       }
@@ -99,7 +99,7 @@ InModuleScope users {
             $subDomain -eq 'vsaex' -and
             $id -eq '00000000-0000-0000-0000-000000000000' -and
             $resource -eq 'userentitlements' -and
-            $version -eq $VSTeamVersionTable.MemberEntitlementManagement
+            $version -eq [VSTeamVersions]::MemberEntitlementManagement
          }
 
          Mock _callAPI {
@@ -119,7 +119,7 @@ InModuleScope users {
                $id -eq '00000000-0000-0000-0000-000000000000' -and
                $resource -eq 'userentitlements' -and
                $method -eq 'Delete' -and
-               $version -eq $VSTeamVersionTable.MemberEntitlementManagement
+               $version -eq [VSTeamVersions]::MemberEntitlementManagement
             }
          }
       }
@@ -130,7 +130,7 @@ InModuleScope users {
             $subDomain -eq 'vsaex' -and
             $id -eq '00000000-0000-0000-0000-000000000000' -and
             $resource -eq 'userentitlements' -and
-            $version -eq $VSTeamVersionTable.MemberEntitlementManagement
+            $version -eq [VSTeamVersions]::MemberEntitlementManagement
          }
 
          Mock _callAPI {
@@ -153,7 +153,7 @@ InModuleScope users {
                $subDomain -eq 'vsaex' -and
                $id -eq '00000000-0000-0000-0000-000000000000' -and
                $resource -eq 'userentitlements' -and
-               $version -eq $VSTeamVersionTable.MemberEntitlementManagement
+               $version -eq [VSTeamVersions]::MemberEntitlementManagement
             }
          }
       }

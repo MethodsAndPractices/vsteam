@@ -70,7 +70,7 @@ function Get-VSTeamProject {
 
          # Call the REST API
          $resp = _callAPI -Area 'projects' -id $ProjectName `
-            -Version $VSTeamVersionTable.Core `
+            -Version $([VSTeamVersions]::Core) `
             -QueryString $queryString
 
          # Storing the object before you return it cleaned up the pipeline.
@@ -84,7 +84,7 @@ function Get-VSTeamProject {
          try {
             # Call the REST API
             $resp = _callAPI -Area 'projects' `
-               -Version $VSTeamVersionTable.Core `
+               -Version $([VSTeamVersions]::Core) `
                -QueryString @{
                stateFilter = $stateFilter
                '$top'      = $top
@@ -131,7 +131,7 @@ function Show-VSTeamProject {
          $ProjectName = $id
       }
 
-      Show-Browser "$($VSTeamVersionTable.Account)/$ProjectName"
+      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName"
    }
 }
 
@@ -189,7 +189,7 @@ function Update-VSTeamProject {
 
          # Call the REST API
          $resp = _callAPI -Area 'projects' -id $id `
-            -Method Patch -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Core
+            -Method Patch -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Core)
 
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
@@ -241,7 +241,7 @@ function Add-VSTeamProject {
    try {
       # Call the REST API
       $resp = _callAPI -Area 'projects' `
-         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Core
+         -Method Post -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Core)
 
       _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
@@ -272,7 +272,7 @@ function Remove-VSTeamProject {
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API
          $resp = _callAPI -Area 'projects' -Id (Get-VSTeamProject $ProjectName).id `
-            -Method Delete -Version $VSTeamVersionTable.Core
+            -Method Delete -Version $([VSTeamVersions]::Core)
 
          _trackProjectProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
@@ -352,7 +352,7 @@ function Clear-VSTeamDefaultProject {
          [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
       }
 
-      $VSTeamVersionTable.DefaultProject = ''
+      [VSTeamVersions]::DefaultProject = ''
       $Global:PSDefaultParameterValues.Remove("*:projectName")
 
       Write-Output "Removed default project"
@@ -421,7 +421,7 @@ function Set-VSTeamDefaultProject {
             # You always have to set at the process level or they will Not
             # be seen in your current session.
             $env:TEAM_PROJECT = $Project
-            $VSTeamVersionTable.DefaultProject = $Project
+            [VSTeamVersions]::DefaultProject = $Project
 
             [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
          }

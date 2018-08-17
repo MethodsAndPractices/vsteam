@@ -37,23 +37,24 @@ function Get-VSTeamApproval {
          $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseIdsFilter -join ',')}
 
          # The support in TFS and VSTS are not the same.
-         if (_isVSTS $VSTeamVersionTable.Account) {
-            if ($AssignedToFilter -ne $null -and $AssignedToFilter -ne "") {
+         $instance = $([VSTeamVersions]::Account)
+         if (_isVSTS $instance) {
+            if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false) {
                $queryString.includeMyGroupApprovals = 'true';
             }
          }
          else {
             # For TFS all three parameters must be set before you can add
             # includeMyGroupApprovals.
-            if ($AssignedToFilter -ne $null -and $AssignedToFilter -ne "" -and
-               $ReleaseIdsFilter -ne $null -and $ReleaseIdsFilter -ne "" -and
+            if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false -and
+                [string]::IsNullOrEmpty($ReleaseIdsFilter) -eq $false -and
                $StatusFilter -eq 'Pending') {
                $queryString.includeMyGroupApprovals = 'true';
             }
          }
 
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $VSTeamVersionTable.Release -QueryString $queryString
+         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $([VSTeamVersions]::Release) -QueryString $queryString
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -86,7 +87,7 @@ function Show-VSTeamApproval {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      Show-Browser "$($VSTeamVersionTable.Account)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
+      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
    }
 }
 
@@ -128,7 +129,7 @@ function Set-VSTeamApproval {
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource approvals `
-                  -Id $item -Version $VSTeamVersionTable.Release -body $body -ContentType 'application/json' | Out-Null
+                  -Id $item -Version $([VSTeamVersions]::Release) -body $body -ContentType 'application/json' | Out-Null
                
                Write-Output "Approval $item status changed to $status"
             }

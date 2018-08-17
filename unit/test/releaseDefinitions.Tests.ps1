@@ -4,8 +4,8 @@ Set-StrictMode -Version Latest
 Add-Type -AssemblyName 'System.Web'
 
 InModuleScope releaseDefinitions {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
-   $VSTeamVersionTable.Release = '1.0-unittest'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Release = '1.0-unittest'
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
@@ -28,7 +28,7 @@ InModuleScope releaseDefinitions {
          $Uri -like "*_apis/projects*" 
       }
    
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Show-VSTeamReleaseDefinition by ID' {
          Mock Show-Browser { }
@@ -52,7 +52,7 @@ InModuleScope releaseDefinitions {
             Get-VSTeamReleaseDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -67,7 +67,7 @@ InModuleScope releaseDefinitions {
             Get-VSTeamReleaseDefinition -projectName project -expand environments
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$($VSTeamVersionTable.Release)&`$expand=environments"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
             }
          }
       }
@@ -83,7 +83,7 @@ InModuleScope releaseDefinitions {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'Releasedef.json' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -107,7 +107,7 @@ InModuleScope releaseDefinitions {
             Get-VSTeamReleaseDefinition -projectName project -id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/15?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/15?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -120,15 +120,15 @@ InModuleScope releaseDefinitions {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/2?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/2?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
 
       # Make sure these test run last as the need differnt 
-      # $VSTeamVersionTable.Account values
+      # [VSTeamVersions]::Account values
       Context 'Get-VSTeamReleaseDefinition with no account' {
-         $VSTeamVersionTable.Account = $null
+         [VSTeamVersions]::Account = $null
 
          It 'should return Release definitions' {
             { Get-VSTeamReleaseDefinition -projectName project } | Should Throw
@@ -138,7 +138,7 @@ InModuleScope releaseDefinitions {
       Context 'Add-VSTeamReleaseDefinition on TFS local Auth' {
          Mock Invoke-RestMethod { return $results }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
          it 'Should add Release' {
             Add-VSTeamReleaseDefinition -projectName project -inFile 'Releasedef.json'
@@ -146,7 +146,7 @@ InModuleScope releaseDefinitions {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'Releasedef.json' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions/?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -154,14 +154,14 @@ InModuleScope releaseDefinitions {
       Context 'Remove-VSTeamReleaseDefinition on TFS local Auth' {
          Mock Invoke-RestMethod { return $results }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
          Remove-VSTeamReleaseDefinition -projectName project -id 2 -Force
          
          It 'should delete Release definition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and 
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions/2?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions/2?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }

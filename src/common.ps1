@@ -6,7 +6,7 @@ function _testAdministrator {
 }
 
 function _hasAccount {
-   if (-not $VSTeamVersionTable.Account) {
+   if (-not [VSTeamVersions]::Account) {
       throw 'You must call Add-VSTeamAccount before calling any other functions in this module.'
    }
 }
@@ -144,11 +144,11 @@ function _addSubDomain {
       $subDomain
    )
 
-   $instance = $VSTeamVersionTable.Account
+   $instance = [VSTeamVersions]::Account
 
    # For VSTS Entitlements is under .vsaex
-   if ($subDomain -and $VSTeamVersionTable.Account.ToLower().Contains('visualstudio.com')) {
-      $instance = $VSTeamVersionTable.Account.ToLower().Replace('visualstudio.com', "$subDomain.visualstudio.com")
+   if ($subDomain -and [VSTeamVersions]::Account.ToLower().Contains('visualstudio.com')) {
+      $instance = [VSTeamVersions]::Account.ToLower().Replace('visualstudio.com', "$subDomain.visualstudio.com")
    }
 
    return $instance
@@ -182,7 +182,7 @@ function _getUserAgent {
 
    $os = Get-OperatingSystem
 
-   $result = "Team Module/$($VSTeamVersionTable.ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
+   $result = "Team Module/$([VSTeamVersions]::ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
 
    Write-Verbose $result
 
@@ -190,7 +190,7 @@ function _getUserAgent {
 }
 
 function _useWindowsAuthenticationOnPremise {
-   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($VSTeamVersionTable.Account -like "*visualstudio.com")
+   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ([VSTeamVersions]::Account -like "*visualstudio.com")
 }
 
 function _useBearerToken {
@@ -203,15 +203,15 @@ function _getWorkItemTypes {
       [string] $ProjectName
    )
 
-   if (-not $VSTeamVersionTable.Account) {
+   if (-not [VSTeamVersions]::Account) {
       Write-Output @()
       return
    }
 
    $area = "/wit"
    $resource = "/workitemtypes"
-   $instance = $VSTeamVersionTable.Account
-   $version = $VSTeamVersionTable.Core
+   $instance = [VSTeamVersions]::Account
+   $version = [VSTeamVersions]::Core
 
    # Build the url to list the projects
    # You CANNOT use _buildRequestURI here or you will end up
@@ -237,14 +237,14 @@ function _getWorkItemTypes {
 }
 
 function _getProjects {
-   if (-not $VSTeamVersionTable.Account) {
+   if (-not [VSTeamVersions]::Account) {
       Write-Output @()
       return
    }
 
    $resource = "/projects"
-   $instance = $VSTeamVersionTable.Account
-   $version = $VSTeamVersionTable.Core
+   $instance = [VSTeamVersions]::Account
+   $version = [VSTeamVersions]::Core
 
    # Build the url to list the projects
    # You CANNOT use _buildRequestURI here or you will end up

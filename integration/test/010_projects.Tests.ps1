@@ -396,13 +396,13 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Set-VSTeamAPIVersion to TFS2018' {
          Set-VSTeamAPIVersion TFS2018
 
-         $VSTeamVersionTable.Version | Should Be 'TFS2018'
+         [VSTeamVersions]::Version | Should Be 'TFS2018'
       }
 
       It 'Set-VSTeamAPIVersion to TFS2017' {
          Set-VSTeamAPIVersion TFS2017
 
-         $VSTeamVersionTable.Version | Should Be 'TFS2017'
+         [VSTeamVersions]::Version | Should Be 'TFS2017'
       }
 
       It 'Clear-VSTeamDefaultProject should clear project' {
