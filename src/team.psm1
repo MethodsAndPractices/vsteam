@@ -42,7 +42,7 @@ function _setEnvironmentVariables {
    $env:TEAM_ACCT = $Acct
    $env:TEAM_TOKEN = $BearerToken
 
-   $VSTeamVersionTable.Account = $Acct
+   [VSTeamVersions]::Account = $Acct
 
    # This is so it can be loaded by default in the next session
    if ($Level -ne "Process") {
@@ -59,7 +59,7 @@ function _clearEnvironmentVariables {
    )
 
    $env:TEAM_PROJECT = $null
-   $VSTeamVersionTable.DefaultProject = ''
+   [VSTeamVersions]::DefaultProject = ''
    $Global:PSDefaultParameterValues.Remove("*:projectName")
 
    # This is so it can be loaded by default in the next session
@@ -72,9 +72,9 @@ function _clearEnvironmentVariables {
 
 function Get-VSTeamInfo {
    return @{
-      Account        = $VSTeamVersionTable.Account
-      Version        = $VSTeamVersionTable.Version
-      ModuleVersion  = $VSTeamVersionTable.ModuleVersion
+      Account        = [VSTeamVersions]::Account
+      Version        = [VSTeamVersions]::Version
+      ModuleVersion  = [VSTeamVersions]::ModuleVersion
       DefaultProject = $Global:PSDefaultParameterValues['*:projectName']
    }
 }
@@ -86,7 +86,7 @@ function Show-VSTeam {
    process {
       _hasAccount
 
-      Show-Browser "$($VSTeamVersionTable.Account)"
+      Show-Browser "$([VSTeamVersions]::Account)"
    }
 }
 
@@ -377,6 +377,23 @@ function Remove-VSTeamAccount {
    }
 }
 
+function Get-VSTeamAPIVersion {
+   [CmdletBinding()]
+   param()
+
+   return @{
+      Version                     = $([VSTeamVersions]::Version)
+      Git                         = $([VSTeamVersions]::Git)
+      Core                        = $([VSTeamVersions]::Core)
+      Build                       = $([VSTeamVersions]::Build)
+      Release                     = $([VSTeamVersions]::Release)
+      DistributedTask             = $([VSTeamVersions]::DistributedTask)
+      Tfvc                        = $([VSTeamVersions]::Tfvc)
+      MemberEntitlementManagement = $([VSTeamVersions]::MemberEntitlementManagement)
+      ServiceFabricEndpoint       = $([VSTeamVersions]::ServiceFabricEndpoint)
+   }
+}
+
 function Set-VSTeamAPIVersion {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
@@ -388,50 +405,50 @@ function Set-VSTeamAPIVersion {
    if ($Force -or $pscmdlet.ShouldProcess($version, "Set-VSTeamAPIVersion")) {
       switch ($version) {
          'TFS2018' {
-            $VSTeamVersionTable.Version = 'TFS2018'
-            $VSTeamVersionTable.Git = '3.2'
-            $VSTeamVersionTable.Core = '3.2'
-            $VSTeamVersionTable.Build = '3.2'
-            $VSTeamVersionTable.Release = '4.0-preview'
-            $VSTeamVersionTable.DistributedTask = '4.0-preview'
-            $VSTeamVersionTable.Tfvc = '3.2'
-            $VSTeamVersionTable.MemberEntitlementManagement = ''
-            $VSTeamVersionTable.ServiceFabricEndpoint = '3.2'
+            [VSTeamVersions]::Version = 'TFS2018'
+            [VSTeamVersions]::Git = '3.2'
+            [VSTeamVersions]::Core = '3.2'
+            [VSTeamVersions]::Build = '3.2'
+            [VSTeamVersions]::Release = '4.0-preview'
+            [VSTeamVersions]::DistributedTask = '4.0-preview'
+            [VSTeamVersions]::Tfvc = '3.2'
+            [VSTeamVersions]::MemberEntitlementManagement = ''
+            [VSTeamVersions]::ServiceFabricEndpoint = '3.2'
          }
          'VSTS' {
-            $VSTeamVersionTable.Version = 'VSTS'
-            $VSTeamVersionTable.Git = '4.0'
-            $VSTeamVersionTable.Core = '4.0'
-            $VSTeamVersionTable.Build = '4.0'
-            $VSTeamVersionTable.Release = '4.1-preview'
-            $VSTeamVersionTable.DistributedTask = '4.1-preview'
-            $VSTeamVersionTable.Tfvc = '4.0'
-            $VSTeamVersionTable.MemberEntitlementManagement = '4.1-preview'
-            $VSTeamVersionTable.ServiceFabricEndpoint = '4.1-preview'
+            [VSTeamVersions]::Version = 'VSTS'
+            [VSTeamVersions]::Git = '4.0'
+            [VSTeamVersions]::Core = '4.0'
+            [VSTeamVersions]::Build = '4.0'
+            [VSTeamVersions]::Release = '4.1-preview'
+            [VSTeamVersions]::DistributedTask = '4.1-preview'
+            [VSTeamVersions]::Tfvc = '4.0'
+            [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
+            [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'
          }
          Default {
-            $VSTeamVersionTable.Version = 'TFS2017'
-            $VSTeamVersionTable.Git = '3.0'
-            $VSTeamVersionTable.Core = '3.0'
-            $VSTeamVersionTable.Build = '3.0'
-            $VSTeamVersionTable.Release = '3.0-preview'
-            $VSTeamVersionTable.DistributedTask = '3.0-preview'
-            $VSTeamVersionTable.Tfvc = '3.0'
-            $VSTeamVersionTable.MemberEntitlementManagement = ''
-            $VSTeamVersionTable.ServiceFabricEndpoint = ''
+            [VSTeamVersions]::Version = 'TFS2017'
+            [VSTeamVersions]::Git = '3.0'
+            [VSTeamVersions]::Core = '3.0'
+            [VSTeamVersions]::Build = '3.0'
+            [VSTeamVersions]::Release = '3.0-preview'
+            [VSTeamVersions]::DistributedTask = '3.0-preview'
+            [VSTeamVersions]::Tfvc = '3.0'
+            [VSTeamVersions]::MemberEntitlementManagement = ''
+            [VSTeamVersions]::ServiceFabricEndpoint = ''
          }
       }
    }
 
-   Write-Verbose $VSTeamVersionTable.Version
-   Write-Verbose "Git: $($VSTeamVersionTable.Git)"
-   Write-Verbose "Core: $($VSTeamVersionTable.Core)"
-   Write-Verbose "Build: $($VSTeamVersionTable.Build)"
-   Write-Verbose "Release: $($VSTeamVersionTable.Release)"
-   Write-Verbose "DistributedTask: $($VSTeamVersionTable.DistributedTask)"
-   Write-Verbose "Tfvc: $($VSTeamVersionTable.Tfvc)"
-   Write-Verbose "MemberEntitlementManagement: $($VSTeamVersionTable.MemberEntitlementManagement)"
-   Write-Verbose "ServiceFabricEndpoint: $($VSTeamVersionTable.ServiceFabricEndpoint)"
+   Write-Verbose [VSTeamVersions]::Version
+   Write-Verbose "Git: $([VSTeamVersions]::Git)"
+   Write-Verbose "Core: $([VSTeamVersions]::Core)"
+   Write-Verbose "Build: $([VSTeamVersions]::Build)"
+   Write-Verbose "Release: $([VSTeamVersions]::Release)"
+   Write-Verbose "DistributedTask: $([VSTeamVersions]::DistributedTask)"
+   Write-Verbose "Tfvc: $([VSTeamVersions]::Tfvc)"
+   Write-Verbose "MemberEntitlementManagement: $([VSTeamVersions]::MemberEntitlementManagement)"
+   Write-Verbose "ServiceFabricEndpoint: $([VSTeamVersions]::ServiceFabricEndpoint)"
 }
 
 function Invoke-VSTeamRequest {
@@ -473,20 +490,8 @@ function Invoke-VSTeamRequest {
    }
 }
 
-$Global:VSTeamVersionTable = @{
-   'Account'                     = $env:TEAM_ACCT
-   'DefaultProject'              = $env:TEAM_PROJECT
-   'Version'                     = 'TFS2017'
-   'Build'                       = '3.0'
-   'Release'                     = '3.0-preview'
-   'Core'                        = '3.0'
-   'Git'                         = '3.0'
-   'DistributedTask'             = '3.0-preview'
-   'Tfvc'                        = '3.0'
-   'MemberEntitlementManagement' = ''
-   'ServiceFabricEndpoint'       = ''
-   'ModuleVersion'               = _getModuleVersion
-}
+# Set the module version
+[VSTeamVersions]::ModuleVersion = _getModuleVersion
 
 # Dynamic parameters get called alot. This can cause
 # multiple calls to TFS/VSTS for a single function call
@@ -505,7 +510,8 @@ Set-Alias Remove-TeamAccount Remove-VSTeamAccount
 Set-Alias Get-TeamOption Get-VSTeamOption
 Set-Alias Get-TeamResourceArea Get-VSTeamResourceArea
 Set-Alias Set-APIVersion Set-VSTeamAPIVersion
+Set-Alias Get-APIVersion Get-VSTeamAPIVersion
 
 Export-ModuleMember `
-   -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion, Invoke-VSTeamRequest `
-   -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Get-TeamResourceArea, Set-APIVersion, gti, ivr, ata
+   -Function Get-VSTeamInfo, Add-VSTeamAccount, Remove-VSTeamAccount, Get-VSTeamOption, Show-VSTeam, Get-VSTeamResourceArea, Set-VSTeamAPIVersion, Invoke-VSTeamRequest, Get-VSTeamAPIVersion `
+   -Alias Get-TeamInfo, Add-TeamAccount, Remove-TeamAccount, Get-TeamOption, Get-TeamResourceArea, Set-APIVersion, gti, ivr, ata, Get-APIVersion

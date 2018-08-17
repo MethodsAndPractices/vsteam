@@ -71,7 +71,7 @@ function Get-VSTeamRelease {
 
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $VSTeamVersionTable.Release
+            $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $([VSTeamVersions]::Release)
             
             # Apply a Type Name so we can use custom format view and custom type extensions
             _applyTypesToRelease -item $resp
@@ -81,10 +81,10 @@ function Get-VSTeamRelease {
       }
       else {
          if ($ProjectName) {
-            $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $VSTeamVersionTable.Release
+            $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $([VSTeamVersions]::Release)
          }
          else {
-            $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $VSTeamVersionTable.Release
+            $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $([VSTeamVersions]::Release)
          }
 
          $QueryString = @{
@@ -135,7 +135,7 @@ function Show-VSTeamRelease {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url
-      Show-Browser "$($VSTeamVersionTable.Account)/$ProjectName/_release?releaseId=$id"
+      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_release?releaseId=$id"
    }
 }
 
@@ -232,7 +232,7 @@ function Add-VSTeamRelease {
          try {
             Write-Debug 'Add-VSTeamRelease Call the REST API'
             $resp = _callAPI -SubDomain 'vsrm' -ProjectName $ProjectName -Area 'release' -Resource 'releases' `
-               -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Release
+               -Method Post -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Release)
 
             _applyTypesToRelease $resp
 
@@ -271,7 +271,7 @@ function Remove-VSTeamRelease {
 
             try {
                # Call the REST API
-               _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item -Version $VSTeamVersionTable.Release | Out-Null
+               _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item -Version $([VSTeamVersions]::Release) | Out-Null
 
                Write-Output "Deleted release $item"
             }
@@ -315,7 +315,7 @@ function Set-VSTeamReleaseStatus {
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -Area release -Resource releases -projectName $ProjectName -id $item `
-                  -body $body -ContentType 'application/json' -Version $VSTeamVersionTable.Release | Out-Null
+                  -body $body -ContentType 'application/json' -Version $([VSTeamVersions]::Release) | Out-Null
 
                Write-Output "Release $item status changed to $status"
             }
@@ -369,7 +369,7 @@ function Set-VSTeamEnvironmentStatus {
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -Area release -Resource "releases/$ReleaseId/environments" -projectName $ProjectName -id $item `
-                  -body $body -ContentType 'application/json' -Version $VSTeamVersionTable.Release | Out-Null
+                  -body $body -ContentType 'application/json' -Version $([VSTeamVersions]::Release) | Out-Null
 
                Write-Output "Environment $item status changed to $status"
             }

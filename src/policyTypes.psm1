@@ -30,7 +30,7 @@ function Get-VSTeamPolicyType {
       if ($id) {
          foreach ($item in $id) {
             try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource types -Version $VSTeamVersionTable.Git
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource types -Version $([VSTeamVersions]::Git)
                
                _applyTypesToPolicyType -item $resp
                
@@ -43,7 +43,7 @@ function Get-VSTeamPolicyType {
       }
       else {
          try {
-            $resp = _callAPI -ProjectName $ProjectName -Area policy -Resource types -Version $VSTeamVersionTable.Git
+            $resp = _callAPI -ProjectName $ProjectName -Area policy -Resource types -Version $([VSTeamVersions]::Git)
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {

@@ -30,7 +30,7 @@ Describe 'Common' {
 
    Context '_getUserAgent on Mac' {
       Mock Get-OperatingSystem { return 'macOS' }
-      $VSTeamVersionTable.ModuleVersion = '0.0.0'
+      [VSTeamVersions]::ModuleVersion = '0.0.0'
 
       $actual = _getUserAgent
 
@@ -49,7 +49,7 @@ Describe 'Common' {
 
    Context '_getUserAgent on Linux' {
       Mock Get-OperatingSystem { return 'Linux' }
-      $VSTeamVersionTable.ModuleVersion = '0.0.0'
+      [VSTeamVersions]::ModuleVersion = '0.0.0'
 
       $actual = _getUserAgent
 
@@ -75,7 +75,7 @@ Describe 'Common' {
    }
 
    Context '_getWorkItemTypes' {
-      $VSTeamVersionTable.Account = $null
+      [VSTeamVersions]::Account = $null
 
       It 'should return empty array' {
          _getWorkItemTypes -ProjectName test | Should be @()

@@ -1,8 +1,8 @@
 Set-StrictMode -Version Latest
 
 InModuleScope pools {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
-   $VSTeamVersionTable.DistributedTask = '1.0-unitTest'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::DistributedTask = '1.0-unitTest'
 
    $hostedPool = [PSCustomObject]@{
       owner     = [PSCustomObject]@{
@@ -55,7 +55,7 @@ InModuleScope pools {
             Get-VSTeamPool
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools/?api-version=$($VSTeamVersionTable.DistributedTask)"
+               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools/?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -67,7 +67,7 @@ InModuleScope pools {
             Get-VSTeamPool -id '1'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools/1?api-version=$($VSTeamVersionTable.DistributedTask)"
+               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/pools/1?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }

@@ -91,7 +91,7 @@ function Get-VSTeamBuild {
          foreach ($item in $id) {
             # Build the url to return the single build
             $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' -id $item `
-               -Version $VSTeamVersionTable.Build
+               -Version $([VSTeamVersions]::Build)
             
             _applyTypesToBuild -item $resp
 
@@ -101,7 +101,7 @@ function Get-VSTeamBuild {
       else {
          # Build the url to list the builds
          $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' `
-            -Version $VSTeamVersionTable.Build `
+            -Version $([VSTeamVersions]::Build) `
             -Querystring @{
             '$top'                   = $top
             'type'                   = $type
@@ -141,7 +141,7 @@ function Show-VSTeamBuild {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      Show-Browser "$($VSTeamVersionTable.Account)/$ProjectName/_build/index?buildId=$Id"
+      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_build/index?buildId=$Id"
    }
 }
 
@@ -167,7 +167,7 @@ function Get-VSTeamBuildLog {
             # Build the url to return the logs of the build
             # Call the REST API to get the number of logs for the build
             $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$item/logs" `
-               -Version $VSTeamVersionTable.Build
+               -Version $([VSTeamVersions]::Build)
 
             $fullLogIndex = $($resp.count - 1)
          }
@@ -179,7 +179,7 @@ function Get-VSTeamBuildLog {
          # Build the url to return the single build
          # Call the REST API to get the number of logs for the build
          $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$item/logs" -id $fullLogIndex `
-            -Version $VSTeamVersionTable.Build
+            -Version $([VSTeamVersions]::Build)
 
          Write-Output $resp
       }     
@@ -275,7 +275,7 @@ function Add-VSTeamBuild {
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' `
          -Method Post -ContentType 'application/json' -Body ($body | ConvertTo-Json) `
-         -Version $VSTeamVersionTable.Build
+         -Version $([VSTeamVersions]::Build)
       
       _applyTypesToBuild -item $resp
 
@@ -305,7 +305,7 @@ function Remove-VSTeamBuild {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
                _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -id $item `
-                  -Method Delete  -Version $VSTeamVersionTable.Build | Out-Null
+                  -Method Delete  -Version $([VSTeamVersions]::Build) | Out-Null
                
                Write-Output "Deleted build $item"
             }
@@ -362,7 +362,7 @@ function Update-VSTeamBuild {
 
          # Call the REST API
          _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -Id $Id `
-            -Method Patch -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.Build | Out-Null
+            -Method Patch -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Build) | Out-Null
       }
    }
 }
@@ -383,7 +383,7 @@ function Get-VSTeamBuildTag {
 
       # Call the REST API
       $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
-         -Version $VSTeamVersionTable.Build
+         -Version $([VSTeamVersions]::Build)
 
       return $resp.value
    }
@@ -414,7 +414,7 @@ function Add-VSTeamBuildTag {
             foreach ($tag in $tags) {
                # Call the REST API
                _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
-                  -Method Put -Querystring @{tag = $tag} -Version $VSTeamVersionTable.Build | Out-Null
+                  -Method Put -Querystring @{tag = $tag} -Version $([VSTeamVersions]::Build) | Out-Null
             }
          }
       }
@@ -446,7 +446,7 @@ function Remove-VSTeamBuildTag {
             foreach ($tag in $tags) {
                # Call the REST API
                _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
-                  -Method Delete -Querystring @{tag = $tag} -Version $VSTeamVersionTable.Build | Out-Null
+                  -Method Delete -Querystring @{tag = $tag} -Version $([VSTeamVersions]::Build) | Out-Null
             }
          }
       }
@@ -468,7 +468,7 @@ function Get-VSTeamBuildArtifact {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/artifacts" `
-         -Version $VSTeamVersionTable.Build
+         -Version $([VSTeamVersions]::Build)
 
       foreach ($item in $resp.value) {
          _applyArtifactTypes -item $item

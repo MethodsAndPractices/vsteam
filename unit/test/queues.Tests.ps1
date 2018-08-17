@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope queues {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    Describe 'Queues' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -9,7 +9,7 @@ InModuleScope queues {
          $Uri -like "*_apis/projects*" 
       }
    
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamQueue with no parameters' {
          Mock Invoke-RestMethod { return @{
@@ -22,7 +22,7 @@ InModuleScope queues {
             Get-VSTeamQueue -ProjectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/?api-version=$($VSTeamVersionTable.DistributedTask)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -38,7 +38,7 @@ InModuleScope queues {
             Get-VSTeamQueue -projectName project -queueName 'Hosted'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/?api-version=$($VSTeamVersionTable.DistributedTask)&queueName=Hosted"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)&queueName=Hosted"
             }
          }
       }
@@ -54,7 +54,7 @@ InModuleScope queues {
             Get-VSTeamQueue -projectName project -actionFilter 'None'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/?api-version=$($VSTeamVersionTable.DistributedTask)&actionFilter=None"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)&actionFilter=None"
             }
          }
       }
@@ -78,11 +78,11 @@ InModuleScope queues {
             # matches I have to search for the portions I expect but can't
             # assume the order. 
             # The general string should look like this:
-            # "https://test.visualstudio.com/project/_apis/distributedtask/queues/?api-version=$($VSTeamVersionTable.DistributedTask)&actionFilter=None&queueName=Hosted"
+            # "https://test.visualstudio.com/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)&actionFilter=None&queueName=Hosted"
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://test.visualstudio.com/project/_apis/distributedtask/queues/*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.DistributedTask)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
                $Uri -like "*actionFilter=None*" -and
                $Uri -like "*queueName=Hosted*"
             }
@@ -98,7 +98,7 @@ InModuleScope queues {
             Get-VSTeamQueue -projectName project -queueId 3
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/3?api-version=$($VSTeamVersionTable.DistributedTask)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/queues/3?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }

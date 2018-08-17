@@ -55,7 +55,7 @@ function Get-VSTeamReleaseDefinition {
 
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -subDomain vsrm -Area release -resource definitions -version $VSTeamVersionTable.Release -projectName $projectName -id $item
+            $resp = _callAPI -subDomain vsrm -Area release -resource definitions -Version $([VSTeamVersions]::Release) -projectName $projectName -id $item
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             _applyTypesToReleaseDefinition -item $resp
@@ -64,7 +64,7 @@ function Get-VSTeamReleaseDefinition {
          }
       }
       else {
-         $listurl = _buildRequestURI -subDomain vsrm -Area release -resource 'definitions' -version $VSTeamVersionTable.Release -projectName $ProjectName
+         $listurl = _buildRequestURI -subDomain vsrm -Area release -resource 'definitions' -Version $([VSTeamVersions]::Release) -projectName $ProjectName
 
          if ($expand -ne 'none') {
             $listurl += "&`$expand=$($expand)"
@@ -102,7 +102,7 @@ function Show-VSTeamReleaseDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url
-      $url = "$($VSTeamVersionTable.Account)/$ProjectName/_release"
+      $url = "$([VSTeamVersions]::Account)/$ProjectName/_release"
       
       if ($id) {
          $url += "?definitionId=$id"
@@ -130,7 +130,7 @@ function Add-VSTeamReleaseDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $resp = _callAPI -Method Post -subDomain vsrm -Area release -Resource definitions -ProjectName $ProjectName `
-         -version $VSTeamVersionTable.Release -inFile $inFile -ContentType 'application/json'
+         -Version $([VSTeamVersions]::Release) -inFile $inFile -ContentType 'application/json'
 
       Write-Output $resp
    }
@@ -158,7 +158,7 @@ function Remove-VSTeamReleaseDefinition {
 
       foreach ($item in $id) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release Definition")) {
-            _callAPI -Method Delete -subDomain vsrm -Area release -Resource definitions -Version $VSTeamVersionTable.Release -projectName $ProjectName -id $item  | Out-Null
+            _callAPI -Method Delete -subDomain vsrm -Area release -Resource definitions -Version $([VSTeamVersions]::Release) -projectName $ProjectName -id $item  | Out-Null
             
             Write-Output "Deleted release defintion $item"
          }

@@ -36,7 +36,7 @@ function Get-VSTeamQueue {
 
       if ($id) {
          $resp = _callAPI -ProjectName $ProjectName -Id $id -Area distributedtask -Resource queues `
-            -Version $VSTeamVersionTable.DistributedTask
+            -Version $([VSTeamVersions]::DistributedTask)
          
          _applyTypesToQueue -item $resp
 
@@ -44,7 +44,7 @@ function Get-VSTeamQueue {
       }
       else {        
          $resp = _callAPI -ProjectName $projectName -Area distributedtask -Resource queues `
-            -QueryString @{ queueName = $queueName; actionFilter = $actionFilter } -Version $VSTeamVersionTable.DistributedTask
+            -QueryString @{ queueName = $queueName; actionFilter = $actionFilter } -Version $([VSTeamVersions]::DistributedTask)
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

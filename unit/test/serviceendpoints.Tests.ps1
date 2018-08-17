@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope serviceendpoints {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    Describe 'ServiceEndpoints TFS2017 throws' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -32,7 +32,7 @@ InModuleScope serviceendpoints {
          $Uri -like "*_apis/projects*" 
       }
    
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamServiceEndpoint' {
          Mock Write-Verbose
@@ -53,7 +53,7 @@ InModuleScope serviceendpoints {
             Get-VSTeamServiceEndpoint -projectName project -Verbose
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$($VSTeamVersionTable.DistributedTask)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -65,7 +65,7 @@ InModuleScope serviceendpoints {
             Remove-VSTeamServiceEndpoint -projectName project -id 5 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/5?api-version=$($VSTeamVersionTable.DistributedTask)" -and
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/5?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Delete'
             }
          }
@@ -231,9 +231,9 @@ InModuleScope serviceendpoints {
    }
 
    Describe 'ServiceEndpoints VSTS' {
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
-      $VSTeamVersionTable.ServiceFabricEndpoint = '4.1-preview'
+      [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'
 
       Context 'Add-VSTeamServiceFabricEndpoint' {
          Mock Write-Progress

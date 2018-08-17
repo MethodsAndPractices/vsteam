@@ -6,7 +6,7 @@ InModuleScope workitemTypes {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    Describe 'workitemTypes' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -15,7 +15,7 @@ InModuleScope workitemTypes {
       }
          
       # Load the mocks to create the project name dynamic parameter
-      . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"      
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"      
 
       Context 'Get-WorkItemTypes' {
          $obj = @{
@@ -36,7 +36,7 @@ InModuleScope workitemTypes {
             Get-VSTeamWorkItemType -ProjectName test
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -58,7 +58,7 @@ InModuleScope workitemTypes {
             Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
          
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/bug?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -80,7 +80,7 @@ InModuleScope workitemTypes {
             Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
          
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/bug?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }

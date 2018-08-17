@@ -1,5 +1,24 @@
 # Changelog
 
+## 4.0.0
+
+**Breaking changes**:
+The @VSTeamVersionTable was removed and replaced with a static VSTeamVersions class.  This allows the values to flow between the provider and the rest of the functions in the module.
+
+Due to this breaking change _Get-VSTeamAPIVersion_ was added to review the current version being used.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/77) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+Build Definition / Process / Phases / Steps are broken down into separate objects
+
+```PowerShell
+(Get-VSTeamBuildDefinition -ProjectName MyProject -Id 42).Process
+(Get-VSTeamBuildDefinition -ProjectName MyProject -Id 42).Process.Phases
+(Get-VSTeamBuildDefinition -ProjectName MyProject -Id 42).Process.Phases[0].Steps
+(Get-VSTeamBuildDefinition -ProjectName MyProject -Id 42).Process.Phases[0].Steps[0]
+```
+
+
 ## 3.0.7
 
 Removed some common code and took dependency on Trackyon.Utils that did the same things.
@@ -243,7 +262,7 @@ You can now tab complete your profiles.
 
 Added support for Profiles. Now you can store different accounts and PATS as a profile using Add-VSTeamProfile. Then you can call Add-VSTeamAccount with the -Profile parameter and the PAT will be read from the profile. This prevents you having to remember the PAT to switch between accounts. Profiles also store the API version to use with the account.
 
-Added $VSTeamVersionTable so you can experiment with different versions of the VSTS/TFS APIs. The variable contains the following:
+Added $Global:VSTeamVersionTable so you can experiment with different versions of the VSTS/TFS APIs. The variable contains the following:
 
 - 'Build'           = '3.0'
 - 'Release'         = '3.0-preview'

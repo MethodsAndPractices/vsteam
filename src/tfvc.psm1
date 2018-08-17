@@ -28,7 +28,7 @@ function Get-VSTeamTfvcRootBranch {
          includeDeleted = $IncludeDeleted;
       }
 
-      $resp = _callAPI -Area tfvc -Resource branches -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
+      $resp = _callAPI -Area tfvc -Resource branches -QueryString $queryString -Version $([VSTeamVersions]::Tfvc)
 
       if ($resp | Get-Member -Name value -MemberType Properties) {
          foreach ($item in $resp.value) {
@@ -69,7 +69,7 @@ function Get-VSTeamTfvcBranch {
             includeDeleted = $IncludeDeleted;
          }
 
-         $resp = _callAPI -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $VSTeamVersionTable.Tfvc
+         $resp = _callAPI -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $([VSTeamVersions]::Tfvc)
 
          _applyTypesToTfvcBranch -item $resp
             

@@ -34,7 +34,7 @@ function Get-VSTeam {
          foreach ($item in $Id) {
             # Call the REST API
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
-               -Version $VSTeamVersionTable.Core
+               -Version $([VSTeamVersions]::Core)
 
             $team = [VSTeamTeam]::new($resp, $ProjectName)
 
@@ -45,7 +45,7 @@ function Get-VSTeam {
          foreach ($item in $Name) {
             # Call the REST API
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
-               -Version $VSTeamVersionTable.Core
+               -Version $([VSTeamVersions]::Core)
 
             $team = [VSTeamTeam]::new($resp, $ProjectName)
 
@@ -55,7 +55,7 @@ function Get-VSTeam {
       else {
          # Call the REST API
          $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
-            -Version $VSTeamVersionTable.Core `
+            -Version $([VSTeamVersions]::Core) `
             -QueryString @{
             '$top'  = $top
             '$skip' = $skip
@@ -94,7 +94,7 @@ function Add-VSTeam {
 
       # Call the REST API
       $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
-         -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
+         -Method Post -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Core)
 
       $team = [VSTeamTeam]::new($resp, $ProjectName)
 
@@ -137,7 +137,7 @@ function Update-VSTeam {
 
          # Call the REST API
          $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Name `
-            -Method Patch -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Core
+            -Method Patch -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Core)
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -169,7 +169,7 @@ function Remove-VSTeam {
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API
          _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Id `
-            -Method Delete -Version $VSTeamVersionTable.Core | Out-Null
+            -Method Delete -Version $([VSTeamVersions]::Core) | Out-Null
 
          Write-Output "Deleted team $Id"
       }

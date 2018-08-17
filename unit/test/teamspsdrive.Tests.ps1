@@ -34,6 +34,85 @@ Describe 'VSTeam Classes' {
    }
 }
 
+$buildDefResultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+$buildDefResults2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
+$buildDefResults2018 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
+$buildDefResultsyaml = Get-Content "$PSScriptRoot\sampleFiles\buildDefyaml.json" -Raw | ConvertFrom-Json
+
+Describe 'TFS 2017 Build Definition' {
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter {
+      $Uri -like "*_apis/projects*" 
+   }
+   
+   Context 'Build Definitions' {
+      Mock Get-VSTeamBuildDefinition {
+         return @(
+            [VSTeamBuildDefinition]::new($buildDefResults2017.value[0], 'TestProject')
+         )
+      }
+
+      $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
+
+      It 'Should create Build Defintions' {
+         $buildDefinitions | Should Not be $null
+      }
+
+      $hasSteps = $buildDefinitions.GetChildItem()[0]
+
+      It 'Should have Steps' {
+         $hasSteps | Should Not Be $null
+      }
+
+      $steps = $hasSteps.GetChildItem()
+
+      It 'Should parse steps' {
+         $steps.Length | Should Be 10
+      }
+   }
+}
+
+Describe 'VSTS Build Definition' {
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter {
+      $Uri -like "*_apis/projects*" 
+   }
+   
+   Context 'Build Definitions' {
+      Mock Get-VSTeamBuildDefinition {
+         return @(
+            [VSTeamBuildDefinition]::new($buildDefResultsVSTS.value[0], 'TestProject'),
+            [VSTeamBuildDefinition]::new($buildDefResultsyaml.value[0], 'TestProject')
+         )
+      }
+
+      $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
+
+      It 'Should create Build Defintions' {
+         $buildDefinitions | Should Not be $null
+      }
+
+      $hasPhases = $buildDefinitions.GetChildItem()[0]
+
+      It 'Should parse phases' {
+         $hasPhases.Process.Phases.Length | Should Be 1
+      }
+
+      $phases = $hasPhases.GetChildItem()[0]
+
+      It 'Should parse steps' {
+         $phases.Steps.Length | Should Be 9
+      }
+
+      $yamlBuild = $buildDefinitions.GetChildItem()[1]
+      $yamlFile = $yamlBuild.GetChildItem()
+
+      It 'Should have yamlFilename' {
+         $yamlFile | Should Be '.vsts-ci.yml'
+      }
+   }
+}
+
 Describe 'TeamsPSDrive' {
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -45,7 +124,7 @@ Describe 'TeamsPSDrive' {
                name        = 'TestProject'
                description = ''
                url         = ''
-               id          = '123-5464-dee43'
+               id          = '123 - 5464-dee43'
                state       = ''
                visibility  = ''
                revision    = 0
@@ -83,14 +162,16 @@ Describe 'TeamsPSDrive' {
 
       It 'Should return builds, releases, repositories and teams' {
          $actual | Should Not Be $null
-         $actual[0].Name | Should Be 'Builds'
+         $actual[0].Name | Should Be 'Build Definitions'
          $actual[0].ProjectName | Should Be 'TestProject'
-         $actual[1].Name | Should Be 'Releases'
+         $actual[1].Name | Should Be 'Builds'
          $actual[1].ProjectName | Should Be 'TestProject'
-         $actual[2].Name | Should Be 'Repositories'
+         $actual[2].Name | Should Be 'Releases'
          $actual[2].ProjectName | Should Be 'TestProject'
-         $actual[3].Name | Should Be 'Teams'
+         $actual[3].Name | Should Be 'Repositories'
          $actual[3].ProjectName | Should Be 'TestProject'
+         $actual[4].Name | Should Be 'Teams'
+         $actual[4].ProjectName | Should Be 'TestProject'
       }
    }
 
@@ -195,10 +276,28 @@ Describe 'TeamsPSDrive' {
       }
    }
 
+   Context 'Build Definitions' {
+      Mock Get-VSTeamBuildDefinition { return @(
+            [VSTeamBuildDefinition]::new(@{}, 'TestProject'),
+            [VSTeamBuildDefinition]::new(@{}, 'TestProject')
+         )
+      }
+
+      $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
+
+      It 'Should create Build Defintions' {
+         $buildDefinitions | Should Not be $null
+      }
+
+      # $hasPhases = $buildDefinitions.GetChildItem()[0]
+
+      # $yamlBuild = $buildDefinitions.GetChildItem()[1]
+   }
+   
    Context 'Releases' {
       Mock Get-VSTeamRelease { return [PSCustomObject]@{
             id                = 1
-            name              = 'Release-007'
+            name              = 'Release - 007'
             status            = 'active'
             createdBy         = [PSCustomObject]@{
                displayname = 'Test User'
@@ -297,7 +396,7 @@ Describe 'TeamsPSDrive' {
                   name        = 'TestProject'
                   description = ''
                   url         = ''
-                  id          = '123-5464-dee43'
+                  id          = '123 - 5464-dee43'
                   state       = ''
                   visibility  = ''
                   revision    = 0

@@ -29,7 +29,7 @@ function Get-VSTeamPolicy {
       if ($id) {
          foreach ($item in $id) {
             try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource configurations -Version $VSTeamVersionTable.Git
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource configurations -Version $([VSTeamVersions]::Git)
    
                _applyTypesToPolicy -item $resp
    
@@ -42,7 +42,7 @@ function Get-VSTeamPolicy {
       }
       else {
          try {
-            $resp = _callAPI -ProjectName $ProjectName -Area policy -Resource configurations -Version $VSTeamVersionTable.Git
+            $resp = _callAPI -ProjectName $ProjectName -Area policy -Resource configurations -Version $([VSTeamVersions]::Git)
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
@@ -91,7 +91,7 @@ function Add-VSTeamPolicy {
       try {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -Resource 'configurations' `
-            -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Git
+            -Method Post -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Git)
 
          Write-Output $resp
       }
@@ -145,7 +145,7 @@ function Update-VSTeamPolicy {
          if ($Force -or $pscmdlet.ShouldProcess($id, "Update Policy")) {
             # Call the REST API
             $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -id $id -Resource 'configurations' `
-               -Method Put -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Git
+               -Method Put -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Git)
 
             Write-Output $resp
          }
@@ -175,7 +175,7 @@ function Remove-VSTeamPolicy {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Policy")) {
             try {
-               _callAPI -ProjectName $ProjectName -Method Delete -Id $item -Area policy -Resource configurations -Version $VSTeamVersionTable.Git | Out-Null
+               _callAPI -ProjectName $ProjectName -Method Delete -Id $item -Area policy -Resource configurations -Version $([VSTeamVersions]::Git) | Out-Null
 
                Write-Output "Deleted policy $item"
             }

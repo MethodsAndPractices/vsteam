@@ -19,7 +19,7 @@ function Get-VSTeamAgent {
 
       if ($id) {
          $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents -Id $id `
-            -Body @{includeCapabilities = 'true'} -Version $VSTeamVersionTable.DistributedTask
+            -Body @{includeCapabilities = 'true'} -Version $([VSTeamVersions]::DistributedTask)
          
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -30,7 +30,7 @@ function Get-VSTeamAgent {
       }
       else {
          $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents `
-            -Body @{includeCapabilities = 'true'} -Version $VSTeamVersionTable.DistributedTask
+            -Body @{includeCapabilities = 'true'} -Version $([VSTeamVersions]::DistributedTask)
 
          $objs = @()
 
@@ -61,7 +61,7 @@ function Remove-VSTeamAgent {
       foreach ($item in $Id) {
          if ($force -or $pscmdlet.ShouldProcess($item,"Delete agent")) {
             try {
-               _callAPI -Method Delete -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask | Out-Null
+               _callAPI -Method Delete -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $([VSTeamVersions]::DistributedTask) | Out-Null
                Write-Output "Deleted agent $item"
             }
             catch {
@@ -85,7 +85,7 @@ function Enable-VSTeamAgent {
    process {
       foreach ($item in $Id) {
          try {
-            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask -ContentType "application/json" -Body "{'enabled':true,'id':$item}" | Out-Null
+            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $([VSTeamVersions]::DistributedTask) -ContentType "application/json" -Body "{'enabled':true,'id':$item}" | Out-Null
             Write-Output "Enabled agent $item"
          }
          catch {
@@ -108,7 +108,7 @@ function Disable-VSTeamAgent {
    process {
       foreach ($item in $Id) {
          try {
-            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $VSTeamVersionTable.DistributedTask -ContentType "application/json" -Body "{'enabled':false,'id':$item}" | Out-Null
+            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -Resource agents -Id $item -Version $([VSTeamVersions]::DistributedTask) -ContentType "application/json" -Body "{'enabled':false,'id':$item}" | Out-Null
             Write-Output "Disabled agent $item"
          }
          catch {

@@ -1,10 +1,10 @@
 Set-StrictMode -Version Latest
 
 InModuleScope teammembers {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    Describe "TeamMembers" {
-      . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
         
       Context 'Get-VSTeamMember for specific project and team' {
          Mock Invoke-RestMethod { return @{value = 'teams'}}
@@ -13,7 +13,7 @@ InModuleScope teammembers {
             Get-VSTeamMember -ProjectName TestProject -TeamId TestTeam
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -26,7 +26,7 @@ InModuleScope teammembers {
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -like "*https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=10*"
             }
          }            
@@ -40,7 +40,7 @@ InModuleScope teammembers {
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -like "*https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$skip=5*"
             }
          }
@@ -54,7 +54,7 @@ InModuleScope teammembers {
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -like "*https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=10*" -and
                $Uri -like "*`$skip=5*"
             }
@@ -68,16 +68,16 @@ InModuleScope teammembers {
             New-Object -TypeName PSObject -Prop @{projectname = "TestProject"; name = "TestTeam"} | Get-VSTeamMember
             
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$($VSTeamVersionTable.Core)"                    
+               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam/members?api-version=$([VSTeamVersions]::Core)"                    
             }
          }
       }
 
-      # Must be last because it sets $VSTeamVersionTable.Account to $null
+      # Must be last because it sets [VSTeamVersions]::Account to $null
       Context '_buildURL handles exception' {
          
          # Arrange
-         $VSTeamVersionTable.Account = $null
+         [VSTeamVersions]::Account = $null
          
          It 'should return approvals' {
          
