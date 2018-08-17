@@ -300,13 +300,13 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if($VSTeamProjectCache.timestamp -ne (Get-Date).Minute) {
+   if($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
       $arrSet = _getProjects
-      $VSTeamProjectCache.projects = $arrSet
-      $VSTeamProjectCache.timestamp = (Get-Date).Minute
+      [VSTeamProjectCache]::projects = $arrSet
+      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
    }
    else {
-      $arrSet = $VSTeamProjectCache.projects
+      $arrSet = [VSTeamProjectCache]::projects
    }
 
    if ($arrSet) {

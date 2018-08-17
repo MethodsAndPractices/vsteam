@@ -245,7 +245,14 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
    Context 'Agent full exercise' {
       It 'Get-VSTeamAgent Should return agents' {
-         $pool = (Get-VSTeamPool)[0]
+         if ($acct -like "http://*") {
+            $pool = (Get-VSTeamPool)[0]            
+         }
+         else {
+            # Grabbing the first hosted pool on VSTS. Skipping index 0 which is 
+            # default and is empty on some accounts
+            $pool = (Get-VSTeamPool)[1]
+         }
          $actual = Get-VSTeamAgent -PoolId $pool.Id
 
          $actual | Should Not Be $null

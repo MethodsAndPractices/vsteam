@@ -194,7 +194,7 @@ function Update-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Invalidate any cache of projects.
-         $VSTeamProjectCache.timestamp = -1
+         [VSTeamProjectCache]::timestamp = -1
 
          # Return the project now that it has been updated
          return Get-VSTeamProject -Id $finalName
@@ -246,7 +246,7 @@ function Add-VSTeamProject {
       _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
       # Invalidate any cache of projects.
-      $VSTeamProjectCache.timestamp = -1
+      [VSTeamProjectCache]::timestamp = -1
 
       return Get-VSTeamProject $ProjectName
    }
@@ -277,7 +277,7 @@ function Remove-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
          # Invalidate any cache of projects.
-         $VSTeamProjectCache.timestamp = -1
+         [VSTeamProjectCache]::timestamp = -1
 
          Write-Output "Deleted $ProjectName"
       }

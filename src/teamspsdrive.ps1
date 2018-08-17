@@ -74,6 +74,11 @@ class VSTeamVersions {
    static [string] $ModuleVersion = $null
 }
 
+class VSTeamProjectCache {
+   static [int] $timestamp = -1
+   static [object] $projects = $null
+}
+
 class VSTeamDirectory : SHiPSDirectory {
    # The object returned from the REST API call
    [object] hidden $_internalObj = $null
@@ -313,10 +318,16 @@ class VSTeamPool : VSTeamDirectory {
       $this.id = $obj.id
       $this.count = $obj.size
       $this.isHosted = $obj.isHosted
-      $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
+
+      # On some accounts teh CreatedBy is null for hosted pools
+      if ($null -ne $obj.createdBy) {
+         $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
+      }
 
       # Depending on TFS/VSTS this might not be returned
-      if ($obj.PSObject.Properties.Match('owner').count -gt 0) {
+      # Just becaues it exisit does not mean it is not $null
+      if ($obj.PSObject.Properties.Match('owner').count -gt 0 -and
+          $null -ne $obj.owner) {
          $this.owner = [VSTeamUser]::new($obj.owner, $null)
       }
 
@@ -510,7 +521,6 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       $this.id = $obj.id
       $this.Path = $obj.path
       $this.Queue = $obj.queue
-      $this.Triggers = $obj.triggers
       $this.Revision = $obj.revision
       $this.Variables = $obj.variables
       $this.CreatedOn = $obj.createdDate
@@ -519,6 +529,10 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
       
       # These might not be returned
+      if ($obj.PSObject.Properties.Match('triggers').count -gt 0) {
+         $this.Triggers = $obj.triggers
+      }
+
       if ($obj.PSObject.Properties.Match('retentionRules').count -gt 0) {
          $this.RetentionRules = $obj.retentionRules
       }
