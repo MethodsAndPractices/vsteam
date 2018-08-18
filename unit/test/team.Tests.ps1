@@ -10,7 +10,7 @@ InModuleScope team {
       Mock Write-Host
 
       Context 'Invoke-VSTeamRequest Options' {
-         $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+         [VSTeamVersions]::Account = 'https://test.visualstudio.com'
          Mock Invoke-RestMethod { Write-Host $args }
 
          Invoke-VSTeamRequest -Method Options
@@ -21,7 +21,7 @@ InModuleScope team {
       }
 
       Context 'Invoke-VSTeamRequest Release' {
-         $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+         [VSTeamVersions]::Account = 'https://test.visualstudio.com'
          Mock Invoke-RestMethod { Write-Host $args } -Verifiable
 
          Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON
@@ -38,7 +38,7 @@ InModuleScope team {
          $Uri -like "*_apis/projects*" 
       }
       
-      . "$PSScriptRoot\mockProjectDynamicParamMandatoryFalse.ps1"
+      . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
 
       $contents = @"
       [
@@ -71,7 +71,7 @@ InModuleScope team {
 
       Context 'Get-VSTeamInfo' {
          It 'should return account and default project' {
-            $VSTeamVersionTable.Account = "mydemos"
+            [VSTeamVersions]::Account = "mydemos"
             $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
             $info = Get-VSTeamInfo
@@ -107,7 +107,7 @@ InModuleScope team {
       Context 'Get-VSTeamOption' {
          # Set the account to use for testing. A normal user would do this
          # using the Add-VSTeamAccount function.
-         $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+         [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
          Mock Invoke-RestMethod { return @{
                count = 1
@@ -494,22 +494,22 @@ InModuleScope team {
 
       Context 'Set-VSTeamAPIVersion' {
          BeforeEach {
-            $VSTeamVersionTable.Version = ''
+            [VSTeamVersions]::Version = ''
          }
 
          It 'Should default to TFS2017' {
             Set-VSTeamAPIVersion
-            $VSTeamVersionTable.Version | Should Be 'TFS2017'
+            [VSTeamVersions]::Version | Should Be 'TFS2017'
          }
 
          It 'Should return TFS2018' {
             Set-VSTeamAPIVersion -Version TFS2018
-            $VSTeamVersionTable.Version | Should Be 'TFS2018'
+            [VSTeamVersions]::Version | Should Be 'TFS2018'
          }
 
          It 'Should VSTS' {
             Set-VSTeamAPIVersion -Version VSTS
-            $VSTeamVersionTable.Version | Should Be 'VSTS'
+            [VSTeamVersions]::Version | Should Be 'VSTS'
          }
       }
    }

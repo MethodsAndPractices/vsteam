@@ -45,7 +45,7 @@ function Get-VSTeamMember {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $resp = _callAPI -Id "$TeamId/members" -Area 'projects' -Resource "$ProjectName/teams" -Version $VSTeamVersionTable.Core `
+      $resp = _callAPI -Id "$TeamId/members" -Area 'projects' -Resource "$ProjectName/teams" -Version $([VSTeamVersions]::Core) `
          -QueryString @{'$top' = $top; '$skip' = $skip}
 
       # Apply a Type Name so we can use custom format view and custom type extensions

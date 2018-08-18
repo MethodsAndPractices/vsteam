@@ -4,7 +4,7 @@ InModuleScope policies {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{ }
@@ -24,7 +24,7 @@ InModuleScope policies {
 
          It 'Should return policies' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -36,7 +36,7 @@ InModuleScope policies {
 
          It 'Should return the policy' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/4?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/4?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -65,7 +65,7 @@ InModuleScope policies {
          It 'Should delete the policy' {
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/4?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/4?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -103,7 +103,7 @@ InModuleScope policies {
             # '{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"10000000-0000-0000-0000-0000000000001","matchKind":"Exact","refName":"refs/heads/master"}],"MinimumApproverCount":1}}'
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/?api-version=$($VSTeamVersionTable.Core)" -and
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/?api-version=$([VSTeamVersions]::Core)" -and
                $Body -like '*"isBlocking":true*' -and
                $Body -like '*"isEnabled":true*' -and
                $Body -like '*"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"}*' -and
@@ -156,7 +156,7 @@ InModuleScope policies {
             #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/1?api-version=$($VSTeamVersionTable.Core)" -and
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/1?api-version=$([VSTeamVersions]::Core)" -and
                $Body -like '*"isBlocking":true*' -and
                $Body -like '*"isEnabled":true*' -and
                $Body -like '*"type":*' -and
@@ -200,7 +200,7 @@ InModuleScope policies {
             #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
-               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/1?api-version=$($VSTeamVersionTable.Core)" -and
+               $Uri -eq "https://test.visualstudio.com/Demo/_apis/policy/configurations/1?api-version=$([VSTeamVersions]::Core)" -and
                $Body -like '*"isBlocking":true*' -and
                $Body -like '*"isEnabled":true*' -and
                $Body -like '*"type":*' -and

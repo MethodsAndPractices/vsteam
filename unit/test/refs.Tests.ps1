@@ -4,7 +4,7 @@ InModuleScope Refs {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
@@ -24,7 +24,7 @@ InModuleScope Refs {
          $Uri -like "*_apis/projects*" 
       }
    
-      . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Context 'Get-VSTeamGitRef' {
          Mock Invoke-RestMethod { return $results } -Verifiable

@@ -205,13 +205,20 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       # Only run for VSTS
       if ($api -eq 'VSTS') {
-         It 'Get-VSTeamBuildDefinition by Id should return 1 phase for 1st build definition' {
-            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI1"}).Id
-            ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 1
+         It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st build definition' {
+            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI1")}).Id
+            $buildDefId | Should Not Be $null
+            $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId
+            $buildDef.Name | Should Be $($newProjectName + "-CI1")
+            $buildDef.Process.Phases.Count | Should Be 1
+            $buildDef.Process.Phases[0].Name | Should Be "Phase 1"
+            $buildDef.Process.Phases[0].Steps.Count | Should Be 1
+            $buildDef.Process.Phases[0].Steps[0].Name | Should Be "PowerShell Script"
+            $buildDef.Process.Phases[0].Steps[0].Inputs.targetType | Should Be "inline"
          }
 
-         It 'Get-VSTeamBuildDefinition by Id should return 2 phase for 2nd build definition' {
-            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -like "*CI2"}).Id
+         It 'Get-VSTeamBuildDefinition by Id should return 2 phases for 2nd build definition' {
+            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI2")}).Id
             ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 2
          }
       }
@@ -238,7 +245,14 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
    Context 'Agent full exercise' {
       It 'Get-VSTeamAgent Should return agents' {
-         $pool = (Get-VSTeamPool)[0]
+         if ($acct -like "http://*") {
+            $pool = (Get-VSTeamPool)[0]            
+         }
+         else {
+            # Grabbing the first hosted pool on VSTS. Skipping index 0 which is 
+            # default and is empty on some accounts
+            $pool = (Get-VSTeamPool)[1]
+         }
          $actual = Get-VSTeamAgent -PoolId $pool.Id
 
          $actual | Should Not Be $null
@@ -389,13 +403,13 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Set-VSTeamAPIVersion to TFS2018' {
          Set-VSTeamAPIVersion TFS2018
 
-         $VSTeamVersionTable.Version | Should Be 'TFS2018'
+         [VSTeamVersions]::Version | Should Be 'TFS2018'
       }
 
       It 'Set-VSTeamAPIVersion to TFS2017' {
          Set-VSTeamAPIVersion TFS2017
 
-         $VSTeamVersionTable.Version | Should Be 'TFS2017'
+         [VSTeamVersions]::Version | Should Be 'TFS2017'
       }
 
       It 'Clear-VSTeamDefaultProject should clear project' {

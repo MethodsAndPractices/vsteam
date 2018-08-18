@@ -16,7 +16,7 @@ function Remove-VSTeamGitRepository {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Repository")) {
             try {
-               _callAPI -Method Delete -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git | Out-Null
+               _callAPI -Method Delete -Id $item -Area git -Resource repositories -Version $([VSTeamVersions]::Git) | Out-Null
 
                Write-Output "Deleted repository $item"
             }
@@ -47,7 +47,7 @@ function Add-VSTeamGitRepository {
       try {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' `
-            -Method Post -ContentType 'application/json' -Body $body -Version $VSTeamVersionTable.Git
+            -Method Post -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Git)
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -84,7 +84,7 @@ function Get-VSTeamGitRepository {
       if ($id) {
          foreach ($item in $id) {
             try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
 
                # Storing the object before you return it cleaned up the pipeline.
                # When I just write the object from the constructor each property
@@ -101,7 +101,7 @@ function Get-VSTeamGitRepository {
       elseif ($Name) {
          foreach ($item in $Name) {
             try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $VSTeamVersionTable.Git
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
 
                # Storing the object before you return it cleaned up the pipeline.
                # When I just write the object from the constructor each property
@@ -117,7 +117,7 @@ function Get-VSTeamGitRepository {
       }
       else {
          try {
-            $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version $VSTeamVersionTable.Git
+            $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
 
             $objs = @()
 
@@ -153,7 +153,7 @@ function Show-VSTeamGitRepository {
          Show-Browser $RemoteUrl
       }
       else {
-         Show-Browser "$($VSTeamVersionTable.Account)/_git/$ProjectName"
+         Show-Browser "$([VSTeamVersions]::Account)/_git/$ProjectName"
       }
    }
 }

@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '3.0.7'
+   ModuleVersion     = '4.0.0'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -62,7 +62,6 @@
 
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('types\Approvals.ps1xml',
-      'types\buildDefinitions.ps1xml',
       'types\builds.ps1xml',
       'types\cloudSubscriptions.ps1xml',
       'types\repositories.ps1xml',
@@ -80,7 +79,6 @@
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
-      'formats\buildDefinitions.format.ps1xml',
       'formats\builds.format.ps1xml',
       'formats\policyTypes.format.ps1xml',
       'formats\profile.format.ps1xml',
@@ -206,7 +204,8 @@
       'Remove-VSTeamAgent',
       'Enable-VSTeamAgent',
       'Disable-VSTeamAgent',
-      'Update-VSTeamProfile')
+      'Update-VSTeamProfile',
+      'Get-VSTeamAPIVersion')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -310,7 +309,8 @@
       'Remove-Agent',
       'Enable-Agent',
       'Disable-Agent',
-      'Update-Profile')
+      'Update-Profile',
+      'Get-APIVersion')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

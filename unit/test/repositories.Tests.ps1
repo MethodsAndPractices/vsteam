@@ -4,7 +4,7 @@ InModuleScope repositories {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
@@ -52,7 +52,7 @@ InModuleScope repositories {
          $Uri -like "*_apis/projects*" 
       }
 
-      . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Context 'Show-VSTeamGitRepository by project' {
          Mock Show-Browser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
@@ -138,7 +138,7 @@ InModuleScope repositories {
          It 'Should remove Git repo' {
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "https://test.visualstudio.com/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$($VSTeamVersionTable.Git)"
+               $Uri -eq "https://test.visualstudio.com/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
             }
          }
       }
@@ -160,7 +160,7 @@ InModuleScope repositories {
       
       Mock _useWindowsAuthenticationOnPremise { return $true }
 
-      $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
       Context 'Get-VSTeamGitRepository no parameters' {
          Mock Invoke-RestMethod { return $results } -Verifiable

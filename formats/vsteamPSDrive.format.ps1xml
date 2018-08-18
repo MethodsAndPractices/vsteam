@@ -47,7 +47,7 @@
 
       <!--Team.GitRef-->
       <!-- This is the format when used with functions -->
-       <View>
+      <View>
          <Name>RefTable</Name>
          <ViewSelectedBy>
             <TypeName>Team.GitRef</TypeName>
@@ -80,7 +80,7 @@
 
       <!--Team.Agent-->
       <!-- This is the format when used with functions -->
-       <View>
+      <View>
          <Name>Team.Agent.Table</Name>
          <ViewSelectedBy>
             <TypeName>Team.Agent</TypeName>
@@ -129,8 +129,8 @@
          </TableControl>
       </View>
 
-       <!--Team.Provider.Agent.Table-->
-       <View>
+      <!--Team.Provider.Agent.Table-->
+      <View>
          <Name>Team.Provider.Agent.Table</Name>
          <ViewSelectedBy>
             <TypeName>Team.Provider.Agent</TypeName>
@@ -278,7 +278,7 @@
          </ListControl>
       </View>
 
-       <View>
+      <View>
          <Name>StatusTable</Name>
          <ViewSelectedBy>
             <TypeName>Team.Provider.Release</TypeName>
@@ -447,6 +447,406 @@
          </ListControl>
       </View>
 
+      <!--Team.BuildDefinition.Table-->
+      <View>
+         <Name>Team.BuildDefinition.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinition</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Provider.BuildDefinition.Table-->
+      <View>
+         <Name>Team.BuildDefinition.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.BuildDefinition</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.BuildDefinition.List-->
+      <View>
+         <Name>Team.BuildDefinition.List</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinition</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>ID</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Name</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>AuthoredBy</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+
+      <!--Team.BuildDefinitionYamlProcess.Table-->
+      <View>
+         <Name>Team.BuildDefinitionYamlProcess.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinitionYamlProcess</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Filename</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>yamlFilename</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+       <!--Team.Provider.BuildDefinitionYamlProcess.Table-->
+      <View>
+         <Name>Team.Provider.BuildDefinitionYamlProcess.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.BuildDefinitionYamlProcess</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Filename</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>yamlFilename</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.BuildDefinitionPhasedProcess.Table-->
+      <View>
+         <Name>Team.BuildDefinitionPhasedProcess.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinitionPhasedProcess</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Phases</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Phases</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.BuildDefinitionProcess.List-->
+      <View>
+         <Name>Team.BuildDefinitionProcess.List</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinitionProcess</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>Name</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Phases</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+
+      <!--Team.BuildDefinitionProcessPhase.Table-->
+      <View>
+         <Name>Team.BuildDefinitionProcessPhase.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinitionProcessPhase</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Steps</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>StepCount</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Provider.BuildDefinitionProcessPhase.Table-->
+      <View>
+         <Name>Team.Provider.BuildDefinitionProcessPhase.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.BuildDefinitionProcessPhase</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Steps</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>StepCount</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.BuildDefinitionProcessPhase.List-->
+      <View>
+         <Name>Team.BuildDefinitionProcessPhase.List</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinitionProcessPhase</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>Name</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Steps</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+
+      <!--Team.BuildDefinitionProcessPhaseStep.Table-->
+      <View>
+         <Name>Team.BuildDefinitionProcessPhaseStep.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinitionProcessPhaseStep</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Enabled</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Enabled</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Provider.BuildDefinitionProcessPhaseStep.Table-->
+      <View>
+         <Name>Team.Provider.BuildDefinitionProcessPhaseStep.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.BuildDefinitionProcessPhaseStep</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Enabled</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Enabled</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.BuildDefinitionProcessPhaseStep.List-->
+      <View>
+         <Name>Team.BuildDefinitionProcessPhaseStep.List</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.BuildDefinitionProcessPhaseStep</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>ID</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Name</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Enabled</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+
       <!--ReleaseTable-->
       <View>
          <Name>ReleaseTable</Name>
@@ -525,7 +925,6 @@
             </TableRowEntries>
          </TableControl>
       </View>
-
 
       <!--Team.Provider.RepositoryTable-->
       <View>
@@ -791,6 +1190,7 @@
             <TypeName>Team.Pools</TypeName>
             <TypeName>Team.Provider.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
+            <TypeName>Team.BuildDefinitions</TypeName>
             <TypeName>Team.Releases</TypeName>
             <TypeName>Team.Repositories</TypeName>
             <TypeName>Team.Teams</TypeName>
@@ -830,6 +1230,7 @@
             <TypeName>Team.Pool</TypeName>
             <TypeName>Team.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
+            <TypeName>Team.BuildDefinitions</TypeName>
             <TypeName>Team.Releases</TypeName>
             <TypeName>Team.Repositories</TypeName>
             <TypeName>Team.Teams</TypeName>

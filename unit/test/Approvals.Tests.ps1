@@ -6,7 +6,7 @@ InModuleScope Approvals {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    Describe 'Approvals' -Tag 'unit', 'approvals' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -15,7 +15,7 @@ InModuleScope Approvals {
       }
 
       # Load the mocks to create the project name dynamic parameter
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamApproval' {         
          # Arrange
@@ -56,7 +56,7 @@ InModuleScope Approvals {
             # Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -66,6 +66,8 @@ InModuleScope Approvals {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
+            # Write-Host $([VSTeamVersions]::Release)
+            # Write-Host $([VSTeamVersions]::Account)
 
             return @{
                count = 1
@@ -92,11 +94,11 @@ InModuleScope Approvals {
             # matches I have to search for the portions I expect but can't
             # assume the order. 
             # The general string should look like this:
-            # "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
+            # "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Uri -like "*https://test.vsrm.visualstudio.com/project/_apis/release/approvals/*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.Release)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
                $Uri -like "*assignedtoFilter=Chuck Reinhart*" -and
                $Uri -like "*includeMyGroupApprovals=true*"
             }
@@ -125,7 +127,7 @@ InModuleScope Approvals {
          It 'should return approvals' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -146,7 +148,7 @@ InModuleScope Approvals {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Method -eq 'Patch' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -160,7 +162,7 @@ InModuleScope Approvals {
          It 'should set approval' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -182,7 +184,7 @@ InModuleScope Approvals {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Method -eq 'Patch' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$($VSTeamVersionTable.Release)"
+               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -198,7 +200,7 @@ InModuleScope Approvals {
       }
 
       Context 'Get-VSTeamApproval TFS' {
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
          
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
@@ -226,11 +228,11 @@ InModuleScope Approvals {
             # matches I have to search for the portions I expect but can't
             # assume the order. 
             # The general string should look like this:
-            # "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$($VSTeamVersionTable.Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
+            # "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.Release)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
                $Uri -like "*statusFilter=Pending*" -and
                $Uri -like "*assignedtoFilter=Test User*" -and
                $Uri -like "*includeMyGroupApprovals=true*" -and

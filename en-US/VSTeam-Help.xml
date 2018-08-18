@@ -13480,6 +13480,17 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -13520,6 +13531,18 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />

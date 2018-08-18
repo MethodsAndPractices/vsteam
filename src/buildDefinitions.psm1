@@ -4,37 +4,6 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-# Apply types to the returned objects so format and type files can
-# identify the object and act on it.
-function _applyTypesToBuildDefinition {
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'Team.BuildDefinition')
-
-   $item.project.PSObject.TypeNames.Insert(0, 'Team.Project')
-
-   if ($item.PSObject.Properties.Match('authoredBy').count -gt 0 -and $null -ne $item.authoredBy) {
-      $item.authoredBy.PSObject.TypeNames.Insert(0, 'Team.User')
-   }
-
-   if ($item.PSObject.Properties.Match('_links').count -gt 0 -and $null -ne $item._links) {
-      $item._links.PSObject.TypeNames.Insert(0, 'Team.Links')
-   }
-
-   if ($item.PSObject.Properties.Match('queue').count -gt 0 -and $null -ne $item.queue) {
-      $item.queue.PSObject.TypeNames.Insert(0, 'Team.Queue')
-   }
-
-   # Only returned for a single item
-   if ($item.PSObject.Properties.Match('variables').count -gt 0 -and $null -ne $item.variables) {
-      $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')
-   }
-
-   if ($item.PSObject.Properties.Match('repository').count -gt 0 -and $null -ne $item.repository) {
-      $item.repository.PSObject.TypeNames.Insert(0, 'Team.Repository')
-   }
-}
-
 function Get-VSTeamBuildDefinition {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
@@ -45,7 +14,7 @@ function Get-VSTeamBuildDefinition {
       [ValidateSet('build', 'xaml', 'All')]
       [string] $Type = 'All',
       
-      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildDefinitionID')]
       [int[]] $Id,
       
@@ -60,27 +29,30 @@ function Get-VSTeamBuildDefinition {
    process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
-
+      
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $VSTeamVersionTable.Build `
+            $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $([VSTeamVersions]::Build) `
                -QueryString @{revision = $revision}
             
-            _applyTypesToBuildDefinition -item $resp
+            Write-Verbose $resp
+            $item = [VSTeamBuildDefinition]::new($resp, $ProjectName)
 
-            Write-Output $resp
+            Write-Output $item
          }
       }
       else {
-         $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $VSTeamVersionTable.Build `
-            -QueryString @{type = $type; name = $filter}
+         $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $([VSTeamVersions]::Build) `
+            -QueryString @{type = $type; name = $filter; includeAllProperties = $true}
          
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypesToBuildDefinition -item $item
-         }
+         $objs = @()
 
-         Write-Output $resp.value
+         foreach ($item in $resp.value) {
+            Write-Verbose $item
+            $objs += [VSTeamBuildDefinition]::new($item, $ProjectName)
+         }
+   
+         Write-Output $objs
       }
    }
 }
@@ -112,7 +84,7 @@ function Show-VSTeamBuildDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url
-      $url = "$($VSTeamVersionTable.Account)/$ProjectName/_build"
+      $url = "$([VSTeamVersions]::Account)/$ProjectName/_build"
 
       if ($id) {
          $url += "/index?definitionId=$id"
@@ -161,7 +133,7 @@ function Add-VSTeamBuildDefinition {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $resp = _callAPI -Method Post -ProjectName $ProjectName -Area build -Resource definitions -Version $VSTeamVersionTable.Build -infile $InFile -ContentType 'application/json'
+      $resp = _callAPI -Method Post -ProjectName $ProjectName -Area build -Resource definitions -Version $([VSTeamVersions]::Build) -infile $InFile -ContentType 'application/json'
 
       return $resp
    }
@@ -188,7 +160,7 @@ function Remove-VSTeamBuildDefinition {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build Definition")) {
             # Call the REST API
-            _callAPI -Method Delete -ProjectName $ProjectName -Area build -Resource definitions -Id $item -Version $VSTeamVersionTable.Build | Out-Null
+            _callAPI -Method Delete -ProjectName $ProjectName -Area build -Resource definitions -Id $item -Version $([VSTeamVersions]::Build) | Out-Null
 
             Write-Output "Deleted build defintion $item"
          }
@@ -219,7 +191,7 @@ function Update-VSTeamBuildDefinition {
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Build Definition")) {
          # Call the REST API
-         _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $VSTeamVersionTable.Build -InFile $InFile -ContentType 'application/json' | Out-Null
+         _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $([VSTeamVersions]::Build) -InFile $InFile -ContentType 'application/json' | Out-Null
       }
    }
 }

@@ -48,7 +48,7 @@ function _trackProgress {
    # Track status
    while (-not $isReady) {
       $status = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
-         -Version $VSTeamVersionTable.DistributedTask
+         -Version $([VSTeamVersions]::DistributedTask)
 
       $isReady = $status.isReady;
 
@@ -71,7 +71,7 @@ function _trackProgress {
 }
 
 function _supportsServiceFabricEndpoint {
-   if (-not $VSTeamVersionTable.ServiceFabricEndpoint) {
+   if (-not [VSTeamVersions]::ServiceFabricEndpoint) {
       throw 'This account does not support Service Fabric endpoints.'
    } 
 }
@@ -403,7 +403,7 @@ function Add-VSTeamServiceEndpoint {
 
       # Call the REST API
       $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+         -Method Post -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::DistributedTask)
       
       _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
@@ -429,7 +429,7 @@ function Get-VSTeamServiceEndpoint {
       if ($id) {
          # Call the REST API
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
-            -Version $VSTeamVersionTable.DistributedTask -ProjectName $ProjectName
+            -Version $([VSTeamVersions]::DistributedTask) -ProjectName $ProjectName
          
          _applyTypesToServiceEndpoint -item $resp
 
@@ -438,7 +438,7 @@ function Get-VSTeamServiceEndpoint {
       else {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-            -Version $VSTeamVersionTable.DistributedTask
+            -Version $([VSTeamVersions]::DistributedTask)
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
@@ -451,13 +451,15 @@ function Get-VSTeamServiceEndpoint {
 }
 
 function Update-VSTeamServiceEndpoint {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $id,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [hashtable] $object
+      [hashtable] $object,
+
+      [switch] $Force
    )
 
    DynamicParam {
@@ -470,13 +472,15 @@ function Update-VSTeamServiceEndpoint {
 
       $body = $object | ConvertTo-Json
 
-      # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
-         -Method Put -ContentType 'application/json' -body $body -Version $VSTeamVersionTable.DistributedTask
+      if ($Force -or $pscmdlet.ShouldProcess($id, "Update Service Endpoint")) {
+         # Call the REST API
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
+            -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::DistributedTask)
       
-      _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
+         _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
 
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
+         return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
+      }
    }
 }
 
@@ -501,7 +505,7 @@ function Remove-VSTeamServiceEndpoint {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Service Endpoint")) {
             # Call the REST API
             _callAPI -projectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $item  `
-               -Method Delete -Version $VSTeamVersionTable.DistributedTask | Out-Null
+               -Method Delete -Version $([VSTeamVersions]::DistributedTask) | Out-Null
 
             Write-Output "Deleted service endpoint $item"
          }

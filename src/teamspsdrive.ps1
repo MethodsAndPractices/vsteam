@@ -2,7 +2,7 @@
    The formatting of the results are controlled in .\formats\vsteamPSDrive.format.ps1xml
 
    Modeling a VSTeam for example:
-   
+
    Account
    - Agent Pools
      - Pool1
@@ -12,6 +12,17 @@
    - Builds
       - Build1
       - Build2
+   - Build Definitions
+      - Build Definition 1
+         - Phase 1
+            - Step 1a
+            - Step 1b
+            - Step 1c
+         - Phase 2
+            - Step 2a
+            - Step 2b
+      - Build Definition 2
+         - yamlFileName
    - Releases
       - Release1
          - Environment 1
@@ -47,6 +58,29 @@ Get-ChildItem
 #>
 
 using namespace Microsoft.PowerShell.SHiPS
+
+class VSTeamVersions {
+   static [string] $Account = $env:TEAM_ACCT
+   static [string] $DefaultProject = $env:TEAM_PROJECT
+   static [string] $Version = 'TFS2017'
+   static [string] $Build = '3.0'
+   static [string] $Release = '3.0-preview'
+   static [string] $Core = '3.0'
+   static [string] $Git = '3.0'
+   static [string] $DistributedTask = '3.0-preview'
+   static [string] $Tfvc = '3.0'
+   static [string] $MemberEntitlementManagement = ''
+   static [string] $ServiceFabricEndpoint = ''
+   static [string] $ModuleVersion = $null
+}
+
+# Dynamic parameters get called alot. This can cause
+# multiple calls to TFS/VSTS for a single function call
+# so I am going to try and cache the values.
+class VSTeamProjectCache {
+   static [int] $timestamp = -1
+   static [object] $projects = $null
+}
 
 class VSTeamDirectory : SHiPSDirectory {
    # The object returned from the REST API call
@@ -167,7 +201,7 @@ class VSTeamAccount : SHiPSDirectory {
       $poolsAndProjects = @(
          [VSTeamPools]::new('Agent Pools')
       )
-      
+
       $items = Get-VSTeamProject | Sort-Object Name
 
       foreach ($item in $items) {
@@ -230,6 +264,7 @@ class VSTeamProject : VSTeamDirectory {
 
    [object[]] GetChildItem() {
       return @(
+         [VSTeamBuildDefinitions]::new('Build Definitions', $this.Name),
          [VSTeamBuilds]::new('Builds', $this.Name),
          [VSTeamReleases]::new('Releases', $this.Name),
          [VSTeamRepositories]::new('Repositories', $this.Name),
@@ -286,10 +321,16 @@ class VSTeamPool : VSTeamDirectory {
       $this.id = $obj.id
       $this.count = $obj.size
       $this.isHosted = $obj.isHosted
-      $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
+
+      # On some accounts teh CreatedBy is null for hosted pools
+      if ($null -ne $obj.createdBy) {
+         $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
+      }
 
       # Depending on TFS/VSTS this might not be returned
-      if ($obj.PSObject.Properties.Match('owner').count -gt 0) {
+      # Just becaues it exisit does not mean it is not $null
+      if ($obj.PSObject.Properties.Match('owner').count -gt 0 -and
+          $null -ne $obj.owner) {
          $this.owner = [VSTeamUser]::new($obj.owner, $null)
       }
 
@@ -299,7 +340,7 @@ class VSTeamPool : VSTeamDirectory {
          $this.DisplayMode = 'd-r-s-'
       }
       else {
-         $this.DisplayMode = 'd-----'        
+         $this.DisplayMode = 'd-----'
       }
 
       $this._internalObj = $obj
@@ -404,6 +445,252 @@ class VSTeamBuild : VSTeamLeaf {
       $this._internalObj = $obj
 
       $this.AddTypeName('Team.Build')
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamBuildDefinitions : VSTeamDirectory {
+
+   # Default constructor
+   VSTeamBuildDefinitions(
+      [string]$Name,
+      [string]$ProjectName
+   ) : base($Name, $ProjectName) {
+      $this.AddTypeName('Team.BuildDefinitions')
+   }
+
+   [object[]] GetChildItem() {
+      $items = Get-VSTeamBuildDefinition -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+
+      foreach ($item in $items) {
+         $item.AddTypeName('Team.Provider.BuildDefinition')
+
+         # This has to be done here becuase this is the only point
+         # we know if the object graph is for the provider or not.
+         if ($item._internalObj.PSObject.Properties.Match('process').count -gt 0) {
+            if ($item.Process.type -eq 1) {
+               $item.Process.AddTypeName('Team.Provider.BuildDefinitionPhasedProcess')
+               foreach ($phase in $item.Process.phases) {
+                  $phase.AddTypeName('Team.Provider.BuildDefinitionProcessPhase')
+
+                  foreach ($step in $phase.steps) {
+                     $step.AddTypeName('Team.Provider.BuildDefinitionProcessPhaseStep')
+                  }
+               }
+            }
+            else {
+               $item.Process.AddTypeName('Team.Provider.BuildDefinitionProcess')
+            }
+         }
+
+
+         # TFS
+         if ($item._internalObj.PSObject.Properties.Match('build').count -gt 0) {
+            foreach ($step in $item.Steps) {
+               $step.AddTypeName('Team.Provider.BuildDefinitionProcessPhaseStep')
+            }
+         }
+      }
+
+      return $items
+   }
+}
+
+[SHiPSProvider(UseCache = $false)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamBuildDefinition : VSTeamDirectory {
+
+   [int]$id = -1
+   [int]$Revision = -1
+   [string]$Path = $null
+   [object]$Tags = $null
+   [object]$Queue = $null
+   [object]$Options = $null
+   [object]$Triggers = $null
+   [object]$Variables = $null
+   [object]$Repository = $null
+   [object]$RetentionRules = $null
+   [VSTeamUser]$AuthoredBy = $null
+   [string]$BuildNumberFormat = $null
+   [string]$JobAuthorizationScope = $null
+   [datetime]$CreatedOn = [datetime]::MinValue
+   [VSTeamBuildDefinitionProcess]$Process = $null
+   [VSTeamBuildDefinitionProcessPhaseStep[]]$Steps = $null
+
+   VSTeamBuildDefinition (
+      [object]$obj,
+      [string]$Projectname
+   ) : base($obj.name, $Projectname) {
+
+      $this.id = $obj.id
+      $this.Path = $obj.path
+      $this.Queue = $obj.queue
+      $this.Revision = $obj.revision
+      $this.Variables = $obj.variables
+      $this.CreatedOn = $obj.createdDate
+      $this.Repository = $obj.repository
+      $this.JobAuthorizationScope = $obj.jobAuthorizationScope
+      $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
+      
+      # These might not be returned
+      if ($obj.PSObject.Properties.Match('triggers').count -gt 0) {
+         $this.Triggers = $obj.triggers
+      }
+
+      if ($obj.PSObject.Properties.Match('retentionRules').count -gt 0) {
+         $this.RetentionRules = $obj.retentionRules
+      }
+      
+      if ($obj.PSObject.Properties.Match('options').count -gt 0) {
+         $this.Options = $obj.options
+      }
+      
+      if ($obj.PSObject.Properties.Match('tags').count -gt 0) {
+         $this.Tags = $obj.tags
+      }
+
+      # This is only in VSTS. In TFS it is a build property
+      if ($obj.PSObject.Properties.Match('process').count -gt 0) {
+         $this.Process = [VSTeamBuildDefinitionProcess]::new($obj.process, $Projectname)         
+      }
+
+      # TFS 2017/2018
+      if ($obj.PSObject.Properties.Match('build').count -gt 0) {
+         $stepNo = 0
+         foreach ($step in $obj.build) {
+            $stepNo++
+            $this.Steps += [VSTeamBuildDefinitionProcessPhaseStep]::new($step, $stepNo, $Projectname)
+         }
+      }
+
+      if ($obj.PSObject.Properties.Match('BuildNumberFormat').count -gt 0) {
+         $this.BuildNumberFormat = $obj.buildNumberFormat
+      }
+
+      $this._internalObj = $obj
+
+      $this.AddTypeName('Team.BuildDefinition')
+   }
+
+   [object[]] GetChildItem() {
+
+      if ($null -ne $this.Steps) {
+         return $this.Steps
+      }
+
+      if ($this.Process.Type -eq 1) {
+         return $this.Process.Phases
+      }
+      else {
+         return $this.Process
+      }
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+class VSTeamBuildDefinitionProcess : VSTeamDirectory {
+   [int]$type
+   [string]$yamlFilename
+   [VSTeamBuildDefinitionProcessPhase[]]$Phases
+
+   VSTeamBuildDefinitionProcess (
+      [object]$obj,
+      [string]$Projectname
+   ) : base("Process", $Projectname) {
+
+      # Is this a yaml build or not?
+      # Type is = 2 for yaml
+      $this.type = $obj.type
+
+      if ($this.type -eq 1) {
+         foreach ($phase in $obj.phases) {
+            $this.Phases += [VSTeamBuildDefinitionProcessPhase]::new($phase, $Projectname)
+         }
+
+         $this.AddTypeName('Team.BuildDefinitionPhasedProcess')
+      }
+      else {
+         $this.yamlFilename = $obj.yamlFilename
+
+         $this.DisplayMode = '------'
+         $this.AddTypeName('Team.BuildDefinitionYamlProcess')
+      }
+
+      $this._internalObj = $obj
+   }
+
+   [string]ToString() {
+      if ($this.type -eq 1) {
+         return "Number of phases: $($this.Phases.Length)"
+      }
+      else {
+         return $this.yamlFilename
+      }
+   }
+}
+
+class VSTeamBuildDefinitionProcessPhase : VSTeamDirectory {
+   [string]$Condition = $null
+   [object]$Target = $null
+   [string]$JobAuthorizationScope = $null
+   [int]$JobCancelTimeoutInMinutes = -1
+   [VSTeamBuildDefinitionProcessPhaseStep[]] $Steps
+   [int]$StepCount = 0
+
+   VSTeamBuildDefinitionProcessPhase(
+      [object]$obj,
+      [string]$Projectname
+   ) : base($obj.name, $Projectname) {
+      $this.Condition = $obj.condition
+      $this.Target = $obj.target
+      $this.JobAuthorizationScope = $obj.jobAuthorizationScope
+      $this.JobCancelTimeoutInMinutes = $obj.jobCancelTimeoutInMinutes
+
+      $this.StepCount = 0
+      foreach ($step in $obj.steps) {
+         $this.StepCount++
+         $this.Steps += [VSTeamBuildDefinitionProcessPhaseStep]::new($step, $this.StepCount, $Projectname)
+      }
+
+      $this._internalObj = $obj
+
+      $this.AddTypeName('Team.BuildDefinitionProcessPhase')
+   }
+
+   [object[]] GetChildItem() {
+      return $this.Steps
+   }
+}
+
+class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
+   [bool]$Enabled = $true
+   [bool]$ContinueOnError = $false
+   [bool]$AlwaysRun = $true
+   [int]$TimeoutInMinutes = 0
+   [string]$Condition = $null
+   [object]$Inputs = $null
+   [object]$Task = $null
+
+   VSTeamBuildDefinitionProcessPhaseStep(
+      [object]$obj,
+      [int]$stepNo,
+      [string]$Projectname
+   ) : base($obj.displayName, $stepNo.ToString(), $Projectname) {
+      $this.Enabled = $obj.enabled
+      $this.ContinueOnError = $obj.continueOnError
+      $this.AlwaysRun = $obj.alwaysRun
+      $this.TimeoutInMinutes = $obj.timeoutInMinutes
+      $this.Inputs = $obj.inputs
+      $this.Task = $obj.task
+            
+      if ($obj.PSObject.Properties.Match('condition').count -gt 0) {
+         $this.Condition = $obj.condition
+      }
+      
+      $this._internalObj = $obj
+
+      $this.AddTypeName('Team.BuildDefinitionProcessPhaseStep')
    }
 }
 
@@ -682,6 +969,7 @@ class VSTeamRef : VSTeamLeaf {
       [object]$obj,
       [string]$ProjectName
    ) : base($obj.name, $obj.objectId, $ProjectName) {
+
       $this.RefName = $obj.name
       $this.Creator = [VSTeamUser]::new($obj.creator, $ProjectName)
 

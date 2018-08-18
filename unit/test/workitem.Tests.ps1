@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope workitems {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
    Describe 'workitems' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -9,7 +9,7 @@ InModuleScope workitems {
          $Uri -like "*_apis/projects*" 
       }
    
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       $obj = @{
          id  = 47
@@ -34,7 +34,7 @@ InModuleScope workitems {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json-patch+json' -and
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/`$Task?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
             }
          }
 
@@ -45,7 +45,7 @@ InModuleScope workitems {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json-patch+json' -and
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/`$Task?api-version=$($VSTeamVersionTable.Core)"
+               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -78,10 +78,10 @@ InModuleScope workitems {
             # matches I have to search for the portions I expect but can't
             # assume the order. 
             # The general string should look like this:
-            # https://test.visualstudio.com/test/_apis/wit/workitems/?api-version=$($VSTeamVersionTable.Core)&ids=47,48&`$Expand=None&errorPolicy=Fail
+            # https://test.visualstudio.com/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=Fail
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://test.visualstudio.com/test/_apis/wit/workitems/*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.Core)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*ids=47,48*" -and
                $Uri -like "*`$Expand=None*" -and
                $Uri -like "*errorPolicy=Fail*"
@@ -99,7 +99,7 @@ InModuleScope workitems {
             Get-VSTeamWorkItem -ProjectName test -Id 47
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/47?api-version=$($VSTeamVersionTable.Core)&`$Expand=None"
+               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/47?api-version=$([VSTeamVersions]::Core)&`$Expand=None"
             }
          }
       }

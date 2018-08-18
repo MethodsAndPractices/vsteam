@@ -47,7 +47,7 @@ function Get-VSTeamWorkItemType {
       # Call the REST API
       if ($WorkItemType) {
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
-            -Version $VSTeamVersionTable.Core -id $WorkItemType
+            -Version $([VSTeamVersions]::Core) -id $WorkItemType
 
          # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
          # To replace all the "": with "_end":
@@ -59,7 +59,7 @@ function Get-VSTeamWorkItemType {
       }
       else {      
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
-            -Version $VSTeamVersionTable.Core
+            -Version $([VSTeamVersions]::Core)
 
          # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
          # To replace all the "": with "_end":

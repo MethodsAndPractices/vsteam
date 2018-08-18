@@ -4,18 +4,12 @@ Set-StrictMode -Version Latest
 Add-Type -AssemblyName 'System.Web'
 
 InModuleScope buildDefinitions {
-   $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
-   $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{
-         queue      = [PSCustomObject]@{ name = 'Default' }
-         _links     = [PSCustomObject]@{}
-         variables  = [PSCustomObject]@{}
-         repository = [PSCustomObject]@{}
-         project    = [PSCustomObject]@{ name = 'project' }
-         authoredBy = [PSCustomObject]@{ name = 'test'}
-      }
-   }
+   $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+   $results2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
+   $results2018 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
+   $resultsyaml = Get-Content "$PSScriptRoot\sampleFiles\buildDefyaml.json" -Raw | ConvertFrom-Json
 
    Describe 'BuildDefinitions' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -23,7 +17,7 @@ InModuleScope buildDefinitions {
          $Uri -like "*_apis/projects*" 
       }
    
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Show-VSTeamBuildDefinition by ID' {
          Mock Show-Browser { }
@@ -97,44 +91,102 @@ InModuleScope buildDefinitions {
          }
       }
 
-      Context 'Get-VSTeamBuildDefinition with no parameters' {
+      Context 'Get-VSTeamBuildDefinition with no parameters 2017' {
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod {
-            return $results 
+            # If this test fails uncomment the line below to see how the mock was called.
+            # Write-Host $args
+            # Write-Host $([VSTeamVersions]::Build)
+            # Write-Host $([VSTeamVersions]::Account)
+
+            return $results2017 
          }
 
          It 'should return build definitions' {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/?api-version=$($VSTeamVersionTable.Build)&type=All"
+               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamBuildDefinition with no parameters 2018' {
+         Mock _useWindowsAuthenticationOnPremise { return $true }
+         Mock Invoke-RestMethod {
+            return $results2018 
+         }
+
+         It 'should return build definitions' {
+            Get-VSTeamBuildDefinition -projectName project
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamBuildDefinition with no parameters VSTS' {
+         Mock Invoke-RestMethod {
+            return $resultsVSTS 
+         }
+
+         It 'should return build definitions' {
+            Get-VSTeamBuildDefinition -projectName project
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamBuildDefinition with no parameters VSTS yaml ' {
+         Mock Invoke-RestMethod {
+            return $resultsVSTS 
+         }
+
+         It 'should return build definitions' {
+            Get-VSTeamBuildDefinition -projectName project
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
             }
          }
       }
 
       Context 'Get-VSTeamBuildDefinition with type parameter' {
          Mock Invoke-RestMethod {
-            return $results 
+            return $resultsVSTS 
          }
 
          It 'should return build definitions by type' {
             Get-VSTeamBuildDefinition -projectName project -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/?api-version=$($VSTeamVersionTable.Build)&type=build"
+               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=build*"
             }
          }
       }
 
       Context 'Get-VSTeamBuildDefinition with filter parameter' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $resultsVSTS }
 
          It 'should return build definitions by filter' {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.Build)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=All*"
             }
@@ -142,14 +194,14 @@ InModuleScope buildDefinitions {
       }
 
       Context 'Get-VSTeamBuildDefinition with both parameters' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $resultsVSTS }
 
          It 'should return build definitions by filter' {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*' -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
-               $Uri -like "*api-version=$($VSTeamVersionTable.Build)*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=build*"
             }
@@ -157,106 +209,87 @@ InModuleScope buildDefinitions {
       }
 
       Context 'Add-VSTeamBuildDefinition' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $resultsVSTS }
 
          it 'Should add build' {
-            Add-VSTeamBuildDefinition -projectName project -inFile 'builddef.json'
+            Add-VSTeamBuildDefinition -projectName project -inFile 'sampleFiles/builddef.json'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
-               $InFile -eq 'builddef.json' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/?api-version=$($VSTeamVersionTable.Build)"
+               $InFile -eq 'sampleFiles/builddef.json' -and
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
 
       Context 'Get-VSTeamBuildDefinition by ID' {
-         Mock Invoke-RestMethod { return @{
-               queue      = @{}
-               _links     = @{}
-               project    = @{}
-               variables  = @{}
-               repository = @{}
-               authoredBy = @{}
-            }}
+         Mock Invoke-RestMethod { return $resultsVSTS.value }
 
          It 'should return build definition' {
             Get-VSTeamBuildDefinition -projectName project -id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/15?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
 
       Context 'Get-VSTeamBuildDefinition by ID local auth' {
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod { return [PSCustomObject]@{
-               queue      = [PSCustomObject]@{}
-               _links     = [PSCustomObject]@{}
-               project    = [PSCustomObject]@{}
-               variables  = [PSCustomObject]@{}
-               repository = [PSCustomObject]@{}
-               authoredBy = [PSCustomObject]@{}
-            }}
+         Mock Invoke-RestMethod { return $resultsVSTS.value }
 
          It 'should return build definition' {
             Get-VSTeamBuildDefinition -projectName project -id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/15?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
 
       Context 'Get-VSTeamBuildDefinition with revision parameter' {
-         Mock Invoke-RestMethod { return @{
-               queue      = @{}
-               _links     = @{}
-               project    = @{}
-               authoredBy = @{}
-            }}
+         Mock Invoke-RestMethod { return $resultsVSTS.value }
 
          It 'should return build definitions by revision' {
             Get-VSTeamBuildDefinition -projectName project -id 16 -revision 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/16?api-version=$($VSTeamVersionTable.Build)&revision=1"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/16?api-version=$([VSTeamVersions]::Build)&revision=1"
             }
          }
       }
 
       Context 'Remove-VSTeamBuildDefinition' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $resultsVSTS }
 
          It 'should delete build definition' {
             Remove-VSTeamBuildDefinition -projectName project -id 2 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and 
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
 
       Context 'Update-VSTeamBuildDefinition' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $resultsVSTS }
 
          It 'should update build definition' {
-            Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'builddef.json' -Force
+            Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
-               $InFile -eq 'builddef.json' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
+               $InFile -eq 'sampleFiles/builddef.json' -and
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
 
       # Make sure these test run last as the need differnt 
-      # $VSTeamVersionTable.Account values
+      # [VSTeamVersions]::Account values
       Context 'Get-VSTeamBuildDefinition with no account' {
-         $VSTeamVersionTable.Account = $null
+         [VSTeamVersions]::Account = $null
 
          It 'should return build definitions' {
             { Get-VSTeamBuildDefinition -projectName project } | Should Throw
@@ -264,48 +297,48 @@ InModuleScope buildDefinitions {
       }
 
       Context 'Add-VSTeamBuildDefinition on TFS local Auth' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $resultsVSTS }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
          it 'Should add build' {
-            Add-VSTeamBuildDefinition -projectName project -inFile 'builddef.json'
+            Add-VSTeamBuildDefinition -projectName project -inFile 'sampleFiles/builddef.json'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
-               $InFile -eq 'builddef.json' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/?api-version=$($VSTeamVersionTable.Build)"
+               $InFile -eq 'sampleFiles/builddef.json' -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
 
       Context 'Remove-VSTeamBuildDefinition on TFS local Auth' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $resultsVSTS }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
          Remove-VSTeamBuildDefinition -projectName project -id 2 -Force
          
          It 'should delete build definition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and 
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
 
       Context 'Update-VSTeamBuildDefinition on TFS local Auth' {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { return $resultsVSTS }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
-         Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'builddef.json' -Force
+         Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
          
          It 'should update build definition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
-               $InFile -eq 'builddef.json' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$($VSTeamVersionTable.Build)"
+               $InFile -eq 'sampleFiles/builddef.json' -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }

@@ -51,11 +51,11 @@ InModuleScope builds {
 
    Describe 'Builds VSTS' {
       # Load the mocks to create the project name dynamic parameter
-      . "$PSScriptRoot\mockProjectNameDynamicParamNoPSet.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       # Set the account to use for testing. A normal user would do this
       # using the Add-VSTeamAccount function.
-      $VSTeamVersionTable.Account = 'https://test.visualstudio.com'
+      [VSTeamVersions]::Account = 'https://test.visualstudio.com'
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -71,7 +71,7 @@ InModuleScope builds {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter { 
                $Method -eq 'Patch' -and 
                $Body -eq '{"keepForever": true}' -and 
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1?api-version=$($VSTeamVersionTable.Build)" }
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1?api-version=$([VSTeamVersions]::Build)" }
          }
       }
 
@@ -87,10 +87,10 @@ InModuleScope builds {
 
       Context 'Get Build Log with build id' {
          Mock Invoke-RestMethod { return @{ count = 4 } } -Verifiable -ParameterFilter {
-            $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1/logs/?api-version=$($VSTeamVersionTable.Build)" 
+            $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1/logs/?api-version=$([VSTeamVersions]::Build)" 
          }
          Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter {
-            $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1/logs/3?api-version=$($VSTeamVersionTable.Build)"
+            $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1/logs/3?api-version=$([VSTeamVersions]::Build)"
          }
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
 
@@ -102,7 +102,7 @@ InModuleScope builds {
       }
 
       Context 'Get Build Log with build id and index' {
-         Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter { $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1/logs/2?api-version=$($VSTeamVersionTable.Build)" }
+         Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter { $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1/logs/2?api-version=$([VSTeamVersions]::Build)" }
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
 
          Get-VSTeamBuildLog -projectName project -Id 1 -Index 2
@@ -119,7 +119,7 @@ InModuleScope builds {
             Get-VSTeamBuild -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)" 
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)" 
             }
          }
       }
@@ -131,7 +131,7 @@ InModuleScope builds {
             Get-VSTeamBuild -projectName project -top 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)&`$top=1" 
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)&`$top=1" 
             }
          }
       }
@@ -143,7 +143,7 @@ InModuleScope builds {
 
          It 'should return top builds' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1?api-version=$($VSTeamVersionTable.Build)" 
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/1?api-version=$([VSTeamVersions]::Build)" 
             }
          }
       }
@@ -157,7 +157,7 @@ InModuleScope builds {
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -173,7 +173,7 @@ InModuleScope builds {
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -190,7 +190,7 @@ InModuleScope builds {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
                ($Body | ConvertFrom-Json).sourceBranch -eq 'refs/heads/dev' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -207,7 +207,7 @@ InModuleScope builds {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
                (($Body | ConvertFrom-Json).parameters | ConvertFrom-Json).'system.debug' -eq 'true' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -225,7 +225,7 @@ InModuleScope builds {
             # Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -240,7 +240,7 @@ InModuleScope builds {
             foreach ($inputTag in $inputTags) {
                Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                   $Method -eq 'Put' -and
-                  $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags/?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
+                  $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags/?api-version=$([VSTeamVersions]::Build)" + "&tag=$inputTag"
                }
             }
          }
@@ -258,7 +258,7 @@ InModuleScope builds {
             foreach ($inputTag in $inputTags) {
                Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                   $Method -eq 'Delete' -and
-                  $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags/?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
+                  $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags/?api-version=$([VSTeamVersions]::Build)" + "&tag=$inputTag"
                }
             }
          }
@@ -273,7 +273,7 @@ InModuleScope builds {
             Get-VSTeamBuildTag -projectName project -id 2
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags/?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/tags/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -310,14 +310,14 @@ InModuleScope builds {
 
          It 'should return the build artifact data' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/artifacts/?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "https://test.visualstudio.com/project/_apis/build/builds/2/artifacts/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
    }
 
    Describe 'Builds TFS' {
-      . "$PSScriptRoot\mockProjectNameDynamicParam.ps1"
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
 
@@ -329,10 +329,10 @@ InModuleScope builds {
       # Remove any previously loaded accounts
       Remove-VSTeamAccount
 
-      $VSTeamVersionTable.Account = 'http://localhost:8080/tfs/defaultcollection'
+      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
       Context 'Get Build Log with index on TFS local Auth' {
-         Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/2?api-version=$($VSTeamVersionTable.Build)" }
+         Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/2?api-version=$([VSTeamVersions]::Build)" }
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
 
          Get-VSTeamBuildLog -projectName project -Id 1 -Index 2
@@ -349,7 +349,7 @@ InModuleScope builds {
             Get-VSTeamBuild -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -360,16 +360,16 @@ InModuleScope builds {
          It 'should return builds' {
             Get-VSTeamBuild -projectName project -id 2
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$($VSTeamVersionTable.Build)" }
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$([VSTeamVersions]::Build)" }
          }
       }
 
       Context 'Get Build Log on TFS local Auth' {
          Mock Invoke-RestMethod { return @{ count = 4 } } -Verifiable -ParameterFilter { 
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/?api-version=$($VSTeamVersionTable.Build)"
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/?api-version=$([VSTeamVersions]::Build)"
          }
          Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter {
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/3?api-version=$($VSTeamVersionTable.Build)"
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/3?api-version=$([VSTeamVersions]::Build)"
          }
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
 
@@ -399,7 +399,7 @@ InModuleScope builds {
 
          It 'should return the build artifact data' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/artifacts/?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/artifacts/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -428,7 +428,7 @@ InModuleScope builds {
             foreach ($inputTag in $inputTags) {
                Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                   $Method -eq 'Put' -and
-                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags/?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
+                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags/?api-version=$([VSTeamVersions]::Build)" + "&tag=$inputTag"
                }
             }
          }
@@ -442,7 +442,7 @@ InModuleScope builds {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$($VSTeamVersionTable.Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -466,7 +466,7 @@ InModuleScope builds {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             ($Body | ConvertFrom-Json).definition.id -eq 2 -and
             ($Body | ConvertFrom-Json).queue.id -eq 3 -and
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
          }
 
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
@@ -497,7 +497,7 @@ InModuleScope builds {
             ($Body | ConvertFrom-Json).definition.id -eq 2 -and
             ($Body | ConvertFrom-Json).queue.id -eq 3 -and
             (($Body | ConvertFrom-Json).parameters | ConvertFrom-Json).'system.debug' -eq 'true' -and
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
          }
 
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
@@ -529,7 +529,7 @@ InModuleScope builds {
             ($Body | ConvertFrom-Json).definition.id -eq 2 -and
             ($Body | ConvertFrom-Json).queue.id -eq 3 -and
             ($Body | ConvertFrom-Json).sourceBranch -eq 'refs/heads/dev' -and
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$($VSTeamVersionTable.Build)"
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
          }
 
          Mock Invoke-RestMethod { throw 'Invoke-RestMethod called with wrong URL' }
@@ -556,7 +556,7 @@ InModuleScope builds {
             foreach ($inputTag in $inputTags) {
                Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                   $Method -eq 'Delete' -and
-                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags/?api-version=$($VSTeamVersionTable.Build)" + "&tag=$inputTag"
+                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags/?api-version=$([VSTeamVersions]::Build)" + "&tag=$inputTag"
                }
             }
          }
@@ -586,7 +586,7 @@ InModuleScope builds {
          Update-VSTeamBuild -projectName project -id 1 -BuildNumber 'TestNumber' -KeepForever $true -Force
 
          It 'should post changes' {
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"keepForever": true, "buildNumber": "TestNumber"}' -and $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1?api-version=$($VSTeamVersionTable.Build)" }
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"keepForever": true, "buildNumber": "TestNumber"}' -and $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1?api-version=$([VSTeamVersions]::Build)" }
          }
       }
    }

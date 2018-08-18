@@ -65,12 +65,12 @@ function Get-VSTeamServiceEndpointType {
 
          # Call the REST API
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointtypes'  `
-            -Version $VSTeamVersionTable.DistributedTask -body $body
+            -Version $([VSTeamVersions]::DistributedTask) -body $body
       }
       else {
          # Call the REST API
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointtypes'  `
-            -Version $VSTeamVersionTable.DistributedTask
+            -Version $([VSTeamVersions]::DistributedTask)
       }
       
       

@@ -57,7 +57,7 @@ function Add-VSTeamWorkItem {
 
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems'  `
-         -Version $VSTeamVersionTable.Core -id $WorkItemType -Method Post `
+         -Version $([VSTeamVersions]::Core) -id $WorkItemType -Method Post `
          -ContentType 'application/json-patch+json' -Body $body
 
       _applyTypesToWorkItem -item $resp
@@ -82,7 +82,7 @@ function Show-VSTeamWorkItem {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      Show-Browser "$($VSTeamVersionTable.Account)/$ProjectName/_workitems/edit/$Id"
+      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_workitems/edit/$Id"
    }
 }
 
@@ -116,7 +116,7 @@ function Get-VSTeamWorkItem {
       # Call the REST API
       if ($Ids) {
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems'  `
-            -Version $VSTeamVersionTable.Core `
+            -Version $([VSTeamVersions]::Core) `
             -Querystring @{
             '$Expand'   = $Expand
             fields      = ($Fields -join ',')
@@ -131,7 +131,7 @@ function Get-VSTeamWorkItem {
       else {
          $a = $id[0]
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems'  `
-            -Version $VSTeamVersionTable.Core -id "$a" `
+            -Version $([VSTeamVersions]::Core) -id "$a" `
             -Querystring @{
             '$Expand' = $Expand
             fields      = ($Fields -join ',')
