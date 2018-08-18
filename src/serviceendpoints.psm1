@@ -472,7 +472,7 @@ function Update-VSTeamServiceEndpoint {
 
       $body = $object | ConvertTo-Json
 
-      if ($Force -or $pscmdlet.ShouldProcess($item, "Update Service Endpoint")) {
+      if ($Force -or $pscmdlet.ShouldProcess($id, "Update Service Endpoint")) {
          # Call the REST API
          $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
             -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::DistributedTask)
