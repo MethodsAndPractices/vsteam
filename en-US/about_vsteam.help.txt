@@ -14,9 +14,9 @@ LONG DESCRIPTION
     -ProjectName parameter is dynamic and you can use tab completion to cycle
     through all the projects.
 
-    Using the $Global:VSTeamVersionTable variable you can control which version of the APIs are used.
+    Using the [VSTeamVersions] class you can control which version of the APIs are used.
     
-    PS C:\> $Global:VSTeamVersionTable
+    PS C:\> Get-VSTeamAPIVersion
 
     Name                         Value
     ----                         -----

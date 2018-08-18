@@ -52,6 +52,14 @@ Required: true
 Accept pipeline input: true (ByPropertyName)
 ```
 
+### -Force
+
+Forces the command without confirmation
+
+```yaml
+Type: SwitchParameter
+```
+
 ## INPUTS
 
 ## OUTPUTS

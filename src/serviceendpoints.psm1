@@ -451,13 +451,15 @@ function Get-VSTeamServiceEndpoint {
 }
 
 function Update-VSTeamServiceEndpoint {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $id,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [hashtable] $object
+      [hashtable] $object,
+
+      [switch] $Force
    )
 
    DynamicParam {
@@ -470,13 +472,15 @@ function Update-VSTeamServiceEndpoint {
 
       $body = $object | ConvertTo-Json
 
-      # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
-         -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::DistributedTask)
+      if ($Force -or $pscmdlet.ShouldProcess($item, "Update Service Endpoint")) {
+         # Call the REST API
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
+            -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::DistributedTask)
       
-      _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
+         _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
 
-      return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
+         return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
+      }
    }
 }
 
