@@ -28,12 +28,72 @@ InModuleScope feeds {
          [VSTeamVersions]::Packaging = '4.0'
          Mock Invoke-RestMethod { return $results.value[0] }
 
-         it 'Should return all the Feeds' {
+         it 'Should return one feed' {
             Get-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::packaging)"
             }
+         }
+      }
+
+      Context 'Add-VSTeamFeed with description' {
+         [VSTeamVersions]::Packaging = '4.0'
+         Mock Invoke-RestMethod { 
+            # Write-Host "$args"
+            return $results.value[0] 
+         }
+
+         it 'Should add Feed' {
+            Add-VSTeamFeed -Name 'module' -Description 'Test Module'
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)" -and
+               $Method -eq 'Post' -and
+               $ContentType -eq 'application/json' -and
+               $Body -like '*"name":  "module"*'
+            }
+         }
+      }
+
+      Context 'Add-VSTeamFeed with upstream sources' {
+         [VSTeamVersions]::Packaging = '4.0'
+         Mock Invoke-RestMethod { 
+            # Write-Host "$args"
+            return $results.value[0] 
+         }
+
+         it 'Should add Feed' {
+            Add-VSTeamFeed -Name 'module' -EnableUpstreamSources -showDeletedPackageVersions
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)" -and
+               $Method -eq 'Post' -and
+               $ContentType -eq 'application/json' -and
+               $Body -like '*"upstreamEnabled":  true*' -and
+               $Body -like '*"upstreamEnabled":  true*' -and
+               $Body -like '*"hideDeletedPackageVersions":  false*'
+            }
+         }
+      }
+
+      Context 'Show-VSTeamFeed by name' {
+         Mock Show-Browser
+         
+         It 'Show call start' {
+            Show-VSTeamFeed -Name module
+
+            Assert-MockCalled Show-Browser
+         }
+      }
+
+      Context 'Show-VSTeamFeed by id' {
+         Mock Show-Browser
+         
+         It 'Show call start' {
+            Show-VSTeamFeed -Id '00000000-0000-0000-0000-000000000000'
+
+            Assert-MockCalled Show-Browser
          }
       }
 
