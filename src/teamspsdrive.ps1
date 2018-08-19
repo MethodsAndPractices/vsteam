@@ -5,13 +5,16 @@
 
    Account
    - Agent Pools
-     - Pool1
-       - Agent1
-   - Project1
-   - Project2
+     - Pool 1
+       - Agent 1
+   - Feeds
+      - Feed 1
+      - Feed 2
+   - Project 1
+   - Project 2
    - Builds
-      - Build1
-      - Build2
+      - Build 1
+      - Build 2
    - Build Definitions
       - Build Definition 1
          - Phase 1
@@ -24,20 +27,20 @@
       - Build Definition 2
          - yamlFileName
    - Releases
-      - Release1
+      - Release 1
          - Environment 1
          - Attempt 1
-            - Task1
-            - Task2
-            - Task3
-      - Release2
+            - Task 1
+            - Task 2
+            - Task 3
+      - Release 2
    - Teams
-      - Team1
-      - Team2
+      - Team 1
+      - Team 2
    - Repositories
-      - Repo1
-         - Ref1
-         - Ref2
+      - Repo 1
+         - Ref 1
+         - Ref 2
 
 
 #region Add-TeamAccount
@@ -69,6 +72,7 @@ class VSTeamVersions {
    static [string] $Git = '3.0'
    static [string] $DistributedTask = '3.0-preview'
    static [string] $Tfvc = '3.0'
+   static [string] $Packaging = ''
    static [string] $MemberEntitlementManagement = ''
    static [string] $ServiceFabricEndpoint = ''
    static [string] $ModuleVersion = $null
@@ -199,7 +203,8 @@ class VSTeamAccount : SHiPSDirectory {
 
    [object[]] GetChildItem() {
       $poolsAndProjects = @(
-         [VSTeamPools]::new('Agent Pools')
+         [VSTeamPools]::new('Agent Pools'),
+         [VSTeamFeeds]::new('Feeds')
       )
 
       $items = Get-VSTeamProject | Sort-Object Name
@@ -270,6 +275,59 @@ class VSTeamProject : VSTeamDirectory {
          [VSTeamRepositories]::new('Repositories', $this.Name),
          [VSTeamTeams]::new('Teams', $this.Name)
       )
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamFeeds : VSTeamDirectory {
+
+   # Default constructor
+   VSTeamFeeds(
+      [string]$Name
+   ) : base($Name, $null) {
+      $this.AddTypeName('Team.Feeds')
+
+      $this.DisplayMode = 'd-r-s-'
+   }
+
+   [object[]] GetChildItem() {
+      $feeds = Get-VSTeamFeed -ErrorAction SilentlyContinue | Sort-Object name
+
+      $objs = @()
+
+      foreach ($feed in $feeds) {
+         $feed.AddTypeName('Team.Provider.Feed')
+
+         $objs += $feed
+      }
+
+      return $objs
+   }
+}
+
+class VSTeamFeed : VSTeamLeaf {
+   [string]$description
+   [string]$url
+   [bool]$upstreamEnabled = $false
+   [PSCustomObject]$upstreamSources
+
+   VSTeamFeed (
+      [object]$obj
+   ) : base($obj.name, $obj.Id, $null) {
+
+      $this.url = $obj.url
+      $this.description = $obj.description
+      $this.upstreamSources = $obj.upstreamSources
+      
+      # These might not be returned
+      if ($obj.PSObject.Properties.Match('upstreamEnabled').count -gt 0) {
+         $this.upstreamEnabled = $obj.upstreamEnabled
+      }
+
+      $this._internalObj = $obj
+
+      $this.AddTypeName('Team.Feed')
    }
 }
 

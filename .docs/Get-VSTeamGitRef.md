@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-Get-VSTeamGitRef gets all the refs for the provided repository..
+Get-VSTeamGitRef gets all the refs for the provided repository.
 
 ## EXAMPLES
 

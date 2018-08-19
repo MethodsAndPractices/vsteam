@@ -115,7 +115,8 @@
       'src\tfvc.psm1',
       'src\users.psm1',
       'src\workitemTypes.psm1',
-      'src\workitems.psm1')
+      'src\workitems.psm1',
+      '.\src\feeds.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -205,7 +206,8 @@
       'Enable-VSTeamAgent',
       'Disable-VSTeamAgent',
       'Update-VSTeamProfile',
-      'Get-VSTeamAPIVersion')
+      'Get-VSTeamAPIVersion',
+      'Get-VSTeamFeed')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -310,7 +312,8 @@
       'Enable-Agent',
       'Disable-Agent',
       'Update-Profile',
-      'Get-APIVersion')
+      'Get-APIVersion',
+      'Get-Feed')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
