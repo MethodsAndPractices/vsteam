@@ -55,6 +55,10 @@ Adds a Git repository to your Visual Studio Team Services or Team Foundation Ser
 
 Adds connections to Kubernetes clusters
 
+### [Add-VSTeamNuGetEndpoint](Add-VSTeamNuGetEndpoint.md)
+
+Adds a new NuGet service endpoint.
+
 ### [Add-VSTeamPolicy](Add-VSTeamPolicy.md)
 
 Adds a new policy to the specified project.

@@ -21,11 +21,11 @@ foreach ($file in $files) {
 Set-Content -Path files.md -Value $sb.ToString()
 
 Write-Output 'Merging Markdown files'
-Install-Module markdownmerge -Scope CurrentUser -Force
+Install-Module Trackyon.Markdown -Scope CurrentUser -Force
 merge-markdown $PSScriptRoot $PSScriptRoot\..\docs
 
 Write-Output 'Creating new file'
-Import-Module platyPS -Force
+Install-Module platyPS -Scope CurrentUser -Force
 New-ExternalHelp ..\docs -OutputPath ..\en-US -Force
 
 # Run again and strip header

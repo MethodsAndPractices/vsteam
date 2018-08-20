@@ -440,45 +440,122 @@ InModuleScope serviceendpoints {
       }
 
       Context 'Add-VSTeamNuGetEndpoint with ApiKey' {
-         Mock Write-Error -Verifiable
+         Mock Write-Progress
          Mock Invoke-RestMethod {
+            return @{id = '23233-2342'}
+         } -ParameterFilter { $Method -eq 'Post'}
+         Mock Invoke-RestMethod {
+
+            # This $i is in the module. Because we use InModuleScope
+            # we can see it
+            if ($i -gt 9) {
+               return [PSCustomObject]@{
+                  isReady         = $true
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
+               }
+            }
+
+            return [PSCustomObject]@{
+               isReady         = $false
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
+            }
          }
          
+         Add-VSTeamNuGetEndpoint -ProjectName 'project' -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -ApiKey '00000000-0000-0000-0000-000000000000'
+         
          It 'should create a new NuGet Serviceendpoint' {
-            Add-VSTeamNuGetEndpoint -ProjectName 'project' -Authentication ApiKey -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -ApiKey '00000000-0000-0000-0000-000000000000'
-
-            Assert-VerifiableMock
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Method -eq 'Post' -and
+               $ContentType -eq 'application/json' -and
+               $Body -like '*"nugetkey": *"00000000-0000-0000-0000-000000000000"*' -and
+               $Body -like '*"scheme": *"None"*'
+            }
          }
       }
 
       Context 'Add-VSTeamNuGetEndpoint with Username and Password' {
-         Mock Write-Error -Verifiable
+         Mock Write-Progress
          Mock Invoke-RestMethod {
+            return @{id = '23233-2342'}
+         } -ParameterFilter { $Method -eq 'Post'}
+         Mock Invoke-RestMethod {
+
+            # This $i is in the module. Because we use InModuleScope
+            # we can see it
+            if ($i -gt 9) {
+               return [PSCustomObject]@{
+                  isReady         = $true
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
+               }
+            }
+
+            return [PSCustomObject]@{
+               isReady         = $false
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
+            }
          }
          
+         $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
+         Add-VSTeamNuGetEndpoint -ProjectName 'project' -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -Username 'testUser' -SecurePassword $password
+        
          It 'should create a new NuGet Serviceendpoint' {
-            Add-VSTeamNuGetEndpoint -ProjectName 'project' -Authentication UsernamePassword -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -Username 'testUser' -Password '00000000-0000-0000-0000-000000000000'
-
-            Assert-VerifiableMock
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Method -eq 'Post' -and
+               $ContentType -eq 'application/json' -and
+               $Body -like '*"username": *"testUser"*' -and
+               $Body -like '*"password": *"00000000-0000-0000-0000-000000000000"*' -and
+               $Body -like '*"scheme": *"UsernamePassword"*'
+            }
          }
       }
 
       Context 'Add-VSTeamNuGetEndpoint with Token' {
-         Mock Write-Error -Verifiable
+         Mock Write-Progress
+         
          Mock Invoke-RestMethod {
+            # Write-Host "$args"
+            return @{id = '23233-2342'}
+         } -ParameterFilter { $Method -eq 'Post'}
+         
+         Mock Invoke-RestMethod {
+            # This $i is in the module. Because we use InModuleScope
+            # we can see it
+            if ($i -gt 9) {
+               return [PSCustomObject]@{
+                  isReady         = $true
+                  operationStatus = [PSCustomObject]@{state = 'Ready'}
+               }
+            }
+
+            return [PSCustomObject]@{
+               isReady         = $false
+               createdBy       = [PSCustomObject]@{}
+               authorization   = [PSCustomObject]@{}
+               data            = [PSCustomObject]@{}
+               operationStatus = [PSCustomObject]@{state = 'InProgress'}
+            }
          }
          
+         Add-VSTeamNuGetEndpoint -ProjectName 'project' -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -PersonalAccessToken '00000000-0000-0000-0000-000000000000'
+         
          It 'should create a new NuGet Serviceendpoint' {
-            Add-VSTeamNuGetEndpoint -ProjectName 'project' -Authentication Token -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -PersonalAccessToken '00000000-0000-0000-0000-000000000000'
-
-            Assert-VerifiableMock
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Method -eq 'Post' -and
+               $ContentType -eq 'application/json' -and
+               $Body -like '*"apitoken":*"00000000-0000-0000-0000-000000000000"*' -and
+               $Body -like '*"scheme":*"Token"*'
+            }
          }
       }
-
-      
-   
-   
-   
    
       Context 'Update-VSTeamServiceEndpoint' {
          Mock Write-Progress
