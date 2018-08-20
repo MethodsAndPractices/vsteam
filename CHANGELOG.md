@@ -4,6 +4,8 @@
 
 You can now list and add package management feeds.
 
+Added Add-VSTeamNuGetEndpoint
+
 ## 4.0.0
 
 **Breaking changes**:
