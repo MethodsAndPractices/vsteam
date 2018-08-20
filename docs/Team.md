@@ -38,6 +38,10 @@ Creates a new build defintion from a JSON file.
 
 Adds a tag to a build.
 
+### [Add-VSTeamFeed](Add-VSTeamFeed.md)
+
+Adds a new feed to package management.
+
 ### [Add-VSTeamGitRepository](Add-VSTeamGitRepository.md)
 
 Adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
@@ -134,6 +138,10 @@ Returns all the tags of a build.
 ### [Get-VSTeamCloudSubscription](Get-VSTeamCloudSubscription.md)
 
 Gets the Azure subscriptions associated with the Team Services account.
+
+### [Get-VSTeamFeed](Get-VSTeamFeed.md)
+
+Returns a list of package feeds for the account.
 
 ### [Get-VSTeamGitRef](Get-VSTeamGitRef.md)
 
@@ -314,6 +322,10 @@ Opens the build summary in the default browser.
 ### [Show-VSTeamBuildDefinition](Show-VSTeamBuildDefinition.md)
 
 Opens the build definition in the default browser.
+
+### [Show-VSTeamFeed](Show-VSTeamFeed.md)
+
+Opens the feed in the default browser.
 
 ### [Show-VSTeamGitRepository](Show-VSTeamGitRepository.md)
 

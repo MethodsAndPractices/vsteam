@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.1
+
+You can now list and add package management feeds.
+
 ## 4.0.0
 
 **Breaking changes**:
@@ -17,7 +21,6 @@ Build Definition / Process / Phases / Steps are broken down into separate object
 (Get-VSTeamBuildDefinition -ProjectName MyProject -Id 42).Process.Phases[0].Steps
 (Get-VSTeamBuildDefinition -ProjectName MyProject -Id 42).Process.Phases[0].Steps[0]
 ```
-
 
 ## 3.0.7
 

@@ -79,7 +79,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
-You can pipe build defintion IDs to this function.
+You can pipe build definition IDs to this function.
 
 ## RELATED LINKS
 
