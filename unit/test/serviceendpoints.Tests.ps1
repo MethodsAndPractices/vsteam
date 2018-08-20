@@ -439,6 +439,47 @@ InModuleScope serviceendpoints {
          }
       }
 
+      Context 'Add-VSTeamNuGetEndpoint with ApiKey' {
+         Mock Write-Error -Verifiable
+         Mock Invoke-RestMethod {
+         }
+         
+         It 'should create a new NuGet Serviceendpoint' {
+            Add-VSTeamNuGetEndpoint -ProjectName 'project' -Authentication ApiKey -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -ApiKey '00000000-0000-0000-0000-000000000000'
+
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Add-VSTeamNuGetEndpoint with Username and Password' {
+         Mock Write-Error -Verifiable
+         Mock Invoke-RestMethod {
+         }
+         
+         It 'should create a new NuGet Serviceendpoint' {
+            Add-VSTeamNuGetEndpoint -ProjectName 'project' -Authentication UsernamePassword -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -Username 'testUser' -Password '00000000-0000-0000-0000-000000000000'
+
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Add-VSTeamNuGetEndpoint with Token' {
+         Mock Write-Error -Verifiable
+         Mock Invoke-RestMethod {
+         }
+         
+         It 'should create a new NuGet Serviceendpoint' {
+            Add-VSTeamNuGetEndpoint -ProjectName 'project' -Authentication Token -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -PersonalAccessToken '00000000-0000-0000-0000-000000000000'
+
+            Assert-VerifiableMock
+         }
+      }
+
+      
+   
+   
+   
+   
       Context 'Update-VSTeamServiceEndpoint' {
          Mock Write-Progress
          Mock Invoke-RestMethod { return @{id = '23233-2342'} } -ParameterFilter { $Method -eq 'Get'}

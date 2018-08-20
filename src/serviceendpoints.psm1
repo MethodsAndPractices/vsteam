@@ -146,6 +146,88 @@ function Add-VSTeamSonarQubeEndpoint {
    }
 }
 
+function Add-VSTeamNuGetEndpoint {
+   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   param(
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $EndpointName,
+    
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $NuGetUrl,
+
+      [Parameter(Mandatory = $true, HelpMessage = 'Username')]
+      [string] $Username,
+    
+      [Parameter(ParameterSetName = 'Plain', Mandatory = $true, Position = 2, HelpMessage = 'Personal Access Token')]
+      [Alias('ApiKey')]
+      [Alias('Password')]
+      [string] $PersonalAccessToken,
+    
+      [Parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
+      [Alias('SecureApiKey')]
+      [Alias('SecurePassword')]
+      [securestring] $SecurePersonalAccessToken,
+
+      [ValidateSet('ApiKey', 'UsernamePassword', 'Token')]
+      [string] $Authentication
+   )
+
+   DynamicParam {
+      _buildProjectNameDynamicParam
+   }
+
+   Process {    
+       
+      if ($personalAccessToken) {
+         $token = $personalAccessToken 
+      }
+      else {
+         $credential = New-Object System.Management.Automation.PSCredential "token", $securePersonalAccessToken
+         $token = $credential.GetNetworkCredential().Password
+      }
+      
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters['ProjectName']
+
+      $obj = @{
+         data = @{}
+         url  = $NuGetUrl
+      }
+
+      if ($Authentication -eq 'ApiKey') {
+         $obj['authorization'] = @{
+            parameters = @{
+               nugetkey = $token
+            }
+            scheme     = 'None'
+         }
+      }
+      elseif ($Authentication -eq 'Token') {
+         $obj['authorization'] = @{
+            parameters = @{
+               apitoken = $token
+            }
+            scheme     = 'Token'
+         }
+      }
+      else {
+         $obj['authorization'] = @{
+            parameters = @{
+               username = $Username
+               password = $token
+            }
+            scheme     = 'UsernamePassword'
+         }
+      }
+
+      return Add-VSTeamServiceEndpoint `
+         -ProjectName $ProjectName `
+         -endpointName $endpointName `
+         -endpointType 'externalnugetfeed' `
+         -object $obj
+   }
+}
+
 function Add-VSTeamAzureRMServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Automatic')]
    param(
@@ -513,13 +595,16 @@ function Remove-VSTeamServiceEndpoint {
    }
 }
 
-Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
+Set-Alias Add-NuGetEndpoint Add-VSTeamNuGetEndpoint
+Set-Alias Add-ServiceEndpoint Add-VSTeamServiceEndpoint
 Set-Alias Add-SonarQubeEndpoint Add-VSTeamSonarQubeEndpoint
 Set-Alias Add-KubernetesEndpoint Add-VSTeamKubernetesEndpoint
-Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Add-ServiceFabricEndpoint Add-VSTeamServiceFabricEndpoint
 Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
 
+Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
+
+Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-ServiceFabricEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
@@ -527,12 +612,11 @@ Set-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-VSTeamServiceFabricEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamServiceEndpoint
 
-Set-Alias Add-ServiceEndpoint Add-VSTeamServiceEndpoint
 Set-Alias Update-ServiceEndpoint Update-VSTeamServiceEndpoint
 
 Export-ModuleMember `
    -Function Get-VSTeamServiceEndpoint, Add-VSTeamAzureRMServiceEndpoint, Remove-VSTeamServiceEndpoint, 
-Add-VSTeamSonarQubeEndpoint, Add-VSTeamServiceFabricEndpoint, Add-VSTeamKubernetesEndpoint, Add-VSTeamServiceEndpoint, Update-VSTeamServiceEndpoint `
-   -Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint, Add-KubernetesEndpoint,
+Add-VSTeamSonarQubeEndpoint, Add-VSTeamServiceFabricEndpoint, Add-VSTeamKubernetesEndpoint, Add-VSTeamServiceEndpoint, Update-VSTeamServiceEndpoint, Add-VSTeamNuGetEndpoint`
+-Alias Get-ServiceEndpoint, Add-AzureRMServiceEndpoint, Remove-ServiceEndpoint, Add-SonarQubeEndpoint, Add-KubernetesEndpoint,
 Remove-VSTeamAzureRMServiceEndpoint, Remove-VSTeamSonarQubeEndpoint, Remove-AzureRMServiceEndpoint,
-Remove-SonarQubeEndpoint, Add-ServiceFabricEndpoint, Remove-ServiceFabricEndpoint, Remove-VSTeamServiceFabricEndpoint, Add-ServiceEndpoint, Update-ServiceEndpoint
+Remove-SonarQubeEndpoint, Add-ServiceFabricEndpoint, Remove-ServiceFabricEndpoint, Remove-VSTeamServiceFabricEndpoint, Add-ServiceEndpoint, Update-ServiceEndpoint, Add-NuGetEndpoint
