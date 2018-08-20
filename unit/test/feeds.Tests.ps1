@@ -51,7 +51,7 @@ InModuleScope feeds {
                $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
-               $Body -like '*"name":  "module"*'
+               $Body -like '*"name": *"module"*'
             }
          }
       }
@@ -70,9 +70,9 @@ InModuleScope feeds {
                $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
-               $Body -like '*"upstreamEnabled":  true*' -and
-               $Body -like '*"upstreamEnabled":  true*' -and
-               $Body -like '*"hideDeletedPackageVersions":  false*'
+               $Body -like '*"upstreamEnabled": *true*' -and
+               $Body -like '*"upstreamEnabled": *true*' -and
+               $Body -like '*"hideDeletedPackageVersions": *false*'
             }
          }
       }
