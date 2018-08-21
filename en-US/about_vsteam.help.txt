@@ -29,6 +29,7 @@ LONG DESCRIPTION
     Git                          3.0
     DistributedTask              3.0-Preview
     MemberEntitlementManagement
+    Packaging
 
     The following list shows the version name and where it is used.
     · Build

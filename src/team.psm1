@@ -389,6 +389,7 @@ function Get-VSTeamAPIVersion {
       Release                     = $([VSTeamVersions]::Release)
       DistributedTask             = $([VSTeamVersions]::DistributedTask)
       Tfvc                        = $([VSTeamVersions]::Tfvc)
+      Packaging                   = $([VSTeamVersions]::Packaging)
       MemberEntitlementManagement = $([VSTeamVersions]::MemberEntitlementManagement)
       ServiceFabricEndpoint       = $([VSTeamVersions]::ServiceFabricEndpoint)
    }
@@ -412,6 +413,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Release = '4.0-preview'
             [VSTeamVersions]::DistributedTask = '4.0-preview'
             [VSTeamVersions]::Tfvc = '3.2'
+            [VSTeamVersions]::Packaging = ''
             [VSTeamVersions]::MemberEntitlementManagement = ''
             [VSTeamVersions]::ServiceFabricEndpoint = '3.2'
          }
@@ -423,6 +425,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Release = '4.1-preview'
             [VSTeamVersions]::DistributedTask = '4.1-preview'
             [VSTeamVersions]::Tfvc = '4.0'
+            [VSTeamVersions]::Packaging = '4.0-preview'
             [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
             [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'
          }
@@ -434,6 +437,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Release = '3.0-preview'
             [VSTeamVersions]::DistributedTask = '3.0-preview'
             [VSTeamVersions]::Tfvc = '3.0'
+            [VSTeamVersions]::Packaging = ''
             [VSTeamVersions]::MemberEntitlementManagement = ''
             [VSTeamVersions]::ServiceFabricEndpoint = ''
          }
@@ -447,6 +451,7 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "Release: $([VSTeamVersions]::Release)"
    Write-Verbose "DistributedTask: $([VSTeamVersions]::DistributedTask)"
    Write-Verbose "Tfvc: $([VSTeamVersions]::Tfvc)"
+   Write-Verbose "Packaging: $([VSTeamVersions]::Packaging)"
    Write-Verbose "MemberEntitlementManagement: $([VSTeamVersions]::MemberEntitlementManagement)"
    Write-Verbose "ServiceFabricEndpoint: $([VSTeamVersions]::ServiceFabricEndpoint)"
 }

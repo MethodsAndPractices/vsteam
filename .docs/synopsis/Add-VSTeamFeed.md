@@ -1,0 +1,1 @@
+Adds a new feed to package management.
