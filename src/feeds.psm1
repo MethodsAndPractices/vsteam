@@ -10,6 +10,34 @@ function _supportsFeeds {
    } 
 }
 
+function Remove-VSTeamFeed {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   param (
+      [Parameter(ParameterSetName = 'ByID', Position = 0, Mandatory = $true)]
+      [Alias('FeedId')]
+      [string[]] $Id,
+
+      # Forces the command without confirmation
+      [switch] $Force
+   )
+
+   process {
+      # Thi swill throw if this account does not support feeds
+      _supportsFeeds
+
+      foreach ($item in $id) {
+
+         if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Package Feed")) {
+            # Call the REST API
+            _callAPI -subDomain feeds -Method Delete -Id $item -Area packaging -Resource feeds -Version $([VSTeamVersions]::Packaging) | Out-Null
+   
+            Write-Output "Deleted build defintion $item"
+         }
+      }
+   }
+}
+
+
 function Get-VSTeamFeed {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param (
@@ -124,7 +152,8 @@ function Show-VSTeamFeed {
 Set-Alias Get-Feed Get-VSTeamFeed
 Set-Alias Add-Feed Add-VSTeamFeed
 Set-Alias Show-Feed Show-VSTeamFeed
+Set-Alias Remove-Feed Remove-VSTeamFeed
 
 Export-ModuleMember `
-   -Function Get-VSTeamFeed, Add-VSTeamFeed, Show-VSTeamFeed `
-   -Alias Get-Feed, Add-Feed, Show-Feed
+   -Function Get-VSTeamFeed, Add-VSTeamFeed, Show-VSTeamFeed, Remove-VSTeamFeed `
+   -Alias Get-Feed, Add-Feed, Show-Feed, Remove-Feed
