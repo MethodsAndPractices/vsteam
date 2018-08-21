@@ -162,7 +162,8 @@ Describe 'TeamsPSDrive' {
       }
 
       # Skip 0 because that will be Agent Pools
-      $project = $account.GetChildItem()[1]
+      # Skip 1 because that will be Feeds
+      $project = $account.GetChildItem()[2]
 
       It 'Should return projects' {
          $project | Should Not Be $null
@@ -236,6 +237,27 @@ Describe 'TeamsPSDrive' {
 
       It 'Should return agent' {
          $agent | Should Not Be $null
+      }
+   }
+
+   Context 'Feeds' {
+      $feedResults = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
+      $singleResult = $feedResults.value[0]
+
+      Mock Get-VSTeamFeed {
+         return [VSTeamFeed]::new($singleResult)
+      }
+
+      $target = [VSTeamFeeds]::new('Feeds')
+
+      It 'Should create Feeds' {
+         $target | Should Not Be $null
+      }
+
+      $feed = $target.GetChildItem()[0]
+
+      It 'Should return feed' {
+         $feed | Should Not Be $null
       }
    }
 

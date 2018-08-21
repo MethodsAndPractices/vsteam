@@ -1,0 +1,1 @@
+Opens the feed in the default browser.
