@@ -35,7 +35,6 @@ function Get-VSTeamBuildDefinition {
             $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $([VSTeamVersions]::Build) `
                -QueryString @{revision = $revision}
             
-            Write-Verbose $resp
             $item = [VSTeamBuildDefinition]::new($resp, $ProjectName)
 
             Write-Output $item
@@ -48,7 +47,6 @@ function Get-VSTeamBuildDefinition {
          $objs = @()
 
          foreach ($item in $resp.value) {
-            Write-Verbose $item
             $objs += [VSTeamBuildDefinition]::new($item, $ProjectName)
          }
    
