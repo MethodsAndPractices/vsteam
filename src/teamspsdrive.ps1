@@ -199,6 +199,9 @@ class VSTeamAccount : SHiPSDirectory {
       [string]$Name
    ) : base($Name) {
       $this.AddTypeName('Team.Account')
+
+      # Invalidate any cache of projects.
+      [VSTeamProjectCache]::timestamp = -1
    }
 
    [object[]] GetChildItem() {
@@ -568,6 +571,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [object]$Triggers = $null
    [object]$Variables = $null
    [object]$Repository = $null
+   [VSTeamGitRepository]$GitRepository = $null
    [object]$RetentionRules = $null
    [VSTeamUser]$AuthoredBy = $null
    [string]$BuildNumberFormat = $null
@@ -587,7 +591,6 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       $this.Revision = $obj.revision
       $this.Variables = $obj.variables
       $this.CreatedOn = $obj.createdDate
-      $this.Repository = $obj.repository
       $this.JobAuthorizationScope = $obj.jobAuthorizationScope
       $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
       
@@ -606,6 +609,15 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       
       if ($obj.PSObject.Properties.Match('tags').count -gt 0) {
          $this.Tags = $obj.tags
+      }
+
+      if ($obj.PSObject.Properties.Match('repository').count -gt 0) {
+         if($obj.repository.type -eq "TfsGit") {
+            # fetch object as $obj.repository is not complete
+            $this.GitRepository = Get-VSTeamGitRepository -Name $obj.repository.Name -ProjectName $Projectname
+         } else {
+            $this.Repository = $obj.repository
+         }
       }
 
       # This is only in VSTS. In TFS it is a build property
@@ -996,8 +1008,13 @@ class VSTeamGitRepository : VSTeamDirectory {
          $this.DefaultBranch = $obj.defaultBranch
       }
 
-      $this.RemoteURL = $obj.remoteURL
-      $this.Project = [VSTeamProject]::new($obj.project)
+      if ($obj.PSObject.Properties.Match('remoteURL').count -gt 0) {
+         $this.RemoteURL = $obj.remoteURL
+      }
+
+      if ($obj.PSObject.Properties.Match('project').count -gt 0) {
+         $this.Project = [VSTeamProject]::new($obj.project)
+      }
 
       $this._internalObj = $obj
 
