@@ -126,7 +126,7 @@ function Add-VSTeamUser {
     }
 }
 
-function Update-VSTeamUserLicense
+function Update-VSTeamUser
 {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmail')]
    param (
@@ -233,9 +233,9 @@ function Remove-VSTeamUser {
 
 Set-Alias Get-User Get-VSTeamUser
 Set-Alias Add-User Add-VSTeamUser
-Set-Alias Update-UserLicense Update-VSTeamUserLicense
+Set-Alias Update-User Update-VSTeamUser
 Set-Alias Remove-User Remove-VSTeamUser
 
 Export-ModuleMember `
-    -Function Get-VSTeamUser, Add-VSTeamUser, Update-VSTeamUserLicense, Remove-VSTeamUser `
-    -Alias Get-User, Add-User, Update-UserLicense, Remove-User
+    -Function Get-VSTeamUser, Add-VSTeamUser, Update-VSTeamUser, Remove-VSTeamUser `
+    -Alias Get-User, Add-User, Update-User, Remove-User
