@@ -370,29 +370,31 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
     # Not supported on TFS
     if (-not ($acct -like "http://*")) {
+
+      $FeedName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
+
       Context 'Feed exercise' {
 
-         It 'Add-VSTeamFeed should add a team' {
-            Add-VSTeamFeed -Name 'TestFeed' | Should Not Be $null
-            (Get-VSTeamFeed).Count | Should Be 1
+         It 'Add-VSTeamFeed should add a feed' {
+            Add-VSTeamFeed -Name $FeedName | Should Not Be $null
          }
 
-         It 'Get-VSTeamFeed Should return all users' {
+         It 'Get-VSTeamFeed Should return all feeds' {
             Get-VSTeamFeed | Should Not Be $null
          }
 
-         It 'Get-VSTeamFeed ById Should return Teams' {
-            $id = (Get-VSTeamFeed | Where-Object name -eq 'TestFeed').Id
-            Get-VSTeamFeed -Id $id | Should Not Be $null
+         It 'Get-VSTeamFeed ById Should return feed' {
+            $FeedID = (Get-VSTeamFeed | Where-Object name -eq $FeedName).Id
+            Get-VSTeamFeed -Id $FeedID | Should Not Be $null
          }
 
          It 'Remove-VSTeamFeed should fail' {
             { Remove-VSTeamFeed -Id '00000000-0000-0000-0000-000000000000' -Force } | Should Throw
          }
 
-         It 'Remove-VSTeamFeed should delete the team' {
-            Remove-VSTeamFeed -Id $id -Force
-            Get-VSTeamFeed | Where-Object name -eq 'TestFeed' | Should Be $null
+         It 'Remove-VSTeamFeed should delete the feed' {
+            Get-VSTeamFeed | Remove-VSTeamFeed -Force
+            Get-VSTeamFeed | Where-Object name -eq $FeedName | Should Be $null
          }
       }
    }

@@ -13,7 +13,7 @@ function _supportsFeeds {
 function Remove-VSTeamFeed {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param (
-      [Parameter(ParameterSetName = 'ByID', Position = 0, Mandatory = $true)]
+      [Parameter(ParameterSetName = 'ByID', Position = 0, Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('FeedId')]
       [string[]] $Id,
 
@@ -31,7 +31,7 @@ function Remove-VSTeamFeed {
             # Call the REST API
             _callAPI -subDomain feeds -Method Delete -Id $item -Area packaging -Resource feeds -Version $([VSTeamVersions]::Packaging) | Out-Null
    
-            Write-Output "Deleted build defintion $item"
+            Write-Output "Deleted Feed $item"
          }
       }
    }
