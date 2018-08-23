@@ -613,8 +613,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
 
       if ($obj.PSObject.Properties.Match('repository').count -gt 0) {
          if($obj.repository.type -eq "TfsGit") {
-            # fetch object as $obj.repository is not complete
-            $this.GitRepository = Get-VSTeamGitRepository -Name $obj.repository.Name -ProjectName $Projectname
+            $this.GitRepository = [VSTeamGitRepository]::new($obj.repository, $Projectname)         
          } else {
             $this.Repository = $obj.repository
          }
@@ -622,7 +621,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
 
       # This is only in VSTS. In TFS it is a build property
       if ($obj.PSObject.Properties.Match('process').count -gt 0) {
-         $this.Process = [VSTeamBuildDefinitionProcess]::new($obj.process, $Projectname)         
+         $this.Process = [VSTeamBuildDefinitionProcess]::new($obj.process, $Projectname)
       }
 
       # TFS 2017/2018
