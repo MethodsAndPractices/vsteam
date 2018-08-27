@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '4.0.1'
+   ModuleVersion     = '4.0.2'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -210,7 +210,8 @@
       'Add-VSTeamNuGetEndpoint',
       'Get-VSTeamFeed',
       'Add-VSTeamFeed',
-      'Show-VSTeamFeed')
+      'Show-VSTeamFeed',
+      'Remove-VSTeamFeed')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -319,7 +320,8 @@
       'Add-NuGetEndpoint',
       'Get-Feed',
       'Add-Feed',
-      'Show-Feed')
+      'Show-Feed',
+      'Remove-Feed')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

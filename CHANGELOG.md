@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.2
+
+Added Remove-VSTeamFeed
+
 ## 4.0.1
 
 You can now list and add package management feeds.
