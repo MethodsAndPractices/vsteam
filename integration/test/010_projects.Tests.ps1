@@ -210,6 +210,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $buildDefId | Should Not Be $null
             $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId
             $buildDef.Name | Should Be $($newProjectName + "-CI1")
+            $buildDef.GitRepository | Should Not be $null
             $buildDef.Process.Phases.Count | Should Be 1
             $buildDef.Process.Phases[0].Name | Should Be "Phase 1"
             $buildDef.Process.Phases[0].Steps.Count | Should Be 1
