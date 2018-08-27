@@ -114,7 +114,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
       }
 
-      It 'Update-VSTeamProject Should update name' {
+      It 'Update-VSTeamProject Should update name' {         
          Update-VSTeamProject -Name $projectName -NewName $newProjectName -Force
 
          Get-VSTeamProject -Name $newProjectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
