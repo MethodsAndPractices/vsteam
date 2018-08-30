@@ -571,11 +571,11 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [object]$Triggers = $null
    [object]$Variables = $null
    [object]$Repository = $null
-   [VSTeamGitRepository]$GitRepository = $null
    [object]$RetentionRules = $null
    [VSTeamUser]$AuthoredBy = $null
    [string]$BuildNumberFormat = $null
    [string]$JobAuthorizationScope = $null
+   [VSTeamGitRepository]$GitRepository = $null
    [datetime]$CreatedOn = [datetime]::MinValue
    [VSTeamBuildDefinitionProcess]$Process = $null
    [VSTeamBuildDefinitionProcessPhaseStep[]]$Steps = $null

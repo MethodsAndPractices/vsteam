@@ -24,10 +24,6 @@ Build Definition / Process / Phases / Steps are broken down into separate object
 (Get-VSTeamBuildDefinition -ProjectName MyProject -Id 42).Process.Phases[0].Steps[0]
 ```
 
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
 ## 3.0.7
 
 Removed some common code and took dependency on Trackyon.Utils that did the same things.
