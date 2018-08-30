@@ -1220,6 +1220,38 @@
          </TableControl>
       </View>
 
+      <!--Team.Provider.Queue.Table-->
+      <View>
+         <Name>Team.Provider.Queue.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.Queue</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
       <!--Team.Provider.Pool.Table-->
       <View>
          <Name>Team.Provider.Pool.Table</Name>
@@ -1265,6 +1297,7 @@
             <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
             <TypeName>Team.Account</TypeName>
             <TypeName>Team.Pool</TypeName>
+            <TypeName>Team.Queues</TypeName>
             <TypeName>Team.Pools</TypeName>
             <TypeName>Team.Provider.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
@@ -1306,6 +1339,7 @@
             <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
             <TypeName>Team.Account</TypeName>
             <TypeName>Team.Pool</TypeName>
+            <TypeName>Team.Queues</TypeName>
             <TypeName>Team.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
             <TypeName>Team.BuildDefinitions</TypeName>

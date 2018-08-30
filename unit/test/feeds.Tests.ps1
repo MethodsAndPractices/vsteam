@@ -10,6 +10,20 @@ InModuleScope feeds {
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*" 
       }
+
+      Context 'Remove-VSTeamFeed' {
+         [VSTeamVersions]::Packaging = '4.0'
+         Mock Invoke-RestMethod
+
+         It 'should delete feed' {
+            Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000' -Force
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Delete' -and 
+               $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::packaging)"
+            }
+         }
+      }
    
       Context 'Get-VSTeamFeed with no parameters' {
          [VSTeamVersions]::Packaging = '4.0'

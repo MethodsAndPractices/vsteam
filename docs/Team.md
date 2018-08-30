@@ -259,6 +259,10 @@ Removes the build definitions for a team project.
 
 Removes the tag from a build.
 
+### [Remove-VSTeamFeed](Remove-VSTeamFeed.md)
+
+Removes a package feed from the account.
+
 ### [Remove-VSTeamGitRepository](Remove-VSTeamGitRepository.md)
 
 Removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.

@@ -14,6 +14,8 @@ InModuleScope queues {
       Context 'Get-VSTeamQueue with no parameters' {
          Mock Invoke-RestMethod { return @{
                value = @{
+                  id   = 3
+                  name = 'Hosted'
                   pool = @{}
                }
             }}
@@ -30,6 +32,8 @@ InModuleScope queues {
       Context 'Get-VSTeamQueue with queueName parameter' {
          Mock Invoke-RestMethod { return @{
                value = @{
+                  id   = 3
+                  name = 'Hosted'
                   pool = @{}
                }
             }}
@@ -46,6 +50,8 @@ InModuleScope queues {
       Context 'Get-VSTeamQueue with actionFilter parameter' {
          Mock Invoke-RestMethod { return @{
                value = @{
+                  id   = 3
+                  name = 'Hosted'
                   pool = @{}
                }
             }}
@@ -66,6 +72,8 @@ InModuleScope queues {
 
             return @{
                value = @{
+                  id   = 3
+                  name = 'Hosted'
                   pool = @{}
                }
             }}
@@ -91,6 +99,8 @@ InModuleScope queues {
 
       Context 'Get-VSTeamQueue' {
          Mock Invoke-RestMethod { return @{
+               id   = 3
+               name = 'Hosted'
                pool = @{}
             }}
 

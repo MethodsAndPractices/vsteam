@@ -274,6 +274,7 @@ class VSTeamProject : VSTeamDirectory {
       return @(
          [VSTeamBuildDefinitions]::new('Build Definitions', $this.Name),
          [VSTeamBuilds]::new('Builds', $this.Name),
+         [VSTeamQueues]::new('Queues', $this.Name),
          [VSTeamReleases]::new('Releases', $this.Name),
          [VSTeamRepositories]::new('Repositories', $this.Name),
          [VSTeamTeams]::new('Teams', $this.Name)
@@ -336,6 +337,58 @@ class VSTeamFeed : VSTeamLeaf {
 
 [SHiPSProvider(UseCache = $true)]
 [SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamQueues : VSTeamDirectory {
+
+   # Default constructor
+   VSTeamQueues(
+      [string]$Name,
+      [string]$ProjectName
+   ) : base($Name, $ProjectName) {
+      $this.AddTypeName('Team.Queues')
+   }
+
+   [object[]] GetChildItem() {
+      $items = Get-VSTeamQueue -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+
+      foreach ($item in $items) {
+         $item.AddTypeName('Team.Provider.Queue')
+      }
+
+      return $items
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamQueue : VSTeamLeaf {
+
+   [string]$poolName
+   [VSTeamPool]$pool
+
+   # Default constructor
+   VSTeamQueue(
+      [object]$obj,
+      [string]$Projectname
+   ) : base($obj.name, $obj.id, $Projectname) {
+
+      # pool values are not returned always
+      if ($obj.PSObject.Properties.Match('poolName').count -gt 0) {
+         $this.poolName = $obj.poolName
+      }
+
+      if ($obj.PSObject.Properties.Match('pool').count -gt 0) {
+         $this.pool = [VSTeamPool]::new($obj.pool)
+         $this.poolName = $obj.pool.name
+      }
+
+      $this.AddTypeName('Team.Queue')
+
+      $this._internalObj = $obj
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
 class VSTeamPools : VSTeamDirectory {
 
    # Default constructor
@@ -380,11 +433,18 @@ class VSTeamPool : VSTeamDirectory {
    ) : base($obj.Name, $null) {
 
       $this.id = $obj.id
-      $this.count = $obj.size
-      $this.isHosted = $obj.isHosted
 
-      # On some accounts teh CreatedBy is null for hosted pools
-      if ($null -ne $obj.createdBy) {
+      # values are not returned always
+      if ($obj.PSObject.Properties.Match('isHosted').count -gt 0) {
+         $this.isHosted = $obj.isHosted
+      }
+      
+      if ($obj.PSObject.Properties.Match('size').count -gt 0) {
+         $this.count = $obj.size
+      }
+
+      # On some accounts the CreatedBy is null for hosted pools
+      if ($obj.PSObject.Properties.Match('createdBy').count -gt 0) {
          $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
       }
 
@@ -566,11 +626,12 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [int]$Revision = -1
    [string]$Path = $null
    [object]$Tags = $null
-   [object]$Queue = $null
+   [VSTeamQueue]$Queue = $null
    [object]$Options = $null
    [object]$Triggers = $null
    [object]$Variables = $null
    [object]$Repository = $null
+   [VSTeamGitRepository]$GitRepository = $null
    [object]$RetentionRules = $null
    [VSTeamUser]$AuthoredBy = $null
    [string]$BuildNumberFormat = $null
@@ -587,7 +648,6 @@ class VSTeamBuildDefinition : VSTeamDirectory {
 
       $this.id = $obj.id
       $this.Path = $obj.path
-      $this.Queue = $obj.queue
       $this.Revision = $obj.revision
       $this.Variables = $obj.variables
       $this.CreatedOn = $obj.createdDate
@@ -595,6 +655,9 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
       
       # These might not be returned
+      if ($obj.PSObject.Properties.Match('queue').count -gt 0) {
+         $this.Queue = [VSTeamQueue]::new($obj.queue, $Projectname)         
+      }
       if ($obj.PSObject.Properties.Match('triggers').count -gt 0) {
          $this.Triggers = $obj.triggers
       }

@@ -1,0 +1,1 @@
+Removes a package feed from the account.

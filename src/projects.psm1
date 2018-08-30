@@ -51,6 +51,9 @@ function Get-VSTeamProject {
    )
 
    DynamicParam {
+      # Get-VSTeamProject should never use cache
+      [VSTeamProjectCache]::timestamp = -1 
+
       _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name'
    }
 
