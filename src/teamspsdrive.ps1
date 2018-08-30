@@ -626,12 +626,11 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [int]$Revision = -1
    [string]$Path = $null
    [object]$Tags = $null
-   [VSTeamQueue]$Queue = $null
    [object]$Options = $null
    [object]$Triggers = $null
    [object]$Variables = $null
    [object]$Repository = $null
-   [VSTeamGitRepository]$GitRepository = $null
+   [VSTeamQueue]$Queue = $null
    [object]$RetentionRules = $null
    [VSTeamUser]$AuthoredBy = $null
    [string]$BuildNumberFormat = $null
