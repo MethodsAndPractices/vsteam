@@ -388,6 +388,9 @@ Set-Alias Remove-Release Remove-VSTeamRelease
 Set-Alias Set-ReleaseStatus Set-VSTeamReleaseStatus
 Set-Alias Set-EnvironmentStatus Set-VSTeamEnvironmentStatus
 Set-Alias Add-ReleaseEnvironment Set-VSTeamEnvironmentStatus
+
+# Add-VSTeamReleaseEnvironment was renamed to Set-VSTeamEnvironmentStatus
+# so I added this alias to prevent breaking those that used the orignal name.
 Set-Alias Add-VSTeamReleaseEnvironment Set-VSTeamEnvironmentStatus
 
 Export-ModuleMember `
