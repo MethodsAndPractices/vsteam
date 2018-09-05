@@ -174,6 +174,38 @@ InModuleScope users {
          }
       }
 
+      Context 'Update-VSTeamUser by invalid email' {
+         Mock _callAPI { return [PSCustomObject]@{ 
+               count = 1
+               value = [PSCustomObject]@{ 
+                  accessLevel = [PSCustomObject]@{ }
+                  email       = 'test@user.com'
+                  id          = '00000000-0000-0000-0000-000000000000'
+               }
+            } 
+         }
+
+         It 'Update User with invalid email should throw' {
+            { Update-VSTeamUser -Email 'not@found.com' -License 'Express' -Force } | Should Throw
+         }
+      }
+
+      Context 'Update-VSTeamUser by invalid id' {
+         Mock _callAPI { return [PSCustomObject]@{ 
+               count = 1
+               value = [PSCustomObject]@{ 
+                  accessLevel = [PSCustomObject]@{ }
+                  email       = 'test@user.com'
+                  id          = '00000000-0000-0000-0000-000000000000'
+               }
+            } 
+         }
+
+         It 'Update User with invalid id should throw' {
+            { Update-VSTeamUser -Id '11111111-0000-0000-0000-000000000000'  -License 'Express' -Force } | Should Throw
+         }
+      }
+
       Context 'Add-VSTeamUser' {
          $obj = @{
             accessLevel         = @{
@@ -204,6 +236,34 @@ InModuleScope users {
 
          It 'Should add a user' {
             Assert-VerifiableMock
+         }
+      }
+
+      Context 'Update user should update' {
+
+         Mock _callAPI { return [PSCustomObject]@{ 
+            count = 1
+            value = [PSCustomObject]@{ 
+               accessLevel = [PSCustomObject]@{
+                  accountLicenseType = "Stakeholder"
+                }
+               email       = 'test@user.com'
+               id          = '00000000-0000-0000-0000-000000000000'
+            }
+         } 
+      }
+
+         Update-VSTeamUser -License 'Stakeholder' -Email 'test@user.com' -Force
+
+         It 'Should update a user' {
+            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
+               $Method -eq 'Patch' -and
+               $subDomain -eq 'vsaex' -and
+               $id -eq '00000000-0000-0000-0000-000000000000' -and
+               $resource -eq 'userentitlements' -and
+               $version -eq [VSTeamVersions]::MemberEntitlementManagement
+            }
+
          }
       }
    }
