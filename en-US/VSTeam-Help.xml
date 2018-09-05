@@ -14360,4 +14360,69 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-VSTeamUser</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>VSTeamUser</command:noun>
+      <maml:description>
+        <maml:para>Updates the users for the account. (Currently only supports updating the LicenseType)</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Updates the users for the account. (Currently only supports updating the LicenseType)</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamUser</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>License</maml:name>
+          <maml:Description>
+            <maml:para>Type of Account License you want to change to. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Advanced</maml:para>
+            <maml:para>- EarlyAdopter</maml:para>
+            <maml:para>- Express</maml:para>
+            <maml:para>- None</maml:para>
+            <maml:para>- Professional</maml:para>
+            <maml:para>- StakeHolder</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>[empty]</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>License</maml:name>
+        <maml:Description>
+          <maml:para>Type of Account License you want to change to. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- Advanced</maml:para>
+          <maml:para>- EarlyAdopter</maml:para>
+          <maml:para>- Express</maml:para>
+          <maml:para>- None</maml:para>
+          <maml:para>- Professional</maml:para>
+          <maml:para>- StakeHolder</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>[empty]</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
 </helpItems>
