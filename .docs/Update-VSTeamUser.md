@@ -16,6 +16,8 @@
 
 ## PARAMETERS
 
+<!-- #include "./params/projectName.md" -->
+
 ### -License
 
 Type of Account License you want to change to. The acceptable values for this parameter are:
