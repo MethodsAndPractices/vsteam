@@ -114,7 +114,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
       }
 
-      It 'Update-VSTeamProject Should update name' {
+      It 'Update-VSTeamProject Should update name' {         
          Update-VSTeamProject -Name $projectName -NewName $newProjectName -Force
 
          Get-VSTeamProject -Name $newProjectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
@@ -210,6 +210,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $buildDefId | Should Not Be $null
             $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId
             $buildDef.Name | Should Be $($newProjectName + "-CI1")
+            $buildDef.GitRepository | Should Not be $null
             $buildDef.Process.Phases.Count | Should Be 1
             $buildDef.Process.Phases[0].Name | Should Be "Phase 1"
             $buildDef.Process.Phases[0].Steps.Count | Should Be 1
@@ -368,6 +369,38 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
+    # Not supported on TFS
+    if (-not ($acct -like "http://*")) {
+
+      $FeedName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
+
+      Context 'Feed exercise' {
+
+         It 'Add-VSTeamFeed should add a feed' {
+            Add-VSTeamFeed -Name $FeedName | Should Not Be $null
+         }
+
+         It 'Get-VSTeamFeed Should return all feeds' {
+            Get-VSTeamFeed | Should Not Be $null
+         }
+
+         It 'Get-VSTeamFeed ById Should return feed' {
+            $FeedID = (Get-VSTeamFeed | Where-Object name -eq $FeedName).Id
+            Get-VSTeamFeed -Id $FeedID | Should Not Be $null
+         }
+
+         It 'Remove-VSTeamFeed should fail' {
+            { Remove-VSTeamFeed -Id '00000000-0000-0000-0000-000000000000' -Force } | Should Throw
+         }
+
+         It 'Remove-VSTeamFeed should delete the feed' {
+            Get-VSTeamFeed | Remove-VSTeamFeed -Force
+            Get-VSTeamFeed | Where-Object name -eq $FeedName | Should Be $null
+         }
+      }
+   }
+
+   
    Context 'Teams full exercise' {
       It 'Get-VSTeam ByName Should return Teams' {
          Get-VSTeam -ProjectName $newProjectName -Name "$newProjectName Team" | Should Not Be $null

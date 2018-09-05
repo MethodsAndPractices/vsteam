@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.2
+
+Added Remove-VSTeamFeed
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/82) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+- removed output of objects returned from API to avoid misleading outputs for consumers
+- added GitRepository object to BuildDefinition
+- had to add a [VSTeamProjectCache]::timestamp = -1 to VSTeamAccount constructor after experiencing blocking with New-PSDrive -Name V -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount' -Verbose; Get-VSTeamBuildDefinition -ProjectName someProject
+
 ## 4.0.1
 
 You can now list and add package management feeds.
@@ -15,7 +25,7 @@ Due to this breaking change _Get-VSTeamAPIVersion_ was added to review the curre
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/77) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
-Build Definition / Process / Phases / Steps are broken down into separate objects
+- Build Definition / Process / Phases / Steps are broken down into separate objects
 
 ```PowerShell
 (Get-VSTeamBuildDefinition -ProjectName MyProject -Id 42).Process
@@ -41,7 +51,7 @@ Merged [Pull Request 70](https://github.com/DarqueWarrior/vsteam/pull/70) and [P
 
 Add [Pull Request 70](https://github.com/DarqueWarrior/vsteam/pull/71) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
-Integration tests for Build Definitions
+- Integration tests for Build Definitions
 
 ## 3.0.4
 
@@ -51,7 +61,7 @@ The ProjectName dynamic parameter that enables Tab Complete of project names was
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/66) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
-Updated integration tests to account for the new hosted agent pool.
+- Updated integration tests to account for the new hosted agent pool.
 
 Also added Pool and Agent to the Provider so you can now navigate pools and agents with Get-ChildItem (ls, dir).
 
