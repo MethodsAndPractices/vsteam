@@ -1,16 +1,17 @@
-<!-- #include "./common/header.md" -->
+
+
 
 # Update-VSTeamUser
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Update-VSTeamUser.md" -->
+Updates the users for the account. (Currently only supports updating the LicenseType)
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Update-VSTeamUser.md" -->
+Updates the users for the account. (Currently only supports updating the LicenseType)
 
 ## EXAMPLES
 
@@ -40,3 +41,4 @@ Default value: [empty]
 ## NOTES
 
 ## RELATED LINKS
+

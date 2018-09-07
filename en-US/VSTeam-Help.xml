@@ -14375,20 +14375,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Update-VSTeamUser</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
-          <maml:name>ProjectName</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the team project for which this function operates.</maml:para>
-            <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>License</maml:name>
           <maml:Description>
@@ -14410,20 +14396,6 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
-        <maml:name>ProjectName</maml:name>
-        <maml:Description>
-          <maml:para>Specifies the team project for which this function operates.</maml:para>
-          <maml:para>You can tab complete from a list of available projects.</maml:para>
-          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>License</maml:name>
         <maml:Description>
