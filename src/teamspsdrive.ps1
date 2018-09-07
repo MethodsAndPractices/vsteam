@@ -444,7 +444,8 @@ class VSTeamPool : VSTeamDirectory {
       }
 
       # On some accounts the CreatedBy is null for hosted pools
-      if ($obj.PSObject.Properties.Match('createdBy').count -gt 0) {
+      if ($obj.PSObject.Properties.Match('createdBy').count -gt 0 -and
+         $null -ne $obj.createdBy) {
          $this.createdBy = [VSTeamUser]::new($obj.createdBy, $null)
       }
 
