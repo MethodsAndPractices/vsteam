@@ -623,6 +623,8 @@ Set-Alias Add-AzureRMServiceEndpoint Add-VSTeamAzureRMServiceEndpoint
 
 Set-Alias Get-ServiceEndpoint Get-VSTeamServiceEndpoint
 
+# These are added to match the Add functions below. It is not clear that you
+# use a named Add but a generic Remove so I created these aliases. 
 Set-Alias Remove-ServiceEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-SonarQubeEndpoint Remove-VSTeamServiceEndpoint
 Set-Alias Remove-ServiceFabricEndpoint Remove-VSTeamServiceEndpoint

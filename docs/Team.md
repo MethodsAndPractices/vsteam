@@ -383,5 +383,9 @@ Updates the project name, description or both.
 
 Updates an existing service connection
 
+### [Update-VSTeamUser](Update-VSTeamUser.md)
+
+Updates the users for the account. (Currently only supports updating the LicenseType)
+
 
 
