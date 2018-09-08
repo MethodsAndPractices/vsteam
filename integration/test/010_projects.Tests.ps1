@@ -203,6 +203,16 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $buildDefs.Count | Should Be 2
       }
 
+      It 'Get-VSTeamBuildDefinition by Type "build" should return 2 build definitions' {
+         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Type build
+         $buildDefs.Count | Should Be 2
+      }
+
+      It 'Get-VSTeamBuildDefinition by Type "xaml" should return no build definitions' {
+         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Type xaml
+         $buildDefs.Count | Should Be 0
+      }
+
       # Only run for VSTS
       if ($api -eq 'VSTS') {
          It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st build definition' {
