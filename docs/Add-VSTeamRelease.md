@@ -37,7 +37,7 @@ id name    Alias
 PS C:\> Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
 ```
 
-This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release. If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.
+This example shows how to find the Build ID, Artifact Alias, and Release definition ID required to start a release. If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 
@@ -45,7 +45,7 @@ This example shows how to find the Build ID, Artifact Alias, and Release Definti
 PS C:\> Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
 ```
 
-This command starts a new release using the Demo-CD release defintion and the build with build number Demo-CI-44.
+This command starts a new release using the Demo-CD release definition and the build with build number Demo-CI-44.
 
 You must set a default project to tab complete DefinitionName and BuildNumber.
 
@@ -69,7 +69,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -DefinitionId
 
-The id of the release defintion to use.
+The id of the release definition to use.
 
 ```yaml
 Type: Int32
@@ -116,7 +116,7 @@ Required: True
 
 ### -DefinitionName
 
-The name of the release defintion to use.
+The name of the release definition to use.
 
 ```yaml
 Type: String

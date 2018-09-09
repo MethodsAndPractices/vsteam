@@ -37,7 +37,7 @@ Queues a new build.
 
 ### [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 
-Creates a new build defintion from a JSON file.
+Creates a new build definition from a JSON file.
 
 ### [Add-VSTeamBuildTag](Add-VSTeamBuildTag.md)
 
@@ -78,7 +78,7 @@ Queues a new release
 
 ### [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
 
-Creates a new release defintion from a JSON file.
+Creates a new release definition from a JSON file.
 
 ### [Add-VSTeamServiceEndpoint](Add-VSTeamServiceEndpoint.md)
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/84) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+- converted VSTeamQueue from format/type to class
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/86) from [Denny](https://github.com/dvankleef) which included the following:
+
+- Added update User. Currently only can update license type
+
 ## 4.0.2
 
 Added Remove-VSTeamFeed
@@ -87,7 +97,7 @@ Account
     - Team1
     - Team2
   - Repositories
-    - Repo1
+    - Repository1
       - Ref1
       - Ref2
 
@@ -116,7 +126,7 @@ Account
     - Team1
     - Team2
   - Repositories
-    - Repo1
+    - Repository1
       - Ref1
       - Ref2
 

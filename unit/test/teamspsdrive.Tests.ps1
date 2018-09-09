@@ -54,7 +54,7 @@ Describe 'TFS 2017 Build Definition' {
 
       $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
 
-      It 'Should create Build Defintions' {
+      It 'Should create Build definitions' {
          $buildDefinitions | Should Not be $null
       }
 
@@ -88,7 +88,7 @@ Describe 'VSTS Build Definition' {
 
       $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
 
-      It 'Should create Build Defintions' {
+      It 'Should create Build definitions' {
          $buildDefinitions | Should Not be $null
       }
 
@@ -319,7 +319,7 @@ Describe 'TeamsPSDrive' {
 
       $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
 
-      It 'Should create Build Defintions' {
+      It 'Should create Build definitions' {
          $buildDefinitions | Should Not be $null
       }
 

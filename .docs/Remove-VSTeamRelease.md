@@ -24,7 +24,7 @@ PS C:\> Get-VSTeamRelease -ProjectName demo | Remove-VSTeamRelease
 
 This command gets a list of all releases in the demo project.
 
-The pipeline operator (|) passes the data to the Remove-VSTeamRelease function, which removes each release defintion object.
+The pipeline operator (|) passes the data to the Remove-VSTeamRelease function, which removes each release definition object.
 
 ## PARAMETERS
 
@@ -36,7 +36,7 @@ Specifies one or more releases by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a release defintion, type Get-VSTeamRelease.
+To find the ID of a release definition, type Get-VSTeamRelease.
 
 ```yaml
 Type: Int32[]
@@ -60,7 +60,7 @@ You can tab complete from a list of available projects.
 
 You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
 
-You can pipe release defintion IDs to this function.
+You can pipe release definition IDs to this function.
 
 ## RELATED LINKS
 

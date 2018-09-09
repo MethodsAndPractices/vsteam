@@ -11,7 +11,7 @@ Updates a build definition for a team project.
 
 ## DESCRIPTION
 
-Reads a JSON file off disk and uses that file to update an existing build defintion in the provided project.
+Reads a JSON file off disk and uses that file to update an existing build definition in the provided project.
 
 You must call Add-VSTeamAccount before calling this function.
 
@@ -23,7 +23,7 @@ You must call Add-VSTeamAccount before calling this function.
 PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json
 ```
 
-This command reads build.json and updates existing build defintion with
+This command reads build.json and updates existing build definition with
 id 123 from it on the demo team project.
 
 ## PARAMETERS
@@ -48,7 +48,7 @@ Accept pipeline input: true (ByPropertyName)
 
 Specifies the build definition to update by ID.
 
-To find the ID of a build defintion, type Get-VSTeamBuildDefinition.
+To find the ID of a build definition, type Get-VSTeamBuildDefinition.
 
 ```yaml
 Type: Int32
@@ -58,7 +58,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -InFile
 
-Path and file name to the JSON file that contains the defintion to be updated. If the path is omitted, the default is the current location.
+Path and file name to the JSON file that contains the definition to be updated. If the path is omitted, the default is the current location.
 
 ```yaml
 Type: String

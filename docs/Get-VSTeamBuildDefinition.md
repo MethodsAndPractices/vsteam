@@ -17,7 +17,7 @@ The project name is a Dynamic Parameter which may not be displayed in the syntax
 
 With just a project name, this function gets all of the build definitions for that team project.
 
-You can also specify a particular build defintion by ID.
+You can also specify a particular build definition by ID.
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo | Format-List *
 
 This command gets a list of all build definitions in the demo project.
 
-The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the build defintion objects.
+The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the build definition objects.
 
 ## PARAMETERS
 
@@ -79,7 +79,7 @@ Specifies one or more build definitions by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a build defintion, type Get-VSTeamBuildDefinition.
+To find the ID of a build definition, type Get-VSTeamBuildDefinition.
 
 ```yaml
 Type: Int32[]
@@ -107,7 +107,7 @@ Default value: -1
 
 ## NOTES
 
-You can pipe build defintion IDs to this function.
+You can pipe build definition IDs to this function.
 
 ## RELATED LINKS
 

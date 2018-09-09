@@ -1,1 +1,1 @@
-Creates a new build defintion from a JSON file.
+Creates a new build definition from a JSON file.

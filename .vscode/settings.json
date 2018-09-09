@@ -8,5 +8,30 @@
    },
    "editor.tabSize": 3,
    "editor.detectIndentation": false,
-   "editor.insertSpaces": true
+   "editor.insertSpaces": true,
+   "cSpell.words": [
+      "accept",
+      "blaschke",
+      "certs",
+      "croxford",
+      "cruijsen",
+      "endpoint",
+      "fergal",
+      "geert",
+      "karpinski",
+      "kees",
+      "kubernetes",
+      "mank",
+      "markus",
+      "michal",
+      "mydemos",
+      "neillans",
+      "opdam",
+      "perfetti",
+      "peña",
+      "team",
+      "untrusted",
+      "verhaar",
+      "vs"
+   ]
 }

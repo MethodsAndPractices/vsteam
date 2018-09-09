@@ -160,7 +160,7 @@ function Remove-VSTeamBuildDefinition {
             # Call the REST API
             _callAPI -Method Delete -ProjectName $ProjectName -Area build -Resource definitions -Id $item -Version $([VSTeamVersions]::Build) | Out-Null
 
-            Write-Output "Deleted build defintion $item"
+            Write-Output "Deleted build definition $item"
          }
       }
    }
