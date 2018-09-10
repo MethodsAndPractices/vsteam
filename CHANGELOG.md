@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.4
+
+Fixed bug where the version would not be saved when storing account at User or Admin level. When you started a new PowerShell the account would load but the version would always be TFS2017.  Now it loads correctly.
+
 ## 4.0.3
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/84) from [Kai Walter](https://github.com/KaiWalter) which included the following:
