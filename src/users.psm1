@@ -166,6 +166,7 @@ function Update-VSTeamUser
       else
       {
          $user = Get-VSTeamUser -Id $id
+         $licenseOld = $user.accessLevel.accountLicenseType
       }
 
       $obj = @{
