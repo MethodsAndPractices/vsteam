@@ -1,5 +1,25 @@
 # Changelog
 
+## 4.0.5
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/89) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
+
+- old license was not populated when updating a user by id
+
+## 4.0.4
+
+Fixed bug where the version would not be saved when storing account at User or Admin level. When you started a new PowerShell the account would load but the version would always be TFS2017.  Now it loads correctly.
+
+## 4.0.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/84) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+- converted VSTeamQueue from format/type to class
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/86) from [Denny](https://github.com/dvankleef) which included the following:
+
+- Added update User. Currently only can update license type
+
 ## 4.0.2
 
 Added Remove-VSTeamFeed
@@ -87,7 +107,7 @@ Account
     - Team1
     - Team2
   - Repositories
-    - Repo1
+    - Repository1
       - Ref1
       - Ref2
 
@@ -116,7 +136,7 @@ Account
     - Team1
     - Team2
   - Repositories
-    - Repo1
+    - Repository1
       - Ref1
       - Ref2
 

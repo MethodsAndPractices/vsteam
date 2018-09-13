@@ -61,7 +61,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
-You can pipe the release defintion ID to this function.
+You can pipe the release definition ID to this function.
 
 ## RELATED LINKS
 

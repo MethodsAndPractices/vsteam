@@ -160,13 +160,13 @@ function Update-VSTeamUser
          }
 
          $id = $user.id
-         $licenseOld = $user.accessLevel.accountLicenseType
-
       }
       else
       {
-         $user = Get-VSTeamUser -Id $id
+         $user = Get-VSTeamUser -Id $id         
       }
+
+      $licenseOld = $user.accessLevel.accountLicenseType
 
       $obj = @{
          from = ""

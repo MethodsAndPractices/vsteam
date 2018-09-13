@@ -17,7 +17,7 @@ The project name is a Dynamic Parameter which may not be displayed in the syntax
 
 With just a project name, this function gets all of the releases for that team project.
 
-You can also specify a particular release defintion by ID.
+You can also specify a particular release definition by ID.
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ PS C:\> Get-VSTeamRelease -ProjectName demo | Format-List *
 
 This command gets a list of all releases in the demo project.
 
-The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release defintion objects.
+The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release definition objects.
 
 ## PARAMETERS
 
@@ -128,7 +128,7 @@ Specifies one or more releases by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a release defintion, type Get-VSTeamRelease.
+To find the ID of a release definition, type Get-VSTeamRelease.
 
 ```yaml
 Type: Int32[]
@@ -151,7 +151,7 @@ You can tab complete from a list of available projects.
 
 You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
 
-You can pipe release defintion IDs to this function.
+You can pipe release definition IDs to this function.
 
 ## RELATED LINKS
 

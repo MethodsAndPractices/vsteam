@@ -112,7 +112,7 @@ You can tab complete from a list of available projects.
 
 You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
 
-You can pipe build defintion IDs to this function.
+You can pipe build definition IDs to this function.
 
 ## RELATED LINKS
 

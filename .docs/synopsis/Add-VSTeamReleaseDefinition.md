@@ -1,1 +1,1 @@
-Creates a new release defintion from a JSON file.
+Creates a new release definition from a JSON file.

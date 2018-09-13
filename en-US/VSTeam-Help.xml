@@ -822,7 +822,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </command:details>
     <maml:description>
       <maml:para>Add-VSTeamBuild will queue a new build.</maml:para>
-      <maml:para>You can override the queue in the build defintion by using the QueueName parameter. You can override the default source branch by using the SourceBranch parameter. You can also set specific build parameters by using the BuildParameters parameter.</maml:para>
+      <maml:para>You can override the queue in the build definition by using the QueueName parameter. You can override the default source branch by using the SourceBranch parameter. You can also set specific build parameters by using the BuildParameters parameter.</maml:para>
       <maml:para>To have the BuildDefinition and QueueNames tab complete you must set a default project by calling Set-VSTeamDefaultProject before you call Add-VSTeamBuild.</maml:para>
     </maml:description>
     <command:syntax>
@@ -845,7 +845,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="BuildDefinition">
           <maml:name>BuildDefinitionName</maml:name>
           <maml:Description>
-            <maml:para>The name of the build defintion to use to queue to build.</maml:para>
+            <maml:para>The name of the build definition to use to queue to build.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -922,7 +922,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
           <maml:name>BuildDefinitionId</maml:name>
           <maml:Description>
-            <maml:para>The Id of the build defintion to use to queue to build.</maml:para>
+            <maml:para>The Id of the build definition to use to queue to build.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -975,7 +975,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="BuildDefinition">
         <maml:name>BuildDefinitionName</maml:name>
         <maml:Description>
-          <maml:para>The name of the build defintion to use to queue to build.</maml:para>
+          <maml:para>The name of the build definition to use to queue to build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -999,7 +999,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
         <maml:name>BuildDefinitionId</maml:name>
         <maml:Description>
-          <maml:para>The Id of the build defintion to use to queue to build.</maml:para>
+          <maml:para>The Id of the build definition to use to queue to build.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -1124,11 +1124,11 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:verb>Add</command:verb>
       <command:noun>VSTeamBuildDefinition</command:noun>
       <maml:description>
-        <maml:para>Creates a new build defintion from a JSON file.</maml:para>
+        <maml:para>Creates a new build definition from a JSON file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Reads a JSON file off disk and uses that file to create a new build defintion in the provided project.</maml:para>
+      <maml:para>Reads a JSON file off disk and uses that file to create a new build definition in the provided project.</maml:para>
       <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
@@ -1151,7 +1151,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="1" aliases="none">
           <maml:name>InFile</maml:name>
           <maml:Description>
-            <maml:para>Path and file name to the JSON file that contains the defintion to be created. If the path is omitted, the default is the current location.</maml:para>
+            <maml:para>Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1180,7 +1180,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="1" aliases="none">
         <maml:name>InFile</maml:name>
         <maml:Description>
-          <maml:para>Path and file name to the JSON file that contains the defintion to be created. If the path is omitted, the default is the current location.</maml:para>
+          <maml:para>Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1213,7 +1213,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamBuildDefinition -ProjectName Demo -InFile build.json</dev:code>
         <dev:remarks>
-          <maml:para>This command reads build.json and creates a new build defintion from it on the demo team project.</maml:para>
+          <maml:para>This command reads build.json and creates a new build definition from it on the demo team project.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3029,7 +3029,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>DefinitionId</maml:name>
           <maml:Description>
-            <maml:para>The id of the release defintion to use.</maml:para>
+            <maml:para>The id of the release definition to use.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -3153,7 +3153,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>DefinitionName</maml:name>
           <maml:Description>
-            <maml:para>The name of the release defintion to use.</maml:para>
+            <maml:para>The name of the release definition to use.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3217,7 +3217,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>DefinitionId</maml:name>
         <maml:Description>
-          <maml:para>The id of the release defintion to use.</maml:para>
+          <maml:para>The id of the release definition to use.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -3277,7 +3277,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
         <maml:name>DefinitionName</maml:name>
         <maml:Description>
-          <maml:para>The name of the release defintion to use.</maml:para>
+          <maml:para>The name of the release definition to use.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3349,14 +3349,14 @@ id name    Alias
 
 PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44</dev:code>
         <dev:remarks>
-          <maml:para>This example shows how to find the Build ID, Artifact Alias, and Release Defintion ID required to start a release. If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.</maml:para>
+          <maml:para>This example shows how to find the Build ID, Artifact Alias, and Release definition ID required to start a release. If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44</dev:code>
         <dev:remarks>
-          <maml:para>This command starts a new release using the Demo-CD release defintion and the build with build number Demo-CI-44.</maml:para>
+          <maml:para>This command starts a new release using the Demo-CD release definition and the build with build number Demo-CI-44.</maml:para>
           <maml:para>You must set a default project to tab complete DefinitionName and BuildNumber.</maml:para>
         </dev:remarks>
       </command:example>
@@ -3369,11 +3369,11 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:verb>Add</command:verb>
       <command:noun>VSTeamReleaseDefinition</command:noun>
       <maml:description>
-        <maml:para>Creates a new release defintion from a JSON file.</maml:para>
+        <maml:para>Creates a new release definition from a JSON file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Reads a JSON file off disk and uses that file to create a new release defintion in the provided project.</maml:para>
+      <maml:para>Reads a JSON file off disk and uses that file to create a new release definition in the provided project.</maml:para>
       <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
@@ -3396,7 +3396,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>InFile</maml:name>
           <maml:Description>
-            <maml:para>Path and file name to the JSON file that contains the defintion to be created. If the path is omitted, the default is the current location.</maml:para>
+            <maml:para>Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3425,7 +3425,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
         <maml:name>InFile</maml:name>
         <maml:Description>
-          <maml:para>Path and file name to the JSON file that contains the defintion to be created. If the path is omitted, the default is the current location.</maml:para>
+          <maml:para>Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3458,7 +3458,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamReleaseDefinition -ProjectName demo -inFile release.json</dev:code>
         <dev:remarks>
-          <maml:para>This command reads release.json and creates a new release defintion from it on the demo team project.</maml:para>
+          <maml:para>This command reads release.json and creates a new release definition from it on the demo team project.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -5151,7 +5151,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>You can pipe build defintion IDs to this function.</maml:para>
+        <maml:para>You can pipe build definition IDs to this function.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5689,7 +5689,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <maml:para>The Get-VSTeamBuildDefinition function gets the build definitions for a team project.</maml:para>
       <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
       <maml:para>With just a project name, this function gets all of the build definitions for that team project.</maml:para>
-      <maml:para>You can also specify a particular build defintion by ID.</maml:para>
+      <maml:para>You can also specify a particular build definition by ID.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -5757,7 +5757,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies one or more build definitions by ID.</maml:para>
             <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-            <maml:para>To find the ID of a build defintion, type Get-VSTeamBuildDefinition.</maml:para>
+            <maml:para>To find the ID of a build definition, type Get-VSTeamBuildDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -5827,7 +5827,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies one or more build definitions by ID.</maml:para>
           <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-          <maml:para>To find the ID of a build defintion, type Get-VSTeamBuildDefinition.</maml:para>
+          <maml:para>To find the ID of a build definition, type Get-VSTeamBuildDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -5862,7 +5862,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>You can pipe build defintion IDs to this function.</maml:para>
+        <maml:para>You can pipe build definition IDs to this function.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5871,7 +5871,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition -ProjectName Demo | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all build definitions in the demo project.</maml:para>
-          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the build defintion objects.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the build definition objects.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -7495,7 +7495,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <maml:para>The Get-VSTeamRelease function gets the releases for a team project.</maml:para>
       <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
       <maml:para>With just a project name, this function gets all of the releases for that team project.</maml:para>
-      <maml:para>You can also specify a particular release defintion by ID.</maml:para>
+      <maml:para>You can also specify a particular release definition by ID.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -7644,7 +7644,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies one or more releases by ID.</maml:para>
             <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-            <maml:para>To find the ID of a release defintion, type Get-VSTeamRelease.</maml:para>
+            <maml:para>To find the ID of a release definition, type Get-VSTeamRelease.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -7783,7 +7783,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies one or more releases by ID.</maml:para>
           <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-          <maml:para>To find the ID of a release defintion, type Get-VSTeamRelease.</maml:para>
+          <maml:para>To find the ID of a release definition, type Get-VSTeamRelease.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -7809,7 +7809,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>You can pipe release defintion IDs to this function.</maml:para>
+        <maml:para>You can pipe release definition IDs to this function.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -7818,7 +7818,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:code>PS C:\&gt; Get-VSTeamRelease -ProjectName demo | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all releases in the demo project.</maml:para>
-          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release defintion objects.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release definition objects.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -7854,7 +7854,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <maml:para>The Get-VSTeamReleaseDefinition function gets the release definitions for a team project.</maml:para>
       <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
       <maml:para>With just a project name, this function gets all of the release definitions for that team project.</maml:para>
-      <maml:para>You can also specify a particular release defintion by ID.</maml:para>
+      <maml:para>You can also specify a particular release definition by ID.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -7907,7 +7907,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies one or more release definitions by ID.</maml:para>
             <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-            <maml:para>To find the ID of a release defintion, type Get-VSTeamReleaseDefinition.</maml:para>
+            <maml:para>To find the ID of a release definition, type Get-VSTeamReleaseDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -7950,7 +7950,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies one or more release definitions by ID.</maml:para>
           <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-          <maml:para>To find the ID of a release defintion, type Get-VSTeamReleaseDefinition.</maml:para>
+          <maml:para>To find the ID of a release definition, type Get-VSTeamReleaseDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -7991,7 +7991,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:code>PS C:\&gt; Get-VSTeamReleaseDefinition -ProjectName demo | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all release definitions in the demo project.</maml:para>
-          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release defintion objects.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release definition objects.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -9936,7 +9936,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies one or more build definitions by ID.</maml:para>
             <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-            <maml:para>To find the ID of a build defintion, type Get-VSTeamBuildDefinition.</maml:para>
+            <maml:para>To find the ID of a build definition, type Get-VSTeamBuildDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -9978,7 +9978,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies one or more build definitions by ID.</maml:para>
           <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-          <maml:para>To find the ID of a build defintion, type Get-VSTeamBuildDefinition.</maml:para>
+          <maml:para>To find the ID of a build definition, type Get-VSTeamBuildDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -10016,7 +10016,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>You can pipe build defintion IDs to this function.</maml:para>
+        <maml:para>You can pipe build definition IDs to this function.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -10025,7 +10025,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition -ProjectName Demo | Remove-VSTeamBuildDefinition</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all build definitions in the demo project.</maml:para>
-          <maml:para>The pipeline operator (|) passes the data to the Remove-VSTeamBuildDefinition function, which removes each build defintion object.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Remove-VSTeamBuildDefinition function, which removes each build definition object.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -10738,7 +10738,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies one or more releases by ID.</maml:para>
             <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-            <maml:para>To find the ID of a release defintion, type Get-VSTeamRelease.</maml:para>
+            <maml:para>To find the ID of a release definition, type Get-VSTeamRelease.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -10780,7 +10780,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies one or more releases by ID.</maml:para>
           <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-          <maml:para>To find the ID of a release defintion, type Get-VSTeamRelease.</maml:para>
+          <maml:para>To find the ID of a release definition, type Get-VSTeamRelease.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -10818,7 +10818,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>You can pipe release defintion IDs to this function.</maml:para>
+        <maml:para>You can pipe release definition IDs to this function.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -10827,7 +10827,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:code>PS C:\&gt; Get-VSTeamRelease -ProjectName demo | Remove-VSTeamRelease</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all releases in the demo project.</maml:para>
-          <maml:para>The pipeline operator (|) passes the data to the Remove-VSTeamRelease function, which removes each release defintion object.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Remove-VSTeamRelease function, which removes each release definition object.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -10885,7 +10885,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:Description>
             <maml:para>Specifies one or more release definitions by ID.</maml:para>
             <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-            <maml:para>To find the ID of a release defintion, type Get-VSTeamReleaseDefinition.</maml:para>
+            <maml:para>To find the ID of a release definition, type Get-VSTeamReleaseDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -10927,7 +10927,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:Description>
           <maml:para>Specifies one or more release definitions by ID.</maml:para>
           <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-          <maml:para>To find the ID of a release defintion, type Get-VSTeamReleaseDefinition.</maml:para>
+          <maml:para>To find the ID of a release definition, type Get-VSTeamReleaseDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -10965,7 +10965,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>You can pipe release defintion IDs to this function.</maml:para>
+        <maml:para>You can pipe release definition IDs to this function.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -10974,7 +10974,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <dev:code>PS C:\&gt; Get-VSTeamReleaseDefinition -ProjectName demo | Remove-VSTeamReleaseDefinition</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all release definitions in the demo project.</maml:para>
-          <maml:para>The pipeline operator (|) passes the data to the Remove-VSTeamReleaseDefinition function, which removes each release defintion object.</maml:para>
+          <maml:para>The pipeline operator (|) passes the data to the Remove-VSTeamReleaseDefinition function, which removes each release definition object.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -12208,7 +12208,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.</maml:para>
         <maml:para>You can tab complete from a list of available projects.</maml:para>
         <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-        <maml:para>You can pipe build defintion IDs to this function.</maml:para>
+        <maml:para>You can pipe build definition IDs to this function.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -12339,7 +12339,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <maml:para>Opens the build definition in the default browser.</maml:para>
       <maml:para>The project name is a Dynamic Parameter which may not be displayed in the syntax above but is mandatory.</maml:para>
       <maml:para>With just a project name, this function shows all of the build definitions for that team project.</maml:para>
-      <maml:para>You can also specify a particular build defintion by ID.</maml:para>
+      <maml:para>You can also specify a particular build definition by ID.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -12951,7 +12951,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>You can pipe the release defintion ID to this function.</maml:para>
+        <maml:para>You can pipe the release definition ID to this function.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -13512,7 +13512,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Reads a JSON file off disk and uses that file to update an existing build defintion in the provided project.</maml:para>
+      <maml:para>Reads a JSON file off disk and uses that file to update an existing build definition in the provided project.</maml:para>
       <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
@@ -13535,7 +13535,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="1" aliases="none">
           <maml:name>InFile</maml:name>
           <maml:Description>
-            <maml:para>Path and file name to the JSON file that contains the defintion to be updated. If the path is omitted, the default is the current location.</maml:para>
+            <maml:para>Path and file name to the JSON file that contains the definition to be updated. If the path is omitted, the default is the current location.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -13548,7 +13548,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>Specifies the build definition to update by ID.</maml:para>
-            <maml:para>To find the ID of a build defintion, type Get-VSTeamBuildDefinition.</maml:para>
+            <maml:para>To find the ID of a build definition, type Get-VSTeamBuildDefinition.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -13578,7 +13578,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>Specifies the build definition to update by ID.</maml:para>
-          <maml:para>To find the ID of a build defintion, type Get-VSTeamBuildDefinition.</maml:para>
+          <maml:para>To find the ID of a build definition, type Get-VSTeamBuildDefinition.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -13590,7 +13590,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="1" aliases="none">
         <maml:name>InFile</maml:name>
         <maml:Description>
-          <maml:para>Path and file name to the JSON file that contains the defintion to be updated. If the path is omitted, the default is the current location.</maml:para>
+          <maml:para>Path and file name to the JSON file that contains the definition to be updated. If the path is omitted, the default is the current location.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -13623,7 +13623,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json</dev:code>
         <dev:remarks>
-          <maml:para>This command reads build.json and updates existing build defintion with id 123 from it on the demo team project.</maml:para>
+          <maml:para>This command reads build.json and updates existing build definition with id 123 from it on the demo team project.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

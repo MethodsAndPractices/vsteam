@@ -25,7 +25,7 @@ PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo | Remove-VSTeamBuildDefiniti
 
 This command gets a list of all build definitions in the demo project.
 
-The pipeline operator (|) passes the data to the Remove-VSTeamBuildDefinition function, which removes each build defintion object.
+The pipeline operator (|) passes the data to the Remove-VSTeamBuildDefinition function, which removes each build definition object.
 
 ## PARAMETERS
 
@@ -51,7 +51,7 @@ Specifies one or more build definitions by ID.
 
 To specify multiple IDs, use commas to separate the IDs.
 
-To find the ID of a build defintion, type Get-VSTeamBuildDefinition.
+To find the ID of a build definition, type Get-VSTeamBuildDefinition.
 
 ```yaml
 Type: Int32[]
@@ -81,7 +81,7 @@ You can tab complete from a list of available projects.
 
 You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
 
-You can pipe build defintion IDs to this function.
+You can pipe build definition IDs to this function.
 
 ## RELATED LINKS
 
