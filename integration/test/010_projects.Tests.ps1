@@ -208,10 +208,11 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $buildDefs.Count | Should Be 2
       }
 
-      It 'Get-VSTeamBuildDefinition by Type "xaml" should return no build definitions' {
-         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Type xaml
-         $buildDefs.Count | Should Be 0
-      }
+      ### issue #87 validity of this test needs to be checked first
+      # It 'Get-VSTeamBuildDefinition by Type "xaml" should return no build definitions' {
+      #    $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Type xaml
+      #    $buildDefs.Count | Should Be 0
+      # }
 
       # Only run for VSTS
       if ($api -eq 'VSTS') {

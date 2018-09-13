@@ -6,7 +6,7 @@ InModuleScope workitemTypes {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'workitemTypes' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -36,7 +36,7 @@ InModuleScope workitemTypes {
             Get-VSTeamWorkItemType -ProjectName test
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -58,7 +58,7 @@ InModuleScope workitemTypes {
             Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
          
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -80,7 +80,7 @@ InModuleScope workitemTypes {
             Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
          
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }

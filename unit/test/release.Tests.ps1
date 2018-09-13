@@ -4,7 +4,7 @@ Set-StrictMode -Version Latest
 Add-Type -AssemblyName 'System.Web'
 
 InModuleScope releases {
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    [VSTeamVersions]::Release = '1.0-unittest'
 
    $results = [PSCustomObject]@{
@@ -40,7 +40,7 @@ InModuleScope releases {
             Show-VSTeamRelease -projectName project -Id 15
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
-               $url -eq 'https://test.visualstudio.com/project/_release?releaseId=15'
+               $url -eq 'https://dev.azure.com/test/project/_release?releaseId=15'
             }
          }
       }
@@ -59,7 +59,7 @@ InModuleScope releases {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -82,7 +82,7 @@ InModuleScope releases {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Patch' -and
                $Body -eq '{ "id": 15, "status": "Abandoned" }' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -106,7 +106,7 @@ InModuleScope releases {
             Get-VSTeamRelease -ProjectName project -Id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -121,7 +121,7 @@ InModuleScope releases {
             Get-VSTeamRelease -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -136,7 +136,7 @@ InModuleScope releases {
             Get-VSTeamRelease -projectName project -expand environments
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
             }
          }
       }
@@ -151,7 +151,7 @@ InModuleScope releases {
             Get-VSTeamRelease
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.vsrm.visualstudio.com/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -168,7 +168,7 @@ InModuleScope releases {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Patch' -and
                $Body -eq $expectedBody -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/1/environments/15?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/1/environments/15?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -197,7 +197,7 @@ InModuleScope releases {
                $Body -like '*"alias": "drop"*' -and
                $Body -like '*"id": "2"*' -and
                $Body -like '*"sourceBranch": ""*' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -279,7 +279,7 @@ InModuleScope releases {
                $Body -like '*"alias": "drop"*' -and
                $Body -like '*"id": "1"*' -and
                $Body -like '*"sourceBranch": ""*' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }

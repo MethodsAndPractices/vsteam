@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 InModuleScope serviceendpointTypes {
    $sampleFile = "$PSScriptRoot\sampleFiles\serviceEndpointTypeSample.json"
 
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'serviceendpointTypes' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -20,7 +20,7 @@ InModuleScope serviceendpointTypes {
             Get-VSTeamServiceEndpointType
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/serviceendpointtypes/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointtypes/?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -34,7 +34,7 @@ InModuleScope serviceendpointTypes {
             Get-VSTeamServiceEndpointType -Type azurerm
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/serviceendpointtypes/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointtypes/?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Body.type -eq 'azurerm'
             }
          }
@@ -49,7 +49,7 @@ InModuleScope serviceendpointTypes {
             Get-VSTeamServiceEndpointType -Type azurerm -Scheme Basic
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/serviceendpointtypes/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointtypes/?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Body.type -eq 'azurerm' -and
                $Body.scheme -eq 'Basic'
             }
@@ -65,7 +65,7 @@ InModuleScope serviceendpointTypes {
             Get-VSTeamServiceEndpointType -Scheme Basic
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/serviceendpointtypes/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointtypes/?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Body.scheme -eq 'Basic'
             }
          }

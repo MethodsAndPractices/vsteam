@@ -29,7 +29,7 @@ InModuleScope tfvc {
          $Uri -like "*_apis/projects*" 
       }
 
-      [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
       Context 'Get-VSTeamTfvcRootBranch with no parameters and single result' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
@@ -189,7 +189,7 @@ InModuleScope tfvc {
       }
    
       $testCases = @(
-         @{ a = 'https://test.visualstudio.com'; t = 'vsts' }
+         @{ a = 'https://dev.azure.com/test'; t = 'vsts' }
          @{ a = 'http://localhost:8080/tfs/defaultcollection'; t = 'tfs' }
       )
 
@@ -214,7 +214,7 @@ InModuleScope tfvc {
          $Uri -like "*_apis/projects*" 
       }   
 
-      [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
       
       Context 'Get-VSTeamTfvcBranch with one path' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable

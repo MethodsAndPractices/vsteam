@@ -6,7 +6,7 @@ InModuleScope Approvals {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'Approvals' -Tag 'unit', 'approvals' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -56,7 +56,7 @@ InModuleScope Approvals {
             # Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -94,10 +94,10 @@ InModuleScope Approvals {
             # matches I have to search for the portions I expect but can't
             # assume the order. 
             # The general string should look like this:
-            # "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
+            # "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -like "*https://test.vsrm.visualstudio.com/project/_apis/release/approvals/*" -and
+               $Uri -like "*https://vsrm.dev.azure.com/test/project/_apis/release/approvals/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
                $Uri -like "*assignedtoFilter=Chuck Reinhart*" -and
                $Uri -like "*includeMyGroupApprovals=true*"
@@ -127,7 +127,7 @@ InModuleScope Approvals {
          It 'should return approvals' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -148,7 +148,7 @@ InModuleScope Approvals {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Method -eq 'Patch' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -162,7 +162,7 @@ InModuleScope Approvals {
          It 'should set approval' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -184,7 +184,7 @@ InModuleScope Approvals {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter { 
                $Method -eq 'Patch' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }

@@ -232,13 +232,16 @@ function Add-VSTeamAccount {
             $_pat = $PersonalAccessToken
          }
 
-         # If they only gave an account name add visualstudio.com
+         # If they only gave an account name add https://dev.azure.com
          if ($Account -notlike "*/*") {
-            if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
-               $Account = "https://$($matches.account).visualstudio.com"
+            if ($Account -match "(?<protocol>https?\://)?(?<domain>dev\.azure\.com/)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])") {
+               $Account = "https://dev.azure.com/$($matches.account)"
             }
          }
-
+         if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)") {
+            $Account = "https://dev.azure.com/$($matches.account)"
+         }
+   
          if ($UseBearerToken.IsPresent) {
             $token = $_pat
             $encodedPat = ''

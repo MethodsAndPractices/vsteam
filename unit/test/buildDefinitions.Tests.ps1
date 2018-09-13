@@ -4,7 +4,7 @@ Set-StrictMode -Version Latest
 Add-Type -AssemblyName 'System.Web'
 
 InModuleScope buildDefinitions {
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
    $results2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
@@ -26,7 +26,7 @@ InModuleScope buildDefinitions {
             Show-VSTeamBuildDefinition -projectName project -Id 15
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
-               $url -eq 'https://test.visualstudio.com/project/_build/index?definitionId=15'
+               $url -eq 'https://dev.azure.com/test/project/_build/index?definitionId=15'
             }
          }
       }
@@ -38,7 +38,7 @@ InModuleScope buildDefinitions {
             Show-VSTeamBuildDefinition -projectName project -Type Mine
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
-               $url -eq 'https://test.visualstudio.com/project/_build/index?_a=mine&path=%5c'
+               $url -eq 'https://dev.azure.com/test/project/_build/index?_a=mine&path=%5c'
             }
          }
       }
@@ -50,7 +50,7 @@ InModuleScope buildDefinitions {
             Show-VSTeamBuildDefinition -projectName project -Type XAML
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
-               $url -eq 'https://test.visualstudio.com/project/_build/xaml&path=%5c'
+               $url -eq 'https://dev.azure.com/test/project/_build/xaml&path=%5c'
             }
          }
       }
@@ -62,7 +62,7 @@ InModuleScope buildDefinitions {
             Show-VSTeamBuildDefinition -projectName project -Type Queued
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
-               $url -eq 'https://test.visualstudio.com/project/_build/index?_a=queued&path=%5c'
+               $url -eq 'https://dev.azure.com/test/project/_build/index?_a=queued&path=%5c'
             }
          }
       }
@@ -74,7 +74,7 @@ InModuleScope buildDefinitions {
             Show-VSTeamBuildDefinition -projectName project -path '\test'
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
-               $url -like 'https://test.visualstudio.com/project/_Build/index?_a=allDefinitions&path=%5Ctest'
+               $url -like 'https://dev.azure.com/test/project/_Build/index?_a=allDefinitions&path=%5Ctest'
             }
          }
       }
@@ -86,7 +86,7 @@ InModuleScope buildDefinitions {
             Show-VSTeamBuildDefinition -projectName project -path 'test'
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
-               $url -like 'https://test.visualstudio.com/project/_Build/index?_a=allDefinitions&path=%5Ctest'
+               $url -like 'https://dev.azure.com/test/project/_Build/index?_a=allDefinitions&path=%5Ctest'
             }
          }
       }
@@ -106,7 +106,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -123,7 +123,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -139,7 +139,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -155,7 +155,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -171,7 +171,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=build*"
             }
@@ -185,7 +185,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=All*"
@@ -200,7 +200,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*' -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://test.visualstudio.com/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=build*"
@@ -217,7 +217,7 @@ InModuleScope buildDefinitions {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'sampleFiles/builddef.json' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -229,7 +229,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project -id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -242,7 +242,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project -id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -254,7 +254,7 @@ InModuleScope buildDefinitions {
             Get-VSTeamBuildDefinition -projectName project -id 16 -revision 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/16?api-version=$([VSTeamVersions]::Build)&revision=1"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/16?api-version=$([VSTeamVersions]::Build)&revision=1"
             }
          }
       }
@@ -267,7 +267,7 @@ InModuleScope buildDefinitions {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and 
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -281,7 +281,7 @@ InModuleScope buildDefinitions {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
                $InFile -eq 'sampleFiles/builddef.json' -and
-               $Uri -eq "https://test.visualstudio.com/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }

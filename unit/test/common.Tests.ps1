@@ -112,12 +112,20 @@ Describe 'Common' {
    }
 
    Context '_isVSTS' {
-      It 'should return true' {
-         _isVSTS 'https://test.visualstudio.com' | Should Be $true
+      It '.visualstudio.com should return true' {
+         _isVSTS 'https://dev.azure.com/test' | Should Be $true
       }
 
-      It 'with / should return true' {
-         _isVSTS 'https://test.visualstudio.com/' | Should Be $true
+      It '.visualstudio.com with / should return true' {
+         _isVSTS 'https://dev.azure.com/test/' | Should Be $true
+      }
+
+      It 'https://dev.azure.com should return true' {
+         _isVSTS 'https://dev.azure.com/test' | Should Be $true
+      }
+
+      It 'https://dev.azure.com with / should return true' {
+         _isVSTS 'https://dev.azure.com/test/' | Should Be $true
       }
 
       It 'should return false' {

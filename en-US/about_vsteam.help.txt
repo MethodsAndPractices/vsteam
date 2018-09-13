@@ -20,7 +20,7 @@ LONG DESCRIPTION
 
     Name                         Value
     ----                         -----
-    Account                      https://test.visualstudio.com
+    Account                      https://dev.azure.com/test
     DefaultProject            
     Version                      TFS2017
     Build                        3.0
