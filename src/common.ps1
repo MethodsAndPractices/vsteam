@@ -192,7 +192,7 @@ function _getUserAgent {
 }
 
 function _useWindowsAuthenticationOnPremise {
-   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ([VSTeamVersions]::Account -like "*visualstudio.com")
+   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ([VSTeamVersions]::Account -like "*visualstudio.com") -and -not ([VSTeamVersions]::Account -like "https://dev.azure.com/*")
 }
 
 function _useBearerToken {
