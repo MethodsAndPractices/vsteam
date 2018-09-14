@@ -120,6 +120,14 @@ Describe 'Common' {
          _isVSTS 'https://test.visualstudio.com/' | Should Be $true
       }
 
+      It 'with Azure DevOps should return true url' {
+         _isVSTS 'https://dev.azure.com/test' | Should Be $true
+      }
+
+      It 'with with Azure DevOps and / should return true' {
+         _isVSTS 'https://dev.azure.com/test/' | Should Be $true
+      }
+
       It 'should return false' {
          _isVSTS 'http://localhost:8080/tfs/defaultcollection' | Should Be $false
       }
