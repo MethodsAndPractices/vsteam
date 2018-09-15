@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.6
+
+Fixed bug where you could not Tab complete the build definition name when calling Add-VSTeamBuild.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/92) from [Olivier](https://github.com/hangar18rip) which included the following:
+
+- Added the Demands property to the VSTeamBuildDefinition type
+
 ## 4.0.5
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/89) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
