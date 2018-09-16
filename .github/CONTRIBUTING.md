@@ -15,7 +15,7 @@ I am truly grateful for all the support developing VSTeam. It means a lot that y
 9. Add type file.
 10. Add format file.
 11. Update the psd1 file.
-12. Update the Readme.md file.
+12. Update the CHANGELOG.md file.
 13. Goto 4 for next function.
 
 ## Running Integration tests
@@ -94,6 +94,6 @@ Format files go in the formats folder.
 
 Make sure casing of all the files you add match. This module runs on Mac, PC and Linux and casing is very important.
 
-### Update README.md
+### Update CHANGELOG.md
 
-Update the Release Notes section of the readme file with your changes.
+Update the CHANGELOG.md file with your changes.
