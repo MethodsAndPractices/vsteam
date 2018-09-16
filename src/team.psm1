@@ -501,6 +501,9 @@ function Invoke-VSTeamRequest {
 # Set the module version
 [VSTeamVersions]::ModuleVersion = _getModuleVersion
 
+# Load the correct version of the environment variable
+Set-VSTeamAPIVersion -Version $([VSTeamVersions]::Version)
+
 Set-Alias gti Get-VSTeamInfo
 Set-Alias ata Add-VSTeamAccount
 Set-Alias ivr Invoke-VSTeamRequest
