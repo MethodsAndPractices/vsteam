@@ -204,32 +204,34 @@ function Add-VSTeamBuild {
       # If they have not set the default project you can't find the
       # validateset so skip that check. However, we still need to give
       # the option to pass a QueueName to use.
+      $queues = $null
+      $queueArrSet = $null 
+
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
          $queues = Get-VSTeamQueue -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
-         $arrSet = $queues.name
+         $queueArrSet = $queues.name
       }
       else {
          Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of QueueName'
-         $queues = $null
-         $arrSet = $null
       }
 
       $ParameterName = 'QueueName'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet
+      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $queueArrSet
       $dp.Add($ParameterName, $rp)
 
+      $buildDefs = $null
+      $buildDefsArrSet = $null
+         
       if ($Global:PSDefaultParameterValues["*:projectName"]) {
          $buildDefs = Get-VSTeamBuildDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
-         $arrSet = $buildDefs.fullname
+         $buildDefsArrSet = $buildDefs.name
       }
       else {
-         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildDefinition'
-         $buildDefs = $null
-         $arrSet = $null
+         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of BuildDefinition'         
       }
 
       $ParameterName = 'BuildDefinitionName'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByName'
+      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $buildDefsArrSet -ParameterSetName 'ByName'
       $dp.Add($ParameterName, $rp)
 
       $dp
@@ -252,10 +254,10 @@ function Add-VSTeamBuild {
       }
 
       $body = @{
-		   definition = @{
-			   id = $id
-		   };
-	   }
+         definition = @{
+            id = $id
+         };
+      }
 
       if ($QueueName) {
          $queueId = Get-VSTeamQueue -ProjectName "$ProjectName" -queueName "$QueueName" |

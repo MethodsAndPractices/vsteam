@@ -460,7 +460,7 @@ InModuleScope builds {
          }
 
          Mock Get-VSTeamBuildDefinition { 
-            return @{ fullname = "MyBuildDef" }
+            return @{ name = "MyBuildDef" }
          }
 
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
@@ -491,7 +491,7 @@ InModuleScope builds {
                id   = 3
             }
          }
-         Mock Get-VSTeamBuildDefinition { return @{ fullname = "MyBuildDef" } }
+         Mock Get-VSTeamBuildDefinition { return @{ name = "MyBuildDef" } }
 
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             ($Body | ConvertFrom-Json).definition.id -eq 2 -and
@@ -523,7 +523,7 @@ InModuleScope builds {
             }
          }
          
-         Mock Get-VSTeamBuildDefinition { return @{ fullname = "MyBuildDef" } }
+         Mock Get-VSTeamBuildDefinition { return @{ name = "MyBuildDef" } }
 
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             ($Body | ConvertFrom-Json).definition.id -eq 2 -and

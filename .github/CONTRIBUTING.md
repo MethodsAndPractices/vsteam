@@ -8,14 +8,15 @@ I am truly grateful for all the support developing VSTeam. It means a lot that y
 2. Explore the API and get familiar with it.
 3. Fork this repository and create a branch for your work.
 4. Install the SHiPS PowerShell module
-5. Write help. **It is important that you do this before you start adding the function.**
-6. Write unit tests.
-7. Code the function.
-8. Add type file.
-9. Add format file.
-10. Update the psd1 file.
-11. Update the Readme.md file.
-12. Goto 4 for next function.
+5. Install the Trackyon.Utils module
+6. Write help. **It is important that you do this before you start adding the function.**
+7. Write unit tests.
+8. Code the function.
+9. Add type file.
+10. Add format file.
+11. Update the psd1 file.
+12. Update the Readme.md file.
+13. Goto 4 for next function.
 
 ## Running Integration tests
 

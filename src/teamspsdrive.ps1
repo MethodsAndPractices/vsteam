@@ -640,6 +640,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [datetime]$CreatedOn = [datetime]::MinValue
    [VSTeamBuildDefinitionProcess]$Process = $null
    [VSTeamBuildDefinitionProcessPhaseStep[]]$Steps = $null
+   [string[]]$Demands = $null
 
    VSTeamBuildDefinition (
       [object]$obj,
@@ -664,6 +665,10 @@ class VSTeamBuildDefinition : VSTeamDirectory {
 
       if ($obj.PSObject.Properties.Match('retentionRules').count -gt 0) {
          $this.RetentionRules = $obj.retentionRules
+      }
+
+      if ($obj.PSObject.Properties.Match('demands').count -gt 0) {
+         $this.Demands = $obj.demands
       }
       
       if ($obj.PSObject.Properties.Match('options').count -gt 0) {
