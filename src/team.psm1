@@ -237,10 +237,9 @@ function Add-VSTeamAccount {
 
          # If they only gave an account name add https://dev.azure.com
          if ($Account -notlike "*/*") {
-            if ($Account -match "(?<protocol>https?\://)?(?<domain>dev\.azure\.com/)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])") {
-               $Account = "https://dev.azure.com/$($matches.account)"
-            }
+            $Account = "https://dev.azure.com/$($Account)"
          }
+         # If they gave https://xxx.visualstudio.com convert to new URL
          if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)") {
             $Account = "https://dev.azure.com/$($matches.account)"
          }

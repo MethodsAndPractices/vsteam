@@ -210,7 +210,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts (old url)' {
+      Context 'Add-VSTeamAccount vsts (old URL)' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion

@@ -21,6 +21,15 @@ function Get-VSTeamProfile {
             # We needed to add ForEach-Object to unroll and show the inner type
             $result = Get-Content $profilesPath | ConvertFrom-Json
 
+            # convert old URL in profile to new URL
+            if ($result) {
+               $result | ForEach-Object {
+                  if ($_.URL -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)") {
+                     $_.URL = "https://dev.azure.com/$($matches.account)"
+                  }
+               }
+            }
+
             if ($Name) {
                $result = $result | Where-Object Name -eq $Name
             }
@@ -157,11 +166,23 @@ function Add-VSTeamProfile {
 
       # If they only gave an account name add https://dev.azure.com
       if ($Account -notlike "*/*") {
-         if ($Account -match "(?<protocol>https?\://)?(?<domain>dev\.azure\.com/)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])") {
-            $Account = "https://dev.azure.com/$($matches.account)"
+         if (-not $Name) {
+            $Name = $Account
          }
+         $Account = "https://dev.azure.com/$($Account)"
       }
+      # If they gave https://dev.azure.com extract Account and Profile name
+      if ($Account -match "(?<protocol>https\://)?(?<domain>dev\.azure\.com/)(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])") {
+         if (-not $Name) {
+            $Name = $matches.account
+         }
+         $Account = "https://dev.azure.com/$($matches.account)"
+      }
+      # If they gave https://xxx.visualstudio.com extract Account and Profile name, convert to new URL
       if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)") {
+         if (-not $Name) {
+            $Name = $matches.account
+         }
          $Account = "https://dev.azure.com/$($matches.account)"
       }
 
