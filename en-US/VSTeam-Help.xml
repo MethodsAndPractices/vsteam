@@ -9200,7 +9200,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>SubDomain</maml:name>
           <maml:Description>
-            <maml:para>The SubDomain before dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
+            <maml:para>The SubDomain before .dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -9362,7 +9362,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>SubDomain</maml:name>
         <maml:Description>
-          <maml:para>The SubDomain before dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
+          <maml:para>The SubDomain before .dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

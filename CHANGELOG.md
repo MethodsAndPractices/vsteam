@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.8
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/93) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+- replaced {accountname}.visualstudio.com with dev.azure.com/{accountname}
+
 ## 4.0.7
 
 Setting the Top to 10,000 when searching by email in Update-VSTeamUser. If you have a large number of users you should use by ID instead of by email. This addresses issue [90](https://github.com/DarqueWarrior/vsteam/issues/90).
