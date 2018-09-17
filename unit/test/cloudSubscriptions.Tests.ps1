@@ -8,7 +8,7 @@ InModuleScope cloudSubscriptions {
          $Uri -like "*_apis/projects*" 
       }
 
-      [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
       Context 'Get-VSTeamCloudSubscription' {
          Mock Invoke-RestMethod { 
@@ -19,7 +19,7 @@ InModuleScope cloudSubscriptions {
             Get-VSTeamCloudSubscription
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions/?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }

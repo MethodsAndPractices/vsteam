@@ -143,7 +143,7 @@
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -226,7 +226,7 @@
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -307,7 +307,7 @@
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -403,7 +403,7 @@
         <maml:name>Account</maml:name>
         <maml:Description>
           <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-          <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+          <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2517,7 +2517,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2587,7 +2587,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2655,7 +2655,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2711,7 +2711,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <maml:name>Account</maml:name>
         <maml:Description>
           <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-          <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+          <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -9200,7 +9200,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>SubDomain</maml:name>
           <maml:Description>
-            <maml:para>The SubDomain between your account and visualstudio.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
+            <maml:para>The SubDomain before .dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -9362,7 +9362,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>SubDomain</maml:name>
         <maml:Description>
-          <maml:para>The SubDomain between your account and visualstudio.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
+          <maml:para>The SubDomain before .dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

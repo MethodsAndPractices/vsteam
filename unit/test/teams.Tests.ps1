@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope teams {
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
@@ -28,7 +28,7 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -44,9 +44,9 @@ InModuleScope teams {
             # matches I have to search for the portions I expect but can't
             # assume the order.
             # The general string should look like this:
-            # "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)&`$top=10"
+            # "https://dev.azure.com/test/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)&`$top=10"
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "https://test.visualstudio.com/_apis/projects/Test/teams/*" -and
+               $Uri -like "https://dev.azure.com/test/_apis/projects/Test/teams/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=10*"
             }
@@ -61,7 +61,7 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*https://test.visualstudio.com/_apis/projects/Test/teams/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/projects/Test/teams/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$skip=10*"
             }
@@ -76,7 +76,7 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*https://test.visualstudio.com/_apis/projects/Test/teams/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/projects/Test/teams/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=10*" -and
                $Uri -like "*`$skip=5*"
@@ -92,7 +92,7 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/TestTeamId?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/TestTeamId?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -105,7 +105,7 @@ InModuleScope teams {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/TestTeamName?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/TestTeamName?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -119,7 +119,7 @@ InModuleScope teams {
             $expectedBody = '{ "name": "TestTeam", "description": "" }'
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)" -and
                $Method -eq "Post" -and
                $Body -eq $expectedBody
             }
@@ -135,7 +135,7 @@ InModuleScope teams {
             $expectedBody = '{ "name": "TestTeam", "description": "Test Description" }'
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)" -and
                $Method -eq "Post" -and
                $Body -eq $expectedBody
             }
@@ -157,7 +157,7 @@ InModuleScope teams {
             $expectedBody = '{ "name": "NewTeamName" }'
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$([VSTeamVersions]::Core)" -and
                $Method -eq "Patch" -and
                $Body -eq $expectedBody
             }
@@ -173,7 +173,7 @@ InModuleScope teams {
             $expectedBody = '{"description": "New Description" }'
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$([VSTeamVersions]::Core)" -and
                $Method -eq "Patch" -and
                $Body -eq $expectedBody
             }
@@ -189,7 +189,7 @@ InModuleScope teams {
             $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/OldTeamName?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$([VSTeamVersions]::Core)" -and
                $Method -eq "Patch" -and
                $Body -eq $expectedBody
             }
@@ -206,7 +206,7 @@ InModuleScope teams {
             $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/OldTeamName?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/TestProject/teams/OldTeamName?api-version=$([VSTeamVersions]::Core)" -and
                $Method -eq "Patch" -and
                $Body -eq $expectedBody
             }
@@ -220,7 +220,7 @@ InModuleScope teams {
             Remove-VSTeam -ProjectName Test -TeamId "TestTeam" -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/Test/teams/TestTeam?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/TestTeam?api-version=$([VSTeamVersions]::Core)" -and
                $Method -eq "Delete"
             }
          }
@@ -234,7 +234,7 @@ InModuleScope teams {
             Get-VSTeam -ProjectName TestProject -TeamId "TestTeam" | Remove-VSTeam -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/projects/TestProject/teams/TestTeam?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/TestProject/teams/TestTeam?api-version=$([VSTeamVersions]::Core)" -and
                $Method -eq "Delete"
             }
          }

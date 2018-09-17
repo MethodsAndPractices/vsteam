@@ -59,7 +59,7 @@ Describe 'Team' -Tag 'integration' {
             $info.Account | Should Be $acct
          }
          else {
-            $info.Account | Should Be "https://$acct.visualstudio.com"
+            $info.Account | Should Be "https://dev.azure.com/$acct"
          }
       }
    }

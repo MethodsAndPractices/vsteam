@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope workitems {
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'workitems' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -14,7 +14,7 @@ InModuleScope workitems {
       $obj = @{
          id  = 47
          rev = 1
-         url = "https://test.visualstudio.com/_apis/wit/workItems/47"
+         url = "https://dev.azure.com/test/_apis/wit/workItems/47"
       }
 
       $collection = @{
@@ -34,7 +34,7 @@ InModuleScope workitems {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json-patch+json' -and
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
             }
          }
 
@@ -45,7 +45,7 @@ InModuleScope workitems {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json-patch+json' -and
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -56,7 +56,7 @@ InModuleScope workitems {
          it 'should return url for mine' {
             Show-VSTeamWorkItem -projectName project -Id 15
 
-            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://test.visualstudio.com/project/_workitems/edit/15' }
+            Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://dev.azure.com/test/project/_workitems/edit/15' }
          }
       }
 
@@ -78,9 +78,9 @@ InModuleScope workitems {
             # matches I have to search for the portions I expect but can't
             # assume the order. 
             # The general string should look like this:
-            # https://test.visualstudio.com/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=Fail
+            # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=Fail
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://test.visualstudio.com/test/_apis/wit/workitems/*" -and
+               $Uri -like "*https://dev.azure.com/test/test/_apis/wit/workitems/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*ids=47,48*" -and
                $Uri -like "*`$Expand=None*" -and
@@ -99,7 +99,7 @@ InModuleScope workitems {
             Get-VSTeamWorkItem -ProjectName test -Id 47
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/test/_apis/wit/workitems/47?api-version=$([VSTeamVersions]::Core)&`$Expand=None"
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/47?api-version=$([VSTeamVersions]::Core)&`$Expand=None"
             }
          }
       }
