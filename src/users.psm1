@@ -152,7 +152,7 @@ function Update-VSTeamUser
       if ($email)
       {
          # We have to go find the id
-         $user = Get-VSTeamUser | Where-Object email -eq $email
+         $user = Get-VSTeamUser -Top 10000 | Where-Object email -eq $email
 
          if (-not$user)
          {

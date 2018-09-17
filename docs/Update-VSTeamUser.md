@@ -17,6 +17,26 @@ Updates the users for the account. (Currently only supports updating the License
 
 ## PARAMETERS
 
+### -Id
+
+The id of the user to be updated.
+
+```yaml
+Type: String
+Parameter Sets: ById
+Required: True
+```
+
+### -Email
+
+The email address of the user to update. For organizations with over 100 users this can be very slow and resource intensive.
+
+```yaml
+Type: String
+Parameter Sets: ByEmail
+Required: True
+```
+
 ### -License
 
 Type of Account License you want to change to. The acceptable values for this parameter are:
@@ -31,7 +51,14 @@ Type of Account License you want to change to. The acceptable values for this pa
 ```yaml
 Type: String
 Required: True
-Default value: [empty]
+```
+
+### -Force
+
+Forces the command without confirmation
+
+```yaml
+Type: SwitchParameter
 ```
 
 ## INPUTS
@@ -42,3 +69,4 @@ Default value: [empty]
 
 ## RELATED LINKS
 
+[Get-VSTeamUser](Get-VSTeamUser.md)
