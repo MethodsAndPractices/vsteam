@@ -154,9 +154,9 @@ phases:
     displayName: 'Copy Integration Tests Artifacts Folder'
     inputs:
       Contents: |
-      *.psd1
-      integration\**
-      
+       *.psd1
+       integration\**
+
       TargetFolder: '$(build.artifactstagingdirectory)/Tests'
 
   - task: PublishBuildArtifacts@1
