@@ -58,7 +58,7 @@
    # RequiredAssemblies = @()
 
    # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-   ScriptsToProcess = @('src\teamspsdrive.ps1')
+   ScriptsToProcess  = @('src\teamspsdrive.ps1')
 
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('types\Approvals.ps1xml',
@@ -74,7 +74,8 @@
       'types\teams.ps1xml',
       'types\tfvc.ps1xml',
       'types\users.ps1xml',
-      'types\workitems.ps1xml')
+      'types\workitems.ps1xml',
+      'types\pullrequest.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -114,7 +115,8 @@
       'src\users.psm1',
       'src\workitemTypes.psm1',
       'src\workitems.psm1',
-      '.\src\feeds.psm1')
+      '.\src\feeds.psm1',
+      'src\pullrequest.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -210,7 +212,9 @@
       'Get-VSTeamFeed',
       'Add-VSTeamFeed',
       'Show-VSTeamFeed',
-      'Remove-VSTeamFeed')
+      'Remove-VSTeamFeed',
+      'Get-VSTeamPullRequest',
+      'Show-VSTeamPullRequest')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -321,7 +325,9 @@
       'Get-Feed',
       'Add-Feed',
       'Show-Feed',
-      'Remove-Feed')
+      'Remove-Feed',
+      'Get-PullRequest',
+      'Show-PullRequest')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
