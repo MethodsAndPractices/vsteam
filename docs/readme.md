@@ -192,6 +192,10 @@ Returns the saved profiles.
 
 Returns a list of projects in the Team Services or Team Foundation Server account.
 
+### [Get-VSTeamPullRequest](Get-VSTeamPullRequest.md)
+
+Returns one or more open pull requests from your team, project, or Id.
+
 ### [Get-VSTeamQueue](Get-VSTeamQueue.md)
 
 Gets a agent queue.
@@ -347,6 +351,10 @@ Opens the Git repository in the default browser.
 ### [Show-VSTeamProject](Show-VSTeamProject.md)
 
 Opens the project in the default browser.
+
+### [Show-VSTeamPullRequest](Show-VSTeamPullRequest.md)
+
+Opens the pull request in the default browser.
 
 ### [Show-VSTeamRelease](Show-VSTeamRelease.md)
 
