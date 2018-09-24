@@ -5,7 +5,7 @@ InModuleScope pullrequest {
     Describe 'Pull Requests' {
         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
-        [VSTeamVersions]::Account = 'https://dev.azure.com/brianschmitt'
+        [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
         $singleResult = @{
             pullRequestId  = 1
