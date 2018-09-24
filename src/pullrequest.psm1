@@ -63,12 +63,17 @@ function Show-VSTeamPullRequest {
     )
 
     process {
-        $pullRequest = Get-PullRequest -PullRequestId $Id
+        try {
+            $pullRequest = Get-PullRequest -PullRequestId $Id
 
-        $projectName = $pullRequest.repository.project.name
-        $repositoryId = $pullRequest.repositoryName
+            $projectName = [uri]::EscapeDataString($pullRequest.repository.project.name)
+            $repositoryId = $pullRequest.repositoryName
 
-        Show-Browser "$([VSTeamVersions]::Account)/$projectName/_git/$repositoryId/pullrequest/$Id"
+            Show-Browser "$([VSTeamVersions]::Account)/$projectName/_git/$repositoryId/pullrequest/$Id"
+        }
+        catch {
+            _handleException $_
+        }
     }
 }
 

@@ -1,75 +1,90 @@
 Set-StrictMode -Version Latest
 
-InModuleScope workitems {
-    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+InModuleScope pullrequest {
 
-    Describe 'pullrequests' {
-        # Mock the call to Get-PullRequest by the dynamic parameter for ProjectName
-        Mock Invoke-RestMethod { return @() } -ParameterFilter {
-            $Uri -like "*pullrequests*" 
-        }
-   
+    Describe 'Pull Requests' {
         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
-        $obj = @{
-            id  = 47
-            rev = 1
-            url = "https://dev.azure.com/test/_apis/git/pullRequests/47"
+        [VSTeamVersions]::Account = 'https://dev.azure.com/brianschmitt'
+
+        $singleResult = @{
+            pullRequestId  = 1
+            repositoryName = "test"
+            reviewStatus   = "Approved"
+            createdByUser  = "Test"
+            creationDate   = "12/31/2018 23:59:59"
+            title          = "test"
+            description    = "Test"
+            sourceRefname  = "refs/heads/test/testpr"
+            mergeStatus    = "succeeded"
+            reviewedByUser = ""
+            status         = "active"
+            url            = "https://dev.azure.com/test/_apis/git/pullRequests/1"
+            artifactId     = ""
         }
 
         $collection = @{
-            count = 1
-            value = @($obj)
+            value = @($singleResult)
         }
 
-        Context 'Show-VSTeamPullRequest' {
-            Mock Show-Browser { }
+        Context 'Show-VSTeamPullRequest by Id' {
+            Mock Show-Browser
 
-            it 'should return url for mine' {
-                Show-VSTeamPullRequest -Id 15
-
-                Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://dev.azure.com/test/project/_git/repo/pullrequest/15' }
+            it 'should show pull request' {
+                Show-VSTeamPullRequest -Id 1
+    
+                Assert-MockCalled Show-Browser
             }
         }
 
-        Context 'Get-VSTeamPullRequest' {       
+        Context 'Show-VSTeamPullRequest with invalid ID' {
+            it 'should show pull request' {
+                { Show-VSTeamPullRequest -Id 999999 } | Should throw
+            }
+        }
 
-            It 'Without Default Project should get pull requests' {
-                Mock Invoke-RestMethod {
-                    # If this test fails uncomment the line below to see how the mock was called.
-                    # Write-Host $args
-               
-                    return $collection
-                }
+        Context 'Get-VSTeamPullRequest' {
 
-                $Global:PSDefaultParameterValues.Remove("*:projectName")
-                Get-VSTeamPullRequest -ProjectName test -Id 47
+            It 'Get-VSTeamPullRequest with no parameters' {
+                Mock Invoke-RestMethod { return $collection }
 
-                # With PowerShell core the order of the query string is not the 
-                # same from run to run!  So instead of testing the entire string
-                # matches I have to search for the portions I expect but can't
-                # assume the order. 
-                # The general string should look like this:
-                # https://dev.azure.com/test/test/_apis/git/pullRequests/47?api-version=4.0
+                $Global:PSDefaultParameterValues.Remove("*:ProjectName")
+                Get-VSTeamPullRequest
+
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -like "*https://dev.azure.com/test/test/_apis/git/pullRequests/*" -and
-                    $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-                    $Uri -like "*47*"
+                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
                 }
             }
 
-            It 'With Default Project should get pull request' {
-                Mock Invoke-RestMethod {
-                    # If this test fails uncomment the line below to see how the mock was called.
-                    # Write-Host $args
-                    return $obj
-                }
+            It 'Get-VSTeamPullRequest with default project name' {
+                Mock Invoke-RestMethod { return $collection }
 
-                $Global:PSDefaultParameterValues["*:projectName"] = 'test'
-                Get-VSTeamWorkItem -ProjectName test -Id 47
+                $Global:PSDefaultParameterValues["*:ProjectName"] = 'testproject'
+                Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "https://dev.azure.com/test/test/_apis/git/pullRequests/47?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
+                }
+            }
+
+            It 'Get-VSTeamPullRequest By ProjectName' {
+                Mock Invoke-RestMethod { return $collection }
+
+                $Global:PSDefaultParameterValues.Remove("*:ProjectName")
+                Get-VSTeamPullRequest -ProjectName testproject
+
+                Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
+                }
+            }
+
+            It 'Get-VSTeamPullRequest By ID' {
+                Mock Invoke-RestMethod { return $singleResult }
+
+                Get-VSTeamPullRequest -Id 1
+
+                Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/1?api-version=$([VSTeamVersions]::Core)"
                 }
             }
         }
