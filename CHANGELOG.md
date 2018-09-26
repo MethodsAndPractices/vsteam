@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.9
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/102) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
+
+- Get-VSTeamPullRequest
+- Show-VSTeamPullRequest
+
 ## 4.0.8
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/93) from [Kai Walter](https://github.com/KaiWalter) which included the following:

@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '4.0.8'
+   ModuleVersion     = '4.0.9'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -115,7 +115,7 @@
       'src\users.psm1',
       'src\workitemTypes.psm1',
       'src\workitems.psm1',
-      '.\src\feeds.psm1',
+      'src\feeds.psm1',
       'src\pullrequest.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
@@ -344,7 +344,7 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags                       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps')
+         Tags       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'Test Plans', 'Repos')
 
          # If you use this you don't need SHiPS in your private repository but the user
          # has to install SHiPS manually.  If you don't add this SHiPS will be installed
@@ -355,7 +355,7 @@
          # LicenseUri = ''
 
          # A URL to the main website for this project.
-         ProjectUri                 = 'https://github.com/DarqueWarrior/vsteam'
+         ProjectUri = 'https://github.com/DarqueWarrior/vsteam'
 
          # A URL to an icon representing this module.
          # IconUri = ''
