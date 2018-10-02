@@ -87,9 +87,9 @@ Will add the account and use the OAuth Token provided by VSTS when you check the
 The Visual Studio Team Services (VSTS) account name to use.
 DO NOT enter the entire URL.
 
-Just the portion before visualstudio.com. For example in the
+Just the portion after dev.azure.com. For example in the
 following url mydemos is the account name.
-<https://mydemos.visualstudio.com>
+<https://dev.azure.com/mydemos>
 or
 The full Team Foundation Server (TFS) url including the collection.
 <http://localhost:8080/tfs/DefaultCollection>

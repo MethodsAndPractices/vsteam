@@ -29,7 +29,7 @@ EXAMPLES
 
     Add-VSTeamAccount -Profile demonstrations
 
-    This will add the account https://demonstrations.visualstudio.com/
+    This will add the account https://dev.azure.com/demonstrations/
 
 KEYWORDS
     Team Services, VSTS, TFS, VSO, TFS, DevOps

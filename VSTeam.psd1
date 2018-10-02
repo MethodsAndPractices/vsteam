@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '4.0.3'
+   ModuleVersion     = '4.0.9'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -58,7 +58,7 @@
    # RequiredAssemblies = @()
 
    # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-   ScriptsToProcess = @('src\teamspsdrive.ps1')
+   ScriptsToProcess  = @('src\teamspsdrive.ps1')
 
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('types\Approvals.ps1xml',
@@ -74,7 +74,8 @@
       'types\teams.ps1xml',
       'types\tfvc.ps1xml',
       'types\users.ps1xml',
-      'types\workitems.ps1xml')
+      'types\workitems.ps1xml',
+      'types\pullrequest.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -114,7 +115,8 @@
       'src\users.psm1',
       'src\workitemTypes.psm1',
       'src\workitems.psm1',
-      '.\src\feeds.psm1')
+      'src\feeds.psm1',
+      'src\pullrequest.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -210,7 +212,9 @@
       'Get-VSTeamFeed',
       'Add-VSTeamFeed',
       'Show-VSTeamFeed',
-      'Remove-VSTeamFeed')
+      'Remove-VSTeamFeed',
+      'Get-VSTeamPullRequest',
+      'Show-VSTeamPullRequest')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -321,7 +325,9 @@
       'Get-Feed',
       'Add-Feed',
       'Show-Feed',
-      'Remove-Feed')
+      'Remove-Feed',
+      'Get-PullRequest',
+      'Show-PullRequest')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
@@ -338,7 +344,7 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags                       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team')
+         Tags       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos')
 
          # If you use this you don't need SHiPS in your private repository but the user
          # has to install SHiPS manually.  If you don't add this SHiPS will be installed
@@ -349,7 +355,7 @@
          # LicenseUri = ''
 
          # A URL to the main website for this project.
-         ProjectUri                 = 'https://github.com/DarqueWarrior/vsteam'
+         ProjectUri = 'https://github.com/DarqueWarrior/vsteam'
 
          # A URL to an icon representing this module.
          # IconUri = ''

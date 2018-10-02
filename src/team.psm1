@@ -33,13 +33,15 @@ function _setEnvironmentVariables {
       [string] $Level = "Process",
       [string] $Pat,
       [string] $Acct,
-      [string] $BearerToken
+      [string] $BearerToken,
+      [string] $Version
    )
 
    # You always have to set at the process level or they will Not
    # be seen in your current session.
    $env:TEAM_PAT = $Pat
    $env:TEAM_ACCT = $Acct
+   $env:TEAM_VERSION = $Version
    $env:TEAM_TOKEN = $BearerToken
 
    [VSTeamVersions]::Account = $Acct
@@ -48,6 +50,7 @@ function _setEnvironmentVariables {
    if ($Level -ne "Process") {
       [System.Environment]::SetEnvironmentVariable("TEAM_PAT", $Pat, $Level)
       [System.Environment]::SetEnvironmentVariable("TEAM_ACCT", $Acct, $Level)
+      [System.Environment]::SetEnvironmentVariable("TEAM_VERSION", $Version, $Level)
    }
 }
 
@@ -67,7 +70,7 @@ function _clearEnvironmentVariables {
       [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
    }
 
-   _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken ''
+   _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken '' -Version ''
 }
 
 function Get-VSTeamInfo {
@@ -232,13 +235,15 @@ function Add-VSTeamAccount {
             $_pat = $PersonalAccessToken
          }
 
-         # If they only gave an account name add visualstudio.com
+         # If they only gave an account name add https://dev.azure.com
          if ($Account -notlike "*/*") {
-            if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)?") {
-               $Account = "https://$($matches.account).visualstudio.com"
-            }
+            $Account = "https://dev.azure.com/$($Account)"
          }
-
+         # If they gave https://xxx.visualstudio.com convert to new URL
+         if ($Account -match "(?<protocol>https?\://)?(?<account>[A-Z0-9][-A-Z0-9]*[A-Z0-9])(?<domain>\.visualstudio\.com)") {
+            $Account = "https://dev.azure.com/$($matches.account)"
+         }
+   
          if ($UseBearerToken.IsPresent) {
             $token = $_pat
             $encodedPat = ''
@@ -257,7 +262,7 @@ function Add-VSTeamAccount {
       }
 
       Clear-VSTeamDefaultProject
-      _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account -BearerToken $token
+      _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account -BearerToken $token -Version $Version
 
       Set-VSTeamAPIVersion -Version (_getVSTeamAPIVersion -Instance $account -Version $Version)
 
@@ -497,6 +502,9 @@ function Invoke-VSTeamRequest {
 
 # Set the module version
 [VSTeamVersions]::ModuleVersion = _getModuleVersion
+
+# Load the correct version of the environment variable
+Set-VSTeamAPIVersion -Version $([VSTeamVersions]::Version)
 
 Set-Alias gti Get-VSTeamInfo
 Set-Alias ata Add-VSTeamAccount

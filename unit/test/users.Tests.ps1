@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope users {
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    
    Describe "Users TFS Errors" {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -47,7 +47,7 @@ InModuleScope users {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0"
+               $url -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0"
             }
          }
       }
@@ -88,7 +88,7 @@ InModuleScope users {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://test.vsaex.visualstudio.com/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
+               $url -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
             }
          }
       }

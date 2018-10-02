@@ -111,7 +111,7 @@ function _isVSTS {
       [parameter(Mandatory = $true)]
       [string] $instance
    )
-   return $instance -like "*.visualstudio.com*"
+   return $instance -like "*.visualstudio.com*" -or $instance -like "https://dev.azure.com/*"
 }
 
 function _getVSTeamAPIVersion {
@@ -147,8 +147,8 @@ function _addSubDomain {
    $instance = [VSTeamVersions]::Account
 
    # For VSTS Entitlements is under .vsaex
-   if ($subDomain -and [VSTeamVersions]::Account.ToLower().Contains('visualstudio.com')) {
-      $instance = [VSTeamVersions]::Account.ToLower().Replace('visualstudio.com', "$subDomain.visualstudio.com")
+   if ($subDomain -and [VSTeamVersions]::Account.ToLower().Contains('dev.azure.com')) {
+      $instance = [VSTeamVersions]::Account.ToLower().Replace('dev.azure.com', "$subDomain.dev.azure.com")
    }
 
    return $instance
@@ -190,7 +190,7 @@ function _getUserAgent {
 }
 
 function _useWindowsAuthenticationOnPremise {
-   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ([VSTeamVersions]::Account -like "*visualstudio.com")
+   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ([VSTeamVersions]::Account -like "*visualstudio.com") -and -not ([VSTeamVersions]::Account -like "https://dev.azure.com/*")
 }
 
 function _useBearerToken {

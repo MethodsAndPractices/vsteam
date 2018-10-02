@@ -130,7 +130,7 @@ Type: String
 
 ### -SubDomain
 
-The SubDomain between your account and visualstudio.com. For example, to target Release Management you must use the SubDomain vsrm.
+The SubDomain before .dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.
 
 ```yaml
 Type: String

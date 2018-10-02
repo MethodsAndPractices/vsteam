@@ -1,5 +1,40 @@
 # Changelog
 
+## 4.0.9
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/102) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
+
+- Get-VSTeamPullRequest
+- Show-VSTeamPullRequest
+
+## 4.0.8
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/93) from [Kai Walter](https://github.com/KaiWalter) which included the following:
+
+- replaced {accountname}.visualstudio.com with dev.azure.com/{accountname}
+
+## 4.0.7
+
+Setting the Top to 10,000 when searching by email in Update-VSTeamUser. If you have a large number of users you should use by ID instead of by email. This addresses issue [90](https://github.com/DarqueWarrior/vsteam/issues/90).
+
+## 4.0.6
+
+Fixed bug where you could not Tab complete the build definition name when calling Add-VSTeamBuild.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/92) from [Olivier](https://github.com/hangar18rip) which included the following:
+
+- Added the Demands property to the VSTeamBuildDefinition type
+
+## 4.0.5
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/89) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
+
+- old license was not populated when updating a user by id
+
+## 4.0.4
+
+Fixed bug where the version would not be saved when storing account at User or Admin level. When you started a new PowerShell the account would load but the version would always be TFS2017.  Now it loads correctly.
+
 ## 4.0.3
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/84) from [Kai Walter](https://github.com/KaiWalter) which included the following:

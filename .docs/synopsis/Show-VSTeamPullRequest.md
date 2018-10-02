@@ -1,0 +1,1 @@
+Opens the pull request in the default browser.

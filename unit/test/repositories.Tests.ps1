@@ -4,7 +4,7 @@ InModuleScope repositories {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
@@ -55,7 +55,7 @@ InModuleScope repositories {
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Context 'Show-VSTeamGitRepository by project' {
-         Mock Show-Browser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
+         Mock Show-Browser -Verifiable -ParameterFilter { $url -eq 'https://dev.azure.com/test/_git/project' }
          Mock Show-Browser { throw "Show-Browser called incorrectly: $Args" }
 
          Show-VSTeamGitRepository -projectName project
@@ -66,10 +66,10 @@ InModuleScope repositories {
       }
 
       Context 'Show-VSTeamGitRepository by remote url' {
-         Mock Show-Browser -Verifiable -ParameterFilter { $url -eq 'https://test.visualstudio.com/_git/project' }
+         Mock Show-Browser -Verifiable -ParameterFilter { $url -eq 'https://dev.azure.com/test/_git/project' }
          Mock Show-Browser { throw "Show-Browser called incorrectly: $Args" }
 
-         Show-VSTeamGitRepository -RemoteUrl 'https://test.visualstudio.com/_git/project'
+         Show-VSTeamGitRepository -RemoteUrl 'https://dev.azure.com/test/_git/project'
 
          it 'should return url for mine' {
             Assert-VerifiableMock
@@ -138,7 +138,7 @@ InModuleScope repositories {
          It 'Should remove Git repo' {
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "https://test.visualstudio.com/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
             }
          }
       }

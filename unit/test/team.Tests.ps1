@@ -10,7 +10,7 @@ InModuleScope team {
       Mock Write-Host
 
       Context 'Invoke-VSTeamRequest Options' {
-         [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
          Mock Invoke-RestMethod { Write-Host $args }
 
          Invoke-VSTeamRequest -Method Options
@@ -21,7 +21,7 @@ InModuleScope team {
       }
 
       Context 'Invoke-VSTeamRequest Release' {
-         [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
          Mock Invoke-RestMethod { Write-Host $args } -Verifiable
 
          Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON
@@ -52,7 +52,7 @@ InModuleScope team {
          },
          {
             "Name": "mydemos",
-            "URL": "https://mydemos.visualstudio.com",
+            "URL": "https://dev.azure.com/mydemos",
             "Pat": "OjEyMzQ1",
             "Type": "Pat",
             "Token": "",
@@ -60,7 +60,7 @@ InModuleScope team {
          },
          {
             "Name": "demonstrations",
-            "URL": "https://demonstrations.visualstudio.com",
+            "URL": "https://dev.azure.com/demonstrations",
             "Pat": "dzY2a2x5am13YWtkcXVwYmg0emE=",
             "Type": "Pat",
             "Token": "",
@@ -107,7 +107,7 @@ InModuleScope team {
       Context 'Get-VSTeamOption' {
          # Set the account to use for testing. A normal user would do this
          # using the Add-VSTeamAccount function.
-         [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
          Mock Invoke-RestMethod { return @{
                count = 1
@@ -124,14 +124,14 @@ InModuleScope team {
          It 'Should return all options' {
             Get-VSTeamOption | Should Not Be $null
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/_apis/"
+               $Uri -eq "https://dev.azure.com/test/_apis/"
             }
          }
 
          It 'Should return release options' {
             Get-VSTeamOption -Release | Should Not Be $null
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
-               $Uri -eq "https://test.vsrm.visualstudio.com/_apis/"
+               $Uri -eq "https://vsrm.dev.azure.com/test/_apis/"
             }
          }
       }
@@ -163,7 +163,7 @@ InModuleScope team {
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
             }
          }
       }
@@ -186,7 +186,7 @@ InModuleScope team {
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
             }
          }
       }
@@ -205,7 +205,26 @@ InModuleScope team {
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
+            }
+         }
+      }
+
+      Context 'Add-VSTeamAccount vsts (old URL)' {
+         Mock _isOnWindows { return $false }
+         Mock _setEnvironmentVariables
+         Mock Set-VSTeamAPIVersion
+
+         It 'should set env at process level' {
+            Add-VSTeamAccount -a https://mydemos.visualstudio.com -pe 12345 -Version VSTS
+
+            Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Version -eq 'VSTS'
+            }
+
+            # Make sure set env vars was called with the correct parameters
+            Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
             }
          }
       }
@@ -224,7 +243,7 @@ InModuleScope team {
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'Process' -and $Pat -eq '' -and $BearerToken -eq 12345 -and $Acct -eq 'https://mydemos.visualstudio.com'
+               $Level -eq 'Process' -and $Pat -eq '' -and $BearerToken -eq 12345 -and $Acct -eq 'https://dev.azure.com/mydemos'
             }
          }
       }
@@ -245,7 +264,7 @@ InModuleScope team {
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
             }
          }
       }
@@ -270,7 +289,7 @@ InModuleScope team {
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
             }
          }
       }
@@ -295,7 +314,7 @@ InModuleScope team {
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+               $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
             }
          }
       }
@@ -372,7 +391,7 @@ InModuleScope team {
 
             # Make sure set env vars was called with the correct parameters
             Assert-MockCalled _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Level -eq 'User' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://mydemos.visualstudio.com'
+               $Level -eq 'User' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
             }
          }
       }

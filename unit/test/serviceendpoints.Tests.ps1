@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope serviceendpoints {
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'ServiceEndpoints TFS2017 throws' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -53,7 +53,7 @@ InModuleScope serviceendpoints {
             Get-VSTeamServiceEndpoint -projectName project -Verbose
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -65,7 +65,7 @@ InModuleScope serviceendpoints {
             Remove-VSTeamServiceEndpoint -projectName project -id 5 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/5?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/5?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Delete'
             }
          }
@@ -468,7 +468,7 @@ InModuleScope serviceendpoints {
          
          It 'should create a new NuGet Serviceendpoint' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
                $Body -like '*"nugetkey": *"00000000-0000-0000-0000-000000000000"*' -and
@@ -507,7 +507,7 @@ InModuleScope serviceendpoints {
         
          It 'should create a new NuGet Serviceendpoint' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
                $Body -like '*"username": *"testUser"*' -and
@@ -548,7 +548,7 @@ InModuleScope serviceendpoints {
          
          It 'should create a new NuGet Serviceendpoint' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.visualstudio.com/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
                $Body -like '*"apitoken":*"00000000-0000-0000-0000-000000000000"*' -and

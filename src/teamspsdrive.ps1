@@ -65,7 +65,7 @@ using namespace Microsoft.PowerShell.SHiPS
 class VSTeamVersions {
    static [string] $Account = $env:TEAM_ACCT
    static [string] $DefaultProject = $env:TEAM_PROJECT
-   static [string] $Version = 'TFS2017'
+   static [string] $Version = $(If ($env:TEAM_VERSION) {$env:TEAM_VERSION} Else {"TFS2017"})
    static [string] $Build = '3.0'
    static [string] $Release = '3.0-preview'
    static [string] $Core = '3.0'
@@ -640,6 +640,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [datetime]$CreatedOn = [datetime]::MinValue
    [VSTeamBuildDefinitionProcess]$Process = $null
    [VSTeamBuildDefinitionProcessPhaseStep[]]$Steps = $null
+   [string[]]$Demands = $null
 
    VSTeamBuildDefinition (
       [object]$obj,
@@ -664,6 +665,10 @@ class VSTeamBuildDefinition : VSTeamDirectory {
 
       if ($obj.PSObject.Properties.Match('retentionRules').count -gt 0) {
          $this.RetentionRules = $obj.retentionRules
+      }
+
+      if ($obj.PSObject.Properties.Match('demands').count -gt 0) {
+         $this.Demands = $obj.demands
       }
       
       if ($obj.PSObject.Properties.Match('options').count -gt 0) {

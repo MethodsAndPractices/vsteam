@@ -21,7 +21,7 @@ InModuleScope profile {
          },
          {
             "Name": "test",
-            "URL": "https://test.visualstudio.com",
+            "URL": "https://dev.azure.com/test",
             "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hm",
             "Type": "Pat",
             "Version": "VSTS"
@@ -32,7 +32,7 @@ InModuleScope profile {
       Context 'Remove-VSTeamProfile' {
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [string]$Value -eq '' }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Remove-VSTeamProfile test
 
@@ -42,9 +42,9 @@ InModuleScope profile {
       }
 
       Context 'Remove-VSTeamProfile entry does not exist' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://test.visualstudio.com*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://dev.azure.com/test*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Remove-VSTeamProfile demos
 
@@ -74,7 +74,7 @@ InModuleScope profile {
       }
 
       Context 'Add-VSTeamProfile with PAT to empty file' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://dev.azure.com/demos*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
          Mock Get-VSTeamProfile { }
 
@@ -86,7 +86,7 @@ InModuleScope profile {
       }
 
       Context 'Add-VSTeamProfile with PAT to empty array' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://dev.azure.com/demos*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
          Mock Get-VSTeamProfile { }
 
@@ -98,7 +98,7 @@ InModuleScope profile {
       }
 
       Context 'Add-VSTeamProfile with OAuth to empty array' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://dev.azure.com/demos*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
          Mock Get-VSTeamProfile { }
 
@@ -110,9 +110,9 @@ InModuleScope profile {
       }
 
       Context 'Add-VSTeamProfile with PAT exisiting entry' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://demos.visualstudio.com*" -and $Value -like "*https://test.visualstudio.com*" -and $Value -like "*TFS2018*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*https://dev.azure.com/demos*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*TFS2018*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Add-VSTeamProfile -Account demos -PersonalAccessToken 12345 -Version TFS2018
 
@@ -125,7 +125,7 @@ InModuleScope profile {
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OnPremise*" -and $Value -like "*http://localhost:8080/tfs/defaultcollection*" -and $Value -like "*TFS2017*" }
          Mock Set-Content { }
          Mock _isOnWindows { return $true }
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Add-VSTeamProfile -Account http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
 
@@ -137,7 +137,7 @@ InModuleScope profile {
       Context 'Add-VSTeamProfile TFS default to TFS2017' {
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*http://localhost:8080/tfs/defaultcollection*" -and $Value -like "*TFS2017*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Add-VSTeamProfile -Account http://localhost:8080/tfs/defaultcollection -PersonalAccessToken 678910
 
@@ -147,13 +147,26 @@ InModuleScope profile {
       }
 
       Context 'Add-VSTeamProfile with PAT replace exisiting entry' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://test.visualstudio.com*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Add-VSTeamProfile -Account test -PersonalAccessToken 678910
 
          It 'Should save profile to disk' {
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Add-VSTeamProfile with existing old URL' {
+         Mock Test-Path { return $true }
+         Mock Get-Content { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { }
+
+         Add-VSTeamProfile -Account test -PersonalAccessToken 678910
+
+         It 'Should save profile with new URL to disk' {
             Assert-VerifiableMock
          }
       }
@@ -200,7 +213,7 @@ InModuleScope profile {
          $actual = Get-VSTeamProfile test
 
          It 'Should return 1 profile' {
-            $actual.URL | Should be 'https://test.visualstudio.com'
+            $actual.URL | Should be 'https://dev.azure.com/test'
          }
 
          It 'Profile Should by Pat' {
@@ -230,8 +243,30 @@ InModuleScope profile {
          }
       }
    
+      Context 'Get-VSTeamProfile with old URL' {
+         Mock Test-Path { return $true }
+         Mock Get-Content { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' }
+
+         $actual = Get-VSTeamProfile
+
+         It 'Should return new URL' {
+            $actual.URL | Should Be "https://dev.azure.com/test"
+         }
+      }
+      
+      Context 'Get-VSTeamProfile with old URL and multiple entries' {
+         Mock Test-Path { return $true }
+         Mock Get-Content { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"},{"Name":"demo","URL":"https://demo.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' }
+
+         $actual = Get-VSTeamProfile -Name "test"
+
+         It 'Should return new URL' {
+            $actual.URL | Should Be "https://dev.azure.com/test"
+         }
+      }
+      
       Context 'Update-VSTeamProfile entry does not exist' {
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          It 'Should throw' {
             { Update-VSTeamProfile -Name Testing -PersonalAccessToken 678910 } | Should -Throw
@@ -251,9 +286,9 @@ InModuleScope profile {
       }
 
       Context 'Update-VSTeamProfile with securePersonalAccessToken' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://test.visualstudio.com*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          $password = '678910' | ConvertTo-SecureString -AsPlainText -Force
 
@@ -265,9 +300,9 @@ InModuleScope profile {
       }
 
       Context 'Update-VSTeamProfile with PAT' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://test.visualstudio.com*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://test.visualstudio.com/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Update-VSTeamProfile -Name test -PersonalAccessToken 678910
 
@@ -275,5 +310,20 @@ InModuleScope profile {
             Assert-VerifiableMock
          }
       }
+
+      Context 'Update-VSTeamProfile with old URL' {
+         Mock Test-Path { return $true }
+         Mock Get-Content { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*VSTS*" }
+         Mock Set-Content { }
+
+         Update-VSTeamProfile -Name test -PersonalAccessToken 678910
+
+         It 'Should update profile with new URL' {
+            Assert-VerifiableMock
+         }         
+      }
+      
+
    }
 }

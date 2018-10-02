@@ -143,7 +143,7 @@
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -226,7 +226,7 @@
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -307,7 +307,7 @@
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -403,7 +403,7 @@
         <maml:name>Account</maml:name>
         <maml:Description>
           <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-          <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+          <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2517,7 +2517,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2587,7 +2587,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2655,7 +2655,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:name>Account</maml:name>
           <maml:Description>
             <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2711,7 +2711,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <maml:name>Account</maml:name>
         <maml:Description>
           <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-          <maml:para>Just the portion before visualstudio.com. For example in the following url mydemos is the account name. &lt;https://mydemos.visualstudio.com&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+          <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -7329,6 +7329,114 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamPullRequest</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamPullRequest</command:noun>
+      <maml:description>
+        <maml:para>Returns one or more a work items from your project.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Returns one or more a work items from your project.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamPullRequest</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="PullRequestId">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the pull request by ID.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="PullRequestId">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the pull request by ID.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamPullRequest</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all the open pull requests for your TFS or Team Services account.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamPullRequest -ProjectName Demo</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all the open pull requests for the Demo team project.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamPullRequest -Id 123</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the pull request with an Id of 123.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Show-VSTeamPullRequest</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamQueue</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamQueue</command:noun>
@@ -9200,7 +9308,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>SubDomain</maml:name>
           <maml:Description>
-            <maml:para>The SubDomain between your account and visualstudio.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
+            <maml:para>The SubDomain before .dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -9362,7 +9470,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>SubDomain</maml:name>
         <maml:Description>
-          <maml:para>The SubDomain between your account and visualstudio.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
+          <maml:para>The SubDomain before .dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -12782,6 +12890,88 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Show-VSTeamPullRequest</command:name>
+      <command:verb>Show</command:verb>
+      <command:noun>VSTeamPullRequest</command:noun>
+      <maml:description>
+        <maml:para>Opens the pull request in the default browser.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Opens the pull request in the default browser.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Show-VSTeamPullRequest</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="PullRequestId">
+          <maml:name>PullRequestId</maml:name>
+          <maml:Description>
+            <maml:para>Specifies pull request by ID.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="PullRequestId">
+        <maml:name>PullRequestId</maml:name>
+        <maml:Description>
+          <maml:para>Specifies pull request by ID.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Team.Release</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>You can pipe the pull request ID to this function.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Show-VSTeamPullRequest 3</dev:code>
+        <dev:remarks>
+          <maml:para>This command will open a web browser with the pull request id of 3.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Show-VSTeamPullRequest -Id 3</dev:code>
+        <dev:remarks>
+          <maml:para>This command will open a web browser with the pull request id of 3.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamPullRequest</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Show-VSTeamRelease</command:name>
       <command:verb>Show</command:verb>
       <command:noun>VSTeamRelease</command:noun>
@@ -14376,6 +14566,18 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:syntaxItem>
         <maml:name>Update-VSTeamUser</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>The id of the user to be updated.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>License</maml:name>
           <maml:Description>
             <maml:para>Type of Account License you want to change to. The acceptable values for this parameter are:</maml:para>
@@ -14391,11 +14593,90 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>[empty]</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamUser</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Email</maml:name>
+          <maml:Description>
+            <maml:para>The email address of the user to update. For organizations with over 100 users this can be very slow and resource intensive.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>License</maml:name>
+          <maml:Description>
+            <maml:para>Type of Account License you want to change to. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Advanced</maml:para>
+            <maml:para>- EarlyAdopter</maml:para>
+            <maml:para>- Express</maml:para>
+            <maml:para>- None</maml:para>
+            <maml:para>- Professional</maml:para>
+            <maml:para>- StakeHolder</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>The id of the user to be updated.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Email</maml:name>
+        <maml:Description>
+          <maml:para>The email address of the user to update. For organizations with over 100 users this can be very slow and resource intensive.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>License</maml:name>
         <maml:Description>
@@ -14412,7 +14693,19 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>[empty]</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -14423,6 +14716,11 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamUser</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
 </helpItems>

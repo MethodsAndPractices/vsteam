@@ -4,7 +4,7 @@ Set-StrictMode -Version Latest
 Add-Type -AssemblyName 'System.Web'
 
 InModuleScope releaseDefinitions {
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    [VSTeamVersions]::Release = '1.0-unittest'
 
    $results = [PSCustomObject]@{
@@ -37,7 +37,7 @@ InModuleScope releaseDefinitions {
             Show-VSTeamReleaseDefinition -projectName project -Id 15
 
             Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
-               $url -eq 'https://test.visualstudio.com/project/_release?definitionId=15'
+               $url -eq 'https://dev.azure.com/test/project/_release?definitionId=15'
             }
          }
       }
@@ -52,7 +52,7 @@ InModuleScope releaseDefinitions {
             Get-VSTeamReleaseDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -67,7 +67,7 @@ InModuleScope releaseDefinitions {
             Get-VSTeamReleaseDefinition -projectName project -expand environments
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
             }
          }
       }
@@ -83,7 +83,7 @@ InModuleScope releaseDefinitions {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'Releasedef.json' -and
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -107,7 +107,7 @@ InModuleScope releaseDefinitions {
             Get-VSTeamReleaseDefinition -projectName project -id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/15?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/15?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -120,7 +120,7 @@ InModuleScope releaseDefinitions {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and 
-               $Uri -eq "https://test.vsrm.visualstudio.com/project/_apis/release/definitions/2?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/2?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }

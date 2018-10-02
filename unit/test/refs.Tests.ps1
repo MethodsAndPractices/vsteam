@@ -4,7 +4,7 @@ InModuleScope Refs {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{

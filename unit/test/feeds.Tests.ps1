@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope feeds {
-   [VSTeamVersions]::Account = 'https://test.visualstudio.com'
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    
    $results = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
 
@@ -20,7 +20,7 @@ InModuleScope feeds {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and 
-               $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::packaging)"
+               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::packaging)"
             }
          }
       }
@@ -33,7 +33,7 @@ InModuleScope feeds {
             Get-VSTeamFeed
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)"
+               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)"
             }
          }
       }
@@ -46,7 +46,7 @@ InModuleScope feeds {
             Get-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::packaging)"
+               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::packaging)"
             }
          }
       }
@@ -62,7 +62,7 @@ InModuleScope feeds {
             Add-VSTeamFeed -Name 'module' -Description 'Test Module'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)" -and
+               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
                $Body -like '*"name": *"module"*'
@@ -81,7 +81,7 @@ InModuleScope feeds {
             Add-VSTeamFeed -Name 'module' -EnableUpstreamSources -showDeletedPackageVersions
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://test.feeds.visualstudio.com/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)" -and
+               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds/?api-version=$([VSTeamVersions]::packaging)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
                $Body -like '*"upstreamEnabled":*true*' -and
