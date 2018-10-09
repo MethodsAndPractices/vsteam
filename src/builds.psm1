@@ -249,7 +249,7 @@ function Add-VSTeamBuild {
       else {
          # Find the BuildDefinition id from the name
          $id = Get-VSTeamBuildDefinition -ProjectName "$ProjectName" -Type All |
-            Where-Object { $_.fullname -eq $BuildDefinition } |
+            Where-Object { $_.name -eq $BuildDefinition } |
             Select-Object -ExpandProperty id
       }
 
