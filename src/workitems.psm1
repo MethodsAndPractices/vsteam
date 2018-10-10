@@ -23,13 +23,13 @@ function Add-VSTeamWorkItem {
         [string]$Title,
 
         [Parameter(Mandatory = $false)]
-        [string]$Description = '',
+        [string]$Description,
 
         [Parameter(Mandatory = $false)]
-        [string]$IterationPath = '',
+        [string]$IterationPath,
 
         [Parameter(Mandatory = $false)]
-        [string]$AssignedTo = ''
+        [string]$AssignedTo
     )
 
     DynamicParam {
