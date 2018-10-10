@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.10
+
+Fixed bug where you could not add a build by build definition name.
+
 ## 4.0.9
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/102) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:

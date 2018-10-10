@@ -8,6 +8,8 @@ InModuleScope builds {
    # this some test may fail
    Remove-VSTeamAccount | Out-Null
 
+   $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+
    # Sample result of a single build
    $singleResult = [PSCustomObject]@{
       logs              = [PSCustomObject]@{}
@@ -150,13 +152,14 @@ InModuleScope builds {
 
       Context 'Add-VSTeamBuild by name' {
          Mock Invoke-RestMethod { return $singleResult }
+         Mock Get-VSTeamBuildDefinition { return [VSTeamBuildDefinition]::new($resultsVSTS.value[0], 'project') }
 
          It 'should add build' {
-            Add-VSTeamBuild -ProjectName project -BuildDefinitionName 'folder\MyBuildDef'
+            Add-VSTeamBuild -ProjectName project -BuildDefinitionName 'aspdemo-CI'
 
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               ($Body | ConvertFrom-Json).definition.id -eq 2 -and
+               ($Body | ConvertFrom-Json).definition.id -eq 699 -and
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/?api-version=$([VSTeamVersions]::Build)"
             }
          }
