@@ -74,6 +74,7 @@ class VSTeamVersions {
    static [string] $Tfvc = '3.0'
    static [string] $Packaging = ''
    static [string] $MemberEntitlementManagement = ''
+   static [string] $ExtensionsManagement = ''
    static [string] $ServiceFabricEndpoint = ''
    static [string] $ModuleVersion = $null
 }

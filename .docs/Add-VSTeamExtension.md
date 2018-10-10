@@ -1,0 +1,63 @@
+<!-- #include "./common/header.md" -->
+
+# Add-VSTeamExtension
+
+## SYNOPSIS
+
+<!-- #include "./synopsis/Add-VSTeamExtension.md" -->
+
+## SYNTAX
+
+## DESCRIPTION
+
+<!-- #include "./synopsis/Add-VSTeamExtension.md" -->
+
+## EXAMPLES
+
+## PARAMETERS
+
+### -PublisherId
+
+The id of the publisher.
+
+```yaml
+Type: String
+Required: true
+Position: 1
+```
+
+### -ExtensionId
+
+The id of the extension.
+
+```yaml
+Type: String
+Required: True
+Position: 1
+```
+
+### -Version
+
+The version of the extension. Example: "0.1.35".
+
+```yaml
+Type: String
+Required: True
+Position: 1
+```
+
+## INPUTS
+
+## OUTPUTS
+
+## NOTES
+
+## RELATED LINKS
+
+[Add-VSTeamExtension](Add-VSTeamExtension.md)
+
+[Get-VSTeamExtension](Get-VSTeamExtension.md)
+
+[Remove-VSTeamExtension](Remove-VSTeamExtension.md)
+
+[Update-VSTeamExtension](Update-VSTeamExtension.md)

@@ -1,0 +1,1 @@
+Update an installed extension. Typically this API is used to enable or disable an extension.

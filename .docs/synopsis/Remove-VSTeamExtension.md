@@ -1,0 +1,1 @@
+Uninstall the specified extension from the account / project collection. 

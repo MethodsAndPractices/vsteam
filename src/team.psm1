@@ -421,6 +421,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Packaging = ''
             [VSTeamVersions]::MemberEntitlementManagement = ''
             [VSTeamVersions]::ServiceFabricEndpoint = '3.2'
+            [VSTeamVersions]::ExtensionsManagement = ''
          }
          'VSTS' {
             [VSTeamVersions]::Version = 'VSTS'
@@ -433,6 +434,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Packaging = '4.0-preview'
             [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
             [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'
+            [VSTeamVersions]::ExtensionsManagement = '4.1-preview.1'
          }
          Default {
             [VSTeamVersions]::Version = 'TFS2017'
@@ -445,6 +447,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Packaging = ''
             [VSTeamVersions]::MemberEntitlementManagement = ''
             [VSTeamVersions]::ServiceFabricEndpoint = ''
+            [VSTeamVersions]::ExtensionsManagement = ''
          }
       }
    }
@@ -459,6 +462,7 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "Packaging: $([VSTeamVersions]::Packaging)"
    Write-Verbose "MemberEntitlementManagement: $([VSTeamVersions]::MemberEntitlementManagement)"
    Write-Verbose "ServiceFabricEndpoint: $([VSTeamVersions]::ServiceFabricEndpoint)"
+   Write-Verbose "ExtensionsManagement: $([VSTeamVersions]::ExtensionsManagement)"
 }
 
 function Invoke-VSTeamRequest {
