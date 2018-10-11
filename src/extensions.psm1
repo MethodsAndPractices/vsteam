@@ -47,12 +47,6 @@ function Update-VSTeamExtension {
       [string] $ExtensionState
    )
 
-   $body = @{
-      name                       = $Name
-      description                = $Description
-      hideDeletedPackageVersions = $true
-   }
-
    $body =    @{
       extensionId    = $ExtensionId
       publisherId    = $PublisherId
@@ -64,7 +58,6 @@ function Update-VSTeamExtension {
     
    # Call the REST API
    _callAPI  -Method Patch -Body $body -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
-
 }
 
 function Remove-VSTeamExtension {
@@ -78,7 +71,6 @@ function Remove-VSTeamExtension {
    $resource = 'extensionmanagement/installedextensionsbyname/' + $PublisherId + '/' + $ExtensionId 
    # Call the REST API
    _callAPI  -Method Delete -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
-
 }
 
 

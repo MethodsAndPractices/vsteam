@@ -10,3 +10,4 @@ integration/prime.ps1
 /Debugscript.txt
 .docs/files.md
 .vs/slnx.sqlite
+unit/results.xml
