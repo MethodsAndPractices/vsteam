@@ -93,6 +93,7 @@ function Get-VSTeamExtension {
 }
 
 function Update-VSTeamExtension {
+   [CmdletBinding( SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param (
       [parameter(Mandatory = $true)]
       [string] $PublisherId,
@@ -102,43 +103,51 @@ function Update-VSTeamExtension {
 
       [parameter(Mandatory = $false)]
       [ValidateSet('none', 'disabled')]
-      [string] $ExtensionState
-   )
+      [string] $ExtensionState,
 
-   $obj =    @{
-      extensionId    = $ExtensionId
-      publisherId    = $PublisherId
-      installState   = 
-         {
-            flags    = $ExtensionState
-         }
-  }
-  $body = $obj | ConvertTo-Json
-  try {
-      $resp = _callAPI  -Method Patch -body $body -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
-      Write-Output $resp   
-   }
-   catch {
-      throw $_
+      [switch] $Force
+   )
+   if ($Force -or $pscmdlet.ShouldProcess($Name, "Update extension")) {
+      $obj =    @{
+         extensionId    = $ExtensionId
+         publisherId    = $PublisherId
+         installState   = 
+            {
+               flags    = $ExtensionState
+            }
+      }
+      $body = $obj | ConvertTo-Json
+      try {
+         $resp = _callAPI  -Method Patch -body $body -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+         Write-Output $resp   
+      }
+      catch {
+         throw $_
+      }
    }
 }
 
 function Remove-VSTeamExtension {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param (
       [parameter(Mandatory = $true)]
       [string] $PublisherId,
 
       [parameter(Mandatory = $true)]
-      [string] $ExtensionId
+      [string] $ExtensionId,
+
+      [switch] $Force
    )
-   $resource = 'extensionmanagement/installedextensionsbyname/' + $PublisherId + '/' + $ExtensionId 
-   try {
-      $resp = _callAPI  -Method Delete -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
-      Write-Output $resp   
+   if ($Force -or $pscmdlet.ShouldProcess($item, "Remove extension")) {
+      $resource = 'extensionmanagement/installedextensionsbyname/' + $PublisherId + '/' + $ExtensionId 
+      try {
+         $resp = _callAPI  -Method Delete -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+         Write-Output $resp   
+      }
+      catch {
+         throw $_
+      }
    }
-   catch {
-      throw $_
-}
 }
 
 
