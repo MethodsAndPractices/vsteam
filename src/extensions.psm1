@@ -28,9 +28,62 @@ function Add-VSTeamExtension {
 }
 
 function Get-VSTeamExtension {
-   Process {
-      #Call the REST API
-      _callAPI  -Method Get -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+   param (
+      [Parameter(ParameterSetName = 'List', Mandatory=$false)]
+      [switch] $IncludeInstallationIssues,
+
+      [Parameter(ParameterSetName = 'List', Mandatory=$false)]
+      [switch] $IncludeDisabledExtensions,
+
+      [Parameter(ParameterSetName = 'List', Mandatory=$false)]
+      [switch] $IncludeErrors,
+
+
+      [Parameter(ParameterSetName = 'GetById', Mandatory=$true)]
+       [string] $PublisherId,
+
+      [Parameter(ParameterSetName = 'GetById', Mandatory=$true)]
+      [string] $ExtensionId      
+   )
+   Process {   
+      
+      if(($PublisherId -and !$ExtensionId) -or (!$PublisherId -and $ExtensionId)){
+         throw 'You must provide both PublisherId and ExtensionId.'
+      }
+
+      if ($PublisherId -and $ExtensionId) {
+         $resource = 'extensionmanagement/installedextensionsbyname/' + $PublisherId + '/' + $ExtensionId
+         try {
+            $resp = _callAPI  -Method Get -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+         
+            Write-Output $resp   
+         }
+         catch {
+            throw $_
+         }
+      }
+     else {
+         $queryString = @{}
+         if ($IncludeInstallationIssues.IsPresent) {
+            $queryString.includeCapabilities = $true
+         }
+         
+         if ($IncludeDisabledExtensions.IsPresent) {
+            $queryString.includeDisabledExtensions = $true
+         }
+
+         if ($IncludeErrors.IsPresent) {
+            $queryString.includeErrors = $true
+         }
+         try {
+            $resp = _callAPI  -Method Get -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -QueryString $queryString -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+           
+            Write-Output $resp   
+         }
+         catch {
+            throw $_
+         }  
+      }
    }
 }
 
@@ -47,7 +100,7 @@ function Update-VSTeamExtension {
       [string] $ExtensionState
    )
 
-   $body =    @{
+   $obj =    @{
       extensionId    = $ExtensionId
       publisherId    = $PublisherId
       installState   = 
@@ -55,9 +108,9 @@ function Update-VSTeamExtension {
             flags    = $ExtensionState
          }
   }
-    
+  $body = $obj | ConvertTo-Json
    # Call the REST API
-   _callAPI  -Method Patch -Body $body -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+   _callAPI  -Method Patch -body $body -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
 }
 
 function Remove-VSTeamExtension {

@@ -60,6 +60,33 @@ InModuleScope extensions {
                $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensions*"
             }
          }
+
+         It 'Should return extensions with optional parameters' {
+            Get-VSTeamExtension -IncludeInstallationIssues -IncludeDisabledExtensions -IncludeErrors
+   
+            Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
+               $Method -eq 'Get' -and
+               $subDomain -eq 'extmgmt' -and
+               $version -eq [VSTeamVersions]::ExtensionsManagement
+               $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensions*" -and
+               $Url -like "*includeInstallationIssues*" -and
+               $Url -like "*includeDisabledExtensions*" -and
+               $Url -like "*includeErrors*"
+            }
+         }
+
+         It 'Should return the extension' {
+            Get-VSTeamExtension -PublisherId test -ExtensionId test
+   
+            Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
+               $Method -eq 'Get' -and
+               $subDomain -eq 'extmgmt' -and
+               $version -eq [VSTeamVersions]::ExtensionsManagement
+               $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
+            }
+         }
+
+
       }
    
       Context 'Add-VSTeamExtension without version' {
