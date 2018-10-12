@@ -150,7 +150,7 @@ InModuleScope extensions {
       Mock _callAPI { return $singleResult }
       
       It 'Should add an extension without version' {
-         Update-VSTeamExtension -PublisherId 'test' -ExtensionId 'test'
+         Update-VSTeamExtension -PublisherId 'test' -ExtensionId 'test' -Force
 
          Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Post' -and
@@ -173,7 +173,7 @@ InModuleScope extensions {
    Mock _callAPI { return $singleResult }
    
    It 'Should remove an extension' {
-      Update-VSTeamExtension -PublisherId 'test' -ExtensionId 'test'
+      Remove-VSTeamExtension -PublisherId 'test' -ExtensionId 'test' -Force
 
       Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
          $Method -eq 'Delete' -and
