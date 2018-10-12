@@ -22,8 +22,13 @@ function Add-VSTeamExtension {
          $resource += '/'+$Version
       }
        
-      # Call the REST API
-      _callAPI  -Method Post -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+      try {
+         $resp = _callAPI  -Method Post -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+         Write-Output $resp   
+      }
+      catch {
+         throw $_
+      }
    }  
 }
 
@@ -109,8 +114,13 @@ function Update-VSTeamExtension {
          }
   }
   $body = $obj | ConvertTo-Json
-   # Call the REST API
-   _callAPI  -Method Patch -body $body -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+  try {
+      $resp = _callAPI  -Method Patch -body $body -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+      Write-Output $resp   
+   }
+   catch {
+      throw $_
+   }
 }
 
 function Remove-VSTeamExtension {
@@ -122,8 +132,13 @@ function Remove-VSTeamExtension {
       [string] $ExtensionId
    )
    $resource = 'extensionmanagement/installedextensionsbyname/' + $PublisherId + '/' + $ExtensionId 
-   # Call the REST API
-   _callAPI  -Method Delete -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+   try {
+      $resp = _callAPI  -Method Delete -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+      Write-Output $resp   
+   }
+   catch {
+      throw $_
+}
 }
 
 
