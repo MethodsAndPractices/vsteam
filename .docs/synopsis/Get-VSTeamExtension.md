@@ -1,1 +1,1 @@
-Get the installed extensions.
+Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.
