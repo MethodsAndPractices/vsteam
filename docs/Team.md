@@ -38,6 +38,10 @@ Creates a new build definition from a JSON file.
 
 Adds a tag to a build.
 
+### [Add-VSTeamExtension](Add-VSTeamExtension.md)
+
+Install the specified extension into the account / project collection.
+
 ### [Add-VSTeamFeed](Add-VSTeamFeed.md)
 
 Adds a new feed to package management.
@@ -142,6 +146,10 @@ Returns all the tags of a build.
 ### [Get-VSTeamCloudSubscription](Get-VSTeamCloudSubscription.md)
 
 Gets the Azure subscriptions associated with the Team Services account.
+
+### [Get-VSTeamExtension](Get-VSTeamExtension.md)
+
+Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.
 
 ### [Get-VSTeamFeed](Get-VSTeamFeed.md)
 
@@ -263,6 +271,10 @@ Removes the build definitions for a team project.
 
 Removes the tag from a build.
 
+### [Remove-VSTeamExtension](Remove-VSTeamExtension.md)
+
+Uninstall the specified extension from the account / project collection. 
+
 ### [Remove-VSTeamFeed](Remove-VSTeamFeed.md)
 
 Removes a package feed from the account.
@@ -374,6 +386,10 @@ Allows you to set the keep forever flag and build number.
 ### [Update-VSTeamBuildDefinition](Update-VSTeamBuildDefinition.md)
 
 Updates a build definition for a team project.
+
+### [Update-VSTeamExtension](Update-VSTeamExtension.md)
+
+Update an installed extension. Typically this API is used to enable or disable an extension.
 
 ### [Update-VSTeamPolicy](Update-VSTeamPolicy.md)
 

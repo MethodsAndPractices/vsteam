@@ -1,5 +1,22 @@
 # Changelog
 
+## 4.0.11
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/111) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
+
+- Adding better error handling when response is null
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/108) from [Richard Diphoorn](https://github.com/rdtechie) which included the following:
+
+- Added description, iteration path and assigned to, on Work items
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/110) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
+
+- Add-VSTeamExtension
+- Get-VSTeamExtension
+- Remove-VSTeamExtension
+- Update-VSTeamExtension
+
 ## 4.0.10
 
 Fixed bug where you could not add a build by build definition name.

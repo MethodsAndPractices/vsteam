@@ -7,6 +7,9 @@
    - Agent Pools
      - Pool 1
        - Agent 1
+   - Extensions
+      - Extension1
+      - Extension2
    - Feeds
       - Feed 1
       - Feed 2
@@ -208,6 +211,7 @@ class VSTeamAccount : SHiPSDirectory {
    [object[]] GetChildItem() {
       $poolsAndProjects = @(
          [VSTeamPools]::new('Agent Pools'),
+         [VSTeamExtensions]::new('Extensions')
          [VSTeamFeeds]::new('Feeds')
       )
 
@@ -280,6 +284,80 @@ class VSTeamProject : VSTeamDirectory {
          [VSTeamRepositories]::new('Repositories', $this.Name),
          [VSTeamTeams]::new('Teams', $this.Name)
       )
+   }
+}
+
+[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(BuiltinProgress = $false)]
+class VSTeamExtensions : VSTeamDirectory {
+
+   # Default constructor
+   VSTeamExtensions(
+      [string]$Name
+   ) : base($Name, $null) {
+      $this.AddTypeName('Team.Extensions')
+
+      $this.DisplayMode = 'd-r-s-'
+   }
+
+   [object[]] GetChildItem() {
+      $extensions = Get-VSTeamExtension -ErrorAction SilentlyContinue | Sort-Object name
+
+      $objs = @()
+
+      foreach ($extension in $extensions) {
+         $extension.AddTypeName('Team.Provider.Extension')
+
+         $objs += $extension
+      }
+
+      return $objs
+   }
+}
+
+class VSTeamExtension : VSTeamLeaf {
+   [string]$publisherId
+   [string]$extensionId
+   [string]$publisherName
+   [string]$version
+   [VSTeamInstallState]$installState
+
+   VSTeamExtension (
+      [object]$obj
+   ) : base($obj.extensionName, $obj.extensionId, $null) {
+
+      $this.extensionId = $obj.extensionId
+      $this.publisherId = $obj.publisherId
+      $this.publisherName = $obj.publisherName
+      $this.version = $obj.version
+      $this.installState = [VSTeamInstallState]::new($obj.installState)
+
+      $this._internalObj = $obj
+
+      $this.AddTypeName('Team.Extension')
+   }
+}
+
+class VSTeamInstallState {
+   [string]$flags
+   [string]$lastUpdated
+   # The object returned from the REST API call
+   [object] hidden $_internalObj = $null
+
+   VSTeamInstallState(
+      [object]$obj
+   ) {
+
+      $this.flags = $obj.flags
+      $this.lastUpdated = $obj.lastUpdated
+
+      $this._internalObj = $obj
+
+      $this.PSObject.TypeNames.Insert(0, 'Team.InstallState')
+   }
+
+   [string]ToString() {
+         return "Flags: $($this.flags), Last Updated: $($this.lastUpdated)"
    }
 }
 

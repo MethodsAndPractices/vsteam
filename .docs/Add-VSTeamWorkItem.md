@@ -25,9 +25,56 @@ Build Definition Build Number  Status     Result
 Demo-CI           Demo-CI-45   notStarted
 ```
 
+### -------------------------- EXAMPLE 2 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description"
+
+Build Definition Build Number  Status     Result
+---------------- ------------  ------     ------
+Demo-CI           Demo-CI-45   notStarted
+```
+
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->
+
+### -Title
+
+The title of the work item
+
+```yaml
+Type: String
+Required: True
+```
+
+### -Description
+
+The Description of the work item
+
+```yaml
+Type: String
+Required: False
+```
+
+### -IterationPath
+
+The IterationPath of the work item
+
+```yaml
+Type: String
+Required: False
+```
+
+### -AssignedTo
+
+The email address of the user this work item will be assigned to.
+
+```yaml
+Type: String
+Required: False
+```
 
 ### -WorkItemType
 

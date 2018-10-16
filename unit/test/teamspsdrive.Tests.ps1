@@ -162,8 +162,9 @@ Describe 'TeamsPSDrive' {
       }
 
       # Skip 0 because that will be Agent Pools
-      # Skip 1 because that will be Feeds
-      $project = $account.GetChildItem()[2]
+      # Skip 1 because that will be Extensions
+      # Skip 2 because that will be Feeds
+      $project = $account.GetChildItem()[3]
 
       It 'Should return projects' {
          $project | Should Not Be $null

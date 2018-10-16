@@ -388,14 +388,15 @@ function Get-VSTeamAPIVersion {
 
    return @{
       Version                     = $([VSTeamVersions]::Version)
-      Git                         = $([VSTeamVersions]::Git)
-      Core                        = $([VSTeamVersions]::Core)
       Build                       = $([VSTeamVersions]::Build)
       Release                     = $([VSTeamVersions]::Release)
+      Core                        = $([VSTeamVersions]::Core)
+      Git                         = $([VSTeamVersions]::Git)
       DistributedTask             = $([VSTeamVersions]::DistributedTask)
       Tfvc                        = $([VSTeamVersions]::Tfvc)
       Packaging                   = $([VSTeamVersions]::Packaging)
       MemberEntitlementManagement = $([VSTeamVersions]::MemberEntitlementManagement)
+      ExtensionsManagement        = $([VSTeamVersions]::ExtensionsManagement)
       ServiceFabricEndpoint       = $([VSTeamVersions]::ServiceFabricEndpoint)
    }
 }
@@ -421,7 +422,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Packaging = ''
             [VSTeamVersions]::MemberEntitlementManagement = ''
             [VSTeamVersions]::ServiceFabricEndpoint = '3.2'
-            [VSTeamVersions]::ExtensionsManagement = ''
+            [VSTeamVersions]::ExtensionsManagement = '3.2-preview'
          }
          'VSTS' {
             [VSTeamVersions]::Version = 'VSTS'
@@ -447,7 +448,7 @@ function Set-VSTeamAPIVersion {
             [VSTeamVersions]::Packaging = ''
             [VSTeamVersions]::MemberEntitlementManagement = ''
             [VSTeamVersions]::ServiceFabricEndpoint = ''
-            [VSTeamVersions]::ExtensionsManagement = ''
+            [VSTeamVersions]::ExtensionsManagement = '3.0-preview'
          }
       }
    }

@@ -35,7 +35,7 @@ Environment data
 <!-- provide the output of $VSTeamVersionTable -->
 
 ```powershell
-> $VSTeamVersionTable
+> Get-VSTeamAPIVersion
 
 ```
 
