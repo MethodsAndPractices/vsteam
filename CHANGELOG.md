@@ -8,7 +8,14 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/111) from [Br
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/108) from [Richard Diphoorn](https://github.com/rdtechie) which included the following:
 
-- Added properties on Work items
+- Added description, iteration path and assigned to, on Work items
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/110) from [Guillaume Pugnet](https://github.com/GPugnet) which included the following:
+
+- Add-VSTeamExtension
+- Get-VSTeamExtension
+- Remove-VSTeamExtension
+- Update-VSTeamExtension
 
 ## 4.0.10
 
