@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.12
+
+Fixed bug where Get-VSTeamGitRepository was failing if you did not provide a project name.  Now you can run without a project and get all the repositories for the entire organization.
+
 ## 4.0.11
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/111) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
