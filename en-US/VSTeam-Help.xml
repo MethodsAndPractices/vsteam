@@ -1408,6 +1408,124 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Add-VSTeamExtension</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamExtension</command:noun>
+      <maml:description>
+        <maml:para>Install the specified extension into the account / project collection.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Install the specified extension into the account / project collection.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamExtension</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PublisherId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the publisher.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ExtensionId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the extension.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>The version of the extension. Example: "0.1.35".</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>PublisherId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the publisher.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ExtensionId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the extension.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Version</maml:name>
+        <maml:Description>
+          <maml:para>The version of the extension. Example: "0.1.35".</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Add-VSTeamFeed</command:name>
       <command:verb>Add</command:verb>
       <command:noun>VSTeamFeed</command:noun>
@@ -6172,6 +6290,172 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamExtension</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamExtension</command:noun>
+      <maml:description>
+        <maml:para>Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamExtension</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PublisherId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the publisher.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ExtensionId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the extension.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamExtension</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeInstallationIssues</maml:name>
+          <maml:Description>
+            <maml:para>If true (the default), include installed extensions with issues.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeDisabledExtensions</maml:name>
+          <maml:Description>
+            <maml:para>If true (the default), include disabled extensions in the results.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeErrors</maml:name>
+          <maml:Description>
+            <maml:para>If true, include installed extensions with errors.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>PublisherId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the publisher.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ExtensionId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the extension.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IncludeInstallationIssues</maml:name>
+        <maml:Description>
+          <maml:para>If true (the default), include installed extensions with issues.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IncludeDisabledExtensions</maml:name>
+        <maml:Description>
+          <maml:para>If true (the default), include disabled extensions in the results.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IncludeErrors</maml:name>
+        <maml:Description>
+          <maml:para>If true, include installed extensions with errors.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamFeed</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamFeed</command:noun>
@@ -10336,6 +10620,123 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Remove-VSTeamExtension</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>VSTeamExtension</command:noun>
+      <maml:description>
+        <maml:para>Uninstall the specified extension from the account / project collection.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Uninstall the specified extension from the account / project collection.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-VSTeamExtension</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PublisherId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the publisher.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ExtensionId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the extension.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>PublisherId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the publisher.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ExtensionId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the extension.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Remove-VSTeamFeed</command:name>
       <command:verb>Remove</command:verb>
       <command:noun>VSTeamFeed</command:noun>
@@ -13818,6 +14219,151 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-VSTeamExtension</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>VSTeamExtension</command:noun>
+      <maml:description>
+        <maml:para>Update an installed extension. Typically this API is used to enable or disable an extension.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Update an installed extension. Typically this API is used to enable or disable an extension.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamExtension</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PublisherId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the publisher.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ExtensionId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the extension.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ExtensionState</maml:name>
+          <maml:Description>
+            <maml:para>The state of an installed extension. Example: "disabled". The acceptable values for this parameter are:</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- disabled</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>PublisherId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the publisher.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ExtensionId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the extension.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ExtensionState</maml:name>
+        <maml:Description>
+          <maml:para>The state of an installed extension. Example: "disabled". The acceptable values for this parameter are:</maml:para>
+          <maml:para>- none</maml:para>
+          <maml:para>- disabled</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeamExtension</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>

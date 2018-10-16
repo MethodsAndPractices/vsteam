@@ -6,7 +6,7 @@
    instead of the table.
    -->
    <ViewDefinitions>
-         <!--Team.Provider.Feed-->
+      <!--Team.Provider.Feed-->
       <!-- This is the format when used with the provider -->
       <View>
          <Name>Team.Provider.Feed</Name>
@@ -45,7 +45,7 @@
          </TableControl>
       </View>
 
-       <!--Team.Feed-->
+      <!--Team.Feed-->
       <View>
          <Name>Team.Feed</Name>
          <ViewSelectedBy>
@@ -646,7 +646,7 @@
          </TableControl>
       </View>
 
-       <!--Team.Provider.BuildDefinitionYamlProcess.Table-->
+      <!--Team.Provider.BuildDefinitionYamlProcess.Table-->
       <View>
          <Name>Team.Provider.BuildDefinitionYamlProcess.Table</Name>
          <ViewSelectedBy>
@@ -1283,6 +1283,88 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Count</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Extension.Table-->
+      <View>
+         <Name>Team.Extension.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Extension</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>               
+               <TableColumnHeader>
+                  <Label>ExtensionId</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>PublisherId</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>publisherId</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--Team.Provider.Extension.Table-->
+      <View>
+         <Name>Team.Provider.Extension.Table</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Provider.Extension</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ExtensionId</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>PublisherId</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>publisherId</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

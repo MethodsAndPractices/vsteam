@@ -16,13 +16,13 @@
 
 ## PARAMETERS
 
-
 ### -PublisherId
 
 The id of the publisher.
 
 ```yaml
 Type: String
+Required: True
 Parameter Sets: GetById
 ```
 
@@ -32,6 +32,7 @@ The id of the extension.
 
 ```yaml
 Type: String
+Required: True
 Parameter Sets: GetById
 ```
 

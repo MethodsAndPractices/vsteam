@@ -22,8 +22,7 @@ The id of the publisher.
 
 ```yaml
 Type: String
-Required: true
-Position: 1
+Required: True
 ```
 
 ### -ExtensionId
@@ -33,7 +32,6 @@ The id of the extension.
 ```yaml
 Type: String
 Required: True
-Position: 1
 ```
 
 ### -Version
@@ -42,8 +40,7 @@ The version of the extension. Example: "0.1.35".
 
 ```yaml
 Type: String
-Required: True
-Position: 1
+Required: False
 ```
 
 ## INPUTS

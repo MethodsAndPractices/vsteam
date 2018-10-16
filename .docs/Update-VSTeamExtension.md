@@ -22,8 +22,7 @@ The id of the publisher.
 
 ```yaml
 Type: String
-Required: true
-Position: 1
+Required: True
 ```
 
 ### -ExtensionId
@@ -33,7 +32,6 @@ The id of the extension.
 ```yaml
 Type: String
 Required: True
-Position: 1
 ```
 
 ### -ExtensionState
@@ -46,8 +44,6 @@ The state of an installed extension. Example: "disabled". The acceptable values 
 ```yaml
 Type: String
 Required: True
-Position: 1
-Default value: none
 ```
 
 <!-- #include "./params/force.md" -->
