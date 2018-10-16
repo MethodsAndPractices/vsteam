@@ -83,7 +83,7 @@ function Add-VSTeamWorkItem {
                 op    = "add"
                 path  = "/fields/System.AssignedTo"
                 value = $AssignedTo
-            }) | Where { $_.value} | ConvertTo-Json
+            }) | Where-Object { $_.value} | ConvertTo-Json
 
         # Call the REST API
         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems'  `

@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.11
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/111) from [Brian Schmitt](https://github.com/brianschmitt) which included the following:
+
+- Adding better error handling when response is null
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/108) from [Richard Diphoorn](https://github.com/rdtechie) which included the following:
+
+- Added properties on Work items
+
 ## 4.0.10
 
 Fixed bug where you could not add a build by build definition name.
