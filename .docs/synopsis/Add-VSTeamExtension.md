@@ -1,0 +1,1 @@
+Install the specified extension into the account / project collection.

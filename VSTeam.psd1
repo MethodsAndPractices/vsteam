@@ -116,7 +116,8 @@
       'src\workitemTypes.psm1',
       'src\workitems.psm1',
       'src\feeds.psm1',
-      'src\pullrequest.psm1')
+      'src\pullrequest.psm1',
+      'src\extensions.psm1')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -214,7 +215,11 @@
       'Show-VSTeamFeed',
       'Remove-VSTeamFeed',
       'Get-VSTeamPullRequest',
-      'Show-VSTeamPullRequest')
+      'Show-VSTeamPullRequest',
+      'Add-VSTeamExtension',
+      'Get-VSTeamExtension',
+      'Update-VSTeamExtension',
+      'Remove-VSTeamExtension')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -327,7 +332,11 @@
       'Show-Feed',
       'Remove-Feed',
       'Get-PullRequest',
-      'Show-PullRequest')
+      'Show-PullRequest',
+      'Add-Extension',
+      'Get-Extension',
+      'Update-Extension',
+      'Remove-Extension')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()
