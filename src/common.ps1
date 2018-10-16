@@ -77,7 +77,7 @@ function _handleException {
 
    $handled = $false
 
-   if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and $ex.Exception.Response.StatusCode -ne "BadRequest") {
+   if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and $null -ne $ex.Exception.Response -and $ex.Exception.Response.StatusCode -ne "BadRequest") {
       $handled = $true
       $msg = "An error occurred: $($ex.Exception.Message)"
       Write-Warning $msg
