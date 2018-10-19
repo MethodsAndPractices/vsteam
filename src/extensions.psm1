@@ -5,6 +5,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
 function Add-VSTeamExtension {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [parameter(Mandatory = $true)]
       [string] $PublisherId,
@@ -13,21 +14,25 @@ function Add-VSTeamExtension {
       [string] $ExtensionId,
 
       [parameter(Mandatory = $false)]
-      [string] $Version
+      [string] $Version,
+
+      [switch] $Force
    )
    Process {
-      $resource = "extensionmanagement/installedextensionsbyname/$PublisherId/$ExtensionId"
-      
-      if ($version) {
-         $resource += '/' + $Version
-      }
-       
-      $resp = _callAPI -Method Post -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+      if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Add extension")) {
+         $resource = "extensionmanagement/installedextensionsbyname/$PublisherId/$ExtensionId"
          
-      $item = [VSTeamExtension]::new($resp)
+         if ($version) {
+            $resource += '/' + $Version
+         }
+       
+         $resp = _callAPI -Method Post -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+         
+         $item = [VSTeamExtension]::new($resp)
 
-      Write-Output $item         
-   }  
+         Write-Output $item         
+      }  
+   }
 }
 
 function Get-VSTeamExtension {
