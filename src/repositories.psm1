@@ -116,20 +116,19 @@ function Get-VSTeamGitRepository {
          }
       }
       else {
-         try {
+         if($ProjectName) {
             $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
-
-            $objs = @()
-
-            foreach ($item in $resp.value) {
-               $objs += [VSTeamGitRepository]::new($item, $ProjectName)
-            }
-
-            Write-Output $objs
+         } else {
+            $resp = _callAPI -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
          }
-         catch {
-            throw $_
+
+         $objs = @()
+
+         foreach ($item in $resp.value) {
+            $objs += [VSTeamGitRepository]::new($item, $ProjectName)
          }
+
+         Write-Output $objs         
       }
    }
 }
