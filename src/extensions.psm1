@@ -19,7 +19,7 @@ function Add-VSTeamExtension {
       [switch] $Force
    )
    Process {
-      if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Add extension")) {
+      if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Add extension ?")) {
          $resource = "extensionmanagement/installedextensionsbyname/$PublisherId/$ExtensionId"
          
          if ($version) {
@@ -105,7 +105,7 @@ function Update-VSTeamExtension {
 
       [switch] $Force
    )
-   if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Update extension")) {
+   if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Update extension ?")) {
 
       $obj = @{
          extensionId  = $ExtensionId
@@ -137,7 +137,7 @@ function Remove-VSTeamExtension {
       [switch] $Force
    )
 
-   if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Remove extension")) {
+   if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Remove extension ?")) {
       $resource = "extensionmanagement/installedextensionsbyname/$PublisherId/$ExtensionId"
 
       $resp = _callAPI -Method Delete -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement)
