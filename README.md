@@ -7,9 +7,9 @@
 
 ## Introduction
 
-VSTeam is a PowerShell module with commands for accessing your [Team Foundation Server 2017/2018](https://cda.ms/Bf) and [Visual Studio Team Services](https://cda.ms/Bf).
+VSTeam is a PowerShell module with commands for accessing your [Azure DevOps Server (previously named Visual Studio Team Foundation Server) 2017/2018](https://cda.ms/Bf) and [Azure DevOps (previously named Visual Studio Team Services)](https://cda.ms/Bf).
 
-VSTeam module is also is a provider allowing users to navigate their [Team Foundation Server 2017/2018](https://cda.ms/Bf) and [Visual Studio Team Services](https://cda.ms/Bf) as a file system.
+VSTeam module is also is a provider allowing users to navigate their [Azure DevOps Server](https://cda.ms/Bf) and [Azure DevOps](https://cda.ms/Bf) as a file system.
 
 To get started you can visit this blog [PowerShell I would like you to meet TFS and VSTS](http://www.donovanbrown.com/post/PowerShell-I-would-like-you-to-meet-TFS-and-VSTS)
 
@@ -24,7 +24,7 @@ You can review the status of every stage of the pipeline below.
 | macOS Team Foundation Server 2017   | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/6)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |
 | Windows Team Foundation Server 2017 | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/2)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |
 | Windows Team Foundation Server 2018 | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/5)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |
-| Windows Visual Studio Team Services | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/4)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |
+| Windows Azure DevOps | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/4)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |
 | Publish to PowerShell Gallery       | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/1)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |
 
 The build for VSTeam is run on macOS, Linux and Windows to ensure there are no casing or other platform specific issues with the code.
@@ -35,7 +35,7 @@ The build for VSTeam is run on macOS, Linux and Windows to ensure there are no c
 
  ![Unit Tests](.github/images/unittests.png)
 
-During the release the module is installed on macOS, Linux and Window and tested against [Team Foundation Server 2017/2018](https://cda.ms/Bf) and [Visual Studio Team Services](https://cda.ms/Bf) before being published to the PowerShell Gallery.
+During the release the module is installed on macOS, Linux and Window and tested against [Azure DevOps Server](https://cda.ms/Bf) and [Azure DevOps](https://cda.ms/Bf) before being published to the PowerShell Gallery.
 
 ## Requirements
 

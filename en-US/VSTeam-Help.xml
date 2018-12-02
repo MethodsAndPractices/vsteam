@@ -5841,7 +5841,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>The id of the build.</maml:para>
@@ -5870,7 +5870,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>The id of the build.</maml:para>
@@ -6276,7 +6276,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>The id of the build.</maml:para>
@@ -6305,7 +6305,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>The id of the build.</maml:para>
@@ -14027,7 +14027,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
           <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>The id of the build.</maml:para>
@@ -14113,7 +14113,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>The id of the build.</maml:para>
