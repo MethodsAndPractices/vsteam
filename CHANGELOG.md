@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.13
+
+Updated readme to Azure DevOps and Azure DevOps Server.
+
+Updated the help file to fix syntax errors on some of the functions.
+
 ## 4.0.12
 
 Fixed bug where Get-VSTeamGitRepository was failing if you did not provide a project name.  Now you can run without a project and get all the repositories for the entire organization.
