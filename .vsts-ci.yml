@@ -7,7 +7,7 @@ phases:
   displayName: Linux
   condition: succeeded()
   queue:
-    name: Hosted Linux Preview
+    name: Hosted Ubuntu 1604
 
   steps:
   - powershell: |  
