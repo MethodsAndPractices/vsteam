@@ -6,9 +6,9 @@ InModuleScope workitems {
    Describe 'workitems' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       $obj = @{
@@ -24,6 +24,9 @@ InModuleScope workitems {
 
       Context 'Add-WorkItem' {
          Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            # Write-Host $args
+
             return $obj
          }
 
@@ -33,6 +36,8 @@ InModuleScope workitems {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*`]' -and # Make sure the body is an array
                $ContentType -eq 'application/json-patch+json' -and
                $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
             }
@@ -40,10 +45,16 @@ InModuleScope workitems {
 
          It 'With Default Project should add work item' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
-            Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test
+            Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*Test1*' -and
+               $Body -like '*Testing*' -and
+               $Body -like '*/fields/System.Title*' -and
+               $Body -like '*/fields/System.Description*' -and
+               $Body -like '*`]' -and # Make sure the body is an array
                $ContentType -eq 'application/json-patch+json' -and
                $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
             }
@@ -60,27 +71,26 @@ InModuleScope workitems {
          }
       }
 
-      Context 'Get-WorkItem' {       
+      Context 'Get-WorkItem' {
 
          It 'Without Default Project should add work item' {
             Mock Invoke-RestMethod {
                # If this test fails uncomment the line below to see how the mock was called.
                # Write-Host $args
-               
+
                return $collection
             }
 
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
-            Get-VSTeamWorkItem -ProjectName test -Ids 47, 48
+            Get-VSTeamWorkItem -Ids 47, 48
 
-            # With PowerShell core the order of the query string is not the 
+            # With PowerShell core the order of the query string is not the
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
-            # assume the order. 
+            # assume the order.
             # The general string should look like this:
             # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=Fail
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/test/_apis/wit/workitems/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*ids=47,48*" -and
                $Uri -like "*`$Expand=None*" -and
@@ -95,11 +105,10 @@ InModuleScope workitems {
                return $obj
             }
 
-            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
-            Get-VSTeamWorkItem -ProjectName test -Id 47
+            Get-VSTeamWorkItem -Id 47
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/47?api-version=$([VSTeamVersions]::Core)&`$Expand=None"
+               $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/47?api-version=$([VSTeamVersions]::Core)&`$Expand=None"
             }
          }
       }

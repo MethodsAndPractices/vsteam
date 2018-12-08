@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.0
+
+**Breaking changes**:
+Project name is no longer a parameter to Get-VSTeamWorkItem
+
+Fixed bug where you could not add a work item if you only provided the title.
+Fixed bug where you could not get a work item by id.
+
 ## 4.0.13
 
 Updated readme to Azure DevOps and Azure DevOps Server.
