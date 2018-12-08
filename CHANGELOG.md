@@ -5,6 +5,19 @@
 **Breaking changes**:
 Project name is no longer a parameter to Get-VSTeamWorkItem
 
+Added Update-VSTeamWorkItem. You can update the following:
+
+- Title
+- Description
+- IterationPath
+- AssignedTo
+
+Exposed the following properties on work item type:
+
+- Description
+- IterationPath
+- AssignedTo
+
 Fixed bug where you could not add a work item if you only provided the title.
 Fixed bug where you could not get a work item by id.
 
@@ -260,7 +273,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/50) from [Mar
   - Add-VSTeamKubernetesEndpoint
   - Add-VSTeamServiceEndpoint
   - Update-VSTeamServiceEndpoint
-  
+
 ## 2.1.12
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/51) from [Steve Croxford](https://github.com/CodedBeard) which included the following:

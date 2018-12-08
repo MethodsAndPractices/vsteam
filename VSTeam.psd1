@@ -219,7 +219,8 @@
       'Add-VSTeamExtension',
       'Get-VSTeamExtension',
       'Update-VSTeamExtension',
-      'Remove-VSTeamExtension')
+      'Remove-VSTeamExtension',
+      'Update-VSTeamWorkItem')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -336,7 +337,8 @@
       'Add-Extension',
       'Get-Extension',
       'Update-Extension',
-      'Remove-Extension')
+      'Remove-Extension',
+      'Update-WorkItem')
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

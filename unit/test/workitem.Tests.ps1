@@ -61,6 +61,45 @@ InModuleScope workitems {
          }
       }
 
+      Context 'Update-WorkItem' {
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            # Write-Host $args
+
+            return $obj
+         }
+
+         It 'Without Default Project should update work item' {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+            Update-VSTeamWorkItem -Id 1 -Title Test
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Patch' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*`]' -and # Make sure the body is an array
+               $ContentType -eq 'application/json-patch+json' -and
+               $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
+            }
+         }
+
+         It 'With Default Project should update work item' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+            Update-VSTeamWorkItem 1 -Title Test1 -Description Testing
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Patch' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*Test1*' -and
+               $Body -like '*Testing*' -and
+               $Body -like '*/fields/System.Title*' -and
+               $Body -like '*/fields/System.Description*' -and
+               $Body -like '*`]' -and # Make sure the body is an array
+               $ContentType -eq 'application/json-patch+json' -and
+               $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
+            }
+         }
+      }
+
       Context 'Show-VSTeamWorkItem' {
          Mock Show-Browser { }
 
