@@ -71,7 +71,7 @@ InModuleScope workitems {
 
          It 'Without Default Project should update work item' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
-            Update-VSTeamWorkItem -Id 1 -Title Test
+            Update-VSTeamWorkItem -Id 1 -Title Test -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Patch' -and
@@ -84,7 +84,7 @@ InModuleScope workitems {
 
          It 'With Default Project should update work item' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
-            Update-VSTeamWorkItem 1 -Title Test1 -Description Testing
+            Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Patch' -and

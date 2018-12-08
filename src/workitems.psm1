@@ -106,7 +106,7 @@ function Add-VSTeamWorkItem {
 }
 
 function Update-VSTeamWorkItem {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int] $Id,
@@ -121,7 +121,9 @@ function Update-VSTeamWorkItem {
       [string]$IterationPath,
 
       [Parameter(Mandatory = $false)]
-      [string]$AssignedTo
+      [string]$AssignedTo,
+
+      [switch] $Force
    )
 
    Process {    
@@ -158,13 +160,15 @@ function Update-VSTeamWorkItem {
       $json = ConvertTo-Json @($body) -Compress
 
       # Call the REST API
-      $resp = _callAPI -Area 'wit' -Resource 'workitems' `
-         -Version $([VSTeamVersions]::Core) -id $Id -Method Patch `
-         -ContentType 'application/json-patch+json' -Body $json
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-WorkItem")) {
+         $resp = _callAPI -Area 'wit' -Resource 'workitems' `
+            -Version $([VSTeamVersions]::Core) -id $Id -Method Patch `
+            -ContentType 'application/json-patch+json' -Body $json
 
-      _applyTypesToWorkItem -item $resp
+         _applyTypesToWorkItem -item $resp
 
-      return $resp
+         return $resp
+      }
    }
 }
 
