@@ -105,7 +105,7 @@ phases:
 
     displayName: 'Run Static Code Analysis'
 
-  - powershell: ./'.docs/gen-help.ps1'
+  - powershell: './gen-help.ps1'
     displayName: 'Generate Help'
     workingDirectory: .docs
 
