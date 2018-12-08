@@ -17,14 +17,12 @@
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamWorkItem -ProjectName demo -Ids 47,48
+PS C:\> Get-VSTeamWorkItem pow-Ids 47,48
 ```
 
 This command gets work items with IDs 47 and 48 by using the ID parameter.
 
 ## PARAMETERS
-
-<!-- #include "./params/projectName.md" -->
 
 ### -Id
 

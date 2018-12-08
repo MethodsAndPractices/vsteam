@@ -18,28 +18,12 @@ Returns one or more a work items from your project.
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamWorkItem -ProjectName demo -Ids 47,48
+PS C:\> Get-VSTeamWorkItem -Ids 47,48
 ```
 
 This command gets work items with IDs 47 and 48 by using the ID parameter.
 
 ## PARAMETERS
-
-### -ProjectName
-
-Specifies the team project for which this function operates.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so
-you do not have to pass the ProjectName with each call.
-
-```yaml
-Type: String
-Required: true
-Position: 0
-Accept pipeline input: true (ByPropertyName)
-```
 
 ### -Id
 

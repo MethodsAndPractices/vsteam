@@ -416,5 +416,9 @@ Updates an existing service connection
 
 Updates the users for the account. (Currently only supports updating the LicenseType)
 
+### [Update-VSTeamWorkItem](Update-VSTeamWorkItem.md)
+
+Update a work item in your project.
+
 
 

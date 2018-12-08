@@ -9,12 +9,24 @@
             <GetScriptBlock>$this.fields.PSObject.Properties['System.Title'].Value</GetScriptBlock>
          </ScriptProperty>
          <ScriptProperty>
+            <Name>Description</Name>
+            <GetScriptBlock>$this.fields.PSObject.Properties['System.Description'].Value</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
             <Name>State</Name>
             <GetScriptBlock>$this.fields.PSObject.Properties['System.State'].Value</GetScriptBlock>
          </ScriptProperty>
          <ScriptProperty>
             <Name>AreaPath</Name>
             <GetScriptBlock>$this.fields.PSObject.Properties['System.AreaPath'].Value</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>IterationPath</Name>
+            <GetScriptBlock>$this.fields.PSObject.Properties['System.IterationPath'].Value</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>AssignedTo</Name>
+            <GetScriptBlock>$this.fields.PSObject.Properties['System.AssignedTo'].Value</GetScriptBlock>
          </ScriptProperty>
          <ScriptProperty>
             <Name>TeamProject</Name>

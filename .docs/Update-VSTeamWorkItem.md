@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Add-VSTeamWorkItem
+# Update-VSTeamWorkItem
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Add-VSTeamWorkItem.md" -->
+<!-- #include "./synopsis/Update-VSTeamWorkItem.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Add-VSTeamWorkItem will add a new work item to your project.
+Update-VSTeamWorkItem will update a new work item in your project.
 
 ## EXAMPLES
 
@@ -18,27 +18,36 @@ Add-VSTeamWorkItem will add a new work item to your project.
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task
+PS C:\> Update-VSTeamWorkItem -WorkItemId 1 -Title "Updated Work Item"
 
-ID Title          Status
--- -----          ------
-6  New Work Item  To Do
+ID Title              Status
+-- -----              ------
+6  Updated Work Item  To Do
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description"
+PS C:\> Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description"
 
-ID Title          Status
--- -----          ------
-6  New Work Item  To Do
+ID Title              Status
+-- -----              ------
+6  Updated Work Item  To Do
 ```
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
+### -Id
+
+The id of the work item.
+
+```yaml
+Type: Int32
+Parameter Sets: ByID
+Required: True
+Accept pipeline input: true (ByPropertyName, ByValue)
+```
 
 ### -Title
 
@@ -46,7 +55,7 @@ The title of the work item
 
 ```yaml
 Type: String
-Required: True
+Required: False
 ```
 
 ### -Description
@@ -76,18 +85,7 @@ Type: String
 Required: False
 ```
 
-### -WorkItemType
-
-The type of work item to add.
-
-You can tab complete from a list of available work item types.
-
-You must use Set-VSTeamDefaultProject to set a default project to enable the tab completion.
-
-```yaml
-Type: String
-Required: True
-```
+<!-- #include "./params/force.md" -->
 
 ## INPUTS
 
@@ -105,6 +103,6 @@ WorkItemType is a dynamic parameter and use the default
 project value to query their validate set.
 
 If you do not set the default project by called Set-VSTeamDefaultProject before
-calling Add-VSTeamWorkItem you will have to type in the names.
+calling Update-VSTeamWorkItem you will have to type in the names.
 
 ## RELATED LINKS

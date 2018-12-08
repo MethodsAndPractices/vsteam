@@ -21,9 +21,9 @@ Add-VSTeamWorkItem will add a new work item to your project.
 PS C:\> Set-VSTeamDefaultProject Demo
 PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task
 
-Build Definition Build Number  Status     Result
----------------- ------------  ------     ------
-Demo-CI           Demo-CI-45   notStarted
+ID Title          Status
+-- -----          ------
+6  New Work Item  To Do
 ```
 
 ### -------------------------- EXAMPLE 2 --------------------------
@@ -32,9 +32,9 @@ Demo-CI           Demo-CI-45   notStarted
 PS C:\> Set-VSTeamDefaultProject Demo
 PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description"
 
-Build Definition Build Number  Status     Result
----------------- ------------  ------     ------
-Demo-CI           Demo-CI-45   notStarted
+ID Title          Status
+-- -----          ------
+6  New Work Item  To Do
 ```
 
 ## PARAMETERS
