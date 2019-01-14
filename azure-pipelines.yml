@@ -10,22 +10,22 @@ phases:
     name: Hosted Ubuntu 1604
 
   steps:
-  - powershell: |  
+  - powershell: |
        # Load the psd1 file so you can read the required modules and install them
        $manifest = Import-PowerShellDataFile .\*.psd1
-       
+
        # Install each module
-       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } 
+       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
 
     displayName: 'Install Dependencies'
 
-  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck' 
+  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
 
     displayName: 'Install Pester'
 
-  - powershell: |  
+  - powershell: |
        Import-Module .\*.psd1
-       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru 
+       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
 
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     displayName: 'Run Unit Tests'
@@ -45,22 +45,22 @@ phases:
     name: Hosted macOS
 
   steps:
-  - powershell: |  
+  - powershell: |
        # Load the psd1 file so you can read the required modules and install them
        $manifest = Import-PowerShellDataFile .\*.psd1
-       
+
        # Install each module
-       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } 
+       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
 
     displayName: 'Install Dependencies'
 
-  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck' 
+  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
 
     displayName: 'Install Pester'
 
-  - powershell: |  
+  - powershell: |
        Import-Module .\*.psd1
-       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru 
+       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
 
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     displayName: 'Run Unit Tests'
@@ -80,40 +80,41 @@ phases:
     name: Hosted VS2017
 
   steps:
-  - powershell: |  
+  - powershell: |
        # Load the psd1 file so you can read the required modules and install them
        $manifest = Import-PowerShellDataFile .\*.psd1
-       
+
        # Install each module
-       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } 
+       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
 
     displayName: 'Install Dependencies'
 
-  - powershell: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose' 
-
+  - powershell: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
     displayName: 'Install PSScriptAnalyzer'
 
-  - powershell: |  
+  - powershell: |
        # Has to happen in this task for it to take effect
        # Load the psd1 file so you can read the required modules and import them
        $manifest = Import-PowerShellDataFile .\*.psd1
-       
+
        # Import each module
        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
-       
+
        $r = Invoke-ScriptAnalyzer –Path ./src –Recurse | Where-Object severity -eq "Warning"
-       $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"} 
+       $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
 
     displayName: 'Run Static Code Analysis'
 
-  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck -Verbose' 
+  - powershell: './gen-help.ps1'
+    displayName: 'Generate Help'
+    workingDirectory: .docs
 
+  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck -Verbose'
     displayName: 'Install Pester'
 
-  - powershell: |  
+  - powershell: |
        Import-Module .\*.psd1
-       Invoke-Pester -Script .\unit -CodeCoverage .\src\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml 
-
+       Invoke-Pester -Script .\unit -CodeCoverage .\src\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
     displayName: 'Run Unit Tests'
 
   - task: PublishTestResults@2
@@ -134,7 +135,7 @@ phases:
   - task: CopyFiles@2
     displayName: 'Copy Module to Artifacts Folder'
     inputs:
-      Contents: |  
+      Contents: |
        *.psd1
        README.md
        .gitignore
@@ -142,7 +143,7 @@ phases:
        src\**
        formats\**
        types\**
-       
+
       TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
     condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
