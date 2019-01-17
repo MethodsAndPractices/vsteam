@@ -347,6 +347,114 @@ function _buildProjectNameDynamicParam {
    #>
 }
 
+function _getProcesses {
+   if (-not [VSTeamVersions]::Account) {
+      Write-Output @()
+      return
+   }
+
+   $resource = "/process/processes"
+   $instance = [VSTeamVersions]::Account
+   $version = [VSTeamVersions]::Core
+
+   # Build the url to list the projects
+   # You CANNOT use _buildRequestURI here or you will end up
+   # in an infinite loop.
+   $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
+
+   # Call the REST API
+   try {
+      $resp = _callAPI -url $listurl
+
+      if ($resp.count -gt 0) {
+         Write-Output ($resp.value).name
+      }
+   }
+   catch {
+      Write-Output @()
+   }
+}
+function _buildProcessNameDynamicParam {
+   param(
+      [string] $ParameterName = 'ProcessName',
+      [string] $ParameterSetName,
+      [bool] $Mandatory = $true,
+      [string] $AliasName,
+      [int] $Position = 0
+   )
+
+   # Create the dictionary
+   $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+
+   # Create the collection of attributes
+   $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+
+   # Create and set the parameters' attributes
+   $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
+   $ParameterAttribute.Mandatory = $Mandatory
+   $ParameterAttribute.Position = $Position
+
+   if ($ParameterSetName) {
+      $ParameterAttribute.ParameterSetName = $ParameterSetName
+   }
+
+   $ParameterAttribute.ValueFromPipelineByPropertyName = $true
+   $ParameterAttribute.HelpMessage = "The name of the process.  You can tab complete from the processes in your Team Services or TFS account when passed on the command line."
+
+   # Add the attributes to the attributes collection
+   $AttributeCollection.Add($ParameterAttribute)
+
+   if ($AliasName) {
+      $AliasAttribute = New-Object System.Management.Automation.AliasAttribute(@($AliasName))
+      $AttributeCollection.Add($AliasAttribute)
+   }
+
+   # Generate and set the ValidateSet
+   if($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
+      $arrSet = _getProcesses
+      [VSTeamProcessCache]::processes = $arrSet
+      [VSTeamProcessCache]::timestamp = (Get-Date).Minute
+   }
+   else {
+      $arrSet = [VSTeamProcessCache]::projects
+   }
+
+   if ($arrSet) {
+      Write-Verbose "arrSet = $arrSet"
+
+      $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
+
+      # Add the ValidateSet to the attributes collection
+      $AttributeCollection.Add($ValidateSetAttribute)
+   }
+
+   # Create and return the dynamic parameter
+   $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
+   $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
+   return $RuntimeParameterDictionary
+
+   <#
+   Builds a dynamic parameter that can be used to tab complete the ProjectName
+   parameter of functions from a list of projects from the added TFS Account.
+   You must call Add-VSTeamAccount before trying to use any function that relies
+   on this dynamic parameter or you will get an error.
+
+   This can only be used in Advanced Fucntion with the [CmdletBinding()] attribute.
+   The function must also have a begin block that maps the value to a common variable
+   like this.
+
+      DynamicParam {
+         # Generate and set the ValidateSet
+         $arrSet = Get-VSTeamProjects | Select-Object -ExpandProperty Name
+
+         _buildProjectNameDynamicParam -arrSet $arrSet
+      }
+      process {
+         # Bind the parameter to a friendly variable
+         $ProjectName = $PSBoundParameters[$ParameterName]
+      }
+   #>
+}
 function _buildDynamicParam {
    param(
       [string] $ParameterName = 'QueueName',
