@@ -47,15 +47,15 @@ Position: 0
 
 ### -ProcessTemplate
 
-The name of the process template to use for the project. The acceptable values for this parameter are:
+The name of the process template to use for the project.
 
-- Agile
-- Scrum
-- CMMI
+You can tab complete from a list of available projects.
+
+Will use the default process template if one is not provided
 
 ```yaml
 Type: String
-Default value: Scrum
+Default value: [Determined by Default Process Template definition]
 ```
 
 ### -Description
@@ -85,3 +85,5 @@ Type: SwitchParameter
 [Add-VSTeamAccount](Add-VSTeamAccount.md)
 
 [Remove-VSTeamProject](Remove-VSTeamProject.md)
+
+[Get-VSTeamProcess](Get-VSTeamProcess.md)
