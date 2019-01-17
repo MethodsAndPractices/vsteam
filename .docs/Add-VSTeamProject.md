@@ -51,11 +51,9 @@ The name of the process template to use for the project.
 
 You can tab complete from a list of available projects.
 
-Will use the default process template if one is not provided
-
 ```yaml
 Type: String
-Default value: [Determined by Default Process Template definition]
+Default value: Scrum
 ```
 
 ### -Description

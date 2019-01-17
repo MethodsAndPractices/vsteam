@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.1
+Added Get-VSTeamProcess
+Modified Add-VSTeamProcess to allow for any Process Template to be used
+
 ## 5.0.0
 
 **Breaking changes**:
