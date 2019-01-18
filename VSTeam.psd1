@@ -268,7 +268,6 @@
       'Add-GitRepository',
       'Remove-GitRepository',
       'Get-Pool',
-      'Get-Process',
       'Get-Project',
       'Show-Project',
       'Update-Project',

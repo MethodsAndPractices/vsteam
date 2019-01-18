@@ -1180,6 +1180,65 @@
          </ListControl>
       </View>
 
+      <!--Team.ProcessTable-->
+      <View>
+         <Name>Team.ProcessTable</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Process</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize/>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Description</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap/>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Description</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+
+      <!--ProcessListView-->
+      <View>
+         <Name>ProessListView</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Process</TypeName>
+            <TypeName>Team.Provider.Process</TypeName>
+            <TypeName>VSTeamProcess</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>Name</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>ID</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Description</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+
       <!-- Put the defaults last because the first matching format is used. -->
 
       <!--Team.Pool.Table-->
