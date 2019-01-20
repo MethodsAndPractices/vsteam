@@ -1,8 +1,11 @@
 # Changelog
 
 ## 5.0.1
-Added Get-VSTeamProcess
-Modified Add-VSTeamProcess to allow for any Process Template to be used
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/128) from [Fifth Street Partners](https://github.com/fifthstreetpartners) which included the following:
+
+- Added Get-VSTeamProcess
+- Modified Add-VSTeamProcess to allow for any Process Template to be used
 
 ## 5.0.0
 
