@@ -41,19 +41,19 @@ function Get-VSTeamProcess {
          Write-Output $project
       }
       elseif ($ProcessName) {
-         #Lookup Process ID by Name
+         # Lookup Process ID by Name
          Get-VSTeamProcess | where-object {$_.name -eq $ProcessName}
 
       }
       else {
-         #return list of processes
+         # Return list of processes
          try {
             # Call the REST API
             $resp = _callAPI -Area 'process/processes' `
                -Version $([VSTeamVersions]::Core) `
                -QueryString @{
-               '$top'      = $top
-               '$skip'     = $skip
+               '$top'  = $top
+               '$skip' = $skip
             }
 
             $objs = @()

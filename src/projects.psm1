@@ -234,9 +234,8 @@ function Add-VSTeamProject {
          $srcCtrl = "Tfvc"
       }
 
-      if ($ProcessTemplate)
-      {
-            $templateTypeId = (Get-VSTeamProcess -Name $ProcessTemplate).Id
+      if ($ProcessTemplate) {
+         $templateTypeId = (Get-VSTeamProcess -Name $ProcessTemplate).Id
       }
 
       $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
