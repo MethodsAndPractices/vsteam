@@ -1,0 +1,1 @@
+Returns a list of process templates in the Team Services or Team Foundation Server account.

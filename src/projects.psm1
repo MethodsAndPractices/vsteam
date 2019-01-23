@@ -211,50 +211,50 @@ function Add-VSTeamProject {
       [Alias('Name')]
       [string] $ProjectName,
 
-      [ValidateSet('Agile', 'CMMI', 'Scrum')]
-      [string] $ProcessTemplate = 'Scrum',
-
       [string] $Description,
 
       [switch] $TFVC
    )
 
-   $srcCtrl = 'Git'
-   $templateTypeId = ''
+   DynamicParam {
+      [VSTeamProcessCache]::timestamp = -1 
 
-   switch ($ProcessTemplate) {
-      'Agile' {
-         $templateTypeId = 'adcc42ab-9882-485e-a3ed-7678f01f66bc'
-      }
-      'CMMI' {
-         $templateTypeId = '27450541-8e31-4150-9947-dc59f998fc01'
-      }
-      # The default is Scrum
-      Default {
-         $templateTypeId = '6b724908-ef14-45cf-84f8-768b5384da45'
-      }
+      _buildProcessNameDynamicParam -ParameterName 'ProcessTemplate' -Mandatory $false
    }
 
-   if ($TFVC.IsPresent) {
-      $srcCtrl = "Tfvc"
-   }
+   process {
+      # Bind the parameter to a friendly variable
+      $ProcessTemplate = $PSBoundParameters["ProcessTemplate"]
 
-   $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
+      $srcCtrl = 'Git'
+      #Default to Scrum Process Template
+      $templateTypeId = '6b724908-ef14-45cf-84f8-768b5384da45'
 
-   try {
-      # Call the REST API
-      $resp = _callAPI -Area 'projects' `
-         -Method Post -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Core)
+      if ($TFVC.IsPresent) {
+         $srcCtrl = "Tfvc"
+      }
 
-      _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
+      if ($ProcessTemplate) {
+         $templateTypeId = (Get-VSTeamProcess -Name $ProcessTemplate).Id
+      }
 
-      # Invalidate any cache of projects.
-      [VSTeamProjectCache]::timestamp = -1
+      $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
 
-      return Get-VSTeamProject $ProjectName
-   }
-   catch {
-      _handleException $_
+      try {
+         # Call the REST API
+         $resp = _callAPI -Area 'projects' `
+            -Method Post -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Core)
+
+         _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
+
+         # Invalidate any cache of projects.
+         [VSTeamProjectCache]::timestamp = -1
+
+         return Get-VSTeamProject $ProjectName
+      }
+      catch {
+         _handleException $_
+      }
    }
 }
 

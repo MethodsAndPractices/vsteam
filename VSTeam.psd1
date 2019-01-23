@@ -13,7 +13,7 @@
    RootModule        = ''
 
    # Version number of this module.
-   ModuleVersion     = '5.0.0'
+   ModuleVersion     = '5.0.1'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -102,6 +102,7 @@
       'src\policies.psm1',
       'src\policyTypes.psm1'
       'src\pools.psm1',
+      'src\processes.psm1'
       'src\projects.psm1',
       'src\queues.psm1',
       'src\releaseDefinitions.psm1',
@@ -142,6 +143,7 @@
       'Get-VSTeamPolicy',
       'Get-VSTeamPolicyType',
       'Get-VSTeamPool',
+      'Get-VSTeamProcess',
       'Get-VSTeamProject',
       'Get-VSTeamQueue',
       'Get-VSTeamRelease',
