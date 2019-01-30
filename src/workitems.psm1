@@ -32,7 +32,7 @@ function Add-VSTeamWorkItem {
       [string]$AssignedTo,
 
       [Parameter(Mandatory = $false)]
-      [string]$ParentId
+      [int]$ParentId
    )
 
    DynamicParam {
@@ -64,7 +64,7 @@ function Add-VSTeamWorkItem {
 
       # The type has to start with a $
       $WorkItemType = "`$$($PSBoundParameters["WorkItemType"])"
-      
+
       # Constructing the contents to be send.
       # Empty parameters will be skipped when converting to json.
       $body = @(

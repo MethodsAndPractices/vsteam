@@ -1,5 +1,7 @@
 # Changelog
 
+- Added ParentId parameter to Add-VSTeamWorkItem to allow the parent work item to be set
+
 ## 5.0.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/128) from [Fifth Street Partners](https://github.com/fifthstreetpartners) which included the following:
