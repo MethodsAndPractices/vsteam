@@ -104,6 +104,15 @@ Type: String
 Required: True
 ```
 
+### -ParentId
+
+The Id of the parent work item that this work item will be related to.
+
+```yaml
+Type: Int
+Required: False
+```
+
 ## INPUTS
 
 ### System.String
