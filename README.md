@@ -19,7 +19,7 @@ You can review the status of every stage of the pipeline below.
 
 |         Stage                       |             Status           |
 |-------------------------------------|------------------------------|
-| Build                               | [![Build status](https://loecda.visualstudio.com/Team%20Module/_apis/build/status/Team%20Module-CI)](https://loecda.visualstudio.com/Team%20Module/_build/latest?definitionId=5)|
+| Build                               | [![Build status](https://loecda.visualstudio.com/Team%20Module/_apis/build/status/CI)](https://loecda.visualstudio.com/Team%20Module/_build/latest?definitionId=52)|
 | Linux Team Foundation Server 2017   | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/7)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |
 | macOS Team Foundation Server 2017   | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/6)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |
 | Windows Team Foundation Server 2017 | [![Environment status](https://loecda.vsrm.visualstudio.com/_apis/public/Release/badge/3e857acd-880f-4056-a46b-1de672ca55cc/1/2)](https://loecda.visualstudio.com/Team%20Module/_releases2?definitionId=1&view=mine&_a=releases) |

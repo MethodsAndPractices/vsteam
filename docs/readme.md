@@ -192,6 +192,10 @@ Get the policy types in the specified Visual Studio Team Services or Team Founda
 
 Returns the agent pools.
 
+### [Get-VSTeamProcess](Get-VSTeamProcess.md)
+
+Returns a list of process templates in the Team Services or Team Foundation Server account.
+
 ### [Get-VSTeamProfile](Get-VSTeamProfile.md)
 
 Returns the saved profiles.
