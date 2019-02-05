@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope policies {
+InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.

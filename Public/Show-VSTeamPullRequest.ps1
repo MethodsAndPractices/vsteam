@@ -8,7 +8,7 @@ function Show-VSTeamPullRequest {
 
    process {
        try {
-           $pullRequest = Get-PullRequest -PullRequestId $Id
+           $pullRequest = Get-VSTeamPullRequest -PullRequestId $Id
 
            $projectName = [uri]::EscapeDataString($pullRequest.repository.project.name)
            $repositoryId = $pullRequest.repositoryName

@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope tfvc {
+InModuleScope VSTeam {
    
    $singleResult = [PSCustomObject]@{
       path        = "$/MyProject/Master";

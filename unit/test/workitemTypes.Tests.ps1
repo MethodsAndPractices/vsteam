@@ -2,7 +2,7 @@ Set-StrictMode -Version Latest
 
 # The InModuleScope command allows you to perform white-box unit testing on the 
 # internal (non-exported) code of a Script Module.
-InModuleScope workitemTypes {
+InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
    # using the Add-VSTeamAccount function.

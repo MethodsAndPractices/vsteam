@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope teams {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $results = [PSCustomObject]@{

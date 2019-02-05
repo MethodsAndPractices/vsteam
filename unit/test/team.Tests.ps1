@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope team {
+InModuleScope VSTeam {
    Describe 'Invoke-VSTeamRequest' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -396,13 +396,13 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount run as administrator' {
+      Context 'Remove-VSTeamAccount run as administrator' {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $true }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at process level' {
-            Remove-TeamAccount
+            Remove-VSTeamAccount
 
             # Assert
             # Make sure set env vars was called with the correct parameters
@@ -412,14 +412,14 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount run as normal user' {
+      Context 'Remove-VSTeamAccount run as normal user' {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $false }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at process level' {
             # Act
-            Remove-TeamAccount
+            Remove-VSTeamAccount
 
             # Assert
             # Make sure set env vars was called with the correct parameters
@@ -429,13 +429,13 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount with no arguments' {
+      Context 'Remove-VSTeamAccount with no arguments' {
          Mock _isOnWindows { return $false }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at process level' {
             # Act
-            Remove-TeamAccount
+            Remove-VSTeamAccount
 
             # Assert
             # Make sure set env vars was called with the correct parameters
@@ -445,14 +445,14 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount at user level' {
+      Context 'Remove-VSTeamAccount at user level' {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $false }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at user level' {
             # Act
-            Remove-TeamAccount -Level User
+            Remove-VSTeamAccount -Level User
 
             # Assert
             # Make sure set env vars was called with the correct parameters
@@ -462,14 +462,14 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount at all levels as administrator' {
+      Context 'Remove-VSTeamAccount at all levels as administrator' {
          Mock _testAdministrator { return $true }
          Mock _isOnWindows { return $true }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at all levels' {
             # Act
-            Remove-TeamAccount -Level All
+            Remove-VSTeamAccount -Level All
 
             # Assert
             Assert-MockCalled _clearEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -486,7 +486,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount at all levels as normal user' {
+      Context 'Remove-VSTeamAccount at all levels as normal user' {
          Mock _testAdministrator { return $false }
          Mock _isOnWindows { return $true }
          Mock Write-Warning
@@ -494,7 +494,7 @@ InModuleScope team {
 
          It 'should clear env at all levels' {
             # Act
-            Remove-TeamAccount -Level All
+            Remove-VSTeamAccount -Level All
 
             # Assert
             Assert-MockCalled _clearEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {

@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope serviceendpoints {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'ServiceEndpoints TFS2017 throws' {
@@ -78,7 +78,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -108,7 +108,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -167,7 +167,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -199,7 +199,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $false
                   operationStatus = [PSCustomObject]@{
@@ -242,7 +242,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -299,7 +299,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -332,7 +332,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -368,7 +368,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -408,7 +408,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -448,7 +448,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -486,7 +486,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -528,7 +528,7 @@ InModuleScope serviceendpoints {
          Mock Invoke-RestMethod {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}
@@ -565,7 +565,7 @@ InModuleScope serviceendpoints {
 
             # This $i is in the module. Because we use InModuleScope
             # we can see it
-            if ($i -gt 9) {
+            if ($iTracking -gt 9) {
                return [PSCustomObject]@{
                   isReady         = $true
                   operationStatus = [PSCustomObject]@{state = 'Ready'}

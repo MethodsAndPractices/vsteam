@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope serviceendpointTypes {
+InModuleScope VSTeam {
    $sampleFile = "$PSScriptRoot\sampleFiles\serviceEndpointTypeSample.json"
 
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'

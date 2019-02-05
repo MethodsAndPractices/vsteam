@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope pullrequest {
+InModuleScope VSTeam {
 
     Describe 'Pull Requests' {
         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"

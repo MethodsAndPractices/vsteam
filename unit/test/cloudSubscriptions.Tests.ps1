@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope cloudSubscriptions {
+InModuleScope VSTeam {
    
    Describe 'CloudSubscriptions vsts' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName

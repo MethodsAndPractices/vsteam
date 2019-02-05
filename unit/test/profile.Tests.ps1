@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope profile {
+InModuleScope VSTeam {
    Describe 'Profile' {
       $expectedPath = "$HOME/vsteam_profiles.json"
       $contents = @"

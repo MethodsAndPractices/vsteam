@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope pools {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    [VSTeamVersions]::DistributedTask = '1.0-unitTest'
 

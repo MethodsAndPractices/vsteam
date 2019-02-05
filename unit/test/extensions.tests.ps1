@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope extensions {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    Describe 'Extension' {
      

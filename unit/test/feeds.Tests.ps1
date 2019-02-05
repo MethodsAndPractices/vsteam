@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope feeds {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    
    $results = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
