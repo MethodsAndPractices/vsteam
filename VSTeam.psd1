@@ -10,10 +10,10 @@
 @{
 
    # Script module or binary module file associated with this manifest.
-   RootModule        = ''
+   RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '5.0.2'
+   ModuleVersion     = '6.0.0'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -58,7 +58,7 @@
    # RequiredAssemblies = @()
 
    # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-   ScriptsToProcess  = @('src\teamspsdrive.ps1')
+   # ScriptsToProcess  = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
    TypesToProcess    = @('types\Approvals.ps1xml',
@@ -91,34 +91,7 @@
       'formats\vsteamPSDrive.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-   NestedModules     = @('src\team.psm1',
-      'src\refs.psm1',
-      'src\repositories.psm1',
-      'src\agents.psm1',
-      'src\Approvals.psm1',
-      'src\buildDefinitions.psm1',
-      'src\builds.psm1',
-      'src\cloudSubscriptions.psm1',
-      'src\policies.psm1',
-      'src\policyTypes.psm1'
-      'src\pools.psm1',
-      'src\processes.psm1'
-      'src\projects.psm1',
-      'src\queues.psm1',
-      'src\releaseDefinitions.psm1',
-      'src\releases.psm1',
-      'src\serviceendpoints.psm1',
-      'src\serviceendpointTypes.psm1',
-      'src\teams.psm1',
-      'src\profile.psm1',
-      'src\teammembers.psm1',
-      'src\tfvc.psm1',
-      'src\users.psm1',
-      'src\workitemTypes.psm1',
-      'src\workitems.psm1',
-      'src\feeds.psm1',
-      'src\pullrequest.psm1',
-      'src\extensions.psm1')
+   # NestedModules     = @()
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
@@ -231,116 +204,7 @@
    # VariablesToExport = ''
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-   AliasesToExport   = @('Get-ServiceEndpoint',
-      'Add-AzureRMServiceEndpoint',
-      'Remove-ServiceEndpoint',
-      'Add-SonarQubeEndpoint',
-      'Add-KubernetesEndpoint',
-      'Add-ServiceEndpoint',
-      'Update-ServiceEndpoint',
-      'Add-ServiceFabricEndpoint',
-      'Remove-ServiceFabricEndpoint',
-      'Remove-VSTeamServiceFabricEndpoint',
-      'Remove-VSTeamAzureRMServiceEndpoint',
-      'Remove-VSTeamSonarQubeEndpoint',
-      'Remove-AzureRMServiceEndpoint',
-      'Remove-SonarQubeEndpoint',
-      'Get-Build',
-      'Show-Build',
-      'Get-BuildLog',
-      'Get-BuildTag',
-      'Get-BuildArtifact',
-      'Add-Build',
-      'Add-BuildTag',
-      'Remove-Build',
-      'Remove-BuildTag',
-      'Update-Build',
-      'Get-BuildDefinition',
-      'Add-BuildDefinition',
-      'Show-BuildDefinition',
-      'Remove-BuildDefinition',
-      'Show-Approval',
-      'Get-Approval',
-      'Set-Approval',
-      'Get-CloudSubscription',
-      'Get-GitRepository',
-      'Show-GitRepository',
-      'Add-GitRepository',
-      'Remove-GitRepository',
-      'Get-Pool',
-      'Get-Project',
-      'Show-Project',
-      'Update-Project',
-      'Add-Project',
-      'Remove-Project',
-      'Get-Queue',
-      'Get-ReleaseDefinition',
-      'Show-ReleaseDefinition',
-      'Add-ReleaseDefinition',
-      'Remove-ReleaseDefinition',
-      'Get-Release',
-      'Show-Release',
-      'Add-Release',
-      'Remove-Release',
-      'Set-ReleaseStatus',
-      'Add-ReleaseEnvironment',
-      'Get-TeamInfo',
-      'Add-TeamAccount',
-      'Remove-TeamAccount',
-      'Get-TeamOption',
-      'Get-TeamResourceArea',
-      'Clear-DefaultProject',
-      'Set-DefaultProject',
-      'Get-TeamMember',
-      'Get-Team',
-      'Add-Team',
-      'Update-Team',
-      'Remove-Team',
-      'Add-Profile',
-      'Remove-Profile',
-      'Get-Profile',
-      'Set-APIVersion',
-      'gti',
-      'ivr',
-      'Add-User',
-      'Remove-User',
-      'Get-User',
-      'Update-User',
-      'ata',
-      'Set-EnvironmentStatus',
-      'Add-VSTeamReleaseEnvironment',
-      'Get-ServiceEndpointType',
-      'Update-BuildDefinition',
-      'Get-TfvcRootBranch',
-      'Get-TfvcBranch',
-      'Get-WorkItemType',
-      'Add-WorkItem',
-      'Get-WorkItem',
-      'Show-WorkItem',
-      'Get-Policy', 
-      'Get-PolicyType', 
-      'Add-Policy', 
-      'Update-Policy', 
-      'Remove-Policy',
-      'Get-GitRef',
-      'Get-Agent',
-      'Remove-Agent',
-      'Enable-Agent',
-      'Disable-Agent',
-      'Update-Profile',
-      'Get-APIVersion',
-      'Add-NuGetEndpoint',
-      'Get-Feed',
-      'Add-Feed',
-      'Show-Feed',
-      'Remove-Feed',
-      'Get-PullRequest',
-      'Show-PullRequest',
-      'Add-Extension',
-      'Get-Extension',
-      'Update-Extension',
-      'Remove-Extension',
-      'Update-WorkItem')
+   # AliasesToExport   = @()
 
    # DSC resources to export from this module
    # DscResourcesToExport = @()

@@ -6,7 +6,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
-function _applyTypes {
+function _applyTypesToPullRequests {
     param($item)
 
     $item.PSObject.TypeNames.Insert(0, 'Team.PullRequest')
@@ -43,7 +43,7 @@ function Get-VSTeamPullRequest {
             }
 
             foreach ($respItem in $pullRequests) {
-                _applyTypes -item $respItem
+                _applyTypesToPullRequests -item $respItem
             }
 
             Write-Output $pullRequests

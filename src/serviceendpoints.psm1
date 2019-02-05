@@ -4,10 +4,10 @@ Set-StrictMode -Version Latest
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . "$here\common.ps1"
 
-$i = 0
-$x = 1
-$y = 10
-$status = $null
+$iTracking = 0
+$xTracking = 1
+$yTracking = 10
+$statusTracking = $null
 
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
@@ -26,7 +26,7 @@ function _applyTypesToServiceEndpoint {
    }
 }
 
-function _trackProgress {
+function _trackServiceEndpointProgress {
    param(
       [Parameter(Mandatory = $true)]
       [string] $projectName,
@@ -39,33 +39,33 @@ function _trackProgress {
       [string] $msg
    )
 
-   $i = 0
-   $x = 1
-   $y = 10
+   $iTracking = 0
+   $xTracking = 1
+   $yTracking = 10
 
    $isReady = $false
 
    # Track status
    while (-not $isReady) {
-      $status = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
+      $statusTracking = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
          -Version $([VSTeamVersions]::DistributedTask)
 
-      $isReady = $status.isReady;
+      $isReady = $statusTracking.isReady;
 
       if (-not $isReady) {
-         $state = $status.operationStatus.state
+         $state = $statusTracking.operationStatus.state
       
          if ($state -eq "Failed") {
-            throw $status.operationStatus.statusMessage
+            throw $statusTracking.operationStatus.statusMessage
          }
       }
        
       # oscillate back a forth to show progress
-      $i += $x
-      Write-Progress -Activity $title -Status $msg -PercentComplete ($i / $y * 100)
+      $iTracking += $xTracking
+      Write-Progress -Activity $title -Status $msg -PercentComplete ($iTracking / $yTracking * 100)
 
-      if ($i -eq $y -or $i -eq 0) {
-         $x *= -1
+      if ($iTracking -eq $yTracking -or $iTracking -eq 0) {
+         $xTracking *= -1
       }
    }
 }
@@ -506,7 +506,7 @@ function Add-VSTeamServiceEndpoint {
       $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
          -Method Post -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::DistributedTask)
       
-      _trackProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
+      _trackServiceEndpointProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 
       return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $resp.id
    }
@@ -578,7 +578,7 @@ function Update-VSTeamServiceEndpoint {
          $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
             -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::DistributedTask)
       
-         _trackProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
+         _trackServiceEndpointProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
 
          return Get-VSTeamServiceEndpoint -ProjectName $ProjectName -id $id
       }
