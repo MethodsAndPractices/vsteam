@@ -9,12 +9,14 @@
 # The order that the classes files are loaded is important. Instead
 # of an awkward naming convention I added a file that has the load
 # order in it.
-$classOrder = Get-Content "$PSScriptRoot\Classes\classes.json" -Raw | ConvertFrom-Json
+# $classOrder = Get-Content "$PSScriptRoot\Classes\classes.json" -Raw | ConvertFrom-Json
 
-ForEach ($classFile in $classOrder) {
-   Write-Verbose -Message "Importing from $classFile"
-   . "$PSScriptRoot\Classes\$classFile"
-}
+# ForEach ($classFile in $classOrder) {
+#    Write-Verbose -Message "Importing from $classFile"
+#    . "$PSScriptRoot\Classes\$classFile"
+# }
+
+. "$PSScriptRoot\src\teamspsdrive.ps1"
 
 $functionFolders = @('Private', 'Public')
 ForEach ($folder in $functionFolders) {
@@ -44,4 +46,4 @@ if ($null -ne $env:TEAM_PROJECT) {
 [VSTeamVersions]::ModuleVersion = _getModuleVersion
 
 # Load the correct version of the environment variable
-Set-VSTeamAPIVersion -Version $([VSTeamVersions]::Version)
+Set-VSTeamAPIVersion -Target $([VSTeamVersions]::Version)

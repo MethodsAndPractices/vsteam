@@ -16,7 +16,7 @@ function Add-VSTeamAccount {
       [parameter(ParameterSetName = 'Windows')]
       [parameter(ParameterSetName = 'Secure')]
       [Parameter(ParameterSetName = 'Plain')]
-      [ValidateSet('TFS2017', 'TFS2018', 'VSTS')]
+      [ValidateSet('TFS2017', 'TFS2018', 'VSTS', 'AzD')]
       [string] $Version,
 
       [string] $Drive,
@@ -132,7 +132,7 @@ function Add-VSTeamAccount {
       Clear-VSTeamDefaultProject
       _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account -BearerToken $token -Version $Version
 
-      Set-VSTeamAPIVersion -Version (_getVSTeamAPIVersion -Instance $account -Version $Version)
+      Set-VSTeamAPIVersion -Target (_getVSTeamAPIVersion -Instance $account -Version $Version)
 
       if ($Drive) {
          # Assign to null so nothing is writen to output.

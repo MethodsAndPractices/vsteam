@@ -158,7 +158,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -Profile mydemos
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -181,7 +181,7 @@ InModuleScope VSTeam {
             Assert-VerifiableMock
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -200,7 +200,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -219,7 +219,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a https://mydemos.visualstudio.com -pe 12345 -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -238,7 +238,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS -UseBearerToken
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -259,7 +259,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a mydemos -SecurePersonalAccessToken $password -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -284,7 +284,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a mydemos -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -309,7 +309,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a mydemos -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -334,7 +334,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'TFS2017'
+               $Target -eq 'TFS2017'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -359,7 +359,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'TFS2017'
+               $Target -eq 'TFS2017'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -386,7 +386,7 @@ InModuleScope VSTeam {
             Add-VSTeamAccount -a mydemos -pe 12345 -Level User
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -522,13 +522,68 @@ InModuleScope VSTeam {
          }
 
          It 'Should return TFS2018' {
-            Set-VSTeamAPIVersion -Version TFS2018
+            Set-VSTeamAPIVersion -Target TFS2018
             [VSTeamVersions]::Version | Should Be 'TFS2018'
          }
 
          It 'Should VSTS' {
-            Set-VSTeamAPIVersion -Version VSTS
+            Set-VSTeamAPIVersion -Target VSTS
             [VSTeamVersions]::Version | Should Be 'VSTS'
+         }
+
+         It 'Should AzD' {
+            Set-VSTeamAPIVersion -Target AzD
+            [VSTeamVersions]::Version | Should Be 'AzD'
+         }
+
+         It 'Should change just Build'{
+            Set-VSTeamAPIVersion -Service Build -Version '5.0'
+            [VSTeamVersions]::Build | Should Be '5.0'
+         }
+
+         It 'Should change just Git'{
+            Set-VSTeamAPIVersion -Service Git -Version '5.0'
+            [VSTeamVersions]::Git | Should Be '5.0'
+         }
+
+         It 'Should change just Core'{
+            Set-VSTeamAPIVersion -Service Core -Version '5.0'
+            [VSTeamVersions]::Core | Should Be '5.0'
+         }
+
+         It 'Should change just Release'{
+            Set-VSTeamAPIVersion -Service Release -Version '5.0'
+            [VSTeamVersions]::Release | Should Be '5.0'
+         }
+
+         It 'Should change just DistributedTask'{
+            Set-VSTeamAPIVersion -Service DistributedTask -Version '5.0'
+            [VSTeamVersions]::DistributedTask | Should Be '5.0'
+         }
+
+         It 'Should change just Tfvc'{
+            Set-VSTeamAPIVersion -Service Tfvc -Version '5.0'
+            [VSTeamVersions]::Tfvc | Should Be '5.0'
+         }
+
+         It 'Should change just Packaging'{
+            Set-VSTeamAPIVersion -Service Packaging -Version '5.0'
+            [VSTeamVersions]::Packaging | Should Be '5.0'
+         }
+
+         It 'Should change just MemberEntitlementManagement'{
+            Set-VSTeamAPIVersion -Service MemberEntitlementManagement -Version '5.0'
+            [VSTeamVersions]::MemberEntitlementManagement | Should Be '5.0'
+         }
+
+         It 'Should change just ServiceFabricEndpoint'{
+            Set-VSTeamAPIVersion -Service ServiceFabricEndpoint -Version '5.0'
+            [VSTeamVersions]::ServiceFabricEndpoint | Should Be '5.0'
+         }
+
+         It 'Should change just ExtensionsManagement'{
+            Set-VSTeamAPIVersion -Service ExtensionsManagement -Version '5.0'
+            [VSTeamVersions]::ExtensionsManagement | Should Be '5.0'
          }
       }
    }

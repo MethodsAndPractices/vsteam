@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.0.0
+
+**Breaking changes**:
+All the aliases have been removed. If you want to use the old aliases run Set-VSTeamAliases. They were removed due to conflicts with other modules.
+
+The VSTeamVersions class is no longer exported. To set versions you must use Set-VSTeamAPIVersion.
+
+Parameters for Set-VSTeamAPIVersion have been changed. The Version parameter has been re-purposed to set the version of a single service. To set all the version for a particular version of TFS or AzD set use the Target parameter.
+
 ## 5.0.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/129) from [Adam Murray](https://github.com/muzzar78) which included the following:
