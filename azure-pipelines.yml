@@ -24,7 +24,7 @@ phases:
     displayName: 'Install Pester'
 
   - powershell: |
-       Import-Module .\*.psd1
+       Import-Module .\Source\*.psd1
        Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
 
     workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -59,7 +59,7 @@ phases:
     displayName: 'Install Pester'
 
   - powershell: |
-       Import-Module .\*.psd1
+       Import-Module .\Source\*.psd1
        Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
 
     workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -113,7 +113,7 @@ phases:
     displayName: 'Install Pester'
 
   - powershell: |
-       Import-Module .\*.psd1
+       Import-Module .\Source\*.psd1
        Invoke-Pester -Script .\unit -CodeCoverage .\src\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
     displayName: 'Run Unit Tests'
 
