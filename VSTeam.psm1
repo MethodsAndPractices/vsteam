@@ -9,14 +9,12 @@
 # The order that the classes files are loaded is important. Instead
 # of an awkward naming convention I added a file that has the load
 # order in it.
-# $classOrder = Get-Content "$PSScriptRoot\Classes\classes.json" -Raw | ConvertFrom-Json
+$classOrder = Get-Content "$PSScriptRoot\Classes\classes.json" -Raw | ConvertFrom-Json
 
-# ForEach ($classFile in $classOrder) {
-#    Write-Verbose -Message "Importing from $classFile"
-#    . "$PSScriptRoot\Classes\$classFile"
-# }
-
-. "$PSScriptRoot\src\teamspsdrive.ps1"
+ForEach ($classFile in $classOrder) {
+   Write-Verbose -Message "Importing from $classFile"
+   . "$PSScriptRoot\Classes\$classFile"
+}
 
 $functionFolders = @('Private', 'Public')
 ForEach ($folder in $functionFolders) {
