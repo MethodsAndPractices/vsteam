@@ -114,7 +114,7 @@ phases:
 
   - powershell: |
        Import-Module .\Source\*.psd1
-       Invoke-Pester -Script .\unit -CodeCoverage .\src\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
+       Invoke-Pester -Script .\unit -CodeCoverage .\Source\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
     displayName: 'Run Unit Tests'
 
   - task: PublishTestResults@2
