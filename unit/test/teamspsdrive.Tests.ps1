@@ -43,9 +43,9 @@ InModuleScope VSTeam {
    Describe 'TFS 2017 Build Definition' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       Context 'Build Definitions' {
          Mock Get-VSTeamBuildDefinition {
             return @(
@@ -76,9 +76,9 @@ InModuleScope VSTeam {
    Describe 'VSTS Build Definition' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       Context 'Build Definitions' {
          Mock Get-VSTeamBuildDefinition {
             return @(
@@ -127,9 +127,9 @@ InModuleScope VSTeam {
    Describe 'TeamsPSDrive' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       Context 'VSTeamAccount & Projects' {
          Mock Get-VSTeamProject { return [VSTeamProject]::new([PSCustomObject]@{
                   name        = 'TestProject'
@@ -329,7 +329,7 @@ InModuleScope VSTeam {
 
          # $yamlBuild = $buildDefinitions.GetChildItem()[1]
       }
-   
+
       Context 'Releases' {
          Mock Get-VSTeamRelease { return [PSCustomObject]@{
                id                = 1

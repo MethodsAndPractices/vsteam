@@ -42,4 +42,4 @@ Type: String
 
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Set-VSTeamAccount](Set-VSTeamAccount.md)

@@ -41,9 +41,9 @@ InModuleScope VSTeam {
    Describe 'pools' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       Context 'Get-VSTeamPool with no parameters' {
          Mock Invoke-RestMethod { return [PSCustomObject]@{
                count = 1

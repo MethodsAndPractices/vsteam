@@ -242,7 +242,7 @@ InModuleScope VSTeam {
             $actual[0].Type | Should be 'OnPremise'
          }
       }
-   
+
       Context 'Get-VSTeamProfile with old URL' {
          Mock Test-Path { return $true }
          Mock Get-Content { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' }
@@ -253,7 +253,7 @@ InModuleScope VSTeam {
             $actual.URL | Should Be "https://dev.azure.com/test"
          }
       }
-      
+
       Context 'Get-VSTeamProfile with old URL and multiple entries' {
          Mock Test-Path { return $true }
          Mock Get-Content { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"},{"Name":"demo","URL":"https://demo.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' }
@@ -264,7 +264,7 @@ InModuleScope VSTeam {
             $actual.URL | Should Be "https://dev.azure.com/test"
          }
       }
-      
+
       Context 'Update-VSTeamProfile entry does not exist' {
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
@@ -321,9 +321,9 @@ InModuleScope VSTeam {
 
          It 'Should update profile with new URL' {
             Assert-VerifiableMock
-         }         
+         }
       }
-      
+
 
    }
 }

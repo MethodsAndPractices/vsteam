@@ -315,6 +315,10 @@ Removes a service endpoint.
 
 Removes a user from the account.
 
+### [Set-VSTeamAlias](Set-VSTeamAlias.md)
+
+In version 6.0 the default aliases were removed to prevent conflicts with other modules. If you want to use the original aliases you can run this function to restore them.
+
 ### [Set-VSTeamAPIVersion](Set-VSTeamAPIVersion.md)
 
 Sets the API versions to support either TFS2017, TFS2018 or VSTS.

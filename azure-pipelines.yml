@@ -100,7 +100,7 @@ phases:
        # Import each module
        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
 
-       $r = Invoke-ScriptAnalyzer –Path ./src –Recurse | Where-Object severity -eq "Warning"
+       $r = Invoke-ScriptAnalyzer –Path ./Source –Recurse | Where-Object severity -ne "Information"
        $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
 
     displayName: 'Run Static Code Analysis'
@@ -136,13 +136,9 @@ phases:
     displayName: 'Copy Module to Artifacts Folder'
     inputs:
       Contents: |
-       *.psd1
        README.md
        .gitignore
-       en-US\**
-       src\**
-       formats\**
-       types\**
+       Source\**
 
       TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
     condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
@@ -158,7 +154,6 @@ phases:
     displayName: 'Copy Integration Tests Artifacts Folder'
     inputs:
       Contents: |
-       *.psd1
        integration\**
 
       TargetFolder: '$(build.artifactstagingdirectory)/Tests'

@@ -46,6 +46,6 @@ Accept pipeline input: true (ByPropertyName)
 
 ## RELATED LINKS
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Set-VSTeamAccount](Set-VSTeamAccount.md)
 
 [Add-VSTeamFeed](Add-VSTeamFeed.md)

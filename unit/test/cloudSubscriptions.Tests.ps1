@@ -1,17 +1,17 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-   
+
    Describe 'CloudSubscriptions vsts' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
 
       [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
       Context 'Get-VSTeamCloudSubscription' {
-         Mock Invoke-RestMethod { 
+         Mock Invoke-RestMethod {
             return @{value = 'subs'}
          }
 
@@ -28,12 +28,12 @@ InModuleScope VSTeam {
    Describe 'CloudSubscriptions TFS' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       Mock _useWindowsAuthenticationOnPremise { return $true }
       [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
-      
+
       Context 'Get-VSTeamCloudSubscription' {
          Mock Invoke-RestMethod { return @{value = 'subs'}}
 
@@ -48,12 +48,12 @@ InModuleScope VSTeam {
 
       # Must be last because it sets [VSTeamVersions]::Account to $null
       Context '_buildURL handles exception' {
-         
+
          # Arrange
          [VSTeamVersions]::Account = $null
-         
+
          It 'should return approvals' {
-         
+
             # Act
             { _buildURL } | Should Throw
          }

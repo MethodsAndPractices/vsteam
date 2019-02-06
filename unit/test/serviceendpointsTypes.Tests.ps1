@@ -8,9 +8,9 @@ InModuleScope VSTeam {
    Describe 'serviceendpointTypes' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       Context 'Get-VSTeamServiceEndpointTypes' {
          Mock Invoke-RestMethod {
             return Get-Content $sampleFile | ConvertFrom-Json

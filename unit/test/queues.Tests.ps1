@@ -6,9 +6,9 @@ InModuleScope VSTeam {
    Describe 'Queues' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamQueue with no parameters' {
@@ -81,10 +81,10 @@ InModuleScope VSTeam {
          it 'Should return all the queues' {
             Get-VSTeamQueue -projectName project -actionFilter 'None' -queueName 'Hosted'
 
-            # With PowerShell core the order of the query string is not the 
+            # With PowerShell core the order of the query string is not the
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
-            # assume the order. 
+            # assume the order.
             # The general string should look like this:
             # "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)&actionFilter=None&queueName=Hosted"
 

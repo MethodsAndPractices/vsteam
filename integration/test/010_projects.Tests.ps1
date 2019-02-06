@@ -37,7 +37,7 @@ InModuleScope VSTeam {
          # The way we search for the account is different for VSTS and TFS
          $search = "*$acct*"
          if ($api -eq 'VSTS') {
-            $search = "*//$acct.*"  
+            $search = "*//$acct.*"
          }
 
          $oAcct = $null
@@ -51,7 +51,7 @@ InModuleScope VSTeam {
          }
 
          Add-VSTeamProfile -Account $acct -PersonalAccessToken $pat -Version $api -Name intTests
-         Add-VSTeamAccount -Profile intTests -Drive int
+         Set-VSTeamAccount -Profile intTests -Drive int
       }
 
       AfterAll {
@@ -60,7 +60,7 @@ InModuleScope VSTeam {
 
          if ($oAcct) {
             Add-VSTeamProfile -Account $oAcct -PersonalAccessToken $pat -Version $oVersion -Name $oName
-            Add-VSTeamAccount -Profile $oName
+            Set-VSTeamAccount -Profile $oName
          }
       }
 
@@ -115,7 +115,7 @@ InModuleScope VSTeam {
             Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
          }
 
-         It 'Update-VSTeamProject Should update name' {         
+         It 'Update-VSTeamProject Should update name' {
             Update-VSTeamProject -Name $projectName -NewName $newProjectName -Force
 
             Get-VSTeamProject -Name $newProjectName | Select-Object -ExpandProperty 'Description' | Should Be 'Test Description'
@@ -168,13 +168,13 @@ InModuleScope VSTeam {
          Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
          $project = $repo = Get-VSTeamProject -Name $newProjectName
          $repo = Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
-      
+
          if ($acct -like "http://*") {
             $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Default"}
          }
          else {
             $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Hosted"}
-         } 
+         }
 
          $srcBuildDef = Get-Content $(Join-Path $PSScriptRoot "010_builddef_1.json") | ConvertFrom-Json
          $srcBuildDef.project.id = $project.Id
@@ -259,10 +259,10 @@ InModuleScope VSTeam {
       Context 'Agent full exercise' {
          It 'Get-VSTeamAgent Should return agents' {
             if ($acct -like "http://*") {
-               $pool = (Get-VSTeamPool)[0]            
+               $pool = (Get-VSTeamPool)[0]
             }
             else {
-               # Grabbing the first hosted pool on VSTS. Skipping index 0 which is 
+               # Grabbing the first hosted pool on VSTS. Skipping index 0 which is
                # default and is empty on some accounts
                $pool = (Get-VSTeamPool)[1]
             }
@@ -408,7 +408,7 @@ InModuleScope VSTeam {
          }
       }
 
-   
+
       Context 'Teams full exercise' {
          It 'Get-VSTeam ByName Should return Teams' {
             Get-VSTeam -ProjectName $newProjectName -Name "$newProjectName Team" | Should Not Be $null

@@ -28,8 +28,8 @@ InModuleScope VSTeam {
          $pat = $env:PAT
          $acct = $env:ACCT
          $api = $env:API_VERSION
-         Add-VSTeamAccount -a $acct -pe $pat -version $api
-         
+         Set-VSTeamAccount -a $acct -pe $pat -version $api
+
          Get-VSTeamProject | Remove-VSTeamProject -Force
       }
 
@@ -45,15 +45,15 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts' {
+      Context 'Set-VSTeamAccount vsts' {
          It 'should set env at process level' {
             $pat = $env:PAT
             $acct = $env:ACCT
             $api = $env:API_VERSION
-            Add-VSTeamAccount -a $acct -pe $pat -version $api
+            Set-VSTeamAccount -a $acct -pe $pat -version $api
 
             $info = Get-VSTeamInfo
-         
+
             $info.DefaultProject | Should Be $null
 
             if ($acct -like "http://*") {
@@ -72,7 +72,7 @@ InModuleScope VSTeam {
 
             # Assert
             $info = Get-VSTeamInfo
-         
+
             $info.Account | Should Be ''
             $info.DefaultProject | Should Be $null
          }

@@ -4,9 +4,9 @@ InModuleScope VSTeam {
    Describe 'Common' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       Context '_convertSecureStringTo_PlainText' {
          $emptySecureString = ConvertTo-SecureString 'Test String' -AsPlainText -Force
 

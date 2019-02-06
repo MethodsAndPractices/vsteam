@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-   
+
    $singleResult = [PSCustomObject]@{
       path        = "$/MyProject/Master";
       description = 'desc';
@@ -26,7 +26,7 @@ InModuleScope VSTeam {
    Describe 'Get-VSTeamTfvcRootBranch VSTS' -Tag 'unit', 'tfvc', 'vsts' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
 
       [VSTeamVersions]::Account = 'https://dev.azure.com/test'
@@ -105,12 +105,12 @@ InModuleScope VSTeam {
    Describe 'Get-VSTeamTfvcRootBranch TFS' -Tag 'unit', 'tfvc', 'tfs' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
 
       [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
       Mock _useWindowsAuthenticationOnPremise { return $true }
-      
+
       Context 'Get-VSTeamTfvcRootBranch with no parameters and single result' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
@@ -185,9 +185,9 @@ InModuleScope VSTeam {
    Describe 'Get-VSTeamTfvcBranch' -Tag 'unit', 'multi' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       $testCases = @(
          @{ a = 'https://dev.azure.com/test'; t = 'vsts' }
          @{ a = 'http://localhost:8080/tfs/defaultcollection'; t = 'tfs' }
@@ -200,22 +200,22 @@ InModuleScope VSTeam {
 
          [VSTeamVersions]::Account = $a
 
-         Get-VSTeamTfvcBranch -Path $/MyProject/Master 
+         Get-VSTeamTfvcBranch -Path $/MyProject/Master
 
          Assert-MockCalled Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
             $Uri -eq "$([VSTeamVersions]::Account)/_apis/tfvc/branches/$/MyProject/Master?api-version=$([VSTeamVersions]::Tfvc)"
          }
       }
    }
-  
+
    Describe 'Get-VSTeamTfvcBranch VSTS' -Tag 'unit', 'tfvc', 'vsts' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
-      }   
+         $Uri -like "*_apis/projects*"
+      }
 
       [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-      
+
       Context 'Get-VSTeamTfvcBranch with one path' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 
@@ -307,12 +307,12 @@ InModuleScope VSTeam {
    Describe 'Get-VSTeamTfvcBranch TFS' -Tag 'unit', 'tfvc', 'tfs' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
 
       [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
       Mock _useWindowsAuthenticationOnPremise { return $true }
-      
+
       Context 'Get-VSTeamTfvcBranch with one path' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable
 

@@ -14,14 +14,14 @@ InModuleScope VSTeam {
    Describe 'BuildDefinitions' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Show-VSTeamBuildDefinition by ID' {
          Mock Show-Browser { }
-         
+
          it 'should return url for mine' {
             Show-VSTeamBuildDefinition -projectName project -Id 15
 
@@ -33,7 +33,7 @@ InModuleScope VSTeam {
 
       Context 'Show-VSTeamBuildDefinition Mine' {
          Mock Show-Browser { }
-         
+
          it 'should return url for mine' {
             Show-VSTeamBuildDefinition -projectName project -Type Mine
 
@@ -45,7 +45,7 @@ InModuleScope VSTeam {
 
       Context 'Show-VSTeamBuildDefinition XAML' {
          Mock Show-Browser { }
-         
+
          it 'should return url for XAML' {
             Show-VSTeamBuildDefinition -projectName project -Type XAML
 
@@ -99,13 +99,13 @@ InModuleScope VSTeam {
             # Write-Host $([VSTeamVersions]::Build)
             # Write-Host $([VSTeamVersions]::Account)
 
-            return $results2017 
+            return $results2017
          }
 
          It 'should return build definitions' {
             Get-VSTeamBuildDefinition -projectName project
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
@@ -116,13 +116,13 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamBuildDefinition with no parameters 2018' {
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod {
-            return $results2018 
+            return $results2018
          }
 
          It 'should return build definitions' {
             Get-VSTeamBuildDefinition -projectName project
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
@@ -132,13 +132,13 @@ InModuleScope VSTeam {
 
       Context 'Get-VSTeamBuildDefinition with no parameters VSTS' {
          Mock Invoke-RestMethod {
-            return $resultsVSTS 
+            return $resultsVSTS
          }
 
          It 'should return build definitions' {
             Get-VSTeamBuildDefinition -projectName project
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
@@ -148,13 +148,13 @@ InModuleScope VSTeam {
 
       Context 'Get-VSTeamBuildDefinition with no parameters VSTS yaml ' {
          Mock Invoke-RestMethod {
-            return $resultsVSTS 
+            return $resultsVSTS
          }
 
          It 'should return build definitions' {
             Get-VSTeamBuildDefinition -projectName project
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
@@ -164,7 +164,7 @@ InModuleScope VSTeam {
 
       Context 'Get-VSTeamBuildDefinition with type parameter' {
          Mock Invoke-RestMethod {
-            return $resultsVSTS 
+            return $resultsVSTS
          }
 
          It 'should return build definitions by type' {
@@ -266,7 +266,7 @@ InModuleScope VSTeam {
             Remove-VSTeamBuildDefinition -projectName project -id 2 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Method -eq 'Delete' -and 
+               $Method -eq 'Delete' -and
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
@@ -286,7 +286,7 @@ InModuleScope VSTeam {
          }
       }
 
-      # Make sure these test run last as the need differnt 
+      # Make sure these test run last as the need differnt
       # [VSTeamVersions]::Account values
       Context 'Get-VSTeamBuildDefinition with no account' {
          [VSTeamVersions]::Account = $null
@@ -318,10 +318,10 @@ InModuleScope VSTeam {
          [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
          Remove-VSTeamBuildDefinition -projectName project -id 2 -Force
-         
+
          It 'should delete build definition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Method -eq 'Delete' -and 
+               $Method -eq 'Delete' -and
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }
@@ -333,7 +333,7 @@ InModuleScope VSTeam {
          [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
          Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
-         
+
          It 'should update build definition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and

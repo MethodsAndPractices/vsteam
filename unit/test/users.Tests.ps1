@@ -2,14 +2,14 @@ Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   
+
    Describe "Users TFS Errors" {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
-      Context 'Get-VSTeamUser' {  
+
+      Context 'Get-VSTeamUser' {
          Mock _callAPI { throw 'Should not be called' } -Verifiable
 
          It 'Should throw' {
@@ -27,7 +27,7 @@ InModuleScope VSTeam {
    Describe "Users VSTS" {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
 
       . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
@@ -35,15 +35,15 @@ InModuleScope VSTeam {
       # Must be defined or call will throw error
       [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
 
-      Context 'Get-VSTeamUser no parameters' {  
-         Mock  _callAPI { return [PSCustomObject]@{ 
+      Context 'Get-VSTeamUser no parameters' {
+         Mock  _callAPI { return [PSCustomObject]@{
                count = 1
                value = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } }
-            } 
+            }
          }
 
          It 'Should return users' {
-            Get-VSTeamUser 
+            Get-VSTeamUser
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
@@ -52,12 +52,12 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamUser By ID' {  
+      Context 'Get-VSTeamUser By ID' {
          Mock  _callAPI {
             return [PSCustomObject]@{
                accessLevel = [PSCustomObject]@{ }
                email       = 'fake@email.com'
-            } 
+            }
          }
 
          It 'Should return users with projects' {
@@ -72,15 +72,15 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamUser with select for projects' {  
+      Context 'Get-VSTeamUser with select for projects' {
          Mock  _callAPI {
-            return [PSCustomObject]@{ 
+            return [PSCustomObject]@{
                count = 1
-               value = [PSCustomObject]@{ 
+               value = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'fake@email.com'
                }
-            } 
+            }
          }
 
          It 'Should return users with projects' {
@@ -108,7 +108,7 @@ InModuleScope VSTeam {
                email       = 'test@user.com'
                userName    = 'Test User'
                id          = '00000000-0000-0000-0000-000000000000'
-            } 
+            }
          }
 
          Remove-VSTeamUser -UserId '00000000-0000-0000-0000-000000000000' -Force
@@ -134,15 +134,15 @@ InModuleScope VSTeam {
          }
 
          Mock _callAPI {
-            return [PSCustomObject]@{ 
+            return [PSCustomObject]@{
                count = 1
-               value = [PSCustomObject]@{ 
+               value = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'test@user.com'
                   userName    = 'Test User'
                   id          = '00000000-0000-0000-0000-000000000000'
                }
-            } 
+            }
          }
 
          Remove-VSTeamUser -Email 'test@user.com' -Force
@@ -159,14 +159,14 @@ InModuleScope VSTeam {
       }
 
       Context 'Remove-VSTeamUser by invalid email' {
-         Mock _callAPI { return [PSCustomObject]@{ 
+         Mock _callAPI { return [PSCustomObject]@{
                count = 1
-               value = [PSCustomObject]@{ 
+               value = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'test@user.com'
                   id          = '00000000-0000-0000-0000-000000000000'
                }
-            } 
+            }
          }
 
          It 'Should throw' {
@@ -175,14 +175,14 @@ InModuleScope VSTeam {
       }
 
       Context 'Update-VSTeamUser by invalid email' {
-         Mock _callAPI { return [PSCustomObject]@{ 
+         Mock _callAPI { return [PSCustomObject]@{
                count = 1
-               value = [PSCustomObject]@{ 
+               value = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'test@user.com'
                   id          = '00000000-0000-0000-0000-000000000000'
                }
-            } 
+            }
          }
 
          It 'Update User with invalid email should throw' {
@@ -191,14 +191,14 @@ InModuleScope VSTeam {
       }
 
       Context 'Update-VSTeamUser by invalid id' {
-         Mock _callAPI { return [PSCustomObject]@{ 
+         Mock _callAPI { return [PSCustomObject]@{
                count = 1
-               value = [PSCustomObject]@{ 
+               value = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'test@user.com'
                   id          = '00000000-0000-0000-0000-000000000000'
                }
-            } 
+            }
          }
 
          It 'Update User with invalid id should throw' {
@@ -224,7 +224,7 @@ InModuleScope VSTeam {
                }
             }
          }
-   
+
          $expected = $obj | ConvertTo-Json
 
          Mock _callAPI -Verifiable -ParameterFilter {
@@ -241,16 +241,16 @@ InModuleScope VSTeam {
 
       Context 'Update user should update' {
 
-         Mock _callAPI { return [PSCustomObject]@{ 
+         Mock _callAPI { return [PSCustomObject]@{
             count = 1
-            value = [PSCustomObject]@{ 
+            value = [PSCustomObject]@{
                accessLevel = [PSCustomObject]@{
                   accountLicenseType = "Stakeholder"
                 }
                email       = 'test@user.com'
                id          = '00000000-0000-0000-0000-000000000000'
             }
-         } 
+         }
       }
 
          Update-VSTeamUser -License 'Stakeholder' -Email 'test@user.com' -Force

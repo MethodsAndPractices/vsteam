@@ -21,9 +21,9 @@ InModuleScope VSTeam {
    Describe 'agents' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       Context 'Get-VSTeamAgents' {
          Mock Invoke-RestMethod { return [PSCustomObject]@{
                count = 1
@@ -32,7 +32,7 @@ InModuleScope VSTeam {
          }
 
          it 'Should return all the pools' {
-            Get-VSTeamAgent -PoolId 1 
+            Get-VSTeamAgent -PoolId 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/1/agents/?api-version=$([VSTeamVersions]::DistributedTask)"
@@ -48,7 +48,7 @@ InModuleScope VSTeam {
          }
 
          it 'Should return all the pools' {
-            1 | Get-VSTeamAgent 
+            1 | Get-VSTeamAgent
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/1/agents/?api-version=$([VSTeamVersions]::DistributedTask)"

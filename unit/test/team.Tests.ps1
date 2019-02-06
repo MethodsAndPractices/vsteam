@@ -4,7 +4,7 @@ InModuleScope VSTeam {
    Describe 'Invoke-VSTeamRequest' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
 
       Mock Write-Host
@@ -35,9 +35,9 @@ InModuleScope VSTeam {
    Describe 'Team VSTS' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-      
+
       . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
 
       $contents = @"
@@ -106,7 +106,7 @@ InModuleScope VSTeam {
 
       Context 'Get-VSTeamOption' {
          # Set the account to use for testing. A normal user would do this
-         # using the Add-VSTeamAccount function.
+         # using the Set-VSTeamAccount function.
          [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
          Mock Invoke-RestMethod { return @{
@@ -136,26 +136,26 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount invalid profile' {
+      Context 'Set-VSTeamAccount invalid profile' {
          Mock _isOnWindows { return $false }
          Mock Write-Error -Verifiable
          Mock Get-VSTeamProfile { return "[]" | ConvertFrom-Json | ForEach-Object { $_ } }
 
-         Add-VSTeamAccount -Profile notFound
+         Set-VSTeamAccount -Profile notFound
 
          It 'should write error' {
             Assert-VerifiableMock
          }
       }
 
-      Context 'Add-VSTeamAccount profile' {
+      Context 'Set-VSTeamAccount profile' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
          Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -Profile mydemos
+            Set-VSTeamAccount -Profile mydemos
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'VSTS'
@@ -168,7 +168,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount profile and drive' {
+      Context 'Set-VSTeamAccount profile and drive' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
@@ -176,7 +176,7 @@ InModuleScope VSTeam {
          Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -Profile mydemos -Drive mydemos
+            Set-VSTeamAccount -Profile mydemos -Drive mydemos
 
             Assert-VerifiableMock
 
@@ -191,13 +191,13 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts' {
+      Context 'Set-VSTeamAccount vsts' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS
+            Set-VSTeamAccount -a mydemos -pe 12345 -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'VSTS'
@@ -210,13 +210,13 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts (old URL)' {
+      Context 'Set-VSTeamAccount vsts (old URL)' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a https://mydemos.visualstudio.com -pe 12345 -Version VSTS
+            Set-VSTeamAccount -a https://mydemos.visualstudio.com -pe 12345 -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'VSTS'
@@ -229,13 +229,13 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts OAuth' {
+      Context 'Set-VSTeamAccount vsts OAuth' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS -UseBearerToken
+            Set-VSTeamAccount -a mydemos -pe 12345 -Version VSTS -UseBearerToken
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'VSTS'
@@ -248,7 +248,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts with securePersonalAccessToken' {
+      Context 'Set-VSTeamAccount vsts with securePersonalAccessToken' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
@@ -256,7 +256,7 @@ InModuleScope VSTeam {
          It 'should set env at process level' {
             $password = '12345' | ConvertTo-SecureString -AsPlainText -Force
 
-            Add-VSTeamAccount -a mydemos -SecurePersonalAccessToken $password -Version VSTS
+            Set-VSTeamAccount -a mydemos -SecurePersonalAccessToken $password -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'VSTS'
@@ -269,7 +269,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount run as administrator' {
+      Context 'Set-VSTeamAccount run as administrator' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -281,7 +281,7 @@ InModuleScope VSTeam {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345
+            Set-VSTeamAccount -a mydemos -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'VSTS'
@@ -294,7 +294,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount run as normal user' {
+      Context 'Set-VSTeamAccount run as normal user' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -306,7 +306,7 @@ InModuleScope VSTeam {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345
+            Set-VSTeamAccount -a mydemos -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'VSTS'
@@ -319,7 +319,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount TFS from windows' {
+      Context 'Set-VSTeamAccount TFS from windows' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -331,7 +331,7 @@ InModuleScope VSTeam {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
+            Set-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'TFS2017'
@@ -344,7 +344,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount TFS' {
+      Context 'Set-VSTeamAccount TFS' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -356,7 +356,7 @@ InModuleScope VSTeam {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -pe 12345
+            Set-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'TFS2017'
@@ -369,7 +369,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Add-VSTeamAccount at user level on Windows machine' {
+      Context 'Set-VSTeamAccount at user level on Windows machine' {
          # This is only supported on a Windows machine. So we have
          # to Mock the call to _isOnWindows so you can develop on a
          # Mac or Linux machine.
@@ -383,7 +383,7 @@ InModuleScope VSTeam {
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at user level' {
-            Add-VSTeamAccount -a mydemos -pe 12345 -Level User
+            Set-VSTeamAccount -a mydemos -pe 12345 -Level User
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
                $Target -eq 'VSTS'

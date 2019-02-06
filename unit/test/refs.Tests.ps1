@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
-   # using the Add-VSTeamAccount function.
+   # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $results = [PSCustomObject]@{
@@ -21,9 +21,9 @@ InModuleScope VSTeam {
    Describe "Git VSTS" {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-   
+
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Context 'Get-VSTeamGitRef' {

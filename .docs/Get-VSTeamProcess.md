@@ -14,7 +14,7 @@ The list of Processs Templates returned can be controlled by using the top and s
 
 You can also get a single Process Template by name or id.
 
-You must call Add-VSTeamAccount before calling this function.
+You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
@@ -76,6 +76,6 @@ Aliases: ProcessID
 
 ## RELATED LINKS
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Set-VSTeamAccount](Set-VSTeamAccount.md)
 
 [Add-VSTeamProject](Add-VSTeamProject.md)
