@@ -12,7 +12,7 @@ phases:
   steps:
   - powershell: |
        # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\*.psd1
+       $manifest = Import-PowerShellDataFile .\Source\*.psd1
 
        # Install each module
        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
@@ -47,7 +47,7 @@ phases:
   steps:
   - powershell: |
        # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\*.psd1
+       $manifest = Import-PowerShellDataFile .\Source\*.psd1
 
        # Install each module
        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
@@ -82,7 +82,7 @@ phases:
   steps:
   - powershell: |
        # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\*.psd1
+       $manifest = Import-PowerShellDataFile .\Source\*.psd1
 
        # Install each module
        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
@@ -95,7 +95,7 @@ phases:
   - powershell: |
        # Has to happen in this task for it to take effect
        # Load the psd1 file so you can read the required modules and import them
-       $manifest = Import-PowerShellDataFile .\*.psd1
+       $manifest = Import-PowerShellDataFile .\Source\*.psd1
 
        # Import each module
        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
