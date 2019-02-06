@@ -172,7 +172,7 @@ InModuleScope VSTeam {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
-         Mock Write-Host -Verifiable
+         Mock Write-Output -Verifiable
          Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
 
          It 'should set env at process level' {
