@@ -154,6 +154,7 @@ phases:
     displayName: 'Copy Integration Tests Artifacts Folder'
     inputs:
       Contents: |
+       Source\*.psd1
        integration\**
 
       TargetFolder: '$(build.artifactstagingdirectory)/Tests'
