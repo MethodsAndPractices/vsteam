@@ -99,7 +99,7 @@ Required: True
 Position: 1
 ```
 
-### -PAT
+### -SecurePersonalAccessToken
 
 A secured string to capture your personal access token.
 
@@ -109,6 +109,7 @@ To use pat simply omit it from the Set-VSTeamAccount command.
 
 ```yaml
 Type: SecureString
+Aliases: PAT
 Parameter Sets: Secure
 Required: True
 ```

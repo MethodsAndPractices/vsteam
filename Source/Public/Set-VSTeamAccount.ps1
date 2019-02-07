@@ -11,6 +11,7 @@ function Set-VSTeamAccount {
       [string] $PersonalAccessToken,
 
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access or Bearer Token')]
+      [Alias('PAT')]
       [securestring] $SecurePersonalAccessToken,
 
       [parameter(ParameterSetName = 'Windows')]

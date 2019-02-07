@@ -2,6 +2,8 @@
 
 ## 6.0.0
 
+Each function is now broken out into a separate file. The folder structure was changed with the core content moved into the Source folder. All the PSM1's were moved to PS1's files.  There is now a single PSM1 now.
+
 **Breaking changes**:
 All the aliases have been removed. If you want to use the old aliases run Set-VSTeamAlias. They were removed due to conflicts with other modules.
 
@@ -10,6 +12,8 @@ The VSTeamVersions class is no longer exported. To set versions you must use Set
 Parameters for Set-VSTeamAPIVersion have been changed. The Version parameter has been re-purposed to set the version of a single service. To set all the version for a particular version of TFS or AzD set use the Target parameter.
 
 Set-VSTeamAccount as been changed to Set-VSTeamAccount the ata alias is now mapped to Set-VSTeamAccount. To use the alias you must run Set-VSTeamAlias.
+
+Changing the PAT parameter to SecurePersonalAccessToken of Set-VSTeamAccount.
 
 ## 5.0.2
 
