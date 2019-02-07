@@ -29,7 +29,7 @@ You will be prompted for the account name and personal access token.
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
-PS C:\> Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga
+PS C:\> Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrthisisnotreal4uhlh5vgbmgap3mziwnga
 ```
 
 Allows you to provide all the information on the command line.
@@ -53,12 +53,12 @@ Will add the account from the profile provided.
 ### -------------------------- EXAMPLE 5 --------------------------
 
 ```PowerShell
-PS C:\> Set-VSTeamAccount -Profile demonstrations -Drive demo
+PS C:\> Set-VSTeamAccount -Profile demonstrations -Drive demo | Invoke-Expression
 PS C:\> Set-Location demo:
 PS demo:\> Get-ChildItem
 ```
 
-Will add the account from the profile provided and mount a drive named demo that you can navigate like a file system.
+Will add the account from the profile provided and mount a drive named demo that you can navigate like a file system. If you do not pipe to Invoke-Expression you can simply copy and paste the output and execute it.
 
 ### -------------------------- EXAMPLE 6 --------------------------
 

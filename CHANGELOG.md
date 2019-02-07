@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.0.1
+
+Fixing issue with mapping drive.
+
+You can now use Set-VSTeamAccount with Invoke-Expression to switch accounts and map a drive on a single line. i.e.:
+
+Set-VSTeamAccount -Profile Test -Drive t | iex
+
+This will switch to the account in the Test profile and map a drive t: to the account.
+
 ## 6.0.0
 
 Each function is now broken out into a separate file. The folder structure was changed with the core content moved into the Source folder. All the PSM1's were moved to PS1's files.  There is now a single PSM1 now.
