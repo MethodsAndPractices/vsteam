@@ -133,14 +133,15 @@ function Set-VSTeamAccount {
       }
 
       if ($Force -or $pscmdlet.ShouldProcess($Account, "Set Account")) {
-         Clear-VSTeamDefaultProject
+         # Piped to null so callers can pipe to Invoke-Expression to mount the drive on one line.
+         Clear-VSTeamDefaultProject *> $null
          _setEnvironmentVariables -Level $Level -Pat $encodedPat -Acct $account -BearerToken $token -Version $Version
 
          Set-VSTeamAPIVersion -Target (_getVSTeamAPIVersion -Instance $account -Version $Version)
 
          if ($Drive) {
             # Assign to null so nothing is writen to output.
-            Write-Output "`nTo map a drive run the following command:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'`n" -ForegroundColor Black -BackgroundColor Yellow
+            Write-Output "# To map a drive run the following command or pipe to iex:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'"
          }
       }
    }
