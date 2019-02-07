@@ -12,7 +12,7 @@ phases:
   steps:
   - powershell: |
        # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\*.psd1
+       $manifest = Import-PowerShellDataFile .\Source\*.psd1
 
        # Install each module
        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
@@ -24,7 +24,7 @@ phases:
     displayName: 'Install Pester'
 
   - powershell: |
-       Import-Module .\*.psd1
+       Import-Module .\Source\*.psd1
        Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
 
     workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -47,7 +47,7 @@ phases:
   steps:
   - powershell: |
        # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\*.psd1
+       $manifest = Import-PowerShellDataFile .\Source\*.psd1
 
        # Install each module
        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
@@ -59,7 +59,7 @@ phases:
     displayName: 'Install Pester'
 
   - powershell: |
-       Import-Module .\*.psd1
+       Import-Module .\Source\*.psd1
        Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
 
     workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -82,7 +82,7 @@ phases:
   steps:
   - powershell: |
        # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\*.psd1
+       $manifest = Import-PowerShellDataFile .\Source\*.psd1
 
        # Install each module
        $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
@@ -95,12 +95,12 @@ phases:
   - powershell: |
        # Has to happen in this task for it to take effect
        # Load the psd1 file so you can read the required modules and import them
-       $manifest = Import-PowerShellDataFile .\*.psd1
+       $manifest = Import-PowerShellDataFile .\Source\*.psd1
 
        # Import each module
        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
 
-       $r = Invoke-ScriptAnalyzer –Path ./src –Recurse | Where-Object severity -eq "Warning"
+       $r = Invoke-ScriptAnalyzer –Path ./Source –Recurse | Where-Object severity -ne "Information"
        $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
 
     displayName: 'Run Static Code Analysis'
@@ -113,8 +113,8 @@ phases:
     displayName: 'Install Pester'
 
   - powershell: |
-       Import-Module .\*.psd1
-       Invoke-Pester -Script .\unit -CodeCoverage .\src\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
+       Import-Module .\Source\*.psd1
+       Invoke-Pester -Script .\unit -CodeCoverage .\Source\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
     displayName: 'Run Unit Tests'
 
   - task: PublishTestResults@2
@@ -136,13 +136,9 @@ phases:
     displayName: 'Copy Module to Artifacts Folder'
     inputs:
       Contents: |
-       *.psd1
        README.md
        .gitignore
-       en-US\**
-       src\**
-       formats\**
-       types\**
+       Source\**
 
       TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
     condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
@@ -158,7 +154,7 @@ phases:
     displayName: 'Copy Integration Tests Artifacts Folder'
     inputs:
       Contents: |
-       *.psd1
+       Source\*.psd1
        integration\**
 
       TargetFolder: '$(build.artifactstagingdirectory)/Tests'

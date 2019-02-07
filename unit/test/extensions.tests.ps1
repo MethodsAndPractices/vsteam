@@ -1,9 +1,9 @@
 Set-StrictMode -Version Latest
 
-InModuleScope extensions {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    Describe 'Extension' {
-     
+
       $results = [PSCustomObject]@{
          count = 1
          value = [PSCustomObject]@{
@@ -20,7 +20,7 @@ InModuleScope extensions {
             installState    = [PSCustomObject]@{
                flags       = 'none'
                lastUpdated = '2018-10-09T11:26:47.187Z'
-            }   
+            }
          }
       }
 
@@ -38,9 +38,9 @@ InModuleScope extensions {
          installState    = [PSCustomObject]@{
             flags       = 'none'
             lastUpdated = '2018-10-09T11:26:47.187Z'
-         }            
-      }  
-      
+         }
+      }
+
       Context 'Get-VSTeamExtension' {
          BeforeAll {
             $env:Team_TOKEN = '1234'
@@ -54,7 +54,7 @@ InModuleScope extensions {
             Mock  _callAPI { return $results }
 
             Get-VSTeamExtension
-   
+
             Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
                $Method -eq 'Get' -and
                $subDomain -eq 'extmgmt' -and
@@ -67,7 +67,7 @@ InModuleScope extensions {
             Mock  _callAPI { return $results }
 
             Get-VSTeamExtension -IncludeInstallationIssues -IncludeDisabledExtensions -IncludeErrors
-   
+
             Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
                $Method -eq 'Get' -and
                $subDomain -eq 'extmgmt' -and
@@ -83,7 +83,7 @@ InModuleScope extensions {
             Mock  _callAPI { return $singleResult }
 
             Get-VSTeamExtension -PublisherId test -ExtensionId test
-   
+
             Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
                $Method -eq 'Get' -and
                $subDomain -eq 'extmgmt' -and
@@ -92,7 +92,7 @@ InModuleScope extensions {
             }
          }
       }
-   
+
       Context 'Add-VSTeamExtension without version' {
          BeforeAll {
             $env:Team_TOKEN = '1234'
@@ -102,8 +102,8 @@ InModuleScope extensions {
             $env:TEAM_TOKEN = $null
          }
 
-         Mock _callAPI { return $singleResult }      
-      
+         Mock _callAPI { return $singleResult }
+
          It 'Should add an extension without version' {
             Add-VSTeamExtension -PublisherId 'test' -ExtensionId 'test'
 
@@ -111,7 +111,7 @@ InModuleScope extensions {
                $Method -eq 'Get' -and
                $subDomain -eq 'extmgmt' -and
                $version -eq [VSTeamVersions]::ExtensionsManagement -and
-               $uri 
+               $uri
                $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
             }
          }
@@ -126,11 +126,11 @@ InModuleScope extensions {
             $env:TEAM_TOKEN = $null
          }
 
-         Mock _callAPI { return $singleResult }      
-      
+         Mock _callAPI { return $singleResult }
+
          It 'Should add an extension with version' {
             Add-VSTeamExtension -PublisherId 'test' -ExtensionId 'test' -Version '1.0.0'
-    
+
             Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
                $Method -eq 'Get' -and
                $subDomain -eq 'extmgmt' -and
@@ -150,7 +150,7 @@ InModuleScope extensions {
          }
 
          Mock _callAPI { return $singleResult }
-      
+
          It 'Should add an extension without version' {
             Update-VSTeamExtension -PublisherId 'test' -ExtensionId 'test' -ExtensionState disabled -Force
 
@@ -159,7 +159,7 @@ InModuleScope extensions {
                $subDomain -eq 'extmgmt' -and
                $version -eq [VSTeamVersions]::ExtensionsManagement
                $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
-            }       
+            }
          }
       }
 
@@ -173,7 +173,7 @@ InModuleScope extensions {
          }
 
          Mock _callAPI { return $singleResult }
-   
+
          It 'Should remove an extension' {
             Remove-VSTeamExtension -PublisherId 'test' -ExtensionId 'test' -Force
 
@@ -182,7 +182,7 @@ InModuleScope extensions {
                $subDomain -eq 'extmgmt' -and
                $version -eq [VSTeamVersions]::ExtensionsManagement
                $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
-            }       
+            }
          }
       }
    }

@@ -1,21 +1,21 @@
 Set-StrictMode -Version Latest
 
-# The InModuleScope command allows you to perform white-box unit testing on the 
+# The InModuleScope command allows you to perform white-box unit testing on the
 # internal (non-exported) code of a Script Module.
-InModuleScope workitemTypes {
+InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
-   # using the Add-VSTeamAccount function.
+   # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'workitemTypes' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-         
+
       # Load the mocks to create the project name dynamic parameter
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"      
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Context 'Get-WorkItemTypes' {
          $obj = @{
@@ -31,7 +31,7 @@ InModuleScope workitemTypes {
          Mock Invoke-RestMethod {
             return ConvertTo-Json $obj
          }
-         
+
          It 'Should return all work item types' {
             Get-VSTeamWorkItemType -ProjectName test
 
@@ -56,7 +56,7 @@ InModuleScope workitemTypes {
          It 'Should return 1 work item type' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
             Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
-         
+
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
             }
@@ -78,7 +78,7 @@ InModuleScope workitemTypes {
          It 'Should return 1 work item type' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
-         
+
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
             }

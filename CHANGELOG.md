@@ -1,5 +1,20 @@
 # Changelog
 
+## 6.0.0
+
+Each function is now broken out into a separate file. The folder structure was changed with the core content moved into the Source folder. All the PSM1's were moved to PS1's files.  There is now a single PSM1 now.
+
+**Breaking changes**:
+All the aliases have been removed. If you want to use the old aliases run Set-VSTeamAlias. They were removed due to conflicts with other modules.
+
+The VSTeamVersions class is no longer exported. To set versions you must use Set-VSTeamAPIVersion.
+
+Parameters for Set-VSTeamAPIVersion have been changed. The Version parameter has been re-purposed to set the version of a single service. To set all the version for a particular version of TFS or AzD set use the Target parameter.
+
+Set-VSTeamAccount as been changed to Set-VSTeamAccount the ata alias is now mapped to Set-VSTeamAccount. To use the alias you must run Set-VSTeamAlias.
+
+Changing the PAT parameter to SecurePersonalAccessToken of Set-VSTeamAccount.
+
 ## 5.0.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/129) from [Adam Murray](https://github.com/muzzar78) which included the following:
@@ -243,7 +258,7 @@ Huge review of the docs and added support for bearer auth.
 Bearer auth will allow you to use the OAuth token created by VSTS during your build and release and not have to create a PAT. Just check the 'Allow scripts to access OAuth token' option on your phase. Then you can add an account by using the -UseBearerToken switch and passing in the $(System.AccessToken) variable.
 
 ```PowerShell
-Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 ```
 
 The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.
@@ -379,13 +394,13 @@ The module now has a dependency on SHiPS for PSDrive support.
 You must be running 6.0.0-rc or later on Mac and Linux.
 You must be running 5.1.16299.64 or later on Windows.
 
-Added drive support created by [Stefan Stranger](https://github.com/stefanstranger). You can now use the -Drive parameter of Add-VSTeamAccount to mount a PSDrive to your account.
+Added drive support created by [Stefan Stranger](https://github.com/stefanstranger). You can now use the -Drive parameter of Set-VSTeamAccount to mount a PSDrive to your account.
 
 You can now tab complete your profiles.
 
 ## 1.0.5
 
-Added support for Profiles. Now you can store different accounts and PATS as a profile using Add-VSTeamProfile. Then you can call Add-VSTeamAccount with the -Profile parameter and the PAT will be read from the profile. This prevents you having to remember the PAT to switch between accounts. Profiles also store the API version to use with the account.
+Added support for Profiles. Now you can store different accounts and PATS as a profile using Add-VSTeamProfile. Then you can call Set-VSTeamAccount with the -Profile parameter and the PAT will be read from the profile. This prevents you having to remember the PAT to switch between accounts. Profiles also store the API version to use with the account.
 
 Added $Global:VSTeamVersionTable so you can experiment with different versions of the VSTS/TFS APIs. The variable contains the following:
 

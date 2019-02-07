@@ -84,6 +84,6 @@ Position: 3
 
 ## RELATED LINKS
 
-[Update-VSTeamAccount](Add-VSTeamAccount.md)
+[Update-VSTeamAccount](Set-VSTeamAccount.md)
 
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)

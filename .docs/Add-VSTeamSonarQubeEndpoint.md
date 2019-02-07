@@ -61,7 +61,7 @@ A secured string to capture your personal access token.
 
 This will allow you to provide your personal access token without displaying it in plain text.
 
-To use pat simply omit it from the Add-VSTeamAccount command.
+To use pat simply omit it from the Set-VSTeamAccount command.
 
 ```yaml
 Type: SecureString

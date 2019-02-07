@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope pullrequest {
+InModuleScope VSTeam {
 
     Describe 'Pull Requests' {
         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
@@ -30,8 +30,8 @@ InModuleScope pullrequest {
                 Mock Show-Browser
 
                 Show-VSTeamPullRequest -Id 1
-    
-                Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter { 
+
+                Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
                     $url -eq "$([VSTeamVersions]::Account)/testproject/_git/testreponame/pullrequest/1"
                 }
             }
@@ -98,7 +98,7 @@ InModuleScope pullrequest {
             }
 
             It 'Get-VSTeamPullRequest Postivite Votes should be Approved Status' {
-                Mock Invoke-RestMethod { 
+                Mock Invoke-RestMethod {
                     $result = $singleResult
                     $result.reviewers.vote = 10
                     return $result
@@ -110,7 +110,7 @@ InModuleScope pullrequest {
             }
 
             It 'Get-VSTeamPullRequest Negative Votes should be Rejected Status' {
-                Mock Invoke-RestMethod { 
+                Mock Invoke-RestMethod {
                     $result = $singleResult
                     $result.reviewers.vote = -10
                     return $result

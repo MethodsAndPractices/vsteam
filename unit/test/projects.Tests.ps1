@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope projects {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'Project' {
@@ -9,7 +9,7 @@ InModuleScope projects {
 
       Context 'Show-VSTeamProject by ID' {
          Mock Show-Browser
-         
+
          It 'Show call start' {
             Show-VSTeamProject -Id 123456
 

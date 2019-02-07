@@ -51,4 +51,4 @@ This causes issues with the ConvertFrom-Json CmdLet.  Therefore, all "": are rep
 
 ## RELATED LINKS
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Set-VSTeamAccount](Set-VSTeamAccount.md)

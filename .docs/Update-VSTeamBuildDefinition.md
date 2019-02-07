@@ -12,7 +12,7 @@
 
 Reads a JSON file off disk and uses that file to update an existing build definition in the provided project.
 
-You must call Add-VSTeamAccount before calling this function.
+You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 

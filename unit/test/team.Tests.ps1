@@ -1,10 +1,10 @@
 Set-StrictMode -Version Latest
 
-InModuleScope team {
+InModuleScope VSTeam {
    Describe 'Invoke-VSTeamRequest' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
 
       Mock Write-Host
@@ -35,9 +35,9 @@ InModuleScope team {
    Describe 'Team VSTS' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
-      
+
       . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
 
       $contents = @"
@@ -106,7 +106,7 @@ InModuleScope team {
 
       Context 'Get-VSTeamOption' {
          # Set the account to use for testing. A normal user would do this
-         # using the Add-VSTeamAccount function.
+         # using the Set-VSTeamAccount function.
          [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
          Mock Invoke-RestMethod { return @{
@@ -136,29 +136,29 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount invalid profile' {
+      Context 'Set-VSTeamAccount invalid profile' {
          Mock _isOnWindows { return $false }
          Mock Write-Error -Verifiable
          Mock Get-VSTeamProfile { return "[]" | ConvertFrom-Json | ForEach-Object { $_ } }
 
-         Add-VSTeamAccount -Profile notFound
+         Set-VSTeamAccount -Profile notFound
 
          It 'should write error' {
             Assert-VerifiableMock
          }
       }
 
-      Context 'Add-VSTeamAccount profile' {
+      Context 'Set-VSTeamAccount profile' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
          Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -Profile mydemos
+            Set-VSTeamAccount -Profile mydemos
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -168,20 +168,20 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount profile and drive' {
+      Context 'Set-VSTeamAccount profile and drive' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
-         Mock Write-Host -Verifiable
+         Mock Write-Output -Verifiable
          Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -Profile mydemos -Drive mydemos
+            Set-VSTeamAccount -Profile mydemos -Drive mydemos
 
             Assert-VerifiableMock
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -191,16 +191,16 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts' {
+      Context 'Set-VSTeamAccount vsts' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS
+            Set-VSTeamAccount -a mydemos -pe 12345 -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -210,16 +210,16 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts (old URL)' {
+      Context 'Set-VSTeamAccount vsts (old URL)' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a https://mydemos.visualstudio.com -pe 12345 -Version VSTS
+            Set-VSTeamAccount -a https://mydemos.visualstudio.com -pe 12345 -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -229,16 +229,16 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts OAuth' {
+      Context 'Set-VSTeamAccount vsts OAuth' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345 -Version VSTS -UseBearerToken
+            Set-VSTeamAccount -a mydemos -pe 12345 -Version VSTS -UseBearerToken
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -248,7 +248,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount vsts with securePersonalAccessToken' {
+      Context 'Set-VSTeamAccount vsts with securePersonalAccessToken' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
@@ -256,10 +256,10 @@ InModuleScope team {
          It 'should set env at process level' {
             $password = '12345' | ConvertTo-SecureString -AsPlainText -Force
 
-            Add-VSTeamAccount -a mydemos -SecurePersonalAccessToken $password -Version VSTS
+            Set-VSTeamAccount -a mydemos -SecurePersonalAccessToken $password -Version VSTS
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -269,7 +269,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount run as administrator' {
+      Context 'Set-VSTeamAccount run as administrator' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -281,10 +281,10 @@ InModuleScope team {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345
+            Set-VSTeamAccount -a mydemos -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -294,7 +294,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount run as normal user' {
+      Context 'Set-VSTeamAccount run as normal user' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -306,10 +306,10 @@ InModuleScope team {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a mydemos -pe 12345
+            Set-VSTeamAccount -a mydemos -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -319,7 +319,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount TFS from windows' {
+      Context 'Set-VSTeamAccount TFS from windows' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -331,10 +331,10 @@ InModuleScope team {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
+            Set-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -UseWindowsAuthentication
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'TFS2017'
+               $Target -eq 'TFS2017'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -344,7 +344,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount TFS' {
+      Context 'Set-VSTeamAccount TFS' {
          # I have to write both test just in case the actually
          # start the PowerShell window as Admin or not. If I
          # don't write both of these I will get different code
@@ -356,10 +356,10 @@ InModuleScope team {
          Mock _setEnvironmentVariables
 
          It 'should set env at process level' {
-            Add-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -pe 12345
+            Set-VSTeamAccount -a http://localhost:8080/tfs/defaultcollection -pe 12345
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'TFS2017'
+               $Target -eq 'TFS2017'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -369,7 +369,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Add-VSTeamAccount at user level on Windows machine' {
+      Context 'Set-VSTeamAccount at user level on Windows machine' {
          # This is only supported on a Windows machine. So we have
          # to Mock the call to _isOnWindows so you can develop on a
          # Mac or Linux machine.
@@ -383,10 +383,10 @@ InModuleScope team {
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at user level' {
-            Add-VSTeamAccount -a mydemos -pe 12345 -Level User
+            Set-VSTeamAccount -a mydemos -pe 12345 -Level User
 
             Assert-MockCalled Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Version -eq 'VSTS'
+               $Target -eq 'VSTS'
             }
 
             # Make sure set env vars was called with the correct parameters
@@ -396,13 +396,13 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount run as administrator' {
+      Context 'Remove-VSTeamAccount run as administrator' {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $true }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at process level' {
-            Remove-TeamAccount
+            Remove-VSTeamAccount
 
             # Assert
             # Make sure set env vars was called with the correct parameters
@@ -412,14 +412,14 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount run as normal user' {
+      Context 'Remove-VSTeamAccount run as normal user' {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $false }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at process level' {
             # Act
-            Remove-TeamAccount
+            Remove-VSTeamAccount
 
             # Assert
             # Make sure set env vars was called with the correct parameters
@@ -429,13 +429,13 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount with no arguments' {
+      Context 'Remove-VSTeamAccount with no arguments' {
          Mock _isOnWindows { return $false }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at process level' {
             # Act
-            Remove-TeamAccount
+            Remove-VSTeamAccount
 
             # Assert
             # Make sure set env vars was called with the correct parameters
@@ -445,14 +445,14 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount at user level' {
+      Context 'Remove-VSTeamAccount at user level' {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $false }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at user level' {
             # Act
-            Remove-TeamAccount -Level User
+            Remove-VSTeamAccount -Level User
 
             # Assert
             # Make sure set env vars was called with the correct parameters
@@ -462,14 +462,14 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount at all levels as administrator' {
+      Context 'Remove-VSTeamAccount at all levels as administrator' {
          Mock _testAdministrator { return $true }
          Mock _isOnWindows { return $true }
          Mock _clearEnvironmentVariables
 
          It 'should clear env at all levels' {
             # Act
-            Remove-TeamAccount -Level All
+            Remove-VSTeamAccount -Level All
 
             # Assert
             Assert-MockCalled _clearEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -486,7 +486,7 @@ InModuleScope team {
          }
       }
 
-      Context 'Remove-TeamAccount at all levels as normal user' {
+      Context 'Remove-VSTeamAccount at all levels as normal user' {
          Mock _testAdministrator { return $false }
          Mock _isOnWindows { return $true }
          Mock Write-Warning
@@ -494,7 +494,7 @@ InModuleScope team {
 
          It 'should clear env at all levels' {
             # Act
-            Remove-TeamAccount -Level All
+            Remove-VSTeamAccount -Level All
 
             # Assert
             Assert-MockCalled _clearEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -522,13 +522,68 @@ InModuleScope team {
          }
 
          It 'Should return TFS2018' {
-            Set-VSTeamAPIVersion -Version TFS2018
+            Set-VSTeamAPIVersion -Target TFS2018
             [VSTeamVersions]::Version | Should Be 'TFS2018'
          }
 
          It 'Should VSTS' {
-            Set-VSTeamAPIVersion -Version VSTS
+            Set-VSTeamAPIVersion -Target VSTS
             [VSTeamVersions]::Version | Should Be 'VSTS'
+         }
+
+         It 'Should AzD' {
+            Set-VSTeamAPIVersion -Target AzD
+            [VSTeamVersions]::Version | Should Be 'AzD'
+         }
+
+         It 'Should change just Build'{
+            Set-VSTeamAPIVersion -Service Build -Version '5.0'
+            [VSTeamVersions]::Build | Should Be '5.0'
+         }
+
+         It 'Should change just Git'{
+            Set-VSTeamAPIVersion -Service Git -Version '5.0'
+            [VSTeamVersions]::Git | Should Be '5.0'
+         }
+
+         It 'Should change just Core'{
+            Set-VSTeamAPIVersion -Service Core -Version '5.0'
+            [VSTeamVersions]::Core | Should Be '5.0'
+         }
+
+         It 'Should change just Release'{
+            Set-VSTeamAPIVersion -Service Release -Version '5.0'
+            [VSTeamVersions]::Release | Should Be '5.0'
+         }
+
+         It 'Should change just DistributedTask'{
+            Set-VSTeamAPIVersion -Service DistributedTask -Version '5.0'
+            [VSTeamVersions]::DistributedTask | Should Be '5.0'
+         }
+
+         It 'Should change just Tfvc'{
+            Set-VSTeamAPIVersion -Service Tfvc -Version '5.0'
+            [VSTeamVersions]::Tfvc | Should Be '5.0'
+         }
+
+         It 'Should change just Packaging'{
+            Set-VSTeamAPIVersion -Service Packaging -Version '5.0'
+            [VSTeamVersions]::Packaging | Should Be '5.0'
+         }
+
+         It 'Should change just MemberEntitlementManagement'{
+            Set-VSTeamAPIVersion -Service MemberEntitlementManagement -Version '5.0'
+            [VSTeamVersions]::MemberEntitlementManagement | Should Be '5.0'
+         }
+
+         It 'Should change just ServiceFabricEndpoint'{
+            Set-VSTeamAPIVersion -Service ServiceFabricEndpoint -Version '5.0'
+            [VSTeamVersions]::ServiceFabricEndpoint | Should Be '5.0'
+         }
+
+         It 'Should change just ExtensionsManagement'{
+            Set-VSTeamAPIVersion -Service ExtensionsManagement -Version '5.0'
+            [VSTeamVersions]::ExtensionsManagement | Should Be '5.0'
          }
       }
    }

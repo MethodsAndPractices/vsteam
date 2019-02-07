@@ -14,7 +14,7 @@ The list of projects returned can be controlled by using the stateFilter, top an
 
 You can also get a single project by name or id.
 
-You must call Add-VSTeamAccount before calling this function.
+You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
@@ -101,7 +101,7 @@ Parameter Sets: ByID
 
 ## RELATED LINKS
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Set-VSTeamAccount](Set-VSTeamAccount.md)
 
 [Add-VSTeamProject](Add-VSTeamProject.md)
 

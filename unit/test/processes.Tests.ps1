@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-InModuleScope processes {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe 'Process' {
@@ -84,7 +84,7 @@ InModuleScope processes {
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/_apis/process/processes/*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" 
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
             }
          }
       }
@@ -99,7 +99,7 @@ InModuleScope processes {
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/_apis/process/processes/*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" 
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
             }
          }
       }

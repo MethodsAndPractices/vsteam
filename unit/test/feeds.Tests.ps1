@@ -1,14 +1,14 @@
 Set-StrictMode -Version Latest
 
-InModuleScope feeds {
+InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   
+
    $results = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
 
    Describe 'Feeds' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*" 
+         $Uri -like "*_apis/projects*"
       }
 
       Context 'Remove-VSTeamFeed' {
@@ -19,12 +19,12 @@ InModuleScope feeds {
             Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000' -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Method -eq 'Delete' -and 
+               $Method -eq 'Delete' -and
                $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::packaging)"
             }
          }
       }
-   
+
       Context 'Get-VSTeamFeed with no parameters' {
          [VSTeamVersions]::Packaging = '4.0'
          Mock Invoke-RestMethod { return $results }
@@ -53,9 +53,9 @@ InModuleScope feeds {
 
       Context 'Add-VSTeamFeed with description' {
          [VSTeamVersions]::Packaging = '4.0'
-         Mock Invoke-RestMethod { 
+         Mock Invoke-RestMethod {
             # Write-Host "$args"
-            return $results.value[0] 
+            return $results.value[0]
          }
 
          it 'Should add Feed' {
@@ -72,9 +72,9 @@ InModuleScope feeds {
 
       Context 'Add-VSTeamFeed with upstream sources' {
          [VSTeamVersions]::Packaging = '4.0'
-         Mock Invoke-RestMethod { 
+         Mock Invoke-RestMethod {
             # Write-Host "$args"
-            return $results.value[0] 
+            return $results.value[0]
          }
 
          it 'Should add Feed' {
@@ -92,7 +92,7 @@ InModuleScope feeds {
 
       Context 'Show-VSTeamFeed by name' {
          Mock Show-Browser
-         
+
          It 'Show call start' {
             Show-VSTeamFeed -Name module
 
@@ -102,7 +102,7 @@ InModuleScope feeds {
 
       Context 'Show-VSTeamFeed by id' {
          Mock Show-Browser
-         
+
          It 'Show call start' {
             Show-VSTeamFeed -Id '00000000-0000-0000-0000-000000000000'
 
@@ -112,10 +112,10 @@ InModuleScope feeds {
 
       Context 'Get-VSTeamFeed on TFS'{
          [VSTeamVersions]::Packaging = ''
-         
+
          it 'Should throw' {
             { Get-VSTeamFeed } | Should throw
          }
-      }      
+      }
    }
 }
