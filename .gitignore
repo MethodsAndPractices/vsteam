@@ -5,7 +5,8 @@
 test/sample.txt
 /src/.vs
 /node_modules
-/docs
+/docs/files.md
+/docs/index.md
 integration/prime.ps1
 /Debugscript.txt
 .docs/files.md
