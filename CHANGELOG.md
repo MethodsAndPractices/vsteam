@@ -21,7 +21,7 @@ The VSTeamVersions class is no longer exported. To set versions you must use Set
 
 Parameters for Set-VSTeamAPIVersion have been changed. The Version parameter has been re-purposed to set the version of a single service. To set all the version for a particular version of TFS or AzD set use the Target parameter.
 
-Set-VSTeamAccount as been changed to Set-VSTeamAccount the ata alias is now mapped to Set-VSTeamAccount. To use the alias you must run Set-VSTeamAlias.
+Add-VSTeamAccount has been changed to Set-VSTeamAccount the ata alias is now mapped to Set-VSTeamAccount. To use the alias you must run Set-VSTeamAlias.
 
 Changing the PAT parameter to SecurePersonalAccessToken of Set-VSTeamAccount.
 
