@@ -17,11 +17,6 @@ Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery
 
 Adds a team to a team project.
 
-### [Add-VSTeamAccount](Add-VSTeamAccount.md)
-
-Stores your account name and personal access token for use with the other
-functions in this module.
-
 ### [Add-VSTeamAzureRMServiceEndpoint](Add-VSTeamAzureRMServiceEndpoint.md)
 
 Adds a new Azure Resource Manager service endpoint.
@@ -314,6 +309,11 @@ Removes a service endpoint.
 ### [Remove-VSTeamUser](Remove-VSTeamUser.md)
 
 Removes a user from the account.
+
+### [Set-VSTeamAccount](Set-VSTeamAccount.md)
+
+Stores your account name and personal access token for use with the other
+functions in this module.
 
 ### [Set-VSTeamAlias](Set-VSTeamAlias.md)
 

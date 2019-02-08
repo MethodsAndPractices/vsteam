@@ -33,4 +33,4 @@ This will open a browser to the TFS or VSTS site
 
 ## RELATED LINKS
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Set-VSTeamAccount](Set-VSTeamAccount.md)

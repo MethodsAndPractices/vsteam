@@ -33,6 +33,6 @@ This will display all the areas of supported APIs for your account.
 
 ## RELATED LINKS
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Set-VSTeamAccount](Set-VSTeamAccount.md)
 
 [Add-VSTeamOption](Add-VSTeamOption.md)

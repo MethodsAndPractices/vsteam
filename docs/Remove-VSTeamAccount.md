@@ -11,7 +11,7 @@ Clears your default project, account name and personal access token.
 
 ## DESCRIPTION
 
-Clears the environment variables that hold your default project, account, bearer token and personal access token. You have to run Add-VSTeamAccount again before calling any other functions.
+Clears the environment variables that hold your default project, account, bearer token and personal access token. You have to run Set-VSTeamAccount again before calling any other functions.
 
 To remove from the Machine level you must be running PowerShell as administrator.
 
@@ -51,4 +51,4 @@ Type: SwitchParameter
 
 ## RELATED LINKS
 
-[Add-VSTeamAccount](Add-VSTeamAccount.md)
+[Set-VSTeamAccount](Set-VSTeamAccount.md)

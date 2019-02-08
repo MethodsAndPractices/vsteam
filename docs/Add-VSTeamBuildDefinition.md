@@ -13,7 +13,7 @@ Creates a new build definition from a JSON file.
 
 Reads a JSON file off disk and uses that file to create a new build definition in the provided project.
 
-You must call Add-VSTeamAccount before calling this function.
+You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
