@@ -6,7 +6,7 @@ function Set-VSTeamAPIVersion {
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]
@@ -48,6 +48,9 @@ function Set-VSTeamAPIVersion {
             'ServiceFabricEndpoint' {
                [VSTeamVersions]::ServiceFabricEndpoint = $Version
             }
+            'Graph' {
+               [VSTeamVersions]::Graph = $Version
+            }
          }
       }
       else {
@@ -64,6 +67,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::MemberEntitlementManagement = ''
                [VSTeamVersions]::ServiceFabricEndpoint = '3.2'
                [VSTeamVersions]::ExtensionsManagement = '3.2-preview'
+               [VSTeamVersions]::Graph = ''
             }
             'TFS2017' {
                [VSTeamVersions]::Version = 'TFS2017'
@@ -77,6 +81,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::MemberEntitlementManagement = ''
                [VSTeamVersions]::ServiceFabricEndpoint = ''
                [VSTeamVersions]::ExtensionsManagement = '3.0-preview'
+               [VSTeamVersions]::Graph = ''
             }
             Default {
                [VSTeamVersions]::Version = $Target
@@ -90,6 +95,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
                [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'
                [VSTeamVersions]::ExtensionsManagement = '4.1-preview.1'
+               [VSTeamVersions]::Graph = '5.0-preview.1'
             }
          }
       }
@@ -106,4 +112,5 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "MemberEntitlementManagement: $([VSTeamVersions]::MemberEntitlementManagement)"
    Write-Verbose "ServiceFabricEndpoint: $([VSTeamVersions]::ServiceFabricEndpoint)"
    Write-Verbose "ExtensionsManagement: $([VSTeamVersions]::ExtensionsManagement)"
+   Write-Verbose "Graph: $([VSTeamVersions]::Graph)"
 }

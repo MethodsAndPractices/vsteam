@@ -13,4 +13,5 @@ class VSTeamVersions {
    static [string] $ExtensionsManagement = ''
    static [string] $ServiceFabricEndpoint = ''
    static [string] $ModuleVersion = $null
+   static [string] $Graph = ''
 }

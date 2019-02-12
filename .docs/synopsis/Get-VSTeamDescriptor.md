@@ -1,0 +1,1 @@
+Resolve a storage key to a descriptor.

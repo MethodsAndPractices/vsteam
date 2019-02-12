@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.0.2
+
+Added Get-VSTeamGroup to retrieve Groups
+Added Get-VSTeamDescriptor to resolve ID's to Descriptors
+
 ## 6.0.1
 
 Fixing issue with mapping drive.

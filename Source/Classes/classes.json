@@ -34,5 +34,17 @@
    "VSTeamProcess.ps1",
    "VSTeamRef.ps1",
    "VSTeamTeam.ps1",
-   "VSTeamAccount.ps1"
+   "VSTeamAccount.ps1",
+   "VSTeamGitRepositoryPermissions.ps1",
+   "VSTeamIdentityPermissions.ps1",
+   "VSTeamProjectPermissions.ps1",
+   "VSTeamWorkItemAreaPermissions.ps1",
+   "VSTeamWorkItemIterationPermissions.ps1",
+   "VSTeamGroup.ps1",
+   "VSTeamGitRepositoryPermissions.ps1",
+   "VSTeamIdentityPermissions.ps1",
+   "VSTeamProjectPermissions.ps1",
+   "VSTeamWorkItemAreaPermissions.ps1",
+   "VSTeamWorkItemIterationPermissions.ps1",
+   "VSTeamDescriptor.ps1"
 ]
