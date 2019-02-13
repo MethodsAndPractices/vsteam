@@ -7,7 +7,7 @@ function Get-VSTeamDescriptor {
 
    process {
       # Call the REST API
-      $resp = _callAPI -Area 'graph/descriptors' -id $StorageKey `
+      $resp = _callAPI -Area 'graph' -Resource 'descriptors' -id $StorageKey `
          -Version $([VSTeamVersions]::Graph) `
          -SubDomain 'vssps'
 

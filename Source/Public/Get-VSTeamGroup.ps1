@@ -27,12 +27,6 @@ function Get-VSTeamGroup {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if ($ProjectName)
-      {
-         $project = Get-VSTeamProject -Name $ProjectName
-         $ScopeDescriptor = Get-VSTeamDescriptor -StorageKey $project.id
-      }
-
       if ($Descriptor) {
          # Call the REST API
          $resp = _callAPI -Area 'graph/groups' -id $Descriptor `
@@ -47,6 +41,10 @@ function Get-VSTeamGroup {
          Write-Output $group
       }
       else {
+         if ($ProjectName) {
+            $project = Get-VSTeamProject -Name $ProjectName
+            $ScopeDescriptor = Get-VSTeamDescriptor -StorageKey $project.id | Select-Object -ExpandProperty value
+         }
 
          $queryString = @{}
          if ($ScopeDescriptor) {
