@@ -1,5 +1,5 @@
 # https://dev.azure.com/<organization>/_apis/securitynamespaces?api-version=5.0
-[flags()] Enum ADOIdentityPermissions
+[flags()] Enum AzDIdentityPermissions
 {
     Read = 1
     Write = 2

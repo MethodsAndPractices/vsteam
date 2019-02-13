@@ -1,5 +1,5 @@
 # https://dev.azure.com/<organization>/_apis/securitynamespaces?api-version=5.0
-[flags()] Enum ADOGitRepositoryPermissions
+[flags()] Enum AzDGitRepositoryPermissions
 {
     Administer = 1
     GenericRead = 2

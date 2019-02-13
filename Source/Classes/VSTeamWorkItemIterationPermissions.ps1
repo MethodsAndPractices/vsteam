@@ -1,5 +1,5 @@
 # https://dev.azure.com/<organization>/_apis/securitynamespaces?api-version=5.0
-[flags()] Enum ADOWorkItemIterationPermissions
+[flags()] Enum AzDWorkItemIterationPermissions
 {
     GENERIC_READ = 1
     GENERIC_WRITE = 2
