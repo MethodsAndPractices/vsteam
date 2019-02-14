@@ -4,15 +4,15 @@ Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery
 
 ## About files
 
-[VSTeam](../en-US/about_vsteam.help.txt)
+[VSTeam](../Source/en-US/about_vsteam.help.txt)
 
 Learn about the goals of VSTeam.
 
-[Profiles](../en-US/about_vsteam_profiles.help.txt)
+[Profiles](../Source/en-US/about_vsteam_profiles.help.txt)
 
 Profiles allow you to store your account information for easy switching of accounts.
 
-[Provider](../en-US/about_vsteam_provider.help.txt)
+[Provider](../Source/en-US/about_vsteam_provider.help.txt)
 
 The provider allows you to navigate your TFS or VSTS as a file system.
 
