@@ -43,7 +43,7 @@ function Get-VSTeamGroup {
       else {
          if ($ProjectName) {
             $project = Get-VSTeamProject -Name $ProjectName
-            $ScopeDescriptor = Get-VSTeamDescriptor -StorageKey $project.id | Select-Object -ExpandProperty value
+            $ScopeDescriptor = Get-VSTeamDescriptor -StorageKey $project.id | Select-Object -ExpandProperty Descriptor
          }
 
          $queryString = @{}

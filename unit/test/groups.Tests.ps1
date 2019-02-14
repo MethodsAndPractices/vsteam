@@ -29,7 +29,7 @@ InModuleScope VSTeam {
       
       Context 'Get-VSTeamGroup by project' {
          Mock Get-VSTeamProject { return $projectResult } -Verifiable
-         Mock Get-VSTeamDescriptor { return $scopeResult } -Verifiable
+         Mock Get-VSTeamDescriptor { return  [VSTeamDescriptor]::new($scopeResult) } -Verifiable
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
