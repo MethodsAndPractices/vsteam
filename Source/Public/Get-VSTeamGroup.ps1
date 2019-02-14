@@ -1,12 +1,10 @@
 function Get-VSTeamGroup {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      # NOTE: This parameter does not work yet. Once figured out, we can activate again.
-      #[Parameter(ParameterSetName = 'List')]
-      #[Parameter(ParameterSetName = 'ListByProjectName')]
-      #[ValidateSet('Microsoft.IdentityModel.Claims.ClaimsIdentity','Microsoft.TeamFoundation.Identity')]
-      #[ValidateSet('vsts')]
-      #[string[]] $SubjectTypes,
+      [Parameter(ParameterSetName = 'List')]
+      [Parameter(ParameterSetName = 'ListByProjectName')]
+      [ValidateSet('vssgp','aadgp')]
+      [string[]] $SubjectTypes,
 
       [Parameter(ParameterSetName = 'List')]
       [string] $ScopeDescriptor,
@@ -29,7 +27,7 @@ function Get-VSTeamGroup {
 
       if ($Descriptor) {
          # Call the REST API
-         $resp = _callAPI -Area 'graph/groups' -id $Descriptor `
+         $resp = _callAPI -Area 'graph' -Resource 'groups' -id $Descriptor `
             -Version $([VSTeamVersions]::Graph) `
             -SubDomain 'vssps'
 
@@ -51,10 +49,10 @@ function Get-VSTeamGroup {
             $queryString.scopeDescriptor = $ScopeDescriptor
          }
 
-         #if ($SubjectTypes -and $SubjectTypes.Length -gt 0)
-         #{
-         #   $queryString.subjectTypes = $SubjectTypes -join ','
-         #}
+         if ($SubjectTypes -and $SubjectTypes.Length -gt 0)
+         {
+            $queryString.subjectTypes = $SubjectTypes -join ','
+         }
 
          try {
             # Call the REST API

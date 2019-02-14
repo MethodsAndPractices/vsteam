@@ -68,6 +68,35 @@ InModuleScope VSTeam {
          }
       }
 
+      Context 'Get-VSTeamGroup by subjectTypes' {
+         Mock Invoke-RestMethod { return $groupListResult } -Verifiable
+
+         Get-VSTeamGroup -SubjectTypes vssgp,aadgp
+
+         It 'Should return groups' {
+            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
+               $Uri -like "*subjectTypes=vssgp,aadgp*"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamGroup by subjectTypes and scopeDescriptor' {
+         Mock Invoke-RestMethod { return $groupListResult } -Verifiable
+
+         Get-VSTeamGroup -ScopeDescriptor scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2 -SubjectTypes vssgp,aadgp
+
+         It 'Should return groups' {
+            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
+               $Uri -like "*subjectTypes=vssgp,aadgp*" -and
+               $Uri -like "*scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2*"
+            }
+         }
+      }
+
       Context 'Get-VSTeamGroup by descriptor' {
          Mock Invoke-RestMethod { return $groupSingleResult } -Verifiable
 
