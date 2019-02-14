@@ -33,6 +33,20 @@ Position: 0
 Accept pipeline input: true (ByPropertyName)
 ```
 
+### -SubjectTypes
+
+A comma separated list of user subject subtypes to reduce the retrieved results.
+Valid subject types:
+
+- vssgp (Azure DevOps Group)
+- aadgp (Azure Active Directory Group)
+
+```yaml
+Type: String[]
+Required: False
+Parameter Sets: List, ListByProjectName
+```
+
 ### -ScopeDescriptor
 
 Specify a non-default scope (collection, project) to search for groups.

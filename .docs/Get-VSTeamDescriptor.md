@@ -1,6 +1,6 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VSTeamExtension
+# Get-VSTeamDescriptor
 
 ## SYNOPSIS
 

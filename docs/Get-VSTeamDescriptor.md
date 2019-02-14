@@ -1,7 +1,7 @@
 
 
 
-# Get-VSTeamExtension
+# Get-VSTeamDescriptor
 
 ## SYNOPSIS
 

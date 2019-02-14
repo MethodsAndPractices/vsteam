@@ -5951,9 +5951,9 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-VSTeamExtension</command:name>
+      <command:name>Get-VSTeamDescriptor</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>VSTeamExtension</command:noun>
+      <command:noun>VSTeamDescriptor</command:noun>
       <maml:description>
         <maml:para>Resolve a storage key to a descriptor.</maml:para>
       </maml:description>
@@ -5963,7 +5963,7 @@ ID Title          Status
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-VSTeamExtension</maml:name>
+        <maml:name>Get-VSTeamDescriptor</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>StorageKey</maml:name>
           <maml:Description>
@@ -6500,6 +6500,20 @@ ID Title          Status
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SubjectTypes</maml:name>
+          <maml:Description>
+            <maml:para>A comma separated list of user subject subtypes to reduce the retrieved results. Valid subject types:</maml:para>
+            <maml:para>- vssgp (Azure DevOps Group)</maml:para>
+            <maml:para>- aadgp (Azure Active Directory Group)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>ScopeDescriptor</maml:name>
           <maml:Description>
             <maml:para>Specify a non-default scope (collection, project) to search for groups.</maml:para>
@@ -6507,6 +6521,37 @@ ID Title          Status
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SubjectTypes</maml:name>
+          <maml:Description>
+            <maml:para>A comma separated list of user subject subtypes to reduce the retrieved results. Valid subject types:</maml:para>
+            <maml:para>- vssgp (Azure DevOps Group)</maml:para>
+            <maml:para>- aadgp (Azure Active Directory Group)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -6553,6 +6598,20 @@ ID Title          Status
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SubjectTypes</maml:name>
+        <maml:Description>
+          <maml:para>A comma separated list of user subject subtypes to reduce the retrieved results. Valid subject types:</maml:para>
+          <maml:para>- vssgp (Azure DevOps Group)</maml:para>
+          <maml:para>- aadgp (Azure Active Directory Group)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
