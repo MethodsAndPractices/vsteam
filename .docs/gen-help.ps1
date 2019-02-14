@@ -33,7 +33,7 @@ if(-not (Get-Module platyPS -ListAvailable)) {
    Install-Module platyPS -Scope CurrentUser -Force
 }
 
-New-ExternalHelp ..\docs -OutputPath ..\en-US -Force
+New-ExternalHelp ..\docs -OutputPath ..\Source\en-US -Force
 
 # Run again and strip header
 Write-Output 'Cleaning doc files for publishing'

@@ -124,485 +124,6 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Add-VSTeamAccount</command:name>
-      <command:verb>Add</command:verb>
-      <command:noun>VSTeamAccount</command:noun>
-      <maml:description>
-        <maml:para>Stores your account name and personal access token for use with the other functions in this module.</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>On Windows you have to option to store the information at the process, user or machine (you must be running PowerShell as administrator to store at the machine level) level.</maml:para>
-      <maml:para>On Linux and Mac you can only store at the process level.</maml:para>
-      <maml:para>Calling Add-VSTeamAccount will clear any default project.</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Add-VSTeamAccount</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
-          <maml:name>Account</maml:name>
-          <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
-          <maml:name>Version</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
-            <maml:para>- TFS2017</maml:para>
-            <maml:para>- TFS2018</maml:para>
-            <maml:para>- VSTS</maml:para>
-            <maml:para>- AzD</maml:para>
-            <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>TFS2017 for TFS and AzD for AzD</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>PAT</maml:name>
-          <maml:Description>
-            <maml:para>A secured string to capture your personal access token.</maml:para>
-            <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
-            <maml:para>To use pat simply omit it from the Add-VSTeamAccount command.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
-          <dev:type>
-            <maml:name>SecureString</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Level</maml:name>
-          <maml:Description>
-            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels. When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
-            <maml:para>To store at the Machine level you must be running PowerShell as an Administrator.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>UseBearerToken</maml:name>
-          <maml:Description>
-            <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Drive</maml:name>
-          <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Add-VSTeamAccount</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
-          <maml:name>Account</maml:name>
-          <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="Token">
-          <maml:name>PersonalAccessToken</maml:name>
-          <maml:Description>
-            <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
-          <maml:name>Version</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
-            <maml:para>- TFS2017</maml:para>
-            <maml:para>- TFS2018</maml:para>
-            <maml:para>- VSTS</maml:para>
-            <maml:para>- AzD</maml:para>
-            <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>TFS2017 for TFS and AzD for AzD</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Level</maml:name>
-          <maml:Description>
-            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels. When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
-            <maml:para>To store at the Machine level you must be running PowerShell as an Administrator.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>UseBearerToken</maml:name>
-          <maml:Description>
-            <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Drive</maml:name>
-          <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Add-VSTeamAccount</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
-          <maml:name>Account</maml:name>
-          <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
-          <maml:name>Version</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
-            <maml:para>- TFS2017</maml:para>
-            <maml:para>- TFS2018</maml:para>
-            <maml:para>- VSTS</maml:para>
-            <maml:para>- AzD</maml:para>
-            <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>TFS2017 for TFS and AzD for AzD</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Level</maml:name>
-          <maml:Description>
-            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels. When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
-            <maml:para>To store at the Machine level you must be running PowerShell as an Administrator.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>UseWindowsAuthentication</maml:name>
-          <maml:Description>
-            <maml:para>Allows the use of the current user's Windows credentials to authenticate against a local TFS.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Drive</maml:name>
-          <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Add-VSTeamAccount</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Profile</maml:name>
-          <maml:Description>
-            <maml:para>The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Drive</maml:name>
-          <maml:Description>
-            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
-        <maml:name>Account</maml:name>
-        <maml:Description>
-          <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
-          <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>PAT</maml:name>
-        <maml:Description>
-          <maml:para>A secured string to capture your personal access token.</maml:para>
-          <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
-          <maml:para>To use pat simply omit it from the Add-VSTeamAccount command.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
-        <dev:type>
-          <maml:name>SecureString</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>Level</maml:name>
-        <maml:Description>
-          <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels. When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
-          <maml:para>To store at the Machine level you must be running PowerShell as an Administrator.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="Token">
-        <maml:name>PersonalAccessToken</maml:name>
-        <maml:Description>
-          <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>UseWindowsAuthentication</maml:name>
-        <maml:Description>
-          <maml:para>Allows the use of the current user's Windows credentials to authenticate against a local TFS.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>UseBearerToken</maml:name>
-        <maml:Description>
-          <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>Profile</maml:name>
-        <maml:Description>
-          <maml:para>The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
-        <maml:name>Version</maml:name>
-        <maml:Description>
-          <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
-          <maml:para>- TFS2017</maml:para>
-          <maml:para>- TFS2018</maml:para>
-          <maml:para>- VSTS</maml:para>
-          <maml:para>- AzD</maml:para>
-          <maml:para></maml:para>
-          <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>TFS2017 for TFS and AzD for AzD</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>Drive</maml:name>
-        <maml:Description>
-          <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues />
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-VSTeamAccount</dev:code>
-        <dev:remarks>
-          <maml:para>You will be prompted for the account name and personal access token.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbmgap3mziwnga</dev:code>
-        <dev:remarks>
-          <maml:para>Allows you to provide all the information on the command line.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
-        <dev:remarks>
-          <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-VSTeamAccount -Profile demonstrations</dev:code>
-        <dev:remarks>
-          <maml:para>Will add the account from the profile provided.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-VSTeamAccount -Profile demonstrations -Drive demo
-PS C:\&gt; Set-Location demo:
-PS demo:\&gt; Get-ChildItem</dev:code>
-        <dev:remarks>
-          <maml:para>Will add the account from the profile provided and mount a drive named demo that you can navigate like a file system.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-VSTeamAccount -Profile demonstrations -Level Machine</dev:code>
-        <dev:remarks>
-          <maml:para>Will add the account from the profile provided and store the information at the Machine level. Now any new PowerShell sessions will auto load this account.</maml:para>
-          <maml:para>Note: You must run PowerShell as an Adminstrator to store at the Machine level.</maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken</dev:code>
-        <dev:remarks>
-          <maml:para>Will add the account and use the OAuth Token provided by VSTS when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Add-VSTeamProfile</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Clear-VSTeamDefaultProject</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-      <maml:navigationLink>
-        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Add-VSTeamAzureRMServiceEndpoint</command:name>
       <command:verb>Add</command:verb>
       <command:noun>VSTeamAzureRMServiceEndpoint</command:noun>
@@ -1133,7 +654,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </command:details>
     <maml:description>
       <maml:para>Reads a JSON file off disk and uses that file to create a new build definition in the provided project.</maml:para>
-      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2958,7 +2479,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -3108,7 +2629,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -3133,7 +2654,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
     <maml:description>
       <maml:para>Add-VSTeamRelease will queue a new release.</maml:para>
       <maml:para>The environments will deploy according to how the release definition is configured in the Triggers tab.</maml:para>
-      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -3500,7 +3021,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     </command:details>
     <maml:description>
       <maml:para>Reads a JSON file off disk and uses that file to create a new release definition in the provided project.</maml:para>
-      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4252,7 +3773,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
           <maml:Description>
             <maml:para>A secured string to capture your personal access token.</maml:para>
             <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
-            <maml:para>To use pat simply omit it from the Add-VSTeamAccount command.</maml:para>
+            <maml:para>To use pat simply omit it from the Set-VSTeamAccount command.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
           <dev:type>
@@ -4319,7 +3840,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         <maml:Description>
           <maml:para>A secured string to capture your personal access token.</maml:para>
           <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
-          <maml:para>To use pat simply omit it from the Add-VSTeamAccount command.</maml:para>
+          <maml:para>To use pat simply omit it from the Set-VSTeamAccount command.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
         <dev:type>
@@ -4794,7 +4315,7 @@ ID Title          Status
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -5437,7 +4958,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -5827,7 +5348,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -6135,7 +5656,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -6423,10 +5944,63 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-VSTeamExtension</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamExtension</command:noun>
+      <maml:description>
+        <maml:para>Resolve a storage key to a descriptor.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Resolve a storage key to a descriptor.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamExtension</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>StorageKey</maml:name>
+          <maml:Description>
+            <maml:para>Storage key of the subject (user, group, scope, etc.) to resolve</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>StorageKey</maml:name>
+        <maml:Description>
+          <maml:para>Storage key of the subject (user, group, scope, etc.) to resolve</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -6898,6 +6472,128 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamGroup</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamGroup</command:noun>
+      <maml:description>
+        <maml:para>Returns a Group or List of Groups.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Returns a Group or List of Groups.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ScopeDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>Specify a non-default scope (collection, project) to search for groups.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Descriptor</maml:name>
+          <maml:Description>
+            <maml:para>The descriptor of the desired graph group.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ScopeDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>Specify a non-default scope (collection, project) to search for groups.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Descriptor</maml:name>
+        <maml:Description>
+          <maml:para>The descriptor of the desired graph group.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamInfo</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamInfo</command:noun>
@@ -6932,7 +6628,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -7145,7 +6841,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -7453,7 +7149,7 @@ ID Title          Status
     <maml:description>
       <maml:para>The list of Processs Templates returned can be controlled by using the top and skip parameters.</maml:para>
       <maml:para>You can also get a single Process Template by name or id.</maml:para>
-      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -7601,7 +7297,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -7678,7 +7374,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -7699,7 +7395,7 @@ ID Title          Status
     <maml:description>
       <maml:para>The list of projects returned can be controlled by using the stateFilter, top and skip parameters.</maml:para>
       <maml:para>You can also get a single project by name or id.</maml:para>
-      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -7907,7 +7603,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -8525,7 +8221,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -8698,7 +8394,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -8751,7 +8447,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -9700,7 +9396,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -10246,7 +9942,7 @@ ID Title          Status
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Clears the environment variables that hold your default project, account, bearer token and personal access token. You have to run Add-VSTeamAccount again before calling any other functions.</maml:para>
+      <maml:para>Clears the environment variables that hold your default project, account, bearer token and personal access token. You have to run Set-VSTeamAccount again before calling any other functions.</maml:para>
       <maml:para>To remove from the Machine level you must be running PowerShell as administrator.</maml:para>
     </maml:description>
     <command:syntax>
@@ -10321,7 +10017,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -10690,7 +10386,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -11470,7 +11166,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -11609,7 +11305,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -11756,7 +11452,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -12079,6 +11775,541 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Set-VSTeamAccount</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>VSTeamAccount</command:noun>
+      <maml:description>
+        <maml:para>Stores your account name and personal access token for use with the other functions in this module.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>On Windows you have to option to store the information at the process, user or machine (you must be running PowerShell as administrator to store at the machine level) level.</maml:para>
+      <maml:para>On Linux and Mac you can only store at the process level.</maml:para>
+      <maml:para>Calling Set-VSTeamAccount will clear any default project.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-VSTeamAccount</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>Account</maml:name>
+          <maml:Description>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para>- AzD</maml:para>
+            <maml:para></maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017 for TFS and AzD for AzD</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="PAT">
+          <maml:name>SecurePersonalAccessToken</maml:name>
+          <maml:Description>
+            <maml:para>A secured string to capture your personal access token.</maml:para>
+            <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
+            <maml:para>To use pat simply omit it from the Set-VSTeamAccount command.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
+          <dev:type>
+            <maml:name>SecureString</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Level</maml:name>
+          <maml:Description>
+            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels. When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
+            <maml:para>To store at the Machine level you must be running PowerShell as an Administrator.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>UseBearerToken</maml:name>
+          <maml:Description>
+            <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-VSTeamAccount</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>Account</maml:name>
+          <maml:Description>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="Token">
+          <maml:name>PersonalAccessToken</maml:name>
+          <maml:Description>
+            <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para>- AzD</maml:para>
+            <maml:para></maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017 for TFS and AzD for AzD</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Level</maml:name>
+          <maml:Description>
+            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels. When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
+            <maml:para>To store at the Machine level you must be running PowerShell as an Administrator.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>UseBearerToken</maml:name>
+          <maml:Description>
+            <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-VSTeamAccount</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>Account</maml:name>
+          <maml:Description>
+            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2018</maml:para>
+            <maml:para>- VSTS</maml:para>
+            <maml:para>- AzD</maml:para>
+            <maml:para></maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>TFS2017 for TFS and AzD for AzD</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Level</maml:name>
+          <maml:Description>
+            <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels. When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
+            <maml:para>To store at the Machine level you must be running PowerShell as an Administrator.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>UseWindowsAuthentication</maml:name>
+          <maml:Description>
+            <maml:para>Allows the use of the current user's Windows credentials to authenticate against a local TFS.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-VSTeamAccount</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Profile</maml:name>
+          <maml:Description>
+            <maml:para>The profile name stored using Set-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Drive</maml:name>
+          <maml:Description>
+            <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>Account</maml:name>
+        <maml:Description>
+          <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+          <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="PAT">
+        <maml:name>SecurePersonalAccessToken</maml:name>
+        <maml:Description>
+          <maml:para>A secured string to capture your personal access token.</maml:para>
+          <maml:para>This will allow you to provide your personal access token without displaying it in plain text.</maml:para>
+          <maml:para>To use pat simply omit it from the Set-VSTeamAccount command.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">SecureString</command:parameterValue>
+        <dev:type>
+          <maml:name>SecureString</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Level</maml:name>
+        <maml:Description>
+          <maml:para>On Windows allows you to store your account information at the Process, User or Machine levels. When saved at the User or Machine level your account information will be in any future PowerShell processes.</maml:para>
+          <maml:para>To store at the Machine level you must be running PowerShell as an Administrator.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="Token">
+        <maml:name>PersonalAccessToken</maml:name>
+        <maml:Description>
+          <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>UseWindowsAuthentication</maml:name>
+        <maml:Description>
+          <maml:para>Allows the use of the current user's Windows credentials to authenticate against a local TFS.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>UseBearerToken</maml:name>
+        <maml:Description>
+          <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Profile</maml:name>
+        <maml:Description>
+          <maml:para>The profile name stored using Set-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
+        <maml:name>Version</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- TFS2017</maml:para>
+          <maml:para>- TFS2018</maml:para>
+          <maml:para>- VSTS</maml:para>
+          <maml:para>- AzD</maml:para>
+          <maml:para></maml:para>
+          <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>TFS2017 for TFS and AzD for AzD</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Drive</maml:name>
+        <maml:Description>
+          <maml:para>The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount</dev:code>
+        <dev:remarks>
+          <maml:para>You will be prompted for the account name and personal access token.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrthisisnotreal4uhlh5vgbmgap3mziwnga</dev:code>
+        <dev:remarks>
+          <maml:para>Allows you to provide all the information on the command line.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
+        <dev:remarks>
+          <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Profile demonstrations</dev:code>
+        <dev:remarks>
+          <maml:para>Will add the account from the profile provided.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Profile demonstrations -Drive demo | Invoke-Expression
+PS C:\&gt; Set-Location demo:
+PS demo:\&gt; Get-ChildItem</dev:code>
+        <dev:remarks>
+          <maml:para>Will add the account from the profile provided and mount a drive named demo that you can navigate like a file system. If you do not pipe to Invoke-Expression you can simply copy and paste the output and execute it.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Profile demonstrations -Level Machine</dev:code>
+        <dev:remarks>
+          <maml:para>Will add the account from the profile provided and store the information at the Machine level. Now any new PowerShell sessions will auto load this account.</maml:para>
+          <maml:para>Note: You must run PowerShell as an Adminstrator to store at the Machine level.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken</dev:code>
+        <dev:remarks>
+          <maml:para>Will add the account and use the OAuth Token provided by VSTS when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamProfile</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-VSTeamDefaultProject</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Set-VSTeamAlias</command:name>
       <command:verb>Set</command:verb>
       <command:noun>VSTeamAlias</command:noun>
@@ -12092,9 +12323,33 @@ ID Title          Status
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Set-VSTeamAlias</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the command without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
-    <command:parameters />
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the command without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
@@ -13029,7 +13284,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -13135,7 +13390,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -13222,7 +13477,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -13417,7 +13672,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -13492,7 +13747,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -13601,7 +13856,7 @@ ID Title          Status
     </command:details>
     <maml:description>
       <maml:para>Opens the project in default browser.</maml:para>
-      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -13680,7 +13935,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -13845,7 +14100,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -13960,7 +14215,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -14047,7 +14302,7 @@ ID Title          Status
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Add-VSTeamAccount</maml:linkText>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
@@ -14508,7 +14763,7 @@ ID Title          Status
     </command:details>
     <maml:description>
       <maml:para>Reads a JSON file off disk and uses that file to update an existing build definition in the provided project.</maml:para>
-      <maml:para>You must call Add-VSTeamAccount before calling this function.</maml:para>
+      <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
