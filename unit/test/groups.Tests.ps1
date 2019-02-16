@@ -22,6 +22,23 @@ InModuleScope VSTeam {
    $groupListResult = Get-Content "$PSScriptRoot\sampleFiles\groups.json" -Raw | ConvertFrom-Json
    $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
 
+   # The Graph API is not supported on TFS
+   Describe "Groups TFS Errors" {
+     Context 'Get-VSTeamGroup' {
+         Mock _callAPI { throw 'Should not be called' } -Verifiable
+
+         It 'Should throw' {
+            Set-VSTeamAPIVersion TFS2017
+
+            { Get-VSTeamGroup } | Should Throw
+         }
+
+         It '_callAPI should be called once to get projects' {
+            Assert-MockCalled _callAPI -Exactly 1
+         }
+      }
+   }
+
    Describe 'Groups VSTS' {
       # You have to set the version or the api-version will not be added when 
       # [VSTeamVersions]::Graph = ''

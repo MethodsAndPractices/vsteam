@@ -6,6 +6,9 @@ function Get-VSTeamDescriptor {
    )
 
    process {
+      # Thi swill throw if this account does not support the graph API
+      _supportsGraph
+
       # Call the REST API
       $resp = _callAPI -Area 'graph' -Resource 'descriptors' -id $StorageKey `
          -Version $([VSTeamVersions]::Graph) `

@@ -8,6 +8,22 @@ InModuleScope VSTeam {
 
    $result = Get-Content "$PSScriptRoot\sampleFiles\descriptor.scope.TestProject.json" -Raw | ConvertFrom-Json
 
+   Describe "Groups TFS Errors" {
+      Context 'Get-VSTeamDescriptor' {
+          Mock _callAPI { throw 'Should not be called' } -Verifiable
+ 
+          It 'Should throw' {
+             Set-VSTeamAPIVersion TFS2017
+ 
+             { Get-VSTeamDescriptor -StorageKey '010d06f0-00d5-472a-bb47-58947c230876' } | Should Throw
+          }
+ 
+          It '_callAPI should not be called' {
+             Assert-MockCalled _callAPI -Exactly 0
+          }
+       }
+    }
+
    Describe 'Descriptor VSTS' {
 
       # You have to set the version or the api-version will not be added when 

@@ -129,7 +129,7 @@ InModuleScope VSTeam {
          }
 
          It 'Should return release options' {
-            Get-VSTeamOption -Release | Should Not Be $null
+            Get-VSTeamOption -subDomain vsrm | Should Not Be $null
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Uri -eq "https://vsrm.dev.azure.com/test/_apis/"
             }
