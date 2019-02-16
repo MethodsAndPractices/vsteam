@@ -19,16 +19,21 @@ function Add-VSTeamProject {
       # Bind the parameter to a friendly variable
       $ProcessTemplate = $PSBoundParameters["ProcessTemplate"]
 
-      $srcCtrl = 'Git'
-      #Default to Scrum Process Template
-      $templateTypeId = '6b724908-ef14-45cf-84f8-768b5384da45'
-
       if ($TFVC.IsPresent) {
          $srcCtrl = "Tfvc"
       }
+      else {
+         $srcCtrl = 'Git'
+      }
 
       if ($ProcessTemplate) {
+         Write-Verbose "Finding $ProcessTemplate id"
          $templateTypeId = (Get-VSTeamProcess -Name $ProcessTemplate).Id
+      }
+      else {
+         # Default to Scrum Process Template
+         $ProcessTemplate = 'Scrum'
+         $templateTypeId = '6b724908-ef14-45cf-84f8-768b5384da45'
       }
 
       $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'

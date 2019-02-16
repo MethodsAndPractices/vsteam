@@ -45,11 +45,11 @@ function Get-VSTeamUser {
            $resp = _callAPI -url $listurl
 
            # Apply a Type Name so we can use custom format view and custom type extensions
-           foreach ($item in $resp.value) {
+           foreach ($item in $resp.members) {
                _applyTypesToUser -item $item
            }
 
-           Write-Output $resp.value
+           Write-Output $resp.members
        }
    }
 }

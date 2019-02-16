@@ -37,8 +37,7 @@ InModuleScope VSTeam {
 
       Context 'Get-VSTeamUser no parameters' {
          Mock  _callAPI { return [PSCustomObject]@{
-               count = 1
-               value = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } }
+               members = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } }
             }
          }
 
@@ -75,8 +74,7 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamUser with select for projects' {
          Mock  _callAPI {
             return [PSCustomObject]@{
-               count = 1
-               value = [PSCustomObject]@{
+               members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'fake@email.com'
                }
@@ -135,8 +133,7 @@ InModuleScope VSTeam {
 
          Mock _callAPI {
             return [PSCustomObject]@{
-               count = 1
-               value = [PSCustomObject]@{
+               members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'test@user.com'
                   userName    = 'Test User'
@@ -160,8 +157,7 @@ InModuleScope VSTeam {
 
       Context 'Remove-VSTeamUser by invalid email' {
          Mock _callAPI { return [PSCustomObject]@{
-               count = 1
-               value = [PSCustomObject]@{
+               members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'test@user.com'
                   id          = '00000000-0000-0000-0000-000000000000'
@@ -176,8 +172,7 @@ InModuleScope VSTeam {
 
       Context 'Update-VSTeamUser by invalid email' {
          Mock _callAPI { return [PSCustomObject]@{
-               count = 1
-               value = [PSCustomObject]@{
+               members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'test@user.com'
                   id          = '00000000-0000-0000-0000-000000000000'
@@ -192,8 +187,7 @@ InModuleScope VSTeam {
 
       Context 'Update-VSTeamUser by invalid id' {
          Mock _callAPI { return [PSCustomObject]@{
-               count = 1
-               value = [PSCustomObject]@{
+               members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
                   email       = 'test@user.com'
                   id          = '00000000-0000-0000-0000-000000000000'
@@ -242,16 +236,15 @@ InModuleScope VSTeam {
       Context 'Update user should update' {
 
          Mock _callAPI { return [PSCustomObject]@{
-            count = 1
-            value = [PSCustomObject]@{
-               accessLevel = [PSCustomObject]@{
-                  accountLicenseType = "Stakeholder"
-                }
-               email       = 'test@user.com'
-               id          = '00000000-0000-0000-0000-000000000000'
+               members = [PSCustomObject]@{
+                  accessLevel = [PSCustomObject]@{
+                     accountLicenseType = "Stakeholder"
+                  }
+                  email       = 'test@user.com'
+                  id          = '00000000-0000-0000-0000-000000000000'
+               }
             }
          }
-      }
 
          Update-VSTeamUser -License 'Stakeholder' -Email 'test@user.com' -Force
 
