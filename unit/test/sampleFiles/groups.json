@@ -1,0 +1,942 @@
+{
+   "count": 36,
+   "value": [
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can perform all operations in the team project.",
+         "domain": "vstfs:///Classification/TeamProject/53e2997d-3723-4c1c-aa62-a0194cb65a29",
+         "principalName": "[Demo Public]\\Project Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "e0302e6e-92f9-41f7-8611-04a3a0d3008f",
+         "displayName": "Project Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have access to the team project.",
+         "domain": "vstfs:///Classification/TeamProject/adc3fef1-3781-48f9-897a-0ef5ca2c1917",
+         "principalName": "[Test Project Private]\\Readers",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "62840a90-5010-4610-986a-0ac7412a7eec",
+         "displayName": "Readers",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTk3NjMyMjQ3NS0xMzEwNTk2Njg1LTI3MDI3NzQ5NjItMjk5NTgyODczMw"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTk3NjMyMjQ3NS0xMzEwNTk2Njg1LTI3MDI3NzQ5NjItMjk5NTgyODczMw"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTk3NjMyMjQ3NS0xMzEwNTk2Njg1LTI3MDI3NzQ5NjItMjk5NTgyODczMw"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTk3NjMyMjQ3NS0xMzEwNTk2Njg1LTI3MDI3NzQ5NjItMjk5NTgyODczMw"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTk3NjMyMjQ3NS0xMzEwNTk2Njg1LTI3MDI3NzQ5NjItMjk5NTgyODczMw",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTk3NjMyMjQ3NS0xMzEwNTk2Njg1LTI3MDI3NzQ5NjItMjk5NTgyODczMw"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have access to the team project.",
+         "domain": "vstfs:///Classification/TeamProject/c32a4f3f-ad08-445d-9c76-52937ad82b38",
+         "principalName": "[Demo]\\Readers",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "6ca617a2-4a65-441d-bd66-0b2339c3198a",
+         "displayName": "Readers",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTA3ODIxOTI2LTM1MTQ0NjU4NTgtMjc1NDQ3MjgxNS0yODI4NDAzNzY5"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTA3ODIxOTI2LTM1MTQ0NjU4NTgtMjc1NDQ3MjgxNS0yODI4NDAzNzY5"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTA3ODIxOTI2LTM1MTQ0NjU4NTgtMjc1NDQ3MjgxNS0yODI4NDAzNzY5"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTA3ODIxOTI2LTM1MTQ0NjU4NTgtMjc1NDQ3MjgxNS0yODI4NDAzNzY5"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTA3ODIxOTI2LTM1MTQ0NjU4NTgtMjc1NDQ3MjgxNS0yODI4NDAzNzY5",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTA3ODIxOTI2LTM1MTQ0NjU4NTgtMjc1NDQ3MjgxNS0yODI4NDAzNzY5"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can create, modify and delete build definitions and manage queued and completed builds.",
+         "domain": "vstfs:///Classification/TeamProject/adc3fef1-3781-48f9-897a-0ef5ca2c1917",
+         "principalName": "[Test Project Private]\\Build Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "732e32e7-7d38-45ac-b636-1a6c050aa20d",
+         "displayName": "Build Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjgyMDc1NDI5NC0xNzc3MTM2MjAxLTI2MzEwNjA4MzEtMzIyMjQ3MzIxNg"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjgyMDc1NDI5NC0xNzc3MTM2MjAxLTI2MzEwNjA4MzEtMzIyMjQ3MzIxNg"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjgyMDc1NDI5NC0xNzc3MTM2MjAxLTI2MzEwNjA4MzEtMzIyMjQ3MzIxNg"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjgyMDc1NDI5NC0xNzc3MTM2MjAxLTI2MzEwNjA4MzEtMzIyMjQ3MzIxNg"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjgyMDc1NDI5NC0xNzc3MTM2MjAxLTI2MzEwNjA4MzEtMzIyMjQ3MzIxNg",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjgyMDc1NDI5NC0xNzc3MTM2MjAxLTI2MzEwNjA4MzEtMzIyMjQ3MzIxNg"
+      },
+      {
+         "subjectKind": "group",
+         "description": "The default project team.",
+         "domain": "vstfs:///Classification/TeamProject/53e2997d-3723-4c1c-aa62-a0194cb65a29",
+         "principalName": "[Demo Public]\\Demo Public Team",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "d0f23f01-4ac3-4b43-a751-1cc0b3897541",
+         "displayName": "Demo Public Team",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xOTE5OTgxMzY2LTIzODA3NzcyODAtMjI4OTU4MDE4OC0yNzQyMjQ4ODE4"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xOTE5OTgxMzY2LTIzODA3NzcyODAtMjI4OTU4MDE4OC0yNzQyMjQ4ODE4"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xOTE5OTgxMzY2LTIzODA3NzcyODAtMjI4OTU4MDE4OC0yNzQyMjQ4ODE4"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xOTE5OTgxMzY2LTIzODA3NzcyODAtMjI4OTU4MDE4OC0yNzQyMjQ4ODE4"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xOTE5OTgxMzY2LTIzODA3NzcyODAtMjI4OTU4MDE4OC0yNzQyMjQ4ODE4",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xOTE5OTgxMzY2LTIzODA3NzcyODAtMjI4OTU4MDE4OC0yNzQyMjQ4ODE4"
+      },
+      {
+         "subjectKind": "group",
+         "description": "",
+         "domain": "vstfs:///Classification/TeamProject/adc3fef1-3781-48f9-897a-0ef5ca2c1917",
+         "principalName": "[Test Project Private]\\Custom Project Level Group",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "15ae2579-7243-4de8-9114-1e146e15df85",
+         "displayName": "Custom Project Level Group",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtNTY3Njc1MzA3LTIyMjYzNjM5NjktMjgzOTYyMTAzMC0yMjE0MDMyNjAy"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtNTY3Njc1MzA3LTIyMjYzNjM5NjktMjgzOTYyMTAzMC0yMjE0MDMyNjAy"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtNTY3Njc1MzA3LTIyMjYzNjM5NjktMjgzOTYyMTAzMC0yMjE0MDMyNjAy"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtNTY3Njc1MzA3LTIyMjYzNjM5NjktMjgzOTYyMTAzMC0yMjE0MDMyNjAy"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtNTY3Njc1MzA3LTIyMjYzNjM5NjktMjgzOTYyMTAzMC0yMjE0MDMyNjAy",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtNTY3Njc1MzA3LTIyMjYzNjM5NjktMjgzOTYyMTAzMC0yMjE0MDMyNjAy"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can perform all operations in the team project.",
+         "domain": "vstfs:///Classification/TeamProject/adc3fef1-3781-48f9-897a-0ef5ca2c1917",
+         "principalName": "[Test Project Private]\\Project Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "ac198706-518b-45ab-8b02-208bf4c516fe",
+         "displayName": "Project Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMQ"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMQ"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMQ"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMQ"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMQ",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMQ"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group should include the service accounts used by the build services set up for this project collection.",
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Project Collection Build Service Accounts",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "bcff4163-a209-43fe-8b67-229972ef8e35",
+         "displayName": "Project Collection Build Service Accounts",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0x"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0x"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0x"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0x"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0x",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0x"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this application group can perform all privileged operations on the Team Project Collection.",
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Project Collection Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "9f69da80-d870-4847-ad89-288f72610899",
+         "displayName": "Project Collection Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0x"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0x"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0x"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0x"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0x",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0x"
+      },
+      {
+         "subjectKind": "group",
+         "description": "This application group contains Team Project Collection service accounts.",
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Project Collection Service Accounts",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "6b5b4944-cccc-4068-863d-29dda4cdb20f",
+         "displayName": "Project Collection Service Accounts",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0y"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0y"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0y"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0y"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0y",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0y"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have access to the team project.",
+         "domain": "vstfs:///Classification/TeamProject/53e2997d-3723-4c1c-aa62-a0194cb65a29",
+         "principalName": "[Demo Public]\\Readers",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "2df3aa03-2f8c-461f-987f-322bc36e19fc",
+         "displayName": "Readers",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xMDQyMjE1NDM0LTYzMjAyNDkxMS0yNzk3NDA3NjMwLTE4NzkyMDkyMzI"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xMDQyMjE1NDM0LTYzMjAyNDkxMS0yNzk3NDA3NjMwLTE4NzkyMDkyMzI"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xMDQyMjE1NDM0LTYzMjAyNDkxMS0yNzk3NDA3NjMwLTE4NzkyMDkyMzI"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xMDQyMjE1NDM0LTYzMjAyNDkxMS0yNzk3NDA3NjMwLTE4NzkyMDkyMzI"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xMDQyMjE1NDM0LTYzMjAyNDkxMS0yNzk3NDA3NjMwLTE4NzkyMDkyMzI",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS0xMDQyMjE1NDM0LTYzMjAyNDkxMS0yNzk3NDA3NjMwLTE4NzkyMDkyMzI"
+      },
+      {
+         "subjectKind": "group",
+         "description": "",
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Custom Collection Level Group",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "39b013b1-4814-4afc-87c0-41c224ff6cab",
+         "displayName": "Custom Collection Level Group",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMS0yOTU2MTczOTM3LTIyNjYyMzA0My0yNTE1Mjg5MjQ1LTM0NDU2MjcwMjE"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMS0yOTU2MTczOTM3LTIyNjYyMzA0My0yNTE1Mjg5MjQ1LTM0NDU2MjcwMjE"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMS0yOTU2MTczOTM3LTIyNjYyMzA0My0yNTE1Mjg5MjQ1LTM0NDU2MjcwMjE"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMS0yOTU2MTczOTM3LTIyNjYyMzA0My0yNTE1Mjg5MjQ1LTM0NDU2MjcwMjE"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMS0yOTU2MTczOTM3LTIyNjYyMzA0My0yNTE1Mjg5MjQ1LTM0NDU2MjcwMjE",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMS0yOTU2MTczOTM3LTIyNjYyMzA0My0yNTE1Mjg5MjQ1LTM0NDU2MjcwMjE"
+      },
+      {
+         "subjectKind": "group",
+         "description": "This application group contains all users and groups that have access to the Team Project Collection.",
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Project Collection Valid Users",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "4345a139-84f3-40b4-97b4-459ae3c125fd",
+         "displayName": "Project Collection Valid Users",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0z"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0z"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0z"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0z"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0z",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC0z"
+      },
+      {
+         "subjectKind": "group",
+         "description": "The default project team.",
+         "domain": "vstfs:///Classification/TeamProject/c32a4f3f-ad08-445d-9c76-52937ad82b38",
+         "principalName": "[Demo]\\Demo Team",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "076a108f-c638-46e8-98d2-49ed9160dcf7",
+         "displayName": "Demo Team",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTExMzIxNjkzLTEzODc2MTk5MTAtMjc0NTAwNTg1OS04MjY0MTUyNzg"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTExMzIxNjkzLTEzODc2MTk5MTAtMjc0NTAwNTg1OS04MjY0MTUyNzg"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTExMzIxNjkzLTEzODc2MTk5MTAtMjc0NTAwNTg1OS04MjY0MTUyNzg"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTExMzIxNjkzLTEzODc2MTk5MTAtMjc0NTAwNTg1OS04MjY0MTUyNzg"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTExMzIxNjkzLTEzODc2MTk5MTAtMjc0NTAwNTg1OS04MjY0MTUyNzg",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0yNTExMzIxNjkzLTEzODc2MTk5MTAtMjc0NTAwNTg1OS04MjY0MTUyNzg"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group should include the service accounts used by the test controllers set up for this project collection.",
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Project Collection Test Service Accounts",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "28f67101-9c5b-4246-87b9-5116348d188e",
+         "displayName": "Project Collection Test Service Accounts",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNC0x"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNC0x"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNC0x"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNC0x"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNC0x",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNC0x"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can add, modify, and delete items within the team project.",
+         "domain": "vstfs:///Classification/TeamProject/c32a4f3f-ad08-445d-9c76-52937ad82b38",
+         "principalName": "[Demo]\\Contributors",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "76750a07-9693-4a51-b697-526fbfaad10e",
+         "displayName": "Contributors",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xOTkyODk5OTc5LTU0NDE5Nzk1My0zMDg5NDE2NTE4LTkyMjg3ODEyMA"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xOTkyODk5OTc5LTU0NDE5Nzk1My0zMDg5NDE2NTE4LTkyMjg3ODEyMA"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xOTkyODk5OTc5LTU0NDE5Nzk1My0zMDg5NDE2NTE4LTkyMjg3ODEyMA"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xOTkyODk5OTc5LTU0NDE5Nzk1My0zMDg5NDE2NTE4LTkyMjg3ODEyMA"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xOTkyODk5OTc5LTU0NDE5Nzk1My0zMDg5NDE2NTE4LTkyMjg3ODEyMA",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xOTkyODk5OTc5LTU0NDE5Nzk1My0zMDg5NDE2NTE4LTkyMjg3ODEyMA"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have access to the team project.",
+         "domain": "vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876",
+         "principalName": "[Test Project Public]\\Readers",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "9f7421c9-164c-4bce-a972-5b05a886b99c",
+         "displayName": "Readers",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjUwMzY2MjgtMTkyMjkyNjg0LTI5MzIxOTY0MzMtMTUzMzEyMzY0"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjUwMzY2MjgtMTkyMjkyNjg0LTI5MzIxOTY0MzMtMTUzMzEyMzY0"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjUwMzY2MjgtMTkyMjkyNjg0LTI5MzIxOTY0MzMtMTUzMzEyMzY0"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjUwMzY2MjgtMTkyMjkyNjg0LTI5MzIxOTY0MzMtMTUzMzEyMzY0"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjUwMzY2MjgtMTkyMjkyNjg0LTI5MzIxOTY0MzMtMTUzMzEyMzY0",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjUwMzY2MjgtMTkyMjkyNjg0LTI5MzIxOTY0MzMtMTUzMzEyMzY0"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group should include accounts for people who should be able to administer the build resources.",
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Project Collection Build Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "2e8996a0-629a-41e5-a3b6-6fb6814a8631",
+         "displayName": "Project Collection Build Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0y"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0y"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0y"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0y"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0y",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMS0y"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have access to the team project.",
+         "domain": "vstfs:///Classification/TeamProject/53e2997d-3723-4c1c-aa62-a0194cb65a29",
+         "principalName": "[Demo Public]\\Project Valid Users",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "939caa4e-bdcd-487d-bcf7-74e8fd56a355",
+         "displayName": "Project Valid Users",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0z"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0z"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0z"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0z"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0z",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0z"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can perform all operations in the team project.",
+         "domain": "vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876",
+         "principalName": "[Test Project Public]\\Project Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "86da1f23-1029-42b1-b2f8-75ca718af334",
+         "displayName": "Project Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMQ"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMQ"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMQ"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMQ"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMQ",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMQ"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can add, modify, and delete items within the team project.",
+         "domain": "vstfs:///Classification/TeamProject/adc3fef1-3781-48f9-897a-0ef5ca2c1917",
+         "principalName": "[Test Project Private]\\Contributors",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "358b7231-3ef5-4a0c-9867-7eb7969083dc",
+         "displayName": "Contributors",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTg1ODYxNTU5OC0xNTY1NjIyNjA2LTI3MjQzMjI3MjgtMzY0NTQxMzg5NQ"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTg1ODYxNTU5OC0xNTY1NjIyNjA2LTI3MjQzMjI3MjgtMzY0NTQxMzg5NQ"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTg1ODYxNTU5OC0xNTY1NjIyNjA2LTI3MjQzMjI3MjgtMzY0NTQxMzg5NQ"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTg1ODYxNTU5OC0xNTY1NjIyNjA2LTI3MjQzMjI3MjgtMzY0NTQxMzg5NQ"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTg1ODYxNTU5OC0xNTY1NjIyNjA2LTI3MjQzMjI3MjgtMzY0NTQxMzg5NQ",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMTg1ODYxNTU5OC0xNTY1NjIyNjA2LTI3MjQzMjI3MjgtMzY0NTQxMzg5NQ"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can create, modify and delete build definitions and manage queued and completed builds.",
+         "domain": "vstfs:///Classification/TeamProject/53e2997d-3723-4c1c-aa62-a0194cb65a29",
+         "principalName": "[Demo Public]\\Build Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "c9afff79-df6f-47f9-923d-854dd6186ff6",
+         "displayName": "Build Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS05ODg1Nzc3NjktMjc3MTYzODQyLTI4NzIxNDAyOTktMjY5MDI5ODM5NQ"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS05ODg1Nzc3NjktMjc3MTYzODQyLTI4NzIxNDAyOTktMjY5MDI5ODM5NQ"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS05ODg1Nzc3NjktMjc3MTYzODQyLTI4NzIxNDAyOTktMjY5MDI5ODM5NQ"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS05ODg1Nzc3NjktMjc3MTYzODQyLTI4NzIxNDAyOTktMjY5MDI5ODM5NQ"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS05ODg1Nzc3NjktMjc3MTYzODQyLTI4NzIxNDAyOTktMjY5MDI5ODM5NQ",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS05ODg1Nzc3NjktMjc3MTYzODQyLTI4NzIxNDAyOTktMjY5MDI5ODM5NQ"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can create, modify and delete build definitions and manage queued and completed builds.",
+         "domain": "vstfs:///Classification/TeamProject/c32a4f3f-ad08-445d-9c76-52937ad82b38",
+         "principalName": "[Demo]\\Build Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "722ed693-33c4-42af-8925-978601e0d914",
+         "displayName": "Build Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xNzI5NjI2MTM0LTExMjE0OTU3OC0yNDIwNDkzNjkxLTIyNDE0MjA5MDk"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xNzI5NjI2MTM0LTExMjE0OTU3OC0yNDIwNDkzNjkxLTIyNDE0MjA5MDk"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xNzI5NjI2MTM0LTExMjE0OTU3OC0yNDIwNDkzNjkxLTIyNDE0MjA5MDk"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xNzI5NjI2MTM0LTExMjE0OTU3OC0yNDIwNDkzNjkxLTIyNDE0MjA5MDk"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xNzI5NjI2MTM0LTExMjE0OTU3OC0yNDIwNDkzNjkxLTIyNDE0MjA5MDk",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMDYyMTUyODk5LTE0NTU3OTMzMi0yNjI1MDAwMDgzLTIwNjA5ODcxOTItMS0xNzI5NjI2MTM0LTExMjE0OTU3OC0yNDIwNDkzNjkxLTIyNDE0MjA5MDk"
+      },
+      {
+         "subjectKind": "group",
+         "description": "The default project team.",
+         "domain": "vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876",
+         "principalName": "[Test Project Public]\\Test Project Public Team",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "96434f18-e21a-4704-9eaf-a6f5b8c854f1",
+         "displayName": "Test Project Public Team",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMzU4NzIwNzk0NC0yNzc0Njk2MDAzLTIxODMwMzM5NjktNDc1MDcwMzU4"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMzU4NzIwNzk0NC0yNzc0Njk2MDAzLTIxODMwMzM5NjktNDc1MDcwMzU4"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMzU4NzIwNzk0NC0yNzc0Njk2MDAzLTIxODMwMzM5NjktNDc1MDcwMzU4"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMzU4NzIwNzk0NC0yNzc0Njk2MDAzLTIxODMwMzM5NjktNDc1MDcwMzU4"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMzU4NzIwNzk0NC0yNzc0Njk2MDAzLTIxODMwMzM5NjktNDc1MDcwMzU4",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMzU4NzIwNzk0NC0yNzc0Njk2MDAzLTIxODMwMzM5NjktNDc1MDcwMzU4"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can add, modify, and delete items within the team project.",
+         "domain": "vstfs:///Classification/TeamProject/53e2997d-3723-4c1c-aa62-a0194cb65a29",
+         "principalName": "[Demo Public]\\Contributors",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "6c16e1d4-4d73-4106-acff-aa7111926e8e",
+         "displayName": "Contributors",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS01Mjg3NzEwOTUtNjI3NTgzMjk2LTIyMjExMDIyNDItMzI3NjYxNjUzMQ"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS01Mjg3NzEwOTUtNjI3NTgzMjk2LTIyMjExMDIyNDItMzI3NjYxNjUzMQ"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS01Mjg3NzEwOTUtNjI3NTgzMjk2LTIyMjExMDIyNDItMzI3NjYxNjUzMQ"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS01Mjg3NzEwOTUtNjI3NTgzMjk2LTIyMjExMDIyNDItMzI3NjYxNjUzMQ"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS01Mjg3NzEwOTUtNjI3NTgzMjk2LTIyMjExMDIyNDItMzI3NjYxNjUzMQ",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTA3MjM2OTQ3LTU5MDgxNDI4NC0yODU4NTkwMjMzLTEyODcwMTkwNDktMS01Mjg3NzEwOTUtNjI3NTgzMjk2LTIyMjExMDIyNDItMzI3NjYxNjUzMQ"
+      },
+      {
+         "subjectKind": "group",
+         "description": "This group should only include service accounts used by proxies set up for this team project collection.",
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Project Collection Proxy Service Accounts",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "cff3ab62-c046-4824-b1ee-ab1dafabe66f",
+         "displayName": "Project Collection Proxy Service Accounts",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNS0x"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNS0x"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNS0x"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNS0x"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNS0x",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtNS0x"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have access to the team project.",
+         "domain": "vstfs:///Classification/TeamProject/adc3fef1-3781-48f9-897a-0ef5ca2c1917",
+         "principalName": "[Test Project Private]\\Project Valid Users",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "a49d666d-fc8a-4a6c-bca8-bd206bd52422",
+         "displayName": "Project Valid Users",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMw"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMw"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMw"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMw"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMw",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MTcxNTkxNzQ1LTIxMzA0MTI4NzYtMjQ3MDExOTQ4MS0zMzg4NTg1MjI3LTAtMC0wLTAtMw"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can perform all operations in the team project.",
+         "domain": "vstfs:///Classification/TeamProject/c32a4f3f-ad08-445d-9c76-52937ad82b38",
+         "principalName": "[Demo]\\Project Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "3212e170-f61b-4f1e-96ba-bd66569d03dd",
+         "displayName": "Project Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0x"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0x"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0x"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0x"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0x",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0x"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can add, modify, and delete items within the team project.",
+         "domain": "vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876",
+         "principalName": "[Test Project Public]\\Contributors",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "743e44ca-193b-4376-8548-d2b12139cab3",
+         "displayName": "Contributors",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMTI4NDY4ODc2NS0xMzE2NzAyMDIxLTMyMDU4NTI5MTUtMjc2MzgzNTY3"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMTI4NDY4ODc2NS0xMzE2NzAyMDIxLTMyMDU4NTI5MTUtMjc2MzgzNTY3"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMTI4NDY4ODc2NS0xMzE2NzAyMDIxLTMyMDU4NTI5MTUtMjc2MzgzNTY3"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMTI4NDY4ODc2NS0xMzE2NzAyMDIxLTMyMDU4NTI5MTUtMjc2MzgzNTY3"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMTI4NDY4ODc2NS0xMzE2NzAyMDIxLTMyMDU4NTI5MTUtMjc2MzgzNTY3",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMTI4NDY4ODc2NS0xMzE2NzAyMDIxLTMyMDU4NTI5MTUtMjc2MzgzNTY3"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have access to the team project.",
+         "domain": "vstfs:///Classification/TeamProject/c32a4f3f-ad08-445d-9c76-52937ad82b38",
+         "principalName": "[Demo]\\Project Valid Users",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "b598e07c-24da-478b-b9c8-d3a9272d1833",
+         "displayName": "Project Valid Users",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0z"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0z"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0z"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0z"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0z",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xOTg1NjQ0Mzk3LTEzMjY3OTUzMzEtMjgxMTM0NDk3OS00MTczMTMzNDktMC0wLTAtMC0z"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group can create, modify and delete build definitions and manage queued and completed builds.",
+         "domain": "vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876",
+         "principalName": "[Test Project Public]\\Build Administrators",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "31680f57-6df9-460f-8526-d3dbe5fb628f",
+         "displayName": "Build Administrators",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjk1OTE4Njk5Ni0yNDc2MzczODI4LTIyMzE0Nzk3MDYtMjc3MjM1MDQ2OQ"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjk1OTE4Njk5Ni0yNDc2MzczODI4LTIyMzE0Nzk3MDYtMjc3MjM1MDQ2OQ"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjk1OTE4Njk5Ni0yNDc2MzczODI4LTIyMzE0Nzk3MDYtMjc3MjM1MDQ2OQ"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjk1OTE4Njk5Ni0yNDc2MzczODI4LTIyMzE0Nzk3MDYtMjc3MjM1MDQ2OQ"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjk1OTE4Njk5Ni0yNDc2MzczODI4LTIyMzE0Nzk3MDYtMjc3MjM1MDQ2OQ",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDI2OTI4Mzg1LTM1NzM1NTc4MzEtMzE0MjAxNTEyNC0yMDgyNjcwNzEwLTEtMjk1OTE4Njk5Ni0yNDc2MzczODI4LTIyMzE0Nzk3MDYtMjc3MjM1MDQ2OQ"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have service-level permissions in this enterprise. For service accounts only.",
+         "domain": "vstfs:///Framework/IdentityDomain/3bb5c90a-fe79-4348-9b5e-63b51876eaec",
+         "principalName": "[TEAM FOUNDATION]\\Enterprise Service Accounts",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "fe221be0-ad74-4a4c-85cc-d978c9a0d398",
+         "displayName": "Enterprise Service Accounts",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTI"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTI"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTI"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTI"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTI",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTI"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have access to the team project.",
+         "domain": "vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876",
+         "principalName": "[Test Project Public]\\Project Valid Users",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "4f96df97-653a-408d-bb48-e2382b690b98",
+         "displayName": "Project Valid Users",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMw"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMw"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMw"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMw"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMw",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yNTkwMDIxODU0LTI5Njg4MjI2MDItMjIwNzM1MTQzNy0xNDQyOTg4NjMwLTAtMC0wLTAtMw"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Identities which are granted explicit permission to a resource will be automatically added to this group if they were not previously a member of any other group.",
+         "isCrossProject": true,
+         "domain": "vstfs:///Framework/IdentityDomain/f9223383-4917-48e5-83d6-6d8080d09b65",
+         "principalName": "[Test]\\Security Service Group",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "8a0cdc8f-51fa-4945-9ee3-ec4032d7eb84",
+         "displayName": "Security Service Group",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC01"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC01"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC01"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC01"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC01",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMjAxMTY2NTg1LTM5MDcxODc5Mi0yMjExODY4MDMyLTIxNjExNTQ5MTctMC0wLTAtMC01"
+      },
+      {
+         "subjectKind": "group",
+         "description": "The default project team.",
+         "domain": "vstfs:///Classification/TeamProject/adc3fef1-3781-48f9-897a-0ef5ca2c1917",
+         "principalName": "[Test Project Private]\\Test Project Private Team",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "889ac477-9012-43ab-96ba-ed43b05e34f3",
+         "displayName": "Test Project Private Team",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjE0NjgxNjQzNC0xMDAxMTc2ODk4LTMwNzM1MzE5OTgtMzMyMjU4MzA4Nw"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjE0NjgxNjQzNC0xMDAxMTc2ODk4LTMwNzM1MzE5OTgtMzMyMjU4MzA4Nw"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjE0NjgxNjQzNC0xMDAxMTc2ODk4LTMwNzM1MzE5OTgtMzMyMjU4MzA4Nw"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjE0NjgxNjQzNC0xMDAxMTc2ODk4LTMwNzM1MzE5OTgtMzMyMjU4MzA4Nw"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjE0NjgxNjQzNC0xMDAxMTc2ODk4LTMwNzM1MzE5OTgtMzMyMjU4MzA4Nw",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS00MDYwMDA1MjkzLTIxNjc5MjkxNjAtMjMwNjQ3NzgxMy0zMzkxODg3NjM5LTEtMjE0NjgxNjQzNC0xMDAxMTc2ODk4LTMwNzM1MzE5OTgtMzMyMjU4MzA4Nw"
+      },
+      {
+         "subjectKind": "group",
+         "description": "Members of this group have been invited to this enterprise.",
+         "domain": "vstfs:///Framework/IdentityDomain/3bb5c90a-fe79-4348-9b5e-63b51876eaec",
+         "principalName": "[TEAM FOUNDATION]\\Enterprise Invited Users",
+         "mailAddress": null,
+         "origin": "vsts",
+         "originId": "88d233b6-4825-47ac-ad56-ff5936a63a54",
+         "displayName": "Enterprise Invited Users",
+         "_links": {
+            "self": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTQwOTY"
+            },
+            "memberships": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTQwOTY"
+            },
+            "membershipState": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTQwOTY"
+            },
+            "storageKey": {
+               "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTQwOTY"
+            }
+         },
+         "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTQwOTY",
+         "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODA5OTEyOTEtMjA0NjcwNzc3OS0yNjA2NjU0Mzg5LTQxMDQ0NjU3Mi0wLTAtMC0wLTQwOTY"
+      }
+   ]
+}

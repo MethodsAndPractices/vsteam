@@ -1,0 +1,14 @@
+{
+   "value": "scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2",
+   "_links": {
+      "self": {
+         "href": "https://vssps.dev.azure.com/test/_apis/Graph/Descriptors/010d06f0-00d5-472a-bb47-58947c230876"
+      },
+      "storageKey": {
+         "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2"
+      },
+      "subject": {
+         "href": "https://vssps.dev.azure.com/test/_apis/Graph/Scopes/scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2"
+      }
+   }
+}

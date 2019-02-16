@@ -1,0 +1,26 @@
+{
+   "subjectKind": "group",
+   "description": "Members of this group can perform all operations in the team project.",
+   "domain": "vstfs:///Classification/TeamProject/53e2997d-3723-4c1c-aa62-a0194cb65a29",
+   "principalName": "[Demo Public]\\Project Administrators",
+   "mailAddress": null,
+   "origin": "vsts",
+   "originId": "e0302e6e-92f9-41f7-8611-04a3a0d3008f",
+   "displayName": "Project Administrators",
+   "_links": {
+      "self": {
+         "href": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+      },
+      "memberships": {
+         "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+      },
+      "membershipState": {
+         "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+      },
+      "storageKey": {
+         "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+      }
+   },
+   "url": "https://vssps.dev.azure.com/test/_apis/Graph/Groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x",
+   "descriptor": "vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x"
+}

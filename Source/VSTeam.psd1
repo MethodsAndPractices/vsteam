@@ -13,7 +13,7 @@
    RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.0.1'
+   ModuleVersion     = '6.1.0'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -28,7 +28,7 @@
    CompanyName       = ''
 
    # Copyright statement for this module
-   Copyright         = '(c) 2016 Donovan Brown. All rights reserved.'
+   Copyright         = '(c) 2019 Donovan Brown. All rights reserved.'
 
    # Description of the functionality provided by this module
    Description       = 'Adds functionality for working with Visual Studio Team Services and Team Foundation Server.'
@@ -75,7 +75,9 @@
       'types\tfvc.ps1xml',
       'types\users.ps1xml',
       'types\workitems.ps1xml',
-      'types\pullrequest.ps1xml')
+      'types\pullrequest.ps1xml',
+      'types\group.ps1xml',
+      'types\descriptor.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -88,7 +90,9 @@
       'formats\users.format.ps1xml',
       'formats\workitemTypes.format.ps1xml',
       'formats\workitems.format.ps1xml',
-      'formats\vsteamPSDrive.format.ps1xml')
+      'formats\vsteamPSDrive.format.ps1xml',
+      'formats\group.format.ps1xml',
+      'formats\descriptor.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    # NestedModules     = @()
@@ -196,7 +200,9 @@
       'Update-VSTeamExtension',
       'Remove-VSTeamExtension',
       'Update-VSTeamWorkItem',
-      "Set-VSTeamAlias")
+      'Set-VSTeamAlias',
+      'Get-VSTeamGroup',
+      'Get-VSTeamDescriptor')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -230,7 +236,7 @@
          # ExternalModuleDependencies = @('SHiPS')
 
          # A URL to the license for this module.
-         # LicenseUri = ''
+         LicenseUri = 'https://github.com/DarqueWarrior/vsteam/blob/master/LICENSE'
 
          # A URL to the main website for this project.
          ProjectUri = 'https://github.com/DarqueWarrior/vsteam'
@@ -239,7 +245,7 @@
          # IconUri = ''
 
          # ReleaseNotes of this module
-         # ReleaseNotes = ''
+         ReleaseNotes = 'https://github.com/DarqueWarrior/vsteam/blob/master/CHANGELOG.md'
 
       } # End of PSData hashtable
 

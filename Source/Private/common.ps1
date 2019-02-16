@@ -6,6 +6,13 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $profilesPath = "$HOME/vsteam_profiles.json"
 
 # Not all versions support the name features.
+
+function _supportsGraph {
+   if (-not [VSTeamVersions]::Graph) {
+      throw 'This account does not support the graph API.'
+   }
+}
+
 function _supportsFeeds {
    if (-not [VSTeamVersions]::Packaging) {
       throw 'This account does not support packages.'

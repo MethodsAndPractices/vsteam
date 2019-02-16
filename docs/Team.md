@@ -142,6 +142,10 @@ Returns all the tags of a build.
 
 Gets the Azure subscriptions associated with the Team Services account.
 
+### [Get-VSTeamDescriptor](Get-VSTeamDescriptor.md)
+
+Resolve a storage key to a descriptor.
+
 ### [Get-VSTeamExtension](Get-VSTeamExtension.md)
 
 Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.
@@ -157,6 +161,10 @@ Queries the provided repository for its refs and returns them.
 ### [Get-VSTeamGitRepository](Get-VSTeamGitRepository.md)
 
 Get all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.
+
+### [Get-VSTeamGroup](Get-VSTeamGroup.md)
+
+Returns a Group or List of Groups.
 
 ### [Get-VSTeamInfo](Get-VSTeamInfo.md)
 

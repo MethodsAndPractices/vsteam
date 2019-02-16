@@ -15,6 +15,7 @@ function Get-VSTeamProject {
       [Alias('ProjectID')]
       [string] $Id,
 
+      [Parameter(ParameterSetName = 'ByID')]
       [switch] $IncludeCapabilities
    )
 

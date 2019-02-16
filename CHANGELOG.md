@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.1.0
+
+The AzD API now defaults to the 5.x versions.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/140) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+Added Get-VSTeamGroup to retrieve Groups
+Added Get-VSTeamDescriptor to resolve ID's to Descriptors
+
+**Breaking changes**:
+
+Replaced the -Release parameter of Get-VSTeamOption with -SubDomain parameter so any domain can be used.
+
 ## 6.0.1
 
 Fixing issue with mapping drive.

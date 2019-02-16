@@ -14,5 +14,6 @@ function Get-VSTeamAPIVersion {
       MemberEntitlementManagement = $([VSTeamVersions]::MemberEntitlementManagement)
       ExtensionsManagement        = $([VSTeamVersions]::ExtensionsManagement)
       ServiceFabricEndpoint       = $([VSTeamVersions]::ServiceFabricEndpoint)
+      Graph                       = $([VSTeamVersions]::Graph)
    }
 }
