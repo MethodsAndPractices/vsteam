@@ -36,14 +36,29 @@ PS C:\> Get-VSTeamOption | Format-Table -View Versions
 
 This will display all the versions of supported APIs for your account using the 'Versions' custom table format.
 
+### -------------------------- EXAMPLE 3 --------------------------
+
+```PowerShell
+PS C:\> Get-VSTeamOption -SubDomain vsrm 
+```
+
+This will display all the versions of supported APIs for the release management service.
+
 ## PARAMETERS
 
-### -Release
+### -SubDomain
 
-Returns options for Release Management APIs
+Returns options for that sub domain APIs. Some examples include:
+
+- vsaex = Member Entitlement Management
+- feeds = Artifacts
+- vsrm = Release Management
+- vssps = Graph
+- extmgmt = Extensions
 
 ```yaml
-Type: SwitchParameter
+Type: String
+Required: false
 ```
 
 ## INPUTS
