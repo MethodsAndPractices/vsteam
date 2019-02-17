@@ -85,20 +85,20 @@ function Set-VSTeamAPIVersion {
             }
             Default {
                [VSTeamVersions]::Version = $Target
-               [VSTeamVersions]::Git = '5.1-preview.1'
-               [VSTeamVersions]::Core = '5.1-preview.1'
+               [VSTeamVersions]::Git = '5.1-preview'
+               [VSTeamVersions]::Core = '5.0'
                [VSTeamVersions]::Build = '5.0'
-               [VSTeamVersions]::Release = '5.1-preview.1'
-               [VSTeamVersions]::DistributedTask = '5.0-preview.2'
+               [VSTeamVersions]::Release = '5.1-preview'
+               [VSTeamVersions]::DistributedTask = '5.0-preview'
                [VSTeamVersions]::Tfvc = '5.0'
-               [VSTeamVersions]::Packaging = '5.1-preview.1'
-               [VSTeamVersions]::MemberEntitlementManagement = '5.1-preview.1'
+               [VSTeamVersions]::Packaging = '5.1-preview'
+               [VSTeamVersions]::MemberEntitlementManagement = '5.1-preview'
                # This version is never passed to the API but is used to evaluate
                # if Service Fabric is enabled for the account. Just set it to 
                # match Distributed Task for AzD
-               [VSTeamVersions]::ServiceFabricEndpoint = '5.0-preview.2'
-               [VSTeamVersions]::ExtensionsManagement = '5.1-preview.1'
-               [VSTeamVersions]::Graph = '5.1-preview.1'
+               [VSTeamVersions]::ServiceFabricEndpoint = '5.0-preview'
+               [VSTeamVersions]::ExtensionsManagement = '5.1-preview'
+               [VSTeamVersions]::Graph = '5.1-preview'
             }
          }
       }
