@@ -102,7 +102,7 @@ function Add-VSTeamGitRepositoryPermission {
          switch($Group.Origin)
          {
             "vsts" {
-               $sid = Get-ADOIdFromDescriptor -Descriptor $Group.Descriptor
+               $sid = _getVSTeamIdFromDescriptor -Descriptor $Group.Descriptor
                $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
             }
             default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues"}
@@ -115,7 +115,7 @@ function Add-VSTeamGitRepositoryPermission {
          switch($User.Origin)
          {
             "vsts" {
-               $sid = Get-ADOIdFromDescriptor -Descriptor $User.Descriptor
+               $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
                $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
             }
             "aad" {

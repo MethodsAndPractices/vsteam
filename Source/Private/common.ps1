@@ -774,3 +774,24 @@ function _convertToHex()
     $hexString = ($bytes.Bytes|ForEach-Object ToString X2) -join ''
     return $hexString.ToLowerInvariant();
 }
+
+function _getVSTeamIdFromDescriptor {
+   [cmdletbinding()]
+   param(
+       [parameter(Mandatory=$true)]
+       [string]$Descriptor
+   )
+
+   $identifier = $Descriptor.Split('.')[1]
+
+   # We need to Pad the string for FromBase64String to work reliably (AzD Descriptors are not padded)
+   $ModulusValue = ($identifier.length % 4)   
+   Switch ($ModulusValue) {
+       '0' {$Padded = $identifier}
+       '1' {$Padded = $identifier.Substring(0,$identifier.Length - 1)}
+       '2' {$Padded = $identifier + ('=' * (4 - $ModulusValue))}
+       '3' {$Padded = $identifier + ('=' * (4 - $ModulusValue))}
+   }
+
+   return [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($Padded))
+}
