@@ -47,7 +47,7 @@ function Get-VSTeamAccessControlList {
 
       if ($Descriptors -and $Descriptors.Length -gt 0)
       {
-         $queryString.descriptors = $Descriptors.Join(",")
+         $queryString.descriptors = $Descriptors -join ","
       }
 
       if ($IncludeExtendedInfo.IsPresent)

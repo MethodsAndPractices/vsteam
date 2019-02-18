@@ -22,12 +22,16 @@
 
 ### -SecurityNamespace
 
+Security namespace identifier.
+
 ```yaml
 Type: VSTeamSecurityNamespace
 Required: True
 ```
 
 ### -SecurityNamespaceId
+
+Security namespace identifier.
 
 ```yaml
 Type: String
@@ -36,6 +40,8 @@ Required: True
 
 ### -Token
 
+The security Token
+
 ```yaml
 Type: String
 Required: True
@@ -43,12 +49,16 @@ Required: True
 
 ### -AllowMask
 
+Bitmask for Allow Permissions
+
 ```yaml
 Type: Int
 Required: True
 ```
 
 ### -DenyMask
+
+Bitmask for Deny Permissions
 
 ```yaml
 Type: Int
@@ -59,7 +69,7 @@ Required: True
 
 ## OUTPUTS
 
-### System.Object
+### VSTeamAccessControlEntry
 
 ## NOTES
 
