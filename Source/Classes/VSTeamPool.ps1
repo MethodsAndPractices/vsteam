@@ -23,7 +23,7 @@ class VSTeamPool : VSTeamDirectory {
       if ($obj.PSObject.Properties.Match('isHosted').count -gt 0) {
          $this.isHosted = $obj.isHosted
       }
-      
+
       if ($obj.PSObject.Properties.Match('size').count -gt 0) {
          $this.count = $obj.size
       }

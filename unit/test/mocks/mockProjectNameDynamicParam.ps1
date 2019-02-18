@@ -22,7 +22,7 @@ Mock _buildProjectNameDynamicParam {
       $AliasAttribute = New-Object System.Management.Automation.AliasAttribute(@($AliasName))
       $AttributeCollection.Add($AliasAttribute)
    }
-   
+
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
    # Create and return the dynamic parameter

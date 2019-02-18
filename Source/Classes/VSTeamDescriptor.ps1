@@ -10,7 +10,7 @@ class VSTeamDescriptor : VSTeamLeaf {
    VSTeamDescriptor (
       [object]$obj
    ) : base($obj.value, $obj.value, $null) {
-     
+
       $this.Links = @{
          'Self' = $obj._links.self.href;
          'StorageKey' = $obj._links.storageKey.href;

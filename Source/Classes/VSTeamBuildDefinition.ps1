@@ -35,10 +35,10 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       $this.CreatedOn = $obj.createdDate
       $this.JobAuthorizationScope = $obj.jobAuthorizationScope
       $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
-      
+
       # These might not be returned
       if ($obj.PSObject.Properties.Match('queue').count -gt 0) {
-         $this.Queue = [VSTeamQueue]::new($obj.queue, $Projectname)         
+         $this.Queue = [VSTeamQueue]::new($obj.queue, $Projectname)
       }
       if ($obj.PSObject.Properties.Match('triggers').count -gt 0) {
          $this.Triggers = $obj.triggers
@@ -51,18 +51,18 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       if ($obj.PSObject.Properties.Match('demands').count -gt 0) {
          $this.Demands = $obj.demands
       }
-      
+
       if ($obj.PSObject.Properties.Match('options').count -gt 0) {
          $this.Options = $obj.options
       }
-      
+
       if ($obj.PSObject.Properties.Match('tags').count -gt 0) {
          $this.Tags = $obj.tags
       }
 
       if ($obj.PSObject.Properties.Match('repository').count -gt 0) {
          if($obj.repository.type -eq "TfsGit") {
-            $this.GitRepository = [VSTeamGitRepository]::new($obj.repository, $Projectname)         
+            $this.GitRepository = [VSTeamGitRepository]::new($obj.repository, $Projectname)
          } else {
             $this.Repository = $obj.repository
          }

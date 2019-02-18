@@ -40,18 +40,18 @@ InModuleScope VSTeam {
    }
 
    Describe 'Groups VSTS' {
-      # You have to set the version or the api-version will not be added when 
+      # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Graph = ''
       [VSTeamVersions]::Graph = '5.0'
-      
+
       Context 'Get-VSTeamGroup by project' {
          Mock Get-VSTeamProject { return $projectResult } -Verifiable
          Mock Get-VSTeamDescriptor { return  [VSTeamDescriptor]::new($scopeResult) } -Verifiable
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
-         
-            return $groupListResult 
+
+            return $groupListResult
          } -Verifiable
 
          Get-VSTeamGroup -ProjectName "Test Project Public"
