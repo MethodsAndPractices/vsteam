@@ -6,7 +6,7 @@ function Get-VSTeamDescriptor {
    )
 
    process {
-      # Thi swill throw if this account does not support the graph API
+      # This will throw if this account does not support the graph API
       _supportsGraph
 
       # Call the REST API

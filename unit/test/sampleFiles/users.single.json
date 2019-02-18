@@ -1,0 +1,29 @@
+{
+   "subjectKind": "user",
+   "metaType": "member",
+   "domain": "788df857-dcd8-444d-885e-bff359bc1982",
+   "principalName": "test@testuser.com",
+   "mailAddress": "test@testuser.com",
+   "origin": "aad",
+   "originId": "c9aa0a0e-03d8-498f-a387-cf076ebafae5",
+   "displayName": "Test User",
+   "_links": {
+     "self": {
+       "href": "https://vssps.dev.azure.com/test/_apis/Graph/Users/aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+     },
+     "memberships": {
+       "href": "https://vssps.dev.azure.com/test/_apis/Graph/Memberships/aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+     },
+     "membershipState": {
+       "href": "https://vssps.dev.azure.com/test/_apis/Graph/MembershipStates/aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+     },
+     "storageKey": {
+       "href": "https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+     },
+     "avatar": {
+       "href": "https://dev.azure.com/test/_apis/GraphProfile/MemberAvatars/aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+     }
+   },
+   "url": "https://vssps.dev.azure.com/test/_apis/Graph/Users/aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj",
+   "descriptor": "aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+ }

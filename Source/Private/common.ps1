@@ -761,3 +761,16 @@ function _clearEnvironmentVariables {
 
    _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken '' -Version ''
 }
+
+function _convertToHex() 
+{
+    [cmdletbinding()]
+    param(
+        [parameter(Mandatory=$true)]
+        [string]$Value
+    )
+
+    $bytes = $Value | Format-Hex -Encoding Unicode
+    $hexString = ($bytes.Bytes|ForEach-Object ToString X2) -join ''
+    return $hexString.ToLowerInvariant();
+}

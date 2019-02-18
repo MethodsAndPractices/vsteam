@@ -13,7 +13,7 @@
    RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.1.0'
+   ModuleVersion     = '6.2.0'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -77,7 +77,11 @@
       'types\workitems.ps1xml',
       'types\pullrequest.ps1xml',
       'types\group.ps1xml',
-      'types\descriptor.ps1xml')
+      'types\descriptor.ps1xml',
+      'types\securityNamespace.ps1xml',
+      'types\accessControlList.ps1xml',
+      'types\accessControlEntry.ps1xml',
+      'types\users2.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -92,7 +96,11 @@
       'formats\workitems.format.ps1xml',
       'formats\vsteamPSDrive.format.ps1xml',
       'formats\group.format.ps1xml',
-      'formats\descriptor.format.ps1xml')
+      'formats\descriptor.format.ps1xml',
+      'formats\securityNamespace.format.ps1xml',
+      'formats\accessControlList.format.ps1xml',
+      'formats\accessControlEntry.format.ps1xml',
+      'formats\users2.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    # NestedModules     = @()
@@ -202,7 +210,11 @@
       'Update-VSTeamWorkItem',
       'Set-VSTeamAlias',
       'Get-VSTeamGroup',
-      'Get-VSTeamDescriptor')
+      'Get-VSTeamDescriptor',
+      'Get-VSTeamSecurityNamespace',
+      'Get-VSTeamAccessControlList',
+      'Add-VSTeamAccessControlEntry',
+      'Get-VSTeamUser2')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()

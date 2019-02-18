@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.2.0
+
+Added functions to deal with Security
+- Added Get-VSTeamSecurityNamespace to retrieve security namespaces
+- Added Add-VSTeamAccessControlEntry to add low level ACE's
+- Added Get-VSTeamAccessControlList to retrieve ACL's
+- Added Add-VSTeamAccessControlList to add ACL's
+
 ## 6.1.0
 
 The AzD API now defaults to the 5.x versions.
