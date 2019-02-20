@@ -795,3 +795,43 @@ function _getVSTeamIdFromDescriptor {
 
    return [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($Padded))
 }
+
+function _getDescriptorForACL {
+   [cmdletbinding()]
+   param(
+      [parameter(Mandatory=$true, ParameterSetName="ByUser")]
+      [VSTeamUser2]$User,
+
+      [parameter(MAndatory=$true, ParameterSetName="ByGroup")]
+      [VSTeamGroup]$Group
+   )
+
+   if ($User)
+   {
+      switch($User.Origin)
+      {
+         "vsts" {
+            $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
+            $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+         }
+         "aad" {
+            $descriptor = "Microsoft.IdentityModel.Claims.ClaimsIdentity;$($User.Domain)\\$($User.PrincipalName)"
+         }
+         default { throw "User type not handled yet for ACL. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues" }
+      }
+   }
+
+   if ($Group)
+   {
+      switch($Group.Origin)
+      {
+         "vsts" {
+            $sid = _getVSTeamIdFromDescriptor -Descriptor $Group.Descriptor
+            $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+         }
+         default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues"}
+      }
+   }
+
+   return $descriptor
+}

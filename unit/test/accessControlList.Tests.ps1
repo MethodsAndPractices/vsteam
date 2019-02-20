@@ -233,7 +233,7 @@ InModuleScope VSTeam {
          $securityNamespace = Get-VSTeamSecurityNamespace -Id "5a27515b-ccd7-42c9-84f1-54c998f03866"
 
          It 'Should throw' {
-            { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamepsace -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
+            { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
          }
       }
    }

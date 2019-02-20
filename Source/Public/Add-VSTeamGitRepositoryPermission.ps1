@@ -96,36 +96,19 @@ function Add-VSTeamGitRepositoryPermission {
          $RepositoryId = $repo.ID
       }
 
-      # Resolve Group to Descriptor
-      if ($Group)
-      {
-         switch($Group.Origin)
-         {
-            "vsts" {
-               $sid = _getVSTeamIdFromDescriptor -Descriptor $Group.Descriptor
-               $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
-            }
-            default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues"}
-         }
-      }
+       # Resolve Group to Descriptor
+       if ($Group)
+       {
+          $Descriptor = _getDescriptorForACL -Group $Group
+       }
+ 
+       # Resolve User to Descriptor
+       if ($User)
+       {
+          $Descriptor = _getDescriptorForACL -User $User
+       }
 
-      # Resolve User to Descriptor
-      if ($User)
-      {
-         switch($User.Origin)
-         {
-            "vsts" {
-               $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
-               $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
-            }
-            "aad" {
-               $descriptor = "Microsoft.IdentityModel.Claims.ClaimsIdentity;$($User.Domain)\\$($User.PrincipalName)"
-            }
-            default { throw "User type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues"}
-         }
-      }
-
-      $token = "repoV2/$($project.ID)"
+      $token = "repoV2/$($Project.ID)"
       
       if ($RepositoryId)
       {
@@ -138,6 +121,6 @@ function Add-VSTeamGitRepositoryPermission {
          $token += "/refs/heads/$($branchHex)"
       }
 
-      Add-VSTeamAccessControlEntry -SecurityNamespaceId $securityNamespaceId -Descriptor $descriptor -Token $token -AllowMask ([int]$Allow) -DenyMask ([int]$Deny)
+      Add-VSTeamAccessControlEntry -SecurityNamespaceId $securityNamespaceId -Descriptor $Descriptor -Token $token -AllowMask ([int]$Allow) -DenyMask ([int]$Deny)
    }
 }
