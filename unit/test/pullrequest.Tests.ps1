@@ -7,6 +7,10 @@ InModuleScope VSTeam {
 
         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
+        # You have to set the version or the api-version will not be added when
+        # [VSTeamVersions]::Core = ''
+        [VSTeamVersions]::Core = '5.1-preview'
+
         $singleResult = @{
             pullRequestId  = 1
             repositoryName = "testreponame"
@@ -47,7 +51,9 @@ InModuleScope VSTeam {
         Context 'Get-VSTeamPullRequest' {
 
             It 'Get-VSTeamPullRequest with no parameters' {
-                Mock Invoke-RestMethod { return $collection }
+                Mock Invoke-RestMethod { 
+                  Write-Host $args 
+                  return $collection }
 
                 $Global:PSDefaultParameterValues.Remove("*:ProjectName")
                 Get-VSTeamPullRequest
