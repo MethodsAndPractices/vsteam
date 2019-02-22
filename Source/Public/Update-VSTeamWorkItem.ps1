@@ -16,6 +16,12 @@ function Update-VSTeamWorkItem {
       [Parameter(Mandatory = $false)]
       [string]$AssignedTo,
 
+      [Parameter(Mandatory = $false)]
+      [string]$Tag,
+
+      [Parameter(Mandatory = $false)]
+      [object]$Link,
+
       [switch] $Force
    )
 
@@ -42,7 +48,24 @@ function Update-VSTeamWorkItem {
             op    = "add"
             path  = "/fields/System.AssignedTo"
             value = $AssignedTo
-         }) | Where-Object { $_.value}
+         }
+         @{
+            op    = "add"
+            path  = "/fields/System.Tags"
+            value = $Tag
+         }
+         @{
+            op    = "add"
+            path  = "/relations/-"
+            value = {
+               rel   = $Link.rel
+               url   = $Link.url
+               attributes  = {
+                  comment     = $Link.comment
+               }
+            }
+         }
+         ) | Where-Object { $_.value}
 
       # It is very important that even if the user only provides
       # a single value above that the item is an array and not
