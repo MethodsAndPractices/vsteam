@@ -85,6 +85,25 @@ Type: String
 Required: False
 ```
 
+### -Tag
+
+The tag(s) you want to add to the work item. This will overwrite any existing tags. Multiple tags can be entered using the semi-colon delimiter.
+
+```yaml
+Type: String
+Required: False
+```
+
+### -Link
+
+The link information to create relationships between work items.
+
+```yaml
+Type: Object
+Properties: rel - relationship type, url - url to the work item to be linked, comment - comment on why the link is being made
+Required: False
+```
+
 <!-- #include "./params/force.md" -->
 
 ## INPUTS
