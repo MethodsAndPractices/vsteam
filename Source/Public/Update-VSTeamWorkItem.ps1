@@ -54,18 +54,24 @@ function Update-VSTeamWorkItem {
             path  = "/fields/System.Tags"
             value = $Tag
          }
-         @{
-            op    = "add"
-            path  = "/relations/-"
-            value = {
-               rel   = $Link.rel
-               url   = $Link.url
-               attributes  = {
-                  comment     = $Link.comment
+         ) | Where-Object { $_.value}
+
+      # To get around JSON parsing issues with non-empty objects
+      If ($Link){
+         $body += @(
+            @{
+               op    = "add"
+               path  = "/relations/-"
+               value = @{
+                  rel   = $Link.rel
+                  url   = $Link.url
+                  attributes = @{
+                     comment = $Link.comment
+                  }
                }
             }
+         )
          }
-         ) | Where-Object { $_.value}
 
       # It is very important that even if the user only provides
       # a single value above that the item is an array and not
@@ -73,7 +79,7 @@ function Update-VSTeamWorkItem {
       # You must call ConvertTo-Json passing in the value and not
       # not using pipeline.
       # https://stackoverflow.com/questions/18662967/convertto-json-an-array-with-a-single-item
-      $json = ConvertTo-Json @($body) -Compress
+      $json = ConvertTo-Json @($body) -Depth 3 -Compress
 
       # Call the REST API
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-WorkItem")) {
