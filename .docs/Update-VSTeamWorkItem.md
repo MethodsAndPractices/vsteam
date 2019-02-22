@@ -100,9 +100,9 @@ The link information to create relationships between work items.
 
 ```yaml
 Type: Object
-Properties: rel - relationship type
-            url - url to the work item to be linked
-            comment - comment on why the link is being made
+Properties: [string] rel - relationship type
+            [string] url - url to the work item to be linked
+            [string] comment - comment on why the link is being made
 Required: False
 ```
 
