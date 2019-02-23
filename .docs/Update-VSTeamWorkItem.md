@@ -96,13 +96,13 @@ Required: False
 
 ### -Link
 
-The link information to create relationships between work items.
+The link information to create relationships between work items. The link type is an object with the following Properties:
+[string] rel - relationship type
+[string] url - url to the work item to be linked
+[string] comment - comment on why the link is being made
 
 ```yaml
 Type: Object
-Properties: [string] rel - relationship type
-            [string] url - url to the work item to be linked
-            [string] comment - comment on why the link is being made
 Required: False
 ```
 

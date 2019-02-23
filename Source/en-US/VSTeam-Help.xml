@@ -6849,30 +6849,41 @@ ID Title          Status
       <command:syntaxItem>
         <maml:name>Get-VSTeamOption</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Release</maml:name>
+          <maml:name>SubDomain</maml:name>
           <maml:Description>
-            <maml:para>Returns options for Release Management APIs</maml:para>
+            <maml:para>Returns options for that sub domain APIs. Some examples include:</maml:para>
+            <maml:para>- vsaex = Member Entitlement Management</maml:para>
+            <maml:para>- feeds = Artifacts</maml:para>
+            <maml:para>- vsrm = Release Management</maml:para>
+            <maml:para>- vssps = Graph</maml:para>
+            <maml:para>- extmgmt = Extensions</maml:para>
           </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
-            <maml:name>SwitchParameter</maml:name>
+            <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>Release</maml:name>
+        <maml:name>SubDomain</maml:name>
         <maml:Description>
-          <maml:para>Returns options for Release Management APIs</maml:para>
+          <maml:para>Returns options for that sub domain APIs. Some examples include:</maml:para>
+          <maml:para>- vsaex = Member Entitlement Management</maml:para>
+          <maml:para>- feeds = Artifacts</maml:para>
+          <maml:para>- vsrm = Release Management</maml:para>
+          <maml:para>- vssps = Graph</maml:para>
+          <maml:para>- extmgmt = Extensions</maml:para>
         </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
-          <maml:name>SwitchParameter</maml:name>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -6895,6 +6906,13 @@ ID Title          Status
         <dev:code>PS C:\&gt; Get-VSTeamOption | Format-Table -View Versions</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for your account using the 'Versions' custom table format.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamOption -SubDomain vsrm</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the versions of supported APIs for the release management service.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -16063,6 +16081,30 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Tag</maml:name>
+          <maml:Description>
+            <maml:para>The tag(s) you want to add to the work item. This will overwrite any existing tags. Multiple tags can be entered using the semi-colon delimiter.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Link</maml:name>
+          <maml:Description>
+            <maml:para>The link information to create relationships between work items. The link type is an object with the following Properties: [string] rel - relationship type [string] url - url to the work item to be linked [string] comment - comment on why the link is being made</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
             <maml:para>Forces the command without confirmation</maml:para>
@@ -16132,6 +16174,30 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Tag</maml:name>
+        <maml:Description>
+          <maml:para>The tag(s) you want to add to the work item. This will overwrite any existing tags. Multiple tags can be entered using the semi-colon delimiter.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Link</maml:name>
+        <maml:Description>
+          <maml:para>The link information to create relationships between work items. The link type is an object with the following Properties: [string] rel - relationship type [string] url - url to the work item to be linked [string] comment - comment on why the link is being made</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+        <dev:type>
+          <maml:name>Object</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
