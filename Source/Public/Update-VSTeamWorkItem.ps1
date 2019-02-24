@@ -58,20 +58,18 @@ function Update-VSTeamWorkItem {
 
       # To get around JSON parsing issues with non-empty objects
       If ($Link){
-         $body += @(
-            @{
-               op    = "add"
-               path  = "/relations/-"
-               value = @{
-                  rel   = $Link.rel
-                  url   = $Link.url
-                  attributes = @{
-                     comment = $Link.comment
-                  }
+         $body +=  @{
+            op    = "add"
+            path  = "/relations/-"
+            value = @{
+               rel   = $Link.rel
+               url   = $Link.url
+               attributes = @{
+                  comment = $Link.comment
                }
             }
-         )
          }
+      }
 
       # It is very important that even if the user only provides
       # a single value above that the item is an array and not
