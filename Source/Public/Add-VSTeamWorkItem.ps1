@@ -14,7 +14,16 @@ function Add-VSTeamWorkItem {
       [string]$AssignedTo,
 
       [Parameter(Mandatory = $false)]
-      [int]$ParentId
+      [int]$ParentId,
+
+      [Parameter(Mandatory = $false)]
+      [string]$Tag,
+
+      [Parameter(Mandatory = $false)]
+      [object]$Link,
+
+      [Parameter(Mandatory = $false)]
+      [object]$CustomFields
    )
 
    DynamicParam {
@@ -69,6 +78,11 @@ function Add-VSTeamWorkItem {
             op    = "add"
             path  = "/fields/System.AssignedTo"
             value = $AssignedTo
+         }
+         @{
+            op    = "add"
+            path  = "/fields/System.Tags"
+            value = $Tag
          }) | Where-Object { $_.value}
 
          if ($ParentId) {
@@ -83,13 +97,41 @@ function Add-VSTeamWorkItem {
             }
          }
 
+         if ($Link) {
+            if (($Link.PSObject.Properties.name -contains "rel") -and ($Link.PSObject.Properties.name -contains "url")){
+               $body +=  @{
+                  op    = "add"
+                  path  = "/relations/-"
+                  value = @{
+                     rel   = $Link.rel
+                     url   = $Link.url
+                     attributes = @{
+                        comment = $Link.comment
+                     }
+                  }
+               }
+            }
+         }
+
+         if ($CustomFields) {
+            ForEach-Object -InputObject $CustomFields {
+               if (($_.PSObject.Properties.name -contains "op") -and ($_.PSObject.Properties.name -contains "path") -and ($_.PSObject.Properties.name -contains "value")){
+                  $body += @{
+                     op    = $_.op
+                     path  = $_.path
+                     value = $_.value
+                  }
+               }
+            }
+         }
+
       # It is very important that even if the user only provides
       # a single value above that the item is an array and not
       # a single object or the call will fail.
       # You must call ConvertTo-Json passing in the value and not
       # not using pipeline.
       # https://stackoverflow.com/questions/18662967/convertto-json-an-array-with-a-single-item
-      $json = ConvertTo-Json @($body) -Compress
+      $json = ConvertTo-Json @($body) -Depth 3 -Compress
 
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' `
