@@ -98,16 +98,14 @@ function Add-VSTeamWorkItem {
       }
 
       if ($Link) {
-         if (($Link.PSObject.Properties.name -contains "rel") -and ($Link.PSObject.Properties.name -contains "url")){
-            $body +=  @{
-               op    = "add"
-               path  = "/relations/-"
-               value = @{
-                  rel   = $Link.rel
-                  url   = $Link.url
-                  attributes = @{
-                     comment = $Link.comment
-                  }
+         $body +=  @{
+            op    = "add"
+            path  = "/relations/-"
+            value = @{
+               rel   = $Link.rel
+               url   = $Link.url
+               attributes = @{
+                  comment = $Link.comment
                }
             }
          }
@@ -115,12 +113,10 @@ function Add-VSTeamWorkItem {
 
       if ($CustomFields) {
          ForEach-Object -InputObject $CustomFields {
-            if (($_.PSObject.Properties.name -contains "op") -and ($_.PSObject.Properties.name -contains "path") -and ($_.PSObject.Properties.name -contains "value")){
-               $body += @{
-                  op    = $_.op
-                  path  = $_.path
-                  value = $_.value
-               }
+            $body += @{
+               op    = $_.op
+               path  = $_.path
+               value = $_.value
             }
          }
       }

@@ -22,6 +22,9 @@ function Update-VSTeamWorkItem {
       [Parameter(Mandatory = $false)]
       [object]$Link,
 
+      [Parameter(Mandatory = $false)]
+      [object]$CustomFields,
+
       [switch] $Force
    )
 
@@ -56,17 +59,25 @@ function Update-VSTeamWorkItem {
          }) | Where-Object { $_.value}
 
       if ($Link) {
-         if (($Link.PSObject.Properties.name -contains "rel") -and ($Link.PSObject.Properties.name -contains "url")){
-            $body +=  @{
-               op    = "add"
-               path  = "/relations/-"
-               value = @{
-                  rel   = $Link.rel
-                  url   = $Link.url
-                  attributes = @{
-                     comment = $Link.comment
-                  }
+         $body +=  @{
+            op    = "add"
+            path  = "/relations/-"
+            value = @{
+               rel   = $Link.rel
+               url   = $Link.url
+               attributes = @{
+                  comment = $Link.comment
                }
+            }
+         }
+      }
+
+      if ($CustomFields) {
+         ForEach-Object -InputObject $CustomFields {
+            $body += @{
+               op    = $_.op
+               path  = $_.path
+               value = $_.value
             }
          }
       }
