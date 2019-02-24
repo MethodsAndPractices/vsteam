@@ -53,19 +53,19 @@ function Update-VSTeamWorkItem {
             op    = "add"
             path  = "/fields/System.Tags"
             value = $Tag
-         }
-         ) | Where-Object { $_.value}
+         }) | Where-Object { $_.value}
 
-      # To get around JSON parsing issues with non-empty objects
-      If ($Link){
-         $body +=  @{
-            op    = "add"
-            path  = "/relations/-"
-            value = @{
-               rel   = $Link.rel
-               url   = $Link.url
-               attributes = @{
-                  comment = $Link.comment
+      if ($Link) {
+         if (($Link.PSObject.Properties.name -contains "rel") -and ($Link.PSObject.Properties.name -contains "url")){
+            $body +=  @{
+               op    = "add"
+               path  = "/relations/-"
+               value = @{
+                  rel   = $Link.rel
+                  url   = $Link.url
+                  attributes = @{
+                     comment = $Link.comment
+                  }
                }
             }
          }
