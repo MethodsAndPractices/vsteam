@@ -85,45 +85,45 @@ function Add-VSTeamWorkItem {
             value = $Tag
          }) | Where-Object { $_.value}
 
-         if ($ParentId) {
-            $parentUri = _buildRequestURI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' -id $ParentId
-            $body += @{
+      if ($ParentId) {
+         $parentUri = _buildRequestURI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' -id $ParentId
+         $body += @{
+            op    = "add"
+            path  = "/relations/-"
+            value = @{
+               "rel" = "System.LinkTypes.Hierarchy-Reverse"
+               "url" = $parentURI
+            }
+         }
+      }
+
+      if ($Link) {
+         if (($Link.PSObject.Properties.name -contains "rel") -and ($Link.PSObject.Properties.name -contains "url")){
+            $body +=  @{
                op    = "add"
                path  = "/relations/-"
                value = @{
-                  "rel" = "System.LinkTypes.Hierarchy-Reverse"
-                  "url" = $parentURI
-               }
-            }
-         }
-
-         if ($Link) {
-            if (($Link.PSObject.Properties.name -contains "rel") -and ($Link.PSObject.Properties.name -contains "url")){
-               $body +=  @{
-                  op    = "add"
-                  path  = "/relations/-"
-                  value = @{
-                     rel   = $Link.rel
-                     url   = $Link.url
-                     attributes = @{
-                        comment = $Link.comment
-                     }
+                  rel   = $Link.rel
+                  url   = $Link.url
+                  attributes = @{
+                     comment = $Link.comment
                   }
                }
             }
          }
+      }
 
-         if ($CustomFields) {
-            ForEach-Object -InputObject $CustomFields {
-               if (($_.PSObject.Properties.name -contains "op") -and ($_.PSObject.Properties.name -contains "path") -and ($_.PSObject.Properties.name -contains "value")){
-                  $body += @{
-                     op    = $_.op
-                     path  = $_.path
-                     value = $_.value
-                  }
+      if ($CustomFields) {
+         ForEach-Object -InputObject $CustomFields {
+            if (($_.PSObject.Properties.name -contains "op") -and ($_.PSObject.Properties.name -contains "path") -and ($_.PSObject.Properties.name -contains "value")){
+               $body += @{
+                  op    = $_.op
+                  path  = $_.path
+                  value = $_.value
                }
             }
          }
+      }
 
       # It is very important that even if the user only provides
       # a single value above that the item is an array and not
