@@ -28,7 +28,7 @@ class VSTeamClassificationNode : VSTeamLeaf {
          }
       }
 
-      if ($obj._links.parent.href)
+      if ([bool]($obj.PSobject.Properties.name -match "_links") -and [bool]($obj._links.PSobject.Properties.name -match "parent"))
       {
          $this.ParentUrl = $obj._links.parent.href
       }
