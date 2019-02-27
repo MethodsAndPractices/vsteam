@@ -9,7 +9,7 @@ InModuleScope VSTeam {
 
         # You have to set the version or the api-version will not be added when
         # [VSTeamVersions]::Core = ''
-        [VSTeamVersions]::Core = '5.1-preview'
+        [VSTeamVersions]::Git = '5.1-preview'
 
         $singleResult = @{
             pullRequestId  = 1
@@ -51,26 +51,26 @@ InModuleScope VSTeam {
         Context 'Get-VSTeamPullRequest' {
 
             It 'Get-VSTeamPullRequest with no parameters' {
-                Mock Invoke-RestMethod { 
-                  Write-Host $args 
-                  return $collection }
+                Mock Invoke-RestMethod { return $collection }
 
                 $Global:PSDefaultParameterValues.Remove("*:ProjectName")
                 Get-VSTeamPullRequest
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
             It 'Get-VSTeamPullRequest with default project name' {
-                Mock Invoke-RestMethod { return $collection }
+                Mock Invoke-RestMethod { 
+                  Write-host $args 
+                  return $collection }
 
                 $Global:PSDefaultParameterValues["*:ProjectName"] = 'testproject'
                 Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -81,7 +81,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -91,7 +91,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -Id 1
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/1?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/1?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
