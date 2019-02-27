@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Remove-VSTeamUser
+# Remove-VSTeamUserEntitlement
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Remove-VSTeamUser.md" -->
+<!-- #include "./synopsis/Remove-VSTeamUserEntitlement.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Remove-VSTeamUser.md" -->
+<!-- #include "./synopsis/Remove-VSTeamUserEntitlement.md" -->
 
 ## EXAMPLES
 

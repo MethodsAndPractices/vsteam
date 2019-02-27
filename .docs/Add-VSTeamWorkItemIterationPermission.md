@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Add-VSTeamGitRepositoryPermission
+# Add-VSTeamWorkItemIterationPermission
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Add-VSTeamGitRepositoryPermission.md" -->
+<!-- #include "./synopsis/Add-VSTeamWorkItemIterationPermission.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Add-VSTeamGitRepositoryPermission.md" -->
+<!-- #include "./synopsis/Add-VSTeamWorkItemIterationPermission.md" -->
 
 ## EXAMPLES
 
@@ -18,21 +18,14 @@
 
 <!-- #include "./params/projectName.md" -->
 
-### -RepositoryId
+### -IterationID
 
 ```yaml
-Type: String
+Type: Int32
 Required: True
 ```
 
-### -RepositoryName
-
-```yaml
-Type: String
-Required: True
-```
-
-### -BranchName
+### -IterationPath
 
 ```yaml
 Type: String
@@ -49,7 +42,7 @@ Required: True
 ### -User
 
 ```yaml
-Type: VSTeamUser
+Type: 
 Required: True
 ```
 
@@ -63,14 +56,14 @@ Required: True
 ### -Allow
 
 ```yaml
-Type: VSTeamGitRepositoryPermissions
+Type: VSTeamWorkItemIterationPermissions
 Required: True
 ```
 
 ### -Deny
 
 ```yaml
-Type: VSTeamGitRepositoryPermissions
+Type: VSTeamWorkItemIterationPermissions
 Required: True
 ```
 

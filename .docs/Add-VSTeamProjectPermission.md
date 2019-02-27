@@ -28,7 +28,7 @@ Required: True
 ### -User
 
 ```yaml
-Type: VSTeamUser2
+Type: 
 Required: True
 ```
 

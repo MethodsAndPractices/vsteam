@@ -7,7 +7,7 @@ InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
-   $userSingleResultObject = [VSTeamUser2]::new($userSingleResult)
+   $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
 
    $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
    $groupSingleResultObject = [VSTeamGroup]::new($groupSingleResult)

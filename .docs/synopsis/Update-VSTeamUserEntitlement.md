@@ -1,0 +1,1 @@
+Edit the entitlements (License, Extensions, Projects, Teams etc) for a user.

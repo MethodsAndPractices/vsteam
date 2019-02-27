@@ -9,13 +9,13 @@ InModuleScope VSTeam {
          $Uri -like "*_apis/projects*"
       }
 
-      Context 'Get-VSTeamUser' {
+      Context 'Get-VSTeamUserEntitlement' {
          Mock _callAPI { throw 'Should not be called' } -Verifiable
 
          It 'Should throw' {
             Set-VSTeamAPIVersion TFS2017
 
-            { Get-VSTeamUser } | Should Throw
+            { Get-VSTeamUserEntitlement } | Should Throw
          }
 
          It '_callAPI should not be called' {
@@ -35,14 +35,14 @@ InModuleScope VSTeam {
       # Must be defined or call will throw error
       [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
 
-      Context 'Get-VSTeamUser no parameters' {
+      Context 'Get-VSTeamUserEntitlement no parameters' {
          Mock  _callAPI { return [PSCustomObject]@{
                members = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } }
             }
          }
 
          It 'Should return users' {
-            Get-VSTeamUser
+            Get-VSTeamUserEntitlement
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
@@ -51,7 +51,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamUser By ID' {
+      Context 'Get-VSTeamUserEntitlement By ID' {
          Mock  _callAPI {
             return [PSCustomObject]@{
                accessLevel = [PSCustomObject]@{ }
@@ -60,7 +60,7 @@ InModuleScope VSTeam {
          }
 
          It 'Should return users with projects' {
-            Get-VSTeamUser -Id '00000000-0000-0000-0000-000000000000'
+            Get-VSTeamUserEntitlement -Id '00000000-0000-0000-0000-000000000000'
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
@@ -71,7 +71,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamUser with select for projects' {
+      Context 'Get-VSTeamUserEntitlement with select for projects' {
          Mock  _callAPI {
             return [PSCustomObject]@{
                members = [PSCustomObject]@{
@@ -82,7 +82,7 @@ InModuleScope VSTeam {
          }
 
          It 'Should return users with projects' {
-            Get-VSTeamUser -Select Projects
+            Get-VSTeamUserEntitlement -Select Projects
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
@@ -91,7 +91,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Remove-VSTeamUser by Id' {
+      Context 'Remove-VSTeamUserEntitlement by Id' {
          Mock _callAPI -ParameterFilter {
             $Method -eq 'Delete' -and
             $subDomain -eq 'vsaex' -and
@@ -109,9 +109,9 @@ InModuleScope VSTeam {
             }
          }
 
-         Remove-VSTeamUser -UserId '00000000-0000-0000-0000-000000000000' -Force
+         Remove-VSTeamUserEntitlement -UserId '00000000-0000-0000-0000-000000000000' -Force
 
-         It 'Should remmove user' {
+         It 'Should remove user' {
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
                $subDomain -eq 'vsaex' -and
                $id -eq '00000000-0000-0000-0000-000000000000' -and
@@ -122,7 +122,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Remove-VSTeamUser by email' {
+      Context 'Remove-VSTeamUserEntitlement by email' {
          Mock _callAPI -ParameterFilter {
             $Method -eq 'Delete' -and
             $subDomain -eq 'vsaex' -and
@@ -142,7 +142,7 @@ InModuleScope VSTeam {
             }
          }
 
-         Remove-VSTeamUser -Email 'test@user.com' -Force
+         Remove-VSTeamUserEntitlement -Email 'test@user.com' -Force
 
          It 'Should remmove user' {
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
@@ -155,7 +155,7 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Remove-VSTeamUser by invalid email' {
+      Context 'Remove-VSTeamUserEntitlement by invalid email' {
          Mock _callAPI { return [PSCustomObject]@{
                members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
@@ -166,11 +166,11 @@ InModuleScope VSTeam {
          }
 
          It 'Should throw' {
-            { Remove-VSTeamUser -Email 'not@found.com' -Force } | Should Throw
+            { Remove-VSTeamUserEntitlement -Email 'not@found.com' -Force } | Should Throw
          }
       }
 
-      Context 'Update-VSTeamUser by invalid email' {
+      Context 'Update-VSTeamUserEntitlement by invalid email' {
          Mock _callAPI { return [PSCustomObject]@{
                members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
@@ -181,11 +181,11 @@ InModuleScope VSTeam {
          }
 
          It 'Update User with invalid email should throw' {
-            { Update-VSTeamUser -Email 'not@found.com' -License 'Express' -Force } | Should Throw
+            { Update-VSTeamUserEntitlement -Email 'not@found.com' -License 'Express' -Force } | Should Throw
          }
       }
 
-      Context 'Update-VSTeamUser by invalid id' {
+      Context 'Update-VSTeamUserEntitlement by invalid id' {
          Mock _callAPI { return [PSCustomObject]@{
                members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{ }
@@ -196,11 +196,11 @@ InModuleScope VSTeam {
          }
 
          It 'Update User with invalid id should throw' {
-            { Update-VSTeamUser -Id '11111111-0000-0000-0000-000000000000'  -License 'Express' -Force } | Should Throw
+            { Update-VSTeamUserEntitlement -Id '11111111-0000-0000-0000-000000000000'  -License 'Express' -Force } | Should Throw
          }
       }
 
-      Context 'Add-VSTeamUser' {
+      Context 'Add-VSTeamUserEntitlement' {
          $obj = @{
             accessLevel         = @{
                accountLicenseType = 'earlyAdopter'
@@ -226,7 +226,7 @@ InModuleScope VSTeam {
             $Body -eq $expected
          }
 
-         Add-VSTeamUser -License earlyAdopter -Email 'test@user.com'
+         Add-VSTeamUserEntitlement -License earlyAdopter -Email 'test@user.com'
 
          It 'Should add a user' {
             Assert-VerifiableMock
@@ -246,7 +246,7 @@ InModuleScope VSTeam {
             }
          }
 
-         Update-VSTeamUser -License 'Stakeholder' -Email 'test@user.com' -Force
+         Update-VSTeamUserEntitlement -License 'Stakeholder' -Email 'test@user.com' -Force
 
          It 'Should update a user' {
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {

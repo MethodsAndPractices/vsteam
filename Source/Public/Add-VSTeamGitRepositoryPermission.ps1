@@ -51,7 +51,7 @@ function Add-VSTeamGitRepositoryPermission {
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndUser")]
       [parameter(Mandatory=$true,ParameterSetName="ByRepositoryIdAndUser")]
       [parameter(Mandatory=$true,ParameterSetName="ByRepositoryNameAndUser")]
-      [VSTeamUser2]$User,
+      [VSTeamUser]$User,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndGroup")]

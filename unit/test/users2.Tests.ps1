@@ -11,13 +11,13 @@ InModuleScope VSTeam {
 
    # The Graph API is not supported on TFS
    Describe "Users TFS Errors" {
-     Context 'Get-VSTeamUser2' {
+     Context 'Get-VSTeamUser' {
          Mock _callAPI { throw 'Should not be called' } -Verifiable
 
          It 'Should throw' {
             Set-VSTeamAPIVersion TFS2017
 
-            { Get-VSTeamUser2 } | Should Throw
+            { Get-VSTeamUser } | Should Throw
          }
       }
    }
@@ -27,7 +27,7 @@ InModuleScope VSTeam {
       # [VSTeamVersions]::Graph = ''
       [VSTeamVersions]::Graph = '5.0'
 
-      Context 'Get-VSTeamUser2 list' {
+      Context 'Get-VSTeamUser list' {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
@@ -35,7 +35,7 @@ InModuleScope VSTeam {
             return $userListResult
          } -Verifiable
 
-         Get-VSTeamUser2
+         Get-VSTeamUser
 
          It 'Should return users' {
             # With PowerShell core the order of the query string is not the
@@ -51,10 +51,10 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamUser2 by subjectTypes' {
+      Context 'Get-VSTeamUser by subjectTypes' {
          Mock Invoke-RestMethod { return $userListResult } -Verifiable
 
-         Get-VSTeamUser2 -SubjectTypes vss,aad
+         Get-VSTeamUser -SubjectTypes vss,aad
 
          It 'Should return users' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -65,10 +65,10 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamUser2 by descriptor' {
+      Context 'Get-VSTeamUser by descriptor' {
          Mock Invoke-RestMethod { return $userSingleResult } -Verifiable
 
-         Get-VSTeamUser2 -UserDescriptor 'aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj'
+         Get-VSTeamUser -UserDescriptor 'aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj'
 
          It 'Should return the user' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -78,19 +78,19 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamUser2 list throws' {
+      Context 'Get-VSTeamUser list throws' {
          Mock Invoke-RestMethod { throw 'Error' }
 
          It 'Should throw' {
-            { Get-VSTeamUser2 } | Should Throw
+            { Get-VSTeamUser } | Should Throw
          }
       }
 
-      Context 'Get-VSTeamUser2 by descriptor throws' {
+      Context 'Get-VSTeamUser by descriptor throws' {
          Mock Invoke-RestMethod { throw 'Error' }
 
          It 'Should throw' {
-            { Get-VSTeamUser2 -UserDescriptor  } | Should Throw
+            { Get-VSTeamUser -UserDescriptor  } | Should Throw
          }
       }
    }

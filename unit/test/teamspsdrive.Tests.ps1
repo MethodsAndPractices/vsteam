@@ -1,15 +1,19 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
+   # Set the account to use for testing. A normal user would do this
+   # using the Set-VSTeamAccount function.
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+
    Describe 'VSTeam Classes' {
-      Context 'VSTeamUser ToString' {
+      Context 'VSTeamUserEntitlement ToString' {
          $obj = [PSCustomObject]@{
             displayName = 'Test User'
             id          = '1'
             uniqueName  = 'test@email.com'
          }
 
-         $target = [VSTeamUser]::new($obj, 'Test Project')
+         $target = [VSTeamUserEntitlement]::new($obj, 'Test Project')
 
          It 'should return displayname' {
             $target.ToString() | Should Be 'Test User'

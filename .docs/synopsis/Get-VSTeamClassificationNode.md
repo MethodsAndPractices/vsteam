@@ -1,0 +1,1 @@
+Gets the classification node for a given node path.

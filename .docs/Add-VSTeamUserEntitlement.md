@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Add-VSTeamUser
+# Add-VSTeamUserEntitlement
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Add-VSTeamUser.md" -->
+<!-- #include "./synopsis/Add-VSTeamUserEntitlement.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Add-VSTeamUser.md" -->
+<!-- #include "./synopsis/Add-VSTeamUserEntitlement.md" -->
 
 ## EXAMPLES
 

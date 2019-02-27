@@ -3,10 +3,26 @@
 ## 6.2.0
 
 Added functions to deal with Security
+Note: Some of these are only supported in Azure DevOps (Online), not TFS and Azure DevOps Server due to unavailable APIs
+
 - Added Get-VSTeamSecurityNamespace to retrieve security namespaces
 - Added Add-VSTeamAccessControlEntry to add low level ACE's
 - Added Get-VSTeamAccessControlList to retrieve ACL's
 - Added Add-VSTeamAccessControlList to add ACL's
+- Added Add-VSTeamWorkItemIterationPermission
+- Added Get-VSTeamWorkItemIteration
+- Added Get-VSTeamClassificationNode
+- Added Get-VSTeamUser (see breaking changes below)
+- Added Get-VSTeamWorkItemArea
+- Added Add-VSTeamWorkItemAreaPermission
+- Added Add-VSTeamProjectPermission
+
+**Breaking changes**:
+
+- Renamed Get-VSTeamUser to Get-VSTeamUserEntitlement
+- Renamed Add-VSTeamUser to Add-VSTeamUserEntitlement
+- Renamed Update-VSTeamUser to Update-VSTeamUserEntitlement
+- Added new Get-VSTeamUser cmdlet retrieving more data about the User itself
 
 ## 6.1.0
 

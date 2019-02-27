@@ -13,7 +13,7 @@ function Add-VSTeamProjectPermission {
       [VSTeamGroup]$Group,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndUser")]
-      [VSTeamUser2]$User,
+      [VSTeamUser]$User,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndGroup")]

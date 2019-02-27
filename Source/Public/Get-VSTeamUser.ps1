@@ -1,55 +1,60 @@
 function Get-VSTeamUser {
    [CmdletBinding(DefaultParameterSetName = 'List')]
-   param (
-       [Parameter(ParameterSetName = 'List')]
-       [int] $Top = 100,
+   param(
+      [Parameter(ParameterSetName = 'List')]
+      [ValidateSet('msa','aad','svc','imp','vss')]
+      [string[]] $SubjectTypes,
 
-       [Parameter(ParameterSetName = 'List')]
-       [int] $Skip = 0,
-
-       [Parameter(ParameterSetName = 'List')]
-       [ValidateSet('Projects', 'Extensions', 'Grouprules')]
-       [string[]] $Select,
-
-       [Parameter(ParameterSetName = 'ByID')]
-       [Alias('UserId')]
-       [string[]] $Id
+      [Parameter(ParameterSetName = 'ByUserDescriptor', Mandatory = $true)]
+      [Alias('UserDescriptor')]
+      [string] $Descriptor
    )
 
    process {
-       # Thi swill throw if this account does not support MemberEntitlementManagement
-       _supportsMemberEntitlementManagement
+      # This will throw if this account does not support the graph API
+      _supportsGraph
 
-       if ($Id) {
-           foreach ($item in $Id) {
-               # Build the url to return the single build
-               # Call the REST API
-               $resp = _callAPI -SubDomain 'vsaex' -Version $([VSTeamVersions]::MemberEntitlementManagement) -Resource 'userentitlements' -id $item
+      if ($Descriptor) {
+         # Call the REST API
+         $resp = _callAPI -Area 'graph' -Resource 'users' -id $Descriptor `
+            -Version $([VSTeamVersions]::Graph) `
+            -SubDomain 'vssps'
 
-               _applyTypesToUser -item $resp
+         # Storing the object before you return it cleaned up the pipeline.
+         # When I just write the object from the constructor each property
+         # seemed to be written
+         $user = [VSTeamUser]::new($resp)
 
-               Write-Output $resp
-           }
-       }
-       else {
-           # Build the url to list the teams
-           # $listurl = _buildUserURL
-           $listurl = _buildRequestURI -SubDomain 'vsaex' -Resource 'userentitlements' `
-               -Version $([VSTeamVersions]::MemberEntitlementManagement)
+         Write-Output $user
+      }
+      else {
+         $queryString = @{}
+         if ($SubjectTypes -and $SubjectTypes.Length -gt 0)
+         {
+            $queryString.subjectTypes = $SubjectTypes -join ','
+         }
 
-           $listurl += _appendQueryString -name "top" -value $top -retainZero
-           $listurl += _appendQueryString -name "skip" -value $skip -retainZero
-           $listurl += _appendQueryString -name "select" -value ($select -join ",")
+         try {
+            # Call the REST API
+            $resp = _callAPI -Area 'graph' -id 'users' `
+               -Version $([VSTeamVersions]::Graph) `
+               -QueryString $queryString `
+               -SubDomain 'vssps'
 
-           # Call the REST API
-           $resp = _callAPI -url $listurl
+            $objs = @()
 
-           # Apply a Type Name so we can use custom format view and custom type extensions
-           foreach ($item in $resp.members) {
-               _applyTypesToUser -item $item
-           }
+            foreach ($item in $resp.value) {
+               $objs += [VSTeamUser]::new($item)
+            }
 
-           Write-Output $resp.members
-       }
+            Write-Output $objs
+         }
+         catch {
+            # I catch because using -ErrorAction Stop on the Invoke-RestMethod
+            # was still running the foreach after and reporting useless errors.
+            # This casuses the first error to terminate this execution.
+            _handleException $_
+         }
+      }
    }
 }
