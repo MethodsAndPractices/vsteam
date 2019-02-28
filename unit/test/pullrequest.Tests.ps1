@@ -62,9 +62,7 @@ InModuleScope VSTeam {
             }
 
             It 'Get-VSTeamPullRequest with default project name' {
-                Mock Invoke-RestMethod { 
-                  Write-host $args 
-                  return $collection }
+                Mock Invoke-RestMethod { return $collection }
 
                 $Global:PSDefaultParameterValues["*:ProjectName"] = 'testproject'
                 Get-VSTeamPullRequest -ProjectName testproject
