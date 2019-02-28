@@ -86,10 +86,11 @@ function Add-VSTeamWorkItemIterationPermission {
             # We have a Path to resolve
             $iteration = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Path $path -StructureGroup "Iterations"
          } else {
-            break
+            # We need to get the "root" node now
+            $iteration = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -StructureGroup "Iterations"
          }
    
-         $nodes += $Iteration
+         $nodes += $iteration
       }
 
       # Build Token from Path

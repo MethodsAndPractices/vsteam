@@ -29,7 +29,7 @@ class VSTeamUser : VSTeamLeaf {
       $this.OriginID = $obj.originId
       $this.DisplayName = $obj.displayName
 
-      if ($this.Origin -eq "aad")
+      if ($this.Origin -eq "aad" -and (Get-Member -inputobject $obj -name "metaType" -MemberType Properties))
       {
          $this.MetaType = $obj.metaType
       }

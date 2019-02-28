@@ -86,7 +86,8 @@ function Add-VSTeamWorkItemAreaPermission {
             # We have a Path to resolve
             $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Path $path -StructureGroup "Areas"
          } else {
-            break
+            # We need to get the "root" node now
+            $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -StructureGroup "Areas"
          }
    
          $nodes += $area

@@ -13,7 +13,7 @@
                   <Label>Descriptor</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>Alkow</Label>
+                  <Label>Allow</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Deny</Label>
