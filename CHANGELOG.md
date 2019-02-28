@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.1.1
+
+Fix interacting with large GIT repos without hitting integer overflow.
+
 ## 6.1.0
 
 The AzD API now defaults to the 5.x versions.
