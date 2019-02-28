@@ -11,6 +11,9 @@ class VSTeamClassificationNode : VSTeamLeaf {
       [object]$obj,
       [string]$Projectname
    ) : base($obj.name, $obj.id, $Projectname) {
+
+      Write-Verbose $obj
+
       $this.Identifier = $obj.identifier
       $this.Name = $obj.name
       $this.StructureType = $obj.structureType
@@ -18,8 +21,7 @@ class VSTeamClassificationNode : VSTeamLeaf {
       $this.Path = $obj.Path
       $this.Url = $obj.Url
       $this.Id = $obj.id
-
-      if ($this.HasChildren)
+      if ($this.HasChildren -and (Get-Member -inputobject $obj -name "children" -MemberType Properties))
       {
          foreach ($child in $obj.children)
          {
@@ -28,7 +30,7 @@ class VSTeamClassificationNode : VSTeamLeaf {
          }
       }
 
-      if ([bool]($obj.PSobject.Properties.name -match "_links") -and [bool]($obj._links.PSobject.Properties.name -match "parent"))
+      if ((Get-Member -inputobject $obj -name "_links" -MemberType Properties) -and (Get-Member -inputobject $obj._links -name "parent" -MemberType Properties))
       {
          $this.ParentUrl = $obj._links.parent.href
       }

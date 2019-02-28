@@ -57,32 +57,56 @@ function Add-VSTeamWorkItemAreaPermission {
 
       if ($AreaID)
       {
-         $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 1 -Ids $AreaID
+         $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Ids $AreaID
       }
 
       if ($AreaPath)
       {
-         $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 1 -Path $AreaPath
+         $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Path $AreaPath -StructureGroup "areas"
       }
 
-      # TODO: Complete function :)
-      # Check if Area exists
+      if (-not $area)
+      {
+         throw "Area not found"
+      }
 
-      # Now we need to recursively fetch the parent nodes
+      if ($area.StructureType -ne "area")
+      {
+         throw "This is not an Area"
+      }
 
-       # Resolve Group to Descriptor
-       if ($Group)
-       {
-          $Descriptor = _getDescriptorForACL -Group $Group
-       }
- 
-       # Resolve User to Descriptor
-       if ($User)
-       {
-          $Descriptor = _getDescriptorForACL -User $User
-       }
+      $nodes = @()
+      $nodes += $area
 
-      $token = "repoV2/$($Project.ID)"
+      while ($area.ParentUrl)
+      {
+         $path = $area.ParentUrl -ireplace ".*(classificationNodes/Areas)\/?"
+         if ($path.length -gt 0)
+         {
+            # We have a Path to resolve
+            $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Path $path -StructureGroup "Areas"
+         } else {
+            break
+         }
+   
+         $nodes += $area
+      }
+
+      # Build Token from Path
+      [array]::Reverse($nodes)
+      $token = ($nodes | ForEach-Object { "vstfs:///Classification/Node/$($_.Identifier)" })  -join ":"
+
+      # Resolve Group to Descriptor
+      if ($Group)
+      {
+         $Descriptor = _getDescriptorForACL -Group $Group
+      }
+
+      # Resolve User to Descriptor
+      if ($User)
+      {
+         $Descriptor = _getDescriptorForACL -User $User
+      }
 
       Add-VSTeamAccessControlEntry -SecurityNamespaceId $securityNamespaceId -Descriptor $Descriptor -Token $token -AllowMask ([int]$Allow) -DenyMask ([int]$Deny)
    }

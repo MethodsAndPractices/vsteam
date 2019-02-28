@@ -79,6 +79,50 @@ InModuleScope VSTeam {
    "url": "https://dev.azure.com/test/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Iterations"
  }
 "@ | ConvertFrom-Json
+
+
+$withoutChildNode = 
+@"
+{
+   "count": 2,
+   "value": [
+     {
+       "id": 44,
+       "identifier": "90aa2c42-de51-450a-bfb6-6e264e364d9a",
+       "name": "Child 1 Level 2",
+       "structureType": "area",
+       "hasChildren": true,
+       "path": "\\Demo Public\\Area\\Child 1 Level 1\\Child 1 Level 2",
+       "_links": {
+         "self": {
+           "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201/Child%201%20Level%202"
+         },
+         "parent": {
+           "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201"
+         }
+       },
+       "url": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201/Child%201%20Level%202"
+     },
+     {
+       "id": 43,
+       "identifier": "38de1ce0-0b1b-45f2-b4f9-f32e3a72b78b",
+       "name": "Child 1 Level 1",
+       "structureType": "area",
+       "hasChildren": true,
+       "path": "\\Demo Public\\Area\\Child 1 Level 1",
+       "_links": {
+         "self": {
+           "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201"
+         },
+         "parent": {
+           "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas"
+         }
+       },
+       "url": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201"
+     }
+   ]
+ }
+"@ | ConvertFrom-Json
   
    Describe 'ClassificationNodes VSTS' {
       # You have to set the version or the api-version will not be added when
@@ -133,13 +177,27 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamClassificationNode by Ids' {
          Mock Invoke-RestMethod { return $classificationNodeResult } -Verifiable
 
-         Get-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup "Iterations" -Ids @(1,2,3,4)
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(1,2,3,4)
 
          It 'Should return Nodes' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/Iterations*" -and
+               $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*Ids=1,2,3,4*"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamClassificationNode by Ids returns no child node' {
+         Mock Invoke-RestMethod { return $withoutChildNode } -Verifiable
+
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(43,44)
+
+         It 'Should return Nodes' {
+            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+               $Uri -like "*Ids=43,44*"
             }
          }
       }

@@ -3,7 +3,6 @@ function Get-VSTeamClassificationNode {
    param(
       [ValidateSet("areas", "iterations")]
       [Parameter(Mandatory = $true, ParameterSetName="ByPath")]
-      [Parameter(Mandatory = $true, ParameterSetName="ByIds")]
       [string] $StructureGroup,
 
       [Parameter(Mandatory = $false, ParameterSetName="ByPath")]
@@ -26,8 +25,12 @@ function Get-VSTeamClassificationNode {
       $ProjectName = $PSBoundParameters["ProjectName"]
       $id = $StructureGroup
 
+      $Path = [uri]::UnescapeDataString($Path)
+
       if ($Path)
       {
+         $Path = [uri]::EscapeUriString($Path)
+         $Path = $Path.TrimStart("/")
          $id += "/$Path"
       }
 
@@ -54,13 +57,30 @@ function Get-VSTeamClassificationNode {
          -Version $([VSTeamVersions]::Core) `
       }
 
-      Write-Verbose $resp | Select-Object -ExpandProperty value
+      if ([bool]($resp.PSobject.Properties.name -match "value"))
+      {
+         try {
+            $objs = @()
+   
+            foreach ($item in $resp.value) {
+               $objs += [VSTeamClassificationNode]::new($item, $ProjectName)
+            }
+   
+            Write-Output $objs
+         }
+         catch {
+            # I catch because using -ErrorAction Stop on the Invoke-RestMethod
+            # was still running the foreach after and reporting useless errors.
+            # This casuses the first error to terminate this execution.
+            _handleException $_
+         }
+      } else {
+         # Storing the object before you return it cleaned up the pipeline.
+         # When I just write the object from the constructor each property
+         # seemed to be written
+         $classificationNode = [VSTeamClassificationNode]::new($resp, $ProjectName)
 
-      # Storing the object before you return it cleaned up the pipeline.
-      # When I just write the object from the constructor each property
-      # seemed to be written
-      $classificationNode =[VSTeamClassificationNode]::new($resp, $ProjectName)
-
-      Write-Output $classificationNode
+         Write-Output $classificationNode
+      }
    }
 }
