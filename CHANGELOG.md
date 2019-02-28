@@ -10,10 +10,8 @@ Note: Some of these are only supported in Azure DevOps (Online), not TFS and Azu
 - Added Get-VSTeamAccessControlList to retrieve ACL's
 - Added Add-VSTeamAccessControlList to add ACL's
 - Added Add-VSTeamWorkItemIterationPermission
-- Added Get-VSTeamWorkItemIteration
 - Added Get-VSTeamClassificationNode
 - Added Get-VSTeamUser (see breaking changes below)
-- Added Get-VSTeamWorkItemArea
 - Added Add-VSTeamWorkItemAreaPermission
 - Added Add-VSTeamProjectPermission
 
