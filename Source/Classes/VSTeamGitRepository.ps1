@@ -3,7 +3,7 @@ using namespace Microsoft.PowerShell.SHiPS
 [SHiPSProvider(UseCache = $true)]
 class VSTeamGitRepository : VSTeamDirectory {
 
-   [int]$Size = 0
+   [long]$Size = 0
    [string]$ID = $null
    [string]$URL = $null
    [string]$sshURL = $null
