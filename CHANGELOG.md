@@ -2,7 +2,9 @@
 
 ## 6.1.1
 
-Fix interacting with large GIT repos without hitting integer overflow.
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/147) from [Joakim Bick](https://github.com/minimoe) which included the following:
+
+Fix interacting with large GIT repositories without hitting integer overflow.
 
 ## 6.1.0
 
