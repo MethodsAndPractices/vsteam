@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.1.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/147) from [Joakim Bick](https://github.com/minimoe) which included the following:
+
+Fix interacting with large GIT repositories without hitting integer overflow.
+
 ## 6.1.0
 
 The AzD API now defaults to the 5.x versions.
