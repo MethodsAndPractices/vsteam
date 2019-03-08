@@ -7,6 +7,7 @@ InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+   $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
    $results2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
    $results2018 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
    $resultsyaml = Get-Content "$PSScriptRoot\sampleFiles\buildDefyaml.json" -Raw | ConvertFrom-Json
@@ -117,6 +118,22 @@ InModuleScope VSTeam {
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod {
             return $results2018
+         }
+
+         It 'should return build definitions' {
+            Get-VSTeamBuildDefinition -projectName project
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
+            }
+         }
+      }
+
+      Context 'Get-VSTeamBuildDefinition with no parameters AzD v5.0 of API' {
+         Mock Invoke-RestMethod {
+            return $resultsAzD
          }
 
          It 'should return build definitions' {

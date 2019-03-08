@@ -16,6 +16,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [object]$RetentionRules = $null
    [VSTeamUser]$AuthoredBy = $null
    [string]$BuildNumberFormat = $null
+   [int]$JobCancelTimeoutInMinutes = -1
    [string]$JobAuthorizationScope = $null
    [VSTeamGitRepository]$GitRepository = $null
    [datetime]$CreatedOn = [datetime]::MinValue
@@ -40,6 +41,12 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       if ($obj.PSObject.Properties.Match('queue').count -gt 0) {
          $this.Queue = [VSTeamQueue]::new($obj.queue, $Projectname)         
       }
+
+      # As of version 5.0 of the REST API this has moved to the Build Def from the phases
+      if ($obj.PSObject.Properties.Match('jobCancelTimeoutInMinutes').count -gt 0) {
+         $this.JobCancelTimeoutInMinutes = $obj.jobCancelTimeoutInMinutes
+      }
+
       if ($obj.PSObject.Properties.Match('triggers').count -gt 0) {
          $this.Triggers = $obj.triggers
       }

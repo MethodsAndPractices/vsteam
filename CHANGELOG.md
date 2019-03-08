@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.1.2
+
+Fixed issued with version 5.0 REST API JSON object for build definition. jobCancelTimeoutInMinutes appears to have moved to the build definition from the phase.
+
 ## 6.1.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/147) from [Joakim Bick](https://github.com/minimoe) which included the following:
