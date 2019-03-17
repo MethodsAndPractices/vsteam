@@ -43,6 +43,7 @@ InModuleScope VSTeam {
    $buildDefResults2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
    $buildDefResults2018 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
    $buildDefResultsyaml = Get-Content "$PSScriptRoot\sampleFiles\buildDefyaml.json" -Raw | ConvertFrom-Json
+   $buildDefResultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
 
    Describe 'TFS 2017 Build Definition' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -77,6 +78,39 @@ InModuleScope VSTeam {
       }
    }
 
+   Describe 'TFS 2018 Build Definition' {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*"
+      }
+
+      Context 'Build Definitions' {
+         Mock Get-VSTeamBuildDefinition {
+            return @(
+               [VSTeamBuildDefinition]::new($buildDefResults2018.value[0], 'TestProject')
+            )
+         }
+
+         $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
+
+         It 'Should create Build definitions' {
+            $buildDefinitions | Should Not be $null
+         }
+
+         $hasSteps = $buildDefinitions.GetChildItem()[0]
+
+         It 'Should have Steps' {
+            $hasSteps | Should Not Be $null
+         }
+
+         $steps = $hasSteps.GetChildItem()
+
+         It 'Should parse steps' {
+            $steps.Length | Should Be 9
+         }
+      }
+   }
+   
    Describe 'VSTS Build Definition' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -87,7 +121,8 @@ InModuleScope VSTeam {
          Mock Get-VSTeamBuildDefinition {
             return @(
                [VSTeamBuildDefinition]::new($buildDefResultsVSTS.value[0], 'TestProject'),
-               [VSTeamBuildDefinition]::new($buildDefResultsyaml.value[0], 'TestProject')
+               [VSTeamBuildDefinition]::new($buildDefResultsyaml.value[0], 'TestProject'),
+               [VSTeamBuildDefinition]::new($buildDefResultsAzD.value[0], 'TestProject')
             )
          }
 
@@ -125,9 +160,14 @@ InModuleScope VSTeam {
          It 'Should have yamlFilename' {
             $yamlFile | Should Be '.vsts-ci.yml'
          }
+
+         $version5Build = $buildDefinitions.GetChildItem()[2]
+
+         It 'Should have jobCancelTimeoutInMinutes' {
+            $version5Build.JobCancelTimeoutInMinutes | Should Be '5'
+         }
       }
    }
-
    Describe 'TeamsPSDrive' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {

@@ -13,7 +13,13 @@ class VSTeamBuildDefinitionProcessPhase : VSTeamDirectory {
       $this.Condition = $obj.condition
       $this.Target = $obj.target
       $this.JobAuthorizationScope = $obj.jobAuthorizationScope
-      $this.JobCancelTimeoutInMinutes = $obj.jobCancelTimeoutInMinutes
+
+      # These might not be returned
+      
+      # As of version 5.0 of the REST API this has moved to the Build Def
+      if ($obj.PSObject.Properties.Match('jobCancelTimeoutInMinutes').count -gt 0) {
+         $this.JobCancelTimeoutInMinutes = $obj.jobCancelTimeoutInMinutes
+      }
 
       $this.StepCount = 0
       foreach ($step in $obj.steps) {

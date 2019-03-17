@@ -22,6 +22,16 @@ Note: Some of these are only supported in Azure DevOps (Online), not TFS and Azu
 - Renamed Update-VSTeamUser to Update-VSTeamUserEntitlement
 - Added new Get-VSTeamUser cmdlet retrieving more data about the User itself
 
+## 6.1.2
+
+Fixed issued with version 5.0 REST API JSON object for build definition. jobCancelTimeoutInMinutes appears to have moved to the build definition from the phase.
+
+## 6.1.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/147) from [Joakim Bick](https://github.com/minimoe) which included the following:
+
+Fix interacting with large GIT repositories without hitting integer overflow.
+
 ## 6.1.0
 
 The AzD API now defaults to the 5.x versions.
