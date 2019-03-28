@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.1.3
+
+Fixed typos in Set-VSTeamAlias function.
+
 ## 6.1.2
 
 Fixed issued with version 5.0 REST API JSON object for build definition. jobCancelTimeoutInMinutes appears to have moved to the build definition from the phase.
