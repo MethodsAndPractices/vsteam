@@ -19,6 +19,12 @@ function _supportsFeeds {
    }
 }
 
+function _supportsSecurityNamespace {
+   if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
+      throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
+   }
+}
+
 function _supportsMemberEntitlementManagement {
    if (-not [VSTeamVersions]::MemberEntitlementManagement) {
        throw 'This account does not support Member Entitlement.'

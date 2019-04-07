@@ -20,6 +20,8 @@ function Get-VSTeamSecurityNamespace {
    )
 
    process {
+      _supportsSecurityNamespace
+
       if ($Id) {
           # Call the REST API
          $resp = _callAPI -Area 'securitynamespaces' -id $Id `

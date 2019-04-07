@@ -18,7 +18,12 @@ class VSTeamClassificationNode : VSTeamLeaf {
       $this.Name = $obj.name
       $this.StructureType = $obj.structureType
       $this.HasChildren = $obj.hasChildren
-      $this.Path = $obj.Path
+
+      if (Get-Member -inputobject $obj -name "Path" -MemberType Properties)
+      {
+         $this.Path = $obj.Path
+      }
+
       $this.Url = $obj.Url
       $this.Id = $obj.id
       if ($this.HasChildren -and (Get-Member -inputobject $obj -name "children" -MemberType Properties))
