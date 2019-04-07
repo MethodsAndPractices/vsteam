@@ -5,15 +5,38 @@ InModuleScope VSTeam {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
+   
    $securityNamespaceListResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespaces.json" -Raw | ConvertFrom-Json
    $securityNamespaceSingleResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespace.single.json" -Raw | ConvertFrom-Json
+
+   Describe "SecurityNamespace TFS Errors" {
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*"
+      }
+
+      Context 'Get-VSTeamSecurityNamespace' {
+         Mock _callAPI { throw 'Should not be called' } -Verifiable
+
+         It 'Should throw' {
+            Set-VSTeamAPIVersion TFS2017
+
+            { Get-VSTeamSecurityNamespace } | Should Throw
+         }
+
+         It '_callAPI should not be called' {
+            Assert-MockCalled _callAPI -Exactly 0
+         }
+      }
+   }
+
 
    Describe 'SecurityNamespace VSTS' {
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''
+      Set-VSTeamAPIVersion AzD
       [VSTeamVersions]::Core = '5.0'
-
+      
       Context 'Get-VSTeamSecurityNamespace list' {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
