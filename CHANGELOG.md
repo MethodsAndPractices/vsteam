@@ -22,6 +22,10 @@ Note: Some of these are only supported in Azure DevOps (Online), not TFS and Azu
 - Renamed Update-VSTeamUser to Update-VSTeamUserEntitlement
 - Added new Get-VSTeamUser cmdlet retrieving more data about the User itself
 
+## 6.1.3
+
+Fixed typos in Set-VSTeamAlias function.
+
 ## 6.1.2
 
 Fixed issued with version 5.0 REST API JSON object for build definition. jobCancelTimeoutInMinutes appears to have moved to the build definition from the phase.
