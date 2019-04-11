@@ -21,7 +21,9 @@ function Remove-VSTeamAccessControlList {
 
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
-      [switch] $Recurse
+      [switch] $Recurse,
+
+      [switch] $Force
    )
 
    process {
@@ -41,11 +43,13 @@ function Remove-VSTeamAccessControlList {
          $queryString.recurse = $true
       }
 
-      # Call the REST API
-      $resp = _callAPI -Area 'accesscontrollists' -id $SecurityNamespaceId -method DELETE `
-         -Version $([VSTeamVersions]::Core) `
-         -QueryString $queryString
+      if ($Force -or $pscmdlet.ShouldProcess($queryString.tokens, "Delete ACL")) {
+         # Call the REST API
+         $resp = _callAPI -Area 'accesscontrollists' -id $SecurityNamespaceId -method DELETE `
+            -Version $([VSTeamVersions]::Core) `
+            -QueryString $queryString
 
-      Write-Output $resp
+         Write-Output $resp
+      }
    }
 }
