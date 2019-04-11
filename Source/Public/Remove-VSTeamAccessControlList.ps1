@@ -1,5 +1,5 @@
 function Remove-VSTeamAccessControlList {
-   [CmdletBinding(DefaultParameterSetName = 'ByNamespace')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByNamespace')]
    param(
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
       [VSTeamSecurityNamespace] $SecurityNamespace,
