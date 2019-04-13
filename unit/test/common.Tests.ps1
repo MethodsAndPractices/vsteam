@@ -84,8 +84,15 @@ InModuleScope VSTeam {
       Context '_handleException' {
          # Build a proper error 
          $obj = "{Value: {Message: 'Top Message'}, Exception: {Message: 'Test Exception', Response: { StatusCode: '401'}}}"
-         $r = [System.Net.Http.HttpResponseMessage]::new([System.Net.HttpStatusCode]::Unauthorized)
-         $e = [Microsoft.PowerShell.Commands.HttpResponseException]::new("Test Exception", $r)
+         
+         if ($PSVersionTable.PSEdition -ne 'Core') {
+            $r = [System.Net.HttpWebResponse]::new()
+            $e = [System.Net.WebException]::new("Test Exception", $null, [System.Net.WebExceptionStatus]::ProtocolError, $r)
+         }
+         else {
+            $r = [System.Net.Http.HttpResponseMessage]::new([System.Net.HttpStatusCode]::Unauthorized)
+            $e = [Microsoft.PowerShell.Commands.HttpResponseException]::new("Test Exception", $r)
+         }
          $ex = Write-Error -Exception $e 2>&1
          $ex.ErrorDetails = [System.Management.Automation.ErrorDetails]::new($obj)
 
@@ -112,8 +119,15 @@ InModuleScope VSTeam {
       Context '_handleException message only' {
          # Build a proper error 
          $obj = "{Value: {Message: 'Test Exception'}, Exception: {Message: 'Test Exception', Response: { StatusCode: '400'}}}"
-         $r = [System.Net.Http.HttpResponseMessage]::new([System.Net.HttpStatusCode]::BadRequest)
-         $e = [Microsoft.PowerShell.Commands.HttpResponseException]::new("Test Exception", $r)
+         
+         if ($PSVersionTable.PSEdition -ne 'Core') {
+            $e = [System.Net.WebException]::new("Test Exception", $null)
+         }
+         else {
+            $r = [System.Net.Http.HttpResponseMessage]::new([System.Net.HttpStatusCode]::BadRequest)
+            $e = [Microsoft.PowerShell.Commands.HttpResponseException]::new("Test Exception", $r)
+         }
+         
          $ex = Write-Error -Exception $e 2>&1
          $ex.ErrorDetails = [System.Management.Automation.ErrorDetails]::new($obj)
 
