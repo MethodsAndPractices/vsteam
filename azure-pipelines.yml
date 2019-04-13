@@ -114,33 +114,15 @@ phases:
 
   - powershell: |
        Import-Module .\Source\*.psd1
-       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results51.xml -OutputFormat NUnitXml
-    displayName: 'Run Unit Tests with PowerShell 5.x'
+       Invoke-Pester -Script .\unit -CodeCoverage .\Source\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
+    displayName: 'Run Unit Tests'
 
   - task: PublishTestResults@2
-    displayName: 'Publish 5.x Test Results'
+    displayName: 'Publish Test Results'
     inputs:
       testRunner: NUnit
-      testResultsFiles: '**\test-results51.xml'
-      testRunTitle: 'Windows Core Unit Tests'
-    condition: succeededOrFailed()  
-
-  - task: PowerShell@2
-    displayName: 'Run Unit Tests with PowerShell Core'
-    targetType: inline
-    pwsh: true
-    continueOnError: true
-    inputs:
-      script: |
-        Import-Module .\*.psd1
-        Invoke-Pester -Script .\unit -CodeCoverage .\src\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results6.xml -OutputFormat NUnitXml
-
-  - task: PublishTestResults@2
-    displayName: 'Publish Core Test Results'
-    inputs:
-      testRunner: NUnit
-      testResultsFiles: '**\test-results6.xml'
-      testRunTitle: 'Windows Core Unit Tests'
+      testResultsFiles: '**\TEST-*.xml'
+      testRunTitle: 'Windows Unit Tests'
     condition: succeededOrFailed()
 
   - task: PublishCodeCoverageResults@1
