@@ -111,7 +111,7 @@ function _handleException {
    if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and $null -ne $ex.Exception.Response -and $ex.Exception.Response.StatusCode -ne "BadRequest") {
       $handled = $true
       $msg = "An error occurred: $($ex.Exception.Message)"
-      Write-Warning $msg
+      Write-Warning -Message $msg
    }
 
    try {
@@ -121,11 +121,11 @@ function _handleException {
 
       if (0 -eq $hasValueProp.count) {
          $handled = $true
-         Write-Warning $e.message
+         Write-Warning -Message $e.message
       }
       else {
          $handled = $true
-         Write-Warning $e.value.message
+         Write-Warning -Message $e.value.message
       }
    }
    catch {
