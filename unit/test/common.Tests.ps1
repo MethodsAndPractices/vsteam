@@ -93,7 +93,7 @@ InModuleScope VSTeam {
             $r = [System.Net.Http.HttpResponseMessage]::new([System.Net.HttpStatusCode]::Unauthorized)
             $e = [Microsoft.PowerShell.Commands.HttpResponseException]::new("Test Exception", $r)
          }
-         $ex = Write-Error -Exception $e 2>&1
+         $ex = Write-Error -Exception $e 2>&1 -ErrorAction Continue
          $ex.ErrorDetails = [System.Management.Automation.ErrorDetails]::new($obj)
 
          It 'Should Write two warnings' {
@@ -108,7 +108,7 @@ InModuleScope VSTeam {
 
       Context '_handleException should re-throw' {
          $e = [System.Management.Automation.RuntimeException]::new('You must call Set-VSTeamAccount before calling any other functions in this module.')
-         $ex = Write-Error -Exception $e 2>&1
+         $ex = Write-Error -Exception $e 2>&1 -ErrorAction Continue
 
          It 'Should throw' {
 
@@ -128,7 +128,7 @@ InModuleScope VSTeam {
             $e = [Microsoft.PowerShell.Commands.HttpResponseException]::new("Test Exception", $r)
          }
          
-         $ex = Write-Error -Exception $e 2>&1
+         $ex = Write-Error -Exception $e 2>&1 -ErrorAction Continue
          $ex.ErrorDetails = [System.Management.Automation.ErrorDetails]::new($obj)
 
          It 'Should Write one warnings' {
