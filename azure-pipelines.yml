@@ -42,7 +42,7 @@ phases:
   displayName: MacOS
   condition: succeeded()
   queue:
-    name: Hosted macOS
+    name: Private macOS
 
   steps:
   - powershell: |
