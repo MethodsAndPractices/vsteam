@@ -1,4 +1,4 @@
-function Remove-VSTeamUser {
+function Remove-VSTeamUserEntitlement {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ById')]
    param(
        [Parameter(ParameterSetName = 'ById', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
@@ -18,7 +18,7 @@ function Remove-VSTeamUser {
 
        if ($email) {
            # We have to go find the id
-           $user = Get-VSTeamUser | Where-Object email -eq $email
+           $user = Get-VSTeamUserEntitlement | Where-Object email -eq $email
 
            if (-not $user) {
                throw "Could not find user with an email equal to $email"
@@ -27,7 +27,7 @@ function Remove-VSTeamUser {
            $id = $user.id
 
        } else {
-           $user = Get-VSTeamUser -Id $id
+           $user = Get-VSTeamUserEntitlement -Id $id
        }
 
        if ($Force -or $PSCmdlet.ShouldProcess("$($user.userName) ($($user.email))", "Delete user")) {

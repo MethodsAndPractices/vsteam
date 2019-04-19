@@ -11,7 +11,7 @@
    "VSTeamAgent.ps1",
    "VSTeamTask.ps1",
    "VSTeamAttempt.ps1",
-   "VSTeamUser.ps1",
+   "VSTeamUserEntitlement.ps1",
    "VSTeamPool.ps1",
    "VSTeamQueue.ps1",
    "VSTeamEnvironment.ps1",
@@ -46,5 +46,10 @@
    "VSTeamProjectPermissions.ps1",
    "VSTeamWorkItemAreaPermissions.ps1",
    "VSTeamWorkItemIterationPermissions.ps1",
-   "VSTeamDescriptor.ps1"
+   "VSTeamDescriptor.ps1",
+   "VSTeamSecurityNamespace.ps1",
+   "VSTeamAccessControlEntry.ps1",
+   "VSTeamAccessControlList.ps1",
+   "VSTeamUser.ps1",
+   "VSTeamClassificationNode.ps1"
 ]

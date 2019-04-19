@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Update-VSTeamUser
+# Update-VSTeamUserEntitlement
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Update-VSTeamUser.md" -->
+<!-- #include "./synopsis/Update-VSTeamUserEntitlement.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Update-VSTeamUser.md" -->
+<!-- #include "./synopsis/Update-VSTeamUserEntitlement.md" -->
 
 ## EXAMPLES
 
@@ -62,4 +62,4 @@ Required: True
 
 ## RELATED LINKS
 
-[Get-VSTeamUser](Get-VSTeamUser.md)
+[Get-VSTeamUserEntitlement](Get-VSTeamUserEntitlement.md)

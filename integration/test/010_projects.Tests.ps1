@@ -352,27 +352,27 @@ InModuleScope VSTeam {
       if (-not ($acct -like "http://*")) {
          Context 'Users exercise' {
 
-            It 'Get-VSTeamUser Should return all users' {
-               Get-VSTeamUser | Should Not Be $null
+            It 'Get-VSTeamUserEntitlement Should return all users' {
+               Get-VSTeamUserEntitlement | Should Not Be $null
             }
 
-            It 'Get-VSTeamUser ById Should return Teams' {
-               $id = (Get-VSTeamUser | Where-Object email -eq $email).Id
-               Get-VSTeamUser -Id $id | Should Not Be $null
+            It 'Get-VSTeamUserEntitlement ById Should return Teams' {
+               $id = (Get-VSTeamUserEntitlement | Where-Object email -eq $email).Id
+               Get-VSTeamUserEntitlement -Id $id | Should Not Be $null
             }
 
-            It 'Remove-VSTeamUser should fail' {
-               { Remove-VSTeamUser -Email fake@NoteReal.foo -Force } | Should Throw
+            It 'Remove-VSTeamUserEntitlement should fail' {
+               { Remove-VSTeamUserEntitlement -Email fake@NoteReal.foo -Force } | Should Throw
             }
 
-            It 'Remove-VSTeamUser should delete the team' {
-               Remove-VSTeamUser -Email $email -Force
-               Get-VSTeamUser | Where-Object Email -eq $email | Should Be $null
+            It 'Remove-VSTeamUserEntitlement should delete the team' {
+               Remove-VSTeamUserEntitlement -Email $email -Force
+               Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should Be $null
             }
 
-            It 'Add-VSTeamUser should add a team' {
-               Add-VSTeamUser -Email $email -License StakeHolder | Should Not Be $null
-               (Get-VSTeamUser).Count | Should Be 2
+            It 'Add-VSTeamUserEntitlement should add a team' {
+               Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
+               (Get-VSTeamUserEntitlement).Count | Should Be 2
             }
          }
       }

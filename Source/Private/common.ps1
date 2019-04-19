@@ -19,6 +19,12 @@ function _supportsFeeds {
    }
 }
 
+function _supportsSecurityNamespace {
+   if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
+      throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
+   }
+}
+
 function _supportsMemberEntitlementManagement {
    if (-not [VSTeamVersions]::MemberEntitlementManagement) {
        throw 'This account does not support Member Entitlement.'
@@ -105,7 +111,7 @@ function _handleException {
    if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and $null -ne $ex.Exception.Response -and $ex.Exception.Response.StatusCode -ne "BadRequest") {
       $handled = $true
       $msg = "An error occurred: $($ex.Exception.Message)"
-      Write-Warning $msg
+      Write-Warning -Message $msg
    }
 
    try {
@@ -115,11 +121,11 @@ function _handleException {
 
       if (0 -eq $hasValueProp.count) {
          $handled = $true
-         Write-Warning $e.message
+         Write-Warning -Message $e.message
       }
       else {
          $handled = $true
-         Write-Warning $e.value.message
+         Write-Warning -Message $e.value.message
       }
    }
    catch {
@@ -760,4 +766,78 @@ function _clearEnvironmentVariables {
    }
 
    _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken '' -Version ''
+}
+
+function _convertToHex() 
+{
+    [cmdletbinding()]
+    param(
+        [parameter(Mandatory=$true)]
+        [string]$Value
+    )
+
+    $bytes = $Value | Format-Hex -Encoding Unicode
+    $hexString = ($bytes.Bytes|ForEach-Object ToString X2) -join ''
+    return $hexString.ToLowerInvariant();
+}
+
+function _getVSTeamIdFromDescriptor {
+   [cmdletbinding()]
+   param(
+       [parameter(Mandatory=$true)]
+       [string]$Descriptor
+   )
+
+   $identifier = $Descriptor.Split('.')[1]
+
+   # We need to Pad the string for FromBase64String to work reliably (AzD Descriptors are not padded)
+   $ModulusValue = ($identifier.length % 4)   
+   Switch ($ModulusValue) {
+       '0' {$Padded = $identifier}
+       '1' {$Padded = $identifier.Substring(0,$identifier.Length - 1)}
+       '2' {$Padded = $identifier + ('=' * (4 - $ModulusValue))}
+       '3' {$Padded = $identifier + ('=' * (4 - $ModulusValue))}
+   }
+
+   return [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($Padded))
+}
+
+function _getDescriptorForACL {
+   [cmdletbinding()]
+   param(
+      [parameter(Mandatory=$true, ParameterSetName="ByUser")]
+      [VSTeamUser]$User,
+
+      [parameter(MAndatory=$true, ParameterSetName="ByGroup")]
+      [VSTeamGroup]$Group
+   )
+
+   if ($User)
+   {
+      switch($User.Origin)
+      {
+         "vsts" {
+            $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
+            $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+         }
+         "aad" {
+            $descriptor = "Microsoft.IdentityModel.Claims.ClaimsIdentity;$($User.Domain)\\$($User.PrincipalName)"
+         }
+         default { throw "User type not handled yet for ACL. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues" }
+      }
+   }
+
+   if ($Group)
+   {
+      switch($Group.Origin)
+      {
+         "vsts" {
+            $sid = _getVSTeamIdFromDescriptor -Descriptor $Group.Descriptor
+            $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+         }
+         default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues"}
+      }
+   }
+
+   return $descriptor
 }

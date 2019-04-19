@@ -11,7 +11,7 @@ class VSTeamFeed : VSTeamLeaf {
       $this.url = $obj.url
       $this.description = $obj.description
       $this.upstreamSources = $obj.upstreamSources
-      
+
       # These might not be returned
       if ($obj.PSObject.Properties.Match('upstreamEnabled').count -gt 0) {
          $this.upstreamEnabled = $obj.upstreamEnabled

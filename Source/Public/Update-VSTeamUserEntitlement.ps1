@@ -1,4 +1,4 @@
-function Update-VSTeamUser
+function Update-VSTeamUserEntitlement
 {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmail')]
    param (
@@ -24,7 +24,7 @@ function Update-VSTeamUser
       if ($email)
       {
          # We have to go find the id
-         $user = Get-VSTeamUser -Top 10000 | Where-Object email -eq $email
+         $user = Get-VSTeamUserEntitlement -Top 10000 | Where-Object email -eq $email
 
          if (-not$user)
          {
@@ -35,7 +35,7 @@ function Update-VSTeamUser
       }
       else
       {
-         $user = Get-VSTeamUser -Id $id
+         $user = Get-VSTeamUserEntitlement -Id $id
       }
 
       $licenseOld = $user.accessLevel.accountLicenseType

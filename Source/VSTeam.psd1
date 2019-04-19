@@ -12,7 +12,7 @@
    RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.1.3'
+   ModuleVersion     = '6.2.0'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -72,11 +72,16 @@
       'types\teammembers.ps1xml',
       'types\teams.ps1xml',
       'types\tfvc.ps1xml',
-      'types\users.ps1xml',
+      'types\usersentitlement.ps1xml',
       'types\workitems.ps1xml',
       'types\pullrequest.ps1xml',
       'types\group.ps1xml',
-      'types\descriptor.ps1xml')
+      'types\descriptor.ps1xml',
+      'types\securityNamespace.ps1xml',
+      'types\accessControlList.ps1xml',
+      'types\accessControlEntry.ps1xml',
+      'types\users.ps1xml',
+      'types\classificationNode.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -86,12 +91,17 @@
       'formats\serviceendpoints.format.ps1xml',
       'formats\serviceendpointTypes.format.ps1xml',
       'formats\team.format.ps1xml',
-      'formats\users.format.ps1xml',
+      'formats\usersentitlement.format.ps1xml',
       'formats\workitemTypes.format.ps1xml',
       'formats\workitems.format.ps1xml',
       'formats\vsteamPSDrive.format.ps1xml',
       'formats\group.format.ps1xml',
-      'formats\descriptor.format.ps1xml')
+      'formats\descriptor.format.ps1xml',
+      'formats\securityNamespace.format.ps1xml',
+      'formats\accessControlList.format.ps1xml',
+      'formats\accessControlEntry.format.ps1xml',
+      'formats\users.format.ps1xml',
+      'formats\classificationNode.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    # NestedModules     = @()
@@ -167,10 +177,10 @@
       'Get-VSTeamProfile',
       'Set-VSTeamAPIVersion',
       'Invoke-VSTeamRequest',
-      'Get-VSTeamUser',
-      'Remove-VSTeamUser',
-      'Add-VSTeamUser',
-      'Update-VSTeamUser',
+      'Get-VSTeamUserEntitlement',
+      'Remove-VSTeamUserEntitlement',
+      'Add-VSTeamUserEntitlement',
+      'Update-VSTeamUserEntitlement',
       'Set-VSTeamEnvironmentStatus',
       'Get-VSTeamServiceEndpointType',
       'Update-VSTeamBuildDefinition',
@@ -201,7 +211,16 @@
       'Update-VSTeamWorkItem',
       'Set-VSTeamAlias',
       'Get-VSTeamGroup',
-      'Get-VSTeamDescriptor')
+      'Get-VSTeamDescriptor',
+      'Get-VSTeamSecurityNamespace',
+      'Get-VSTeamAccessControlList',
+      'Add-VSTeamAccessControlEntry',
+      'Get-VSTeamUser',
+      'Add-VSTeamProjectPermission',
+      'Add-VSTeamGitRepositoryPermission',
+      'Add-VSTeamWorkItemAreaPermission',
+      'Add-VSTeamWorkItemIterationPermission',
+      'Get-VSTeamClassificationNode')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()

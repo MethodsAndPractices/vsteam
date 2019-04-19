@@ -20,7 +20,7 @@ class VSTeamProcess {
       if ($obj.PSObject.Properties.Match('description').count -gt 0) {
          $this.Description = $obj.description
       }
-      
+
       $this.AddTypeName('Team.Process')
    }
 

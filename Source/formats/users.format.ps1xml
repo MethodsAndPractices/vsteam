@@ -1,87 +1,77 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
    <ViewDefinitions>
-      <!--Team.UserEntitlement.TableView-->
+      <!--Team.User2.TableView-->
       <View>
-         <Name>Team.UserEntitlement.TableView</Name>
+         <Name>Team.User2.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.UserEntitlement</TypeName>
+            <TypeName>Team.User2</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>
                <TableColumnHeader>
-                  <Label>UserName</Label>
+                  <Label>PrincipalName</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>Email</Label>
-               </TableColumnHeader>
+                  <Label>DisplayName</Label>
+               </TableColumnHeader>            
                <TableColumnHeader>
-                  <Label>AccessLevel</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>LastAccessedDate</Label>
-               </TableColumnHeader>
+                  <Label>Origin</Label>
+               </TableColumnHeader>                    
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
                   <TableColumnItems>
                      <TableColumnItem>
-                        <PropertyName>userName</PropertyName>
+                        <PropertyName>PrincipalName</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>email</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>accessLevelName</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>lastAccessedDate</PropertyName>
-                     </TableColumnItem>
+                        <PropertyName>DisplayName</PropertyName>
+                     </TableColumnItem>  
+                      <TableColumnItem>
+                        <PropertyName>Origin</PropertyName>
+                     </TableColumnItem>                     
                   </TableColumnItems>
                </TableRowEntry>
             </TableRowEntries>
          </TableControl>
       </View>
-      <!--Team.UserEntitlement.WideView -->
+      <!--Team.User2.ListView-->
       <View>
-         <Name>Team.UserEntitlement.WideView</Name>
+         <Name>Team.User2.ListView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.UserEntitlement</TypeName>
-         </ViewSelectedBy>
-         <WideControl>
-            <WideEntries>
-               <WideEntry>
-                  <WideItem>
-                     <PropertyName>userName</PropertyName>
-                  </WideItem>
-               </WideEntry>
-            </WideEntries>
-         </WideControl>
-      </View>
-      <!--Team.UserEntitlement.ListView-->
-      <View>
-         <Name>Team.UserEntitlement.ListView</Name>
-         <ViewSelectedBy>
-            <TypeName>Team.UserEntitlement</TypeName>
+            <TypeName>Team.User2</TypeName>
          </ViewSelectedBy>
          <ListControl>
             <ListEntries>
                <ListEntry>
                   <ListItems>
                      <ListItem>
-                        <PropertyName>id</PropertyName>
+                        <PropertyName>ID</PropertyName>
                      </ListItem>
                      <ListItem>
-                        <PropertyName>userName</PropertyName>
+                        <PropertyName>PrincipalName</PropertyName>
                      </ListItem>
                      <ListItem>
-                        <PropertyName>email</PropertyName>
+                        <PropertyName>MailAddress</PropertyName>
                      </ListItem>
                      <ListItem>
-                        <PropertyName>accessLevelName</PropertyName>
+                        <PropertyName>DisplayName</PropertyName>
                      </ListItem>
                      <ListItem>
-                        <PropertyName>projects</PropertyName>
+                        <PropertyName>Origin</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>OriginID</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>URL</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Descriptor</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Links</PropertyName>
                      </ListItem>
                   </ListItems>
                </ListEntry>

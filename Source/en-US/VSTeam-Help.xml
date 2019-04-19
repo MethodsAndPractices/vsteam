@@ -124,6 +124,378 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Add-VSTeamAccessControlEntry</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamAccessControlEntry</command:noun>
+      <maml:description>
+        <maml:para>Add or update ACEs in the ACL for the provided token. The request contains the target token, a list of ACEs and a optional merge parameter. In the case of a collision (by identity descriptor) with an existing ACE in the ACL, the "merge" parameter determines the behavior. If set, the existing ACE has its allow and deny merged with the incoming ACE's allow and deny. If unset, the existing ACE is displaced.</maml:para>
+        <maml:para>Note: This is a low-level function. You should really use a high level function (Add-VSTeam Permission / Set-VSTeam Permission / Get-VSTeam*Permission) unless you know what you are doing.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Add or update ACEs in the ACL for the provided token. The request contains the target token, a list of ACEs and a optional merge parameter. In the case of a collision (by identity descriptor) with an existing ACE in the ACL, the "merge" parameter determines the behavior. If set, the existing ACE has its allow and deny merged with the incoming ACE's allow and deny. If unset, the existing ACE is displaced.</maml:para>
+      <maml:para>Note: This is a low-level function. You should really use a high level function (Add-VSTeam Permission / Set-VSTeam Permission / Get-VSTeam*Permission) unless you know what you are doing.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamAccessControlEntry</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SecurityNamespaceName</maml:name>
+          <maml:Description>
+            <maml:para>Security Namespace Name. Valid names are:</maml:para>
+            <maml:para>AzD: - Analytics (58450c49-b02d-465a-ab12-59ae512d6531)</maml:para>
+            <maml:para>- AnalyticsViews (d34d3680-dfe5-4cc6-a949-7d9c68f73cba)</maml:para>
+            <maml:para>- ReleaseManagement (7c7d32f7-0e86-4cd6-892e-b35dbba870bd)</maml:para>
+            <maml:para>- ReleaseManagement2 (c788c23e-1b46-4162-8f5e-d7585343b5de)</maml:para>
+            <maml:para>- Identity (5a27515b-ccd7-42c9-84f1-54c998f03866)</maml:para>
+            <maml:para>- WorkItemTrackingAdministration (445d2788-c5fb-4132-bbef-09c4045ad93f)</maml:para>
+            <maml:para>- DistributedTask (101eae8c-1709-47f9-b228-0e476c35b3ba)</maml:para>
+            <maml:para>- WorkItemQueryFolders (71356614-aad7-4757-8f2c-0fb3bff6f680)</maml:para>
+            <maml:para>- GitRepositories (2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87)</maml:para>
+            <maml:para>- VersionControlItems2 (3c15a8b7-af1a-45c2-aa97-2cb97078332e)</maml:para>
+            <maml:para>- EventSubscriber (2bf24a2b-70ba-43d3-ad97-3d9e1f75622f)</maml:para>
+            <maml:para>- WorkItemTrackingProvision (5a6cd233-6615-414d-9393-48dbb252bd23)</maml:para>
+            <maml:para>- ServiceEndpoints (49b48001-ca20-4adc-8111-5b60c903a50c)</maml:para>
+            <maml:para>- ServiceHooks (cb594ebe-87dd-4fc9-ac2c-6a10a4c92046)</maml:para>
+            <maml:para>- Chat (bc295513-b1a2-4663-8d1a-7017fd760d18)</maml:para>
+            <maml:para>- Collection (3e65f728-f8bc-4ecd-8764-7e378b19bfa7)</maml:para>
+            <maml:para>- Proxy (cb4d56d2-e84b-457e-8845-81320a133fbb)</maml:para>
+            <maml:para>- Plan (bed337f8-e5f3-4fb9-80da-81e17d06e7a8)</maml:para>
+            <maml:para>- Process (2dab47f9-bd70-49ed-9bd5-8eb051e59c02)</maml:para>
+            <maml:para>- AccountAdminSecurity (11238e09-49f2-40c7-94d0-8f0307204ce4)</maml:para>
+            <maml:para>- Library (b7e84409-6553-448a-bbb2-af228e07cbeb)</maml:para>
+            <maml:para>- Environment (83d4c2e6-e57d-4d6e-892b-b87222b7ad20)</maml:para>
+            <maml:para>- Project (52d39943-cb85-4d7f-8fa8-c6baac873819)</maml:para>
+            <maml:para>- EventSubscription (58b176e7-3411-457a-89d0-c6d0ccb3c52b)</maml:para>
+            <maml:para>- CSS (83e28ad4-2d72-4ceb-97b0-c7726d5502c3)</maml:para>
+            <maml:para>- TeamLabSecurity (9e4894c3-ff9a-4eac-8a85-ce11cafdc6f1)</maml:para>
+            <maml:para>- ProjectAnalysisLanguageMetrics (fc5b7b85-5d6b-41eb-8534-e128cb10eb67)</maml:para>
+            <maml:para>- Tagging (bb50f182-8e5e-40b8-bc21-e8752a1e7ae2)</maml:para>
+            <maml:para>- MetaTask (f6a4de49-dbe2-4704-86dc-f8ec1a294436)</maml:para>
+            <maml:para>- Iteration (bf7bfa03-b2b7-47db-8113-fa2e002cc5b1)</maml:para>
+            <maml:para>- Favorites (fa557b48-b5bf-458a-bb2b-1b680426fe8b)</maml:para>
+            <maml:para>- Registry (4ae0db5d-8437-4ee8-a18b-1f6fb38bd34c)</maml:para>
+            <maml:para>- Graph (c2ee56c9-e8fa-4cdd-9d48-2c44f697a58e)</maml:para>
+            <maml:para>- ViewActivityPaneSecurity (dc02bf3d-cd48-46c3-8a41-345094ecc94b)</maml:para>
+            <maml:para>- Job (2a887f97-db68-4b7c-9ae3-5cebd7add999)</maml:para>
+            <maml:para>- WorkItemTracking (73e71c45-d483-40d5-bdba-62fd076f7f87)</maml:para>
+            <maml:para>- StrongBox (4a9e8381-289a-4dfd-8460-69028eaa93b3)</maml:para>
+            <maml:para>- Server (1f4179b3-6bac-4d01-b421-71ea09171400)</maml:para>
+            <maml:para>- TestManagement  (e06e1c24-e93d-4e4a-908a-7d951187b483)</maml:para>
+            <maml:para>- SettingEntries (6ec4592e-048c-434e-8e6c-8671753a8418)</maml:para>
+            <maml:para>- BuildAdministration (302acaca-b667-436d-a946-87133492041c)</maml:para>
+            <maml:para>- Location (2725d2bc-7520-4af4-b0e3-8d876494731f)</maml:para>
+            <maml:para>- Boards (251e12d9-bea3-43a8-bfdb-901b98c0125e)</maml:para>
+            <maml:para>- UtilizationPermissions (83abde3a-4593-424e-b45f-9898af99034d)</maml:para>
+            <maml:para>- WorkItemsHub (c0e7a722-1cad-4ae6-b340-a8467501e7ce)</maml:para>
+            <maml:para>- WebPlatform (0582eb05-c896-449a-b933-aa3d99e121d6)</maml:para>
+            <maml:para>- VersionControlPrivileges (66312704-deb5-43f9-b51c-ab4ff5e351c3)</maml:para>
+            <maml:para>- Workspaces (93bafc04-9075-403a-9367-b7164eac6b5c)</maml:para>
+            <maml:para>- CrossProjectWidgetView (093cbb02-722b-4ad6-9f88-bc452043fa63)</maml:para>
+            <maml:para>- WorkItemTrackingConfiguration (35e35e8e-686d-4b01-aff6-c369d6e36ce0)</maml:para>
+            <maml:para>- Discussion Threads (0d140cae-8ac1-4f48-b6d1-c93ce0301a12)</maml:para>
+            <maml:para>- BoardsExternalIntegration (5ab15bc8-4ea1-d0f3-8344-cab8fe976877)</maml:para>
+            <maml:para>- DataProvider (7ffa7cf4-317c-4fea-8f1d-cfda50cfa956)</maml:para>
+            <maml:para>- Social (81c27cc8-7a9f-48ee-b63f-df1e1d0412dd)</maml:para>
+            <maml:para>- Security (9a82c708-bfbe-4f31-984c-e860c2196781)</maml:para>
+            <maml:para>- IdentityPicker (a60e0d84-c2f8-48e4-9c0c-f32da48d5fd1)</maml:para>
+            <maml:para>- ServicingOrchestration (84cc1aa4-15bc-423d-90d9-f97c450fc729)</maml:para>
+            <maml:para>- Build (33344d9c-fc72-4d6f-aba5-fa317101a7e9)</maml:para>
+            <maml:para>- DashboardsPrivileges (8adf73b7-389a-4276-b638-fe1653f7efc7)</maml:para>
+            <maml:para>- VersionControlItems (a39371cf-0841-4c16-bbd3-276e341bc052)</maml:para>
+            <maml:para></maml:para>
+            <maml:para>VSSPS: - EventSubscriber (2bf24a2b-70ba-43d3-ad97-3d9e1f75622f) (VSSPS)</maml:para>
+            <maml:para>- EventSubscription (58b176e7-3411-457a-89d0-c6d0ccb3c52b) (VSSPS)</maml:para>
+            <maml:para>- Registry (4ae0db5d-8437-4ee8-a18b-1f6fb38bd34c) (VSSPS)</maml:para>
+            <maml:para>- Graph (c2ee56c9-e8fa-4cdd-9d48-2c44f697a58e) (VSSPS)</maml:para>
+            <maml:para>- Invitation (ea0b4d1e-577a-4797-97b5-2f5755e548d5) (VSSPS)</maml:para>
+            <maml:para>- SystemGraph (b24dfdf1-285a-4ea6-a55b-32549a68121d) (VSSPS)</maml:para>
+            <maml:para>- Job (2a887f97-db68-4b7c-9ae3-5cebd7add999) (VSSPS)</maml:para>
+            <maml:para>- CommerceCollectionSecurity (307be2d3-12ed-45c2-aacf-6598760efca7) (VSSPS)</maml:para>
+            <maml:para>- StrongBox (4a9e8381-289a-4dfd-8460-69028eaa93b3) (VSSPS)</maml:para>
+            <maml:para>- GroupLicensing (c6a4fd35-b508-49eb-8ea7-7189df5f3698) (VSSPS)</maml:para>
+            <maml:para>- Server (1f4179b3-6bac-4d01-b421-71ea09171400) (VSSPS)</maml:para>
+            <maml:para>- SettingEntries (6ec4592e-048c-434e-8e6c-8671753a8418) (VSSPS)</maml:para>
+            <maml:para>- RemotableTemplateTest (ccdcb71c-4780-4a42-9bb4-8bce07a7628f) (VSSPS)</maml:para>
+            <maml:para>- Location (2725d2bc-7520-4af4-b0e3-8d876494731f) (VSSPS)</maml:para>
+            <maml:para>- WebPlatform (0582eb05-c896-449a-b933-aa3d99e121d6) (VSSPS)</maml:para>
+            <maml:para>- DataProvider (7ffa7cf4-317c-4fea-8f1d-cfda50cfa956) (VSSPS)</maml:para>
+            <maml:para>- Security (9a82c708-bfbe-4f31-984c-e860c2196781) (VSSPS)</maml:para>
+            <maml:para>- IdentityPicker (a60e0d84-c2f8-48e4-9c0c-f32da48d5fd1) (VSSPS)</maml:para>
+            <maml:para>- ServicingOrchestration (84cc1aa4-15bc-423d-90d9-f97c450fc729) (VSSPS)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SecurityNamespace</maml:name>
+          <maml:Description>
+            <maml:para>Security namespace identifier.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamSecurityNamespace</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamSecurityNamespace</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SecurityNamespaceId</maml:name>
+          <maml:Description>
+            <maml:para>Security namespace identifier.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Token</maml:name>
+          <maml:Description>
+            <maml:para>The security Token</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AllowMask</maml:name>
+          <maml:Description>
+            <maml:para>Bitmask for Allow Permissions</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+          <dev:type>
+            <maml:name>Int</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>DenyMask</maml:name>
+          <maml:Description>
+            <maml:para>Bitmask for Deny Permissions</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+          <dev:type>
+            <maml:name>Int</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SecurityNamespaceName</maml:name>
+        <maml:Description>
+          <maml:para>Security Namespace Name. Valid names are:</maml:para>
+          <maml:para>AzD: - Analytics (58450c49-b02d-465a-ab12-59ae512d6531)</maml:para>
+          <maml:para>- AnalyticsViews (d34d3680-dfe5-4cc6-a949-7d9c68f73cba)</maml:para>
+          <maml:para>- ReleaseManagement (7c7d32f7-0e86-4cd6-892e-b35dbba870bd)</maml:para>
+          <maml:para>- ReleaseManagement2 (c788c23e-1b46-4162-8f5e-d7585343b5de)</maml:para>
+          <maml:para>- Identity (5a27515b-ccd7-42c9-84f1-54c998f03866)</maml:para>
+          <maml:para>- WorkItemTrackingAdministration (445d2788-c5fb-4132-bbef-09c4045ad93f)</maml:para>
+          <maml:para>- DistributedTask (101eae8c-1709-47f9-b228-0e476c35b3ba)</maml:para>
+          <maml:para>- WorkItemQueryFolders (71356614-aad7-4757-8f2c-0fb3bff6f680)</maml:para>
+          <maml:para>- GitRepositories (2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87)</maml:para>
+          <maml:para>- VersionControlItems2 (3c15a8b7-af1a-45c2-aa97-2cb97078332e)</maml:para>
+          <maml:para>- EventSubscriber (2bf24a2b-70ba-43d3-ad97-3d9e1f75622f)</maml:para>
+          <maml:para>- WorkItemTrackingProvision (5a6cd233-6615-414d-9393-48dbb252bd23)</maml:para>
+          <maml:para>- ServiceEndpoints (49b48001-ca20-4adc-8111-5b60c903a50c)</maml:para>
+          <maml:para>- ServiceHooks (cb594ebe-87dd-4fc9-ac2c-6a10a4c92046)</maml:para>
+          <maml:para>- Chat (bc295513-b1a2-4663-8d1a-7017fd760d18)</maml:para>
+          <maml:para>- Collection (3e65f728-f8bc-4ecd-8764-7e378b19bfa7)</maml:para>
+          <maml:para>- Proxy (cb4d56d2-e84b-457e-8845-81320a133fbb)</maml:para>
+          <maml:para>- Plan (bed337f8-e5f3-4fb9-80da-81e17d06e7a8)</maml:para>
+          <maml:para>- Process (2dab47f9-bd70-49ed-9bd5-8eb051e59c02)</maml:para>
+          <maml:para>- AccountAdminSecurity (11238e09-49f2-40c7-94d0-8f0307204ce4)</maml:para>
+          <maml:para>- Library (b7e84409-6553-448a-bbb2-af228e07cbeb)</maml:para>
+          <maml:para>- Environment (83d4c2e6-e57d-4d6e-892b-b87222b7ad20)</maml:para>
+          <maml:para>- Project (52d39943-cb85-4d7f-8fa8-c6baac873819)</maml:para>
+          <maml:para>- EventSubscription (58b176e7-3411-457a-89d0-c6d0ccb3c52b)</maml:para>
+          <maml:para>- CSS (83e28ad4-2d72-4ceb-97b0-c7726d5502c3)</maml:para>
+          <maml:para>- TeamLabSecurity (9e4894c3-ff9a-4eac-8a85-ce11cafdc6f1)</maml:para>
+          <maml:para>- ProjectAnalysisLanguageMetrics (fc5b7b85-5d6b-41eb-8534-e128cb10eb67)</maml:para>
+          <maml:para>- Tagging (bb50f182-8e5e-40b8-bc21-e8752a1e7ae2)</maml:para>
+          <maml:para>- MetaTask (f6a4de49-dbe2-4704-86dc-f8ec1a294436)</maml:para>
+          <maml:para>- Iteration (bf7bfa03-b2b7-47db-8113-fa2e002cc5b1)</maml:para>
+          <maml:para>- Favorites (fa557b48-b5bf-458a-bb2b-1b680426fe8b)</maml:para>
+          <maml:para>- Registry (4ae0db5d-8437-4ee8-a18b-1f6fb38bd34c)</maml:para>
+          <maml:para>- Graph (c2ee56c9-e8fa-4cdd-9d48-2c44f697a58e)</maml:para>
+          <maml:para>- ViewActivityPaneSecurity (dc02bf3d-cd48-46c3-8a41-345094ecc94b)</maml:para>
+          <maml:para>- Job (2a887f97-db68-4b7c-9ae3-5cebd7add999)</maml:para>
+          <maml:para>- WorkItemTracking (73e71c45-d483-40d5-bdba-62fd076f7f87)</maml:para>
+          <maml:para>- StrongBox (4a9e8381-289a-4dfd-8460-69028eaa93b3)</maml:para>
+          <maml:para>- Server (1f4179b3-6bac-4d01-b421-71ea09171400)</maml:para>
+          <maml:para>- TestManagement  (e06e1c24-e93d-4e4a-908a-7d951187b483)</maml:para>
+          <maml:para>- SettingEntries (6ec4592e-048c-434e-8e6c-8671753a8418)</maml:para>
+          <maml:para>- BuildAdministration (302acaca-b667-436d-a946-87133492041c)</maml:para>
+          <maml:para>- Location (2725d2bc-7520-4af4-b0e3-8d876494731f)</maml:para>
+          <maml:para>- Boards (251e12d9-bea3-43a8-bfdb-901b98c0125e)</maml:para>
+          <maml:para>- UtilizationPermissions (83abde3a-4593-424e-b45f-9898af99034d)</maml:para>
+          <maml:para>- WorkItemsHub (c0e7a722-1cad-4ae6-b340-a8467501e7ce)</maml:para>
+          <maml:para>- WebPlatform (0582eb05-c896-449a-b933-aa3d99e121d6)</maml:para>
+          <maml:para>- VersionControlPrivileges (66312704-deb5-43f9-b51c-ab4ff5e351c3)</maml:para>
+          <maml:para>- Workspaces (93bafc04-9075-403a-9367-b7164eac6b5c)</maml:para>
+          <maml:para>- CrossProjectWidgetView (093cbb02-722b-4ad6-9f88-bc452043fa63)</maml:para>
+          <maml:para>- WorkItemTrackingConfiguration (35e35e8e-686d-4b01-aff6-c369d6e36ce0)</maml:para>
+          <maml:para>- Discussion Threads (0d140cae-8ac1-4f48-b6d1-c93ce0301a12)</maml:para>
+          <maml:para>- BoardsExternalIntegration (5ab15bc8-4ea1-d0f3-8344-cab8fe976877)</maml:para>
+          <maml:para>- DataProvider (7ffa7cf4-317c-4fea-8f1d-cfda50cfa956)</maml:para>
+          <maml:para>- Social (81c27cc8-7a9f-48ee-b63f-df1e1d0412dd)</maml:para>
+          <maml:para>- Security (9a82c708-bfbe-4f31-984c-e860c2196781)</maml:para>
+          <maml:para>- IdentityPicker (a60e0d84-c2f8-48e4-9c0c-f32da48d5fd1)</maml:para>
+          <maml:para>- ServicingOrchestration (84cc1aa4-15bc-423d-90d9-f97c450fc729)</maml:para>
+          <maml:para>- Build (33344d9c-fc72-4d6f-aba5-fa317101a7e9)</maml:para>
+          <maml:para>- DashboardsPrivileges (8adf73b7-389a-4276-b638-fe1653f7efc7)</maml:para>
+          <maml:para>- VersionControlItems (a39371cf-0841-4c16-bbd3-276e341bc052)</maml:para>
+          <maml:para></maml:para>
+          <maml:para>VSSPS: - EventSubscriber (2bf24a2b-70ba-43d3-ad97-3d9e1f75622f) (VSSPS)</maml:para>
+          <maml:para>- EventSubscription (58b176e7-3411-457a-89d0-c6d0ccb3c52b) (VSSPS)</maml:para>
+          <maml:para>- Registry (4ae0db5d-8437-4ee8-a18b-1f6fb38bd34c) (VSSPS)</maml:para>
+          <maml:para>- Graph (c2ee56c9-e8fa-4cdd-9d48-2c44f697a58e) (VSSPS)</maml:para>
+          <maml:para>- Invitation (ea0b4d1e-577a-4797-97b5-2f5755e548d5) (VSSPS)</maml:para>
+          <maml:para>- SystemGraph (b24dfdf1-285a-4ea6-a55b-32549a68121d) (VSSPS)</maml:para>
+          <maml:para>- Job (2a887f97-db68-4b7c-9ae3-5cebd7add999) (VSSPS)</maml:para>
+          <maml:para>- CommerceCollectionSecurity (307be2d3-12ed-45c2-aacf-6598760efca7) (VSSPS)</maml:para>
+          <maml:para>- StrongBox (4a9e8381-289a-4dfd-8460-69028eaa93b3) (VSSPS)</maml:para>
+          <maml:para>- GroupLicensing (c6a4fd35-b508-49eb-8ea7-7189df5f3698) (VSSPS)</maml:para>
+          <maml:para>- Server (1f4179b3-6bac-4d01-b421-71ea09171400) (VSSPS)</maml:para>
+          <maml:para>- SettingEntries (6ec4592e-048c-434e-8e6c-8671753a8418) (VSSPS)</maml:para>
+          <maml:para>- RemotableTemplateTest (ccdcb71c-4780-4a42-9bb4-8bce07a7628f) (VSSPS)</maml:para>
+          <maml:para>- Location (2725d2bc-7520-4af4-b0e3-8d876494731f) (VSSPS)</maml:para>
+          <maml:para>- WebPlatform (0582eb05-c896-449a-b933-aa3d99e121d6) (VSSPS)</maml:para>
+          <maml:para>- DataProvider (7ffa7cf4-317c-4fea-8f1d-cfda50cfa956) (VSSPS)</maml:para>
+          <maml:para>- Security (9a82c708-bfbe-4f31-984c-e860c2196781) (VSSPS)</maml:para>
+          <maml:para>- IdentityPicker (a60e0d84-c2f8-48e4-9c0c-f32da48d5fd1) (VSSPS)</maml:para>
+          <maml:para>- ServicingOrchestration (84cc1aa4-15bc-423d-90d9-f97c450fc729) (VSSPS)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SecurityNamespace</maml:name>
+        <maml:Description>
+          <maml:para>Security namespace identifier.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamSecurityNamespace</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamSecurityNamespace</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SecurityNamespaceId</maml:name>
+        <maml:Description>
+          <maml:para>Security namespace identifier.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Token</maml:name>
+        <maml:Description>
+          <maml:para>The security Token</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AllowMask</maml:name>
+        <maml:Description>
+          <maml:para>Bitmask for Allow Permissions</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+        <dev:type>
+          <maml:name>Int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>DenyMask</maml:name>
+        <maml:Description>
+          <maml:para>Bitmask for Deny Permissions</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+        <dev:type>
+          <maml:name>Int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>VSTeamAccessControlEntry</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Add-VSTeamAzureRMServiceEndpoint</command:name>
       <command:verb>Add</command:verb>
       <command:noun>VSTeamAzureRMServiceEndpoint</command:noun>
@@ -1267,6 +1639,264 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Add-VSTeamGitRepositoryPermission</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamGitRepositoryPermission</command:noun>
+      <maml:description>
+        <maml:para>Add permissions to a git repository, all repositories in a project, or a specific branch</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Add permissions to a git repository, all repositories in a project, or a specific branch</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamGitRepositoryPermission</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RepositoryName</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>BranchName</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Descriptor</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamUser</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Group</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamGroup</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamGroup</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Allow</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamGitRepositoryPermissions</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamGitRepositoryPermissions</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Deny</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamGitRepositoryPermissions</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamGitRepositoryPermissions</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>RepositoryId</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>RepositoryName</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>BranchName</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Descriptor</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamUser</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Group</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamGroup</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamGroup</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Allow</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamGitRepositoryPermissions</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamGitRepositoryPermissions</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Deny</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamGitRepositoryPermissions</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamGitRepositoryPermissions</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -2644,6 +3274,192 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Add-VSTeamProjectPermission</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamProjectPermission</command:noun>
+      <maml:description>
+        <maml:para>Add Permissions on Project Level</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Add Permissions on Project Level</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamProjectPermission</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Descriptor</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+          <dev:type>
+            <maml:name></maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Group</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamGroup</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamGroup</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Allow</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamProjectPermissions</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamProjectPermissions</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Deny</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamProjectPermissions</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamProjectPermissions</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Descriptor</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Group</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamGroup</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamGroup</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Allow</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamProjectPermissions</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamProjectPermissions</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Deny</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamProjectPermissions</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamProjectPermissions</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Add-VSTeamRelease</command:name>
       <command:verb>Add</command:verb>
       <command:noun>VSTeamRelease</command:noun>
@@ -3875,19 +4691,19 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Add-VSTeamUser</command:name>
+      <command:name>Add-VSTeamUserEntitlement</command:name>
       <command:verb>Add</command:verb>
-      <command:noun>VSTeamUser</command:noun>
+      <command:noun>VSTeamUserEntitlement</command:noun>
       <maml:description>
-        <maml:para>Adds a user to the account.</maml:para>
+        <maml:para>Add a user, assign license and extensions and make them a member of a project group in an account.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Adds a user to the account.</maml:para>
+      <maml:para>Add a user, assign license and extensions and make them a member of a project group in an account.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Add-VSTeamUser</maml:name>
+        <maml:name>Add-VSTeamUserEntitlement</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
@@ -4248,6 +5064,474 @@ ID Title          Status
         </dev:remarks>
       </command:example>
     </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Add-VSTeamWorkItemAreaPermission</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamWorkItemAreaPermission</command:noun>
+      <maml:description>
+        <maml:para>Add Permissions to a Work Item Area</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Add Permissions to a Work Item Area</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamWorkItemAreaPermission</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AreaID</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AreaPath</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Descriptor</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+          <dev:type>
+            <maml:name></maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Group</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamGroup</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamGroup</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Allow</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamWorkItemAreaPermissions</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamWorkItemAreaPermissions</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Deny</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamWorkItemAreaPermissions</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamWorkItemAreaPermissions</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AreaID</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AreaPath</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Descriptor</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Group</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamGroup</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamGroup</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Allow</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamWorkItemAreaPermissions</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamWorkItemAreaPermissions</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Deny</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamWorkItemAreaPermissions</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamWorkItemAreaPermissions</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Add-VSTeamWorkItemIterationPermission</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamWorkItemIterationPermission</command:noun>
+      <maml:description>
+        <maml:para>Add Permissions to an Iteration</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Add Permissions to an Iteration</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamWorkItemIterationPermission</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IterationID</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IterationPath</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Descriptor</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+          <dev:type>
+            <maml:name></maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Group</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamGroup</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamGroup</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Allow</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamWorkItemIterationPermissions</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamWorkItemIterationPermissions</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Deny</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamWorkItemIterationPermissions</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamWorkItemIterationPermissions</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IterationID</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IterationPath</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Descriptor</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Group</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamGroup</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamGroup</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Allow</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamWorkItemIterationPermissions</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamWorkItemIterationPermissions</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Deny</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamWorkItemIterationPermissions</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamWorkItemIterationPermissions</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -4674,6 +5958,186 @@ ID Title          Status
       <command:returnValue>
         <dev:type>
           <maml:name>Team.Team</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-VSTeamAccessControlList</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamAccessControlList</command:noun>
+      <maml:description>
+        <maml:para>Return a list of access control lists for the specified security namespace and token. All ACLs in the security namespace will be retrieved if no optional parameters are provided.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Return a list of access control lists for the specified security namespace and token. All ACLs in the security namespace will be retrieved if no optional parameters are provided.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamAccessControlList</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SecurityNamespace</maml:name>
+          <maml:Description>
+            <maml:para>Security namespace identifier.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamSecurityNamespace</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamSecurityNamespace</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SecurityNamespaceId</maml:name>
+          <maml:Description>
+            <maml:para>Security namespace identifier.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Token</maml:name>
+          <maml:Description>
+            <maml:para>Security token</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Descriptors</maml:name>
+          <maml:Description>
+            <maml:para>An optional filter string containing a list of identity descriptors whose ACEs should be retrieved. If this is not set entire ACLs will be returned.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeExtendedInfo</maml:name>
+          <maml:Description>
+            <maml:para>If set, populate the extended information properties for the access control entries contained in the returned lists.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Recurse</maml:name>
+          <maml:Description>
+            <maml:para>If true and this is a hierarchical namespace, return child ACLs of the specified token.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SecurityNamespace</maml:name>
+        <maml:Description>
+          <maml:para>Security namespace identifier.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamSecurityNamespace</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamSecurityNamespace</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SecurityNamespaceId</maml:name>
+        <maml:Description>
+          <maml:para>Security namespace identifier.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Token</maml:name>
+        <maml:Description>
+          <maml:para>Security token</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Descriptors</maml:name>
+        <maml:Description>
+          <maml:para>An optional filter string containing a list of identity descriptors whose ACEs should be retrieved. If this is not set entire ACLs will be returned.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IncludeExtendedInfo</maml:name>
+        <maml:Description>
+          <maml:para>If set, populate the extended information properties for the access control entries contained in the returned lists.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Recurse</maml:name>
+        <maml:Description>
+          <maml:para>If true and this is a hierarchical namespace, return child ACLs of the specified token.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>VSTeamAccessControlList</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -5892,6 +7356,168 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamClassificationNode</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamClassificationNode</command:noun>
+      <maml:description>
+        <maml:para>Gets the classification node for a given node path.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Gets the classification node for a given node path.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamClassificationNode</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>StructureGroup</maml:name>
+          <maml:Description>
+            <maml:para>Structure group of the classification node, area or iteration.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+          <dev:type>
+            <maml:name>string</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Depth</maml:name>
+          <maml:Description>
+            <maml:para>Depth of children to fetch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">int32</command:parameterValue>
+          <dev:type>
+            <maml:name>int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:Description>
+            <maml:para>Path of the classification node.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+          <dev:type>
+            <maml:name>string</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Ids</maml:name>
+          <maml:Description>
+            <maml:para>Integer classification nodes ids.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">int32[]</command:parameterValue>
+          <dev:type>
+            <maml:name>int32[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>StructureGroup</maml:name>
+        <maml:Description>
+          <maml:para>Structure group of the classification node, area or iteration.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Depth</maml:name>
+        <maml:Description>
+          <maml:para>Depth of children to fetch.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">int32</command:parameterValue>
+        <dev:type>
+          <maml:name>int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:Description>
+          <maml:para>Path of the classification node.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Ids</maml:name>
+        <maml:Description>
+          <maml:para>Integer classification nodes ids.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">int32[]</command:parameterValue>
+        <dev:type>
+          <maml:name>int32[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamCloudSubscription</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamCloudSubscription</command:noun>
@@ -6849,30 +8475,41 @@ ID Title          Status
       <command:syntaxItem>
         <maml:name>Get-VSTeamOption</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Release</maml:name>
+          <maml:name>SubDomain</maml:name>
           <maml:Description>
-            <maml:para>Returns options for Release Management APIs</maml:para>
+            <maml:para>Returns options for that sub domain APIs. Some examples include:</maml:para>
+            <maml:para>- vsaex = Member Entitlement Management</maml:para>
+            <maml:para>- feeds = Artifacts</maml:para>
+            <maml:para>- vsrm = Release Management</maml:para>
+            <maml:para>- vssps = Graph</maml:para>
+            <maml:para>- extmgmt = Extensions</maml:para>
           </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
-            <maml:name>SwitchParameter</maml:name>
+            <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>Release</maml:name>
+        <maml:name>SubDomain</maml:name>
         <maml:Description>
-          <maml:para>Returns options for Release Management APIs</maml:para>
+          <maml:para>Returns options for that sub domain APIs. Some examples include:</maml:para>
+          <maml:para>- vsaex = Member Entitlement Management</maml:para>
+          <maml:para>- feeds = Artifacts</maml:para>
+          <maml:para>- vsrm = Release Management</maml:para>
+          <maml:para>- vssps = Graph</maml:para>
+          <maml:para>- extmgmt = Extensions</maml:para>
         </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
-          <maml:name>SwitchParameter</maml:name>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -6895,6 +8532,13 @@ ID Title          Status
         <dev:code>PS C:\&gt; Get-VSTeamOption | Format-Table -View Versions</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for your account using the 'Versions' custom table format.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamOption -SubDomain vsrm</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the versions of supported APIs for the release management service.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -8517,6 +10161,121 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamSecurityNamespace</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamSecurityNamespace</command:noun>
+      <maml:description>
+        <maml:para>List all security namespaces or just the specified namespace.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>List all security namespaces or just the specified namespace.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamSecurityNamespace</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Security namespace identifier.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamSecurityNamespace</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>Security namespace name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamSecurityNamespace</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>LocalOnly</maml:name>
+          <maml:Description>
+            <maml:para>If true, retrieve only local security namespaces.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>Security namespace identifier.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Security namespace name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>LocalOnly</maml:name>
+        <maml:Description>
+          <maml:para>If true, retrieve only local security namespaces.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>VSTeamSecurityNamespace</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamServiceEndpoint</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamServiceEndpoint</command:noun>
@@ -8980,6 +10739,96 @@ ID Title          Status
       <command:syntaxItem>
         <maml:name>Get-VSTeamUser</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SubjectTypes</maml:name>
+          <maml:Description>
+            <maml:para>A comma separated list of user subject subtypes to reduce the retrieved results. Valid subject types:</maml:para>
+            <maml:para>- vss (Azure DevOps User)</maml:para>
+            <maml:para>- aad (Azure Active Directory User)</maml:para>
+            <maml:para>- svc (Azure DevOps Service Identity)</maml:para>
+            <maml:para>- imp (Imported Identity)</maml:para>
+            <maml:para>- msa (Microsoft Account)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamUser</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Descriptor</maml:name>
+          <maml:Description>
+            <maml:para>The descriptor of the desired graph user.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SubjectTypes</maml:name>
+        <maml:Description>
+          <maml:para>A comma separated list of user subject subtypes to reduce the retrieved results. Valid subject types:</maml:para>
+          <maml:para>- vss (Azure DevOps User)</maml:para>
+          <maml:para>- aad (Azure Active Directory User)</maml:para>
+          <maml:para>- svc (Azure DevOps Service Identity)</maml:para>
+          <maml:para>- imp (Imported Identity)</maml:para>
+          <maml:para>- msa (Microsoft Account)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Descriptor</maml:name>
+        <maml:Description>
+          <maml:para>The descriptor of the desired graph user.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-VSTeamUserEntitlement</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamUserEntitlement</command:noun>
+      <maml:description>
+        <maml:para>Get User Entitlement for a user.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get User Entitlement for a user.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamUserEntitlement</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Skip</maml:name>
           <maml:Description>
             <maml:para>The number of items to skip.</maml:para>
@@ -9020,7 +10869,7 @@ ID Title          Status
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Get-VSTeamUser</maml:name>
+        <maml:name>Get-VSTeamUserEntitlement</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>UserId</maml:name>
           <maml:Description>
@@ -9983,6 +11832,139 @@ ID Title          Status
     </command:parameters>
     <command:inputTypes />
     <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Remove-VSTeamAccessControlList</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>VSTeamAccessControlList</command:noun>
+      <maml:description>
+        <maml:para>Remove access control lists under the specfied security namespace.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Remove access control lists under the specfied security namespace.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-VSTeamAccessControlList</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SecurityNamespace</maml:name>
+          <maml:Description>
+            <maml:para>Security namespace identifier.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamSecurityNamespace</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamSecurityNamespace</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SecurityNamespaceId</maml:name>
+          <maml:Description>
+            <maml:para>Security namespace identifier.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Tokens</maml:name>
+          <maml:Description>
+            <maml:para>One or more comma-separated security tokens</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Recurse</maml:name>
+          <maml:Description>
+            <maml:para>If true and this is a hierarchical namespace, also remove child ACLs of the specified tokens.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SecurityNamespace</maml:name>
+        <maml:Description>
+          <maml:para>Security namespace identifier.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamSecurityNamespace</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamSecurityNamespace</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SecurityNamespaceId</maml:name>
+        <maml:Description>
+          <maml:para>Security namespace identifier.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Tokens</maml:name>
+        <maml:Description>
+          <maml:para>One or more comma-separated security tokens</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Recurse</maml:name>
+        <maml:Description>
+          <maml:para>If true and this is a hierarchical namespace, also remove child ACLs of the specified tokens.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -11634,19 +13616,21 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Remove-VSTeamUser</command:name>
+      <command:name>Remove-VSTeamUserEntitlement</command:name>
       <command:verb>Remove</command:verb>
-      <command:noun>VSTeamUser</command:noun>
+      <command:noun>VSTeamUserEntitlement</command:noun>
       <maml:description>
-        <maml:para>Removes a user from the account.</maml:para>
+        <maml:para>Delete a user from the account.</maml:para>
+        <maml:para>The delete operation includes unassigning Extensions and Licenses and removing the user from all project memberships. The user would continue to have access to the account if she is member of an AAD group, that is added directly to the account.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Removes a user from the account.</maml:para>
+      <maml:para>Delete a user from the account.</maml:para>
+      <maml:para>The delete operation includes unassigning Extensions and Licenses and removing the user from all project memberships. The user would continue to have access to the account if she is member of an AAD group, that is added directly to the account.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Remove-VSTeamUser</maml:name>
+        <maml:name>Remove-VSTeamUserEntitlement</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
@@ -11694,7 +13678,7 @@ ID Title          Status
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Remove-VSTeamUser</maml:name>
+        <maml:name>Remove-VSTeamUserEntitlement</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
@@ -15816,19 +17800,19 @@ PS demo:\&gt; Get-ChildItem</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Update-VSTeamUser</command:name>
+      <command:name>Update-VSTeamUserEntitlement</command:name>
       <command:verb>Update</command:verb>
-      <command:noun>VSTeamUser</command:noun>
+      <command:noun>VSTeamUserEntitlement</command:noun>
       <maml:description>
-        <maml:para>Updates the users for the account. (Currently only supports updating the LicenseType)</maml:para>
+        <maml:para>Edit the entitlements (License, Extensions, Projects, Teams etc) for a user.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Updates the users for the account. (Currently only supports updating the LicenseType)</maml:para>
+      <maml:para>Edit the entitlements (License, Extensions, Projects, Teams etc) for a user.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Update-VSTeamUser</maml:name>
+        <maml:name>Update-VSTeamUserEntitlement</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
@@ -15872,7 +17856,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
-        <maml:name>Update-VSTeamUser</maml:name>
+        <maml:name>Update-VSTeamUserEntitlement</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Email</maml:name>
           <maml:Description>
@@ -15982,7 +17966,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     <command:examples />
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Get-VSTeamUser</maml:linkText>
+        <maml:linkText>Get-VSTeamUserEntitlement</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>

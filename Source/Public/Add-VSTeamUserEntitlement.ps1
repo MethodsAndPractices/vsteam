@@ -1,4 +1,4 @@
-function Add-VSTeamUser {
+function Add-VSTeamUserEntitlement {
    [CmdletBinding()]
    param(
        [Parameter(Mandatory = $true)]

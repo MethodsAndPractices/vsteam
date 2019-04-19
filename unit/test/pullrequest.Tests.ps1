@@ -7,6 +7,10 @@ InModuleScope VSTeam {
 
         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
+        # You have to set the version or the api-version will not be added when
+        # [VSTeamVersions]::Core = ''
+        [VSTeamVersions]::Git = '5.1-preview'
+
         $singleResult = @{
             pullRequestId  = 1
             repositoryName = "testreponame"
@@ -53,7 +57,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -64,7 +68,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -75,7 +79,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -85,7 +89,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -Id 1
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/1?api-version=$([VSTeamVersions]::Core)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/1?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 

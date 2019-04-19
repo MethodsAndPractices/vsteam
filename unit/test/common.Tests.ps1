@@ -82,11 +82,21 @@ InModuleScope VSTeam {
       }
 
       Context '_handleException' {
+         # Build a proper error 
          $obj = "{Value: {Message: 'Top Message'}, Exception: {Message: 'Test Exception', Response: { StatusCode: '401'}}}"
-         $ex = ConvertFrom-Json $obj
+         
+         if ($PSVersionTable.PSEdition -ne 'Core') {
+            $r = [System.Net.HttpWebResponse]::new()
+            $e = [System.Net.WebException]::new("Test Exception", $null, [System.Net.WebExceptionStatus]::ProtocolError, $r)
+         }
+         else {
+            $r = [System.Net.Http.HttpResponseMessage]::new([System.Net.HttpStatusCode]::Unauthorized)
+            $e = [Microsoft.PowerShell.Commands.HttpResponseException]::new("Test Exception", $r)
+         }
+         $ex = Write-Error -Exception $e 2>&1 -ErrorAction Continue
+         $ex.ErrorDetails = [System.Management.Automation.ErrorDetails]::new($obj)
 
          It 'Should Write two warnings' {
-            Mock ConvertFrom-Json { return $ex }
             Mock Write-Warning -ParameterFilter { $Message -eq 'An error occurred: Test Exception'} -Verifiable
             Mock Write-Warning -ParameterFilter { $Message -eq 'Top Message' } -Verifiable
 
@@ -96,12 +106,32 @@ InModuleScope VSTeam {
          }
       }
 
+      Context '_handleException should re-throw' {
+         $e = [System.Management.Automation.RuntimeException]::new('You must call Set-VSTeamAccount before calling any other functions in this module.')
+         $ex = Write-Error -Exception $e 2>&1 -ErrorAction Continue
+
+         It 'Should throw' {
+
+            { _handleException $ex } | Should Throw
+         }
+      }
+
       Context '_handleException message only' {
-         $obj = "{Exception: {Message: 'Test Exception'}, Message: 'Test Exception'}"
-         $ex = ConvertFrom-Json $obj
+         # Build a proper error 
+         $obj = "{Value: {Message: 'Test Exception'}, Exception: {Message: 'Test Exception', Response: { StatusCode: '400'}}}"
+         
+         if ($PSVersionTable.PSEdition -ne 'Core') {
+            $e = [System.Net.WebException]::new("Test Exception", $null)
+         }
+         else {
+            $r = [System.Net.Http.HttpResponseMessage]::new([System.Net.HttpStatusCode]::BadRequest)
+            $e = [Microsoft.PowerShell.Commands.HttpResponseException]::new("Test Exception", $r)
+         }
+         
+         $ex = Write-Error -Exception $e 2>&1 -ErrorAction Continue
+         $ex.ErrorDetails = [System.Management.Automation.ErrorDetails]::new($obj)
 
          It 'Should Write one warnings' {
-            Mock ConvertFrom-Json { return $ex }
             Mock Write-Warning -ParameterFilter { $Message -eq 'Test Exception' } -Verifiable
 
             _handleException $ex
