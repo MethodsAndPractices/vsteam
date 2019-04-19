@@ -30,13 +30,13 @@ function Get-VSTeamRelease {
       [Parameter(ParameterSetName = 'List')]
       [string] $continuationToken,
 
-      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Position = 0, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseID')]
       [int[]] $id
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $false
+      _buildProjectNameDynamicParam -Mandatory $false -Position 1
    }
 
    process {
