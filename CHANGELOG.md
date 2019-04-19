@@ -2,6 +2,8 @@
 
 ## 6.2.0
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/144) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
 Added functions to deal with Security
 Note: Some of these are only supported in Azure DevOps (Online), not TFS and Azure DevOps Server due to unavailable APIs
 
