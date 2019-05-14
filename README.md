@@ -44,7 +44,7 @@ During the release the module is installed on macOS, Linux and Window and tested
 
 ## Module Dependencies
 
-- SHiPS module
+- [SHiPS module](https://www.powershellgallery.com/packages/SHiPS/)
 
 ## Contributors
 
