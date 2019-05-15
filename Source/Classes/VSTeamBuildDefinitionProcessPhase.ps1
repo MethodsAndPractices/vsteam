@@ -24,9 +24,11 @@ class VSTeamBuildDefinitionProcessPhase : VSTeamDirectory {
       }
 
       $this.StepCount = 0
-      foreach ($step in $obj.steps) {
-         $this.StepCount++
-         $this.Steps += [VSTeamBuildDefinitionProcessPhaseStep]::new($step, $this.StepCount, $Projectname)
+      if ( $obj.PSObject.Properties.name -match 'steps' ) {
+         foreach ($step in $obj.steps) {
+            $this.StepCount++
+            $this.Steps += [VSTeamBuildDefinitionProcessPhaseStep]::new($step, $this.StepCount, $Projectname)
+         }
       }
 
       $this._internalObj = $obj
