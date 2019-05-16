@@ -7,7 +7,7 @@ InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $accessControlListResult =
-@"
+   @"
 {
    "count": 5,
    "value": [
@@ -96,7 +96,7 @@ InModuleScope VSTeam {
 "@ | ConvertFrom-Json
 
    $securityNamespace = 
-@"
+   @"
 {
    "count": 1,
    "value": [
