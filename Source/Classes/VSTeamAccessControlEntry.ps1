@@ -6,7 +6,7 @@ class VSTeamAccessControlEntry : VSTeamLeaf {
    [string]$Descriptor = $null
    [int]$Allow = 0
    [int]$Deny = 0
-   [hashtable]$ExtendedInfo = @{}
+   [PSCustomObject]$ExtendedInfo = @{}
 
    VSTeamAccessControlEntry (
       [object]$obj

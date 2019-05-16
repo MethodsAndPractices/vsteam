@@ -4,7 +4,8 @@ function Get-VSTeamAccessControlList {
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
       [VSTeamSecurityNamespace] $SecurityNamespace,
 
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
+      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('ID')]
       [ValidateScript({
          try {
              [System.Guid]::Parse($_) | Out-Null

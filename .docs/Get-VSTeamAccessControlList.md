@@ -14,6 +14,12 @@
 
 ## EXAMPLES
 
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList
+```
+
 ## PARAMETERS
 
 ### -SecurityNamespace

@@ -408,6 +408,18 @@ InModuleScope VSTeam {
          }
       }
 
+      # Not supported on TFS
+      if (-not ($acct -like "http://*")) {
+         Context 'Access control list' {
+            It 'Get-VSTeamAccessControlList should return without error' {
+               $(Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList) | Should Not Be $null
+            }
+
+            It 'Get-VSTeamAccessControlList -IncludeExtendedInfo should return without error' {
+               $(Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList -IncludeExtendedInfo) | Should Not Be $null
+            }
+         }
+      }
 
       Context 'Teams full exercise' {
          It 'Get-VSTeam ByName Should return Teams' {
