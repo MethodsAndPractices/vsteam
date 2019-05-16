@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.2.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/158) from [Ryan](https://github.com/RPhay) which included the following:
+
+Fixes issue [Get-VSTeamBuildDefinition fails #155](https://github.com/DarqueWarrior/vsteam/issues/155)
+
 ## 6.2.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/156) from [Daniel Sturm](https://github.com/danstur) which included the following:

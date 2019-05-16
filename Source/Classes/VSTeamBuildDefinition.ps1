@@ -32,7 +32,9 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       $this.id = $obj.id
       $this.Path = $obj.path
       $this.Revision = $obj.revision
-      $this.Variables = $obj.variables
+      if ( $obj.PSObject.Properties.name -match 'Variables' ) {
+         $this.Variables = $obj.variables
+      }
       $this.CreatedOn = $obj.createdDate
       $this.JobAuthorizationScope = $obj.jobAuthorizationScope
       $this.AuthoredBy = [VSTeamUserEntitlement]::new($obj.authoredBy, $Projectname)
