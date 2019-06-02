@@ -36,7 +36,12 @@ InModuleScope VSTeam {
          # to Mock the call to _isOnWindows so you can develop on a
          # Mac or Linux machine.
          Mock _isOnWindows { return $true }
-         
+
+         # Have to Mock this because you can't call
+         # [Security.Principal.WindowsIdentity]::GetCurrent()
+         # on Mac and Linux
+         Mock _testAdministrator { return $false }
+
          Mock Write-Error { } -Verifiable
 
          It 'Should return error' {
