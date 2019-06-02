@@ -1,17 +1,17 @@
 
 
 
-# Add-VSTeamUser
+# Add-VSTeamWorkItemAreaPermission
 
 ## SYNOPSIS
 
-Adds a user to the account.
+Add Permissions to a Work Item Area
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Adds a user to the account.
+Add Permissions to a Work Item Area
 
 ## EXAMPLES
 
@@ -33,37 +33,53 @@ Position: 0
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -License
+### -AreaID
 
-Type of Account License. The acceptable values for this parameter are:
+```yaml
+Type: Int32
+Required: True
+```
 
-- Advanced
-- EarlyAdopter
-- Express
-- None
-- Professional
-- StakeHolder
+### -AreaPath
 
 ```yaml
 Type: String
 Required: True
-Default value: EarlyAdopter
+```
+
+### -Descriptor
+
+```yaml
+Type: String
+Required: True
+```
+
+### -User
+
+```yaml
+Type: 
+Required: True
 ```
 
 ### -Group
 
-The acceptable values for this parameter are:
+```yaml
+Type: VSTeamGroup
+Required: True
+```
 
-- Custom
-- ProjectAdministrator
-- ProjectContributor
-- ProjectReader
-- ProjectStakeholder
+### -Allow
 
 ```yaml
-Type: String
+Type: VSTeamWorkItemAreaPermissions
 Required: True
-Default value: ProjectContributor
+```
+
+### -Deny
+
+```yaml
+Type: VSTeamWorkItemAreaPermissions
+Required: True
 ```
 
 ## INPUTS

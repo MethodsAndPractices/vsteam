@@ -4,15 +4,15 @@ Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery
 
 ## About files
 
-[VSTeam](../Source/en-US/about_vsteam.help.txt)
+[VSTeam](../en-US/about_vsteam.help.txt)
 
 Learn about the goals of VSTeam.
 
-[Profiles](../Source/en-US/about_vsteam_profiles.help.txt)
+[Profiles](../en-US/about_vsteam_profiles.help.txt)
 
 Profiles allow you to store your account information for easy switching of accounts.
 
-[Provider](../Source/en-US/about_vsteam_provider.help.txt)
+[Provider](../en-US/about_vsteam_provider.help.txt)
 
 The provider allows you to navigate your TFS or VSTS as a file system.
 
@@ -21,6 +21,12 @@ The provider allows you to navigate your TFS or VSTS as a file system.
 ### [Add-VSTeam](Add-VSTeam.md)
 
 Adds a team to a team project.
+
+### [Add-VSTeamAccessControlEntry](Add-VSTeamAccessControlEntry.md)
+
+Add or update ACEs in the ACL for the provided token. The request contains the target token, a list of ACEs and a optional merge parameter. In the case of a collision (by identity descriptor) with an existing ACE in the ACL, the "merge" parameter determines the behavior. If set, the existing ACE has its allow and deny merged with the incoming ACE's allow and deny. If unset, the existing ACE is displaced.
+
+Note: This is a low-level function. You should really use a high level function (Add-VSTeam*Permission / Set-VSTeam*Permission / Get-VSTeam*Permission) unless you know what you are doing.
 
 ### [Add-VSTeamAzureRMServiceEndpoint](Add-VSTeamAzureRMServiceEndpoint.md)
 
@@ -50,6 +56,10 @@ Adds a new feed to package management.
 
 Adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
 
+### [Add-VSTeamGitRepositoryPermission](Add-VSTeamGitRepositoryPermission.md)
+
+Add permissions to a git repository, all repositories in a project, or a specific branch
+
 ### [Add-VSTeamKubernetesEndpoint](Add-VSTeamKubernetesEndpoint.md)
 
 Adds connections to Kubernetes clusters
@@ -71,6 +81,10 @@ the Add-TeamAccount function in this module.
 
 Adds a Team Project to your account.
 
+### [Add-VSTeamProjectPermission](Add-VSTeamProjectPermission.md)
+
+Add Permissions on Project Level
+
 ### [Add-VSTeamRelease](Add-VSTeamRelease.md)
 
 Queues a new release
@@ -91,13 +105,21 @@ Adds a new Service Fabric service endpoint.
 
 Adds a new SonarQube service endpoint.
 
-### [Add-VSTeamUser](Add-VSTeamUser.md)
+### [Add-VSTeamUserEntitlement](Add-VSTeamUserEntitlement.md)
 
-Adds a user to the account.
+Add a user, assign license and extensions and make them a member of a project group in an account.
 
 ### [Add-VSTeamWorkItem](Add-VSTeamWorkItem.md)
 
 Adds a work item to your project.
+
+### [Add-VSTeamWorkItemAreaPermission](Add-VSTeamWorkItemAreaPermission.md)
+
+Add Permissions to a Work Item Area
+
+### [Add-VSTeamWorkItemIterationPermission](Add-VSTeamWorkItemIterationPermission.md)
+
+Add Permissions to an Iteration
 
 ### [Clear-VSTeamDefaultProject](Clear-VSTeamDefaultProject.md)
 
@@ -114,6 +136,10 @@ Enables an agent in a pool.
 ### [Get-VSTeam](Get-VSTeam.md)
 
 Returns a team.
+
+### [Get-VSTeamAccessControlList](Get-VSTeamAccessControlList.md)
+
+Return a list of access control lists for the specified security namespace and token. All ACLs in the security namespace will be retrieved if no optional parameters are provided.
 
 ### [Get-VSTeamAgent](Get-VSTeamAgent.md)
 
@@ -142,6 +168,10 @@ Displays the logs for the build.
 ### [Get-VSTeamBuildTag](Get-VSTeamBuildTag.md)
 
 Returns all the tags of a build.
+
+### [Get-VSTeamClassificationNode](Get-VSTeamClassificationNode.md)
+
+Gets the classification node for a given node path.
 
 ### [Get-VSTeamCloudSubscription](Get-VSTeamCloudSubscription.md)
 
@@ -227,6 +257,10 @@ Gets the release definitions for a team project.
 
 List all the areas supported by this instance of TFS/VSTS.
 
+### [Get-VSTeamSecurityNamespace](Get-VSTeamSecurityNamespace.md)
+
+List all security namespaces or just the specified namespace.
+
 ### [Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
 
 Gets a service endpoint.
@@ -247,6 +281,10 @@ Gets root branches for all projects with TFVC source control.
 
 Returns a list of users for the account.
 
+### [Get-VSTeamUserEntitlement](Get-VSTeamUserEntitlement.md)
+
+Get User Entitlement for a user.
+
 ### [Get-VSTeamWorkItem](Get-VSTeamWorkItem.md)
 
 Returns one or more a work items from your project.
@@ -262,6 +300,10 @@ Allows you to call any TFS/VSTS REST API. All the Auth and Route Structure is ta
 ### [Remove-VSTeam](Remove-VSTeam.md)
 
 Removes a team from a project.
+
+### [Remove-VSTeamAccessControlList](Remove-VSTeamAccessControlList.md)
+
+Remove access control lists under the specfied security namespace.
 
 ### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
 
@@ -319,9 +361,11 @@ Removes the release definitions for a team project.
 
 Removes a service endpoint.
 
-### [Remove-VSTeamUser](Remove-VSTeamUser.md)
+### [Remove-VSTeamUserEntitlement](Remove-VSTeamUserEntitlement.md)
 
-Removes a user from the account.
+Delete a user from the account.
+
+The delete operation includes unassigning Extensions and Licenses and removing the user from all project memberships. The user would continue to have access to the account if she is member of an AAD group, that is added directly to the account.
 
 ### [Set-VSTeamAccount](Set-VSTeamAccount.md)
 
@@ -428,9 +472,9 @@ Updates the project name, description or both.
 
 Updates an existing service connection
 
-### [Update-VSTeamUser](Update-VSTeamUser.md)
+### [Update-VSTeamUserEntitlement](Update-VSTeamUserEntitlement.md)
 
-Updates the users for the account. (Currently only supports updating the LicenseType)
+Edit the entitlements (License, Extensions, Projects, Teams etc) for a user.
 
 ### [Update-VSTeamWorkItem](Update-VSTeamWorkItem.md)
 
