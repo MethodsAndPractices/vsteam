@@ -32,6 +32,11 @@ InModuleScope VSTeam {
 "@
 
       Context 'You cannot use -UseWindowsAuthentication with Azd' {
+         # This is only supported on a Windows machine. So we have
+         # to Mock the call to _isOnWindows so you can develop on a
+         # Mac or Linux machine.
+         Mock _isOnWindows { return $true }
+         
          Mock Write-Error { } -Verifiable
 
          It 'Should return error' {
