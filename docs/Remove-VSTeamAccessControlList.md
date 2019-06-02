@@ -53,14 +53,6 @@ Type: Switch
 Required: True
 ```
 
-### -Force
-
-Forces the command without confirmation
-
-```yaml
-Type: SwitchParameter
-```
-
 ## INPUTS
 
 ## OUTPUTS

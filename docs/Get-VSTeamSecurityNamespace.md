@@ -55,6 +55,4 @@ Parameter Sets: List
 
 ## NOTES
 
-This CMDLET is currently only available in Azure DevOps Service (Online)
-
 ## RELATED LINKS

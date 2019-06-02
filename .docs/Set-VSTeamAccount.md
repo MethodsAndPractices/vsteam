@@ -140,7 +140,7 @@ Position: 2
 
 ### -UseWindowsAuthentication
 
-Allows the use of the current user's Windows credentials to authenticate against a local TFS.
+Allows the use of the current user's Windows credentials to authenticate against a local Team Foundation Server or Azure DevOps Server. This cannot be used to connect to Azure DevOps Services.
 
 ```yaml
 Type: SwitchParameter
