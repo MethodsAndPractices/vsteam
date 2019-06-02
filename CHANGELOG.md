@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.2.4
+
+Added code to log error if -UseWindowsAuthentication is used to connect to Azure DevOps Services. -UseWindowsAuthentication is only for connecting to TFS or Azure DevOps Server.
+
 ## 6.2.3
 
 Fixes issue [Get-VSTeamAccessControlList -IncludeExtendedInfo. Cannot convert value PSCustomObject to type Hashtable #159](https://github.com/DarqueWarrior/vsteam/issues/159)
