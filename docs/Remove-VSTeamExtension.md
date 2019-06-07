@@ -58,3 +58,4 @@ Type: SwitchParameter
 [Remove-VSTeamExtension](Remove-VSTeamExtension.md)
 
 [Update-VSTeamExtension](Update-VSTeamExtension.md)
+

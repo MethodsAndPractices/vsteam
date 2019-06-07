@@ -74,3 +74,4 @@ Type: SwitchParameter
 [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
 
 [Get-VSTeamPolicyType](Get-VSTeamPolicyType.md)
+

@@ -43,7 +43,7 @@ Required: True
 ### -User
 
 ```yaml
-Type: 
+Type: VSTeamUser
 Required: True
 ```
 
@@ -77,3 +77,4 @@ Required: True
 ## NOTES
 
 ## RELATED LINKS
+

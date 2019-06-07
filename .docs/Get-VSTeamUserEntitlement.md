@@ -49,7 +49,7 @@ Comma (",") separated list of properties to select in the result entitlements.  
 
 - Projects
 - Extensions
-- Grouprules
+- GroupRules
 
 ```yaml
 Type: String

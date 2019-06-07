@@ -18,7 +18,7 @@ Invoke-VSTeamRequest allows you to call a TFS/VSTS REST API much easier than usi
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Invoke-VSTeamRequest -resource projecthistory -version '4.1-preview' -Verbose
+PS C:\> Invoke-VSTeamRequest -resource projectHistory -version '4.1-preview' -Verbose
 ```
 
 This command will return the project history.
@@ -170,3 +170,4 @@ Type: Switch
 ## NOTES
 
 ## RELATED LINKS
+

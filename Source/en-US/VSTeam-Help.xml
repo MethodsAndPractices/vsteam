@@ -2652,7 +2652,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>blocking</maml:name>
           <maml:Description>
-            <maml:para>Determines if the policy will block pushes to the branch if the policy is not adheared to.</maml:para>
+            <maml:para>Determines if the policy will block pushes to the branch if the policy is not adhered to.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2717,7 +2717,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>blocking</maml:name>
         <maml:Description>
-          <maml:para>Determines if the policy will block pushes to the branch if the policy is not adheared to.</maml:para>
+          <maml:para>Determines if the policy will block pushes to the branch if the policy is not adhered to.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2846,7 +2846,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>UseBearerToken</maml:name>
           <maml:Description>
-            <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
+            <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2915,7 +2915,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>UseBearerToken</maml:name>
           <maml:Description>
-            <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
+            <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3037,7 +3037,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>UseBearerToken</maml:name>
         <maml:Description>
-          <maml:para>Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
+          <maml:para>Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -3318,9 +3318,9 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:Description>
             <maml:para></maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
           <dev:type>
-            <maml:name></maml:name>
+            <maml:name>VSTeamUser</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -3395,9 +3395,9 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <maml:Description>
           <maml:para></maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
         <dev:type>
-          <maml:name></maml:name>
+          <maml:name>VSTeamUser</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -4122,7 +4122,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="2" aliases="none">
           <maml:name>useWindowsSecurity</maml:name>
           <maml:Description>
-            <maml:para>If windows intergrated authentication should be enabled. If set to false, all authentication is disabled.</maml:para>
+            <maml:para>If windows integrated authentication should be enabled. If set to false, all authentication is disabled.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
           <dev:type>
@@ -4146,7 +4146,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>clusterSpn</maml:name>
           <maml:Description>
-            <maml:para>Specify the cluster service principal name, for use with windows intergrated authentication.</maml:para>
+            <maml:para>Specify the cluster service principal name, for use with windows integrated authentication.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4223,7 +4223,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="2" aliases="none">
           <maml:name>useWindowsSecurity</maml:name>
           <maml:Description>
-            <maml:para>If windows intergrated authentication should be enabled. If set to false, all authentication is disabled.</maml:para>
+            <maml:para>If windows integrated authentication should be enabled. If set to false, all authentication is disabled.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
           <dev:type>
@@ -4247,7 +4247,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>clusterSpn</maml:name>
           <maml:Description>
-            <maml:para>Specify the cluster service principal name, for use with windows intergrated authentication.</maml:para>
+            <maml:para>Specify the cluster service principal name, for use with windows integrated authentication.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4324,7 +4324,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="2" aliases="none">
         <maml:name>useWindowsSecurity</maml:name>
         <maml:Description>
-          <maml:para>If windows intergrated authentication should be enabled. If set to false, all authentication is disabled.</maml:para>
+          <maml:para>If windows integrated authentication should be enabled. If set to false, all authentication is disabled.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
         <dev:type>
@@ -4336,7 +4336,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
         <maml:name>clusterSpn</maml:name>
         <maml:Description>
-          <maml:para>Specify the cluster service principal name, for use with windows intergrated authentication.</maml:para>
+          <maml:para>Specify the cluster service principal name, for use with windows integrated authentication.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4445,7 +4445,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
-PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someuser@someplace.com" -password $password</dev:code>
+PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someUser@someplace.com" -password $password</dev:code>
         <dev:remarks>
           <maml:para>Adds a Service Fabric Endpoint for an Azure AD secured cluster.</maml:para>
         </dev:remarks>
@@ -5136,9 +5136,9 @@ ID Title          Status
           <maml:Description>
             <maml:para></maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
           <dev:type>
-            <maml:name></maml:name>
+            <maml:name>VSTeamUser</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -5237,9 +5237,9 @@ ID Title          Status
         <maml:Description>
           <maml:para></maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
         <dev:type>
-          <maml:name></maml:name>
+          <maml:name>VSTeamUser</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -5370,9 +5370,9 @@ ID Title          Status
           <maml:Description>
             <maml:para></maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
           <dev:type>
-            <maml:name></maml:name>
+            <maml:name>VSTeamUser</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -5471,9 +5471,9 @@ ID Title          Status
         <maml:Description>
           <maml:para></maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
         <dev:type>
-          <maml:name></maml:name>
+          <maml:name>VSTeamUser</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -6250,7 +6250,7 @@ ID Title          Status
     <maml:alertSet>
       <maml:alert>
         <maml:para>To read system capabilities that contain dots you have to use the PSObject Properties property.</maml:para>
-        <maml:para>(Get-VSTeamAgent 1 91).systemCapabilities.psobject.Properties['Agent.OS'].Value</maml:para>
+        <maml:para>(Get-VSTeamAgent 1 91).systemCapabilities.PSObject.Properties['Agent.OS'].Value</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -6505,7 +6505,7 @@ ID Title          Status
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>ReasonFilter</maml:name>
           <maml:Description>
-            <maml:para>Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveset, CheckInShelveset, Triggered, or All.</maml:para>
+            <maml:para>Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveSet, CheckInShelveSet, Triggered, or All.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -6658,7 +6658,7 @@ ID Title          Status
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>ReasonFilter</maml:name>
         <maml:Description>
-          <maml:para>Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveset, CheckInShelveset, Triggered, or All.</maml:para>
+          <maml:para>Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveSet, CheckInShelveSet, Triggered, or All.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -8096,7 +8096,7 @@ ID Title          Status
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteurl)</dev:code>
+        <dev:code>PS C:\&gt; git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteUrl)</dev:code>
         <dev:remarks>
           <maml:para>This command gets the remote URL and passes it to git clone command.</maml:para>
         </dev:remarks>
@@ -8858,7 +8858,7 @@ ID Title          Status
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The list of Processs Templates returned can be controlled by using the top and skip parameters.</maml:para>
+      <maml:para>The list of Process Templates returned can be controlled by using the top and skip parameters.</maml:para>
       <maml:para>You can also get a single Process Template by name or id.</maml:para>
       <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
@@ -8893,7 +8893,7 @@ ID Title          Status
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Skip</maml:name>
           <maml:Description>
-            <maml:para>Defines the number of Processs Templates to skip. The default value is 0</maml:para>
+            <maml:para>Defines the number of Process Templates to skip. The default value is 0</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -8961,7 +8961,7 @@ ID Title          Status
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Skip</maml:name>
         <maml:Description>
-          <maml:para>Defines the number of Processs Templates to skip. The default value is 0</maml:para>
+          <maml:para>Defines the number of Process Templates to skip. The default value is 0</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -10866,7 +10866,7 @@ ID Title          Status
             <maml:para>Comma (",") separated list of properties to select in the result entitlements.  The acceptable values for this parameter are:</maml:para>
             <maml:para>- Projects</maml:para>
             <maml:para>- Extensions</maml:para>
-            <maml:para>- Grouprules</maml:para>
+            <maml:para>- GroupRules</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -10935,7 +10935,7 @@ ID Title          Status
           <maml:para>Comma (",") separated list of properties to select in the result entitlements.  The acceptable values for this parameter are:</maml:para>
           <maml:para>- Projects</maml:para>
           <maml:para>- Extensions</maml:para>
-          <maml:para>- Grouprules</maml:para>
+          <maml:para>- GroupRules</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -11683,7 +11683,7 @@ ID Title          Status
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Invoke-VSTeamRequest -resource projecthistory -version '4.1-preview' -Verbose</dev:code>
+        <dev:code>PS C:\&gt; Invoke-VSTeamRequest -resource projectHistory -version '4.1-preview' -Verbose</dev:code>
         <dev:remarks>
           <maml:para>This command will return the project history.</maml:para>
         </dev:remarks>
@@ -14329,14 +14329,14 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Profile demonstrations -Level Machine</dev:code>
         <dev:remarks>
           <maml:para>Will add the account from the profile provided and store the information at the Machine level. Now any new PowerShell sessions will auto load this account.</maml:para>
-          <maml:para>Note: You must run PowerShell as an Adminstrator to store at the Machine level.</maml:para>
+          <maml:para>Note: You must run PowerShell as an Administrator to store at the Machine level.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken</dev:code>
         <dev:remarks>
-          <maml:para>Will add the account and use the OAuth Token provided by VSTS when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.</maml:para>
+          <maml:para>Will add the account and use the OAuth Token provided by VSTS when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alias for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -17142,7 +17142,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>blocking</maml:name>
           <maml:Description>
-            <maml:para>Determines if the policy will block pushes to the branch if the policy is not adheared to.</maml:para>
+            <maml:para>Determines if the policy will block pushes to the branch if the policy is not adhered to.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -17219,7 +17219,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>blocking</maml:name>
         <maml:Description>
-          <maml:para>Determines if the policy will block pushes to the branch if the policy is not adheared to.</maml:para>
+          <maml:para>Determines if the policy will block pushes to the branch if the policy is not adhered to.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>

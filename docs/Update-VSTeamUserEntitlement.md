@@ -70,3 +70,4 @@ Type: SwitchParameter
 ## RELATED LINKS
 
 [Get-VSTeamUserEntitlement](Get-VSTeamUserEntitlement.md)
+

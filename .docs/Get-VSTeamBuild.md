@@ -78,7 +78,7 @@ Parameter Sets: List
 
 ### -ReasonFilter
 
-Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveset, CheckInShelveset, Triggered, or All.
+Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveSet, CheckInShelveSet, Triggered, or All.
 
 ```yaml
 Type: String
