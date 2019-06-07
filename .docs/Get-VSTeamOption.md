@@ -39,7 +39,7 @@ This will display all the versions of supported APIs for your account using the 
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamOption -SubDomain vsrm 
+PS C:\> Get-VSTeamOption -SubDomain vsrm
 ```
 
 This will display all the versions of supported APIs for the release management service.

@@ -1,17 +1,14 @@
-
-
-
-# Update-VSTeamUser
+# Update-VSTeamUserEntitlement
 
 ## SYNOPSIS
 
-Updates the users for the account. (Currently only supports updating the LicenseType)
+Edit the entitlements (License, Extensions, Projects, Teams etc) for a user.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Updates the users for the account. (Currently only supports updating the LicenseType)
+Edit the entitlements (License, Extensions, Projects, Teams etc) for a user.
 
 ## EXAMPLES
 
@@ -69,4 +66,4 @@ Type: SwitchParameter
 
 ## RELATED LINKS
 
-[Get-VSTeamUser](Get-VSTeamUser.md)
+[Get-VSTeamUserEntitlement](Get-VSTeamUserEntitlement.md)

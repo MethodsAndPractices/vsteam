@@ -71,3 +71,4 @@ Parameter Sets: ByID
 [Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
 
 [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
+

@@ -1,37 +1,22 @@
+<!-- #include "./common/header.md" -->
 
-
-
-# Add-VSTeamUser
+# Add-VSTeamUserEntitlement
 
 ## SYNOPSIS
 
-Adds a user to the account.
+<!-- #include "./synopsis/Add-VSTeamUserEntitlement.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Adds a user to the account.
+<!-- #include "./synopsis/Add-VSTeamUserEntitlement.md" -->
 
 ## EXAMPLES
 
 ## PARAMETERS
 
-### -ProjectName
-
-Specifies the team project for which this function operates.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so
-you do not have to pass the ProjectName with each call.
-
-```yaml
-Type: String
-Required: true
-Position: 0
-Accept pipeline input: true (ByPropertyName)
-```
+<!-- #include "./params/projectName.md" -->
 
 ### -License
 

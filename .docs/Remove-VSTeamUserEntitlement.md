@@ -1,38 +1,24 @@
+<!-- #include "./common/header.md" -->
 
-
-
-# Remove-VSTeamUser
+# Remove-VSTeamUserEntitlement
 
 ## SYNOPSIS
 
-Removes a user from the account.
+<!-- #include "./synopsis/Remove-VSTeamUserEntitlement.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Removes a user from the account.
+<!-- #include "./synopsis/Remove-VSTeamUserEntitlement.md" -->
 
 ## EXAMPLES
 
 ## PARAMETERS
 
-### -Confirm
+<!-- #include "./params/confirm.md" -->
 
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Aliases: cf
-```
-
-### -Force
-
-Forces the command without confirmation
-
-```yaml
-Type: SwitchParameter
-```
+<!-- #include "./params/force.md" -->
 
 ### -UserId
 
@@ -58,15 +44,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Aliases: wi
-```
+<!-- #include "./params/whatIf.md" -->
 
 ## INPUTS
 

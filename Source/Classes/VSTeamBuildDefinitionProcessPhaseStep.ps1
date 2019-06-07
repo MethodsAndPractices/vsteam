@@ -18,11 +18,11 @@ class VSTeamBuildDefinitionProcessPhaseStep : VSTeamLeaf {
       $this.TimeoutInMinutes = $obj.timeoutInMinutes
       $this.Inputs = $obj.inputs
       $this.Task = $obj.task
-            
+
       if ($obj.PSObject.Properties.Match('condition').count -gt 0) {
          $this.Condition = $obj.condition
       }
-      
+
       $this._internalObj = $obj
 
       $this.AddTypeName('Team.BuildDefinitionProcessPhaseStep')

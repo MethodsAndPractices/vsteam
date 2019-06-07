@@ -94,7 +94,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Packaging = '5.1-preview'
                [VSTeamVersions]::MemberEntitlementManagement = '5.1-preview'
                # This version is never passed to the API but is used to evaluate
-               # if Service Fabric is enabled for the account. Just set it to 
+               # if Service Fabric is enabled for the account. Just set it to
                # match Distributed Task for AzD
                [VSTeamVersions]::ServiceFabricEndpoint = '5.0-preview'
                [VSTeamVersions]::ExtensionsManagement = '5.1-preview'

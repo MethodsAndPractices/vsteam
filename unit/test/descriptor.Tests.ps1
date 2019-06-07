@@ -11,13 +11,13 @@ InModuleScope VSTeam {
    Describe "Groups TFS Errors" {
       Context 'Get-VSTeamDescriptor' {
           Mock _callAPI { throw 'Should not be called' } -Verifiable
- 
+
           It 'Should throw' {
              Set-VSTeamAPIVersion TFS2017
- 
+
              { Get-VSTeamDescriptor -StorageKey '010d06f0-00d5-472a-bb47-58947c230876' } | Should Throw
           }
- 
+
           It '_callAPI should not be called' {
              Assert-MockCalled _callAPI -Exactly 0
           }
@@ -26,7 +26,7 @@ InModuleScope VSTeam {
 
    Describe 'Descriptor VSTS' {
 
-      # You have to set the version or the api-version will not be added when 
+      # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Graph = ''
       [VSTeamVersions]::Graph = '5.0'
 
@@ -34,8 +34,8 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
-         
-            return $result 
+
+            return $result
          } -Verifiable
 
          Get-VSTeamDescriptor -StorageKey '010d06f0-00d5-472a-bb47-58947c230876'

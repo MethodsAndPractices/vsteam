@@ -17,46 +17,31 @@ Returns a list of users for the account.
 
 ## PARAMETERS
 
-### -Skip
+### -SubjectTypes
 
-The number of items to skip.
+A comma separated list of user subject subtypes to reduce the retrieved results.
+Valid subject types:
 
-```yaml
-Type: Int32
-Parameter Sets: List
-```
-
-### -UserId
-
-The id of the user to retrieve.
+- vss (Azure DevOps User)
+- aad (Azure Active Directory User)
+- svc (Azure DevOps Service Identity)
+- imp (Imported Identity)
+- msa (Microsoft Account)
 
 ```yaml
 Type: String[]
-Parameter Sets: ByID
-```
-
-### -Top
-
-Specifies the maximum number to return.
-
-```yaml
-Type: Int32
+Required: False
 Parameter Sets: List
 ```
 
-### -Select
+### -Descriptor
 
-Comma (",") separated list of properties to select in the result entitlements.  The acceptable values for this parameter are:
-
-- Projects
-- Extensions
-- Grouprules
+The descriptor of the desired graph user.
 
 ```yaml
 Type: String
-Parameter Sets: List
-Required: True
-Default value: None
+Required: False
+Parameter Sets: ByUserDescriptor
 ```
 
 ## INPUTS
@@ -66,3 +51,4 @@ Default value: None
 ## NOTES
 
 ## RELATED LINKS
+

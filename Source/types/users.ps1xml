@@ -1,49 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-   <!-- Team.UserEntitlement -->
+   <!-- Team.User2 -->
    <Type>
-      <Name>Team.UserEntitlement</Name>
-      <Members>
-         <ScriptProperty>
-            <Name>accessLevelName</Name>
-            <GetScriptBlock>$this.accessLevel.licenseDisplayName</GetScriptBlock>
-         </ScriptProperty>
-         <ScriptProperty>
-            <Name>userName</Name>
-            <GetScriptBlock>$this.user.displayName</GetScriptBlock>
-         </ScriptProperty>
-         <ScriptProperty>
-            <Name>email</Name>
-            <GetScriptBlock>$this.user.mailAddress</GetScriptBlock>
-         </ScriptProperty>
-         <ScriptProperty>
-            <Name>projects</Name>
-            <GetScriptBlock>[string]::Join(", ", $this.projectEntitlements.projectRef.name)</GetScriptBlock>
-            <!-- <GetScriptBlock>[string]::Join(", ", $this.user.projectEntitlements.projectRef.name)</GetScriptBlock> -->
-         </ScriptProperty>
-         <MemberSet>
-            <Name>PSStandardMembers</Name>
-            <Members>
-               <PropertySet>
-                  <Name>DefaultDisplayPropertySet</Name>
-                  <ReferencedProperties>
-                     <Name>accessLevel</Name>
-                     <Name>extensions</Name>
-                     <Name>groupAssignments</Name>
-                     <Name>id</Name>
-                     <Name>lastAccessedDate</Name>
-                     <Name>projectEntitlements</Name>
-                     <Name>user</Name>
-                  </ReferencedProperties>
-               </PropertySet>
-            </Members>
-         </MemberSet>
-      </Members>
-   </Type>
-   
-   <!-- Team.AccessLevel -->
-   <Type>
-      <Name>Team.AccessLevel</Name>
+      <Name>Team.User2</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -51,13 +10,19 @@
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
-                     <Name>accountLicenseType</Name>
-                     <Name>assignmentSource</Name>
-                     <Name>licenseDisplayName</Name>
-                     <Name>licensingSource</Name>
-                     <Name>msdnLicenseType</Name>
-                     <Name>status</Name>
-                     <Name>statusMessage</Name>
+                     <Name>SubjectKind</Name>
+                     <Name>CUID</Name>
+                     <Name>PrincipalName</Name>
+                     <Name>Domain</Name>
+                     <Name>MailAddress</Name>
+                     <Name>Origin</Name>
+                     <Name>OriginID</Name>
+                     <Name>DisplayName</Name>
+                     <Name>URL</Name>
+                     <Name>Descriptor</Name>
+                     <Name>Links</Name>
+                     <Name>ID</Name>
+                     <Name>Name</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

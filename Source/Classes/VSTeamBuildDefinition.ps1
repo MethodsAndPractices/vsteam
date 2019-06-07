@@ -14,7 +14,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [object]$Repository = $null
    [VSTeamQueue]$Queue = $null
    [object]$RetentionRules = $null
-   [VSTeamUser]$AuthoredBy = $null
+   [VSTeamUserEntitlement]$AuthoredBy = $null
    [string]$BuildNumberFormat = $null
    [int]$JobCancelTimeoutInMinutes = -1
    [string]$JobAuthorizationScope = $null
@@ -32,14 +32,16 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       $this.id = $obj.id
       $this.Path = $obj.path
       $this.Revision = $obj.revision
-      $this.Variables = $obj.variables
+      if ( $obj.PSObject.Properties.name -match 'Variables' ) {
+         $this.Variables = $obj.variables
+      }
       $this.CreatedOn = $obj.createdDate
       $this.JobAuthorizationScope = $obj.jobAuthorizationScope
-      $this.AuthoredBy = [VSTeamUser]::new($obj.authoredBy, $Projectname)
-      
+      $this.AuthoredBy = [VSTeamUserEntitlement]::new($obj.authoredBy, $Projectname)
+
       # These might not be returned
       if ($obj.PSObject.Properties.Match('queue').count -gt 0) {
-         $this.Queue = [VSTeamQueue]::new($obj.queue, $Projectname)         
+         $this.Queue = [VSTeamQueue]::new($obj.queue, $Projectname)
       }
 
       # As of version 5.0 of the REST API this has moved to the Build Def from the phases
@@ -58,18 +60,18 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       if ($obj.PSObject.Properties.Match('demands').count -gt 0) {
          $this.Demands = $obj.demands
       }
-      
+
       if ($obj.PSObject.Properties.Match('options').count -gt 0) {
          $this.Options = $obj.options
       }
-      
+
       if ($obj.PSObject.Properties.Match('tags').count -gt 0) {
          $this.Tags = $obj.tags
       }
 
       if ($obj.PSObject.Properties.Match('repository').count -gt 0) {
          if($obj.repository.type -eq "TfsGit") {
-            $this.GitRepository = [VSTeamGitRepository]::new($obj.repository, $Projectname)         
+            $this.GitRepository = [VSTeamGitRepository]::new($obj.repository, $Projectname)
          } else {
             $this.Repository = $obj.repository
          }

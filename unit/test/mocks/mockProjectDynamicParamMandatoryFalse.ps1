@@ -1,7 +1,7 @@
 Mock _buildProjectNameDynamicParam {
    # Set the dynamic parameters' name
    $ParameterName = 'Project'
-   # Create the dictionary 
+   # Create the dictionary
    $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
    # Create the collection of attributes
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]

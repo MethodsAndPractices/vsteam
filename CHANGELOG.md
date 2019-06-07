@@ -1,5 +1,53 @@
 # Changelog
 
+## 6.2.5
+
+Polished the docs.
+
+## 6.2.4
+
+Added code to log error if -UseWindowsAuthentication is used to connect to Azure DevOps Services. -UseWindowsAuthentication is only for connecting to TFS or Azure DevOps Server.
+
+## 6.2.3
+
+Fixes issue [Get-VSTeamAccessControlList -IncludeExtendedInfo. Cannot convert value PSCustomObject to type Hashtable #159](https://github.com/DarqueWarrior/vsteam/issues/159)
+
+## 6.2.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/158) from [Ryan](https://github.com/RPhay) which included the following:
+
+Fixes issue [Get-VSTeamBuildDefinition fails #155](https://github.com/DarqueWarrior/vsteam/issues/155)
+
+## 6.2.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/156) from [Daniel Sturm](https://github.com/danstur) which included the following:
+
+Corrects error creating VSTeamBuildDefinitionProcessPhase object in later versions of Azure DevOps Server (TFS).
+
+## 6.2.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/144) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+Added functions to deal with Security
+Note: Some of these are only supported in Azure DevOps (Online), not TFS and Azure DevOps Server due to unavailable APIs
+
+- Added Get-VSTeamSecurityNamespace to retrieve security namespaces
+- Added Add-VSTeamAccessControlEntry to add low level ACE's
+- Added Get-VSTeamAccessControlList to retrieve ACL's
+- Added Add-VSTeamAccessControlList to add ACL's
+- Added Add-VSTeamWorkItemIterationPermission
+- Added Get-VSTeamClassificationNode
+- Added Get-VSTeamUser (see breaking changes below)
+- Added Add-VSTeamWorkItemAreaPermission
+- Added Add-VSTeamProjectPermission
+
+**Breaking changes**:
+
+- Renamed Get-VSTeamUser to Get-VSTeamUserEntitlement
+- Renamed Add-VSTeamUser to Add-VSTeamUserEntitlement
+- Renamed Update-VSTeamUser to Update-VSTeamUserEntitlement
+- Added new Get-VSTeamUser cmdlet retrieving more data about the User itself
+
 ## 6.1.3
 
 Fixed typos in Set-VSTeamAlias function.

@@ -94,3 +94,4 @@ Type: SwitchParameter
 [Update-VSTeamAccount](Set-VSTeamAccount.md)
 
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+

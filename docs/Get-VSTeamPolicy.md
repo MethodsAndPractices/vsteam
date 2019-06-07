@@ -74,3 +74,4 @@ Accept pipeline input: true (ByPropertyName)
 [Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
 
 [Get-VSTeamPolicyType](Get-VSTeamPolicyType.md)
+

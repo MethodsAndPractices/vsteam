@@ -75,10 +75,10 @@ function Set-VSTeamAlias {
       New-Alias Remove-Profile Remove-VSTeamProfile -Scope Global
       New-Alias Get-Profile Get-VSTeamProfile -Scope Global
       New-Alias Set-APIVersion Set-VSTeamAPIVersion -Scope Global
-      New-Alias Add-User Add-VSTeamUser -Scope Global
-      New-Alias Remove-User Remove-VSTeamUser -Scope Global
-      New-Alias Get-User Get-VSTeamUser -Scope Global
-      New-Alias Update-User Update-VSTeamUser -Scope Global
+      New-Alias Add-UserEntitlement Add-VSTeamUserEntitlement -Scope Global
+      New-Alias Remove-UserEntitlement Remove-VSTeamUserEntitlement -Scope Global
+      New-Alias Get-UserEntitlement Get-VSTeamUserEntitlement -Scope Global
+      New-Alias Update-UserEntitlement Update-VSTeamUserEntitlement -Scope Global
       New-Alias Set-EnvironmentStatus Set-VSTeamEnvironmentStatus -Scope Global
       New-Alias Get-ServiceEndpointType Get-VSTeamServiceEndpointType -Scope Global
       New-Alias Update-BuildDefinition Update-VSTeamBuildDefinition -Scope Global
