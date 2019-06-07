@@ -2,10 +2,10 @@ function Update-VSTeamRelease {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [int] $id,
+      [int] $Id,
 
       [Parameter(Mandatory = $true)]
-      [PSCustomObject] $release,
+      [PSCustomObject] $Release,
 
       [switch] $Force
    )
@@ -18,9 +18,9 @@ function Update-VSTeamRelease {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $body = $release | ConvertTo-Json
+      $body = $Release | ConvertTo-Json -Depth 99
 
-      if ($Force -or $pscmdlet.ShouldProcess($id, "Update Release")) {
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Release")) {
          # Call the REST API
          $resp = _callAPI -ProjectName $projectName -SubDomain vsrm -Area release -Resource releases -Id $id  `
             -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Release)

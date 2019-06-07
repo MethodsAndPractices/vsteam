@@ -226,26 +226,5 @@ InModuleScope VSTeam {
             { Add-VSTeamRelease -ProjectName project -DefinitionId 1 -ArtifactAlias drop -BuildId 2 } | Should Throw
          }
       }
-
-      Context 'Update-VSTeamRelease' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $singleResult
-         }
-
-         It 'should return releases' {
-            $r = Get-VSTeamRelease -ProjectName project -Id 15
-
-            $r.variables | Add-Member NoteProperty temp(@{value = 'temp'})
-
-            Update-VSTeamRelease -ProjectName project -Id 15 -Release $r
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Method -eq 'Put' -and
-               $Body -ne $null -and
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
-            }
-         }        
-      }
    }
 }

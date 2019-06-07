@@ -30,11 +30,17 @@ function Get-VSTeamRelease {
       [Parameter(ParameterSetName = 'List')]
       [string] $continuationToken,
 
-      [Parameter(Position = 0, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
+      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdJson')]
+      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseID')]
       [int[]] $id,
 
-      [switch]$JSON
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
+      [switch]$JSON,
+
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
+      [switch]$raw
    )
 
    DynamicParam {
@@ -50,13 +56,16 @@ function Get-VSTeamRelease {
       if ($id) {
          foreach ($item in $id) {
             $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $([VSTeamVersions]::Release)
-
+            
             if ($JSON.IsPresent) {
                $resp | ConvertTo-Json -Depth 99
             }
             else {
-               # Apply a Type Name so we can use custom format view and custom type extensions
-               _applyTypesToRelease -item $resp
+               if (-not $raw.IsPresent) {
+
+                  # Apply a Type Name so we can use custom format view and custom type extensions
+                  _applyTypesToRelease -item $resp
+               }
 
                Write-Output $resp
             }
@@ -84,18 +93,13 @@ function Get-VSTeamRelease {
 
          # Call the REST API
          $resp = _callAPI -url $listurl -QueryString $QueryString
-
-         if ($JSON.IsPresent) {
-            $resp | ConvertTo-Json -Depth 99
+         
+         # Apply a Type Name so we can use custom format view and custom type extensions
+         foreach ($item in $resp.value) {
+            _applyTypesToRelease -item $item
          }
-         else {
-            # Apply a Type Name so we can use custom format view and custom type extensions
-            foreach ($item in $resp.value) {
-               _applyTypesToRelease -item $item
-            }
 
-            Write-Output $resp.value
-         }
+         Write-Output $resp.value         
       }
    }
 }

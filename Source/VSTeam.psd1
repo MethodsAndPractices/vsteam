@@ -12,7 +12,7 @@
    RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.2.5'
+   ModuleVersion     = '6.2.6'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
