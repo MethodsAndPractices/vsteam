@@ -32,7 +32,9 @@ function Get-VSTeamRelease {
 
       [Parameter(Position = 0, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseID')]
-      [int[]] $id
+      [int[]] $id,
+
+      [switch]$JSON
    )
 
    DynamicParam {
@@ -49,10 +51,15 @@ function Get-VSTeamRelease {
          foreach ($item in $id) {
             $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $([VSTeamVersions]::Release)
 
-            # Apply a Type Name so we can use custom format view and custom type extensions
-            _applyTypesToRelease -item $resp
+            if ($JSON.IsPresent) {
+               $resp | ConvertTo-Json -Depth 99
+            }
+            else {
+               # Apply a Type Name so we can use custom format view and custom type extensions
+               _applyTypesToRelease -item $resp
 
-            Write-Output $resp
+               Write-Output $resp
+            }
          }
       }
       else {
@@ -78,12 +85,17 @@ function Get-VSTeamRelease {
          # Call the REST API
          $resp = _callAPI -url $listurl -QueryString $QueryString
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypesToRelease -item $item
+         if ($JSON.IsPresent) {
+            $resp | ConvertTo-Json -Depth 99
          }
+         else {
+            # Apply a Type Name so we can use custom format view and custom type extensions
+            foreach ($item in $resp.value) {
+               _applyTypesToRelease -item $item
+            }
 
-         Write-Output $resp.value
+            Write-Output $resp.value
+         }
       }
    }
 }

@@ -122,6 +122,14 @@ Aliases: ReleaseID
 Accept pipeline input: true (ByPropertyName)
 ```
 
+### -JSON
+
+Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.
+
+```yaml
+Type: Switch
+```
+
 ## INPUTS
 
 ## OUTPUTS
