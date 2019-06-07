@@ -1,6 +1,3 @@
-
-
-
 # Add-VSTeamGitRepositoryPermission
 
 ## SYNOPSIS
@@ -98,4 +95,3 @@ Required: True
 ## NOTES
 
 ## RELATED LINKS
-

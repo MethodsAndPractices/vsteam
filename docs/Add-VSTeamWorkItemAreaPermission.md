@@ -1,6 +1,3 @@
-
-
-
 # Add-VSTeamWorkItemAreaPermission
 
 ## SYNOPSIS
@@ -91,4 +88,3 @@ Required: True
 ## NOTES
 
 ## RELATED LINKS
-

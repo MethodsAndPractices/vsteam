@@ -1,6 +1,3 @@
-
-
-
 # Add-VSTeamProjectPermission
 
 ## SYNOPSIS
@@ -77,4 +74,3 @@ Required: True
 ## NOTES
 
 ## RELATED LINKS
-

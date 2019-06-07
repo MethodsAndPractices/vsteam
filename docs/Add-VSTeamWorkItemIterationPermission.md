@@ -1,6 +1,3 @@
-
-
-
 # Add-VSTeamWorkItemIterationPermission
 
 ## SYNOPSIS
@@ -91,4 +88,3 @@ Required: True
 ## NOTES
 
 ## RELATED LINKS
-

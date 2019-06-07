@@ -1,6 +1,3 @@
-
-
-
 # Get-VSTeamOption
 
 ## SYNOPSIS
@@ -71,4 +68,3 @@ Required: false
 ## RELATED LINKS
 
 [Set-VSTeamAccount](Set-VSTeamAccount.md)
-
