@@ -1,3 +1,6 @@
+
+
+
 # Get-VSTeamClassificationNode
 
 ## SYNOPSIS
@@ -23,8 +26,8 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Required: true
 Position: 0
+Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -69,3 +72,4 @@ Type: int32[]
 ## NOTES
 
 ## RELATED LINKS
+

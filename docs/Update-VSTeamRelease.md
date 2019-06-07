@@ -1,16 +1,17 @@
-<!-- #include "./common/header.md" -->
+
+
 
 # Update-VSTeamRelease
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Update-VSTeamRelease.md" -->
+Allows you to update release variables for future stages to read.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Update-VSTeamRelease.md" -->
+Allows you to update release variables for future stages to read.
 
 ## EXAMPLES
 
@@ -38,7 +39,21 @@ Adds a variable temp to the release with a value of test.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
+### -ProjectName
+
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
+
+```yaml
+Type: String
+Position: 0
+Required: True
+Accept pipeline input: true (ByPropertyName)
+```
 
 ### -Id
 
@@ -59,11 +74,32 @@ Type: PSCustomObject
 Required: True
 ```
 
-<!-- #include "./params/confirm.md" -->
+### -Confirm
 
-<!-- #include "./params/force.md" -->
+Prompts you for confirmation before running the cmdlet.
 
-<!-- #include "./params/whatIf.md" -->
+```yaml
+Type: SwitchParameter
+Aliases: cf
+```
+
+### -Force
+
+Forces the command without confirmation
+
+```yaml
+Type: SwitchParameter
+```
+
+### -WhatIf
+
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Aliases: wi
+```
 
 ## INPUTS
 
@@ -74,3 +110,4 @@ Required: True
 ## NOTES
 
 ## RELATED LINKS
+

@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Remove access control lists under the specfied security namespace.
+Remove access control lists under the specified security namespace.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Remove access control lists under the specfied security namespace.
+Remove access control lists under the specified security namespace.
 
 ## EXAMPLES
 

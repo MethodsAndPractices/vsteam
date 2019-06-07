@@ -322,7 +322,7 @@ Removes the tag from a build.
 
 ### [Remove-VSTeamExtension](Remove-VSTeamExtension.md)
 
-Uninstall the specified extension from the account / project collection.
+Uninstall the specified extension from the account / project collection. 
 
 ### [Remove-VSTeamFeed](Remove-VSTeamFeed.md)
 
@@ -463,6 +463,10 @@ Allows you to update the Personal Access Token for your profile.
 
 Updates the project name, description or both.
 
+### [Update-VSTeamRelease](Update-VSTeamRelease.md)
+
+Allows you to update release variables for future stages to read.
+
 ### [Update-VSTeamServiceEndpoint](Update-VSTeamServiceEndpoint.md)
 
 Updates an existing service connection
@@ -474,3 +478,7 @@ Edit the entitlements (License, Extensions, Projects, Teams etc) for a user.
 ### [Update-VSTeamWorkItem](Update-VSTeamWorkItem.md)
 
 Update a work item in your project.
+
+
+
+
