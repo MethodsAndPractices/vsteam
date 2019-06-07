@@ -298,7 +298,7 @@ Removes a team from a project.
 
 ### [Remove-VSTeamAccessControlList](Remove-VSTeamAccessControlList.md)
 
-Remove access control lists under the specfied security namespace.
+Remove access control lists under the specified security namespace.
 
 ### [Remove-VSTeamAccount](Remove-VSTeamAccount.md)
 
@@ -322,7 +322,7 @@ Removes the tag from a build.
 
 ### [Remove-VSTeamExtension](Remove-VSTeamExtension.md)
 
-Uninstall the specified extension from the account / project collection. 
+Uninstall the specified extension from the account / project collection.
 
 ### [Remove-VSTeamFeed](Remove-VSTeamFeed.md)
 
@@ -474,6 +474,3 @@ Edit the entitlements (License, Extensions, Projects, Teams etc) for a user.
 ### [Update-VSTeamWorkItem](Update-VSTeamWorkItem.md)
 
 Update a work item in your project.
-
-
-

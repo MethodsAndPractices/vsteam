@@ -26,7 +26,7 @@ Adds a Service Fabric Endpoint for a non-secure cluster
 
 ```PowerShell
 PS C:\> $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
-PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someuser@someplace.com" -password $password
+PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someUser@someplace.com" -password $password
 ```
 
 Adds a Service Fabric Endpoint for an Azure AD secured cluster.
@@ -59,7 +59,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -useWindowsSecurity
 
-If windows intergrated authentication should be enabled. If set to false, all authentication is disabled.
+If windows integrated authentication should be enabled. If set to false, all authentication is disabled.
 
 ```yaml
 Type: Boolean
@@ -69,7 +69,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -clusterSpn
 
-Specify the cluster service principal name, for use with windows intergrated authentication.
+Specify the cluster service principal name, for use with windows integrated authentication.
 
 ```yaml
 Type: String

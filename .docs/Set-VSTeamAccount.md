@@ -68,7 +68,7 @@ PS C:\> Set-VSTeamAccount -Profile demonstrations -Level Machine
 
 Will add the account from the profile provided and store the information at the Machine level. Now any new PowerShell sessions will auto load this account.
 
-Note: You must run PowerShell as an Adminstrator to store at the Machine level.
+Note: You must run PowerShell as an Administrator to store at the Machine level.
 
 ### -------------------------- EXAMPLE 7 --------------------------
 
@@ -76,7 +76,7 @@ Note: You must run PowerShell as an Adminstrator to store at the Machine level.
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 ```
 
-Will add the account and use the OAuth Token provided by VSTS when you check the *Allow scripts to access OAuth token* checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alais for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.
+Will add the account and use the OAuth Token provided by VSTS when you check the *Allow scripts to access OAuth token* checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alias for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.
 
 ## PARAMETERS
 

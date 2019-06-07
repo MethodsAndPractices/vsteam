@@ -112,3 +112,4 @@ Position: 4
 [Get-VSTeamServiceEndpointType](Get-VSTeamServiceEndpointType.md)
 
 [Remove-VSTeamServiceEndpoint](Remove-VSTeamServiceEndpoint.md)
+

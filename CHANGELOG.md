@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.2.5
+
+Polished the docs.
+
 ## 6.2.4
 
 Added code to log error if -UseWindowsAuthentication is used to connect to Azure DevOps Services. -UseWindowsAuthentication is only for connecting to TFS or Azure DevOps Server.

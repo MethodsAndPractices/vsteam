@@ -1,6 +1,3 @@
-
-
-
 # Get-VSTeamClassificationNode
 
 ## SYNOPSIS

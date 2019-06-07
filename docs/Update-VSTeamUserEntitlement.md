@@ -1,6 +1,3 @@
-
-
-
 # Update-VSTeamUserEntitlement
 
 ## SYNOPSIS

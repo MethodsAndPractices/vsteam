@@ -78,3 +78,4 @@ Type: SwitchParameter
 [Set-VSTeamAccount](Set-VSTeamAccount.md)
 
 [Add-VSTeamProject](Add-VSTeamProject.md)
+

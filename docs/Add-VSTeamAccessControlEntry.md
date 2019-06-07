@@ -1,6 +1,3 @@
-
-
-
 # Add-VSTeamAccessControlEntry
 
 ## SYNOPSIS
@@ -42,6 +39,7 @@ Accept pipeline input: true (ByPropertyName)
 Security Namespace Name. Valid names are:
 
 AzD:
+
 - Analytics (58450c49-b02d-465a-ab12-59ae512d6531)
 - AnalyticsViews (d34d3680-dfe5-4cc6-a949-7d9c68f73cba)
 - ReleaseManagement (7c7d32f7-0e86-4cd6-892e-b35dbba870bd)
@@ -104,6 +102,7 @@ AzD:
 - VersionControlItems (a39371cf-0841-4c16-bbd3-276e341bc052)
 
 VSSPS:
+
 - EventSubscriber (2bf24a2b-70ba-43d3-ad97-3d9e1f75622f) (VSSPS)
 - EventSubscription (58b176e7-3411-457a-89d0-c6d0ccb3c52b) (VSSPS)
 - Registry (4ae0db5d-8437-4ee8-a18b-1f6fb38bd34c) (VSSPS)
@@ -123,7 +122,6 @@ VSSPS:
 - Security (9a82c708-bfbe-4f31-984c-e860c2196781) (VSSPS)
 - IdentityPicker (a60e0d84-c2f8-48e4-9c0c-f32da48d5fd1) (VSSPS)
 - ServicingOrchestration (84cc1aa4-15bc-423d-90d9-f97c450fc729) (VSSPS)
-
 
 ```yaml
 Type: String

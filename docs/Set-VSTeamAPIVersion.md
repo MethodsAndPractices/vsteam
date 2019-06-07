@@ -20,14 +20,15 @@ Set-VSTeamAPIVersion sets the versions of APIs used.
 ```PowerShell
 PS C:\> Set-VSTeamAPIVersion AzD
 ```
-This command sets the API versions to support AzD.
 
+This command sets the API versions to support AzD.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
 PS C:\> Set-VSTeamAPIVersion -Service Release -Version '5.0'
 ```
+
 This command sets the version of the Release calls to 5.0.
 
 ## PARAMETERS
@@ -95,3 +96,4 @@ Type: SwitchParameter
 ## NOTES
 
 ## RELATED LINKS
+

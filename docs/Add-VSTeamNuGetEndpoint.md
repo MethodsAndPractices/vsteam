@@ -150,3 +150,4 @@ Required: True
 [Get-VSTeamServiceEndpointType](Get-VSTeamServiceEndpointType.md)
 
 [Remove-VSTeamServiceEndpoint](Remove-VSTeamServiceEndpoint.md)
+

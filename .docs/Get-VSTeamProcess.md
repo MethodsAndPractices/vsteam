@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The list of Processs Templates returned can be controlled by using the top and skip parameters.
+The list of Process Templates returned can be controlled by using the top and skip parameters.
 
 You can also get a single Process Template by name or id.
 
@@ -50,7 +50,7 @@ Default value: 100
 
 ### -Skip
 
-Defines the number of Processs Templates to skip. The default value is 0
+Defines the number of Process Templates to skip. The default value is 0
 
 ```yaml
 Type: Int32

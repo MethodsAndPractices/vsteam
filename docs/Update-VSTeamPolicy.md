@@ -68,7 +68,7 @@ Type: Switch
 
 ### -blocking
 
-Determines if the policy will block pushes to the branch if the policy is not adheared to.
+Determines if the policy will block pushes to the branch if the policy is not adhered to.
 
 ```yaml
 Type: Switch
@@ -98,3 +98,4 @@ Required: True
 [Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
 
 [Get-VSTeamPolicyType](Get-VSTeamPolicyType.md)
+

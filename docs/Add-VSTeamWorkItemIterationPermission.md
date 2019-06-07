@@ -1,6 +1,3 @@
-
-
-
 # Add-VSTeamWorkItemIterationPermission
 
 ## SYNOPSIS
@@ -57,7 +54,7 @@ Required: True
 ### -User
 
 ```yaml
-Type: 
+Type: VSTeamUser
 Required: True
 ```
 

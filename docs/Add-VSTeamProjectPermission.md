@@ -1,6 +1,3 @@
-
-
-
 # Add-VSTeamProjectPermission
 
 ## SYNOPSIS
@@ -43,7 +40,7 @@ Required: True
 ### -User
 
 ```yaml
-Type: 
+Type: VSTeamUser
 Required: True
 ```
 

@@ -51,6 +51,7 @@ Accept pipeline input: true (ByPropertyName)
 
 To read system capabilities that contain dots you have to use the PSObject Properties property.
 
-(Get-VSTeamAgent 1 91).systemCapabilities.psobject.Properties['Agent.OS'].Value
+(Get-VSTeamAgent 1 91).systemCapabilities.PSObject.Properties['Agent.OS'].Value
 
 ## RELATED LINKS
+
