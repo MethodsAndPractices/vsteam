@@ -1,5 +1,20 @@
 # Changelog
 
+## 6.2.6
+
+Added Update-VSTeamRelease.
+Added support for -Raw and -Json on Get-VSTeamRelease so the objects and/or JSON can be returned in Update-VSTeamRelease.
+
+This was added so users can update release variables from one stage to pass to the next.
+
+```PowerShell
+$r = Get-VSTeamRelease $(Release.ReleaseId) -Raw
+$r.variables.DEPLOYMENT_CONFIG.value = "test123"
+Update-VSTeamRelease $(Release.ReleaseId) -Release $r
+```
+
+See the help of Update-VSTeamRelease for more examples.
+
 ## 6.2.5
 
 Polished the docs.

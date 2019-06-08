@@ -12,7 +12,7 @@
    RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.2.5'
+   ModuleVersion     = '6.2.6'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -220,7 +220,8 @@
       'Add-VSTeamGitRepositoryPermission',
       'Add-VSTeamWorkItemAreaPermission',
       'Add-VSTeamWorkItemIterationPermission',
-      'Get-VSTeamClassificationNode')
+      'Get-VSTeamClassificationNode',
+      'Update-VSTeamRelease')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
