@@ -474,7 +474,7 @@ InModuleScope VSTeam {
          }
 
          It 'Remove-VSTeamProject Should remove Project' {
-            Remove-VSTeamProject -ProjectName $newProjectName -Force
+            Remove-VSTeamProject -ProjectName $newProjectName -Force -Verbose
          }
 
          It 'Remove-VSTeamAccount Should remove account' {
