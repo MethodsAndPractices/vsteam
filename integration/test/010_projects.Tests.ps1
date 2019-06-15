@@ -474,6 +474,8 @@ InModuleScope VSTeam {
          }
 
          It 'Remove-VSTeamProject Should remove Project' {
+            Set-VSTeamAPIVersion $env:API_VERSION
+
             Remove-VSTeamProject -ProjectName $newProjectName -Force -Verbose
          }
 
