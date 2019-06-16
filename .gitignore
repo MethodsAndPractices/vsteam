@@ -13,3 +13,4 @@ integration/prime.ps1
 .vs/slnx.sqlite
 unit/results.xml
 en-US/VSTeam-Help.xml
+Source/Classes/classes.ps1

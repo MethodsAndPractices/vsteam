@@ -6,15 +6,8 @@
 # The module manifest is using wildcard exports for functions
 # and alias so you only have to name the files correctly.
 
-# The order that the classes files are loaded is important. Instead
-# of an awkward naming convention I added a file that has the load
-# order in it.
-$classOrder = Get-Content "$PSScriptRoot\Classes\classes.json" -Raw | ConvertFrom-Json
-
-ForEach ($classFile in $classOrder) {
-   Write-Verbose -Message "Importing from $classFile"
-   . "$PSScriptRoot\Classes\$classFile"
-}
+# Classes.ps1 is built using a script in the root folder
+. "$PSScriptRoot\Classes\classes.ps1"
 
 $functionFolders = @('Private', 'Public')
 ForEach ($folder in $functionFolders) {
