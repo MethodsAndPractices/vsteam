@@ -1,5 +1,6 @@
 {
    "output": "classes.ps1",
+   "fileType": "classes",
    "files": [
       "VSTeamVersions.ps1",
       "VSTeamProjectCache.ps1",

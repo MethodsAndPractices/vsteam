@@ -1,0 +1,5 @@
+{
+   "output": "formats.ps1xml",
+   "fileType": "formats",
+   "files": "*.ps1xml"
+}
