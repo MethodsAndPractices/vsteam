@@ -1,5 +1,5 @@
 {
-   "output": "vsteam.types.ps1xml",
+   "output": "../../dist/vsteam.types.ps1xml",
    "fileType": "types",
    "files": "*.ps1xml"
 }

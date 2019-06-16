@@ -631,7 +631,7 @@ function _callAPI {
          Write-Verbose "return type: $($resp.gettype())"
          Write-Verbose $resp
       }
-   
+
       return $resp
    }
    catch {
@@ -724,7 +724,8 @@ function _supportsServiceFabricEndpoint {
 
 function _getModuleVersion {
    # Read the version from the psd1 file.
-   $content = (Get-Content -Raw "$here\..\VSTeam.psd1" | Out-String)
+   # $content = (Get-Content -Raw "./VSTeam.psd1" | Out-String)
+   $content = (Get-Content -Raw "$here\VSTeam.psd1" | Out-String)
    $r = [regex]"ModuleVersion += +'([^']+)'"
    $d = $r.Match($content)
 
@@ -799,7 +800,7 @@ function _getVSTeamIdFromDescriptor {
    $identifier = $Descriptor.Split('.')[1]
 
    # We need to Pad the string for FromBase64String to work reliably (AzD Descriptors are not padded)
-   $ModulusValue = ($identifier.length % 4)   
+   $ModulusValue = ($identifier.length % 4)
    Switch ($ModulusValue) {
       '0' { $Padded = $identifier }
       '1' { $Padded = $identifier.Substring(0, $identifier.Length - 1) }

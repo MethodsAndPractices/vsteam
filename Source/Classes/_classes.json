@@ -1,5 +1,5 @@
 {
-   "output": "vsteam.classes.ps1",
+   "output": "../../dist/vsteam.classes.ps1",
    "fileType": "classes",
    "files": [
       "VSTeamVersions.ps1",

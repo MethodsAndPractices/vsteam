@@ -20,3 +20,4 @@ Source/formats/vsteam.format.ps1xml
 Source/Public/vsteam.public.ps1
 Source/Private/vsteam.private.ps1
 Source/Classes/vsteam.classes.ps1
+/dist

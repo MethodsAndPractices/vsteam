@@ -1,5 +1,5 @@
 {
-   "output": "vsteam.public.ps1",
+   "output": "../../dist/vsteam.public.ps1",
    "fileType": "functions",
    "files": "*.ps1"
 }

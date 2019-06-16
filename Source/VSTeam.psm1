@@ -6,12 +6,12 @@
 # The module manifest is using wildcard exports for functions
 # and alias so you only have to name the files correctly.
 
-# Classes.ps1 is built using a script in the root folder
-. "$PSScriptRoot\Classes\vsteam.classes.ps1"
-. "$PSScriptRoot\Private\vsteam.private.ps1"
-. "$PSScriptRoot\Public\vsteam.public.ps1"
+# Files are built using a script in the root folder
+. "$PSScriptRoot\vsteam.classes.ps1"
+. "$PSScriptRoot\vsteam.private.ps1"
+. "$PSScriptRoot\vsteam.public.ps1"
 
-$publicFunctions = (Get-ChildItem -Path "$PSScriptRoot\Public" -Filter '*.ps1').BaseName
+$publicFunctions = (Import-PowerShellDataFile "$PSScriptRoot\VSTeam.psd1").FunctionsToExport
 Export-ModuleMember -Function $publicFunctions
 
 # Check to see if the user stored the default project in an environment variable
