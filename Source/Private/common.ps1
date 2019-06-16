@@ -27,7 +27,7 @@ function _supportsSecurityNamespace {
 
 function _supportsMemberEntitlementManagement {
    if (-not [VSTeamVersions]::MemberEntitlementManagement) {
-       throw 'This account does not support Member Entitlement.'
+      throw 'This account does not support Member Entitlement.'
    }
 }
 
@@ -109,8 +109,8 @@ function _handleException {
    $handled = $false
 
    if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and
-       $null -ne $ex.Exception.Response -and
-       $ex.Exception.Response.StatusCode -ne "BadRequest") {
+      $null -ne $ex.Exception.Response -and
+      $ex.Exception.Response.StatusCode -ne "BadRequest") {
       $handled = $true
       $msg = "An error occurred: $($ex.Exception.Message)"
       Write-Warning -Message $msg
@@ -333,7 +333,7 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
+   if ($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
       $arrSet = _getProjects
       [VSTeamProjectCache]::projects = $arrSet
       [VSTeamProjectCache]::timestamp = (Get-Date).Minute
@@ -443,7 +443,7 @@ function _buildProcessNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
+   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
       $arrSet = _getProcesses
       [VSTeamProcessCache]::processes = $arrSet
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
@@ -504,7 +504,7 @@ function _buildDynamicParam {
    $ParameterAttribute.Mandatory = $Mandatory
    $ParameterAttribute.ValueFromPipelineByPropertyName = $true
 
-   if($Position -ne -1) {
+   if ($Position -ne -1) {
       $ParameterAttribute.Position = $Position
    }
 
@@ -589,9 +589,9 @@ function _callAPI {
 
    # If the caller did not provide a Url build it.
    if (-not $Url) {
-      $buildUriParams = @{} + $PSBoundParameters;
+      $buildUriParams = @{ } + $PSBoundParameters;
       $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType'
-      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null}
+      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
       $Url = _buildRequestURI @buildUriParams
    }
    elseif ($QueryString) {
@@ -614,10 +614,10 @@ function _callAPI {
       $params.Add('UseDefaultCredentials', $true)
    }
    elseif (_useBearerToken) {
-      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN"})
+      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
    }
    else {
-      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT"})
+      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
    }
 
    # We have to remove any extra parameters not used by Invoke-RestMethod
@@ -626,17 +626,19 @@ function _callAPI {
 
    try {
       $resp = Invoke-RestMethod @params
+
+      if ($resp) {
+         Write-Verbose "return type: $($resp.gettype())"
+         Write-Verbose $resp
+      }
+   
+      return $resp
    }
    catch {
       _handleException $_
-   }
 
-   if ($resp) {
-      Write-Verbose "return type: $($resp.gettype())"
-      Write-Verbose $resp
+      throw
    }
-
-   return $resp
 }
 
 function _trackProjectProgress {
@@ -775,24 +777,23 @@ function _clearEnvironmentVariables {
    _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken '' -Version ''
 }
 
-function _convertToHex() 
-{
-    [cmdletbinding()]
-    param(
-        [parameter(Mandatory=$true)]
-        [string]$Value
-    )
+function _convertToHex() {
+   [cmdletbinding()]
+   param(
+      [parameter(Mandatory = $true)]
+      [string]$Value
+   )
 
-    $bytes = $Value | Format-Hex -Encoding Unicode
-    $hexString = ($bytes.Bytes|ForEach-Object ToString X2) -join ''
-    return $hexString.ToLowerInvariant();
+   $bytes = $Value | Format-Hex -Encoding Unicode
+   $hexString = ($bytes.Bytes | ForEach-Object ToString X2) -join ''
+   return $hexString.ToLowerInvariant();
 }
 
 function _getVSTeamIdFromDescriptor {
    [cmdletbinding()]
    param(
-       [parameter(Mandatory=$true)]
-       [string]$Descriptor
+      [parameter(Mandatory = $true)]
+      [string]$Descriptor
    )
 
    $identifier = $Descriptor.Split('.')[1]
@@ -800,10 +801,10 @@ function _getVSTeamIdFromDescriptor {
    # We need to Pad the string for FromBase64String to work reliably (AzD Descriptors are not padded)
    $ModulusValue = ($identifier.length % 4)   
    Switch ($ModulusValue) {
-       '0' {$Padded = $identifier}
-       '1' {$Padded = $identifier.Substring(0,$identifier.Length - 1)}
-       '2' {$Padded = $identifier + ('=' * (4 - $ModulusValue))}
-       '3' {$Padded = $identifier + ('=' * (4 - $ModulusValue))}
+      '0' { $Padded = $identifier }
+      '1' { $Padded = $identifier.Substring(0, $identifier.Length - 1) }
+      '2' { $Padded = $identifier + ('=' * (4 - $ModulusValue)) }
+      '3' { $Padded = $identifier + ('=' * (4 - $ModulusValue)) }
    }
 
    return [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($Padded))
@@ -812,17 +813,15 @@ function _getVSTeamIdFromDescriptor {
 function _getDescriptorForACL {
    [cmdletbinding()]
    param(
-      [parameter(Mandatory=$true, ParameterSetName="ByUser")]
+      [parameter(Mandatory = $true, ParameterSetName = "ByUser")]
       [VSTeamUser]$User,
 
-      [parameter(MAndatory=$true, ParameterSetName="ByGroup")]
+      [parameter(MAndatory = $true, ParameterSetName = "ByGroup")]
       [VSTeamGroup]$Group
    )
 
-   if ($User)
-   {
-      switch($User.Origin)
-      {
+   if ($User) {
+      switch ($User.Origin) {
          "vsts" {
             $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
             $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
@@ -834,15 +833,13 @@ function _getDescriptorForACL {
       }
    }
 
-   if ($Group)
-   {
-      switch($Group.Origin)
-      {
+   if ($Group) {
+      switch ($Group.Origin) {
          "vsts" {
             $sid = _getVSTeamIdFromDescriptor -Descriptor $Group.Descriptor
             $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
          }
-         default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues"}
+         default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues" }
       }
    }
 
