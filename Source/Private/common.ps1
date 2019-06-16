@@ -108,7 +108,9 @@ function _handleException {
 
    $handled = $false
 
-   if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and $null -ne $ex.Exception.Response -and $ex.Exception.Response.StatusCode -ne "BadRequest") {
+   if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and
+       $null -ne $ex.Exception.Response -and
+       $ex.Exception.Response.StatusCode -ne "BadRequest") {
       $handled = $true
       $msg = "An error occurred: $($ex.Exception.Message)"
       Write-Warning -Message $msg
@@ -622,7 +624,12 @@ function _callAPI {
    $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Url', 'QueryString'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
-   $resp = Invoke-RestMethod @params
+   try {
+      $resp = Invoke-RestMethod @params
+   }
+   catch {
+      _handleException $_
+   }
 
    if ($resp) {
       Write-Verbose "return type: $($resp.gettype())"
