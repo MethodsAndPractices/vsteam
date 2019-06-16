@@ -60,48 +60,10 @@
    # ScriptsToProcess  = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
-   TypesToProcess    = @('types\Approvals.ps1xml',
-      'types\builds.ps1xml',
-      'types\cloudSubscriptions.ps1xml',
-      'types\repositories.ps1xml',
-      'types\policies.ps1xml',
-      'types\releaseDefinitions.ps1xml',
-      'types\releases.ps1xml',
-      'types\serviceendpoints.ps1xml',
-      'types\team.ps1xml',
-      'types\teammembers.ps1xml',
-      'types\teams.ps1xml',
-      'types\tfvc.ps1xml',
-      'types\usersentitlement.ps1xml',
-      'types\workitems.ps1xml',
-      'types\pullrequest.ps1xml',
-      'types\group.ps1xml',
-      'types\descriptor.ps1xml',
-      'types\securityNamespace.ps1xml',
-      'types\accessControlList.ps1xml',
-      'types\accessControlEntry.ps1xml',
-      'types\users.ps1xml',
-      'types\classificationNode.ps1xml')
+   TypesToProcess    = @('types\vsteam.types.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
-   FormatsToProcess  = @('formats\Approvals.format.ps1xml',
-      'formats\builds.format.ps1xml',
-      'formats\policyTypes.format.ps1xml',
-      'formats\profile.format.ps1xml',
-      'formats\serviceendpoints.format.ps1xml',
-      'formats\serviceendpointTypes.format.ps1xml',
-      'formats\team.format.ps1xml',
-      'formats\usersentitlement.format.ps1xml',
-      'formats\workitemTypes.format.ps1xml',
-      'formats\workitems.format.ps1xml',
-      'formats\vsteamPSDrive.format.ps1xml',
-      'formats\group.format.ps1xml',
-      'formats\descriptor.format.ps1xml',
-      'formats\securityNamespace.format.ps1xml',
-      'formats\accessControlList.format.ps1xml',
-      'formats\accessControlEntry.format.ps1xml',
-      'formats\users.format.ps1xml',
-      'formats\classificationNode.format.ps1xml')
+   FormatsToProcess  = @('formats\vsteam.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    # NestedModules     = @()
@@ -247,7 +209,7 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos')
+         Tags         = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos')
 
          # If you use this you don't need SHiPS in your private repository but the user
          # has to install SHiPS manually.  If you don't add this SHiPS will be installed
@@ -255,10 +217,10 @@
          # ExternalModuleDependencies = @('SHiPS')
 
          # A URL to the license for this module.
-         LicenseUri = 'https://github.com/DarqueWarrior/vsteam/blob/master/LICENSE'
+         LicenseUri   = 'https://github.com/DarqueWarrior/vsteam/blob/master/LICENSE'
 
          # A URL to the main website for this project.
-         ProjectUri = 'https://github.com/DarqueWarrior/vsteam'
+         ProjectUri   = 'https://github.com/DarqueWarrior/vsteam'
 
          # A URL to an icon representing this module.
          # IconUri = ''

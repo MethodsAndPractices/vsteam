@@ -7,20 +7,9 @@
 # and alias so you only have to name the files correctly.
 
 # Classes.ps1 is built using a script in the root folder
-. "$PSScriptRoot\Classes\classes.ps1"
-
-$functionFolders = @('Private', 'Public')
-ForEach ($folder in $functionFolders) {
-   $folderPath = Join-Path -Path $PSScriptRoot -ChildPath $folder
-   If (Test-Path -Path $folderPath) {
-      Write-Verbose -Message "Importing from $folder"
-      $functions = Get-ChildItem -Path $folderPath -Filter '*.ps1'
-      ForEach ($function in $functions) {
-         Write-Verbose -Message "  Importing $($function.BaseName)"
-         . $($function.FullName)
-      }
-   }
-}
+. "$PSScriptRoot\Classes\vsteam.classes.ps1"
+. "$PSScriptRoot\Private\vsteam.private.ps1"
+. "$PSScriptRoot\Public\vsteam.public.ps1"
 
 $publicFunctions = (Get-ChildItem -Path "$PSScriptRoot\Public" -Filter '*.ps1').BaseName
 Export-ModuleMember -Function $publicFunctions

@@ -1,0 +1,5 @@
+{
+   "output": "vsteam.private.ps1",
+   "fileType": "functions",
+   "files": "*.ps1"
+}
