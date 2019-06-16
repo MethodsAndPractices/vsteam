@@ -1,6 +1,6 @@
 # VSTeam Help
 
-<!-- #include "./common/description.md" -->
+<!-- #include "./common/description.txt" -->
 
 ## About files
 

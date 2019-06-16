@@ -1,5 +1,16 @@
 # Changelog
 
+## 6.2.7
+
+Added support for -Raw and -Json on Get-VSTeamBuildDefinition so the objects and/or JSON can be returned in Update-VSTeamBuildDefinition.
+
+This was added so users can update Build variables from one stage to pass to the next.
+
+```PowerShell
+$b = Get-VSTeamBuildDefinition 12 -Raw
+Add-VSTeamBuildDefinition -InFile $b
+```
+
 ## 6.2.6
 
 Added Update-VSTeamRelease.

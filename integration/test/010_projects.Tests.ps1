@@ -170,10 +170,10 @@ InModuleScope VSTeam {
          $repo = Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
 
          if ($acct -like "http://*") {
-            $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Default"}
+            $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object { $_.poolName -eq "Default" }
          }
          else {
-            $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Hosted"}
+            $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object { $_.poolName -eq "Hosted" }
          }
 
          $srcBuildDef = Get-Content $(Join-Path $PSScriptRoot "010_builddef_1.json") | ConvertFrom-Json
@@ -218,7 +218,7 @@ InModuleScope VSTeam {
          # Only run for VSTS
          if ($api -eq 'VSTS') {
             It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st build definition' {
-               $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI1")}).Id
+               $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI1") }).Id
                $buildDefId | Should Not Be $null
                $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId
                $buildDef.Name | Should Be $($newProjectName + "-CI1")
@@ -231,7 +231,7 @@ InModuleScope VSTeam {
             }
 
             It 'Get-VSTeamBuildDefinition by Id should return 2 phases for 2nd build definition' {
-               $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI2")}).Id
+               $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI2") }).Id
                ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 2
             }
          }
@@ -301,11 +301,11 @@ InModuleScope VSTeam {
 
       Context 'Get Work Item Types' {
          It 'Get-VSTeamWorkItemType' {
-            Get-VSTeamWorkItemType -ProjectName $newProjectName  | Should Not Be $null
+            Get-VSTeamWorkItemType -ProjectName $newProjectName | Should Not Be $null
          }
 
          It 'Get-VSTeamWorkItemType By Type' {
-            Get-VSTeamWorkItemType -ProjectName $newProjectName -WorkItemType Bug  | Should Not Be $null
+            Get-VSTeamWorkItemType -ProjectName $newProjectName -WorkItemType Bug | Should Not Be $null
          }
       }
 
@@ -448,7 +448,7 @@ InModuleScope VSTeam {
 
          It 'Remove-VSTeam should delete the team' {
             Remove-VSTeam -ProjectName $newProjectName -Name 'testing123' -Force
-            Get-VSTeam -ProjectName $newProjectName | Where-Object { $_.Name -eq 'testing123'} | Should Be $null
+            Get-VSTeam -ProjectName $newProjectName | Where-Object { $_.Name -eq 'testing123' } | Should Be $null
          }
       }
 
@@ -474,6 +474,14 @@ InModuleScope VSTeam {
          }
 
          It 'Remove-VSTeamProject Should remove Project' {
+            Set-VSTeamAPIVersion $env:API_VERSION
+
+            # I have noticed that if the delete happens too soon you will get a
+            # 400 response and told to try again later. So this test needs to be
+            # retried. We need to wait a minute after the rename before we try
+            # and delete
+            Start-Sleep -Seconds 60
+
             Remove-VSTeamProject -ProjectName $newProjectName -Force
          }
 
