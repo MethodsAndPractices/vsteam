@@ -4,10 +4,21 @@ param(
 
    # Building help is skipped by default to speed your inner loop.
    # Use this flag to include building the help
-   [switch]$buildHelp
+   [switch]$buildHelp,
+
+   # By default the build will not install dependencies
+   [switch]$installDep
 )
 
 . ./Merge-Files.ps1
+
+if ($installDep.IsPresent) {
+   # Load the psd1 file so you can read the required modules and install them
+   $manifest = Import-PowerShellDataFile .\Source\VSTeam.psd1
+
+   # Install each module
+   $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
+}
 
 if ([System.IO.Path]::IsPathRooted($outputDir)) {
    $output = $outputDir

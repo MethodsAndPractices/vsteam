@@ -35,13 +35,11 @@ PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
       $outputDir
    )
 
-   Write-Output "File to process: $inputFile"
-
    $fullPath = $(Resolve-Path $inputFile)
    Write-Verbose "Full Path: $fullPath"
 
    $fileOrder = Get-Content $fullPath -Raw | ConvertFrom-Json
-   Write-Output "Processing: $($fileOrder.fileType)"
+   Write-Output "Processing: $($fileOrder.fileType) in $fullPath"
 
    $workingDir = Split-Path $fullPath
    Write-Verbose "Working Directory: $workingDir"
