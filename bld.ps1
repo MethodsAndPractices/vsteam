@@ -6,17 +6,24 @@ param(
 
 . ./Merge-Files.ps1
 
-Merge-Files -inputFile ./Source/types/_types.json -outputDir $outputDir
-Merge-Files -inputFile ./Source/Public/_public.json -outputDir $outputDir
-Merge-Files -inputFile ./Source/Classes/_classes.json -outputDir $outputDir
-Merge-Files -inputFile ./Source/formats/_formats.json -outputDir $outputDir
-Merge-Files -inputFile ./Source/Private/_private.json -outputDir $outputDir
+if ([System.IO.Path]::IsPathRooted($outputDir)) {
+   $output = $outputDir
+}
+else {
+   $output = Join-Path (Get-Location) $outputDir
+}
 
-Copy-Item -Path ./Source/en-US -Destination "$outputDir/" -Recurse -Force
-Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$outputDir/VSTeam.psm1" -Force
+Merge-Files -inputFile ./Source/types/_types.json -outputDir $output
+Merge-Files -inputFile ./Source/Public/_public.json -outputDir $output
+Merge-Files -inputFile ./Source/Classes/_classes.json -outputDir $output
+Merge-Files -inputFile ./Source/formats/_formats.json -outputDir $output
+Merge-Files -inputFile ./Source/Private/_private.json -outputDir $output
+
+Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
+Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
    ForEach-Object -Process { Write-Output "'$_'" }) -join ','
 
 (Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") |
-Set-Content "$outputDir/VSTeam.psd1"
+Set-Content "$output/VSTeam.psd1"

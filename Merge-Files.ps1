@@ -46,8 +46,7 @@ PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
    $workingDir = Split-Path $fullPath
    Write-Verbose "Working Directory: $workingDir"
 
-   $output = Join-Path (Get-Location) $outputDir
-   $output = Join-Path $output $fileOrder.outputFile
+   $output = Join-Path $outputDir $fileOrder.outputFile
 
    Push-Location
    Set-Location $workingDir
