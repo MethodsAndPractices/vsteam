@@ -96,7 +96,7 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags         = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos')
+         Tags         = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos', 'AzD', 'ADO', 'AzDO')
 
          # If you use this you don't need SHiPS in your private repository but the user
          # has to install SHiPS manually.  If you don't add this SHiPS will be installed
