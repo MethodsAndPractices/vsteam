@@ -17,6 +17,9 @@ output file. All comments will also be removed from the output file.
 .PARAMETER InputFile
 The JSON file to process.
 
+.PARAMETER outputDir
+The destination folder.
+
 .EXAMPLE
 PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
 
@@ -25,7 +28,11 @@ PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
    param(
       [Parameter(Mandatory = $True)]
       [string]
-      $inputFile
+      $inputFile,
+
+      [Parameter(Mandatory = $True)]
+      [string]
+      $outputDir
    )
 
    Write-Output "File to process: $inputFile"
@@ -39,10 +46,11 @@ PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
    $workingDir = Split-Path $fullPath
    Write-Verbose "Working Directory: $workingDir"
 
+   $output = Join-Path (Get-Location) $outputDir
+   $output = Join-Path $output $fileOrder.outputFile
+
    Push-Location
    Set-Location $workingDir
-
-   $outputFile = Join-Path (Get-Location) $fileOrder.output
 
    try {
       $files = $fileOrder.files
@@ -53,20 +61,21 @@ PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
 
       # This makes sure the file is there and empty.
       # If the file already exisit it will be overwritten.
-      $null = New-Item -ItemType file -Path $outputFile -Force
+      $null = New-Item -ItemType file -Path $output -Force
+      Write-Output "Creating: $output"
 
       switch ($fileOrder.fileType) {
          'formats' {
-            Merge-Formats $files | Add-Content $outputFile
+            Merge-Formats $files | Add-Content $output
          }
          'types' {
-            Merge-Types $files | Add-Content $outputFile
+            Merge-Types $files | Add-Content $output
          }
          'functions' {
-            Merge-Functions $files | Add-Content $outputFile
+            Merge-Functions $files | Add-Content $output
          }
          Default {
-            Merge-Classes $files | Add-Content $outputFile
+            Merge-Classes $files | Add-Content $output
          }
       }
    }
@@ -144,7 +153,6 @@ function Merge-Functions {
          }
       }
 
-      Write-Verbose "Output File: $outputFile"
       Write-Output $contents.ToString()
    }
 }
@@ -188,7 +196,6 @@ function Merge-Classes {
          }
       }
 
-      Write-Verbose "Output File: $outputFile"
       Write-Output "$($usingsSb.ToString())  $($contents.ToString())"
    }
 }

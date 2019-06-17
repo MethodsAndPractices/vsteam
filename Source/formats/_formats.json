@@ -1,5 +1,5 @@
 {
-   "output": "../../dist/vsteam.format.ps1xml",
+   "outputFile": "vsteam.format.ps1xml",
    "fileType": "formats",
    "files": "*.ps1xml"
 }
