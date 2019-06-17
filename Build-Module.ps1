@@ -27,11 +27,10 @@ else {
    $output = Join-Path (Get-Location) $outputDir
 }
 
+Merge-Files -inputFile ./Source/_functions.json -outputDir $output
 Merge-Files -inputFile ./Source/types/_types.json -outputDir $output
-Merge-Files -inputFile ./Source/Public/_public.json -outputDir $output
 Merge-Files -inputFile ./Source/Classes/_classes.json -outputDir $output
 Merge-Files -inputFile ./Source/formats/_formats.json -outputDir $output
-Merge-Files -inputFile ./Source/Private/_private.json -outputDir $output
 
 # Build the help
 if ($buildHelp.IsPresent) {

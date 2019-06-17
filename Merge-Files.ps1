@@ -50,10 +50,12 @@ PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
    Set-Location $workingDir
 
    try {
-      $files = $fileOrder.files
+      $files = $()
 
-      if ('String' -eq $fileOrder.files.GetType().Name) {
-         $files = Get-ChildItem -Filter $fileOrder.files
+      foreach ($file in $fileOrder.files) {
+         foreach ($item in $(Get-ChildItem -Filter $file)) {
+            $files += , (Resolve-Path $item.FullName)
+         }
       }
 
       # This makes sure the file is there and empty.

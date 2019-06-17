@@ -1,5 +1,7 @@
 {
    "outputFile": "vsteam.format.ps1xml",
    "fileType": "formats",
-   "files": "*.ps1xml"
+   "files": [
+      "*.ps1xml"
+   ]
 }

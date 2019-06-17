@@ -8,8 +8,7 @@
 
 # Files are built using a script in the root folder
 . "$PSScriptRoot\vsteam.classes.ps1"
-. "$PSScriptRoot\vsteam.private.ps1"
-. "$PSScriptRoot\vsteam.public.ps1"
+. "$PSScriptRoot\vsteam.functions.ps1"
 
 $publicFunctions = (Import-PowerShellDataFile "$PSScriptRoot\VSTeam.psd1").FunctionsToExport
 Export-ModuleMember -Function $publicFunctions
