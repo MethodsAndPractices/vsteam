@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.2.8
+
+Added functions to deal with variable groups
+
+- Added Add-VSTeamVariableGroup to add new variable groups.
+- Added Get-VSTeamVariableGroup to get variable groups.
+- Added Update-VSTeamVariableGroup to update variable groups
+- Added Remove-VSTeamVariableGroup to remove variable groups
+
 ## 6.2.7
 
 Added support for -Raw and -Json on Get-VSTeamBuildDefinition so the objects and/or JSON can be returned in Update-VSTeamBuildDefinition.
