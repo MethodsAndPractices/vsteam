@@ -309,6 +309,39 @@ InModuleScope VSTeam {
          }
       }
 
+      Context 'Simple Variable Group' {
+         $newVariableGroup = $null
+         It 'Add-VSTeamVariableGroup Should add a variable group' {
+            $variables = @{
+               key1 = @{
+                  value = "value1"
+               }
+               key2 = @{
+                  value    = "value2"
+                  isSecret = $true
+               }
+            }
+            $newVariableGroup = Add-VSTeamVariableGroup -ProjectName $newProjectName -variableGroupName "TestVariableGroup1" -variableGroupType "Vsts" -variableGroupDescription "A test variable group" -variableGroupVariables $variables
+            $newVariableGroup | Should Not Be $null
+         }
+
+         It 'Update-VSTeamVariableGroup Should update the variable group' {
+            $newVariableGroup | Should Not Be $null
+            $variables = @{
+               key3 = @{
+                  value = "value3"
+               }
+            }
+            $newVariableGroup = Update-VSTeamVariableGroup -ProjectName $newProjectName -id $newVariableGroup.id -variableGroupName "TestVariableGroup2" -variableGroupType "Vsts" -variableGroupDescription "A test variable group update" -variableGroupVariables $variables
+            $newVariableGroup | Should Not Be $null
+         }
+
+         It 'Remove-VSTeamVariableGroup Should remove the variable group' {
+            $newVariableGroup | Should Not Be $null
+            {Remove-VSTeamVariableGroup -ProjectName $newProjectName -id $newVariableGroup.id -Force} | Should Not Throw
+         }
+      }
+
       Context 'Service Endpoints full exercise' {
          It 'Add-VSTeamSonarQubeEndpoint Should add service endpoint' {
             { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `

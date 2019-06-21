@@ -81,7 +81,8 @@
       'types\accessControlList.ps1xml',
       'types\accessControlEntry.ps1xml',
       'types\users.ps1xml',
-      'types\classificationNode.ps1xml')
+      'types\classificationNode.ps1xml',
+      'types\variablegroups.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
    FormatsToProcess  = @('formats\Approvals.format.ps1xml',
@@ -101,7 +102,8 @@
       'formats\accessControlList.format.ps1xml',
       'formats\accessControlEntry.format.ps1xml',
       'formats\users.format.ps1xml',
-      'formats\classificationNode.format.ps1xml')
+      'formats\classificationNode.format.ps1xml',
+      'formats\variablegroups.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    # NestedModules     = @()
@@ -221,7 +223,11 @@
       'Add-VSTeamWorkItemAreaPermission',
       'Add-VSTeamWorkItemIterationPermission',
       'Get-VSTeamClassificationNode',
-      'Update-VSTeamRelease')
+      'Update-VSTeamRelease',
+      'Add-VSTeamVariableGroup',
+      'Get-VSTeamVariableGroup',
+      'Remove-VSTeamVariableGroup',
+      'Update-VSTeamVariableGroup')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
