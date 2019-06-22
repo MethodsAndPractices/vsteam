@@ -1,5 +1,4 @@
 function Add-VSTeamVariableGroup {
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $variableGroupName,
