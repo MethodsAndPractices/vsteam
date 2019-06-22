@@ -4,21 +4,58 @@
 # Update-VSTeamVariableGroup
 
 ## SYNOPSIS
+
 Updates an existing variable group
 
 ## SYNTAX
 
-```powershell
-Update-VSTeamVariableGroup [-id] <String> [-variableGroupName] <String> [-variableGroupType] <String>
- [-variableGroupDescription] <String> [-variableGroupVariables] <Hashtable>
- [[-variableGroupProviderData] <Hashtable>] [-Force] [-WhatIf] [-Confirm] [-ProjectName] <String>
- [<CommonParameters>]
-```
-
 ## DESCRIPTION
+
 Updates an existing variable group
 
 ## EXAMPLES
+
+### -------------------------- EXAMPLE 1 --------------------------
+
+```powershell
+
+$methodParameters = @{
+   ProjectName              = "some_project_name"
+   variableGroupName        = "new_variable_group"
+   variableGroupDescription = "Describe the Variable Group"
+   variableGroupType        = "Vsts"
+   variableGroupVariables   = @{
+      key1 = @{
+         value = "value1"
+         isSecret = $true
+      }
+   }
+}
+
+$newVariableGroup = Add-VSTeamVariableGroup @methodParameters
+
+$methodParameters = @{
+   id                       = $newVariableGroup.id
+   ProjectName              = "some_project_name"
+   variableGroupName        = "new_variable_group"
+   variableGroupDescription = "Describe the Variable Group"
+   variableGroupType        = "AzureKeyVault"
+   variableGroupVariables   = @{
+      name_of_existing_secret  = @{
+         enabled     = $true
+         contentType = ""
+         value       = ""
+         isSecret    = $true
+      }
+   }
+   variableGroupProviderData =  @{
+      serviceEndpointId = "AzureRMServiceEndpointGuid"
+      vault             = "name_of_existing_key_vault"
+   }
+}
+
+Update-VSTeamVariableGroup @methodParameters
+```
 
 ## PARAMETERS
 
@@ -28,7 +65,6 @@ Prompts you for confirmation before running the cmdlet.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
 Aliases: cf
 
 Required: False
@@ -44,7 +80,6 @@ Does not prompt
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -56,29 +91,29 @@ Accept wildcard characters: False
 
 ### -ProjectName
 
-The name of the project. 
-You can tab complete from the projects in your Team Services or TFS account when passed on the command line.
+### -ProjectName
+
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values:
-
-Required: True
 Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Required: True
+Accept pipeline input: true (ByPropertyName)
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
 Aliases: wi
 
 Required: False
@@ -89,11 +124,11 @@ Accept wildcard characters: False
 ```
 
 ### -id
+
 ID of the existing variable group
 
 ```yaml
 Type: String
-Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -104,11 +139,11 @@ Accept wildcard characters: False
 ```
 
 ### -variableGroupDescription
+
 The variable group description
 
 ```yaml
 Type: String
-Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -119,11 +154,11 @@ Accept wildcard characters: False
 ```
 
 ### -variableGroupName
+
 The variable group name
 
 ```yaml
 Type: String
-Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -134,11 +169,11 @@ Accept wildcard characters: False
 ```
 
 ### -variableGroupProviderData
+
 The variable group ProviderData.  This should be $null for Vsts types.
 
 ```yaml
 Type: Hashtable
-Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -149,11 +184,11 @@ Accept wildcard characters: False
 ```
 
 ### -variableGroupType
+
 The variable group type
 
 ```yaml
 Type: String
-Parameter Sets: (All)
 Aliases:
 Accepted values: Vsts, AzureKeyVault
 
@@ -165,11 +200,11 @@ Accept wildcard characters: False
 ```
 
 ### -variableGroupVariables
-The variable group variables. Please refer to the unit test for examples.
+
+The variable group variables.
 
 ```yaml
 Type: Hashtable
-Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -180,12 +215,14 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String
+
 System.Collections.Hashtable
 
 ## OUTPUTS
@@ -201,3 +238,4 @@ System.Collections.Hashtable
 [Get-VSTeamVariableGroup](Get-VSTeamVariableGroup.md)
 
 [Remove-VSTeamVariableGroup](Remove-VSTeamVariableGroup.md)
+

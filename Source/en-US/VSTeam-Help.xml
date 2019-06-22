@@ -4831,19 +4831,21 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
       <command:verb>Add</command:verb>
       <command:noun>VSTeamVariableGroup</command:noun>
       <maml:description>
-        <maml:para>Adds a generic service connection</maml:para>
+        <maml:para>Adds a variable group.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Adds a generic service connection</maml:para>
+      <maml:para>Adds a variable group.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Add-VSTeamVariableGroup</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
-            <maml:para>The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.</maml:para>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4895,7 +4897,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none">
           <maml:name>variableGroupVariables</maml:name>
           <maml:Description>
-            <maml:para>The variable group variables. Please refer to the unit test for examples.</maml:para>
+            <maml:para>The variable group variables.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
           <dev:type>
@@ -4919,10 +4921,12 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
-          <maml:para>The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.</maml:para>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4982,7 +4986,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none">
         <maml:name>variableGroupVariables</maml:name>
         <maml:Description>
-          <maml:para>The variable group variables. Please refer to the unit test for examples.</maml:para>
+          <maml:para>The variable group variables.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
         <dev:type>
@@ -5017,7 +5021,57 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName              = "some_project_name"
+   variableGroupName        = "new_variable_group"
+   variableGroupDescription = "Describe the Variable Group"
+   variableGroupType        = "Vsts"
+   variableGroupVariables   = @{
+      key1 = @{
+         value = "value1"
+      }
+      key2 = @{
+         value    = "value2"
+         isSecret = $true
+      }
+   }
+}
+
+Add-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName              = "some_project_name"
+   variableGroupName        = "new_variable_group"
+   variableGroupDescription = "Describe the Variable Group"
+   variableGroupType        = "AzureKeyVault"
+   variableGroupVariables   = @{
+      name_of_existing_secret  = @{
+         enabled     = $true
+         contentType = ""
+         value       = ""
+         isSecret    = $true
+      }
+   }
+   variableGroupProviderData =  @{
+      serviceEndpointId = "AzureRMServiceEndpointGuid"
+      vault             = "name_of_existing_key_vault"
+   }
+}
+
+Add-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Update-VSTeamVariableGroup</maml:linkText>
@@ -11509,10 +11563,12 @@ ID Title          Status
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-VSTeamVariableGroup</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
-            <maml:para>The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.</maml:para>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -11536,10 +11592,24 @@ ID Title          Status
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
-          <maml:para>The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.</maml:para>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -11588,8 +11658,24 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code></dev:code>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName              = "some_project_name"
+}
+
+Get-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName              = "some_project_name"
+   id                       = "variable_group_id"
+}
+
+Get-VSTeamVariableGroup @methodParameters</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -14494,10 +14580,12 @@ ID Title          Status
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Remove-VSTeamVariableGroup</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
-            <maml:para>The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.</maml:para>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -14578,10 +14666,24 @@ ID Title          Status
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
-          <maml:para>The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.</maml:para>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -14640,7 +14742,36 @@ ID Title          Status
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName              = "some_project_name"
+   variableGroupName        = "new_variable_group"
+   variableGroupDescription = "Describe the Variable Group"
+   variableGroupType        = "Vsts"
+   variableGroupVariables   = @{
+      key1 = @{
+         value = "value1"
+         isSecret = $true
+      }
+   }
+}
+
+$newVariableGroup = Add-VSTeamVariableGroup @methodParameters
+
+$methodParameters = @{
+   id                       = $newVariableGroup.id
+   ProjectName              = "some_project_name"
+   Force                    = $true
+}
+
+Remove-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Add-VSTeamVariableGroup</maml:linkText>
@@ -19030,10 +19161,12 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Update-VSTeamVariableGroup</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
           <maml:name>ProjectName</maml:name>
           <maml:Description>
-            <maml:para>The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.</maml:para>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -19097,7 +19230,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none">
           <maml:name>variableGroupVariables</maml:name>
           <maml:Description>
-            <maml:para>The variable group variables. Please refer to the unit test for examples.</maml:para>
+            <maml:para>The variable group variables.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
           <dev:type>
@@ -19178,10 +19311,24 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
-          <maml:para>The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line.</maml:para>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -19265,7 +19412,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none">
         <maml:name>variableGroupVariables</maml:name>
         <maml:Description>
-          <maml:para>The variable group variables. Please refer to the unit test for examples.</maml:para>
+          <maml:para>The variable group variables.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
         <dev:type>
@@ -19300,7 +19447,50 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName              = "some_project_name"
+   variableGroupName        = "new_variable_group"
+   variableGroupDescription = "Describe the Variable Group"
+   variableGroupType        = "Vsts"
+   variableGroupVariables   = @{
+      key1 = @{
+         value = "value1"
+         isSecret = $true
+      }
+   }
+}
+
+$newVariableGroup = Add-VSTeamVariableGroup @methodParameters
+
+$methodParameters = @{
+   id                       = $newVariableGroup.id
+   ProjectName              = "some_project_name"
+   variableGroupName        = "new_variable_group"
+   variableGroupDescription = "Describe the Variable Group"
+   variableGroupType        = "AzureKeyVault"
+   variableGroupVariables   = @{
+      name_of_existing_secret  = @{
+         enabled     = $true
+         contentType = ""
+         value       = ""
+         isSecret    = $true
+      }
+   }
+   variableGroupProviderData =  @{
+      serviceEndpointId = "AzureRMServiceEndpointGuid"
+      vault             = "name_of_existing_key_vault"
+   }
+}
+
+Update-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Add-VSTeamVariableGroup</maml:linkText>

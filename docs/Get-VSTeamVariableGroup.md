@@ -4,51 +4,66 @@
 # Get-VSTeamVariableGroup
 
 ## SYNOPSIS
+
 Gets a variable group
 
 ## SYNTAX
 
-### List (Default)
-```powershell
-Get-VSTeamVariableGroup [-ProjectName] <String> [<CommonParameters>]
-```
-
-### ByID
-```powershell
-Get-VSTeamVariableGroup -id <String> [-ProjectName] <String> [<CommonParameters>]
-```
-
 ## DESCRIPTION
+
 Gets a variable group
+
 ## EXAMPLES
 
-### Example 1
+### -------------------------- EXAMPLE 1 --------------------------
+
+```powershell
+
+$methodParameters = @{
+   ProjectName              = "some_project_name"
+}
+
+Get-VSTeamVariableGroup @methodParameters
+```
+
+### -------------------------- EXAMPLE 2 --------------------------
+
+```powershell
+
+$methodParameters = @{
+   ProjectName              = "some_project_name"
+   id                       = "variable_group_id"
+}
+
+Get-VSTeamVariableGroup @methodParameters
+```
 
 ## PARAMETERS
 
 ### -ProjectName
-The name of the project. 
-You can tab complete from the projects in your Team Services or TFS account when passed on the command line.
+
+### -ProjectName
+
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: 
-
-Required: True
 Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Required: True
+Accept pipeline input: true (ByPropertyName)
 ```
 
 ### -id
+
 ID of the existing variable group
 
 ```yaml
 Type: String
-Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -59,13 +74,13 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String
-
 
 ## OUTPUTS
 
@@ -80,3 +95,4 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 [Update-VSTeamVariableGroup](Update-VSTeamVariableGroup.md)
 
 [Remove-VSTeamVariableGroup](Remove-VSTeamVariableGroup.md)
+

@@ -3,51 +3,52 @@
 # Get-VSTeamVariableGroup
 
 ## SYNOPSIS
+
 <!-- #include "./synopsis/Get-VSTeamVariableGroup.md" -->
 
 ## SYNTAX
 
-### List (Default)
-```powershell
-Get-VSTeamVariableGroup [-ProjectName] <String> [<CommonParameters>]
-```
-
-### ByID
-```powershell
-Get-VSTeamVariableGroup -id <String> [-ProjectName] <String> [<CommonParameters>]
-```
-
 ## DESCRIPTION
+
 <!-- #include "./synopsis/Get-VSTeamVariableGroup.md" -->
+
 ## EXAMPLES
 
-### Example 1
+### -------------------------- EXAMPLE 1 --------------------------
+
+```powershell
+
+$methodParameters = @{
+   ProjectName              = "some_project_name"
+}
+
+Get-VSTeamVariableGroup @methodParameters
+```
+
+### -------------------------- EXAMPLE 2 --------------------------
+
+```powershell
+
+$methodParameters = @{
+   ProjectName              = "some_project_name"
+   id                       = "variable_group_id"
+}
+
+Get-VSTeamVariableGroup @methodParameters
+```
 
 ## PARAMETERS
 
 ### -ProjectName
-The name of the project. 
-You can tab complete from the projects in your Team Services or TFS account when passed on the command line.
 
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: 
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
+<!-- #include "./params/projectName.md" -->
 
 ### -id
+
 ID of the existing variable group
 
 ```yaml
 Type: String
-Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -58,13 +59,13 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
 For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.String
-
 
 ## OUTPUTS
 
