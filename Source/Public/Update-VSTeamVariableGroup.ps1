@@ -28,6 +28,9 @@ function Update-VSTeamVariableGroup {
    }
 
    Process {
+      # This will throw if this account does not support Variable Groups
+      _supportsVariableGroups
+
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
