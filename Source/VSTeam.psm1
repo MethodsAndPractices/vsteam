@@ -10,9 +10,6 @@
 . "$PSScriptRoot\vsteam.classes.ps1"
 . "$PSScriptRoot\vsteam.functions.ps1"
 
-$publicFunctions = (Import-PowerShellDataFile "$PSScriptRoot\VSTeam.psd1").FunctionsToExport
-Export-ModuleMember -Function $publicFunctions
-
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {
    # Make sure the value in the environment variable still exisits.

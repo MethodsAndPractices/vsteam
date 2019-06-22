@@ -10,7 +10,7 @@ param(
    [switch]$installDep
 )
 
-. ./Merge-Files.ps1
+. ./Merge-File.ps1
 
 if ($installDep.IsPresent) {
    # Load the psd1 file so you can read the required modules and install them
@@ -27,10 +27,10 @@ else {
    $output = Join-Path (Get-Location) $outputDir
 }
 
-Merge-Files -inputFile ./Source/_functions.json -outputDir $output
-Merge-Files -inputFile ./Source/types/_types.json -outputDir $output
-Merge-Files -inputFile ./Source/Classes/_classes.json -outputDir $output
-Merge-Files -inputFile ./Source/formats/_formats.json -outputDir $output
+Merge-File -inputFile ./Source/_functions.json -outputDir $output
+Merge-File -inputFile ./Source/types/_types.json -outputDir $output
+Merge-File -inputFile ./Source/Classes/_classes.json -outputDir $output
+Merge-File -inputFile ./Source/formats/_formats.json -outputDir $output
 
 # Build the help
 if ($buildHelp.IsPresent) {
@@ -47,9 +47,9 @@ Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
 Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+      ForEach-Object -Process { Write-Output "'$_'" }) -join ','
 
 (Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") |
-Set-Content "$output/VSTeam.psd1"
+   Set-Content "$output/VSTeam.psd1"
 
 Write-Output 'Publish complete'

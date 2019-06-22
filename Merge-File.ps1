@@ -1,4 +1,4 @@
-function Merge-Files {
+function Merge-File {
    <#
 .SYNOPSIS
 Combines all the files in the provided inputFile into a single file.
@@ -21,7 +21,7 @@ The JSON file to process.
 The destination folder.
 
 .EXAMPLE
-PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
+PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
 
 #>
    [CmdletBinding()]
@@ -65,16 +65,16 @@ PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
 
       switch ($fileOrder.fileType) {
          'formats' {
-            Merge-Formats $files | Add-Content $output
+            Merge-Format $files | Add-Content $output
          }
          'types' {
-            Merge-Types $files | Add-Content $output
+            Merge-Type $files | Add-Content $output
          }
          'functions' {
-            Merge-Functions $files | Add-Content $output
+            Merge-Function $files | Add-Content $output
          }
          Default {
-            Merge-Classes $files | Add-Content $output
+            Merge-Class $files | Add-Content $output
          }
       }
    }
@@ -86,7 +86,7 @@ PS C:\> Merge-Files -InputFile .\Source\Classes\classes.json
    }
 }
 
-function Merge-Formats {
+function Merge-Format {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $True)]
@@ -109,7 +109,7 @@ function Merge-Formats {
    }
 }
 
-function Merge-Types {
+function Merge-Type {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $True)]
@@ -132,7 +132,7 @@ function Merge-Types {
    }
 }
 
-function Merge-Functions {
+function Merge-Function {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $True)]
@@ -156,7 +156,7 @@ function Merge-Functions {
    }
 }
 
-function Merge-Classes {
+function Merge-Class {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $True)]
