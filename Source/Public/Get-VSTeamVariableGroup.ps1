@@ -1,12 +1,12 @@
 function Get-VSTeamVariableGroup {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Position = 0, ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $id
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam
+      _buildProjectNameDynamicParam -Position 1
    }
 
    Process {
