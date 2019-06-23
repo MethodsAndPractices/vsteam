@@ -19,7 +19,7 @@ function Get-VSTeamVariableGroup {
       if ($id) {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups'  `
-            -Version $([VSTeamVersions]::DistributedTask) -Id $id
+            -Version $([VSTeamVersions]::VariableGroups) -Id $id
 
          _applyTypesToVariableGroup -item $resp
 

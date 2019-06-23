@@ -327,7 +327,7 @@ InModuleScope VSTeam {
 
          It 'Get-VSTeamVariableGroup Should get the variable group created first by list then by id' {
             $existingVariableGroups = Get-VSTeamVariableGroup -ProjectName $newProjectName
-            $existingVariableGroups.Count | Should Not BeGreaterThan 0
+            $existingVariableGroups.Count | Should BeGreaterThan 0
 
             $existingVariableGroup = Get-VSTeamVariableGroup -ProjectName $newProjectName -id $newVariableGroup.id
             $existingVariableGroup | Should Not Be $null
