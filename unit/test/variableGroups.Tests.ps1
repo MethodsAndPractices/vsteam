@@ -8,16 +8,10 @@ InModuleScope VSTeam {
    # Variable Groups are not supported on TFS 2017
    Describe "Variable Groups TFS 2017 Errors" {
       Context 'Get-VSTeamVariableGroup' {
-         Mock _callAPI { throw 'Should not be called' } -Verifiable
-
          It 'Should throw' {
             Set-VSTeamAPIVersion TFS2017
 
             { Get-VSTeamVariableGroup -projectName project } | Should Throw
-         }
-
-         It '_callAPI should be called once to get projects' {
-            Assert-MockCalled _callAPI -Exactly 1
          }
       }
 
