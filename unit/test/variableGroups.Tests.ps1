@@ -16,8 +16,6 @@ InModuleScope VSTeam {
       }
 
       Context 'Remove-VSTeamVariableGroup' {
-         Mock _callAPI { throw 'Should not be called' } -Verifiable
-
          It 'Should throw' {
             Set-VSTeamAPIVersion TFS2017
 
@@ -26,8 +24,6 @@ InModuleScope VSTeam {
       }
 
       Context 'Add-VSTeamVariableGroup' {
-         Mock _callAPI { throw 'Should not be called' } -Verifiable
-
          It 'Should throw' {
             Set-VSTeamAPIVersion TFS2017
             $testParameters = @{
@@ -54,8 +50,6 @@ InModuleScope VSTeam {
       }
 
       Context 'Update-VSTeamVariableGroup' {
-         Mock _callAPI { throw 'Should not be called' } -Verifiable
-
          It 'Should throw' {
             Set-VSTeamAPIVersion TFS2017
             $testParameters = @{
