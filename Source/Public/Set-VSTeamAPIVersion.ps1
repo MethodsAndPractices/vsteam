@@ -80,7 +80,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '3.0'
                [VSTeamVersions]::Release = '3.0-preview'
                [VSTeamVersions]::DistributedTask = '3.0-preview'
-               [VSTeamVersions]::VariableGroups = ''
+               [VSTeamVersions]::VariableGroups = '3.2-preview.1'
                [VSTeamVersions]::Tfvc = '3.0'
                [VSTeamVersions]::Packaging = ''
                [VSTeamVersions]::MemberEntitlementManagement = ''
