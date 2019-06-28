@@ -716,12 +716,6 @@ function _trackServiceEndpointProgress {
    }
 }
 
-function _supportsVariableGroups {
-   if (-not [VSTeamVersions]::VariableGroups) {
-      throw 'This account does not support Variable Group endpoints.'
-   }
-}
-
 function _supportsServiceFabricEndpoint {
    if (-not [VSTeamVersions]::ServiceFabricEndpoint) {
       throw 'This account does not support Service Fabric endpoints.'
