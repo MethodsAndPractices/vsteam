@@ -16,9 +16,6 @@
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>Type</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
                   <Label>Created By</Label>
                </TableColumnHeader>
                <TableColumnHeader>
@@ -33,9 +30,6 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>name</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>type</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>createdByUser</PropertyName>
@@ -63,9 +57,6 @@
                      </ListItem>
                      <ListItem>
                         <PropertyName>name</PropertyName>
-                     </ListItem>
-                     <ListItem>
-                        <PropertyName>type</PropertyName>
                      </ListItem>
                      <ListItem>
                         <PropertyName>createdByUser</PropertyName>
