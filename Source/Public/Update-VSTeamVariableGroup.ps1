@@ -2,29 +2,34 @@ function Update-VSTeamVariableGroup {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $id,
+      [string] $Id,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $variableGroupName,
+      [string] $Name,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [ValidateSet('Vsts', 'AzureKeyVault')]
-      [string] $variableGroupType,
+      [string] $Description,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $variableGroupDescription,
-
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [hashtable] $variableGroupVariables,
-
-      [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
-      [hashtable] $variableGroupProviderData = $null,
+      [hashtable] $Variables,
 
       [switch] $Force
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam
+      $dp = _buildProjectNameDynamicParam
+
+      if ([VSTeamVersions]::Version -ne "TFS2017") {
+         $ParameterName = 'Type'
+         $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet ('Vsts', 'AzureKeyVault') -Mandatory $true
+         $dp.Add($ParameterName, $rp)
+
+         $ParameterName = 'ProviderData'
+         $rp = _buildDynamicParam -ParameterName $ParameterName -Mandatory $false -ParameterType ([hashtable])
+         $dp.Add($ParameterName, $rp)
+      }
+
+      return $dp
    }
 
    Process {
@@ -32,25 +37,30 @@ function Update-VSTeamVariableGroup {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $body = @{
-         name        = $variableGroupName
-         type        = $variableGroupType
-         description = $variableGroupDescription
-         variables   = $variableGroupVariables
+         name        = $Name
+         description = $Description
+         variables   = $Variables
       }
-      if ($null -ne $variableGroupProviderData) {
-         $body.Add("providerData", $variableGroupProviderData)
+      if ([VSTeamVersions]::Version -ne "TFS2017") {
+         $Type = $PSBoundParameters['Type']
+         $body.Add("type", $Type)
+
+         $ProviderData = $PSBoundParameters['ProviderData']
+         if ($null -ne $ProviderData) {
+            $body.Add("providerData", $ProviderData)
+         }
       }
 
       $body = $body | ConvertTo-Json
 
-      if ($Force -or $pscmdlet.ShouldProcess($id, "Update Variable Group")) {
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Variable Group")) {
          # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'variablegroups' -Id $id  `
+         $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'variablegroups' -Id $Id  `
             -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::VariableGroups)
 
          Write-Verbose $resp
 
-         return Get-VSTeamVariableGroup -ProjectName $ProjectName -id $id
+         return Get-VSTeamVariableGroup -ProjectName $ProjectName -Id $Id
       }
    }
 }

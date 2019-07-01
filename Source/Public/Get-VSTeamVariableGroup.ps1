@@ -2,7 +2,7 @@ function Get-VSTeamVariableGroup {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(Position = 0, ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $id
+      [string] $Id
    )
 
    DynamicParam {
@@ -13,10 +13,10 @@ function Get-VSTeamVariableGroup {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if ($id) {
+      if ($Id) {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups'  `
-            -Version $([VSTeamVersions]::VariableGroups) -Id $id
+            -Version $([VSTeamVersions]::VariableGroups) -Id $Id
 
          _applyTypesToVariableGroup -item $resp
 

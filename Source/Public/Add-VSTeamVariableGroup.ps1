@@ -1,24 +1,29 @@
 function Add-VSTeamVariableGroup {
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $variableGroupName,
+      [string] $Name,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [ValidateSet('Vsts', 'AzureKeyVault')]
-      [string] $variableGroupType,
+      [string] $Description,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $variableGroupDescription,
-
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [hashtable] $variableGroupVariables,
-
-      [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
-      [hashtable] $variableGroupProviderData = $null
+      [hashtable] $Variables
    )
 
    DynamicParam {
-      _buildProjectNameDynamicParam
+      $dp = _buildProjectNameDynamicParam
+
+      if ([VSTeamVersions]::Version -ne "TFS2017") {
+         $ParameterName = 'Type'
+         $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet ('Vsts', 'AzureKeyVault') -Mandatory $true
+         $dp.Add($ParameterName, $rp)
+
+         $ParameterName = 'ProviderData'
+         $rp = _buildDynamicParam -ParameterName $ParameterName -Mandatory $false -ParameterType ([hashtable])
+         $dp.Add($ParameterName, $rp)
+      }
+
+      return $dp
    }
 
    Process {
@@ -26,13 +31,18 @@ function Add-VSTeamVariableGroup {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $body = @{
-         name        = $variableGroupName
-         type        = $variableGroupType
-         description = $variableGroupDescription
-         variables   = $variableGroupVariables
+         name        = $Name
+         description = $Description
+         variables   = $Variables
       }
-      if ($null -ne $variableGroupProviderData) {
-         $body.Add("providerData", $variableGroupProviderData)
+      if ([VSTeamVersions]::Version -ne "TFS2017") {
+         $Type = $PSBoundParameters['Type']
+         $body.Add("type", $Type)
+
+         $ProviderData = $PSBoundParameters['ProviderData']
+         if ($null -ne $ProviderData) {
+            $body.Add("providerData", $ProviderData)
+         }
       }
 
       $body = $body | ConvertTo-Json

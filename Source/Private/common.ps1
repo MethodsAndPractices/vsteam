@@ -494,7 +494,11 @@ function _buildDynamicParam {
       [array] $arrSet,
       [bool] $Mandatory = $false,
       [string] $ParameterSetName,
-      [int] $Position = -1
+      [int] $Position = -1,
+      [type] $ParameterType = [string],
+      [bool] $ValueFromPipelineByPropertyName = $true,
+      [string] $AliasName,
+      [string] $HelpMessage
    )
    # Create the collection of attributes
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
@@ -502,7 +506,7 @@ function _buildDynamicParam {
    # Create and set the parameters' attributes
    $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
    $ParameterAttribute.Mandatory = $Mandatory
-   $ParameterAttribute.ValueFromPipelineByPropertyName = $true
+   $ParameterAttribute.ValueFromPipelineByPropertyName = $ValueFromPipelineByPropertyName
 
    if ($Position -ne -1) {
       $ParameterAttribute.Position = $Position
@@ -512,8 +516,17 @@ function _buildDynamicParam {
       $ParameterAttribute.ParameterSetName = $ParameterSetName
    }
 
+   if ($HelpMessage) {
+      $ParameterAttribute.HelpMessage = $HelpMessage
+   }
+
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
+
+   if ($AliasName) {
+      $AliasAttribute = New-Object System.Management.Automation.AliasAttribute(@($AliasName))
+      $AttributeCollection.Add($AliasAttribute)
+   }
 
    if ($arrSet) {
       # Generate and set the ValidateSet
@@ -524,33 +537,7 @@ function _buildDynamicParam {
    }
 
    # Create and return the dynamic parameter
-   return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
-}
-
-function _buildDynamicSwitchParam {
-   param(
-      [string] $ParameterName = 'QueueName',
-      [array] $arrSet,
-      [bool] $Mandatory = $false,
-      [string] $ParameterSetName
-   )
-   # Create the collection of attributes
-   $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-
-   # Create and set the parameters' attributes
-   $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-   $ParameterAttribute.Mandatory = $Mandatory
-   $ParameterAttribute.ValueFromPipelineByPropertyName = $true
-
-   if ($ParameterSetName) {
-      $ParameterAttribute.ParameterSetName = $ParameterSetName
-   }
-
-   # Add the attributes to the attributes collection
-   $AttributeCollection.Add($ParameterAttribute)
-
-   # Create and return the dynamic parameter
-   return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [switch], $AttributeCollection)
+   return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, $ParameterType, $AttributeCollection)
 }
 
 function _convertSecureStringTo_PlainText {
@@ -631,7 +618,7 @@ function _callAPI {
          Write-Verbose "return type: $($resp.gettype())"
          Write-Verbose $resp
       }
-   
+
       return $resp
    }
    catch {
@@ -799,7 +786,7 @@ function _getVSTeamIdFromDescriptor {
    $identifier = $Descriptor.Split('.')[1]
 
    # We need to Pad the string for FromBase64String to work reliably (AzD Descriptors are not padded)
-   $ModulusValue = ($identifier.length % 4)   
+   $ModulusValue = ($identifier.length % 4)
    Switch ($ModulusValue) {
       '0' { $Padded = $identifier }
       '1' { $Padded = $identifier.Substring(0, $identifier.Length - 1) }
