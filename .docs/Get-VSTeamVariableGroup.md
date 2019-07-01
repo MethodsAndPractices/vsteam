@@ -31,7 +31,7 @@ Get-VSTeamVariableGroup @methodParameters
 
 $methodParameters = @{
    ProjectName              = "some_project_name"
-   id                       = "variable_group_id"
+   Id                       = "variable_group_id"
 }
 
 Get-VSTeamVariableGroup @methodParameters
@@ -43,7 +43,7 @@ Get-VSTeamVariableGroup @methodParameters
 
 <!-- #include "./params/projectName.md" -->
 
-### -id
+### -Id
 
 ID of the existing variable group
 
@@ -52,7 +52,7 @@ Type: String
 Aliases:
 
 Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

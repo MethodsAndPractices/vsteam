@@ -21,10 +21,10 @@ Adds a variable group.
 
 $methodParameters = @{
    ProjectName              = "some_project_name"
-   variableGroupName        = "new_variable_group"
-   variableGroupDescription = "Describe the Variable Group"
-   variableGroupType        = "Vsts"
-   variableGroupVariables   = @{
+   Name        = "new_variable_group"
+   Description = "Describe the Variable Group"
+   Type        = "Vsts"
+   Variables   = @{
       key1 = @{
          value = "value1"
       }
@@ -44,10 +44,10 @@ Add-VSTeamVariableGroup @methodParameters
 
 $methodParameters = @{
    ProjectName              = "some_project_name"
-   variableGroupName        = "new_variable_group"
-   variableGroupDescription = "Describe the Variable Group"
-   variableGroupType        = "AzureKeyVault"
-   variableGroupVariables   = @{
+   Name        = "new_variable_group"
+   Description = "Describe the Variable Group"
+   Type        = "AzureKeyVault"
+   Variables   = @{
       name_of_existing_secret  = @{
          enabled     = $true
          contentType = ""
@@ -55,7 +55,7 @@ $methodParameters = @{
          isSecret    = $true
       }
    }
-   variableGroupProviderData =  @{
+   ProviderData =  @{
       serviceEndpointId = "AzureRMServiceEndpointGuid"
       vault             = "name_of_existing_key_vault"
    }
@@ -82,7 +82,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -variableGroupDescription
+### -Description
 
 The variable group description
 
@@ -91,13 +91,13 @@ Type: String
 Aliases:
 
 Required: True
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -variableGroupName
+### -Name
 
 The variable group name
 
@@ -106,30 +106,30 @@ Type: String
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -variableGroupProviderData
+### -ProviderData
 
-The variable group ProviderData.  This should be $null for Vsts types.
+The variable group ProviderData.  This parameter is not available in TFS2017. This should be $null for Vsts types.
 
 ```yaml
 Type: Hashtable
 Aliases:
 
 Required: False
-Position: 5
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -variableGroupType
+### -Type
 
-The variable group type
+The variable group type.  This parameter is not available in TFS2017; all variable groups are type Vsts in this case.
 
 ```yaml
 Type: String
@@ -137,13 +137,13 @@ Aliases:
 Accepted values: Vsts, AzureKeyVault
 
 Required: True
-Position: 2
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -variableGroupVariables
+### -Variables
 
 The variable group variables.
 
@@ -152,7 +152,7 @@ Type: Hashtable
 Aliases:
 
 Required: True
-Position: 4
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

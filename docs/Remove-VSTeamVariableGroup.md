@@ -21,10 +21,10 @@ Removes a variable group
 
 $methodParameters = @{
    ProjectName              = "some_project_name"
-   variableGroupName        = "new_variable_group"
-   variableGroupDescription = "Describe the Variable Group"
-   variableGroupType        = "Vsts"
-   variableGroupVariables   = @{
+   Name        = "new_variable_group"
+   Description = "Describe the Variable Group"
+   Type        = "Vsts"
+   Variables   = @{
       key1 = @{
          value = "value1"
          isSecret = $true
@@ -35,7 +35,7 @@ $methodParameters = @{
 $newVariableGroup = Add-VSTeamVariableGroup @methodParameters
 
 $methodParameters = @{
-   id                       = $newVariableGroup.id
+   Id                       = $newVariableGroup.id
    ProjectName              = "some_project_name"
    Force                    = $true
 }
@@ -109,7 +109,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -id
+### -Id
 
 ID of the existing variable group
 
@@ -118,7 +118,7 @@ Type: String
 Aliases:
 
 Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

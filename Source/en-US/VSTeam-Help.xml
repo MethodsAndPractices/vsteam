@@ -4854,8 +4854,20 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
-          <maml:name>variableGroupName</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Description</maml:name>
+          <maml:Description>
+            <maml:para>The variable group description</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>The variable group name</maml:para>
           </maml:Description>
@@ -4866,10 +4878,22 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
-          <maml:name>variableGroupType</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>ProviderData</maml:name>
           <maml:Description>
-            <maml:para>The variable group type</maml:para>
+            <maml:para>The variable group ProviderData.  This parameter is not available in TFS2017. This should be $null for Vsts types.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Type</maml:name>
+          <maml:Description>
+            <maml:para>The variable group type.  This parameter is not available in TFS2017; all variable groups are type Vsts in this case.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Vsts</command:parameterValue>
@@ -4882,34 +4906,10 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="none">
-          <maml:name>variableGroupDescription</maml:name>
-          <maml:Description>
-            <maml:para>The variable group description</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none">
-          <maml:name>variableGroupVariables</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Variables</maml:name>
           <maml:Description>
             <maml:para>The variable group variables.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
-          <dev:type>
-            <maml:name>Hashtable</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="5" aliases="none">
-          <maml:name>variableGroupProviderData</maml:name>
-          <maml:Description>
-            <maml:para>The variable group ProviderData.  This should be $null for Vsts types.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
           <dev:type>
@@ -4935,8 +4935,8 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="none">
-        <maml:name>variableGroupDescription</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Description</maml:name>
         <maml:Description>
           <maml:para>The variable group description</maml:para>
         </maml:Description>
@@ -4947,8 +4947,8 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
-        <maml:name>variableGroupName</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>The variable group name</maml:para>
         </maml:Description>
@@ -4959,10 +4959,10 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="5" aliases="none">
-        <maml:name>variableGroupProviderData</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>ProviderData</maml:name>
         <maml:Description>
-          <maml:para>The variable group ProviderData.  This should be $null for Vsts types.</maml:para>
+          <maml:para>The variable group ProviderData.  This parameter is not available in TFS2017. This should be $null for Vsts types.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
         <dev:type>
@@ -4971,10 +4971,10 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
-        <maml:name>variableGroupType</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Type</maml:name>
         <maml:Description>
-          <maml:para>The variable group type</maml:para>
+          <maml:para>The variable group type.  This parameter is not available in TFS2017; all variable groups are type Vsts in this case.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4983,8 +4983,8 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none">
-        <maml:name>variableGroupVariables</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Variables</maml:name>
         <maml:Description>
           <maml:para>The variable group variables.</maml:para>
         </maml:Description>
@@ -5026,10 +5026,10 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
-   variableGroupName        = "new_variable_group"
-   variableGroupDescription = "Describe the Variable Group"
-   variableGroupType        = "Vsts"
-   variableGroupVariables   = @{
+   Name        = "new_variable_group"
+   Description = "Describe the Variable Group"
+   Type        = "Vsts"
+   Variables   = @{
       key1 = @{
          value = "value1"
       }
@@ -5049,10 +5049,10 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
-   variableGroupName        = "new_variable_group"
-   variableGroupDescription = "Describe the Variable Group"
-   variableGroupType        = "AzureKeyVault"
-   variableGroupVariables   = @{
+   Name        = "new_variable_group"
+   Description = "Describe the Variable Group"
+   Type        = "AzureKeyVault"
+   Variables   = @{
       name_of_existing_secret  = @{
          enabled     = $true
          contentType = ""
@@ -5060,7 +5060,7 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
          isSecret    = $true
       }
    }
-   variableGroupProviderData =  @{
+   ProviderData =  @{
       serviceEndpointId = "AzureRMServiceEndpointGuid"
       vault             = "name_of_existing_key_vault"
    }
@@ -11577,8 +11577,8 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>id</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
           <maml:Description>
             <maml:para>ID of the existing variable group</maml:para>
           </maml:Description>
@@ -11618,8 +11618,8 @@ ID Title          Status
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-        <maml:name>id</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>ID of the existing variable group</maml:para>
         </maml:Description>
@@ -11672,7 +11672,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
-   id                       = "variable_group_id"
+   Id                       = "variable_group_id"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
@@ -14594,18 +14594,6 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>id</maml:name>
-          <maml:Description>
-            <maml:para>ID of the existing variable group</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
@@ -14638,6 +14626,18 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>ID of the existing variable group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -14704,8 +14704,8 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-        <maml:name>id</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>ID of the existing variable group</maml:para>
         </maml:Description>
@@ -14747,10 +14747,10 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
-   variableGroupName        = "new_variable_group"
-   variableGroupDescription = "Describe the Variable Group"
-   variableGroupType        = "Vsts"
-   variableGroupVariables   = @{
+   Name        = "new_variable_group"
+   Description = "Describe the Variable Group"
+   Type        = "Vsts"
+   Variables   = @{
       key1 = @{
          value = "value1"
          isSecret = $true
@@ -14761,7 +14761,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
 $newVariableGroup = Add-VSTeamVariableGroup @methodParameters
 
 $methodParameters = @{
-   id                       = $newVariableGroup.id
+   Id                       = $newVariableGroup.id
    ProjectName              = "some_project_name"
    Force                    = $true
 }
@@ -19175,82 +19175,6 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-          <maml:name>id</maml:name>
-          <maml:Description>
-            <maml:para>ID of the existing variable group</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
-          <maml:name>variableGroupName</maml:name>
-          <maml:Description>
-            <maml:para>The variable group name</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
-          <maml:name>variableGroupType</maml:name>
-          <maml:Description>
-            <maml:para>The variable group type</maml:para>
-          </maml:Description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Vsts</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">AzureKeyVault</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="none">
-          <maml:name>variableGroupDescription</maml:name>
-          <maml:Description>
-            <maml:para>The variable group description</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none">
-          <maml:name>variableGroupVariables</maml:name>
-          <maml:Description>
-            <maml:para>The variable group variables.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
-          <dev:type>
-            <maml:name>Hashtable</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="5" aliases="none">
-          <maml:name>variableGroupProviderData</maml:name>
-          <maml:Description>
-            <maml:para>The variable group ProviderData.  This should be $null for Vsts types.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
-          <dev:type>
-            <maml:name>Hashtable</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
@@ -19283,6 +19207,82 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>ID of the existing variable group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Description</maml:name>
+          <maml:Description>
+            <maml:para>The variable group description</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>The variable group name</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>ProviderData</maml:name>
+          <maml:Description>
+            <maml:para>The variable group ProviderData.  This parameter is not available in TFS2017. This should be $null for Vsts types.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Type</maml:name>
+          <maml:Description>
+            <maml:para>The variable group type.  This parameter is not available in TFS2017; all variable groups are type Vsts in this case.</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Vsts</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">AzureKeyVault</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Variables</maml:name>
+          <maml:Description>
+            <maml:para>The variable group variables.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -19349,8 +19349,8 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
-        <maml:name>id</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>ID of the existing variable group</maml:para>
         </maml:Description>
@@ -19361,8 +19361,8 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="none">
-        <maml:name>variableGroupDescription</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Description</maml:name>
         <maml:Description>
           <maml:para>The variable group description</maml:para>
         </maml:Description>
@@ -19373,8 +19373,8 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
-        <maml:name>variableGroupName</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>The variable group name</maml:para>
         </maml:Description>
@@ -19385,10 +19385,10 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="5" aliases="none">
-        <maml:name>variableGroupProviderData</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>ProviderData</maml:name>
         <maml:Description>
-          <maml:para>The variable group ProviderData.  This should be $null for Vsts types.</maml:para>
+          <maml:para>The variable group ProviderData.  This parameter is not available in TFS2017. This should be $null for Vsts types.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
         <dev:type>
@@ -19397,10 +19397,10 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
-        <maml:name>variableGroupType</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Type</maml:name>
         <maml:Description>
-          <maml:para>The variable group type</maml:para>
+          <maml:para>The variable group type.  This parameter is not available in TFS2017; all variable groups are type Vsts in this case.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -19409,8 +19409,8 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none">
-        <maml:name>variableGroupVariables</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Variables</maml:name>
         <maml:Description>
           <maml:para>The variable group variables.</maml:para>
         </maml:Description>
@@ -19452,10 +19452,10 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
-   variableGroupName        = "new_variable_group"
-   variableGroupDescription = "Describe the Variable Group"
-   variableGroupType        = "Vsts"
-   variableGroupVariables   = @{
+   Name        = "new_variable_group"
+   Description = "Describe the Variable Group"
+   Type        = "Vsts"
+   Variables   = @{
       key1 = @{
          value = "value1"
          isSecret = $true
@@ -19468,10 +19468,10 @@ $newVariableGroup = Add-VSTeamVariableGroup @methodParameters
 $methodParameters = @{
    id                       = $newVariableGroup.id
    ProjectName              = "some_project_name"
-   variableGroupName        = "new_variable_group"
-   variableGroupDescription = "Describe the Variable Group"
-   variableGroupType        = "AzureKeyVault"
-   variableGroupVariables   = @{
+   Name        = "new_variable_group"
+   Description = "Describe the Variable Group"
+   Type        = "AzureKeyVault"
+   Variables   = @{
       name_of_existing_secret  = @{
          enabled     = $true
          contentType = ""
@@ -19479,7 +19479,7 @@ $methodParameters = @{
          isSecret    = $true
       }
    }
-   variableGroupProviderData =  @{
+   ProviderData =  @{
       serviceEndpointId = "AzureRMServiceEndpointGuid"
       vault             = "name_of_existing_key_vault"
    }
