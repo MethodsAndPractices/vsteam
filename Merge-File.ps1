@@ -99,7 +99,10 @@ function Merge-Format {
 
       ForEach ($file in $files) {
          Write-Verbose -Message "Merging from $file"
-         [xml]$xml = Get-Content $file
+         $fileContents = Get-Content $file
+         $newFileContents = ($fileContents -replace '<!--.+-->', '')
+         [xml]$xml = $newFileContents
+         
          $finalXml += $xml.Configuration.ViewDefinitions.InnerXml
       }
 
@@ -122,7 +125,10 @@ function Merge-Type {
 
       ForEach ($file in $files) {
          Write-Verbose -Message "Merging from $file"
-         [xml]$xml = Get-Content $file
+         $fileContents = Get-Content $file
+         $newFileContents = ($fileContents -replace '<!--.+-->', '')
+         [xml]$xml = $newFileContents
+
          $finalXml += $xml.Types.InnerXml
       }
 
