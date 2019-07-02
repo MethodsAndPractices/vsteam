@@ -27,8 +27,8 @@ function _applyTypesToWorkItem {
 
 function _applyTypesToUser {
    param(
-       [Parameter(Mandatory = $true)]
-       $item
+      [Parameter(Mandatory = $true)]
+      $item
    )
 
    $item.PSObject.TypeNames.Insert(0, 'Team.UserEntitlement')
@@ -199,4 +199,17 @@ function _applyTypesToServiceEndpointType {
          $dataSource.PSObject.TypeNames.Insert(0, 'Team.DataSource')
       }
    }
+}
+
+function _applyTypesToVariableGroup {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.VariableGroup')
+
+   $item.createdBy.PSObject.TypeNames.Insert(0, 'Team.User')
+   $item.modifiedBy.PSObject.TypeNames.Insert(0, 'Team.User')
+   if ($item.PSObject.Properties.Match('providerData').count -gt 0 -and $null -ne $item.providerData) {
+      $item.providerData.PSObject.TypeNames.Insert(0, 'Team.ProviderData')
+   }
+   $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')
 }

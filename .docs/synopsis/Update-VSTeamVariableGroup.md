@@ -1,0 +1,1 @@
+Updates an existing variable group

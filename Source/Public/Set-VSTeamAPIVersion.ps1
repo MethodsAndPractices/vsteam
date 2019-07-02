@@ -6,7 +6,7 @@ function Set-VSTeamAPIVersion {
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]
@@ -32,6 +32,9 @@ function Set-VSTeamAPIVersion {
             }
             'DistributedTask' {
                [VSTeamVersions]::DistributedTask = $Version
+            }
+            'VariableGroups' {
+               [VSTeamVersions]::VariableGroups = $Version
             }
             'Tfvc' {
                [VSTeamVersions]::Tfvc = $Version
@@ -62,6 +65,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '3.2'
                [VSTeamVersions]::Release = '4.0-preview'
                [VSTeamVersions]::DistributedTask = '4.0-preview'
+               [VSTeamVersions]::VariableGroups = '4.0-preview'
                [VSTeamVersions]::Tfvc = '3.2'
                [VSTeamVersions]::Packaging = ''
                [VSTeamVersions]::MemberEntitlementManagement = ''
@@ -76,6 +80,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '3.0'
                [VSTeamVersions]::Release = '3.0-preview'
                [VSTeamVersions]::DistributedTask = '3.0-preview'
+               [VSTeamVersions]::VariableGroups = '3.2-preview.1'
                [VSTeamVersions]::Tfvc = '3.0'
                [VSTeamVersions]::Packaging = ''
                [VSTeamVersions]::MemberEntitlementManagement = ''
@@ -90,6 +95,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '5.0'
                [VSTeamVersions]::Release = '5.1-preview'
                [VSTeamVersions]::DistributedTask = '5.0-preview'
+               [VSTeamVersions]::VariableGroups = '5.0-preview.1'
                [VSTeamVersions]::Tfvc = '5.0'
                [VSTeamVersions]::Packaging = '5.1-preview'
                [VSTeamVersions]::MemberEntitlementManagement = '5.1-preview'
@@ -110,6 +116,7 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "Build: $([VSTeamVersions]::Build)"
    Write-Verbose "Release: $([VSTeamVersions]::Release)"
    Write-Verbose "DistributedTask: $([VSTeamVersions]::DistributedTask)"
+   Write-Verbose "VariableGroups: $([VSTeamVersions]::VariableGroups)"
    Write-Verbose "Tfvc: $([VSTeamVersions]::Tfvc)"
    Write-Verbose "Packaging: $([VSTeamVersions]::Packaging)"
    Write-Verbose "MemberEntitlementManagement: $([VSTeamVersions]::MemberEntitlementManagement)"

@@ -1,0 +1,1 @@
+Removes a variable group

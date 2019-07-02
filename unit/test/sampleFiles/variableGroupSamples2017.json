@@ -1,0 +1,31 @@
+{
+   "count": 1,
+   "value": [
+      {
+         "variables": {
+            "key1": {
+               "value": "value1"
+            },
+            "key2": {
+               "value": null,
+               "isSecret": true
+            }
+         },
+         "id": 1,
+         "name": "TestVariableGroup1",
+         "description": "A test variable group",
+         "createdBy": {
+            "id": "3965414d-7e1b-480b-a9fb-f9193b7a1b41",
+            "displayName": "tuser",
+            "uniqueName": "LOCAL\\tuser"
+         },
+         "createdOn": "2019-06-25T13:49:52.3966667Z",
+         "modifiedBy": {
+            "id": "3965414d-7e1b-480b-a9fb-f9193b7a1b41",
+            "displayName": "tuser",
+            "uniqueName": "LOCAL\\tuser"
+         },
+         "modifiedOn": "2019-06-25T13:49:52.3966667Z"
+      }
+   ]
+}

@@ -11,6 +11,15 @@ $b = Get-VSTeamBuildDefinition 12 -Raw
 Add-VSTeamBuildDefinition -InFile $b
 ```
 
+Also merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/170) from [Ignacio Galarza, Jr.](https://github.com/ignatz42) which included the following:
+
+Added functions to deal with variable groups
+
+- Added Add-VSTeamVariableGroup to add new variable groups.
+- Added Get-VSTeamVariableGroup to get variable groups.
+- Added Update-VSTeamVariableGroup to update variable groups
+- Added Remove-VSTeamVariableGroup to remove variable groups
+
 ## 6.2.6
 
 Added Update-VSTeamRelease.
