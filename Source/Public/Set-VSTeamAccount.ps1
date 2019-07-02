@@ -56,7 +56,7 @@ function Set-VSTeamAccount {
          $levelParam = _buildDynamicParam -ParameterName 'Level' -arrSet $arrSet
          $RuntimeParameterDictionary.Add('Level', $levelParam)
 
-         $winAuthParam = _buildDynamicSwitchParam -ParameterName 'UseWindowsAuthentication' -Mandatory $true -ParameterSetName 'Windows'
+         $winAuthParam = _buildDynamicParam -ParameterName 'UseWindowsAuthentication' -Mandatory $true -ParameterSetName 'Windows' -ParameterType ([switch])
          $RuntimeParameterDictionary.Add('UseWindowsAuthentication', $winAuthParam)
       }
 

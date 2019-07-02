@@ -309,6 +309,73 @@ InModuleScope VSTeam {
          }
       }
 
+      Context 'Simple Variable Group' {
+         $variableGroupName = "TestVariableGroup1"
+         $variableGroupUpdatedName = "TestVariableGroup2"
+         It 'Add-VSTeamVariableGroup Should add a variable group' {
+            $parameters = @{
+               ProjectName = $newProjectName
+               Name = $variableGroupName
+               Description = "A test variable group"
+               Variables = @{
+                  key1 = @{
+                     value = "value1"
+                  }
+                  key2 = @{
+                     value    = "value2"
+                     isSecret = $true
+                  }
+               }
+            }
+            if ($api -ne 'TFS2017') {
+               $parameters.Add("Type", "Vsts")
+            }
+
+            $newVariableGroup = Add-VSTeamVariableGroup @parameters
+            $newVariableGroup | Should Not Be $null
+         }
+
+         It 'Get-VSTeamVariableGroup Should get the variable group created first by list then by id' {
+            $existingVariableGroups = ,(Get-VSTeamVariableGroup -ProjectName $newProjectName)
+            $existingVariableGroups.Count | Should BeGreaterThan 0
+
+            $newVariableGroup = ($existingVariableGroups | Where-Object { $_.Name -eq $variableGroupName })
+            $newVariableGroup | Should Not Be $null
+
+            $existingVariableGroup = Get-VSTeamVariableGroup -ProjectName $newProjectName -Id $newVariableGroup.Id
+            $existingVariableGroup | Should Not Be $null
+         }
+
+         It 'Update-VSTeamVariableGroup Should update the variable group' {
+            $newVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupName })
+            $newVariableGroup | Should Not Be $null
+
+            $parameters = @{
+               ProjectName = $newProjectName
+               Id          = $newVariableGroup.Id
+               Name        = $variableGroupUpdatedName
+               Description = "A test variable group update"
+               Variables   = @{
+                  key3 = @{
+                     value = "value3"
+                  }
+               }
+            }
+            if ($api -ne 'TFS2017') {
+               $parameters.Add("Type", "Vsts")
+            }
+
+            $updatedVariableGroup = Update-VSTeamVariableGroup @parameters
+            $updatedVariableGroup | Should Not Be $null
+         }
+
+         It 'Remove-VSTeamVariableGroup Should remove the variable group' {
+            $updatedVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupUpdatedName })
+            $updatedVariableGroup | Should Not Be $null
+            {Remove-VSTeamVariableGroup -ProjectName $newProjectName -Id $updatedVariableGroup.Id -Force} | Should Not Throw
+         }
+      }
+
       Context 'Service Endpoints full exercise' {
          It 'Add-VSTeamSonarQubeEndpoint Should add service endpoint' {
             { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `

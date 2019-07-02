@@ -9,6 +9,7 @@ function Get-VSTeamAPIVersion {
       Core                        = $([VSTeamVersions]::Core)
       Git                         = $([VSTeamVersions]::Git)
       DistributedTask             = $([VSTeamVersions]::DistributedTask)
+      VariableGroups              = $([VSTeamVersions]::VariableGroups)
       Tfvc                        = $([VSTeamVersions]::Tfvc)
       Packaging                   = $([VSTeamVersions]::Packaging)
       MemberEntitlementManagement = $([VSTeamVersions]::MemberEntitlementManagement)

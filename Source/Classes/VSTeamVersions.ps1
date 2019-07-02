@@ -7,6 +7,7 @@ class VSTeamVersions {
    static [string] $Core = '3.0'
    static [string] $Git = '3.0'
    static [string] $DistributedTask = '3.0-preview'
+   static [string] $VariableGroups = '3.2-preview.1'
    static [string] $Tfvc = '3.0'
    static [string] $Packaging = ''
    static [string] $MemberEntitlementManagement = ''
