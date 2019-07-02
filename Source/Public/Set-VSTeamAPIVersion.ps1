@@ -65,7 +65,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '3.2'
                [VSTeamVersions]::Release = '4.0-preview'
                [VSTeamVersions]::DistributedTask = '4.0-preview'
-               [VSTeamVersions]::VariableGroups = '4.1-preview.1'
+               [VSTeamVersions]::VariableGroups = '4.0-preview'
                [VSTeamVersions]::Tfvc = '3.2'
                [VSTeamVersions]::Packaging = ''
                [VSTeamVersions]::MemberEntitlementManagement = ''
