@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>Team.Policy</Name>
+      <Members>
+         <ScriptProperty>
+            <Name>policyType</Name>
+            <GetScriptBlock>$this.type.displayName</GetScriptBlock>
+         </ScriptProperty>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>policyType</Name>
+                     <Name>settings</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>

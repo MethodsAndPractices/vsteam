@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Types>   
-   <!--Team.ReleaseDefinition-->
+<Types>
    <Type>
-      <Name>Team.ReleaseDefinition</Name>
+      <Name>Team.TeamMember</Name>
       <Members>
-         <ScriptProperty>
-            <Name>createdByUser</Name>
-            <GetScriptBlock>$this.createdBy.displayName</GetScriptBlock>
-         </ScriptProperty>
          <MemberSet>
             <Name>PSStandardMembers</Name>
             <Members>
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
+                     <Name>team</Name>
+                     <Name>displayName</Name>
                      <Name>id</Name>
-                     <Name>name</Name>
-                     <Name>createdByUser</Name>
+                     <Name>uniqueName</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

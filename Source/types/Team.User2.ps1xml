@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-   <!-- Team.Group -->
    <Type>
-      <Name>Team.Group</Name>
+      <Name>Team.User2</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -11,7 +10,7 @@
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
                      <Name>SubjectKind</Name>
-                     <Name>Description</Name>
+                     <Name>CUID</Name>
                      <Name>PrincipalName</Name>
                      <Name>Domain</Name>
                      <Name>MailAddress</Name>
@@ -23,7 +22,6 @@
                      <Name>Links</Name>
                      <Name>ID</Name>
                      <Name>Name</Name>
-                     <Name>ProjectName</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

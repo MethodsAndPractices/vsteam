@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-   <!-- Team.Team -->
    <Type>
-      <Name>Team.Team</Name>
+      <Name>Team.Option</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -10,10 +9,10 @@
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
-                     <Name>projectname</Name>
-                     <Name>name</Name>
-                     <Name>id</Name>
-                     <Name>description</Name>
+                     <Name>resourceName</Name>
+                     <Name>minVersion</Name>
+                     <Name>maxVersion</Name>
+                     <Name>routeTemplate</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

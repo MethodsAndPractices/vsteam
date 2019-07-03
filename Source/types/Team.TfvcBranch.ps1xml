@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-   <!-- Team.TeamMember -->
    <Type>
-      <Name>Team.TeamMember</Name>
+      <Name>Team.TfvcBranch</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -10,10 +9,8 @@
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
-                     <Name>team</Name>
-                     <Name>displayName</Name>
-                     <Name>id</Name>
-                     <Name>uniqueName</Name>
+                     <Name>path</Name>
+                     <Name>description</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

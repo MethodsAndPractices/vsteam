@@ -45,6 +45,7 @@ During the release the module is installed on macOS, Linux and Window and tested
 ## Module Dependencies
 
 - [SHiPS module](https://www.powershellgallery.com/packages/SHiPS/)
+- [Trackyon.Utils module](https://www.powershellgallery.com/packages/Trackyon.Utils)
 
 ## Contributors
 

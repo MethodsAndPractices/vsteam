@@ -52,4 +52,4 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 (Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") |
    Set-Content "$output/VSTeam.psd1"
 
-Write-Output 'Publish complete'
+Write-Output "Publish complete to $output"

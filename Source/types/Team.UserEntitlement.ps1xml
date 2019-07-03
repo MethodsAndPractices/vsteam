@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-   <!-- Team.UserEntitlement -->
    <Type>
       <Name>Team.UserEntitlement</Name>
       <Members>
@@ -19,7 +18,6 @@
          <ScriptProperty>
             <Name>projects</Name>
             <GetScriptBlock>[string]::Join(", ", $this.projectEntitlements.projectRef.name)</GetScriptBlock>
-            <!-- <GetScriptBlock>[string]::Join(", ", $this.user.projectEntitlements.projectRef.name)</GetScriptBlock> -->
          </ScriptProperty>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -34,30 +32,6 @@
                      <Name>lastAccessedDate</Name>
                      <Name>projectEntitlements</Name>
                      <Name>user</Name>
-                  </ReferencedProperties>
-               </PropertySet>
-            </Members>
-         </MemberSet>
-      </Members>
-   </Type>
-   
-   <!-- Team.AccessLevel -->
-   <Type>
-      <Name>Team.AccessLevel</Name>
-      <Members>
-         <MemberSet>
-            <Name>PSStandardMembers</Name>
-            <Members>
-               <PropertySet>
-                  <Name>DefaultDisplayPropertySet</Name>
-                  <ReferencedProperties>
-                     <Name>accountLicenseType</Name>
-                     <Name>assignmentSource</Name>
-                     <Name>licenseDisplayName</Name>
-                     <Name>licensingSource</Name>
-                     <Name>msdnLicenseType</Name>
-                     <Name>status</Name>
-                     <Name>statusMessage</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-   <!-- Team.Descriptor -->
    <Type>
-      <Name>Team.Descriptor</Name>
+      <Name>Team.AccessLevel</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -10,8 +9,13 @@
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
-                     <Name>Descriptor</Name>
-                     <Name>Links</Name>
+                     <Name>accountLicenseType</Name>
+                     <Name>assignmentSource</Name>
+                     <Name>licenseDisplayName</Name>
+                     <Name>licensingSource</Name>
+                     <Name>msdnLicenseType</Name>
+                     <Name>status</Name>
+                     <Name>statusMessage</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

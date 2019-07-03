@@ -15,7 +15,6 @@ OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE AND INFORMATION
 REMAINS WITH THE USER.
 ******************************************************************** -->
 <Types>
-   <!--Team.PullRequest-->
    <Type>
       <Name>Team.PullRequest</Name>
       <Members>
@@ -35,18 +34,7 @@ REMAINS WITH THE USER.
             <Name>reviewStatus</Name>
             <GetScriptBlock>
                 $votes = $this.reviewers.vote
-                if (!$this.reviewers -or $votes -contains 0)
-                {
-                    "Pending"
-                }
-                elseif ($votes -contains -10)
-                {
-                    "Rejected"
-                }
-                else
-                {
-                    "Approved"
-                }
+                if (!$this.reviewers -or $votes -contains 0) { "Pending" } elseif ($votes -contains -10) { "Rejected" } else { "Approved" }
             </GetScriptBlock>
          </ScriptProperty>
          <ScriptProperty>

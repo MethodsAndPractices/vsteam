@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-   <!-- Team.AccessControlList -->
    <Type>
-      <Name>Team.AccessControlList</Name>
+      <Name>Team.AccessControlEntry</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -10,9 +9,10 @@
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
-                     <Name>Token</Name>
-                     <Name>InheritPermissions</Name>
-                     <Name>Aces</Name>
+                     <Name>Descriptor</Name>
+                     <Name>Allow</Name>
+                     <Name>Deny</Name>
+                     <Name>ExtendedInfo</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

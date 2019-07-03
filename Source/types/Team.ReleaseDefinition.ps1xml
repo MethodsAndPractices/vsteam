@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Types>
-   <!--Team.AzureSubscription-->
+<Types>   
    <Type>
-      <Name>Team.AzureSubscription</Name>
+      <Name>Team.ReleaseDefinition</Name>
       <Members>
+         <ScriptProperty>
+            <Name>createdByUser</Name>
+            <GetScriptBlock>$this.createdBy.displayName</GetScriptBlock>
+         </ScriptProperty>
          <MemberSet>
             <Name>PSStandardMembers</Name>
             <Members>
                <PropertySet>
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
-                     <Name>displayName</Name>
-                     <Name>subscriptionId</Name>
-                     <Name>subscriptionTenantId</Name>
+                     <Name>id</Name>
+                     <Name>name</Name>
+                     <Name>createdByUser</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>
          </MemberSet>
       </Members>
-   </Type>  
+   </Type>
 </Types>

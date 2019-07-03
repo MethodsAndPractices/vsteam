@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-   <!-- Team.AccessControlEntry -->
    <Type>
-      <Name>Team.AccessControlEntry</Name>
+      <Name>Team.Descriptor</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -11,9 +10,7 @@
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
                      <Name>Descriptor</Name>
-                     <Name>Allow</Name>
-                     <Name>Deny</Name>
-                     <Name>ExtendedInfo</Name>
+                     <Name>Links</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>
