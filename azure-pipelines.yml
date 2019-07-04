@@ -153,15 +153,16 @@ phases:
        README.md
        .gitignore
        dist\**
-
       TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
+      flattenFolders: true
     condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Module'
     inputs:
-      PathtoPublish: '$(build.artifactstagingdirectory)/VSTeam'
-      ArtifactName: Module
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/VSTeam'
+      ArtifactName: 'Module'
+      publishLocation: 'Container'
     condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
   - task: CopyFiles@2
@@ -179,4 +180,5 @@ phases:
     inputs:
       PathtoPublish: '$(build.artifactstagingdirectory)/Tests'
       ArtifactName: Test
+      publishLocation: 'Container'
     condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
