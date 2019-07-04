@@ -47,6 +47,29 @@ During the release the module is installed on macOS, Linux and Window and tested
 - [SHiPS module](https://www.powershellgallery.com/packages/SHiPS/)
 - [Trackyon.Utils module](https://www.powershellgallery.com/packages/Trackyon.Utils)
 
+## Building Module
+
+In an effort to reduce the module size this repository contains two scripts Build-Module.ps1 and Merge-File.ps1 that merges similar files into a single file. The files in the formats folder are merged into vsteam.format.ps1xml. The files in the classes folder are merged into vsteam.classes.ps1. The functions from the Private and Public folders are merged into vsteam.functions.ps1. Finally all the files in the types folder are merged into vsteam.types.ps1xml. The order of the files being merged can be controlled by the _*.json files in the repository.
+
+The JSON files must be in the following format:
+
+```JSON
+{
+   "outputFile": "vsteam.functions.ps1",
+   "fileType": "functions",
+   "files": [
+      "./Private/*.ps1",
+      "./Public/*.ps1"
+   ]
+}
+```
+
+The final module is stored in a dist folder by default. You can override this folder by using the -outputDir parameter to the Build-Module.ps1 script.
+
+To generate the help add the -buildHelp switch parameter.
+
+You can also use the -installDep switch parameter to install all the module dependencies to bootstrap your development.
+
 ## Contributors
 
 [Guidelines](.github/CONTRIBUTING.md)
