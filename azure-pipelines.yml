@@ -118,7 +118,7 @@ phases:
        # Import each module
        $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
 
-       $r = Invoke-ScriptAnalyzer –Path ./Source –Recurse | Where-Object severity -ne "Information"
+       $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
        $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
 
     displayName: 'Run Static Code Analysis'
