@@ -12,7 +12,7 @@ phases:
   steps:
   - powershell: |
        # Build the module and help
-       .\Build-Module.ps1 -buildHelp
+       .\Build-Module.ps1
 
     displayName: 'Build Module'
 
@@ -53,7 +53,7 @@ phases:
   steps:
   - powershell: |
        # Build the module and help
-       .\Build-Module.ps1 -buildHelp
+       .\Build-Module.ps1
 
     displayName: 'Build Module'
 
@@ -122,10 +122,6 @@ phases:
        $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
 
     displayName: 'Run Static Code Analysis'
-
-  - powershell: './gen-help.ps1'
-    displayName: 'Generate Help'
-    workingDirectory: .docs
 
   - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck -Verbose'
     displayName: 'Install Pester'
