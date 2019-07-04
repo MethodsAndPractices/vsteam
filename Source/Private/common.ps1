@@ -711,7 +711,8 @@ function _supportsServiceFabricEndpoint {
 
 function _getModuleVersion {
    # Read the version from the psd1 file.
-   $content = (Get-Content -Raw "$here\..\VSTeam.psd1" | Out-String)
+   # $content = (Get-Content -Raw "./VSTeam.psd1" | Out-String)
+   $content = (Get-Content -Raw "$here\VSTeam.psd1" | Out-String)
    $r = [regex]"ModuleVersion += +'([^']+)'"
    $d = $r.Match($content)
 

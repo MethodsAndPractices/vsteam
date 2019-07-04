@@ -25,7 +25,10 @@ class VSTeamRelease : VSTeamDirectory {
       $this.DefinitionName = $obj.releaseDefinition.name
       $this.CreatedBy = [VSTeamUserEntitlement]::new($obj.createdBy, $ProjectName)
       $this.ModifiedBy = [VSTeamUserEntitlement]::new($obj.modifiedBy, $ProjectName)
-      $this.RequestedFor = [VSTeamUserEntitlement]::new($obj.requestedFor, $ProjectName)
+
+      if ($obj.PSObject.Properties.Match('RequestedFor').count -gt 0) {
+         $this.RequestedFor = [VSTeamUserEntitlement]::new($obj.requestedFor, $ProjectName)
+      }
 
       $this._internalObj = $obj
 

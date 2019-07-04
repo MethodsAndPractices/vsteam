@@ -27,15 +27,15 @@ function Update-VSTeamBuild {
 
          $items = New-Object System.Collections.ArrayList
 
-         if ($KeepForever -ne $null) {
+         if ($null -ne $KeepForever) {
             $items.Add("`"keepForever`": $($KeepForever.ToString().ToLower())") > $null
          }
 
-         if ($buildNumber -ne $null -and $buildNumber.Length -gt 0) {
+         if ($null -ne $buildNumber -and $buildNumber.Length -gt 0) {
             $items.Add("`"buildNumber`": `"$BuildNumber`"") > $null
          }
 
-         if ($items -ne $null -and $items.count -gt 0) {
+         if ($null -ne $items -and $items.count -gt 0) {
             $body += ($items -join ", ")
          }
 

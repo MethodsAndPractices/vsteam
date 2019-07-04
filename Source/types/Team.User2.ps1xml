@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>Team.User2</Name>
+      <Members>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>SubjectKind</Name>
+                     <Name>CUID</Name>
+                     <Name>PrincipalName</Name>
+                     <Name>Domain</Name>
+                     <Name>MailAddress</Name>
+                     <Name>Origin</Name>
+                     <Name>OriginID</Name>
+                     <Name>DisplayName</Name>
+                     <Name>URL</Name>
+                     <Name>Descriptor</Name>
+                     <Name>Links</Name>
+                     <Name>ID</Name>
+                     <Name>Name</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>

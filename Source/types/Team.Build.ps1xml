@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>Team.Build</Name>
+      <Members>
+         <AliasProperty>
+            <Name>name</Name>
+            <ReferencedMemberName>buildNumber</ReferencedMemberName>
+         </AliasProperty>
+         <ScriptProperty>
+            <Name>queueName</Name>
+            <GetScriptBlock>$this.queue.name</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>queueID</Name>
+            <GetScriptBlock>$this.queue.id</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>definitionName</Name>
+            <GetScriptBlock>$this.definition.name</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>projectName</Name>
+            <GetScriptBlock>$this.project.name</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>repositoryType</Name>
+            <GetScriptBlock>$this.repository.type</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>requestedForUser</Name>
+            <GetScriptBlock>$this.requestedFor.displayName</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>requestedByUser</Name>
+            <GetScriptBlock>$this.requestedBy.displayName</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>lastChangedByUser</Name>
+            <GetScriptBlock>$this.lastChangedBy.displayName</GetScriptBlock>
+         </ScriptProperty>
+      </Members>
+   </Type>
+</Types>

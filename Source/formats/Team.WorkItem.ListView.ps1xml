@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>Team.WorkItem.ListView</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.WorkItem</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>id</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>title</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>state</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

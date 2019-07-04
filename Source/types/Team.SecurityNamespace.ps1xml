@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>Team.SecurityNamespace</Name>
+      <Members>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>ID</Name>
+                     <Name>Name</Name>
+                     <Name>DisplayName</Name>
+                     <Name>ElementLength</Name>
+                     <Name>WritePermission</Name>
+                     <Name>ReadPermission</Name>
+                     <Name>DataspaceCategory</Name>
+                     <Name>StructureValue</Name>
+                     <Name>ExtensionType</Name>
+                     <Name>IsRemotable</Name>
+                     <Name>UseTokenTranslator</Name>
+                     <Name>SystemBitMask</Name>
+                     <Name>Actions</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>

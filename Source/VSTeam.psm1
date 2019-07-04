@@ -6,31 +6,9 @@
 # The module manifest is using wildcard exports for functions
 # and alias so you only have to name the files correctly.
 
-# The order that the classes files are loaded is important. Instead
-# of an awkward naming convention I added a file that has the load
-# order in it.
-$classOrder = Get-Content "$PSScriptRoot\Classes\classes.json" -Raw | ConvertFrom-Json
-
-ForEach ($classFile in $classOrder) {
-   Write-Verbose -Message "Importing from $classFile"
-   . "$PSScriptRoot\Classes\$classFile"
-}
-
-$functionFolders = @('Private', 'Public')
-ForEach ($folder in $functionFolders) {
-   $folderPath = Join-Path -Path $PSScriptRoot -ChildPath $folder
-   If (Test-Path -Path $folderPath) {
-      Write-Verbose -Message "Importing from $folder"
-      $functions = Get-ChildItem -Path $folderPath -Filter '*.ps1'
-      ForEach ($function in $functions) {
-         Write-Verbose -Message "  Importing $($function.BaseName)"
-         . $($function.FullName)
-      }
-   }
-}
-
-$publicFunctions = (Get-ChildItem -Path "$PSScriptRoot\Public" -Filter '*.ps1').BaseName
-Export-ModuleMember -Function $publicFunctions
+# Files are built using a script in the root folder
+. "$PSScriptRoot\vsteam.classes.ps1"
+. "$PSScriptRoot\vsteam.functions.ps1"
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {

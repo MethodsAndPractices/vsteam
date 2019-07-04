@@ -13,3 +13,11 @@ integration/prime.ps1
 .vs/slnx.sqlite
 unit/results.xml
 en-US/VSTeam-Help.xml
+Source/Classes/classes.ps1
+Source/formats/formats.ps1xml
+Source/types/vsteam.types.ps1xml
+Source/formats/vsteam.format.ps1xml
+Source/Public/vsteam.public.ps1
+Source/Private/vsteam.private.ps1
+Source/Classes/vsteam.classes.ps1
+/dist

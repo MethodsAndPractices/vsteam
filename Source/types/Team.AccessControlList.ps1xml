@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>Team.AccessControlList</Name>
+      <Members>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>Token</Name>
+                     <Name>InheritPermissions</Name>
+                     <Name>Aces</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>
