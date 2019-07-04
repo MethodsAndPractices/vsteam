@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>Team.AccessControlList.TableView</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.AccessControlList</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>Token</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>InheritPermissions</Label>
+               </TableColumnHeader>       
+               <TableColumnHeader>
+                  <Label>Access Control Entries</Label>
+               </TableColumnHeader>            
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>Token</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>InheritPermissions</PropertyName>
+                     </TableColumnItem>  
+                     <TableColumnItem>
+                        <Alignment>Left</Alignment>
+                        <ScriptBlock>$_.Aces | % { $_.ToString() }</ScriptBlock> 
+                     </TableColumnItem>  
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>     
+   </ViewDefinitions>
+</Configuration>
