@@ -2,7 +2,7 @@
    "outputFile": "vsteam.functions.ps1",
    "fileType": "functions",
    "files": [
-      "./private/*.ps1",
-      "./public/*.ps1"
+      "./Private/*.ps1",
+      "./Public/*.ps1"
    ]
 }
