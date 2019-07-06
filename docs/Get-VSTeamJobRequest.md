@@ -15,6 +15,14 @@ Returns all the job requests of an agent.
 
 ## EXAMPLES
 
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+PS C:\> Get-VSTeamJobRequest 1 111
+```
+
+This will display all the job request of agent with id 111 under the pool with id 1.
+
 ## PARAMETERS
 
 ### -PoolId
@@ -33,9 +41,16 @@ Id of the agent to return.
 
 ```yaml
 Type: String
-Parameter Sets: ByID
 Required: True
 Accept pipeline input: true (ByValue)
+```
+
+### -CompletedRequestCount
+
+The number of requests to return.
+
+```yaml
+Type: Int32
 ```
 
 ## INPUTS

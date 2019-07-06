@@ -9,6 +9,8 @@ SHORT DESCRIPTION
    - Agent Pools
      - Pool1
        - Agent1
+         - JobRequest1
+         - JobRequest2
    - Project1
    - Project2
    - Builds

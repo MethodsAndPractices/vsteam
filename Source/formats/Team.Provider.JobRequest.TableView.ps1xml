@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.Provider.GitRef.TableView</Name>
+         <Name>Team.Provider.JobRequest.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.Provider.GitRef</TypeName>
+            <TypeName>Team.Provider.JobRequest</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize />
@@ -16,7 +16,13 @@
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>Creator</Label>
+                  <Label>Type</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Pipeline</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Duration</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
@@ -27,10 +33,16 @@
                         <PropertyName>DisplayMode</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>RefName</PropertyName>
+                        <PropertyName>Name</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>Creator</PropertyName>
+                        <PropertyName>Type</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Pipeline</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Duration</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

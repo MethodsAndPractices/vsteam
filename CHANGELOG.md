@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.2.8
+
+Added support for Get-VSTeamJobRequest. The provider was extended to show the Job Request under the Agent.
+
+- Account
+   - Agent Pools
+     - Pool1
+       - Agent1
+         - JobRequest1
+
 ## 6.2.7
 
 Added support for -Raw and -Json on Get-VSTeamBuildDefinition so the objects and/or JSON can be returned in Update-VSTeamBuildDefinition.
