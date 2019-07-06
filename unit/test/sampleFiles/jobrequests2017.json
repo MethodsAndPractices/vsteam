@@ -1,0 +1,121 @@
+{
+   "count": 2,
+   "value": [
+      {
+         "requestId": 2437,
+         "queueTime": "2019-06-04T13:31:44.4633333Z",
+         "assignTime": "2019-06-04T13:31:44.4633333Z",
+         "receiveTime": "2019-06-04T13:31:45.0124471Z",
+         "finishTime": "2019-06-04T13:32:30.17Z",
+         "result": "failed",
+         "serviceOwner": "00000000-0000-0000-0000-000000000000",
+         "hostId": "00000000-0000-0000-0000-000000000000",
+         "scopeId": "00000000-0000-0000-0000-000000000000",
+         "planType": "Build",
+         "planId": "00000000-0000-0000-0000-000000000000",
+         "jobId": "00000000-0000-0000-0000-000000000000",
+         "demands": [
+            "Agent.Version -gtVersion 1.98.1"
+         ],
+         "reservedAgent": {
+            "_links": {
+               "self": {
+                  "href": "http://localhost:8080/tfs/_apis/distributedtask/pools/1/agents/2"
+               },
+               "web": {
+                  "href": "http://localhost:8080/tfs/DefaultCollection/_admin/_AgentPool#_a=agents\u0026poolId=1\u0026agentId=2"
+               }
+            },
+            "id": 2,
+            "name": "Service02",
+            "version": "2.122.1",
+            "enabled": true,
+            "status": "online"
+         },
+         "definition": {
+            "_links": {
+               "web": {
+                  "href": "http://localhost:8080/tfs/_permalink/_build/index?collectionId=00000000-0000-0000-0000-000000000000\u0026projectId=00000000-0000-0000-0000-000000000000\u0026definitionId=1681"
+               },
+               "self": {
+                  "href": "http://localhost:8080/tfs/DefaultCollection/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/1681"
+               }
+            },
+            "id": 1681,
+            "name": "aspDockerTestaa5f3481-Docker-CI"
+         },
+         "owner": {
+            "_links": {
+               "web": {
+                  "href": "http://localhost:8080/tfs/_permalink/_build/index?collectionId=00000000-0000-0000-0000-000000000000\u0026projectId=00000000-0000-0000-0000-000000000000\u0026buildId=794"
+               },
+               "self": {
+                  "href": "http://localhost:8080/tfs/DefaultCollection/00000000-0000-0000-0000-000000000000/_apis/build/Builds/794"
+               }
+            },
+            "id": 794,
+            "name": "aspDockerTestaa5f3481-Docker-CI-794"
+         },
+         "data": {
+            "IsScheduledKey": "False"
+         }
+      },
+      {
+         "requestId": 2435,
+         "queueTime": "2019-06-04T13:27:10.0266667Z",
+         "assignTime": "2019-06-04T13:27:10.0266667Z",
+         "receiveTime": "2019-06-04T13:27:10.5594875Z",
+         "finishTime": "2019-06-04T13:28:48.3933333Z",
+         "result": "succeeded",
+         "serviceOwner": "00000000-0000-0000-0000-000000000000",
+         "hostId": "00000000-0000-0000-0000-000000000000",
+         "scopeId": "00000000-0000-0000-0000-000000000000",
+         "planType": "Release",
+         "planId": "00000000-0000-0000-0000-000000000000",
+         "jobId": "00000000-0000-0000-0000-000000000000",
+         "demands": [
+            "Agent.Version -gtVersion 2.0.0"
+         ],
+         "reservedAgent": {
+            "_links": {
+               "self": {
+                  "href": "http://localhost:8080/tfs/_apis/distributedtask/pools/1/agents/2"
+               },
+               "web": {
+                  "href": "http://localhost:8080/tfs/DefaultCollection/_admin/_AgentPool#_a=agents\u0026poolId=1\u0026agentId=2"
+               }
+            },
+            "id": 2,
+            "name": "Service02",
+            "version": "2.122.1",
+            "enabled": true,
+            "status": "online"
+         },
+         "definition": {
+            "_links": {
+               "web": {
+                  "href": "http://localhost:8080/tfs/DefaultCollection/00000000-0000-0000-0000-000000000000/_release?definitionId=1"
+               },
+               "self": {
+                  "href": "http://localhost:8080/tfs/DefaultCollection/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/1"
+               }
+            },
+            "id": 1,
+            "name": "aspPaaSTestbbe7a004-CD"
+         },
+         "owner": {
+            "_links": {
+               "web": {
+                  "href": "http://localhost:8080/tfs/DefaultCollection/00000000-0000-0000-0000-000000000000/_release?releaseId=1\u0026_a=release-summary"
+               },
+               "self": {
+                  "href": "http://localhost:8080/tfs/DefaultCollection/00000000-0000-0000-0000-000000000000/_apis/Release/releases/1"
+               }
+            },
+            "id": 3,
+            "name": "Release-1 / Prod"
+         },
+         "data": {}
+      }
+   ]
+}

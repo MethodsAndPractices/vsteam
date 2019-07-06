@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>Team.JobRequest.TableView</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.JobRequest</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <AutoSize />
+            <TableHeaders>
+            <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Type</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Pipeline</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Name</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Date queued</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Date assigned</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Date started</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Date completed</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Demands</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Duration</Label>
+               </TableColumnHeader>
+               
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <Wrap />
+                  <TableColumnItems>
+                  <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Type</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Pipeline</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>QueueTime</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>AssignTime</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>StartTime</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>FinishTime</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Demands</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Duration</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

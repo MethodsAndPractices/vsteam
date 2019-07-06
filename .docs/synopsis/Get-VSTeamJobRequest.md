@@ -1,0 +1,1 @@
+Returns all the job requests of an agent.

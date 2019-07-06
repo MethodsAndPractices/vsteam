@@ -1,0 +1,138 @@
+{
+   "count": 2,
+   "value": [
+      {
+         "requestId": 1962,
+         "queueTime": "2019-07-05T22:43:11.5266667Z",
+         "assignTime": "2019-07-05T22:43:12.4566667Z",
+         "receiveTime": "2019-07-05T22:43:15.7632852Z",
+         "finishTime": "2019-07-05T22:45:29.3486102Z",
+         "result": "succeeded",
+         "serviceOwner": "00000000-0000-0000-0000-000000000000",
+         "hostId": "00000000-0000-0000-0000-000000000000",
+         "scopeId": "00000000-0000-0000-0000-000000000000",
+         "planType": "Release",
+         "planId": "00000000-0000-0000-0000-000000000000",
+         "jobId": "00000000-0000-0000-0000-000000000000",
+         "demands": [
+            "Agent.Version -gtVersion 2.115.0"
+         ],
+         "reservedAgent": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/distributedtask/pools/1/agents/113"
+               },
+               "web": {
+                  "href": "https://dev.azure.com/Test/_admin/_AgentPool#_a=agents\u0026poolId=1\u0026agentId=113"
+               }
+            },
+            "id": 113,
+            "name": "WinBldBox-3_Service1",
+            "version": "2.147.1",
+            "osDescription": "Microsoft Windows 6.3.9600 ",
+            "enabled": true,
+            "status": "online",
+            "provisioningState": "Provisioned",
+            "accessPoint": "CodexAccessMapping"
+         },
+         "definition": {
+            "_links": {
+               "web": {
+                  "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_release?definitionId=2"
+               },
+               "self": {
+                  "href": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/2"
+               }
+            },
+            "id": 2,
+            "name": "PTracker-CD"
+         },
+         "owner": {
+            "_links": {
+               "web": {
+                  "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_release?releaseId=169\u0026_a=release-summary"
+               },
+               "self": {
+                  "href": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/releases/169"
+               }
+            },
+            "id": 1995,
+            "name": "Release-123 / Prod K8s"
+         },
+         "data": {
+            "ParallelismTag": "Private"
+         },
+         "poolId": 1,
+         "agentDelays": [],
+         "orchestrationId": "00000000-0000-0000-0000-000000000000.stage_15af52f747f140a7817a7661062cea76_25_1.phase_1.__default",
+         "matchesAllAgentsInPool": true
+      },
+      {
+         "requestId": 1956,
+         "queueTime": "2019-07-05T22:27:19.3133333Z",
+         "assignTime": "2019-07-05T22:27:20.1066667Z",
+         "receiveTime": "2019-07-05T22:27:23.2742733Z",
+         "finishTime": "2019-07-05T22:28:08.9394298Z",
+         "result": "succeeded",
+         "serviceOwner": "00000000-0000-0000-0000-000000000000",
+         "hostId": "00000000-0000-0000-0000-000000000000",
+         "scopeId": "00000000-0000-0000-0000-000000000000",
+         "planType": "Release",
+         "planId": "00000000-0000-0000-0000-000000000000",
+         "jobId": "00000000-0000-0000-0000-000000000000",
+         "demands": [
+            "sqlpackage",
+            "Agent.Version -gtVersion 2.115.0"
+         ],
+         "reservedAgent": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/distributedtask/pools/1/agents/113"
+               },
+               "web": {
+                  "href": "https://dev.azure.com/Test/_admin/_AgentPool#_a=agents\u0026poolId=1\u0026agentId=113"
+               }
+            },
+            "id": 113,
+            "name": "WinBldBox-3_Service1",
+            "version": "2.147.1",
+            "osDescription": "Microsoft Windows 6.3.9600 ",
+            "enabled": true,
+            "status": "online",
+            "provisioningState": "Provisioned",
+            "accessPoint": "CodexAccessMapping"
+         },
+         "definition": {
+            "_links": {
+               "web": {
+                  "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_release?definitionId=2"
+               },
+               "self": {
+                  "href": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/2"
+               }
+            },
+            "id": 2,
+            "name": "PTracker-CD"
+         },
+         "owner": {
+            "_links": {
+               "web": {
+                  "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_release?releaseId=169\u0026_a=release-summary"
+               },
+               "self": {
+                  "href": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/releases/169"
+               }
+            },
+            "id": 1988,
+            "name": "Release-123 / QA Database"
+         },
+         "data": {
+            "ParallelismTag": "Private"
+         },
+         "poolId": 1,
+         "agentDelays": [],
+         "orchestrationId": "00000000-0000-0000-0000-000000000000.stage_15af52f747f140a7817a7661062cea76_16_1.phase_1.__default",
+         "matchesAllAgentsInPool": true
+      }
+   ]
+}
