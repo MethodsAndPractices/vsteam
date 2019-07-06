@@ -10,8 +10,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
 
-$results2017 = Get-Content "./sampleFiles/jobrequests2017.json" | ConvertFrom-Json
-$resultsAzD = Get-Content "./sampleFiles/jobrequestsAzD.json" | ConvertFrom-Json
+$resultsAzD = Get-Content "$PSScriptRoot/sampleFiles/jobrequestsAzD.json" -Raw | ConvertFrom-Json
+$results2017 = Get-Content "$PSScriptRoot/sampleFiles/jobrequests2017.json" -Raw | ConvertFrom-Json
 
 Describe "Get-VSTeamJobRequest" {
    Context "2017" {

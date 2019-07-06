@@ -265,7 +265,7 @@ InModuleScope VSTeam {
                   osDescription      = 'Linux'
                   name               = 'Test_Agent'
                   systemCapabilities = [PSCustomObject]@{}
-               }
+               }, 1
             )
          }
 
