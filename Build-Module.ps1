@@ -7,7 +7,9 @@ param(
    [switch]$buildHelp,
 
    # By default the build will not install dependencies
-   [switch]$installDep
+   [switch]$installDep,
+
+   [switch]$ipmo
 )
 
 . ./Merge-File.ps1
@@ -53,3 +55,8 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
    Set-Content "$output/VSTeam.psd1"
 
 Write-Output "Publish complete to $output"
+
+if($ipmo.IsPresent) {
+   Import-Module "$output/VSTeam.psd1" -Force
+   Set-VSTeamAlias
+}

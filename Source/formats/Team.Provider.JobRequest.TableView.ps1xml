@@ -2,21 +2,27 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.Feed.TableView</Name>
+         <Name>Team.Provider.JobRequest.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.Feed</TypeName>
+            <TypeName>Team.Provider.JobRequest</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize />
             <TableHeaders>
                <TableColumnHeader>
+                  <Label>Mode</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>Description</Label>
+                  <Label>Type</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>ID</Label>
+                  <Label>Pipeline</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Duration</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
@@ -24,13 +30,19 @@
                   <Wrap />
                   <TableColumnItems>
                      <TableColumnItem>
+                        <PropertyName>DisplayMode</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
                         <PropertyName>Name</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>Description</PropertyName>
+                        <PropertyName>Type</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>ID</PropertyName>
+                        <PropertyName>Pipeline</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Duration</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

@@ -209,6 +209,10 @@ Returns a Group or List of Groups.
 
 Displays your current account and default project.
 
+### [Get-VSTeamJobRequest](Get-VSTeamJobRequest.md)
+
+Returns all the job requests of an agent.
+
 ### [Get-VSTeamMember](Get-VSTeamMember.md)
 
 Returns a team member.
