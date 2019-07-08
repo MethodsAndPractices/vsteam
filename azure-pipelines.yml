@@ -3,7 +3,7 @@ resources:
 - repo: self
 
 phases:
-- phase: Phase_2
+- phase: Linux_Phase
   displayName: Linux
   condition: succeeded()
   queue:
@@ -44,7 +44,7 @@ phases:
       testRunTitle: 'Linux Unit Tests'
     condition: succeededOrFailed()
 
-- phase: Phase_3
+- phase: MacOS_Phase
   displayName: MacOS
   condition: succeeded()
   queue:
@@ -85,7 +85,7 @@ phases:
       testRunTitle: 'Mac Unit Tests'
     condition: succeededOrFailed()
 
-- phase: Phase_1
+- phase: Windows_Phase
   displayName: Windows
   condition: succeeded()
   queue:
@@ -154,7 +154,7 @@ phases:
        .gitignore
        dist\**
       TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
-      flattenFolders: true
+      flattenFolders: false
     condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
   - task: PublishBuildArtifacts@1
