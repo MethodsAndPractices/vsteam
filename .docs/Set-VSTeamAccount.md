@@ -158,7 +158,7 @@ Parameter Sets: Secure, Plain
 
 ### -Profile
 
-The profile name stored using Set-VSTeamProfile function. You can tab complete through existing profile names.
+The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.
 
 ```yaml
 Type: String
@@ -188,7 +188,7 @@ Type: String
 
 [Set-VSTeamAccount](Set-VSTeamAccount.md)
 
-[Set-VSTeamProfile](Set-VSTeamProfile.md)
+[Add-VSTeamProfile](Add-VSTeamProfile.md)
 
 [Clear-VSTeamDefaultProject](Clear-VSTeamDefaultProject.md)
 

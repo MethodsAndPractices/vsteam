@@ -15203,7 +15203,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Profile</maml:name>
           <maml:Description>
-            <maml:para>The profile name stored using Set-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
+            <maml:para>The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -15317,7 +15317,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Profile</maml:name>
         <maml:Description>
-          <maml:para>The profile name stored using Set-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
+          <maml:para>The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -15436,7 +15436,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Set-VSTeamProfile</maml:linkText>
+        <maml:linkText>Add-VSTeamProfile</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
