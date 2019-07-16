@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.2.9
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/176) from [Carlo Wahlstedt](https://github.com/carlowahlstedt) which included the following:
+
+Updated help to refer to Add-VSTeamProfile instead of Set-VSTeamProfile
+
 ## 6.2.8
 
 Added support for Get-VSTeamJobRequest. The provider was extended to show the Job Request under the Agent.
