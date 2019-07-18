@@ -63,6 +63,19 @@ Path and file name to the JSON file that contains the definition to be updated. 
 ```yaml
 Type: String
 Required: True
+Parameter Sets: File
+Position: 1
+Accept pipeline input: true (ByPropertyName)
+```
+
+### -BuildDefinition
+
+JSON string of build definition.
+
+```yaml
+Type: String
+Required: True
+Parameter Sets: JSON
 Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```

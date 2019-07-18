@@ -25,6 +25,15 @@ PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.jso
 This command reads build.json and updates existing build definition with
 id 123 from it on the demo team project.
 
+### -------------------------- EXAMPLE 2 --------------------------
+
+```PowerShell
+PS C:\> $b = Get-VSTeamBuildDefinition -ProjectName Demo -Id 23 -Raw
+PS C:\> $b.variables.subscriptionId.value = 'Some New Value'
+PS C:\> $body = $b | ConvertTo-Json -Depth 100
+PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition $body
+```
+
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->
@@ -48,6 +57,19 @@ Path and file name to the JSON file that contains the definition to be updated. 
 ```yaml
 Type: String
 Required: True
+Parameter Sets: File
+Position: 1
+Accept pipeline input: true (ByPropertyName)
+```
+
+### -BuildDefinition
+
+JSON string of build definition.
+
+```yaml
+Type: String
+Required: True
+Parameter Sets: JSON
 Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
