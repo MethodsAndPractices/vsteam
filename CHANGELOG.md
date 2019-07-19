@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.3.0
+
+Added support for the following:
+
+- Update-VSTeamReleaseDefinition
+
+Also added Raw and JSON support to the Get-VSTeamReleaseDefinition.
+The shape of the object returned by Get-VSTeamReleaseDefinition was slightly changed.
+Release definitions was added to the SHiPS provider.
+
 ## 6.2.9
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/176) from [Carlo Wahlstedt](https://github.com/carlowahlstedt) which included the following:
