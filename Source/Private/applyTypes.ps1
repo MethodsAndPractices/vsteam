@@ -118,32 +118,6 @@ function _applyTypesToPullRequests {
    $item.PSObject.TypeNames.Insert(0, 'Team.PullRequest')
 }
 
-function _applyTypesToReleaseDefinition {
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'Team.ReleaseDefinition')
-
-   $item._links.PSObject.TypeNames.Insert(0, 'Team.Links')
-   $item._links.self.PSObject.TypeNames.Insert(0, 'Team.Link')
-   $item._links.web.PSObject.TypeNames.Insert(0, 'Team.Link')
-   $item.createdBy.PSObject.TypeNames.Insert(0, 'Team.User')
-   $item.modifiedBy.PSObject.TypeNames.Insert(0, 'Team.User')
-
-   # This is not always returned depends on expand flag
-   if ($item.PSObject.Properties.Match('artifacts').count -gt 0 -and $null -ne $item.artifacts) {
-      $item.artifacts.PSObject.TypeNames.Insert(0, 'Team.Artifacts')
-   }
-
-   if ($item.PSObject.Properties.Match('retentionPolicy').count -gt 0 -and $null -ne $item.retentionPolicy) {
-      $item.retentionPolicy.PSObject.TypeNames.Insert(0, 'Team.RetentionPolicy')
-   }
-
-   if ($item.PSObject.Properties.Match('lastRelease').count -gt 0 -and $null -ne $item.lastRelease) {
-      # This is VSTS
-      $item.lastRelease.PSObject.TypeNames.Insert(0, 'Team.Release')
-   }
-}
-
 function _applyTypesToRelease {
    param($item)
 

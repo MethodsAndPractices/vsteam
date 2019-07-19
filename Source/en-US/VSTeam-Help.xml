@@ -18071,6 +18071,16 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:para>This command reads build.json and updates existing build definition with id 123 from it on the demo team project.</maml:para>
         </dev:remarks>
       </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $b = Get-VSTeamBuildDefinition -ProjectName Demo -Id 23 -Raw
+PS C:\&gt; $b.variables.subscriptionId.value = 'Some New Value'
+PS C:\&gt; $body = $b | ConvertTo-Json -Depth 100
+PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition $body</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
     </command:examples>
     <command:relatedLinks />
   </command:command>

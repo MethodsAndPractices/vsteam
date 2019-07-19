@@ -39,6 +39,7 @@ class VSTeamProject : VSTeamDirectory {
          [VSTeamBuildDefinitions]::new('Build Definitions', $this.Name),
          [VSTeamBuilds]::new('Builds', $this.Name),
          [VSTeamQueues]::new('Queues', $this.Name),
+         [VSTeamReleaseDefinitions]::new('Release Definitions', $this.Name),
          [VSTeamReleases]::new('Releases', $this.Name),
          [VSTeamRepositories]::new('Repositories', $this.Name),
          [VSTeamTeams]::new('Teams', $this.Name)

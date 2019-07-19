@@ -42,36 +42,6 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamReleaseDefinition with no parameters' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $results
-         }
-
-         It 'should return Release definitions' {
-            Get-VSTeamReleaseDefinition -projectName project
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
-            }
-         }
-      }
-
-      Context 'Get-VSTeamReleaseDefinition with expand environments' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $results
-         }
-
-         It 'should return Release definitions' {
-            Get-VSTeamReleaseDefinition -projectName project -expand environments
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
-            }
-         }
-      }
-
       Context 'Add-VSTeamReleaseDefinition' {
          Mock Invoke-RestMethod {
             return $results
@@ -88,30 +58,6 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Get-VSTeamReleaseDefinition by ID' {
-         Mock Invoke-RestMethod { return [PSCustomObject]@{
-               queue           = [PSCustomObject]@{ name = 'Default' }
-               _links          = [PSCustomObject]@{
-                  self = [PSCustomObject]@{}
-                  web  = [PSCustomObject]@{}
-               }
-               retentionPolicy = [PSCustomObject]@{}
-               lastRelease     = [PSCustomObject]@{}
-               artifacts       = [PSCustomObject]@{}
-               modifiedBy      = [PSCustomObject]@{ name = 'project' }
-               createdBy       = [PSCustomObject]@{ name = 'test'}
-            }
-         }
-
-         It 'should return Release definition' {
-            Get-VSTeamReleaseDefinition -projectName project -id 15
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/15?api-version=$([VSTeamVersions]::Release)"
-            }
-         }
-      }
-
       Context 'Remove-VSTeamReleaseDefinition' {
          Mock Invoke-RestMethod { return $results }
 
@@ -122,16 +68,6 @@ InModuleScope VSTeam {
                $Method -eq 'Delete' -and
                $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/2?api-version=$([VSTeamVersions]::Release)"
             }
-         }
-      }
-
-      # Make sure these test run last as the need differnt
-      # [VSTeamVersions]::Account values
-      Context 'Get-VSTeamReleaseDefinition with no account' {
-         [VSTeamVersions]::Account = $null
-
-         It 'should return Release definitions' {
-            { Get-VSTeamReleaseDefinition -projectName project } | Should Throw
          }
       }
 

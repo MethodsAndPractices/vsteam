@@ -11,7 +11,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
 
 Describe "Update-VSTeamBuildDefinition" {  
-         Context "AzD" {
+   Context "AzD" {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       [VSTeamVersions]::Account = 'https://dev.azure.com/test'
