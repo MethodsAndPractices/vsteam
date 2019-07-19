@@ -483,6 +483,10 @@ Updates the project name, description or both.
 
 Allows you to update release variables for future stages to read.
 
+### [Update-VSTeamReleaseDefinition](Update-VSTeamReleaseDefinition.md)
+
+Updates a build definition for a team project.
+
 ### [Update-VSTeamServiceEndpoint](Update-VSTeamServiceEndpoint.md)
 
 Updates an existing service connection

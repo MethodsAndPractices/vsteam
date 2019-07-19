@@ -11,7 +11,7 @@ Updates a build definition for a team project.
 
 ## DESCRIPTION
 
-Reads a JSON file off disk and uses that file to update an existing build definition in the provided project.
+Reads a JSON file off disk or string and uses that file to update an existing build definition in the provided project.
 
 You must call Set-VSTeamAccount before calling this function.
 
