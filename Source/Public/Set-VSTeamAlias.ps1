@@ -113,5 +113,6 @@ function Set-VSTeamAlias {
       New-Alias Remove-Extension Remove-VSTeamExtension -Scope Global
       New-Alias Update-WorkItem Update-VSTeamWorkItem -Scope Global
       New-Alias Get-JobRequest Get-VSTeamJobRequest -Scope Global
+      New-Alias Update-ReleaseDefinition Update-VSTeamReleaseDefinition -Scope Global
    }
 }

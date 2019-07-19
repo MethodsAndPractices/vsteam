@@ -5,7 +5,6 @@ using namespace Microsoft.PowerShell.SHiPS
 class VSTeamUser : VSTeamLeaf {
 
    [string]$SubjectKind = $null
-   #[string]$CUID = $null
    [string]$Domain = $null
    [string]$PrincipalName = $null
    [string]$MailAddress = $null
@@ -21,7 +20,6 @@ class VSTeamUser : VSTeamLeaf {
       [object]$obj
    ) : base($obj.displayName, $obj.descriptor, $null) {
       $this.SubjectKind = $obj.subjectKind
-      #$this.CUID = $obj.cuid
       $this.Domain = $obj.domain
       $this.PrincipalName = $obj.principalName
       $this.MailAddress = $obj.mailAddress

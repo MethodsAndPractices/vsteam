@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Update-VSTeamBuildDefinition
+# Update-VSTeamReleaseDefinition
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Update-VSTeamBuildDefinition.md" -->
+<!-- #include "./synopsis/Update-VSTeamReleaseDefinition.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Reads a JSON file off disk or string and uses that file to update an existing build definition in the provided project.
+Reads a JSON file off disk or from string and uses that file to update an existing release definition in the provided project.
 
 You must call Set-VSTeamAccount before calling this function.
 
@@ -19,36 +19,26 @@ You must call Set-VSTeamAccount before calling this function.
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json
+PS C:\> Update-VSTeamReleaseDefinition -ProjectName Demo -Id 123 -InFile release.json
 ```
 
-This command reads build.json and updates existing build definition with
+This command reads release.json and updates existing release definition with
 id 123 from it on the demo team project.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
-PS C:\> $b = Get-VSTeamBuildDefinition -ProjectName Demo -Id 23 -Raw
+PS C:\> $b = Get-VSTeamReleaseDefinition -ProjectName Demo -Id 23 -Raw
 PS C:\> $b.variables.subscriptionId.value = 'Some New Value'
 PS C:\> $body = $b | ConvertTo-Json -Depth 100
-PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition $body
+PS C:\> Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $body
 ```
+
+This commands update the variables of the release definition.
 
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->
-
-### -Id
-
-Specifies the build definition to update by ID.
-
-To find the ID of a build definition, type Get-VSTeamBuildDefinition.
-
-```yaml
-Type: Int32
-Required: True
-Accept pipeline input: true (ByPropertyName)
-```
 
 ### -InFile
 
@@ -56,23 +46,29 @@ Path and file name to the JSON file that contains the definition to be updated. 
 
 ```yaml
 Type: String
-Required: True
+Required: true
 Parameter Sets: File
 Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -BuildDefinition
+### -ReleaseDefinition
 
-JSON string of build definition.
+JSON string of release definition.
 
 ```yaml
 Type: String
-Required: True
+Required: true 
 Parameter Sets: JSON
 Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/confirm.md" -->
+
+<!-- #include "./params/force.md" -->
+
+<!-- #include "./params/whatIf.md" -->
 
 ## INPUTS
 
@@ -82,7 +78,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.
+This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.
 
 You can tab complete from a list of available projects.
 

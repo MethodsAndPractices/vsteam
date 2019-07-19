@@ -115,20 +115,6 @@ InModuleScope VSTeam {
          }
       }
 
-      Context 'Update-VSTeamBuildDefinition' {
-         Mock Invoke-RestMethod { return $resultsVSTS }
-
-         It 'should update build definition' {
-            Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Method -eq 'Put' -and
-               $InFile -eq 'sampleFiles/builddef.json' -and
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
-            }
-         }
-      }
-
       Context 'Add-VSTeamBuildDefinition on TFS local Auth' {
          Mock Invoke-RestMethod { return $resultsVSTS }
          Mock _useWindowsAuthenticationOnPremise { return $true }
@@ -155,22 +141,6 @@ InModuleScope VSTeam {
          It 'should delete build definition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
-            }
-         }
-      }
-
-      Context 'Update-VSTeamBuildDefinition on TFS local Auth' {
-         Mock Invoke-RestMethod { return $resultsVSTS }
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
-
-         Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
-
-         It 'should update build definition' {
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Method -eq 'Put' -and
-               $InFile -eq 'sampleFiles/builddef.json' -and
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
             }
          }

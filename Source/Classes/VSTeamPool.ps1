@@ -7,7 +7,7 @@ class VSTeamPool : VSTeamDirectory {
    [int]$id
    [bool]$isHosted = $false
    [VSTeamUserEntitlement]$owner = $null
-   [VSTeamUserEntitlement]$createdBy = $null
+   [VSTeamUserEntitlement]$CreatedBy = $null
 
    # The number of agents in the pool
    [int]$count
@@ -31,7 +31,7 @@ class VSTeamPool : VSTeamDirectory {
       # On some accounts the CreatedBy is null for hosted pools
       if ($obj.PSObject.Properties.Match('createdBy').count -gt 0 -and
          $null -ne $obj.createdBy) {
-         $this.createdBy = [VSTeamUserEntitlement]::new($obj.createdBy, $null)
+         $this.CreatedBy = [VSTeamUserEntitlement]::new($obj.createdBy, $null)
       }
 
       # Depending on TFS/VSTS this might not be returned

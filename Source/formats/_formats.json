@@ -52,6 +52,8 @@
       "Team.Team.TableView.ps1xml",
       "Team.Team.ListView.ps1xml",
       "Team.Provider.Release.TableView.ps1xml",
+      "Team.ReleaseDefinition.TableView.ps1xml",
+      "Team.Provider.ReleaseDefinition.TableView.ps1xml",
       "Team.Environment.Status.TableView.ps1xml",
       "Team.Build.TableView.ps1xml",
       "Team.Build.ListView.ps1xml",

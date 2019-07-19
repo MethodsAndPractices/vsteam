@@ -225,12 +225,14 @@ InModuleScope VSTeam {
             $actual[1].ProjectName | Should Be 'TestProject'
             $actual[2].Name | Should Be 'Queues'
             $actual[2].ProjectName | Should Be 'TestProject'
-            $actual[3].Name | Should Be 'Releases'
+            $actual[3].Name | Should Be 'Release Definitions'
             $actual[3].ProjectName | Should Be 'TestProject'
-            $actual[4].Name | Should Be 'Repositories'
+            $actual[4].Name | Should Be 'Releases'
             $actual[4].ProjectName | Should Be 'TestProject'
-            $actual[5].Name | Should Be 'Teams'
+            $actual[5].Name | Should Be 'Repositories'
             $actual[5].ProjectName | Should Be 'TestProject'
+            $actual[6].Name | Should Be 'Teams'
+            $actual[6].ProjectName | Should Be 'TestProject'
          }
       }
 

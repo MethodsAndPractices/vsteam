@@ -4,9 +4,18 @@ function Get-VSTeamReleaseDefinition {
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('environments', 'artifacts', 'none')]
       [string] $Expand = 'none',
-      [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+      
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw', ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson', ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseDefinitionID')]
-      [int[]] $Id
+      [int[]] $Id,
+
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
+      [switch]$JSON,
+
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
+      [switch]$raw
    )
 
    DynamicParam {
@@ -23,10 +32,19 @@ function Get-VSTeamReleaseDefinition {
          foreach ($item in $id) {
             $resp = _callAPI -subDomain vsrm -Area release -resource definitions -Version $([VSTeamVersions]::Release) -projectName $projectName -id $item
 
-            # Apply a Type Name so we can use custom format view and custom type extensions
-            _applyTypesToReleaseDefinition -item $resp
-
-            Write-Output $resp
+            if ($JSON.IsPresent) {
+               $resp | ConvertTo-Json -Depth 99
+            }
+            else {
+               if (-not $raw.IsPresent) {
+                  $item = [VSTeamReleaseDefinition]::new($resp, $ProjectName)
+                  
+                  Write-Output $item
+               }
+               else {
+                  Write-Output $resp
+               }
+            }
          }
       }
       else {
@@ -39,12 +57,13 @@ function Get-VSTeamReleaseDefinition {
          # Call the REST API
          $resp = _callAPI -url $listurl
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
+         $objs = @()
+
          foreach ($item in $resp.value) {
-            _applyTypesToReleaseDefinition -item $item
+            $objs += [VSTeamReleaseDefinition]::new($item, $ProjectName)
          }
 
-         Write-Output $resp.value
+         Write-Output $objs
       }
    }
 }
