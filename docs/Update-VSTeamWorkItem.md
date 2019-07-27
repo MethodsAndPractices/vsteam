@@ -88,7 +88,7 @@ Required: False
 
 ### -Force
 
-Forces the command without confirmation
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter

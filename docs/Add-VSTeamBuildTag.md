@@ -60,7 +60,7 @@ Accept pipeline input: true (ByPropertyName, ByValue)
 
 ### -Confirm
 
-Prompts you for confirmation before running the cmdlet.
+Prompts you for confirmation before running the function.
 
 ```yaml
 Type: SwitchParameter
@@ -73,7 +73,7 @@ Aliases: cf
 
 ### -Force
 
-Forces the command without confirmation
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter

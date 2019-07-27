@@ -48,5 +48,19 @@
       "vsrm",
       "vssgp",
       "vssps"
-   ]
+   ],
+   "workbench.colorCustomizations": {
+      "activityBar.background": "#007699",
+      "activityBar.foreground": "#e7e7e7",
+      "activityBar.inactiveForeground": "#e7e7e799",
+      "activityBarBadge.background": "#ff80e2",
+      "activityBarBadge.foreground": "#15202b",
+      "titleBar.activeBackground": "#004f66",
+      "titleBar.inactiveBackground": "#004f6699",
+      "titleBar.activeForeground": "#e7e7e7",
+      "titleBar.inactiveForeground": "#e7e7e799",
+      "statusBar.background": "#004f66",
+      "statusBarItem.hoverBackground": "#007699",
+      "statusBar.foreground": "#e7e7e7"
+   }
 }
