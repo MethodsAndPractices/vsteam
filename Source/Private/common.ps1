@@ -8,24 +8,28 @@ $profilesPath = "$HOME/vsteam_profiles.json"
 # Not all versions support the name features.
 
 function _supportsGraph {
+   _hasAccount
    if (-not [VSTeamVersions]::Graph) {
       throw 'This account does not support the graph API.'
    }
 }
 
 function _supportsFeeds {
+   _hasAccount
    if (-not [VSTeamVersions]::Packaging) {
       throw 'This account does not support packages.'
    }
 }
 
 function _supportsSecurityNamespace {
+   _hasAccount
    if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
       throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
    }
 }
 
 function _supportsMemberEntitlementManagement {
+   _hasAccount
    if (-not [VSTeamVersions]::MemberEntitlementManagement) {
       throw 'This account does not support Member Entitlement.'
    }

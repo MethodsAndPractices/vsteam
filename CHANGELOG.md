@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.3.1
+
+Added support for the following:
+
+- Add-VSTeamMembership
+- Remove-VSTeamMembership
+- Get-VSTeamMembership
+- Test-VSTeamMembership
+
 ## 6.3.0
 
 Added support for the following:

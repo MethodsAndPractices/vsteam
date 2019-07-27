@@ -57,7 +57,7 @@ Accept pipeline input: true (ByPropertyName, ByValue)
 
 ### -Force
 
-Forces the command without confirmation
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter

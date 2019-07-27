@@ -1174,7 +1174,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1185,7 +1185,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1250,7 +1250,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1262,7 +1262,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2150,6 +2150,104 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Remove-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Add-VSTeamMembership</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamMembership</command:noun>
+      <maml:description>
+        <maml:para>Adds a membership to a container.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Adds a membership to a container.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamMembership</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+          <maml:name>MemberDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>ContainerDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+        <maml:name>MemberDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>ContainerDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamUser</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Test-VsTeamMembership</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -3564,7 +3662,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3652,7 +3750,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3776,7 +3874,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -9064,6 +9162,122 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamMembership</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamMembership</command:noun>
+      <maml:description>
+        <maml:para>Gets a memberships for a container or member.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Gets a memberships for a container or member.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamMembership</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+          <maml:name>ContainerDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamMembership</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+          <maml:name>MemberDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+        <maml:name>ContainerDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+        <maml:name>MemberDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>(Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerdescriptor }</dev:code>
+        <dev:remarks>
+          <maml:para>Get all the groups for a user</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>(Get-VSTeamMembership -ContainerDescriptor $group.id).value | % {Get-VSTeamUser -Descriptor $_.memberDescriptor }</dev:code>
+        <dev:remarks>
+          <maml:para>Get all the members for a group</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamUser</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Test-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamOption</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamOption</command:noun>
@@ -12704,7 +12918,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -12715,7 +12929,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -12766,7 +12980,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -12778,7 +12992,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -12974,7 +13188,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13000,7 +13214,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13075,7 +13289,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13113,7 +13327,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13188,7 +13402,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13230,7 +13444,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13314,7 +13528,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13356,7 +13570,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13472,7 +13686,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13483,7 +13697,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13548,7 +13762,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13560,7 +13774,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13634,7 +13848,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13672,7 +13886,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13802,7 +14016,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13830,7 +14044,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -13857,6 +14071,104 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Remove-VSTeamMembership</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>VSTeamMembership</command:noun>
+      <maml:description>
+        <maml:para>Removes a membership to a container.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Removes a membership to a container.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-VSTeamMembership</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+          <maml:name>MemberDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>ContainerDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+        <maml:name>MemberDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>ContainerDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamUser</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Test-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -13903,7 +14215,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -13944,7 +14256,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -14015,7 +14327,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14041,7 +14353,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -14107,7 +14419,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14135,7 +14447,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -14233,7 +14545,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14275,7 +14587,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -14380,7 +14692,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14422,7 +14734,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -14524,7 +14836,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14564,7 +14876,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -14616,7 +14928,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14627,7 +14939,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14664,7 +14976,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14675,7 +14987,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -14700,7 +15012,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -14712,7 +15024,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -15109,7 +15421,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15202,7 +15514,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15283,7 +15595,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15321,7 +15633,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15453,7 +15765,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -15561,7 +15873,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15575,7 +15887,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -15647,7 +15959,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15695,7 +16007,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15759,7 +16071,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -15878,7 +16190,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -15958,7 +16270,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -16039,7 +16351,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -16053,7 +16365,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -16222,7 +16534,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -16313,7 +16625,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -16401,7 +16713,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -16455,7 +16767,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -17556,6 +17868,113 @@ PS demo:\&gt; Get-ChildItem</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Test-VSTeamMembership</command:name>
+      <command:verb>Test</command:verb>
+      <command:noun>VSTeamMembership</command:noun>
+      <maml:description>
+        <maml:para>Tests the membership in a container.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Tests the membership in a container.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Test-VSTeamMembership</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+          <maml:name>MemberDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>ContainerDescriptor</maml:name>
+          <maml:Description>
+            <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
+        <maml:name>MemberDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>ContainerDescriptor</maml:name>
+        <maml:Description>
+          <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>$True or $False</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamUser</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VsTeamMembership</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Update-VSTeam</command:name>
       <command:verb>Update</command:verb>
       <command:noun>VSTeam</command:noun>
@@ -17622,7 +18041,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -17633,7 +18052,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -17708,7 +18127,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -17720,7 +18139,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -17840,7 +18259,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -17851,7 +18270,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -17926,7 +18345,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -17938,7 +18357,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18234,7 +18653,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18286,7 +18705,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18565,7 +18984,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18603,7 +19022,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18655,7 +19074,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18774,7 +19193,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18838,7 +19257,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18940,7 +19359,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18951,7 +19370,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19014,7 +19433,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19026,7 +19445,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19133,7 +19552,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19144,7 +19563,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19195,7 +19614,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19206,7 +19625,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19269,7 +19688,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19281,7 +19700,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19398,7 +19817,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19450,7 +19869,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19560,7 +19979,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19604,7 +20023,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19660,7 +20079,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -20123,7 +20542,7 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the command without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -20197,7 +20616,7 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the command without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>

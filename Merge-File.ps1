@@ -102,7 +102,7 @@ function Merge-Format {
          $fileContents = Get-Content $file
          $newFileContents = ($fileContents -replace '<!--.+-->', '')
          [xml]$xml = $newFileContents
-         
+
          $finalXml += $xml.Configuration.ViewDefinitions.InnerXml
       }
 
@@ -173,6 +173,7 @@ function Merge-Class {
    process {
       $usingsSb = New-Object System.Text.StringBuilder
       $contents = New-Object System.Text.StringBuilder
+      $usings = @()
 
       ForEach ($file in $files) {
          Write-Verbose -Message "Merging from $file"

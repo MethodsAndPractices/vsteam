@@ -61,7 +61,7 @@ Path and file name to the JSON file that contains the definition to be updated. 
 
 ```yaml
 Type: String
-Required: True
+Required: true
 Parameter Sets: File
 Position: 1
 Accept pipeline input: true (ByPropertyName)
@@ -73,7 +73,7 @@ JSON string of release definition.
 
 ```yaml
 Type: String
-Required: True
+Required: true 
 Parameter Sets: JSON
 Position: 1
 Accept pipeline input: true (ByPropertyName)
@@ -81,7 +81,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -Confirm
 
-Prompts you for confirmation before running the cmdlet.
+Prompts you for confirmation before running the function.
 
 ```yaml
 Type: SwitchParameter
@@ -94,7 +94,7 @@ Aliases: cf
 
 ### -Force
 
-Forces the command without confirmation
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter
