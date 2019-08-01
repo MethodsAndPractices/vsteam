@@ -67,6 +67,9 @@ InModuleScope VSTeam {
 
          $null = Get-VSTeamMembership -MemberDescriptor $UserDescriptor
          It "Should get a container's members" {
+            # This should stop the call to cache projects
+            [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Method -eq "Get"
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$MemberDescriptor*" -and
@@ -82,6 +85,9 @@ InModuleScope VSTeam {
 
          $null = Get-VSTeamMembership -ContainerDescriptor $GroupDescriptor
          It "Should get a container's members" {
+            # This should stop the call to cache projects
+            [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Method -eq "Get"
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$GroupDescriptor*" -and
