@@ -18,7 +18,8 @@ class VSTeamAccount : SHiPSDirectory {
       $poolsAndProjects = @(
          [VSTeamPools]::new('Agent Pools'),
          [VSTeamExtensions]::new('Extensions')
-         [VSTeamFeeds]::new('Feeds')
+         [VSTeamFeeds]::new('Feeds'),
+         [VSTeamPermissions]::new('Permissions')
       )
 
       $items = Get-VSTeamProject | Sort-Object Name
