@@ -2,7 +2,7 @@
 
 ## 6.3.1
 
-Added support for the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/178) from [Jim W](https://github.com/Seekatar) which included the following:
 
 - Add-VSTeamMembership
 - Remove-VSTeamMembership
