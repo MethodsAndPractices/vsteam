@@ -1,0 +1,1 @@
+Gets a memberships for a container or member.

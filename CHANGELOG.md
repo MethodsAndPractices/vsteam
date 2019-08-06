@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.3.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/178) from [Jim W](https://github.com/Seekatar) which included the following:
+
+- Add-VSTeamMembership
+- Remove-VSTeamMembership
+- Get-VSTeamMembership
+- Test-VSTeamMembership
+
 ## 6.3.0
 
 Added support for the following:
@@ -21,10 +30,10 @@ Updated help to refer to Add-VSTeamProfile instead of Set-VSTeamProfile
 Added support for Get-VSTeamJobRequest. The provider was extended to show the Job Request under the Agent.
 
 - Account
-   - Agent Pools
-     - Pool1
-       - Agent1
-         - JobRequest1
+  - Agent Pools
+    - Pool1
+      - Agent1
+        - JobRequest1
 
 ## 6.2.7
 

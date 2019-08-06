@@ -31,7 +31,7 @@ You can now call other functions that require a project name without passing the
 
 ### -Force
 
-Forces the command without confirmation
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter
