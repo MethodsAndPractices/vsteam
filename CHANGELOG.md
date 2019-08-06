@@ -30,10 +30,10 @@ Updated help to refer to Add-VSTeamProfile instead of Set-VSTeamProfile
 Added support for Get-VSTeamJobRequest. The provider was extended to show the Job Request under the Agent.
 
 - Account
-   - Agent Pools
-     - Pool1
-       - Agent1
-         - JobRequest1
+  - Agent Pools
+    - Pool1
+      - Agent1
+        - JobRequest1
 
 ## 6.2.7
 

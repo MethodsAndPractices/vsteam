@@ -14,14 +14,17 @@ Gets a memberships for a container or member.
 Gets a memberships for a container or member.
 
 ## EXAMPLES
+
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-(Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerdescriptor }
+(Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerDescriptor }
 ```
+
 Get all the groups for a user
 
 ### -------------------------- EXAMPLE 2 --------------------------
+
 ```PowerShell
 (Get-VSTeamMembership -ContainerDescriptor $group.id).value | % {Get-VSTeamUser -Descriptor $_.memberDescriptor }
 ```
@@ -55,7 +58,6 @@ Position: 0
 ## INPUTS
 
 ## OUTPUTS
-
 
 ## NOTES
 

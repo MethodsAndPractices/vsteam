@@ -23,7 +23,8 @@
 ## INPUTS
 
 ## OUTPUTS
-### $True or $False
+
+### System.Boolean
 
 ## NOTES
 

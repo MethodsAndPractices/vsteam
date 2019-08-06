@@ -9240,7 +9240,7 @@ ID Title          Status
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>(Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerdescriptor }</dev:code>
+        <dev:code>(Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerDescriptor }</dev:code>
         <dev:remarks>
           <maml:para>Get all the groups for a user</maml:para>
         </dev:remarks>
@@ -17937,7 +17937,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>$True or $False</maml:name>
+          <maml:name>System.Boolean</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
