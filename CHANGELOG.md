@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.3.2
+
+Fixed typo in README.md file for better readability.
+
 ## 6.3.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/178) from [Jim W](https://github.com/Seekatar) which included the following:
