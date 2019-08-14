@@ -9,16 +9,32 @@ $profilesPath = "$HOME/vsteam_profiles.json"
 
 function _supportsGraph {
    _hasAccount
-   if (-not [VSTeamVersions]::Graph) {
+   if ($false -eq $(_testGraphSupport)) {
       throw 'This account does not support the graph API.'
    }
 }
 
+function _testGraphSupport {
+   if (-not [VSTeamVersions]::Graph) {
+      return $false
+   }
+
+   return $true
+}
+
 function _supportsFeeds {
    _hasAccount
-   if (-not [VSTeamVersions]::Packaging) {
+   if ($false -eq $(_testFeedSupport)) {
       throw 'This account does not support packages.'
    }
+}
+
+function _testFeedSupport {
+   if (-not [VSTeamVersions]::Packaging) {
+      return $false
+   }
+
+   return $true
 }
 
 function _supportsSecurityNamespace {
