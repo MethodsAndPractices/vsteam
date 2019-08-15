@@ -1,5 +1,16 @@
 # Changelog
 
+## 6.3.2
+
+Add PSDrive support for memberships
+
+- Memberships
+  - Groups
+      - Group1
+  - Users
+      - User1
+
+
 ## 6.3.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/178) from [Jim W](https://github.com/Seekatar) which included the following:

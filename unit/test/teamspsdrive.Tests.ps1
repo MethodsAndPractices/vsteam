@@ -110,7 +110,7 @@ InModuleScope VSTeam {
          }
       }
    }
-   
+
    Describe 'VSTS Build Definition' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -209,7 +209,8 @@ InModuleScope VSTeam {
          # Skip 0 because that will be Agent Pools
          # Skip 1 because that will be Extensions
          # Skip 2 because that will be Feeds
-         $project = $account.GetChildItem()[3]
+         # Skip 3 because that will be Permissions
+         $project = $account.GetChildItem()[4]
 
          It 'Should return projects' {
             $project | Should Not Be $null
@@ -536,6 +537,30 @@ InModuleScope VSTeam {
 
          It 'Should return team' {
             $team | Should Not Be $null
+         }
+      }
+
+      Context 'Permissions' {
+         Set-StrictMode -Version Latest
+         Mock Get-VSTeamGroup { return [VSTeamGroup]::new(@{})}
+         Mock Get-VSTeamUser { return [VSTeamGroup]::new(@{})}
+
+         $permissions = [VSTeamPermissions]::new('Permissions')
+
+         It 'Should create Permissions' {
+            $permissions | Should Not Be $null
+            $permissions.GetChildItem().Count | Should Be 2
+         }
+
+         $groups = $permissions.GetChildItem()[0]
+         $users = $permissions.GetChildItem()[1]
+
+         It 'Should return groups' {
+            $groups | Should Not Be $null
+         }
+
+         It 'Should return users' {
+            $users | Should Not Be $null
          }
       }
    }
