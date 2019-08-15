@@ -2,7 +2,17 @@
 
 ## 6.3.2
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/181) from [Michael Erpenbeck](https://github.com/GitMje) which included the following:
 Fixed typo in README.md file for better readability.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/179) from [Jim W](https://github.com/Seekatar) which included the following:
+Add PSDrive support for memberships
+
+- Memberships
+  - Groups
+    - Group1
+  - Users
+    - User1
 
 ## 6.3.1
 
