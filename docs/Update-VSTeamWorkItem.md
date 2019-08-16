@@ -37,6 +37,17 @@ ID Title              Status
 6  Updated Work Item  To Do
 ```
 
+### -------------------------- EXAMPLE 3 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> Update-VSTeamWorkItem -ID 6 -Tag TestTag1
+
+ID Title              Status
+-- -----              ------
+6  Updated Work Item  To Do
+```
+
 ## PARAMETERS
 
 ### -Id
@@ -86,6 +97,14 @@ Type: String
 Required: False
 ```
 
+### -Tag
+
+The tag to add to the work item
+
+```yaml
+Type: String
+Required: False
+```
 ### -Force
 
 Forces the function without confirmation

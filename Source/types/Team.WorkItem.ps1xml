@@ -39,6 +39,10 @@
             <Name>Reason</Name>
             <GetScriptBlock>$this.fields.PSObject.Properties['System.Reason'].Value</GetScriptBlock>
          </ScriptProperty>
+         <ScriptProperty>
+            <Name>Tags</Name>
+            <GetScriptBlock>$this.fields.PSObject.Properties['System.Tags'].Value</GetScriptBlock>
+         </ScriptProperty>
          <MemberSet>
             <Name>PSStandardMembers</Name>
             <Members>

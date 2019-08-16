@@ -88,10 +88,18 @@ InModuleScope VSTeam {
 
             return $obj
          }
+         # have to mock the call to Get-VsTeamWorkItem for Update-VSTeamWorkItem unit tests
+         # This is because Get-VsTeamWorkItem is called in Update-VsTeamWorkItem in order to
+         # get already existing tags, so we don't blow them away when we PATCH.
+         Mock Get-VsTeamWorkItem {
+            return @{
+               Tags = @('MockedTag')
+            }
+         }
 
          It 'Without Default Project should update work item' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
-            Update-VSTeamWorkItem -Id 1 -Title Test -Force
+            Update-VSTeamWorkItem -Id 1 -Title Test -Tag TestTag1 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Patch' -and
@@ -104,7 +112,7 @@ InModuleScope VSTeam {
 
          It 'With Default Project should update work item' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
-            Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -Force
+            Update-VSTeamWorkItem -Id 1 -Title Test1 -Description Testing -Tag TestTag1 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Patch' -and
@@ -113,6 +121,8 @@ InModuleScope VSTeam {
                $Body -like '*Testing*' -and
                $Body -like '*/fields/System.Title*' -and
                $Body -like '*/fields/System.Description*' -and
+               $Body -like '*TestTag1*' -and
+               $Body -like '*/fields/System.Tags*' -and
                $Body -like '*`]' -and # Make sure the body is an array
                $ContentType -eq 'application/json-patch+json' -and
                $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"

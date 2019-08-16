@@ -16,11 +16,21 @@ function Update-VSTeamWorkItem {
       [Parameter(Mandatory = $false)]
       [string]$AssignedTo,
 
+      [Parameter(Mandatory = $false)]
+      [string]$Tag,
+
       [switch] $Force
    )
 
    Process {
-      # Constructing the contents to be send.
+
+      if ($Tag.Length -ge 1) {
+         # Get existing tags (if any) so we do not lose them
+         # when calling the api with PATCH.
+         # Then add on the value in $Tag
+         $Tags = "$((Get-VSTeamWorkItem -Id $Id).Tags);$($Tag)"
+      }
+      # Constructing the contents to be sent.
       # Empty parameters will be skipped when converting to json.
       $body = @(
          @{
@@ -42,6 +52,11 @@ function Update-VSTeamWorkItem {
             op    = "add"
             path  = "/fields/System.AssignedTo"
             value = $AssignedTo
+         }
+         @{
+            op    = "add"
+            path  = "/fields/System.Tags"
+            value = $Tags
          }) | Where-Object { $_.value}
 
       # It is very important that even if the user only provides
