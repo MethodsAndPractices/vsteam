@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.3.2
+
+Modified Update-VSTeamWorkItem to have -Tag parameter, which will add a tag to a work item
+
 ## 6.3.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/178) from [Jim W](https://github.com/Seekatar) which included the following:
