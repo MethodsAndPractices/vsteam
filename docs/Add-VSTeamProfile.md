@@ -96,7 +96,7 @@ Parameter Sets: Windows
 
 ### -UseBearerToken
 
-Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
+Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
 
 ```yaml
 Type: SwitchParameter
@@ -143,3 +143,4 @@ Default value: TFS2017 for TFS and AzD for AzD
 [Set-VSTeamAccount](Set-VSTeamAccount.md)
 
 [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+

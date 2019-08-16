@@ -36,8 +36,8 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Required: true
 Position: 0
+Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -65,10 +65,14 @@ Type: String
 
 ### -Force
 
-Forces the command without confirmation
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter
+Required: false
+Position: Named
+Accept pipeline input: false
+Parameter Sets: (All)
 ```
 
 ## INPUTS
@@ -78,3 +82,4 @@ Type: SwitchParameter
 ## NOTES
 
 ## RELATED LINKS
+

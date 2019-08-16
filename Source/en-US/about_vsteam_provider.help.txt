@@ -9,6 +9,19 @@ SHORT DESCRIPTION
    - Agent Pools
      - Pool1
        - Agent1
+         - JobRequest1
+         - JobRequest2
+   - Extensions
+     - Extension1
+     - Extension2
+   - Feeds
+     - Feed1
+     - Feed2
+   - Memberships
+     - Groups
+       - Group1
+     - Users
+       - User1
    - Project1
    - Project2
    - Builds
@@ -31,10 +44,10 @@ SHORT DESCRIPTION
          - Ref2
 
 LONG DESCRIPTION
-   You use the New-PSDrive cmdlet to mount a drive to your account. 
+   You use the New-PSDrive cmdlet to mount a drive to your account.
 
    You can also use the -Drive parameter of Set-VSTeamAccount to have
-   the required command written to the console so you can copy and 
+   the required command written to the console so you can copy and
    paste the command.
 
    The provider caches the results. To force a round trip to skip the
@@ -47,7 +60,7 @@ EXAMPLES
    Get-ChildItem
 
    Set-VSTeamAccount -Profile '[profileName]' -Drive '[driveName]'
-  
+
    To map a drive run the following command:
    New-PSDrive -Name driveName -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
 

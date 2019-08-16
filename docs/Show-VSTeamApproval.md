@@ -36,8 +36,8 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Required: true
 Position: 0
+Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -78,3 +78,4 @@ You can pipe build definition IDs to this function.
 [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 
 [Remove-VSTeamBuildDefinition](Remove-VSTeamBuildDefinition.md)
+

@@ -6,9 +6,9 @@ class VSTeamRelease : VSTeamDirectory {
    [string]$ID = $null
    [string]$Status = $null
    [object]$Environments = $null
-   [VSTeamUser]$CreatedBy = $null
-   [VSTeamUser]$RequestedFor = $null
-   [VSTeamUser]$ModifiedBy = $null
+   [VSTeamUserEntitlement]$CreatedBy = $null
+   [VSTeamUserEntitlement]$RequestedFor = $null
+   [VSTeamUserEntitlement]$ModifiedBy = $null
    [string]$DefinitionName = $null
    [object]$releaseDefinition = $null
    [datetime]$CreatedOn #DateTime is not nullable
@@ -23,9 +23,12 @@ class VSTeamRelease : VSTeamDirectory {
       $this.Environments = $obj.environments
       $this.releaseDefinition = $obj.releaseDefinition
       $this.DefinitionName = $obj.releaseDefinition.name
-      $this.CreatedBy = [VSTeamUser]::new($obj.createdBy, $ProjectName)
-      $this.ModifiedBy = [VSTeamUser]::new($obj.modifiedBy, $ProjectName)
-      $this.RequestedFor = [VSTeamUser]::new($obj.requestedFor, $ProjectName)
+      $this.CreatedBy = [VSTeamUserEntitlement]::new($obj.createdBy, $ProjectName)
+      $this.ModifiedBy = [VSTeamUserEntitlement]::new($obj.modifiedBy, $ProjectName)
+
+      if ($obj.PSObject.Properties.Match('RequestedFor').count -gt 0) {
+         $this.RequestedFor = [VSTeamUserEntitlement]::new($obj.requestedFor, $ProjectName)
+      }
 
       $this._internalObj = $obj
 

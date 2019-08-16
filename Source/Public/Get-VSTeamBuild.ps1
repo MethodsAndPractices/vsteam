@@ -47,41 +47,45 @@ function Get-VSTeamBuild {
    process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
+      try {
+         if ($id) {
+            foreach ($item in $id) {
+               # Build the url to return the single build
+               $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' -id $item `
+                  -Version $([VSTeamVersions]::Build)
 
-      if ($id) {
-         foreach ($item in $id) {
-            # Build the url to return the single build
-            $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' -id $item `
-               -Version $([VSTeamVersions]::Build)
+               _applyTypesToBuild -item $resp
 
-            _applyTypesToBuild -item $resp
+               Write-Output $resp
+            }
+         }
+         else {
+            # Build the url to list the builds
+            $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' `
+               -Version $([VSTeamVersions]::Build) `
+               -Querystring @{
+               '$top'                   = $top
+               'type'                   = $type
+               'buildNumber'            = $buildNumber
+               'resultFilter'           = $resultFilter
+               'statusFilter'           = $statusFilter
+               'reasonFilter'           = $reasonFilter
+               'maxBuildsPerDefinition' = $maxBuildsPerDefinition
+               'queues'                 = ($queues -join ',')
+               'properties'             = ($properties -join ',')
+               'definitions'            = ($definitions -join ',')
+            }
 
-            Write-Output $resp
+            # Apply a Type Name so we can use custom format view and custom type extensions
+            foreach ($item in $resp.value) {
+               _applyTypesToBuild -item $item
+            }
+
+            Write-Output $resp.value
          }
       }
-      else {
-         # Build the url to list the builds
-         $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' `
-            -Version $([VSTeamVersions]::Build) `
-            -Querystring @{
-            '$top'                   = $top
-            'type'                   = $type
-            'buildNumber'            = $buildNumber
-            'resultFilter'           = $resultFilter
-            'statusFilter'           = $statusFilter
-            'reasonFilter'           = $reasonFilter
-            'maxBuildsPerDefinition' = $maxBuildsPerDefinition
-            'queues'                 = ($queues -join ',')
-            'properties'             = ($properties -join ',')
-            'definitions'            = ($definitions -join ',')
-         }
-
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypesToBuild -item $item
-         }
-
-         Write-Output $resp.value
+      catch {
+         _handleException $_
       }
    }
 }

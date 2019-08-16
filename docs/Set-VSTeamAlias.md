@@ -19,10 +19,14 @@ In version 6.0 the default aliases were removed to prevent conflicts with other 
 
 ### -Force
 
-Forces the command without confirmation
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter
+Required: false
+Position: Named
+Accept pipeline input: false
+Parameter Sets: (All)
 ```
 
 ## INPUTS
@@ -36,3 +40,4 @@ Type: SwitchParameter
 ## NOTES
 
 ## RELATED LINKS
+

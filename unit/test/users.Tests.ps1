@@ -1,15 +1,17 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
+
+   # Set the account to use for testing. A normal user would do this
+   # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
-   Describe "Users TFS Errors" {
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+   $userListResult = Get-Content "$PSScriptRoot\sampleFiles\users.json" -Raw | ConvertFrom-Json
+   $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
 
-      Context 'Get-VSTeamUser' {
+   # The Graph API is not supported on TFS
+   Describe "Users TFS Errors" {
+     Context 'Get-VSTeamUser' {
          Mock _callAPI { throw 'Should not be called' } -Verifiable
 
          It 'Should throw' {
@@ -17,246 +19,78 @@ InModuleScope VSTeam {
 
             { Get-VSTeamUser } | Should Throw
          }
-
-         It '_callAPI should not be called' {
-            Assert-MockCalled _callAPI -Exactly 0
-         }
       }
    }
 
-   Describe "Users VSTS" {
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+   Describe 'Users VSTS' {
+      # You have to set the version or the api-version will not be added when
+      # [VSTeamVersions]::Graph = ''
+      [VSTeamVersions]::Graph = '5.0'
 
-      . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
+      Context 'Get-VSTeamUser list' {
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            # Write-Host $args
 
-      # Must be defined or call will throw error
-      [VSTeamVersions]::MemberEntitlementManagement = '4.1-preview'
+            return $userListResult
+         } -Verifiable
 
-      Context 'Get-VSTeamUser no parameters' {
-         Mock  _callAPI { return [PSCustomObject]@{
-               members = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } }
-            }
-         }
+         Get-VSTeamUser
 
          It 'Should return users' {
-            Get-VSTeamUser
-
-            # Make sure it was called with the correct URI
-            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0"
+            # With PowerShell core the order of the query string is not the
+            # same from run to run!  So instead of testing the entire string
+            # matches I have to search for the portions I expect but can't
+            # assume the order.
+            # The general string should look like this:
+            # "https://vssps.dev.azure.com/test/_apis/graph/users?api-version=$([VSTeamVersions]::Graph)"
+            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/users*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
             }
          }
       }
 
-      Context 'Get-VSTeamUser By ID' {
-         Mock  _callAPI {
-            return [PSCustomObject]@{
-               accessLevel = [PSCustomObject]@{ }
-               email       = 'fake@email.com'
-            }
-         }
+      Context 'Get-VSTeamUser by subjectTypes' {
+         Mock Invoke-RestMethod { return $userListResult } -Verifiable
 
-         It 'Should return users with projects' {
-            Get-VSTeamUser -Id '00000000-0000-0000-0000-000000000000'
+         Get-VSTeamUser -SubjectTypes vss,aad
 
-            # Make sure it was called with the correct URI
-            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $subDomain -eq 'vsaex' -and
-               $id -eq '00000000-0000-0000-0000-000000000000' -and
-               $resource -eq 'userentitlements'
+         It 'Should return users' {
+            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/users*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
+               $Uri -like "*subjectTypes=vss,aad*"
             }
          }
       }
 
-      Context 'Get-VSTeamUser with select for projects' {
-         Mock  _callAPI {
-            return [PSCustomObject]@{
-               members = [PSCustomObject]@{
-                  accessLevel = [PSCustomObject]@{ }
-                  email       = 'fake@email.com'
-               }
-            }
-         }
+      Context 'Get-VSTeamUser by descriptor' {
+         Mock Invoke-RestMethod { return $userSingleResult } -Verifiable
 
-         It 'Should return users with projects' {
-            Get-VSTeamUser -Select Projects
+         Get-VSTeamUser -UserDescriptor 'aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj'
 
-            # Make sure it was called with the correct URI
-            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
+         It 'Should return the user' {
+            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/users/aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
             }
          }
       }
 
-      Context 'Remove-VSTeamUser by Id' {
-         Mock _callAPI -ParameterFilter {
-            $Method -eq 'Delete' -and
-            $subDomain -eq 'vsaex' -and
-            $id -eq '00000000-0000-0000-0000-000000000000' -and
-            $resource -eq 'userentitlements' -and
-            $version -eq [VSTeamVersions]::MemberEntitlementManagement
-         }
-
-         Mock _callAPI {
-            return [PSCustomObject]@{
-               accessLevel = [PSCustomObject]@{ }
-               email       = 'test@user.com'
-               userName    = 'Test User'
-               id          = '00000000-0000-0000-0000-000000000000'
-            }
-         }
-
-         Remove-VSTeamUser -UserId '00000000-0000-0000-0000-000000000000' -Force
-
-         It 'Should remmove user' {
-            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $subDomain -eq 'vsaex' -and
-               $id -eq '00000000-0000-0000-0000-000000000000' -and
-               $resource -eq 'userentitlements' -and
-               $method -eq 'Delete' -and
-               $version -eq [VSTeamVersions]::MemberEntitlementManagement
-            }
-         }
-      }
-
-      Context 'Remove-VSTeamUser by email' {
-         Mock _callAPI -ParameterFilter {
-            $Method -eq 'Delete' -and
-            $subDomain -eq 'vsaex' -and
-            $id -eq '00000000-0000-0000-0000-000000000000' -and
-            $resource -eq 'userentitlements' -and
-            $version -eq [VSTeamVersions]::MemberEntitlementManagement
-         }
-
-         Mock _callAPI {
-            return [PSCustomObject]@{
-               members = [PSCustomObject]@{
-                  accessLevel = [PSCustomObject]@{ }
-                  email       = 'test@user.com'
-                  userName    = 'Test User'
-                  id          = '00000000-0000-0000-0000-000000000000'
-               }
-            }
-         }
-
-         Remove-VSTeamUser -Email 'test@user.com' -Force
-
-         It 'Should remmove user' {
-            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $Method -eq 'Delete' -and
-               $subDomain -eq 'vsaex' -and
-               $id -eq '00000000-0000-0000-0000-000000000000' -and
-               $resource -eq 'userentitlements' -and
-               $version -eq [VSTeamVersions]::MemberEntitlementManagement
-            }
-         }
-      }
-
-      Context 'Remove-VSTeamUser by invalid email' {
-         Mock _callAPI { return [PSCustomObject]@{
-               members = [PSCustomObject]@{
-                  accessLevel = [PSCustomObject]@{ }
-                  email       = 'test@user.com'
-                  id          = '00000000-0000-0000-0000-000000000000'
-               }
-            }
-         }
+      Context 'Get-VSTeamUser list throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
 
          It 'Should throw' {
-            { Remove-VSTeamUser -Email 'not@found.com' -Force } | Should Throw
+            { Get-VSTeamUser } | Should Throw
          }
       }
 
-      Context 'Update-VSTeamUser by invalid email' {
-         Mock _callAPI { return [PSCustomObject]@{
-               members = [PSCustomObject]@{
-                  accessLevel = [PSCustomObject]@{ }
-                  email       = 'test@user.com'
-                  id          = '00000000-0000-0000-0000-000000000000'
-               }
-            }
-         }
+      Context 'Get-VSTeamUser by descriptor throws' {
+         Mock Invoke-RestMethod { throw 'Error' }
 
-         It 'Update User with invalid email should throw' {
-            { Update-VSTeamUser -Email 'not@found.com' -License 'Express' -Force } | Should Throw
-         }
-      }
-
-      Context 'Update-VSTeamUser by invalid id' {
-         Mock _callAPI { return [PSCustomObject]@{
-               members = [PSCustomObject]@{
-                  accessLevel = [PSCustomObject]@{ }
-                  email       = 'test@user.com'
-                  id          = '00000000-0000-0000-0000-000000000000'
-               }
-            }
-         }
-
-         It 'Update User with invalid id should throw' {
-            { Update-VSTeamUser -Id '11111111-0000-0000-0000-000000000000'  -License 'Express' -Force } | Should Throw
-         }
-      }
-
-      Context 'Add-VSTeamUser' {
-         $obj = @{
-            accessLevel         = @{
-               accountLicenseType = 'earlyAdopter'
-            }
-            user                = @{
-               principalName = 'test@user.com'
-               subjectKind   = 'user'
-            }
-            projectEntitlements = @{
-               group      = @{
-                  groupType = 'ProjectContributor'
-               }
-               projectRef = @{
-                  id = $null
-               }
-            }
-         }
-
-         $expected = $obj | ConvertTo-Json
-
-         Mock _callAPI -Verifiable -ParameterFilter {
-            $Method -eq 'Post' -and
-            $Body -eq $expected
-         }
-
-         Add-VSTeamUser -License earlyAdopter -Email 'test@user.com'
-
-         It 'Should add a user' {
-            Assert-VerifiableMock
-         }
-      }
-
-      Context 'Update user should update' {
-
-         Mock _callAPI { return [PSCustomObject]@{
-               members = [PSCustomObject]@{
-                  accessLevel = [PSCustomObject]@{
-                     accountLicenseType = "Stakeholder"
-                  }
-                  email       = 'test@user.com'
-                  id          = '00000000-0000-0000-0000-000000000000'
-               }
-            }
-         }
-
-         Update-VSTeamUser -License 'Stakeholder' -Email 'test@user.com' -Force
-
-         It 'Should update a user' {
-            Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $Method -eq 'Patch' -and
-               $subDomain -eq 'vsaex' -and
-               $id -eq '00000000-0000-0000-0000-000000000000' -and
-               $resource -eq 'userentitlements' -and
-               $version -eq [VSTeamVersions]::MemberEntitlementManagement
-            }
-
+         It 'Should throw' {
+            { Get-VSTeamUser -UserDescriptor  } | Should Throw
          }
       }
    }

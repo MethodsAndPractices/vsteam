@@ -71,8 +71,8 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Required: true
 Position: 0
+Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -154,3 +154,4 @@ BuildDefinition and QueueName are dynamic parameters and use the default project
 If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamBuild you will have to type in the names.
 
 ## RELATED LINKS
+

@@ -56,7 +56,7 @@ function Set-VSTeamAccount {
          $levelParam = _buildDynamicParam -ParameterName 'Level' -arrSet $arrSet
          $RuntimeParameterDictionary.Add('Level', $levelParam)
 
-         $winAuthParam = _buildDynamicSwitchParam -ParameterName 'UseWindowsAuthentication' -Mandatory $true -ParameterSetName 'Windows'
+         $winAuthParam = _buildDynamicParam -ParameterName 'UseWindowsAuthentication' -Mandatory $true -ParameterSetName 'Windows' -ParameterType ([switch])
          $RuntimeParameterDictionary.Add('UseWindowsAuthentication', $winAuthParam)
       }
 
@@ -64,6 +64,10 @@ function Set-VSTeamAccount {
    }
 
    process {
+      # invalidate cache when changing account/collection
+      # otherwise dynamic parameters being picked for a wrong collection
+      [VSTeamProjectCache]::timestamp = -1
+      
       # Bind the parameter to a friendly variable
       $Profile = $PSBoundParameters['Profile']
 
@@ -130,6 +134,11 @@ function Set-VSTeamAccount {
             $encodedPat = ''
             $token = ''
          }
+      }
+
+      if((_isOnWindows) -and ($UsingWindowsAuth) -and $(_isVSTS $Account)) {
+         Write-Error "Windows Auth can only be used with Team Fondation Server or Azure DevOps Server.$([Environment]::NewLine)Provide a Personal Access Token or Bearer Token to connect to Azure DevOps Services."
+         return
       }
 
       if ($Force -or $pscmdlet.ShouldProcess($Account, "Set Account")) {

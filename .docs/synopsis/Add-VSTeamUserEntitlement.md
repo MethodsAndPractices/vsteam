@@ -1,0 +1,1 @@
+Add a user, assign license and extensions and make them a member of a project group in an account.

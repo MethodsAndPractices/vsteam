@@ -1,0 +1,1 @@
+Remove access control lists under the specified security namespace.

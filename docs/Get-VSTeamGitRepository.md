@@ -34,7 +34,7 @@ This command returns all the Git repositories for the Demo team project.
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```PowerShell
-PS C:\> git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteurl)
+PS C:\> git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteUrl)
 ```
 
 This command gets the remote URL and passes it to git clone command.
@@ -52,8 +52,8 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Required: true
 Position: 0
+Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -93,3 +93,4 @@ Accept pipeline input: true (ByPropertyName)
 ## NOTES
 
 ## RELATED LINKS
+

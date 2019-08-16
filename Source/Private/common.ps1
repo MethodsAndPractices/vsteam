@@ -8,20 +8,46 @@ $profilesPath = "$HOME/vsteam_profiles.json"
 # Not all versions support the name features.
 
 function _supportsGraph {
-   if (-not [VSTeamVersions]::Graph) {
+   _hasAccount
+   if ($false -eq $(_testGraphSupport)) {
       throw 'This account does not support the graph API.'
    }
 }
 
+function _testGraphSupport {
+   if (-not [VSTeamVersions]::Graph) {
+      return $false
+   }
+
+   return $true
+}
+
 function _supportsFeeds {
-   if (-not [VSTeamVersions]::Packaging) {
+   _hasAccount
+   if ($false -eq $(_testFeedSupport)) {
       throw 'This account does not support packages.'
    }
 }
 
+function _testFeedSupport {
+   if (-not [VSTeamVersions]::Packaging) {
+      return $false
+   }
+
+   return $true
+}
+
+function _supportsSecurityNamespace {
+   _hasAccount
+   if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
+      throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
+   }
+}
+
 function _supportsMemberEntitlementManagement {
+   _hasAccount
    if (-not [VSTeamVersions]::MemberEntitlementManagement) {
-       throw 'This account does not support Member Entitlement.'
+      throw 'This account does not support Member Entitlement.'
    }
 }
 
@@ -102,10 +128,12 @@ function _handleException {
 
    $handled = $false
 
-   if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and $null -ne $ex.Exception.Response -and $ex.Exception.Response.StatusCode -ne "BadRequest") {
+   if ($ex.Exception.PSObject.Properties.Match('Response').count -gt 0 -and
+      $null -ne $ex.Exception.Response -and
+      $ex.Exception.Response.StatusCode -ne "BadRequest") {
       $handled = $true
       $msg = "An error occurred: $($ex.Exception.Message)"
-      Write-Warning $msg
+      Write-Warning -Message $msg
    }
 
    try {
@@ -115,11 +143,11 @@ function _handleException {
 
       if (0 -eq $hasValueProp.count) {
          $handled = $true
-         Write-Warning $e.message
+         Write-Warning -Message $e.message
       }
       else {
          $handled = $true
-         Write-Warning $e.value.message
+         Write-Warning -Message $e.value.message
       }
    }
    catch {
@@ -325,7 +353,7 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
+   if ($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
       $arrSet = _getProjects
       [VSTeamProjectCache]::projects = $arrSet
       [VSTeamProjectCache]::timestamp = (Get-Date).Minute
@@ -435,7 +463,7 @@ function _buildProcessNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
+   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
       $arrSet = _getProcesses
       [VSTeamProcessCache]::processes = $arrSet
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
@@ -486,7 +514,11 @@ function _buildDynamicParam {
       [array] $arrSet,
       [bool] $Mandatory = $false,
       [string] $ParameterSetName,
-      [int] $Position = -1
+      [int] $Position = -1,
+      [type] $ParameterType = [string],
+      [bool] $ValueFromPipelineByPropertyName = $true,
+      [string] $AliasName,
+      [string] $HelpMessage
    )
    # Create the collection of attributes
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
@@ -494,9 +526,9 @@ function _buildDynamicParam {
    # Create and set the parameters' attributes
    $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
    $ParameterAttribute.Mandatory = $Mandatory
-   $ParameterAttribute.ValueFromPipelineByPropertyName = $true
+   $ParameterAttribute.ValueFromPipelineByPropertyName = $ValueFromPipelineByPropertyName
 
-   if($Position -ne -1) {
+   if ($Position -ne -1) {
       $ParameterAttribute.Position = $Position
    }
 
@@ -504,8 +536,17 @@ function _buildDynamicParam {
       $ParameterAttribute.ParameterSetName = $ParameterSetName
    }
 
+   if ($HelpMessage) {
+      $ParameterAttribute.HelpMessage = $HelpMessage
+   }
+
    # Add the attributes to the attributes collection
    $AttributeCollection.Add($ParameterAttribute)
+
+   if ($AliasName) {
+      $AliasAttribute = New-Object System.Management.Automation.AliasAttribute(@($AliasName))
+      $AttributeCollection.Add($AliasAttribute)
+   }
 
    if ($arrSet) {
       # Generate and set the ValidateSet
@@ -516,33 +557,7 @@ function _buildDynamicParam {
    }
 
    # Create and return the dynamic parameter
-   return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
-}
-
-function _buildDynamicSwitchParam {
-   param(
-      [string] $ParameterName = 'QueueName',
-      [array] $arrSet,
-      [bool] $Mandatory = $false,
-      [string] $ParameterSetName
-   )
-   # Create the collection of attributes
-   $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-
-   # Create and set the parameters' attributes
-   $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-   $ParameterAttribute.Mandatory = $Mandatory
-   $ParameterAttribute.ValueFromPipelineByPropertyName = $true
-
-   if ($ParameterSetName) {
-      $ParameterAttribute.ParameterSetName = $ParameterSetName
-   }
-
-   # Add the attributes to the attributes collection
-   $AttributeCollection.Add($ParameterAttribute)
-
-   # Create and return the dynamic parameter
-   return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [switch], $AttributeCollection)
+   return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, $ParameterType, $AttributeCollection)
 }
 
 function _convertSecureStringTo_PlainText {
@@ -581,9 +596,9 @@ function _callAPI {
 
    # If the caller did not provide a Url build it.
    if (-not $Url) {
-      $buildUriParams = @{} + $PSBoundParameters;
+      $buildUriParams = @{ } + $PSBoundParameters;
       $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType'
-      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null}
+      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
       $Url = _buildRequestURI @buildUriParams
    }
    elseif ($QueryString) {
@@ -606,24 +621,31 @@ function _callAPI {
       $params.Add('UseDefaultCredentials', $true)
    }
    elseif (_useBearerToken) {
-      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN"})
+      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
    }
    else {
-      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT"})
+      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
    }
 
    # We have to remove any extra parameters not used by Invoke-RestMethod
    $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Url', 'QueryString'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
-   $resp = Invoke-RestMethod @params
+   try {
+      $resp = Invoke-RestMethod @params
 
-   if ($resp) {
-      Write-Verbose "return type: $($resp.gettype())"
-      Write-Verbose $resp
+      if ($resp) {
+         Write-Verbose "return type: $($resp.gettype())"
+         Write-Verbose $resp
+      }
+
+      return $resp
    }
+   catch {
+      _handleException $_
 
-   return $resp
+      throw
+   }
 }
 
 function _trackProjectProgress {
@@ -709,7 +731,8 @@ function _supportsServiceFabricEndpoint {
 
 function _getModuleVersion {
    # Read the version from the psd1 file.
-   $content = (Get-Content -Raw "$here\..\VSTeam.psd1" | Out-String)
+   # $content = (Get-Content -Raw "./VSTeam.psd1" | Out-String)
+   $content = (Get-Content -Raw "$here\VSTeam.psd1" | Out-String)
    $r = [regex]"ModuleVersion += +'([^']+)'"
    $d = $r.Match($content)
 
@@ -760,4 +783,73 @@ function _clearEnvironmentVariables {
    }
 
    _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken '' -Version ''
+}
+
+function _convertToHex() {
+   [cmdletbinding()]
+   param(
+      [parameter(Mandatory = $true)]
+      [string]$Value
+   )
+
+   $bytes = $Value | Format-Hex -Encoding Unicode
+   $hexString = ($bytes.Bytes | ForEach-Object ToString X2) -join ''
+   return $hexString.ToLowerInvariant();
+}
+
+function _getVSTeamIdFromDescriptor {
+   [cmdletbinding()]
+   param(
+      [parameter(Mandatory = $true)]
+      [string]$Descriptor
+   )
+
+   $identifier = $Descriptor.Split('.')[1]
+
+   # We need to Pad the string for FromBase64String to work reliably (AzD Descriptors are not padded)
+   $ModulusValue = ($identifier.length % 4)
+   Switch ($ModulusValue) {
+      '0' { $Padded = $identifier }
+      '1' { $Padded = $identifier.Substring(0, $identifier.Length - 1) }
+      '2' { $Padded = $identifier + ('=' * (4 - $ModulusValue)) }
+      '3' { $Padded = $identifier + ('=' * (4 - $ModulusValue)) }
+   }
+
+   return [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($Padded))
+}
+
+function _getDescriptorForACL {
+   [cmdletbinding()]
+   param(
+      [parameter(Mandatory = $true, ParameterSetName = "ByUser")]
+      [VSTeamUser]$User,
+
+      [parameter(MAndatory = $true, ParameterSetName = "ByGroup")]
+      [VSTeamGroup]$Group
+   )
+
+   if ($User) {
+      switch ($User.Origin) {
+         "vsts" {
+            $sid = _getVSTeamIdFromDescriptor -Descriptor $User.Descriptor
+            $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+         }
+         "aad" {
+            $descriptor = "Microsoft.IdentityModel.Claims.ClaimsIdentity;$($User.Domain)\\$($User.PrincipalName)"
+         }
+         default { throw "User type not handled yet for ACL. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues" }
+      }
+   }
+
+   if ($Group) {
+      switch ($Group.Origin) {
+         "vsts" {
+            $sid = _getVSTeamIdFromDescriptor -Descriptor $Group.Descriptor
+            $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
+         }
+         default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues" }
+      }
+   }
+
+   return $descriptor
 }

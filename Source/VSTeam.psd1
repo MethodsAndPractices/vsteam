@@ -12,7 +12,7 @@
    RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.1.2'
+   ModuleVersion     = '6.3.2'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -60,149 +60,17 @@
    # ScriptsToProcess  = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
-   TypesToProcess    = @('types\Approvals.ps1xml',
-      'types\builds.ps1xml',
-      'types\cloudSubscriptions.ps1xml',
-      'types\repositories.ps1xml',
-      'types\policies.ps1xml',
-      'types\releaseDefinitions.ps1xml',
-      'types\releases.ps1xml',
-      'types\serviceendpoints.ps1xml',
-      'types\team.ps1xml',
-      'types\teammembers.ps1xml',
-      'types\teams.ps1xml',
-      'types\tfvc.ps1xml',
-      'types\users.ps1xml',
-      'types\workitems.ps1xml',
-      'types\pullrequest.ps1xml',
-      'types\group.ps1xml',
-      'types\descriptor.ps1xml')
+   TypesToProcess    = @('.\vsteam.types.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
-   FormatsToProcess  = @('formats\Approvals.format.ps1xml',
-      'formats\builds.format.ps1xml',
-      'formats\policyTypes.format.ps1xml',
-      'formats\profile.format.ps1xml',
-      'formats\serviceendpoints.format.ps1xml',
-      'formats\serviceendpointTypes.format.ps1xml',
-      'formats\team.format.ps1xml',
-      'formats\users.format.ps1xml',
-      'formats\workitemTypes.format.ps1xml',
-      'formats\workitems.format.ps1xml',
-      'formats\vsteamPSDrive.format.ps1xml',
-      'formats\group.format.ps1xml',
-      'formats\descriptor.format.ps1xml')
+   FormatsToProcess  = @('.\vsteam.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    # NestedModules     = @()
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-   FunctionsToExport = @('Add-VSTeamAzureRMServiceEndpoint',
-      'Add-VSTeamSonarQubeEndpoint',
-      'Add-VSTeamKubernetesEndpoint',
-      'Add-VSTeamServiceFabricEndpoint',
-      'Add-VSTeamServiceEndpoint',
-      'Update-VSTeamServiceEndpoint',
-      'Add-VSTeamBuild',
-      'Add-VSTeamBuildDefinition',
-      'Add-VSTeamProject',
-      'Add-VSTeamRelease',
-      'Add-VSTeamReleaseDefinition',
-      'Set-VSTeamAccount',
-      'Add-VSTeam',
-      'Add-VSTeamPolicy',
-      'Clear-VSTeamDefaultProject',
-      'Get-VSTeamApproval',
-      'Get-VSTeamBuild',
-      'Get-VSTeamBuildDefinition',
-      'Get-VSTeamCloudSubscription',
-      'Get-VSTeamPolicy',
-      'Get-VSTeamPolicyType',
-      'Get-VSTeamPool',
-      'Get-VSTeamProcess',
-      'Get-VSTeamProject',
-      'Get-VSTeamQueue',
-      'Get-VSTeamRelease',
-      'Get-VSTeamReleaseDefinition',
-      'Get-VSTeamServiceEndpoint',
-      'Get-VSTeamInfo',
-      'Get-VSTeam',
-      'Get-VSTeamMember',
-      'Update-VSTeamPolicy',
-      'Remove-VSTeamBuild',
-      'Remove-VSTeamBuildDefinition',
-      'Remove-VSTeamProject',
-      'Remove-VSTeamRelease',
-      'Remove-VSTeamReleaseDefinition',
-      'Remove-VSTeamServiceEndpoint',
-      'Remove-VSTeamAccount',
-      'Remove-VSTeam',
-      'Remove-VSTeamPolicy',
-      'Set-VSTeamApproval',
-      'Set-VSTeamDefaultProject',
-      'Set-VSTeamReleaseStatus',
-      'Update-VSTeamProject',
-      'Update-VSTeam',
-      'Get-VSTeamGitRepository',
-      'Add-VSTeamGitRepository',
-      'Remove-VSTeamGitRepository',
-      'Get-VSTeamBuildLog',
-      'Add-VSTeamBuildTag',
-      'Get-VSTeamBuildTag',
-      'Remove-VSTeamBuildTag',
-      'Get-VSTeamBuildArtifact',
-      'Update-VSTeamBuild',
-      'Get-VSTeamOption',
-      'Get-VSTeamResourceArea',
-      'Show-VSTeamProject',
-      'Show-VSTeamBuildDefinition',
-      'Show-VSTeamApproval',
-      'Show-VSTeamBuild',
-      'Show-VSTeamGitRepository',
-      'Show-VSTeamReleaseDefinition',
-      'Show-VSTeamRelease',
-      'Show-VSTeam',
-      'Add-VSTeamProfile',
-      'Remove-VSTeamProfile',
-      'Get-VSTeamProfile',
-      'Set-VSTeamAPIVersion',
-      'Invoke-VSTeamRequest',
-      'Get-VSTeamUser',
-      'Remove-VSTeamUser',
-      'Add-VSTeamUser',
-      'Update-VSTeamUser',
-      'Set-VSTeamEnvironmentStatus',
-      'Get-VSTeamServiceEndpointType',
-      'Update-VSTeamBuildDefinition',
-      'Get-VSTeamTfvcRootBranch',
-      'Get-VSTeamTfvcBranch',
-      'Get-VSTeamWorkItemType',
-      'Add-VSTeamWorkItem',
-      'Get-VSTeamWorkItem',
-      'Show-VSTeamWorkItem',
-      'Get-VSTeamGitRef',
-      'Get-VSTeamAgent',
-      'Remove-VSTeamAgent',
-      'Enable-VSTeamAgent',
-      'Disable-VSTeamAgent',
-      'Update-VSTeamProfile',
-      'Get-VSTeamAPIVersion',
-      'Add-VSTeamNuGetEndpoint',
-      'Get-VSTeamFeed',
-      'Add-VSTeamFeed',
-      'Show-VSTeamFeed',
-      'Remove-VSTeamFeed',
-      'Get-VSTeamPullRequest',
-      'Show-VSTeamPullRequest',
-      'Add-VSTeamExtension',
-      'Get-VSTeamExtension',
-      'Update-VSTeamExtension',
-      'Remove-VSTeamExtension',
-      'Update-VSTeamWorkItem',
-      'Set-VSTeamAlias',
-      'Get-VSTeamGroup',
-      'Get-VSTeamDescriptor',
-      'Get-VSTeamBuildTimeline')
+   # This wildcard will be replaced during the build process in AzD
+   FunctionsToExport = @('*')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -228,7 +96,7 @@
       PSData = @{
 
          # Tags applied to this module. These help with module discovery in online galleries.
-         Tags       = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos')
+         Tags         = @('VSTS', 'TFS', 'DevOps', 'VisualStudio', 'TeamServices', 'Team', 'AzureDevOps', 'Pipelines', 'Boards', 'Artifacts', 'TestPlans', 'Repos', 'AzD', 'ADO', 'AzDO')
 
          # If you use this you don't need SHiPS in your private repository but the user
          # has to install SHiPS manually.  If you don't add this SHiPS will be installed
@@ -236,10 +104,10 @@
          # ExternalModuleDependencies = @('SHiPS')
 
          # A URL to the license for this module.
-         LicenseUri = 'https://github.com/DarqueWarrior/vsteam/blob/master/LICENSE'
+         LicenseUri   = 'https://github.com/DarqueWarrior/vsteam/blob/master/LICENSE'
 
          # A URL to the main website for this project.
-         ProjectUri = 'https://github.com/DarqueWarrior/vsteam'
+         ProjectUri   = 'https://github.com/DarqueWarrior/vsteam'
 
          # A URL to an icon representing this module.
          # IconUri = ''

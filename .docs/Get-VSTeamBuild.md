@@ -53,6 +53,14 @@ PS C:\> Get-VSTeamBuild -ProjectName demo -ID 1203,1204
 
 This command gets builds with IDs 1203 and 1204 by using the ID parameter.
 
+### -------------------------- EXAMPLE 5 --------------------------
+
+```PowerShell
+PS C:\> Get-VSTeamBuild -ProjectName demo -ID 1203 -Raw
+```
+
+This command returns the raw object returned from the server.
+
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->
@@ -78,7 +86,7 @@ Parameter Sets: List
 
 ### -ReasonFilter
 
-Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveset, CheckInShelveset, Triggered, or All.
+Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveSet, CheckInShelveSet, Triggered, or All.
 
 ```yaml
 Type: String
@@ -155,6 +163,26 @@ Parameter Sets: List
 ```
 
 <!-- #include "./params/BuildIds.md" -->
+
+### -JSON
+
+Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.
+
+```yaml
+Type: Switch
+Required: True
+Parameter Sets: ByIDJson
+```
+
+### -Raw
+
+Returns the raw response. This is required when you need to use the object to send back.  Without this switch the object produced from the returned object will not match the expected shape of the JSON for sending back to server.
+
+```yaml
+Type: Switch
+Required: True
+Parameter Sets: ByIDRaw
+```
 
 ## INPUTS
 

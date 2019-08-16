@@ -1,0 +1,1 @@
+List all security namespaces or just the specified namespace.

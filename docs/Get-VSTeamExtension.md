@@ -79,3 +79,4 @@ Parameter Sets: List
 [Remove-VSTeamExtension](Remove-VSTeamExtension.md)
 
 [Update-VSTeamExtension](Update-VSTeamExtension.md)
+

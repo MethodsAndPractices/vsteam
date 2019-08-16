@@ -94,7 +94,7 @@ Parameter Sets: Windows
 
 ### -UseBearerToken
 
-Switches the authorzation from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
+Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
 
 ```yaml
 Type: SwitchParameter

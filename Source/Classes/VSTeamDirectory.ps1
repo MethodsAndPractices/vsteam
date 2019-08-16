@@ -38,4 +38,16 @@ class VSTeamDirectory : SHiPSDirectory {
       # directory.
       $this.PSObject.TypeNames.Insert(0, $name)
    }
+
+   [void] hidden SetProp(
+      [object]$other,
+      [string]$prop
+   ) {
+      # Some objects don't always return the same properties. This method will
+      # see if the property is on the other object before trying to read it
+      # which would error if you try to access.      
+      if ( $other.PSObject.Properties.name -match $prop ) {
+         $this.PSObject.Properties[$prop].value = $other.PSObject.Properties[$prop].value
+      }
+   }
 }

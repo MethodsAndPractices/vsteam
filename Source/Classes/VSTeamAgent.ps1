@@ -1,14 +1,19 @@
-class VSTeamAgent : VSTeamLeaf {
+class VSTeamAgent : VSTeamDirectory {
    [string]$version
    [string]$status
    [string]$os
    [bool]$enabled
+   [int]$poolId
+   [int]$agentId
    [PSCustomObject]$systemCapabilities
 
    VSTeamAgent (
-      [object]$obj
-   ) : base($obj.name, $obj.Id, $null) {
+      [object]$obj,
+      [int]$poolId
+   ) : base($obj.name, $null) {
 
+      $this.poolId = $poolId
+      $this.agentId = $obj.Id
       $this.status = $obj.status
       $this.enabled = $obj.enabled
       $this.version = $obj.version
@@ -22,5 +27,19 @@ class VSTeamAgent : VSTeamLeaf {
       $this._internalObj = $obj
 
       $this.AddTypeName('Team.Agent')
+   }
+
+   [object[]] GetChildItem() {
+      $jobRequests = Get-VSTeamJobRequest -PoolId $this.poolId -AgentId $this.agentId -ErrorAction SilentlyContinue
+
+      $objs = @()
+
+      foreach ($item in $jobRequests) {
+         $item.AddTypeName('Team.Provider.JobRequest')
+
+         $objs += $item
+      }
+
+      return $objs
    }
 }

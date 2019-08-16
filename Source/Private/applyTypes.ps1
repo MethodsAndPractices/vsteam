@@ -27,8 +27,8 @@ function _applyTypesToWorkItem {
 
 function _applyTypesToUser {
    param(
-       [Parameter(Mandatory = $true)]
-       $item
+      [Parameter(Mandatory = $true)]
+      $item
    )
 
    $item.PSObject.TypeNames.Insert(0, 'Team.UserEntitlement')
@@ -118,32 +118,6 @@ function _applyTypesToPullRequests {
    $item.PSObject.TypeNames.Insert(0, 'Team.PullRequest')
 }
 
-function _applyTypesToReleaseDefinition {
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'Team.ReleaseDefinition')
-
-   $item._links.PSObject.TypeNames.Insert(0, 'Team.Links')
-   $item._links.self.PSObject.TypeNames.Insert(0, 'Team.Link')
-   $item._links.web.PSObject.TypeNames.Insert(0, 'Team.Link')
-   $item.createdBy.PSObject.TypeNames.Insert(0, 'Team.User')
-   $item.modifiedBy.PSObject.TypeNames.Insert(0, 'Team.User')
-
-   # This is not always returned depends on expand flag
-   if ($item.PSObject.Properties.Match('artifacts').count -gt 0 -and $null -ne $item.artifacts) {
-      $item.artifacts.PSObject.TypeNames.Insert(0, 'Team.Artifacts')
-   }
-
-   if ($item.PSObject.Properties.Match('retentionPolicy').count -gt 0 -and $null -ne $item.retentionPolicy) {
-      $item.retentionPolicy.PSObject.TypeNames.Insert(0, 'Team.RetentionPolicy')
-   }
-
-   if ($item.PSObject.Properties.Match('lastRelease').count -gt 0 -and $null -ne $item.lastRelease) {
-      # This is VSTS
-      $item.lastRelease.PSObject.TypeNames.Insert(0, 'Team.Release')
-   }
-}
-
 function _applyTypesToRelease {
    param($item)
 
@@ -199,4 +173,17 @@ function _applyTypesToServiceEndpointType {
          $dataSource.PSObject.TypeNames.Insert(0, 'Team.DataSource')
       }
    }
+}
+
+function _applyTypesToVariableGroup {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.VariableGroup')
+
+   $item.createdBy.PSObject.TypeNames.Insert(0, 'Team.User')
+   $item.modifiedBy.PSObject.TypeNames.Insert(0, 'Team.User')
+   if ($item.PSObject.Properties.Match('providerData').count -gt 0 -and $null -ne $item.providerData) {
+      $item.providerData.PSObject.TypeNames.Insert(0, 'Team.ProviderData')
+   }
+   $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')
 }

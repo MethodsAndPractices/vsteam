@@ -170,10 +170,10 @@ InModuleScope VSTeam {
          $repo = Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI'
 
          if ($acct -like "http://*") {
-            $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Default"}
+            $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object { $_.poolName -eq "Default" }
          }
          else {
-            $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object {$_.poolName -eq "Hosted"}
+            $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object { $_.poolName -eq "Hosted" }
          }
 
          $srcBuildDef = Get-Content $(Join-Path $PSScriptRoot "010_builddef_1.json") | ConvertFrom-Json
@@ -218,7 +218,7 @@ InModuleScope VSTeam {
          # Only run for VSTS
          if ($api -eq 'VSTS') {
             It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st build definition' {
-               $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI1")}).Id
+               $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI1") }).Id
                $buildDefId | Should Not Be $null
                $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId
                $buildDef.Name | Should Be $($newProjectName + "-CI1")
@@ -231,7 +231,7 @@ InModuleScope VSTeam {
             }
 
             It 'Get-VSTeamBuildDefinition by Id should return 2 phases for 2nd build definition' {
-               $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object {$_.Name -eq $($newProjectName + "-CI2")}).Id
+               $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI2") }).Id
                ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should Be 2
             }
          }
@@ -301,11 +301,78 @@ InModuleScope VSTeam {
 
       Context 'Get Work Item Types' {
          It 'Get-VSTeamWorkItemType' {
-            Get-VSTeamWorkItemType -ProjectName $newProjectName  | Should Not Be $null
+            Get-VSTeamWorkItemType -ProjectName $newProjectName | Should Not Be $null
          }
 
          It 'Get-VSTeamWorkItemType By Type' {
-            Get-VSTeamWorkItemType -ProjectName $newProjectName -WorkItemType Bug  | Should Not Be $null
+            Get-VSTeamWorkItemType -ProjectName $newProjectName -WorkItemType Bug | Should Not Be $null
+         }
+      }
+
+      Context 'Simple Variable Group' {
+         $variableGroupName = "TestVariableGroup1"
+         $variableGroupUpdatedName = "TestVariableGroup2"
+         It 'Add-VSTeamVariableGroup Should add a variable group' {
+            $parameters = @{
+               ProjectName = $newProjectName
+               Name = $variableGroupName
+               Description = "A test variable group"
+               Variables = @{
+                  key1 = @{
+                     value = "value1"
+                  }
+                  key2 = @{
+                     value    = "value2"
+                     isSecret = $true
+                  }
+               }
+            }
+            if ($api -ne 'TFS2017') {
+               $parameters.Add("Type", "Vsts")
+            }
+
+            $newVariableGroup = Add-VSTeamVariableGroup @parameters
+            $newVariableGroup | Should Not Be $null
+         }
+
+         It 'Get-VSTeamVariableGroup Should get the variable group created first by list then by id' {
+            $existingVariableGroups = ,(Get-VSTeamVariableGroup -ProjectName $newProjectName)
+            $existingVariableGroups.Count | Should BeGreaterThan 0
+
+            $newVariableGroup = ($existingVariableGroups | Where-Object { $_.Name -eq $variableGroupName })
+            $newVariableGroup | Should Not Be $null
+
+            $existingVariableGroup = Get-VSTeamVariableGroup -ProjectName $newProjectName -Id $newVariableGroup.Id
+            $existingVariableGroup | Should Not Be $null
+         }
+
+         It 'Update-VSTeamVariableGroup Should update the variable group' {
+            $newVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupName })
+            $newVariableGroup | Should Not Be $null
+
+            $parameters = @{
+               ProjectName = $newProjectName
+               Id          = $newVariableGroup.Id
+               Name        = $variableGroupUpdatedName
+               Description = "A test variable group update"
+               Variables   = @{
+                  key3 = @{
+                     value = "value3"
+                  }
+               }
+            }
+            if ($api -ne 'TFS2017') {
+               $parameters.Add("Type", "Vsts")
+            }
+
+            $updatedVariableGroup = Update-VSTeamVariableGroup @parameters
+            $updatedVariableGroup | Should Not Be $null
+         }
+
+         It 'Remove-VSTeamVariableGroup Should remove the variable group' {
+            $updatedVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupUpdatedName })
+            $updatedVariableGroup | Should Not Be $null
+            {Remove-VSTeamVariableGroup -ProjectName $newProjectName -Id $updatedVariableGroup.Id -Force} | Should Not Throw
          }
       }
 
@@ -352,27 +419,27 @@ InModuleScope VSTeam {
       if (-not ($acct -like "http://*")) {
          Context 'Users exercise' {
 
-            It 'Get-VSTeamUser Should return all users' {
-               Get-VSTeamUser | Should Not Be $null
+            It 'Get-VSTeamUserEntitlement Should return all users' {
+               Get-VSTeamUserEntitlement | Should Not Be $null
             }
 
-            It 'Get-VSTeamUser ById Should return Teams' {
-               $id = (Get-VSTeamUser | Where-Object email -eq $email).Id
-               Get-VSTeamUser -Id $id | Should Not Be $null
+            It 'Get-VSTeamUserEntitlement ById Should return Teams' {
+               $id = (Get-VSTeamUserEntitlement | Where-Object email -eq $email).Id
+               Get-VSTeamUserEntitlement -Id $id | Should Not Be $null
             }
 
-            It 'Remove-VSTeamUser should fail' {
-               { Remove-VSTeamUser -Email fake@NoteReal.foo -Force } | Should Throw
+            It 'Remove-VSTeamUserEntitlement should fail' {
+               { Remove-VSTeamUserEntitlement -Email fake@NoteReal.foo -Force } | Should Throw
             }
 
-            It 'Remove-VSTeamUser should delete the team' {
-               Remove-VSTeamUser -Email $email -Force
-               Get-VSTeamUser | Where-Object Email -eq $email | Should Be $null
+            It 'Remove-VSTeamUserEntitlement should delete the team' {
+               Remove-VSTeamUserEntitlement -Email $email -Force
+               Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should Be $null
             }
 
-            It 'Add-VSTeamUser should add a team' {
-               Add-VSTeamUser -Email $email -License StakeHolder | Should Not Be $null
-               (Get-VSTeamUser).Count | Should Be 2
+            It 'Add-VSTeamUserEntitlement should add a team' {
+               Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
+               (Get-VSTeamUserEntitlement).Count | Should Be 2
             }
          }
       }
@@ -408,6 +475,18 @@ InModuleScope VSTeam {
          }
       }
 
+      # Not supported on TFS
+      if (-not ($acct -like "http://*")) {
+         Context 'Access control list' {
+            It 'Get-VSTeamAccessControlList should return without error' {
+               $(Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList) | Should Not Be $null
+            }
+
+            It 'Get-VSTeamAccessControlList -IncludeExtendedInfo should return without error' {
+               $(Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList -IncludeExtendedInfo) | Should Not Be $null
+            }
+         }
+      }
 
       Context 'Teams full exercise' {
          It 'Get-VSTeam ByName Should return Teams' {
@@ -436,7 +515,7 @@ InModuleScope VSTeam {
 
          It 'Remove-VSTeam should delete the team' {
             Remove-VSTeam -ProjectName $newProjectName -Name 'testing123' -Force
-            Get-VSTeam -ProjectName $newProjectName | Where-Object { $_.Name -eq 'testing123'} | Should Be $null
+            Get-VSTeam -ProjectName $newProjectName | Where-Object { $_.Name -eq 'testing123' } | Should Be $null
          }
       }
 
@@ -462,6 +541,14 @@ InModuleScope VSTeam {
          }
 
          It 'Remove-VSTeamProject Should remove Project' {
+            Set-VSTeamAPIVersion $env:API_VERSION
+
+            # I have noticed that if the delete happens too soon you will get a
+            # 400 response and told to try again later. So this test needs to be
+            # retried. We need to wait a minute after the rename before we try
+            # and delete
+            Start-Sleep -Seconds 60
+
             Remove-VSTeamProject -ProjectName $newProjectName -Force
          }
 

@@ -36,8 +36,8 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Required: true
 Position: 0
+Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -72,3 +72,4 @@ You can pipe the release definition ID to this function.
 [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
 
 [Remove-VSTeamReleaseDefinition](Remove-VSTeamReleaseDefinition.md)
+

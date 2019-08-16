@@ -36,8 +36,8 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Required: true
 Position: 0
+Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -60,7 +60,7 @@ Type: Switch
 
 ### -blocking
 
-Determines if the policy will block pushes to the branch if the policy is not adheared to.
+Determines if the policy will block pushes to the branch if the policy is not adhered to.
 
 ```yaml
 Type: Switch
@@ -90,3 +90,4 @@ Required: True
 [Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
 
 [Get-VSTeamPolicyType](Get-VSTeamPolicyType.md)
+

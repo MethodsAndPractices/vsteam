@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>Team.GitRepository</Name>
+      <Members>
+         <ScriptProperty>
+            <Name>projectName</Name>
+            <GetScriptBlock>$this.project.name</GetScriptBlock>
+         </ScriptProperty>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>name</Name>
+                     <Name>remoteUrl</Name>
+                     <Name>defaultBranch</Name>
+                     <Name>projectName</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>

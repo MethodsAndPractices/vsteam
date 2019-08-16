@@ -132,6 +132,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Add-VSTeamSonarQubeEndpoint throws on TFS' {
+         Mock Write-Warning
          Mock Write-Error -Verifiable
          Mock Invoke-RestMethod {
             $e = [System.Management.Automation.ErrorRecord]::new(
@@ -266,6 +267,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Add-VSTeamSonarQubeEndpoint throws on VSTS' {
+         Mock Write-Warning
          Mock Write-Error -Verifiable
          Mock Invoke-RestMethod {
             $e = [System.Management.Automation.ErrorRecord]::new(

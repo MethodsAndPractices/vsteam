@@ -88,10 +88,14 @@ Required: False
 
 ### -Force
 
-Forces the command without confirmation
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter
+Required: false
+Position: Named
+Accept pipeline input: false
+Parameter Sets: (All)
 ```
 
 ## INPUTS
@@ -113,3 +117,4 @@ If you do not set the default project by called Set-VSTeamDefaultProject before
 calling Update-VSTeamWorkItem you will have to type in the names.
 
 ## RELATED LINKS
+

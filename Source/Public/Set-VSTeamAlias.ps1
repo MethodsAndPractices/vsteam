@@ -18,9 +18,6 @@ function Set-VSTeamAlias {
       New-Alias Update-ServiceEndpoint Update-VSTeamServiceEndpoint -Scope Global
       New-Alias Add-ServiceFabricEndpoint Add-VSTeamServiceFabricEndpoint -Scope Global
       New-Alias Remove-ServiceFabricEndpoint Remove-VSTeamServiceFabricEndpoint -Scope Global
-      New-Alias Remove-VSTeamServiceFabricEndpoint Remove-VSTeamVSTeamServiceFabricEndpoint -Scope Global
-      New-Alias Remove-VSTeamAzureRMServiceEndpoint Remove-VSTeamVSTeamAzureRMServiceEndpoint -Scope Global
-      New-Alias Remove-VSTeamSonarQubeEndpoint Remove-VSTeamVSTeamSonarQubeEndpoint -Scope Global
       New-Alias Remove-AzureRMServiceEndpoint Remove-VSTeamAzureRMServiceEndpoint -Scope Global
       New-Alias Remove-SonarQubeEndpoint Remove-VSTeamSonarQubeEndpoint -Scope Global
       New-Alias Get-Build Get-VSTeamBuild -Scope Global
@@ -62,28 +59,27 @@ function Set-VSTeamAlias {
       New-Alias Remove-Release Remove-VSTeamRelease -Scope Global
       New-Alias Set-ReleaseStatus Set-VSTeamReleaseStatus -Scope Global
       New-Alias Add-ReleaseEnvironment Add-VSTeamReleaseEnvironment -Scope Global
-      New-Alias Get-TeamInfo Get-VSTeamTeamInfo -Scope Global
-      New-Alias Add-TeamAccount Add-VSTeamTeamAccount -Scope Global
-      New-Alias Remove-TeamAccount Remove-VSTeamTeamAccount -Scope Global
-      New-Alias Get-TeamOption Get-VSTeamTeamOption -Scope Global
-      New-Alias Get-TeamResourceArea Get-VSTeamTeamResourceArea -Scope Global
+      New-Alias Get-TeamInfo Get-VSTeamInfo -Scope Global
+      New-Alias Add-TeamAccount Set-VSTeamAccount -Scope Global
+      New-Alias Remove-TeamAccount Remove-VSTeamAccount -Scope Global
+      New-Alias Get-TeamOption Get-VSTeamOption -Scope Global
+      New-Alias Get-TeamResourceArea Get-VSTeamResourceArea -Scope Global
       New-Alias Clear-DefaultProject Clear-VSTeamDefaultProject -Scope Global
       New-Alias Set-DefaultProject Set-VSTeamDefaultProject -Scope Global
-      New-Alias Get-TeamMember Get-VSTeamTeamMember -Scope Global
-      New-Alias Get-Team Get-VSTeamTeam -Scope Global
-      New-Alias Add-Team Add-VSTeamTeam -Scope Global
-      New-Alias Update-Team Update-VSTeamTeam -Scope Global
-      New-Alias Remove-Team Remove-VSTeamTeam -Scope Global
+      New-Alias Get-TeamMember Get-VSTeamMember -Scope Global
+      New-Alias Get-Team Get-VSTeam -Scope Global
+      New-Alias Add-Team Add-VSTeam -Scope Global
+      New-Alias Update-Team Update-VSTeam -Scope Global
+      New-Alias Remove-Team Remove-VSTeam -Scope Global
       New-Alias Add-Profile Add-VSTeamProfile -Scope Global
       New-Alias Remove-Profile Remove-VSTeamProfile -Scope Global
       New-Alias Get-Profile Get-VSTeamProfile -Scope Global
       New-Alias Set-APIVersion Set-VSTeamAPIVersion -Scope Global
-      New-Alias Add-User Add-VSTeamUser -Scope Global
-      New-Alias Remove-User Remove-VSTeamUser -Scope Global
-      New-Alias Get-User Get-VSTeamUser -Scope Global
-      New-Alias Update-User Update-VSTeamUser -Scope Global
+      New-Alias Add-UserEntitlement Add-VSTeamUserEntitlement -Scope Global
+      New-Alias Remove-UserEntitlement Remove-VSTeamUserEntitlement -Scope Global
+      New-Alias Get-UserEntitlement Get-VSTeamUserEntitlement -Scope Global
+      New-Alias Update-UserEntitlement Update-VSTeamUserEntitlement -Scope Global
       New-Alias Set-EnvironmentStatus Set-VSTeamEnvironmentStatus -Scope Global
-      New-Alias Add-VSTeamReleaseEnvironment Add-VSTeamVSTeamReleaseEnvironment -Scope Global
       New-Alias Get-ServiceEndpointType Get-VSTeamServiceEndpointType -Scope Global
       New-Alias Update-BuildDefinition Update-VSTeamBuildDefinition -Scope Global
       New-Alias Get-TfvcRootBranch Get-VSTeamTfvcRootBranch -Scope Global
@@ -115,6 +111,8 @@ function Set-VSTeamAlias {
       New-Alias Get-Extension Get-VSTeamExtension -Scope Global
       New-Alias Update-Extension Update-VSTeamExtension -Scope Global
       New-Alias Remove-Extension Remove-VSTeamExtension -Scope Global
-      New-Alias Update-WorkItem  Update-VSTeamWorkItem  -Scope Global
+      New-Alias Update-WorkItem Update-VSTeamWorkItem -Scope Global
+      New-Alias Get-JobRequest Get-VSTeamJobRequest -Scope Global
+      New-Alias Update-ReleaseDefinition Update-VSTeamReleaseDefinition -Scope Global
    }
 }
