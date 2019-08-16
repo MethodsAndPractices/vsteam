@@ -148,6 +148,8 @@ phases:
 
   - task: ms-codeanalysis.vss-microsoft-security-code-analysis.build-task-credscan.CredScan@2
     displayName: 'Run CredScan'
+    inputs:
+      suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
 
   - task: ms-codeanalysis.vss-microsoft-security-code-analysis.build-task-report.SdtReport@1
     displayName: 'Create Security Analysis Report'
