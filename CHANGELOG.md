@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.3.3
+
+updated Add-VSTeamWorkItem and Update-VSTeamWorkItem to support any work item field, also custom ones.
+
 ## 6.3.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/182) from [eosfor](https://github.com/eosfor) which included the following:
