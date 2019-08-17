@@ -107,8 +107,7 @@ InModuleScope VSTeam {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
             $additionalFields = @{"System.Title"= "Test1"; "System.AreaPath" = "Project\\TestPath"}
-            Add-VSTeamWorkItem -ProjectName test `-WorkItemType Task -Title Test1 -Description Testing -ParentId 25 `
-            -AdditionalFields $additionalFields ` | Should Throw   
+            { Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25 -AdditionalFields $additionalFields } | Should Throw
          }
       }
 
