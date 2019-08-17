@@ -36,6 +36,18 @@ ID Title          Status
 6  New Work Item  To Do
 ```
 
+### -------------------------- EXAMPLE 3 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
+
+ID Title          Status
+-- -----          ------
+6  New Work Item  To Do
+```
+
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->
@@ -95,6 +107,15 @@ The Id of the parent work item that this work item will be related to.
 
 ```yaml
 Type: Int
+Required: False
+```
+
+### -AdditionalFields
+
+Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.
+
+```yaml
+Type: Hashtable
 Required: False
 ```
 

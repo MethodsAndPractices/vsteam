@@ -36,6 +36,18 @@ ID Title              Status
 6  Updated Work Item  To Do
 ```
 
+### -------------------------- EXAMPLE 3 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+PS C:\> Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
+
+ID Title          Status
+-- -----          ------
+6  Updated Work Item  To Do
+```
+
 ## PARAMETERS
 
 ### -Id
@@ -82,6 +94,15 @@ The email address of the user this work item will be assigned to.
 
 ```yaml
 Type: String
+Required: False
+```
+
+### -AdditionalFields
+
+Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.
+
+```yaml
+Type: Hashtable
 Required: False
 ```
 

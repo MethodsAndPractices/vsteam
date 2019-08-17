@@ -79,6 +79,37 @@ InModuleScope VSTeam {
                $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
             }
          }
+
+         It 'With Default Project should add work item with additional properties' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+
+            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25 -AdditionalFields $additionalFields
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Post' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*Test1*' -and
+               $Body -like '*Testing*' -and
+               $Body -like '*/fields/System.Title*' -and
+               $Body -like '*/fields/System.Description*' -and
+               $Body -like '*/relations/-*' -and
+               $Body -like '*_apis/wit/workitems/25*' -and
+               $Body -like '*/fields/System.Tags*' -and
+               $Body -like '*/fields/System.AreaPath*' -and
+               $Body -like '*`]' -and # Make sure the body is an array
+               $ContentType -eq 'application/json-patch+json' -and
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            }
+         }
+
+         It 'With Default Project should throw exception when adding existing parameters to additional properties' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+
+            $additionalFields = @{"System.Title"= "Test1"; "System.AreaPath" = "Project\\TestPath"}
+            Add-VSTeamWorkItem -ProjectName test `-WorkItemType Task -Title Test1 -Description Testing -ParentId 25 `
+            -AdditionalFields $additionalFields ` | Should Throw   
+         }
       }
 
       Context 'Update-WorkItem' {
