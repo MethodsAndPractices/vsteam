@@ -3,9 +3,13 @@
    "tool": "Credential Scanner",
    "suppressions": [
       {
-         "hash": "BG8gd4CEW48uJFk9RkfR7hG5FVyyJ6mb",
+         "hash": "12345",
          "_justification": "Fake password or PAT token only used for unit tests."
-      },      
+      }, 
+      {
+         "hash": "678910",
+         "_justification": "Fake password or PAT token only used for unit tests."
+      },         
      {
        "hash": "00000000-0000-0000-0000-000000000000",
        "_justification": "Fake thumb print used only used for unit tests and in documentation."
