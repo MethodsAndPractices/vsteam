@@ -146,20 +146,20 @@ phases:
       failIfCoverageEmpty: true
     condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], false))
 
-  - task: ms-codeanalysis.vss-microsoft-security-code-analysis.build-task-credscan.CredScan@2
+  - task: CredScan@2
     displayName: 'Run CredScan'
     inputs:
       suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
 
-  - task: ms-codeanalysis.vss-microsoft-security-code-analysis.build-task-report.SdtReport@1
+  - task: SdtReport@1
     displayName: 'Create Security Analysis Report'
     inputs:
       AllTools: true
 
-  - task: ms-codeanalysis.vss-microsoft-security-code-analysis.build-task-publishsecurityanalysislogs.PublishSecurityAnalysisLogs@2
+  - task: PublishSecurityAnalysisLogs@2
     displayName: 'Publish Security Analysis Logs'
 
-  - task: ms-codeanalysis.vss-microsoft-security-code-analysis.build-task-postanalysis.PostAnalysis@1
+  - task: PostAnalysis@1
     displayName: 'Post Analysis'
     inputs:
       AllTools: true
