@@ -25,7 +25,8 @@ phases:
 
     displayName: 'Install Dependencies'
 
-  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
+  - powershell: |
+        Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
 
     displayName: 'Install Pester'
 
@@ -66,7 +67,8 @@ phases:
 
     displayName: 'Install Dependencies'
 
-  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
+  - powershell: |
+        Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
 
     displayName: 'Install Pester'
 
@@ -107,7 +109,9 @@ phases:
 
     displayName: 'Install Dependencies'
 
-  - powershell: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
+  - powershell: |
+        Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
+
     displayName: 'Install PSScriptAnalyzer'
 
   - powershell: |
@@ -123,12 +127,15 @@ phases:
 
     displayName: 'Run Static Code Analysis'
 
-  - powershell: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck -Verbose'
+  - powershell: |
+        Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck -Verbose
+
     displayName: 'Install Pester'
 
   - powershell: |
        Import-Module .\dist\*.psd1
        Invoke-Pester -Script .\unit -CodeCoverage .\dist\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
+
     displayName: 'Run Unit Tests'
 
   - task: PublishTestResults@2
