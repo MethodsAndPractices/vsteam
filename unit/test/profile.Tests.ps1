@@ -290,7 +290,7 @@ InModuleScope VSTeam {
          Mock Set-Content { }
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
-         $password = '678910' | ConvertTo-SecureString -AsPlainText -Force
+         $password = 'BG8gd4CEW48uJFk9RkfR7hG5FVyyJ6mb' | ConvertTo-SecureString -AsPlainText -Force
 
          Update-VSTeamProfile -Name test -SecurePersonalAccessToken $password
 
@@ -304,7 +304,7 @@ InModuleScope VSTeam {
          Mock Set-Content { }
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
-         Update-VSTeamProfile -Name test -PersonalAccessToken 678910
+         Update-VSTeamProfile -Name test -PersonalAccessToken 'BG8gd4CEW48uJFk9RkfR7hG5FVyyJ6mb'
 
          It 'Should update profile' {
             Assert-VerifiableMock
@@ -317,7 +317,7 @@ InModuleScope VSTeam {
          Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and $Value -like "*OjY3ODkxMA==*" -and $Value -like "*https://dev.azure.com/test*" -and $Value -like "*VSTS*" }
          Mock Set-Content { }
 
-         Update-VSTeamProfile -Name test -PersonalAccessToken 678910
+         Update-VSTeamProfile -Name test -PersonalAccessToken 'BG8gd4CEW48uJFk9RkfR7hG5FVyyJ6mb'
 
          It 'Should update profile with new URL' {
             Assert-VerifiableMock
