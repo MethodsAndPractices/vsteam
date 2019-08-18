@@ -168,7 +168,7 @@ InModuleScope VSTeam {
          Mock Set-VSTeamAPIVersion
 
          It 'should set env at process level' {
-            $password = 'BG8gd4CEW48uJFk9RkfR7hG5FVyyJ6mb' | ConvertTo-SecureString -AsPlainText -Force
+            $password = '12345' | ConvertTo-SecureString -AsPlainText -Force
 
             Set-VSTeamAccount -a mydemos -SecurePersonalAccessToken $password -Version VSTS
 
