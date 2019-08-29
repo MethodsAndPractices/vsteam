@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.3.3
+
+Get-VSTeamVariableGroup: support for getting by name as well as by ID
+
 ## 6.3.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/182) from [eosfor](https://github.com/eosfor) which included the following:
