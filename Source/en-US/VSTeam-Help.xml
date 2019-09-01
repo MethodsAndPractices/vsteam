@@ -5298,6 +5298,18 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AdditionalFields</maml:name>
+          <maml:Description>
+            <maml:para>Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -5389,6 +5401,18 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AdditionalFields</maml:name>
+        <maml:Description>
+          <maml:para>Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -5406,6 +5430,7 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
       <maml:alert>
         <maml:para>WorkItemType is a dynamic parameter and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamWorkItem you will have to type in the names.</maml:para>
+        <maml:para>Any of the basic work item parameters defined in this method, will cause an exception if also added to the parameter AdditionalFields, since it is redundant. Either only use the parameter OR define them in the AdditionalFields parameter.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5425,6 +5450,19 @@ ID Title          Status
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description"
+
+ID Title          Status
+-- -----          ------
+6  New Work Item  To Do</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
+PS C:\&gt; $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+PS C:\&gt; Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
 
 ID Title          Status
 -- -----          ------
@@ -20592,6 +20630,18 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AdditionalFields</maml:name>
+          <maml:Description>
+            <maml:para>Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
             <maml:para>Forces the function without confirmation</maml:para>
@@ -20666,6 +20716,18 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AdditionalFields</maml:name>
+        <maml:Description>
+          <maml:para>Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
           <maml:para>Forces the function without confirmation</maml:para>
@@ -20694,6 +20756,7 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
       <maml:alert>
         <maml:para>WorkItemType is a dynamic parameter and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Update-VSTeamWorkItem you will have to type in the names.</maml:para>
+        <maml:para>Any of the basic work item parameters defined in this method, will cause an exception if also added to the parameter AdditionalFields, since it is redundant. Either only use the parameter OR define them in the AdditionalFields parameter.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -20716,6 +20779,19 @@ PS C:\&gt; Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -
 
 ID Title              Status
 -- -----              ------
+6  Updated Work Item  To Do</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
+PS C:\&gt; $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+PS C:\&gt; Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
+
+ID Title          Status
+-- -----          ------
 6  Updated Work Item  To Do</dev:code>
         <dev:remarks>
           <maml:para></maml:para>

@@ -2,7 +2,13 @@
 
 ## 6.3.3
 
-Get-VSTeamVariableGroup: support for getting by name as well as by ID
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/191) from [quintessential5](https://github.com/quintessential5) which included the following:
+
+Get-VSTeamVariableGroup: support for getting by name as well as by ID.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/190) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Updated Add-VSTeamWorkItem and Update-VSTeamWorkItem to support any work item field, also custom ones.
 
 ## 6.3.2
 
