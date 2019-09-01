@@ -15,6 +15,16 @@ Removes a membership to a container.
 
 ## EXAMPLES
 
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+PS C:\> $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
+PS C:\> $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+PS C:\> Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor
+```
+
+Removes Test User from the Endpoint Administrators group.
+
 ## PARAMETERS
 
 ### -MemberDescriptor

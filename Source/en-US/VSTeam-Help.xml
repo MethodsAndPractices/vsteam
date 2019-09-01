@@ -2228,7 +2228,17 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
+PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor</dev:code>
+        <dev:remarks>
+          <maml:para>Adds Test User to the Endpoint Administrators group.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Get-VsTeamUser</maml:linkText>
@@ -8851,7 +8861,15 @@ ID Title          Status
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'</dev:code>
+        <dev:remarks>
+          <maml:para>Assigns Endpoint Administrators group to $group variable.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -12013,9 +12031,9 @@ ID Title          Status
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
-          <maml:name>Id</maml:name>
+          <maml:name>Name</maml:name>
           <maml:Description>
-            <maml:para>ID of the existing variable group</maml:para>
+            <maml:para>Name of the existing variable group</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -12053,10 +12071,22 @@ ID Title          Status
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>ID of the existing variable group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Name of the existing variable group</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -12108,6 +12138,18 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
    Id                       = "variable_group_id"
+}
+
+Get-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName              = "some_project_name"
+   Name                       = "variable_group_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
@@ -14146,7 +14188,17 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
+PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor</dev:code>
+        <dev:remarks>
+          <maml:para>Removes Test User from the Endpoint Administrators group.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Get-VsTeamUser</maml:linkText>

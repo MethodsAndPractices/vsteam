@@ -24,14 +24,15 @@ function Get-VSTeamVariableGroup {
          _applyTypesToVariableGroup -item $resp
 
          Write-Output $resp
-      } else {
+      }
+      else {
          if ($Name) {
             $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups' -Version $([VSTeamVersions]::VariableGroups) -Method Get `
                -QueryString @{groupName = $Name}
 
             Write-Output $resp
          }
-         else {  
+         else {
             # Call the REST API
             $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups'  `
                -Version $([VSTeamVersions]::VariableGroups)
