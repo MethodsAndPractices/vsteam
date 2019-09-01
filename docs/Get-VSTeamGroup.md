@@ -15,6 +15,14 @@ Returns a Group or List of Groups.
 
 ## EXAMPLES
 
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+PS C:\> $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+```
+
+Assigns Endpoint Administrators group to $group variable.
+
 ## PARAMETERS
 
 ### -ProjectName

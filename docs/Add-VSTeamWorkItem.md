@@ -37,6 +37,18 @@ ID Title          Status
 6  New Work Item  To Do
 ```
 
+### -------------------------- EXAMPLE 3 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamDefaultProject Demo
+PS C:\> $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
+
+ID Title          Status
+-- -----          ------
+6  New Work Item  To Do
+```
+
 ## PARAMETERS
 
 ### -ProjectName
@@ -113,6 +125,15 @@ Type: Int
 Required: False
 ```
 
+### -AdditionalFields
+
+Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.
+
+```yaml
+Type: Hashtable
+Required: False
+```
+
 ## INPUTS
 
 ### System.String
@@ -130,6 +151,8 @@ project value to query their validate set.
 
 If you do not set the default project by called Set-VSTeamDefaultProject before
 calling Add-VSTeamWorkItem you will have to type in the names.
+
+Any of the basic work item parameters defined in this method, will cause an exception if also added to the parameter AdditionalFields, since it is redundant. Either only use the parameter OR define them in the AdditionalFields parameter.
 
 ## RELATED LINKS
 
