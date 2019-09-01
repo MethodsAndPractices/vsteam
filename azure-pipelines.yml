@@ -194,9 +194,9 @@ stages:
       displayName: 'Copy Module to Artifacts Folder'
       inputs:
         Contents: |
-        README.md
-        .gitignore
-        dist\**
+          README.md
+          .gitignore
+          dist\**
         TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
         flattenFolders: false
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
