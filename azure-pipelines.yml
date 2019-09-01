@@ -244,12 +244,11 @@ stages:
             displayName: 'Use NuGet 4.7.0'
             inputs:
               versionSpec: 4.7.0
-          - powershell: |
+          - pwsh: |
               # Load the psd1 file so you can read the required modules and install them
               $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
               # Install each module
               $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-            pwsh: true
             workingDirectory: '$(System.DefaultWorkingDirectory)/CI/Module'
             displayName: 'Install Module Dependencies'
