@@ -12163,7 +12163,7 @@ ID Title          Status
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
-   ProjectName              = "some_project_name"
+   ProjectName = "some_project_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
@@ -12174,8 +12174,8 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
-   ProjectName              = "some_project_name"
-   Id                       = "variable_group_id"
+   ProjectName = "some_project_name"
+   Id          = "variable_group_id"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
@@ -12186,8 +12186,8 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
-   ProjectName              = "some_project_name"
-   Name                       = "variable_group_name"
+   ProjectName = "some_project_name"
+   Name        = "variable_group_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
