@@ -11,13 +11,14 @@ variables:
   vmLinuxImageName: 'ubuntu-latest'
   vmmacOSImageName: 'macOS-latest'
   vmWindowsImageName: 'windows-latest'
+  Folder: 'dist'
 
 stages:
 - stage: Build
   displayName: Build Stage
   jobs:
   - job: Linux_Phase
-    displayName: Linux
+    displayName: Linux Build
     pool:
       vmImage: $(vmLinuxImageName)
     steps:
@@ -57,7 +58,7 @@ stages:
       condition: succeededOrFailed()
 
   - job: MacOS_Phase
-    displayName: MacOS
+    displayName: MacOS Build
     pool:
       vmImage: $(vmmacOSImageName)
 
@@ -98,7 +99,7 @@ stages:
       condition: succeededOrFailed()
 
   - job: Windows_Phase
-    displayName: Windows
+    displayName: Windows Build
     pool:
       vmImage: $(vmWindowsImageName)
 
@@ -225,3 +226,30 @@ stages:
         ArtifactName: Test
         publishLocation: 'Container'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  jobs:
+  - deployment: Deploy
+    displayName: Package
+    pool:
+      vmImage: $(vmWindowsImageName)
+    environment: 'Package'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@0
+            displayName: 'Use NuGet 4.7.0'
+            inputs:
+              versionSpec: 4.7.0
+          - powershell: |
+              # Load the psd1 file so you can read the required modules and install them
+              $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
+
+              # Install each module
+              $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+            pwsh: true
+            workingDirectory: '$(System.DefaultWorkingDirectory)/CI/Module'
+            displayName: 'Install Module Dependencies'
