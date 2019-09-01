@@ -49,12 +49,12 @@ stages:
       displayName: 'Run Unit Tests'
 
     - task: PublishTestResults@2
-    displayName: 'Publish Test Results'
-    inputs:
-      testRunner: NUnit
-      testResultsFiles: '**\test-results.xml'
-      testRunTitle: 'Linux Unit Tests'
-    condition: succeededOrFailed()
+      displayName: 'Publish Test Results'
+      inputs:
+        testRunner: NUnit
+        testResultsFiles: '**\test-results.xml'
+        testRunTitle: 'Linux Unit Tests'
+      condition: succeededOrFailed()
 
   - job: MacOS_Phase
     displayName: MacOS
@@ -90,12 +90,12 @@ stages:
       displayName: 'Run Unit Tests'
 
     - task: PublishTestResults@2
-    displayName: 'Publish Test Results'
-    inputs:
-      testRunner: NUnit
-      testResultsFiles: '**\test-results.xml'
-      testRunTitle: 'Mac Unit Tests'
-    condition: succeededOrFailed()
+      displayName: 'Publish Test Results'
+      inputs:
+        testRunner: NUnit
+        testResultsFiles: '**\test-results.xml'
+        testRunTitle: 'Mac Unit Tests'
+      condition: succeededOrFailed()
 
   - job: Windows_Phase
     displayName: Windows
