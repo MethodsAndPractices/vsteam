@@ -12069,9 +12069,9 @@ ID Title          Status
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
-          <maml:name>Id</maml:name>
+          <maml:name>Name</maml:name>
           <maml:Description>
-            <maml:para>ID of the existing variable group</maml:para>
+            <maml:para>Name of the existing variable group</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -12109,10 +12109,22 @@ ID Title          Status
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>ID of the existing variable group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Name of the existing variable group</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -12151,7 +12163,7 @@ ID Title          Status
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
-   ProjectName              = "some_project_name"
+   ProjectName = "some_project_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
@@ -12162,8 +12174,20 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
-   ProjectName              = "some_project_name"
-   Id                       = "variable_group_id"
+   ProjectName = "some_project_name"
+   Id          = "variable_group_id"
+}
+
+Get-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName = "some_project_name"
+   Name        = "variable_group_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
