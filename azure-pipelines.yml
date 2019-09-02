@@ -79,7 +79,7 @@ stages:
         targetType: 'inline'
         script: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
 
-    - task: PowerShell@2 
+    - task: PowerShell@2
       displayName: 'Run Static Code Analysis'
       inputs:
         targetType: 'inline'
@@ -87,13 +87,13 @@ stages:
           # Has to happen in this task for it to take effect
           # Load the psd1 file so you can read the required modules and import them
           $manifest = Import-PowerShellDataFile .\dist\*.psd1
-          
+
           # Import each module
           $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
-          
+
           $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
           $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
-    
+
     # - task: PowerShell@2
     #   displayName: 'Install Pester'
     #   inputs:
@@ -200,10 +200,12 @@ stages:
               artifactName: 'module'
               buildType: 'current'
               targetPath: '$(Pipeline.Workspace)'
+
           - task: NuGetToolInstaller@0
             displayName: 'Use NuGet 4.7.0'
             inputs:
               versionSpec: 4.7.0
+
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
@@ -211,11 +213,11 @@ stages:
               script: |
                 # Load the psd1 file so you can read the required modules and install them
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
-                
+
                 # Install each module
                 $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-                workingDirectory: '$(Pipeline.Workspace)/module'
-          
+              workingDirectory: '$(Pipeline.Workspace)/module'
+
           - task: PowerShell@2
             displayName: 'Compute Version Number'
             inputs:
@@ -223,7 +225,7 @@ stages:
               script: |
                 # Load the psd1 file so you can read the version
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
-                
+
                 Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
               workingDirectory: '$(Pipeline.Workspace)/module'
 
@@ -276,7 +278,7 @@ stages:
                   $url = "$(REPO_URL)"
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -force
                   $creds = New-Object PSCredential($e, $pwd)
-                  
+
                   if(-not (Get-PSRepository | ? Name -eq $n)) {
                       Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                   }
@@ -288,13 +290,13 @@ stages:
                 script: |
                   # Load the psd1 file so you can read the version
                   $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
-                  
+
                   $n = 'LoECDA'
                   $e = "$(EMAIL)"
                   $b = "$($manifest.ModuleVersion).$(Build.BuildId)"
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -for
                   $creds = New-Object PSCredential($e, $pwd)
-                  
+
                   Install-Module -N VSTeam -Repo $n -Cr $creds -Max $b -Min $b -verb -Scope CurrentUser
                 workingDirectory: '$(Pipeline.Workspace)/test'
 
@@ -303,7 +305,7 @@ stages:
               inputs:
                 targetType: 'inline'
                 script: 'Install-Module -Name Pester -MinimumVersion 4.3.1 -MaximumVersion 4.3.1 -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
-            
+
             - task: PowerShell@2
               displayName: 'Run Integration Tests'
               inputs:
@@ -313,8 +315,8 @@ stages:
                   Import-Module VSTeam
                   Invoke-Pester -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
                 failOnStderr: true
-                workingDirectory: '$(Pipeline.Workspace)/test/integration'                
-                  
+                workingDirectory: '$(Pipeline.Workspace)/test/integration'
+
             - task: PublishTestResults@2
               displayName: 'Publish Test Results'
               inputs:
