@@ -17,7 +17,7 @@ stages:
 - stage: Build
   displayName: Build Stage
   jobs:
-  - job: Unit Test
+  - job: macOS_Linux_Phase
     strategy:
       matrix:
         macOS:
@@ -27,6 +27,7 @@ stages:
           OS: 'Linux'
           vmImageName: 'ubuntu-latest'
       maxParallel: 2
+    displayName: 'Build'
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -51,7 +52,7 @@ stages:
       condition: succeededOrFailed()
 
   - job: Windows_Phase
-    displayName: Unit Test Windows
+    displayName: Build Windows
     pool:
       vmImage: $(vmWindowsImageName)
 
