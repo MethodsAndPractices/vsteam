@@ -22,10 +22,10 @@ stages:
       matrix:
         macOS:
           OS: 'macos'
-          vmImageName: $(vmmacOSImageName)
+          vmImageName: '$(vmmacOSImageName)'
         linux:
           OS: 'linux'
-          vmImageName: $(vmLinuxImageName)
+          vmImageName: '$(vmLinuxImageName)'
       maxParallel: 2
     pool:
       vmImage: $(vmImageName)
