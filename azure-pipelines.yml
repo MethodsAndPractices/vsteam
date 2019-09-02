@@ -231,11 +231,11 @@ stages:
                 $n = 'LoECDA'
                 $e = "$(EMAIL)"
                 $url = "$(REPO_URL)"
-                $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -for
+                $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -force
                 $creds = New-Object PSCredential($e, $pwd)
 
                 if(-not (Get-PSRepository | ? Name -eq $n)) {
-                    Register-PSRepository -Cr $creds -N $n -So $url -I Trusted -verb
+                    Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                 }
               displayName: 'Register Private Repository'
             - powershell: |
