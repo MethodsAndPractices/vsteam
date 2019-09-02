@@ -17,7 +17,7 @@ stages:
 - stage: Build
   displayName: Build Stage
   jobs:
-  - job: macOS&Linux
+  - job: macOS_Linux
     strategy:
       matrix:
         macOS:
