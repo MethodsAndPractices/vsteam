@@ -16,8 +16,10 @@ variables:
 stages:
 - stage: Build
   displayName: Build Stage
+
   jobs:
   - job: macOS_Linux_Phase
+    displayName: 'Build'
     strategy:
       matrix:
         macOS:
@@ -27,11 +29,12 @@ stages:
           OS: 'Linux'
           vmImageName: 'ubuntu-latest'
       maxParallel: 2
-    displayName: 'Build'
     pool:
       vmImage: $(vmImageName)
     steps:
-    - pwsh: |
+    - pwsh:
+      displayName: 'Register Private Repository'
+      script: |
         $n = 'LoECDA'
         $e = "$(EMAIL)"
         $url = "$(REPO_URL)"
@@ -41,18 +44,21 @@ stages:
         if(-not (Get-PSRepository | ? Name -eq $n)) {
             Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
         }
-      displayName: 'Register Private Repository'
-    - powershell: .\Build-Module.ps1 -installDep
+
+    - pwsh:
       displayName: 'Build Module'
+      script: .\Build-Module.ps1 -installDep
 
-    - powershell: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+    - pwsh:
       displayName: 'Install Pester'
+      script: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
 
-    - powershell: |
+    - pwsh:
+      displayName: 'Run Unit Tests'
+      script: |
        Import-Module .\dist\*.psd1
        Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
       workingDirectory: '$(System.DefaultWorkingDirectory)'
-      displayName: 'Run Unit Tests'
 
     - task: PublishTestResults@2
       displayName: 'Publish Test Results'
@@ -79,13 +85,14 @@ stages:
             Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
         }
       displayName: 'Register Private Repository'
-    - powershell: .\Build-Module.ps1 -installDep -buildHelp
+
+    - pwsh: .\Build-Module.ps1 -installDep -buildHelp
       displayName: 'Build Module'
 
-    - powershell: Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
+    - pwsh: Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
       displayName: 'Install PSScriptAnalyzer'
 
-    - powershell: |
+    - pwsh: |
         # Has to happen in this task for it to take effect
         # Load the psd1 file so you can read the required modules and import them
         $manifest = Import-PowerShellDataFile .\dist\*.psd1
@@ -98,10 +105,10 @@ stages:
 
       displayName: 'Run Static Code Analysis'
 
-    - powershell: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck -Verbose
+    - pwsh: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck -Verbose
       displayName: 'Install Pester'
 
-    # - powershell: |
+    # - pwsh: |
     #     Import-Module .\dist\*.psd1
     #     Invoke-Pester -Script .\unit -CodeCoverage .\dist\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
 
@@ -109,7 +116,7 @@ stages:
     #   condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], false))
     #   displayName: 'Run Unit Tests with Code Coverage'
 
-    # - powershell: |
+    # - pwsh: |
     #     Import-Module .\dist\*.psd1
     #     Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
     #   workingDirectory: '$(System.DefaultWorkingDirectory)'
