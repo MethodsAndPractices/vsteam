@@ -15,6 +15,7 @@ stages:
   - deployment: 'Default'
     pool:
       vmImage: 'ubuntu-latest'
+    environment: 'Default'
     strategy:
       runOnce:
         deploy:
