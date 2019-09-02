@@ -51,7 +51,7 @@ stages:
         testRunTitle: '$(OS) Unit Tests'
       condition: succeededOrFailed()
 
-   - job: Windows_Phase
+  - job: Windows_Phase
     displayName: Windows
     pool:
       vmImage: $(vmWindowsImageName)
