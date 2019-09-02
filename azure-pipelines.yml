@@ -33,19 +33,6 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - pwsh:
-      displayName: 'Register Private Repository'
-      script: |
-        $n = 'LoECDA'
-        $e = "$(EMAIL)"
-        $url = "$(REPO_URL)"
-        $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -force
-        $creds = New-Object PSCredential($e, $pwd)
-
-        if(-not (Get-PSRepository | ? Name -eq $n)) {
-            Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
-        }
-
-    - pwsh:
       displayName: 'Build Module'
       script: .\Build-Module.ps1 -installDep
 
@@ -74,18 +61,6 @@ stages:
       vmImage: $(vmWindowsImageName)
 
     steps:
-    - pwsh: |
-        $n = 'LoECDA'
-        $e = "$(EMAIL)"
-        $url = "$(REPO_URL)"
-        $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -force
-        $creds = New-Object PSCredential($e, $pwd)
-
-        if(-not (Get-PSRepository | ? Name -eq $n)) {
-            Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
-        }
-      displayName: 'Register Private Repository'
-
     - pwsh: .\Build-Module.ps1 -installDep -buildHelp
       displayName: 'Build Module'
 
@@ -288,17 +263,13 @@ stages:
             - pwsh: |
                 'Install-Module -Name Pester -MinimumVersion 4.3.1 -MaximumVersion 4.3.1 -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
               displayName: 'Install Pester'
-            - task: DownloadPipelineArtifact@2
-              inputs:
-                artifactName: 'test'
-                buildType: 'current'
-                targetPath: '$(Pipeline.Workspace)'
-            - pwsh: |
+            - pwsh:
+              displayName: 'Run Integration Tests'
+              script: |
                 Import-Module VSTeam
                 Invoke-Pester -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
               failOnStderr: true
               workingDirectory: '$(Pipeline.Workspace)/test/integration'
-              displayName: 'Run Integration Tests'
               env:
                 PAT: $(2017PAT)
             - task: PublishTestResults@2
