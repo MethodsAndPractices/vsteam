@@ -218,6 +218,12 @@ stages:
     pool:
       vmImage: $(vmLinuxImageName)
     steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        artifactName: 'test'
+        buildType: 'current'
+        targetPath: '$(Pipeline.Workspace)'
+
     - powershell: |
         $n = 'LoECDA'
         $e = "$(EMAIL)"
@@ -240,7 +246,7 @@ stages:
         $creds = New-Object PSCredential($e, $pwd)
         
         Install-Module -N VSTeam -Repo $n -Cr $creds -Max $b -Min $b -verb -Scope CurrentUser
-      workingDirectory: '$(System.DefaultWorkingDirectory)/CI/Test'
+      workingDirectory: '$(Pipeline.Workspace)/test'
       displayName: 'Install VSTeam Module'
     - powershell: 'Install-Module -Name Pester -MinimumVersion 4.3.1 -MaximumVersion 4.3.1 -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
       displayName: 'Install Pester'
@@ -248,7 +254,7 @@ stages:
         Import-Module VSTeam
         Invoke-Pester -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
       failOnStderr: true
-      workingDirectory: '$(System.DefaultWorkingDirectory)/CI/Test/integration'
+      workingDirectory: '$(Pipeline.Workspace)/test/integration'
       displayName: 'Run Integration Tests'
       env:
         PAT: $(2017PAT)
@@ -257,7 +263,7 @@ stages:
       inputs:
         testResultsFormat: NUnit
         testResultsFiles: '**/test-results.xml'
-        searchFolder: '$(System.DefaultWorkingDirectory)/CI/Test/integration'
+        searchFolder: '$(Pipeline.Workspace)/test/integration'
         testRunTitle: 'Linux Tests'
       continueOnError: true
       condition: succeededOrFailed()
