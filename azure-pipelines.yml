@@ -23,7 +23,7 @@ stages:
         macOS:
           OS: 'macOS'
           vmImageName: 'macOS-latest'
-        linux:
+        Linux:
           OS: 'Linux'
           vmImageName: 'ubuntu-latest'
       maxParallel: 2
@@ -232,12 +232,7 @@ stages:
       runOnce:
         deploy:
           steps:
-            - task: DownloadPipelineArtifact@2
-              inputs:
-                artifactName: 'test'
-                buildType: 'current'
-                targetPath: '$(Pipeline.Workspace)'
-            - powershell: |
+            - pwsh: |
                 $n = 'LoECDA'
                 $e = "$(EMAIL)"
                 $url = "$(REPO_URL)"
@@ -248,7 +243,7 @@ stages:
                     Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                 }
               displayName: 'Register Private Repository'
-            - powershell: |
+            - pwsh: |
                 # Load the psd1 file so you can read the version
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
@@ -261,10 +256,15 @@ stages:
                 Install-Module -N VSTeam -Repo $n -Cr $creds -Max $b -Min $b -verb -Scope CurrentUser
               workingDirectory: '$(Pipeline.Workspace)/test'
               displayName: 'Install VSTeam Module'
-            - powershell: |
+            - pwsh: |
                 'Install-Module -Name Pester -MinimumVersion 4.3.1 -MaximumVersion 4.3.1 -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
               displayName: 'Install Pester'
-            - powershell: |
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifactName: 'test'
+                buildType: 'current'
+                targetPath: '$(Pipeline.Workspace)'
+            - pwsh: |
                 Import-Module VSTeam
                 Invoke-Pester -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
               failOnStderr: true
