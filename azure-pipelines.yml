@@ -218,7 +218,50 @@ stages:
     pool:
       vmImage: $(vmLinuxImageName)
     steps:
-    - script: echo Linux TFS 2017
+    - powershell: |
+        $n = 'LoECDA'
+        $e = "$(EMAIL)"
+        $url = "$(REPO_URL)"
+        $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -for
+        $creds = New-Object PSCredential($e, $pwd)
+        
+        if(-not (Get-PSRepository | ? Name -eq $n)) {
+            Register-PSRepository -Cr $creds -N $n -So $url -I Trusted -verb
+        }
+      displayName: 'Register Private Repository'
+    - powershell: |
+        # Load the psd1 file so you can read the version
+        $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
+        
+        $n = 'LoECDA'
+        $e = "$(EMAIL)"
+        $b = "$($manifest.ModuleVersion).$(Build.BuildId)"
+        $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -for
+        $creds = New-Object PSCredential($e, $pwd)
+        
+        Install-Module -N VSTeam -Repo $n -Cr $creds -Max $b -Min $b -verb -Scope CurrentUser
+      workingDirectory: '$(System.DefaultWorkingDirectory)/CI/Test'
+      displayName: 'Install VSTeam Module'
+    - powershell: 'Install-Module -Name Pester -MinimumVersion 4.3.1 -MaximumVersion 4.3.1 -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
+      displayName: 'Install Pester'
+    - powershell: |
+        Import-Module VSTeam
+        Invoke-Pester -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
+      failOnStderr: true
+      workingDirectory: '$(System.DefaultWorkingDirectory)/CI/Test/integration'
+      displayName: 'Run Integration Tests'
+      env:
+        PAT: $(2017PAT)
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFormat: NUnit
+        testResultsFiles: '**/test-results.xml'
+        searchFolder: '$(System.DefaultWorkingDirectory)/CI/Test/integration'
+        testRunTitle: 'Linux Tests'
+      continueOnError: true
+      condition: succeededOrFailed()
+      
   - job: macOSTFS2017
     displayName: macOS TFS 2017
     dependsOn: LinuxTFS2017
