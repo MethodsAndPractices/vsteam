@@ -195,12 +195,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              artifactName: 'module'
-              buildType: 'current'
-              targetPath: '$(Pipeline.Workspace)'
-
           - task: NuGetToolInstaller@0
             displayName: 'Use NuGet 4.7.0'
             inputs:
@@ -297,7 +291,7 @@ stages:
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -for
                   $creds = New-Object PSCredential($e, $pwd)
 
-                  Install-Module -N VSTeam -Repo $n -Cr $creds -Max $b -Min $b -verb -Scope CurrentUser
+                  Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Scope CurrentUser -Verbose
                 workingDirectory: '$(Pipeline.Workspace)/test'
 
             - task: PowerShell@2
