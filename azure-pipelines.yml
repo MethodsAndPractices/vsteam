@@ -208,6 +208,33 @@ stages:
               $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
             workingDirectory: '$(Pipeline.Workspace)/module'
             displayName: 'Install Module Dependencies'
+          - pwsh: |
+              # Load the psd1 file so you can read the version
+              $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
+
+              Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
+            workingDirectory: '$(Pipeline.Workspace)/module'
+            displayName: 'Compute Version Number'
+          - pwsh: |
+              Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
+              ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
+            workingDirectory: '$(Pipeline.Workspace)/module'
+            displayName: 'Create NuSpec from PSD1'
+          - task: NuGetCommand@2
+            displayName: 'Pack Module'
+            inputs:
+              command: pack
+              packagesToPack: '$(Pipeline.Workspace)/module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/module/$(Folder)'
+              versioningScheme: byEnvVar
+              versionEnvVar: 'PACKAGE_VERSION'
+          - task: NuGetCommand@2
+            displayName: 'Push Module'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/module/$(Folder)/*.nupkg'
+              publishVstsFeed: 'vsteam'
+              allowPackageConflicts: true
 
 - stage: Testing
   displayName: Testing stage
