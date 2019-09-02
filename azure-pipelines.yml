@@ -17,10 +17,19 @@ stages:
 - stage: Build
   displayName: Build Stage
   jobs:
-  - job: Linux_Phase
-    displayName: Linux
+  - job: macOS&Linux
+    strategy:
+      matrix:
+        macOS:
+          OS: 'macos'
+          vmImageName: $(vmmacOSImageName)
+        linux:
+          OS: 'linux'
+          vmImageName: $(vmLinuxImageName)
+      maxParallel: 2
+    displayName: $(OS)
     pool:
-      vmImage: $(vmLinuxImageName)
+      vmImage: $(vmImageName)
     steps:
     - powershell: .\Build-Module.ps1 -installDep
       displayName: 'Build Module'
@@ -39,34 +48,59 @@ stages:
       inputs:
         testRunner: NUnit
         testResultsFiles: '**\test-results.xml'
-        testRunTitle: 'Linux Unit Tests'
+        testRunTitle: '$(OS) Unit Tests'
       condition: succeededOrFailed()
 
-  - job: MacOS_Phase
-    displayName: MacOS
-    pool:
-      vmImage: $(vmmacOSImageName)
+  # - job: Linux_Phase
+  #   displayName: Linux
+  #   pool:
+  #     vmImage: $(vmLinuxImageName)
+  #   steps:
+  #   - powershell: .\Build-Module.ps1 -installDep
+  #     displayName: 'Build Module'
 
-    steps:
-    - powershell: .\Build-Module.ps1 -installDep
-      displayName: 'Build Module'
+  #   - powershell: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+  #     displayName: 'Install Pester'
 
-    - powershell: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
-      displayName: 'Install Pester'
+  #   - powershell: |
+  #      Import-Module .\dist\*.psd1
+  #      Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
+  #     workingDirectory: '$(System.DefaultWorkingDirectory)'
+  #     displayName: 'Run Unit Tests'
 
-    - powershell: |
-       Import-Module .\dist\*.psd1
-       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
-      workingDirectory: '$(System.DefaultWorkingDirectory)'
-      displayName: 'Run Unit Tests'
+  #   - task: PublishTestResults@2
+  #     displayName: 'Publish Test Results'
+  #     inputs:
+  #       testRunner: NUnit
+  #       testResultsFiles: '**\test-results.xml'
+  #       testRunTitle: 'Linux Unit Tests'
+  #     condition: succeededOrFailed()
 
-    - task: PublishTestResults@2
-      displayName: 'Publish Test Results'
-      inputs:
-        testRunner: NUnit
-        testResultsFiles: '**\test-results.xml'
-        testRunTitle: 'Mac Unit Tests'
-      condition: succeededOrFailed()
+  # - job: MacOS_Phase
+  #   displayName: MacOS
+  #   pool:
+  #     vmImage: $(vmmacOSImageName)
+
+  #   steps:
+  #   - powershell: .\Build-Module.ps1 -installDep
+  #     displayName: 'Build Module'
+
+  #   - powershell: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+  #     displayName: 'Install Pester'
+
+  #   - powershell: |
+  #      Import-Module .\dist\*.psd1
+  #      Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
+  #     workingDirectory: '$(System.DefaultWorkingDirectory)'
+  #     displayName: 'Run Unit Tests'
+
+  #   - task: PublishTestResults@2
+  #     displayName: 'Publish Test Results'
+  #     inputs:
+  #       testRunner: NUnit
+  #       testResultsFiles: '**\test-results.xml'
+  #       testRunTitle: 'Mac Unit Tests'
+  #     condition: succeededOrFailed()
 
   - job: Windows_Phase
     displayName: Windows
