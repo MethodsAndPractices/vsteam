@@ -27,7 +27,6 @@ stages:
           OS: 'linux'
           vmImageName: $(vmLinuxImageName)
       maxParallel: 2
-    displayName: $(OS)
     pool:
       vmImage: $(vmImageName)
     steps:
