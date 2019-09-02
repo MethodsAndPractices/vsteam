@@ -218,28 +218,33 @@ stages:
     pool:
       vmImage: $(vmLinuxImageName)
     steps:
+    - script: echo Linux TFS 2017
   - job: macOSTFS2017
     displayName: macOS TFS 2017
     dependsOn: LinuxTFS2017
     pool:
       vmImage: $(vmmacOSImageName)
     steps:
+    - script: echo macOS TFS 2017
   - job: WindowsTFS2017
     displayName: Windows TFS 2017
     dependsOn: macOSTFS2017
     pool:
       vmImage: $(vmWindowsImageName)
     steps:
+    - script: echo Windows TFS 2017
   - job: TFS2018
     displayName: TFS 2018 Integration Tests
     pool:
       vmImage: $(vmWindowsImageName)
     steps:
+    - script: echo TFS 2018 Integration Tests
   - job: AzD
     displayName: AzD Integration Tests
     pool:
       vmImage: $(vmWindowsImageName)
     steps:
+    - script: echo AzD Integration Tests
 
 - stage: Produciton
   displayName: PowerShell Gallery
@@ -254,3 +259,4 @@ stages:
       runOnce:
         deploy:
           steps:
+          - script: echo PowerShell Gallery
