@@ -17,16 +17,17 @@ stages:
 - stage: Build
   displayName: Build Stage
   jobs:
-  - job: macOS_Linux
+  - job: macOS_Linux_Phase
     strategy:
       matrix:
         macOS:
-          OS: 'macos'
+          OS: 'macOS'
           vmImageName: 'macOS-latest'
         linux:
-          OS: 'linux'
+          OS: 'Linux'
           vmImageName: 'ubuntu-latest'
       maxParallel: 2
+    displayName: '$(OS)'
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -50,58 +51,7 @@ stages:
         testRunTitle: '$(OS) Unit Tests'
       condition: succeededOrFailed()
 
-  # - job: Linux_Phase
-  #   displayName: Linux
-  #   pool:
-  #     vmImage: $(vmLinuxImageName)
-  #   steps:
-  #   - powershell: .\Build-Module.ps1 -installDep
-  #     displayName: 'Build Module'
-
-  #   - powershell: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
-  #     displayName: 'Install Pester'
-
-  #   - powershell: |
-  #      Import-Module .\dist\*.psd1
-  #      Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
-  #     workingDirectory: '$(System.DefaultWorkingDirectory)'
-  #     displayName: 'Run Unit Tests'
-
-  #   - task: PublishTestResults@2
-  #     displayName: 'Publish Test Results'
-  #     inputs:
-  #       testRunner: NUnit
-  #       testResultsFiles: '**\test-results.xml'
-  #       testRunTitle: 'Linux Unit Tests'
-  #     condition: succeededOrFailed()
-
-  # - job: MacOS_Phase
-  #   displayName: MacOS
-  #   pool:
-  #     vmImage: $(vmmacOSImageName)
-
-  #   steps:
-  #   - powershell: .\Build-Module.ps1 -installDep
-  #     displayName: 'Build Module'
-
-  #   - powershell: Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
-  #     displayName: 'Install Pester'
-
-  #   - powershell: |
-  #      Import-Module .\dist\*.psd1
-  #      Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
-  #     workingDirectory: '$(System.DefaultWorkingDirectory)'
-  #     displayName: 'Run Unit Tests'
-
-  #   - task: PublishTestResults@2
-  #     displayName: 'Publish Test Results'
-  #     inputs:
-  #       testRunner: NUnit
-  #       testResultsFiles: '**\test-results.xml'
-  #       testRunTitle: 'Mac Unit Tests'
-  #     condition: succeededOrFailed()
-
-  - job: Windows_Phase
+   - job: Windows_Phase
     displayName: Windows
     pool:
       vmImage: $(vmWindowsImageName)
