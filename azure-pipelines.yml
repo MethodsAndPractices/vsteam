@@ -202,12 +202,19 @@ stages:
         flattenFolders: false
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
-    - task: PublishBuildArtifacts@1
+    # - task: PublishBuildArtifacts@1
+    #   displayName: 'Publish Module'
+    #   inputs:
+    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/VSTeam'
+    #     ArtifactName: 'Module'
+    #     publishLocation: 'Container'
+    #   condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
+
+    - task: PublishPipelineArtifact@1
       displayName: 'Publish Module'
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/VSTeam'
-        ArtifactName: 'Module'
-        publishLocation: 'Container'
+        targetPath: '$(Build.ArtifactStagingDirectory)/VSTeam'
+        artifact: 'module'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
     - task: CopyFiles@2
@@ -219,13 +226,20 @@ stages:
         TargetFolder: '$(build.artifactstagingdirectory)/Tests'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
-    - task: PublishBuildArtifacts@1
+    - task: PublishPipelineArtifact@1
       displayName: 'Publish Tests'
       inputs:
-        PathtoPublish: '$(build.artifactstagingdirectory)/Tests'
-        ArtifactName: Test
-        publishLocation: 'Container'
+        targetPath: '$(Build.ArtifactStagingDirectory)/Tests'
+        artifact: 'test'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
+
+    # - task: PublishBuildArtifacts@1
+    #   displayName: 'Publish Tests'
+    #   inputs:
+    #     PathtoPublish: '$(build.artifactstagingdirectory)/Tests'
+    #     ArtifactName: Test
+    #     publishLocation: 'Container'
+    #   condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
 - stage: Deploy
   displayName: Deploy stage
@@ -240,6 +254,11 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifactName: 'module'
+              buildType: 'current'
+              targetPath: '$(Pipeline.Workspace)'
           - task: NuGetToolInstaller@0
             displayName: 'Use NuGet 4.7.0'
             inputs:
@@ -250,5 +269,5 @@ stages:
 
               # Install each module
               $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-            workingDirectory: '$(System.DefaultWorkingDirectory)/CI/Module'
+            workingDirectory: '$(Pipeline.Workspace)/module'
             displayName: 'Install Module Dependencies'
