@@ -45,7 +45,7 @@ stages:
           $n = 'LoECDA'
           $e = "$(EMAIL)"
           $url = "$(REPO_URL)"
-          $pwd = ConvertTo-SecureString $env:PKG_PAT -AsPlainText -Force
+          $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
           $creds = New-Object PSCredential($e, $pwd)
 
           if(-not (Get-PSRepository | ? Name -eq $n)) {
@@ -238,7 +238,7 @@ stages:
                 $n = 'LoECDA'
                 $e = "$(EMAIL)"
                 $url = "$(REPO_URL)"
-                $pwd = ConvertTo-SecureString "afrofqbrxqbs3zonjdganx4bhuwypeml3dj7etsbrcuazw6mw5rq" -AsPlainText -force
+                $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -force
                 $creds = New-Object PSCredential($e, $pwd)
                 if(-not (Get-PSRepository | ? Name -eq $n)) {
                     Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
@@ -318,7 +318,7 @@ stages:
                   $n = 'LoECDA'
                   $e = "$(EMAIL)"
                   $url = "$(REPO_URL)"
-                  $pwd = ConvertTo-SecureString $env:PKG_PAT -AsPlainText -Force
+                  $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
                   $creds = New-Object PSCredential($e, $pwd)
 
                   if(-not (Get-PSRepository | ? Name -eq $n)) {
@@ -336,7 +336,7 @@ stages:
                   $n = 'LoECDA'
                   $e = "$(EMAIL)"
                   $b = "$($manifest.ModuleVersion).$(Build.BuildId)"
-                  $pwd = ConvertTo-SecureString $env:PKG_PAT -AsPlainText -Force
+                  $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
                   $creds = New-Object PSCredential($e, $pwd)
 
                   Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Scope CurrentUser -Verbose
