@@ -20,6 +20,11 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: NuGetToolInstaller@0
+            displayName: 'Use NuGet 5.2.0'
+            inputs:
+              versionSpec: '5.2.0'
+              
           - powershell: |
               $n = 'LoECDA'
               $e = "$(EMAIL)"
