@@ -196,9 +196,9 @@ stages:
         deploy:
           steps:
           - task: NuGetToolInstaller@0
-            displayName: 'Use NuGet 4.7.0'
+            displayName: 'Use NuGet 5.2.0'
             inputs:
-              versionSpec: 4.7.0
+              versionSpec: '5.2.0'
 
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
@@ -262,6 +262,10 @@ stages:
       runOnce:
         deploy:
           steps:
+            - task: NuGetToolInstaller@0
+              displayName: 'Use NuGet 5.2.0'
+              inputs:
+                versionSpec: '5.2.0'
             - task: PowerShell@2
               displayName: 'Register Private Repository'
               inputs:
