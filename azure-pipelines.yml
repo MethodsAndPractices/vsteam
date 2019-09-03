@@ -32,6 +32,8 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - pwsh: Get-Module -ListAvailable PackageManagement, PowerShellGet
+    
     - task: PowerShell@2
       displayName: 'Build Module'
       inputs:
