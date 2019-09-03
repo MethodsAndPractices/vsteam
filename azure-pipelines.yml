@@ -200,8 +200,8 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                Update-Module PackageManagement -Verbose -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
-                Update-Module PowerShellGet -Verbose -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+                Update-Module PackageManagement -Verbose -Force -Scope CurrentUser
+                Update-Module PowerShellGet -Verbose -Force -Scope CurrentUser
 
           - task: NuGetToolInstaller@0
             displayName: 'Use NuGet 5.2.0'
