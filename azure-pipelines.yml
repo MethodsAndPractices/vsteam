@@ -10,6 +10,8 @@ phases:
     name: Hosted Ubuntu 1604
 
   steps:
+  - pwsh: Get-Module -ListAvailable PackageManagement, PowerShellGet
+  
   - powershell: |
        # Build the module and help
        .\Build-Module.ps1
