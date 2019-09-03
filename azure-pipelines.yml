@@ -201,6 +201,20 @@ stages:
               versionSpec: '5.2.0'
 
           - task: PowerShell@2
+            displayName: 'Register Private Repository'
+            inputs:
+              targetType: 'inline'
+              script: |
+                $n = 'LoECDA'
+                $e = "$(EMAIL)"
+                $url = "$(REPO_URL)"
+                $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -force
+                $creds = New-Object PSCredential($e, $pwd)
+                if(-not (Get-PSRepository | ? Name -eq $n)) {
+                    Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
+                }
+
+          - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
               targetType: 'inline'
