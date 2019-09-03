@@ -32,8 +32,6 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - pwsh: Get-Module -ListAvailable PackageManagement, PowerShellGet
-    
     - task: PowerShell@2
       displayName: 'Build Module'
       inputs:
@@ -197,11 +195,20 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: PowerShell@2
+            displayName: 'Update Modules'
+            inputs:
+              script: |
+                Update-Module PackageManagement -Verbose
+                Update-Module PowerShellGet -Verbose
+
           - task: NuGetToolInstaller@0
             displayName: 'Use NuGet 5.2.0'
             inputs:
               versionSpec: '5.2.0'
 
+          - pwsh: Get-Module -ListAvailable PackageManagement, PowerShellGet
+          
           - task: PowerShell@2
             displayName: 'Register Private Repository'
             inputs:
