@@ -198,6 +198,7 @@ stages:
           - task: PowerShell@2
             displayName: 'Update Modules'
             inputs:
+              targetType: 'inline'
               script: |
                 Update-Module PackageManagement -Verbose
                 Update-Module PowerShellGet -Verbose
