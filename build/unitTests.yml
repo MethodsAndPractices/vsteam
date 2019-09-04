@@ -41,13 +41,13 @@ steps:
 
   - task: PowerShell@2
     displayName: 'Run Unit Tests'
-      inputs:
-        targetType: 'inline'
-        script: |
-          Import-Module .\dist\*.psd1
-          Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
-      condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], true))
+    inputs:
+      targetType: 'inline'
+      script: |
+        Import-Module .\dist\*.psd1
+        Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], true))
 
   - task: PublishCodeCoverageResults@1
     displayName: 'Publish code coverage'
