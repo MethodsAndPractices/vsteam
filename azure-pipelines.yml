@@ -153,7 +153,7 @@ stages:
   - deployment: Deploy
     displayName: Package Management
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: '$(vmLinuxImageName)'
     environment: 'Default'
     strategy:
       runOnce:
@@ -215,7 +215,7 @@ stages:
   - deployment: LinuxTFS2017
     displayName: Linux TFS 2017
     pool:
-      vmImage: ubuntu-latest
+      vmImage: $(vmLinuxImageName)
     environment: 'Linux TFS 2017'
     strategy:
       runOnce:
