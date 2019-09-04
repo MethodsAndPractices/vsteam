@@ -160,20 +160,6 @@ stages:
         deploy:
           steps:
           - task: PowerShell@2
-            displayName: 'Register Private Repository'
-            inputs:
-              targetType: 'inline'
-              script: |
-                $n = 'LoECDA'
-                $e = "$(EMAIL)"
-                $url = "$(REPO_URL)"
-                $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -force
-                $creds = New-Object PSCredential($e, $pwd)
-                if(-not (Get-PSRepository | ? Name -eq $n)) {
-                    Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
-                }
-
-          - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
               targetType: 'inline'
@@ -183,7 +169,7 @@ stages:
 
                 # Install each module
                 $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-              workingDirectory: '$(Pipeline.Workspace)/module'
+              workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: PowerShell@2
             displayName: 'Compute Version Number'
@@ -194,7 +180,7 @@ stages:
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
                 Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
-              workingDirectory: '$(Pipeline.Workspace)/module'
+              workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: PowerShell@2
             displayName: 'Create NuSpec from PSD1'
@@ -203,14 +189,14 @@ stages:
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
                 ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
-              workingDirectory: '$(Pipeline.Workspace)/module'
+              workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: NuGetCommand@2
             displayName: 'Pack Module'
             inputs:
               command: pack
-              packagesToPack: '$(Pipeline.Workspace)/module/$(Folder)/VSTeam.nuspec'
-              packDestination: '$(Pipeline.Workspace)/module/$(Folder)'
+              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
               versioningScheme: byEnvVar
               versionEnvVar: 'PACKAGE_VERSION'
 
@@ -218,7 +204,7 @@ stages:
             displayName: 'Push Module'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/module/$(Folder)/*.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
               publishVstsFeed: 'vsteam'
               allowPackageConflicts: true
 
@@ -229,7 +215,7 @@ stages:
   - deployment: LinuxTFS2017
     displayName: Linux TFS 2017
     pool:
-      vmImage: $(vmLinuxImageName)
+      vmImage: ubuntu-latest
     environment: 'Linux TFS 2017'
     strategy:
       runOnce:
