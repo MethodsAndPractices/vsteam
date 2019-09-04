@@ -7,11 +7,11 @@ resources:
 - repo: self
 
 variables:
-  # Agent VM image name
-  vmLinuxImageName: 'ubuntu-latest'
-  vmmacOSImageName: 'macOS-latest'
-  vmWindowsImageName: 'windows-latest'
   Folder: 'dist'
+  # Agent VM image name
+  vmmacOSImageName: 'macOS-latest'
+  vmLinuxImageName: 'ubuntu-latest'
+  vmWindowsImageName: 'windows-latest'
 
 stages:
 - stage: Build
