@@ -29,7 +29,7 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - template: build/templates/unitTests.yml
+    - template: build/unitTests.yml
       parameters:
         os: '$(OS)'
 
@@ -39,11 +39,10 @@ stages:
       vmImage: 'windows-latest'
 
     steps:
-    - task: PowerShell@2
-      displayName: 'Build Module'
-      inputs:
-        targetType: 'inline'
-        script: '.\Build-Module.ps1 -installDep -buildHelp'
+    - template: build/unitTests.yml
+      parameters:
+        os: 'Windows'
+        codeCoverage: 'true'
 
     - task: PowerShell@2
       displayName: 'Install PSScriptAnalyzer'
@@ -185,7 +184,7 @@ stages:
   dependsOn: Package
   jobs:
   
-  - template: build/templates/integrationTests.yml
+  - template: build/integrationTests.yml
     parameters:
       name: 'LinuxTFS2017'
       displayName: 'Linux TFS 2017'
@@ -194,7 +193,7 @@ stages:
       apiVersion: 'TFS2017'
       os: 'Linux'
 
-  - template: build/templates/integrationTests.yml
+  - template: build/integrationTests.yml
     parameters:
       depends: 'LinuxTFS2017'
       name: 'macOSTFS2017'
