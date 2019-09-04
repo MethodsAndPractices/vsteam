@@ -1,0 +1,41 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  # Agent VM image name
+  vmLinuxImageName: 'ubuntu-latest'
+
+stages:
+- stage: deploy
+  jobs:
+  - deployment: 'Default'
+    pool:
+      vmImage: '$(vmLinuxImageName)'
+    environment: 'Default'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@0
+            displayName: 'Use NuGet 5.2.0'
+            inputs:
+              versionSpec: '5.2.0'
+              
+          - powershell: |
+              $n = 'LoECDA'
+              $e = "$(EMAIL)"
+              $url = "$(REPO_URL)"
+              $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -for
+              $creds = New-Object PSCredential($e, $pwd)
+              if(-not (Get-PSRepository | ? Name -eq $n)) {
+                  Register-PSRepository -Cr $creds -N $n -So $url -I Trusted -verb
+              }
+            displayName: 'Register Private Repository'
