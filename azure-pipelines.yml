@@ -210,7 +210,7 @@ stages:
   dependsOn: Package
   jobs:
   
-  - template: builds/jobs/integrationTests.yml
+  - template: build/jobs/integrationTests.yml
     parameters:
       name: 'LinuxTFS2017'
       displayName: 'Linux TFS 2017'
@@ -219,7 +219,7 @@ stages:
       apiVersion: 'TFS2017'
       os: 'Linux'
 
-  - template: builds/jobs/integrationTests.yml
+  - template: build/jobs/integrationTests.yml
     parameters:
       name: 'macOSTFS2017'
       displayName: 'macOS TFS 2017'
