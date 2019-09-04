@@ -9,12 +9,16 @@ trigger:
 resources:
 - repo: self
 
+variables:
+  # Agent VM image name
+  vmLinuxImageName: 'ubuntu-latest'
+
 stages:
 - stage: deploy
   jobs:
   - deployment: 'Default'
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: '$(vmLinuxImageName)'
     environment: 'Default'
     strategy:
       runOnce:
