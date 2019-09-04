@@ -32,26 +32,6 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: NuGetToolInstaller@0
-      displayName: 'Use NuGet 5.2.0'
-      inputs:
-        versionSpec: '5.2.0'
-
-    - task: PowerShell@2
-      displayName: 'Register Private Repository'
-      inputs:
-        targetType: 'inline'
-        script: |
-          $n = 'LoECDA'
-          $e = "$(EMAIL)"
-          $url = "$(REPO_URL)"
-          $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
-          $creds = New-Object PSCredential($e, $pwd)
-
-          if(-not (Get-PSRepository | ? Name -eq $n)) {
-              Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
-          }
-          
     - task: PowerShell@2
       displayName: 'Build Module'
       inputs:
@@ -173,27 +153,12 @@ stages:
   - deployment: Deploy
     displayName: Package Management
     pool:
-      vmImage: $(vmWindowsImageName)
+      vmImage: $(vmLinuxImageName)
     environment: 'Default'
     strategy:
       runOnce:
         deploy:
           steps:
-          - task: PowerShell@2
-            displayName: 'Update Modules'
-            inputs:
-              targetType: 'inline'
-              script: |
-                Update-Module PackageManagement -Verbose -Force -Scope CurrentUser
-                Update-Module PowerShellGet -Verbose -Force -Scope CurrentUser
-
-          - task: NuGetToolInstaller@0
-            displayName: 'Use NuGet 5.2.0'
-            inputs:
-              versionSpec: '5.2.0'
-
-          - pwsh: Get-Module -ListAvailable PackageManagement, PowerShellGet
-          
           - task: PowerShell@2
             displayName: 'Register Private Repository'
             inputs:
@@ -270,10 +235,6 @@ stages:
       runOnce:
         deploy:
           steps:
-            - task: NuGetToolInstaller@0
-              displayName: 'Use NuGet 5.2.0'
-              inputs:
-                versionSpec: '5.2.0'
             - task: PowerShell@2
               displayName: 'Register Private Repository'
               inputs:
