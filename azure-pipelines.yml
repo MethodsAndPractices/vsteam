@@ -153,7 +153,7 @@ stages:
   - deployment: Deploy
     displayName: Package Management
     pool:
-      vmImage: $(vmLinuxImageName)
+      vmImage: 'ubuntu-latest'
     environment: 'Default'
     strategy:
       runOnce:
