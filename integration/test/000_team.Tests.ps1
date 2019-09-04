@@ -1,9 +1,9 @@
 Set-StrictMode -Version Latest
 
-if ($null -eq $env:TEAM_CIBUILD) {
-   Get-Module VSTeam | Remove-Module -Force
-   Import-Module $PSScriptRoot\..\..\Source\VSTeam.psd1 -Force
-}
+# if ($null -eq $env:TEAM_CIBUILD) {
+#    Get-Module VSTeam | Remove-Module -Force
+#    Import-Module $PSScriptRoot\..\..\dist\VSTeam.psd1 -Force
+# }
 
 ##############################################################
 #     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
@@ -22,60 +22,58 @@ if ($null -eq $env:TEAM_CIBUILD) {
 
 Set-VSTeamAPIVersion -Target $env:API_VERSION
 
-InModuleScope VSTeam {
-   Describe 'Team' -Tag 'integration' {
-      BeforeAll {
+Describe 'Team' -Tag 'integration' {
+   BeforeAll {
+      $pat = $env:PAT
+      $acct = $env:ACCT
+      $api = $env:API_VERSION
+      Set-VSTeamAccount -a $acct -pe $pat -version $api
+
+      Get-VSTeamProject | Remove-VSTeamProject -Force
+   }
+
+   Context 'Get-VSTeamInfo' {
+      It 'should return account and default project' {
+         [VSTeamVersions]::Account = "mydemos"
+         $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+
+         $info = Get-VSTeamInfo
+
+         $info.Account | Should Be "mydemos"
+         $info.DefaultProject | Should Be "MyProject"
+      }
+   }
+
+   Context 'Set-VSTeamAccount vsts' {
+      It 'should set env at process level' {
          $pat = $env:PAT
          $acct = $env:ACCT
          $api = $env:API_VERSION
          Set-VSTeamAccount -a $acct -pe $pat -version $api
 
-         Get-VSTeamProject | Remove-VSTeamProject -Force
-      }
+         $info = Get-VSTeamInfo
 
-      Context 'Get-VSTeamInfo' {
-         It 'should return account and default project' {
-            [VSTeamVersions]::Account = "mydemos"
-            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+         $info.DefaultProject | Should Be $null
 
-            $info = Get-VSTeamInfo
-
-            $info.Account | Should Be "mydemos"
-            $info.DefaultProject | Should Be "MyProject"
+         if ($acct -like "http://*") {
+            $info.Account | Should Be $acct
+         }
+         else {
+            $info.Account | Should Be "https://dev.azure.com/$acct"
          }
       }
+   }
 
-      Context 'Set-VSTeamAccount vsts' {
-         It 'should set env at process level' {
-            $pat = $env:PAT
-            $acct = $env:ACCT
-            $api = $env:API_VERSION
-            Set-VSTeamAccount -a $acct -pe $pat -version $api
+   Context 'Remove-TeamAccount run as normal user' {
+      It 'should clear env at process level' {
+         # Act
+         Remove-VSTeamAccount
 
-            $info = Get-VSTeamInfo
+         # Assert
+         $info = Get-VSTeamInfo
 
-            $info.DefaultProject | Should Be $null
-
-            if ($acct -like "http://*") {
-               $info.Account | Should Be $acct
-            }
-            else {
-               $info.Account | Should Be "https://dev.azure.com/$acct"
-            }
-         }
-      }
-
-      Context 'Remove-TeamAccount run as normal user' {
-         It 'should clear env at process level' {
-            # Act
-            Remove-VSTeamAccount
-
-            # Assert
-            $info = Get-VSTeamInfo
-
-            $info.Account | Should Be ''
-            $info.DefaultProject | Should Be $null
-         }
+         $info.Account | Should Be ''
+         $info.DefaultProject | Should Be $null
       }
    }
 }
