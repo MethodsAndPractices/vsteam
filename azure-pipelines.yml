@@ -209,6 +209,9 @@ stages:
   dependsOn: Package
   jobs:
   - deployment: LinuxTFS2017
+    variables:
+      ACCT: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
+      API_VERSION: TFS2017
     displayName: Linux TFS 2017
     pool:
       vmImage: 'ubuntu-latest'
