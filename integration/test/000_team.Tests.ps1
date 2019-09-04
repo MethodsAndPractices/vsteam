@@ -22,58 +22,60 @@ Set-StrictMode -Version Latest
 
 Set-VSTeamAPIVersion -Target $env:API_VERSION
 
-Describe 'Team' -Tag 'integration' {
-   BeforeAll {
-      $pat = $env:PAT
-      $acct = $env:ACCT
-      $api = $env:API_VERSION
-      Set-VSTeamAccount -a $acct -pe $pat -version $api
-
-      Get-VSTeamProject | Remove-VSTeamProject -Force
-   }
-
-   Context 'Get-VSTeamInfo' {
-      It 'should return account and default project' {
-         [VSTeamVersions]::Account = "mydemos"
-         $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
-
-         $info = Get-VSTeamInfo
-
-         $info.Account | Should Be "mydemos"
-         $info.DefaultProject | Should Be "MyProject"
-      }
-   }
-
-   Context 'Set-VSTeamAccount vsts' {
-      It 'should set env at process level' {
+InModuleScope VSTeam {
+   Describe 'Team' -Tag 'integration' {
+      BeforeAll {
          $pat = $env:PAT
          $acct = $env:ACCT
          $api = $env:API_VERSION
          Set-VSTeamAccount -a $acct -pe $pat -version $api
 
-         $info = Get-VSTeamInfo
+         Get-VSTeamProject | Remove-VSTeamProject -Force
+      }
 
-         $info.DefaultProject | Should Be $null
+      Context 'Get-VSTeamInfo' {
+         It 'should return account and default project' {
+            [VSTeamVersions]::Account = "mydemos"
+            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
 
-         if ($acct -like "http://*") {
-            $info.Account | Should Be $acct
-         }
-         else {
-            $info.Account | Should Be "https://dev.azure.com/$acct"
+            $info = Get-VSTeamInfo
+
+            $info.Account | Should Be "mydemos"
+            $info.DefaultProject | Should Be "MyProject"
          }
       }
-   }
 
-   Context 'Remove-TeamAccount run as normal user' {
-      It 'should clear env at process level' {
-         # Act
-         Remove-VSTeamAccount
+      Context 'Set-VSTeamAccount vsts' {
+         It 'should set env at process level' {
+            $pat = $env:PAT
+            $acct = $env:ACCT
+            $api = $env:API_VERSION
+            Set-VSTeamAccount -a $acct -pe $pat -version $api
 
-         # Assert
-         $info = Get-VSTeamInfo
+            $info = Get-VSTeamInfo
 
-         $info.Account | Should Be ''
-         $info.DefaultProject | Should Be $null
+            $info.DefaultProject | Should Be $null
+
+            if ($acct -like "http://*") {
+               $info.Account | Should Be $acct
+            }
+            else {
+               $info.Account | Should Be "https://dev.azure.com/$acct"
+            }
+         }
+      }
+
+      Context 'Remove-TeamAccount run as normal user' {
+         It 'should clear env at process level' {
+            # Act
+            Remove-VSTeamAccount
+
+            # Assert
+            $info = Get-VSTeamInfo
+
+            $info.Account | Should Be ''
+            $info.DefaultProject | Should Be $null
+         }
       }
    }
 }
