@@ -29,34 +29,9 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: PowerShell@2
-      displayName: 'Build Module'
-      inputs:
-        targetType: 'inline'
-        script: '.\Build-Module.ps1 -installDep'
-
-    - task: PowerShell@2
-      displayName: 'Install Pester'
-      inputs:
-        targetType: 'inline'
-        script: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
-
-    - task: PowerShell@2
-      displayName: 'Run Unit Tests'
-      inputs:
-        targetType: 'inline'
-        script: |
-          Import-Module .\dist\*.psd1
-          Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
-
-    - task: PublishTestResults@2
-      displayName: 'Publish Test Results'
-      inputs:
-        testResultsFormat: 'NUnit'
-        testResultsFiles: '**\test-results.xml'
-        testRunTitle: '$(OS) Unit Tests'
-      condition: succeededOrFailed()
+    - template: build/templates/unitTests.yml
+      parameters:
+        os: '$(OS)'
 
   - job: Windows_Phase
     displayName: Build Windows
@@ -210,7 +185,7 @@ stages:
   dependsOn: Package
   jobs:
   
-  - template: build/jobs/integrationTests.yml
+  - template: build/templates/integrationTests.yml
     parameters:
       name: 'LinuxTFS2017'
       displayName: 'Linux TFS 2017'
@@ -219,8 +194,9 @@ stages:
       apiVersion: 'TFS2017'
       os: 'Linux'
 
-  - template: build/jobs/integrationTests.yml
+  - template: build/templates/integrationTests.yml
     parameters:
+      depends: 'LinuxTFS2017'
       name: 'macOSTFS2017'
       displayName: 'macOS TFS 2017'
       pool: 'macOS-latest'
