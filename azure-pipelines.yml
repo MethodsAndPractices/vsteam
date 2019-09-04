@@ -251,7 +251,7 @@ stages:
                   $creds = New-Object PSCredential($e, $pwd)
 
                   Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Scope CurrentUser -Verbose
-                workingDirectory: '$(Pipeline.Workspace)/test'
+                workingDirectory: '$(Pipeline.Workspace)/Test'
 
             - task: PowerShell@2
               displayName: 'Install Pester'
