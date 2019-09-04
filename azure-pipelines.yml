@@ -8,10 +8,6 @@ resources:
 
 variables:
   Folder: 'dist'
-  # Agent VM image name
-  vmmacOSImageName: 'macOS-latest'
-  vmLinuxImageName: 'ubuntu-latest'
-  vmWindowsImageName: 'windows-latest'
 
 stages:
 - stage: Build
@@ -64,7 +60,7 @@ stages:
   - job: Windows_Phase
     displayName: Build Windows
     pool:
-      vmImage: $(vmWindowsImageName)
+      vmImage: 'windows-latest'
 
     steps:
     - task: PowerShell@2
@@ -153,7 +149,7 @@ stages:
   - deployment: Deploy
     displayName: Package Management
     pool:
-      vmImage: '$(vmLinuxImageName)'
+      vmImage: 'ubuntu-latest'
     environment: 'Default'
     strategy:
       runOnce:
@@ -215,7 +211,7 @@ stages:
   - deployment: LinuxTFS2017
     displayName: Linux TFS 2017
     pool:
-      vmImage: $(vmLinuxImageName)
+      vmImage: 'ubuntu-latest'
     environment: 'Linux TFS 2017'
     strategy:
       runOnce:
@@ -284,26 +280,26 @@ stages:
     displayName: macOS TFS 2017
     dependsOn: LinuxTFS2017
     pool:
-      vmImage: $(vmmacOSImageName)
+      vmImage: 'macOS-latest'
     steps:
     - script: echo macOS TFS 2017
   - job: WindowsTFS2017
     displayName: Windows TFS 2017
     dependsOn: macOSTFS2017
     pool:
-      vmImage: $(vmWindowsImageName)
+      vmImage: 'windows-latest'
     steps:
     - script: echo Windows TFS 2017
   - job: TFS2018
     displayName: TFS 2018 Integration Tests
     pool:
-      vmImage: $(vmWindowsImageName)
+      vmImage: 'windows-latest'
     steps:
     - script: echo TFS 2018 Integration Tests
   - job: AzD
     displayName: AzD Integration Tests
     pool:
-      vmImage: $(vmWindowsImageName)
+      vmImage: 'windows-latest'
     steps:
     - script: echo AzD Integration Tests
 
@@ -314,7 +310,7 @@ stages:
   - deployment: Deploy
     displayName: PowerShell Gallery
     pool:
-      vmImage: $(vmWindowsImageName)
+      vmImage: 'windows-latest'
     environment: 'PowerShell Gallery'
     strategy:
       runOnce:
