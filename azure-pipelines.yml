@@ -8,6 +8,7 @@ resources:
 
 variables:
   Folder: 'dist'
+  TEAM_CIBUILD: 'true'
 
 stages:
 - stage: Build
