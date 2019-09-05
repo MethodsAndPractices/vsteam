@@ -130,6 +130,11 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: NuGetToolInstaller@0
+            displayName: 'Install NuGet 5.2.0'
+            inputs:
+              versionSpec: 5.2.0
+              
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
@@ -244,4 +249,43 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: echo PowerShell Gallery
+          - task: NuGetToolInstaller@0
+            displayName: 'Install NuGet 5.2.0'
+            inputs:
+              versionSpec: 5.2.0
+
+          - task: PowerShell@2
+            displayName: 'Install Module Dependencies'
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Load the psd1 file so you can read the required modules and install them
+                $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
+
+                # Install each module
+                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+              workingDirectory: '$(Pipeline.Workspace)/Module'
+
+          - task: PowerShell@2
+            displayName: 'Create NuSpec from PSD1'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
+                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
+              workingDirectory: '$(Pipeline.Workspace)/Module'
+
+          - task: NuGetCommand@2
+            displayName: 'Pack Module'
+            inputs:
+              command: pack
+              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
+
+          - task: NuGetCommand@2
+            displayName: 'Push Module'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: 'PowerShell Gallery'
