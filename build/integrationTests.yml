@@ -67,9 +67,9 @@ jobs:
                 script: |
                   if('${{parameters['apiVersion']}}' -eq 'TFS2017') {
                     $env:PAT='$(2017PAT)'
-                  } else if('${{parameters['apiVersion']}}' -eq 'TFS2018') {
+                  } elseif('${{parameters['apiVersion']}}' -eq 'TFS2018') {
                     $env:PAT='$(2018PAT)'
-                  } else if('${{parameters['apiVersion']}}' -eq 'VSTS') {
+                  } elseif('${{parameters['apiVersion']}}' -eq 'VSTS') {
                     $env:PAT='$(VSTSPAT)'
                   }
                   Import-Module VSTeam
