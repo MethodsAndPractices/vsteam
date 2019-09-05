@@ -1,0 +1,377 @@
+{
+   "count": 2,
+   "value": [
+       {
+           "tasks": [
+               {
+                   "environment": {},
+                   "displayName": "If Versioning File Doesn't Exist",
+                   "alwaysRun": false,
+                   "continueOnError": false,
+                   "condition": "succeeded()",
+                   "enabled": true,
+                   "timeoutInMinutes": 0,
+                   "inputs": {
+                       "targetType": "inline",
+                       "arguments": "$(AssemblyVersionInfoFullPath)",
+                       "script": "# Write your powershell commands here.\n\nWrite-Host \"Hello World\"\n\n# Use the environment variables input below to pass secret variables to this script.",
+                       "errorActionPreference": "stop",
+                       "failOnStderr": "false",
+                       "ignoreLASTEXITCODE": "false",
+                       "pwsh": "false",
+                       "workingDirectory": ""
+                   },
+                   "task": {
+                       "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f0",
+                       "versionSpec": "2.*",
+                       "definitionType": "task"
+                   }
+               },
+               {
+                   "environment": {},
+                   "displayName": "Read Assembly Info",
+                   "alwaysRun": false,
+                   "continueOnError": false,
+                   "condition": "succeeded()",
+                   "enabled": true,
+                   "timeoutInMinutes": 0,
+                   "inputs": {
+                       "searchPattern": "$(AssemblyVersionInfoFullPath)",
+                       "variablesPrefix": ""
+                   },
+                   "task": {
+                       "id": "33fd47eb-f330-4462-9c7d-230feee2956d",
+                       "versionSpec": "1.*",
+                       "definitionType": "task"
+                   }
+               },
+               {
+                   "environment": {},
+                   "displayName": "Update AssemblyInfo",
+                   "alwaysRun": false,
+                   "continueOnError": false,
+                   "condition": "succeeded()",
+                   "enabled": true,
+                   "timeoutInMinutes": 0,
+                   "inputs": {
+                       "assemblyInfoFiles": "$(AssemblyVersionInfoFullPath)",
+                       "ensureAttribute": "false",
+                       "description": "",
+                       "configuration": "$(BuildConfiguration)",
+                       "company": "",
+                       "product": "",
+                       "copyright": "",
+                       "trademark": "",
+                       "culture": "",
+                       "informationalVersion": "$(AssemblyInfo.AssemblyFileVersion.Major).$(AssemblyInfo.AssemblyFileVersion.Minor).$(Build.BuildId)-$(PrereleaseTag)",
+                       "comVisible": "none",
+                       "clsCompliant": "none",
+                       "fileVersionMajor": "",
+                       "fileVersionMinor": "",
+                       "fileVersionBuild": "$(Build.BuildId)",
+                       "fileVersionRevision": "",
+                       "assemblyVersionMajor": "",
+                       "assemblyVersionMinor": "",
+                       "assemblyVersionBuild": "",
+                       "assemblyVersionRevision": "",
+                       "customAttributes": ""
+                   },
+                   "task": {
+                       "id": "406f4a5c-0822-4881-87cd-008b5aa90bc5",
+                       "versionSpec": "2.*",
+                       "definitionType": "task"
+                   }
+               }
+           ],
+           "runsOn": [
+               "Agent",
+               "DeploymentGroup"
+           ],
+           "revision": 5,
+           "createdBy": {
+               "displayName": "Louis",
+               "id": "243afec6-f2b3-4678-a73c-ea7f2b8de771",
+               "uniqueName": "LOCAL\\tuser"
+           },
+           "createdOn": "2019-02-26T00:45:50.293Z",
+           "modifiedBy": {
+               "displayName": "Louis",
+               "id": "243afec6-f2b3-4678-a73c-ea7f2b8de771",
+               "uniqueName": "LOCAL\\tuser"
+           },
+           "modifiedOn": "2019-03-18T23:48:48.313Z",
+           "comment": "changed script to inline`",
+           "id": "d30f8b85-6b13-41a9-bb77-2e1a9c611def",
+           "name": "For Unit Tests",
+           "version": {
+               "major": 1,
+               "minor": 0,
+               "patch": 0,
+               "isTest": false
+           },
+           "iconUrl": "https://cdn.vsassets.io/v/M140_20181008.4/_content/icon-meta-task.png",
+           "friendlyName": "For Unit Tests",
+           "description": "Unit test run on 3/6/2019 3:57 PM.",
+           "category": "Build",
+           "definitionType": "metaTask",
+           "author": "Louis",
+           "demands": [],
+           "groups": [],
+           "inputs": [
+               {
+                   "aliases": [],
+                   "options": {},
+                   "properties": {},
+                   "name": "BuildConfiguration",
+                   "label": "BuildConfiguration",
+                   "defaultValue": "$(BuildConfiguration)",
+                   "required": true,
+                   "type": "string",
+                   "helpMarkDown": "Left blank, the value is not updated. Variables can be used, eg. `$(BuildConfiguration)`.",
+                   "groupName": ""
+               },
+               {
+                   "aliases": [],
+                   "options": {},
+                   "properties": {},
+                   "name": "AssemblyInfo.AssemblyFileVersion.Major",
+                   "label": "AssemblyInfo.AssemblyFileVersion.Major",
+                   "defaultValue": "",
+                   "required": true,
+                   "type": "string",
+                   "helpMarkDown": "",
+                   "groupName": ""
+               },
+               {
+                   "aliases": [],
+                   "options": {},
+                   "properties": {},
+                   "name": "AssemblyInfo.AssemblyFileVersion.Minor",
+                   "label": "AssemblyInfo.AssemblyFileVersion.Minor",
+                   "defaultValue": "",
+                   "required": true,
+                   "type": "string",
+                   "helpMarkDown": "",
+                   "groupName": ""
+               },
+               {
+                   "aliases": [],
+                   "options": {},
+                   "properties": {},
+                   "name": "AssemblyVersionInfoFullPath",
+                   "label": "AssemblyVersionInfoFullPath",
+                   "defaultValue": "**\\AssemblyInfo.cs",
+                   "required": true,
+                   "type": "filePath",
+                   "helpMarkDown": "Pattern to use for finding the AssemblyInfo file.",
+                   "groupName": ""
+               },
+               {
+                   "aliases": [],
+                   "options": {},
+                   "properties": {},
+                   "name": "PrereleaseTag",
+                   "label": "PrereleaseTag",
+                   "defaultValue": "",
+                   "required": true,
+                   "type": "string",
+                   "helpMarkDown": "",
+                   "groupName": ""
+               }
+           ],
+           "satisfies": [],
+           "sourceDefinitions": [],
+           "dataSourceBindings": [],
+           "instanceNameFormat": "Task group: For Unit Tests $(BuildConfiguration)",
+           "preJobExecution": {},
+           "execution": {},
+           "postJobExecution": {}
+       },
+       {
+         "tasks": [
+             {
+                 "environment": {},
+                 "displayName": "If Versioning File Doesn't Exist",
+                 "alwaysRun": false,
+                 "continueOnError": false,
+                 "condition": "succeeded()",
+                 "enabled": true,
+                 "timeoutInMinutes": 0,
+                 "inputs": {
+                     "targetType": "inline",
+                     "arguments": "$(AssemblyVersionInfoFullPath)",
+                     "script": "# Write your powershell commands here.\n\nWrite-Host \"Hello World\"\n\n# Use the environment variables input below to pass secret variables to this script.",
+                     "errorActionPreference": "stop",
+                     "failOnStderr": "false",
+                     "ignoreLASTEXITCODE": "false",
+                     "pwsh": "false",
+                     "workingDirectory": ""
+                 },
+                 "task": {
+                     "id": "e213ff0f-5d5c-4791-802d-52ea3e7be1f0",
+                     "versionSpec": "2.*",
+                     "definitionType": "task"
+                 }
+             },
+             {
+                 "environment": {},
+                 "displayName": "Read Assembly Info",
+                 "alwaysRun": false,
+                 "continueOnError": false,
+                 "condition": "succeeded()",
+                 "enabled": true,
+                 "timeoutInMinutes": 0,
+                 "inputs": {
+                     "searchPattern": "$(AssemblyVersionInfoFullPath)",
+                     "variablesPrefix": ""
+                 },
+                 "task": {
+                     "id": "33fd47eb-f330-4462-9c7d-230feee2956d",
+                     "versionSpec": "1.*",
+                     "definitionType": "task"
+                 }
+             },
+             {
+                 "environment": {},
+                 "displayName": "Update AssemblyInfo",
+                 "alwaysRun": false,
+                 "continueOnError": false,
+                 "condition": "succeeded()",
+                 "enabled": true,
+                 "timeoutInMinutes": 0,
+                 "inputs": {
+                     "assemblyInfoFiles": "$(AssemblyVersionInfoFullPath)",
+                     "ensureAttribute": "false",
+                     "description": "",
+                     "configuration": "$(BuildConfiguration)",
+                     "company": "",
+                     "product": "",
+                     "copyright": "",
+                     "trademark": "",
+                     "culture": "",
+                     "informationalVersion": "$(AssemblyInfo.AssemblyFileVersion.Major).$(AssemblyInfo.AssemblyFileVersion.Minor).$(Build.BuildId)-$(PrereleaseTag)",
+                     "comVisible": "none",
+                     "clsCompliant": "none",
+                     "fileVersionMajor": "",
+                     "fileVersionMinor": "",
+                     "fileVersionBuild": "$(Build.BuildId)",
+                     "fileVersionRevision": "",
+                     "assemblyVersionMajor": "",
+                     "assemblyVersionMinor": "",
+                     "assemblyVersionBuild": "",
+                     "assemblyVersionRevision": "",
+                     "customAttributes": ""
+                 },
+                 "task": {
+                     "id": "406f4a5c-0822-4881-87cd-008b5aa90bc5",
+                     "versionSpec": "2.*",
+                     "definitionType": "task"
+                 }
+             }
+         ],
+         "runsOn": [
+             "Agent",
+             "DeploymentGroup"
+         ],
+         "revision": 5,
+         "createdBy": {
+             "displayName": "Louis",
+             "id": "243afec6-f2b3-4678-a73c-ea7f2b8de771",
+             "uniqueName": "LOCAL\\tuser"
+         },
+         "createdOn": "2019-02-26T00:45:50.293Z",
+         "modifiedBy": {
+             "displayName": "Louis",
+             "id": "243afec6-f2b3-4678-a73c-ea7f2b8de771",
+             "uniqueName": "LOCAL\\tuser"
+         },
+         "modifiedOn": "2019-03-18T23:48:48.313Z",
+         "comment": "changed script to inline`",
+         "id": "d30f8b85-6b13-41a9-bb77-2e1a8c611def",
+         "name": "For Unit Tests 2",
+         "version": {
+             "major": 1,
+             "minor": 0,
+             "patch": 0,
+             "isTest": false
+         },
+         "iconUrl": "https://cdn.vsassets.io/v/M140_20181008.4/_content/icon-meta-task.png",
+         "friendlyName": "For Unit Tests 2",
+         "description": "Unit test run on 3/6/2019 3:57 PM.",
+         "category": "Build",
+         "definitionType": "metaTask",
+         "author": "Louis",
+         "demands": [],
+         "groups": [],
+         "inputs": [
+             {
+                 "aliases": [],
+                 "options": {},
+                 "properties": {},
+                 "name": "BuildConfiguration",
+                 "label": "BuildConfiguration",
+                 "defaultValue": "$(BuildConfiguration)",
+                 "required": true,
+                 "type": "string",
+                 "helpMarkDown": "Left blank, the value is not updated. Variables can be used, eg. `$(BuildConfiguration)`.",
+                 "groupName": ""
+             },
+             {
+                 "aliases": [],
+                 "options": {},
+                 "properties": {},
+                 "name": "AssemblyInfo.AssemblyFileVersion.Major",
+                 "label": "AssemblyInfo.AssemblyFileVersion.Major",
+                 "defaultValue": "",
+                 "required": true,
+                 "type": "string",
+                 "helpMarkDown": "",
+                 "groupName": ""
+             },
+             {
+                 "aliases": [],
+                 "options": {},
+                 "properties": {},
+                 "name": "AssemblyInfo.AssemblyFileVersion.Minor",
+                 "label": "AssemblyInfo.AssemblyFileVersion.Minor",
+                 "defaultValue": "",
+                 "required": true,
+                 "type": "string",
+                 "helpMarkDown": "",
+                 "groupName": ""
+             },
+             {
+                 "aliases": [],
+                 "options": {},
+                 "properties": {},
+                 "name": "AssemblyVersionInfoFullPath",
+                 "label": "AssemblyVersionInfoFullPath",
+                 "defaultValue": "**\\AssemblyInfo.cs",
+                 "required": true,
+                 "type": "filePath",
+                 "helpMarkDown": "Pattern to use for finding the AssemblyInfo file.",
+                 "groupName": ""
+             },
+             {
+                 "aliases": [],
+                 "options": {},
+                 "properties": {},
+                 "name": "PrereleaseTag",
+                 "label": "PrereleaseTag",
+                 "defaultValue": "",
+                 "required": true,
+                 "type": "string",
+                 "helpMarkDown": "",
+                 "groupName": ""
+             }
+         ],
+         "satisfies": [],
+         "sourceDefinitions": [],
+         "dataSourceBindings": [],
+         "instanceNameFormat": "Task group: For Unit Tests $(BuildConfiguration)",
+         "preJobExecution": {},
+         "execution": {},
+         "postJobExecution": {}
+     }
+   ]
+}
