@@ -65,12 +65,13 @@ jobs:
               inputs:
                 targetType: 'inline'
                 script: |
-                  ${{ if eq(parameters['apiVersion'], 'TFS2017') }}:
+                  if('${{parameters['apiVersion']}}' -eq 'TFS2017') {
                     $env:PAT='$(2017PAT)'
-                  ${{ if eq(parameters['apiVersion'], 'TFS2018') }}:
+                  } else if('${{parameters['apiVersion']}}' -eq 'TFS2018') {
                     $env:PAT='$(2018PAT)'
-                  ${{ if eq(parameters['apiVersion'], 'VSTS') }}:
+                  } else if('${{parameters['apiVersion']}}' -eq 'VSTS') {
                     $env:PAT='$(VSTSPAT)'
+                  }
                   Import-Module VSTeam
                   Invoke-Pester -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
                 failOnStderr: true
