@@ -1,15 +1,15 @@
 parameters:
   os: ''
-  codeCoverage: 'false'
+  buildHelp: 'false'
 
 steps:
 - task: PowerShell@2
   displayName: 'Build Module'
   inputs:
     targetType: 'inline'
-    ${{ if eq(parameters.codeCoverage, 'false') }}:
+    ${{ if eq(parameters.buildHelp, 'false') }}:
       script: '.\Build-Module.ps1 -installDep'
-    ${{ if eq(parameters.codeCoverage, 'true') }}:
+    ${{ if eq(parameters.buildHelp, 'true') }}:
       script: '.\Build-Module.ps1 -installDep -buildHelp'
 
 - task: PowerShell@2
@@ -18,7 +18,7 @@ steps:
     targetType: 'inline'
     script: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
 
-- ${{ if eq(parameters.codeCoverage, 'false') }}:
+- ${{ if eq($(CodeCoverage), 'false') }}:
   - task: PowerShell@2
     displayName: 'Run Unit Tests'
     inputs:
@@ -28,7 +28,7 @@ steps:
         Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passThru
       workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-- ${{ if eq(parameters.codeCoverage, 'true') }}:
+- ${{ if eq($(CodeCoverage), 'true') }}:
   - task: PowerShell@2
     displayName: 'Run Unit Tests'
     inputs:
