@@ -1,1 +1,1 @@
-Opens TFS or VSTS site in the default browser.
+Opens TFS or AzD site in the default browser.
