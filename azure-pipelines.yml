@@ -186,42 +186,50 @@ stages:
   
   - template: build/integrationTests.yml
     parameters:
-      name: 'LinuxTFS2017'
       displayName: 'Linux TFS 2017'
-      pool: 'ubuntu-latest'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
-      apiVersion: 'TFS2017'
       os: 'Linux'
+      name: 'LinuxTFS2017'
+      pool: 'ubuntu-latest'
+      apiVersion: 'TFS2017'
+      depends: 'WindowsTFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
 
   - template: build/integrationTests.yml
     parameters:
-      depends: 'LinuxTFS2017'
-      name: 'macOSTFS2017'
+      displayName: 'Windows TFS 2017'
+      os: 'Windows'
+      name: 'WindowsTFS2017'
+      pool: 'windows-latest'
+      apiVersion: 'TFS2017'
+      depends: 'macOSTFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
+
+  - template: build/integrationTests.yml
+    parameters:
       displayName: 'macOS TFS 2017'
-      pool: 'macOS-latest'
-      account: 'http://168.61.180.150:8080/tfs/defaultcollection'
-      apiVersion: 'TFS2018'
       os: 'macOS'
-  
-  - job: WindowsTFS2017
-    displayName: Windows TFS 2017
-    dependsOn: macOSTFS2017
-    pool:
-      vmImage: 'windows-latest'
-    steps:
-    - script: echo Windows TFS 2017
-  - job: TFS2018
-    displayName: TFS 2018 Integration Tests
-    pool:
-      vmImage: 'windows-latest'
-    steps:
-    - script: echo TFS 2018 Integration Tests
-  - job: AzD
-    displayName: AzD Integration Tests
-    pool:
-      vmImage: 'windows-latest'
-    steps:
-    - script: echo AzD Integration Tests
+      pool: 'macOS-latest'
+      name: 'macOSTFS2017'
+      apiVersion: 'TFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
+
+  - template: build/integrationTests.yml
+    parameters:
+      displayName: 'TFS 2018 Integration Tests'
+      os: 'Windows'
+      pool: 'windows-latest'
+      name: 'windowsTFS2018'
+      apiVersion: 'TFS2018'
+      account: 'http://168.61.180.150:8080/tfs/defaultcollection'
+
+  - template: build/integrationTests.yml
+    parameters:
+      displayName: 'AzD Integration Tests'
+      os: 'Windows'
+      pool: 'windows-latest'
+      name: 'windowsAzD'
+      apiVersion: 'VSTS'
+      account: 'tooltester'
 
 - stage: Produciton
   displayName: PowerShell Gallery
