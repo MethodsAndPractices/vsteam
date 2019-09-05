@@ -1,219 +1,291 @@
 name: $(Build.BuildID)
+
+trigger:
+- master
+
 resources:
 - repo: self
 
-phases:
-- phase: Linux_Phase
-  displayName: Linux
-  condition: succeeded()
-  queue:
-    name: Hosted Ubuntu 1604
+variables:
+  Folder: 'dist'
+  TEAM_CIBUILD: 'true'
 
-  steps:
-  - powershell: |
-       # Build the module and help
-       .\Build-Module.ps1
+stages:
+- stage: Build
+  displayName: Build Stage
 
-    displayName: 'Build Module'
+  jobs:
+  - job: macOS_Linux_Phase
+    displayName: 'Build'
+    strategy:
+      matrix:
+        macOS:
+          OS: 'macOS'
+          vmImageName: 'macOS-latest'
+        Linux:
+          OS: 'Linux'
+          vmImageName: 'ubuntu-latest'
+      maxParallel: 2
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - template: build/unitTests.yml
+      parameters:
+        os: '$(OS)'
 
-  - powershell: |
-       # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\dist\*.psd1
+  - job: Windows_Phase
+    displayName: Build Windows
+    pool:
+      vmImage: 'windows-latest'
 
-       # Install each module
-       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+    steps:
+    - template: build/unitTests.yml
+      parameters:
+        os: 'Windows'
+        codeCoverage: 'true'
 
-    displayName: 'Install Dependencies'
+    - task: PowerShell@2
+      displayName: 'Install PSScriptAnalyzer'
+      inputs:
+        targetType: 'inline'
+        script: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
 
-  - powershell: |
-        Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+    - task: PowerShell@2
+      displayName: 'Run Static Code Analysis'
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Has to happen in this task for it to take effect
+          # Load the psd1 file so you can read the required modules and import them
+          $manifest = Import-PowerShellDataFile .\dist\*.psd1
 
-    displayName: 'Install Pester'
+          # Import each module
+          $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
 
-  - powershell: |
-       Import-Module .\dist\*.psd1
-       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
+          $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
+          $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
 
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    displayName: 'Run Unit Tests'
+    - task: CredScan@2
+      displayName: 'Run CredScan'
+      inputs:
+        suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
 
-  - task: PublishTestResults@2
-    displayName: 'Publish Test Results'
-    inputs:
-      testRunner: NUnit
-      testResultsFiles: '**\test-results.xml'
-      testRunTitle: 'Linux Unit Tests'
-    condition: succeededOrFailed()
+    - task: SdtReport@1
+      displayName: 'Create Security Analysis Report'
+      inputs:
+        AllTools: true
 
-- phase: MacOS_Phase
-  displayName: MacOS
-  condition: succeeded()
-  queue:
-    name: Hosted macOS High Sierra
+    - task: PublishSecurityAnalysisLogs@2
+      displayName: 'Publish Security Analysis Logs'
 
-  steps:
-  - powershell: |
-       # Build the module and help
-       .\Build-Module.ps1
+    - task: PostAnalysis@1
+      displayName: 'Post Analysis'
+      inputs:
+        AllTools: true
 
-    displayName: 'Build Module'
+    - task: CopyFiles@2
+      displayName: 'Copy Module to Artifacts Folder'
+      inputs:
+        Contents: |
+          README.md
+          .gitignore
+          dist\**
+        TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
+        flattenFolders: false
+      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
-  - powershell: |
-       # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\dist\*.psd1
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Module'
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/VSTeam'
+        artifact: 'module'
+      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
-       # Install each module
-       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+    - task: CopyFiles@2
+      displayName: 'Copy Integration Tests Artifacts Folder'
+      inputs:
+        Contents: |
+          dist\*.psd1
+          integration\**
+        TargetFolder: '$(build.artifactstagingdirectory)/Tests'
+      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
-    displayName: 'Install Dependencies'
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Tests'
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/Tests'
+        artifact: 'test'
+      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
-  - powershell: |
-        Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+- stage: Package
+  displayName: Package Management
+  dependsOn: Build
+  jobs:
+  - deployment: Deploy
+    displayName: Package Management
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'Default'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@0
+            displayName: 'Install NuGet 5.2.0'
+            inputs:
+              versionSpec: 5.2.0
+              
+          - task: PowerShell@2
+            displayName: 'Install Module Dependencies'
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Load the psd1 file so you can read the required modules and install them
+                $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
-    displayName: 'Install Pester'
+                # Install each module
+                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+              workingDirectory: '$(Pipeline.Workspace)/Module'
 
-  - powershell: |
-       Import-Module .\dist\*.psd1
-       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
+          - task: PowerShell@2
+            displayName: 'Compute Version Number'
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Load the psd1 file so you can read the version
+                $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    displayName: 'Run Unit Tests'
+                Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
+              workingDirectory: '$(Pipeline.Workspace)/Module'
 
-  - task: PublishTestResults@2
-    displayName: 'Publish Test Results'
-    inputs:
-      testRunner: NUnit
-      testResultsFiles: '**\test-results.xml'
-      testRunTitle: 'Mac Unit Tests'
-    condition: succeededOrFailed()
+          - task: PowerShell@2
+            displayName: 'Create NuSpec from PSD1'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
+                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
+              workingDirectory: '$(Pipeline.Workspace)/Module'
 
-- phase: Windows_Phase
-  displayName: Windows
-  condition: succeeded()
-  queue:
-    name: Hosted Windows 2019 with VS2019
+          - task: NuGetCommand@2
+            displayName: 'Pack Module'
+            inputs:
+              command: pack
+              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
+              versioningScheme: byEnvVar
+              versionEnvVar: 'PACKAGE_VERSION'
 
-  steps:
-  - powershell: |
-       # Build the module and help
-       .\Build-Module.ps1 -buildHelp
+          - task: NuGetCommand@2
+            displayName: 'Push Module'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
+              publishVstsFeed: 'vsteam'
+              allowPackageConflicts: true
 
-    displayName: 'Build Module'
+- stage: Testing
+  displayName: Testing stage
+  dependsOn: Package
+  jobs:
+  
+  - template: build/integrationTests.yml
+    parameters:
+      displayName: 'Linux TFS 2017'
+      os: 'Linux'
+      name: 'LinuxTFS2017'
+      pool: 'ubuntu-latest'
+      apiVersion: 'TFS2017'
+      depends: 'WindowsTFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
 
-  - powershell: |
-       # Load the psd1 file so you can read the required modules and install them
-       $manifest = Import-PowerShellDataFile .\dist\*.psd1
+  - template: build/integrationTests.yml
+    parameters:
+      displayName: 'Windows TFS 2017'
+      os: 'Windows'
+      name: 'WindowsTFS2017'
+      pool: 'windows-latest'
+      apiVersion: 'TFS2017'
+      depends: 'macOSTFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
 
-       # Install each module
-       $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+  - template: build/integrationTests.yml
+    parameters:
+      displayName: 'macOS TFS 2017'
+      os: 'macOS'
+      pool: 'macOS-latest'
+      name: 'macOSTFS2017'
+      apiVersion: 'TFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
 
-    displayName: 'Install Dependencies'
+  - template: build/integrationTests.yml
+    parameters:
+      displayName: 'TFS 2018 Integration Tests'
+      os: 'Windows'
+      pool: 'windows-latest'
+      name: 'windowsTFS2018'
+      apiVersion: 'TFS2018'
+      account: 'http://168.61.180.150:8080/tfs/defaultcollection'
 
-  - powershell: |
-        Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose
+  - template: build/integrationTests.yml
+    parameters:
+      displayName: 'AzD Integration Tests'
+      os: 'Windows'
+      pool: 'windows-latest'
+      name: 'windowsAzD'
+      apiVersion: 'VSTS'
+      account: 'tooltester'
 
-    displayName: 'Install PSScriptAnalyzer'
+- stage: Produciton
+  displayName: PowerShell Gallery
+  dependsOn: Testing
+  jobs:
+  - deployment: Deploy
+    displayName: PowerShell Gallery
+    pool:
+      vmImage: 'windows-latest'
+    environment: 'PowerShell Gallery'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@0
+            displayName: 'Install NuGet 5.2.0'
+            inputs:
+              versionSpec: 5.2.0
 
-  - powershell: |
-       # Has to happen in this task for it to take effect
-       # Load the psd1 file so you can read the required modules and import them
-       $manifest = Import-PowerShellDataFile .\dist\*.psd1
+          - task: PowerShell@2
+            displayName: 'Install Module Dependencies'
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Load the psd1 file so you can read the required modules and install them
+                $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
-       # Import each module
-       $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
+                # Install each module
+                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+              workingDirectory: '$(Pipeline.Workspace)/Module'
 
-       $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
-       $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
+          - task: PowerShell@2
+            displayName: 'Create NuSpec from PSD1'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
+                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
+              workingDirectory: '$(Pipeline.Workspace)/Module'
 
-    displayName: 'Run Static Code Analysis'
+          - task: NuGetCommand@2
+            displayName: 'Pack Module'
+            inputs:
+              command: pack
+              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
 
-  - powershell: |
-        Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck -Verbose
-
-    displayName: 'Install Pester'
-
-  - powershell: |
-       Import-Module .\dist\*.psd1
-       Invoke-Pester -Script .\unit -CodeCoverage .\dist\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
-
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], false))
-    displayName: 'Run Unit Tests with Code Coverage'
-
-  - powershell: |
-       Import-Module .\dist\*.psd1
-       Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passthru
-
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], true))
-    displayName: 'Run Unit Tests'
-
-  - task: PublishTestResults@2
-    displayName: 'Publish Test Results'
-    inputs:
-      testRunner: NUnit
-      testResultsFiles: '**\TEST-*.xml'
-      testRunTitle: 'Windows Unit Tests'
-    condition: succeededOrFailed()
-
-  - task: PublishCodeCoverageResults@1
-    displayName: 'Publish code coverage'
-    inputs:
-      summaryFileLocation: '**\coverage.xml'
-      failIfCoverageEmpty: true
-    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], false))
-
-  - task: CredScan@2
-    displayName: 'Run CredScan'
-    inputs:
-      suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
-
-  - task: SdtReport@1
-    displayName: 'Create Security Analysis Report'
-    inputs:
-      AllTools: true
-
-  - task: PublishSecurityAnalysisLogs@2
-    displayName: 'Publish Security Analysis Logs'
-
-  - task: PostAnalysis@1
-    displayName: 'Post Analysis'
-    inputs:
-      AllTools: true
-
-  - task: CopyFiles@2
-    displayName: 'Copy Module to Artifacts Folder'
-    inputs:
-      Contents: |
-       README.md
-       .gitignore
-       dist\**
-      TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
-      flattenFolders: false
-    condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
-
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Module'
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/VSTeam'
-      ArtifactName: 'Module'
-      publishLocation: 'Container'
-    condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
-
-  - task: CopyFiles@2
-    displayName: 'Copy Integration Tests Artifacts Folder'
-    inputs:
-      Contents: |
-       dist\*.psd1
-       integration\**
-
-      TargetFolder: '$(build.artifactstagingdirectory)/Tests'
-    condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
-
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Tests'
-    inputs:
-      PathtoPublish: '$(build.artifactstagingdirectory)/Tests'
-      ArtifactName: Test
-      publishLocation: 'Container'
-    condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
+          - task: NuGetCommand@2
+            displayName: 'Push Module'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: 'PowerShell Gallery'

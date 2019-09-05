@@ -1,9 +1,9 @@
 Set-StrictMode -Version Latest
 
-if ($null -eq $env:TEAM_CIBUILD) {
-   Get-Module VSTeam | Remove-Module -Force
-   Import-Module $PSScriptRoot\..\..\Source\VSTeam.psd1 -Force
-}
+# if ($null -eq $env:TEAM_CIBUILD) {
+#    Get-Module VSTeam | Remove-Module -Force
+#    Import-Module $PSScriptRoot\..\..\dist\VSTeam.psd1 -Force
+# }
 
 ##############################################################
 #     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
