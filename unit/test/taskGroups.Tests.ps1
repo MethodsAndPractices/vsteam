@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-#ipmo D:\Projects\Main\Powershell\vsteam\dist\VSTeam.psd1 -Force
+ipmo D:\Projects\Main\Powershell\vsteam\dist\VSTeam.psd1 -Force
 
 InModuleScope VSTeam {
    # Set the account to use for testing. A normal user would do this
@@ -21,6 +21,7 @@ InModuleScope VSTeam {
       BeforeAll {
          Set-VSTeamAPIVersion -Target VSTS
          $projectName = "project"
+         $taskGroupJsonAsString = Get-Content $taskGroupJson -Raw
       }
 
       Context 'Get-VSTeamTaskGroup list' {
@@ -72,15 +73,15 @@ InModuleScope VSTeam {
       }
 
 
-      # Context 'Remove-VSTeamVariableGroup' {
+      # Context 'Remove-VSTeamTaskGroup' {
       #    Mock Invoke-RestMethod
 
-      #    It 'should delete variable group' {
+      #    It 'should delete Task group' {
       #       $projectID = 1
-      #       Remove-VSTeamVariableGroup -projectName project -Id $projectID -Force
+      #       Remove-VSTeamTaskGroup -projectName project -Id $projectID -Force
 
       #       Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-      #          $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+      #          $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/Taskgroups/$($projectID)?api-version=$([VSTeamVersions]::TaskGroups)" -and
       #          $Method -eq 'Delete'
       #       }
       #    }
@@ -92,8 +93,6 @@ InModuleScope VSTeam {
          }
 
          It 'should create a task group using body param' {
-            $taskGroupJsonAsString = Get-Content $taskGroupJson -Raw
-
             Add-VSTeamTaskGroup -ProjectName $projectName -Body $taskGroupJsonAsString
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -106,31 +105,42 @@ InModuleScope VSTeam {
          It 'should create a task group using infile param' {
             Add-VSTeamTaskGroup -ProjectName $projectName -InFile $taskGroupJson
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/?api-version=$([VSTeamVersions]::TaskGroups)" -and
                $InFile -eq $taskGroupJson -and
                $Method -eq "Post"
-            }
+             }
          }
       }
 
-      # Context 'Update-VSTeamVariableGroup' {
-      #    Mock Invoke-RestMethod {
-      #       #Write-Host $args
+      Context 'Update-VSTeamTaskGroup' {
+         Mock Invoke-RestMethod {
+            return Get-Content $taskGroupJson | ConvertFrom-Json
+         }
 
-      #       $collection = Get-Content $sampleFileVSTS | ConvertFrom-Json
-      #       return $collection.value | Where-Object {$_.id -eq 1}
-      #    } -Verifiable
+         It 'should update a task group using body param' {
+            $taskGroupToUpdate = Get-VSTeamTaskGroup -Name "For Unit Tests" -ProjectName $projectName
 
-      #    It 'should update an exisiting Variable Group' {
+            Update-VSTeamTaskGroup -ProjectName $projectName -Body $taskGroupJsonAsString -Id $taskGroupToUpdate.id
 
-      #       Update-VSTeamVariableGroup @testParameters
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/$($taskGroupToUpdate.id)?api-version=$([VSTeamVersions]::TaskGroups)" -and
+               $Body -eq $taskGroupJsonAsString -and
+               $Method -eq "Put"
+            }
+         }
 
-      #       Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-      #          $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
-      #          $Method -eq 'Put'
-      #       }
-      #    }
-      # }
+         It 'should update a task group using infile param' {
+            $taskGroupToUpdate = Get-VSTeamTaskGroup -Name "For Unit Tests" -ProjectName $projectName
+
+            Update-VSTeamTaskGroup -ProjectName $projectName -InFile $taskGroupJson -Id $taskGroupToUpdate.id
+
+             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/$($taskGroupToUpdate.id)?api-version=$([VSTeamVersions]::TaskGroups)" -and
+               $InFile -eq $taskGroupJson -and
+               $Method -eq "Put"
+             }
+         }
+      }
    }
 }
