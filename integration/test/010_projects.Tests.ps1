@@ -439,7 +439,7 @@ InModuleScope VSTeam {
 
             It 'Add-VSTeamUserEntitlement should add a team' {
                Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
-               (Get-VSTeamUserEntitlement).Count | Should Be 2
+               (Get-VSTeamUserEntitlement).Count | Should Be 3
             }
          }
       }
