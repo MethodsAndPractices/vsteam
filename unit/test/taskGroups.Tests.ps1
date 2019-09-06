@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-ipmo D:\Projects\Main\Powershell\vsteam\dist\VSTeam.psd1 -Force
+#ipmo D:\Projects\Main\Powershell\vsteam\dist\VSTeam.psd1 -Force
 
 InModuleScope VSTeam {
    # Set the account to use for testing. A normal user would do this
@@ -54,6 +54,7 @@ InModuleScope VSTeam {
 
       Context 'Get-VSTeamTaskGroup Name' {
          Mock Invoke-RestMethod {
+            # Return multiple task groups, because the function filters by name after getting the list from the server.
             return Get-Content $taskGroupsJson | ConvertFrom-Json
          }
 
@@ -85,22 +86,33 @@ InModuleScope VSTeam {
       #    }
       # }
 
-#       Context 'Add-VSTeamTaskGroup' {
-#          # #todo
-#          # Mock Invoke-RestMethod {
-#          #    $collection = Get-Content $sampleFileVSTS | ConvertFrom-Json
-#          #    return $collection.value | Where-Object {$_.id -eq 2}
-#          # } -Verifiable
+      Context 'Add-VSTeamTaskGroup' {
+         Mock Invoke-RestMethod {
+            return Get-Content $taskGroupJson | ConvertFrom-Json
+         }
 
-#          It 'should create a task group' {
+         It 'should create a task group using body param' {
+            $taskGroupJsonAsString = Get-Content $taskGroupJson -Raw
 
-# #            Add-VSTeamTaskGroup
+            Add-VSTeamTaskGroup -ProjectName $projectName -Body $taskGroupJsonAsString
 
-#             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-#  #              $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$([VSTeamVersions]::VariableGroups)"
-#             }
-#          }
-#       }
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/?api-version=$([VSTeamVersions]::TaskGroups)" -and
+               $Body -eq $taskGroupJsonAsString -and
+               $Method -eq "Post"
+            }
+         }
+
+         It 'should create a task group using infile param' {
+            Add-VSTeamTaskGroup -ProjectName $projectName -InFile $taskGroupJson
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/?api-version=$([VSTeamVersions]::TaskGroups)" -and
+               $InFile -eq $taskGroupJson -and
+               $Method -eq "Post"
+            }
+         }
+      }
 
       # Context 'Update-VSTeamVariableGroup' {
       #    Mock Invoke-RestMethod {
