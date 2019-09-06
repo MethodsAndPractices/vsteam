@@ -1,9 +1,11 @@
 
 function Get-VSTeamTaskGroup {
-   [CmdletBinding()]
+   [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
+      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
      [string] $Id,
      
+     [Parameter(ParameterSetName = 'ByName', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
      [string] $Name
   )
 
