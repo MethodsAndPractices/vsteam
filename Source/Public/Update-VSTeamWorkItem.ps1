@@ -25,7 +25,7 @@ function Update-VSTeamWorkItem {
    Process {
       # Constructing the contents to be send.
       # Empty parameters will be skipped when converting to json.
-      $body = @(
+      [Array]$body = @(
          @{
             op    = "add"
             path  = "/fields/System.Title"

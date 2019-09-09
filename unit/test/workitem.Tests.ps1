@@ -80,7 +80,7 @@ InModuleScope VSTeam {
             }
          }
 
-         It 'With Default Project should add work item with additional properties' {
+         It 'With Default Project should add work item only with additional properties and parent id' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
             $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
@@ -103,7 +103,27 @@ InModuleScope VSTeam {
             }
          }
 
-         It 'With Default Project should throw exception when adding existing parameters to additional properties' {
+         It 'With Default Project should add work item only with additional properties' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+
+            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -AdditionalFields $additionalFields
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Post' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*Test1*' -and
+               $Body -like '*Testing*' -and
+               $Body -like '*/fields/System.Title*' -and
+               $Body -like '*/fields/System.Tags*' -and
+               $Body -like '*/fields/System.AreaPath*' -and
+               $Body -like '*`]' -and # Make sure the body is an array
+               $ContentType -eq 'application/json-patch+json' -and
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            }
+         }
+
+         It 'With Default Project should throw exception when adding existing parameters to additional properties and parent id' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
             $additionalFields = @{"System.Title"= "Test1"; "System.AreaPath" = "Project\\TestPath"}
@@ -147,6 +167,74 @@ InModuleScope VSTeam {
                $ContentType -eq 'application/json-patch+json' -and
                $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
             }
+         }
+
+         It 'With Default Project should update work item with 2 parameters and additional properties' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+
+            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Patch' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*Test1*' -and
+               $Body -like '*Testing*' -and
+               $Body -like '*/fields/System.Title*' -and
+               $Body -like '*/fields/System.Description*' -and
+               $Body -like '*/relations/-*' -and
+               $Body -like '*/fields/System.Tags*' -and
+               $Body -like '*/fields/System.AreaPath*' -and
+               $Body -like '*`]' -and # Make sure the body is an array
+               $ContentType -eq 'application/json-patch+json' -and
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            }
+         }
+
+         It 'With Default Project should update work item only with 1 parameter and additional properties' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+
+            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            Update-VSTeamWorkItem 1 -Title Test1 -AdditionalFields $additionalFields
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Patch' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*Test1*' -and
+               $Body -like '*Testing*' -and
+               $Body -like '*/fields/System.Title*' -and
+               $Body -like '*/fields/System.Tags*' -and
+               $Body -like '*/fields/System.AreaPath*' -and
+               $Body -like '*`]' -and # Make sure the body is an array
+               $ContentType -eq 'application/json-patch+json' -and
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            }
+         }
+
+         It 'With Default Project should update work item only with additional properties' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+
+            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            Update-VSTeamWorkItem 1 -AdditionalFields $additionalFields
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Patch' -and
+               $Body -like '`[*' -and # Make sure the body is an array
+               $Body -like '*Test1*' -and
+               $Body -like '*Testing*' -and
+               $Body -like '*/fields/System.Tags*' -and
+               $Body -like '*/fields/System.AreaPath*' -and
+               $Body -like '*`]' -and # Make sure the body is an array
+               $ContentType -eq 'application/json-patch+json' -and
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            }
+         }
+
+         It 'With Default Project should throw exception when adding existing parameters to additional properties' {
+            $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+
+            $additionalFields = @{"System.Title"= "Test1"; "System.AreaPath" = "Project\\TestPath"}
+            { Update-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should Throw
          }
       }
 
