@@ -1,7 +1,5 @@
 Set-StrictMode -Version Latest
 
-ipmo D:\Projects\Main\Powershell\vsteam\dist\VSTeam.psd1 -Force
-
 InModuleScope VSTeam {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
@@ -72,20 +70,20 @@ InModuleScope VSTeam {
          }
       }
 
+      Context 'Remove-VSTeamTaskGroup' {
+         Mock Invoke-RestMethod
 
-      # Context 'Remove-VSTeamTaskGroup' {
-      #    Mock Invoke-RestMethod
+         It 'should delete Task group' {
+            $projectID = "d30f8b85-6b13-41a9-bb77-2e1a9c611def"
 
-      #    It 'should delete Task group' {
-      #       $projectID = 1
-      #       Remove-VSTeamTaskGroup -projectName project -Id $projectID -Force
+            Remove-VSTeamTaskGroup -projectName $projectName -Id $projectID -Force
 
-      #       Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-      #          $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/Taskgroups/$($projectID)?api-version=$([VSTeamVersions]::TaskGroups)" -and
-      #          $Method -eq 'Delete'
-      #       }
-      #    }
-      # }
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/$($projectID)?api-version=$([VSTeamVersions]::TaskGroups)" -and
+               $Method -eq 'Delete'
+            }
+         }
+      }
 
       Context 'Add-VSTeamTaskGroup' {
          Mock Invoke-RestMethod {
