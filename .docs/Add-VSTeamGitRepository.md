@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-Add-VSTeamGitRepository adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
+Add-VSTeamGitRepository adds a Git repository to your Azure DevOps or Team Foundation Server account.
 
 ## EXAMPLES
 

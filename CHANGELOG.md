@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.3.4
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/193) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Rename:
+VSTS --> AzD
+*Visual Studio Team Services --> Azure DevOps
+
 ## 6.3.3
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/191) from [quintessential5](https://github.com/quintessential5) which included the following:

@@ -1,1 +1,1 @@
-Get the policy types in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the policy types in the specified Azure DevOps or Team Foundation Server project.

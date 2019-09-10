@@ -1,0 +1,88 @@
+parameters:
+  name: ''
+  displayName: ''
+  pool: ''
+  account: ''
+  apiVersion: ''
+  os: ''
+  depends: ''
+
+jobs:
+  - deployment: ${{ parameters.name }}
+    displayName: ${{ parameters.displayName }}
+    variables:
+      ACCT: ${{ parameters.account}}
+      API_VERSION: ${{ parameters.apiVersion }}
+    ${{ if eq(parameters['depends'], true) }}:
+    dependsOn: ${{ parameters.depends }}
+    pool:
+      vmImage: ${{ parameters.pool }}
+    environment: '${{ parameters.displayName }}'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: PowerShell@2
+              displayName: 'Register Private Repository'
+              inputs:
+                targetType: 'inline'
+                script: |
+                  $n = 'LoECDA'
+                  $e = "$(EMAIL)"
+                  $url = "$(REPO_URL)"
+                  $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
+                  $creds = New-Object PSCredential($e, $pwd)
+
+                  if(-not (Get-PSRepository | ? Name -eq $n)) {
+                      Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
+                  }
+
+            - task: PowerShell@2
+              displayName: 'Install VSTeam Module'
+              inputs:
+                targetType: 'inline'
+                script: |
+                  # Load the psd1 file so you can read the version
+                  $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
+
+                  $n = 'LoECDA'
+                  $e = "$(EMAIL)"
+                  $b = "$($manifest.ModuleVersion).$(Build.BuildId)"
+                  $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
+                  $creds = New-Object PSCredential($e, $pwd)
+
+                  Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Scope CurrentUser -Verbose
+                workingDirectory: '$(Pipeline.Workspace)/Test'
+
+            - task: PowerShell@2
+              displayName: 'Install Pester'
+              inputs:
+                targetType: 'inline'
+                script: 'Install-Module -Name Pester -MinimumVersion 4.3.1 -MaximumVersion 4.3.1 -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
+
+            - task: PowerShell@2
+              displayName: 'Run Integration Tests'
+              inputs:
+                targetType: 'inline'
+                script: |
+                  if('${{parameters['apiVersion']}}' -eq 'TFS2017') {
+                    $env:PAT='$(2017PAT)'
+                  } elseif('${{parameters['apiVersion']}}' -eq 'TFS2018') {
+                    $env:PAT='$(2018PAT)'
+                  } elseif('${{parameters['apiVersion']}}' -eq 'VSTS') {
+                    $env:PAT='$(VSTSPAT)'
+                  }
+                  Import-Module VSTeam
+                  Invoke-Pester -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
+                failOnStderr: true
+                workingDirectory: '$(Pipeline.Workspace)/Test/integration'
+
+            - task: PublishTestResults@2
+              displayName: 'Publish Test Results'
+              inputs:
+                testResultsFormat: NUnit
+                testResultsFiles: '**/test-results.xml'
+                searchFolder: '$(Pipeline.Workspace)/Test/integration'
+                testRunTitle: '${{ parameters.os }} Tests'
+              continueOnError: true
+              condition: succeededOrFailed()

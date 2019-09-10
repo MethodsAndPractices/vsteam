@@ -2,7 +2,7 @@ TOPIC
     VSTeam Provider
 
 SHORT DESCRIPTION
-    The VSTeamAccount SHiPS provider allows you to navigate your TFS/VSTS
+    The VSTeamAccount SHiPS provider allows you to navigate your TFS/AzD
     as a file system using the following tree:
 
    Account

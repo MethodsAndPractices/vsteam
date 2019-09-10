@@ -14,6 +14,6 @@ Profiles allow you to store your account information for easy switching of accou
 
 [Provider](../en-US/about_vsteam_provider.help.txt)
 
-The provider allows you to navigate your TFS or VSTS as a file system.
+The provider allows you to navigate your TFS or AzD as a file system.
 
 <!-- #include "./index.md" -->

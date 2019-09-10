@@ -12,7 +12,7 @@
    RootModule        = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.3.3'
+   ModuleVersion     = '6.3.4'
 
    # Supported PSEditions
    # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@
    Copyright         = '(c) 2019 Donovan Brown. All rights reserved.'
 
    # Description of the functionality provided by this module
-   Description       = 'Adds functionality for working with Visual Studio Team Services and Team Foundation Server.'
+   Description       = 'Adds functionality for working with Azure DevOps and Team Foundation Server.'
 
    # Minimum version of the Windows PowerShell engine required by this module
    # PowerShellVersion = ''

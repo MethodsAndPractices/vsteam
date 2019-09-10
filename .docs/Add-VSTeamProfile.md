@@ -40,7 +40,7 @@ On Windows, allows you use to use Windows authentication against a local TFS ser
 
 ### -Account
 
-The Visual Studio Team Services (VSTS) account name to use.
+The Azure DevOps (AzD) account name to use.
 DO NOT enter the entire URL.
 
 Just the portion after dev.azure.com. For example in the
@@ -74,7 +74,7 @@ Required: True
 
 ### -PersonalAccessToken
 
-The personal access token from VSTS/TFS to use to access this account.
+The personal access token from AzD/TFS to use to access this account.
 
 ```yaml
 Type: String

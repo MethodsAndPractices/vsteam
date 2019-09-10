@@ -21,7 +21,7 @@ LONG DESCRIPTION
 EXAMPLES
     Add-VSTeamProfile -Account demonstrations -Name demonstrations -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrmgap3mziwnga -Version VSTS
 
-    This will add a profile named demonstrations for use with Set-VSTeamAccount using the VSTS API.
+    This will add a profile named demonstrations for use with Set-VSTeamAccount using the AzD API.
 
     Get-VSTeamProfiles | Remove-VSTeamProfiles -Force
 

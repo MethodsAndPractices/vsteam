@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-Invoke-VSTeamRequest allows you to call a TFS/VSTS REST API much easier than using Invoke-WebRequest directly. The shape of the URI and authentication is all handled for you.
+Invoke-VSTeamRequest allows you to call a TFS/AzD REST API much easier than using Invoke-WebRequest directly. The shape of the URI and authentication is all handled for you.
 
 ## EXAMPLES
 
