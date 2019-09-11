@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.3.5
+
+Merged [Pull Request]() from [quintessential5](https://github.com/quintessential5) which included the following:
+
+Support for task groups.
+
 ## 6.3.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/193) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:

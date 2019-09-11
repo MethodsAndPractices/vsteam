@@ -1,6 +1,7 @@
 function Remove-VSTeamTaskGroup {
+   [CmdletBinding()]
    param(       
-      [Parameter(Mandatory)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $Id,
 
       [switch] $Force
