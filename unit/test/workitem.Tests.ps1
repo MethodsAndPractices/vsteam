@@ -113,7 +113,6 @@ InModuleScope VSTeam {
                $Method -eq 'Post' -and
                $Body -like '`[*' -and # Make sure the body is an array
                $Body -like '*Test1*' -and
-               $Body -like '*Testing*' -and
                $Body -like '*/fields/System.Title*' -and
                $Body -like '*/fields/System.Tags*' -and
                $Body -like '*/fields/System.AreaPath*' -and
@@ -182,12 +181,11 @@ InModuleScope VSTeam {
                $Body -like '*Testing*' -and
                $Body -like '*/fields/System.Title*' -and
                $Body -like '*/fields/System.Description*' -and
-               $Body -like '*/relations/-*' -and
                $Body -like '*/fields/System.Tags*' -and
                $Body -like '*/fields/System.AreaPath*' -and
                $Body -like '*`]' -and # Make sure the body is an array
                $ContentType -eq 'application/json-patch+json' -and
-               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
             }
          }
 
@@ -201,13 +199,12 @@ InModuleScope VSTeam {
                $Method -eq 'Patch' -and
                $Body -like '`[*' -and # Make sure the body is an array
                $Body -like '*Test1*' -and
-               $Body -like '*Testing*' -and
                $Body -like '*/fields/System.Title*' -and
                $Body -like '*/fields/System.Tags*' -and
                $Body -like '*/fields/System.AreaPath*' -and
                $Body -like '*`]' -and # Make sure the body is an array
                $ContentType -eq 'application/json-patch+json' -and
-               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
             }
          }
 
@@ -220,13 +217,11 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Patch' -and
                $Body -like '`[*' -and # Make sure the body is an array
-               $Body -like '*Test1*' -and
-               $Body -like '*Testing*' -and
                $Body -like '*/fields/System.Tags*' -and
                $Body -like '*/fields/System.AreaPath*' -and
                $Body -like '*`]' -and # Make sure the body is an array
                $ContentType -eq 'application/json-patch+json' -and
-               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
             }
          }
 
