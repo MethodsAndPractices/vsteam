@@ -120,6 +120,7 @@ stages:
 - stage: Package
   displayName: Package Management
   dependsOn: Build
+  condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
   jobs:
   - deployment: Deploy
     displayName: Package Management
