@@ -1,5 +1,6 @@
 function Get-VSTeamAPIVersion {
    [CmdletBinding()]
+   [OutputType([System.Collections.Hashtable])] 
    param()
 
    return @{
