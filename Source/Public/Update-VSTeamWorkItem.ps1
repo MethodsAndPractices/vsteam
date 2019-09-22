@@ -25,7 +25,7 @@ function Update-VSTeamWorkItem {
    Process {
       # Constructing the contents to be send.
       # Empty parameters will be skipped when converting to json.
-      $body = @(
+      [Array]$body = @(
          @{
             op    = "add"
             path  = "/fields/System.Title"
@@ -53,7 +53,7 @@ function Update-VSTeamWorkItem {
          foreach ($fieldName in $AdditionalFields.Keys) {
 
             #check that main properties are not added into the additional fields hashtable
-            $foundFields = $body | Where-Object { $_.path -like "*$fieldName" }
+            $foundFields = $body | Where-Object { $null -ne $_ -and $_.path -like "*$fieldName" }
             if ($null -ne $foundFields) {
                throw "Found duplicate field '$fieldName' in parameter AdditionalFields, which is already a parameter. Please remove it."
             }
