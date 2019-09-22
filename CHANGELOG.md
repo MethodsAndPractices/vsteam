@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.3.5
+
+Updated Build-Module.ps1 to support static code analysis and running unit tests.
+Updated Merge-File.ps1 to clean trailing white-space.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/199) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+bug fix for update and add workitem
+
 ## 6.3.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/193) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
