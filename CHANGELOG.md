@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.3.6
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/200) from [Chris Gardner](https://github.com/ChrisLGardner) which included the following:
+
+Get-VSTeamPullRequest documentation was linking to Get-VSTeamWorkItem documentation
+
 ## 6.3.5
 
 Updated Build-Module.ps1 to support static code analysis and running unit tests.
