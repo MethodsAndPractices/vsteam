@@ -50,7 +50,6 @@ function Get-VSTeamWiql {
             -Querystring $QueryString
       }
 
-      $workItems = @()
       if ($Expand) {
          
          [array]$Ids = $resp.workItems | Select-Object -ExpandProperty id
