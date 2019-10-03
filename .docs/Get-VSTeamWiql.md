@@ -4,13 +4,13 @@
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VSTeamWiqlItem.md" -->
+<!-- #include "./synopsis/Get-VSTeamWiql.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Get-VSTeamWiqlItem.md" -->
+<!-- #include "./synopsis/Get-VSTeamWiql.md" -->
 
 ## EXAMPLES
 
