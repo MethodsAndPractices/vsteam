@@ -44,7 +44,7 @@ InModuleScope VSTeam {
       Context 'Get-Wiql' {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
-            Write-Host $args
+            #Write-Host $args
        
             return $wiqlResult
          }
@@ -52,7 +52,7 @@ InModuleScope VSTeam {
          # function is mocked because it is used when switch 'Expanded' is being used.
          Mock Get-VSTeamWorkItem {
             # If this test fails uncomment the line below to see how the mock was called.
-            Write-Host $args
+            #Write-Host $args
        
             return $expandedWorkItems
          }
