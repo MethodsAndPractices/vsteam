@@ -44,7 +44,7 @@ InModuleScope VSTeam {
       Context 'Get-Wiql' {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
+            Write-Host $args
        
             return $wiqlResult
          }
