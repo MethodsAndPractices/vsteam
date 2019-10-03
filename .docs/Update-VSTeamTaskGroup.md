@@ -101,9 +101,33 @@ Accept wildcard characters: False
 
 The path to the json file that represents the task group
 
+```yaml
+Type: String
+Parameter Sets: ByFile
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -Body
 
 The json that represents the task group as a string
+
+```yaml
+Type: String
+Parameter Sets: ByBody
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 
