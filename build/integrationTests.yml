@@ -24,13 +24,13 @@ jobs:
       runOnce:
         deploy:
           steps:
-            ${{ if eq(parameters['start'], 'true') }}:
             - task: AzureResourceGroupDeployment@2
               displayName: 'Start TFS 2017'
               inputs:
                 azureSubscription: 'PM_DONOVANBROWN'
                 action: Start
                 resourceGroupName: SonarQube
+              condition: and(succeeded(), eq('${{ parameters.start }}', 'true'))
 
             - task: PowerShell@2
               displayName: 'Register Private Repository'
@@ -97,10 +97,10 @@ jobs:
               continueOnError: true
               condition: succeededOrFailed()
 
-            ${{ if eq(parameters['stop'], 'true') }}:
             - task: AzureResourceGroupDeployment@2
               displayName: 'Stop and Deallocate TFS 2017'
               inputs:
                 azureSubscription: 'PM_DONOVANBROWN'
                 action: StopWithDeallocate
                 resourceGroupName: SonarQube
+              condition: and(succeeded(), eq('${{ parameters.stop }}', 'true'))
