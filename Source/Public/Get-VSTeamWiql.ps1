@@ -17,8 +17,8 @@ function Get-VSTeamWiql {
       [Switch] $Expand
    )
    DynamicParam {
-      $arrSet = Get-VSTeamProject | Select-Object -ExpandProperty Name
-      _buildProjectNameDynamicParam -mandatory $true -arrSet $arrSet      
+      #$arrSet = Get-VSTeamProject | Select-Object -ExpandProperty Name
+      _buildProjectNameDynamicParam -mandatory $true #-arrSet $arrSet      
    }
 
    Process {
@@ -53,7 +53,7 @@ function Get-VSTeamWiql {
       $workItems = @()
       if ($Expand) {
          
-         $Ids = $resp.workItems | Select-Object -ExpandProperty id
+         [array]$Ids = $resp.workItems | Select-Object -ExpandProperty id
          $Fields = $resp.columns | Select-Object -ExpandProperty referenceName
       
          $resp.workItems = @()
