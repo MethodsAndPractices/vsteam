@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.3.7
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/204) from [Jeroen Janssen](https://github.com/japj) which included the following:
+
+add maxParallelism to Disable/Enable-VSTeamAgent
+
 ## 6.3.6
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/200) from [Chris Gardner](https://github.com/ChrisLGardner) which included the following:
