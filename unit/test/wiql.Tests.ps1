@@ -33,12 +33,12 @@ InModuleScope VSTeam {
          asOf            = "2019-10-03T18:35:09.117Z"
          columns         = @($column)
          sortColumns     = @($sortColumn)
-         workItems       = @($workItem)
+         workItems       = @($workItem,$workItem)
       }
 
       $expandedWorkItems = @{
          count = 1
-         value = @($workItem)
+         value = @($workItem,$workItem)
       }
 
       Context 'Get-Wiql' {

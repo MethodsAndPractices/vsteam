@@ -52,8 +52,8 @@ function Get-VSTeamWiql {
 
       if ($Expand) {
          
-         [array]$Ids = $resp.workItems | Select-Object -ExpandProperty id
-         $Fields = $resp.columns | Select-Object -ExpandProperty referenceName
+         [array]$Ids = $resp.workItems.id
+         $Fields = $resp.columns.referenceName
       
          $resp.workItems = @()
          #splitting id array by 200, since a maximum of 200 ids are allowed per call   
