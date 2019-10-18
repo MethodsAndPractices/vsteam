@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/VSTS and a NuGet server using the NuGet connection type.
+The cmdlet adds a new connection between TFS/AzD and a NuGet server using the NuGet connection type.
 
 This is only used when using the NuGet tasks.
 
@@ -79,7 +79,7 @@ Position: Named
 ### -EndpointName
 
 The name displayed on the services page.
-In VSTS this is the Connection Name.
+In AzD this is the Connection Name.
 
 ```yaml
 Type: String

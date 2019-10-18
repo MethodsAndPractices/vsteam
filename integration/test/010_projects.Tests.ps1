@@ -2,7 +2,7 @@ Set-StrictMode -Version Latest
 
 if ($null -eq $env:TEAM_CIBUILD) {
    Get-Module VSTeam | Remove-Module -Force
-   Import-Module $PSScriptRoot\..\..\Source\VSTeam.psd1 -Force
+   Import-Module $PSScriptRoot\..\..\dist\VSTeam.psd1 -Force
 }
 
 ##############################################################
@@ -439,7 +439,7 @@ InModuleScope VSTeam {
 
             It 'Add-VSTeamUserEntitlement should add a team' {
                Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
-               (Get-VSTeamUserEntitlement).Count | Should Be 2
+               (Get-VSTeamUserEntitlement).Count | Should Be 3
             }
          }
       }

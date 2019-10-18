@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure Resource Manager connection type.
+The cmdlet adds a new connection between TFS/AzD and Azure using the Azure Resource Manager connection type.
 
 ## EXAMPLES
 
@@ -77,7 +77,7 @@ Accept pipeline input: true (ByPropertyName)
 ### -EndpointName
 
 The name displayed on the services page.
-In VSTS this is the Connection Name.
+In AzD this is the Connection Name.
 
 ```yaml
 Type: String

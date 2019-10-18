@@ -2228,7 +2228,17 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
+PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor</dev:code>
+        <dev:remarks>
+          <maml:para>Adds Test User to the Endpoint Administrators group.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Get-VsTeamUser</maml:linkText>
@@ -5288,6 +5298,18 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AdditionalFields</maml:name>
+          <maml:Description>
+            <maml:para>Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -5379,6 +5401,18 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AdditionalFields</maml:name>
+        <maml:Description>
+          <maml:para>Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -5396,6 +5430,7 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
       <maml:alert>
         <maml:para>WorkItemType is a dynamic parameter and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamWorkItem you will have to type in the names.</maml:para>
+        <maml:para>Any of the basic work item parameters defined in this method, will cause an exception if also added to the parameter AdditionalFields, since it is redundant. Either only use the parameter OR define them in the AdditionalFields parameter.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -5415,6 +5450,19 @@ ID Title          Status
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description"
+
+ID Title          Status
+-- -----          ------
+6  New Work Item  To Do</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
+PS C:\&gt; $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+PS C:\&gt; Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
 
 ID Title          Status
 -- -----          ------
@@ -8851,7 +8899,15 @@ ID Title          Status
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'</dev:code>
+        <dev:remarks>
+          <maml:para>Assigns Endpoint Administrators group to $group variable.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -12013,9 +12069,9 @@ ID Title          Status
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
-          <maml:name>Id</maml:name>
+          <maml:name>Name</maml:name>
           <maml:Description>
-            <maml:para>ID of the existing variable group</maml:para>
+            <maml:para>Name of the existing variable group</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -12053,10 +12109,22 @@ ID Title          Status
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
           <maml:para>ID of the existing variable group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Name of the existing variable group</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -12095,7 +12163,7 @@ ID Title          Status
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
-   ProjectName              = "some_project_name"
+   ProjectName = "some_project_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
@@ -12106,8 +12174,20 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
-   ProjectName              = "some_project_name"
-   Id                       = "variable_group_id"
+   ProjectName = "some_project_name"
+   Id          = "variable_group_id"
+}
+
+Get-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName = "some_project_name"
+   Name        = "variable_group_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters</dev:code>
@@ -14146,7 +14226,17 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
-    <command:examples />
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
+PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor</dev:code>
+        <dev:remarks>
+          <maml:para>Removes Test User from the Endpoint Administrators group.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Get-VsTeamUser</maml:linkText>
@@ -20540,6 +20630,18 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AdditionalFields</maml:name>
+          <maml:Description>
+            <maml:para>Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
             <maml:para>Forces the function without confirmation</maml:para>
@@ -20614,6 +20716,18 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AdditionalFields</maml:name>
+        <maml:Description>
+          <maml:para>Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
           <maml:para>Forces the function without confirmation</maml:para>
@@ -20642,6 +20756,7 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
       <maml:alert>
         <maml:para>WorkItemType is a dynamic parameter and use the default project value to query their validate set.</maml:para>
         <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Update-VSTeamWorkItem you will have to type in the names.</maml:para>
+        <maml:para>Any of the basic work item parameters defined in this method, will cause an exception if also added to the parameter AdditionalFields, since it is redundant. Either only use the parameter OR define them in the AdditionalFields parameter.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -20664,6 +20779,19 @@ PS C:\&gt; Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -
 
 ID Title              Status
 -- -----              ------
+6  Updated Work Item  To Do</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
+PS C:\&gt; $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+PS C:\&gt; Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
+
+ID Title          Status
+-- -----          ------
 6  Updated Work Item  To Do</dev:code>
         <dev:remarks>
           <maml:para></maml:para>

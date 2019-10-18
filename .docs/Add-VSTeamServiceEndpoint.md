@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new generic connection between TFS/VSTS and a third party service (see VSTS for available connections).
+The cmdlet adds a new generic connection between TFS/AzD and a third party service (see AzD for available connections).
 
 ## EXAMPLES
 
@@ -30,7 +30,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -EndpointName
 
-The name displayed on the services page. In VSTS this is the Connection Name.
+The name displayed on the services page. In AzD this is the Connection Name.
 
 ```yaml
 Type: String
@@ -39,7 +39,7 @@ Position: 2
 
 ### -EndpointType
 
-Type of endpoint (eg. `kubernetes`, `sonarqube`). See VSTS service page for supported endpoints.
+Type of endpoint (eg. `kubernetes`, `sonarqube`). See AzD service page for supported endpoints.
 
 ```yaml
 Type: String

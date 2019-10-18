@@ -52,6 +52,23 @@ InModuleScope VSTeam {
          }
       }
 
+      Context 'Get-VSTeamVariableGroup Name' {
+         Mock Invoke-RestMethod {
+
+            $collection = Get-Content $sampleFile2017 | ConvertFrom-Json
+            return $collection.value | Where-Object {$_.name -eq "TestVariableGroup1"}
+         }
+
+         It 'Should return one variable group' {
+            $varGroupName = "TestVariableGroup1"
+            Get-VSTeamVariableGroup -projectName project -Name $varGroupName
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/?api-version=$([VSTeamVersions]::VariableGroups)&groupName=$varGroupName"
+            }
+         }
+      }
+
       Context 'Remove-VSTeamVariableGroup' {
          Mock Invoke-RestMethod
 

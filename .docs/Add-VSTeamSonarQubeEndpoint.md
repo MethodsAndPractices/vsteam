@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using the SonarQube connection type.
+The cmdlet adds a new connection between TFS/AzD and a SonarQube server using the SonarQube connection type.
 
 This is only used when using the SonarQube tasks.
 
@@ -48,7 +48,7 @@ Accept pipeline input: true (ByPropertyName)
 ### -EndpointName
 
 The name displayed on the services page.
-In VSTS this is the Connection Name.
+In AzD this is the Connection Name.
 
 ```yaml
 Type: String
