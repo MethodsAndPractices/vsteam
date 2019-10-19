@@ -58,7 +58,7 @@ function Get-VSTeamWiql {
          $resp.workItems = @()
          #splitting id array by 200, since a maximum of 200 ids are allowed per call   
          $countIds = $Ids.Count    
-         for ($beginRange = 0; $beginRange -lt $countIds; $beginRange += 200) {
+         $resp.workItems = for ($beginRange = 0; $beginRange -lt $countIds; $beginRange += 200) {
 
             $endRange = ($beginRange + 199)
             
@@ -69,7 +69,7 @@ function Get-VSTeamWiql {
                $idArray = $Ids[$beginRange..($endRange)]
             }
             
-            $resp.workItems += (Get-VSTeamWorkItem -Fields $Fields -Ids $idArray).value
+            (Get-VSTeamWorkItem -Fields $Fields -Ids $idArray).value
          }
       
       }
