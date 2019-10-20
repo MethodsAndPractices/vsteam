@@ -237,6 +237,11 @@ InModuleScope VSTeam {
             [VSTeamVersions]::Version | Should Be 'TFS2018'
          }
 
+         It 'Should return AzD2019' {
+            Set-VSTeamAPIVersion -Target AzD2019
+            [VSTeamVersions]::Version | Should Be 'AzD2019'
+         }
+
          It 'Should VSTS' {
             Set-VSTeamAPIVersion -Target VSTS
             [VSTeamVersions]::Version | Should Be 'VSTS'

@@ -2,7 +2,7 @@ function Set-VSTeamAPIVersion {
    [CmdletBinding(DefaultParameterSetName = 'Target', SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
       [parameter(ParameterSetName = 'Target', Mandatory = $false, Position = 0)]
-      [ValidateSet('TFS2017', 'TFS2018', 'VSTS', 'AzD')]
+      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD')]
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
@@ -58,6 +58,21 @@ function Set-VSTeamAPIVersion {
       }
       else {
          switch ($Target) {
+            'AzD2019' {
+               [VSTeamVersions]::Version = 'AzD2019'
+               [VSTeamVersions]::Git = '5.0'
+               [VSTeamVersions]::Core = '5.0'
+               [VSTeamVersions]::Build = '5.0'
+               [VSTeamVersions]::Release = '5.0'
+               [VSTeamVersions]::DistributedTask = '5.0'
+               [VSTeamVersions]::VariableGroups = '5.0'
+               [VSTeamVersions]::Tfvc = '5.0'
+               [VSTeamVersions]::Packaging = ''
+               [VSTeamVersions]::MemberEntitlementManagement = ''
+               [VSTeamVersions]::ServiceFabricEndpoint = '5.0'
+               [VSTeamVersions]::ExtensionsManagement = '5.0'
+               [VSTeamVersions]::Graph = ''
+            }
             'TFS2018' {
                [VSTeamVersions]::Version = 'TFS2018'
                [VSTeamVersions]::Git = '3.2'

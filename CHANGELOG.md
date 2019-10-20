@@ -1,5 +1,9 @@
 # Changelog
 
+Added:
+
+- AzD2019 configuration, being Azure DevOps Server (on-prem) 2019 (17.143.28912.1)
+
 ## 6.3.6
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/200) from [Chris Gardner](https://github.com/ChrisLGardner) which included the following:
