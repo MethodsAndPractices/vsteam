@@ -1,0 +1,22 @@
+
+{
+   "tool": "Credential Scanner",
+   "suppressions": [
+     {
+       "file": "profile.Tests.ps1",
+       "_justification": "Fake credentials only used for unit tests."
+     },
+     {
+      "file": "Set-VSTeamAccount.Tests.ps1",
+      "_justification": "Fake credentials only used for unit tests."
+    },
+    {
+      "file": "serviceendpoints.Tests.ps1",
+      "_justification": "Fake credentials only used for unit tests."
+    },
+    {
+      "file": "VSTeam-Help.xml",
+      "_justification": "Fake credentials which are part of PS documentation examples."
+    }
+   ]
+ }

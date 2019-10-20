@@ -19,7 +19,7 @@
 ```powershell
 
 $methodParameters = @{
-   ProjectName              = "some_project_name"
+   ProjectName = "some_project_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters
@@ -30,8 +30,20 @@ Get-VSTeamVariableGroup @methodParameters
 ```powershell
 
 $methodParameters = @{
-   ProjectName              = "some_project_name"
-   Id                       = "variable_group_id"
+   ProjectName = "some_project_name"
+   Id          = "variable_group_id"
+}
+
+Get-VSTeamVariableGroup @methodParameters
+```
+
+### -------------------------- EXAMPLE 3 --------------------------
+
+```powershell
+
+$methodParameters = @{
+   ProjectName = "some_project_name"
+   Name        = "variable_group_name"
 }
 
 Get-VSTeamVariableGroup @methodParameters
@@ -46,6 +58,10 @@ Get-VSTeamVariableGroup @methodParameters
 ### -Id
 
 ID of the existing variable group
+
+### -Name
+
+Name of the existing variable group
 
 ```yaml
 Type: String

@@ -9,17 +9,25 @@ param(
    # By default the build will not install dependencies
    [switch]$installDep,
 
-   [switch]$ipmo
+   [switch]$ipmo,
+
+   [switch]$analyzeScript,
+
+   [switch]$runTests,
+
+   [switch]$codeCoverage
 )
 
 . ./Merge-File.ps1
 
-if ($installDep.IsPresent) {
+if ($installDep.IsPresent -or $analyzeScript.IsPresent) {
    # Load the psd1 file so you can read the required modules and install them
    $manifest = Import-PowerShellDataFile .\Source\VSTeam.psd1
 
    # Install each module
-   $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
+   if ($manifest.RequiredModules) {
+      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
+   }
 }
 
 if ([System.IO.Path]::IsPathRooted($outputDir)) {
@@ -28,6 +36,8 @@ if ([System.IO.Path]::IsPathRooted($outputDir)) {
 else {
    $output = Join-Path (Get-Location) $outputDir
 }
+
+$output = [System.IO.Path]::GetFullPath($output)
 
 Merge-File -inputFile ./Source/_functions.json -outputDir $output
 Merge-File -inputFile ./Source/types/_types.json -outputDir $output
@@ -49,14 +59,37 @@ Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
 Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-      ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
 
-(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") |
-   Set-Content "$output/VSTeam.psd1"
+(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
 
 Write-Output "Publish complete to $output"
 
-if($ipmo.IsPresent) {
+if ($ipmo.IsPresent -or $runTests.IsPresent) {
    Import-Module "$output/VSTeam.psd1" -Force
    Set-VSTeamAlias
+}
+
+if ($analyzeScript.IsPresent) {
+   Write-Output "Starting static code analysis..."
+   if ($null -eq $(Get-Module -Name PSScriptAnalyzer)) {
+      Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser
+   }
+
+   $r = Invoke-ScriptAnalyzer -Path $output -Recurse
+   $r | ForEach-Object { Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)" }
+   Write-Output "Static code analysis complete."
+}
+
+if ($runTests.IsPresent) {
+   if ($null -eq $(Get-Module -Name Pester)) {
+      Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+   }
+
+   if ($codeCoverage.IsPresent) {
+      Invoke-Pester -Script .\unit -CodeCoverage .\dist\*.ps1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -Show Fails
+   }
+   else {
+      Invoke-Pester -Script .\unit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passThru -Show Fails
+   }
 }

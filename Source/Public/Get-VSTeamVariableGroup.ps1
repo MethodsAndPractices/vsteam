@@ -2,7 +2,10 @@ function Get-VSTeamVariableGroup {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(Position = 0, ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $Id
+      [string] $Id,
+
+      [Parameter(Position = 0, ParameterSetName = 'ByName', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [string] $Name
    )
 
    DynamicParam {
@@ -21,17 +24,26 @@ function Get-VSTeamVariableGroup {
          _applyTypesToVariableGroup -item $resp
 
          Write-Output $resp
-      } else {
-         # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups'  `
-            -Version $([VSTeamVersions]::VariableGroups)
+      }
+      else {
+         if ($Name) {
+            $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups' -Version $([VSTeamVersions]::VariableGroups) -Method Get `
+               -QueryString @{groupName = $Name}
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypesToVariableGroup -item $item
+            Write-Output $resp
          }
+         else {
+            # Call the REST API
+            $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups'  `
+               -Version $([VSTeamVersions]::VariableGroups)
 
-         return $resp.value
+            # Apply a Type Name so we can use custom format view and custom type extensions
+            foreach ($item in $resp.value) {
+               _applyTypesToVariableGroup -item $item
+            }
+
+            return $resp.value
+         }
       }
    }
 }

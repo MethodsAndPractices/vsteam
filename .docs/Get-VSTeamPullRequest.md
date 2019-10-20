@@ -4,13 +4,13 @@
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VSTeamWorkItem.md" -->
+<!-- #include "./synopsis/Get-VSTeamPullRequest.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Get-VSTeamWorkItem.md" -->
+<!-- #include "./synopsis/Get-VSTeamPullRequest.md" -->
 
 ## EXAMPLES
 

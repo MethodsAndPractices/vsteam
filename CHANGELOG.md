@@ -1,5 +1,38 @@
 # Changelog
 
+## 6.3.6
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/200) from [Chris Gardner](https://github.com/ChrisLGardner) which included the following:
+
+Get-VSTeamPullRequest documentation was linking to Get-VSTeamWorkItem documentation
+
+## 6.3.5
+
+Updated Build-Module.ps1 to support static code analysis and running unit tests.
+Updated Merge-File.ps1 to clean trailing white-space.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/199) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+bug fix for update and add workitem
+
+## 6.3.4
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/193) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Rename:
+VSTS --> AzD
+*Visual Studio Team Services --> Azure DevOps
+
+## 6.3.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/191) from [quintessential5](https://github.com/quintessential5) which included the following:
+
+Get-VSTeamVariableGroup: support for getting by name as well as by ID.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/190) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Updated Add-VSTeamWorkItem and Update-VSTeamWorkItem to support any work item field, also custom ones.
+
 ## 6.3.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/182) from [eosfor](https://github.com/eosfor) which included the following:
