@@ -15,10 +15,21 @@ function Remove-VSTeamWorkItem {
 
       $idsToDelete = @()
 
-      if ($Ids) {
+      if ($PSCmdlet.ParameterSetName -eq "List") {
+
+         if($null -eq $Ids) {
+            throw "No Ids given, array was null" 
+         }
+
          $idsToDelete = $Ids       
       }
       else {
+
+         # work item IDs in AzD cannot be lower than 1. First work item id is always 1.
+         if($Id -lt 1) {
+            throw "given work item Id has to be greater than 0" 
+         }
+
          $idsToDelete = @($id[0])        
       }
 
