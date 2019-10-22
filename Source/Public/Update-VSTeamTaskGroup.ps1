@@ -21,7 +21,7 @@ function Update-VSTeamTaskGroup {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if ($Force -or $pscmdlet.ShouldProcess($item, "Update Task Group")) {
+      if ($Force -or $pscmdlet.ShouldProcess("Update Task Group")) {
          if ($InFile) {
             $resp = _callAPI -Method Put -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $([VSTeamVersions]::TaskGroups) -InFile $InFile -ContentType 'application/json' -Id $Id
          }
