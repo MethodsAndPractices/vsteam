@@ -30,9 +30,9 @@ function Get-VSTeamVariableGroup {
             $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups' -Version $([VSTeamVersions]::VariableGroups) -Method Get `
                -QueryString @{groupName = $Name}
 
-            _applyTypesToVariableGroup -item $resp.value
+            _applyTypesToVariableGroup -item $resp
 
-            Write-Output $resp.value
+            Write-Output $resp
          }
          else {
             # Call the REST API
