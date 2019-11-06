@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.
+Removes the Git repository from your Azure DevOps or Team Foundation Server account.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Remove-VSTeamGitRepository removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.
+Remove-VSTeamGitRepository removes the Git repository from your Azure DevOps or Team Foundation Server account.
 
 ## EXAMPLES
 

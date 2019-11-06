@@ -35,7 +35,7 @@ Allows you to provide all the information on the command line.
 PS C:\> Get-VSTeamProfile | Where-Object version -eq vsts | Select-Object -skip 1 | Update-VSTeamProfile -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Force
 ```
 
-This will update all but the first VSTS profile
+This will update all but the first AzD profile
 
 ## PARAMETERS
 
@@ -56,7 +56,7 @@ Required: True
 
 ### -PersonalAccessToken
 
-The personal access token from VSTS/TFS to use to access this account.
+The personal access token from AzD/TFS to use to access this account.
 
 ```yaml
 Type: String
