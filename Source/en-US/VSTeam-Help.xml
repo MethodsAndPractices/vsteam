@@ -2925,10 +2925,11 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+			   <maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+            <maml:para>If you are on AzD it will default to AzD otherwise it will default to TFS2017</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3008,6 +3009,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+			<maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -3065,6 +3067,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+			<maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -3172,6 +3175,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
           <maml:para>- TFS2018</maml:para>
+		  <maml:para>- AzD2019</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
           <maml:para></maml:para>
@@ -15654,6 +15658,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+			<maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -15761,6 +15766,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+			<maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -15842,6 +15848,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+			<maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -16036,6 +16043,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
           <maml:para>- TFS2018</maml:para>
+		  <maml:para>- AzD2019</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
           <maml:para></maml:para>
@@ -16244,6 +16252,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+			<maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
           </maml:Description>
@@ -16322,6 +16331,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
           <maml:para>- TFS2018</maml:para>
+		  <maml:para>- AzD2019</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
         </maml:Description>

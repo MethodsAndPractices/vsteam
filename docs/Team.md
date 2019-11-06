@@ -405,7 +405,7 @@ In version 6.0 the default aliases were removed to prevent conflicts with other 
 
 ### [Set-VSTeamAPIVersion](Set-VSTeamAPIVersion.md)
 
-Sets the API versions to support either TFS2017, TFS2018 or AzD.
+Sets the API versions to support either TFS2017, TFS2018, AzD2019 or AzD.
 
 ### [Set-VSTeamApproval](Set-VSTeamApproval.md)
 

@@ -4,6 +4,7 @@ Specifies the version to use. The acceptable values for this parameter are:
 
 - TFS2017
 - TFS2018
+- AzD2019
 - VSTS
 - AzD
 
