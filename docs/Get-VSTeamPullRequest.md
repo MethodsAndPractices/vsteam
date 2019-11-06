@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Returns one or more a work items from your project.
+Returns one or more open pull requests from your team, project, or Id.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Returns one or more a work items from your project.
+Returns one or more open pull requests from your team, project, or Id.
 
 ## EXAMPLES
 

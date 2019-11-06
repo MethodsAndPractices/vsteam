@@ -1,8 +1,18 @@
 # Changelog
 
-Added:
+## 6.4.0
 
-- AzD2019 configuration, being Azure DevOps Server (on-prem) 2019 (17.143.28912.1)
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/211) from [Dick van de Meulengraaf](https://github.com/dickvdm) which included the following:
+
+AzD2019 configuration, being Azure DevOps Server (on-prem) 2019 (17.143.28912.1)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/204) from [Jeroen Janssen](https://github.com/japj) which included the following:
+
+maxParallelism to Disable/Enable-VSTeamAgent
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/205) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Get-VSTeamWiql to get work items via [WIQL](https://docs.microsoft.com/en-us/rest/api/azure/devops/wit/wiql?view=azure-devops-rest-5.1) and also to expand the returned work items with all fields selected.
 
 ## 6.3.6
 

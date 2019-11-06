@@ -1,6 +1,6 @@
 # VSTeam Help
 
-Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery.com/packages/VSTeam/) that wraps the [REST API provided by Team Foundation Server and Visual Studio Team Services](https://cda.ms/ys). This allows you to access the power of TFS and VSTS from [PowerShell on Windows, MacOS and Linux](https://github.com/PowerShell/PowerShell).
+Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery.com/packages/VSTeam/) that wraps the [REST API provided by Team Foundation Server and Azure DevOps](https://cda.ms/ys). This allows you to access the power of TFS and AzD from [PowerShell on Windows, MacOS and Linux](https://github.com/PowerShell/PowerShell).
 
 ## About files
 
@@ -14,7 +14,7 @@ Profiles allow you to store your account information for easy switching of accou
 
 [Provider](../en-US/about_vsteam_provider.help.txt)
 
-The provider allows you to navigate your TFS or VSTS as a file system.
+The provider allows you to navigate your TFS or AzD as a file system.
 
 ## VSTeam Functions
 
@@ -54,7 +54,7 @@ Adds a new feed to package management.
 
 ### [Add-VSTeamGitRepository](Add-VSTeamGitRepository.md)
 
-Adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
+Adds a Git repository to your Azure DevOps or Team Foundation Server account.
 
 ### [Add-VSTeamGitRepositoryPermission](Add-VSTeamGitRepositoryPermission.md)
 
@@ -191,7 +191,7 @@ Resolve a storage key to a descriptor.
 
 ### [Get-VSTeamExtension](Get-VSTeamExtension.md)
 
-Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the installed extensions in the specified Azure DevOps or Team Foundation Server project.
 
 ### [Get-VSTeamFeed](Get-VSTeamFeed.md)
 
@@ -203,7 +203,7 @@ Queries the provided repository for its refs and returns them.
 
 ### [Get-VSTeamGitRepository](Get-VSTeamGitRepository.md)
 
-Get all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.
+Get all the repositories in your Azure DevOps or Team Foundation Server account, or a specific project.
 
 ### [Get-VSTeamGroup](Get-VSTeamGroup.md)
 
@@ -227,15 +227,15 @@ Gets a memberships for a container or member.
 
 ### [Get-VSTeamOption](Get-VSTeamOption.md)
 
-Returns all the versions of supported APIs of your TFS or VSTS.
+Returns all the versions of supported APIs of your TFS or AzD.
 
 ### [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
 
-Get the code policies in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the code policies in the specified Azure DevOps or Team Foundation Server project.
 
 ### [Get-VSTeamPolicyType](Get-VSTeamPolicyType.md)
 
-Get the policy types in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the policy types in the specified Azure DevOps or Team Foundation Server project.
 
 ### [Get-VSTeamPool](Get-VSTeamPool.md)
 
@@ -305,6 +305,10 @@ Get User Entitlement for a user.
 
 Gets a variable group
 
+### [Get-VSTeamWiql](Get-VSTeamWiql.md)
+
+Returns work items from the given WIQL query or a saved query by ID from your projects team.
+
 ### [Get-VSTeamWorkItem](Get-VSTeamWorkItem.md)
 
 Returns one or more a work items from your project.
@@ -315,7 +319,7 @@ Gets a list of all Work Item Types or a single work item type.
 
 ### [Invoke-VSTeamRequest](Invoke-VSTeamRequest.md)
 
-Allows you to call any TFS/VSTS REST API. All the Auth and Route Structure is taken care of for you. Just provide the parts of the API call you need.  If you need to send a non-standard URL use the -Url parameter.  If the -Url is used the Url is not changed but the header and UserAgent are added for you.
+Allows you to call any TFS/AzD REST API. All the Auth and Route Structure is taken care of for you. Just provide the parts of the API call you need.  If you need to send a non-standard URL use the -Url parameter.  If the -Url is used the Url is not changed but the header and UserAgent are added for you.
 
 ### [Remove-VSTeam](Remove-VSTeam.md)
 
@@ -355,7 +359,7 @@ Removes a package feed from the account.
 
 ### [Remove-VSTeamGitRepository](Remove-VSTeamGitRepository.md)
 
-Removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.
+Removes the Git repository from your Azure DevOps or Team Foundation Server account.
 
 ### [Remove-VSTeamMembership](Remove-VSTeamMembership.md)
 
@@ -406,7 +410,7 @@ In version 6.0 the default aliases were removed to prevent conflicts with other 
 
 ### [Set-VSTeamAPIVersion](Set-VSTeamAPIVersion.md)
 
-Sets the API versions to support either TFS2017, TFS2018, AzD2019 or VSTS.
+Sets the API versions to support either TFS2017, TFS2018, AzD2019 or AzD.
 
 ### [Set-VSTeamApproval](Set-VSTeamApproval.md)
 
@@ -426,7 +430,7 @@ Sets the status of a release to Active or Abandoned.
 
 ### [Show-VSTeam](Show-VSTeam.md)
 
-Opens TFS or VSTS site in the default browser.
+Opens TFS or AzD site in the default browser.
 
 ### [Show-VSTeamApproval](Show-VSTeamApproval.md)
 
