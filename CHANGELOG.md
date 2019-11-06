@@ -1,10 +1,16 @@
 # Changelog
 
-## 6.3.7
+## 6.4.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/204) from [Jeroen Janssen](https://github.com/japj) which included the following:
 
 add maxParallelism to Disable/Enable-VSTeamAgent
+
+## 6.4.0
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/205) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Added Get-VSTeamWiql to get work items via [WIQL](https://docs.microsoft.com/en-us/rest/api/azure/devops/wit/wiql?view=azure-devops-rest-5.1) and also to expand the returned work items with all fields selected.
 
 ## 6.3.6
 

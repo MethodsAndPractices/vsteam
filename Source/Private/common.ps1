@@ -65,6 +65,7 @@ function _hasAccount {
 function _buildRequestURI {
    [CmdletBinding()]
    param(
+      [string]$team,
       [string]$resource,
       [string]$area,
       [string]$id,
@@ -88,6 +89,10 @@ function _buildRequestURI {
 
       if ($ProjectName) {
          $sb.Append("/$projectName") | Out-Null
+      }
+
+      if ($team) {
+         $sb.Append("/$team") | Out-Null
       }
 
       $sb.Append("/_apis/") | Out-Null
@@ -588,8 +593,9 @@ function _callAPI {
       [object]$body,
       [string]$InFile,
       [string]$OutFile,
-      [string]$ContentType,
+      [string]$ContentType,      
       [string]$ProjectName,
+      [string]$Team,
       [string]$Url,
       [object]$QueryString
    )
@@ -628,7 +634,7 @@ function _callAPI {
    }
 
    # We have to remove any extra parameters not used by Invoke-RestMethod
-   $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Url', 'QueryString'
+   $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
    try {
