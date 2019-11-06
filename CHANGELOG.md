@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.4.0
+
+Added Get-VSTeamWiql to get work items via [WIQL](https://docs.microsoft.com/en-us/rest/api/azure/devops/wit/wiql?view=azure-devops-rest-5.1) and also to expand the returned work items with all fields selected.
+
 ## 6.3.6
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/200) from [Chris Gardner](https://github.com/ChrisLGardner) which included the following:

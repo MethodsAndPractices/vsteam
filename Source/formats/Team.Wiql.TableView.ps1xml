@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>Team.Wiql.TableView</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Wiql</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>QueryType</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>WorkItemIDs</Label>
+               </TableColumnHeader>      
+               <TableColumnHeader>
+                  <Label>WorkItems</Label>                  
+               </TableColumnHeader>             
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>queryType</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>WorkItemIDs</PropertyName>
+                     </TableColumnItem>
+                      <TableColumnItem>
+                        <PropertyName>workItems</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

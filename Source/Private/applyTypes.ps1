@@ -25,6 +25,13 @@ function _applyTypesToWorkItem {
    }
 }
 
+function _applyTypesToWiql {
+   param($item)
+   if ($item) {
+      $item.PSObject.TypeNames.Insert(0, 'Team.Wiql')
+   }
+}
+
 function _applyTypesToUser {
    param(
       [Parameter(Mandatory = $true)]
