@@ -16,15 +16,15 @@ InModuleScope VSTeam {
          url = "https://dev.azure.com/test/_apis/wit/workItems/47"
       }
 
-      $column = @{         
+      $column = @{
          referenceName = "System.Id"
          name          = "ID"
          url           = "https://dev.azure.com/razorspoint-test/_apis/wit/fields/System.Id"
       }
-      
-      $sortColumn = @{         
+
+      $sortColumn = @{
          field      = $column
-         descending = $false          
+         descending = $false
       }
 
       $wiqlResult = @{
@@ -33,31 +33,31 @@ InModuleScope VSTeam {
          asOf            = "2019-10-03T18:35:09.117Z"
          columns         = @($column)
          sortColumns     = @($sortColumn)
-         workItems       = @($workItem,$workItem)
+         workItems       = @($workItem, $workItem)
       }
 
       $expandedWorkItems = @{
          count = 1
-         value = @($workItem,$workItem)
+         value = @($workItem, $workItem)
       }
 
       Context 'Get-Wiql' {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
-            Write-Host $args
-       
+            # Write-Host $args
+
             return $wiqlResult
          }
 
          # function is mocked because it is used when switch 'Expanded' is being used.
          Mock Get-VSTeamWorkItem {
             # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
-       
+            # Write-Host $args
+
             return $expandedWorkItems
          }
 
-         It 'Get work items with custom WIQL query' {           
+         It 'Get work items with custom WIQL query' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery
@@ -72,9 +72,9 @@ InModuleScope VSTeam {
                $ContentType -eq 'application/json' -and
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/?api-version=$([VSTeamVersions]::Core)&`$top=100"
             }
-         }   
-         
-         It 'Get work items with custom WIQL query with -Top 250' {           
+         }
+
+         It 'Get work items with custom WIQL query with -Top 250' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 250
@@ -89,9 +89,9 @@ InModuleScope VSTeam {
                $ContentType -eq 'application/json' -and
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/?api-version=$([VSTeamVersions]::Core)&`$top=250"
             }
-         } 
-         
-         It 'Get work items with custom WIQL query with -Top 0' {           
+         }
+
+         It 'Get work items with custom WIQL query with -Top 0' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 0
@@ -106,9 +106,9 @@ InModuleScope VSTeam {
                $ContentType -eq 'application/json' -and
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/?api-version=$([VSTeamVersions]::Core)"
             }
-         } 
-         
-         It 'Get work items with custom WIQL query with expanded work items' {           
+         }
+
+         It 'Get work items with custom WIQL query with expanded work items' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Expand
@@ -125,7 +125,7 @@ InModuleScope VSTeam {
             }
          }
 
-         It 'Get work items with custom WIQL query with time precision' {           
+         It 'Get work items with custom WIQL query with time precision' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -TimePrecision
@@ -144,7 +144,7 @@ InModuleScope VSTeam {
             }
          }
 
-         It 'Get work items with query ID query' {           
+         It 'Get work items with query ID query' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1
 
@@ -152,8 +152,8 @@ InModuleScope VSTeam {
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/1?api-version=$([VSTeamVersions]::Core)&`$top=100"
             }
          }
-        
-         It 'Get work items with query ID query with expanded work items' {           
+
+         It 'Get work items with query ID query with expanded work items' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1 -Expand
 
@@ -161,8 +161,6 @@ InModuleScope VSTeam {
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/1?api-version=$([VSTeamVersions]::Core)&`$top=100"
             }
          }
-
-       
-      }      
+      }
    }
 }

@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the installed extensions in the specified Azure DevOps or Team Foundation Server project.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the installed extensions in the specified Azure DevOps or Team Foundation Server project.
 
 ## EXAMPLES
 

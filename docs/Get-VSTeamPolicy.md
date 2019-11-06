@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Get the code policies in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the code policies in the specified Azure DevOps or Team Foundation Server project.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Get the code policies in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the code policies in the specified Azure DevOps or Team Foundation Server project.
 
 ## EXAMPLES
 

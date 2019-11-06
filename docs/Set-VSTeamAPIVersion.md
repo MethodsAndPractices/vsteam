@@ -5,7 +5,7 @@
 
 ## SYNOPSIS
 
-Sets the API versions to support either TFS2017, TFS2018 or VSTS.
+Sets the API versions to support either TFS2017, TFS2018 or AzD.
 
 ## SYNTAX
 
