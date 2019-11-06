@@ -1,12 +1,10 @@
 # Changelog
 
-## 6.4.1
+## 6.4.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/204) from [Jeroen Janssen](https://github.com/japj) which included the following:
 
 add maxParallelism to Disable/Enable-VSTeamAgent
-
-## 6.4.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/205) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 

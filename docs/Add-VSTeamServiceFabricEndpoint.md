@@ -148,7 +148,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -endpointName
 
-The name displayed on the services page. In VSTS this is the Connection Name.
+The name displayed on the services page. In AzD this is the Connection Name.
 
 ```yaml
 Type: String
