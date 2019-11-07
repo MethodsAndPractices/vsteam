@@ -261,6 +261,7 @@ InModuleScope VSTeam {
             # assume the order.
             # The general string should look like this:
             # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=omit
+
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
