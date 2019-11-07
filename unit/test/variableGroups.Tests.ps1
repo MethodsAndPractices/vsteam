@@ -56,7 +56,7 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod {
 
             $collection = Get-Content $sampleFile2017 | ConvertFrom-Json
-            return $collection.value | Where-Object {$_.name -eq "TestVariableGroup1"}
+            return $collection | Where-Object {$_.value.name -eq "TestVariableGroup1"}
          }
 
          It 'Should return one variable group' {
