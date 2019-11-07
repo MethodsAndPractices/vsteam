@@ -17,7 +17,7 @@
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Remove-VSTeamWorkItem -Ids 47,48
+PS C:\> Remove-VSTeamWorkItem -Id 47,48 -Force
 ```
 
 This command deletes work items with IDs 47 and 48 by using the IDs parameter.
@@ -33,7 +33,7 @@ This command deletes the work item with ID 47 by using the ID parameter.
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```PowerShell
-PS C:\> Remove-VSTeamWorkItem -Ids 47 -Destroy
+PS C:\> Remove-VSTeamWorkItem -Id 47 -Destroy -Force
 ```
 
 This command deletes work item with IDs 47 **permanently** by using the Destroy parameter.
@@ -42,18 +42,7 @@ This command deletes work item with IDs 47 **permanently** by using the Destroy 
 
 ### -Id
 
-The id of the work item.
-
-```yaml
-Type: Int32
-Parameter Sets: ByID
-Required: True
-Accept pipeline input: true (ByPropertyName, ByValue)
-```
-
-### -Ids
-
-The id of the work item.
+The id of one or more work items.
 
 ```yaml
 Type: Int32[]
@@ -69,6 +58,12 @@ Optional parameter, if set to true, the work item is deleted permanently. **Plea
 ```yaml
 Type: Switch
 ```
+
+<!-- #include "./params/force.md" -->
+
+<!-- #include "./params/confirm.md" -->
+
+<!-- #include "./params/whatif.md" -->
 
 ## INPUTS
 
