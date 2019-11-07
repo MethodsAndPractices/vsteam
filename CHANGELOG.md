@@ -2,6 +2,18 @@
 
 ## 6.4.0
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/214) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
+
+Add/Update Var Group: Support for Body Param, so that json can be directly provided rather than a hashtable of variables. See the example in the documentation for more use case details.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/213) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
+
+Get-VSTeamVariableGroup fixes
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/212) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
+
+Support for task groups
+
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/211) from [Dick van de Meulengraaf](https://github.com/dickvdm) which included the following:
 
 AzD2019 configuration, being Azure DevOps Server (on-prem) 2019 (17.143.28912.1)
@@ -39,7 +51,7 @@ VSTS --> AzD
 
 ## 6.3.3
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/191) from [quintessential5](https://github.com/quintessential5) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/191) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:
 
 Get-VSTeamVariableGroup: support for getting by name as well as by ID.
 
