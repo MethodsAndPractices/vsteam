@@ -1,6 +1,6 @@
 function Get-VSTeamAPIVersion {
    [CmdletBinding()]
-   [OutputType([System.Collections.Hashtable])] 
+   [OutputType([System.Collections.Hashtable])]
    param()
 
    return @{
@@ -13,6 +13,7 @@ function Get-VSTeamAPIVersion {
       VariableGroups              = $([VSTeamVersions]::VariableGroups)
       Tfvc                        = $([VSTeamVersions]::Tfvc)
       Packaging                   = $([VSTeamVersions]::Packaging)
+      TaskGroups                  = $([VSTeamVersions]::TaskGroups)
       MemberEntitlementManagement = $([VSTeamVersions]::MemberEntitlementManagement)
       ExtensionsManagement        = $([VSTeamVersions]::ExtensionsManagement)
       ServiceFabricEndpoint       = $([VSTeamVersions]::ServiceFabricEndpoint)
