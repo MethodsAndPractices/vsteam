@@ -18,11 +18,11 @@ function Get-VSTeamWiql {
    )
    DynamicParam {
       #$arrSet = Get-VSTeamProject | Select-Object -ExpandProperty Name
-      _buildProjectNameDynamicParam -mandatory $true #-arrSet $arrSet      
+      _buildProjectNameDynamicParam -mandatory $true #-arrSet $arrSet
    }
 
    Process {
-      
+
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
@@ -51,27 +51,26 @@ function Get-VSTeamWiql {
       }
 
       if ($Expand) {
-         
+
          [array]$Ids = $resp.workItems.id
          $Fields = $resp.columns.referenceName
-      
+
          $resp.workItems = @()
-         #splitting id array by 200, since a maximum of 200 ids are allowed per call   
-         $countIds = $Ids.Count    
+         #splitting id array by 200, since a maximum of 200 ids are allowed per call
+         $countIds = $Ids.Count
          $resp.workItems = for ($beginRange = 0; $beginRange -lt $countIds; $beginRange += 200) {
 
             $endRange = ($beginRange + 199)
-            
+
             if ($endRange -gt $countIds) {
                $idArray = $Ids[$beginRange..($countIds - 1)]
             }
             else {
                $idArray = $Ids[$beginRange..($endRange)]
             }
-            
-            (Get-VSTeamWorkItem -Fields $Fields -Ids $idArray).value
+
+            (Get-VSTeamWorkItem -Fields $Fields -Id $idArray).value
          }
-      
       }
 
       _applyTypesToWiql -item $resp

@@ -56,7 +56,7 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod {
 
             $collection = Get-Content $sampleFile2017 | ConvertFrom-Json
-            return $collection.value | Where-Object {$_.name -eq "TestVariableGroup1"}
+            return $collection | Where-Object {$_.value.name -eq "TestVariableGroup1"}
          }
 
          It 'Should return one variable group' {
@@ -237,6 +237,16 @@ InModuleScope VSTeam {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
          }
+         
+         It "should create a new var group when passing the json as the body" {
+            $body = Get-Content $sampleFileVSTS -Raw
+            $projName = "project"
+            Add-VSTeamVariableGroup -Body $body -ProjectName $projName
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+               $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups/?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Method -eq 'Post' }
+         }
       }
 
       Context 'Update-VSTeamVariableGroup' {
@@ -269,6 +279,18 @@ InModuleScope VSTeam {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Method -eq 'Put'
+            }
+         }
+
+         It "should update an existing var group when passing the json as the body" {
+            $body = Get-Content $sampleFileVSTS -Raw
+            $projName = "project"
+            $id = "1"
+            Update-VSTeamVariableGroup -Body $body -ProjectName $projName -Id $id
+            
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups/$($id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
                $Method -eq 'Put'
             }
          }

@@ -87,6 +87,7 @@ function Set-VSTeamAlias {
       New-Alias Get-WorkItemType Get-VSTeamWorkItemType -Scope Global
       New-Alias Add-WorkItem Add-VSTeamWorkItem -Scope Global
       New-Alias Get-WorkItem Get-VSTeamWorkItem -Scope Global
+      New-Alias Remove-WorkItem Remove-VSTeamWorkItem -Scope Global
       New-Alias Show-WorkItem Show-VSTeamWorkItem -Scope Global
       New-Alias Get-Policy Get-VSTeamPolicy -Scope Global
       New-Alias Get-PolicyType Get-VSTeamPolicyType -Scope Global

@@ -44,55 +44,13 @@ Remove-VSTeamVariableGroup @methodParameters
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-
-Does not prompt
-
-```yaml
-Type: SwitchParameter
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProjectName
-
 <!-- #include "./params/projectName.md" -->
 
-### -WhatIf
+<!-- #include "./params/force.md" -->
 
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+<!-- #include "./params/confirm.md" -->
 
-```yaml
-Type: SwitchParameter
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+<!-- #include "./params/whatif.md" -->
 
 ### -Id
 
