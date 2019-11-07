@@ -17,6 +17,9 @@ Support for task groups
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/211) from [Dick van de Meulengraaf](https://github.com/dickvdm) which included the following:
 
 AzD2019 configuration, being Azure DevOps Server (on-prem) 2019 (17.143.28912.1)
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/209) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Added Remove-VSTeamWorkItem to delete work items
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/204) from [Jeroen Janssen](https://github.com/japj) which included the following:
 
