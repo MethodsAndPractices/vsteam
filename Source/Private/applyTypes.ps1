@@ -25,12 +25,6 @@ function _applyTypesToWorkItem {
    }
 }
 
-function _applyTypesToWorkItemDeleted {
-   param($item)
-      $item.PSObject.TypeNames.Insert(0, 'Team.WorkItemDeleted')
-      $item.resource.PSObject.TypeNames.Insert(0,'Team.WorkItem')
-}
-
 function _applyTypesToWiql {
    param($item)
    if ($item) {

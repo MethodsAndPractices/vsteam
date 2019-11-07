@@ -57,7 +57,7 @@ The flag to control error policy in a bulk get work items request.  The acceptab
 Type: String
 Parameter Sets: List
 Required: True
-Default value: Fail
+Default value: Omit
 ```
 
 ### -Fields

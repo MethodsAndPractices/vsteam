@@ -15,25 +15,12 @@ InModuleScope VSTeam {
          id  = 47
          rev = 1
          url = "https://dev.azure.com/test/_apis/wit/workItems/47"
-      }      
+      }
 
       $collection = @{
          count = 1
          value = @($obj)
       }
-
-      $objDeleted = @{
-         id = 47
-         name = "Test Work Item 47"
-         deletedBy = "Theobald Test <theobald.test@contoso.com>"
-         deletedDate = "10/19/2019 9:08:48 PM"
-         code = 200
-         resource = $obj
-      }
-
-      $collectionDeleted = @(
-         $objDeleted
-      )      
 
       Context 'Add-WorkItem' {
          Mock Invoke-RestMethod {
@@ -96,7 +83,7 @@ InModuleScope VSTeam {
          It 'With Default Project should add work item only with additional properties and parent id' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25 -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -119,7 +106,7 @@ InModuleScope VSTeam {
          It 'With Default Project should add work item only with additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -138,7 +125,7 @@ InModuleScope VSTeam {
          It 'With Default Project should throw exception when adding existing parameters to additional properties and parent id' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Title"= "Test1"; "System.AreaPath" = "Project\\TestPath"}
+            $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
             { Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25 -AdditionalFields $additionalFields } | Should Throw
          }
       }
@@ -184,7 +171,7 @@ InModuleScope VSTeam {
          It 'With Default Project should update work item with 2 parameters and additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -205,7 +192,7 @@ InModuleScope VSTeam {
          It 'With Default Project should update work item only with 1 parameter and additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Update-VSTeamWorkItem 1 -Title Test1 -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -224,7 +211,7 @@ InModuleScope VSTeam {
          It 'With Default Project should update work item only with additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Update-VSTeamWorkItem 1 -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -241,7 +228,7 @@ InModuleScope VSTeam {
          It 'With Default Project should throw exception when adding existing parameters to additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Title"= "Test1"; "System.AreaPath" = "Project\\TestPath"}
+            $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
             { Update-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should Throw
          }
       }
@@ -266,20 +253,20 @@ InModuleScope VSTeam {
                return $collection
             }
 
-            Get-VSTeamWorkItem -Ids 47, 48
+            Get-VSTeamWorkItem -Id 47, 48
 
             # With PowerShell core the order of the query string is not the
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
             # assume the order.
             # The general string should look like this:
-            # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=Fail
+            # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=omit
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*ids=47,48*" -and
                $Uri -like "*`$Expand=None*" -and
-               $Uri -like "*errorPolicy=Fail*"
+               $Uri -like "*errorPolicy=omit*"
             }
          }
 
@@ -295,69 +282,6 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/47?api-version=$([VSTeamVersions]::Core)&`$Expand=None"
             }
-         }
-      }
-
-      Context 'Remove-WorkItem'{        
-
-         It 'Should delete single work item' {
-            Mock Invoke-RestMethod {
-               # If this test fails uncomment the line below to see how the mock was called.
-               #Write-Host $args
-
-               return $collectionDeleted
-            }
-
-            Remove-VSTeamWorkItem -Id 47
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*workitems/47*"
-            }
-         }
-
-         It 'Should throw single work item with id equals $null' {            
-            {Remove-VSTeamWorkItem -Id $null} | Should -Throw
-         }
-
-         It 'Should delete multipe work items' {
-            Mock Invoke-RestMethod {
-               # If this test fails uncomment the line below to see how the mock was called.
-               #Write-Host $args
-
-               return $collectionDeleted
-            }
-
-            Remove-VSTeamWorkItem -Ids 47, 48
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               ($Uri -like "*workitems/47*" -or $Uri -like "*workitems/48*")
-            }
-         }
-
-         It 'Single Work Item Should be deleted permanently' {
-            Mock Invoke-RestMethod {
-               # If this test fails uncomment the line below to see how the mock was called.
-               #Write-Host $args
-
-               return $collectionDeleted
-            }
-
-            Remove-VSTeamWorkItem -Ids 47, 48 -Destroy
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               ($Uri -like "*workitems/47*" -or $Uri -like "*workitems/48*") -and
-               $Uri -like "*destroy=True*"
-            }
-         }
-         
-         It 'Should throw multiple work item with array equals $null' {            
-            {Remove-VSTeamWorkItem -Ids $null} | Should -Throw
          }
       }
    }

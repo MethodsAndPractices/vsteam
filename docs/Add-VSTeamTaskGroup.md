@@ -1,9 +1,5 @@
----
-external help file: VSTeam-Help.xml
-Module Name: VSTeam
-online version:
-schema: 2.0.0
----
+
+
 
 # Add-VSTeamTaskGroup
 
@@ -33,6 +29,8 @@ $taskGroupJson = ConvertTo-Json -InputObject $taskGroup -Depth 10
 
 Add-VSTeamTaskGroup -Body $taskGroupJson -ProjectName "destinationProjectName"
 ```
+
+This example is useful for when one wants to copy an existing task group in one project into another project.
 
 ## PARAMETERS
 
@@ -74,9 +72,33 @@ Accept wildcard characters: False
 
 The path to the json file that represents the task group
 
+```yaml
+Type: String
+Parameter Sets: ByFile
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -Body
 
 The json that represents the task group as a string
+
+```yaml
+Type: String
+Parameter Sets: ByBody
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 

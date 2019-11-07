@@ -104,6 +104,10 @@ Adds a new Service Fabric service endpoint.
 
 Adds a new SonarQube service endpoint.
 
+### [Add-VSTeamTaskGroup](Add-VSTeamTaskGroup.md)
+
+Adds a task group.
+
 ### [Add-VSTeamUserEntitlement](Add-VSTeamUserEntitlement.md)
 
 Add a user, assign license and extensions and make them a member of a project group in an account.
@@ -280,6 +284,10 @@ Gets a service endpoint.
 
 Get service endpoint types.
 
+### [Get-VSTeamTaskGroup](Get-VSTeamTaskGroup.md)
+
+Gets a task group
+
 ### [Get-VSTeamTfvcBranch](Get-VSTeamTfvcBranch.md)
 
 Gets a branch for a given path from TFVC source control.
@@ -384,6 +392,10 @@ Removes the release definitions for a team project.
 
 Removes a service endpoint.
 
+### [Remove-VSTeamTaskGroup](Remove-VSTeamTaskGroup.md)
+
+Removes a task group
+
 ### [Remove-VSTeamUserEntitlement](Remove-VSTeamUserEntitlement.md)
 
 Delete a user from the account.
@@ -393,6 +405,10 @@ The delete operation includes unassigning Extensions and Licenses and removing t
 ### [Remove-VSTeamVariableGroup](Remove-VSTeamVariableGroup.md)
 
 Removes a variable group
+
+### [Remove-VSTeamWorkItem](Remove-VSTeamWorkItem.md)
+
+Deletes the specified work item and sends it to the Recycle Bin, so that it can be restored back, if required. Optionally, if the destroy parameter has been set to true, it destroys the work item permanently. WARNING: If the destroy parameter is set to true, work items deleted by this command will NOT go to recycle-bin and there is no way to restore/recover them after deletion. It is recommended NOT to use this parameter. If you do, please use this parameter with extreme caution.
 
 ### [Set-VSTeamAccount](Set-VSTeamAccount.md)
 
@@ -510,6 +526,10 @@ Updates a build definition for a team project.
 ### [Update-VSTeamServiceEndpoint](Update-VSTeamServiceEndpoint.md)
 
 Updates an existing service connection
+
+### [Update-VSTeamTaskGroup](Update-VSTeamTaskGroup.md)
+
+Updates an existing task group
 
 ### [Update-VSTeamUserEntitlement](Update-VSTeamUserEntitlement.md)
 
