@@ -12991,7 +12991,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Fail</dev:defaultValue>
+          <dev:defaultValue>Omit</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Fields</maml:name>
@@ -13073,7 +13073,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Fail</dev:defaultValue>
+        <dev:defaultValue>Omit</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Fields</maml:name>
