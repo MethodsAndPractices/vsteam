@@ -17,7 +17,7 @@ function Set-VSTeamAccount {
       [parameter(ParameterSetName = 'Windows')]
       [parameter(ParameterSetName = 'Secure')]
       [Parameter(ParameterSetName = 'Plain')]
-      [ValidateSet('TFS2017', 'TFS2018', 'VSTS', 'AzD')]
+      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD')]
       [string] $Version,
 
       [string] $Drive,

@@ -504,7 +504,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The cmdlet adds a new connection between TFS/VSTS and Azure using the Azure Resource Manager connection type.</maml:para>
+      <maml:para>The cmdlet adds a new connection between TFS/AzD and Azure using the Azure Resource Manager connection type.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -562,7 +562,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="4" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -675,7 +675,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="4" aliases="none">
         <maml:name>EndpointName</maml:name>
         <maml:Description>
-          <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+          <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1558,11 +1558,11 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:verb>Add</command:verb>
       <command:noun>VSTeamGitRepository</command:noun>
       <maml:description>
-        <maml:para>Adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.</maml:para>
+        <maml:para>Adds a Git repository to your Azure DevOps or Team Foundation Server account.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Add-VSTeamGitRepository adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.</maml:para>
+      <maml:para>Add-VSTeamGitRepository adds a Git repository to your Azure DevOps or Team Foundation Server account.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1909,7 +1909,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The cmdlet adds a new connection between TFS/VSTS and a Kubernetes cluster using kubeconfig json.</maml:para>
+      <maml:para>The cmdlet adds a new connection between TFS/AzD and a Kubernetes cluster using kubeconfig json.</maml:para>
       <maml:para>This is only used when using the Kubernetes tasks.</maml:para>
     </maml:description>
     <command:syntax>
@@ -1932,7 +1932,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2055,7 +2055,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
         <maml:name>EndpointName</maml:name>
         <maml:Description>
-          <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+          <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2272,7 +2272,7 @@ PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDes
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The cmdlet adds a new connection between TFS/VSTS and a NuGet server using the NuGet connection type.</maml:para>
+      <maml:para>The cmdlet adds a new connection between TFS/AzD and a NuGet server using the NuGet connection type.</maml:para>
       <maml:para>This is only used when using the NuGet tasks.</maml:para>
     </maml:description>
     <command:syntax>
@@ -2319,7 +2319,7 @@ PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDes
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2372,7 +2372,7 @@ PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDes
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2437,7 +2437,7 @@ PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDes
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2491,7 +2491,7 @@ PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDes
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2546,7 +2546,7 @@ PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDes
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2623,7 +2623,7 @@ PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDes
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>EndpointName</maml:name>
         <maml:Description>
-          <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+          <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2897,7 +2897,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>The Azure DevOps (AzD) account name to use. DO NOT enter the entire URL.</maml:para>
             <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2925,6 +2925,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -2968,7 +2969,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>The Azure DevOps (AzD) account name to use. DO NOT enter the entire URL.</maml:para>
             <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -2981,7 +2982,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="none">
           <maml:name>PersonalAccessToken</maml:name>
           <maml:Description>
-            <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+            <maml:para>The personal access token from AzD/TFS to use to access this account.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3008,6 +3009,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -3037,7 +3039,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>The Azure DevOps (AzD) account name to use. DO NOT enter the entire URL.</maml:para>
             <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -3065,6 +3067,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -3094,7 +3097,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
         <maml:name>Account</maml:name>
         <maml:Description>
-          <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+          <maml:para>The Azure DevOps (AzD) account name to use. DO NOT enter the entire URL.</maml:para>
           <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -3121,7 +3124,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="none">
         <maml:name>PersonalAccessToken</maml:name>
         <maml:Description>
-          <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+          <maml:para>The personal access token from AzD/TFS to use to access this account.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3172,6 +3175,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
           <maml:para>- TFS2018</maml:para>
+          <maml:para>- AzD2019</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
           <maml:para></maml:para>
@@ -4045,7 +4049,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The cmdlet adds a new generic connection between TFS/VSTS and a third party service (see VSTS for available connections).</maml:para>
+      <maml:para>The cmdlet adds a new generic connection between TFS/AzD and a third party service (see AzD for available connections).</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4067,7 +4071,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4079,7 +4083,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>EndpointType</maml:name>
           <maml:Description>
-            <maml:para>Type of endpoint (eg. `kubernetes`, `sonarqube`). See VSTS service page for supported endpoints.</maml:para>
+            <maml:para>Type of endpoint (eg. `kubernetes`, `sonarqube`). See AzD service page for supported endpoints.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4132,7 +4136,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="none">
         <maml:name>EndpointName</maml:name>
         <maml:Description>
-          <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+          <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4144,7 +4148,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
         <maml:name>EndpointType</maml:name>
         <maml:Description>
-          <maml:para>Type of endpoint (eg. `kubernetes`, `sonarqube`). See VSTS service page for supported endpoints.</maml:para>
+          <maml:para>Type of endpoint (eg. `kubernetes`, `sonarqube`). See AzD service page for supported endpoints.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4242,7 +4246,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="3" aliases="displayName">
           <maml:name>endpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4343,7 +4347,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="3" aliases="displayName">
           <maml:name>endpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4516,7 +4520,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="3" aliases="displayName">
         <maml:name>endpointName</maml:name>
         <maml:Description>
-          <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+          <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4594,7 +4598,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The cmdlet adds a new connection between TFS/VSTS and a SonarQube server using the SonarQube connection type.</maml:para>
+      <maml:para>The cmdlet adds a new connection between TFS/AzD and a SonarQube server using the SonarQube connection type.</maml:para>
       <maml:para>This is only used when using the SonarQube tasks.</maml:para>
       <maml:para>Using SonarQube with the Maven tasks uses a Generic Connection type.</maml:para>
     </maml:description>
@@ -4642,7 +4646,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4683,7 +4687,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
           <maml:name>EndpointName</maml:name>
           <maml:Description>
-            <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+            <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4750,7 +4754,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="3" aliases="none">
         <maml:name>EndpointName</maml:name>
         <maml:Description>
-          <maml:para>The name displayed on the services page. In VSTS this is the Connection Name.</maml:para>
+          <maml:para>The name displayed on the services page. In AzD this is the Connection Name.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4793,6 +4797,221 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Remove-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Add-VSTeamTaskGroup</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamTaskGroup</command:noun>
+      <maml:description>
+        <maml:para>Adds a task group.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Adds a task group.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamTaskGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>InFile</maml:name>
+          <maml:Description>
+            <maml:para>The path to the json file that represents the task group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamTaskGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Body</maml:name>
+          <maml:Description>
+            <maml:para>The json that represents the task group as a string</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>InFile</maml:name>
+        <maml:Description>
+          <maml:para>The path to the json file that represents the task group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Body</maml:name>
+        <maml:Description>
+          <maml:para>The json that represents the task group as a string</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>$taskGroup = Get-VSTeamTaskGroup -Name "taskGroupName" -ProjectName "sourceProjectName"
+
+# Set the ID and revision to null, so AzD is happy.
+$taskGroup.id = $null
+$taskGroup.revision = $null
+
+$taskGroupJson = ConvertTo-Json -InputObject $taskGroup -Depth 10
+
+Add-VSTeamTaskGroup -Body $taskGroupJson -ProjectName "destinationProjectName"</dev:code>
+        <dev:remarks>
+          <maml:para>This example is useful for when one wants to copy an existing task group in one project into another project.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamTaskGroup</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -5027,6 +5246,35 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamVariableGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Body</maml:name>
+          <maml:Description>
+            <maml:para>The json that represents the variable group as a string</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
@@ -5103,6 +5351,18 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Body</maml:name>
+        <maml:Description>
+          <maml:para>The json that represents the variable group as a string</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -5175,6 +5435,27 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
 }
 
 Add-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code># Copy variable group varGroupName from project sourceProjectName to project targetProjectName.  If varGroupName already exists, we'll update it; else, we'll add it.
+
+$Name = "varGroupName"
+$FromProject  = "sourceProjectName"
+$ToProject = "targetProjectName"
+
+$FromVariableGroupObject = Get-VSTeamVariableGroup -Name $Name -ProjectName $FromProject
+$body = ConvertTo-Json -InputObject $FromVariableGroupObject -Depth 100 -Compress
+$toVariableGroupObject = Get-VSTeamVariableGroup -Name $Name -ProjectName $ToProject
+if ($toVariableGroupObject) {
+   Update-VSTeamVariableGroup -Body $body -ProjectName $ToProject -Id $toVariableGroupObject.id
+}
+else {
+   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject   
+}</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -6676,7 +6957,7 @@ ID Title          Status
     <maml:description>
       <maml:para>The Get-VSTeamApproval function gets the approvals for all releases for a team project.</maml:para>
       <maml:para>With just a project name, this function gets all of the pending approvals for that team project.</maml:para>
-      <maml:para>When using with VSTS "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter is not empty.</maml:para>
+      <maml:para>When using with AzD "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter is not empty.</maml:para>
       <maml:para>When using with TFS "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter, Release Id Filter are not empty and Status Filter equals Pending.</maml:para>
       <maml:para>The Team.Approval type has three custom table formats:</maml:para>
       <maml:para>- Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions</maml:para>
@@ -8259,11 +8540,11 @@ ID Title          Status
       <command:verb>Get</command:verb>
       <command:noun>VSTeamExtension</command:noun>
       <maml:description>
-        <maml:para>Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.</maml:para>
+        <maml:para>Get the installed extensions in the specified Azure DevOps or Team Foundation Server project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.</maml:para>
+      <maml:para>Get the installed extensions in the specified Azure DevOps or Team Foundation Server project.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -8575,11 +8856,11 @@ ID Title          Status
       <command:verb>Get</command:verb>
       <command:noun>VSTeamGitRepository</command:noun>
       <maml:description>
-        <maml:para>Get all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.</maml:para>
+        <maml:para>Get all the repositories in your Azure DevOps or Team Foundation Server account, or a specific project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get-VSTeamGitRepository gets all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.</maml:para>
+      <maml:para>Get-VSTeamGitRepository gets all the repositories in your Azure DevOps or Team Foundation Server account, or a specific project.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -9338,11 +9619,11 @@ ID Title          Status
       <command:verb>Get</command:verb>
       <command:noun>VSTeamOption</command:noun>
       <maml:description>
-        <maml:para>Returns all the versions of supported APIs of your TFS or VSTS.</maml:para>
+        <maml:para>Returns all the versions of supported APIs of your TFS or AzD.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Returns all the versions of supported APIs of your TFS or VSTS.</maml:para>
+      <maml:para>Returns all the versions of supported APIs of your TFS or AzD.</maml:para>
       <maml:para>There are two table formats defined for the Team.Option type, Default and Versions.</maml:para>
       <maml:para>Default view contains Name, Area, Max Version and URI Template.</maml:para>
       <maml:para>Version view contains Name, Area, Min Version, Max Version, Released Version and Resource Version.</maml:para>
@@ -9431,11 +9712,11 @@ ID Title          Status
       <command:verb>Get</command:verb>
       <command:noun>VSTeamPolicy</command:noun>
       <maml:description>
-        <maml:para>Get the code policies in the specified Visual Studio Team Services or Team Foundation Server project.</maml:para>
+        <maml:para>Get the code policies in the specified Azure DevOps or Team Foundation Server project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get the code policies in the specified Visual Studio Team Services or Team Foundation Server project.</maml:para>
+      <maml:para>Get the code policies in the specified Azure DevOps or Team Foundation Server project.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -9542,11 +9823,11 @@ ID Title          Status
       <command:verb>Get</command:verb>
       <command:noun>VSTeamPolicyType</command:noun>
       <maml:description>
-        <maml:para>Get the policy types in the specified Visual Studio Team Services or Team Foundation Server project.</maml:para>
+        <maml:para>Get the policy types in the specified Azure DevOps or Team Foundation Server project.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get the policy types in the specified Visual Studio Team Services or Team Foundation Server project.</maml:para>
+      <maml:para>Get the policy types in the specified Azure DevOps or Team Foundation Server project.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -10201,11 +10482,11 @@ ID Title          Status
       <command:verb>Get</command:verb>
       <command:noun>VSTeamPullRequest</command:noun>
       <maml:description>
-        <maml:para>Returns one or more a work items from your project.</maml:para>
+        <maml:para>Returns one or more open pull requests from your team, project, or Id.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Returns one or more a work items from your project.</maml:para>
+      <maml:para>Returns one or more open pull requests from your team, project, or Id.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -11562,6 +11843,202 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamTaskGroup</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamTaskGroup</command:noun>
+      <maml:description>
+        <maml:para>Gets a task group</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Gets a task group</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamTaskGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>ID of the existing task group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamTaskGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>Name of the existing task group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>ID of the existing task group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>Name of the existing task group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName = "some_project_name"
+}
+
+Get-VSTeamTaskGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para>Get all the task groups for the some_project_name project.  Here we are splatting the parameter, but it may also be directly specified.  See a non-splatting example below.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-VSTeamTaskGroup -ProjectName "some_project_name" -Id "Task_group_id"</dev:code>
+        <dev:remarks>
+          <maml:para>Get a task group when the ID is already known.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>$methodParameters = @{
+   ProjectName = "some_project_name"
+   Name        = "Task_group_name"
+}
+
+Get-VSTeamTaskGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para>Get a task group by name, when the ID is not known.  Here we are splatting the parameters, but they may also be directly specified.  Getting by ID is preferred, as it's more efficient; but getting by name is, of course, handy.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamTfvcBranch</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamTfvcBranch</command:noun>
@@ -12213,6 +12690,214 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamWiqlItem</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamWiqlItem</command:noun>
+      <maml:description>
+        <maml:para>Returns work items from the given WIQL query or a saved query by ID from your projects team.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Returns work items from the given WIQL query or a saved query by ID from your projects team.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamWiqlItem</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>The id query to return work items for. This is the ID of any saved query within a team in a project</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>The max number of results to return.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>100</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>TimePrecision</maml:name>
+          <maml:Description>
+            <maml:para>Whether or not to use time precision.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Expand</maml:name>
+          <maml:Description>
+            <maml:para>The expand the work items with the selected attributes in the WIQL query.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamWiqlItem</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Query</maml:name>
+          <maml:Description>
+            <maml:para>The WIQL query. For the syntax check the official documentation (https://docs.microsoft.com/en-us/azure/devops/boards/queries/wiql-syntax?view=azure-devops).</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>The max number of results to return.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>100</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>TimePrecision</maml:name>
+          <maml:Description>
+            <maml:para>Whether or not to use time precision.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Expand</maml:name>
+          <maml:Description>
+            <maml:para>The expand the work items with the selected attributes in the WIQL query.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>The id query to return work items for. This is the ID of any saved query within a team in a project</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Query</maml:name>
+        <maml:Description>
+          <maml:para>The WIQL query. For the syntax check the official documentation (https://docs.microsoft.com/en-us/azure/devops/boards/queries/wiql-syntax?view=azure-devops).</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Top</maml:name>
+        <maml:Description>
+          <maml:para>The max number of results to return.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>100</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>TimePrecision</maml:name>
+        <maml:Description>
+          <maml:para>Whether or not to use time precision.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Expand</maml:name>
+        <maml:Description>
+          <maml:para>The expand the work items with the selected attributes in the WIQL query.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>ProjectName</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Get-VSTeamWiql you will have to type in the names.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject" -Expand</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets work items via a WIQL query and expands the return work items with only the selected fields System.Id, System.Title and System.State.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject"</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets work items via a WIQL query and returns the WIQL query result with only work item IDs.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamWorkItem</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamWorkItem</command:noun>
@@ -12306,7 +12991,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Fail</dev:defaultValue>
+          <dev:defaultValue>Omit</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Fields</maml:name>
@@ -12388,7 +13073,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Fail</dev:defaultValue>
+        <dev:defaultValue>Omit</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Fields</maml:name>
@@ -12579,11 +13264,11 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:verb>Invoke</command:verb>
       <command:noun>VSTeamRequest</command:noun>
       <maml:description>
-        <maml:para>Allows you to call any TFS/VSTS REST API. All the Auth and Route Structure is taken care of for you. Just provide the parts of the API call you need.  If you need to send a non-standard URL use the -Url parameter.  If the -Url is used the Url is not changed but the header and UserAgent are added for you.</maml:para>
+        <maml:para>Allows you to call any TFS/AzD REST API. All the Auth and Route Structure is taken care of for you. Just provide the parts of the API call you need.  If you need to send a non-standard URL use the -Url parameter.  If the -Url is used the Url is not changed but the header and UserAgent are added for you.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Invoke-VSTeamRequest allows you to call a TFS/VSTS REST API much easier than using Invoke-WebRequest directly. The shape of the URI and authentication is all handled for you.</maml:para>
+      <maml:para>Invoke-VSTeamRequest allows you to call a TFS/AzD REST API much easier than using Invoke-WebRequest directly. The shape of the URI and authentication is all handled for you.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -14070,11 +14755,11 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:verb>Remove</command:verb>
       <command:noun>VSTeamGitRepository</command:noun>
       <maml:description>
-        <maml:para>Removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.</maml:para>
+        <maml:para>Removes the Git repository from your Azure DevOps or Team Foundation Server account.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Remove-VSTeamGitRepository removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.</maml:para>
+      <maml:para>Remove-VSTeamGitRepository removes the Git repository from your Azure DevOps or Team Foundation Server account.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -14988,6 +15673,216 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Remove-VSTeamTaskGroup</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>VSTeamTaskGroup</command:noun>
+      <maml:description>
+        <maml:para>Removes a task group</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Removes a task group</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-VSTeamTaskGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Does not prompt</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>ID of the existing task group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Does not prompt</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>ID of the existing task group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>System.String</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>$projectName = "some_project_name"
+$taskGroup = Get-VSTeamTaskGroup -Name "taskName" -ProjectName $projectName
+
+$methodParameters = @{
+   Id                       = $taskGroup.id
+   ProjectName              = $projectName
+   Force                    = $true
+}
+
+Remove-VSTeamTaskGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Remove-VSTeamUserEntitlement</command:name>
       <command:verb>Remove</command:verb>
       <command:noun>VSTeamUserEntitlement</command:noun>
@@ -15412,6 +16307,151 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Remove-VSTeamWorkItem</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>VSTeamWorkItem</command:noun>
+      <maml:description>
+        <maml:para>Deletes the specified work item and sends it to the Recycle Bin, so that it can be restored back, if required. Optionally, if the destroy parameter has been set to true, it destroys the work item permanently. WARNING: If the destroy parameter is set to true, work items deleted by this command will NOT go to recycle-bin and there is no way to restore/recover them after deletion. It is recommended NOT to use this parameter. If you do, please use this parameter with extreme caution.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Deletes the specified work item and sends it to the Recycle Bin, so that it can be restored back, if required. Optionally, if the destroy parameter has been set to true, it destroys the work item permanently. WARNING: If the destroy parameter is set to true, work items deleted by this command will NOT go to recycle-bin and there is no way to restore/recover them after deletion. It is recommended NOT to use this parameter. If you do, please use this parameter with extreme caution.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-VSTeamWorkItem</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>The id of the work item.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Destroy</maml:name>
+          <maml:Description>
+            <maml:para>Optional parameter, if set to true, the work item is deleted permanently. Please note: the destroy action is PERMANENT and cannot be undone.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Remove-VSTeamWorkItem</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
+          <maml:name>Ids</maml:name>
+          <maml:Description>
+            <maml:para>The id of the work item.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Destroy</maml:name>
+          <maml:Description>
+            <maml:para>Optional parameter, if set to true, the work item is deleted permanently. Please note: the destroy action is PERMANENT and cannot be undone.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>The id of the work item.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
+        <maml:name>Ids</maml:name>
+        <maml:Description>
+          <maml:para>The id of the work item.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Destroy</maml:name>
+        <maml:Description>
+          <maml:para>Optional parameter, if set to true, the work item is deleted permanently. Please note: the destroy action is PERMANENT and cannot be undone.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>ProjectName</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>If you do not set the default project by called Set-VSTeamDefaultProject before calling Get-VSTeamWorkItem you will have to type in the names.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Ids 47,48</dev:code>
+        <dev:remarks>
+          <maml:para>This command deletes work items with IDs 47 and 48 by using the IDs parameter.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Id 47</dev:code>
+        <dev:remarks>
+          <maml:para>This command deletes the work item with ID 47 by using the ID parameter.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Ids 47 -Destroy</dev:code>
+        <dev:remarks>
+          <maml:para>This command deletes work item with IDs 47 permanently by using the Destroy parameter.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Set-VSTeamAccount</command:name>
       <command:verb>Set</command:verb>
       <command:noun>VSTeamAccount</command:noun>
@@ -15430,7 +16470,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>The Azure DevOps (AzD) account name to use. DO NOT enter the entire URL.</maml:para>
             <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -15446,6 +16486,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -15525,7 +16566,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>The Azure DevOps (AzD) account name to use. DO NOT enter the entire URL.</maml:para>
             <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -15538,7 +16579,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="Token">
           <maml:name>PersonalAccessToken</maml:name>
           <maml:Description>
-            <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+            <maml:para>The personal access token from AzD/TFS to use to access this account.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -15553,6 +16594,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -15618,7 +16660,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>Account</maml:name>
           <maml:Description>
-            <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+            <maml:para>The Azure DevOps (AzD) account name to use. DO NOT enter the entire URL.</maml:para>
             <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -15634,6 +16676,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
@@ -15737,7 +16780,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
         <maml:name>Account</maml:name>
         <maml:Description>
-          <maml:para>The Visual Studio Team Services (VSTS) account name to use. DO NOT enter the entire URL.</maml:para>
+          <maml:para>The Azure DevOps (AzD) account name to use. DO NOT enter the entire URL.</maml:para>
           <maml:para>Just the portion after dev.azure.com. For example in the following url mydemos is the account name. &lt;https://dev.azure.com/mydemos&gt; or The full Team Foundation Server (TFS) url including the collection. &lt;http://localhost:8080/tfs/DefaultCollection&gt;</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -15777,7 +16820,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="Token">
         <maml:name>PersonalAccessToken</maml:name>
         <maml:Description>
-          <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+          <maml:para>The personal access token from AzD/TFS to use to access this account.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -15828,6 +16871,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
           <maml:para>- TFS2018</maml:para>
+          <maml:para>- AzD2019</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
           <maml:para></maml:para>
@@ -15922,7 +16966,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken</dev:code>
         <dev:remarks>
-          <maml:para>Will add the account and use the OAuth Token provided by VSTS when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alias for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.</maml:para>
+          <maml:para>Will add the account and use the OAuth Token provided by AzD when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alias for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -16021,7 +17065,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:verb>Set</command:verb>
       <command:noun>VSTeamAPIVersion</command:noun>
       <maml:description>
-        <maml:para>Sets the API versions to support either TFS2017, TFS2018 or VSTS.</maml:para>
+        <maml:para>Sets the API versions to support either TFS2017, TFS2018, AzD2019 or AzD.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -16036,6 +17080,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- AzD2019</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
           </maml:Description>
@@ -16114,6 +17159,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
           <maml:para>- TFS2018</maml:para>
+          <maml:para>- AzD2019</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
         </maml:Description>
@@ -16891,11 +17937,11 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:verb>Show</command:verb>
       <command:noun>VSTeam</command:noun>
       <maml:description>
-        <maml:para>Opens TFS or VSTS site in the default browser.</maml:para>
+        <maml:para>Opens TFS or AzD site in the default browser.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Opens TFS or VSTS site in the default browser.</maml:para>
+      <maml:para>Opens TFS or AzD site in the default browser.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -16915,7 +17961,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeam</dev:code>
         <dev:remarks>
-          <maml:para>This will open a browser to the TFS or VSTS site</maml:para>
+          <maml:para>This will open a browser to the TFS or AzD site</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -19088,7 +20134,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="none">
           <maml:name>PersonalAccessToken</maml:name>
           <maml:Description>
-            <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+            <maml:para>The personal access token from AzD/TFS to use to access this account.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -19140,7 +20186,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="none">
         <maml:name>PersonalAccessToken</maml:name>
         <maml:Description>
-          <maml:para>The personal access token from VSTS/TFS to use to access this account.</maml:para>
+          <maml:para>The personal access token from AzD/TFS to use to access this account.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -19200,7 +20246,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProfile | Where-Object version -eq vsts | Select-Object -skip 1 | Update-VSTeamProfile -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Force</dev:code>
         <dev:remarks>
-          <maml:para>This will update all but the first VSTS profile</maml:para>
+          <maml:para>This will update all but the first AzD profile</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -19883,7 +20929,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>UUID of existing services endpoint from VSTS</maml:para>
+            <maml:para>UUID of existing services endpoint from AzD</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -19935,7 +20981,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>UUID of existing services endpoint from VSTS</maml:para>
+          <maml:para>UUID of existing services endpoint from AzD</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -20017,6 +21063,326 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Remove-VSTeamServiceEndpoint</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-VSTeamTaskGroup</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>VSTeamTaskGroup</command:noun>
+      <maml:description>
+        <maml:para>Updates an existing task group</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Updates an existing task group</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamTaskGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Does not prompt</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>ID of the existing task group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>InFile</maml:name>
+          <maml:Description>
+            <maml:para>The path to the json file that represents the task group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamTaskGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Does not prompt</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>ID of the existing task group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Body</maml:name>
+          <maml:Description>
+            <maml:para>The json that represents the task group as a string</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Does not prompt</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>ID of the existing task group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>InFile</maml:name>
+        <maml:Description>
+          <maml:para>The path to the json file that represents the task group</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Body</maml:name>
+        <maml:Description>
+          <maml:para>The json that represents the task group as a string</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>$projectName = "projectName"
+
+$taskGroup = Get-VSTeamTaskGroup -Name "taskGroupName" -ProjectName $projectName
+
+# Make some change, e.g.
+$taskGroup.description = "new description"
+
+$taskGroupJson = ConvertTo-Json -InputObject $taskGroup -Depth 10
+
+Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGroupJson</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-VSTeamTaskGroup</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-VSTeamTaskGroup</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -20333,6 +21699,80 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamVariableGroup</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Does not prompt</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>ID of the existing variable group</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Body</maml:name>
+          <maml:Description>
+            <maml:para>The json that represents the task group as a string</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
@@ -20469,6 +21909,18 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Body</maml:name>
+        <maml:Description>
+          <maml:para>The json that represents the task group as a string</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -20534,6 +21986,27 @@ $methodParameters = @{
 }
 
 Update-VSTeamVariableGroup @methodParameters</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code># Copy variable group varGroupName from project sourceProjectName to project targetProjectName.  If varGroupName already exists, we'll update it; else, we'll add it.
+
+$Name = "varGroupName"
+$FromProject  = "sourceProjectName"
+$ToProject = "targetProjectName"
+
+$FromVariableGroupObject = Get-VSTeamVariableGroup -Name $Name -ProjectName $FromProject
+$body = ConvertTo-Json -InputObject $FromVariableGroupObject -Depth 100 -Compress
+$toVariableGroupObject = Get-VSTeamVariableGroup -Name $Name -ProjectName $ToProject
+if ($toVariableGroupObject) {
+   Update-VSTeamVariableGroup -Body $body -ProjectName $ToProject -Id $toVariableGroupObject.id
+}
+else {
+   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject   
+}</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

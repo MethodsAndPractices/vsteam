@@ -1,0 +1,1 @@
+Removes a task group

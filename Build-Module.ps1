@@ -53,7 +53,7 @@ if ($buildHelp.IsPresent) {
    Pop-Location
 }
 
-Write-Output 'Publishing help files'
+Write-Output 'Publishing about help files'
 Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
 Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
