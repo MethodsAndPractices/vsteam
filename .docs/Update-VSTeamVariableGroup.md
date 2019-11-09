@@ -72,7 +72,7 @@ if ($toVariableGroupObject) {
    Update-VSTeamVariableGroup -Body $body -ProjectName $ToProject -Id $toVariableGroupObject.id
 }
 else {
-   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject   
+   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject
 }
 
 ```
@@ -153,7 +153,7 @@ Type: String
 Parameter Sets: ByHashtable
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
