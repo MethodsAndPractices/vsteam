@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.4.1
+
+Fixed issue [Description on variable groups is not a required field #208](https://github.com/DarqueWarrior/vsteam/issues/208).
+
 ## 6.4.0
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/214) from [Louis Tourtellotte](https://github.com/quintessential5) which included the following:

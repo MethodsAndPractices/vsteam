@@ -5181,7 +5181,7 @@ Add-VSTeamTaskGroup -Body $taskGroupJson -ProjectName "destinationProjectName"</
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Description</maml:name>
           <maml:Description>
             <maml:para>The variable group description</maml:para>
@@ -5291,7 +5291,7 @@ Add-VSTeamTaskGroup -Body $taskGroupJson -ProjectName "destinationProjectName"</
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Description</maml:name>
         <maml:Description>
           <maml:para>The variable group description</maml:para>
@@ -5454,7 +5454,7 @@ if ($toVariableGroupObject) {
    Update-VSTeamVariableGroup -Body $body -ProjectName $ToProject -Id $toVariableGroupObject.id
 }
 else {
-   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject   
+   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject
 }</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -12914,63 +12914,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>The id of the work item.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Fields</maml:name>
-          <maml:Description>
-            <maml:para>Comma-separated list of requested fields.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
-          <dev:type>
-            <maml:name>String[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Expand</maml:name>
-          <maml:Description>
-            <maml:para>Comma-separated list of requested fields.  The acceptable values for this parameter are:</maml:para>
-            <maml:para>- None</maml:para>
-            <maml:para>- Relations</maml:para>
-            <maml:para>- Fields</maml:para>
-            <maml:para>- Links</maml:para>
-            <maml:para>- All</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>AsOf</maml:name>
-          <maml:Description>
-            <maml:para></maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
-          <dev:type>
-            <maml:name>DateTime</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-VSTeamWorkItem</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
-          <maml:name>Ids</maml:name>
-          <maml:Description>
-            <maml:para>The id of the work item.</maml:para>
+            <maml:para>The id of one or more work items.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -12991,7 +12935,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Omit</dev:defaultValue>
+          <dev:defaultValue>omit</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Fields</maml:name>
@@ -13040,19 +12984,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>The id of the work item.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-        <dev:type>
-          <maml:name>Int32</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
-        <maml:name>Ids</maml:name>
-        <maml:Description>
-          <maml:para>The id of the work item.</maml:para>
+          <maml:para>The id of one or more work items.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -13073,7 +13005,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Omit</dev:defaultValue>
+        <dev:defaultValue>omit</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Fields</maml:name>
@@ -13138,7 +13070,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamWorkItem -Ids 47,48</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamWorkItem -Id 47,48</dev:code>
         <dev:remarks>
           <maml:para>This command gets work items with IDs 47 and 48 by using the IDs parameter.</maml:para>
         </dev:remarks>
@@ -16112,21 +16044,10 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-          <maml:name>Confirm</maml:name>
-          <maml:Description>
-            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Does not prompt</maml:para>
+            <maml:para>Forces the function without confirmation</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -16134,10 +16055,21 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
           <maml:name>WhatIf</maml:name>
           <maml:Description>
-            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -16160,42 +16092,6 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
-        <maml:name>Confirm</maml:name>
-        <maml:Description>
-          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Force</maml:name>
-        <maml:Description>
-          <maml:para>Does not prompt</maml:para>
-        </maml:Description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-        <maml:name>ProjectName</maml:name>
-        <maml:Description>
-          <maml:para></maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false"></command:parameterValue>
-        <dev:type>
-          <maml:name></maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
         <maml:name>ProjectName</maml:name>
         <maml:Description>
@@ -16210,10 +16106,34 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the function without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
         <maml:name>WhatIf</maml:name>
         <maml:Description>
-          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -16323,33 +16243,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Id</maml:name>
           <maml:Description>
-            <maml:para>The id of the work item.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
-          <maml:name>Destroy</maml:name>
-          <maml:Description>
-            <maml:para>Optional parameter, if set to true, the work item is deleted permanently. Please note: the destroy action is PERMANENT and cannot be undone.</maml:para>
-          </maml:Description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Remove-VSTeamWorkItem</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
-          <maml:name>Ids</maml:name>
-          <maml:Description>
-            <maml:para>The id of the work item.</maml:para>
+            <maml:para>The id of one or more work items.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
           <dev:type>
@@ -16369,25 +16263,46 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the function without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>Id</maml:name>
         <maml:Description>
-          <maml:para>The id of the work item.</maml:para>
-        </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-        <dev:type>
-          <maml:name>Int32</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="none">
-        <maml:name>Ids</maml:name>
-        <maml:Description>
-          <maml:para>The id of the work item.</maml:para>
+          <maml:para>The id of one or more work items.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
         <dev:type>
@@ -16400,6 +16315,42 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <maml:name>Destroy</maml:name>
         <maml:Description>
           <maml:para>Optional parameter, if set to true, the work item is deleted permanently. Please note: the destroy action is PERMANENT and cannot be undone.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the function without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -16428,7 +16379,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Ids 47,48</dev:code>
+        <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Id 47,48 -Force</dev:code>
         <dev:remarks>
           <maml:para>This command deletes work items with IDs 47 and 48 by using the IDs parameter.</maml:para>
         </dev:remarks>
@@ -16442,7 +16393,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Ids 47 -Destroy</dev:code>
+        <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Id 47 -Destroy -Force</dev:code>
         <dev:remarks>
           <maml:para>This command deletes work item with IDs 47 permanently by using the Destroy parameter.</maml:para>
         </dev:remarks>
@@ -21634,7 +21585,7 @@ Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGr
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>Description</maml:name>
           <maml:Description>
             <maml:para>The variable group description</maml:para>
@@ -21849,7 +21800,7 @@ Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGr
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>Description</maml:name>
         <maml:Description>
           <maml:para>The variable group description</maml:para>
@@ -22005,7 +21956,7 @@ if ($toVariableGroupObject) {
    Update-VSTeamVariableGroup -Body $body -ProjectName $ToProject -Id $toVariableGroupObject.id
 }
 else {
-   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject   
+   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject
 }</dev:code>
         <dev:remarks>
           <maml:para></maml:para>

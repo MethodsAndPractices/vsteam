@@ -45,38 +45,6 @@ Remove-VSTeamVariableGroup @methodParameters
 
 ## PARAMETERS
 
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-
-Does not prompt
-
-```yaml
-Type: SwitchParameter
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProjectName
-
 ### -ProjectName
 
 Specifies the team project for which this function operates.
@@ -93,20 +61,43 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -WhatIf
+### -Force
 
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+Forces the function without confirmation
 
 ```yaml
 Type: SwitchParameter
-Aliases: wi
-
-Required: False
+Required: false
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
+Accept pipeline input: false
+Parameter Sets: (All)
+```
+
+### -Confirm
+
+Prompts you for confirmation before running the function.
+
+```yaml
+Type: SwitchParameter
+Required: false
+Position: Named
+Accept pipeline input: false
+Parameter Sets: (All)
+Aliases: cf
+```
+
+### -WhatIf
+
+Shows what would happen if the function runs.
+The function is not run.
+
+```yaml
+Type: SwitchParameter
+Required: false
+Position: Named
+Accept pipeline input: false
+Parameter Sets: (All)
+Aliases: wi
 ```
 
 ### -Id
