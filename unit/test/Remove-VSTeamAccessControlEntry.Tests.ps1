@@ -9,103 +9,20 @@ InModuleScope VSTeam {
 $securityNamespace = 
 @"
 {
-    "DisplayName":  "Git Repositories",
-    "SeparatorValue":  "/",
-    "ElementLength":  -1,
-    "WritePermission":  8192,
-    "ReadPermission":  2,
-    "DataspaceCategory":  "Git",
-    "StructureValue":  "1",
-    "ExtensionType":  "Microsoft.TeamFoundation.Git.Server.Plugins.GitSecurityNamespaceExtension",
-    "IsRemotable":  true,
-    "UseTokenTranslator":  true,
-    "SystemBitMask":  0,
-    "Actions":  [
-                    {
-                        "DisplayName":  "Administer",
-                        "Name":  "Administer",
-                        "Bit":  1
-                    },
-                    {
-                        "DisplayName":  "Read",
-                        "Name":  "GenericRead",
-                        "Bit":  2
-                    },
-                    {
-                        "DisplayName":  "Contribute",
-                        "Name":  "GenericContribute",
-                        "Bit":  4
-                    },
-                    {
-                        "DisplayName":  "Force push (rewrite history, delete branches and tags)",
-                        "Name":  "ForcePush",
-                        "Bit":  8
-                    },
-                    {
-                        "DisplayName":  "Create branch",
-                        "Name":  "CreateBranch",
-                        "Bit":  16
-                    },
-                    {
-                        "DisplayName":  "Create tag",
-                        "Name":  "CreateTag",
-                        "Bit":  32
-                    },
-                    {
-                        "DisplayName":  "Manage notes",
-                        "Name":  "ManageNote",
-                        "Bit":  64
-                    },
-                    {
-                        "DisplayName":  "Bypass policies when pushing",
-                        "Name":  "PolicyExempt",
-                        "Bit":  128
-                    },
-                    {
-                        "DisplayName":  "Create repository",
-                        "Name":  "CreateRepository",
-                        "Bit":  256
-                    },
-                    {
-                        "DisplayName":  "Delete repository",
-                        "Name":  "DeleteRepository",
-                        "Bit":  512
-                    },
-                    {
-                        "DisplayName":  "Rename repository",
-                        "Name":  "RenameRepository",
-                        "Bit":  1024
-                    },
-                    {
-                        "DisplayName":  "Edit policies",
-                        "Name":  "EditPolicies",
-                        "Bit":  2048
-                    },
-                    {
-                        "DisplayName":  "Remove others\u0027 locks",
-                        "Name":  "RemoveOthersLocks",
-                        "Bit":  4096
-                    },
-                    {
-                        "DisplayName":  "Manage permissions",
-                        "Name":  "ManagePermissions",
-                        "Bit":  8192
-                    },
-                    {
-                        "DisplayName":  "Contribute to pull requests",
-                        "Name":  "PullRequestContribute",
-                        "Bit":  16384
-                    },
-                    {
-                        "DisplayName":  "Bypass policies when completing pull requests",
-                        "Name":  "PullRequestBypassPolicy",
-                        "Bit":  32768
-                    }
-                ],
-    "ID":  "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87",
-    "ProjectName":  "",
-    "DisplayMode":  "------",
-    "Name":  "Git Repositories"
+    "namespaceId":  "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87",
+    "name":  "Git Repositories",
+    "displayName":  "Git Repositories",
+    "separatorValue":  "/",
+    "elementLength":  -1,
+    "writePermission":  8192,
+    "readPermission":  2,
+    "dataspaceCategory":  "Git",
+    "actions":  "               ",
+    "structureValue":  1,
+    "extensionType":  "Microsoft.TeamFoundation.Git.Server.Plugins.GitSecurityNamespaceExtension",
+    "isRemotable":  true,
+    "useTokenTranslator":  true,
+    "systemBitMask":  0
 }
 "@ | ConvertFrom-Json
   
