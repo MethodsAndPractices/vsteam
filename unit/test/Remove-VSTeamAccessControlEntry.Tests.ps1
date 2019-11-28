@@ -137,7 +137,7 @@ InModuleScope VSTeam {
       Context 'Remove-VSTeamAccessControlEntry by SecurityNamespaceId' {
          Mock Invoke-RestMethod { return $true }
 
-         Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor abc -Token xyz
+         Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODc2Mzk2MjA0LTIwNjc1NTI1ODctMzA2NDY5MTU3My0yNjkxODIxNjgzLTEtMjM0NjY4Mzk3Mi0yNDI0MDE0NjYzLTI5MzAxOTk4OTktMTU1MjUwNTM3MQ" -Token xyz
 
          It 'Should have a properly constructed URL' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -157,7 +157,7 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod { return $true }
 
          $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
-         Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor abc -Token xyz 
+         Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODc2Mzk2MjA0LTIwNjc1NTI1ODctMzA2NDY5MTU3My0yNjkxODIxNjgzLTEtMjM0NjY4Mzk3Mi0yNDI0MDE0NjYzLTI5MzAxOTk4OTktMTU1MjUwNTM3MQ" -Token xyz 
 
          It 'Should have a properly constructed URL' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -177,7 +177,7 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod { return $true }
 
          Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" | `
-            Remove-VSTeamAccessControlEntry -Descriptor abc -Token xyz 
+            Remove-VSTeamAccessControlEntry -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODc2Mzk2MjA0LTIwNjc1NTI1ODctMzA2NDY5MTU3My0yNjkxODIxNjgzLTEtMjM0NjY4Mzk3Mi0yNDI0MDE0NjYzLTI5MzAxOTk4OTktMTU1MjUwNTM3MQ" -Token xyz 
 
          It 'Should have a properly constructed URL' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
