@@ -91,6 +91,7 @@ $securityNamespace =
         {
             "DisplayName":  "Contribute to pull requests",
             "Name":  "PullRequestContribute",
+            "Bit":"16384"
         },
         {
             "DisplayName":  "Bypass policies when completing pull requests",
