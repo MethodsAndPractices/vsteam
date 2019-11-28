@@ -1,5 +1,5 @@
 Set-StrictMode -Version Latest
-
+Import-module .\Downloads\vsteam-master\bin\VSTeam.psd1
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
@@ -17,7 +17,87 @@ $securityNamespace =
     "writePermission":  8192,
     "readPermission":  2,
     "dataspaceCategory":  "Git",
-    "actions":  "               ",
+    "actions":  [
+        {
+            "DisplayName":  "Administer",
+            "Name":  "Administer",
+            "Bit":  1
+        },
+        {
+            "DisplayName":  "Read",
+            "Name":  "GenericRead",
+            "Bit":  2
+        },
+        {
+            "DisplayName":  "Contribute",
+            "Name":  "GenericContribute",
+            "Bit":  4
+        },
+        {
+            "DisplayName":  "Force push (rewrite history, delete branches and tags)",
+            "Name":  "ForcePush",
+            "Bit":  8
+        },
+        {
+            "DisplayName":  "Create branch",
+            "Name":  "CreateBranch",
+            "Bit":  16
+        },
+        {
+            "DisplayName":  "Create tag",
+            "Name":  "CreateTag",
+            "Bit":  32
+        },
+        {
+            "DisplayName":  "Manage notes",
+            "Name":  "ManageNote",
+            "Bit":  64
+        },
+        {
+            "DisplayName":  "Bypass policies when pushing",
+            "Name":  "PolicyExempt",
+            "Bit":  128
+        },
+        {
+            "DisplayName":  "Create repository",
+            "Name":  "CreateRepository",
+            "Bit":  256
+        },
+        {
+            "DisplayName":  "Delete repository",
+            "Name":  "DeleteRepository",
+            "Bit":  512
+        },
+        {
+            "DisplayName":  "Rename repository",
+            "Name":  "RenameRepository",
+            "Bit":  1024
+        },
+        {
+            "DisplayName":  "Edit policies",
+            "Name":  "EditPolicies",
+            "Bit":  2048
+        },
+        {
+            "DisplayName":  "Remove others\u0027 locks",
+            "Name":  "RemoveOthersLocks",
+            "Bit":  4096
+        },
+        {
+            "DisplayName":  "Manage permissions",
+            "Name":  "ManagePermissions",
+            "Bit":  8192
+        },
+        {
+            "DisplayName":  "Contribute to pull requests",
+            "Name":  "PullRequestContribute",
+        },
+        {
+            "DisplayName":  "Bypass policies when completing pull requests",
+            "Name":  "PullRequestBypassPolicy",
+            "Bit":  32768
+        }
+    ],
     "structureValue":  1,
     "extensionType":  "Microsoft.TeamFoundation.Git.Server.Plugins.GitSecurityNamespaceExtension",
     "isRemotable":  true,
@@ -74,7 +154,7 @@ $securityNamespace =
          Mock Invoke-RestMethod { return $true }
 
          Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" | `
-            Remove-VSTeamAccessControlEntry -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODc2Mzk2MjA0LTIwNjc1NTI1ODctMzA2NDY5MTU3My0yNjkxODIxNjgzLTEtMjM0NjY4Mzk3Mi0yNDI0MDE0NjYzLTI5MzAxOTk4OTktMTU1MjUwNTM3MQ" -Token xyz 
+         Remove-VSTeamAccessControlEntry -SecurityNamespace $_ -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0xODc2Mzk2MjA0LTIwNjc1NTI1ODctMzA2NDY5MTU3My0yNjkxODIxNjgzLTEtMjM0NjY4Mzk3Mi0yNDI0MDE0NjYzLTI5MzAxOTk4OTktMTU1MjUwNTM3MQ" -Token xyz 
 
          It 'Should have a properly constructed URL' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
