@@ -6,7 +6,7 @@ InModuleScope VSTeam {
    # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
-   $securityNamespace = 
+   [VSTeamSecurityNamespace]$securityNamespace = 
 @"
 {
     "DisplayName":  "Git Repositories",
@@ -102,35 +102,15 @@ InModuleScope VSTeam {
                         "Bit":  32768
                     }
                 ],
-    "_internalObj":  [
-                         {
-                             "namespaceId":  "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87",
-                             "name":  "Git Repositories",
-                             "displayName":  "Git Repositories",
-                             "separatorValue":  "/",
-                             "elementLength":  -1,
-                             "writePermission":  8192,
-                             "readPermission":  2,
-                             "dataspaceCategory":  "Git",
-                             "actions":  "               ",
-                             "structureValue":  1,
-                             "extensionType":  "Microsoft.TeamFoundation.Git.Server.Plugins.GitSecurityNamespaceExtension",
-                             "isRemotable":  true,
-                             "useTokenTranslator":  true,
-                             "systemBitMask":  0
-                         }
-                     ],
     "ID":  "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87",
     "ProjectName":  "",
     "DisplayMode":  "------",
     "Name":  "Git Repositories"
 }
 "@ | ConvertFrom-Json
-
-   $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace)
   
    Describe 'AccessControlEntry VSTS' {
-      # You have to set the version or the api-version will not be Removeed when
+      # You have to set the version or the api-version will not be Removed when
       # [VSTeamVersions]::Core = ''
       [VSTeamVersions]::Core = '5.1'
 
@@ -153,7 +133,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace' {
-         Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
+         Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
          Mock Invoke-RestMethod { return $true }
 
          $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
@@ -173,7 +153,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace (pipeline)' {
-         Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
+         Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
          Mock Invoke-RestMethod { return $true }
 
          Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" | `
