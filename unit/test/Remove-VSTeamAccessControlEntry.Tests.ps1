@@ -6,7 +6,7 @@ InModuleScope VSTeam {
    # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
-   [VSTeamSecurityNamespace]$securityNamespace = 
+$securityNamespace = 
 @"
 {
     "DisplayName":  "Git Repositories",
