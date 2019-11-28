@@ -1,5 +1,5 @@
 Set-StrictMode -Version Latest
-Import-module .\Downloads\vsteam-master\bin\VSTeam.psd1
+
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
