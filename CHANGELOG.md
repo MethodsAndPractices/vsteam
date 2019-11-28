@@ -4,7 +4,7 @@
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/<pull-request-number>) from [Steven Cady](https://github.com/cadacious) which included the following:
 
-Added Remove-VSTeamAccessControlEntry to delete users/groups from Access Control Lists within security namespaces. Supports removing single or multiple entries. Can remove vsts origin or aad origin, but not in the same run. Origin defaults to vsts if not specified.
+Added Remove-VSTeamAccessControlEntry to delete users/groups from Access Control Lists within security namespaces. Supports removing single or multiple entries. Only supports removing vsts origin users/groups.
 
 ## 6.4.1
 
