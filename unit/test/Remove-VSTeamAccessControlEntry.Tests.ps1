@@ -113,7 +113,7 @@ $securityNamespace =
       [VSTeamVersions]::Core = '5.1'
 
       Context 'Remove-VSTeamAccessControlEntry by SecurityNamespaceId' {
-         Mock Invoke-RestMethod { return $true }
+         Mock Invoke-RestMethod { return $true } -Verifiable
 
          Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz
 
@@ -121,9 +121,8 @@ $securityNamespace =
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
                $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*Microsoft.TeamFoundation.Identity;S-1*" -and
                $Uri -like "*?token=xyz*" -and
-               $Uri -like "*&descriptors=abc*" -and
+               $Uri -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
                $ContentType -eq "application/json" -and
                $Method -eq "Delete"
             }
@@ -132,40 +131,38 @@ $securityNamespace =
 
       Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace' {
          Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
-         Mock Invoke-RestMethod { return $true }
+         Mock Invoke-RestMethod { return $true } -Verifiable
 
          $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
          Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz 
 
          It 'Should have a properly constructed URL' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
-                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-                $Uri -like "*Microsoft.TeamFoundation.Identity;S-1*" -and
-                $Uri -like "*?token=xyz*" -and
-                $Uri -like "*&descriptors=abc*" -and
-                $ContentType -eq "application/json" -and
-                $Method -eq "Delete"
+               $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+               $Uri -like "*?token=xyz*" -and
+               $Uri -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
+               $ContentType -eq "application/json" -and
+               $Method -eq "Delete"
             }
          }
       }
 
       Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace (pipeline)' {
          Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
-         Mock Invoke-RestMethod { return $true }
+         Mock Invoke-RestMethod { return $true } -Verifiable
 
          Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" | `
          Remove-VSTeamAccessControlEntry -SecurityNamespace $_ -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz 
 
          It 'Should have a properly constructed URL' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
-                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-                $Uri -like "*Microsoft.TeamFoundation.Identity;S-1*" -and
-                $Uri -like "*?token=xyz*" -and
-                $Uri -like "*&descriptors=abc*" -and
-                $ContentType -eq "application/json" -and
-                $Method -eq "Delete"
+               $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+               $Uri -like "*?token=xyz*" -and
+               $Uri -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
+               $ContentType -eq "application/json" -and
+               $Method -eq "Delete"
             }
          }
       }
