@@ -37,7 +37,13 @@ function Remove-VSTeamAccessControlEntry {
             foreach($UniqueDescriptor in $Descriptor.Split(","))
             {
                 $UniqueDescriptor = ($UniqueDescriptor).split(".")[1]
-                $UniqueDescriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($UniqueDescriptor))
+                try{
+                    $UniqueDescriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($UniqueDescriptor))
+                }
+                catch
+                {
+                    Throw "Could not convert base64 string to string."
+                }
                 $UniqueDescriptor = "Microsoft.TeamFoundation.Identity;"+"$UniqueDescriptor"
 
                 $Descriptors += $UniqueDescriptor
@@ -48,7 +54,15 @@ function Remove-VSTeamAccessControlEntry {
         else 
         {
             $Descriptor = ($descriptor).split(".")[1]
-            $Descriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Descriptor))
+            try
+            {
+                 $Descriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Descriptor))
+            }
+            catch
+            {
+                 Return "Could not convert base64 string to string."
+            }
+            
             $Descriptor = "Microsoft.TeamFoundation.Identity;"+"$descriptor"
 
             [Uri]$Uri = "$($env:TEAM_ACCT)/_apis/accesscontrolentries/$($securityNamespaceId)?token=$($token)&descriptors=$($descriptor)&api-version=5.1"
@@ -56,5 +70,7 @@ function Remove-VSTeamAccessControlEntry {
 
         # Call the REST API
         $resp = _callAPI -method DELETE -Url $Uri -ContentType "application/json"
+
+	return $resp
     }
  }
