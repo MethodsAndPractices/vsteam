@@ -107,45 +107,32 @@ $securityNamespace =
 }
 "@ | ConvertFrom-Json
   
-   Describe 'AccessControlEntry VSTS' {
-      # You have to set the version or the api-version will not be Removed when
-      # [VSTeamVersions]::Core = ''
-      [VSTeamVersions]::Core = '5.1'
+    Describe 'AccessControlEntry VSTS'{
+        # You have to set the version or the api-version will not be Removed when
+        # [VSTeamVersions]::Core = ''
+        [VSTeamVersions]::Core = '5.1'
 
-      Context 'Remove-VSTeamAccessControlEntry by SecurityNamespaceId' {
-         It 'Should have a properly constructed URL' {
-            Mock Invoke-RestMethod { return $true } -Verifiable
+        Mock Invoke-RestMethod { return $true } -Verifiable
+        Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
 
-            Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz
-   
-            Assert-MockCalled Invoke-RestMethod -ParameterFilter {
-               $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*?token=xyz*" -and
-               $Uri -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
-               $ContentType -eq "application/json" -and
-               $Method -eq "Delete"
+        Context 'Remove-VSTeamAccessControlEntry by SecurityNamespaceId'{
+            It 'Should succeed with a properly formatted descriptor'{
+            Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz | Should be $true
             }
-         }
-      }
-
-      Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace' {
-         It 'Should have a properly constructed URL' {
-            Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
-            Mock Invoke-RestMethod { return $true } -Verifiable
-   
-            $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
-            Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz 
-
-            Assert-MockCalled Invoke-RestMethod -ParameterFilter {
-               $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*?token=xyz*" -and
-               $Uri -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
-               $ContentType -eq "application/json" -and
-               $Method -eq "Delete"
+            It 'Should fail with an improperly formatted descriptor'{
+            Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor "vssgp.NotARealDescriptor" -Token xyz | Should belike "Could not convert base64 string to string*"
             }
-         }
-      }
-   }
+        }
+
+        Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace'{
+            It 'Should succeed with a properly formatted descriptor'{  
+                $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
+                Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz | Should be $true
+            }
+            It 'Should succeed with a properly formatted descriptor'{  
+                $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
+                Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor "vssgp.NotARealDescriptor" -Token xyz | Should belike "Could not convert base64 string to string*"
+            }
+        }
+    }
 }
