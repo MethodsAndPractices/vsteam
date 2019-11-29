@@ -114,15 +114,15 @@ $securityNamespace =
 
       Context 'Remove-VSTeamAccessControlEntry by SecurityNamespaceId' {
          It 'Should have a properly constructed URL' {
-            Mock _callAPI { return $true } -Verifiable
+            Mock Invoke-RestMethod { return $true } -Verifiable
 
             Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz
    
-            Assert-MockCalled _callAPI -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Url -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
-               $Url -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Url -like "*?token=xyz*" -and
-               $Url -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
+            Assert-MockCalled Invoke-RestMethod -ParameterFilter {
+               $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+               $Uri -like "*?token=xyz*" -and
+               $Uri -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
                $ContentType -eq "application/json" -and
                $Method -eq "Delete"
             }
@@ -132,16 +132,16 @@ $securityNamespace =
       Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace' {
          It 'Should have a properly constructed URL' {
             Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
-            Mock _callAPI { return $true } -Verifiable
+            Mock Invoke-RestMethod { return $true } -Verifiable
    
             $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
             Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz 
 
-            Assert-MockCalled _callAPI -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Url -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
-               $Url -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Url -like "*?token=xyz*" -and
-               $Url -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
+            Assert-MockCalled Invoke-RestMethod -ParameterFilter {
+               $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+               $Uri -like "*?token=xyz*" -and
+               $Uri -like "*&descriptors=Microsoft.TeamFoundation.Identity;S-1*" -and
                $ContentType -eq "application/json" -and
                $Method -eq "Delete"
             }
