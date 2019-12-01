@@ -1,76 +1,89 @@
 function Remove-VSTeamAccessControlEntry {
-    [CmdletBinding(DefaultParameterSetName = 'ByNamespace')]
+    [CmdletBinding(DefaultParameterSetName = 'byNamespace', SupportsShouldProcess=$true, ConfirmImpact = 'High')]
+    [OutputType([System.String])]
     param(
-       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
-       [VSTeamSecurityNamespace] $SecurityNamespace,
+       [Parameter(ParameterSetName = 'byNamespace', Mandatory = $true, ValueFromPipeline = $true)]
+       [VSTeamSecurityNamespace] $securityNamespace,
  
-       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-       [ValidateScript({
-          try {
-              [System.Guid]::Parse($_) | Out-Null
-              $true
-          } catch {
-              $false
-          }
-       })]
-       [string] $SecurityNamespaceId,
+       [Parameter(ParameterSetName = 'byNamespaceId', Mandatory = $true)]
+       [guid] $securityNamespaceId,
  
-       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
-       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-       [string] $Token,
+       [Parameter(ParameterSetName = 'byNamespace', Mandatory = $true)]
+       [Parameter(ParameterSetName = 'byNamespaceId', Mandatory = $true)]
+       [string] $token,
  
-       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
-       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-       [string] $Descriptor
+       [Parameter(ParameterSetName = 'byNamespace', Mandatory = $true)]
+       [Parameter(ParameterSetName = 'byNamespaceId', Mandatory = $true)]
+       [System.Array] $descriptor
     )
  
     process {
-        if ($SecurityNamespace)
-        {
-            $SecurityNamespaceId = $SecurityNamespace.ID
+        if($securityNamespace) {
+            $securityNamespaceId = ($securityNamespace | Select-Object -ExpandProperty id -ErrorAction SilentlyContinue)
         }
 
-        if ($Descriptor -like "*,*")
-        {
-            $Descriptors = @()
+        if(($descriptor).count -gt 1) {
+            $descriptor = @()
 
-            foreach($UniqueDescriptor in $Descriptor.Split(","))
-            {
-                $UniqueDescriptor = ($UniqueDescriptor).split(".")[1]
-                try{
-                    $UniqueDescriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($UniqueDescriptor))
+            foreach($uniqueDescriptor in $descriptor) {
+                $uniqueDescriptor = ($uniqueDescriptor).split(".")[1]
+                try {
+                    
+                    $uniqueDescriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy"))
                 }
-                catch
-                {
-                    Throw "Could not convert base64 string to string."
+                catch [FormatException]{
+                    Write-Error "Could not convert base64 string to string."
+                    continue
                 }
-                $UniqueDescriptor = "Microsoft.TeamFoundation.Identity;"+"$UniqueDescriptor"
+                $uniqueDescriptor = "Microsoft.TeamFoundation.Identity;"+"$uniqueDescriptor"
 
-                $Descriptors += $UniqueDescriptor
+                $descriptor += $uniqueDescriptor
             }
-
-            [Uri]$Uri = "$($env:TEAM_ACCT)/_apis/accesscontrolentries/$($securityNamespaceId)?token=$($token)&descriptors=$($descriptors -join ",")&api-version=5.1"
+        
+            if(($descriptor).count -eq 0) {
+                Write-Error "No valid descriptors provided."
+                return
+            }
+            else
+            {
+                $descriptor = $descriptor -join ","
+            }
         }
-        else 
-        {
-            $Descriptor = ($descriptor).split(".")[1]
-            try
-            {
-                 $Descriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Descriptor))
+        else {
+            $descriptor = ($descriptor).split(".")[1]
+            try {
+                 $descriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($descriptor))
             }
-            catch
-            {
-                 Return "Could not convert base64 string to string."
+            catch {
+                 trap [FormatException]{}
+                 Write-Error "Could not convert base64 string to string."
+                 return
             }
             
-            $Descriptor = "Microsoft.TeamFoundation.Identity;"+"$descriptor"
-
-            [Uri]$Uri = "$($env:TEAM_ACCT)/_apis/accesscontrolentries/$($securityNamespaceId)?token=$($token)&descriptors=$($descriptor)&api-version=5.1"
+            $descriptor = "Microsoft.TeamFoundation.Identity;"+"$descriptor"
+        }
+        
+        if($PSCmdlet.ShouldProcess("$token")) {
+        # Call the REST API
+        $resp = _callAPI -method DELETE -Area "accesscontrolentries" -id $securityNamespaceId -ContentType "application/json" -Version $([VSTeamVersions]::Core) -QueryString @{token = $token; descriptors = $descriptor} -ErrorAction SilentlyContinue
         }
 
-        # Call the REST API
-        $resp = _callAPI -method DELETE -Url $Uri -ContentType "application/json"
+        switch($resp) {
+            {($resp -eq $true)}
+            {
+                return "Removal of ACE from ACL succeeded."
+            }
 
-	return $resp
+            {($resp -eq $false)}
+            {
+                Write-Error "Removal of ACE from ACL failed. Ensure descriptor and token are correct."
+                return
+            }
+            {($resp -ne $true) -and ($resp -ne $false)}
+            {
+                Write-Error "Unexpected response from REST API."
+                return
+            }
+        }
     }
  }

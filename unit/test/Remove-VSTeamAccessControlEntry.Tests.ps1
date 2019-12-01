@@ -112,26 +112,58 @@ $securityNamespace =
         # [VSTeamVersions]::Core = ''
         [VSTeamVersions]::Core = '5.1'
 
-        Mock Invoke-RestMethod { return $true } -Verifiable
+        
         Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
 
         Context 'Remove-VSTeamAccessControlEntry by SecurityNamespaceId'{
-            It 'Should succeed with a properly formatted descriptor'{
-            Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz | Should be $true
+            It 'Should succeed with a properly formatted descriptor if descriptor is on ACL'{
+                Mock _callAPI { return $true } -Verifiable
+                Remove-VSTeamAccessControlEntry -SecurityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -Descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04") -Token xyz -confirm:$false | Should be "Removal of ACE from ACL succeeded."
+            }
+            It 'Should fail with a properly formatted descriptor if descriptor is not on ACL already'{
+                Mock _callAPI { return $false } -Verifiable
+                Remove-VSTeamAccessControlEntry -SecurityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -Descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04") -Token xyz -confirm:$false -ErrorVariable err -ErrorAction SilentlyContinue
+                $err.count | should be 1
+                $err[0].Exception.Message | Should Be "Removal of ACE from ACL failed. Ensure descriptor and token are correct."
+                $err
             }
             It 'Should fail with an improperly formatted descriptor'{
-            Remove-VSTeamAccessControlEntry -SecurityNamespaceId 2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87 -Descriptor "vssgp.NotARealDescriptor" -Token xyz | Should belike "Could not convert base64 string to string*"
+                Remove-VSTeamAccessControlEntry -SecurityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -Descriptor @("vssgp.NotARealDescriptor") -Token xyz -confirm:$false -ErrorVariable err -ErrorAction SilentlyContinue
+                $err.count | should be 2
+                $err[1].Exception.Message | Should Be "Could not convert base64 string to string."
+            }
+            It 'Should fail if the REST API gives a non true/false response'{
+                Mock _callAPI { return "Not a valid return" } -Verifiable
+                Remove-VSTeamAccessControlEntry -SecurityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -Descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04") -Token xyz -confirm:$false -ErrorVariable err -ErrorAction SilentlyContinue
+                $err.count | should be 1
+                $err[0].Exception.Message | Should Be "Unexpected response from REST API."
             }
         }
 
         Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace'{
-            It 'Should succeed with a properly formatted descriptor'{  
+            It 'Should succeed with a properly formatted descriptor if descriptor is on ACL'{  
                 $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
-                Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor "vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04" -Token xyz | Should be $true
+                Mock _callAPI { return $true } -Verifiable
+                Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04") -Token xyz -confirm:$false | Should be "Removal of ACE from ACL succeeded."
             }
-            It 'Should succeed with a properly formatted descriptor'{  
+            It 'Should fail with a properly formatted descriptor if descriptor is not on ACL already'{ 
                 $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
-                Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor "vssgp.NotARealDescriptor" -Token xyz | Should belike "Could not convert base64 string to string*"
+                Mock _callAPI { return $false } -Verifiable 
+                Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04") -Token xyz -confirm:$false -ErrorVariable err -ErrorAction SilentlyContinue
+                $err.count | should be 1
+                $err[0].Exception.Message | Should Be "Removal of ACE from ACL failed. Ensure descriptor and token are correct."
+            }
+            It 'Should fail with an improperly formatted descriptor'{  
+                $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
+                Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor @("vssgp.NotARealDescriptor") -Token xyz -confirm:$false -ErrorVariable err -ErrorAction SilentlyContinue
+                $err.count | should be 2
+                $err[1].Exception.Message | Should Be "Could not convert base64 string to string."
+            }
+            It 'Should fail if the REST API gives a non true/false response'{
+                Mock _callAPI { return "Not a valid return" } -Verifiable
+                Remove-VSTeamAccessControlEntry -SecurityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -Descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04") -Token xyz -confirm:$false -ErrorVariable err -ErrorAction SilentlyContinue
+                $err.count | should be 1
+                $err[0].Exception.Message | Should Be "Unexpected response from REST API."
             }
         }
     }
