@@ -14,6 +14,53 @@ Removes specified ACEs in the ACL for the provided token. The request URI contai
 Removes specified ACEs in the ACL for the provided token. The request URI contains the namespace ID, the target token, and a single or list of descriptors that should be removed. Only supports removing AzD based users/groups.
 
 ## EXAMPLES
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
+```
+
+This will remove the specified descriptor from the specified repository, using the security namespace id, while confirming for the remove action.
+
+### -------------------------- EXAMPLE 2 --------------------------
+
+```PowerShell
+PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -confirm:$false
+```
+
+This will remove the specified descriptor from the specified repository, using the security namespace id, with no confirmation for the remove action.
+
+### -------------------------- EXAMPLE 3 --------------------------
+
+```PowerShell
+PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
+```
+
+This will remove multiple descriptors from the specified repository, using the security namespace id, while confirming for the remove action.
+
+### -------------------------- EXAMPLE 4 --------------------------
+
+```PowerShell
+PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
+```
+
+This will remove the specified descriptor from the specified repository, using a security namespace object, while confirming for the remove action.
+
+### -------------------------- EXAMPLE 5 --------------------------
+
+```PowerShell
+PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -confirm:$false
+```
+
+This will remove the specified descriptor from the specified repository, using a security namespace object, with no confirmation for the remove action.
+
+### -------------------------- EXAMPLE 6 --------------------------
+
+```PowerShell
+PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
+```
+
+This will remove multiple descriptors from the specified repository, using a security namespace object, while confirming for the remove action.
 
 ## PARAMETERS
 
@@ -124,8 +171,23 @@ Required: True
 
 The security Token
 
+Valid token formats are:
+
+- Git Repository (repov2/$projectID/$repositoryID)
+- Build Definition ($projectID/$buildDefinitionID)
+- Release Definition ($projectID/$releaseDefinitionID, $projectID/Path/to/Release/$releaseDefinitionID)
+
 ```yaml
 Type: String
+Required: True
+```
+
+### -Descriptor
+
+An array of descriptors of users/groups to be removed
+
+```yaml
+Type: System.Array
 Required: True
 ```
 
@@ -135,7 +197,7 @@ Required: True
 
 ## NOTES
 
-### This function outputs a warning if the ACE removal from the ACL returns $False. This can be due to the wrong descriptor being provided, or the descriptor already not being on the ACL.
+### This function outputs a non-terminating error if the ACE removal from the ACL returns $False. This can be due to the wrong descriptor being provided, or the descriptor already not being on the ACL.
 
 ## RELATED LINKS
 
