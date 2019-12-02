@@ -1,5 +1,21 @@
 # Changelog
 
+## 6.4.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/225) from [Steven Cady](https://github.com/cadacious) which included the following:
+
+Added Get-VSTeamPermissionInheritance to retrieve permission inheritance state of Git Repositories, Build Definition, and Release Definitions.
+
+Added Set-VSTeamPermissionInheritance to set permission inheritance state of Git Repositories, Build Definition, and Release Definitions.
+
+Updated Set-VSTeamAPIVersion with new version for Build.
+
+## 6.4.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/224) from [Steven Cady](https://github.com/cadacious) which included the following:
+
+Added Remove-VSTeamAccessControlEntry to delete users/groups from Access Control Lists within security namespaces. Supports removing single or multiple entries.
+
 ## 6.4.1
 
 Fixed issue [Description on variable groups is not a required field #208](https://github.com/DarqueWarrior/vsteam/issues/208).
