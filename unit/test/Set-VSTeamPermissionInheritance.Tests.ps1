@@ -147,7 +147,7 @@ InModuleScope VSTeam {
             $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
             It 'Should fail when the REST API does not return Status Code 204 for a valid repository'{
-            $env:TEAM_PROJECT = "ProjectName"
+            new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock _callAPI { return } -Verifiable
             Set-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" -newState $true -ErrorVariable err -ErrorAction SilentlyContinue -confirm:$false 
             $err.count | should be 1
@@ -182,7 +182,7 @@ InModuleScope VSTeam {
             $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
             It 'Should fail when the REST API does not return Status Code 204 for a valid build definition'{
-            $env:TEAM_PROJECT = "ProjectName"
+            new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock _callAPI { return } -Verifiable
             Set-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -newState $true -ErrorVariable err -ErrorAction SilentlyContinue -confirm:$false 
             $err.count | should be 1
@@ -218,7 +218,7 @@ InModuleScope VSTeam {
             $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
             It 'Should fail when the REST API does not return Status Code 204 for a valid release definition'{
-            $env:TEAM_PROJECT = "ProjectName"
+            new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock _callAPI { return } -Verifiable
             Set-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -newState $true -ErrorVariable err -ErrorAction SilentlyContinue -confirm:$false 
             $err.count | should be 1

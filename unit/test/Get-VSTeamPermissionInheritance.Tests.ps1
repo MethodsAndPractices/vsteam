@@ -136,7 +136,7 @@ InModuleScope VSTeam {
             $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
             It 'Should fail with an improperly named repository'{
-            $env:TEAM_PROJECT = "ProjectName"
+            new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock Get-VSTeamGitRepository { return } -Verifiable
             Get-VSTeamPermissionInheritance -resourceName "Not-RepositoryName" -resourceType "Repository" -ErrorVariable err -ErrorAction SilentlyContinue
             $err.count | should be 1
@@ -154,7 +154,7 @@ InModuleScope VSTeam {
             $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
             It 'Should fail with an improperly named repository'{
-            $env:TEAM_PROJECT = "ProjectName"
+            new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock Get-VSTeamBuildDefinition { return } -Verifiable
             Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
             $err.count | should be 1
@@ -172,7 +172,7 @@ InModuleScope VSTeam {
             $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
             It 'Should fail with an improperly named release definition'{
-            $env:TEAM_PROJECT = "ProjectName"
+            new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock Get-VSTeamReleaseDefinition { return } -Verifiable
             Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
             $err.count | should be 1
