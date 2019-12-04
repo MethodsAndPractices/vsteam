@@ -129,12 +129,6 @@ InModuleScope VSTeam {
             It 'Should succeed retrieving permission inheritance state with a properly named repository'{
             Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" | Should be "$true"
             }
-            It 'Should fail when $env:TEAM_PROJECT is not set'{
-            Remove-Item Env:\TEAM_PROJECT
-            Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
-            }
             It 'Should fail with an improperly named repository'{
             new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock Get-VSTeamGitRepository { return } -Verifiable
@@ -146,12 +140,6 @@ InModuleScope VSTeam {
         Context 'Get-VSTeamPermissionInheritance by Build Definition name'{
             It 'Should succeed enabling permission inheritance with a properly named Build Definition'{
             Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" | Should be "$true"
-            }
-            It 'Should fail when $env:TEAM_PROJECT is not set'{
-            Remove-Item Env:\TEAM_PROJECT
-            Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
             It 'Should fail with an improperly named repository'{
             new-item env:\TEAM_PROJECT -Value "ProjectName"
@@ -172,11 +160,28 @@ InModuleScope VSTeam {
             $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
             It 'Should fail with an improperly named release definition'{
-            new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock Get-VSTeamReleaseDefinition { return } -Verifiable
             Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
             $err.count | should be 1
             $err[0].Exception.Message | Should Be "Unable to retrieve release definition information. Ensure that the resourceName provided matches a release definition name exactly."
+            }
+        #Moving to the end and into its own context due to issues doing unit test on Mac OS and Linux when removing the $env:TEAM_PROJECT environment variable.
+        Context 'Get-VSTeamPermissionInheritance when `$env:TEAM_PROJECT doesnt exist'{
+            It 'Should fail when $env:TEAM_PROJECT is not set'{
+            Remove-Item Env:\TEAM_PROJECT
+            Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" -ErrorVariable err -ErrorAction SilentlyContinue
+            $err.count | should be 1
+            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
+            }
+            It 'Should fail when $env:TEAM_PROJECT is not set'{
+            Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
+            $err.count | should be 1
+            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
+            }
+            It 'Should fail when $env:TEAM_PROJECT is not set'{
+            Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
+            $err.count | should be 1
+            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
         }
     }
