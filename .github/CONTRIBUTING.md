@@ -24,10 +24,10 @@ I am truly grateful for all the support developing VSTeam. It means a lot that y
 - Install SonarQube extension
 - Use an empty account to run the integration tests
 - Set the following Environment variables.
-  - $env:ACCT = VSTS Account Name or full TFS URL including collection
-  - $env:API_VERSION = TFS2017, TFS2018, AzD2019 for on-prem versions, or VSTS for the Service variant, depending on the value used for ACCT
-  - $env:EMAIL = Email of user to remove and re-add to account
-  - $env:PAT = Personal Access token of ACCT
+  - `$env:ACCT = VSTS` Account Name or full TFS URL including collection
+  - `$env:API_VERSION = TFS2017` or TFS2018 / AzD2019 for on-prem versions, or VSTS for the Service variant, depending on the value used for ACCT
+  - `$env:EMAIL` = Email of user to remove and re-add to account
+  - `$env:PAT` = Personal Access token of ACCT
 
 ### Housekeeping
 
@@ -35,7 +35,7 @@ This module runs on Mac, PC and Linux. Therefore, **casing is very important**. 
 
 ### Explore the API
 
-To access the REST API, you are going to need a Personal Access Token (PAT). You can learn how to create a PAT from the [Authenticating with personal access tokens](http://cda.ms/4k) topic of [docs.microsoft.com](http://cda.ms/4k). Once you have a PAT start Postman. If you do not have Postman you can download it from getPostman.com.
+To access the REST API, you are going to need a Personal Access Token (PAT). You can learn how to create a PAT from the [Authenticating with personal access tokens](http://cda.ms/4k) topic of [docs.microsoft.com](http://cda.ms/4k). Once you have a PAT start [Postman](https://www.getpostman.com). If you do not have Postman you can download it from getPostman.com.
 
 I normally begin with Get-xxx function of any API. For the purpose of this document I am going to use the [User Entitlements API](http://cda.ms/4m). This function will combine the Get and List APIs.  I will begin with List. Using the sample request enter the data into Postman.
 
@@ -45,7 +45,7 @@ Replace {organization} with just the portion of your Azure DevOps (AzD) URL afte
 
 ![Postman Get Request](images/contributing_postmanGet.png)
 
-Now before we press Send we have to enter our PAT. Select “Basic Auth” for Type under Authorization. You can leave the Username empty. For your Password copy and paste in your PAT.
+Now before we press Send we have to enter our PAT. Select "Basic Auth" for Type under Authorization. You can leave the Username empty. For your Password copy and paste in your PAT.
 
 ![Postman Auth](images/contributing_postmanAuth.png)
 
