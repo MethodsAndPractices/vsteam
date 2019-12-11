@@ -39,7 +39,9 @@ To access the REST API, you are going to need a Personal Access Token (PAT). You
 
 I normally begin with Get-xxx function of any API. For the purpose of this document I am going to use the [User Entitlements API](http://cda.ms/4m). This function will combine the Get and List APIs.  I will begin with List. Using the sample request enter the data into Postman.
 
-GET `https://vsaex.dev.azure.com/{organization}/_apis/userentitlements?top={top}&skip={skip}&api-version=5.1-preview.2`
+```HTTP
+GET 'https://vsaex.dev.azure.com/{organization}/_apis/userentitlements?top={top}&skip={skip}&api-version=5.1-preview.2'
+```
 
 Replace {organization} with just the portion of your Azure DevOps (AzD) URL after "https://dev.azure.com" For {top} I am going to enter 100 and for {skip} 0. Postman should look similar to the image below.
 
