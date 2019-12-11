@@ -74,7 +74,7 @@ To run build the script Build-Module.ps1. The script has the following parameter
 * `-ipmo`: build module will be imported into session. IF a loaded module exist, it will be overwritten with the build version.
 * `-analyzeScript`: run the static code analyzer for the scripts with PSScriptAnalyzer
 * `-runTests`: runs the unit tests
-* `-testName`: can be used to filter the unit test parts that should be run. See [the Pester documentation](https://github.com/pester/Pester/wiki/Invoke%E2%80%90Pester#testname-alias-name) for a more elaborate explanation.
+* `-testName 'tests to filter'`: can be used to filter the unit test parts that should be run. Wildcards can be used! See [the Pester documentation](https://github.com/pester/Pester/wiki/Invoke%E2%80%90Pester#testname-alias-name) for a more elaborate explanation.
 * `-codeCoverage`: outputs the code coverage. Output by default is NUnit
 
 Below are some examples on how to build the module locally. It is expected that your working directory is at the root of the repository.
