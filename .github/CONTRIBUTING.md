@@ -7,13 +7,13 @@ I am truly grateful for all the support developing VSTeam. It means a lot that y
 1. Visit [docs.microsoft.com](http://cda.ms/4j) and find the API you want to wrap.
 2. Explore the API and get familiar with it.
 3. Fork this repository and create a branch for your work.
-4. Install the SHiPS PowerShell module
-5. Install the Trackyon.Utils module
+4. Install the `SHiPS` PowerShell module
+5. Install the `Trackyon.Utils` module
 6. Write help. **It is important that you do this before you start adding the function.**
 7. Write unit tests.
 8. Code the function.
-9. Add type file.
-10. Add format file.
+9. *If needed:* Add type file.
+10. *If needed:* Add format file.
 11. Update the psd1 file.
 12. Update the CHANGELOG.md file.
 13. Goto 4 for next function.
@@ -40,9 +40,9 @@ To access the REST API, you are going to need a Personal Access Token (PAT). You
 
 I normally begin with Get-xxx function of any API. For the purpose of this document I am going to use the [User Entitlements API](http://cda.ms/4m). This function will combine the Get and List APIs.  I will begin with List. Using the sample request enter the data into Postman.
 
-GET `https://{accountName}.vsaex.visualstudio.com/_apis/userentitlements?top={top}&skip={skip}&api-version=4.1-preview`
+GET `https://vsaex.dev.azure.com/{organization}/_apis/userentitlements?top={top}&skip={skip}&api-version=5.1-preview.2`
 
-Replace {accountName} with just the portion of your Visual Studio Team Services (VSTS) URL before “.visualstudio.com.” For {top} I am going to enter 100 and for {skip} 0. Postman should look similar to the image below.
+Replace {organization} with just the portion of your Azure DevOps (AzD) URL after "https://dev.azure.com" For {top} I am going to enter 100 and for {skip} 0. Postman should look similar to the image below.
 
 ![Postman Get Request](images/contributing_postmanGet.png)
 
@@ -88,9 +88,13 @@ If you feel the conventions should be changed please log and issue so we can dis
 
 Type files go in the types folder.
 
+See PowerShell documentation for more explanation: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_types.ps1xml?view=powershell-6
+
 ### Add a format file
 
 Format files go in the formats folder.
+
+See PowerShell documentation for more explanation: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_format.ps1xml?view=powershell-6
 
 ### Update VSTeam.psd1
 
