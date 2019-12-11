@@ -43,7 +43,7 @@ I normally begin with Get-xxx function of any API. For the purpose of this docum
 GET 'https://vsaex.dev.azure.com/{organization}/_apis/userentitlements?top={top}&skip={skip}&api-version=5.1-preview.2'
 ```
 
-Replace {organization} with just the portion of your Azure DevOps (AzD) URL after "https://dev.azure.com" For {top} I am going to enter 100 and for {skip} 0. Postman should look similar to the image below.
+Replace `{organization}` with just the portion of your Azure DevOps (AzD) URL after "https://dev.azure.com" For `{top}` I am going to enter 100 and for `{skip}` 0. Postman should look similar to the image below.
 
 ![Postman Get Request](images/contributing_postmanGet.png)
 
