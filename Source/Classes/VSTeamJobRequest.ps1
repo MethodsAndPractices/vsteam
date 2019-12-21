@@ -2,7 +2,7 @@ class VSTeamJobRequest : VSTeamLeaf {
    [datetime] $QueueTime
    [datetime] $AssignTime
    [datetime] $StartTime
-   [datetime] $FinishTime
+   [nullable[datetime]] $FinishTime
    [timespan] $Duration
    [string] $Type
    [string] $Result
@@ -14,15 +14,25 @@ class VSTeamJobRequest : VSTeamLeaf {
    ) : base($obj.owner.name, $obj.requestId, $null) {
 
       $this.Type = $obj.planType
-      $this.Result = $obj.result
+      if ($obj.PSobject.Properties.Name -contains "result") {
+         $this.Result = $obj.result
+      }
+      else {
+         $this.Result = 'running' 
+      }
       $this.Demands = $obj.demands
       $this.QueueTime = $obj.queueTime
       $this.AssignTime = $obj.assignTime
       $this.StartTime = $obj.receiveTime
-      $this.FinishTime = $obj.finishTime
+      if ($obj.PSobject.Properties.Name -contains "finishTime") {
+         $this.FinishTime = $obj.finishTime
+      }
+      else {
+         $this.FinishTime = $null 
+      }
       $this.Pipeline = $obj.definition.name
 
-      if($null -ne $this.FinishTime) {
+      if ($null -ne $this.FinishTime) {
          $this.Duration = $this.FinishTime - $this.StartTime
       }
 
