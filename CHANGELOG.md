@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/226) from [Asif Mithawala](https://github.com/asifma) which included the following:
+
+Added property checks in VSTeamJobRequest
+
 ## 6.4.1
 
 Fixed issue [Description on variable groups is not a required field #208](https://github.com/DarqueWarrior/vsteam/issues/208).
