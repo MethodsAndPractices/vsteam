@@ -29,7 +29,7 @@ function Remove-VSTeamAccessControlEntry {
                 $uniqueDescriptor = ($uniqueDescriptor).split(".")[1]
                 try {
                     
-                    $uniqueDescriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy"))
+                    $uniqueDescriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("$uniqueDescriptor"))
                 }
                 catch [FormatException]{
                     Write-Error "Could not convert base64 string to string."
