@@ -1,10 +1,24 @@
 # Changelog
-
-## 6.4.2
+## 6.4.3
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/224) from [Steven Cady](https://github.com/cadacious) which included the following:
 
 Added Remove-VSTeamAccessControlEntry to delete users/groups from Access Control Lists within security namespaces. Supports removing single or multiple entries. Only supports removing vsts origin users/groups.
+
+## 6.4.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/226) from [Asif Mithawala](https://github.com/asifma) which included the following:
+
+Added property checks in VSTeamJobRequest
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/227) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Added Remove-VSTeamWorkItem to delete work items
+
+- Added a parameter to filter unit tests
+- Added documentation on parameters of Build-Module.ps1 in code and for README.MD
+- Removed references to update the .PSD1 file in the PR template as well as in the contribution doc, since it does not seem to be needed anymore, because it is generated automatically.
+- Added coverage.xml to the .gitignore file
 
 ## 6.4.1
 
