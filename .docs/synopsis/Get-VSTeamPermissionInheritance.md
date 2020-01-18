@@ -1,0 +1,1 @@
+Returns true or false.

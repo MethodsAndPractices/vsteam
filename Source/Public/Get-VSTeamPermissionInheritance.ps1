@@ -2,8 +2,8 @@
    [OutputType([System.String])]
    [CmdletBinding()]
    param(
-      [Parameter(Mandatory)]
-      [string] $resourceName,
+      [Parameter(Mandatory, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]
+      [string] $Name,
 
       [Parameter(Mandatory)]
       [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
@@ -18,7 +18,7 @@
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
       Write-Verbose "Creating VSTeamPermissionInheritance"
-      $item = [VSTeamPermissionInheritance]::new($ProjectName, $resourceName, $resourceType)
+      $item = [VSTeamPermissionInheritance]::new($ProjectName, $Name, $resourceType)
       $token = $item.Token
       $version = $item.Version
       $projectID = $item.ProjectID

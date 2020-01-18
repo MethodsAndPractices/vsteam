@@ -2,15 +2,15 @@
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
    [OutputType([System.String])]
    param(
-      [Parameter(Mandatory)]
-      [string] $resourceName,
+      [Parameter(Mandatory, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]
+      [string] $Name,
 
       [Parameter(Mandatory)]
       [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
-      [string] $resourceType,
+      [string] $ResourceType,
 
       [Parameter(Mandatory)]
-      [bool] $newState,
+      [bool] $NewState,
 
       # Forces the command without confirmation
       [switch] $Force
@@ -24,7 +24,7 @@
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
       Write-Verbose "Creating VSTeamPermissionInheritance"
-      $item = [VSTeamPermissionInheritance]::new($ProjectName, $resourceName, $resourceType)
+      $item = [VSTeamPermissionInheritance]::new($ProjectName, $Name, $ResourceType)
       $token = $item.Token
       $version = $item.Version
       $projectID = $item.ProjectID
@@ -35,7 +35,8 @@
       Write-Verbose "ProjectID = $ProjectID"
       Write-Verbose "SecurityNamespaceID = $SecurityNamespaceID"
 
-      if ($force -or $PSCmdlet.ShouldProcess($resourceName, "Set Permission Inheritance")) {
+      if ($force -or $PSCmdlet.ShouldProcess($Name, "Set Permission Inheritance")) {
+         # The case of the state is important. It must be lowercase.
          $body = @"
 {
     "contributionIds":["ms.vss-admin-web.security-view-update-data-provider"],
@@ -46,7 +47,7 @@
             "changeInheritance":true,
             "permissionSetId":"$securityNamespaceID",
             "permissionSetToken":"$token",
-            "inheritPermissions":$newState
+            "inheritPermissions":$($NewState.ToString().ToLower())
         }
     }
 }
@@ -56,10 +57,10 @@
       }
 
       if (($resp | Select-Object -ExpandProperty dataProviders | Select-Object -ExpandProperty 'ms.vss-admin-web.security-view-update-data-provider' | Select-Object -ExpandProperty statusCode) -eq "204") {
-         Return "Inheritance successfully changed for $resourceType $resourceName."
+         Return "Inheritance successfully changed for $ResourceType $Name."
       }
       else {
-         Write-Error "Inheritance change failed for $resourceType $resourceName."
+         Write-Error "Inheritance change failed for $ResourceType $Name."
          Return
       }
    }
