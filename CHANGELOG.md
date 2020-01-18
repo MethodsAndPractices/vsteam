@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.3
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/229) from [Asif Mithawala](https://github.com/asifma) which included the following:
+
+Added additional property checks in VSTeamJobRequest
+
 ## 6.4.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/226) from [Asif Mithawala](https://github.com/asifma) which included the following:
