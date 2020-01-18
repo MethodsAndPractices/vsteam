@@ -228,7 +228,7 @@ stages:
       pool: 'windows-latest'
       name: 'windowsTFS2018'
       apiVersion: 'TFS2018'
-      account: 'http://168.61.180.150:8080/tfs/defaultcollection'
+      account: 'http://winbldbox3.centralus.cloudapp.azure.com:8080/tfs/defaultcollection'
 
   - template: build/integrationTests.yml
     parameters:

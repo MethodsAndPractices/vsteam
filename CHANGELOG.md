@@ -2,19 +2,24 @@
 
 ## 6.4.3
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/225) from [Steven Cady](https://github.com/cadacious) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/229) from [Asif Mithawala](https://github.com/asifma) which included the following:
 
-Added Get-VSTeamPermissionInheritance to retrieve permission inheritance state of Git Repositories, Build Definition, and Release Definitions.
-
-Added Set-VSTeamPermissionInheritance to set permission inheritance state of Git Repositories, Build Definition, and Release Definitions.
-
-Updated Set-VSTeamAPIVersion with new version for Build.
+Added additional property checks in VSTeamJobRequest
 
 ## 6.4.2
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/224) from [Steven Cady](https://github.com/cadacious) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/226) from [Asif Mithawala](https://github.com/asifma) which included the following:
 
-Added Remove-VSTeamAccessControlEntry to delete users/groups from Access Control Lists within security namespaces. Supports removing single or multiple entries.
+Added property checks in VSTeamJobRequest
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/227) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+Added Remove-VSTeamWorkItem to delete work items
+
+- Added a parameter to filter unit tests
+- Added documentation on parameters of Build-Module.ps1 in code and for README.MD
+- Removed references to update the .PSD1 file in the PR template as well as in the contribution doc, since it does not seem to be needed anymore, because it is generated automatically.
+- Added coverage.xml to the .gitignore file
 
 ## 6.4.1
 
@@ -37,6 +42,7 @@ Support for task groups
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/211) from [Dick van de Meulengraaf](https://github.com/dickvdm) which included the following:
 
 AzD2019 configuration, being Azure DevOps Server (on-prem) 2019 (17.143.28912.1)
+
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/209) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 Added Remove-VSTeamWorkItem to delete work items
