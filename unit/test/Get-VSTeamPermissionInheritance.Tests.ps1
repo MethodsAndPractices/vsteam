@@ -2,21 +2,20 @@
 
 InModuleScope VSTeam {
 
-    # Set the account and API versions to use for testing. A normal user would do this
-    # using the Get-VSTeamAccount function.
-    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-    [VSTeamVersions]::Git = '5.1-preview'
-    [VSTeamVersions]::Release = '5.1-preview'
-    [VSTeamVersions]::Build = '5.0-preview'
+   # Set the account and API versions to use for testing. A normal user would do this
+   # using the Get-VSTeamAccount function.
+   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+   [VSTeamVersions]::Git = '5.1-preview'
+   [VSTeamVersions]::Release = '5.1-preview'
+   [VSTeamVersions]::Build = '5.0-preview'
 
-    # Set the project to use for testing. A normal user would do this
-    # using the Get-VSTeamDefaultProject function
-    $env:TEAM_PROJECT = "ProjectName"
+   # Set the project to use for testing. A normal user would do this
+   # using the Get-VSTeamDefaultProject function
+   $env:TEAM_PROJECT = "ProjectName"
 
-  
-    Describe 'Toggling permission inheritance'{
-        
-        $projectIDReturn = @"
+   Describe 'Get-VSTeamPermissionInheritance' {
+
+      $projectIDReturn = @"
 {
     "Revision":  133,
     "ID":  "a6296153-733c-4dbf-ae34-d5e756f25591",
@@ -31,7 +30,7 @@ InModuleScope VSTeam {
 }
 "@ | ConvertFrom-Json
 
-        $repositoryIDReturn = @"
+      $repositoryIDReturn = @"
 {
     "Size":  8968,
     "ID":  "9213446d-b91f-4460-a005-0aebe2ecad5b",
@@ -45,7 +44,7 @@ InModuleScope VSTeam {
 }
 "@ | ConvertFrom-Json
 
-        $buildDefinitionIDReturn = @"
+      $buildDefinitionIDReturn = @"
 {
     "id":  36,
     "Revision":  1,
@@ -72,7 +71,7 @@ InModuleScope VSTeam {
 }
 "@ | ConvertFrom-Json
 
-        $releaseDefinitionIDReturn = @"
+      $releaseDefinitionIDReturn = @"
 {
     "Url":  "https://vsrm.dev.azure.com/OrganizationName/a6296153-733c-4dbf-ae34-d5e756f25591/_apis/Release/definitions/4",
     "Path":  "\\PathName",
@@ -100,9 +99,9 @@ InModuleScope VSTeam {
 }
 "@ | ConvertFrom-Json
 
-        $accessControlListReturn = New-Object -TypeName PSObject -Property @{InheritPermissions = "$true"}
-        
-        $callAPIReturn = @"
+      $accessControlListReturn = New-Object -TypeName PSObject -Property @{InheritPermissions = "$true" }
+
+      $callAPIReturn = @"
 {
     "dataProviders":
     {
@@ -112,77 +111,78 @@ InModuleScope VSTeam {
             "{
                 \"inheritPermissions\":true
             }"
-            
+
         }
     }
 }
 "@ | ConvertFrom-Json
 
-        Mock Get-VSTeamProject { return $projectIDReturn } -Verifiable
-        Mock Get-VSTeamGitRepository { return $repositoryIDReturn } -Verifiable
-        Mock Get-VSTeamBuildDefinition { return $buildDefinitionIDReturn } -Verifiable
-        Mock Get-VSTeamReleaseDefinition { return $releaseDefinitionIDReturn } -Verifiable
-        Mock Get-VSTeamAccessControlList{ return $accessControlListReturn } -Verifiable
-        Mock _callAPI { return $callAPIReturn } -Verifiable
+      Mock Get-VSTeamProject { return $projectIDReturn } -Verifiable
+      Mock Get-VSTeamGitRepository { return $repositoryIDReturn } -Verifiable
+      Mock Get-VSTeamBuildDefinition { return $buildDefinitionIDReturn } -Verifiable
+      Mock Get-VSTeamReleaseDefinition { return $releaseDefinitionIDReturn } -Verifiable
+      Mock Get-VSTeamAccessControlList { return $accessControlListReturn } -Verifiable
+      Mock _callAPI { return $callAPIReturn } -Verifiable
 
-        Context 'Get-VSTeamPermissionInheritance by Repository name'{
-            It 'Should succeed retrieving permission inheritance state with a properly named repository'{
+      Context 'Get-VSTeamPermissionInheritance by Repository name' {
+         It 'Should succeed retrieving permission inheritance state with a properly named repository' {
             Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" | Should be "$true"
-            }
-            It 'Should fail with an improperly named repository'{
+         }
+         It 'Should fail with an improperly named repository' {
             new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock Get-VSTeamGitRepository { return } -Verifiable
             Get-VSTeamPermissionInheritance -resourceName "Not-RepositoryName" -resourceType "Repository" -ErrorVariable err -ErrorAction SilentlyContinue
             $err.count | should be 1
             $err[0].Exception.Message | Should Be "Unable to retrieve repository information. Ensure that the resourceName provided matches a repository name exactly."
-            }
-        }
-        Context 'Get-VSTeamPermissionInheritance by Build Definition name'{
-            It 'Should succeed enabling permission inheritance with a properly named Build Definition'{
+         }
+      }
+      Context 'Get-VSTeamPermissionInheritance by Build Definition name' {
+         It 'Should succeed enabling permission inheritance with a properly named Build Definition' {
             Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" | Should be "$true"
-            }
-            It 'Should fail with an improperly named repository'{
+         }
+         It 'Should fail with an improperly named repository' {
             new-item env:\TEAM_PROJECT -Value "ProjectName"
             Mock Get-VSTeamBuildDefinition { return } -Verifiable
             Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
             $err.count | should be 1
             $err[0].Exception.Message | Should Be "Unable to retrieve build definition information. Ensure that the resourceName provided matches a build definition name exactly."
-            }
-        }
-        Context 'Get-VSTeamPermissionInheritance by Release Definition name'{
-            It 'Should succeed enabling permission inheritance with a properly named Release Definition'{
+         }
+      }
+      Context 'Get-VSTeamPermissionInheritance by Release Definition name' {
+         It 'Should succeed enabling permission inheritance with a properly named Release Definition' {
             Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" | Should be "$true"
-            }
-            It 'Should fail when $env:TEAM_PROJECT is not set'{
+         }
+         It 'Should fail when $env:TEAM_PROJECT is not set' {
             Remove-Item Env:\TEAM_PROJECT
             Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
             $err.count | should be 1
             $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
-            }
-            It 'Should fail with an improperly named release definition'{
+         }
+         It 'Should fail with an improperly named release definition' {
             Mock Get-VSTeamReleaseDefinition { return } -Verifiable
             Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
             $err.count | should be 1
             $err[0].Exception.Message | Should Be "Unable to retrieve release definition information. Ensure that the resourceName provided matches a release definition name exactly."
+         }
+         #Moving to the end and into its own context due to issues doing unit test on Mac OS and Linux when removing the $env:TEAM_PROJECT environment variable.
+         Context 'Get-VSTeamPermissionInheritance when `$env:TEAM_PROJECT doesnt exist' {
+            It 'Should fail when $env:TEAM_PROJECT is not set' {
+               Remove-Item Env:\TEAM_PROJECT
+               Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" -ErrorVariable err -ErrorAction SilentlyContinue
+               $err.count | should be 1
+               $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
-        #Moving to the end and into its own context due to issues doing unit test on Mac OS and Linux when removing the $env:TEAM_PROJECT environment variable.
-        Context 'Get-VSTeamPermissionInheritance when `$env:TEAM_PROJECT doesnt exist'{
-            It 'Should fail when $env:TEAM_PROJECT is not set'{
-            Remove-Item Env:\TEAM_PROJECT
-            Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
+            It 'Should fail when $env:TEAM_PROJECT is not set' {
+               Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
+               $err.count | should be 1
+               $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
-            It 'Should fail when $env:TEAM_PROJECT is not set'{
-            Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
+            It 'Should fail when $env:TEAM_PROJECT is not set' {
+               Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
+               $err.count | should be 1
+               $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
             }
-            It 'Should fail when $env:TEAM_PROJECT is not set'{
-            Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
-            }
-        }
-    }
+         }
+      }
+   }
 }
