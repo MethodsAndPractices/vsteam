@@ -13,6 +13,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Get-VSTeamProject.ps1"
 . "$here/../../Source/Public/Get-VSTeamBuildDefinition.ps1"
+. "$here/../../Source/Public/Get-VSTeamReleaseDefinition.ps1"
 . "$here/../../Source/Public/Get-VSTeamGitRepository.ps1"
 . "$here/../../Source/Public/Get-VSTeamAccessControlList.ps1"
 . "$here/../../Source/Public/$sut"
@@ -22,10 +23,12 @@ Add-Type -AssemblyName 'System.Web'
 
 [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
-$buildDefHierarchyResults = Get-Content "$PSScriptRoot\sampleFiles\buildDefHierarchyQuery.json" -Raw | ConvertFrom-Json
 $buildDefresults = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
+$releaseDefresults = Get-Content "$PSScriptRoot\sampleFiles\releaseDefAzD.json" -Raw | ConvertFrom-Json
 $gitRepoResult = Get-Content "$PSScriptRoot\sampleFiles\singleGitRepo.json" -Raw | ConvertFrom-Json
+$buildDefHierarchyResults = Get-Content "$PSScriptRoot\sampleFiles\buildDefHierarchyQuery.json" -Raw | ConvertFrom-Json
 $accesscontrollistsResult = Get-Content "$PSScriptRoot\sampleFiles\repoAccesscontrollists.json" -Raw | ConvertFrom-Json
+$releaseDefHierarchyResults = Get-Content "$PSScriptRoot\sampleFiles\releaseDefHierarchyQuery.json" -Raw | ConvertFrom-Json
 
 $singleResult = [PSCustomObject]@{
    name        = 'Project'
@@ -45,7 +48,7 @@ Describe 'Get-VSTeamPermissionInheritance' {
       $Uri -like "*_apis/projects*"
    }
 
-   Context 'Get-VSTeamPermissionInheritance builddef' {
+   Context 'Get-VSTeamPermissionInheritance buildDef' {
       Mock _useWindowsAuthenticationOnPremise { return $true }
       Mock Get-VSTeamProject { return $singleResult }
       Mock Get-VSTeamBuildDefinition { return $buildDefresults.value }
@@ -57,8 +60,8 @@ Describe 'Get-VSTeamPermissionInheritance' {
          return $buildDefHierarchyResults
       }
 
-      It 'should return build definitions' {
-         Get-VSTeamPermissionInheritance -projectName project -Name dynamTest-Docker-CI -resourceType BuildDefinition
+      It 'should return true' {
+         Get-VSTeamPermissionInheritance -projectName project -Name dynamTest-Docker-CI -resourceType BuildDefinition | Should be $true
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Post' -and
@@ -70,13 +73,38 @@ Describe 'Get-VSTeamPermissionInheritance' {
       }
    }
 
+   Context 'Get-VSTeamPermissionInheritance releaseDef' {
+      Mock _useWindowsAuthenticationOnPremise { return $true }
+      Mock Get-VSTeamProject { return $singleResult }
+      Mock Get-VSTeamReleaseDefinition { return $releaseDefresults.value }
+      Mock Invoke-RestMethod {
+         # If this test fails uncomment the line below to see how the mock was called.
+         # Write-Host $args
+         # Write-Host $([VSTeamVersions]::Release)
+
+         return $releaseDefHierarchyResults
+      }
+
+      It 'should return true' {
+         Get-VSTeamPermissionInheritance -projectName project -Name PTracker-CD -resourceType ReleaseDefinition | Should be $true
+
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Post' -and
+            $Body -like '*c788c23e-1b46-4162-8f5e-d7585343b5de*' -and
+            $Body -like '*123-5464-dee43//2*' -and
+            $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/project/123-5464-dee43*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Release)*"
+         }
+      }
+   }
+
    Context 'Get-VSTeamPermissionInheritance repository' {
       Mock _useWindowsAuthenticationOnPremise { return $true }
       Mock Get-VSTeamProject { return $singleResult }
       Mock Get-VSTeamGitRepository { return $gitRepoResult }
       Mock Get-VSTeamAccessControlList { return $accesscontrollistsResult.value } -Verifiable
 
-      It 'should return build definitions' {
+      It 'should return true' {
          Get-VSTeamPermissionInheritance -projectName project -Name project -resourceType Repository | Should be $true
 
          Assert-MockCalled Get-VSTeamAccessControlList -Exactly -Scope It -Times 1

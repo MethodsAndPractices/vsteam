@@ -46,7 +46,12 @@
     }
 }
 "@
-         Write-Output (_callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json" -Body $body |
+
+         $resp = _callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json" -Body $body
+
+         Write-Verbose $($resp | ConvertTo-Json -Depth 99)         
+
+         Write-Output ($resp |
             Select-Object -ExpandProperty dataProviders |
             Select-Object -ExpandProperty 'ms.vss-admin-web.security-view-data-provider' |
             Select-Object -ExpandProperty permissionsContextJson |
