@@ -15,7 +15,7 @@ class VSTeamPermissionInheritance {
          "Repository" {
             $this.SecurityNamespaceID = "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
 
-            $repositoryID = (Get-VSTeamGitRepository -Name "$resourceName" -projectName $projectName -WarningAction SilentlyContinue -ErrorAction SilentlyContinue | Select-Object -ExpandProperty id -ErrorAction SilentlyContinue)
+            $repositoryID = (Get-VSTeamGitRepository -Name "$resourceName" -projectName $projectName | Select-Object -ExpandProperty id )
 
             if ($null -eq $repositoryID) {
                Write-Error "Unable to retrieve repository information. Ensure that the resourceName provided matches a repository name exactly."
@@ -30,7 +30,7 @@ class VSTeamPermissionInheritance {
          "BuildDefinition" {
             $this.SecurityNamespaceID = "33344d9c-fc72-4d6f-aba5-fa317101a7e9"
 
-            $buildDefinitionID = (Get-VSTeamBuildDefinition -projectName $projectName -ErrorAction SilentlyContinue | Where-Object name -eq "$resourceName" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty id -ErrorAction SilentlyContinue)
+            $buildDefinitionID = (Get-VSTeamBuildDefinition -projectName $projectName | Where-Object name -eq "$resourceName" | Select-Object -ExpandProperty id )
 
             if ($null -eq $buildDefinitionID) {
                Write-Error "Unable to retrieve build definition information. Ensure that the resourceName provided matches a build definition name exactly."
@@ -45,7 +45,7 @@ class VSTeamPermissionInheritance {
          "ReleaseDefinition" {
             $this.SecurityNamespaceID = "c788c23e-1b46-4162-8f5e-d7585343b5de"
 
-            $releaseDefinition = (Get-VSTeamReleaseDefinition -projectName $projectName -ErrorAction SilentlyContinue | Where-Object -Property name -eq "$resourceName" -ErrorAction SilentlyContinue)
+            $releaseDefinition = (Get-VSTeamReleaseDefinition -projectName $projectName | Where-Object -Property name -eq "$resourceName" )
 
             if ($null -eq $releaseDefinition) {
                Write-Error "Unable to retrieve release definition information. Ensure that the resourceName provided matches a release definition name exactly."

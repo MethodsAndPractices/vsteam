@@ -30,7 +30,7 @@
       Write-Verbose "SecurityNamespaceID = $SecurityNamespaceID"
 
       if ($resourceType -eq "Repository") {
-         $resp = (Get-VSTeamAccessControlList -SecurityNamespaceId $securityNamespaceID -token $token | Select-Object -ExpandProperty InheritPermissions)
+         Write-Output (Get-VSTeamAccessControlList -SecurityNamespaceId $securityNamespaceID -token $token | Select-Object -ExpandProperty InheritPermissions)
       }
       else {
          $body = @"
@@ -46,23 +46,12 @@
     }
 }
 "@
-         $resp = (_callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json" -Body $body |
+         Write-Output (_callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json" -Body $body |
             Select-Object -ExpandProperty dataProviders |
             Select-Object -ExpandProperty 'ms.vss-admin-web.security-view-data-provider' |
             Select-Object -ExpandProperty permissionsContextJson |
             ConvertFrom-Json |
             Select-Object -ExpandProperty inheritPermissions)
-      }
-
-      Switch ($resp) {
-         { ($resp -eq $true) -or ($resp -eq $false) } {
-            return $resp
-         }
-
-         { ($resp -ne $true) -and ($resp -ne $false) } {
-            Write-Error "Unable to retrieve permission inheritance state."
-            return
-         }
       }
    }
 }

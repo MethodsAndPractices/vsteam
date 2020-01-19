@@ -1,188 +1,85 @@
 ﻿Set-StrictMode -Version Latest
 
-InModuleScope VSTeam {
+Import-Module SHiPS
 
-   # Set the account and API versions to use for testing. A normal user would do this
-   # using the Get-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   [VSTeamVersions]::Git = '5.1-preview'
-   [VSTeamVersions]::Release = '5.1-preview'
-   [VSTeamVersions]::Build = '5.0-preview'
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-   # Set the project to use for testing. A normal user would do this
-   # using the Get-VSTeamDefaultProject function
-   $env:TEAM_PROJECT = "ProjectName"
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/VSTeamLeaf.ps1"
+. "$here/../../Source/Classes/VSTeamSecurityNamespace.ps1"
+. "$here/../../Source/Classes/VSTeamPermissionInheritance.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/Get-VSTeamProject.ps1"
+. "$here/../../Source/Public/Get-VSTeamBuildDefinition.ps1"
+. "$here/../../Source/Public/Get-VSTeamGitRepository.ps1"
+. "$here/../../Source/Public/Get-VSTeamAccessControlList.ps1"
+. "$here/../../Source/Public/$sut"
 
-   Describe 'Get-VSTeamPermissionInheritance' {
+# Loading System.Web avoids issues finding System.Web.HttpUtility
+Add-Type -AssemblyName 'System.Web'
 
-      $projectIDReturn = @"
-{
-    "Revision":  133,
-    "ID":  "a6296153-733c-4dbf-ae34-d5e756f25591",
-    "URL":  "https://dev.azure.com/test/_apis/projects/a6296153-733c-4dbf-ae34-d5e756f25591",
-    "State":  "wellFormed",
-    "Visibility":  "private",
-    "Description":  null,
-    "_internalObj":  null,
-    "DisplayMode":  "d-----",
-    "ProjectName":  "$env:TEAM_PROJECT",
-    "Name":  "$env:TEAM_PROJECT"
+[VSTeamVersions]::Account = 'https://dev.azure.com/test'
+
+$buildDefHierarchyResults = Get-Content "$PSScriptRoot\sampleFiles\buildDefHierarchyQuery.json" -Raw | ConvertFrom-Json
+$buildDefresults = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
+$gitRepoResult = Get-Content "$PSScriptRoot\sampleFiles\singleGitRepo.json" -Raw | ConvertFrom-Json
+$accesscontrollistsResult = Get-Content "$PSScriptRoot\sampleFiles\repoAccesscontrollists.json" -Raw | ConvertFrom-Json
+
+$singleResult = [PSCustomObject]@{
+   name        = 'Project'
+   description = ''
+   url         = ''
+   id          = '123-5464-dee43'
+   state       = ''
+   visibility  = ''
+   revision    = 0
+   defaultTeam = [PSCustomObject]@{}
+   _links      = [PSCustomObject]@{}
 }
-"@ | ConvertFrom-Json
 
-      $repositoryIDReturn = @"
-{
-    "Size":  8968,
-    "ID":  "9213446d-b91f-4460-a005-0aebe2ecad5b",
-    "URL":  "https://dev.azure.com/OrganizationName/a6296153-733c-4dbf-ae34-d5e756f25591/_apis/git/repositories/9213446d-b91f-4460-a005-0aebe2ecad5b",
-    "sshURL":  "git@ssh.dev.azure.com:v3/OrganizationName/ProjectName/RepositoryName",
-    "RemoteURL":  "https://OrganizationName@dev.azure.com/OrganizationName/TeamName/_git/RepositoryName",
-    "DefaultBranch":  "refs/heads/master",
-    "DisplayMode":  "d-----",
-    "OrganizationName":  "OrganizationName",
-    "Name":  "RepositoryName"
-}
-"@ | ConvertFrom-Json
+Describe 'Get-VSTeamPermissionInheritance' {
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter {
+      $Uri -like "*_apis/projects*"
+   }
 
-      $buildDefinitionIDReturn = @"
-{
-    "id":  36,
-    "Revision":  1,
-    "Path":  "\\",
-    "Tags":  null,
-    "Options":  null,
-    "Triggers":  null,
-    "Variables":  null,
-    "Repository":  null,
-    "Queue":  null,
-    "RetentionRules":  null,
-    "AuthoredBy":  null,
-    "BuildNumberFormat":  "",
-    "JobCancelTimeoutInMinutes":  5,
-    "JobAuthorizationScope":  "projectCollection",
-    "GitRepository":  null,
-    "CreatedOn":  "\/Date(1574829999220)\/",
-    "Process":  null,
-    "Steps":  null,
-    "Demands":  null,
-    "DisplayMode":  "d-----",
-    "ProjectName":  "ProjectName",
-    "Name":  "Build-Name"
-}
-"@ | ConvertFrom-Json
+   Context 'Get-VSTeamPermissionInheritance builddef' {
+      Mock _useWindowsAuthenticationOnPremise { return $true }
+      Mock Get-VSTeamProject { return $singleResult }
+      Mock Get-VSTeamBuildDefinition { return $buildDefresults.value }
+      Mock Invoke-RestMethod {
+         # If this test fails uncomment the line below to see how the mock was called.
+         # Write-Host $args
+         # Write-Host $([VSTeamVersions]::Build)
 
-      $releaseDefinitionIDReturn = @"
-{
-    "Url":  "https://vsrm.dev.azure.com/OrganizationName/a6296153-733c-4dbf-ae34-d5e756f25591/_apis/Release/definitions/4",
-    "Path":  "\\PathName",
-    "Revision":  1,
-    "Tags":  null,
-    "Description":  "",
-    "isDeleted":  false,
-    "Triggers":  null,
-    "Artifacts":  null,
-    "Variables":  null,
-    "Properties":  null,
-    "Environments":  null,
-    "VariableGroups":  null,
-    "ReleaseNameFormat":  null,
-    "CreatedBy":  null,
-    "ModifiedBy":  null,
-    "CreatedOn":  "\/Date(1574831824817)\/",
-    "ModifiedOn":  "\/Date(1574831824817)\/",
-    "createdByUser":  null,
-    "_internalObj":  null,
-    "ID":  "4",
-    "ProjectName":  "ProjectName",
-    "DisplayMode":  "------",
-    "Name":  "Release-Name"
-}
-"@ | ConvertFrom-Json
+         return $buildDefHierarchyResults
+      }
 
-      $accessControlListReturn = New-Object -TypeName PSObject -Property @{InheritPermissions = "$true" }
+      It 'should return build definitions' {
+         Get-VSTeamPermissionInheritance -projectName project -Name dynamTest-Docker-CI -resourceType BuildDefinition
 
-      $callAPIReturn = @"
-{
-    "dataProviders":
-    {
-        "ms.vss-admin-web.security-view-data-provider":
-        {
-            "permissionsContextJson":
-            "{
-                \"inheritPermissions\":true
-            }"
-
-        }
-    }
-}
-"@ | ConvertFrom-Json
-
-      Mock Get-VSTeamProject { return $projectIDReturn } -Verifiable
-      Mock Get-VSTeamGitRepository { return $repositoryIDReturn } -Verifiable
-      Mock Get-VSTeamBuildDefinition { return $buildDefinitionIDReturn } -Verifiable
-      Mock Get-VSTeamReleaseDefinition { return $releaseDefinitionIDReturn } -Verifiable
-      Mock Get-VSTeamAccessControlList { return $accessControlListReturn } -Verifiable
-      Mock _callAPI { return $callAPIReturn } -Verifiable
-
-      Context 'Get-VSTeamPermissionInheritance by Repository name' {
-         It 'Should succeed retrieving permission inheritance state with a properly named repository' {
-            Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" | Should be "$true"
-         }
-         It 'Should fail with an improperly named repository' {
-            new-item env:\TEAM_PROJECT -Value "ProjectName"
-            Mock Get-VSTeamGitRepository { return } -Verifiable
-            Get-VSTeamPermissionInheritance -resourceName "Not-RepositoryName" -resourceType "Repository" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve repository information. Ensure that the resourceName provided matches a repository name exactly."
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Post' -and
+            $Body -like '*123-5464-dee43/1432*' -and
+            $Body -like '*33344d9c-fc72-4d6f-aba5-fa317101a7e9*' -and
+            $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/project/123-5464-dee43*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
          }
       }
-      Context 'Get-VSTeamPermissionInheritance by Build Definition name' {
-         It 'Should succeed enabling permission inheritance with a properly named Build Definition' {
-            Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" | Should be "$true"
-         }
-         It 'Should fail with an improperly named repository' {
-            new-item env:\TEAM_PROJECT -Value "ProjectName"
-            Mock Get-VSTeamBuildDefinition { return } -Verifiable
-            Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve build definition information. Ensure that the resourceName provided matches a build definition name exactly."
-         }
-      }
-      Context 'Get-VSTeamPermissionInheritance by Release Definition name' {
-         It 'Should succeed enabling permission inheritance with a properly named Release Definition' {
-            Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" | Should be "$true"
-         }
-         It 'Should fail when $env:TEAM_PROJECT is not set' {
-            Remove-Item Env:\TEAM_PROJECT
-            Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
-         }
-         It 'Should fail with an improperly named release definition' {
-            Mock Get-VSTeamReleaseDefinition { return } -Verifiable
-            Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
-            $err.count | should be 1
-            $err[0].Exception.Message | Should Be "Unable to retrieve release definition information. Ensure that the resourceName provided matches a release definition name exactly."
-         }
-         #Moving to the end and into its own context due to issues doing unit test on Mac OS and Linux when removing the $env:TEAM_PROJECT environment variable.
-         Context 'Get-VSTeamPermissionInheritance when `$env:TEAM_PROJECT doesnt exist' {
-            It 'Should fail when $env:TEAM_PROJECT is not set' {
-               Remove-Item Env:\TEAM_PROJECT
-               Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" -ErrorVariable err -ErrorAction SilentlyContinue
-               $err.count | should be 1
-               $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
-            }
-            It 'Should fail when $env:TEAM_PROJECT is not set' {
-               Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
-               $err.count | should be 1
-               $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
-            }
-            It 'Should fail when $env:TEAM_PROJECT is not set' {
-               Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition" -ErrorVariable err -ErrorAction SilentlyContinue
-               $err.count | should be 1
-               $err[0].Exception.Message | Should Be "Unable to retrieve project information. Ensure that Set-VSTeamDefaultProject has been run prior to execution."
-            }
-         }
+   }
+
+   Context 'Get-VSTeamPermissionInheritance repository' {
+      Mock _useWindowsAuthenticationOnPremise { return $true }
+      Mock Get-VSTeamProject { return $singleResult }
+      Mock Get-VSTeamGitRepository { return $gitRepoResult }
+      Mock Get-VSTeamAccessControlList { return $accesscontrollistsResult.value } -Verifiable
+
+      It 'should return build definitions' {
+         Get-VSTeamPermissionInheritance -projectName project -Name project -resourceType Repository | Should be $true
+
+         Assert-MockCalled Get-VSTeamAccessControlList -Exactly -Scope It -Times 1
       }
    }
 }

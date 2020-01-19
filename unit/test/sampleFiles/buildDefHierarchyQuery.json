@@ -1,0 +1,18 @@
+{
+   "dataProviderSharedData": {
+      "_featureFlags": {
+         "VisualStudio.Services.AdminEngagement.ResourcePermissions.EnableExportPermissions": false
+      }
+   },
+   "dataProviders": {
+      "ms.vss-web.component-data": {},
+      "ms.vss-web.shared-data": null,
+      "ms.vss-admin-web.security-view-data-provider": {
+         "title": "Members",
+         "isAadGroupsAdminUi": true,
+         "permissionsContextJson": "{\"permissionSetId\":\"00000000-0000-0000-0000-000000000000\",\"token\":\"00000000-0000-0000-0000-000000000000/23\",\"tokenDisplayName\":null,\"canManageGroups\":true,\"canManagePermissions\":false,\"inheritPermissions\":true,\"controlManagesFocus\":false,\"canTokenInheritPermissions\":true,\"customDoNotHavePermissionsText\":null,\"showAllGroupsIfCollection\":false,\"hideExplicitClearButton\":false,\"hideToolbar\":false,\"allowAADSearchInHosted\":false}",
+         "securityViewOptionsJson": "{\"displayScope\":\"Demo\",\"defaultFilter\":\"groups\",\"isAadAccount\":true}",
+         "userHasReadAccess": true
+      }
+   }
+}
