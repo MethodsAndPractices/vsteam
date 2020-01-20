@@ -23,3 +23,5 @@ Source/Classes/vsteam.classes.ps1
 /dist
 test-results.xml
 coverage.xml
+.editorconfig
+.vscode/settings.json
