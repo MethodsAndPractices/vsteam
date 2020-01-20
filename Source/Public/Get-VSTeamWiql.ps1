@@ -1,80 +1,66 @@
 function Get-VSTeamWiql {
-   [CmdletBinding(DefaultParameterSetName = 'ByID')]
-   param(
-      [Parameter(ParameterSetName = 'ByID', Mandatory = $true, Position = 0)]
-      [string] $Id,
-
-      [Parameter(ParameterSetName = 'ByQuery', Mandatory = $true, Position = 0)]
-      [string] $Query,
-
-      [Parameter(Mandatory = $true, Position = 1)]
-      [string] $Team,
-
-      [int] $Top = 100,
-
-      [Switch] $TimePrecision,
-
-      [Switch] $Expand
-   )
-   DynamicParam {
-      #$arrSet = Get-VSTeamProject | Select-Object -ExpandProperty Name
-      _buildProjectNameDynamicParam -mandatory $true #-arrSet $arrSet
-   }
-
-   Process {
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      $QueryString = @{
-         '$top'        = $Top
-         timePrecision = $TimePrecision
-      }
-
-      # Call the REST API
-      if ($Query) {
-
-         $body = (@{
-               query = $Query
-            }) | ConvertTo-Json
-
-         $resp = _callAPI -ProjectName $ProjectName -Team $Team -Area 'wit' -Resource 'wiql'  `
-            -method "POST" -ContentType "application/json" `
-            -Version $([VSTeamVersions]::Core) `
-            -Querystring $QueryString `
-            -Body $body
-      }
-      else {
-         $resp = _callAPI -ProjectName $ProjectName -Team $Team -Area 'wit' -Resource 'wiql'  `
-            -Version $([VSTeamVersions]::Core) -id "$Id" `
-            -Querystring $QueryString
-      }
-
-      if ($Expand) {
-
-         [array]$Ids = $resp.workItems.id
-         $Fields = $resp.columns.referenceName
-
-         $resp.workItems = @()
-         #splitting id array by 200, since a maximum of 200 ids are allowed per call
-         $countIds = $Ids.Count
-         $resp.workItems = for ($beginRange = 0; $beginRange -lt $countIds; $beginRange += 200) {
-
-            $endRange = ($beginRange + 199)
-
-            if ($endRange -gt $countIds) {
-               $idArray = $Ids[$beginRange..($countIds - 1)]
+    [CmdletBinding(DefaultParameterSetName = 'ByID')]
+    param(
+        [QueryTransformToID()]
+        [ArgumentCompleter([QueryCompleter])]
+        [Parameter(ParameterSetName = 'ByID', Mandatory = $true, Position = 0)]
+        [string] $Id,
+        [Parameter(ParameterSetName = 'ByQuery', Mandatory = $true)]
+        [string] $Query,
+        [Parameter(Position=1)]
+        [validateProject()]
+        [ArgumentCompleter([ProjectCompleter])]
+        $ProjectName,
+        [string] $Team,
+        [int] $Top = 100,
+        [Switch] $TimePrecision,
+        [Switch] $Expand
+    )
+    Process {
+        $params      =  @{ 
+            ProjectName = $ProjectName 
+            Area        = 'wit'
+            Resource    = 'wiql' 
+            Version     =  [VSTeamVersions]::Core
+            QueryString = @{
+                '$top'        = $Top
+                timePrecision = $TimePrecision
             }
-            else {
-               $idArray = $Ids[$beginRange..($endRange)]
+        }
+        if ($Team) {
+            $params['Team']=  $Team 
+        }
+        if ($Query) {
+            $params['body']   = @{query = $Query} | ConvertTo-Json
+            $params['method'] = 'POST'
+            $params['ContentType'] = 'application/json'
+        }
+        else {
+            $params['id']= $Id
+        }
+        Write-Progress -Activity "Querying Data" -CurrentOperation "Getting list of items"
+        $resp = _callAPI  @params
+        if ($Expand) {
+            if ($resp.queryResultType -eq 'workItemLink') {
+                Add-Member -InputObject $resp -MemberType NoteProperty -Name Workitems -Value @()
+                $Ids = $resp.workItemRelations.Target.id
             }
-
-            (Get-VSTeamWorkItem -Fields $Fields -Id $idArray).value
-         }
-      }
-
-      _applyTypesToWiql -item $resp
-
-      return $resp
-   }
+            else {  $Ids = $resp.workItems.id }
+            #splitting id array by 200, since a maximum of 200 ids are allowed per call
+            $countIds = $Ids.Count
+            $resp.workItems = for ($beginRange = 0; $beginRange -lt $countIds; $beginRange += 200) {
+                #strict mode is on so pick lesser of  0..199 and 0..count-1 
+                $endRange = [math]::Min(($beginRange + 199),($countIds - 1))
+                Write-Progress -Activity "Querying Data" -CurrentOperation "Expanding items $beginRange to $EndRange of $countIDs"
+                if ($Query -match "\*") {
+                    Get-VSTeamWorkItem -Id $Ids[$beginRange..$endRange] 
+                }
+                else {
+                    Get-VSTeamWorkItem  -Id $Ids[$beginRange..$endRange] -Fields $resp.columns.referenceName 
+                }
+            }
+        }
+        Write-Progress -Activity "Querying Data" -Completed
+        $resp
+    }
 }

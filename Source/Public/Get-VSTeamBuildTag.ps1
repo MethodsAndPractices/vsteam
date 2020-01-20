@@ -1,21 +1,17 @@
 function Get-VSTeamBuildTag {
-   param(
-      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-      [Alias('BuildID')]
-      [int] $Id
-   )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
-         -Version $([VSTeamVersions]::Build)
-
-      return $resp.value
-   }
+    param(
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('BuildID')]
+        [int] $Id,
+        [Parameter(Mandatory=$true, Position = 0 )]
+        [ValidateProject()]
+        [ArgumentCompleter([ProjectCompleter])]
+        $ProjectName
+    )
+    process {
+        # Call the REST API
+        $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
+            -Version $([VSTeamVersions]::Build)
+        return $resp.value
+    }
 }

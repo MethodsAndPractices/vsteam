@@ -1,24 +1,23 @@
 function Get-VSTeamBuildArtifact {
-   param(
-      [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-      [Alias('BuildID')]
-      [int] $Id
-   )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/artifacts" `
-         -Version $([VSTeamVersions]::Build)
-
-      foreach ($item in $resp.value) {
-         _applyArtifactTypes -item $item
-      }
-
-      Write-Output $resp.value
-   }
+    param(
+        [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('BuildID')]
+        [int] $Id,
+        [Parameter(Mandatory=$true, Position = 0 )]
+        [ValidateProject()]
+        [ArgumentCompleter([ProjectCompleter])]
+        $ProjectName
+    )
+    process {
+        $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/artifacts" `
+            -Version $([VSTeamVersions]::Build)
+        foreach ($item in $resp.value) {
+            $item.PSObject.TypeNames.Insert(0, "Team.Build.Artifact")
+            if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource) {
+                $item.resource.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource')
+                $item.resource.properties.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource.Properties')
+            }
+        }
+        Write-Output $resp.value
+    }
 }

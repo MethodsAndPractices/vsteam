@@ -1,105 +1,87 @@
 function Get-VSTeamRelease {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
-   param(
-      [ValidateSet('environments', 'artifacts', 'approvals', 'none')]
-      [string] $expand,
-
-      [Parameter(ParameterSetName = 'List')]
-      [ValidateSet('Draft', 'Active', 'Abandoned')]
-      [string] $statusFilter,
-
-      [Parameter(ParameterSetName = 'List')]
-      [int] $definitionId,
-
-      [Parameter(ParameterSetName = 'List')]
-      [int] $top,
-
-      [Parameter(ParameterSetName = 'List')]
-      [string] $createdBy,
-
-      [Parameter(ParameterSetName = 'List')]
-      [DateTime] $minCreatedTime,
-
-      [Parameter(ParameterSetName = 'List')]
-      [DateTime] $maxCreatedTime,
-
-      [Parameter(ParameterSetName = 'List')]
-      [ValidateSet('ascending', 'descending')]
-      [string] $queryOrder,
-
-      [Parameter(ParameterSetName = 'List')]
-      [string] $continuationToken,
-
-      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdJson')]
-      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
-      [Alias('ReleaseID')]
-      [int[]] $id,
-
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
-      [switch]$JSON,
-
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-      [switch]$raw
-   )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $false -Position 1
-   }
-
-   process {
-      Write-Debug 'Get-VSTeamRelease Process'
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      if ($id) {
-         foreach ($item in $id) {
-            $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $([VSTeamVersions]::Release)
-            
-            if ($JSON.IsPresent) {
-               $resp | ConvertTo-Json -Depth 99
+    [CmdletBinding(DefaultParameterSetName = 'List')]
+    param(
+        [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
+        [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdJson')]
+        [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
+        [Alias('ReleaseID')]
+        [int[]] $id,
+        [Parameter(ParameterSetName = 'List')]
+        [string] $searchText,
+        [Parameter(ParameterSetName = 'List')]
+        [ValidateSet('Draft', 'Active', 'Abandoned')]
+        [string] $statusFilter,
+        [Parameter(ParameterSetName = 'List')]
+        [ValidateSet('environments', 'artifacts', 'approvals', 'none')]
+        [string] $expand,
+        [Parameter(ParameterSetName = 'List')]
+        [int] $definitionId,
+        [Parameter(ParameterSetName = 'List')]
+        [int] $top,
+        [Parameter(ParameterSetName = 'List')]
+        [string] $createdBy,
+        [Parameter(ParameterSetName = 'List')]
+        [DateTime] $minCreatedTime,
+        [Parameter(ParameterSetName = 'List')]
+        [DateTime] $maxCreatedTime,
+        [Parameter(ParameterSetName = 'List')]
+        [ValidateSet('ascending', 'descending')]
+        [string] $queryOrder,
+        [Parameter(ParameterSetName = 'List')]
+        [string] $continuationToken,
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
+        [switch]$JSON,
+        [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
+        [switch]$raw,
+        [Parameter(Position=1 )]
+        [ValidateProject()]
+        [ArgumentCompleter([ProjectCompleter])]
+        $ProjectName
+    )
+    process {
+        Write-Debug 'Get-VSTeamRelease Process'
+        if ($id) {
+            foreach ($item in $id) {
+                $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $([VSTeamVersions]::Release)
+                if ($JSON.IsPresent) {
+                    $resp | ConvertTo-Json -Depth 99
+                }
+                else {
+                    if (-not $raw.IsPresent) {
+                        # Apply a Type Name so we can use custom format view and custom type extensions
+                        _applyTypesToRelease -item $resp
+                    }
+                    Write-Output $resp
+                }
+            }
+        }
+        else {
+            if ($ProjectName) {
+                $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $([VSTeamVersions]::Release)
             }
             else {
-               if (-not $raw.IsPresent) {
-
-                  # Apply a Type Name so we can use custom format view and custom type extensions
-                  _applyTypesToRelease -item $resp
-               }
-
-               Write-Output $resp
+                $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $([VSTeamVersions]::Release)
             }
-         }
-      }
-      else {
-         if ($ProjectName) {
-            $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $([VSTeamVersions]::Release)
-         }
-         else {
-            $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $([VSTeamVersions]::Release)
-         }
-
-         $QueryString = @{
-            '$top'              = $top
-            '$expand'           = $expand
-            'createdBy'         = $createdBy
-            'queryOrder'        = $queryOrder
-            'statusFilter'      = $statusFilter
-            'definitionId'      = $definitionId
-            'minCreatedTime'    = $minCreatedTime
-            'maxCreatedTime'    = $maxCreatedTime
-            'continuationToken' = $continuationToken
-         }
-
-         # Call the REST API
-         $resp = _callAPI -url $listurl -QueryString $QueryString
-         
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypesToRelease -item $item
-         }
-
-         Write-Output $resp.value         
-      }
-   }
+            $QueryString = @{
+                '$top'              = $top
+                '$expand'           = $expand
+                'createdBy'         = $createdBy
+                'queryOrder'        = $queryOrder
+                'searchText'        = $searchText
+                'statusFilter'      = $statusFilter
+                'definitionId'      = $definitionId
+                'minCreatedTime'    = $minCreatedTime
+                'maxCreatedTime'    = $maxCreatedTime
+                'continuationToken' = $continuationToken
+                
+            }
+            # Call the REST API
+            $resp = _callAPI -url $listurl -QueryString $QueryString
+            # Apply a Type Name so we can use custom format view and custom type extensions
+            foreach ($item in $resp.value) {
+                _applyTypesToRelease -item $item
+            }
+            Write-Output $resp.value
+        }
+    }
 }

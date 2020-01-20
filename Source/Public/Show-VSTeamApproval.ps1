@@ -1,21 +1,16 @@
 function Show-VSTeamApproval {
-   [CmdletBinding()]
-   param(
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [Alias('Id')]
-      [int] $ReleaseDefinitionId
-   )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      Write-Debug 'Show-VSTeamApproval Process'
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
-   }
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+        [Alias('Id')]
+        [int] $ReleaseDefinitionId,
+        [Parameter(Mandatory=$true, Position = 0 )]
+        [ValidateProject()]
+        [ArgumentCompleter([ProjectCompleter])]
+        $ProjectName
+    )
+    process {
+        Write-Debug 'Show-VSTeamApproval Process'
+                Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
+    }
 }
