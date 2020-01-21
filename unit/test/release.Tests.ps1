@@ -132,7 +132,7 @@ InModuleScope VSTeam {
                $Body -like '*"alias": "drop"*' -and
                $Body -like '*"id": "2"*' -and
                $Body -like '*"sourceBranch": ""*' -and
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -214,7 +214,7 @@ InModuleScope VSTeam {
                $Body -like '*"alias": "drop"*' -and
                $Body -like '*"id": "1"*' -and
                $Body -like '*"sourceBranch": ""*' -and
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }

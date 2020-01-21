@@ -24,7 +24,7 @@ InModuleScope VSTeam {
             Get-VSTeamQueue -ProjectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -42,7 +42,7 @@ InModuleScope VSTeam {
             Get-VSTeamQueue -projectName project -queueName 'Hosted'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)&queueName=Hosted"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$([VSTeamVersions]::DistributedTask)&queueName=Hosted"
             }
          }
       }
@@ -60,7 +60,7 @@ InModuleScope VSTeam {
             Get-VSTeamQueue -projectName project -actionFilter 'None'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)&actionFilter=None"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$([VSTeamVersions]::DistributedTask)&actionFilter=None"
             }
          }
       }

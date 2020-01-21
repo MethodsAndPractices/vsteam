@@ -36,7 +36,7 @@ InModuleScope VSTeam {
             Get-VSTeamWorkItemType -ProjectName test
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
