@@ -29,7 +29,7 @@ InModuleScope VSTeam {
             Get-VSTeamVariableGroup -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/?api-version=$([VSTeamVersions]::VariableGroups)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)"
             }
          }
       }
@@ -64,7 +64,7 @@ InModuleScope VSTeam {
             Get-VSTeamVariableGroup -projectName project -Name $varGroupName
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/?api-version=$([VSTeamVersions]::VariableGroups)&groupName=$varGroupName"
+                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)&groupName=$varGroupName"
             }
          }
       }
@@ -168,7 +168,7 @@ InModuleScope VSTeam {
             Get-VSTeamVariableGroup -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/?api-version=$([VSTeamVersions]::VariableGroups)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)"
             }
          }
       }
@@ -244,7 +244,7 @@ InModuleScope VSTeam {
             Add-VSTeamVariableGroup -Body $body -ProjectName $projName
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
-               $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups/?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)" -and
                $Method -eq 'Post' }
          }
       }
