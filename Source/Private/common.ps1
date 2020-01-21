@@ -95,14 +95,14 @@ function _buildRequestURI {
          $sb.Append("/$team") | Out-Null
       }
 
-      $sb.Append("/_apis/") | Out-Null
+      $sb.Append("/_apis") | Out-Null
 
       if ($area) {
-         $sb.Append("$area/") | Out-Null
+         $sb.Append("/$area") | Out-Null
       }
 
       if ($resource) {
-         $sb.Append($resource) | Out-Null
+         $sb.Append("/$resource") | Out-Null
       }
 
       if ($id) {
