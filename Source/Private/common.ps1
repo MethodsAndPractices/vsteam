@@ -102,11 +102,11 @@ function _buildRequestURI {
       }
 
       if ($resource) {
-         $sb.Append("$resource/") | Out-Null
+         $sb.Append($resource) | Out-Null
       }
 
       if ($id) {
-         $sb.Append($id) | Out-Null
+         $sb.Append("/$id") | Out-Null
       }
 
       if ($version) {
