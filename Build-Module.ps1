@@ -63,17 +63,18 @@ if ($buildHelp.IsPresent) {
 }
 
 Write-Output 'Publishing about help files'
-Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
+Copy-Item -Path ./Source/en-US       -Destination "$output/" -Recurse   -Force
 Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
+Copy-Item -Path ./Source/VSTeam.psd1 -Destination "$output/VSTeam.psd1" -Force
 
+$PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
 Write-Output 'Updating Functions To Export'
-$newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
-
-(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
+$FunctionsToExport  = @()
+$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"}) 
+$FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName 
+Update-ModuleManifest -Path "$output/VSTeam.psd1" -FunctionsToExport $FunctionsToExport
 
 Write-Output "Publish complete to $output"
-
 
 #reload the just build module
 if ($ipmo.IsPresent -or $runTests.IsPresent) {
