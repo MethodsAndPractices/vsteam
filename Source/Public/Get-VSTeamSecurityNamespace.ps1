@@ -1,81 +1,73 @@
 function Get-VSTeamSecurityNamespace {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
-   param(
-      [Parameter(ParameterSetName = 'ByNamespaceName', Mandatory = $true)]
-      [string] $Name,
-
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-      [ValidateScript({
-         try {
-             [System.Guid]::Parse($_) | Out-Null
-             $true
-         } catch {
-             $false
-         }
-      })]
-      [string] $Id,
-
-      [Parameter(ParameterSetName = 'List', Mandatory = $false)]
-      [switch] $LocalOnly
-   )
-
-   process {
-      _supportsSecurityNamespace
-
-      if ($Id) {
-          # Call the REST API
-         $resp = _callAPI -Area 'securitynamespaces' -id $Id `
-         -Version $([VSTeamVersions]::Core) `
-      } else {
-         $queryString = @{}
-         if ($LocalOnly.IsPresent)
-         {
-            $queryString.localOnly = $true
-         }
-
-         $resp = _callAPI -Area 'securitynamespaces' `
-         -Version $([VSTeamVersions]::Core) `
-         -QueryString $queryString
-      }
-
-      Write-Verbose $resp | Select-Object -ExpandProperty value
-
-      if ($resp.count -le 0) {
-         Write-Output $null
-      }
-
-      if ($resp.count -gt 1) {
-         # If we only need to find one specific by name
-         if ($Name) {
-            $selected = $resp.value | Where-Object {$_.name -eq $Name}
-            if ($selected) {
-               return [VSTeamSecurityNamespace]::new($selected)
-            } else {
-               return $null
+    [CmdletBinding(DefaultParameterSetName = 'List')]
+    param(
+        [Parameter(ParameterSetName = 'ByNamespaceName', Mandatory = $true)]
+        [string] $Name,
+        [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
+        [ValidateScript({
+            try {
+                [System.Guid]::Parse($_) | Out-Null
+                $true
+            } catch {
+                $false
             }
-         }
-
-         try {
-            $objs = @()
-            foreach ($item in $resp.value) {
-               $objs += [VSTeamSecurityNamespace]::new($item)
+        })]
+        [string] $Id,
+        [Parameter(ParameterSetName = 'List', Mandatory = $false)]
+        [switch] $LocalOnly
+    )
+    process {
+        _hasAccount
+        if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
+            throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
+        }
+        if ($Id) {
+            # Call the REST API
+            $resp = _callAPI -Area 'securitynamespaces' -id $Id `
+            -Version $([VSTeamVersions]::Core) `
+        } else {
+            $queryString = @{}
+            if ($LocalOnly.IsPresent)
+            {
+                $queryString.localOnly = $true
             }
-
-            Write-Output $objs
-         }
-         catch {
-            # I catch because using -ErrorAction Stop on the Invoke-RestMethod
-            # was still running the foreach after and reporting useless errors.
-            # This casuses the first error to terminate this execution.
-            _handleException $_
-         }
-      } else {
-         # Storing the object before you return it cleaned up the pipeline.
-         # When I just write the object from the constructor each property
-         # seemed to be written
-         $acl = [VSTeamSecurityNamespace]::new($resp.value)
-
-         Write-Output $acl
-      }
-   }
+            $resp = _callAPI -Area 'securitynamespaces' `
+            -Version $([VSTeamVersions]::Core) `
+            -QueryString $queryString
+        }
+        Write-Verbose $resp | Select-Object -ExpandProperty value
+        if ($resp.count -le 0) {
+            Write-Output $null
+        }
+        if ($resp.count -gt 1) {
+            # If we only need to find one specific by name
+            if ($Name) {
+                $selected = $resp.value | Where-Object {$_.name -eq $Name}
+                if ($selected) {
+                    return [VSTeamSecurityNamespace]::new($selected)
+                } else {
+                    return $null
+                }
+            }
+            try {
+                $objs = @()
+                foreach ($item in $resp.value) {
+                    $objs += [VSTeamSecurityNamespace]::new($item)
+                }
+                Write-Output $objs
+            }
+            catch {
+                # I catch because using -ErrorAction Stop on the Invoke-RestMethod
+                # was still running the foreach after and reporting useless errors.
+                # This casuses the first error to terminate this execution.
+                _handleException $_
+            }
+        } else {
+            # Storing the object before you return it cleaned up the pipeline.
+            # When I just write the object from the constructor each property
+            # seemed to be written
+            $acl = [VSTeamSecurityNamespace]::new($resp.value)
+            Write-Output $acl
+        }
+    }
 }
