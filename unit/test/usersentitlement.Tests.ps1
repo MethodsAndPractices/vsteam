@@ -46,7 +46,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0"
+               $url -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0"
             }
          }
       }
@@ -86,7 +86,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
-               $url -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
+               $url -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$([VSTeamVersions]::MemberEntitlementManagement)&top=100&skip=0&Select=Projects"
             }
          }
       }

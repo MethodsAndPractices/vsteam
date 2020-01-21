@@ -231,7 +231,7 @@ InModuleScope VSTeam {
             # "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals" -and
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
                $Uri -like "*statusFilter=Pending*" -and
                $Uri -like "*assignedtoFilter=Test User*" -and
