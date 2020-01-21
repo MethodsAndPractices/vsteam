@@ -79,7 +79,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/projects/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=100*" -and
                $Uri -like "*stateFilter=WellFormed*"
@@ -96,7 +96,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/projects/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
                $Uri -like "*`$top=10*" -and
                $Uri -like "*stateFilter=WellFormed*"
             }
@@ -112,7 +112,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/projects/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$skip=1*" -and
                $Uri -like "*`$top=100*" -and
@@ -130,7 +130,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/projects/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=100*" -and
                $Uri -like "*stateFilter=All*"

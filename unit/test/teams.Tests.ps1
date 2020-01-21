@@ -46,7 +46,7 @@ InModuleScope VSTeam {
             # The general string should look like this:
             # "https://dev.azure.com/test/_apis/projects/Test/teams/?api-version=$([VSTeamVersions]::Core)&`$top=10"
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "https://dev.azure.com/test/_apis/projects/Test/teams/*" -and
+               $Uri -like "https://dev.azure.com/test/_apis/projects/Test/teams*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=10*"
             }
@@ -61,7 +61,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/projects/Test/teams/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/projects/Test/teams*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$skip=10*"
             }
@@ -76,7 +76,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/projects/Test/teams/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/projects/Test/teams*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=10*" -and
                $Uri -like "*`$skip=5*"
@@ -284,7 +284,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/*" -and
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$skip=10*"
             }
@@ -299,7 +299,7 @@ InModuleScope VSTeam {
 
             # Make sure it was called with the correct URI
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/*" -and
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*`$top=10*" -and
                $Uri -like "*`$skip=5*"

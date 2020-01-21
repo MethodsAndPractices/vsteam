@@ -34,7 +34,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -51,7 +51,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -67,7 +67,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -83,7 +83,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -99,7 +99,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -115,7 +115,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=build*"
             }
@@ -129,7 +129,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=All*"
@@ -144,7 +144,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*' -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=build*"

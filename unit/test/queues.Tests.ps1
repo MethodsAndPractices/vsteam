@@ -89,7 +89,7 @@ InModuleScope VSTeam {
             # "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)&actionFilter=None&queueName=Hosted"
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/distributedtask/queues/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/distributedtask/queues*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
                $Uri -like "*actionFilter=None*" -and
                $Uri -like "*queueName=Hosted*"

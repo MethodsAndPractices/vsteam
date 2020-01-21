@@ -263,7 +263,7 @@ InModuleScope VSTeam {
             # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=omit
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*ids=47,48*" -and
                $Uri -like "*`$Expand=None*" -and
