@@ -1,0 +1,1 @@
+Sets the permission inheritance to true or false.

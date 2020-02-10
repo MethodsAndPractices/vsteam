@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.4
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/225) from [Cadacious](https://github.com/Cadacious) which included the following:
+
+Added Get/Set-VSTeamPermissionInheritance
+
 ## 6.4.3
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/229) from [Asif Mithawala](https://github.com/asifma) which included the following:
