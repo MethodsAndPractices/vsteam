@@ -593,7 +593,7 @@ function _callAPI {
       [object]$body,
       [string]$InFile,
       [string]$OutFile,
-      [string]$ContentType,      
+      [string]$ContentType,
       [string]$ProjectName,
       [string]$Team,
       [string]$Url,

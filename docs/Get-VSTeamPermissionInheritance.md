@@ -1,35 +1,35 @@
 
 
 
-# Get-VSTeamPolicy
+# Get-VSTeamPermissionInheritance
 
 ## SYNOPSIS
 
-Get the code policies in the specified Azure DevOps or Team Foundation Server project.
+Returns true or false.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Get the code policies in the specified Azure DevOps or Team Foundation Server project.
+Returns true or false.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamPolicy -ProjectName Demo
+PS C:\> Get-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition
 ```
 
-This command returns all the policies for the Demo project in your TFS or Team Services account.
+This command returns true or false.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamPolicy -ProjectName Demo -Id 1
+PS C:\> Get-VSTeamBuildDefinition | Get-VSTeamPermissionInheritance -ResourceType BuildDefinition
 ```
 
-This command gets the policy with an id of 1 within the Demo project.
+This command returns true or false for every build definition returned from Get-VSTeamBuildDefinition.
 
 ## PARAMETERS
 
@@ -49,16 +49,27 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Id
+### -Name
 
-Specifies one code policy by id.
-
-The id is an integer. Unique within each project.
+Specifies the name of the resource.
 
 ```yaml
-Type: Int
-Parameter Sets: ByID
+Type: String
 Accept pipeline input: true (ByPropertyName)
+Required: True
+```
+
+### -ResourceType
+
+Specifies the type of resource. The acceptable values for this parameter are:
+
+- Repository
+- BuildDefinition
+- ReleaseDefinition
+
+```yaml
+Type: String
+Required: True
 ```
 
 ## INPUTS
@@ -73,5 +84,5 @@ Accept pipeline input: true (ByPropertyName)
 
 [Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
 
-[Get-VSTeamPolicyType](Get-VSTeamPolicyType.md)
+[Get-VSTeamPermissionInheritanceType](Get-VSTeamPermissionInheritanceType.md)
 

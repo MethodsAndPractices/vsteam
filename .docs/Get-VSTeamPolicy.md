@@ -22,7 +22,7 @@ PS C:\> Get-VSTeamPolicy -ProjectName Demo
 
 This command returns all the policies for the Demo project in your TFS or Team Services account.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
 PS C:\> Get-VSTeamPolicy -ProjectName Demo -Id 1

@@ -1,0 +1,16 @@
+{
+   "count": 1,
+   "value": [
+      {
+         "inheritPermissions": true,
+         "token": "repoV2/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000",
+         "acesDictionary": {
+            "Microsoft.IdentityModel.Claims.ClaimsIdentity;00000000-0000-0000-0000-000000000000\\unit@test.com": {
+               "descriptor": "Microsoft.IdentityModel.Claims.ClaimsIdentity;00000000-0000-0000-0000-000000000000\\unit@test.com",
+               "allow": 32382,
+               "deny": 0
+            }
+         }
+      }
+   ]
+}
