@@ -56,6 +56,8 @@
          $resp = _callAPI -method POST -area "Contribution" -resource "HierarchyQuery" -id $projectID -Version $version -ContentType "application/json" -Body $body
       }
 
+      Write-Verbose "Result: $(ConvertTo-Json -InputObject $resp -Depth 100)"
+
       if (($resp | Select-Object -ExpandProperty dataProviders | Select-Object -ExpandProperty 'ms.vss-admin-web.security-view-update-data-provider' | Select-Object -ExpandProperty statusCode) -eq "204") {
          Return "Inheritance successfully changed for $ResourceType $Name."
       }
