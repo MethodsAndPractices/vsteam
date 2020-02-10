@@ -5,60 +5,71 @@
 
 ## SYNOPSIS
 
-Retrieves inheritance status of specified resource.
+Returns true or false.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Retrieves specified ACEs in the ACL for the provided token. 
+Returns true or false.
 
 ## EXAMPLES
+
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository"
+PS C:\> Get-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition
 ```
 
-This will retrieve the permission inheritance status on the named repository.
+This command returns true or false.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition"
+PS C:\> Get-VSTeamBuildDefinition | Get-VSTeamPermissionInheritance -ResourceType BuildDefinition
 ```
 
-This will retrieve the permission inheritance status on the named build definition.
-
-### -------------------------- EXAMPLE 3 --------------------------
-
-```PowerShell
-PS C:\> Get-VSTeamPermissionInheritance -resourceName "Release-Name" -resourceType "ReleaseDefinition"
-```
-
-This will retrieve the permission inheritance status on the named release definition.
+This command returns true or false for every build definition returned from Get-VSTeamBuildDefinition.
 
 ## PARAMETERS
 
-### -resourceName
+### -ProjectName
 
-The name of the resource being retreived.
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
+Position: 0
+Required: True
+Accept pipeline input: true (ByPropertyName)
+```
+
+### -Name
+
+Specifies the name of the resource.
+
+```yaml
+Type: String
+Accept pipeline input: true (ByPropertyName)
 Required: True
 ```
 
-### -resourceType
+### -ResourceType
 
-The type of resource being retrieved.
-
-Valid types are:
+Specifies the type of resource. The acceptable values for this parameter are:
 
 - Repository
 - BuildDefinition
 - ReleaseDefinition
 
+```yaml
+Type: String
+Required: True
 ```
 
 ## INPUTS
@@ -67,9 +78,11 @@ Valid types are:
 
 ## NOTES
 
-### This function uses a non-documented REST API to perform the Set operation against repositories, build, and release definitions. The API being utilized was sniffed from performing actions via the web UI and may be documented at some point in the future.
-
-### May not work against TFS and/or on-prem AzD Server.
-
 ## RELATED LINKS
+
+[Add-VSTeamPolicy](Add-VSTeamPolicy.md)
+
+[Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
+
+[Get-VSTeamPermissionInheritanceType](Get-VSTeamPermissionInheritanceType.md)
 

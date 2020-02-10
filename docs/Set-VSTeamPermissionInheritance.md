@@ -5,63 +5,63 @@
 
 ## SYNOPSIS
 
-Sets inheritance status of specified resource.
+Sets the permission inheritance to true or false.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Sets specified ACEs in the ACL for the provided token. 
+Sets the permission inheritance to true or false.
 
 ## EXAMPLES
+
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Set-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" -newState $true -confirm:$false
+PS C:\> Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true -Force
 ```
 
-Sets permission inheritance to true for the specified repository, while not requiring direct confirmation the change.
+This command sets the permission inheritance to true.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
-PS C:\> Set-VSTeamPermissionInheritance -resourceName "RepositoryName" -resourceType "Repository" -newState $false -confirm:$false
+PS C:\> Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force
 ```
 
-Sets permission inheritance to false for the specified repository, while not requiring direct confirmation the change.
-
-### -------------------------- EXAMPLE 3 --------------------------
-
-```PowerShell
-PS C:\> Set-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -newState $true 
-```
-
-Sets permission inheritance to true for the specified build defintiion, while requiring direct confirmation of the change.
-
-### -------------------------- EXAMPLE 4 --------------------------
-
-```PowerShell
-PS C:\> Set-VSTeamPermissionInheritance -resourceName "Build-Name" -resourceType "BuildDefinition" -newState $false
-```
-
-Sets permission inheritance to false for the specified build definition, while requiring direct confirmation of the change.
+ThisThis command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.
 
 ## PARAMETERS
 
-### -resourceName
+### -ProjectName
 
-The name of the resource being set.
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
+Position: 0
+Required: True
+Accept pipeline input: true (ByPropertyName)
+```
+
+### -Name
+
+Specifies the name of the resource.
+
+```yaml
+Type: String
+Accept pipeline input: true (ByPropertyName)
 Required: True
 ```
 
-### -resourceType
+### -ResourceType
 
-The type of resource being set.
-
-Valid types are:
+Specifies the type of resource. The acceptable values for this parameter are:
 
 - Repository
 - BuildDefinition
@@ -72,17 +72,25 @@ Type: String
 Required: True
 ```
 
-### -newState
+### -NewState
 
-The state to change permission inheritance to.
-
-Supported values:
-True
-False
+The new state to set
 
 ```yaml
-Type: String
+Type: Boolean
 Required: True
+```
+
+### -Force
+
+Forces the function without confirmation
+
+```yaml
+Type: SwitchParameter
+Required: false
+Position: Named
+Accept pipeline input: false
+Parameter Sets: (All)
 ```
 
 ## INPUTS
@@ -91,9 +99,11 @@ Required: True
 
 ## NOTES
 
-### This function uses a non-documented REST API to perform the Set operation against repositories, build, and release definitions. The API being utilized was sniffed from performing actions via the web UI and may be documented at some point in the future.
-
-### May not work against TFS and/or on-prem AzD Server.
-
 ## RELATED LINKS
+
+[Add-VSTeamPolicy](Add-VSTeamPolicy.md)
+
+[Remove-VSTeamPolicy](Remove-VSTeamPolicy.md)
+
+[Set-VSTeamPermissionInheritanceType](Set-VSTeamPermissionInheritanceType.md)
 

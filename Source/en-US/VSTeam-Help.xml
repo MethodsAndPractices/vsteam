@@ -9735,7 +9735,7 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>Specifies the name of the resource.</maml:para>
@@ -9779,7 +9779,7 @@ ID Title          Status
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>Specifies the name of the resource.</maml:para>
@@ -17910,7 +17910,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
           <maml:name>Name</maml:name>
           <maml:Description>
             <maml:para>Specifies the name of the resource.</maml:para>
@@ -17977,7 +17977,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
         <maml:name>Name</maml:name>
         <maml:Description>
           <maml:para>Specifies the name of the resource.</maml:para>
@@ -18039,14 +18039,14 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true</dev:code>
+        <dev:code>PS C:\&gt; Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true -Force</dev:code>
         <dev:remarks>
           <maml:para>This command sets the permission inheritance to true.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force</dev:code>
         <dev:remarks>
           <maml:para>ThisThis command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.</maml:para>
         </dev:remarks>
