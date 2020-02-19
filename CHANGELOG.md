@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.4.5
+
+- Add -Filter, -FilterContains, -Top and -ContinuationToken to Get-VSTeamGitRefs
+
 ## 6.4.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/231) from [Dave Neeley](https://github.com/daveneeley) which included the following:
