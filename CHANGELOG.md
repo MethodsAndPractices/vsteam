@@ -2,6 +2,8 @@
 
 ## 6.4.5
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/237) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
 - Add -Filter, -FilterContains, -Top and -ContinuationToken to Get-VSTeamGitRefs
 
 ## 6.4.4
