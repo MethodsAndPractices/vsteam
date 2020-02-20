@@ -63,7 +63,7 @@ function Update-VSTeamVariableGroup {
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Variable Group")) {
          # Call the REST API
          $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'variablegroups' -Id $Id  `
-            -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::VariableGroups)
+            -Method Put -ContentType 'application/json;charset=utf-8' -body $body -Version $([VSTeamVersions]::VariableGroups)
 
          Write-Verbose $resp
 

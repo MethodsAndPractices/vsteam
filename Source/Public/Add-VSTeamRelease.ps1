@@ -91,7 +91,7 @@ function Add-VSTeamRelease {
          try {
             Write-Debug 'Add-VSTeamRelease Call the REST API'
             $resp = _callAPI -SubDomain 'vsrm' -ProjectName $ProjectName -Area 'release' -Resource 'releases' `
-               -Method Post -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Release)
+               -Method Post -ContentType 'application/json;charset=utf-8' -Body $body -Version $([VSTeamVersions]::Release)
 
             _applyTypesToRelease $resp
 

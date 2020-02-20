@@ -17,7 +17,7 @@ function Add-VSTeamGitRepository {
       try {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' `
-            -Method Post -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Git)
+            -Method Post -ContentType 'application/json;charset=utf-8' -Body $body -Version $([VSTeamVersions]::Git)
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property

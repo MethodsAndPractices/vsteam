@@ -23,10 +23,10 @@ function Update-VSTeamReleaseDefinition {
          # Call the REST API
 
          if ($InFile) {
-            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $([VSTeamVersions]::Release) -InFile $InFile -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $([VSTeamVersions]::Release) -InFile $InFile -ContentType 'application/json;charset=utf-8' | Out-Null
          }
          else {
-            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $([VSTeamVersions]::Release) -Body $ReleaseDefinition -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $([VSTeamVersions]::Release) -Body $ReleaseDefinition -ContentType 'application/json;charset=utf-8' | Out-Null
          }
       }
    }

@@ -79,7 +79,7 @@ function Update-VSTeamWorkItem {
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-WorkItem")) {
          $resp = _callAPI -Area 'wit' -Resource 'workitems' `
             -Version $([VSTeamVersions]::Core) -id $Id -Method Patch `
-            -ContentType 'application/json-patch+json' -Body $json
+            -ContentType 'application/json-patch+json;charset=utf-8' -Body $json
 
          _applyTypesToWorkItem -item $resp
 
