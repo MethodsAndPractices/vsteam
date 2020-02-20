@@ -102,7 +102,7 @@ InModuleScope VSTeam {
                $Body -like "*`"descriptor`": `"abc`",*" -and
                $Body -like "*`"allow`": 12,*" -and
                $Body -like "*`"deny`": 15,*" -and
-               $ContentType -eq "application/json" -and
+               $ContentType -eq "application/json;charset=utf-8" -and
                $Method -eq "Post"
             }
          }
@@ -123,7 +123,7 @@ InModuleScope VSTeam {
                $Body -like "*`"descriptor`": `"abc`",*" -and
                $Body -like "*`"allow`": 12,*" -and
                $Body -like "*`"deny`": 15,*" -and
-               $ContentType -eq "application/json" -and
+               $ContentType -eq "application/json;charset=utf-8" -and
                $Method -eq "Post"
             }
          }
@@ -144,7 +144,7 @@ InModuleScope VSTeam {
                $Body -like "*`"descriptor`": `"abc`",*" -and
                $Body -like "*`"allow`": 12,*" -and
                $Body -like "*`"deny`": 15,*" -and
-               $ContentType -eq "application/json" -and
+               $ContentType -eq "application/json;charset=utf-8" -and
                $Method -eq "Post"
             }
          }

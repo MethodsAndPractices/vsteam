@@ -39,7 +39,7 @@ function Get-VSTeamWiql {
             }) | ConvertTo-Json
 
          $resp = _callAPI -ProjectName $ProjectName -Team $Team -Area 'wit' -Resource 'wiql'  `
-            -method "POST" -ContentType "application/json" `
+            -method "POST" -ContentType "application/json;charset=utf-8" `
             -Version $([VSTeamVersions]::Core) `
             -Querystring $QueryString `
             -Body $body
