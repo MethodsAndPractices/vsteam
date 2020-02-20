@@ -30,6 +30,19 @@ InModuleScope VSTeam {
             Assert-VerifiableMock
          }
       }
+
+      Context 'Invoke-VSTeamRequest AdditionalHeaders' {
+         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+         Mock Invoke-RestMethod { return @() } -Verifiable -ParameterFilter {
+            $Headers["Test"] -eq 'Test'
+         }
+
+         Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON -AdditionalHeaders @{Test = "Test"}
+
+         It 'Should call API' {
+            Assert-VerifiableMock
+         }
+      }
    }
 
    Describe 'Team VSTS' {
