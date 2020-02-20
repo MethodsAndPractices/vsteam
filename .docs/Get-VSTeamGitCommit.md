@@ -1,6 +1,6 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VSTeamBuild
+# Get-VSTeamGitCommit
 
 ## SYNOPSIS
 
