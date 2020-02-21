@@ -71,7 +71,7 @@ The status to set the pull request to. Valid values for this are:
 
 ```yaml
 Type: String
-Parameter Set: Status
+Parameter Sets: Status
 ```
 
 ### -EnableAutoComplete
@@ -80,7 +80,7 @@ Set the pull requests auto complete status
 
 ```yaml
 Type: Switch
-Parameter Set: EnableAutoComplete
+Parameter Sets: EnableAutoComplete
 ```
 
 ### -AutoCompleteIdentity
@@ -89,7 +89,7 @@ The identity that enabled autocomplete. This is mandatory if -AutoComplete is se
 
 ```yaml
 Type: VSTeamUser
-Parameter Set: EnableAutoComplete
+Parameter Sets: EnableAutoComplete
 ```
 
 ### -DisableAutoComplete
@@ -98,7 +98,7 @@ Unset the pull requests auto complete status
 
 ```yaml
 Type: Switch
-Parameter Set: DisableAutoComplete
+Parameter Sets: DisableAutoComplete
 ```
 
 ### -Draft
@@ -107,7 +107,7 @@ Set the pull request as a draft
 
 ```yaml
 Type: Switch
-Parameter Set: Draft
+Parameter Sets: Draft
 ```
 
 ### -Publish
@@ -116,7 +116,7 @@ Publish the pull request
 
 ```yaml
 Type: Switch
-Parameter Set: Publish
+Parameter Sets: Publish
 ```
 
 <!-- #include "./params/confirm.md" -->
