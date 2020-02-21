@@ -4,7 +4,8 @@
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/241) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
-Add Update-VSTeamPullRequest to manipulate some basics about Pull Requests
+- Added Update-VSTeamPullRequest to manipulate some basics about Pull Requests
+- Added Add-VSTeamPullRequest to create Pull Requests
 
 ## 6.4.4
 
