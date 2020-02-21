@@ -45,7 +45,7 @@ The id of the repository
 ```yaml
 Type: Guid
 Required: True
-Alias: Id
+Aliases: Id
 Accept pipeline input: true (ByPropertyName)
 Parameter Sets: Draft, Publish, Status, EnableAutoComplete, DisableAutoComplete
 ```
