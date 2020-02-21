@@ -1,41 +1,90 @@
 function Get-VSTeamPullRequest {
-   [CmdletBinding()]
+   [CmdletBinding(DefaultParameterSetName = "SearchCriteriaWithStatus")]
    param (
        [Alias('PullRequestId')]
-       [string] $Id
+       [Parameter(ParameterSetName = "ById")]
+       [string] $Id,
+       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+       [Guid] $RepositoryId,
+       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+       [Guid] $SourceRepositoryId,
+       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+       [ValidatePattern('^refs/.*')]
+       [string] $SourceBranchRef,
+       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+       [ValidatePattern('^refs/.*')]
+       [string] $TargetBranchRef,
+       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+       [ValidateSet("abandoned", "active", "all", "completed", "notSet")]
+       [string] $Status,
+       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+       [switch] $All,
+       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+       [int] $Top,
+       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+       [int] $Skip
    )
 
    DynamicParam {
-       _buildProjectNameDynamicParam -mandatory $false
+      _buildProjectNameDynamicParam -Mandatory $false
    }
 
    Process {
-       # Bind the parameter to a friendly variable
-       $ProjectName = $PSBoundParameters["ProjectName"]
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
 
-       try {
-           if ($ProjectName) {
+      try {
+         if ($Id) {
+            if ($ProjectName) {
                $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -Id $Id
-           }
-           else {
+            } else {
                $resp = _callAPI -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -Id $Id
-           }
+            }
+         } else {
+            $queryString = @{
+               'searchCriteria.sourceRefName'               = $SourceBranchRef
+               'searchCriteria.sourceRepositoryId'          = $SourceRepositoryId
+               'searchCriteria.targetRefName'               = $TargetBranchRef
+               'searchCriteria.status'                      = if ($All.IsPresent) { 'all' } else { $Status }
+               '$top'                                       = $Top
+               '$skip'                                      = $Skip
+            }
 
-           if ($resp.PSobject.Properties.Name -contains "value") {
-               $pullRequests = $resp.value
-           }
-           else {
-               $pullRequests = $resp
-           }
+            if ($RepositoryId) {
+               if ($ProjectName) {
+                  $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+               } else {
+                  $resp = _callAPI -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+               }
+            } else {
+               if ($ProjectName) {
+                  $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -QueryString $queryString
+               } else {
+                  $resp = _callAPI -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -QueryString $queryString
+               }
+            }
+         }
 
-           foreach ($respItem in $pullRequests) {
-               _applyTypesToPullRequests -item $respItem
-           }
+         if ($resp.PSobject.Properties.Name -contains "value") {
+            $pullRequests = $resp.value
+         }
+         else {
+            $pullRequests = $resp
+         }
 
-           Write-Output $pullRequests
-       }
-       catch {
-           _handleException $_
-       }
+         foreach ($respItem in $pullRequests) {
+            _applyTypesToPullRequests -item $respItem
+         }
+
+         Write-Output $pullRequests
+      } catch {
+          _handleException $_
+      }
    }
 }
