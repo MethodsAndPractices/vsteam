@@ -2,9 +2,9 @@
 
 ## 6.4.5
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/239) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/241) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
-Added ;charset=utf-8 to POST/PUT JSON requests
+Add Update-VSTeamPullRequest to manipulate some basics about Pull Requests
 
 ## 6.4.4
 

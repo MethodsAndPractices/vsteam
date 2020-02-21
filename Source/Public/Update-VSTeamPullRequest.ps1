@@ -4,21 +4,25 @@ function Update-VSTeamPullRequest {
       [Parameter(ParameterSetName = "Draft", ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Parameter(ParameterSetName = "Publish", ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Parameter(ParameterSetName = "Status", ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
-      [Parameter(ParameterSetName = "AutoComplete", ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
+      [Parameter(ParameterSetName = "EnableAutoComplete", ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
+      [Parameter(ParameterSetName = "DisableAutoComplete", ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Alias('Id')]
       [Guid] $RepositoryId,
       [Parameter(ParameterSetName = "Draft", Mandatory = $true)]
       [Parameter(ParameterSetName = "Publish", Mandatory = $true)]
       [Parameter(ParameterSetName = "Status", Mandatory = $true)]
-      [Parameter(ParameterSetName = "AutoComplete", Mandatory = $true)]
+      [Parameter(ParameterSetName = "EnableAutoComplete", Mandatory = $true)]
+      [Parameter(ParameterSetName = "DisableAutoComplete", Mandatory = $true)]
       [int] $PullRequestId,
       [Parameter(ParameterSetName = "Status", Mandatory = $true)]
       [ValidateSet("abandoned","active","completed","notSet")]
       [string] $Status,
-      [Parameter(ParameterSetName = "AutoComplete", Mandatory = $true)]
-      [Nullable[bool]] $AutoComplete,
-      [Parameter(ParameterSetName = "AutoComplete")]
-      [VSTeamDescriptor] $AutoCompleteIdentity,
+      [Parameter(ParameterSetName = "EnableAutoComplete", Mandatory = $true)]
+      [Switch] $EnableAutoComplete,
+      [Parameter(ParameterSetName = "EnableAutoComplete", Mandatory = $true)]
+      [VSTeamUser] $AutoCompleteIdentity,
+      [Parameter(ParameterSetName = "DisableAutoComplete", Mandatory = $true)]
+      [Switch] $DisableAutoComplete,
       [Parameter(ParameterSetName = "Draft", Mandatory = $true)]
       [switch] $Draft,
       [Parameter(ParameterSetName = "Publish", Mandatory = $true)]
@@ -26,7 +30,8 @@ function Update-VSTeamPullRequest {
       [Parameter(ParameterSetName = "Draft")]
       [Parameter(ParameterSetName = "Publish")]
       [Parameter(ParameterSetName = "Status")]
-      [Parameter(ParameterSetName = "AutoComplete")]
+      [Parameter(ParameterSetName = "EnableAutoComplete")]
+      [Parameter(ParameterSetName = "DisableAutoComplete")]
       [switch] $Force
    )
 
@@ -41,41 +46,32 @@ function Update-VSTeamPullRequest {
       if ($Force -or $pscmdlet.ShouldProcess($PullRequestId, "Update Pull Request ID")) {
          if ($Draft.IsPresent)
          {
-            $msg = "Setting Pull Request to Draft"
             $body = '{"isDraft": true }'
          }
 
          if ($Publish.IsPresent)
          {
-            $msg = "Setting Pull Request to Published"
             $body = '{"isDraft": false }'
          }
 
-         if(-not [string]::IsNullOrEmpty($AutoComplete) )
+         if ($EnableAutoComplete.IsPresent)
          {
-            if ($AutoComplete -eq $true)
-            {
-               if (!$AutoCompleteIdentity -or $AutoCompleteIdentity.Descriptor -eq $null)
-               {
-                  throw "-AutoCompleteIdentity needs to be set when enabling AutoComplete"
-               }
-            }
-
-            $msg = "Setting AutoComplete to $AutoComplete"
             $body = '{"autoCompleteSetBy": "' + $AutoCompleteIdentity.Descriptor + '"}'
          }
 
+         if ($DisableAutoComplete.IsPresent)
+         {
+            $body = '{"autoCompleteSetBy": null}'
+         }
+               
          if ($Status)
          {
-            $msg  = "Setting Status to $Status"
             $body = '{"status": "' + $Status + '"}'
          }
 
          # Call the REST API
          $resp = _callAPI -Area git -Resource repositories -iD "$RepositoryId/pullrequests/$PullRequestId" `
             -Method Patch -ContentType 'application/json;charset=utf-8' -body $body -Version $([VSTeamVersions]::Git)
-
-         #_trackProjectProgress -resp $resp -title 'Updating pull request' -msg $msg
 
          _applyTypesToPullRequests -item $resp
          Write-Output $resp
