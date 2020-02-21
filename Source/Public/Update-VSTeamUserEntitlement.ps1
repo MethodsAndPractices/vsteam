@@ -55,7 +55,7 @@ function Update-VSTeamUserEntitlement
       if ($Force -or $PSCmdlet.ShouldProcess("$( $user.userName ) ($( $user.email ))", "Update user"))
       {
          # Call the REST API
-         _callAPI -Method Patch -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Id $id -Version $([VSTeamVersions]::MemberEntitlementManagement) -ContentType 'application/json-patch+json;charset=utf-8' | Out-Null
+         _callAPI -Method Patch -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Id $id -Version $([VSTeamVersions]::MemberEntitlementManagement) -ContentType 'application/json-patch+json' | Out-Null
 
          Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from ($licenseOld) to ($License)"
       }
