@@ -58,7 +58,7 @@ $body =
       # Call the REST API
       $resp = _callAPI -Area 'accesscontrolentries' -id $SecurityNamespaceId -method POST -body $body `
          -Version $([VSTeamVersions]::Core) `
-         -ContentType "application/json;charset=utf-8"
+         -ContentType "application/json"
 
       if ($resp.count -ne 1)
       {

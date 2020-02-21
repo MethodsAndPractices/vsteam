@@ -43,7 +43,7 @@ function Update-VSTeamBuild {
 
          # Call the REST API
          _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -Id $Id `
-            -Method Patch -ContentType 'application/json;charset=utf-8' -body $body -Version $([VSTeamVersions]::Build) | Out-Null
+            -Method Patch -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Build) | Out-Null
       }
    }
 }

@@ -472,7 +472,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Body -like '*"nugetkey": *"00000000-0000-0000-0000-000000000000"*' -and
                $Body -like '*"scheme": *"None"*'
             }
@@ -511,7 +511,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Body -like '*"username": *"testUser"*' -and
                $Body -like '*"password": *"00000000-0000-0000-0000-000000000000"*' -and
                $Body -like '*"scheme": *"UsernamePassword"*'
@@ -552,7 +552,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Body -like '*"apitoken":*"00000000-0000-0000-0000-000000000000"*' -and
                $Body -like '*"scheme":*"Token"*'
             }

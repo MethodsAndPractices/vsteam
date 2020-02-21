@@ -64,7 +64,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$([VSTeamVersions]::packaging)" -and
                $Method -eq 'Post' -and
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Body -like '*"name": *"module"*'
             }
          }
@@ -83,7 +83,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$([VSTeamVersions]::packaging)" -and
                $Method -eq 'Post' -and
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Body -like '*"upstreamEnabled":*true*' -and
                $Body -like '*"hideDeletedPackageVersions":*false*'
             }

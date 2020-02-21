@@ -69,7 +69,7 @@ InModuleScope VSTeam {
                $Body -like "*[System.Title]*" -and
                $Body -like "*[System.State]*" -and
                $Body -like '*`}' -and # Make sure the body is an object
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)&`$top=100"
             }
          }
@@ -86,7 +86,7 @@ InModuleScope VSTeam {
                $Body -like "*[System.Title]*" -and
                $Body -like "*[System.State]*" -and
                $Body -like '*`}' -and # Make sure the body is an object
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)&`$top=250"
             }
          }
@@ -103,7 +103,7 @@ InModuleScope VSTeam {
                $Body -like "*[System.Title]*" -and
                $Body -like "*[System.State]*" -and
                $Body -like '*`}' -and # Make sure the body is an object
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)"
             }
          }
@@ -120,7 +120,7 @@ InModuleScope VSTeam {
                $Body -like "*[System.Title]*" -and
                $Body -like "*[System.State]*" -and
                $Body -like '*`}' -and # Make sure the body is an object
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)&`$top=100"
             }
          }
@@ -137,7 +137,7 @@ InModuleScope VSTeam {
                $Body -like "*[System.Title]*" -and
                $Body -like "*[System.State]*" -and
                $Body -like '*`}' -and # Make sure the body is an object
-               $ContentType -eq 'application/json;charset=utf-8' -and
+               $ContentType -eq 'application/json' -and
                $Uri -like "*timePrecision=True*"
                $Uri -like "*`$top=100*"
                $Uri -like "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)*"

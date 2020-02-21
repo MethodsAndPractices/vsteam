@@ -47,7 +47,7 @@
 }
 "@
 
-         $resp = _callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json;charset=utf-8" -Body $body
+         $resp = _callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json" -Body $body
 
          Write-Verbose $($resp | ConvertTo-Json -Depth 99)         
 

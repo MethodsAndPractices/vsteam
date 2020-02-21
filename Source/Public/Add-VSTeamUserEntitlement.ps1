@@ -42,6 +42,6 @@ function Add-VSTeamUserEntitlement {
        $body = $obj | ConvertTo-Json
 
        # Call the REST API
-       _callAPI  -Method Post -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Version $([VSTeamVersions]::MemberEntitlementManagement) -ContentType "application/json;charset=utf-8"
+       _callAPI  -Method Post -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Version $([VSTeamVersions]::MemberEntitlementManagement) -ContentType "application/json"
    }
 }

@@ -19,7 +19,7 @@ function Add-VSTeam {
 
       # Call the REST API
       $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
-         -Method Post -ContentType 'application/json;charset=utf-8' -Body $body -Version $([VSTeamVersions]::Core)
+         -Method Post -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Core)
 
       $team = [VSTeamTeam]::new($resp, $ProjectName)
 

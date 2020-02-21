@@ -30,7 +30,7 @@ function Set-VSTeamReleaseStatus {
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -Area release -Resource releases -projectName $ProjectName -id $item `
-                  -body $body -ContentType 'application/json;charset=utf-8' -Version $([VSTeamVersions]::Release) | Out-Null
+                  -body $body -ContentType 'application/json' -Version $([VSTeamVersions]::Release) | Out-Null
 
                Write-Output "Release $item status changed to $status"
             }

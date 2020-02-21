@@ -71,7 +71,7 @@ function Update-VSTeamPullRequest {
 
          # Call the REST API
          $resp = _callAPI -Area git -Resource repositories -iD "$RepositoryId/pullrequests/$PullRequestId" `
-            -Method Patch -ContentType 'application/json;charset=utf-8' -body $body -Version $([VSTeamVersions]::Git)
+            -Method Patch -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Git)
 
          _applyTypesToPullRequests -item $resp
          Write-Output $resp

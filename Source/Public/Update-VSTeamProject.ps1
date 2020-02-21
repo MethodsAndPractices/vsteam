@@ -52,7 +52,7 @@ function Update-VSTeamProject {
 
          # Call the REST API
          $resp = _callAPI -Area 'projects' -id $id `
-            -Method Patch -ContentType 'application/json;charset=utf-8' -body $body -Version $([VSTeamVersions]::Core)
+            -Method Patch -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Core)
 
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 

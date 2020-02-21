@@ -88,7 +88,7 @@ function Add-VSTeamBuild {
 
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' `
-         -Method Post -ContentType 'application/json;charset=utf-8' -Body ($body | ConvertTo-Json) `
+         -Method Post -ContentType 'application/json' -Body ($body | ConvertTo-Json) `
          -Version $([VSTeamVersions]::Build)
 
       _applyTypesToBuild -item $resp
