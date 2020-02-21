@@ -4,7 +4,7 @@
 
 ## SYNOPSIS
 
-Update a pull request
+<!-- #include "./synopsis/Update-VSTeamPullRequest.md" -->
 
 ## SYNTAX
 

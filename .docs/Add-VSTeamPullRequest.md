@@ -4,7 +4,7 @@
 
 ## SYNOPSIS
 
-Create a new Pull Request
+<!-- #include "./synopsis/Add-VSTeamPullRequest.md" -->
 
 ## SYNTAX
 
@@ -13,6 +13,16 @@ Create a new Pull Request
 Create a new Pull Request
 
 ## EXAMPLES
+
+### -------------------------- EXAMPLE 1 --------------------------
+
+```PowerShell
+PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
+PS C:\> Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.RepositoryId -SourceRefName "refs/heads/mybranch" -TargetRefName "refs/heads/master" -Title "My PR" -Description "My Description" -Draft
+```
+
+Create a new pull request as a draft
 
 ## PARAMETERS
 
