@@ -7,7 +7,11 @@ function Add-VSTeamUserEntitlement {
        [ValidateSet('Advanced', 'EarlyAdopter', 'Express', 'None', 'Professional', 'StakeHolder')]
        [string]$License = 'EarlyAdopter',
        [ValidateSet('Custom', 'ProjectAdministrator', 'ProjectContributor', 'ProjectReader', 'ProjectStakeholder')]
-       [string]$Group = 'ProjectContributor'
+       [string]$Group = 'ProjectContributor',
+       [ValidateSet('account', 'auto', 'msdn', 'none', 'profile', 'trial')]
+       [string]$LicensingSource = "account",
+       [ValidateSet('eligible', 'enterprise', 'none', 'platforms', 'premium', 'professional', 'testProfessional', 'ultimate')]
+       [string]$MSDNLicenseType = "none"
    )
 
    DynamicParam {
@@ -24,6 +28,8 @@ function Add-VSTeamUserEntitlement {
        $obj = @{
            accessLevel         = @{
                accountLicenseType = $License
+               licensingSource = $LicensingSource
+               msdnLicenseType = $MSDNLicenseType
            }
            user                = @{
                principalName = $email

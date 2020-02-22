@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.5
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/244) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+Add support for licensingSource and msdnLicenseType to Add-VSTeamUserEntitlement / Update-VSTeamUserEntitlement
+
 ## 6.4.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/231) from [Dave Neeley](https://github.com/daveneeley) which included the following:

@@ -432,14 +432,24 @@ InModuleScope VSTeam {
                { Remove-VSTeamUserEntitlement -Email fake@NoteReal.foo -Force } | Should Throw
             }
 
-            It 'Remove-VSTeamUserEntitlement should delete the team' {
+            It 'Remove-VSTeamUserEntitlement should delete the user' {
                Remove-VSTeamUserEntitlement -Email $email -Force
                Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should Be $null
             }
 
-            It 'Add-VSTeamUserEntitlement should add a team' {
+            It 'Add-VSTeamUserEntitlement should add a user' {
                Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
                (Get-VSTeamUserEntitlement).Count | Should Be 3
+            }
+
+            It 'Remove-VSTeamUserEntitlement should delete the user' {
+               Remove-VSTeamUserEntitlement -Email $email -Force
+               Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should Be $null
+            }
+
+            It 'Add-VSTeamUserEntitlement should add a user with MSDN license' {
+               Add-VSTeamUserEntitlement -Email $email -License none -LicensingSource msdn -MSDNLicenseType professional | Should not be $null
+               (Get-VSTeamUserEntitlement).Count | Should Be 4
             }
          }
       }
