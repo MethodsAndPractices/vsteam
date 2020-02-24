@@ -47,7 +47,7 @@ Specifies the ID of the repository.
 ```yaml
 Type: Guid
 Aliases: ID
-Mandatory: true
+Required: true
 Accept pipeline input: true (ByPropertyName)
 ```
 
@@ -57,7 +57,7 @@ Name of the branch.
 
 ```yaml
 Type: String
-Mandatory: true
+Required: true
 ```
 
 ### -VersionOptions
