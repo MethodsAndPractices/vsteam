@@ -24,3 +24,6 @@ Source/Classes/vsteam.classes.ps1
 test-results.xml
 coverage.xml
 .DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
