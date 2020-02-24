@@ -58,11 +58,8 @@ if ($buildHelp.IsPresent) {
    Write-Output 'Creating help files'
    Push-Location
    Set-Location ./.docs
-   Try {
-      ./gen-help.ps1
-   } Finally {
-      Pop-Location
-   }
+   ./gen-help.ps1
+   Pop-Location
 }
 
 Write-Output 'Publishing about help files'
