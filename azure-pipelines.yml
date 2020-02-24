@@ -293,14 +293,14 @@ stages:
               nuGetFeedType: external
               publishFeedCredentials: 'PowerShell Gallery'
               
-           - task: GithubRelease@0 
-             displayName: 'Create GitHub Release'      
-             inputs:
-                gitHubConnection: vsteam
-                repositoryName: DarqueWarrior/vsteam
-                tagSource: manual
-                tag: v$(PACKAGE_VERSION)      
-                addChangeLog: true
-                compareWith: 'lastFullRelease'
-                assets: |
-                     $(Pipeline.Workspace)/Module/$(Folder)/*.nupkg
+          - task: GithubRelease@0 
+            displayName: 'Create GitHub Release'      
+            inputs:
+              gitHubConnection: vsteam
+              repositoryName: DarqueWarrior/vsteam
+              tagSource: manual
+              tag: v$(PACKAGE_VERSION)      
+              addChangeLog: true
+              compareWith: 'lastFullRelease'
+              assets: |
+                $(Pipeline.Workspace)/Module/$(Folder)/*.nupkg
