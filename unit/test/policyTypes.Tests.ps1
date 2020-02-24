@@ -26,7 +26,7 @@ InModuleScope VSTeam {
 
          It 'Should return policies' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/types/?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/types?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }

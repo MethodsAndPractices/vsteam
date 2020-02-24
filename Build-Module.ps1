@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param(
+   #output path of the build module
    [string]$outputDir = './dist',
 
    # Building help is skipped by default to speed your inner loop.
@@ -9,12 +10,20 @@ param(
    # By default the build will not install dependencies
    [switch]$installDep,
 
+   # build module will be imported into session
    [switch]$ipmo,
 
+   # run the scripts with the PS script analyzer
    [switch]$analyzeScript,
 
+   # runs the unit tests
    [switch]$runTests,
 
+   # can be used to filter the unit test parts that should be run
+   # see also: https://github.com/pester/Pester/wiki/Invoke%E2%80%90Pester#testname-alias-name
+   [string]$testName,
+
+   # outputs the code coverage
    [switch]$codeCoverage
 )
 
@@ -65,11 +74,21 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 Write-Output "Publish complete to $output"
 
+
+#reload the just build module
 if ($ipmo.IsPresent -or $runTests.IsPresent) {
+
+   #module needs to be unloaded if present
+   if((Get-Module VSTeam)){
+      Remove-Module VSTeam
+   }
+
    Import-Module "$output/VSTeam.psd1" -Force
    Set-VSTeamAlias
 }
 
+
+#run PSScriptAnalyzer
 if ($analyzeScript.IsPresent) {
    Write-Output "Starting static code analysis..."
    if ($null -eq $(Get-Module -Name PSScriptAnalyzer)) {
@@ -81,15 +100,38 @@ if ($analyzeScript.IsPresent) {
    Write-Output "Static code analysis complete."
 }
 
+
+# run the unit tests with Pester
 if ($runTests.IsPresent) {
    if ($null -eq $(Get-Module -Name Pester)) {
       Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
+   $pesterArgs = @{
+      Script = '.\unit'  
+      OutputFile = 'test-results.xml'
+      OutputFormat = 'NUnitXml'
+      Show = 'Fails'
+      Strict = $true
+   }
+
    if ($codeCoverage.IsPresent) {
-      Invoke-Pester -Script .\unit -CodeCoverage .\dist\*.ps1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -Show Fails
+      $pesterArgs.CodeCoverage = "$outputDir\*.ps1"
+      $pesterArgs.CodeCoverageOutputFile = "coverage.xml"
+      $pesterArgs.CodeCoverageOutputFileFormat = 'JaCoCo'
    }
    else {
-      Invoke-Pester -Script .\unit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passThru -Show Fails
+      $pesterArgs.PassThru = $true
    }
+
+   if($testName){
+
+      $pesterArgs.TestName = $testName
+
+      #passthru must be activated according to Pester docs
+      $pesterArgs.PassThru = $true
+   }
+
+   Invoke-Pester @pesterArgs 
+
 }

@@ -13,6 +13,21 @@ The VSTeam module is also a provider allowing users to navigate their [Azure Dev
 
 To get started you can visit this blog [PowerShell I would like you to meet TFS and VSTS](http://www.donovanbrown.com/post/PowerShell-I-would-like-you-to-meet-TFS-and-VSTS)
 
+Documentation of the cmdlets can be found in the [docs README](https://github.com/DarqueWarrior/vsteam/blob/master/docs/readme.md) or using `Get-Help VSTeam` once the module is installed.
+
+## Requirements
+
+- Windows PowerShell 5.0 or newer.
+- PowerShell Core.
+
+## Installation
+
+Install this module from the [PowerShell Gallery](https://www.powershellgallery.com/packages/VSTeam)
+
+## Change Log
+
+[Change Log](CHANGELOG.md)
+
 ## Pipeline Status
 
 You can review the status of every stage of the pipeline below.
@@ -37,11 +52,6 @@ The build for VSTeam is run on macOS, Linux and Windows to ensure there are no c
 
 During the release the module is installed on macOS, Linux and Window and tested against [Azure DevOps Server](https://cda.ms/Bf) and [Azure DevOps](https://cda.ms/Bf) before being published to the PowerShell Gallery.
 
-## Requirements
-
-- Windows PowerShell 5.0 or newer.
-- PowerShell Core.
-
 ## Module Dependencies
 
 - [SHiPS module](https://www.powershellgallery.com/packages/SHiPS/)
@@ -49,7 +59,7 @@ During the release the module is installed on macOS, Linux and Window and tested
 
 ## Building Module
 
-In an effort to reduce the module size this repository contains two scripts Build-Module.ps1 and Merge-File.ps1 that merges similar files into a single file. The files in the formats folder are merged into vsteam.format.ps1xml. The files in the classes folder are merged into vsteam.classes.ps1. The functions from the Private and Public folders are merged into vsteam.functions.ps1. Finally all the files in the types folder are merged into vsteam.types.ps1xml. The order of the files being merged can be controlled by the _*.json files in the repository.
+In an effort to reduce the module size this repository contains two scripts `Build-Module.ps1` and `Merge-File.ps1` that merges similar files into a single file. The files in the formats folder are merged into `vsteam.format.ps1xml`. The files in the classes folder are merged into `vsteam.classes.ps1`. The functions from the Private and Public folders are merged into `vsteam.functions.ps1`. Finally all the files in the types folder are merged into `vsteam.types.ps1xml`. The order of the files being merged can be controlled by the `_*.json` files in the repository.
 
 The JSON files must be in the following format:
 
@@ -64,19 +74,41 @@ The JSON files must be in the following format:
 }
 ```
 
-The final module is stored in a dist folder by default. You can override this folder by using the -outputDir parameter to the Build-Module.ps1 script.
+### How to build locally
 
-To generate the help add the -buildHelp switch parameter.
+To run build the script Build-Module.ps1. The script has the following parameters:
 
-You can also use the -installDep switch parameter to install all the module dependencies to bootstrap your development.
+* `-outputDir 'C:\outputdir'`: The final module is stored in a dist folder by default. You can override this folder by using the parameter
+* `-buildHelp`: Building help is skipped by default to speed your inner loop. Use this flag to include building the help
+* `-installDep`: By default the build will not install dependencies unless this switch is used
+* `-ipmo`: build module will be imported into session. IF a loaded module exist, it will be overwritten with the build version.
+* `-analyzeScript`: run the static code analyzer for the scripts with PSScriptAnalyzer
+* `-runTests`: runs the unit tests
+* `-testName 'tests to filter'`: can be used to filter the unit test parts that should be run. Wildcards can be used! See [the Pester documentation](https://github.com/pester/Pester/wiki/Invoke%E2%80%90Pester#testname-alias-name) for a more elaborate explanation.
+* `-codeCoverage`: outputs the code coverage. Output by default is NUnit
+
+Below are some examples on how to build the module locally. It is expected that your working directory is at the root of the repository.
+
+Builds the module, installs needed dependencies, loads the module into the session and also builds the help.
+```PowerShell
+.\Build-Module.ps1 -installDep -ipmo -buildHelp
+```
+
+Runs all unit tests and executes the static code analysis.
+```PowerShell
+.\Build-Module.ps1 -runTests -codeCoverage -analyzeScript
+```
+
+Runs the tests, but executes only the unit tests that have the description "workitems" for the logical grouped unit tests. This can be used if you only want to test a portion of your unit tests.
+```PowerShell
+.\Build-Module.ps1 -runTests -testName workitems
+```
+
+
 
 ## Contributors
 
 [Guidelines](.github/CONTRIBUTING.md)
-
-## Change Log
-
-[Change Log](CHANGELOG.md)
 
 ## Maintainers
 

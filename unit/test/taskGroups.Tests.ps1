@@ -31,7 +31,7 @@ InModuleScope VSTeam {
             Get-VSTeamTaskGroup -projectName $projectName
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/?api-version=$([VSTeamVersions]::TaskGroups)"
+               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups?api-version=$([VSTeamVersions]::TaskGroups)"
             }
          }
       }
@@ -62,7 +62,7 @@ InModuleScope VSTeam {
             $taskGroup = Get-VSTeamTaskGroup -projectName $projectName -Name $taskGroupName
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/?api-version=$([VSTeamVersions]::TaskGroups)"
+                $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups?api-version=$([VSTeamVersions]::TaskGroups)"
             }
 
             # Ensure that we only have one task group, in other words, that the name filter was applied.
@@ -94,7 +94,7 @@ InModuleScope VSTeam {
             Add-VSTeamTaskGroup -ProjectName $projectName -Body $taskGroupJsonAsString
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/?api-version=$([VSTeamVersions]::TaskGroups)" -and
+               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups?api-version=$([VSTeamVersions]::TaskGroups)" -and
                $Body -eq $taskGroupJsonAsString -and
                $Method -eq "Post"
             }
@@ -104,7 +104,7 @@ InModuleScope VSTeam {
             Add-VSTeamTaskGroup -ProjectName $projectName -InFile $taskGroupJson
 
              Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups/?api-version=$([VSTeamVersions]::TaskGroups)" -and
+               $Uri -eq "https://dev.azure.com/test/$projectName/_apis/distributedtask/taskgroups?api-version=$([VSTeamVersions]::TaskGroups)" -and
                $InFile -eq $taskGroupJson -and
                $Method -eq "Post"
              }
