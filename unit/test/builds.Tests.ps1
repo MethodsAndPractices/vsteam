@@ -317,6 +317,28 @@ InModuleScope VSTeam {
             }
          }
       }
+
+      Context "Get-VSTeamBuildArtifact result without properties" {
+         Mock Invoke-RestMethod { return [PSCustomObject]@{
+               value = [PSCustomObject]@{
+                  id       = 150
+                  name     = "Drop"
+                  resource = [PSCustomObject]@{
+                     type       = "filepath"
+                     data       = "C:\Test"
+                  }
+               }
+            }
+         }
+
+         Get-VSTeamBuildArtifact -projectName project -id 2
+
+         It 'should return the build artifact data' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/artifacts?api-version=$([VSTeamVersions]::Build)"
+            }
+         }
+      }
    }
 
    Describe 'Builds TFS' {

@@ -95,7 +95,7 @@ function _applyTypesToBuild {
 function _applyArtifactTypes {
    $item.PSObject.TypeNames.Insert(0, "Team.Build.Artifact")
 
-   if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource) {
+   if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource -and $item.resource.PSObject.Properties.Match('propeties').count -gt 0) {
       $item.resource.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource')
       $item.resource.properties.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource.Properties')
    }
