@@ -1,0 +1,1 @@
+Get-VSTeamGitStats retrieves statistics about branches within a repository.
