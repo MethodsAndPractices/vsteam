@@ -84,7 +84,7 @@ InModuleScope VSTeam {
             Position = 0
             ParameterType = ([hashtable])
             ValueFromPipelineByPropertyName = $false
-            AliasName = "TestAlieas"
+            AliasName = "TestAlias"
             HelpMessage = "Test Help Message"
          }
          $param = (_buildDynamicParam @testParams)
@@ -113,7 +113,7 @@ InModuleScope VSTeam {
             $param.Attributes[1].AliasNames | Should Be $testParams.AliasName
          }
 
-         It 'Should set the possible vaule attributes of the dynamic parameter' {
+         It 'Should set the possible value attributes of the dynamic parameter' {
             (Compare-Object -ReferenceObject $param.Attributes[2].ValidValues -DifferenceObject $testParams.arrSet) | Should BeNullOrEmpty
          }
       }
