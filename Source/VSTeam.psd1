@@ -27,7 +27,7 @@
    CompanyName       = ''
 
    # Copyright statement for this module
-   Copyright         = '(c) 2019 Donovan Brown. All rights reserved.'
+   Copyright         = '(c) 2020 Donovan Brown. All rights reserved.'
 
    # Description of the functionality provided by this module
    Description       = 'Adds functionality for working with Azure DevOps and Team Foundation Server.'

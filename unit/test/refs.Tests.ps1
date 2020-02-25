@@ -36,6 +36,68 @@ InModuleScope VSTeam {
          }
       }
 
+      Context 'Get-VSTeamGitRef with Filter' {
+         Mock Invoke-RestMethod { return $results } -Verifiable -ParameterFilter {
+            $Uri -like "*filter=refs*"
+         }
+
+         Get-VSTeamGitRef -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -Filter "refs/heads"
+
+         It 'Should return a single ref with filter' {
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Get-VSTeamGitRef with FilterContains' {
+         Mock Invoke-RestMethod { return $results } -Verifiable -ParameterFilter {
+            $Uri -like "*filterContains=test"
+         }
+
+         Get-VSTeamGitRef -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -FilterContains "test"
+
+         It 'Should return a single ref' {
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Get-VSTeamGitRef with Top' {
+         Mock Invoke-RestMethod { return $results } -Verifiable -ParameterFilter {
+            $Uri -like "*`$top=100"
+         }
+
+         Get-VSTeamGitRef -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -Top 100
+
+         It 'Should return a single ref' {
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Get-VSTeamGitRef with ContinuationToken' {
+         Mock Invoke-RestMethod { return $results } -Verifiable -ParameterFilter {
+            $Uri -like "*continuationToken=myToken"
+         }
+
+         Get-VSTeamGitRef -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -ContinuationToken "myToken"
+
+         It 'Should return a single ref' {
+            Assert-VerifiableMock
+         }
+      }
+
+      Context 'Get-VSTeamGitRef with Filter, FilterContains, Top' {
+         Mock Invoke-RestMethod { return $results } -Verifiable -ParameterFilter {
+            $Uri -like "*filter=/refs/heads*" -and
+            $Uri -like "*`$top=500*" -and
+            $Uri -like "*filterContains=test*"
+         }
+
+         Get-VSTeamGitRef -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -Filter "/refs/heads" -FilterContains "test" -Top 500
+
+         It 'Should return a single ref' {
+            Assert-VerifiableMock
+         }
+      }
+
       Context 'Get-VSTeamGitRef by id throws' {
          Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
 
