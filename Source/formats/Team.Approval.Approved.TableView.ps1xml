@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
-   <ViewDefinitions>
-      <View>
-         <Name>Team.Approval.Approved.TableView</Name>
-         <ViewSelectedBy>
-            <TypeName>Team.Approval</TypeName>
-         </ViewSelectedBy>
-         <TableControl>
-            <TableHeaders>
-               <TableColumnHeader>
-                  <Label>Release Name</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>Environment</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>Is Automated</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>Approval Type</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>Approver Name</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>Release Definition</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>Comments</Label>
-               </TableColumnHeader>
-            </TableHeaders>
-            <TableRowEntries>
-               <TableRowEntry>
-                  <TableColumnItems>
-                     <TableColumnItem>
-                        <PropertyName>releaseName</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>releaseEnvironmentName</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>isAutomated</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>shortApprovalType</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>approverName</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>releaseDefinitionName</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>comments</PropertyName>
-                     </TableColumnItem>
-                  </TableColumnItems>
-               </TableRowEntry>
-            </TableRowEntries>
-         </TableControl>
-      </View>
-   </ViewDefinitions>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.Approval.Approved.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.Approval</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Release Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Environment</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Is Automated</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Approval Type</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Approver Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Release Definition</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Comments</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>releaseName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>releaseEnvironmentName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>isAutomated</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>shortApprovalType</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>approverName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>releaseDefinitionName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>comments</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
 </Configuration>

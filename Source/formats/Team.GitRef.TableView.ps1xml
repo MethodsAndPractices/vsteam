@@ -1,1 +1,35 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.GitRef.TableView</Name><ViewSelectedBy><TypeName>Team.GitRef</TypeName></ViewSelectedBy><TableControl><AutoSize /><TableHeaders><TableColumnHeader><Label>Name</Label></TableColumnHeader><TableColumnHeader><Label>Creator</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><Wrap /><TableColumnItems><TableColumnItem><PropertyName>RefName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>Creator</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.GitRef.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.GitRef</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<AutoSize />
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Creator</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap />
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>RefName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Creator</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

@@ -1,1 +1,46 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.Group.ListView</Name><ViewSelectedBy><TypeName>Team.Group</TypeName></ViewSelectedBy><ListControl><ListEntries><ListEntry><ListItems><ListItem><PropertyName>ID</PropertyName></ListItem><ListItem><PropertyName>PrincipalName</PropertyName></ListItem><ListItem><PropertyName>DisplayName</PropertyName></ListItem><ListItem><PropertyName>ProjectName</PropertyName></ListItem><ListItem><PropertyName>Origin</PropertyName></ListItem><ListItem><PropertyName>OriginID</PropertyName></ListItem><ListItem><PropertyName>URL</PropertyName></ListItem><ListItem><PropertyName>Descriptor</PropertyName></ListItem><ListItem><PropertyName>Links</PropertyName></ListItem></ListItems></ListEntry></ListEntries></ListControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.Group.ListView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.Group</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<PropertyName>ID</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>PrincipalName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>DisplayName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>ProjectName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>Origin</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>OriginID</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>URL</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>Descriptor</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>Links</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

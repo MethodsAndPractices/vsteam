@@ -1,1 +1,39 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.PolicyType.TableView</Name><ViewSelectedBy><TypeName>Team.PolicyType</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>Name</Label></TableColumnHeader><TableColumnHeader><Label>Description</Label></TableColumnHeader><TableColumnHeader><Label>Id</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>displayName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>description</PropertyName></TableColumnItem><TableColumnItem><PropertyName>id</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.PolicyType.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.PolicyType</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Description</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Id</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>displayName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>description</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>id</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>
