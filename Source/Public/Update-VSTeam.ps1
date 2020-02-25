@@ -33,7 +33,7 @@ function Update-VSTeam {
 
          # Call the REST API
          $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Name `
-            -Method Patch -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Core)
+            -Method Patch -ContentType 'application/json;charset=utf-8' -Body $body -Version $([VSTeamVersions]::Core)
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property

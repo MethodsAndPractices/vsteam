@@ -17,10 +17,10 @@ function Add-VSTeamTaskGroup {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       if ($InFile) {
-         $resp = _callAPI -Method Post -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $([VSTeamVersions]::TaskGroups) -InFile $InFile -ContentType 'application/json'
+         $resp = _callAPI -Method Post -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $([VSTeamVersions]::TaskGroups) -InFile $InFile -ContentType 'application/json;charset=utf-8'
       }
       else {
-         $resp = _callAPI -Method Post -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $([VSTeamVersions]::TaskGroups) -ContentType 'application/json' -Body $Body
+         $resp = _callAPI -Method Post -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $([VSTeamVersions]::TaskGroups) -ContentType 'application/json;charset=utf-8' -Body $Body
       }
 
       return $resp
