@@ -766,13 +766,14 @@ function _callAPI {
       [string]$ProjectName,
       [string]$Team,
       [string]$Url,
-      [object]$QueryString
+      [object]$QueryString,
+      [hashtable]$AdditionalHeaders
    )
 
    # If the caller did not provide a Url build it.
    if (-not $Url) {
       $buildUriParams = @{ } + $PSBoundParameters;
-      $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType'
+      $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
       foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
       $Url = _buildRequestURI @buildUriParams
    }
@@ -794,6 +795,7 @@ function _callAPI {
 
    if (_useWindowsAuthenticationOnPremise) {
       $params.Add('UseDefaultCredentials', $true)
+      $params.Add('Headers', @{})
    }
    elseif (_useBearerToken) {
       $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
@@ -802,8 +804,16 @@ function _callAPI {
       $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
    }
 
+   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys")
+   {
+      foreach ($key in $AdditionalHeaders.Keys)
+      {
+         $params['Headers'].Add($key, $AdditionalHeaders[$key])
+      }
+   }
+   
    # We have to remove any extra parameters not used by Invoke-RestMethod
-   $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString'
+   $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
    try {

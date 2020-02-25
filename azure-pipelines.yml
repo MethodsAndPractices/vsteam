@@ -68,6 +68,7 @@ stages:
     - task: CredScan@2
       displayName: 'Run CredScan'
       inputs:
+        toolMajorVersion: 'V2'
         suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
 
     - task: SdtReport@1
@@ -239,12 +240,12 @@ stages:
       apiVersion: 'VSTS'
       account: 'tooltester'
 
-- stage: Produciton
-  displayName: PowerShell Gallery
+- stage: Production
+  displayName: PowerShell Gallery / GitHub Release
   dependsOn: Testing
   jobs:
   - deployment: Deploy
-    displayName: PowerShell Gallery
+    displayName: PowerShell Gallery / GitHub Release
     pool:
       vmImage: 'windows-latest'
     environment: 'PowerShell Gallery'
@@ -292,3 +293,15 @@ stages:
               packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'PowerShell Gallery'
+              
+          - task: GithubRelease@0 
+            displayName: 'Create GitHub Release'      
+            inputs:
+              gitHubConnection: Darquewarrior
+              repositoryName: DarqueWarrior/vsteam
+              tagSource: manual
+              tag: v$(PACKAGE_VERSION)      
+              addChangeLog: true
+              compareWith: 'lastFullRelease'
+              assets: |
+                $(Pipeline.Workspace)/Module/$(Folder)/*.nupkg

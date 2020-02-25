@@ -204,6 +204,8 @@ InModuleScope VSTeam {
          $obj = @{
             accessLevel         = @{
                accountLicenseType = 'earlyAdopter'
+               licensingSource = 'msdn'
+               msdnLicenseType = 'enterprise'
             }
             user                = @{
                principalName = 'test@user.com'
@@ -226,7 +228,7 @@ InModuleScope VSTeam {
             $Body -eq $expected
          }
 
-         Add-VSTeamUserEntitlement -License earlyAdopter -Email 'test@user.com'
+         Add-VSTeamUserEntitlement -License earlyAdopter -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com'
 
          It 'Should add a user' {
             Assert-VerifiableMock
@@ -239,6 +241,8 @@ InModuleScope VSTeam {
                members = [PSCustomObject]@{
                   accessLevel = [PSCustomObject]@{
                      accountLicenseType = "Stakeholder"
+                     licensingSource = "msdn"
+                     msdnLicenseType = "enterprise"
                   }
                   email       = 'test@user.com'
                   id          = '00000000-0000-0000-0000-000000000000'
@@ -246,7 +250,7 @@ InModuleScope VSTeam {
             }
          }
 
-         Update-VSTeamUserEntitlement -License 'Stakeholder' -Email 'test@user.com' -Force
+         Update-VSTeamUserEntitlement -License 'Stakeholder' -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com' -Force
 
          It 'Should update a user' {
             Assert-MockCalled _callAPI -Exactly 1 -ParameterFilter {
