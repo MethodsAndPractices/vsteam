@@ -19,7 +19,7 @@ Update a pull request
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
-PS C:\> Update-VSTeamPullRequest -ProjectName project -RepositoryId $r.RepositoryId -Draft
+PS C:\> Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Draft
 ```
 
 Set the pull request to be a draft
@@ -29,14 +29,12 @@ Set the pull request to be a draft
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
-PS C:\> Update-VSTeamPullRequest -ProjectName project -RepositoryId $r.RepositoryId -Status abandoned
+PS C:\> Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abandoned
 ```
 
 Abandon a pull request
 
 ## PARAMETERS
-
-<!-- #include "./params/projectName.md" -->
 
 ### -RepositoryId
 
@@ -108,16 +106,6 @@ Set the pull request as a draft
 ```yaml
 Type: Switch
 Parameter Sets: Draft
-```
-
-### -Publish
-
-Publish the pull request
-
-```yaml
-Type: Switch
-Parameter Sets: Publish
-```
 
 <!-- #include "./params/confirm.md" -->
 
