@@ -563,6 +563,20 @@ function _getProjects {
    }
 }
 
+function _getProjectsWithCache {
+   # Generate and set the ValidateSet
+   if ($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
+      $arrSet = _getProjects
+      [VSTeamProjectCache]::projects = $arrSet
+      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+   }
+   else {
+      $arrSet = [VSTeamProjectCache]::projects
+   }
+   
+   return $arrSet
+}
+
 function _buildProjectNameDynamicParam {
    param(
       [string] $ParameterName = 'ProjectName',
@@ -574,16 +588,8 @@ function _buildProjectNameDynamicParam {
 
    $helpMessage = "The name of the project.  You can tab complete from the projects in your Team Services or TFS account when passed on the command line."
 
-   # Generate and set the ValidateSet
-   if ($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
-      $arrSet = _getProjects
-      [VSTeamProjectCache]::projects = $arrSet
-      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-   }
-   else {
-      $arrSet = [VSTeamProjectCache]::projects
-   }
-
+   $arrSet = _getProjectsWithCache
+   
    $alias = @()
 
    if ($AliasName)
@@ -645,6 +651,22 @@ function _getProcesses {
       Write-Output @()
    }
 }
+
+function _getProcessesWithCache 
+{
+   # Generate and set the ValidateSet
+   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
+      $arrSet = _getProcesses
+      [VSTeamProcessCache]::processes = $arrSet
+      [VSTeamProcessCache]::timestamp = (Get-Date).Minute
+   }
+   else {
+      $arrSet = [VSTeamProcessCache]::processes
+   }
+   
+   return $arrSet
+}
+
 function _buildProcessNameDynamicParam {
    param(
       [string] $ParameterName = 'ProcessName',
@@ -656,15 +678,7 @@ function _buildProcessNameDynamicParam {
 
    $helpMessage = "The name of the process.  You can tab complete from the processes in your Team Services or TFS account when passed on the command line."
 
-   # Generate and set the ValidateSet
-   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
-      $arrSet = _getProcesses
-      [VSTeamProcessCache]::processes = $arrSet
-      [VSTeamProcessCache]::timestamp = (Get-Date).Minute
-   }
-   else {
-      $arrSet = [VSTeamProcessCache]::processes
-   }
+   $arrSet = _getProcessesWithCache
 
    $alias = @()
    if ($AliasName)
