@@ -102,12 +102,12 @@ function Get-VSTeamGitCommit {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if (($ItemVersionVersionType -eq "commit") -and ($ItemVersionVersion -eq $null -or $ItemVersionVersion -eq ''))
+      if (($ItemVersionVersionType -eq "commit") -and ($null -eq $ItemVersionVersion -or $ItemVersionVersion -eq ''))
       {
          throw "If you have a -ItemVersionVersionType of 'commit' you need to set a commit id as -ItemVersionVersion";
       }
 
-      if (($CompareVersionVersionType -eq "commit") -and ($CompareVersionVersion -eq $null -or $CompareVersionVersion -eq ''))
+      if (($CompareVersionVersionType -eq "commit") -and ($null -eq $CompareVersionVersion -or $CompareVersionVersion -eq ''))
       {
          throw "If you have a -CompareVersionVersionType of 'commit' you need to set a commit id as -CompareVersionVersion";
       }
