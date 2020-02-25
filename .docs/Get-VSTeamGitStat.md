@@ -1,29 +1,31 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VSTeamGitStats
+# Get-VSTeamGitStat
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VSTeamGitStats.md" -->
+<!-- #include "./synopsis/Get-VSTeamGitStat.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Get-VSTeamGitStats retrieves statistics about branches within a repository.
+<!-- #include "./synopsis/Get-VSTeamGitStat.md" -->
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamGitStats -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD
+PS C:\> Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD
 ```
+
+This command returns all the Git stats for the entire repository
 
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamGitStats -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop
+PS C:\> Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop
 ```
 
 This command returns all the Git stats for a specific branch
@@ -31,7 +33,7 @@ This command returns all the Git stats for a specific branch
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamGitStats -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop -VersionType branch -Version 67cae2b029dff7eb3dc062b49403aaedca5bad8d
+PS C:\> Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop -VersionType branch -Version 67cae2b029dff7eb3dc062b49403aaedca5bad8d
 ```
 
 This command returns all the Git stats for a specific commit

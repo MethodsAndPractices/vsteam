@@ -1,4 +1,4 @@
-function Get-VSTeamGitStats {
+function Get-VSTeamGitStat {
    [CmdletBinding(DefaultParameterSetName = "ByOptionalName")]
    param (
       [Parameter(ParameterSetName = "ByVersion", ValueFromPipelineByPropertyName = $true, Mandatory = $true)]
@@ -30,8 +30,7 @@ function Get-VSTeamGitStats {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      if (($VersionType -eq "commit") -and ($Version -eq $null -or $Version -eq ''))
-      {
+      if (($VersionType -eq "commit") -and ($null -eq $Version -or $Version -eq '')) {
          throw "If you have a -VersionType of 'commit' you need to set a commit id as -Version";
       }
 
@@ -48,12 +47,13 @@ function Get-VSTeamGitStats {
          $hasValueProp = $resp.PSObject.Properties.Match('value')
 
          if (0 -eq $hasValueProp.count) {
-            _applyTypes $resp "VSTeam.GitStats"
+            _applyTypes $resp "VSTeam.GitStat"
             Write-Output $resp
-         } else {
+         }
+         else {
             $obj = @()
             foreach ($item in $resp.value) {
-               _applyTypes $item "VSTeam.GitStats"
+               _applyTypes $item "VSTeam.GitStat"
                $obj += $item
             }
 

@@ -109,34 +109,34 @@ InModuleScope VSTeam {
 
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
-      Context 'Get-VSTeamGitStats' {
+      Context 'Get-VSTeamGitStat' {
          Mock Invoke-RestMethod { return $multipleResults } -Verifiable -ParameterFilter {
             $Uri -like "*/Test/*" -and
             $Uri -like "*repositories/00000000-0000-0000-0000-000000000000/stats/branches*"
          }
 
-         Get-VSTeamGitStats -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000
+         Get-VSTeamGitStat -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000
 
          It 'Should return multiple results' {
             Assert-VerifiableMock
          }
       }
 
-      Context 'Get-VSTeamGitStats by name' {
+      Context 'Get-VSTeamGitStat by name' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             $Uri -like "*/Test/*" -and
             $Uri -like "*repositories/00000000-0000-0000-0000-000000000000/stats/branches*" -and
             $Uri -like "*name=develop*"
          }
 
-         Get-VSTeamGitStats -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -BranchName develop
+         Get-VSTeamGitStat -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -BranchName develop
 
          It 'Should return multiple results' {
             Assert-VerifiableMock
          }
       }
 
-      Context 'Get-VSTeamGitStats by tag' {
+      Context 'Get-VSTeamGitStat by tag' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             $Uri -like "*/Test/*" -and
             $Uri -like "*repositories/00000000-0000-0000-0000-000000000000/stats/branches*" -and
@@ -144,14 +144,14 @@ InModuleScope VSTeam {
             $Uri -like "*baseVersionDescriptor.version=test*"
          }
 
-         Get-VSTeamGitStats -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -BranchName "develop" -VersionType "tag" -Version "test"
+         Get-VSTeamGitStat -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -BranchName "develop" -VersionType "tag" -Version "test"
 
          It 'Should return multiple results' {
             Assert-VerifiableMock
          }
       }
 
-      Context 'Get-VSTeamGitStats by tag with options' {
+      Context 'Get-VSTeamGitStat by tag with options' {
          Mock Invoke-RestMethod { return $singleResult } -Verifiable -ParameterFilter {
             $Uri -like "*/Test/*" -and
             $Uri -like "*repositories/00000000-0000-0000-0000-000000000000/stats/branches*" -and
@@ -160,26 +160,26 @@ InModuleScope VSTeam {
             $Uri -like "*baseVersionDescriptor.versionOptions=previousChange*"
          }
 
-         Get-VSTeamGitStats -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -BranchName "develop" -VersionType "tag" -Version "test" -VersionOptions previousChange
+         Get-VSTeamGitStat -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -BranchName "develop" -VersionType "tag" -Version "test" -VersionOptions previousChange
 
          It 'Should return multiple results' {
             Assert-VerifiableMock
          }
       }
 
-      Context 'Get-VSTeamGitStats by commit throws' {
+      Context 'Get-VSTeamGitStat by commit throws' {
          Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should throw because of invalid parameters' {
-            { Get-VSTeamGitStats -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -VersionType commit -Version '' } | Should Throw
+            { Get-VSTeamGitStat -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -VersionType commit -Version '' } | Should Throw
          }
       }
 
-      Context 'Get-VSTeamGitStats by id throws' {
+      Context 'Get-VSTeamGitStat by id throws' {
          Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
 
          It 'Should return a single repo by id' {
-            { Get-VSTeamGitStats -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 } | Should Throw
+            { Get-VSTeamGitStat -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 } | Should Throw
          }
       }
    }
