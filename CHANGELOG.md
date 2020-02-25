@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.6
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/238) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+- Added Get-VSTeamGitCommit to retrieve commits
+
 ## 6.4.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/257) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
