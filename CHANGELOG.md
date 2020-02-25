@@ -1,16 +1,14 @@
 # Changelog
 
-## 6.4.5
-
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/245) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
-
-Add Get-VSTeamGitStats to retrieve statistics about branches
-
 ## 6.4.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/257) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Fix bug in Get-VSTeamBuildArtifact with additional "properties" property
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/245) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+- Add Get-VSTeamGitStats to retrieve statistics about branches
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/244) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
@@ -19,6 +17,10 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/244) from [Mi
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/243) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Add additional filtering capabilities to Get-VSTeamPullRequest
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/242) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+- Added "-and" operator to the Membership tests
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/241) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
