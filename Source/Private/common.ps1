@@ -157,6 +157,7 @@ Function New-DynamicParam {
            PowerShell Language
    
    #>
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '', Justification='This does not actually create anything "new"')]
    param(
        
        [string]
