@@ -68,6 +68,7 @@ stages:
     - task: CredScan@2
       displayName: 'Run CredScan'
       inputs:
+        toolMajorVersion: 'V2'
         suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
 
     - task: SdtReport@1
