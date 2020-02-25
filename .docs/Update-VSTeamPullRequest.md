@@ -106,6 +106,7 @@ Set the pull request as a draft
 ```yaml
 Type: Switch
 Parameter Sets: Draft
+```
 
 <!-- #include "./params/confirm.md" -->
 
