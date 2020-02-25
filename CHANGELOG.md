@@ -1,16 +1,14 @@
 # Changelog
 
-## 6.4.5
-
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/244) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
-
-Add support for licensingSource and msdnLicenseType to Add-VSTeamUserEntitlement / Update-VSTeamUserEntitlement
-
 ## 6.4.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/257) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
 - Fix bug in Get-VSTeamBuildArtifact with additional "properties" property
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/244) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+- Add support for licensingSource and msdnLicenseType to Add-VSTeamUserEntitlement / Update-VSTeamUserEntitlement
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/243) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
 
