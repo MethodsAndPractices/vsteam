@@ -10,20 +10,23 @@ param(
    # By default the build will not install dependencies
    [switch]$installDep,
 
-   # build module will be imported into session
+   # built module will be imported into session
    [switch]$ipmo,
 
    # run the scripts with the PS script analyzer
    [switch]$analyzeScript,
 
    # runs the unit tests
+   [Parameter(ParameterSetName="UnitTest", Mandatory=$true)]
    [switch]$runTests,
 
    # can be used to filter the unit test parts that should be run
    # see also: https://github.com/pester/Pester/wiki/Invoke%E2%80%90Pester#testname-alias-name
+   [Parameter(ParameterSetName="UnitTest")]
    [string]$testName,
 
    # outputs the code coverage
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$codeCoverage
 )
 
@@ -78,7 +81,7 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 Write-Output "Publish complete to $output"
 
 
-#reload the just build module
+#reload the just built module
 if ($ipmo.IsPresent -or $runTests.IsPresent) {
 
    #module needs to be unloaded if present
