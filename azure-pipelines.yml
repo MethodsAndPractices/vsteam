@@ -74,7 +74,8 @@ stages:
     - task: SdtReport@1
       displayName: 'Create Security Analysis Report'
       inputs:
-        AllTools: true
+        AllTools: false
+        CredScan: true
 
     - task: PublishSecurityAnalysisLogs@2
       displayName: 'Publish Security Analysis Logs'
@@ -82,7 +83,8 @@ stages:
     - task: PostAnalysis@1
       displayName: 'Post Analysis'
       inputs:
-        AllTools: true
+        AllTools: false
+        CredScan: true
 
     - task: CopyFiles@2
       displayName: 'Copy Module to Artifacts Folder'
