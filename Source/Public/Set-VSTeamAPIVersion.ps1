@@ -112,7 +112,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Version = $Target
                [VSTeamVersions]::Git = '5.1-preview'
                [VSTeamVersions]::Core = '5.0'
-               [VSTeamVersions]::Build = '5.0-preview'
+               [VSTeamVersions]::Build = '5.1-preview'
                [VSTeamVersions]::Release = '5.1-preview'
                [VSTeamVersions]::DistributedTask = '5.0-preview'
                [VSTeamVersions]::VariableGroups = '5.0-preview.1'
