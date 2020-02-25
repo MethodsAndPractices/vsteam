@@ -1,23 +1,34 @@
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName="All")]
 param(
    #output path of the build module
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [string]$outputDir = './dist',
 
    # Building help is skipped by default to speed your inner loop.
    # Use this flag to include building the help
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$buildHelp,
 
    # By default the build will not install dependencies
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$installDep,
 
    # built module will be imported into session
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$ipmo,
 
    # run the scripts with the PS script analyzer
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$analyzeScript,
 
    # runs the unit tests
    [Parameter(ParameterSetName="UnitTest", Mandatory=$true)]
+   [Parameter(ParameterSetName="All")]
    [switch]$runTests,
 
    # can be used to filter the unit test parts that should be run
