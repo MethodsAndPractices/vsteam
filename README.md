@@ -4,6 +4,7 @@
 [![Documentation - VSTeam](https://img.shields.io/badge/Documentation-VSTeam-blue.svg)](https://github.com/DarqueWarrior/vsteam/blob/master/docs/readme.md)
 [![PowerShell Gallery - VSTeam](https://img.shields.io/badge/PowerShell%20Gallery-VSTeam-blue.svg)](https://www.powershellgallery.com/packages/VSTeam)
 [![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.0-blue.svg)](https://github.com/PowerShell/PowerShell)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md) 
 
 ## Introduction
 
