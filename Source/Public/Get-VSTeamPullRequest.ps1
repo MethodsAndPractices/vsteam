@@ -1,34 +1,42 @@
 function Get-VSTeamPullRequest {
    [CmdletBinding(DefaultParameterSetName = "SearchCriteriaWithStatus")]
    param (
-       [Alias('PullRequestId')]
-       [Parameter(ParameterSetName = "ById")]
-       [string] $Id,
-       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
-       [Guid] $RepositoryId,
-       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
-       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-       [Guid] $SourceRepositoryId,
-       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
-       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-       [ValidatePattern('^refs/.*')]
-       [string] $SourceBranchRef,
-       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
-       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-       [ValidatePattern('^refs/.*')]
-       [string] $TargetBranchRef,
-       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-       [ValidateSet("abandoned", "active", "all", "completed", "notSet")]
-       [string] $Status,
-       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
-       [switch] $All,
-       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
-       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-       [int] $Top,
-       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
-       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-       [int] $Skip
+      [Alias('PullRequestId')]
+      [Parameter(ParameterSetName = "ById")]
+      [string] $Id,
+       
+      [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+      [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+      [Guid] $RepositoryId,
+       
+      [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+      [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+      [Guid] $SourceRepositoryId,
+       
+      [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+      [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+      [ValidatePattern('^refs/.*')]
+      [string] $SourceBranchRef,
+       
+      [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+      [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+      [ValidatePattern('^refs/.*')]
+      [string] $TargetBranchRef,
+       
+      [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+      [ValidateSet("abandoned", "active", "all", "completed", "notSet")]
+      [string] $Status,
+       
+      [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+      [switch] $All,
+       
+      [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+      [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+      [int] $Top,
+       
+      [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+      [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
+      [int] $Skip
    )
 
    DynamicParam {
@@ -43,29 +51,34 @@ function Get-VSTeamPullRequest {
          if ($Id) {
             if ($ProjectName) {
                $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -Id $Id
-            } else {
+            }
+            else {
                $resp = _callAPI -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -Id $Id
             }
-         } else {
+         }
+         else {
             $queryString = @{
-               'searchCriteria.sourceRefName'               = $SourceBranchRef
-               'searchCriteria.sourceRepositoryId'          = $SourceRepositoryId
-               'searchCriteria.targetRefName'               = $TargetBranchRef
-               'searchCriteria.status'                      = if ($All.IsPresent) { 'all' } else { $Status }
-               '$top'                                       = $Top
-               '$skip'                                      = $Skip
+               'searchCriteria.sourceRefName'      = $SourceBranchRef
+               'searchCriteria.sourceRepositoryId' = $SourceRepositoryId
+               'searchCriteria.targetRefName'      = $TargetBranchRef
+               'searchCriteria.status'             = if ($All.IsPresent) { 'all' } else { $Status }
+               '$top'                              = $Top
+               '$skip'                             = $Skip
             }
 
             if ($RepositoryId) {
                if ($ProjectName) {
                   $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
-               } else {
+               }
+               else {
                   $resp = _callAPI -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
                }
-            } else {
+            }
+            else {
                if ($ProjectName) {
                   $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -QueryString $queryString
-               } else {
+               }
+               else {
                   $resp = _callAPI -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -QueryString $queryString
                }
             }
@@ -83,8 +96,9 @@ function Get-VSTeamPullRequest {
          }
 
          Write-Output $pullRequests
-      } catch {
-          _handleException $_
+      }
+      catch {
+         _handleException $_
       }
    }
 }
