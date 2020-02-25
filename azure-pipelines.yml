@@ -296,7 +296,7 @@ stages:
           - task: GithubRelease@0 
             displayName: 'Create GitHub Release'      
             inputs:
-              gitHubConnection: vsteam
+              gitHubConnection: Darquewarrior
               repositoryName: DarqueWarrior/vsteam
               tagSource: manual
               tag: v$(PACKAGE_VERSION)      
