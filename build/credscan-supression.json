@@ -17,6 +17,14 @@
     {
       "file": "VSTeam-Help.xml",
       "_justification": "Fake credentials which are part of PS documentation examples."
+    },
+    {
+      "file": "Add-VSTeamServiceFabricEndpoint.md",
+      "_justification": "Fake credentials which are part of PS documentation examples."
+    },
+    {
+      "file": "buildDefyaml.json",
+      "_justification": "Fake credentials only used for unit tests."
     }
    ]
  }
