@@ -1,1 +1,39 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.User2.TableView</Name><ViewSelectedBy><TypeName>Team.User2</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>PrincipalName</Label></TableColumnHeader><TableColumnHeader><Label>DisplayName</Label></TableColumnHeader><TableColumnHeader><Label>Origin</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>PrincipalName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>DisplayName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>Origin</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.User2.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.User2</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>PrincipalName</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>DisplayName</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Origin</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>PrincipalName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>DisplayName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Origin</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

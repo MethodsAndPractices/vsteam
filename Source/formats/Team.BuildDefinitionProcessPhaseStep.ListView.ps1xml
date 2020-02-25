@@ -1,1 +1,28 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.BuildDefinitionProcessPhaseStep.ListView</Name><ViewSelectedBy><TypeName>Team.BuildDefinitionProcessPhaseStep</TypeName></ViewSelectedBy><ListControl><ListEntries><ListEntry><ListItems><ListItem><PropertyName>ID</PropertyName></ListItem><ListItem><PropertyName>Name</PropertyName></ListItem><ListItem><PropertyName>Enabled</PropertyName></ListItem></ListItems></ListEntry></ListEntries></ListControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.BuildDefinitionProcessPhaseStep.ListView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.BuildDefinitionProcessPhaseStep</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<PropertyName>ID</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>Name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>Enabled</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

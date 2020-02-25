@@ -1,1 +1,39 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.Release.TableView</Name><ViewSelectedBy><TypeName>VSTeamRelease</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>Mode</Label></TableColumnHeader><TableColumnHeader><Label>Name</Label></TableColumnHeader><TableColumnHeader><Label>Status</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>DisplayMode</PropertyName></TableColumnItem><TableColumnItem><PropertyName>Name</PropertyName></TableColumnItem><TableColumnItem><PropertyName>status</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.Release.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>VSTeamRelease</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Mode</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Status</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>DisplayMode</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Name</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>status</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>
