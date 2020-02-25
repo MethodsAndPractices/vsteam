@@ -52,21 +52,10 @@ InModuleScope VSTeam {
 
          Add-VSTeamProfile -Account $acct -PersonalAccessToken $pat -Version $api -Name intTests
          Set-VSTeamAccount -Profile intTests -Drive int
-
-         if ($null -ne (Get-VSTeamUserEntitlement -Email $email))
-         {
-            Remove-VSTeamUserEntitlement -Email $email -Force
-         }
       }
 
       AfterAll {
          # Put everything back
-
-         if ($null -ne (Get-VSTeamUserEntitlement -Email $email))
-         {
-            Remove-VSTeamUserEntitlement -Email $email -Force
-         }
-
          Set-Location $originalLocation
 
          if ($oAcct) {
@@ -434,11 +423,6 @@ InModuleScope VSTeam {
                Get-VSTeamUserEntitlement | Should Not Be $null
             }
 
-            It 'Add-VSTeamUserEntitlement should add a user' {
-               Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
-               (Get-VSTeamUserEntitlement).Count | Should Be 2
-            }
-
             It 'Get-VSTeamUserEntitlement ById Should return Teams' {
                $id = (Get-VSTeamUserEntitlement | Where-Object email -eq $email).Id
                Get-VSTeamUserEntitlement -Id $id | Should Not Be $null
@@ -453,14 +437,19 @@ InModuleScope VSTeam {
                Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should Be $null
             }
 
-            It 'Add-VSTeamUserEntitlement should add a user with MSDN license' {
-               Add-VSTeamUserEntitlement -Email $email -License none -LicensingSource msdn -MSDNLicenseType professional | Should not be $null
-               (Get-VSTeamUserEntitlement).Count | Should Be 2
+            It 'Add-VSTeamUserEntitlement should add a user' {
+               Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
+               (Get-VSTeamUserEntitlement).Count | Should Be 3
             }
 
             It 'Remove-VSTeamUserEntitlement should delete the user' {
                Remove-VSTeamUserEntitlement -Email $email -Force
                Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should Be $null
+            }
+
+            It 'Add-VSTeamUserEntitlement should add a user with MSDN license' {
+               Add-VSTeamUserEntitlement -Email $email -License none -LicensingSource msdn -MSDNLicenseType professional | Should not be $null
+               (Get-VSTeamUserEntitlement).Count | Should Be 4
             }
          }
       }
