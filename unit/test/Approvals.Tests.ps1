@@ -56,7 +56,7 @@ InModuleScope VSTeam {
             # Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -97,7 +97,7 @@ InModuleScope VSTeam {
             # "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -like "*https://vsrm.dev.azure.com/test/project/_apis/release/approvals/*" -and
+               $Uri -like "*https://vsrm.dev.azure.com/test/project/_apis/release/approvals*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
                $Uri -like "*assignedtoFilter=Chuck Reinhart*" -and
                $Uri -like "*includeMyGroupApprovals=true*"
@@ -127,7 +127,7 @@ InModuleScope VSTeam {
          It 'should return approvals' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -231,7 +231,7 @@ InModuleScope VSTeam {
             # "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/*" -and
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
                $Uri -like "*statusFilter=Pending*" -and
                $Uri -like "*assignedtoFilter=Test User*" -and

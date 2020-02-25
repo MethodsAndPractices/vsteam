@@ -24,7 +24,7 @@ stages:
           vmImageName: 'macOS-latest'
         Linux:
           OS: 'Linux'
-          vmImageName: 'ubuntu-latest'
+          vmImageName: 'ubuntu-16.04'
       maxParallel: 2
     pool:
       vmImage: $(vmImageName)
@@ -125,7 +125,7 @@ stages:
   - deployment: Deploy
     displayName: Package Management
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'ubuntu-16.04'
     environment: 'Default'
     strategy:
       runOnce:
@@ -195,7 +195,7 @@ stages:
       displayName: 'Linux TFS 2017'
       os: 'Linux'
       name: 'LinuxTFS2017'
-      pool: 'ubuntu-latest'
+      pool: 'ubuntu-16.04'
       stop: 'true'
       apiVersion: 'TFS2017'
       depends: 'WindowsTFS2017'

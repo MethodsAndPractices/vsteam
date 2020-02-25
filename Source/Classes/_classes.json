@@ -55,6 +55,7 @@
       "VSTeamClassificationNode.ps1",
       "VSTeamJobRequest.ps1",
       "VSTeamReleaseDefinition.ps1",
-      "VSTeamReleaseDefinitions.ps1"
+      "VSTeamReleaseDefinitions.ps1",
+      "VSTeamPermissionInheritance.ps1"
    ]
 }

@@ -53,7 +53,7 @@ InModuleScope VSTeam {
             Get-VSTeamServiceEndpoint -projectName project -Verbose
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -470,7 +470,7 @@ InModuleScope VSTeam {
 
          It 'should create a new NuGet Serviceendpoint' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
                $Body -like '*"nugetkey": *"00000000-0000-0000-0000-000000000000"*' -and
@@ -509,7 +509,7 @@ InModuleScope VSTeam {
 
          It 'should create a new NuGet Serviceendpoint' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
                $Body -like '*"username": *"testUser"*' -and
@@ -550,7 +550,7 @@ InModuleScope VSTeam {
 
          It 'should create a new NuGet Serviceendpoint' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Post' -and
                $ContentType -eq 'application/json' -and
                $Body -like '*"apitoken":*"00000000-0000-0000-0000-000000000000"*' -and

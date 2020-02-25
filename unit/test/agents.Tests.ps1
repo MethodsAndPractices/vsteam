@@ -35,7 +35,7 @@ InModuleScope VSTeam {
             Get-VSTeamAgent -PoolId 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/1/agents/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/1/agents?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -51,7 +51,7 @@ InModuleScope VSTeam {
             1 | Get-VSTeamAgent
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/1/agents/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/1/agents?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }

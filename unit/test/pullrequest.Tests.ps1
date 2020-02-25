@@ -57,7 +57,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -68,7 +68,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -79,7 +79,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 

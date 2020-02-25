@@ -55,7 +55,7 @@ InModuleScope VSTeam {
             Get-VSTeamPool
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }

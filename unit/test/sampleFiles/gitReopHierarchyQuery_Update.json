@@ -1,0 +1,11 @@
+{
+   "dataProviderSharedData": {},
+   "dataProviders": {
+      "ms.vss-web.component-data": {},
+      "ms.vss-web.shared-data": null,
+      "ms.vss-admin-web.security-view-update-data-provider": {
+         "statusCode": 204,
+         "statusDescription": null
+      }
+   }
+}

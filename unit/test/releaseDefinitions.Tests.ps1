@@ -53,7 +53,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'Releasedef.json' -and
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -82,7 +82,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'Releasedef.json' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
