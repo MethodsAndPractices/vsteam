@@ -1,0 +1,18 @@
+parameters:
+  variableName: ''
+
+steps:
+- bash: |
+    echo "Variable 'variableName' found with value '$VARIABLE_NAME'"
+    if [ -z "$VARIABLE_NAME" ]; then
+      echo "##vso[task.logissue type=error;]Missing template parameter \"variableName\""
+      echo "##vso[task.complete result=Failed;]"
+    fi
+  env:
+    VARIABLE_NAME: ${{ parameters.variableName }}
+  displayName: Check for required parameters in YAML template
+- powershell: |
+   mkdir -p $(Pipeline.Workspace)/variables
+   echo "$(${{ parameters.variableName }})" > $(Pipeline.Workspace)/variables/${{ parameters.variableName }}.variable
+   echo "Variable written to '$(Pipeline.Workspace)/variables/${{ parameters.variableName }}.variable'"
+  displayName: 'Persist ''${{ parameters.variableName }}'' variable'
