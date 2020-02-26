@@ -1,6 +1,6 @@
 function Test-VSTeamYamlPipeline {   
    param(
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Int32] $PipelineId,
       [Parameter(Mandatory = $false)]
       [string] $FilePath
@@ -37,6 +37,8 @@ function Test-VSTeamYamlPipeline {
          }
       }
       
+      _applyTypesToYamlPipelineResultType -item $resp
+
       return $resp
    }
 }
