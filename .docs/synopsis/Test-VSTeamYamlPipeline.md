@@ -1,0 +1,1 @@
+Tests the commited YAML pipeline files to check for inconsitencies.
