@@ -188,6 +188,13 @@ stages:
               publishVstsFeed: 'vsteam'
               allowPackageConflicts: true
 
+          - template: ./templates/persist-variable.yml
+            parameters:
+              variableName: 'PACKAGE_VERSION'
+
+          - publish: $(Pipeline.Workspace)/variables
+            artifact: variables
+
 - stage: Testing
   displayName: Testing stage
   dependsOn: Package
@@ -255,6 +262,13 @@ stages:
       runOnce:
         deploy:
           steps:
+          - download: current
+            artifact: variables
+
+          - template: ./templates/read-variable.yml
+            parameters:
+               variableName: 'PACKAGE_VERSION'
+
           - task: NuGetToolInstaller@0
             displayName: 'Install NuGet 5.2.0'
             inputs:
