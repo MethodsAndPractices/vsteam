@@ -1,6 +1,6 @@
 <!-- #include "./common/header.md" -->
 
-# Test-VSTeamMembership
+# Test-VSTeamYamlPipeline
 
 ## SYNOPSIS
 
