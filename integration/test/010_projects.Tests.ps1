@@ -52,21 +52,48 @@ InModuleScope VSTeam {
 
          Add-VSTeamProfile -Account $acct -PersonalAccessToken $pat -Version $api -Name intTests
          Set-VSTeamAccount -Profile intTests -Drive int
+         Set-VSTeamAPIVersion $env:API_VERSION
 
-         if ($null -ne (Get-VSTeamUserEntitlement | Where-Object email -eq $email))
+         if (-not ($acct -like "http://*")) { # Not supported on TFS
+            if ($null -ne (Get-VSTeamUserEntitlement | Where-Object email -eq $email))
+            {
+               Remove-VSTeamUserEntitlement -Email $email -Force
+            }
+
+            $currentUserCount = (Get-VSTeamUserEntitlement | measure-object).Count
+         }
+
+         if (-not (Get-VSTeamProject | Where-Object { $_.Name -eq "MyProject"}))
          {
-            Remove-VSTeamUserEntitlement -Email $email -Force
+            Add-VSTeamProject -Name "MyProject"
+         }
+
+         if (-not (Get-VSTeamProject | Where-Object { $_.Name -eq "NextProject"}))
+         {
+            Add-VSTeamProject -Name "NextProject"
          }
       }
 
       AfterAll {
          # Put everything back
 
-         if ($null -ne (Get-VSTeamUserEntitlement | Where-Object email -eq $email))
-         {
-            Remove-VSTeamUserEntitlement -Email $email -Force
+         Set-VSTeamAPIVersion $env:API_VERSION
+
+         if (-not ($acct -like "http://*")) { # Not supported on TFS
+            if ($null -ne (Get-VSTeamUserEntitlement | Where-Object email -eq $email))
+            {
+               Remove-VSTeamUserEntitlement -Email $email -Force
+            }
          }
 
+         # I have noticed that if the delete happens too soon you will get a
+         # 400 response and told to try again later. So this test needs to be
+         # retried. We need to wait a minute after the rename before we try
+         # and delete
+         Start-Sleep -Seconds 60
+         Get-VSTeamProject | Where-Object { $_.Name -eq  $projectName } | Remove-VSTeamProject -Force
+         Get-VSTeamProject | Where-Object { $_.Name -eq  $newProjectName } | Remove-VSTeamProject -Force
+         
          Remove-VSTeamAccount
          
 
@@ -439,7 +466,7 @@ InModuleScope VSTeam {
 
             It 'Add-VSTeamUserEntitlement should add a user' {
                Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
-               (Get-VSTeamUserEntitlement).Count | Should Be 2
+               (Get-VSTeamUserEntitlement).Count | Should Be ($currentUserCount + 1)
             }
 
             It 'Get-VSTeamUserEntitlement ById Should return Teams' {
@@ -458,7 +485,7 @@ InModuleScope VSTeam {
 
             It 'Add-VSTeamUserEntitlement should add a user with MSDN license' {
                Add-VSTeamUserEntitlement -Email $email -License none -LicensingSource msdn -MSDNLicenseType professional | Should not be $null
-               (Get-VSTeamUserEntitlement).Count | Should Be 2
+               (Get-VSTeamUserEntitlement).Count | Should Be ($currentUserCount + 1)
             }
 
             It 'Remove-VSTeamUserEntitlement should delete the user' {
@@ -562,18 +589,6 @@ InModuleScope VSTeam {
             Clear-VSTeamDefaultProject
 
             $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
-         }
-
-         It 'Remove-VSTeamProject Should remove Project' {
-            Set-VSTeamAPIVersion $env:API_VERSION
-
-            # I have noticed that if the delete happens too soon you will get a
-            # 400 response and told to try again later. So this test needs to be
-            # retried. We need to wait a minute after the rename before we try
-            # and delete
-            Start-Sleep -Seconds 60
-
-            Remove-VSTeamProject -ProjectName $newProjectName -Force
          }
       }
    }

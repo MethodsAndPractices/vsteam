@@ -30,7 +30,7 @@ InModuleScope VSTeam {
          $api = $env:API_VERSION
          Set-VSTeamAccount -a $acct -pe $pat -version $api
 
-         Get-VSTeamProject | Remove-VSTeamProject -Force
+         Get-VSTeamProject | Where-Object { $_.Name -like "TeamModuleIntegration*" } | Remove-VSTeamProject -Force
       }
 
       Context 'Get-VSTeamInfo' {
