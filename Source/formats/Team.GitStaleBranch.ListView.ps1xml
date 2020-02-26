@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>Team.GitStaleBranch.ListView</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.GitStaleBranch</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>ProjectName</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>RepositoryName</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>BranchName</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Creator</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>LastCommitId</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>LastCommitter</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>LastCommitDate</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Behind</PropertyName>
+                     </ListItem>
+                      <ListItem>
+                        <PropertyName>Ahead</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

@@ -15,7 +15,11 @@ class VSTeamGitCommitRef : VSTeamLeaf {
       $this.Committer = [VSTeamGitUserDate]::new($obj.committer, $ProjectName)
       $this.CommitId = $obj.commitId
       $this.Comment = $obj.comment
-      $this.RemoteUrl = $obj.remoteUrl
+
+      if ($obj.PSobject.Properties.Name -contains "remoteurl") {
+         $this.RemoteUrl = $obj.remoteUrl
+      }
+
       $this.Url = $obj.url
 
       $this._internalObj = $obj
