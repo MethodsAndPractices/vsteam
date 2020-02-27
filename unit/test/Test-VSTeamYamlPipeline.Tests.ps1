@@ -20,9 +20,9 @@ InModuleScope VSTeam {
       Context 'Test-VSTeamYamlPipeline' {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
-             #Write-Host $args
-             #Write-Host $([VSTeamVersions]::Build)
-             #Write-Host $([VSTeamVersions]::Account)
+             Write-Host $args
+             Write-Host $([VSTeamVersions]::Build)
+             Write-Host $([VSTeamVersions]::Account)
 
             return $resultsAzD
          }
