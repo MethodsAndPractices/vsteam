@@ -1,14 +1,10 @@
-name: $(Build.BuildID)
+name: Test-Yaml-Pipeline
 
 trigger:
 - master
 
 resources:
 - repo: self
-
-variables:
-  Folder: 'dist'
-  TEAM_CIBUILD: 'true'
 
 stages:
 - stage: Build
@@ -22,192 +18,15 @@ stages:
       vmImage: 'windows-latest'
 
     steps:  
-
-    - task: PowerShell@2
-      displayName: 'Install PSScriptAnalyzer'
-      inputs:
-        targetType: 'inline'
-        script: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
-
-    - task: PowerShell@2
-      displayName: 'Run Static Code Analysis'
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Has to happen in this task for it to take effect
-          # Load the psd1 file so you can read the required modules and import them
-          $manifest = Import-PowerShellDataFile .\dist\*.psd1
-
-          # Import each module
-          $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
-
-          $r = Invoke-ScriptAnalyzer -Path ./dist -Recurse | Where-Object severity -ne "Information"
-          $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
-
     - task: CopyFiles@2
       displayName: 'Copy Module to Artifacts Folder'
       inputs:
-        Contents: |
-          README.md
-          .gitignore
-          dist\**
-        TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
+        Contents: '**'          
+        TargetFolder: '$(build.artifactstagingdirectory)'
         flattenFolders: false
-      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
     - task: PublishPipelineArtifact@1
       displayName: 'Publish Module'
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)/VSTeam'
+        targetPath: '$(Build.ArtifactStagingDirectory)'
         artifact: 'module'
-      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
-
-    - task: CopyFiles@2
-      displayName: 'Copy Integration Tests Artifacts Folder'
-      inputs:
-        Contents: |
-          dist\*.psd1
-          integration\**
-        TargetFolder: '$(build.artifactstagingdirectory)/Tests'
-      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
-
-    - task: PublishPipelineArtifact@1
-      displayName: 'Publish Tests'
-      inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)/Tests'
-        artifact: 'test'
-      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
-
-- stage: Package
-  displayName: Package Management
-  dependsOn: Build
-  condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
-  jobs:
-  - deployment: Deploy
-    displayName: Package Management
-    pool:
-      vmImage: 'ubuntu-16.04'
-    environment: 'Default'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: NuGetToolInstaller@0
-            displayName: 'Install NuGet 5.2.0'
-            inputs:
-              versionSpec: 5.2.0
-              
-          - task: PowerShell@2
-            displayName: 'Install Module Dependencies'
-            inputs:
-              targetType: 'inline'
-              script: |
-                # Load the psd1 file so you can read the required modules and install them
-                $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
-
-                # Install each module
-                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-              workingDirectory: '$(Pipeline.Workspace)/Module'
-
-          - task: PowerShell@2
-            displayName: 'Compute Version Number'
-            inputs:
-              targetType: 'inline'
-              script: |
-                # Load the psd1 file so you can read the version
-                $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
-
-                Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
-              workingDirectory: '$(Pipeline.Workspace)/Module'
-
-          - task: PowerShell@2
-            displayName: 'Create NuSpec from PSD1'
-            inputs:
-              targetType: 'inline'
-              script: |
-                Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
-                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
-              workingDirectory: '$(Pipeline.Workspace)/Module'
-
-          - task: NuGetCommand@2
-            displayName: 'Pack Module'
-            inputs:
-              command: pack
-              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
-              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
-              versioningScheme: byEnvVar
-              versionEnvVar: 'PACKAGE_VERSION'
-
-          - task: NuGetCommand@2
-            displayName: 'Push Module'
-            inputs:
-              command: push
-              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
-              publishVstsFeed: 'vsteam'
-              allowPackageConflicts: true
-
-
-- stage: Production
-  displayName: PowerShell Gallery / GitHub Release
-  jobs:
-  - deployment: Deploy
-    displayName: PowerShell Gallery / GitHub Release
-    pool:
-      vmImage: 'windows-latest'
-    environment: 'PowerShell Gallery'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: NuGetToolInstaller@0
-            displayName: 'Install NuGet 5.2.0'
-            inputs:
-              versionSpec: 5.2.0
-
-          - task: PowerShell@2
-            displayName: 'Install Module Dependencies'
-            inputs:
-              targetType: 'inline'
-              script: |
-                # Load the psd1 file so you can read the required modules and install them
-                $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
-
-                # Install each module
-                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-              workingDirectory: '$(Pipeline.Workspace)/Module'
-
-          - task: PowerShell@2
-            displayName: 'Create NuSpec from PSD1'
-            inputs:
-              targetType: 'inline'
-              script: |
-                Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
-                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
-              workingDirectory: '$(Pipeline.Workspace)/Module'
-
-          - task: NuGetCommand@2
-            displayName: 'Pack Module'
-            inputs:
-              command: pack
-              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
-              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
-
-          - task: NuGetCommand@2
-            displayName: 'Push Module'
-            inputs:
-              command: push
-              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
-              nuGetFeedType: external
-              publishFeedCredentials: 'PowerShell Gallery'
-              
-          - task: GithubRelease@0 
-            displayName: 'Create GitHub Release'      
-            inputs:
-              gitHubConnection: Darquewarrior
-              repositoryName: DarqueWarrior/vsteam
-              tagSource: manual
-              tag: v$(PACKAGE_VERSION)      
-              addChangeLog: true
-              compareWith: 'lastFullRelease'
-              assets: |
-                $(Pipeline.Workspace)/Module/$(Folder)/*.nupkg
