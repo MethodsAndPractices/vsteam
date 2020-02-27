@@ -19,7 +19,7 @@ InModuleScope VSTeam {
             Get-VSTeamCloudSubscription
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -41,7 +41,7 @@ InModuleScope VSTeam {
             Get-VSTeamCloudSubscription
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }

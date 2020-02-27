@@ -1,25 +1,45 @@
 function Get-VSTeamGitRef {
-    [CmdletBinding()]
-    param (
-        [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position=0)]
-        [Alias('Id')]
-        [guid] $RepositoryID,
-        [Parameter(Mandatory=$true, Position = 1 )]
-        [ValidateProject()]
-        [ArgumentCompleter([ProjectCompleter])]
-        $ProjectName
-    )
-    process {
-        try {
-            $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/refs" -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
-            $obj = @()
-            foreach ($item in $resp.value) {
-                $obj += [VSTeamRef]::new($item, $ProjectName)
-            }
-            Write-Output $obj
-        }
-        catch {
-            throw $_
-        }
-    }
+   [CmdletBinding()]
+   param (
+      [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position=0)]
+      [Alias('Id')]
+      [guid] $RepositoryID,
+      [Parameter()]
+      [string] $Filter,
+      [Parameter()]
+      [string] $FilterContains,
+      [Parameter()]
+      [int] $Top,
+      [Parameter()]
+      [string] $ContinuationToken,
+      [Parameter(Mandatory=$true, Position = 1 )]
+      [ValidateProject()]
+      [ArgumentCompleter([ProjectCompleter])]
+      $ProjectName
+   )
+   process {
+      try {
+
+         $queryString = @{
+            '$top'              = $Top
+            'filter'            = $Filter
+            'filterContains'    = $FilterContains
+            'continuationToken' = $continuationToken
+         }
+
+         $url = _buildRequestURI -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -ProjectName $ProjectName -Id "$RepositoryID/refs"
+         $resp = _callAPI -url $url -QueryString $queryString
+
+         $obj = @()
+
+         foreach ($item in $resp.value) {
+            $obj += [VSTeamRef]::new($item, $ProjectName)
+         }
+
+         Write-Output $obj
+      }
+      catch {
+         throw $_
+      }
+   }
 }

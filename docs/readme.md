@@ -233,6 +233,10 @@ Gets a memberships for a container or member.
 
 Returns all the versions of supported APIs of your TFS or AzD.
 
+### [Get-VSTeamPermissionInheritance](Get-VSTeamPermissionInheritance.md)
+
+Returns true or false.
+
 ### [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
 
 Get the code policies in the specified Azure DevOps or Team Foundation Server project.
@@ -439,6 +443,10 @@ Sets the default project to be used with other calls in the module.
 ### [Set-VSTeamEnvironmentStatus](Set-VSTeamEnvironmentStatus.md)
 
 Sets the status of a environment to canceled, inProgress, notStarted, partiallySucceeded, queued, rejected, scheduled, succeeded or undefined.
+
+### [Set-VSTeamPermissionInheritance](Set-VSTeamPermissionInheritance.md)
+
+Sets the permission inheritance to true or false.
 
 ### [Set-VSTeamReleaseStatus](Set-VSTeamReleaseStatus.md)
 

@@ -95,6 +95,8 @@
       "Team.WorkItem.ListView.ps1xml",
       "Team.WorkItemDeleted.TableView.ps1xml",
       "Team.WorkItemDeleted.ListView.ps1xml",
-      "Team.JobRequest.TableView.ps1xml"
+      "Team.JobRequest.TableView.ps1xml",
+      "Team.GitCommitRef.TableView.ps1xml",
+      "Team.GitUserDate.TableView.ps1xml"
    ]
 }

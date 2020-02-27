@@ -97,7 +97,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'sampleFiles/builddef.json' -and
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
@@ -126,7 +126,7 @@ InModuleScope VSTeam {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'sampleFiles/builddef.json' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }

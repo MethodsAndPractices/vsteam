@@ -39,7 +39,7 @@ Describe 'Get-VSTeamReleaseDefinition' {
          Get-VSTeamReleaseDefinition -projectName project
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)"
          }
       }
    }
@@ -54,7 +54,7 @@ Describe 'Get-VSTeamReleaseDefinition' {
          Get-VSTeamReleaseDefinition -projectName project -expand environments
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
          }
       }
    }

@@ -4,6 +4,7 @@
 [![Documentation - VSTeam](https://img.shields.io/badge/Documentation-VSTeam-blue.svg)](https://github.com/DarqueWarrior/vsteam/blob/master/docs/readme.md)
 [![PowerShell Gallery - VSTeam](https://img.shields.io/badge/PowerShell%20Gallery-VSTeam-blue.svg)](https://www.powershellgallery.com/packages/VSTeam)
 [![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.0-blue.svg)](https://github.com/PowerShell/PowerShell)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md) 
 
 ## Introduction
 
@@ -12,6 +13,21 @@ VSTeam is a PowerShell module with commands for accessing your [Azure DevOps Ser
 The VSTeam module is also a provider allowing users to navigate their [Azure DevOps Server](https://cda.ms/Bf) and [Azure DevOps](https://cda.ms/Bf) as a file system.
 
 To get started you can visit this blog [PowerShell I would like you to meet TFS and VSTS](http://www.donovanbrown.com/post/PowerShell-I-would-like-you-to-meet-TFS-and-VSTS)
+
+Documentation of the cmdlets can be found in the [docs README](https://github.com/DarqueWarrior/vsteam/blob/master/docs/readme.md) or using `Get-Help VSTeam` once the module is installed.
+
+## Requirements
+
+- Windows PowerShell 5.0 or newer.
+- PowerShell Core.
+
+## Installation
+
+Install this module from the [PowerShell Gallery](https://www.powershellgallery.com/packages/VSTeam)
+
+## Change Log
+
+[Change Log](CHANGELOG.md)
 
 ## Pipeline Status
 
@@ -36,11 +52,6 @@ The build for VSTeam is run on macOS, Linux and Windows to ensure there are no c
  ![Unit Tests](.github/images/unittests.png)
 
 During the release the module is installed on macOS, Linux and Window and tested against [Azure DevOps Server](https://cda.ms/Bf) and [Azure DevOps](https://cda.ms/Bf) before being published to the PowerShell Gallery.
-
-## Requirements
-
-- Windows PowerShell 5.0 or newer.
-- PowerShell Core.
 
 ## Module Dependencies
 
@@ -99,10 +110,6 @@ Runs the tests, but executes only the unit tests that have the description "work
 ## Contributors
 
 [Guidelines](.github/CONTRIBUTING.md)
-
-## Change Log
-
-[Change Log](CHANGELOG.md)
 
 ## Maintainers
 

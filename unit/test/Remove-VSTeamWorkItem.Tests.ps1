@@ -43,7 +43,7 @@ InModuleScope VSTeam {
             Remove-VSTeamWorkItem -Id 47 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*workitems/47*"
             }
@@ -64,7 +64,7 @@ InModuleScope VSTeam {
             Remove-VSTeamWorkItem -Id 47, 48 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                ($Uri -like "*workitems/47*" -or $Uri -like "*workitems/48*")
             }
@@ -81,7 +81,7 @@ InModuleScope VSTeam {
             Remove-VSTeamWorkItem -Id 47, 48 -Destroy -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                ($Uri -like "*workitems/47*" -or $Uri -like "*workitems/48*") -and
                $Uri -like "*destroy=True*"

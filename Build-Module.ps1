@@ -1,29 +1,43 @@
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName="All")]
 param(
    #output path of the build module
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [string]$outputDir = './dist',
 
    # Building help is skipped by default to speed your inner loop.
    # Use this flag to include building the help
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$buildHelp,
 
    # By default the build will not install dependencies
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$installDep,
 
-   # build module will be imported into session
+   # built module will be imported into session
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$ipmo,
 
    # run the scripts with the PS script analyzer
+   [Parameter(ParameterSetName="All")]
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$analyzeScript,
 
    # runs the unit tests
+   [Parameter(ParameterSetName="UnitTest", Mandatory=$true)]
+   [Parameter(ParameterSetName="All")]
    [switch]$runTests,
 
    # can be used to filter the unit test parts that should be run
    # see also: https://github.com/pester/Pester/wiki/Invoke%E2%80%90Pester#testname-alias-name
+   [Parameter(ParameterSetName="UnitTest")]
    [string]$testName,
 
    # outputs the code coverage
+   [Parameter(ParameterSetName="UnitTest")]
    [switch]$codeCoverage
 )
 
@@ -58,8 +72,11 @@ if ($buildHelp.IsPresent) {
    Write-Output 'Creating help files'
    Push-Location
    Set-Location ./.docs
-   ./gen-help.ps1
-   Pop-Location
+   Try {
+      ./gen-help.ps1
+   } Finally {
+      Pop-Location
+   }
 }
 
 Write-Output 'Publishing about help files'
@@ -70,13 +87,14 @@ Copy-Item -Path ./Source/VSTeam.psd1 -Destination "$output/VSTeam.psd1" -Force
 $PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
 Write-Output 'Updating Functions To Export'
 $FunctionsToExport  = @()
-$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"}) 
-$FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName 
+$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"})
+$FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName
 Update-ModuleManifest -Path "$output/VSTeam.psd1" -FunctionsToExport $FunctionsToExport
 
 Write-Output "Publish complete to $output"
 
-#reload the just build module
+
+#reload the just built module
 if ($ipmo.IsPresent -or $runTests.IsPresent) {
 
    #module needs to be unloaded if present
@@ -109,7 +127,7 @@ if ($runTests.IsPresent) {
    }
 
    $pesterArgs = @{
-      Script = '.\unit'  
+      Script = '.\unit'
       OutputFile = 'test-results.xml'
       OutputFormat = 'NUnitXml'
       Show = 'Fails'
@@ -133,6 +151,6 @@ if ($runTests.IsPresent) {
       $pesterArgs.PassThru = $true
    }
 
-   Invoke-Pester @pesterArgs 
+   Invoke-Pester @pesterArgs
 
 }

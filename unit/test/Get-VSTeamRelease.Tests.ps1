@@ -99,7 +99,7 @@ InModuleScope VSTeam {
             Get-VSTeamRelease -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -114,7 +114,7 @@ InModuleScope VSTeam {
             Get-VSTeamRelease -projectName project -expand environments
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
             }
          }
       }
@@ -129,7 +129,7 @@ InModuleScope VSTeam {
             Get-VSTeamRelease
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }

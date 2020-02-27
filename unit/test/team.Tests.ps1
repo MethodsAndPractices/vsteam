@@ -30,6 +30,19 @@ InModuleScope VSTeam {
             Assert-VerifiableMock
          }
       }
+
+      Context 'Invoke-VSTeamRequest AdditionalHeaders' {
+         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+         Mock Invoke-RestMethod { return @() } -Verifiable -ParameterFilter {
+            $Headers["Test"] -eq 'Test'
+         }
+
+         Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON -AdditionalHeaders @{Test = "Test"}
+
+         It 'Should call API' {
+            Assert-VerifiableMock
+         }
+      }
    }
 
    Describe 'Team VSTS' {
@@ -95,14 +108,14 @@ InModuleScope VSTeam {
          It 'Should return all options' {
             Get-VSTeamOption | Should Not Be $null
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/"
+               $Uri -eq "https://dev.azure.com/test/_apis"
             }
          }
 
          It 'Should return release options' {
             Get-VSTeamOption -subDomain vsrm | Should Not Be $null
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/_apis/"
+               $Uri -eq "https://vsrm.dev.azure.com/test/_apis"
             }
          }
       }

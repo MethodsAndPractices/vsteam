@@ -57,7 +57,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -68,7 +68,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -79,7 +79,7 @@ InModuleScope VSTeam {
                 Get-VSTeamPullRequest -ProjectName testproject
 
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests/?api-version=$([VSTeamVersions]::Git)"
+                    $Uri -eq "$([VSTeamVersions]::Account)/testproject/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
                 }
             }
 
@@ -91,6 +91,105 @@ InModuleScope VSTeam {
                 Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                     $Uri -eq "$([VSTeamVersions]::Account)/_apis/git/pullRequests/1?api-version=$([VSTeamVersions]::Git)"
                 }
+            }
+
+            It 'Get-VSTeamPullRequest with All' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               Get-VSTeamPullRequest -ProjectName Test -All
+
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+                  $Uri -like "*Test/_apis/git*" -and
+                  $Uri -like "*status=all*"
+               }
+            }
+
+            It 'Get-VSTeamPullRequest with Status abandoned' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               Get-VSTeamPullRequest -ProjectName Test -Status abandoned
+
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+                  $Uri -like "*Test/_apis/git*" -and
+                  $Uri -like "*status=abandoned*"
+               }
+            }
+
+            It 'Get-VSTeamPullRequest with source branch' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               Get-VSTeamPullRequest -ProjectName Test -SourceBranchRef "refs/heads/mybranch"
+
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+                  $Uri -like "*Test/_apis/git*" -and
+                  $Uri -like "*searchCriteria.sourceRefName=refs/heads/mybranch*"
+               }
+            }
+
+            It 'Get-VSTeamPullRequest with target branch' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               Get-VSTeamPullRequest -ProjectName Test -TargetBranchRef "refs/heads/mybranch"
+
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+                  $Uri -like "*Test/_apis/git*" -and
+                  $Uri -like "*searchCriteria.targetRefName=refs/heads/mybranch*"
+               }
+            }
+
+            It 'Get-VSTeamPullRequest with repository id' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               Get-VSTeamPullRequest -ProjectName Test -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF"
+
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+                  $Uri -like "*Test/_apis/git*" -and
+                  $Uri -like "*repositories/93BBA613-2729-4158-9217-751E952AB4AF*"
+               }
+            }
+
+            
+            It 'Get-VSTeamPullRequest with source repository id' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               Get-VSTeamPullRequest -ProjectName Test -SourceRepositoryId "93BBA613-2729-4158-9217-751E952AB4AF"
+
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+                  $Uri -like "*Test/_apis/git*" -and
+                  $Uri -like "*searchCriteria.sourceRepositoryId=93BBA613-2729-4158-9217-751E952AB4AF*"
+               }
+            }
+
+            It 'Get-VSTeamPullRequest with top and skip' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               Get-VSTeamPullRequest -ProjectName Test -SourceRepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -Top 100 -Skip 200
+
+               Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+                  $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+                  $Uri -like "*Test/_apis/git*" -and
+                  $Uri -like "*searchCriteria.sourceRepositoryId=93BBA613-2729-4158-9217-751E952AB4AF*" -and
+                  $Uri -like "*`$top=100*" -and
+                  $Uri -like "*`$skip=200*"
+               }
+            }
+
+            It 'Get-VSTeamPullRequest with source branch in wrong format throws' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               { Get-VSTeamPullRequest -ProjectName Test -SourceBranchRef "garbage" } | should throw
+            }
+
+            It 'Get-VSTeamPullRequest with target branch in wrong format throws' {
+               Mock Invoke-RestMethod { return $singleResult }
+
+               { Get-VSTeamPullRequest -ProjectName Test -TargetBranchRef "garbage" } | should throw
             }
 
             It 'Get-VSTeamPullRequest No Votes should be Pending Status' {
