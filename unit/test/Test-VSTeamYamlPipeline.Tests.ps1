@@ -34,7 +34,7 @@ InModuleScope VSTeam {
 
                $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-               $Body -like '*"PreviewRun":  true*' -and
+               $Body -like '*"PreviewRun":*true*' -and
                $Body -notlike '*YamlOverride*'
             }
          }
@@ -47,7 +47,7 @@ InModuleScope VSTeam {
 
                $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-               $Body -like '*"PreviewRun":  true*' -and
+               $Body -like '*"PreviewRun":*true*' -and
                $Body -like '*YamlOverride*'
             }
          }
@@ -61,7 +61,7 @@ InModuleScope VSTeam {
 
                $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-               $Body -like '*"PreviewRun":  true*' -and
+               $Body -like '*"PreviewRun":*true*' -and
                $Body -like '*YamlOverride*'
             }
          }
