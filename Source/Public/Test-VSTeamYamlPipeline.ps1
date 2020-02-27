@@ -31,7 +31,7 @@ function Test-VSTeamYamlPipeline {
       try {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'pipelines' -Resource "$PipelineId" -id "runs" `
-            -Method Post -ContentType 'application/json' -Body ($body | ConvertTo-Json) `
+            -Method Post -ContentType 'application/json; charset=utf-8' -Body ($body | ConvertTo-Json) `
             -Version $([VSTeamVersions]::Build)
       }
       catch {
