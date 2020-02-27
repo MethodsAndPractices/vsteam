@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.5
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/272) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Add Test-VSTeamYamlPipeline to preview check changes for YAML pipelines. [See release spront 165](https://docs.microsoft.com/en-us/azure/devops/release-notes/2020/sprint-165-update#azure-pipelines-1).
+
 ## 6.4.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/257) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
