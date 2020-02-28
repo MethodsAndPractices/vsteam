@@ -1,4 +1,4 @@
-. $PSScriptRoot\vsteam.functions.ps1 
+. $PSScriptRoot\vsteam.functions.ps1
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {
    # Make sure the value in the environment variable still exisits.
@@ -13,5 +13,5 @@ if ($null -ne $env:TEAM_PROJECT) {
 # Load the correct version of the environment variable
 Set-VSTeamAPIVersion -Target $([VSTeamVersions]::Version)
 
-
-get-command _getProcesses,_getProjects,_getWorkItemTypes  | ForEach-Object { $_.Visibility =  [System.Management.Automation.SessionStateEntryVisibility]::Private}
+#These need to be exported to make them accessible in classes but we don't want them to be usable from the command line.
+Get-Command _getProcesses,_getProjects,_getWorkItemTypes,_callApi  | ForEach-Object { $_.Visibility =  [System.Management.Automation.SessionStateEntryVisibility]::Private}
