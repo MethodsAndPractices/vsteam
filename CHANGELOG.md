@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.5
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/273) from [Lukas Wöhrl](https://github.com/woehrl01) which included the following:
+
+Adds a new function Update-VSTeamAgent which allows to update the agent version
+
 ## 6.4.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/257) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
