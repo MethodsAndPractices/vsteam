@@ -15,7 +15,9 @@ function Get-VSTeamBuildArtifact {
             $item.PSObject.TypeNames.Insert(0, "Team.Build.Artifact")
             if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource) {
                 $item.resource.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource')
-                $item.resource.properties.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource.Properties')
+                if (Get-member -InputObject $item.resource -Name "properties") {
+                  $item.resource.properties.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource.Properties')
+                }
             }
         }
         Write-Output $resp.value
