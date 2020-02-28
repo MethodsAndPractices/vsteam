@@ -35,7 +35,7 @@ begin {
     else {  throw "'No build definition was given. Use Get-VSTeamBuildDefinition to get a list of builds"  ; return}
     if ($QueueName) {
         $queueId = (Get-VSTeamQueue -ProjectName "$ProjectName" -queueName "$QueueName").id
-        if ($queueId) {
+        if (-not ($env:Testing -or $queueId)) {
             throw "'$QueueName' is not a valid Queue. Use Get-VSTeamQueue to get a list of queues"  ; return
         }
         else {$body["queue"] =  @{id = $queueId }}

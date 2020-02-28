@@ -99,10 +99,10 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
 
    #module needs to be unloaded if present
    if((Get-Module VSTeam)){
-      Remove-Module VSTeam
+      Remove-Module VSTeam  -Force
    }
-
-   Import-Module "$output/VSTeam.psd1" -Force
+   $env:testing = $true
+   Import-Module "$output/VSTeam.psd1"  -Global -Force
    Set-VSTeamAlias
 }
 
@@ -122,7 +122,7 @@ if ($analyzeScript.IsPresent) {
 
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
-   if ($null -eq $(Get-Module -Name Pester)) {
+   if ($null -eq $(Get-Module -ListAvailable Pester)) {
       Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 

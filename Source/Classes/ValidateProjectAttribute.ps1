@@ -5,7 +5,7 @@ class ValidateProjectAttribute :  System.Management.Automation.ValidateArguments
             [VSTeamProjectCache]::projects  =  _getProjects
             [VSTeamProjectCache]::timestamp = (get-date).TimeOfDay.TotalMinutes
         }
-        if ($arguments -notin [VSTeamProjectCache]::projects) {
+        if (-not ($Env:Testing -or $arguments -in [VSTeamProjectCache]::projects)) {
             throw [System.Management.Automation.ValidationMetadataException]::new(
                     "'$arguments' is not a valid project. Valid projects are: '" + 
                     ([VSTeamProjectCache]::projects -join "', '") + "'"  )

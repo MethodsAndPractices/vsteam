@@ -48,5 +48,10 @@
       "vsrm",
       "vssgp",
       "vssps"
+   ],
+   "terminal.integrated.commandsToSkipShell": [
+      "PowerShell.RunSelection",
+      "workbench.action.files.save",
+      "workbench.action.files.newUntitled"
    ]
 }

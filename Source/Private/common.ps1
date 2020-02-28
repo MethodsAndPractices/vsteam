@@ -57,7 +57,7 @@ function _testAdministrator {
 }
 
 function _hasAccount {
-   if (-not [VSTeamVersions]::Account) {
+   if (-not ($Env:Testing -or [VSTeamVersions]::Account)) {
       throw 'You must call Set-VSTeamAccount before calling any other functions in this module.'
    }
 }
