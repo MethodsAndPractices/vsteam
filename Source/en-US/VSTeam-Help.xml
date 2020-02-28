@@ -3572,6 +3572,294 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Add-VSTeamPullRequest</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>VSTeamPullRequest</command:noun>
+      <maml:description>
+        <maml:para>Create a new Pull Request</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Create a new Pull Request</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-VSTeamPullRequest</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the ID of the repository</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SourceRefName</maml:name>
+          <maml:Description>
+            <maml:para>A source reference, like a branch or commit Needs to be in ref format like refs/heads/MyBranch</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>TargetRefName</maml:name>
+          <maml:Description>
+            <maml:para>A target reference, like a branch or commit Needs to be in ref format like refs/heads/MyBranch</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Title</maml:name>
+          <maml:Description>
+            <maml:para>The title of the pull request</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Description</maml:name>
+          <maml:Description>
+            <maml:para>The description of the pull request</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Draft</maml:name>
+          <maml:Description>
+            <maml:para>Mark the new pull request as a draft</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the function without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
+        <maml:name>RepositoryId</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the ID of the repository</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SourceRefName</maml:name>
+        <maml:Description>
+          <maml:para>A source reference, like a branch or commit Needs to be in ref format like refs/heads/MyBranch</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>TargetRefName</maml:name>
+        <maml:Description>
+          <maml:para>A target reference, like a branch or commit Needs to be in ref format like refs/heads/MyBranch</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Title</maml:name>
+        <maml:Description>
+          <maml:para>The title of the pull request</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Description</maml:name>
+        <maml:Description>
+          <maml:para>The description of the pull request</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Draft</maml:name>
+        <maml:Description>
+          <maml:para>Mark the new pull request as a draft</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the function without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Team.PullRequest</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+PS C:\&gt; $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
+PS C:\&gt; Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.RepositoryId -SourceRefName "refs/heads/mybranch" -TargetRefName "refs/heads/master" -Title "My PR" -Description "My Description" -Draft</dev:code>
+        <dev:remarks>
+          <maml:para>Create a new pull request as a draft</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Add-VSTeamRelease</command:name>
       <command:verb>Add</command:verb>
       <command:noun>VSTeamRelease</command:noun>
@@ -5080,6 +5368,44 @@ Add-VSTeamTaskGroup -Body $taskGroupJson -ProjectName "destinationProjectName"</
           </dev:type>
           <dev:defaultValue>ProjectContributor</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>LicensingSource</maml:name>
+          <maml:Description>
+            <maml:para>Licensing Source (e.g. Account. MSDN etc.). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- account</maml:para>
+            <maml:para>- auto</maml:para>
+            <maml:para>- msdn</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- profile</maml:para>
+            <maml:para>- trial</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>account</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>MSDNLicenseType</maml:name>
+          <maml:Description>
+            <maml:para>Type of MSDN License (e.g. Visual Studio Professional, Visual Studio Enterprise etc.). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- eligible</maml:para>
+            <maml:para>- enterprise</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- platforms</maml:para>
+            <maml:para>- premium</maml:para>
+            <maml:para>- professional</maml:para>
+            <maml:para>- testProfessional</maml:para>
+            <maml:para>- ultimate</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>none</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -5131,6 +5457,44 @@ Add-VSTeamTaskGroup -Body $taskGroupJson -ProjectName "destinationProjectName"</
           <maml:uri />
         </dev:type>
         <dev:defaultValue>ProjectContributor</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>LicensingSource</maml:name>
+        <maml:Description>
+          <maml:para>Licensing Source (e.g. Account. MSDN etc.). The acceptable values for this parameter are:</maml:para>
+          <maml:para>- account</maml:para>
+          <maml:para>- auto</maml:para>
+          <maml:para>- msdn</maml:para>
+          <maml:para>- none</maml:para>
+          <maml:para>- profile</maml:para>
+          <maml:para>- trial</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>account</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>MSDNLicenseType</maml:name>
+        <maml:Description>
+          <maml:para>Type of MSDN License (e.g. Visual Studio Professional, Visual Studio Enterprise etc.). The acceptable values for this parameter are:</maml:para>
+          <maml:para>- eligible</maml:para>
+          <maml:para>- enterprise</maml:para>
+          <maml:para>- none</maml:para>
+          <maml:para>- platforms</maml:para>
+          <maml:para>- premium</maml:para>
+          <maml:para>- professional</maml:para>
+          <maml:para>- testProfessional</maml:para>
+          <maml:para>- ultimate</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -8763,6 +9127,1240 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamGitCommit</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamGitCommit</command:noun>
+      <maml:description>
+        <maml:para>Retrieve git commits for a project</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-VSTeamGitCommit function gets the commits for a git repository.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGitCommit</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id or friendly name of the repository. To use the friendly name, projectId must also be specified.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FromDate</maml:name>
+          <maml:Description>
+            <maml:para>If provided, only include history entries created after this date (string)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ToDate</maml:name>
+          <maml:Description>
+            <maml:para>If provided, only include history entries created before this date (string)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersion</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersion</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FromCommitId</maml:name>
+          <maml:Description>
+            <maml:para>If provided, a lower bound for filtering commits alphabetically</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ToCommitId</maml:name>
+          <maml:Description>
+            <maml:para>If provided, an upper bound for filtering commits alphabetically</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Author</maml:name>
+          <maml:Description>
+            <maml:para>Alias or display name of the author</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemPath</maml:name>
+          <maml:Description>
+            <maml:para>Path of item to search under</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ExcludeDeletes</maml:name>
+          <maml:Description>
+            <maml:para>Only applies when an itemPath is specified. This determines whether to exclude delete entries of the specified path.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>Maximum number of entries to retrieve</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>Number of entries to skip</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:Description>
+            <maml:para>Alias or display name of the committer</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGitCommit</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id or friendly name of the repository. To use the friendly name, projectId must also be specified.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FromDate</maml:name>
+          <maml:Description>
+            <maml:para>If provided, only include history entries created after this date (string)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ToDate</maml:name>
+          <maml:Description>
+            <maml:para>If provided, only include history entries created before this date (string)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersion</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersion</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FromCommitId</maml:name>
+          <maml:Description>
+            <maml:para>If provided, a lower bound for filtering commits alphabetically</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ToCommitId</maml:name>
+          <maml:Description>
+            <maml:para>If provided, an upper bound for filtering commits alphabetically</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Author</maml:name>
+          <maml:Description>
+            <maml:para>Alias or display name of the author</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>Maximum number of entries to retrieve</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>Number of entries to skip</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:Description>
+            <maml:para>Alias or display name of the committer</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGitCommit</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id or friendly name of the repository. To use the friendly name, projectId must also be specified.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FromDate</maml:name>
+          <maml:Description>
+            <maml:para>If provided, only include history entries created after this date (string)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ToDate</maml:name>
+          <maml:Description>
+            <maml:para>If provided, only include history entries created before this date (string)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersion</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersion</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FromCommitId</maml:name>
+          <maml:Description>
+            <maml:para>If provided, a lower bound for filtering commits alphabetically</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ToCommitId</maml:name>
+          <maml:Description>
+            <maml:para>If provided, an upper bound for filtering commits alphabetically</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Author</maml:name>
+          <maml:Description>
+            <maml:para>Alias or display name of the author</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>Maximum number of entries to retrieve</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>Number of entries to skip</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:Description>
+            <maml:para>Alias or display name of the committer</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGitCommit</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id or friendly name of the repository. To use the friendly name, projectId must also be specified.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FromDate</maml:name>
+          <maml:Description>
+            <maml:para>If provided, only include history entries created after this date (string)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ToDate</maml:name>
+          <maml:Description>
+            <maml:para>If provided, only include history entries created before this date (string)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersion</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemVersionVersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersion</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit). The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>CompareVersionVersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FromCommitId</maml:name>
+          <maml:Description>
+            <maml:para>If provided, a lower bound for filtering commits alphabetically</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ToCommitId</maml:name>
+          <maml:Description>
+            <maml:para>If provided, an upper bound for filtering commits alphabetically</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Author</maml:name>
+          <maml:Description>
+            <maml:para>Alias or display name of the author</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ItemPath</maml:name>
+          <maml:Description>
+            <maml:para>Path of item to search under</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ExcludeDeletes</maml:name>
+          <maml:Description>
+            <maml:para>Only applies when an itemPath is specified. This determines whether to exclude delete entries of the specified path.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>Maximum number of entries to retrieve</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>Number of entries to skip</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>HistoryMode</maml:name>
+          <maml:Description>
+            <maml:para>What Git history mode should be used. This only applies to the search criteria when Ids = null and an itemPath is specified. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- fullHistory</maml:para>
+            <maml:para>- fullHistorySimplifyMerges</maml:para>
+            <maml:para>- simplifiedHistory</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:Description>
+            <maml:para>Alias or display name of the committer</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGitCommit</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id or friendly name of the repository. To use the friendly name, projectId must also be specified.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Ids</maml:name>
+          <maml:Description>
+            <maml:para>If provided, specifies the exact commit ids of the commits to fetch. May not be combined with other parameters.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="none">
+        <maml:name>RepositoryId</maml:name>
+        <maml:Description>
+          <maml:para>The id or friendly name of the repository. To use the friendly name, projectId must also be specified.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>FromDate</maml:name>
+        <maml:Description>
+          <maml:para>If provided, only include history entries created after this date (string)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ToDate</maml:name>
+        <maml:Description>
+          <maml:para>If provided, only include history entries created before this date (string)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ItemVersionVersionType</maml:name>
+        <maml:Description>
+          <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- branch</maml:para>
+          <maml:para>- commit</maml:para>
+          <maml:para>- tag</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ItemVersionVersion</maml:name>
+        <maml:Description>
+          <maml:para>Version string identifier (name of tag/branch, SHA1 of commit)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ItemVersionVersionOptions</maml:name>
+        <maml:Description>
+          <maml:para>Version options - Specify additional modifiers to version (e.g Previous). The acceptable values for this parameter are:</maml:para>
+          <maml:para>- firstParent</maml:para>
+          <maml:para>- none</maml:para>
+          <maml:para>- previousChange</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>CompareVersionVersionType</maml:name>
+        <maml:Description>
+          <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- branch</maml:para>
+          <maml:para>- commit</maml:para>
+          <maml:para>- tag</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>CompareVersionVersion</maml:name>
+        <maml:Description>
+          <maml:para>Version string identifier (name of tag/branch, SHA1 of commit). The acceptable values for this parameter are:</maml:para>
+          <maml:para>- firstParent</maml:para>
+          <maml:para>- none</maml:para>
+          <maml:para>- previousChange</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>CompareVersionVersionOptions</maml:name>
+        <maml:Description>
+          <maml:para>Version options - Specify additional modifiers to version (e.g Previous)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>FromCommitId</maml:name>
+        <maml:Description>
+          <maml:para>If provided, a lower bound for filtering commits alphabetically</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ToCommitId</maml:name>
+        <maml:Description>
+          <maml:para>If provided, an upper bound for filtering commits alphabetically</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Author</maml:name>
+        <maml:Description>
+          <maml:para>Alias or display name of the author</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Ids</maml:name>
+        <maml:Description>
+          <maml:para>If provided, specifies the exact commit ids of the commits to fetch. May not be combined with other parameters.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ItemPath</maml:name>
+        <maml:Description>
+          <maml:para>Path of item to search under</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ExcludeDeletes</maml:name>
+        <maml:Description>
+          <maml:para>Only applies when an itemPath is specified. This determines whether to exclude delete entries of the specified path.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Top</maml:name>
+        <maml:Description>
+          <maml:para>Maximum number of entries to retrieve</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Skip</maml:name>
+        <maml:Description>
+          <maml:para>Number of entries to skip</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>HistoryMode</maml:name>
+        <maml:Description>
+          <maml:para>What Git history mode should be used. This only applies to the search criteria when Ids = null and an itemPath is specified. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- firstParent</maml:para>
+          <maml:para>- fullHistory</maml:para>
+          <maml:para>- fullHistorySimplifyMerges</maml:para>
+          <maml:para>- simplifiedHistory</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:Description>
+          <maml:para>Alias or display name of the committer</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets commits.</maml:para>
+        <maml:para>You can tab complete from a list of available projects.</maml:para>
+        <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        <maml:para>You can pipe a repository ID to this function.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamGitCommit -ProjectName demo -RepositoryId 118C262F-0D4C-4B76-BD9B-7DD8CA12F196</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of all commits in the demo project for a specific repository.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamGitRef</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamGitRef</command:noun>
@@ -8802,6 +10400,54 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Filter</maml:name>
+          <maml:Description>
+            <maml:para>A filter to apply to the refs (starts with).</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+          <dev:type>
+            <maml:name>string</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FilterContains</maml:name>
+          <maml:Description>
+            <maml:para>A filter to apply to the refs (contains). (Azure DevOps Service and Azure DevOps Server 2019+ only)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+          <dev:type>
+            <maml:name>string</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>Maximum number of refs to return. It cannot be bigger than 1000. If it is not provided but continuationToken is, top will default to 100. (Azure DevOps Service and Azure DevOps Server 2019+ only)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+          <dev:type>
+            <maml:name>int</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ContinuationToken</maml:name>
+          <maml:Description>
+            <maml:para>The continuation token used for pagination. (Azure DevOps Service and Azure DevOps Server 2019+ only)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+          <dev:type>
+            <maml:name>string</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -8827,6 +10473,54 @@ ID Title          Status
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
           <maml:name>Guid</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Filter</maml:name>
+        <maml:Description>
+          <maml:para>A filter to apply to the refs (starts with).</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>FilterContains</maml:name>
+        <maml:Description>
+          <maml:para>A filter to apply to the refs (contains). (Azure DevOps Service and Azure DevOps Server 2019+ only)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Top</maml:name>
+        <maml:Description>
+          <maml:para>Maximum number of refs to return. It cannot be bigger than 1000. If it is not provided but continuationToken is, top will default to 100. (Azure DevOps Service and Azure DevOps Server 2019+ only)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ContinuationToken</maml:name>
+        <maml:Description>
+          <maml:para>The continuation token used for pagination. (Azure DevOps Service and Azure DevOps Server 2019+ only)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -8997,6 +10691,217 @@ ID Title          Status
         <dev:code>PS C:\&gt; git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteUrl)</dev:code>
         <dev:remarks>
           <maml:para>This command gets the remote URL and passes it to git clone command.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-VSTeamGitStat</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamGitStat</command:noun>
+      <maml:description>
+        <maml:para>Retrieves statistics about branches within a repository.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Retrieves statistics about branches within a repository.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamGitStat</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="ID">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the ID of the repository.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>BranchName</maml:name>
+          <maml:Description>
+            <maml:para>Name of the branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>VersionOptions</maml:name>
+          <maml:Description>
+            <maml:para>Version options - Specify additional modifiers to version (e.g Previous). Valid options for this parameter are:</maml:para>
+            <maml:para>- firstParent</maml:para>
+            <maml:para>- none</maml:para>
+            <maml:para>- previousChange</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Version</maml:name>
+          <maml:Description>
+            <maml:para>Version string identifier (name of tag/branch, SHA1 of commit)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>VersionType</maml:name>
+          <maml:Description>
+            <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. Valid options for this parameter are:</maml:para>
+            <maml:para>- branch</maml:para>
+            <maml:para>- commit</maml:para>
+            <maml:para>- tag</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="ID">
+        <maml:name>RepositoryId</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the ID of the repository.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>BranchName</maml:name>
+        <maml:Description>
+          <maml:para>Name of the branch.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>VersionOptions</maml:name>
+        <maml:Description>
+          <maml:para>Version options - Specify additional modifiers to version (e.g Previous). Valid options for this parameter are:</maml:para>
+          <maml:para>- firstParent</maml:para>
+          <maml:para>- none</maml:para>
+          <maml:para>- previousChange</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Version</maml:name>
+        <maml:Description>
+          <maml:para>Version string identifier (name of tag/branch, SHA1 of commit)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>VersionType</maml:name>
+        <maml:Description>
+          <maml:para>Version type (branch, tag, or commit). Determines how Id is interpreted. Valid options for this parameter are:</maml:para>
+          <maml:para>- branch</maml:para>
+          <maml:para>- commit</maml:para>
+          <maml:para>- tag</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all the Git stats for the entire repository</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all the Git stats for a specific branch</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop -VersionType branch -Version 67cae2b029dff7eb3dc062b49403aaedca5bad8d</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all the Git stats for a specific commit</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -10657,6 +12562,212 @@ ID Title          Status
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamPullRequest</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The repository ID of the pull request's target branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SourceRepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>If set, search for pull requests whose source branch is in this repository.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SourceBranchRef</maml:name>
+          <maml:Description>
+            <maml:para>If set, search for pull requests from this branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>TargetBranchRef</maml:name>
+          <maml:Description>
+            <maml:para>If set, search for pull requests into this branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Status</maml:name>
+          <maml:Description>
+            <maml:para>If set, search for pull requests that are in this state. Defaults to Active if unset. Valid values for this parameter are:</maml:para>
+            <maml:para>- abandoned</maml:para>
+            <maml:para>- active</maml:para>
+            <maml:para>- all</maml:para>
+            <maml:para>- completed</maml:para>
+            <maml:para>- notSet</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>The number of pull requests to retrieve.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>The number of pull requests to ignore. For example, to retrieve results 101-150, set top to 50 and skip to 100.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamPullRequest</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The repository ID of the pull request's target branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SourceRepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>If set, search for pull requests whose source branch is in this repository.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>SourceBranchRef</maml:name>
+          <maml:Description>
+            <maml:para>If set, search for pull requests from this branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>TargetBranchRef</maml:name>
+          <maml:Description>
+            <maml:para>If set, search for pull requests into this branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>All</maml:name>
+          <maml:Description>
+            <maml:para></maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Top</maml:name>
+          <maml:Description>
+            <maml:para>The number of pull requests to retrieve.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>The number of pull requests to ignore. For example, to retrieve results 101-150, set top to 50 and skip to 100.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
@@ -10681,6 +12792,107 @@ ID Title          Status
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>RepositoryId</maml:name>
+        <maml:Description>
+          <maml:para>The repository ID of the pull request's target branch.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SourceRepositoryId</maml:name>
+        <maml:Description>
+          <maml:para>If set, search for pull requests whose source branch is in this repository.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>SourceBranchRef</maml:name>
+        <maml:Description>
+          <maml:para>If set, search for pull requests from this branch.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>TargetBranchRef</maml:name>
+        <maml:Description>
+          <maml:para>If set, search for pull requests into this branch.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Status</maml:name>
+        <maml:Description>
+          <maml:para>If set, search for pull requests that are in this state. Defaults to Active if unset. Valid values for this parameter are:</maml:para>
+          <maml:para>- abandoned</maml:para>
+          <maml:para>- active</maml:para>
+          <maml:para>- all</maml:para>
+          <maml:para>- completed</maml:para>
+          <maml:para>- notSet</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>All</maml:name>
+        <maml:Description>
+          <maml:para></maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Top</maml:name>
+        <maml:Description>
+          <maml:para>The number of pull requests to retrieve.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Skip</maml:name>
+        <maml:Description>
+          <maml:para>The number of pull requests to ignore. For example, to retrieve results 101-150, set top to 50 and skip to 100.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -10710,6 +12922,20 @@ ID Title          Status
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamPullRequest -ProjectName Demo -All</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all pull requests for the Demo team project.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamPullRequest -ProjectName Demo -TargetBranchRef "refs/heads/mybranch"</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns all open pull requests for a specific branch</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest -Id 123</dev:code>
         <dev:remarks>
           <maml:para>This command gets the pull request with an Id of 123.</maml:para>
@@ -10719,6 +12945,14 @@ ID Title          Status
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Show-VSTeamPullRequest</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Add-VSTeamPullRequest</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Update-VSTeamPullRequest</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -13503,6 +15737,18 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AdditionalHeaders</maml:name>
+          <maml:Description>
+            <maml:para>Adds additional headers to the request</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <dev:type>
+            <maml:name>Hashtable</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -13665,6 +15911,18 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AdditionalHeaders</maml:name>
+        <maml:Description>
+          <maml:para>Adds additional headers to the request</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -20710,6 +22968,545 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <dev:code>PS C:\&gt; Update-VSTeamProject -Name Demo -NewName aspDemo</dev:code>
         <dev:remarks>
           <maml:para>This command changes the name of your project from Demo to aspDemo.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-VSTeamPullRequest</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>VSTeamPullRequest</command:noun>
+      <maml:description>
+        <maml:para>Update a pull request</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Update a pull request</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamPullRequest</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the repository</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PullRequestId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the pull request</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Draft</maml:name>
+          <maml:Description>
+            <maml:para>Set the pull request as a draft</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the function without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamPullRequest</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the repository</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PullRequestId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the pull request</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the function without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamPullRequest</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the repository</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PullRequestId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the pull request</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Status</maml:name>
+          <maml:Description>
+            <maml:para>The status to set the pull request to. Valid values for this are:</maml:para>
+            <maml:para>- abandoned</maml:para>
+            <maml:para>- active</maml:para>
+            <maml:para>- completed</maml:para>
+            <maml:para>- notSet</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the function without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamPullRequest</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the repository</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PullRequestId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the pull request</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>EnableAutoComplete</maml:name>
+          <maml:Description>
+            <maml:para>Set the pull requests auto complete status</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AutoCompleteIdentity</maml:name>
+          <maml:Description>
+            <maml:para>The identity that enabled autocomplete. This is mandatory if -AutoComplete is set to $true</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
+          <dev:type>
+            <maml:name>VSTeamUser</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the function without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-VSTeamPullRequest</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the repository</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>PullRequestId</maml:name>
+          <maml:Description>
+            <maml:para>The id of the pull request</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>DisableAutoComplete</maml:name>
+          <maml:Description>
+            <maml:para>Unset the pull requests auto complete status</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the function without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="Id">
+        <maml:name>RepositoryId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the repository</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>PullRequestId</maml:name>
+        <maml:Description>
+          <maml:para>The id of the pull request</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Status</maml:name>
+        <maml:Description>
+          <maml:para>The status to set the pull request to. Valid values for this are:</maml:para>
+          <maml:para>- abandoned</maml:para>
+          <maml:para>- active</maml:para>
+          <maml:para>- completed</maml:para>
+          <maml:para>- notSet</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>EnableAutoComplete</maml:name>
+        <maml:Description>
+          <maml:para>Set the pull requests auto complete status</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AutoCompleteIdentity</maml:name>
+        <maml:Description>
+          <maml:para>The identity that enabled autocomplete. This is mandatory if -AutoComplete is set to $true</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">VSTeamUser</command:parameterValue>
+        <dev:type>
+          <maml:name>VSTeamUser</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>DisableAutoComplete</maml:name>
+        <maml:Description>
+          <maml:para>Unset the pull requests auto complete status</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Draft</maml:name>
+        <maml:Description>
+          <maml:para>Set the pull request as a draft</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the function without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Team.PullRequest</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+PS C:\&gt; $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
+PS C:\&gt; Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Draft</dev:code>
+        <dev:remarks>
+          <maml:para>Set the pull request to be a draft</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+PS C:\&gt; $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
+PS C:\&gt; Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abandoned</dev:code>
+        <dev:remarks>
+          <maml:para>Abandon a pull request</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

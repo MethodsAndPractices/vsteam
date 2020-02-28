@@ -16,6 +16,8 @@ function Invoke-VSTeamRequest {
       [string]$ContentType,
       [string]$Url,
       [hashtable]$AdditionalHeaders,
+      [object]$QueryString,
+      [string]$Team,
       [Parameter( Position = 0 )]
       [ValidateProject()]
       [ArgumentCompleter([ProjectCompleter])]
