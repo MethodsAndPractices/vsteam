@@ -139,7 +139,9 @@ InModuleScope VSTeam {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
-               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/messages?api-version=$([VSTeamVersions]::DistributedTask)&agentId=950"
+               $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/36/messages*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
+               $Uri -like "*agentId=950*"
             }
          }
       }
@@ -148,7 +150,7 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod { throw 'boom' }
 
          It 'should update the agent with passed in Id' {
-            { Disable-VSTeamAgent -Pool 36 -Id 950 } | Should Throw
+            { Update-VSTeamAgent -Pool 36 -Id 950 } | Should Throw
          }
       }
    }
