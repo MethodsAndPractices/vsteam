@@ -107,12 +107,10 @@ $securityNamespace =
     "systemBitMask":  0
 }
 "@ | ConvertFrom-Json
-
     Describe 'AccessControlEntry VSTS'{
         # You have to set the version or the api-version will not be Removed when
         # [VSTeamVersions]::Core = ''
         [VSTeamVersions]::Core = '5.1'
-
 
         Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
 

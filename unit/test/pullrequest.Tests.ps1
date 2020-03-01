@@ -154,7 +154,6 @@ InModuleScope VSTeam {
                }
             }
 
-
             It 'Get-VSTeamPullRequest with source repository id' {
                Mock Invoke-RestMethod { return $singleResult }
 

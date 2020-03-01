@@ -111,4 +111,3 @@ Describe 'Get-VSTeamPermissionInheritance' {
       }
    }
 }
-

@@ -6,4 +6,4 @@
 
 - [ ] [Write Help](https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#write-help)
 - [ ] [Write Unit Test](https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#write-unit-test)
-- [ ] [Update CHANGELOG.md](https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#add-a-format-file)
+- [ ] [Update CHANGELOG.md](https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#update-changelogmd)
