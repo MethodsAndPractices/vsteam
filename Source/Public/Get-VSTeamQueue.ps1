@@ -15,7 +15,7 @@ function Get-VSTeamQueue {
         $ProjectName
     )
     process {
-                if ($id) {
+         if ($id) {
             $resp = _callAPI -ProjectName $ProjectName -Id $id -Area distributedtask -Resource queues `
                 -Version $([VSTeamVersions]::DistributedTask)
             $item = [VSTeamQueue]::new($resp, $ProjectName)

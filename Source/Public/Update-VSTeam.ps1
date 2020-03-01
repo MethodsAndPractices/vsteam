@@ -7,13 +7,13 @@ function Update-VSTeam {
         [string]$NewTeamName,
         [string]$Description,
         [switch] $Force,
-        [Parameter(Mandatory=$true, Position = 0 )]
+        [Parameter(Mandatory=$true, Position = 0 , ValueFromPipelineByPropertyName = $true)]
         [ValidateProject()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )
     process {
-                if (-not $NewTeamName -and -not $Description) {
+         if (-not $NewTeamName -and -not $Description) {
             throw 'You must provide a new team name or description, or both.'
         }
         if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-VSTeam")) {

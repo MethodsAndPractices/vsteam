@@ -9,32 +9,24 @@ $profilesPath = "$HOME/vsteam_profiles.json"
 
 function _supportsGraph {
    _hasAccount
-   if ($false -eq $(_testGraphSupport)) {
+   if (-not [VSTeamVersions]::Graph ) {
       throw 'This account does not support the graph API.'
    }
 }
 
 function _testGraphSupport {
-   if (-not [VSTeamVersions]::Graph) {
-      return $false
-   }
-
-   return $true
+   [VSTeamVersions]::Graph -as [boolean]
 }
 
 function _supportsFeeds {
    _hasAccount
-   if ($false -eq $(_testFeedSupport)) {
+   if (-not [VSTeamVersions]::Packaging) {
       throw 'This account does not support packages.'
    }
 }
 
 function _testFeedSupport {
-   if (-not [VSTeamVersions]::Packaging) {
-      return $false
-   }
-
-   return $true
+   [VSTeamVersions]::Packaging  -as [Boolean]
 }
 
 function _supportsSecurityNamespace {
@@ -71,18 +63,12 @@ function _buildRequestURI {
       [string]$id,
       [string]$version,
       [string]$subDomain,
-      [object]$queryString
+      [object]$queryString,
+      [ValidateProject()]
+      $ProjectName
    )
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $false
-   }
 
    process {
-      _hasAccount
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $sb = New-Object System.Text.StringBuilder
 
       $sb.Append($(_addSubDomain -subDomain $subDomain)) | Out-Null
@@ -642,7 +628,7 @@ function _callAPI {
          $params['Headers'].Add($key, $AdditionalHeaders[$key])
       }
    }
-   
+
    # We have to remove any extra parameters not used by Invoke-RestMethod
    $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }

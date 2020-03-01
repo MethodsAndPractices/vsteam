@@ -10,7 +10,7 @@ function Remove-VSTeamUserEntitlement {
         [switch]$Force
     )
     process {
-        # Thi swill throw if this account does not support MemberEntitlementManagement
+        # This will throw if this account does not support MemberEntitlementManagement
         _hasAccount
         if (-not [VSTeamVersions]::MemberEntitlementManagement) {
             throw 'This account does not support Member Entitlement.'

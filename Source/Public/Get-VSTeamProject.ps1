@@ -12,7 +12,7 @@ function Get-VSTeamProject {
         [Alias('ProjectID')]
         [string] $Id,
         [switch] $IncludeCapabilities,
-        [Parameter(ParameterSetName = 'ByName', Mandatory=$true)]
+        [Parameter(ParameterSetName = 'ByName', Mandatory=$true,Position=0)]
         [ValidateUncachedProject()]
         [ArgumentCompleter([UncachedProjectCompleter])]
         $Name

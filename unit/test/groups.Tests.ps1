@@ -33,8 +33,8 @@ InModuleScope VSTeam {
             { Get-VSTeamGroup } | Should Throw
          }
 
-         It '_callAPI should be called once to get projects' {
-            Assert-MockCalled _callAPI -Exactly 1
+         It 'Does not fetch Projects when not needed' {
+            Assert-MockCalled _callAPI -Exactly 0
          }
       }
    }

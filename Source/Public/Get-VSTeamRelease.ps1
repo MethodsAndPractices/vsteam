@@ -11,7 +11,7 @@ function Get-VSTeamRelease {
         [Parameter(ParameterSetName = 'List')]
         [ValidateSet('Draft', 'Active', 'Abandoned')]
         [string] $statusFilter,
-        [Parameter(ParameterSetName = 'List')]
+
         [ValidateSet('environments', 'artifacts', 'approvals', 'none')]
         [string] $expand,
         [Parameter(ParameterSetName = 'List')]
@@ -73,7 +73,7 @@ function Get-VSTeamRelease {
                 'minCreatedTime'    = $minCreatedTime
                 'maxCreatedTime'    = $maxCreatedTime
                 'continuationToken' = $continuationToken
-                
+
             }
             # Call the REST API
             $resp = _callAPI -url $listurl -QueryString $QueryString

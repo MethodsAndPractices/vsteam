@@ -9,7 +9,7 @@ function Add-VSTeamFeed {
         [switch] $showDeletedPackageVersions
     )
     process {
-        # Thi swill throw if this account does not support feeds
+        # This will throw if this account does not support feeds
         _hasAccount
         if (-not [VSTeamVersions]::Packaging) {
             throw 'This account does not support packages.'

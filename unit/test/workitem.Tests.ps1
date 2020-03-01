@@ -27,8 +27,8 @@ InModuleScope VSTeam {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
 
-            return $obj
          }
+         Mock -CommandName _CallApi -ParameterFilter {$Url -like "*workitemtypes*"} {'{"value": {"name": "Task"}} ' }
 
          It 'Without Default Project should add work item' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")

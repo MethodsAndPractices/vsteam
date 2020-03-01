@@ -351,7 +351,7 @@ InModuleScope VSTeam {
          It 'should set default project' {
             Set-VSTeamDefaultProject 'MyProject'
 
-            Assert-VerifiableMock
+
             $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
          }
       }

@@ -29,17 +29,15 @@ InModuleScope VSTeam {
 
       $wiqlResult = @{
          querytype       = "flat"
-         queryTypeResult = "worItem"
+         queryResultType = "worItem"
          asOf            = "2019-10-03T18:35:09.117Z"
          columns         = @($column)
          sortColumns     = @($sortColumn)
       workItems       = @($workItem, $workItem)
       }
 
-      $expandedWorkItems = @{
-         count = 1
-       value = @($workItem, $workItem)
-      }
+      $expandedWorkItems = @($workItem, $workItem)
+
 
       Context 'Get-Wiql' {
          Mock Invoke-RestMethod {

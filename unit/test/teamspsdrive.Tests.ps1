@@ -175,19 +175,17 @@ InModuleScope VSTeam {
       }
 
       Context 'VSTeamAccount & Projects' {
-         Mock Get-VSTeamProject { return [VSTeamProject]::new([PSCustomObject]@{
-                  name        = 'TestProject'
-                  description = ''
-                  url         = ''
-                  id          = '123 - 5464-dee43'
-                  state       = ''
-                  visibility  = ''
-                  revision    = 0
-                  defaultTeam = [PSCustomObject]@{}
-                  _links      = [PSCustomObject]@{}
-               }
-            )
-         }
+         Mock -ParameterFilter {$area -eq 'projects'} _callAPI { @{'value'=@([PSCustomObject]@{
+            name        = 'TestProject'
+            description = ''
+            url         = ''
+            id          = '123 - 5464-dee43'
+            state       = ''
+            visibility  = ''
+            revision    = 0
+            defaultTeam = [PSCustomObject]@{}
+            _links      = [PSCustomObject]@{}
+         })}}
 
          Mock Get-VSTeamPool {
             return [PSCustomObject]@{
@@ -238,7 +236,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Agent Pools' {
-         Mock Get-VSTeamPool { return [VSTeamPool]::new(@{
+         Mock  -CommandName _callAPI -ParameterFilter {$area -eq 'distributedtask'}  { @{'value'=@( @{
                   owner     = [PSCustomObject]@{
                      displayName = 'Test User'
                      id          = '1'
@@ -255,9 +253,8 @@ InModuleScope VSTeam {
                   Name      = 'Default'
                }
             )
-         }
-
-         Mock Get-VSTeamAgent { return [VSTeamAgent]::new(@{
+         }}
+         Mock  -CommandName _callAPI -ParameterFilter {$area -like 'distributedtask/pools/*'} { @{'value'=@(@{
                   _links             = [PSCustomObject]@{}
                   createdOn          = '2018-03-28T16:48:58.317Z'
                   maxParallelism     = 1
@@ -268,8 +265,7 @@ InModuleScope VSTeam {
                   osDescription      = 'Linux'
                   name               = 'Test_Agent'
                   systemCapabilities = [PSCustomObject]@{}
-               }, 1
-            )
+               })}
          }
 
          $target = [VSTeamPools]::new('Agent Pools')
@@ -295,9 +291,7 @@ InModuleScope VSTeam {
          $feedResults = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
          $singleResult = $feedResults.value[0]
 
-         Mock Get-VSTeamFeed {
-            return [VSTeamFeed]::new($singleResult)
-         }
+         Mock  -CommandName _callAPI -ParameterFilter {$subDomain -eq 'feeds'} { @{'value'=@($singleResult)}}
 
          $target = [VSTeamFeeds]::new('Feeds')
 
@@ -313,9 +307,12 @@ InModuleScope VSTeam {
       }
 
       Context 'Builds' {
-         Mock Get-VSTeamBuild { return @([PSCustomObject]@{
+         Mock  -CommandName _callAPI -ParameterFilter {$resource -eq 'builds'} { @{'value'=@([PSCustomObject]@{
                   id            = 1
                   description   = ''
+                  logs          = ''
+                  _links        = ''
+                  repository    = ''
                   buildNumber   = '1'
                   status        = 'completed'
                   result        = 'succeeded'
@@ -342,9 +339,7 @@ InModuleScope VSTeam {
                   project       = [PSCustomObject]@{
                      name = 'Test Project'
                   }
-               }
-            )
-         }
+               })}}
 
          $builds = [VSTeamBuilds]::new('TestBuild', 'TestProject')
 
@@ -360,11 +355,11 @@ InModuleScope VSTeam {
       }
 
       Context 'Build Definitions' {
-         Mock Get-VSTeamBuildDefinition { return @(
-               [VSTeamBuildDefinition]::new(@{}, 'TestProject'),
-               [VSTeamBuildDefinition]::new(@{}, 'TestProject')
-            )
-         }
+         #Mock Get-VSTeamBuildDefinition { return @(
+         #      [VSTeamBuildDefinition]::new(@{}, 'TestProject'),
+         #      [VSTeamBuildDefinition]::new(@{}, 'TestProject')
+         #   )
+         #}
 
          $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
 
@@ -378,58 +373,60 @@ InModuleScope VSTeam {
       }
 
       Context 'Releases' {
-         Mock Get-VSTeamRelease { return [PSCustomObject]@{
-               id                = 1
-               name              = 'Release - 007'
-               status            = 'active'
-               createdBy         = [PSCustomObject]@{
-                  displayname = 'Test User'
-                  uniqueName  = 'test@email.com'
-                  id          = '1'
-               }
-               modifiedBy        = [PSCustomObject]@{
-                  displayname = 'Test User'
-                  uniqueName  = 'test@email.com'
-                  id          = '1'
-               }
-               requestedFor      = [PSCustomObject]@{
-                  displayname = ''
-                  uniqueName  = ''
-                  id          = ''
-               }
-               createdOn         = Get-Date
-               releaseDefinition = [PSCustomObject]@{
-                  name = 'Test Release Def'
-               }
-               environments      = @([PSCustomObject]@{
-                     id          = 1
-                     name        = 'Dev'
-                     status      = 'Succeeded'
-                     deploySteps = @([PSCustomObject]@{
-                           id                  = 963
-                           deploymentId        = 350
-                           attempt             = 1
-                           reason              = 'automated'
-                           status              = 'succeeded'
-                           releaseDeployPhases = @([PSCustomObject]@{
-                                 deploymentJobs = @([PSCustomObject]@{
-                                       tasks = @([PSCustomObject]@{
-                                             name   = 'Initialize Job'
-                                             status = 'succeeded'
-                                             id     = 1
-                                             logUrl = ''
-                                          }
-                                       )
-                                    }
-                                 )
-                              }
-                           )
-                        }
-                     )
-                  }
-               )
+         $rel_obj = [PSCustomObject]@{
+            id                = 1
+            name              = 'Release - 007'
+            status            = 'active'
+            "_links"          = [PSCustomObject]@{self='';web=''}
+            createdBy         = [PSCustomObject]@{
+               displayname = 'Test User'
+               uniqueName  = 'test@email.com'
+               id          = '1'
             }
-         }
+            modifiedBy        = [PSCustomObject]@{
+               displayname = 'Test User'
+               uniqueName  = 'test@email.com'
+               id          = '1'
+            }
+            requestedFor      = [PSCustomObject]@{
+               displayname = ''
+               uniqueName  = ''
+               id          = ''
+            }
+            createdOn         = Get-Date
+            releaseDefinition = [PSCustomObject]@{
+               name = 'Test Release Def'
+            }
+            environments      = @([PSCustomObject]@{
+                  id          = 1
+                  name        = 'Dev'
+                  status      = 'Succeeded'
+                  deploySteps = @([PSCustomObject]@{
+                        id                  = 963
+                        deploymentId        = 350
+                        attempt             = 1
+                        reason              = 'automated'
+                        status              = 'succeeded'
+                        releaseDeployPhases = @([PSCustomObject]@{
+                              deploymentJobs = @([PSCustomObject]@{
+                                    tasks = @([PSCustomObject]@{
+                                          name   = 'Initialize Job'
+                                          status = 'succeeded'
+                                          id     = 1
+                                          logUrl = ''
+                                       }
+                                    )
+                                 }
+                              )
+                           }
+                        )
+                     }
+                  )
+               }
+            )}
+
+         Mock  -CommandName _callAPI -ParameterFilter {$url -like '*_apis/release/releases*'} { @{'value'=@($rel_obj)}  }
+         Mock  -CommandName _callAPI -ParameterFilter {$SubDomain -eq 'vsrm' -and $id} {$rel_obj  }
 
          $releases = [VSTeamReleases]::new('Releases', 'TestProject')
 
@@ -467,7 +464,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Repositories' {
-         Mock Get-VSTeamGitRepository { return [VSTeamGitRepository]::new(@{
+         Mock  -CommandName _callAPI -ParameterFilter {$Resource -like 'repositories'} { @{'value'=@([PSCustomObject]@{
                   id            = "fa7b6ac1-0d4c-46cb-8565-8fd49e2031ad"
                   name          = ''
                   url           = ''
@@ -486,10 +483,9 @@ InModuleScope VSTeam {
                      defaultTeam = [PSCustomObject]@{}
                      _links      = [PSCustomObject]@{}
                   }
-               }, 'TestProject')
-         }
+               })}}
 
-         Mock Get-VSTeamGitRef { return [VSTeamRef]::new([PSCustomObject]@{
+         Mock  -CommandName _callAPI -ParameterFilter {$url -like "*git/repositories*/refs*"} {@{'value'= @([PSCustomObject]@{
                   objectId = '6f365a7143e492e911c341451a734401bcacadfd'
                   name     = 'refs/heads/master'
                   creator  = [PSCustomObject]@{
@@ -497,7 +493,7 @@ InModuleScope VSTeam {
                      id          = '1'
                      uniqueName  = 'some@email.com'
                   }
-               }, 'TestProject')
+               })}
          }
 
          $repositories = [VSTeamRepositories]::new('Repositories', 'TestProject')
@@ -520,12 +516,12 @@ InModuleScope VSTeam {
       }
 
       Context 'Teams' {
-         Mock Get-VSTeam { return [VSTeamTeam]::new(@{
+         Mock -CommandName _callAPI -ParameterFilter {$area -eq 'Projects'} { @{'value'=@( [PSCustomObject]@{
                   name        = ''
                   ProjectName = ''
                   description = ''
                   id          = 1
-               }, 'TestProject') }
+               })}}
 
          $teams = [VSTeamTeams]::new('Teams', 'TestProject')
 

@@ -201,7 +201,8 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod { return $singleResult }
 
          It 'Should update the team' {
-            Get-VSTeam -ProjectName TestProject -TeamId "OldTeamName" | Update-VSTeam -NewTeamName "NewTeamName" -Description "New Description"
+           $t=  Get-VSTeam -ProjectName TestProject -TeamId "OldTeamName"
+           $t | Update-VSTeam -NewTeamName "NewTeamName" -Description "New Description"
 
             $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
 
