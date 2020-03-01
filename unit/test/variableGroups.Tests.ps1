@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
@@ -237,13 +238,13 @@ InModuleScope VSTeam {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
          }
-         
+
          It "should create a new var group when passing the json as the body" {
             $body = Get-Content $sampleFileVSTS -Raw
             $projName = "project"
             Add-VSTeamVariableGroup -Body $body -ProjectName $projName
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)" -and
                $Method -eq 'Post' }
          }
@@ -288,7 +289,7 @@ InModuleScope VSTeam {
             $projName = "project"
             $id = "1"
             Update-VSTeamVariableGroup -Body $body -ProjectName $projName -Id $id
-            
+
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups/$($id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
                $Method -eq 'Put'

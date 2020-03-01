@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
@@ -52,11 +53,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Build Definitions' {
-         Mock Get-VSTeamBuildDefinition {
-            return @(
-               [VSTeamBuildDefinition]::new($buildDefResults2017.value[0], 'TestProject')
-            )
-         }
+        Mock  -CommandName _callAPI -ParameterFilter {$Area -eq 'build' -and $Resource -eq 'definitions'} { $buildDefResults2017 }
+
 
          $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
 
@@ -85,11 +83,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Build Definitions' {
-         Mock Get-VSTeamBuildDefinition {
-            return @(
-               [VSTeamBuildDefinition]::new($buildDefResults2018.value[0], 'TestProject')
-            )
-         }
+         Mock  -CommandName _callAPI -ParameterFilter {$Area -eq 'build' -and $Resource -eq 'definitions'} { $buildDefResults2018 }
 
          $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
 
@@ -118,13 +112,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Build Definitions' {
-         Mock Get-VSTeamBuildDefinition {
-            return @(
-               [VSTeamBuildDefinition]::new($buildDefResultsVSTS.value[0], 'TestProject'),
-               [VSTeamBuildDefinition]::new($buildDefResultsyaml.value[0], 'TestProject'),
-               [VSTeamBuildDefinition]::new($buildDefResultsAzD.value[0], 'TestProject')
-            )
-         }
+         Mock  -CommandName _callAPI -ParameterFilter {$Area -eq 'build' -and $Resource -eq 'definitions'} {
+            @{value=@($buildDefResultsVSTS.value[0], $buildDefResultsyaml.value[0], $buildDefResultsAzD.value[0])} }
 
          $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
 
@@ -355,11 +344,11 @@ InModuleScope VSTeam {
       }
 
       Context 'Build Definitions' {
-         #Mock Get-VSTeamBuildDefinition { return @(
-         #      [VSTeamBuildDefinition]::new(@{}, 'TestProject'),
-         #      [VSTeamBuildDefinition]::new(@{}, 'TestProject')
-         #   )
-         #}
+         Mock Get-VSTeamBuildDefinition { return @(
+               [VSTeamBuildDefinition]::new(@{}, 'TestProject'),
+               [VSTeamBuildDefinition]::new(@{}, 'TestProject')
+            )
+         }
 
          $buildDefinitions = [VSTeamBuildDefinitions]::new('Build Definitions', 'TestProject')
 

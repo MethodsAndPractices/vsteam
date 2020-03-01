@@ -3,6 +3,7 @@ Set-StrictMode -Version Latest
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
 
+$env:Testing=$true
 InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    [VSTeamVersions]::Release = '1.0-unittest'
@@ -88,7 +89,7 @@ InModuleScope VSTeam {
             }
          }
       }
-      
+
       Context 'Get-VSTeamRelease with no parameters' {
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod {

@@ -9,7 +9,7 @@ function Get-VSTeamMember {
         [Alias('Name')]
         [Alias('Id')]
         [string] $TeamId,
-        [Parameter(Mandatory=$true, Position = 0 )]
+        [Parameter(Mandatory=$true, Position = 0, ValueFromPipelineByPropertyName = $true )]
         [ValidateProject()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName

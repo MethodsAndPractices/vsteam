@@ -1,10 +1,10 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    Describe "TeamMembers" {
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Context 'Get-VSTeamMember for specific project and team' {
          Mock Invoke-RestMethod { return @{value = 'teams'}}

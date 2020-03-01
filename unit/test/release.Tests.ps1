@@ -3,6 +3,7 @@ Set-StrictMode -Version Latest
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
 
+$env:Testing=$true
 InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    [VSTeamVersions]::Release = '1.0-unittest'
@@ -155,54 +156,9 @@ InModuleScope VSTeam {
             )
          }
 
-         Mock Get-VSTeamBuild {
-            $bld1 = New-Object -TypeName PSObject -Prop @{name = "Bld1"; id = 1}
-            $bld2 = New-Object -TypeName PSObject -Prop @{name = "Bld2"; id = 2}
+         Mock Get-VSTeamBuild {New-Object -TypeName PSObject -Prop @{name = "Bld1"; id = 1} }
 
-            return @(
-               $bld1,
-               $bld2
-            )
-         }
-
-         Mock Invoke-RestMethod {
-            return $singleResult
-         }
-
-         Mock _buildDynamicParam {
-            param(
-               [string] $ParameterName = 'QueueName',
-               [array] $arrSet,
-               [bool] $Mandatory = $false,
-               [string] $ParameterSetName
-            )
-
-            # Create the collection of attributes
-            $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-
-            # Create and set the parameters' attributes
-            $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-            $ParameterAttribute.Mandatory = $Mandatory
-            $ParameterAttribute.ValueFromPipelineByPropertyName = $true
-
-            if ($ParameterSetName) {
-               $ParameterAttribute.ParameterSetName = $ParameterSetName
-            }
-
-            # Add the attributes to the attributes collection
-            $AttributeCollection.Add($ParameterAttribute)
-
-            if ($arrSet) {
-               # Generate and set the ValidateSet
-               $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
-
-               # Add the ValidateSet to the attributes collection
-               $AttributeCollection.Add($ValidateSetAttribute)
-            }
-
-            # Create and return the dynamic parameter
-            return New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
-         }
+         Mock Invoke-RestMethod { return $singleResult }
 
          It 'should add a release' {
             Add-VSTeamRelease -ProjectName project -BuildNumber 'Bld1' -DefinitionName 'Test1'

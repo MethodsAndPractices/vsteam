@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    [VSTeamVersions]::DistributedTask = '1.0-unitTest'

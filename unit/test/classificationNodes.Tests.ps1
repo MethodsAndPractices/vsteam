@@ -1,12 +1,13 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
-   $classificationNodeResult = 
+   $classificationNodeResult =
 @"
 {
    "id": 16,
@@ -81,7 +82,7 @@ InModuleScope VSTeam {
 "@ | ConvertFrom-Json
 
 
-$withoutChildNode = 
+$withoutChildNode =
 @"
 {
    "count": 2,
@@ -123,7 +124,7 @@ $withoutChildNode =
    ]
  }
 "@ | ConvertFrom-Json
-  
+
    Describe 'ClassificationNodes VSTS' {
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''

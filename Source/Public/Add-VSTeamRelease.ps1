@@ -29,10 +29,10 @@ function Add-VSTeamRelease {
     begin {
         if ($BuildNumber) {
             $buildID = (Get-VSTeamBuild -ProjectName $ProjectName -BuildNumber $BuildNumber).id
-            if ($-not $buildID) { throw "'$BuildnNumber' is not a valid build  Use Get-VsTeamBuild to get a list of valid build numbers."}
+            if (-not $buildID) { throw "'$BuildnNumber' is not a valid build  Use Get-VsTeamBuild to get a list of valid build numbers."}
         }
         if ($DefinitionName -and -not $artifactAlias) {
-            $def = Get-VSTeamReleaseDefinition  | Where-Object {$_.name -eq "Release 1.0"}
+            $def = Get-VSTeamReleaseDefinition -ProjectName $ProjectName  | Where-Object {$_.name -eq $DefinitionName}
             $DefinitionId = $def.id
             $artifactAlias = $def.artifacts[0].alias
         }

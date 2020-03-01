@@ -67,7 +67,7 @@ Describe 'Get-VSTeamPermissionInheritance' {
             $Method -eq 'Post' -and
             $Body -like '*123-5464-dee43/1432*' -and
             $Body -like '*33344d9c-fc72-4d6f-aba5-fa317101a7e9*' -and
-            $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/project/123-5464-dee43*" -and
+            $Uri -like "*/_apis/Contribution/HierarchyQuery/project/123-5464-dee43*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
          }
       }
@@ -92,7 +92,7 @@ Describe 'Get-VSTeamPermissionInheritance' {
             $Method -eq 'Post' -and
             $Body -like '*c788c23e-1b46-4162-8f5e-d7585343b5de*' -and
             $Body -like '*123-5464-dee43//2*' -and
-            $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/project/123-5464-dee43*" -and
+            $Uri -like "*_apis/Contribution/HierarchyQuery/project/123-5464-dee43*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Release)*"
          }
       }
@@ -111,3 +111,4 @@ Describe 'Get-VSTeamPermissionInheritance' {
       }
    }
 }
+

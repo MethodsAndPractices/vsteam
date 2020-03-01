@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
    Describe 'Profile' {
       $expectedPath = "$HOME/vsteam_profiles.json"

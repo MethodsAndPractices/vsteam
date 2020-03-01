@@ -22,6 +22,7 @@ Set-StrictMode -Version Latest
 
 Set-VSTeamAPIVersion -Target $env:API_VERSION
 
+$env:Testing=$true
 InModuleScope VSTeam {
    Describe 'Team' -Tag 'integration' {
       BeforeAll {

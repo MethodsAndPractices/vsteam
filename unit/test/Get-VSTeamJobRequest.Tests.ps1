@@ -21,26 +21,26 @@ Describe "Get-VSTeamJobRequest" {
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          # Write-Host $args
-         
+
          return $results2017
       }
 
       It "return all jobs" {
          # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+         [VSTeamProjectCache]::timestamp = -1
 
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
-            $Uri -like "*agentid=4*" 
+            $Uri -like "*agentid=4*"
          }
       }
 
       It "return 2 jobs" {
          # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+         [VSTeamProjectCache]::timestamp = -1
 
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
@@ -60,27 +60,27 @@ Describe "Get-VSTeamJobRequest" {
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          #Write-Host $args
-         
+
          return $resultsAzD
       }
 
       It "return all jobs" {
          # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+         [VSTeamProjectCache]::timestamp = -1
 
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
-            $Uri -like "*agentid=4*" 
+            $Uri -like "*agentid=4*"
          }
       }
 
       It "return 2 jobs" {
          # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-      
+         [VSTeamProjectCache]::timestamp = -1
+
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

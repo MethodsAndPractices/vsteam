@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
@@ -40,7 +41,7 @@ InModuleScope VSTeam {
    ]
 }
 "@ | ConvertFrom-Json
-  
+
    Describe 'GitRepositoryPermissions VSTS' {
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''

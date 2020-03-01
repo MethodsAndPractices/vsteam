@@ -1,5 +1,6 @@
 #Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
    Describe 'Common' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName

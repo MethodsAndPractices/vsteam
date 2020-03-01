@@ -1,12 +1,13 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
-$securityNamespace = 
+$securityNamespace =
 @"
 {
     "namespaceId":  "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87",
@@ -106,13 +107,13 @@ $securityNamespace =
     "systemBitMask":  0
 }
 "@ | ConvertFrom-Json
-  
+
     Describe 'AccessControlEntry VSTS'{
         # You have to set the version or the api-version will not be Removed when
         # [VSTeamVersions]::Core = ''
         [VSTeamVersions]::Core = '5.1'
 
-        
+
         Mock Get-VSTeamSecurityNamespace { return $securityNamespace }
 
         Context 'Remove-VSTeamAccessControlEntry by SecurityNamespaceId'{
@@ -141,19 +142,19 @@ $securityNamespace =
         }
 
         Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace'{
-            It 'Should succeed with a properly formatted descriptor if descriptor is on ACL'{  
+            It 'Should succeed with a properly formatted descriptor if descriptor is on ACL'{
                 $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
                 Mock _callAPI { return $true } -Verifiable
                 Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04") -Token xyz -confirm:$false | Should be "Removal of ACE from ACL succeeded."
             }
-            It 'Should fail with a properly formatted descriptor if descriptor is not on ACL already'{ 
+            It 'Should fail with a properly formatted descriptor if descriptor is not on ACL already'{
                 $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
-                Mock _callAPI { return $false } -Verifiable 
+                Mock _callAPI { return $false } -Verifiable
                 Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0yMTkxNDc4NTk1LTU1MDM1MzIxOC0yNDM3MjM2NDgzLTQyMjkyNzUyNDktMC0wLTAtOC04") -Token xyz -confirm:$false -ErrorVariable err -ErrorAction SilentlyContinue
                 $err.count | should be 1
                 $err[0].Exception.Message | Should Be "Removal of ACE from ACL failed. Ensure descriptor and token are correct."
             }
-            It 'Should fail with an improperly formatted descriptor'{  
+            It 'Should fail with an improperly formatted descriptor'{
                 $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
                 Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor @("vssgp.NotARealDescriptor") -Token xyz -confirm:$false -ErrorVariable err -ErrorAction SilentlyContinue
                 $err.count | should be 2

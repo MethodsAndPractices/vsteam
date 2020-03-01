@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
 
     Describe 'Pull Requests' {
@@ -153,7 +154,7 @@ InModuleScope VSTeam {
                }
             }
 
-            
+
             It 'Get-VSTeamPullRequest with source repository id' {
                Mock Invoke-RestMethod { return $singleResult }
 

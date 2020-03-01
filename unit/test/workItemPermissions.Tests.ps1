@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
@@ -40,10 +41,10 @@ InModuleScope VSTeam {
    ]
 }
 "@ | ConvertFrom-Json
-  
 
 
-$classificationNodeById = 
+
+$classificationNodeById =
 @"
 {
    "count": 1,
@@ -71,7 +72,7 @@ $classificationNodeById =
 
    $classificationNodeByIdObject = [VSTeamClassificationNode]::new($classificationNodeById, "test")
 
-   $parentClassificationNode = 
+   $parentClassificationNode =
 @"
 {
    "count": 1,
@@ -129,7 +130,7 @@ $classificationNodeById =
    $classificationNodeIterationIdObject = [VSTeamClassificationNode]::new($classificationNodeIterationId, "test")
 
 
-   $areaRootNode = 
+   $areaRootNode =
 @"
 {
    "id": 24,
@@ -149,7 +150,7 @@ $classificationNodeById =
 
    $areaRootNodeObject = [VSTeamClassificationNode]::new($areaRootNode, "test")
 
-   $iterationRootNode = 
+   $iterationRootNode =
 @"
 {
    "id": 16,

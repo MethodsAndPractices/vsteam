@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
 
     Describe 'Pull Requests' {
@@ -49,20 +50,20 @@ InModuleScope VSTeam {
            }
 
             It 'Add-VSTeamPullRequest with wrong -SourceRefName throws' {
-               { 
+               {
                   Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
                   -Title "PR Title" -Description "PR Description" `
                   -SourceRefName "garbage" -TargetRefName "refs/heads/master" `
-                  -Draft -Force 
+                  -Draft -Force
                } | Should Throw
             }
 
             It 'Add-VSTeamPullRequest with wrong -TargetRefName throws' {
-               { 
+               {
                   Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
                   -Title "PR Title" -Description "PR Description" `
                   -SourceRefName "refs/heads/test" -TargetRefName "garbage" `
-                  -Draft -Force 
+                  -Draft -Force
                } | Should Throw
             }
         }

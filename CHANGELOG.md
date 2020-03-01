@@ -1,4 +1,10 @@
 # Changelog
+- Removed dependency on trackyon.utils (incl. adding Show-Browser function)
+- Changed load sequence for classes to allow them to be accessible when parameters evaluated
+- Replaced dynamic parameters with argument completers / validators
+- Changing the load sequence breaks some Pester because what is making the call is out of scope, so moved the mocked item upstream so it is called by something in scope.
+
+
 
 ## 6.4.4
 

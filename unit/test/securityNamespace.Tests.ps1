@@ -1,11 +1,12 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   
+
    $securityNamespaceListResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespaces.json" -Raw | ConvertFrom-Json
    $securityNamespaceSingleResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespace.single.json" -Raw | ConvertFrom-Json
 
@@ -36,7 +37,7 @@ InModuleScope VSTeam {
       # [VSTeamVersions]::Core = ''
       Set-VSTeamAPIVersion AzD
       [VSTeamVersions]::Core = '5.0'
-      
+
       Context 'Get-VSTeamSecurityNamespace list' {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.

@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
    $sampleFile = "$PSScriptRoot\sampleFiles\serviceEndpointTypeSample.json"
 

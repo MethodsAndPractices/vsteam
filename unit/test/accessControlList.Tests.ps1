@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
@@ -95,7 +96,7 @@ InModuleScope VSTeam {
  }
 "@ | ConvertFrom-Json
 
-   $securityNamespace = 
+   $securityNamespace =
    @"
 {
    "count": 1,
@@ -152,7 +153,7 @@ InModuleScope VSTeam {
 "@ | ConvertFrom-Json
 
    $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
-  
+
    Describe 'AccessControlList VSTS' {
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''
@@ -186,7 +187,7 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
 
          $securityNamespace = Get-VSTeamSecurityNamespace -Id "58450c49-b02d-465a-ab12-59ae512d6531"
-         Get-VSTeamAccessControlList -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor" 
+         Get-VSTeamAccessControlList -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor"
 
          It 'Should return ACLs' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -204,7 +205,7 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
 
          Get-VSTeamSecurityNamespace -Id "58450c49-b02d-465a-ab12-59ae512d6531" | `
-            Get-VSTeamAccessControlList -Token "SomeToken" -Descriptors "SomeDescriptor" 
+            Get-VSTeamAccessControlList -Token "SomeToken" -Descriptors "SomeDescriptor"
 
          It 'Should return ACEs' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {

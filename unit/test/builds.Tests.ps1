@@ -2,6 +2,7 @@ Set-StrictMode -Version Latest
 
 # The InModuleScope command allows you to perform white-box unit testing on the
 # internal (non-exported) code of a Script Module.
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Just in case it was loaded. If we don't do

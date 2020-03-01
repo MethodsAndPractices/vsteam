@@ -68,7 +68,7 @@ Describe 'Set-VSTeamPermissionInheritance' {
             $Method -eq 'Post' -and
             $Body -like '*123-5464-dee43/1432*' -and
             $Body -like '*33344d9c-fc72-4d6f-aba5-fa317101a7e9*' -and
-            $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and
+            $Uri -like "*/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
          }
       }
@@ -93,7 +93,7 @@ Describe 'Set-VSTeamPermissionInheritance' {
             $Method -eq 'Post' -and
             $Body -like '*c788c23e-1b46-4162-8f5e-d7585343b5de*' -and
             $Body -like '*123-5464-dee43//2*' -and
-            $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and
+            $Uri -like "*/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Release)*"
          }
       }
@@ -120,7 +120,7 @@ Describe 'Set-VSTeamPermissionInheritance' {
             $Method -eq 'Post' -and
             $Body -like '*2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*' -and
             $Body -like '*repoV2/123-5464-dee43/00000000-0000-0000-0000-000000000001*' -and
-            $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and
+            $Uri -like "*/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Git)*"
          }
       }

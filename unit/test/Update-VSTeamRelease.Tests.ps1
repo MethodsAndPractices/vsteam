@@ -3,6 +3,7 @@ Set-StrictMode -Version Latest
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
 
+$env:Testing=$true
 InModuleScope VSTeam {
    [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    [VSTeamVersions]::Release = '1.0-unittest'
@@ -46,7 +47,7 @@ InModuleScope VSTeam {
                $Body -ne $null -and
                $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
             }
-         }        
+         }
       }
    }
 }

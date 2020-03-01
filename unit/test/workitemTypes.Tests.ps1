@@ -2,6 +2,7 @@ Set-StrictMode -Version Latest
 
 # The InModuleScope command allows you to perform white-box unit testing on the
 # internal (non-exported) code of a Script Module.
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
@@ -35,7 +36,7 @@ InModuleScope VSTeam {
          It 'Should return all work item types' {
             Get-VSTeamWorkItemType -ProjectName test
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes?api-version=$([VSTeamVersions]::Core)"
             }
          }

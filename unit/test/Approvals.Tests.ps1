@@ -2,6 +2,7 @@ Set-StrictMode -Version Latest
 
 # The InModuleScope command allows you to perform white-box unit testing on the
 # internal (non-exported) code of a Script Module.
+$env:Testing=$true
 InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
@@ -107,7 +108,7 @@ InModuleScope VSTeam {
 
       # This makes sure the alias is working
       Context 'Get-VSTeamApproval' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
+         Mock _useWindowsAuthenticationOnPremise { $true }
          Mock Invoke-RestMethod { return @{
                count = 1
                value = @(
@@ -168,7 +169,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Set-VSTeamApproval' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
+        # Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod { return @{
                id       = 1
                revision = 1
