@@ -349,6 +349,10 @@ Allows you to call any TFS/AzD REST API. All the Auth and Route Structure is tak
 
 Removes a team from a project.
 
+### [Remove-VSTeamAccessControlEntry](Remove-VSTeamAccessControlEntry.md)
+
+Removes specified ACEs in the ACL for the provided token. The request URI contains the namespace ID, the target token, and a single or list of descriptors that should be removed. Only supports removing AzD based users/groups.
+
 ### [Remove-VSTeamAccessControlList](Remove-VSTeamAccessControlList.md)
 
 Remove access control lists under the specified security namespace.
