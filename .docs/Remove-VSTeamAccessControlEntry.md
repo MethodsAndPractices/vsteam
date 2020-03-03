@@ -1,12 +1,11 @@
 
-
-
+<!-- #include "./common/header.md" -->
 
 # Remove-VSTeamAccessControlEntry
 
 ## SYNOPSIS
 
-Removes specified ACEs in the ACL for the provided token. The request URI contains the namespace ID, the target token, and a single or list of descriptors that should be removed. Only supports removing AzD based users/groups.
+<!-- #include "./synopsis/Remove-VSTeamAccessControlEntry.md" -->
 
 ## SYNTAX
 
@@ -201,4 +200,3 @@ Required: True
 This function outputs a non-terminating error if the ACE removal from the ACL returns $False. This can be due to the wrong descriptor being provided, or the descriptor already not being on the ACL.
 
 ## RELATED LINKS
-

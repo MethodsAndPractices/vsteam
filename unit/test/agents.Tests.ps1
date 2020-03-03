@@ -130,5 +130,28 @@ InModuleScope VSTeam {
             { Disable-VSTeamAgent -Pool 36 -Id 950 } | Should Throw
          }
       }
+
+      Context 'Update-VSTeamAgent by ID' {
+         Mock Invoke-RestMethod
+
+         It 'should update the agent with passed in Id' {
+            Update-VSTeamAgent -Pool 36 -Id 950
+
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Post' -and
+               $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/36/messages*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
+               $Uri -like "*agentId=950*"
+            }
+         }
+      }
+
+      Context 'Update-VSTeamAgent throws' {
+         Mock Invoke-RestMethod { throw 'boom' }
+
+         It 'should update the agent with passed in Id' {
+            { Update-VSTeamAgent -Pool 36 -Id 950 } | Should Throw
+         }
+      }
    }
 }

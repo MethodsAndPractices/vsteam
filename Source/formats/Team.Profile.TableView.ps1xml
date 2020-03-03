@@ -1,1 +1,45 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.Profile.TableView</Name><ViewSelectedBy><TypeName>Team.Profile</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>Name</Label></TableColumnHeader><TableColumnHeader><Label>URL</Label></TableColumnHeader><TableColumnHeader><Label>Version</Label></TableColumnHeader><TableColumnHeader><Label>Type</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>Name</PropertyName></TableColumnItem><TableColumnItem><PropertyName>URL</PropertyName></TableColumnItem><TableColumnItem><PropertyName>Version</PropertyName></TableColumnItem><TableColumnItem><PropertyName>Type</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.Profile.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.Profile</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>URL</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Version</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Type</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>Name</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>URL</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Version</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Type</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

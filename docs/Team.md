@@ -84,6 +84,10 @@ Adds a Team Project to your account.
 
 Add Permissions on Project Level
 
+### [Add-VSTeamPullRequest](Add-VSTeamPullRequest.md)
+
+Create a new Pull Request
+
 ### [Add-VSTeamRelease](Add-VSTeamRelease.md)
 
 Queues a new release
@@ -196,6 +200,10 @@ Get the installed extensions in the specified Azure DevOps or Team Foundation Se
 
 Returns a list of package feeds for the account.
 
+### [Get-VSTeamGitCommit](Get-VSTeamGitCommit.md)
+
+Retrieve git commits for a project
+
 ### [Get-VSTeamGitRef](Get-VSTeamGitRef.md)
 
 Queries the provided repository for its refs and returns them.
@@ -203,6 +211,10 @@ Queries the provided repository for its refs and returns them.
 ### [Get-VSTeamGitRepository](Get-VSTeamGitRepository.md)
 
 Get all the repositories in your Azure DevOps or Team Foundation Server account, or a specific project.
+
+### [Get-VSTeamGitStat](Get-VSTeamGitStat.md)
+
+Retrieves statistics about branches within a repository.
 
 ### [Get-VSTeamGroup](Get-VSTeamGroup.md)
 
@@ -331,6 +343,10 @@ Allows you to call any TFS/AzD REST API. All the Auth and Route Structure is tak
 ### [Remove-VSTeam](Remove-VSTeam.md)
 
 Removes a team from a project.
+
+### [Remove-VSTeamAccessControlEntry](Remove-VSTeamAccessControlEntry.md)
+
+Removes specified ACEs in the ACL for the provided token. The request URI contains the namespace ID, the target token, and a single or list of descriptors that should be removed. Only supports removing AzD based users/groups.
 
 ### [Remove-VSTeamAccessControlList](Remove-VSTeamAccessControlList.md)
 
@@ -522,6 +538,10 @@ Allows you to update the Personal Access Token for your profile.
 ### [Update-VSTeamProject](Update-VSTeamProject.md)
 
 Updates the project name, description or both.
+
+### [Update-VSTeamPullRequest](Update-VSTeamPullRequest.md)
+
+Update a pull request
 
 ### [Update-VSTeamRelease](Update-VSTeamRelease.md)
 
