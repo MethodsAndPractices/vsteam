@@ -1,1 +1,45 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.UserEntitlement.TableView</Name><ViewSelectedBy><TypeName>Team.UserEntitlement</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>UserName</Label></TableColumnHeader><TableColumnHeader><Label>Email</Label></TableColumnHeader><TableColumnHeader><Label>AccessLevel</Label></TableColumnHeader><TableColumnHeader><Label>LastAccessedDate</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>userName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>email</PropertyName></TableColumnItem><TableColumnItem><PropertyName>accessLevelName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>lastAccessedDate</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.UserEntitlement.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.UserEntitlement</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>UserName</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Email</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>AccessLevel</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>LastAccessedDate</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>userName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>email</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>accessLevelName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>lastAccessedDate</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

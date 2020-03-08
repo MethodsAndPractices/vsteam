@@ -449,7 +449,7 @@ InModuleScope VSTeam {
 
             It 'Add-VSTeamUserEntitlement should add a user with MSDN license' {
                Add-VSTeamUserEntitlement -Email $email -License none -LicensingSource msdn -MSDNLicenseType professional | Should not be $null
-               (Get-VSTeamUserEntitlement).Count | Should Be 4
+               (Get-VSTeamUserEntitlement).Count | Should Be 3
             }
          }
       }
