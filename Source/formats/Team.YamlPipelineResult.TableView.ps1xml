@@ -13,13 +13,13 @@
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Id</Label>
-               </TableColumnHeader>   
+               </TableColumnHeader>
                <TableColumnHeader>
                   <Label>url</Label>
-               </TableColumnHeader>  
+               </TableColumnHeader>
                 <TableColumnHeader>
                   <Label>state</Label>
-               </TableColumnHeader>            
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
