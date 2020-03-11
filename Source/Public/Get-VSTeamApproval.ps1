@@ -23,7 +23,7 @@ function Get-VSTeamApproval {
          $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseIdsFilter -join ',')}
 
          # The support in TFS and VSTS are not the same.
-         $instance = $([VSTeamVersions]::Account)
+         $instance = $(_getInstance)
          if (_isVSTS $instance) {
             if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false) {
                $queryString.includeMyGroupApprovals = 'true';

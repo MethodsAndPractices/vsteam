@@ -1,9 +1,9 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
    Describe 'Extension' {
-
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       $results = [PSCustomObject]@{
          count = 1
          value = [PSCustomObject]@{

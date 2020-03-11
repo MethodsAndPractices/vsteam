@@ -1,11 +1,6 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
    $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
 
@@ -27,7 +22,7 @@ InModuleScope VSTeam {
    $projectResultObject = [VSTeamProject]::new($projectResult)
 
    $accessControlEntryResult =
-@"
+   @"
 {
    "count": 1,
    "value": [
@@ -43,8 +38,8 @@ InModuleScope VSTeam {
   
 
 
-$classificationNodeById = 
-@"
+   $classificationNodeById = 
+   @"
 {
    "count": 1,
    "value": [
@@ -72,7 +67,7 @@ $classificationNodeById =
    $classificationNodeByIdObject = [VSTeamClassificationNode]::new($classificationNodeById, "test")
 
    $parentClassificationNode = 
-@"
+   @"
 {
    "count": 1,
    "value": [
@@ -101,7 +96,7 @@ $classificationNodeById =
 
 
    $classificationNodeIterationId =
-@"
+   @"
 {
    "count": 1,
    "value": [
@@ -130,7 +125,7 @@ $classificationNodeById =
 
 
    $areaRootNode = 
-@"
+   @"
 {
    "id": 24,
    "identifier": "b33b12d7-6abb-4b7a-b9d6-2092d0933c99",
@@ -150,7 +145,7 @@ $classificationNodeById =
    $areaRootNodeObject = [VSTeamClassificationNode]::new($areaRootNode, "test")
 
    $iterationRootNode = 
-@"
+   @"
 {
    "id": 16,
    "identifier": "dfa90792-403a-4119-a52b-bd142c08291b",
@@ -170,6 +165,10 @@ $classificationNodeById =
    $iterationRootNodeObject = [VSTeamClassificationNode]::new($iterationRootNode, "test")
 
    Describe 'WorkItem Area/Iteration Permissions VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''
       [VSTeamVersions]::Core = '5.0'

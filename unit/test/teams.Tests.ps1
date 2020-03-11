@@ -1,8 +1,6 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
          id          = '6f365a7143e492e911c341451a734401bcacadfd'
@@ -16,8 +14,10 @@ InModuleScope VSTeam {
       name        = 'refs/heads/master'
       description = 'team description'
    }
-
+   
    Describe "Teams VSTS" {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Context 'Get-VSTeam with project name' {
@@ -246,7 +246,7 @@ InModuleScope VSTeam {
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
 
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
       Context 'Get-VSTeam with project name on TFS local Auth' {
          Mock Invoke-RestMethod { return $results }

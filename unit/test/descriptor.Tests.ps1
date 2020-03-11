@@ -2,29 +2,28 @@ Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
 
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $result = Get-Content "$PSScriptRoot\sampleFiles\descriptor.scope.TestProject.json" -Raw | ConvertFrom-Json
 
    Describe "Groups TFS Errors" {
       Context 'Get-VSTeamDescriptor' {
-          Mock _callAPI { throw 'Should not be called' } -Verifiable
+         Mock _callAPI { throw 'Should not be called' } -Verifiable
 
-          It 'Should throw' {
-             Set-VSTeamAPIVersion TFS2017
+         It 'Should throw' {
+            Set-VSTeamAPIVersion TFS2017
 
-             { Get-VSTeamDescriptor -StorageKey '010d06f0-00d5-472a-bb47-58947c230876' } | Should Throw
-          }
+            { Get-VSTeamDescriptor -StorageKey '010d06f0-00d5-472a-bb47-58947c230876' } | Should Throw
+         }
 
-          It '_callAPI should not be called' {
-             Assert-MockCalled _callAPI -Exactly 0
-          }
-       }
-    }
+         It '_callAPI should not be called' {
+            Assert-MockCalled _callAPI -Exactly 0
+         }
+      }
+   }
 
    Describe 'Descriptor VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Graph = ''

@@ -21,8 +21,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
 
-[VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
 $buildDefresults = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
 $releaseDefresults = Get-Content "$PSScriptRoot\sampleFiles\releaseDefAzD.json" -Raw | ConvertFrom-Json
 $gitRepoResult = Get-Content "$PSScriptRoot\sampleFiles\singleGitRepo.json" -Raw | ConvertFrom-Json
@@ -43,6 +41,9 @@ $singleResult = [PSCustomObject]@{
 }
 
 Describe 'Get-VSTeamPermissionInheritance' {
+   Remove-VSTeamAccount
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
       $Uri -like "*_apis/projects*"

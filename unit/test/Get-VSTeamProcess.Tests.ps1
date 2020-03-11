@@ -11,7 +11,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
    
 Describe 'Get-VSTeamProcess' {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
 
    $results = [PSCustomObject]@{

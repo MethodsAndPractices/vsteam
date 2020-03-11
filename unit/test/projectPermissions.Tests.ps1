@@ -1,33 +1,33 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
+   Describe 'ProjectPermissions VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+      $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
 
-   $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
-   $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
+      $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
+      $groupSingleResultObject = [VSTeamGroup]::new($groupSingleResult)
 
-   $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
-   $groupSingleResultObject = [VSTeamGroup]::new($groupSingleResult)
+      $projectResult = [PSCustomObject]@{
+         name        = 'Test Project Public'
+         description = ''
+         url         = ''
+         id          = '010d06f0-00d5-472a-bb47-58947c230876'
+         state       = ''
+         visibility  = ''
+         revision    = 0
+         defaultTeam = [PSCustomObject]@{}
+         _links      = [PSCustomObject]@{}
+      }
 
-   $projectResult = [PSCustomObject]@{
-      name        = 'Test Project Public'
-      description = ''
-      url         = ''
-      id          = '010d06f0-00d5-472a-bb47-58947c230876'
-      state       = ''
-      visibility  = ''
-      revision    = 0
-      defaultTeam = [PSCustomObject]@{}
-      _links      = [PSCustomObject]@{}
-   }
+      $projectResultObject = [VSTeamProject]::new($projectResult)
 
-   $projectResultObject = [VSTeamProject]::new($projectResult)
-
-   $accessControlEntryResult =
-@"
+      $accessControlEntryResult =
+      @"
 {
    "count": 1,
    "value": [
@@ -40,8 +40,7 @@ InModuleScope VSTeam {
    ]
 }
 "@ | ConvertFrom-Json
-  
-   Describe 'ProjectPermissions VSTS' {
+
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''
       [VSTeamVersions]::Core = '5.0'

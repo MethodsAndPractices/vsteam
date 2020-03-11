@@ -3,12 +3,11 @@ Set-StrictMode -Version Latest
 # The InModuleScope command allows you to perform white-box unit testing on the
 # internal (non-exported) code of a Script Module.
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    Describe 'Approvals' -Tag 'unit', 'approvals' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -34,6 +33,9 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamApproval' {
          # Arrange
          Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            # Write-Host $args
+
             return @{
                count = 1
                value = @(
@@ -66,8 +68,6 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
-            # Write-Host $([VSTeamVersions]::Release)
-            # Write-Host $([VSTeamVersions]::Account)
 
             return @{
                count = 1
@@ -200,11 +200,13 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamApproval TFS' {
-         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+         # Set the account to use for testing. A normal user would do this
+         # using the Set-VSTeamAccount function.
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
+            # Write-Host $args
 
             return @{
                count = 1

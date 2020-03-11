@@ -5,7 +5,7 @@ InModuleScope VSTeam {
    Describe 'Pull Requests' {
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''

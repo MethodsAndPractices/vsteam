@@ -14,10 +14,11 @@ Describe "Update-VSTeamBuildDefinition" {
    Context "AzD" {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
-         #Write-Host $args
+         # Write-Host $args
          
          return $resultsAzD
       }
@@ -50,9 +51,19 @@ Describe "Update-VSTeamBuildDefinition" {
    }   
 
    Context 'TFS local Auth' {
-      Mock Invoke-RestMethod { return $resultsAzD }
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Remove-VSTeamAccount
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+      
       Mock _useWindowsAuthenticationOnPremise { return $true }
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+
+      Mock Invoke-RestMethod { 
+         # If this test fails uncomment the line below to see how the mock was called.
+         # Write-Host $args
+
+         return $resultsAzD 
+      }
 
       Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
 
