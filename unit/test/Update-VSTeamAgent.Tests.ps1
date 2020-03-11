@@ -8,17 +8,15 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
 
-[VSTeamVersions]::Account = 'https://dev.azure.com/test'
-[VSTeamVersions]::DistributedTask = '1.0-unitTest'
-
-Describe 'agents' {
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
+Describe 'Update-VSTeamAgent' {
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   [VSTeamVersions]::DistributedTask = '1.0-unitTest'
 
    Context 'Update-VSTeamAgent by ID' {
-      Mock Invoke-RestMethod
+      Mock Invoke-RestMethod {
+         # If this test fails uncomment the line below to see how the mock was called.
+         # Write-Host $args
+      }
 
       It 'should update the agent with passed in Id' {
          Update-VSTeamAgent -Pool 36 -Id 950 -Force

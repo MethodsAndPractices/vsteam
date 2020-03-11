@@ -17,7 +17,7 @@ function Show-VSTeamGitRepository {
          Show-Browser $RemoteUrl
       }
       else {
-         Show-Browser "$([VSTeamVersions]::Account)/_git/$ProjectName"
+         Show-Browser "$(_getInstance)/_git/$ProjectName"
       }
    }
 }

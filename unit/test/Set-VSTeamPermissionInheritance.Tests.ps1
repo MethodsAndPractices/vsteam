@@ -21,29 +21,30 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
 
-[VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
-$buildDefresults = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
-$releaseDefresults = Get-Content "$PSScriptRoot\sampleFiles\releaseDefAzD.json" -Raw | ConvertFrom-Json
-$gitRepoResult = Get-Content "$PSScriptRoot\sampleFiles\singleGitRepo.json" -Raw | ConvertFrom-Json
-$gitRepoHierarchyUpdateResults = Get-Content "$PSScriptRoot\sampleFiles\gitReopHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
-$buildDefHierarchyUpdateResults = Get-Content "$PSScriptRoot\sampleFiles\buildDefHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
-$accesscontrollistsResult = Get-Content "$PSScriptRoot\sampleFiles\repoAccesscontrollists.json" -Raw | ConvertFrom-Json
-$releaseDefHierarchyUpdateResults = Get-Content "$PSScriptRoot\sampleFiles\releaseDefHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
-
-$singleResult = [PSCustomObject]@{
-   name        = 'Project'
-   description = ''
-   url         = ''
-   id          = '123-5464-dee43'
-   state       = ''
-   visibility  = ''
-   revision    = 0
-   defaultTeam = [PSCustomObject]@{}
-   _links      = [PSCustomObject]@{}
-}
-
 Describe 'Set-VSTeamPermissionInheritance' {
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
+   $buildDefresults = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
+   $releaseDefresults = Get-Content "$PSScriptRoot\sampleFiles\releaseDefAzD.json" -Raw | ConvertFrom-Json
+   $gitRepoResult = Get-Content "$PSScriptRoot\sampleFiles\singleGitRepo.json" -Raw | ConvertFrom-Json
+   $gitRepoHierarchyUpdateResults = Get-Content "$PSScriptRoot\sampleFiles\gitReopHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
+   $buildDefHierarchyUpdateResults = Get-Content "$PSScriptRoot\sampleFiles\buildDefHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
+   $accesscontrollistsResult = Get-Content "$PSScriptRoot\sampleFiles\repoAccesscontrollists.json" -Raw | ConvertFrom-Json
+   $releaseDefHierarchyUpdateResults = Get-Content "$PSScriptRoot\sampleFiles\releaseDefHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
+
+   $singleResult = [PSCustomObject]@{
+      name        = 'Project'
+      description = ''
+      url         = ''
+      id          = '123-5464-dee43'
+      state       = ''
+      visibility  = ''
+      revision    = 0
+      defaultTeam = [PSCustomObject]@{}
+      _links      = [PSCustomObject]@{}
+   }
+
+
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
       $Uri -like "*_apis/projects*"

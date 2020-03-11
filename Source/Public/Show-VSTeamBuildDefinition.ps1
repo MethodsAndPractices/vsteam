@@ -25,7 +25,7 @@ function Show-VSTeamBuildDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url
-      $url = "$([VSTeamVersions]::Account)/$ProjectName/_build"
+      $url = "$(_getInstance)/$ProjectName/_build"
 
       if ($id) {
          $url += "/index?definitionId=$id"

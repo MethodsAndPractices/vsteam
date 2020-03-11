@@ -10,7 +10,7 @@ InModuleScope VSTeam {
       Mock Write-Host
 
       Context 'Invoke-VSTeamRequest Options' {
-         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
          Mock Invoke-RestMethod { Write-Host $args }
 
          Invoke-VSTeamRequest -Method Options
@@ -21,7 +21,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Invoke-VSTeamRequest Release' {
-         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
          Mock Invoke-RestMethod { Write-Host $args } -Verifiable
 
          Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON
@@ -32,7 +32,7 @@ InModuleScope VSTeam {
       }
 
       Context 'Invoke-VSTeamRequest AdditionalHeaders' {
-         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
          Mock Invoke-RestMethod { return @() } -Verifiable -ParameterFilter {
             $Headers["Test"] -eq 'Test'
          }
@@ -54,14 +54,18 @@ InModuleScope VSTeam {
       . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
 
       Context 'Get-VSTeamInfo' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+         
          It 'should return account and default project' {
             [VSTeamVersions]::Account = "mydemos"
-            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+            $Global:PSDefaultParameterValues['*:projectName'] = 'TestProject'
 
             $info = Get-VSTeamInfo
 
             $info.Account | Should Be "mydemos"
-            $info.DefaultProject | Should Be "MyProject"
+            $info.DefaultProject | Should Be "TestProject"
          }
       }
 
@@ -91,7 +95,7 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamOption' {
          # Set the account to use for testing. A normal user would do this
          # using the Set-VSTeamAccount function.
-         [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
          Mock Invoke-RestMethod { return @{
                count = 1

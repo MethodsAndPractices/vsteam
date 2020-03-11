@@ -4,23 +4,23 @@ Set-StrictMode -Version Latest
 Add-Type -AssemblyName 'System.Web'
 
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   [VSTeamVersions]::Release = '1.0-unittest'
+   Describe 'Releases' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      [VSTeamVersions]::Release = '1.0-unittest'
 
-   $singleResult = [PSCustomObject]@{
-      environments = [PSCustomObject]@{}
-      variables    = [PSCustomObject]@{
-         BrowserToUse = [PSCustomObject]@{
-            value = "phantomjs"
+      $singleResult = [PSCustomObject]@{
+         environments = [PSCustomObject]@{}
+         variables    = [PSCustomObject]@{
+            BrowserToUse = [PSCustomObject]@{
+               value = "phantomjs"
+            }
+         }
+         _links       = [PSCustomObject]@{
+            self = [PSCustomObject]@{}
+            web  = [PSCustomObject]@{}
          }
       }
-      _links       = [PSCustomObject]@{
-         self = [PSCustomObject]@{}
-         web  = [PSCustomObject]@{}
-      }
-   }
-
-   Describe 'Releases' {
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"

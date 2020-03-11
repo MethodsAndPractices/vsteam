@@ -1,9 +1,10 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
+   
    Describe 'workitems' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"

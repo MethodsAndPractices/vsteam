@@ -2,10 +2,6 @@ Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
 
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $accessControlListResult =
    @"
 {
@@ -154,6 +150,10 @@ InModuleScope VSTeam {
    $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
   
    Describe 'AccessControlList VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''
       [VSTeamVersions]::Core = '5.0'

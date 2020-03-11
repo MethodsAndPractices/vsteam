@@ -1,11 +1,6 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
          id            = ''
@@ -45,8 +40,12 @@ InModuleScope VSTeam {
          visibility  = ''
       }
    }
-
+   
    Describe "Git VSTS" {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -153,14 +152,14 @@ InModuleScope VSTeam {
    }
 
    Describe "Git TFS" {
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
       }
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
-
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
 
       Context 'Get-VSTeamGitRepository no parameters' {
          Mock Invoke-RestMethod { return $results } -Verifiable

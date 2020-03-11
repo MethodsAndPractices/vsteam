@@ -11,8 +11,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\pipelineDefYamlResult.json" -Raw | ConvertFrom-Json
 
-Describe 'Yaml Pipeline Checks AzD Services' {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+Describe 'Test-VSTeamYamlPipeline' {
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -22,7 +22,7 @@ Describe 'Yaml Pipeline Checks AzD Services' {
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
    $testYamlPath = "$PSScriptRoot\sampleFiles\azure-pipelines.test.yml"
 
-   Context 'Test-VSTeamYamlPipeline' {
+   Context 'Yaml Pipeline Checks AzD Services' {
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          # Write-Host $args
