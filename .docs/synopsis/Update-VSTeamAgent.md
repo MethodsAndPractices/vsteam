@@ -1,0 +1,1 @@
+Instructs the agent to download and install the lastest version of the agent on self-hosted agents. 

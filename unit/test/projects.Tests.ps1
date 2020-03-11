@@ -1,9 +1,9 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    Describe 'Project' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
       . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
 
@@ -21,7 +21,7 @@ InModuleScope VSTeam {
          Mock Show-Browser
 
          It 'Show call open' {
-            Show-VSTeamProject -ProjectName MyProject
+            Show-VSTeamProject -ProjectName ShowProject
 
             Assert-MockCalled Show-Browser
          }
@@ -31,7 +31,7 @@ InModuleScope VSTeam {
          Mock Show-Browser
 
          It 'Show call open' {
-            Show-VSTeamProject MyProject
+            Show-VSTeamProject ShowProject
 
             Assert-MockCalled Show-Browser
          }
@@ -330,14 +330,18 @@ InModuleScope VSTeam {
       }
 
       Context 'Set-VSTeamDefaultProject' {
-         It 'should set default project' {
-            Set-VSTeamDefaultProject 'MyProject'
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
 
-            $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
+         It 'should set default project' {
+            Set-VSTeamDefaultProject 'DefaultProject'
+
+            $Global:PSDefaultParameterValues['*:projectName'] | Should be 'DefaultProject'
          }
 
          It 'should update default project' {
-            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+            $Global:PSDefaultParameterValues['*:projectName'] = 'DefaultProject'
 
             Set-VSTeamDefaultProject -Project 'NextProject'
 
@@ -346,6 +350,10 @@ InModuleScope VSTeam {
       }
 
       Context 'Set-VSTeamDefaultProject on Non Windows' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+
          Mock _isOnWindows { return $false } -Verifiable
 
          It 'should set default project' {
@@ -357,6 +365,10 @@ InModuleScope VSTeam {
       }
 
       Context 'Set-VSTeamDefaultProject As Admin on Windows' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $true } -Verifiable
 
@@ -369,6 +381,10 @@ InModuleScope VSTeam {
       }
 
       Context 'Clear-VSTeamDefaultProject on Non Windows' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+
          Mock _isOnWindows { return $false } -Verifiable
 
          It 'should clear default project' {
@@ -381,6 +397,10 @@ InModuleScope VSTeam {
       }
 
       Context 'Clear-VSTeamDefaultProject as Non-Admin on Windows' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+         
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $false }
 
@@ -394,6 +414,10 @@ InModuleScope VSTeam {
       }
 
       Context 'Clear-VSTeamDefaultProject as Admin on Windows' {
+         AfterAll {
+            $Global:PSDefaultParameterValues.Remove("*:projectName")
+         }
+
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $true } -Verifiable
 

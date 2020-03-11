@@ -17,7 +17,9 @@ Describe "Get-VSTeamJobRequest" {
    Context "2017" {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+      Remove-VSTeamAccount
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          # Write-Host $args
@@ -56,10 +58,12 @@ Describe "Get-VSTeamJobRequest" {
    Context "AzD" {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      Remove-VSTeamAccount
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
-         #Write-Host $args
+         # Write-Host $args
          
          return $resultsAzD
       }

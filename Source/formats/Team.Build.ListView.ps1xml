@@ -1,1 +1,44 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.Build.ListView</Name><ViewSelectedBy><TypeName>Team.Provider.Build</TypeName><TypeName>VSTeamBuild</TypeName></ViewSelectedBy><ListControl><ListEntries><ListEntry><ListItems><ListItem><PropertyName>ID</PropertyName></ListItem><ListItem><PropertyName>Name</PropertyName></ListItem><ListItem><PropertyName>Status</PropertyName></ListItem><ListItem><PropertyName>Result</PropertyName></ListItem><ListItem><PropertyName>StartTime</PropertyName></ListItem><ListItem><PropertyName>RequestedBy</PropertyName></ListItem><ListItem><PropertyName>BuildDefinition</PropertyName></ListItem><ListItem><PropertyName>ProjectName</PropertyName></ListItem></ListItems></ListEntry></ListEntries></ListControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.Build.ListView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.Provider.Build</TypeName>
+				<TypeName>VSTeamBuild</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<PropertyName>ID</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>Name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>Status</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>Result</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>StartTime</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>RequestedBy</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>BuildDefinition</PropertyName>
+							</ListItem>
+							<ListItem>
+								<PropertyName>ProjectName</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

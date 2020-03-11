@@ -1,1 +1,46 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.Repository.TableView</Name><ViewSelectedBy><TypeName>Team.Repository</TypeName><TypeName>VSTeamGitRepository</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>Name</Label></TableColumnHeader><TableColumnHeader><Label>Remote URL</Label></TableColumnHeader><TableColumnHeader><Label>Default Branch</Label></TableColumnHeader><TableColumnHeader><Label>Project Name</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>Name</PropertyName></TableColumnItem><TableColumnItem><PropertyName>remoteUrl</PropertyName></TableColumnItem><TableColumnItem><PropertyName>defaultBranch</PropertyName></TableColumnItem><TableColumnItem><PropertyName>projectName</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.Repository.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.Repository</TypeName>
+				<TypeName>VSTeamGitRepository</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Remote URL</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Default Branch</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Project Name</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>Name</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>remoteUrl</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>defaultBranch</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>projectName</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

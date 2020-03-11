@@ -74,7 +74,8 @@ stages:
     - task: SdtReport@1
       displayName: 'Create Security Analysis Report'
       inputs:
-        AllTools: true
+        AllTools: false
+        CredScan: true
 
     - task: PublishSecurityAnalysisLogs@2
       displayName: 'Publish Security Analysis Logs'
@@ -82,7 +83,8 @@ stages:
     - task: PostAnalysis@1
       displayName: 'Post Analysis'
       inputs:
-        AllTools: true
+        AllTools: false
+        CredScan: true
 
     - task: CopyFiles@2
       displayName: 'Copy Module to Artifacts Folder'
@@ -136,7 +138,7 @@ stages:
             displayName: 'Install NuGet 5.2.0'
             inputs:
               versionSpec: 5.2.0
-              
+
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
@@ -190,7 +192,7 @@ stages:
   displayName: Testing stage
   dependsOn: Package
   jobs:
-  
+
   - template: build/integrationTests.yml
     parameters:
       displayName: 'Linux TFS 2017'
@@ -277,6 +279,11 @@ stages:
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
                 ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
+
+                # Load the psd1 file so you can read the version
+                $manifest = Import-PowerShellDataFile ./$(Folder)/VSTeam.psd1
+
+                Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion)"
               workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: NuGetCommand@2
@@ -293,14 +300,14 @@ stages:
               packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'PowerShell Gallery'
-              
-          - task: GithubRelease@0 
-            displayName: 'Create GitHub Release'      
+
+          - task: GithubRelease@0
+            displayName: 'Create GitHub Release'
             inputs:
               gitHubConnection: Darquewarrior
               repositoryName: DarqueWarrior/vsteam
               tagSource: manual
-              tag: v$(PACKAGE_VERSION)      
+              tag: v$(PACKAGE_VERSION)
               addChangeLog: true
               compareWith: 'lastFullRelease'
               assets: |

@@ -31,6 +31,10 @@ InModuleScope VSTeam {
       ]
 "@
 
+      AfterAll {
+         Remove-VSTeamAccount
+      }
+
       Context 'You cannot use -UseWindowsAuthentication with Azd' {
          # This is only supported on a Windows machine. So we have
          # to Mock the call to _isOnWindows so you can develop on a

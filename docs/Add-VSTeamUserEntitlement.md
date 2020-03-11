@@ -66,6 +66,40 @@ Required: True
 Default value: ProjectContributor
 ```
 
+### -LicensingSource
+
+Licensing Source (e.g. Account. MSDN etc.). The acceptable values for this parameter are:
+
+- account
+- auto
+- msdn
+- none
+- profile
+- trial
+
+```yaml
+Type: String
+Default value: account
+```
+
+### -MSDNLicenseType
+
+Type of MSDN License (e.g. Visual Studio Professional, Visual Studio Enterprise etc.). The acceptable values for this parameter are:
+
+- eligible
+- enterprise
+- none
+- platforms
+- premium
+- professional
+- testProfessional
+- ultimate
+
+```yaml
+Type: String
+Default value: none
+```
+
 ## INPUTS
 
 ## OUTPUTS

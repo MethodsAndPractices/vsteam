@@ -194,3 +194,9 @@ function _applyTypesToVariableGroup {
    }
    $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')
 }
+
+function _applyTypesToYamlPipelineResultType {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.YamlPipelineResult')
+}
