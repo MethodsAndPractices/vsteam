@@ -8,7 +8,7 @@ InModuleScope VSTeam {
          $Uri -like "*_apis/projects*"
       }
 
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       Context 'Get-VSTeamCloudSubscription' {
          Mock Invoke-RestMethod {
@@ -32,7 +32,7 @@ InModuleScope VSTeam {
       }
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
       Context 'Get-VSTeamCloudSubscription' {
          Mock Invoke-RestMethod { return @{value = 'subs'}}

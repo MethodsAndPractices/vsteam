@@ -20,6 +20,6 @@ function Show-VSTeamProject {
          $ProjectName = $id
       }
 
-      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName"
+      Show-Browser "$(_getInstance)/$ProjectName"
    }
 }

@@ -16,6 +16,6 @@ function Show-VSTeamApproval {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
+      Show-Browser "$(_getInstance)/$ProjectName/_release?releaseId=$ReleaseDefinitionId"
    }
 }

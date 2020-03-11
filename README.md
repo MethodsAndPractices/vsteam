@@ -114,6 +114,7 @@ Runs the tests, but executes only the unit tests that have the description "work
 ## Maintainers
 
 - [Donovan Brown](https://github.com/darquewarrior) - [@DonovanBrown](https://twitter.com/DonovanBrown)
+- [Sebastian Schütze](https://github.com/SebastianSchuetze) - [@RazorSPoint](https://twitter.com/RazorSPoint)
 
 ## License
 

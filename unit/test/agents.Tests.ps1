@@ -1,9 +1,6 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   [VSTeamVersions]::DistributedTask = '1.0-unitTest'
-
    $testAgent = [PSCustomObject]@{
       _links             = [PSCustomObject]@{}
       createdOn          = '2018-03-28T16:48:58.317Z'
@@ -19,6 +16,9 @@ InModuleScope VSTeam {
    }
 
    Describe 'agents' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      [VSTeamVersions]::DistributedTask = '1.0-unitTest'
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
