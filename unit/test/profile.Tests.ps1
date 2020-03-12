@@ -34,7 +34,10 @@ InModuleScope VSTeam {
             # If this test fails uncomment the line below to see how the mock was called.
             Write-Host $args
          } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [string]$Value -eq '' }
-         Mock Set-Content { }
+         Mock Set-Content { 
+            # If this test fails uncomment the line below to see how the mock was called.
+            Write-Host $args
+         }
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 
          Remove-VSTeamProfile test
