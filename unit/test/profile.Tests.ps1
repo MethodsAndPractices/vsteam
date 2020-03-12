@@ -34,14 +34,14 @@ InModuleScope VSTeam {
             # If this test fails uncomment the line below to see how the mock was called.
             Write-Host "Set-Content with a parameter filter"
             Write-Host "Expected Path: $expectedPath"
-            $PSVersionTable
+            write-host "$PSVersionTable"
             Write-Host $args
          } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and ([string]$Value -eq '' -or $null -eq $Value)}
          Mock Set-Content { 
             # If this test fails uncomment the line below to see how the mock was called.
             Write-Host "Set-Content no parameter filter"
             Write-Host "Expected Path: $expectedPath"
-            $PSVersionTable
+            write-host "$PSVersionTable"
             Write-Host $args
          }
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
