@@ -35,7 +35,7 @@ InModuleScope VSTeam {
             Write-Host "Set-Content with a parameter filter"
             Write-Host "Expected Path: $expectedPath"
             Write-Host $args
-         } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [string]$Value -eq '' }
+         } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and ([string]$Value -eq '' -or $null -eq $Value)}
          Mock Set-Content { 
             # If this test fails uncomment the line below to see how the mock was called.
             Write-Host "Set-Content no parameter filter"
