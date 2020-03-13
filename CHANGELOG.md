@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.4.7
+
+_callAPI, _buildRequestURI and Invoke-VSTeamRequest now support UseProjectId switch if the Project ID is required for the API call.
+
 ## 6.4.6
 
 Corrected a display issue were the List view was being used by default instead of Table.

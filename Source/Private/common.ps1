@@ -75,7 +75,8 @@ function _buildRequestURI {
       [string]$id,
       [string]$version,
       [string]$subDomain,
-      [object]$queryString
+      [object]$queryString,
+      [switch]$UseProjectId
    )
    DynamicParam {
       _buildProjectNameDynamicParam -Mandatory $false
@@ -92,7 +93,13 @@ function _buildRequestURI {
       $sb.Append($(_addSubDomain -subDomain $subDomain -instance $(_getInstance))) | Out-Null
 
       if ($ProjectName) {
-         $sb.Append("/$projectName") | Out-Null
+         if ($UseProjectId.IsPresent) {
+            $projectId = (Get-VSTeamProject -Name $ProjectName | Select-Object -ExpandProperty id)
+            $sb.Append("/$projectId") | Out-Null
+         }
+         else {
+            $sb.Append("/$projectName") | Out-Null
+         }
       }
 
       if ($team) {
@@ -514,7 +521,7 @@ function _buildDynamicParam {
    )
    # Create the collection of attributes
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-<#
+   <#
 .SYNOPSIS
 Short description
 
@@ -612,7 +619,8 @@ function _callAPI {
       [string]$Team,
       [string]$Url,
       [object]$QueryString,
-      [hashtable]$AdditionalHeaders
+      [hashtable]$AdditionalHeaders,
+      [switch]$UseProjectId
    )
 
    # If the caller did not provide a Url build it.
@@ -649,16 +657,14 @@ function _callAPI {
       $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
    }
 
-   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys")
-   {
-      foreach ($key in $AdditionalHeaders.Keys)
-      {
+   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
+      foreach ($key in $AdditionalHeaders.Keys) {
          $params['Headers'].Add($key, $AdditionalHeaders[$key])
       }
    }
    
    # We have to remove any extra parameters not used by Invoke-RestMethod
-   $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
+   $extra = 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
    try {
