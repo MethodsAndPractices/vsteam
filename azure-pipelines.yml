@@ -24,7 +24,7 @@ stages:
           vmImageName: 'macOS-latest'
         Linux:
           OS: 'Linux'
-          vmImageName: 'ubuntu-16.04'
+          vmImageName: 'ubuntu-latest'
       maxParallel: 2
     pool:
       vmImage: $(vmImageName)
