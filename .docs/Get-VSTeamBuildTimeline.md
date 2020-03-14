@@ -56,13 +56,15 @@ Build id where you get the time line from
 ```yaml
 Type: int[]
 Parameter Sets: ByID
+```
 
-### -TimelineId
+### -Id
 
 Returns the timelines with the given timeline id.
 
 ```yaml
 Type: Guid
+Aliases: TimelineId
 Parameter Sets: ByID
 ```
 
