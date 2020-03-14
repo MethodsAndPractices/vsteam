@@ -32,18 +32,18 @@ displays all available properties (*) of the timeline objects.
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```PowerShell
-PS C:\> 84651ddb-8492-4057-b7b7-f6b11008e39f,595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 | Get-VSTeamBuildTimeline -ProjectName demo  -BuildId 1
+PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -Id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382
 ```
 
-This command gets the timelines with IDs 84651ddb-8492-4057-b7b7-f6b11008e39f and 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 by using the pipeline.
+This command gets the timelines with ID 1 and timeline id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7. It is filtered with the change ID and plan ID.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -ID 84651ddb-8492-4057-b7b7-f6b11008e39f,595dac0c-0f1a-4bfd-a35f-e5a838ac71d7
+PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -ID @(1,2)
 ```
 
-This command gets timelines with IDs 84651ddb-8492-4057-b7b7-f6b11008e39f and 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 by using the ID parameter.
+This command gets timelines with IDs 1 and 2 by using the ID parameter.
 
 ## PARAMETERS
 
