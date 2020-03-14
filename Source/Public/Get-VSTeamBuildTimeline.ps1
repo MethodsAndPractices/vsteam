@@ -1,6 +1,9 @@
 function Get-VSTeamBuildTimeline {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param (
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, Mandatory= $true, Postition = 1)]
+      [int[]] $BuildID,
+
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('TimelineId')]
       [Guid] $Id,
@@ -9,10 +12,7 @@ function Get-VSTeamBuildTimeline {
       [int] $ChangeId,
 
       [Parameter(ParameterSetName = 'ByID')]
-      [Guid] $PlanId,
-
-      [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true)]
-      [int[]] $BuildID
+      [Guid] $PlanId
    )
 
    DynamicParam {
