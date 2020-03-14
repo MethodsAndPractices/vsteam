@@ -54,7 +54,7 @@ This command gets timelines with IDs 84651ddb-8492-4057-b7b7-f6b11008e39f and 59
 Build id where you get the time line from
 
 ```yaml
-Type: Int32[]
+Type: int[]
 Parameter Sets: ByID
 
 ### -TimelineId
