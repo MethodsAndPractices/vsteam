@@ -1,7 +1,7 @@
 parameters:
   os: ''
   buildHelp: 'false'
-  CodeCoverage: 'true'
+  CodeCoverage: 'false'
 
 steps:
 - task: PowerShell@2
@@ -29,18 +29,7 @@ steps:
         Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passThru
       workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-- ${{ if eq(parameters.CodeCoverage, 'true') }}:
-  - task: PowerShell@2
-    displayName: 'Run Unit Tests'
-    inputs:
-      targetType: 'inline'
-      script: |
-        Import-Module .\dist\*.psd1
-        Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passThru
-      workingDirectory: '$(System.DefaultWorkingDirectory)'
-    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], true))
-
-  
+- ${{ if eq(parameters.CodeCoverage, 'true') }}: 
   - task: PowerShell@2
     displayName: 'Run Unit Tests with Code Coverage'
     inputs:
@@ -50,14 +39,12 @@ steps:
         Invoke-Pester -Script .\unit -CodeCoverage .\dist\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
       workingDirectory: '$(System.DefaultWorkingDirectory)'
       pwsh: true
-    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], true))
 
   - task: PublishCodeCoverageResults@1
     displayName: 'Publish code coverage'
     inputs:
       summaryFileLocation: '**\coverage.xml'
       failIfCoverageEmpty: true
-    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], false))
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
