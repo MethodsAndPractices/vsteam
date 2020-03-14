@@ -49,6 +49,14 @@ This command gets timelines with IDs 84651ddb-8492-4057-b7b7-f6b11008e39f and 59
 
 <!-- #include "./params/projectName.md" -->
 
+### -BuildId
+
+Build id where you get the time line from
+
+```yaml
+Type: Int32[]
+Parameter Sets: ByID
+
 ### -TimelineId
 
 Returns the timelines with the given timeline id.
