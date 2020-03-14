@@ -25,6 +25,13 @@ function _applyTypesToWorkItem {
    }
 }
 
+function _applyTypesToWiql {
+   param($item)
+   if ($item) {
+      $item.PSObject.TypeNames.Insert(0, 'Team.Wiql')
+   }
+}
+
 function _applyTypesToUser {
    param(
       [Parameter(Mandatory = $true)]
@@ -88,7 +95,7 @@ function _applyTypesToBuild {
 function _applyArtifactTypes {
    $item.PSObject.TypeNames.Insert(0, "Team.Build.Artifact")
 
-   if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource) {
+   if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource -and $item.resource.PSObject.Properties.Match('propeties').count -gt 0) {
       $item.resource.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource')
       $item.resource.properties.PSObject.TypeNames.Insert(0, 'Team.Build.Artifact.Resource.Properties')
    }
@@ -186,4 +193,10 @@ function _applyTypesToVariableGroup {
       $item.providerData.PSObject.TypeNames.Insert(0, 'Team.ProviderData')
    }
    $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')
+}
+
+function _applyTypesToYamlPipelineResultType {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.YamlPipelineResult')
 }

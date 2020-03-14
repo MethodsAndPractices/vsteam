@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Returns all the versions of supported APIs of your TFS or VSTS.
+Returns all the versions of supported APIs of your TFS or AzD.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Returns all the versions of supported APIs of your TFS or VSTS.
+Returns all the versions of supported APIs of your TFS or AzD.
 
 There are two table formats defined for the Team.Option type, Default and Versions.
 

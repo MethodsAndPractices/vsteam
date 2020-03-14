@@ -1,6 +1,6 @@
 # VSTeam Help
 
-Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery.com/packages/VSTeam/) that wraps the [REST API provided by Team Foundation Server and Visual Studio Team Services](https://cda.ms/ys). This allows you to access the power of TFS and VSTS from [PowerShell on Windows, MacOS and Linux](https://github.com/PowerShell/PowerShell).
+Welcome to VSTeam. VSTeam is a [PowerShell module](https://www.powershellgallery.com/packages/VSTeam/) that wraps the [REST API provided by Team Foundation Server and Azure DevOps](https://cda.ms/ys). This allows you to access the power of TFS and AzD from [PowerShell on Windows, MacOS and Linux](https://github.com/PowerShell/PowerShell).
 
 ## About files
 
@@ -14,7 +14,7 @@ Profiles allow you to store your account information for easy switching of accou
 
 [Provider](../en-US/about_vsteam_provider.help.txt)
 
-The provider allows you to navigate your TFS or VSTS as a file system.
+The provider allows you to navigate your TFS or AzD as a file system.
 
 ## VSTeam Functions
 
@@ -54,7 +54,7 @@ Adds a new feed to package management.
 
 ### [Add-VSTeamGitRepository](Add-VSTeamGitRepository.md)
 
-Adds a Git repository to your Visual Studio Team Services or Team Foundation Server account.
+Adds a Git repository to your Azure DevOps or Team Foundation Server account.
 
 ### [Add-VSTeamGitRepositoryPermission](Add-VSTeamGitRepositoryPermission.md)
 
@@ -89,6 +89,10 @@ Adds a Team Project to your account.
 
 Add Permissions on Project Level
 
+### [Add-VSTeamPullRequest](Add-VSTeamPullRequest.md)
+
+Create a new Pull Request
+
 ### [Add-VSTeamRelease](Add-VSTeamRelease.md)
 
 Queues a new release
@@ -108,6 +112,10 @@ Adds a new Service Fabric service endpoint.
 ### [Add-VSTeamSonarQubeEndpoint](Add-VSTeamSonarQubeEndpoint.md)
 
 Adds a new SonarQube service endpoint.
+
+### [Add-VSTeamTaskGroup](Add-VSTeamTaskGroup.md)
+
+Adds a task group.
 
 ### [Add-VSTeamUserEntitlement](Add-VSTeamUserEntitlement.md)
 
@@ -191,11 +199,15 @@ Resolve a storage key to a descriptor.
 
 ### [Get-VSTeamExtension](Get-VSTeamExtension.md)
 
-Get the installed extensions in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the installed extensions in the specified Azure DevOps or Team Foundation Server project.
 
 ### [Get-VSTeamFeed](Get-VSTeamFeed.md)
 
 Returns a list of package feeds for the account.
+
+### [Get-VSTeamGitCommit](Get-VSTeamGitCommit.md)
+
+Retrieve git commits for a project
 
 ### [Get-VSTeamGitRef](Get-VSTeamGitRef.md)
 
@@ -203,7 +215,11 @@ Queries the provided repository for its refs and returns them.
 
 ### [Get-VSTeamGitRepository](Get-VSTeamGitRepository.md)
 
-Get all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.
+Get all the repositories in your Azure DevOps or Team Foundation Server account, or a specific project.
+
+### [Get-VSTeamGitStat](Get-VSTeamGitStat.md)
+
+Retrieves statistics about branches within a repository.
 
 ### [Get-VSTeamGroup](Get-VSTeamGroup.md)
 
@@ -227,15 +243,19 @@ Gets a memberships for a container or member.
 
 ### [Get-VSTeamOption](Get-VSTeamOption.md)
 
-Returns all the versions of supported APIs of your TFS or VSTS.
+Returns all the versions of supported APIs of your TFS or AzD.
+
+### [Get-VSTeamPermissionInheritance](Get-VSTeamPermissionInheritance.md)
+
+Returns true or false.
 
 ### [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
 
-Get the code policies in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the code policies in the specified Azure DevOps or Team Foundation Server project.
 
 ### [Get-VSTeamPolicyType](Get-VSTeamPolicyType.md)
 
-Get the policy types in the specified Visual Studio Team Services or Team Foundation Server project.
+Get the policy types in the specified Azure DevOps or Team Foundation Server project.
 
 ### [Get-VSTeamPool](Get-VSTeamPool.md)
 
@@ -285,6 +305,10 @@ Gets a service endpoint.
 
 Get service endpoint types.
 
+### [Get-VSTeamTaskGroup](Get-VSTeamTaskGroup.md)
+
+Gets a task group
+
 ### [Get-VSTeamTfvcBranch](Get-VSTeamTfvcBranch.md)
 
 Gets a branch for a given path from TFVC source control.
@@ -305,6 +329,10 @@ Get User Entitlement for a user.
 
 Gets a variable group
 
+### [Get-VSTeamWiql](Get-VSTeamWiql.md)
+
+Returns work items from the given WIQL query or a saved query by ID from your projects team.
+
 ### [Get-VSTeamWorkItem](Get-VSTeamWorkItem.md)
 
 Returns one or more a work items from your project.
@@ -315,11 +343,15 @@ Gets a list of all Work Item Types or a single work item type.
 
 ### [Invoke-VSTeamRequest](Invoke-VSTeamRequest.md)
 
-Allows you to call any TFS/VSTS REST API. All the Auth and Route Structure is taken care of for you. Just provide the parts of the API call you need.  If you need to send a non-standard URL use the -Url parameter.  If the -Url is used the Url is not changed but the header and UserAgent are added for you.
+Allows you to call any TFS/AzD REST API. All the Auth and Route Structure is taken care of for you. Just provide the parts of the API call you need.  If you need to send a non-standard URL use the -Url parameter.  If the -Url is used the Url is not changed but the header and UserAgent are added for you.
 
 ### [Remove-VSTeam](Remove-VSTeam.md)
 
 Removes a team from a project.
+
+### [Remove-VSTeamAccessControlEntry](Remove-VSTeamAccessControlEntry.md)
+
+Removes specified ACEs in the ACL for the provided token. The request URI contains the namespace ID, the target token, and a single or list of descriptors that should be removed. Only supports removing AzD based users/groups.
 
 ### [Remove-VSTeamAccessControlList](Remove-VSTeamAccessControlList.md)
 
@@ -355,7 +387,7 @@ Removes a package feed from the account.
 
 ### [Remove-VSTeamGitRepository](Remove-VSTeamGitRepository.md)
 
-Removes the Git repository from your Visual Studio Team Services or Team Foundation Server account.
+Removes the Git repository from your Azure DevOps or Team Foundation Server account.
 
 ### [Remove-VSTeamMembership](Remove-VSTeamMembership.md)
 
@@ -385,6 +417,10 @@ Removes the release definitions for a team project.
 
 Removes a service endpoint.
 
+### [Remove-VSTeamTaskGroup](Remove-VSTeamTaskGroup.md)
+
+Removes a task group
+
 ### [Remove-VSTeamUserEntitlement](Remove-VSTeamUserEntitlement.md)
 
 Delete a user from the account.
@@ -394,6 +430,10 @@ The delete operation includes unassigning Extensions and Licenses and removing t
 ### [Remove-VSTeamVariableGroup](Remove-VSTeamVariableGroup.md)
 
 Removes a variable group
+
+### [Remove-VSTeamWorkItem](Remove-VSTeamWorkItem.md)
+
+Deletes the specified work item and sends it to the Recycle Bin, so that it can be restored back, if required. Optionally, if the destroy parameter has been set to true, it destroys the work item permanently. WARNING: If the destroy parameter is set to true, work items deleted by this command will NOT go to recycle-bin and there is no way to restore/recover them after deletion. It is recommended NOT to use this parameter. If you do, please use this parameter with extreme caution.
 
 ### [Set-VSTeamAccount](Set-VSTeamAccount.md)
 
@@ -406,7 +446,7 @@ In version 6.0 the default aliases were removed to prevent conflicts with other 
 
 ### [Set-VSTeamAPIVersion](Set-VSTeamAPIVersion.md)
 
-Sets the API versions to support either TFS2017, TFS2018 or VSTS.
+Sets the API versions to support either TFS2017, TFS2018, AzD2019 or AzD.
 
 ### [Set-VSTeamApproval](Set-VSTeamApproval.md)
 
@@ -420,13 +460,17 @@ Sets the default project to be used with other calls in the module.
 
 Sets the status of a environment to canceled, inProgress, notStarted, partiallySucceeded, queued, rejected, scheduled, succeeded or undefined.
 
+### [Set-VSTeamPermissionInheritance](Set-VSTeamPermissionInheritance.md)
+
+Sets the permission inheritance to true or false.
+
 ### [Set-VSTeamReleaseStatus](Set-VSTeamReleaseStatus.md)
 
 Sets the status of a release to Active or Abandoned.
 
 ### [Show-VSTeam](Show-VSTeam.md)
 
-Opens TFS or VSTS site in the default browser.
+Opens TFS or AzD site in the default browser.
 
 ### [Show-VSTeamApproval](Show-VSTeamApproval.md)
 
@@ -500,6 +544,10 @@ Allows you to update the Personal Access Token for your profile.
 
 Updates the project name, description or both.
 
+### [Update-VSTeamPullRequest](Update-VSTeamPullRequest.md)
+
+Update a pull request
+
 ### [Update-VSTeamRelease](Update-VSTeamRelease.md)
 
 Allows you to update release variables for future stages to read.
@@ -511,6 +559,10 @@ Updates a build definition for a team project.
 ### [Update-VSTeamServiceEndpoint](Update-VSTeamServiceEndpoint.md)
 
 Updates an existing service connection
+
+### [Update-VSTeamTaskGroup](Update-VSTeamTaskGroup.md)
+
+Updates an existing task group
 
 ### [Update-VSTeamUserEntitlement](Update-VSTeamUserEntitlement.md)
 

@@ -144,6 +144,16 @@ Converts the PowerShell object into JSON and displays in the console.
 Type: Switch
 ```
 
+### -AdditionalHeaders
+
+Adds additional headers to the request
+
+```yaml
+Type: Hashtable
+```
+
+<!-- #include "./params/useProjectId.md" -->
+
 ## INPUTS
 
 ### System.String

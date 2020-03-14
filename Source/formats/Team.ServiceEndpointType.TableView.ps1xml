@@ -1,1 +1,33 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.ServiceEndpointType.TableView</Name><ViewSelectedBy><TypeName>Team.ServiceEndpointType</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>Name</Label></TableColumnHeader><TableColumnHeader><Label>Description</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>displayName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>description</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.ServiceEndpointType.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.ServiceEndpointType</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Description</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>displayName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>description</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

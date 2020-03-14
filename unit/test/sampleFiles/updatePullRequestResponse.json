@@ -1,0 +1,89 @@
+{
+	"repository": {
+		"id": "45df2d67-e709-4557-a7f9-c6812b449277",
+		"name": "Sandbox",
+		"url": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277",
+		"project": {
+			"id": "1070399c-f49f-4803-bf9a-180cfdcd3536",
+			"name": "Sandbox",
+			"description": "A Sandbox project for all VSTS Users to play with. All users are project administrators.\nNOTE: This is not the place to store real code, just for testing out VSTS features!",
+			"url": "https://dev.azure.com/demo/_apis/projects/1070399c-f49f-4803-bf9a-180cfdcd3536",
+			"state": "wellFormed",
+			"revision": 1320,
+			"visibility": "private",
+			"lastUpdateTime": "2019-12-17T16:11:36.913Z"
+		},
+		"size": 703,
+		"remoteUrl": "https://demo@dev.azure.com/demo/Sandbox/_git/Sandbox",
+		"sshUrl": "git@ssh.dev.azure.com:v3/demo/Sandbox/Sandbox",
+		"webUrl": "https://dev.azure.com/demo/Sandbox/_git/Sandbox"
+	},
+	"pullRequestId": 19543,
+	"codeReviewId": 19543,
+	"status": "abandoned",
+	"createdBy": {
+		"displayName": "Test Example",
+		"url": "https://spsprodweu3.vssps.visualstudio.com/A988A78A-385A-4F12-88EC-56E2F246E989/_apis/Identities/BA76EEA1-67C6-47FF-9189-B5C601453310",
+		"_links": {
+			"avatar": {
+				"href": "https://dev.azure.com/demo/_apis/GraphProfile/MemberAvatars/aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+			}
+		},
+		"id": "BA76EEA1-67C6-47FF-9189-B5C601453310",
+		"uniqueName": "test@example.com",
+		"imageUrl": "https://dev.azure.com/demo/_api/_common/identityImage?id=BA76EEA1-67C6-47FF-9189-B5C601453310",
+		"descriptor": "aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+	},
+	"creationDate": "2020-02-20T15:57:14.0675132Z",
+	"closedDate": "2020-02-20T17:18:52.0589152Z",
+	"title": "Updated README.md",
+	"description": "Updated README.md",
+	"sourceRefName": "refs/heads/test",
+	"targetRefName": "refs/heads/master",
+	"isDraft": true,
+	"mergeId": "e41b1f54-bdad-4734-ae35-e9284ccefc85",
+	"lastMergeSourceCommit": {
+		"commitId": "d38f9af14c01ad85fe102fbb67a266f0cd30d96a",
+		"url": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/commits/d38f9af14c01ad85fe102fbb67a266f0cd30d96a"
+	},
+	"lastMergeTargetCommit": {
+		"commitId": "5a93adb75eab8af4075d307717dadee94db39209",
+		"url": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/commits/5a93adb75eab8af4075d307717dadee94db39209"
+	},
+	"reviewers": [],
+	"url": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/pullRequests/19543",
+	"_links": {
+		"self": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/pullRequests/19543"
+		},
+		"repository": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277"
+		},
+		"workItems": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/pullRequests/19543/workitems"
+		},
+		"sourceBranch": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/refs/heads/test"
+		},
+		"targetBranch": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/refs/heads/master"
+		},
+		"statuses": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/pullRequests/19543/statuses"
+		},
+		"sourceCommit": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/commits/d38f9af14c01ad85fe102fbb67a266f0cd30d96a"
+		},
+		"targetCommit": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/commits/5a93adb75eab8af4075d307717dadee94db39209"
+		},
+		"createdBy": {
+			"href": "https://spsprodweu3.vssps.visualstudio.com/A988A78A-385A-4F12-88EC-56E2F246E989/_apis/Identities/BA76EEA1-67C6-47FF-9189-B5C601453310"
+		},
+		"iterations": {
+			"href": "https://dev.azure.com/demo/1070399c-f49f-4803-bf9a-180cfdcd3536/_apis/git/repositories/45df2d67-e709-4557-a7f9-c6812b449277/pullRequests/19543/iterations"
+		}
+	},
+	"supportsIterations": true,
+	"artifactId": "vstfs:///Git/PullRequestId/1070399c-f49f-4803-bf9a-180cfdcd3536%2f45df2d67-e709-4557-a7f9-c6812b449277%2f19543"
+}

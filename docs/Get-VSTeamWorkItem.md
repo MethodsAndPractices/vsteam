@@ -18,7 +18,7 @@ Returns one or more a work items from your project.
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS C:\> Get-VSTeamWorkItem -Ids 47,48
+PS C:\> Get-VSTeamWorkItem -Id 47,48
 ```
 
 This command gets work items with IDs 47 and 48 by using the IDs parameter.
@@ -27,18 +27,7 @@ This command gets work items with IDs 47 and 48 by using the IDs parameter.
 
 ### -Id
 
-The id of the work item.
-
-```yaml
-Type: Int32
-Parameter Sets: ByID
-Required: True
-Accept pipeline input: true (ByPropertyName, ByValue)
-```
-
-### -Ids
-
-The id of the work item.
+The id of one or more work items.
 
 ```yaml
 Type: Int32[]
@@ -58,7 +47,7 @@ The flag to control error policy in a bulk get work items request.  The acceptab
 Type: String
 Parameter Sets: List
 Required: True
-Default value: Fail
+Default value: omit
 ```
 
 ### -Fields

@@ -24,7 +24,7 @@ stages:
           vmImageName: 'macOS-latest'
         Linux:
           OS: 'Linux'
-          vmImageName: 'ubuntu-latest'
+          vmImageName: 'ubuntu-16.04'
       maxParallel: 2
     pool:
       vmImage: $(vmImageName)
@@ -68,12 +68,14 @@ stages:
     - task: CredScan@2
       displayName: 'Run CredScan'
       inputs:
+        toolMajorVersion: 'V2'
         suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
 
     - task: SdtReport@1
       displayName: 'Create Security Analysis Report'
       inputs:
-        AllTools: true
+        AllTools: false
+        CredScan: true
 
     - task: PublishSecurityAnalysisLogs@2
       displayName: 'Publish Security Analysis Logs'
@@ -81,7 +83,8 @@ stages:
     - task: PostAnalysis@1
       displayName: 'Post Analysis'
       inputs:
-        AllTools: true
+        AllTools: false
+        CredScan: true
 
     - task: CopyFiles@2
       displayName: 'Copy Module to Artifacts Folder'
@@ -125,7 +128,7 @@ stages:
   - deployment: Deploy
     displayName: Package Management
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'ubuntu-16.04'
     environment: 'Default'
     strategy:
       runOnce:
@@ -135,7 +138,7 @@ stages:
             displayName: 'Install NuGet 5.2.0'
             inputs:
               versionSpec: 5.2.0
-              
+
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
@@ -189,13 +192,14 @@ stages:
   displayName: Testing stage
   dependsOn: Package
   jobs:
-  
+
   - template: build/integrationTests.yml
     parameters:
       displayName: 'Linux TFS 2017'
       os: 'Linux'
       name: 'LinuxTFS2017'
-      pool: 'ubuntu-latest'
+      pool: 'ubuntu-16.04'
+      stop: 'true'
       apiVersion: 'TFS2017'
       depends: 'WindowsTFS2017'
       account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
@@ -215,6 +219,7 @@ stages:
       displayName: 'macOS TFS 2017'
       os: 'macOS'
       pool: 'macOS-latest'
+      start: 'true'
       name: 'macOSTFS2017'
       apiVersion: 'TFS2017'
       account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
@@ -226,7 +231,7 @@ stages:
       pool: 'windows-latest'
       name: 'windowsTFS2018'
       apiVersion: 'TFS2018'
-      account: 'http://168.61.180.150:8080/tfs/defaultcollection'
+      account: 'http://winbldbox3.centralus.cloudapp.azure.com:8080/tfs/defaultcollection'
 
   - template: build/integrationTests.yml
     parameters:
@@ -237,12 +242,12 @@ stages:
       apiVersion: 'VSTS'
       account: 'tooltester'
 
-- stage: Produciton
-  displayName: PowerShell Gallery
+- stage: Production
+  displayName: PowerShell Gallery / GitHub Release
   dependsOn: Testing
   jobs:
   - deployment: Deploy
-    displayName: PowerShell Gallery
+    displayName: PowerShell Gallery / GitHub Release
     pool:
       vmImage: 'windows-latest'
     environment: 'PowerShell Gallery'
@@ -274,6 +279,11 @@ stages:
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
                 ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
+
+                # Load the psd1 file so you can read the version
+                $manifest = Import-PowerShellDataFile ./$(Folder)/VSTeam.psd1
+
+                Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion)"
               workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: NuGetCommand@2
@@ -290,3 +300,15 @@ stages:
               packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'PowerShell Gallery'
+
+          - task: GithubRelease@0
+            displayName: 'Create GitHub Release'
+            inputs:
+              gitHubConnection: Darquewarrior
+              repositoryName: DarqueWarrior/vsteam
+              tagSource: manual
+              tag: v$(PACKAGE_VERSION)
+              addChangeLog: true
+              compareWith: 'lastFullRelease'
+              assets: |
+                $(Pipeline.Workspace)/Module/$(Folder)/*.nupkg

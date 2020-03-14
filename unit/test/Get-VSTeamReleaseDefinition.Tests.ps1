@@ -15,13 +15,12 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
 
-
-[VSTeamVersions]::Account = 'https://dev.azure.com/test'
-[VSTeamVersions]::Release = '1.0-unittest'
-
 $results = Get-Content "$PSScriptRoot\sampleFiles\releaseDefAzD.json" -Raw | ConvertFrom-Json
 
 Describe 'Get-VSTeamReleaseDefinition' {
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   [VSTeamVersions]::Release = '1.0-unittest'
+   
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
       $Uri -like "*_apis/projects*"
@@ -39,7 +38,7 @@ Describe 'Get-VSTeamReleaseDefinition' {
          Get-VSTeamReleaseDefinition -projectName project
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)"
          }
       }
    }
@@ -54,7 +53,7 @@ Describe 'Get-VSTeamReleaseDefinition' {
          Get-VSTeamReleaseDefinition -projectName project -expand environments
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
          }
       }
    }

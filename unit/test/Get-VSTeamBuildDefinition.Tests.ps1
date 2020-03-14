@@ -4,8 +4,6 @@ Set-StrictMode -Version Latest
 Add-Type -AssemblyName 'System.Web'
 
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
    $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
    $results2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
@@ -20,6 +18,8 @@ InModuleScope VSTeam {
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       Context 'Get-VSTeamBuildDefinition with no parameters 2017' {
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
@@ -34,7 +34,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -42,6 +42,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition with no parameters 2018' {
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod {
             return $results2018
@@ -51,7 +53,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -59,6 +61,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition with no parameters AzD v5.0 of API' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod {
             return $resultsAzD
          }
@@ -67,7 +71,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -75,6 +79,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition with no parameters VSTS' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod {
             return $resultsVSTS
          }
@@ -83,7 +89,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -91,6 +97,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition with no parameters VSTS yaml ' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod {
             return $resultsVSTS
          }
@@ -99,7 +107,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=All*"
             }
@@ -107,6 +115,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition with type parameter' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod {
             return $resultsVSTS
          }
@@ -115,7 +125,7 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*type=build*"
             }
@@ -123,13 +133,15 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition with filter parameter' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod { return $resultsVSTS }
 
          It 'should return build definitions by filter' {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=All*"
@@ -138,13 +150,15 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition with both parameters' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod { return $resultsVSTS }
 
          It 'should return build definitions by filter' {
             Get-VSTeamBuildDefinition -projectName project -filter 'click*' -type build
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions/*" -and
+               $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=build*"
@@ -153,6 +167,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition by ID' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod { return $resultsVSTS.value }
 
          It 'should return build definition' {
@@ -167,6 +183,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition by ID -Raw' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod { return $resultsVSTS.value }
 
          It 'should return build definition' {
@@ -181,6 +199,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition by ID -Json' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod { return $resultsVSTS.value }
 
          It 'should return build definition' {
@@ -195,6 +215,8 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamBuildDefinition by ID local auth' {
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod { return $resultsVSTS.value }
 
@@ -202,12 +224,14 @@ InModuleScope VSTeam {
             Get-VSTeamBuildDefinition -projectName project -id 15
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
             }
          }
       }
 
       Context 'Get-VSTeamBuildDefinition with revision parameter' {
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
          Mock Invoke-RestMethod { return $resultsVSTS.value }
 
          It 'should return build definitions by revision' {

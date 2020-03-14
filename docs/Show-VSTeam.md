@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Opens TFS or VSTS site in the default browser.
+Opens TFS or AzD site in the default browser.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Opens TFS or VSTS site in the default browser.
+Opens TFS or AzD site in the default browser.
 
 ## EXAMPLES
 
@@ -21,7 +21,7 @@ Opens TFS or VSTS site in the default browser.
 PS C:\> Show-VSTeam
 ```
 
-This will open a browser to the TFS or VSTS site
+This will open a browser to the TFS or AzD site
 
 ## PARAMETERS
 

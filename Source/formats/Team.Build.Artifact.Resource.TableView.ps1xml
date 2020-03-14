@@ -1,1 +1,51 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.Build.Artifact.Resource.TableView</Name><ViewSelectedBy><TypeName>Team.Build.Artifact.Resource</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>Type</Label></TableColumnHeader><TableColumnHeader><Label>Data</Label></TableColumnHeader><TableColumnHeader><Label>Url</Label></TableColumnHeader><TableColumnHeader><Label>Download Url</Label></TableColumnHeader><TableColumnHeader><Label>Properties</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>type</PropertyName></TableColumnItem><TableColumnItem><PropertyName>data</PropertyName></TableColumnItem><TableColumnItem><PropertyName>url</PropertyName></TableColumnItem><TableColumnItem><PropertyName>downloadUrl</PropertyName></TableColumnItem><TableColumnItem><PropertyName>properties</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.Build.Artifact.Resource.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.Build.Artifact.Resource</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Type</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Data</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Url</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Download Url</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Properties</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>type</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>data</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>url</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>downloadUrl</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>properties</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

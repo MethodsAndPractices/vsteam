@@ -14,6 +14,6 @@ function Show-VSTeamWorkItem {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_workitems/edit/$Id"
+      Show-Browser "$(_getInstance)/$ProjectName/_workitems/edit/$Id"
    }
 }

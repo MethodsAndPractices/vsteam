@@ -14,6 +14,6 @@ function Show-VSTeamBuild {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_build/index?buildId=$Id"
+      Show-Browser "$(_getInstance)/$ProjectName/_build/index?buildId=$Id"
    }
 }

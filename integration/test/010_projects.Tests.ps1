@@ -10,8 +10,8 @@ if ($null -eq $env:TEAM_CIBUILD) {
 ##############################################################
 # Before running these tests you must set the following      #
 # Environment variables.                                     #
-# $env:API_VERSION = TFS2017, TFS2018 or VSTS depending on   #
-#                    the value used for ACCT                 #
+# $env:API_VERSION = TFS2017, TFS2018, AzD2019 or VSTS       #
+#                    depending on the value used for ACCT    #
 # $env:EMAIL = Email of user to remove and re-add to account #
 # $env:ACCT = VSTS Account Name or full TFS URL including    #
 #             collection                                     #
@@ -432,13 +432,23 @@ InModuleScope VSTeam {
                { Remove-VSTeamUserEntitlement -Email fake@NoteReal.foo -Force } | Should Throw
             }
 
-            It 'Remove-VSTeamUserEntitlement should delete the team' {
+            It 'Remove-VSTeamUserEntitlement should delete the user' {
                Remove-VSTeamUserEntitlement -Email $email -Force
                Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should Be $null
             }
 
-            It 'Add-VSTeamUserEntitlement should add a team' {
+            It 'Add-VSTeamUserEntitlement should add a user' {
                Add-VSTeamUserEntitlement -Email $email -License StakeHolder | Should Not Be $null
+               (Get-VSTeamUserEntitlement).Count | Should Be 3
+            }
+
+            It 'Remove-VSTeamUserEntitlement should delete the user' {
+               Remove-VSTeamUserEntitlement -Email $email -Force
+               Get-VSTeamUserEntitlement | Where-Object Email -eq $email | Should Be $null
+            }
+
+            It 'Add-VSTeamUserEntitlement should add a user with MSDN license' {
+               Add-VSTeamUserEntitlement -Email $email -License none -LicensingSource msdn -MSDNLicenseType professional | Should not be $null
                (Get-VSTeamUserEntitlement).Count | Should Be 3
             }
          }

@@ -30,7 +30,7 @@ InModuleScope VSTeam {
 "@
 
       Context 'Remove-VSTeamProfile' {
-         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and [string]$Value -eq '' }
+         Mock Set-Content { } -Verifiable -ParameterFilter { $Path -eq $expectedPath -and ([string]$Value -eq '')}
          Mock Set-Content { }
          Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
 

@@ -22,3 +22,8 @@ Source/Private/vsteam.private.ps1
 Source/Classes/vsteam.classes.ps1
 /dist
 test-results.xml
+coverage.xml
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store

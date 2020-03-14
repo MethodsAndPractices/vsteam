@@ -8,7 +8,7 @@ InModuleScope VSTeam {
          $Uri -like "*_apis/projects*"
       }
 
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       Context 'Get-VSTeamCloudSubscription' {
          Mock Invoke-RestMethod {
@@ -19,7 +19,7 @@ InModuleScope VSTeam {
             Get-VSTeamCloudSubscription
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -32,7 +32,7 @@ InModuleScope VSTeam {
       }
 
       Mock _useWindowsAuthenticationOnPremise { return $true }
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
       Context 'Get-VSTeamCloudSubscription' {
          Mock Invoke-RestMethod { return @{value = 'subs'}}
@@ -41,7 +41,7 @@ InModuleScope VSTeam {
             Get-VSTeamCloudSubscription
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions/?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/serviceendpointproxy/azurermsubscriptions?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }

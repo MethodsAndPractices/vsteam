@@ -1,16 +1,14 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
-   $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{ }
-   }
-
    Describe 'Policies VSTS' {
+      $results = [PSCustomObject]@{
+         value = [PSCustomObject]@{ }
+      }
+      
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -24,7 +22,7 @@ InModuleScope VSTeam {
 
          It 'Should return policies' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }
@@ -103,7 +101,7 @@ InModuleScope VSTeam {
             # '{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"10000000-0000-0000-0000-0000000000001","matchKind":"Exact","refName":"refs/heads/master"}],"MinimumApproverCount":1}}'
             Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
-               $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/?api-version=$([VSTeamVersions]::Core)" -and
+               $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations?api-version=$([VSTeamVersions]::Core)" -and
                $Body -like '*"isBlocking":true*' -and
                $Body -like '*"isEnabled":true*' -and
                $Body -like '*"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"}*' -and

@@ -3,12 +3,11 @@ Set-StrictMode -Version Latest
 # The InModuleScope command allows you to perform white-box unit testing on the
 # internal (non-exported) code of a Script Module.
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    Describe 'Approvals' -Tag 'unit', 'approvals' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -34,6 +33,9 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamApproval' {
          # Arrange
          Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            # Write-Host $args
+
             return @{
                count = 1
                value = @(
@@ -56,7 +58,7 @@ InModuleScope VSTeam {
             # Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -66,8 +68,6 @@ InModuleScope VSTeam {
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
-            # Write-Host $([VSTeamVersions]::Release)
-            # Write-Host $([VSTeamVersions]::Account)
 
             return @{
                count = 1
@@ -97,7 +97,7 @@ InModuleScope VSTeam {
             # "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -like "*https://vsrm.dev.azure.com/test/project/_apis/release/approvals/*" -and
+               $Uri -like "*https://vsrm.dev.azure.com/test/project/_apis/release/approvals*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
                $Uri -like "*assignedtoFilter=Chuck Reinhart*" -and
                $Uri -like "*includeMyGroupApprovals=true*"
@@ -127,7 +127,7 @@ InModuleScope VSTeam {
          It 'should return approvals' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals?api-version=$([VSTeamVersions]::Release)"
             }
          }
       }
@@ -200,11 +200,13 @@ InModuleScope VSTeam {
       }
 
       Context 'Get-VSTeamApproval TFS' {
-         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+         # Set the account to use for testing. A normal user would do this
+         # using the Set-VSTeamAccount function.
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
          Mock Invoke-RestMethod {
             # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
+            # Write-Host $args
 
             return @{
                count = 1
@@ -231,7 +233,7 @@ InModuleScope VSTeam {
             # "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
                -ParameterFilter {
-               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/*" -and
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
                $Uri -like "*statusFilter=Pending*" -and
                $Uri -like "*assignedtoFilter=Test User*" -and

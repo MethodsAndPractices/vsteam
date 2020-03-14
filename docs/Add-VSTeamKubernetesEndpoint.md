@@ -11,7 +11,7 @@ Adds connections to Kubernetes clusters
 
 ## DESCRIPTION
 
-The cmdlet adds a new connection between TFS/VSTS and a Kubernetes cluster using kubeconfig json.
+The cmdlet adds a new connection between TFS/AzD and a Kubernetes cluster using kubeconfig json.
 
 This is only used when using the Kubernetes tasks.
 
@@ -58,7 +58,7 @@ Accept pipeline input: true (ByPropertyName)
 ### -EndpointName
 
 The name displayed on the services page.
-In VSTS this is the Connection Name.
+In AzD this is the Connection Name.
 
 ```yaml
 Type: String

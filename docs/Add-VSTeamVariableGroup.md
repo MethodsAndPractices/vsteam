@@ -64,6 +64,27 @@ $methodParameters = @{
 Add-VSTeamVariableGroup @methodParameters
 ```
 
+### -------------------------- EXAMPLE 3 --------------------------
+
+```powershell
+# Copy variable group varGroupName from project sourceProjectName to project targetProjectName.  If varGroupName already exists, we'll update it; else, we'll add it.
+
+$Name = "varGroupName"
+$FromProject  = "sourceProjectName"
+$ToProject = "targetProjectName"
+
+$FromVariableGroupObject = Get-VSTeamVariableGroup -Name $Name -ProjectName $FromProject
+$body = ConvertTo-Json -InputObject $FromVariableGroupObject -Depth 100 -Compress
+$toVariableGroupObject = Get-VSTeamVariableGroup -Name $Name -ProjectName $ToProject
+if ($toVariableGroupObject) {
+   Update-VSTeamVariableGroup -Body $body -ProjectName $ToProject -Id $toVariableGroupObject.id
+}
+else {
+   Add-VSTeamVariableGroup -Body $body -ProjectName $ToProject
+}
+
+```
+
 ## PARAMETERS
 
 ### -ProjectName
@@ -88,9 +109,10 @@ The variable group description
 
 ```yaml
 Type: String
+Parameter Sets: ByHashtable
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -103,6 +125,7 @@ The variable group name
 
 ```yaml
 Type: String
+Parameter Sets: ByHashtable
 Aliases:
 
 Required: True
@@ -118,6 +141,7 @@ The variable group ProviderData.  This parameter is not available in TFS2017. Th
 
 ```yaml
 Type: Hashtable
+Parameter Sets: ByHashtable
 Aliases:
 
 Required: False
@@ -133,6 +157,7 @@ The variable group type.  This parameter is not available in TFS2017; all variab
 
 ```yaml
 Type: String
+Parameter Sets: ByHashtable
 Aliases:
 Accepted values: Vsts, AzureKeyVault
 
@@ -149,6 +174,23 @@ The variable group variables.
 
 ```yaml
 Type: Hashtable
+Parameter Sets: ByHashtable
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Body
+
+The json that represents the variable group as a string
+
+```yaml
+Type: String
+Parameter Sets: ByBody
 Aliases:
 
 Required: True

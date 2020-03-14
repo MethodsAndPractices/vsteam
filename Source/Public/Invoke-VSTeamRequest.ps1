@@ -14,7 +14,9 @@ function Invoke-VSTeamRequest {
       [string]$OutFile,
       [switch]$JSON,
       [string]$ContentType,
-      [string]$Url
+      [string]$Url,
+      [hashtable]$AdditionalHeaders,
+      [switch]$UseProjectId
    )
    DynamicParam {
       _buildProjectNameDynamicParam -Mandatory $false

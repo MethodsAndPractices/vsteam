@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>Team.Wiql.ListView</Name>
+         <ViewSelectedBy>
+            <TypeName>Team.Wiql</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>queryType</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>WorkItemIDs</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>workItems</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

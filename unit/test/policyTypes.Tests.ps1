@@ -1,18 +1,16 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
-   $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{ }
-   }
-
-   $singleResult = [PSCustomObject]@{ }
-
    Describe "Policies VSTS" {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
+      $results = [PSCustomObject]@{
+         value = [PSCustomObject]@{ }
+      }
+
+      $singleResult = [PSCustomObject]@{ }
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -26,7 +24,7 @@ InModuleScope VSTeam {
 
          It 'Should return policies' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/types/?api-version=$([VSTeamVersions]::Core)"
+               $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/types?api-version=$([VSTeamVersions]::Core)"
             }
          }
       }

@@ -5,13 +5,13 @@
 
 ## SYNOPSIS
 
-Get all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.
+Get all the repositories in your Azure DevOps or Team Foundation Server account, or a specific project.
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-Get-VSTeamGitRepository gets all the repositories in your Visual Studio Team Services or Team Foundation Server account, or a specific project.
+Get-VSTeamGitRepository gets all the repositories in your Azure DevOps or Team Foundation Server account, or a specific project.
 
 ## EXAMPLES
 

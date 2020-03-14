@@ -1,13 +1,19 @@
 Set-StrictMode -Version Latest
 
-InModuleScope VSTeam {
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+. "$here/../../Source/Classes/VSTeamLeaf.ps1"
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/VSTeamSecurityNamespace.ps1"
+. "$here/../../Source/Classes/VSTeamAccessControlEntry.ps1"
+. "$here/../../Source/Classes/VSTeamAccessControlList.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/$sut"
 
-   $accessControlListResult =
-   @"
+$accessControlListResult =
+@"
 {
    "count": 5,
    "value": [
@@ -95,8 +101,8 @@ InModuleScope VSTeam {
  }
 "@ | ConvertFrom-Json
 
-   $securityNamespace = 
-   @"
+$securityNamespace = 
+@"
 {
    "count": 1,
    "value": [
@@ -151,90 +157,93 @@ InModuleScope VSTeam {
  }
 "@ | ConvertFrom-Json
 
-   $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
+$securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
   
-   Describe 'AccessControlList VSTS' {
-      # You have to set the version or the api-version will not be added when
-      # [VSTeamVersions]::Core = ''
-      [VSTeamVersions]::Core = '5.0'
+Describe 'Get-VSTeamAccessControlList' {
+   # Set the account to use for testing. A normal user would do this
+   # using the Set-VSTeamAccount function.
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
+   # You have to set the version or the api-version will not be added when
+   # [VSTeamVersions]::Core = ''
+   [VSTeamVersions]::Core = '5.0'
 
-      Context 'Get-VSTeamAccessControlList by SecurityNamespaceId' {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            # Write-Host $args
+   Context 'Get-VSTeamAccessControlList by SecurityNamespaceId' {
+      Mock Invoke-RestMethod {
+         # If this test fails uncomment the line below to see how the mock was called.
+         # Write-Host $args
 
-            return $accessControlListResult
-         } -Verifiable
+         return $accessControlListResult
+      } -Verifiable
 
-         Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse
+      Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse
 
-         It 'Should return ACLs' {
-            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/5a27515b-ccd7-42c9-84f1-54c998f03866*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*descriptors=SomeDescriptor*" -and
-               $Uri -like "*includeExtendedInfo=True*" -and
-               $Uri -like "*token=SomeToken*" -and
-               $Uri -like "*recurse=True*" -and
-               $Method -eq "Get"
-            }
+      It 'Should return ACLs' {
+         Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+            $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/5a27515b-ccd7-42c9-84f1-54c998f03866*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*descriptors=SomeDescriptor*" -and
+            $Uri -like "*includeExtendedInfo=True*" -and
+            $Uri -like "*token=SomeToken*" -and
+            $Uri -like "*recurse=True*" -and
+            $Method -eq "Get"
          }
       }
+   }
 
-      Context 'Get-VSTeamAccessControlList by SecurityNamespace' {
-         Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
-         Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
+   Context 'Get-VSTeamAccessControlList by SecurityNamespace' {
+      Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
+      Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
 
-         $securityNamespace = Get-VSTeamSecurityNamespace -Id "58450c49-b02d-465a-ab12-59ae512d6531"
-         Get-VSTeamAccessControlList -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor" 
+      $securityNamespace = Get-VSTeamSecurityNamespace -Id "58450c49-b02d-465a-ab12-59ae512d6531"
+      Get-VSTeamAccessControlList -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor" 
 
-         It 'Should return ACLs' {
-            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*descriptors=SomeDescriptor*" -and
-               $Uri -like "*token=SomeToken*" -and
-               $Method -eq "Get"
-            }
+      It 'Should return ACLs' {
+         Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+            $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*descriptors=SomeDescriptor*" -and
+            $Uri -like "*token=SomeToken*" -and
+            $Method -eq "Get"
          }
       }
+   }
 
-      Context 'Get-VSTeamAccessControlList by SecurityNamespace (pipeline)' {
-         Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
-         Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
+   Context 'Get-VSTeamAccessControlList by SecurityNamespace (pipeline)' {
+      Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
+      Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
 
-         Get-VSTeamSecurityNamespace -Id "58450c49-b02d-465a-ab12-59ae512d6531" | `
-            Get-VSTeamAccessControlList -Token "SomeToken" -Descriptors "SomeDescriptor" 
+      Get-VSTeamSecurityNamespace -Id "58450c49-b02d-465a-ab12-59ae512d6531" | `
+         Get-VSTeamAccessControlList -Token "SomeToken" -Descriptors "SomeDescriptor" 
 
-         It 'Should return ACEs' {
-            Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*descriptors=SomeDescriptor*" -and
-               $Uri -like "*token=SomeToken*" -and
-               $Method -eq "Get"
-            }
+      It 'Should return ACEs' {
+         Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+            $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*descriptors=SomeDescriptor*" -and
+            $Uri -like "*token=SomeToken*" -and
+            $Method -eq "Get"
          }
       }
+   }
 
-      Context 'Get-VSTeamAccessControlList by securityNamespaceId throws' {
-         Mock Invoke-RestMethod { throw 'Error' }
+   Context 'Get-VSTeamAccessControlList by securityNamespaceId throws' {
+      Mock Invoke-RestMethod { throw 'Error' }
 
-         It 'Should throw' {
-            { Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
-         }
+      It 'Should throw' {
+         { Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
       }
+   }
 
-      Context 'Get-VSTeamAccessControlList by SecurityNamespace throws' {
-         Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
-         Mock Invoke-RestMethod { throw 'Error' }
+   Context 'Get-VSTeamAccessControlList by SecurityNamespace throws' {
+      Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
+      Mock Invoke-RestMethod { throw 'Error' }
 
-         $securityNamespace = Get-VSTeamSecurityNamespace -Id "5a27515b-ccd7-42c9-84f1-54c998f03866"
+      $securityNamespace = Get-VSTeamSecurityNamespace -Id "5a27515b-ccd7-42c9-84f1-54c998f03866"
 
-         It 'Should throw' {
-            { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
-         }
+      It 'Should throw' {
+         { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
       }
    }
 }

@@ -17,7 +17,9 @@ Describe "Get-VSTeamJobRequest" {
    Context "2017" {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+      Remove-VSTeamAccount
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          # Write-Host $args
@@ -32,7 +34,7 @@ Describe "Get-VSTeamJobRequest" {
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests/*" -and
+            $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
             $Uri -like "*agentid=4*" 
          }
@@ -45,7 +47,7 @@ Describe "Get-VSTeamJobRequest" {
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests/*" -and
+            $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
             $Uri -like "*agentid=4*" -and
             $Uri -like "*completedRequestCount=2*"
@@ -56,10 +58,12 @@ Describe "Get-VSTeamJobRequest" {
    Context "AzD" {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      Remove-VSTeamAccount
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
-         #Write-Host $args
+         # Write-Host $args
          
          return $resultsAzD
       }
@@ -71,7 +75,7 @@ Describe "Get-VSTeamJobRequest" {
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests/*" -and
+            $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
             $Uri -like "*agentid=4*" 
          }
@@ -84,7 +88,7 @@ Describe "Get-VSTeamJobRequest" {
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests/*" -and
+            $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
             $Uri -like "*agentid=4*" -and
             $Uri -like "*completedRequestCount=2*"

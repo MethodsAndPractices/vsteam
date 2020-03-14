@@ -1,1 +1,45 @@
-<?xml version="1.0" encoding="utf-8" ?><Configuration><ViewDefinitions><View><Name>Team.Group.TableView</Name><ViewSelectedBy><TypeName>Team.Group</TypeName></ViewSelectedBy><TableControl><TableHeaders><TableColumnHeader><Label>PrincipalName</Label></TableColumnHeader><TableColumnHeader><Label>Name</Label></TableColumnHeader><TableColumnHeader><Label>ProjectName</Label></TableColumnHeader><TableColumnHeader><Label>Origin</Label></TableColumnHeader></TableHeaders><TableRowEntries><TableRowEntry><TableColumnItems><TableColumnItem><PropertyName>PrincipalName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>DisplayName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>ProjectName</PropertyName></TableColumnItem><TableColumnItem><PropertyName>Origin</PropertyName></TableColumnItem></TableColumnItems></TableRowEntry></TableRowEntries></TableControl></View></ViewDefinitions></Configuration>
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>Team.Group.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>Team.Group</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>PrincipalName</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>ProjectName</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Origin</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>PrincipalName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>DisplayName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>ProjectName</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Origin</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

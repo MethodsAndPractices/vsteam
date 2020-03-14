@@ -1,0 +1,48 @@
+{
+   "id": "00000000-0000-0000-0000-000000000001",
+   "name": "GitRepo",
+   "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000",
+   "project": {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "Project",
+      "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+      "state": "wellFormed",
+      "revision": 150,
+      "visibility": "private",
+      "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+   },
+   "defaultBranch": "refs/heads/master",
+   "size": 1939413,
+   "remoteUrl": "https://Test@dev.azure.com/Test/Project/_git/GitRepo",
+   "sshUrl": "git@ssh.dev.azure.com:v3/Test/Project/GitRepo",
+   "webUrl": "https://dev.azure.com/Test/Project/_git/GitRepo",
+   "_links": {
+      "self": {
+         "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000"
+      },
+      "project": {
+         "href": "vstfs:///Classification/TeamProject/00000000-0000-0000-0000-000000000000"
+      },
+      "web": {
+         "href": "https://dev.azure.com/Test/Project/_git/GitRepo"
+      },
+      "ssh": {
+         "href": "git@ssh.dev.azure.com:v3/Test/Project/GitRepo"
+      },
+      "commits": {
+         "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits"
+      },
+      "refs": {
+         "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/refs"
+      },
+      "pullRequests": {
+         "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/pullRequests"
+      },
+      "items": {
+         "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/items"
+      },
+      "pushes": {
+         "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/pushes"
+      }
+   }
+}

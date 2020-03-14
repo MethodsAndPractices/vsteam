@@ -5,6 +5,6 @@ function Show-VSTeam {
    process {
       _hasAccount
 
-      Show-Browser "$([VSTeamVersions]::Account)"
+      Show-Browser "$(_getInstance)"
    }
 }

@@ -17,7 +17,7 @@ function Show-VSTeamReleaseDefinition {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       # Build the url
-      $url = "$([VSTeamVersions]::Account)/$ProjectName/_release"
+      $url = "$(_getInstance)/$ProjectName/_release"
 
       if ($id) {
          $url += "?definitionId=$id"

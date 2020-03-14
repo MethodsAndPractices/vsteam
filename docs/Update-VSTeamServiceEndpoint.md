@@ -35,7 +35,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ### -Id
 
-UUID of existing services endpoint from VSTS
+UUID of existing services endpoint from AzD
 
 ```yaml
 Type: String

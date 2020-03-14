@@ -1,9 +1,9 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    Describe 'workitems' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -83,7 +83,7 @@ InModuleScope VSTeam {
          It 'With Default Project should add work item only with additional properties and parent id' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25 -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -106,7 +106,7 @@ InModuleScope VSTeam {
          It 'With Default Project should add work item only with additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -125,7 +125,7 @@ InModuleScope VSTeam {
          It 'With Default Project should throw exception when adding existing parameters to additional properties and parent id' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Title"= "Test1"; "System.AreaPath" = "Project\\TestPath"}
+            $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
             { Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25 -AdditionalFields $additionalFields } | Should Throw
          }
       }
@@ -171,7 +171,7 @@ InModuleScope VSTeam {
          It 'With Default Project should update work item with 2 parameters and additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -192,7 +192,7 @@ InModuleScope VSTeam {
          It 'With Default Project should update work item only with 1 parameter and additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Update-VSTeamWorkItem 1 -Title Test1 -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -211,7 +211,7 @@ InModuleScope VSTeam {
          It 'With Default Project should update work item only with additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+            $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
             Update-VSTeamWorkItem 1 -AdditionalFields $additionalFields
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -228,7 +228,7 @@ InModuleScope VSTeam {
          It 'With Default Project should throw exception when adding existing parameters to additional properties' {
             $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
-            $additionalFields = @{"System.Title"= "Test1"; "System.AreaPath" = "Project\\TestPath"}
+            $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
             { Update-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should Throw
          }
       }
@@ -253,20 +253,21 @@ InModuleScope VSTeam {
                return $collection
             }
 
-            Get-VSTeamWorkItem -Ids 47, 48
+            Get-VSTeamWorkItem -Id 47, 48
 
             # With PowerShell core the order of the query string is not the
             # same from run to run!  So instead of testing the entire string
             # matches I have to search for the portions I expect but can't
             # assume the order.
             # The general string should look like this:
-            # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=Fail
+            # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=omit
+
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems/*" -and
+               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
                $Uri -like "*ids=47,48*" -and
                $Uri -like "*`$Expand=None*" -and
-               $Uri -like "*errorPolicy=Fail*"
+               $Uri -like "*errorPolicy=omit*"
             }
          }
 

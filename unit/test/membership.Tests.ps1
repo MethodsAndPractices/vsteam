@@ -1,12 +1,11 @@
 Set-StrictMode -Version Latest
 
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    Describe 'Users VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Graph = ''
       [VSTeamVersions]::Graph = '5.0'
@@ -20,7 +19,7 @@ InModuleScope VSTeam {
          $result = Test-VSTeamMembership -MemberDescriptor $UserDescriptor -ContainerDescriptor $GroupDescriptor
          It 'Should test membership' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Method -eq "Head"
+               $Method -eq "Head" -and
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$UserDescriptor/$GroupDescriptor*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
             }
@@ -37,7 +36,7 @@ InModuleScope VSTeam {
          $null = Add-VSTeamMembership -MemberDescriptor $UserDescriptor -ContainerDescriptor $GroupDescriptor
          It 'Should add membership' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Method -eq "Put"
+               $Method -eq "Put" -and
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$UserDescriptor/$GroupDescriptor*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
             }
@@ -53,7 +52,7 @@ InModuleScope VSTeam {
          $null = Remove-VSTeamMembership -MemberDescriptor $UserDescriptor -ContainerDescriptor $GroupDescriptor -Force
          It 'Should remove a membership' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Method -eq "Delete"
+               $Method -eq "Delete" -and
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$UserDescriptor/$GroupDescriptor*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
             }
@@ -71,7 +70,7 @@ InModuleScope VSTeam {
             [VSTeamProjectCache]::timestamp = (Get-Date).Minute
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Method -eq "Get"
+               $Method -eq "Get" -and
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$MemberDescriptor*" -and
                $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
             }
@@ -89,9 +88,9 @@ InModuleScope VSTeam {
             [VSTeamProjectCache]::timestamp = (Get-Date).Minute
 
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-               $Method -eq "Get"
+               $Method -eq "Get" -and
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$GroupDescriptor*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
+               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
                $Uri -like "*direction=Down*"
             }
          }
