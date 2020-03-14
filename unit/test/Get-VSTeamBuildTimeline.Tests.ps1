@@ -1,0 +1,81 @@
+Set-StrictMode -Version Latest
+
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/$sut"
+
+Describe 'Get-VSTeamBuildTimeline' {
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   [VSTeamVersions]::Build = '1.0-unitTest'
+
+   Context 'Get-VSTeamBuildTimeline by ID' {
+      Mock Invoke-RestMethod {
+         # If this test fails uncomment the line below to see how the mock was called.
+          #Write-Host $args
+      }
+
+      It 'should get timeline with multiple build IDs' {
+         Get-VSTeamBuildTimeline -BuildID @(1,2) -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject"
+
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
+            $Method -eq 'Get' -and
+            $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/*" -and
+            ($Uri -like "*builds/1/*" -or $Uri -like "*builds/2/*")
+            $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+         }
+      }
+
+      It 'should get timeline with changeId and PlanId' {
+         Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -ChangeId 4 -PlanId 00000000-0000-0000-0000-000000000000
+
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Get' -and
+            $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
+            $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
+            $Uri -like "*planId=00000000-0000-0000-0000-000000000000*" -and
+            $Uri -like "*changeId=4*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+         }
+      }
+
+      It 'should get timeline without changeId' {
+         Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -PlanId 00000000-0000-0000-0000-000000000000
+
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Get' -and
+            $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
+            $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
+            $Uri -like "*planId=00000000-0000-0000-0000-000000000000*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+         }
+      }
+
+      It 'should get timeline without planId' {
+         Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -ChangeId 4
+
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Get' -and
+            $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
+            $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
+            $Uri -like "*changeId=4*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+         }
+      }
+
+      It 'should get timeline without planId and changeID' {
+         Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject"
+
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Get' -and
+            $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
+            $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
+            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+         }
+      }      
+   }
+}

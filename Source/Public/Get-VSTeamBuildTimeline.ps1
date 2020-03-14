@@ -1,7 +1,7 @@
 function Get-VSTeamBuildTimeline {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param (
-      [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, Mandatory= $true, Postition = 1)]
+      [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true, Mandatory= $true, Position=0)]
       [int[]] $BuildID,
 
       [Parameter(ParameterSetName = 'ByID')]
@@ -32,7 +32,7 @@ function Get-VSTeamBuildTimeline {
             $resource = "builds/$item/timeline/$Id"
          }
 
-         $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource $resource `
+         $resp = _callAPI -method Get -ProjectName $projectName -Area 'build' -Resource $resource `
             -Version $([VSTeamVersions]::Build) `
             -Querystring @{
                'changeId'                 = $ChangeId
