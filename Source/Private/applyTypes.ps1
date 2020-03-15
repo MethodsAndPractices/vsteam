@@ -200,3 +200,15 @@ function _applyTypesToYamlPipelineResultType {
 
    $item.PSObject.TypeNames.Insert(0, 'Team.YamlPipelineResult')
 }
+
+function _applyTypesToBuildTimelineResultType {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.BuildTimeline')
+
+   $item.records.PSObject.TypeNames.Insert(0, 'Team.BuildTimelineRecord[]')
+
+   foreach ($records in $item.records) {
+      $records.PSObject.TypeNames.Insert(0, 'Team.BuildTimelineRecord')
+   }
+}

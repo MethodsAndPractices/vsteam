@@ -19,7 +19,7 @@ function Get-VSTeamBuildTimeline {
       _buildProjectNameDynamicParam
    }
 
-   process {
+   Process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
   
@@ -38,6 +38,8 @@ function Get-VSTeamBuildTimeline {
                'changeId'                 = $ChangeId
                'planId'                   = $PlanId              
             }
+
+         _applyTypesToBuildTimelineResultType -item $resp
 
          Write-Output $resp
       }

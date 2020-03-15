@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>Team.BuildTimeline</Name>
+      <Members>
+         <ScriptProperty>
+            <Name>id</Name>
+            <GetScriptBlock>$this.id</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>changeId</Name>
+            <GetScriptBlock>$this.changeId</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>lastChangedOn</Name>
+            <GetScriptBlock>[datetime]::Parse($this.lastChangedOn)</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>lastChangedBy</Name>
+            <GetScriptBlock>$this.lastChangedBy</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>numberOfRecords</Name>
+            <GetScriptBlock>$this.records.Count</GetScriptBlock>
+         </ScriptProperty>
+      </Members>
+   </Type>
+</Types>
