@@ -206,9 +206,11 @@ function _applyTypesToBuildTimelineResultType {
 
    $item.PSObject.TypeNames.Insert(0, 'Team.BuildTimeline')
 
-   $item.records.PSObject.TypeNames.Insert(0, 'Team.BuildTimelineRecord[]')
+   if ($item.PSObject.Properties.Match('records').count -gt 0 -and $null -ne $item.records) {
+      $item.records.PSObject.TypeNames.Insert(0, 'Team.BuildTimelineRecord[]')
 
-   foreach ($records in $item.records) {
-      $records.PSObject.TypeNames.Insert(0, 'Team.BuildTimelineRecord')
+      foreach ($records in $item.records) {
+         $records.PSObject.TypeNames.Insert(0, 'Team.BuildTimelineRecord')
+      }
    }
 }
