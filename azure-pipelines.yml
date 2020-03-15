@@ -7,7 +7,7 @@ trigger:
       - master
   paths:
     include: 
-      - "*"
+      - '*'
     exclude:
     # exclude files and folders which are not part of the module or build pipeline
     - README.md
@@ -27,7 +27,7 @@ pr:
     - master
   paths:
     include: 
-    - "*"
+    - '*'
     exclude:
     # exclude files and folders which are not part of the module or build pipeline
     - README.md
