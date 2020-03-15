@@ -15,76 +15,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/Get-VSTeamSecurityNamespace.ps1"
 . "$here/../../Source/Public/$sut"
 
-$accessControlEntryResult =
-@"
-{
-   "count": 1,
-   "value": [
-     {
-       "descriptor": "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-1204400969-2402986413-2179408616-0-0-0-0-1",
-       "allow": 8,
-       "deny": 0,
-       "extendedInfo": {}
-     }
-   ]
-}
-"@ | ConvertFrom-Json
-
-$securityNamespace = 
-@"
-{
-   "count": 1,
-   "value": [
-     {
-       "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531",
-       "name": "Analytics",
-       "displayName": "Analytics",
-       "separatorValue": "/",
-       "elementLength": -1,
-       "writePermission": 2,
-       "readPermission": 1,
-       "dataspaceCategory": "Default",
-       "actions": [
-         {
-           "bit": 1,
-           "name": "Read",
-           "displayName": "View analytics",
-           "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
-         },
-         {
-           "bit": 2,
-           "name": "Administer",
-           "displayName": "Manage analytics permissions",
-           "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
-         },
-         {
-           "bit": 4,
-           "name": "Stage",
-           "displayName": "Push the data to staging area",
-           "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
-         },
-         {
-           "bit": 8,
-           "name": "ExecuteUnrestrictedQuery",
-           "displayName": "Execute query without any restrictions on the query form",
-           "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
-         },
-         {
-           "bit": 16,
-           "name": "ReadEuii",
-           "displayName": "Read EUII data",
-           "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
-         }
-       ],
-       "structureValue": 1,
-       "extensionType": null,
-       "isRemotable": false,
-       "useTokenTranslator": false,
-       "systemBitMask": 30
-     }
-   ]
- }
-"@ | ConvertFrom-Json
+$securityNamespace = Get-Content "$PSScriptRoot\sampleFiles\securityNamespace.json" -Raw | ConvertFrom-Json
+$accessControlEntryResult = Get-Content "$PSScriptRoot\sampleFiles\accessControlEntryResult.json" -Raw | ConvertFrom-Json
 
 $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
   
@@ -189,7 +121,7 @@ Describe 'Add-VSTeamAccessControlEntry' {
       $securityNamespace = Get-VSTeamSecurityNamespace -Id "5a27515b-ccd7-42c9-84f1-54c998f03866"
 
       It 'Should throw' {
-         { Add-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor abc -Token xyz -AllowMask 12 -DenyMask 15  } | Should Throw
+         { Add-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace -Descriptor abc -Token xyz -AllowMask 12 -DenyMask 15 } | Should Throw
       }
    }
 }
