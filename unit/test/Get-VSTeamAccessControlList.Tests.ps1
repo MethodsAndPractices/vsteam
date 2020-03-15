@@ -1,5 +1,7 @@
 Set-StrictMode -Version Latest
 
+Import-Module SHiPS
+
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
@@ -10,6 +12,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamAccessControlEntry.ps1"
 . "$here/../../Source/Classes/VSTeamAccessControlList.ps1"
 . "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/Set-VSTeamDefaultProject.ps1"
+. "$here/../../Source/Public/Get-VSTeamSecurityNamespace.ps1"
 . "$here/../../Source/Public/$sut"
 
 $accessControlListResult =
@@ -168,13 +172,16 @@ Describe 'Get-VSTeamAccessControlList' {
    # [VSTeamVersions]::Core = ''
    [VSTeamVersions]::Core = '5.0'
 
-   Context 'Get-VSTeamAccessControlList by SecurityNamespaceId' {
+   Context 'by SecurityNamespaceId' {
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          # Write-Host $args
 
          return $accessControlListResult
       } -Verifiable
+
+      # Even with a default set this URI should not have the project added. 
+      Set-VSTeamDefaultProject -Project Testing
 
       Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse
 
@@ -191,12 +198,15 @@ Describe 'Get-VSTeamAccessControlList' {
       }
    }
 
-   Context 'Get-VSTeamAccessControlList by SecurityNamespace' {
-      Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
-      Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
+   Context 'by SecurityNamespace' {
+      Mock Invoke-RestMethod {
+         # If this test fails uncomment the line below to see how the mock was called.
+         # Write-Host $args
+      
+         return $accessControlListResult 
+      } -Verifiable
 
-      $securityNamespace = Get-VSTeamSecurityNamespace -Id "58450c49-b02d-465a-ab12-59ae512d6531"
-      Get-VSTeamAccessControlList -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor" 
+      Get-VSTeamAccessControlList -SecurityNamespace $securityNamespaceObject -Token "SomeToken" -Descriptors "SomeDescriptor" 
 
       It 'Should return ACLs' {
          Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -209,12 +219,10 @@ Describe 'Get-VSTeamAccessControlList' {
       }
    }
 
-   Context 'Get-VSTeamAccessControlList by SecurityNamespace (pipeline)' {
-      Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
+   Context 'by SecurityNamespace (pipeline)' {
       Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
 
-      Get-VSTeamSecurityNamespace -Id "58450c49-b02d-465a-ab12-59ae512d6531" | `
-         Get-VSTeamAccessControlList -Token "SomeToken" -Descriptors "SomeDescriptor" 
+      $securityNamespaceObject | Get-VSTeamAccessControlList -Token "SomeToken" -Descriptors "SomeDescriptor" 
 
       It 'Should return ACEs' {
          Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -228,7 +236,7 @@ Describe 'Get-VSTeamAccessControlList' {
       }
    }
 
-   Context 'Get-VSTeamAccessControlList by securityNamespaceId throws' {
+   Context 'by securityNamespaceId throws' {
       Mock Invoke-RestMethod { throw 'Error' }
 
       It 'Should throw' {
@@ -236,14 +244,11 @@ Describe 'Get-VSTeamAccessControlList' {
       }
    }
 
-   Context 'Get-VSTeamAccessControlList by SecurityNamespace throws' {
-      Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
+   Context 'by SecurityNamespace throws' {
       Mock Invoke-RestMethod { throw 'Error' }
 
-      $securityNamespace = Get-VSTeamSecurityNamespace -Id "5a27515b-ccd7-42c9-84f1-54c998f03866"
-
       It 'Should throw' {
-         { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamespace -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
+         { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamespaceObject -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
       }
    }
 }

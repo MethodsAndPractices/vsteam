@@ -76,7 +76,8 @@ function _buildRequestURI {
       [string]$version,
       [string]$subDomain,
       [object]$queryString,
-      [switch]$UseProjectId
+      [switch]$UseProjectId,
+      [switch]$NoProject
    )
    DynamicParam {
       _buildProjectNameDynamicParam -Mandatory $false
@@ -92,7 +93,12 @@ function _buildRequestURI {
 
       $sb.Append($(_addSubDomain -subDomain $subDomain -instance $(_getInstance))) | Out-Null
 
-      if ($ProjectName) {
+      # There are some APIs that must not have the project added to the URI.
+      # However, if they caller set the default project it will be passed in
+      # here and added to the URI by mistake. Functions that need the URI
+      # created without the project even if the default project is set needs
+      # to pass the -NoProject switch.
+      if ($ProjectName -and $NoProject.IsPresent -eq $false) {
          if ($UseProjectId.IsPresent) {
             $projectId = (Get-VSTeamProject -Name $ProjectName | Select-Object -ExpandProperty id)
             $sb.Append("/$projectId") | Out-Null
@@ -620,7 +626,8 @@ function _callAPI {
       [string]$Url,
       [object]$QueryString,
       [hashtable]$AdditionalHeaders,
-      [switch]$UseProjectId
+      [switch]$UseProjectId,
+      [switch]$NoProject
    )
 
    # If the caller did not provide a Url build it.
@@ -664,7 +671,7 @@ function _callAPI {
    }
    
    # We have to remove any extra parameters not used by Invoke-RestMethod
-   $extra = 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
+   $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
    try {

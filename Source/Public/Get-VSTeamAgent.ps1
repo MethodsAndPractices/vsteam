@@ -12,7 +12,7 @@ function Get-VSTeamAgent {
    process {
 
       if ($id) {
-         $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents -Id $id `
+         $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents -Id $id -NoProject `
             -Body @{includeCapabilities = 'true'} -Version $([VSTeamVersions]::DistributedTask)
 
          # Storing the object before you return it cleaned up the pipeline.
@@ -23,7 +23,7 @@ function Get-VSTeamAgent {
          Write-Output $item
       }
       else {
-         $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents `
+         $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents -NoProject `
             -Body @{includeCapabilities = 'true'} -Version $([VSTeamVersions]::DistributedTask)
 
          $objs = @()

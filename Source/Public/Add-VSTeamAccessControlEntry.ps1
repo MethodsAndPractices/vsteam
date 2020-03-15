@@ -4,16 +4,8 @@ function Add-VSTeamAccessControlEntry {
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
       [VSTeamSecurityNamespace] $SecurityNamespace,
 
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-      [ValidateScript({
-         try {
-             [System.Guid]::Parse($_) | Out-Null
-             $true
-         } catch {
-             $false
-         }
-      })]
-      [string] $SecurityNamespaceId,
+      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]      
+      [guid] $SecurityNamespaceId,
 
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
@@ -57,7 +49,7 @@ $body =
 "@
       # Call the REST API
       $resp = _callAPI -Area 'accesscontrolentries' -id $SecurityNamespaceId -method POST -body $body `
-         -Version $([VSTeamVersions]::Core) `
+         -Version $([VSTeamVersions]::Core) -NoProject `
          -ContentType "application/json"
 
       if ($resp.count -ne 1)

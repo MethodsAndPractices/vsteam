@@ -1,5 +1,7 @@
 Set-StrictMode -Version Latest
 
+Import-Module SHiPS
+
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
@@ -9,6 +11,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamSecurityNamespace.ps1"
 . "$here/../../Source/Classes/VSTeamAccessControlEntry.ps1"
 . "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/Set-VSTeamDefaultProject.ps1"
+. "$here/../../Source/Public/Get-VSTeamSecurityNamespace.ps1"
 . "$here/../../Source/Public/$sut"
 
 $accessControlEntryResult =
@@ -85,6 +89,14 @@ $securityNamespace =
 $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
   
 Describe 'Add-VSTeamAccessControlEntry' {
+   # This API must be called with no project. However, if a default project is
+   # set that gets added to the URI.
+
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter {
+      $Uri -like "*_apis/projects*"
+   }
+   
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -100,6 +112,9 @@ Describe 'Add-VSTeamAccessControlEntry' {
 
          return $accessControlEntryResult
       } -Verifiable
+
+      # Even with a default set this URI should not have the project added. 
+      Set-VSTeamDefaultProject -Project Testing
 
       Add-VSTeamAccessControlEntry -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Descriptor abc -Token xyz -AllowMask 12 -DenyMask 15
 

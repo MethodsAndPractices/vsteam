@@ -5,15 +5,7 @@ function Get-VSTeamSecurityNamespace {
       [string] $Name,
 
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-      [ValidateScript({
-         try {
-             [System.Guid]::Parse($_) | Out-Null
-             $true
-         } catch {
-             $false
-         }
-      })]
-      [string] $Id,
+      [guid] $Id,
 
       [Parameter(ParameterSetName = 'List', Mandatory = $false)]
       [switch] $LocalOnly

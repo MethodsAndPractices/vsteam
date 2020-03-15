@@ -15,15 +15,7 @@ function Add-VSTeamGitRepositoryPermission {
       [parameter(Mandatory=$true,ParameterSetName="ByRepositoryIdAndGroup")]
       [parameter(Mandatory=$true,ParameterSetName="ByRepositoryIdAndUser")]
       [parameter(Mandatory=$true,ParameterSetName="ByRepositoryIdAndDescriptor")]
-      [ValidateScript({
-         try {
-             [System.Guid]::Parse($_) | Out-Null
-             $true
-         } catch {
-             $false
-         }
-      })]
-      [string]$RepositoryId,
+      [guid]$RepositoryId,
 
       [parameter(Mandatory=$true,ParameterSetName="ByRepositoryNameAndGroup")]
       [parameter(Mandatory=$true,ParameterSetName="ByRepositoryNameAndUser")]

@@ -5,15 +5,7 @@ function Remove-VSTeamAccessControlList {
       [VSTeamSecurityNamespace] $SecurityNamespace,
 
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-      [ValidateScript({
-         try {
-             [System.Guid]::Parse($_) | Out-Null
-             $true
-         } catch {
-             $false
-         }
-      })]
-      [string] $SecurityNamespaceId,
+      [guid] $SecurityNamespaceId,
 
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]

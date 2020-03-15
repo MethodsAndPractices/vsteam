@@ -10,6 +10,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Classes/VSTeamAgent.ps1"
 . "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/Set-VSTeamDefaultProject.ps1"
 . "$here/../../Source/Public/$sut"
 
 $testAgent = [PSCustomObject]@{
@@ -34,6 +35,9 @@ Describe 'Get-VSTeamAgent' {
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
       $Uri -like "*_apis/projects*"
    }
+
+   # Even with a default set this URI should not have the project added. 
+   Set-VSTeamDefaultProject -Project Testing
 
    Context 'Get-VSTeamAgent' {
       Mock Invoke-RestMethod { return [PSCustomObject]@{
