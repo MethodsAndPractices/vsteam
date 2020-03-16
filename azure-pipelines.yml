@@ -9,30 +9,12 @@ trigger:
     exclude:
     # exclude files and folders which are not part of the module or build pipeline
     - README.md
-    - CODE_OF_CONDUCT.md
-    - CHANGELOG.md
-    - .gitignore
-    - .editorconfig
-    - LICENSE
-    - dist/*
-    - docs/*
-    - .vscode/*
-    - .github/*
 pr:
   autoCancel: true
   paths:
     exclude:
     # exclude files and folders which are not part of the module or build pipeline
     - README.md
-    - CODE_OF_CONDUCT.md
-    - CHANGELOG.md
-    - .gitignore
-    - .editorconfig
-    - LICENSE
-    - dist/*
-    - docs/*
-    - .vscode/*
-    - .github/*
 
 
 resources:
