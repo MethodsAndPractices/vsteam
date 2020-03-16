@@ -12,15 +12,12 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
 
-# Loading System.Web avoids issues finding System.Web.HttpUtility
-Add-Type -AssemblyName 'System.Web'
-
 $results = Get-Content "$PSScriptRoot\sampleFiles\releaseDefAzD.json" -Raw | ConvertFrom-Json
 
 Describe 'Get-VSTeamReleaseDefinition' {
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    [VSTeamVersions]::Release = '1.0-unittest'
-   
+
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
       $Uri -like "*_apis/projects*"

@@ -13,19 +13,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/Set-VSTeamDefaultProject.ps1"
 . "$here/../../Source/Public/$sut"
 
-$testAgent = [PSCustomObject]@{
-   _links             = [PSCustomObject]@{ }
-   createdOn          = '2018-03-28T16:48:58.317Z'
-   maxParallelism     = 1
-   id                 = 102
-   status             = 'Online'
-   version            = '1.336.1'
-   enabled            = $true
-   osDescription      = 'Linux'
-   name               = 'Test_Agent'
-   authorization      = [PSCustomObject]@{ }
-   systemCapabilities = [PSCustomObject]@{ }
-}
+$testAgent = Get-Content "$PSScriptRoot\sampleFiles\agentSingleResult.json" -Raw | ConvertFrom-Json
 
 Describe 'Get-VSTeamAgent' {
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable

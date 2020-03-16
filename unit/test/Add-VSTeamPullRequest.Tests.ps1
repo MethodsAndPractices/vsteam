@@ -8,7 +8,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
 
-Describe 'Add-VSTeamPullRequest' {
+Describe 'VSTeamPullRequest' {
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable

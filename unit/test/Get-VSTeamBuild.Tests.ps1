@@ -8,36 +8,13 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
+. "$here/../../Source/Public/Remove-VSTeamAccount.ps1"
 
 # Sample result of a single build
-$singleResult = [PSCustomObject]@{
-   logs              = [PSCustomObject]@{ }
-   queue             = [PSCustomObject]@{ }
-   _links            = [PSCustomObject]@{ }
-   project           = [PSCustomObject]@{ }
-   repository        = [PSCustomObject]@{ }
-   requestedFor      = [PSCustomObject]@{ }
-   orchestrationPlan = [PSCustomObject]@{ }
-   definition        = [PSCustomObject]@{ }
-   lastChangedBy     = [PSCustomObject]@{ }
-   requestedBy       = [PSCustomObject]@{ }
-}
+$singleResult = Get-Content "$PSScriptRoot\sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json
 
 # Sample result for list of builds
-$results = [PSCustomObject]@{
-   value = [PSCustomObject]@{
-      logs              = [PSCustomObject]@{ }
-      queue             = [PSCustomObject]@{ }
-      _links            = [PSCustomObject]@{ }
-      project           = [PSCustomObject]@{ }
-      repository        = [PSCustomObject]@{ }
-      requestedFor      = [PSCustomObject]@{ }
-      orchestrationPlan = [PSCustomObject]@{ }
-      definition        = [PSCustomObject]@{ }
-      lastChangedBy     = [PSCustomObject]@{ }
-      requestedBy       = [PSCustomObject]@{ }
-   }
-}
+$results = Get-Content "$PSScriptRoot\sampleFiles\buildResults.json" -Raw | ConvertFrom-Json
 
 Describe 'Get-VSTeamBuild' {
    # Load the mocks to create the project name dynamic parameter

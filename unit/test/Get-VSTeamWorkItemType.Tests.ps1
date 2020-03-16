@@ -9,7 +9,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
 
-Describe 'Get-VSTeamWorkItemType' {
+Describe 'VSTeamWorkItemType' {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable

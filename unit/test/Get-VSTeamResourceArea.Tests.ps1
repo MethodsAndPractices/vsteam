@@ -9,7 +9,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
 
-Describe 'Get-VSTeamResourceArea' {
+Describe 'VSTeamResourceArea' {
    Context 'Get-VSTeamResourceArea' {
       Mock _callAPI { return @{
             value = @{ }

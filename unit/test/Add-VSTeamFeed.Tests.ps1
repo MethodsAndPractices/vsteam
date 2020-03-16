@@ -14,7 +14,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 $results = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
 
-Describe 'Feeds' {
+Describe 'VSTeamFeed' {
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
       
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName

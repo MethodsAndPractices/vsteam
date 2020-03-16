@@ -20,7 +20,7 @@ $accessControlEntryResult = Get-Content "$PSScriptRoot\sampleFiles\accessControl
 
 $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
   
-Describe 'Add-VSTeamAccessControlEntry' {
+Describe 'VSTeamAccessControlEntry' {
    # This API must be called with no project. However, if a default project is
    # set that gets added to the URI.
 
