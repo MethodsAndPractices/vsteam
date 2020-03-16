@@ -20,9 +20,6 @@ trigger:
     - .github/*
 pr:
   autoCancel: true
-  branches:
-    include:
-    - master
   paths:
     exclude:
     # exclude files and folders which are not part of the module or build pipeline
