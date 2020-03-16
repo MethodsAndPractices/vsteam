@@ -1,0 +1,12 @@
+{
+   "environments": {},
+   "variables": {
+      "BrowserToUse": {
+         "value": "phantomjs"
+      }
+   },
+   "_links": {
+      "self": {},
+      "web": {}
+   }
+}
