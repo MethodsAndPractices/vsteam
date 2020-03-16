@@ -36,6 +36,7 @@ Describe 'Get-VSTeamDescriptor' {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   Mock _supportsGraph { return $true }
 
    # You have to set the version or the api-version will not be added when
    [VSTeamVersions]::Graph = '5.0'

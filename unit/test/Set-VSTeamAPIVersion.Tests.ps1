@@ -8,7 +8,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
 
-Describe 'Set-VSTeamAPIVersion' {
+Describe 'VSTeamAPIVersion' {
 
    Context 'Set-VSTeamAPIVersion' {
       BeforeEach {
