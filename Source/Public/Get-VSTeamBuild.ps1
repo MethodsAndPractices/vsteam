@@ -29,7 +29,7 @@ function Get-VSTeamBuild {
         [Alias('BuildID')]
         [int[]] $Id,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

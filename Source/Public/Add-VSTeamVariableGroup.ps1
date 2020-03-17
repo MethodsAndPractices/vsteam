@@ -9,7 +9,7 @@ function Add-VSTeamVariableGroup {
         [Parameter(ParameterSetName = 'ByBody', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [string] $Body,
         [Parameter( Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

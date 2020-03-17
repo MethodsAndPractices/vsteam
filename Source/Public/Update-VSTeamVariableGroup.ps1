@@ -13,7 +13,7 @@ function Update-VSTeamVariableGroup {
         [string] $Body,
         [switch] $Force,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

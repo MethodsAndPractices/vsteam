@@ -14,7 +14,7 @@ function Add-VSTeamAzureRMServiceEndpoint {
         [string] $servicePrincipalKey,
         [string] $endpointName,
         [Parameter(Mandatory=$true, Position = 0)]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

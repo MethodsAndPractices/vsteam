@@ -3,7 +3,7 @@ function Set-VSTeamDefaultProject {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
     param([switch] $Force,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $Project)
     DynamicParam {

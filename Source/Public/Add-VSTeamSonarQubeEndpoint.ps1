@@ -10,7 +10,7 @@ function Add-VSTeamSonarQubeEndpoint {
         [parameter(ParameterSetName = 'Secure', Mandatory = $true, HelpMessage = 'Personal Access Token')]
         [securestring] $securePersonalAccessToken,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

@@ -4,7 +4,7 @@ function Add-VSTeamGitRepository {
         [parameter(Mandatory = $true)]
         [string] $Name,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

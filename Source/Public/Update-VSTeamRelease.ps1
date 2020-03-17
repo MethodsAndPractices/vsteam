@@ -7,7 +7,7 @@ function Update-VSTeamRelease {
         [PSCustomObject] $Release,
         [switch] $Force,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

@@ -5,7 +5,7 @@ function Add-VSTeamProject {
         [string] $ProjectName,
         [string] $Description,
         [switch] $TFVC,
-        [ValidateProcess()]
+        [ValidateProcessAttribute()]
         [ArgumentCompleter([ProcessCompleter])]
         $ProcessTemplate
     )

@@ -12,7 +12,7 @@ function Show-VSTeamBuildDefinition {
         [Parameter(ParameterSetName = 'List')]
         [string] $Path = '\',
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

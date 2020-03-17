@@ -7,7 +7,7 @@ function Update-VSTeamServiceEndpoint {
         [hashtable] $object,
         [switch] $Force,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

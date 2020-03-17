@@ -9,7 +9,7 @@ function Get-VSTeamProcess {
         [Alias('ProcessTemplateID')]
         [string] $Id,
         [Parameter(ParameterSetName = 'ByName',Mandatory=$true)]
-        [ValidateProcess()]
+        [ValidateProcessAttribute()]
         [ArgumentCompleter([ProcessCompleter])]
         $Name
 

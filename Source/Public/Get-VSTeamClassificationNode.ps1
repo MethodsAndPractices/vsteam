@@ -12,7 +12,7 @@ function Get-VSTeamClassificationNode {
         [Parameter(Mandatory = $false, ParameterSetName="ByIds")]
         [int] $Depth,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

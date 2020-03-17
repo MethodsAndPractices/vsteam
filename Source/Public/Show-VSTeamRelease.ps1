@@ -5,7 +5,7 @@ function Show-VSTeamRelease {
         [Alias('ReleaseID')]
         [int] $id,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

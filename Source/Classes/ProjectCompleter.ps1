@@ -3,10 +3,11 @@ class ProjectCompleter : System.Management.Automation.IArgumentCompleter {
         [string]$CommandName, [string]$ParameterName, [string]$WordToComplete,
         [System.Management.Automation.Language.CommandAst]$CommandAst, [System.Collections.IDictionary] $FakeBoundParameters
     )    {
-        if ([VSTeamProjectCache]::timestamp -lt 0 -or 
-            [VSTeamProjectCache]::timestamp -lt [datetime]::Now.TimeOfDay.TotalMinutes - 5) {
-            [VSTeamProjectCache]::projects  =  _getProjects
-            [VSTeamProjectCache]::timestamp = (get-date).TimeOfDay.TotalMinutes
+        if (  [VSTeamVersions]::Account -and 
+             ([VSTeamProjectCache]::timestamp -lt 0 -or
+              [VSTeamProjectCache]::timestamp -lt [datetime]::Now.TimeOfDay.TotalMinutes - 5) ) {
+              [VSTeamProjectCache]::projects  = (Invoke-VSTeamRequest -url  ('{0}/_apis/projects?api-version={1}&stateFilter=All&$top=9999' -f [VSTeamVersions]::Account, [VSTeamVersions]::Core  )).value.name
+              [VSTeamProjectCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
         }
         $results = [System.Collections.Generic.List[System.Management.Automation.CompletionResult]]::new()
         foreach ($p in [VSTeamProjectCache]::projects ) {

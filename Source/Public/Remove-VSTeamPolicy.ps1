@@ -5,7 +5,7 @@ function Remove-VSTeamPolicy {
         [int[]] $Id,
         [switch] $Force,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

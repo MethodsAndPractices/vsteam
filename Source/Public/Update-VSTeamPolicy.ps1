@@ -11,7 +11,7 @@ function Update-VSTeamPolicy {
         [hashtable] $settings,
         [switch] $Force,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

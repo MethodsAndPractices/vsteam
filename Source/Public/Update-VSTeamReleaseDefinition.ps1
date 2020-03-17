@@ -8,7 +8,7 @@ function Update-VSTeamReleaseDefinition {
         # Forces the command without confirmation
         [switch] $Force,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

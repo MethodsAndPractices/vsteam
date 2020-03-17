@@ -20,12 +20,12 @@ function Get-VSTeamBuildDefinition {
         [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
         [switch]$raw,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )
     process {
-                if ($id) {
+         if ($id) {
             foreach ($item in $id) {
                 $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $([VSTeamVersions]::Build) `
                     -QueryString @{revision = $revision }

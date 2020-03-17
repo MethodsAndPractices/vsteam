@@ -18,7 +18,7 @@ function Add-VSTeamUserEntitlement {
       [string]$MSDNLicenseType = "none",
 
       [Parameter( Position = 0 )]
-      [ValidateProject()]
+      [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
     )

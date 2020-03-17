@@ -2,7 +2,7 @@ function Get-VSTeamWorkItemType {
     [CmdletBinding(DefaultParameterSetName = 'List')]
     param(
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName,
         [ArgumentCompleter([WorkItemTypeCompleter])]

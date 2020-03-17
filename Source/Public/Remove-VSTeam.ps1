@@ -6,7 +6,7 @@ function Remove-VSTeam {
         [string]$Id,
         [switch]$Force,
         [Parameter(Mandatory=$true, Position = 0 , ValueFromPipelineByPropertyName = $true)]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

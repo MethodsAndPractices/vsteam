@@ -34,7 +34,7 @@ function Get-VSTeamRelease {
         [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
         [switch]$raw,
         [Parameter(Position=1 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

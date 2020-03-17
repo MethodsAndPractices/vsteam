@@ -12,6 +12,3 @@ if ($null -ne $env:TEAM_PROJECT) {
 
 # Load the correct version of the environment variable
 Set-VSTeamAPIVersion -Target $([VSTeamVersions]::Version)
-
-#These need to be exported to make them accessible in classes but we don't want them to be usable from the command line.
-Get-Command _getProcesses,_getProjects,_getWorkItemTypes,_callApi  | ForEach-Object { $_.Visibility =  [System.Management.Automation.SessionStateEntryVisibility]::Private}

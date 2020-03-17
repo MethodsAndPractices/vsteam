@@ -5,7 +5,7 @@ function Remove-VSTeamVariableGroup {
         [string[]] $id,
         [switch] $Force,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

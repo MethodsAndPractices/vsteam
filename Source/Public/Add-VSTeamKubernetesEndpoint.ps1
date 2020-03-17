@@ -14,7 +14,7 @@ function Add-VSTeamKubernetesEndpoint {
         [switch] $acceptUntrustedCerts,
         [switch] $generatePfx,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

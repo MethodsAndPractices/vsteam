@@ -6,7 +6,7 @@ function Get-VSTeamVariableGroup {
         [Parameter(Position = 0, ParameterSetName = 'ByName', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [string] $Name,
         [Parameter(Position=1)]
-        [validateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter] ) ]
         $ProjectName
     )

@@ -7,7 +7,7 @@ function Get-VSTeamGitRepository {
         [Parameter(ParameterSetName = 'ByName', ValueFromPipeline = $true)]
         [string[]] $Name,
         [Parameter( Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

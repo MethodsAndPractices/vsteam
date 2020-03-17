@@ -8,7 +8,7 @@ function Add-VSTeamBuild {
         [Parameter(Mandatory = $false)]
         [hashtable] $BuildParameters,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName,
         [ArgumentCompleter([TeamQueueCompleter])]

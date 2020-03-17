@@ -19,7 +19,7 @@ function Invoke-VSTeamRequest {
       [object]$QueryString,
       [string]$Team,
       [Parameter( Position = 0 )]
-      [ValidateProject()]
+      [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )

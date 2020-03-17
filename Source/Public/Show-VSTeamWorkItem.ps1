@@ -5,7 +5,7 @@ function Show-VSTeamWorkItem {
         [Alias('WorkItemID')]
         [int] $Id,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

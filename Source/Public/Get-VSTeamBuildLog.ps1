@@ -6,7 +6,7 @@ function Get-VSTeamBuildLog {
         [int[]] $Id,
         [int] $Index,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

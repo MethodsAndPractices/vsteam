@@ -16,7 +16,7 @@
       [switch] $Force,
 
       [Parameter( Position = 0 )]
-      [ValidateProject()]
+      [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )

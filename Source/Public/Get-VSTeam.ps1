@@ -12,7 +12,7 @@ function Get-VSTeam {
         [Alias('TeamName')]
         [string[]] $Name,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

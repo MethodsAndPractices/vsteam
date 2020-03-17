@@ -8,7 +8,7 @@ function Get-VSTeamWiql {
         [Parameter(ParameterSetName = 'ByQuery', Mandatory = $true)]
         [string] $Query,
         [Parameter(Position=1)]
-        [validateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName,
         [string] $Team,

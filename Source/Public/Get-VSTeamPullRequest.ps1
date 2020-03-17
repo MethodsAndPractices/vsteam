@@ -39,7 +39,7 @@ function Get-VSTeamPullRequest {
       [int] $Skip,
 
       [Parameter( Position = 0 )]
-      [ValidateProject()]
+      [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )

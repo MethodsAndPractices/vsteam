@@ -15,7 +15,7 @@ function Set-VSTeamEnvironmentStatus {
         # Forces the command without confirmation
         [switch] $Force,
         [Parameter(Position=1)]
-        [validateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter] ) ]
         $ProjectName
     )

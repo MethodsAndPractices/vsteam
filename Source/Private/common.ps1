@@ -64,7 +64,7 @@ function _buildRequestURI {
       [string]$version,
       [string]$subDomain,
       [object]$queryString,
-      [ValidateProject()]
+      [ValidateProjectAttribute()]
       $ProjectName
    )
 

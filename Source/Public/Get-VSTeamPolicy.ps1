@@ -4,7 +4,7 @@ function Get-VSTeamPolicy {
         [Parameter(ValueFromPipeline = $true)]
         [int[]] $Id,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )

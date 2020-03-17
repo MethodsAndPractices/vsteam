@@ -7,7 +7,7 @@ function Get-VSTeamApproval {
         [int[]] $ReleaseIdsFilter,
         [string] $AssignedToFilter,
         [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProject()]
+        [ValidateProjectAttribute()]
         [ArgumentCompleter([ProjectCompleter])]
         $ProjectName
     )
