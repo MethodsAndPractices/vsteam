@@ -2,9 +2,9 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    Describe 'wiql' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -34,11 +34,13 @@ InModuleScope VSTeam {
          asOf            = "2019-10-03T18:35:09.117Z"
          columns         = @($column)
          sortColumns     = @($sortColumn)
-      workItems       = @($workItem, $workItem)
+         workItems       = @($workItem, $workItem)
       }
 
-      $expandedWorkItems = @($workItem, $workItem)
-
+      $expandedWorkItems = @{
+         count = 1
+         value = @($workItem, $workItem)
+      }
 
       Context 'Get-Wiql' {
          Mock Invoke-RestMethod {

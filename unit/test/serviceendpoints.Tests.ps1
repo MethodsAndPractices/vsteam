@@ -2,9 +2,9 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    Describe 'ServiceEndpoints TFS2017 throws' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -28,6 +28,8 @@ InModuleScope VSTeam {
    }
 
    Describe 'ServiceEndpoints TFS' {
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -54,7 +56,7 @@ InModuleScope VSTeam {
             Get-VSTeamServiceEndpoint -projectName project -Verbose
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/serviceendpoints?api-version=$([VSTeamVersions]::DistributedTask)"
             }
          }
       }
@@ -66,7 +68,7 @@ InModuleScope VSTeam {
             Remove-VSTeamServiceEndpoint -projectName project -id 5 -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints/5?api-version=$([VSTeamVersions]::DistributedTask)" -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/serviceendpoints/5?api-version=$([VSTeamVersions]::DistributedTask)" -and
                $Method -eq 'Delete'
             }
          }
@@ -233,6 +235,8 @@ InModuleScope VSTeam {
    }
 
    Describe 'ServiceEndpoints VSTS' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'

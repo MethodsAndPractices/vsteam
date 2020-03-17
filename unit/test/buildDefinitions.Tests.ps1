@@ -5,11 +5,11 @@ Add-Type -AssemblyName 'System.Web'
 
 $env:Testing=$true
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
 
    Describe 'BuildDefinitions' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -119,7 +119,7 @@ InModuleScope VSTeam {
       Context 'Add-VSTeamBuildDefinition on TFS local Auth' {
          Mock Invoke-RestMethod { return $resultsVSTS }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
          it 'Should add build' {
             Add-VSTeamBuildDefinition -projectName project -inFile 'sampleFiles/builddef.json'
@@ -135,7 +135,7 @@ InModuleScope VSTeam {
       Context 'Remove-VSTeamBuildDefinition on TFS local Auth' {
          Mock Invoke-RestMethod { return $resultsVSTS }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
          Remove-VSTeamBuildDefinition -projectName project -id 2 -Force
 

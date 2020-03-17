@@ -2,24 +2,23 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
+   Describe "Git VSTS" {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
-   $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{
-         objectId = '6f365a7143e492e911c341451a734401bcacadfd'
-         name     = 'refs/heads/master'
-         creator  = [PSCustomObject]@{
-            displayName = 'Microsoft.VisualStudio.Services.TFS'
-            id          = '1'
-            uniqueName  = 'some@email.com'
+      $results = [PSCustomObject]@{
+         value = [PSCustomObject]@{
+            objectId = '6f365a7143e492e911c341451a734401bcacadfd'
+            name     = 'refs/heads/master'
+            creator  = [PSCustomObject]@{
+               displayName = 'Microsoft.VisualStudio.Services.TFS'
+               id          = '1'
+               uniqueName  = 'some@email.com'
+            }
          }
       }
-   }
-
-   Describe "Git VSTS" {
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"

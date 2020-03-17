@@ -5,12 +5,16 @@ InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+   #[VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $securityNamespaceListResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespaces.json" -Raw | ConvertFrom-Json
    $securityNamespaceSingleResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespace.single.json" -Raw | ConvertFrom-Json
 
    Describe "SecurityNamespace TFS Errors" {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -31,8 +35,14 @@ InModuleScope VSTeam {
       }
    }
 
-
    Describe 'SecurityNamespace VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
+      $securityNamespaceListResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespaces.json" -Raw | ConvertFrom-Json
+      $securityNamespaceSingleResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespace.single.json" -Raw | ConvertFrom-Json
+
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''
       Set-VSTeamAPIVersion AzD

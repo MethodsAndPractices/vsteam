@@ -48,8 +48,12 @@ function _testAdministrator {
    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
+function _getInstance {
+   return [VSTeamVersions]::Account
+}
+
 function _hasAccount {
-   if (-not ($Env:Testing -or [VSTeamVersions]::Account)) {
+   if (-not $($Env:Testing -or (_getInstance)) ) {
       throw 'You must call Set-VSTeamAccount before calling any other functions in this module.'
    }
 }
@@ -65,16 +69,23 @@ function _buildRequestURI {
       [string]$subDomain,
       [object]$queryString,
       [ValidateProjectAttribute()]
-      $ProjectName
+      $ProjectName,
+      [switch]$UseProjectId
    )
 
    process {
       $sb = New-Object System.Text.StringBuilder
 
-      $sb.Append($(_addSubDomain -subDomain $subDomain)) | Out-Null
+      $sb.Append($(_addSubDomain -subDomain $subDomain -instance $(_getInstance))) | Out-Null
 
       if ($ProjectName) {
-         $sb.Append("/$projectName") | Out-Null
+         if ($UseProjectId.IsPresent) {
+            $projectId = (Get-VSTeamProject -Name $ProjectName | Select-Object -ExpandProperty id)
+            $sb.Append("/$projectId") | Out-Null
+         }
+         else {
+            $sb.Append("/$projectName") | Out-Null
+         }
       }
 
       if ($team) {
@@ -185,14 +196,13 @@ function _isOnWindows {
 
 function _addSubDomain {
    param(
-      $subDomain
+      [string] $subDomain,
+      [string] $instance
    )
 
-   $instance = [VSTeamVersions]::Account
-
    # For VSTS Entitlements is under .vsaex
-   if ($subDomain -and [VSTeamVersions]::Account.ToLower().Contains('dev.azure.com')) {
-      $instance = [VSTeamVersions]::Account.ToLower().Replace('dev.azure.com', "$subDomain.dev.azure.com")
+   if ($subDomain -and $instance.ToLower().Contains('dev.azure.com')) {
+      $instance = $instance.ToLower().Replace('dev.azure.com', "$subDomain.dev.azure.com")
    }
 
    return $instance
@@ -234,7 +244,7 @@ function _getUserAgent {
 }
 
 function _useWindowsAuthenticationOnPremise {
-   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ([VSTeamVersions]::Account -like "*visualstudio.com") -and -not ([VSTeamVersions]::Account -like "https://dev.azure.com/*")
+   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($(_getInstance) -like "*visualstudio.com") -and -not ($(_getInstance) -like "https://dev.azure.com/*")
 }
 
 function _useBearerToken {
@@ -247,24 +257,14 @@ function _getWorkItemTypes {
       [string] $ProjectName
    )
 
-   if (-not [VSTeamVersions]::Account) {
+   if (-not $(_getInstance)) {
       Write-Output @()
       return
    }
 
-   $area = "/wit"
-   $resource = "/workitemtypes"
-   $instance = [VSTeamVersions]::Account
-   $version = [VSTeamVersions]::Core
-
-   # Build the url to list the projects
-   # You CANNOT use _buildRequestURI here or you will end up
-   # in an infinite loop.
-   $listurl = $instance + '/' + $ProjectName + '/_apis' + $area + $resource + '?api-version=' + $version
-
    # Call the REST API
    try {
-      $resp = _callAPI -url $listurl
+      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $([VSTeamVersions]::Core)
 
       # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
       # To replace all the "": with "_end":
@@ -281,13 +281,13 @@ function _getWorkItemTypes {
 }
 
 function _getProjects {
-   if (-not [VSTeamVersions]::Account) {
+   if (-not $(_getInstance)) {
       Write-Output @()
       return
    }
 
    $resource = "/projects"
-   $instance = [VSTeamVersions]::Account
+   $instance = $(_getInstance)
    $version = [VSTeamVersions]::Core
 
    # Build the url to list the projects
@@ -392,23 +392,17 @@ function _buildProjectNameDynamicParam {
 }
 
 function _getProcesses {
-   if (-not [VSTeamVersions]::Account) {
+   if (-not $(_getInstance)) {
       Write-Output @()
       return
    }
 
-   $resource = "/process/processes"
-   $instance = [VSTeamVersions]::Account
-   $version = [VSTeamVersions]::Core
-
-   # Build the url to list the projects
-   # You CANNOT use _buildRequestURI here or you will end up
-   # in an infinite loop.
-   $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
-
    # Call the REST API
    try {
-      $resp = _callAPI -url $listurl
+      $query = @{}
+      $query['stateFilter'] = 'All'
+      $query['$top'] = '9999'
+      $resp = _callAPI -area 'process' -resource 'processes' -Version $([VSTeamVersions]::Core) -QueryString $query
 
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
@@ -513,7 +507,34 @@ function _buildDynamicParam {
    )
    # Create the collection of attributes
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+   <#
+.SYNOPSIS
+Short description
 
+.DESCRIPTION
+Long description
+
+.PARAMETER ParameterName
+Parameter description
+
+.PARAMETER ParameterSetName
+Parameter description
+
+.PARAMETER Mandatory
+Parameter description
+
+.PARAMETER AliasName
+Parameter description
+
+.PARAMETER Position
+Parameter description
+
+.EXAMPLE
+An example
+
+.NOTES
+General notes
+#>
    # Create and set the parameters' attributes
    $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
    $ParameterAttribute.Mandatory = $Mandatory
@@ -584,7 +605,8 @@ function _callAPI {
       [string]$Team,
       [string]$Url,
       [object]$QueryString,
-      [hashtable]$AdditionalHeaders
+      [hashtable]$AdditionalHeaders,
+      [switch]$UseProjectId
    )
 
    # If the caller did not provide a Url build it.
@@ -621,15 +643,13 @@ function _callAPI {
       $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
    }
 
-   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys")
-   {
-      foreach ($key in $AdditionalHeaders.Keys)
-      {
+   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
+      foreach ($key in $AdditionalHeaders.Keys) {
          $params['Headers'].Add($key, $AdditionalHeaders[$key])
       }
    }
    # We have to remove any extra parameters not used by Invoke-RestMethod
-   $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
+   $extra = 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
    try {

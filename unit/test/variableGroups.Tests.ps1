@@ -2,12 +2,11 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $sampleFile2017 = "$PSScriptRoot\sampleFiles\variableGroupSamples2017.json"
+   
    Describe 'Variable Groups 2017' {
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+      
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/project*"
@@ -30,7 +29,7 @@ InModuleScope VSTeam {
             Get-VSTeamVariableGroup -projectName project
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)"
             }
          }
       }
@@ -48,7 +47,7 @@ InModuleScope VSTeam {
             Get-VSTeamVariableGroup -projectName project -id $projectID
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$([VSTeamVersions]::VariableGroups)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$([VSTeamVersions]::VariableGroups)"
             }
          }
       }
@@ -65,7 +64,7 @@ InModuleScope VSTeam {
             Get-VSTeamVariableGroup -projectName project -Name $varGroupName
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)&groupName=$varGroupName"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)&groupName=$varGroupName"
             }
          }
       }
@@ -78,7 +77,7 @@ InModuleScope VSTeam {
             Remove-VSTeamVariableGroup -projectName project -id $projectID -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$([VSTeamVersions]::VariableGroups)" -and
                $Method -eq 'Delete'
             }
          }
@@ -94,7 +93,7 @@ InModuleScope VSTeam {
 
          It 'should create a new Variable Group' {
             $testParameters = @{
-               ProjectName              = "project"
+               ProjectName = "project"
                Name        = "TestVariableGroup2"
                Description = "A test variable group linked to an Azure KeyVault"
                Variables   = @{
@@ -120,8 +119,8 @@ InModuleScope VSTeam {
 
          It 'should update an exisiting Variable Group' {
             $testParameters = @{
-               ProjectName              = "project"
-               id                       = 1
+               ProjectName = "project"
+               id          = 1
                Name        = "TestVariableGroup1"
                Description = "A test variable group"
                Variables   = @{
@@ -138,7 +137,7 @@ InModuleScope VSTeam {
             Update-VSTeamVariableGroup @testParameters
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
                $Method -eq 'Put'
             }
          }
@@ -147,6 +146,10 @@ InModuleScope VSTeam {
 
    $sampleFileVSTS = "$PSScriptRoot\sampleFiles\variableGroupSamples.json"
    Describe 'Variable Groups VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/project*"
@@ -216,7 +219,7 @@ InModuleScope VSTeam {
 
          It 'should create a new AzureRM Key Vault Variable Group' {
             $testParameters = @{
-               ProjectName               = "project"
+               ProjectName  = "project"
                Name         = "TestVariableGroup2"
                Description  = "A test variable group linked to an Azure KeyVault"
                Type         = "AzureKeyVault"
@@ -260,8 +263,8 @@ InModuleScope VSTeam {
 
          It 'should update an exisiting Variable Group' {
             $testParameters = @{
-               ProjectName              = "project"
-               Id                       = 1
+               ProjectName = "project"
+               Id          = 1
                Name        = "TestVariableGroup1"
                Description = "A test variable group"
                Type        = "Vsts"

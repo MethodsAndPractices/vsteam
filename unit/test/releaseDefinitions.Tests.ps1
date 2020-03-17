@@ -5,25 +5,25 @@ Add-Type -AssemblyName 'System.Web'
 
 $env:Testing=$true
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   [VSTeamVersions]::Release = '1.0-unittest'
-
-   $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{
-         queue           = [PSCustomObject]@{ name = 'Default' }
-         _links          = [PSCustomObject]@{
-            self = [PSCustomObject]@{}
-            web  = [PSCustomObject]@{}
-         }
-         retentionPolicy = [PSCustomObject]@{}
-         lastRelease     = [PSCustomObject]@{}
-         artifacts       = [PSCustomObject]@{}
-         modifiedBy      = [PSCustomObject]@{ name = 'project' }
-         createdBy       = [PSCustomObject]@{ name = 'test'}
-      }
-   }
-
    Describe 'ReleaseDefinitions' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      [VSTeamVersions]::Release = '1.0-unittest'
+
+      $results = [PSCustomObject]@{
+         value = [PSCustomObject]@{
+            queue           = [PSCustomObject]@{ name = 'Default' }
+            _links          = [PSCustomObject]@{
+               self = [PSCustomObject]@{}
+               web  = [PSCustomObject]@{}
+            }
+            retentionPolicy = [PSCustomObject]@{}
+            lastRelease     = [PSCustomObject]@{}
+            artifacts       = [PSCustomObject]@{}
+            modifiedBy      = [PSCustomObject]@{ name = 'project' }
+            createdBy       = [PSCustomObject]@{ name = 'test'}
+         }
+      }
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
@@ -75,7 +75,7 @@ InModuleScope VSTeam {
       Context 'Add-VSTeamReleaseDefinition on TFS local Auth' {
          Mock Invoke-RestMethod { return $results }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
          it 'Should add Release' {
             Add-VSTeamReleaseDefinition -projectName project -inFile 'Releasedef.json'
@@ -91,7 +91,7 @@ InModuleScope VSTeam {
       Context 'Remove-VSTeamReleaseDefinition on TFS local Auth' {
          Mock Invoke-RestMethod { return $results }
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
          Remove-VSTeamReleaseDefinition -projectName project -id 2 -Force
 

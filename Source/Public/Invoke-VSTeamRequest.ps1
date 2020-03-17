@@ -21,7 +21,8 @@ function Invoke-VSTeamRequest {
       [Parameter( Position = 0 )]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      $ProjectName,
+      [switch]$UseProjectId
    )
    process {
       $params = $PSBoundParameters

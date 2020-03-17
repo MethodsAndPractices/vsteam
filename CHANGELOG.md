@@ -142,11 +142,29 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/229) from [As
 
 Added additional property checks in VSTeamJobRequest
 
+## 6.4.7
+
+_callAPI, _buildRequestURI and Invoke-VSTeamRequest now support UseProjectId switch if the Project ID is required for the API call.
+
+## 6.4.6
+
+Corrected a display issue were the List view was being used by default instead of Table.
+
 ## 6.4.5
+
+All unit test now pass consistently.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/265) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+- Simplify merging of files
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/272) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Add Test-VSTeamYamlPipeline to preview check changes for YAML pipelines. [See release sprint 165](https://docs.microsoft.com/azure/devops/release-notes/2020/sprint-165-update#azure-pipelines-1).
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/273) from [Lukas Wöhrl](https://github.com/woehrl01) which included the following:
 
-Adds a new function Update-VSTeamAgent which allows to update the agent version
+- Adds a new function Update-VSTeamAgent which allows to update the agent version
 
 ## 6.4.4
 

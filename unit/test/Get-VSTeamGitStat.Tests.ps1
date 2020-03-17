@@ -2,30 +2,25 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $singleResult = [PSCustomObject]@{
-      commit = [PSCustomObject]@{
-         commitId = '67cae2b029dff7eb3dc062b49403aaedca5bad8d'
-         author = [PSCustomObject]@{
-            name = '"Chuck Reinhart'
+      commit        = [PSCustomObject]@{
+         commitId  = '67cae2b029dff7eb3dc062b49403aaedca5bad8d'
+         author    = [PSCustomObject]@{
+            name  = '"Chuck Reinhart'
             email = 'fabrikamfiber3@hotmail.com'
-            date = '2014-01-29T23:52:56Z'
+            date  = '2014-01-29T23:52:56Z'
          }
          committer = [PSCustomObject]@{
-            name = '"Chuck Reinhart'
+            name  = '"Chuck Reinhart'
             email = 'fabrikamfiber3@hotmail.com'
-            date = '2014-01-29T23:52:56Z'
+            date  = '2014-01-29T23:52:56Z'
          }
-         comment = 'home page'
-         url = 'https://dev.azure.com/fabrikam/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/67cae2b029dff7eb3dc062b49403aaedca5bad8d'
+         comment   = 'home page'
+         url       = 'https://dev.azure.com/fabrikam/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/67cae2b029dff7eb3dc062b49403aaedca5bad8d'
       }
-      name = 'develop'
-      aheadCount = 1
-      behindCount = 17
+      name          = 'develop'
+      aheadCount    = 1
+      behindCount   = 17
       isBaseVersion = $false
    }
 
@@ -33,76 +28,80 @@ InModuleScope VSTeam {
       count = 3
       value = @(
          [PSCustomObject]@{
-            commit = [PSCustomObject]@{
-               commitId = '67cae2b029dff7eb3dc062b49403aaedca5bad8d'
-               author = [PSCustomObject]@{
-                  name = '"Chuck Reinhart'
+            commit        = [PSCustomObject]@{
+               commitId  = '67cae2b029dff7eb3dc062b49403aaedca5bad8d'
+               author    = [PSCustomObject]@{
+                  name  = '"Chuck Reinhart'
                   email = 'fabrikamfiber3@hotmail.com'
-                  date = '2014-01-29T23:52:56Z'
+                  date  = '2014-01-29T23:52:56Z'
                }
                committer = [PSCustomObject]@{
-                  name = '"Chuck Reinhart'
+                  name  = '"Chuck Reinhart'
                   email = 'fabrikamfiber3@hotmail.com'
-                  date = '2014-01-29T23:52:56Z'
+                  date  = '2014-01-29T23:52:56Z'
                }
-               comment = 'home page'
-               url = 'https://dev.azure.com/fabrikam/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/67cae2b029dff7eb3dc062b49403aaedca5bad8d'
+               comment   = 'home page'
+               url       = 'https://dev.azure.com/fabrikam/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/67cae2b029dff7eb3dc062b49403aaedca5bad8d'
             }
-            name = 'develop'
-            aheadCount = 1
-            behindCount = 17
+            name          = 'develop'
+            aheadCount    = 1
+            behindCount   = 17
             isBaseVersion = $false
          },
          [PSCustomObject]@{
-            commit = [PSCustomObject]@{
-               parents = @('fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f')
-               treeId = '8263e7232a2331c563d737e4fc4e9c66a8286c63'
-               commitId = '23d0bc5b128a10056dc68afece360d8a0fabb014'
-               author = [PSCustomObject]@{
-                  name = 'Norman Paulk'
+            commit        = [PSCustomObject]@{
+               parents   = @('fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f')
+               treeId    = '8263e7232a2331c563d737e4fc4e9c66a8286c63'
+               commitId  = '23d0bc5b128a10056dc68afece360d8a0fabb014'
+               author    = [PSCustomObject]@{
+                  name  = 'Norman Paulk'
                   email = 'Fabrikamfiber16@hotmail.com'
-                  date = '2014-06-30T18:10:55Z'
+                  date  = '2014-06-30T18:10:55Z'
                }
                committer = [PSCustomObject]@{
-                  name = 'Norman Paulk'
+                  name  = 'Norman Paulk'
                   email = 'Fabrikamfiber16@hotmail.com'
-                  date = '2014-06-30T18:10:55Z'
+                  date  = '2014-06-30T18:10:55Z'
                }
-               comment = 'Better description for hello world\n'
-               url = 'https://dev.azure.com/fabrikam/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014'
+               comment   = 'Better description for hello world\n'
+               url       = 'https://dev.azure.com/fabrikam/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014'
             }
-            name = 'master'
-            aheadCount = 0
-            behindCount = 0
+            name          = 'master'
+            aheadCount    = 0
+            behindCount   = 0
             isBaseVersion = $true
          },
          [PSCustomObject]@{
-            commit = [PSCustomObject]@{
-               parents = @('fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f')
-               treeId = '8263e7232a2331c563d737e4fc4e9c66a8286c63'
-               commitId = '23d0bc5b128a10056dc68afece360d8a0fabb014'
-               author = [PSCustomObject]@{
-                  name = 'Norman Paulk'
+            commit        = [PSCustomObject]@{
+               parents   = @('fe17a84cc2dfe0ea3a2202ab4dbac0706058e41f')
+               treeId    = '8263e7232a2331c563d737e4fc4e9c66a8286c63'
+               commitId  = '23d0bc5b128a10056dc68afece360d8a0fabb014'
+               author    = [PSCustomObject]@{
+                  name  = 'Norman Paulk'
                   email = 'Fabrikamfiber16@hotmail.com'
-                  date = '2014-06-30T18:10:55Z'
+                  date  = '2014-06-30T18:10:55Z'
                }
                committer = [PSCustomObject]@{
-                  name = 'Norman Paulk'
+                  name  = 'Norman Paulk'
                   email = 'Fabrikamfiber16@hotmail.com'
-                  date = '2014-06-30T18:10:55Z'
+                  date  = '2014-06-30T18:10:55Z'
                }
-               comment = 'Better description for hello world\n'
-               url = 'https://dev.azure.com/fabrikam/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014'
+               comment   = 'Better description for hello world\n'
+               url       = 'https://dev.azure.com/fabrikam/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/commits/23d0bc5b128a10056dc68afece360d8a0fabb014'
             }
-            name = 'npaulk/feature'
-            aheadCount = 0
-            behindCount = 0
+            name          = 'npaulk/feature'
+            aheadCount    = 0
+            behindCount   = 0
             isBaseVersion = $true
          }
       )
    }
 
    Describe "Git VSTS" {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"

@@ -2,11 +2,6 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $projectResult = [PSCustomObject]@{
       name        = 'Test Project Public'
       description = ''
@@ -25,7 +20,11 @@ InModuleScope VSTeam {
 
    # The Graph API is not supported on TFS
    Describe "Groups TFS Errors" {
-     Context 'Get-VSTeamGroup' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
+      Context 'Get-VSTeamGroup' {
          Mock _callAPI { throw 'Should not be called' } -Verifiable
 
          It 'Should throw' {
@@ -41,6 +40,10 @@ InModuleScope VSTeam {
    }
 
    Describe 'Groups VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Graph = ''
       [VSTeamVersions]::Graph = '5.0'
@@ -89,7 +92,7 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamGroup by subjectTypes' {
          Mock Invoke-RestMethod { return $groupListResult } -Verifiable
 
-         Get-VSTeamGroup -SubjectTypes vssgp,aadgp
+         Get-VSTeamGroup -SubjectTypes vssgp, aadgp
 
          It 'Should return groups' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -103,7 +106,7 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamGroup by subjectTypes and scopeDescriptor' {
          Mock Invoke-RestMethod { return $groupListResult } -Verifiable
 
-         Get-VSTeamGroup -ScopeDescriptor scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2 -SubjectTypes vssgp,aadgp
+         Get-VSTeamGroup -ScopeDescriptor scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2 -SubjectTypes vssgp, aadgp
 
          It 'Should return groups' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {

@@ -5,9 +5,6 @@ Add-Type -AssemblyName 'System.Web'
 
 $env:Testing=$true
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   [VSTeamVersions]::Release = '1.0-unittest'
-
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
          environments = [PSCustomObject]@{}
@@ -32,6 +29,9 @@ InModuleScope VSTeam {
    }
 
    Describe 'Releases' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      [VSTeamVersions]::Release = '1.0-unittest'
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"

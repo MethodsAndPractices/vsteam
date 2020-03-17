@@ -5,10 +5,10 @@ InModuleScope VSTeam {
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+   #[VSTeamVersions]::Account = 'https://dev.azure.com/test'
 
    $classificationNodeResult =
-@"
+   @"
 {
    "id": 16,
    "identifier": "dfa90792-403a-4119-a52b-bd142c08291b",
@@ -82,8 +82,8 @@ InModuleScope VSTeam {
 "@ | ConvertFrom-Json
 
 
-$withoutChildNode =
-@"
+   $withoutChildNode =
+   @"
 {
    "count": 2,
    "value": [
@@ -126,6 +126,15 @@ $withoutChildNode =
 "@ | ConvertFrom-Json
 
    Describe 'ClassificationNodes VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*"
+      }
+
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''
       [VSTeamVersions]::Core = '5.0'
@@ -178,7 +187,7 @@ $withoutChildNode =
       Context 'Get-VSTeamClassificationNode by Ids' {
          Mock Invoke-RestMethod { return $classificationNodeResult } -Verifiable
 
-         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(1,2,3,4)
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(1, 2, 3, 4)
 
          It 'Should return Nodes' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -192,7 +201,7 @@ $withoutChildNode =
       Context 'Get-VSTeamClassificationNode by Ids returns no child node' {
          Mock Invoke-RestMethod { return $withoutChildNode } -Verifiable
 
-         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(43,44)
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(43, 44)
 
          It 'Should return Nodes' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {

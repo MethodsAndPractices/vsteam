@@ -2,44 +2,44 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-   [VSTeamVersions]::DistributedTask = '1.0-unitTest'
-
-   $hostedPool = [PSCustomObject]@{
-      owner     = [PSCustomObject]@{
-         displayName = 'Test User'
-         id          = '1'
-         uniqueName  = 'test@email.com'
-      }
-      createdBy = [PSCustomObject]@{
-         displayName = 'Test User'
-         id          = '1'
-         uniqueName  = 'test@email.com'
-      }
-      id        = 1
-      size      = 1
-      isHosted  = $true
-      Name      = 'Hosted'
-   }
-
-   $privatePool = [PSCustomObject]@{
-      owner     = [PSCustomObject]@{
-         displayName = 'Test User'
-         id          = '1'
-         uniqueName  = 'test@email.com'
-      }
-      createdBy = [PSCustomObject]@{
-         displayName = 'Test User'
-         id          = '1'
-         uniqueName  = 'test@email.com'
-      }
-      id        = 1
-      size      = 1
-      isHosted  = $false
-      Name      = 'Default'
-   }
-
    Describe 'pools' {
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      [VSTeamVersions]::DistributedTask = '1.0-unitTest'
+
+      $hostedPool = [PSCustomObject]@{
+         owner     = [PSCustomObject]@{
+            displayName = 'Test User'
+            id          = '1'
+            uniqueName  = 'test@email.com'
+         }
+         createdBy = [PSCustomObject]@{
+            displayName = 'Test User'
+            id          = '1'
+            uniqueName  = 'test@email.com'
+         }
+         id        = 1
+         size      = 1
+         isHosted  = $true
+         Name      = 'Hosted'
+      }
+
+      $privatePool = [PSCustomObject]@{
+         owner     = [PSCustomObject]@{
+            displayName = 'Test User'
+            id          = '1'
+            uniqueName  = 'test@email.com'
+         }
+         createdBy = [PSCustomObject]@{
+            displayName = 'Test User'
+            id          = '1'
+            uniqueName  = 'test@email.com'
+         }
+         id        = 1
+         size      = 1
+         isHosted  = $false
+         Name      = 'Default'
+      }
+   
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"

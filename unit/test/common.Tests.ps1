@@ -150,10 +150,11 @@ InModuleScope VSTeam {
       }
 
       Context '_getWorkItemTypes' {
-         [VSTeamVersions]::Account = $null
+         Mock _getInstance { return $null } -Verifiable
 
          It 'should return empty array' {
             _getWorkItemTypes -ProjectName test | Should be @()
+            Assert-VerifiableMock
          }
       }
 

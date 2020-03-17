@@ -9,6 +9,6 @@ function Show-VSTeamFeed {
    process {
       _hasAccount
 
-      Show-Browser "$([VSTeamVersions]::Account)/_packaging?feed=$Name&_a=feed"
+      Show-Browser "$(_getInstance)/_packaging?feed=$Name&_a=feed"
    }
 }

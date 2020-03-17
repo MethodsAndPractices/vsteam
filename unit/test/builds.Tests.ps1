@@ -58,7 +58,7 @@ InModuleScope VSTeam {
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -355,7 +355,7 @@ InModuleScope VSTeam {
       # Remove any previously loaded accounts
       Remove-VSTeamAccount
 
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
       Context 'Get Build Log with index on TFS local Auth' {
          Mock Invoke-RestMethod { return @{ value = @{} } } -Verifiable -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/2?api-version=$([VSTeamVersions]::Build)" }

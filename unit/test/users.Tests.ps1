@@ -3,16 +3,14 @@ Set-StrictMode -Version Latest
 $env:Testing=$true
 InModuleScope VSTeam {
 
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $userListResult = Get-Content "$PSScriptRoot\sampleFiles\users.json" -Raw | ConvertFrom-Json
    $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
 
    # The Graph API is not supported on TFS
    Describe "Users TFS Errors" {
-     Context 'Get-VSTeamUser' {
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+      
+      Context 'Get-VSTeamUser' {
          Mock _callAPI { throw 'Should not be called' } -Verifiable
 
          It 'Should throw' {
@@ -24,6 +22,10 @@ InModuleScope VSTeam {
    }
 
    Describe 'Users VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Graph = ''
       [VSTeamVersions]::Graph = '5.0'
@@ -55,7 +57,7 @@ InModuleScope VSTeam {
       Context 'Get-VSTeamUser by subjectTypes' {
          Mock Invoke-RestMethod { return $userListResult } -Verifiable
 
-         Get-VSTeamUser -SubjectTypes vss,aad
+         Get-VSTeamUser -SubjectTypes vss, aad
 
          It 'Should return users' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {

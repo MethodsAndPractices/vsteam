@@ -2,11 +2,6 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
    $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
    $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
 
@@ -28,7 +23,7 @@ InModuleScope VSTeam {
    $projectResultObject = [VSTeamProject]::new($projectResult)
 
    $accessControlEntryResult =
-@"
+   @"
 {
    "count": 1,
    "value": [
@@ -43,6 +38,10 @@ InModuleScope VSTeam {
 "@ | ConvertFrom-Json
 
    Describe 'GitRepositoryPermissions VSTS' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   
       # You have to set the version or the api-version will not be added when
       # [VSTeamVersions]::Core = ''
       [VSTeamVersions]::Core = '5.0'

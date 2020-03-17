@@ -2,16 +2,14 @@ Set-StrictMode -Version Latest
 
 $env:Testing=$true
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
-   $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{ }
-   }
-
    Describe 'Policies VSTS' {
+      $results = [PSCustomObject]@{
+         value = [PSCustomObject]@{ }
+      }
+      
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
