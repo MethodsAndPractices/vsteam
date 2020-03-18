@@ -1,6 +1,8 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal (non-exported) code of a Script Modu
+
 InModuleScope VSTeam {
    $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
    $userSingleResultObject = [VSTeamUser]::new($userSingleResult)

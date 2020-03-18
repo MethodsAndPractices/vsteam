@@ -1,12 +1,13 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
    Describe 'VSTeam Classes' {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-   
+
       Context 'VSTeamUserEntitlement ToString' {
          $obj = [PSCustomObject]@{
             displayName = 'Test User'
@@ -48,7 +49,7 @@ InModuleScope VSTeam {
 
    Describe 'TFS 2017 Build Definition' {
       Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-      
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"

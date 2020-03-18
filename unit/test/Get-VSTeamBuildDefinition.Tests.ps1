@@ -1,9 +1,9 @@
 Set-StrictMode -Version Latest
-
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
-
-$env:Testing=$true
+$env:testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
    $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
    $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json

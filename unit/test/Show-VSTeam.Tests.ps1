@@ -1,23 +1,19 @@
 Set-StrictMode -Version Latest
+$env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
+InModuleScope VSTeam {
+   Describe 'Show-VSTeam' {
+      Context 'Show-VSTeam' {
+         Mock _getInstance { return 'https://dev.azure.com/test' }
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+         Mock Show-Browser -Verifiable
 
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
+         Show-VSTeam
 
-Describe 'Show-VSTeam' {
-   Context 'Show-VSTeam' {
-      Mock _getInstance { return 'https://dev.azure.com/test' }
-      
-      Mock Show-Browser -Verifiable
-
-      Show-VSTeam
-
-      It 'Should open browser' {
-         Assert-VerifiableMock
+         It 'Should open browser' {
+            Assert-VerifiableMock
+         }
       }
    }
 }

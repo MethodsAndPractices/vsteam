@@ -1,6 +1,7 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
    $taskGroupsJson = "$PSScriptRoot\sampleFiles\taskGroups.json"
    $taskGroupJson = "$PSScriptRoot\sampleFiles\taskGroup.json"

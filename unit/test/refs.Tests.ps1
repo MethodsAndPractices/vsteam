@@ -1,6 +1,7 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
    Describe "Git VSTS" {
       # Set the account to use for testing. A normal user would do this
@@ -18,7 +19,7 @@ InModuleScope VSTeam {
             }
          }
       }
-   
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"

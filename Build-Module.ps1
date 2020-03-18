@@ -84,15 +84,17 @@ Write-Output 'Publishing about help files'
 Copy-Item -Path ./Source/en-US       -Destination "$output/" -Recurse   -Force
 Copy-Item -Path ./Source/VSTeam.psd1 -Destination "$output/VSTeam.psd1" -Force
 
+
 Get-Content -Path ./Source/VSTeam.psm1 | Out-File -Append -FilePath "$output/VSTeam.psm1"
-Write-Output 'Updating Functions To Export'
+<#Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
       ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+#>
 
-#$PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
+$PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
 Write-Output 'Updating Functions To Export'
 $FunctionsToExport  = @()
-#$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"})
+$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"})
 $FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName
 Update-ModuleManifest -Path "$output/VSTeam.psd1" -FunctionsToExport $FunctionsToExport
 

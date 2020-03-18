@@ -1,24 +1,8 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
-
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   # [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-
-
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/VSTeamSecurityNamespace.ps1"
-. "$here/../../Source/Classes/VSTeamAccessControlEntry.ps1"
-. "$here/../../Source/Classes/VSTeamAccessControlList.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
 
 $accessControlListResult =
 @"
@@ -168,17 +152,20 @@ $securityNamespace =
 $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
 
 Describe 'AccessControlList VSTS' {
-   # You have to set the version or the api-version will not be added when
-   # [VSTeamVersions]::Core = ''
-   [VSTeamVersions]::Core = '5.0'
+
 
    Context 'Get-VSTeamAccessControlList by SecurityNamespaceId' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          # Write-Host $args
 
          return $accessControlListResult
       } -Verifiable
+
+
 
       Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse
 
@@ -197,6 +184,9 @@ Describe 'AccessControlList VSTS' {
    }
 
    Context 'Get-VSTeamAccessControlList by SecurityNamespace' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
       Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
 
@@ -215,6 +205,9 @@ Describe 'AccessControlList VSTS' {
    }
 
    Context 'Get-VSTeamAccessControlList by SecurityNamespace (pipeline)' {
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock Get-VSTeamSecurityNamespace { return $securityNamespaceObject }
       Mock Invoke-RestMethod { return $accessControlListResult } -Verifiable
 

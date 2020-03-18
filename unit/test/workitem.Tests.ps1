@@ -1,16 +1,20 @@
 Set-StrictMode -Version Latest
-
-$env:Testing=$true
+$env:testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
    Describe 'workitems' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+      $singleResult = ' {"value": {"name": "Task"}} '
+      Mock Invoke-RestMethod {
+         # If this test fails uncomment the line below to see how the mock was called.
+         # Write-Host $args
+          return $singleResult
+      }
 
       $obj = @{
          id  = 47
@@ -24,16 +28,10 @@ InModuleScope VSTeam {
       }
 
       Context 'Add-WorkItem' {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            # Write-Host $args
-
-         }
-         Mock -CommandName _CallApi -ParameterFilter {$Url -like "*workitemtypes*"} {'{"value": {"name": "Task"}} ' }
 
          It 'Without Default Project should add work item' {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
-            Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test
+            Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test\
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and

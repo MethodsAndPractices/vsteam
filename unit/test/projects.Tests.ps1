@@ -1,10 +1,11 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
    Describe 'Project' {
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      
+
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
       . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
 
@@ -401,7 +402,7 @@ InModuleScope VSTeam {
          AfterAll {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
          }
-         
+
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $false }
 

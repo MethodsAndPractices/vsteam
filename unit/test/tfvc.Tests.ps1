@@ -1,6 +1,7 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
 
    $singleResult = [PSCustomObject]@{
@@ -37,7 +38,7 @@ InModuleScope VSTeam {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
 
-            return $singleResult 
+            return $singleResult
          } -Verifiable
 
          $res = Get-VSTeamTfvcRootBranch
@@ -202,8 +203,8 @@ InModuleScope VSTeam {
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          # Write-Host $args
-         
-         return $singleResult 
+
+         return $singleResult
       } -Verifiable
 
       It 'should call the REST endpoint with correct parameters for <t>' -TestCases $testCases {

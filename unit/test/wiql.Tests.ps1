@@ -1,6 +1,7 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
    Describe 'wiql' {
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
@@ -30,7 +31,7 @@ InModuleScope VSTeam {
 
       $wiqlResult = @{
          querytype       = "flat"
-         queryResultType = "worItem"
+         queryResultType = "workItem"
          asOf            = "2019-10-03T18:35:09.117Z"
          columns         = @($column)
          sortColumns     = @($sortColumn)
@@ -59,7 +60,7 @@ InModuleScope VSTeam {
          }
 
          It 'Get work items with custom WIQL query' {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
+            #$Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery
 
@@ -76,7 +77,7 @@ InModuleScope VSTeam {
          }
 
          It 'Get work items with custom WIQL query with -Top 250' {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
+            #$Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 250
 
@@ -93,7 +94,7 @@ InModuleScope VSTeam {
          }
 
          It 'Get work items with custom WIQL query with -Top 0' {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
+            #$Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 0
 
@@ -110,7 +111,7 @@ InModuleScope VSTeam {
          }
 
          It 'Get work items with custom WIQL query with expanded work items' {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
+            #$Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Expand
 
@@ -127,7 +128,7 @@ InModuleScope VSTeam {
          }
 
          It 'Get work items with custom WIQL query with time precision' {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
+            #$Global:PSDefaultParameterValues.Remove("*:projectName")
             $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -TimePrecision
 
@@ -146,16 +147,23 @@ InModuleScope VSTeam {
          }
 
          It 'Get work items with query ID query' {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
+            #$Global:PSDefaultParameterValues.Remove("*:projectName")
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/1?api-version=$([VSTeamVersions]::Core)&`$top=100"
             }
          }
-
+         $wiqlResult = @{
+            querytype       = "flat"
+            queryResultType = "workItem"
+            asOf            = "2019-10-03T18:35:09.117Z"
+            columns         = @($column)
+            sortColumns     = @($sortColumn)
+            workItems       = @($workItem, $workItem)
+         }
          It 'Get work items with query ID query with expanded work items' {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
+            #$Global:PSDefaultParameterValues.Remove("*:projectName")
             Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1 -Expand
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

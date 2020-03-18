@@ -1,6 +1,7 @@
 Set-StrictMode -Version Latest
-
 $env:Testing=$true
+# The InModuleScope command allows you to perform white-box unit testing on the
+# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 InModuleScope VSTeam {
 
     Describe 'Pull Requests' {
@@ -9,9 +10,6 @@ InModuleScope VSTeam {
         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
         # You have to set the version or the api-version will not be added when
-        # [VSTeamVersions]::Core = ''
-        [VSTeamVersions]::Git = '5.1-preview'
-        [VSTeamVersions]::Graph = '5.0'
 
        $result = Get-Content "$PSScriptRoot\sampleFiles\updatePullRequestResponse.json" -Raw | ConvertFrom-Json
 
