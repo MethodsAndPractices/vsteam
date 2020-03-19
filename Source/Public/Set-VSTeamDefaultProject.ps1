@@ -9,7 +9,7 @@ function Set-VSTeamDefaultProject {
     DynamicParam {
         $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
         # Only add these options on Windows Machines
-        if ([System.Environment]::OSVersion.Platform -like "win*") {
+        if (_isOnWindows) {
             $ParameterName = 'Level'
             # Create the collection of attributes
             $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
@@ -36,13 +36,13 @@ function Set-VSTeamDefaultProject {
         return $dp
     }
     begin {
-                if ([System.Environment]::OSVersion.Platform -like "win*") {
+      if (_isOnWindows) {
             $Level = $PSBoundParameters[$ParameterName]
-        }
+      }
     }
     process {
         if ($Force -or $pscmdlet.ShouldProcess($Project, "Set-VSTeamDefaultProject")) {
-            if ([System.Environment]::OSVersion.Platform -like "win*") {
+            if (_isOnWindows) {
                 if (-not $Level) {
                     $Level = "Process"
                 }
