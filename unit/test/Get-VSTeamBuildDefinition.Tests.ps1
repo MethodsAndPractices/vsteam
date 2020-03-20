@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region include
 Import-Module SHiPS
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -32,253 +33,173 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamBuildDefinition.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
-$resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
-$resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
-$results2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
-$results2018 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
+Describe 'VSTeamBuildDefinition' {
+   Context 'Get-VSTeamBuildDefinition' {
+      $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
+      $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+      $results2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
+      $results2018 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
 
-Describe 'Get-VSTeamBuildDefinition' {
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+      Mock Invoke-RestMethod { return $results2017 } -ParameterFilter { $Uri -like "*2017Project*" }
+      Mock Invoke-RestMethod { return $results2018 } -ParameterFilter { $Uri -like "*2018Project*" }
+      Mock Invoke-RestMethod { return $resultsAzD } -ParameterFilter { $Uri -like "*azd*" }
+      Mock Invoke-RestMethod { return $resultsVSTS } -ParameterFilter { $Uri -like "*vsts*" }
+      Mock Invoke-RestMethod { return $resultsVSTS.value } -ParameterFilter { $Uri -like "*101*" }
 
-   Context 'Succeeds with no parameters 2017' {
-      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+      Context 'Server' {
+         Mock _useWindowsAuthenticationOnPremise { return $true }
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
-      Mock _useWindowsAuthenticationOnPremise { return $true }
-      Mock Invoke-RestMethod {
-         # If this test fails uncomment the line below to see how the mock was called.
-         # Write-Host $args
-         # Write-Host $([VSTeamVersions]::Build)
-         # Write-Host $([VSTeamVersions]::Account)
+         It 'TFS 2017 with no parameters should return build definitions' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName "2017Project"
 
-         return $results2017
-      }
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/2017Project/_apis/build/definitions*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
+            }
+         }
 
-      It 'should return build definitions' {
-         Get-VSTeamBuildDefinition -projectName project
+         It 'TFS 2018 with no parameters should return build definitions' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName "2018Project"
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-            $Uri -like "*type=All*"
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -like "*http://localhost:8080/tfs/defaultcollection/2018Project/_apis/build/definitions*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
+            }
+         }
+
+         It 'by ID local auth should return build definition' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName project -id 101
+
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)"
+            }
          }
       }
-   }
 
-   Context 'Succeeds with no parameters 2018' {
-      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+      Context 'Services' {
+         ## Arrange
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-      Mock _useWindowsAuthenticationOnPremise { return $true }
-      Mock Invoke-RestMethod {
-         return $results2018
-      }
+         It 'AzD v5.0 of API with no parameters should return build definitions' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName azd
 
-      It 'should return build definitions' {
-         Get-VSTeamBuildDefinition -projectName project
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-            $Uri -like "*type=All*"
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -like "*https://dev.azure.com/test/azd/_apis/build/definitions*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
+            }
          }
-      }
-   }
 
-   Context 'Succeeds with no parameters AzD v5.0 of API' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         It 'should return build definitions' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName vsts
 
-      Mock Invoke-RestMethod {
-         return $resultsAzD
-      }
-
-      It 'should return build definitions' {
-         Get-VSTeamBuildDefinition -projectName project
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-            $Uri -like "*type=All*"
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=All*"
+            }
          }
-      }
-   }
 
-   Context 'Succeeds with no parameters VSTS' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         It 'with type parameter should return build definitions by type' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName vsts -type build
 
-      Mock Invoke-RestMethod {
-         return $resultsVSTS
-      }
-
-      It 'should return build definitions' {
-         Get-VSTeamBuildDefinition -projectName project
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-            $Uri -like "*type=All*"
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*type=build*"
+            }
          }
-      }
-   }
 
-   Context 'Succeeds with no parameters VSTS yaml ' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         It 'with filter parameter should return build definitions by filter' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName vsts -filter 'click*'
 
-      Mock Invoke-RestMethod {
-         return $resultsVSTS
-      }
-
-      It 'should return build definitions' {
-         Get-VSTeamBuildDefinition -projectName project
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-            $Uri -like "*type=All*"
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*name=click*" -and
+               $Uri -like "*type=All*"
+            }
          }
-      }
-   }
 
-   Context 'Succeeds with type parameter' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         It 'with both parameters should return build definitions by filter' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName vsts -filter 'click*' -type build
 
-      Mock Invoke-RestMethod {
-         return $resultsVSTS
-      }
-
-      It 'should return build definitions by type' {
-         Get-VSTeamBuildDefinition -projectName project -type build
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-            $Uri -like "*type=build*"
+            ## Asset
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
+               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*name=click*" -and
+               $Uri -like "*type=build*"
+            }
          }
-      }
-   }
 
-   Context 'Succeeds with filter parameter' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         It 'by id should return build definition' {
+            ## Act
+            $b = Get-VSTeamBuildDefinition -projectName project -id 101
 
-      Mock Invoke-RestMethod { return $resultsVSTS }
+            ## Assert
+            $b | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'Team.BuildDefinition'
 
-      It 'should return build definitions by filter' {
-         Get-VSTeamBuildDefinition -projectName project -filter 'click*'
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-            $Uri -like "*name=click*" -and
-            $Uri -like "*type=All*"
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)"
+            }
          }
-      }
-   }
 
-   Context 'Succeeds with both parameters' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         It 'by ID -Raw should return build definition' {
+            ## Act
+            $raw = Get-VSTeamBuildDefinition -projectName project -id 101 -Raw
 
-      Mock Invoke-RestMethod { return $resultsVSTS }
+            ## Assert
+            $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.Management.Automation.PSCustomObject'
 
-      It 'should return build definitions by filter' {
-         Get-VSTeamBuildDefinition -projectName project -filter 'click*' -type build
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/project/_apis/build/definitions*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
-            $Uri -like "*name=click*" -and
-            $Uri -like "*type=build*"
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)"
+            }
          }
-      }
-   }
 
-   Context 'Succeeds by ID' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         It 'by ID -Json should return build definition' {
+            ## Act
+            $b = Get-VSTeamBuildDefinition -projectName project -id 101 -Json
 
-      Mock Invoke-RestMethod { return $resultsVSTS.value }
+            ## Assert
+            $b | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.String'
 
-      It 'should return build definition' {
-         $b = Get-VSTeamBuildDefinition -projectName project -id 15
-
-         $b | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'Team.BuildDefinition'
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)"
+            }
          }
-      }
-   }
 
-   Context 'Succeeds by ID -Raw' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         It 'with revision parameter should return build definitions by revision' {
+            ## Act
+            Get-VSTeamBuildDefinition -projectName project -id 101 -revision 1
 
-      Mock Invoke-RestMethod { return $resultsVSTS.value }
-
-      It 'should return build definition' {
-         $raw = Get-VSTeamBuildDefinition -projectName project -id 15 -Raw
-
-         $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.Management.Automation.PSCustomObject'
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)&revision=1"
+            }
          }
-      }
-   }
-
-   Context 'Succeeds by ID -Json' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-
-      Mock Invoke-RestMethod { return $resultsVSTS.value }
-
-      It 'should return build definition' {
-         $b = Get-VSTeamBuildDefinition -projectName project -id 15 -Json
-
-         $b | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.String'
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
-         }
-      }
-   }
-
-   Context 'Succeeds by ID local auth' {
-      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-
-      Mock _useWindowsAuthenticationOnPremise { return $true }
-      Mock Invoke-RestMethod { return $resultsVSTS.value }
-
-      It 'should return build definition' {
-         Get-VSTeamBuildDefinition -projectName project -id 15
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/15?api-version=$([VSTeamVersions]::Build)"
-         }
-      }
-   }
-
-   Context 'Succeeds with revision parameter' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-
-      Mock Invoke-RestMethod { return $resultsVSTS.value }
-
-      It 'should return build definitions by revision' {
-         Get-VSTeamBuildDefinition -projectName project -id 16 -revision 1
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/16?api-version=$([VSTeamVersions]::Build)&revision=1"
-         }
-      }
-   }
-
-   # Make sure these test run last as the need differnt
-   # [VSTeamVersions]::Account values
-   Context 'Succeeds with no account' {
-      [VSTeamVersions]::Account = $null
-
-      It 'should return build definitions' {
-         { Get-VSTeamBuildDefinition -projectName project } | Should Throw
       }
    }
 }

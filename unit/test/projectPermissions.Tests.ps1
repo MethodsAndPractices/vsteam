@@ -41,8 +41,7 @@ InModuleScope VSTeam {
 }
 "@ | ConvertFrom-Json
 
-      # You have to set the version or the api-version will not be added when
-      # [VSTeamVersions]::Core = ''
+      # You have to set the version or the api-version will not be added when versions = ''
       [VSTeamVersions]::Core = '5.0'
 
       Context 'Add-VSTeamProjectPermission by ProjectUser' {

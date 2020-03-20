@@ -1,5 +1,6 @@
-#Set-StrictMode -Version Latest
+Set-StrictMode -Version Latest
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
@@ -7,13 +8,9 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/$sut"
+#endregion
 
 Describe 'Common' {
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
-
    Context '_convertSecureStringTo_PlainText' {
       $emptySecureString = ConvertTo-SecureString 'Test String' -AsPlainText -Force
 

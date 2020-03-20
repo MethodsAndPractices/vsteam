@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region inclucde
 Import-Module SHiPS
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -11,14 +12,17 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamExtension.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
 Describe 'VSTeamExtension' {
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      
+   ## Arrange
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+
    $results = Get-Content "$PSScriptRoot\sampleFiles\extensionResults.json" -Raw | ConvertFrom-Json
    $singleResult = Get-Content "$PSScriptRoot\sampleFiles\singleExtensionResult.json" -Raw | ConvertFrom-Json
 
    Context 'Get-VSTeamExtension' {
+      ## Arrange
       BeforeAll {
          $env:Team_TOKEN = '1234'
       }
@@ -27,11 +31,14 @@ Describe 'VSTeamExtension' {
          $env:TEAM_TOKEN = $null
       }
 
-      It 'Should return extensions' {
-         Mock  _callAPI { return $results }
+      Mock _callAPI { return $results }
+      Mock _callAPI { return $singleResult } -ParameterFilter { $resource -eq "extensionmanagement/installedextensionsbyname/test/test" }
 
+      It 'Should return extensions' {
+         ## Act
          Get-VSTeamExtension
 
+         ## Assert
          Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
@@ -41,10 +48,10 @@ Describe 'VSTeamExtension' {
       }
 
       It 'Should return extensions with optional parameters' {
-         Mock  _callAPI { return $results }
-
+         ## Act
          Get-VSTeamExtension -IncludeInstallationIssues -IncludeDisabledExtensions -IncludeErrors
 
+         ## Assert
          Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
@@ -57,10 +64,10 @@ Describe 'VSTeamExtension' {
       }
 
       It 'Should return the extension' {
-         Mock  _callAPI { return $singleResult }
-
+         ## Act
          Get-VSTeamExtension -PublisherId test -ExtensionId test
 
+         ## Assert
          Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and

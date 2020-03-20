@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region include
 Import-Module SHiPS
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -11,110 +12,79 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamClassificationNode.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
-$withoutChildNode = Get-Content "$PSScriptRoot\sampleFiles\withoutChildNode.json" -Raw | ConvertFrom-Json
-$classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
-  
 Describe 'Get-VSTeamClassificationNode' {
+   # You have to set the version or the api-version will not be added when versions = ''
+   [VSTeamVersions]::Core = '5.0'
+
+   $withoutChildNode = Get-Content "$PSScriptRoot\sampleFiles\withoutChildNode.json" -Raw | ConvertFrom-Json
+   $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
+
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
-   
-   # You have to set the version or the api-version will not be added when
-   # [VSTeamVersions]::Core = ''
-   [VSTeamVersions]::Core = '5.0'
-
    Context 'simplest call' {
-      Mock Invoke-RestMethod {
-         # If this test fails uncomment the line below to see how the mock was called.
-         # Write-Host $args
+      Mock Invoke-RestMethod { return $classificationNodeResult }
+      Mock Invoke-RestMethod { return $withoutChildNode } -ParameterFilter { $Uri -like "*Ids=43,44*" }
 
-         return $classificationNodeResult
-      } -Verifiable
+      It 'with StructureGroup should return Nodes' {
+         ## Act
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup "Iterations"
 
-      Get-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup "Iterations"
-
-      It 'Should return Nodes' {
-         Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/Iterations*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
          }
       }
-   }
 
-   Context 'with Depth' {
-      Mock Invoke-RestMethod { return $classificationNodeResult } -Verifiable
+      It 'with depth should return Nodes' {
+         ## Act
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup "Iterations" -Depth 10
 
-      Get-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup "Iterations" -Depth 10
-
-      It 'Should return Nodes' {
-         Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/Iterations*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
             $Uri -like "*`$Depth=10*"
          }
       }
-   }
 
-   Context 'by Path' {
-      Mock Invoke-RestMethod { return $classificationNodeResult } -Verifiable
+      It 'by Path should return Nodes' {
+         ## Act
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup "Iterations" -Path "test/test/test"
 
-      Get-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup "Iterations" -Path "test/test/test"
-
-      It 'Should return Nodes' {
-         Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/Iterations/test/test/test*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
          }
       }
-   }
 
-   Context 'by Ids' {
-      Mock Invoke-RestMethod { return $classificationNodeResult } -Verifiable
+      It 'by ids should return Nodes' {
+         ## Act
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(1, 2, 3, 4)
 
-      Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(1, 2, 3, 4)
-
-      It 'Should return Nodes' {
-         Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
             $Uri -like "*Ids=1,2,3,4*"
          }
       }
-   }
 
-   Context 'by Ids returns no child node' {
-      Mock Invoke-RestMethod { return $withoutChildNode } -Verifiable
+      It 'should handle when there is no child nodes' {
+         ## Act
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(43, 44)
 
-      Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(43, 44)
-
-      It 'Should return Nodes' {
+         ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
             $Uri -like "*Ids=43,44*"
          }
-      }
-   }
-
-   Context 'throws' {
-      Mock Invoke-RestMethod { throw 'Error' }
-
-      It 'Should throw' {
-         { Get-VSTeamClassificationNode -ProjectName "test" -StructureGroup "Areas" } | Should Throw
-      }
-   }
-
-   Context 'with Depth throws' {
-      Mock Invoke-RestMethod { throw 'Error' }
-
-      It 'Should throw' {
-         { Get-VSTeamClassificationNode -ProjectName "test" -StructureGroup "Areas" -Depth 12 } | Should Throw
       }
    }
 }

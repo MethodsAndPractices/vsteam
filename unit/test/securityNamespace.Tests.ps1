@@ -34,8 +34,7 @@ InModuleScope VSTeam {
       $securityNamespaceListResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespaces.json" -Raw | ConvertFrom-Json
       $securityNamespaceSingleResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespace.single.json" -Raw | ConvertFrom-Json
 
-      # You have to set the version or the api-version will not be added when
-      # [VSTeamVersions]::Core = ''
+      # You have to set the version or the api-version will not be added when versions = ''
       Set-VSTeamAPIVersion AzD
       [VSTeamVersions]::Core = '5.0'
       

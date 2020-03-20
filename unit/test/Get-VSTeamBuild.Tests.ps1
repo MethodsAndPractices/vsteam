@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
@@ -9,97 +10,83 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
 . "$here/../../Source/Public/Remove-VSTeamAccount.ps1"
+#endregion
 
-# Sample result of a single build
-$singleResult = Get-Content "$PSScriptRoot\sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json
+Describe 'VSTeamBuild' {
+   ## Arrange
+   # Sample result of a single build
+   $singleResult = Get-Content "$PSScriptRoot\sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json
 
-# Sample result for list of builds
-$results = Get-Content "$PSScriptRoot\sampleFiles\buildResults.json" -Raw | ConvertFrom-Json
+   # Sample result for list of builds
+   $results = Get-Content "$PSScriptRoot\sampleFiles\buildResults.json" -Raw | ConvertFrom-Json
 
-Describe 'Get-VSTeamBuild' {
    # Load the mocks to create the project name dynamic parameter
+   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   Mock Invoke-RestMethod { return $results }
+   Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*101*" }
 
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
+   Context 'Get-VSTeamBuild' {
+      Context 'Services' {
+         ## Arrange
+         # Set the account to use for testing. A normal user would do this
+         # using the Set-VSTeamAccount function.
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-   Context 'Get Builds with no parameters' {
-      Mock Invoke-RestMethod { return $results }
+         It 'with no parameters should return builds' {
+            ## Act
+            Get-VSTeamBuild -projectName project
 
-      It 'should return builds' {
-         Get-VSTeamBuild -projectName project
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)"
+            }
+         }
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)"
+         It 'with Top parameter should return top builds' {
+            ## Act
+            Get-VSTeamBuild -projectName project -top 1
+
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)&`$top=1"
+            }
+         }
+
+         It 'by id should return top builds' {
+            ## Act
+            Get-VSTeamBuild -projectName project -id 101
+
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/101?api-version=$([VSTeamVersions]::Build)"
+            }
          }
       }
-   }
 
-   Context 'Get Builds with Top parameter' {
-      Mock Invoke-RestMethod { return $results }
+      Context 'Server' {
+         ## Arrange
+         Mock _useWindowsAuthenticationOnPremise { return $true }
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
-      It 'should return top builds' {
-         Get-VSTeamBuild -projectName project -top 1
+         It 'with no parameters on TFS local Auth should return builds' {
+            ## Act
+            Get-VSTeamBuild -projectName project
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)&`$top=1"
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)"
+            }
          }
-      }
-   }
 
-   Context 'Get Build build by id' {
-      Mock Invoke-RestMethod { return $singleResult }
+         It 'should return builds' {
+            ## Act
+            Get-VSTeamBuild -projectName project -id 101
 
-      Get-VSTeamBuild -projectName project -id 1
-
-      It 'should return top builds' {
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1?api-version=$([VSTeamVersions]::Build)"
+            ## Assert
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/101?api-version=$([VSTeamVersions]::Build)" }
          }
-      }
-   }
-}
-
-Describe 'Get-VSTeamBuild' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-
-   Mock _useWindowsAuthenticationOnPremise { return $true }
-
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
-
-   # Remove any previously loaded accounts
-   Remove-VSTeamAccount
-
-   Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-
-   Context 'Get Builds with no parameters on TFS local Auth' {
-      Mock Invoke-RestMethod { return $results }
-
-      It 'should return builds' {
-         Get-VSTeamBuild -projectName project
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)"
-         }
-      }
-   }
-
-   Context 'Get Build by id on TFS local Auth' {
-      Mock Invoke-RestMethod { return $singleResult }
-
-      It 'should return builds' {
-         Get-VSTeamBuild -projectName project -id 2
-
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$([VSTeamVersions]::Build)" }
       }
    }
 }

@@ -7,8 +7,7 @@ InModuleScope VSTeam {
 
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-      # You have to set the version or the api-version will not be added when
-      # [VSTeamVersions]::Core = ''
+      # You have to set the version or the api-version will not be added when versions = ''
       [VSTeamVersions]::Git = '5.1-preview'
       [VSTeamVersions]::Graph = '5.0'
 

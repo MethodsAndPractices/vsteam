@@ -108,7 +108,7 @@ InModuleScope VSTeam {
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
       
       # You have to set the version or the api-version will not be Removed when
-      # [VSTeamVersions]::Core = ''
+      # versions = ''
       [VSTeamVersions]::Core = '5.1'
 
         

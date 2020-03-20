@@ -1,77 +1,58 @@
 Set-StrictMode -Version Latest
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
-Describe 'Get-VSTeamBuildTag' {
+Describe 'VSTeamBuildTag' {
    # Load the mocks to create the project name dynamic parameter
+   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
+   $tags = 'Tag1', 'Tag2'
+   Mock Invoke-RestMethod {
+      return @{ value = $tags }
    }
 
-   Context 'Get-VSTeamBuildTag calls correct Url' {
-      Mock Invoke-RestMethod {
-         return @{ value = 'Tag1', 'Tag2' }
-      }
+   Context 'Get-VSTeamBuildTag' {
+      Context 'Services' {
+         $returndata = Get-VSTeamBuildTag -projectName project -id 2
 
-      It 'should get all Build Tags for the Build.' {
-         Get-VSTeamBuildTag -projectName project -id 2
+         It 'should create correct URL.' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/tags?api-version=$([VSTeamVersions]::Build)"
+            }
+         }
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/tags?api-version=$([VSTeamVersions]::Build)"
+         It 'should return correct data.' {
+            Compare-Object $tags  $returndata | Should Be $null
          }
       }
-   }
 
-   Context 'Get-VSTeamBuildTag returns correct data' {
-      $tags = 'Tag1', 'Tag2'
-      Mock Invoke-RestMethod {
-         return @{ value = $tags }
-      }
+      Context 'Server' {
+         Mock _useWindowsAuthenticationOnPremise { return $true }
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
-      It 'should get all Build Tags for the Build.' {
          $returndata = Get-VSTeamBuildTag -projectName project -id 2
 
-         Compare-Object $tags  $returndata |
-         Should Be $null
-      }
-   }
-}
+         It 'should create correct URL.' {
+            Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$([VSTeamVersions]::Build)"
+            }
+         }
 
-Describe 'Get-VSTeamBuildTag' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-
-   Mock _useWindowsAuthenticationOnPremise { return $true }
-
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
-
-   Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-
-   Context 'Get-VSTeamBuildTag returns correct data on TFS local Auth' {
-      $tags = 'Tag1', 'Tag2'
-      Mock Invoke-RestMethod {
-         return @{ value = $tags }
-      }
-
-      It 'should get all Build Tags for the Build.' {
-         $returndata = Get-VSTeamBuildTag -projectName project -id 2
-
-         Compare-Object $tags  $returndata |
-         Should Be $null
+         It 'should return correct data.' {
+            Compare-Object $tags  $returndata | Should Be $null
+         }
       }
    }
 }

@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region include
 Import-Module SHiPS
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -11,6 +12,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamExtension.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
 Describe 'VSTeamExtension' {
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
@@ -32,7 +34,8 @@ Describe 'VSTeamExtension' {
       }
    }
 
-   Context 'Add-VSTeamExtension without version' {
+   Context 'Add-VSTeamExtension' {
+      ## Arrange
       BeforeAll {
          $env:Team_TOKEN = '1234'
       }
@@ -44,9 +47,11 @@ Describe 'VSTeamExtension' {
       Mock _callAPI { return $singleResult }
 
       It 'Should add an extension without version' {
+         ## Act
          Add-VSTeamExtension -PublisherId 'test' -ExtensionId 'test'
 
-         Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
+         ## Assert
+         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
             $version -eq [VSTeamVersions]::ExtensionsManagement -and
@@ -54,23 +59,13 @@ Describe 'VSTeamExtension' {
             $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
          }
       }
-   }
-
-   Context 'Add-VSTeamExtension with version' {
-      BeforeAll {
-         $env:Team_TOKEN = '1234'
-      }
-
-      AfterAll {
-         $env:TEAM_TOKEN = $null
-      }
-
-      Mock _callAPI { return $singleResult }
 
       It 'Should add an extension with version' {
+         ## Act
          Add-VSTeamExtension -PublisherId 'test' -ExtensionId 'test' -Version '1.0.0'
 
-         Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
+         ## Assert
+         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
             $version -eq [VSTeamVersions]::ExtensionsManagement

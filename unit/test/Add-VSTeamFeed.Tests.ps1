@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region include
 Import-Module SHiPS
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -11,47 +12,39 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
-
-$results = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
+#endregion
 
 Describe 'VSTeamFeed' {
+   ## Arrange
+   $results = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
+
+   [VSTeamVersions]::Packaging = '4.0'
+   Mock Invoke-RestMethod {
+      # Write-Host "$args"
+      return $results.value[0]
    }
 
-   Context 'Add-VSTeamFeed with description' {
-      [VSTeamVersions]::Packaging = '4.0'
-      Mock Invoke-RestMethod {
-         # Write-Host "$args"
-         return $results.value[0]
-      }
-
-      it 'Should add Feed' {
+   Context 'Add-VSTeamFeed' {
+      it 'with description should add feed' {
+         ## Act
          Add-VSTeamFeed -Name 'module' -Description 'Test Module'
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$([VSTeamVersions]::packaging)" -and
             $Method -eq 'Post' -and
             $ContentType -eq 'application/json' -and
             $Body -like '*"name": *"module"*'
          }
       }
-   }
 
-   Context 'Add-VSTeamFeed with upstream sources' {
-      [VSTeamVersions]::Packaging = '4.0'
-      Mock Invoke-RestMethod {
-         # Write-Host "$args"
-         return $results.value[0]
-      }
-
-      it 'Should add Feed' {
+      it 'with upstream sources should add feed' {
+         ## Act
          Add-VSTeamFeed -Name 'module' -EnableUpstreamSources -showDeletedPackageVersions
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$([VSTeamVersions]::packaging)" -and
             $Method -eq 'Post' -and
             $ContentType -eq 'application/json' -and

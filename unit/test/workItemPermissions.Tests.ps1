@@ -169,8 +169,7 @@ InModuleScope VSTeam {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    
-      # You have to set the version or the api-version will not be added when
-      # [VSTeamVersions]::Core = ''
+      # You have to set the version or the api-version will not be added when versions = ''
       [VSTeamVersions]::Core = '5.0'
 
       Context 'Add-VSTeamWorkItemAreaPermission by AreaID and User' {

@@ -23,7 +23,7 @@ function Get-VSTeamProcess {
       $ProcessName = $PSBoundParameters["Name"]
 
       if ($id) {
-         $queryString = @{}
+         $queryString = @{ }
 
          # Call the REST API
          $resp = _callAPI -Area 'process/processes' -id $id `
@@ -36,8 +36,7 @@ function Get-VSTeamProcess {
       }
       elseif ($ProcessName) {
          # Lookup Process ID by Name
-         Get-VSTeamProcess | where-object {$_.name -eq $ProcessName}
-
+         Get-VSTeamProcess | where-object { $_.name -eq $ProcessName }
       }
       else {
          # Return list of processes

@@ -1,5 +1,6 @@
 Import-Module SHiPS
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
@@ -9,34 +10,27 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamJobRequest.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
-
-$resultsAzD = Get-Content "$PSScriptRoot/sampleFiles/jobrequestsAzD.json" -Raw | ConvertFrom-Json
-$results2017 = Get-Content "$PSScriptRoot/sampleFiles/jobrequests2017.json" -Raw | ConvertFrom-Json
+#endregion
 
 Describe "Get-VSTeamJobRequest" {
-   Context "2017" {
-      # Set the account to use for testing. A normal user would do this
-      # using the Set-VSTeamAccount function.
-      Remove-VSTeamAccount
+   ## Arrange
+   $resultsAzD = Get-Content "$PSScriptRoot/sampleFiles/jobrequestsAzD.json" -Raw | ConvertFrom-Json
+   $results2017 = Get-Content "$PSScriptRoot/sampleFiles/jobrequests2017.json" -Raw | ConvertFrom-Json
+
+   Context "Server" {
+      ## Arrnage
+      Mock Invoke-RestMethod { return $results2017 }
       Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 
-      Mock Invoke-RestMethod {
-         # If this test fails uncomment the line below to see how the mock was called.
-         # Write-Host $args
-         
-         return $results2017
-      }
-
       It "return all jobs" {
-         # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-
+         ## Act
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
+         ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
-            $Uri -like "*agentid=4*" 
+            $Uri -like "*agentid=4*"
          }
       }
 
@@ -55,18 +49,9 @@ Describe "Get-VSTeamJobRequest" {
       }
    }
 
-   Context "AzD" {
-      # Set the account to use for testing. A normal user would do this
-      # using the Set-VSTeamAccount function.
-      Remove-VSTeamAccount
+   Context "Services" {
+      Mock Invoke-RestMethod { return $resultsAzD }
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      
-      Mock Invoke-RestMethod {
-         # If this test fails uncomment the line below to see how the mock was called.
-         # Write-Host $args
-         
-         return $resultsAzD
-      }
 
       It "return all jobs" {
          # This should stop the call to cache projects
@@ -77,14 +62,14 @@ Describe "Get-VSTeamJobRequest" {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
-            $Uri -like "*agentid=4*" 
+            $Uri -like "*agentid=4*"
          }
       }
 
       It "return 2 jobs" {
          # This should stop the call to cache projects
          [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-      
+
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
