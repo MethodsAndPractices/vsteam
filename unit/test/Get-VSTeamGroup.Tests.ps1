@@ -117,6 +117,11 @@ Describe "VSTeamGroup" {
       Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
       Mock _callAPI
       
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      # if you don't _callAPI will be called for this an throw off the count
+      # below.
+      Mock _getProjects { return @() }
+
       # The Graph API is not supported on TFS
       Mock _supportsGraph { throw 'This account does not support the graph API.' }
 
@@ -127,7 +132,7 @@ Describe "VSTeamGroup" {
       }
 
       It '_callAPI should not be called' {
-         Assert-MockCalled _callAPI -Exactly -Times 0
+         Assert-MockCalled _callAPI -Exactly -Times 0 -Scope Context
       }
    }
 }
