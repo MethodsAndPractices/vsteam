@@ -31,9 +31,10 @@ Describe 'VSTeamAgent' {
             count = 1
             value = $testAgent
          }
-      }      
+      }   
+      Mock Invoke-RestMethod { return $testAgent } -ParameterFilter { $Uri -like "*101*"}   
 
-      it 'by id should return all the pools' {
+      it 'by pool id should return all the agents' {
          ## Act
          Get-VSTeamAgent -PoolId 1
 
@@ -43,7 +44,17 @@ Describe 'VSTeamAgent' {
          }
       }
 
-      it 'PoolID from pipeline by value should return all the pools' {
+      it 'with agent id parameter should return on agent' {
+         ## Act
+         Get-VSTeamAgent -PoolId 1 -id 101
+
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/1/agents/101?api-version=$([VSTeamVersions]::DistributedTask)"
+         }
+      }
+
+      it 'PoolID from pipeline by value should return all the agents' {
          ## Act
          1 | Get-VSTeamAgent
 

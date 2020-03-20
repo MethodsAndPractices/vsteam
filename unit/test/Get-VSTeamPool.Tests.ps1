@@ -9,42 +9,81 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/VSTeamAgent.ps1"
+. "$here/../../Source/Classes/VSTeamPool.ps1"
 . "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/Get-VSTeamAgent.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 
 Describe 'VSTeamPool' {
    ## Arrange
-   $testAgent = [PSCustomObject]@{
-      _links             = [PSCustomObject]@{ }
-      createdOn          = '2018-03-28T16:48:58.317Z'
-      maxParallelism     = 1
-      id                 = 102
-      status             = 'Online'
-      version            = '1.336.1'
-      enabled            = $true
-      osDescription      = 'Linux'
-      name               = 'Test_Agent'
-      authorization      = [PSCustomObject]@{ }
-      systemCapabilities = [PSCustomObject]@{ }
+   [VSTeamVersions]::DistributedTask = '1.0-unitTest'
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+
+   $hostedPool = [PSCustomObject]@{
+      owner     = [PSCustomObject]@{
+         displayName = 'Test User'
+         id          = '1'
+         uniqueName  = 'test@email.com'
+      }
+      createdBy = [PSCustomObject]@{
+         displayName = 'Test User'
+         id          = '1'
+         uniqueName  = 'test@email.com'
+      }
+      id        = 1
+      size      = 1
+      isHosted  = $true
+      Name      = 'Hosted'
    }
 
-   [VSTeamVersions]::DistributedTask = '1.0-unitTest'
+   $privatePool = [PSCustomObject]@{
+      owner     = [PSCustomObject]@{
+         displayName = 'Test User'
+         id          = '1'
+         uniqueName  = 'test@email.com'
+      }
+      createdBy = [PSCustomObject]@{
+         displayName = 'Test User'
+         id          = '1'
+         uniqueName  = 'test@email.com'
+      }
+      id        = 1
+      size      = 1
+      isHosted  = $false
+      Name      = 'Default'
+   }
 
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   
-   Mock Invoke-RestMethod { return $testAgent }
-   
-   Context 'Get-VSTeamPool' {
-      it 'with id parameter should return all the pools' {
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter {
+      $Uri -like "*_apis/projects*"
+   }
+
+   Context 'Get-VSTeamPool with no parameters' {
+      Mock Invoke-RestMethod { return [PSCustomObject]@{
+            count = 1
+            value = $privatePool
+         }
+      }
+
+      Mock Invoke-RestMethod { return $hostedPool } -ParameterFilter { $Uri -like "*101*" }
+
+      it 'with no parameters should return all the pools' {
          ## Act
-         Get-VSTeamAgent -PoolId 1 -id 1
+         Get-VSTeamPool
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/1/agents/1?api-version=$([VSTeamVersions]::DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools?api-version=$([VSTeamVersions]::DistributedTask)"
+         }
+      }
+
+      it 'with id parameter should return all the pools' {
+         ## Act
+         Get-VSTeamPool -id 101
+
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/101?api-version=$([VSTeamVersions]::DistributedTask)"
          }
       }
    }
