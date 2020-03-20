@@ -29,7 +29,7 @@ Describe "VSTeamDescriptor" {
          # Set the account to use for testing. A normal user would do this
          # using the Set-VSTeamAccount function.
          Mock _getInstance { return 'https://dev.azure.com/test' }
-         Mock _supportsGraph { return $true }
+         Mock _supportsGraph
       
          Mock Invoke-RestMethod { return $result }
       

@@ -34,7 +34,7 @@ Describe "VSTeamGroup" {
          # using the Set-VSTeamAccount function.
          Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-         Mock _supportsGraph { return $true }
+         Mock _supportsGraph
 
          Mock Invoke-RestMethod { return $groupListResult }
 
@@ -112,11 +112,13 @@ Describe "VSTeamGroup" {
    }
 
    Context 'Server' {
-      # The Graph API is not supported on TFS
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-      Mock _callAPI { throw 'Should not be called' } -Verifiable
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
+      Mock _callAPI
+      
+      # The Graph API is not supported on TFS
+      Mock _supportsGraph { throw 'This account does not support the graph API.' }
 
       It 'Should throw' {
          Set-VSTeamAPIVersion TFS2017
@@ -124,10 +126,8 @@ Describe "VSTeamGroup" {
          { Get-VSTeamGroup } | Should Throw
       }
 
-      It '_callAPI should be called once to get projects' {
-         Assert-MockCalled _callAPI -Exactly 1
+      It '_callAPI should not be called' {
+         Assert-MockCalled _callAPI -Exactly -Times 0
       }
    }
-
 }
-
