@@ -24,9 +24,9 @@ Describe 'VSTeamAccessControlList' {
    [VSTeamVersions]::Core = '5.0'
 
    $accessControlListResult = Get-Content "$PSScriptRoot\sampleFiles\accessControlListResult.json" -Raw | ConvertFrom-Json
-   
+
    $securityNamespace = Get-Content "$PSScriptRoot\sampleFiles\securityNamespace.json" -Raw | ConvertFrom-Json
-   $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value)
+   $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value[0])
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
@@ -37,11 +37,14 @@ Describe 'VSTeamAccessControlList' {
       Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*token=boom*" }
 
       It 'by SecurityNamespaceId should return ACLs' {
+         ## Arrange
          # Even with a default set this URI should not have the project added.
          Set-VSTeamDefaultProject -Project Testing
 
+         ## Act
          Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse
 
+         ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/5a27515b-ccd7-42c9-84f1-54c998f03866*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
@@ -54,8 +57,11 @@ Describe 'VSTeamAccessControlList' {
       }
 
       It 'by SecurityNamespace should return ACLs' {
-         Get-VSTeamAccessControlList -SecurityNamespace $securityNamespaceObject -Token "SomeToken" -Descriptors "SomeDescriptor"
-         
+         ## Act
+         # I use $securityNamespace.value[0] here because using securityNamespaceObject was leading to issues
+         Get-VSTeamAccessControlList -SecurityNamespace $($securityNamespace.value[0]) -Token "SomeToken" -Descriptors "SomeDescriptor"
+
+         ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
@@ -66,8 +72,10 @@ Describe 'VSTeamAccessControlList' {
       }
 
       It 'by SecurityNamespace (pipeline) should return ACEs' {
+         ## Act
          $securityNamespaceObject | Get-VSTeamAccessControlList -Token "AcesToken" -Descriptors "AcesDescriptor"
-         
+
+         ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
@@ -79,10 +87,12 @@ Describe 'VSTeamAccessControlList' {
       }
 
       It 'by SecurityNamespaceId should throw' {
+         ## Act / Assert
          { Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "boom" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
       }
 
       It 'by SecurityNamespace should throw' {
+         ## Act / Assert
          { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamespaceObject -Token "boom" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should Throw
       }
    }
