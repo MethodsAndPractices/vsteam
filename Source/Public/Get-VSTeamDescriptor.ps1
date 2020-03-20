@@ -12,7 +12,7 @@ function Get-VSTeamDescriptor {
       # Call the REST API
       $resp = _callAPI -Area 'graph' -Resource 'descriptors' -id $StorageKey `
          -Version $([VSTeamVersions]::Graph) `
-         -SubDomain 'vssps'
+         -SubDomain 'vssps' -NoProject
 
       # Storing the object before you return it cleaned up the pipeline.
       # When I just write the object from the constructor each property

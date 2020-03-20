@@ -4,7 +4,7 @@ function Get-VSTeamCloudSubscription {
 
    # Call the REST API
    $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointproxy/azurermsubscriptions' `
-      -Version $([VSTeamVersions]::DistributedTask)
+      -Version $([VSTeamVersions]::DistributedTask) -NoProject
 
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {

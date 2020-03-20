@@ -24,7 +24,9 @@ Describe 'Feed' {
 
          Mock _supportsFeeds { return $true }
          Mock Invoke-RestMethod { return $results }
-         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         Mock _getInstance { return 'https://dev.azure.com/test' }
+         # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+         Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
          Mock Invoke-RestMethod { return $results.value[0] } -ParameterFilter { $Uri -like "*00000000-0000-0000-0000-000000000000*" }
 
          it 'with no parameters should return all the Feeds' {

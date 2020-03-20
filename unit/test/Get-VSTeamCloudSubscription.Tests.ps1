@@ -13,12 +13,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamCloudSubscription' {
    Context 'Get-VSTeamCloudSubscription' {
-      Mock Invoke-RestMethod {
-         return @{value = 'subs' }
-      }
+      Mock Invoke-RestMethod { return @{value = 'subs' } }
 
       Context 'Services' {
-         Mock _getInstance { return 'https://dev.azure.com/test' }      
+         Mock _getInstance { return 'https://dev.azure.com/test' }
 
          It 'should return all AzureRM Subscriptions' {
             Get-VSTeamCloudSubscription

@@ -12,7 +12,7 @@ function Get-VSTeamFeed {
 
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -subDomain feeds -Id $item -Area packaging -Resource feeds -Version $([VSTeamVersions]::Packaging)
+            $resp = _callAPI -NoProject -subDomain feeds -Id $item -Area packaging -Resource feeds -Version $([VSTeamVersions]::Packaging)
 
             Write-Verbose $resp
             $item = [VSTeamFeed]::new($resp)
@@ -21,7 +21,7 @@ function Get-VSTeamFeed {
          }
       }
       else {
-         $resp = _callAPI -subDomain feeds -Area packaging -Resource feeds -Version $([VSTeamVersions]::Packaging)
+         $resp = _callAPI -NoProject -subDomain feeds -Area packaging -Resource feeds -Version $([VSTeamVersions]::Packaging)
 
          $objs = @()
 

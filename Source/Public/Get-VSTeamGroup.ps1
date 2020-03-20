@@ -30,7 +30,7 @@ function Get-VSTeamGroup {
 
       if ($Descriptor) {
          # Call the REST API
-         $resp = _callAPI -Area 'graph' -Resource 'groups' -id $Descriptor `
+         $resp = _callAPI -NoProject -Area 'graph' -Resource 'groups' -id $Descriptor `
             -Version $([VSTeamVersions]::Graph) `
             -SubDomain 'vssps'
 
@@ -59,7 +59,7 @@ function Get-VSTeamGroup {
 
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'graph' -id 'groups' `
+            $resp = _callAPI -NoProject -Area 'graph' -id 'groups' `
                -Version $([VSTeamVersions]::Graph) `
                -QueryString $queryString `
                -SubDomain 'vssps'
