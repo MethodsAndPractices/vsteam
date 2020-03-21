@@ -23,7 +23,10 @@ Describe 'Get-VSTeamClassificationNode' {
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
    Context 'simplest call' {
       Mock Invoke-RestMethod { return $classificationNodeResult }

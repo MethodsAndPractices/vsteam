@@ -15,6 +15,9 @@ Describe 'VSTeamCloudSubscription' {
    Context 'Get-VSTeamCloudSubscription' {
       Mock Invoke-RestMethod { return @{value = 'subs' } }
 
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+
       Context 'Services' {
          Mock _getInstance { return 'https://dev.azure.com/test' }
 

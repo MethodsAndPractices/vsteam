@@ -25,9 +25,7 @@ InModuleScope VSTeam {
 
    Describe 'Get-VSTeamTfvcRootBranch VSTS' -Tag 'unit', 'tfvc', 'vsts' {
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 

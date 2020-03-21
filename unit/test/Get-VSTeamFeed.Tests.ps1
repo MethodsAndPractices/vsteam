@@ -14,8 +14,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 #endregion
 
-
-Describe 'Feed' {
+Describe 'VSTeamFeed' {
    Context 'Get-VSTeamFeed' {
       Context 'Services' {
          ## Arrange

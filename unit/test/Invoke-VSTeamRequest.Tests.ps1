@@ -17,6 +17,9 @@ Describe 'Invoke-VSTeamRequest' {
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
 
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+
       # Called to convert from ProjectName to ProjectID
       Mock Get-VSTeamProject { return [PSCustomObject]@{ id = '00000000-0000-0000-0000-000000000000' } } -Verifiable
 

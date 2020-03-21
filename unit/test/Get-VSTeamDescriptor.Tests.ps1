@@ -20,6 +20,9 @@ Describe "VSTeamDescriptor" {
    ## Arrange
    $result = Get-Content "$PSScriptRoot\sampleFiles\descriptor.scope.TestProject.json" -Raw | ConvertFrom-Json
 
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+
    Context 'Get-VSTeamDescriptor' {
       Context 'Services' {
          ## Arrange

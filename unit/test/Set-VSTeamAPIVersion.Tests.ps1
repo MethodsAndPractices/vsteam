@@ -12,10 +12,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamAPIVersion' {
    Context 'Set-VSTeamAPIVersion' {
-      # BeforeEach {
-      #    [VSTeamVersions]::Version = ''
-      # }
-
       It 'Should default to TFS2017' {
          Set-VSTeamAPIVersion
          [VSTeamVersions]::Version | Should Be 'TFS2017'

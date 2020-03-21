@@ -21,7 +21,10 @@ Describe 'VSTeamAgent' {
 
    $testAgent = Get-Content "$PSScriptRoot\sampleFiles\agentSingleResult.json" -Raw | ConvertFrom-Json
 
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
    # Even with a default set this URI should not have the project added. 
    Set-VSTeamDefaultProject -Project Testing
