@@ -40,7 +40,7 @@ function Get-VSTeamProject {
          }
 
          # Call the REST API
-         $resp = _callAPI -Area 'projects' -id $ProjectName `
+         $resp = _callAPI -Area 'projects' -NoProject -id $ProjectName `
             -Version $([VSTeamVersions]::Core) `
             -QueryString $queryString
 
@@ -54,7 +54,7 @@ function Get-VSTeamProject {
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'projects' `
+            $resp = _callAPI -Area 'projects' -NoProject `
                -Version $([VSTeamVersions]::Core) `
                -QueryString @{
                stateFilter = $stateFilter

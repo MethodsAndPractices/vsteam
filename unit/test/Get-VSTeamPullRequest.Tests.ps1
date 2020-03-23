@@ -16,7 +16,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamPullRequest' {
    # You have to manually load the type file so the property reviewStatus
    # can be tested.
-   Update-TypeData -AppendPath "$here/../../Source/types/Team.PullRequest.ps1xml"
+   Update-TypeData -AppendPath "$here/../../Source/types/Team.PullRequest.ps1xml" -ErrorAction Ignore
 
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
