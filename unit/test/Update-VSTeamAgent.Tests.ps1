@@ -9,7 +9,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 
 Describe 'Update-VSTeamAgent' {
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   Mock _getInstance { return 'https://dev.azure.com/test' }
    [VSTeamVersions]::DistributedTask = '1.0-unitTest'
 
    Context 'Update-VSTeamAgent by ID' {
