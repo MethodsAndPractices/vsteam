@@ -88,6 +88,11 @@ Describe "VSTeamGitRepository" {
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
+   ## If you don't call this and there is a default project in scope
+   ## these tests will fail. The API can be called with or without
+   ## a project and these tests are written to test without one. 
+   Clear-DefaultProject
+
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
    Mock Invoke-RestMethod {
@@ -119,7 +124,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories?api-version=3.0"
+               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories?api-version=$([VSTeamVersions]::Git)"
             }
          }
 
@@ -129,7 +134,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=3.0"
+               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
             }
          }
 
@@ -139,7 +144,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/testRepo?api-version=3.0"
+               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/testRepo?api-version=$([VSTeamVersions]::Git)"
             }
          }
 
@@ -165,7 +170,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories?api-version=3.0"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories?api-version=$([VSTeamVersions]::Git)"
             }
          }
 
@@ -175,7 +180,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=3.0"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
             }
          }
 
@@ -185,7 +190,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/testRepo?api-version=3.0"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/testRepo?api-version=$([VSTeamVersions]::Git)"
             }
          }
       }
