@@ -17,7 +17,7 @@ function Get-VSTeamWorkItem {
    Process {
       # Call the REST API
       if ($Id.Length -gt 1) {
-         $resp = _callAPI -Area 'wit' -Resource 'workitems'  `
+         $resp = _callAPI -NoProject -Area 'wit' -Resource 'workitems'  `
             -Version $([VSTeamVersions]::Core) `
             -Querystring @{
             '$Expand'   = $Expand
@@ -34,7 +34,7 @@ function Get-VSTeamWorkItem {
       }
       else {
          $a = $Id[0]
-         $resp = _callAPI -Area 'wit' -Resource 'workitems'  `
+         $resp = _callAPI -NoProject -Area 'wit' -Resource 'workitems'  `
             -Version $([VSTeamVersions]::Core) -id "$a" `
             -Querystring @{
             '$Expand' = $Expand
