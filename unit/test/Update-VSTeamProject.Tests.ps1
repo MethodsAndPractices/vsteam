@@ -41,12 +41,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamProject' {
-   [VSTeamVersions]::Core = '1.0-unitTest'
-
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
    . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
 
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   Mock _getApiVersion { return '1.0-unitTests' }
+   Mock _getInstance { return 'https://dev.azure.com/test' }
 
    $singleResult = [PSCustomObject]@{
       name        = 'Test'
@@ -60,12 +59,23 @@ Describe 'VSTeamProject' {
       _links      = [PSCustomObject]@{ }
    }
 
-   Context 'Update-VSTeamProject' {
-      Mock Invoke-RestMethod { return $singleResult }
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
-      Mock Invoke-RestMethod { return @{status = 'inProgress'; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Patch' }
-      Mock _trackProjectProgress
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$([VSTeamVersions]::Core)" }
+   Context 'Update-VSTeamProject' {         
+      Mock Invoke-RestMethod {
+         Write-Host $args
+         return $singleResult 
+      }
+      Mock Invoke-RestMethod {
+         Write-Host "single result $args"
+         return $singleResult 
+      } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
+      Mock Invoke-RestMethod {
+         Write-Host "in progress $args"
+         return @{status = 'inProgress'; url = 'https://someplace.com' }
+      } -ParameterFilter { $Method -eq 'Patch' }
+      Mock _trackProjectProgress {
+         Write-Host "in progress $args"
+      }
+      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$(_getApiVersion Core)" }
 
       It 'with no op by id should not call Invoke-RestMethod' {
          Update-VSTeamProject -id '123-5464-dee43'
@@ -76,24 +86,24 @@ Describe 'VSTeamProject' {
       It 'with newName should change name' {
          Update-VSTeamProject -ProjectName Test -newName Testing123 -Force
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"name": "Testing123"}' }
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$([VSTeamVersions]::Core)" }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$(_getApiVersion Core)" }
       }
 
       It 'with newDescription should change description' {
          Update-VSTeamProject -ProjectName Test -newDescription Testing123 -Force
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 2 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 2 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Method -eq 'Patch' -and $Body -eq '{"description": "Testing123"}' }
       }
 
       It 'with new name and description should not call Invoke-RestMethod' {
          Update-VSTeamProject -ProjectName Test -newName Testing123 -newDescription Testing123 -Force
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Method -eq 'Patch' }
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$([VSTeamVersions]::Core)" }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$(_getApiVersion Core)" }
       }
    }
 }

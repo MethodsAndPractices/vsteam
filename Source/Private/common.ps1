@@ -56,6 +56,57 @@ function _testAdministrator {
    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
+function _getApiVersion {
+   [CmdletBinding()]
+   param (
+      [parameter(Mandatory = $true, Position = 0)]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph', 'TaskGroups')]
+      [string] $Service
+   )
+
+   switch ($Service) {
+      'Build' {
+         return [VSTeamVersions]::Build
+      }
+      'Release' {
+         return [VSTeamVersions]::Release
+      }
+      'Core' {
+         return [VSTeamVersions]::Core
+      }
+      'Git' {
+         return [VSTeamVersions]::Git
+      }
+      'DistributedTask' {
+         return [VSTeamVersions]::DistributedTask
+      }
+      'VariableGroups' {
+         return [VSTeamVersions]::VariableGroups
+      }
+      'Tfvc' {
+         return [VSTeamVersions]::Tfvc
+      }
+      'Packaging' {
+         return [VSTeamVersions]::Packaging
+      }
+      'MemberEntitlementManagement' {
+         return [VSTeamVersions]::MemberEntitlementManagement
+      }
+      'ExtensionsManagement' {
+         return [VSTeamVersions]::ExtensionsManagement
+      }
+      'ServiceFabricEndpoint' {
+         return [VSTeamVersions]::ServiceFabricEndpoint
+      }
+      'Graph' {
+         return [VSTeamVersions]::Graph
+      }
+      'TaskGroups' {
+         return [VSTeamVersions]::TaskGroups
+      }
+   }
+}
+
 function _getInstance {
    return [VSTeamVersions]::Account
 }
@@ -419,7 +470,7 @@ function _getProcesses {
 
    # Call the REST API
    try {
-      $query = @{}
+      $query = @{ }
       $query['stateFilter'] = 'All'
       $query['$top'] = '9999'
       $resp = _callAPI -area 'process' -resource 'processes' -Version $([VSTeamVersions]::Core) -QueryString $query
@@ -655,7 +706,7 @@ function _callAPI {
 
    if (_useWindowsAuthenticationOnPremise) {
       $params.Add('UseDefaultCredentials', $true)
-      $params.Add('Headers', @{})
+      $params.Add('Headers', @{ })
    }
    elseif (_useBearerToken) {
       $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })

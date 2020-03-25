@@ -17,7 +17,7 @@ function Get-VSTeamSecurityNamespace {
       if ($Id) {
           # Call the REST API
          $resp = _callAPI -Area 'securitynamespaces' -id $Id `
-         -Version $([VSTeamVersions]::Core) `
+         -Version $([VSTeamVersions]::Core) -NoProject `
       } else {
          $queryString = @{}
          if ($LocalOnly.IsPresent)
@@ -26,7 +26,7 @@ function Get-VSTeamSecurityNamespace {
          }
 
          $resp = _callAPI -Area 'securitynamespaces' `
-         -Version $([VSTeamVersions]::Core) `
+         -Version $([VSTeamVersions]::Core) -NoProject `
          -QueryString $queryString
       }
 
