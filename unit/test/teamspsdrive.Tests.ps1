@@ -177,6 +177,7 @@ InModuleScope VSTeam {
       }
 
       Context 'VSTeamAccount & Projects' {
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' -or $Service -eq 'Packaging' }
          Mock Get-VSTeamProject { return [VSTeamProject]::new([PSCustomObject]@{
                   name        = 'TestProject'
                   description = ''
@@ -185,8 +186,8 @@ InModuleScope VSTeam {
                   state       = ''
                   visibility  = ''
                   revision    = 0
-                  defaultTeam = [PSCustomObject]@{}
-                  _links      = [PSCustomObject]@{}
+                  defaultTeam = [PSCustomObject]@{ }
+                  _links      = [PSCustomObject]@{ }
                }
             )
          }
@@ -196,9 +197,9 @@ InModuleScope VSTeam {
                name                 = 'Default'
                id                   = 1
                size                 = 1
-               createdBy            = [PSCustomObject]@{}
-               administratorsGroup  = [PSCustomObject]@{}
-               serviceAccountsGroup = [PSCustomObject]@{}
+               createdBy            = [PSCustomObject]@{ }
+               administratorsGroup  = [PSCustomObject]@{ }
+               serviceAccountsGroup = [PSCustomObject]@{ }
             }
          }
 
@@ -260,7 +261,7 @@ InModuleScope VSTeam {
          }
 
          Mock Get-VSTeamAgent { return [VSTeamAgent]::new(@{
-                  _links             = [PSCustomObject]@{}
+                  _links             = [PSCustomObject]@{ }
                   createdOn          = '2018-03-28T16:48:58.317Z'
                   maxParallelism     = 1
                   id                 = 102
@@ -269,7 +270,7 @@ InModuleScope VSTeam {
                   version            = '1.336.1'
                   osDescription      = 'Linux'
                   name               = 'Test_Agent'
-                  systemCapabilities = [PSCustomObject]@{}
+                  systemCapabilities = [PSCustomObject]@{ }
                }, 1
             )
          }
@@ -363,8 +364,8 @@ InModuleScope VSTeam {
 
       Context 'Build Definitions' {
          Mock Get-VSTeamBuildDefinition { return @(
-               [VSTeamBuildDefinition]::new(@{}, 'TestProject'),
-               [VSTeamBuildDefinition]::new(@{}, 'TestProject')
+               [VSTeamBuildDefinition]::new(@{ }, 'TestProject'),
+               [VSTeamBuildDefinition]::new(@{ }, 'TestProject')
             )
          }
 
@@ -485,8 +486,8 @@ InModuleScope VSTeam {
                      state       = ''
                      visibility  = ''
                      revision    = 0
-                     defaultTeam = [PSCustomObject]@{}
-                     _links      = [PSCustomObject]@{}
+                     defaultTeam = [PSCustomObject]@{ }
+                     _links      = [PSCustomObject]@{ }
                   }
                }, 'TestProject')
          }
@@ -544,8 +545,8 @@ InModuleScope VSTeam {
 
       Context 'Permissions' {
          Set-StrictMode -Version Latest
-         Mock Get-VSTeamGroup { return [VSTeamGroup]::new(@{})}
-         Mock Get-VSTeamUser { return [VSTeamGroup]::new(@{})}
+         Mock Get-VSTeamGroup { return [VSTeamGroup]::new(@{ }) }
+         Mock Get-VSTeamUser { return [VSTeamGroup]::new(@{ }) }
 
          $permissions = [VSTeamPermissions]::new('Permissions')
 
