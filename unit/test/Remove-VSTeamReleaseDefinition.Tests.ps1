@@ -48,7 +48,7 @@ Describe 'VSTeamReleaseDefinition' {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/2?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/2?api-version=$(_getApiVersion Release)"
             }
          }
       }
@@ -64,7 +64,7 @@ Describe 'VSTeamReleaseDefinition' {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions/2?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions/2?api-version=$(_getApiVersion Release)"
             }
          }
       }

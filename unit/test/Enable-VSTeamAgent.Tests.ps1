@@ -13,7 +13,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamAgent' {
    Context 'Enable-VSTeamAgent' {
       ## Arrnage
-      [VSTeamVersions]::DistributedTask = '1.0-unitTest'
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
+
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -27,7 +28,7 @@ Describe 'VSTeamAgent' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$([VSTeamVersions]::DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTask)"
          }
       }
 

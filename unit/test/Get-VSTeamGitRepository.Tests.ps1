@@ -37,14 +37,36 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/Remove-VSTeamAccount.ps1"
 . "$here/../../Source/Public/Get-VSTeamBuildDefinition.ps1"
 . "$here/../../Source/Public/Get-VSTeamProject.ps1"
+. "$here/../../Source/Public/Clear-VSTeamDefaultProject.ps1"
 . "$here/../../Source/Classes/VSTeamGitRepository.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 
-$results = [PSCustomObject]@{
-   value = [PSCustomObject]@{
+Describe "VSTeamGitRepository" {
+   $results = [PSCustomObject]@{
+      value = [PSCustomObject]@{
+         id            = ''
+         url           = ''
+         sshUrl        = ''
+         remoteUrl     = ''
+         defaultBranch = ''
+         size          = 0
+         name          = ''
+         project       = [PSCustomObject]@{
+            name        = 'Project'
+            id          = 1
+            description = ''
+            url         = ''
+            state       = ''
+            revision    = ''
+            visibility  = ''
+         }
+      }
+   }
+
+   $singleResult = [PSCustomObject]@{
       id            = ''
       url           = ''
       sshUrl        = ''
@@ -62,36 +84,16 @@ $results = [PSCustomObject]@{
          visibility  = ''
       }
    }
-}
 
-$singleResult = [PSCustomObject]@{
-   id            = ''
-   url           = ''
-   sshUrl        = ''
-   remoteUrl     = ''
-   defaultBranch = ''
-   size          = 0
-   name          = ''
-   project       = [PSCustomObject]@{
-      name        = 'Project'
-      id          = 1
-      description = ''
-      url         = ''
-      state       = ''
-      revision    = ''
-      visibility  = ''
-   }
-}
-
-Describe "VSTeamGitRepository" {
    ## Arrange
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
 
    ## If you don't call this and there is a default project in scope
    ## these tests will fail. The API can be called with or without
    ## a project and these tests are written to test without one. 
-   Clear-DefaultProject
+   Clear-VSTeamDefaultProject
 
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
@@ -124,7 +126,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories?api-version=$(_getApiVersion Git)"
             }
          }
 
@@ -134,7 +136,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Git)"
             }
          }
 
@@ -144,7 +146,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/testRepo?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/testRepo?api-version=$(_getApiVersion Git)"
             }
          }
 
@@ -170,7 +172,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories?api-version=$(_getApiVersion Git)"
             }
          }
 
@@ -180,7 +182,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Git)"
             }
          }
 
@@ -190,7 +192,7 @@ Describe "VSTeamGitRepository" {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/testRepo?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/testRepo?api-version=$(_getApiVersion Git)"
             }
          }
       }

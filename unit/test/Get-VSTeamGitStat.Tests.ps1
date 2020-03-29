@@ -23,7 +23,7 @@ Describe "TeamGitStat" {
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   Mock _getInstance { return 'https://dev.azure.com/test' }
 
    Mock Invoke-RestMethod { return $singleResult }
 

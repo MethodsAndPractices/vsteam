@@ -6,6 +6,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/Get-VSTeamProfile.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 

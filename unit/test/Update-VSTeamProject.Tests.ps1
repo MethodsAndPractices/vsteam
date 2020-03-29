@@ -59,21 +59,21 @@ Describe 'VSTeamProject' {
       _links      = [PSCustomObject]@{ }
    }
 
-   Context 'Update-VSTeamProject' {         
+   Context 'Update-VSTeamProject' {
       Mock Invoke-RestMethod {
-         Write-Host $args
-         return $singleResult 
+         # Write-Host $args
+         return $singleResult
       }
       Mock Invoke-RestMethod {
-         Write-Host "single result $args"
-         return $singleResult 
+         # Write-Host "single result $args"
+         return $singleResult
       } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
       Mock Invoke-RestMethod {
-         Write-Host "in progress $args"
+         # Write-Host "in progress $args"
          return @{status = 'inProgress'; url = 'https://someplace.com' }
       } -ParameterFilter { $Method -eq 'Patch' }
       Mock _trackProjectProgress {
-         Write-Host "in progress $args"
+         # Write-Host "in progress $args"
       }
       Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Testing123?api-version=$(_getApiVersion Core)" }
 

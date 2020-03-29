@@ -94,7 +94,7 @@ Describe "VSTeamGitRepository" {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "https://dev.azure.com/test/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Git)"
             }
          }
 
@@ -114,7 +114,7 @@ Describe "VSTeamGitRepository" {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -ParameterFilter {
                $Method -eq 'Delete' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::Git)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/git/repositories/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion Git)"
             }
          }
       }

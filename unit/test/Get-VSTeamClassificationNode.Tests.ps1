@@ -15,15 +15,14 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'Get-VSTeamClassificationNode' {
-   # You have to set the version or the api-version will not be added when versions = ''
-   [VSTeamVersions]::Core = '5.0'
-
    $withoutChildNode = Get-Content "$PSScriptRoot\sampleFiles\withoutChildNode.json" -Raw | ConvertFrom-Json
    $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }
+
+   Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
    
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
@@ -39,7 +38,7 @@ Describe 'Get-VSTeamClassificationNode' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/Iterations*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
+            $Uri -like "*api-version=$(_getApiVersion Core)*"
          }
       }
 
@@ -50,7 +49,7 @@ Describe 'Get-VSTeamClassificationNode' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/Iterations*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*`$Depth=10*"
          }
       }
@@ -62,7 +61,7 @@ Describe 'Get-VSTeamClassificationNode' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/Iterations/test/test/test*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
+            $Uri -like "*api-version=$(_getApiVersion Core)*"
          }
       }
 
@@ -73,7 +72,7 @@ Describe 'Get-VSTeamClassificationNode' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*Ids=1,2,3,4*"
          }
       }
@@ -85,7 +84,7 @@ Describe 'Get-VSTeamClassificationNode' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*Ids=43,44*"
          }
       }

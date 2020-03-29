@@ -13,11 +13,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamWorkItem' {
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
+   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
@@ -44,11 +43,11 @@ Describe 'VSTeamWorkItem' {
          # matches I have to search for the portions I expect but can't
          # assume the order.
          # The general string should look like this:
-         # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$([VSTeamVersions]::Core)&ids=47,48&`$Expand=None&errorPolicy=omit
+         # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$(_getApiVersion Core)&ids=47,48&`$Expand=None&errorPolicy=omit
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*ids=47,48*" -and
             $Uri -like "*`$Expand=None*" -and
             $Uri -like "*errorPolicy=omit*"
@@ -59,7 +58,7 @@ Describe 'VSTeamWorkItem' {
          Get-VSTeamWorkItem -Id 47
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/47?api-version=$([VSTeamVersions]::Core)&`$Expand=None"
+            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/47?api-version=$(_getApiVersion Core)&`$Expand=None"
          }
       }
    }

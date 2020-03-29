@@ -43,7 +43,7 @@ Describe 'VSTeamReleaseStatus' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -eq $expectedBody -and
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/1/environments/15?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/1/environments/15?api-version=$(_getApiVersion Release)"
          }
       }
 

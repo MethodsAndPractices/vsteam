@@ -18,9 +18,7 @@ Describe 'VSTeamWiql' {
    Mock _getInstance { return 'https://dev.azure.com/test' }
       
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
+   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
    $workItem = @{
       id  = 47
@@ -81,7 +79,7 @@ Describe 'VSTeamWiql' {
             $Body -like "*[System.State]*" -and
             $Body -like '*`}' -and # Make sure the body is an object
             $ContentType -eq 'application/json' -and
-            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)&`$top=100"
+            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$(_getApiVersion Core)&`$top=100"
          }
       }
 
@@ -98,7 +96,7 @@ Describe 'VSTeamWiql' {
             $Body -like "*[System.State]*" -and
             $Body -like '*`}' -and # Make sure the body is an object
             $ContentType -eq 'application/json' -and
-            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)&`$top=250"
+            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$(_getApiVersion Core)&`$top=250"
          }
       }
 
@@ -115,7 +113,7 @@ Describe 'VSTeamWiql' {
             $Body -like "*[System.State]*" -and
             $Body -like '*`}' -and # Make sure the body is an object
             $ContentType -eq 'application/json' -and
-            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -132,7 +130,7 @@ Describe 'VSTeamWiql' {
             $Body -like "*[System.State]*" -and
             $Body -like '*`}' -and # Make sure the body is an object
             $ContentType -eq 'application/json' -and
-            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)&`$top=100"
+            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$(_getApiVersion Core)&`$top=100"
          }
       }
 
@@ -151,7 +149,7 @@ Describe 'VSTeamWiql' {
             $ContentType -eq 'application/json' -and
             $Uri -like "*timePrecision=True*"
             $Uri -like "*`$top=100*"
-            $Uri -like "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$([VSTeamVersions]::Core)*"
+            $Uri -like "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$(_getApiVersion Core)*"
          }
       }
 
@@ -160,7 +158,7 @@ Describe 'VSTeamWiql' {
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/1?api-version=$([VSTeamVersions]::Core)&`$top=100"
+            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/1?api-version=$(_getApiVersion Core)&`$top=100"
          }
       }
 
@@ -169,7 +167,7 @@ Describe 'VSTeamWiql' {
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1 -Expand
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/1?api-version=$([VSTeamVersions]::Core)&`$top=100"
+            $Uri -eq "https://dev.azure.com/test/test/test team/_apis/wit/wiql/1?api-version=$(_getApiVersion Core)&`$top=100"
          }
       }
    }

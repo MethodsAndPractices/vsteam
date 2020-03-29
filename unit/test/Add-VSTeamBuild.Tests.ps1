@@ -40,25 +40,26 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamBuild' {
-   $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
-
-   # Sample result of a single build
-   $singleResult = Get-Content "$PSScriptRoot\sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json
-
    Context 'Add-VSTeamBuild' {
+      ## Arrange
+      $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+      $singleResult = Get-Content "$PSScriptRoot\sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json
+
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
+
       Context 'Services' {
          ## Arrange
          BeforeAll {
             $Global:PSDefaultParameterValues.Remove("*:projectName")
          }
-         
+
          # Load the mocks to create the project name dynamic parameter
          . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
          # Set the account to use for testing. A normal user would do this
          # using the Set-VSTeamAccount function.
          Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-
+         
          Mock Invoke-RestMethod { return $singleResult }
          Mock Get-VSTeamBuildDefinition { return $resultsVSTS.value }
 
@@ -70,7 +71,7 @@ Describe 'VSTeamBuild' {
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 699 -and
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -82,7 +83,7 @@ Describe 'VSTeamBuild' {
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -95,7 +96,7 @@ Describe 'VSTeamBuild' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
                ($Body | ConvertFrom-Json).sourceBranch -eq 'refs/heads/dev' -and
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -108,7 +109,7 @@ Describe 'VSTeamBuild' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
                (($Body | ConvertFrom-Json).parameters | ConvertFrom-Json).'system.debug' -eq 'true' -and
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
       }
@@ -149,7 +150,7 @@ Describe 'VSTeamBuild' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                # The write-host below is great for seeing how many ways the mock is called.
                # Write-Host "Assert Mock $Uri"
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)" -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$(_getApiVersion Build)" -and
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
                ($Body | ConvertFrom-Json).queue.id -eq 3
             }
@@ -167,7 +168,7 @@ Describe 'VSTeamBuild' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                # The write-host below is great for seeing how many ways the mock is called.
                # Write-Host "Assert Mock $Uri"
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)" -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$(_getApiVersion Build)" -and
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
                ($Body | ConvertFrom-Json).queue.id -eq 3 -and
                $Body -like "*system.debug*"
@@ -186,7 +187,7 @@ Describe 'VSTeamBuild' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                # The write-host below is great for seeing how many ways the mock is called.
                # Write-Host "Assert Mock $Uri"
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$([VSTeamVersions]::Build)" -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$(_getApiVersion Build)" -and
                ($Body | ConvertFrom-Json).definition.id -eq 2 -and
                ($Body | ConvertFrom-Json).queue.id -eq 3 -and
                ($Body | ConvertFrom-Json).sourceBranch -eq 'refs/heads/dev'

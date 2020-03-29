@@ -5,6 +5,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamQueue.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
@@ -17,6 +18,7 @@ Describe 'VSTeamQueue' {
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
       
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
@@ -33,7 +35,7 @@ Describe 'VSTeamQueue' {
    
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues/101?api-version=$([VSTeamVersions]::DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues/101?api-version=$(_getApiVersion DistributedTask)"
          }
       }
 
@@ -46,11 +48,11 @@ Describe 'VSTeamQueue' {
          # matches I have to search for the portions I expect but can't
          # assume the order.
          # The general string should look like this:
-         # "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$([VSTeamVersions]::DistributedTask)&actionFilter=None&queueName=Hosted"
+         # "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$(_getApiVersion DistributedTask)&actionFilter=None&queueName=Hosted"
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/project/_apis/distributedtask/queues*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
             $Uri -like "*actionFilter=None*" -and
             $Uri -like "*queueName=Hosted*"
          }
@@ -62,7 +64,7 @@ Describe 'VSTeamQueue' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$([VSTeamVersions]::DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$(_getApiVersion DistributedTask)"
          }
       }
 
@@ -72,7 +74,7 @@ Describe 'VSTeamQueue' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$([VSTeamVersions]::DistributedTask)&queueName=Hosted"
+            $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$(_getApiVersion DistributedTask)&queueName=Hosted"
          }
       }
 
@@ -82,7 +84,7 @@ Describe 'VSTeamQueue' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$([VSTeamVersions]::DistributedTask)&actionFilter=None"
+            $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$(_getApiVersion DistributedTask)&actionFilter=None"
          }
       }
    }

@@ -21,6 +21,7 @@ Describe 'VSTeamPullRequest' {
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
 
    # You have to set the version or the api-version will not be added when versions = ''
    [VSTeamVersions]::Git = '5.1-preview'
@@ -73,7 +74,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
+            $Uri -eq "https://dev.azure.com/test/_apis/git/pullRequests?api-version=$(_getApiVersion Git)"
          }
       }
 
@@ -82,7 +83,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName testproject
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/testproject/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
+            $Uri -eq "https://dev.azure.com/test/testproject/_apis/git/pullRequests?api-version=$(_getApiVersion Git)"
          }
       }
 
@@ -91,7 +92,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName testproject
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/testproject/_apis/git/pullRequests?api-version=$([VSTeamVersions]::Git)"
+            $Uri -eq "https://dev.azure.com/test/testproject/_apis/git/pullRequests?api-version=$(_getApiVersion Git)"
          }
       }
 
@@ -99,7 +100,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -Id 101
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/git/pullRequests/101?api-version=$([VSTeamVersions]::Git)"
+            $Uri -eq "https://dev.azure.com/test/_apis/git/pullRequests/101?api-version=$(_getApiVersion Git)"
          }
       }
 
@@ -107,7 +108,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName Test -All
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*status=all*"
          }
@@ -117,7 +118,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName Test -Status abandoned
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*status=abandoned*"
          }
@@ -127,7 +128,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName Test -SourceBranchRef "refs/heads/mybranch"
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*searchCriteria.sourceRefName=refs/heads/mybranch*"
          }
@@ -137,7 +138,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName Test -TargetBranchRef "refs/heads/mybranch"
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*searchCriteria.targetRefName=refs/heads/mybranch*"
          }
@@ -147,7 +148,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName Test -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF"
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*repositories/93BBA613-2729-4158-9217-751E952AB4AF*"
          }
@@ -157,7 +158,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName Test -SourceRepositoryId "93BBA613-2729-4158-9217-751E952AB4AF"
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*searchCriteria.sourceRepositoryId=93BBA613-2729-4158-9217-751E952AB4AF*"
          }
@@ -167,7 +168,7 @@ Describe 'VSTeamPullRequest' {
          Get-VSTeamPullRequest -ProjectName Test -SourceRepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -Top 100 -Skip 200
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -like "*api-version=$([VSTeamVersions]::Git)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*searchCriteria.sourceRepositoryId=93BBA613-2729-4158-9217-751E952AB4AF*" -and
             $Uri -like "*`$top=100*" -and

@@ -11,7 +11,7 @@ function Disable-VSTeamAgent {
    process {
       foreach ($item in $Id) {
          try {
-            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -NoProject -Resource agents -Id $item -Version $([VSTeamVersions]::DistributedTask) -ContentType "application/json" -Body "{'enabled':false,'id':$item,'maxParallelism':1}" | Out-Null
+            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -NoProject -Resource agents -Id $item -Version $(_getApiVersion DistributedTask) -ContentType "application/json" -Body "{'enabled':false,'id':$item,'maxParallelism':1}" | Out-Null
             Write-Output "Disabled agent $item"
          }
          catch {

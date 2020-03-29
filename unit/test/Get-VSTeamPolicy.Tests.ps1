@@ -32,7 +32,7 @@ Describe 'VSTeamPolicy' {
          
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations?api-version=$([VSTeamVersions]::Git)"
+            $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations?api-version=$(_getApiVersion Git)"
          }
       }
 
@@ -42,7 +42,7 @@ Describe 'VSTeamPolicy' {
          
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/4?api-version=$([VSTeamVersions]::Git)"
+            $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/4?api-version=$(_getApiVersion Git)"
          }
       }
 

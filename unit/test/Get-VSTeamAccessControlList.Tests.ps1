@@ -21,7 +21,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamAccessControlList' {
    ## Arrange
    # You have to set the version or the api-version will not be added when versions = ''
-   [VSTeamVersions]::Core = '5.0'
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
    $accessControlListResult = Get-Content "$PSScriptRoot\sampleFiles\accessControlListResult.json" -Raw | ConvertFrom-Json
 
@@ -47,7 +47,7 @@ Describe 'VSTeamAccessControlList' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/5a27515b-ccd7-42c9-84f1-54c998f03866*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*descriptors=SomeDescriptor*" -and
             $Uri -like "*includeExtendedInfo=True*" -and
             $Uri -like "*token=SomeToken*" -and
@@ -64,7 +64,7 @@ Describe 'VSTeamAccessControlList' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*descriptors=SomeDescriptor*" -and
             $Uri -like "*token=SomeToken*" -and
             $Method -eq "Get"
@@ -78,8 +78,8 @@ Describe 'VSTeamAccessControlList' {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*descriptors=AcesDescriptor*" -and
             $Uri -like "*token=AcesToken*" -and
             $Method -eq "Get"

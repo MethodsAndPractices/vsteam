@@ -13,6 +13,7 @@ Describe 'Add-VSTeamBuildTag' {
    Context 'Add-VSTeamBuildTag' {
       ## Arrange
       $inputTags = "Test1", "Test2", "Test3"
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
 
       Context 'Services' {
          ## Arrange
@@ -21,7 +22,7 @@ Describe 'Add-VSTeamBuildTag' {
 
          # Set the account to use for testing. A normal user would do this
          # using the Set-VSTeamAccount function.
-         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         Mock _getInstance { return 'https://dev.azure.com/test' }
 
          Mock Invoke-RestMethod
 
@@ -33,7 +34,7 @@ Describe 'Add-VSTeamBuildTag' {
             foreach ($inputTag in $inputTags) {
                Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                   $Method -eq 'Put' -and
-                  $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/tags?api-version=$([VSTeamVersions]::Build)" + "&tag=$inputTag"
+                  $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)" + "&tag=$inputTag"
                }
             }
          }
@@ -42,22 +43,22 @@ Describe 'Add-VSTeamBuildTag' {
       Context 'Server' {
          ## Arrange
          . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-   
+
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         
-         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-   
+
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
+
          Mock Invoke-RestMethod
-   
+
          It 'should add tags to Build' {
             ## Act
             Add-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
-   
+
             ## Assert
             foreach ($inputTag in $inputTags) {
                Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                   $Method -eq 'Put' -and
-                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$([VSTeamVersions]::Build)" + "&tag=$inputTag"
+                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)" + "&tag=$inputTag"
                }
             }
          }

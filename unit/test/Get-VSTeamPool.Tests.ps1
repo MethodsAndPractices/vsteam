@@ -6,9 +6,11 @@ Import-Module SHiPS
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
+. "$here/../../Source/Classes/VSTeamLeaf.ps1"
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamPool.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
@@ -16,8 +18,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamPool' {
    ## Arrange
-   [VSTeamVersions]::DistributedTask = '1.0-unitTest'
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _hasProjectCacheExpired { return $false }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
+
 
    $hostedPool = [PSCustomObject]@{
       owner     = [PSCustomObject]@{
@@ -73,7 +77,7 @@ Describe 'VSTeamPool' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools?api-version=$([VSTeamVersions]::DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools?api-version=$(_getApiVersion DistributedTask)"
          }
       }
 
@@ -83,7 +87,7 @@ Describe 'VSTeamPool' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/101?api-version=$([VSTeamVersions]::DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/101?api-version=$(_getApiVersion DistributedTask)"
          }
       }
    }

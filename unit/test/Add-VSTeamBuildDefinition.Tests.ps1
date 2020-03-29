@@ -18,9 +18,11 @@ Describe 'VSTeamBuildDefinition' {
 
       Mock Invoke-RestMethod { return $resultsVSTS }
 
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
+
       Context 'Services' {
          ## Arrange
-         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         Mock _getInstance { return 'https://dev.azure.com/test' }
 
          it 'Should add build' {
             ## Act
@@ -30,7 +32,7 @@ Describe 'VSTeamBuildDefinition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'sampleFiles/builddef.json' -and
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions?api-version=$(_getApiVersion Build)"
             }
          }
       }
@@ -38,7 +40,7 @@ Describe 'VSTeamBuildDefinition' {
       Context 'Server' {
          ## Arrange
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
          it 'Should add build' {
             ## Act
@@ -48,7 +50,7 @@ Describe 'VSTeamBuildDefinition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'sampleFiles/builddef.json' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions?api-version=$(_getApiVersion Build)"
             }
          }
       }

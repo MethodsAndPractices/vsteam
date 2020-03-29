@@ -23,6 +23,8 @@ Describe 'VSTeamBuildLog' {
          }
       }
 
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
+
       Context 'Services' {
          ## Arrange
          # Set the account to use for testing. A normal user would do this
@@ -35,11 +37,11 @@ Describe 'VSTeamBuildLog' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs?api-version=$(_getApiVersion Build)"
             }
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/3?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/3?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -49,7 +51,7 @@ Describe 'VSTeamBuildLog' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/2?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/2?api-version=$(_getApiVersion Build)"
             }
          }
       }
@@ -65,7 +67,7 @@ Describe 'VSTeamBuildLog' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/2?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/2?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -75,11 +77,11 @@ Describe 'VSTeamBuildLog' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs?api-version=$(_getApiVersion Build)"
             }
          
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/3?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/3?api-version=$(_getApiVersion Build)"
             }
          }
       }

@@ -17,8 +17,7 @@ Describe 'VSTeamPullRequest' {
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
    # You have to set the version or the api-version will not be added when versions = ''
-   [VSTeamVersions]::Graph = '5.0'
-   [VSTeamVersions]::Git = '5.1-preview'
+   Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
 
    $result = Get-Content "$PSScriptRoot\sampleFiles\updatePullRequestResponse.json" -Raw | ConvertFrom-Json
 

@@ -75,7 +75,7 @@ Describe 'VSTeamProjectPermission' {
 "@ | ConvertFrom-Json
 
    # You have to set the version or the api-version will not be added when versions = ''
-   [VSTeamVersions]::Core = '5.0'
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
    Context 'Add-VSTeamProjectPermission by ProjectUser' {
       Mock Invoke-RestMethod {
@@ -90,7 +90,7 @@ Describe 'VSTeamProjectPermission' {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/52d39943-cb85-4d7f-8fa8-c6baac873819*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"`$PROJECT:vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
             $Body -like "*`"allow`": 73731,*" -and
@@ -105,7 +105,7 @@ Describe 'VSTeamProjectPermission' {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/52d39943-cb85-4d7f-8fa8-c6baac873819*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"`$PROJECT:vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 73731,*" -and
@@ -119,7 +119,7 @@ Describe 'VSTeamProjectPermission' {
          Add-VSTeamProjectPermission -Project $projectResultObject -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamProjectPermissions]'GENERIC_READ,GENERIC_WRITE,WORK_ITEM_DELETE,RENAME') -Deny ([VSTeamProjectPermissions]'CHANGE_PROCESS,VIEW_TEST_RESULTS')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/52d39943-cb85-4d7f-8fa8-c6baac873819*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"`$PROJECT:vstfs:///Classification/TeamProject/010d06f0-00d5-472a-bb47-58947c230876`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 73731,*" -and

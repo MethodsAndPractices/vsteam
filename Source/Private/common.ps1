@@ -15,7 +15,7 @@ function _supportsGraph {
 }
 
 function _testGraphSupport {
-   if (-not [VSTeamVersions]::Graph) {
+   if (-not $(_getApiVersion Graph)) {
       return $false
    }
 
@@ -30,7 +30,7 @@ function _supportsFeeds {
 }
 
 function _testFeedSupport {
-   if (-not [VSTeamVersions]::Packaging) {
+   if (-not $(_getApiVersion Packaging)) {
       return $false
    }
 
@@ -46,7 +46,7 @@ function _supportsSecurityNamespace {
 
 function _supportsMemberEntitlementManagement {
    _hasAccount
-   if (-not [VSTeamVersions]::MemberEntitlementManagement) {
+   if (-not $(_getApiVersion MemberEntitlementManagement)) {
       throw 'This account does not support Member Entitlement.'
    }
 }
@@ -56,53 +56,70 @@ function _testAdministrator {
    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
+# When you mock this in tests be sure to add a Parameter Filter that matches
+# the Service that should be used. 
+# Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
+# Also test in the Assert-MockCalled that the correct version was used in the URL that was
+# built for the API call.
 function _getApiVersion {
-   [CmdletBinding()]
+   [CmdletBinding(DefaultParameterSetName = 'Service')]
    param (
-      [parameter(Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph', 'TaskGroups')]
-      [string] $Service
+      [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph', 'TaskGroups', 'Policy')]
+      [string] $Service,
+
+      [parameter(ParameterSetName = 'Target')]
+      [switch] $Target
    )
 
-   switch ($Service) {
-      'Build' {
-         return [VSTeamVersions]::Build
-      }
-      'Release' {
-         return [VSTeamVersions]::Release
-      }
-      'Core' {
-         return [VSTeamVersions]::Core
-      }
-      'Git' {
-         return [VSTeamVersions]::Git
-      }
-      'DistributedTask' {
-         return [VSTeamVersions]::DistributedTask
-      }
-      'VariableGroups' {
-         return [VSTeamVersions]::VariableGroups
-      }
-      'Tfvc' {
-         return [VSTeamVersions]::Tfvc
-      }
-      'Packaging' {
-         return [VSTeamVersions]::Packaging
-      }
-      'MemberEntitlementManagement' {
-         return [VSTeamVersions]::MemberEntitlementManagement
-      }
-      'ExtensionsManagement' {
-         return [VSTeamVersions]::ExtensionsManagement
-      }
-      'ServiceFabricEndpoint' {
-         return [VSTeamVersions]::ServiceFabricEndpoint
-      }
-      'Graph' {
-         return [VSTeamVersions]::Graph
-      }
-      'TaskGroups' {
-         return [VSTeamVersions]::TaskGroups
+   if ($Target.IsPresent) {
+      return [VSTeamVersions]::Version
+   }
+   else {
+
+      switch ($Service) {
+         'Build' {
+            return [VSTeamVersions]::Build
+         }
+         'Release' {
+            return [VSTeamVersions]::Release
+         }
+         'Core' {
+            return [VSTeamVersions]::Core
+         }
+         'Git' {
+            return [VSTeamVersions]::Git
+         }
+         'DistributedTask' {
+            return [VSTeamVersions]::DistributedTask
+         }
+         'VariableGroups' {
+            return [VSTeamVersions]::VariableGroups
+         }
+         'Tfvc' {
+            return [VSTeamVersions]::Tfvc
+         }
+         'Packaging' {
+            return [VSTeamVersions]::Packaging
+         }
+         'MemberEntitlementManagement' {
+            return [VSTeamVersions]::MemberEntitlementManagement
+         }
+         'ExtensionsManagement' {
+            return [VSTeamVersions]::ExtensionsManagement
+         }
+         'ServiceFabricEndpoint' {
+            return [VSTeamVersions]::ServiceFabricEndpoint
+         }
+         'Graph' {
+            return [VSTeamVersions]::Graph
+         }
+         'TaskGroups' {
+            return [VSTeamVersions]::TaskGroups
+         }
+         'Policy' {
+            return [VSTeamVersions]::Policy
+         }
       }
    }
 }
@@ -335,7 +352,7 @@ function _getWorkItemTypes {
 
    # Call the REST API
    try {
-      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $([VSTeamVersions]::Core)
+      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
 
       # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
       # To replace all the "": with "_end":
@@ -351,6 +368,14 @@ function _getWorkItemTypes {
    }
 }
 
+# When writing unit tests mock this and return false.
+# This will prevent the dynamic project name parameter
+# from trying to call the getProject function.
+# Mock _hasProjectCacheExpired { return $false }
+function _hasProjectCacheExpired {
+   return $([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute
+}
+
 function _getProjects {
    if (-not $(_getInstance)) {
       Write-Output @()
@@ -359,7 +384,7 @@ function _getProjects {
 
    $resource = "/projects"
    $instance = $(_getInstance)
-   $version = [VSTeamVersions]::Core
+   $version = $(_getApiVersion Core)
 
    # Build the url to list the projects
    # You CANNOT use _buildRequestURI here or you will end up
@@ -415,7 +440,7 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if ($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
+   if (_hasProjectCacheExpired) {
       $arrSet = _getProjects
       [VSTeamProjectCache]::projects = $arrSet
       [VSTeamProjectCache]::timestamp = (Get-Date).Minute
@@ -473,7 +498,7 @@ function _getProcesses {
       $query = @{ }
       $query['stateFilter'] = 'All'
       $query['$top'] = '9999'
-      $resp = _callAPI -area 'process' -resource 'processes' -Version $([VSTeamVersions]::Core) -QueryString $query
+      $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query
 
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
@@ -677,7 +702,17 @@ function _callAPI {
       [string]$Url,
       [object]$QueryString,
       [hashtable]$AdditionalHeaders,
+      # Some API calls require the Project ID and not the project name.
+      # However, the dynamic project name parameter only shows you names
+      # and not the Project IDs. Using this flag the project name provided
+      # will be converted to the Project ID when building the URI for the API
+      # call.
       [switch]$UseProjectId,
+      # This flag makes sure that even if a default project is set that it is
+      # not used to build the URI for the API call. Not all API require or 
+      # allow the project to be used. Setting a default project would cause
+      # that project name to be used in building the URI that would lead to 
+      # 404 because the URI would not be correct.
       [switch]$NoProject
    )
 
@@ -795,7 +830,7 @@ function _trackServiceEndpointProgress {
    # Track status
    while (-not $isReady) {
       $statusTracking = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
-         -Version $([VSTeamVersions]::DistributedTask)
+         -Version $(_getApiVersion DistributedTask)
 
       $isReady = $statusTracking.isReady;
 
@@ -818,7 +853,7 @@ function _trackServiceEndpointProgress {
 }
 
 function _supportsServiceFabricEndpoint {
-   if (-not [VSTeamVersions]::ServiceFabricEndpoint) {
+   if (-not $(_getApiVersion ServiceFabricEndpoint)) {
       throw 'This account does not support Service Fabric endpoints.'
    }
 }

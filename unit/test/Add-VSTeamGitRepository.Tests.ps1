@@ -43,46 +43,44 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 #endregion
 
-$singleResult = [PSCustomObject]@{
-   id            = ''
-   url           = ''
-   sshUrl        = ''
-   remoteUrl     = ''
-   defaultBranch = ''
-   size          = 0
-   name          = 'testRepo'
-   project       = [PSCustomObject]@{
-      name        = 'Project'
-      id          = 1
-      description = ''
-      url         = ''
-      state       = ''
-      revision    = ''
-      visibility  = ''
-   }
-}
-
 Describe "VSTeamGitRepository" {
-   ## Arrange
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
-
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-
-   Mock Invoke-RestMethod {
-      # Write-Host "Single $Uri"
-      return $singleResult } -ParameterFilter {
-      $Uri -like "*00000000-0000-0000-0000-000000000000*" -or
-      $Uri -like "*testRepo*" -or
-      $Body -like "*testRepo*"
-   }
-
    Context 'Add-VSTeamGitRepository' {
+      ## Arrange
+      $singleResult = [PSCustomObject]@{
+         id            = ''
+         url           = ''
+         sshUrl        = ''
+         remoteUrl     = ''
+         defaultBranch = ''
+         size          = 0
+         name          = 'testRepo'
+         project       = [PSCustomObject]@{
+            name        = 'Project'
+            id          = 1
+            description = ''
+            url         = ''
+            state       = ''
+            revision    = ''
+            visibility  = ''
+         }
+      }
+
+      Mock _hasProjectCacheExpired { return $false }
+
+      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
+
+      Mock Invoke-RestMethod { return $singleResult }
+
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
 
       It 'by name should add Git repo' {
          Add-VSTeamGitRepository -Name 'testRepo' -ProjectName 'test'
-         Assert-VerifiableMock
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Method -eq "Post" -and
+            $Uri -eq "https://dev.azure.com/test/test/_apis/git/repositories?api-version=1.0-gitUnitTests" -and
+            $Body -like "*testRepo*"
+         }
       }
    }
 }

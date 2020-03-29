@@ -28,7 +28,7 @@ Describe "VSTeamGroup" {
          $scopeResult = Get-Content "$PSScriptRoot\sampleFiles\descriptor.scope.TestProject.json" -Raw | ConvertFrom-Json
 
          # You have to set the version or the api-version will not be added when versions = ''
-         [VSTeamVersions]::Graph = '5.0'
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
 
          # Set the account to use for testing. A normal user would do this
          # using the Set-VSTeamAccount function.
@@ -49,10 +49,10 @@ Describe "VSTeamGroup" {
             # matches I have to search for the portions I expect but can't
             # assume the order.
             # The general string should look like this:
-            # "https://vssps.dev.azure.com/test/_apis/graph/groups?api-version=$([VSTeamVersions]::Graph)&scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2"
+            # "https://vssps.dev.azure.com/test/_apis/graph/groups?api-version=$(_getApiVersion Graph)&scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2"
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
                $Uri -like "*scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2*"
             }
          }
@@ -62,7 +62,7 @@ Describe "VSTeamGroup" {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
                $Uri -like "*scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2*"
             }
          }
@@ -72,7 +72,7 @@ Describe "VSTeamGroup" {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
                $Uri -like "*subjectTypes=vssgp,aadgp*"
             }
          }
@@ -82,7 +82,7 @@ Describe "VSTeamGroup" {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
                $Uri -like "*subjectTypes=vssgp,aadgp*" -and
                $Uri -like "*scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2*"
             }
@@ -95,7 +95,7 @@ Describe "VSTeamGroup" {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/groups/vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
+               $Uri -like "*api-version=$(_getApiVersion Graph)*"
             }
          }
 
@@ -122,12 +122,13 @@ Describe "VSTeamGroup" {
       # below.
       Mock _getProjects { return @() }
 
+      Mock _getApiVersion { return 'TFS2017' }
+      Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Graph' }
+
       # The Graph API is not supported on TFS
       Mock _supportsGraph { throw 'This account does not support the graph API.' }
 
       It 'Should throw' {
-         Set-VSTeamAPIVersion TFS2017
-
          { Get-VSTeamGroup } | Should Throw
       }
 

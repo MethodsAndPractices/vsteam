@@ -4,7 +4,7 @@ function Add-VSTeamAccessControlEntry {
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
       [VSTeamSecurityNamespace] $SecurityNamespace,
 
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]      
+      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
       [guid] $SecurityNamespaceId,
 
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
@@ -27,13 +27,12 @@ function Add-VSTeamAccessControlEntry {
    )
 
    process {
-      if ($SecurityNamespace)
-      {
+      if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
       }
 
-$body =
-@"
+      $body =
+      @"
    {
       "token": "$Token",
       "merge": true,
@@ -49,11 +48,10 @@ $body =
 "@
       # Call the REST API
       $resp = _callAPI -Area 'accesscontrolentries' -id $SecurityNamespaceId -method POST -body $body `
-         -Version $([VSTeamVersions]::Core) -NoProject `
+         -Version $(_getApiVersion Core) -NoProject `
          -ContentType "application/json"
 
-      if ($resp.count -ne 1)
-      {
+      if ($resp.count -ne 1) {
          throw "Expected 1 result, but got $($rep.count)"
       }
 

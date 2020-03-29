@@ -20,7 +20,7 @@ function Get-VSTeamGitRepository {
       if ($id) {
          foreach ($item in $id) {
             try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $(_getApiVersion Git)
 
                # Storing the object before you return it cleaned up the pipeline.
                # When I just write the object from the constructor each property
@@ -37,7 +37,7 @@ function Get-VSTeamGitRepository {
       elseif ($Name) {
          foreach ($item in $Name) {
             try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $(_getApiVersion Git)
 
                # Storing the object before you return it cleaned up the pipeline.
                # When I just write the object from the constructor each property
@@ -53,9 +53,9 @@ function Get-VSTeamGitRepository {
       }
       else {
          if($ProjectName) {
-            $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
+            $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version $(_getApiVersion Git)
          } else {
-            $resp = _callAPI -Area git -Resource repositories -Version $([VSTeamVersions]::Git)
+            $resp = _callAPI -Area git -Resource repositories -Version $(_getApiVersion Git)
          }
 
          $objs = @()

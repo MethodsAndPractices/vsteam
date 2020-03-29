@@ -54,7 +54,7 @@ function Get-VSTeamAccessControlList {
 
       # Call the REST API
       $resp = _callAPI -Area 'accesscontrollists' -id $SecurityNamespaceId -method GET `
-         -Version $([VSTeamVersions]::Core) -NoProject `
+         -Version $(_getApiVersion Core) -NoProject `
          -QueryString $queryString
 
       try {

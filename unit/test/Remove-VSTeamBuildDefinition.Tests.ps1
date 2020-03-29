@@ -27,7 +27,7 @@ Describe 'Remove-VSTeamBuildDefinition' {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Delete' -and
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
+            $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/2?api-version=$(_getApiVersion Build)"
          }
       }
    }
@@ -42,7 +42,7 @@ Describe 'Remove-VSTeamBuildDefinition' {
       It 'should delete build definition' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
             $Method -eq 'Delete' -and
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$(_getApiVersion Build)"
          }
       }
    }

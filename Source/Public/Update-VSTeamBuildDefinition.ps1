@@ -26,7 +26,7 @@ function Update-VSTeamBuildDefinition {
          # Call the REST API
 
          if ($InFile) {
-            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $([VSTeamVersions]::Build) -InFile $InFile -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -InFile $InFile -ContentType 'application/json' | Out-Null
          }
          else {
             _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $([VSTeamVersions]::Build) -Body $BuildDefinition -ContentType 'application/json' | Out-Null

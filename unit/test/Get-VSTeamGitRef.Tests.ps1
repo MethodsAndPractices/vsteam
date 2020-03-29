@@ -23,6 +23,7 @@ Describe "VSTeamGitRef" {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
@@ -51,7 +52,7 @@ Describe "VSTeamGitRef" {
          
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/Test/_apis/git/repositories/00000000-0000-0000-0000-000000000000/refs?api-version=$([VSTeamVersions]::Git)"
+            $Uri -eq "https://dev.azure.com/test/Test/_apis/git/repositories/00000000-0000-0000-0000-000000000000/refs?api-version=$(_getApiVersion Git)"
          }
       }
 

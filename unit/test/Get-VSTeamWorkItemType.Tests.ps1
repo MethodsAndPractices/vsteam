@@ -19,6 +19,8 @@ Describe 'VSTeamWorkItemType' {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+
 
    Context 'Get-VSTeamWorkItemType' {
       $testSuite = @{
@@ -47,7 +49,7 @@ Describe 'VSTeamWorkItemType' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -60,7 +62,7 @@ Describe 'VSTeamWorkItemType' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -73,7 +75,7 @@ Describe 'VSTeamWorkItemType' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$(_getApiVersion Core)"
          }
       }
    }

@@ -33,7 +33,7 @@ Describe 'Remove-VSTeamBuild' {
          # Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -ParameterFilter {
             $Method -eq 'Delete' -and
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2?api-version=$([VSTeamVersions]::Build)"
+            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2?api-version=$(_getApiVersion Build)"
          }
       }
    }
@@ -51,7 +51,7 @@ Describe 'Remove-VSTeamBuild' {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Delete' -and
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$([VSTeamVersions]::Build)"
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$(_getApiVersion Build)"
          }
       }
    }

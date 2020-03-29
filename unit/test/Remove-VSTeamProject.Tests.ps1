@@ -60,8 +60,8 @@ Describe 'VSTeamProject' {
 
    Mock Write-Progress
    Mock _trackProjectProgress
-   Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
-   Mock Invoke-RestMethod { return @{status = 'inProgress'; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Delete' -and $Uri -eq "https://dev.azure.com/test/_apis/projects/123-5464-dee43?api-version=$([VSTeamVersions]::Core)" }
+   Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
+   Mock Invoke-RestMethod { return @{status = 'inProgress'; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Delete' -and $Uri -eq "https://dev.azure.com/test/_apis/projects/123-5464-dee43?api-version=$(_getApiVersion Core)" }
 
    Context 'Remove-VSTeamProject with Force' {
       It 'Should not call Invoke-RestMethod' {
@@ -69,8 +69,8 @@ Describe 'VSTeamProject' {
          Remove-VSTeamProject -ProjectName Test -Force
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
-         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Delete' -and $Uri -eq "https://dev.azure.com/test/_apis/projects/123-5464-dee43?api-version=$([VSTeamVersions]::Core)" }
+         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
+         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Delete' -and $Uri -eq "https://dev.azure.com/test/_apis/projects/123-5464-dee43?api-version=$(_getApiVersion Core)" }
       }
    }
 }

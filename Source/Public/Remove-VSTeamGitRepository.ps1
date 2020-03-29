@@ -10,7 +10,7 @@ function Remove-VSTeamGitRepository {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Repository")) {
             try {
-               _callAPI -Method Delete -Id $item -Area git -Resource repositories -Version $([VSTeamVersions]::Git) | Out-Null
+               _callAPI -Method Delete -Id $item -Area git -Resource repositories -Version $(_getApiVersion Git) | Out-Null
 
                Write-Output "Deleted repository $item"
             }

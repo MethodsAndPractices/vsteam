@@ -16,6 +16,8 @@ Describe 'VSTeamProcess' {
    . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
@@ -51,7 +53,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/process/processes*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*`$top=100*"
          }
       }
@@ -76,7 +78,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/process/processes*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*`$skip=1*" -and
             $Uri -like "*`$top=100*"
          }
@@ -88,7 +90,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/process/processes*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
+            $Uri -like "*api-version=$(_getApiVersion Core)*"
          }
       }
 
@@ -98,7 +100,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/process/processes/123-5464-dee43*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
+            $Uri -like "*api-version=$(_getApiVersion Core)*"
          }
       }
    }

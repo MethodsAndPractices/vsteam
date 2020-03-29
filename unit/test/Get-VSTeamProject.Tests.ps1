@@ -40,8 +40,9 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamProject' {
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+         
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
    . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
 
@@ -89,7 +90,7 @@ Describe 'VSTeamProject' {
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*`$top=100*" -and
             $Uri -like "*stateFilter=WellFormed*"
          }
@@ -112,7 +113,7 @@ Describe 'VSTeamProject' {
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*`$skip=1*" -and
             $Uri -like "*`$top=100*" -and
             $Uri -like "*stateFilter=WellFormed*"
@@ -125,7 +126,7 @@ Describe 'VSTeamProject' {
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*`$top=100*" -and
             $Uri -like "*stateFilter=All*"
          }
@@ -136,7 +137,7 @@ Describe 'VSTeamProject' {
 
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/projects/TestProject?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/_apis/projects/TestProject?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -146,7 +147,7 @@ Describe 'VSTeamProject' {
          # Make sure it was called with the correct URI
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/projects/TestProject*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*includeCapabilities=True*"
          }
       }

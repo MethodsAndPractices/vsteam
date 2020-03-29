@@ -15,8 +15,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamMembership' {
    ## Arrange
    # You have to set the version or the api-version will not be added when [VSTeamVersions]::Graph = ''
-   [VSTeamVersions]::Graph = '5.0'
    Mock _supportsGraph
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
@@ -36,7 +36,7 @@ Describe 'VSTeamMembership' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Get" -and
             $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$MemberDescriptor*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
+            $Uri -like "*api-version=$(_getApiVersion Graph)*"
          }
       }
 
@@ -48,7 +48,7 @@ Describe 'VSTeamMembership' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Get" -and
             $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$GroupDescriptor*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Graph)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
             $Uri -like "*direction=Down*"
          }
       }

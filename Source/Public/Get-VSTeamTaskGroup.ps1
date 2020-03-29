@@ -18,12 +18,12 @@ function Get-VSTeamTaskGroup {
      $ProjectName = $PSBoundParameters["ProjectName"]
 
      if ($Id) {
-        $resp = _callAPI -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $([VSTeamVersions]::TaskGroups) -Id $Id -Method Get
+        $resp = _callAPI -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -Id $Id -Method Get
 
         Write-Output $resp.value
      }
      else {
-         $resp = _callAPI -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $([VSTeamVersions]::TaskGroups) -Method Get
+         $resp = _callAPI -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -Method Get
                  
         if ($Name) {
            if ($resp.value) {

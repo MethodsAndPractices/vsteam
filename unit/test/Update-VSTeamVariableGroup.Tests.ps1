@@ -17,19 +17,16 @@ Describe 'VSTeamVariableGroup' {
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/project*" }
 
-   Context 'Add-VSTeamVariableGroup' {
+   Context 'Update-VSTeamVariableGroup' {
       Context 'Services' {
          . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-         
-         [VSTeamVersions]::VariableGroups = '5.0-preview.1'
 
          $sampleFileVSTS = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples.json" | ConvertFrom-Json)
       
+         Mock _getApiVersion { return 'VSTS' }
+         Mock _getApiVersion { return '5.0-preview.1-unitTests' } -ParameterFilter { $Service -eq 'VariableGroups' }
+
          Mock _getInstance { return 'https://dev.azure.com/test' }
-      
-         BeforeAll {
-            Set-VSTeamAPIVersion -Target VSTS
-         }
       
          Mock Invoke-RestMethod { return $sampleFileVSTS.value[0] }
                
@@ -54,7 +51,7 @@ Describe 'VSTeamVariableGroup' {
             Update-VSTeamVariableGroup @testParameters
       
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$(_getApiVersion VariableGroups)" -and
                $Method -eq 'Put'
             }
          }
@@ -66,7 +63,7 @@ Describe 'VSTeamVariableGroup' {
             Update-VSTeamVariableGroup -Body $body -ProjectName $projName -Id $id
                   
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups/$($id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups/$($id)?api-version=$(_getApiVersion VariableGroups)" -and
                $Method -eq 'Put'
             }
          }
@@ -74,16 +71,12 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
-         [VSTeamVersions]::VariableGroups = '3.2-preview.1'
          
          $sampleFile2017 = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples2017.json" | ConvertFrom-Json)
 
+         Mock _getApiVersion { return 'TFS2017' }
+         Mock _getApiVersion { return '3.2-preview.1-unitTests' }
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-
-         BeforeAll {
-            Set-VSTeamAPIVersion -Target TFS2017
-         }
 
          Mock Invoke-RestMethod { return $sampleFile2017.value[0] }
 
@@ -107,7 +100,7 @@ Describe 'VSTeamVariableGroup' {
             Update-VSTeamVariableGroup @testParameters
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$(_getApiVersion VariableGroups)" -and
                $Method -eq 'Put'
             }
          }

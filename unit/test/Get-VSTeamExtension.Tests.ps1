@@ -17,6 +17,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamExtension' {
    ## Arrange
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ExtensionsManagement' }
 
    $results = Get-Content "$PSScriptRoot\sampleFiles\extensionResults.json" -Raw | ConvertFrom-Json
    $singleResult = Get-Content "$PSScriptRoot\sampleFiles\singleExtensionResult.json" -Raw | ConvertFrom-Json
@@ -42,7 +43,7 @@ Describe 'VSTeamExtension' {
          Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
-            $version -eq [VSTeamVersions]::ExtensionsManagement
+            $version -eq $(_getApiVersion ExtensionsManagement)
             $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensions*"
          }
       }
@@ -55,7 +56,7 @@ Describe 'VSTeamExtension' {
          Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
-            $version -eq [VSTeamVersions]::ExtensionsManagement
+            $version -eq $(_getApiVersion ExtensionsManagement)
             $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensions*" -and
             $Url -like "*includeInstallationIssues*" -and
             $Url -like "*includeDisabledExtensions*" -and
@@ -71,7 +72,7 @@ Describe 'VSTeamExtension' {
          Assert-MockCalled _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
-            $version -eq [VSTeamVersions]::ExtensionsManagement
+            $version -eq $(_getApiVersion ExtensionsManagement)
             $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
          }
       }

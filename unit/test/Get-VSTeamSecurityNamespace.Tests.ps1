@@ -25,13 +25,14 @@ Describe "VSTeamSecurityNamespace" {
          # Set the account to use for testing. A normal user would do this
          # using the Set-VSTeamAccount function.
          Mock _getInstance { return 'https://dev.azure.com/test' }
+         Mock _supportsSecurityNamespace { return $true }
 
          $securityNamespaceListResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespaces.json" -Raw | ConvertFrom-Json
          $securityNamespaceSingleResult = Get-Content "$PSScriptRoot\sampleFiles\securityNamespace.single.json" -Raw | ConvertFrom-Json
 
          # You have to set the version or the api-version will not be added when versions = ''
-         Set-VSTeamAPIVersion AzD
-         [VSTeamVersions]::Core = '5.0'
+         Mock _getApiVersion { return 'AzD' }
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
       
          Mock Invoke-RestMethod { return $securityNamespaceListResult }
          Mock Invoke-RestMethod { return $securityNamespaceSingleResult } -ParameterFilter { $Uri -like "*58450c49-b02d-465a-ab12-59ae512d6531*" }
@@ -43,10 +44,10 @@ Describe "VSTeamSecurityNamespace" {
             # matches I have to search for the portions I expect but can't
             # assume the order.
             # The general string should look like this:
-            # "https://vssps.dev.azure.com/test/_apis/graph/groups?api-version=$([VSTeamVersions]::Graph)&scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2"
+            # "https://vssps.dev.azure.com/test/_apis/graph/groups?api-version=$(_getApiVersion Graph)&scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2"
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://dev.azure.com/test/_apis/securitynamespaces*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
+               $Uri -like "*api-version=$(_getApiVersion Core)*"
             }
          }
 
@@ -55,7 +56,7 @@ Describe "VSTeamSecurityNamespace" {
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://dev.azure.com/test/_apis/securitynamespaces/58450c49-b02d-465a-ab12-59ae512d6531*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
+               $Uri -like "*api-version=$(_getApiVersion Core)*"
             }
          }
 
@@ -63,7 +64,7 @@ Describe "VSTeamSecurityNamespace" {
             Get-VSTeamSecurityNamespace -Name "WorkItemTracking"
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://dev.azure.com/test/_apis/securitynamespaces*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*"
+               $Uri -like "*api-version=$(_getApiVersion Core)*"
             }
          }
 
@@ -74,10 +75,10 @@ Describe "VSTeamSecurityNamespace" {
             # matches I have to search for the portions I expect but can't
             # assume the order.
             # The general string should look like this:
-            # "https://vssps.dev.azure.com/test/_apis/graph/groups?api-version=$([VSTeamVersions]::Graph)&scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2"
+            # "https://vssps.dev.azure.com/test/_apis/graph/groups?api-version=$(_getApiVersion Graph)&scopeDescriptor=scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2"
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "https://dev.azure.com/test/_apis/securitynamespaces*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Core)*" -and
                $Uri -like "*localOnly=true*"
             }
          }
@@ -89,10 +90,10 @@ Describe "VSTeamSecurityNamespace" {
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
          Mock _callAPI { throw 'Should not be called' } -Verifiable
+         Mock _getApiVersion { return 'TFS2017' }
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
          It 'should throw' {
-            Set-VSTeamAPIVersion TFS2017
-
             { Get-VSTeamSecurityNamespace } | Should Throw
          }
 

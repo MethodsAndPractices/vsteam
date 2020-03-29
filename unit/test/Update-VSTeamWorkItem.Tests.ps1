@@ -44,7 +44,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '`[*' -and # Make sure the body is an array
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -61,7 +61,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.Description*' -and
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -82,7 +82,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.AreaPath*' -and
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -101,7 +101,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.AreaPath*' -and
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -118,7 +118,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.AreaPath*' -and
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/1?api-version=$(_getApiVersion Core)"
          }
       }
 

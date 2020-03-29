@@ -59,14 +59,15 @@ Describe 'VSTeamProject' {
    }
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' }
 
    Context 'Add-VSTeamProject' {
       Mock Write-Progress
 
       # Add Project
-      Mock Invoke-RestMethod { return @{status = 'inProgress'; id = '123-5464-dee43'; url = 'https://someplace.com'} } -ParameterFilter {
+      Mock Invoke-RestMethod { return @{status = 'inProgress'; id = '123-5464-dee43'; url = 'https://someplace.com' } } -ParameterFilter {
          $Method -eq 'Post' -and
-         $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$([VSTeamVersions]::Core)"
+         $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)"
       }
 
       # Track Progress
@@ -74,7 +75,7 @@ Describe 'VSTeamProject' {
          # This $i is in the module. Because we use InModuleScope
          # we can see it
          if ($i -gt 9) {
-            return @{status = 'succeeded'}
+            return @{status = 'succeeded' }
          }
 
          return @{status = 'inProgress' }
@@ -84,18 +85,18 @@ Describe 'VSTeamProject' {
 
       # Get-VSTeamProject
       Mock Invoke-RestMethod { return $singleResult } -ParameterFilter {
-         $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)"
+         $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)"
       }
 
       It 'with tfvc should create project with tfvc' {
          Add-VSTeamProject -Name Test -tfvc
 
          Assert-MockCalled Invoke-RestMethod -Times 1 -Scope It  -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)"
          }
          Assert-MockCalled Invoke-RestMethod -Times 1 -Scope It  -ParameterFilter {
             $Method -eq 'Post' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$([VSTeamVersions]::Core)" -and
+            $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" -and
             $Body -eq '{"name": "Test", "description": "", "capabilities": {"versioncontrol": { "sourceControlType": "Tfvc"}, "processTemplate":{"templateTypeId": "6b724908-ef14-45cf-84f8-768b5384da45"}}}'
          }
       }
@@ -103,40 +104,40 @@ Describe 'VSTeamProject' {
 
    Context 'Add-VSTeamProject with Agile' {
 
-      Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$([VSTeamVersions]::Core)"}
+      Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
       Mock _trackProjectProgress
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
-      Mock Get-VSTeamProcess { return @{name = 'Agile'; id = 1}}
+      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
+      Mock Get-VSTeamProcess { return @{name = 'Agile'; id = 1 } }
 
       It 'Should create project with Agile' {
          Add-VSTeamProject -ProjectName Test -processTemplate Agile
 
-         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
-         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$([VSTeamVersions]::Core)"}
+         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
+         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
       }
    }
 
    Context 'Add-VSTeamProject with CMMI' {
 
-      Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$([VSTeamVersions]::Core)"}
+      Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
       Mock _trackProjectProgress
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
-      Mock Get-VSTeamProcess { return @{name = 'CMMI'; id = 1}}
+      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
+      Mock Get-VSTeamProcess { return @{name = 'CMMI'; id = 1 } }
 
       It 'Should create project with CMMI' {
          Add-VSTeamProject -ProjectName Test -processTemplate CMMI
 
-         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
-         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$([VSTeamVersions]::Core)"}
+         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
+         Assert-MockCalled Invoke-RestMethod -Times 1 -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
       }
    }
 
    Context 'Add-VSTeamProject throws error' {
 
-      Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com'} } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$([VSTeamVersions]::Core)"}
+      Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
       Mock Write-Error
       Mock _trackProjectProgress { throw 'Test error' }
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$([VSTeamVersions]::Core)" }
+      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
 
       It '_trackProjectProgress errors should throw' { { Add-VSTeamProject -projectName Test -processTemplate CMMI } | Should throw
       }

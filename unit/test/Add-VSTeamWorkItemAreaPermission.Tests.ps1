@@ -157,10 +157,11 @@ Describe 'VSTeamWorkItemAreaPermission' {
    Mock _getInstance { return 'https://dev.azure.com/test' }
    
    # You have to set the version or the api-version will not be added when versions = ''
-   [VSTeamVersions]::Core = '5.0'
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
    Context 'Add-VSTeamWorkItemAreaPermission' {
-      Mock _getProjects { return "Test Project Public" }
+      # Mock _getProjects { return "Test Project Public" }
+      Mock _hasProjectCacheExpired { return $false }
       Mock Get-VSTeamClassificationNode { return $areaRootNodeObject }
       Mock Get-VSTeamClassificationNode { return $parentClassificationNodeObject } -ParameterFilter { $Path -eq "Child%201%20Level%201" }
       Mock Get-VSTeamClassificationNode { return $classificationNodeByIdObject } -ParameterFilter { $Ids -eq 44 -or $Path -eq "Child 1 Level 1/Child 1 Level 2" }
@@ -176,7 +177,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/b33b12d7-6abb-4b7a-b9d6-2092d0933c99:vstfs:///Classification/Node/38de1ce0-0b1b-45f2-b4f9-f32e3a72b78b:vstfs:///Classification/Node/90aa2c42-de51-450a-bfb6-6e264e364d9a`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
             $Body -like "*`"allow`": 65,*" -and
@@ -190,7 +191,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
          Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaID 44 -Group $groupSingleResultObject -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/b33b12d7-6abb-4b7a-b9d6-2092d0933c99:vstfs:///Classification/Node/38de1ce0-0b1b-45f2-b4f9-f32e3a72b78b:vstfs:///Classification/Node/90aa2c42-de51-450a-bfb6-6e264e364d9a`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 65,*" -and
@@ -204,7 +205,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
          Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaID 44 -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/b33b12d7-6abb-4b7a-b9d6-2092d0933c99:vstfs:///Classification/Node/38de1ce0-0b1b-45f2-b4f9-f32e3a72b78b:vstfs:///Classification/Node/90aa2c42-de51-450a-bfb6-6e264e364d9a`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 65,*" -and
@@ -218,7 +219,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
          Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaPath "Child 1 Level 1/Child 1 Level 2" -User $userSingleResultObject -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/b33b12d7-6abb-4b7a-b9d6-2092d0933c99:vstfs:///Classification/Node/38de1ce0-0b1b-45f2-b4f9-f32e3a72b78b:vstfs:///Classification/Node/90aa2c42-de51-450a-bfb6-6e264e364d9a`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
             $Body -like "*`"allow`": 65,*" -and
@@ -232,7 +233,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
          Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaPath "Child 1 Level 1/Child 1 Level 2" -Group $groupSingleResultObject -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/b33b12d7-6abb-4b7a-b9d6-2092d0933c99:vstfs:///Classification/Node/38de1ce0-0b1b-45f2-b4f9-f32e3a72b78b:vstfs:///Classification/Node/90aa2c42-de51-450a-bfb6-6e264e364d9a`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 65,*" -and
@@ -247,7 +248,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/b33b12d7-6abb-4b7a-b9d6-2092d0933c99:vstfs:///Classification/Node/38de1ce0-0b1b-45f2-b4f9-f32e3a72b78b:vstfs:///Classification/Node/90aa2c42-de51-450a-bfb6-6e264e364d9a`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 65,*" -and
@@ -275,7 +276,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
    #    It 'Should return ACEs' {
    #       Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
    #          $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-   #          $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+   #          $Uri -like "*api-version=$(_getApiVersion Core)*" -and
    #          $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
    #          $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
    #          $Body -like "*`"allow`": 5,*" -and
@@ -297,7 +298,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
    #    It 'Should return ACEs' {
    #       Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
    #          $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-   #          $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+   #          $Uri -like "*api-version=$(_getApiVersion Core)*" -and
    #          $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
    #          $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
    #          $Body -like "*`"allow`": 5,*" -and
@@ -319,7 +320,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
    #    It 'Should return ACEs' {
    #       Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
    #          $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-   #          $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+   #          $Uri -like "*api-version=$(_getApiVersion Core)*" -and
    #          $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
    #          $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
    #          $Body -like "*`"allow`": 5,*" -and
@@ -347,7 +348,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
    #    It 'Should return ACEs' {
    #       Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
    #          $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-   #          $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+   #          $Uri -like "*api-version=$(_getApiVersion Core)*" -and
    #          $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
    #          $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
    #          $Body -like "*`"allow`": 5,*" -and
@@ -369,7 +370,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
    #    It 'Should return ACEs' {
    #       Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
    #          $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-   #          $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+   #          $Uri -like "*api-version=$(_getApiVersion Core)*" -and
    #          $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
    #          $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
    #          $Body -like "*`"allow`": 5,*" -and
@@ -391,7 +392,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
    #    It 'Should return ACEs' {
    #       Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
    #          $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-   #          $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+   #          $Uri -like "*api-version=$(_getApiVersion Core)*" -and
    #          $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
    #          $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
    #          $Body -like "*`"allow`": 5,*" -and

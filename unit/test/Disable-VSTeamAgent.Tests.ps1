@@ -13,8 +13,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamAgent' {
    Context 'Disable-VSTeamAgent' {
       ## Arrange
-      [VSTeamVersions]::DistributedTask = '1.0-unitTest'
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod -ParameterFilter { $Uri -like "*950*" }
@@ -34,7 +34,7 @@ Describe 'VSTeamAgent' {
             # The write-host below is great for seeing how many ways the mock is called.
             # Write-Host "Assert Mock $Uri"
             $Method -eq 'Patch' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$([VSTeamVersions]::DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTask)"
          }
       }
    }

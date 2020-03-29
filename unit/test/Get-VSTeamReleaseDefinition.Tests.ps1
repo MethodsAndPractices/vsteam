@@ -24,6 +24,7 @@ Describe 'VSTeamReleaseDefinition' {
    Mock Invoke-RestMethod { return $results }
    Mock Invoke-RestMethod { return $results.value[0] } -ParameterFilter { $Uri -like "*15*" }
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
 
    Context 'Get-VSTeamReleaseDefinition' {
       It 'no parameters should return Release definitions' {
@@ -32,7 +33,7 @@ Describe 'VSTeamReleaseDefinition' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$(_getApiVersion Release)"
          }
       }
 
@@ -42,7 +43,7 @@ Describe 'VSTeamReleaseDefinition' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$(_getApiVersion Release)&`$expand=environments"
          }
       }
 
@@ -52,7 +53,7 @@ Describe 'VSTeamReleaseDefinition' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/15?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions/15?api-version=$(_getApiVersion Release)"
          }
       }
    }

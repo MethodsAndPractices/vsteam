@@ -19,7 +19,8 @@ Describe 'VSTeamBuildArtifact' {
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
 
       Mock Invoke-RestMethod { return [PSCustomObject]@{
             value = [PSCustomObject]@{
@@ -57,7 +58,7 @@ Describe 'VSTeamBuildArtifact' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/artifacts?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/artifacts?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -67,7 +68,7 @@ Describe 'VSTeamBuildArtifact' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/artifacts?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/artifacts?api-version=$(_getApiVersion Build)"
             }
          }
       }
@@ -75,7 +76,7 @@ Describe 'VSTeamBuildArtifact' {
       Context 'Server' {
          ## Arrange
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
          It 'calls correct Url on TFS local Auth should return the build artifact data' {
             ## Act
@@ -83,7 +84,7 @@ Describe 'VSTeamBuildArtifact' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/artifacts?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/artifacts?api-version=$(_getApiVersion Build)"
             }
          }
       }

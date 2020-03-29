@@ -12,7 +12,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamReleaseDefinition' {
-   [VSTeamVersions]::Release = '1.0-unittest'
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{
@@ -48,7 +48,7 @@ Describe 'VSTeamReleaseDefinition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'Releasedef.json' -and
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/definitions?api-version=$(_getApiVersion Release)"
             }
          }
       }
@@ -65,7 +65,7 @@ Describe 'VSTeamReleaseDefinition' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Post' -and
                $InFile -eq 'Releasedef.json' -and
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/release/definitions?api-version=$(_getApiVersion Release)"
             }
          }
       }

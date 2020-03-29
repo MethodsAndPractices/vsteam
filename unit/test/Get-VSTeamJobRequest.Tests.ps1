@@ -17,10 +17,12 @@ Describe "Get-VSTeamJobRequest" {
    $resultsAzD = Get-Content "$PSScriptRoot/sampleFiles/jobrequestsAzD.json" -Raw | ConvertFrom-Json
    $results2017 = Get-Content "$PSScriptRoot/sampleFiles/jobrequests2017.json" -Raw | ConvertFrom-Json
 
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
+
    Context "Server" {
       ## Arrnage
       Mock Invoke-RestMethod { return $results2017 }
-      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+      Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
       It "return all jobs" {
          ## Act
@@ -29,7 +31,7 @@ Describe "Get-VSTeamJobRequest" {
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
             $Uri -like "*agentid=4*"
          }
       }
@@ -42,7 +44,7 @@ Describe "Get-VSTeamJobRequest" {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
             $Uri -like "*agentid=4*" -and
             $Uri -like "*completedRequestCount=2*"
          }
@@ -51,7 +53,7 @@ Describe "Get-VSTeamJobRequest" {
 
    Context "Services" {
       Mock Invoke-RestMethod { return $resultsAzD }
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      Mock _getInstance { return 'https://dev.azure.com/test' }
 
       It "return all jobs" {
          # This should stop the call to cache projects
@@ -61,7 +63,7 @@ Describe "Get-VSTeamJobRequest" {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
             $Uri -like "*agentid=4*"
          }
       }
@@ -74,7 +76,7 @@ Describe "Get-VSTeamJobRequest" {
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
             $Uri -like "*agentid=4*" -and
             $Uri -like "*completedRequestCount=2*"
          }

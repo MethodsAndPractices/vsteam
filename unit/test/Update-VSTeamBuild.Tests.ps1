@@ -30,7 +30,7 @@ Describe 'Update-VSTeamBuild' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -eq '{"keepForever": true}' -and
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1?api-version=$([VSTeamVersions]::Build)" }
+            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1?api-version=$(_getApiVersion Build)" }
       }
    }
 
@@ -47,7 +47,7 @@ Describe 'Update-VSTeamBuild' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
              $Method -eq 'Patch' -and 
              $Body -eq '{"keepForever": true, "buildNumber": "TestNumber"}' -and 
-             $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1?api-version=$([VSTeamVersions]::Build)" }
+             $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1?api-version=$(_getApiVersion Build)" }
       }
    }
 }

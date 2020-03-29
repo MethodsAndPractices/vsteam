@@ -16,7 +16,8 @@ Describe 'VSTeamBuildTag' {
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
 
    $tags = 'Tag1', 'Tag2'
    Mock Invoke-RestMethod {
@@ -29,7 +30,7 @@ Describe 'VSTeamBuildTag' {
 
          It 'should create correct URL.' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/tags?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -40,13 +41,13 @@ Describe 'VSTeamBuildTag' {
 
       Context 'Server' {
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
          $returndata = Get-VSTeamBuildTag -projectName project -id 2
 
          It 'should create correct URL.' {
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)"
             }
          }
 

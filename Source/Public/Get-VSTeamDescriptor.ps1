@@ -11,7 +11,7 @@ function Get-VSTeamDescriptor {
 
       # Call the REST API
       $resp = _callAPI -Area 'graph' -Resource 'descriptors' -id $StorageKey `
-         -Version $([VSTeamVersions]::Graph) `
+         -Version $(_getApiVersion Graph) `
          -SubDomain 'vssps' -NoProject
 
       # Storing the object before you return it cleaned up the pipeline.

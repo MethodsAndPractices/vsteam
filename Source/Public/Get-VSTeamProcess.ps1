@@ -27,7 +27,7 @@ function Get-VSTeamProcess {
 
          # Call the REST API
          $resp = _callAPI -Area 'process/processes' -id $id `
-            -Version $([VSTeamVersions]::Core) `
+            -Version $(_getApiVersion Core) `
             -QueryString $queryString
 
          $project = [VSTeamProcess]::new($resp)
@@ -43,7 +43,7 @@ function Get-VSTeamProcess {
          try {
             # Call the REST API
             $resp = _callAPI -Area 'process/processes' `
-               -Version $([VSTeamVersions]::Core) `
+               -Version $(_getApiVersion Core) `
                -QueryString @{
                '$top'  = $top
                '$skip' = $skip

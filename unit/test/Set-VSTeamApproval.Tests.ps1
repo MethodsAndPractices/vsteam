@@ -37,7 +37,7 @@ Describe 'Set-VSTeamApproval' -Tag 'unit', 'approvals' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$(_getApiVersion Release)"
          }
       }
    }
@@ -51,7 +51,7 @@ Describe 'Set-VSTeamApproval' -Tag 'unit', 'approvals' {
       It 'should set approval' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
             -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$(_getApiVersion Release)"
          }
       }
    }
@@ -73,7 +73,7 @@ Describe 'Set-VSTeamApproval' -Tag 'unit', 'approvals' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 `
             -ParameterFilter {
             $Method -eq 'Patch' -and
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/1?api-version=$(_getApiVersion Release)"
          }
       }
    }

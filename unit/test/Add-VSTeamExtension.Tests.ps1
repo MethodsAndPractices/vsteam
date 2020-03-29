@@ -15,27 +15,28 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamExtension' {
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      
-   $singleResult = [PSCustomObject]@{
-      extensionId     = 'test'
-      extensionName   = 'test'
-      publisherId     = 'test'
-      publisherName   = 'test'
-      version         = '1.0.0'
-      registrationId  = '12345678-9012-3456-7890-123456789012'
-      manifestVersion = 1
-      baseUri         = ''
-      fallbackBaseUri = ''
-      scopes          = [PSCustomObject]@{ }
-      installState    = [PSCustomObject]@{
-         flags       = 'none'
-         lastUpdated = '2018-10-09T11:26:47.187Z'
-      }
-   }
-
    Context 'Add-VSTeamExtension' {
       ## Arrange
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ExtensionsManagement' }
+
+      $singleResult = [PSCustomObject]@{
+         extensionId     = 'test'
+         extensionName   = 'test'
+         publisherId     = 'test'
+         publisherName   = 'test'
+         version         = '1.0.0'
+         registrationId  = '12345678-9012-3456-7890-123456789012'
+         manifestVersion = 1
+         baseUri         = ''
+         fallbackBaseUri = ''
+         scopes          = [PSCustomObject]@{ }
+         installState    = [PSCustomObject]@{
+            flags       = 'none'
+            lastUpdated = '2018-10-09T11:26:47.187Z'
+         }
+      }
+
       BeforeAll {
          $env:Team_TOKEN = '1234'
       }
@@ -54,7 +55,7 @@ Describe 'VSTeamExtension' {
          Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
-            $version -eq [VSTeamVersions]::ExtensionsManagement -and
+            $version -eq $(_getApiVersion ExtensionsManagement) -and
             $uri
             $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
          }
@@ -68,7 +69,7 @@ Describe 'VSTeamExtension' {
          Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
-            $version -eq [VSTeamVersions]::ExtensionsManagement
+            $version -eq $(_getApiVersion ExtensionsManagement)
             $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test/1.0.0*"
          }
       }

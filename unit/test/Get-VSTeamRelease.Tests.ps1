@@ -23,6 +23,7 @@ Describe 'VSTeamRelease' {
    $singleResult = Get-Content "$PSScriptRoot\sampleFiles\releaseSingleReult.json" -Raw | ConvertFrom-Json
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
    
    Mock Invoke-RestMethod { return $results }
    Mock Invoke-RestMethod { return $singleResult } -ParameterFilter {
@@ -39,7 +40,7 @@ Describe 'VSTeamRelease' {
          $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.Management.Automation.PSCustomObject'
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
@@ -51,7 +52,7 @@ Describe 'VSTeamRelease' {
          $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'Team.Release'
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
@@ -63,7 +64,7 @@ Describe 'VSTeamRelease' {
          $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.String'
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
@@ -73,7 +74,7 @@ Describe 'VSTeamRelease' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
 
@@ -83,7 +84,7 @@ Describe 'VSTeamRelease' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)&`$expand=environments"
          }
       }
 
@@ -93,7 +94,7 @@ Describe 'VSTeamRelease' {
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
    }

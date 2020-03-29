@@ -19,7 +19,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamRelease' {
    ## Arrange
-   [VSTeamVersions]::Release = '1.0-unittest'
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
    
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
@@ -38,8 +38,7 @@ Describe 'VSTeamRelease' {
       }
    }
    
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+   Mock _hasProjectCacheExpired { return $false }
 
    Context 'Add-VSTeamRelease' {
       ## Arrange
@@ -120,7 +119,7 @@ Describe 'VSTeamRelease' {
             $Body -like '*"alias": "drop"*' -and
             $Body -like '*"id": "1"*' -and
             $Body -like '*"sourceBranch": ""*' -and
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
 
@@ -136,7 +135,7 @@ Describe 'VSTeamRelease' {
             $Body -like '*"alias": "drop"*' -and
             $Body -like '*"id": "2"*' -and
             $Body -like '*"sourceBranch": ""*' -and
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
 

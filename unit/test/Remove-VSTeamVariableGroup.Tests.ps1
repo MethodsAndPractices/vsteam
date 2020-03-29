@@ -35,7 +35,7 @@ Describe 'VSTeamVariableGroup' {
             Remove-VSTeamVariableGroup -projectName project -Id $projectID -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$(_getApiVersion VariableGroups)" -and
                $Method -eq 'Delete'
             }
          }
@@ -59,7 +59,7 @@ Describe 'VSTeamVariableGroup' {
             Remove-VSTeamVariableGroup -projectName project -id $projectID -Force
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/distributedtask/variablegroups/$($projectID)?api-version=$(_getApiVersion VariableGroups)" -and
                $Method -eq 'Delete'
             }
          }

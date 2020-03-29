@@ -32,12 +32,19 @@ Describe 'VSTeamPermissionInheritance' {
 
    Context 'Get-VSTeamPermissionInheritance' {
       ## Arrange
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter {
+         $Service -eq 'Build' -or
+         $Service -eq 'Release' -or
+         $Service -eq 'Git'
+      }
+      Mock _hasProjectCacheExpired { return $false }
+
       Mock Get-VSTeamProject { return $singleResult }
       Mock Get-VSTeamGitRepository { return $gitRepoResult }
-      Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock Get-VSTeamBuildDefinition { return $buildDefresults.value }
       Mock Get-VSTeamReleaseDefinition { return $releaseDefresults.value }
-      Mock Get-VSTeamAccessControlList { return $accesscontrollistsResult.value } -Verifiable
+      Mock Get-VSTeamAccessControlList { return $accesscontrollistsResult.value }
       Mock Invoke-RestMethod { return $releaseDefHierarchyResults } -ParameterFilter {
          $Body -like '*c788c23e-1b46-4162-8f5e-d7585343b5de*'
       }
@@ -56,7 +63,7 @@ Describe 'VSTeamPermissionInheritance' {
             $Body -like '*010d06f0-00d5-472a-bb47-58947c230876/1432*' -and
             $Body -like '*33344d9c-fc72-4d6f-aba5-fa317101a7e9*' -and
             $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/Project/010d06f0-00d5-472a-bb47-58947c230876*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+            $Uri -like "*api-version=$(_getApiVersion Build)*"
          }
       }
 
@@ -70,7 +77,7 @@ Describe 'VSTeamPermissionInheritance' {
             $Body -like '*c788c23e-1b46-4162-8f5e-d7585343b5de*' -and
             $Body -like '*010d06f0-00d5-472a-bb47-58947c230876//2*' -and
             $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/project/010d06f0-00d5-472a-bb47-58947c230876*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Release)*"
+            $Uri -like "*api-version=$(_getApiVersion Release)*"
          }
       }
       

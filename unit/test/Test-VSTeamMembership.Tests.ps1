@@ -36,7 +36,7 @@ Describe 'VSTeamMembership' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Head" -and
             $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$UserDescriptor/$GroupDescriptor*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Graph)*"
+            $Uri -like "*api-version=$(_getApiVersion Graph)*"
          }
 
          $result | Should Be $true

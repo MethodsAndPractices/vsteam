@@ -15,6 +15,7 @@ Describe 'VSTeamWorkItem' {
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
@@ -42,7 +43,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '`[*' -and # Make sure the body is an array
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -59,7 +60,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.Description*' -and
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -79,7 +80,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*System.LinkTypes.Hierarchy-Reverse*' -and
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -102,7 +103,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.AreaPath*' -and
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -121,7 +122,7 @@ Describe 'VSTeamWorkItem' {
             $Body -like '*/fields/System.AreaPath*' -and
             $Body -like '*`]' -and # Make sure the body is an array
             $ContentType -eq 'application/json-patch+json' -and
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$([VSTeamVersions]::Core)"
+            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitems/`$Task?api-version=$(_getApiVersion Core)"
          }
       }
 

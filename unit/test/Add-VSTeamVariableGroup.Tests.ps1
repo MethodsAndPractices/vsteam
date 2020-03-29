@@ -15,13 +15,13 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamVariableGroup' {
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/project*" }
+   Mock _hasProjectCacheExpired { return $false }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'VariableGroups' }
 
    Context 'Add-VSTeamVariableGroup' {
       Context 'Services' {
          . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
-         [VSTeamVersions]::VariableGroups = '5.0-preview.1'
 
          $sampleFileVSTS = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples.json" | ConvertFrom-Json)
 
@@ -64,7 +64,7 @@ Describe 'VSTeamVariableGroup' {
             Add-VSTeamVariableGroup -Body $body -ProjectName $projName
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups?api-version=$([VSTeamVersions]::VariableGroups)" -and
+               $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups?api-version=$(_getApiVersion VariableGroups)" -and
                $Method -eq 'Post'
             }
          }
@@ -72,8 +72,6 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
-         [VSTeamVersions]::VariableGroups = '3.2-preview.1'
 
          $sampleFile2017 = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples2017.json" | ConvertFrom-Json)
 

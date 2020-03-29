@@ -44,6 +44,8 @@ Describe 'VSTeamBuildDefinition' {
 
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
+
       Mock Invoke-RestMethod { return $results2017 } -ParameterFilter { $Uri -like "*2017Project*" }
       Mock Invoke-RestMethod { return $results2018 } -ParameterFilter { $Uri -like "*2018Project*" }
       Mock Invoke-RestMethod { return $resultsAzD } -ParameterFilter { $Uri -like "*azd*" }
@@ -52,7 +54,7 @@ Describe 'VSTeamBuildDefinition' {
 
       Context 'Server' {
          Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
          It 'TFS 2017 with no parameters should return build definitions' {
             ## Act
@@ -61,7 +63,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "*http://localhost:8080/tfs/defaultcollection/2017Project/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
                $Uri -like "*type=All*"
             }
          }
@@ -73,7 +75,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "*http://localhost:8080/tfs/defaultcollection/2018Project/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
                $Uri -like "*type=All*"
             }
          }
@@ -84,14 +86,14 @@ Describe 'VSTeamBuildDefinition' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/101?api-version=$(_getApiVersion Build)"
             }
          }
       }
 
       Context 'Services' {
          ## Arrange
-         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+         Mock _getInstance { return 'https://dev.azure.com/test' }
 
          It 'AzD v5.0 of API with no parameters should return build definitions' {
             ## Act
@@ -100,7 +102,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/azd/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
                $Uri -like "*type=All*"
             }
          }
@@ -112,7 +114,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
                $Uri -like "*type=All*"
             }
          }
@@ -124,7 +126,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
                $Uri -like "*type=build*"
             }
          }
@@ -136,7 +138,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=All*"
             }
@@ -149,7 +151,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Asset
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
                $Uri -like "*name=click*" -and
                $Uri -like "*type=build*"
             }
@@ -163,7 +165,7 @@ Describe 'VSTeamBuildDefinition' {
             $b | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'Team.BuildDefinition'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -175,7 +177,7 @@ Describe 'VSTeamBuildDefinition' {
             $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.Management.Automation.PSCustomObject'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -187,7 +189,7 @@ Describe 'VSTeamBuildDefinition' {
             $b | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.String'
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -197,7 +199,7 @@ Describe 'VSTeamBuildDefinition' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$([VSTeamVersions]::Build)&revision=1"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$(_getApiVersion Build)&revision=1"
             }
          }
       }

@@ -18,7 +18,7 @@ Describe 'VSTeamFeed' {
    Context 'Get-VSTeamFeed' {
       Context 'Services' {
          ## Arrange
-         [VSTeamVersions]::Packaging = '4.0'
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Packaging' }
          $results = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
 
          Mock _supportsFeeds { return $true }
@@ -34,7 +34,7 @@ Describe 'VSTeamFeed' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$([VSTeamVersions]::packaging)"
+               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$(_getApiVersion packaging)"
             }
          }
 
@@ -44,15 +44,16 @@ Describe 'VSTeamFeed' {
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$([VSTeamVersions]::packaging)"
+               $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion packaging)"
             }
          }
       }
 
       Context 'Server' {
          ## Arrange
-         [VSTeamVersions]::Packaging = ''
          Mock _supportsFeeds { return $false }
+         Mock _getApiVersion { return 'TFS2017' }
+         Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Packaging' }
 
          it 'is not supported and should throw' {
             ## Act / Assert

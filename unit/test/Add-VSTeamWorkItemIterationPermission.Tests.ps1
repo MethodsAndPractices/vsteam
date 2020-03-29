@@ -127,12 +127,16 @@ Describe 'VSTeamWorkItemIterationPermission' {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }
-
+   
    # You have to set the version or the api-version will not be added when versions = ''
-   [VSTeamVersions]::Core = '5.0'
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+   
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock _hasProjectCacheExpired { return $true }
+   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
    Context 'Add-VSTeamWorkItemIterationPermission' {
-      Mock _getProjects { return "Test Project Public" }
+      # Mock _getProjects { return "Test Project Public" }
       Mock Get-VSTeamClassificationNode { return $iterationRootNodeObject }
       Mock Get-VSTeamClassificationNode { return $classificationNodeIterationIdObject } -ParameterFilter { $Ids -eq 44 -or $Path -eq "Sprint 1" } 
 
@@ -146,7 +150,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -User $userSingleResultObject -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
             $Body -like "*`"allow`": 5,*" -and
@@ -160,7 +164,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -Group $groupSingleResultObject -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 5,*" -and
@@ -174,7 +178,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 5,*" -and
@@ -188,7 +192,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -User $userSingleResultObject -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
             $Body -like "*`"allow`": 5,*" -and
@@ -202,7 +206,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -Group $groupSingleResultObject -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 5,*" -and
@@ -216,7 +220,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like "*`"token`": `"vstfs:///Classification/Node/dfa90792-403a-4119-a52b-bd142c08291b:vstfs:///Classification/Node/18e7998d-d0c5-4c01-b547-d7d4eb4c97c5`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 5,*" -and

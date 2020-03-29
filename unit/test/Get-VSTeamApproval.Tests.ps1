@@ -15,6 +15,7 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
 
    Mock Invoke-RestMethod { throw 'error' } -ParameterFilter { $Uri -like "*boom*" }
    Mock Invoke-RestMethod {
@@ -40,7 +41,6 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    Context 'Get-VSTeamApproval' {
-
       Context 'Services' {
          # Arrange
          Mock _handleException -Verifiable
@@ -52,7 +52,7 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
             # Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It `
                -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals?api-version=$([VSTeamVersions]::Release)"
+               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/approvals?api-version=$(_getApiVersion Release)"
             }
          }
          
@@ -74,11 +74,11 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
             # matches I have to search for the portions I expect but can't
             # assume the order.
             # The general string should look like this:
-            # "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
+            # "https://vsrm.dev.azure.com/test/project/_apis/release/approvals/?api-version=$(_getApiVersion Release)&assignedtoFilter=Chuck%20Reinhart&includeMyGroupApprovals=true"
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It `
                -ParameterFilter {
                $Uri -like "*https://vsrm.dev.azure.com/test/project/_apis/release/approvals*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Release)*" -and
                $Uri -like "*assignedtoFilter=Chuck Reinhart*" -and
                $Uri -like "*includeMyGroupApprovals=true*"
             }
@@ -101,11 +101,11 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
             # matches I have to search for the portions I expect but can't
             # assume the order.
             # The general string should look like this:
-            # "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$([VSTeamVersions]::Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
+            # "http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals/?api-version=$(_getApiVersion Release)&statusFilter=Pending&assignedtoFilter=Test User&includeMyGroupApprovals=true&releaseIdsFilter=1"
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It `
                -ParameterFilter {
                $Uri -like "*http://localhost:8080/tfs/defaultcollection/project/_apis/release/approvals*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Release)*" -and
+               $Uri -like "*api-version=$(_getApiVersion Release)*" -and
                $Uri -like "*statusFilter=Pending*" -and
                $Uri -like "*assignedtoFilter=Test User*" -and
                $Uri -like "*includeMyGroupApprovals=true*" -and
