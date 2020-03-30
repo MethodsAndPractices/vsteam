@@ -49,12 +49,12 @@ function Get-VSTeamClassificationNode {
       {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-         -Version $([VSTeamVersions]::Core) `
+         -Version $(_getApiVersion Core) `
          -QueryString $queryString
       } else {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-         -Version $([VSTeamVersions]::Core) `
+         -Version $(_getApiVersion Core) `
       }
 
       if ([bool]($resp.PSobject.Properties.name -match "value"))

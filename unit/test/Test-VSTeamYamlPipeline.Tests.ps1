@@ -38,7 +38,7 @@ Describe 'Test-VSTeamYamlPipeline' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
 
             $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Build)*" -and
             $Body -like '*"PreviewRun":*true*' -and
             $Body -notlike '*YamlOverride*'
          }
@@ -51,7 +51,7 @@ Describe 'Test-VSTeamYamlPipeline' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
 
             $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Build)*" -and
             $Body -like '*"PreviewRun":*true*' -and
             $Body -like '*YamlOverride*'
          }
@@ -65,7 +65,7 @@ Describe 'Test-VSTeamYamlPipeline' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
 
             $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Build)*" -and
             $Body -like '*"PreviewRun":*true*' -and
             $Body -like '*YamlOverride*'
          }

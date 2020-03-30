@@ -24,7 +24,7 @@ class VSTeamPermissionInheritance {
 
             $this.Token = "repoV2/$($this.ProjectID)/$repositoryID"
 
-            $this.Version = "$([VSTeamVersions]::Git)"
+            $this.Version = "$(_getApiVersion Git)"
          }
 
          "BuildDefinition" {
@@ -39,7 +39,7 @@ class VSTeamPermissionInheritance {
 
             $this.Token = "$($this.ProjectID)/$buildDefinitionID"
 
-            $this.Version = "$([VSTeamVersions]::Build)"
+            $this.Version = "$(_getApiVersion Build)"
          }
 
          "ReleaseDefinition" {
@@ -59,7 +59,7 @@ class VSTeamPermissionInheritance {
                $this.Token = "$($this.ProjectID)" + "$($releaseDefinition.path -replace "\\","/")" + "/$($releaseDefinition.id)"
             }
 
-            $this.Version = "$([VSTeamVersions]::Release)"
+            $this.Version = "$(_getApiVersion Release)"
          }
       }
    }

@@ -115,7 +115,7 @@ function Add-VSTeamWorkItem {
 
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' `
-         -Version $([VSTeamVersions]::Core) -id $WorkItemType -Method Post `
+         -Version $(_getApiVersion Core) -id $WorkItemType -Method Post `
          -ContentType 'application/json-patch+json' -Body $json
 
       _applyTypesToWorkItem -item $resp

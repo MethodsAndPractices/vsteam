@@ -31,7 +31,7 @@ function Get-VSTeamGitRef {
             'continuationToken' = $continuationToken
          }
          
-         $url = _buildRequestURI -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -ProjectName $ProjectName -Id "$RepositoryID/refs" 
+         $url = _buildRequestURI -Area git -Resource repositories -Version $(_getApiVersion Git) -ProjectName $ProjectName -Id "$RepositoryID/refs" 
          $resp = _callAPI -url $url -QueryString $queryString
 
          $obj = @()

@@ -22,7 +22,7 @@ function Update-VSTeamVariableGroup {
    DynamicParam {
       $dp = _buildProjectNameDynamicParam
 
-      if ([VSTeamVersions]::Version -ne "TFS2017" -and $PSCmdlet.ParameterSetName -eq "ByHashtable") {
+      if ($(_getApiVersion -Target) -ne "TFS2017" -and $PSCmdlet.ParameterSetName -eq "ByHashtable") {
          $ParameterName = 'Type'
          $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet ('Vsts', 'AzureKeyVault') -Mandatory $true
          $dp.Add($ParameterName, $rp)
@@ -47,7 +47,7 @@ function Update-VSTeamVariableGroup {
          description = $Description
          variables   = $Variables
       }
-      if ([VSTeamVersions]::Version -ne "TFS2017") {
+      if ($(_getApiVersion -Target) -ne "TFS2017") {
          $Type = $PSBoundParameters['Type']
             $bodyAsHashtable.Add("type", $Type)
 
@@ -63,7 +63,7 @@ function Update-VSTeamVariableGroup {
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Variable Group")) {
          # Call the REST API
          $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'variablegroups' -Id $Id  `
-            -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::VariableGroups)
+            -Method Put -ContentType 'application/json' -body $body -Version $(_getApiVersion VariableGroups)
 
          Write-Verbose $resp
 

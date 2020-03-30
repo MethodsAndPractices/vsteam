@@ -1,0 +1,52 @@
+{
+   "count": 1,
+   "value": [
+      {
+         "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531",
+         "name": "Analytics",
+         "displayName": "Analytics",
+         "separatorValue": "/",
+         "elementLength": -1,
+         "writePermission": 2,
+         "readPermission": 1,
+         "dataspaceCategory": "Default",
+         "actions": [
+            {
+               "bit": 1,
+               "name": "Read",
+               "displayName": "View analytics",
+               "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
+            },
+            {
+               "bit": 2,
+               "name": "Administer",
+               "displayName": "Manage analytics permissions",
+               "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
+            },
+            {
+               "bit": 4,
+               "name": "Stage",
+               "displayName": "Push the data to staging area",
+               "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
+            },
+            {
+               "bit": 8,
+               "name": "ExecuteUnrestrictedQuery",
+               "displayName": "Execute query without any restrictions on the query form",
+               "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
+            },
+            {
+               "bit": 16,
+               "name": "ReadEuii",
+               "displayName": "Read EUII data",
+               "namespaceId": "58450c49-b02d-465a-ab12-59ae512d6531"
+            }
+         ],
+         "structureValue": 1,
+         "extensionType": null,
+         "isRemotable": false,
+         "useTokenTranslator": false,
+         "systemBitMask": 30
+      }
+   ]
+}

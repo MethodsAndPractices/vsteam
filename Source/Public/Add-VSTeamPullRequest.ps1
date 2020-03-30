@@ -47,7 +47,7 @@ function Add-VSTeamPullRequest {
          try {
             Write-Debug 'Add-VSTeamPullRequest Call the REST API'
             $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' -Id "$RepositoryId/pullrequests" `
-               -Method Post -ContentType 'application/json;charset=utf-8' -Body $body -Version $([VSTeamVersions]::Release)
+               -Method Post -ContentType 'application/json;charset=utf-8' -Body $body -Version $(_getApiVersion Git)
 
             _applyTypesToPullRequests -item $resp
 

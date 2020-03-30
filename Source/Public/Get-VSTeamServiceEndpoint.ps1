@@ -16,7 +16,7 @@ function Get-VSTeamServiceEndpoint {
       if ($id) {
          # Call the REST API
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
-            -Version $([VSTeamVersions]::DistributedTask) -ProjectName $ProjectName
+            -Version $(_getApiVersion DistributedTask) -ProjectName $ProjectName
 
          _applyTypesToServiceEndpoint -item $resp
 
@@ -25,7 +25,7 @@ function Get-VSTeamServiceEndpoint {
       else {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-            -Version $([VSTeamVersions]::DistributedTask)
+            -Version $(_getApiVersion DistributedTask)
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

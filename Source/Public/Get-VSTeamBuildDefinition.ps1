@@ -36,7 +36,7 @@ function Get-VSTeamBuildDefinition {
 
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $([VSTeamVersions]::Build) `
+            $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $(_getApiVersion Build) `
                -QueryString @{revision = $revision }
 
             if ($JSON.IsPresent) {
@@ -55,7 +55,7 @@ function Get-VSTeamBuildDefinition {
          }
       }
       else {
-         $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $([VSTeamVersions]::Build) `
+         $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $(_getApiVersion Build) `
             -QueryString @{type = $type; name = $filter; includeAllProperties = $true }
 
          $objs = @()

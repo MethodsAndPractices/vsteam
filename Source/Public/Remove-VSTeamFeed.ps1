@@ -17,7 +17,7 @@ function Remove-VSTeamFeed {
 
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Package Feed")) {
             # Call the REST API
-            _callAPI -subDomain feeds -Method Delete -Id $item -Area packaging -Resource feeds -Version $([VSTeamVersions]::Packaging) | Out-Null
+            _callAPI -NoProject -subDomain feeds -Method Delete -Id $item -Area packaging -Resource feeds -Version $(_getApiVersion Packaging) | Out-Null
 
             Write-Output "Deleted Feed $item"
          }
