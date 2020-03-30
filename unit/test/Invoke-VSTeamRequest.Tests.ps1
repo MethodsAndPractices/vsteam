@@ -12,6 +12,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'Invoke-VSTeamRequest' {
+   Mock _hasProjectCacheExpired { return $false }
+   
    Context 'Invoke-VSTeamRequest Options' {
       Mock Invoke-RestMethod
 
