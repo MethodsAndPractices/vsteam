@@ -16,7 +16,7 @@ function Get-VSTeamBuildLog {
                 # Build the url to return the logs of the build
                 # Call the REST API to get the number of logs for the build
                 $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$item/logs" `
-                    -Version $([VSTeamVersions]::Build)
+                    -Version $(_getApiVersion Build)
                 $fullLogIndex = $($resp.count - 1)
             }
             else {
@@ -26,7 +26,8 @@ function Get-VSTeamBuildLog {
             # Build the url to return the single build
             # Call the REST API to get the number of logs for the build
             $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$item/logs" -id $fullLogIndex `
-                -Version $([VSTeamVersions]::Build)
+                -Version $(_getApiVersion Build)
+
             Write-Output $resp
         }
     }

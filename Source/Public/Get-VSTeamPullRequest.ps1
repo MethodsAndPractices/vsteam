@@ -47,10 +47,10 @@ function Get-VSTeamPullRequest {
       try {
          if ($Id) {
             if ($ProjectName) {
-               $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -Id $Id
+               $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $(_getApiVersion Git) -Id $Id
             }
             else {
-               $resp = _callAPI -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -Id $Id
+               $resp = _callAPI -Area git -Resource pullRequests -Version $(_getApiVersion Git) -Id $Id
             }
          }
          else {
@@ -65,18 +65,18 @@ function Get-VSTeamPullRequest {
 
             if ($RepositoryId) {
                if ($ProjectName) {
-                  $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+                  $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString
                }
                else {
-                  $resp = _callAPI -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+                  $resp = _callAPI -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString
                }
             }
             else {
                if ($ProjectName) {
-                  $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -QueryString $queryString
+                  $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $(_getApiVersion Git) -QueryString $queryString
                }
                else {
-                  $resp = _callAPI -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -QueryString $queryString
+                  $resp = _callAPI -Area git -Resource pullRequests -Version $(_getApiVersion Git) -QueryString $queryString
                }
             }
          }

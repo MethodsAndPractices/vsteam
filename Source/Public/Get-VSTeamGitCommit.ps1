@@ -131,7 +131,7 @@ function Get-VSTeamGitCommit {
             'searchCriteria.user'                           = $User
          }
 
-         $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/commits" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+         $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/commits" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString
 
          $obj = @()
 

@@ -1,58 +1,67 @@
 function Get-VSTeamClassificationNode {
-    [CmdletBinding(DefaultParameterSetName = 'ByIds')]
-    param(
-        [ValidateSet("areas", "iterations")]
-        [Parameter(Mandatory = $true, ParameterSetName="ByPath")]
-        [string] $StructureGroup,
-        [Parameter(Mandatory = $false, ParameterSetName="ByPath")]
-        [string] $Path,
-        [Parameter(Mandatory = $false, ParameterSetName="ByIds")]
-        [int[]] $Ids,
-        [Parameter(Mandatory = $false, ParameterSetName="ByPath")]
-        [Parameter(Mandatory = $false, ParameterSetName="ByIds")]
-        [int] $Depth,
-        [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProjectAttribute()]
-        [ArgumentCompleter([ProjectCompleter])]
-        $ProjectName
-    )
-    process {
-                $id = $StructureGroup
-        $Path = [uri]::UnescapeDataString($Path)
-        if ($Path)
-        {
-            $Path = [uri]::EscapeUriString($Path)
-            $Path = $Path.TrimStart("/")
-            $id += "/$Path"
-        }
-        $queryString = @{}
-        if ($Depth)
-        {
-            $queryString.Add("`$Depth", $Depth)
-        }
-        if ($Ids)
-        {
-            $queryString.Add("Ids", $Ids -join ",")
-        }
-        if ($queryString.Count -gt 0)
-        {
-            # Call the REST API
-            $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-            -Version $([VSTeamVersions]::Core) `
-            -QueryString $queryString
-        } else {
-            # Call the REST API
-            $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-            -Version $([VSTeamVersions]::Core) `
-        }
-        if ([bool]($resp.PSobject.Properties.name -match "value"))
-        {
-            try {
-                $objs = @()
-                foreach ($item in $resp.value) {
-                    $objs += [VSTeamClassificationNode]::new($item, $ProjectName)
-                }
-                Write-Output $objs
+   [CmdletBinding(DefaultParameterSetName = 'ByIds')]
+   param(
+      [ValidateSet("areas", "iterations")]
+      [Parameter(Mandatory = $true, ParameterSetName="ByPath")]
+      [string] $StructureGroup,
+
+      [Parameter(Mandatory = $false, ParameterSetName="ByPath")]
+      [string] $Path,
+
+      [Parameter(Mandatory = $false, ParameterSetName="ByIds")]
+      [int[]] $Ids,
+
+      [Parameter(Mandatory = $false, ParameterSetName="ByPath")]
+      [Parameter(Mandatory = $false, ParameterSetName="ByIds")]
+      [int] $Depth,
+
+      [Parameter(Mandatory=$true, Position = 0 )]
+      [ValidateProjectAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      $ProjectName
+   )
+   process {
+      $id = $StructureGroup
+
+      $Path = [uri]::UnescapeDataString($Path)
+
+      if ($Path)
+      {
+         $Path = [uri]::EscapeUriString($Path)
+         $Path = $Path.TrimStart("/")
+         $id += "/$Path"
+      }
+
+      $queryString = @{}
+      if ($Depth)
+      {
+         $queryString.Add("`$Depth", $Depth)
+      }
+
+      if ($Ids)
+      {
+         $queryString.Add("Ids", $Ids -join ",")
+      }
+      if ($queryString.Count -gt 0)
+      {
+         # Call the REST API
+         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
+         -Version $(_getApiVersion Core) `
+         -QueryString $queryString
+      } else {
+         # Call the REST API
+         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
+         -Version $(_getApiVersion Core) `
+      }
+      if ([bool]($resp.PSobject.Properties.name -match "value"))
+      {
+         try {
+            $objs = @()
+
+            foreach ($item in $resp.value) {
+               $objs += [VSTeamClassificationNode]::new($item, $ProjectName)
+            }
+            Write-Output $objs
             }
             catch {
                 # I catch because using -ErrorAction Stop on the Invoke-RestMethod

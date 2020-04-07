@@ -39,7 +39,7 @@ function Get-VSTeamGitStat {
             'baseVersionDescriptor.versionOptions' = $VersionOptions
          }
 
-         $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/stats/branches" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+         $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/stats/branches" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString
 
          $hasValueProp = $resp.PSObject.Properties.Match('value')
 

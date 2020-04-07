@@ -1,7 +1,9 @@
 Set-StrictMode -Version Latest
 $env:Testing=$true
-# The InModuleScope command allows you to perform white-box unit testing on the
+# Loading the code from source files will break if functionality moves from one file to another, instead
+# the InModuleScope command allows you to perform white-box unit testing on the
 # internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
+
 InModuleScope VSTeam {
    $results = [PSCustomObject]@{
       count = 2
@@ -52,31 +54,33 @@ InModuleScope VSTeam {
    }
 
    Describe "Git VSTS" {
-      # Set the account to use for testing. A normal user would do this
-      # using the Set-VSTeamAccount function.
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+   # Set the account to use for testing. A normal user would do this
+   # using the Set-VSTeamAccount function.
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
 
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
+   Context 'Get-VSTeamGitCommit' {
+      Mock Invoke-RestMethod { return $results }
 
-      Context 'Get-VSTeamGitCommit' {
-         Mock Invoke-RestMethod { return $results } -Verifiable -ParameterFilter {
+      It 'should return all commits for the repo' {
+         Get-VSTeamGitCommit -ProjectName Test -RepositoryId 06E176BE-D3D2-41C2-AB34-5F4D79AEC86B
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*"
          }
-
-         Get-VSTeamGitCommit -ProjectName Test -RepositoryId 06E176BE-D3D2-41C2-AB34-5F4D79AEC86B
-
-         It 'Should return all commits for the repo' {
-            Assert-VerifiableMock
-         }
       }
 
-      Context 'Get-VSTeamGitCommit with many Parameters' {
-         Mock Invoke-RestMethod { return $results } -Verifiable -ParameterFilter {
+      It 'with many Parameters should return all commits for the repo' {
+         Get-VSTeamGitCommit -ProjectName Test -RepositoryId '06E176BE-D3D2-41C2-AB34-5F4D79AEC86B' `
+            -FromDate '2020-01-01' -ToDate '2020-03-01' `
+            -ItemVersionVersionType 'commit' -ItemVersionVersion 'abcdef1234567890abcdef1234567890' -ItemVersionVersionOptions 'previousChange' `
+            -CompareVersionVersionType 'commit' -CompareVersionVersion 'abcdef1234567890abcdef1234567890' -CompareVersionVersionOptions 'previousChange' `
+            -FromCommitId 'abcdef' -ToCommitId 'fedcba' `
+            -Author "Test" `
+            -Top 100 -Skip 50 `
+            -User "Test"
+
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*" -and
             $Uri -like "*searchCriteria.fromDate=2020-01-01T00:00:00Z*" -and
             $Uri -like "*searchCriteria.toDate=2020-03-01T00:00:00Z*" -and
@@ -93,31 +97,9 @@ InModuleScope VSTeam {
             $Uri -like "*searchCriteria.`$top=100*" -and
             $Uri -like "*searchCriteria.`$skip=50*"
          }
-
-         Get-VSTeamGitCommit -ProjectName Test -RepositoryId '06E176BE-D3D2-41C2-AB34-5F4D79AEC86B' `
-            -FromDate '2020-01-01' -ToDate '2020-03-01' `
-            -ItemVersionVersionType 'commit' -ItemVersionVersion 'abcdef1234567890abcdef1234567890' -ItemVersionVersionOptions 'previousChange' `
-            -CompareVersionVersionType 'commit' -CompareVersionVersion 'abcdef1234567890abcdef1234567890' -CompareVersionVersionOptions 'previousChange' `
-            -FromCommitId 'abcdef' -ToCommitId 'fedcba' `
-            -Author "Test" `
-            -Top 100 -Skip 50 `
-            -User "Test"
-
-         It 'Should return all commits for the repo' {
-            Assert-VerifiableMock
-         }
       }
 
-      Context 'Get-VSTeamGitCommit with ItemPath parameters' {
-         Mock Invoke-RestMethod { return $results } -Verifiable -ParameterFilter {
-            $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*" -and
-            $Uri -like "*searchCriteria.itemPath=test*" -and
-            $Uri -like "*searchCriteria.excludeDeletes=true*" -and
-            $Uri -like "*searchCriteria.historyMode=fullHistory*" -and
-            $Uri -like "*searchCriteria.`$top=100*" -and
-            $Uri -like "*searchCriteria.`$skip=50*"
-         }
-
+      It 'with ItemPath parameters should return all commits for the repo' {
          Get-VSTeamGitCommit -ProjectName Test -RepositoryId '06E176BE-D3D2-41C2-AB34-5F4D79AEC86B' `
             -ItemPath 'test' `
             -ExcludeDeletes `
@@ -125,17 +107,15 @@ InModuleScope VSTeam {
             -Top 100 -Skip 50 `
             -User "Test"
 
-         It 'Should return all commits for the repo' {
-            Assert-VerifiableMock
-         }
-      }
-
-      Context 'Get-VSTeamGitCommit by id throws' {
-         Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." }
-
-         It 'Should throw' {
-            { Get-VSTeamGitCommit -ProjectName Test -RepositoryId  06E176BE-D3D2-41C2-AB34-5F4D79AEC86B } | Should Throw
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*" -and
+            $Uri -like "*searchCriteria.itemPath=test*" -and
+            $Uri -like "*searchCriteria.excludeDeletes=true*" -and
+            $Uri -like "*searchCriteria.historyMode=fullHistory*" -and
+            $Uri -like "*searchCriteria.`$top=100*" -and
+            $Uri -like "*searchCriteria.`$skip=50*"
          }
       }
    }
+}
 }

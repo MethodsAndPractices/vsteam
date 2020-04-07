@@ -1,0 +1,39 @@
+{
+   "count": 2,
+   "value": [
+      {
+         "id": 44,
+         "identifier": "90aa2c42-de51-450a-bfb6-6e264e364d9a",
+         "name": "Child 1 Level 2",
+         "structureType": "area",
+         "hasChildren": true,
+         "path": "\\Demo Public\\Area\\Child 1 Level 1\\Child 1 Level 2",
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201/Child%201%20Level%202"
+            },
+            "parent": {
+               "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201"
+            }
+         },
+         "url": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201/Child%201%20Level%202"
+      },
+      {
+         "id": 43,
+         "identifier": "38de1ce0-0b1b-45f2-b4f9-f32e3a72b78b",
+         "name": "Child 1 Level 1",
+         "structureType": "area",
+         "hasChildren": true,
+         "path": "\\Demo Public\\Area\\Child 1 Level 1",
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201"
+            },
+            "parent": {
+               "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas"
+            }
+         },
+         "url": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas/Child%201%20Level%201"
+      }
+   ]
+}

@@ -1,45 +1,41 @@
 function Get-VSTeamSecurityNamespace {
-    [CmdletBinding(DefaultParameterSetName = 'List')]
-    param(
-        [Parameter(ParameterSetName = 'ByNamespaceName', Mandatory = $true)]
-        [string] $Name,
-        [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-        [ValidateScript({
-            try {
-                [System.Guid]::Parse($_) | Out-Null
-                $true
-            } catch {
-                $false
-            }
-        })]
-        [string] $Id,
-        [Parameter(ParameterSetName = 'List', Mandatory = $false)]
-        [switch] $LocalOnly
-    )
-    process {
-        _hasAccount
-        if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
-            throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
-        }
-        if ($Id) {
-            # Call the REST API
-            $resp = _callAPI -Area 'securitynamespaces' -id $Id `
-            -Version $([VSTeamVersions]::Core) `
-        } else {
-            $queryString = @{}
-            if ($LocalOnly.IsPresent)
-            {
-                $queryString.localOnly = $true
-            }
-            $resp = _callAPI -Area 'securitynamespaces' `
-            -Version $([VSTeamVersions]::Core) `
-            -QueryString $queryString
-        }
-        Write-Verbose $resp | Select-Object -ExpandProperty value
-        if ($resp.count -le 0) {
+   [CmdletBinding(DefaultParameterSetName = 'List')]
+   param(
+      [Parameter(ParameterSetName = 'ByNamespaceName', Mandatory = $true)]
+      [string] $Name,
+      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
+      [ValidateScript({
+         try {
+               [System.Guid]::Parse($_) | Out-Null
+               $true
+         } catch { $false }
+      })]
+      [string] $Id,
+      [Parameter(ParameterSetName = 'List', Mandatory = $false)]
+      [switch] $LocalOnly
+   )
+   process {
+      _supportsSecurityNamespace
+
+      if ($Id) {
+         # Call the REST API
+         $resp = _callAPI -Area 'securitynamespaces' -id $Id -Version $(_getApiVersion Core)  -NoProject
+      } else {
+         $queryString = @{}
+         if ($LocalOnly.IsPresent)
+         {
+               $queryString.localOnly = $true
+         }
+
+         $resp = _callAPI -Area 'securitynamespaces'  -Version $(_getApiVersion Core)  -NoProject -QueryString $queryString
+      }
+
+      Write-Verbose $resp | Select-Object -ExpandProperty value
+         if ($resp.count -le 0) {
             Write-Output $null
-        }
-        if ($resp.count -gt 1) {
+         }
+
+         if ($resp.count -gt 1) {
             # If we only need to find one specific by name
             if ($Name) {
                 $selected = $resp.value | Where-Object {$_.name -eq $Name}
@@ -68,6 +64,6 @@ function Get-VSTeamSecurityNamespace {
             # seemed to be written
             $acl = [VSTeamSecurityNamespace]::new($resp.value)
             Write-Output $acl
-        }
+         }
     }
 }

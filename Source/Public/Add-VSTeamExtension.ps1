@@ -16,7 +16,7 @@ function Add-VSTeamExtension {
          $resource += '/' + $Version
       }
 
-      $resp = _callAPI -Method Post -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement) -ContentType "application/json"
+      $resp = _callAPI -Method Post -SubDomain 'extmgmt' -Resource $resource -Version $(_getApiVersion ExtensionsManagement) -ContentType "application/json"
 
       $item = [VSTeamExtension]::new($resp)
 

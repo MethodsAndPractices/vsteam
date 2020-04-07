@@ -26,7 +26,7 @@ function _callMembershipAPI {
       -Id $Id `
       -SubDomain "vssps" `
       -Method $Method `
-      -Version $([VSTeamVersions]::Graph) `
+      -Version $(_getApiVersion Graph) `
       -QueryString $query
 
    return $resp

@@ -2,8 +2,10 @@ Set-StrictMode -Version Latest
 # Loading System.Web avoids issues finding System.Web.HttpUtility
 Add-Type -AssemblyName 'System.Web'
 $env:testing=$true
-# The InModuleScope command allows you to perform white-box unit testing on the
+# Loading the code from source files will break if functionality moves from one file to another, instead
+# the InModuleScope command allows you to perform white-box unit testing on the
 # internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
+
 InModuleScope VSTeam {
    Describe 'Releases' {
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
@@ -22,25 +24,25 @@ InModuleScope VSTeam {
          }
       }
 
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter {
+      $Uri -like "*_apis/projects*"
+   }
+
+   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+
+   Context 'Update-VSTeamRelease' {
+      Mock _useWindowsAuthenticationOnPremise { return $true }
+      Mock Invoke-RestMethod {
+         return $singleResult
       }
 
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+      It 'should return releases' {
+         $r = Get-VSTeamRelease -ProjectName project -Id 15
 
-      Context 'Update-VSTeamRelease' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $singleResult
-         }
+         $r.variables | Add-Member NoteProperty temp(@{value = 'temp' })
 
-         It 'should return releases' {
-            $r = Get-VSTeamRelease -ProjectName project -Id 15
-
-            $r.variables | Add-Member NoteProperty temp(@{value = 'temp'})
-
-            Update-VSTeamRelease -ProjectName project -Id 15 -Release $r
+         Update-VSTeamRelease -ProjectName project -Id 15 -Release $r
 
             Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
