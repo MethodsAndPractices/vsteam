@@ -1,13 +1,20 @@
 Set-StrictMode -Version Latest
-$env:Testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope VSTeam {
+#region include
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Private/applyTypes.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
 
 Describe 'VSTeamPullRequest' {
+   ## Arrange
+   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
    # You have to set the version or the api-version will not be added when versions = ''
    Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
@@ -51,31 +58,22 @@ Describe 'VSTeamPullRequest' {
 
       It 'Add-VSTeamPullRequest with wrong -SourceRefName throws' {
          ## Act / Assert
-         {
+         { 
             Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
                -Title "PR Title" -Description "PR Description" `
                -SourceRefName "garbage" -TargetRefName "refs/heads/master" `
-               -Draft -Force
+               -Draft -Force 
          } | Should Throw
       }
 
-            It 'Add-VSTeamPullRequest with wrong -SourceRefName throws' {
-               {
-                  Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
-                  -Title "PR Title" -Description "PR Description" `
-                  -SourceRefName "garbage" -TargetRefName "refs/heads/master" `
-                  -Draft -Force
-               } | Should Throw
-            }
-
-            It 'Add-VSTeamPullRequest with wrong -TargetRefName throws' {
-               {
-                  Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
-                  -Title "PR Title" -Description "PR Description" `
-                  -SourceRefName "refs/heads/test" -TargetRefName "garbage" `
-                  -Draft -Force
-               } | Should Throw
-            }
-        }
-    }
+      It 'Add-VSTeamPullRequest with wrong -TargetRefName throws' {
+         ## Act / Assert
+         { 
+            Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
+               -Title "PR Title" -Description "PR Description" `
+               -SourceRefName "refs/heads/test" -TargetRefName "garbage" `
+               -Draft -Force 
+         } | Should Throw
+      }
+   }
 }

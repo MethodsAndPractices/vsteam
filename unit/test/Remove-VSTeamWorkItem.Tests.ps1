@@ -1,18 +1,23 @@
 Set-StrictMode -Version Latest
-$env:Testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope VSTeam {
+#region include
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-   Describe 'workitems' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/applyTypes.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/Set-VSTeamAPIVersion.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+   
+Describe 'VSTeamWorkItem' {
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+      
+   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
    . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
@@ -93,5 +98,4 @@ InModuleScope VSTeam {
          }
       }
    }
-}
 }

@@ -1,38 +1,40 @@
 Set-StrictMode -Version Latest
-$env:Testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope VSTeam {
-   Describe 'Update-VSTeamAgent' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      [VSTeamVersions]::DistributedTask = '1.0-unitTest'
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-      Context 'Update-VSTeamAgent by ID' {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            # Write-Host $args
-         }
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/$sut"
 
-         It 'should update the agent with passed in Id' {
-            Update-VSTeamAgent -Pool 36 -Id 950 -Force
+Describe 'Update-VSTeamAgent' {
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   [VSTeamVersions]::DistributedTask = '1.0-unitTest'
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Method -eq 'Post' -and
-               $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/36/messages*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::DistributedTask)*" -and
-               $Uri -like "*agentId=950*"
-            }
-         }
+   Context 'Update-VSTeamAgent by ID' {
+      Mock Invoke-RestMethod {
+         # If this test fails uncomment the line below to see how the mock was called.
+         # Write-Host $args
       }
 
-      Context 'Update-VSTeamAgent throws' {
-         Mock Invoke-RestMethod { throw 'boom' }
+      It 'should update the agent with passed in Id' {
+         Update-VSTeamAgent -Pool 36 -Id 950 -Force
 
-         It 'should update the agent with passed in Id' {
-            { Update-VSTeamAgent -Pool 36 -Id 950 -Force } | Should Throw
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Post' -and
+            $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/36/messages*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
+            $Uri -like "*agentId=950*"
          }
+      }
+   }
+
+   Context 'Update-VSTeamAgent throws' {
+      Mock Invoke-RestMethod { throw 'boom' }
+
+      It 'should update the agent with passed in Id' {
+         { Update-VSTeamAgent -Pool 36 -Id 950 -Force } | Should Throw
       }
    }
 }

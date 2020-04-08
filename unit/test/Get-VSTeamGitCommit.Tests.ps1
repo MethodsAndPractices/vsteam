@@ -1,59 +1,24 @@
 Set-StrictMode -Version Latest
-$env:Testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope VSTeam {
-   $results = [PSCustomObject]@{
-      count = 2
-      value = @(
-         [PSCustomObject]@{
-            author       = [PSCustomObject]@{
-               date  = '2020-02-19T15:12:01Z'
-               email = 'test@test.com'
-               name  = 'Test User'
-            }
-            changeCounts = [PSCustomObject]@{
-               Add    = 2
-               Delete = 0
-               Edit   = 1
-            }
-            comment      = 'Just a test commit'
-            commitId     = '1234567890abcdef1234567890abcdef'
-            committer    = [PSCustomObject]@{
-               date  = '2020-02-19T15:12:01Z'
-               email = 'test@test.com'
-               name  = 'Test User'
-            }
-            remoteUrl    = 'https://dev.azure.com/test/test/_git/test/commit/1234567890abcdef1234567890abcdef'
-            url          = 'https://dev.azure.com/test/21AF684D-AFFB-4F9A-9D49-866EF24D6A4A/_apid/git/repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits/1234567890abcdef1234567890abcdef'
-         },
-         [PSCustomObject]@{
-            author       = [PSCustomObject]@{
-               date  = '2020-02-20T01:00:01Z'
-               email = 'eample@example.com'
-               name  = 'Example User'
-            }
-            changeCounts = [PSCustomObject]@{
-               Add    = 8
-               Delete = 1
-               Edit   = 0
-            }
-            comment      = 'Just another test commit'
-            commitId     = 'abcdef1234567890abcdef1234567890'
-            committer    = [PSCustomObject]@{
-               date  = '2020-02-20T01:00:01Z'
-               email = 'eample@example.com'
-               name  = 'Example User'
-            }
-            remoteUrl    = 'https://dev.azure.com/test/test/_git/test/commit/abcdef1234567890abcdef1234567890'
-            url          = 'https://dev.azure.com/test/21AF684D-AFFB-4F9A-9D49-866EF24D6A4A/_apid/git/repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits/abcdef1234567890abcdef1234567890'
-         }
-      )
-   }
+#region include
+Import-Module SHiPS
 
-   Describe "Git VSTS" {
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+
+. "$here/../../Source/Classes/VSTeamLeaf.ps1"
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamGitUserDate.ps1"
+. "$here/../../Source/Classes/VSTeamGitCommitRef.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+
+Describe "VSTeamGitCommit" {
+   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
+
+   $results = Get-Content "$PSScriptRoot\sampleFiles\gitCommitResults.json" -Raw | ConvertFrom-Json
 
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
@@ -117,5 +82,4 @@ InModuleScope VSTeam {
          }
       }
    }
-}
 }

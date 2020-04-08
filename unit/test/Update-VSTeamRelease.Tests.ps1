@@ -1,29 +1,34 @@
 Set-StrictMode -Version Latest
-# Loading System.Web avoids issues finding System.Web.HttpUtility
-Add-Type -AssemblyName 'System.Web'
-$env:testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope VSTeam {
-   Describe 'Releases' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      [VSTeamVersions]::Release = '1.0-unittest'
+#region include
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-      $singleResult = [PSCustomObject]@{
-         environments = [PSCustomObject]@{}
-         variables    = [PSCustomObject]@{
-            BrowserToUse = [PSCustomObject]@{
-               value = "phantomjs"
-            }
-         }
-         _links       = [PSCustomObject]@{
-            self = [PSCustomObject]@{}
-            web  = [PSCustomObject]@{}
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/applyTypes.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/Get-VSTeamRelease.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+
+Describe 'VSTeamRelease' {
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
+   
+   $singleResult = [PSCustomObject]@{
+      environments = [PSCustomObject]@{ }
+      variables    = [PSCustomObject]@{
+         BrowserToUse = [PSCustomObject]@{
+            value = "phantomjs"
          }
       }
-
+      _links       = [PSCustomObject]@{
+         self = [PSCustomObject]@{ }
+         web  = [PSCustomObject]@{ }
+      }
+   }
+      
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
       $Uri -like "*_apis/projects*"
@@ -44,12 +49,11 @@ InModuleScope VSTeam {
 
          Update-VSTeamRelease -ProjectName project -Id 15 -Release $r
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Method -eq 'Put' -and
-               $Body -ne $null -and
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
-            }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Put' -and
+            $Body -ne $null -and
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
-      }
+      }        
    }
 }

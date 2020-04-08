@@ -1,32 +1,34 @@
 Set-StrictMode -Version Latest
-$env:Testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope Vsteam {
-   Describe 'Get-VSTeamInfo' {
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
+#region include
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+
+Describe 'VSTeamInfo' {
+   ## Arrange
+   . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
+
+   Context 'Get-VSTeamInfo' {
+      AfterAll {
+         $Global:PSDefaultParameterValues.Remove("*:projectName")
       }
 
-      . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
+      It 'should return account and default project' {
+         [VSTeamVersions]::Account = "mydemos"
+         $Global:PSDefaultParameterValues['*:projectName'] = 'TestProject'
 
-      Context 'Get-VSTeamInfo' {
-         AfterAll {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
-         }
+         ## Act
+         $info = Get-VSTeamInfo
 
-         It 'should return account and default project' {
-            [VSTeamVersions]::Account = "mydemos"
-            $Global:PSDefaultParameterValues['*:projectName'] = 'TestProject'
-
-            $info = Get-VSTeamInfo
-
-            $info.Account | Should Be "mydemos"
-            $info.DefaultProject | Should Be "TestProject"
-         }
+         ## Assert
+         $info.Account | Should Be "mydemos"
+         $info.DefaultProject | Should Be "TestProject"
       }
    }
 }

@@ -1,11 +1,14 @@
 Set-StrictMode -Version Latest
-$env:Testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope VSTeam {
+#region include
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Private/$sut"
+#endregion
 
 Describe 'Common' {
    Context '_convertSecureStringTo_PlainText' {
@@ -238,5 +241,4 @@ Describe 'Common' {
          _isVSTS 'http://localhost:8080/tfs/defaultcollection' | Should Be $false
       }
    }
-}
 }

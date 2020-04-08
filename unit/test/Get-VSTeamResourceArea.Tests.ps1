@@ -1,22 +1,27 @@
 Set-StrictMode -Version Latest
-$env:Testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope vsteam {
-   Describe 'Get-VSTeamResourceArea' {
-      Context 'Get-VSTeamResourceArea' {
-         Mock _callAPI { return @{
-               value = @{ }
-            }
-         }
+#region include
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Private/applyTypes.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+
+Describe 'VSTeamResourceArea' {
+   Context 'Get-VSTeamResourceArea' {
+      ## Arrange
+      Mock _callAPI { return @{ value = @{ } } }
+
+      It 'Should return resources' {
+         ## Act
          $actual = Get-VSTeamResourceArea
 
-         It 'Should return resources' {
-            $actual | Should Not Be $null
-         }
+         ## Assert
+         $actual | Should Not Be $null
       }
    }
 }

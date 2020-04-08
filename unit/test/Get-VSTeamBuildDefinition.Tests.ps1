@@ -1,22 +1,46 @@
 Set-StrictMode -Version Latest
-# Loading System.Web avoids issues finding System.Web.HttpUtility
-Add-Type -AssemblyName 'System.Web'
-$env:testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope VSTeam {
-   $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
-   $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
-   $results2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
-   $results2018 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
+#region include
+Import-Module SHiPS
 
-   Describe 'BuildDefinitions' {
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+
+. "$here/../../Source/Classes/VSTeamLeaf.ps1"
+. "$here/../../Source/Classes/VSTeamDirectory.ps1"
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
+. "$here/../../Source/Classes/VSTeamTeams.ps1"
+. "$here/../../Source/Classes/VSTeamRepositories.ps1"
+. "$here/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
+. "$here/../../Source/Classes/VSTeamTask.ps1"
+. "$here/../../Source/Classes/VSTeamAttempt.ps1"
+. "$here/../../Source/Classes/VSTeamEnvironment.ps1"
+. "$here/../../Source/Classes/VSTeamRelease.ps1"
+. "$here/../../Source/Classes/VSTeamReleases.ps1"
+. "$here/../../Source/Classes/VSTeamBuild.ps1"
+. "$here/../../Source/Classes/VSTeamBuilds.ps1"
+. "$here/../../Source/Classes/VSTeamQueues.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitions.ps1"
+. "$here/../../Source/Classes/VSTeamProject.ps1"
+. "$here/../../Source/Classes/VSTeamGitRepository.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitionProcess.ps1"
+. "$here/../../Source/Classes/VSTeamPool.ps1"
+. "$here/../../Source/Classes/VSTeamQueue.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinition.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+
+Describe 'VSTeamBuildDefinition' {
+   Context 'Get-VSTeamBuildDefinition' {
+      $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
+      $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+      $results2017 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
+      $results2018 = Get-Content "$PSScriptRoot\sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
 
       . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 

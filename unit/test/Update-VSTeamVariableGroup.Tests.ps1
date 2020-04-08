@@ -46,6 +46,10 @@ Describe 'VSTeamVariableGroup' {
                      isSecret = $true
                   }
                }
+               ProviderData =  @{
+                  serviceEndpointId = "AzureRMServiceEndpointGuid"
+                  vault             = "name_of_existing_key_vault"
+               }
             }
       
             Update-VSTeamVariableGroup @testParameters

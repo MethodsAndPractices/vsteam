@@ -126,7 +126,7 @@ Describe 'VSTeamWorkItem' {
          $Global:PSDefaultParameterValues["*:projectName"] = 'test'
 
          $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
-         { Update-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should Throw
+         { Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should Throw
       }
    }
 }

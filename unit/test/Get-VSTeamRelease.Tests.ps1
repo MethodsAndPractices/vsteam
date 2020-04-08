@@ -1,47 +1,36 @@
 Set-StrictMode -Version Latest
-# Loading System.Web avoids issues finding System.Web.HttpUtility
-Add-Type -AssemblyName 'System.Web'
-$env:testing=$true
-# Loading the code from source files will break if functionality moves from one file to another, instead
-# the InModuleScope command allows you to perform white-box unit testing on the
-# internal \(non-exported\) code of a Script Module, ensuring the module is loaded.
 
-InModuleScope VSTeam {
-   $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{
-         environments = [PSCustomObject]@{}
-         _links       = [PSCustomObject]@{
-            self = [PSCustomObject]@{}
-            web  = [PSCustomObject]@{}
-         }
-      }
+#region include
+Import-Module SHiPS
+
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+
+. "$here/../../Source/Classes/VSTeamLeaf.ps1"
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamFeed.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Private/applyTypes.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+
+Describe 'VSTeamRelease' {
+   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+
+   [VSTeamVersions]::Release = '1.0-unittest'
+   $results = Get-Content "$PSScriptRoot\sampleFiles\releaseResults.json" -Raw | ConvertFrom-Json
+   $singleResult = Get-Content "$PSScriptRoot\sampleFiles\releaseSingleReult.json" -Raw | ConvertFrom-Json
+
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
+   
+   Mock Invoke-RestMethod { return $results }
+   Mock Invoke-RestMethod { return $singleResult } -ParameterFilter {
+      $Uri -like "*15*"
    }
 
-   $singleResult = [PSCustomObject]@{
-      environments = [PSCustomObject]@{}
-      variables    = [PSCustomObject]@{
-         BrowserToUse = [PSCustomObject]@{
-            value = "phantomjs"
-         }
-      }
-      _links       = [PSCustomObject]@{
-         self = [PSCustomObject]@{}
-         web  = [PSCustomObject]@{}
-      }
-   }
-
-   Describe 'Releases' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      [VSTeamVersions]::Release = '1.0-unittest'
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
-
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
-      Context 'Get-VSTeamRelease' {
+   Context 'Get-VSTeamRelease' {
 
       It 'by Id -Raw should return release as Raw' {
          ## Act
@@ -78,12 +67,6 @@ InModuleScope VSTeam {
             $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
-   }
-      Context 'Get-VSTeamRelease with no parameters' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $results
-         }
 
       It 'with no parameters should return releases' {
          ## Act
@@ -114,6 +97,5 @@ InModuleScope VSTeam {
             $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
-   }
    }
 }
