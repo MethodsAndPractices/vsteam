@@ -15,7 +15,7 @@ function Show-VSTeamBuildDefinition {
       [Parameter(ParameterSetName = 'List')]
       [string] $Path = '\',
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
@@ -23,6 +23,7 @@ function Show-VSTeamBuildDefinition {
    process {
       # Build the url
       $url = "$(_getInstance)/$ProjectName/_build"
+
       if ($id) {
          $url += "/index?definitionId=$id"
       }
@@ -41,13 +42,15 @@ function Show-VSTeamBuildDefinition {
                # All
                $url += '/index?_a=allDefinitions&path='
             }
-            }
-            # Make sure path starts with \
-            if ($Path[0] -ne '\') {
-                $Path = '\' + $Path
-            }
-            $url += [System.Web.HttpUtility]::UrlEncode($Path)
+         }
+
+         # Make sure path starts with \
+         if ($Path[0] -ne '\') {
+            $Path = '\' + $Path
+         }
+         $url += [System.Web.HttpUtility]::UrlEncode($Path)
       }
+
       Show-Browser $url
    }
 }

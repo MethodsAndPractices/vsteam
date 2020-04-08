@@ -13,6 +13,7 @@ function Get-VSTeamTfvcBranch {
       [parameter(Mandatory = $false)]
       [switch] $IncludeDeleted = $false
    )
+
    process {
       foreach ($item in $Path) {
          $queryString = [ordered]@{
@@ -22,7 +23,8 @@ function Get-VSTeamTfvcBranch {
          }
 
          $resp = _callAPI -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $(_getApiVersion Tfvc)
-         $resp.PSObject.TypeNames.Insert(0, 'Team.TfvcBranch')
+
+         _applyTypesToTfvcBranch -item $resp
 
          Write-Output $resp
       }

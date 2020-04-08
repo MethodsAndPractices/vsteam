@@ -25,10 +25,10 @@ function Get-VSTeamBuildDefinition {
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [switch]$raw,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       if ($id) {
@@ -42,25 +42,26 @@ function Get-VSTeamBuildDefinition {
             else {
                if (-not $raw.IsPresent) {
                   $item = [VSTeamBuildDefinition]::new($resp, $ProjectName)
+                  
                   Write-Output $item
                }
                else {
                   Write-Output $resp
                }
             }
-            }
-        }
-        else {
-            $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $(_getApiVersion Build) `
-                -QueryString @{type = $type; name = $filter; includeAllProperties = $true }
+         }
+      }
+      else {
+         $resp = _callAPI -ProjectName $ProjectName -Area build -Resource definitions -Version $(_getApiVersion Build) `
+            -QueryString @{type = $type; name = $filter; includeAllProperties = $true }
 
-            $objs = @()
+         $objs = @()
 
-            foreach ($item in $resp.value) {
-                $objs += [VSTeamBuildDefinition]::new($item, $ProjectName)
-            }
+         foreach ($item in $resp.value) {
+            $objs += [VSTeamBuildDefinition]::new($item, $ProjectName)
+         }
 
-            Write-Output $objs
-        }
-    }
+         Write-Output $objs
+      }
+   }
 }

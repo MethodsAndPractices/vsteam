@@ -9,19 +9,21 @@ function Update-VSTeamRelease {
 
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
-   process {
+
+   Process {
       $body = $Release | ConvertTo-Json -Depth 99
+
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Release")) {
          # Call the REST API
          $resp = _callAPI -ProjectName $projectName -SubDomain vsrm -Area release -Resource releases -Id $id  `
             -Method Put -ContentType 'application/json' -body $body -Version $(_getApiVersion Release)
 
-            Write-Output $resp
+         Write-Output $resp
       }
-    }
+   }
 }

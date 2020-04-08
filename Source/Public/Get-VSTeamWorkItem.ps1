@@ -13,34 +13,35 @@ function Get-VSTeamWorkItem {
 
       [string[]] $Fields
    )
+
    Process {
       # Call the REST API
       if ($Id.Length -gt 1) {
-         $resp = _callAPI -Area 'wit' -Resource 'workitems'  `
-            -Version  $(_getApiVersion Core) `
+         $resp = _callAPI -NoProject -Area 'wit' -Resource 'workitems'  `
+            -Version $(_getApiVersion Core) `
             -Querystring @{
-            '$Expand'    = $Expand
-            fields        = ($Fields -join ',')
+            '$Expand'   = $Expand
+            fields      = ($Fields -join ',')
             errorPolicy = $ErrorPolicy
-            ids            = ($Id -join ',')
+            ids         = ($Id -join ',')
          }
 
          foreach ($item in $resp.value) {
-               $item.PSObject.TypeNames.Insert(0, 'Team.WorkItem')
+            _applyTypesToWorkItem -item $item
          }
 
          return $resp.value
       }
       else {
          $a = $Id[0]
-         $resp = _callAPI -Area 'wit' -Resource 'workitems'  `
-               -Version $(_getApiVersion Core) -id "$a" `
-               -Querystring @{
-               '$Expand' = $Expand
-               fields    = ($Fields -join ',')
+         $resp = _callAPI -NoProject -Area 'wit' -Resource 'workitems'  `
+            -Version $(_getApiVersion Core) -id "$a" `
+            -Querystring @{
+            '$Expand' = $Expand
+            fields    = ($Fields -join ',')
          }
 
-         $resp.PSObject.TypeNames.Insert(0, 'Team.WorkItem')
+         _applyTypesToWorkItem -item $resp
 
          return $resp
       }

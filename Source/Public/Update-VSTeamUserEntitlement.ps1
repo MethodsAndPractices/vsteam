@@ -31,12 +31,11 @@ function Update-VSTeamUserEntitlement
 
       [switch]$Force
    )
-   process {
+
+   Process {
       # This will throw if this account does not support MemberEntitlementManagement
-      _hasAccount
-      if (-not [VSTeamVersions]::MemberEntitlementManagement) {
-         throw 'This account does not support Member Entitlement.'
-      }
+      _supportsMemberEntitlementManagement
+
       if ($email)
       {
          # We have to go find the id
@@ -75,7 +74,9 @@ function Update-VSTeamUserEntitlement
 
       $body = ConvertTo-Json -InputObject @($obj)
 
-      if ($Force -or $PSCmdlet.ShouldProcess("$( $user.userName ) ($( $user.email ))", "Update user"))
+      $msg = "$( $user.userName ) ($( $user.email ))"
+
+      if ($Force -or $PSCmdlet.ShouldProcess($msg, "Update user"))
       {
          # Call the REST API
          _callAPI -Method Patch -NoProject -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Id $id -Version $(_getApiVersion MemberEntitlementManagement) -ContentType 'application/json-patch+json' | Out-Null

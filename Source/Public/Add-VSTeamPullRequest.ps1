@@ -22,18 +22,18 @@ function Add-VSTeamPullRequest {
       [Parameter()]
       [switch] $Draft,
 
-      # Forces the command without confirmation
       [Parameter()]
       [switch] $Force,
 
-      [Parameter( Position = 0 )]
+      [Parameter(Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
 
    process {
       Write-Verbose "Add-VSTeamPullRequest"
+      
       $body = '{"sourceRefName": "' + $SourceRefName + '", "targetRefName": "' + $TargetRefName + '", "title": "' + $Title + '", "description": "' + $Description + '", "isDraft": ' + $Draft.ToString().ToLower() + '}'
 
       Write-Verbose $body

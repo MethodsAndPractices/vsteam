@@ -81,8 +81,7 @@ function Update-VSTeamWorkItem {
             -Version $(_getApiVersion Core) -id $Id -Method Patch `
             -ContentType 'application/json-patch+json' -Body $json -NoProject
 
-         $resp.PSObject.TypeNames.Insert(0, 'Team.WorkItemType')
-         
+         _applyTypesToWorkItem -item $resp
 
          return $resp
       }

@@ -9,13 +9,13 @@ function Update-VSTeamServiceEndpoint {
 
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
 
-   process {
+   Process {
       $body = $object | ConvertTo-Json
 
       if ($Force -or $pscmdlet.ShouldProcess($id, "Update Service Endpoint")) {

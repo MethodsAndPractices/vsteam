@@ -16,23 +16,25 @@ function Update-VSTeamPolicy {
 
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
+
    process {
       if (-not $type) {
          $policy = Get-VSTeamPolicy -ProjectName $ProjectName -Id $id | Select-Object -First 1
          $type = $policy.type.id
       }
+      
       $body = @{
          isEnabled  = $enabled.IsPresent;
          isBlocking = $blocking.IsPresent;
-         type        = @{
+         type       = @{
             id = $type
          }
-         settings    = $settings
+         settings   = $settings
       } | ConvertTo-Json -Depth 10 -Compress
 
       try {

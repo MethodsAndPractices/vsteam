@@ -4,12 +4,14 @@ function Show-VSTeamProject {
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id,
-      [Parameter(ParameterSetName ='ByName', Position = 0 )]
+      
+      [Parameter(ParameterSetName = 'ByName', Position = 0)]
       [ValidateProjectAttribute()]
-      [ArgumentCompleter([ProjectCompleter] ) ]
+      [ArgumentCompleter([ProjectCompleter]) ]
       [Alias('ProjectName')]
       $Name
    )
+   
    process {
       _hasAccount
 

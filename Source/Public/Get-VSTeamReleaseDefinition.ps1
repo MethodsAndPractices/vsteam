@@ -17,43 +17,48 @@ function Get-VSTeamReleaseDefinition {
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [switch]$raw,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
    process {
-      Write-Debug 'Get-VSTeamReleaseDefinition Process'
       if ($id) {
-      foreach ($item in $id) {
-         $resp = _callAPI -subDomain vsrm -Area release -resource definitions -Version $(_getApiVersion Release) -projectName $projectName -id $item
+         foreach ($item in $id) {
+            $resp = _callAPI -subDomain vsrm -Area release -resource definitions -Version $(_getApiVersion Release) -projectName $projectName -id $item
 
-         if ($JSON.IsPresent) {
-            $resp | ConvertTo-Json -Depth 99
-         }
-         else {
-            if (-not $raw.IsPresent) {
-               $item = [VSTeamReleaseDefinition]::new($resp, $ProjectName)
-               Write-Output $item
+            if ($JSON.IsPresent) {
+               $resp | ConvertTo-Json -Depth 99
             }
             else {
-               Write-Output $resp
+               if (-not $raw.IsPresent) {
+                  $item = [VSTeamReleaseDefinition]::new($resp, $ProjectName)
+
+                  Write-Output $item
+               }
+               else {
+                  Write-Output $resp
+               }
             }
          }
-            }
-        }
-        else {
-            $listurl = _buildRequestURI -subDomain vsrm -Area release -resource 'definitions' -Version $(_getApiVersion Release) -projectName $ProjectName
-            if ($expand -ne 'none') {
-                $listurl += "&`$expand=$($expand)"
-            }
-            # Call the REST API
-            $resp = _callAPI -url $listurl
-            $objs = @()
-            foreach ($item in $resp.value) {
-                $objs += [VSTeamReleaseDefinition]::new($item, $ProjectName)
-            }
-            Write-Output $objs
-        }
-    }
+      }
+      else {
+         $listurl = _buildRequestURI -subDomain vsrm -Area release -resource 'definitions' -Version $(_getApiVersion Release) -projectName $ProjectName
+         
+         if ($expand -ne 'none') {
+            $listurl += "&`$expand=$($expand)"
+         }
+         
+         # Call the REST API
+         $resp = _callAPI -url $listurl
+         
+         $objs = @()
+         
+         foreach ($item in $resp.value) {
+            $objs += [VSTeamReleaseDefinition]::new($item, $ProjectName)
+         }
+         
+         Write-Output $objs
+      }
+   }
 }

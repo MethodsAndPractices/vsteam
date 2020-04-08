@@ -41,19 +41,18 @@ function Get-VSTeamRelease {
       [string] $continuationToken,
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
 
-      [switch]$JSON,
+      [switch] $JSON,
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
 
-      [switch]$raw,
+      [switch] $raw,
 
-      [Parameter(Position=1 )]
+      [Parameter(Position = 1)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
-   process {
-      Write-Debug 'Get-VSTeamRelease Process'
 
+   process {
       if ($id) {
          foreach ($item in $id) {
             $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $(_getApiVersion Release)
@@ -66,6 +65,7 @@ function Get-VSTeamRelease {
                   # Apply a Type Name so we can use custom format view and custom type extensions
                   _applyTypesToRelease -item $resp
                }
+
                Write-Output $resp
             }
          }
@@ -77,6 +77,7 @@ function Get-VSTeamRelease {
          else {
             $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $(_getApiVersion Release)
          }
+
          $QueryString = @{
             '$top'              = $top
             '$expand'           = $expand
@@ -90,12 +91,15 @@ function Get-VSTeamRelease {
             'continuationToken' = $continuationToken
 
          }
+
          # Call the REST API
          $resp = _callAPI -url $listurl -QueryString $QueryString
+         
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-               _applyTypesToRelease -item $item
+            _applyTypesToRelease -item $item
          }
+         
          Write-Output $resp.value
       }
    }

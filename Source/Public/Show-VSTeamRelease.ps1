@@ -4,14 +4,14 @@ function Show-VSTeamRelease {
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 1)]
       [Alias('ReleaseID')]
       [int] $id,
-      [Parameter(Mandatory=$true, Position = 0 )]
+      
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
-   process {
-      Write-Debug 'Show-VSTeamRelease Process'
 
+   process {
       if ($id -lt 1) {
          Throw "$id is not a valid id. Value must be greater than 0."
       }

@@ -10,10 +10,10 @@ function Add-VSTeamServiceEndpoint {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [hashtable] $object,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       $object['name'] = $endpointName

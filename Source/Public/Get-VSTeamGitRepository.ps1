@@ -8,10 +8,10 @@ function Get-VSTeamGitRepository {
       [Parameter(ParameterSetName = 'ByName', ValueFromPipeline = $true)]
       [string[]] $Name,
 
-      [Parameter( Position = 0 )]
+      [Parameter(Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
 
    process {
@@ -19,21 +19,6 @@ function Get-VSTeamGitRepository {
          foreach ($item in $id) {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $(_getApiVersion Git)
-               # Storing the object before you return it cleaned up the pipeline.
-               # When I just write the object from the constructor each property
-               # seemed to be written
-               $item = [VSTeamGitRepository]::new($resp, $ProjectName)
-               Write-Output $item
-            }
-            catch {
-                  throw $_
-               }
-            }
-        }
-      elseif ($Name) {
-         foreach ($item in $Name) {
-            try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version  $(_getApiVersion Git)
 
                # Storing the object before you return it cleaned up the pipeline.
                # When I just write the object from the constructor each property
@@ -46,21 +31,38 @@ function Get-VSTeamGitRepository {
                throw $_
             }
          }
-        }
-        else {
-            if($ProjectName) {
-                $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version  $(_getApiVersion Git)
-            } else {
-                $resp = _callAPI -Area git -Resource repositories -Version $(_getApiVersion Git)
+      }
+      elseif ($Name) {
+         foreach ($item in $Name) {
+            try {
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area git -Resource repositories -Version $(_getApiVersion Git)
+
+               # Storing the object before you return it cleaned up the pipeline.
+               # When I just write the object from the constructor each property
+               # seemed to be written
+               $item = [VSTeamGitRepository]::new($resp, $ProjectName)
+
+               Write-Output $item
             }
-
-            $objs = @()
-
-            foreach ($item in $resp.value) {
-                $objs += [VSTeamGitRepository]::new($item, $ProjectName)
+            catch {
+               throw $_
             }
+         }
+      }
+      else {
+         if($ProjectName) {
+            $resp = _callAPI -ProjectName $ProjectName -Area git -Resource repositories -Version $(_getApiVersion Git)
+         } else {
+            $resp = _callAPI -Area git -Resource repositories -Version $(_getApiVersion Git)
+         }
 
-            Write-Output $objs
-        }
-    }
+         $objs = @()
+
+         foreach ($item in $resp.value) {
+            $objs += [VSTeamGitRepository]::new($item, $ProjectName)
+         }
+
+         Write-Output $objs
+      }
+   }
 }

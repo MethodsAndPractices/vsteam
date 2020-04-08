@@ -3,11 +3,13 @@ function Show-VSTeamGitRepository {
    param (
       [Parameter(ValueFromPipelineByPropertyName = $true)]
       [string] $RemoteUrl,
-      [Parameter( Position = 0 )]
+
+      [Parameter(Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
+   
    process {
       if ($RemoteUrl) {
          Show-Browser $RemoteUrl

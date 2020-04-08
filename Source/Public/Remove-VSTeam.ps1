@@ -7,11 +7,12 @@ function Remove-VSTeam {
 
       [switch]$Force,
 
-      [Parameter(Mandatory=$true, Position = 0 , ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
+   
    process {
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API

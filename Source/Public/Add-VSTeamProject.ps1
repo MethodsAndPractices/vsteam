@@ -10,7 +10,7 @@ function Add-VSTeamProject {
 
       [ValidateProcessAttribute()]
       [ArgumentCompleter([ProcessCompleter])]
-      $ProcessTemplate
+      [string] $ProcessTemplate
    )
    process {
       if ($TFVC.IsPresent) {

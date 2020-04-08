@@ -3,8 +3,10 @@ function Remove-VSTeamVariableGroup {
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $id,
+      
       [switch] $Force,
-      [Parameter(Mandatory=$true, Position = 0 )]
+
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
@@ -17,7 +19,7 @@ function Remove-VSTeamVariableGroup {
             _callAPI -projectName $projectName -Area 'distributedtask' -Resource 'variablegroups' -Id $item  `
                -Method Delete -Version $(_getApiVersion VariableGroups) | Out-Null
 
-               Write-Output "Deleted variable group $item"
+            Write-Output "Deleted variable group $item"
          }
       }
    }

@@ -7,6 +7,7 @@ function Get-VSTeamTfvcRootBranch {
       [parameter(Mandatory = $false)]
       [switch] $IncludeDeleted = $false
    )
+
    process {
       $queryString = [ordered]@{
          includeChildren = $IncludeChildren;
@@ -17,13 +18,14 @@ function Get-VSTeamTfvcRootBranch {
 
       if ($resp | Get-Member -Name value -MemberType Properties) {
          foreach ($item in $resp.value) {
-               $item.PSObject.TypeNames.Insert(0, 'Team.TfvcBranch')
+            _applyTypesToTfvcBranch -item $item
          }
 
          Write-Output $resp.value
       }
       else {
-         $resp.PSObject.TypeNames.Insert(0, 'Team.TfvcBranch')
+         _applyTypesToTfvcBranch -item $resp
+
          Write-Output $resp
       }
    }

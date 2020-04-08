@@ -1,70 +1,80 @@
 function Get-VSTeamWiql {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param(
-      [QueryTransformToID()]
-      [ArgumentCompleter([QueryCompleter])]
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, Position = 0)]
       [string] $Id,
 
-      [Parameter(ParameterSetName = 'ByQuery', Mandatory = $true)]
+      [Parameter(ParameterSetName = 'ByQuery', Mandatory = $true, Position = 0)]
       [string] $Query,
 
-      [Parameter(Position=1)]
-      [ValidateProjectAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName,
-
+      [Parameter(Mandatory = $true, Position = 1)]
       [string] $Team,
 
       [int] $Top = 100,
+
       [Switch] $TimePrecision,
+
       [Switch] $Expand
    )
-   process {
-      $params      =  @{
-         ProjectName = $ProjectName
-         Area        = 'wit'
-         Resource    = 'wiql'
-         Version     =  [VSTeamVersions]::Core
-         QueryString = @{
-            '$top'        = $Top
-            timePrecision = $TimePrecision
-            }
+   DynamicParam {
+      #$arrSet = Get-VSTeamProject | Select-Object -ExpandProperty Name
+      _buildProjectNameDynamicParam -mandatory $true #-arrSet $arrSet
+   }
+
+   Process {
+
+      # Bind the parameter to a friendly variable
+      $ProjectName = $PSBoundParameters["ProjectName"]
+
+      $QueryString = @{
+         '$top'        = $Top
+         timePrecision = $TimePrecision
       }
-      if ($Team) {
-         $params['Team']=  $Team
-      }
+
+      # Call the REST API
       if ($Query) {
-         $params['body']   = @{query = $Query} | ConvertTo-Json
-         $params['method'] = 'POST'
-         $params['ContentType'] = 'application/json'
+
+         $body = (@{
+               query = $Query
+            }) | ConvertTo-Json
+
+         $resp = _callAPI -ProjectName $ProjectName -Team $Team -Area 'wit' -Resource 'wiql'  `
+            -method "POST" -ContentType "application/json" `
+            -Version $(_getApiVersion Core) `
+            -Querystring $QueryString `
+            -Body $body
       }
       else {
-         $params['id']= $Id
+         $resp = _callAPI -ProjectName $ProjectName -Team $Team -Area 'wit' -Resource 'wiql'  `
+            -Version $(_getApiVersion Core) -id "$Id" `
+            -Querystring $QueryString
       }
-      Write-Progress -Activity "Querying Data" -CurrentOperation "Getting list of items"
-      $resp = _callAPI  @params
+
       if ($Expand) {
-         if ($resp.queryResultType -eq 'workItemLink') {
-            Add-Member -InputObject $resp -MemberType NoteProperty -Name Workitems -Value @()
-            $Ids = $resp.workItemRelations.Target.id
-         }
-         else {  $Ids = $resp.workItems.id }
+
+         [array]$Ids = $resp.workItems.id
+         $Fields = $resp.columns.referenceName
+
+         $resp.workItems = @()
          #splitting id array by 200, since a maximum of 200 ids are allowed per call
          $countIds = $Ids.Count
          $resp.workItems = for ($beginRange = 0; $beginRange -lt $countIds; $beginRange += 200) {
-            #strict mode is on so pick lesser of  0..199 and 0..count-1
-            $endRange = [math]::Min(($beginRange + 199),($countIds - 1))
-            Write-Progress -Activity "Querying Data" -CurrentOperation "Expanding items $beginRange to $EndRange of $countIDs"
-            if ($Query -match "\*") {
-               Get-VSTeamWorkItem -Id $Ids[$beginRange..$endRange]
+
+            $endRange = ($beginRange + 199)
+
+            if ($endRange -gt $countIds) {
+               $idArray = $Ids[$beginRange..($countIds - 1)]
             }
             else {
-               Get-VSTeamWorkItem  -Id $Ids[$beginRange..$endRange] -Fields $resp.columns.referenceName
+               $idArray = $Ids[$beginRange..($endRange)]
             }
+
+            (Get-VSTeamWorkItem -Fields $Fields -Id $idArray).value
          }
       }
-      Write-Progress -Activity "Querying Data" -Completed
-      $resp
+
+      _applyTypesToWiql -item $resp
+
+      return $resp
    }
 }

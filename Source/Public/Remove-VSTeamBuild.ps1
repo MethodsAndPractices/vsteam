@@ -7,7 +7,7 @@ function Remove-VSTeamBuild {
 
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
@@ -24,7 +24,7 @@ function Remove-VSTeamBuild {
             catch {
                _handleException $_
             }
-            }
-        }
-    }
+         }
+      }
+   }
 }

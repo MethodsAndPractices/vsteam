@@ -18,7 +18,7 @@ function Invoke-VSTeamRequest {
       [hashtable]$AdditionalHeaders,
       [object]$QueryString,
       [string]$Team,
-      [Parameter( Position = 0 )]
+      [Parameter(Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName,

@@ -7,9 +7,9 @@ function Get-VSTeamVariableGroup {
       [Parameter(Position = 0, ParameterSetName = 'ByName', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Name,
 
-      [Parameter(Position=1)]
+      [Parameter(Position = 1)]
       [ValidateProjectAttribute()]
-      [ArgumentCompleter([ProjectCompleter] ) ]
+      [ArgumentCompleter([ProjectCompleter]) ]
       $ProjectName
    )
 
@@ -17,7 +17,7 @@ function Get-VSTeamVariableGroup {
       if ($Id) {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups'  `
-               -Version $(_getApiVersion VariableGroups) -Id $Id
+            -Version $(_getApiVersion VariableGroups) -Id $Id
 
          _applyTypesToVariableGroup -item $resp
 
@@ -26,18 +26,22 @@ function Get-VSTeamVariableGroup {
       else {
          if ($Name) {
             $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups' -Version $(_getApiVersion VariableGroups) -Method Get `
-               -QueryString @{groupName = $Name}
+               -QueryString @{groupName = $Name }
+
             _applyTypesToVariableGroup -item $resp.value
+            
             Write-Output $resp.value
          }
          else {
             # Call the REST API
             $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'variablegroups'  `
                -Version $(_getApiVersion VariableGroups)
-            # Apply a Type Name so we can use custom format view and custom type extensions
+            
+               # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
                _applyTypesToVariableGroup -item $item
             }
+            
             return $resp.value
          }
       }

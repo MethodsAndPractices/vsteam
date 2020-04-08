@@ -40,10 +40,10 @@ function Get-VSTeamBuild {
 
       [int[]] $Id,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
 
    process {
@@ -64,26 +64,28 @@ function Get-VSTeamBuild {
             $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' `
                -Version $(_getApiVersion Build) `
                -Querystring @{
-               '$top'                        = $top
-               'type'                        = $type
-               'buildNumber'                = $buildNumber
-               'resultFilter'            = $resultFilter
-               'statusFilter'            = $statusFilter
-               'reasonFilter'            = $reasonFilter
+               '$top'                   = $top
+               'type'                   = $type
+               'buildNumber'            = $buildNumber
+               'resultFilter'           = $resultFilter
+               'statusFilter'           = $statusFilter
+               'reasonFilter'           = $reasonFilter
                'maxBuildsPerDefinition' = $maxBuildsPerDefinition
-               'queues'                    = ($queues -join ',')
-               'properties'                = ($properties -join ',')
-               'definitions'                = ($definitions -join ',')
+               'queues'                 = ($queues -join ',')
+               'properties'             = ($properties -join ',')
+               'definitions'            = ($definitions -join ',')
             }
+
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
                _applyTypesToBuild -item $item
             }
+
             Write-Output $resp.value
-            }
-        }
+         }
+      }
       catch {
-            _handleException $_
+         _handleException $_
       }
    }
 }

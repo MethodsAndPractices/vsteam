@@ -11,25 +11,25 @@ function Add-VSTeamPolicy {
       [Parameter(Mandatory = $true)]
       [hashtable] $settings,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       $body = @{
          isEnabled  = $enabled.IsPresent;
          isBlocking = $blocking.IsPresent;
-         type        = @{
+         type       = @{
             id = $type
          };
-         settings    = $settings
+         settings   = $settings
       } | ConvertTo-Json -Depth 10 -Compress
 
       try {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -Resource 'configurations' `
-               -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
+            -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
 
          Write-Output $resp
       }

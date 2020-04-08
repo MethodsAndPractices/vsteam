@@ -15,6 +15,7 @@ function Get-VSTeamUserEntitlement {
       [Alias('UserId')]
       [string[]] $Id
    )
+
    process {
       # This will throw if this account does not support MemberEntitlementManagement
       _supportsMemberEntitlementManagement
@@ -25,8 +26,7 @@ function Get-VSTeamUserEntitlement {
             # Call the REST API
             $resp = _callAPI -SubDomain 'vsaex' -Version $(_getApiVersion MemberEntitlementManagement) -Resource 'userentitlements' -id $item
 
-            $resp.PSObject.TypeNames.Insert(0, 'Team.UserEntitlement')
-            $resp.accessLevel.PSObject.TypeNames.Insert(0, 'Team.AccessLevel')
+            _applyTypesToUser -item $resp
 
             Write-Output $resp
          }
@@ -35,9 +35,9 @@ function Get-VSTeamUserEntitlement {
          # Build the url to list the teams
          # $listurl = _buildUserURL
          $listurl = _buildRequestURI -SubDomain 'vsaex' -Resource 'userentitlements' `
-                  -Version $(_getApiVersion MemberEntitlementManagement)
+            -Version $(_getApiVersion MemberEntitlementManagement)
 
-                  $listurl += _appendQueryString -name "top" -value $top -retainZero
+         $listurl += _appendQueryString -name "top" -value $top -retainZero
          $listurl += _appendQueryString -name "skip" -value $skip -retainZero
          $listurl += _appendQueryString -name "select" -value ($select -join ",")
 
@@ -46,8 +46,7 @@ function Get-VSTeamUserEntitlement {
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.members) {
-               $item.PSObject.TypeNames.Insert(0, 'Team.UserEntitlement')
-               $item.accessLevel.PSObject.TypeNames.Insert(0, 'Team.AccessLevel')
+            _applyTypesToUser -item $item
          }
 
          Write-Output $resp.members

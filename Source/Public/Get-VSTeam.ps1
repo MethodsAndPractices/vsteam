@@ -1,22 +1,27 @@
 function Get-VSTeam {
-    [CmdletBinding(DefaultParameterSetName = 'List')]
-    param (
-        [Parameter(ParameterSetName = 'List')]
-        [int] $Top,
-        [Parameter(ParameterSetName = 'List')]
-        [int] $Skip,
-        [Parameter(ParameterSetName = 'ByID')]
-        [Alias('TeamId')]
-        [string[]] $Id,
-        [Parameter(ParameterSetName = 'ByName')]
-        [Alias('TeamName')]
-        [string[]] $Name,
-        [Parameter(Mandatory=$true, Position = 0 )]
-        [ValidateProjectAttribute()]
-        [ArgumentCompleter([ProjectCompleter])]
-        $ProjectName
-    )
-    process {
+   [CmdletBinding(DefaultParameterSetName = 'List')]
+   param (
+      [Parameter(ParameterSetName = 'List')]
+      [int] $Top,
+
+      [Parameter(ParameterSetName = 'List')]
+      [int] $Skip,
+
+      [Parameter(ParameterSetName = 'ByID')]
+      [Alias('TeamId')]
+      [string[]] $Id,
+
+      [Parameter(ParameterSetName = 'ByName')]
+      [Alias('TeamName')]
+      [string[]] $Name,
+
+      [Parameter(Mandatory = $true, Position = 0)]
+      [ValidateProjectAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
+   )
+
+   process {
       if ($Id) {
          foreach ($item in $Id) {
             # Call the REST API
@@ -34,7 +39,7 @@ function Get-VSTeam {
             $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
                -Version $(_getApiVersion Core)
 
-               $team = [VSTeamTeam]::new($resp, $ProjectName)
+            $team = [VSTeamTeam]::new($resp, $ProjectName)
 
             Write-Output $team
          }
@@ -54,6 +59,7 @@ function Get-VSTeam {
          foreach ($item in $resp.value) {
             $obj += [VSTeamTeam]::new($item, $ProjectName)
          }
+
          Write-Output $obj
       }
    }

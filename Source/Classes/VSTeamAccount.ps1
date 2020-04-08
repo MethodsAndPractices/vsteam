@@ -21,11 +21,11 @@ class VSTeamAccount : SHiPSDirectory {
       )
 
       # Don't show directories not supported by the server
-      if ([VSTeamVersions]::Packaging) {
+      if (_testFeedSupport) {
          $topLevelFolders += [VSTeamFeeds]::new('Feeds')
       }
 
-      if([VSTeamVersions]::Graph ) {
+      if (_testGraphSupport) {
          $topLevelFolders += [VSTeamPermissions]::new('Permissions')
       }
 

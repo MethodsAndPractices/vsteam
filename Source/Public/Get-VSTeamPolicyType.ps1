@@ -4,17 +4,20 @@ function Get-VSTeamPolicyType {
       [Parameter(ValueFromPipeline = $true)]
       [guid[]] $Id,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
+
    process {
       if ($id) {
          foreach ($item in $id) {
             try {
                $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource types -Version $(_getApiVersion Policy)
-               $resp.PSObject.TypeNames.Insert(0, 'Team.PolicyType')
+
+               _applyTypesToPolicyType -item $resp
+
                Write-Output $resp
             }
             catch {
@@ -28,8 +31,9 @@ function Get-VSTeamPolicyType {
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {
-               $item.PSObject.TypeNames.Insert(0, 'Team.PolicyType')
+               _applyTypesToPolicyType -item $item
             }
+
             Write-Output $resp.value
          }
          catch {

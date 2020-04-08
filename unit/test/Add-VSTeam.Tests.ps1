@@ -6,12 +6,14 @@ Import-Module SHiPS
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
+. "$here/../../Source/Private/applyTypes.ps1"
+. "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Classes/VSTeamLeaf.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamTeam.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ValidateProjectAttribute.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 
@@ -23,12 +25,12 @@ Describe "VSTeam" {
       description = 'team description'
    }   
 
+   Mock _hasProjectCacheExpired { return $false }
+   
    Context "Add-VSTeam" {
       Context "Services" {
          Mock _getInstance { return 'https://dev.azure.com/test' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
          Context 'Add-VSTeam with team name only' {
             Mock Invoke-RestMethod { return $singleResult }
@@ -64,8 +66,6 @@ Describe "VSTeam" {
       }
 
       Context "Server" {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-
          Mock _useWindowsAuthenticationOnPremise { return $true }
 
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }

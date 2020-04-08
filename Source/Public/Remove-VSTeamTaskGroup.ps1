@@ -5,7 +5,7 @@ function Remove-VSTeamTaskGroup {
       [string[]] $Id,
 
       [switch] $Force,
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
 
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]

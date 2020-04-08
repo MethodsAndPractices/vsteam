@@ -3,7 +3,8 @@ function Get-VSTeamServiceEndpoint {
    param(
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $id,
-      [Parameter(Mandatory=$true, Position = 0 )]
+      
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
@@ -21,11 +22,11 @@ function Get-VSTeamServiceEndpoint {
       else {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-               -Version $(_getApiVersion DistributedTask)
+            -Version $(_getApiVersion DistributedTask)
 
-               # Apply a Type Name so we can use custom format view and custom type extensions
+         # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {
-               _applyTypesToServiceEndpoint -item $item
+            _applyTypesToServiceEndpoint -item $item
          }
 
          return $resp.value

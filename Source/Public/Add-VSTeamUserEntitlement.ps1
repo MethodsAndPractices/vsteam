@@ -17,17 +17,15 @@ function Add-VSTeamUserEntitlement {
       [ValidateSet('eligible', 'enterprise', 'none', 'platforms', 'premium', 'professional', 'testProfessional', 'ultimate')]
       [string]$MSDNLicenseType = "none",
 
-      [Parameter( Position = 0 )]
+      [Parameter(Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
-    )
+      [string] $ProjectName
+   )
    process {
-      # This will throw if this account does not support MemberEntitlementManagement
-      _hasAccount
-      if (-not [VSTeamVersions]::MemberEntitlementManagement) {
-            throw 'This account does not support Member Entitlement.'
-      }
+      # Thi swill throw if this account does not support MemberEntitlementManagement
+      _supportsMemberEntitlementManagement
+
       $obj = @{
          accessLevel         = @{
             accountLicenseType = $License

@@ -6,7 +6,7 @@ function Remove-VSTeamPolicy {
 
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
@@ -23,7 +23,7 @@ function Remove-VSTeamPolicy {
             catch {
                _handleException $_
             }
-            }
-        }
-    }
+         }
+      }
+   }
 }

@@ -9,7 +9,7 @@
       [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
       [string] $resourceType,
 
-      [Parameter( Position = 0 )]
+      [Parameter(Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
@@ -48,7 +48,7 @@
 
          $resp = _callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json" -Body $body
 
-         Write-Verbose $($resp | ConvertTo-Json -Depth 99)
+         Write-Verbose $($resp | ConvertTo-Json -Depth 99)         
 
          Write-Output ($resp |
             Select-Object -ExpandProperty dataProviders |

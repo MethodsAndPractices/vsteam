@@ -12,24 +12,21 @@ function Set-VSTeamApproval {
 
       [string] $Comment,
 
-      # Forces the command without confirmation
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
 
    process {
-      Write-Debug 'Set-VSTeamApproval Process'
-
       $body = '{ "status": "' + $status + '", "approver": "' + $approver + '", "comments": "' + $comment + '" }'
+      
       Write-Verbose $body
 
       foreach ($item in $id) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Approval Status")) {
-            Write-Debug 'Set-VSTeamApproval Call the REST API'
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource approvals `

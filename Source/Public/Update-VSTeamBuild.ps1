@@ -13,7 +13,7 @@ function Update-VSTeamBuild {
 
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
@@ -27,18 +27,19 @@ function Update-VSTeamBuild {
          $items = New-Object System.Collections.ArrayList
 
          if ($null -ne $KeepForever) {
-               $items.Add("`"keepForever`": $($KeepForever.ToString().ToLower())") > $null
+            $items.Add("`"keepForever`": $($KeepForever.ToString().ToLower())") > $null
          }
 
          if ($null -ne $buildNumber -and $buildNumber.Length -gt 0) {
-               $items.Add("`"buildNumber`": `"$BuildNumber`"") > $null
+            $items.Add("`"buildNumber`": `"$BuildNumber`"") > $null
          }
 
          if ($null -ne $items -and $items.count -gt 0) {
-               $body += ($items -join ", ")
+            $body += ($items -join ", ")
          }
 
          $body += '}'
+         
          # Call the REST API
          _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -Id $Id `
             -Method Patch -ContentType 'application/json' -body $body -Version $(_getApiVersion Build) | Out-Null

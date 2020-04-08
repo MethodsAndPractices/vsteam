@@ -12,12 +12,13 @@ function Update-VSTeamTaskGroup {
 
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
-   process {
+   
+   Process {
       if ($Force -or $pscmdlet.ShouldProcess("Update Task Group")) {
          if ($InFile) {
             $resp = _callAPI -Method Put -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -InFile $InFile -ContentType 'application/json' -Id $Id
@@ -28,5 +29,5 @@ function Update-VSTeamTaskGroup {
       }
 
       return $resp
-    }
+   }
 }

@@ -4,14 +4,13 @@ function Get-VSTeamBuildTag {
       [Alias('BuildID')]
       [int] $Id,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       # Call the REST API
-
       $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
          -Version $(_getApiVersion Build)
 

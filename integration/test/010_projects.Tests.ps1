@@ -21,7 +21,7 @@ if ($null -eq $env:TEAM_CIBUILD) {
 ##############################################################
 
 Set-VSTeamAPIVersion -Target $env:API_VERSION
-$env:testing=$true
+
 InModuleScope VSTeam {
    Describe 'VSTeam Integration Tests' -Tag 'integration' {
       BeforeAll {

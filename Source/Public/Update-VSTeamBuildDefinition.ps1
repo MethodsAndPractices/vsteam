@@ -10,10 +10,9 @@ function Update-VSTeamBuildDefinition {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'JSON')]
       [string] $BuildDefinition,
 
-      # Forces the command without confirmation
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
@@ -24,10 +23,10 @@ function Update-VSTeamBuildDefinition {
          # Call the REST API
 
          if ($InFile) {
-               _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -InFile $InFile -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -InFile $InFile -ContentType 'application/json' | Out-Null
          }
          else {
-               _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -Body $BuildDefinition -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -Body $BuildDefinition -ContentType 'application/json' | Out-Null
          }
       }
    }

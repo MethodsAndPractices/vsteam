@@ -1,21 +1,22 @@
 function Get-VSTeamGitRef {
    [CmdletBinding()]
    param (
-      [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position=0)]
+      [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Alias('Id')]
       [guid] $RepositoryID,
-      [Parameter()]
+
       [string] $Filter,
-      [Parameter()]
+
       [string] $FilterContains,
-      [Parameter()]
+
       [int] $Top,
-      [Parameter()]
+
       [string] $ContinuationToken,
-      [Parameter(Mandatory=$true, Position = 1 )]
+
+      [Parameter(Mandatory = $true, Position = 1)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       try {

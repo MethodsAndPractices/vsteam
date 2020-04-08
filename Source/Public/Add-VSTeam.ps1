@@ -3,18 +3,20 @@ function Add-VSTeam {
    param(
       [Parameter(Mandatory = $true, Position = 1)]
       [Alias('TeamName')]
-      [string]$Name,
-      [string]$Description = '',
-      [Parameter(Mandatory=$true, Position = 0)]
+      [string] $Name,
+
+      [string] $Description = '',
+      
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
       # Call the REST API
-      $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
+      $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -NoProject `
          -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Core)
 
       $team = [VSTeamTeam]::new($resp, $ProjectName)

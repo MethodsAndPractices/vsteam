@@ -1,16 +1,25 @@
-class ReleaseDefinitionCompleter : System.Management.Automation.IArgumentCompleter {
-  [System.Collections.Generic.IEnumerable[System.Management.Automation.CompletionResult]] CompleteArgument(
-        [string]$CommandName, [string]$ParameterName, [string]$WordToComplete,
-        [System.Management.Automation.Language.CommandAst]$CommandAst, [System.Collections.IDictionary] $FakeBoundParameters
-  )    {
-        $results = [System.Collections.Generic.List[System.Management.Automation.CompletionResult]]::new()
-        if ($Global:PSDefaultParameterValues["*:projectName"]){
-            foreach ($r in (Get-VSTeamReleaseDefinition -ProjectName $Global:PSDefaultParameterValues["*:projectName"]).name ) {
-                if  ($r -like "*$WordToComplete*") {
-                        $results.Add([System.Management.Automation.CompletionResult]::new($r))
-                }
+using namespace System.Collections
+using namespace System.Collections.Generic
+using namespace System.Management.Automation
+
+class ReleaseDefinitionCompleter : IArgumentCompleter {
+   [IEnumerable[CompletionResult]] CompleteArgument(
+      [string] $CommandName,
+      [string] $ParameterName,
+      [string] $WordToComplete,
+      [Language.CommandAst] $CommandAst,
+      [IDictionary] $FakeBoundParameters
+   ) {
+      $results = [List[CompletionResult]]::new()
+
+      if (_getDefaultProject) {
+         foreach ($r in (Get-VSTeamReleaseDefinition -ProjectName $(_getDefaultProject)).name) {
+            if ($r -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new($r))
             }
-        }
-        return $results
-  }
+         }
+      }
+
+      return $results
+   }
 }

@@ -12,10 +12,10 @@ function Add-VSTeamVariableGroup {
       [Parameter(ParameterSetName = 'ByBody', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Body,
 
-      [Parameter( Position = 0 )]
+      [Parameter(Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    DynamicParam {
       $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
@@ -32,13 +32,14 @@ function Add-VSTeamVariableGroup {
 
       return $dp
    }
+
    Process {
-   if ([string]::IsNullOrWhiteSpace($Body))
+      if ([string]::IsNullOrWhiteSpace($Body))
       {
          $bodyAsHashtable = @{
          name        = $Name
          description = $Description
-         variables    = $Variables
+         variables   = $Variables
       }
       if ([VSTeamVersions]::Version -ne "TFS2017") {
          $Type = $PSBoundParameters['Type']
@@ -49,6 +50,7 @@ function Add-VSTeamVariableGroup {
                $bodyAsHashtable.Add("providerData", $ProviderData)
          }
       }
+
          $body = $bodyAsHashtable | ConvertTo-Json
       }
 

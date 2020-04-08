@@ -3,14 +3,17 @@ function Add-VSTeamBuildTag {
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [string[]] $Tags,
+      
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
       [int[]] $Id,
+
       [switch] $Force,
-      [Parameter(Mandatory=$true, Position = 0 )]
+      
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       foreach ($item in $id) {
@@ -18,7 +21,7 @@ function Add-VSTeamBuildTag {
             foreach ($tag in $tags) {
                # Call the REST API
                _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
-                  -Method Put -Querystring @{tag = $tag} -Version $(_getApiVersion Build) | Out-Null
+                  -Method Put -Querystring @{tag = $tag } -Version $(_getApiVersion Build) | Out-Null
             }
          }
       }

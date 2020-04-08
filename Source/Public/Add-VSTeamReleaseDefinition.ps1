@@ -4,14 +4,13 @@ function Add-VSTeamReleaseDefinition {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $inFile,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
+   
    process {
-      Write-Debug 'Add-VSTeamReleaseDefinition Process'
-
       $resp = _callAPI -Method Post -subDomain vsrm -Area release -Resource definitions -ProjectName $ProjectName `
          -Version $(_getApiVersion Release) -inFile $inFile -ContentType 'application/json'
 

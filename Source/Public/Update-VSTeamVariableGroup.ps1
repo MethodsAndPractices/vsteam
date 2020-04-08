@@ -18,11 +18,12 @@ function Update-VSTeamVariableGroup {
 
       [switch] $Force,
 
-      [Parameter(Mandatory=$true, Position = 0 )]
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName
    )
+
    DynamicParam {
       $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
@@ -38,13 +39,15 @@ function Update-VSTeamVariableGroup {
 
       return $dp
    }
+
    Process {
-      if ([string]::IsNullOrWhiteSpace($Body))  {
+      if ([string]::IsNullOrWhiteSpace($Body)) {
          $bodyAsHashtable = @{
             name        = $Name
             description = $Description
-            variables    = $Variables
+            variables   = $Variables
          }
+      
          if ([VSTeamVersions]::Version -ne "TFS2017") {
             $Type = $PSBoundParameters['Type']
             $bodyAsHashtable.Add("type", $Type)
@@ -54,12 +57,14 @@ function Update-VSTeamVariableGroup {
                $bodyAsHashtable.Add("providerData", $ProviderData)
             }
          }
+      
          $body = $bodyAsHashtable | ConvertTo-Json
       }
+
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Variable Group")) {
          # Call the REST API
          $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'variablegroups' -Id $Id  `
-               -Method Put -ContentType 'application/json' -body $body -Version $(_getApiVersion VariableGroups)
+            -Method Put -ContentType 'application/json' -body $body -Version $(_getApiVersion VariableGroups)
 
          Write-Verbose $resp
 

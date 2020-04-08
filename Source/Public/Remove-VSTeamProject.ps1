@@ -3,12 +3,13 @@ function Remove-VSTeamProject {
    param(
       [switch] $Force,
 
-      [Parameter(Mandatory=$true)]
+      [Parameter(Mandatory = $true)]
       [Alias('ProjectName')]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $Name
    )
+   
    Process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["Name"]

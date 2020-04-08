@@ -1,17 +1,25 @@
-class WorkItemTypeCompleter : System.Management.Automation.IArgumentCompleter {
-  [System.Collections.Generic.IEnumerable[System.Management.Automation.CompletionResult]] CompleteArgument(
-        [string]$CommandName, [string]$ParameterName, [string]$WordToComplete,
-        [System.Management.Automation.Language.CommandAst]$CommandAst, [System.Collections.IDictionary] $FakeBoundParameters
-  )    {
-        $results = [System.Collections.Generic.List[System.Management.Automation.CompletionResult]]::new()
-        if ($Global:PSDefaultParameterValues["*:projectName"]){
-            foreach ($w in (_getWorkItemTypes -ProjectName $Global:PSDefaultParameterValues["*:projectName"])) {
-                if  ($w -like "*$WordToComplete*") {
-                        $results.Add([System.Management.Automation.CompletionResult]::new($w))
-                }
-            }
-        }
-        return $results
-  }
-}
+using namespace System.Collections
+using namespace System.Collections.Generic
+using namespace System.Management.Automation
 
+class WorkItemTypeCompleter : IArgumentCompleter {
+   [IEnumerable[CompletionResult]] CompleteArgument(
+      [string] $CommandName, 
+      [string] $ParameterName,
+      [string] $WordToComplete,
+      [Language.CommandAst] $CommandAst,
+      [IDictionary] $FakeBoundParameters
+   ) {
+      $results = [List[CompletionResult]]::new()
+
+      if (_getDefaultProject) {
+         foreach ($w in (_getWorkItemTypes -ProjectName $(_getDefaultProject))) {
+            if ($w -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new($w))
+            }
+         }
+      }
+      
+      return $results
+   }
+}

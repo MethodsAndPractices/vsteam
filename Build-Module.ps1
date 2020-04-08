@@ -81,22 +81,14 @@ if ($buildHelp.IsPresent) {
 }
 
 Write-Output 'Publishing about help files'
-Copy-Item -Path ./Source/en-US       -Destination "$output/" -Recurse   -Force
-Copy-Item -Path ./Source/VSTeam.psd1 -Destination "$output/VSTeam.psd1" -Force
+Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
+Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
-
-Get-Content -Path ./Source/VSTeam.psm1 | Out-File -Append -FilePath "$output/VSTeam.psm1" -Encoding ascii
-<#Write-Output 'Updating Functions To Export'
-$newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-      ForEach-Object -Process { Write-Output "'$_'" }) -join ','
-#>
-
-$PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
 Write-Output 'Updating Functions To Export'
-$FunctionsToExport  = @()
-$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"})
-$FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName
-Update-ModuleManifest -Path "$output/VSTeam.psd1" -FunctionsToExport $FunctionsToExport
+$newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
+   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+
+(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
 
 Write-Output "Publish complete to $output"
 
@@ -108,8 +100,8 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
    if ((Get-Module VSTeam)) {
       Remove-Module VSTeam
    }
-   $env:testing = $true
-   Import-Module "$output/VSTeam.psd1"  -Global -Force
+
+   Import-Module "$output/VSTeam.psd1" -Force
    Set-VSTeamAlias
 }
 
@@ -120,7 +112,7 @@ if ($runTests.IsPresent) {
    }
 
    $pesterArgs = @{
-      Script       = '.\unit'
+      Script       = '.\unit'  
       OutputFile   = 'test-results.xml'
       OutputFormat = 'NUnitXml'
       Show         = 'Fails'
@@ -128,7 +120,7 @@ if ($runTests.IsPresent) {
    }
 
    if ($codeCoverage.IsPresent) {
-      $pesterArgs.CodeCoverage = "$outputDir\*.ps1"
+      $pesterArgs.CodeCoverage = "./Source/**/*.ps1"
       $pesterArgs.CodeCoverageOutputFile = "coverage.xml"
       $pesterArgs.CodeCoverageOutputFileFormat = 'JaCoCo'
    }
@@ -144,7 +136,7 @@ if ($runTests.IsPresent) {
       $pesterArgs.PassThru = $true
    }
 
-   Invoke-Pester @pesterArgs
+   Invoke-Pester @pesterArgs 
 }
 
 # Run this last so the results can be seen even if tests were also run

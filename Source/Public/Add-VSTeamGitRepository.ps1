@@ -3,10 +3,11 @@ function Add-VSTeamGitRepository {
    param(
       [parameter(Mandatory = $true)]
       [string] $Name,
-      [Parameter(Mandatory=$true, Position = 0 )]
+
+      [Parameter(Mandatory = $true, Position = 0)]
       [ValidateProjectAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       $body = '{"name": "' + $Name + '"}'
@@ -14,7 +15,7 @@ function Add-VSTeamGitRepository {
       try {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' `
-               -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
+            -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property

@@ -7,7 +7,7 @@ function Get-VSTeamFeed {
    )
 
    process {
-      # This will throw if this account does not support feeds
+      # Thi swill throw if this account does not support feeds
       _supportsFeeds
 
       if ($id) {

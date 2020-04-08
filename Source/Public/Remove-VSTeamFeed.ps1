@@ -5,7 +5,6 @@ function Remove-VSTeamFeed {
       [Alias('FeedId')]
       [string[]] $Id,
 
-      # Forces the command without confirmation
       [switch] $Force
    )
    process {
