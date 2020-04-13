@@ -10,19 +10,19 @@ function Update-VSTeamReleaseDefinition {
       [switch] $Force,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
 
    Process {
       if ($Force -or $pscmdlet.ShouldProcess('', "Update Release Definition")) {
          # Call the REST API
          if ($InFile) {
-            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $([VSTeamVersions]::Release) -InFile $InFile -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $(_getApiVersion Release) -InFile $InFile -ContentType 'application/json' | Out-Null
          }
          else {
-            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $([VSTeamVersions]::Release) -Body $ReleaseDefinition -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -SubDomain vsrm -Area Release -Resource definitions -Version $(_getApiVersion Release) -Body $ReleaseDefinition -ContentType 'application/json' | Out-Null
          }
       }
    }

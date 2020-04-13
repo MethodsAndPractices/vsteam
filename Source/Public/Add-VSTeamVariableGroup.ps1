@@ -13,7 +13,7 @@ function Add-VSTeamVariableGroup {
       [string] $Body,
 
       [Parameter(Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )

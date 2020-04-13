@@ -11,9 +11,9 @@ function Remove-VSTeamBuildTag {
       [switch] $Force,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    
    process {

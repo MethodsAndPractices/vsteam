@@ -8,9 +8,9 @@ function Get-VSTeamTaskGroup {
       [string] $Name,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
 
    process {

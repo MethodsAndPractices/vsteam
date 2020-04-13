@@ -8,9 +8,9 @@ function Remove-VSTeam {
       [switch]$Force,
 
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    
    process {

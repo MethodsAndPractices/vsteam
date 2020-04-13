@@ -8,10 +8,11 @@ function Add-VSTeamProject {
 
       [switch] $TFVC,
 
-      [ValidateProcessAttribute()]
+      [ProcessValidateAttribute()]
       [ArgumentCompleter([ProcessCompleter])]
       [string] $ProcessTemplate
    )
+   
    process {
       if ($TFVC.IsPresent) {
          $srcCtrl = "Tfvc"

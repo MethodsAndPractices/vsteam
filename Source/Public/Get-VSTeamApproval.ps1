@@ -10,7 +10,7 @@ function Get-VSTeamApproval {
       [string] $AssignedToFilter,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )

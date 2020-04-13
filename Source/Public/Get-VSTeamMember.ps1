@@ -13,9 +13,9 @@ function Get-VSTeamMember {
       [string] $TeamId,
 
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true )]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       $resp = _callAPI -Id "$TeamId/members" -Area 'projects' -Resource "$ProjectName/teams" -Version $(_getApiVersion Core) `

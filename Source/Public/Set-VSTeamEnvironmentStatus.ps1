@@ -20,9 +20,9 @@ function Set-VSTeamEnvironmentStatus {
       [switch] $Force,
 
       [Parameter(Position = 1)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter]) ]
-      $ProjectName
+      [string] $ProjectName
    )
 
    process {

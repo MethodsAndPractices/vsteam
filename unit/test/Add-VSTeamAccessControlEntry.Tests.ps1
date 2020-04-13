@@ -14,6 +14,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Set-VSTeamDefaultProject.ps1"
 . "$here/../../Source/Public/Get-VSTeamSecurityNamespace.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 
@@ -29,8 +31,7 @@ Describe 'VSTeamAccessControlEntry' {
       $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value[0])
 
       ## Arrange
-      # This value being left around can cause other tests to fail.
-      AfterAll { $Global:PSDefaultParameterValues.Remove("*:projectName") }
+      Mock _getDefaultProject { return "Testing" }
 
       # Set the account to use for testing. A normal user would do this using the
       # Set-VSTeamAccount function.
@@ -65,12 +66,6 @@ Describe 'VSTeamAccessControlEntry' {
       }
 
       It 'by SecurityNamespaceId should return ACEs' {
-         # Even with a default set this URI should not have the project added.
-         # So set the default project to Testing here and test below that the
-         # project is NOT added to the Uri.
-         ## Arange
-         Set-VSTeamDefaultProject -Project Testing
-
          ## Act
          Add-VSTeamAccessControlEntry -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Descriptor abc -Token xyz -AllowMask 12 -DenyMask 15
 

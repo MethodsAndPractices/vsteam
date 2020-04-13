@@ -31,7 +31,7 @@ function Add-VSTeamServiceFabricEndpoint {
       [bool] $useWindowsSecurity,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )

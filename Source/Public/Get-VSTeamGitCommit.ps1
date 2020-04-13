@@ -112,7 +112,7 @@ function Get-VSTeamGitCommit {
       [string] $User,
       
       [Parameter(Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )

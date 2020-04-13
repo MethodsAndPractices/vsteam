@@ -8,7 +8,7 @@ function Add-VSTeamTaskGroup {
       [string] $Body,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )

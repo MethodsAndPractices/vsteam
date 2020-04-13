@@ -20,21 +20,15 @@ function Add-VSTeamWorkItem {
       [hashtable] $AdditionalFields,
 
       [Parameter(Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName,
+      
       [Parameter(Mandatory = $true)]
-
+      [WorkItemTypeValidateAttribute()]
       [ArgumentCompleter([WorkItemTypeCompleter])]
       [string] $WorkItemType
    )
-   begin {
-      $resp = _callApi -ur ('{0}/{1}/_apis/wit/workitemtypes?api-version={2}' -f (_getInstance), $ProjectName , [VSTeamVersions]::Core)
-      $wiTypes = ($resp.Replace('"":', '"_end":') | ConvertFrom-Json).value.name
-      if ($WorkItemType -notin $wiTypes) {
-         throw ("$workItemType is not a valid work item type. Valid types are " + ($wiTypes -join ', '))
-      }
-   }
 
    Process {
       # The type has to start with a $

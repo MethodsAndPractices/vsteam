@@ -21,7 +21,7 @@ function Add-VSTeamKubernetesEndpoint {
       [switch] $generatePfx,
         
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )

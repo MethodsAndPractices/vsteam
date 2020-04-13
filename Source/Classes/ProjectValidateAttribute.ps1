@@ -1,9 +1,10 @@
 using namespace System.Management.Automation
 
-class ValidateProjectAttribute :  ValidateArgumentsAttribute {
+class ProjectValidateAttribute : ValidateArgumentsAttribute {
    [void] Validate(
       [object] $arguments,
-      [EngineIntrinsics]$EngineIntrinsics) {
+      [EngineIntrinsics] $EngineIntrinsics) {
+     
       if (_hasProjectCacheExpired) {
          [VSTeamProjectCache]::projects = _getProjects
          [VSTeamProjectCache]::timestamp = (Get-Date).Minute

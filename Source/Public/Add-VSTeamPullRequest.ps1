@@ -26,7 +26,7 @@ function Add-VSTeamPullRequest {
       [switch] $Force,
 
       [Parameter(Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )

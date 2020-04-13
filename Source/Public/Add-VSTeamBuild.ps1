@@ -11,7 +11,7 @@ function Add-VSTeamBuild {
       [hashtable] $BuildParameters,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName,
 
@@ -31,7 +31,7 @@ function Add-VSTeamBuild {
       }
       elseif ($BuildDefinitionName) {
          # Find the BuildDefinition id from the name
-         $id = (Get-VSTeamBuildDefinition  -Filter $BuildDefinitionName  -Type All).id
+         $id = (Get-VSTeamBuildDefinition -ProjectName "$ProjectName" -Filter $BuildDefinitionName  -Type All).id
          if (-not $id) {
             throw "'$BuildDefinitionName' is not a valid build definition. Use Get-VSTeamBuildDefinition to get a list of build names"  ; return
          }

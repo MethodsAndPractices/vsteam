@@ -13,8 +13,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamWiql' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
    Mock _getInstance { return 'https://dev.azure.com/test' }
       
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName

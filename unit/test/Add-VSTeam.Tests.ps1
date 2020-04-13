@@ -6,82 +6,48 @@ Import-Module SHiPS
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-. "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamTeam.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ValidateProjectAttribute.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 
-
 Describe "VSTeam" {
-   $singleResult = [PSCustomObject]@{
-      id          = '6f365a7143e492e911c341451a734401bcacadfd'
-      name        = 'refs/heads/master'
-      description = 'team description'
-   }   
-
-   Mock _hasProjectCacheExpired { return $false }
-   
    Context "Add-VSTeam" {
-      Context "Services" {
-         Mock _getInstance { return 'https://dev.azure.com/test' }
-         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+      $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
+      
+      Mock _callAPI { return $singleResult }
+      Mock _hasProjectCacheExpired { return $false }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
-         Context 'Add-VSTeam with team name only' {
-            Mock Invoke-RestMethod { return $singleResult }
+      It 'with team name only should create a team' {
+         Add-VSTeam -ProjectName Test -TeamName "TestTeam"
 
-            It 'Should create a team' {
-               Add-VSTeam -ProjectName Test -TeamName "TestTeam"
-
-               $expectedBody = '{ "name": "TestTeam", "description": "" }'
-
-               Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                  $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams?api-version=$(_getApiVersion Core)" -and
-                  $Method -eq "Post" -and
-                  $Body -eq $expectedBody
-               }
-            }
-         }
-
-         Context 'Add-VSTeam with team name and description' {
-            Mock Invoke-RestMethod { return $singleResult }
-
-            It 'Should create a team' {
-               Add-VSTeam -ProjectName Test -TeamName "TestTeam" -Description "Test Description"
-
-               $expectedBody = '{ "name": "TestTeam", "description": "Test Description" }'
-
-               Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                  $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams?api-version=$(_getApiVersion Core)" -and
-                  $Method -eq "Post" -and
-                  $Body -eq $expectedBody
-               }
-            }
+         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+            $NoProject -eq $true -and
+            $Area -eq 'projects' -and
+            $Resource -eq 'Test' -and
+            $Method -eq 'Post' -and
+            $ContentType -eq 'application/json' -and
+            $Body -eq '{ "name": "TestTeam", "description": "" }'
+            $Version -eq '1.0-unitTests'
          }
       }
 
-      Context "Server" {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
+      It 'with team name and description should create a team' {
+         Add-VSTeam -ProjectName Test -TeamName "TestTeam" -Description "Test Description"
 
-         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
-
-         Mock Invoke-RestMethod { return $singleResult }
-
-         It 'with team name only on TFS local Auth should create a team' {
-            Add-VSTeam -ProjectName Test -TeamName "TestTeam"
-
-            $expectedBody = '{ "name": "TestTeam", "description": "" }'
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams?api-version=$(_getApiVersion Core)" -and
-               $Method -eq "Post" -and
-               $Body -eq $expectedBody
-            }
+         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+            $NoProject -eq $true -and
+            $Area -eq 'projects' -and
+            $Resource -eq 'Test' -and
+            $Method -eq 'Post' -and
+            $ContentType -eq 'application/json' -and
+            $Body -eq '{ "name": "TestTeam", "description": "Test Description" }'
+            $Version -eq '1.0-unitTests'
          }
       }
    }

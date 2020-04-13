@@ -14,9 +14,9 @@ function Get-VSTeamGroup {
       [string] $Descriptor,
 
       [Parameter(ParameterSetName = 'ListByProjectName', Mandatory = $true)]
-      [ValidateUncachedProjectAttribute()]
+      [UncachedProjectValidateAttribute()]
       [ArgumentCompleter([UncachedProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    
    process {

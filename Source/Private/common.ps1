@@ -139,7 +139,7 @@ function _buildRequestURI {
       [string]$version,
       [string]$subDomain,
       [object]$queryString,
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       $ProjectName,
       [switch]$UseProjectId,
       [switch]$NoProject
@@ -365,6 +365,10 @@ function _hasProjectCacheExpired {
    return $([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute
 }
 
+function _hasProcessTemplateCacheExpired {
+   return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute
+}
+
 function _getProjects {
    if (-not $(_getInstance)) {
       Write-Output @()
@@ -487,7 +491,7 @@ function _getProcesses {
       $query = @{ }
       $query['stateFilter'] = 'All'
       $query['$top'] = '9999'
-      $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query
+      $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
 
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
@@ -539,7 +543,7 @@ function _buildProcessNameDynamicParam {
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
    }
    else {
-      $arrSet = [VSTeamProcessCache]::projects
+      $arrSet = [VSTeamProcessCache]::processes
    }
 
    if ($arrSet) {

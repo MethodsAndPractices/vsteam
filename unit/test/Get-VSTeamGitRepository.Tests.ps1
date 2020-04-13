@@ -10,6 +10,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamTeams.ps1"
 . "$here/../../Source/Classes/VSTeamRepositories.ps1"
@@ -94,8 +96,6 @@ Describe "VSTeamGitRepository" {
    ## these tests will fail. The API can be called with or without
    ## a project and these tests are written to test without one. 
    Clear-VSTeamDefaultProject
-
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
    Mock Invoke-RestMethod {
       # Write-Host "results $Uri"

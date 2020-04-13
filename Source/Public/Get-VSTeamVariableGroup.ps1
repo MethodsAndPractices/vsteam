@@ -8,9 +8,9 @@ function Get-VSTeamVariableGroup {
       [string] $Name,
 
       [Parameter(Position = 1)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter]) ]
-      $ProjectName
+      [string] $ProjectName
    )
 
    process {

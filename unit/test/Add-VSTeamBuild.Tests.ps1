@@ -31,6 +31,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamPool.ps1"
 . "$here/../../Source/Classes/VSTeamQueue.ps1"
 . "$here/../../Source/Classes/VSTeamBuildDefinition.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/TeamQueueCompleter.ps1"
+. "$here/../../Source/Classes/BuildDefinitionCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/Get-VSTeamQueue.ps1"
@@ -48,14 +52,6 @@ Describe 'VSTeamBuild' {
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
 
       Context 'Services' {
-         ## Arrange
-         BeforeAll {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
-         }
-
-         # Load the mocks to create the project name dynamic parameter
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
          # Set the account to use for testing. A normal user would do this
          # using the Set-VSTeamAccount function.
          Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
@@ -70,7 +66,7 @@ Describe 'VSTeamBuild' {
             ## Assert
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               ($Body | ConvertFrom-Json).definition.id -eq 699 -and
+               $Body -like "*699*" -and 
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
@@ -82,7 +78,7 @@ Describe 'VSTeamBuild' {
             ## Assert
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               ($Body | ConvertFrom-Json).definition.id -eq 2 -and
+               $Body -like "*2*" -and 
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
@@ -94,8 +90,8 @@ Describe 'VSTeamBuild' {
             ## Assert
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               ($Body | ConvertFrom-Json).sourceBranch -eq 'refs/heads/dev' -and
+               $Body -like "*2*" -and 
+               $Body -like "*refs/heads/dev*" -and 
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
@@ -107,8 +103,8 @@ Describe 'VSTeamBuild' {
             ## Assert
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               (($Body | ConvertFrom-Json).parameters | ConvertFrom-Json).'system.debug' -eq 'true' -and
+               $Body -like "*2*" -and 
+               $Body -like "*true*" -and 
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds?api-version=$(_getApiVersion Build)"
             }
          }
@@ -116,14 +112,8 @@ Describe 'VSTeamBuild' {
 
       Context 'Server' {
          ## Arrange
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-
-         AfterAll {
-            $Global:PSDefaultParameterValues.Remove("*:projectName")
-         }
 
          Mock Invoke-RestMethod {
             # Write-Host $args
@@ -139,58 +129,43 @@ Describe 'VSTeamBuild' {
          Mock Get-VSTeamBuildDefinition { return @{ name = "MyBuildDef" } }
 
          It 'by id on TFS local Auth should add build' {
-            ## Arrange
-            $Global:PSDefaultParameterValues["*:projectName"] = 'Project'
-
             ## Act
             Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue
 
             ## Assert
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               # The write-host below is great for seeing how many ways the mock is called.
-               # Write-Host "Assert Mock $Uri"
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$(_getApiVersion Build)" -and
-               ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               ($Body | ConvertFrom-Json).queue.id -eq 3
+               $Body -like "*2*" -and 
+               $Body -like "*3*"
             }
          }
 
          It 'with parameters on TFS local Auth should add build' {
-            ## Arrange
-            $Global:PSDefaultParameterValues["*:projectName"] = 'Project'
-
             ## Act
             Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -BuildParameters @{'system.debug' = 'true' }
 
             ## Assert
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               # The write-host below is great for seeing how many ways the mock is called.
-               # Write-Host "Assert Mock $Uri"
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$(_getApiVersion Build)" -and
-               ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               ($Body | ConvertFrom-Json).queue.id -eq 3 -and
+               $Body -like "*2*" -and 
+               $Body -like "*3*" -and 
                $Body -like "*system.debug*"
             }
          }
 
          It 'with source branch on TFS local auth should add build' {
-            ## Arrange
-            $Global:PSDefaultParameterValues["*:projectName"] = 'Project'
-
             ## Act
             Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -SourceBranch refs/heads/dev
 
             ## Assert
             # Call to queue build.
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               # The write-host below is great for seeing how many ways the mock is called.
-               # Write-Host "Assert Mock $Uri"
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds?api-version=$(_getApiVersion Build)" -and
-               ($Body | ConvertFrom-Json).definition.id -eq 2 -and
-               ($Body | ConvertFrom-Json).queue.id -eq 3 -and
-               ($Body | ConvertFrom-Json).sourceBranch -eq 'refs/heads/dev'
+               $Body -like "*2*" -and 
+               $Body -like "*3*" -and 
+               $Body -like "*refs/heads/dev*"
             }
          }
       }

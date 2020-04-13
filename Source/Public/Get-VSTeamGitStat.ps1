@@ -20,10 +20,11 @@ function Get-VSTeamGitStat {
       [Parameter(ParameterSetName = 'ByVersion', Mandatory = $true)]
       [ValidateSet("branch", "commit", "tag")]
       [string] $VersionType,
+      
       [Parameter(Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
 
    process {

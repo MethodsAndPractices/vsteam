@@ -6,18 +6,18 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 
 Describe 'VSTeamBuildDefinition' {
    Context 'Add-VSTeamBuildDefinition' {
       ## Arrange
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
       $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
 
       Mock Invoke-RestMethod { return $resultsVSTS }
-
+      Mock _getProjects { return @() }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
 
       Context 'Services' {

@@ -20,16 +20,17 @@ function Get-VSTeamBuildDefinition {
       [int] $Revision,
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
-      [switch]$JSON,
+      [switch] $JSON,
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-      [switch]$raw,
+      [switch] $raw,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )
+   
    process {
       if ($id) {
          foreach ($item in $id) {

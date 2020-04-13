@@ -48,8 +48,6 @@ Describe "VSTeamGitRepository" {
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-
    Context 'Show-VSTeamGitRepository' {
       Mock Show-Browser
       Mock _getInstance { return 'https://dev.azure.com/test' }

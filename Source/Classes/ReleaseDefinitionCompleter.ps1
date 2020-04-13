@@ -8,14 +8,26 @@ class ReleaseDefinitionCompleter : IArgumentCompleter {
       [string] $ParameterName,
       [string] $WordToComplete,
       [Language.CommandAst] $CommandAst,
-      [IDictionary] $FakeBoundParameters
-   ) {
+      [IDictionary] $FakeBoundParameters) {
+
       $results = [List[CompletionResult]]::new()
 
-      if (_getDefaultProject) {
-         foreach ($r in (Get-VSTeamReleaseDefinition -ProjectName $(_getDefaultProject)).name) {
-            if ($r -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new($r))
+      # If the user has explictly added the -ProjectName parameter
+      # to the command use that instead of the default project.
+      $projectName = $FakeBoundParameters['ProjectName']
+
+      # Only use the default project if the ProjectName parameter was
+      # not used
+      if (-not $projectName) {
+         $projectName = _getDefaultProject
+      }
+
+      # If there is no projectName by this point just return a empty
+      # list.
+      if ($projectName) {
+         foreach ($r in (Get-VSTeamReleaseDefinition -ProjectName $projectName)) {
+            if ($r.name -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new($r.name))
             }
          }
       }

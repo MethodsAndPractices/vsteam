@@ -5,9 +5,9 @@ function Set-VSTeamDefaultProject {
       [switch] $Force,
       
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $Project
+      [string] $Project
    )
    DynamicParam {
       $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary

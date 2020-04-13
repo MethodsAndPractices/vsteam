@@ -6,9 +6,9 @@ function Show-VSTeamWorkItem {
       [int] $Id,
       
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    
    process {

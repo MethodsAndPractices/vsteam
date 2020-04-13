@@ -11,7 +11,7 @@ function Add-VSTeamServiceEndpoint {
       [hashtable] $object,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )

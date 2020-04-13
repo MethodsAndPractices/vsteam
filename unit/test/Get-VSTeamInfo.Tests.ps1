@@ -12,8 +12,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamInfo' {
    ## Arrange
-   . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
-
    Context 'Get-VSTeamInfo' {
       AfterAll {
          $Global:PSDefaultParameterValues.Remove("*:projectName")

@@ -1,9 +1,10 @@
 using namespace System.Management.Automation
 
-class ValidateUncachedProjectAttribute :  ValidateArgumentsAttribute {
+class UncachedProjectValidateAttribute :  ValidateArgumentsAttribute {
    [void] Validate(
       [object] $arguments,
       [EngineIntrinsics] $EngineIntrinsics) {
+      
       [VSTeamProjectCache]::projects = _getProjects
       [VSTeamProjectCache]::timestamp = (Get-Date).Minute
         
@@ -12,6 +13,5 @@ class ValidateUncachedProjectAttribute :  ValidateArgumentsAttribute {
             "'$arguments' is not a valid project. Valid projects are: '" +
             ([VSTeamProjectCache]::projects -join "', '") + "'"  )
       }
-      return
    }
 }

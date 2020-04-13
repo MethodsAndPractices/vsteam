@@ -6,10 +6,10 @@ function Show-VSTeamProject {
       [string] $Id,
       
       [Parameter(ParameterSetName = 'ByName', Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter]) ]
       [Alias('ProjectName')]
-      $Name
+      [string] $Name
    )
    
    process {

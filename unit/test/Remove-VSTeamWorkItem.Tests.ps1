@@ -17,9 +17,7 @@ Describe 'VSTeamWorkItem' {
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
       
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
-
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }  
 
    $obj = @{
       id  = 47

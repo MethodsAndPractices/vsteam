@@ -7,9 +7,9 @@ function Remove-VSTeamReleaseDefinition {
       [switch] $Force,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    
    process {

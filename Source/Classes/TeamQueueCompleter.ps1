@@ -8,24 +8,30 @@ class TeamQueueCompleter : IArgumentCompleter {
       [string] $ParameterName,
       [string] $WordToComplete,
       [Language.CommandAst] $CommandAst,
-      [IDictionary] $FakeBoundParameters
-   ) {
+      [IDictionary] $FakeBoundParameters) {
+
       $results = [List[CompletionResult]]::new()
-      
-      $projName = $FakeBoundParameters['ProjectName'] 
-      
-      if (-not $projName -and $Global:PSDefaultParameterValues["*:projectName"]) {
-         $projName = $Global:PSDefaultParameterValues["*:projectName"]
+
+      # If the user has explictly added the -ProjectName parameter
+      # to the command use that instead of the default project.
+      $projectName = $FakeBoundParameters['ProjectName']
+
+      # Only use the default project if the ProjectName parameter was
+      # not used
+      if (-not $projectName) {
+         $projectName = _getDefaultProject
       }
-      
-      if ($projName) { 
-         foreach ($q in (Get-VSTeamQueue -ProjectName $projName).name ) {
-            if ($q -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new($q))
+
+      # If there is no projectName by this point just return a empty
+      # list.
+      if ($projectName) {
+         foreach ($q in (Get-VSTeamQueue -ProjectName $projectName)) {
+            if ($q.name -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new($q.name))
             }
          }
       }
-      
+
       return $results
    }
 }

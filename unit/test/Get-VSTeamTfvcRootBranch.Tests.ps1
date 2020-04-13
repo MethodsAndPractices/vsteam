@@ -12,7 +12,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 #endregion
 
-Describe 'VSTeamTfvcRootBranch'  -Tag 'unit', 'tfvc' {
+Describe 'VSTeamTfvcRootBranch'  -Tag 'unit', 'tfvc', 'get' {
    $singleResult = [PSCustomObject]@{
       path        = "$/TfvcProject/Master";
       description = 'desc';

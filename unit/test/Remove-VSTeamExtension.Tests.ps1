@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region include
 Import-Module SHiPS
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -11,10 +12,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamExtension.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
-
-$singleResult = Get-Content "$PSScriptRoot\sampleFiles\singleExtensionResult.json" -Raw | ConvertFrom-Json
+#endregion
 
 Describe 'VSTeamExtension' {
+   $singleResult = Get-Content "$PSScriptRoot\sampleFiles\singleExtensionResult.json" -Raw | ConvertFrom-Json
+
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
    Context 'Remove-VSTeamExtension' {

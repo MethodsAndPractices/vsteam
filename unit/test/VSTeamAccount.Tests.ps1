@@ -10,6 +10,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/UncachedProjectCompleter.ps1"
+. "$here/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
 . "$here/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
 . "$here/../../Source/Classes/VSTeamBuildDefinitionProcess.ps1"

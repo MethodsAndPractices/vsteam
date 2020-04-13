@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
@@ -13,10 +15,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamBuildLog' {
    Context 'Get-VSTeamBuildLog' {
       ## Arrange
-      # Load the mocks to create the project name dynamic parameter
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
       Mock Invoke-RestMethod { return @{
             count = 4
             value = @{ }

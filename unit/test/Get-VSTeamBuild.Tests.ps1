@@ -20,10 +20,6 @@ Describe 'VSTeamBuild' {
    # Sample result for list of builds
    $results = Get-Content "$PSScriptRoot\sampleFiles\buildResults.json" -Raw | ConvertFrom-Json
 
-   # Load the mocks to create the project name dynamic parameter
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
    Mock Invoke-RestMethod { return $results }
    Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*101*" }
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }

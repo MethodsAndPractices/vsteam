@@ -16,9 +16,9 @@ function Show-VSTeamBuildDefinition {
       [string] $Path = '\',
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    process {
       # Build the url

@@ -37,8 +37,6 @@ Describe "VSTeamUserEntitlement" {
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
          Mock _getInstance { return 'https://dev.azure.com/test' }
 
-         . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
-
          Context 'Get-VSTeamUserEntitlement' {
             Mock Invoke-RestMethod { return [PSCustomObject]@{ members = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } } } }
             Mock Invoke-RestMethod { return [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ }; email = 'fake@email.com' } } -ParameterFilter {

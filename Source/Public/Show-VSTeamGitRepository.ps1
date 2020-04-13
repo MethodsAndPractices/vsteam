@@ -5,9 +5,9 @@ function Show-VSTeamGitRepository {
       [string] $RemoteUrl,
 
       [Parameter(Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
    
    process {

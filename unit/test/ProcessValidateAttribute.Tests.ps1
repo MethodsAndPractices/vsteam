@@ -9,30 +9,30 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/$sut"
 #endregion
 
-Describe "ValidateProjectAttribute" {
-   Context "Existing Project" {
-      Mock _hasProjectCacheExpired { return $true }
-      Mock _getProjects { return @("Test1", "Test2") }
+Describe "ProcessValidateAttribute" {
+   Context "Existing Process" {
+      Mock _hasProcessTemplateCacheExpired { return $true }
+      Mock _getProcesses { return @("Test1", "Test2") }
 
       It "it is not in list and should throw" {
-         $target = [ValidateProjectAttribute]::new()
+         $target = [ProcessValidateAttribute]::new()
 
          { $target.Validate("Test", $null) } | Should Throw
       }
 
       It "it is in list and should not throw" {
-         $target = [ValidateProjectAttribute]::new()
+         $target = [ProcessValidateAttribute]::new()
 
          { $target.Validate("Test1", $null) } | Should Not Throw
       }
    }
 
-   Context "No Projects" {
-      Mock _getProjects { return @() }
-      Mock _hasProjectCacheExpired { return $true }
+   Context "No Processes" {
+      Mock _getProcesses { return @() }
+      Mock _hasProcessTemplateCacheExpired { return $true }
 
       It "list is empty and should not throw" {
-         $target = [ValidateProjectAttribute]::new()
+         $target = [ProcessValidateAttribute]::new()
 
          { $target.Validate("Test", $null) } | Should Not Throw
       }

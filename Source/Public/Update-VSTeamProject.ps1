@@ -11,10 +11,10 @@ function Update-VSTeamProject {
       [string] $Id,
       
       [Parameter(ParameterSetName = 'ByName', Position = 0)]
-      [ValidateProjectAttribute()]      
+      [ProjectValidateAttribute()]      
       [ArgumentCompleter([ProjectCompleter]) ]
       [Alias('ProjectName')]
-      $Name
+      [string] $Name
    )
    process {
       # Bind the parameter to a friendly variable

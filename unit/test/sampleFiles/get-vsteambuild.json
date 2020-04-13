@@ -1,0 +1,2069 @@
+{
+   "count": 15,
+   "value": [
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/568"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=568"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 568,
+         "buildNumber": "568",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-11-14T00:49:33.4869922Z",
+         "startTime": "2019-11-14T00:49:37.916511Z",
+         "finishTime": "2019-11-14T00:56:02.1824107Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/568",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=163",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 163,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/568",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "4aed57b05fb1840a916ed7aca0d2b81784b916be",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-11-14T00:56:14.133Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/568/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": true,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/567"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=567"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/567/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/567/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/35"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 567,
+         "buildNumber": "567",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-11-13T22:57:31.1366485Z",
+         "startTime": "2019-11-13T22:57:35.3378265Z",
+         "finishTime": "2019-11-13T23:01:48.4753281Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/567",
+         "definition": {
+            "drafts": [],
+            "id": 35,
+            "name": "PTracker-CI-NoMobile",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/35?revision=7",
+            "uri": "vstfs:///Build/Definition/35",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 7,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/567",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "4aed57b05fb1840a916ed7aca0d2b81784b916be",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-11-13T23:02:00.413Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/567/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": true,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/561"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=561"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/561/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/561/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 561,
+         "buildNumber": "561",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-09-24T09:47:50.3503432Z",
+         "startTime": "2019-09-24T09:47:55.8261537Z",
+         "finishTime": "2019-09-24T09:54:09.609426Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/561",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=163",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 163,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/561",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "4aed57b05fb1840a916ed7aca0d2b81784b916be",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-09-24T09:54:22.31Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/561/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/560"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=560"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/560/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/560/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 560,
+         "buildNumber": "560",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-09-16T14:07:31.5444889Z",
+         "startTime": "2019-09-16T14:07:36.8564926Z",
+         "finishTime": "2019-09-16T14:13:54.1086977Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/560",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=163",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 163,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/560",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "4aed57b05fb1840a916ed7aca0d2b81784b916be",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "individualCI",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "lastChangedDate": "2019-09-16T14:14:07.007Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/560/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/559"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=559"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/559/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/559/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 559,
+         "buildNumber": "559",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-09-16T13:34:59.7905462Z",
+         "startTime": "2019-09-16T13:35:06.5445281Z",
+         "finishTime": "2019-09-16T13:41:24.5546558Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/559",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=163",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 163,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/559",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "b3ffb9a7c9c4a3d78da50c581aaaf3fc708d1b6c",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "individualCI",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "lastChangedDate": "2019-09-16T13:41:36.677Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/559/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/439"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=439"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/439/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/439/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 439,
+         "buildNumber": "439",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-08-11T01:39:00.0335414Z",
+         "startTime": "2019-08-11T01:39:04.0259789Z",
+         "finishTime": "2019-08-11T01:45:15.9902888Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/439",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=160",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 160,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/439",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "3675df748e52db693ee212753e55f1c7dbf8d5cb",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-08-11T01:45:27.513Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/439/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/437"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=437"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/437/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/437/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/35"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 437,
+         "buildNumber": "437",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-08-10T21:17:06.5166358Z",
+         "startTime": "2019-08-10T21:17:10.7955997Z",
+         "finishTime": "2019-08-10T21:20:46.9614646Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/437",
+         "definition": {
+            "drafts": [],
+            "id": 35,
+            "name": "PTracker-CI-NoMobile",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/35?revision=3",
+            "uri": "vstfs:///Build/Definition/35",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 3,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/437",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "3675df748e52db693ee212753e55f1c7dbf8d5cb",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "individualCI",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "lastChangedDate": "2019-08-10T21:20:57.987Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/437/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/436"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=436"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/436/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/436/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/35"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 436,
+         "buildNumber": "436",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-08-10T20:24:49.2169814Z",
+         "startTime": "2019-08-10T20:24:53.4360947Z",
+         "finishTime": "2019-08-10T20:28:23.7547621Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/436",
+         "definition": {
+            "drafts": [],
+            "id": 35,
+            "name": "PTracker-CI-NoMobile",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/35?revision=3",
+            "uri": "vstfs:///Build/Definition/35",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 3,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/436",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "704daae62cc0b089d766e252b4b1b6d5df5e8cc7",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "individualCI",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "lastChangedDate": "2019-08-10T20:28:35.323Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/436/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/435"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=435"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/435/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/435/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/35"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 435,
+         "buildNumber": "435",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-08-10T19:43:50.8088667Z",
+         "startTime": "2019-08-10T19:43:54.8276414Z",
+         "finishTime": "2019-08-10T19:47:46.4447025Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/435",
+         "definition": {
+            "drafts": [],
+            "id": 35,
+            "name": "PTracker-CI-NoMobile",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/35?revision=3",
+            "uri": "vstfs:///Build/Definition/35",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 3,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/435",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "ad4c7ac13f391de1b3578c626b552cf0c989362b",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "individualCI",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "lastChangedDate": "2019-08-10T19:47:57.407Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/435/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/434"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=434"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/434/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/434/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/35"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 434,
+         "buildNumber": "434",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-08-10T18:22:36.8537588Z",
+         "startTime": "2019-08-10T18:22:40.7924134Z",
+         "finishTime": "2019-08-10T18:26:11.4338339Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/434",
+         "definition": {
+            "drafts": [],
+            "id": 35,
+            "name": "PTracker-CI-NoMobile",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/35?revision=3",
+            "uri": "vstfs:///Build/Definition/35",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 3,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/434",
+         "sourceBranch": "refs/heads/master",
+         "sourceVersion": "d053f177ccb502742f59fa82a83fd62c03049ab2",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "individualCI",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.TFS",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "lastChangedDate": "2019-08-10T18:26:21.677Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/434/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/378"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=378"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/378/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/378/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 378,
+         "buildNumber": "378",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-07-21T11:13:16.3812613Z",
+         "startTime": "2019-07-21T11:13:20.271675Z",
+         "finishTime": "2019-07-21T11:19:35.6806252Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/378",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=139",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 139,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/378",
+         "sourceBranch": "refs/heads/ai",
+         "sourceVersion": "dcfa73e5ba9902d9418d8e95f1b6109866288bca",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-07-21T11:19:46.37Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/378/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/375"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=375"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/375/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/375/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 375,
+         "buildNumber": "375",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-07-20T06:07:42.8970532Z",
+         "startTime": "2019-07-20T06:07:46.2556853Z",
+         "finishTime": "2019-07-20T06:13:45.7807549Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/375",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=139",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 139,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/375",
+         "sourceBranch": "refs/heads/ai",
+         "sourceVersion": "3fd0eda7ed7a9b07d67059cf2b1a41f97b28342d",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-07-20T06:13:55.08Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/375/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/374"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=374"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/374/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/374/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 374,
+         "buildNumber": "374",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-07-20T05:44:18.9264275Z",
+         "startTime": "2019-07-20T05:44:22.0483519Z",
+         "finishTime": "2019-07-20T05:50:26.895186Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/374",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=139",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 139,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/374",
+         "sourceBranch": "refs/heads/ai",
+         "sourceVersion": "ea7e90eb93a52b638d8e36035f42bf3779df8572",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-07-20T05:50:36.777Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/374/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/360"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=360"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/360/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/360/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 360,
+         "buildNumber": "360",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-07-18T12:56:22.3506669Z",
+         "startTime": "2019-07-18T12:56:25.8594256Z",
+         "finishTime": "2019-07-18T13:05:08.4010842Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/360",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=138",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 138,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/360",
+         "sourceBranch": "refs/heads/ai",
+         "sourceVersion": "cada3319a0970da5028d37adf65bb226db53724f",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-07-18T13:05:20.217Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/360/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      },
+      {
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/358"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/results?buildId=358"
+            },
+            "sourceVersionDisplayUri": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/358/sources"
+            },
+            "timeline": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/358/Timeline"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "validationResults": [],
+         "plans": [
+            {
+               "planId": "00000000-0000-0000-0000-000000000000"
+            }
+         ],
+         "triggerInfo": {},
+         "id": 358,
+         "buildNumber": "358",
+         "status": "completed",
+         "result": "succeeded",
+         "queueTime": "2019-07-13T15:43:12.8662868Z",
+         "startTime": "2019-07-13T15:43:17.087519Z",
+         "finishTime": "2019-07-13T15:49:25.7371406Z",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Builds/358",
+         "definition": {
+            "drafts": [],
+            "id": 23,
+            "name": "PTracker-CI",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=138",
+            "uri": "vstfs:///Build/Definition/23",
+            "path": "\\",
+            "type": "build",
+            "queueStatus": "enabled",
+            "revision": 138,
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+               "state": "wellFormed",
+               "revision": 150,
+               "visibility": "private",
+               "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+            }
+         },
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         },
+         "uri": "vstfs:///Build/Build/358",
+         "sourceBranch": "refs/heads/ai",
+         "sourceVersion": "cada3319a0970da5028d37adf65bb226db53724f",
+         "queue": {
+            "id": 81,
+            "name": "Default",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "priority": "normal",
+         "reason": "manual",
+         "requestedFor": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "requestedBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@fakedomain.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "lastChangedDate": "2019-07-13T15:49:36.66Z",
+         "lastChangedBy": {
+            "displayName": "Microsoft.VisualStudio.Services.ReleaseManagement",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "00000000-0000-0000-0000-000000000000@00000000-0000-0000-0000-000000000000",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/s2s.redacted",
+            "descriptor": "s2s.redacted"
+         },
+         "parameters": "{\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"system.debug\":\"false\"}",
+         "orchestrationPlan": {
+            "planId": "00000000-0000-0000-0000-000000000000"
+         },
+         "logs": {
+            "id": 0,
+            "type": "Container",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/builds/358/logs"
+         },
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "keepForever": false,
+         "retainedByRelease": true,
+         "triggeredByBuild": null
+      }
+   ]
+}

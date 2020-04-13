@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Set-VSTeamAPIVersion.ps1"
@@ -13,33 +15,22 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamServiceEndpointType' {
-   $sampleFile = "$PSScriptRoot\sampleFiles\serviceEndpointTypeSample.json"
+   $sampleFile = $(Get-Content "$PSScriptRoot\sampleFiles\serviceEndpointTypeSample.json" -Raw | ConvertFrom-Json)
 
-   Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock Invoke-RestMethod { return $sampleFile }
    
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+   Mock _getInstance { return 'https://dev.azure.com/test' }   
 
    Context 'Get-VSTeamServiceEndpointType' {
-      Mock Invoke-RestMethod {
-         return Get-Content $sampleFile | ConvertFrom-Json
-      }
-
-      It 'Should return all service endpoints types' {
+      It 'should return all service endpoints types' {
          Get-VSTeamServiceEndpointType
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/serviceendpointtypes?api-version=$(_getApiVersion DistributedTask)"
          }
       }
-   }
 
-   Context 'Get-VSTeamServiceEndpointType by Type' {
-      Mock Invoke-RestMethod {
-         return Get-Content $sampleFile | ConvertFrom-Json
-      }
-
-      It 'Should return all service endpoints types' {
+      It 'by Type should return all service endpoints types' {
          Get-VSTeamServiceEndpointType -Type azurerm
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -47,14 +38,8 @@ Describe 'VSTeamServiceEndpointType' {
             $Body.type -eq 'azurerm'
          }
       }
-   }
-
-   Context 'Get-VSTeamServiceEndpointType by Type and scheme' {
-      Mock Invoke-RestMethod {
-         return Get-Content $sampleFile | ConvertFrom-Json
-      }
-
-      It 'Should return all service endpoints types' {
+      
+      It 'by Type and scheme should return all service endpoints types' {
          Get-VSTeamServiceEndpointType -Type azurerm -Scheme Basic
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -63,14 +48,8 @@ Describe 'VSTeamServiceEndpointType' {
             $Body.scheme -eq 'Basic'
          }
       }
-   }
-
-   Context 'Get-VSTeamServiceEndpointType by scheme' {
-      Mock Invoke-RestMethod {
-         return Get-Content $sampleFile | ConvertFrom-Json
-      }
-
-      It 'Should return all service endpoints types' {
+      
+      It 'by scheme should return all service endpoints types' {
          Get-VSTeamServiceEndpointType -Scheme Basic
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

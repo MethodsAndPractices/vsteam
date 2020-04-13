@@ -8,12 +8,12 @@ class UncachedProjectCompleter : IArgumentCompleter {
       [string] $ParameterName, 
       [string] $WordToComplete,
       [Language.CommandAst] $CommandAst, 
-      [IDictionary] $FakeBoundParameters
-   ) {
-      [VSTeamProjectCache]::projects = _getProjects
-      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+      [IDictionary] $FakeBoundParameters) {
 
       $results = [List[CompletionResult]]::new()
+      
+      [VSTeamProjectCache]::projects = _getProjects
+      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
       
       foreach ($p in [VSTeamProjectCache]::projects) {
          if ($p -like "*$WordToComplete*" -and $p -match "\s") {

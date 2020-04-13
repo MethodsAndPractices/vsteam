@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Set-VSTeamAPIVersion.ps1"
@@ -18,9 +20,7 @@ Describe 'VSTeamVariableGroup' {
 
    Context 'Remove-VSTeamVariableGroup' {
       Context 'Services' {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
-         [VSTeamVersions]::VariableGroups = '5.0-preview.1'
+         Mock _getApiVersion { return '5.0-preview.1' } -ParameterFilter { $Service -eq 'VariableGroups' }
 
          Mock _getInstance { return 'https://dev.azure.com/test' }
 
@@ -42,9 +42,7 @@ Describe 'VSTeamVariableGroup' {
       }
 
       Context 'Server' {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
-         [VSTeamVersions]::VariableGroups = '3.2-preview.1'
+         Mock _getApiVersion { return '3.2-preview.1' } -ParameterFilter { $Service -eq 'VariableGroups' }
 
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 

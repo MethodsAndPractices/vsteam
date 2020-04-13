@@ -19,9 +19,9 @@ function Update-VSTeamVariableGroup {
       [switch] $Force,
 
       [Parameter(Mandatory = $true, Position = 0)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      $ProjectName
+      [string] $ProjectName
    )
 
    DynamicParam {

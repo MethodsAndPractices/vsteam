@@ -43,9 +43,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamProject' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-   . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
-
    Mock _getInstance { return 'https://dev.azure.com/test' }
 
    Context 'Clear-VSTeamDefaultProject on Non Windows' {

@@ -7,6 +7,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamQueue.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/Get-VSTeamProject.ps1"
@@ -15,7 +17,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamQueue' {
    ## Arrange
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+   Mock _getProjects { return $null }
+   Mock _hasProjectCacheExpired { return $true }
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
@@ -24,9 +27,7 @@ Describe 'VSTeamQueue' {
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
    Mock Invoke-RestMethod { return @{ value = @{ id = 3; name = 'Hosted'; pool = @{ } } } }
-   Mock Invoke-RestMethod { return @{ id = 101; name = 'Hosted'; pool = @{ } } } -ParameterFilter {
-      $Uri -like "*101*"
-   }
+   Mock Invoke-RestMethod { return @{ id = 101; name = 'Hosted'; pool = @{ } } } -ParameterFilter { $Uri -like "*101*" }
       
    Context 'Get-VSTeamQueue' {
       It 'should return requested queue' {

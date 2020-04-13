@@ -18,8 +18,6 @@ Describe 'VSTeamWorkItem' {
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
    $obj = @{
       id  = 47
       rev = 1

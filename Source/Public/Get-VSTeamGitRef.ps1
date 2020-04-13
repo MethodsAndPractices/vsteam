@@ -14,7 +14,7 @@ function Get-VSTeamGitRef {
       [string] $ContinuationToken,
 
       [Parameter(Mandatory = $true, Position = 1)]
-      [ValidateProjectAttribute()]
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )
