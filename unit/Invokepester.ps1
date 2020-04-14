@@ -55,6 +55,6 @@ function Invoke-PesterJob {
 
    $params = $PSBoundParameters
 
-   Start-Job -ScriptBlock { Set-Location $using:pwd; Import-Module ..\source\vsteam.psd1; Invoke-Pester @using:params } |
+   Start-Job -ScriptBlock { Set-Location $using:pwd; Invoke-Pester @using:params } |
       Receive-Job -Wait -AutoRemoveJob
 }
