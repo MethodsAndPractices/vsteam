@@ -7,6 +7,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/VSTeamProject.ps1"
 . "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/UncachedProjectCompleter.ps1"
 . "$here/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
@@ -16,11 +17,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'Invoke-VSTeamRequest' {
-   Mock _hasProjectCacheExpired { return $false }
+   Mock _getProjects { return @() }
+   Mock _hasProjectCacheExpired { return $true }
    
    Context 'Invoke-VSTeamRequest Options' {
       Mock Invoke-RestMethod
-
       Mock _getInstance { return 'https://dev.azure.com/test' }
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -31,6 +32,7 @@ Describe 'Invoke-VSTeamRequest' {
 
       It 'options should call API' {
          Invoke-VSTeamRequest -Method Options
+
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq "Options" -and
             $Uri -eq "https://dev.azure.com/test/_apis"
@@ -39,6 +41,7 @@ Describe 'Invoke-VSTeamRequest' {
 
       It 'release should call API' {
          Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON
+
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://vsrm.dev.azure.com/test/testproject/_apis/release/releases/1?api-version=4.1-preview"
          }
@@ -46,6 +49,7 @@ Describe 'Invoke-VSTeamRequest' {
 
       It 'AdditionalHeaders should call API' {
          Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON -AdditionalHeaders @{Test = "Test" }
+
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Headers["Test"] -eq 'Test' -and
             $Uri -eq "https://vsrm.dev.azure.com/test/testproject/_apis/release/releases/1?api-version=4.1-preview"
