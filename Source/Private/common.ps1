@@ -5,6 +5,103 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "It is used in other files")]
 $profilesPath = "$HOME/vsteam_profiles.json"
 
+# This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
+# If you need to call TFS or VSTS this is the function to use.
+function _callAPI {
+   param(
+      [string]$resource,
+      [string]$area,
+      [string]$id,
+      [string]$version,
+      [string]$subDomain,
+      [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
+      [string]$method,
+      [Parameter(ValueFromPipeline = $true)]
+      [object]$body,
+      [string]$InFile,
+      [string]$OutFile,
+      [string]$ContentType,
+      [string]$ProjectName,
+      [string]$Team,
+      [string]$Url,
+      [object]$QueryString,
+      [hashtable]$AdditionalHeaders,
+      # Some API calls require the Project ID and not the project name.
+      # However, the dynamic project name parameter only shows you names
+      # and not the Project IDs. Using this flag the project name provided
+      # will be converted to the Project ID when building the URI for the API
+      # call.
+      [switch]$UseProjectId,
+      # This flag makes sure that even if a default project is set that it is
+      # not used to build the URI for the API call. Not all API require or 
+      # allow the project to be used. Setting a default project would cause
+      # that project name to be used in building the URI that would lead to 
+      # 404 because the URI would not be correct.
+      [Alias('IgnoreDefaultProject')]
+      [switch]$NoProject
+   )
+
+   # If the caller did not provide a Url build it.
+   if (-not $Url) {
+      $buildUriParams = @{ } + $PSBoundParameters;
+      $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
+      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
+      $Url = _buildRequestURI @buildUriParams
+   }
+   elseif ($QueryString) {
+      # If the caller provided the URL and QueryString we need
+      # to add the querystring now
+      foreach ($key in $QueryString.keys) {
+         $Url += _appendQueryString -name $key -value $QueryString[$key]
+      }
+   }
+
+   if ($body) {
+      Write-Verbose "Body $body"
+   }
+
+   $params = $PSBoundParameters
+   $params.Add('Uri', $Url)
+   $params.Add('UserAgent', (_getUserAgent))
+
+   if (_useWindowsAuthenticationOnPremise) {
+      $params.Add('UseDefaultCredentials', $true)
+      $params.Add('Headers', @{ })
+   }
+   elseif (_useBearerToken) {
+      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
+   }
+   else {
+      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
+   }
+
+   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
+      foreach ($key in $AdditionalHeaders.Keys) {
+         $params['Headers'].Add($key, $AdditionalHeaders[$key])
+      }
+   }
+   
+   # We have to remove any extra parameters not used by Invoke-RestMethod
+   $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
+   foreach ($e in $extra) { $params.Remove($e) | Out-Null }
+
+   try {
+      $resp = Invoke-RestMethod @params
+
+      if ($resp) {
+         Write-Verbose "return type: $($resp.gettype())"
+         Write-Verbose $resp
+      }
+
+      return $resp
+   }
+   catch {
+      _handleException $_
+
+      throw
+   }
+}
+
 # Not all versions support the name features.
 
 function _supportsGraph {
@@ -672,102 +769,6 @@ function _convertSecureStringTo_PlainText {
    # this was the one technique that worked on Mac, Linux and Windows
    $credential = New-Object System.Management.Automation.PSCredential 'unknown', $SecureString
    return $credential.GetNetworkCredential().Password
-}
-
-# This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
-# If you need to call TFS or VSTS this is the function to use.
-function _callAPI {
-   param(
-      [string]$resource,
-      [string]$area,
-      [string]$id,
-      [string]$version,
-      [string]$subDomain,
-      [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
-      [string]$method,
-      [Parameter(ValueFromPipeline = $true)]
-      [object]$body,
-      [string]$InFile,
-      [string]$OutFile,
-      [string]$ContentType,
-      [string]$ProjectName,
-      [string]$Team,
-      [string]$Url,
-      [object]$QueryString,
-      [hashtable]$AdditionalHeaders,
-      # Some API calls require the Project ID and not the project name.
-      # However, the dynamic project name parameter only shows you names
-      # and not the Project IDs. Using this flag the project name provided
-      # will be converted to the Project ID when building the URI for the API
-      # call.
-      [switch]$UseProjectId,
-      # This flag makes sure that even if a default project is set that it is
-      # not used to build the URI for the API call. Not all API require or 
-      # allow the project to be used. Setting a default project would cause
-      # that project name to be used in building the URI that would lead to 
-      # 404 because the URI would not be correct.
-      [switch]$NoProject
-   )
-
-   # If the caller did not provide a Url build it.
-   if (-not $Url) {
-      $buildUriParams = @{ } + $PSBoundParameters;
-      $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
-      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
-      $Url = _buildRequestURI @buildUriParams
-   }
-   elseif ($QueryString) {
-      # If the caller provided the URL and QueryString we need
-      # to add the querystring now
-      foreach ($key in $QueryString.keys) {
-         $Url += _appendQueryString -name $key -value $QueryString[$key]
-      }
-   }
-
-   if ($body) {
-      Write-Verbose "Body $body"
-   }
-
-   $params = $PSBoundParameters
-   $params.Add('Uri', $Url)
-   $params.Add('UserAgent', (_getUserAgent))
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $params.Add('UseDefaultCredentials', $true)
-      $params.Add('Headers', @{ })
-   }
-   elseif (_useBearerToken) {
-      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
-   }
-   else {
-      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
-   }
-
-   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
-      foreach ($key in $AdditionalHeaders.Keys) {
-         $params['Headers'].Add($key, $AdditionalHeaders[$key])
-      }
-   }
-   
-   # We have to remove any extra parameters not used by Invoke-RestMethod
-   $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
-   foreach ($e in $extra) { $params.Remove($e) | Out-Null }
-
-   try {
-      $resp = Invoke-RestMethod @params
-
-      if ($resp) {
-         Write-Verbose "return type: $($resp.gettype())"
-         Write-Verbose $resp
-      }
-
-      return $resp
-   }
-   catch {
-      _handleException $_
-
-      throw
-   }
 }
 
 function _trackProjectProgress {

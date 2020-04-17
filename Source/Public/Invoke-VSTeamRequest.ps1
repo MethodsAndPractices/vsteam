@@ -38,7 +38,9 @@ function Invoke-VSTeamRequest {
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName,
       
-      [switch] $UseProjectId)
+      [switch] $UseProjectId,
+      
+      [switch] $NoProject)
 
    process {
       $params = $PSBoundParameters

@@ -1,6 +1,8 @@
 Set-StrictMode -Version Latest
 
 #region include
+Import-Module SHiPS
+
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
