@@ -1,4 +1,4 @@
-function Add-VSTeamClassificationNode {
+function Add-VSTeamArea {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true)]

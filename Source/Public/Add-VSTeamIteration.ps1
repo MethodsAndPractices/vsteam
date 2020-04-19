@@ -1,4 +1,4 @@
-function Add-VSTeamClassificationNode {
+function Add-VSTeamIteration {
    [CmdletBinding()]
    param(
       [CmdletBinding(DefaultParameterSetName = 'ByIteration')]
