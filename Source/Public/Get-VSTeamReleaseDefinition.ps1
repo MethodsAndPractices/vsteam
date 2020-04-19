@@ -30,7 +30,7 @@ function Get-VSTeamReleaseDefinition {
 
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -subDomain vsrm -Area release -resource definitions -Version $([VSTeamVersions]::Release) -projectName $projectName -id $item
+            $resp = _callAPI -subDomain vsrm -Area release -resource definitions -Version $(_getApiVersion Release) -projectName $projectName -id $item
 
             if ($JSON.IsPresent) {
                $resp | ConvertTo-Json -Depth 99
@@ -48,7 +48,7 @@ function Get-VSTeamReleaseDefinition {
          }
       }
       else {
-         $listurl = _buildRequestURI -subDomain vsrm -Area release -resource 'definitions' -Version $([VSTeamVersions]::Release) -projectName $ProjectName
+         $listurl = _buildRequestURI -subDomain vsrm -Area release -resource 'definitions' -Version $(_getApiVersion Release) -projectName $ProjectName
 
          if ($expand -ne 'none') {
             $listurl += "&`$expand=$($expand)"

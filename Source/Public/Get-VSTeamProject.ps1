@@ -40,8 +40,8 @@ function Get-VSTeamProject {
          }
 
          # Call the REST API
-         $resp = _callAPI -Area 'projects' -id $ProjectName `
-            -Version $([VSTeamVersions]::Core) `
+         $resp = _callAPI -Area 'projects' -NoProject -id $ProjectName `
+            -Version $(_getApiVersion Core) `
             -QueryString $queryString
 
          # Storing the object before you return it cleaned up the pipeline.
@@ -54,8 +54,8 @@ function Get-VSTeamProject {
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'projects' `
-               -Version $([VSTeamVersions]::Core) `
+            $resp = _callAPI -Area 'projects' -NoProject `
+               -Version $(_getApiVersion Core) `
                -QueryString @{
                stateFilter = $stateFilter
                '$top'      = $top

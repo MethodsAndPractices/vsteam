@@ -17,8 +17,8 @@ function Get-VSTeamUser {
       if ($Descriptor) {
          # Call the REST API
          $resp = _callAPI -Area 'graph' -Resource 'users' -id $Descriptor `
-            -Version $([VSTeamVersions]::Graph) `
-            -SubDomain 'vssps'
+            -Version $(_getApiVersion Graph) `
+            -SubDomain 'vssps' -NoProject
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -37,9 +37,9 @@ function Get-VSTeamUser {
          try {
             # Call the REST API
             $resp = _callAPI -Area 'graph' -id 'users' `
-               -Version $([VSTeamVersions]::Graph) `
+               -Version $(_getApiVersion Graph) `
                -QueryString $queryString `
-               -SubDomain 'vssps'
+               -SubDomain 'vssps' -NoProject
 
             $objs = @()
 

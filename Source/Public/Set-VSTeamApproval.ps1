@@ -36,7 +36,7 @@ function Set-VSTeamApproval {
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource approvals `
-                  -Id $item -Version $([VSTeamVersions]::Release) -body $body -ContentType 'application/json' | Out-Null
+                  -Id $item -Version $(_getApiVersion Release) -body $body -ContentType 'application/json' | Out-Null
 
                Write-Output "Approval $item status changed to $status"
             }

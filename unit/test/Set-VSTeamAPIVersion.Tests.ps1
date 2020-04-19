@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
@@ -7,14 +8,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
-Describe 'Set-VSTeamAPIVersion' {
-
+Describe 'VSTeamAPIVersion' {
    Context 'Set-VSTeamAPIVersion' {
-      BeforeEach {
-         [VSTeamVersions]::Version = ''
-      }
-
       It 'Should default to TFS2017' {
          Set-VSTeamAPIVersion
          [VSTeamVersions]::Version | Should Be 'TFS2017'

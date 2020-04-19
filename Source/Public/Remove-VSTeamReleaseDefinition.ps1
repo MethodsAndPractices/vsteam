@@ -20,7 +20,7 @@ function Remove-VSTeamReleaseDefinition {
 
       foreach ($item in $id) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release Definition")) {
-            _callAPI -Method Delete -subDomain vsrm -Area release -Resource definitions -Version $([VSTeamVersions]::Release) -projectName $ProjectName -id $item  | Out-Null
+            _callAPI -Method Delete -subDomain vsrm -Area release -Resource definitions -Version $(_getApiVersion Release) -projectName $ProjectName -id $item  | Out-Null
 
             Write-Output "Deleted release definition $item"
          }

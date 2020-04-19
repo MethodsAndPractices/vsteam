@@ -13,7 +13,7 @@ function Get-VSTeamBuildArtifact {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/artifacts" `
-         -Version $([VSTeamVersions]::Build)
+         -Version $(_getApiVersion Build)
 
       foreach ($item in $resp.value) {
          _applyArtifactTypes -item $item

@@ -53,7 +53,7 @@
 }
 "@
          # Call the REST API to change the inheritance state
-         $resp = _callAPI -method POST -area "Contribution" -resource "HierarchyQuery" -id $projectID -Version $version -ContentType "application/json" -Body $body
+         $resp = _callAPI -NoProject -method POST -area "Contribution" -resource "HierarchyQuery" -id $projectID -Version $version -ContentType "application/json" -Body $body
       }
 
       Write-Verbose "Result: $(ConvertTo-Json -InputObject $resp -Depth 100)"
