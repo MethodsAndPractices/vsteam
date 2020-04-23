@@ -4,19 +4,19 @@ function Get-VSTeamBuildDefinition {
       [Parameter(ParameterSetName = 'List')]
       [string] $Filter,
 
-      [Parameter(ParameterSetName = 'List')]
       [ValidateSet('build', 'xaml', 'All')]
+      [Parameter(ParameterSetName = 'List')]
       [string] $Type = 'All',
 
+      [Alias('BuildDefinitionID')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdJson')]
       [Parameter(Position = 0, ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-      [Alias('BuildDefinitionID')]
       [int[]] $Id,
 
+      [Parameter(ParameterSetName = 'ByID')]
       [Parameter(ParameterSetName = 'ByIdRaw')]
       [Parameter(ParameterSetName = 'ByIdJson')]
-      [Parameter(ParameterSetName = 'ByID')]
       [int] $Revision,
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
@@ -25,9 +25,9 @@ function Get-VSTeamBuildDefinition {
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [switch] $raw,
 
-      [Parameter(Mandatory = $true, Position = 0)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0)]
       [string] $ProjectName
    )
    

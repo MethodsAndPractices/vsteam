@@ -6,6 +6,7 @@ Import-Module SHiPS
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
+. "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamLeaf.ps1"
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
@@ -14,21 +15,20 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/UncachedProjectCompleter.ps1"
 . "$here/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
-. "$here/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-. "$here/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
-. "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamTask.ps1"
 . "$here/../../Source/Classes/VSTeamAttempt.ps1"
 . "$here/../../Source/Classes/VSTeamEnvironment.ps1"
+. "$here/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
+. "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamRelease.ps1"
 . "$here/../../Source/Classes/VSTeamReleases.ps1"
 . "$here/../../Source/Classes/VSTeamBuild.ps1"
-. "$here/../../Source/Classes/VSTeamBuilds.ps1"
-. "$here/../../Source/Classes/VSTeamRepositories.ps1"
 . "$here/../../Source/Classes/VSTeamTeams.ps1"
+. "$here/../../Source/Classes/VSTeamRepositories.ps1"
 . "$here/../../Source/Classes/VSTeamQueues.ps1"
+. "$here/../../Source/Classes/VSTeamBuilds.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitions.ps1"
 . "$here/../../Source/Classes/VSTeamProject.ps1"
-. "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Get-VSTeamProject.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
@@ -41,11 +41,14 @@ Describe 'Invoke-VSTeamRequest' {
       Mock Invoke-RestMethod
       Mock _getInstance { return 'https://dev.azure.com/test' }
 
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+      $projectResult = $(Get-Content "$PSScriptRoot\sampleFiles\projectResult.json" | ConvertFrom-Json)
 
-      # Called to convert from ProjectName to ProjectID
-      Mock Get-VSTeamProject { return [PSCustomObject]@{ id = '00000000-0000-0000-0000-000000000000' } } -Verifiable
+      Mock _callAPI { return $projectResult } -ParameterFilter {
+         $Area -eq 'projects' -and
+         $id -eq 'testproject' -and
+         $Version -eq "$(_getApiVersion Core)" -and
+         $IgnoreDefaultProject -eq $true
+      }
 
       It 'options should call API' {
          Invoke-VSTeamRequest -Method Options -NoProject
@@ -77,7 +80,7 @@ Describe 'Invoke-VSTeamRequest' {
          Invoke-VSTeamRequest -ProjectName testproject -UseProjectId -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview'
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/00000000-0000-0000-0000-000000000000/_apis/release/releases/1?api-version=4.1-preview"
+            $Uri -eq "https://vsrm.dev.azure.com/test/010d06f0-00d5-472a-bb47-58947c230876/_apis/release/releases/1?api-version=4.1-preview"
          }
       }
    }
