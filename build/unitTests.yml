@@ -8,6 +8,7 @@ steps:
   displayName: 'Build Module'
   inputs:
     targetType: 'inline'
+    pwsh: true
     ${{ if eq(parameters.buildHelp, 'false') }}:
       script: '.\Build-Module.ps1 -installDep'
     ${{ if eq(parameters.buildHelp, 'true') }}:
@@ -17,6 +18,7 @@ steps:
   displayName: 'Install Pester'
   inputs:
     targetType: 'inline'
+    pwsh: true
     script: 'Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
 
 - ${{ if eq(parameters.CodeCoverage, 'false') }}:
@@ -24,6 +26,7 @@ steps:
     displayName: 'Run Unit Tests'
     inputs:
       targetType: 'inline'
+      pwsh: true
       script: |
         Import-Module .\dist\*.psd1
         Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passThru
@@ -34,6 +37,7 @@ steps:
     displayName: 'Run Unit Tests'
     inputs:
       targetType: 'inline'
+      pwsh: true
       script: |
         Import-Module .\dist\*.psd1
         Invoke-Pester -Script .\unit -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml -passThru
@@ -44,6 +48,7 @@ steps:
     displayName: 'Run Unit Tests with Code Coverage'
     inputs:
       targetType: 'inline'
+      pwsh: true
       script: |
         Import-Module .\dist\*.psd1
         Invoke-Pester -Script .\unit -CodeCoverage .\dist\*.ps*1 -CodeCoverageOutputFile coverage.xml -CodeCoverageOutputFileFormat JaCoCo -EnableExit -Strict -OutputFile test-results.xml -OutputFormat NUnitXml
