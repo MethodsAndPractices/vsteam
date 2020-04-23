@@ -48,6 +48,7 @@ Structure group of the classification node.
 
 ```yaml
 Type: string
+Accepted values: iterations, areas
 ```
 
 ### -Path
