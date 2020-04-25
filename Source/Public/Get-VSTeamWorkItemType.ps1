@@ -6,15 +6,18 @@ function Get-VSTeamWorkItemType {
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName,
 
-      [Parameter()]
-      [WorkItemTypeValidateAttribute()]
+      [parameter(ParameterSetName='Process', Mandatory = $true)]
+      [ValidateProcessAttribute()]
+      [ArgumentCompleter([ProcessTemplateCompleter])]
+      $ProcessTemplate,
+
       [ArgumentCompleter([WorkItemTypeCompleter])]
       [string] $WorkItemType
    )
 
    Process {
       # Call the REST API
-      if ($WorkItemType) {
+      if ($WorkItemType -and -not $ProcessTemplate) {
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
             -Version $(_getApiVersion Core) -id $WorkItemType
 
@@ -25,6 +28,15 @@ function Get-VSTeamWorkItemType {
          _applyTypesWorkItemType -item $resp
 
          return $resp
+      }
+      elseif ($ProcessTemplate) {
+         $url = (Get-VSTeamProcess -Name $ProcessTemplate).url + "/workitemtypes?api-version=" + (_getApiVersion Graph)
+         $resp = (_callapi -Url $url)
+         if (-not $WorkItemType)  {$WorkItemType = '*'}
+         $resp.value | Where-Object {$_.name -like $workitemType} | ForEach-Object {
+               $_.PSObject.TypeNames.Insert(0, 'Team.WorkItemType')
+               Write-Output $_
+         }
       }
       else {
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
