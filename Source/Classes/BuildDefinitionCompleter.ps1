@@ -30,8 +30,11 @@ class BuildDefinitionCompleter : IArgumentCompleter {
       # list.
       if ($projectName) {
          foreach ($b in (Get-VSTeamBuildDefinition -ProjectName $projectName)) {
-            if ($b.name -like "*$WordToComplete*") {
+            if ($b.name -like "*$WordToComplete*" -and $b.name -notmatch '\W') {
                $results.Add([CompletionResult]::new($b.name))
+            }
+            elseif  ($b.name -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($b.name)'"))
             }
          }
       }

@@ -18,8 +18,11 @@ class ProjectCompleter : IArgumentCompleter {
       }
 
       foreach ($p in [VSTeamProjectCache]::projects) {
-         if ($p -like "*$WordToComplete*") {
+         if ($p -like "*$WordToComplete*" -and $p -notmatch "\W") {
             $results.Add([CompletionResult]::new($p))
+         }
+         elseif ($p -like "*$WordToComplete*"){
+            $results.Add([CompletionResult]::new("'$p'"))
          }
       }
 

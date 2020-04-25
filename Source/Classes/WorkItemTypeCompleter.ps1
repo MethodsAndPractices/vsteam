@@ -26,8 +26,11 @@ class WorkItemTypeCompleter : IArgumentCompleter {
       # list.
       if ($projectName) {
          foreach ($w in (_getWorkItemTypes -ProjectName $projectName)) {
-            if ($w -like "*$WordToComplete*") {
+            if ($w -like "*$WordToComplete*" -and $w -notmatch '\W') {
                $results.Add([CompletionResult]::new($w))
+            }
+            elseif ($w -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$w'"))
             }
          }
       }

@@ -20,11 +20,13 @@ class ProcessTemplateCompleter : IArgumentCompleter {
       }
 
       foreach ($p in [VSTeamProcessCache]::processes) {
-         if ($p -like "*$WordToComplete*") {
+         if ($p -like "*$WordToComplete*" -and $p -notmatch '\W') {
             $results.Add([CompletionResult]::new($p))
          }
+         elseif ($p -like "*$WordToComplete*") {
+            $results.Add([CompletionResult]::new("'$p'"))
+         }
       }
-
       return $results
    }
 }

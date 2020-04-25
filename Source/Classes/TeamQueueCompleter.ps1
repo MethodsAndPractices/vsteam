@@ -29,9 +29,11 @@ class TeamQueueCompleter : IArgumentCompleter {
             if ($q.name -like "*$WordToComplete*") {
                $results.Add([CompletionResult]::new($q.name))
             }
+            elseif  ($q.name -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($q.name)'"))
+            }
          }
       }
-
       return $results
    }
 }

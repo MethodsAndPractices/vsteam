@@ -31,9 +31,9 @@ function _callAPI {
       # call.
       [switch]$UseProjectId,
       # This flag makes sure that even if a default project is set that it is
-      # not used to build the URI for the API call. Not all API require or 
+      # not used to build the URI for the API call. Not all API require or
       # allow the project to be used. Setting a default project would cause
-      # that project name to be used in building the URI that would lead to 
+      # that project name to be used in building the URI that would lead to
       # 404 because the URI would not be correct.
       [Alias('IgnoreDefaultProject')]
       [switch]$NoProject
@@ -78,7 +78,7 @@ function _callAPI {
          $params['Headers'].Add($key, $AdditionalHeaders[$key])
       }
    }
-   
+
    # We have to remove any extra parameters not used by Invoke-RestMethod
    $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
    foreach ($e in $extra) { $params.Remove($e) | Out-Null }
@@ -144,7 +144,7 @@ function _testAdministrator {
 }
 
 # When you mock this in tests be sure to add a Parameter Filter that matches
-# the Service that should be used. 
+# the Service that should be used.
 # Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
 # Also test in the Assert-MockCalled that the correct version was used in the URL that was
 # built for the API call.
