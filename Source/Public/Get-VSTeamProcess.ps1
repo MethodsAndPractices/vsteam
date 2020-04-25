@@ -31,21 +31,21 @@ function Get-VSTeamProcess {
       }
       elseif ($Name) {
          # Lookup Process ID by Name
-         Get-VSTeamProcess | where-object { $_.name -eq $Name }
+         Get-VSTeamProcess | Where-Object {$_.name -eq $ProcessName}
       }
       else {
          # Return list of processes
          try {
             # Call the REST API
-            $resp = _callAPI -area 'process' -resource 'processes' `
-               -Version $(_getApiVersion Core) -NoProject `
+            $resp = _callAPI -Area 'work' -resource 'processes' `
+               -Version $(_getApiVersion Graph)  -NoProject `
                -QueryString @{
                '$top'  = $top
                '$skip' = $skip
             }
 
             $objs = @()
-            
+
             foreach ($item in $resp.value) {
                $objs += [VSTeamProcess]::new($item)
             }
