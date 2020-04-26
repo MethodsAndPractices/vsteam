@@ -1,6 +1,11 @@
 function Get-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
+      [Parameter(ParameterSetName = 'ByName',Mandatory=$true, Position=0)]
+      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [Alias('ProcessName','ProcessTemplate')]
+      $Name,
+
       [Parameter(ParameterSetName = 'List')]
       [int] $Top = 100,
 
@@ -11,10 +16,6 @@ function Get-VSTeamProcess {
       [Alias('ProcessTemplateID')]
       [string] $Id,
 
-      [Parameter(ParameterSetName = 'ByName', Mandatory = $true)]
-      [ProcessValidateAttribute()]
-      [ArgumentCompleter([ProcessTemplateCompleter])]
-      [string] $Name
    )
    process {
       if ($id) {
@@ -31,7 +32,7 @@ function Get-VSTeamProcess {
       }
       elseif ($Name) {
          # Lookup Process ID by Name
-         Get-VSTeamProcess | Where-Object {$_.name -eq $ProcessName}
+         Get-VSTeamProcess | Where-Object {$_.name -like $ProcessName} | Sort-Object -Property Name
       }
       else {
          # Return list of processes
@@ -45,12 +46,15 @@ function Get-VSTeamProcess {
             }
 
             $objs = @()
-
+            #we just fetched the processes so let's update the cache. Also Cache the URLS for processes
+            [VSTeamProcessCache]::processes = $resp.value.name | Sort-Object
+            [VSTeamProcessCache]::timestamp = (Get-Date).Minute
+            $script:ProcessURLHash = @{}
             foreach ($item in $resp.value) {
+               $script:ProcessURLHash[$item.name] = [VSTeamVersions]::Account + "/_apis/work/processes/" + $item.typeId
                $objs += [VSTeamProcess]::new($item)
             }
-
-            Write-Output $objs
+            $objs | Sort-Object -Property Name
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod

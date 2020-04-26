@@ -13,6 +13,12 @@
 						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
+						<Label>Enabled</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Default</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
 						<Label>Description</Label>
 					</TableColumnHeader>
 				</TableHeaders>
@@ -22,6 +28,12 @@
 						<TableColumnItems>
 							<TableColumnItem>
 								<PropertyName>Name</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>IsEnabled</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>IsDefault</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
 								<PropertyName>Description</PropertyName>

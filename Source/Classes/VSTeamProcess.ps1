@@ -9,7 +9,6 @@ class VSTeamProcess {
    [bool]$IsDefault = $false
    [string]$Type = $null
    [string]$ParentProcessTypeId = $null
-   [string]$CustomizationType = $Null
    VSTeamProcess (
       [object]$obj
    )  {
