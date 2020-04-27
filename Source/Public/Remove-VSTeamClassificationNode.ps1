@@ -39,6 +39,6 @@ function Remove-VSTeamClassificationNode {
       $null = _callAPI -Method "Delete" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
          -ContentType 'application/json; charset=utf-8' `
          -QueryString $queryString `
-         -Version $([VSTeamVersions]::Core)
+         -Version $(_getApiVersion Core)
    }
 }

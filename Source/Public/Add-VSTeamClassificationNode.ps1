@@ -15,7 +15,7 @@ function Add-VSTeamClassificationNode {
       [CmdletBinding(DefaultParameterSetName = 'ByArea')]
       [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
       [Parameter(Mandatory = $false)]
-      [string] $Path,
+      [string] $Path = $null,
 
       [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
       [Parameter(Mandatory = $false)]
@@ -60,7 +60,7 @@ function Add-VSTeamClassificationNode {
       $resp = _callAPI -Method "Post" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
          -ContentType 'application/json; charset=utf-8' `
          -body $bodyAsJson `
-         -Version $([VSTeamVersions]::Core)
+         -Version $(_getApiVersion Core)
       
       $resp = [VSTeamClassificationNode]::new($resp, $ProjectName)
 
