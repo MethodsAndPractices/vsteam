@@ -55,7 +55,6 @@ Describe 'Remove-VSTeamArea' {
       It 'with Path "<Path>" should delete area' -TestCases @(
          @{Path = "SubPath" }
          @{Path = "Path/SubPath" }
-         @{Path = "Path\SubPath" }
       ) {
          param ($Path)      
          ## Act

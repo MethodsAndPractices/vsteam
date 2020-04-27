@@ -42,7 +42,6 @@ Describe 'Add-VSTeamArea' {
       It 'with Path "<Path>" should return Nodes' -TestCases @(
          @{ Path = "SubPath" }
          @{ Path = "Path/SubPath" }
-         @{ Path = "Path\SubPath" }
      ) {
          param ($Path)      
          ## Act

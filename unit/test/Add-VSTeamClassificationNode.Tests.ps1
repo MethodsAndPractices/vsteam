@@ -46,10 +46,8 @@ Describe 'Add-VSTeamClassificationNode' {
       It 'with StructureGroup "<StructureGroup>" by Path "<Path>" should return Nodes' -TestCases @(
          @{StructureGroup = "areas"; Path = "SubPath" }
          @{StructureGroup = "areas"; Path = "Path/SubPath" }
-         @{StructureGroup = "areas"; Path = "Path\SubPath" }
          @{StructureGroup = "iterations"; Path = "SubPath" }
          @{StructureGroup = "iterations"; Path = "Path/SubPath" }
-         @{StructureGroup = "iterations"; Path = "Path\SubPath" }
      ) {
          param ($StructureGroup, $Path)      
          ## Act

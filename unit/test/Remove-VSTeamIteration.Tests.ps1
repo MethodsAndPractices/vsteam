@@ -55,7 +55,6 @@ Describe 'Remove-VSTeamIteration' {
       It 'with Path "<Path>" should delete iteration' -TestCases @(
          @{Path = "SubPath" }
          @{Path = "Path/SubPath" }
-         @{Path = "Path\SubPath" }
       ) {
          param ($Path)      
          ## Act
