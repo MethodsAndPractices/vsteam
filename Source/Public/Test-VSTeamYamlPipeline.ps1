@@ -32,7 +32,7 @@ function Test-VSTeamYamlPipeline {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'pipelines' -Resource "$PipelineId" -id "runs" `
             -Method Post -ContentType 'application/json; charset=utf-8' -Body ($body | ConvertTo-Json) `
-            -Version $([VSTeamVersions]::Build)
+            -Version $(_getApiVersion Build)
       }
       catch {
          if ($PSItem -match 'PipelineValidationException') {

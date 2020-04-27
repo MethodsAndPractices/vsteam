@@ -21,7 +21,7 @@ function Get-VSTeamQueue {
 
       if ($id) {
          $resp = _callAPI -ProjectName $ProjectName -Id $id -Area distributedtask -Resource queues `
-            -Version $([VSTeamVersions]::DistributedTask)
+            -Version $(_getApiVersion DistributedTask)
 
          $item = [VSTeamQueue]::new($resp, $ProjectName)
 
@@ -29,7 +29,7 @@ function Get-VSTeamQueue {
       }
       else {
          $resp = _callAPI -ProjectName $projectName -Area distributedtask -Resource queues `
-            -QueryString @{ queueName = $queueName; actionFilter = $actionFilter } -Version $([VSTeamVersions]::DistributedTask)
+            -QueryString @{ queueName = $queueName; actionFilter = $actionFilter } -Version $(_getApiVersion DistributedTask)
 
          $objs = @()
 

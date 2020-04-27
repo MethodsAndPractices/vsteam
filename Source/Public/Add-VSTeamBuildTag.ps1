@@ -23,7 +23,7 @@ function Add-VSTeamBuildTag {
             foreach ($tag in $tags) {
                # Call the REST API
                _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
-                  -Method Put -Querystring @{tag = $tag} -Version $([VSTeamVersions]::Build) | Out-Null
+                  -Method Put -Querystring @{tag = $tag} -Version $(_getApiVersion Build) | Out-Null
             }
          }
       }

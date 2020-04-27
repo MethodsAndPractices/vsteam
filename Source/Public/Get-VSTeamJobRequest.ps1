@@ -24,7 +24,7 @@ function Get-VSTeamJobRequest {
       }      
 
       $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource "jobrequests" `
-         -QueryString $body -Version $([VSTeamVersions]::DistributedTask)
+         -QueryString $body -Version $(_getApiVersion DistributedTask)
 
       $objs = @()
 

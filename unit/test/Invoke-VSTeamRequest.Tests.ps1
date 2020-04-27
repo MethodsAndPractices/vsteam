@@ -1,77 +1,59 @@
 Set-StrictMode -Version Latest
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/Get-VSTeamProject.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
 Describe 'Invoke-VSTeamRequest' {
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { 
-      return @()
-   } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
-
-   Mock Write-Host
-
+   Mock _hasProjectCacheExpired { return $false }
+   
    Context 'Invoke-VSTeamRequest Options' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      Mock Invoke-RestMethod {
-         # Write-Host $args 
-      }
+      Mock Invoke-RestMethod
 
-      Invoke-VSTeamRequest -Method Options
+      Mock _getInstance { return 'https://dev.azure.com/test' }
 
-      It 'Should call API' {
-         Assert-VerifiableMock
-      }
-   }
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
-   Context 'Invoke-VSTeamRequest Release' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      Mock Invoke-RestMethod {
-         # Write-Host $args
-      } -Verifiable
-
-      Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON
-
-      It 'Should call API' {
-         Assert-VerifiableMock
-      }
-   }
-
-   Context 'Invoke-VSTeamRequest AdditionalHeaders' {
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      Mock Invoke-RestMethod { return @() } -Verifiable -ParameterFilter {
-         $Headers["Test"] -eq 'Test'
-      }
-
-      Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON -AdditionalHeaders @{Test = "Test" }
-
-      It 'Should call API' {
-         Assert-VerifiableMock
-      }
-   }
-
-   Context 'Invoke-VSTeamRequest By Product ID' {
       # Called to convert from ProjectName to ProjectID
-      Mock Get-VSTeamProject {
-         return [PSCustomObject]@{
-            id = '00000000-0000-0000-0000-000000000000'
-         } } -Verifiable
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      Mock Invoke-RestMethod { return @() } -Verifiable -ParameterFilter {
-         $Uri -like "*https://vsrm.dev.azure.com/test/00000000-0000-0000-0000-000000000000*"
+      Mock Get-VSTeamProject { return [PSCustomObject]@{ id = '00000000-0000-0000-0000-000000000000' } } -Verifiable
+
+      It 'options should call API' {
+         Invoke-VSTeamRequest -Method Options
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq "Options" -and
+            $Uri -eq "https://dev.azure.com/test/_apis"
+         }
       }
 
-      Invoke-VSTeamRequest -ProjectName testproject -UseProjectId -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview'
+      It 'release should call API' {
+         Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://vsrm.dev.azure.com/test/testproject/_apis/release/releases/1?api-version=4.1-preview"
+         }
+      }
 
-      It 'Should call API' {
-         Assert-VerifiableMock
+      It 'AdditionalHeaders should call API' {
+         Invoke-VSTeamRequest -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview' -ProjectName testproject -JSON -AdditionalHeaders @{Test = "Test" }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Headers["Test"] -eq 'Test' -and
+            $Uri -eq "https://vsrm.dev.azure.com/test/testproject/_apis/release/releases/1?api-version=4.1-preview"
+         }
+      }
+
+      It 'by Product Id should call API with product id instead of name' {
+         Invoke-VSTeamRequest -ProjectName testproject -UseProjectId -Area release -Resource releases -Id 1 -SubDomain vsrm -Version '4.1-preview'
+
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://vsrm.dev.azure.com/test/00000000-0000-0000-0000-000000000000/_apis/release/releases/1?api-version=4.1-preview"
+         }
       }
    }
 }

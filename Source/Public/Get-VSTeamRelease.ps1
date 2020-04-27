@@ -55,7 +55,7 @@ function Get-VSTeamRelease {
 
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $([VSTeamVersions]::Release)
+            $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $(_getApiVersion Release)
             
             if ($JSON.IsPresent) {
                $resp | ConvertTo-Json -Depth 99
@@ -73,10 +73,10 @@ function Get-VSTeamRelease {
       }
       else {
          if ($ProjectName) {
-            $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $([VSTeamVersions]::Release)
+            $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $(_getApiVersion Release)
          }
          else {
-            $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $([VSTeamVersions]::Release)
+            $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $(_getApiVersion Release)
          }
 
          $QueryString = @{

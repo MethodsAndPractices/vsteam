@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
@@ -8,9 +9,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
 Describe 'Get-VSTeamOption' {
    Context 'Get-VSTeamOption' {
+      ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
@@ -28,14 +31,20 @@ Describe 'Get-VSTeamOption' {
       }
 
       It 'Should return all options' {
+         ## Act
          Get-VSTeamOption | Should Not Be $null
+
+         ## Assert
          Assert-MockCalled Invoke-RestMethod -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis"
          }
       }
 
       It 'Should return release options' {
+         ## Act
          Get-VSTeamOption -subDomain vsrm | Should Not Be $null
+
+         ## Assert
          Assert-MockCalled Invoke-RestMethod -ParameterFilter {
             $Uri -eq "https://vsrm.dev.azure.com/test/_apis"
          }
