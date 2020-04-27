@@ -10,10 +10,10 @@ function Update-VSTeamProject {
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [string] $Id,
       
-      [Parameter(ParameterSetName = 'ByName', Position = 0)]
+      [Alias('ProjectName')]
       [ProjectValidateAttribute()]      
       [ArgumentCompleter([ProjectCompleter]) ]
-      [Alias('ProjectName')]
+      [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
       [string] $Name
    )
    process {

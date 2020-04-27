@@ -4,9 +4,9 @@ function Add-VSTeamBuildDefinition {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $InFile,
 
-      [Parameter(Mandatory = $true, Position = 0)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [string] $ProjectName
    )
 

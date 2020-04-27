@@ -19,7 +19,7 @@ function Set-VSTeamEnvironmentStatus {
 
       [switch] $Force,
 
-      [Parameter(Position = 1)]
+      [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter]) ]
       [string] $ProjectName

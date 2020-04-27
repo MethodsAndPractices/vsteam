@@ -15,7 +15,7 @@ function Get-VSTeamClassificationNode {
       [Parameter(Mandatory = $false, ParameterSetName = "ByIds")]
       [int] $Depth,
 
-      [Parameter(Mandatory = $true, Position = 0)]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName

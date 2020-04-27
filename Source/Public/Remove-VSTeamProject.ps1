@@ -3,7 +3,7 @@ function Remove-VSTeamProject {
    param(
       [switch] $Force,
 
-      [Parameter(Mandatory = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('ProjectName')]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]

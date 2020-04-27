@@ -111,7 +111,7 @@ function Get-VSTeamGitCommit {
       [Parameter(ParameterSetName = 'ItemPath')]
       [string] $User,
       
-      [Parameter(Position = 0)]
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName

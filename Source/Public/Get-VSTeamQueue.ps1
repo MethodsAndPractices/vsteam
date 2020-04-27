@@ -12,7 +12,7 @@ function Get-VSTeamQueue {
       [Alias('QueueID')]
       [string] $id,
 
-      [Parameter(Mandatory = $true, Position = 0)]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName

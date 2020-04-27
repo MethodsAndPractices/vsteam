@@ -38,7 +38,7 @@ function Get-VSTeamPullRequest {
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [int] $Skip,
 
-      [Parameter(Position = 0)]
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName

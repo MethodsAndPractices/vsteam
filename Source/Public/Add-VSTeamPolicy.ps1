@@ -11,9 +11,9 @@ function Add-VSTeamPolicy {
       [Parameter(Mandatory = $true)]
       [hashtable] $settings,
 
-      [Parameter(Mandatory = $true, Position = 0)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [string] $ProjectName
    )
    process {

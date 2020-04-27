@@ -46,7 +46,7 @@ function Get-VSTeamRelease {
 
       [switch] $raw,
 
-      [Parameter(Position = 1)]
+      [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName

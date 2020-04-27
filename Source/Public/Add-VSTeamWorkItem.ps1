@@ -19,7 +19,7 @@ function Add-VSTeamWorkItem {
       [Parameter(Mandatory = $false)]
       [hashtable] $AdditionalFields,
 
-      [Parameter(Position = 0)]
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName,

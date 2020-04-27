@@ -25,9 +25,9 @@ function Add-VSTeamRelease {
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [string] $ProjectName,
 
       [ArgumentCompleter([ReleaseDefinitionCompleter])]

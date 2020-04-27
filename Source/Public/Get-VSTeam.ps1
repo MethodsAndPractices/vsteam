@@ -15,7 +15,7 @@ function Get-VSTeam {
       [Alias('TeamName')]
       [string[]] $Name,
 
-      [Parameter(Mandatory = $true, Position = 0)]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName

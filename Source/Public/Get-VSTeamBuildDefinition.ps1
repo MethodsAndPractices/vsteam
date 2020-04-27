@@ -27,7 +27,7 @@ function Get-VSTeamBuildDefinition {
 
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Mandatory = $true, Position = 0)]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [string] $ProjectName
    )
    

@@ -25,9 +25,9 @@ function Add-VSTeamPullRequest {
       [Parameter()]
       [switch] $Force,
 
-      [Parameter(Position = 0)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
       [string] $ProjectName
    )
 

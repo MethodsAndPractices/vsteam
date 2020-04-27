@@ -5,7 +5,7 @@ function Show-VSTeamReleaseDefinition {
       [Alias('ReleaseDefinitionID')]
       [int] $Id,
    
-      [Parameter(Mandatory = $true, Position = 0)]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName

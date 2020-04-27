@@ -33,7 +33,7 @@ function Invoke-VSTeamRequest {
 
       [string] $Team,
       
-      [Parameter(Position = 0)]
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName,
