@@ -1,19 +1,15 @@
 function Add-VSTeamIteration {
    [CmdletBinding()]
    param(
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]
       [Parameter(Mandatory = $true)]
       [string] $Name,
-
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
+   
       [Parameter(Mandatory = $false)]
       [string] $Path,
-
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
+  
       [Parameter(Mandatory = $false)]
       [datetime] $StartDate,
 
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
       [Parameter(Mandatory = $false)]
       [datetime] $FinishDate
    )
@@ -26,7 +22,17 @@ function Add-VSTeamIteration {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["ProjectName"]
 
-      $resp = Add-VSTeamClassificationNode -Name $Name -StructureGroup "iteration" -Path $Path -ProjectName $ProjectName -StartDate $StartDate -FinishDate $FinishDate
+      $params = @{}
+
+      if($StartDate){
+         $params.StartDate = $StartDate
+      }
+
+      if($FinishDate){
+         $params.FinishDate = $FinishDate
+      }
+
+      $resp = Add-VSTeamClassificationNode -Name $Name -StructureGroup "iterations" -Path $Path -ProjectName $ProjectName @params
 
       $resp = [VSTeamClassificationNode]::new($resp, $ProjectName)
 

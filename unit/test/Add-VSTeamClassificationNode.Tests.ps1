@@ -64,6 +64,8 @@ Describe 'Add-VSTeamClassificationNode' {
       }
       
       It 'with StructureGroup "<StructureGroup>" by empty Path "<Path>" should return Nodes' -TestCases @(
+         @{StructureGroup = "areas"; Path = "" }
+         @{StructureGroup = "areas"; Path = $null }
          @{StructureGroup = "iterations"; Path = "" }
          @{StructureGroup = "iterations"; Path = $null }
      ) {
