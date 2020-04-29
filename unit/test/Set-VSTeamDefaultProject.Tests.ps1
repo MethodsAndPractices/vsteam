@@ -13,7 +13,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/ProjectCompleter.ps1"
 . "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamProcessCache.ps1"
-. "$here/../../Source/Classes/ProcessCompleter.ps1"
+. "$here/../../Source/Classes/ProcessTemplateCompleter.ps1"
 . "$here/../../Source/Classes/ProcessValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamTeams.ps1"

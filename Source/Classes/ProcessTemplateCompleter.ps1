@@ -2,7 +2,9 @@ using namespace System.Collections
 using namespace System.Collections.Generic
 using namespace System.Management.Automation
 
-class ProcessCompleter : IArgumentCompleter {
+# This class defines an attribute that allows the user the tab complete
+# process templates for function parameters.
+class ProcessTemplateCompleter : IArgumentCompleter {
    [IEnumerable[CompletionResult]] CompleteArgument(
       [string] $CommandName,
       [string] $ParameterName,

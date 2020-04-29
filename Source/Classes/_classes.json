@@ -4,7 +4,7 @@
    "files": [
       "BuildCompleter.ps1",
       "BuildDefinitionCompleter.ps1",
-      "ProcessCompleter.ps1",
+      "ProcessTemplateCompleter.ps1",
       "ProjectCompleter.ps1",
       "ReleaseDefinitionCompleter.ps1",
       "TeamQueueCompleter.ps1",

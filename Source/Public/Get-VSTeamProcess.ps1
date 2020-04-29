@@ -13,7 +13,7 @@ function Get-VSTeamProcess {
 
       [Parameter(ParameterSetName = 'ByName', Mandatory = $true)]
       [ProcessValidateAttribute()]
-      [ArgumentCompleter([ProcessCompleter])]
+      [ArgumentCompleter([ProcessTemplateCompleter])]
       [string] $Name
    )
    process {
