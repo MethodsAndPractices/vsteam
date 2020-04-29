@@ -2,6 +2,10 @@ using namespace System.Collections
 using namespace System.Collections.Generic
 using namespace System.Management.Automation
 
+# This class defines an attribute that allows the user the tab complete
+# build numbers for function parameters. For this completer to work the
+# users must have already provided the ProjectName parameter for the
+# function or set a default project.
 class BuildCompleter : IArgumentCompleter {
    [IEnumerable[CompletionResult]] CompleteArgument(
       [string] $CommandName,
@@ -18,7 +22,7 @@ class BuildCompleter : IArgumentCompleter {
 
       # Only use the default project if the ProjectName parameter was
       # not used
-      if(-not $projectName){
+      if (-not $projectName) {
          $projectName = _getDefaultProject
       }
 
