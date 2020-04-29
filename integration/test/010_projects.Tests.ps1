@@ -174,7 +174,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object { $_.poolName -eq "Hosted" }
       }
 
-      $srcBuildDef = Get-Content $(Join-Path $PSScriptRoot "010_builddef_1.json") | ConvertFrom-Json
+      $srcBuildDef = Get-Content "$PSScriptRoot\sampleFiles\010_builddef_1.json" -Raw | ConvertFrom-Json
       $srcBuildDef.project.id = $project.Id
       $srcBuildDef.queue.id = $defaultQueue.Id
       $srcBuildDef.repository.id = $repo.Id
@@ -182,7 +182,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       $tmpBuildDef1 = (New-TemporaryFile).FullName
       $srcBuildDef | ConvertTo-Json -Depth 10 | Set-Content -Path $tmpBuildDef1
 
-      $srcBuildDef = Get-Content $(Join-Path $PSScriptRoot "010_builddef_2.json") | ConvertFrom-Json
+      $srcBuildDef = Get-Content "$PSScriptRoot\sampleFiles\010_builddef_2.json" -Raw | ConvertFrom-Json
       $srcBuildDef.project.id = $project.Id
       $srcBuildDef.queue.id = $defaultQueue.Id
       $srcBuildDef.repository.id = $repo.Id
