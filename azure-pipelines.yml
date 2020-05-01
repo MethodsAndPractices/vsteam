@@ -15,6 +15,7 @@ pr:
     exclude:
     # exclude files and folders which are not part of the module or build pipeline
     - README.md
+    - /README.md
     - test.md
 
 
