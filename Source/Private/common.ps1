@@ -216,7 +216,7 @@ function _getInstance {
 }
 
 function _getDefaultProject {
-   return $Global:PSDefaultParameterValues["*:projectName"]
+   return $Global:PSDefaultParameterValues["*-vsteam*:projectName"]
 }
 function _hasAccount {
    if (-not $(_getInstance)) {
@@ -896,7 +896,7 @@ function _clearEnvironmentVariables {
 
    $env:TEAM_PROJECT = $null
    [VSTeamVersions]::DefaultProject = ''
-   $Global:PSDefaultParameterValues.Remove("*:projectName")
+   $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
    # This is so it can be loaded by default in the next session
    if ($Level -ne "Process") {

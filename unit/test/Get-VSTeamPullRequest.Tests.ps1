@@ -70,7 +70,7 @@ Describe 'VSTeamPullRequest' {
       }
 
       It 'with no parameters' {
-         $Global:PSDefaultParameterValues.Remove("*:ProjectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamPullRequest
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -79,7 +79,7 @@ Describe 'VSTeamPullRequest' {
       }
 
       It 'with default project name' {
-         $Global:PSDefaultParameterValues["*:ProjectName"] = 'testproject'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'testproject'
          Get-VSTeamPullRequest -ProjectName testproject
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -88,7 +88,7 @@ Describe 'VSTeamPullRequest' {
       }
 
       It 'By ProjectName' {
-         $Global:PSDefaultParameterValues.Remove("*:ProjectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamPullRequest -ProjectName testproject
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

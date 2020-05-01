@@ -68,7 +68,7 @@ function Clear-VSTeamDefaultProject {
       }
 
       [VSTeamVersions]::DefaultProject = ''
-      $Global:PSDefaultParameterValues.Remove("*:projectName")
+      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
       Write-Output "Removed default project"
    }

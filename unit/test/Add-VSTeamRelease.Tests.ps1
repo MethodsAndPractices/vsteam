@@ -45,11 +45,11 @@ Describe 'VSTeamRelease' {
    Context 'Add-VSTeamRelease' {
       ## Arrange
       BeforeAll {
-         $Global:PSDefaultParameterValues["*:projectName"] = 'project'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'project'
       }
 
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       Mock Get-VSTeamReleaseDefinition {

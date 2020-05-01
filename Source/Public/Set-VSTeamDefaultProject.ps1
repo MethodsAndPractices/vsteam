@@ -62,7 +62,7 @@ function Set-VSTeamDefaultProject {
             [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
          }
 
-         $Global:PSDefaultParameterValues["*:projectName"] = $Project
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = $Project
       }
    }
 }

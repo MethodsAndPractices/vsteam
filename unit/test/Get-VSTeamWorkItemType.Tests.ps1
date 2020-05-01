@@ -47,7 +47,7 @@ Describe 'VSTeamWorkItemType' {
 
       It 'by type with default project should return 1 work item type' {
          ## Arrange
-         $Global:PSDefaultParameterValues["*:projectName"] = 'test'         
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'         
          
          ## Act
          Get-VSTeamWorkItemType -WorkItemType bug
@@ -60,7 +60,7 @@ Describe 'VSTeamWorkItemType' {
 
       It 'by type with explicit project should return 1 work item type' {
          ## Arrange
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
          ## Act
          Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug

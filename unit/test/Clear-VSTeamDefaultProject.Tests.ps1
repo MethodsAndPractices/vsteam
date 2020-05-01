@@ -47,51 +47,51 @@ Describe 'VSTeamProject' {
 
    Context 'Clear-VSTeamDefaultProject on Non Windows' {
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       Mock _isOnWindows { return $false }
 
       It 'should clear default project' {
-         $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'MyProject'
 
          Clear-VSTeamDefaultProject
 
-         $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should BeNullOrEmpty
       }
    }
 
    Context 'Clear-VSTeamDefaultProject as Non-Admin on Windows' {
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
          
       Mock _isOnWindows { return $true }
       Mock _testAdministrator { return $false }
 
       It 'should clear default project' {
-         $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'MyProject'
 
          Clear-VSTeamDefaultProject
 
-         $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should BeNullOrEmpty
       }
    }
 
    Context 'Clear-VSTeamDefaultProject as Admin on Windows' {
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       Mock _isOnWindows { return $true }
       Mock _testAdministrator { return $true }
 
       It 'should clear default project' {
-         $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'MyProject'
 
          Clear-VSTeamDefaultProject
 
-         $Global:PSDefaultParameterValues['*:projectName'] | Should BeNullOrEmpty
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should BeNullOrEmpty
       }
    }
 }
