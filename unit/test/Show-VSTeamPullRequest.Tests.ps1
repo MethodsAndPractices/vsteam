@@ -5,8 +5,10 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProcess.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
+. "$here/../../Source/Classes/VSTeamProcess.ps1"
 . "$here/../../Source/Classes/VSTeamProcessCache.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
@@ -15,12 +17,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamPullRequest' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
    Mock _getInstance { return 'https://dev.azure.com/test' }
-
-   # You have to set the version or the api-version will not be added when versions = ''
-   [VSTeamVersions]::Git = '5.1-preview'
+   Mock _getApiVersion { return '1.0-unitTest' } -ParameterFilter { $Service -eq 'Git' }
 
    $singleResult = @{
       pullRequestId  = 1

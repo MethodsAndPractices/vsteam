@@ -15,8 +15,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 #endregion
 
-$securityNamespace = 
-@"
+Describe 'VSTeamSecurityNamespace' {
+   
+   $securityNamespace = 
+   @"
 {
     "namespaceId":  "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87",
     "name":  "Git Repositories",
@@ -116,7 +118,6 @@ $securityNamespace =
 }
 "@ | ConvertFrom-Json
   
-Describe 'VSTeamSecurityNamespace' {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }

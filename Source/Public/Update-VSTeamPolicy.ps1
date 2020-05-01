@@ -14,21 +14,20 @@ function Update-VSTeamPolicy {
       [Parameter(Mandatory = $true)]
       [hashtable] $settings,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
    process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if (-not $type) {
          $policy = Get-VSTeamPolicy -ProjectName $ProjectName -Id $id | Select-Object -First 1
          $type = $policy.type.id
       }
-
+      
       $body = @{
          isEnabled  = $enabled.IsPresent;
          isBlocking = $blocking.IsPresent;

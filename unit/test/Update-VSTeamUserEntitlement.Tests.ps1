@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Get-VSTeamUserEntitlement.ps1"
@@ -39,7 +41,21 @@ Describe "VSTeamUserEntitlement" {
          }
       }
 
-      It 'Should update a user' {
+      # Get-VSTeamUserEntitlement by id
+      Mock _callAPI {
+         return [PSCustomObject]@{
+            accessLevel = [PSCustomObject]@{
+               accountLicenseType = "Stakeholder"
+               licensingSource    = "msdn"
+               msdnLicenseType    = "enterprise"
+            }
+            email       = 'test@user.com'
+            userName    = 'Test User'
+            id          = '00000000-0000-0000-0000-000000000000'
+         }
+      } -ParameterFilter { $id -eq '00000000-0000-0000-0000-000000000000' }
+
+      It 'by email should update a user' {
          Update-VSTeamUserEntitlement -License 'Stakeholder' -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com' -Force
             
          Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -51,47 +67,24 @@ Describe "VSTeamUserEntitlement" {
          }
       }
 
-      It 'update user with invalid email should throw' {
+      It 'by id should update a user' {
+         Update-VSTeamUserEntitlement -Id '00000000-0000-0000-0000-000000000000' -Force
+            
+         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Method -eq 'Patch' -and
+            $subDomain -eq 'vsaex' -and
+            $id -eq '00000000-0000-0000-0000-000000000000' -and
+            $resource -eq 'userentitlements' -and
+            $version -eq $(_getApiVersion MemberEntitlementManagement)
+         }
+      }
+
+      It 'with wrong email should update user with invalid email should throw' {
          { Update-VSTeamUserEntitlement -Email 'not@found.com' -License 'Express' -Force } | Should Throw
       }
 
-      It 'update user with invalid id should throw' {
+      It 'with invalid id should update user with invalid id should throw' {
          { Update-VSTeamUserEntitlement -Id '11111111-0000-0000-0000-000000000000'  -License 'Express' -Force } | Should Throw
       }
-
-      # Context 'Add-VSTeamUserEntitlement' {
-      #    $obj = @{
-      #       accessLevel         = @{
-      #          accountLicenseType = 'earlyAdopter'
-      #          licensingSource    = 'msdn'
-      #          msdnLicenseType    = 'enterprise'
-      #       }
-      #       user                = @{
-      #          principalName = 'test@user.com'
-      #          subjectKind   = 'user'
-      #       }
-      #       projectEntitlements = @{
-      #          group      = @{
-      #             groupType = 'ProjectContributor'
-      #          }
-      #          projectRef = @{
-      #             id = $null
-      #          }
-      #       }
-      #    }
-
-      #    $expected = $obj | ConvertTo-Json
-
-      #    Mock _callAPI -ParameterFilter {
-      #       $Method -eq 'Post' -and
-      #       $Body -eq $expected
-      #    }
-
-      #    Add-VSTeamUserEntitlement -License earlyAdopter -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com'
-
-      #    It 'Should add a user' {
-      #       Assert-VerifiableMock
-      #    }
-      # }
    }
 }

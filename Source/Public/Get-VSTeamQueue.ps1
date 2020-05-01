@@ -3,22 +3,22 @@ function Get-VSTeamQueue {
    param(
       [Parameter(ParameterSetName = 'List')]
       [string] $queueName,
+
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('None', 'Manage', 'Use')]
       [string] $actionFilter,
+
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('QueueID')]
-      [string] $id
+      [string] $id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
+   
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ($id) {
          $resp = _callAPI -ProjectName $ProjectName -Id $id -Area distributedtask -Resource queues `
             -Version $(_getApiVersion DistributedTask)
@@ -36,7 +36,7 @@ function Get-VSTeamQueue {
          foreach ($item in $resp.value) {
             $objs += [VSTeamQueue]::new($item, $ProjectName)
          }
-
+         
          Write-Output $objs
       }
    }

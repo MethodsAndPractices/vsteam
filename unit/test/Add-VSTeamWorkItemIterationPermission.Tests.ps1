@@ -10,6 +10,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamTeams.ps1"
 . "$here/../../Source/Classes/VSTeamRepositories.ps1"
@@ -40,28 +42,29 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 #endregion
 
-$userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
-$userSingleResultObject = [VSTeamUser]::new($userSingleResult)
+Describe 'VSTeamWorkItemIterationPermission' {
+   $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+   $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
 
-$groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
-$groupSingleResultObject = [VSTeamGroup]::new($groupSingleResult)
+   $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
+   $groupSingleResultObject = [VSTeamGroup]::new($groupSingleResult)
 
-$projectResult = [PSCustomObject]@{
-   name        = 'Test Project Public'
-   description = ''
-   url         = ''
-   id          = '010d06f0-00d5-472a-bb47-58947c230876'
-   state       = ''
-   visibility  = ''
-   revision    = 0
-   defaultTeam = [PSCustomObject]@{ }
-   _links      = [PSCustomObject]@{ }
-}
+   $projectResult = [PSCustomObject]@{
+      name        = 'Test Project Public'
+      description = ''
+      url         = ''
+      id          = '010d06f0-00d5-472a-bb47-58947c230876'
+      state       = ''
+      visibility  = ''
+      revision    = 0
+      defaultTeam = [PSCustomObject]@{ }
+      _links      = [PSCustomObject]@{ }
+   }
 
-$projectResultObject = [VSTeamProject]::new($projectResult)
+   $projectResultObject = [VSTeamProject]::new($projectResult)
 
-$accessControlEntryResult =
-@"
+   $accessControlEntryResult =
+   @"
 {
    "count": 1,
    "value": [
@@ -75,8 +78,8 @@ $accessControlEntryResult =
 }
 "@ | ConvertFrom-Json
 
-$classificationNodeIterationId =
-@"
+   $classificationNodeIterationId =
+   @"
 {
    "count": 1,
    "value": [
@@ -101,10 +104,10 @@ $classificationNodeIterationId =
  }
 "@ | ConvertFrom-Json | Select-Object -ExpandProperty value
 
-$classificationNodeIterationIdObject = [VSTeamClassificationNode]::new($classificationNodeIterationId, "test")
+   $classificationNodeIterationIdObject = [VSTeamClassificationNode]::new($classificationNodeIterationId, "test")
 
-$iterationRootNode =
-@"
+   $iterationRootNode =
+   @"
 {
    "id": 16,
    "identifier": "dfa90792-403a-4119-a52b-bd142c08291b",
@@ -121,9 +124,8 @@ $iterationRootNode =
  }
 "@ | ConvertFrom-Json
 
-$iterationRootNodeObject = [VSTeamClassificationNode]::new($iterationRootNode, "test")
+   $iterationRootNodeObject = [VSTeamClassificationNode]::new($iterationRootNode, "test")
 
-Describe 'VSTeamWorkItemIterationPermission' {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }

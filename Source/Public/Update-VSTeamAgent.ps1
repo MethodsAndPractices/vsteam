@@ -15,7 +15,7 @@ function Update-VSTeamAgent {
       foreach ($item in $Id) {
          try {
             if ($Force -or $pscmdlet.ShouldProcess($item, "Update-VSTeamAgent")) {
-               _callAPI -Method Post -Area "distributedtask/pools/$PoolId" -Resource messages -QueryString @{agentId = $item} -Version $([VSTeamVersions]::DistributedTask) -ContentType "application/json" | Out-Null
+               _callAPI -Method Post -Area "distributedtask/pools/$PoolId" -Resource messages -QueryString @{agentId = $item} -Version $(_getApiVersion DistributedTask) -ContentType "application/json" | Out-Null
                Write-Output "Update agent $item"
             }
          }

@@ -25,7 +25,7 @@ class VSTeamAccount : SHiPSDirectory {
          $topLevelFolders += [VSTeamFeeds]::new('Feeds')
       }
 
-      if(_testGraphSupport) {
+      if (_testGraphSupport) {
          $topLevelFolders += [VSTeamPermissions]::new('Permissions')
       }
 

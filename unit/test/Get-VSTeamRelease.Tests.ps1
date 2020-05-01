@@ -10,28 +10,26 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamFeed.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 
-Describe 'VSTeamRelease' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
-   [VSTeamVersions]::Release = '1.0-unittest'
+Describe 'VSTeamRelease' {   
    $results = Get-Content "$PSScriptRoot\sampleFiles\releaseResults.json" -Raw | ConvertFrom-Json
    $singleResult = Get-Content "$PSScriptRoot\sampleFiles\releaseSingleReult.json" -Raw | ConvertFrom-Json
 
+   Mock _getProjects { return $null }
+   Mock _hasProjectCacheExpired { return $true }
    Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
+   Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
    
    Mock Invoke-RestMethod { return $results }
-   Mock Invoke-RestMethod { return $singleResult } -ParameterFilter {
-      $Uri -like "*15*"
-   }
+   Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*15*" }
 
    Context 'Get-VSTeamRelease' {
-
       It 'by Id -Raw should return release as Raw' {
          ## Act
          $raw = Get-VSTeamRelease -ProjectName project -Id 15 -Raw

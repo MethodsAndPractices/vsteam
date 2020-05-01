@@ -1,17 +1,21 @@
 Set-StrictMode -Version Latest
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Remove-VSTeamAccount.ps1"
 . "$here/../../Source/Public/$sut"
-
-$resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+#endregion
 
 Describe "Update-VSTeamBuildDefinition" {  
+   $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+   
    Mock _hasProjectCacheExpired { return $false }
    
    Context "AzD" {

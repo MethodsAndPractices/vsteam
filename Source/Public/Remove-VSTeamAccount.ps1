@@ -1,7 +1,6 @@
 function Remove-VSTeamAccount {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
-      # Forces the command without confirmation
       [switch] $Force
    )
 

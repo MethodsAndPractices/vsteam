@@ -10,6 +10,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamFeed.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/Get-VSTeamBuild.ps1"
@@ -19,9 +21,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamReleaseStatus' {
    ## Arrange
-   [VSTeamVersions]::Release = '1.0-unittest'
-
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+   Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
 

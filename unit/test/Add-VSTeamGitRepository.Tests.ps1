@@ -31,6 +31,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamPool.ps1"
 . "$here/../../Source/Classes/VSTeamQueue.ps1"
 . "$here/../../Source/Classes/VSTeamBuildDefinition.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/Get-VSTeamQueue.ps1"
@@ -66,8 +68,6 @@ Describe "VSTeamGitRepository" {
       }
 
       Mock _hasProjectCacheExpired { return $false }
-
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
       Mock Invoke-RestMethod { return $singleResult }
 

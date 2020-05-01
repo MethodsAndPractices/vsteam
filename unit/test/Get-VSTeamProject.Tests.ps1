@@ -10,6 +10,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
+. "$here/../../Source/Classes/UncachedProjectCompleter.ps1"
+. "$here/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamTeams.ps1"
 . "$here/../../Source/Classes/VSTeamRepositories.ps1"
@@ -42,9 +46,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamProject' {
    Mock _getInstance { return 'https://dev.azure.com/test' }
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-         
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-   . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
 
    $results = [PSCustomObject]@{
       value = [PSCustomObject]@{

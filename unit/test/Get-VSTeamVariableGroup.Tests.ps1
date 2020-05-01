@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Set-VSTeamAPIVersion.ps1"
@@ -20,8 +22,6 @@ Describe 'VSTeamVariableGroup' {
 
    Context 'Get-VSTeamVariableGroup' {
       Context 'Services' {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
          $sampleFileVSTS = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples.json" | ConvertFrom-Json)
 
          Mock _getApiVersion { return 'VSTS' }
@@ -50,8 +50,6 @@ Describe 'VSTeamVariableGroup' {
       }
 
       Context 'Server' {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
          $sampleFile2017 = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples2017.json" | ConvertFrom-Json)
 
          Mock _getApiVersion { return 'TFS2017' }

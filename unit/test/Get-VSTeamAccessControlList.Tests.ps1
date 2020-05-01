@@ -9,6 +9,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamLeaf.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamSecurityNamespace.ps1"
 . "$here/../../Source/Classes/VSTeamAccessControlEntry.ps1"
 . "$here/../../Source/Classes/VSTeamAccessControlList.ps1"

@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Set-VSTeamAPIVersion.ps1"
@@ -19,8 +21,6 @@ Describe 'VSTeamVariableGroup' {
 
    Context 'Update-VSTeamVariableGroup' {
       Context 'Services' {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
          $sampleFileVSTS = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples.json" | ConvertFrom-Json)
       
          Mock _getApiVersion { return 'VSTS' }
@@ -32,12 +32,12 @@ Describe 'VSTeamVariableGroup' {
                
          It 'should update an exisiting Variable Group' {
             $testParameters = @{
-               ProjectName = "project"
-               Id          = 1
-               Name        = "TestVariableGroup1"
-               Description = "A test variable group"
-               Type        = "Vsts"
-               Variables   = @{
+               ProjectName  = "project"
+               Id           = 1
+               Name         = "TestVariableGroup1"
+               Description  = "A test variable group"
+               Type         = "Vsts"
+               Variables    = @{
                   key1 = @{
                      value = "value"
                   }
@@ -45,6 +45,10 @@ Describe 'VSTeamVariableGroup' {
                      value    = ""
                      isSecret = $true
                   }
+               }
+               ProviderData = @{
+                  serviceEndpointId = "AzureRMServiceEndpointGuid"
+                  vault             = "name_of_existing_key_vault"
                }
             }
       
@@ -69,9 +73,7 @@ Describe 'VSTeamVariableGroup' {
          }
       }
 
-      Context 'Server' {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-         
+      Context 'Server' {         
          $sampleFile2017 = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples2017.json" | ConvertFrom-Json)
 
          Mock _getApiVersion { return 'TFS2017' }
@@ -86,6 +88,7 @@ Describe 'VSTeamVariableGroup' {
                id          = 1
                Name        = "TestVariableGroup1"
                Description = "A test variable group"
+               Type        = "AzureKeyVault"
                Variables   = @{
                   key1 = @{
                      value = "value"

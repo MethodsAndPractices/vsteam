@@ -4,6 +4,15 @@
 
 _callAPI, _buildRequestURI and Invoke-VSTeamRequest now support UseProjectId switch if the Project ID is required for the API call.
 
+Addressed following issues:
+
+- Do not change the strict mode setting for the user's PowerShell session [#296](https://github.com/DarqueWarrior/vsteam/issues/296)
+- Consider reducing the scope of the default parameter "Project" from "*" to "*-VsTeam*" [#297](https://github.com/DarqueWarrior/vsteam/issues/297)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/275) from [Jhoneill](https://github.com/jhoneill) which included the following:
+
+- Removing Dynamic parameters for completer and validator attributes.
+
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/283) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added Get-VSTeamBuildTimeline to get timeline of a build

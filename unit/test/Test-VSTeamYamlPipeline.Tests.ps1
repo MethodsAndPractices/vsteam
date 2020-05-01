@@ -5,6 +5,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
@@ -19,7 +21,6 @@ Describe 'Test-VSTeamYamlPipeline' {
       $Uri -like "*_apis/projects*"
    }
 
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
    $testYamlPath = "$PSScriptRoot\sampleFiles\azure-pipelines.test.yml"
 
    Context 'Yaml Pipeline Checks AzD Services' {

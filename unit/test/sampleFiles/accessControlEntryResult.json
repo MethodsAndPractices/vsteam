@@ -5,7 +5,9 @@
          "descriptor": "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-1204400969-2402986413-2179408616-0-0-0-0-1",
          "allow": 8,
          "deny": 0,
-         "extendedInfo": {}
+         "extendedInfo": {
+            "message": "Hello World"
+         }
       }
    ]
 }

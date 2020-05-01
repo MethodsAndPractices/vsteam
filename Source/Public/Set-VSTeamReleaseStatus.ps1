@@ -7,25 +7,19 @@ function Set-VSTeamReleaseStatus {
       [ValidateSet('Active', 'Abandoned')]
       [string] $Status,
 
-      # Forces the command without confirmation
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    Process {
-      Write-Debug 'Set-VSTeamReleaseStatus Process'
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $body = '{ "id": ' + $id + ', "status": "' + $status + '" }'
 
       foreach ($item in $id) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set status on Release")) {
-            Write-Debug 'Set-VSTeamReleaseStatus Call the REST API'
 
             try {
                # Call the REST API

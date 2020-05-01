@@ -12,16 +12,14 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamInfo' {
    ## Arrange
-   . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
-
    Context 'Get-VSTeamInfo' {
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       It 'should return account and default project' {
          [VSTeamVersions]::Account = "mydemos"
-         $Global:PSDefaultParameterValues['*:projectName'] = 'TestProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'TestProject'
 
          ## Act
          $info = Get-VSTeamInfo

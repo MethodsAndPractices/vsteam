@@ -4,29 +4,33 @@ function Update-VSTeam {
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Alias('TeamName', 'TeamId', 'TeamToUpdate', 'Id')]
       [string]$Name,
+      
       [string]$NewTeamName,
+      
       [string]$Description,
-      [switch] $Force
+      
+      [switch] $Force,
+      
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
 
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if (-not $NewTeamName -and -not $Description) {
          throw 'You must provide a new team name or description, or both.'
       }
-
+      
       if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-VSTeam")) {
          if (-not $NewTeamName) {
             $body = '{"description": "' + $Description + '" }'
          }
+         
          if (-not $Description) {
             $body = '{ "name": "' + $NewTeamName + '" }'
          }
+
          if ($NewTeamName -and $Description) {
             $body = '{ "name": "' + $NewTeamName + '", "description": "' + $Description + '" }'
          }

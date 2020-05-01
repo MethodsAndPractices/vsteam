@@ -16,8 +16,6 @@ Describe 'Remove-VSTeamAccount' {
       $Uri -like "*_apis/projects*"
    }
 
-   . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
-
    Context 'Remove-VSTeamAccount run as administrator' {
       Mock _isOnWindows { return $true }
       Mock _testAdministrator { return $true }

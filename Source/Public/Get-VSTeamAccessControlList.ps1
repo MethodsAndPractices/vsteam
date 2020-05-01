@@ -26,25 +26,21 @@ function Get-VSTeamAccessControlList {
    )
 
    process {
-      if ($SecurityNamespace)
-      {
+      if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
       }
 
-      $queryString = @{}
+      $queryString = @{ }
 
-      if ($Token)
-      {
+      if ($Token) {
          $queryString.token = $Token
       }
 
-      if ($Descriptors -and $Descriptors.Length -gt 0)
-      {
+      if ($Descriptors -and $Descriptors.Length -gt 0) {
          $queryString.descriptors = $Descriptors -join ","
       }
 
-      if ($IncludeExtendedInfo.IsPresent)
-      {
+      if ($IncludeExtendedInfo.IsPresent) {
          $queryString.includeExtendedInfo = $true
       }
 

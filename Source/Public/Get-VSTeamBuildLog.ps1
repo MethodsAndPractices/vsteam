@@ -4,17 +4,15 @@ function Get-VSTeamBuildLog {
       [Parameter(Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
       [int[]] $Id,
-      [int] $Index
+
+      [int] $Index,
+        
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       foreach ($item in $id) {
          if (-not $Index) {
             # Build the url to return the logs of the build

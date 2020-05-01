@@ -1,13 +1,15 @@
 function Remove-VSTeamProject {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('ProjectName')]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $Name
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -ParameterName 'Name' -AliasName 'ProjectName'
-   }
-
+   
    Process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["Name"]

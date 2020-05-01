@@ -2,16 +2,14 @@ function Add-VSTeamGitRepository {
    [CmdletBinding()]
    param(
       [parameter(Mandatory = $true)]
-      [string] $Name
+      [string] $Name,
+
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $body = '{"name": "' + $Name + '"}'
 
       try {

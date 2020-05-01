@@ -4,35 +4,35 @@ function Add-VSTeamNuGetEndpoint {
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $EndpointName,
-
+      
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $NuGetUrl,
-
+      
       [Parameter(ParameterSetName = 'ClearToken', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [string] $PersonalAccessToken,
-
+      
       [Parameter(ParameterSetName = 'ClearApiKey', Mandatory = $true, HelpMessage = 'ApiKey')]
       [string] $ApiKey,
-
+      
       [Parameter(ParameterSetName = 'SecurePassword', Mandatory = $true, HelpMessage = 'Username')]
       [string] $Username,
-
+      
       [Parameter(ParameterSetName = 'SecureToken', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
-
+      
       [Parameter(ParameterSetName = 'SecureApiKey', Mandatory = $true, HelpMessage = 'ApiKey')]
       [securestring] $SecureApiKey,
-
+      
       [Parameter(ParameterSetName = 'SecurePassword', Mandatory = $true, HelpMessage = 'Password')]
-      [securestring] $SecurePassword
+      [securestring] $SecurePassword,
+        
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-
+   
+   process {
       if ($PersonalAccessToken) {
          $Authentication = 'Token'
          $token = $PersonalAccessToken
@@ -57,11 +57,8 @@ function Add-VSTeamNuGetEndpoint {
          $token = $credential.GetNetworkCredential().Password
       }
 
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters['ProjectName']
-
       $obj = @{
-         data = @{}
+         data = @{ }
          url  = $NuGetUrl
       }
 

@@ -226,7 +226,7 @@ stages:
 
   - template: build/integrationTests.yml
     parameters:
-      displayName: 'TFS 2018 Integration Tests'
+      displayName: 'Windows TFS 2018'
       os: 'Windows'
       pool: 'windows-latest'
       start2018: 'true'
@@ -237,7 +237,7 @@ stages:
 
   - template: build/integrationTests.yml
     parameters:
-      displayName: 'AzD Integration Tests'
+      displayName: 'Windows AzD'
       os: 'Windows'
       pool: 'windows-latest'
       name: 'windowsAzD'
