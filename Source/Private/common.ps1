@@ -1,5 +1,3 @@
-Set-StrictMode -Version Latest
-
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "It is used in other files")]
