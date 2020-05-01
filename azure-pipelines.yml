@@ -32,6 +32,7 @@ stages:
     - template: build/unitTests.yml
       parameters:
         os: '$(OS)'
+        CodeCoverage: 'true'
 
   - job: Windows_Phase
     displayName: Build Windows
@@ -43,7 +44,7 @@ stages:
       parameters:
         os: 'Windows'
         buildHelp: 'true'
-        CodeCoverage: 'true'
+        CodeCoverage: 'false'
 
     - task: PowerShell@2
       displayName: 'Install PSScriptAnalyzer'
