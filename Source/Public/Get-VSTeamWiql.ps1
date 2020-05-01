@@ -40,13 +40,13 @@ function Get-VSTeamWiql {
 
          $resp = _callAPI -ProjectName $ProjectName -Team $Team -Area 'wit' -Resource 'wiql'  `
             -method "POST" -ContentType "application/json" `
-            -Version $([VSTeamVersions]::Core) `
+            -Version $(_getApiVersion Core) `
             -Querystring $QueryString `
             -Body $body
       }
       else {
          $resp = _callAPI -ProjectName $ProjectName -Team $Team -Area 'wit' -Resource 'wiql'  `
-            -Version $([VSTeamVersions]::Core) -id "$Id" `
+            -Version $(_getApiVersion Core) -id "$Id" `
             -Querystring $QueryString
       }
 

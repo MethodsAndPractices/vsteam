@@ -5,15 +5,7 @@ function Get-VSTeamSecurityNamespace {
       [string] $Name,
 
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-      [ValidateScript({
-         try {
-             [System.Guid]::Parse($_) | Out-Null
-             $true
-         } catch {
-             $false
-         }
-      })]
-      [string] $Id,
+      [guid] $Id,
 
       [Parameter(ParameterSetName = 'List', Mandatory = $false)]
       [switch] $LocalOnly
@@ -25,7 +17,7 @@ function Get-VSTeamSecurityNamespace {
       if ($Id) {
           # Call the REST API
          $resp = _callAPI -Area 'securitynamespaces' -id $Id `
-         -Version $([VSTeamVersions]::Core) `
+         -Version $(_getApiVersion Core) -NoProject `
       } else {
          $queryString = @{}
          if ($LocalOnly.IsPresent)
@@ -34,7 +26,7 @@ function Get-VSTeamSecurityNamespace {
          }
 
          $resp = _callAPI -Area 'securitynamespaces' `
-         -Version $([VSTeamVersions]::Core) `
+         -Version $(_getApiVersion Core) -NoProject `
          -QueryString $queryString
       }
 

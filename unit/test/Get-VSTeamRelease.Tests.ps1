@@ -1,136 +1,100 @@
 Set-StrictMode -Version Latest
 
-# Loading System.Web avoids issues finding System.Web.HttpUtility
-Add-Type -AssemblyName 'System.Web'
+#region include
+Import-Module SHiPS
 
-InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+
+. "$here/../../Source/Classes/VSTeamLeaf.ps1"
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamFeed.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Private/applyTypes.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+
+Describe 'VSTeamRelease' {
+   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+
    [VSTeamVersions]::Release = '1.0-unittest'
+   $results = Get-Content "$PSScriptRoot\sampleFiles\releaseResults.json" -Raw | ConvertFrom-Json
+   $singleResult = Get-Content "$PSScriptRoot\sampleFiles\releaseSingleReult.json" -Raw | ConvertFrom-Json
 
-   $results = [PSCustomObject]@{
-      value = [PSCustomObject]@{
-         environments = [PSCustomObject]@{}
-         _links       = [PSCustomObject]@{
-            self = [PSCustomObject]@{}
-            web  = [PSCustomObject]@{}
-         }
-      }
+   Mock _getInstance { return 'https://dev.azure.com/test' }
+   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
+   
+   Mock Invoke-RestMethod { return $results }
+   Mock Invoke-RestMethod { return $singleResult } -ParameterFilter {
+      $Uri -like "*15*"
    }
 
-   $singleResult = [PSCustomObject]@{
-      environments = [PSCustomObject]@{}
-      variables    = [PSCustomObject]@{
-         BrowserToUse = [PSCustomObject]@{
-            value = "phantomjs"
-         }
-      }
-      _links       = [PSCustomObject]@{
-         self = [PSCustomObject]@{}
-         web  = [PSCustomObject]@{}
-      }
-   }
+   Context 'Get-VSTeamRelease' {
 
-   Describe 'Releases' {
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+      It 'by Id -Raw should return release as Raw' {
+         ## Act
+         $raw = Get-VSTeamRelease -ProjectName project -Id 15 -Raw
 
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+         ## Assert
+         $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.Management.Automation.PSCustomObject'
 
-      Context 'Get-VSTeamRelease by ID -Raw' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $singleResult
-         }
-
-         It 'should return release as Raw' {
-            $raw = Get-VSTeamRelease -ProjectName project -Id 15 -Raw
-
-            $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.Management.Automation.PSCustomObject'
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
-            }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
-      Context 'Get-VSTeamRelease by ID' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $singleResult
-         }
+      It 'by Id should return release as Object' {
+         ## Act
+         $r = Get-VSTeamRelease -ProjectName project -Id 15
 
-         It 'should return release as Object' {
-            $r = Get-VSTeamRelease -ProjectName project -Id 15
+         ## Assert
+         $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'Team.Release'
 
-            $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'Team.Release'
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
-            }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
-      Context 'Get-VSTeamRelease by ID -JSON' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $singleResult
-         }
+      It 'by Id -JSON should return release as JSON' {
+         ## Act
+         $r = Get-VSTeamRelease -ProjectName project -Id 15 -JSON
 
-         It 'should return release as JSON' {
-            $r = Get-VSTeamRelease -ProjectName project -Id 15 -JSON
+         ## Assert
+         $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.String'
 
-            $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.String'
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$([VSTeamVersions]::Release)"
-            }
-         }
-      }
-      
-      Context 'Get-VSTeamRelease with no parameters' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $results
-         }
-
-         It 'should return releases' {
-            Get-VSTeamRelease -projectName project
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
-            }
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
-      Context 'Get-VSTeamRelease with expand environments' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $results
-         }
+      It 'with no parameters should return releases' {
+         ## Act
+         Get-VSTeamRelease -projectName project
 
-         It 'should return releases' {
-            Get-VSTeamRelease -projectName project -expand environments
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$([VSTeamVersions]::Release)&`$expand=environments"
-            }
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
 
-      Context 'Get-VSTeamRelease with no parameters & no project' {
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock Invoke-RestMethod {
-            return $results
+      It 'with expand environments should return releases' {
+         ## Act
+         Get-VSTeamRelease -projectName project -expand environments
+
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)&`$expand=environments"
          }
+      }
 
-         It 'should return releases' {
-            Get-VSTeamRelease
+      It 'with no parameters & no project should return releases' {
+         ## Act
+         Get-VSTeamRelease
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases?api-version=$([VSTeamVersions]::Release)"
-            }
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
    }

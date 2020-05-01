@@ -23,7 +23,7 @@ function Get-VSTeamApproval {
          $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseIdsFilter -join ',')}
 
          # The support in TFS and VSTS are not the same.
-         $instance = $([VSTeamVersions]::Account)
+         $instance = $(_getInstance)
          if (_isVSTS $instance) {
             if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false) {
                $queryString.includeMyGroupApprovals = 'true';
@@ -40,7 +40,7 @@ function Get-VSTeamApproval {
          }
 
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $([VSTeamVersions]::Release) -QueryString $queryString
+         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $(_getApiVersion Release) -QueryString $queryString
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

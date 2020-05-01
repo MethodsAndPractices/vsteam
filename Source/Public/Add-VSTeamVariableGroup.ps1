@@ -55,7 +55,7 @@ function Add-VSTeamVariableGroup {
 
       # Call the REST API
       $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'variablegroups'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::VariableGroups)
+         -Method Post -ContentType 'application/json' -body $body -Version $(_getApiVersion VariableGroups)
 
       return Get-VSTeamVariableGroup -ProjectName $ProjectName -id $resp.id
    }

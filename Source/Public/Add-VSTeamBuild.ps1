@@ -61,8 +61,8 @@ function Add-VSTeamBuild {
       else {
          # Find the BuildDefinition id from the name
          $id = Get-VSTeamBuildDefinition -ProjectName "$ProjectName" -Type All |
-            Where-Object { $_.name -eq $BuildDefinition } |
-            Select-Object -ExpandProperty id
+         Where-Object { $_.name -eq $BuildDefinition } |
+         Select-Object -ExpandProperty id
       }
 
       $body = @{
@@ -73,7 +73,7 @@ function Add-VSTeamBuild {
 
       if ($QueueName) {
          $queueId = Get-VSTeamQueue -ProjectName "$ProjectName" -queueName "$QueueName" |
-            Select-Object -ExpandProperty Id
+         Select-Object -ExpandProperty Id
 
          $body.Add('queue', @{ id = $queueId })
       }
@@ -89,7 +89,7 @@ function Add-VSTeamBuild {
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' `
          -Method Post -ContentType 'application/json' -Body ($body | ConvertTo-Json) `
-         -Version $([VSTeamVersions]::Build)
+         -Version $(_getApiVersion Build)
 
       _applyTypesToBuild -item $resp
 

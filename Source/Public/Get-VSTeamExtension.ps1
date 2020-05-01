@@ -20,14 +20,14 @@ function Get-VSTeamExtension {
       if ($PublisherId -and $ExtensionId) {
          $resource = "extensionmanagement/installedextensionsbyname/$PublisherId/$ExtensionId"
 
-         $resp = _callAPI -SubDomain 'extmgmt' -Resource $resource -Version $([VSTeamVersions]::ExtensionsManagement)
+         $resp = _callAPI -SubDomain 'extmgmt' -Resource $resource -Version $(_getApiVersion ExtensionsManagement)
 
          $item = [VSTeamExtension]::new($resp)
 
          Write-Output $item
       }
       else {
-         $queryString = @{}
+         $queryString = @{ }
          if ($IncludeInstallationIssues.IsPresent) {
             $queryString.includeCapabilities = $true
          }
@@ -40,7 +40,7 @@ function Get-VSTeamExtension {
             $queryString.includeErrors = $true
          }
 
-         $resp = _callAPI -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -QueryString $queryString -Version $([VSTeamVersions]::ExtensionsManagement)
+         $resp = _callAPI -SubDomain 'extmgmt' -Resource 'extensionmanagement/installedextensions' -QueryString $queryString -Version $(_getApiVersion ExtensionsManagement)
 
          $objs = @()
 

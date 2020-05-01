@@ -24,7 +24,7 @@ function Get-VSTeamUserEntitlement {
            foreach ($item in $Id) {
                # Build the url to return the single build
                # Call the REST API
-               $resp = _callAPI -SubDomain 'vsaex' -Version $([VSTeamVersions]::MemberEntitlementManagement) -Resource 'userentitlements' -id $item
+               $resp = _callAPI -SubDomain 'vsaex' -Version $(_getApiVersion MemberEntitlementManagement) -Resource 'userentitlements' -id $item
 
                _applyTypesToUser -item $resp
 
@@ -35,7 +35,7 @@ function Get-VSTeamUserEntitlement {
            # Build the url to list the teams
            # $listurl = _buildUserURL
            $listurl = _buildRequestURI -SubDomain 'vsaex' -Resource 'userentitlements' `
-               -Version $([VSTeamVersions]::MemberEntitlementManagement)
+               -Version $(_getApiVersion MemberEntitlementManagement)
 
            $listurl += _appendQueryString -name "top" -value $top -retainZero
            $listurl += _appendQueryString -name "skip" -value $skip -retainZero

@@ -22,7 +22,7 @@ function Get-VSTeamTfvcBranch {
             includeDeleted = $IncludeDeleted;
          }
 
-         $resp = _callAPI -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $([VSTeamVersions]::Tfvc)
+         $resp = _callAPI -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $(_getApiVersion Tfvc)
 
          _applyTypesToTfvcBranch -item $resp
 

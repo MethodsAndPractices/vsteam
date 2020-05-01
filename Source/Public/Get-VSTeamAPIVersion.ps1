@@ -12,11 +12,12 @@ function Get-VSTeamAPIVersion {
       DistributedTask             = $([VSTeamVersions]::DistributedTask)
       VariableGroups              = $([VSTeamVersions]::VariableGroups)
       Tfvc                        = $([VSTeamVersions]::Tfvc)
-      Packaging                   = $([VSTeamVersions]::Packaging)
+      Packaging                   = $(_getApiVersion Packaging)
       TaskGroups                  = $([VSTeamVersions]::TaskGroups)
       MemberEntitlementManagement = $([VSTeamVersions]::MemberEntitlementManagement)
       ExtensionsManagement        = $([VSTeamVersions]::ExtensionsManagement)
       ServiceFabricEndpoint       = $([VSTeamVersions]::ServiceFabricEndpoint)
       Graph                       = $([VSTeamVersions]::Graph)
+      Policy                      = $([VSTeamVersions]::Policy)
    }
 }

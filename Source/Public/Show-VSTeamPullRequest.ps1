@@ -13,7 +13,7 @@ function Show-VSTeamPullRequest {
            $projectName = [uri]::EscapeDataString($pullRequest.repository.project.name)
            $repositoryId = $pullRequest.repositoryName
 
-           Show-Browser "$([VSTeamVersions]::Account)/$projectName/_git/$repositoryId/pullrequest/$Id"
+           Show-Browser "$(_getInstance)/$projectName/_git/$repositoryId/pullrequest/$Id"
        }
        catch {
            _handleException $_

@@ -41,7 +41,7 @@ function Add-VSTeamProject {
       try {
          # Call the REST API
          $resp = _callAPI -Area 'projects' `
-            -Method Post -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Core)
+            -Method Post -ContentType 'application/json' -body $body -Version $(_getApiVersion Core)
 
          _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 

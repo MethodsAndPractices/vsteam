@@ -24,7 +24,7 @@ function Remove-VSTeamRelease {
 
             try {
                # Call the REST API
-               _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item -Version $([VSTeamVersions]::Release) | Out-Null
+               _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item -Version $(_getApiVersion Release) | Out-Null
 
                Write-Output "Deleted release $item"
             }
