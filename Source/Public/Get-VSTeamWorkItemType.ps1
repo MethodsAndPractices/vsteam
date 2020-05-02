@@ -4,7 +4,7 @@ function Get-VSTeamWorkItemType {
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      [string] $ProjectName,
+      $ProjectName,
 
       [parameter(ParameterSetName='Process', Mandatory = $true)]
       [ValidateProcessAttribute()]
@@ -12,7 +12,12 @@ function Get-VSTeamWorkItemType {
       $ProcessTemplate,
 
       [ArgumentCompleter([WorkItemTypeCompleter])]
-      [string] $WorkItemType
+      [Alias('Name')]
+      $WorkItemType,
+
+      [parameter(ParameterSetName='Process')]
+      [ValidateSet('behaviors','layout','states')]
+      [string[]]$Expand
    )
 
    Process {
@@ -30,17 +35,27 @@ function Get-VSTeamWorkItemType {
          return $resp
       }
       elseif ($ProcessTemplate) {
-         $url = (Get-VSTeamProcess -Name $ProcessTemplate).url + "/workitemtypes?api-version=" + (_getApiVersion Graph)
-         $resp = (_callapi -Url $url)
+         #Get URL for the process - see if we cached it first, if not, request it.
+         if ($script:ProcessURLHash -and $script:ProcessURLHash[$ProcessTemplate]) {
+                  $url =  $script:ProcessURLHash[$ProcessTemplate]
+         }
+         else   { $url =  (Get-VSTeamProcess -Name $ProcessTemplate).url}
+         if (-not $url) {throw "Could not find the Process for '$ProcessTemplate" ; return}
+         else   { $url += "/workitemtypes?api-version=" + (_getApiVersion Graph)}
+
+         if ($Expand) { $resp = _callAPI -Url $url -QueryString @{'$expand' = ($Expand -Join ',').ToLower() }    }
+         else         { $resp = _callapi -Url $url }
+
          if (-not $WorkItemType)  {$WorkItemType = '*'}
          $resp.value | Where-Object {$_.name -like $workitemType} | ForEach-Object {
-               $_.PSObject.TypeNames.Insert(0, 'Team.WorkItemType')
-               Write-Output $_
+                $_.PSObject.TypeNames.Insert(0, 'Team.WorkItemType')
+                #Add members so that we can pipe this into other commands which look for these as valuebypropertyName
+                Add-Member           -InputObject $_ -MemberType AliasProperty -Name WorkItemType    -Value "name"
+                Add-Member -PassThru -InputObject $_ -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
          }
       }
       else {
-         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
-            -Version $(_getApiVersion Core)
+         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes' -Version $(_getApiVersion Core)
 
          # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
          # To replace all the "": with "_end":
