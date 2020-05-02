@@ -1,26 +1,42 @@
-class QueryCompleter : System.Management.Automation.IArgumentCompleter {
-    [System.Collections.Generic.IEnumerable[System.Management.Automation.CompletionResult]] CompleteArgument(
-        [string]$CommandName, [string]$ParameterName, [string]$WordToComplete,
-        [System.Management.Automation.Language.CommandAst]$CommandAst, [System.Collections.IDictionary] $FakeBoundParameters
-    )    {
-        $results = [System.Collections.Generic.List[System.Management.Automation.CompletionResult]]::new()
-        $projName = $FakeBoundParameters['ProjectName']
-        if (-not $projName -and $Global:PSDefaultParameterValues['*-Vsteam*:projectName']) {
-            $projName = $Global:PSDefaultParameterValues['*-Vsteam*:projectName']
-        }
-        if (-not $projName) {return $results}
-        if ([VSTeamQueryCache]::timestamp -lt 0 -or
-            [VSTeamQueryCache]::timestamp -lt [datetime]::Now.TimeOfDay.TotalMinutes -5) {
-            [VSTeamQueryCache]::queries  =  (Invoke-VSTeamRequest -ProjectName $projName  -Area wit -Resource queries -version ([vsteamversions]::core) -QueryString @{'$depth'=1}
+using namespace System.Collections
+using namespace System.Collections.Generic
+using namespace System.Management.Automation
+
+class QueryCompleter : IArgumentCompleter {
+   [IEnumerable[CompletionResult]] CompleteArgument(
+      [string] $CommandName,
+      [string] $ParameterName,
+      [string] $WordToComplete,
+      [Language.CommandAst] $CommandAst,
+      [IDictionary] $FakeBoundParameters) {
+
+      $results = [List[CompletionResult]]::new()
+
+      # If the user has explictly added the -ProjectName parameter
+      # to the command use that instead of the default project.
+      $projectName = $FakeBoundParameters['ProjectName']
+
+      # Only use the default project if the ProjectName parameter was
+      # not used
+      if (-not $projectName) {
+         $projectName = _getDefaultProject
+      }
+
+      # If there is no projectName by this point just return an empty list.
+      if ($projectName) {
+
+         if ([VSTeamQueryCache]::timestamp -lt 0 -or
+             [VSTeamQueryCache]::timestamp -lt [datetime]::Now.TimeOfDay.TotalMinutes -5) {
+             [VSTeamQueryCache]::queries  =  (Invoke-VSTeamRequest -ProjectName $projName  -Area wit -Resource queries -version ([vsteamversions]::core) -QueryString @{'$depth'=1}
                                             ).value.children | Select-Object Name,ID | Sort-Object Name
-            [VSTeamQueryCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
-        }
-        foreach ($q in [VSTeamQueryCache]::queries ) {
+             [VSTeamQueryCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
+         }
+         foreach ($q in [VSTeamQueryCache]::queries ) {
             if ($q.name -like "*$WordToComplete*" -and $q.name -match "[\s'\(\[#;@]") {
-                $results.Add([System.Management.Automation.CompletionResult]::new(('"{0}"' -f $q.name)))
+                $results.Add([CompletionResult]::new(('"{0}"' -f $q.name)))
             }
             elseif ($q.name -like "*$WordToComplete*"){
-                    $results.Add([System.Management.Automation.CompletionResult]::new($q.name))
+                    $results.Add([CompletionResult]::new($q.name))
             }
         }
         return $results

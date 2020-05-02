@@ -4,8 +4,11 @@ class ProcessValidateAttribute : ValidateArgumentsAttribute {
    [void] Validate(
       [object] $arguments,
       [EngineIntrinsics] $EngineIntrinsics) {
-      
-      if (_hasProcessTemplateCacheExpired) { 
+
+      #Do not fail on null or empty, leave that to other validation conditions
+      if ([string]::IsNullOrEmpty($arguments)) {return}
+
+      if (_hasProcessTemplateCacheExpired) {
          [VSTeamProcessCache]::processes = _getProcesses
          [VSTeamProcessCache]::timestamp = (Get-Date).Minute
       }
