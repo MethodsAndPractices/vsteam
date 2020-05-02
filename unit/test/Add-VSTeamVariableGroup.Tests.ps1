@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Set-VSTeamAPIVersion.ps1"
@@ -14,15 +16,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamVariableGroup' {
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock _hasProjectCacheExpired { return $false }
+   Mock _getProjects { return @() }
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'VariableGroups' }
 
    Context 'Add-VSTeamVariableGroup' {
       Context 'Services' {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
-
          $sampleFileVSTS = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples.json" | ConvertFrom-Json)
 
          Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -71,8 +69,6 @@ Describe 'VSTeamVariableGroup' {
       }
 
       Context 'Server' {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
          $sampleFile2017 = $(Get-Content "$PSScriptRoot\sampleFiles\variableGroupSamples2017.json" | ConvertFrom-Json)
 
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable

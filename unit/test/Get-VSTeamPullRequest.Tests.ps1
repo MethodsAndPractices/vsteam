@@ -7,6 +7,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProcess.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamProcessCache.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
@@ -18,13 +20,11 @@ Describe 'VSTeamPullRequest' {
    # can be tested.
    Update-TypeData -AppendPath "$here/../../Source/types/Team.PullRequest.ps1xml" -ErrorAction Ignore
 
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+   Mock _getProjects { return $null }
+   Mock _hasProjectCacheExpired { return $true }
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
-
-   # You have to set the version or the api-version will not be added when versions = ''
-   [VSTeamVersions]::Git = '5.1-preview'
 
    $singleResult = @{
       pullRequestId  = 1
@@ -70,7 +70,7 @@ Describe 'VSTeamPullRequest' {
       }
 
       It 'with no parameters' {
-         $Global:PSDefaultParameterValues.Remove("*:ProjectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamPullRequest
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -79,7 +79,7 @@ Describe 'VSTeamPullRequest' {
       }
 
       It 'with default project name' {
-         $Global:PSDefaultParameterValues["*:ProjectName"] = 'testproject'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'testproject'
          Get-VSTeamPullRequest -ProjectName testproject
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -88,7 +88,7 @@ Describe 'VSTeamPullRequest' {
       }
 
       It 'By ProjectName' {
-         $Global:PSDefaultParameterValues.Remove("*:ProjectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamPullRequest -ProjectName testproject
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

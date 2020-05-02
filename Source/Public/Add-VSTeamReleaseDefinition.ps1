@@ -2,19 +2,15 @@ function Add-VSTeamReleaseDefinition {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $inFile
+      [string] $inFile,
+
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
+   
    process {
-      Write-Debug 'Add-VSTeamReleaseDefinition Process'
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $resp = _callAPI -Method Post -subDomain vsrm -Area release -Resource definitions -ProjectName $ProjectName `
          -Version $(_getApiVersion Release) -inFile $inFile -ContentType 'application/json'
 

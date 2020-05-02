@@ -8,7 +8,6 @@ function Remove-VSTeamAgent {
       [Alias('AgentID')]
       [int[]] $Id,
 
-      # Forces the command without confirmation
       [switch] $Force
    )
 

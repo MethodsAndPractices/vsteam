@@ -6,6 +6,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Get-VSTeamWorkItem.ps1"
@@ -13,8 +14,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamWiql' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
    Mock _getInstance { return 'https://dev.azure.com/test' }
       
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -67,7 +66,7 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query' {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery
 
@@ -84,7 +83,7 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with -Top 250' {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 250
 
@@ -101,7 +100,7 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with -Top 0' {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 0
 
@@ -118,7 +117,7 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with expanded work items' {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Expand
 
@@ -135,7 +134,7 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with time precision' {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -TimePrecision
 
@@ -154,7 +153,7 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with query ID query' {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -163,7 +162,7 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with query ID query with expanded work items' {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1 -Expand
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

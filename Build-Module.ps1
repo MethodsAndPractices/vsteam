@@ -86,7 +86,7 @@ Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
 Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-      ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
 
 (Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
 
@@ -107,7 +107,7 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
 
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
-   if ($null -eq $(Get-Module -Name Pester)) {
+   if ($null -eq $(Get-Module -ListAvailable Pester)) {
       Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
@@ -120,7 +120,7 @@ if ($runTests.IsPresent) {
    }
 
    if ($codeCoverage.IsPresent) {
-      $pesterArgs.CodeCoverage = "$outputDir\*.ps1"
+      $pesterArgs.CodeCoverage = "./Source/**/*.ps1"
       $pesterArgs.CodeCoverageOutputFile = "coverage.xml"
       $pesterArgs.CodeCoverageOutputFileFormat = 'JaCoCo'
    }

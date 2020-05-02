@@ -6,19 +6,14 @@ function Add-VSTeamProject {
 
       [string] $Description,
 
-      [switch] $TFVC
+      [switch] $TFVC,
+
+      [ProcessValidateAttribute()]
+      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [string] $ProcessTemplate
    )
-
-   DynamicParam {
-      [VSTeamProcessCache]::timestamp = -1
-
-      _buildProcessNameDynamicParam -ParameterName 'ProcessTemplate' -Mandatory $false
-   }
-
+   
    process {
-      # Bind the parameter to a friendly variable
-      $ProcessTemplate = $PSBoundParameters["ProcessTemplate"]
-
       if ($TFVC.IsPresent) {
          $srcCtrl = "Tfvc"
       }

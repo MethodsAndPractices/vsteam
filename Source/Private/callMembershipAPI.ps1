@@ -9,8 +9,6 @@ function _callMembershipAPI {
       [ValidateSet('', 'Up', 'Down')]
       [string] $Direction
    )
-   Set-StrictMode -Version Latest
-
    # This will throw if this account does not support the graph API
    _supportsGraph
 

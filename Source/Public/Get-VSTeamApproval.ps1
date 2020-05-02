@@ -7,20 +7,18 @@ function Get-VSTeamApproval {
       [Alias('ReleaseIdFilter')]
       [int[]] $ReleaseIdsFilter,
 
-      [string] $AssignedToFilter
+      [string] $AssignedToFilter,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       try {
          # Build query string and determine if the includeMyGroupApprovals should be added.
-         $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseIdsFilter -join ',')}
+         $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseIdsFilter -join ',') }
 
          # The support in TFS and VSTS are not the same.
          $instance = $(_getInstance)
@@ -33,7 +31,7 @@ function Get-VSTeamApproval {
             # For TFS all three parameters must be set before you can add
             # includeMyGroupApprovals.
             if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false -and
-                [string]::IsNullOrEmpty($ReleaseIdsFilter) -eq $false -and
+               [string]::IsNullOrEmpty($ReleaseIdsFilter) -eq $false -and
                $StatusFilter -eq 'Pending') {
                $queryString.includeMyGroupApprovals = 'true';
             }

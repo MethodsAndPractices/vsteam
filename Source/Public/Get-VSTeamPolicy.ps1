@@ -2,16 +2,14 @@ function Get-VSTeamPolicy {
    [CmdletBinding()]
    param (
       [Parameter(ValueFromPipeline = $true)]
-      [int[]] $Id
+      [int[]] $Id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
       if ($id) {
          foreach ($item in $id) {
             try {

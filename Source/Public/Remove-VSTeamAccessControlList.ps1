@@ -19,15 +19,13 @@ function Remove-VSTeamAccessControlList {
    )
 
    process {
-      if ($SecurityNamespace)
-      {
+      if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
       }
 
-      $queryString = @{}
+      $queryString = @{ }
 
-      if ($Tokens)
-      {
+      if ($Tokens) {
          $queryString.tokens = $Tokens -join ","
       }
 

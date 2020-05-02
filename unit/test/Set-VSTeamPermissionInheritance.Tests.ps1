@@ -1,24 +1,52 @@
 ﻿Set-StrictMode -Version Latest
 
+#region include
 Import-Module SHiPS
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Classes/VSTeamLeaf.ps1"
+. "$here/../../Source/Classes/VSTeamDirectory.ps1"
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
+. "$here/../../Source/Classes/VSTeamTeams.ps1"
+. "$here/../../Source/Classes/VSTeamRepositories.ps1"
+. "$here/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
+. "$here/../../Source/Classes/UncachedProjectCompleter.ps1"
+. "$here/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamSecurityNamespace.ps1"
 . "$here/../../Source/Classes/VSTeamPermissionInheritance.ps1"
-. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Classes/VSTeamTask.ps1"
+. "$here/../../Source/Classes/VSTeamAttempt.ps1"
+. "$here/../../Source/Classes/VSTeamEnvironment.ps1"
+. "$here/../../Source/Classes/VSTeamRelease.ps1"
+. "$here/../../Source/Classes/VSTeamReleases.ps1"
+. "$here/../../Source/Classes/VSTeamBuild.ps1"
+. "$here/../../Source/Classes/VSTeamBuilds.ps1"
+. "$here/../../Source/Classes/VSTeamPool.ps1"
+. "$here/../../Source/Classes/VSTeamQueue.ps1"
+. "$here/../../Source/Classes/VSTeamQueues.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitionProcess.ps1"
+. "$here/../../Source/Classes/VSTeamProject.ps1"
+. "$here/../../Source/Classes/VSTeamGitRepository.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinition.ps1"
+. "$here/../../Source/Classes/VSTeamBuildDefinitions.ps1"
 . "$here/../../Source/Public/Get-VSTeamProject.ps1"
 . "$here/../../Source/Public/Get-VSTeamBuildDefinition.ps1"
 . "$here/../../Source/Public/Get-VSTeamReleaseDefinition.ps1"
 . "$here/../../Source/Public/Get-VSTeamGitRepository.ps1"
 . "$here/../../Source/Public/Get-VSTeamAccessControlList.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
-Describe 'Set-VSTeamPermissionInheritance' {
+Describe 'VSTeamPermissionInheritance' {
    $gitRepoResult = Get-Content "$PSScriptRoot\sampleFiles\singleGitRepo.json" -Raw | ConvertFrom-Json
    $buildDefresults = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
    $releaseDefresults = Get-Content "$PSScriptRoot\sampleFiles\releaseDefAzD.json" -Raw | ConvertFrom-Json
@@ -45,10 +73,22 @@ Describe 'Set-VSTeamPermissionInheritance' {
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
+   Mock _callAPI { return $singleResult } -ParameterFilter {
+      $Area -eq 'projects' -and
+      $id -eq 'project' -and
+      $Version -eq "$(_getApiVersion Core)" -and
+      $IgnoreDefaultProject -eq $true
+   }
+
+   Mock _useWindowsAuthenticationOnPremise { return $true }
+   
    Context 'Set-VSTeamPermissionInheritance buildDef' {
-      Mock Get-VSTeamProject { return $singleResult }
-      Mock _useWindowsAuthenticationOnPremise { return $true }
-      Mock Get-VSTeamBuildDefinition { return $buildDefresults.value }
+      Mock _callAPI { return $buildDefresults } -ParameterFilter {
+         $Area -eq 'build' -and
+         $Resource -eq 'definitions' -and
+         $Version -eq "$(_getApiVersion Build)"
+      }
+
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
          # Write-Host $args
@@ -71,8 +111,6 @@ Describe 'Set-VSTeamPermissionInheritance' {
    }
 
    Context 'Set-VSTeamPermissionInheritance releaseDef' {
-      Mock _useWindowsAuthenticationOnPremise { return $true }
-      Mock Get-VSTeamProject { return $singleResult }
       Mock Get-VSTeamReleaseDefinition { return $releaseDefresults.value }
       Mock Invoke-RestMethod {
          # If this test fails uncomment the line below to see how the mock was called.
@@ -96,8 +134,6 @@ Describe 'Set-VSTeamPermissionInheritance' {
    }
 
    Context 'Set-VSTeamPermissionInheritance repository' {
-      Mock _useWindowsAuthenticationOnPremise { return $true }
-      Mock Get-VSTeamProject { return $singleResult }
       Mock Get-VSTeamGitRepository { return $gitRepoResult }
       Mock Get-VSTeamAccessControlList { return $accesscontrollistsResult.value }
 

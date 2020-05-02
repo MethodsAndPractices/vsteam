@@ -11,16 +11,15 @@ function Update-VSTeamBuild {
       [parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $BuildNumber,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-VSTeamBuild")) {
 
          $body = '{'
@@ -40,7 +39,7 @@ function Update-VSTeamBuild {
          }
 
          $body += '}'
-
+         
          # Call the REST API
          _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -Id $Id `
             -Method Patch -ContentType 'application/json' -body $body -Version $(_getApiVersion Build) | Out-Null

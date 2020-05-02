@@ -36,17 +36,15 @@ function Get-VSTeamPullRequest {
 
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-      [int] $Skip
+      [int] $Skip,
+
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $false
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   
+   process {
       try {
          if ($Id) {
             if ($ProjectName) {
@@ -102,3 +100,4 @@ function Get-VSTeamPullRequest {
       }
    }
 }
+

@@ -7,16 +7,15 @@
 
       [Parameter(Mandatory)]
       [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
-      [string] $resourceType
+      [string] $resourceType,
+
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
       Write-Verbose "Creating VSTeamPermissionInheritance"
       $item = [VSTeamPermissionInheritance]::new($ProjectName, $Name, $resourceType)
       $token = $item.Token

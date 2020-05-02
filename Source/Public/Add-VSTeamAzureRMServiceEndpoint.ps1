@@ -4,7 +4,7 @@ function Add-VSTeamAzureRMServiceEndpoint {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]
       [string] $subscriptionName,
-
+        
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $subscriptionId,
 
@@ -17,17 +17,14 @@ function Add-VSTeamAzureRMServiceEndpoint {
       [Parameter(ParameterSetName = 'Manual', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $servicePrincipalKey,
 
-      [string] $endpointName
+      [string] $endpointName,
+
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       if (-not $endpointName) {
          $endpointName = $subscriptionName
       }

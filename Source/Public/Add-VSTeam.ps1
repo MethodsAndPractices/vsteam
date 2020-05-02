@@ -3,18 +3,16 @@ function Add-VSTeam {
    param(
       [Parameter(Mandatory = $true, Position = 1)]
       [Alias('TeamName')]
-      [string]$Name,
+      [string] $Name,
 
-      [string]$Description = ''
+      [string] $Description = '',
+      
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
       # Call the REST API

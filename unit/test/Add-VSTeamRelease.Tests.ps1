@@ -10,6 +10,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamFeed.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/BuildCompleter.ps1"
+. "$here/../../Source/Classes/ReleaseDefinitionCompleter.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/Get-VSTeamBuild.ps1"
@@ -20,8 +24,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe 'VSTeamRelease' {
    ## Arrange
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
-   
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    Mock _getInstance { return 'https://dev.azure.com/test' }
 
@@ -43,11 +45,11 @@ Describe 'VSTeamRelease' {
    Context 'Add-VSTeamRelease' {
       ## Arrange
       BeforeAll {
-         $Global:PSDefaultParameterValues["*:projectName"] = 'project'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'project'
       }
 
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       Mock Get-VSTeamReleaseDefinition {
@@ -61,11 +63,9 @@ Describe 'VSTeamRelease' {
 
       Mock Get-VSTeamBuild {
          $bld1 = New-Object -TypeName PSObject -Prop @{name = "Bld1"; id = 1 }
-         $bld2 = New-Object -TypeName PSObject -Prop @{name = "Bld2"; id = 2 }
 
          return @(
-            $bld1,
-            $bld2
+            $bld1
          )
       }
 

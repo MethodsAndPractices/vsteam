@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>Team.BuildTimelineRecord</Name>
+      <Members>
+         <ScriptProperty>
+            <Name>LastModified</Name>
+            <GetScriptBlock>[datetime]::Parse($this.lastModified)</GetScriptBlock>
+         </ScriptProperty>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>Name</Name>
+                     <Name>Id</Name>
+                     <Name>Type</Name>
+                     <Name>State</Name>
+                     <Name>Result</Name>
+                     <Name>ParentId</Name>
+                     <Name>ErrorCount</Name>
+                     <Name>WarningCount</Name>
+                  </ReferencedProperties>
+               </PropertySet>               
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>

@@ -98,6 +98,9 @@
       "Team.JobRequest.TableView.ps1xml",
       "Team.GitCommitRef.TableView.ps1xml",
       "Team.GitUserDate.TableView.ps1xml",
+      "Team.BuildTimeline.TableView.ps1xml",
+      "Team.BuildTimeline.ListView.ps1xml",
+      "Team.YamlPipelineResult.TableView.ps1xml",
       "Team.ResourceArea.TableView.ps1xml"
    ]
 }

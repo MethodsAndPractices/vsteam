@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
@@ -18,8 +20,6 @@ Describe 'VSTeamWorkItem' {
    Mock Invoke-RestMethod { return @() } -ParameterFilter {
       $Uri -like "*_apis/projects*"
    }
-
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    $obj = @{
       id  = 47
@@ -36,7 +36,7 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'Without Default Project should update work item' {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Update-VSTeamWorkItem -Id 1 -Title Test -Force
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -49,7 +49,7 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should update work item' {
-         $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
          Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -Force
 
          Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -66,7 +66,7 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should update work item with 2 parameters and additional properties' {
-         $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
 
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
          Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields
@@ -87,7 +87,7 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should update work item only with 1 parameter and additional properties' {
-         $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
 
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
          Update-VSTeamWorkItem 1 -Title Test1 -AdditionalFields $additionalFields
@@ -106,7 +106,7 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should update work item only with additional properties' {
-         $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
 
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
          Update-VSTeamWorkItem 1 -AdditionalFields $additionalFields
@@ -123,10 +123,10 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should throw exception when adding existing parameters to additional properties' {
-         $Global:PSDefaultParameterValues["*:projectName"] = 'test'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
 
          $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
-         { Update-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should Throw
+         { Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should Throw
       }
    }
 }

@@ -12,17 +12,15 @@
       [Parameter(Mandatory)]
       [bool] $NewState,
 
-      # Forces the command without confirmation
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
       Write-Verbose "Creating VSTeamPermissionInheritance"
       $item = [VSTeamPermissionInheritance]::new($ProjectName, $Name, $ResourceType)
       $token = $item.Token
@@ -59,11 +57,10 @@
       Write-Verbose "Result: $(ConvertTo-Json -InputObject $resp -Depth 100)"
 
       if (($resp | Select-Object -ExpandProperty dataProviders | Select-Object -ExpandProperty 'ms.vss-admin-web.security-view-update-data-provider' | Select-Object -ExpandProperty statusCode) -eq "204") {
-         Return "Inheritance successfully changed for $ResourceType $Name."
+         return "Inheritance successfully changed for $ResourceType $Name."
       }
       else {
          Write-Error "Inheritance change failed for $ResourceType $Name."
-         Return
       }
    }
 }

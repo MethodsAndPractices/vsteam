@@ -6,8 +6,8 @@ parameters:
   apiVersion: ''
   os: ''
   depends: ''
-  start: 'false'
-  stop: 'false'
+  start2017: 'false'
+  stop2017: 'false'
 
 jobs:
   - deployment: ${{ parameters.name }}
@@ -30,7 +30,15 @@ jobs:
                 azureSubscription: 'PM_DONOVANBROWN'
                 action: Start
                 resourceGroupName: SonarQube
-              condition: and(succeeded(), eq('${{ parameters.start }}', 'true'))
+              condition: and(succeeded(), eq('${{ parameters.start2017 }}', 'true'))
+
+            - task: AzureResourceGroupDeployment@2
+              displayName: 'Start TFS 2018'
+              inputs:
+                azureSubscription: 'PM_DONOVANBROWN'
+                action: Start
+                resourceGroupName: WinBldBox
+              condition: and(succeeded(), eq('${{ parameters.start2018 }}', 'true'))
 
             - task: PowerShell@2
               displayName: 'Register Private Repository'
@@ -103,4 +111,12 @@ jobs:
                 azureSubscription: 'PM_DONOVANBROWN'
                 action: StopWithDeallocate
                 resourceGroupName: SonarQube
-              condition: and(succeeded(), eq('${{ parameters.stop }}', 'true'))
+              condition: and(succeeded(), eq('${{ parameters.stop2017 }}', 'true'))
+
+            - task: AzureResourceGroupDeployment@2
+              displayName: 'Stop and Deallocate TFS 2018'
+              inputs:
+                azureSubscription: 'PM_DONOVANBROWN'
+                action: StopWithDeallocate
+                resourceGroupName: WinBldBox
+              condition: and(succeeded(), eq('${{ parameters.stop2018 }}', 'true'))

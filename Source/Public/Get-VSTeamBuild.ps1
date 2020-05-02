@@ -37,16 +37,16 @@ function Get-VSTeamBuild {
 
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true)]
       [Alias('BuildID')]
-      [int[]] $Id
+
+      [int[]] $Id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
       try {
          if ($id) {
             foreach ($item in $id) {

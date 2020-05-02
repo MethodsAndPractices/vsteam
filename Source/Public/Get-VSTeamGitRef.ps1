@@ -1,27 +1,24 @@
 function Get-VSTeamGitRef {
    [CmdletBinding()]
    param (
-      [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true)]
+      [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Alias('Id')]
       [guid] $RepositoryID,
-      [Parameter()]
+
       [string] $Filter,
-      [Parameter()]
+
       [string] $FilterContains,
-      [Parameter()]
+
       [int] $Top,
-      [Parameter()]
-      [string] $ContinuationToken
+
+      [string] $ContinuationToken,
+
+      [Parameter(Mandatory = $true, Position = 1, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       try {
 
          $queryString = @{
@@ -30,8 +27,8 @@ function Get-VSTeamGitRef {
             'filterContains'    = $FilterContains
             'continuationToken' = $continuationToken
          }
-         
-         $url = _buildRequestURI -Area git -Resource repositories -Version $(_getApiVersion Git) -ProjectName $ProjectName -Id "$RepositoryID/refs" 
+
+         $url = _buildRequestURI -Area git -Resource repositories -Version $(_getApiVersion Git) -ProjectName $ProjectName -Id "$RepositoryID/refs"
          $resp = _callAPI -url $url -QueryString $queryString
 
          $obj = @()
