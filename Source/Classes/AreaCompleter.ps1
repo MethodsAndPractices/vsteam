@@ -2,7 +2,7 @@ using namespace System.Collections
 using namespace System.Collections.Generic
 using namespace System.Management.Automation
 
-class UncachedProjectCompleter : IArgumentCompleter {
+class AreaCompleter : IArgumentCompleter {
    [IEnumerable[CompletionResult]] CompleteArgument(
       [string] $CommandName,
       [string] $ParameterName,
@@ -12,15 +12,9 @@ class UncachedProjectCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      [VSTeamProjectCache]::update()
-
-      foreach ($p in [VSTeamProjectCache]::GetCurrent() ) {
-         if ($p -like "*$WordToComplete*" -and $p -notmatch "\W") {
-            $results.Add([CompletionResult]::new($p))
-         }
-         elseif ($p -like "*$WordToComplete*") {
-            $results.Add([CompletionResult]::new("'$($p.replace("'","''"))'", $p, 0, $p))
-         }
+      @("build", "Contribution", "distributedtask", "git", "graph", "packaging", "policy", "process", "release", "tfvc", "wit"
+       ).where({$_ -like "$wordToComplete*"}) | ForEach-Object {
+            $results.Add([CompletionResult]::new($_))
       }
       return $results
    }

@@ -1,5 +1,19 @@
 # Changelog
 
+- Change scope of default `-Project` parameter to apply only to `*-Vsteam*` commands (#297 - impacts  _clearEnvironmentVariables, get-VSTeamInfo *-VSTeamDefaultProject)
+- Change formats.json and types.json to list "*" instead of individual files. This won't work for classes because they must be loaded in the correct sequence
+- Change build-module.ps1 and _source_ version of vsteam.psm1 to support having the classes in the PSM1 file. This makes them accessible outside the module and avoids issues with classes not being in scope when needed in completers, without needing to load from modules to process in the manifest. [see](https://github.com/PowerShell/PowerShell/issues/12132#issuecomment-599520589)
+- Change Invoke-vsteamRequest. (#302) Switch order of parameters "area" and "resource" and give them completers. Add a switch '-ExpandValue'
+    Example Type `Invoke-vs` `[Tab]` `[-]` `[Tab]` "-area" completes (first on the url path) `[space]` `[Tab]` "build" etc complete; for "WIT" `-Resource` `[Tab]` will suggest "workitemtypecategories" etc. and `-value` or `-ExpandValue` and instead of `Count=15; Value=[Array]`, the array is returned
+- Change the VSTeamProcess object (#300)  to add "ProcessTemplate" property as a duplicate of "name" so that objects can be piped into (e.g) Get-WorkItemType. 
+- Change the Get-VSTeamProcess function (#300) to update the cached list of processes automatically and to support wildcards in -Name parameter. 
+- Change the format xml for process type to show enabled/default status (#300) 
+- Add members to ProcessCache and ProjectCache classes (#300) to do the update  within the class and also to and all in one check for freshness, update if required and return the results. Update the completer/validator classes which use the cache objects. 
+- Fix issues with spaces and apostophes in names returned by completers. (#299) Ensure new completers/validators follow the style from #289 and parameters which use them bring names into line with those in #289
+- Change Get-VSteamWorkitemType to support getting work items from a process as well as from a Project (#300). Add a "hidden" attribute to Project WorkItem types (found from WorkItemCategories). Support Expanding _behaviors, layouts_ and _states_.   
+    example 1 `Get-VSTeamWorkItemType -ProcessTemplate Scrum2 -WorkItemType 'Product Backlog Item' -Expand layout | select -ExpandProperty layout`  
+    example 2 `Get-VSTeamProcess scr* |  Get-VSTeamWorkItemType  -WorkItemType pro* | ft name,processtemplate`
+
 ## 6.4.7
 
 _callAPI, _buildRequestURI and Invoke-VSTeamRequest now support UseProjectId switch if the Project ID is required for the API call.

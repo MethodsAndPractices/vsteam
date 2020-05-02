@@ -7,11 +7,10 @@ class UncachedProjectValidateAttribute :  ValidateArgumentsAttribute {
 
       #Do not fail on null or empty, leave that to other validation conditions
       if ([string]::IsNullOrEmpty($arguments)) {return}
+      #force a cache update
+      [VSTeamProjectCache]::Update()
 
-      [VSTeamProjectCache]::projects = _getProjects
-      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-
-      if (-not  $arguments -in [VSTeamProjectCache]::projects) {
+      if (-not  $arguments -in [VSTeamProjectCache]::GetCurrent()) {
          throw [ValidationMetadataException]::new(
             "'$arguments' is not a valid project. Valid projects are: '" +
             ([VSTeamProjectCache]::projects -join "', '") + "'"  )

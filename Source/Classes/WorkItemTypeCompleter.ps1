@@ -30,7 +30,7 @@ class WorkItemTypeCompleter : IArgumentCompleter {
                $results.Add([CompletionResult]::new($w))
             }
             elseif ($w -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new("'$w'"))
+               $results.Add([CompletionResult]::new("'$($w.replace("'","''"))'", $w, 0, $w))
             }
          }
       }

@@ -1,10 +1,10 @@
 function Get-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(ParameterSetName = 'ByName',Mandatory=$true, Position=0)]
+      [Parameter(ParameterSetName = 'ByName', Position=0)]
       [ArgumentCompleter([ProcessTemplateCompleter])]
       [Alias('ProcessName','ProcessTemplate')]
-      $Name,
+      $Name = '*',
 
       [Parameter(ParameterSetName = 'List')]
       [int] $Top = 100,
@@ -14,8 +14,7 @@ function Get-VSTeamProcess {
 
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProcessTemplateID')]
-      [string] $Id,
-
+      [string] $Id
    )
    process {
       if ($id) {
@@ -30,10 +29,7 @@ function Get-VSTeamProcess {
 
          Write-Output $project
       }
-      elseif ($Name) {
-         # Lookup Process ID by Name
-         Get-VSTeamProcess | Where-Object {$_.name -like $ProcessName} | Sort-Object -Property Name
-      }
+
       else {
          # Return list of processes
          try {
@@ -45,16 +41,14 @@ function Get-VSTeamProcess {
                '$skip' = $skip
             }
 
-            $objs = @()
-            #we just fetched the processes so let's update the cache. Also Cache the URLS for processes
+           #we just fetched the processes so let's update the cache. Also Cache the URLS for processes
             [VSTeamProcessCache]::processes = $resp.value.name | Sort-Object
             [VSTeamProcessCache]::timestamp = (Get-Date).Minute
             $script:ProcessURLHash = @{}
-            foreach ($item in $resp.value) {
-               $script:ProcessURLHash[$item.name] = [VSTeamVersions]::Account + "/_apis/work/processes/" + $item.typeId
-               $objs += [VSTeamProcess]::new($item)
-            }
-            $objs | Sort-Object -Property Name
+            $resp.value | ForEach-Object {
+               $script:ProcessURLHash[$_.name] = [VSTeamVersions]::Account + "/_apis/work/processes/" + $_.typeId
+               [VSTeamProcess]::new($_)
+            } | Where-Object {$_.name -like $Name} | Sort-Object -Property Name
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod

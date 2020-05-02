@@ -34,6 +34,21 @@ This command gets a list of the work items available to projects which use the '
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```PowerShell
+PS R:\repos\vsteam> Get-VSTeamProcess scr* |  Get-VSTeamWorkItemType  -WorkItemType pro* | ft name,processtemplate
+name                 ProcessTemplate
+----                 ---------------
+Product Backlog Item Scrum
+Product Backlog Item Scrum2
+Product Backlog Item Scrum4
+
+```
+
+The first command gets a the process templates which match SCR*. The second finds WorkItem Types 
+in those process which match "pro*", and the third shows a table of Type name and process template with that type
+
+### -------------------------- EXAMPLE 4 --------------------------
+
+```PowerShell
 PS R:\repos\vsteam> $t = Get-VSTeamWorkItemType -ProcessTemplate Basic -WorkItemType Task -Expand layout
 PS R:\repos\vsteam> $t.layout.pages.labels
 ```

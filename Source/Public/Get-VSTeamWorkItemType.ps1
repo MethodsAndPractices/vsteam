@@ -1,13 +1,14 @@
 function Get-VSTeamWorkItemType {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(ParameterSetName = 'List',  Mandatory = $true, ValueFromPipelineByPropertyName = $true , Position = 0)]
+      [parameter(ParameterSetName='Process', Mandatory = $false)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       $ProjectName,
 
-      [parameter(ParameterSetName='Process', Mandatory = $true)]
-      [ValidateProcessAttribute()]
+      [parameter(ParameterSetName='Process', Mandatory = $true , ValueFromPipelineByPropertyName = $true)]
+      [ProcessValidateAttribute()]
       [ArgumentCompleter([ProcessTemplateCompleter])]
       $ProcessTemplate,
 
@@ -48,10 +49,10 @@ function Get-VSTeamWorkItemType {
 
          if (-not $WorkItemType)  {$WorkItemType = '*'}
          $resp.value | Where-Object {$_.name -like $workitemType} | ForEach-Object {
-                $_.PSObject.TypeNames.Insert(0, 'Team.WorkItemType')
-                #Add members so that we can pipe this into other commands which look for these as valuebypropertyName
-                Add-Member           -InputObject $_ -MemberType AliasProperty -Name WorkItemType    -Value "name"
-                Add-Member -PassThru -InputObject $_ -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
+               _applyTypesWorkItemType -item $_
+               #Add members so that we can pipe this into other commands which look for these as valuebypropertyName
+               Add-Member           -InputObject $_ -MemberType AliasProperty -Name WorkItemType    -Value "name"
+               Add-Member -PassThru -InputObject $_ -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
          }
       }
       else {

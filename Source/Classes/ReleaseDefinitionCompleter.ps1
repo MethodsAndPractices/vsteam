@@ -30,7 +30,7 @@ class ReleaseDefinitionCompleter : IArgumentCompleter {
                $results.Add([CompletionResult]::new($r.name))
             }
             elseif  ($r.name -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new("'$($r.name)'"))
+               $results.Add([CompletionResult]::new("'$($r.name.replace("'","''"))'", $r.name, 0, $r.name))
             }
          }
       }

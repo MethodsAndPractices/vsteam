@@ -26,11 +26,11 @@ class TeamQueueCompleter : IArgumentCompleter {
       # list.
       if ($projectName) {
          foreach ($q in (Get-VSTeamQueue -ProjectName $projectName)) {
-            if ($q.name -like "*$WordToComplete*") {
+            if ($q.name -like "*$WordToComplete*" -and $q.name -notmatch '\W') {
                $results.Add([CompletionResult]::new($q.name))
             }
             elseif  ($q.name -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new("'$($q.name)'"))
+               $results.Add([CompletionResult]::new("'$($q.name.replace("'","''"))'", $q.name, 0, $q.name))
             }
          }
       }
