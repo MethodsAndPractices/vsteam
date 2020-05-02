@@ -10,6 +10,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamTeams.ps1"
 . "$here/../../Source/Classes/VSTeamRepositories.ps1"
@@ -29,7 +31,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamGroup.ps1"
 . "$here/../../Source/Classes/VSTeamUser.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
 . "$here/../../Source/Classes/VSTeamAccessControlEntry.ps1"
 . "$here/../../Source/Classes/VSTeamSecurityNamespace.ps1"
 . "$here/../../Source/Private/common.ps1"
@@ -40,28 +41,29 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 #endregion
 
-$userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
-$userSingleResultObject = [VSTeamUser]::new($userSingleResult)
+Describe 'VSTeamWorkItemAreaPermission' {
+   $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+   $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
 
-$groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
-$groupSingleResultObject = [VSTeamGroup]::new($groupSingleResult)
+   $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
+   $groupSingleResultObject = [VSTeamGroup]::new($groupSingleResult)
 
-$projectResult = [PSCustomObject]@{
-   name        = 'Test Project Public'
-   description = ''
-   url         = ''
-   id          = '010d06f0-00d5-472a-bb47-58947c230876'
-   state       = ''
-   visibility  = ''
-   revision    = 0
-   defaultTeam = [PSCustomObject]@{ }
-   _links      = [PSCustomObject]@{ }
-}
+   $projectResult = [PSCustomObject]@{
+      name        = 'Test Project Public'
+      description = ''
+      url         = ''
+      id          = '010d06f0-00d5-472a-bb47-58947c230876'
+      state       = ''
+      visibility  = ''
+      revision    = 0
+      defaultTeam = [PSCustomObject]@{ }
+      _links      = [PSCustomObject]@{ }
+   }
 
-$projectResultObject = [VSTeamProject]::new($projectResult)
+   $projectResultObject = [VSTeamProject]::new($projectResult)
 
-$accessControlEntryResult =
-@"
+   $accessControlEntryResult =
+   @"
 {
    "count": 1,
    "value": [
@@ -75,8 +77,8 @@ $accessControlEntryResult =
 }
 "@ | ConvertFrom-Json
 
-$classificationNodeById = 
-@"
+   $classificationNodeById = 
+   @"
 {
    "count": 1,
    "value": [
@@ -101,10 +103,10 @@ $classificationNodeById =
  }
 "@ | ConvertFrom-Json | Select-Object -ExpandProperty value
 
-$classificationNodeByIdObject = [VSTeamClassificationNode]::new($classificationNodeById, "test")
+   $classificationNodeByIdObject = [VSTeamClassificationNode]::new($classificationNodeById, "test")
 
-$parentClassificationNode = 
-@"
+   $parentClassificationNode = 
+   @"
 {
    "count": 1,
    "value": [
@@ -129,10 +131,10 @@ $parentClassificationNode =
  }
 "@ | ConvertFrom-Json | Select-Object -ExpandProperty value
 
-$parentClassificationNodeObject = [VSTeamClassificationNode]::new($parentClassificationNode, "test")
+   $parentClassificationNodeObject = [VSTeamClassificationNode]::new($parentClassificationNode, "test")
 
-$areaRootNode = 
-@"
+   $areaRootNode = 
+   @"
 {
    "id": 24,
    "identifier": "b33b12d7-6abb-4b7a-b9d6-2092d0933c99",
@@ -149,9 +151,8 @@ $areaRootNode =
  }
 "@ | ConvertFrom-Json
 
-$areaRootNodeObject = [VSTeamClassificationNode]::new($areaRootNode, "test")
+   $areaRootNodeObject = [VSTeamClassificationNode]::new($areaRootNode, "test")
 
-Describe 'VSTeamWorkItemAreaPermission' {
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.
    Mock _getInstance { return 'https://dev.azure.com/test' }

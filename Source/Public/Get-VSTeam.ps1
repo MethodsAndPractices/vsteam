@@ -13,17 +13,15 @@ function Get-VSTeam {
 
       [Parameter(ParameterSetName = 'ByName')]
       [Alias('TeamName')]
-      [string[]] $Name
+      [string[]] $Name,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ($Id) {
          foreach ($item in $Id) {
             # Call the REST API

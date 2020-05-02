@@ -10,6 +10,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
+. "$here/../../Source/Classes/UncachedProjectCompleter.ps1"
+. "$here/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamTeams.ps1"
 . "$here/../../Source/Classes/VSTeamRepositories.ps1"
@@ -41,9 +45,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamProject' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-   . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
-
    $singleResult = [PSCustomObject]@{
       name        = 'Test'
       description = ''

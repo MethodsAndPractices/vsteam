@@ -20,7 +20,7 @@ function Get-VSTeamJobRequest {
          }
       }
       else {
-         $body = @{agentid = $AgentID}
+         $body = @{agentid = $AgentID }
       }      
 
       $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource "jobrequests" `

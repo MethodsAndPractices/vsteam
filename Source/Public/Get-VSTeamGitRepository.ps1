@@ -6,17 +6,15 @@ function Get-VSTeamGitRepository {
       [guid[]] $Id,
 
       [Parameter(ParameterSetName = 'ByName', ValueFromPipeline = $true)]
-      [string[]] $Name
+      [string[]] $Name,
+
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $false
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ($id) {
          foreach ($item in $id) {
             try {

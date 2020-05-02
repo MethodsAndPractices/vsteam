@@ -1,12 +1,16 @@
 Set-StrictMode -Version Latest
 
+#region include
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
+#endregion
 
 Describe 'Remove-VSTeamBuild' {
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
@@ -15,9 +19,6 @@ Describe 'Remove-VSTeamBuild' {
    }
 
    Context 'Service' {
-      # Load the mocks to create the project name dynamic parameter
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
@@ -39,8 +40,6 @@ Describe 'Remove-VSTeamBuild' {
    }
    
    Context 'Server local Auth' {
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-
       Mock _useWindowsAuthenticationOnPremise { return $true }
 
       Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable

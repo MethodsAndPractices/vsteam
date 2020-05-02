@@ -2,53 +2,37 @@ function Add-VSTeamWorkItem {
    [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true)]
-      [string]$Title,
+      [string] $Title,
 
       [Parameter(Mandatory = $false)]
-      [string]$Description,
+      [string] $Description,
 
       [Parameter(Mandatory = $false)]
-      [string]$IterationPath,
+      [string] $IterationPath,
 
       [Parameter(Mandatory = $false)]
-      [string]$AssignedTo,
+      [string] $AssignedTo,
 
       [Parameter(Mandatory = $false)]
-      [int]$ParentId,
+      [int] $ParentId,
 
       [Parameter(Mandatory = $false)]
-      [hashtable]$AdditionalFields
+      [hashtable] $AdditionalFields,
+
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName,
+      
+      [Parameter(Mandatory = $true)]
+      [WorkItemTypeValidateAttribute()]
+      [ArgumentCompleter([WorkItemTypeCompleter])]
+      [string] $WorkItemType
    )
 
-   DynamicParam {
-      $dp = _buildProjectNameDynamicParam -mandatory $true
-
-      # If they have not set the default project you can't find the
-      # validateset so skip that check. However, we still need to give
-      # the option to pass a WorkItemType to use.
-      if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $wittypes = _getWorkItemTypes -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
-         $arrSet = $wittypes
-      }
-      else {
-         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of WorkItemType'
-         $wittypes = $null
-         $arrSet = $null
-      }
-
-      $ParameterName = 'WorkItemType'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -Mandatory $true
-      $dp.Add($ParameterName, $rp)
-
-      $dp
-   }
-
    Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       # The type has to start with a $
-      $WorkItemType = "`$$($PSBoundParameters["WorkItemType"])"
+      $WorkItemType = '$' + $WorkItemType
 
       # Constructing the contents to be send.
       # Empty parameters will be skipped when converting to json.

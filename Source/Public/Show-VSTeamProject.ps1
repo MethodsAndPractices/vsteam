@@ -3,13 +3,15 @@ function Show-VSTeamProject {
    param(
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
-      [string] $Id
+      [string] $Id,
+      
+      [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter]) ]
+      [Alias('ProjectName')]
+      [string] $Name
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name' -AliasName 'ProjectName'
-   }
-
+   
    process {
       _hasAccount
 

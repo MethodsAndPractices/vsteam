@@ -2,7 +2,7 @@ function Get-VSTeamUser {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'List')]
-      [ValidateSet('msa','aad','svc','imp','vss')]
+      [ValidateSet('msa', 'aad', 'svc', 'imp', 'vss')]
       [string[]] $SubjectTypes,
 
       [Parameter(ParameterSetName = 'ByUserDescriptor', Mandatory = $true)]
@@ -28,9 +28,8 @@ function Get-VSTeamUser {
          Write-Output $user
       }
       else {
-         $queryString = @{}
-         if ($SubjectTypes -and $SubjectTypes.Length -gt 0)
-         {
+         $queryString = @{ }
+         if ($SubjectTypes -and $SubjectTypes.Length -gt 0) {
             $queryString.subjectTypes = $SubjectTypes -join ','
          }
 

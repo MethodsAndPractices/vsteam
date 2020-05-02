@@ -5,6 +5,8 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
@@ -36,8 +38,6 @@ Describe "VSTeamUserEntitlement" {
          Mock _getApiVersion { return 'VSTS' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
          Mock _getInstance { return 'https://dev.azure.com/test' }
-
-         . "$PSScriptRoot\mocks\mockProjectDynamicParamMandatoryFalse.ps1"
 
          Context 'Get-VSTeamUserEntitlement' {
             Mock Invoke-RestMethod { return [PSCustomObject]@{ members = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } } } }

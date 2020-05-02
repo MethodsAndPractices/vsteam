@@ -4,36 +4,34 @@ function Get-VSTeamBuildDefinition {
       [Parameter(ParameterSetName = 'List')]
       [string] $Filter,
 
-      [Parameter(ParameterSetName = 'List')]
       [ValidateSet('build', 'xaml', 'All')]
+      [Parameter(ParameterSetName = 'List')]
       [string] $Type = 'All',
 
+      [Alias('BuildDefinitionID')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdJson')]
       [Parameter(Position = 0, ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-      [Alias('BuildDefinitionID')]
       [int[]] $Id,
 
+      [Parameter(ParameterSetName = 'ByID')]
       [Parameter(ParameterSetName = 'ByIdRaw')]
       [Parameter(ParameterSetName = 'ByIdJson')]
-      [Parameter(ParameterSetName = 'ByID')]
       [int] $Revision,
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
-      [switch]$JSON,
+      [switch] $JSON,
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-      [switch]$raw
+      [switch] $raw,
+
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
+   
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ($id) {
          foreach ($item in $id) {
             $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $(_getApiVersion Build) `

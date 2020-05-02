@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
@@ -19,10 +21,6 @@ Describe 'VSTeamBuild' {
 
    # Sample result for list of builds
    $results = Get-Content "$PSScriptRoot\sampleFiles\buildResults.json" -Raw | ConvertFrom-Json
-
-   # Load the mocks to create the project name dynamic parameter
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
 
    Mock Invoke-RestMethod { return $results }
    Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*101*" }

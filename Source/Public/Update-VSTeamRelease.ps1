@@ -7,17 +7,15 @@ function Update-VSTeamRelease {
       [Parameter(Mandatory = $true)]
       [PSCustomObject] $Release,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $body = $Release | ConvertTo-Json -Depth 99
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Release")) {

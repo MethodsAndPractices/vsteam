@@ -2,17 +2,14 @@ function Get-VSTeamServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $id
+      [string] $id,
+      
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       if ($id) {
          # Call the REST API
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `

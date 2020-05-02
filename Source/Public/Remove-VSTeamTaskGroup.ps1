@@ -1,20 +1,17 @@
 function Remove-VSTeamTaskGroup {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
-   param(       
+   param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $Id,
 
-      [switch] $Force
+      [switch] $Force,
+      
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       foreach ($item in $Id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Task Group")) {
             # Call the REST API

@@ -6,6 +6,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Private/callMembershipAPI.ps1"
 . "$here/../../Source/Public/Get-VSTeamProject.ps1"
@@ -14,9 +16,8 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamMembership' {
    ## Arrange
-   # You have to set the version or the api-version will not be added when [VSTeamVersions]::Graph = ''
-   [VSTeamVersions]::Graph = '5.0'
    Mock _supportsGraph
+   Mock _getApiVersion { return '5.0' } -ParameterFilter { $Service -eq 'Graph' }
    
    # Set the account to use for testing. A normal user would do this
    # using the Set-VSTeamAccount function.

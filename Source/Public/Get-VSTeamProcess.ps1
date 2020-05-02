@@ -9,48 +9,43 @@ function Get-VSTeamProcess {
 
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProcessTemplateID')]
-      [string] $Id
+      [string] $Id,
+
+      [Parameter(ParameterSetName = 'ByName', Mandatory = $true)]
+      [ProcessValidateAttribute()]
+      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [string] $Name
    )
-
-   DynamicParam {
-      [VSTeamProcessCache]::timestamp = -1
-
-      _buildProcessNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name'
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProcessName = $PSBoundParameters["Name"]
-
       if ($id) {
          $queryString = @{ }
 
          # Call the REST API
-         $resp = _callAPI -Area 'process/processes' -id $id `
+         $resp = _callAPI -area 'process' -resource 'processes' -id $id `
             -Version $(_getApiVersion Core) `
-            -QueryString $queryString
+            -QueryString $queryString -NoProject
 
          $project = [VSTeamProcess]::new($resp)
 
          Write-Output $project
       }
-      elseif ($ProcessName) {
+      elseif ($Name) {
          # Lookup Process ID by Name
-         Get-VSTeamProcess | where-object { $_.name -eq $ProcessName }
+         Get-VSTeamProcess | where-object { $_.name -eq $Name }
       }
       else {
          # Return list of processes
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'process/processes' `
-               -Version $(_getApiVersion Core) `
+            $resp = _callAPI -area 'process' -resource 'processes' `
+               -Version $(_getApiVersion Core) -NoProject `
                -QueryString @{
                '$top'  = $top
                '$skip' = $skip
             }
 
             $objs = @()
-
+            
             foreach ($item in $resp.value) {
                $objs += [VSTeamProcess]::new($item)
             }

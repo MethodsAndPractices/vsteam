@@ -15,6 +15,7 @@ function Get-VSTeamExtension {
       [Parameter(ParameterSetName = 'GetById', Mandatory = $true)]
       [string] $ExtensionId
    )
+   
    Process {
 
       if ($PublisherId -and $ExtensionId) {

@@ -13,7 +13,7 @@ function Remove-VSTeamUserEntitlement {
    )
 
    process {
-       # Thi swill throw if this account does not support MemberEntitlementManagement
+       # This will throw if this account does not support MemberEntitlementManagement
        _supportsMemberEntitlementManagement
 
        if ($email) {

@@ -8,17 +8,14 @@ function Add-VSTeamServiceEndpoint {
       [string] $endpointType,
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [hashtable] $object
+      [hashtable] $object,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       $object['name'] = $endpointName
       $object['type'] = $endpointType
 

@@ -3,18 +3,16 @@ function Remove-VSTeamServiceEndpoint {
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $id,
-
-      [switch] $Force
+   
+      [switch] $Force,
+   
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Service Endpoint")) {
             # Call the REST API

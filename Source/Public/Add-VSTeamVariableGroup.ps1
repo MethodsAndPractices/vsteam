@@ -10,11 +10,15 @@ function Add-VSTeamVariableGroup {
       [hashtable] $Variables,
 
       [Parameter(ParameterSetName = 'ByBody', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-      [string] $Body
-   )
+      [string] $Body,
 
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
+   )
    DynamicParam {
-      $dp = _buildProjectNameDynamicParam
+      $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
       if ([VSTeamVersions]::Version -ne "TFS2017" -and $PSCmdlet.ParameterSetName -eq "ByHashtable") {
          $ParameterName = 'Type'
@@ -30,9 +34,6 @@ function Add-VSTeamVariableGroup {
    }
 
    Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ([string]::IsNullOrWhiteSpace($Body))
       {
          $bodyAsHashtable = @{

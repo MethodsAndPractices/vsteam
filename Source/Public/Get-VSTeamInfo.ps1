@@ -1,8 +1,8 @@
 function Get-VSTeamInfo {
    return @{
-      Account        = [VSTeamVersions]::Account
-      Version        = [VSTeamVersions]::Version
+      Account        = _getInstance
+      Version        = $(_getApiVersion -Target)
       ModuleVersion  = [VSTeamVersions]::ModuleVersion
-      DefaultProject = $Global:PSDefaultParameterValues['*:projectName']
+      DefaultProject = $Global:PSDefaultParameterValues['*-vsteam*:projectName']
    }
 }

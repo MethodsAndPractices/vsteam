@@ -1,12 +1,18 @@
 Set-StrictMode -Version Latest
 
 #region include
+Import-Module SHiPS
+
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamLeaf.ps1"
+. "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamUser.ps1"
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Get-VSTeamUser.ps1"
@@ -15,8 +21,6 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'Pull Requests' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
-
    Mock _getInstance { return 'https://dev.azure.com/test' }
 
    # You have to set the version or the api-version will not be added when versions = ''
@@ -72,7 +76,11 @@ Describe 'Pull Requests' {
          $user = Get-VSTeamUser -Descriptor "aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
 
          Mock Invoke-RestMethod { return $result }
-         Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -EnableAutoComplete -AutoCompleteIdentity $user -Force
+         Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" `
+                                  -PullRequestId 19543 `
+                                  -EnableAutoComplete `
+                                  -AutoCompleteIdentity $user `
+                                  -Force
 
          Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and

@@ -16,11 +16,16 @@ function Update-VSTeamVariableGroup {
       [Parameter(ParameterSetName = 'ByBody', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Body,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
 
    DynamicParam {
-      $dp = _buildProjectNameDynamicParam
+      $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
       if ($(_getApiVersion -Target) -ne "TFS2017" -and $PSCmdlet.ParameterSetName -eq "ByHashtable") {
          $ParameterName = 'Type'
@@ -36,27 +41,23 @@ function Update-VSTeamVariableGroup {
    }
 
    Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-
-      if ([string]::IsNullOrWhiteSpace($Body))
-      {
+      if ([string]::IsNullOrWhiteSpace($Body)) {
          $bodyAsHashtable = @{
-         name        = $Name
-         description = $Description
-         variables   = $Variables
-      }
-      if ($(_getApiVersion -Target) -ne "TFS2017") {
-         $Type = $PSBoundParameters['Type']
+            name        = $Name
+            description = $Description
+            variables   = $Variables
+         }
+      
+         if ([VSTeamVersions]::Version -ne "TFS2017") {
+            $Type = $PSBoundParameters['Type']
             $bodyAsHashtable.Add("type", $Type)
 
-         $ProviderData = $PSBoundParameters['ProviderData']
-         if ($null -ne $ProviderData) {
+            $ProviderData = $PSBoundParameters['ProviderData']
+            if ($null -ne $ProviderData) {
                $bodyAsHashtable.Add("providerData", $ProviderData)
+            }
          }
-      }
-
+      
          $body = $bodyAsHashtable | ConvertTo-Json
       }
 

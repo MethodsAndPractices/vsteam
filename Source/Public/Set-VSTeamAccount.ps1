@@ -136,7 +136,7 @@ function Set-VSTeamAccount {
          }
       }
 
-      if((_isOnWindows) -and ($UsingWindowsAuth) -and $(_isVSTS $Account)) {
+      if ((_isOnWindows) -and ($UsingWindowsAuth) -and $(_isVSTS $Account)) {
          Write-Error "Windows Auth can only be used with Team Fondation Server or Azure DevOps Server.$([Environment]::NewLine)Provide a Personal Access Token or Bearer Token to connect to Azure DevOps Services."
          return
       }

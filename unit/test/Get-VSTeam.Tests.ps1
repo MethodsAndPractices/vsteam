@@ -10,33 +10,34 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamTeam.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
 #endregion
 
+Describe "VSTeam" {
+   $results = [PSCustomObject]@{
+      value = [PSCustomObject]@{
+         id          = '6f365a7143e492e911c341451a734401bcacadfd'
+         name        = 'refs/heads/master'
+         description = 'team description'
+      }
+   }
 
-$results = [PSCustomObject]@{
-   value = [PSCustomObject]@{
+   $singleResult = [PSCustomObject]@{
       id          = '6f365a7143e492e911c341451a734401bcacadfd'
       name        = 'refs/heads/master'
       description = 'team description'
    }
-}
-
-$singleResult = [PSCustomObject]@{
-   id          = '6f365a7143e492e911c341451a734401bcacadfd'
-   name        = 'refs/heads/master'
-   description = 'team description'
-}
    
-Describe "VSTeam" {
    Context "Get-VSTeam" {
+      Mock _hasProjectCacheExpired { return $false }
+      
       Context "services" {
          Mock _getInstance { return 'https://dev.azure.com/test' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
 
          Context 'Get-VSTeam with project name' {
             Mock Invoke-RestMethod { return $results }
@@ -131,8 +132,6 @@ Describe "VSTeam" {
 
 
       Context "Server" {
-         . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-
          Mock _useWindowsAuthenticationOnPremise { return $true }
 
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }

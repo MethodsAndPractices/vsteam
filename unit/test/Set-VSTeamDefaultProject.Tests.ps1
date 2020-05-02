@@ -10,7 +10,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Classes/VSTeamDirectory.ps1"
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamProcessCache.ps1"
+. "$here/../../Source/Classes/ProcessTemplateCompleter.ps1"
+. "$here/../../Source/Classes/ProcessValidateAttribute.ps1"
 . "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
 . "$here/../../Source/Classes/VSTeamTeams.ps1"
 . "$here/../../Source/Classes/VSTeamRepositories.ps1"
@@ -43,34 +47,31 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe 'VSTeamProject' {
-   . "$PSScriptRoot\mocks\mockProjectNameDynamicParam.ps1"
-   . "$PSScriptRoot\mocks\mockProcessNameDynamicParam.ps1"
-
    Mock _getInstance { return 'https://dev.azure.com/test' }
 
    Context 'Set-VSTeamDefaultProject' {
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       It 'should set default project' {
          Set-VSTeamDefaultProject 'DefaultProject'
 
-         $Global:PSDefaultParameterValues['*:projectName'] | Should be 'DefaultProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should be 'DefaultProject'
       }
 
       It 'should update default project' {
-         $Global:PSDefaultParameterValues['*:projectName'] = 'DefaultProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'DefaultProject'
 
          Set-VSTeamDefaultProject -Project 'NextProject'
 
-         $Global:PSDefaultParameterValues['*:projectName'] | Should be 'NextProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should be 'NextProject'
       }
    }
 
    Context 'Set-VSTeamDefaultProject on Non Windows' {
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       Mock _isOnWindows { return $false } -Verifiable
@@ -79,13 +80,13 @@ Describe 'VSTeamProject' {
          Set-VSTeamDefaultProject 'MyProject'
 
          Assert-VerifiableMock
-         $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should be 'MyProject'
       }
    }
 
    Context 'Set-VSTeamDefaultProject As Admin on Windows' {
       AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*:projectName")
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       Mock _isOnWindows { return $true }
@@ -95,7 +96,7 @@ Describe 'VSTeamProject' {
          Set-VSTeamDefaultProject 'MyProject'
 
          Assert-VerifiableMock
-         $Global:PSDefaultParameterValues['*:projectName'] | Should be 'MyProject'
+         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should be 'MyProject'
       }
    }
 }
