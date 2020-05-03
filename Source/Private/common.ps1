@@ -41,6 +41,7 @@ function _callAPI {
 
    # If the caller did not provide a Url build it.
    if (-not $Url) {
+      if (-not (_getInstance)) {throw [System.Exception]'No logon. Cannot call the REST API.'}
       $buildUriParams = @{ } + $PSBoundParameters;
       $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
       foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
@@ -436,15 +437,9 @@ function _getWorkItemTypes {
 
    # Call the REST API
    try {
-      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
-
-      # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
-      # To replace all the "": with "_end":
-      $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
-
-      if ($resp.count -gt 0) {
-         Write-Output ($resp.value).name
-      }
+      $v      = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
+      $hidden = $v.value.where({$_.referencename -eq "Microsoft.HiddenCategory"}).workitemtypes.name
+      $v.value.where(          {$_.referencename -ne "Microsoft.HiddenCategory"}).workitemtypes.name.where({$_ -notin $hidden})
    }
    catch {
       Write-Verbose $_
