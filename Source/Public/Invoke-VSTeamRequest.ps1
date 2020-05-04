@@ -54,16 +54,16 @@ function Invoke-VSTeamRequest {
       $params.Remove('JSON') | Out-Null
       $params.Remove('ExpandValue') | Out-Null
 
-      $output = _callAPI @params
+      $resp = _callAPI @params
 
       if ($JSON.IsPresent) {
-         $output | ConvertTo-Json -Depth 99
+         $resp | ConvertTo-Json -Depth 99
       }
       elseif ($ExpandValue) {
-         $output | Select-Object -ExpandProperty Value
+         $resp | Select-Object -ExpandProperty Value
       }
       else {
-         $output
+         $resp
       }
    }
 }
