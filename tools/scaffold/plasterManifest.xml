@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest schemaVersion="1.1" templateType="Item" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+	<metadata>
+		<name>VsTeamNewCmdlet</name>
+		<id>62071bc2-9397-494f-a4a8-682c15c31e83</id>
+		<version>0.1.0</version>
+		<title>VsTeam New Command Template</title>
+		<description>Scaffolds a new cmdlet</description>
+		<author>Sebastian Schütze</author>
+		<tags>VSTeam</tags>
+	</metadata>
+	<parameters>
+		<parameter name="CommandVerb" type="text" prompt="Enter the verb of the command you want to use" />
+		<parameter name="CommandNoun" type="text" prompt="Enter the noun of the command" />
+	</parameters>
+	<content>
+		<file source="New-Cmdlet.documentation.md" destination=".docs/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" />
+		<modify path=".docs/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" encoding="UTF8">
+			<replace>
+				<original>CommandVerb</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandVerb</substitute>
+			</replace>
+			<replace>
+				<original>CommandNoun</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
+			</replace>
+		</modify>
+		<file source="New-Cmdlet.synopsis.md" destination=".docs/synopsis/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" />
+		<modify path=".docs/synopsis/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" encoding="UTF8">
+			<replace>
+				<original>CommandVerb</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandVerb</substitute>
+			</replace>
+			<replace>
+				<original>CommandNoun</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
+			</replace>
+		</modify>
+		<file source="New-Cmdlet.Tests.ps1.tmpl" destination="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" />
+		<modify path="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" encoding="UTF8">
+			<replace>
+				<original>CommandVerb</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandVerb</substitute>
+			</replace>
+			<replace>
+				<original>CommandNoun</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
+			</replace>
+		</modify>
+      <file source="NewCmdlet.ListView.ps1xml" destination="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.ListView.ps1xml" />
+      <file source="NewCmdlet.TableView.ps1xml" destination="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.TableView.ps1xml" />
+      <file source="NewCmdlet.Type.ps1xml" destination="Source/types/Team.${PLASTER_PARAM_CommandNoun}.ps1xml" />
+	</content>
+</plasterManifest>

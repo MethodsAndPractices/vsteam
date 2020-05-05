@@ -1,0 +1,54 @@
+Set-StrictMode -Version Latest
+
+#region include
+Import-Module SHiPS
+
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+
+. "$here/../../Source/Classes/VSTeamVersions.ps1"
+. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
+. "$here/../../Source/Private/applyTypes.ps1"
+. "$here/../../Source/Private/common.ps1"
+. "$here/../../Source/Public/$sut"
+#endregion
+
+Describe "VSTeam#CommandNoun" {
+   Context "CommandVerb-VSTeamCommandNoun" {
+            
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' }
+
+      Mock _callAPI {
+         #Write-Host $args 
+         return 
+      }
+
+      It 'simple unit test' {
+         CommandVerb-VSTeamCommandNoun -Param1 "Value1"
+
+         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Method -eq 'Post' -and
+            $ContentType -eq 'application/json' -and
+            $Body -eq '{ "name": "TestTeam", "description": "" }'
+            $Version -eq '1.0-unitTests'
+         }
+      }
+
+
+      It 'unit test with multiple input testdata <TestData>' -TestCase @(
+         {TestData = "MyData1" }
+         {TestData = "MyData2" }
+      ) {
+         param ($TestData)
+         CommandVerb-VSTeamCommandNoun -Param1 $TestData
+
+         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Method -eq 'Post' -and
+            $ContentType -eq 'application/json' -and
+            $Version -eq '1.0-unitTests'
+         }
+      }
+   }
+}
