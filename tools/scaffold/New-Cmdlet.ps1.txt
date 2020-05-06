@@ -1,0 +1,21 @@
+function CommandVerb-VSTeamCommandNoun {
+   [CmdletBinding()]
+   param(
+      [Parameter(Mandatory = $true, Position = 0)]
+      [string] $Param1
+   )
+
+   Process {     
+      
+      #TODO: add your own code to call the API
+      $resp = _callAPI -Area '#area#' -Resource '#resource#'  `
+         -Version $(_getApiVersion '#apiVersion#') `
+         -Querystring @{
+         queryParam      = $Param1
+      }     
+
+      #TODO: return only data when needed. E.g. remove cmdlets don't usually need to return anything
+      return $resp
+     
+   }
+}
