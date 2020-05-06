@@ -7,17 +7,15 @@ function CommandVerb-VSTeamCommandNoun {
 
    Process {     
       
-      #TODO: add your own code to call the API
-      $resp = _callAPI -Area '#area#' -Resource '#resource#'  `
-         -Version $(_getApiVersion '#apiVersion#') `
-         -Querystring @{
-         queryParam      = $Param1
-      }     
-
-      #TODO: remove this when you add your own code
-      $resp = @{
-         property = $Param1
+      #TODO: add your own code to call the API, make sure you use the correct Api version 
+      $resp = _callAPI -Area 'area' -Resource 'resource'  `
+         -Method "Post" `
+         -ContentType 'application/json' `
+         -Version $(_getApiVersion 'Core') `
+         -QueryString @{
+         'queryParam' = $Param1
       }
+
       #TODO: return only data when needed. E.g. remove cmdlets don't usually need to return anything
       return $resp
      

@@ -18,28 +18,32 @@ Describe "VSTeamCommandNoun" {
    Context "CommandVerb-VSTeamCommandNoun" {
             
       Mock _getInstance { return 'https://dev.azure.com/test' }
-      Mock _getApiVersion { return '1.0-unitTests' }
+      Mock _getApiVersion { 
+         Write-Host $args
+         return '1.0-unitTests' 
+      }
 
       Mock _callAPI {
          #Write-Host $args 
-         return 
+         $resp = @{property = $Param1 } | ConvertTo-Json -Depth 50
+         return $resp
       }
 
       It 'simple unit test' {
-         CommandVerb-VSTeamCommandNoun -Param1 "Value1"
+         $param1Value = "Value1"
+         CommandVerb-VSTeamCommandNoun -Param1 $param1Value
 
          Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Post' -and
             $ContentType -eq 'application/json' -and
-            $Body -eq '{ "name": "TestTeam", "description": "" }'
             $Version -eq '1.0-unitTests'
          }
       }
 
 
       It 'unit test with multiple input testdata <TestData>' -TestCase @(
-         {TestData = "MyData1" }
-         {TestData = "MyData2" }
+         @{ TestData = "MyData1" }
+         @{ TestData = "MyData2" }
       ) {
          param ($TestData)
          CommandVerb-VSTeamCommandNoun -Param1 $TestData
