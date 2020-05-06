@@ -19,7 +19,6 @@ Describe "VSTeamCommandNoun" {
             
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { 
-         Write-Host $args
          return '1.0-unitTests' 
       }
 
