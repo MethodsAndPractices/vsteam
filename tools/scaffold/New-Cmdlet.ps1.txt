@@ -14,6 +14,10 @@ function CommandVerb-VSTeamCommandNoun {
          queryParam      = $Param1
       }     
 
+      #TODO: remove this when you add your own code
+      $resp = @{
+         property = $Param1
+      }
       #TODO: return only data when needed. E.g. remove cmdlets don't usually need to return anything
       return $resp
      
