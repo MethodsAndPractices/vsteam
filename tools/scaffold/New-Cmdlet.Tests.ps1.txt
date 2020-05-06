@@ -14,7 +14,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 #endregion
 
-Describe "VSTeam#CommandNoun" {
+Describe "VSTeamCommandNoun" {
    Context "CommandVerb-VSTeamCommandNoun" {
             
       Mock _getInstance { return 'https://dev.azure.com/test' }
