@@ -10,10 +10,56 @@
 		<tags>VSTeam</tags>
 	</metadata>
 	<parameters>
-		<parameter name="CommandVerb" type="text" prompt="Enter the verb of the command you want to use" />
-		<parameter name="CommandNoun" type="text" prompt="Enter the noun of the command" />
+      <parameter name='CommandVerb' type='choice' prompt='Which cmdlet do you want to use'>
+            <choice label='&amp;Add'
+                    help="Uses Add as an approved verb."
+                    value="Add"/>
+            <choice label='&amp;Disable'
+                    help="Uses Disable as an approved verb."
+                    value="Disable"/>
+            <choice label='&amp;Enable'
+                    help="Uses Enable as an approved verb."
+                    value="Enable"/>
+            <choice label='&amp;Get'
+                    help="Uses Get as an approved verb."
+                    value="Get"/>
+            <choice label='&amp;Remove'
+                    help="Uses Add as an approved verb."
+                    value="Remove"/>
+            <choice label='&amp;Update'
+                    help="Uses Add as an approved verb."
+                    value="Update"/>
+            <choice label='&amp;Set'
+                    help="Uses Set as an approved verb."
+                    value="Set"/>    
+            <choice label='&amp;Show'
+                    help="Uses Add as an approved verb."
+                    value="Show"/> 
+            <choice label='&amp;Test'
+                    help="Uses Test as an approved verb."
+                    value="Test"/>                                  
+      </parameter>
+      <parameter name="CommandNoun" type="text" prompt="Enter the noun of the command" />
+      <parameter name='Options' type='multichoice' default='3' prompt='Select desired files you want to additionally use'>
+            <choice label='T&amp;ype (ps1xml) file'
+                    help="Adds a type file for the object returned by your command."
+                    value="TypeFile"/>
+            <choice label='&amp;Table view (ps1xml) format file'
+                    help="Adds a format file to format the return objects with a table view."
+                    value="FormatTableView"/>
+            <choice label='&amp;List view (ps1xml) format file'
+                    help="Adds a format file to format the return objects with a list view."
+                    value="FormatListView"/>
+            <choice label='&amp;None'
+                    help="No options specified."
+                    value="None"/>
+      </parameter>
 	</parameters>
 	<content>
+      <message>&#10;&#10;Scaffolding your new PowerShell VSTeam command ${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun} &#10;&#10;&#10;</message>
+
+
+      <message>Creating documentation files</message>
 		<file source="New-Cmdlet.documentation.md" destination=".docs/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" />
 		<modify path=".docs/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" encoding="UTF8">
 			<replace>
@@ -25,6 +71,7 @@
 				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
 			</replace>
 		</modify>
+
 		<file source="New-Cmdlet.synopsis.md" destination=".docs/synopsis/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" />
 		<modify path=".docs/synopsis/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" encoding="UTF8">
 			<replace>
@@ -36,7 +83,9 @@
 				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
 			</replace>
 		</modify>
-		<file source="New-Cmdlet.Tests.ps1.tmpl" destination="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" />
+
+      <message>Creating PowerShell cmdlet file</message>
+		<file source="New-Cmdlet.ps1.txt" destination="Source/Public/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.ps1" />
 		<modify path="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" encoding="UTF8">
 			<replace>
 				<original>CommandVerb</original>
@@ -47,8 +96,70 @@
 				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
 			</replace>
 		</modify>
-      <file source="NewCmdlet.ListView.ps1xml" destination="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.ListView.ps1xml" />
-      <file source="NewCmdlet.TableView.ps1xml" destination="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.TableView.ps1xml" />
-      <file source="NewCmdlet.Type.ps1xml" destination="Source/types/Team.${PLASTER_PARAM_CommandNoun}.ps1xml" />
+
+      <message>Creating PowerShell Pester unit test file</message>
+		<file source="New-Cmdlet.Tests.ps1.txt" destination="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" />
+		<modify path="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" encoding="UTF8">
+			<replace>
+				<original>CommandVerb</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandVerb</substitute>
+			</replace>
+			<replace>
+				<original>CommandNoun</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
+			</replace>
+		</modify>
+
+      <message condition='$PLASTER_PARAM_Options -contains "TypeFile"'>
+      Creating type file
+      </message>
+      <file source="NewCmdlet.Type.ps1xml" 
+            condition='$PLASTER_PARAM_Options -contains "TypeFile"'
+            destination="Source/types/Team.${PLASTER_PARAM_CommandNoun}.ps1xml" />
+      <modify path="Source/types/Team.${PLASTER_PARAM_CommandNoun}.ps1xml"
+              condition='$PLASTER_PARAM_Options -contains "TypeFile"'
+              encoding="UTF8">
+			<replace>
+				<original>TypeName</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
+			</replace>
+		</modify>
+
+      <message condition='$PLASTER_PARAM_Options -contains "FormatListView"'>
+      Creating list view formatting file
+      </message>
+      <file source="NewCmdlet.ListView.ps1xml" 
+            destination="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.ListView.ps1xml" 
+            condition='$PLASTER_PARAM_Options -contains "FormatListView"' />
+      <modify path="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.ListView.ps1xml" 
+              condition='$PLASTER_PARAM_Options -contains "FormatListView"'
+              encoding="UTF8">
+			<replace>
+				<original>TypeName</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
+			</replace>
+		</modify>
+
+      <message condition='$PLASTER_PARAM_Options -contains "FormatTableView"'>
+      Creating table view formatting file
+      </message>
+      <file source="NewCmdlet.TableView.ps1xml" 
+            destination="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.TableView.ps1xml" 
+            condition='$PLASTER_PARAM_Options -contains "FormatTableView"' />
+      <modify path="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.TableView.ps1xml" 
+              condition='$PLASTER_PARAM_Options -contains "FormatTableView"'
+              encoding="UTF8">
+			<replace>
+				<original>TypeName</original>
+				<substitute expand="true">$PLASTER_PARAM_CommandNoun</substitute>
+			</replace>
+		</modify>
+
+      <message>
+              Your new PowerShell command ... has been created.
+              Run the following command to test your new command:
+
+              .\Build-Module.ps1 -installDep -ipmo -runTests -testName 'VSTeam${PLASTER_PARAM_CommandNoun}'
+      </message>
 	</content>
 </plasterManifest>
