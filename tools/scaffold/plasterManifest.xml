@@ -56,10 +56,16 @@
       </parameter>
 	</parameters>
 	<content>
-      <message>&#10;&#10;Scaffolding your new PowerShell VSTeam command ${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun} &#10;&#10;&#10;</message>
+      <message>     
+      Scaffolding your new PowerShell VSTeam command ${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}
+       #######################################################################################
+      </message>
 
 
-      <message>Creating documentation files</message>
+      <message>
+      Creating documentation files
+      ############################
+      </message>
 		<file source="New-Cmdlet.documentation.md" destination=".docs/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" />
 		<modify path=".docs/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.md" encoding="UTF8">
 			<replace>
@@ -84,7 +90,10 @@
 			</replace>
 		</modify>
 
-      <message>Creating PowerShell cmdlet file</message>
+      <message>
+      Creating PowerShell cmdlet file
+      ###############################
+      </message>
 		<file source="New-Cmdlet.ps1.txt" destination="Source/Public/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.ps1" />
 		<modify path="Source/Public/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.ps1" encoding="UTF8">
 			<replace>
@@ -97,7 +106,10 @@
 			</replace>
 		</modify>
 
-      <message>Creating PowerShell Pester unit test file</message>
+      <message>
+      Creating PowerShell Pester unit test file
+      #########################################
+      </message>
 		<file source="New-Cmdlet.Tests.ps1.txt" destination="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" />
 		<modify path="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" encoding="UTF8">
 			<replace>
@@ -112,6 +124,7 @@
 
       <message condition='$PLASTER_PARAM_Options -contains "TypeFile"'>
       Creating type file
+      ##################
       </message>
       <file source="NewCmdlet.Type.ps1xml" 
             condition='$PLASTER_PARAM_Options -contains "TypeFile"'
@@ -127,6 +140,7 @@
 
       <message condition='$PLASTER_PARAM_Options -contains "FormatListView"'>
       Creating list view formatting file
+      ##################################
       </message>
       <file source="NewCmdlet.ListView.ps1xml" 
             destination="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.ListView.ps1xml" 
@@ -142,6 +156,7 @@
 
       <message condition='$PLASTER_PARAM_Options -contains "FormatTableView"'>
       Creating table view formatting file
+      ###################################
       </message>
       <file source="NewCmdlet.TableView.ps1xml" 
             destination="Source/formats/Team.${PLASTER_PARAM_CommandNoun}.TableView.ps1xml" 
