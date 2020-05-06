@@ -86,7 +86,7 @@
 
       <message>Creating PowerShell cmdlet file</message>
 		<file source="New-Cmdlet.ps1.txt" destination="Source/Public/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.ps1" />
-		<modify path="unit/test/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.Tests.ps1" encoding="UTF8">
+		<modify path="Source/Public/${PLASTER_PARAM_CommandVerb}-VSTeam${PLASTER_PARAM_CommandNoun}.ps1" encoding="UTF8">
 			<replace>
 				<original>CommandVerb</original>
 				<substitute expand="true">$PLASTER_PARAM_CommandVerb</substitute>
