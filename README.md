@@ -102,7 +102,7 @@ Runs all unit tests and executes the static code analysis.
 
 Runs the tests, but executes only the unit tests that have the description "workitems" for the logical grouped unit tests. This can be used if you only want to test a portion of your unit tests.
 ```PowerShell
-.\Build-Module.ps1 -runTests -testName workitems
+.\Build-Module.ps1 -installDep -ipmo -runTests -testName workitems
 ```
 
 
@@ -110,6 +110,8 @@ Runs the tests, but executes only the unit tests that have the description "work
 ## Contributors
 
 [Guidelines](.github/CONTRIBUTING.md)
+
+**Note:** To make it easier to contribute we are using Plaster to make it easier for you to code new commands for the module. [Check the contribution guide](.github/CONTRIBUTING.md#Get-the-code-and-scaffold-template) for more info.
 
 ## Maintainers
 
