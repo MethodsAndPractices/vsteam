@@ -6,12 +6,11 @@ Import-Module SHiPS
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/$sut"
+# if you need more functions that you need in the unit tests, then import them here
+# . "$here/../../my/folder"
 #endregion
 
 Describe "VSTeamCommandNoun" {
@@ -23,11 +22,13 @@ Describe "VSTeamCommandNoun" {
       }
 
       Mock _callAPI {
-         #Write-Host $args 
-         $resp = @{property = $Param1 } | ConvertTo-Json -Depth 50
+         Write-Host $args 
+         #add your test return value
+         $resp = @{property = "myReturnValue" } | ConvertTo-Json -Depth 50
          return $resp
       }
 
+      #simple unit test for testing parameters
       It 'simple unit test' {
          $param1Value = "Value1"
          CommandVerb-VSTeamCommandNoun -Param1 $param1Value
@@ -35,11 +36,12 @@ Describe "VSTeamCommandNoun" {
          Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Post' -and
             $ContentType -eq 'application/json' -and
+            $Body -like "*queryParam*:*$Param1*" -and
             $Version -eq '1.0-unitTests'
          }
       }
 
-
+      #unit test example if you use example data that you run the test with
       It 'unit test with multiple input testdata <TestData>' -TestCase @(
          @{ TestData = "MyData1" }
          @{ TestData = "MyData2" }
@@ -50,6 +52,7 @@ Describe "VSTeamCommandNoun" {
          Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Post' -and
             $ContentType -eq 'application/json' -and
+            $Body -like "*queryParam*:*$TestData*" -and
             $Version -eq '1.0-unitTests'
          }
       }
