@@ -23,16 +23,15 @@ function Add-VSTeamClassificationNode {
 
       [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
       [Parameter(Mandatory = $false)]
-      [datetime] $FinishDate
+      [datetime] $FinishDate,
+      
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $true
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
       $id = $StructureGroup
 
       $Path = [uri]::UnescapeDataString($Path)

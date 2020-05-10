@@ -44,13 +44,13 @@ function Get-VSTeamClassificationNode {
 
       if ($queryString.Count -gt 0) {
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
+         $resp = _callAPI -Method "Get" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
             -Version $(_getApiVersion Core) `
             -QueryString $queryString
       }
       else {
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
+         $resp = _callAPI -Method "Get" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
             -Version $(_getApiVersion Core) `
       
       }
