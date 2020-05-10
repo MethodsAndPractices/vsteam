@@ -5,17 +5,15 @@ function Remove-VSTeamArea {
       [int] $ReClassifyId,
      
       [Parameter(Mandatory = $false)]
-      [string] $Path
+      [string] $Path,
+      
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $true
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $null = Remove-VSTeamClassificationNode -StructureGroup 'areas' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId
    }
 }

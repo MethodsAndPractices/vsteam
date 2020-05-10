@@ -5,12 +5,14 @@ function Add-VSTeamArea {
       [string] $Name,
 
       [Parameter(Mandatory = $false)]
-      [string] $Path
-   )
+      [string] $Path,
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $true
-   }
+      
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
+   )
 
    process {
       # Bind the parameter to a friendly variable
