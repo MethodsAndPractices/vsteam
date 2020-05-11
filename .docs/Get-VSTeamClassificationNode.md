@@ -56,7 +56,7 @@ Type: int32[]
 
 ## NOTES
 
-This is a base function for iterations and areas.
+This function is the base function for Get-VSTeamArea and Get-VSTeamIteration.
 
 ## RELATED LINKS
 
