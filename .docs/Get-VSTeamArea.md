@@ -1,28 +1,20 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VSTeamClassificationNode
+# Get-VSTeamArea
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VSTeamClassificationNode.md" -->
+<!-- #include "./synopsis/Get-VSTeamArea.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Get-VSTeamClassificationNode.md" -->
+<!-- #include "./synopsis/Get-VSTeamArea.md" -->
 
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->
-
-### -StructureGroup
-
-Structure group of the classification node, area or iteration.
-
-```yaml
-Type: string
-```
 
 ### -Depth
 
@@ -56,10 +48,10 @@ Type: int32[]
 
 ## NOTES
 
-This is a base function for iterations and areas.
+This is a wrapper function for Get-VSTeamClassificationNode
 
 ## RELATED LINKS
 
-[Get-VSTeamArea](Get-VSTeamArea.md)
+[Get-VSTeamClassificationNode](Get-VSTeamClassificationNode.md)
 
 [Get-VSTeamIteration](Get-VSTeamIteration.md)
