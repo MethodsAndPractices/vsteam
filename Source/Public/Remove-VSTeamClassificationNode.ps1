@@ -9,16 +9,15 @@ function Remove-VSTeamClassificationNode {
       [string] $StructureGroup,
      
       [Parameter(Mandatory = $false)]
-      [string] $Path
+      [string] $Path,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $true
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
       $id = $StructureGroup
 
       $Path = [uri]::UnescapeDataString($Path)
