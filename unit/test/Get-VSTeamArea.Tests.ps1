@@ -21,12 +21,16 @@ Describe 'Get-VSTeamArea' {
 
    $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
 
+   # Make sure the project name is valid. By returning an empty array
+   # all project names are valid. Otherwise, you name you pass for the
+   # project in your commands must appear in the list.
+   Mock _getProjects { return @() }
    Mock _getInstance { return 'https://dev.azure.com/test' }
    Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
    
    Context 'simplest call' {
       Mock Invoke-RestMethod {
-         Write-Host $args
+         # Write-Host $args
          return $classificationNodeResult 
       }
 

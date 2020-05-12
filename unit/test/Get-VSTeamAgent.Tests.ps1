@@ -19,6 +19,10 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamAgent' {
    ## Arrange
+   # Make sure the project name is valid. By returning an empty array
+   # all project names are valid. Otherwise, you name you pass for the
+   # project in your commands must appear in the list.
+   Mock _getProjects { return @() }
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
 
    $testAgent = Get-Content "$PSScriptRoot\sampleFiles\agentSingleResult.json" -Raw | ConvertFrom-Json

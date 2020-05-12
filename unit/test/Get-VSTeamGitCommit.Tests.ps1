@@ -18,6 +18,12 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 #endregion
 
 Describe "VSTeamGitCommit" {
+   ## Arrange
+   # Make sure the project name is valid. By returning an empty array
+   # all project names are valid. Otherwise, you name you pass for the
+   # project in your commands must appear in the list.
+   Mock _getProjects { return @() }
+      
    $results = Get-Content "$PSScriptRoot\sampleFiles\gitCommitResults.json" -Raw | ConvertFrom-Json
 
    # Set the account to use for testing. A normal user would do this
