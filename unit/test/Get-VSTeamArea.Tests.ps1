@@ -38,7 +38,7 @@ Describe 'Get-VSTeamArea' {
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/areas/test/test/test*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Uri -like "*`$Depth=10*"
+            $Uri -like "*`$Depth=5*"
          }
       }
 
@@ -51,7 +51,7 @@ Describe 'Get-VSTeamArea' {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*Ids=1,2,3,4*" -and
-            $Uri -like "*`$Depth=10*"
+            $Uri -like "*`$Depth=5*"
          }
       }
    }

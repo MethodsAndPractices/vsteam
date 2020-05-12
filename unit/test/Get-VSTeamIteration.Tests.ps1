@@ -34,16 +34,28 @@ Describe 'Get-VSTeamIteration' {
       Mock Invoke-RestMethod { return $classificationNodeResult }
       Mock Invoke-RestMethod { return $withoutChildNode } -ParameterFilter { $Uri -like "*Ids=43,44*" }
 
-      It 'by ids, path and depth should return iterations' {
+      It 'by path and depth should return iterations' {
          ## Act
-         Get-VSTeamIteration -ProjectName "Public Demo" -Ids @(1, 2, 3, 4) -Depth 5 -Path "test/test/test"
+         Get-VSTeamIteration -ProjectName "Public Demo" -Depth 5 -Path "test/test/test"
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/Iterations/test/test/test*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+            $Uri -like "*`$Depth=5*"
+         }
+      }
+
+      It 'by ids and depth should return iterations' {
+         ## Act
+         Get-VSTeamIteration -ProjectName "Public Demo" -Ids @(1, 2, 3, 4) -Depth 5
+
+         ## Assert
+         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*Ids=1,2,3,4*" -and
-            $Uri -like "*`$Depth=10*"
+            $Uri -like "*`$Depth=5*"
          }
       }
    }
