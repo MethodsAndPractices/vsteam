@@ -1,0 +1,1 @@
+Gets the iteration node for a given iteration path.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.4.8
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/286) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Added cmdlets for add, get and remove for classification nodes, iterations and areas
+
 ## 6.4.7
 
 _callAPI, _buildRequestURI and Invoke-VSTeamRequest now support UseProjectId switch if the Project ID is required for the API call.
