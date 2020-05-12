@@ -3,10 +3,10 @@ function Update-VSTeamReleaseDefinition {
    Param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'File')]
       [string] $InFile,
-      
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'JSON')]
       [string] $ReleaseDefinition,
-      
+
       [switch] $Force,
 
       [ProjectValidateAttribute()]

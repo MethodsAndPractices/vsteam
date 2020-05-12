@@ -2,9 +2,6 @@ function Show-VSTeamBuildDefinition {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'List')]
-      [string] $Filter,
-
-      [Parameter(ParameterSetName = 'List')]
       [ValidateSet('Mine', 'All', 'Queued', 'XAML')]
       [string] $Type = 'All',
 

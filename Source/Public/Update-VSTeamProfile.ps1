@@ -48,28 +48,28 @@ function Update-VSTeamProfile {
          $authType = 'Pat'
          $encodedPat = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$_pat"))
 
-         $profile = Get-VSTeamProfile | Where-Object Name -eq $Name
+         $vsteamProfile = Get-VSTeamProfile | Where-Object Name -eq $Name
 
-         if ($profile) {
+         if ($vsteamProfile) {
             # See if this item is already in there
             # I am testing URL because the user may provide a different
             # name and I don't want two with the same URL.
             # The @() forces even 1 item to an array
             # Now get an array of all profiles but this one and update this one.
-            $profiles = @(Get-VSTeamProfile | Where-Object Name -ne $Name)
+            $vsteamProfiles = @(Get-VSTeamProfile | Where-Object Name -ne $Name)
 
             $newProfile = [PSCustomObject]@{
                Name    = $Name
-               URL     = $profile.URL
+               URL     = $vsteamProfile.URL
                Type    = $authType
                Pat     = $encodedPat
                Token   = $token
-               Version = $profile.Version
+               Version = $vsteamProfile.Version
             }
 
-            $profiles += $newProfile
+            $vsteamProfiles += $newProfile
 
-            $contents = ConvertTo-Json $profiles
+            $contents = ConvertTo-Json $vsteamProfiles
 
             Set-Content -Path $profilesPath -Value $contents
          }

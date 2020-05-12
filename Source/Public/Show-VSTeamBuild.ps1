@@ -10,7 +10,7 @@ function Show-VSTeamBuild {
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       Show-Browser "$(_getInstance)/$ProjectName/_build/index?buildId=$Id"
    }

@@ -22,7 +22,7 @@ function Set-VSTeamApproval {
 
    process {
       $body = '{ "status": "' + $status + '", "approver": "' + $approver + '", "comments": "' + $comment + '" }'
-      
+
       Write-Verbose $body
 
       foreach ($item in $id) {

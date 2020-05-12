@@ -1,4 +1,4 @@
-function Test-VSTeamYamlPipeline {   
+function Test-VSTeamYamlPipeline {
    [CmdletBinding(DefaultParameterSetName = 'WithFilePath')]
    param(
       [Parameter(ParameterSetName = 'WithFilePath', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
@@ -18,14 +18,14 @@ function Test-VSTeamYamlPipeline {
       $ProjectName = $PSBoundParameters["ProjectName"]
 
       $body = @{
-         PreviewRun = $true      
+         PreviewRun = $true
       }
 
       if ($FilePath) {
          $body.YamlOverride = [string](Get-Content -raw $FilePath)
       }
       elseif ($YamlOverride) {
-         $body.YamlOverride = $YamlOverride         
+         $body.YamlOverride = $YamlOverride
       }
 
       try {
@@ -43,7 +43,7 @@ function Test-VSTeamYamlPipeline {
             throw
          }
       }
-      
+
       _applyTypesToYamlPipelineResultType -item $resp
 
       return $resp

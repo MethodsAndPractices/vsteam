@@ -9,7 +9,7 @@ function Show-VSTeamGitRepository {
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       if ($RemoteUrl) {
          Show-Browser $RemoteUrl

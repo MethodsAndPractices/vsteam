@@ -1,5 +1,5 @@
 function Remove-VSTeamIteration {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [Parameter(Mandatory = $false)]
       [int] $ReClassifyId,
@@ -10,10 +10,14 @@ function Remove-VSTeamIteration {
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      [string] $ProjectName
+      [string] $ProjectName,
+
+      [switch] $Force
    )
 
    process {
-      $null = Remove-VSTeamClassificationNode -StructureGroup 'iterations' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId
+      if ($force -or $pscmdlet.ShouldProcess($Path, "Delete iteration")) {
+         $null = Remove-VSTeamClassificationNode -StructureGroup 'iterations' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId
+      }
    }
 }

@@ -15,7 +15,7 @@ function Update-VSTeamWorkItem {
 
       [Parameter(Mandatory = $false)]
       [string]$AssignedTo,
-      
+
       [Parameter(Mandatory = $false)]
       [hashtable]$AdditionalFields,
 

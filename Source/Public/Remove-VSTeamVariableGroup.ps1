@@ -3,7 +3,7 @@ function Remove-VSTeamVariableGroup {
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $id,
-      
+
       [switch] $Force,
 
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]

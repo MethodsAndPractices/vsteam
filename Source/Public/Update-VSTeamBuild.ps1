@@ -39,7 +39,7 @@ function Update-VSTeamBuild {
          }
 
          $body += '}'
-         
+
          # Call the REST API
          _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -Id $Id `
             -Method Patch -ContentType 'application/json' -body $body -Version $(_getApiVersion Build) | Out-Null

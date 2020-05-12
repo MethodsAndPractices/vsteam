@@ -11,7 +11,7 @@ function Remove-VSTeamReleaseDefinition {
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       Write-Debug 'Remove-VSTeamReleaseDefinition Process'
 

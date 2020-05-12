@@ -1,5 +1,6 @@
 function Test-VSTeamMembership {
    [CmdletBinding()]
+   [OutputType([System.Boolean])]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = "MemberDescriptor")]
       [string] $MemberDescriptor,
