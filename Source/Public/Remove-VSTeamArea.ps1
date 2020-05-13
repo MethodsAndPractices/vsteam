@@ -17,7 +17,7 @@ function Remove-VSTeamArea {
 
    process {
       if ($force -or $pscmdlet.ShouldProcess($Path, "Delete area")) {
-         $null = Remove-VSTeamClassificationNode -StructureGroup 'areas' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId
+         $null = Remove-VSTeamClassificationNode -StructureGroup 'areas' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId -Force
       }
    }
 }

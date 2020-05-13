@@ -31,7 +31,8 @@ Describe 'Remove-VSTeamIteration' {
       It 'should delete iteration' -TestCases @(
       ) {     
          ## Act
-         Remove-VSTeamIteration -ProjectName "Public Demo"
+         Remove-VSTeamIteration -ProjectName "Public Demo" -Force
+
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
@@ -45,7 +46,8 @@ Describe 'Remove-VSTeamIteration' {
       ) {
          param ($ReClassifyId)      
          ## Act
-         Remove-VSTeamIteration -ProjectName "Public Demo" -ReClassifyId $ReClassifyId
+         Remove-VSTeamIteration -ProjectName "Public Demo" -ReClassifyId $ReClassifyId -Force
+
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
@@ -60,7 +62,7 @@ Describe 'Remove-VSTeamIteration' {
       ) {
          param ($Path)      
          ## Act
-         Remove-VSTeamIteration -ProjectName "Public Demo" -Path $Path
+         Remove-VSTeamIteration -ProjectName "Public Demo" -Path $Path -Force
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -76,7 +78,7 @@ Describe 'Remove-VSTeamIteration' {
       ) {
          param ($Path)      
          ## Act
-         Remove-VSTeamIteration -ProjectName "Public Demo" -Path $Path
+         Remove-VSTeamIteration -ProjectName "Public Demo" -Path $Path -Force
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

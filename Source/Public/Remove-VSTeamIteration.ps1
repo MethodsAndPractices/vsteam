@@ -17,7 +17,7 @@ function Remove-VSTeamIteration {
 
    process {
       if ($force -or $pscmdlet.ShouldProcess($Path, "Delete iteration")) {
-         $null = Remove-VSTeamClassificationNode -StructureGroup 'iterations' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId
+         $null = Remove-VSTeamClassificationNode -StructureGroup 'iterations' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId -Force
       }
    }
 }
