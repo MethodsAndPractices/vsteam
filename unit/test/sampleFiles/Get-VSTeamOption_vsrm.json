@@ -1,0 +1,1875 @@
+{
+   "value": [
+      {
+         "id": "06bcc74a-1491-4eb8-a0eb-704778f9d041",
+         "area": "ClientTrace",
+         "resourceName": "Events",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "4.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "e4f5c81e-e250-447b-9fef-bd48471bea5e",
+         "area": "Container",
+         "resourceName": "Containers",
+         "routeTemplate": "_apis/resources/{resource}/{containerId}/{*itemPath}",
+         "resourceVersion": 4,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "e71a64ac-b2b5-4230-a4c0-dad657cf97e2",
+         "area": "Container",
+         "resourceName": "Containers",
+         "routeTemplate": "_apis/{resource}/{container}/{*itemPath}",
+         "resourceVersion": 3,
+         "minVersion": "2.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3505911e-ead6-431a-8656-b61c5d3b07a3",
+         "area": "contentViolation",
+         "resourceName": "reports",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "2648442b-fd63-4b9a-902f-0c913510f139",
+         "area": "Contribution",
+         "resourceName": "installedApps",
+         "routeTemplate": "_apis/{area}/{resource}/{extensionId}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3353e165-a11e-43aa-9d88-14f2bb09b6d9",
+         "area": "Contribution",
+         "resourceName": "HierarchyQuery",
+         "routeTemplate": "_apis/{area}/{resource}/{scopeName}/{scopeValue}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "8ec9f10c-ab9f-4618-8817-48f3125dde6a",
+         "area": "Contribution",
+         "resourceName": "Hierarchy",
+         "routeTemplate": "_apis/{area}/{resource}/{contributionId}/{scopeName}/{scopeValue}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "197d0a40-ec36-4fa1-9fd8-6a1324644462",
+         "area": "Contribution",
+         "resourceName": "Hierarchy",
+         "routeTemplate": "_apis/{area}/{resource}/{contributionId}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "4.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "738368db-35ee-4b85-9f94-77ed34af2b0d",
+         "area": "Contribution",
+         "resourceName": "dataProvidersQuery",
+         "routeTemplate": "_apis/{area}/dataProviders/query/{scopeName}/{scopeValue}",
+         "resourceVersion": 1,
+         "minVersion": "2.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3e2f6668-0798-4dcb-b592-bfe2fa57fde2",
+         "area": "Contribution",
+         "resourceName": "installedApps",
+         "routeTemplate": "_apis/{area}/{resource}/{publisherName}/{extensionName}",
+         "resourceVersion": 1,
+         "minVersion": "2.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "db7f2146-2309-4cee-b39c-c767777a1c55",
+         "area": "Contribution",
+         "resourceName": "ContributionNodeQuery",
+         "routeTemplate": "_apis/{area}/nodes/query",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "b5cc35c2-ff2b-491d-a085-24b6e9f396fd",
+         "area": "CustomerIntelligence",
+         "resourceName": "Events",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "0cf03c5a-d16d-4297-bfeb-f38a56d86670",
+         "area": "CvsFileDownload",
+         "resourceName": "CvsFileDownload",
+         "routeTemplate": "_apis/public/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "e3c30451-f373-45bf-9cf5-afe941256aad",
+         "area": "DeploymentTracking",
+         "resourceName": "deploymentresources",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{resourceId}",
+         "resourceVersion": 1,
+         "minVersion": "4.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "557624af-b29e-4c20-8ab0-0399d2204f3f",
+         "area": "distributedtask",
+         "resourceName": "events",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/plans/{planId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "65fd0708-bc1e-447b-a731-0587c5464e5b",
+         "area": "distributedtask",
+         "resourceName": "plangroupsqueue",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/{resource}/{planGroup}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "0dd73091-3e36-4f43-b443-1b76dd426d84",
+         "area": "distributedtask",
+         "resourceName": "plangroupsqueue",
+         "routeTemplate": "_apis/{area}/hubs/{hubName}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "83597576-cc2c-453c-bea6-2882ae6a1653",
+         "area": "distributedtask",
+         "resourceName": "timelines",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/plans/{planId}/{resource}/{timelineId}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "44f7ed85-9a3a-4669-bd4c-312d021559f4",
+         "area": "distributedtask",
+         "resourceName": "webhooks",
+         "routeTemplate": "_apis/public/{area}/{resource}/{webHookId}",
+         "resourceVersion": 1,
+         "minVersion": "6.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "eb55e5d6-2f30-4295-b5ed-38da50b1fc52",
+         "area": "distributedtask",
+         "resourceName": "attachments",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/plans/{planId}/{resource}/{type}",
+         "resourceVersion": 1,
+         "minVersion": "2.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "5cecd946-d704-471e-a45f-3b4064fcfaba",
+         "area": "distributedtask",
+         "resourceName": "plans",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/{resource}/{planId}",
+         "resourceVersion": 2,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "57835cc4-6ff0-4d62-8c27-4541ba97a094",
+         "area": "distributedtask",
+         "resourceName": "references",
+         "routeTemplate": "_apis/{area}/hubs/{hubName}/plans/{planId}/nodes/{nodeId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "5.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "ffe38397-3a9d-4ca6-b06d-49303f287ba5",
+         "area": "distributedtask",
+         "resourceName": "timelines",
+         "routeTemplate": "_apis/{area}/plans/{planId}/{resource}/{timelineId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "1.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "858983e4-19bd-4c5e-864c-507b59b58b12",
+         "area": "distributedtask",
+         "resourceName": "feed",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/plans/{planId}/timelines/{timelineId}/records/{recordId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "0a1efd25-abda-43bd-9629-6c7bdd2e0d60",
+         "area": "distributedtask",
+         "resourceName": "jobinstances",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/{resource}/{orchestrationId}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "7898f959-9cdf-4096-b29e-7f293031629e",
+         "area": "distributedtask",
+         "resourceName": "attachments",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/plans/{planId}/timelines/{timelineId}/records/{recordId}/{resource}/{type}/{name}",
+         "resourceVersion": 1,
+         "minVersion": "2.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "15344176-9e77-4cf4-a7c3-8bc4d0a3c4eb",
+         "area": "distributedtask",
+         "resourceName": "logs",
+         "routeTemplate": "_apis/{area}/plans/{planId}/{resource}/{logId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "1.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "038fd4d5-cda7-44ca-92c0-935843fee1a7",
+         "area": "distributedtask",
+         "resourceName": "metrics",
+         "routeTemplate": "_apis/{area}/hubs/{hubName}/plangroupsqueue/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "8893bc5b-35b2-4be7-83cb-99e683551db4",
+         "area": "distributedtask",
+         "resourceName": "records",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/plans/{planId}/timelines/{timelineId}/{resource}/{recordId}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "dfed02fb-deee-4039-a04d-aa21d0241995",
+         "area": "distributedtask",
+         "resourceName": "events",
+         "routeTemplate": "_apis/{area}/plans/{planId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "1.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "9ae056f6-d4e4-4d0c-bd26-aee2a22f01f2",
+         "area": "distributedtask",
+         "resourceName": "feed",
+         "routeTemplate": "_apis/{area}/plans/{planId}/timelines/{timelineId}/records/{recordId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "1.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "f8d10759-6e90-48bc-96b0-d19440116797",
+         "area": "distributedtask",
+         "resourceName": "plans",
+         "routeTemplate": "_apis/{area}/{resource}/{planId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "1.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "46f5667d-263a-4684-91b1-dff7fdcf64e2",
+         "area": "distributedtask",
+         "resourceName": "logs",
+         "routeTemplate": "{scopeIdentifier}/_apis/{area}/hubs/{hubName}/plans/{planId}/{resource}/{logId}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "50170d5d-f122-492f-9816-e2ef9f8d1756",
+         "area": "distributedtask",
+         "resourceName": "records",
+         "routeTemplate": "_apis/{area}/plans/{planId}/timelines/{timelineId}/{resource}/{recordId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "1.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "01c3d915-4b98-4948-8e16-c8cc68b17afe",
+         "area": "Extensions",
+         "resourceName": "Assets",
+         "routeTemplate": "_apis/public/{area}/{providerName}/{version}/{resource}/{*assetType}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "232b00f3-c6b8-48c6-883f-1a8dc6cbef8a",
+         "area": "Fallback",
+         "resourceName": "NotFound",
+         "routeTemplate": "_apis/{*params}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "6f13e9a6-aae2-4b89-b683-131ca9564cec",
+         "area": "Favorite",
+         "resourceName": "Favorites",
+         "routeTemplate": "_apis/{area}/{resource}/{favoriteId}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "0c04d86b-e315-464f-8125-4d6222d306c2",
+         "area": "Favorite",
+         "resourceName": "FavoriteProviders",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "ed9a188e-213f-4331-bf62-8aa10d135ca3",
+         "area": "Favorite",
+         "resourceName": "TeamFavorites",
+         "routeTemplate": "_apis/{area}/{resource}/{favoriteId}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3e2b80f8-9e6f-441e-8393-005610692d9c",
+         "area": "FeatureAvailability",
+         "resourceName": "FeatureFlags",
+         "routeTemplate": "_apis/{resource}/{name}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c4209f25-7a27-41dd-9f04-06080c7b6afd",
+         "area": "FeatureManagement",
+         "resourceName": "Features",
+         "routeTemplate": "_apis/{area}/{resource}/{featureId}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "2b4486ad-122b-400c-ae65-17b6672c1f9d",
+         "area": "FeatureManagement",
+         "resourceName": "FeatureStatesQuery",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "f29e997b-c2da-4d15-8380-765788a1a74c",
+         "area": "FeatureManagement",
+         "resourceName": "FeatureStatesQuery",
+         "routeTemplate": "_apis/{area}/{resource}/{userScope}/{scopeName}/{scopeValue}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3f810f28-03e2-4239-b0bc-788add3005e5",
+         "area": "FeatureManagement",
+         "resourceName": "FeatureStatesQuery",
+         "routeTemplate": "_apis/{area}/{resource}/{userScope}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "98911314-3f9b-4eaf-80e8-83900d8e85d9",
+         "area": "FeatureManagement",
+         "resourceName": "FeatureStates",
+         "routeTemplate": "_apis/{area}/{resource}/{userScope}/{featureId}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "dd291e43-aa9f-4cee-8465-a93c78e414a4",
+         "area": "FeatureManagement",
+         "resourceName": "FeatureStates",
+         "routeTemplate": "_apis/{area}/{resource}/{userScope}/{scopeName}/{scopeValue}/{featureId}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "0c62d343-21b0-4732-997b-017fde84dc28",
+         "area": "hooks",
+         "resourceName": "notifications",
+         "routeTemplate": "_apis/{area}/subscriptions/{subscriptionId}/{resource}/{notificationId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "fc50d02a-849f-41fb-8af1-0a5216103269",
+         "area": "hooks",
+         "resourceName": "subscriptions",
+         "routeTemplate": "_apis/{area}/{resource}/{subscriptionId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "140ed26d-ed51-4583-a1bd-0dd3fdd708bd",
+         "area": "hooks",
+         "resourceName": "inputValuesQuery",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "c3428e90-7a69-4194-8ed8-0f153185ee0d",
+         "area": "hooks",
+         "resourceName": "actions",
+         "routeTemplate": "_apis/{area}/consumers/{consumerId}/{resource}/{consumerActionId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "1139462c-7e27-4524-a997-31b9b73551fe",
+         "area": "hooks",
+         "resourceName": "testNotifications",
+         "routeTemplate": "_apis/{area}/{resource}/{notificationId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "3b36bcb5-02ad-43c6-bbfa-6dfc6f8e9d68",
+         "area": "hooks",
+         "resourceName": "Diagnostics",
+         "routeTemplate": "_apis/{area}/subscriptions/{subscriptionId}/diagnostics",
+         "resourceVersion": 1,
+         "minVersion": "4.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "1a57562f-160a-4b5c-9185-905e95b39d36",
+         "area": "hooks",
+         "resourceName": "notificationsQuery",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "c7c3c1cf-9e05-4c0d-a425-a0f922c2c6ed",
+         "area": "hooks",
+         "resourceName": "subscriptionsQuery",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "e0e0a1c9-beeb-4fb7-a8c8-b18e3161a50e",
+         "area": "hooks",
+         "resourceName": "externalEvents",
+         "routeTemplate": "_apis/public/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "db4777cd-8e08-4a84-8ba3-c974ea033718",
+         "area": "hooks",
+         "resourceName": "eventTypes",
+         "routeTemplate": "_apis/{area}/publishers/{publisherId}/{resource}/{eventTypeId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "1e83a210-5b53-43bc-90f0-d476a4e5d731",
+         "area": "hooks",
+         "resourceName": "publishers",
+         "routeTemplate": "_apis/{area}/{resource}/{publisherId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "99b44a8a-65a8-4670-8f3e-e7f7842cce64",
+         "area": "hooks",
+         "resourceName": "publishersQuery",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "4301c514-5f34-4f5d-a145-f0ea7b5b7d19",
+         "area": "hooks",
+         "resourceName": "consumers",
+         "routeTemplate": "_apis/{area}/{resource}/{consumerId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "d815d352-a566-4dc1-a3e3-fd245acf688c",
+         "area": "hooks",
+         "resourceName": "PublisherInputValuesQuery",
+         "routeTemplate": "_apis/{area}/publishers/{publisherId}/inputValuesQuery",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "2c0fe4cd-0061-4274-8734-484af43b3722",
+         "area": "IdentityNavigation",
+         "resourceName": "Navigate",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "4.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "4d9b6936-e96a-4a42-8c3b-81e8337cd010",
+         "area": "IdentityPicker",
+         "resourceName": "Identities",
+         "routeTemplate": "_apis/{area}/{resource}/{objectId}/avatar",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "4102f006-0b23-4b26-bb1b-b661605e6b33",
+         "area": "IdentityPicker",
+         "resourceName": "Identities",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "839e4258-f559-421b-a38e-b6e691967ab3",
+         "area": "IdentityPicker",
+         "resourceName": "Identities",
+         "routeTemplate": "_apis/{area}/{resource}/{objectId}/mru/{featureId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c01af8fd-2a61-4811-a7a3-b85bcec080af",
+         "area": "IdentityPicker",
+         "resourceName": "Identities",
+         "routeTemplate": "_apis/{area}/{resource}/{objectId}/connections",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "00d9565f-ed9c-4a06-9a50-00e7896ccab4",
+         "area": "Location",
+         "resourceName": "ConnectionData",
+         "routeTemplate": "_apis/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "e81700f7-3be2-46de-8624-2eb35882fcaa",
+         "area": "Location",
+         "resourceName": "ResourceAreas",
+         "routeTemplate": "_apis/{resource}/{areaId}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "d810a47d-f4f4-4a62-a03f-fa1860585c4c",
+         "area": "Location",
+         "resourceName": "ServiceDefinitions",
+         "routeTemplate": "_apis/{resource}/{serviceType}/{identifier}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "91cc4dd2-7aad-4182-bb39-940717b86890",
+         "area": "NewDomainUrlMigration",
+         "resourceName": "Requests",
+         "routeTemplate": "_apis/ServicingOrchestration/{area}/{resource}/{requestId}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "b5bbdd21-c178-4398-b6db-0166d910028a",
+         "area": "notification",
+         "resourceName": "EventTypeFieldValuesQuery",
+         "routeTemplate": "_apis/{area}/eventTypes/{eventType}/fieldValuesQuery",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "cbe076d8-2803-45ff-8d8d-44653686ea2a",
+         "area": "notification",
+         "resourceName": "Settings",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "fa5d24ba-7484-4f3d-888d-4ec6b1974082",
+         "area": "notification",
+         "resourceName": "SubscriptionTemplates",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "4c329e39-ba30-43af-ab4c-54e35011deb2",
+         "area": "notification",
+         "resourceName": "SubscriptionUserSettings",
+         "routeTemplate": "_apis/{area}/Subscriptions/{subscriptionId}/{resource}/{userId}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "62864326-f4e0-4903-9bc0-5c87c40efb6d",
+         "area": "notification",
+         "resourceName": "SubscriptionEvaluationRequests",
+         "routeTemplate": "_apis/{area}/{resource}/{requestId}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "4.1",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "77878ce9-6391-49af-aa9d-768ac784461f",
+         "area": "notification",
+         "resourceName": "StatisticsQuery",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "4d5caff1-25ba-430b-b808-7a1f352cc197",
+         "area": "notification",
+         "resourceName": "Subscribers",
+         "routeTemplate": "_apis/{area}/{resource}/{subscriberId}",
+         "resourceVersion": 1,
+         "minVersion": "4.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "991842f3-eb16-4aea-ac81-81353ef2b75c",
+         "area": "notification",
+         "resourceName": "DiagnosticLogs",
+         "routeTemplate": "_apis/{area}/{resource}/{source}/entries/{entryId}",
+         "resourceVersion": 1,
+         "minVersion": "4.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "ed5a3dff-aeb5-41b1-b4f7-89e66e58b62e",
+         "area": "notification",
+         "resourceName": "UserSettings",
+         "routeTemplate": "_apis/{area}/Subscriptions/{subscriptionId}/{resource}/{userId}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "70f911d6-abac-488c-85b3-a206bf57e165",
+         "area": "notification",
+         "resourceName": "Subscriptions",
+         "routeTemplate": "_apis/{area}/{resource}/{subscriptionId}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "831e34f0-6d93-45a4-a222-c661f08dcea9",
+         "area": "notification",
+         "resourceName": "Follows",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "2.2",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "6864db85-08c0-4006-8e8e-cc1bebe31675",
+         "area": "notification",
+         "resourceName": "SubscriptionQuery",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "347600fc-ea3d-489b-b684-cdccf5c04ca1",
+         "area": "notification",
+         "resourceName": "SubscriptionEvaluationRequest",
+         "routeTemplate": "_apis/{area}/{resource}/{jobId}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "19824fa9-1c76-40e6-9cce-cf0b9ca1cb60",
+         "area": "notification",
+         "resourceName": "NotificationReasons",
+         "routeTemplate": "_apis/{area}/{resource}/{notificationId}",
+         "resourceVersion": 1,
+         "minVersion": "4.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "20f1929d-4be7-4c2e-a74e-d47640ff3418",
+         "area": "notification",
+         "resourceName": "Diagnostics",
+         "routeTemplate": "_apis/{area}/subscriptions/{subscriptionId}/diagnostics",
+         "resourceVersion": 1,
+         "minVersion": "4.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "14c57b7a-c0e6-4555-9f51-e067188fdd8e",
+         "area": "notification",
+         "resourceName": "Events",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "cc84fb5f-6247-4c7a-aeae-e5a3c3fddb21",
+         "area": "notification",
+         "resourceName": "EventTypes",
+         "routeTemplate": "_apis/{area}/{resource}/{eventType}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "8f3c6ab2-5bae-4537-b16e-f84e0955599e",
+         "area": "notification",
+         "resourceName": "BatchNotificationOperations",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "9463a800-1b44-450e-9083-f948ea174b45",
+         "area": "notification",
+         "resourceName": "EventTransforms",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "7f82df6d-7d09-46c1-a015-643b556b3a1e",
+         "area": "operations",
+         "resourceName": "operations",
+         "routeTemplate": "_apis/{resource}/{pluginId}/{operationId}",
+         "resourceVersion": 1,
+         "minVersion": "4.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "9a1b74b4-2ca8-4a9f-8470-c2f2e6fdc949",
+         "area": "operations",
+         "resourceName": "operations",
+         "routeTemplate": "_apis/{resource}/{operationId}",
+         "resourceVersion": 1,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "7ef423e0-59d8-4c00-b951-7143b18bd97b",
+         "area": "OrganizationPolicy",
+         "resourceName": "PoliciesBatch",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "d0ab077b-1b97-4f78-984c-cfe2d248fc79",
+         "area": "OrganizationPolicy",
+         "resourceName": "Policies",
+         "routeTemplate": "_apis/{area}/{resource}/{policyName}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "222af71b-7280-4a95-80e4-dcb0deeac834",
+         "area": "OrganizationPolicy",
+         "resourceName": "PolicyInformation",
+         "routeTemplate": "_apis/{area}/{resource}/{policyName}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "1b88a413-826e-4c01-8343-047ff2825fda",
+         "area": "Pipeline",
+         "resourceName": "logs",
+         "routeTemplate": "{project}/_apis/{area}/pipelines/{pipelineId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "a8d6c5f1-d617-404f-a0c6-087360ff5c75",
+         "area": "Pipeline",
+         "resourceName": "environments",
+         "routeTemplate": "{project}/_apis/{area}/pipelines/{pipelineId}/{resource}/{environmentId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "e8e04093-a899-4e1e-b0e0-1620cc0274bf",
+         "area": "Pipeline",
+         "resourceName": "types",
+         "routeTemplate": "{project}/_apis/{area}/artifacts/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "84c75752-195c-48cc-a546-1c613b4eca4f",
+         "area": "Pipeline",
+         "resourceName": "revisions",
+         "routeTemplate": "{project}/_apis/{area}/definitions/{pipelineId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "e1d4a73d-7943-41c8-ab6e-22fb24c417f3",
+         "area": "Pipeline",
+         "resourceName": "pipelines",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{pipelineId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3f6339d6-ccfe-4ae3-bdda-3c4bcfd03cf0",
+         "area": "Pipeline",
+         "resourceName": "tags",
+         "routeTemplate": "{project}/_apis/{area}/definitions/{pipelineDefinitionId}/{resource}/{*tag}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "539a858d-4f0f-4c51-9c86-47dd4af33311",
+         "area": "Pipeline",
+         "resourceName": "templates",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{templateId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "5dc9041d-5c0d-4614-8709-67ad2f36ca45",
+         "area": "Pipeline",
+         "resourceName": "folders",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{*path}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "b19f34e3-c9c6-4792-8109-8e3d26425e77",
+         "area": "Pipeline",
+         "resourceName": "tasks",
+         "routeTemplate": "{project}/_apis/{area}/pipelines/{pipelineId}/environments/{environmentId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "56c976bd-9fda-4840-b453-8ec5182e0ad2",
+         "area": "Pipeline",
+         "resourceName": "tags",
+         "routeTemplate": "{project}/_apis/{area}/pipelines/{pipelineId}/{resource}/{*tag}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "49c50e9c-ff97-4f13-8b6f-b892934cf619",
+         "area": "Pipeline",
+         "resourceName": "definitions",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{definitionId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3832dd2b-c5e6-46d6-833c-d646523bb8c2",
+         "area": "Pipeline",
+         "resourceName": "artifacts",
+         "routeTemplate": "{project}/_apis/{area}/pipelines/{pipelineId}/{resource}/{artifactName}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "cb7f5916-f5c2-4a5b-8895-e54974cbcfc8",
+         "area": "Pipeline",
+         "resourceName": "tags",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "4fd146b3-c423-4b9b-9848-f025131cfe5f",
+         "area": "Pipeline",
+         "resourceName": "logs",
+         "routeTemplate": "{project}/_apis/{area}/pipelines/{pipelineId}/environments/{environmentId}/deployPhases/{pipelineDeployPhaseId}/tasks/{taskId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "39b4da5d-f8d6-47f2-86f3-ff0a050ead4c",
+         "area": "Pipeline",
+         "resourceName": "tasks",
+         "routeTemplate": "{project}/_apis/{area}/pipelines/{pipelineId}/environments/{environmentId}/deployPhases/{pipelineDeployPhaseId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "2666a539-2001-4f80-bcc7-0379956749d4",
+         "area": "Release",
+         "resourceName": "gates",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{gateStepId}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "4259291d-4b0a-4409-9fb3-04f22ab9bc47",
+         "area": "Release",
+         "resourceName": "tasks",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/attempts/{attemptId}/timelines/{timelineId}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "4259191d-4b0a-4409-9fb3-09f22ab9bc47",
+         "area": "Release",
+         "resourceName": "tasks",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/deployPhases/{releaseDeployPhaseId}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "224e92b2-8d13-4c14-b120-13d877c516f8",
+         "area": "Release",
+         "resourceName": "sendmail",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{releaseId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "71dd499b-317d-45ea-9134-140ea1932b5e",
+         "area": "Release",
+         "resourceName": "inputvaluesquery",
+         "routeTemplate": "{project}/_apis/{area}/artifacts/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "0e5def23-78b3-461f-8198-1558f25041c8",
+         "area": "Release",
+         "resourceName": "sourcebranches",
+         "routeTemplate": "{project}/_apis/{area}/definitions/{definitionId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "36b276e0-3c70-4320-a63c-1a2e1466a0d1",
+         "area": "Release",
+         "resourceName": "tasks",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "dd93ecaf-ce48-4f24-933f-234f87682b24",
+         "area": "Release",
+         "resourceName": "artifacts",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "e71ba1ed-c0a4-4a28-a61f-2dd5f68cf3fd",
+         "area": "Release",
+         "resourceName": "logs",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/tasks/{taskId}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "d8f96f24-8ea7-4cb6-baab-2df8fc515665",
+         "area": "Release",
+         "resourceName": "definitions",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{definitionId}",
+         "resourceVersion": 4,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "23f461c8-629a-4144-a076-3054fa5f268a",
+         "area": "Release",
+         "resourceName": "history",
+         "routeTemplate": "{project}/_apis/Release/releases/{releaseId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "f2571c27-bf50-4938-b396-32d109ddef26",
+         "area": "Release",
+         "resourceName": "agentartifacts",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "8dcf9fe9-ca37-4113-8ee1-37928e98407c",
+         "area": "Release",
+         "resourceName": "changes",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "30fc787e-a9e0-4a07-9fbc-3e903aa051d2",
+         "area": "Release",
+         "resourceName": "versions",
+         "routeTemplate": "{project}/_apis/{area}/artifacts/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "409d301f-3046-46f3-beb9-4357fbce0a8c",
+         "area": "Release",
+         "resourceName": "flightAssignments",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "b47c6458-e73b-47cb-a770-4df1e8813a91",
+         "area": "Release",
+         "resourceName": "approvals",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 3,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "938f7222-9acb-48fe-b8a3-4eda04597171",
+         "area": "Release",
+         "resourceName": "favorites",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{scope}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "b005ef73-cddc-448e-9ba2-5193bf36b19f",
+         "area": "Release",
+         "resourceName": "deployments",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "6b03b696-824e-4479-8eb2-6644a51aba89",
+         "area": "Release",
+         "resourceName": "environmenttemplates",
+         "routeTemplate": "{project}/_apis/{area}/definitions/{resource}",
+         "resourceVersion": 4,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c957584a-82aa-4131-8222-6d47f78bfa7a",
+         "area": "Release",
+         "resourceName": "approvals",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 3,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "a166fde7-27ad-408e-ba75-703c2cc9d500",
+         "area": "Release",
+         "resourceName": "releases",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{releaseId}",
+         "resourceVersion": 8,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "214111ee-2415-4df2-8ed2-74417f7d61f9",
+         "area": "Release",
+         "resourceName": "attachments",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/attempts/{attemptId}/timelines/{timelineId}/{resource}/{type}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "12b5d21a-f54c-430e-a8c1-7515d196890e",
+         "area": "Release",
+         "resourceName": "definitionEnvironments",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "8efc2a3c-1fc8-4f6d-9822-75e98cecb48f",
+         "area": "Release",
+         "resourceName": "types",
+         "routeTemplate": "{project}/_apis/{area}/artifacts/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3d21b4c8-c32e-45b2-a7cb-770a369012f4",
+         "area": "Release",
+         "resourceName": "tags",
+         "routeTemplate": "{project}/_apis/{area}/definitions/{releaseDefinitionId}/{resource}/{*tag}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "917ace4a-79d1-45a7-987c-7be4db4268fa",
+         "area": "Release",
+         "resourceName": "projects",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c63c3718-7cfd-41e0-b89b-81c1ca143437",
+         "area": "Release",
+         "resourceName": "releasesettings",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "86cee25a-68ba-4ba3-9171-8ad6ffc6df93",
+         "area": "Release",
+         "resourceName": "tags",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c4071f6d-3697-46ca-858e-8b10ff09e52f",
+         "area": "Release",
+         "resourceName": "attachments",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/attempts/{attemptId}/timelines/{timelineId}/records/{recordId}/{resource}/{type}/{name}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "dec7ca5a-7f7f-4797-8bf1-8efc0dc93b28",
+         "area": "Release",
+         "resourceName": "logs",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/gates/{gateId}/tasks/{taskId}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c5b602b6-d1b3-4363-8a51-94384f78068f",
+         "area": "Release",
+         "resourceName": "tags",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/{resource}/{*tag}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "a9c09fe4-901e-4b2e-b05d-9888ad883ae9",
+         "area": "Release",
+         "resourceName": "sources",
+         "routeTemplate": "{project}/_apis/{area}/artifacts/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "930db3e4-243a-4dda-840e-9edf9deeb456",
+         "area": "Release",
+         "resourceName": "receiveExternalEvent",
+         "routeTemplate": "_apis/public/{area}/{resource}/{webHookId}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "250c7158-852e-4130-a00f-a0cce9b72d05",
+         "area": "Release",
+         "resourceName": "approvals",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{approvalStepId}/history",
+         "resourceVersion": 3,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "6162082c-380f-4648-95d7-a72348c755f0",
+         "area": "Release",
+         "resourceName": "releases",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 8,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "60b86efb-7b8c-4853-8f9f-aa142b77b479",
+         "area": "Release",
+         "resourceName": "attachments",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/attempts/{attemptId}/plan/{planId}/timelines/{timelineId}/records/{recordId}/{resource}/{type}/{name}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "9328e074-59fb-465a-89d9-b09c82ee5109",
+         "area": "Release",
+         "resourceName": "approvals",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{approvalId}",
+         "resourceVersion": 3,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "f7ddf76d-ce0c-4d68-94ff-becaec5d9dea",
+         "area": "Release",
+         "resourceName": "folders",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{*path}",
+         "resourceVersion": 2,
+         "minVersion": "3.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "17c91af7-09fd-4256-bff1-c24ee4f73bc0",
+         "area": "Release",
+         "resourceName": "logs",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/deployPhases/{releaseDeployPhaseId}/tasks/{taskId}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "a7e426b1-03dc-48af-9dfe-c98bac612dcb",
+         "area": "Release",
+         "resourceName": "environments",
+         "routeTemplate": "{project}/_apis/Release/releases/{releaseId}/{resource}/{environmentId}",
+         "resourceVersion": 6,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c1a68497-69da-40fb-9423-cab19cfeeca9",
+         "area": "Release",
+         "resourceName": "autotriggerissues",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "4.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c37fbab5-214b-48e4-a55b-cb6b4f6e4038",
+         "area": "Release",
+         "resourceName": "logs",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "cd1502bb-3c73-4e11-80a6-d11308dceae5",
+         "area": "Release",
+         "resourceName": "metrics",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "1a60a35d-b8c9-45fb-bf67-da0829711147",
+         "area": "Release",
+         "resourceName": "badge",
+         "routeTemplate": "_apis/public/{area}/{resource}/{projectId}/{releaseDefinitionId}/{environmentId}/{branchName}",
+         "resourceVersion": 1,
+         "minVersion": "4.1",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c5788899-1e84-439b-b5f9-dbc10ecffe24",
+         "area": "Release",
+         "resourceName": "ContinuousDeployment",
+         "routeTemplate": "{project}/_apis/{area}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "4.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "cf6fc7ba-4ad9-403b-86e6-e372cd3b2327",
+         "area": "Release",
+         "resourceName": "throttlingQueue",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "3.1",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "cd42261a-f5c6-41c8-9259-f078989b9f25",
+         "area": "Release",
+         "resourceName": "issues",
+         "routeTemplate": "{project}/_apis/{area}/{resource}/{buildId}",
+         "resourceVersion": 1,
+         "minVersion": "3.2",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "4f165cc0-875c-4768-b148-f12f78769fab",
+         "area": "Release",
+         "resourceName": "workitems",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "a4d06688-0dfa-4895-82a5-f43ec9452306",
+         "area": "Release",
+         "resourceName": "attachments",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/attempts/{attemptId}/plan/{planId}/{resource}/{type}",
+         "resourceVersion": 1,
+         "minVersion": "5.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "616c46e4-f370-4456-adaa-fbaf79c7b79e",
+         "area": "Release",
+         "resourceName": "manualInterventions",
+         "routeTemplate": "{project}/_apis/Release/releases/{releaseId}/{resource}/{manualInterventionId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "0208d263-120f-478c-91e8-fe0d27b1abf1",
+         "area": "Release",
+         "resourceName": "ipAddress",
+         "routeTemplate": "_apis/{area}/{resource}/{ipDetectionMethods}",
+         "resourceVersion": 1,
+         "minVersion": "3.1",
+         "maxVersion": "3.2",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "2577e6c3-6999-4400-bc69-fe1d837755fe",
+         "area": "Release",
+         "resourceName": "logs",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/environments/{environmentId}/attempts/{attemptId}/timelines/{timelineId}/tasks/{taskId}/{resource}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "258b82e0-9d41-43f3-86d6-fef14ddd44bc",
+         "area": "Release",
+         "resourceName": "revisions",
+         "routeTemplate": "{project}/_apis/Release/definitions/{definitionId}/{resource}/{revision}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "d141a2a2-f181-4480-ad19-4399b3d1a9d7",
+         "area": "ReleaseManagement",
+         "resourceName": "releasepath",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "3ddeb308-c21b-4cfe-812d-43bdff8363a3",
+         "area": "ReleaseManagement",
+         "resourceName": "release",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "5e66e77f-2581-47e8-a429-5e61c070326a",
+         "area": "ReleaseManagement",
+         "resourceName": "component",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "0ac8266a-5443-4bb6-9274-7b0fcf281b26",
+         "area": "ReleaseManagement",
+         "resourceName": "environment",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "51edd448-01ef-44af-b686-8cb304cd1376",
+         "area": "ReleaseManagement",
+         "resourceName": "releasetemplate",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "f5f759c2-d222-4968-a7ad-b1d72deb7f0d",
+         "area": "ReleaseManagement",
+         "resourceName": "tfsconnection",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "d843590d-370d-47ef-97f5-bea3ceff021f",
+         "area": "ReleaseManagement",
+         "resourceName": "agentartifacts",
+         "routeTemplate": "{project}/_apis/{area}/releases/{releaseId}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "ab4410bc-62b4-454c-b5ba-e6cd9b624d70",
+         "area": "ReleaseManagement",
+         "resourceName": "stage",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "c67132ff-671d-451e-b817-f9e1603d4dac",
+         "area": "ReleaseManagement",
+         "resourceName": "azuresubscription",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "e9abe73d-489c-4d84-b61b-598cd150232c",
+         "area": "RM",
+         "resourceName": "consumers",
+         "routeTemplate": "_apis/{area}/{resource}/{consumerId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "25dcffd2-9f2a-4109-b4cc-000f8472107d",
+         "area": "SBS",
+         "resourceName": "SBSInherit",
+         "routeTemplate": "_apis/{area}/{securityNamespaceId}/inherit",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "466ecead-d7f1-447c-8bc1-52c22592b98e",
+         "area": "SBS",
+         "resourceName": "SBSTokens",
+         "routeTemplate": "_apis/{area}/{securityNamespaceId}/tokens",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "3f95720d-2ef6-47cc-b5d7-733561d13eb9",
+         "area": "SBS",
+         "resourceName": "SBSAcls",
+         "routeTemplate": "_apis/{area}/{securityNamespaceId}/acls",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "ab821a2b-f383-4c72-8274-8425ed30835d",
+         "area": "SBS",
+         "resourceName": "SBSAces",
+         "routeTemplate": "_apis/{area}/{securityNamespaceId}/aces",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "049929b0-79e1-4ad5-a548-9e192d5c049e",
+         "area": "SBS",
+         "resourceName": "SBSNamespace",
+         "routeTemplate": "_apis/{area}/{securityNamespaceId}",
+         "resourceVersion": 3,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "d9da18e4-274b-4dd4-b09d-b8b931af3826",
+         "area": "SBS",
+         "resourceName": "SBSAclStore",
+         "routeTemplate": "_apis/{area}/{securityNamespaceId}/{aclStoreId}",
+         "resourceVersion": 2,
+         "minVersion": "2.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "18a2ad18-7571-46ae-bec7-0c7da1495885",
+         "area": "Security",
+         "resourceName": "AccessControlLists",
+         "routeTemplate": "_apis/{resource}/{securityNamespaceId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "cf1faa59-1b63-4448-bf04-13d981a46f5d",
+         "area": "Security",
+         "resourceName": "PermissionEvaluationBatch",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "ce7b9f95-fde9-4be8-a86d-83b366f0b87a",
+         "area": "Security",
+         "resourceName": "SecurityNamespaces",
+         "routeTemplate": "_apis/{resource}/{securityNamespaceId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "dd3b8bd6-c7fc-4cbd-929a-933d9c011c9d",
+         "area": "Security",
+         "resourceName": "Permissions",
+         "routeTemplate": "_apis/{resource}/{securityNamespaceId}/{permissions}",
+         "resourceVersion": 2,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "ac08c8ff-4323-4b08-af90-bcd018d380ce",
+         "area": "Security",
+         "resourceName": "AccessControlEntries",
+         "routeTemplate": "_apis/{resource}/{securityNamespaceId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "5.1"
+      },
+      {
+         "id": "3c4bfe05-aeb6-45f8-93a6-929468401657",
+         "area": "Servicing",
+         "resourceName": "ServiceLevel",
+         "routeTemplate": "_apis/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "4cbaafaf-e8af-4570-98d1-79ee99c56327",
+         "area": "Settings",
+         "resourceName": "Entries",
+         "routeTemplate": "_apis/{area}/{scopeName}/{scopeValue}/{resource}/{userScope}/{*key}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "cd006711-163d-4cd4-a597-b05bad2556ff",
+         "area": "Settings",
+         "resourceName": "Entries",
+         "routeTemplate": "_apis/{area}/{resource}/{userScope}/{*key}",
+         "resourceVersion": 1,
+         "minVersion": "3.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "5f4c431a-4d8f-442d-96e7-1e7522e6eabd",
+         "area": "Stats",
+         "resourceName": "Activities",
+         "routeTemplate": "_apis/{area}/{resource}/{activityId}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      },
+      {
+         "id": "11420b6b-3324-490a-848d-b8aafdb906ba",
+         "area": "WebPlatformAuth",
+         "resourceName": "SessionToken",
+         "routeTemplate": "_apis/{area}/{resource}",
+         "resourceVersion": 1,
+         "minVersion": "1.0",
+         "maxVersion": "6.0",
+         "releasedVersion": "0.0"
+      }
+   ],
+   "count": 187
+}
