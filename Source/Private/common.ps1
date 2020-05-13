@@ -243,6 +243,8 @@ function _buildRequestURI {
    )
 
    process {
+      _hasAccount
+      
       $sb = New-Object System.Text.StringBuilder
 
       $sb.Append($(_addSubDomain -subDomain $subDomain -instance $(_getInstance))) | Out-Null
