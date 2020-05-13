@@ -2,6 +2,8 @@
 
 ## 6.4.8
 
+You can now tab complete Area and Resource of Invoke-VSTeamRequest.
+
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/286) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Added cmdlets for add, get and remove for classification nodes, iterations and areas

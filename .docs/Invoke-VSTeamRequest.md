@@ -69,7 +69,9 @@ Default value: Get
 
 ### -Body
 
-Specifies the body of the request. The body is the content of the request that follows the headers. You can also pipe a body value to Invoke-VSTeamRequest.
+Specifies the body of the request. The body is the content of the request that follows the headers.
+
+You can pipe a body value to Invoke-VSTeamRequest.
 
 The Body parameter can be used to specify a list of query parameters or specify the content of the response.
 
@@ -98,7 +100,7 @@ Type: String
 
 ### -Area
 
-The area to find the resource.
+The area to find the resource. You can tab complete this value. It can be filtered by passing -subDomain first.
 
 ```yaml
 Type: String
@@ -106,7 +108,7 @@ Type: String
 
 ### -Resource
 
-The name of the feature you want to manipulate.
+The name of the feature you want to manipulate. You can tab complete this value if you pass -Area before this parameter.
 
 ```yaml
 Type: String

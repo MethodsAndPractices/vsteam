@@ -1,8 +1,10 @@
 function Invoke-VSTeamRequest {
    [CmdletBinding()]
    param(
+      [ArgumentCompleter([InvokeCompleter])]
       [string] $resource,
 
+      [ArgumentCompleter([InvokeCompleter])]
       [string] $area,
 
       [string] $id,
