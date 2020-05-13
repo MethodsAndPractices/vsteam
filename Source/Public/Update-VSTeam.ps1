@@ -4,13 +4,13 @@ function Update-VSTeam {
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Alias('TeamName', 'TeamId', 'TeamToUpdate', 'Id')]
       [string]$Name,
-      
+
       [string]$NewTeamName,
-      
+
       [string]$Description,
-      
+
       [switch] $Force,
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
@@ -21,12 +21,12 @@ function Update-VSTeam {
       if (-not $NewTeamName -and -not $Description) {
          throw 'You must provide a new team name or description, or both.'
       }
-      
+
       if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-VSTeam")) {
          if (-not $NewTeamName) {
             $body = '{"description": "' + $Description + '" }'
          }
-         
+
          if (-not $Description) {
             $body = '{ "name": "' + $NewTeamName + '" }'
          }

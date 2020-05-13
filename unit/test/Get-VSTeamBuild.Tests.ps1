@@ -16,6 +16,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 Describe 'VSTeamBuild' {
    ## Arrange
+   # Make sure the project name is valid. By returning an empty array
+   # all project names are valid. Otherwise, you name you pass for the
+   # project in your commands must appear in the list.
+   Mock _getProjects { return @() }
+
    # Sample result of a single build
    $singleResult = Get-Content "$PSScriptRoot\sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json
 

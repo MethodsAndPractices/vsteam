@@ -36,7 +36,8 @@ Describe 'Remove-VSTeamClassificationNode' {
       ) {
          param ($StructureGroup)      
          ## Act
-         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup
+         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Force
+         
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
@@ -51,7 +52,8 @@ Describe 'Remove-VSTeamClassificationNode' {
       ) {
          param ($StructureGroup, $ReClassifyId)      
          ## Act
-         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -ReClassifyId $ReClassifyId
+         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -ReClassifyId $ReClassifyId -Force
+
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
@@ -68,7 +70,7 @@ Describe 'Remove-VSTeamClassificationNode' {
       ) {
          param ($StructureGroup, $Path)      
          ## Act
-         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Path $Path
+         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Path $Path -Force
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -86,7 +88,7 @@ Describe 'Remove-VSTeamClassificationNode' {
       ) {
          param ($StructureGroup, $Path)      
          ## Act
-         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Path $Path
+         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Path $Path -Force
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

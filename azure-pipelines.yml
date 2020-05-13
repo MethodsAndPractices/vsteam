@@ -62,8 +62,13 @@ stages:
           # Import each module
           $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
 
+          $count = 0
           $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
-          $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
+          $r | ForEach-Object {Write-Host "##vso[task.logissue type=error;sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"; $count++}
+
+          if($count -ne 0) {
+            Write-Host "##vso[task.complete result=Failed;]Static Code Analysis with error count = $count"
+          }
 
     - task: CredScan@2
       displayName: 'Run CredScan'

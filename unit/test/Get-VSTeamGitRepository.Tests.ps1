@@ -88,6 +88,11 @@ Describe "VSTeamGitRepository" {
    }
 
    ## Arrange
+   # Make sure the project name is valid. By returning an empty array
+   # all project names are valid. Otherwise, you name you pass for the
+   # project in your commands must appear in the list.
+   Mock _getProjects { return @() }
+      
    # Mock the call to Get-Projects by the dynamic parameter for ProjectName
    Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
    Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }

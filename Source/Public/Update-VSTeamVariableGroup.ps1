@@ -47,7 +47,7 @@ function Update-VSTeamVariableGroup {
             description = $Description
             variables   = $Variables
          }
-      
+
          if ([VSTeamVersions]::Version -ne "TFS2017") {
             $Type = $PSBoundParameters['Type']
             $bodyAsHashtable.Add("type", $Type)
@@ -57,7 +57,7 @@ function Update-VSTeamVariableGroup {
                $bodyAsHashtable.Add("providerData", $ProviderData)
             }
          }
-      
+
          $body = $bodyAsHashtable | ConvertTo-Json
       }
 

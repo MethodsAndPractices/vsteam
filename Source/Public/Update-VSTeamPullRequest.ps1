@@ -7,23 +7,23 @@ function Update-VSTeamPullRequest {
 
       [Parameter(Mandatory = $true)]
       [int] $PullRequestId,
-      
+
       [Parameter(ParameterSetName = "Status", Mandatory = $true)]
       [ValidateSet("abandoned", "active", "completed", "notSet")]
       [string] $Status,
-      
+
       [Parameter(ParameterSetName = "EnableAutoComplete", Mandatory = $true)]
       [Switch] $EnableAutoComplete,
-      
+
       [Parameter(ParameterSetName = "EnableAutoComplete", Mandatory = $true)]
       [VSTeamUser] $AutoCompleteIdentity,
-      
+
       [Parameter(ParameterSetName = "DisableAutoComplete", Mandatory = $true)]
       [Switch] $DisableAutoComplete,
-      
+
       [Parameter(ParameterSetName = "Draft", Mandatory = $false)]
       [switch] $Draft,
-      
+
       [switch] $Force
    )
 
@@ -43,7 +43,7 @@ function Update-VSTeamPullRequest {
          if ($DisableAutoComplete.IsPresent) {
             $body = '{"autoCompleteSetBy": null}'
          }
-               
+
          if ($Status) {
             $body = '{"status": "' + $Status + '"}'
          }

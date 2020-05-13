@@ -31,7 +31,8 @@ Describe 'Remove-VSTeamArea' {
       It 'should delete area' -TestCases @(
       ) {     
          ## Act
-         Remove-VSTeamArea -ProjectName "Public Demo"
+         Remove-VSTeamArea -ProjectName "Public Demo" -Force
+
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
@@ -45,7 +46,8 @@ Describe 'Remove-VSTeamArea' {
       ) {
          param ($ReClassifyId)      
          ## Act
-         Remove-VSTeamArea -ProjectName "Public Demo" -ReClassifyId $ReClassifyId
+         Remove-VSTeamArea -ProjectName "Public Demo" -ReClassifyId $ReClassifyId -Force
+         
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
@@ -60,7 +62,7 @@ Describe 'Remove-VSTeamArea' {
       ) {
          param ($Path)      
          ## Act
-         Remove-VSTeamArea -ProjectName "Public Demo" -Path $Path
+         Remove-VSTeamArea -ProjectName "Public Demo" -Path $Path -Force
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -76,7 +78,7 @@ Describe 'Remove-VSTeamArea' {
       ) {
          param ($Path)      
          ## Act
-         Remove-VSTeamArea -ProjectName "Public Demo" -Path $Path
+         Remove-VSTeamArea -ProjectName "Public Demo" -Path $Path -Force
 
          ## Assert
          Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

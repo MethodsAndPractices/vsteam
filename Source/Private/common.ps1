@@ -39,64 +39,66 @@ function _callAPI {
       [switch]$NoProject
    )
 
-   # If the caller did not provide a Url build it.
-   if (-not $Url) {
-      $buildUriParams = @{ } + $PSBoundParameters;
-      $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
-      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
-      $Url = _buildRequestURI @buildUriParams
-   }
-   elseif ($QueryString) {
-      # If the caller provided the URL and QueryString we need
-      # to add the querystring now
-      foreach ($key in $QueryString.keys) {
-         $Url += _appendQueryString -name $key -value $QueryString[$key]
+   process {
+      # If the caller did not provide a Url build it.
+      if (-not $Url) {
+         $buildUriParams = @{ } + $PSBoundParameters;
+         $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
+         foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
+         $Url = _buildRequestURI @buildUriParams
       }
-   }
-
-   if ($body) {
-      Write-Verbose "Body $body"
-   }
-
-   $params = $PSBoundParameters
-   $params.Add('Uri', $Url)
-   $params.Add('UserAgent', (_getUserAgent))
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $params.Add('UseDefaultCredentials', $true)
-      $params.Add('Headers', @{ })
-   }
-   elseif (_useBearerToken) {
-      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
-   }
-   else {
-      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
-   }
-
-   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
-      foreach ($key in $AdditionalHeaders.Keys) {
-         $params['Headers'].Add($key, $AdditionalHeaders[$key])
+      elseif ($QueryString) {
+         # If the caller provided the URL and QueryString we need
+         # to add the querystring now
+         foreach ($key in $QueryString.keys) {
+            $Url += _appendQueryString -name $key -value $QueryString[$key]
+         }
       }
-   }
+
+      if ($body) {
+         Write-Verbose "Body $body"
+      }
+
+      $params = $PSBoundParameters
+      $params.Add('Uri', $Url)
+      $params.Add('UserAgent', (_getUserAgent))
+
+      if (_useWindowsAuthenticationOnPremise) {
+         $params.Add('UseDefaultCredentials', $true)
+         $params.Add('Headers', @{ })
+      }
+      elseif (_useBearerToken) {
+         $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
+      }
+      else {
+         $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
+      }
+
+      if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
+         foreach ($key in $AdditionalHeaders.Keys) {
+            $params['Headers'].Add($key, $AdditionalHeaders[$key])
+         }
+      }
    
-   # We have to remove any extra parameters not used by Invoke-RestMethod
-   $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
-   foreach ($e in $extra) { $params.Remove($e) | Out-Null }
+      # We have to remove any extra parameters not used by Invoke-RestMethod
+      $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
+      foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
-   try {
-      $resp = Invoke-RestMethod @params
+      try {
+         $resp = Invoke-RestMethod @params
 
-      if ($resp) {
-         Write-Verbose "return type: $($resp.gettype())"
-         Write-Verbose $resp
+         if ($resp) {
+            Write-Verbose "return type: $($resp.gettype())"
+            Write-Verbose $resp
+         }
+
+         return $resp
       }
+      catch {
+         _handleException $_
 
-      return $resp
-   }
-   catch {
-      _handleException $_
-
-      throw
+         throw
+      }
    }
 }
 

@@ -10,6 +10,12 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Public/$sut"
 
 Describe 'Get-VSTeamBuildTimeline' {
+   ## Arrnage 
+   # Make sure the project name is valid. By returning an empty array
+   # all project names are valid. Otherwise, you name you pass for the
+   # project in your commands must appear in the list.
+   Mock _getProjects { return @() }
+   
    Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    [VSTeamVersions]::Build = '1.0-unitTest'
    $buildTimeline = Get-Content "$PSScriptRoot\sampleFiles\buildTimeline.json" -Raw | ConvertFrom-Json 
