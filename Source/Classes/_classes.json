@@ -1,7 +1,8 @@
 {
-   "outputFile": "vsteam.classes.ps1",
+   "outputFile": "vsteam.psm1",
    "fileType": "classes",
    "files": [
+      "VSTeamWorkItemTypeCache.ps1",
       "InvokeCompleter.ps1",
       "BuildCompleter.ps1",
       "BuildDefinitionCompleter.ps1",

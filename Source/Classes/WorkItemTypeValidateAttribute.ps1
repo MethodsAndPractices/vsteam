@@ -4,9 +4,9 @@ class WorkItemTypeValidateAttribute : ValidateArgumentsAttribute {
    [void] Validate(
       [object] $arguments,
       [EngineIntrinsics] $EngineIntrinsics) {
-      
-      if (_getDefaultProject) {
-         $types = _getWorkItemTypes -ProjectName $(_getDefaultProject)
+      #Do not fail on null or empty, leave that to other validation conditions
+      if (_getDefaultProject -and -not [string]::IsNullOrEmpty($arguments)) {
+         $types = [VSTeamWorkItemTypeCache]::GetCurrent()
 
          if (($null -ne $types) -and (-not ($arguments -in $types))) {
             throw [ValidationMetadataException]::new(

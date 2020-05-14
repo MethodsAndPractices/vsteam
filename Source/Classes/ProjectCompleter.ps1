@@ -1,7 +1,8 @@
 using namespace System.Collections
 using namespace System.Collections.Generic
 using namespace System.Management.Automation
-
+# This class defines an attribute that allows the user the tab complete project names
+# for function parameters. 
 class ProjectCompleter : IArgumentCompleter {
    [IEnumerable[CompletionResult]] CompleteArgument(
       [string] $CommandName,
@@ -12,14 +13,12 @@ class ProjectCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      if (_hasProjectCacheExpired) {
-         [VSTeamProjectCache]::projects = _getProjects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-      }
-
-      foreach ($p in [VSTeamProjectCache]::projects) {
-         if ($p -like "*$WordToComplete*") {
+      foreach ($p in [VSTeamProjectCache]::GetCurrent()) {
+         if ($p -like "*$WordToComplete*" -and $p -notmatch "\W") {
             $results.Add([CompletionResult]::new($p))
+         }
+         elseif ($p -like "*$WordToComplete*"){
+            $results.Add([CompletionResult]::new("'$($p.replace("'","''"))'", $p, 0, $p))
          }
       }
 

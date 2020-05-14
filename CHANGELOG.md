@@ -1,5 +1,36 @@
 # Changelog
 
+## Updates to completers , validators and their associated caches
+```
+Source\Classes\VSTeamProcessCache.ps1               | Add methods to get current (updating if needed), update on demand and invalidate the cache
+Source\Classes\ProcessTemplateCompleter.ps1         | Use new cache methods and wrap completion items containing whitespace in quotes
+Source\Classes\ProcessValidateAttribute.ps1         | Use new cache methods. Do not fail on null or empty
+Source\Private\common.ps1                           | _getWorkItemTypes defaults project name instead of making it mandatory and makes different rest call to get non-hidden types.
+Source\Classes\VSTeamWorkItemTypeCache.ps1          | Add methods to get current (updating if needed), update on demand  and invalidate the cache. Add support for Per-ProcessTemplate lists of work items
+Source\Classes\WorkItemTypeCompleter.ps1            | Use new cache methods and completing work items specific to a process or non-default project,  wrap completion items containing whitespace in quotes
+Source\Classes\WorkItemTypeValidateAttribute.ps1    | Use new cache methods. Do not fail on null or empty 
+Source\Classes\VSTeamProjectCache.ps1               | Add methods to cache object - as above
+Source\Classes\ProjectCompleter.ps1                 | Use new cache methods and wrap completion items containing whitespace in quotes
+Source\Classes\ProjectValidateAttribute.ps1         | Use new cache methods. Do not fail on null or empty 
+Source\Classes\BuildCompleter.ps1                   | Wrap completion items containing whitespace in quotes
+Source\Classes\BuildDefinitionCompleter.ps1         | Wrap completion items containing whitespace in quotes
+Source\Classes\UncachedProjectCompleter.ps1         | Wrap completion items containing whitespace in quotes
+Source\Classes\UncachedProjectValidateAttribute.ps1 | Do not fail on null or empty
+Source\Classes\TeamQueueCompleter.ps1               | Wrap completion items containing whitespace in quotes
+Source\Clasess\_classes.json                        | VSTeamWorkItemTypeCache was missing, **build classes into PSM1 file.**
+```
+The change to the build destination in claseses.json follows on from 
+https://github.com/PowerShell/PowerShell/issues/12132  (TLDR put classes directly into PSM1 and load with "Using module")
+and need two changes which are **not in this PR**    
+In build-module.ps1 change line 85 from    
+`Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force`   
+to    
+`Get-Content -Path ./Source/VSTeam.psm1 | Out-File -Append -FilePath "$output/VSTeam.psm1" -Encoding ascii`   
+and In source\VSteam.psm1    
+remove line 10   
+`. "$PSScriptRoot\vsteam.classes.ps1"`   
+And update preceding comment to reflect the change   
+
 ## 6.4.8
 
 You can now tab complete Area and Resource of Invoke-VSTeamRequest.

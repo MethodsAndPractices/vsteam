@@ -427,32 +427,20 @@ function _useBearerToken {
    return (!$env:TEAM_PAT) -and ($env:TEAM_TOKEN)
 }
 
+
 function _getWorkItemTypes {
    param(
-      [Parameter(Mandatory = $true)]
-      [string] $ProjectName
+      [string]$ProjectName = (_getDefaultProject)
    )
-
-   if (-not $(_getInstance)) {
-      Write-Output @()
-      return
-   }
 
    # Call the REST API
    try {
-      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
-
-      # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
-      # To replace all the "": with "_end":
-      $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
-
-      if ($resp.count -gt 0) {
-         Write-Output ($resp.value).name
-      }
+      $v      = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
+      $hidden = $v.value.where({$_.referencename -eq "Microsoft.HiddenCategory"}).workitemtypes.name
+      $v.value.where(          {$_.referencename -ne "Microsoft.HiddenCategory"}).workitemtypes.name.where({$_ -notin $hidden})
    }
    catch {
       Write-Verbose $_
-      Write-Output @()
    }
 }
 

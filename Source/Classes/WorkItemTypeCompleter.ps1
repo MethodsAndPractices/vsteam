@@ -11,27 +11,33 @@ class WorkItemTypeCompleter : IArgumentCompleter {
       [IDictionary] $FakeBoundParameters) {
 
       $results = [List[CompletionResult]]::new()
-
-      # If the user has explictly added the -ProjectName parameter
-      # to the command use that instead of the default project.
-      $projectName = $FakeBoundParameters['ProjectName']
-
-      # Only use the default project if the ProjectName parameter was
-      # not used
-      if (-not $projectName) {
-         $projectName = _getDefaultProject
+      $workitemTypes = $null
+      # If the user has added the -ProcessTemplate parameter,
+      # get Names of WorkItem types by process, otherwise get them by project
+      if ($FakeBoundParameters['ProcessTemplate']) {
+               $workitemTypes = [VSTeamWorkItemTypeCache]::GetByProcess($FakeBoundParameters['ProcessTemplate']).name | Sort-Object
       }
+      else {
+         # if the ProjectName parameter  either was the default or was omitted,
+         # then use the cached list of project WorkItem type-Names.
+         # Otherwise get the names for the given project
+         $projectName = $FakeBoundParameters['ProjectName']
 
-      # If there is no projectName by this point just return a empty
-      # list.
-      if ($projectName) {
-         foreach ($w in (_getWorkItemTypes -ProjectName $projectName)) {
-            if ($w -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new($w))
-            }
+         if (-not $projectName -or $projectName -eq ( _getDefaultProject) ) {
+               $workitemTypes = [VSTeamWorkItemTypeCache]::GetCurrent()
+         }
+         else {$workitemTypes = _getWorkItemTypes -Project $projectname
          }
       }
-
+      #The list of workitemtypes might be empty...
+      foreach ($w in $workitemTypes.where({$_ -like "*$WordToComplete*"})) {
+         if   ($w -notmatch '\W') {
+               $results.Add([CompletionResult]::new($w))
+         }
+         else {
+              $results.Add([CompletionResult]::new("'$($w.replace("'","''"))'", $w, 0, $w))
+         }
+      }
       return $results
    }
 }

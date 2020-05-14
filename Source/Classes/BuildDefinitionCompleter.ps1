@@ -2,10 +2,9 @@ using namespace System.Collections
 using namespace System.Collections.Generic
 using namespace System.Management.Automation
 
-# This class defines an attribute that allows the user the tab complete
-# build definition names for function parameters. For this completer to
-# work the users must have already provided the ProjectName parameter for
-# the function or set a default project.
+# This class defines an attribute that allows the user the tab complete  build definition names
+# for function parameters. For this completer to work the users must have already provided
+# the ProjectName parameter for the function, or set a default project.
 class BuildDefinitionCompleter : IArgumentCompleter {
    [IEnumerable[CompletionResult]] CompleteArgument(
       [string] $CommandName,
@@ -30,8 +29,11 @@ class BuildDefinitionCompleter : IArgumentCompleter {
       # list.
       if ($projectName) {
          foreach ($b in (Get-VSTeamBuildDefinition -ProjectName $projectName)) {
-            if ($b.name -like "*$WordToComplete*") {
+            if ($b.name -like "*$WordToComplete*" -and $b.name -notmatch '\W') {
                $results.Add([CompletionResult]::new($b.name))
+            }
+            elseif  ($b.name -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($b.name.replace("'","''"))'", $b.name, 0, $b.name))
             }
          }
       }
