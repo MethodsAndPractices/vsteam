@@ -1,27 +1,31 @@
 Set-StrictMode -Version Latest
 
 #region include
-Import-Module SHiPS
+BeforeAll {
+   Import-Module SHiPS
+      
+   $here = $PSScriptRoot
+   $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamTeam.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Public/$sut"
+   . "$here/../../Source/Private/common.ps1"
+   . "$here/../../Source/Classes/VSTeamLeaf.ps1"
+   . "$here/../../Source/Classes/VSTeamTeam.ps1"
+   . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+   . "$here/../../Source/Classes/ProjectCompleter.ps1"
+   . "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
+   . "$here/../../Source/Public/$sut"
+}
 #endregion
 
 Describe "VSTeam" {
    Context "Add-VSTeam" {
-      $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
+      BeforeAll {
+         $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
       
-      Mock _callAPI { return $singleResult }
-      Mock _hasProjectCacheExpired { return $false }
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+         Mock _callAPI { return $singleResult }
+         Mock _hasProjectCacheExpired { return $false }
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+      }
 
       It 'with team name only should create a team' {
          Add-VSTeam -ProjectName Test -TeamName "TestTeam"
