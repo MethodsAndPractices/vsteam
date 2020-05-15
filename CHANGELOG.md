@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.5.0
+
+Requires Pester 5.x
+
 ## 6.4.8
 
 You can now tab complete Area and Resource of Invoke-VSTeamRequest.

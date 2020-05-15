@@ -107,8 +107,8 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
 
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
-   if ($null -eq $(Get-Module -ListAvailable Pester)) {
-      Install-Module -Name Pester -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+   if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
    $pesterArgs = @{
