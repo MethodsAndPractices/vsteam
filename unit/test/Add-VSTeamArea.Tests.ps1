@@ -20,7 +20,7 @@ Describe 'VSTeamArea' {
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
    }
 
-   Context 'Add-VSTeamArea' {
+   Context 'Add-VSTeamArea' -Tag "Add" {
       BeforeAll {
          $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
 
