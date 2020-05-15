@@ -1,5 +1,12 @@
 # Changelog
 
+## Enhance Get-VsteamWorkItemType. 
+Update \source\Get-VSTeamWorkItemType.ps1 and .docs\Get-VSTeamWorkItemType.md
+1. Support selection of work item types in a project or in a process template.
+2. Allow selection of multiple types using wildcards
+3. For selection from Process templates, allow expansion of behaviors, layouts, and/or states
+4. A "hidden" attribute to returned work item types to allow hidden ones to be filtered out later. 
+
 ## 6.4.8
 
 You can now tab complete Area and Resource of Invoke-VSTeamRequest.
