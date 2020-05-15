@@ -1,20 +1,22 @@
 Set-StrictMode -Version Latest
 
 Describe "VSTeam" {
-   Context "Add-VSTeam" {
-      BeforeAll {
-         Import-Module SHiPS
-      
-         $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-
-         . "$PSScriptRoot/../../Source/Private/common.ps1"
-         . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-         . "$PSScriptRoot/../../Source/Classes/VSTeamTeam.ps1"
-         . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-         . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-         . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-         . "$PSScriptRoot/../../Source/Public/$sut"
+   BeforeAll {
+      Import-Module SHiPS
    
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamTeam.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+   }
+
+   Context "Add-VSTeam" {
+      BeforeAll {   
          $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
       
          Mock _callAPI { return $singleResult }
