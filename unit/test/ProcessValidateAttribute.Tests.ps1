@@ -13,7 +13,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 Describe "ProcessValidateAttribute" {
    Context "Existing Process" {
       Mock _hasProcessTemplateCacheExpired { return $true }
-      Mock _getProcesses { return @("Test1", "Test2") }
+      Mock _getProcesses { return @(@{Name='Test1';typeId=''},@{Name='Test2';typeId=''})}
 
       It "it is not in list and should throw" {
          $target = [ProcessValidateAttribute]::new()

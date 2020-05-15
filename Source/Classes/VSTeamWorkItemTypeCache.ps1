@@ -4,7 +4,7 @@ class VSTeamWorkItemTypeCache {
    static hidden [string]    $CachedProjectName   = ''
    static hidden [object]    $WorkItemTypes       = $null
    static hidden [hashtable] $ProcessWITs         = @{}
-   static hidden [hashtable] $ProcesTimeStamps    = @{}
+   static hidden [hashtable] $ProcessTimeStamps   = @{}
 
    static [Void] Update (  ) {
       [VSTeamWorkItemTypeCache]::CachedProjectName = _getDefaultProject
@@ -30,17 +30,17 @@ class VSTeamWorkItemTypeCache {
    static [object] GetByProcess ($ProcessName) {
          #Must be a valid proces; update if not time or old time kept for this process. 
       if    ([VSTeamProcessCache]::GetCurrent() -contains $ProcessName -and
-            ([VSTeamWorkItemTypeCache]::ProcesTimeStamps[ $ProcessName] -isnot [datetime] -or
-             [VSTeamWorkItemTypeCache]::ProcesTimeStamps[ $ProcessName].AddMinutes([VSTeamWorkItemTypeCache]::MaxAgeMin) -lt (Get-Date)
+            ([VSTeamWorkItemTypeCache]::ProcessTimeStamps[$ProcessName] -isnot [datetime] -or
+             [VSTeamWorkItemTypeCache]::ProcessTimeStamps[$ProcessName].AddMinutes([VSTeamWorkItemTypeCache]::MaxAgeMin) -lt (Get-Date)
             )
       ) {
-             [VSTeamWorkItemTypeCache]::ProcessWITs[$ProcessName]      = Get-VSTeamWorkItemType -ProcessTemplate $ProcessName | Sort-Object -Property Name
-             [VSTeamWorkItemTypeCache]::ProcesTimeStamps[$ProcessName] = Get-Date
+             [VSTeamWorkItemTypeCache]::ProcessWITs[$ProcessName]       = Get-VSTeamWorkItemType -ProcessTemplate $ProcessName | Sort-Object -Property Name
+             [VSTeamWorkItemTypeCache]::ProcessTimeStamps[$ProcessName] = Get-Date
       }
       return [VSTeamWorkItemTypeCache]::ProcessWITs[$ProcessName] 
    }
    static [void] InvalidateByProcess ($ProcessName) {
-      [VSTeamWorkItemTypeCache]::ProcesTimeStamps.Remove( $ProcessName)
+      [VSTeamWorkItemTypeCache]::ProcessTimeStamps.Remove( $ProcessName)
    }
 
 }

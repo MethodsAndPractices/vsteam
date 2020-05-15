@@ -2,10 +2,13 @@
 
 ## Updates to completers , validators and their associated caches
 ```
-Source\Classes\VSTeamProcessCache.ps1               | Add methods to get current (updating if needed), update on demand and invalidate the cache
+Source\Classes\VSTeamProcessCache.ps1               | Add methods to get current (updating if needed), update on demand and invalidate the cache;
+                                                      also now caches the URL for the process
 Source\Classes\ProcessTemplateCompleter.ps1         | Use new cache methods and wrap completion items containing whitespace in quotes
 Source\Classes\ProcessValidateAttribute.ps1         | Use new cache methods. Do not fail on null or empty
-Source\Private\common.ps1                           | _getWorkItemTypes defaults project name instead of making it mandatory and makes different rest call to get non-hidden types.
+Source\Private\common.ps1                           | _getWorkItemTypes defaults project name instead of making it mandatory & makes different rest call to get non-hidden types.
+                                                    | _getProcesses now returns whole process not just the name (_buildProcessNameDynamicParam updated accordingly
+unit\test\ProcessValidateAttribute.Tests.ps1        | mock for _getProcesses updated to return name as a property not a name string. 
 Source\Classes\VSTeamWorkItemTypeCache.ps1          | Add methods to get current (updating if needed), update on demand  and invalidate the cache. Add support for Per-ProcessTemplate lists of work items
 Source\Classes\WorkItemTypeCompleter.ps1            | Use new cache methods and completing work items specific to a process or non-default project,  wrap completion items containing whitespace in quotes
 Source\Classes\WorkItemTypeValidateAttribute.ps1    | Use new cache methods. Do not fail on null or empty 

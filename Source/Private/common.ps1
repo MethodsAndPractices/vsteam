@@ -581,7 +581,7 @@ function _getProcesses {
       $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
 
       if ($resp.count -gt 0) {
-         Write-Output ($resp.value).name
+         Write-Output $resp.value
       }
    }
    catch {
@@ -625,7 +625,7 @@ function _buildProcessNameDynamicParam {
 
    # Generate and set the ValidateSet
    if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
-      $arrSet = _getProcesses
+      $arrSet = (_getProcesses).name
       [VSTeamProcessCache]::processes = $arrSet
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
    }
