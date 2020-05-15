@@ -1,40 +1,38 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
+Describe 'VSTeamArea' {
+   BeforeAll {
+      Import-Module SHiPS
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Classes/VSTeamClassificationNode.ps1"
-. "$here/../../Source/Public/Add-VSTeamClassificationNode"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
+      . "$PSScriptRoot/../../Source/Public/Add-VSTeamClassificationNode"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-Describe 'Add-VSTeamArea' {
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+   }
 
-   $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
+   Context 'Add-VSTeamArea' {
+      BeforeAll {
+         $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
 
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-   Context 'simplest call' {
-      Mock Invoke-RestMethod {
-         #Write-Host $args
-         return $classificationNodeResult 
-      }      
+         Mock Invoke-RestMethod { return $classificationNodeResult }
+      }
 
       It 'area should return Nodes' {
          ## Act
          Add-VSTeamArea -ProjectName "Public Demo" -Name "MyClassificationNodeName"
+
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/areas*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like '*"name":*"MyClassificationNodeName"*'
@@ -44,29 +42,29 @@ Describe 'Add-VSTeamArea' {
       It 'with Path "<Path>" should return Nodes' -TestCases @(
          @{ Path = "SubPath" }
          @{ Path = "Path/SubPath" }
-     ) {
-         param ($Path)      
+      ) {
+         param ($Path)
          ## Act
          Add-VSTeamArea -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/areas/$Path*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like '*"name":*"MyClassificationNodeName"*'
          }
       }
-      
+
       It 'with empty Path "<Path>" should return Nodes' -TestCases @(
          @{Path = "" }
          @{Path = $null }
-     ) {
-         param ($Path)      
+      ) {
+         param ($Path)
          ## Act
          Add-VSTeamArea -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/areas?*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Body -like '*"name":*"MyClassificationNodeName"*'
