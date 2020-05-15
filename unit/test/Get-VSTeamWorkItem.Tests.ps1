@@ -1,38 +1,39 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe 'VSTeamWorkItem' {
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-   $obj = @{
-      id  = 47
-      rev = 1
-      url = "https://dev.azure.com/test/_apis/wit/workItems/47"
-   }
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
-   $collection = @{
-      count = 1
-      value = @($obj)
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+
+      $obj = @{
+         id  = 47
+         rev = 1
+         url = "https://dev.azure.com/test/_apis/wit/workItems/47"
+      }
+
+      $collection = @{
+         count = 1
+         value = @($obj)
+      }
    }
 
    Context 'Get-VSTeamWorkItem' {
-      Mock Invoke-RestMethod { return $obj }
-      Mock Invoke-RestMethod { return $collection } -ParameterFilter { $Uri -like "*ids=47,48*" }
+      BeforeAll {
+         Mock Invoke-RestMethod { return $obj }
+         Mock Invoke-RestMethod { return $collection } -ParameterFilter { $Uri -like "*ids=47,48*" }
+      }
 
       It 'by id should return work items' {
          Get-VSTeamWorkItem -Id 47, 48
@@ -44,7 +45,7 @@ Describe 'VSTeamWorkItem' {
          # The general string should look like this:
          # https://dev.azure.com/test/test/_apis/wit/workitems/?api-version=$(_getApiVersion Core)&ids=47,48&`$Expand=None&errorPolicy=omit
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*ids=47,48*" -and
@@ -56,7 +57,7 @@ Describe 'VSTeamWorkItem' {
       It 'by Id with Default Project should return single work item' {
          Get-VSTeamWorkItem -Id 47
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/wit/workitems/47?api-version=$(_getApiVersion Core)&`$Expand=None"
          }
       }
