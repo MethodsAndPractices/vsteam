@@ -53,5 +53,6 @@
       "PowerShell.RunSelection",
       "workbench.action.files.save",
       "workbench.action.files.newUntitled"
-   ]
+   ],
+   "powershell.pester.useLegacyCodeLens": false
 }
