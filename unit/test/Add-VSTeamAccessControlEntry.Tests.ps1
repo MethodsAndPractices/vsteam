@@ -19,7 +19,7 @@ Describe 'VSTeamAccessControlEntry' {
       . "$PSScriptRoot/../../Source/Public/$sut"
    }
 
-   Context 'Add-VSTeamAccessControlEntry' {
+   Context 'Add-VSTeamAccessControlEntry' -Tag "Add" {
       BeforeAll {
          ## Arrange
          # Load sample files you need for mocks below
@@ -104,12 +104,12 @@ Describe 'VSTeamAccessControlEntry' {
          }
       }
 
-      It 'by securityNamespaceId throws should throw' {
+      It 'by securityNamespaceId throws should throw' -Tag "Throws" {
          ## Act / Assert
          { Add-VSTeamAccessControlEntry -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Descriptor boom -Token xyz -AllowMask 12 -DenyMask 15 } | Should -Throw
       }
 
-      It 'by SecurityNamespace should throw' {
+      It 'by SecurityNamespace should throw' -Tag "Throws" {
          ## Act / Assert
          { Add-VSTeamAccessControlEntry -SecurityNamespace $securityNamespaceObject -Descriptor boom -Token xyz -AllowMask 12 -DenyMask 15 } | Should -Throw
       }
