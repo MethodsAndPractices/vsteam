@@ -27,7 +27,7 @@ Describe "VSTeam" {
       It 'with team name only should create a team' {
          Add-VSTeam -ProjectName Test -TeamName "TestTeam"
 
-         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $NoProject -eq $true -and
             $Area -eq 'projects' -and
             $Resource -eq 'Test' -and
@@ -41,7 +41,7 @@ Describe "VSTeam" {
       It 'with team name and description should create a team' {
          Add-VSTeam -ProjectName Test -TeamName "TestTeam" -Description "Test Description"
 
-         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $NoProject -eq $true -and
             $Area -eq 'projects' -and
             $Resource -eq 'Test' -and
