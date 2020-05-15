@@ -52,7 +52,7 @@ Describe 'VSTeamAccessControlEntry' {
          $securityNamespaceObject | Add-VSTeamAccessControlEntry -Descriptor abc -Token xyz -AllowMask 12 -DenyMask 15
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             # The write-host below is great for seeing how many ways the mock is called.
             # Write-Host "Assert Mock $Uri"
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/58450c49-b02d-465a-ab12-59ae512d6531*" -and
@@ -71,7 +71,7 @@ Describe 'VSTeamAccessControlEntry' {
          Add-VSTeamAccessControlEntry -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Descriptor abc -Token xyz -AllowMask 12 -DenyMask 15
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             # The write-host below is great for seeing how many ways the mock is called.
             # Write-Host "Assert Mock $Uri"
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/5a27515b-ccd7-42c9-84f1-54c998f03866*" -and
@@ -90,7 +90,7 @@ Describe 'VSTeamAccessControlEntry' {
          Add-VSTeamAccessControlEntry -SecurityNamespace $securityNamespaceObject -Descriptor abc -Token xyz -AllowMask 12 -DenyMask 15
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             # The write-host below is great for seeing how many ways the mock is called.
             # Write-Host "Assert Mock $Uri"
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/58450c49-b02d-465a-ab12-59ae512d6531*" -and
