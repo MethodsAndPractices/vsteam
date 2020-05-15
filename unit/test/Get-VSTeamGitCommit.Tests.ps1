@@ -1,42 +1,43 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
-
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamGitUserDate.ps1"
-. "$here/../../Source/Classes/VSTeamGitCommitRef.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe "VSTeamGitCommit" {
-   ## Arrange
-   # Make sure the project name is valid. By returning an empty array
-   # all project names are valid. Otherwise, you name you pass for the
-   # project in your commands must appear in the list.
-   Mock _getProjects { return @() }
-      
-   $results = Get-Content "$PSScriptRoot\sampleFiles\gitCommitResults.json" -Raw | ConvertFrom-Json
+   BeforeAll {
+      Import-Module SHiPS
 
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamGitUserDate.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamGitCommitRef.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+
+      ## Arrange
+      # Make sure the project name is valid. By returning an empty array
+      # all project names are valid. Otherwise, you name you pass for the
+      # project in your commands must appear in the list.
+      Mock _getProjects { return @() }
+
+      $results = Get-Content "$PSScriptRoot\sampleFiles\gitCommitResults.json" -Raw | ConvertFrom-Json
+
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
+   }
 
    Context 'Get-VSTeamGitCommit' {
-      Mock Invoke-RestMethod { return $results }
+      BeforeAll {
+         Mock Invoke-RestMethod { return $results }
+      }
 
       It 'should return all commits for the repo' {
          Get-VSTeamGitCommit -ProjectName Test -RepositoryId 06E176BE-D3D2-41C2-AB34-5F4D79AEC86B
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*"
          }
       }
@@ -51,7 +52,7 @@ Describe "VSTeamGitCommit" {
             -Top 100 -Skip 50 `
             -User "Test"
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*" -and
             $Uri -like "*searchCriteria.fromDate=2020-01-01T00:00:00Z*" -and
             $Uri -like "*searchCriteria.toDate=2020-03-01T00:00:00Z*" -and
@@ -78,7 +79,7 @@ Describe "VSTeamGitCommit" {
             -Top 100 -Skip 50 `
             -User "Test"
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*" -and
             $Uri -like "*searchCriteria.itemPath=test*" -and
             $Uri -like "*searchCriteria.excludeDeletes=true*" -and
