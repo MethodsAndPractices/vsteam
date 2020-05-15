@@ -9,24 +9,20 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Public/$sut"
 
-Describe 'Get-VSTeamBuildTimeline' {
+Describe 'VSTeamBuildTimeline' {
    ## Arrnage 
    # Make sure the project name is valid. By returning an empty array
    # all project names are valid. Otherwise, you name you pass for the
    # project in your commands must appear in the list.
    Mock _getProjects { return @() }
    
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    [VSTeamVersions]::Build = '1.0-unitTest'
+   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    $buildTimeline = Get-Content "$PSScriptRoot\sampleFiles\buildTimeline.json" -Raw | ConvertFrom-Json 
    $buildTimelineEmptyRecords = Get-Content "$PSScriptRoot\sampleFiles\buildTimelineEmptyRecords.json" -Raw | ConvertFrom-Json 
 
    Context 'Get-VSTeamBuildTimeline by ID' {
-      Mock Invoke-RestMethod {
-         # If this test fails uncomment the line below to see how the mock was called.
-         #Write-Host $args
-         return $buildTimeline
-      }
+      Mock Invoke-RestMethod { return $buildTimeline }
 
       It 'should get timeline with multiple build IDs' {
          Get-VSTeamBuildTimeline -BuildID @(1, 2) -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject"
@@ -89,18 +85,11 @@ Describe 'Get-VSTeamBuildTimeline' {
       }  
       
       It 'should get timeline without records and no exception' {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
-            return $buildTimelineEmptyRecords
-         }
+         Mock Invoke-RestMethod { return $buildTimelineEmptyRecords }
 
          $null = Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -ChangeId 4 -PlanId 00000000-0000-0000-0000-000000000000
 
-         { 
-            Get-VSTeamBuildTimeline -BuildID 1 -ProjectName "MyProject" 
-         } | Should Not Throw
-        
+         { Get-VSTeamBuildTimeline -BuildID 1 -ProjectName "MyProject"  } | Should Not Throw        
       }
    }
 }
