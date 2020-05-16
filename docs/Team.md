@@ -23,6 +23,10 @@ Add or update ACEs in the ACL for the provided token. The request contains the t
 
 Note: This is a low-level function. You should really use a high level function (Add-VSTeam*Permission / Set-VSTeam*Permission / Get-VSTeam*Permission) unless you know what you are doing.
 
+### [Add-VSTeamArea](Add-VSTeamArea.md)
+
+Adds a new area to the project
+
 ### [Add-VSTeamAzureRMServiceEndpoint](Add-VSTeamAzureRMServiceEndpoint.md)
 
 Adds a new Azure Resource Manager service endpoint.
@@ -39,6 +43,10 @@ Creates a new build definition from a JSON file.
 
 Adds a tag to a build.
 
+### [Add-VSTeamClassificationNode](Add-VSTeamClassificationNode.md)
+
+Adds either a new iteration or area to the project
+
 ### [Add-VSTeamExtension](Add-VSTeamExtension.md)
 
 Install the specified extension into the account / project collection.
@@ -54,6 +62,10 @@ Adds a Git repository to your Azure DevOps or Team Foundation Server account.
 ### [Add-VSTeamGitRepositoryPermission](Add-VSTeamGitRepositoryPermission.md)
 
 Add permissions to a git repository, all repositories in a project, or a specific branch
+
+### [Add-VSTeamIteration](Add-VSTeamIteration.md)
+
+Adds a new iteration to the project
 
 ### [Add-VSTeamKubernetesEndpoint](Add-VSTeamKubernetesEndpoint.md)
 
@@ -160,6 +172,10 @@ Returns the agents in a pool.
 
 Gets a list of approvals for all releases for a team project.
 
+### [Get-VSTeamArea](Get-VSTeamArea.md)
+
+Gets the area node for a given area path.
+
 ### [Get-VSTeamBuild](Get-VSTeamBuild.md)
 
 Gets the builds for a team project.
@@ -179,6 +195,10 @@ Displays the logs for the build.
 ### [Get-VSTeamBuildTag](Get-VSTeamBuildTag.md)
 
 Returns all the tags of a build.
+
+### [Get-VSTeamBuildTimeline](Get-VSTeamBuildTimeline.md)
+
+Get the timelines for builds
 
 ### [Get-VSTeamClassificationNode](Get-VSTeamClassificationNode.md)
 
@@ -223,6 +243,10 @@ Returns a Group or List of Groups.
 ### [Get-VSTeamInfo](Get-VSTeamInfo.md)
 
 Displays your current account and default project.
+
+### [Get-VSTeamIteration](Get-VSTeamIteration.md)
+
+Gets the iteration node for a given iteration path.
 
 ### [Get-VSTeamJobRequest](Get-VSTeamJobRequest.md)
 
@@ -360,6 +384,11 @@ Clears your default project, account name and personal access token.
 
 Removes an agent from a pool.
 
+### [Remove-VSTeamArea](Remove-VSTeamArea.md)
+
+Removes an existing area from the project
+
+
 ### [Remove-VSTeamBuild](Remove-VSTeamBuild.md)
 
 Deletes the build.
@@ -372,6 +401,11 @@ Removes the build definitions for a team project.
 
 Removes the tag from a build.
 
+### [Remove-VSTeamClassificationNode](Remove-VSTeamClassificationNode.md)
+
+
+Removes either an existing iteration or area from the project
+
 ### [Remove-VSTeamExtension](Remove-VSTeamExtension.md)
 
 Uninstall the specified extension from the account / project collection. 
@@ -383,6 +417,11 @@ Removes a package feed from the account.
 ### [Remove-VSTeamGitRepository](Remove-VSTeamGitRepository.md)
 
 Removes the Git repository from your Azure DevOps or Team Foundation Server account.
+
+### [Remove-VSTeamIteration](Remove-VSTeamIteration.md)
+
+
+Removes an existing iteration from the project
 
 ### [Remove-VSTeamMembership](Remove-VSTeamMembership.md)
 
@@ -511,9 +550,17 @@ Opens the work item in the default browser.
 
 Tests the membership in a container.
 
+### [Test-VSTeamYamlPipeline](Test-VSTeamYamlPipeline.md)
+
+Tests the commited YAML pipeline files to check for inconsitencies. Now, you can try out a YAML pipeline without committing it to a repo or running it. Given an existing pipeline and an optional new YAML payload, this function will give you back the full YAML pipeline.
+
 ### [Update-VSTeam](Update-VSTeam.md)
 
 Updates the team name, description or both.
+
+### [Update-VSTeamAgent](Update-VSTeamAgent.md)
+
+Instructs the agent to download and install the lastest version of the agent on self-hosted agents. 
 
 ### [Update-VSTeamBuild](Update-VSTeamBuild.md)
 

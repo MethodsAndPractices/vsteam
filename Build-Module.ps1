@@ -45,7 +45,7 @@ param(
 
 if ($installDep.IsPresent -or $analyzeScript.IsPresent) {
    # Load the psd1 file so you can read the required modules and install them
-   $manifest = Import-PowerShellDataFile .\Source\VSTeam.psd1
+   $manifest = Import-PowerShellDataFile .\Source\VSTeam.psd1 
 
    # Install each module
    if ($manifest.RequiredModules) {
