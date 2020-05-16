@@ -1,49 +1,47 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
-
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamFeed.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Public/Get-VSTeamBuild.ps1"
-. "$here/../../Source/Public/Get-VSTeamReleaseDefinition.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe 'VSTeamRelease' {
-   ## Arrange
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
-   
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+   BeforeAll {
+      Import-Module SHiPS
+      
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+      
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamFeed.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamBuild.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamReleaseDefinition.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+      
+      ## Arrange
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
+
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+
+      Mock Show-Browser
+   }
 
    Context 'Show-VSTeamRelease' {
-      ## Arrange
-      Mock Show-Browser { }
-
       it 'by Id should show release' {
          ## Act
          Show-VSTeamRelease -projectName project -Id 15
 
          ## Assert
-         Assert-MockCalled Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter {
             $url -eq 'https://dev.azure.com/test/project/_release?releaseId=15'
          }
       }
 
       ## Act / Assert
       it 'with invalid Id should throw' {
-         { Show-VSTeamRelease -projectName project -Id 0 } | Should throw
+         { Show-VSTeamRelease -projectName project -Id 0 } | Should -Throw
       }
    }
 }
