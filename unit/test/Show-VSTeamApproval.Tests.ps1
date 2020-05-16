@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Describe 'Show-VSTeamApproval' -Tag 'unit', 'approvals' {
+Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
    BeforeAll {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
@@ -19,18 +19,15 @@ Describe 'Show-VSTeamApproval' -Tag 'unit', 'approvals' {
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
       }
+
+      Mock Show-Browser -Verifiable
    }
 
-   Context 'Succeeds' {
-      BeforeAll {
-         Mock Show-Browser -Verifiable
-
-         Show-VSTeamApproval -projectName project -ReleaseDefinitionId 1
-      }
-
+   Context 'Show-VSTeamApproval' {      
       It 'should open in browser' {
+         Show-VSTeamApproval -projectName project -ReleaseDefinitionId 1
+
          Should -InvokeVerifiable
       }
    }
 }
-
