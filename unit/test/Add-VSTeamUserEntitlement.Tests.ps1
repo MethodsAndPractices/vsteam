@@ -18,21 +18,21 @@ Describe "VSTeamUserEntitlement" {
       BeforeAll {
          [VSTeamVersions]::ModuleVersion = '0.0.0'
          Mock _getProjects { return @() }
-         Mock _getInstance { return 'https://dev.azure.com/test' }
          Mock _getApiVersion { return 'VSTS' }
+         Mock _getInstance { return 'https://dev.azure.com/test' }
 
-         Mock _callAPI -ParameterFilter {
-            $Method -eq 'Post' -and
-            $SubDomain -eq 'vsaex' -and
-            $Body -like '*"principalName": "test@user.com"*' -and
-            $Body -like '*"subjectKind": "user"*'
-         } -Verifiable
+         Mock _callAPI
       }
 
       It 'Should add a user' {
          Add-VSTeamUserEntitlement -License earlyAdopter -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com'
 
-         Should -InvokeVerifiable
+         Should -Invoke _callAPI -ParameterFilter {
+            $Method -eq 'Post' -and
+            $SubDomain -eq 'vsaex' -and
+            $Body -like '*"principalName":*"test@user.com"*' -and
+            $Body -like '*"subjectKind":*"user"*'
+         }
       }
    }
 }
