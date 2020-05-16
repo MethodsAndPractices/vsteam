@@ -76,7 +76,7 @@ jobs:
               displayName: 'Install Pester'
               inputs:
                 targetType: 'inline'
-                script: 'Install-Module -Name Pester -MinimumVersion 4.3.1 -MaximumVersion 4.3.1 -Repository PSGallery -Force -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
+                script: 'Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "$(PESTER_VERSION)" -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
 
             - task: PowerShell@2
               displayName: 'Run Integration Tests'
