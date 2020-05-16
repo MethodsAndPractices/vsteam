@@ -107,35 +107,39 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
 
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
+   # This loads [PesterConfiguration] into scope
+   Import-Module Pester
+
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
       Write-Output "Installing Pester 5"
       Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc8' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
-   $pesterArgs = @{
-      Path       = '.\unit'  
-      OutputFile   = 'test-results.xml'
-      OutputFormat = 'NUnitXml'
-   }
+   $pesterArgs = [PesterConfiguration]::Default
+   $pesterArgs.Run.Path = '.\unit'
+   # $pesterArgs.Output.Verbosity = "Normal"
+   $pesterArgs.TestResult.Enabled = $true
+   $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
    if ($codeCoverage.IsPresent) {
-      $pesterArgs.CodeCoverage = "./Source/**/*.ps1"
-      $pesterArgs.CodeCoverageOutputFile = "coverage.xml"
-      $pesterArgs.CodeCoverageOutputFileFormat = 'JaCoCo'
+      $pesterArgs.CodeCoverage.Enabled = $true
+      $pesterArgs.CodeCoverage.OutputFormat = 'JaCoCo'
+      $pesterArgs.CodeCoverage.OutputPath = "coverage.xml"
+      $pesterArgs.CodeCoverage.Path = "./Source/**/*.ps1"
    }
    else {
-      $pesterArgs.PassThru = $true
+      $pesterArgs.Run.PassThru = $false
    }
 
    if ($testName) {
 
-      $pesterArgs.FullNameFilter = $testName
+      $pesterArgs.Filter.FullName = $testName
 
       #passthru must be activated according to Pester docs
-      $pesterArgs.PassThru = $true
+      $pesterArgs.Run.PassThru = $true
    }
 
-   Invoke-Pester @pesterArgs 
+   Invoke-Pester -Configuration $pesterArgs 
 }
 
 # Run this last so the results can be seen even if tests were also run
