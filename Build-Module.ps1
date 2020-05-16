@@ -108,15 +108,14 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
-      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      Write-Output "Installing Pester 5"
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc8' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
    $pesterArgs = @{
-      Script       = '.\unit'  
+      Path       = '.\unit'  
       OutputFile   = 'test-results.xml'
       OutputFormat = 'NUnitXml'
-      Show         = 'Fails'
-      Strict       = $true
    }
 
    if ($codeCoverage.IsPresent) {
@@ -130,7 +129,7 @@ if ($runTests.IsPresent) {
 
    if ($testName) {
 
-      $pesterArgs.TestName = $testName
+      $pesterArgs.FullNameFilter = $testName
 
       #passthru must be activated according to Pester docs
       $pesterArgs.PassThru = $true
