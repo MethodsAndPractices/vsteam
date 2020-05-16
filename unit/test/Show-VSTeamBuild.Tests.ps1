@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Describe 'Show-VSTeamBuild' {
+Describe 'VSTeamBuild' {
    BeforeAll {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
@@ -19,14 +19,12 @@ Describe 'Show-VSTeamBuild' {
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*_apis/projects*"
       }
+
+      Mock Show-Browser
    }
 
-   Context 'By ID' {
-      BeforeAll {
-         Mock Show-Browser
-      }
-
-      it 'should return url for mine' {
+   Context 'Show-VSTeamBuild' {
+      it 'By ID should return url for mine' {
          Show-VSTeamBuild -projectName project -Id 15
 
          Should -Invoke Show-Browser -Exactly -Scope It -Times 1 -ParameterFilter { $url -eq 'https://dev.azure.com/test/project/_build/index?buildId=15' }
