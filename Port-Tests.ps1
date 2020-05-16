@@ -24,6 +24,7 @@ function Port-Tests {
       $newFileContents = ($newFileContents -replace 'Assert-VerifiableMock', 'Should -InvokeVerifiable')
       $newFileContents = ($newFileContents -replace '\| Should Throw', '| Should -Throw')
       $newFileContents = ($newFileContents -replace '\| Should Be', '| Should -Be')
+      $newFileContents = ($newFileContents -replace 'Not Be', '-Not -Be')
       $newFileContents = ($newFileContents -replace '\| Should Not BeNullOrEmpty', '| Should -Not -BeNullOrEmpty')
 
       $lines = $newFileContents -split [Environment]::NewLine
