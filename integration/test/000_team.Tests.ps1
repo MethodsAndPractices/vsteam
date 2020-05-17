@@ -15,10 +15,10 @@ Set-StrictMode -Version Latest
 #     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
 ##############################################################
 
-Set-VSTeamAPIVersion -Target $env:API_VERSION
 
 Describe 'Team' -Tag 'integration' {
    BeforeAll {
+      Set-VSTeamAPIVersion -Target $env:API_VERSION
       $pat = $env:PAT
       $acct = $env:ACCT
       $api = $env:API_VERSION
@@ -31,27 +31,29 @@ Describe 'Team' -Tag 'integration' {
    }
 
    Context 'Get-VSTeamInfo' {
-      # Set-VSTeamAccount is set in the Before All
-      # so just set the default project here
-      # Arrange
-      Set-VSTeamDefaultProject -Project 'MyProject'
+      BeforeAll {
+         # Set-VSTeamAccount is set in the Before All
+         # so just set the default project here
+         # Arrange
+         Set-VSTeamDefaultProject -Project 'MyProject'
 
-      # Act
-      $info = Get-VSTeamInfo
+         # Act
+         $info = Get-VSTeamInfo
+      }
 
       # Assert
       It 'should return account' {
          # The account for Server is formated different than for Services
          if ($acct -like "http://*") {
-            $info.Account | Should Be $acct
+            $info.Account | Should -Be $acct
          }
          else {
-            $info.Account | Should Be "https://dev.azure.com/$($env:ACCT)"
+            $info.Account | Should -Be "https://dev.azure.com/$($env:ACCT)"
          }
       }
 
       It 'should return default project' {
-         $info.DefaultProject | Should Be "MyProject"
+         $info.DefaultProject | Should -Be "MyProject"
       }
    }
 
@@ -63,8 +65,8 @@ Describe 'Team' -Tag 'integration' {
          # Assert
          $info = Get-VSTeamInfo
 
-         $info.Account | Should Be ''
-         $info.DefaultProject | Should Be $null
+         $info.Account | Should -Be ''
+         $info.DefaultProject | Should -Be $null
       }
    }
 }

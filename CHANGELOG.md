@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.5.0
+
+Requires Pester 5.x
+All the tests have been upgraded to use Pester 5.
+
 ## 6.4.8
 
 You can now tab complete Area and Resource of Invoke-VSTeamRequest.

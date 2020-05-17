@@ -1,32 +1,33 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
-
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamTeam.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe "VSTeam" {
+   BeforeAll {
+      Import-Module SHiPS
+   
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamTeam.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+   }
+
    Context "Add-VSTeam" {
-      $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
+      BeforeAll {   
+         $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
       
-      Mock _callAPI { return $singleResult }
-      Mock _hasProjectCacheExpired { return $false }
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+         Mock _callAPI { return $singleResult }
+         Mock _hasProjectCacheExpired { return $false }
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+      }
 
       It 'with team name only should create a team' {
          Add-VSTeam -ProjectName Test -TeamName "TestTeam"
 
-         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $NoProject -eq $true -and
             $Area -eq 'projects' -and
             $Resource -eq 'Test' -and
@@ -40,7 +41,7 @@ Describe "VSTeam" {
       It 'with team name and description should create a team' {
          Add-VSTeam -ProjectName Test -TeamName "TestTeam" -Description "Test Description"
 
-         Assert-MockCalled _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $NoProject -eq $true -and
             $Area -eq 'projects' -and
             $Resource -eq 'Test' -and

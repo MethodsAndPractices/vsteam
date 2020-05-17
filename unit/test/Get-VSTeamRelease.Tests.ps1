@@ -1,33 +1,32 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
+Describe 'VSTeamRelease' {
+   BeforeAll {
+      Import-Module SHiPS
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamFeed.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamFeed.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-Describe 'VSTeamRelease' {   
-   $results = Get-Content "$PSScriptRoot\sampleFiles\releaseResults.json" -Raw | ConvertFrom-Json
-   $singleResult = Get-Content "$PSScriptRoot\sampleFiles\releaseSingleReult.json" -Raw | ConvertFrom-Json
+      $results = Get-Content "$PSScriptRoot\sampleFiles\releaseResults.json" -Raw | ConvertFrom-Json
+      $singleResult = Get-Content "$PSScriptRoot\sampleFiles\releaseSingleReult.json" -Raw | ConvertFrom-Json
 
-   Mock _getProjects { return $null }
-   Mock _hasProjectCacheExpired { return $true }
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
-   
-   Mock Invoke-RestMethod { return $results }
-   Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*15*" }
+      Mock _getProjects { return $null }
+      Mock _hasProjectCacheExpired { return $true }
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
+
+      Mock Invoke-RestMethod { return $results }
+      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*15*" }
+   }
 
    Context 'Get-VSTeamRelease' {
       It 'by Id -Raw should return release as Raw' {
@@ -35,9 +34,9 @@ Describe 'VSTeamRelease' {
          $raw = Get-VSTeamRelease -ProjectName project -Id 15 -Raw
 
          ## Assert
-         $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.Management.Automation.PSCustomObject'
+         $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'System.Management.Automation.PSCustomObject'
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
@@ -47,9 +46,9 @@ Describe 'VSTeamRelease' {
          $r = Get-VSTeamRelease -ProjectName project -Id 15
 
          ## Assert
-         $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'Team.Release'
+         $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'Team.Release'
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
@@ -59,9 +58,9 @@ Describe 'VSTeamRelease' {
          $r = Get-VSTeamRelease -ProjectName project -Id 15 -JSON
 
          ## Assert
-         $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should be 'System.String'
+         $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'System.String'
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
@@ -71,7 +70,7 @@ Describe 'VSTeamRelease' {
          Get-VSTeamRelease -projectName project
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
@@ -81,7 +80,7 @@ Describe 'VSTeamRelease' {
          Get-VSTeamRelease -projectName project -expand environments
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)&`$expand=environments"
          }
       }
@@ -91,7 +90,7 @@ Describe 'VSTeamRelease' {
          Get-VSTeamRelease
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://vsrm.dev.azure.com/test/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }

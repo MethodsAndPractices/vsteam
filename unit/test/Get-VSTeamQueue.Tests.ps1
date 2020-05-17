@@ -1,47 +1,46 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
-
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamDirectory.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamUserEntitlement.ps1"
-. "$here/../../Source/Classes/VSTeamPool.ps1"
-. "$here/../../Source/Classes/VSTeamQueue.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Public/Get-VSTeamProject.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe 'VSTeamQueue' {
-   ## Arrange
-   Mock _getProjects { return $null }
-   Mock _hasProjectCacheExpired { return $true }
+   BeforeAll {
+      Import-Module SHiPS
 
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
-      
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-   Mock Invoke-RestMethod { return @{ value = @{ id = 3; name = 'Hosted'; pool = @{ } } } }
-   Mock Invoke-RestMethod { return @{ id = 101; name = 'Hosted'; pool = @{ } } } -ParameterFilter { $Uri -like "*101*" }
-      
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamQueue.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+
+      ## Arrange
+      Mock _getProjects { return $null }
+      Mock _hasProjectCacheExpired { return $true }
+
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
+
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+
+      Mock Invoke-RestMethod { return @{ value = @{ id = 3; name = 'Hosted'; pool = @{ } } } }
+      Mock Invoke-RestMethod { return @{ id = 101; name = 'Hosted'; pool = @{ } } } -ParameterFilter { $Uri -like "*101*" }
+   }
+
    Context 'Get-VSTeamQueue' {
       It 'should return requested queue' {
          ## Act
          Get-VSTeamQueue -projectName project -queueId 101
-   
+
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues/101?api-version=$(_getApiVersion DistributedTask)"
          }
       }
@@ -57,7 +56,7 @@ Describe 'VSTeamQueue' {
          # The general string should look like this:
          # "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$(_getApiVersion DistributedTask)&actionFilter=None&queueName=Hosted"
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/project/_apis/distributedtask/queues*" -and
             $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
             $Uri -like "*actionFilter=None*" -and
@@ -70,7 +69,7 @@ Describe 'VSTeamQueue' {
          Get-VSTeamQueue -ProjectName project
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$(_getApiVersion DistributedTask)"
          }
       }
@@ -80,7 +79,7 @@ Describe 'VSTeamQueue' {
          Get-VSTeamQueue -projectName project -queueName 'Hosted'
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$(_getApiVersion DistributedTask)&queueName=Hosted"
          }
       }
@@ -90,7 +89,7 @@ Describe 'VSTeamQueue' {
          Get-VSTeamQueue -projectName project -actionFilter 'None'
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$(_getApiVersion DistributedTask)&actionFilter=None"
          }
       }
