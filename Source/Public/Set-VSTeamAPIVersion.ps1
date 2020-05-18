@@ -83,20 +83,20 @@ function Set-VSTeamAPIVersion {
             }
             'TFS2018' {
                [VSTeamVersions]::Version = 'TFS2018'
-               [VSTeamVersions]::Git = '3.2'
-               [VSTeamVersions]::Core = '3.2'
-               [VSTeamVersions]::Build = '3.2'
+               [VSTeamVersions]::Git = '4.0'
+               [VSTeamVersions]::Core = '4.0'
+               [VSTeamVersions]::Build = '4.0'
                [VSTeamVersions]::Release = '4.0-preview'
                [VSTeamVersions]::DistributedTask = '4.0-preview'
                [VSTeamVersions]::VariableGroups = '4.0-preview'
-               [VSTeamVersions]::Tfvc = '3.2'
-               [VSTeamVersions]::Packaging = ''
+               [VSTeamVersions]::Tfvc = '4.0'
+               [VSTeamVersions]::Packaging = '4.0-preview'
                [VSTeamVersions]::TaskGroups = '4.0-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
-               [VSTeamVersions]::ServiceFabricEndpoint = '3.2'
-               [VSTeamVersions]::ExtensionsManagement = '3.2-preview'
+               [VSTeamVersions]::ServiceFabricEndpoint = '4.0-preview'
+               [VSTeamVersions]::ExtensionsManagement = '4.0-preview'
                [VSTeamVersions]::Graph = ''
-               [VSTeamVersions]::Policy = ''
+               [VSTeamVersions]::Policy = '4.0'
             }
             'TFS2017' {
                [VSTeamVersions]::Version = 'TFS2017'
