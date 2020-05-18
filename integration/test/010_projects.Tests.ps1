@@ -1,20 +1,5 @@
 Set-StrictMode -Version Latest
 
-##############################################################
-#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
-##############################################################
-# Before running these tests you must set the following      #
-# Environment variables.                                     #
-# $env:API_VERSION = TFS2017, TFS2018, AzD2019 or VSTS       #
-#                    depending on the value used for ACCT    #
-# $env:EMAIL = Email of user to remove and re-add to account #
-# $env:ACCT = VSTS Account Name or full TFS URL including    #
-#             collection                                     #
-# $env:PAT = Personal Access token of ACCT                   #
-##############################################################
-#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
-##############################################################
-
 Describe 'VSTeam Integration Tests' -Tag 'integration' {
    BeforeAll {
       Set-VSTeamAPIVersion -Target $env:API_VERSION
@@ -54,36 +39,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       if ($oAcct) {
          Add-VSTeamProfile -Account $oAcct -PersonalAccessToken $pat -Version $oVersion -Name $oName
          Set-VSTeamAccount -Profile $oName
-      }
-   }
-
-   Context 'Set-VSTeamDefaultProject' {
-      It 'should set default project' {
-         Set-VSTeamDefaultProject -Project 'MyProject'
-
-         $info = Get-VSTeamInfo
-
-         $info.DefaultProject | Should -Be 'MyProject'
-      }
-
-      It 'should update default project' {
-         Set-VSTeamDefaultProject -Project $newProjectName
-
-         $info = Get-VSTeamInfo
-
-         $info.DefaultProject | Should -Be $newProjectName
-      }
-   }
-
-   Context 'Clear-VSTeamDefaultProject' {
-      It 'should clear default project' {
-         Set-VSTeamDefaultProject -Project 'MyProject'
-
-         Clear-VSTeamDefaultProject
-
-         $info = Get-VSTeamInfo
-            
-         $info.DefaultProject | Should -BeNullOrEmpty
       }
    }
 
