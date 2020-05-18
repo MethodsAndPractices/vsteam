@@ -3,9 +3,11 @@ function Get-VSTeamOption {
    param(
       [string] $subDomain,
 
+      [Parameter(Position = 0)]
       [Alias("Service")]
       [string] $area,
 
+      [Parameter(Position = 1)]
       [string] $resource
    )
 
