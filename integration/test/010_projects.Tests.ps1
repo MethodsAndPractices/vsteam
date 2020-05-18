@@ -340,6 +340,43 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
+   Context 'Policy full exercise' {
+      BeforeAll {
+         $actualTypes = Get-VSTeamPolicyType -ProjectName $newProjectName
+      }
+
+      It 'Should return all policy types' {
+         $actualTypes | Should -Not -Be $null
+      }
+
+      It 'Should add Policy' {
+         $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
+         $repoId = $(Get-VSTeamGitRepository -ProjectName $newProjectName -Name $newProjectName | Select-Object -ExpandProperty Id)
+         
+         Add-VSTeamPolicy -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 1; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" })}
+
+         $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
+         
+         $newPolicy | Should -Not -Be $null
+         $newPolicy.settings.minimumApproverCount | Should -Be 1
+      }
+
+      It 'Should update Policy' {
+         $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
+         $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
+         $newPolicy = Update-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 2; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" })}
+         
+         $newPolicy.settings.minimumApproverCount | Should -Be 2
+      }
+
+      It 'Should remove Policy' {
+         $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
+         Remove-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName
+
+         Get-VSTeamPolicy -ProjectName $newProjectName | Should -Be $null
+      }
+   }
+
    Context 'Service Endpoints full exercise' {
       It 'Add-VSTeamSonarQubeEndpoint Should add service endpoint' {
          { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `
