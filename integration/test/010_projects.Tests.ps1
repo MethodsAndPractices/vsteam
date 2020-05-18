@@ -332,6 +332,14 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
+   Context 'Get-VSTeamExtension' {
+      It 'Should return SonarQube Extension' {
+         $actual = Get-VSTeamExtension
+
+         $($actual | Where-Object name -eq SonarQube) | Should -Not -Be $null
+      }
+   }
+
    Context 'Service Endpoints full exercise' {
       It 'Add-VSTeamSonarQubeEndpoint Should add service endpoint' {
          { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `
