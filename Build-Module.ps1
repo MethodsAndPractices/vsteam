@@ -132,11 +132,7 @@ if ($runTests.IsPresent) {
    }
 
    if ($testName) {
-
       $pesterArgs.Filter.FullName = $testName
-
-      #passthru must be activated according to Pester docs
-      $pesterArgs.Run.PassThru = $true
    }
 
    Invoke-Pester -Configuration $pesterArgs 
