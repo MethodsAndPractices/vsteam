@@ -1,29 +1,32 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe 'VSTeamBuildDefinition' {
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+      
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+   }
+      
    Context 'Add-VSTeamBuildDefinition' {
       ## Arrange
-      $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+      BeforeAll {
+         $resultsVSTS = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
 
-      Mock Invoke-RestMethod { return $resultsVSTS }
-      Mock _getProjects { return @() }
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
+         Mock Invoke-RestMethod { return $resultsVSTS }
+         Mock _getProjects { return @() }
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
+      }
 
-      Context 'Services' {
+      Context 'Services' -Tag "Services" {
          ## Arrange
-         Mock _getInstance { return 'https://dev.azure.com/test' }
+         BeforeAll {
+            Mock _getInstance { return 'https://dev.azure.com/test' }
+         }
 
          it 'Should add build' {
             ## Act
@@ -38,10 +41,12 @@ Describe 'VSTeamBuildDefinition' {
          }
       }
 
-      Context 'Server' {
+      Context 'Server' -Tag "Server" {
          ## Arrange
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
+         BeforeAll {
+            Mock _useWindowsAuthenticationOnPremise { return $true }
+            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
+         }
 
          it 'Should add build' {
             ## Act

@@ -432,16 +432,17 @@ function _getWorkItemTypes {
    param(
       [string]$ProjectName = (_getDefaultProject)
    )
-
+   $types = @()   
    # Call the REST API
    try {
-      $v      = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
-      $hidden = $v.value.where({$_.referencename -eq "Microsoft.HiddenCategory"}).workitemtypes.name
-      $v.value.where(          {$_.referencename -ne "Microsoft.HiddenCategory"}).workitemtypes.name.where({$_ -notin $hidden})
+      $resp   = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
+      $hidden = $resp.value.where({$_.referencename -eq "Microsoft.HiddenCategory"}).workitemtypes.name
+      $types += $resp.value.where(          {$_.referencename -ne "Microsoft.HiddenCategory"}).workitemtypes.name.where({$_ -notin $hidden})
    }
    catch {
       Write-Verbose $_
    }
+   return $types
 }
 
 # When writing unit tests mock this and return false.

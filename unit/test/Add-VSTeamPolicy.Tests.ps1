@@ -1,29 +1,27 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Public/Get-VSTeamProject.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe 'VSTeamPolicy' {
    ## Arrange
-   # Set the account to use for testing. A normal user would do this
-   # using the Set-VSTeamAccount function.
-   Mock _getInstance { return 'https://dev.azure.com/test' }
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-   Mock Invoke-RestMethod
-   Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*boom*" }
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+      # Set the account to use for testing. A normal user would do this
+      # using the Set-VSTeamAccount function.
+      Mock _getInstance { return 'https://dev.azure.com/test' }
 
-   Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
+      Mock Invoke-RestMethod
+      Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*boom*" }
+
+      Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
+   }
 
    Context 'Add-VSTeamPolicy' {
       It 'should add the policy' {
@@ -45,7 +43,7 @@ Describe 'VSTeamPolicy' {
          # assume the order.
          # The general string should look like this:
          # '{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"10000000-0000-0000-0000-0000000000001","matchKind":"Exact","refName":"refs/heads/master"}],"MinimumApproverCount":1}}'
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Post' -and
             $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations?api-version=$(_getApiVersion Git)" -and
             $Body -like '*"isBlocking":true*' -and
@@ -71,7 +69,7 @@ Describe 'VSTeamPolicy' {
                      repositoryId = '10000000-0000-0000-0000-0000000000001'
                   })
             }
-         } | Should Throw
+         } | Should -Throw
       }
    }
 }

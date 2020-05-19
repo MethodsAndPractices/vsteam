@@ -186,7 +186,7 @@ function Merge-Class {
          $fileContents = Get-Content $file
 
          # Find all the usings and save them
-         $matches = $fileContents | Select-String 'using.+'
+         $matches = $fileContents | Select-String '^\s*using\s+\w+'
 
          ForEach ($m in $matches) {
             Write-Verbose "Found $($m.Line)"
@@ -199,7 +199,7 @@ function Merge-Class {
          }
 
          # Remove move all the using statements and comments
-         $newFileContents = ($fileContents -replace 'using.+', '')
+         $newFileContents = ($fileContents -replace '^\s*using.*$', '')
 
          # Remove all trailing whitespace
          $newFileContents = ($newFileContents -replace ' +$', '')

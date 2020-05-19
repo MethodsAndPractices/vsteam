@@ -2,10 +2,38 @@
 
 ## Enhance Get-VsteamWorkItemType. 
 Update \source\Get-VSTeamWorkItemType.ps1 and .docs\Get-VSTeamWorkItemType.md
-1. Support selection of work item types in a project or in a process template.
-2. Allow selection of multiple types using wildcards
-3. For selection from Process templates, allow expansion of behaviors, layouts, and/or states
-4. A "hidden" attribute to returned work item types to allow hidden ones to be filtered out later. 
+1. Support selection of work item types from a project or from a process template.
+2. Allow the selection of multiple types using wildcards
+3. Add "hidden" attribute on returned work item types to allow hidden ones to be filtered out later. 
+4. Completer no longer suggests hidden (unavailable) WITs
+5. For selection from Process templates, allow expansion of behaviors, layouts, and/or states
+6. Fixed issue were work item validator was tied to the current project even if adding work items to a different project.
+
+Source/Public/Get-VSTeamWorkItemType.ps1           Update Get-VSTeamWorkItemType to allow W.I.Ts to come from process as well as projects
+Source/Public/Add-VSTeamWorkItem.ps1               Can no change the value of workitemtype to something which doesn't validate. 
+                                                   Moved the addition of a $ sign to it
+.docs/Get-VSTeamWorkItemType.md                    Add the new functionality to help
+Source/Classes/VSTeamWorkItemTypeCache.ps1         Support for caching W.I.Ts for current project and any process
+Source/Classes/workItemTypeCompleter.ps1           Support for caching and completing for a specific project or process
+Source/Classes/workItemTypeValidateAttribute.ps1   Support for caching and validating for a specific project or process
+Source/Private.common.ps1                          Updated _getWorkItemTypes to remove hidden items. 
+
+unit/test/Add-VsteamWorkItemType.Test.ps1          referenes to extra dependency PS1 files added 
+unit/test/Get-VsteamWorkItemType.Test.ps1          referenes to extra dependency PS1 files added
+
+/MergeFile.ps1                                     See #319 build fails if "using" is used in anything but a using statement      
+
+
++ These which were included in an earlier PR. 
+Source/Classes/ProcessTemplateCompleter.ps1        Updated process completer (Needed for new process parameter)
+Source/Classes/ProcessValidateAttribute.ps1        Updated process validator
+Source/Classes/VSTeamProcessCache.ps1              Updated process cache 
+
+
+## 6.5.0
+
+Requires Pester 5.x
+All the tests have been upgraded to use Pester 5.
 
 ## 6.4.8
 
