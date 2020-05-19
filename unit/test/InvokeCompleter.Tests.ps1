@@ -1,21 +1,17 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/Get-VSTeamOption.ps1"
-. "$here/../../Source/Classes/$sut"
-#endregion
-
 Describe "InvokeCompleter" {
-
    BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+   
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamOption.ps1"
+      . "$PSScriptRoot/../../Source/Classes/$sut"
+   
       $result = Get-Content "$PSScriptRoot\sampleFiles\Get-VSTeamOption.json" -Raw | ConvertFrom-Json
       $resultVsrmSubDomain = Get-Content "$PSScriptRoot\sampleFiles\Get-VSTeamOption_vsrm.json" -Raw | ConvertFrom-Json
 
@@ -29,7 +25,7 @@ Describe "InvokeCompleter" {
 
          $actual = $target.CompleteArgument("Invoke-VSTeamRequest", "Area", "", $null, @{ })
 
-         $actual.count | Should Be 76
+         $actual.count | Should -Be 76
       }
    }
 
@@ -39,17 +35,17 @@ Describe "InvokeCompleter" {
 
          $actual = $target.CompleteArgument("Invoke-VSTeamRequest", "Area", "", $null, @{ subDomain = 'vsrm' })
 
-         $actual.count | Should Be 31
+         $actual.count | Should -Be 31
       }
    }
 
-   Context "with area and subdomain" {      
+   Context "with area and subdomain" {
       It "should return resources for no area with sub domain" {
          $target = [InvokeCompleter]::new()
 
          $actual = $target.CompleteArgument("Invoke-VSTeamRequest", "Resource", "", $null, @{ subDomain = 'vsrm' })
 
-         $actual.count | Should Be 0
+         $actual.count | Should -Be 0
       }
 
       It "should return resources for area and sub domain" {
@@ -57,7 +53,7 @@ Describe "InvokeCompleter" {
 
          $actual = $target.CompleteArgument("Invoke-VSTeamRequest", "Resource", "", $null, @{ subDomain = 'vsrm'; Area = 'Release' })
 
-         $actual.count | Should Be 38
+         $actual.count | Should -Be 38
       }
    }
 }

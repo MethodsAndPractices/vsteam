@@ -1,40 +1,40 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
-
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamDirectory.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamFeed.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/Get-VSTeamFeed.ps1"
-. "$here/../../Source/Classes/$sut"
-#endregion
-
 Describe "VSTeamFeeds" {
+   BeforeAll {
+      Import-Module SHiPS
+      
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+      
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamFeed.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamFeed.ps1"
+      . "$PSScriptRoot/../../Source/Classes/$sut"
+   }
+      
    Context 'Constructor' {
-      $feedResults = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
-      $singleResult = $feedResults.value[0]
+      BeforeAll {
+         $feedResults = Get-Content "$PSScriptRoot\sampleFiles\feeds.json" -Raw | ConvertFrom-Json
+         $singleResult = $feedResults.value[0]
 
-      Mock Get-VSTeamFeed {
-         return [VSTeamFeed]::new($singleResult)
+         Mock Get-VSTeamFeed {
+            return [VSTeamFeed]::new($singleResult)
+         }
+
+         $target = [VSTeamFeeds]::new('Feeds')
+         $feed = $target.GetChildItem()[0]
       }
-
-      $target = [VSTeamFeeds]::new('Feeds')
 
       It 'Should create Feeds' {
-         $target | Should Not Be $null
+         $target | Should -Not -Be $null
       }
 
-      $feed = $target.GetChildItem()[0]
-
       It 'Should return feed' {
-         $feed | Should Not Be $null
+         $feed | Should -Not -Be $null
       }
    }
 }

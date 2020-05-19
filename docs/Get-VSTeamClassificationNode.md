@@ -1,5 +1,9 @@
-
-
+---
+external help file: VSTeam-Help.xml
+Module Name: VSTeam
+online version:
+schema: 2.0.0
+---
 
 # Get-VSTeamClassificationNode
 
@@ -71,5 +75,11 @@ Type: int32[]
 
 ## NOTES
 
+This function is the base function for Get-VSTeamArea and Get-VSTeamIteration.
+
 ## RELATED LINKS
+
+[Get-VSTeamArea](Get-VSTeamArea.md)
+
+[Get-VSTeamIteration](Get-VSTeamIteration.md)
 

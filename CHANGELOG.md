@@ -6,17 +6,12 @@ New files     :
                  Source\Classes\VSTeamQueryCache.ps1              | implments cache for completer and transformer
                  Source\Classes\QueryCompleter.ps1                | argument completer - completes by friendly name  
                  Source\Classes\QueryTransformToIDAttribute.ps1   | argument transformer turns name of query into its GUID
-                 Source\Clasess\_classes.json                     | Add three classes above, **build classes into PSM1 file.**
+                 Source\Clasess\_classes.json                     | Add three classes above
 
-The change to the build destination in claseses.json follows on from https://github.com/PowerShell/PowerShell/issues/12132 (TLDR put classes directly into PSM1 and load with "Using module") and need two changes which are not in this PR
-In build-module.ps1 change line 85 from
-Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
-to
-Get-Content -Path ./Source/VSTeam.psm1 | Out-File -Append -FilePath "$output/VSTeam.psm1" -Encoding ascii
-and In source\VSteam.psm1
-remove line 10
-. "$PSScriptRoot\vsteam.classes.ps1"
-And update preceding comment to reflect the change
+## 6.5.0
+
+Requires Pester 5.x
+All the tests have been upgraded to use Pester 5.
 
 ## 6.4.8
 
