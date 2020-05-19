@@ -32,7 +32,7 @@ class BuildCompleter : IArgumentCompleter {
             if ($b.buildNumber -like "$WordToComplete*" -and $b.buildNumber -notmatch '\S') {
                $results.Add([CompletionResult]::new($b.buildNumber))
             }
-            elseif  ($b.buildNumber -like "*$WordToComplete*") {
+            elseif  ($b.buildNumber -like "$WordToComplete*") { #only search for builds starting with "1" not with 1 in the middle or at the end
                $results.Add([CompletionResult]::new("'$($b.buildNumber.replace("'","''"))'", $b.buildNumber, 0, $b.buildNumber))
             }
          }
