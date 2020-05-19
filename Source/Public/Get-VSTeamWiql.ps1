@@ -1,7 +1,7 @@
 function Get-VSTeamWiql {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param(
-      [QueryTransformToID()]
+      [QueryTransformToIDAttribute()]
       [ArgumentCompleter([QueryCompleter])]
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, Position = 0)]
       [string] $Id,
@@ -39,13 +39,15 @@ function Get-VSTeamWiql {
       }
       else {
          $params['id']= $Id
+      }
+      if ($Team) {
          $params['Team']=  $Team
       }
       $resp = _callAPI  @params
 
       if ($Expand) {
-         #Handle queries for work item links 
-         if ($resp.queryResultType -eq 'workItemLink') {
+         #Handle queries for work item links also allow for the tests not Setting the query result type. 
+         if ($resp.psobject.Properties['queryResultType'] -and  $resp.queryResultType -eq 'workItemLink') {
             Add-Member -InputObject $resp -MemberType NoteProperty -Name Workitems -Value @()
             $Ids = $resp.workItemRelations.Target.id
          }

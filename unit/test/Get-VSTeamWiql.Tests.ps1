@@ -6,7 +6,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
 
 . "$here/../../Source/Classes/VSTeamVersions.ps1"
 . "$here/../../Source/Classes/VSTeamProjectCache.ps1"
+. "$here/../../Source/Classes/ProjectCompleter.ps1"
 . "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
+. "$here/../../Source/Classes/VSTeamQueryCache.ps1"
+. "$here/../../Source/Classes/QueryCompleter.ps1"  
+. "$here/../../Source/Classes/QueryTransformToIDAttribute.ps1"
 . "$here/../../Source/Private/applyTypes.ps1"
 . "$here/../../Source/Private/common.ps1"
 . "$here/../../Source/Public/Get-VSTeamWorkItem.ps1"
@@ -37,7 +41,7 @@ Describe 'VSTeamWiql' {
 
    $wiqlResult = @{
       querytype       = "flat"
-      queryTypeResult = "worItem"
+      queryTypeResult = "workItem"
       asOf            = "2019-10-03T18:35:09.117Z"
       columns         = @($column)
       sortColumns     = @($sortColumn)
@@ -60,7 +64,7 @@ Describe 'VSTeamWiql' {
       # function is mocked because it is used when switch 'Expanded' is being used.
       Mock Get-VSTeamWorkItem {
          # If this test fails uncomment the line below to see how the mock was called.
-         # Write-Host $args
+          Write-Host $args
 
          return $expandedWorkItems
       }
@@ -133,6 +137,16 @@ Describe 'VSTeamWiql' {
          }
       }
 
+#previous Test changes $WIQLResult 
+   $wiqlResult = @{
+      querytype       = "flat"
+      queryTypeResult = "workItem"
+      asOf            = "2019-10-03T18:35:09.117Z"
+      columns         = @($column)
+      sortColumns     = @($sortColumn)
+      workItems       = @($workItem, $workItem)
+   }
+
       It 'Get work items with custom WIQL query with time precision' {
          $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
@@ -146,8 +160,8 @@ Describe 'VSTeamWiql' {
             $Body -like "*[System.State]*" -and
             $Body -like '*`}' -and # Make sure the body is an object
             $ContentType -eq 'application/json' -and
-            $Uri -like "*timePrecision=True*"
-            $Uri -like "*`$top=100*"
+            $Uri -like "*timePrecision=True*" -and
+            $Uri -like "*`$top=100*" -and 
             $Uri -like "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$(_getApiVersion Core)*"
          }
       }
