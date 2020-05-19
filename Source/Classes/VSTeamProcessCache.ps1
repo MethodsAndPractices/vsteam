@@ -8,10 +8,15 @@ class VSTeamProcessCache {
    static [Void] Update () {
       #Allow unit tests to mock returning the project list and testing freshness
       $list = _getProcesses 
-      foreach ($p in $list) {
-         [VSTeamProcessCache]::urls[$p.name] =  (_getInstance) + "/_apis/work/processes/" + $p.Id
+      if ($list) {
+         foreach ($process in $list) {
+            [VSTeamProcessCache]::urls[$process.name] =  (_getInstance) + "/_apis/work/processes/" + $process.Id
+         }
+         [VSTeamProcessCache]::processes = $List.name | Sort-Object
       }
-      [VSTeamProcessCache]::processes = $List.name | Sort-Object
+      else {
+         [VSTeamProcessCache]::processes = $null
+      }
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
       # "save current minute" refreshes on average after 30secs  but not after exact hours timeOfDayTotalMinutes might be a better base
    }
