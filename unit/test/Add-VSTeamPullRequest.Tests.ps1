@@ -1,29 +1,31 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe 'VSTeamPullRequest' {
    ## Arrange
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+   BeforeAll {
 
-   # You have to set the version or the api-version will not be added when versions = ''
-   Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-   $result = Get-Content "$PSScriptRoot\sampleFiles\updatePullRequestResponse.json" -Raw | ConvertFrom-Json
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+
+      # You have to set the version or the api-version will not be added when versions = ''
+      Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
+
+      $result = Get-Content "$PSScriptRoot\sampleFiles\updatePullRequestResponse.json" -Raw | ConvertFrom-Json
+   }
 
    Context 'Add-VSTeamPullRequest' {
-      Mock Invoke-RestMethod { return $result }
+      BeforeAll {
+         Mock Invoke-RestMethod { return $result }
+      }
 
       It 'Add-VSTeamPullRequest as Draft' {
          ## Act
@@ -33,7 +35,7 @@ Describe 'VSTeamPullRequest' {
             -Draft -Force
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Post' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests*" -and
@@ -49,7 +51,7 @@ Describe 'VSTeamPullRequest' {
             -Force
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Post' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests*" -and
@@ -59,22 +61,22 @@ Describe 'VSTeamPullRequest' {
 
       It 'Add-VSTeamPullRequest with wrong -SourceRefName throws' {
          ## Act / Assert
-         { 
+         {
             Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
                -Title "PR Title" -Description "PR Description" `
                -SourceRefName "garbage" -TargetRefName "refs/heads/master" `
-               -Draft -Force 
-         } | Should Throw
+               -Draft -Force
+         } | Should -Throw
       }
 
       It 'Add-VSTeamPullRequest with wrong -TargetRefName throws' {
          ## Act / Assert
-         { 
+         {
             Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
                -Title "PR Title" -Description "PR Description" `
                -SourceRefName "refs/heads/test" -TargetRefName "garbage" `
-               -Draft -Force 
-         } | Should Throw
+               -Draft -Force
+         } | Should -Throw
       }
    }
 }

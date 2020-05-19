@@ -71,7 +71,7 @@ You can run gen-help.ps1 from the .docs folder to make sure you can generate the
 
 ### Write Unit Test
 
-Using [Pester](https://github.com/pester/Pester) write unit test for the new function. I am a firm believer if I cannot write a test before I write the code I am not clear on what I expect the code to do. After writing the help first writing the unit tests should be pretty straight forward.
+Using [Pester](https://github.com/pester/Pester) 5.x write unit test for the new function. I am a firm believer if I cannot write a test before I write the code I am not clear on what I expect the code to do. After writing the help first writing the unit tests should be pretty straight forward.
 
 At first it will feel odd to write the help and test first but the more you do it the easier it gets.
 

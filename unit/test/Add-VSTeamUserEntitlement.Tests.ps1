@@ -1,58 +1,38 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/Get-VSTeamUserEntitlement.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe "VSTeamUserEntitlement" {
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamUserEntitlement.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+   }
+
    Context 'Add-VSTeamUserEntitlement' {
-      [VSTeamVersions]::ModuleVersion = '0.0.0'
-      Mock _getApiVersion { return 'VSTS' }
-      Mock _getProjects { return @() }
-      Mock _getInstance { return 'https://dev.azure.com/test' }
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
+      BeforeAll {
+         [VSTeamVersions]::ModuleVersion = '0.0.0'
+         Mock _getProjects { return @() }
+         Mock _getApiVersion { return 'VSTS' }
+         Mock _getInstance { return 'https://dev.azure.com/test' }
 
-      $obj = @{
-         accessLevel         = @{
-            accountLicenseType = 'earlyAdopter'
-            licensingSource    = 'msdn'
-            msdnLicenseType    = 'enterprise'
-         }
-         user                = @{
-            principalName = 'test@user.com'
-            subjectKind   = 'user'
-         }
-         projectEntitlements = @{
-            group      = @{
-               groupType = 'ProjectContributor'
-            }
-            projectRef = @{
-               id = $null
-            }
-         }
+         Mock _callAPI
       }
-
-      $expected = $obj | ConvertTo-Json
-
-      Mock _callAPI -ParameterFilter {
-         $Method -eq 'Post' -and
-         $Body -eq $expected
-      }
-
-      Add-VSTeamUserEntitlement -License earlyAdopter -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com'
 
       It 'Should add a user' {
-         Assert-VerifiableMock
+         Add-VSTeamUserEntitlement -License earlyAdopter -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com'
+
+         Should -Invoke _callAPI -ParameterFilter {
+            $Method -eq 'Post' -and
+            $SubDomain -eq 'vsaex' -and
+            $Body -like '*"principalName":*"test@user.com"*' -and
+            $Body -like '*"subjectKind":*"user"*'
+         }
       }
    }
 }

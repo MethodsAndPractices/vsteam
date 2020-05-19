@@ -20,19 +20,13 @@ Source\Classes\BuildDefinitionCompleter.ps1         | Wrap completion items cont
 Source\Classes\UncachedProjectCompleter.ps1         | Wrap completion items containing whitespace in quotes
 Source\Classes\UncachedProjectValidateAttribute.ps1 | Do not fail on null or empty
 Source\Classes\TeamQueueCompleter.ps1               | Wrap completion items containing whitespace in quotes
-Source\Clasess\_classes.json                        | VSTeamWorkItemTypeCache was missing, **build classes into PSM1 file.**
-```
-The change to the build destination in claseses.json follows on from 
-https://github.com/PowerShell/PowerShell/issues/12132  (TLDR put classes directly into PSM1 and load with "Using module")
-and need two changes which are **not in this PR**    
-In build-module.ps1 change line 85 from    
-`Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force`   
-to    
-`Get-Content -Path ./Source/VSTeam.psm1 | Out-File -Append -FilePath "$output/VSTeam.psm1" -Encoding ascii`   
-and In source\VSteam.psm1    
-remove line 10   
-`. "$PSScriptRoot\vsteam.classes.ps1"`   
-And update preceding comment to reflect the change   
+Source\Clasess\_classes.json                        | VSTeamWorkItemTypeCache was missing 
+
+
+## 6.5.0
+
+Requires Pester 5.x
+All the tests have been upgraded to use Pester 5.
 
 ## 6.4.8
 

@@ -1,40 +1,37 @@
 Set-StrictMode -Version Latest
 
-Import-Module SHiPS
+Describe 'VSTeamFeed' {
+   BeforeAll {
+      Import-Module SHiPS
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-Describe 'Feeds' {
-   Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*"
+      }
+
+      Mock Show-Browser
    }
 
-   Context 'Show-VSTeamFeed by name' {
-      Mock Show-Browser
-
-      It 'Show call start' {
+   Context 'Show-VSTeamFeed' {
+      It 'by name should call show-browser' {
          Show-VSTeamFeed -Name module
 
-         Assert-MockCalled Show-Browser
+         Should -Invoke Show-Browser
       }
-   }
 
-   Context 'Show-VSTeamFeed by id' {
-      Mock Show-Browser
-
-      It 'Show call start' {
+      It 'by id should call show-browser' {
          Show-VSTeamFeed -Id '00000000-0000-0000-0000-000000000000'
 
-         Assert-MockCalled Show-Browser
+         Should -Invoke Show-Browser
       }
    }
 }

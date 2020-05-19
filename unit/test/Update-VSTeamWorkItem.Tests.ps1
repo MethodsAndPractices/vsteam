@@ -1,45 +1,46 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe 'VSTeamWorkItem' {
-   Mock _getInstance { return 'https://dev.azure.com/test' }
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-   # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-   Mock Invoke-RestMethod { return @() } -ParameterFilter {
-      $Uri -like "*_apis/projects*"
-   }
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-   $obj = @{
-      id  = 47
-      rev = 1
-      url = "https://dev.azure.com/test/_apis/wit/workItems/47"
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+
+      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*_apis/projects*"
+      }
+
+      $obj = @{
+         id  = 47
+         rev = 1
+         url = "https://dev.azure.com/test/_apis/wit/workItems/47"
+      }
    }
 
    Context 'Update-VSTeamWorkItem' {
-      Mock Invoke-RestMethod {
-         # If this test fails uncomment the line below to see how the mock was called.
-         # Write-Host $args
+      BeforeAll {
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            # Write-Host $args
 
-         return $obj
+            return $obj
+         }
       }
 
       It 'Without Default Project should update work item' {
          $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Update-VSTeamWorkItem -Id 1 -Title Test -Force
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
             $Body -like '*`]' -and # Make sure the body is an array
@@ -52,7 +53,7 @@ Describe 'VSTeamWorkItem' {
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
          Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -Force
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
             $Body -like '*Test1*' -and
@@ -71,7 +72,7 @@ Describe 'VSTeamWorkItem' {
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
          Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
             $Body -like '*Test1*' -and
@@ -92,7 +93,7 @@ Describe 'VSTeamWorkItem' {
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
          Update-VSTeamWorkItem 1 -Title Test1 -AdditionalFields $additionalFields
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
             $Body -like '*Test1*' -and
@@ -111,7 +112,7 @@ Describe 'VSTeamWorkItem' {
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
          Update-VSTeamWorkItem 1 -AdditionalFields $additionalFields
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
             $Body -like '*/fields/System.Tags*' -and
@@ -126,7 +127,7 @@ Describe 'VSTeamWorkItem' {
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
 
          $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
-         { Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should Throw
+         { Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should -Throw
       }
    }
 }
