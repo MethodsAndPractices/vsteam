@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.5.1
+
+- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id. 
+
 ## 6.5.0
 
 Requires Pester 5.x
