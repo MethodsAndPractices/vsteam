@@ -1,15 +1,14 @@
 # escape=`
-ARG fromTag=7.0.1-ubuntu-18.04
 
-FROM mcr.microsoft.com/powershell:7.0.1-ubuntu-18.04
+FROM mcr.microsoft.com/powershell:7.0.1-windowsservercore-1903
 
-SHELL ["pwsh", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+SHELL ["pwsh", "-Command", "$ErrorActionPreference = 'SilentlyContinue'; $ProgressPreference = 'SilentlyContinue';"]
 
 RUN pwsh `
       -NoLogo `
       -NoProfile `
       -Command " `
-         Write-host "Installing needed PowerShell modules...";`
+         Write-host 'Installing needed PowerShell modules...';`
          Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted;`
          Install-Module -Name SHiPS -SkipPublisherCheck;`
          Install-Module -Name Trackyon.Utils;`
