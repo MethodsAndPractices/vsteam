@@ -25,14 +25,30 @@ Describe 'VSTeamBuild' {
          # using the Set-VSTeamAccount function.
          Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-         Stop-VSTeamBuild -projectName project -id 1
+        
       }
 
       It 'should post changes' {
-         Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+         Stop-VSTeamBuild -projectName project -id 1
+
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
-            $Body -eq '{"status": "Cancelling"}' -and
+            $Body -eq '{"status":"Cancelling"}' -and
             $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1?api-version=$(_getApiVersion Build)" }
+      }
+
+      It 'should process pipeline with multiple ids' {
+
+         $idArr = (1..3)
+
+         $idArr | Stop-VSTeamBuild -projectName project
+
+         Should -Invoke Invoke-RestMethod -Exactly -Times $idArr.Count -ParameterFilter {
+            $Method -eq 'Patch' -and
+            $Body -eq '{"status":"Cancelling"}' -and
+            $Uri -like "https://dev.azure.com/test/project/_apis/build/builds/*" -and
+            $Uri -like "*api-version=$(_getApiVersion Build)*"
+          }
       }
    }
 }
