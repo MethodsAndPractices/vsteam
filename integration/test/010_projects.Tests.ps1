@@ -8,9 +8,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       $acct = $env:ACCT
       $email = $env:EMAIL
       $api = $env:API_VERSION
-      $projectName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
-      $newProjectName = $projectName + [guid]::NewGuid().toString().substring(0, 5) + '1'
-
+      
       $originalLocation = Get-Location
 
       $search = "*$acct*"
@@ -28,8 +26,21 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $oName = $profile.Name
       }
 
+      Remove-Profile -Name intTests -Force
       Add-VSTeamProfile -Account $acct -PersonalAccessToken $pat -Version $api -Name intTests
-      Set-VSTeamAccount -Profile intTests -Drive int
+      Set-VSTeamAccount -Profile intTests
+
+      $projectDescription = 'Project for VSTeam integration testing.'
+      $projectName = 'TeamModuleIntegration-' + [guid]::NewGuid().toString().substring(0, 5)
+      $newProjectName = $projectName + [guid]::NewGuid().toString().substring(0, 5) + '1'
+
+      $existingProject = $(Get-VSTeamProject | Where-Object Description -eq $projectDescription)
+
+      if($existingProject) {
+         $projectName = $existingProject.Name
+      } else {
+         Add-VSTeamProject -Name $projectName -Description $projectDescription | Should -Not -Be $null
+      }
    }
 
    AfterAll {
@@ -53,49 +64,21 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
    }
 
    Context 'Project full exercise' {
-      It 'Add-VSTeamProject Should create project' {
-         Add-VSTeamProject -Name $projectName | Should -Not -Be $null
-      }
-
       It 'Get-VSTeamProject Should return projects' {
          Get-VSTeamProject -Name $projectName -IncludeCapabilities | Should -Not -Be $null
       }
 
       It 'Update-VSTeamProject Should update description' {
-         Update-VSTeamProject -Name $projectName -NewDescription 'Test Description' -Force
+         Update-VSTeamProject -Name $projectName -NewDescription $projectDescription -Force
 
-         Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty 'Description' | Should -Be 'Test Description'
+         Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty 'Description' | Should -Be $projectDescription
       }
 
       It 'Update-VSTeamProject Should update name' {
          Update-VSTeamProject -Name $projectName -NewName $newProjectName -Force
 
-         Get-VSTeamProject -Name $newProjectName | Select-Object -ExpandProperty 'Description' | Should -Be 'Test Description'
-      }
-   }
-
-   Context 'PS Drive full exercise' {
-      BeforeAll {
-         New-PSDrive -Name int -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
-         $actual = Set-Location int: -PassThru
-      }
-
-      It 'Should be able to mount drive' {
-         $actual | Should -Not -Be $null
-      }
-
-      It 'Should list projects' {
-         Get-ChildItem | Should -Not -Be $null
-      }
-
-      It 'Should list Builds, Releases and Teams' {
-         Set-Location $newProjectName
-         Get-ChildItem | Should -Not -Be $null
-      }
-
-      It 'Should list Teams' {
-         Set-Location 'Teams'
-         Get-ChildItem | Should -Not -Be $null
+         # Calling Get-VSTeamProject with new name verifies the name was changed.
+         Get-VSTeamProject -Name $newProjectName | Select-Object -ExpandProperty 'Description' | Should -Be $projectDescription
       }
    }
 
@@ -106,12 +89,14 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Add-VSTeamGitRepository Should create repository' {
          Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing'
+
          (Get-VSTeamGitRepository -ProjectName $newProjectName).Count | Should -Be 2
          Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing' | Select-Object -ExpandProperty Name | Should -Be 'testing'
       }
 
       It 'Remove-VSTeamGitRepository Should delete repository' {
          Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing' | Select-Object -ExpandProperty Id | Remove-VSTeamGitRepository -Force
+
          Get-VSTeamGitRepository -ProjectName $newProjectName | Where-Object { $_.Name -eq 'testing' } | Should -Be $null
       }
    }
@@ -144,6 +129,10 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $srcBuildDef.name = $newProjectName + "-CI2"
          $tmpBuildDef2 = (New-TemporaryFile).FullName
          $srcBuildDef | ConvertTo-Json -Depth 10 | Set-Content -Path $tmpBuildDef2
+      }
+
+      AfterAll {
+         Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI' | Remove-VSTeamGitRepository -Force
       }
 
       It 'Add-VSTeamBuildDefinition should add a build definition' {
@@ -268,6 +257,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $variableGroupName = "TestVariableGroup1"
          $variableGroupUpdatedName = "TestVariableGroup2"
       }
+      
       It 'Add-VSTeamVariableGroup Should add a variable group' {
          $parameters = @{
             ProjectName = $newProjectName
@@ -332,14 +322,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
-   Context 'Get-VSTeamExtension' {
-      It 'Should return SonarQube Extension' {
-         $actual = Get-VSTeamExtension
-
-         $($actual | Where-Object name -eq SonarQube) | Should -Not -Be $null
-      }
-   }
-
    Context 'Policy full exercise' {
       BeforeAll {
          $actualTypes = Get-VSTeamPolicyType -ProjectName $newProjectName
@@ -353,7 +335,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
          $repoId = $(Get-VSTeamGitRepository -ProjectName $newProjectName -Name $newProjectName | Select-Object -ExpandProperty Id)
          
-         Add-VSTeamPolicy -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 1; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" })}
+         Add-VSTeamPolicy -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 1; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" }) }
 
          $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
          
@@ -364,7 +346,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Should update Policy' {
          $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
          $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
-         $newPolicy = Update-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 2; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" })}
+         $newPolicy = Update-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 2; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" }) }
          
          $newPolicy.settings.minimumApproverCount | Should -Be 2
       }
@@ -378,11 +360,9 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
    }
 
    Context 'Service Endpoints full exercise' {
-      It 'Add-VSTeamSonarQubeEndpoint Should add service endpoint' {
-         { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `
-               -SonarQubeURl 'http://sonarqube.somewhereIn.cloudapp.azure.com:9000' -PersonalAccessToken 'Faketoken' } | Should -Not -Throw
+      BeforeAll {
+         $newProjectName = $(Get-VSTeamProject | Where-Object Description -eq $projectDescription)
       }
-
       It 'Add-VSTeamAzureRMServiceEndpoint Should add service endpoint' {
          { Add-VSTeamAzureRMServiceEndpoint -ProjectName $newProjectName -displayName 'AzureEndoint' `
                -subscriptionId '00000000-0000-0000-0000-000000000000' -subscriptionTenantId '00000000-0000-0000-0000-000000000000' `
@@ -392,7 +372,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Get-VSTeamServiceEndpoint Should return service endpoints' {
          $actual = Get-VSTeamServiceEndpoint -ProjectName $newProjectName
 
-         $actual.Count | Should -Be 2
+         $actual.Count | Should -Be $null
       }
 
       It 'Remove-VSTeamServiceEndpoint Should delete service endpoints' {
@@ -557,22 +537,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $info = Get-VSTeamInfo
 
          $info.DefaultProject | Should -BeNullOrEmpty
-      }
-
-      It 'Remove-VSTeamProject Should remove Project' {
-         Set-VSTeamAPIVersion $env:API_VERSION
-
-         # I have noticed that if the delete happens too soon you will get a
-         # 400 response and told to try again later. So this test needs to be
-         # retried. We need to wait a minute after the rename before we try
-         # and delete
-         Start-Sleep -Seconds 60
-
-         Remove-VSTeamProject -ProjectName $newProjectName -Force
-      }
-
-      It 'Remove-VSTeamAccount Should remove account' {
-         Remove-VSTeamAccount
       }
    }
 }

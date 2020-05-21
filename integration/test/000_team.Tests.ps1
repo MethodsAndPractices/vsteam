@@ -2,10 +2,11 @@ Set-StrictMode -Version Latest
 
 Describe 'Team' -Tag 'integration' {
    BeforeAll {
-      Set-VSTeamAPIVersion -Target $env:API_VERSION
       $pat = $env:PAT
       $acct = $env:ACCT
       $api = $env:API_VERSION
+      
+      Set-VSTeamAPIVersion -Target $env:API_VERSION
       Set-VSTeamAccount -a $acct -pe $pat -version $api
 
       # See if there are any existing projects. If so use the 
