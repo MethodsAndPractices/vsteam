@@ -546,6 +546,10 @@ Opens the release definitions for a team project in the default browser.
 
 Opens the work item in the default browser.
 
+### [Stop-VSTeamBuild](Stop-VSTeamBuild.md)
+
+Allows you to cancel a running build.
+
 ### [Test-VSTeamMembership](Test-VSTeamMembership.md)
 
 Tests the membership in a container.

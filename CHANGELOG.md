@@ -1,15 +1,13 @@
 # Changelog
 
-## 6.5.1
-
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
-
-- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
-
 ## 6.5.0
 
 Requires Pester 5.x
 All the tests have been upgraded to use Pester 5.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
+
+- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
 
 ## 6.4.8
 
