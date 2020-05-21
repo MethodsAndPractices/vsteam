@@ -7,6 +7,11 @@ New files     :
                  Source\Classes\QueryCompleter.ps1                | argument completer - completes by friendly name  
                  Source\Classes\QueryTransformToIDAttribute.ps1   | argument transformer turns name of query into its GUID
                  Source\Clasess\_classes.json                     | Add three classes above
+## 6.5.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
+
+- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
 
 ## 6.5.0
 
