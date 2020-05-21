@@ -1,5 +1,6 @@
 # Changelog
 
+<<<<<<< HEAD
 ## Enhance Get-VsteamWorkItemType. 
 Update \source\Get-VSTeamWorkItemType.ps1 and .docs\Get-VSTeamWorkItemType.md
 1. Support selection of work item types from a project or from a process template.
@@ -29,6 +30,13 @@ Source/Classes/ProcessTemplateCompleter.ps1        Updated process completer (Ne
 Source/Classes/ProcessValidateAttribute.ps1        Updated process validator
 Source/Classes/VSTeamProcessCache.ps1              Updated process cache 
 
+=======
+## 6.5.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
+
+- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
+>>>>>>> upstream/master
 
 ## 6.5.0
 
