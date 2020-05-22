@@ -26,7 +26,7 @@ Describe "VSTeamExtension" {
 
    Context 'Add-VSTeamExtension' {
       It 'Should add SonarQube Extension' {
-         $actual = Add-VSTeamExtension -PublisherId sonarsource -ExtensionId sonarqube
+         $actual = Add-VSTeamExtension -PublisherId 'sonarsource' -ExtensionId 'sonarqube'
 
          $($actual | Where-Object name -eq SonarQube) | Should -Not -Be $null
       }
