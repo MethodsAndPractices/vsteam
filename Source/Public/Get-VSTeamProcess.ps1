@@ -1,6 +1,12 @@
 function Get-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName = 'List')]
+   [OutputType([vsteamprocess])]
    param(
+      [Parameter(ParameterSetName = 'ByName', Position=0)]
+      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [Alias('ProcessName','ProcessTemplate')]
+      $Name = '*',
+
       [Parameter(ParameterSetName = 'List')]
       [int] $Top = 100,
 
@@ -9,12 +15,7 @@ function Get-VSTeamProcess {
 
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProcessTemplateID')]
-      [string] $Id,
-
-      [Parameter(ParameterSetName = 'ByName', Mandatory = $true)]
-      [ProcessValidateAttribute()]
-      [ArgumentCompleter([ProcessTemplateCompleter])]
-      [string] $Name
+      [string] $Id
    )
    process {
       if ($id) {
@@ -29,28 +30,25 @@ function Get-VSTeamProcess {
 
          Write-Output $project
       }
-      elseif ($Name) {
-         # Lookup Process ID by Name
-         Get-VSTeamProcess | where-object { $_.name -eq $Name }
-      }
+
       else {
          # Return list of processes
          try {
             # Call the REST API
-            $resp = _callAPI -area 'process' -resource 'processes' `
-               -Version $(_getApiVersion Core) -NoProject `
+            $resp = _callAPI -Area 'work' -resource 'processes' `
+               -Version $(_getApiVersion Graph)  -NoProject `
                -QueryString @{
                '$top'  = $top
                '$skip' = $skip
             }
 
-            $objs = @()
-            
-            foreach ($item in $resp.value) {
-               $objs += [VSTeamProcess]::new($item)
-            }
-
-            Write-Output $objs
+           #we just fetched the processes so let's update the cache. Also Cache the URLS for processes
+            [VSTeamProcessCache]::processes = $resp.value.name | Sort-Object
+            [VSTeamProcessCache]::timestamp = (Get-Date).Minute
+            $resp.value | ForEach-Object {
+               [VSTeamProcessCache]::urls[$_.name] =  _getInstance + "/_apis/work/processes/" + $_.Id
+               [VSTeamProcess]::new($_)
+            } | Where-Object {$_.name -like $Name} | Sort-Object -Property Name
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod

@@ -4,23 +4,30 @@ class VSTeamProcess {
    [string]$URL = $null
    [string]$Description = $null
    [string]$Name = $null
+   [string]$ReferenceName = $null
+   [bool]$IsEnabled = $true
    [bool]$IsDefault = $false
    [string]$Type = $null
-
+   [string]$ProcessTemplate = $null
+   [string]$ParentProcessTypeId = $null
    VSTeamProcess (
       [object]$obj
    )  {
-      $this.ID = $obj.id
-      $this.URL = $obj.url
-      $this.IsDefault = $obj.isDefault
-      $this.Name = $obj.name
-      $this.Type = $obj.type
-
+      $this.ID              = $obj.typeId
+      $this.URL             = [VSTeamVersions]::Account + "/_apis/work/processes/" + $obj.typeId
+      $this.IsEnabled       = $obj.isEnabled
+      $this.IsDefault       = $obj.isDefault
+      $this.ReferenceName   = $obj.referenceName
+      $this.Name            = $obj.name
+      $this.ProcessTemplate = $obj.name
+      $this.Type            = $obj.customizationType
       # The description is not always returned so protect yourself.
       if ($obj.PSObject.Properties.Match('description').count -gt 0) {
-         $this.Description = $obj.description
+         $this.Description         = $obj.description
       }
-
+      if ($obj.PSObject.Properties.Match('parentProcessTypeId').count -gt 0) {
+         $this.ParentProcessTypeId = $obj.parentProcessTypeId
+      }
       $this.AddTypeName('Team.Process')
    }
 

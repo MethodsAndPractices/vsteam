@@ -13,7 +13,7 @@ Describe "ProcessValidateAttribute" {
    Context "Existing Process" {
       BeforeAll {
          Mock _hasProcessTemplateCacheExpired { return $true }
-         Mock _getProcesses { return @("Test1", "Test2") }
+         Mock _getProcesses { return @(@{Name='Test1';Id=''},@{Name='Test2';Id=''})}
       }
 
       It "it is not in list and should throw" {

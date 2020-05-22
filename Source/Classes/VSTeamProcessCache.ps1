@@ -4,4 +4,28 @@
 class VSTeamProcessCache {
    static [int] $timestamp = -1
    static [object] $processes = $null
+   static [hashtable] $urls = @{}
+   static [Void] Update () {
+      #Allow unit tests to mock returning the project list and testing freshness
+      $list = _getProcesses 
+      if ($list) {
+         foreach ($process in $list) {
+            [VSTeamProcessCache]::urls[$process.name] =  (_getInstance) + "/_apis/work/processes/" + $process.Id
+         }
+         [VSTeamProcessCache]::processes = $List.name | Sort-Object
+      }
+      else {
+         [VSTeamProcessCache]::processes = $null
+      }
+      [VSTeamProcessCache]::timestamp = (Get-Date).Minute
+      # "save current minute" refreshes on average after 30secs  but not after exact hours timeOfDayTotalMinutes might be a better base
+   }
+   static [object] GetCurrent () {
+      if (_hasProcessTemplateCacheExpired) { [VSTeamProcessCache]::Update() }
+      return ([VSTeamProcessCache]::processes)
+   }
+   static [object] GetURl ([string]$ProcessName) {
+      if (_hasProcessTemplateCacheExpired) { [VSTeamProcessCache]::Update() }
+      return ([VSTeamProcessCache]::urls[$ProcessName])
+   }
 }
