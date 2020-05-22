@@ -105,15 +105,15 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '3.0'
                [VSTeamVersions]::Release = '3.0-preview'
                [VSTeamVersions]::DistributedTask = '3.0-preview'
-               [VSTeamVersions]::VariableGroups = '3.2-preview.1'
-               [VSTeamVersions]::TaskGroups = '3.2-preview.1'
+               [VSTeamVersions]::VariableGroups = '' # Was introduced in Update 1
+               [VSTeamVersions]::TaskGroups = '3.0-preview'
                [VSTeamVersions]::Tfvc = '3.0'
-               [VSTeamVersions]::Packaging = ''
+               [VSTeamVersions]::Packaging = '3.0-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
-               [VSTeamVersions]::ServiceFabricEndpoint = ''
+               [VSTeamVersions]::ServiceFabricEndpoint = '3.0-preview'
                [VSTeamVersions]::ExtensionsManagement = '3.0-preview'
                [VSTeamVersions]::Graph = ''
-               [VSTeamVersions]::Policy = ''
+               [VSTeamVersions]::Policy = '3.0'
             }
             'TFS2017U1' {
                [VSTeamVersions]::Version = 'TFS2017'
