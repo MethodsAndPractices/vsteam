@@ -2,7 +2,7 @@ function Set-VSTeamAPIVersion {
    [CmdletBinding(DefaultParameterSetName = 'Target', SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
       [parameter(ParameterSetName = 'Target', Mandatory = $false, Position = 0)]
-      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD')]
+      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1')]
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
@@ -106,15 +106,33 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Release = '3.0-preview'
                [VSTeamVersions]::DistributedTask = '3.0-preview'
                [VSTeamVersions]::VariableGroups = '3.2-preview.1'
+               [VSTeamVersions]::TaskGroups = '3.2-preview.1'
                [VSTeamVersions]::Tfvc = '3.0'
                [VSTeamVersions]::Packaging = ''
-               [VSTeamVersions]::TaskGroups = '3.2-preview.1'
                [VSTeamVersions]::MemberEntitlementManagement = ''
                [VSTeamVersions]::ServiceFabricEndpoint = ''
                [VSTeamVersions]::ExtensionsManagement = '3.0-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = ''
             }
+            'TFS2017U1' {
+               [VSTeamVersions]::Version = 'TFS2017'
+               [VSTeamVersions]::Git = '3.1'
+               [VSTeamVersions]::Core = '3.1'
+               [VSTeamVersions]::Build = '3.1'
+               [VSTeamVersions]::Release = '3.1-preview'
+               [VSTeamVersions]::DistributedTask = '3.1-preview'
+               [VSTeamVersions]::VariableGroups = '3.1-preview' # Resource of DistributedTask area
+               [VSTeamVersions]::TaskGroups = '3.1-preview' # Resource of DistributedTask area
+               [VSTeamVersions]::ServiceFabricEndpoint = '' # The serviceendpoints resource of DistributedTask area
+               [VSTeamVersions]::Tfvc = '3.1'
+               [VSTeamVersions]::Packaging = '3.1-preview'
+               [VSTeamVersions]::MemberEntitlementManagement = '' # SubDomain vsaex
+               [VSTeamVersions]::ExtensionsManagement = '3.1-preview' # Actual area is extensionmanagement
+               [VSTeamVersions]::Graph = '' # SubDomain vssps
+               [VSTeamVersions]::Policy = '3.1'
+            }
+            # AZD, VSTS
             Default {
                [VSTeamVersions]::Version = $Target
                [VSTeamVersions]::Git = '5.1-preview'
@@ -123,9 +141,9 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Release = '5.1-preview'
                [VSTeamVersions]::DistributedTask = '5.0-preview'
                [VSTeamVersions]::VariableGroups = '5.0-preview.1'
+               [VSTeamVersions]::TaskGroups = '5.1-preview.1'
                [VSTeamVersions]::Tfvc = '5.0'
                [VSTeamVersions]::Packaging = '5.1-preview'
-               [VSTeamVersions]::TaskGroups = '5.1-preview.1'
                [VSTeamVersions]::MemberEntitlementManagement = '5.1-preview'
                # This version is never passed to the API but is used to evaluate
                # if Service Fabric is enabled for the account. Just set it to
