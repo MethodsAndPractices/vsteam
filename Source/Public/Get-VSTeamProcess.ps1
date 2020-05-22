@@ -7,10 +7,10 @@ function Get-VSTeamProcess {
       [Alias('ProcessName','ProcessTemplate')]
       $Name = '*',
 
-      [Parameter(ParameterSetName = 'List')]
+      [Parameter(DontShow=$true, ParameterSetName = 'List')]
       [int] $Top = 100,
 
-      [Parameter(ParameterSetName = 'List')]
+      [Parameter(DontShow=$true, ParameterSetName = 'List')]
       [int] $Skip = 0,
 
       [Parameter(ParameterSetName = 'ByID')]
@@ -18,35 +18,27 @@ function Get-VSTeamProcess {
       [string] $Id
    )
    process {
+      # The REST API ignores Top and Skip but allows them to be specified & the function does the same. 
+
+      # Return either a single proces by ID or a list of processes
       if ($id) {
-         $queryString = @{ }
+         # Call the REST API with an ID
+         $resp = _callAPI -NoProject -area 'work' -resource 'processes' -id $id  -Version $(_getApiVersion Core) 
 
-         # Call the REST API
-         $resp = _callAPI -area 'process' -resource 'processes' -id $id `
-            -Version $(_getApiVersion Core) `
-            -QueryString $queryString -NoProject
-
-         $project = [VSTeamProcess]::new($resp)
-
-         Write-Output $project
+         if ($resp) {
+            return [VSTeamProcess]::new($resp)
+         }
       }
-
       else {
-         # Return list of processes
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'work' -resource 'processes' `
-               -Version $(_getApiVersion Graph)  -NoProject `
-               -QueryString @{
-               '$top'  = $top
-               '$skip' = $skip
-            }
+            $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion core)  
 
-           #we just fetched the processes so let's update the cache. Also Cache the URLS for processes
+            #we just fetched all the processes so let's update the cache. Also, cache the URLS for processes
             [VSTeamProcessCache]::processes = $resp.value.name | Sort-Object
             [VSTeamProcessCache]::timestamp = (Get-Date).Minute
             $resp.value | ForEach-Object {
-               [VSTeamProcessCache]::urls[$_.name] =  _getInstance + "/_apis/work/processes/" + $_.Id
+               [VSTeamProcessCache]::urls[$_.name] =  (_getInstance) + "/_apis/work/processes/" + $_.TypeId
                [VSTeamProcess]::new($_)
             } | Where-Object {$_.name -like $Name} | Sort-Object -Property Name
          }

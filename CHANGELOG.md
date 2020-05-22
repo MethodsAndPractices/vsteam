@@ -1,5 +1,24 @@
 # Changelog
 
+Source/Classes/ProcessTemplateCompleter.ps1        |
+Source/Classes/ProcessValidateAttribute.ps1        |
+Source/Classes/ProjectCompleter.ps1                |
+Source/Classes/ProjectValidateAttribute.ps1        |  Changed in previous PR and files need to stay in sync / are a depedency for this 
+
+Source/Classes/VSTeamProcessCache.ps1
+Source/Public/Get-VSTeamProcess.ps1                |  Update to get process from different URL branch (WORK/PROCESS) 
+                                                   |  this version is more allows add, modify and is the path to changing work item types. 
+                                                   |  However it ignores the top and skip options. 
+                                                   |  Now update the cache automatically; support wildcards, paramater aliases, specify output type. 
+.docs/Get-VSTeamProcess.md                         |  Update to documentation   
+Source/Classes/VSTeamProcess.ps1                   |  Modify class to be more pipeline friendly and to work with slightly different fields from the different URL path.
+Source/formats/Team.Process.TableView.ps1xml       |  Updated to isDisabled and isDefault
+Source/formats/Team.Process.ListView.ps1xml        |  Updated to isDisabled and isDefault
+
+unit/test/Get-VSTeamProcess.Tests.ps1              |  Updated for new behavior. (Don't validate name to allow wildcard use, top and skip ignored. )
+unit/test/Add-VSTeamProject.Tests.ps1              |  Fix for side effects of changes above
+unit/test/ProcessValidateAttribute.Tests.ps1       |  Fix for side effects of changes above
+
 ## 6.5.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:

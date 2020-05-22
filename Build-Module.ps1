@@ -49,7 +49,7 @@ if ($installDep.IsPresent -or $analyzeScript.IsPresent) {
 
    # Install each module
    if ($manifest.RequiredModules) {
-      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
+      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
    }
 }
 
@@ -81,14 +81,22 @@ if ($buildHelp.IsPresent) {
 }
 
 Write-Output 'Publishing about help files'
-Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
-Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
+Copy-Item -Path ./Source/en-US       -Destination "$output/" -Recurse   -Force
+Copy-Item -Path ./Source/VSTeam.psd1 -Destination "$output/VSTeam.psd1" -Force
 
-Write-Output 'Updating Functions To Export'
+
+Get-Content -Path ./Source/VSTeam.psm1 | Out-File -Append -FilePath "$output/VSTeam.psm1" -Encoding ascii
+<#Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+      ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+#>
 
-(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
+$PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
+Write-Output 'Updating Functions To Export'
+$FunctionsToExport  = @()
+$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"})
+$FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName
+Update-ModuleManifest -Path "$output/VSTeam.psd1" -FunctionsToExport $FunctionsToExport
 
 Write-Output "Publish complete to $output"
 
@@ -100,8 +108,8 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
    if ((Get-Module VSTeam)) {
       Remove-Module VSTeam
    }
-
-   Import-Module "$output/VSTeam.psd1" -Force
+   $env:testing = $true
+   Import-Module "$output/VSTeam.psd1"  -Global -Force
    Set-VSTeamAlias
 }
 
