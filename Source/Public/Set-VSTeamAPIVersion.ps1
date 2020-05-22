@@ -2,7 +2,7 @@ function Set-VSTeamAPIVersion {
    [CmdletBinding(DefaultParameterSetName = 'Target', SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
       [parameter(ParameterSetName = 'Target', Mandatory = $false, Position = 0)]
-      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1')]
+      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1', 'TFS2017U2')]
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
@@ -107,10 +107,10 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::DistributedTask = '3.0-preview'
                [VSTeamVersions]::VariableGroups = '' # Was introduced in Update 1
                [VSTeamVersions]::TaskGroups = '3.0-preview'
+               [VSTeamVersions]::ServiceFabricEndpoint = '3.0-preview'
                [VSTeamVersions]::Tfvc = '3.0'
                [VSTeamVersions]::Packaging = '3.0-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
-               [VSTeamVersions]::ServiceFabricEndpoint = '3.0-preview'
                [VSTeamVersions]::ExtensionsManagement = '3.0-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '3.0'
@@ -124,13 +124,30 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::DistributedTask = '3.1-preview'
                [VSTeamVersions]::VariableGroups = '3.1-preview' # Resource of DistributedTask area
                [VSTeamVersions]::TaskGroups = '3.1-preview' # Resource of DistributedTask area
-               [VSTeamVersions]::ServiceFabricEndpoint = '' # The serviceendpoints resource of DistributedTask area
+               [VSTeamVersions]::ServiceFabricEndpoint = '3.1-preview' # The serviceendpoints resource of DistributedTask area
                [VSTeamVersions]::Tfvc = '3.1'
                [VSTeamVersions]::Packaging = '3.1-preview'
                [VSTeamVersions]::MemberEntitlementManagement = '' # SubDomain vsaex
                [VSTeamVersions]::ExtensionsManagement = '3.1-preview' # Actual area is extensionmanagement
                [VSTeamVersions]::Graph = '' # SubDomain vssps
                [VSTeamVersions]::Policy = '3.1'
+            }
+            'TFS2017U2' {
+               [VSTeamVersions]::Version = 'TFS2017'
+               [VSTeamVersions]::Git = '3.2'
+               [VSTeamVersions]::Core = '3.2'
+               [VSTeamVersions]::Build = '3.2'
+               [VSTeamVersions]::Release = '3.2-preview'
+               [VSTeamVersions]::DistributedTask = '3.2-preview'
+               [VSTeamVersions]::VariableGroups = '3.2-preview' # Resource of DistributedTask area
+               [VSTeamVersions]::TaskGroups = '3.2-preview' # Resource of DistributedTask area
+               [VSTeamVersions]::ServiceFabricEndpoint = '3.2-preview' # The serviceendpoints resource of DistributedTask area
+               [VSTeamVersions]::Tfvc = '3.2'
+               [VSTeamVersions]::Packaging = '3.2-preview'
+               [VSTeamVersions]::MemberEntitlementManagement = '' # SubDomain vsaex
+               [VSTeamVersions]::ExtensionsManagement = '3.2-preview' # Actual area is extensionmanagement
+               [VSTeamVersions]::Graph = '' # SubDomain vssps
+               [VSTeamVersions]::Policy = '3.2'
             }
             # AZD, VSTS
             Default {
