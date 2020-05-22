@@ -2,7 +2,7 @@ function Set-VSTeamAPIVersion {
    [CmdletBinding(DefaultParameterSetName = 'Target', SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
       [parameter(ParameterSetName = 'Target', Mandatory = $false, Position = 0)]
-      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1', 'TFS2017U2')]
+      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1', 'TFS2017U2', 'TFS2017U3', 'TFS2018U1', 'TFS2018U2', 'TFS2018U3', 'AzD2019U1')]
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
@@ -63,6 +63,7 @@ function Set-VSTeamAPIVersion {
          }
       }
       else {
+         # https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-5.1#api-and-tfs-version-mapping
          switch ($Target) {
             'AzD2019' {
                [VSTeamVersions]::Version = 'AzD2019'
@@ -81,7 +82,24 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '5.0'
             }
-            'TFS2018' {
+            'AzD2019U1' {
+               [VSTeamVersions]::Version = 'AzD2019'
+               [VSTeamVersions]::Git = '5.1'
+               [VSTeamVersions]::Core = '5.1'
+               [VSTeamVersions]::Build = '5.1'
+               [VSTeamVersions]::Release = '5.1'
+               [VSTeamVersions]::DistributedTask = '5.1-preview'
+               [VSTeamVersions]::VariableGroups = '5.1-preview'
+               [VSTeamVersions]::Tfvc = '5.1'
+               [VSTeamVersions]::Packaging = '5.1-preview'
+               [VSTeamVersions]::TaskGroups = '5.1-preview'
+               [VSTeamVersions]::MemberEntitlementManagement = ''
+               [VSTeamVersions]::ServiceFabricEndpoint = '5.1-preview'
+               [VSTeamVersions]::ExtensionsManagement = '5.1-preview'
+               [VSTeamVersions]::Graph = ''
+               [VSTeamVersions]::Policy = '5.1'
+            }
+            { $_ -eq 'TFS2018' -or $_ -eq 'TFS2018U1' } {
                [VSTeamVersions]::Version = 'TFS2018'
                [VSTeamVersions]::Git = '4.0'
                [VSTeamVersions]::Core = '4.0'
@@ -97,6 +115,23 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '4.0-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '4.0'
+            }
+            { $_ -eq 'TFS2018U2' -or $_ -eq 'TFS2018U3' } {
+               [VSTeamVersions]::Version = 'TFS2018'
+               [VSTeamVersions]::Git = '4.1'
+               [VSTeamVersions]::Core = '4.1'
+               [VSTeamVersions]::Build = '4.1'
+               [VSTeamVersions]::Release = '4.1-preview'
+               [VSTeamVersions]::DistributedTask = '4.1-preview'
+               [VSTeamVersions]::VariableGroups = '4.1-preview'
+               [VSTeamVersions]::Tfvc = '4.1'
+               [VSTeamVersions]::Packaging = '4.1-preview'
+               [VSTeamVersions]::TaskGroups = '4.1-preview'
+               [VSTeamVersions]::MemberEntitlementManagement = ''
+               [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'
+               [VSTeamVersions]::ExtensionsManagement = '4.1-preview'
+               [VSTeamVersions]::Graph = ''
+               [VSTeamVersions]::Policy = '4.1'
             }
             'TFS2017' {
                [VSTeamVersions]::Version = 'TFS2017'
@@ -132,7 +167,8 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Graph = '' # SubDomain vssps
                [VSTeamVersions]::Policy = '3.1'
             }
-            'TFS2017U2' {
+            # Update 3 of TFS 2017 did not introduce a new API Version
+            { $_ -eq 'TFS2017U2' -or $_ -eq 'TFS2017U3' } {
                [VSTeamVersions]::Version = 'TFS2017'
                [VSTeamVersions]::Git = '3.2'
                [VSTeamVersions]::Core = '3.2'
@@ -152,22 +188,22 @@ function Set-VSTeamAPIVersion {
             # AZD, VSTS
             Default {
                [VSTeamVersions]::Version = $Target
-               [VSTeamVersions]::Git = '5.1-preview'
-               [VSTeamVersions]::Core = '5.0'
-               [VSTeamVersions]::Build = '5.1-preview'
-               [VSTeamVersions]::Release = '5.1-preview'
-               [VSTeamVersions]::DistributedTask = '5.0-preview'
-               [VSTeamVersions]::VariableGroups = '5.0-preview.1'
-               [VSTeamVersions]::TaskGroups = '5.1-preview.1'
-               [VSTeamVersions]::Tfvc = '5.0'
-               [VSTeamVersions]::Packaging = '5.1-preview'
-               [VSTeamVersions]::MemberEntitlementManagement = '5.1-preview'
+               [VSTeamVersions]::Git = '5.1'
+               [VSTeamVersions]::Core = '5.1'
+               [VSTeamVersions]::Build = '5.1'
+               [VSTeamVersions]::Release = '5.1'
+               [VSTeamVersions]::DistributedTask = '6.0-preview'
+               [VSTeamVersions]::VariableGroups = '6.0-preview'
+               [VSTeamVersions]::TaskGroups = '6.0-preview'
+               [VSTeamVersions]::Tfvc = '5.1'
+               [VSTeamVersions]::Packaging = '6.0-preview' # SubDoman feeds
+               [VSTeamVersions]::MemberEntitlementManagement = '6.0-preview'
                # This version is never passed to the API but is used to evaluate
                # if Service Fabric is enabled for the account. Just set it to
                # match Distributed Task for AzD
                [VSTeamVersions]::ServiceFabricEndpoint = '5.0-preview'
-               [VSTeamVersions]::ExtensionsManagement = '5.1-preview'
-               [VSTeamVersions]::Graph = '5.1-preview'
+               [VSTeamVersions]::ExtensionsManagement = '6.0-preview' # SubDomain extmgmt
+               [VSTeamVersions]::Graph = '6.0-preview' # SubDomain vssps
                [VSTeamVersions]::Policy = '5.1'
             }
          }
