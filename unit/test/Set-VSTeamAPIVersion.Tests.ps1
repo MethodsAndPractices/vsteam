@@ -82,8 +82,8 @@ Describe 'VSTeamAPIVersion' {
       }
 
       It 'Should change just ServiceFabricEndpoint' {
-         Set-VSTeamAPIVersion -Service ServiceFabricEndpoint -Version '7.0'
-         [VSTeamVersions]::ServiceFabricEndpoint | Should -Be '7.0'
+         Set-VSTeamAPIVersion -Service ServiceEndpoints -Version '7.0'
+         [VSTeamVersions]::ServiceEndpoints | Should -Be '7.0'
       }
 
       It 'Should change just ExtensionsManagement' {

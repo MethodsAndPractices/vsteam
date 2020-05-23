@@ -6,7 +6,7 @@ function Set-VSTeamAPIVersion {
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph', 'TaskGroups', 'Policy')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]
@@ -48,8 +48,8 @@ function Set-VSTeamAPIVersion {
             'ExtensionsManagement' {
                [VSTeamVersions]::ExtensionsManagement = $Version
             }
-            'ServiceFabricEndpoint' {
-               [VSTeamVersions]::ServiceFabricEndpoint = $Version
+            'ServiceEndpoints' {
+               [VSTeamVersions]::ServiceEndpoints = $Version
             }
             'Graph' {
                [VSTeamVersions]::Graph = $Version
@@ -77,7 +77,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Packaging = '5.0-preview'
                [VSTeamVersions]::TaskGroups = '5.0-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
-               [VSTeamVersions]::ServiceFabricEndpoint = '5.0-preview'
+               [VSTeamVersions]::ServiceEndpoints = '5.0-preview'
                [VSTeamVersions]::ExtensionsManagement = '5.0-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '5.0'
@@ -94,7 +94,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Packaging = '5.1-preview'
                [VSTeamVersions]::TaskGroups = '5.1-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
-               [VSTeamVersions]::ServiceFabricEndpoint = '5.1-preview'
+               [VSTeamVersions]::ServiceEndpoints = '5.1-preview'
                [VSTeamVersions]::ExtensionsManagement = '5.1-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '5.1'
@@ -111,7 +111,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Packaging = '4.0-preview'
                [VSTeamVersions]::TaskGroups = '4.0-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
-               [VSTeamVersions]::ServiceFabricEndpoint = '4.0-preview'
+               [VSTeamVersions]::ServiceEndpoints = '4.0-preview'
                [VSTeamVersions]::ExtensionsManagement = '4.0-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '4.0'
@@ -128,7 +128,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Packaging = '4.1-preview'
                [VSTeamVersions]::TaskGroups = '4.1-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
-               [VSTeamVersions]::ServiceFabricEndpoint = '4.1-preview'
+               [VSTeamVersions]::ServiceEndpoints = '4.1-preview'
                [VSTeamVersions]::ExtensionsManagement = '4.1-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '4.1'
@@ -142,7 +142,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::DistributedTask = '3.0-preview'
                [VSTeamVersions]::VariableGroups = '' # Was introduced in Update 1
                [VSTeamVersions]::TaskGroups = '3.0-preview'
-               [VSTeamVersions]::ServiceFabricEndpoint = '3.0-preview'
+               [VSTeamVersions]::ServiceEndpoints = '3.0-preview'
                [VSTeamVersions]::Tfvc = '3.0'
                [VSTeamVersions]::Packaging = '3.0-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
@@ -159,7 +159,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::DistributedTask = '3.1-preview'
                [VSTeamVersions]::VariableGroups = '3.1-preview' # Resource of DistributedTask area
                [VSTeamVersions]::TaskGroups = '3.1-preview' # Resource of DistributedTask area
-               [VSTeamVersions]::ServiceFabricEndpoint = '3.1-preview' # The serviceendpoints resource of DistributedTask area
+               [VSTeamVersions]::ServiceEndpoints = '3.1-preview' # The serviceendpoints resource of DistributedTask area
                [VSTeamVersions]::Tfvc = '3.1'
                [VSTeamVersions]::Packaging = '3.1-preview'
                [VSTeamVersions]::MemberEntitlementManagement = '' # SubDomain vsaex
@@ -177,7 +177,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::DistributedTask = '3.2-preview'
                [VSTeamVersions]::VariableGroups = '3.2-preview' # Resource of DistributedTask area
                [VSTeamVersions]::TaskGroups = '3.2-preview' # Resource of DistributedTask area
-               [VSTeamVersions]::ServiceFabricEndpoint = '3.2-preview' # The serviceendpoints resource of DistributedTask area
+               [VSTeamVersions]::ServiceEndpoints = '3.2-preview' # The serviceendpoints resource of DistributedTask area
                [VSTeamVersions]::Tfvc = '3.2'
                [VSTeamVersions]::Packaging = '3.2-preview'
                [VSTeamVersions]::MemberEntitlementManagement = '' # SubDomain vsaex
@@ -201,7 +201,7 @@ function Set-VSTeamAPIVersion {
                # This version is never passed to the API but is used to evaluate
                # if Service Fabric is enabled for the account. Just set it to
                # match Distributed Task for AzD
-               [VSTeamVersions]::ServiceFabricEndpoint = '5.0-preview'
+               [VSTeamVersions]::ServiceEndpoints = '5.0-preview'
                [VSTeamVersions]::ExtensionsManagement = '6.0-preview' # SubDomain extmgmt
                [VSTeamVersions]::Graph = '6.0-preview' # SubDomain vssps
                [VSTeamVersions]::Policy = '5.1'
@@ -221,7 +221,7 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "Packaging: $(_getApiVersion Packaging)"
    Write-Verbose "TaskGroups: $([VSTeamVersions]::TaskGroups)"
    Write-Verbose "MemberEntitlementManagement: $([VSTeamVersions]::MemberEntitlementManagement)"
-   Write-Verbose "ServiceFabricEndpoint: $([VSTeamVersions]::ServiceFabricEndpoint)"
+   Write-Verbose "ServiceEndpoints: $([VSTeamVersions]::ServiceEndpoints)"
    Write-Verbose "ExtensionsManagement: $([VSTeamVersions]::ExtensionsManagement)"
    Write-Verbose "Graph: $([VSTeamVersions]::Graph)"
    Write-Verbose "Policy: $([VSTeamVersions]::Policy)"

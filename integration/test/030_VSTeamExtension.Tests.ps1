@@ -31,11 +31,6 @@ Describe "VSTeamExtension" {
          $($actual | Where-Object name -eq SonarQube) | Should -Not -Be $null
       }
 
-      It 'Add-VSTeamSonarQubeEndpoint Should add service endpoint' {
-         { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `
-               -SonarQubeURl 'http://sonarqube.somewhereIn.cloudapp.azure.com:9000' -PersonalAccessToken 'Faketoken' } | Should -Not -Throw
-      }
-
       It 'Should remove SonarQube Extension' {
          $actual = Remove-VSTeamExtension -PublisherId sonarsource -ExtensionId sonarqube -Force
 

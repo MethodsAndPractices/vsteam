@@ -2,19 +2,19 @@ class VSTeamVersions {
    static [string] $Account = $env:TEAM_ACCT
    static [string] $DefaultProject = $env:TEAM_PROJECT
    static [string] $Version = $(If ($env:TEAM_VERSION) { $env:TEAM_VERSION } Else { "TFS2017" })
+   static [string] $Git = '3.0'
+   static [string] $Core = '3.0'
    static [string] $Build = '3.0'
    static [string] $Release = '3.0-preview'
-   static [string] $Core = '3.0'
-   static [string] $Git = '3.0'
    static [string] $DistributedTask = '3.0-preview'
-   static [string] $VariableGroups = '3.2-preview.1'
-   static [string] $TaskGroups = '3.2-preview.1'
+   static [string] $VariableGroups = ''
+   static [string] $TaskGroups = '3.0-preview'
    static [string] $Tfvc = '3.0'
-   static [string] $Packaging = ''
+   static [string] $Packaging = '3.0-preview'
    static [string] $MemberEntitlementManagement = ''
    static [string] $ExtensionsManagement = ''
-   static [string] $ServiceFabricEndpoint = ''
+   static [string] $ServiceEndpoints = '3.0-preview'
    static [string] $ModuleVersion = $null
    static [string] $Graph = ''
-   static [string] $Policy = ''
+   static [string] $Policy = '3.0'
 }
