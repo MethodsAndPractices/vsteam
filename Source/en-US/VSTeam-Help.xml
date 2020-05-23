@@ -7849,6 +7849,94 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamAPIVersion</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamAPIVersion</command:noun>
+      <maml:description>
+        <maml:para>Returns the versions of APIs used.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Returns the versions of APIs used.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamAPIVersion</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Service</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the service to change. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Build</maml:para>
+            <maml:para>- Release</maml:para>
+            <maml:para>- Core</maml:para>
+            <maml:para>- Git</maml:para>
+            <maml:para>- DistributedTask</maml:para>
+            <maml:para>- Tfvc</maml:para>
+            <maml:para>- Packaging</maml:para>
+            <maml:para>- MemberEntitlementManagement</maml:para>
+            <maml:para>- ExtensionsManagement</maml:para>
+            <maml:para>- ServiceFabricEndpoint</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Service</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the service to change. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- Build</maml:para>
+          <maml:para>- Release</maml:para>
+          <maml:para>- Core</maml:para>
+          <maml:para>- Git</maml:para>
+          <maml:para>- DistributedTask</maml:para>
+          <maml:para>- Tfvc</maml:para>
+          <maml:para>- Packaging</maml:para>
+          <maml:para>- MemberEntitlementManagement</maml:para>
+          <maml:para>- ExtensionsManagement</maml:para>
+          <maml:para>- ServiceFabricEndpoint</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamAPIVersion</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the API versions currently in use.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamAPIVersion -Service Release</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the version of the Release API currently in use.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamApproval</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamApproval</command:noun>
@@ -21435,8 +21523,15 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2017U1</maml:para>
+            <maml:para>- TFS2017U2</maml:para>
+            <maml:para>- TFS2017U3</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- TFS2018U1</maml:para>
+            <maml:para>- TFS2018U2</maml:para>
+            <maml:para>- TFS2018U3</maml:para>
             <maml:para>- AzD2019</maml:para>
+            <maml:para>- AzD2019U1</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
           </maml:Description>
@@ -21514,8 +21609,15 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <maml:Description>
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
+          <maml:para>- TFS2017U1</maml:para>
+          <maml:para>- TFS2017U2</maml:para>
+          <maml:para>- TFS2017U3</maml:para>
           <maml:para>- TFS2018</maml:para>
+          <maml:para>- TFS2018U1</maml:para>
+          <maml:para>- TFS2018U2</maml:para>
+          <maml:para>- TFS2018U3</maml:para>
           <maml:para>- AzD2019</maml:para>
+          <maml:para>- AzD2019U1</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
         </maml:Description>
