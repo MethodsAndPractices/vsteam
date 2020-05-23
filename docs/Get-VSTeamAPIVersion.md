@@ -46,7 +46,7 @@ Specifies the service to change. The acceptable values for this parameter are:
 - Packaging
 - MemberEntitlementManagement
 - ExtensionsManagement
-- ServiceFabricEndpoint
+- ServiceEndpoints
 
 ```yaml
 Type: String

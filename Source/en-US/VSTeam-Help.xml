@@ -7875,7 +7875,7 @@ ID Title          Status
             <maml:para>- Packaging</maml:para>
             <maml:para>- MemberEntitlementManagement</maml:para>
             <maml:para>- ExtensionsManagement</maml:para>
-            <maml:para>- ServiceFabricEndpoint</maml:para>
+            <maml:para>- ServiceEndpoints</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -7900,7 +7900,7 @@ ID Title          Status
           <maml:para>- Packaging</maml:para>
           <maml:para>- MemberEntitlementManagement</maml:para>
           <maml:para>- ExtensionsManagement</maml:para>
-          <maml:para>- ServiceFabricEndpoint</maml:para>
+          <maml:para>- ServiceEndpoints</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -21569,7 +21569,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
             <maml:para>- Packaging</maml:para>
             <maml:para>- MemberEntitlementManagement</maml:para>
             <maml:para>- ExtensionsManagement</maml:para>
-            <maml:para>- ServiceFabricEndpoint</maml:para>
+            <maml:para>- ServiceEndpoints</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -21641,7 +21641,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:para>- Packaging</maml:para>
           <maml:para>- MemberEntitlementManagement</maml:para>
           <maml:para>- ExtensionsManagement</maml:para>
-          <maml:para>- ServiceFabricEndpoint</maml:para>
+          <maml:para>- ServiceEndpoints</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
