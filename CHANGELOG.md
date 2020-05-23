@@ -1,15 +1,18 @@
 # Changelog
 
-## 6.5.1
+## 6.5.0
+
+Added support for different releases of the Server version:
+TFS2017U1, TFS2017U2, TFS2017U3, TFS2018U1, TFS2018U2, TFS2018U3 and AZD2019U1.
+
+The versions for Azure DevOps were also updated to 6.0-preview where supported.
+
+Requires Pester 5.x
+All the tests have been upgraded to use Pester 5.
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
 
 - Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
-
-## 6.5.0
-
-Requires Pester 5.x
-All the tests have been upgraded to use Pester 5.
 
 ## 6.4.8
 

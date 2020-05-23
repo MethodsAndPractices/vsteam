@@ -7849,6 +7849,94 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-VSTeamAPIVersion</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>VSTeamAPIVersion</command:noun>
+      <maml:description>
+        <maml:para>Returns the versions of APIs used.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Returns the versions of APIs used.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamAPIVersion</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Service</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the service to change. The acceptable values for this parameter are:</maml:para>
+            <maml:para>- Build</maml:para>
+            <maml:para>- Release</maml:para>
+            <maml:para>- Core</maml:para>
+            <maml:para>- Git</maml:para>
+            <maml:para>- DistributedTask</maml:para>
+            <maml:para>- Tfvc</maml:para>
+            <maml:para>- Packaging</maml:para>
+            <maml:para>- MemberEntitlementManagement</maml:para>
+            <maml:para>- ExtensionsManagement</maml:para>
+            <maml:para>- ServiceEndpoints</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Service</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the service to change. The acceptable values for this parameter are:</maml:para>
+          <maml:para>- Build</maml:para>
+          <maml:para>- Release</maml:para>
+          <maml:para>- Core</maml:para>
+          <maml:para>- Git</maml:para>
+          <maml:para>- DistributedTask</maml:para>
+          <maml:para>- Tfvc</maml:para>
+          <maml:para>- Packaging</maml:para>
+          <maml:para>- MemberEntitlementManagement</maml:para>
+          <maml:para>- ExtensionsManagement</maml:para>
+          <maml:para>- ServiceEndpoints</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamAPIVersion</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the API versions currently in use.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamAPIVersion -Service Release</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the version of the Release API currently in use.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-VSTeamApproval</command:name>
       <command:verb>Get</command:verb>
       <command:noun>VSTeamApproval</command:noun>
@@ -12625,6 +12713,30 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Area</maml:name>
+          <maml:Description>
+            <maml:para>Returns options for that area's APIs.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Resource</maml:name>
+          <maml:Description>
+            <maml:para>Returns options for that resource's APIs.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -12637,6 +12749,30 @@ ID Title          Status
           <maml:para>- vsrm = Release Management</maml:para>
           <maml:para>- vssps = Graph</maml:para>
           <maml:para>- extmgmt = Extensions</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Area</maml:name>
+        <maml:Description>
+          <maml:para>Returns options for that area's APIs.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Resource</maml:name>
+        <maml:Description>
+          <maml:para>Returns options for that resource's APIs.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -12673,6 +12809,20 @@ ID Title          Status
         <dev:code>PS C:\&gt; Get-VSTeamOption -SubDomain vsrm</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for the release management service.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamOption -Area core</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the versions of supported APIs for the area core.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamOption -Area core -Resource teams</dev:code>
+        <dev:remarks>
+          <maml:para>This will display all the versions of supported APIs for resources teams under the area core.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -21373,8 +21523,15 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2017U1</maml:para>
+            <maml:para>- TFS2017U2</maml:para>
+            <maml:para>- TFS2017U3</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- TFS2018U1</maml:para>
+            <maml:para>- TFS2018U2</maml:para>
+            <maml:para>- TFS2018U3</maml:para>
             <maml:para>- AzD2019</maml:para>
+            <maml:para>- AzD2019U1</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
           </maml:Description>
@@ -21412,7 +21569,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
             <maml:para>- Packaging</maml:para>
             <maml:para>- MemberEntitlementManagement</maml:para>
             <maml:para>- ExtensionsManagement</maml:para>
-            <maml:para>- ServiceFabricEndpoint</maml:para>
+            <maml:para>- ServiceEndpoints</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -21452,8 +21609,15 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <maml:Description>
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
+          <maml:para>- TFS2017U1</maml:para>
+          <maml:para>- TFS2017U2</maml:para>
+          <maml:para>- TFS2017U3</maml:para>
           <maml:para>- TFS2018</maml:para>
+          <maml:para>- TFS2018U1</maml:para>
+          <maml:para>- TFS2018U2</maml:para>
+          <maml:para>- TFS2018U3</maml:para>
           <maml:para>- AzD2019</maml:para>
+          <maml:para>- AzD2019U1</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
         </maml:Description>
@@ -21477,7 +21641,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
           <maml:para>- Packaging</maml:para>
           <maml:para>- MemberEntitlementManagement</maml:para>
           <maml:para>- ExtensionsManagement</maml:para>
-          <maml:para>- ServiceFabricEndpoint</maml:para>
+          <maml:para>- ServiceEndpoints</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -23481,6 +23645,168 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Stop-VSTeamBuild</command:name>
+      <command:verb>Stop</command:verb>
+      <command:noun>VSTeamBuild</command:noun>
+      <maml:description>
+        <maml:para>Allows you to cancel a running build.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Stop-VSTeamBuild will cancel a build using the build id.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Stop-VSTeamBuild</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>The id of the build.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the function.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+        <maml:name>ProjectName</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the team project for which this function operates.</maml:para>
+          <maml:para>You can tab complete from a list of available projects.</maml:para>
+          <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="named" aliases="BuildID">
+        <maml:name>Id</maml:name>
+        <maml:Description>
+          <maml:para>The id of the build.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the function.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the function runs. The function is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>ProjectName</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>BuildId</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
+PS C:\&gt; Stop-VSTeamBuild -id 1</dev:code>
+        <dev:remarks>
+          <maml:para>This example cancels the build with build id 1.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
+PS C:\&gt; $buildsToCancel = Get-VSTeamBuild -StatusFilter "inProgress" | where-object definitionName -eq Build-Defenition-Name
+PS C:\&gt; ForEach($build in $buildsToCancel) { Stop-VSTeamBuild -id $build.id }</dev:code>
+        <dev:remarks>
+          <maml:para>This example will find all builds with a status of "inProgress" and a defenitionName of "Build-Defenition-Name" and then cancel each of these builds.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>

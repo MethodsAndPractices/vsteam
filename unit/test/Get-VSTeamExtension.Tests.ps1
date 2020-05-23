@@ -27,7 +27,7 @@ Describe 'VSTeamExtension' {
          $env:Team_TOKEN = '1234'
 
          Mock _callAPI { return $results }
-         Mock _callAPI { return $singleResult } -ParameterFilter { $resource -eq "extensionmanagement/installedextensionsbyname/test/test" }
+         Mock _callAPI { return $singleResult } -ParameterFilter { $id -eq "test/test" }
       }
 
       AfterAll {
@@ -40,10 +40,10 @@ Describe 'VSTeamExtension' {
 
          ## Assert
          Should -Invoke _callAPI -Exactly 1 -Scope It -ParameterFilter {
-            $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
+            $area -eq 'extensionmanagement' -and
+            $resource -eq 'installedextensions' -and
             $version -eq $(_getApiVersion ExtensionsManagement)
-            $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensions*"
          }
       }
 
@@ -53,13 +53,10 @@ Describe 'VSTeamExtension' {
 
          ## Assert
          Should -Invoke _callAPI -Exactly 1 -Scope It -ParameterFilter {
-            $Method -eq 'Get' -and
             $subDomain -eq 'extmgmt' -and
+            $area -eq 'extensionmanagement' -and
+            $resource -eq 'installedextensions' -and
             $version -eq $(_getApiVersion ExtensionsManagement)
-            $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensions*" -and
-            $Url -like "*includeInstallationIssues*" -and
-            $Url -like "*includeDisabledExtensions*" -and
-            $Url -like "*includeErrors*"
          }
       }
 
@@ -69,12 +66,12 @@ Describe 'VSTeamExtension' {
 
          ## Assert
          Should -Invoke _callAPI -Exactly 1 -Scope It -ParameterFilter {
-            $Method -eq 'Get' -and
+            $id -eq 'test/test' -and
             $subDomain -eq 'extmgmt' -and
+            $area -eq 'extensionmanagement' -and
+            $resource -eq 'installedextensionsbyname' -and
             $version -eq $(_getApiVersion ExtensionsManagement)
-            $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
          }
       }
    }
 }
-

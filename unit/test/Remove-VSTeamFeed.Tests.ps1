@@ -12,7 +12,6 @@ Describe 'VSTeamFeed' {
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
       
-      Mock _supportsFeeds { return $true }
       Mock _getApiVersion { return '1.0-unitTests' }
       Mock _getInstance { return 'https://dev.azure.com/test' }
 

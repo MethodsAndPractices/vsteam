@@ -10,6 +10,7 @@ class VSTeamProject : VSTeamDirectory {
    [string]$State = $null
    [string]$Visibility = $null
    [string]$Description = $null
+   [string]$ProjectName = $null
 
    VSTeamProject (
       [object]$obj
@@ -19,6 +20,20 @@ class VSTeamProject : VSTeamDirectory {
       $this.State = $obj.state
       $this.Revision = $obj.revision
       $this.Visibility = $obj.visibility
+
+      # This is required so we can pipe this object to functions
+      # like Remove-VSTeamProject. Even though the base class has
+      # a name property, without it you will get an 
+      # error stating:
+      #
+      # The input object cannot be bound to any parameters for the 
+      # command either because the command does not take pipeline 
+      # input or the input and its properties do not match any of 
+      # the parameters that take pipeline input.
+      #
+      # Adding this property has it match the ProjectName alias for
+      # name on Remove-VSTeamProject.
+      $this.ProjectName = $obj.name
 
       # The description is not always returned so protect yourself.
       if ($obj.PSObject.Properties.Match('description').count -gt 0) {
