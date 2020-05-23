@@ -26,12 +26,14 @@ class ReleaseDefinitionCompleter : IArgumentCompleter {
       # list.
       if ($projectName) {
          foreach ($r in (Get-VSTeamReleaseDefinition -ProjectName $projectName)) {
-            if ($r.name -like "*$WordToComplete*") {
+            if ($r.name -like "*$WordToComplete*" -and $r.name -notmatch "\W") {
                $results.Add([CompletionResult]::new($r.name))
+            }
+            elseif  ($r.name -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($r.name.replace("'","''"))'", $r.name, 0, $r.name))
             }
          }
       }
-
       return $results
    }
 }
