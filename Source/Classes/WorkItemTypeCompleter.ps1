@@ -25,9 +25,9 @@ class WorkItemTypeCompleter : IArgumentCompleter {
       # If there is no projectName by this point just return a empty
       # list.
       if ($projectName) {
-         foreach ($w in (_getWorkItemTypes -ProjectName $projectName)) {
-            if ($w -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new($w))
+         foreach ($value in (_getWorkItemTypes -ProjectName $projectName)) {
+            if ($value -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
             }
          }
       }

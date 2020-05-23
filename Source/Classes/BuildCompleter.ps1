@@ -29,9 +29,9 @@ class BuildCompleter : IArgumentCompleter {
       # If there is no projectName by this point just return a empty
       # list.
       if ($projectName) {
-         foreach ($b in (Get-VSTeamBuild -ProjectName $projectName)) {
-            if ($b.buildNumber -like "$WordToComplete*") {
-               $results.Add([CompletionResult]::new($b.buildNumber))
+         foreach ($value in (Get-VSTeamBuild -ProjectName $projectName).buildNumber) {
+            if ($value -like "$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
             }
          }
       }
