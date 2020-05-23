@@ -815,7 +815,7 @@ function _trackServiceEndpointProgress {
    # Track status
    while (-not $isReady) {
       $statusTracking = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
-         -Version $(_getApiVersion DistributedTask)
+         -Version $(_getApiVersion ServiceEndpoints)
 
       $isReady = $statusTracking.isReady;
 
