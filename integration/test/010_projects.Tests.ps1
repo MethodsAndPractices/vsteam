@@ -376,7 +376,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Get-VSTeamServiceEndpoint Should return service endpoints' {
          $actual = Get-VSTeamServiceEndpoint -ProjectName $newProjectName
 
-         $actual.Count | Should -Be 1
+         $actual | Should -Not -Be $null
       }
 
       It 'Remove-VSTeamServiceEndpoint Should delete service endpoints' {
