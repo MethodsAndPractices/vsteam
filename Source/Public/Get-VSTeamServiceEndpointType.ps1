@@ -31,12 +31,12 @@ function Get-VSTeamServiceEndpointType {
 
          # Call the REST API
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointtypes'  `
-            -Version $(_getApiVersion DistributedTask) -body $body
+            -Version $(_getApiVersion ServiceEndpoints) -body $body
       }
       else {
          # Call the REST API
          $resp = _callAPI -Area 'distributedtask' -Resource 'serviceendpointtypes'  `
-            -Version $(_getApiVersion DistributedTask)
+            -Version $(_getApiVersion ServiceEndpoints)
       }
 
 

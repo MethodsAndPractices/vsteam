@@ -1,20 +1,5 @@
 Set-StrictMode -Version Latest
 
-##############################################################
-#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
-##############################################################
-# Before running these tests you must set the following      #
-# Environment variables.                                     #
-# $env:API_VERSION = TFS2017, TFS2018, AzD2019 or VSTS       #
-#                    depending on the value used for ACCT    #
-# $env:EMAIL = Email of user to remove and re-add to account #
-# $env:ACCT = VSTS Account Name or full TFS URL including    #
-#             collection                                     #
-# $env:PAT = Personal Access token of ACCT                   #
-##############################################################
-#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
-##############################################################
-
 Describe 'VSTeam Integration Tests' -Tag 'integration' {
    BeforeAll {
       Set-VSTeamAPIVersion -Target $env:API_VERSION
@@ -23,9 +8,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       $acct = $env:ACCT
       $email = $env:EMAIL
       $api = $env:API_VERSION
-      $projectName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
-      $newProjectName = $projectName + [guid]::NewGuid().toString().substring(0, 5) + '1'
-
+      
       $originalLocation = Get-Location
 
       $search = "*$acct*"
@@ -43,8 +26,22 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $oName = $profile.Name
       }
 
+      Remove-VSTeamProfile -Name intTests -Force
       Add-VSTeamProfile -Account $acct -PersonalAccessToken $pat -Version $api -Name intTests
-      Set-VSTeamAccount -Profile intTests -Drive int
+      Set-VSTeamAccount -Profile intTests
+
+      $projectDescription = 'Project for VSTeam integration testing.'
+      $projectName = 'TeamModuleIntegration-' + [guid]::NewGuid().toString().substring(0, 5)
+      $newProjectName = $projectName + [guid]::NewGuid().toString().substring(0, 5) + '1'
+
+      $existingProject = $(Get-VSTeamProject | Where-Object Description -eq $projectDescription)
+
+      if ($existingProject) {
+         $projectName = $existingProject.Name
+      }
+      else {
+         Add-VSTeamProject -Name $projectName -Description $projectDescription | Should -Not -Be $null
+      }
    }
 
    AfterAll {
@@ -54,36 +51,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       if ($oAcct) {
          Add-VSTeamProfile -Account $oAcct -PersonalAccessToken $pat -Version $oVersion -Name $oName
          Set-VSTeamAccount -Profile $oName
-      }
-   }
-
-   Context 'Set-VSTeamDefaultProject' {
-      It 'should set default project' {
-         Set-VSTeamDefaultProject -Project 'MyProject'
-
-         $info = Get-VSTeamInfo
-
-         $info.DefaultProject | Should -Be 'MyProject'
-      }
-
-      It 'should update default project' {
-         Set-VSTeamDefaultProject -Project $newProjectName
-
-         $info = Get-VSTeamInfo
-
-         $info.DefaultProject | Should -Be $newProjectName
-      }
-   }
-
-   Context 'Clear-VSTeamDefaultProject' {
-      It 'should clear default project' {
-         Set-VSTeamDefaultProject -Project 'MyProject'
-
-         Clear-VSTeamDefaultProject
-
-         $info = Get-VSTeamInfo
-            
-         $info.DefaultProject | Should -BeNullOrEmpty
       }
    }
 
@@ -98,49 +65,21 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
    }
 
    Context 'Project full exercise' {
-      It 'Add-VSTeamProject Should create project' {
-         Add-VSTeamProject -Name $projectName | Should -Not -Be $null
-      }
-
       It 'Get-VSTeamProject Should return projects' {
          Get-VSTeamProject -Name $projectName -IncludeCapabilities | Should -Not -Be $null
       }
 
       It 'Update-VSTeamProject Should update description' {
-         Update-VSTeamProject -Name $projectName -NewDescription 'Test Description' -Force
+         Update-VSTeamProject -Name $projectName -NewDescription $projectDescription -Force
 
-         Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty 'Description' | Should -Be 'Test Description'
+         Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty 'Description' | Should -Be $projectDescription
       }
 
       It 'Update-VSTeamProject Should update name' {
          Update-VSTeamProject -Name $projectName -NewName $newProjectName -Force
 
-         Get-VSTeamProject -Name $newProjectName | Select-Object -ExpandProperty 'Description' | Should -Be 'Test Description'
-      }
-   }
-
-   Context 'PS Drive full exercise' {
-      BeforeAll {
-         New-PSDrive -Name int -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
-         $actual = Set-Location int: -PassThru
-      }
-
-      It 'Should be able to mount drive' {
-         $actual | Should -Not -Be $null
-      }
-
-      It 'Should list projects' {
-         Get-ChildItem | Should -Not -Be $null
-      }
-
-      It 'Should list Builds, Releases and Teams' {
-         Set-Location $newProjectName
-         Get-ChildItem | Should -Not -Be $null
-      }
-
-      It 'Should list Teams' {
-         Set-Location 'Teams'
-         Get-ChildItem | Should -Not -Be $null
+         # Calling Get-VSTeamProject with new name verifies the name was changed.
+         Get-VSTeamProject -Name $newProjectName | Select-Object -ExpandProperty 'Description' | Should -Be $projectDescription
       }
    }
 
@@ -151,12 +90,14 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Add-VSTeamGitRepository Should create repository' {
          Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing'
+
          (Get-VSTeamGitRepository -ProjectName $newProjectName).Count | Should -Be 2
          Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing' | Select-Object -ExpandProperty Name | Should -Be 'testing'
       }
 
       It 'Remove-VSTeamGitRepository Should delete repository' {
          Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing' | Select-Object -ExpandProperty Id | Remove-VSTeamGitRepository -Force
+
          Get-VSTeamGitRepository -ProjectName $newProjectName | Where-Object { $_.Name -eq 'testing' } | Should -Be $null
       }
    }
@@ -189,6 +130,10 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $srcBuildDef.name = $newProjectName + "-CI2"
          $tmpBuildDef2 = (New-TemporaryFile).FullName
          $srcBuildDef | ConvertTo-Json -Depth 10 | Set-Content -Path $tmpBuildDef2
+      }
+
+      AfterAll {
+         Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'CI' | Remove-VSTeamGitRepository -Force
       }
 
       It 'Add-VSTeamBuildDefinition should add a build definition' {
@@ -308,81 +253,120 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
-   Context 'Simple Variable Group' {
+   if ($(Get-VSTeamAPIVersion -Service VariableGroups) -ne '') {
+      # Only run these tests on versions that support the API
+      Context 'Simple Variable Group' {
+         BeforeAll {
+            $variableGroupName = "TestVariableGroup1"
+            $variableGroupUpdatedName = "TestVariableGroup2"
+         }
+      
+         It 'Add-VSTeamVariableGroup Should add a variable group' {
+            $parameters = @{
+               ProjectName = $newProjectName
+               Name        = $variableGroupName
+               Description = "A test variable group"
+               Variables   = @{
+                  key1 = @{
+                     value = "value1"
+                  }
+                  key2 = @{
+                     value    = "value2"
+                     isSecret = $true
+                  }
+               }
+            }
+            if ($api -ne 'TFS2017') {
+               $parameters.Add("Type", "Vsts")
+            }
+
+            $newVariableGroup = Add-VSTeamVariableGroup @parameters
+            $newVariableGroup | Should -Not -Be $null
+         }
+
+         It 'Get-VSTeamVariableGroup Should get the variable group created first by list then by id' {
+            $existingVariableGroups = , (Get-VSTeamVariableGroup -ProjectName $newProjectName)
+            $existingVariableGroups.Count | Should -BeGreaterThan 0
+
+            $newVariableGroup = ($existingVariableGroups | Where-Object { $_.Name -eq $variableGroupName })
+            $newVariableGroup | Should -Not -Be $null
+
+            $existingVariableGroup = Get-VSTeamVariableGroup -ProjectName $newProjectName -Id $newVariableGroup.Id
+            $existingVariableGroup | Should -Not -Be $null
+         }
+
+         It 'Update-VSTeamVariableGroup Should update the variable group' {
+            $newVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupName })
+            $newVariableGroup | Should -Not -Be $null
+
+            $parameters = @{
+               ProjectName = $newProjectName
+               Id          = $newVariableGroup.Id
+               Name        = $variableGroupUpdatedName
+               Description = "A test variable group update"
+               Variables   = @{
+                  key3 = @{
+                     value = "value3"
+                  }
+               }
+            }
+            if ($api -ne 'TFS2017') {
+               $parameters.Add("Type", "Vsts")
+            }
+
+            $updatedVariableGroup = Update-VSTeamVariableGroup @parameters
+            $updatedVariableGroup | Should -Not -Be $null
+         }
+
+         It 'Remove-VSTeamVariableGroup Should remove the variable group' {
+            $updatedVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupUpdatedName })
+            $updatedVariableGroup | Should -Not -Be $null
+            { Remove-VSTeamVariableGroup -ProjectName $newProjectName -Id $updatedVariableGroup.Id -Force } | Should -Not -Throw
+         }
+      }
+   }
+
+   Context 'Policy full exercise' {
       BeforeAll {
-         $variableGroupName = "TestVariableGroup1"
-         $variableGroupUpdatedName = "TestVariableGroup2"
-      }
-      It 'Add-VSTeamVariableGroup Should add a variable group' {
-         $parameters = @{
-            ProjectName = $newProjectName
-            Name        = $variableGroupName
-            Description = "A test variable group"
-            Variables   = @{
-               key1 = @{
-                  value = "value1"
-               }
-               key2 = @{
-                  value    = "value2"
-                  isSecret = $true
-               }
-            }
-         }
-         if ($api -ne 'TFS2017') {
-            $parameters.Add("Type", "Vsts")
-         }
-
-         $newVariableGroup = Add-VSTeamVariableGroup @parameters
-         $newVariableGroup | Should -Not -Be $null
+         $actualTypes = Get-VSTeamPolicyType -ProjectName $newProjectName
       }
 
-      It 'Get-VSTeamVariableGroup Should get the variable group created first by list then by id' {
-         $existingVariableGroups = , (Get-VSTeamVariableGroup -ProjectName $newProjectName)
-         $existingVariableGroups.Count | Should -BeGreaterThan 0
-
-         $newVariableGroup = ($existingVariableGroups | Where-Object { $_.Name -eq $variableGroupName })
-         $newVariableGroup | Should -Not -Be $null
-
-         $existingVariableGroup = Get-VSTeamVariableGroup -ProjectName $newProjectName -Id $newVariableGroup.Id
-         $existingVariableGroup | Should -Not -Be $null
+      It 'Should return all policy types' {
+         $actualTypes | Should -Not -Be $null
       }
 
-      It 'Update-VSTeamVariableGroup Should update the variable group' {
-         $newVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupName })
-         $newVariableGroup | Should -Not -Be $null
+      It 'Should add Policy' {
+         $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
+         $repoId = $(Get-VSTeamGitRepository -ProjectName $newProjectName -Name $newProjectName | Select-Object -ExpandProperty Id)
+         
+         Add-VSTeamPolicy -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 1; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" }) }
 
-         $parameters = @{
-            ProjectName = $newProjectName
-            Id          = $newVariableGroup.Id
-            Name        = $variableGroupUpdatedName
-            Description = "A test variable group update"
-            Variables   = @{
-               key3 = @{
-                  value = "value3"
-               }
-            }
-         }
-         if ($api -ne 'TFS2017') {
-            $parameters.Add("Type", "Vsts")
-         }
-
-         $updatedVariableGroup = Update-VSTeamVariableGroup @parameters
-         $updatedVariableGroup | Should -Not -Be $null
+         $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
+         
+         $newPolicy | Should -Not -Be $null
+         $newPolicy.settings.minimumApproverCount | Should -Be 1
       }
 
-      It 'Remove-VSTeamVariableGroup Should remove the variable group' {
-         $updatedVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupUpdatedName })
-         $updatedVariableGroup | Should -Not -Be $null
-         { Remove-VSTeamVariableGroup -ProjectName $newProjectName -Id $updatedVariableGroup.Id -Force } | Should -Not -Throw
+      It 'Should update Policy' {
+         $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
+         $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
+         $newPolicy = Update-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 2; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" }) }
+         
+         $newPolicy.settings.minimumApproverCount | Should -Be 2
+      }
+
+      It 'Should remove Policy' {
+         $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
+         Remove-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName
+
+         Get-VSTeamPolicy -ProjectName $newProjectName | Should -Be $null
       }
    }
 
    Context 'Service Endpoints full exercise' {
-      It 'Add-VSTeamSonarQubeEndpoint Should add service endpoint' {
-         { Add-VSTeamSonarQubeEndpoint -ProjectName $newProjectName -EndpointName 'TestSonarQube' `
-               -SonarQubeURl 'http://sonarqube.somewhereIn.cloudapp.azure.com:9000' -PersonalAccessToken 'Faketoken' } | Should -Not -Throw
+      BeforeAll {
+         $newProjectName = $(Get-VSTeamProject | Where-Object Description -eq $projectDescription)
       }
-
       It 'Add-VSTeamAzureRMServiceEndpoint Should add service endpoint' {
          { Add-VSTeamAzureRMServiceEndpoint -ProjectName $newProjectName -displayName 'AzureEndoint' `
                -subscriptionId '00000000-0000-0000-0000-000000000000' -subscriptionTenantId '00000000-0000-0000-0000-000000000000' `
@@ -392,27 +376,13 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Get-VSTeamServiceEndpoint Should return service endpoints' {
          $actual = Get-VSTeamServiceEndpoint -ProjectName $newProjectName
 
-         $actual.Count | Should -Be 2
+         $actual | Should -Not -Be $null
       }
 
       It 'Remove-VSTeamServiceEndpoint Should delete service endpoints' {
          Get-VSTeamServiceEndpoint -ProjectName $newProjectName | Remove-VSTeamServiceEndpoint -ProjectName $newProjectName -Force
 
          Get-VSTeamServiceEndpoint -ProjectName $newProjectName | Should -Be $null
-      }
-
-      # Not supported on TFS 2017
-      if ($env:API_VERSION -ne 'TFS2017') {
-         It 'Add-VSTeamServiceFabricEndpoint Should add service endpoint' {
-            { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
-                  -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should -Not -Be $null
-         }
-      }
-      else {
-         It 'Add-VSTeamServiceFabricEndpoint not supported on TFS2017 Should throw' {
-            { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
-                  -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should -Throw
-         }
       }
    }
 
@@ -453,10 +423,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             (Get-VSTeamUserEntitlement).Count | Should -Be 3
          }
       }
-   }
-
-   # Not supported on TFS
-   if (-not ($env:ACCT -like "http://*")) {      
+   
       Context 'Feed exercise' {
          BeforeAll {
             $FeedName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
@@ -484,10 +451,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             Get-VSTeamFeed | Where-Object name -eq $FeedName | Should -Be $null
          }
       }
-   }
-
-   # Not supported on TFS
-   if (-not ($env:ACCT -like "http://*")) {
+   
       Context 'Access control list' {
          It 'Get-VSTeamAccessControlList should return without error' {
             $(Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList) | Should -Not -Be $null
@@ -557,22 +521,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $info = Get-VSTeamInfo
 
          $info.DefaultProject | Should -BeNullOrEmpty
-      }
-
-      It 'Remove-VSTeamProject Should remove Project' {
-         Set-VSTeamAPIVersion $env:API_VERSION
-
-         # I have noticed that if the delete happens too soon you will get a
-         # 400 response and told to try again later. So this test needs to be
-         # retried. We need to wait a minute after the rename before we try
-         # and delete
-         Start-Sleep -Seconds 60
-
-         Remove-VSTeamProject -ProjectName $newProjectName -Force
-      }
-
-      It 'Remove-VSTeamAccount Should remove account' {
-         Remove-VSTeamAccount
       }
    }
 }

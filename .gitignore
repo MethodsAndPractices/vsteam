@@ -30,3 +30,5 @@ coverage.xml
 **/.DS_Store
 **/._.DS_Store
 .gdn
+integration/fullRun.ps1
+integration/Start-PSCountdown.ps1

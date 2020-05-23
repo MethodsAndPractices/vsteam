@@ -14,7 +14,7 @@ function Add-VSTeamProfile {
 
       [string] $Name,
 
-      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS')]
+      [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1', 'TFS2017U2', 'TFS2017U3', 'TFS2018U1', 'TFS2018U2', 'TFS2018U3', 'AzD2019U1')]
       [string] $Version,
 
       [switch] $UseBearerToken

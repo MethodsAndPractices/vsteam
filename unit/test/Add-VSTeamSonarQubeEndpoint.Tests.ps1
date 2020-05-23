@@ -19,7 +19,7 @@ Describe 'VSTeamSonarQubeEndpoint' {
          Mock _hasProjectCacheExpired { return $false }
 
          Mock _getInstance { return 'https://dev.azure.com/test' }
-         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceFabricEndpoint' }
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
 
          Mock Write-Warning
          Mock Write-Error -Verifiable

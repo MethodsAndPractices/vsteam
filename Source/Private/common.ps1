@@ -115,17 +115,6 @@ function _testGraphSupport {
    (_getApiVersion Graph) -as [boolean]
 }
 
-function _supportsFeeds {
-   _hasAccount
-   if ($false -eq $(_testFeedSupport)) {
-      throw 'This account does not support packages.'
-   }
-}
-
-function _testFeedSupport {
-   (_getApiVersion Packaging) -as [boolean]
-}
-
 function _supportsSecurityNamespace {
    _hasAccount
    if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
@@ -154,7 +143,7 @@ function _getApiVersion {
    [CmdletBinding(DefaultParameterSetName = 'Service')]
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph', 'TaskGroups', 'Policy')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -197,8 +186,8 @@ function _getApiVersion {
          'ExtensionsManagement' {
             return [VSTeamVersions]::ExtensionsManagement
          }
-         'ServiceFabricEndpoint' {
-            return [VSTeamVersions]::ServiceFabricEndpoint
+         'ServiceEndpoints' {
+            return [VSTeamVersions]::ServiceEndpoints
          }
          'Graph' {
             return [VSTeamVersions]::Graph
@@ -826,7 +815,7 @@ function _trackServiceEndpointProgress {
    # Track status
    while (-not $isReady) {
       $statusTracking = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
-         -Version $(_getApiVersion DistributedTask)
+         -Version $(_getApiVersion ServiceEndpoints)
 
       $isReady = $statusTracking.isReady;
 
@@ -845,12 +834,6 @@ function _trackServiceEndpointProgress {
       if ($iTracking -eq $yTracking -or $iTracking -eq 0) {
          $xTracking *= -1
       }
-   }
-}
-
-function _supportsServiceFabricEndpoint {
-   if (-not $(_getApiVersion ServiceFabricEndpoint)) {
-      throw 'This account does not support Service Fabric endpoints.'
    }
 }
 
