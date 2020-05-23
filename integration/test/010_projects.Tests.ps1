@@ -26,7 +26,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $oName = $profile.Name
       }
 
-      Remove-Profile -Name intTests -Force
+      Remove-VSTeamProfile -Name intTests -Force
       Add-VSTeamProfile -Account $acct -PersonalAccessToken $pat -Version $api -Name intTests
       Set-VSTeamAccount -Profile intTests
 
@@ -36,9 +36,10 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       $existingProject = $(Get-VSTeamProject | Where-Object Description -eq $projectDescription)
 
-      if($existingProject) {
+      if ($existingProject) {
          $projectName = $existingProject.Name
-      } else {
+      }
+      else {
          Add-VSTeamProject -Name $projectName -Description $projectDescription | Should -Not -Be $null
       }
    }
@@ -252,73 +253,76 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
-   Context 'Simple Variable Group' {
-      BeforeAll {
-         $variableGroupName = "TestVariableGroup1"
-         $variableGroupUpdatedName = "TestVariableGroup2"
-      }
+   if ($(Get-VSTeamAPIVersion -Service VariableGroups) -ne '') {
+      # Only run these tests on versions that support the API
+      Context 'Simple Variable Group' {
+         BeforeAll {
+            $variableGroupName = "TestVariableGroup1"
+            $variableGroupUpdatedName = "TestVariableGroup2"
+         }
       
-      It 'Add-VSTeamVariableGroup Should add a variable group' {
-         $parameters = @{
-            ProjectName = $newProjectName
-            Name        = $variableGroupName
-            Description = "A test variable group"
-            Variables   = @{
-               key1 = @{
-                  value = "value1"
-               }
-               key2 = @{
-                  value    = "value2"
-                  isSecret = $true
-               }
-            }
-         }
-         if ($api -ne 'TFS2017') {
-            $parameters.Add("Type", "Vsts")
-         }
-
-         $newVariableGroup = Add-VSTeamVariableGroup @parameters
-         $newVariableGroup | Should -Not -Be $null
-      }
-
-      It 'Get-VSTeamVariableGroup Should get the variable group created first by list then by id' {
-         $existingVariableGroups = , (Get-VSTeamVariableGroup -ProjectName $newProjectName)
-         $existingVariableGroups.Count | Should -BeGreaterThan 0
-
-         $newVariableGroup = ($existingVariableGroups | Where-Object { $_.Name -eq $variableGroupName })
-         $newVariableGroup | Should -Not -Be $null
-
-         $existingVariableGroup = Get-VSTeamVariableGroup -ProjectName $newProjectName -Id $newVariableGroup.Id
-         $existingVariableGroup | Should -Not -Be $null
-      }
-
-      It 'Update-VSTeamVariableGroup Should update the variable group' {
-         $newVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupName })
-         $newVariableGroup | Should -Not -Be $null
-
-         $parameters = @{
-            ProjectName = $newProjectName
-            Id          = $newVariableGroup.Id
-            Name        = $variableGroupUpdatedName
-            Description = "A test variable group update"
-            Variables   = @{
-               key3 = @{
-                  value = "value3"
+         It 'Add-VSTeamVariableGroup Should add a variable group' {
+            $parameters = @{
+               ProjectName = $newProjectName
+               Name        = $variableGroupName
+               Description = "A test variable group"
+               Variables   = @{
+                  key1 = @{
+                     value = "value1"
+                  }
+                  key2 = @{
+                     value    = "value2"
+                     isSecret = $true
+                  }
                }
             }
-         }
-         if ($api -ne 'TFS2017') {
-            $parameters.Add("Type", "Vsts")
+            if ($api -ne 'TFS2017') {
+               $parameters.Add("Type", "Vsts")
+            }
+
+            $newVariableGroup = Add-VSTeamVariableGroup @parameters
+            $newVariableGroup | Should -Not -Be $null
          }
 
-         $updatedVariableGroup = Update-VSTeamVariableGroup @parameters
-         $updatedVariableGroup | Should -Not -Be $null
-      }
+         It 'Get-VSTeamVariableGroup Should get the variable group created first by list then by id' {
+            $existingVariableGroups = , (Get-VSTeamVariableGroup -ProjectName $newProjectName)
+            $existingVariableGroups.Count | Should -BeGreaterThan 0
 
-      It 'Remove-VSTeamVariableGroup Should remove the variable group' {
-         $updatedVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupUpdatedName })
-         $updatedVariableGroup | Should -Not -Be $null
-         { Remove-VSTeamVariableGroup -ProjectName $newProjectName -Id $updatedVariableGroup.Id -Force } | Should -Not -Throw
+            $newVariableGroup = ($existingVariableGroups | Where-Object { $_.Name -eq $variableGroupName })
+            $newVariableGroup | Should -Not -Be $null
+
+            $existingVariableGroup = Get-VSTeamVariableGroup -ProjectName $newProjectName -Id $newVariableGroup.Id
+            $existingVariableGroup | Should -Not -Be $null
+         }
+
+         It 'Update-VSTeamVariableGroup Should update the variable group' {
+            $newVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupName })
+            $newVariableGroup | Should -Not -Be $null
+
+            $parameters = @{
+               ProjectName = $newProjectName
+               Id          = $newVariableGroup.Id
+               Name        = $variableGroupUpdatedName
+               Description = "A test variable group update"
+               Variables   = @{
+                  key3 = @{
+                     value = "value3"
+                  }
+               }
+            }
+            if ($api -ne 'TFS2017') {
+               $parameters.Add("Type", "Vsts")
+            }
+
+            $updatedVariableGroup = Update-VSTeamVariableGroup @parameters
+            $updatedVariableGroup | Should -Not -Be $null
+         }
+
+         It 'Remove-VSTeamVariableGroup Should remove the variable group' {
+            $updatedVariableGroup = (Get-VSTeamVariableGroup -ProjectName $newProjectName | Where-Object { $_.Name -eq $variableGroupUpdatedName })
+            $updatedVariableGroup | Should -Not -Be $null
+            { Remove-VSTeamVariableGroup -ProjectName $newProjectName -Id $updatedVariableGroup.Id -Force } | Should -Not -Throw
+         }
       }
    }
 
@@ -372,27 +376,13 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Get-VSTeamServiceEndpoint Should return service endpoints' {
          $actual = Get-VSTeamServiceEndpoint -ProjectName $newProjectName
 
-         $actual.Count | Should -Be $null
+         $actual.Count | Should -Be 1
       }
 
       It 'Remove-VSTeamServiceEndpoint Should delete service endpoints' {
          Get-VSTeamServiceEndpoint -ProjectName $newProjectName | Remove-VSTeamServiceEndpoint -ProjectName $newProjectName -Force
 
          Get-VSTeamServiceEndpoint -ProjectName $newProjectName | Should -Be $null
-      }
-
-      # Not supported on TFS 2017
-      if ($env:API_VERSION -ne 'TFS2017') {
-         It 'Add-VSTeamServiceFabricEndpoint Should add service endpoint' {
-            { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
-                  -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should -Not -Be $null
-         }
-      }
-      else {
-         It 'Add-VSTeamServiceFabricEndpoint not supported on TFS2017 Should throw' {
-            { Add-VSTeamServiceFabricEndpoint -ProjectName $newProjectName -endpointName 'ServiceFabricTestEndoint' `
-                  -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false } | Should -Throw
-         }
       }
    }
 
@@ -433,10 +423,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             (Get-VSTeamUserEntitlement).Count | Should -Be 3
          }
       }
-   }
-
-   # Not supported on TFS
-   if (-not ($env:ACCT -like "http://*")) {      
+   
       Context 'Feed exercise' {
          BeforeAll {
             $FeedName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
@@ -464,10 +451,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             Get-VSTeamFeed | Where-Object name -eq $FeedName | Should -Be $null
          }
       }
-   }
-
-   # Not supported on TFS
-   if (-not ($env:ACCT -like "http://*")) {
+   
       Context 'Access control list' {
          It 'Get-VSTeamAccessControlList should return without error' {
             $(Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList) | Should -Not -Be $null
