@@ -1,5 +1,5 @@
 {
-   "outputFile": "vsteam.psm1",
+   "outputFile": "vsteam.classes.ps1",
    "fileType": "classes",
    "files": [
       "InvokeCompleter.ps1",
