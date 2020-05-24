@@ -38,7 +38,9 @@ param(
 
    # outputs the code coverage
    [Parameter(ParameterSetName = "UnitTest")]
-   [switch]$codeCoverage
+   [switch]$codeCoverage,
+
+   [switch]$WithPublicClasses
 )
 
 . ./Merge-File.ps1
@@ -83,6 +85,12 @@ if ($buildHelp.IsPresent) {
 Write-Output 'Publishing about help files'
 Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
 Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
+if ($WithPublicClasses) {
+   Write-Output "Merging classes.ps1 into VSTeam.ps1"
+   Get-Content -Path "$output/VSTeam.psm1" | Out-File -Append -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
+   Copy-Item   -Path "$output/vsteam.classes.ps1" -Destination "$output/VSTeam.psm1" 
+   "#empty" |  Out-File -Force -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
+}
 
 Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
