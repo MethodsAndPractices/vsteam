@@ -2,6 +2,8 @@
 
 ## 6.5.0
 
+Changed the completers to quote all values.
+
 Added support for different releases of the Server version:
 TFS2017U1, TFS2017U2, TFS2017U3, TFS2018U1, TFS2018U2, TFS2018U3 and AZD2019U1.
 
