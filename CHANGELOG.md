@@ -30,7 +30,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/286) from [Se
 
 ## 6.4.7
 
-_callAPI, _buildRequestURI and Invoke-VSTeamRequest now support UseProjectId switch if the Project ID is required for the API call.
+\_callAPI, \_buildRequestURI and Invoke-VSTeamRequest now support UseProjectId switch if the Project ID is required for the API call.
 
 Addressed following issues:
 
@@ -110,7 +110,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/237) from [Mi
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/232) from [Mark Wragg](https://github.com/markwragg) which included the following:
 
-- Bug fix in Get-VSTeamBuildArtifact where an error is returned because the API returns an extra record along with the list of artifacts that is called 'build.sourcelabel' and contains a URL but no "properties" object.
+- Bug fix in Get-VSTeamBuildArtifact where an error is returned because the API returns an extra record along with the list of artifacts that is called 'build.sourceLabel' and contains a URL but no "properties" object.
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/231) from [Dave Neeley](https://github.com/daveneeley) which included the following:
 
@@ -177,7 +177,7 @@ maxParallelism to Disable/Enable-VSTeamAgent
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/205) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-Get-VSTeamWiql to get work items via [WIQL](https://docs.microsoft.com/en-us/rest/api/azure/devops/wit/wiql?view=azure-devops-rest-5.1) and also to expand the returned work items with all fields selected.
+Get-VSTeamWiql to get work items via [WIQL](https://docs.microsoft.com/rest/api/azure/devops/wit/wiql?view=azure-devops-rest-5.1&WT.mc_id=-github-dbrown) and also to expand the returned work items with all fields selected.
 
 **Breaking changes**:
 
@@ -196,7 +196,7 @@ Updated Merge-File.ps1 to clean trailing white-space.
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/199) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-bug fix for update and add workitem
+bug fix for update and add workItem
 
 ## 6.3.4
 
@@ -482,7 +482,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/102) from [Br
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/93) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
-- replaced {accountname}.visualstudio.com with dev.azure.com/{accountname}
+- replaced {accountName}.visualStudio.com with dev.azure.com/{accountName}
 
 ## 4.0.7
 
@@ -906,7 +906,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/8) from [Mich
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Added serviceEndpoint parameters to Add-VSTeamAzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
-- The _trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/en-us/docs/integrate/api/endpoints/endpoints)
+- The _trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/docs/integrate/api/endpoints/endpoints?WT.mc_id=-github-dbrown)
 - The URL in the payload changed to [https://management.azure.com](https://management.azure.com)
 
 ## 0.1.19
