@@ -1,44 +1,44 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
+Describe 'VSTeamClassificationNode' {
+   BeforeAll {
+      Import-Module SHiPS
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/VSTeamClassificationNode.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-Describe 'Remove-VSTeamClassificationNode' {
+      $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
 
-   $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+   }
 
-
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-   Context 'simplest call' {
-      Mock Invoke-RestMethod {
-         #Write-Host $args
-         return $classificationNodeResult 
-      }      
+   Context 'Remove-VSTeamClassificationNode' {
+      BeforeAll {
+         Mock Invoke-RestMethod {
+            #Write-Host $args
+            return $classificationNodeResult
+         }
+      }
 
       It 'with StructureGroup "<StructureGroup>" should delete Nodes' -TestCases @(
          @{StructureGroup = "areas" }
          @{StructureGroup = "iterations" }
       ) {
-         param ($StructureGroup)      
+         param ($StructureGroup)
          ## Act
-         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup
+         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Force
+
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/$StructureGroup*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*"
@@ -46,14 +46,15 @@ Describe 'Remove-VSTeamClassificationNode' {
       }
 
       It 'with StructureGroup "<StructureGroup>" should delete Nodes with reclassification id <ReClassifyId>' -TestCases @(
-         @{StructureGroup = "areas"; ReClassifyId = 4}
+         @{StructureGroup = "areas"; ReClassifyId = 4 }
          @{StructureGroup = "iterations"; ReClassifyId = 99 }
       ) {
-         param ($StructureGroup, $ReClassifyId)      
+         param ($StructureGroup, $ReClassifyId)
          ## Act
-         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -ReClassifyId $ReClassifyId
+         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -ReClassifyId $ReClassifyId -Force
+
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/$StructureGroup*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*"
@@ -66,30 +67,30 @@ Describe 'Remove-VSTeamClassificationNode' {
          @{StructureGroup = "iterations"; Path = "SubPath" }
          @{StructureGroup = "iterations"; Path = "Path/SubPath" }
       ) {
-         param ($StructureGroup, $Path)      
+         param ($StructureGroup, $Path)
          ## Act
-         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Path $Path
+         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Path $Path -Force
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/$StructureGroup/$Path*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*"
          }
       }
-      
+
       It 'with StructureGroup "<StructureGroup>" by empty Path "<Path>" should delete Nodes' -TestCases @(
          @{StructureGroup = "areas"; Path = "" }
          @{StructureGroup = "areas"; Path = $null }
          @{StructureGroup = "iterations"; Path = "" }
          @{StructureGroup = "iterations"; Path = $null }
       ) {
-         param ($StructureGroup, $Path)      
+         param ($StructureGroup, $Path)
          ## Act
-         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Path $Path
+         Remove-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Path $Path -Force
 
          ## Assert
-         Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq "Delete" -and
             $Uri -like "https://dev.azure.com/test/Public Demo/_apis/wit/classificationnodes/$StructureGroup?*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*"

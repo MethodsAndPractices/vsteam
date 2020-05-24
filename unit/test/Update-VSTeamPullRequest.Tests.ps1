@@ -1,42 +1,40 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
+Describe 'VSTeamPullRequest' {
+   BeforeAll {
+      Import-Module SHiPS
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamDirectory.ps1"
-. "$here/../../Source/Classes/VSTeamUser.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/Get-VSTeamUser.ps1"
-. "$here/../../Source/Public/Set-VSTeamAPIVersion.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamUser.ps1"
+      . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-Describe 'Pull Requests' {
-   Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getInstance { return 'https://dev.azure.com/test' }
 
-   # You have to set the version or the api-version will not be added when versions = ''
-   Mock _getApiVersion { return '1.0-unitTest' } -ParameterFilter { $Service -eq 'Git' -or $Service -eq 'Graph' }
+      # You have to set the version or the api-version will not be added when versions = ''
+      Mock _getApiVersion { return '1.0-unitTest' } -ParameterFilter { $Service -eq 'Git' -or $Service -eq 'Graph' }
 
-   $result = Get-Content "$PSScriptRoot\sampleFiles\updatePullRequestResponse.json" -Raw | ConvertFrom-Json
-   $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+      $result = Get-Content "$PSScriptRoot\sampleFiles\updatePullRequestResponse.json" -Raw | ConvertFrom-Json
+      $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+   }
 
    Context 'Update-VSTeamPullRequest' {
-
       It 'Update-VSTeamPullRequest to Draft' {
          Mock Invoke-RestMethod { return $result }
 
          Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Draft -Force
 
-         Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests/19543*" -and
@@ -49,7 +47,7 @@ Describe 'Pull Requests' {
 
          Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Force
 
-         Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests/19543*" -and
@@ -62,7 +60,7 @@ Describe 'Pull Requests' {
 
          Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Status abandoned -Force
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests/19543*" -and
@@ -77,12 +75,12 @@ Describe 'Pull Requests' {
 
          Mock Invoke-RestMethod { return $result }
          Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" `
-                                  -PullRequestId 19543 `
-                                  -EnableAutoComplete `
-                                  -AutoCompleteIdentity $user `
-                                  -Force
+            -PullRequestId 19543 `
+            -EnableAutoComplete `
+            -AutoCompleteIdentity $user `
+            -Force
 
-         Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests/19543*" -and
@@ -94,7 +92,7 @@ Describe 'Pull Requests' {
          Mock Invoke-RestMethod { return $result }
          Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -DisableAutoComplete -Force
 
-         Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests/19543*" -and

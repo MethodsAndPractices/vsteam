@@ -27,7 +27,7 @@ function Update-VSTeamPolicy {
          $policy = Get-VSTeamPolicy -ProjectName $ProjectName -Id $id | Select-Object -First 1
          $type = $policy.type.id
       }
-      
+
       $body = @{
          isEnabled  = $enabled.IsPresent;
          isBlocking = $blocking.IsPresent;

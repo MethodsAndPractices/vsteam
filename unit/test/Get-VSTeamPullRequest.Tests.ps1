@@ -1,79 +1,81 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
-
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProcess.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Classes/VSTeamProcessCache.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
-
 Describe 'VSTeamPullRequest' {
-   # You have to manually load the type file so the property reviewStatus
-   # can be tested.
-   Update-TypeData -AppendPath "$here/../../Source/types/Team.PullRequest.ps1xml" -ErrorAction Ignore
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+      
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProcess.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProcessCache.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+      
 
-   Mock _getProjects { return $null }
-   Mock _hasProjectCacheExpired { return $true }
+      # You have to manually load the type file so the property reviewStatus
+      # can be tested.
+      Update-TypeData -AppendPath "$PSScriptRoot/../../Source/types/Team.PullRequest.ps1xml" -ErrorAction Ignore
 
-   Mock _getInstance { return 'https://dev.azure.com/test' }
-   Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
+      Mock _getProjects { return $null }
+      Mock _hasProjectCacheExpired { return $true }
 
-   $singleResult = @{
-      pullRequestId  = 1
-      repositoryName = "testreponame"
-      repository     = @{
-         project = @{
-            name = "testproject"
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
+
+      $singleResult = @{
+         pullRequestId  = 1
+         repositoryName = "testreponame"
+         repository     = @{
+            project = @{
+               name = "testproject"
+            }
+         }
+         reviewers      = @{
+            vote = 0
          }
       }
-      reviewers      = @{
-         vote = 0
-      }
-   }
 
-   $collection = @{
-      value = @($singleResult)
+      $collection = @{
+         value = @($singleResult)
+      }
    }
 
    Context 'Get-VSTeamPullRequest' {
-      Mock Invoke-RestMethod { return $collection }
-      Mock Invoke-RestMethod {
-         $result = $singleResult
-         $result.reviewers.vote = 0
-         return $result
-      } -ParameterFilter { 
-         $Uri -like "*101*"
-      }
+      BeforeAll {
+         Mock Invoke-RestMethod { return $collection }
+         Mock Invoke-RestMethod {
+            $result = $singleResult
+            $result.reviewers.vote = 0
+            return $result
+         } -ParameterFilter {
+            $Uri -like "*101*"
+         }
 
-      Mock Invoke-RestMethod {
-         $result = $singleResult
-         $result.reviewers.vote = 10
-         return $result
-      } -ParameterFilter { 
-         $Uri -like "*110*"
-      }
+         Mock Invoke-RestMethod {
+            $result = $singleResult
+            $result.reviewers.vote = 10
+            return $result
+         } -ParameterFilter {
+            $Uri -like "*110*"
+         }
 
-      Mock Invoke-RestMethod {
-         $result = $singleResult
-         $result.reviewers.vote = -10
-         return $result
-      } -ParameterFilter { 
-         $Uri -like "*100*"
+         Mock Invoke-RestMethod {
+            $result = $singleResult
+            $result.reviewers.vote = -10
+            return $result
+         } -ParameterFilter {
+            $Uri -like "*100*"
+         }
       }
 
       It 'with no parameters' {
          $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamPullRequest
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/git/pullRequests?api-version=$(_getApiVersion Git)"
          }
       }
@@ -82,7 +84,7 @@ Describe 'VSTeamPullRequest' {
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'testproject'
          Get-VSTeamPullRequest -ProjectName testproject
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/testproject/_apis/git/pullRequests?api-version=$(_getApiVersion Git)"
          }
       }
@@ -91,7 +93,7 @@ Describe 'VSTeamPullRequest' {
          $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamPullRequest -ProjectName testproject
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/testproject/_apis/git/pullRequests?api-version=$(_getApiVersion Git)"
          }
       }
@@ -99,7 +101,7 @@ Describe 'VSTeamPullRequest' {
       It 'By ID' {
          Get-VSTeamPullRequest -Id 101
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/git/pullRequests/101?api-version=$(_getApiVersion Git)"
          }
       }
@@ -107,7 +109,7 @@ Describe 'VSTeamPullRequest' {
       It 'with All' {
          Get-VSTeamPullRequest -ProjectName Test -All
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*status=all*"
@@ -117,7 +119,7 @@ Describe 'VSTeamPullRequest' {
       It 'with Status abandoned' {
          Get-VSTeamPullRequest -ProjectName Test -Status abandoned
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*status=abandoned*"
@@ -127,7 +129,7 @@ Describe 'VSTeamPullRequest' {
       It 'with source branch' {
          Get-VSTeamPullRequest -ProjectName Test -SourceBranchRef "refs/heads/mybranch"
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*searchCriteria.sourceRefName=refs/heads/mybranch*"
@@ -137,7 +139,7 @@ Describe 'VSTeamPullRequest' {
       It 'with target branch' {
          Get-VSTeamPullRequest -ProjectName Test -TargetBranchRef "refs/heads/mybranch"
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*searchCriteria.targetRefName=refs/heads/mybranch*"
@@ -147,7 +149,7 @@ Describe 'VSTeamPullRequest' {
       It 'with repository id' {
          Get-VSTeamPullRequest -ProjectName Test -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF"
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*repositories/93BBA613-2729-4158-9217-751E952AB4AF*"
@@ -157,7 +159,7 @@ Describe 'VSTeamPullRequest' {
       It 'with source repository id' {
          Get-VSTeamPullRequest -ProjectName Test -SourceRepositoryId "93BBA613-2729-4158-9217-751E952AB4AF"
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*searchCriteria.sourceRepositoryId=93BBA613-2729-4158-9217-751E952AB4AF*"
@@ -167,7 +169,7 @@ Describe 'VSTeamPullRequest' {
       It 'with top and skip' {
          Get-VSTeamPullRequest -ProjectName Test -SourceRepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -Top 100 -Skip 200
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*api-version=$(_getApiVersion Git)*" -and
             $Uri -like "*Test/_apis/git*" -and
             $Uri -like "*searchCriteria.sourceRepositoryId=93BBA613-2729-4158-9217-751E952AB4AF*" -and
@@ -177,29 +179,30 @@ Describe 'VSTeamPullRequest' {
       }
 
       It 'with source branch in wrong format throws' {
-         { Get-VSTeamPullRequest -ProjectName Test -SourceBranchRef "garbage" } | should throw
+         { Get-VSTeamPullRequest -ProjectName Test -SourceBranchRef "garbage" } | Should -Throw
       }
 
       It 'with target branch in wrong format throws' {
-         { Get-VSTeamPullRequest -ProjectName Test -TargetBranchRef "garbage" } | should throw
+         { Get-VSTeamPullRequest -ProjectName Test -TargetBranchRef "garbage" } | Should -Throw
       }
 
       It 'No Votes should be Pending Status' {
          $pr = Get-VSTeamPullRequest -Id 101
 
-         $pr.reviewStatus | Should be "Pending"
+         $pr.reviewStatus | Should -Be "Pending"
       }
 
       It 'Postivite Votes should be Approved Status' {
          $pr = Get-VSTeamPullRequest -Id 110
 
-         $pr.reviewStatus | Should be "Approved"
+         $pr.reviewStatus | Should -Be "Approved"
       }
 
       It 'Negative Votes should be Rejected Status' {
          $pr = Get-VSTeamPullRequest -Id 100
 
-         $pr.reviewStatus | Should be "Rejected"
+         $pr.reviewStatus | Should -Be "Rejected"
       }
    }
 }
+

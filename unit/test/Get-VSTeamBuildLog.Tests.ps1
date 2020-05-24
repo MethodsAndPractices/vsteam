@@ -1,44 +1,52 @@
 Set-StrictMode -Version Latest
 
-#region include
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+BeforeAll {
+   $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Classes/ProjectCompleter.ps1"
-. "$here/../../Source/Classes/ProjectValidateAttribute.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
-#endregion
+   . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+   . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+   . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+   . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+   . "$PSScriptRoot/../../Source/Private/common.ps1"
+   . "$PSScriptRoot/../../Source/Public/$sut"
+}
 
 Describe 'VSTeamBuildLog' {
    Context 'Get-VSTeamBuildLog' {
-      ## Arrange
-      Mock Invoke-RestMethod { return @{
-            count = 4
-            value = @{ }
+      BeforeAll {
+         ## Arrange
+         Mock Invoke-RestMethod { return @{
+               count = 4
+               value = @{ }
+            }
          }
+
+         # Make sure the project name is valid. By returning an empty array
+         # all project names are valid. Otherwise, you name you pass for the
+         # project in your commands must appear in the list.
+         Mock _getProjects { return @() }
+
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
       }
 
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
-
       Context 'Services' {
-         ## Arrange
-         # Set the account to use for testing. A normal user would do this
-         # using the Set-VSTeamAccount function.
-         Mock _getInstance { return 'https://dev.azure.com/test' }
+         BeforeAll {
+            ## Arrange
+            # Set the account to use for testing. A normal user would do this
+            # using the Set-VSTeamAccount function.
+            Mock _getInstance { return 'https://dev.azure.com/test' }
+         }
 
          It 'with build id should return full log' {
             ## Act
             Get-VSTeamBuildLog -projectName project -Id 1
 
             ## Assert
-            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs?api-version=$(_getApiVersion Build)"
             }
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/3?api-version=$(_getApiVersion Build)"
             }
          }
@@ -48,23 +56,25 @@ Describe 'VSTeamBuildLog' {
             Get-VSTeamBuildLog -projectName project -Id 1 -Index 2
 
             ## Assert
-            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/2?api-version=$(_getApiVersion Build)"
             }
          }
       }
 
       Context 'Server' {
-         ## Arrange
-         Mock _useWindowsAuthenticationOnPremise { return $true }
-         Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
+         BeforeAll {
+            ## Arrange
+            Mock _useWindowsAuthenticationOnPremise { return $true }
+            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
+         }
 
          It 'with index on TFS local Auth Should return full log' {
             ## Act
             Get-VSTeamBuildLog -projectName project -Id 1 -Index 2
 
             ## Assert
-            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/2?api-version=$(_getApiVersion Build)"
             }
          }
@@ -74,11 +84,11 @@ Describe 'VSTeamBuildLog' {
             Get-VSTeamBuildLog -projectName project -Id 1
 
             ## Assert
-            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs?api-version=$(_getApiVersion Build)"
             }
-         
-            Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/3?api-version=$(_getApiVersion Build)"
             }
          }

@@ -33,16 +33,16 @@ function Set-VSTeamAccount {
       # Create the dictionary
       $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
-      $profileArrSet = Get-VSTeamProfile | Select-Object -ExpandProperty Name
+      $vsteamProfileArrSet = Get-VSTeamProfile | Select-Object -ExpandProperty Name
 
-      if ($profileArrSet) {
-         $profileParam = _buildDynamicParam -ParameterName 'Profile' -ParameterSetName 'Profile' -arrSet $profileArrSet
+      if ($vsteamProfileArrSet) {
+         $vsteamProfileParam = _buildDynamicParam -ParameterName 'Profile' -ParameterSetName 'Profile' -arrSet $vsteamProfileArrSet
       }
       else {
-         $profileParam = _buildDynamicParam -ParameterName 'Profile' -ParameterSetName 'Profile'
+         $vsteamProfileParam = _buildDynamicParam -ParameterName 'Profile' -ParameterSetName 'Profile'
       }
 
-      $RuntimeParameterDictionary.Add('Profile', $profileParam)
+      $RuntimeParameterDictionary.Add('Profile', $vsteamProfileParam)
 
       # Only add these options on Windows Machines
       if (_isOnWindows) {
@@ -67,9 +67,9 @@ function Set-VSTeamAccount {
       # invalidate cache when changing account/collection
       # otherwise dynamic parameters being picked for a wrong collection
       [VSTeamProjectCache]::timestamp = -1
-      
+
       # Bind the parameter to a friendly variable
-      $Profile = $PSBoundParameters['Profile']
+      $vsteamProfile = $PSBoundParameters['Profile']
 
       if (_isOnWindows) {
          # Bind the parameter to a friendly variable
@@ -85,8 +85,8 @@ function Set-VSTeamAccount {
          $Level = "Process"
       }
 
-      if ($Profile) {
-         $info = Get-VSTeamProfile | Where-Object Name -eq $Profile
+      if ($vsteamProfile) {
+         $info = Get-VSTeamProfile | Where-Object Name -eq $vsteamProfile
 
          if ($info) {
             $encodedPat = $info.Pat

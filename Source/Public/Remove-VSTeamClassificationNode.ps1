@@ -1,5 +1,5 @@
 function Remove-VSTeamClassificationNode {
-   [CmdletBinding()]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [Parameter(Mandatory = $false)]
       [int] $ReClassifyId,
@@ -14,7 +14,9 @@ function Remove-VSTeamClassificationNode {
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
-      [string] $ProjectName
+      [string] $ProjectName,
+
+      [switch] $Force
    )
 
    process {
@@ -28,16 +30,17 @@ function Remove-VSTeamClassificationNode {
          $id += "/$Path"
       }
 
-      $queryString = @{}
-      if ($ReClassifyId)
-      {
+      $queryString = @{ }
+      if ($ReClassifyId) {
          $queryString.Add("`$ReClassifyId", $ReClassifyId)
       }
 
       # Call the REST API
-      $null = _callAPI -Method "Delete" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-         -ContentType 'application/json; charset=utf-8' `
-         -QueryString $queryString `
-         -Version $(_getApiVersion Core)
+      if ($force -or $pscmdlet.ShouldProcess($Path, "Delete classification node")) {
+         $null = _callAPI -Method "Delete" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
+            -ContentType 'application/json; charset=utf-8' `
+            -QueryString $queryString `
+            -Version $(_getApiVersion Core)
+      }
    }
 }

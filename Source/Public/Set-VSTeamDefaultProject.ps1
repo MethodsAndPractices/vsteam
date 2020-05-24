@@ -3,7 +3,7 @@ function Set-VSTeamDefaultProject {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
    param(
       [switch] $Force,
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
@@ -11,7 +11,7 @@ function Set-VSTeamDefaultProject {
    )
    DynamicParam {
       $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
-   
+
       # Only add these options on Windows Machines
       if (_isOnWindows) {
          $ParameterName = 'Level'
@@ -37,7 +37,7 @@ function Set-VSTeamDefaultProject {
          $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
          $dp.Add($ParameterName, $RuntimeParameter)
       }
-   
+
       return $dp
    }
 
@@ -53,7 +53,7 @@ function Set-VSTeamDefaultProject {
             if (-not $Level) {
                $Level = "Process"
             }
-         
+
             # You always have to set at the process level or they will Not
             # be seen in your current session.
             $env:TEAM_PROJECT = $Project

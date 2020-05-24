@@ -1,30 +1,31 @@
 Set-StrictMode -Version Latest
 
-#region include
-Import-Module SHiPS
+Describe 'VSTeamUserEntitlement' -Tag 'Classes', 'Unit' {
+   BeforeAll {
+      Import-Module SHiPS
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamLeaf.ps1"
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Private/applyTypes.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Classes/$sut"
-#endregion
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Classes/$sut"
+   }
 
-Describe 'VSTeamUserEntitlement' -Tag 'Classes', 'Unit' {   
    Context 'ToString' {
-      $obj = [PSCustomObject]@{
-         displayName = 'Test User'
-         id          = '1'
-         uniqueName  = 'test@email.com'
+      BeforeAll {
+         $obj = [PSCustomObject]@{
+            displayName = 'Test User'
+            id          = '1'
+            uniqueName  = 'test@email.com'
+         }
+
+         $target = [VSTeamUserEntitlement]::new($obj, 'Test Project')
       }
 
-      $target = [VSTeamUserEntitlement]::new($obj, 'Test Project')
-
       It 'should return displayname' {
-         $target.ToString() | Should Be 'Test User'
+         $target.ToString() | Should -Be 'Test User'
       }
    }
 }

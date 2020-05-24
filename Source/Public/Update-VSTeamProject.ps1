@@ -2,16 +2,16 @@ function Update-VSTeamProject {
    [CmdletBinding(DefaultParameterSetName = 'ByName', SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [string] $NewName = '',
-      
+
       [string] $NewDescription = '',
-      
+
       [switch] $Force,
-      
+
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [string] $Id,
-      
+
       [Alias('ProjectName')]
-      [ProjectValidateAttribute()]      
+      [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter]) ]
       [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
       [string] $Name
@@ -32,7 +32,7 @@ function Update-VSTeamProject {
          Write-Verbose 'Nothing to update'
          return
       }
-      
+
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Update Project")) {
          # At the end we return the project and need it's name
          # this is used to track the final name.

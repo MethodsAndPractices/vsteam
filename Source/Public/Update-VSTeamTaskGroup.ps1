@@ -17,7 +17,7 @@ function Update-VSTeamTaskGroup {
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [string] $ProjectName
    )
-   
+
    Process {
       if ($Force -or $pscmdlet.ShouldProcess("Update Task Group")) {
          if ($InFile) {

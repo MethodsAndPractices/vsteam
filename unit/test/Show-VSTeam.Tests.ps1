@@ -1,23 +1,24 @@
 Set-StrictMode -Version Latest
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+Describe 'VSTeam' {
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-Describe 'Show-VSTeam' {
-   Context 'Show-VSTeam' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
-      
+
       Mock Show-Browser -Verifiable
+   }
 
-      Show-VSTeam
-
+   Context 'Show-VSTeam' {
       It 'Should open browser' {
-         Assert-VerifiableMock
+         Show-VSTeam
+         
+         Should -InvokeVerifiable
       }
    }
 }
