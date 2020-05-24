@@ -45,7 +45,7 @@ function Add-VSTeamBuild {
       
       if ($QueueName) {
          $queueId = (Get-VSTeamQueue -ProjectName "$ProjectName" -queueName "$QueueName").id
-         if (-not ($env:Testing -or $queueId)) {
+         if ($queueId) {
             throw "'$QueueName' is not a valid Queue. Use Get-VSTeamQueue to get a list of queues"  ; return
          }
          else { $body["queue"] = @{id = $queueId } }
