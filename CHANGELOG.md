@@ -12,6 +12,10 @@ The versions for Azure DevOps were also updated to 6.0-preview where supported.
 Requires Pester 5.x
 All the tests have been upgraded to use Pester 5.
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/315) from [Jhoneill](https://github.com/jhoneill) which included the following:
+
+- Fix Get-VSTeamWiql [#314](https://github.com/DarqueWarrior/vsteam/issues/314)
+
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
 
 - Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
