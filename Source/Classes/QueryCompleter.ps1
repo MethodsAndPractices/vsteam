@@ -2,6 +2,10 @@ using namespace System.Collections
 using namespace System.Collections.Generic
 using namespace System.Management.Automation
 
+# This class defines an attribute that allows the user the tab complete
+# queries for function parameters. For this completer to work the
+# users must have already provided the ProjectName parameter for the
+# function or set a default project.
 class QueryCompleter : IArgumentCompleter {
    [IEnumerable[CompletionResult]] CompleteArgument(
       [string] $CommandName,
@@ -11,7 +15,6 @@ class QueryCompleter : IArgumentCompleter {
       [IDictionary] $FakeBoundParameters) {
 
       $results = [List[CompletionResult]]::new()
-
 
       # If the user has explictly added the -ProjectName parameter
       # to the command use that instead of the default project.
@@ -26,16 +29,13 @@ class QueryCompleter : IArgumentCompleter {
       # If there is no projectName by this point just return a empty
       # list.
       if ($projectName) {
-
-         foreach  ( $q in [vsteamquerycache]::GetCurrent()  ) {
-            if     ($q.name -like "*$WordToComplete*" -and $q.name -notmatch '\w') {
-                  $results.Add([CompletionResult]::new($q.name))
-            }
-            elseif ($q.name -like "*$WordToComplete*") {
-                  $results.Add([CompletionResult]::new("'$($q.name.replace("'","''"))'", $q.name, 0, $q.name))
+         foreach ($value in [VSTeamQueryCache]::GetCurrent().name) {
+            if ($value -like "$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
             }
          }
       }
-      return   $results
+
+      return $results
    }
 }
