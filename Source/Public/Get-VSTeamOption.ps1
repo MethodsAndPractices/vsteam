@@ -1,12 +1,29 @@
 function Get-VSTeamOption {
    [CmdletBinding()]
-   param([string] $subDomain)
+   param(
+      [string] $subDomain,
+
+      [Parameter(Position = 0)]
+      [Alias("Service")]
+      [string] $area,
+
+      [Parameter(Position = 1)]
+      [string] $resource
+   )
 
    # Build the url to list the projects
-   $params = @{"Method" = "Options"}
+   $params = @{ "Method" = "Options" }
 
    if ($subDomain) {
       $params.Add("SubDomain", $subDomain)
+   }
+
+   if ($area) {
+      $params.Add("Area", $area)
+   }
+
+   if ($resource) {
+      $params.Add("Resource", $resource)
    }
 
    # Call the REST API

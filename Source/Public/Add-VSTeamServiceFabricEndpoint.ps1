@@ -37,9 +37,6 @@ function Add-VSTeamServiceFabricEndpoint {
    )
    
    process {
-      # This will throw if this account does not support ServiceFabricEndpoint
-      _supportsServiceFabricEndpoint
-
       switch ($PSCmdlet.ParameterSetName) {
          "Certificate" {
             # copied securestring usage from Set-VSTeamAccount

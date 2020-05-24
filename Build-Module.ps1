@@ -120,12 +120,12 @@ if ($runTests.IsPresent) {
 
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
       Write-Output "Installing Pester 5"
-      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc8' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc9' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = '.\unit'
-   $pesterArgs.Output.Verbosity = "Normal"
+   $pesterArgs.Output.Verbosity = "Minimal"
    $pesterArgs.TestResult.Enabled = $true
    $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
@@ -140,11 +140,7 @@ if ($runTests.IsPresent) {
    }
 
    if ($testName) {
-
       $pesterArgs.Filter.FullName = $testName
-
-      #passthru must be activated according to Pester docs
-      $pesterArgs.Run.PassThru = $true
    }
 
    Invoke-Pester -Configuration $pesterArgs 

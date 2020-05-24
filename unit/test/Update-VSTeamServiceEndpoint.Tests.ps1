@@ -20,7 +20,7 @@ Describe 'VSTeamServiceEndpoint' {
          Mock _hasProjectCacheExpired { return $false }
 
          Mock _getInstance { return 'https://dev.azure.com/test' }
-         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceFabricEndpoint' }
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
 
          Mock Write-Progress
          Mock Invoke-RestMethod { return @{id = '23233-2342' } } -ParameterFilter { $Method -eq 'Get' }

@@ -13,9 +13,6 @@ function Add-VSTeamFeed {
    )
 
    process {
-      # This will throw if this account does not support feeds
-      _supportsFeeds
-
       $body = @{
          name                       = $Name
          description                = $Description
