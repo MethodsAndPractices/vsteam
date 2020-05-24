@@ -14,14 +14,14 @@ class ProcessTemplateCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      foreach ($p in [VSTeamProcessCache]::GetCurrent()) {
-         if ($p -like "*$WordToComplete*" -and $p -notmatch '\W') {
-            $results.Add([CompletionResult]::new($p))
+      $wildCard  =  $WordToComplete -replace "^'?(.*)'$",'*$1*' 
+      foreach ($value in [VSTeamProcessCache]::GetCurrent().where({$_ -like $wildCard}) ) {
+         if ($value -match "\W") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
          }
-         elseif ($p -like "*$WordToComplete*") {
-            $results.Add([CompletionResult]::new("'$($p.replace("'","''"))'", $p, 0, $p))
-         }
+         else {$results.Add([CompletionResult]::new($value)) }
       }
+
       return $results
    }
 }
