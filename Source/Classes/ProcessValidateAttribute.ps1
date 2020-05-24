@@ -9,7 +9,7 @@ class ProcessValidateAttribute : ValidateArgumentsAttribute {
       if ([string]::IsNullOrEmpty($arguments)) {return}
       #tests count HTTP calls and expect 1 from reading the cache, but for a call on each read, so only read once! # 
       $CachedProcesses = [VSTeamProcessCache]::GetCurrent()
-      if (($null -ne $CachedProcesses) -and ($arguments -notin $CachedProcesses) ) {
+      if (($CachedProcesses.count -gt 0) -and ($arguments -notin $CachedProcesses) ) {
          throw [ValidationMetadataException]::new(
             "'$arguments' is not a valid process. Valid processes are: '" +
             ($CachedProcesses -join "', '") + "'")

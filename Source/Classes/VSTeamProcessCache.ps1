@@ -1,31 +1,41 @@
-# Dynamic parameters get called alot. This can cause
-# multiple calls to TFS/VSTS for a single function call
-# so I am going to try and cache the values.
+# cache process names and URLs to reduce the number of
+# rest APIs calls needed for parameter completion / validation 
+
+#Unit tests should populate cache with expected processes ideally with 
+# a mock for  Get-VSTeamProcess which returns objects with name and (optionally) URL properties 
+# we let them mock the testing freshness but really they should call invalidate 
 class VSTeamProcessCache {
    static [int] $timestamp = -1
-   static [object] $processes = $null
+   static [object[]] $processes = @()
    static [hashtable] $urls = @{}
-   static [Void] Update () {
-      #Allow unit tests to mock returning the project list and testing freshness
-      $list = _getProcesses 
+   static [Void] Update () {     
+      $list = Get-VSTeamProcess
       if ($list) {
          foreach ($process in $list) {
-            [VSTeamProcessCache]::urls[$process.name] =  (_getInstance) + "/_apis/work/processes/" + $process.Id
+            if ($process.psobject.Properties['url']) {
+               [VSTeamProcessCache]::urls[$process.name] = $process.url
+            }
          }
-         [VSTeamProcessCache]::processes = $List.name | Sort-Object
+         [VSTeamProcessCache]::processes = @() + ( $List | Select-Object -ExpandProperty Name | Sort-Object)
       }
       else {
-         [VSTeamProcessCache]::processes = $null
+         [VSTeamProcessCache]::processes = @()
       }
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
-      # "save current minute" refreshes on average after 30secs  but not after exact hours timeOfDayTotalMinutes might be a better base
+   }
+   #"save current minute" refreshes on average after 30secs  but not after exact hours timeOfDayTotalMinutes might be a better base
+   static [bool] HasExpired () {
+      return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute
    }
    static [object] GetCurrent () {
-      if (_hasProcessTemplateCacheExpired) { [VSTeamProcessCache]::Update() }
+      if ([VSTeamProcessCache]::HasExpired()) { [VSTeamProcessCache]::Update() }
       return ([VSTeamProcessCache]::processes)
    }
    static [object] GetURl ([string]$ProcessName) {
-      if (_hasProcessTemplateCacheExpired) { [VSTeamProcessCache]::Update() }
+      if ([VSTeamProcessCache]::HasExpired()) { [VSTeamProcessCache]::Update() }
       return ([VSTeamProcessCache]::urls[$ProcessName])
+   }
+   static [void] Invalidate () {
+      [VSTeamProcessCache]::timestamp = -1 
    }
 }
