@@ -19,7 +19,9 @@ function Get-VSTeamProcess {
    )
    process {
       # The REST API ignores Top and Skip but allows them to be specified & the function does the same. 
-
+      if ($PSBoundParameters['Top','Skip'] -gt 0) {
+         Write-Warning "You specified -Top $Top , -Skip $Skip These parameters are ignored and will be removed in future"
+      }
       # Return either a single proces by ID or a list of processes
       if ($id) {
          # Call the REST API with an ID
@@ -33,14 +35,6 @@ function Get-VSTeamProcess {
          try {
             # Call the REST API
             $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion core)  
-
-            #we just fetched all the processes so let's update the cache. Also, cache the URLS for processes
-            [VSTeamProcessCache]::processes = $resp.value.name | Sort-Object
-            [VSTeamProcessCache]::timestamp = (Get-Date).Minute
-            $resp.value | ForEach-Object {
-               [VSTeamProcessCache]::urls[$_.name] =  (_getInstance) + "/_apis/work/processes/" + $_.TypeId
-               [VSTeamProcess]::new($_)
-            } | Where-Object {$_.name -like $Name} | Sort-Object -Property Name
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod
@@ -48,6 +42,13 @@ function Get-VSTeamProcess {
             # This casuses the first error to terminate this execution.
             _handleException $_
          }
+         #we just fetched all the processes so let's update the cache. Also, cache the URLS for processes
+         [VSTeamProcessCache]::processes = $resp.value.name | Sort-Object
+         [VSTeamProcessCache]::timestamp = (Get-Date).Minute
+         $resp.value | ForEach-Object {
+            [VSTeamProcessCache]::urls[$_.name] =  (_getInstance) + "/_apis/work/processes/" + $_.TypeId
+            [VSTeamProcess]::new($_)
+         } | Where-Object {$_.name -like $Name} | Sort-Object -Property Name
       }
    }
 }
