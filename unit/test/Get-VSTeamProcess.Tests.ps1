@@ -51,8 +51,8 @@ Describe 'VSTeamProcess' {
          type        = 'Agile'
       }
 
-      Mock Invoke-RestMethod { return $results }
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*123-5464-dee43*" }
+      Mock Invoke-RestMethod {return $results }
+      Mock Invoke-RestMethod {return $singleResult } -ParameterFilter { $Uri -like "*123-5464-dee43*" }
    }
 
    Context 'Get-VSTeamProcess' {
@@ -66,7 +66,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*" 
+            $Uri -like "*api-version=$(_getApiVersion ProcessDefinition)*" 
          }
       }
 <# no longer pass top or skip. Parameters are ignored.
@@ -106,7 +106,7 @@ Describe 'VSTeamProcess' {
          # Only called once for name - we don't validate the name, so wildcards can be given. 
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*"
+            $Uri -like "*api-version=$(_getApiVersion ProcessDefinition)*"
          }
       }
 
@@ -116,7 +116,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes/123-5464-dee43*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*"
+            $Uri -like "*api-version=$(_getApiVersion ProcessDefinition)*"
          }
       }
    }

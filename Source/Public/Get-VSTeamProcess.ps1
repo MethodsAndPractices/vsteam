@@ -25,7 +25,7 @@ function Get-VSTeamProcess {
       # Return either a single proces by ID or a list of processes
       if ($id) {
          # Call the REST API with an ID
-         $resp = _callAPI -NoProject -area 'work' -resource 'processes' -id $id  -Version $(_getApiVersion Core) 
+         $resp = _callAPI -NoProject -area 'work' -resource 'processes' -id $id  -Version $(_getApiVersion ProcessDefinition) 
 
          if ($resp) {
             return [VSTeamProcess]::new($resp)
@@ -34,7 +34,7 @@ function Get-VSTeamProcess {
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion core)  
+            $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion ProcessDefinition)  
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod
