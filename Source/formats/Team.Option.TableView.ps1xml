@@ -7,15 +7,15 @@
 				<TypeName>Team.Option</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
-				<TableHeaders>
-					<TableColumnHeader>
-						<Label>Name</Label>
-					</TableColumnHeader>
+				<TableHeaders>					
 					<TableColumnHeader>
 						<Label>Area</Label>
 					</TableColumnHeader>
+               <TableColumnHeader>
+						<Label>Resource</Label>
+					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Max</Label>
+						<Label>Released</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
 						<Label>Template</Label>
@@ -25,13 +25,13 @@
 					<TableRowEntry>
 						<TableColumnItems>
 							<TableColumnItem>
+								<PropertyName>area</PropertyName>
+							</TableColumnItem>
+                     <TableColumnItem>
 								<PropertyName>resourceName</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>area</PropertyName>
-							</TableColumnItem>
-							<TableColumnItem>
-								<PropertyName>maxVersion</PropertyName>
+								<PropertyName>releasedVersion</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
 								<PropertyName>routeTemplate</PropertyName>

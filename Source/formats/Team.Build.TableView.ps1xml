@@ -6,7 +6,7 @@
          <ViewSelectedBy>
             <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
             <TypeName>Team.Account</TypeName>
-            <TypeName>Team.Pool</TypeName>
+            <TypeName>Team.Provider.Pool</TypeName>
             <TypeName>Team.Queues</TypeName>
             <TypeName>Team.Pools</TypeName>
             <TypeName>Team.Provider.Pools</TypeName>

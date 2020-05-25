@@ -7,6 +7,10 @@ Describe 'VSTeamWiql' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamQueryCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/QueryCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/QueryTransformToIDAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamWorkItem.ps1"
@@ -33,15 +37,6 @@ Describe 'VSTeamWiql' {
          descending = $false
       }
 
-      $wiqlResult = @{
-         querytype       = "flat"
-         queryTypeResult = "worItem"
-         asOf            = "2019-10-03T18:35:09.117Z"
-         columns         = @($column)
-         sortColumns     = @($sortColumn)
-         workItems       = @($workItem, $workItem)
-      }
-
       $expandedWorkItems = @{
          count = 1
          value = @($workItem, $workItem)
@@ -54,6 +49,16 @@ Describe 'VSTeamWiql' {
             # If this test fails uncomment the line below to see how the mock was called.
             # Write-Host $args
 
+            # result is returned and -Expand is specified, the work items field is overwritten
+            # If $wiqlResult is defined once (like column, and work item) the second expand has a problem
+            $wiqlResult = @{
+               querytype       = "flat"
+               queryTypeResult = "workItem"
+               asOf            = "2019-10-03T18:35:09.117Z"
+               columns         = @($column)
+               sortColumns     = @($sortColumn)
+               workItems       = @($workItem, $workItem)
+            }
             return $wiqlResult
          }
 
@@ -64,10 +69,11 @@ Describe 'VSTeamWiql' {
 
             return $expandedWorkItems
          }
+
+         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       }
 
       It 'Get work items with custom WIQL query' {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery
 
@@ -84,7 +90,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with -Top 250' {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 250
 
@@ -101,7 +106,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with -Top 0' {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 0
 
@@ -118,7 +122,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with expanded work items' {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Expand
 
@@ -135,7 +138,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with time precision' {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -TimePrecision
 
@@ -147,14 +149,13 @@ Describe 'VSTeamWiql' {
             $Body -like "*[System.State]*" -and
             $Body -like '*`}' -and # Make sure the body is an object
             $ContentType -eq 'application/json' -and
-            $Uri -like "*timePrecision=True*"
-            $Uri -like "*`$top=100*"
+            $Uri -like "*timePrecision=True*" -and
+            $Uri -like "*`$top=100*" -and
             $Uri -like "https://dev.azure.com/test/test/test team/_apis/wit/wiql?api-version=$(_getApiVersion Core)*"
          }
       }
 
       It 'Get work items with query ID query' {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -163,7 +164,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with query ID query with expanded work items' {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Id 1 -Expand
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

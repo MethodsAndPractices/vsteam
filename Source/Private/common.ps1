@@ -115,17 +115,6 @@ function _testGraphSupport {
    (_getApiVersion Graph) -as [boolean]
 }
 
-function _supportsFeeds {
-   _hasAccount
-   if ($false -eq $(_testFeedSupport)) {
-      throw 'This account does not support packages.'
-   }
-}
-
-function _testFeedSupport {
-   (_getApiVersion Packaging) -as [boolean]
-}
-
 function _supportsSecurityNamespace {
    _hasAccount
    if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
@@ -154,7 +143,7 @@ function _getApiVersion {
    [CmdletBinding(DefaultParameterSetName = 'Service')]
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceFabricEndpoint', 'Graph', 'TaskGroups', 'Policy')]
+      [ValidateScript({$_ -in ([VSTeamVersions] | Get-Member -Static  -MemberType Property).name})]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -162,55 +151,10 @@ function _getApiVersion {
    )
 
    if ($Target.IsPresent) {
-      return [VSTeamVersions]::Version
+         return [VSTeamVersions]::Version
    }
-   else {
+   else {return [VSTeamVersions]::$Service }
 
-      switch ($Service) {
-         'Build' {
-            return [VSTeamVersions]::Build
-         }
-         'Release' {
-            return [VSTeamVersions]::Release
-         }
-         'Core' {
-            return [VSTeamVersions]::Core
-         }
-         'Git' {
-            return [VSTeamVersions]::Git
-         }
-         'DistributedTask' {
-            return [VSTeamVersions]::DistributedTask
-         }
-         'VariableGroups' {
-            return [VSTeamVersions]::VariableGroups
-         }
-         'Tfvc' {
-            return [VSTeamVersions]::Tfvc
-         }
-         'Packaging' {
-            return [VSTeamVersions]::Packaging
-         }
-         'MemberEntitlementManagement' {
-            return [VSTeamVersions]::MemberEntitlementManagement
-         }
-         'ExtensionsManagement' {
-            return [VSTeamVersions]::ExtensionsManagement
-         }
-         'ServiceFabricEndpoint' {
-            return [VSTeamVersions]::ServiceFabricEndpoint
-         }
-         'Graph' {
-            return [VSTeamVersions]::Graph
-         }
-         'TaskGroups' {
-            return [VSTeamVersions]::TaskGroups
-         }
-         'Policy' {
-            return [VSTeamVersions]::Policy
-         }
-      }
-   }
 }
 
 function _getInstance {
@@ -427,22 +371,32 @@ function _useBearerToken {
    return (!$env:TEAM_PAT) -and ($env:TEAM_TOKEN)
 }
 
-
 function _getWorkItemTypes {
    param(
-      [string]$ProjectName = (_getDefaultProject)
+      [string] $ProjectName = (_getDefaultProject)
    )
-   $types = @()   
+
+   if (-not $(_getInstance)) {
+      Write-Output @()
+      return
+   }
+
    # Call the REST API
    try {
-      $resp   = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
-      $hidden = $resp.value.where({$_.referencename -eq "Microsoft.HiddenCategory"}).workitemtypes.name
-      $types += $resp.value.where(          {$_.referencename -ne "Microsoft.HiddenCategory"}).workitemtypes.name.where({$_ -notin $hidden})
+      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
+
+      # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
+      # To replace all the "": with "_end":
+      $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
+
+      if ($resp.count -gt 0) {
+         Write-Output ($resp.value).name
+      }
    }
    catch {
       Write-Verbose $_
+      Write-Output @()
    }
-   return $types
 }
 
 # When writing unit tests mock this and return false.
@@ -582,7 +536,7 @@ function _getProcesses {
       $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
 
       if ($resp.count -gt 0) {
-         Write-Output $resp.value
+         Write-Output ($resp.value).name
       }
    }
    catch {
@@ -626,7 +580,7 @@ function _buildProcessNameDynamicParam {
 
    # Generate and set the ValidateSet
    if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
-      $arrSet = (_getProcesses).name
+      $arrSet = _getProcesses
       [VSTeamProcessCache]::processes = $arrSet
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
    }
@@ -815,7 +769,7 @@ function _trackServiceEndpointProgress {
    # Track status
    while (-not $isReady) {
       $statusTracking = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
-         -Version $(_getApiVersion DistributedTask)
+         -Version $(_getApiVersion ServiceEndpoints)
 
       $isReady = $statusTracking.isReady;
 
@@ -834,12 +788,6 @@ function _trackServiceEndpointProgress {
       if ($iTracking -eq $yTracking -or $iTracking -eq 0) {
          $xTracking *= -1
       }
-   }
-}
-
-function _supportsServiceFabricEndpoint {
-   if (-not $(_getApiVersion ServiceFabricEndpoint)) {
-      throw 'This account does not support Service Fabric endpoints.'
    }
 }
 

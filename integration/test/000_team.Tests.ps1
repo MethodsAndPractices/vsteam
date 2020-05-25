@@ -1,33 +1,44 @@
 Set-StrictMode -Version Latest
 
-##############################################################
-#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
-##############################################################
-# Before running these tests you must set the following      #
-# Environment variables.                                     #
-# $env:API_VERSION = TFS2017, TFS2018, AzD2019 or VSTS       #
-#                    depending on the value used for ACCT    #
-# $env:EMAIL = Email of user to remove and re-add to account #
-# $env:ACCT = VSTS Account Name or full TFS URL including    #
-#             collection                                     #
-# $env:PAT = Personal Access token of ACCT                   #
-##############################################################
-#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
-##############################################################
-
-
 Describe 'Team' -Tag 'integration' {
    BeforeAll {
-      Set-VSTeamAPIVersion -Target $env:API_VERSION
       $pat = $env:PAT
       $acct = $env:ACCT
       $api = $env:API_VERSION
+      
+      Set-VSTeamAPIVersion -Target $env:API_VERSION
       Set-VSTeamAccount -a $acct -pe $pat -version $api
 
-      ##############################################################
-      # THIS DELETES ALL EXISTING TEAM PROJECTS!!!!                #
-      ##############################################################
-      Get-VSTeamProject | Remove-VSTeamProject -Force
+      # See if there are any existing projects. If so use the 
+      # first one as the expected project name. If there are none
+      # simply use MyProject
+      $expectedProjectName = Get-VSTeamProject | Select-Object -First 1 -ExpandProperty Name
+
+      if (-not $expectedProjectName) {
+         $expectedProjectName = 'MyProject'
+      }
+   }
+
+   Context 'Set-VSTeamDefaultProject' {
+      It 'should set default project' {
+         Set-VSTeamDefaultProject -Project $expectedProjectName
+
+         $info = Get-VSTeamInfo
+
+         $info.DefaultProject | Should -Be $expectedProjectName
+      }
+   }
+
+   Context 'Clear-VSTeamDefaultProject' {
+      It 'should clear default project' {
+         Set-VSTeamDefaultProject -Project $expectedProjectName
+
+         Clear-VSTeamDefaultProject
+
+         $info = Get-VSTeamInfo
+            
+         $info.DefaultProject | Should -BeNullOrEmpty
+      }
    }
 
    Context 'Get-VSTeamInfo' {
@@ -35,7 +46,7 @@ Describe 'Team' -Tag 'integration' {
          # Set-VSTeamAccount is set in the Before All
          # so just set the default project here
          # Arrange
-         Set-VSTeamDefaultProject -Project 'MyProject'
+         Set-VSTeamDefaultProject -Project $expectedProjectName
 
          # Act
          $info = Get-VSTeamInfo
@@ -53,7 +64,7 @@ Describe 'Team' -Tag 'integration' {
       }
 
       It 'should return default project' {
-         $info.DefaultProject | Should -Be "MyProject"
+         $info.DefaultProject | Should -Be $expectedProjectName
       }
    }
 

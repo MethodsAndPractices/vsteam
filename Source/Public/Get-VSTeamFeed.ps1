@@ -7,9 +7,6 @@ function Get-VSTeamFeed {
    )
 
    process {
-      # Thi swill throw if this account does not support feeds
-      _supportsFeeds
-
       if ($id) {
          foreach ($item in $id) {
             $resp = _callAPI -NoProject -subDomain feeds -Id $item -Area packaging -Resource feeds -Version $(_getApiVersion Packaging)

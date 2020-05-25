@@ -31,18 +31,18 @@ class InvokeCompleter : IArgumentCompleter {
       if ($ParameterName -eq 'Area') {
          $areas = $(Get-VSTeamOption @p | Select-Object Area | Sort-Object -Property Area -Unique)
 
-         foreach ($a in $areas) {
-            if ($a.area -like "$WordToComplete*") {
-               $results.Add([CompletionResult]::new($a.area))
+         foreach ($value in $areas.area) {
+            if ($value -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
             }
          }
       }
       elseif ($ParameterName -eq 'Resource' -and $area) {
          $resources = $(Get-VSTeamOption @p | Where-Object area -eq $area | Select-Object -Property resourceName | Sort-Object -Property resourceName -Unique)
 
-         foreach ($r in $resources) {
-            if ($r.resourceName -like "$WordToComplete*") {
-               $results.Add([CompletionResult]::new($r.resourceName))
+         foreach ($value in $resources.resourceName) {
+            if ($value -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
             }
          }
       }

@@ -49,7 +49,7 @@ if ($installDep.IsPresent -or $analyzeScript.IsPresent) {
 
    # Install each module
    if ($manifest.RequiredModules) {
-      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
+      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
    }
 }
 
@@ -81,22 +81,14 @@ if ($buildHelp.IsPresent) {
 }
 
 Write-Output 'Publishing about help files'
-Copy-Item -Path ./Source/en-US       -Destination "$output/" -Recurse   -Force
-Copy-Item -Path ./Source/VSTeam.psd1 -Destination "$output/VSTeam.psd1" -Force
+Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
+Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
-
-Get-Content -Path ./Source/VSTeam.psm1 | Out-File -Append -FilePath "$output/VSTeam.psm1" -Encoding ascii
-<#Write-Output 'Updating Functions To Export'
-$newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-      ForEach-Object -Process { Write-Output "'$_'" }) -join ','
-#>
-
-$PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
 Write-Output 'Updating Functions To Export'
-$FunctionsToExport  = @()
-$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"})
-$FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName
-Update-ModuleManifest -Path "$output/VSTeam.psd1" -FunctionsToExport $FunctionsToExport
+$newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
+   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+
+(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
 
 Write-Output "Publish complete to $output"
 
@@ -108,8 +100,8 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
    if ((Get-Module VSTeam)) {
       Remove-Module VSTeam
    }
-   $env:testing = $true
-   Import-Module "$output/VSTeam.psd1"  -Global -Force
+
+   Import-Module "$output/VSTeam.psd1" -Force
    Set-VSTeamAlias
 }
 
@@ -120,12 +112,12 @@ if ($runTests.IsPresent) {
 
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
       Write-Output "Installing Pester 5"
-      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc8' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc9' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = '.\unit'
-   $pesterArgs.Output.Verbosity = "Normal"
+   $pesterArgs.Output.Verbosity = "Minimal"
    $pesterArgs.TestResult.Enabled = $true
    $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
@@ -140,11 +132,7 @@ if ($runTests.IsPresent) {
    }
 
    if ($testName) {
-
       $pesterArgs.Filter.FullName = $testName
-
-      #passthru must be activated according to Pester docs
-      $pesterArgs.Run.PassThru = $true
    }
 
    Invoke-Pester -Configuration $pesterArgs 
