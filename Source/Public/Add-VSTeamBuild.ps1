@@ -33,7 +33,7 @@ function Add-VSTeamBuild {
          # Find the BuildDefinition id from the name
          $id = (Get-VSTeamBuildDefinition -ProjectName "$ProjectName" -Filter $BuildDefinitionName  -Type All).id
          if (-not $id) {
-            throw "'$BuildDefinitionName' is not a valid build definition. Use Get-VSTeamBuildDefinition to get a list of build names"  ; return
+            throw "'$BuildDefinitionName' is not a valid build definition. Use Get-VSTeamBuildDefinition to get a list of build names"  ; return is not a valid Queue. Use Get-VSTeamQueue to get a list of queues
          }
          $body = @{
             definition = @{
@@ -45,7 +45,7 @@ function Add-VSTeamBuild {
       
       if ($QueueName) {
          $queueId = (Get-VSTeamQueue -ProjectName "$ProjectName" -queueName "$QueueName").id
-         if (-not ($env:Testing -or $queueId)) {
+         if (-not $queueId) {
             throw "'$QueueName' is not a valid Queue. Use Get-VSTeamQueue to get a list of queues"  ; return
          }
          else { $body["queue"] = @{id = $queueId } }

@@ -24,7 +24,7 @@ Source/Classes/vsteam.classes.ps1
 test-results.xml
 coverage.xml
 .editorconfig
-.vscode/settings.json
+.vscode/*
 .DS_Store
 ._.DS_Store
 **/.DS_Store

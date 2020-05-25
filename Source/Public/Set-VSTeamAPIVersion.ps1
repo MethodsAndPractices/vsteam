@@ -6,7 +6,7 @@ function Set-VSTeamAPIVersion {
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy')]
+      [ValidateScript({$_ -in ([VSTeamVersions] | Get-Member -Static  -MemberType Property).name})]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]
@@ -17,50 +17,7 @@ function Set-VSTeamAPIVersion {
 
    if ($Force -or $pscmdlet.ShouldProcess($Target, "Set-VSTeamAPIVersion")) {
       if ($PSCmdlet.ParameterSetName -eq 'Service') {
-         switch ($Service) {
-            'Build' {
-               [VSTeamVersions]::Build = $Version
-            }
-            'Release' {
-               [VSTeamVersions]::Release = $Version
-            }
-            'Core' {
-               [VSTeamVersions]::Core = $Version
-            }
-            'Git' {
-               [VSTeamVersions]::Git = $Version
-            }
-            'DistributedTask' {
-               [VSTeamVersions]::DistributedTask = $Version
-            }
-            'VariableGroups' {
-               [VSTeamVersions]::VariableGroups = $Version
-            }
-            'Tfvc' {
-               [VSTeamVersions]::Tfvc = $Version
-            }
-            'Packaging' {
-               [VSTeamVersions]::Packaging = $Version
-            }
-            'MemberEntitlementManagement' {
-               [VSTeamVersions]::MemberEntitlementManagement = $Version
-            }
-            'ExtensionsManagement' {
-               [VSTeamVersions]::ExtensionsManagement = $Version
-            }
-            'ServiceEndpoints' {
-               [VSTeamVersions]::ServiceEndpoints = $Version
-            }
-            'Graph' {
-               [VSTeamVersions]::Graph = $Version
-            }
-            'TaskGroups' {
-               [VSTeamVersions]::TaskGroups = $Version
-            }
-            'Policy' {
-               [VSTeamVersions]::Policy = $Version
-            }
-         }
+         [VSTeamVersions]::$Service = $Version
       }
       else {
          # https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-5.1#api-and-tfs-version-mapping
@@ -205,6 +162,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '6.0-preview' # SubDomain extmgmt
                [VSTeamVersions]::Graph = '6.0-preview' # SubDomain vssps
                [VSTeamVersions]::Policy = '5.1'
+               [VSTeamVersions]::ProcessDefinition = '5.1-preview' #This may be valid for AzD2019
             }
          }
       }
@@ -225,4 +183,5 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "ExtensionsManagement: $([VSTeamVersions]::ExtensionsManagement)"
    Write-Verbose "Graph: $([VSTeamVersions]::Graph)"
    Write-Verbose "Policy: $([VSTeamVersions]::Policy)"
+   Write-Verbose "ProcessDefinition: $([VSTeamVersions]::ProcessDefinition)"
 }

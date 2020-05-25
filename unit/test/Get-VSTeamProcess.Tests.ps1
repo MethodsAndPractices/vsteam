@@ -20,22 +20,33 @@ Describe 'VSTeamProcess' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
-      $results = [PSCustomObject]@{
-         value = [PSCustomObject]@{
-            name        = 'Agile'
-            description = ''
-            url         = ''
-            id          = '123-5464-dee43'
-            isDefault   = 'false'
-            type        = 'Agile'
-         }
+      #Note: if the call is to ...work/processes... the identity field is "TypeID". calling to ...Process/processes... it is "ID"
+      $results =   [PSCustomObject]@{
+         value = @(
+            [PSCustomObject]@{
+               name        = 'Agile'
+               description = ''
+               url         = ''
+               typeid      = '123-5464-dee43'
+               isDefault   = 'false'
+               type        = 'Agile'
+            }
+            [PSCustomObject]@{
+               name        = 'Scrum'
+               description = ''
+               url         = ''
+               typeid      = '234-6575-eff54'
+               isDefault   = 'false'
+               type        = 'Agile'
+            }
+         )
       }
 
       $singleResult = [PSCustomObject]@{
          name        = 'Agile'
          description = ''
          url         = ''
-         id          = '123-5464-dee43'
+         typeid      = '123-5464-dee43'
          isDefault   = 'false'
          type        = 'Agile'
       }
@@ -47,17 +58,18 @@ Describe 'VSTeamProcess' {
    Context 'Get-VSTeamProcess' {
       It 'with no parameters using BearerToken should return process' {
          ## Act
-         Get-VSTeamProcess
+         $p = Get-VSTeamProcess
 
          ## Assert
+         $p.count             | should -Be 2 
+         $p[0].gettype().name | should -Be VSTeamProcess  # don't use BeOfType it's not in this scope/
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/process/processes*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Uri -like "*`$top=100*"
+            $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" 
          }
       }
-
+<# no longer pass top or skip. Parameters are ignored.
       It 'with top 10 should return top 10 process' {
          ## Act
          Get-VSTeamProcess -top 10
@@ -65,7 +77,7 @@ Describe 'VSTeamProcess' {
          ## Assert
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/process/processes*" -and
+            $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
             $Uri -like "*`$top=10*"
          }
       }
@@ -77,20 +89,23 @@ Describe 'VSTeamProcess' {
          ## Assert
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/process/processes*" -and
+            $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*`$skip=1*" -and
             $Uri -like "*`$top=100*"
          }
       }
-
+#>
       It 'by Name should return Process by Name' {
-         Get-VSTeamProcess -Name Agile
+         [VSTeamProcessCache]::timestamp   = -1
+         $p = Get-VSTeamProcess -Name Agile
 
-         # Make sure it was called with the correct URI
-         # It is called twice once for the call and once for the validator
-         Should -Invoke Invoke-RestMethod -Exactly -Times 2 -Scope It -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/process/processes*" -and
+         $p.name | should -Be  'Agile'
+         $p.id   | should -Not -BeNullOrEmpty
+         # Make sure it was ca lled with the correct URI
+         # Only called once for name - we don't validate the name, so wildcards can be given. 
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*"
          }
       }
@@ -100,7 +115,7 @@ Describe 'VSTeamProcess' {
 
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/process/processes/123-5464-dee43*" -and
+            $Uri -like "*https://dev.azure.com/test/_apis/work/processes/123-5464-dee43*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*"
          }
       }
