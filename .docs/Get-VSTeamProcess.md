@@ -50,9 +50,7 @@ names like "Custom Scrum", "Scrum for Contoso" will all be returned.
 
 ### -Top
 
-Specifies the maximum number to return.   
-If -Skip is specified and -Top is omitted the next 100 will be returned. 
-If neither Skip nor -Top is specified, all process templates will be returned. 
+The API now disregards the SKIP and TOP query values, so this parameter is ignored and deprecated. It will be removed in a future version
 
 ```yaml
 Type: Int32
@@ -62,9 +60,7 @@ Default value: 100
 
 ### -Skip
 
-Defines the number of Process Templates to skip.
-If -Top is specified and -Skip is omitted none will be skipped. 
-If neither Skip nor -Top is specified, all process templates will be returned. 
+The API now disregards the SKIP and TOP query values, so this parameter is ignored and deprecated. It will be removed in a future version
 
 
 ```yaml
