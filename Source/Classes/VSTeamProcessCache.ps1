@@ -9,17 +9,16 @@ class VSTeamProcessCache {
    static [object[]] $processes = @()
    static [hashtable] $urls = @{}
    static [Void] Update () {     
+      [VSTeamProcessCache]::processes = @()
+      #Get-VSTeamProcess should call update(listOfProcesses), 
+      #but it if doesn't (e.g. a simple mock) processes will still be empty, and we can call it
       $list = Get-VSTeamProcess
-      if ($list) {
-         foreach ($process in $list) {
-            if ($process.psobject.Properties['url']) {
-               [VSTeamProcessCache]::urls[$process.name] = $process.url
-            }
-         }
-         [VSTeamProcessCache]::processes = @() + ( $List | Select-Object -ExpandProperty Name | Sort-Object)
-      }
-      else {
-         [VSTeamProcessCache]::processes = @()
+      if ([VSTeamProcessCache]::processes.Count -eq 0) {[VSTeamProcessCache]::Update($list) }
+   }
+   static [Void] Update ([object[]]$NewItems) {
+      [VSTeamProcessCache]::processes = $NewItems | Select-Object -ExpandProperty Name | Sort-Object
+      $NewItems | Where-Object {$_.psobject.Properties['url']} | ForEach-Object {
+            [VSTeamProcessCache]::urls[$_.name] = $_.url
       }
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
    }

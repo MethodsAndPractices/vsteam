@@ -143,7 +143,7 @@ function _getApiVersion {
    [CmdletBinding(DefaultParameterSetName = 'Service')]
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy')]
+      [ValidateScript({$_ -in ([VSTeamVersions] | Get-Member -Static  -MemberType Property).name})]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -151,55 +151,10 @@ function _getApiVersion {
    )
 
    if ($Target.IsPresent) {
-      return [VSTeamVersions]::Version
+         return [VSTeamVersions]::Version
    }
-   else {
+   else {return [VSTeamVersions]::$Service }
 
-      switch ($Service) {
-         'Build' {
-            return [VSTeamVersions]::Build
-         }
-         'Release' {
-            return [VSTeamVersions]::Release
-         }
-         'Core' {
-            return [VSTeamVersions]::Core
-         }
-         'Git' {
-            return [VSTeamVersions]::Git
-         }
-         'DistributedTask' {
-            return [VSTeamVersions]::DistributedTask
-         }
-         'VariableGroups' {
-            return [VSTeamVersions]::VariableGroups
-         }
-         'Tfvc' {
-            return [VSTeamVersions]::Tfvc
-         }
-         'Packaging' {
-            return [VSTeamVersions]::Packaging
-         }
-         'MemberEntitlementManagement' {
-            return [VSTeamVersions]::MemberEntitlementManagement
-         }
-         'ExtensionsManagement' {
-            return [VSTeamVersions]::ExtensionsManagement
-         }
-         'ServiceEndpoints' {
-            return [VSTeamVersions]::ServiceEndpoints
-         }
-         'Graph' {
-            return [VSTeamVersions]::Graph
-         }
-         'TaskGroups' {
-            return [VSTeamVersions]::TaskGroups
-         }
-         'Policy' {
-            return [VSTeamVersions]::Policy
-         }
-      }
-   }
 }
 
 function _getInstance {

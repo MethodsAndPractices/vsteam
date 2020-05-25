@@ -25,7 +25,7 @@ function Get-VSTeamProcess {
       # Return either a single proces by ID or a list of processes
       if ($id) {
          # Call the REST API with an ID
-         $resp = _callAPI -NoProject -area 'work' -resource 'processes' -id $id  -Version $(_getApiVersion Core) 
+         $resp = _callAPI -NoProject -area 'work' -resource 'processes' -id $id  -Version $(_getApiVersion ProcessDefinition) 
 
          if ($resp) {
             return [VSTeamProcess]::new($resp)
@@ -34,7 +34,7 @@ function Get-VSTeamProcess {
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion core)  
+            $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion ProcessDefinition)  
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod
@@ -42,13 +42,11 @@ function Get-VSTeamProcess {
             # This casuses the first error to terminate this execution.
             _handleException $_
          }
+         $processes = $resp.value | ForEach-Object {[VSTeamProcess]::new($_)} | Sort-Object -Property Name
          #we just fetched all the processes so let's update the cache. Also, cache the URLS for processes
-         [VSTeamProcessCache]::processes = $resp.value.name | Sort-Object
-         [VSTeamProcessCache]::timestamp = (Get-Date).Minute
-         $resp.value | ForEach-Object {
-            [VSTeamProcessCache]::urls[$_.name] =  (_getInstance) + "/_apis/work/processes/" + $_.TypeId
-            [VSTeamProcess]::new($_)
-         } | Where-Object {$_.name -like $Name} | Sort-Object -Property Name
+         [VSTeamProcessCache]::Update($processes) 
+
+         return ($processes | Where-Object {$_.name -like $Name} )
       }
    }
 }
