@@ -113,7 +113,7 @@ if ($runTests.IsPresent) {
    }
 
    # This loads [PesterConfiguration] into scope
-   Import-Module Pester
+   Import-Module Pester -MinimumVersion 5.0.0
 
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = '.\unit'
