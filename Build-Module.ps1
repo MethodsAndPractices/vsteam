@@ -107,13 +107,13 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
 
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
-   # This loads [PesterConfiguration] into scope
-   Import-Module Pester
-
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
       Write-Output "Installing Pester 5"
       Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc9' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
+
+   # This loads [PesterConfiguration] into scope
+   Import-Module Pester
 
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = '.\unit'
