@@ -17,8 +17,10 @@ class VSTeamProcessCache {
    }
    static [Void] Update ([object[]]$NewItems) {
       [VSTeamProcessCache]::processes = $NewItems | Select-Object -ExpandProperty Name | Sort-Object
-      $NewItems | Where-Object {$_.psobject.Properties['url']} | ForEach-Object {
-            [VSTeamProcessCache]::urls[$_.name] = $_.url
+      if ($Newitems) {
+         $NewItems | Where-Object {$_.psobject.Properties['url']} | ForEach-Object {
+               [VSTeamProcessCache]::urls[$_.name] = $_.url
+         }
       }
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
    }
