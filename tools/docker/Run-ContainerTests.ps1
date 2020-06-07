@@ -226,10 +226,10 @@ function Wait-DockerContainer {
    }
 }
 
-$platform = $PSVersionTable.Platform
+$platform = Get-OperatingSystem
 
-if ($platform -ne "Win32NT" -or $UseLinux) {
-   Write-Warning "Platform is not Win32NT based but '$platform'. Windows container do not work on Linux based systems. Ignoring Windows containers..."
+if ($platform -ne "Windows" -or $UseLinux) {
+   Write-Warning "Platform is not Windows based but '$platform'. Windows container do not work on linux based systems. Ignoring windows containers..."
 }
 
 $scriptPath = $PSScriptRoot
