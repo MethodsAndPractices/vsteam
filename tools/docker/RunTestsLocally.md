@@ -1,14 +1,14 @@
 # Run Unit Tests Locally with Docker
 
-When helping us to develop this module or when we want to expand the module. We always write unit tests. The problem with that is, that most of the time everybody is using his own machine with different version of OS or different versions of dependencies.
+When helping us to develop this module or when we want to expand the module. We always write unit tests. The problem with that is, that most of the time everybody is using their own machine with different version of OS or different versions of dependencies.
 
 This is why we created docker files for windows and linux. Currently we have prepared to run the unit tests in
 
-* linux - PowerShell Core 7
-* windows server core - PowerShell 5
-* windows server core - PowerShell Core 7
+* Linux - PowerShell Core 7
+* Windows server core - PowerShell 5
+* Windows server core - PowerShell Core 7
 
-In best case you should only need to run the powershell script below. The dockerfiles being used for this have only the needed PowerShell modules installed. So theoretically you could also develop in theese containers with VSCode and remote development.
+In best case you should only need to run the PowerShell script below. The docker files being used for this have only the needed PowerShell modules installed. So theoretically you could also develop in these containers with [Visual Studio Code](https://code.visualstudio.com/?wt.mc_id=DX_841432&WT.mc_id=github-github-dbrown) and [remote development](https://code.visualstudio.com/docs/remote/remote-overview?WT.mc_id=github-github-dbrown).
 
 # Prerequisites
 
@@ -27,7 +27,7 @@ Also be aware that we cannot know all prerequisites as there often many differen
 1. Install Docker: https://docs.docker.com/engine/install
 2. Run [Run-ContainerTests.ps1](Run-ContainerTests.ps1) located under ./tools/docker
 
-   ```powershell
+   ```PowerShell
    #Example
    Run-ContainerTests.ps1
    ```
@@ -35,5 +35,5 @@ Also be aware that we cannot know all prerequisites as there often many differen
 # Limitations
 
 * Windows container only work with windows based systems.
-* If you want to use the container to develop with VSCode remote development, then it currently only works with linux systems.
+* If you want to use the container to develop with [Visual Studio Code](https://code.visualstudio.com/?wt.mc_id=DX_841432&WT.mc_id=github-github-dbrown) [remote development](https://code.visualstudio.com/docs/remote/remote-overview?WT.mc_id=github-github-dbrown), then it currently only works with linux systems.
 * The log in PowerShell 5 window is scrambled, only the Pester results at the end can be properly observed.

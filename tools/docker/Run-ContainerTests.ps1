@@ -1,25 +1,24 @@
 [CmdletBinding()]
 param (
-    #if you want to make sure that only linux based containers are used, since windows based containers are not supported on your OS
-    [Parameter(Mandatory=$false)]
-    [switch]
-    $UseLinux
+   # if you want to make sure that only Linux based containers are used, since Windows based containers are not supported on your OS
+   [Parameter(Mandatory = $false)]
+   [switch]
+   $UseLinux
 )
 
 function Set-DockerHost {
    <#
     .SYNOPSIS
-        Switch between windows and linux containers. IMPORTANT: Works only for windows based systems
+        Switch between Windows and Linux containers. IMPORTANT: Works only for Windows based systems
    #>
    [CmdletBinding()]
    param (
       #sets the container OS
       [Parameter(Mandatory = $true)]
-      [ValidateSet("windows", "linux")]
+      [ValidateSet("Windows", "Linux")]
       [string]
       $Os
    )
-
 
    process {
       $dockerVersion = docker version --format '{{json .}}' | ConvertFrom-Json
@@ -44,10 +43,12 @@ function Add-DockerBuild {
       [Parameter(Mandatory = $true)]
       [string]
       $DockerFile,
+
       # give it a named tag. Best with repository and image name
       [Parameter(Mandatory = $true)]
       [string]
       $Tag,
+
       # Force the rebuild of the container
       [Switch]
       $Force
@@ -56,8 +57,8 @@ function Add-DockerBuild {
    process {
       $dockerImageId = docker images -q $Tag
 
-      #only build if image does not exist or it's forced
-      #when not using force: It can't be checked if a docker file has is different from the existing image
+      # only build if image does not exist or it's forced
+      # when not using force: It can't be checked if a docker file has is different from the existing image
       if ($null -eq $dockerImageId -or $Force) {
          docker build -f $DockerFile --tag $Tag .
       }
@@ -74,28 +75,34 @@ function Start-DockerVSTeamTests {
       [Parameter(Mandatory = $true)]
       [string]
       $Container,
+
       # volume mapping string
       # see: https://docs.docker.com/storage/volumes/#start-a-container-with-a-volume
       [Parameter(Mandatory = $true)]
       [string]
       $Volume,
+
       # default directoy when the container is started
       [Parameter(Mandatory = $true)]
       [string]
       $DefaultWorkDir,
+
       # Image to start
       [Parameter(Mandatory = $true)]
       [string]
       $Image,
+
       # choose which shell to start
       [Parameter(Mandatory = $false)]
       [ValidateSet("pwsh", "powershell")]
       [string]
       $Shell = "pwsh",
+
       # Use if powershell should wait for the container to exit
       [Parameter(Mandatory = $false)]
       [Switch]
       $Wait,
+
       # Open another powershell session to show the logs from the container
       [Parameter(Mandatory = $false)]
       [Switch]
@@ -108,18 +115,18 @@ function Start-DockerVSTeamTests {
       # Later it is converted to a string to start the container with it
       $pesterBuild = {
 
-         .\Build-Module.ps1 -installDep;
-         $null = Import-Module Pester;
+         .\Build-Module.ps1 -installDep
+         $null = Import-Module Pester
 
-         $pesterArgs = [PesterConfiguration]::Default;
-         $pesterArgs.Run.Exit = $true;
-         $pesterArgs.Run.Path = '.\unit';
-         $pesterArgs.Run.PassThru = $true;
-         $pesterArgs.Output.Verbosity = 'Normal';
-         $pesterArgs.TestResult.Enabled = $true;
+         $pesterArgs = [PesterConfiguration]::Default
+         $pesterArgs.Run.Exit = $true
+         $pesterArgs.Run.Path = '.\unit'
+         $pesterArgs.Run.PassThru = $true
+         $pesterArgs.Output.Verbosity = 'Normal'
+         $pesterArgs.TestResult.Enabled = $true
          $pesterArgs.TestResult.OutputPath = '#Container#_result.xml'
 
-         Invoke-Pester -Configuration $pesterArgs;
+         Invoke-Pester -Configuration $pesterArgs
 
          # exist with PowerShells last exist code for docker.
          # without deliverate exit code the -Wait switch could cause to wait indefinetely
@@ -151,10 +158,10 @@ function Start-DockerVSTeamTests {
          $Shell -Command $psCommandString
 
       if ($FollowLogs) {
-         $output = (docker exec -it $Container $Shell -c '$PSVersionTable | ConvertTo-Json -Compress;') -join ''
+         $output = (docker exec -it $Container $Shell -c '$PSVersionTable | ConvertTo-Json -Compress') -join ''
          $outputFirst = $output.IndexOf('{')
          $ouputLast = $output.LastIndexOf('}')
-         $versiontable = $output.Substring($outputFirst, $ouputLast+1-$outputFirst) | ConvertFrom-Json -Depth 50
+         $versiontable = $output.Substring($outputFirst, $ouputLast + 1 - $outputFirst) | ConvertFrom-Json -Depth 50
          $psVersion = "$($versiontable.PSVersion.Major).$($versiontable.PSVersion.Minor).$($versiontable.PSVersion.Patch)"
 
          $argList = "-NoExit -Command `"`$Host.UI.RawUI.WindowTitle = 'VSTeam Unit Tests | PowerShell $($versiontable.PSEdition) $psVersion | $($versiontable.Os)'; docker logs $Container -f`""
@@ -164,7 +171,6 @@ function Start-DockerVSTeamTests {
       if ($Wait) {
          docker wait $Container
       }
-
    }
 }
 
@@ -211,7 +217,7 @@ function Wait-DockerContainer {
 
             $exitCodes += @{
                containerName = $_
-               exitCode = $exitCode
+               exitCode      = $exitCode
             }
          }
       }
@@ -221,8 +227,9 @@ function Wait-DockerContainer {
 }
 
 $platform = $PSVersionTable.Platform
+
 if ($platform -ne "Win32NT" -or $UseLinux) {
-   Write-Warning "Platform is not Win32NT based but '$platform'. Windows container do not work on linux based systems. Ignoring windows containers..."
+   Write-Warning "Platform is not Win32NT based but '$platform'. Windows container do not work on Linux based systems. Ignoring Windows containers..."
 }
 
 $scriptPath = $PSScriptRoot
@@ -232,47 +239,48 @@ $containerFilePath = "$rootDir/build/docker"
 
 $dockerRepository = "vsteam"
 
+$WindowsImage = "$dockerRepository/wcore1903"
+$WindowsContainerPS7 = "$($dockerRepository)_wcore1903_ps7_tests"
+$WindowsContainerPS5 = "$($dockerRepository)_wcore1903_ps5_tests"
 
-$windowsImage = "$dockerRepository/wcore1903"
-$windowsContainerPS7 = "$($dockerRepository)_wcore1903_ps7_tests"
-$windowsContainerPS5 = "$($dockerRepository)_wcore1903_ps5_tests"
-
-# Build / run windows based container
+# Build / run Windows based container
 if ($platform -eq "Win32NT" -and !$UseLinux) {
-   Set-DockerHost -Os windows -Verbose
-   Add-DockerBuild -DockerFile "$containerFilePath/wcore1903/Dockerfile" -Tag $windowsImage
+   Set-DockerHost -Os Windows -Verbose
+   Add-DockerBuild -DockerFile "$containerFilePath/wcore1903/Dockerfile" -Tag $WindowsImage
 
    Start-DockerVSTeamTests `
-      -Container $windowsContainerPS7 `
+      -Container $WindowsContainerPS7 `
       -Volume "$rootDir`:$containerFolder" `
       -DefaultWorkDir $containerFolder `
-      -Image $windowsImage `
+      -Image $WindowsImage `
       -FollowLogs
 
    Start-DockerVSTeamTests `
-      -Container $windowsContainerPS5 `
+      -Container $WindowsContainerPS5 `
       -Volume "$rootDir`:$containerFolder" `
       -DefaultWorkDir $containerFolder `
-      -Image $windowsImage `
+      -Image $WindowsImage `
       -Shell powershell `
       -FollowLogs
 
-   $null = Wait-DockerContainer -Container @($windowsContainerPS5,$windowsContainerPS7)
+   $null = Wait-DockerContainer -Container @($WindowsContainerPS5, $WindowsContainerPS7)
 }
 
-$linuxImage = "$dockerRepository/linux"
-$linuxContainer = "$($dockerRepository)_linux_ps7_tests"
-$linuxContainerFolder = $containerFolder.Replace('c:/', '/c/')
+$LinuxImage = "$dockerRepository/Linux"
+$LinuxContainer = "$($dockerRepository)_Linux_ps7_tests"
+$LinuxContainerFolder = $containerFolder.Replace('c:/', '/c/')
 
-# Build / run linux based container
+# Build / run Linux based container
 if ($platform -eq "Win32NT" -and !$UseLinux) {
-   Set-DockerHost -Os linux -Verbose
+   Set-DockerHost -Os Linux -Verbose
 }
-Add-DockerBuild -DockerFile "$containerFilePath/linux/Dockerfile" -Tag $linuxImage
+
+Add-DockerBuild -DockerFile "$containerFilePath/Linux/Dockerfile" -Tag $LinuxImage
+
 $null = Start-DockerVSTeamTests `
-   -Container $linuxContainer `
-   -Volume "$rootDir`:$linuxContainerFolder" `
-   -DefaultWorkDir $linuxContainerFolder `
-   -Image $linuxImage `
+   -Container $LinuxContainer `
+   -Volume "$rootDir`:$LinuxContainerFolder" `
+   -DefaultWorkDir $LinuxContainerFolder `
+   -Image $LinuxImage `
    -Wait `
    -FollowLogs
