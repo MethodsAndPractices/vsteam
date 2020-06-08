@@ -10,14 +10,11 @@ RUN pwsh `
       -NoLogo `
       -NoProfile `
       -Command " `
-         `$ProgressPreference = 'SilentlyContinue';`
-         Write-host 'Installing needed PowerShell modules...';`
-         Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted;`
-         Install-Module -Name SHiPS -Repository PSGallery -SkipPublisherCheck;`
-         Install-Module -Name Trackyon.Utils -Repository PSGallery;`
-         Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '${pesterMinVer}' -AllowClobber -SkipPublisherCheck;`
-         Install-Module -Name PSSCriptAnalyzer -Repository PSGallery;`
-         Install-Module -Name Plaster -Repository PSGallery; `
+         `$PSVersionTable; `
+         Write-host 'Installing needed PowerShell modules...'; `
+         Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted; `
+         Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck -Verbose; `
+         Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '${pesterMinVer}' -AllowClobber -SkipPublisherCheck; `
          "
 
 CMD ["pwsh.exe"]

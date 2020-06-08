@@ -11,7 +11,6 @@ RUN pwsh `
    -NoProfile `
    -Command " `
    `$PSVersionTable; `
-   Get-PSRepository; `
    Write-host 'Installing needed PowerShell modules...'; `
    Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted; `
    Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck -Verbose; `
@@ -40,11 +39,8 @@ RUN powershell `
 RUN powershell `
    -NoLogo `
    -Command " `
-   Install-Module -Name SHiPS -Repository PSGallery -SkipPublisherCheck -Verbose;`
-   Install-Module -Name Trackyon.Utils -Repository PSGallery -Verbose;`
+   Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck -Verbose; `
    Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "$env:pesterMinVer" -AllowClobber -SkipPublisherCheck -Verbose;`
-   Install-Module -Name PSSCriptAnalyzer -Repository PSGallery -Verbose;`
-   Install-Module -Name Plaster -Repository PSGallery -Verbose; `
    "
 
 CMD ["pwsh.exe"]
