@@ -1,6 +1,6 @@
 # escape=`
 ARG fromTag=7.0.1-ubuntu-18.04
-ARG pesterMinVer=5.0.0-rc8
+ARG pesterMinVer=5.0.2
 
 FROM mcr.microsoft.com/powershell:${fromTag}
 

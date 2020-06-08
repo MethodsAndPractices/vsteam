@@ -60,7 +60,7 @@ function Add-DockerBuild {
       # only build if image does not exist or it's forced
       # when not using force: It can't be checked if a docker file has is different from the existing image
       if ($null -eq $dockerImageId -or $Force) {
-         docker build -f $DockerFile --tag $Tag .
+         docker build --file $DockerFile --tag $Tag .
       }
       else {
          Write-Verbose "image $Tag already exists with id $dockerImageId"
@@ -121,8 +121,8 @@ function Start-DockerVSTeamTests {
          $pesterArgs = [PesterConfiguration]::Default
          $pesterArgs.Run.Exit = $true
          $pesterArgs.Run.Path = '.\unit'
-         $pesterArgs.Run.PassThru = $true
-         $pesterArgs.Output.Verbosity = 'Normal'
+         $pesterArgs.Run.PassThru = $false
+         $pesterArgs.Output.Verbosity = 'None'
          $pesterArgs.TestResult.Enabled = $true
          $pesterArgs.TestResult.OutputPath = '#Container#_result.xml'
 
@@ -161,7 +161,7 @@ function Start-DockerVSTeamTests {
          $output = (docker exec -it $Container $Shell -c '$PSVersionTable | ConvertTo-Json -Compress') -join ''
          $outputFirst = $output.IndexOf('{')
          $ouputLast = $output.LastIndexOf('}')
-         $versiontable = $output.Substring($outputFirst, $ouputLast + 1 - $outputFirst) | ConvertFrom-Json -Depth 50
+         $versiontable = $output.Substring($outputFirst, $ouputLast + 1 - $outputFirst) | ConvertFrom-Json
          $psVersion = "$($versiontable.PSVersion.Major).$($versiontable.PSVersion.Minor).$($versiontable.PSVersion.Patch)"
 
          $argList = "-NoExit -Command `"`$Host.UI.RawUI.WindowTitle = 'VSTeam Unit Tests | PowerShell $($versiontable.PSEdition) $psVersion | $($versiontable.Os)'; docker logs $Container -f`""
@@ -235,7 +235,7 @@ if ($platform -ne "Windows" -or $UseLinux) {
 $scriptPath = $PSScriptRoot
 $rootDir = (Resolve-Path -Path "$scriptPath\..\..\").ToString().trim('\')
 $containerFolder = "c:/vsteam"
-$containerFilePath = "$rootDir/build/docker"
+$containerFilePath = "$rootDir/tools/docker"
 
 $dockerRepository = "vsteam"
 
@@ -244,7 +244,7 @@ $WindowsContainerPS7 = "$($dockerRepository)_wcore1903_ps7_tests"
 $WindowsContainerPS5 = "$($dockerRepository)_wcore1903_ps5_tests"
 
 # Build / run Windows based container
-if ($platform -eq "Win32NT" -and !$UseLinux) {
+if ($platform -eq "Windows" -and !$UseLinux) {
    Set-DockerHost -Os Windows -Verbose
    Add-DockerBuild -DockerFile "$containerFilePath/wcore1903/Dockerfile" -Tag $WindowsImage
 
@@ -266,12 +266,12 @@ if ($platform -eq "Win32NT" -and !$UseLinux) {
    $null = Wait-DockerContainer -Container @($WindowsContainerPS5, $WindowsContainerPS7)
 }
 
-$LinuxImage = "$dockerRepository/Linux"
+$LinuxImage = "$dockerRepository/linux"
 $LinuxContainer = "$($dockerRepository)_Linux_ps7_tests"
 $LinuxContainerFolder = $containerFolder.Replace('c:/', '/c/')
 
 # Build / run Linux based container
-if ($platform -eq "Win32NT" -and !$UseLinux) {
+if ($platform -eq "Windows") {
    Set-DockerHost -Os Linux -Verbose
 }
 

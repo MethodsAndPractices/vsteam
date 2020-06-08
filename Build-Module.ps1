@@ -112,7 +112,7 @@ if ($runTests.IsPresent) {
 
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
       Write-Output "Installing Pester 5"
-      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc8' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.2' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
    $pesterArgs = [PesterConfiguration]::Default

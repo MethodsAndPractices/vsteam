@@ -30,3 +30,6 @@ coverage.xml
 **/.DS_Store
 **/._.DS_Store
 .gdn
+vsteam_Linux_ps7_tests_result.xml
+vsteam_wcore1903_ps5_tests_result.xml
+vsteam_wcore1903_ps7_tests_result.xml
