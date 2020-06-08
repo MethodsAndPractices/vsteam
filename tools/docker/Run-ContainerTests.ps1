@@ -154,7 +154,7 @@ function Start-DockerVSTeamTests {
          $output = (docker exec -it $Container $Shell -c '$PSVersionTable | ConvertTo-Json -Compress;') -join ''
          $outputFirst = $output.IndexOf('{')
          $ouputLast = $output.LastIndexOf('}')
-         $versiontable = $output.Substring($outputFirst, $ouputLast+1-$outputFirst) | ConvertFrom-Json -Depth 50
+         $versiontable = $output.Substring($outputFirst, $ouputLast+1-$outputFirst) | ConvertFrom-Json
          $psVersion = "$($versiontable.PSVersion.Major).$($versiontable.PSVersion.Minor).$($versiontable.PSVersion.Patch)"
 
          $argList = "-NoExit -Command `"`$Host.UI.RawUI.WindowTitle = 'VSTeam Unit Tests | PowerShell $($versiontable.PSEdition) $psVersion | $($versiontable.Os)'; docker logs $Container -f`""
@@ -220,15 +220,15 @@ function Wait-DockerContainer {
    }
 }
 
-$platform = $PSVersionTable.Platform
-if ($platform -ne "Win32NT" -or $UseLinux) {
-   Write-Warning "Platform is not Win32NT based but '$platform'. Windows container do not work on linux based systems. Ignoring windows containers..."
+$os = Get-OperatingSystem
+if ($os -ne "Windows" -or $UseLinux) {
+   Write-Warning "Platform is not Windows based but '$os'. Windows container do not work on linux based systems. Ignoring windows containers..."
 }
 
 $scriptPath = $PSScriptRoot
 $rootDir = (Resolve-Path -Path "$scriptPath\..\..\").ToString().trim('\')
 $containerFolder = "c:/vsteam"
-$containerFilePath = "$rootDir/build/docker"
+$containerFilePath = "$rootDir/Tools/docker"
 
 $dockerRepository = "vsteam"
 
@@ -238,7 +238,7 @@ $windowsContainerPS7 = "$($dockerRepository)_wcore1903_ps7_tests"
 $windowsContainerPS5 = "$($dockerRepository)_wcore1903_ps5_tests"
 
 # Build / run windows based container
-if ($platform -eq "Win32NT" -and !$UseLinux) {
+if ($os -eq "Windows" -and !$UseLinux) {
    Set-DockerHost -Os windows -Verbose
    Add-DockerBuild -DockerFile "$containerFilePath/wcore1903/Dockerfile" -Tag $windowsImage
 
@@ -265,7 +265,7 @@ $linuxContainer = "$($dockerRepository)_linux_ps7_tests"
 $linuxContainerFolder = $containerFolder.Replace('c:/', '/c/')
 
 # Build / run linux based container
-if ($platform -eq "Win32NT" -and !$UseLinux) {
+if ($os -eq "Windows" -and !$UseLinux) {
    Set-DockerHost -Os linux -Verbose
 }
 Add-DockerBuild -DockerFile "$containerFilePath/linux/Dockerfile" -Tag $linuxImage
