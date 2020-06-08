@@ -37,3 +37,8 @@ Also be aware that we cannot know all prerequisites as there often many differen
 * Windows container only work with windows based systems.
 * If you want to use the container to develop with VSCode remote development, then it currently only works with linux systems.
 * The log in PowerShell 5 window is scrambled, only the Pester results at the end can be properly observed.
+
+# Troubleshooting
+
+* sometimes windows container do not seem to be able to connect to the internet on a windows host. This often happens when there are multiple networking adapters (Ethernet, Wi-Fi, etc.) present on the host.
+Check the [github issue](https://github.com/docker/for-win/issues/2760) for mitigation.
