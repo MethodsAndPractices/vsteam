@@ -51,9 +51,3 @@ RUN powershell `
          "
 
 CMD ["pwsh.exe"]
-
-
-#Invoke-WebRequest https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile "C:\Program Files\Nuget\Nuget.exe"
-#$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
-#$newpath = "$oldpath;c:\path\to\folder"
-#Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
