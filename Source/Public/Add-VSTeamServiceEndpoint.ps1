@@ -23,7 +23,7 @@ function Add-VSTeamServiceEndpoint {
 
       # Call the REST API
       $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $(_getApiVersion DistributedTask)
+         -Method Post -ContentType 'application/json' -body $body -Version $(_getApiVersion ServiceEndpoints)
 
       _trackServiceEndpointProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 

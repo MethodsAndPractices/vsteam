@@ -23,7 +23,7 @@ Describe 'VSTeamServiceFabricEndpoint' {
       Context 'Services' {
          BeforeAll {
             Mock _getInstance { return 'https://dev.azure.com/test' }
-            Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceFabricEndpoint' }
+            Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
 
             Mock Write-Progress
             Mock Invoke-RestMethod { return @{id = '23233-2342' } } -ParameterFilter { $Method -eq 'Post' }
@@ -76,22 +76,25 @@ Describe 'VSTeamServiceFabricEndpoint' {
          BeforeAll {
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
             Mock _getApiVersion { return 'TFS2017' }
-            Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'ServiceFabricEndpoint' }
+            Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
          }
 
          Context 'Add-VSTeamServiceFabricEndpoint' {
             BeforeAll {
-               Mock ConvertTo-Json { throw 'Should not be called' }
+               Mock Add-VSTeamServiceEndpoint -ParameterFilter {
+                  $endpointType -eq 'servicefabric'
+               }
             }
 
-            It 'Should throw' {
+            # Service Fabric is supported on all VSTeam supported versions of TFS
+            It 'Should not throw' {
                { Add-VSTeamServiceFabricEndpoint -projectName 'project' `
                      -endpointName 'PM_DonovanBrown' -url "tcp://0.0.0.0:19000" `
-                     -useWindowsSecurity $false } | Should -Throw
+                     -useWindowsSecurity $false } | Should -Not -Throw
             }
 
-            It 'ConvertTo-Json should not be called' {
-               Should -Invoke ConvertTo-Json -Exactly -Times 0 -Scope Context
+            It 'Add-VSTeamServiceEndpoint should be called' {
+               Should -Invoke Add-VSTeamServiceEndpoint -Exactly -Times 1 -Scope Context
             }
          }
       }

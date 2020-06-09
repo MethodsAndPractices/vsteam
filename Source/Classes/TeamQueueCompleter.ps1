@@ -25,9 +25,9 @@ class TeamQueueCompleter : IArgumentCompleter {
       # If there is no projectName by this point just return a empty
       # list.
       if ($projectName) {
-         foreach ($q in (Get-VSTeamQueue -ProjectName $projectName)) {
-            if ($q.name -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new($q.name))
+         foreach ($value in (Get-VSTeamQueue -ProjectName $projectName).name) {
+            if ($value -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
             }
          }
       }

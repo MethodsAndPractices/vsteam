@@ -18,13 +18,10 @@ class VSTeamAccount : SHiPSDirectory {
       $topLevelFolders = @(
          [VSTeamPools]::new('Agent Pools'),
          [VSTeamExtensions]::new('Extensions')
+         [VSTeamFeeds]::new('Feeds')
       )
-
+      
       # Don't show directories not supported by the server
-      if (_testFeedSupport) {
-         $topLevelFolders += [VSTeamFeeds]::new('Feeds')
-      }
-
       if (_testGraphSupport) {
          $topLevelFolders += [VSTeamPermissions]::new('Permissions')
       }

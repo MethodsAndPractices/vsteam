@@ -8,9 +8,6 @@ function Remove-VSTeamFeed {
       [switch] $Force
    )
    process {
-      # This will throw if this account does not support feeds
-      _supportsFeeds
-
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Package Feed")) {
             # Call the REST API

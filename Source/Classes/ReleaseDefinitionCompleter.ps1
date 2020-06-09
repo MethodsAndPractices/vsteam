@@ -25,9 +25,9 @@ class ReleaseDefinitionCompleter : IArgumentCompleter {
       # If there is no projectName by this point just return a empty
       # list.
       if ($projectName) {
-         foreach ($r in (Get-VSTeamReleaseDefinition -ProjectName $projectName)) {
-            if ($r.name -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new($r.name))
+         foreach ($value in (Get-VSTeamReleaseDefinition -ProjectName $projectName).name) {
+            if ($value -like "*$WordToComplete*") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
             }
          }
       }

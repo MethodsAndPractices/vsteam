@@ -15,12 +15,9 @@ class UncachedProjectCompleter : IArgumentCompleter {
       [VSTeamProjectCache]::projects = _getProjects
       [VSTeamProjectCache]::timestamp = (Get-Date).Minute
       
-      foreach ($p in [VSTeamProjectCache]::projects) {
-         if ($p -like "*$WordToComplete*" -and $p -match "\s") {
-            $results.Add([CompletionResult]::new("'$p'"))
-         }
-         elseif ($p -like "*$WordToComplete*") {
-            $results.Add([CompletionResult]::new($p))
+      foreach ($value in [VSTeamProjectCache]::projects) {
+         if ($value -like "*$WordToComplete*") {
+            $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
          }
       } 
       

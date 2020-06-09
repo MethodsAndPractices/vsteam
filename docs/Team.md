@@ -168,6 +168,10 @@ Return a list of access control lists for the specified security namespace and t
 
 Returns the agents in a pool.
 
+### [Get-VSTeamAPIVersion](Get-VSTeamAPIVersion.md)
+
+Returns the versions of APIs used.
+
 ### [Get-VSTeamApproval](Get-VSTeamApproval.md)
 
 Gets a list of approvals for all releases for a team project.
@@ -545,6 +549,10 @@ Opens the release definitions for a team project in the default browser.
 ### [Show-VSTeamWorkItem](Show-VSTeamWorkItem.md)
 
 Opens the work item in the default browser.
+
+### [Stop-VSTeamBuild](Stop-VSTeamBuild.md)
+
+Allows you to cancel a running build.
 
 ### [Test-VSTeamMembership](Test-VSTeamMembership.md)
 

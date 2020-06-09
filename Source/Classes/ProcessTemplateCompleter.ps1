@@ -19,9 +19,9 @@ class ProcessTemplateCompleter : IArgumentCompleter {
          [VSTeamProcessCache]::timestamp = (Get-Date).Minute
       }
 
-      foreach ($p in [VSTeamProcessCache]::processes) {
-         if ($p -like "*$WordToComplete*") {
-            $results.Add([CompletionResult]::new($p))
+      foreach ($value in [VSTeamProcessCache]::processes) {
+         if ($value -like "*$WordToComplete*") {
+            $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
          }
       }
 
