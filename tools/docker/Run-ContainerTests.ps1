@@ -3,7 +3,11 @@ param (
    # if you want to make sure that only Linux based containers are used, since Windows based containers are not supported on your OS
    [Parameter(Mandatory = $false)]
    [switch]
-   $UseLinux
+   $UseLinux,
+
+   # Open another PowerShell session to show the logs from the container
+   [Switch]
+   $ShowLogs
 )
 
 function Set-DockerHost {
@@ -245,23 +249,25 @@ $WindowsContainerPS5 = "$($dockerRepository)_wcore1903_ps5_tests"
 
 # Build / run Windows based container
 if ($platform -eq "Windows" -and !$UseLinux) {
-   Set-DockerHost -Os Windows -Verbose
+   Set-DockerHost -Os Windows
    Add-DockerBuild -DockerFile "$containerFilePath/wcore1903/Dockerfile" -Tag $WindowsImage
 
-   Start-DockerVSTeamTests `
+   Write-Output 'Starting PowerShell 7 tests on Windows'
+   $null = Start-DockerVSTeamTests `
       -Container $WindowsContainerPS7 `
       -Volume "$rootDir`:$containerFolder" `
       -DefaultWorkDir $containerFolder `
       -Image $WindowsImage `
-      -FollowLogs
+      -FollowLogs:$ShowLogs
 
-   Start-DockerVSTeamTests `
+   Write-Output 'Starting PowerShell 5 tests on Windows'
+   $null = Start-DockerVSTeamTests `
       -Container $WindowsContainerPS5 `
       -Volume "$rootDir`:$containerFolder" `
       -DefaultWorkDir $containerFolder `
       -Image $WindowsImage `
       -Shell powershell `
-      -FollowLogs
+      -FollowLogs:$ShowLogs
 
    $null = Wait-DockerContainer -Container @($WindowsContainerPS5, $WindowsContainerPS7)
 }
@@ -272,15 +278,16 @@ $LinuxContainerFolder = $containerFolder.Replace('c:/', '/c/')
 
 # Build / run Linux based container
 if ($platform -eq "Windows") {
-   Set-DockerHost -Os Linux -Verbose
+   Set-DockerHost -Os Linux
 }
 
 Add-DockerBuild -DockerFile "$containerFilePath/Linux/Dockerfile" -Tag $LinuxImage
 
+Write-Output 'Starting PowerShell 7 tests on Linux'
 $null = Start-DockerVSTeamTests `
    -Container $LinuxContainer `
    -Volume "$rootDir`:$LinuxContainerFolder" `
    -DefaultWorkDir $LinuxContainerFolder `
    -Image $LinuxImage `
    -Wait `
-   -FollowLogs
+   -FollowLogs:$ShowLogs

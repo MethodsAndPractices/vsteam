@@ -7,14 +7,13 @@ FROM mcr.microsoft.com/powershell:${fromTag}
 SHELL ["pwsh", "-Command", "$ErrorActionPreference = 'Stop';"]
 
 RUN pwsh `
-      -NoLogo `
-      -NoProfile `
-      -Command " `
-         `$PSVersionTable; `
-         Write-host 'Installing needed PowerShell modules...'; `
-         Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted; `
-         Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck -Verbose; `
-         Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '${pesterMinVer}' -AllowClobber -SkipPublisherCheck; `
-         "
+   -NoLogo `
+   -NoProfile `
+   -Command " `
+   `Write-host 'Installing needed PowerShell modules...'; `
+   Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted; `
+   Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck -Verbose; `
+   Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '${pesterMinVer}' -AllowClobber -SkipPublisherCheck; `
+   "
 
 CMD ["pwsh.exe"]

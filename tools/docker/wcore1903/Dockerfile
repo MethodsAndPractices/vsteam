@@ -10,10 +10,9 @@ RUN pwsh `
    -NoLogo `
    -NoProfile `
    -Command " `
-   `$PSVersionTable; `
-   Write-host 'Installing needed PowerShell modules...'; `
+   `Write-host 'Installing needed PowerShell modules...'; `
    Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted; `
-   Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck -Verbose; `
+   Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck; `
    Install-Module -Name Pester -Force -AllowPrerelease -MinimumVersion "$env:pesterMinVer" -AllowClobber -SkipPublisherCheck; `
    "
 
@@ -25,28 +24,23 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 RUN powershell `
    -NoLogo `
    -Command " `
-   `$PSVersionTable; `
+   `Write-host 'Installing nuget and PowerShellGet...'; `
    Set-ExecutionPolicy Bypass -Scope Process -Force; `
    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
    iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); `
    choco install nuget.commandline -y; `
-   Install-PackageProvider -Name NuGet -Force -Verbose; `
-   Install-Module -Name PowerShellGet -Force -Verbose; `
-   Update-Module -Name PowerShellGet -Verbose; `
+   Install-PackageProvider -Name NuGet -Force; `
+   Install-Module -Name PowerShellGet -Force; `
+   Update-Module -Name PowerShellGet; `
    "
 
 # install all modules for PS 5.1 as well
 RUN powershell `
    -NoLogo `
    -Command " `
-   Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck -Verbose; `
-   Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "$env:pesterMinVer" -AllowClobber -SkipPublisherCheck -Verbose;`
+   `Write-host 'Installing needed PowerShell modules...'; `
+   Install-Module -Name 'Trackyon.Utils', 'PSScriptAnalyzer', 'Plaster', 'SHiPS' -SkipPublisherCheck; `
+   Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "$env:pesterMinVer" -AllowClobber -SkipPublisherCheck;`
    "
 
 CMD ["pwsh.exe"]
-
-
-#Invoke-WebRequest https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile "C:\Program Files\Nuget\Nuget.exe"
-#$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
-#$newpath = "$oldpath;c:\path\to\folder"
-#Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
