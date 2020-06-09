@@ -153,6 +153,14 @@ function Start-DockerVSTeamTests {
       # using a script block here to have syntax checking and highlightning.
       # Later it is converted to a string to start the container with it
       $pesterBuild = {
+         Write-Verbose 'Deleting old results'
+         # I delete from the container so that all the correct permissions
+         # are granted to delete. When I tried this from outside the container
+         # I did not have permissions to delete it.
+         if (Test-Path "'#Container#_result.xml'") {
+            Write-Verbose "Deleting old results file '#Container#_result.xml'"
+            Remove-Item "'#Container#_result.xml'"
+         }
 
          .\Build-Module.ps1 -installDep
          $null = Import-Module Pester
@@ -203,7 +211,16 @@ function Start-DockerVSTeamTests {
          $versiontable = $output.Substring($outputFirst, $ouputLast + 1 - $outputFirst) | ConvertFrom-Json
          $psVersion = "$($versiontable.PSVersion.Major).$($versiontable.PSVersion.Minor).$($versiontable.PSVersion.Patch)"
 
-         $argList = "-NoExit -Command `"`$Host.UI.RawUI.WindowTitle = 'VSTeam Unit Tests | PowerShell $($versiontable.PSEdition) $psVersion | $($versiontable.Os)'; docker logs $Container -f`""
+         # On Linux the logs show up in the same PowerShell window so we need it to exit 
+         # On Windows new windows are opened and you want -NoExit so they stay open for you to
+         # review the logs.
+         if (Get-OperatingSystem -ne 'Windows') {
+            $argList = "-Command `"`$Host.UI.RawUI.WindowTitle = 'VSTeam Unit Tests | PowerShell $($versiontable.PSEdition) $psVersion | $($versiontable.Os)'; docker logs $Container -f`""
+         }
+         else {
+            $argList = "-NoExit -Command `"`$Host.UI.RawUI.WindowTitle = 'VSTeam Unit Tests | PowerShell $($versiontable.PSEdition) $psVersion | $($versiontable.Os)'; docker logs $Container -f`""
+         }
+
          Start-Process $Shell -argumentlist $argList
       }
 
@@ -278,22 +295,6 @@ $WindowsImage = "$dockerRepository/wcore1903"
 $WindowsContainerPS7 = "$($dockerRepository)_wcore1903_ps7_tests"
 $WindowsContainerPS5 = "$($dockerRepository)_wcore1903_ps5_tests"
 
-Write-Verbose 'Deleting old results'
-# Delete old test results.
-if (Test-Path "$rootDir/vsteam_Linux_ps7_tests_result.xml") {
-   Write-Verbose "Deleting old results file $rootDir/vsteam_Linux_ps7_tests_result.xml"
-   Remove-Item "$rootDir/vsteam_Linux_ps7_tests_result.xml"
-}
-
-if (Test-Path "$rootDir/vsteam_wcore1903_ps7_tests_result.xml") {
-   Write-Verbose "Deleting old results file $rootDir/vsteam_wcore1903_ps7_tests_result.xml"
-   Remove-Item "$rootDir/vsteam_wcore1903_ps7_tests_result.xml"
-}
-
-if (Test-Path "$rootDir/vsteam_wcore1903_ps5_tests_result.xml") {
-   Write-Verbose "Deleting old results file $rootDir/vsteam_wcore1903_ps5_tests_result.xml"
-   Remove-Item "$rootDir/vsteam_wcore1903_ps5_tests_result.xml"
-}
 
 # Build / run Windows based container
 if ($platform -eq "Windows" -and !$UseLinux) {
