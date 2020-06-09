@@ -4,7 +4,7 @@
 [![Documentation - VSTeam](https://img.shields.io/badge/Documentation-VSTeam-blue.svg)](https://github.com/DarqueWarrior/vsteam/blob/master/docs/readme.md)
 [![PowerShell Gallery - VSTeam](https://img.shields.io/badge/PowerShell%20Gallery-VSTeam-blue.svg)](https://www.powershellgallery.com/packages/VSTeam)
 [![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.0-blue.svg)](https://github.com/PowerShell/PowerShell)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md) 
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 ## Introduction
 
@@ -95,6 +95,8 @@ Builds the module, installs needed dependencies, loads the module into the sessi
 .\Build-Module.ps1 -installDep -ipmo -buildHelp
 ```
 
+#### Run Tests Locally
+
 Runs all unit tests and executes the static code analysis.
 ```PowerShell
 .\Build-Module.ps1 -runTests -codeCoverage -analyzeScript
@@ -105,7 +107,9 @@ Runs the tests, but executes only the unit tests that have the description "work
 .\Build-Module.ps1 -runTests -testName workitems
 ```
 
+#### Run Tests in Docker
 
+You can [run your unit tests also locally](/tools/docker/RunTestsLocally.md) and cross-platform in a standardized environment.
 
 ## Contributors
 
