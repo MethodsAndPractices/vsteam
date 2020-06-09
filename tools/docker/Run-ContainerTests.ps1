@@ -157,9 +157,9 @@ function Start-DockerVSTeamTests {
          # I delete from the container so that all the correct permissions
          # are granted to delete. When I tried this from outside the container
          # I did not have permissions to delete it.
-         if (Test-Path "'#Container#_result.xml'") {
-            Write-Verbose "Deleting old results file '#Container#_result.xml'"
-            Remove-Item "'#Container#_result.xml'"
+         if (Test-Path '#Container#_result.xml') {
+            Write-Verbose 'Deleting old results file #Container#_result.xml'
+            Remove-Item '#Container#_result.xml'
          }
 
          .\Build-Module.ps1 -installDep
@@ -330,7 +330,7 @@ if ($platform -eq "Windows") {
    Set-DockerHost -Os Linux
 }
 
-Add-DockerBuild -DockerFile "$containerFilePath/Linux/Dockerfile" -Tag $LinuxImage
+Add-DockerBuild -DockerFile "$containerFilePath/linux/Dockerfile" -Tag $LinuxImage
 
 Write-Output 'Starting PowerShell 7 tests on Linux'
 $null = Start-DockerVSTeamTests `
