@@ -10,6 +10,42 @@ param (
    $ShowLogs
 )
 
+function Find-Numbers {
+   [CmdletBinding()]
+   param (
+      [string] $fileToRead
+   )
+   
+   process {
+      $passed = 0
+      $failed = 0
+      $skipped = 0
+      $not_run = 0
+         
+      if (Test-Path $fileToRead) {
+         $a = Get-Content $fileToRead
+         $myMatches = $a | Select-string "total=""([0-9]+)"""
+         $passed = $myMatches.Matches[0].Groups[1].Value -as [int]
+
+         $myMatches = $a | Select-string 'failures="([0-9]+)"'
+         $failed = $myMatches.Matches[0].Groups[1].Value -as [int]
+
+         $myMatches = $a | Select-string 'skipped="([0-9]+)"'
+         $skipped = $myMatches.Matches[0].Groups[1].Value -as [int]
+
+         $myMatches = $a | Select-string 'not-run="([0-9]+)"'
+         $not_run = $myMatches.Matches[0].Groups[1].Value -as [int]
+      }
+
+      Write-Output @{
+         Passed  = $passed
+         Failed  = $failed
+         Skipped = $skipped
+         NotRun  = $not_run
+      }
+   }
+}
+
 function Set-DockerHost {
    <#
     .SYNOPSIS
@@ -114,7 +150,6 @@ function Start-DockerVSTeamTests {
    )
 
    begin {
-
       # using a script block here to have syntax checking and highlightning.
       # Later it is converted to a string to start the container with it
       $pesterBuild = {
@@ -232,10 +267,6 @@ function Wait-DockerContainer {
 
 $platform = Get-OperatingSystem
 
-if ($platform -ne "Windows" -or $UseLinux) {
-   Write-Warning "Platform is not Windows based but '$platform'. Windows container do not work on linux based systems. Ignoring windows containers..."
-}
-
 $scriptPath = $PSScriptRoot
 $rootDir = (Resolve-Path -Path "$scriptPath\..\..\").ToString().trim('\')
 $containerFolder = "c:/vsteam"
@@ -246,6 +277,23 @@ $dockerRepository = "vsteam"
 $WindowsImage = "$dockerRepository/wcore1903"
 $WindowsContainerPS7 = "$($dockerRepository)_wcore1903_ps7_tests"
 $WindowsContainerPS5 = "$($dockerRepository)_wcore1903_ps5_tests"
+
+Write-Verbose 'Deleting old results'
+# Delete old test results.
+if (Test-Path "$rootDir/vsteam_Linux_ps7_tests_result.xml") {
+   Write-Verbose "Deleting old results file $rootDir/vsteam_Linux_ps7_tests_result.xml"
+   Remove-Item "$rootDir/vsteam_Linux_ps7_tests_result.xml"
+}
+
+if (Test-Path "$rootDir/vsteam_wcore1903_ps7_tests_result.xml") {
+   Write-Verbose "Deleting old results file $rootDir/vsteam_wcore1903_ps7_tests_result.xml"
+   Remove-Item "$rootDir/vsteam_wcore1903_ps7_tests_result.xml"
+}
+
+if (Test-Path "$rootDir/vsteam_wcore1903_ps5_tests_result.xml") {
+   Write-Verbose "Deleting old results file $rootDir/vsteam_wcore1903_ps5_tests_result.xml"
+   Remove-Item "$rootDir/vsteam_wcore1903_ps5_tests_result.xml"
+}
 
 # Build / run Windows based container
 if ($platform -eq "Windows" -and !$UseLinux) {
@@ -291,3 +339,14 @@ $null = Start-DockerVSTeamTests `
    -Image $LinuxImage `
    -Wait `
    -FollowLogs:$ShowLogs
+
+$linux = Find-Numbers -fileToRead "$rootDir/vsteam_Linux_ps7_tests_result.xml"
+$winP5 = Find-Numbers -fileToRead "$rootDir/vsteam_wcore1903_ps5_tests_result.xml"
+$winP7 = Find-Numbers -fileToRead "$rootDir/vsteam_wcore1903_ps7_tests_result.xml"
+   
+$totalPassed = $winP5.Passed + $linux.Passed + $winP7.Passed
+$totalFailed = $winP5.Failed + $linux.Failed + $winP7.Failed
+$totalNotRun = $winP5.NotRun + $linux.NotRun + $winP7.NotRun
+$totalSkipped = $winP5.Skipped + $linux.Skipped + $winP7.Skipped
+   
+Write-Host "Tests Passed: $totalPassed, Failed: $totalFailed, Skipped: $totalSkipped, NotRun: $totalNotRun"
