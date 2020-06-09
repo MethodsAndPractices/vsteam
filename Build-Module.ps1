@@ -92,9 +92,8 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 Write-Output "Publish complete to $output"
 
-
 # reload the just built module
-if ($ipmo.IsPresent -or $runTests.IsPresent) {
+if ($ipmo.IsPresent) {
 
    # module needs to be unloaded if present
    if ((Get-Module VSTeam)) {
@@ -109,7 +108,7 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
 if ($runTests.IsPresent) {
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
       Write-Output "Installing Pester 5"
-      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc9' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.2' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
 
    # This loads [PesterConfiguration] into scope
