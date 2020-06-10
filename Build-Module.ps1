@@ -38,7 +38,11 @@ param(
 
    # outputs the code coverage
    [Parameter(ParameterSetName = "UnitTest")]
-   [switch]$codeCoverage
+   [switch]$codeCoverage,
+
+   # If specified puts classes in the PSM1 file instead of dot sourcing them from a PS1.
+   # This can be helpful in development but is not used for release builds 
+   [switch]$withPublicClasses
 )
 
 . ./Merge-File.ps1
@@ -83,6 +87,18 @@ if ($buildHelp.IsPresent) {
 Write-Output 'Publishing about help files'
 Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
 Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
+
+if ($WithPublicClasses) {
+   # If the classes are in vsteam.psm1 and the module is loaded with using rather than with import-module, 
+   # then the classes are accessible from the command-line, scripts, and functions which do form part of the module
+   #  See https://github.com/DarqueWarrior/vsteam/pull/313#issuecomment-629644064 for more information
+   # Currently the default is not to do this, but it can make things easier in development, 
+   # if the default changes the switch name will too and the condition will become a -not 
+   Write-Output "Merging classes.ps1 into VSTeam.psm1"
+   Get-Content -Path "$output/VSTeam.psm1" | Out-File -Append -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
+   Copy-Item -Path "$output/vsteam.classes.ps1" -Destination "$output/VSTeam.psm1" 
+   "#empty" | Out-File -Force -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
+}
 
 Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |

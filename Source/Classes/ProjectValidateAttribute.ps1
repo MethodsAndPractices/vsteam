@@ -5,13 +5,17 @@ class ProjectValidateAttribute : ValidateArgumentsAttribute {
       [object] $arguments,
       [EngineIntrinsics] $EngineIntrinsics) {
 
-      #Do not fail on null or empty, leave that to other validation conditions
-      if ([string]::IsNullOrEmpty($arguments)) {return}
-      $list = [VSTeamProjectCache]::GetCurrent()
-      if (($list.count -gt 0) -and ($arguments -notin $list)) {
+      # Do not fail on null or empty, leave that to other validation conditions
+      if ([string]::IsNullOrEmpty($arguments)) { 
+         return 
+      }
+
+      $cachedProjects = [VSTeamProjectCache]::GetCurrent()
+
+      if (($cachedProjects.count -gt 0) -and ($arguments -notin $cachedProjects)) {
          throw [ValidationMetadataException]::new(
             "'$arguments' is not a valid project. Valid projects are: '" +
-            ([VSTeamProjectCache]::projects -join "', '") + "'")
+            ($cachedProjects -join "', '") + "'")
       }
    }
 }

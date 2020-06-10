@@ -20,8 +20,8 @@ Describe 'VSTeamProcess' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
-      #Note: if the call is to ...work/processes... the identity field is "TypeID". calling to ...Process/processes... it is "ID"
-      $results =   [PSCustomObject]@{
+      # Note: if the call is to ...work/processes... the identity field is "TypeID". calling to ...Process/processes... it is "ID"
+      $results = [PSCustomObject]@{
          value = @(
             [PSCustomObject]@{
                name        = 'Agile'
@@ -51,6 +51,7 @@ Describe 'VSTeamProcess' {
          type        = 'Agile'
       }
 
+      Mock Write-Warning
       Mock Invoke-RestMethod { return $results }
       Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*123-5464-dee43*" }
    }
@@ -69,39 +70,46 @@ Describe 'VSTeamProcess' {
             $Uri -like "*api-version=$(_getApiVersion Core)*" 
          }
       }
-<# no longer pass top or skip. Parameters are ignored.
-      It 'with top 10 should return top 10 process' {
+      
+      It 'with top should return warning' {
          ## Act
          Get-VSTeamProcess -top 10
 
          ## Assert
+         # Make sure you warn the user
+         Should -Invoke Write-Warning -Exactly -Times 1 -Scope It
+
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
-            $Uri -like "*`$top=10*"
+            $Uri -NotLike "*`$top=10*"
          }
       }
 
-      It 'with skip 1 should skip first process' {
+      It 'with skip should return warning' {
          ## Act
          Get-VSTeamProcess -skip 1
 
          ## Assert
+         # Make sure you warn the user
+         Should -Invoke Write-Warning -Exactly -Times 1 -Scope It
+
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Uri -like "*`$skip=1*" -and
-            $Uri -like "*`$top=100*"
+            $Uri -NotLike "*`$skip=1*" -and
+            $Uri -NotLike "*`$top=100*"
          }
       }
-#>
+
       It 'by Name should return Process by Name' {
-         [VSTeamProcessCache]::timestamp   = -1
+         [VSTeamProcessCache]::timestamp = -1
          $p = Get-VSTeamProcess -Name Agile
 
          $p.name | should -Be  'Agile'
          $p.id   | should -Not -BeNullOrEmpty
+
          # Make sure it was ca lled with the correct URI
          # Only called once for name - we don't validate the name, so wildcards can be given. 
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

@@ -4,17 +4,25 @@
 class VSTeamProjectCache {
    static [int] $timestamp = -1
    static [object] $projects = $null
+
    static [Void] Update () {
-      #Allow unit tests to mock returning the project list and testing freshness
+      # Allow unit tests to mock returning the project list and testing freshness
       [VSTeamProjectCache]::projects = _getProjects
+      
+      # "save current minute" refreshes on average after 30 secs but not after 
+      # exact hours timeOfDayTotalMinutes might be a better base
       [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-      # "save current minute" refreshes on average after 30secs  but not after exact hours timeOfDayTotalMinutes might be a better base
    }
+
    static [void] Invalidate () {
       [VSTeamProjectCache]::timestamp = -1
    }
+
    static [object] GetCurrent () {
-      if (_hasProjectCacheExpired) { [VSTeamProjectCache]::Update() }
+      if (_hasProjectCacheExpired) { 
+         [VSTeamProjectCache]::Update() 
+      }
+
       return ([VSTeamProjectCache]::projects)
    }
 }

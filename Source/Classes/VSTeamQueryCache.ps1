@@ -2,7 +2,7 @@ class VSTeamQueryCache {
    static [int] $timestamp = -1
    static [object] $queries = $null
 
-   static [Void] Update () {
+   static [Void] Update() {
       $projectName = (_getDefaultProject)
 
       if ($projectName) {
@@ -16,11 +16,11 @@ class VSTeamQueryCache {
       }
    }
 
-   static [void] Invalidate () {
+   static [void] Invalidate() {
       [VSTeamQueryCache]::timestamp = -1
    }
 
-   static [object] GetCurrent () {
+   static [object] GetCurrent() {
       if ([VSTeamQueryCache]::timestamp -lt 0 -or
          [VSTeamQueryCache]::timestamp -lt [datetime]::Now.TimeOfDay.TotalMinutes - 5) {
          [VSTeamQueryCache]::Update()

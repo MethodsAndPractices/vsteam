@@ -24,7 +24,7 @@ function Get-VSTeamAPIVersion {
          TaskGroups                  = $(_getApiVersion TaskGroups)
          MemberEntitlementManagement = $(_getApiVersion MemberEntitlementManagement)
          ExtensionsManagement        = $(_getApiVersion ExtensionsManagement)
-         ServiceEndpoints       = $(_getApiVersion ServiceEndpoints)
+         ServiceEndpoints            = $(_getApiVersion ServiceEndpoints)
          Graph                       = $(_getApiVersion Graph)
          Policy                      = $(_getApiVersion Policy)
       }

@@ -1,6 +1,5 @@
 function Get-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName = 'List')]
-   # [OutputType([vsteamprocess])]
    param(
       [Parameter(ParameterSetName = 'ByName', Position = 0)]
       [ArgumentCompleter([ProcessTemplateCompleter])]

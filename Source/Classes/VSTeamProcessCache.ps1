@@ -1,4 +1,4 @@
-# cache process names and URLs to reduce the number of
+# Cache process names and URLs to reduce the number of
 # rest APIs calls needed for parameter completion / validation 
 
 # Unit tests should populate cache with expected processes ideally with 
@@ -9,7 +9,7 @@ class VSTeamProcessCache {
    static [object[]] $processes = @()
    static [hashtable] $urls = @{}
 
-   static [Void] Update () {     
+   static [Void] Update() {     
       $list = Get-VSTeamProcess
       if ($list) {
          foreach ($process in $list) {
@@ -28,11 +28,11 @@ class VSTeamProcessCache {
    
    # "save current minute" refreshes on average after 30secs  but not after 
    # exact hours timeOfDayTotalMinutes might be a better base
-   static [bool] HasExpired () {
+   static [bool] HasExpired() {
       return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute
    }
    
-   static [object] GetCurrent () {
+   static [object] GetCurrent() {
       if ([VSTeamProcessCache]::HasExpired()) { 
          [VSTeamProcessCache]::Update() 
       }
@@ -40,7 +40,7 @@ class VSTeamProcessCache {
       return ([VSTeamProcessCache]::processes)
    }
    
-   static [object] GetURl ([string] $ProcessName) {
+   static [object] GetURl([string] $ProcessName) {
       if ([VSTeamProcessCache]::HasExpired()) {
          [VSTeamProcessCache]::Update()
       }
@@ -48,7 +48,7 @@ class VSTeamProcessCache {
       return ([VSTeamProcessCache]::urls[$ProcessName])
    }
    
-   static [void] Invalidate () {
+   static [void] Invalidate() {
       [VSTeamProcessCache]::timestamp = -1 
    }
 }
