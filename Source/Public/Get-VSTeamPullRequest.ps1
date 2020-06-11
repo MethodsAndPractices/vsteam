@@ -3,10 +3,13 @@ function Get-VSTeamPullRequest {
    param (
       [Alias('PullRequestId')]
       [Parameter(ParameterSetName = "ById")]
+      [Parameter(ParameterSetName = "IncludeCommits")]
       [string] $Id,
-
+      
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
+      [Parameter(ParameterSetName = "ById")]
+      [Parameter(ParameterSetName = "IncludeCommits", Mandatory)]
       [Guid] $RepositoryId,
 
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
@@ -30,6 +33,9 @@ function Get-VSTeamPullRequest {
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [switch] $All,
 
+      [Parameter(ParameterSetName = "IncludeCommits")]
+      [switch] $IncludeCommits,
+
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [int] $Top,
@@ -47,7 +53,13 @@ function Get-VSTeamPullRequest {
    process {
       try {
          if ($Id) {
-            if ($ProjectName) {
+            if ($RepositoryId) {
+               $queryString = @{
+                  'includeCommits' = $IncludeCommits
+               }
+               $resp = _callAPI -Id "$RepositoryId/pullRequests/$Id" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString 
+            }
+            elseif ($ProjectName) {
                $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $(_getApiVersion Git) -Id $Id
             }
             else {

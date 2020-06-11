@@ -20,6 +20,10 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Br
 
 - Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
+
+- Adds -IncludeCommits switch to Get-VSTeamPullRequest.
+
 ## 6.4.8
 
 You can now tab complete Area and Resource of Invoke-VSTeamRequest.
