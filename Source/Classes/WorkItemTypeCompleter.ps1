@@ -28,7 +28,7 @@ class WorkItemTypeCompleter : IArgumentCompleter {
                Select-Object -ExpandProperty Name | Sort-Object
          }
          else { #if projectname -and $ProjectName -ne _getDefaultProject
-            $workitemTypeNames = Get-VSTeamWorkItemType -ProjectName $projectName | Where-Object -Not hidden | 
+            $workitemTypeNames = Get-VSTeamWorkItemType -ProjectName $projectName | Where-Object {-Not $_.hidden} | 
                Select-Object -ExpandProperty name | Sort-Object
          }
       }

@@ -1,5 +1,32 @@
 # Changelog
 
+New file
+   Source/Classes/VSTeamWorkItemTypeCache.ps1         | Not previously cached. 
+
+Changed files 
+   Source/Classes/ProcessValidateAttribute.ps1        | From previous update
+   Source/Classes/VSTeamProcess.ps1                   | From previous update
+   Source/Classes/VSTeamProcessCache.ps1              | From previous update
+   Source/Classes/VSTeamVersions.ps1                  | From previous update (Adds ProcessDefinition as an api type with a version)
+   Source/Public/Get-VSTeamProcess.ps1                | From previous update (uses ProcessDefinition as an api type)
+   unit/test/Add-VSTeam.Tests.ps1                     | From previous update (Updated dependencies)
+   unit/test/Add-VSTeamProject.Tests.ps1              | From previous update (Updated dependencies)
+   unit/test/Get-VSTeamProcess.Tests.ps1              | From previous update
+   unit/test/ProcessValidateAttribute.Tests.ps1       | From previous update (Updated dependencies)
+
+   Source/Classes/WorkItemTypeCompleter.ps1           | Add support for ProcessTemplate
+   Source/Classes/WorkItemTypeValidateAttribute.ps1   | Add support for ProcessTemplate
+   Source/Classes/_classes.json                       | Add VSTeamWorkItemTypeCache.ps1 
+   Source/Private/common.ps1                          | streamlined _getApiVersion, _getworkItemTypes
+   Source/Public/Get-VSTeamWorkItemType.ps1           | Support ProcessTemplate parameter, add attribute to denote hidden work item types. 
+   .docs/Get-VSTeamWorkItemType.md                    | Updated help
+   Source/Public/Add-VSTeamWorkItem.ps1               | Improve handline of workitemType parameter
+   unit/test/Add-VSTeamWorkItem.Tests.ps1             | Updated dependencies 
+   unit/test/Get-VSTeamWorkItemType.Tests.ps1         | Updated dependencies 
+
+   Build-Module.ps1                                   | add support for -withpublicClasses
+   Merge-File.ps1                                     | fix issue with "using" outside using statements
+
 ## 6.5.0
 
 Changed the completers to quote all values.

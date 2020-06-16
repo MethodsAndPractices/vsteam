@@ -15,7 +15,7 @@ class VSTeamWorkItemTypeCache {
    static [Void] Update (  ) {
       [VSTeamWorkItemTypeCache]::WorkItemTypes = @()
       $projectName=  _getDefaultProject
-      $list = @() + (Get-VSTeamWorkItemType -ProjectName $projectName | Where-Object -Not hidden |Sort-Object -Property Name)
+      $list = @() + (Get-VSTeamWorkItemType -ProjectName $projectName | Where-Object {-Not $_.Hidden} |Sort-Object -Property Name)
       #if Get-VSTeamWorkItemType  didn't update the cache for us, do it now.
       if ($list -and [VSTeamWorkItemTypeCache]::WorkItemTypes.count -eq 0)  {[VSTeamWorkItemTypeCache]::update($list,$projectName) }
    }

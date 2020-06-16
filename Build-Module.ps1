@@ -38,7 +38,10 @@ param(
 
    # outputs the code coverage
    [Parameter(ParameterSetName = "UnitTest")]
-   [switch]$codeCoverage
+   [switch]$codeCoverage,
+
+   #If specified puts classes in the PSM1 file instead on dot sourcing them from a PS1. This can be helpful in development but is not used for release builds 
+   [switch]$WithPublicClasses
 )
 
 . ./Merge-File.ps1
@@ -49,7 +52,7 @@ if ($installDep.IsPresent -or $analyzeScript.IsPresent) {
 
    # Install each module
    if ($manifest.RequiredModules) {
-      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
+       $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -Force -Scope CurrentUser } }
    }
 }
 
@@ -83,18 +86,35 @@ if ($buildHelp.IsPresent) {
 Write-Output 'Publishing about help files'
 Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
 Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
+if ($WithPublicClasses) {
+   #If the classes are in vsteam.psm1 and the module is loaded with using rather than with import-module, 
+   #then the classes are accessible from the command-line, scripts, and functions which do form part of the module
+   # See https://github.com/DarqueWarrior/vsteam/pull/313#issuecomment-629644064 for more information
+   #Currently the default not to do this, but it can make things easier in development, 
+   #if the default changes the switch name will too and the condition will become a -not 
+   Write-Output "Merging classes.ps1 into VSTeam.psm1"
+   Get-Content -Path "$output/VSTeam.psm1" | Out-File -Append -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
+   Copy-Item   -Path "$output/vsteam.classes.ps1" -Destination "$output/VSTeam.psm1" 
+   "#empty" |  Out-File -Force -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
+}
 
-Write-Output 'Updating Functions To Export'
+<#Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+      ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+#>
 
-(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
+$PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
+Write-Output 'Updating Functions To Export'
+$FunctionsToExport  = @()
+$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"})
+$FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName
+Update-ModuleManifest -Path "$output/VSTeam.psd1" -FunctionsToExport $FunctionsToExport
 
 Write-Output "Publish complete to $output"
 
 
 # reload the just built module
-if ($ipmo.IsPresent -or $runTests.IsPresent) {
+if ($ipmo.IsPresent) {
 
    # module needs to be unloaded if present
    if ((Get-Module VSTeam)) {
@@ -107,13 +127,13 @@ if ($ipmo.IsPresent -or $runTests.IsPresent) {
 
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
-   # This loads [PesterConfiguration] into scope
-   Import-Module Pester
-
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
       Write-Output "Installing Pester 5"
-      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc9' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.2' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
+
+   # This loads [PesterConfiguration] into scope
+   Import-Module Pester -MinimumVersion 5.0.0
 
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = '.\unit'
