@@ -19,12 +19,13 @@ class WorkItemTypeValidateAttribute : ValidateArgumentsAttribute {
       
       #Do not fail on null or empty, leave that to other validation conditions
       if (-not [string]::IsNullOrEmpty($arguments)) {
-         $workitemTypes = $null
-         $msg           = ""
+         $workitemTypes   = $null
+         $msg             = ""
          # If a process template was specified get the workitemtypes for that template.
          # If a (non-default) project was specified get the workitemtypes for that project
          # If no project (or the default project) was specified, get the default work item types. 
-         $processTemplate = $pscmdlet.MyInvocation.BoundParameters['ProcessTemplate']
+         $processTemplate =''
+         if (Test-Path Variable:PSCmdlet) {$processTemplate = $pscmdlet.MyInvocation.BoundParameters['ProcessTemplate'] } 
          if ($processTemplate) {
                   #Process work item cache holds full object. Using select-object avoids an error if nothing returned. 
                   $workitemTypes = [VSTeamWorkItemTypeCache]::GetByProcess($processTemplate) | Select-Object -ExpandProperty Name | Sort-Object
@@ -33,15 +34,15 @@ class WorkItemTypeValidateAttribute : ValidateArgumentsAttribute {
          else {
             $projectName = $pscmdlet.MyInvocation.BoundParameters['ProjectName']
             if (-not $projectName -or $projectName -eq ( _getDefaultProject) ) {
-                  $workitemTypes = [VSTeamWorkItemTypeCache]::GetCurrent()
+                  $workitemTypes = [VSTeamWorkItemTypeCache]::GetCurrent() | Select-Object -ExpandProperty Name | Sort-Object
             }
             else {
-                  $workitemTypes = _getWorkItemTypes -Project $projectname
+                  $workitemTypes = Get-VSTeamWorkItemType -Project $projectname | Select-Object -ExpandProperty Name | Sort-Object
                   $msg           = " in project '$projectname'"
             }
          }
 
-         if (($null -ne $workitemTypes) -and (-not ($arguments -in $workitemTypes))) {
+         if ($workitemTypes -and (-not ($arguments -in $workitemTypes))) {
             throw [ValidationMetadataException]::new(
                "'$arguments' is not a valid WorkItemType$msg. Valid WorkItemTypes are: '" +
                  ($workitemTypes -join "', '") + "'")
