@@ -32,7 +32,7 @@ function Update-VSTeamUserEntitlement
       [switch]$Force
    )
 
-   process {
+   Process {
       # This will throw if this account does not support MemberEntitlementManagement
       _supportsMemberEntitlementManagement
 
@@ -41,7 +41,7 @@ function Update-VSTeamUserEntitlement
          # We have to go find the id
          $user = Get-VSTeamUserEntitlement -Top 10000 | Where-Object email -eq $email
 
-         if (-not$user)
+         if (-not $user)
          {
             throw "Could not find user with an email equal to $email"
          }
@@ -74,10 +74,12 @@ function Update-VSTeamUserEntitlement
 
       $body = ConvertTo-Json -InputObject @($obj)
 
-      if ($Force -or $PSCmdlet.ShouldProcess("$( $user.userName ) ($( $user.email ))", "Update user"))
+      $msg = "$( $user.userName ) ($( $user.email ))"
+
+      if ($Force -or $PSCmdlet.ShouldProcess($msg, "Update user"))
       {
          # Call the REST API
-         _callAPI -Method Patch -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Id $id -Version $([VSTeamVersions]::MemberEntitlementManagement) -ContentType 'application/json-patch+json' | Out-Null
+         _callAPI -Method Patch -NoProject -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Id $id -Version $(_getApiVersion MemberEntitlementManagement) -ContentType 'application/json-patch+json' | Out-Null
 
          Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseType: ($licenseTypeOriginal) to ($newLicenseType)"
          Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseSource: ($licenseSourceOriginal) to ($newLicenseSource)"

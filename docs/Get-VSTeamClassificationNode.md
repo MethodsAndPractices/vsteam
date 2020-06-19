@@ -71,5 +71,11 @@ Type: int32[]
 
 ## NOTES
 
+This function is the base function for Get-VSTeamArea and Get-VSTeamIteration.
+
 ## RELATED LINKS
+
+[Get-VSTeamArea](Get-VSTeamArea.md)
+
+[Get-VSTeamIteration](Get-VSTeamIteration.md)
 

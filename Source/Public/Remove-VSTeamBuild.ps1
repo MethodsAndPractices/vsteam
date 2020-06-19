@@ -5,22 +5,19 @@ function Remove-VSTeamBuild {
       [Alias('BuildID')]
       [int[]] $Id,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
                _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -id $item `
-                  -Method Delete  -Version $([VSTeamVersions]::Build) | Out-Null
+                  -Method Delete  -Version $(_getApiVersion Build) | Out-Null
 
                Write-Output "Deleted build $item"
             }

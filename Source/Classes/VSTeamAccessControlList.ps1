@@ -27,6 +27,6 @@ class VSTeamAccessControlList : VSTeamLeaf {
    }
 
    [string]ToString() {
-      return $this.Descriptor
+      return $this.Token
    }
 }

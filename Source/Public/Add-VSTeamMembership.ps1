@@ -3,9 +3,9 @@ function Add-VSTeamMembership {
    param(
       [Parameter(Mandatory = $true)]
       [string] $MemberDescriptor,
+      
       [Parameter(Mandatory = $true)]
-      [string] $ContainerDescriptor,
-      [switch] $DontTest
+      [string] $ContainerDescriptor
    )
 
    process {

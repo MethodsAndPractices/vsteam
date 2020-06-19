@@ -24,7 +24,15 @@ Source/Classes/vsteam.classes.ps1
 /dist
 test-results.xml
 coverage.xml
+.editorconfig
+.vscode/settings.json
 .DS_Store
 ._.DS_Store
 **/.DS_Store
 **/._.DS_Store
+.gdn
+vsteam_Linux_ps7_tests_result.xml
+vsteam_wcore1903_ps5_tests_result.xml
+vsteam_wcore1903_ps7_tests_result.xml
+integration/fullRun.ps1
+integration/Start-PSCountdown.ps1

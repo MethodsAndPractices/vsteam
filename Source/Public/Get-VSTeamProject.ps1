@@ -14,16 +14,14 @@ function Get-VSTeamProject {
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id,
+      
+      [switch] $IncludeCapabilities,
 
-      [switch] $IncludeCapabilities
+      [Parameter(ParameterSetName = 'ByName', Mandatory = $true, Position = 0)]
+      [UncachedProjectValidateAttribute()]
+      [ArgumentCompleter([UncachedProjectCompleter])]
+      [string] $Name
    )
-
-   DynamicParam {
-      # Get-VSTeamProject should never use cache
-      [VSTeamProjectCache]::timestamp = -1
-
-      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name'
-   }
 
    process {
       # Bind the parameter to a friendly variable
@@ -34,14 +32,14 @@ function Get-VSTeamProject {
       }
 
       if ($ProjectName) {
-         $queryString = @{}
+         $queryString = @{ }
          if ($includeCapabilities.IsPresent) {
             $queryString.includeCapabilities = $true
          }
 
          # Call the REST API
          $resp = _callAPI -Area 'projects' -id $ProjectName `
-            -Version $([VSTeamVersions]::Core) `
+            -Version $(_getApiVersion Core) -IgnoreDefaultProject `
             -QueryString $queryString
 
          # Storing the object before you return it cleaned up the pipeline.
@@ -55,7 +53,7 @@ function Get-VSTeamProject {
          try {
             # Call the REST API
             $resp = _callAPI -Area 'projects' `
-               -Version $([VSTeamVersions]::Core) `
+               -Version $(_getApiVersion Core) -IgnoreDefaultProject `
                -QueryString @{
                stateFilter = $stateFilter
                '$top'      = $top
@@ -63,11 +61,11 @@ function Get-VSTeamProject {
             }
 
             $objs = @()
-
+            
             foreach ($item in $resp.value) {
                $objs += [VSTeamProject]::new($item)
             }
-
+            
             Write-Output $objs
          }
          catch {

@@ -1,6 +1,7 @@
 
 
 
+
 # Remove-VSTeamAccessControlEntry
 
 ## SYNOPSIS
@@ -197,7 +198,7 @@ Required: True
 
 ## NOTES
 
-### This function outputs a non-terminating error if the ACE removal from the ACL returns $False. This can be due to the wrong descriptor being provided, or the descriptor already not being on the ACL.
+This function outputs a non-terminating error if the ACE removal from the ACL returns $False. This can be due to the wrong descriptor being provided, or the descriptor already not being on the ACL.
 
 ## RELATED LINKS
 

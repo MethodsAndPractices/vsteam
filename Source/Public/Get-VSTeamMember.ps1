@@ -10,18 +10,15 @@ function Get-VSTeamMember {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('Name')]
       [Alias('Id')]
-      [string] $TeamId
+      [string] $TeamId,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true )]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      $resp = _callAPI -Id "$TeamId/members" -Area 'projects' -Resource "$ProjectName/teams" -Version $([VSTeamVersions]::Core) `
+      $resp = _callAPI -Id "$TeamId/members" -Area 'projects' -Resource "$ProjectName/teams" -Version $(_getApiVersion Core) `
          -QueryString @{'$top' = $top; '$skip' = $skip}
 
       # Apply a Type Name so we can use custom format view and custom type extensions

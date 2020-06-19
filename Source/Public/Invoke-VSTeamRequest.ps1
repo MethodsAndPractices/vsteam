@@ -1,25 +1,48 @@
 function Invoke-VSTeamRequest {
    [CmdletBinding()]
    param(
-      [string]$resource,
-      [string]$area,
-      [string]$id,
-      [string]$version,
-      [string]$subDomain,
+      [ArgumentCompleter([InvokeCompleter])]
+      [string] $resource,
+
+      [ArgumentCompleter([InvokeCompleter])]
+      [string] $area,
+
+      [string] $id,
+
+      [string] $version,
+
+      [string] $subDomain,
+
       [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
-      [string]$method,
+      [string] $method,
+
       [Parameter(ValueFromPipeline = $true)]
-      [object]$body,
-      [string]$InFile,
-      [string]$OutFile,
-      [switch]$JSON,
-      [string]$ContentType,
-      [string]$Url,
-      [hashtable]$AdditionalHeaders
-   )
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $false
-   }
+      [object] $body,
+
+      [string] $InFile,
+
+      [string] $OutFile,
+
+      [switch] $JSON,
+
+      [string] $ContentType,
+
+      [string] $Url,
+
+      [hashtable] $AdditionalHeaders,
+
+      [object] $QueryString,
+
+      [string] $Team,
+      
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName,
+      
+      [switch] $UseProjectId,
+      
+      [switch] $NoProject)
 
    process {
       $params = $PSBoundParameters

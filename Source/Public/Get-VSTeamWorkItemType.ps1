@@ -1,39 +1,22 @@
 function Get-VSTeamWorkItemType {
    [CmdletBinding(DefaultParameterSetName = 'List')]
-   param()
+   param(
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName,
 
-   DynamicParam {
-      $dp = _buildProjectNameDynamicParam
-
-      # If they have not set the default project you can't find the
-      # validateset so skip that check. However, we still need to give
-      # the option to pass a WorkItemType to use.
-      if ($Global:PSDefaultParameterValues["*:projectName"]) {
-         $wittypes = _getWorkItemTypes -ProjectName $Global:PSDefaultParameterValues["*:projectName"]
-         $arrSet = $wittypes
-      }
-      else {
-         Write-Verbose 'Call Set-VSTeamDefaultProject for Tab Complete of WorkItemType'
-         $wittypes = $null
-         $arrSet = $null
-      }
-
-      $ParameterName = 'WorkItemType'
-      $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet $arrSet -ParameterSetName 'ByType'
-      $dp.Add($ParameterName, $rp)
-
-      $dp
-   }
+      [Parameter()]
+      [WorkItemTypeValidateAttribute()]
+      [ArgumentCompleter([WorkItemTypeCompleter])]
+      [string] $WorkItemType
+   )
 
    Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-      $WorkItemType = $PSBoundParameters["WorkItemType"]
-
       # Call the REST API
       if ($WorkItemType) {
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
-            -Version $([VSTeamVersions]::Core) -id $WorkItemType
+            -Version $(_getApiVersion Core) -id $WorkItemType
 
          # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
          # To replace all the "": with "_end":
@@ -45,7 +28,7 @@ function Get-VSTeamWorkItemType {
       }
       else {
          $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
-            -Version $([VSTeamVersions]::Core)
+            -Version $(_getApiVersion Core)
 
          # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
          # To replace all the "": with "_end":

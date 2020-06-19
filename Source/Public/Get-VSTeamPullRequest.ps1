@@ -4,56 +4,54 @@ function Get-VSTeamPullRequest {
       [Alias('PullRequestId')]
       [Parameter(ParameterSetName = "ById")]
       [string] $Id,
-       
+
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Guid] $RepositoryId,
-       
+
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [Guid] $SourceRepositoryId,
-       
+
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [ValidatePattern('^refs/.*')]
       [string] $SourceBranchRef,
-       
+
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [ValidatePattern('^refs/.*')]
       [string] $TargetBranchRef,
-       
+
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [ValidateSet("abandoned", "active", "all", "completed", "notSet")]
       [string] $Status,
-       
+
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [switch] $All,
-       
+
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
       [int] $Top,
-       
+
       [Parameter(ParameterSetName = "SearchCriteriaWithAll")]
       [Parameter(ParameterSetName = "SearchCriteriaWithStatus")]
-      [int] $Skip
+      [int] $Skip,
+
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $false
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   
+   process {
       try {
          if ($Id) {
             if ($ProjectName) {
-               $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -Id $Id
+               $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $(_getApiVersion Git) -Id $Id
             }
             else {
-               $resp = _callAPI -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -Id $Id
+               $resp = _callAPI -Area git -Resource pullRequests -Version $(_getApiVersion Git) -Id $Id
             }
          }
          else {
@@ -68,18 +66,18 @@ function Get-VSTeamPullRequest {
 
             if ($RepositoryId) {
                if ($ProjectName) {
-                  $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+                  $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString
                }
                else {
-                  $resp = _callAPI -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+                  $resp = _callAPI -Id "$RepositoryId/pullRequests" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString
                }
             }
             else {
                if ($ProjectName) {
-                  $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -QueryString $queryString
+                  $resp = _callAPI -ProjectName $ProjectName -Area git -Resource pullRequests -Version $(_getApiVersion Git) -QueryString $queryString
                }
                else {
-                  $resp = _callAPI -Area git -Resource pullRequests -Version $([VSTeamVersions]::Git) -QueryString $queryString
+                  $resp = _callAPI -Area git -Resource pullRequests -Version $(_getApiVersion Git) -QueryString $queryString
                }
             }
          }
@@ -102,3 +100,4 @@ function Get-VSTeamPullRequest {
       }
    }
 }
+

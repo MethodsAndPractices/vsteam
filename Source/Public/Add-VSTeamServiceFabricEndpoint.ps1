@@ -4,7 +4,7 @@ function Add-VSTeamServiceFabricEndpoint {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]
       [string] $endpointName,
-
+        
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $url,
 
@@ -28,20 +28,15 @@ function Add-VSTeamServiceFabricEndpoint {
       [string] $clusterSpn,
 
       [Parameter(ParameterSetName = 'None', Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
-      [bool] $useWindowsSecurity
+      [bool] $useWindowsSecurity,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # This will throw if this account does not support ServiceFabricEndpoint
-      _supportsServiceFabricEndpoint
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   
+   process {
       switch ($PSCmdlet.ParameterSetName) {
          "Certificate" {
             # copied securestring usage from Set-VSTeamAccount

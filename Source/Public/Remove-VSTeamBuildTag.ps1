@@ -8,22 +8,21 @@ function Remove-VSTeamBuildTag {
       [Alias('BuildID')]
       [int[]] $Id,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   
+   process {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-VSTeamBuildTag")) {
             foreach ($tag in $tags) {
                # Call the REST API
                _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
-                  -Method Delete -Querystring @{tag = $tag} -Version $([VSTeamVersions]::Build) | Out-Null
+                  -Method Delete -Querystring @{tag = $tag } -Version $(_getApiVersion Build) | Out-Null
             }
          }
       }

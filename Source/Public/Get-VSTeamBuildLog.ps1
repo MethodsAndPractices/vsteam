@@ -4,23 +4,21 @@ function Get-VSTeamBuildLog {
       [Parameter(Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
       [int[]] $Id,
-      [int] $Index
+
+      [int] $Index,
+        
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       foreach ($item in $id) {
          if (-not $Index) {
             # Build the url to return the logs of the build
             # Call the REST API to get the number of logs for the build
             $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$item/logs" `
-               -Version $([VSTeamVersions]::Build)
+               -Version $(_getApiVersion Build)
 
             $fullLogIndex = $($resp.count - 1)
          }
@@ -32,7 +30,7 @@ function Get-VSTeamBuildLog {
          # Build the url to return the single build
          # Call the REST API to get the number of logs for the build
          $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$item/logs" -id $fullLogIndex `
-            -Version $([VSTeamVersions]::Build)
+            -Version $(_getApiVersion Build)
 
          Write-Output $resp
       }

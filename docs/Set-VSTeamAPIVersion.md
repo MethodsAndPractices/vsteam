@@ -38,8 +38,15 @@ This command sets the version of the Release calls to 5.0.
 Specifies the version to use. The acceptable values for this parameter are:
 
 - TFS2017
+- TFS2017U1
+- TFS2017U2
+- TFS2017U3
 - TFS2018
+- TFS2018U1
+- TFS2018U2
+- TFS2018U3
 - AzD2019
+- AzD2019U1
 - VSTS
 - AzD
 
@@ -64,7 +71,7 @@ Specifies the service to change. The acceptable values for this parameter are:
 - Packaging
 - MemberEntitlementManagement
 - ExtensionsManagement
-- ServiceFabricEndpoint
+- ServiceEndpoints
 
 ```yaml
 Type: String

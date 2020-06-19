@@ -4,20 +4,19 @@ function Remove-VSTeamPolicy {
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
-   Process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Policy")) {
             try {
-               _callAPI -ProjectName $ProjectName -Method Delete -Id $item -Area policy -Resource configurations -Version $([VSTeamVersions]::Git) | Out-Null
+               _callAPI -ProjectName $ProjectName -Method Delete -Id $item -Area policy -Resource configurations -Version  $(_getApiVersion Git) | Out-Null
 
                Write-Output "Deleted policy $item"
             }

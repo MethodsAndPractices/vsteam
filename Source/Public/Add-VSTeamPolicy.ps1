@@ -9,16 +9,14 @@ function Add-VSTeamPolicy {
       [switch] $blocking,
 
       [Parameter(Mandatory = $true)]
-      [hashtable] $settings
+      [hashtable] $settings,
+
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
    process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $body = @{
          isEnabled  = $enabled.IsPresent;
          isBlocking = $blocking.IsPresent;
@@ -31,7 +29,7 @@ function Add-VSTeamPolicy {
       try {
          # Call the REST API
          $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -Resource 'configurations' `
-            -Method Post -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Git)
+            -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
 
          Write-Output $resp
       }

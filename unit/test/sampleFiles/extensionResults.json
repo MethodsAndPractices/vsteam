@@ -1,0 +1,19 @@
+{
+   "count": 1,
+   "value": {
+      "extensionId": "test",
+      "extensionName": "test",
+      "publisherId": "test",
+      "publisherName": "test",
+      "version": "1.0.0",
+      "registrationId": "12345678-9012-3456-7890-123456789012",
+      "manifestVersion": 1,
+      "baseUri": "",
+      "fallbackBaseUri": "",
+      "scopes": {},
+      "installState": {
+         "flags": "none",
+         "lastUpdated": "2018-10-09T11:26:47.187Z"
+      }
+   }
+}

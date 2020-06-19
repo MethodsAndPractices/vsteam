@@ -3,17 +3,15 @@ function Show-VSTeamWorkItem {
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [Alias('WorkItemID')]
-      [int] $Id
+      [int] $Id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_workitems/edit/$Id"
+      Show-Browser "$(_getInstance)/$ProjectName/_workitems/edit/$Id"
    }
 }

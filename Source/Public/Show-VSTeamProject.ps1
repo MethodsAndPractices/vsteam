@@ -3,12 +3,14 @@ function Show-VSTeamProject {
    param(
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
-      [string] $Id
-   )
+      [string] $Id,
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -ParameterSetName 'ByName' -ParameterName 'Name' -AliasName 'ProjectName'
-   }
+      [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter]) ]
+      [Alias('ProjectName')]
+      [string] $Name
+   )
 
    process {
       _hasAccount
@@ -20,6 +22,6 @@ function Show-VSTeamProject {
          $ProjectName = $id
       }
 
-      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName"
+      Show-Browser "$(_getInstance)/$ProjectName"
    }
 }

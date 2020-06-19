@@ -2,9 +2,6 @@ function Show-VSTeamBuildDefinition {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'List')]
-      [string] $Filter,
-
-      [Parameter(ParameterSetName = 'List')]
       [ValidateSet('Mine', 'All', 'Queued', 'XAML')]
       [string] $Type = 'All',
 
@@ -13,19 +10,16 @@ function Show-VSTeamBuildDefinition {
       [int[]] $Id,
 
       [Parameter(ParameterSetName = 'List')]
-      [string] $Path = '\'
+      [string] $Path = '\',
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       # Build the url
-      $url = "$([VSTeamVersions]::Account)/$ProjectName/_build"
+      $url = "$(_getInstance)/$ProjectName/_build"
 
       if ($id) {
          $url += "/index?definitionId=$id"
@@ -51,7 +45,6 @@ function Show-VSTeamBuildDefinition {
          if ($Path[0] -ne '\') {
             $Path = '\' + $Path
          }
-
          $url += [System.Web.HttpUtility]::UrlEncode($Path)
       }
 

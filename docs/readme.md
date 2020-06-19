@@ -28,6 +28,10 @@ Add or update ACEs in the ACL for the provided token. The request contains the t
 
 Note: This is a low-level function. You should really use a high level function (Add-VSTeam*Permission / Set-VSTeam*Permission / Get-VSTeam*Permission) unless you know what you are doing.
 
+### [Add-VSTeamArea](Add-VSTeamArea.md)
+
+Adds a new area to the project
+
 ### [Add-VSTeamAzureRMServiceEndpoint](Add-VSTeamAzureRMServiceEndpoint.md)
 
 Adds a new Azure Resource Manager service endpoint.
@@ -44,6 +48,10 @@ Creates a new build definition from a JSON file.
 
 Adds a tag to a build.
 
+### [Add-VSTeamClassificationNode](Add-VSTeamClassificationNode.md)
+
+Adds either a new iteration or area to the project
+
 ### [Add-VSTeamExtension](Add-VSTeamExtension.md)
 
 Install the specified extension into the account / project collection.
@@ -59,6 +67,10 @@ Adds a Git repository to your Azure DevOps or Team Foundation Server account.
 ### [Add-VSTeamGitRepositoryPermission](Add-VSTeamGitRepositoryPermission.md)
 
 Add permissions to a git repository, all repositories in a project, or a specific branch
+
+### [Add-VSTeamIteration](Add-VSTeamIteration.md)
+
+Adds a new iteration to the project
 
 ### [Add-VSTeamKubernetesEndpoint](Add-VSTeamKubernetesEndpoint.md)
 
@@ -88,6 +100,10 @@ Adds a Team Project to your account.
 ### [Add-VSTeamProjectPermission](Add-VSTeamProjectPermission.md)
 
 Add Permissions on Project Level
+
+### [Add-VSTeamPullRequest](Add-VSTeamPullRequest.md)
+
+Create a new Pull Request
 
 ### [Add-VSTeamRelease](Add-VSTeamRelease.md)
 
@@ -157,9 +173,17 @@ Return a list of access control lists for the specified security namespace and t
 
 Returns the agents in a pool.
 
+### [Get-VSTeamAPIVersion](Get-VSTeamAPIVersion.md)
+
+Returns the versions of APIs used.
+
 ### [Get-VSTeamApproval](Get-VSTeamApproval.md)
 
 Gets a list of approvals for all releases for a team project.
+
+### [Get-VSTeamArea](Get-VSTeamArea.md)
+
+Gets the area node for a given area path.
 
 ### [Get-VSTeamBuild](Get-VSTeamBuild.md)
 
@@ -181,6 +205,10 @@ Displays the logs for the build.
 
 Returns all the tags of a build.
 
+### [Get-VSTeamBuildTimeline](Get-VSTeamBuildTimeline.md)
+
+Get the timelines for builds
+
 ### [Get-VSTeamClassificationNode](Get-VSTeamClassificationNode.md)
 
 Gets the classification node for a given node path.
@@ -201,6 +229,10 @@ Get the installed extensions in the specified Azure DevOps or Team Foundation Se
 
 Returns a list of package feeds for the account.
 
+### [Get-VSTeamGitCommit](Get-VSTeamGitCommit.md)
+
+Retrieve git commits for a project
+
 ### [Get-VSTeamGitRef](Get-VSTeamGitRef.md)
 
 Queries the provided repository for its refs and returns them.
@@ -209,6 +241,10 @@ Queries the provided repository for its refs and returns them.
 
 Get all the repositories in your Azure DevOps or Team Foundation Server account, or a specific project.
 
+### [Get-VSTeamGitStat](Get-VSTeamGitStat.md)
+
+Retrieves statistics about branches within a repository.
+
 ### [Get-VSTeamGroup](Get-VSTeamGroup.md)
 
 Returns a Group or List of Groups.
@@ -216,6 +252,10 @@ Returns a Group or List of Groups.
 ### [Get-VSTeamInfo](Get-VSTeamInfo.md)
 
 Displays your current account and default project.
+
+### [Get-VSTeamIteration](Get-VSTeamIteration.md)
+
+Gets the iteration node for a given iteration path.
 
 ### [Get-VSTeamJobRequest](Get-VSTeamJobRequest.md)
 
@@ -337,6 +377,10 @@ Allows you to call any TFS/AzD REST API. All the Auth and Route Structure is tak
 
 Removes a team from a project.
 
+### [Remove-VSTeamAccessControlEntry](Remove-VSTeamAccessControlEntry.md)
+
+Removes specified ACEs in the ACL for the provided token. The request URI contains the namespace ID, the target token, and a single or list of descriptors that should be removed. Only supports removing AzD based users/groups.
+
 ### [Remove-VSTeamAccessControlList](Remove-VSTeamAccessControlList.md)
 
 Remove access control lists under the specified security namespace.
@@ -348,6 +392,11 @@ Clears your default project, account name and personal access token.
 ### [Remove-VSTeamAgent](Remove-VSTeamAgent.md)
 
 Removes an agent from a pool.
+
+### [Remove-VSTeamArea](Remove-VSTeamArea.md)
+
+Removes an existing area from the project
+
 
 ### [Remove-VSTeamBuild](Remove-VSTeamBuild.md)
 
@@ -361,6 +410,11 @@ Removes the build definitions for a team project.
 
 Removes the tag from a build.
 
+### [Remove-VSTeamClassificationNode](Remove-VSTeamClassificationNode.md)
+
+
+Removes either an existing iteration or area from the project
+
 ### [Remove-VSTeamExtension](Remove-VSTeamExtension.md)
 
 Uninstall the specified extension from the account / project collection. 
@@ -372,6 +426,11 @@ Removes a package feed from the account.
 ### [Remove-VSTeamGitRepository](Remove-VSTeamGitRepository.md)
 
 Removes the Git repository from your Azure DevOps or Team Foundation Server account.
+
+### [Remove-VSTeamIteration](Remove-VSTeamIteration.md)
+
+
+Removes an existing iteration from the project
 
 ### [Remove-VSTeamMembership](Remove-VSTeamMembership.md)
 
@@ -496,13 +555,25 @@ Opens the release definitions for a team project in the default browser.
 
 Opens the work item in the default browser.
 
+### [Stop-VSTeamBuild](Stop-VSTeamBuild.md)
+
+Allows you to cancel a running build.
+
 ### [Test-VSTeamMembership](Test-VSTeamMembership.md)
 
 Tests the membership in a container.
 
+### [Test-VSTeamYamlPipeline](Test-VSTeamYamlPipeline.md)
+
+Tests the commited YAML pipeline files to check for inconsitencies. Now, you can try out a YAML pipeline without committing it to a repo or running it. Given an existing pipeline and an optional new YAML payload, this function will give you back the full YAML pipeline.
+
 ### [Update-VSTeam](Update-VSTeam.md)
 
 Updates the team name, description or both.
+
+### [Update-VSTeamAgent](Update-VSTeamAgent.md)
+
+Instructs the agent to download and install the lastest version of the agent on self-hosted agents. 
 
 ### [Update-VSTeamBuild](Update-VSTeamBuild.md)
 
@@ -527,6 +598,10 @@ Allows you to update the Personal Access Token for your profile.
 ### [Update-VSTeamProject](Update-VSTeamProject.md)
 
 Updates the project name, description or both.
+
+### [Update-VSTeamPullRequest](Update-VSTeamPullRequest.md)
+
+Update a pull request
 
 ### [Update-VSTeamRelease](Update-VSTeamRelease.md)
 

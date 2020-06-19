@@ -13,9 +13,6 @@ function Add-VSTeamFeed {
    )
 
    process {
-      # Thi swill throw if this account does not support feeds
-      _supportsFeeds
-
       $body = @{
          name                       = $Name
          description                = $Description
@@ -50,7 +47,7 @@ function Add-VSTeamFeed {
 
       # Call the REST API
       $resp = _callAPI -subDomain feeds -Area packaging -Resource feeds `
-         -Method Post -ContentType 'application/json' -body $bodyAsJson -Version $([VSTeamVersions]::Packaging)
+         -Method Post -ContentType 'application/json' -body $bodyAsJson -Version $(_getApiVersion Packaging)
 
       return [VSTeamFeed]::new($resp)
    }

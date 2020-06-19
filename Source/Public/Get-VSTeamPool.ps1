@@ -9,7 +9,7 @@ function Get-VSTeamPool {
    process {
 
       if ($id) {
-         $resp = _callAPI -Area distributedtask -Resource pools -Id $id -Version $([VSTeamVersions]::DistributedTask)
+         $resp = _callAPI -NoProject -Area distributedtask -Resource pools -Id $id -Version $(_getApiVersion DistributedTask)
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -19,7 +19,7 @@ function Get-VSTeamPool {
          Write-Output $item
       }
       else {
-         $resp = _callAPI -Area distributedtask -Resource pools -Version $([VSTeamVersions]::DistributedTask)
+         $resp = _callAPI -NoProject -Area distributedtask -Resource pools -Version $(_getApiVersion DistributedTask)
 
          $objs = @()
 

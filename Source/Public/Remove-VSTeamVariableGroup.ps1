@@ -4,22 +4,20 @@ function Remove-VSTeamVariableGroup {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $id,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Variable Group")) {
             # Call the REST API
             _callAPI -projectName $projectName -Area 'distributedtask' -Resource 'variablegroups' -Id $item  `
-               -Method Delete -Version $([VSTeamVersions]::VariableGroups) | Out-Null
+               -Method Delete -Version $(_getApiVersion VariableGroups) | Out-Null
 
             Write-Output "Deleted variable group $item"
          }

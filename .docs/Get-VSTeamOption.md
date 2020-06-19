@@ -44,6 +44,22 @@ PS C:\> Get-VSTeamOption -SubDomain vsrm
 
 This will display all the versions of supported APIs for the release management service.
 
+### -------------------------- EXAMPLE 4 --------------------------
+
+```PowerShell
+PS C:\> Get-VSTeamOption -Area core
+```
+
+This will display all the versions of supported APIs for the area core.
+
+### -------------------------- EXAMPLE 5 --------------------------
+
+```PowerShell
+PS C:\> Get-VSTeamOption -Area core -Resource teams
+```
+
+This will display all the versions of supported APIs for resources teams under the area core.
+
 ## PARAMETERS
 
 ### -SubDomain
@@ -55,6 +71,24 @@ Returns options for that sub domain APIs. Some examples include:
 - vsrm = Release Management
 - vssps = Graph
 - extmgmt = Extensions
+
+```yaml
+Type: String
+Required: false
+```
+
+### -Area
+
+Returns options for that area's APIs.
+
+```yaml
+Type: String
+Required: false
+```
+
+### -Resource
+
+Returns options for that resource's APIs.
 
 ```yaml
 Type: String

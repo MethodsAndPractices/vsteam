@@ -9,8 +9,6 @@ function _callMembershipAPI {
       [ValidateSet('', 'Up', 'Down')]
       [string] $Direction
    )
-   Set-StrictMode -Version Latest
-
    # This will throw if this account does not support the graph API
    _supportsGraph
 
@@ -26,7 +24,7 @@ function _callMembershipAPI {
       -Id $Id `
       -SubDomain "vssps" `
       -Method $Method `
-      -Version $([VSTeamVersions]::Graph) `
+      -Version $(_getApiVersion Graph) `
       -QueryString $query
 
    return $resp

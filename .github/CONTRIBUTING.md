@@ -19,10 +19,7 @@ I am truly grateful for all the support developing VSTeam. It means a lot that y
 
 ## Running Integration tests
 
-**THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.**
-
 - Install SonarQube extension
-- Use an empty account to run the integration tests
 - Set the following Environment variables.
   - `$env:ACCT = VSTS` Account Name or full TFS URL including collection
   - `$env:API_VERSION = TFS2017` or TFS2018 / AzD2019 for on-prem versions, or VSTS for the Service variant, depending on the value used for ACCT
@@ -71,7 +68,7 @@ You can run gen-help.ps1 from the .docs folder to make sure you can generate the
 
 ### Write Unit Test
 
-Using [Pester](https://github.com/pester/Pester) write unit test for the new function. I am a firm believer if I cannot write a test before I write the code I am not clear on what I expect the code to do. After writing the help first writing the unit tests should be pretty straight forward.
+Using [Pester](https://github.com/pester/Pester) 5.x write unit test for the new function. I am a firm believer if I cannot write a test before I write the code I am not clear on what I expect the code to do. After writing the help first writing the unit tests should be pretty straight forward.
 
 At first it will feel odd to write the help and test first but the more you do it the easier it gets.
 

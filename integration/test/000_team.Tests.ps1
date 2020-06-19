@@ -1,81 +1,83 @@
 Set-StrictMode -Version Latest
 
-# if ($null -eq $env:TEAM_CIBUILD) {
-#    Get-Module VSTeam | Remove-Module -Force
-#    Import-Module $PSScriptRoot\..\..\dist\VSTeam.psd1 -Force
-# }
+Describe 'Team' -Tag 'integration' {
+   BeforeAll {
+      $pat = $env:PAT
+      $acct = $env:ACCT
+      $api = $env:API_VERSION
 
-##############################################################
-#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
-##############################################################
-# Before running these tests you must set the following      #
-# Environment variables.                                     #
-# $env:API_VERSION = TFS2017, TFS2018, AzD2019 or VSTS       #
-#                    depending on the value used for ACCT    #
-# $env:EMAIL = Email of user to remove and re-add to account #
-# $env:ACCT = VSTS Account Name or full TFS URL including    #
-#             collection                                     #
-# $env:PAT = Personal Access token of ACCT                   #
-##############################################################
-#     THESE TEST ARE DESTRUCTIVE. USE AN EMPTY ACCOUNT.      #
-##############################################################
+      Set-VSTeamAPIVersion -Target $env:API_VERSION
+      Set-VSTeamAccount -a $acct -pe $pat -version $api
 
-Set-VSTeamAPIVersion -Target $env:API_VERSION
+      # See if there are any existing projects. If so use the
+      # first one as the expected project name. If there are none
+      # simply use MyProject
+      $expectedProjectName = Get-VSTeamProject | Select-Object -First 1 -ExpandProperty Name
 
-InModuleScope VSTeam {
-   Describe 'Team' -Tag 'integration' {
+      if (-not $expectedProjectName) {
+         $expectedProjectName = 'MyProject'
+      }
+   }
+
+   Context 'Set-VSTeamDefaultProject' {
+      It 'should set default project' {
+         Set-VSTeamDefaultProject -Project $expectedProjectName
+
+         $info = Get-VSTeamInfo
+
+         $info.DefaultProject | Should -Be $expectedProjectName
+      }
+   }
+
+   Context 'Clear-VSTeamDefaultProject' {
+      It 'should clear default project' {
+         Set-VSTeamDefaultProject -Project $expectedProjectName
+
+         Clear-VSTeamDefaultProject
+
+         $info = Get-VSTeamInfo
+
+         $info.DefaultProject | Should -BeNullOrEmpty
+      }
+   }
+
+   Context 'Get-VSTeamInfo' {
       BeforeAll {
-         $pat = $env:PAT
-         $acct = $env:ACCT
-         $api = $env:API_VERSION
-         Set-VSTeamAccount -a $acct -pe $pat -version $api
+         # Set-VSTeamAccount is set in the Before All
+         # so just set the default project here
+         # Arrange
+         Set-VSTeamDefaultProject -Project $expectedProjectName
 
-         Get-VSTeamProject | Where-Object { $_.Name -like "TeamModuleIntegration*" } | Remove-VSTeamProject -Force
+         # Act
+         $info = Get-VSTeamInfo
       }
 
-      Context 'Get-VSTeamInfo' {
-         It 'should return account and default project' {
-            [VSTeamVersions]::Account = "mydemos"
-            $Global:PSDefaultParameterValues['*:projectName'] = 'MyProject'
-
-            $info = Get-VSTeamInfo
-
-            $info.Account | Should Be "mydemos"
-            $info.DefaultProject | Should Be "MyProject"
+      # Assert
+      It 'should return account' {
+         # The account for Server is formated different than for Services
+         if ($acct -like "http://*") {
+            $info.Account | Should -Be $acct
+         }
+         else {
+            $info.Account | Should -Be "https://dev.azure.com/$($env:ACCT)"
          }
       }
 
-      Context 'Set-VSTeamAccount vsts' {
-         It 'should set env at process level' {
-            $pat = $env:PAT
-            $acct = $env:ACCT
-            $api = $env:API_VERSION
-            Set-VSTeamAccount -a $acct -pe $pat -version $api
-
-            $info = Get-VSTeamInfo
-
-            $info.DefaultProject | Should Be $null
-
-            if ($acct -like "http://*") {
-               $info.Account | Should Be $acct
-            }
-            else {
-               $info.Account | Should Be "https://dev.azure.com/$acct"
-            }
-         }
+      It 'should return default project' {
+         $info.DefaultProject | Should -Be $expectedProjectName
       }
+   }
 
-      Context 'Remove-TeamAccount run as normal user' {
-         It 'should clear env at process level' {
-            # Act
-            Remove-VSTeamAccount
+   Context 'Remove-VSTeamAccount run as normal user' {
+      It 'should clear env at process level' {
+         # Act
+         Remove-VSTeamAccount
 
-            # Assert
-            $info = Get-VSTeamInfo
+         # Assert
+         $info = Get-VSTeamInfo
 
-            $info.Account | Should Be ''
-            $info.DefaultProject | Should Be $null
-         }
+         $info.Account | Should -Be ''
+         $info.DefaultProject | Should -Be $null
       }
    }
 }

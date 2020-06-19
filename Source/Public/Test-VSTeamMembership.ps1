@@ -1,5 +1,6 @@
 function Test-VSTeamMembership {
    [CmdletBinding()]
+   [OutputType([System.Boolean])]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = "MemberDescriptor")]
       [string] $MemberDescriptor,
@@ -8,8 +9,6 @@ function Test-VSTeamMembership {
    )
 
    process {
-      Set-StrictMode -Version Latest
-
       $PrevWarningPreference = $WarningPreference
       try {
          $WarningPreference = "SilentlyContinue" # avoid 404 warning, since that indicates it doesn't exist

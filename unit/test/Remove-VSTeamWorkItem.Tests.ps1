@@ -1,15 +1,22 @@
 Set-StrictMode -Version Latest
 
-InModuleScope VSTeam {
-   [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+Describe 'VSTeamWorkItem' {
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-   Describe 'workitems' {
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
-
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
       $obj = @{
          id  = 47
@@ -29,63 +36,65 @@ InModuleScope VSTeam {
       $collectionDeleted = @(
          $objDeleted
       )
+   }
 
-      Context 'Remove-WorkItem' {
+   Context 'Remove-WorkItem' {
+      BeforeAll {
+      }
 
-         It 'Should delete single work item' {
-            Mock Invoke-RestMethod {
-               # If this test fails uncomment the line below to see how the mock was called.
-               #Write-Host $args
+      It 'Should delete single work item' {
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            #Write-Host $args
 
-               return $collectionDeleted
-            }
-
-            Remove-VSTeamWorkItem -Id 47 -Force
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               $Uri -like "*workitems/47*"
-            }
+            return $collectionDeleted
          }
 
-         It 'Should throw single work item with id equals $null' {
-            { Remove-VSTeamWorkItem -Id $null } | Should -Throw
+         Remove-VSTeamWorkItem -Id 47 -Force
+
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+            $Uri -like "*workitems/47*"
+         }
+      }
+
+      It 'Should throw single work item with id equals $null' {
+         { Remove-VSTeamWorkItem -Id $null } | Should -Throw
+      }
+
+      It 'Should delete multipe work items' {
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            #Write-Host $args
+
+            return $collectionDeleted
          }
 
-         It 'Should delete multipe work items' {
-            Mock Invoke-RestMethod {
-               # If this test fails uncomment the line below to see how the mock was called.
-               #Write-Host $args
+         Remove-VSTeamWorkItem -Id 47, 48 -Force
 
-               return $collectionDeleted
-            }
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
+            $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+            ($Uri -like "*workitems/47*" -or $Uri -like "*workitems/48*")
+         }
+      }
 
-            Remove-VSTeamWorkItem -Id 47, 48 -Force
+      It 'Single Work Item Should be deleted permanently' {
+         Mock Invoke-RestMethod {
+            # If this test fails uncomment the line below to see how the mock was called.
+            #Write-Host $args
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               ($Uri -like "*workitems/47*" -or $Uri -like "*workitems/48*")
-            }
+            return $collectionDeleted
          }
 
-         It 'Single Work Item Should be deleted permanently' {
-            Mock Invoke-RestMethod {
-               # If this test fails uncomment the line below to see how the mock was called.
-               #Write-Host $args
+         Remove-VSTeamWorkItem -Id 47, 48 -Destroy -Force
 
-               return $collectionDeleted
-            }
-
-            Remove-VSTeamWorkItem -Id 47, 48 -Destroy -Force
-
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
-               $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
-               $Uri -like "*api-version=$([VSTeamVersions]::Core)*" -and
-               ($Uri -like "*workitems/47*" -or $Uri -like "*workitems/48*") -and
-               $Uri -like "*destroy=True*"
-            }
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
+            $Uri -like "*https://dev.azure.com/test/_apis/wit/workitems*" -and
+            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+            ($Uri -like "*workitems/47*" -or $Uri -like "*workitems/48*") -and
+            $Uri -like "*destroy=True*"
          }
       }
    }

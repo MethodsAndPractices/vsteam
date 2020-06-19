@@ -2,22 +2,20 @@ function Show-VSTeamGitRepository {
    [CmdletBinding()]
    param (
       [Parameter(ValueFromPipelineByPropertyName = $true)]
-      [string] $RemoteUrl
+      [string] $RemoteUrl,
+
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $false
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ($RemoteUrl) {
          Show-Browser $RemoteUrl
       }
       else {
-         Show-Browser "$([VSTeamVersions]::Account)/_git/$ProjectName"
+         Show-Browser "$(_getInstance)/_git/$ProjectName"
       }
    }
 }

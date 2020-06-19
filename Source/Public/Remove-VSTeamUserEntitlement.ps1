@@ -13,7 +13,7 @@ function Remove-VSTeamUserEntitlement {
    )
 
    process {
-       # Thi swill throw if this account does not support MemberEntitlementManagement
+       # This will throw if this account does not support MemberEntitlementManagement
        _supportsMemberEntitlementManagement
 
        if ($email) {
@@ -32,7 +32,7 @@ function Remove-VSTeamUserEntitlement {
 
        if ($Force -or $PSCmdlet.ShouldProcess("$($user.userName) ($($user.email))", "Delete user")) {
            # Call the REST API
-           _callAPI -Method Delete -SubDomain 'vsaex' -Resource 'userentitlements' -Id $Id -Version $([VSTeamVersions]::MemberEntitlementManagement) | Out-Null
+           _callAPI -Method Delete -SubDomain 'vsaex' -Resource 'userentitlements' -Id $Id -Version $(_getApiVersion MemberEntitlementManagement) | Out-Null
 
            Write-Output "Deleted user $($user.userName) ($($user.email))"
        }

@@ -5,20 +5,19 @@ function Remove-VSTeam {
       [Alias('Name', 'TeamId', 'TeamName')]
       [string]$Id,
 
-      [switch]$Force
+      [switch]$Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
+   
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API
          _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Id `
-            -Method Delete -Version $([VSTeamVersions]::Core) | Out-Null
+            -Method Delete -Version $(_getApiVersion Core) | Out-Null
 
          Write-Output "Deleted team $Id"
       }

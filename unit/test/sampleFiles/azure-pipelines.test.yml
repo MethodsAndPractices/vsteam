@@ -1,0 +1,32 @@
+name: Test-Yaml-Pipeline
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+stages:
+- stage: Build
+  displayName: Build Stage
+
+  jobs:
+
+  - job: Windows_Phase
+    displayName: Build Windows
+    pool:
+      vmImage: 'windows-latest'
+
+    steps:  
+    - task: CopyFiles@2
+      displayName: 'Copy Module to Artifacts Folder'
+      inputs:
+        Contents: '**'          
+        TargetFolder: '$(build.artifactstagingdirectory)'
+        flattenFolders: false
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Module'
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+        artifact: 'module'

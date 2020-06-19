@@ -14,16 +14,15 @@ function Update-VSTeamPolicy {
       [Parameter(Mandatory = $true)]
       [hashtable] $settings,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
    process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if (-not $type) {
          $policy = Get-VSTeamPolicy -ProjectName $ProjectName -Id $id | Select-Object -First 1
          $type = $policy.type.id
@@ -42,7 +41,7 @@ function Update-VSTeamPolicy {
          if ($Force -or $pscmdlet.ShouldProcess($id, "Update Policy")) {
             # Call the REST API
             $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -id $id -Resource 'configurations' `
-               -Method Put -ContentType 'application/json' -Body $body -Version $([VSTeamVersions]::Git)
+               -Method Put -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
 
             Write-Output $resp
          }

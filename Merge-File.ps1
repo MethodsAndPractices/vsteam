@@ -58,6 +58,8 @@ PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
          }
       }
 
+      $files = $files | select-object -Unique # We don't worry about case sensitivity, because for Linux to work it needs to be cased correctly anyways
+
       # This makes sure the file is there and empty.
       # If the file already exisit it will be overwritten.
       $null = New-Item -ItemType file -Path $output -Force

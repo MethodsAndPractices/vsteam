@@ -194,3 +194,23 @@ function _applyTypesToVariableGroup {
    }
    $item.variables.PSObject.TypeNames.Insert(0, 'Team.Variables')
 }
+
+function _applyTypesToYamlPipelineResultType {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.YamlPipelineResult')
+}
+
+function _applyTypesToBuildTimelineResultType {
+   param($item)
+
+   $item.PSObject.TypeNames.Insert(0, 'Team.BuildTimeline')
+
+   if ($item.PSObject.Properties.Match('records').count -gt 0 -and $null -ne $item.records) {
+      $item.records.PSObject.TypeNames.Insert(0, 'Team.BuildTimelineRecord[]')
+
+      foreach ($records in $item.records) {
+         $records.PSObject.TypeNames.Insert(0, 'Team.BuildTimelineRecord')
+      }
+   }
+}

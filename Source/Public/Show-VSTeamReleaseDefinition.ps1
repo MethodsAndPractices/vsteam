@@ -3,21 +3,17 @@ function Show-VSTeamReleaseDefinition {
    param(
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseDefinitionID')]
-      [int] $Id
+      [int] $Id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      Write-Debug 'Show-VSTeamReleaseDefinition Process'
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       # Build the url
-      $url = "$([VSTeamVersions]::Account)/$ProjectName/_release"
+      $url = "$(_getInstance)/$ProjectName/_release"
 
       if ($id) {
          $url += "?definitionId=$id"

@@ -2,7 +2,7 @@ function Get-VSTeamUser {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'List')]
-      [ValidateSet('msa','aad','svc','imp','vss')]
+      [ValidateSet('msa', 'aad', 'svc', 'imp', 'vss')]
       [string[]] $SubjectTypes,
 
       [Parameter(ParameterSetName = 'ByUserDescriptor', Mandatory = $true)]
@@ -17,8 +17,8 @@ function Get-VSTeamUser {
       if ($Descriptor) {
          # Call the REST API
          $resp = _callAPI -Area 'graph' -Resource 'users' -id $Descriptor `
-            -Version $([VSTeamVersions]::Graph) `
-            -SubDomain 'vssps'
+            -Version $(_getApiVersion Graph) `
+            -SubDomain 'vssps' -NoProject
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -28,18 +28,17 @@ function Get-VSTeamUser {
          Write-Output $user
       }
       else {
-         $queryString = @{}
-         if ($SubjectTypes -and $SubjectTypes.Length -gt 0)
-         {
+         $queryString = @{ }
+         if ($SubjectTypes -and $SubjectTypes.Length -gt 0) {
             $queryString.subjectTypes = $SubjectTypes -join ','
          }
 
          try {
             # Call the REST API
             $resp = _callAPI -Area 'graph' -id 'users' `
-               -Version $([VSTeamVersions]::Graph) `
+               -Version $(_getApiVersion Graph) `
                -QueryString $queryString `
-               -SubDomain 'vssps'
+               -SubDomain 'vssps' -NoProject
 
             $objs = @()
 

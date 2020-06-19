@@ -2,18 +2,16 @@ function Get-VSTeamBuildArtifact {
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
-      [int] $Id
+      [int] $Id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
-   Process {
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+   process {
       $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/artifacts" `
-         -Version $([VSTeamVersions]::Build)
+         -Version $(_getApiVersion Build)
 
       foreach ($item in $resp.value) {
          _applyArtifactTypes -item $item

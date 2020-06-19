@@ -5,15 +5,7 @@ function Get-VSTeamSecurityNamespace {
       [string] $Name,
 
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
-      [ValidateScript({
-         try {
-             [System.Guid]::Parse($_) | Out-Null
-             $true
-         } catch {
-             $false
-         }
-      })]
-      [string] $Id,
+      [guid] $Id,
 
       [Parameter(ParameterSetName = 'List', Mandatory = $false)]
       [switch] $LocalOnly
@@ -23,19 +15,20 @@ function Get-VSTeamSecurityNamespace {
       _supportsSecurityNamespace
 
       if ($Id) {
-          # Call the REST API
+         # Call the REST API
          $resp = _callAPI -Area 'securitynamespaces' -id $Id `
-         -Version $([VSTeamVersions]::Core) `
-      } else {
-         $queryString = @{}
-         if ($LocalOnly.IsPresent)
-         {
+            -Version $(_getApiVersion Core) -NoProject `
+      
+      }
+      else {
+         $queryString = @{ }
+         if ($LocalOnly.IsPresent) {
             $queryString.localOnly = $true
          }
 
          $resp = _callAPI -Area 'securitynamespaces' `
-         -Version $([VSTeamVersions]::Core) `
-         -QueryString $queryString
+            -Version $(_getApiVersion Core) -NoProject `
+            -QueryString $queryString
       }
 
       Write-Verbose $resp | Select-Object -ExpandProperty value
@@ -47,10 +40,11 @@ function Get-VSTeamSecurityNamespace {
       if ($resp.count -gt 1) {
          # If we only need to find one specific by name
          if ($Name) {
-            $selected = $resp.value | Where-Object {$_.name -eq $Name}
+            $selected = $resp.value | Where-Object { $_.name -eq $Name }
             if ($selected) {
                return [VSTeamSecurityNamespace]::new($selected)
-            } else {
+            }
+            else {
                return $null
             }
          }
@@ -69,7 +63,8 @@ function Get-VSTeamSecurityNamespace {
             # This casuses the first error to terminate this execution.
             _handleException $_
          }
-      } else {
+      }
+      else {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written

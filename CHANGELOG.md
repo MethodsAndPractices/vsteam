@@ -1,5 +1,70 @@
 # Changelog
 
+## 6.5.0
+
+Changed the completers to quote all values.
+
+Added support for different releases of the Server version:
+TFS2017U1, TFS2017U2, TFS2017U3, TFS2018U1, TFS2018U2, TFS2018U3 and AZD2019U1.
+
+The versions for Azure DevOps were also updated to 6.0-preview where supported.
+
+Requires Pester 5.x
+All the tests have been upgraded to use Pester 5.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/315) from [Jhoneill](https://github.com/jhoneill) which included the following:
+
+- Fix Get-VSTeamWiql [#314](https://github.com/DarqueWarrior/vsteam/issues/314)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
+
+- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
+
+## 6.4.8
+
+You can now tab complete Area and Resource of Invoke-VSTeamRequest.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/286) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Added cmdlets for add, get and remove for classification nodes, iterations and areas
+
+## 6.4.7
+
+\_callAPI, \_buildRequestURI and Invoke-VSTeamRequest now support UseProjectId switch if the Project ID is required for the API call.
+
+Addressed following issues:
+
+- Do not change the strict mode setting for the user's PowerShell session [#296](https://github.com/DarqueWarrior/vsteam/issues/296)
+- Consider reducing the scope of the default parameter "Project" from "*" to "*-VsTeam*" [#297](https://github.com/DarqueWarrior/vsteam/issues/297)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/275) from [Jhoneill](https://github.com/jhoneill) which included the following:
+
+- Removing Dynamic parameters for completer and validator attributes.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/283) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Added Get-VSTeamBuildTimeline to get timeline of a build
+
+## 6.4.6
+
+Corrected a display issue were the List view was being used by default instead of Table.
+
+## 6.4.5
+
+All unit test now pass consistently.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/265) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
+
+- Simplify merging of files
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/272) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Add Test-VSTeamYamlPipeline to preview check changes for YAML pipelines. [See release sprint 165](https://docs.microsoft.com/azure/devops/release-notes/2020/sprint-165-update#azure-pipelines-1).
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/273) from [Lukas Wöhrl](https://github.com/woehrl01) which included the following:
+
+- Adds a new function Update-VSTeamAgent which allows to update the agent version
+
 ## 6.4.4
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/257) from [Michel Zehnder](https://github.com/MichelZ) which included the following:
@@ -45,7 +110,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/237) from [Mi
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/232) from [Mark Wragg](https://github.com/markwragg) which included the following:
 
-- Bug fix in Get-VSTeamBuildArtifact where an error is returned because the API returns an extra record along with the list of artifacts that is called 'build.sourcelabel' and contains a URL but no "properties" object.
+- Bug fix in Get-VSTeamBuildArtifact where an error is returned because the API returns an extra record along with the list of artifacts that is called 'build.sourceLabel' and contains a URL but no "properties" object.
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/231) from [Dave Neeley](https://github.com/daveneeley) which included the following:
 
@@ -112,7 +177,7 @@ maxParallelism to Disable/Enable-VSTeamAgent
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/205) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-Get-VSTeamWiql to get work items via [WIQL](https://docs.microsoft.com/en-us/rest/api/azure/devops/wit/wiql?view=azure-devops-rest-5.1) and also to expand the returned work items with all fields selected.
+Get-VSTeamWiql to get work items via [WIQL](https://docs.microsoft.com/rest/api/azure/devops/wit/wiql?view=azure-devops-rest-5.1&WT.mc_id=-github-dbrown) and also to expand the returned work items with all fields selected.
 
 **Breaking changes**:
 
@@ -131,7 +196,7 @@ Updated Merge-File.ps1 to clean trailing white-space.
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/199) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
-bug fix for update and add workitem
+bug fix for update and add workItem
 
 ## 6.3.4
 
@@ -417,7 +482,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/102) from [Br
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/93) from [Kai Walter](https://github.com/KaiWalter) which included the following:
 
-- replaced {accountname}.visualstudio.com with dev.azure.com/{accountname}
+- replaced {accountName}.visualStudio.com with dev.azure.com/{accountName}
 
 ## 4.0.7
 
@@ -841,7 +906,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/8) from [Mich
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Added serviceEndpoint parameters to Add-VSTeamAzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
-- The _trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/en-us/docs/integrate/api/endpoints/endpoints)
+- The _trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/docs/integrate/api/endpoints/endpoints?WT.mc_id=-github-dbrown)
 - The URL in the payload changed to [https://management.azure.com](https://management.azure.com)
 
 ## 0.1.19

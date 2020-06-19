@@ -7,23 +7,21 @@ function Update-VSTeamRelease {
       [Parameter(Mandatory = $true)]
       [PSCustomObject] $Release,
 
-      [switch] $Force
+      [switch] $Force,
+
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    Process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       $body = $Release | ConvertTo-Json -Depth 99
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Release")) {
          # Call the REST API
          $resp = _callAPI -ProjectName $projectName -SubDomain vsrm -Area release -Resource releases -Id $id  `
-            -Method Put -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Release)
+            -Method Put -ContentType 'application/json' -body $body -Version $(_getApiVersion Release)
 
          Write-Output $resp
       }

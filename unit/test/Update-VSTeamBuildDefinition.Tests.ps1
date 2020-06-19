@@ -1,66 +1,89 @@
 Set-StrictMode -Version Latest
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".")
+Describe "VSTeamBuildDefinition" {
+   BeforeAll {
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+      
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Remove-VSTeamAccount.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+      
+      $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
 
-. "$here/../../Source/Classes/VSTeamVersions.ps1"
-. "$here/../../Source/Classes/VSTeamProjectCache.ps1"
-. "$here/../../Source/Private/common.ps1"
-. "$here/../../Source/Public/$sut"
+      Mock _hasProjectCacheExpired { return $false }
+   }
 
-$resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+   Context "Update-VSTeamBuildDefinition" {
+      Context "Services" {
+         BeforeAll {
+            # Set the account to use for testing. A normal user would do this
+            # using the Set-VSTeamAccount function.
+            Mock _getInstance { return 'https://dev.azure.com/test' }
 
-Describe "Update-VSTeamBuildDefinition" {  
-   Context "AzD" {
-      # Set the account to use for testing. A normal user would do this
-      # using the Set-VSTeamAccount function.
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
-      Mock Invoke-RestMethod {
-         # If this test fails uncomment the line below to see how the mock was called.
-         #Write-Host $args
-         
-         return $resultsAzD
-      }
+            Mock Invoke-RestMethod {
+               # If this test fails uncomment the line below to see how the mock was called.
+               # Write-Host $args
 
-      It "should update build definition from json" {
-         # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+               return $resultsAzD
+            }
+         }
 
-         Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition 'JSON'
+         It "should update build definition from json" {
+            # This should stop the call to cache projects
+            [VSTeamProjectCache]::timestamp = (Get-Date).Minute
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Put' -and
-            $Uri -like "*https://dev.azure.com/test/Demo/_apis/build/definitions/23*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+            Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition 'JSON'
+
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Put' -and
+               $Uri -like "*https://dev.azure.com/test/Demo/_apis/build/definitions/23*" -and
+               $Uri -like "*api-version=$(_getApiVersion Build)*"
+            }
+         }
+
+         It 'should update build definition from file' {
+            # This should stop the call to cache projects
+            [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+
+            Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
+
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+               $Method -eq 'Put' -and
+               $InFile -eq 'sampleFiles/builddef.json' -and
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/2?api-version=$(_getApiVersion Build)"
+            }
          }
       }
 
-      It 'should update build definition from file' {
-         # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-         
-         Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
+      Context 'Server' {
+         BeforeAll {
+            # Set the account to use for testing. A normal user would do this
+            # using the Set-VSTeamAccount function.
+            Remove-VSTeamAccount
+            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Put' -and
-            $InFile -eq 'sampleFiles/builddef.json' -and
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
+            Mock _useWindowsAuthenticationOnPremise { return $true }
+
+            Mock Invoke-RestMethod {
+               # If this test fails uncomment the line below to see how the mock was called.
+               # Write-Host $args
+
+               return $resultsAzD
+            }
+
+            Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
          }
-      }
-   }   
 
-   Context 'TFS local Auth' {
-      Mock Invoke-RestMethod { return $resultsAzD }
-      Mock _useWindowsAuthenticationOnPremise { return $true }
-      [VSTeamVersions]::Account = 'http://localhost:8080/tfs/defaultcollection'
-
-      Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
-
-      It 'should update build definition' {
-         Assert-MockCalled Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
-            $Method -eq 'Put' -and
-            $InFile -eq 'sampleFiles/builddef.json' -and
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$([VSTeamVersions]::Build)"
+         It 'should update build definition' {
+            Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
+               $Method -eq 'Put' -and
+               $InFile -eq 'sampleFiles/builddef.json' -and
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/definitions/2?api-version=$(_getApiVersion Build)"
+            }
          }
       }
    }

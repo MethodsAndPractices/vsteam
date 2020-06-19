@@ -6,15 +6,7 @@ function Get-VSTeamAccessControlList {
 
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('ID')]
-      [ValidateScript({
-         try {
-             [System.Guid]::Parse($_) | Out-Null
-             $true
-         } catch {
-             $false
-         }
-      })]
-      [string] $SecurityNamespaceId,
+      [guid] $SecurityNamespaceId,
 
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
@@ -34,25 +26,21 @@ function Get-VSTeamAccessControlList {
    )
 
    process {
-      if ($SecurityNamespace)
-      {
+      if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
       }
 
-      $queryString = @{}
+      $queryString = @{ }
 
-      if ($Token)
-      {
+      if ($Token) {
          $queryString.token = $Token
       }
 
-      if ($Descriptors -and $Descriptors.Length -gt 0)
-      {
+      if ($Descriptors -and $Descriptors.Length -gt 0) {
          $queryString.descriptors = $Descriptors -join ","
       }
 
-      if ($IncludeExtendedInfo.IsPresent)
-      {
+      if ($IncludeExtendedInfo.IsPresent) {
          $queryString.includeExtendedInfo = $true
       }
 
@@ -62,7 +50,7 @@ function Get-VSTeamAccessControlList {
 
       # Call the REST API
       $resp = _callAPI -Area 'accesscontrollists' -id $SecurityNamespaceId -method GET `
-         -Version $([VSTeamVersions]::Core) `
+         -Version $(_getApiVersion Core) -NoProject `
          -QueryString $queryString
 
       try {

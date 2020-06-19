@@ -1,0 +1,1 @@
+Adds a new area to the project

@@ -1,9 +1,106 @@
-Set-StrictMode -Version Latest
-
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "It is used in other files")]
 $profilesPath = "$HOME/vsteam_profiles.json"
+
+# This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
+# If you need to call TFS or VSTS this is the function to use.
+function _callAPI {
+   param(
+      [string]$resource,
+      [string]$area,
+      [string]$id,
+      [string]$version,
+      [string]$subDomain,
+      [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
+      [string]$method,
+      [Parameter(ValueFromPipeline = $true)]
+      [object]$body,
+      [string]$InFile,
+      [string]$OutFile,
+      [string]$ContentType,
+      [string]$ProjectName,
+      [string]$Team,
+      [string]$Url,
+      [object]$QueryString,
+      [hashtable]$AdditionalHeaders,
+      # Some API calls require the Project ID and not the project name.
+      # However, the dynamic project name parameter only shows you names
+      # and not the Project IDs. Using this flag the project name provided
+      # will be converted to the Project ID when building the URI for the API
+      # call.
+      [switch]$UseProjectId,
+      # This flag makes sure that even if a default project is set that it is
+      # not used to build the URI for the API call. Not all API require or 
+      # allow the project to be used. Setting a default project would cause
+      # that project name to be used in building the URI that would lead to 
+      # 404 because the URI would not be correct.
+      [Alias('IgnoreDefaultProject')]
+      [switch]$NoProject
+   )
+
+   process {
+      # If the caller did not provide a Url build it.
+      if (-not $Url) {
+         $buildUriParams = @{ } + $PSBoundParameters;
+         $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
+         foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
+         $Url = _buildRequestURI @buildUriParams
+      }
+      elseif ($QueryString) {
+         # If the caller provided the URL and QueryString we need
+         # to add the querystring now
+         foreach ($key in $QueryString.keys) {
+            $Url += _appendQueryString -name $key -value $QueryString[$key]
+         }
+      }
+
+      if ($body) {
+         Write-Verbose "Body $body"
+      }
+
+      $params = $PSBoundParameters
+      $params.Add('Uri', $Url)
+      $params.Add('UserAgent', (_getUserAgent))
+
+      if (_useWindowsAuthenticationOnPremise) {
+         $params.Add('UseDefaultCredentials', $true)
+         $params.Add('Headers', @{ })
+      }
+      elseif (_useBearerToken) {
+         $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
+      }
+      else {
+         $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
+      }
+
+      if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
+         foreach ($key in $AdditionalHeaders.Keys) {
+            $params['Headers'].Add($key, $AdditionalHeaders[$key])
+         }
+      }
+   
+      # We have to remove any extra parameters not used by Invoke-RestMethod
+      $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
+      foreach ($e in $extra) { $params.Remove($e) | Out-Null }
+
+      try {
+         $resp = Invoke-RestMethod @params
+
+         if ($resp) {
+            Write-Verbose "return type: $($resp.gettype())"
+            Write-Verbose $resp
+         }
+
+         return $resp
+      }
+      catch {
+         _handleException $_
+
+         throw
+      }
+   }
+}
 
 # Not all versions support the name features.
 
@@ -15,26 +112,7 @@ function _supportsGraph {
 }
 
 function _testGraphSupport {
-   if (-not [VSTeamVersions]::Graph) {
-      return $false
-   }
-
-   return $true
-}
-
-function _supportsFeeds {
-   _hasAccount
-   if ($false -eq $(_testFeedSupport)) {
-      throw 'This account does not support packages.'
-   }
-}
-
-function _testFeedSupport {
-   if (-not [VSTeamVersions]::Packaging) {
-      return $false
-   }
-
-   return $true
+   (_getApiVersion Graph) -as [boolean]
 }
 
 function _supportsSecurityNamespace {
@@ -46,7 +124,7 @@ function _supportsSecurityNamespace {
 
 function _supportsMemberEntitlementManagement {
    _hasAccount
-   if (-not [VSTeamVersions]::MemberEntitlementManagement) {
+   if (-not $(_getApiVersion MemberEntitlementManagement)) {
       throw 'This account does not support Member Entitlement.'
    }
 }
@@ -56,8 +134,83 @@ function _testAdministrator {
    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
+# When you mock this in tests be sure to add a Parameter Filter that matches
+# the Service that should be used. 
+# Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
+# Also test in the Assert-MockCalled that the correct version was used in the URL that was
+# built for the API call.
+function _getApiVersion {
+   [CmdletBinding(DefaultParameterSetName = 'Service')]
+   param (
+      [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy')]
+      [string] $Service,
+
+      [parameter(ParameterSetName = 'Target')]
+      [switch] $Target
+   )
+
+   if ($Target.IsPresent) {
+      return [VSTeamVersions]::Version
+   }
+   else {
+
+      switch ($Service) {
+         'Build' {
+            return [VSTeamVersions]::Build
+         }
+         'Release' {
+            return [VSTeamVersions]::Release
+         }
+         'Core' {
+            return [VSTeamVersions]::Core
+         }
+         'Git' {
+            return [VSTeamVersions]::Git
+         }
+         'DistributedTask' {
+            return [VSTeamVersions]::DistributedTask
+         }
+         'VariableGroups' {
+            return [VSTeamVersions]::VariableGroups
+         }
+         'Tfvc' {
+            return [VSTeamVersions]::Tfvc
+         }
+         'Packaging' {
+            return [VSTeamVersions]::Packaging
+         }
+         'MemberEntitlementManagement' {
+            return [VSTeamVersions]::MemberEntitlementManagement
+         }
+         'ExtensionsManagement' {
+            return [VSTeamVersions]::ExtensionsManagement
+         }
+         'ServiceEndpoints' {
+            return [VSTeamVersions]::ServiceEndpoints
+         }
+         'Graph' {
+            return [VSTeamVersions]::Graph
+         }
+         'TaskGroups' {
+            return [VSTeamVersions]::TaskGroups
+         }
+         'Policy' {
+            return [VSTeamVersions]::Policy
+         }
+      }
+   }
+}
+
+function _getInstance {
+   return [VSTeamVersions]::Account
+}
+
+function _getDefaultProject {
+   return $Global:PSDefaultParameterValues["*-vsteam*:projectName"]
+}
 function _hasAccount {
-   if (-not [VSTeamVersions]::Account) {
+   if (-not $(_getInstance)) {
       throw 'You must call Set-VSTeamAccount before calling any other functions in this module.'
    }
 }
@@ -71,24 +224,33 @@ function _buildRequestURI {
       [string]$id,
       [string]$version,
       [string]$subDomain,
-      [object]$queryString
+      [object]$queryString,
+      [ProjectValidateAttribute()]
+      $ProjectName,
+      [switch]$UseProjectId,
+      [switch]$NoProject
    )
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $false
-   }
 
    process {
       _hasAccount
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+      
       $sb = New-Object System.Text.StringBuilder
 
-      $sb.Append($(_addSubDomain -subDomain $subDomain)) | Out-Null
+      $sb.Append($(_addSubDomain -subDomain $subDomain -instance $(_getInstance))) | Out-Null
 
-      if ($ProjectName) {
-         $sb.Append("/$projectName") | Out-Null
+      # There are some APIs that must not have the project added to the URI.
+      # However, if they caller set the default project it will be passed in
+      # here and added to the URI by mistake. Functions that need the URI
+      # created without the project even if the default project is set needs
+      # to pass the -NoProject switch.
+      if ($ProjectName -and $NoProject.IsPresent -eq $false) {
+         if ($UseProjectId.IsPresent) {
+            $projectId = (Get-VSTeamProject -Name $ProjectName | Select-Object -ExpandProperty id)
+            $sb.Append("/$projectId") | Out-Null
+         }
+         else {
+            $sb.Append("/$projectName") | Out-Null
+         }
       }
 
       if ($team) {
@@ -199,14 +361,13 @@ function _isOnWindows {
 
 function _addSubDomain {
    param(
-      $subDomain
+      [string] $subDomain,
+      [string] $instance
    )
 
-   $instance = [VSTeamVersions]::Account
-
    # For VSTS Entitlements is under .vsaex
-   if ($subDomain -and [VSTeamVersions]::Account.ToLower().Contains('dev.azure.com')) {
-      $instance = [VSTeamVersions]::Account.ToLower().Replace('dev.azure.com', "$subDomain.dev.azure.com")
+   if ($subDomain -and $instance.ToLower().Contains('dev.azure.com')) {
+      $instance = $instance.ToLower().Replace('dev.azure.com', "$subDomain.dev.azure.com")
    }
 
    return $instance
@@ -248,7 +409,7 @@ function _getUserAgent {
 }
 
 function _useWindowsAuthenticationOnPremise {
-   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ([VSTeamVersions]::Account -like "*visualstudio.com") -and -not ([VSTeamVersions]::Account -like "https://dev.azure.com/*")
+   return (_isOnWindows) -and (!$env:TEAM_PAT) -and -not ($(_getInstance) -like "*visualstudio.com") -and -not ($(_getInstance) -like "https://dev.azure.com/*")
 }
 
 function _useBearerToken {
@@ -261,24 +422,14 @@ function _getWorkItemTypes {
       [string] $ProjectName
    )
 
-   if (-not [VSTeamVersions]::Account) {
+   if (-not $(_getInstance)) {
       Write-Output @()
       return
    }
 
-   $area = "/wit"
-   $resource = "/workitemtypes"
-   $instance = [VSTeamVersions]::Account
-   $version = [VSTeamVersions]::Core
-
-   # Build the url to list the projects
-   # You CANNOT use _buildRequestURI here or you will end up
-   # in an infinite loop.
-   $listurl = $instance + '/' + $ProjectName + '/_apis' + $area + $resource + '?api-version=' + $version
-
    # Call the REST API
    try {
-      $resp = _callAPI -url $listurl
+      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
 
       # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
       # To replace all the "": with "_end":
@@ -294,15 +445,27 @@ function _getWorkItemTypes {
    }
 }
 
+# When writing unit tests mock this and return false.
+# This will prevent the dynamic project name parameter
+# from trying to call the getProject function.
+# Mock _hasProjectCacheExpired { return $false }
+function _hasProjectCacheExpired {
+   return $([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute
+}
+
+function _hasProcessTemplateCacheExpired {
+   return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute
+}
+
 function _getProjects {
-   if (-not [VSTeamVersions]::Account) {
+   if (-not $(_getInstance)) {
       Write-Output @()
       return
    }
 
    $resource = "/projects"
-   $instance = [VSTeamVersions]::Account
-   $version = [VSTeamVersions]::Core
+   $instance = $(_getInstance)
+   $version = $(_getApiVersion Core)
 
    # Build the url to list the projects
    # You CANNOT use _buildRequestURI here or you will end up
@@ -358,7 +521,7 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if ($([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute) {
+   if (_hasProjectCacheExpired) {
       $arrSet = _getProjects
       [VSTeamProjectCache]::projects = $arrSet
       [VSTeamProjectCache]::timestamp = (Get-Date).Minute
@@ -406,23 +569,17 @@ function _buildProjectNameDynamicParam {
 }
 
 function _getProcesses {
-   if (-not [VSTeamVersions]::Account) {
+   if (-not $(_getInstance)) {
       Write-Output @()
       return
    }
 
-   $resource = "/process/processes"
-   $instance = [VSTeamVersions]::Account
-   $version = [VSTeamVersions]::Core
-
-   # Build the url to list the projects
-   # You CANNOT use _buildRequestURI here or you will end up
-   # in an infinite loop.
-   $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
-
    # Call the REST API
    try {
-      $resp = _callAPI -url $listurl
+      $query = @{ }
+      $query['stateFilter'] = 'All'
+      $query['$top'] = '9999'
+      $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
 
       if ($resp.count -gt 0) {
          Write-Output ($resp.value).name
@@ -474,7 +631,7 @@ function _buildProcessNameDynamicParam {
       [VSTeamProcessCache]::timestamp = (Get-Date).Minute
    }
    else {
-      $arrSet = [VSTeamProcessCache]::projects
+      $arrSet = [VSTeamProcessCache]::processes
    }
 
    if ($arrSet) {
@@ -527,7 +684,34 @@ function _buildDynamicParam {
    )
    # Create the collection of attributes
    $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+   <#
+.SYNOPSIS
+Short description
 
+.DESCRIPTION
+Long description
+
+.PARAMETER ParameterName
+Parameter description
+
+.PARAMETER ParameterSetName
+Parameter description
+
+.PARAMETER Mandatory
+Parameter description
+
+.PARAMETER AliasName
+Parameter description
+
+.PARAMETER Position
+Parameter description
+
+.EXAMPLE
+An example
+
+.NOTES
+General notes
+#>
    # Create and set the parameters' attributes
    $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
    $ParameterAttribute.Mandatory = $Mandatory
@@ -576,92 +760,6 @@ function _convertSecureStringTo_PlainText {
    # this was the one technique that worked on Mac, Linux and Windows
    $credential = New-Object System.Management.Automation.PSCredential 'unknown', $SecureString
    return $credential.GetNetworkCredential().Password
-}
-
-# This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
-# If you need to call TFS or VSTS this is the function to use.
-function _callAPI {
-   param(
-      [string]$resource,
-      [string]$area,
-      [string]$id,
-      [string]$version,
-      [string]$subDomain,
-      [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
-      [string]$method,
-      [Parameter(ValueFromPipeline = $true)]
-      [object]$body,
-      [string]$InFile,
-      [string]$OutFile,
-      [string]$ContentType,
-      [string]$ProjectName,
-      [string]$Team,
-      [string]$Url,
-      [object]$QueryString,
-      [hashtable]$AdditionalHeaders
-   )
-
-   # If the caller did not provide a Url build it.
-   if (-not $Url) {
-      $buildUriParams = @{ } + $PSBoundParameters;
-      $extra = 'method', 'body', 'InFile', 'OutFile', 'ContentType', 'AdditionalHeaders'
-      foreach ($x in $extra) { $buildUriParams.Remove($x) | Out-Null }
-      $Url = _buildRequestURI @buildUriParams
-   }
-   elseif ($QueryString) {
-      # If the caller provided the URL and QueryString we need
-      # to add the querystring now
-      foreach ($key in $QueryString.keys) {
-         $Url += _appendQueryString -name $key -value $QueryString[$key]
-      }
-   }
-
-   if ($body) {
-      Write-Verbose "Body $body"
-   }
-
-   $params = $PSBoundParameters
-   $params.Add('Uri', $Url)
-   $params.Add('UserAgent', (_getUserAgent))
-
-   if (_useWindowsAuthenticationOnPremise) {
-      $params.Add('UseDefaultCredentials', $true)
-      $params.Add('Headers', @{})
-   }
-   elseif (_useBearerToken) {
-      $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
-   }
-   else {
-      $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
-   }
-
-   if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys")
-   {
-      foreach ($key in $AdditionalHeaders.Keys)
-      {
-         $params['Headers'].Add($key, $AdditionalHeaders[$key])
-      }
-   }
-   
-   # We have to remove any extra parameters not used by Invoke-RestMethod
-   $extra = 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
-   foreach ($e in $extra) { $params.Remove($e) | Out-Null }
-
-   try {
-      $resp = Invoke-RestMethod @params
-
-      if ($resp) {
-         Write-Verbose "return type: $($resp.gettype())"
-         Write-Verbose $resp
-      }
-
-      return $resp
-   }
-   catch {
-      _handleException $_
-
-      throw
-   }
 }
 
 function _trackProjectProgress {
@@ -717,7 +815,7 @@ function _trackServiceEndpointProgress {
    # Track status
    while (-not $isReady) {
       $statusTracking = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $resp.id  `
-         -Version $([VSTeamVersions]::DistributedTask)
+         -Version $(_getApiVersion ServiceEndpoints)
 
       $isReady = $statusTracking.isReady;
 
@@ -736,12 +834,6 @@ function _trackServiceEndpointProgress {
       if ($iTracking -eq $yTracking -or $iTracking -eq 0) {
          $xTracking *= -1
       }
-   }
-}
-
-function _supportsServiceFabricEndpoint {
-   if (-not [VSTeamVersions]::ServiceFabricEndpoint) {
-      throw 'This account does not support Service Fabric endpoints.'
    }
 }
 
@@ -791,7 +883,7 @@ function _clearEnvironmentVariables {
 
    $env:TEAM_PROJECT = $null
    [VSTeamVersions]::DefaultProject = ''
-   $Global:PSDefaultParameterValues.Remove("*:projectName")
+   $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
    # This is so it can be loaded by default in the next session
    if ($Level -ne "Process") {

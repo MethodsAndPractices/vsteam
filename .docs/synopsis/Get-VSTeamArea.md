@@ -1,0 +1,1 @@
+Gets the area node for a given area path.

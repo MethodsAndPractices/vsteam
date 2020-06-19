@@ -2,21 +2,19 @@ function Get-VSTeamPolicyType {
    [CmdletBinding()]
    param (
       [Parameter(ValueFromPipeline = $true)]
-      [guid[]] $Id
+      [guid[]] $Id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -mandatory $true
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ($id) {
          foreach ($item in $id) {
             try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource types -Version $([VSTeamVersions]::Git)
+               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource types -Version $(_getApiVersion Policy)
 
                _applyTypesToPolicyType -item $resp
 
@@ -29,7 +27,7 @@ function Get-VSTeamPolicyType {
       }
       else {
          try {
-            $resp = _callAPI -ProjectName $ProjectName -Area policy -Resource types -Version $([VSTeamVersions]::Git)
+            $resp = _callAPI -ProjectName $ProjectName -Area policy -Resource types -Version $(_getApiVersion Policy)
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {

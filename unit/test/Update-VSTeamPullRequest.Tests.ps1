@@ -1,87 +1,102 @@
 Set-StrictMode -Version Latest
 
-InModuleScope VSTeam {
+Describe 'VSTeamPullRequest' {
+   BeforeAll {
+      Import-Module SHiPS
 
-   Describe 'Pull Requests' {
-      . "$PSScriptRoot\mocks\mockProjectNameDynamicParamNoPSet.ps1"
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-      [VSTeamVersions]::Account = 'https://dev.azure.com/test'
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamUser.ps1"
+      . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
 
-      # You have to set the version or the api-version will not be added when
-      # [VSTeamVersions]::Core = ''
-      [VSTeamVersions]::Git = '5.1-preview'
-      [VSTeamVersions]::Graph = '5.0'
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+
+      # You have to set the version or the api-version will not be added when versions = ''
+      Mock _getApiVersion { return '1.0-unitTest' } -ParameterFilter { $Service -eq 'Git' -or $Service -eq 'Graph' }
 
       $result = Get-Content "$PSScriptRoot\sampleFiles\updatePullRequestResponse.json" -Raw | ConvertFrom-Json
       $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+   }
 
-      Context 'Update-VSTeamPullRequest' {
+   Context 'Update-VSTeamPullRequest' {
+      It 'Update-VSTeamPullRequest to Draft' {
+         Mock Invoke-RestMethod { return $result }
 
-         It 'Update-VSTeamPullRequest to Draft' {
-            Mock Invoke-RestMethod { return $result }
+         Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Draft -Force
 
-            Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Draft -Force
-
-            Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
-               $Method -eq 'Patch' -and
-               $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
-               $Uri -like "*pullrequests/19543*" -and
-               $Body -eq '{"isDraft": true }'
-            }
+         Should -Invoke Invoke-RestMethod -Scope It -ParameterFilter {
+            $Method -eq 'Patch' -and
+            $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
+            $Uri -like "*pullrequests/19543*" -and
+            $Body -eq '{"isDraft": true }'
          }
+      }
 
-         It 'Update-VSTeamPullRequest to Published' {
-            Mock Invoke-RestMethod { return $result }
+      It 'Update-VSTeamPullRequest to Published' {
+         Mock Invoke-RestMethod { return $result }
 
-            Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Force
+         Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Force
 
-            Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
-               $Method -eq 'Patch' -and
-               $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
-               $Uri -like "*pullrequests/19543*" -and
-               $Body -eq '{"isDraft": false }'
-            }
+         Should -Invoke Invoke-RestMethod -Scope It -ParameterFilter {
+            $Method -eq 'Patch' -and
+            $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
+            $Uri -like "*pullrequests/19543*" -and
+            $Body -eq '{"isDraft": false }'
          }
+      }
 
-         It 'Update-VSTeamPullRequest to set status to abandoned' {
-            Mock Invoke-RestMethod { return $result }
+      It 'Update-VSTeamPullRequest to set status to abandoned' {
+         Mock Invoke-RestMethod { return $result }
 
-            Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Status abandoned -Force
+         Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -Status abandoned -Force
 
-            Assert-MockCalled Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-               $Method -eq 'Patch' -and
-               $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
-               $Uri -like "*pullrequests/19543*" -and
-               $Body -eq '{"status": "abandoned"}'
-            }
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Method -eq 'Patch' -and
+            $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
+            $Uri -like "*pullrequests/19543*" -and
+            $Body -eq '{"status": "abandoned"}'
          }
+      }
 
-         It 'Update-VSTeamPullRequest to set to enable auto complete' {
-            Mock Invoke-RestMethod { return $userSingleResult }
+      It 'Update-VSTeamPullRequest to set to enable auto complete' {
+         Mock Invoke-RestMethod { return $userSingleResult }
 
-            $user = Get-VSTeamUser -Descriptor "aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
+         $user = Get-VSTeamUser -Descriptor "aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"
 
-            Mock Invoke-RestMethod { return $result }
-            Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -EnableAutoComplete -AutoCompleteIdentity $user -Force
+         Mock Invoke-RestMethod { return $result }
+         Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" `
+            -PullRequestId 19543 `
+            -EnableAutoComplete `
+            -AutoCompleteIdentity $user `
+            -Force
 
-            Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
-               $Method -eq 'Patch' -and
-               $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
-               $Uri -like "*pullrequests/19543*" -and
-               $Body -eq '{"autoCompleteSetBy": "aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"}'
-            }
+         Should -Invoke Invoke-RestMethod -Scope It -ParameterFilter {
+            $Method -eq 'Patch' -and
+            $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
+            $Uri -like "*pullrequests/19543*" -and
+            $Body -eq '{"autoCompleteSetBy": "aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj"}'
          }
+      }
 
-         It 'Update-VSTeamPullRequest to set to disable auto complete' {
-            Mock Invoke-RestMethod { return $result }
-            Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -DisableAutoComplete -Force
+      It 'Update-VSTeamPullRequest to set to disable auto complete' {
+         Mock Invoke-RestMethod { return $result }
+         Update-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -PullRequestId 19543 -DisableAutoComplete -Force
 
-            Assert-MockCalled Invoke-RestMethod -Scope It -ParameterFilter {
-               $Method -eq 'Patch' -and
-               $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
-               $Uri -like "*pullrequests/19543*" -and
-               $Body -eq '{"autoCompleteSetBy": null}'
-            }
+         Should -Invoke Invoke-RestMethod -Scope It -ParameterFilter {
+            $Method -eq 'Patch' -and
+            $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
+            $Uri -like "*pullrequests/19543*" -and
+            $Body -eq '{"autoCompleteSetBy": null}'
          }
       }
    }

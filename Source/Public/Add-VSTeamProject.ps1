@@ -6,19 +6,14 @@ function Add-VSTeamProject {
 
       [string] $Description,
 
-      [switch] $TFVC
+      [switch] $TFVC,
+
+      [ProcessValidateAttribute()]
+      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [string] $ProcessTemplate
    )
-
-   DynamicParam {
-      [VSTeamProcessCache]::timestamp = -1
-
-      _buildProcessNameDynamicParam -ParameterName 'ProcessTemplate' -Mandatory $false
-   }
-
+   
    process {
-      # Bind the parameter to a friendly variable
-      $ProcessTemplate = $PSBoundParameters["ProcessTemplate"]
-
       if ($TFVC.IsPresent) {
          $srcCtrl = "Tfvc"
       }
@@ -41,7 +36,7 @@ function Add-VSTeamProject {
       try {
          # Call the REST API
          $resp = _callAPI -Area 'projects' `
-            -Method Post -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Core)
+            -Method Post -ContentType 'application/json' -body $body -Version $(_getApiVersion Core)
 
          _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 

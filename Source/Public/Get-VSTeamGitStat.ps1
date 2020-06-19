@@ -19,17 +19,15 @@ function Get-VSTeamGitStat {
 
       [Parameter(ParameterSetName = 'ByVersion', Mandatory = $true)]
       [ValidateSet("branch", "commit", "tag")]
-      [string] $VersionType
+      [string] $VersionType,
+      
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -Mandatory $true
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if (($VersionType -eq "commit") -and ($null -eq $Version -or $Version -eq '')) {
          throw "If you have a -VersionType of 'commit' you need to set a commit id as -Version";
       }
@@ -42,7 +40,7 @@ function Get-VSTeamGitStat {
             'baseVersionDescriptor.versionOptions' = $VersionOptions
          }
 
-         $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/stats/branches" -Area git -Resource repositories -Version $([VSTeamVersions]::Git) -QueryString $queryString
+         $resp = _callAPI -ProjectName $ProjectName -Id "$RepositoryID/stats/branches" -Area git -Resource repositories -Version $(_getApiVersion Git) -QueryString $queryString
 
          $hasValueProp = $resp.PSObject.Properties.Match('value')
 

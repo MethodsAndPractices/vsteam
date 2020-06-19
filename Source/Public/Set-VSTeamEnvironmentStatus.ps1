@@ -17,30 +17,23 @@ function Set-VSTeamEnvironmentStatus {
 
       [datetime] $ScheduledDeploymentTime,
 
-      # Forces the command without confirmation
-      [switch] $Force
+      [switch] $Force,
+
+      [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter]) ]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam -Position 1
-   }
-
-   Process {
-      Write-Debug 'Set-VSTeamEnvironmentStatus Process'
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      $body = ConvertTo-Json ([PSCustomObject]@{status = $Status; comment = $Comment; scheduledDeploymentTime = $ScheduledDeploymentTime})
+   process {
+      $body = ConvertTo-Json ([PSCustomObject]@{status = $Status; comment = $Comment; scheduledDeploymentTime = $ScheduledDeploymentTime })
 
       foreach ($item in $EnvironmentId) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Status on Environment")) {
-            Write-Debug 'Set-VSTeamEnvironmentStatus Call the REST API'
-
             try {
                # Call the REST API
                _callAPI -Method Patch -SubDomain vsrm -Area release -Resource "releases/$ReleaseId/environments" -projectName $ProjectName -id $item `
-                  -body $body -ContentType 'application/json' -Version $([VSTeamVersions]::Release) | Out-Null
+                  -body $body -ContentType 'application/json' -Version $(_getApiVersion Release) | Out-Null
 
                Write-Output "Environment $item status changed to $status"
             }

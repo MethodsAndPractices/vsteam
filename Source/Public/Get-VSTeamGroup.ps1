@@ -3,7 +3,7 @@ function Get-VSTeamGroup {
    param(
       [Parameter(ParameterSetName = 'List')]
       [Parameter(ParameterSetName = 'ListByProjectName')]
-      [ValidateSet('vssgp','aadgp')]
+      [ValidateSet('vssgp', 'aadgp')]
       [string[]] $SubjectTypes,
 
       [Parameter(ParameterSetName = 'List')]
@@ -11,27 +11,22 @@ function Get-VSTeamGroup {
 
       [Parameter(ParameterSetName = 'ByGroupDescriptor', Mandatory = $true)]
       [Alias('GroupDescriptor')]
-      [string] $Descriptor
+      [string] $Descriptor,
+
+      [Parameter(ParameterSetName = 'ListByProjectName', Mandatory = $true)]
+      [UncachedProjectValidateAttribute()]
+      [ArgumentCompleter([UncachedProjectCompleter])]
+      [string] $ProjectName
    )
-
-   DynamicParam {
-      # Get-VSTeamGroup should never use cache
-      [VSTeamProjectCache]::timestamp = -1
-
-      _buildProjectNameDynamicParam -ParameterSetName 'ListByProjectName' -ParameterName 'ProjectName'
-   }
-
+   
    process {
       # This will throw if this account does not support the graph API
       _supportsGraph
 
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
       if ($Descriptor) {
          # Call the REST API
-         $resp = _callAPI -Area 'graph' -Resource 'groups' -id $Descriptor `
-            -Version $([VSTeamVersions]::Graph) `
+         $resp = _callAPI -NoProject -Area 'graph' -Resource 'groups' -id $Descriptor `
+            -Version $(_getApiVersion Graph) `
             -SubDomain 'vssps'
 
          # Storing the object before you return it cleaned up the pipeline.
@@ -47,20 +42,19 @@ function Get-VSTeamGroup {
             $ScopeDescriptor = Get-VSTeamDescriptor -StorageKey $project.id | Select-Object -ExpandProperty Descriptor
          }
 
-         $queryString = @{}
+         $queryString = @{ }
          if ($ScopeDescriptor) {
             $queryString.scopeDescriptor = $ScopeDescriptor
          }
 
-         if ($SubjectTypes -and $SubjectTypes.Length -gt 0)
-         {
+         if ($SubjectTypes -and $SubjectTypes.Length -gt 0) {
             $queryString.subjectTypes = $SubjectTypes -join ','
          }
 
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'graph' -id 'groups' `
-               -Version $([VSTeamVersions]::Graph) `
+            $resp = _callAPI -NoProject -Area 'graph' -id 'groups' `
+               -Version $(_getApiVersion Graph) `
                -QueryString $queryString `
                -SubDomain 'vssps'
 

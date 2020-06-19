@@ -3,17 +3,15 @@ function Show-VSTeamBuild {
    param (
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
-      [int[]] $Id
+      [int[]] $Id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
-      Show-Browser "$([VSTeamVersions]::Account)/$ProjectName/_build/index?buildId=$Id"
+      Show-Browser "$(_getInstance)/$ProjectName/_build/index?buildId=$Id"
    }
 }

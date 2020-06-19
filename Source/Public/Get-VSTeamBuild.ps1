@@ -22,6 +22,7 @@ function Get-VSTeamBuild {
       [Parameter(ParameterSetName = 'List')]
       [int[]] $Definitions,
 
+      [ArgumentCompleter([BuildCompleter])]
       [Parameter(ParameterSetName = 'List')]
       [string] $BuildNumber,
 
@@ -37,22 +38,22 @@ function Get-VSTeamBuild {
 
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true)]
       [Alias('BuildID')]
-      [int[]] $Id
+
+      [int[]] $Id,
+
+      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [string] $ProjectName
    )
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
-
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
       try {
          if ($id) {
             foreach ($item in $id) {
                # Build the url to return the single build
                $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' -id $item `
-                  -Version $([VSTeamVersions]::Build)
+                  -Version $(_getApiVersion Build)
 
                _applyTypesToBuild -item $resp
 
@@ -62,7 +63,7 @@ function Get-VSTeamBuild {
          else {
             # Build the url to list the builds
             $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' `
-               -Version $([VSTeamVersions]::Build) `
+               -Version $(_getApiVersion Build) `
                -Querystring @{
                '$top'                   = $top
                'type'                   = $type

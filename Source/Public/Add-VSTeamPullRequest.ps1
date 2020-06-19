@@ -22,21 +22,18 @@ function Add-VSTeamPullRequest {
       [Parameter()]
       [switch] $Draft,
 
-      # Forces the command without confirmation
       [Parameter()]
-      [switch] $Force
-   )
+      [switch] $Force,
 
-   DynamicParam {
-      _buildProjectNameDynamicParam
-   }
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $ProjectName
+   )
 
    process {
       Write-Verbose "Add-VSTeamPullRequest"
-
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["ProjectName"]
-
+      
       $body = '{"sourceRefName": "' + $SourceRefName + '", "targetRefName": "' + $TargetRefName + '", "title": "' + $Title + '", "description": "' + $Description + '", "isDraft": ' + $Draft.ToString().ToLower() + '}'
 
       Write-Verbose $body
@@ -47,7 +44,7 @@ function Add-VSTeamPullRequest {
          try {
             Write-Debug 'Add-VSTeamPullRequest Call the REST API'
             $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' -Id "$RepositoryId/pullrequests" `
-               -Method Post -ContentType 'application/json;charset=utf-8' -Body $body -Version $([VSTeamVersions]::Release)
+               -Method Post -ContentType 'application/json;charset=utf-8' -Body $body -Version $(_getApiVersion Git)
 
             _applyTypesToPullRequests -item $resp
 

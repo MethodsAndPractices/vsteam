@@ -9,31 +9,31 @@
 @{
 
    # Script module or binary module file associated with this manifest.
-   RootModule        = 'VSTeam.psm1'
+   RootModule           = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion     = '6.4.4'
+   ModuleVersion        = '6.5.0'
 
    # Supported PSEditions
-   # CompatiblePSEditions = @()
+   CompatiblePSEditions = @('Core', 'Desktop')
 
    # ID used to uniquely identify this module
-   GUID              = '210e95b1-50bb-44da-a993-f567f4574214'
+   GUID                 = '210e95b1-50bb-44da-a993-f567f4574214'
 
    # Author of this module
-   Author            = '@DonovanBrown'
+   Author               = '@DonovanBrown'
 
    # Company or vendor of this module
-   CompanyName       = ''
+   CompanyName          = ''
 
    # Copyright statement for this module
-   Copyright         = '(c) 2020 Donovan Brown. All rights reserved.'
+   Copyright            = '(c) 2020 Donovan Brown. All rights reserved.'
 
    # Description of the functionality provided by this module
-   Description       = 'Adds functionality for working with Azure DevOps and Team Foundation Server.'
+   Description          = 'Adds functionality for working with Azure DevOps and Team Foundation Server.'
 
    # Minimum version of the Windows PowerShell engine required by this module
-   # PowerShellVersion = ''
+   PowerShellVersion = '5.1'
 
    # Name of the Windows PowerShell host required by this module
    # PowerShellHostName = ''
@@ -51,7 +51,7 @@
    # ProcessorArchitecture = ''
 
    # Modules that must be imported into the global environment prior to importing this module
-   RequiredModules   = @('SHiPS', 'Trackyon.Utils')
+   RequiredModules      = @('SHiPS', 'Trackyon.Utils')
 
    # Assemblies that must be loaded prior to importing this module
    # RequiredAssemblies = @()
@@ -60,17 +60,17 @@
    # ScriptsToProcess  = @()
 
    # Type files (.ps1xml) to be loaded when importing this module
-   TypesToProcess    = @('.\vsteam.types.ps1xml')
+   TypesToProcess       = @('.\vsteam.types.ps1xml')
 
    # Format files (.ps1xml) to be loaded when importing this module
-   FormatsToProcess  = @('.\vsteam.format.ps1xml')
+   FormatsToProcess     = @('.\vsteam.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
    # NestedModules     = @()
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    # This wildcard will be replaced during the build process in AzD
-   FunctionsToExport = @('*')
+   FunctionsToExport    = @('*')
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
    # CmdletsToExport = @()
@@ -91,7 +91,7 @@
    # FileList = @()
 
    # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-   PrivateData       = @{
+   PrivateData          = @{
 
       PSData = @{
 

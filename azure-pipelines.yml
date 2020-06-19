@@ -9,6 +9,7 @@ resources:
 variables:
   Folder: 'dist'
   TEAM_CIBUILD: 'true'
+  PESTER_VERSION: '5.0.0-rc9'
 
 stages:
 - stage: Build
@@ -62,8 +63,13 @@ stages:
           # Import each module
           $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
 
+          $count = 0
           $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
-          $r | ForEach-Object {Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"}
+          $r | ForEach-Object {Write-Host "##vso[task.logissue type=error;sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"; $count++}
+
+          if($count -ne 0) {
+            Write-Host "##vso[task.complete result=Failed;]Static Code Analysis with error count = $count"
+          }
 
     - task: CredScan@2
       displayName: 'Run CredScan'
@@ -199,7 +205,7 @@ stages:
       os: 'Linux'
       name: 'LinuxTFS2017'
       pool: 'ubuntu-16.04'
-      stop: 'true'
+      stop2017: 'true'
       apiVersion: 'TFS2017'
       depends: 'WindowsTFS2017'
       account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
@@ -219,23 +225,25 @@ stages:
       displayName: 'macOS TFS 2017'
       os: 'macOS'
       pool: 'macOS-latest'
-      start: 'true'
+      start2017: 'true'
       name: 'macOSTFS2017'
       apiVersion: 'TFS2017'
       account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
 
   - template: build/integrationTests.yml
     parameters:
-      displayName: 'TFS 2018 Integration Tests'
+      displayName: 'Windows TFS 2018'
       os: 'Windows'
       pool: 'windows-latest'
+      start2018: 'true'
+      stop2018: 'true'
       name: 'windowsTFS2018'
       apiVersion: 'TFS2018'
       account: 'http://winbldbox3.centralus.cloudapp.azure.com:8080/tfs/defaultcollection'
 
   - template: build/integrationTests.yml
     parameters:
-      displayName: 'AzD Integration Tests'
+      displayName: 'Windows AzD'
       os: 'Windows'
       pool: 'windows-latest'
       name: 'windowsAzD'
@@ -245,6 +253,7 @@ stages:
 - stage: Production
   displayName: PowerShell Gallery / GitHub Release
   dependsOn: Testing
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   jobs:
   - deployment: Deploy
     displayName: PowerShell Gallery / GitHub Release

@@ -2,16 +2,20 @@ function Update-VSTeamProject {
    [CmdletBinding(DefaultParameterSetName = 'ByName', SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
       [string] $NewName = '',
+
       [string] $NewDescription = '',
+
       [switch] $Force,
+
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
-      [string] $Id
+      [string] $Id,
+
+      [Alias('ProjectName')]
+      [ProjectValidateAttribute()]
+      [ArgumentCompleter([ProjectCompleter]) ]
+      [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [string] $Name
    )
-
-   DynamicParam {
-      _buildProjectNameDynamicParam -ParameterName 'Name' -AliasName 'ProjectName' -ParameterSetName 'ByName' -Mandatory $false
-   }
-
    process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["Name"]
@@ -30,7 +34,6 @@ function Update-VSTeamProject {
       }
 
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Update Project")) {
-
          # At the end we return the project and need it's name
          # this is used to track the final name.
          $finalName = $ProjectName
@@ -51,8 +54,8 @@ function Update-VSTeamProject {
          }
 
          # Call the REST API
-         $resp = _callAPI -Area 'projects' -id $id `
-            -Method Patch -ContentType 'application/json' -body $body -Version $([VSTeamVersions]::Core)
+         $resp = _callAPI -Area 'projects' -id $id -NoProject `
+            -Method Patch -ContentType 'application/json' -body $body -Version $(_getApiVersion Core)
 
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
