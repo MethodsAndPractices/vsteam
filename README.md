@@ -123,5 +123,3 @@ You can [run your unit tests also locally](/tools/docker/RunTestsLocally.md) and
 ## License
 
 This project is [licensed under the MIT License](LICENSE).
-
-triger test
