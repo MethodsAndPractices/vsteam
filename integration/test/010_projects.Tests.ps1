@@ -220,7 +220,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       # Only run for VSTS
       if ($env:API_VERSION -eq 'VSTS') {
-         It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st release definition' {
+         It 'Get-VSTeamReleaseDefinition by Id should return intended attribute values for 1st release definition' {
             $releaseDefId = (Get-VSTeamReleaseDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CD1") }).Id
             $releaseDefId | Should -Not -Be $null
             $releaseDef = Get-VSTeamReleaseDefinition -ProjectName $newProjectName -Id $releaseDefId
@@ -232,13 +232,13 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $releaseDef.environments[0].deployPhases[0].workflowTasks[0].inputs.targetType | Should -Be "inline"
          }
 
-         It 'Get-VSTeamBuildDefinition by Id should return 2 phases for 2nd build definition' {
+         It 'Get-VSTeamReleaseDefinition by Id should return 2 phases for 2nd build definition' {
             $releaseDefId = (Get-VSTeamReleaseDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CD2") }).Id
             ((Get-VSTeamReleaseDefinition -ProjectName $newProjectName -Id $releaseDefId).environments[0].deployPhases).Count | Should -Be 2
          }
       }
 
-      It 'Remove-VSTeamBuildDefinition should delete build definition' {
+      It 'Remove-VSTeamReleaseDefinition should delete build definition' {
          Get-VSTeamReleaseDefinition -ProjectName $newProjectName | Remove-VSTeamReleaseDefinition -ProjectName $newProjectName -Force
          Get-VSTeamReleaseDefinition -ProjectName $newProjectName | Should -Be $null
       }
