@@ -28,7 +28,6 @@ Describe "VSTeamReleaseDefinition" {
             $Area -eq 'Release' -and
             $Resource -eq 'definitions' -and
             $Version -eq "$(_getApiVersion Release)" -and
-            $ContentType -eq 'application/json' -and
             $InFile -eq 'releaseDef.json'
          }
       }
@@ -42,7 +41,6 @@ Describe "VSTeamReleaseDefinition" {
             $Area -eq 'Release' -and
             $Resource -eq 'definitions' -and
             $Version -eq "$(_getApiVersion Release)" -and
-            $ContentType -eq 'application/json' -and
             $InFile -eq $null -and
             $Body -eq "{}"
          }
