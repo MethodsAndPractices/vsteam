@@ -8,7 +8,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       $acct = $env:ACCT
       $email = $env:EMAIL
       $api = $env:API_VERSION
-      
+
       $originalLocation = Get-Location
 
       $search = "*$acct*"
@@ -260,7 +260,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $variableGroupName = "TestVariableGroup1"
             $variableGroupUpdatedName = "TestVariableGroup2"
          }
-      
+
          It 'Add-VSTeamVariableGroup Should add a variable group' {
             $parameters = @{
                ProjectName = $newProjectName
@@ -338,11 +338,11 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Should add Policy' {
          $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
          $repoId = $(Get-VSTeamGitRepository -ProjectName $newProjectName -Name $newProjectName | Select-Object -ExpandProperty Id)
-         
+
          Add-VSTeamPolicy -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 1; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" }) }
 
          $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
-         
+
          $newPolicy | Should -Not -Be $null
          $newPolicy.settings.minimumApproverCount | Should -Be 1
       }
@@ -351,7 +351,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
          $typeId = $($actualTypes | Where-Object displayName -eq 'Minimum number of reviewers' | Select-Object -ExpandProperty id)
          $newPolicy = Update-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName -type $typeId -enabled -blocking -settings @{MinimumApproverCount = 2; Scope = @(@{repositoryId = $repoId; matchKind = "Exact"; refName = "refs/heads/master" }) }
-         
+
          $newPolicy.settings.minimumApproverCount | Should -Be 2
       }
 
@@ -423,7 +423,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             (Get-VSTeamUserEntitlement).Count | Should -Be 3
          }
       }
-   
+
       Context 'Feed exercise' {
          BeforeAll {
             $FeedName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
@@ -451,7 +451,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             Get-VSTeamFeed | Where-Object name -eq $FeedName | Should -Be $null
          }
       }
-   
+
       Context 'Access control list' {
          It 'Get-VSTeamAccessControlList should return without error' {
             $(Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList) | Should -Not -Be $null
