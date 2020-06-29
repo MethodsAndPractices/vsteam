@@ -52,7 +52,7 @@ if ($installDep.IsPresent -or $analyzeScript.IsPresent) {
 
    # Install each module
    if ($manifest.RequiredModules) {
-      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
+       $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -Force -Scope CurrentUser } }
    }
 }
 
@@ -98,8 +98,6 @@ if ($WithPublicClasses) {
    "#empty" |  Out-File -Force -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
 }
 
-
-Get-Content -Path ./Source/VSTeam.psm1 | Out-File -Append -FilePath "$output/VSTeam.psm1" -Encoding ascii
 <#Write-Output 'Updating Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
       ForEach-Object -Process { Write-Output "'$_'" }) -join ','
@@ -116,26 +114,26 @@ Write-Output "Publish complete to $output"
 
 
 # reload the just built module
-if ($ipmo.IsPresent -or $runTests.IsPresent) {
+if ($ipmo.IsPresent) {
 
    # module needs to be unloaded if present
    if ((Get-Module VSTeam)) {
       Remove-Module VSTeam
    }
-   $env:testing = $true
-   Import-Module "$output/VSTeam.psd1"  -Global -Force
+
+   Import-Module "$output/VSTeam.psd1" -Force
    Set-VSTeamAlias
 }
 
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
-   # This loads [PesterConfiguration] into scope
-   Import-Module Pester
-
    if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
       Write-Output "Installing Pester 5"
-      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.0-rc9' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.2' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
+
+   # This loads [PesterConfiguration] into scope
+   Import-Module Pester -MinimumVersion 5.0.0
 
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = '.\unit'

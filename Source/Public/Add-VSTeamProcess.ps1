@@ -23,7 +23,7 @@ function Add-VSTeamProcess {
    }
    if ($ReferenceName) {$body['referenceName'] = $ReferenceName}
    if ($Description)   {$body['description']   = $Description  }
-   $url  = (_getInstance) + "/_apis/work/processes?api-version=" + (_getApiVersion Graph)
+   $url  = (_getInstance) + "/_apis/work/processes?api-version=" + (_getApiVersion ProcessDefinition)
    if ($PSCmdlet.ShouldProcess($ProcessName,'Create New Process')) {
       $resp = _callAPI -Url $url -method Post  -ContentType "application/json" -body (ConvertTo-Json  $body)
 

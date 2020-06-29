@@ -38,9 +38,9 @@ function Set-VSTeamProcess {
 
       $url =  [VSTeamProcessCache]::GetURl($ProcessTemplate)
       if (-not $url) {Write-Warning "Could not find the Process for '$ProcessTemplate" ; return}
-      else   { $url += "?api-version=" + (_getApiVersion Graph)}
+      else   { $url += "?api-version=" + (_getApiVersion ProcessDefinition)}
 
-      if ($Force -or $PSCmdlet.ShouldProcess($ProcessTemplate,'Update Devops Process')) {
+      if ($Force -or $PSCmdlet.ShouldProcess($ProcessTemplate,'Update Devops Process template')) {
          $resp = _callAPI -Url $url -method Patch -ContentType "application/json" -body (ConvertTo-Json $body)
          if ($resp.psobject.Properties.name -contains 'typeid') { [VSTeamProcess]::new($resp)      }
          else {Write-Warning 'The server did not return an ID for a modified created process. '}
