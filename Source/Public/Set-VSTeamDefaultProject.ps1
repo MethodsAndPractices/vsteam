@@ -59,8 +59,8 @@ function Set-VSTeamDefaultProject {
          [VSTeamVersions]::DefaultProcess = $env:TEAM_PROCESS
 
          if  ((_isOnWindows) -and $Level -and $level -ne "Process") {
-            [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
-            [System.Environment]::SetEnvironmentVariable("TEAM_PROCESS", $Project, $env:TEAM_PROCESS)
+            [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project,           $Level)
+            [System.Environment]::SetEnvironmentVariable("TEAM_PROCESS", $env:TEAM_PROCESS , $Level)
          }
 
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = $Project
