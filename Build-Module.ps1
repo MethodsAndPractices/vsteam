@@ -40,19 +40,56 @@ param(
    [Parameter(ParameterSetName = "UnitTest")]
    [switch]$codeCoverage,
 
-   #If specified puts classes in the PSM1 file instead on dot sourcing them from a PS1. This can be helpful in development but is not used for release builds 
-   [switch]$WithPublicClasses
+   # runs the integration tests
+   [Parameter(ParameterSetName = "UnitTest")]
+   [Parameter(ParameterSetName = "All")]
+   [switch]$runIntegrationTests
 )
+
+if ($runIntegrationTests.IsPresent) {
+   if (
+      $null -eq $env:ACCT -or
+      $null -eq $env:API_VERSION -or
+      $null -eq $env:PAT -or
+      $null -eq $env:EMAIL
+   ) {
+      throw "You must set all environment variables that are needed first to run integration tests. Please see https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#running-integration-tests for details."
+   }
+}
+
+function Start-IntegrationTests {
+   [CmdletBinding(DefaultParameterSetName = "All", SupportsShouldProcess, ConfirmImpact = "High")]
+   param ()
+
+   process {
+
+      if ($PSCmdLet.ShouldProcess("Integration Tests on $env:ACCT", "TOTAL DESTRUCTION OF THE ACCOUNT")) {
+         Import-Module Pester -MinimumVersion 5.0.0
+
+         $pesterArgs = [PesterConfiguration]::Default
+         $pesterArgs.Run.Path = '.\integration'
+         $pesterArgs.Run.Exit = $true
+         $pesterArgs.Output.Verbosity = "Normal"
+         $pesterArgs.TestResult.Enabled = $true
+         $pesterArgs.TestResult.OutputPath = 'integrationTest-results.xml'
+         $pesterArgs.Run.PassThru = $true
+
+         Invoke-Pester -Configuration $pesterArgs
+      }
+
+   }
+
+}
 
 . ./Merge-File.ps1
 
 if ($installDep.IsPresent -or $analyzeScript.IsPresent) {
    # Load the psd1 file so you can read the required modules and install them
-   $manifest = Import-PowerShellDataFile .\Source\VSTeam.psd1 
+   $manifest = Import-PowerShellDataFile .\Source\VSTeam.psd1
 
    # Install each module
    if ($manifest.RequiredModules) {
-       $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -Force -Scope CurrentUser } }
+      $manifest.RequiredModules | ForEach-Object { if (-not (get-module $_ -ListAvailable)) { Write-Host "Installing $_"; Install-Module -SkipPublisherCheck -Name $_ -Repository PSGallery -F -Scope CurrentUser } }
    }
 }
 
@@ -86,35 +123,17 @@ if ($buildHelp.IsPresent) {
 Write-Output 'Publishing about help files'
 Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
 Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
-if ($WithPublicClasses) {
-   #If the classes are in vsteam.psm1 and the module is loaded with using rather than with import-module, 
-   #then the classes are accessible from the command-line, scripts, and functions which do form part of the module
-   # See https://github.com/DarqueWarrior/vsteam/pull/313#issuecomment-629644064 for more information
-   #Currently the default not to do this, but it can make things easier in development, 
-   #if the default changes the switch name will too and the condition will become a -not 
-   Write-Output "Merging classes.ps1 into VSTeam.psm1"
-   Get-Content -Path "$output/VSTeam.psm1" | Out-File -Append -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
-   Copy-Item   -Path "$output/vsteam.classes.ps1" -Destination "$output/VSTeam.psm1" 
-   "#empty" |  Out-File -Force -FilePath "$output/vsteam.classes.ps1" -Encoding ascii 
-}
 
-<#Write-Output 'Updating Functions To Export'
-$newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
-      ForEach-Object -Process { Write-Output "'$_'" }) -join ','
-#>
-
-$PSDsettings = Import-PowerShellDataFile -path "./Source/VSTeam.psd1"
 Write-Output 'Updating Functions To Export'
-$FunctionsToExport  = @()
-$FunctionsToExport += $PSDsettings.FunctionsToExport.where({$_ -like "_*"})
-$FunctionsToExport +=  (Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName
-Update-ModuleManifest -Path "$output/VSTeam.psd1" -FunctionsToExport $FunctionsToExport
+$newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
+   ForEach-Object -Process { Write-Output "'$_'" }) -join ','
+
+(Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
 
 Write-Output "Publish complete to $output"
 
-
 # reload the just built module
-if ($ipmo.IsPresent) {
+if ($ipmo.IsPresent -or $runTests.IsPresent -or $runIntegrationTests.IsPresent) {
 
    # module needs to be unloaded if present
    if ((Get-Module VSTeam)) {
@@ -155,7 +174,7 @@ if ($runTests.IsPresent) {
       $pesterArgs.Filter.FullName = $testName
    }
 
-   Invoke-Pester -Configuration $pesterArgs 
+   Invoke-Pester -Configuration $pesterArgs
 }
 
 # Run this last so the results can be seen even if tests were also run
@@ -170,4 +189,9 @@ if ($analyzeScript.IsPresent) {
    $r = Invoke-ScriptAnalyzer -Path $output -Recurse
    $r | ForEach-Object { Write-Host "##vso[task.logissue type=$($_.Severity);sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)" }
    Write-Output "Static code analysis complete."
+}
+
+# run integration tests with Pester
+if ($runIntegrationTests.IsPresent) {
+   Start-IntegrationTests
 }
