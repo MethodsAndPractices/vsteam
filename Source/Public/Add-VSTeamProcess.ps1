@@ -12,11 +12,11 @@ function Add-VSTeamProcess {
       [parameter(Mandatory = $true)]
       [ProcessValidateAttribute()]
       [ArgumentCompleter([ProcessTemplateCompleter])]
-      $ParentProcess
+      $ParentProcessName
    )
 
-   $parentProcess = Get-VSTeamProcess -Name $ParentProcess
-   if (-not $parentProcess) { Write-Warning "Couldn't turn '$ParentProcess' into a process GUID."; return   }
+   $parentProcess = Get-VSTeamProcess -Name $ParentProcessName
+   if (-not $parentProcess) { Write-Warning "Couldn't turn '$ParentProcessName' into a process GUID."; return   }
    #Create a new process
    $body          =  @{ 'parentProcessTypeId'  = $parentProcess.id
                         'name'                 = $ProcessName

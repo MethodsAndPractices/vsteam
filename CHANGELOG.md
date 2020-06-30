@@ -1,23 +1,52 @@
 # Changelog
 
-Source/Classes/ProcessTemplateCompleter.ps1        |
-Source/Classes/ProcessValidateAttribute.ps1        |
-Source/Classes/ProjectCompleter.ps1                |
-Source/Classes/ProjectValidateAttribute.ps1        |  Changed in previous PR and files need to stay in sync / are a depedency for this 
+Commands to modify existing process templates (enable, or disable scrum, agile etc.), and add new ones (custom scrum etc)
 
-Source/Classes/VSTeamProcessCache.ps1
-Source/Public/Get-VSTeamProcess.ps1                |  Update to get process from different URL branch (WORK/PROCESS) 
-                                                   |  this version is more allows add, modify and is the path to changing work item types. 
-                                                   |  However it ignores the top and skip options. 
-                                                   |  Now update the cache automatically; support wildcards, paramater aliases, specify output type. 
-.docs/Get-VSTeamProcess.md                         |  Update to documentation   
-Source/Classes/VSTeamProcess.ps1                   |  Modify class to be more pipeline friendly and to work with slightly different fields from the different URL path.
-Source/formats/Team.Process.TableView.ps1xml       |  Updated to isDisabled and isDefault
-Source/formats/Team.Process.ListView.ps1xml        |  Updated to isDisabled and isDefault
+**New commands Set-VSTeamProcess and Add-VSTeamProcess, their unit tests and documentation**  
+```
+Source/Public/Set-VSTeamProcess.ps1   
+Source/Public/Add-VSTeamProcess.ps1  
+.docs/Set-VSTeamProcess.md  
+.docs/Add-VSTeamProcess.md  
+.docs/synopsis/Set-VSTeamProcess.md  
+.docs/synopsis/Add-VSTeamProcess.md  
+unit/test/Set-VSTeamProcess.Tests.ps1
+unit/test/Add-VSTeamProcess.Tests.ps1  
+```
+**Modified for extra functionality**
+```
+Source/Public/Get-VSTeamProcess.ps1                |  Previously Updated to get process from different URL branch (WORK/PROCESS) ignores the top and skip options.   
+                                                   |  Now update the caches automatically, supports wildcards and paramater aliases, specifies output type.   
+.docs/Get-VSTeamProcess.md                         |  Update to documentation     
+Source/Classes/VSTeamProcess.ps1                   |  Modify class to be more pipeline friendly and to work with slightly different fields from the different URL path.  
+Source/formats/Team.Process.TableView.ps1xml       |  Previously Updated to show isDisabled and isDefault  
+Source/formats/Team.Process.ListView.ps1xml        |  Previously Updated to show isDisabled and isDefault  
+Source/Public/Set-VSTeamDefaultProject.ps1         |  Record process type for default project. 
+```
 
-unit/test/Get-VSTeamProcess.Tests.ps1              |  Updated for new behavior. (Don't validate name to allow wildcard use, top and skip ignored. )
-unit/test/Add-VSTeamProject.Tests.ps1              |  Fix for side effects of changes above
-unit/test/ProcessValidateAttribute.Tests.ps1       |  Fix for side effects of changes above
+**Included from changes in this series** 
+```
+Source/Classes/ProjectCompleter.ps1                |  Changed in previous PR and files need to stay in sync / are a depedency for this  
+Source/Classes/ProjectValidateAttribute.ps1        |    
+Source/Classes/VSTeamProjectCache.ps1|             |  
+Source/Private/common.ps1                          |  
+Source/Classes/ProcessTemplateCompleter.ps1        |  
+Source/Classes/ProcessValidateAttribute.ps1        |  
+Source/Classes/VSTeamProcessCache.ps1              |  
+
+Source/Classes/VSTeamVersions.ps1                  |  Add ProcessDefinition and DefaultProcess static properties  (ProcessDefinition used in Add, Get, Set -VSTeamProcess)  
+Source/Public/Set-VSTeamAPIVersion.ps1             |  Streamlined to work with extra members in VSTeamVersions , ProcessDefinition support  
+
+unit/test/Get-VSTeamProcess.Tests.ps1              |  Updated for new behavior. (Don't validate name to allow wildcard use, top and skip ignored. )  
+unit/test/Add-VSTeamProject.Tests.ps1              |  Fix for side effects of changes above  
+unit/test/ProcessValidateAttribute.Tests.ps1       |  Fix for side effects of changes above  
+unit/test/ProcessTemplateCompleter.Tests.ps1       |  Fix for side effects of changes above  
+unit/test/Get-VSTeamAgent.Tests.ps1                |  Fix for side effects of changes above   
+
+Source/Public/Add-VSTeamBuild.ps1                  |  Ensuring reference to $env:testing is gone from all branches  
+build-Module.ps1                                   |  Ensuring -WithPublicClasses support is present in all branches  
+Merge-File.ps1                                     |  Ensuring fix for "using" outside using statements is prsent in all branches  
+```
 
 ## 6.5.1
 ## 6.5.0
