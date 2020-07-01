@@ -6,17 +6,22 @@ Describe 'VSTeamWorkItem' {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProcessCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProcessValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProcessTemplateCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamWorkItemTypeCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/WorkItemTypeCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/WorkItemTypeValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamWorkItemType.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
       
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
+      Mock Get-VSTeamWorkItemType {return @([pscustomobject]@{Name='Task'})}
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 

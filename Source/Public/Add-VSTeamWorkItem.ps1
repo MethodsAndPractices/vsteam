@@ -31,9 +31,6 @@ function Add-VSTeamWorkItem {
    )
 
    Process {
-      # The type has to start with a $
-      $WorkItemType = '$' + $WorkItemType
-
       # Constructing the contents to be send.
       # Empty parameters will be skipped when converting to json.
       [Array]$body = @(
@@ -97,9 +94,9 @@ function Add-VSTeamWorkItem {
       # https://stackoverflow.com/questions/18662967/convertto-json-an-array-with-a-single-item
       $json = ConvertTo-Json @($body) -Compress
 
-      # Call the REST API
+      # Call the REST API  The "ID" is the type prefixed with a $ - the variable will fail validation if we try to change it. 
       $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' `
-         -Version $(_getApiVersion Core) -id $WorkItemType -Method Post `
+         -Version $(_getApiVersion Core) -id ('$' + $WorkItemType) -Method Post `
          -ContentType 'application/json-patch+json' -Body $json
 
       _applyTypesToWorkItem -item $resp

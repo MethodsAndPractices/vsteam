@@ -62,6 +62,13 @@ Describe 'VSTeamProject' {
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' }
+      Mock _callApi -ParameterFilter {$area -eq 'work' -and $resource -eq 'processes'} -MockWith {
+            return @{value = @(
+                        @{name = 'Agile'; Typeid = '00000000-0000-0000-0000-000000000001' },
+                        @{name = 'CMMI' ; Typeid = '00000000-0000-0000-0000-000000000002' },
+                        @{name = 'Scrum'; Typeid = '00000000-0000-0000-0000-000000000003' }
+            )}
+      }         
    }
 
    Context 'Add-VSTeamProject' {
@@ -91,8 +98,9 @@ Describe 'VSTeamProject' {
          Mock Invoke-RestMethod { return $singleResult } -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)"
          }
-      }
 
+      }
+#-Area 'work' -resource 'processes'       
       It 'with tfvc should create project with tfvc' {
          Add-VSTeamProject -Name Test -tfvc
 
@@ -112,7 +120,6 @@ Describe 'VSTeamProject' {
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
          Mock _trackProjectProgress
          Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
-         Mock Get-VSTeamProcess { return @{name = 'Agile'; id = 1 } }
       }
 
       It 'Should create project with Agile' {

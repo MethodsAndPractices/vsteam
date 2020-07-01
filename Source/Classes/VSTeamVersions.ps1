@@ -1,6 +1,7 @@
 class VSTeamVersions {
    static [string] $Account = $env:TEAM_ACCT
    static [string] $DefaultProject = $env:TEAM_PROJECT
+   static [string] $DefaultProcess = $env:TEAM_PROCESS
    static [string] $Version = $(If ($env:TEAM_VERSION) { $env:TEAM_VERSION } Else { "TFS2017" })
    static [string] $Git = '3.0'
    static [string] $Core = '3.0'
@@ -17,4 +18,5 @@ class VSTeamVersions {
    static [string] $ModuleVersion = $null
    static [string] $Graph = ''
    static [string] $Policy = '3.0'
+   static [string] $ProcessDefinition = ''
 }

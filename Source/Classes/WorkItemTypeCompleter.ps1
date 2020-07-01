@@ -11,24 +11,34 @@ class WorkItemTypeCompleter : IArgumentCompleter {
       [IDictionary] $FakeBoundParameters) {
 
       $results = [List[CompletionResult]]::new()
-
-      # If the user has explictly added the -ProjectName parameter
-      # to the command use that instead of the default project.
-      $projectName = $FakeBoundParameters['ProjectName']
-
-      # Only use the default project if the ProjectName parameter was
-      # not used
-      if (-not $projectName) {
-         $projectName = _getDefaultProject
+      $workitemTypeNames = $null
+      # If the user has added the -ProcessTemplate parameter,
+      # get Names of WorkItem types by process, otherwise get them by project
+      if ($FakeBoundParameters['ProcessTemplate']) {
+               $workitemTypeNames = [VSTeamWorkItemTypeCache]::GetByProcess($FakeBoundParameters['ProcessTemplate']) | 
+                  Select-Object -ExpandProperty name | Sort-Object
       }
-
-      # If there is no projectName by this point just return a empty
-      # list.
-      if ($projectName) {
-         foreach ($value in (_getWorkItemTypes -ProjectName $projectName)) {
-            if ($value -like "*$WordToComplete*") {
-               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
-            }
+      else {
+         # if the ProjectName parameter either was the default or was omitted,
+         # then use the cached list of WorkItem-type names for the default project.
+         # If a non-default project was specified, then get the names for that project
+         $projectName = $FakeBoundParameters['ProjectName']
+         if (-not $projectName -or $ProjectName -eq (_getDefaultProject) ) { 
+            $workitemTypeNames = [VSTeamWorkItemTypeCache]::GetCurrent() | 
+               Select-Object -ExpandProperty Name | Sort-Object
+         }
+         else { #if projectname -and $ProjectName -ne _getDefaultProject
+            $workitemTypeNames = Get-VSTeamWorkItemType -ProjectName $projectName | Where-Object {-Not $_.hidden} | 
+               Select-Object -ExpandProperty name | Sort-Object
+         }
+      }
+      $wildCard  =  $WordToComplete -replace "^'?(.*)'?$",'*$1*' 
+      foreach ($value in ($workitemTypeNames | Where-Object {$_ -like $wildCard} )) {
+         if   ($value -notmatch '\W') {
+               $results.Add([CompletionResult]::new($value))
+         }
+         else {
+            $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
          }
       }
 

@@ -14,15 +14,11 @@ class ProcessTemplateCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      if (_hasProcessTemplateCacheExpired) {
-         [VSTeamProcessCache]::processes = _getProcesses
-         [VSTeamProcessCache]::timestamp = (Get-Date).Minute
-      }
-
-      foreach ($value in [VSTeamProcessCache]::processes) {
-         if ($value -like "*$WordToComplete*") {
-            $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
+      foreach ($value in ([VSTeamProcessCache]::GetCurrent() | Where-Object {$_ -like "*$WordToComplete*"})) {
+         if ($value -match "\W") {
+               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
          }
+         else {$results.Add([CompletionResult]::new($value)) }
       }
 
       return $results
