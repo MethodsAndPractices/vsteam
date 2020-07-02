@@ -54,6 +54,14 @@ PS C:\> Get-VSTeamPullRequest -Id 123
 
 This command gets the pull request with an Id of 123.
 
+### -------------------------- EXAMPLE 6 --------------------------
+
+```PowerShell
+PS C:\> Get-VSTeamPullRequest -Id 123 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits
+```
+
+This command gets the pull request with an Id of 123 and includes the commits that are part of the pull request.
+
 ## PARAMETERS
 
 ### -ProjectName
@@ -80,7 +88,7 @@ Specifies the pull request by ID.
 Type: String
 Aliases: PullRequestId
 Accept pipeline input: true (ByPropertyName)
-Parameter Sets: ById
+Parameter Sets: ById, IncludeCommits
 ```
 
 ### -RepositoryId
@@ -89,7 +97,7 @@ The repository ID of the pull request's target branch.
 
 ```yaml
 Type: Guid
-Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
+Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll, ById, IncludeCommits
 ```
 
 ### -SourceRepositoryId
@@ -157,6 +165,15 @@ The number of pull requests to ignore. For example, to retrieve results 101-150,
 ```yaml
 Type: Int32
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
+```
+
+### -IncludeCommits
+
+If set, includes the commits that are part of the pull request. Requires the RepositoryId to be set.
+
+```yaml
+Type: Switch
+Parameter Sets: IncludeCommits
 ```
 
 ## INPUTS
