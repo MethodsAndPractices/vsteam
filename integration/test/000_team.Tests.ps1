@@ -5,11 +5,11 @@ Describe 'Team' -Tag 'integration' {
       $pat = $env:PAT
       $acct = $env:ACCT
       $api = $env:API_VERSION
-      
+
       Set-VSTeamAPIVersion -Target $env:API_VERSION
       Set-VSTeamAccount -a $acct -pe $pat -version $api
 
-      # See if there are any existing projects. If so use the 
+      # See if there are any existing projects. If so use the
       # first one as the expected project name. If there are none
       # simply use MyProject
       $expectedProjectName = Get-VSTeamProject | Select-Object -First 1 -ExpandProperty Name
@@ -36,7 +36,7 @@ Describe 'Team' -Tag 'integration' {
          Clear-VSTeamDefaultProject
 
          $info = Get-VSTeamInfo
-            
+
          $info.DefaultProject | Should -BeNullOrEmpty
       }
    }
