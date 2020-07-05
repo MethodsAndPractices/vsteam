@@ -18,7 +18,7 @@ Describe 'VSTeamProcess' {
       Mock _hasProjectCacheExpired { return $true }
       Mock _hasProcessTemplateCacheExpired { return $true }
       Mock _getInstance { return 'https://dev.azure.com/test' }
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
 
       # Note: if the call is to ...work/processes... the identity field is "TypeID". calling to ...Process/processes... it is "ID"
       $results = [PSCustomObject]@{
@@ -67,7 +67,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*" 
+            $Uri -like "*api-version=$(_getApiVersion Processes)*" 
          }
       }
       
@@ -97,7 +97,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Processes)*" -and
             $Uri -NotLike "*`$skip=1*" -and
             $Uri -NotLike "*`$top=100*"
          }
@@ -114,7 +114,7 @@ Describe 'VSTeamProcess' {
          # Only called once for name - we don't validate the name, so wildcards can be given. 
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*"
+            $Uri -like "*api-version=$(_getApiVersion Processes)*"
          }
       }
 
@@ -124,7 +124,7 @@ Describe 'VSTeamProcess' {
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes/123-5464-dee43*" -and
-            $Uri -like "*api-version=$(_getApiVersion Core)*"
+            $Uri -like "*api-version=$(_getApiVersion Processes)*"
          }
       }
    }

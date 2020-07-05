@@ -2,12 +2,13 @@ Set-StrictMode -Version Latest
 
 Describe 'Team' -Tag 'integration' {
    BeforeAll {
+      . "$PSScriptRoot/testprep.ps1"
+
+      Set-TestPrep
+   
       $pat = $env:PAT
       $acct = $env:ACCT
       $api = $env:API_VERSION
-
-      Set-VSTeamAPIVersion -Target $env:API_VERSION
-      Set-VSTeamAccount -a $acct -pe $pat -version $api
 
       # See if there are any existing projects. If so use the
       # first one as the expected project name. If there are none
@@ -78,6 +79,19 @@ Describe 'Team' -Tag 'integration' {
 
          $info.Account | Should -Be ''
          $info.DefaultProject | Should -Be $null
+      }
+   }
+
+   Context 'Profile full exercise' {
+      BeforeAll {
+         Add-VSTeamProfile -Name inttests -Account intTests -PersonalAccessToken 00000000-0000-0000-0000-000000000000
+      }
+      It 'Get-VSTeamProfile' {
+         Get-VSTeamProfile inttests | Should -Not -Be $null
+      }
+
+      It 'Remove-VSTeamProfile' {
+         Remove-VSTeamProfile inttests -Force
       }
    }
 }

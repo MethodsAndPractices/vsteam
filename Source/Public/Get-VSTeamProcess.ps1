@@ -1,3 +1,21 @@
+# id: 02cc6a73-5cfb-427d-8c8e-b49fb086e8af
+# area: processes
+# resource name: processes
+# route template: _apis/work/{resource}/{processTypeId}
+#
+# First appears in TFS 2017 U2 with same values in TFS 2017 U3:
+# resourceVersion : 1
+# minVersion      : 2.1
+# maxVersion      : 3.2
+# releasedVersion : 0.0
+# However, I was unable to get any combination of versions to work.
+#
+# TFS 2018 U1 returns values
+# resourceVersion : 1
+# minVersion      : 2.1
+# maxVersion      : 4.0
+# releasedVersion : 0.0
+
 function Get-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
@@ -25,7 +43,7 @@ function Get-VSTeamProcess {
       # Return either a single proces by ID or a list of processes
       if ($id) {
          # Call the REST API with an ID
-         $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -id $id  -Version $(_getApiVersion Core) 
+         $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -id $id  -Version $(_getApiVersion Processes) 
 
          if ($resp) {
             return [VSTeamProcess]::new($resp)
@@ -34,7 +52,7 @@ function Get-VSTeamProcess {
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion core)  
+            $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion Processes)  
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod

@@ -36,3 +36,4 @@ vsteam_wcore1903_ps5_tests_result.xml
 vsteam_wcore1903_ps7_tests_result.xml
 integration/fullRun.ps1
 integration/Start-PSCountdown.ps1
+integrationTest-results.xml

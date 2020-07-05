@@ -143,7 +143,7 @@ function _getApiVersion {
    [CmdletBinding(DefaultParameterSetName = 'Service')]
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy', 'Processes')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -197,7 +197,10 @@ function _getApiVersion {
          }
          'Policy' {
             return [VSTeamVersions]::Policy
-         }
+         } 
+         'Processes' {
+            return [VSTeamVersions]::Processes
+         } 
       }
    }
 }

@@ -17,4 +17,5 @@ class VSTeamVersions {
    static [string] $ModuleVersion = $null
    static [string] $Graph = ''
    static [string] $Policy = '3.0'
+   static [string] $Processes = ''
 }
