@@ -203,6 +203,16 @@ Describe 'VSTeamPullRequest' {
 
          $pr.reviewStatus | Should -Be "Rejected"
       }
+
+      It 'with RepositoryId and IncludeCommits' {
+         Get-VSTeamPullRequest -Id 101 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits
+         Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
+            $Uri -like "*test/_apis/git/repositories*" -and
+            $Uri -like "*includeCommits=True" -and
+            $Uri -like "*api-version=$(_getApiVersion Git)*" -and
+            $Uri -like "*pullRequests/101*"
+         }
+      }
    }
 }
 
