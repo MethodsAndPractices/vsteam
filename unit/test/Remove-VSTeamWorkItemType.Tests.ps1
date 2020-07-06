@@ -73,6 +73,8 @@ Describe 'Set-VSTeamWorkItemType' {
                   }
                )
       } 
+      [VSTeamWorkItemTypeCache]::invalidate()
+      [VSTeamProcessCache]::invalidate()
    }
    Context 'Create New work Item Type' {
 

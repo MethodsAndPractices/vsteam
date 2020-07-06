@@ -54,7 +54,9 @@ Describe 'Add-VSTeamWorkItemType' {
 
 
    Context 'Create New work Item Type' {
-
+      BeforeAll {
+         [VSTeamProcessCache]::invalidate()
+      }
       It 'Calls the API with the expected body. ' {
          Add-VSTeamWorkItemType -ProcessTemplate Scrum -WorkItemType NewWit -Description "New Work item Type" -Color Red  -Icon asterisk 
          Should -Invoke _callApi -Exactly -Times 1 -Scope It -ParameterFilter {
