@@ -36,7 +36,7 @@ function Set-VSTeamWorkItemType {
       $body = @{} #note. "Changing" some options to their current value can causes an error. So only do real changes.
       #move into classes for validting / completing icons
 
-      if ($Icon -and $Icon -ne $wit.icon) {qappsrv.exe
+      if ($Icon -and $Icon -ne $wit.icon) {
                $body['icon']        = $Icon
       }
       else {   $body['icon']        = $wit.icon}
