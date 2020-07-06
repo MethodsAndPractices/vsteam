@@ -6,13 +6,13 @@ Describe 'Team' -Tag 'integration' {
 
       Set-TestPrep
    
-      $pat = $env:PAT
       $acct = $env:ACCT
-      $api = $env:API_VERSION
 
       # See if there are any existing projects. If so use the
       # first one as the expected project name. If there are none
       # simply use MyProject
+      # We can't use Get-ProjectName here as the name as to be an existing
+      # project name unless no projects exisit.
       $expectedProjectName = Get-VSTeamProject | Select-Object -First 1 -ExpandProperty Name
 
       if (-not $expectedProjectName) {

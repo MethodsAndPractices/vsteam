@@ -75,7 +75,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
-   Context 'BuildDefinition full exercise' {
+   Context 'BuildDefinition full exercise' -Tag "BuildDefinition" {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
@@ -133,31 +133,22 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $buildDefs.Count | Should -Be 2
       }
 
-      ### issue #87 validity of this test needs to be checked first
-      # It 'Get-VSTeamBuildDefinition by Type "xaml" should return no build definitions' {
-      #    $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Type xaml
-      #    $buildDefs.Count | Should -Be 0
-      # }
+      It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st build definition' -Skip:$skippedOnTFS {
+         $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI1") }).Id
+         $buildDefId | Should -Not -Be $null
+         $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId
+         $buildDef.Name | Should -Be $($newProjectName + "-CI1")
+         $buildDef.GitRepository | Should -Not -Be $null
+         $buildDef.Process.Phases.Count | Should -Be 1
+         $buildDef.Process.Phases[0].Name | Should -Be "Phase 1"
+         $buildDef.Process.Phases[0].Steps.Count | Should -Be 1
+         $buildDef.Process.Phases[0].Steps[0].Name | Should -Be "PowerShell Script"
+         $buildDef.Process.Phases[0].Steps[0].Inputs.targetType | Should -Be "inline"
+      }
 
-      # Only run for VSTS
-      if ($env:API_VERSION -eq 'VSTS') {
-         It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st build definition' {
-            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI1") }).Id
-            $buildDefId | Should -Not -Be $null
-            $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId
-            $buildDef.Name | Should -Be $($newProjectName + "-CI1")
-            $buildDef.GitRepository | Should -Not -Be $null
-            $buildDef.Process.Phases.Count | Should -Be 1
-            $buildDef.Process.Phases[0].Name | Should -Be "Phase 1"
-            $buildDef.Process.Phases[0].Steps.Count | Should -Be 1
-            $buildDef.Process.Phases[0].Steps[0].Name | Should -Be "PowerShell Script"
-            $buildDef.Process.Phases[0].Steps[0].Inputs.targetType | Should -Be "inline"
-         }
-
-         It 'Get-VSTeamBuildDefinition by Id should return 2 phases for 2nd build definition' {
-            $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI2") }).Id
-            ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should -Be 2
-         }
+      It 'Get-VSTeamBuildDefinition by Id should return 2 phases for 2nd build definition' -Skip:$skippedOnTFS {
+         $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI2") }).Id
+         ((Get-VSTeamBuildDefinition -ProjectName $newProjectName -Id $buildDefId).Process.Phases).Count | Should -Be 2
       }
 
       It 'Remove-VSTeamBuildDefinition should delete build definition' {
@@ -370,6 +361,9 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Remove-VSTeamPolicy' {
          $newPolicy = Get-VSTeamPolicy -ProjectName $newProjectName
+         
+         Start-Sleep -Seconds 2
+
          Remove-VSTeamPolicy -id $newPolicy.Id -ProjectName $newProjectName
          
          # If you call Get-VSTeamPolicy too quickly it will return the item
