@@ -20,6 +20,14 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Br
 
 - Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
 
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
+
+- Adds -IncludeCommits switch to Get-VSTeamPullRequest.
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/328) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Run unit tests in Docker containers Locally
+
 ## 6.4.8
 
 You can now tab complete Area and Resource of Invoke-VSTeamRequest.
@@ -35,7 +43,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/286) from [Se
 Addressed following issues:
 
 - Do not change the strict mode setting for the user's PowerShell session [#296](https://github.com/DarqueWarrior/vsteam/issues/296)
-- Consider reducing the scope of the default parameter "Project" from "*" to "*-VsTeam*" [#297](https://github.com/DarqueWarrior/vsteam/issues/297)
+- Consider reducing the scope of the default parameter "Project" from "_" to "_-VsTeam\*" [#297](https://github.com/DarqueWarrior/vsteam/issues/297)
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/275) from [Jhoneill](https://github.com/jhoneill) which included the following:
 
@@ -204,7 +212,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/193) from [Se
 
 Rename:
 VSTS --> AzD
-*Visual Studio Team Services --> Azure DevOps
+\*Visual Studio Team Services --> Azure DevOps
 
 ## 6.3.3
 
@@ -393,7 +401,7 @@ This will switch to the account in the Test profile and map a drive t: to the ac
 
 ## 6.0.0
 
-Each function is now broken out into a separate file. The folder structure was changed with the core content moved into the Source folder. All the PSM1's were moved to PS1's files.  There is now a single PSM1 now.
+Each function is now broken out into a separate file. The folder structure was changed with the core content moved into the Source folder. All the PSM1's were moved to PS1's files. There is now a single PSM1 now.
 
 **Breaking changes**:
 All the aliases have been removed. If you want to use the old aliases run Set-VSTeamAlias. They were removed due to conflicts with other modules.
@@ -448,7 +456,7 @@ Updated the help file to fix syntax errors on some of the functions.
 
 ## 4.0.12
 
-Fixed bug where Get-VSTeamGitRepository was failing if you did not provide a project name.  Now you can run without a project and get all the repositories for the entire organization.
+Fixed bug where Get-VSTeamGitRepository was failing if you did not provide a project name. Now you can run without a project and get all the repositories for the entire organization.
 
 ## 4.0.11
 
@@ -504,7 +512,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/89) from [Gui
 
 ## 4.0.4
 
-Fixed bug where the version would not be saved when storing account at User or Admin level. When you started a new PowerShell the account would load but the version would always be TFS2017.  Now it loads correctly.
+Fixed bug where the version would not be saved when storing account at User or Admin level. When you started a new PowerShell the account would load but the version would always be TFS2017. Now it loads correctly.
 
 ## 4.0.3
 
@@ -535,7 +543,7 @@ Added Add-VSTeamNuGetEndpoint
 ## 4.0.0
 
 **Breaking changes**:
-The @VSTeamVersionTable was removed and replaced with a static VSTeamVersions class.  This allows the values to flow between the provider and the rest of the functions in the module.
+The @VSTeamVersionTable was removed and replaced with a static VSTeamVersions class. This allows the values to flow between the provider and the rest of the functions in the module.
 
 Due to this breaking change _Get-VSTeamAPIVersion_ was added to review the current version being used.
 
@@ -636,7 +644,7 @@ Account
       - Ref1
       - Ref2
 
-Polished the classes defined for the provider. Also updated some of the functions to return the same classes as the provider.  The classes all have a hidden _internalObj property that contains the raw object returned from the REST API call. Not all the properties of the object are exposed via properties of the class. This property will provide access to them if you need them.
+Polished the classes defined for the provider. Also updated some of the functions to return the same classes as the provider. The classes all have a hidden \_internalObj property that contains the raw object returned from the REST API call. Not all the properties of the object are exposed via properties of the class. This property will provide access to them if you need them.
 
 Updated the format.ps1xml files to show more data when the provider is used and to format the provider output to be more consistent with a normal file system. The + and . modes were replaced with d----- and ----- for directories and leafs.
 
@@ -646,7 +654,7 @@ Added a lot of new tests that pushed th code coverage to 99.69%.
 
 Huge review of the docs and added support for bearer auth.
 
-Bearer auth will allow you to use the OAuth token created by VSTS during your build and release and not have to create a PAT. Just check the 'Allow scripts to access OAuth token' option on your phase. Then you can add an account by using the -UseBearerToken switch and passing in the $(System.AccessToken) variable.
+Bearer auth will allow you to use the OAuth token created by VSTS during your build and release and not have to create a PAT. Just check the 'Allow scripts to access OAuth token' option on your phase. Then you can add an account by using the -UseBearerToken switch and passing in the \$(System.AccessToken) variable.
 
 ```PowerShell
 Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
@@ -793,12 +801,12 @@ You can now tab complete your profiles.
 
 Added support for Profiles. Now you can store different accounts and PATS as a profile using Add-VSTeamProfile. Then you can call Set-VSTeamAccount with the -Profile parameter and the PAT will be read from the profile. This prevents you having to remember the PAT to switch between accounts. Profiles also store the API version to use with the account.
 
-Added $Global:VSTeamVersionTable so you can experiment with different versions of the VSTS/TFS APIs. The variable contains the following:
+Added \$Global:VSTeamVersionTable so you can experiment with different versions of the VSTS/TFS APIs. The variable contains the following:
 
-- 'Build'           = '3.0'
-- 'Release'         = '3.0-preview'
-- 'Core'            = '3.0'
-- 'Git'             = '3.0'
+- 'Build' = '3.0'
+- 'Release' = '3.0-preview'
+- 'Core' = '3.0'
+- 'Git' = '3.0'
 - 'DistributedTask' = '3.0-preview'
 
 You can update the version so try new versions of APIs. See Set-VSTeamAPIVersion.
@@ -820,7 +828,7 @@ Changed projectName dynamic parameter to return projects in any state instead of
 
 ## 1.0.2
 
-Added Show-VSTeam* functions
+Added Show-VSTeam\* functions
 
 Fixed ReleaseDefinition functions not recognized bug
 
@@ -906,7 +914,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/8) from [Mich
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/6)from [Michel Perfetti](https://github.com/miiitch) which included the following:
 
 - Added serviceEndpoint parameters to Add-VSTeamAzureRMServiceEndpoint cmdlet: if the serviceEndPoint parameters are not specified, the Automatic mode is used
-- The _trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/docs/integrate/api/endpoints/endpoints?WT.mc_id=-github-dbrown)
+- The \_trackProgress function was changed too to reflect the return code of the api [endpoints](https://www.visualstudio.com/docs/integrate/api/endpoints/endpoints?WT.mc_id=-github-dbrown)
 - The URL in the payload changed to [https://management.azure.com](https://management.azure.com)
 
 ## 0.1.19
@@ -931,7 +939,7 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/3) from [Andy
 
 - Corrected typos in help files.
 - Refactored location of common methods.
-- Implemented using DefaultCredentials when using TFS.  This removes the need to create a PAT.
+- Implemented using DefaultCredentials when using TFS. This removes the need to create a PAT.
 
 ## 0.1.14
 

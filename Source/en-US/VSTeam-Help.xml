@@ -13783,6 +13783,70 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The repository ID of the pull request's target branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamPullRequest</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="PullRequestId">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the pull request by ID.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The repository ID of the pull request's target branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeCommits</maml:name>
+          <maml:Description>
+            <maml:para>If set, includes the commits that are part of the pull request. Requires the RepositoryId to be set.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-VSTeamPullRequest</maml:name>
@@ -14119,6 +14183,18 @@ ID Title          Status
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IncludeCommits</maml:name>
+        <maml:Description>
+          <maml:para>If set, includes the commits that are part of the pull request. Requires the RepositoryId to be set.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes />
     <command:returnValues />
@@ -14161,6 +14237,13 @@ ID Title          Status
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest -Id 123</dev:code>
         <dev:remarks>
           <maml:para>This command gets the pull request with an Id of 123.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamPullRequest -Id 123 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the pull request with an Id of 123 and includes the commits that are part of the pull request.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
