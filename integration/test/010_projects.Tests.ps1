@@ -129,6 +129,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
 
       It 'Get-VSTeamBuildDefinition by Type "build" should return 2 build definitions' {
+         Mock Write-Warning
          $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Type build
          $buildDefs.Count | Should -Be 2
       }

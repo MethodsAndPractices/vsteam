@@ -1,15 +1,15 @@
 function Set-TestPrep {
-   # Module must be loaded
-   if (-not (Get-Module VSTeam)) {
-      Write-Host "Importing module"
-      Import-Module ..\dist\VSTeam.psd1
-   }
-
    if ($null -eq $env:ACCT -or
       $null -eq $env:API_VERSION -or
       $null -eq $env:PAT -or
       $null -eq $env:EMAIL) {
       throw "You must set all environment variables that are needed first to run integration tests. Please see https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#running-integration-tests for details."
+   }
+   
+   # Module must be loaded
+   if (-not (Get-Module VSTeam)) {
+      Write-Host "Importing module"
+      Import-Module "$PSScriptRoot\..\..\dist\VSTeam.psd1"
    }
 
    Write-Host "Target = $($env:ACCT)"
