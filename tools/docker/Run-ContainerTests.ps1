@@ -169,7 +169,7 @@ function Start-DockerVSTeamTests {
          $pesterArgs.Run.Exit = $true
          $pesterArgs.Run.Path = '.\unit'
          $pesterArgs.Run.PassThru = $false
-         $pesterArgs.Output.Verbosity = 'Minimal'
+         $pesterArgs.Output.Verbosity = 'Normal'
          $pesterArgs.TestResult.Enabled = $true
          $pesterArgs.TestResult.OutputPath = '#Container#_result.xml'
 

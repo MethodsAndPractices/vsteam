@@ -45,14 +45,21 @@ function Get-VSTeamProcess {
          # Call the REST API with an ID
          $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -id $id  -Version $(_getApiVersion Processes) 
 
-         if ($resp) {
-            return [VSTeamProcess]::new($resp)
-         }
+         $process = [VSTeamProcess]::new($resp)
+
+         Write-Output $process
       }
       else {
          try {
             # Call the REST API
             $resp = _callAPI -NoProject -Area 'work' -resource 'processes' -Version (_getApiVersion Processes)  
+
+            # We just fetched all the processes so let's update the cache. Also, cache the URLS for processes
+            [VSTeamProcessCache]::Update($resp.value)
+
+            $resp.value | ForEach-Object {
+               [VSTeamProcess]::new($_)
+            } | Where-Object { $_.name -like $Name } | Sort-Object -Property Name
          }
          catch {
             # I catch because using -ErrorAction Stop on the Invoke-RestMethod
@@ -60,14 +67,6 @@ function Get-VSTeamProcess {
             # This casuses the first error to terminate this execution.
             _handleException $_
          }
-         
-         # We just fetched all the processes so let's update the cache. Also, cache the URLS for processes
-         [VSTeamProcessCache]::processes = $resp.value.name | Sort-Object
-         [VSTeamProcessCache]::timestamp = (Get-Date).Minute
-         $resp.value | ForEach-Object {
-            [VSTeamProcessCache]::urls[$_.name] = (_getInstance) + "/_apis/work/processes/" + $_.TypeId
-            [VSTeamProcess]::new($_)
-         } | Where-Object { $_.name -like $Name } | Sort-Object -Property Name
       }
    }
 }

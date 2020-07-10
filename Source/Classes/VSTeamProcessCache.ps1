@@ -9,8 +9,13 @@ class VSTeamProcessCache {
    static [object[]] $processes = @()
    static [hashtable] $urls = @{}
 
-   static [Void] Update() {     
-      $list = Get-VSTeamProcess
+   static [Void] Update([object[]] $list) {     
+      # If a list is passed in just use that
+      # If not call Get-VSTeamProcess
+      if(-not $list){
+         $list = Get-VSTeamProcess
+      }
+
       if ($list) {
          foreach ($process in $list) {
             if ($process.psobject.Properties['url']) {
@@ -34,7 +39,7 @@ class VSTeamProcessCache {
    
    static [object] GetCurrent() {
       if ([VSTeamProcessCache]::HasExpired()) { 
-         [VSTeamProcessCache]::Update() 
+         [VSTeamProcessCache]::Update($null) 
       }
 
       return ([VSTeamProcessCache]::processes)
@@ -42,7 +47,7 @@ class VSTeamProcessCache {
    
    static [object] GetURl([string] $ProcessName) {
       if ([VSTeamProcessCache]::HasExpired()) {
-         [VSTeamProcessCache]::Update()
+         [VSTeamProcessCache]::Update($null)
       }
           
       return ([VSTeamProcessCache]::urls[$ProcessName])
