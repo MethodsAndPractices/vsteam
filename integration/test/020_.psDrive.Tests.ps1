@@ -3,7 +3,7 @@ Describe "PS Drive Full exercise" {
       . "$PSScriptRoot/testprep.ps1"
 
       Set-TestPrep
-      Set-Project
+      $target = Set-Project
 
       $originalLocation = Get-Location
    }
@@ -23,23 +23,20 @@ Describe "PS Drive Full exercise" {
          $projects | Should -Not -Be $null
       }
 
-      It 'Should list Builds, Releases and Teams' {
-         Set-Location $newProjectName
+      It 'Should list Builds, Releases and Teams under project' {
+         Set-Location $target.Name
          $projectChildren = Get-ChildItem
          Start-Sleep -Seconds 2
          $projectChildren | Should -Not -Be $null
       }
-
-      # I have noticed this test hanging lately trying to acquire data from Teams
-      # Might be a race condition from creation of project to calling this
-      # Not sure if a delay might help.
-      # It 'Should list Teams' {
-      #    Start-Sleep -Seconds 2
-      #    Set-Location 'Teams'
-      #    Start-Sleep -Seconds 2
-      #    $teamsChildren = Get-ChildItem
-      #    $teamsChildren | Should -Not -Be $null
-      # }
+      
+      It 'Should list Teams' {
+         Start-Sleep -Seconds 2
+         Set-Location 'Teams'
+         Start-Sleep -Seconds 2
+         $teamsChildren = Get-ChildItem
+         $teamsChildren | Should -Not -Be $null
+      }
    }
 
    AfterAll {
