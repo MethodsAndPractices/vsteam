@@ -9,9 +9,7 @@ class VSTeamProjectCache {
       # Allow unit tests to mock returning the project list and testing freshness
       [VSTeamProjectCache]::projects = _getProjects
       
-      # "save current minute" refreshes on average after 30 secs but not after 
-      # exact hours timeOfDayTotalMinutes might be a better base
-      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+      [VSTeamProjectCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
    }
 
    static [void] Invalidate () {

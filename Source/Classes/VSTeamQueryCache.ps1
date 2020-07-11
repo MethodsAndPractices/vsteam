@@ -21,8 +21,7 @@ class VSTeamQueryCache {
    }
 
    static [object] GetCurrent() {
-      if ([VSTeamQueryCache]::timestamp -lt 0 -or
-         [VSTeamQueryCache]::timestamp -lt [datetime]::Now.TimeOfDay.TotalMinutes - 5) {
+      if (_hasQueryCacheExpired) {
          [VSTeamQueryCache]::Update()
       }
 

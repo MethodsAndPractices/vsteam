@@ -12,7 +12,7 @@ class VSTeamProcessCache {
    static [Void] Update([object[]] $list) {     
       # If a list is passed in just use that
       # If not call Get-VSTeamProcess
-      if(-not $list){
+      if (-not $list) {
          $list = Get-VSTeamProcess
       }
 
@@ -28,17 +28,11 @@ class VSTeamProcessCache {
          [VSTeamProcessCache]::processes = @()
       }
 
-      [VSTeamProcessCache]::timestamp = (Get-Date).Minute
-   }
-   
-   # "save current minute" refreshes on average after 30secs  but not after 
-   # exact hours timeOfDayTotalMinutes might be a better base
-   static [bool] HasExpired() {
-      return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute
+      [VSTeamProcessCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
    }
    
    static [object] GetCurrent() {
-      if ([VSTeamProcessCache]::HasExpired()) { 
+      if (_hasProcessTemplateCacheExpired) { 
          [VSTeamProcessCache]::Update($null) 
       }
 
@@ -46,7 +40,7 @@ class VSTeamProcessCache {
    }
    
    static [object] GetURl([string] $ProcessName) {
-      if ([VSTeamProcessCache]::HasExpired()) {
+      if (_hasProcessTemplateCacheExpired) {
          [VSTeamProcessCache]::Update($null)
       }
           

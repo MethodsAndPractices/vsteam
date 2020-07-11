@@ -12,7 +12,7 @@ class ProcessValidateAttribute : ValidateArgumentsAttribute {
 
       $cachedProcesses = [VSTeamProcessCache]::GetCurrent()
 
-      if (($cachedProcesses.count -gt 0) -and ($arguments -notin $cachedProcesses) ) {
+      if (($cachedProcesses.count -gt 0) -and ($arguments -notin $cachedProcesses)) {
          throw [ValidationMetadataException]::new(
             "'$arguments' is not a valid process. Valid processes are: '" +
             ($cachedProcesses -join "', '") + "'")

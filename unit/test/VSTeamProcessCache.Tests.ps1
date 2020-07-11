@@ -15,42 +15,6 @@ Describe "VSTeamProcessCache" {
       . "$PSScriptRoot/../../Source/Classes/$sut"
    }
 
-   Context 'HasExpired' {
-      BeforeAll {
-         Mock Get-Date {
-            return New-Object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc)
-         }
-      }
-
-      It 'Should false' {
-         # Arrange
-         # Above we mocked Get-Date to return a date with
-         # a minute value of 0
-         [VSTeamProcessCache]::timestamp = 0
-
-         # Act
-         $actual = [VSTeamProcessCache]::HasExpired()
-
-         # Assert
-         $actual | Should -Be $false
-      }
-
-      It 'Should return true' {
-         # Arrange
-         # Invalidate should set [VSTeamProcessCache]::timestamp
-         # to -1 which will never be returned by the Minute
-         # property of Get-Date so the cache should return
-         # true from Has Expired
-         [VSTeamProcessCache]::Invalidate()
-
-         # Act
-         $actual = [VSTeamProcessCache]::HasExpired()
-
-         # Assert
-         $actual | Should -Be $true
-      }
-   }
-
    Context 'GetCurrent' {
       BeforeAll {
          # Arrange
@@ -61,6 +25,7 @@ Describe "VSTeamProcessCache" {
             )
          }
 
+         # I am mocking the date so I can test below that the timestamp was updated
          Mock Get-Date {
             return New-Object DateTime 1970, 1, 1, 0, 15, 0, ([DateTimeKind]::Utc)
          }
