@@ -64,9 +64,18 @@ Describe 'VSTeamProject' {
       Mock _getApiVersion { return '1.0-unitTests' }
       Mock _callApi -ParameterFilter { $area -eq 'work' -and $resource -eq 'processes' } -MockWith {
          return [PSCustomObject]@{value = @(
-               [PSCustomObject]@{name = 'Agile'; Typeid = '00000000-0000-0000-0000-000000000001' },
-               [PSCustomObject]@{name = 'CMMI' ; Typeid = '00000000-0000-0000-0000-000000000002' },
-               [PSCustomObject]@{name = 'Scrum'; Typeid = '00000000-0000-0000-0000-000000000003' }
+               [PSCustomObject]@{
+                  name   = 'Agile'
+                  Typeid = '00000000-0000-0000-0000-000000000001' 
+               },
+               [PSCustomObject]@{
+                  name   = 'CMMI'
+                  Typeid = '00000000-0000-0000-0000-000000000002' 
+               },
+               [PSCustomObject]@{
+                  name   = 'Scrum'
+                  Typeid = '00000000-0000-0000-0000-000000000003' 
+               }
             )
          }
       }         
