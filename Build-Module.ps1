@@ -66,7 +66,7 @@ function Start-IntegrationTests {
       $pesterArgs = [PesterConfiguration]::Default
       $pesterArgs.Run.Path = '.\integration'
       $pesterArgs.Run.Exit = $true
-      $pesterArgs.Output.Verbosity = "Normal"
+      $pesterArgs.Output.Verbosity = "Detailed"
       $pesterArgs.TestResult.Enabled = $true
       $pesterArgs.TestResult.OutputPath = 'integrationTest-results.xml'
       $pesterArgs.Run.PassThru = $false
@@ -132,7 +132,7 @@ if ($runTests.IsPresent) {
 
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = '.\unit'
-   $pesterArgs.Output.Verbosity = "Normal"
+   $pesterArgs.Output.Verbosity = "Detailed"
    $pesterArgs.TestResult.Enabled = $true
    $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
