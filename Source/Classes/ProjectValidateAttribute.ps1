@@ -10,7 +10,7 @@ class ProjectValidateAttribute : ValidateArgumentsAttribute {
          return 
       }
 
-      $cachedProjects = [VSTeamProjectCache]::GetCurrent()
+      $cachedProjects = [VSTeamProjectCache]::GetCurrent($false)
 
       if (($cachedProjects.count -gt 0) -and ($arguments -notin $cachedProjects)) {
          throw [ValidationMetadataException]::new(

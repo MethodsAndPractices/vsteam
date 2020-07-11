@@ -461,7 +461,7 @@ function _hasProcessTemplateCacheExpired {
 }
 
 function _hasQueryCacheExpired {
-   return $([VSTeamQueryCache]::timestamp) -ne  (Get-Date).TimeOfDay.TotalMinutes
+   return $([VSTeamQueryCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
 }
 
 function _getProjects {
@@ -528,14 +528,7 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if (_hasProjectCacheExpired) {
-      $arrSet = _getProjects
-      [VSTeamProjectCache]::projects = $arrSet
-      [VSTeamProjectCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
-   }
-   else {
-      $arrSet = [VSTeamProjectCache]::projects
-   }
+   $arrSet = [VSTeamProjectCache]::GetCurrent($false)      
 
    if ($arrSet) {
       Write-Verbose "arrSet = $arrSet"

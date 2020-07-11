@@ -53,8 +53,7 @@ Describe "VSTeamProjectCache" {
          }
 
          # Act
-         [VSTeamProjectCache]::Invalidate()
-         $actual = [VSTeamProjectCache]::GetCurrent()
+         $actual = [VSTeamProjectCache]::GetCurrent($true)
       }
 
       It 'Should call _getProjects' {

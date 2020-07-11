@@ -13,8 +13,7 @@ class UncachedProjectCompleter : IArgumentCompleter {
       $results = [List[CompletionResult]]::new()
       
       # Force an update of the cache
-      [VSTeamProjectCache]::Update()
-      $cachedProjects = [VSTeamProjectCache]::GetCurrent()
+      $cachedProjects = [VSTeamProjectCache]::GetCurrent($true)
       
       foreach ($value in $cachedProjects) {
          if ($value -like "*$WordToComplete*") {

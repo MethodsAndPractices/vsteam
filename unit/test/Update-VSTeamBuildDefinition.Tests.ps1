@@ -34,7 +34,7 @@ Describe "VSTeamBuildDefinition" {
 
          It "should update build definition from json" {
             # This should stop the call to cache projects
-            [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+            Mock _hasProjectCacheExpired { return $false }
 
             Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition 'JSON'
 
@@ -47,7 +47,7 @@ Describe "VSTeamBuildDefinition" {
 
          It 'should update build definition from file' {
             # This should stop the call to cache projects
-            [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+            Mock _hasProjectCacheExpired { return $false }
 
             Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
 

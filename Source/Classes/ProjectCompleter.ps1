@@ -12,7 +12,7 @@ class ProjectCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      $cachedProjects = [VSTeamProjectCache]::GetCurrent()
+      $cachedProjects = [VSTeamProjectCache]::GetCurrent($false)
 
       foreach ($value in $cachedProjects) {
          if ($value -like "*$WordToComplete*") {

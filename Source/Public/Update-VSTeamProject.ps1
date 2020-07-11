@@ -60,7 +60,7 @@ function Update-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Invalidate any cache of projects.
-         [VSTeamProjectCache]::timestamp = -1
+         [VSTeamProjectCache]::Invalidate()
 
          # Return the project now that it has been updated
          return Get-VSTeamProject -Id $finalName
