@@ -145,7 +145,12 @@ Describe 'VSTeamProject' {
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
          Mock _trackProjectProgress
          Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
-         Mock Get-VSTeamProcess { return @{name = 'CMMI'; id = 1 } }
+         Mock Get-VSTeamProcess { return [PSCustomObject]@{
+               name   = 'CMMI'
+               id     = 1
+               Typeid = '00000000-0000-0000-0000-000000000002' 
+            } 
+         }
       }
 
       It 'Should create project with CMMI' {
