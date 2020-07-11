@@ -20,7 +20,10 @@ Describe "VSTeam" {
          $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
       
          Mock _callAPI { return $singleResult }
-         Mock _hasProjectCacheExpired { return $false }
+         # These two lines will force a refresh of the project
+         # cache and return an empty list.
+         Mock _getProjects { return @() }
+         Mock _hasProjectCacheExpired { return $true }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
       }
 
