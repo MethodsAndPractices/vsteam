@@ -62,6 +62,7 @@ function _callAPI {
       $params = $PSBoundParameters
       $params.Add('Uri', $Url)
       $params.Add('UserAgent', (_getUserAgent))
+      $params.Add('TimeoutSec', (_getDefaultTimeout))
 
       if (_useWindowsAuthenticationOnPremise) {
          $params.Add('UseDefaultCredentials', $true)
@@ -209,9 +210,19 @@ function _getInstance {
    return [VSTeamVersions]::Account
 }
 
+function _getDefaultTimeout {
+   if ($Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]) {
+      return $Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]
+   } 
+   else {
+      return 10
+   }
+}
+
 function _getDefaultProject {
    return $Global:PSDefaultParameterValues["*-vsteam*:projectName"]
 }
+
 function _hasAccount {
    if (-not $(_getInstance)) {
       throw 'You must call Set-VSTeamAccount before calling any other functions in this module.'
@@ -882,12 +893,16 @@ function _clearEnvironmentVariables {
    )
 
    $env:TEAM_PROJECT = $null
+   $env:TEAM_TIMEOUT = $null
    [VSTeamVersions]::DefaultProject = ''
+   [VSTeamVersions]::DefaultTimeout = ''
    $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+   $Global:PSDefaultParameterValues.Remove("*-vsteam*:vsteamApiTimeout")
 
    # This is so it can be loaded by default in the next session
    if ($Level -ne "Process") {
       [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
+      [System.Environment]::SetEnvironmentVariable("TEAM_TIMEOUT", $null, $Level)
    }
 
    _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken '' -Version ''

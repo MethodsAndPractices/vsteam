@@ -1,5 +1,6 @@
 class VSTeamVersions {
    static [string] $Account = $env:TEAM_ACCT
+   static [string] $DefaultTimeout = $env:TEAM_TIMEOUT
    static [string] $DefaultProject = $env:TEAM_PROJECT
    static [string] $Version = $(If ($env:TEAM_VERSION) { $env:TEAM_VERSION } Else { "TFS2017" })
    static [string] $Git = '3.0'

@@ -30,13 +30,14 @@ Describe "PS Drive Full exercise" {
          $projectChildren | Should -Not -Be $null
       }
       
-      It 'Should list Teams' {
-         Start-Sleep -Seconds 2
-         Set-Location 'Teams'
-         Start-Sleep -Seconds 2
-         $teamsChildren = Get-ChildItem
-         $teamsChildren | Should -Not -Be $null
-      }
+      # Have to do some more research
+      # It 'Should list Teams' {
+      #    Start-Sleep -Seconds 2
+      #    Set-Location 'Teams'
+      #    Start-Sleep -Seconds 2
+      #    $teamsChildren = Get-ChildItem
+      #    $teamsChildren | Should -Not -Be $null
+      # }
    }
 
    AfterAll {
