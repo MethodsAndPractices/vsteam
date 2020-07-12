@@ -14,7 +14,7 @@ LONG DESCRIPTION
     -ProjectName parameter is dynamic and you can use tab completion to cycle
     through all the projects.
 
-    All the calls have a default 10 second timeout. Use Set-VSTeamDefaultAPITimeout
+    All the calls have a default 60 second timeout. Use Set-VSTeamDefaultAPITimeout
     to adjust the timeout.
 
     Using the Set-VSTeamAPIVersion function you can control which version of the APIs are used.
