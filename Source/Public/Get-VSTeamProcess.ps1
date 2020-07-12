@@ -42,7 +42,7 @@ function Get-VSTeamProcess {
 
       # In later APIs you can get the process templates from the 'work' area. For older APIs the process templates are 
       # in the 'process' area.
-      # Default to the newwer way of accessing process templates
+      # Default to the newer way of accessing process templates
       $area = 'work'
 
       # If this returns an empty string use the old area of 'process'
@@ -50,7 +50,7 @@ function Get-VSTeamProcess {
          $area = 'process'
       }
 
-      # Return either a single proces by ID or a list of processes
+      # Return either a single process by ID or a list of processes
       if ($id) {
          # Call the REST API with an ID
          $resp = _callAPI -NoProject -Area $area -resource 'processes' -id $id -Version $(_getApiVersion Processes)
