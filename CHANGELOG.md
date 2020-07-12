@@ -2,7 +2,7 @@
 
 ## 6.5.0
 
-Added a default 60 second timeout on _callAPI. You can override the value with Set-VSTeamDefaultAPITimeout and clear with Clear-VSTeamDefaultAPITimeout
+Added a default 60 second timeout on _callAPI. You can override the value with Set-VSTeamDefaultAPITimeout and clear with Clear-VSTeamDefaultAPITimeout.
 
 Changed the completers to quote all values.
 
