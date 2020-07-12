@@ -57,6 +57,21 @@ Describe 'VSTeamProcess' {
    }
 
    Context 'Get-VSTeamProcess' {
+      It 'should use process area for old APIs' {
+         Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Processes' }
+
+         ## Act
+         $p = Get-VSTeamProcess
+
+         ## Assert
+         $p.count             | should -Be 2 
+         $p[0].gettype().name | should -Be VSTeamProcess  # don't use BeOfType it's not in this scope/
+         # Make sure it was called with the correct URI
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            $Uri -like "*https://dev.azure.com/test/_apis/process/processes*"
+         }
+      }
+
       It 'with no parameters using BearerToken should return process' {
          ## Act
          $p = Get-VSTeamProcess
