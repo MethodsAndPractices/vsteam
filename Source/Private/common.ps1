@@ -215,7 +215,7 @@ function _getDefaultTimeout {
       return $Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]
    } 
    else {
-      return 10
+      return 30
    }
 }
 
