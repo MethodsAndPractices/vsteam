@@ -10,7 +10,7 @@ class VSTeamTeams : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeam -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $items = Get-VSTeam -ProjectName $this.ProjectName
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Team')

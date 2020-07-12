@@ -14,7 +14,7 @@ class VSTeamFeeds : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $feeds = Get-VSTeamFeed -ErrorAction SilentlyContinue | Sort-Object name
+      $feeds = Get-VSTeamFeed | Sort-Object name
 
       $objs = @()
 
