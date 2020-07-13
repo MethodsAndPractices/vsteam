@@ -154,7 +154,7 @@ stages:
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
                 # Install each module
-                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
               workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: PowerShell@2
@@ -165,6 +165,8 @@ stages:
                 # Load the psd1 file so you can read the version
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
+                Write-Host "Package Version Number: $($manifest.ModuleVersion).$(Build.BuildId)"
+
                 Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
               workingDirectory: '$(Pipeline.Workspace)/Module'
 
@@ -174,7 +176,10 @@ stages:
               targetType: 'inline'
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
-                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
+
+                Write-Host "Convert psd1 into a NuSpec"
+
+                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1 -Verbose
               workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: NuGetCommand@2
