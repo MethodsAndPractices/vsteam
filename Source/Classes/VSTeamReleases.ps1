@@ -12,7 +12,7 @@ class VSTeamReleases : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $releases = Get-VSTeamRelease -ProjectName $this.ProjectName -Expand Environments -ErrorAction SilentlyContinue
+      $releases = Get-VSTeamRelease -ProjectName $this.ProjectName -Expand Environments
 
       $objs = @()
 

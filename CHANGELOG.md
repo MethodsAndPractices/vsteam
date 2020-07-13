@@ -66,6 +66,8 @@ unit/test/ProcessValidateAttribute.Tests.ps1
 
 ## 6.5.0
 
+Added a default 60 second timeout on _callAPI. You can override the value with Set-VSTeamDefaultAPITimeout and clear with Clear-VSTeamDefaultAPITimeout.
+
 Changed the completers to quote all values.
 
 Added support for different releases of the Server version:
@@ -82,15 +84,19 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/315) from [Jh
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/317) from [Brittan DeYoung](https://github.com/brittandeyoung) which included the following:
 
-- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id.
+- Adds a new function Stop-VSTeamBuild which allows cancelling a build using the build id
 
-Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/322) from [Jhoneill](https://github.com/jhoneill) which included the following:
 
-- Adds -IncludeCommits switch to Get-VSTeamPullRequest.
+- Enhance Get-VSTeamProcess
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/328) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
 
 - Run unit tests in Docker containers Locally
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
+
+- Adds -IncludeCommits switch to Get-VSTeamPullRequest
 
 ## 6.4.8
 

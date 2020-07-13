@@ -14,7 +14,7 @@ class VSTeamUsers : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $Users = Get-VSTeamUser -ErrorAction SilentlyContinue | Sort-Object name
+      $Users = Get-VSTeamUser | Sort-Object name
 
       $objs = @()
 

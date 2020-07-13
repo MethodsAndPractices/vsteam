@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Describe 'VSTeamDefaultProject' {
+Describe "VSTeamProjectCache" {
    BeforeAll {
       Import-Module SHiPS
 
@@ -10,7 +10,10 @@ Describe 'VSTeamDefaultProject' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProcessCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -37,66 +40,34 @@ Describe 'VSTeamDefaultProject' {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Public/Remove-VSTeamAccount.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamBuildDefinition.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProcess.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
-      . "$PSScriptRoot/../../Source/Public/$sut"
-
-      Mock _getInstance { return 'https://dev.azure.com/test' }
+      . "$PSScriptRoot/../../Source/Classes/$sut"
    }
 
-   Context 'Clear-VSTeamDefaultProject on Non Windows' {
+   Context 'GetCurrent' {
       BeforeAll {
-         Mock _isOnWindows { return $false }
+         # Arrange
+         Mock _getProjects { return  ConvertFrom-Json '["Demo", "Universal"]' }
+
+         Mock Get-Date {
+            return New-Object DateTime 1970, 1, 1, 0, 15, 0, ([DateTimeKind]::Utc)
+         }
+
+         # Act
+         $actual = [VSTeamProjectCache]::GetCurrent($true)
       }
 
-      AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+      It 'Should call _getProjects' {
+         Should -Invoke _getProjects -Exactly -Scope Context -Times 1
       }
 
-      It 'should clear default project' {
-         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'MyProject'
-
-         Clear-VSTeamDefaultProject
-
-         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should -BeNullOrEmpty
-      }
-   }
-
-   Context 'Clear-VSTeamDefaultProject as Non-Admin on Windows' {
-      BeforeAll {
-         Mock _isOnWindows { return $true }
-         Mock _testAdministrator { return $false }
+      It 'Should return array' {
+         # Assert
+         $actual.length | Should -Be 2
       }
 
-      AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
-      }
-
-      It 'should clear default project' {
-         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'MyProject'
-
-         Clear-VSTeamDefaultProject
-
-         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should -BeNullOrEmpty
-      }
-   }
-
-   Context 'Clear-VSTeamDefaultProject as Admin on Windows' {
-      BeforeAll {
-         Mock _isOnWindows { return $true }
-         Mock _testAdministrator { return $true }
-      }
-
-      AfterAll {
-         $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
-      }
-
-      It 'should clear default project' {
-         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'MyProject'
-
-         Clear-VSTeamDefaultProject
-
-         $Global:PSDefaultParameterValues['*-vsteam*:projectName'] | Should -BeNullOrEmpty
+      It 'Should set timestamp' {
+         # Assert
+         [VSTeamProjectCache]::timestamp | Should -Be 15
       }
    }
 }

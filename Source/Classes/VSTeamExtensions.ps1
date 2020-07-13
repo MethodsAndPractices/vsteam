@@ -14,7 +14,7 @@ class VSTeamExtensions : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $extensions = Get-VSTeamExtension -ErrorAction SilentlyContinue | Sort-Object name
+      $extensions = Get-VSTeamExtension | Sort-Object name
 
       $objs = @()
 

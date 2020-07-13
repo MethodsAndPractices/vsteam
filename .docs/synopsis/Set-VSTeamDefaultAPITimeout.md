@@ -1,0 +1,1 @@
+Sets the default timeout to be used with other calls in the module.

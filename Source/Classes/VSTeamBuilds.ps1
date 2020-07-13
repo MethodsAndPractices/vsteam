@@ -13,7 +13,7 @@ class VSTeamBuilds : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $builds = Get-VSTeamBuild -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $builds = Get-VSTeamBuild -ProjectName $this.ProjectName
 
       $objs = @()
 

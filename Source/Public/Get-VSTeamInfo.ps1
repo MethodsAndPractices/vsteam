@@ -4,5 +4,6 @@ function Get-VSTeamInfo {
       Version        = $(_getApiVersion -Target)
       ModuleVersion  = [VSTeamVersions]::ModuleVersion
       DefaultProject = $Global:PSDefaultParameterValues['*-vsteam*:projectName']
+      DefaultTimeout = $Global:PSDefaultParameterValues['*-vsteam*:vsteamApiTimeout']
    }
 }

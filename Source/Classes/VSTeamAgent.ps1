@@ -30,7 +30,7 @@ class VSTeamAgent : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $jobRequests = Get-VSTeamJobRequest -PoolId $this.poolId -AgentId $this.agentId -ErrorAction SilentlyContinue
+      $jobRequests = Get-VSTeamJobRequest -PoolId $this.poolId -AgentId $this.agentId
 
       $objs = @()
 

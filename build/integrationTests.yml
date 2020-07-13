@@ -96,7 +96,7 @@ jobs:
                   $pesterArgs = [PesterConfiguration]::Default
                   $pesterArgs.Run.Exit = $true
                   $pesterArgs.Run.PassThru = $true
-                  $pesterArgs.Output.Verbosity = "Normal"
+                  $pesterArgs.Output.Verbosity = "Detailed"
                   $pesterArgs.TestResult.Enabled = $true
                   $pesterArgs.TestResult.OutputPath = 'test-results.xml'
             
