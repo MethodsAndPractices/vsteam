@@ -30,11 +30,11 @@ PS R:\repos\vsteam> Get-VSTeamWorkItemType -ProcessTemplate Basic
 
 This command gets a list of the WorkItems available to projects which use the 'Basic' Template
 
-
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```PowerShell
-PS R:\repos\vsteam> Get-VSTeamProcess scr* |  Get-VSTeamWorkItemType  -WorkItemType pro* | ft name,processtemplate
+PS R:\repos\vsteam> Get-VSTeamProcess scr* | Get-VSTeamWorkItemType -WorkItemType pro* | ft name,processTemplate
+
 name                 ProcessTemplate
 ----                 ---------------
 Product Backlog Item Scrum
@@ -43,8 +43,7 @@ Product Backlog Item Scrum4
 
 ```
 
-The first command gets a the process templates which match SCR*. The second finds WorkItem Types 
-in those process which match "pro*", and the third shows a table of Type name and process template with that type
+The first command gets a the process templates which match SCR*. The second finds WorkItem Types in those process which match "pro*", and the third shows a table of Type name and process template with that type
 
 ### -------------------------- EXAMPLE 4 --------------------------
 
@@ -53,8 +52,7 @@ PS R:\repos\vsteam> $t = Get-VSTeamWorkItemType -ProcessTemplate Basic -WorkItem
 PS R:\repos\vsteam> $t.layout.pages.labels
 ```
 
-The first command gets a single WorkItem in the 'Basic' Template, and requests its layout information.
-The second command displays the names of the pages used in the layout ('Details', 'History', 'Links', 'Attachments')
+The first command gets a single WorkItem in the 'Basic' Template, and requests its layout information. The second command displays the names of the pages used in the layout ('Details', 'History', 'Links', 'Attachments')
 
 ## PARAMETERS
 
@@ -68,6 +66,7 @@ The Process holding the WorkItems of interest.
 Type: String
 Parameter Sets: Process
 ```
+
 ### -WorkItemType
 
 The type of WorkItem to retrieve.
@@ -77,17 +76,15 @@ Type: String
 Aliases: Name
 ```
 
-
 ### -Expand
 
-If specified the workitem(s) returned will have behavior and/or layout and/or state information attached.
+If specified the work item(s) returned will have behavior and/or layout and/or state information attached.
 
 ```yaml
 Type: String[]
 Parameter Sets: Process
 Accepted values: 'behaviors','layout','states'
 ```
-
 
 ## INPUTS
 

@@ -1,1 +1,1 @@
-Removes a custom workitem type from custom process template.
+Removes a custom work item type from custom process template.

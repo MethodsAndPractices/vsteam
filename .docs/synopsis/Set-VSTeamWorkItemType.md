@@ -1,1 +1,1 @@
-Modifies an existing workitem type in a custom process template.
+Modifies an existing work item type in a custom process template.
