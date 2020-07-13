@@ -1,10 +1,11 @@
-<!-- #include "./common/header.md" -->
+
+
 
 # Remove-VSTeamWorkItemType
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Remove-VSTeamWorkItemType.md" -->
+Removes a custom work item type from custom process template.
 
 ## SYNTAX
 
@@ -42,7 +43,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-<!-- #include "./params/force.md" -->
+### -Force
+
+Forces the function without confirmation
+
+```yaml
+Type: SwitchParameter
+Required: false
+Position: Named
+Accept pipeline input: false
+Parameter Sets: (All)
+```
 
 ### -ProcessTemplate
 
@@ -111,3 +122,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
