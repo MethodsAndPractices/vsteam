@@ -1,69 +1,5 @@
 # Changelog
 
-## New functions to give Add-, Set- and Remove- functionality for VSTeamWorkItemTypes
-### Changed files
-
-**Function, help and unit tests for Add-**
-```
-.docs/synopsis/Add-VSTeamWorkItemType.md
-.docs/Add-VSTeamWorkItemType.md
-Source/Public/Add-VSTeamWorkItemType.ps1
-unit/test/Add-VSTeamWorkItemType.Tests.ps1
-```
-**for Remove-**
-```
-.docs/Remove-VSTeamWorkItemType.md
-.docs/synopsis/Remove-VSTeamWorkItemType.md
-Source/Public/Remove-VSTeamWorkItemType.ps1
-unit/test/Remove-VSTeamWorkItemType.Tests.ps1
-```
-**For Set-**
-```
-.docs/Set-VSTeamWorkItemType.md
-.docs/synopsis/Set-VSTeamWorkItemType.md
-Source/Public/Set-VSTeamWorkItemType.ps1
-unit/test/Set-VSTeamWorkItemType.Tests.ps1
-```
-
-**New Completer / Validator / Transformer classes and their supporting caches**
-```
-Source/Classes/ColorCompleter.ps1
-Source/Classes/ColorTransformToHexAttribute.ps1
-Source/Classes/IconCache.ps1
-Source/Classes/IconCompleter.ps1
-Source/Classes/IconTransformAttribute.ps1
-```
-**Updated to incorporate the the new classes above**
-```
-Source/Classes/_classes.json
-```
-
-**Chaneged in earlier PRs  not yet merged but dependencies for this one**
-```
-.docs/synopsis/Get-VSTeamWorkItemType.md
-.docs/Get-VSTeamWorkItemType.md
-Source/Public/Get-VSTeamWorkItemType.ps1
-unit/test/Get-VSTeamWorkItemType.Tests.ps1
-Merge-File.ps1
-Source/Classes/ProcessTemplateCompleter.ps1
-Source/Classes/ProcessValidateAttribute.ps1
-Source/Classes/VSTeamProcess.ps1
-Source/Classes/VSTeamProcessCache.ps1
-Source/Classes/VSTeamVersions.ps1
-Source/Classes/VSTeamWorkItemTypeCache.ps1
-Source/Classes/WorkItemTypeCompleter.ps1
-Source/Classes/WorkItemTypeValidateAttribute.ps1
-Source/Private/common.ps1
-Source/Public/Add-VSTeamWorkItem.ps1
-Source/Public/Get-VSTeamProcess.ps1
-Source/Public/Set-VSTeamAPIVersion.ps1
-unit/test/Add-VSTeam.Tests.ps1
-unit/test/Add-VSTeamProject.Tests.ps1
-unit/test/Add-VSTeamWorkItem.Tests.ps1
-unit/test/Get-VSTeamProcess.Tests.ps1
-unit/test/ProcessValidateAttribute.Tests.ps1
-```
-
 ## 6.5.0
 
 Added a default 60 second timeout on _callAPI. You can override the value with Set-VSTeamDefaultAPITimeout and clear with Clear-VSTeamDefaultAPITimeout.
@@ -97,6 +33,10 @@ Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/328) from [Se
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/333) from [Daniel Sturm](https://github.com/danstur) which included the following:
 
 - Adds -IncludeCommits switch to Get-VSTeamPullRequest
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/338) from [Jhoneill](https://github.com/jhoneill) which included the following:
+
+- Adds new functions Add/Set/Remove-VSTeamWorkItemTypes
 
 ## 6.4.8
 
