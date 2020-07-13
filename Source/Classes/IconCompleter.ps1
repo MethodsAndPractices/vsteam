@@ -11,9 +11,11 @@ class IconCompleter : IArgumentCompleter {
       [IDictionary] $FakeBoundParameters) {
 
       $results = [List[CompletionResult]]::new()
-      foreach ($w in [IconCache]::GetCurrent().where({$_ -like "*$WordToComplete*"})) {
+
+      foreach ($w in [IconCache]::GetCurrent().where({ $_ -like "*$WordToComplete*" })) {
          $results.Add([CompletionResult]::new($w))
       }
+
       return $results
    }
 }

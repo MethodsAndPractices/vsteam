@@ -13,10 +13,11 @@ class ColorCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      [KnownColor].GetFields().where({$_.IsStatic -and $_.name -like "$wordToComplete*" }) |
+      [KnownColor].GetFields().where( { $_.IsStatic -and $_.name -like "$wordToComplete*" }) |
       Sort-Object -Property name | ForEach-Object {
          $results.Add([CompletionResult]::new($_.name))
       }
+      
       return $results
    }
 }

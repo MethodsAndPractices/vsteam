@@ -14,11 +14,8 @@ class ProcessTemplateCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      foreach ($value in ([VSTeamProcessCache]::GetCurrent() | Where-Object {$_ -like "*$WordToComplete*"})) {
-         if ($value -match "\W") {
-               $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
-         }
-         else {$results.Add([CompletionResult]::new($value)) }
+      foreach ($value in ([VSTeamProcessCache]::GetCurrent() | Where-Object { $_ -like "*$WordToComplete*" })) {
+         $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
       }
 
       return $results

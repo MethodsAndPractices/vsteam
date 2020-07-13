@@ -23,7 +23,7 @@ function Add-VSTeamWorkItem {
       [ProjectValidateAttribute()]
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName,
-      
+
       [Parameter(Mandatory = $true)]
       [WorkItemTypeValidateAttribute()]
       [ArgumentCompleter([WorkItemTypeCompleter])]
@@ -67,7 +67,7 @@ function Add-VSTeamWorkItem {
          }
       }
 
-      #this loop must always come after the main work item fields defined in the function parameters
+      # This loop must always come after the main work item fields defined in the function parameters
       if ($AdditionalFields) {
          foreach ($fieldName in $AdditionalFields.Keys) {
 
@@ -94,7 +94,7 @@ function Add-VSTeamWorkItem {
       # https://stackoverflow.com/questions/18662967/convertto-json-an-array-with-a-single-item
       $json = ConvertTo-Json @($body) -Compress
 
-      # Call the REST API  The "ID" is the type prefixed with a $ - the variable will fail validation if we try to change it. 
+      # Call the REST API The "ID" is the type prefixed with a $. The parameter will fail validation if we try to change it.
       $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' `
          -Version $(_getApiVersion Core) -id ('$' + $WorkItemType) -Method Post `
          -ContentType 'application/json-patch+json' -Body $json

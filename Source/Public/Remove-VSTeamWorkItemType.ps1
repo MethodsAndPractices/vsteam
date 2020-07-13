@@ -14,7 +14,7 @@ function Remove-VSTeamWorkItemType {
       [switch]$Force
    )
    process {
-      $wit  = [VSTeamWorkItemTypeCache]::GetByProcess($ProcessTemplate ) | Where-Object -Property name -eq  $WorkItemType
+      $wit  = [VSTeamWorkItemTypeCache]::GetCurrent($ProcessTemplate ) | Where-Object -Property name -eq  $WorkItemType
      if (-not $wit) {Write-Warning "'$workitemType' does not appear to be a valid WorkItem Type." ; return}
       elseif  ($wit.customization -eq 'System') {
           throw "'$workitemType' is a system WorkItem and cannot be deleted (but can be disabled)." ; return
