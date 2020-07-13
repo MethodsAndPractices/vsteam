@@ -51,9 +51,11 @@ jobs:
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
                   $creds = New-Object PSCredential($e, $pwd)
 
-                  if(-not (Get-PSRepository | ? Name -eq $n)) {
+                  if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
                       Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                   }
+
+                  Get-PSRepository
 
             - task: PowerShell@2
               displayName: 'Install VSTeam Module'
