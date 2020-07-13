@@ -78,11 +78,6 @@ function Get-VSTeamProcess {
             # This casuses the first error to terminate this execution.
             _handleException $_
          }
-         $processes = $resp.value | ForEach-Object {[VSTeamProcess]::new($_)} | Sort-Object -Property Name
-         #we just fetched all the processes so let's update the cache. Also, cache the URLS for processes
-         [VSTeamProcessCache]::Update($processes) 
-
-         return ($processes | Where-Object {$_.name -like $Name} )
       }
    }
 }

@@ -32,7 +32,7 @@ function Set-VSTeamWorkItemType {
    process {
       $wit  = [VSTeamWorkItemTypeCache]::GetByProcess($ProcessTemplate ) | Where-Object -Property name -eq  $WorkItemType
       if (-not $wit) {Write-Warning "'$workitemType' does not appear to be a valid Workitem type." ; return}
-      $url  = "$($wit.url)?api-version=" + (_getApiVersion ProcessDefinition)  
+      $url  = "$($wit.url)?api-version=" + (_getApiVersion Processes)  
       $body = @{} #note. "Changing" some options to their current value can causes an error. So only do real changes.
       #move into classes for validting / completing icons
 
@@ -66,7 +66,7 @@ function Set-VSTeamWorkItemType {
                }
                else { #for system items we have to POST to the creation URL
                   $body['inheritsFrom'] = $wit.referenceName
-                  $url    = ($url -replace 'workItemTypes/.*$' , 'workItemTypes?api-version=')  + (_getApiVersion ProcessDefinition) 
+                  $url    = ($url -replace 'workItemTypes/.*$' , 'workItemTypes?api-version=')  + (_getApiVersion Processes) 
                   $resp = _callapi -Url $url -method  POST  -ContentType "application/json" -body (ConvertTo-Json $body) -ErrorAction stop 
                }
                [VSTeamWorkItemTypeCache]::InvalidateByProcess($ProcessTemplate)

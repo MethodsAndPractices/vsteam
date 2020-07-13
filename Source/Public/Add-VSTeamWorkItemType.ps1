@@ -22,7 +22,7 @@ function Add-VSTeamWorkItemType {
 
    $url =  [VSTeamProcessCache]::GetURl($ProcessTemplate)
    if (-not $url) {Write-Warning "Could not convert '$ProcessTemplate' into a process template"; return}
-   $url += "/workitemtypes?api-version=" + (_getApiVersion ProcessDefinition)  
+   $url += "/workitemtypes?api-version=" + (_getApiVersion Processes)  
    
    $body  = @{
       name  = $WorkItemType

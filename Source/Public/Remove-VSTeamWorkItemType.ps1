@@ -19,7 +19,7 @@ function Remove-VSTeamWorkItemType {
       elseif  ($wit.customization -eq 'System') {
           throw "'$workitemType' is a system WorkItem and cannot be deleted (but can be disabled)." ; return
       }
-      $url  = "$($wit.url)?api-version=" + (_getApiVersion ProcessDefinition)  
+      $url  = "$($wit.url)?api-version=" + (_getApiVersion Processes)  
       if ($Force -or $PSCmdlet.ShouldProcess($WorkItemType,"Modify $ProcessTemplate to delete definition of Workitem type") ) {
          $null =  _callapi -Url $url -method  Delete
          [VSTeamWorkItemTypeCache]::InvalidateByProcess($ProcessTemplate)

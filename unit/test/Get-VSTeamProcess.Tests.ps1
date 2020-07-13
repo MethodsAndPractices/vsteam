@@ -66,6 +66,7 @@ Describe 'VSTeamProcess' {
          ## Assert
          $p.count             | should -Be 2 
          $p[0].gettype().name | should -Be VSTeamProcess  # don't use BeOfType it's not in this scope/
+
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/process/processes*"
@@ -120,12 +121,11 @@ Describe 'VSTeamProcess' {
 
       It 'by Name should return Process by Name' {
          [VSTeamProcessCache]::timestamp = -1
-         
          $p = Get-VSTeamProcess -Name Agile
 
          $p.name | should -Be  'Agile'
          $p.id   | should -Not -BeNullOrEmpty
-         
+
          # Make sure it was ca lled with the correct URI
          # Only called once for name - we don't validate the name, so wildcards can be given. 
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
