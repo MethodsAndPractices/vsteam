@@ -12,10 +12,10 @@ class UncachedProjectCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
       
-      [VSTeamProjectCache]::projects = _getProjects
-      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+      # Force an update of the cache
+      $cachedProjects = [VSTeamProjectCache]::GetCurrent($true)
       
-      foreach ($value in [VSTeamProjectCache]::projects) {
+      foreach ($value in $cachedProjects) {
          if ($value -like "*$WordToComplete*") {
             $results.Add([CompletionResult]::new("'$($value.replace("'","''"))'", $value, 0, $value))
          }

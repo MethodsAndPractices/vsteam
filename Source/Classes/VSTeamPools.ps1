@@ -14,7 +14,7 @@ class VSTeamPools : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $pools = Get-VSTeamPool -ErrorAction SilentlyContinue | Sort-Object name
+      $pools = Get-VSTeamPool | Sort-Object name
 
       $objs = @()
 

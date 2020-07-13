@@ -54,7 +54,7 @@ class VSTeamPool : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $agents = Get-VSTeamAgent -PoolId $this.id -ErrorAction SilentlyContinue
+      $agents = Get-VSTeamAgent -PoolId $this.id
 
       $objs = @()
 

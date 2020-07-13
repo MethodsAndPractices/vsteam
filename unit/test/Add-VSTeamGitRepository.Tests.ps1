@@ -67,7 +67,10 @@ Describe "VSTeamGitRepository" {
             }
          }
 
-         Mock _hasProjectCacheExpired { return $false }
+         # These two lines will force a refresh of the project
+         # cache and return an empty list.
+         Mock _getProjects { return @() }
+         Mock _hasProjectCacheExpired { return $true }
 
          Mock Invoke-RestMethod { return $singleResult }
 

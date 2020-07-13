@@ -1,27 +1,10 @@
 Describe "VSTeamExtension" {
    BeforeAll {
-      Set-VSTeamAPIVersion -Target $env:API_VERSION
+      . "$PSScriptRoot/testprep.ps1"
 
-      $pat = $env:PAT
-      $acct = $env:ACCT
-      $email = $env:EMAIL
-      $api = $env:API_VERSION
+      Set-TestPrep
 
-      $projectDescription = 'Project for VSTeam integration testing.'
-      $newProjectName = 'TeamModuleIntegration' + [guid]::NewGuid().toString().substring(0, 5)
-
-      $originalLocation = Get-Location
-
-      Set-VSTeamAccount -Account $acct -PersonalAccessToken $pat -Version $api
-
-      $existingProject = $(Get-VSTeamProject | Where-Object Description -eq $projectDescription)
-
-      if ($existingProject) {
-         $newProjectName = $existingProject.Name
-      }
-      else {
-         Add-VSTeamProject -Name $newProjectName -Description $projectDescription | Should -Not -Be $null
-      }
+      Set-Project
    }
 
    Context 'Add-VSTeamExtension' {

@@ -13,7 +13,7 @@ class VSTeamQueues : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamQueue -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $items = Get-VSTeamQueue -ProjectName $this.ProjectName
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Queue')

@@ -46,39 +46,33 @@ param(
    [switch]$runIntegrationTests
 )
 
-if ($runIntegrationTests.IsPresent) {
-   if (
-      $null -eq $env:ACCT -or
-      $null -eq $env:API_VERSION -or
-      $null -eq $env:PAT -or
-      $null -eq $env:EMAIL
-   ) {
-      throw "You must set all environment variables that are needed first to run integration tests. Please see https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#running-integration-tests for details."
+function Import-Pester {
+   if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
+      Write-Output "Installing Pester 5"
+      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.2' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
    }
+
+   # This loads [PesterConfiguration] into scope
+   Import-Module Pester -MinimumVersion 5.0.0
 }
 
 function Start-IntegrationTests {
    [CmdletBinding(DefaultParameterSetName = "All", SupportsShouldProcess, ConfirmImpact = "High")]
-   param ()
+   param()
 
    process {
+      Import-Pester
 
-      if ($PSCmdLet.ShouldProcess("Integration Tests on $env:ACCT", "TOTAL DESTRUCTION OF THE ACCOUNT")) {
-         Import-Module Pester -MinimumVersion 5.0.0
+      $pesterArgs = [PesterConfiguration]::Default
+      $pesterArgs.Run.Path = '.\integration'
+      $pesterArgs.Run.Exit = $true
+      $pesterArgs.Output.Verbosity = "Detailed"
+      $pesterArgs.TestResult.Enabled = $true
+      $pesterArgs.TestResult.OutputPath = 'integrationTest-results.xml'
+      $pesterArgs.Run.PassThru = $false
 
-         $pesterArgs = [PesterConfiguration]::Default
-         $pesterArgs.Run.Path = '.\integration'
-         $pesterArgs.Run.Exit = $true
-         $pesterArgs.Output.Verbosity = "Normal"
-         $pesterArgs.TestResult.Enabled = $true
-         $pesterArgs.TestResult.OutputPath = 'integrationTest-results.xml'
-         $pesterArgs.Run.PassThru = $true
-
-         Invoke-Pester -Configuration $pesterArgs
-      }
-
+      Invoke-Pester -Configuration $pesterArgs
    }
-
 }
 
 . ./Merge-File.ps1
@@ -132,31 +126,13 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 Write-Output "Publish complete to $output"
 
-# reload the just built module
-if ($ipmo.IsPresent -or $runTests.IsPresent -or $runIntegrationTests.IsPresent) {
-
-   # module needs to be unloaded if present
-   if ((Get-Module VSTeam)) {
-      Remove-Module VSTeam
-   }
-
-   Import-Module "$output/VSTeam.psd1" -Force
-   Set-VSTeamAlias
-}
-
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
-   if ($null -eq $(Get-Module -ListAvailable Pester | Where-Object Version -like '5.*')) {
-      Write-Output "Installing Pester 5"
-      Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion '5.0.2' -Scope CurrentUser -AllowClobber -SkipPublisherCheck
-   }
-
-   # This loads [PesterConfiguration] into scope
-   Import-Module Pester -MinimumVersion 5.0.0
+   Import-Pester
 
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = '.\unit'
-   $pesterArgs.Output.Verbosity = "Minimal"
+   $pesterArgs.Output.Verbosity = "Detailed"
    $pesterArgs.TestResult.Enabled = $true
    $pesterArgs.TestResult.OutputPath = 'test-results.xml'
 
@@ -175,6 +151,19 @@ if ($runTests.IsPresent) {
    }
 
    Invoke-Pester -Configuration $pesterArgs
+}
+
+# reload the just built module
+if ($ipmo.IsPresent -or $analyzeScript.IsPresent -or $runIntegrationTests.IsPresent) {
+   # module needs to be unloaded if present
+   if ((Get-Module VSTeam)) {
+      Remove-Module VSTeam
+   }
+
+   Write-Host "Importing module"
+
+   Import-Module "$output/VSTeam.psd1" -Force
+   Set-VSTeamAlias
 }
 
 # Run this last so the results can be seen even if tests were also run

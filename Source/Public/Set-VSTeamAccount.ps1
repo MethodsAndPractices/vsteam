@@ -66,7 +66,7 @@ function Set-VSTeamAccount {
    process {
       # invalidate cache when changing account/collection
       # otherwise dynamic parameters being picked for a wrong collection
-      [VSTeamProjectCache]::timestamp = -1
+      [VSTeamProjectCache]::Invalidate()
 
       # Bind the parameter to a friendly variable
       $vsteamProfile = $PSBoundParameters['Profile']
