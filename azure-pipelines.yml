@@ -206,25 +206,24 @@ stages:
 
   - template: build/integrationTests.yml
     parameters:
-      displayName: 'Linux TFS 2017'
+      displayName: 'Linux TFS 2018'
       os: 'Linux'
-      name: 'LinuxTFS2017'
       pool: 'ubuntu-16.04'
-      stop2017: 'true'
-      apiVersion: 'TFS2017'
-      depends: 'WindowsTFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
+      start2018: 'true'
+      stop2018: 'true'
+      name: 'LinuxTFS2018'
+      apiVersion: 'TFS2018'
+      account: 'http://winbldbox3.centralus.cloudapp.azure.com:8080/tfs/defaultcollection'
 
   - template: build/integrationTests.yml
     parameters:
-      displayName: 'Windows TFS 2017'
+      displayName: 'Windows AzD'
       os: 'Windows'
-      name: 'WindowsTFS2017'
       pool: 'windows-latest'
-      apiVersion: 'TFS2017'
-      depends: 'macOSTFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
-
+      name: 'windowsAzD'
+      apiVersion: 'VSTS'
+      account: 'tooltester'
+      
   - template: build/integrationTests.yml
     parameters:
       displayName: 'macOS TFS 2017'
@@ -237,23 +236,14 @@ stages:
 
   - template: build/integrationTests.yml
     parameters:
-      displayName: 'Windows TFS 2018'
+      displayName: 'Windows TFS 2017'
       os: 'Windows'
+      name: 'WindowsTFS2017'
       pool: 'windows-latest'
-      start2018: 'true'
-      stop2018: 'true'
-      name: 'windowsTFS2018'
-      apiVersion: 'TFS2018'
-      account: 'http://winbldbox3.centralus.cloudapp.azure.com:8080/tfs/defaultcollection'
-
-  - template: build/integrationTests.yml
-    parameters:
-      displayName: 'Windows AzD'
-      os: 'Windows'
-      pool: 'windows-latest'
-      name: 'windowsAzD'
-      apiVersion: 'VSTS'
-      account: 'tooltester'
+      stop2017: 'true'
+      apiVersion: 'TFS2017'
+      depends: 'macOSTFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
 
 - stage: Production
   displayName: PowerShell Gallery / GitHub Release
