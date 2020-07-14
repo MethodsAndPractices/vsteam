@@ -71,6 +71,8 @@ jobs:
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
                   $creds = New-Object PSCredential($e, $pwd)
 
+                  Get-PSRepository
+
                   Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Force -Scope CurrentUser -Verbose
                 workingDirectory: '$(Pipeline.Workspace)/Test'
 

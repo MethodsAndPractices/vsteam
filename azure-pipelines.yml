@@ -307,6 +307,13 @@ stages:
               packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
               packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
 
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish nupkg Artifact'
+            inputs:
+              targetPath: '$(Pipeline.Workspace)/Module/$(Folder)'
+              artifact: 'Package'
+              publishLocation: 'pipeline'
+
           - task: NuGetCommand@2
             displayName: 'Push Module'
             inputs:
@@ -319,7 +326,7 @@ stages:
             displayName: 'Create GitHub Release'
             inputs:
               gitHubConnection: Darquewarrior
-              repositoryName: DarqueWarrior/vsteam
+              repositoryName: MethodsAndPractices/vsteam
               tagSource: manual
               tag: v$(PACKAGE_VERSION)
               addChangeLog: true
