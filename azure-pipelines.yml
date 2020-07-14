@@ -223,26 +223,16 @@ stages:
       name: 'windowsAzD'
       apiVersion: 'VSTS'
       account: 'tooltester'
-      
+
   - template: build/integrationTests.yml
     parameters:
       displayName: 'macOS TFS 2017'
       os: 'macOS'
       pool: 'macOS-latest'
       start2017: 'true'
+      stop2017: 'true'
       name: 'macOSTFS2017'
       apiVersion: 'TFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
-
-  - template: build/integrationTests.yml
-    parameters:
-      displayName: 'Windows TFS 2017'
-      os: 'Windows'
-      name: 'WindowsTFS2017'
-      pool: 'windows-latest'
-      stop2017: 'true'
-      apiVersion: 'TFS2017'
-      depends: 'macOSTFS2017'
       account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
 
 - stage: Production
