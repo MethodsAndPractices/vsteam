@@ -99,7 +99,15 @@
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Prerequisites: </maml:para>
+        <maml:para>Once per session:</maml:para>
+        <maml:para>Set the account that all calls will use with Set-VSTeamAccount.</maml:para>
+        <maml:para>Set the API version that all calls will use based on your environment using Set-VSTeamAPIVersion.  Not setting this will use the default which at this time is 3.0, TFS2017.  Using the default could limit API functionality.</maml:para>
+        <maml:para>You can check what version of the API will be called with Get-VSTeamAPIVersion.</maml:para>
+        <maml:para>Optional:</maml:para>
+        <maml:para>Generally, once per session:</maml:para>
+        <maml:para>Use Set-VSTeamDefaultProject so you don't have to provide the -ProjectName parameter with the rest of the calls in the module.  However, the -ProjectName parameter is dynamic and you can use tab completion to cycle through all the projects.</maml:para>
+        <maml:para>Use Set-VSTeamDefaultAPITimeout to change the default timeout of 60 seconds for all calls.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
@@ -118,6 +126,22 @@
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Update-VSTeam</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamAPIVersion</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultAPITimeout</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -488,11 +512,36 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Prerequisites: </maml:para>
+        <maml:para>Once per session:</maml:para>
+        <maml:para>Set the account that all calls will use with Set-VSTeamAccount.</maml:para>
+        <maml:para>Set the API version that all calls will use based on your environment using Set-VSTeamAPIVersion.  Not setting this will use the default which at this time is 3.0, TFS2017.  Using the default could limit API functionality.</maml:para>
+        <maml:para>You can check what version of the API will be called with Get-VSTeamAPIVersion.</maml:para>
+        <maml:para>Optional:</maml:para>
+        <maml:para>Generally, once per session:</maml:para>
+        <maml:para>Use Set-VSTeamDefaultProject so you don't have to provide the -ProjectName parameter with the rest of the calls in the module.  However, the -ProjectName parameter is dynamic and you can use tab completion to cycle through all the projects.</maml:para>
+        <maml:para>Use Set-VSTeamDefaultAPITimeout to change the default timeout of 60 seconds for all calls.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples />
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamAPIVersion</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultProject</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultAPITimeout</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>

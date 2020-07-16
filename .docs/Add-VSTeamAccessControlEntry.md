@@ -73,4 +73,8 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/Prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
