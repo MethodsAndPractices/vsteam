@@ -1,5 +1,34 @@
 # Changelog
-
+## Add commands for workitem States (Add, Get, Hide, Remove, Show)
+Pre-requisites
+```
+        new file:   Source/Classes/ColorCompleter.ps1                  | Tab completes names of colors for icons/status dots   
+        new file:   Source/Classes/ColorTransformToHexAttribute.ps1    | Change color names to RGB values in Hex.  
+        modified:   Source/Classes/ProcessTemplateCompleter.ps1        | Supports updated VSTeamProcessCache
+        modified:   Source/Classes/WorkItemTypeCompleter.ps1           | No supports cache and completion of workitems from a named template
+        new file:   Source/Classes/VSTeamWorkItemTypeCache.ps1         | Cache for worktem type completer 
+        modified:   Source/Classes/VSTeamVersions                      | Now holds default project's process template. 
+        modified:   Source/Classes/_classes.json                       | add VSTeamWorkItemTypeCache and ColorCompleter
+        modified:   Source/Private/common.ps1                          | simpler _getAPIVersion
+        modified:   Source/Public/Set-VSTeamDefaultProject.ps1         | Now records default project's process template.
+        modified:   Source/Public/Get-VSTeamWorkItemType.ps1           | Updated version required for manipulating state 
+        modified:   .docs/Get-VSTeamWorkItemType.md                    | Updated help for command
+        modified:   unit/test/Get-VSTeamWorkItemType.Tests.ps1         | updated tests requied by changes 
+        modified:   unit/test/Add-VSTeamWorkItem.Tests.ps1
+        modified:   unit/test/Get-VSTeamAgent.Tests.ps1
+        modified:   unit/test/ProcessTemplateCompleter.Tests.ps1
+        modified:   unit/test/Set-VSTeamDefaultProject.Tests.ps1
+```
+New functionality
+```
+        new file:   Source/Public/Add-VSTeamWorkItemState.ps1          | Creates a new custom state for a work item type
+        new file:   Source/Public/Get-VSTeamWorkItemState.ps1          | Lists the states for a work item type
+        new file:   Source/Public/Hide-VSTeamWorkItemState.ps1         | Hides a system work item type (can't be removed)
+        new file:   Source/Public/Remove-VSTeamWorkItemState.ps1       | Removes a custom work item type (can't be hidden)
+        new file:   Source/Public/Show-VSTeamWorkItemState.ps1         | Unhides a previously hidden system work item type   
+        new file:   Source/formats/Team.Workitemstate.TableView.ps1xml | Layout  for the workitem states
+        modified:   unit/test/Get-VSTeamAgent.Tests.ps1                | Updated to add the new layout 
+```
 ## 6.5.0
 
 Added a default 60 second timeout on _callAPI. You can override the value with Set-VSTeamDefaultAPITimeout and clear with Clear-VSTeamDefaultAPITimeout.

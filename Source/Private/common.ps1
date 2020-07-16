@@ -152,58 +152,10 @@ function _getApiVersion {
    )
 
    if ($Target.IsPresent) {
-      return [VSTeamVersions]::Version
+         return [VSTeamVersions]::Version
    }
-   else {
+   else {return [VSTeamVersions]::$Service }
 
-      switch ($Service) {
-         'Build' {
-            return [VSTeamVersions]::Build
-         }
-         'Release' {
-            return [VSTeamVersions]::Release
-         }
-         'Core' {
-            return [VSTeamVersions]::Core
-         }
-         'Git' {
-            return [VSTeamVersions]::Git
-         }
-         'DistributedTask' {
-            return [VSTeamVersions]::DistributedTask
-         }
-         'VariableGroups' {
-            return [VSTeamVersions]::VariableGroups
-         }
-         'Tfvc' {
-            return [VSTeamVersions]::Tfvc
-         }
-         'Packaging' {
-            return [VSTeamVersions]::Packaging
-         }
-         'MemberEntitlementManagement' {
-            return [VSTeamVersions]::MemberEntitlementManagement
-         }
-         'ExtensionsManagement' {
-            return [VSTeamVersions]::ExtensionsManagement
-         }
-         'ServiceEndpoints' {
-            return [VSTeamVersions]::ServiceEndpoints
-         }
-         'Graph' {
-            return [VSTeamVersions]::Graph
-         }
-         'TaskGroups' {
-            return [VSTeamVersions]::TaskGroups
-         }
-         'Policy' {
-            return [VSTeamVersions]::Policy
-         } 
-         'Processes' {
-            return [VSTeamVersions]::Processes
-         } 
-      }
-   }
 }
 
 function _getInstance {
@@ -430,33 +382,22 @@ function _useBearerToken {
    return (!$env:TEAM_PAT) -and ($env:TEAM_TOKEN)
 }
 
+
 function _getWorkItemTypes {
    param(
-      [Parameter(Mandatory = $true)]
-      [string] $ProjectName
+      [string]$ProjectName = (_getDefaultProject)
    )
-
-   if (-not $(_getInstance)) {
-      Write-Output @()
-      return
-   }
-
+   $types = @()   
    # Call the REST API
    try {
-      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
-
-      # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
-      # To replace all the "": with "_end":
-      $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
-
-      if ($resp.count -gt 0) {
-         Write-Output ($resp.value).name
-      }
+      $resp   = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
+      $hidden = $resp.value.where({$_.referencename -eq "Microsoft.HiddenCategory"}).workitemtypes.name
+      $types += $resp.value.where(          {$_.referencename -ne "Microsoft.HiddenCategory"}).workitemtypes.name.where({$_ -notin $hidden})
    }
    catch {
       Write-Verbose $_
-      Write-Output @()
    }
+   return $types
 }
 
 # When writing unit tests mock this and return false.
@@ -593,7 +534,7 @@ function _getProcesses {
       $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
 
       if ($resp.count -gt 0) {
-         Write-Output ($resp.value).name
+         Write-Output $resp.value
       }
    }
    catch {
@@ -637,7 +578,8 @@ function _buildProcessNameDynamicParam {
 
    # Generate and set the ValidateSet
    if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes) {
-      $arrSet = _getProcesses
+       $arrSet = (_getProcesses).name
+
       [VSTeamProcessCache]::processes = $arrSet
       [VSTeamProcessCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
    }

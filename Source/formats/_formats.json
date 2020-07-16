@@ -93,6 +93,7 @@
       "Team.Wiql.ListView.ps1xml",
       "Team.WorkItem.TableView.ps1xml",
       "Team.WorkItem.ListView.ps1xml",
+      "Team.Workitemstate.TableView.ps1xml",
       "Team.WorkItemDeleted.TableView.ps1xml",
       "Team.WorkItemDeleted.ListView.ps1xml",
       "Team.JobRequest.TableView.ps1xml",
