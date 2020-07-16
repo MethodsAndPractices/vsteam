@@ -41,7 +41,7 @@ function Add-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
          # Invalidate any cache of projects.
-         [VSTeamProjectCache]::timestamp = -1
+         [VSTeamProjectCache]::Invalidate()
 
          return Get-VSTeamProject $ProjectName
       }

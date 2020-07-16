@@ -1,45 +1,53 @@
-# cache process names and URLs to reduce the number of
+# Cache process names and URLs to reduce the number of
 # rest APIs calls needed for parameter completion / validation 
 
-#Unit tests should populate cache with expected processes ideally with 
+# Unit tests should populate cache with expected processes ideally with 
 # a mock for  Get-VSTeamProcess which returns objects with name and (optionally) URL properties 
 # we let them mock the testing freshness but really they should call invalidate 
 class VSTeamProcessCache {
    static [int] $timestamp = -1
    static [object[]] $processes = @()
    static [hashtable] $urls = @{}
-   #Allow the class to be  updated with a list. If no list is given we'll get the one first 
-   static [Void] Update ([object[]]$NewItems) {
-      #even if we get nothing back ensure processes is still an array
-      [VSTeamProcessCache]::processes = @() + ($NewItems | Select-Object -ExpandProperty Name | Sort-Object)
-      #Handle newitems being null or empty
-      if ($Newitems) {
-         $NewItems | Where-Object {$_.psobject.Properties['url']} | ForEach-Object {
-               [VSTeamProcessCache]::urls[$_.name] = $_.url
-         }
+
+   static [Void] Update([object[]] $list) {     
+      # If a list is passed in just use that
+      # If not call Get-VSTeamProcess
+      if (-not $list) {
+         $list = Get-VSTeamProcess
       }
-      [VSTeamProcessCache]::timestamp = (Get-Date).Minute
+
+      if ($list) {
+         foreach ($process in $list) {
+            if ($process.psobject.Properties['url']) {
+               [VSTeamProcessCache]::urls[$process.name] = $process.url
+            }
+         }
+         [VSTeamProcessCache]::processes = @() + ($List | Select-Object -ExpandProperty Name | Sort-Object)
+      }
+      else {
+         [VSTeamProcessCache]::processes = @()
+      }
+
+      [VSTeamProcessCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
    }
-   static [Void] Update () {     
-      [VSTeamProcessCache]::processes = @()
-      #Get-VSTeamProcess should call update(listOfProcesses), 
-      #but it if doesn't (e.g. a simple mock) processes will still be empty, and we can call it
-      $list = Get-VSTeamProcess
-      if ([VSTeamProcessCache]::processes.Count -eq 0) {[VSTeamProcessCache]::Update($list) }
-   }
-   #"save current minute" refreshes on average after 30secs  but not after exact hours timeOfDayTotalMinutes might be a better base
-   static [bool] HasExpired () {
-      return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute
-   }
-   static [object] GetCurrent () {
-      if ([VSTeamProcessCache]::HasExpired()) { [VSTeamProcessCache]::Update() }
+   
+   static [object] GetCurrent() {
+      if (_hasProcessTemplateCacheExpired) { 
+         [VSTeamProcessCache]::Update($null) 
+      }
+
       return ([VSTeamProcessCache]::processes)
    }
-   static [object] GetURl ([string]$ProcessName) {
-      if ([VSTeamProcessCache]::HasExpired()) { [VSTeamProcessCache]::Update() }
+   
+   static [object] GetURl([string] $ProcessName) {
+      if (_hasProcessTemplateCacheExpired) {
+         [VSTeamProcessCache]::Update($null)
+      }
+          
       return ([VSTeamProcessCache]::urls[$ProcessName])
    }
-   static [void] Invalidate () {
+   
+   static [void] Invalidate() {
       [VSTeamProcessCache]::timestamp = -1 
    }
 }

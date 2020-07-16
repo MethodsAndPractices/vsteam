@@ -42,7 +42,7 @@ Describe "Get-VSTeamJobRequest" {
 
       It "return 2 jobs" {
          # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+         Mock _hasProjectCacheExpired { return $false }
 
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
@@ -63,7 +63,7 @@ Describe "Get-VSTeamJobRequest" {
 
       It "return all jobs" {
          # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+         Mock _hasProjectCacheExpired { return $false }
 
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
@@ -76,7 +76,7 @@ Describe "Get-VSTeamJobRequest" {
 
       It "return 2 jobs" {
          # This should stop the call to cache projects
-         [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+         Mock _hasProjectCacheExpired { return $false }
 
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 

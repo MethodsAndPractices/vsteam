@@ -39,7 +39,7 @@ function Get-VSTeamWorkItemType {
          #Get URL for the process from the cache. Cache will be up to date because it was used to validate $ProcessTemplate
          $url =  [VSTeamProcessCache]::GetURl($ProcessTemplate)
          if (-not $url) {Write-Warning "Could not find the Process for '$ProcessTemplate" ; return}
-         else   { $url += "/workitemtypes?api-version=" + (_getApiVersion ProcessDefinition)}
+         else   { $url += "/workitemtypes?api-version=" + (_getApiVersion Processes)}
 
          #Call the rest API
          if ($Expand) { $resp = _callAPI -Url $url -QueryString @{'$expand' = ($Expand -Join ',').ToLower() }    }

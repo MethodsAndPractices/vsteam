@@ -9,7 +9,7 @@ resources:
 variables:
   Folder: 'dist'
   TEAM_CIBUILD: 'true'
-  PESTER_VERSION: '5.0.0-rc9'
+  PESTER_VERSION: '5.0.2'
 
 stages:
 - stage: Build
@@ -208,7 +208,7 @@ stages:
       stop2017: 'true'
       apiVersion: 'TFS2017'
       depends: 'WindowsTFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
 
   - template: build/integrationTests.yml
     parameters:
@@ -218,7 +218,7 @@ stages:
       pool: 'windows-latest'
       apiVersion: 'TFS2017'
       depends: 'macOSTFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
 
   - template: build/integrationTests.yml
     parameters:
@@ -228,7 +228,7 @@ stages:
       start2017: 'true'
       name: 'macOSTFS2017'
       apiVersion: 'TFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
 
   - template: build/integrationTests.yml
     parameters:

@@ -38,7 +38,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '5.0-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '5.0'
-               [VSTeamVersions]::ProcessDefinition = '5.1-preview'
+               [VSTeamVersions]::Processes = '5.0-preview'
             }
             'AzD2019U1' {
                [VSTeamVersions]::Version = 'AzD2019'
@@ -56,8 +56,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '5.1-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '5.1'
-               [VSTeamVersions]::ProcessDefinition = '5.1-preview'
-
+               [VSTeamVersions]::Processes = '5.1-preview'
             }
             { $_ -eq 'TFS2018' -or $_ -eq 'TFS2018U1' } {
                [VSTeamVersions]::Version = 'TFS2018'
@@ -75,7 +74,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '4.0-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '4.0'
-               [VSTeamVersions]::ProcessDefinition = '4.0-preview'
+               [VSTeamVersions]::Processes = '4.0-preview'
             }
             { $_ -eq 'TFS2018U2' -or $_ -eq 'TFS2018U3' } {
                [VSTeamVersions]::Version = 'TFS2018'
@@ -93,7 +92,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '4.1-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '4.1'
-               [VSTeamVersions]::ProcessDefinition = '4.1-preview'
+               [VSTeamVersions]::Processes = '4.1-preview'
             }
             'TFS2017' {
                [VSTeamVersions]::Version = 'TFS2017'
@@ -111,7 +110,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '3.0-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '3.0'
-               [VSTeamVersions]::ProcessDefinition = '3.0-preview'
+               [VSTeamVersions]::Processes = ''
             }
             'TFS2017U1' {
                [VSTeamVersions]::Version = 'TFS2017'
@@ -129,7 +128,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '3.1-preview' # Actual area is extensionmanagement
                [VSTeamVersions]::Graph = '' # SubDomain vssps
                [VSTeamVersions]::Policy = '3.1'
-               [VSTeamVersions]::ProcessDefinition = '3.1-preview'
+               [VSTeamVersions]::Processes = ''
             }
             # Update 3 of TFS 2017 did not introduce a new API Version
             { $_ -eq 'TFS2017U2' -or $_ -eq 'TFS2017U3' } {
@@ -148,7 +147,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '3.2-preview' # Actual area is extensionmanagement
                [VSTeamVersions]::Graph = '' # SubDomain vssps
                [VSTeamVersions]::Policy = '3.2'
-               [VSTeamVersions]::ProcessDefinition = '3.2-preview'
+               [VSTeamVersions]::Processes = ''
             }
             # AZD, VSTS
             Default {
@@ -158,7 +157,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '5.1'
                [VSTeamVersions]::Release = '5.1'
                [VSTeamVersions]::DistributedTask = '6.0-preview'
-               [VSTeamVersions]::VariableGroups = '6.0-preview'
+               [VSTeamVersions]::VariableGroups = '5.1-preview.1'
                [VSTeamVersions]::TaskGroups = '6.0-preview'
                [VSTeamVersions]::Tfvc = '5.1'
                [VSTeamVersions]::Packaging = '6.0-preview' # SubDoman feeds
@@ -170,7 +169,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::ExtensionsManagement = '6.0-preview' # SubDomain extmgmt
                [VSTeamVersions]::Graph = '6.0-preview' # SubDomain vssps
                [VSTeamVersions]::Policy = '5.1'
-               [VSTeamVersions]::ProcessDefinition = '5.1-preview' #This may be valid for AzD2019
+               [VSTeamVersions]::Processes = '6.0-preview'
             }
          }
       }
@@ -191,5 +190,5 @@ function Set-VSTeamAPIVersion {
    Write-Verbose "ExtensionsManagement: $([VSTeamVersions]::ExtensionsManagement)"
    Write-Verbose "Graph: $([VSTeamVersions]::Graph)"
    Write-Verbose "Policy: $([VSTeamVersions]::Policy)"
-   Write-Verbose "ProcessDefinition: $([VSTeamVersions]::ProcessDefinition)"
+   Write-Verbose "Processes: $([VSTeamVersions]::Processes)"
 }

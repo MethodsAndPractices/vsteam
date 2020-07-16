@@ -5,14 +5,17 @@ class ProcessValidateAttribute : ValidateArgumentsAttribute {
       [object] $arguments,
       [EngineIntrinsics] $EngineIntrinsics) {
 
-      #Do not fail on null or empty, leave that to other validation conditions
-      if ([string]::IsNullOrEmpty($arguments)) {return}
-      #tests count HTTP calls and expect 1 from reading the cache, but for a call on each read, so only read once! # 
-      $CachedProcesses = [VSTeamProcessCache]::GetCurrent()
-      if (($CachedProcesses.count -gt 0) -and ($arguments -notin $CachedProcesses) ) {
+      # Do not fail on null or empty, leave that to other validation conditions
+      if ([string]::IsNullOrEmpty($arguments)) {
+         return 
+      }
+
+      $cachedProcesses = [VSTeamProcessCache]::GetCurrent()
+
+      if (($cachedProcesses.count -gt 0) -and ($arguments -notin $cachedProcesses)) {
          throw [ValidationMetadataException]::new(
             "'$arguments' is not a valid process. Valid processes are: '" +
-            ($CachedProcesses -join "', '") + "'")
+            ($cachedProcesses -join "', '") + "'")
       }
    }
 }

@@ -12,7 +12,7 @@ class VSTeamRepositories : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamGitRepository -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $items = Get-VSTeamGitRepository -ProjectName $this.ProjectName
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Repository')

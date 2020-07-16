@@ -129,7 +129,12 @@ Describe 'VSTeamBuildDefinition' {
             }
          }
 
-         It 'with type parameter should return build definitions by type' {
+         It 'with type parameter "build" should return build definitions by type' {
+            ## Arrange
+            # This has not been supported since version 2.0 of the API which we 
+            # no longer support. https://github.com/DarqueWarrior/vsteam/issues/87
+            Mock Write-Warning
+
             ## Act
             Get-VSTeamBuildDefinition -projectName vsts -type build
 
@@ -138,6 +143,19 @@ Describe 'VSTeamBuildDefinition' {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
                $Uri -like "*api-version=$(_getApiVersion Build)*" -and
                $Uri -like "*type=build*"
+            }
+         }
+
+         It 'with type parameter "xaml" should return removal warning' {
+            ## Arrange
+            # This has not been supported since version 2.0 of the API which we 
+            # no longer support. https://github.com/DarqueWarrior/vsteam/issues/87
+            Mock Write-Warning
+   
+            Get-VSTeamBuildDefinition -ProjectName vsts -Type xaml
+            
+            Should -Invoke Write-Warning -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Message -eq "You specified -Type xaml. This parameters is ignored and will be removed in future"
             }
          }
 
@@ -155,6 +173,11 @@ Describe 'VSTeamBuildDefinition' {
          }
 
          It 'with both parameters should return build definitions by filter' {
+            ## Arrange
+            # This has not been supported since version 2.0 of the API which we 
+            # no longer support. https://github.com/DarqueWarrior/vsteam/issues/87
+            Mock Write-Warning
+            
             ## Act
             Get-VSTeamBuildDefinition -projectName vsts -filter 'click*' -type build
 

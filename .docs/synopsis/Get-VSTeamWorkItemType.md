@@ -1,1 +1,1 @@
-Gets a list of all workitem types or a single workitem type.
+Gets a list of all work item types or a single work item type.

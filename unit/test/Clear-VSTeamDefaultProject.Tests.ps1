@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Describe 'VSTeamProject' {
+Describe 'VSTeamDefaultProject' {
    BeforeAll {
       Import-Module SHiPS
 

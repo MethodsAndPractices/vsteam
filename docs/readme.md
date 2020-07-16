@@ -149,6 +149,14 @@ Add Permissions to a Work Item Area
 
 Add Permissions to an Iteration
 
+### [Add-VSTeamWorkItemType](Add-VSTeamWorkItemType.md)
+
+Adds a new work item type to a custom process template.
+
+### [Clear-VSTeamDefaultAPITimeout](Clear-VSTeamDefaultAPITimeout.md)
+
+Clears the value stored in the default timeout parameter value.
+
 ### [Clear-VSTeamDefaultProject](Clear-VSTeamDefaultProject.md)
 
 Clears the value stored in the default project parameter value.
@@ -367,7 +375,7 @@ Returns one or more a work items from your project.
 
 ### [Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)
 
-Gets a list of all Work Item Types or a single work item type.
+Gets a list of all work item types or a single work item type.
 
 ### [Invoke-VSTeamRequest](Invoke-VSTeamRequest.md)
 
@@ -478,6 +486,10 @@ Removes a variable group
 
 Deletes the specified work item and sends it to the Recycle Bin, so that it can be restored back, if required. Optionally, if the destroy parameter has been set to true, it destroys the work item permanently. WARNING: If the destroy parameter is set to true, work items deleted by this command will NOT go to recycle-bin and there is no way to restore/recover them after deletion. It is recommended NOT to use this parameter. If you do, please use this parameter with extreme caution.
 
+### [Remove-VSTeamWorkItemType](Remove-VSTeamWorkItemType.md)
+
+Removes a custom work item type from custom process template.
+
 ### [Set-VSTeamAccount](Set-VSTeamAccount.md)
 
 Stores your account name and personal access token for use with the other
@@ -495,6 +507,10 @@ Sets the API versions to support either TFS2017, TFS2018, AzD2019 or AzD.
 
 Sets the status of approval to Approved, Rejected, Pending, or ReAssigned.
 
+### [Set-VSTeamDefaultAPITimeout](Set-VSTeamDefaultAPITimeout.md)
+
+Sets the default timeout to be used with other calls in the module.
+
 ### [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 
 Sets the default project to be used with other calls in the module.
@@ -510,6 +526,10 @@ Sets the permission inheritance to true or false.
 ### [Set-VSTeamReleaseStatus](Set-VSTeamReleaseStatus.md)
 
 Sets the status of a release to Active or Abandoned.
+
+### [Set-VSTeamWorkItemType](Set-VSTeamWorkItemType.md)
+
+Modifies an existing work item type in a custom process template.
 
 ### [Show-VSTeam](Show-VSTeam.md)
 

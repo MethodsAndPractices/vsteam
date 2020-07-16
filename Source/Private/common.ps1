@@ -62,6 +62,7 @@ function _callAPI {
       $params = $PSBoundParameters
       $params.Add('Uri', $Url)
       $params.Add('UserAgent', (_getUserAgent))
+      $params.Add('TimeoutSec', (_getDefaultTimeout))
 
       if (_useWindowsAuthenticationOnPremise) {
          $params.Add('UseDefaultCredentials', $true)
@@ -143,7 +144,7 @@ function _getApiVersion {
    [CmdletBinding(DefaultParameterSetName = 'Service')]
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateScript({$_ -in ([VSTeamVersions] | Get-Member -Static  -MemberType Property).name})]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy', 'Processes')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -153,17 +154,74 @@ function _getApiVersion {
    if ($Target.IsPresent) {
          return [VSTeamVersions]::Version
    }
-   else {return [VSTeamVersions]::$Service }
-
+   else {
+      switch ($Service) {
+         'Build' {
+            return [VSTeamVersions]::Build
+         }
+         'Release' {
+            return [VSTeamVersions]::Release
+         }
+         'Core' {
+            return [VSTeamVersions]::Core
+         }
+         'Git' {
+            return [VSTeamVersions]::Git
+         }
+         'DistributedTask' {
+            return [VSTeamVersions]::DistributedTask
+         }
+         'VariableGroups' {
+            return [VSTeamVersions]::VariableGroups
+         }
+         'Tfvc' {
+            return [VSTeamVersions]::Tfvc
+         }
+         'Packaging' {
+            return [VSTeamVersions]::Packaging
+         }
+         'MemberEntitlementManagement' {
+            return [VSTeamVersions]::MemberEntitlementManagement
+         }
+         'ExtensionsManagement' {
+            return [VSTeamVersions]::ExtensionsManagement
+         }
+         'ServiceEndpoints' {
+            return [VSTeamVersions]::ServiceEndpoints
+         }
+         'Graph' {
+            return [VSTeamVersions]::Graph
+         }
+         'TaskGroups' {
+            return [VSTeamVersions]::TaskGroups
+         }
+         'Policy' {
+            return [VSTeamVersions]::Policy
+         } 
+         'Processes' {
+            return [VSTeamVersions]::Processes
+         } 
+      }
+   }
 }
 
 function _getInstance {
    return [VSTeamVersions]::Account
 }
 
+function _getDefaultTimeout {
+   if ($Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]) {
+      return $Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]
+   } 
+   else {
+      return 60
+   }
+}
+
 function _getDefaultProject {
    return $Global:PSDefaultParameterValues["*-vsteam*:projectName"]
 }
+
 function _hasAccount {
    if (-not $(_getInstance)) {
       throw 'You must call Set-VSTeamAccount before calling any other functions in this module.'
@@ -394,11 +452,15 @@ function _getWorkItemTypes {
 # from trying to call the getProject function.
 # Mock _hasProjectCacheExpired { return $false }
 function _hasProjectCacheExpired {
-   return $([VSTeamProjectCache]::timestamp) -ne (Get-Date).Minute
+   return $([VSTeamProjectCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
 }
 
 function _hasProcessTemplateCacheExpired {
-   return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute
+   return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
+}
+
+function _hasQueryCacheExpired {
+   return $([VSTeamQueryCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
 }
 
 function _getProjects {
@@ -465,14 +527,7 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if (_hasProjectCacheExpired) {
-      $arrSet = _getProjects
-      [VSTeamProjectCache]::projects = $arrSet
-      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
-   }
-   else {
-      $arrSet = [VSTeamProjectCache]::projects
-   }
+   $arrSet = [VSTeamProjectCache]::GetCurrent($false)      
 
    if ($arrSet) {
       Write-Verbose "arrSet = $arrSet"
@@ -569,10 +624,10 @@ function _buildProcessNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).Minute) {
-      $arrSet = (_getProcesses).name
+   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes) {
+      $arrSet = _getProcesses
       [VSTeamProcessCache]::processes = $arrSet
-      [VSTeamProcessCache]::timestamp = (Get-Date).Minute
+      [VSTeamProcessCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
    }
    else {
       $arrSet = [VSTeamProcessCache]::processes
@@ -826,12 +881,16 @@ function _clearEnvironmentVariables {
    )
 
    $env:TEAM_PROJECT = $null
+   $env:TEAM_TIMEOUT = $null
    [VSTeamVersions]::DefaultProject = ''
+   [VSTeamVersions]::DefaultTimeout = ''
    $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+   $Global:PSDefaultParameterValues.Remove("*-vsteam*:vsteamApiTimeout")
 
    # This is so it can be loaded by default in the next session
    if ($Level -ne "Process") {
       [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
+      [System.Environment]::SetEnvironmentVariable("TEAM_TIMEOUT", $null, $Level)
    }
 
    _setEnvironmentVariables -Level $Level -Pat '' -Acct '' -UseBearerToken '' -Version ''

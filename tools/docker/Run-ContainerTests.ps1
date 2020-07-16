@@ -169,7 +169,7 @@ function Start-DockerVSTeamTests {
          $pesterArgs.Run.Exit = $true
          $pesterArgs.Run.Path = '.\unit'
          $pesterArgs.Run.PassThru = $false
-         $pesterArgs.Output.Verbosity = 'Minimal'
+         $pesterArgs.Output.Verbosity = 'Detailed'
          $pesterArgs.TestResult.Enabled = $true
          $pesterArgs.TestResult.OutputPath = '#Container#_result.xml'
 
@@ -214,7 +214,8 @@ function Start-DockerVSTeamTests {
          # On Linux the logs show up in the same PowerShell window so we need it to exit 
          # On Windows new windows are opened and you want -NoExit so they stay open for you to
          # review the logs.
-         if (Get-OperatingSystem -ne 'Windows') {
+         $os = Get-OperatingSystem
+         if ($os -ne 'Windows') {
             $argList = "-Command `"`$Host.UI.RawUI.WindowTitle = 'VSTeam Unit Tests | PowerShell $($versiontable.PSEdition) $psVersion | $($versiontable.Os)'; docker logs $Container -f`""
          }
          else {
