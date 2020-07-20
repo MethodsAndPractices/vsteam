@@ -1,10 +1,10 @@
 <!-- #include "./common/header.md" -->
 
-# Add-VSTeamWorkItem
+# Get-VsteamWorkItemState
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VsteamWorkItemState.md" -->
+<!-- #include "./synopsis/Get-VSTeamWorkItemState.md" -->
 
 ## SYNTAX
 
@@ -31,7 +31,7 @@ Order Name      Category   Color  Customization Hidden
 5     Removed   Removed    ffffff system
 ```
 This lists the states for the built in WorkItem type "bug" in the current project
-Notice that the states all have a customization of system; therse states can be hidden but not removed. 
+Notice that the states all have a customization of system; therse states can be hidden but not removed.
 
 ### Example 2
 ```powershell
@@ -45,10 +45,10 @@ Order Name      Category   Color  Customization Hidden
 4     Failed    Removed    ff0000 custom
 
 ```
-This lists the states for the custom WorkItem type "update" in the custom process "Scrum4". 
-Notice that the states all have a customization of custom; therse states can be removed but hidden. 
+This lists the states for the custom WorkItem type "update" in the custom process "Scrum4".
+Notice that the states all have a customization of custom; therse states can be removed but hidden.
 
-### Example 3 
+### Example 3
 ```powershell
 Get-VSTeamProcess | Get-VSTeamWorkItemType -WorkItemType bug | Get-VsteamWorkItemState | Sort-object name,processtemplate|  Format-table ProcessTemplate,WorkItemType,Order,name,Color -AutoSize
 
@@ -60,11 +60,11 @@ CMMI            Bug              2 Active    007acc
 Scrum           Bug              2 Approved  b2b2b2
 ...
 ```
-This command gets all the process templates, gets the "bug" WorkItem type in each one, and gets the states available for all the different versions of bug. It sorts the results to group the sates together - and formats the results as a table. 
+This command gets all the process templates, gets the "bug" WorkItem type in each one, and gets the states available for all the different versions of bug. It sorts the results to group the sates together - and formats the results as a table.
 This shows that In the default "Agile" and "CMMI" templates bugs have a state of "Active" but do not have "Approved", but the reverse is true in the "Scrum" template.
 
 
-### Example 3 
+### Example 3
 ```powershell
 Get-VSTeamProcess | Get-VSTeamWorkItemType | Get-VsteamWorkItemState | where {$_.hidden} |  Format-table ProcessTemplate,WorkItemType,Order,name,Color
 
@@ -73,7 +73,7 @@ ProcessTemplate WorkItemType order name    color
 Scrum2          Epic             6 Removed ffffff
 
 ```
-This command gets all the process templates, and all their WorkItem types and gets system states which have been hidden, formatting the result as a table. 
+This command gets all the process templates, and all their WorkItem types and gets system states which have been hidden, formatting the result as a table.
 In the example, the custom template "Scrum2" has hidden the "Removed" state for Epics.
 
 ## PARAMETERS

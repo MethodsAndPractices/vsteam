@@ -1,6 +1,6 @@
 
 function Show-VsteamWorkItemState {
-   [CmdletBinding(SupportsShouldProcess=$true)]
+   [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='High')]
    param(
       [parameter(ValueFromPipelineByPropertyName=$true)]
       [ProcessValidateAttribute()]
@@ -24,7 +24,7 @@ function Show-VsteamWorkItemState {
             Write-Warning "'$n' does not  match a hidden state for the WorkItem type '$WorkItemType'."
          }
          elseif ($PSCmdlet.ShouldProcess($n,"Modify Work Item '$WorkItemType' in process template '$ProcessTemplate'; show state")) {
-            $url = $result.url + "/states/$($state.id)?api-version=" + (_getApiVersion Processes) 
+            $url = $result.url + "/states/$($state.id)?api-version=" + (_getApiVersion Processes)
             $null = _callAPI -Url $url -method Delete  #no result to send back
          }
       }

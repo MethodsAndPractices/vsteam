@@ -1,10 +1,9 @@
 <!-- #include "./common/header.md" -->
 
-# Add-VSTeamWorkItem
+# Hide-VsteamWorkItemState
 
 ## SYNOPSIS
-
-<!-- #include "./synopsis/Hide-VsteamWorkItemState.md" -->
+<!-- #include "./synopsis/Hide-VSTeamWorkItemState.md" -->
 
 ## SYNTAX
 
@@ -14,7 +13,7 @@ Hide-VsteamWorkItemState [-ProcessTemplate <Object>] [-WorkItemType] <Object> [-
 ```
 
 ## DESCRIPTION
-Each WorkItem type in each process templates has a set of possible states.  Items may have system defined states and/or custom (user defined) states. System states cannot be removed, but can be hidden and this command is used to hide them 
+Each WorkItem type in each process templates has a set of possible states.  Items may have system defined states and/or custom (user defined) states. System states cannot be removed, but can be hidden and this command is used to hide them
 
 ## EXAMPLES
 
@@ -34,7 +33,7 @@ In this example the user has tried to hide the state "Approved" for bugs in the 
 
 ### Example 2
 ```powershell
-PS C:\> Hide-VsteamWorkItemState -WorkItemType Bug -Name Approved -ProcessTemplate Scrum2 -Force 
+PS C:\> Hide-VsteamWorkItemState -WorkItemType Bug -Name Approved -ProcessTemplate Scrum2 -Force
 
 Order Name     Category Color  Customization Hidden
 ----- ----     -------- -----  ------------- ------
@@ -42,7 +41,7 @@ Order Name     Category Color  Customization Hidden
 
 ```
 
-This version hides the state "Approved" for bugs in the custom template named Scrum2. -Force has specified to skip the confirmation, and the command returns the modified state. Notice that the customization column changes from "system" to "inherited" when a state is hidden. 
+This version hides the state "Approved" for bugs in the custom template named Scrum2. -Force has specified to skip the confirmation, and the command returns the modified state. Notice that the customization column changes from "system" to "inherited" when a state is hidden.
 
 If the state is already hidden a warning message will appear and the state will not be changed.
 

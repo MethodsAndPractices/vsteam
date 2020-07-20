@@ -1,10 +1,10 @@
 <!-- #include "./common/header.md" -->
 
-# Add-VSTeamWorkItem
+# Show-VsteamWorkItemState
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Show-VsteamWorkItemState.md" -->
+<!-- #include "./synopsis/Show-VSTeamWorkItemState.md" -->
 
 ## SYNTAX
 
@@ -14,21 +14,23 @@ Show-VsteamWorkItemState -ProcessTemplate <Object> -WorkItemType <Object> [-Name
 ```
 
 ## DESCRIPTION
-Each WorkItem type in each process templates has a set of possible states.  Items may have system defined states and/or custom (user defined) states. System states cannot be removed, but can be hidden and this command is used to unhide states which have previously been hidden 
+Each WorkItem type in each process templates has a set of possible states.  Items may have system defined states and/or custom (user defined) states. System states cannot be removed, but can be hidden and this command is used to unhide states which have previously been hidden
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Show-VsteamWorkItemState -WorkItemType Bug -Name Approved -ProcessTemplate Scrum2
+PS C:\> Show-VsteamWorkItemState -WorkItemType Bug -Name Approved -ProcessTemplate Scrum2 -Force
 
 ```
-This unhides the "Approved" state for bug in the custom process template "Scrum2". If the state is not hidden a warning message will appear and the state will not be changed. 
+This unhides the "Approved" state for bug in the custom process template "Scrum2", without the confirmation prompt.
+If the state is not hidden a warning message will appear and the state will not be changed.
 
 ## PARAMETERS
 
 ### -Confirm
-Prompts you for confirmation before running the cmdlet. 
+Prompts you for confirmation before running the cmdlet. By default the cmdlet displays the confirmation prompt so this is only required if the $ConfirmPreference automatic variable has been changed.
+
 
 ```yaml
 Type: SwitchParameter
@@ -43,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Force
-Suppresses the confirmation dialog so the command can be run without user intervention. By default SHOW does not require confirmation unless the $ConfirmPreference variable is changed -Force will not be needed. Hide and Show have different behaviors because hiding a state which is needed is considered harmful.
+Suppresses the confirmation dialog so the command can be run without user intervention.
 
 
 ```yaml
