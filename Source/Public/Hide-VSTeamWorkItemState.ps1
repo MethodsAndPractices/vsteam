@@ -27,7 +27,7 @@ function Hide-VsteamWorkItemState {
          if (-not $State) {
             Write-Warning "'$n' does not match a system state for the WorkItem type '$WorkItemType'."
          }
-         elseif ($Force -or $PSCmdlet.ShouldProcess($state.name,"Modify Work Item '$WorkItemType' in process template '$ProcessTemplate'; hide state")) {
+         elseif ($Force -or $PSCmdlet.ShouldProcess($state.name,"Modify WorkItem type '$WorkItemType' in process template '$ProcessTemplate'; hide state")) {
             $url = $resp.url + "/states/$($state.id)?api-version=" + (_getApiVersion Processes) 
             $resp = _callAPI -Url $url -method Put    -body (ConvertTo-Json @{'hidden'=$true}) -ContentType "application/json"
             $resp.psobject.TypeNames.Insert(0,'Team.Workitemstate')

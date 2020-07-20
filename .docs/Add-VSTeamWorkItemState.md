@@ -21,10 +21,17 @@ Each WorkItem type in each process templates has a set of possible states.  Item
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+Add-VsteamWorkItemState -WorkItemType bug -Color Blue -Name Postponed -ProcessTemplate Scrum2 -Force
+
+
+Order Name      Category   Color  Customization Hidden
+----- ----      --------   -----  ------------- ------
+4     Postponed InProgress 0000ff custom
 ```
 
-{{ Add example description here }}
+This adds a state "postponed", shown in blue, as a custom state to the "Bug" WorkItem type in the scrum process template. 
+It is added in to the in-progress category - by default "Committed" is at position 3 in the list of states, as in-progress state, and 
+"Done" is at postition 4 as a completed state, so this the state is inserted between them and "Done" and "Removed" each move down by one position.
 
 ## PARAMETERS
 

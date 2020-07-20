@@ -19,10 +19,24 @@ Each WorkItem type in each process templates has a set of possible states.  Item
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Remove-VsteamWorkItemState -WorkItemType Bug  -Name postponed -ProcessTemplate Scrum2
+
+Confirm
+Are you sure you want to perform this action?
+Performing the operation "Modify WorkItem type 'Bug' in process template 'Scrum2'; delete state" on target "postponed".
+[Y] Yes [A] Yes to All [N] No [L] No to All [S] Suspend [?] Help (default is "Yes"): y
 ```
 
-{{ Add example description here }}
+This removes the state "Postponed" from the WorkItem type "Bug" in the template named "Scrum2" - because -Force was not specified a confirmation prompt is shown.
+
+### Example 2
+```powershell
+PS C:\> Get-VsteamWorkItemState -WorkItemType Bug  -ProcessTemplate Scrum2 | Where-Object customizationType -eq "custom" | Remove-VsteamWorkItemState -Force
+
+```
+
+As an alternative to the first example, this removes any and all custom types from the WorkItem type "Bug" in the template named "Scrum2", and -Force is use to remove any prompt which might appear.
+
 
 ## PARAMETERS
 

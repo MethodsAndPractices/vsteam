@@ -23,7 +23,7 @@ PS C:\> Hide-VsteamWorkItemState -WorkItemType Bug -Name Approved
 
 Confirm
 Are you sure you want to perform this action?
-Performing the operation "Modify Work Item 'Bug' in process template 'Scrum'; hide state" on target "Approved".
+Performing the operation "Modify WorkItem type 'Bug' in process template 'Scrum'; hide state" on target "Approved".
 [Y] Yes [A] Yes to All [N] No [L] No to All [S] Suspend [?] Help (default is "Yes"): y
 WARNING: An error occurred: Response status code does not indicate success: 403 (Forbidden).
 WARNING: VS402356: You do not have the permissions required to perform the attempted operation on this process.
