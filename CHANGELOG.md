@@ -24,18 +24,23 @@ New functionality
         new file:   Source/Public/Add-VSTeamWorkItemState.ps1          | Creates a new custom state for a work item type
         new file:   .docs/Add-VSTeamWorkItemState.ps1             
         new file:   .docs/synopsis/Add-VSTeamWorkItemState.ps1    
+        new file:   unit/Test/Add-VSTeamWorkItemState.ps1             
         new file:   Source/Public/Get-VSTeamWorkItemState.ps1          | Lists the states for a work item type
         new file:   .docs/Get-VSTeamWorkItemState.ps1   
         new file:   .docs/synopsis/Get-VSTeamWorkItemState.ps1 
+        new file:   unit/Test/Get-VSTeamWorkItemState.ps1             
         new file:   Source/Public/Hide-VSTeamWorkItemState.ps1         | Hides a state for system work item type (can't be removed)
         new file:   .docs//Hide-VSTeamWorkItemState.ps1
         new file:   .docs/synopsis/Hide-VSTeamWorkItemState.ps1
+        new file:   unit/Test/Hide-VSTeamWorkItemState.ps1             
         new file:   Source/Public/Remove-VSTeamWorkItemState.ps1       | Removes a custom work item type (can't be hidden)
         new file:   .docs/Remove-VSTeamWorkItemState.ps1       
         new file    .docs/synopsis/Remove-VSTeamWorkItemState.ps1     
+        new file:   unit/Test/Remove-VSTeamWorkItemState.ps1             
         new file:   Source/Public/Show-VSTeamWorkItemState.ps1         | Unhides a previously hidden system work item type   
         new file:   .docs/Show-VSTeamWorkItemState.ps1 
         new file:   .docs/synopsis/Show-VSTeamWorkItemState.ps1 
+        new file:   unit/Test/Show-VSTeamWorkItemState.ps1              
         new file:   Source/formats/Team.Workitemstate.TableView.ps1xml | Layout  for the workitem states
         modified:   unit/test/Get-VSTeamAgent.Tests.ps1                | Updated to add the new layout 
 ```

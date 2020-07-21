@@ -7,6 +7,7 @@ function Get-VsteamWorkItemState {
       $ProcessTemplate = $env:TEAM_PROCESS,
 
       [parameter(Mandatory = $true,ValueFromPipelineByPropertyName=$true, Position=1)]
+      [WorkItemTypeValidateAttribute()]
       [ArgumentCompleter([WorkItemTypeCompleter])]
       $WorkItemType
    )

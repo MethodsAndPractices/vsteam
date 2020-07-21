@@ -28,7 +28,7 @@ function Add-VsteamWorkItemState {
    process{
       if ($Force -or $PSCmdlet.ShouldProcess($name,"Modify WorkItem type '$WorkItemType' in process template '$ProcessTemplate'; Add new state")) {
          #Get the workItem type to be updated, if it  is a system one we need to make it an inherited one
-         $wit =  $wit = [VSTeamWorkItemTypeCache]::GetByProcess($ProcessTemplate) | Where-Object name -eq $WorkItemType
+         $wit = [VSTeamWorkItemTypeCache]::GetByProcess($ProcessTemplate) | Where-Object name -eq $WorkItemType
          if ($wit.customization -eq 'system') {
             $url = ($wit.url -replace '/workItemTypes/.*$', '/workItemTypes?api-version=') +  (_getApiVersion Processes)
             $body = @{
