@@ -152,10 +152,11 @@ function _getApiVersion {
    )
 
    if ($Target.IsPresent) {
-         return [VSTeamVersions]::Version
+      return [VSTeamVersions]::Version
    }
-   else {return [VSTeamVersions]::$Service }
-
+   else {
+      return [VSTeamVersions]::$Service 
+   }
 }
 
 function _getInstance {
@@ -382,21 +383,28 @@ function _useBearerToken {
    return (!$env:TEAM_PAT) -and ($env:TEAM_TOKEN)
 }
 
-
 function _getWorkItemTypes {
    param(
-      [string]$ProjectName = (_getDefaultProject)
+      [Parameter(Mandatory = $true)]
+      [string] $ProjectName
    )
+   if (-not $(_getInstance)) {
+      Write-Output @()
+      return
+   }
+   
    $types = @()   
+   
    # Call the REST API
    try {
-      $resp   = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
-      $hidden = $resp.value.where({$_.referencename -eq "Microsoft.HiddenCategory"}).workitemtypes.name
-      $types += $resp.value.where(          {$_.referencename -ne "Microsoft.HiddenCategory"}).workitemtypes.name.where({$_ -notin $hidden})
+      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
+      $hidden = $resp.value.where( { $_.referencename -eq "Microsoft.HiddenCategory" }).workitemtypes.name
+      $types += $resp.value.where( { $_.referencename -ne "Microsoft.HiddenCategory" }).workitemtypes.name.where( { $_ -notin $hidden })
    }
    catch {
       Write-Verbose $_
    }
+
    return $types
 }
 
@@ -520,109 +528,6 @@ function _buildProjectNameDynamicParam {
    #>
 }
 
-function _getProcesses {
-   if (-not $(_getInstance)) {
-      Write-Output @()
-      return
-   }
-
-   # Call the REST API
-   try {
-      $query = @{ }
-      $query['stateFilter'] = 'All'
-      $query['$top'] = '9999'
-      $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
-
-      if ($resp.count -gt 0) {
-         Write-Output $resp.value
-      }
-   }
-   catch {
-      Write-Output @()
-   }
-}
-function _buildProcessNameDynamicParam {
-   param(
-      [string] $ParameterName = 'ProcessName',
-      [string] $ParameterSetName,
-      [bool] $Mandatory = $true,
-      [string] $AliasName,
-      [int] $Position = 0
-   )
-
-   # Create the dictionary
-   $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
-
-   # Create the collection of attributes
-   $AttributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
-
-   # Create and set the parameters' attributes
-   $ParameterAttribute = New-Object System.Management.Automation.ParameterAttribute
-   $ParameterAttribute.Mandatory = $Mandatory
-   $ParameterAttribute.Position = $Position
-
-   if ($ParameterSetName) {
-      $ParameterAttribute.ParameterSetName = $ParameterSetName
-   }
-
-   $ParameterAttribute.ValueFromPipelineByPropertyName = $true
-   $ParameterAttribute.HelpMessage = "The name of the process.  You can tab complete from the processes in your Team Services or TFS account when passed on the command line."
-
-   # Add the attributes to the attributes collection
-   $AttributeCollection.Add($ParameterAttribute)
-
-   if ($AliasName) {
-      $AliasAttribute = New-Object System.Management.Automation.AliasAttribute(@($AliasName))
-      $AttributeCollection.Add($AliasAttribute)
-   }
-
-   # Generate and set the ValidateSet
-   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes) {
-       $arrSet = (_getProcesses).name
-
-      [VSTeamProcessCache]::processes = $arrSet
-      [VSTeamProcessCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
-   }
-   else {
-      $arrSet = [VSTeamProcessCache]::processes
-   }
-
-   if ($arrSet) {
-      Write-Verbose "arrSet = $arrSet"
-
-      $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
-
-      # Add the ValidateSet to the attributes collection
-      $AttributeCollection.Add($ValidateSetAttribute)
-   }
-
-   # Create and return the dynamic parameter
-   $RuntimeParameter = New-Object System.Management.Automation.RuntimeDefinedParameter($ParameterName, [string], $AttributeCollection)
-   $RuntimeParameterDictionary.Add($ParameterName, $RuntimeParameter)
-   return $RuntimeParameterDictionary
-
-   <#
-   Builds a dynamic parameter that can be used to tab complete the ProjectName
-   parameter of functions from a list of projects from the added TFS Account.
-   You must call Set-VSTeamAccount before trying to use any function that relies
-   on this dynamic parameter or you will get an error.
-
-   This can only be used in Advanced Fucntion with the [CmdletBinding()] attribute.
-   The function must also have a begin block that maps the value to a common variable
-   like this.
-
-      DynamicParam {
-         # Generate and set the ValidateSet
-         $arrSet = Get-VSTeamProjects | Select-Object -ExpandProperty Name
-
-         _buildProjectNameDynamicParam -arrSet $arrSet
-      }
-      process {
-         # Bind the parameter to a friendly variable
-         $ProjectName = $PSBoundParameters[$ParameterName]
-      }
-   #>
-}
 function _buildDynamicParam {
    param(
       [string] $ParameterName = 'QueueName',

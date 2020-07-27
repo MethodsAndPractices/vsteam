@@ -30,11 +30,10 @@ PS R:\repos\vsteam> Get-VSTeamWorkItemType -ProcessTemplate Basic
 
 This command gets a list of the WorkItems available to projects which use the 'Basic' Template
 
-
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```PowerShell
-PS R:\repos\vsteam> Get-VSTeamProcess scr* |  Get-VSTeamWorkItemType  -WorkItemType pro* | ft name,processtemplate
+PS R:\repos\vsteam> Get-VSTeamProcess scr* | Get-VSTeamWorkItemType  -WorkItemType pro* | ft name,ProcessTemplate
 name                 ProcessTemplate
 ----                 ---------------
 Product Backlog Item Scrum
@@ -43,7 +42,7 @@ Product Backlog Item Scrum4
 
 ```
 
-The first command gets a the process templates which match SCR*. The second finds WorkItem Types 
+The first command gets a the process templates which match SCR*. The second finds WorkItem Types
 in those process which match "pro*", and the third shows a table of Type name and process template with that type
 
 ### -------------------------- EXAMPLE 4 --------------------------
@@ -68,6 +67,7 @@ The Process holding the WorkItems of interest.
 Type: String
 Parameter Sets: Process
 ```
+
 ### -WorkItemType
 
 The type of WorkItem to retrieve.
@@ -77,17 +77,15 @@ Type: String
 Aliases: Name
 ```
 
-
 ### -Expand
 
-If specified the workitem(s) returned will have behavior and/or layout and/or state information attached.
+If specified the work items returned will have behavior and/or layout and/or state information attached.
 
 ```yaml
 Type: String[]
 Parameter Sets: Process
 Accepted values: 'behaviors','layout','states'
 ```
-
 
 ## INPUTS
 
@@ -101,7 +99,7 @@ Accepted values: 'behaviors','layout','states'
 
 The JSON returned has empty named items i.e.
 "": "To Do"
-This causes issues with the ConvertFrom-Json CmdLet.  Therefore, all "": are replaced with "_end":
+This causes issues with the ConvertFrom-Json CmdLet. Therefore, all "": are replaced with "_end":
 
 ## RELATED LINKS
 
