@@ -9,7 +9,7 @@ resources:
 variables:
   Folder: 'dist'
   TEAM_CIBUILD: 'true'
-  PESTER_VERSION: '5.0.0-rc9'
+  PESTER_VERSION: '5.0.2'
 
 stages:
 - stage: Build
@@ -154,7 +154,7 @@ stages:
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
                 # Install each module
-                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
+                $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
               workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: PowerShell@2
@@ -165,6 +165,8 @@ stages:
                 # Load the psd1 file so you can read the version
                 $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
 
+                Write-Host "Package Version Number: $($manifest.ModuleVersion).$(Build.BuildId)"
+
                 Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
               workingDirectory: '$(Pipeline.Workspace)/Module'
 
@@ -174,7 +176,10 @@ stages:
               targetType: 'inline'
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
-                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1
+
+                Write-Host "Convert psd1 into a NuSpec"
+
+                ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1 -Verbose
               workingDirectory: '$(Pipeline.Workspace)/Module'
 
           - task: NuGetCommand@2
@@ -201,43 +206,12 @@ stages:
 
   - template: build/integrationTests.yml
     parameters:
-      displayName: 'Linux TFS 2017'
+      displayName: 'Linux TFS 2018'
       os: 'Linux'
-      name: 'LinuxTFS2017'
       pool: 'ubuntu-16.04'
-      stop2017: 'true'
-      apiVersion: 'TFS2017'
-      depends: 'WindowsTFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
-
-  - template: build/integrationTests.yml
-    parameters:
-      displayName: 'Windows TFS 2017'
-      os: 'Windows'
-      name: 'WindowsTFS2017'
-      pool: 'windows-latest'
-      apiVersion: 'TFS2017'
-      depends: 'macOSTFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
-
-  - template: build/integrationTests.yml
-    parameters:
-      displayName: 'macOS TFS 2017'
-      os: 'macOS'
-      pool: 'macOS-latest'
-      start2017: 'true'
-      name: 'macOSTFS2017'
-      apiVersion: 'TFS2017'
-      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/defaultcollection'
-
-  - template: build/integrationTests.yml
-    parameters:
-      displayName: 'Windows TFS 2018'
-      os: 'Windows'
-      pool: 'windows-latest'
       start2018: 'true'
       stop2018: 'true'
-      name: 'windowsTFS2018'
+      name: 'LinuxTFS2018'
       apiVersion: 'TFS2018'
       account: 'http://winbldbox3.centralus.cloudapp.azure.com:8080/tfs/defaultcollection'
 
@@ -249,6 +223,17 @@ stages:
       name: 'windowsAzD'
       apiVersion: 'VSTS'
       account: 'tooltester'
+
+  - template: build/integrationTests.yml
+    parameters:
+      displayName: 'macOS TFS 2017'
+      os: 'macOS'
+      pool: 'macOS-latest'
+      start2017: 'true'
+      stop2017: 'true'
+      name: 'macOSTFS2017'
+      apiVersion: 'TFS2017'
+      account: 'http://sonarqube.eastus2.cloudapp.azure.com:8080/tfs/vsteam'
 
 - stage: Production
   displayName: PowerShell Gallery / GitHub Release
@@ -302,6 +287,13 @@ stages:
               packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
               packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
 
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish nupkg Artifact'
+            inputs:
+              targetPath: '$(Pipeline.Workspace)/Module/$(Folder)'
+              artifact: 'Package'
+              publishLocation: 'pipeline'
+
           - task: NuGetCommand@2
             displayName: 'Push Module'
             inputs:
@@ -314,7 +306,7 @@ stages:
             displayName: 'Create GitHub Release'
             inputs:
               gitHubConnection: Darquewarrior
-              repositoryName: DarqueWarrior/vsteam
+              repositoryName: MethodsAndPractices/vsteam
               tagSource: manual
               tag: v$(PACKAGE_VERSION)
               addChangeLog: true

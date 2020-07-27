@@ -45,7 +45,7 @@ class VSTeamGitRepository : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamGitRef -ProjectName $this.ProjectName -RepositoryID $this.id -ErrorAction SilentlyContinue
+      $items = Get-VSTeamGitRef -ProjectName $this.ProjectName -RepositoryID $this.id
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.GitRef')

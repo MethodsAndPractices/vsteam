@@ -14,27 +14,31 @@ LONG DESCRIPTION
     -ProjectName parameter is dynamic and you can use tab completion to cycle
     through all the projects.
 
+    All the calls have a default 60 second timeout. Use Set-VSTeamDefaultAPITimeout
+    to adjust the timeout.
+
     Using the Set-VSTeamAPIVersion function you can control which version of the APIs are used.
     
     PS C:\> Get-VSTeamAPIVersion
 
     Name                           Value
     ----                           -----
-    ExtensionsManagement           3.0-preview
-    Git                            3.0
-    Version                        TFS2017
-    Tfvc                           3.0
-    Policy                         3.0
-    MemberEntitlementManagement
-    ServiceEndpoints               3.0-preview
-    DistributedTask                3.0-preview
-    Build                          3.0
     Release                        3.0-preview
-    Core                           3.0
-    Graph
-    VariableGroups
+    DistributedTask                3.0-preview
+    Git                            3.0
+    ServiceEndpoints               3.0-preview
     Packaging                      3.0-preview
+    ExtensionsManagement           3.0-preview
+    Policy                         3.0
+    Build                          3.0
+    Core                           3.0
     TaskGroups                     3.0-preview
+    Processes
+    Graph
+    Tfvc                           3.0
+    VariableGroups
+    Version                        TFS2017
+    MemberEntitlementManagement
 
     To use different API versions you can update the version in the version table.
 

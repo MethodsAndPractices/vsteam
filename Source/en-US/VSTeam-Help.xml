@@ -7127,6 +7127,76 @@ ID Title          Status
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Clear-VSTeamDefaultAPITimeout</command:name>
+      <command:verb>Clear</command:verb>
+      <command:noun>VSTeamDefaultAPITimeout</command:noun>
+      <maml:description>
+        <maml:para>Clears the value stored in the default timeout parameter value.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Clears the value stored in the default timeout parameter value.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Clear-VSTeamDefaultAPITimeout</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Level</maml:name>
+          <maml:Description>
+            <maml:para>On Windows allows you to clear your default timeout at the Process, User or Machine levels.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Level</maml:name>
+        <maml:Description>
+          <maml:para>On Windows allows you to clear your default timeout at the Process, User or Machine levels.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Clear-VSTeamDefaultAPITimeout</dev:code>
+        <dev:remarks>
+          <maml:para>This will clear the default timeout parameter value.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamDefaultAPITimeout</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-VSTeamAccount</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Clear-VSTeamDefaultProject</command:name>
       <command:verb>Clear</command:verb>
       <command:noun>VSTeamDefaultProject</command:noun>
@@ -7178,7 +7248,7 @@ ID Title          Status
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Clear-Project</dev:code>
+        <dev:code>PS C:\&gt; Clear-VSTeamDefaultProject</dev:code>
         <dev:remarks>
           <maml:para>This will clear the default project parameter value. You will now have to provide a project for any functions that require a project.</maml:para>
         </dev:remarks>
@@ -13273,8 +13343,7 @@ ID Title          Status
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>The list of Process Templates returned can be controlled by using the top and skip parameters.</maml:para>
-      <maml:para>You can also get a single Process Template by name or id.</maml:para>
+      <maml:para>The list of Process Templates can be filtered by name  (which may include Wildcard). You can also get a single Process Template by id</maml:para>
       <maml:para>You must call Set-VSTeamAccount before calling this function.</maml:para>
     </maml:description>
     <command:syntax>
@@ -13296,7 +13365,7 @@ ID Title          Status
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Top</maml:name>
           <maml:Description>
-            <maml:para>Specifies the maximum number to return.</maml:para>
+            <maml:para>Specifies the maximum number to return. If -Skip is specified and -Top is omitted the next 100 will be returned. If neither Skip nor -Top is specified, all process templates will be returned.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -13308,7 +13377,7 @@ ID Title          Status
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Skip</maml:name>
           <maml:Description>
-            <maml:para>Defines the number of Process Templates to skip. The default value is 0</maml:para>
+            <maml:para>Defines the number of Process Templates to skip. If -Top is specified and -Skip is omitted none will be skipped. If neither Skip nor -Top is specified, all process templates will be returned.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -13364,7 +13433,7 @@ ID Title          Status
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Top</maml:name>
         <maml:Description>
-          <maml:para>Specifies the maximum number to return.</maml:para>
+          <maml:para>Specifies the maximum number to return. If -Skip is specified and -Top is omitted the next 100 will be returned. If neither Skip nor -Top is specified, all process templates will be returned.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -13376,7 +13445,7 @@ ID Title          Status
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Skip</maml:name>
         <maml:Description>
-          <maml:para>Defines the number of Process Templates to skip. The default value is 0</maml:para>
+          <maml:para>Defines the number of Process Templates to skip. If -Top is specified and -Skip is omitted none will be skipped. If neither Skip nor -Top is specified, all process templates will be returned.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -13415,9 +13484,16 @@ ID Title          Status
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-VSTeamProcess -top 5 | Format-Wide</dev:code>
+        <dev:code>PS C:\&gt; Get-VSTeamProcess | Format-Wide</dev:code>
         <dev:remarks>
-          <maml:para>This will return the top five Process Templates only showing their name</maml:para>
+          <maml:para>This will return the Process Templates only showing their name</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamProcess *scrum*</dev:code>
+        <dev:remarks>
+          <maml:para>This will return an process templates with names containing scrum, in other words, the default "Scrum" template and custom ones with names like "Custom Scrum", "Scrum for Contoso" will all be returned.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -13783,6 +13859,70 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The repository ID of the pull request's target branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-VSTeamPullRequest</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
+          <maml:name>ProjectName</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the team project for which this function operates.</maml:para>
+            <maml:para>You can tab complete from a list of available projects.</maml:para>
+            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="PullRequestId">
+          <maml:name>Id</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the pull request by ID.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RepositoryId</maml:name>
+          <maml:Description>
+            <maml:para>The repository ID of the pull request's target branch.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
+          <dev:type>
+            <maml:name>Guid</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeCommits</maml:name>
+          <maml:Description>
+            <maml:para>If set, includes the commits that are part of the pull request. Requires the RepositoryId to be set.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-VSTeamPullRequest</maml:name>
@@ -14119,6 +14259,18 @@ ID Title          Status
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IncludeCommits</maml:name>
+        <maml:Description>
+          <maml:para>If set, includes the commits that are part of the pull request. Requires the RepositoryId to be set.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes />
     <command:returnValues />
@@ -14161,6 +14313,13 @@ ID Title          Status
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest -Id 123</dev:code>
         <dev:remarks>
           <maml:para>This command gets the pull request with an Id of 123.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-VSTeamPullRequest -Id 123 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets the pull request with an Id of 123 and includes the commits that are part of the pull request.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -21894,6 +22053,134 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <dev:code>PS C:\&gt; Set-VSTeamApproval -Id 1 -Status Rejected</dev:code>
         <dev:remarks>
           <maml:para>This command rejects approval with Id of 1.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-VSTeamDefaultAPITimeout</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>VSTeamDefaultAPITimeout</command:noun>
+      <maml:description>
+        <maml:para>Sets the default timeout to be used with other calls in the module.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>By setting a default timeout you can adjust the value for your needs</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-VSTeamDefaultAPITimeout</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>TimeoutSec</maml:name>
+          <maml:Description>
+            <maml:para>Specifies the timeout for all function calls.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+          <dev:type>
+            <maml:name>Int</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Level</maml:name>
+          <maml:Description>
+            <maml:para>On Windows allows you to store your default timeout at the Process, User or Machine levels.</maml:para>
+            <maml:para>When saved at the User or Machine level your default timeout will be in any future PowerShell processes.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>Forces the function without confirmation</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>Forces the function without confirmation</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>TimeoutSec</maml:name>
+        <maml:Description>
+          <maml:para>Specifies the timeout for all function calls.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int</command:parameterValue>
+        <dev:type>
+          <maml:name>Int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Level</maml:name>
+        <maml:Description>
+          <maml:para>On Windows allows you to store your default timeout at the Process, User or Machine levels.</maml:para>
+          <maml:para>When saved at the User or Machine level your default timeout will be in any future PowerShell processes.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-VSTeamDefaultAPITimeout 30</dev:code>
+        <dev:remarks>
+          <maml:para>This command sets 30 seconds as the default timeout.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

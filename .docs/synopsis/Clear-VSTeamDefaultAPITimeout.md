@@ -1,0 +1,1 @@
+Clears the value stored in the default timeout parameter value.

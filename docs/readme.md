@@ -149,6 +149,10 @@ Add Permissions to a Work Item Area
 
 Add Permissions to an Iteration
 
+### [Clear-VSTeamDefaultAPITimeout](Clear-VSTeamDefaultAPITimeout.md)
+
+Clears the value stored in the default timeout parameter value.
+
 ### [Clear-VSTeamDefaultProject](Clear-VSTeamDefaultProject.md)
 
 Clears the value stored in the default project parameter value.
@@ -494,6 +498,10 @@ Sets the API versions to support either TFS2017, TFS2018, AzD2019 or AzD.
 ### [Set-VSTeamApproval](Set-VSTeamApproval.md)
 
 Sets the status of approval to Approved, Rejected, Pending, or ReAssigned.
+
+### [Set-VSTeamDefaultAPITimeout](Set-VSTeamDefaultAPITimeout.md)
+
+Sets the default timeout to be used with other calls in the module.
 
 ### [Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
 

@@ -13,7 +13,7 @@ class VSTeamReleaseDefinitions : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamReleaseDefinition -ProjectName $this.ProjectName -ErrorAction SilentlyContinue | Sort-Object name
+      $items = Get-VSTeamReleaseDefinition -ProjectName $this.ProjectName | Sort-Object name
       
       $objs = @()
 

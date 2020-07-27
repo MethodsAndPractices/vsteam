@@ -41,11 +41,11 @@ function Get-VSTeamWiql {
       else {
          $params['id'] = $Id
       }
-      
+
       if ($Team) {
          $params['Team'] = $Team
       }
-      
+
       $resp = _callAPI  @params
 
       if ($Expand) {
@@ -54,8 +54,8 @@ function Get-VSTeamWiql {
             Add-Member -InputObject $resp -MemberType NoteProperty -Name Workitems -Value @()
             $Ids = $resp.workItemRelations.Target.id
          }
-         else { 
-            $Ids = $resp.workItems.id 
+         else {
+            $Ids = $resp.workItems.id
          }
 
          # splitting id array by 200, since a maximum of 200 ids are allowed per call

@@ -14,7 +14,7 @@ class VSTeamGroups : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $Groups = Get-VSTeamGroup -ErrorAction SilentlyContinue | Sort-Object name
+      $Groups = Get-VSTeamGroup | Sort-Object name
 
       $objs = @()
 

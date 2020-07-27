@@ -51,9 +51,11 @@ jobs:
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
                   $creds = New-Object PSCredential($e, $pwd)
 
-                  if(-not (Get-PSRepository | ? Name -eq $n)) {
+                  if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
                       Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                   }
+
+                  Get-PSRepository
 
             - task: PowerShell@2
               displayName: 'Install VSTeam Module'
@@ -68,6 +70,8 @@ jobs:
                   $b = "$($manifest.ModuleVersion).$(Build.BuildId)"
                   $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
                   $creds = New-Object PSCredential($e, $pwd)
+
+                  Get-PSRepository
 
                   Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Force -Scope CurrentUser -Verbose
                 workingDirectory: '$(Pipeline.Workspace)/Test'
@@ -96,7 +100,7 @@ jobs:
                   $pesterArgs = [PesterConfiguration]::Default
                   $pesterArgs.Run.Exit = $true
                   $pesterArgs.Run.PassThru = $true
-                  $pesterArgs.Output.Verbosity = "Normal"
+                  $pesterArgs.Output.Verbosity = "Detailed"
                   $pesterArgs.TestResult.Enabled = $true
                   $pesterArgs.TestResult.OutputPath = 'test-results.xml'
             

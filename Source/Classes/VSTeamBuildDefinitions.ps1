@@ -13,7 +13,7 @@ class VSTeamBuildDefinitions : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeamBuildDefinition -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      $items = Get-VSTeamBuildDefinition -ProjectName $this.ProjectName
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.BuildDefinition')

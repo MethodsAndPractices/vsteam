@@ -32,6 +32,11 @@ function Get-VSTeamBuildDefinition {
    )
    
    process {
+       # The REST API ignores Top and Skip but allows them to be specified & the function does the same. 
+       if ($PSBoundParameters['Type'] -gt 0) {
+         Write-Warning "You specified -Type $type. This parameters is ignored and will be removed in future"
+      }
+
       if ($id) {
          foreach ($item in $id) {
             $resp = _callAPI -ProjectName $ProjectName -Id $item -Area build -Resource definitions -Version $(_getApiVersion Build) `

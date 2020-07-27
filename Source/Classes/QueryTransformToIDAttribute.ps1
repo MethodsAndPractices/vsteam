@@ -2,7 +2,7 @@ using namespace System.Management.Automation
 
 class QueryTransformToIDAttribute : ArgumentTransformationAttribute {
    [object] Transform(
-      [EngineIntrinsics]$EngineIntrinsics,
+      [EngineIntrinsics] $EngineIntrinsics,
       [object] $InputData) {
       # If input data isn't empty and is not a GUID, and it is found as a name in the cache,
       # then replace it with the match ID from the cache

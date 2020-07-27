@@ -5,13 +5,12 @@ class UncachedProjectValidateAttribute :  ValidateArgumentsAttribute {
       [object] $arguments,
       [EngineIntrinsics] $EngineIntrinsics) {
       
-      [VSTeamProjectCache]::projects = _getProjects
-      [VSTeamProjectCache]::timestamp = (Get-Date).Minute
+      $cachedProjects = [VSTeamProjectCache]::GetCurrent($true)
         
-      if (-not  $arguments -in [VSTeamProjectCache]::projects) {
+      if (-not  $arguments -in $cachedProjects) {
          throw [ValidationMetadataException]::new(
             "'$arguments' is not a valid project. Valid projects are: '" +
-            ([VSTeamProjectCache]::projects -join "', '") + "'"  )
+            ($cachedProjects -join "', '") + "'"  )
       }
    }
 }

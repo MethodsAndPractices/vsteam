@@ -1,6 +1,6 @@
 using namespace Microsoft.PowerShell.SHiPS
 
-[SHiPSProvider(UseCache = $true)]
+[SHiPSProvider(UseCache = $false)]
 class VSTeamTeams : VSTeamDirectory {
    VSTeamTeams(
       [string]$Name,
@@ -10,7 +10,9 @@ class VSTeamTeams : VSTeamDirectory {
    }
 
    [object[]] GetChildItem() {
-      $items = Get-VSTeam -ProjectName $this.ProjectName -ErrorAction SilentlyContinue
+      Write-Verbose "Project: $($this.ProjectName)"
+      
+      $items = Get-VSTeam -ProjectName $this.ProjectName
 
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.Team')
