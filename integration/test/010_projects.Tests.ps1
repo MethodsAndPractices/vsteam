@@ -237,7 +237,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
 
       AfterAll {
-         Clear-DefaultProject
+         Clear-VSTeamDefaultProject
       }
 
       It 'Add-VSTeamWorkItem' {
