@@ -4,6 +4,7 @@ Set-StrictMode -Version Latest
 
 $global:skippedOnTFS = ($env:ACCT -like "http://*")
 $global:skipVariableGroups = ($env:API_VERSION -eq 'TFS2017')
+$global:skipReleaseDefs = ($env:API_VERSION -eq 'TFS2017')
 
 Describe 'VSTeam Integration Tests' -Tag 'integration' {
    BeforeAll {
@@ -17,6 +18,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       
       Write-Host "SkippedOnTFS = $($global:skippedOnTFS)"
       Write-Host "SkipVariableGroups = $($global:skipVariableGroups)"
+      Write-Host "SkipReleaseDefs = $($global:skipReleaseDefs)"
       
       $originalLocation = Get-Location
 
@@ -158,7 +160,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
-   Context 'ReleaseDefinition full exercise' {
+   Context 'ReleaseDefinition full exercise' -Skip:$skipReleaseDefs {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just
@@ -175,20 +177,20 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          }
 
          $srcReleaseDef = Get-Content "$PSScriptRoot\sampleFiles\010_releasedef_1.json" -Raw | ConvertFrom-Json
-         $srcReleaseDef.name = $newProjectName + "-CD1"
+         $srcReleaseDef.name = "$newProjectName-CD1"
          $srcReleaseDef.environments[0].deployPhases[0].deploymentInput.queueId = $defaultQueue.Id
          $tmpReleaseDef1 = (New-TemporaryFile).FullName
          $srcReleaseDef | ConvertTo-Json -Depth 10 | Set-Content -Path $tmpReleaseDef1
 
-         Invoke-VSTeamRequest -ProjectName $newProjectName -Method Post -SubDomain vsrm -Area Release -Resource definitions -Version "5.1" -InFile $tmpReleaseDef1
+         Add-VSTeamReleaseDefinition -ProjectName $newProjectName -InFile $tmpReleaseDef1
 
          $srcReleaseDef = Get-Content "$PSScriptRoot\sampleFiles\010_releasedef_2.json" -Raw | ConvertFrom-Json
-         $srcReleaseDef.name = $newProjectName + "-CD2"
+         $srcReleaseDef.name = "$newProjectName-CD2"
          $srcReleaseDef.environments[0].deployPhases[0].deploymentInput.queueId = $defaultQueue.Id
          $tmpReleaseDef2 = (New-TemporaryFile).FullName
          $srcReleaseDef | ConvertTo-Json -Depth 10 | Set-Content -Path $tmpReleaseDef2
 
-         Invoke-VSTeamRequest -ProjectName $newProjectName -Method Post -SubDomain vsrm -Area Release -Resource definitions -Version "5.1" -InFile $tmpReleaseDef2
+         Add-VSTeamReleaseDefinition -ProjectName $newProjectName -InFile $tmpReleaseDef2
       }
 
       It 'Should have 2 release definition' {
@@ -196,24 +198,21 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $buildDefs.Count | Should -Be 2
       }
 
-      # Only run for VSTS
-      if ($env:API_VERSION -eq 'VSTS') {
-         It 'Get-VSTeamReleaseDefinition by Id should return intended attribute values for 1st release definition' {
-            $releaseDefId = (Get-VSTeamReleaseDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CD1") }).Id
-            $releaseDefId | Should -Not -Be $null
-            $releaseDef = Get-VSTeamReleaseDefinition -ProjectName $newProjectName -Id $releaseDefId
-            $releaseDef.Name | Should -Be $($newProjectName + "-CD1")
-            $releaseDef.environments[0].deployPhases.Count | Should -Be 1
-            $releaseDef.environments[0].deployPhases[0].Name | Should -Be "Phase 1"
-            $releaseDef.environments[0].deployPhases[0].workflowTasks.Count | Should -Be 1
-            $releaseDef.environments[0].deployPhases[0].workflowTasks[0].Name | Should -Be "PowerShell Script"
-            $releaseDef.environments[0].deployPhases[0].workflowTasks[0].inputs.targetType | Should -Be "inline"
-         }
+      It 'Get-VSTeamReleaseDefinition by Id should return intended attribute values for 1st release definition' {
+         $releaseDefId = (Get-VSTeamReleaseDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CD1") }).Id
+         $releaseDefId | Should -Not -Be $null
+         $releaseDef = Get-VSTeamReleaseDefinition -ProjectName $newProjectName -Id $releaseDefId
+         $releaseDef.Name | Should -Be $($newProjectName + "-CD1")
+         $releaseDef.environments[0].deployPhases.Count | Should -Be 1
+         $releaseDef.environments[0].deployPhases[0].Name | Should -Be "Phase 1"
+         $releaseDef.environments[0].deployPhases[0].workflowTasks.Count | Should -Be 1
+         $releaseDef.environments[0].deployPhases[0].workflowTasks[0].Name | Should -Be "PowerShell Script"
+         $releaseDef.environments[0].deployPhases[0].workflowTasks[0].inputs.targetType | Should -Be "inline"
+      }
 
-         It 'Get-VSTeamReleaseDefinition by Id should return 2 phases for 2nd build definition' {
-            $releaseDefId = (Get-VSTeamReleaseDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CD2") }).Id
-            ((Get-VSTeamReleaseDefinition -ProjectName $newProjectName -Id $releaseDefId).environments[0].deployPhases).Count | Should -Be 2
-         }
+      It 'Get-VSTeamReleaseDefinition by Id should return 2 phases for 2nd build definition' {
+         $releaseDefId = (Get-VSTeamReleaseDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CD2") }).Id
+         ((Get-VSTeamReleaseDefinition -ProjectName $newProjectName -Id $releaseDefId).environments[0].deployPhases).Count | Should -Be 2
       }
 
       It 'Remove-VSTeamReleaseDefinition should delete build definition' {
