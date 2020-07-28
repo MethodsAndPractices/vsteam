@@ -1,0 +1,171 @@
+{
+   "source": "undefined",
+   "revision": 1,
+   "description": null,
+   "createdBy": null,
+   "createdOn": "0001-01-01T00:00:00",
+   "modifiedBy": null,
+   "modifiedOn": "0001-01-01T00:00:00",
+   "isDeleted": false,
+   "variables": {},
+   "variableGroups": [],
+   "environments": [
+      {
+         "id": 0,
+         "name": "Environment 1",
+         "variables": {},
+         "variableGroups": [],
+         "preDeployApprovals": {
+            "approvals": [
+               {
+                  "rank": 1,
+                  "isAutomated": true,
+                  "isNotificationOn": false,
+                  "id": 0
+               }
+            ]
+         },
+         "postDeployApprovals": {
+            "approvals": [
+               {
+                  "rank": 1,
+                  "isAutomated": true,
+                  "isNotificationOn": false,
+                  "id": 0
+               }
+            ]
+         },
+         "deployPhases": [
+            {
+               "deploymentInput": {
+                  "parallelExecution": {
+                     "parallelExecutionType": 0
+                  },
+                  "skipArtifactsDownload": false,
+                  "artifactsDownloadInput": {
+                     "downloadInputs": []
+                  },
+                  "queueId": 25,
+                  "demands": [],
+                  "enableAccessToken": false,
+                  "timeoutInMinutes": 0,
+                  "jobCancelTimeoutInMinutes": 1,
+                  "condition": "succeeded()",
+                  "overrideInputs": {}
+               },
+               "rank": 1,
+               "phaseType": 1,
+               "name": "Phase 1",
+               "refName": null,
+               "workflowTasks": [
+                  {
+                     "environment": {},
+                     "taskId": "e213ff0f-5d5c-4791-802d-52ea3e7be1f1",
+                     "version": "2.*",
+                     "name": "PowerShell Script",
+                     "refName": "",
+                     "enabled": true,
+                     "alwaysRun": false,
+                     "continueOnError": false,
+                     "timeoutInMinutes": 0,
+                     "definitionType": "task",
+                     "overrideInputs": {},
+                     "condition": "succeeded()",
+                     "inputs": {
+                        "targetType": "inline",
+                        "filePath": "",
+                        "arguments": "",
+                        "script": "Write-Host \"Hello World\"\n",
+                        "errorActionPreference": "stop",
+                        "failOnStderr": "false",
+                        "ignoreLASTEXITCODE": "false",
+                        "pwsh": "false",
+                        "workingDirectory": ""
+                     }
+                  }
+               ]
+            },
+            {
+               "deploymentInput": {
+                  "parallelExecution": {
+                     "parallelExecutionType": 0
+                  },
+                  "timeoutInMinutes": 0,
+                  "jobCancelTimeoutInMinutes": 1,
+                  "condition": "succeeded()",
+                  "overrideInputs": {}
+               },
+               "rank": 2,
+               "phaseType": 2,
+               "name": "Phase 2 with special char áà",
+               "refName": null,
+               "workflowTasks": [
+                  {
+                     "environment": {},
+                     "taskId": "28782b92-5e8e-4458-9751-a71cd1492bae",
+                     "version": "1.*",
+                     "name": "Delay by 1 minutes",
+                     "refName": "",
+                     "enabled": true,
+                     "alwaysRun": false,
+                     "continueOnError": false,
+                     "timeoutInMinutes": 0,
+                     "definitionType": "task",
+                     "overrideInputs": {},
+                     "condition": "succeeded()",
+                     "inputs": {
+                        "delayForMinutes": "1"
+                     }
+                  }
+               ]
+            }
+         ],
+         "environmentOptions": {
+            "emailNotificationType": "OnlyOnFailure",
+            "emailRecipients": "release.environment.owner;release.creator",
+            "skipArtifactsDownload": false,
+            "timeoutInMinutes": 0,
+            "enableAccessToken": false,
+            "publishDeploymentStatus": true,
+            "badgeEnabled": false,
+            "autoLinkWorkItems": false,
+            "pullRequestDeploymentEnabled": false
+         },
+         "demands": [],
+         "conditions": [],
+         "executionPolicy": {
+            "concurrencyCount": 1,
+            "queueDepthCount": 0
+         },
+         "schedules": [],
+         "retentionPolicy": {
+            "daysToKeep": 30,
+            "releasesToKeep": 3,
+            "retainBuild": true
+         },
+         "processParameters": {},
+         "properties": {},
+         "preDeploymentGates": {
+            "id": 0,
+            "gatesOptions": null,
+            "gates": []
+         },
+         "postDeploymentGates": {
+            "id": 0,
+            "gatesOptions": null,
+            "gates": []
+         },
+         "environmentTriggers": []
+      }
+   ],
+   "artifacts": [],
+   "triggers": [],
+   "releaseNameFormat": null,
+   "tags": [],
+   "properties": {},
+   "id": 0,
+   "name": "AzureFunctions_CD - 3",
+   "path": "\\",
+   "projectReference": null,
+   "_links": {}
+}
