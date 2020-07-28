@@ -160,6 +160,12 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
    Context 'ReleaseDefinition full exercise' {
       BeforeAll {
+         # Everytime you run the test a new "$newProjectName" is generated.
+         # This is fine if you are running all the tests but not if you just
+         # want to run these. So if the newProjectName can't be found in the 
+         # target system change newProjectName to equal the name of the project
+         # found with the correct description.
+         $newProjectName = Get-ProjectName
 
          if ($acct -like "http://*") {
             $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object { $_.poolName -eq "Default" }
