@@ -221,6 +221,38 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
+   Context 'WorkItem full exercise' {
+      BeforeAll {
+         # Everytime you run the test a new "$newProjectName" is generated.
+         # This is fine if you are running all the tests but not if you just
+         # want to run these. So if the newProjectName can't be found in the 
+         # target system change newProjectName to equal the name of the project
+         # found with the correct description.
+         $newProjectName = Get-ProjectName
+
+         # It is important for these tests that this returns a value.
+         # This will allow the validator to run which was a source of
+         # a bug we needed to fix. 
+         Set-VSTeamDefaultProject  $newProjectName
+      }
+
+      AfterAll {
+         Clear-VSTeamDefaultProject
+      }
+
+      It 'Add-VSTeamWorkItem' {
+         $actual = Add-VSTeamWorkItem -ProjectName $newProjectName -Title "IntTestWorkItem" -WorkItemType "Product Backlog Item"
+
+         $actual | Should -Not -Be $null
+      }
+
+      It 'Remove-VSTeamWorkItem' {
+         $workItemId = Get-VSTeamWiql -Query "Select [System.Id] From WorkItems" -ProjectName $newProjectName | Select-Object -ExpandProperty WorkItemIds
+
+         { Remove-VSTeamWorkItem -Force -Destroy -Id $workItemId } | Should -Not -Throw
+      }
+   }
+
    Context 'Pool full exercise' {
       It 'Get-VSTeamPool Should return agent pools' {
          $actual = Get-VSTeamPool

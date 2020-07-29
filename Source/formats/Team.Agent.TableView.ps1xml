@@ -42,7 +42,7 @@
 								<PropertyName>os</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>id</PropertyName>
+								<PropertyName>agentId</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>
