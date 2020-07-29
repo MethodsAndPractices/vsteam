@@ -2,6 +2,7 @@
 
 ## 6.5.1
 
+Fixed bug [337](https://github.com/MethodsAndPractices/vsteam/issues/337)
 Fixed bug [345](https://github.com/MethodsAndPractices/vsteam/issues/345)
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/335) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
