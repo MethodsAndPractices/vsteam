@@ -14,7 +14,7 @@ class InvokeCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      # If the user has explictly added the -subDomain parameter
+      # If the user has explicitly added the -subDomain parameter
       # to the command use that to filter the results.
       $subDomain = $FakeBoundParameters['subDomain']
 
