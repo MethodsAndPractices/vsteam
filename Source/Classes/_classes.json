@@ -3,7 +3,6 @@
    "fileType": "classes",
    "files": [
       "InvokeCompleter.ps1",
-      "BuildCompleter.ps1",
       "BuildDefinitionCompleter.ps1",
       "ProcessTemplateCompleter.ps1",
       "ProjectCompleter.ps1",

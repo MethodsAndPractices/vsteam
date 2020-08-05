@@ -22,7 +22,7 @@ function Get-VSTeamBuild {
       [Parameter(ParameterSetName = 'List')]
       [int[]] $Definitions,
 
-      [ArgumentCompleter([BuildCompleter])]
+      [ArgumentCompleter([vsteam_lib.BuildCompleter])]
       [Parameter(ParameterSetName = 'List')]
       [string] $BuildNumber,
 

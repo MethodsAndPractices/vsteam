@@ -16,7 +16,7 @@ function Add-VSTeamRelease {
       [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
       [string] $BuildId,
 
-      [ArgumentCompleter([BuildCompleter])]
+      [ArgumentCompleter([vsteam_lib.BuildCompleter])]
       [Parameter(ParameterSetName = 'ByName', Mandatory = $true)]
       [string] $BuildNumber,
 

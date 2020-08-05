@@ -55,5 +55,6 @@
       "workbench.action.files.newUntitled"
    ],
    "powershell.pester.useLegacyCodeLens": false,
-   "powershell.pester.outputVerbosity": "Detailed"
+   "powershell.pester.outputVerbosity": "Detailed",
+   "powershell.codeFormatting.addWhitespaceAroundPipe": true
 }
