@@ -2,8 +2,6 @@
    "outputFile": "vsteam.classes.ps1",
    "fileType": "classes",
    "files": [
-      "InvokeCompleter.ps1",
-      "BuildDefinitionCompleter.ps1",
       "ProcessTemplateCompleter.ps1",
       "ProjectCompleter.ps1",
       "ReleaseDefinitionCompleter.ps1",
