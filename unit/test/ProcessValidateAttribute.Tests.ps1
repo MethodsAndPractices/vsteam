@@ -2,10 +2,11 @@ Set-StrictMode -Version Latest
 
 Describe "ProcessValidateAttribute" {
    BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamProcess.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProcessCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProcessTemplateCompleter.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -22,7 +23,7 @@ Describe "ProcessValidateAttribute" {
             )
          }
 
-         [VSTeamProcessCache]::Invalidate()
+         [vsteam_lib.ProcessTemplateCache]::Invalidate()
       }
 
       It "should not throw if name is in the list and should populate cache on first call" {
@@ -31,9 +32,9 @@ Describe "ProcessValidateAttribute" {
 
          Should -Invoke -CommandName Get-VSTeamProcess -Times 1 -Exactly
 
-         [VSTeamProcessCache]::processes.Count | should -BeGreaterThan 0
+         [vsteam_lib.ProcessTemplateCache]::Templates.Count | should -BeGreaterThan 0
 
-         [VSTeamProcessCache]::timestamp | should -BeGreaterOrEqual 0
+         [vsteam_lib.ProcessTemplateCache]::TimeStamp | should -BeGreaterOrEqual 0
       }
 
       It "should throw if name is not in list " {
@@ -49,7 +50,7 @@ Describe "ProcessValidateAttribute" {
             return @()
          }
 
-         [VSTeamProcessCache]::Invalidate()
+         [vsteam_lib.ProcessTemplateCache]::Invalidate()
       }
 
       It "list is empty and should not throw" {

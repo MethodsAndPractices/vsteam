@@ -3,7 +3,8 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamDefaultProject' {
    BeforeAll {
       Import-Module SHiPS
-
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+      
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
@@ -12,7 +13,6 @@ Describe 'VSTeamDefaultProject' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProcessCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProcessTemplateCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProcessValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"

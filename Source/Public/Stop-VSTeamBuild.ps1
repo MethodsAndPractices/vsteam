@@ -14,22 +14,26 @@ function Stop-VSTeamBuild {
    process {
       if ($pscmdlet.ShouldProcess($Id, "Stop-VSTeamBuild")) {
        
-       try {
+         try {
  
-          $body = @{
-             "status" = "Cancelling"
-          }
+            $body = @{
+               "status" = "Cancelling"
+            }
  
-         $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 50
+            $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 50
  
-         # Call the REST API
-         _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -Id $Id `
-            -Method Patch -ContentType 'application/json' -body $bodyAsJson -Version $(_getApiVersion Build) | Out-Null
-       }
+            # Call the REST API
+            _callAPI -Method Patch -ProjectName $ProjectName `
+               -Area build `
+               -Resource builds `
+               -Id $Id `
+               -body $bodyAsJson `
+               -Version $(_getApiVersion Build) | Out-Null
+         }
  
-       catch {
-         _handleException $_
-       }
-     }
+         catch {
+            _handleException $_
+         }
+      }
    }
- }
+}

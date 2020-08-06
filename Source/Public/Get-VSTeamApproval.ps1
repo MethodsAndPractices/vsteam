@@ -38,7 +38,11 @@ function Get-VSTeamApproval {
          }
 
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $(_getApiVersion Release) -QueryString $queryString
+         $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName `
+            -Area release `
+            -Resource approvals `
+            -QueryString $queryString `
+            -Version $(_getApiVersion Release)
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

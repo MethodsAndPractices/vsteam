@@ -25,7 +25,11 @@ function Update-VSTeamExtension {
 
       $body = $obj | ConvertTo-Json
 
-      $resp = _callAPI -Method Patch -body $body -SubDomain 'extmgmt' -Area 'extensionmanagement' -Resource 'installedextensions' -Version $(_getApiVersion ExtensionsManagement) -ContentType "application/json"
+      $resp = _callAPI -Method Patch -SubDomain extmgmt `
+         -Area extensionmanagement `
+         -Resource installedextensions `
+         -Body $body `
+         -Version $(_getApiVersion ExtensionsManagement)
 
       $item = [VSTeamExtension]::new($resp)
 

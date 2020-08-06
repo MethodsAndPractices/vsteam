@@ -13,7 +13,11 @@ function Get-VSTeamPolicy {
       if ($id) {
          foreach ($item in $id) {
             try {
-               $resp = _callAPI -ProjectName $ProjectName -Id $item -Area policy -Resource configurations -Version $(_getApiVersion Git)
+               $resp = _callAPI -ProjectName $ProjectName `
+                  -Area policy `
+                  -Resource configurations `
+                  -Id $item `
+                  -Version $(_getApiVersion Policy)
 
                _applyTypesToPolicy -item $resp
 
@@ -26,7 +30,10 @@ function Get-VSTeamPolicy {
       }
       else {
          try {
-            $resp = _callAPI -ProjectName $ProjectName -Area policy -Resource configurations -Version $(_getApiVersion Git)
+            $resp = _callAPI -ProjectName $ProjectName `
+               -Area policy `
+               -Resource configurations `
+               -Version $(_getApiVersion Policy)
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {

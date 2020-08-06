@@ -11,7 +11,10 @@ function Get-VSTeamBuildTag {
    )
    process {
       # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
+      $resp = _callAPI -ProjectName $projectName `
+         -Area build `
+         -Resource builds `
+         -ID "$Id/tags" `
          -Version $(_getApiVersion Build)
 
       return $resp.value

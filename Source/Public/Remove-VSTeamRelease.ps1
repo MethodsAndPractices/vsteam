@@ -16,7 +16,11 @@ function Remove-VSTeamRelease {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
             try {
                # Call the REST API
-               _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item -Version $(_getApiVersion Release) | Out-Null
+               _callAPI -Method Delete -SubDomain vsrm -ProjectName $ProjectName `
+                  -Area release `
+                  -Resource releases `
+                  -id $item `
+                  -Version $(_getApiVersion Release) | Out-Null
 
                Write-Output "Deleted release $item"
             }

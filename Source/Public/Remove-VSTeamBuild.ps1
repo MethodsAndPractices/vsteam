@@ -16,8 +16,11 @@ function Remove-VSTeamBuild {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build")) {
             try {
-               _callAPI -ProjectName $ProjectName -Area 'build' -Resource 'builds' -id $item `
-                  -Method Delete  -Version $(_getApiVersion Build) | Out-Null
+               _callAPI -Method Delete -ProjectName $ProjectName `
+                  -Area build `
+                  -Resource builds `
+                  -id $item `
+                  -Version $(_getApiVersion Build) | Out-Null
 
                Write-Output "Deleted build $item"
             }

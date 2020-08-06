@@ -2,12 +2,13 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamProcess' {
    BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProcess.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProcessCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProcessTemplateCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProcessValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
@@ -16,7 +17,6 @@ Describe 'VSTeamProcess' {
    
       Mock _getProjects { return @() }
       Mock _hasProjectCacheExpired { return $true }
-      Mock _hasProcessTemplateCacheExpired { return $true }
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
 
@@ -119,7 +119,7 @@ Describe 'VSTeamProcess' {
       }
 
       It 'by Name should return Process by Name' {
-         [VSTeamProcessCache]::timestamp = -1
+         [vsteam_lib.ProcessTemplateCache]::Invalidate()
          $p = Get-VSTeamProcess -Name Agile
 
          $p.name | should -Be  'Agile'

@@ -29,8 +29,12 @@ function Set-VSTeamApproval {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Approval Status")) {
             try {
                # Call the REST API
-               _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource approvals `
-                  -Id $item -Version $(_getApiVersion Release) -body $body -ContentType 'application/json' | Out-Null
+               _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName `
+                  -Area release `
+                  -Resource approvals `
+                  -Id $item `
+                  -body $body `
+                  -Version $(_getApiVersion Release) | Out-Null
 
                Write-Output "Approval $item status changed to $status"
             }

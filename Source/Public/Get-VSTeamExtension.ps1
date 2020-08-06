@@ -15,7 +15,7 @@ function Get-VSTeamExtension {
       [Parameter(ParameterSetName = 'GetById', Mandatory = $true)]
       [string] $ExtensionId
    )
-   
+
    Process {
 
       if ($PublisherId -and $ExtensionId) {
@@ -46,8 +46,8 @@ function Get-VSTeamExtension {
          }
 
          $resp = _callAPI -SubDomain 'extmgmt' `
-            -Area 'extensionmanagement' `
-            -Resource 'installedextensions' `
+            -Area extensionmanagement `
+            -Resource installedextensions `
             -QueryString $queryString `
             -Version $(_getApiVersion ExtensionsManagement)
 

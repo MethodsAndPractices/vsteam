@@ -1,6 +1,8 @@
 Set-StrictMode -Version Latest
 
 BeforeAll {
+   Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+   
    $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
    . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"

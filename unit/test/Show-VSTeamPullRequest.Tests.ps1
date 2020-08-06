@@ -9,7 +9,6 @@ Describe 'VSTeamPullRequest' {
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProcess.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProcessCache.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamPullRequest.ps1"

@@ -95,7 +95,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Packaging = '5.1-preview'
                [VSTeamVersions]::TaskGroups = '5.1-preview'
                [VSTeamVersions]::MemberEntitlementManagement = ''
-               [VSTeamVersions]::ServiceEndpoints = '5.1-preview'
+               [VSTeamVersions]::ServiceEndpoints = '5.0-preview'
                [VSTeamVersions]::ExtensionsManagement = '5.1-preview'
                [VSTeamVersions]::Graph = ''
                [VSTeamVersions]::Policy = '5.1'
@@ -219,19 +219,52 @@ function Set-VSTeamAPIVersion {
    }
 
    Write-Verbose [VSTeamVersions]::Version
+
+   # The Get-VSTeamOption comments above each version are the
+   # calls you can use to see if the versions match. Once the
+   # resources under an area deviates we have to introduce a
+   # new version. For example the calls for Service Endpoints
+   # used to use DistributedTask until they were no longer the
+   # same and the ServiceEndpoints version was added.
+   
+   # Get-VSTeamOption -area 'git' -resource 'repositories'
+   # Get-VSTeamOption -area 'git' -resource 'pullRequests'
    Write-Verbose "Git: $([VSTeamVersions]::Git)"
+
    Write-Verbose "Core: $([VSTeamVersions]::Core)"
+
+   # Get-VSTeamOption -area 'build' -resource 'Builds'
+   # Get-VSTeamOption -area 'build' -resource 'Definitions'
    Write-Verbose "Build: $([VSTeamVersions]::Build)"
+
+   # Get-VSTeamOption -subDomain vsrm -area 'Release' -resource 'releases'
+   # Get-VSTeamOption -subDomain vsrm -area 'Release' -resource 'approvals'
+   # Get-VSTeamOption -subDomain vsrm -area 'Release' -resource 'definitions'
    Write-Verbose "Release: $([VSTeamVersions]::Release)"
+
    Write-Verbose "DistributedTask: $([VSTeamVersions]::DistributedTask)"
+
    Write-Verbose "VariableGroups: $([VSTeamVersions]::VariableGroups)"
+   
    Write-Verbose "Tfvc: $([VSTeamVersions]::Tfvc)"
+   
    Write-Verbose "Packaging: $(_getApiVersion Packaging)"
+   
    Write-Verbose "TaskGroups: $([VSTeamVersions]::TaskGroups)"
+   
    Write-Verbose "MemberEntitlementManagement: $([VSTeamVersions]::MemberEntitlementManagement)"
+
+   # Get-VSTeamOption -area 'distributedtask' -resource 'serviceendpoints'   
    Write-Verbose "ServiceEndpoints: $([VSTeamVersions]::ServiceEndpoints)"
+
+   # Get-VSTeamOption -subDomain 'extmgmt' -area 'ExtensionManagement' -resource 'InstalledExtensions'
+   # Get-VSTeamOption -subDomain 'extmgmt' -area 'ExtensionManagement' -resource 'InstalledExtensionsByName'
    Write-Verbose "ExtensionsManagement: $([VSTeamVersions]::ExtensionsManagement)"
+ 
    Write-Verbose "Graph: $([VSTeamVersions]::Graph)"
+
+   # Get-VSTeamOption -area 'policy' -resource 'configurations'
    Write-Verbose "Policy: $([VSTeamVersions]::Policy)"
+ 
    Write-Verbose "Processes: $([VSTeamVersions]::Processes)"
 }

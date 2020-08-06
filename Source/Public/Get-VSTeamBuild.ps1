@@ -52,7 +52,10 @@ function Get-VSTeamBuild {
          if ($id) {
             foreach ($item in $id) {
                # Build the url to return the single build
-               $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' -id $item `
+               $resp = _callAPI -ProjectName $projectName `
+                  -Area build `
+                  -Resource builds `
+                  -id $item `
                   -Version $(_getApiVersion Build)
 
                _applyTypesToBuild -item $resp
@@ -62,9 +65,7 @@ function Get-VSTeamBuild {
          }
          else {
             # Build the url to list the builds
-            $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource 'builds' `
-               -Version $(_getApiVersion Build) `
-               -Querystring @{
+            $querystring = @{
                '$top'                   = $top
                'type'                   = $type
                'buildNumber'            = $buildNumber
@@ -76,6 +77,12 @@ function Get-VSTeamBuild {
                'properties'             = ($properties -join ',')
                'definitions'            = ($definitions -join ',')
             }
+
+            $resp = _callAPI -ProjectName $projectName `
+               -Area build `
+               -Resource builds `
+               -Querystring $queryString `
+               -Version $(_getApiVersion Build)
 
             # Apply a Type Name so we can use custom format view and custom type extensions
             foreach ($item in $resp.value) {

@@ -472,10 +472,6 @@ function _hasProjectCacheExpired {
    return $([VSTeamProjectCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
 }
 
-function _hasProcessTemplateCacheExpired {
-   return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
-}
-
 function _hasQueryCacheExpired {
    return $([VSTeamQueryCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
 }
@@ -584,27 +580,6 @@ function _buildProjectNameDynamicParam {
    #>
 }
 
-function _getProcesses {
-   if (-not $(_getInstance)) {
-      Write-Output @()
-      return
-   }
-
-   # Call the REST API
-   try {
-      $query = @{ }
-      $query['stateFilter'] = 'All'
-      $query['$top'] = '9999'
-      $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
-
-      if ($resp.count -gt 0) {
-         Write-Output ($resp.value).name
-      }
-   }
-   catch {
-      Write-Output @()
-   }
-}
 function _buildProcessNameDynamicParam {
    param(
       [string] $ParameterName = 'ProcessName',
@@ -641,14 +616,7 @@ function _buildProcessNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes) {
-      $arrSet = _getProcesses
-      [VSTeamProcessCache]::processes = $arrSet
-      [VSTeamProcessCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
-   }
-   else {
-      $arrSet = [VSTeamProcessCache]::processes
-   }
+   $arrSet = [vsteam_lib.ProcessTemplateCache]::GetCurrent()
 
    if ($arrSet) {
       Write-Verbose "arrSet = $arrSet"

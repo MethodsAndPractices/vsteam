@@ -65,7 +65,7 @@ function Get-VSTeamProcess {
             $resp = _callAPI -NoProject -Area $area -resource 'processes' -Version (_getApiVersion Processes)  
 
             # We just fetched all the processes so let's update the cache. Also, cache the URLS for processes
-            [VSTeamProcessCache]::Update($resp.value)
+            [vsteam_lib.ProcessTemplateCache]::Update([string[]]$($resp.value | Select-Object -ExpandProperty Name | Sort-Object))
 
             $resp.value | ForEach-Object {
                [VSTeamProcess]::new($_)

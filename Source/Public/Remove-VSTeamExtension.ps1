@@ -11,9 +11,13 @@ function Remove-VSTeamExtension {
    )
 
    if ($Force -or $pscmdlet.ShouldProcess($ExtensionId, "Remove extension")) {
-      $resource = "extensionmanagement/installedextensionsbyname/$PublisherId/$ExtensionId"
+      $id = "$PublisherId/$ExtensionId"
 
-      $resp = _callAPI -NoProject -Method Delete -SubDomain 'extmgmt' -Resource $resource -Version $(_getApiVersion ExtensionsManagement)
+      $resp = _callAPI -Method Delete -NoProject -SubDomain extmgmt `
+         -Area extensionmanagement `
+         -Resource installedextensionsbyname `
+         -Id $id `
+         -Version $(_getApiVersion ExtensionsManagement)
 
       Write-Output $resp
    }

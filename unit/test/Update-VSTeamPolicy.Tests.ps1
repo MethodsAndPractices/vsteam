@@ -45,7 +45,7 @@ Describe 'VSTeamPolicy' {
          #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Put' -and
-            $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/1?api-version=$(_getApiVersion Git)" -and
+            $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/1?api-version=$(_getApiVersion Policy)" -and
             $Body -like '*"isBlocking":true*' -and
             $Body -like '*"isEnabled":true*' -and
             $Body -like '*"type":*' -and
@@ -80,7 +80,7 @@ Describe 'VSTeamPolicy' {
          #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Put' -and
-            $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/1?api-version=$(_getApiVersion Git)" -and
+            $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/1?api-version=$(_getApiVersion Policy)" -and
             $Body -like '*"isBlocking":true*' -and
             $Body -like '*"isEnabled":true*' -and
             $Body -like '*"type":*' -and

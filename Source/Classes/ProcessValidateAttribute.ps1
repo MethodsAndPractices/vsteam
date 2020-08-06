@@ -10,7 +10,7 @@ class ProcessValidateAttribute : ValidateArgumentsAttribute {
          return 
       }
 
-      $cachedProcesses = [VSTeamProcessCache]::GetCurrent()
+      $cachedProcesses = [vsteam_lib.ProcessTemplateCache]::GetCurrent()
 
       if (($cachedProcesses.count -gt 0) -and ($arguments -notin $cachedProcesses)) {
          throw [ValidationMetadataException]::new(

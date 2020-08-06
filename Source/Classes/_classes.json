@@ -16,7 +16,6 @@
       "WorkItemTypeValidateAttribute.ps1",
       "VSTeamVersions.ps1",
       "VSTeamProjectCache.ps1",
-      "VSTeamProcessCache.ps1",
       "VSTeamQueryCache.ps1",
       "VSTeamDirectory.ps1",
       "VSTeamLeaf.ps1",

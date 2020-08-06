@@ -16,7 +16,11 @@ function Remove-VSTeamBuildDefinition {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Build Definition")) {
             # Call the REST API
-            _callAPI -Method Delete -ProjectName $ProjectName -Area build -Resource definitions -Id $item -Version  $(_getApiVersion Build) | Out-Null
+            _callAPI -Method Delete -ProjectName $ProjectName `
+               -Area build `
+               -Resource definitions `
+               -Id $item `
+               -Version $(_getApiVersion Build) | Out-Null
 
             Write-Output "Deleted build definition $item"
          }

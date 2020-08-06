@@ -5,9 +5,9 @@ function Get-VSTeamReleaseDefinition {
       [ValidateSet('environments', 'artifacts', 'none')]
       [string] $Expand = 'none',
 
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw', ValueFromPipelineByPropertyName = $true)]
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson', ValueFromPipelineByPropertyName = $true)]
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseDefinitionID')]
       [int[]] $Id,
 
@@ -23,9 +23,17 @@ function Get-VSTeamReleaseDefinition {
       [string] $ProjectName
    )
    process {
+      $commonArgs = @{
+         subDomain   = 'vsrm'
+         area        = 'release'
+         resource    = 'definitions'
+         projectName = $ProjectName
+         version     = $(_getApiVersion Release)
+      }
+
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -subDomain vsrm -Area release -resource definitions -Version $(_getApiVersion Release) -projectName $projectName -id $item
+            $resp = _callAPI @commonArgs -id $item
 
             if ($JSON.IsPresent) {
                $resp | ConvertTo-Json -Depth 99
@@ -43,7 +51,7 @@ function Get-VSTeamReleaseDefinition {
          }
       }
       else {
-         $listurl = _buildRequestURI -subDomain vsrm -Area release -resource 'definitions' -Version $(_getApiVersion Release) -projectName $ProjectName
+         $listurl = _buildRequestURI @commonArgs
          
          if ($expand -ne 'none') {
             $listurl += "&`$expand=$($expand)"

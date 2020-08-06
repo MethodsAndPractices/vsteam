@@ -3,6 +3,7 @@ Set-StrictMode -Version Latest
 Describe "VSTeamBuilds" {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 

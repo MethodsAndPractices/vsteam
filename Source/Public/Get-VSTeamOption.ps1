@@ -3,10 +3,12 @@ function Get-VSTeamOption {
    param(
       [string] $subDomain,
 
+      [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
       [Parameter(Position = 0)]
       [Alias("Service")]
       [string] $area,
-
+      
+      [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
       [Parameter(Position = 1)]
       [string] $resource
    )

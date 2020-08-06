@@ -21,8 +21,12 @@ function Remove-VSTeamBuildTag {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-VSTeamBuildTag")) {
             foreach ($tag in $tags) {
                # Call the REST API
-               _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/tags" `
-                  -Method Delete -Querystring @{tag = $tag } -Version $(_getApiVersion Build) | Out-Null
+               _callAPI -Method Delete -ProjectName $projectName `
+                  -Area build `
+                  -Resource builds `
+                  -Id "$Id/tags" `
+                  -Querystring @{tag = $tag } `
+                  -Version $(_getApiVersion Build) | Out-Null
             }
          }
       }

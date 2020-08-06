@@ -10,13 +10,17 @@ function Add-VSTeamExtension {
       [string] $Version
    )
    Process {
-      $resource = "extensionmanagement/installedextensionsbyname/$PublisherId/$ExtensionId"
+      $id = "$PublisherId/$ExtensionId"
 
       if ($version) {
-         $resource += '/' + $Version
+         $id += '/' + $Version
       }
 
-      $resp = _callAPI -Method Post -SubDomain 'extmgmt' -Resource $resource -Version $(_getApiVersion ExtensionsManagement) -ContentType "application/json"
+      $resp = _callAPI -Method Post -SubDomain 'extmgmt' `
+         -Area extensionmanagement `
+         -Resource installedextensionsbyname `
+         -Id $id `
+         -Version $(_getApiVersion ExtensionsManagement)
 
       $item = [VSTeamExtension]::new($resp)
 

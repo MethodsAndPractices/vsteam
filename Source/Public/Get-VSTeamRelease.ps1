@@ -53,9 +53,16 @@ function Get-VSTeamRelease {
    )
 
    process {
+      $commonArgs = @{
+         subDomain = 'vsrm'
+         area      = 'release'
+         resource  = 'releases'
+         version   = $(_getApiVersion Release)
+      }
+      
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $(_getApiVersion Release)
+            $resp = _callAPI @commonArgs -ProjectName $ProjectName -id $item
 
             if ($JSON.IsPresent) {
                $resp | ConvertTo-Json -Depth 99
@@ -72,13 +79,13 @@ function Get-VSTeamRelease {
       }
       else {
          if ($ProjectName) {
-            $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $(_getApiVersion Release)
+            $listurl = _buildRequestURI @commonArgs -ProjectName $ProjectName
          }
          else {
-            $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $(_getApiVersion Release)
+            $listurl = _buildRequestURI @commonArgs
          }
 
-         $QueryString = @{
+         $queryString = @{
             '$top'              = $top
             '$expand'           = $expand
             'createdBy'         = $createdBy
@@ -89,11 +96,10 @@ function Get-VSTeamRelease {
             'minCreatedTime'    = $minCreatedTime
             'maxCreatedTime'    = $maxCreatedTime
             'continuationToken' = $continuationToken
-
          }
 
          # Call the REST API
-         $resp = _callAPI -url $listurl -QueryString $QueryString
+         $resp = _callAPI -url $listurl -QueryString $queryString
          
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

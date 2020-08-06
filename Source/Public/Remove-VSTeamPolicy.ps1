@@ -16,7 +16,11 @@ function Remove-VSTeamPolicy {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Policy")) {
             try {
-               _callAPI -ProjectName $ProjectName -Method Delete -Id $item -Area policy -Resource configurations -Version  $(_getApiVersion Git) | Out-Null
+               _callAPI -Method Delete -ProjectName $ProjectName `
+                  -Area policy `
+                  -Resource configurations `
+                  -Id $item `
+                  -Version $(_getApiVersion Policy) | Out-Null
 
                Write-Output "Deleted policy $item"
             }

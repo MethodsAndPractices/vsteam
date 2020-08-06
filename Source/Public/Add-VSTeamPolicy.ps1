@@ -28,8 +28,11 @@ function Add-VSTeamPolicy {
 
       try {
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -Resource 'configurations' `
-            -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
+         $resp = _callAPI -Method Post -ProjectName $ProjectName `
+            -Area policy `
+            -Resource configurations `
+            -Body $body `
+            -Version $(_getApiVersion Policy)
 
          Write-Output $resp
       }

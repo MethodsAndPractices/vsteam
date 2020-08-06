@@ -10,7 +10,10 @@ function Get-VSTeamBuildArtifact {
       [string] $ProjectName
    )
    process {
-      $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource "builds/$Id/artifacts" `
+      $resp = _callAPI -ProjectName $projectName `
+         -Area build `
+         -Resource builds `
+         -Id "$Id/artifacts" `
          -Version $(_getApiVersion Build)
 
       foreach ($item in $resp.value) {
