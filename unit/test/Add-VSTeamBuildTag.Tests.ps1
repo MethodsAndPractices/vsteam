@@ -1,5 +1,12 @@
 Set-StrictMode -Version Latest
 
+# Adds a tag to a build.
+# Get-VSTeamOption 'build' 'tags'
+# id              : 6e6114b2-8161-44c8-8f6c-c5505782427f
+# area            : build
+# resourceName    : tags
+# routeTemplate   : {project}/_apis/{area}/builds/{buildId}/{resource}/{*tag}
+
 Describe 'VSTeamBuildTag' {
    BeforeAll {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
@@ -15,54 +22,26 @@ Describe 'VSTeamBuildTag' {
    Context 'Add-VSTeamBuildTag' -Tag "Add" {
       ## Arrange
       BeforeAll {
-         $inputTags = "Test1", "Test2", "Test3"
+         Mock _callAPI
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
       }
 
-      Context 'Services' -Tag "Services" {
-         ## Arrange
-         BeforeAll {
-            # Set the account to use for testing. A normal user would do this
-            # using the Set-VSTeamAccount function.
-            Mock _getInstance { return 'https://dev.azure.com/test' }
+      It 'should add tags to Build' {
+         ## Arrange 
+         $inputTags = "Test1", "Test2", "Test3"
 
-            Mock Invoke-RestMethod
-         }
+         ## Act
+         Add-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
 
-         It 'should add tags to Build' {
-            ## Act
-            Add-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
-
-            ## Assert
-            foreach ($inputTag in $inputTags) {
-               Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Method -eq 'Put' -and
-                  $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)" + "&tag=$inputTag"
-               }
-            }
-         }
-      }
-
-      Context 'Server' -Tag "Server" {
-         ## Arrange
-         BeforeAll {
-            Mock _useWindowsAuthenticationOnPremise { return $true }
-
-            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
-
-            Mock Invoke-RestMethod
-         }
-
-         It 'should add tags to Build' {
-            ## Act
-            Add-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
-
-            ## Assert
-            foreach ($inputTag in $inputTags) {
-               Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Method -eq 'Put' -and
-                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)" + "&tag=$inputTag"
-               }
+         ## Assert
+         foreach ($inputTag in $inputTags) {
+            Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Method -eq 'Put' -and
+               $ProjectName -eq "project" -and
+               $Area -eq "build/builds/2" -and 
+               $Resource -eq "tags" -and 
+               $Id -eq $inputTag -and 
+               $Version -eq $(_getApiVersion Build)
             }
          }
       }

@@ -23,7 +23,6 @@ function Add-VSTeam {
    process {
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
-      # Call the REST API
       $resp = _callAPI -Method POST -NoProject `
          -Resource "projects/$ProjectName/teams" `
          -Body $body `

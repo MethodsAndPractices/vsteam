@@ -11,6 +11,7 @@
 # resourceName    : AccessControlEntries
 # routeTemplate   : _apis/{resource}/{securityNamespaceId}
 # https://bit.ly/Add-VSTeamAccessControlEntry
+
 function Add-VSTeamAccessControlEntry {
    [CmdletBinding(DefaultParameterSetName = 'ByNamespace')]
    param(
@@ -38,7 +39,6 @@ function Add-VSTeamAccessControlEntry {
       [ValidateRange(0, [int]::MaxValue)]
       [int] $DenyMask
    )
-
    process {
       if ($SecurityNamespace) {
          $SecurityNamespaceId = $SecurityNamespace.ID
@@ -59,7 +59,6 @@ function Add-VSTeamAccessControlEntry {
       ]
    }
 "@
-      # Call the REST API
       $resp = _callAPI -Method POST -NoProject `
          -Resource accesscontrolentries `
          -Id $SecurityNamespaceId `

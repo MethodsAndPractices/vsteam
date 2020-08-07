@@ -20,7 +20,6 @@ function Add-VSTeamArea {
       [ArgumentCompleter([ProjectCompleter])]
       [string] $ProjectName
    )
-
    process {
       $resp = Add-VSTeamClassificationNode -ProjectName $ProjectName `
          -Name $Name `

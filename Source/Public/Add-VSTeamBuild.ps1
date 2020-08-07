@@ -66,7 +66,6 @@ function Add-VSTeamBuild {
          }
       }
    }
-
    process {
       if ($SourceBranch) {
          $body.Add('sourceBranch', $SourceBranch)
@@ -76,7 +75,6 @@ function Add-VSTeamBuild {
          $body.Add('parameters', ($BuildParameters | ConvertTo-Json -Compress))
       }
       
-      # Call the REST API
       $resp = _callAPI -Method POST -ProjectName $ProjectName `
          -Area build `
          -Resource builds `
