@@ -14,13 +14,20 @@ function Get-VSTeamTaskGroup {
    )
 
    process {
+      $commonArgs = @{
+         Area        = 'distributedtask'
+         Resource    = 'taskgroups'
+         ProjectName = $ProjectName
+         Version     = $(_getApiVersion TaskGroups)
+      }
+
       if ($Id) {
-         $resp = _callAPI -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -Id $Id -Method Get
+         $resp = _callAPI @commonArgs -Id $Id
 
          Write-Output $resp.value
       }
       else {
-         $resp = _callAPI -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -Method Get
+         $resp = _callAPI @commonArgs
          
          if ($Name) {
             if ($resp.value) {

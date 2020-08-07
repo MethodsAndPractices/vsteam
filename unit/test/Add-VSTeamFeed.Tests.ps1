@@ -32,7 +32,6 @@ Describe 'VSTeamFeed' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$(_getApiVersion Packaging)" -and
             $Method -eq 'Post' -and
-            $ContentType -eq 'application/json' -and
             $Body -like '*"name": *"module"*'
          }
       }
@@ -45,7 +44,6 @@ Describe 'VSTeamFeed' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$(_getApiVersion packaging)" -and
             $Method -eq 'Post' -and
-            $ContentType -eq 'application/json' -and
             $Body -like '*"upstreamEnabled":*true*' -and
             $Body -like '*"hideDeletedPackageVersions":*false*'
          }

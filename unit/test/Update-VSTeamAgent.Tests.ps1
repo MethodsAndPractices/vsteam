@@ -12,7 +12,7 @@ Describe 'VSTeamAgent' {
       . "$PSScriptRoot/../../Source/Public/$sut"
       
       Mock _getInstance { return 'https://dev.azure.com/test' }
-      Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'DistributedTask' }
+      Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
    }
 
    Context 'Update-VSTeamAgent by ID' {
@@ -26,7 +26,7 @@ Describe 'VSTeamAgent' {
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Post' -and
             $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/36/messages*" -and
-            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTaskReleased)*" -and
             $Uri -like "*agentId=950*"
          }
       }

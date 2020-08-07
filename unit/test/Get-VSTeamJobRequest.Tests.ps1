@@ -18,7 +18,7 @@ Describe "Get-VSTeamJobRequest" {
       $resultsAzD = Get-Content "$PSScriptRoot/sampleFiles/jobrequestsAzD.json" -Raw | ConvertFrom-Json
       $results2017 = Get-Content "$PSScriptRoot/sampleFiles/jobrequests2017.json" -Raw | ConvertFrom-Json
 
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
    }
 
    Context "Server" {
@@ -35,7 +35,7 @@ Describe "Get-VSTeamJobRequest" {
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests*" -and
-            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTaskReleased)*" -and
             $Uri -like "*agentid=4*"
          }
       }
@@ -48,7 +48,7 @@ Describe "Get-VSTeamJobRequest" {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*http://localhost:8080/tfs/defaultcollection/_apis/distributedtask/pools/5/jobrequests*" -and
-            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTaskReleased)*" -and
             $Uri -like "*agentid=4*" -and
             $Uri -like "*completedRequestCount=2*"
          }
@@ -69,7 +69,7 @@ Describe "Get-VSTeamJobRequest" {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests*" -and
-            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTaskReleased)*" -and
             $Uri -like "*agentid=4*"
          }
       }
@@ -82,7 +82,7 @@ Describe "Get-VSTeamJobRequest" {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/distributedtask/pools/5/jobrequests*" -and
-            $Uri -like "*api-version=$(_getApiVersion DistributedTask)*" -and
+            $Uri -like "*api-version=$(_getApiVersion DistributedTaskReleased)*" -and
             $Uri -like "*agentid=4*" -and
             $Uri -like "*completedRequestCount=2*"
          }

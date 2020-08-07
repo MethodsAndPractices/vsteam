@@ -46,8 +46,11 @@ function Add-VSTeamFeed {
       $bodyAsJson = $body | ConvertTo-Json
 
       # Call the REST API
-      $resp = _callAPI -subDomain feeds -Area packaging -Resource feeds `
-         -Method Post -ContentType 'application/json' -body $bodyAsJson -Version $(_getApiVersion Packaging)
+      $resp = _callAPI -Method Post -subDomain feeds `
+         -Area packaging `
+         -Resource feeds `
+         -body $bodyAsJson `
+         -Version $(_getApiVersion Packaging)
 
       return [VSTeamFeed]::new($resp)
    }

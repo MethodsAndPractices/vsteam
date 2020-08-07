@@ -7,9 +7,17 @@ function Get-VSTeamFeed {
    )
 
    process {
+      $commonArgs = @{
+         subDomain = 'feeds'
+         area      = 'packaging'
+         resource  = 'feeds'
+         NoProject = $true
+         version   = $(_getApiVersion Packaging)
+      }
+
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -NoProject -subDomain feeds -Id $item -Area packaging -Resource feeds -Version $(_getApiVersion Packaging)
+            $resp = _callAPI @commonArgs -Id $item
 
             Write-Verbose $resp
             $item = [VSTeamFeed]::new($resp)
@@ -18,7 +26,7 @@ function Get-VSTeamFeed {
          }
       }
       else {
-         $resp = _callAPI -NoProject -subDomain feeds -Area packaging -Resource feeds -Version $(_getApiVersion Packaging)
+         $resp = _callAPI @commonArgs
 
          $objs = @()
 

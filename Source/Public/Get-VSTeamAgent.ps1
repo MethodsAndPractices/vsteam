@@ -10,10 +10,16 @@ function Get-VSTeamAgent {
    )
 
    process {
+      $commonArgs = @{
+         NoProject = $true
+         Area      = "distributedtask/pools/$PoolId"
+         Resource  = 'agents'
+         Body      = @{ includeCapabilities = 'true' }
+         Version   = $(_getApiVersion DistributedTaskReleased)
+      }
 
       if ($id) {
-         $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents -Id $id -NoProject `
-            -Body @{includeCapabilities = 'true'} -Version $(_getApiVersion DistributedTask)
+         $resp = _callAPI @commonArgs -Id $id
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -23,8 +29,7 @@ function Get-VSTeamAgent {
          Write-Output $item
       }
       else {
-         $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource agents -NoProject `
-            -Body @{includeCapabilities = 'true'} -Version $(_getApiVersion DistributedTask)
+         $resp = _callAPI @commonArgs
 
          $objs = @()
 

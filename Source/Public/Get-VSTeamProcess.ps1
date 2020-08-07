@@ -40,20 +40,27 @@ function Get-VSTeamProcess {
          Write-Warning "You specified -Top $Top , -Skip $Skip These parameters are ignored and will be removed in future"
       }
 
-      # In later APIs you can get the process templates from the 'work' area. For older APIs the process templates are 
-      # in the 'process' area.
-      # Default to the newer way of accessing process templates
-      $area = 'work'
+      $commonArgs = @{
+         # In later APIs you can get the process templates from the 'work' 
+         # area. For older APIs the process templates are in the 'processes'
+         # area. Default to the newer way of accessing process templates.
+         # Get-VSTeamOption -area 'work' -resource 'processes' returns nothing
+         # this is odd but the call works.
+         area      = 'work'
+         resource  = 'processes'
+         NoProject = $true
+         version   = $(_getApiVersion Processes)
+      }
 
       # If this returns an empty string use the old area of 'process'
-      if (-not $(_getApiVersion Processes)) {
-         $area = 'process'
+      if (-not $commonArgs.version) {
+         $commonArgs.area = 'process'
       }
 
       # Return either a single process by ID or a list of processes
       if ($id) {
          # Call the REST API with an ID
-         $resp = _callAPI -NoProject -Area $area -resource 'processes' -id $id -Version $(_getApiVersion Processes)
+         $resp = _callAPI @commonArgs -id $id
 
          $process = [VSTeamProcess]::new($resp)
 
@@ -62,7 +69,7 @@ function Get-VSTeamProcess {
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -NoProject -Area $area -resource 'processes' -Version (_getApiVersion Processes)  
+            $resp = _callAPI @commonArgs
 
             # We just fetched all the processes so let's update the cache. Also, cache the URLS for processes
             [vsteam_lib.ProcessTemplateCache]::Update([string[]]$($resp.value | Select-Object -ExpandProperty Name | Sort-Object))

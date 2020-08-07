@@ -18,16 +18,22 @@ function Get-VSTeamGroup {
       [ArgumentCompleter([UncachedProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       # This will throw if this account does not support the graph API
       _supportsGraph
 
+      $commonArgs = @{
+         subDomain = 'vssps'
+         area      = 'graph'
+         resource  = 'groups'
+         noProject = $true
+         version   = $(_getApiVersion Graph)
+      }
+
       if ($Descriptor) {
          # Call the REST API
-         $resp = _callAPI -NoProject -Area 'graph' -Resource 'groups' -id $Descriptor `
-            -Version $(_getApiVersion Graph) `
-            -SubDomain 'vssps'
+         $resp = _callAPI @commonArgs -id $Descriptor
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -53,10 +59,7 @@ function Get-VSTeamGroup {
 
          try {
             # Call the REST API
-            $resp = _callAPI -NoProject -Area 'graph' -id 'groups' `
-               -Version $(_getApiVersion Graph) `
-               -QueryString $queryString `
-               -SubDomain 'vssps'
+            $resp = _callAPI @commonArgs -QueryString $queryString
 
             $objs = @()
 

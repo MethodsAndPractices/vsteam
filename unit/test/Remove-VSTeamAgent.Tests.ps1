@@ -11,7 +11,7 @@ Describe 'VSTeamAgent' {
       . "$PSScriptRoot/../../Source/Public/$sut"
    
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      [VSTeamVersions]::DistributedTask = '1.0-unitTest'
+      [VSTeamVersions]::DistributedTaskReleased = '1.0-unitTest'
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -29,7 +29,7 @@ Describe 'VSTeamAgent' {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Delete' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTaskReleased)"
          }
       }
    }

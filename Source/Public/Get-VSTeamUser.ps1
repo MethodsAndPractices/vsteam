@@ -14,11 +14,17 @@ function Get-VSTeamUser {
       # This will throw if this account does not support the graph API
       _supportsGraph
 
+      $commonArgs = @{
+         subDomain = 'vssps'
+         area      = 'graph'
+         resource  = 'users'
+         noProject = $true
+         version   = $(_getApiVersion Graph)
+      }
+
       if ($Descriptor) {
          # Call the REST API
-         $resp = _callAPI -Area 'graph' -Resource 'users' -id $Descriptor `
-            -Version $(_getApiVersion Graph) `
-            -SubDomain 'vssps' -NoProject
+         $resp = _callAPI @commonArgs -id $Descriptor
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
@@ -35,10 +41,7 @@ function Get-VSTeamUser {
 
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'graph' -id 'users' `
-               -Version $(_getApiVersion Graph) `
-               -QueryString $queryString `
-               -SubDomain 'vssps' -NoProject
+            $resp = _callAPI @commonArgs -QueryString $queryString
 
             $objs = @()
 

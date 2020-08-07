@@ -11,7 +11,13 @@ function Enable-VSTeamAgent {
    process {
       foreach ($item in $Id) {
          try {
-            _callAPI -Method Patch -Area "distributedtask/pools/$PoolId" -NoProject -Resource agents -Id $item -Version $(_getApiVersion DistributedTask) -ContentType "application/json" -Body "{'enabled':true,'id':$item,'maxParallelism':1}" | Out-Null
+            _callAPI -Method Patch -NoProject `
+               -Area "distributedtask/pools/$PoolId" `
+               -Resource agents `
+               -Id $item `
+               -Body "{'enabled':true,'id':$item,'maxParallelism':1}" `
+               -Version $(_getApiVersion DistributedTaskReleased) | Out-Null
+
             Write-Output "Enabled agent $item"
          }
          catch {

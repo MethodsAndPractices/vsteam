@@ -6,7 +6,7 @@ function Set-VSTeamAPIVersion {
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'DistributedTaskReleased', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]
@@ -32,6 +32,9 @@ function Set-VSTeamAPIVersion {
             }
             'DistributedTask' {
                [VSTeamVersions]::DistributedTask = $Version
+            }
+            'DistributedTaskReleased' {
+               [VSTeamVersions]::DistributedTaskReleased = $Version
             }
             'VariableGroups' {
                [VSTeamVersions]::VariableGroups = $Version
@@ -72,6 +75,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '5.0'
                [VSTeamVersions]::Release = '5.0'
                [VSTeamVersions]::DistributedTask = '5.0-preview'
+               [VSTeamVersions]::DistributedTaskReleased = ''
                [VSTeamVersions]::VariableGroups = '5.0-preview'
                [VSTeamVersions]::Tfvc = '5.0'
                [VSTeamVersions]::Packaging = '5.0-preview'
@@ -90,6 +94,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '5.1'
                [VSTeamVersions]::Release = '5.1'
                [VSTeamVersions]::DistributedTask = '5.1-preview'
+               [VSTeamVersions]::DistributedTaskReleased = ''
                [VSTeamVersions]::VariableGroups = '5.1-preview'
                [VSTeamVersions]::Tfvc = '5.1'
                [VSTeamVersions]::Packaging = '5.1-preview'
@@ -108,6 +113,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '4.0'
                [VSTeamVersions]::Release = '4.0-preview'
                [VSTeamVersions]::DistributedTask = '4.0-preview'
+               [VSTeamVersions]::DistributedTaskReleased = ''
                [VSTeamVersions]::VariableGroups = '4.0-preview'
                [VSTeamVersions]::Tfvc = '4.0'
                [VSTeamVersions]::Packaging = '4.0-preview'
@@ -126,6 +132,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '4.1'
                [VSTeamVersions]::Release = '4.1-preview'
                [VSTeamVersions]::DistributedTask = '4.1-preview'
+               [VSTeamVersions]::DistributedTaskReleased = ''
                [VSTeamVersions]::VariableGroups = '4.1-preview'
                [VSTeamVersions]::Tfvc = '4.1'
                [VSTeamVersions]::Packaging = '4.1-preview'
@@ -144,6 +151,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '3.0'
                [VSTeamVersions]::Release = '3.0-preview'
                [VSTeamVersions]::DistributedTask = '3.0-preview'
+               [VSTeamVersions]::DistributedTaskReleased = ''
                [VSTeamVersions]::VariableGroups = '' # Was introduced in Update 1
                [VSTeamVersions]::TaskGroups = '3.0-preview'
                [VSTeamVersions]::ServiceEndpoints = '3.0-preview'
@@ -162,6 +170,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '3.1'
                [VSTeamVersions]::Release = '3.1-preview'
                [VSTeamVersions]::DistributedTask = '3.1-preview'
+               [VSTeamVersions]::DistributedTaskReleased = ''
                [VSTeamVersions]::VariableGroups = '3.1-preview' # Resource of DistributedTask area
                [VSTeamVersions]::TaskGroups = '3.1-preview' # Resource of DistributedTask area
                [VSTeamVersions]::ServiceEndpoints = '3.1-preview' # The serviceendpoints resource of DistributedTask area
@@ -181,6 +190,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '3.2'
                [VSTeamVersions]::Release = '3.2-preview'
                [VSTeamVersions]::DistributedTask = '3.2-preview'
+               [VSTeamVersions]::DistributedTaskReleased = ''
                [VSTeamVersions]::VariableGroups = '3.2-preview' # Resource of DistributedTask area
                [VSTeamVersions]::TaskGroups = '3.2-preview' # Resource of DistributedTask area
                [VSTeamVersions]::ServiceEndpoints = '3.2-preview' # The serviceendpoints resource of DistributedTask area
@@ -200,6 +210,7 @@ function Set-VSTeamAPIVersion {
                [VSTeamVersions]::Build = '5.1'
                [VSTeamVersions]::Release = '5.1'
                [VSTeamVersions]::DistributedTask = '6.0-preview'
+               [VSTeamVersions]::DistributedTaskReleased = '5.1'
                [VSTeamVersions]::VariableGroups = '5.1-preview.1'
                [VSTeamVersions]::TaskGroups = '6.0-preview'
                [VSTeamVersions]::Tfvc = '5.1'
@@ -242,16 +253,31 @@ function Set-VSTeamAPIVersion {
    # Get-VSTeamOption -subDomain vsrm -area 'Release' -resource 'definitions'
    Write-Verbose "Release: $([VSTeamVersions]::Release)"
 
+   # These are distributed task, resources that have released versions
+   # Get-VSTeamOption -area 'distributedtask' -resource 'pools'
+   # Get-VSTeamOption -area 'distributedtask' -resource 'agents'
+   # Get-VSTeamOption -area 'distributedtask' -resource 'messages'
+   # Get-VSTeamOption -area 'distributedtask' -resource 'jobrequests'
+   Write-Verbose "DistributedTask: $([VSTeamVersions]::DistributedTaskReleased)"
+   
+   # These are distributed task, resources that are in preview
+   # Get-VSTeamOption -area 'distributedtask' -resource 'queues'
+   # Get-VSTeamOption -area 'distributedtask' -resource 'azurermsubscriptions'
    Write-Verbose "DistributedTask: $([VSTeamVersions]::DistributedTask)"
 
+   # Get-VSTeamOption -area 'distributedtask' -resource 'variablegroups'
    Write-Verbose "VariableGroups: $([VSTeamVersions]::VariableGroups)"
    
+   # Get-VSTeamOption -area 'tfvc' -resource 'branches'
    Write-Verbose "Tfvc: $([VSTeamVersions]::Tfvc)"
    
-   Write-Verbose "Packaging: $(_getApiVersion Packaging)"
+   # Get-VSTeamOption -subDomain feeds -area 'Packaging' -resource 'Feeds'
+   Write-Verbose "Packaging: $([VSTeamVersions]::Packaging)"
    
+   # Get-VSTeamOption -area 'distributedtask' -resource 'taskgroups'
    Write-Verbose "TaskGroups: $([VSTeamVersions]::TaskGroups)"
    
+   # Get-VSTeamOption -subDomain vsaex -area 'MemberEntitlementManagement' -resource 'UserEntitlements'
    Write-Verbose "MemberEntitlementManagement: $([VSTeamVersions]::MemberEntitlementManagement)"
 
    # Get-VSTeamOption -area 'distributedtask' -resource 'serviceendpoints'   
@@ -261,10 +287,15 @@ function Set-VSTeamAPIVersion {
    # Get-VSTeamOption -subDomain 'extmgmt' -area 'ExtensionManagement' -resource 'InstalledExtensionsByName'
    Write-Verbose "ExtensionsManagement: $([VSTeamVersions]::ExtensionsManagement)"
  
+   # Get-VSTeamOption -subDomain vssps -area 'Graph' -resource 'Users'
+   # Get-VSTeamOption -subDomain vssps -area 'Graph' -resource 'Groups'
+   # Get-VSTeamOption -subDomain vssps -area 'Graph' -resource 'Memberships'
+   # Get-VSTeamOption -subDomain vssps -area 'Graph' -resource 'Descriptors'
    Write-Verbose "Graph: $([VSTeamVersions]::Graph)"
 
    # Get-VSTeamOption -area 'policy' -resource 'configurations'
    Write-Verbose "Policy: $([VSTeamVersions]::Policy)"
- 
+   
+   # Get-VSTeamOption -area 'processes' -resource 'processes'
    Write-Verbose "Processes: $([VSTeamVersions]::Processes)"
 }

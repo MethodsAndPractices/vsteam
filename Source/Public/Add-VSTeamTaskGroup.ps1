@@ -13,11 +13,19 @@ function Add-VSTeamTaskGroup {
       [string] $ProjectName
    )
    process {
+      $commonArgs = @{
+         Method      = 'Post'
+         Area        = 'distributedtask'
+         Resource    = 'taskgroups'
+         ProjectName = $ProjectName
+         Version     = $(_getApiVersion TaskGroups)
+      }
+
       if ($InFile) {
-         $resp = _callAPI -Method Post -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -InFile $InFile -ContentType 'application/json'
+         $resp = _callAPI @commonArgs -InFile $InFile
       }
       else {
-         $resp = _callAPI -Method Post -ProjectName $ProjectName -Area distributedtask -Resource taskgroups -Version $(_getApiVersion TaskGroups) -ContentType 'application/json' -Body $Body
+         $resp = _callAPI @commonArgs -Body $Body
       }
 
       return $resp

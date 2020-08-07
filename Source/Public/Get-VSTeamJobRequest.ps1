@@ -23,8 +23,10 @@ function Get-VSTeamJobRequest {
          $body = @{agentid = $AgentID }
       }      
 
-      $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource "jobrequests" `
-         -QueryString $body -Version $(_getApiVersion DistributedTask)
+      $resp = _callAPI -Area "distributedtask/pools/$PoolId" `
+         -Resource jobrequests `
+         -QueryString $body `
+         -Version $(_getApiVersion DistributedTaskReleased)
 
       $objs = @()
 

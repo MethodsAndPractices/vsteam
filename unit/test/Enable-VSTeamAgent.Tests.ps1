@@ -14,7 +14,7 @@ Describe 'VSTeamAgent' {
    Context 'Enable-VSTeamAgent' {
       ## Arrnage
       BeforeAll {
-         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
+         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
 
          Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
@@ -30,7 +30,7 @@ Describe 'VSTeamAgent' {
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTaskReleased)"
          }
       }
 

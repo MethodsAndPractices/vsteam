@@ -11,7 +11,11 @@ function Remove-VSTeamFeed {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Package Feed")) {
             # Call the REST API
-            _callAPI -subDomain feeds -Method Delete -Id $item -Area packaging -Resource feeds -Version  $(_getApiVersion Packaging) | Out-Null
+            _callAPI -Method Delete -subDomain feeds `
+               -Area packaging `
+               -Resource feeds `
+               -Id $item `
+               -Version  $(_getApiVersion Packaging) | Out-Null
 
             Write-Output "Deleted Feed $item"
          }

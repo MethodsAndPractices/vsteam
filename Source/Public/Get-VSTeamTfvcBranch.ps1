@@ -18,11 +18,15 @@ function Get-VSTeamTfvcBranch {
       foreach ($item in $Path) {
          $queryString = [ordered]@{
             includeChildren = $IncludeChildren;
-            includeParent = $IncludeParent;
-            includeDeleted = $IncludeDeleted;
+            includeParent   = $IncludeParent;
+            includeDeleted  = $IncludeDeleted;
          }
 
-         $resp = _callAPI -Area tfvc -Resource branches -Id $item -QueryString $queryString -Version $(_getApiVersion Tfvc)
+         $resp = _callAPI -Area tfvc `
+            -Resource branches `
+            -Id $item `
+            -QueryString $queryString `
+            -Version $(_getApiVersion Tfvc)
 
          _applyTypesToTfvcBranch -item $resp
 

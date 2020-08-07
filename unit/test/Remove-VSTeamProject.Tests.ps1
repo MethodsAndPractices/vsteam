@@ -62,6 +62,7 @@ Describe 'VSTeamProject' {
       Mock _trackProjectProgress
       Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
       Mock Invoke-RestMethod { return @{status = 'inProgress'; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Delete' -and $Uri -eq "https://dev.azure.com/test/_apis/projects/123-5464-dee43?api-version=$(_getApiVersion Core)" }
+      Mock Invoke-RestMethod
    }
 
    Context 'Remove-VSTeamProject with Force' {

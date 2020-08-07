@@ -19,7 +19,7 @@ Describe 'VSTeamPool' {
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _hasProjectCacheExpired { return $false }
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
 
       $hostedPool = [PSCustomObject]@{
          owner     = [PSCustomObject]@{
@@ -78,7 +78,7 @@ Describe 'VSTeamPool' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools?api-version=$(_getApiVersion DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools?api-version=$(_getApiVersion DistributedTaskReleased)"
          }
       }
 
@@ -88,7 +88,7 @@ Describe 'VSTeamPool' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/101?api-version=$(_getApiVersion DistributedTask)"
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/101?api-version=$(_getApiVersion DistributedTaskReleased)"
          }
       }
    }

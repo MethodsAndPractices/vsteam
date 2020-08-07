@@ -8,6 +8,7 @@ class VSTeamVersions {
    static [string] $Build = '3.0'
    static [string] $Release = '3.0-preview'
    static [string] $DistributedTask = '3.0-preview'
+   static [string] $DistributedTaskReleased = ''
    static [string] $VariableGroups = ''
    static [string] $TaskGroups = '3.0-preview'
    static [string] $Tfvc = '3.0'

@@ -34,29 +34,31 @@ function Add-VSTeamVariableGroup {
    }
 
    Process {
-      if ([string]::IsNullOrWhiteSpace($Body))
-      {
+      if ([string]::IsNullOrWhiteSpace($Body)) {
          $bodyAsHashtable = @{
-         name        = $Name
-         description = $Description
-         variables   = $Variables
-      }
-      if ([VSTeamVersions]::Version -ne "TFS2017") {
-         $Type = $PSBoundParameters['Type']
+            name        = $Name
+            description = $Description
+            variables   = $Variables
+         }
+         if ([VSTeamVersions]::Version -ne "TFS2017") {
+            $Type = $PSBoundParameters['Type']
             $bodyAsHashtable.Add("type", $Type)
 
-         $ProviderData = $PSBoundParameters['ProviderData']
-         if ($null -ne $ProviderData) {
+            $ProviderData = $PSBoundParameters['ProviderData']
+            if ($null -ne $ProviderData) {
                $bodyAsHashtable.Add("providerData", $ProviderData)
+            }
          }
-      }
 
          $body = $bodyAsHashtable | ConvertTo-Json
       }
 
       # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'variablegroups'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $(_getApiVersion VariableGroups)
+      $resp = _callAPI -Method Post -ProjectName $projectName `
+         -Area distributedtask `
+         -Resource variablegroups `
+         -body $body `
+         -Version $(_getApiVersion VariableGroups)
 
       return Get-VSTeamVariableGroup -ProjectName $ProjectName -id $resp.id
    }

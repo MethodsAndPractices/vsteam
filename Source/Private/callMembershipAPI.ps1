@@ -20,12 +20,12 @@ function _callMembershipAPI {
    }
 
    # Call the REST API
-   $resp = _callAPI -Area 'graph' -Resource 'memberships' `
+   $resp = _callAPI -Method $Method -SubDomain vssps `
+      -Area graph `
+      -Resource memberships `
       -Id $Id `
-      -SubDomain "vssps" `
-      -Method $Method `
-      -Version $(_getApiVersion Graph) `
-      -QueryString $query
+      -QueryString $query `
+      -Version $(_getApiVersion Graph)
 
    return $resp
 }

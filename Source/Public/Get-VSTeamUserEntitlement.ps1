@@ -20,11 +20,17 @@ function Get-VSTeamUserEntitlement {
       # This will throw if this account does not support MemberEntitlementManagement
       _supportsMemberEntitlementManagement
 
+      $commonArgs = @{
+         subDomain = 'vsaex'
+         resource  = 'userentitlements'
+         version   = $(_getApiVersion MemberEntitlementManagement)
+      }
+
       if ($Id) {
          foreach ($item in $Id) {
             # Build the url to return the single build
             # Call the REST API
-            $resp = _callAPI -SubDomain 'vsaex' -Version $(_getApiVersion MemberEntitlementManagement) -Resource 'userentitlements' -id $item
+            $resp = _callAPI @commonArgs -id $item
 
             _applyTypesToUser -item $resp
 
@@ -34,8 +40,7 @@ function Get-VSTeamUserEntitlement {
       else {
          # Build the url to list the teams
          # $listurl = _buildUserURL
-         $listurl = _buildRequestURI -SubDomain 'vsaex' -Resource 'userentitlements' `
-            -Version $(_getApiVersion MemberEntitlementManagement)
+         $listurl = _buildRequestURI @commonArgs
 
          $listurl += _appendQueryString -name "top" -value $top -retainZero
          $listurl += _appendQueryString -name "skip" -value $skip -retainZero

@@ -3,7 +3,7 @@ function Get-VSTeamAPIVersion {
    [OutputType([System.Collections.Hashtable])]
    param(
       [Parameter(Mandatory = $false, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy', 'Processes')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'DistributedTaskReleased', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy', 'Processes')]
       [string] $Service
    )
 
@@ -18,6 +18,7 @@ function Get-VSTeamAPIVersion {
          Core                        = $(_getApiVersion Core)
          Git                         = $(_getApiVersion Git)
          DistributedTask             = $(_getApiVersion DistributedTask)
+         DistributedTaskReleased     = $(_getApiVersion DistributedTaskReleased)
          VariableGroups              = $(_getApiVersion VariableGroups)
          Tfvc                        = $(_getApiVersion Tfvc)
          Packaging                   = $(_getApiVersion Packaging)
