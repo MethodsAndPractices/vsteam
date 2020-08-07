@@ -32,7 +32,7 @@ function Get-VSTeamBuildTimeline {
             $resource = "builds/$item/timeline/$Id"
          }
 
-         $resp = _callAPI -method Get -ProjectName $projectName -Area 'build' -Resource $resource `
+         $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource $resource `
             -Version $([VSTeamVersions]::Build) `
             -Querystring @{
                'changeId'                 = $ChangeId

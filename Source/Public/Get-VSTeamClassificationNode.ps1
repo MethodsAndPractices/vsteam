@@ -42,17 +42,21 @@ function Get-VSTeamClassificationNode {
          $queryString.Add("Ids", $Ids -join ",")
       }
 
+      $commonArgs = @{
+         ProjectName = $ProjectName 
+         Area        = 'wit' 
+         Resource    = "classificationnodes" 
+         id          = $id
+         Version     = $(_getApiVersion Core)
+      }
+
       if ($queryString.Count -gt 0) {
          # Call the REST API
-         $resp = _callAPI -Method "Get" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-            -Version $(_getApiVersion Core) `
-            -QueryString $queryString
+         $resp = _callAPI @commonArgs -QueryString $queryString
       }
       else {
          # Call the REST API
-         $resp = _callAPI -Method "Get" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-            -Version $(_getApiVersion Core) `
-      
+         $resp = _callAPI @commonArgs      
       }
 
       if ([bool]($resp.PSobject.Properties.name -match "value")) {

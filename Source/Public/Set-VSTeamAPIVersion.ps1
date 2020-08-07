@@ -242,6 +242,16 @@ function Set-VSTeamAPIVersion {
    # Get-VSTeamOption -area 'git' -resource 'pullRequests'
    Write-Verbose "Git: $([VSTeamVersions]::Git)"
 
+   # Get-VSTeamOption -area 'core' -resource 'teams'
+   # Get-VSTeamOption -area 'core' -resource 'members'
+   # Get-VSTeamOption -area 'core' -resource 'projects'
+   # Get-VSTeamOption -area 'wit' -resource 'queries'
+   # Get-VSTeamOption -area 'wit' -resource 'workItems'
+   # Get-VSTeamOption -area 'wit' -resource 'workItemTypes'
+   # Get-VSTeamOption -area 'wit' -resource 'classificationNodes'
+   # Get-VSTeamOption -area 'Security' -resource 'SecurityNamespaces'
+   # Get-VSTeamOption -area 'Security' -resource 'AccessControlLists'
+   # Get-VSTeamOption -area 'Security' -resource 'AccessControlEntries'
    Write-Verbose "Core: $([VSTeamVersions]::Core)"
 
    # Get-VSTeamOption -area 'build' -resource 'Builds'
@@ -262,6 +272,7 @@ function Set-VSTeamAPIVersion {
    
    # These are distributed task, resources that are in preview
    # Get-VSTeamOption -area 'distributedtask' -resource 'queues'
+   # Get-VSTeamOption -area 'distributedtask' -resource 'serviceendpoints'
    # Get-VSTeamOption -area 'distributedtask' -resource 'azurermsubscriptions'
    Write-Verbose "DistributedTask: $([VSTeamVersions]::DistributedTask)"
 

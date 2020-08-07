@@ -34,7 +34,6 @@ Describe 'VSTeamMembership' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Method -eq "Get" -and
             $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$MemberDescriptor*" -and
             $Uri -like "*api-version=$(_getApiVersion Graph)*"
          }
@@ -46,7 +45,6 @@ Describe 'VSTeamMembership' {
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Method -eq "Get" -and
             $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/memberships/$GroupDescriptor*" -and
             $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
             $Uri -like "*direction=Down*"

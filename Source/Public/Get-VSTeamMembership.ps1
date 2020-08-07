@@ -9,10 +9,10 @@ function Get-VSTeamMembership {
 
    process {
       if ($MemberDescriptor) {
-         return _callMembershipAPI -Id $MemberDescriptor -Method Get -Direction Up
+         return _callMembershipAPI -Id $MemberDescriptor -Direction Up
       }
       else {
-         return _callMembershipAPI -Id $ContainerDescriptor -Method Get -Direction Down
+         return _callMembershipAPI -Id $ContainerDescriptor -Direction Down
       }
    }
 }

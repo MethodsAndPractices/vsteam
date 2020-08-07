@@ -1,3 +1,11 @@
+# Create a team in a team project.
+# Get-VSTeamOption 'core' 'teams'
+# id              : d30a3dd1-f8ba-442a-b86a-bd0c0c383e59
+# area            : core
+# resourceName    : teams
+# routeTemplate   : _apis/projects/{projectId}/{resource}/{*teamId}
+# https://bit.ly/Add-VSTeam
+
 function Add-VSTeam {
    [CmdletBinding()]
    param(
@@ -16,8 +24,10 @@ function Add-VSTeam {
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
       # Call the REST API
-      $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -NoProject `
-         -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Core)
+      $resp = _callAPI -Method POST -NoProject `
+         -Resource "projects/$ProjectName/teams" `
+         -Body $body `
+         -Version $(_getApiVersion Core)
 
       $team = [VSTeamTeam]::new($resp, $ProjectName)
 

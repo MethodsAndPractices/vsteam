@@ -21,7 +21,7 @@ function Update-VSTeamServiceEndpoint {
       if ($Force -or $pscmdlet.ShouldProcess($id, "Update Service Endpoint")) {
          # Call the REST API
          $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints' -Id $id  `
-            -Method Put -ContentType 'application/json' -body $body -Version $(_getApiVersion ServiceEndpoints)
+            -Method PUT -ContentType 'application/json' -body $body -Version $(_getApiVersion ServiceEndpoints)
 
          _trackServiceEndpointProgress -projectName $projectName -resp $resp -title 'Updating Service Endpoint' -msg "Updating $id"
 

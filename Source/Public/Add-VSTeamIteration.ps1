@@ -1,3 +1,11 @@
+# Create new or update an existing classification node.
+# Get-VSTeamOption 'wit' 'classificationNodes'
+# id              : 5a172953-1b41-49d3-840a-33f79c3ce89f
+# area            : wit
+# resourceName    : classificationNodes
+# routeTemplate   : {project}/_apis/{area}/{resource}/{structureGroup}/{*path}
+# https://bit.ly/Add-VSTeamClassificationNode
+
 function Add-VSTeamIteration {
    [CmdletBinding()]
    param(
@@ -22,15 +30,18 @@ function Add-VSTeamIteration {
    process {
       $params = @{}
 
-      if($StartDate){
+      if ($StartDate) {
          $params.StartDate = $StartDate
       }
 
-      if($FinishDate){
+      if ($FinishDate) {
          $params.FinishDate = $FinishDate
       }
 
-      $resp = Add-VSTeamClassificationNode -Name $Name -StructureGroup "iterations" -Path $Path -ProjectName $ProjectName @params
+      $resp = Add-VSTeamClassificationNode @params -ProjectName $ProjectName `
+         -Name $Name `
+         -StructureGroup iterations `
+         -Path $Path
 
       $resp = [VSTeamClassificationNode]::new($resp, $ProjectName)
 

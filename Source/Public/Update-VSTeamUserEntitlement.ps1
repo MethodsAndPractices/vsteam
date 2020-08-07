@@ -74,7 +74,7 @@ function Update-VSTeamUserEntitlement {
 
       if ($Force -or $PSCmdlet.ShouldProcess($msg, "Update user")) {
          # Call the REST API
-         _callAPI -Method Patch -SubDomain vsaex -NoProject `
+         _callAPI -Method PATCH -SubDomain vsaex -NoProject `
             -Resource userentitlements `
             -Id $id `
             -ContentType 'application/json-patch+json' `

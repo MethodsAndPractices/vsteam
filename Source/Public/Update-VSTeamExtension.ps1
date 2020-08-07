@@ -25,7 +25,7 @@ function Update-VSTeamExtension {
 
       $body = $obj | ConvertTo-Json
 
-      $resp = _callAPI -Method Patch -SubDomain extmgmt `
+      $resp = _callAPI -Method PATCH -SubDomain extmgmt `
          -Area extensionmanagement `
          -Resource installedextensions `
          -Body $body `

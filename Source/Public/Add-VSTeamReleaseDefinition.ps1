@@ -11,7 +11,7 @@ function Add-VSTeamReleaseDefinition {
    )
 
    process {
-      $resp = _callAPI -Method Post -ProjectName $ProjectName -subDomain vsrm `
+      $resp = _callAPI -Method POST -ProjectName $ProjectName -subDomain vsrm `
          -Area release `
          -Resource definitions `
          -inFile $inFile `

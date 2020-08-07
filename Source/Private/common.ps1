@@ -451,7 +451,10 @@ function _getWorkItemTypes {
 
    # Call the REST API
    try {
-      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
+      $resp = _callAPI -ProjectName $ProjectName `
+         -area wit `
+         -resource workitemtypes `
+         -version $(_getApiVersion Core)
 
       # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
       # To replace all the "": with "_end":

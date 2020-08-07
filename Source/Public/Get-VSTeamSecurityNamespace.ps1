@@ -14,11 +14,15 @@ function Get-VSTeamSecurityNamespace {
    process {
       _supportsSecurityNamespace
 
+      $commonArgs = @{
+         Resource  = 'securitynamespaces'
+         NoProject = $true
+         Version   = $(_getApiVersion Core)
+      }
+
       if ($Id) {
          # Call the REST API
-         $resp = _callAPI -Area 'securitynamespaces' -id $Id `
-            -Version $(_getApiVersion Core) -NoProject `
-      
+         $resp = _callAPI @commonArgs -id $Id      
       }
       else {
          $queryString = @{ }
@@ -26,9 +30,7 @@ function Get-VSTeamSecurityNamespace {
             $queryString.localOnly = $true
          }
 
-         $resp = _callAPI -Area 'securitynamespaces' `
-            -Version $(_getApiVersion Core) -NoProject `
-            -QueryString $queryString
+         $resp = _callAPI @commonArgs -QueryString $queryString
       }
 
       Write-Verbose $resp | Select-Object -ExpandProperty value

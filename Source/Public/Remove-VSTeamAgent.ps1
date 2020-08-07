@@ -15,7 +15,7 @@ function Remove-VSTeamAgent {
       foreach ($item in $Id) {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete agent")) {
             try {
-               _callAPI -Method Delete `
+               _callAPI -Method DELETE `
                   -Area "distributedtask/pools/$PoolId" `
                   -Resource agents `
                   -Id $item `

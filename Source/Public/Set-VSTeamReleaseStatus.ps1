@@ -23,7 +23,7 @@ function Set-VSTeamReleaseStatus {
 
             try {
                # Call the REST API
-               _callAPI -Method Patch -SubDomain vsrm -ProjectName $ProjectName `
+               _callAPI -Method PATCH -SubDomain vsrm -ProjectName $ProjectName `
                   -Area release `
                   -Resource releases `
                   -id $item `

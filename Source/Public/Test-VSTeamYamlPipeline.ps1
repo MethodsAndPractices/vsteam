@@ -30,7 +30,7 @@ function Test-VSTeamYamlPipeline {
 
       try {
          # Call the REST API
-         $resp = _callAPI -Method Post -ProjectName $ProjectName `
+         $resp = _callAPI -Method POST -ProjectName $ProjectName `
             -Area pipelines `
             -id "$PipelineId/runs" `
             -Body ($body | ConvertTo-Json) `

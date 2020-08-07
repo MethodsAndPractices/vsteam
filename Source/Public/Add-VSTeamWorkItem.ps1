@@ -100,9 +100,13 @@ function Add-VSTeamWorkItem {
       $json = ConvertTo-Json @($body) -Compress
 
       # Call the REST API
-      $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' `
-         -Version $(_getApiVersion Core) -id $fullWorkItemType -Method Post `
-         -ContentType 'application/json-patch+json' -Body $json
+      $resp = _callAPI -Method POST -ProjectName $ProjectName `
+         -Area wit `
+         -Resource workitems `
+         -id $fullWorkItemType `
+         -Body $json `
+         -ContentType 'application/json-patch+json' `
+         -Version $(_getApiVersion Core)
 
       _applyTypesToWorkItem -item $resp
 

@@ -77,9 +77,13 @@ function Update-VSTeamWorkItem {
 
       # Call the REST API
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-WorkItem")) {
-         $resp = _callAPI -Area 'wit' -Resource 'workitems' `
-            -Version $(_getApiVersion Core) -id $Id -Method Patch `
-            -ContentType 'application/json-patch+json' -Body $json -NoProject
+         $resp = _callAPI -Method PATCH -NoProject `
+            -Area wit `
+            -Resource workitems `
+            -id $Id `
+            -ContentType 'application/json-patch+json' `
+            -Body $json `
+            -Version $(_getApiVersion Core)
 
          _applyTypesToWorkItem -item $resp
 

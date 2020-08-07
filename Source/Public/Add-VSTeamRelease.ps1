@@ -55,7 +55,7 @@ function Add-VSTeamRelease {
       if ($force -or $pscmdlet.ShouldProcess($description, "Add Release")) {
          try {
             Write-Debug 'Add-VSTeamRelease Call the REST API'
-            $resp = _callAPI -Method Post -SubDomain vsrm -ProjectName $ProjectName `
+            $resp = _callAPI -Method POST -SubDomain vsrm -ProjectName $ProjectName `
                -Area release `
                -Resource releases `
                -Body $body `

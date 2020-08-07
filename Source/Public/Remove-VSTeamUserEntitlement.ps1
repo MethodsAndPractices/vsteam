@@ -33,7 +33,7 @@ function Remove-VSTeamUserEntitlement {
 
       if ($Force -or $PSCmdlet.ShouldProcess("$($user.userName) ($($user.email))", "Delete user")) {
          # Call the REST API
-         _callAPI -Method Delete -SubDomain vsaex `
+         _callAPI -Method DELETE -SubDomain vsaex `
             -Resource userentitlements `
             -Id $Id `
             -Version $(_getApiVersion MemberEntitlementManagement) | Out-Null

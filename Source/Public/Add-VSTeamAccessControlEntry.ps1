@@ -1,3 +1,16 @@
+
+# Add or update ACEs in the ACL for the provided token. The request body 
+# contains the target token, a list of ACEs and a optional merge parameter.
+# In the case of a collision (by identity descriptor) with an existing ACE
+# in the ACL, the "merge" parameter determines the behavior. If set, the 
+# existing ACE has its allow and deny merged with the incoming ACE's allow
+# and deny. If unset, the existing ACE is displaced.
+# Get-VSTeamOption 'Security' 'AccessControlEntries'
+# id              : ac08c8ff-4323-4b08-af90-bcd018d380ce
+# area            : Security
+# resourceName    : AccessControlEntries
+# routeTemplate   : _apis/{resource}/{securityNamespaceId}
+# https://bit.ly/Add-VSTeamAccessControlEntry
 function Add-VSTeamAccessControlEntry {
    [CmdletBinding(DefaultParameterSetName = 'ByNamespace')]
    param(
@@ -47,9 +60,11 @@ function Add-VSTeamAccessControlEntry {
    }
 "@
       # Call the REST API
-      $resp = _callAPI -Area 'accesscontrolentries' -id $SecurityNamespaceId -method POST -body $body `
-         -Version $(_getApiVersion Core) -NoProject `
-         -ContentType "application/json"
+      $resp = _callAPI -Method POST -NoProject `
+         -Resource accesscontrolentries `
+         -Id $SecurityNamespaceId `
+         -Body $body `
+         -Version $(_getApiVersion Core)
 
       if ($resp.count -ne 1) {
          throw "Expected 1 result, but got $($rep.count)"

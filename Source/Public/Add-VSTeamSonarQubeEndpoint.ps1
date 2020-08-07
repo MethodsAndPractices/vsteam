@@ -1,3 +1,11 @@
+# Create a service endpoint.
+# Get-VSTeamOption 'distributedtask' 'serviceendpoints'
+# id              : dca61d2f-3444-410a-b5ec-db2fc4efb4c5
+# area            : distributedtask
+# resourceName    : serviceendpoints
+# routeTemplate   : {project}/_apis/{area}/{resource}/{endpointId}
+# https://bit.ly/Add-VSTeamServiceEndpoint
+
 function Add-VSTeamSonarQubeEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
@@ -43,10 +51,9 @@ function Add-VSTeamSonarQubeEndpoint {
       }
 
       try {
-         return Add-VSTeamServiceEndpoint `
-            -ProjectName $ProjectName `
+         return Add-VSTeamServiceEndpoint -ProjectName $ProjectName `
             -endpointName $endpointName `
-            -endpointType 'sonarqube' `
+            -endpointType sonarqube `
             -object $obj
       }
       catch [System.Net.WebException] {

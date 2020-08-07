@@ -33,7 +33,6 @@ Describe 'VSTeamBuildTimeline' {
          Get-VSTeamBuildTimeline -BuildID @(1, 2) -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject"
 
          Should -Invoke Invoke-RestMethod -Scope It -Times 2 -ParameterFilter {
-            $Method -eq 'Get' -and
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/*" -and
             ($Uri -like "*builds/1/*" -or $Uri -like "*builds/2/*")
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
@@ -45,7 +44,6 @@ Describe 'VSTeamBuildTimeline' {
          Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -ChangeId 4 -PlanId 00000000-0000-0000-0000-000000000000
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Get' -and
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
             $Uri -like "*planId=00000000-0000-0000-0000-000000000000*" -and
@@ -58,7 +56,6 @@ Describe 'VSTeamBuildTimeline' {
          Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -PlanId 00000000-0000-0000-0000-000000000000
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Get' -and
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
             $Uri -like "*planId=00000000-0000-0000-0000-000000000000*" -and
@@ -70,7 +67,6 @@ Describe 'VSTeamBuildTimeline' {
          Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -ChangeId 4
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Get' -and
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
             $Uri -like "*changeId=4*" -and
@@ -82,7 +78,6 @@ Describe 'VSTeamBuildTimeline' {
          Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject"
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Get' -and
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
             $Uri -like "*api-version=$([VSTeamVersions]::Build)*"

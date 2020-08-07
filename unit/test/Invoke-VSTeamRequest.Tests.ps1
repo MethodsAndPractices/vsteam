@@ -45,7 +45,7 @@ Describe 'VSTeamRequest' {
          $projectResult = $(Get-Content "$PSScriptRoot\sampleFiles\projectResult.json" | ConvertFrom-Json)
 
          Mock _callAPI { return $projectResult } -ParameterFilter {
-            $Area -eq 'projects' -and
+            $Resource -eq 'projects' -and
             $id -eq 'testproject' -and
             $Version -eq "$(_getApiVersion Core)" -and
             $IgnoreDefaultProject -eq $true
@@ -53,7 +53,7 @@ Describe 'VSTeamRequest' {
       }
 
       It 'options should call API' {
-         Invoke-VSTeamRequest -Method Options -NoProject
+         Invoke-VSTeamRequest -Method OPTIONS -NoProject
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq "Options" -and

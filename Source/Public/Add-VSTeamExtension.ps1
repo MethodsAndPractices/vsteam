@@ -16,7 +16,7 @@ function Add-VSTeamExtension {
          $id += '/' + $Version
       }
 
-      $resp = _callAPI -Method Post -SubDomain 'extmgmt' `
+      $resp = _callAPI -Method POST -SubDomain 'extmgmt' `
          -Area extensionmanagement `
          -Resource installedextensionsbyname `
          -Id $id `

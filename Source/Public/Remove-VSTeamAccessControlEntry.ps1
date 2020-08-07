@@ -64,7 +64,11 @@ function Remove-VSTeamAccessControlEntry {
         
       if ($PSCmdlet.ShouldProcess("$token")) {
          # Call the REST API
-         $resp = _callAPI -method DELETE -Area "accesscontrolentries" -id $securityNamespaceId -ContentType "application/json" -Version $(_getApiVersion Core) -QueryString @{token = $token; descriptors = $descriptor } -ErrorAction SilentlyContinue
+         $resp = _callAPI -method DELETE `
+            -Resource accesscontrolentries `
+            -id $securityNamespaceId `
+            -QueryString @{token = $token; descriptors = $descriptor } `
+            -Version $(_getApiVersion Core) 
       }
 
       switch ($resp) {

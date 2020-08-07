@@ -83,11 +83,14 @@ Describe "VSTeamMember" {
 
    Context 'Get-VSTeamMember for specific team, fed through pipeline' {
       BeforeAll {
-         Mock Invoke-RestMethod { return @{value = 'teammembers' } }
+         Mock Invoke-RestMethod { 
+            Write-Host $args
+            return @{ value = 'teammembers' } 
+         }
       }
 
       It 'Should return teammembers' {
-         New-Object -TypeName PSObject -Prop @{projectname = "TestProject"; name = "TestTeam" } | Get-VSTeamMember
+         New-Object -TypeName PSObject -Prop @{ projectname = "TestProject"; name = "TestTeam" } | Get-VSTeamMember
 
          Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/projects/TestProject/teams/TestTeam/members?api-version=$(_getApiVersion Core)"

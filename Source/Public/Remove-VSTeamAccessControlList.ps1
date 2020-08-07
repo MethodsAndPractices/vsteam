@@ -35,9 +35,11 @@ function Remove-VSTeamAccessControlList {
 
       if ($Force -or $pscmdlet.ShouldProcess($queryString.tokens, "Delete ACL")) {
          # Call the REST API
-         $resp = _callAPI -Area 'accesscontrollists' -id $SecurityNamespaceId -method DELETE `
-            -Version $(_getApiVersion Core) `
-            -QueryString $queryString
+         $resp = _callAPI -Method DELETE `
+            -Resource accesscontrollists `
+            -id $SecurityNamespaceId  `
+            -QueryString $queryString `
+            -Version $(_getApiVersion Core)
 
          Write-Output $resp
       }

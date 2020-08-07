@@ -7,7 +7,10 @@ class VSTeamQueryCache {
 
       if ($projectName) {
          [VSTeamQueryCache]::queries = $(_callAPi -ProjectName $projectName `
-               -Area wit -Resource queries -QueryString @{'$depth' = 1 } -version $(_getApiVersion core)).value.children | 
+               -Area wit `
+               -Resource queries `
+               -QueryString @{ '$depth' = 1 } `
+               -version $(_getApiVersion core)).value.children | 
          Where-Object -Property isfolder -ne "True" | 
          Select-Object Name, ID | 
          Sort-Object Name

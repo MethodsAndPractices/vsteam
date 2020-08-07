@@ -1,3 +1,11 @@
+# Queues a build
+# Get-VSTeamOption 'build' 'Builds'
+# id              : 0cd358e1-9217-4d94-8269-1c1ee6f93dcf
+# area            : Build
+# resourceName    : Builds
+# routeTemplate   : {project}/_apis/build/{resource}/{buildId}
+# https://bit.ly/Add-VSTeamBuild
+
 function Add-VSTeamBuild {
    [CmdletBinding(DefaultParameterSetName = 'ByName')]
    param(
@@ -69,7 +77,7 @@ function Add-VSTeamBuild {
       }
       
       # Call the REST API
-      $resp = _callAPI -Method Post -ProjectName $ProjectName `
+      $resp = _callAPI -Method POST -ProjectName $ProjectName `
          -Area build `
          -Resource builds `
          -Body ($body | ConvertTo-Json) `

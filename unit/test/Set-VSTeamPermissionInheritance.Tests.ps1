@@ -72,7 +72,7 @@ Describe 'VSTeamPermissionInheritance' {
       Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
       Mock _callAPI { return $singleResult } -ParameterFilter {
-         $Area -eq 'projects' -and
+         $Resource -eq 'projects' -and
          $id -eq 'project' -and
          $Version -eq "$(_getApiVersion Core)" -and
          $IgnoreDefaultProject -eq $true
@@ -102,7 +102,7 @@ Describe 'VSTeamPermissionInheritance' {
          Set-VSTeamPermissionInheritance -projectName project -Name dynamTest-Docker-CI -resourceType BuildDefinition -NewState $false -Force
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Post' -and
+            $Method -eq 'POST' -and
             $Body -like '*123-5464-dee43/1432*' -and
             $Body -like '*33344d9c-fc72-4d6f-aba5-fa317101a7e9*' -and
             $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and
@@ -127,7 +127,7 @@ Describe 'VSTeamPermissionInheritance' {
          Set-VSTeamPermissionInheritance -projectName project -Name PTracker-CD -resourceType ReleaseDefinition -NewState $false -Force
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Post' -and
+            $Method -eq 'POST' -and
             $Body -like '*c788c23e-1b46-4162-8f5e-d7585343b5de*' -and
             $Body -like '*123-5464-dee43//2*' -and
             $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and
@@ -154,7 +154,7 @@ Describe 'VSTeamPermissionInheritance' {
          Set-VSTeamPermissionInheritance -projectName project -Name project -resourceType Repository -NewState $false -Force
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Method -eq 'Post' -and
+            $Method -eq 'POST' -and
             $Body -like '*2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*' -and
             $Body -like '*repoV2/123-5464-dee43/00000000-0000-0000-0000-000000000001*' -and
             $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/123-5464-dee43*" -and

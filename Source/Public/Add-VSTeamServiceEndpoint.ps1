@@ -1,3 +1,11 @@
+# Create a service endpoint.
+# Get-VSTeamOption 'distributedtask' 'serviceendpoints'
+# id              : dca61d2f-3444-410a-b5ec-db2fc4efb4c5
+# area            : distributedtask
+# resourceName    : serviceendpoints
+# routeTemplate   : {project}/_apis/{area}/{resource}/{endpointId}
+# https://bit.ly/Add-VSTeamServiceEndpoint
+
 function Add-VSTeamServiceEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure')]
    param(
@@ -22,8 +30,11 @@ function Add-VSTeamServiceEndpoint {
       $body = $object | ConvertTo-Json
 
       # Call the REST API
-      $resp = _callAPI -ProjectName $projectName -Area 'distributedtask' -Resource 'serviceendpoints'  `
-         -Method Post -ContentType 'application/json' -body $body -Version $(_getApiVersion ServiceEndpoints)
+      $resp = _callAPI -Method POST -ProjectName $projectName `
+         -Area distributedtask `
+         -Resource serviceendpoints `
+         -body $body `
+         -Version $(_getApiVersion ServiceEndpoints)
 
       _trackServiceEndpointProgress -projectName $projectName -resp $resp -title 'Creating Service Endpoint' -msg "Creating $endpointName"
 

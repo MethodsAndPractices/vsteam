@@ -10,7 +10,7 @@ function Remove-VSTeamMembership {
 
    process {
       if ($Force -or $PSCmdlet.ShouldProcess("$MemberDescriptor/$ContainerDescriptor", "Delete Membership")) {
-         return _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method Delete
+         return _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method DELETE
       }
    }
 }

@@ -23,7 +23,7 @@ function Update-VSTeamBuildDefinition {
          # Call the REST API
 
          if ($InFile) {
-            _callAPI -Method Put -ProjectName $ProjectName `
+            _callAPI -Method PUT -ProjectName $ProjectName `
                -Area build `
                -Resource definitions `
                -Id $Id `
@@ -31,7 +31,7 @@ function Update-VSTeamBuildDefinition {
                -Version $(_getApiVersion Build) | Out-Null
          }
          else {
-            _callAPI -Method Put -ProjectName $ProjectName `
+            _callAPI -Method PUT -ProjectName $ProjectName `
                -Area build `
                -Resource definitions `
                -Id $Id `

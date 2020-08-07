@@ -9,6 +9,6 @@ function Add-VSTeamMembership {
    )
 
    process {
-      return _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method Put
+      return _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method PUT
    }
 }

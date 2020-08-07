@@ -12,7 +12,7 @@ function Test-VSTeamMembership {
       $PrevWarningPreference = $WarningPreference
       try {
          $WarningPreference = "SilentlyContinue" # avoid 404 warning, since that indicates it doesn't exist
-         $null = _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method Head
+         $null = _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method HEAD
          return $true
       } catch {
          $WarningPreference = $PrevWarningPreference

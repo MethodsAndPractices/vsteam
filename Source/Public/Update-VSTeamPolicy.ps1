@@ -40,7 +40,7 @@ function Update-VSTeamPolicy {
       try {
          if ($Force -or $pscmdlet.ShouldProcess($id, "Update Policy")) {
             # Call the REST API
-            $resp = _callAPI -Method Put -ProjectName $ProjectName `
+            $resp = _callAPI -Method PUT -ProjectName $ProjectName `
                -Area policy `
                -Resource configurations `
                -id $id `

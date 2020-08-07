@@ -20,7 +20,7 @@ function Update-VSTeamRelease {
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Release")) {
          # Call the REST API
-         $resp = _callAPI -Method Put -SubDomain vsrm -ProjectName $projectName `
+         $resp = _callAPI -Method PUT -SubDomain vsrm -ProjectName $projectName `
             -Area release `
             -Resource releases `
             -Id $id `

@@ -14,9 +14,15 @@ function Get-VSTeamWorkItemType {
 
    Process {
       # Call the REST API
+      $commonArgs = @{
+         ProjectName = $ProjectName
+         Area        = 'wit'
+         Resource    = 'workitemtypes'
+         Version     = $(_getApiVersion Core)
+      }
+
       if ($WorkItemType) {
-         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
-            -Version $(_getApiVersion Core) -id $WorkItemType
+         $resp = _callAPI @commonArgs -id $WorkItemType
 
          # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
          # To replace all the "": with "_end":
@@ -27,8 +33,7 @@ function Get-VSTeamWorkItemType {
          return $resp
       }
       else {
-         $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitemtypes'  `
-            -Version $(_getApiVersion Core)
+         $resp = _callAPI @commonArgs
 
          # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
          # To replace all the "": with "_end":

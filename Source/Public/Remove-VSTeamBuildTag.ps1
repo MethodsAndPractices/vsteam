@@ -21,7 +21,7 @@ function Remove-VSTeamBuildTag {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-VSTeamBuildTag")) {
             foreach ($tag in $tags) {
                # Call the REST API
-               _callAPI -Method Delete -ProjectName $projectName `
+               _callAPI -Method DELETE -ProjectName $projectName `
                   -Area build `
                   -Resource builds `
                   -Id "$Id/tags" `

@@ -16,7 +16,7 @@ function Remove-VSTeamVariableGroup {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Variable Group")) {
             # Call the REST API
-            _callAPI -Method Delete -ProjectName $projectName `
+            _callAPI -Method DELETE -ProjectName $projectName `
                -Area distributedtask `
                -Resource variablegroups `
                -Id $item `

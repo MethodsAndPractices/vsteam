@@ -31,6 +31,12 @@ function Get-VSTeamProject {
          $ProjectName = $id
       }
 
+      $commonArgs = @{
+         Resource             = 'projects'
+         IgnoreDefaultProject = $true
+         Version              = $(_getApiVersion Core)
+      }
+
       if ($ProjectName) {
          $queryString = @{ }
          if ($includeCapabilities.IsPresent) {
@@ -38,8 +44,7 @@ function Get-VSTeamProject {
          }
 
          # Call the REST API
-         $resp = _callAPI -Area 'projects' -id $ProjectName `
-            -Version $(_getApiVersion Core) -IgnoreDefaultProject `
+         $resp = _callAPI @commonArgs -id $ProjectName `
             -QueryString $queryString
 
          # Storing the object before you return it cleaned up the pipeline.
@@ -52,8 +57,7 @@ function Get-VSTeamProject {
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -Area 'projects' `
-               -Version $(_getApiVersion Core) -IgnoreDefaultProject `
+            $resp = _callAPI @commonArgs `
                -QueryString @{
                stateFilter = $stateFilter
                '$top'      = $top

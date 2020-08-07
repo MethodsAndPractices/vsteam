@@ -23,7 +23,7 @@ function Stop-VSTeamBuild {
             $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 50
  
             # Call the REST API
-            _callAPI -Method Patch -ProjectName $ProjectName `
+            _callAPI -Method PATCH -ProjectName $ProjectName `
                -Area build `
                -Resource builds `
                -Id $Id `

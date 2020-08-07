@@ -20,7 +20,7 @@ function Add-VSTeamBuildTag {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Add-VSTeamBuildTag")) {
             foreach ($tag in $tags) {
                # Call the REST API
-               _callAPI -Method Put -ProjectName $projectName `
+               _callAPI -Method PUT -ProjectName $projectName `
                   -Area build `
                   -Resource builds `
                   -id "$Id/tags" `

@@ -1,3 +1,11 @@
+# Create a service endpoint.
+# Get-VSTeamOption 'distributedtask' 'serviceendpoints'
+# id              : dca61d2f-3444-410a-b5ec-db2fc4efb4c5
+# area            : distributedtask
+# resourceName    : serviceendpoints
+# routeTemplate   : {project}/_apis/{area}/{resource}/{endpointId}
+# https://bit.ly/Add-VSTeamServiceEndpoint
+
 function Add-VSTeamKubernetesEndpoint {
    [CmdletBinding()]
    param(
@@ -54,10 +62,9 @@ function Add-VSTeamKubernetesEndpoint {
          url           = $kubernetesUrl
       }
 
-      return Add-VSTeamServiceEndpoint `
-         -ProjectName $ProjectName `
+      return Add-VSTeamServiceEndpoint -ProjectName $ProjectName `
          -endpointName $endpointName `
-         -endpointType 'kubernetes' `
+         -endpointType kubernetes `
          -object $obj
    }
 }

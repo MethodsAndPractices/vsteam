@@ -37,8 +37,10 @@ function Remove-VSTeamClassificationNode {
 
       # Call the REST API
       if ($force -or $pscmdlet.ShouldProcess($Path, "Delete classification node")) {
-         $null = _callAPI -Method "Delete" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-            -ContentType 'application/json; charset=utf-8' `
+         $null = _callAPI -Method DELETE -ProjectName $ProjectName `
+            -Area wit `
+            -Resource classificationnodes `
+            -id $id `
             -QueryString $queryString `
             -Version $(_getApiVersion Core)
       }

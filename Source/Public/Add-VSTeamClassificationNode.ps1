@@ -1,3 +1,11 @@
+# Create new or update an existing classification node.
+# Get-VSTeamOption 'wit' 'classificationNodes'
+# id              : 5a172953-1b41-49d3-840a-33f79c3ce89f
+# area            : wit
+# resourceName    : classificationNodes
+# routeTemplate   : {project}/_apis/{area}/{resource}/{structureGroup}/{*path}
+# https://bit.ly/Add-VSTeamClassificationNode
+
 function Add-VSTeamClassificationNode {
    [CmdletBinding()]
    param(
@@ -46,18 +54,20 @@ function Add-VSTeamClassificationNode {
          name = $Name
       }
 
-      if($StructureGroup -eq "iterations"){
+      if ($StructureGroup -eq "iterations") {
          $body.attributes = @{
-            startDate = $StartDate
+            startDate  = $StartDate
             finishDate = $FinishDate
-          }
+         }
       }
 
       $bodyAsJson = $body | ConvertTo-Json
 
       # Call the REST API
-      $resp = _callAPI -Method "Post" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-         -ContentType 'application/json; charset=utf-8' `
+      $resp = _callAPI -Method POST -ProjectName $ProjectName `
+         -Area wit `
+         -Resource classificationnodes `
+         -id $id `
          -body $bodyAsJson `
          -Version $(_getApiVersion Core)
       

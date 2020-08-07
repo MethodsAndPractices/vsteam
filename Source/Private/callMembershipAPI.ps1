@@ -4,8 +4,10 @@ function _callMembershipAPI {
    param(
       [Parameter(Mandatory = $true)]
       [string] $Id,
-      [ValidateSet('Get', 'Post', 'Patch', 'Delete', 'Options', 'Put', 'Default', 'Head', 'Merge', 'Trace')]
-      [string] $Method,
+
+      [ValidateSet('GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS', 'PUT', 'DEFAULT', 'HEAD', 'MERGE', 'TRACE')]
+      [string] $Method = 'GET',
+      
       [ValidateSet('', 'Up', 'Down')]
       [string] $Direction
    )

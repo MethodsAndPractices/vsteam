@@ -22,11 +22,16 @@ function Get-VSTeam {
    )
 
    process {
+      $commonArgs = @{
+         Area     = 'projects' 
+         Resource = "$ProjectName/teams"
+         Version  = $(_getApiVersion Core)
+      }
+      
       if ($Id) {
          foreach ($item in $Id) {
             # Call the REST API
-            $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
-               -Version $(_getApiVersion Core)
+            $resp = _callAPI @commonArgs -id $item               
 
             $team = [VSTeamTeam]::new($resp, $ProjectName)
 
@@ -36,8 +41,7 @@ function Get-VSTeam {
       elseif ($Name) {
          foreach ($item in $Name) {
             # Call the REST API
-            $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -id $item `
-               -Version $(_getApiVersion Core)
+            $resp = _callAPI @commonArgs -id $item
 
             $team = [VSTeamTeam]::new($resp, $ProjectName)
 
@@ -46,8 +50,7 @@ function Get-VSTeam {
       }
       else {
          # Call the REST API
-         $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" `
-            -Version $(_getApiVersion Core) `
+         $resp = _callAPI @commonArgs `
             -QueryString @{
             '$top'  = $top
             '$skip' = $skip

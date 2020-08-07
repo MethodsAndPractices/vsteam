@@ -49,7 +49,7 @@ function Add-VSTeamUserEntitlement {
       $body = $obj | ConvertTo-Json
 
       # Call the REST API
-      _callAPI -Method Post -SubDomain vsaex `
+      _callAPI -Method POST -SubDomain vsaex `
          -Resource userentitlements `
          -Body $body `
          -Version $(_getApiVersion MemberEntitlementManagement)

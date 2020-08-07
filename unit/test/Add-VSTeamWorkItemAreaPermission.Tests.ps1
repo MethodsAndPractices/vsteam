@@ -184,7 +184,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
             $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
             $Body -like "*`"allow`": 65,*" -and
             $Body -like "*`"deny`": 10,*" -and
-            $ContentType -eq "application/json" -and
             $Method -eq "Post"
          }
       }
@@ -198,7 +197,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 65,*" -and
             $Body -like "*`"deny`": 10,*" -and
-            $ContentType -eq "application/json" -and
             $Method -eq "Post"
          }
       }
@@ -212,7 +210,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 65,*" -and
             $Body -like "*`"deny`": 10,*" -and
-            $ContentType -eq "application/json" -and
             $Method -eq "Post"
          }
       }
@@ -226,7 +223,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
             $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
             $Body -like "*`"allow`": 65,*" -and
             $Body -like "*`"deny`": 10,*" -and
-            $ContentType -eq "application/json" -and
             $Method -eq "Post"
          }
       }
@@ -240,7 +236,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 65,*" -and
             $Body -like "*`"deny`": 10,*" -and
-            $ContentType -eq "application/json" -and
             $Method -eq "Post"
          }
       }
@@ -255,7 +250,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 65,*" -and
             $Body -like "*`"deny`": 10,*" -and
-            $ContentType -eq "application/json" -and
             $Method -eq "Post"
          }
       }

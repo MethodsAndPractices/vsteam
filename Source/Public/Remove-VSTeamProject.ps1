@@ -16,8 +16,10 @@ function Remove-VSTeamProject {
 
       if ($Force -or $pscmdlet.ShouldProcess($ProjectName, "Delete Project")) {
          # Call the REST API
-         $resp = _callAPI -Area 'projects' -Id (Get-VSTeamProject $ProjectName).id `
-            -Method Delete -Version $(_getApiVersion Core)
+         $resp = _callAPI -Method DELETE `
+            -Resource projects `
+            -Id (Get-VSTeamProject $ProjectName).id `
+            -Version $(_getApiVersion Core)
 
          _trackProjectProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 

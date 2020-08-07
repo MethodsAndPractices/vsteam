@@ -32,7 +32,7 @@ function Set-VSTeamEnvironmentStatus {
          if ($force -or $pscmdlet.ShouldProcess($item, "Set Status on Environment")) {
             try {
                # Call the REST API
-               _callAPI -Method Patch -SubDomain vsrm -projectName $ProjectName `
+               _callAPI -Method PATCH -SubDomain vsrm -projectName $ProjectName `
                   -Area release `
                   -Resource releases `
                   -id "$ReleaseId/environments/$item" `

@@ -11,7 +11,7 @@ function Disable-VSTeamAgent {
    process {
       foreach ($item in $Id) {
          try {
-            _callAPI -Method Patch -NoProject `
+            _callAPI -Method PATCH -NoProject `
                -Area "distributedtask/pools/$PoolId" `
                -Resource agents `
                -Id $item `

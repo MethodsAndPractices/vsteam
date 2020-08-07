@@ -59,8 +59,7 @@ Describe 'VSTeamAccessControlList' {
             $Uri -like "*descriptors=SomeDescriptor*" -and
             $Uri -like "*includeExtendedInfo=True*" -and
             $Uri -like "*token=SomeToken*" -and
-            $Uri -like "*recurse=True*" -and
-            $Method -eq "Get"
+            $Uri -like "*recurse=True*"
          }
       }
 
@@ -74,8 +73,7 @@ Describe 'VSTeamAccessControlList' {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrollists/58450c49-b02d-465a-ab12-59ae512d6531*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*descriptors=SomeDescriptor*" -and
-            $Uri -like "*token=SomeToken*" -and
-            $Method -eq "Get"
+            $Uri -like "*token=SomeToken*"
          }
       }
 
@@ -89,8 +87,7 @@ Describe 'VSTeamAccessControlList' {
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*descriptors=AcesDescriptor*" -and
-            $Uri -like "*token=AcesToken*" -and
-            $Method -eq "Get"
+            $Uri -like "*token=AcesToken*"
          }
       }
 

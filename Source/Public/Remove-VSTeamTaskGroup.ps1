@@ -15,7 +15,7 @@ function Remove-VSTeamTaskGroup {
       foreach ($item in $Id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Task Group")) {
             # Call the REST API
-            _callAPI -Method Delete -ProjectName $ProjectName `
+            _callAPI -Method DELETE -ProjectName $ProjectName `
                -Area distributedtask `
                -Resource taskgroups `
                -Id $item `

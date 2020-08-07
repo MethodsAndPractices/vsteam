@@ -50,8 +50,7 @@ Describe 'VSTeamNuGetEndpoint' {
          Add-VSTeamNuGetEndpoint -ProjectName 'project' -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -ApiKey '00000000-0000-0000-0000-000000000000'
          Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$(_getApiVersion DistributedTask)" -and
-            $Method -eq 'Post' -and
-            $ContentType -eq 'application/json' -and
+            $Method -eq 'POST' -and
             $Body -like '*"nugetkey": *"00000000-0000-0000-0000-000000000000"*' -and
             $Body -like '*"scheme": *"None"*'
          }
@@ -63,8 +62,7 @@ Describe 'VSTeamNuGetEndpoint' {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$(_getApiVersion DistributedTask)" -and
-            $Method -eq 'Post' -and
-            $ContentType -eq 'application/json' -and
+            $Method -eq 'POST' -and
             $Body -like '*"username": *"testUser"*' -and
             $Body -like '*"password": *"00000000-0000-0000-0000-000000000000"*' -and
             $Body -like '*"scheme": *"UsernamePassword"*'
@@ -75,8 +73,7 @@ Describe 'VSTeamNuGetEndpoint' {
          Add-VSTeamNuGetEndpoint -ProjectName 'project' -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -PersonalAccessToken '00000000-0000-0000-0000-000000000000'
          Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$(_getApiVersion DistributedTask)" -and
-            $Method -eq 'Post' -and
-            $ContentType -eq 'application/json' -and
+            $Method -eq 'POST' -and
             $Body -like '*"apitoken":*"00000000-0000-0000-0000-000000000000"*' -and
             $Body -like '*"scheme":*"Token"*'
          }
