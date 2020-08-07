@@ -5,9 +5,7 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vsteam-lib", "vsteam-lib\vsteam-lib.csproj", "{1AA57E4C-905C-481E-BB2B-F12F62754815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vsteam-lib.Test", "vsteam-lib.Test\vsteam-lib.Test.csproj", "{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Management.Automation.Abstractions", "..\System.Management.Automation.Abstractions\System.Management.Automation.Abstractions\System.Management.Automation.Abstractions.csproj", "{DD6AB358-D07C-4302-8361-6D7ED3D0B1DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vsteam-lib.Test", "vsteam-lib.Test\vsteam-lib.Test.csproj", "{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD6AB358-D07C-4302-8361-6D7ED3D0B1DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD6AB358-D07C-4302-8361-6D7ED3D0B1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD6AB358-D07C-4302-8361-6D7ED3D0B1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD6AB358-D07C-4302-8361-6D7ED3D0B1DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

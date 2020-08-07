@@ -14,10 +14,10 @@
     <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
     <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="Trackyon.System.Management.Automation.Abstractions" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\System.Management.Automation.Abstractions\System.Management.Automation.Abstractions\System.Management.Automation.Abstractions.csproj" />
     <ProjectReference Include="..\vsteam-lib\vsteam-lib.csproj" />
   </ItemGroup>
 

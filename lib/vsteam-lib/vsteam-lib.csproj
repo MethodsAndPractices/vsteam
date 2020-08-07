@@ -7,14 +7,11 @@
 
   <ItemGroup>
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\System.Management.Automation.Abstractions\System.Management.Automation.Abstractions\System.Management.Automation.Abstractions.csproj" />
+    <PackageReference Include="Trackyon.System.Management.Automation.Abstractions" Version="1.0.0" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xCopy $(OutDir)*.* r:\repos\vsteam\dist\bin\ /Y" />
+    <Exec Command="xCopy $(OutDir)*.* $(SolutionDir)..\dist\bin\ /Y" />
   </Target>
 
 </Project>
