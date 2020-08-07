@@ -124,6 +124,10 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 (Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
 
+Write-Output "Building C# project"
+dotnet build --nologo --verbosity quiet lib
+Copy-Item -Recurse .\lib\vsteam-lib\bin\Debug\netstandard2.0\ .\dist\bin\ -Force
+
 Write-Output "Publish complete to $output"
 
 # run the unit tests with Pester

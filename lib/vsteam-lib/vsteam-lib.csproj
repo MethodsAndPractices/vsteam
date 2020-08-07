@@ -11,8 +11,4 @@
     <PackageReference Include="Trackyon.System.Management.Automation.Abstractions" Version="1.0.0" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cp -R $(OutDir) $(SolutionDir)../dist/bin/" />
-  </Target>
-
 </Project>
