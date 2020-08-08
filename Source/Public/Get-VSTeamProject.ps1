@@ -18,8 +18,8 @@ function Get-VSTeamProject {
       [switch] $IncludeCapabilities,
 
       [Parameter(ParameterSetName = 'ByName', Mandatory = $true, Position = 0)]
-      [UncachedProjectValidateAttribute()]
-      [ArgumentCompleter([UncachedProjectCompleter])]
+      [vsteam_lib.ProjectValidateAttribute($true)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $Name
    )
 

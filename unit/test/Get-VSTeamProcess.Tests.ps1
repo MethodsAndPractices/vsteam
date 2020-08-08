@@ -8,7 +8,6 @@ Describe 'VSTeamProcess' {
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProcess.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"

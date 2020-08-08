@@ -3,28 +3,27 @@ Set-StrictMode -Version Latest
 Describe "VSTeam" {
    BeforeAll {
       Import-Module SHiPS
-   
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeam.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
    }
 
    Context "Add-VSTeam" {
-      BeforeAll {   
+      BeforeAll {
          $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
-      
+
          Mock _callAPI { return $singleResult }
-         
-         # These two lines will force a refresh of the project
-         # cache and return an empty list.
-         Mock _getProjects { return @() }
-         Mock _hasProjectCacheExpired { return $true }
+
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
       }
 

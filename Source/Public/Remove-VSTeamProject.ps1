@@ -5,8 +5,8 @@ function Remove-VSTeamProject {
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('ProjectName')]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $Name
    )
    
@@ -24,7 +24,7 @@ function Remove-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Deleting team project' -msg "Deleting $ProjectName"
 
          # Invalidate any cache of projects.
-         [VSTeamProjectCache]::Invalidate()
+         [vsteam_lib.ProjectCache]::Invalidate()
 
          Write-Output "Deleted $ProjectName"
       }

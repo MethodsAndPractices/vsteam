@@ -7,9 +7,9 @@ function Get-VSTeamBuildLog {
 
       [int] $Index,
         
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {

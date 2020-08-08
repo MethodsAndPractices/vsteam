@@ -3,15 +3,16 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamMembership' {
    ## Arrange
    BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+      
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/callMembershipAPI.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+      
       # You have to set the version or the api-version will not be added when [VSTeamVersions]::Graph = ''
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
       

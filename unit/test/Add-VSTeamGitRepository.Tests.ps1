@@ -3,13 +3,13 @@ Set-StrictMode -Version Latest
 Describe "VSTeamGitRepository" {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -31,8 +31,6 @@ Describe "VSTeamGitRepository" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinition.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamQueue.ps1"
@@ -41,8 +39,13 @@ Describe "VSTeamGitRepository" {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
-      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      # . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
    }
 
    Context 'Add-VSTeamGitRepository' {
@@ -66,11 +69,6 @@ Describe "VSTeamGitRepository" {
                visibility  = ''
             }
          }
-
-         # These two lines will force a refresh of the project
-         # cache and return an empty list.
-         Mock _getProjects { return @() }
-         Mock _hasProjectCacheExpired { return $true }
 
          Mock Invoke-RestMethod { return $singleResult }
 

@@ -1,27 +1,31 @@
 Set-StrictMode -Version Latest
 
-BeforeAll {
-   Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
-   
-   $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-
-   . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-   . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-   . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-   . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-   . "$PSScriptRoot/../../Source/Private/common.ps1"
-   . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
-   . "$PSScriptRoot/../../Source/Public/$sut"
-   . "$PSScriptRoot/../../Source/Public/Remove-VSTeamAccount.ps1"
-}
-
 Describe 'VSTeamBuild' {
    BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+   
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+      . "$PSScriptRoot/../../Source/Public/Remove-VSTeamAccount.ps1"
+   
       ## Arrange
       # Make sure the project name is valid. By returning an empty array
       # all project names are valid. Otherwise, you name you pass for the
       # project in your commands must appear in the list.
-      Mock _getProjects { return @() }
+      # Get-VSTeamProject for cache
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
+         $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+         $Uri -like "*`$top=100*" -and
+         $Uri -like "*stateFilter=WellFormed*"
+      }
 
       # Sample result of a single build
       $singleResult = Get-Content "$PSScriptRoot\sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json

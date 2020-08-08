@@ -3,21 +3,28 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamPullRequest' {
    ## Arrange
    BeforeAll {
-
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+      
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       # You have to set the version or the api-version will not be added when versions = ''
       Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
+
+      # Get-VSTeamProject for cache
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
+         $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+         $Uri -like "*`$top=100*" -and
+         $Uri -like "*stateFilter=WellFormed*"
+      }
 
       $result = Get-Content "$PSScriptRoot\sampleFiles\updatePullRequestResponse.json" -Raw | ConvertFrom-Json
    }

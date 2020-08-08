@@ -2,15 +2,18 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamReleaseDefinition' {
    BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+      
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
 
@@ -27,11 +30,6 @@ Describe 'VSTeamReleaseDefinition' {
             modifiedBy      = [PSCustomObject]@{ name = 'project' }
             createdBy       = [PSCustomObject]@{ name = 'test' }
          }
-      }
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
       }
    }
 

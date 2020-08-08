@@ -1,17 +1,19 @@
 Set-StrictMode -Version Latest
 
-BeforeAll {
-   $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-
-   . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-   . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-   . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-   . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-   . "$PSScriptRoot/../../Source/Private/common.ps1"
-   . "$PSScriptRoot/../../Source/Public/$sut"
-}
-
 Describe 'VSTeamBuildLog' {
+   BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+   
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+   }
+
    Context 'Get-VSTeamBuildLog' {
       BeforeAll {
          ## Arrange
@@ -24,7 +26,10 @@ Describe 'VSTeamBuildLog' {
          # Make sure the project name is valid. By returning an empty array
          # all project names are valid. Otherwise, you name you pass for the
          # project in your commands must appear in the list.
-         Mock _getProjects { return @() }
+         Mock Invoke-RestMethod { return @() } -ParameterFilter {
+            $Uri -like "*`$top=100*" -and
+            $Uri -like "*stateFilter=WellFormed*"
+         }
 
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
       }

@@ -4,14 +4,13 @@ Describe 'VSTeamProject' {
    BeforeAll {
       Import-Module SHiPS
       Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
-      
+
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProcess.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -33,10 +32,6 @@ Describe 'VSTeamProject' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinition.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamQueue.ps1"
@@ -45,6 +40,11 @@ Describe 'VSTeamProject' {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProcess.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
       $singleResult = [PSCustomObject]@{
          name        = 'Test'
@@ -64,19 +64,25 @@ Describe 'VSTeamProject' {
          return [PSCustomObject]@{value = @(
                [PSCustomObject]@{
                   name   = 'Agile'
-                  Typeid = '00000000-0000-0000-0000-000000000001' 
+                  Typeid = '00000000-0000-0000-0000-000000000001'
                },
                [PSCustomObject]@{
                   name   = 'CMMI'
-                  Typeid = '00000000-0000-0000-0000-000000000002' 
+                  Typeid = '00000000-0000-0000-0000-000000000002'
                },
                [PSCustomObject]@{
                   name   = 'Scrum'
-                  Typeid = '00000000-0000-0000-0000-000000000003' 
+                  Typeid = '00000000-0000-0000-0000-000000000003'
                }
             )
          }
-      }         
+      }
+
+      # Get-VSTeamProject for cache 
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*`$top=100*" -and
+         $Uri -like "*stateFilter=WellFormed*"
+      }
    }
 
    Context 'Add-VSTeamProject' {
@@ -85,7 +91,7 @@ Describe 'VSTeamProject' {
 
          # Add Project
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = '123-5464-dee43'; url = 'https://someplace.com' } } -ParameterFilter {
-            $Method -eq 'Post' -and
+            $Method -eq 'POST' -and
             $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)"
          }
 
@@ -102,19 +108,19 @@ Describe 'VSTeamProject' {
             $Uri -eq 'https://someplace.com'
          }
 
-         # Get-VSTeamProject
+         # Get-VSTeamProject to return project after creation
          Mock Invoke-RestMethod { return $singleResult } -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)"
          }
-
       }
-      #-Area 'work' -resource 'processes'       
+
       It 'with tfvc should create project with tfvc' {
          Add-VSTeamProject -Name Test -tfvc
 
          Should -Invoke Invoke-RestMethod -Times 1 -Scope It  -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)"
          }
+
          Should -Invoke Invoke-RestMethod -Times 1 -Scope It  -ParameterFilter {
             $Method -eq 'Post' -and
             $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" -and
@@ -146,8 +152,8 @@ Describe 'VSTeamProject' {
          Mock Get-VSTeamProcess { return [PSCustomObject]@{
                name   = 'CMMI'
                id     = 1
-               Typeid = '00000000-0000-0000-0000-000000000002' 
-            } 
+               Typeid = '00000000-0000-0000-0000-000000000002'
+            }
          }
       }
 

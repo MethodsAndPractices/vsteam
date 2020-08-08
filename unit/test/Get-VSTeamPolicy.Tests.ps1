@@ -2,10 +2,28 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamPolicy' {
    BeforeAll {
+      Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+      
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamTask.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamAttempt.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamEnvironment.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamReleases.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -21,6 +39,11 @@ Describe 'VSTeamPolicy' {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
+
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*`$top=100*" -and
+         $Uri -like "*stateFilter=WellFormed*"
+      }
 
       Mock Invoke-RestMethod { return $results }
       Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*boom*" }

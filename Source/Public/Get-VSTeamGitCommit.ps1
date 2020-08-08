@@ -112,8 +112,8 @@ function Get-VSTeamGitCommit {
       [string] $User,
       
       [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 

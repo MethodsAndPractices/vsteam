@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Performance", "CA1813:Avoid unsealed attributes", Justification = "I need this file unsealed so my test project can derive from it to gain access to the protected method.", Scope = "type", Target = "~T:vsteam_lib.ProcessTemplateValidateAttribute")]
+[assembly: SuppressMessage("Performance", "CA1813:Avoid unsealed attributes", Justification = "I need this file unsealed so my test project can derive from it to gain access to the protected method.", Scope = "type", Target = "~T:vsteam_lib.ProjectValidateAttribute")]

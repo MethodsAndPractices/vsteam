@@ -3,13 +3,12 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamArea' {
    BeforeAll {
       Import-Module SHiPS
-      
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Remove-VSTeamClassificationNode.ps1"

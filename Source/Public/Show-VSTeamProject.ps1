@@ -6,8 +6,8 @@ function Show-VSTeamProject {
       [string] $Id,
 
       [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter]) ]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter]) ]
       [Alias('ProjectName')]
       [string] $Name
    )

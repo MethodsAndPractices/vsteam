@@ -2,20 +2,22 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamVariableGroup' {
    BeforeAll {
-
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+      
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamVariableGroup.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
-      Mock _getProjects { return @() }
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
+
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'VariableGroups' }
    }
 

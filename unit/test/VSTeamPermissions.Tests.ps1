@@ -2,16 +2,16 @@ Set-StrictMode -Version Latest
 
 Describe "VSTeamPermissions" {
    BeforeAll {
-      Import-Module SHiPS      
-      
+      Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-      
+
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGroups.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUsers.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"

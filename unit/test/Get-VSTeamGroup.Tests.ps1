@@ -3,12 +3,27 @@ Set-StrictMode -Version Latest
 Describe "VSTeamGroup" {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
    
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamTask.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamAttempt.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamEnvironment.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamReleases.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
@@ -41,10 +56,18 @@ Describe "VSTeamGroup" {
             Mock _supportsGraph
 
             Mock Invoke-RestMethod { return $groupListResult }
+
+            Mock Get-VSTeamProject { return $projectResult } -ParameterFilter {
+               $Name -like "Test Project Public"
+            }
+
+            Mock Invoke-RestMethod { return @() } -ParameterFilter {
+               $Uri -like "*`$top=100*" -and
+               $Uri -like "*stateFilter=WellFormed*"
+            }
          }
 
-         It 'by project should return groups' {
-            Mock Get-VSTeamProject { return $projectResult } -Verifiable
+         It 'by project should return groups' {            
             Mock Get-VSTeamDescriptor { return  [VSTeamDescriptor]::new($scopeResult) } -Verifiable
 
             Get-VSTeamGroup -ProjectName "Test Project Public"

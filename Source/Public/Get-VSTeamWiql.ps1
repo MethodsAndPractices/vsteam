@@ -11,9 +11,9 @@ function Get-VSTeamWiql {
 
       [string] $Team,
 
-      [Parameter(Position = 2)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $false, Position = 2)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       $ProjectName,
 
       [int] $Top = 100,

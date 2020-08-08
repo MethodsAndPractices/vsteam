@@ -3,15 +3,13 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamWorkItemAreaPermission' {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -35,7 +33,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Public/Add-VSTeamAccessControlEntry.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
@@ -161,8 +158,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
 
    Context 'Add-VSTeamWorkItemAreaPermission' {
       BeforeAll {
-         # Mock _getProjects { return "Test Project Public" }
-         Mock _hasProjectCacheExpired { return $false }
          Mock Get-VSTeamClassificationNode { return $areaRootNodeObject }
          Mock Get-VSTeamClassificationNode { return $parentClassificationNodeObject } -ParameterFilter { $Path -eq "Child%201%20Level%201" }
          Mock Get-VSTeamClassificationNode { return $classificationNodeByIdObject } -ParameterFilter { $Ids -eq 44 -or $Path -eq "Child 1 Level 1/Child 1 Level 2" }

@@ -3,17 +3,20 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamIteration' {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
    
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamClassificationNode"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    
       $withoutChildNode = Get-Content "$PSScriptRoot\sampleFiles\withoutChildNode.json" -Raw | ConvertFrom-Json
@@ -26,7 +29,10 @@ Describe 'VSTeamIteration' {
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
       # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*`$top=100*" -and
+         $Uri -like "*stateFilter=WellFormed*"
+      }
    }
 
    Context 'Get-VSTeamIteration' {

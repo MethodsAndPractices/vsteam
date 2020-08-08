@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\lib",
+    "\\lib\\vsteam-lib",
+    "\\lib\\vsteam-lib.Test",
+    "\\Source",
+    "\\Source\\Classes",
+    "\\Source\\Private",
+    "\\Source\\Public",
+    "\\unit",
+    "\\unit\\test"
+  ],
+  "SelectedNode": "\\lib\\vsteam-lib\\ProjectValidateAttribute.cs",
+  "PreviewInSolutionExplorer": false
+}

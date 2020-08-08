@@ -2,24 +2,30 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamPullRequest' {
    BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-      
+
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProcess.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
-      
+
 
       # You have to manually load the type file so the property reviewStatus
       # can be tested.
       Update-TypeData -AppendPath "$PSScriptRoot/../../Source/types/Team.PullRequest.ps1xml" -ErrorAction Ignore
 
-      Mock _getProjects { return $null }
-      Mock _hasProjectCacheExpired { return $true }
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*`$top=100*" -and
+         $Uri -like "*stateFilter=WellFormed*"
+      }
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }

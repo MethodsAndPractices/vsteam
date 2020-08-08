@@ -23,7 +23,7 @@ namespace vsteam_lib.Test
          // Arrange
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke<string>().Returns(this._templates);
-         ProcessTemplateCache.Shell = ps;
+         ProcessTemplateCache.Cache.Shell = ps;
          ProcessTemplateCache.Invalidate();
 
          // Act
@@ -37,7 +37,7 @@ namespace vsteam_lib.Test
          // Arrange
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke<string>().Returns(this._templates);
-         ProcessTemplateCache.Shell = ps;
+         ProcessTemplateCache.Cache.Shell = ps;
          ProcessTemplateCache.Invalidate();
 
          // Act
@@ -52,7 +52,7 @@ namespace vsteam_lib.Test
          // Arrange
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke<string>().Returns(this._templates);
-         ProcessTemplateCache.Shell = ps;
+         ProcessTemplateCache.Cache.Shell = ps;
          ProcessTemplateCache.Invalidate();
 
          // Act
@@ -67,7 +67,7 @@ namespace vsteam_lib.Test
          // Arrange
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke<string>().Returns(this._empty);
-         ProcessTemplateCache.Shell = ps;
+         ProcessTemplateCache.Cache.Shell = ps;
          ProcessTemplateCache.Invalidate();
 
          // Act

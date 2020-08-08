@@ -11,7 +11,7 @@ class VSTeamAccount : SHiPSDirectory {
       $this.AddTypeName('Team.Account')
 
       # Invalidate any cache of projects.
-      [VSTeamProjectCache]::Invalidate()
+      [vsteam_lib.ProjectCache]::Invalidate()
    }
 
    [object[]] GetChildItem() {

@@ -3,11 +3,11 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamPermissionInheritance' {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
    
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
@@ -42,9 +42,15 @@ Describe 'VSTeamPermissionInheritance' {
             $Service -eq 'Release' -or
             $Service -eq 'Git'
          }
-         Mock _hasProjectCacheExpired { return $false }
+         
+         Mock Invoke-RestMethod { return @() } -ParameterFilter {
+            $Uri -like "*`$top=100*" -and
+            $Uri -like "*stateFilter=WellFormed*"
+         }
 
-         Mock Get-VSTeamProject { return $singleResult }
+         Mock Get-VSTeamProject { return $singleResult } -ParameterFilter {
+            $Name -like 'project'
+         }
          Mock Get-VSTeamGitRepository { return $gitRepoResult }
          Mock Get-VSTeamBuildDefinition { return $buildDefresults.value }
          Mock Get-VSTeamReleaseDefinition { return $releaseDefresults.value }

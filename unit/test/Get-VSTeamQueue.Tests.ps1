@@ -3,6 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamQueue' {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
@@ -12,7 +13,6 @@ Describe 'VSTeamQueue' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueue.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"

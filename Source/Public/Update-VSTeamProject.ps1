@@ -11,9 +11,9 @@ function Update-VSTeamProject {
       [string] $Id,
 
       [Alias('ProjectName')]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter]) ]
       [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter]) ]
       [string] $Name
    )
    process {
@@ -63,7 +63,7 @@ function Update-VSTeamProject {
          _trackProjectProgress -resp $resp -title 'Updating team project' -msg $msg
 
          # Invalidate any cache of projects.
-         [VSTeamProjectCache]::Invalidate()
+         [vsteam_lib.ProjectCache]::Invalidate()
 
          # Return the project now that it has been updated
          return Get-VSTeamProject -Id $finalName

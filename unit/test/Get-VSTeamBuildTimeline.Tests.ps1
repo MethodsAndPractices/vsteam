@@ -1,17 +1,17 @@
 Set-StrictMode -Version Latest
 
-BeforeAll {
-   $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-
-   . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-   . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-   . "$PSScriptRoot/../../Source/Private/common.ps1"
-   . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
-   . "$PSScriptRoot/../../Source/Public/$sut"
-}
-
 Describe 'VSTeamBuildTimeline' {
    BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+   
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+   
       ## Arrnage
       # Make sure the project name is valid. By returning an empty array
       # all project names are valid. Otherwise, you name you pass for the

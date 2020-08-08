@@ -2,12 +2,11 @@ Set-StrictMode -Version Latest
 
 Describe "VSTeamUserEntitlement" {
    BeforeAll {
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+      
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamUserEntitlement.ps1"
@@ -17,7 +16,6 @@ Describe "VSTeamUserEntitlement" {
    Context 'Add-VSTeamUserEntitlement' {
       BeforeAll {
          [VSTeamVersions]::ModuleVersion = '0.0.0'
-         Mock _getProjects { return @() }
          Mock _getApiVersion { return 'VSTS' }
          Mock _getInstance { return 'https://dev.azure.com/test' }
 

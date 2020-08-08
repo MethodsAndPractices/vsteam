@@ -3,17 +3,20 @@ Set-StrictMode -Version Latest
 Describe "VSTeam" {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
    
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeam.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    
       $results = [PSCustomObject]@{
@@ -36,9 +39,11 @@ Describe "VSTeam" {
          # Make sure the project name is valid. By returning an empty array
          # all project names are valid. Otherwise, you name you pass for the
          # project in your commands must appear in the list.
-         Mock _getProjects { return @() }
-
-         Mock _hasProjectCacheExpired { return $true }
+         # Get-VSTeamProject for cache
+         Mock Invoke-RestMethod { return @() } -ParameterFilter {
+            $Uri -like "*`$top=100*" -and
+            $Uri -like "*stateFilter=WellFormed*"
+         }
       }
 
       Context "services" {

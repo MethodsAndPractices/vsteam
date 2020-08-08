@@ -19,7 +19,7 @@ namespace vsteam_lib.Test
          // Arrange
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke<string>().Returns(this._templates);
-         ProcessTemplateCache.Shell = ps;
+         ProcessTemplateCache.Cache.Shell = ps;
          ProcessTemplateCache.Invalidate();
 
          var target = new ProcessTemplateCompleter(ps);

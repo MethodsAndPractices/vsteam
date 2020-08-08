@@ -1,24 +1,50 @@
 Set-StrictMode -Version Latest
 
-BeforeAll {
-   $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-
-   . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-   . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-   . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-   . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-   . "$PSScriptRoot/../../Source/Private/common.ps1"
-   . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
-   . "$PSScriptRoot/../../Source/Public/$sut"
-}
-
 Describe 'VSTeamBuildArtifact' {
    BeforeAll {
+      Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+   
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamTask.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamAttempt.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamEnvironment.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamReleases.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+
       # Make sure the project name is valid. By returning an empty array
       # all project names are valid. Otherwise, you name you pass for the
       # project in your commands must appear in the list.
-      Mock _getProjects { return @() }
+      # Get-VSTeamProject for cache
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {
+         $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
+         $Uri -like "*api-version=$(_getApiVersion Core)*" -and
+         $Uri -like "*`$top=100*" -and
+         $Uri -like "*stateFilter=WellFormed*"
+      }
    }
+
    Context "Get-VSTeamBuildArtifact" {
       BeforeAll {
          ## Arrange
@@ -39,7 +65,7 @@ Describe 'VSTeamBuildArtifact' {
                }
             }
          } -ParameterFilter {
-            $Uri -like "*1*"
+            $Uri -like "*builds/1*"
          }
 
          Mock Invoke-RestMethod { return [PSCustomObject]@{

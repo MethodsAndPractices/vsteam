@@ -10,7 +10,6 @@ Describe 'VSTeamBuild' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -32,15 +31,18 @@ Describe 'VSTeamBuild' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinition.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/TeamQueueCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Public/Remove-VSTeamAccount.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamBuildDefinition.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
    }
 
    Context 'Add-VSTeamBuild' -Tag "Add" {

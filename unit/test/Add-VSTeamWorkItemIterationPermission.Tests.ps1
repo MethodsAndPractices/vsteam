@@ -3,15 +3,13 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamWorkItemIterationPermission' {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -31,12 +29,10 @@ Describe 'VSTeamWorkItemIterationPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamGroup.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamAccessControlEntry.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Public/Add-VSTeamAccessControlEntry.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
@@ -130,15 +126,10 @@ Describe 'VSTeamWorkItemIterationPermission' {
 
       # You have to set the version or the api-version will not be added when versions = ''
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock _hasProjectCacheExpired { return $true }
-      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
    }
 
    Context 'Add-VSTeamWorkItemIterationPermission' {
       BeforeAll {
-         # Mock _getProjects { return "Test Project Public" }
          Mock Get-VSTeamClassificationNode { return $iterationRootNodeObject }
          Mock Get-VSTeamClassificationNode { return $classificationNodeIterationIdObject } -ParameterFilter { $Ids -eq 44 -or $Path -eq "Sprint 1" }
 

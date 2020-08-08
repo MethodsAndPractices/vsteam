@@ -1,23 +1,22 @@
 Set-StrictMode -Version Latest
 
-BeforeAll {
-   Import-Module SHiPS
-
-   $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-
-   . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-   . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-   . "$PSScriptRoot/../../Source/Classes/VSTeamProjectCache.ps1"
-   . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-   . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-   . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
-   . "$PSScriptRoot/../../Source/Public/Get-VSTeamClassificationNode"
-   . "$PSScriptRoot/../../Source/Private/common.ps1"
-   . "$PSScriptRoot/../../Source/Public/$sut"
-}
-
 Describe 'Get-VSTeamArea' {
    BeforeAll {
+      Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
+   
+      $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
+
+      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
+      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
+      . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamClassificationNode"
+      . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Public/$sut"
+   
       $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
 
       # Make sure the project name is valid. By returning an empty array
