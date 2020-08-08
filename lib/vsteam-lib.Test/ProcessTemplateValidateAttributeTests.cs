@@ -1,10 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
-using System.Text;
 
 namespace vsteam_lib.Test
 {
@@ -13,12 +11,13 @@ namespace vsteam_lib.Test
    ///  to the protected method we need to test.
    /// </summary>
    [TestClass]
+   [ExcludeFromCodeCoverage]
    public sealed class ProcessTemplateValidateAttributeTests : ProcessTemplateValidateAttribute
    {
+      private readonly Collection<string> _empty = new Collection<string>();
       private readonly Collection<string> _templates = new Collection<string>() { "Agile", "Basic", "CMMI", "Scrum", "Scrum with spaces" };
 
       [TestMethod]
-      [ExpectedException(typeof(ValidationMetadataException))]
       public void Invalid_Value_Throws()
       {
          // Arrange
@@ -28,9 +27,8 @@ namespace vsteam_lib.Test
          ProcessTemplateCache.Invalidate();
 
          // Act
-         this.Validate("Test", null);
-
          // Assert
+         Assert.ThrowsException<ValidationMetadataException>(() => this.Validate("Test", null));
       }
 
       [TestMethod]
@@ -44,6 +42,36 @@ namespace vsteam_lib.Test
 
          // Act
          this.Validate("Basic", null);
+
+         // Assert
+      }
+
+      [TestMethod]
+      public void Null_Value_Does_Not_Throw()
+      {
+         // Arrange
+         var ps = BaseTests.PrepPowerShell();
+         ps.Invoke<string>().Returns(this._templates);
+         ProcessTemplateCache.Shell = ps;
+         ProcessTemplateCache.Invalidate();
+
+         // Act
+         this.Validate(null, null);
+
+         // Assert
+      }
+
+      [TestMethod]
+      public void Empty_Cache_Does_Not_Throw()
+      {
+         // Arrange
+         var ps = BaseTests.PrepPowerShell();
+         ps.Invoke<string>().Returns(this._empty);
+         ProcessTemplateCache.Shell = ps;
+         ProcessTemplateCache.Invalidate();
+
+         // Act
+         this.Validate("Agile", null);
 
          // Assert
       }

@@ -2,11 +2,13 @@
 using NSubstitute;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace vsteam_lib.Test
 {
    [TestClass]
+   [ExcludeFromCodeCoverage]
    public class ProcessTemplateCacheTests
    {
       private readonly Collection<string> _templates = new Collection<string>() { "Agile", "Basic", "CMMI", "Scrum", "Scrum with spaces" };
