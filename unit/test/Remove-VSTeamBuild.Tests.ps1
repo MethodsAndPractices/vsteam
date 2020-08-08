@@ -7,15 +7,14 @@ Describe 'Remove-VSTeamBuild' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject"
       . "$PSScriptRoot/../../Source/Public/$sut"
    
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+      # Invalidate the cache to force a call to Get-VSTeamProject so the
+      # test can control what is returned.
+      [vsteam_lib.ProjectCache]::Invalidate()
+      Mock Get-VSTeamProject { return @(@{Name = "VSTeamBuild"}) }
    }
 
    Context 'Service' {
@@ -28,14 +27,14 @@ Describe 'Remove-VSTeamBuild' {
          Mock Invoke-RestMethod
 
          # Act
-         Remove-VSTeamBuild -projectName project -id 2 -Force
+         Remove-VSTeamBuild -projectName VSTeamBuild -id 2 -Force
       }
 
       It 'should delete build' {
          # Assert
          Should -Invoke Invoke-RestMethod -Scope Context -Exactly -Times 1 -ParameterFilter {
             $Method -eq 'Delete' -and
-            $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2?api-version=$(_getApiVersion Build)"
+            $Uri -eq "https://dev.azure.com/test/VSTeamBuild/_apis/build/builds/2?api-version=$(_getApiVersion Build)"
          }
       }
    }
@@ -49,11 +48,11 @@ Describe 'Remove-VSTeamBuild' {
       }
 
       It 'should delete build' {
-         Remove-VSTeamBuild -projectName project -id 2 -Force
+         Remove-VSTeamBuild -projectName VSTeamBuild -id 2 -Force
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Delete' -and
-            $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2?api-version=$(_getApiVersion Build)"
+            $Uri -eq "http://localhost:8080/tfs/defaultcollection/VSTeamBuild/_apis/build/builds/2?api-version=$(_getApiVersion Build)"
          }
       }
    }
@@ -66,7 +65,7 @@ Describe 'Remove-VSTeamBuild' {
          Mock Invoke-RestMethod { throw 'Testing error handling.' }
 
          # Act
-         Remove-VSTeamBuild -ProjectName project -id 2 -Force
+         Remove-VSTeamBuild -ProjectName VSTeamBuild -id 2 -Force
       }
 
       It 'should add tags to Build' {

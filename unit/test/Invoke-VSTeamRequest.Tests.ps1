@@ -11,10 +11,6 @@ Describe 'VSTeamRequest' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTask.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamAttempt.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamEnvironment.ps1"
@@ -32,8 +28,10 @@ Describe 'VSTeamRequest' {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
-      Mock _getProjects { return @() }
-      Mock _hasProjectCacheExpired { return $true }
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
    }
 
    Context 'Invoke-VSTeamRequest Options' {

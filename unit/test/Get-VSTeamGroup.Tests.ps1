@@ -24,10 +24,6 @@ Describe "VSTeamGroup" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGroup.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDescriptor.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -36,6 +32,11 @@ Describe "VSTeamGroup" {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamDescriptor.ps1"
       . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
    }
    
    Context 'Get-VSTeamGroup' {
@@ -145,11 +146,6 @@ Describe "VSTeamGroup" {
          # using the Set-VSTeamAccount function.
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
          Mock _callAPI
-      
-         # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-         # if you don't _callAPI will be called for this an throw off the count
-         # below.
-         Mock _getProjects { return @() }
 
          Mock _getApiVersion { return 'TFS2017' }
          Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Graph' }

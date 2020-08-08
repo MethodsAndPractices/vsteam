@@ -3,21 +3,22 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamWorkItem' {
    BeforeAll {
       Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
-      
+
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
+
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
       $obj = @{
          id  = 47

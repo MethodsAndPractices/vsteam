@@ -8,7 +8,6 @@ Describe "Get-VSTeamJobRequest" {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamJobRequest.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -41,9 +40,6 @@ Describe "Get-VSTeamJobRequest" {
       }
 
       It "return 2 jobs" {
-         # This should stop the call to cache projects
-         Mock _hasProjectCacheExpired { return $false }
-
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -62,9 +58,6 @@ Describe "Get-VSTeamJobRequest" {
       }
 
       It "return all jobs" {
-         # This should stop the call to cache projects
-         Mock _hasProjectCacheExpired { return $false }
-
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -75,9 +68,6 @@ Describe "Get-VSTeamJobRequest" {
       }
 
       It "return 2 jobs" {
-         # This should stop the call to cache projects
-         Mock _hasProjectCacheExpired { return $false }
-
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

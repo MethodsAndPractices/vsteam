@@ -15,10 +15,6 @@ Describe 'VSTeamPermissionInheritance' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamPermissionInheritance.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTask.ps1"
@@ -44,6 +40,11 @@ Describe 'VSTeamPermissionInheritance' {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamAccessControlList.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
       
       $gitRepoResult = Get-Content "$PSScriptRoot\sampleFiles\singleGitRepo.json" -Raw | ConvertFrom-Json
       $buildDefresults = Get-Content "$PSScriptRoot\sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
@@ -67,9 +68,6 @@ Describe 'VSTeamPermissionInheritance' {
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' -or $Service -eq 'Release' -or $Service -eq 'Git' }
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
       Mock _callAPI { return $singleResult } -ParameterFilter {
          $Resource -eq 'projects' -and

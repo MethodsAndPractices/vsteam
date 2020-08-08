@@ -7,7 +7,6 @@ Describe 'VSTeamAgent' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    }

@@ -10,7 +10,6 @@ Describe 'VSTeamPool' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -18,7 +17,6 @@ Describe 'VSTeamPool' {
 
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
-      Mock _hasProjectCacheExpired { return $false }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
 
       $hostedPool = [PSCustomObject]@{
@@ -53,11 +51,6 @@ Describe 'VSTeamPool' {
          size      = 1
          isHosted  = $false
          Name      = 'Default'
-      }
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
       }
    }
 

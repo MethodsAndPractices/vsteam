@@ -7,15 +7,16 @@ Describe "VSTeamBuildDefinition" {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Remove-VSTeamAccount.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
       
       $resultsAzD = Get-Content "$PSScriptRoot\sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
-
-      Mock _hasProjectCacheExpired { return $false }
    }
 
    Context "Update-VSTeamBuildDefinition" {
@@ -34,9 +35,6 @@ Describe "VSTeamBuildDefinition" {
          }
 
          It "should update build definition from json" {
-            # This should stop the call to cache projects
-            Mock _hasProjectCacheExpired { return $false }
-
             Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition 'JSON'
 
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -47,9 +45,6 @@ Describe "VSTeamBuildDefinition" {
          }
 
          It 'should update build definition from file' {
-            # This should stop the call to cache projects
-            Mock _hasProjectCacheExpired { return $false }
-
             Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
 
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

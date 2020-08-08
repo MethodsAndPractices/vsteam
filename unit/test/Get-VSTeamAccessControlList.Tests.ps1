@@ -9,8 +9,6 @@ Describe 'VSTeamAccessControlList' {
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamAccessControlEntry.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamAccessControlList.ps1"
@@ -19,12 +17,12 @@ Describe 'VSTeamAccessControlList' {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    
-      ## Arrange
-      # Make sure the project name is valid. By returning an empty array
-      # all project names are valid. Otherwise, you name you pass for the
-      # project in your commands must appear in the list.
-      Mock _getProjects { return @() }
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
+      ## Arrange
       # You have to set the version or the api-version will not be added when versions = ''
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
@@ -36,8 +34,8 @@ Describe 'VSTeamAccessControlList' {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
    }
+   
    Context 'Get-VSTeamAccessControlList' {
       BeforeAll {
          Mock Invoke-RestMethod { return $accessControlListResult }

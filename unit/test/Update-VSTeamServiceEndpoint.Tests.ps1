@@ -7,8 +7,6 @@ Describe 'VSTeamServiceEndpoint' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Add-VSTeamServiceEndpoint.ps1"
@@ -18,8 +16,6 @@ Describe 'VSTeamServiceEndpoint' {
 
    Context 'Update-VSTeamServiceEndpoint' {
       BeforeAll {
-         Mock _hasProjectCacheExpired { return $false }
-
          Mock _getInstance { return 'https://dev.azure.com/test' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
 

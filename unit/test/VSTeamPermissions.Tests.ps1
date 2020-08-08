@@ -12,8 +12,6 @@ Describe "VSTeamPermissions" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamGroups.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUsers.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamUser.ps1"

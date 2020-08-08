@@ -11,18 +11,16 @@ Describe "VSTeamGitRef" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRef.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    
-      ## Arrange
-      # Make sure the project name is valid. By returning an empty array
-      # all project names are valid. Otherwise, you name you pass for the
-      # project in your commands must appear in the list.
-      Mock _getProjects { return @() }
-      
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
+
+      ## Arrange      
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -39,9 +37,6 @@ Describe "VSTeamGitRef" {
             }
          }
       }
-   
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
 
       Mock Invoke-RestMethod { return $results }
       Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." } -ParameterFilter {

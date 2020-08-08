@@ -9,6 +9,11 @@ Describe 'Common' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
    }
 
    Context '_convertSecureStringTo_PlainText' {
@@ -22,10 +27,6 @@ Describe 'Common' {
    }
 
    Context '_buildProjectNameDynamicParam set Alias' {
-      BeforeAll {
-         Mock _getProjects
-      }
-
       It 'Should set the alias of dynamic parameter' {
          $actual = _buildProjectNameDynamicParam -AliasName TestAlias
          $actual["ProjectName"].Attributes[1].AliasNames | Should -Be 'TestAlias'
@@ -76,7 +77,10 @@ Describe 'Common' {
 
    Context '_buildProjectNameDynamicParam' {
       BeforeAll {
-         Mock _getProjects { return  ConvertFrom-Json '["Demo", "Universal"]' }
+         # Prime the project cache with desired list. This will make sure
+         # the project name used will pass validation and Get-VSTeamProject 
+         # will not need to be called.
+         [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))
       }
 
       It 'should return dynamic parameter' {
@@ -86,7 +90,10 @@ Describe 'Common' {
 
    Context '_buildDynamicParam no defaults' {
       BeforeAll {
-         Mock _getProjects { return  ConvertFrom-Json '["Demo", "Universal"]' }
+         # Prime the project cache with desired list. This will make sure
+         # the project name used will pass validation and Get-VSTeamProject 
+         # will not need to be called.
+         [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))
 
          $testParams = @{
             ParameterName                   = 'TestParam'
@@ -133,7 +140,10 @@ Describe 'Common' {
 
    Context '_buildDynamicParam defaults' {
       BeforeAll {
-         Mock _getProjects { return  ConvertFrom-Json '["Demo", "Universal"]' }
+         # Prime the project cache with desired list. This will make sure
+         # the project name used will pass validation and Get-VSTeamProject 
+         # will not need to be called.
+         [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))
 
          $param = (_buildDynamicParam)
       }

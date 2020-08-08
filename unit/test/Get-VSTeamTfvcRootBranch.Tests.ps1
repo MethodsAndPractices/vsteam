@@ -7,11 +7,15 @@ Describe 'VSTeamTfvcRootBranch'  -Tag 'unit', 'tfvc', 'get' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
       $singleResult = [PSCustomObject]@{
          path        = "$/TfvcProject/Master";
@@ -40,9 +44,6 @@ Describe 'VSTeamTfvcRootBranch'  -Tag 'unit', 'tfvc', 'get' {
    Context 'Get-VSTeamTfvcRootBranch' {
       Context 'Services' {
          BeforeAll {
-            # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-            Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
-
             Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
          }
 
@@ -134,11 +135,6 @@ Describe 'VSTeamTfvcRootBranch'  -Tag 'unit', 'tfvc', 'get' {
 
       Context 'Server' {
          BeforeAll {
-            # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-            Mock Invoke-RestMethod { return @() } -ParameterFilter {
-               $Uri -like "*_apis/projects*"
-            }
-
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
             Mock _useWindowsAuthenticationOnPremise { return $true }
          }

@@ -9,23 +9,19 @@ Describe "VSTeamSecurityNamespace" {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
    }
 
    Context "Get-VSTeamSecurityNamespace" {
-      BeforeAll {
-         # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-         # to avoid the
-         # Cannot validate argument on parameter 'ProjectName'.
-         # error when using test project names that do not really exist.
-         Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/projects*" }
-      }
-
       Context 'Services' {
          BeforeAll {
             # Set the account to use for testing. A normal user would do this

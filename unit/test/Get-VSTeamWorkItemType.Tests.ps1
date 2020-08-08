@@ -7,14 +7,18 @@ Describe 'VSTeamWorkItemType' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/WorkItemTypeCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/WorkItemTypeValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
-      
+
+      # Invalidate the cache to force a call to Get-VSTeamProject so the
+      # test can control what is returned.
+      [vsteam_lib.ProjectCache]::Invalidate()
+      Mock Get-VSTeamProject { return @(@{Name = "VSTeamWorkItemType"}) }
+
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
@@ -39,24 +43,24 @@ Describe 'VSTeamWorkItemType' {
 
       It 'with project only should return all work item types' {
          ## Act
-         Get-VSTeamWorkItemType -ProjectName test
+         Get-VSTeamWorkItemType -ProjectName VSTeamWorkItemType
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes?api-version=$(_getApiVersion Core)"
+            $Uri -eq "https://dev.azure.com/test/VSTeamWorkItemType/_apis/wit/workitemtypes?api-version=$(_getApiVersion Core)"
          }
       }
 
       It 'by type with default project should return 1 work item type' {
          ## Arrange
-         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
+         $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'VSTeamWorkItemType'
 
          ## Act
          Get-VSTeamWorkItemType -WorkItemType bug
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$(_getApiVersion Core)"
+            $Uri -eq "https://dev.azure.com/test/VSTeamWorkItemType/_apis/wit/workitemtypes/bug?api-version=$(_getApiVersion Core)"
          }
       }
 
@@ -65,11 +69,11 @@ Describe 'VSTeamWorkItemType' {
          $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
          ## Act
-         Get-VSTeamWorkItemType -ProjectName test -WorkItemType bug
+         Get-VSTeamWorkItemType -ProjectName VSTeamWorkItemType -WorkItemType bug
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/test/_apis/wit/workitemtypes/bug?api-version=$(_getApiVersion Core)"
+            $Uri -eq "https://dev.azure.com/test/VSTeamWorkItemType/_apis/wit/workitemtypes/bug?api-version=$(_getApiVersion Core)"
          }
       }
    }

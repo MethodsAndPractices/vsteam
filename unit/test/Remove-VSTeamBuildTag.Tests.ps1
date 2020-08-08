@@ -7,10 +7,14 @@ Describe 'VSTeamBuildTag' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject"
       . "$PSScriptRoot/../../Source/Public/$sut"
+
+      # Invalidate the cache to force a call to Get-VSTeamProject so the
+      # test can control what is returned.
+      [vsteam_lib.ProjectCache]::Invalidate()
+      Mock Get-VSTeamProject { return @(@{Name = "VSTeamBuildTag"}) }
    }
 
    Context 'Remove-VSTeamBuildTag' {
@@ -24,20 +28,15 @@ Describe 'VSTeamBuildTag' {
             # Set the account to use for testing. A normal user would do this
             # using the Set-VSTeamAccount function.
             Mock _getInstance { return 'https://dev.azure.com/test' }
-
-            # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-            Mock Invoke-RestMethod { return @() } -ParameterFilter {
-               $Uri -like "*_apis/projects*"
-            }
          }
 
          It 'should add tags to Build' {
-            Remove-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
+            Remove-VSTeamBuildTag -ProjectName VSTeamBuildTag -id 2 -Tags $inputTags
 
             foreach ($inputTag in $inputTags) {
                Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                   $Method -eq 'Delete' -and
-                  $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)" + "&tag=$inputTag"
+                  $Uri -eq "https://dev.azure.com/test/VSTeamBuildTag/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)" + "&tag=$inputTag"
                }
             }
          }
@@ -47,21 +46,16 @@ Describe 'VSTeamBuildTag' {
          BeforeAll {
             Mock _useWindowsAuthenticationOnPremise { return $true }
 
-            # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-            Mock Invoke-RestMethod { return @() } -ParameterFilter {
-               $Uri -like "*_apis/projects*"
-            }
-
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
          }
 
          It 'should add tags to Build' {
-            Remove-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
+            Remove-VSTeamBuildTag -ProjectName VSTeamBuildTag -id 2 -Tags $inputTags
 
             foreach ($inputTag in $inputTags) {
                Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                   $Method -eq 'Delete' -and
-                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)" + "&tag=$inputTag"
+                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/VSTeamBuildTag/_apis/build/builds/2/tags?api-version=$(_getApiVersion Build)" + "&tag=$inputTag"
                }
             }
          }

@@ -11,12 +11,12 @@ Describe 'VSTeamFeed' {
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*_apis/projects*"
-      }
+      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       Mock Show-Browser
    }
