@@ -40,7 +40,9 @@ namespace vsteam_lib
          {
             if (string.IsNullOrEmpty(wordToComplete) || word.StartsWith(wordToComplete, true, CultureInfo.InvariantCulture))
             {
-               values.Add(new CompletionResult($"'{word}'"));
+               // Only wrap in single quotes if they have a space. This makes it easier
+               // to use on macOs
+               values.Add(new CompletionResult(word.Contains(" ") ? $"'{word}'" : word));
             }
          }
       }

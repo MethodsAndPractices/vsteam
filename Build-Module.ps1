@@ -126,6 +126,8 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 Write-Output "Building C# project"
 dotnet build --nologo --verbosity quiet lib
+
+Write-Output "Copying lib to $output\bin"
 Copy-Item -Recurse .\lib\vsteam-lib\bin\Debug\netstandard2.0\ .\dist\bin\ -Force
 
 Write-Output "Publish complete to $output"
@@ -154,6 +156,8 @@ if ($runTests.IsPresent) {
    }
 
    Invoke-Pester -Configuration $pesterArgs
+
+   dotnet test --nologo lib
 }
 
 # reload the just built module

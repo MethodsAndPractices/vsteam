@@ -83,10 +83,7 @@ Describe "VSTeamMember" {
 
    Context 'Get-VSTeamMember for specific team, fed through pipeline' {
       BeforeAll {
-         Mock Invoke-RestMethod { 
-            Write-Host $args
-            return @{ value = 'teammembers' } 
-         }
+         Mock Invoke-RestMethod { return @{ value = 'teammembers' } }
       }
 
       It 'Should return teammembers' {

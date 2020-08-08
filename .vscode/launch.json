@@ -5,6 +5,16 @@
    "version": "0.2.0",
    "configurations": [
       {
+         "name": "Start PowerShell",
+         "type": "coreclr",
+         "request": "launch",
+         "program": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+         "args": [],
+         "cwd": "${workspaceFolder}",
+         "stopAtEntry": false,
+         "externalConsole": true
+      },
+      {
          "type": "PowerShell",
          "request": "launch",
          "name": "PowerShell Pester Tests",
