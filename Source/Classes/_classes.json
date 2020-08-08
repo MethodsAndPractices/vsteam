@@ -7,7 +7,6 @@
       "TeamQueueCompleter.ps1",
       "UncachedProjectCompleter.ps1",
       "WorkItemTypeCompleter.ps1",
-      "ProcessValidateAttribute.ps1",
       "ProjectValidateAttribute.ps1",
       "QueryCompleter.ps1",
       "QueryTransformToIDAttribute.ps1",
