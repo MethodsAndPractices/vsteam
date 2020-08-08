@@ -20,11 +20,11 @@ Adds a tag to a build.
 
 <!-- #include "./params/BuildIds.md" -->
 
-<!-- #include "./params/buildTags.md" -->
+<!-- #include "./params/BuildTags.md" -->
 
 <!-- #include "./params/confirm.md" -->
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/Force.md" -->
 
 <!-- #include "./params/whatIf.md" -->
 
