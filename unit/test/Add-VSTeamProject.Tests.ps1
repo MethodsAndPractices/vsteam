@@ -34,7 +34,6 @@ Describe 'VSTeamProject' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinition.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProcessTemplateCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProcessValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"

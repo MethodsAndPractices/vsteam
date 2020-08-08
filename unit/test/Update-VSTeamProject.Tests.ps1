@@ -15,7 +15,6 @@ Describe 'VSTeamProject' {
       . "$PSScriptRoot/../../Source/Classes/ProjectValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/UncachedProjectCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/UncachedProjectValidateAttribute.ps1"
-      . "$PSScriptRoot/../../Source/Classes/ProcessTemplateCompleter.ps1"
       . "$PSScriptRoot/../../Source/Classes/ProcessValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"

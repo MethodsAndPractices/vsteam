@@ -20,7 +20,7 @@ function Get-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(ParameterSetName = 'ByName', Position = 0)]
-      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
       [Alias('ProcessName', 'ProcessTemplate')]
       $Name = '*',
 

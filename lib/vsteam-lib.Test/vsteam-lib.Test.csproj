@@ -6,7 +6,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <Configurations>Debug;Release;VS</Configurations>
+    <Configurations>Debug;Release;VS;LibOnly</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,20 +10,23 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		LibOnly|Any CPU = LibOnly|Any CPU
 		Release|Any CPU = Release|Any CPU
 		VS|Any CPU = VS|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1AA57E4C-905C-481E-BB2B-F12F62754815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1AA57E4C-905C-481E-BB2B-F12F62754815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA57E4C-905C-481E-BB2B-F12F62754815}.LibOnly|Any CPU.ActiveCfg = LibOnly|Any CPU
+		{1AA57E4C-905C-481E-BB2B-F12F62754815}.LibOnly|Any CPU.Build.0 = LibOnly|Any CPU
 		{1AA57E4C-905C-481E-BB2B-F12F62754815}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AA57E4C-905C-481E-BB2B-F12F62754815}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1AA57E4C-905C-481E-BB2B-F12F62754815}.VS|Any CPU.ActiveCfg = VS|Any CPU
 		{1AA57E4C-905C-481E-BB2B-F12F62754815}.VS|Any CPU.Build.0 = VS|Any CPU
 		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.LibOnly|Any CPU.ActiveCfg = LibOnly|Any CPU
 		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.VS|Any CPU.ActiveCfg = VS|Any CPU
 		{8800D865-8C86-48F4-A2D9-D6F01DBEEAF1}.VS|Any CPU.Build.0 = VS|Any CPU
 	EndGlobalSection

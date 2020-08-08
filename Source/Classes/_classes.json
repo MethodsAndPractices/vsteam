@@ -2,7 +2,6 @@
    "outputFile": "vsteam.classes.ps1",
    "fileType": "classes",
    "files": [
-      "ProcessTemplateCompleter.ps1",
       "ProjectCompleter.ps1",
       "ReleaseDefinitionCompleter.ps1",
       "TeamQueueCompleter.ps1",

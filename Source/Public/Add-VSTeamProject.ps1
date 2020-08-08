@@ -9,7 +9,7 @@ function Add-VSTeamProject {
       [switch] $TFVC,
 
       [ProcessValidateAttribute()]
-      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
       [string] $ProcessTemplate
    )
    

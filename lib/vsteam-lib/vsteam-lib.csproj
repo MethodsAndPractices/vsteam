@@ -8,7 +8,7 @@
      need the PostBuild event to copy the files into the dist folder of VSTeam.
      When not in VS the Build-Module.ps1 files takes care of it because it works
      on macOS and Linux-->
-      <Configurations>Debug;Release;VS</Configurations>
+      <Configurations>Debug;Release;VS;LibOnly</Configurations>
    </PropertyGroup>
 
    <ItemGroup>

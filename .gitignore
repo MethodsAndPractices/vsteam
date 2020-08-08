@@ -37,3 +37,7 @@ vsteam_wcore1903_ps7_tests_result.xml
 integration/fullRun.ps1
 integration/Start-PSCountdown.ps1
 integrationTest-results.xml
+.vs/ProjectSettings.json
+.vs/vsteam/v16/.suo
+.vs/vsteam/v16/TestStore/0/000.testlog
+.vs/vsteam/v16/TestStore/0/testlog.manifest

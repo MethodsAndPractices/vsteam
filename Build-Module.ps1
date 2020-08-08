@@ -43,7 +43,11 @@ param(
    # runs the integration tests
    [Parameter(ParameterSetName = "UnitTest")]
    [Parameter(ParameterSetName = "All")]
-   [switch]$runIntegrationTests
+   [switch]$runIntegrationTests,
+
+   [Parameter(ParameterSetName = "UnitTest")]
+   [Parameter(ParameterSetName = "All")]
+   [switch]$skipLibBuild
 )
 
 function Import-Pester {
@@ -114,23 +118,22 @@ if ($buildHelp.IsPresent) {
    }
 }
 
-Write-Output 'Publishing about help files'
+Write-Output 'Publishing: About help files'
 Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
 Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
-Write-Output 'Updating Functions To Export'
+Write-Output '  Updating: Functions To Export'
 $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
    ForEach-Object -Process { Write-Output "'$_'" }) -join ','
 
 (Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
 
-Write-Output "Building C# project"
-dotnet build --nologo --verbosity quiet lib
+if (-not $skipLibBuild.IsPresent) {
+   Write-Output '  Building: C# project'
+   dotnet build --nologo --verbosity quiet --configuration LibOnly --output $output\bin lib
+}
 
-Write-Output "Copying lib to $output\bin"
-Copy-Item -Recurse .\lib\vsteam-lib\bin\Debug\netstandard2.0\ .\dist\bin\ -Force
-
-Write-Output "Publish complete to $output"
+Write-Output "Publishing: Complete to $output"
 
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
@@ -157,7 +160,9 @@ if ($runTests.IsPresent) {
 
    Invoke-Pester -Configuration $pesterArgs
 
-   dotnet test --nologo lib
+   if (-not $skipLibBuild.IsPresent) {
+      dotnet test --nologo lib
+   }
 }
 
 # reload the just built module
@@ -167,7 +172,7 @@ if ($ipmo.IsPresent -or $analyzeScript.IsPresent -or $runIntegrationTests.IsPres
       Remove-Module VSTeam
    }
 
-   Write-Host "Importing module"
+   Write-Host " Importing: Module"
 
    Import-Module "$output/VSTeam.psd1" -Force
    Set-VSTeamAlias
