@@ -4,13 +4,11 @@
     "\\lib",
     "\\lib\\vsteam-lib",
     "\\lib\\vsteam-lib.Test",
+    "\\lib\\vsteam-lib.Test\\sampleFiles",
     "\\Source",
-    "\\Source\\Classes",
-    "\\Source\\Private",
     "\\Source\\Public",
     "\\unit",
-    "\\unit\\test"
+    "\\unit\\test\\sampleFiles"
   ],
-  "SelectedNode": "\\lib\\vsteam-lib\\ProjectValidateAttribute.cs",
   "PreviewInSolutionExplorer": false
 }

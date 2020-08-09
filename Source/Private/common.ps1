@@ -473,38 +473,6 @@ function _getWorkItemTypes {
    }
 }
 
-function _hasQueryCacheExpired {
-   return $([VSTeamQueryCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
-}
-
-# function _getProjects {
-#    if (-not $(_getInstance)) {
-#       Write-Output @()
-#       return
-#    }
-
-#    $resource = "/projects"
-#    $instance = $(_getInstance)
-#    $version = $(_getApiVersion Core)
-
-#    # Build the url to list the projects
-#    # You CANNOT use _buildRequestURI here or you will end up
-#    # in an infinite loop.
-#    $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
-
-#    # Call the REST API
-#    try {
-#       $resp = _callAPI -url $listurl
-
-#       if ($resp.count -gt 0) {
-#          Write-Output ($resp.value).name
-#       }
-#    }
-#    catch {
-#       Write-Output @()
-#    }
-# }
-
 function _buildProjectNameDynamicParam {
    param(
       [string] $ParameterName = 'ProjectName',

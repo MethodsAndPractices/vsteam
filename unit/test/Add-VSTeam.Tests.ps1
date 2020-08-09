@@ -22,7 +22,7 @@ Describe "VSTeam" {
       BeforeAll {
          $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
 
-         Mock _callAPI { Write-Host $args return $singleResult }
+         Mock _callAPI { return $singleResult }
 
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
       }
