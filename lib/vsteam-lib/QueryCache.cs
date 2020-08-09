@@ -56,7 +56,7 @@ namespace vsteam_lib
          return Cache.Values;
       }
 
-      public static object GetId(string name)
+      public static string GetId(string name)
       {
          if (Ids.Keys.Contains(name))
          {

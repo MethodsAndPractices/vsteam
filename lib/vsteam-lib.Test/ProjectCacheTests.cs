@@ -56,6 +56,7 @@ namespace vsteam_lib.Test
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke<string>().Returns(this._templates);
          ProjectCache.Cache.Shell = ps;
+         ProjectCache.Invalidate();
 
          // Act
          var actual = ProjectCache.GetCurrent(false);

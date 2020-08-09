@@ -1,7 +1,7 @@
 function Get-VSTeamWiql {
    [CmdletBinding(DefaultParameterSetName = 'ByID')]
    param(
-      [QueryTransformToIDAttribute()]
+      [vsteam_lib.QueryTransformToIDAttribute()]
       [ArgumentCompleter([vsteam_lib.QueryCompleter])]
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, Position = 0)]
       [string] $Id,

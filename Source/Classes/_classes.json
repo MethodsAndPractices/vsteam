@@ -2,10 +2,8 @@
    "outputFile": "vsteam.classes.ps1",
    "fileType": "classes",
    "files": [
-      "ReleaseDefinitionCompleter.ps1",
       "TeamQueueCompleter.ps1",
       "WorkItemTypeCompleter.ps1",
-      "QueryTransformToIDAttribute.ps1",
       "WorkItemTypeValidateAttribute.ps1",
       "VSTeamVersions.ps1",
       "VSTeamDirectory.ps1",

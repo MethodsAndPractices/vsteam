@@ -30,7 +30,7 @@ function Add-VSTeamRelease {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
 
-      [ArgumentCompleter([ReleaseDefinitionCompleter])]
+      [ArgumentCompleter([vsteam_lib.ReleaseDefinitionCompleter])]
       [string] $DefinitionName
    )
 
