@@ -6,10 +6,13 @@ namespace vsteam_lib
    /// Cache process template names to reduce the number of
    /// rest APIs calls needed for parameter completion / validation 
    /// </summary>
-   public static class ProcessTemplateCache
+   public static class WorkItemTypeCache
    {
-      internal static InternalCache Cache { get; } = new InternalCache("Get-VSTeamProcess", "Name", false);
-
+      /// <summary>
+      /// This is where all the work is done. Every other call just delegates to this object.
+      /// </summary>
+      internal static InternalCache Cache { get; } = new InternalCache("Get-WorkItemType", "Name", true);
+      
       internal static bool HasCacheExpired => Cache.HasCacheExpired;
 
       public static void Invalidate() => Cache.Invalidate();

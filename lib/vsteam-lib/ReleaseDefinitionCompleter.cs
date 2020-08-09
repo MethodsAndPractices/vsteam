@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation.Abstractions;
 
 namespace vsteam_lib
@@ -11,29 +10,12 @@ namespace vsteam_lib
       /// loaded in a unit test.
       /// </summary>
       [ExcludeFromCodeCoverage]
-      public ReleaseDefinitionCompleter() : base() { }
+      public ReleaseDefinitionCompleter() : base("Get-VSTeamReleaseDefinition", "Name", false) { }
 
       /// <summary>
       /// This constructor is used during unit testings
       /// </summary>
       /// <param name="powerShell">fake instance of IPowerShell used for testing</param>
-      internal ReleaseDefinitionCompleter(IPowerShell powerShell) : base(powerShell) { }
-
-      internal override IEnumerable<string> GetValues(string projectName)
-      {
-         this._powerShell.Commands.Clear();
-
-         var results = this._powerShell.AddCommand("Get-VSTeamReleaseDefinition")
-                                       .AddParameter("ProjectName", projectName)
-                                       .AddCommand("Select-Object")
-                                       .AddParameter("ExpandProperty", "Name")
-                                       .AddParameter("Unique")
-                                       .AddCommand("Sort-Object")
-                                       .Invoke<string>();
-
-         PowerShellWrapper.LogPowerShellError(this._powerShell, results);
-
-         return results;
-      }
+      internal ReleaseDefinitionCompleter(IPowerShell powerShell) : base("Get-VSTeamReleaseDefinition", "Name", false, powerShell) { }
    }
 }

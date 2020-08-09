@@ -7,8 +7,8 @@ function Get-VSTeamWorkItemType {
       [string] $ProjectName,
 
       [Parameter()]
-      [WorkItemTypeValidateAttribute()]
-      [ArgumentCompleter([WorkItemTypeCompleter])]
+      [vsteam_lib.WorkItemTypeValidateAttribute()]
+      [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]
       [string] $WorkItemType
    )
 

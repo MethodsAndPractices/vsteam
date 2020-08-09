@@ -11,7 +11,7 @@ namespace vsteam_lib.Test
    [ExcludeFromCodeCoverage]
    public class ProcessTemplateCacheTests
    {
-      private readonly Collection<string> _templates = new Collection<string>() { "Agile", "Basic", "CMMI", "Scrum", "Scrum with spaces" };
+      private readonly Collection<string> _items = new Collection<string>() { "Agile", "Basic", "CMMI", "Scrum", "Scrum with spaces" };
 
       [TestMethod]
       public void HasCacheExpired()
@@ -38,7 +38,7 @@ namespace vsteam_lib.Test
          // Arrange
          var expected = 5;
          var ps = BaseTests.PrepPowerShell();
-         ps.Invoke<string>().Returns(this._templates);
+         ps.Invoke<string>().Returns(this._items);
          ProcessTemplateCache.Cache.Shell = ps;
 
          // Act
@@ -54,7 +54,7 @@ namespace vsteam_lib.Test
          // Arrange
          var expected = 5;
          var ps = BaseTests.PrepPowerShell();
-         ps.Invoke<string>().Returns(this._templates);
+         ps.Invoke<string>().Returns(this._items);
          ProcessTemplateCache.Cache.Shell = ps;
 
          // Act

@@ -31,7 +31,6 @@ Describe 'VSTeamBuild' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinition.ps1"
-      . "$PSScriptRoot/../../Source/Classes/TeamQueueCompleter.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamQueue.ps1"

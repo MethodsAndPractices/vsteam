@@ -8,27 +8,13 @@ namespace vsteam_lib
    /// </summary>
    public static class ProjectCache
    {
-      internal static InternalCache Cache { get; } = new InternalCache();
+      internal static InternalCache Cache { get; } = new InternalCache("Get-VSTeamProject", "Name", false);
+      
       internal static bool HasCacheExpired => Cache.HasCacheExpired;
 
       public static void Invalidate() => Cache.Invalidate();
 
-      public static void Update(IEnumerable<string> list)
-      {
-         // If a list is passed in use it. If not call Get-VSTeamProcess
-         if (null == list)
-         {
-            Cache.Shell.Commands.Clear();
-
-            list = Cache.Shell.AddCommand("Get-VSTeamProject")
-                              .AddCommand("Select-Object")
-                              .AddParameter("ExpandProperty", "Name")
-                              .AddCommand("Sort-Object")
-                              .Invoke<string>();
-         }
-
-         Cache.Prime(list);
-      }
+      public static void Update(IEnumerable<string> list) => Cache.Update(list);
 
       /// <summary>
       /// There are times we need to force an update of the cache

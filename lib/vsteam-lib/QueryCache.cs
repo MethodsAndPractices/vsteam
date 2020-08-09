@@ -5,7 +5,8 @@ namespace vsteam_lib
 {
    public static class QueryCache
    {
-      internal static InternalCache Cache { get; } = new InternalCache();
+      internal static InternalCache Cache { get; } = new InternalCache("Get-VSTeamQuery", "Name", true);
+
       internal static bool HasCacheExpired => Cache.HasCacheExpired;
       internal static Dictionary<string, string> Ids { get; } = new Dictionary<string, string>();
 

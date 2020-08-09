@@ -7,8 +7,6 @@ Describe 'VSTeamWorkItemType' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/WorkItemTypeCompleter.ps1"
-      . "$PSScriptRoot/../../Source/Classes/WorkItemTypeValidateAttribute.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
@@ -18,6 +16,10 @@ Describe 'VSTeamWorkItemType' {
       # test can control what is returned.
       [vsteam_lib.ProjectCache]::Invalidate()
       Mock Get-VSTeamProject { return @(@{Name = "VSTeamWorkItemType"}) }
+
+      # Prime the cache with an empty list. This will make sure
+      # Get-VSTeamWorkItemType will not need to be called.
+      [vsteam_lib.WorkItemTypeCache]::Update([string[]]@())
 
       ## Arrange
       # Set the account to use for testing. A normal user would do this

@@ -23,7 +23,7 @@ function Add-VSTeamBuild {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
 
-      [ArgumentCompleter([TeamQueueCompleter])]
+      [ArgumentCompleter([vsteam_lib.QueueCompleter])]
       [string] $QueueName,
 
       [ArgumentCompleter([vsteam_lib.BuildDefinitionCompleter])]

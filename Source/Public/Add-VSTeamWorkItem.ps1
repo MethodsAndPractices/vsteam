@@ -25,8 +25,8 @@ function Add-VSTeamWorkItem {
       [string] $ProjectName,
       
       [Parameter(Mandatory = $true)]
-      [WorkItemTypeValidateAttribute()]
-      [ArgumentCompleter([WorkItemTypeCompleter])]
+      [vsteam_lib.WorkItemTypeValidateAttribute()]
+      [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]
       [string] $WorkItemType
    )
 

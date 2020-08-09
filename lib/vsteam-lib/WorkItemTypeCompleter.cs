@@ -3,19 +3,19 @@ using System.Management.Automation.Abstractions;
 
 namespace vsteam_lib
 {
-   public class BuildCompleter : BaseProjectCompleter
+   public class WorkItemTypeCompleter : BaseProjectCompleter
    {
       /// <summary>
       /// This constructor is used when running in a PowerShell session. It cannot be
       /// loaded in a unit test.
       /// </summary>
       [ExcludeFromCodeCoverage]
-      public BuildCompleter() : base("Get-VSTeamBuild", "BuildNumber", true) { }
+      public WorkItemTypeCompleter() : base("Get-WorkItemType", "Name", false) { }
 
       /// <summary>
       /// This constructor is used during unit testings
       /// </summary>
       /// <param name="powerShell">fake instance of IPowerShell used for testing</param>
-      internal BuildCompleter(IPowerShell powerShell) : base("Get-VSTeamBuild", "BuildNumber", true, powerShell) { }
+      internal WorkItemTypeCompleter(IPowerShell powerShell) : base("Get-WorkItemType", "Name", false, powerShell) { }
    }
 }
