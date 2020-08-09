@@ -29,6 +29,11 @@ Describe 'VSTeamPolicy' {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
+      
       ## Arrange
       $results = [PSCustomObject]@{
          value = [PSCustomObject]@{ }
@@ -37,11 +42,6 @@ Describe 'VSTeamPolicy' {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*`$top=100*" -and
-         $Uri -like "*stateFilter=WellFormed*"
-      }
 
       Mock Invoke-RestMethod { return $results }
       Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*boom*" }

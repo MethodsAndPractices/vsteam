@@ -15,14 +15,10 @@ Describe "TeamGitStat" {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
       
-      ## Arrange
-      # Make sure the project name is valid. By returning an empty array
-      # all project names are valid. Otherwise, you name you pass for the
-      # project in your commands must appear in the list.
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*`$top=100*" -and
-         $Uri -like "*stateFilter=WellFormed*"
-      }
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
       $singleResult = Get-Content "$PSScriptRoot\sampleFiles\gitStatSingleResult.json" -Raw | ConvertFrom-Json
 

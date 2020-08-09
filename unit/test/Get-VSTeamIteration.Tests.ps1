@@ -15,6 +15,11 @@ Describe 'VSTeamIteration' {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
+      
       $withoutChildNode = Get-Content "$PSScriptRoot\sampleFiles\withoutChildNode.json" -Raw | ConvertFrom-Json
       $classificationNodeResult = Get-Content "$PSScriptRoot\sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
 
@@ -23,12 +28,6 @@ Describe 'VSTeamIteration' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
 
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*`$top=100*" -and
-         $Uri -like "*stateFilter=WellFormed*"
-      }
    }
 
    Context 'Get-VSTeamIteration' {
