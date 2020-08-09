@@ -17,7 +17,7 @@
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```PowerShell
-PS R:\repos\vsteam> Get-WorkItemType -ProjectName test -WorkItemType 'Code Review Response'
+PS R:\repos\vsteam> Get-VSTeamWorkItemType -ProjectName test -WorkItemType 'Code Review Response'
 ```
 
 This command gets a single work item type.

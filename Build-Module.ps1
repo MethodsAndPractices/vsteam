@@ -47,7 +47,9 @@ param(
 
    [Parameter(ParameterSetName = "UnitTest")]
    [Parameter(ParameterSetName = "All")]
-   [switch]$skipLibBuild
+   [switch]$skipLibBuild,
+    
+   [string]$configuration = "LibOnly"
 )
 
 function Import-Pester {
@@ -130,7 +132,7 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 if (-not $skipLibBuild.IsPresent) {
    Write-Output '  Building: C# project'
-   dotnet build --nologo --verbosity quiet --configuration LibOnly --output $output\bin lib
+   dotnet build --nologo --verbosity quiet --configuration $configuration --output $output\bin lib
 }
 
 Write-Output "Publishing: Complete to $output"
@@ -161,7 +163,7 @@ if ($runTests.IsPresent) {
    Invoke-Pester -Configuration $pesterArgs
 
    if (-not $skipLibBuild.IsPresent) {
-      dotnet test --nologo lib
+      dotnet test --nologo --configuration $configuration lib 
    }
 }
 

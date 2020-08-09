@@ -10,12 +10,12 @@ namespace vsteam_lib
       /// loaded in a unit test.
       /// </summary>
       [ExcludeFromCodeCoverage]
-      public WorkItemTypeCompleter() : base("Get-WorkItemType", "Name", false) { }
+      public WorkItemTypeCompleter() : base("Get-VSTeamWorkItemType", "Name", false) { }
 
       /// <summary>
       /// This constructor is used during unit testings
       /// </summary>
       /// <param name="powerShell">fake instance of IPowerShell used for testing</param>
-      internal WorkItemTypeCompleter(IPowerShell powerShell) : base("Get-WorkItemType", "Name", false, powerShell) { }
+      internal WorkItemTypeCompleter(IPowerShell powerShell) : base("Get-VSTeamWorkItemType", "Name", false, powerShell) { }
    }
 }

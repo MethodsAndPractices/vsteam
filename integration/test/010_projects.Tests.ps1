@@ -16,9 +16,9 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       $email = $env:EMAIL
       $api = $env:API_VERSION
       
-      Write-Host "SkippedOnTFS = $($global:skippedOnTFS)"
-      Write-Host "SkipVariableGroups = $($global:skipVariableGroups)"
-      Write-Host "SkipReleaseDefs = $($global:skipReleaseDefs)"
+      Write-Host "      SkippedOnTFS: $($global:skippedOnTFS)"
+      Write-Host "SkipVariableGroups: $($global:skipVariableGroups)"
+      Write-Host "   SkipReleaseDefs: $($global:skipReleaseDefs)"
       
       $originalLocation = Get-Location
 

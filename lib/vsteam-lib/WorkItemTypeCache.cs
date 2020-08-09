@@ -11,7 +11,7 @@ namespace vsteam_lib
       /// <summary>
       /// This is where all the work is done. Every other call just delegates to this object.
       /// </summary>
-      internal static InternalCache Cache { get; } = new InternalCache("Get-WorkItemType", "Name", true);
+      internal static InternalCache Cache { get; } = new InternalCache("Get-VSTeamWorkItemType", "Name", true);
       
       internal static bool HasCacheExpired => Cache.HasCacheExpired;
 

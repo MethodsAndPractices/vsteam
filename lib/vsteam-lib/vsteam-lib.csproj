@@ -11,6 +11,11 @@
       <Configurations>Debug;Release;VS;LibOnly</Configurations>
    </PropertyGroup>
 
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+     <DebugType>none</DebugType>
+     <DebugSymbols>false</DebugSymbols>
+   </PropertyGroup>
+
    <ItemGroup>
       <PackageReference Include="PowerShellStandard.Library" Version="5.1.0" />
       <PackageReference Include="Trackyon.System.Management.Automation.Abstractions" Version="1.0.0" />
