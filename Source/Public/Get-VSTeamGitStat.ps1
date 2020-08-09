@@ -51,7 +51,7 @@ function Get-VSTeamGitStat {
          else {
             $obj = @()
             foreach ($item in $resp.value) {
-               _applyTypes $item "VSTeam.GitStat"
+               _applyTypes $item "Team.GitStat"
                $obj += $item
             }
 

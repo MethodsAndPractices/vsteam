@@ -12,7 +12,7 @@ namespace vsteam_lib
 {
    /// <summary>
    /// This base class if for completers that could be passed a 
-   /// projct name.
+   /// project name.
    /// </summary>
    public abstract class BaseProjectCompleter : BaseCompleter
    {

@@ -2,6 +2,7 @@
    "outputFile": "vsteam.format.ps1xml",
    "fileType": "formats",
    "files": [
+      "Team.Query.TableView.ps1xml",
       "Team.Provider.JobRequest.TableView.ps1xml",
       "Team.Approval.Pending.TableView.ps1xml",
       "Team.Approval.Approved.TableView.ps1xml",

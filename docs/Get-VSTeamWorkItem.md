@@ -72,12 +72,6 @@ Comma-separated list of requested fields.  The acceptable values for this parame
 Type: String
 ```
 
-### -AsOf
-
-```yaml
-Type: DateTime
-```
-
 ## INPUTS
 
 ### System.String

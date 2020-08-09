@@ -304,6 +304,10 @@ Returns a list of projects in the Team Services or Team Foundation Server accoun
 
 Returns one or more open pull requests from your team, project, or Id.
 
+### [Get-VSTeamQuery](Get-VSTeamQuery.md)
+
+Gets the root queries and their children.
+
 ### [Get-VSTeamQueue](Get-VSTeamQueue.md)
 
 Gets a agent queue.

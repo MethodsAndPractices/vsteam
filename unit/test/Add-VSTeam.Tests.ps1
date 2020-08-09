@@ -22,7 +22,7 @@ Describe "VSTeam" {
       BeforeAll {
          $singleResult = Get-Content "$PSScriptRoot\sampleFiles\get-vsteam.json" -Raw | ConvertFrom-Json
 
-         Mock _callAPI { return $singleResult }
+         Mock _callAPI { Write-Host $args return $singleResult }
 
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
       }
@@ -32,11 +32,9 @@ Describe "VSTeam" {
 
          Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $NoProject -eq $true -and
-            $Area -eq 'projects' -and
-            $Resource -eq 'Test' -and
-            $Method -eq 'Post' -and
-            $ContentType -eq 'application/json' -and
-            $Body -eq '{ "name": "TestTeam", "description": "" }'
+            $Resource -eq 'projects/Test/teams' -and
+            $Method -eq 'POST' -and
+            $Body -eq '{ "name": "TestTeam", "description": "" }' -and
             $Version -eq '1.0-unitTests'
          }
       }
@@ -46,11 +44,9 @@ Describe "VSTeam" {
 
          Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $NoProject -eq $true -and
-            $Area -eq 'projects' -and
-            $Resource -eq 'Test' -and
-            $Method -eq 'Post' -and
-            $ContentType -eq 'application/json' -and
-            $Body -eq '{ "name": "TestTeam", "description": "Test Description" }'
+            $Resource -eq 'projects/Test/teams' -and
+            $Method -eq 'POST' -and
+            $Body -eq '{ "name": "TestTeam", "description": "Test Description" }' -and
             $Version -eq '1.0-unitTests'
          }
       }
