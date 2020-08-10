@@ -22,6 +22,8 @@ Describe 'VSTeamRelease' {
       [vsteam_lib.ProjectCache]::Invalidate()
       Mock Get-VSTeamProject { return @(@{Name = "VSTeamRelease"}) }
 
+      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+
       ## Arrange
       Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
 

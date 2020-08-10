@@ -21,6 +21,8 @@ Describe 'VSTeamWorkItemType' {
       # Get-VSTeamWorkItemType will not need to be called.
       [vsteam_lib.WorkItemTypeCache]::Update([string[]]@())
 
+      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.

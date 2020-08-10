@@ -71,7 +71,7 @@ namespace vsteam_lib
                                 .AddCommand("Select-Object")
                                 .AddParameter("ExpandProperty", this._property)
                                 .AddCommand("Sort-Object")
-                                .Invoke<string>();
+                                .Invoke<string>();            
             }
          }
 

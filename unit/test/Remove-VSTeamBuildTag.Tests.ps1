@@ -15,6 +15,8 @@ Describe 'VSTeamBuildTag' {
       # test can control what is returned.
       [vsteam_lib.ProjectCache]::Invalidate()
       Mock Get-VSTeamProject { return @(@{Name = "VSTeamBuildTag"}) }
+
+      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
    }
 
    Context 'Remove-VSTeamBuildTag' {
