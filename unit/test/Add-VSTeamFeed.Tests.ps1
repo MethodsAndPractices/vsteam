@@ -31,7 +31,7 @@ Describe 'VSTeamFeed' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -eq "https://feeds.dev.azure.com/test/_apis/packaging/feeds?api-version=$(_getApiVersion Packaging)" -and
             $Method -eq 'Post' -and
-            $Body -like '*"name": *"module"*'
+            $Body -like '*"name":*"module"*'
          }
       }
 

@@ -14,7 +14,11 @@ Describe "VSTeam" {
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeam.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
-      
+
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())      
 
       $singleResult = [PSCustomObject]@{
          id          = '6f365a7143e492e911c341451a734401bcacadfd'
@@ -23,7 +27,7 @@ Describe "VSTeam" {
       }
    }
 
-   Context "Get-VSTeam" {
+   Context "Update-VSTeam" {
       Context "services" {
          BeforeAll {
             Mock _getInstance { return 'https://dev.azure.com/test' }

@@ -124,7 +124,9 @@ Describe 'VSTeamProject' {
          Should -Invoke Invoke-RestMethod -Times 1 -Scope It  -ParameterFilter {
             $Method -eq 'Post' -and
             $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" -and
-            $Body -eq '{"capabilities":{"versioncontrol":{"processTemplate":{"templateTypeId":"6b724908-ef14-45cf-84f8-768b5384da45"},"sourceControlType":"Tfvc"}},"name":"Test","description":""}'
+            $Body -like '*"name":*"Test"*' -and
+            $Body -like '*"templateTypeId":*6b724908-ef14-45cf-84f8-768b5384da45*' -and
+            $Body -like '*"sourceControlType":*"Tfvc"*'
          }
       }
    }
