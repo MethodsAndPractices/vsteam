@@ -40,6 +40,10 @@ jobs:
                 resourceGroupName: WinBldBox
               condition: and(succeeded(), eq('${{ parameters.start2018 }}', 'true'))
 
+            - task: NuGetAuthenticate@0
+              inputs:
+                nuGetServiceConnections: 'Azure Artifacts'
+
             - task: PowerShell@2
               displayName: 'Register Private Repository'
               inputs:
