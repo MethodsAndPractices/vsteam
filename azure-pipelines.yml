@@ -48,12 +48,14 @@ stages:
     - task: PowerShell@2
       displayName: 'Install PSScriptAnalyzer'
       inputs:
+        pwsh: true
         targetType: 'inline'
         script: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
 
     - task: PowerShell@2
       displayName: 'Run Static Code Analysis'
       inputs:
+        pwsh: true
         targetType: 'inline'
         script: |
           # Has to happen in this task for it to take effect
@@ -148,6 +150,7 @@ stages:
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 # Load the psd1 file so you can read the required modules and install them
@@ -160,6 +163,7 @@ stages:
           - task: PowerShell@2
             displayName: 'Compute Version Number'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 # Load the psd1 file so you can read the version
@@ -173,6 +177,7 @@ stages:
           - task: PowerShell@2
             displayName: 'Create NuSpec from PSD1'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
@@ -257,6 +262,7 @@ stages:
           - task: PowerShell@2
             displayName: 'Install Module Dependencies'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 # Load the psd1 file so you can read the required modules and install them
@@ -269,6 +275,7 @@ stages:
           - task: PowerShell@2
             displayName: 'Create NuSpec from PSD1'
             inputs:
+              pwsh: true
               targetType: 'inline'
               script: |
                 Install-Module -Name Trackyon.Nuget -Scope CurrentUser -Force -Verbose
