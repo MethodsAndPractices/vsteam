@@ -9,14 +9,12 @@ Describe "VSTeamPolicyType" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
-      # Invalidate the cache to force a call to Get-VSTeamProject so the
-      # test can control what is returned.
-      [vsteam_lib.ProjectCache]::Invalidate()
-      Mock Get-VSTeamProject { return @(@{Name = "VSTeamPolicyType"}, @{Name = "boom"}) }
-      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
       ## Arrnage
       # Set the account to use for testing. A normal user would do this

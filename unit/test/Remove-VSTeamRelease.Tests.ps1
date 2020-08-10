@@ -14,14 +14,12 @@ Describe 'VSTeamRelease' {
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamBuild.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamReleaseDefinition.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
-      # Invalidate the cache to force a call to Get-VSTeamProject so the
-      # test can control what is returned.
-      [vsteam_lib.ProjectCache]::Invalidate()
-      Mock Get-VSTeamProject { return @(@{Name = "VSTeamRelease"}) }
-      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
       ## Arrange
       Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }

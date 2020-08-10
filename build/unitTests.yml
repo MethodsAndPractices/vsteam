@@ -7,6 +7,7 @@ steps:
 - task: PowerShell@2
   displayName: 'Build Module'
   inputs:
+    pwsh: true
     targetType: 'inline'
     ${{ if eq(parameters.buildHelp, 'false') }}:
       script: '.\Build-Module.ps1 -installDep -configuration Release'
@@ -16,6 +17,7 @@ steps:
 - task: PowerShell@2
   displayName: 'Install Pester'
   inputs:
+    pwsh: true
     targetType: 'inline'
     script: 'Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "$(PESTER_VERSION)" -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
 
@@ -23,6 +25,7 @@ steps:
   - task: PowerShell@2
     displayName: 'Run Unit Tests'
     inputs:
+      pwsh: true
       targetType: 'inline'
       script: |
         Import-Module .\dist\*.psd1
@@ -43,6 +46,7 @@ steps:
   - task: PowerShell@2
     displayName: 'Run Unit Tests'
     inputs:
+      pwsh: true
       targetType: 'inline'
       script: |
         Import-Module .\dist\*.psd1
@@ -64,6 +68,7 @@ steps:
     displayName: 'Run Unit Tests with Code Coverage'
     inputs:
       targetType: 'inline'
+      pwsh: true
       script: |
         Import-Module .\dist\*.psd1
         # This loads [PesterConfiguration] into scope
