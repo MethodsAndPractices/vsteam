@@ -44,6 +44,7 @@ function Add-VSTeamProject {
 
          # Invalidate any cache of projects.
          [vsteam_lib.ProjectCache]::Invalidate()
+         Start-Sleep -Seconds 5
 
          return Get-VSTeamProject $ProjectName
       }
