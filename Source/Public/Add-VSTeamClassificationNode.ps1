@@ -61,7 +61,7 @@ function Add-VSTeamClassificationNode {
          }
       }
 
-      $bodyAsJson = $body | ConvertTo-Json
+      $bodyAsJson = $body | ConvertTo-Json -Compress -Depth 100
 
       # Call the REST API
       $resp = _callAPI -Method POST -ProjectName $ProjectName `

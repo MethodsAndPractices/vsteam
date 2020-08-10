@@ -160,57 +160,7 @@ function _getApiVersion {
       return [VSTeamVersions]::Version
    }
    else {
-
-      switch ($Service) {
-         'Build' {
-            return [VSTeamVersions]::Build
-         }
-         'Release' {
-            return [VSTeamVersions]::Release
-         }
-         'Core' {
-            return [VSTeamVersions]::Core
-         }
-         'Git' {
-            return [VSTeamVersions]::Git
-         }
-         'DistributedTask' {
-            return [VSTeamVersions]::DistributedTask
-         }
-         'DistributedTaskReleased' {
-            return [VSTeamVersions]::DistributedTaskReleased
-         }
-         'VariableGroups' {
-            return [VSTeamVersions]::VariableGroups
-         }
-         'Tfvc' {
-            return [VSTeamVersions]::Tfvc
-         }
-         'Packaging' {
-            return [VSTeamVersions]::Packaging
-         }
-         'MemberEntitlementManagement' {
-            return [VSTeamVersions]::MemberEntitlementManagement
-         }
-         'ExtensionsManagement' {
-            return [VSTeamVersions]::ExtensionsManagement
-         }
-         'ServiceEndpoints' {
-            return [VSTeamVersions]::ServiceEndpoints
-         }
-         'Graph' {
-            return [VSTeamVersions]::Graph
-         }
-         'TaskGroups' {
-            return [VSTeamVersions]::TaskGroups
-         }
-         'Policy' {
-            return [VSTeamVersions]::Policy
-         } 
-         'Processes' {
-            return [VSTeamVersions]::Processes
-         } 
-      }
+      return [VSTeamVersions]::$Service
    }
 }
 

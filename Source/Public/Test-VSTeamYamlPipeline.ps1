@@ -33,7 +33,7 @@ function Test-VSTeamYamlPipeline {
          $resp = _callAPI -Method POST -ProjectName $ProjectName `
             -Area pipelines `
             -id "$PipelineId/runs" `
-            -Body ($body | ConvertTo-Json) `
+            -Body ($body | ConvertTo-Json -Compress -Depth 100) `
             -Version $(_getApiVersion Build)
       }
       catch {

@@ -31,13 +31,25 @@ function Add-VSTeamProject {
          $templateTypeId = '6b724908-ef14-45cf-84f8-768b5384da45'
       }
 
-      $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
+      # $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
+      $body = @{ 
+         name         = $ProjectName
+         description  = $Description
+         capabilities = @{
+            versioncontrol = @{
+               sourceControlType = $srcCtrl 
+               processTemplate   = @{
+                  templateTypeId = $templateTypeId 
+               }
+            }
+         }
+      }
 
       try {
          # Call the REST API
          $resp = _callAPI -Method POST `
             -Resource projects `
-            -body $body `
+            -Body ($body | ConvertTo-Json -Compress -Depth 100) `
             -Version $(_getApiVersion Core)
 
          _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
