@@ -12,12 +12,14 @@ Describe 'VSTeamRelease' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamFeed.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
-      # Prime the project cache with an empty list. This will make sure
-      # any project name used will pass validation and Get-VSTeamProject 
-      # will not need to be called.
-      [vsteam_lib.ProjectCache]::Update([string[]]@())
+      # Invalidate the cache to force a call to Get-VSTeamProject so the
+      # test can control what is returned.
+      [vsteam_lib.ProjectCache]::Invalidate()
+      Mock Get-VSTeamProject { return @(@{Name = "VSTeamRelease"}) }
+      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
       
       $results = Get-Content "$PSScriptRoot\sampleFiles\releaseResults.json" -Raw | ConvertFrom-Json
       $singleResult = Get-Content "$PSScriptRoot\sampleFiles\releaseSingleReult.json" -Raw | ConvertFrom-Json
@@ -32,57 +34,57 @@ Describe 'VSTeamRelease' {
    Context 'Get-VSTeamRelease' {
       It 'by Id -Raw should return release as Raw' {
          ## Act
-         $raw = Get-VSTeamRelease -ProjectName project -Id 15 -Raw
+         $raw = Get-VSTeamRelease -ProjectName VSTeamRelease -Id 15 -Raw
 
          ## Assert
          $raw | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'System.Management.Automation.PSCustomObject'
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/VSTeamRelease/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
       It 'by Id should return release as Object' {
          ## Act
-         $r = Get-VSTeamRelease -ProjectName project -Id 15
+         $r = Get-VSTeamRelease -ProjectName VSTeamRelease -Id 15
 
          ## Assert
          $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'Team.Release'
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/VSTeamRelease/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
       It 'by Id -JSON should return release as JSON' {
          ## Act
-         $r = Get-VSTeamRelease -ProjectName project -Id 15 -JSON
+         $r = Get-VSTeamRelease -ProjectName VSTeamRelease -Id 15 -JSON
 
          ## Assert
          $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'System.String'
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/VSTeamRelease/_apis/release/releases/15?api-version=$(_getApiVersion Release)"
          }
       }
 
       It 'with no parameters should return releases' {
          ## Act
-         Get-VSTeamRelease -projectName project
+         Get-VSTeamRelease -projectName VSTeamRelease
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)"
+            $Uri -eq "https://vsrm.dev.azure.com/test/VSTeamRelease/_apis/release/releases?api-version=$(_getApiVersion Release)"
          }
       }
 
       It 'with expand environments should return releases' {
          ## Act
-         Get-VSTeamRelease -projectName project -expand environments
+         Get-VSTeamRelease -projectName VSTeamRelease -expand environments
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/project/_apis/release/releases?api-version=$(_getApiVersion Release)&`$expand=environments"
+            $Uri -eq "https://vsrm.dev.azure.com/test/VSTeamRelease/_apis/release/releases?api-version=$(_getApiVersion Release)&`$expand=environments"
          }
       }
 

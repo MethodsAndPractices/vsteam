@@ -15,7 +15,8 @@ Describe "VSTeamPolicyType" {
       # Invalidate the cache to force a call to Get-VSTeamProject so the
       # test can control what is returned.
       [vsteam_lib.ProjectCache]::Invalidate()
-      Mock Get-VSTeamProject { return @(@{Name = "VSTeamPolicyType"}) }
+      Mock Get-VSTeamProject { return @(@{Name = "VSTeamPolicyType"}, @{Name = "boom"}) }
+      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
       ## Arrnage
       # Set the account to use for testing. A normal user would do this

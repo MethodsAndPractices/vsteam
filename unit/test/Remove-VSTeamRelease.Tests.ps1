@@ -21,7 +21,6 @@ Describe 'VSTeamRelease' {
       # test can control what is returned.
       [vsteam_lib.ProjectCache]::Invalidate()
       Mock Get-VSTeamProject { return @(@{Name = "VSTeamRelease"}) }
-
       $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
       ## Arrange
