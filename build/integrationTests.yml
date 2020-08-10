@@ -50,14 +50,10 @@ jobs:
                 targetType: 'inline'
                 script: |
                   $n = 'LoECDA'
-                  # $e = "$(EMAIL)"
                   $url = "$(REPO_URL)"
-                  # $pwd = ConvertTo-SecureString "$(PKG_PAT)" -AsPlainText -Force
-                  # $creds = New-Object PSCredential($e, $pwd)
 
                   if(-not (Get-PSRepository | Where-Object Name -eq $n)) {
                       Register-PSRepository -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
-                      # Register-PSRepository -Credential $creds -Name $n -SourceLocation $url -InstallationPolicy Trusted -Verbose
                   }
 
                   Get-PSRepository
