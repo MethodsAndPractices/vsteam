@@ -11,6 +11,8 @@ namespace vsteam_lib.Provider
 
       protected string ProjectName { get; }
 
+      public PSObject InternalObject { get; set; }
+
       /// <summary>
       /// I want the mode to resemble that of
       /// a normal file system.
@@ -47,6 +49,7 @@ namespace vsteam_lib.Provider
 
       protected virtual object[] GetChildren()
       {
+         
          this.PowerShell.Commands.Clear();
 
          var children = this.PowerShell.Create(RunspaceMode.CurrentRunspace)

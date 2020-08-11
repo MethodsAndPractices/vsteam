@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Management.Automation;
 using System.Management.Automation.Abstractions;
-using System.Text;
 
 namespace vsteam_lib.Provider
 {
-   class Permissions : Directory
+   internal class Permissions : Directory
    {
       public Permissions(string name, IPowerShell powerShell) : base(name, null, null, powerShell, null)
       {
          this.DisplayMode = "d-r-s-";
       }
 
-      public Permissions(string name) : this(name, new PowerShellWrapper()) { }
+      public Permissions(string name) : this(name, new PowerShellWrapper(RunspaceMode.CurrentRunspace)) { }
 
       protected override object[] GetChildren()
       {

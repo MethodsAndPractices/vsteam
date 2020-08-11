@@ -31,7 +31,7 @@ function Get-VSTeamJobRequest {
       $objs = @()
 
       foreach ($item in $resp.value) {
-         $objs += [VSTeamJobRequest]::new($item)
+         $objs += [vsteam_lib.JobRequest]::new($item)
       }
 
       Write-Output $objs

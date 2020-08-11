@@ -24,7 +24,7 @@ function Get-VSTeamAgent {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $item = [VSTeamAgent]::new($resp, $PoolId)
+         $item = [vsteam_lib.Agent]::new($resp, $PoolId)
 
          Write-Output $item
       }
@@ -34,7 +34,7 @@ function Get-VSTeamAgent {
          $objs = @()
 
          foreach ($item in $resp.value) {
-            $objs += [VSTeamAgent]::new($item, $PoolId)
+            $objs += [vsteam_lib.Agent]::new($item, $PoolId)
          }
 
          Write-Output $objs

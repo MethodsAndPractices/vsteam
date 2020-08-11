@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 
 namespace vsteam_lib.Provider
@@ -19,7 +20,7 @@ namespace vsteam_lib.Provider
       /// This will be called by SHiPS when a new drive is added.
       /// </summary>
       /// <param name="name"></param>
-      public Account(string name) : this(name, new PowerShellWrapper()) { }
+      public Account(string name) : this(name, new PowerShellWrapper(RunspaceMode.CurrentRunspace)) { }
 
       protected override object[] GetChildren()
       {
@@ -30,6 +31,7 @@ namespace vsteam_lib.Provider
             new Feeds("Feeds", this._powerShell)
          };
 
+         // TODO: Only show on supported servers
          menus.Add(new Permissions("Permissions", this._powerShell));
 
          // This will add any projects
