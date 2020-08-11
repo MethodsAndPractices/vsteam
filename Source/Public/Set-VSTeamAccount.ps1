@@ -150,7 +150,7 @@ function Set-VSTeamAccount {
 
          if ($Drive) {
             # Assign to null so nothing is writen to output.
-            Write-Output "# To map a drive run the following command or pipe to iex:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'"
+            Write-Output "# To map a drive run the following command or pipe to iex:`nNew-PSDrive -Name $Drive -PSProvider SHiPS -Root 'VSTeam#vsteam_lib.Provider.Account'"
          }
       }
    }

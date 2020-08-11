@@ -4,7 +4,15 @@
       <View>
          <Name>Team.PSDrive.Default.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
+         <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
+            <TypeName>vsteam_lib.Provider.Directory</TypeName>
+            <TypeName>vsteam_lib.Provider.AgentPools</TypeName>
+            <TypeName>vsteam_lib.Provider.Extensions</TypeName>
+            <TypeName>vsteam_lib.Provider.Feeds</TypeName>
+            <TypeName>vsteam_lib.Provider.Permissions</TypeName>
+            <TypeName>vsteam_lib.Provider.Account</TypeName>
+            <TypeName>vsteam_lib.Provider.Groups</TypeName>
+            <TypeName>vsteam_lib.Provider.Users</TypeName>
             <TypeName>Team.Account</TypeName>
             <TypeName>Team.Pool</TypeName>
             <TypeName>Team.Queues</TypeName>

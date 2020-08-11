@@ -22,7 +22,9 @@
    </ItemGroup>
 
    <ItemGroup>
-     <Folder Include="Provider\" />
+     <Reference Include="Microsoft.PowerShell.SHiPS">
+       <HintPath>..\..\..\SHiPS\0.8.1\Microsoft.PowerShell.SHiPS.dll</HintPath>
+     </Reference>
    </ItemGroup>
 
    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
