@@ -2,24 +2,21 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.JobRequest.TableView</Name>
+         <Name>vsteam_lib.JobRequest.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.JobRequest</TypeName>
+            <TypeName>vsteam_lib.JobRequest</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize />
             <TableHeaders>
-            <TableColumnHeader>
-                  <Label>ID</Label>
+               <TableColumnHeader>
+                  <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Type</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Pipeline</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Date queued</Label>
@@ -39,14 +36,16 @@
                <TableColumnHeader>
                   <Label>Duration</Label>
                </TableColumnHeader>
-               
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
                   <Wrap />
                   <TableColumnItems>
-                  <TableColumnItem>
-                        <PropertyName>ID</PropertyName>
+                     <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Type</PropertyName>
@@ -55,13 +54,10 @@
                         <PropertyName>Pipeline</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>Name</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
                         <PropertyName>QueueTime</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>AssignTime</PropertyName>
+                        <PropertyName>AssignedTime</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>StartTime</PropertyName>
@@ -74,6 +70,9 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Duration</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>ID</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

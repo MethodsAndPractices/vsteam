@@ -6,12 +6,9 @@ namespace vsteam_lib.Provider
 {
    public class Account : Directory
    {
-      private readonly IPowerShell _powerShell;
-
-      public Account(string name, IPowerShell powerShell) : base(name, "Get-VSTeamProject", "Team.Provider.Project", powerShell, null)
+      public Account(string name, IPowerShell powerShell) :
+         base(name, "Get-VSTeamProject", "Team.Provider.Project", powerShell)
       {
-         this._powerShell = powerShell;
-
          // Invalidate any cache of projects
          ProjectCache.Invalidate();
       }
@@ -20,19 +17,22 @@ namespace vsteam_lib.Provider
       /// This will be called by SHiPS when a new drive is added.
       /// </summary>
       /// <param name="name"></param>
-      public Account(string name) : this(name, new PowerShellWrapper(RunspaceMode.CurrentRunspace)) { }
+      public Account(string name) :
+         this(name, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
+      {
+      }
 
       protected override object[] GetChildren()
       {
          var menus = new List<object>()
          {
-            new AgentPools("Agent Pools", this._powerShell),
-            new Extensions("Extensions", this._powerShell),
-            new Feeds("Feeds", this._powerShell)
+            new Directory("Agent Pools", "Get-VSTeamPool", "Team.Provider.Pool", this.PowerShell),
+            new Directory("Extensions", "Get-VSTeamExtension", "Team.Provider.Extension", this.PowerShell),
+            new Directory("Feeds", "Get-VSTeamFeed", "Team.Provider.Feed", this.PowerShell)
          };
 
          // TODO: Only show on supported servers
-         menus.Add(new Permissions("Permissions", this._powerShell));
+         menus.Add(new Permissions("Permissions", this.PowerShell));
 
          // This will add any projects
          menus.AddRange(base.GetChildren());

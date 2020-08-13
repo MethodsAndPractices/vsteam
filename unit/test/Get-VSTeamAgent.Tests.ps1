@@ -7,9 +7,7 @@ Describe 'VSTeamAgent' {
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamAgent.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Set-VSTeamDefaultProject.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"

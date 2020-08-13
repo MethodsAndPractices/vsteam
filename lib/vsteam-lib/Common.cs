@@ -7,7 +7,13 @@ namespace vsteam_lib
       public static string GetDefaultProject(IPowerShell powerShell)
       {
          powerShell.Commands.Clear();
-         return powerShell.AddScript("$Global:PSDefaultParameterValues[\"*-vsteam*:projectName\"]").Invoke<string>()[0];
+
+         var results = powerShell.AddScript("$Global:PSDefaultParameterValues[\"*-vsteam*:projectName\"]")
+                                 .Invoke<string>();
+
+         PowerShellWrapper.LogPowerShellError(powerShell, results);
+
+         return results[0];
       }
    }
 }

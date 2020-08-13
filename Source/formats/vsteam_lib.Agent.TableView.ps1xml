@@ -2,21 +2,27 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.Pool.TableView</Name>
+			<Name>vsteam_lib.Agent.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.Pool</TypeName>
+				<TypeName>vsteam_lib.Agent</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />
 				<TableHeaders>
 					<TableColumnHeader>
-						<Label>Mode</Label>
-					</TableColumnHeader>
-					<TableColumnHeader>
 						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Count</Label>
+						<Label>Enabled</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Version</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>OS</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>ID</Label>
 					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
@@ -24,13 +30,19 @@
 						<Wrap />
 						<TableColumnItems>
 							<TableColumnItem>
-								<PropertyName>DisplayMode</PropertyName>
+								<PropertyName>name</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>Name</PropertyName>
+								<PropertyName>enabled</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>Count</PropertyName>
+								<PropertyName>version</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>os</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>agentId</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

@@ -36,11 +36,11 @@ function Add-VSTeamProject {
          name         = $ProjectName
          description  = $Description
          capabilities = @{
-            versioncontrol = @{
+            versioncontrol  = @{
                sourceControlType = $srcCtrl 
-               processTemplate   = @{
-                  templateTypeId = $templateTypeId 
-               }
+            }
+            processTemplate = @{
+               templateTypeId = $templateTypeId 
             }
          }
       }

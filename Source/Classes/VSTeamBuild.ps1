@@ -1,5 +1,5 @@
 class VSTeamBuild : VSTeamLeaf {
-   [datetime]$StartTime
+   [nullable[datetime]] $StartTime
    [string]$Status = $null
    [string]$Result = $null
    [string]$BuildNumber = $null

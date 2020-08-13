@@ -9,7 +9,7 @@
 			<TableControl>
 				<TableHeaders>
 					<TableColumnHeader>
-						<Label>Release Name</Label>
+						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
 						<Label>Environment</Label>

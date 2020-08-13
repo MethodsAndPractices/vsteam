@@ -4,28 +4,24 @@
       <View>
          <Name>Team.PSDrive.Default.TableView</Name>
          <ViewSelectedBy>
-         <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
+            <TypeName>Microsoft.PowerShell.SHiPS.SHiPSLeaf</TypeName>
+            <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
             <TypeName>vsteam_lib.Provider.Directory</TypeName>
-            <TypeName>vsteam_lib.Provider.AgentPools</TypeName>
-            <TypeName>vsteam_lib.Provider.Extensions</TypeName>
-            <TypeName>vsteam_lib.Provider.Feeds</TypeName>
-            <TypeName>vsteam_lib.Provider.Permissions</TypeName>
-            <TypeName>vsteam_lib.Provider.Account</TypeName>
-            <TypeName>vsteam_lib.Provider.Groups</TypeName>
-            <TypeName>vsteam_lib.Provider.Users</TypeName>
-            <TypeName>Team.Account</TypeName>
-            <TypeName>Team.Pool</TypeName>
             <TypeName>Team.Queues</TypeName>
-            <TypeName>Team.Pools</TypeName>
+            <TypeName>Team.Provider.Queue</TypeName>
+            <TypeName>Team.Provider.Pool</TypeName>
             <TypeName>Team.Provider.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
             <TypeName>Team.BuildDefinitions</TypeName>
             <TypeName>Team.Releases</TypeName>
+            <TypeName>Team.ReleaseDefinitions</TypeName>
             <TypeName>Team.Repositories</TypeName>
             <TypeName>Team.Teams</TypeName>
             <TypeName>Team.Permissions</TypeName>
             <TypeName>Team.Groups</TypeName>
             <TypeName>Team.Users</TypeName>
+            <TypeName>Team.Provider.Group</TypeName>
+            <TypeName>Team.Provider.User</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize />

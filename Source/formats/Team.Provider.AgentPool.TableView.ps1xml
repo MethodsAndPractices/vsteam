@@ -2,27 +2,21 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Agent.TableView</Name>
+			<Name>Team.Provider.AgentPool.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Agent</TypeName>
+				<TypeName>Team.Provider.AgentPool</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />
 				<TableHeaders>
 					<TableColumnHeader>
+						<Label>Mode</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
 						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Enabled</Label>
-					</TableColumnHeader>
-					<TableColumnHeader>
-						<Label>Version</Label>
-					</TableColumnHeader>
-					<TableColumnHeader>
-						<Label>OS</Label>
-					</TableColumnHeader>
-					<TableColumnHeader>
-						<Label>ID</Label>
+						<Label>Count</Label>
 					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
@@ -30,19 +24,13 @@
 						<Wrap />
 						<TableColumnItems>
 							<TableColumnItem>
-								<PropertyName>name</PropertyName>
+								<PropertyName>DisplayMode</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>enabled</PropertyName>
+								<PropertyName>Name</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>version</PropertyName>
-							</TableColumnItem>
-							<TableColumnItem>
-								<PropertyName>os</PropertyName>
-							</TableColumnItem>
-							<TableColumnItem>
-								<PropertyName>agentId</PropertyName>
+								<PropertyName>Count</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

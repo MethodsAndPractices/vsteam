@@ -5,9 +5,9 @@ namespace vsteam_lib.Provider
 {
    public class Leaf : SHiPSLeaf
    {
-      public PSObject InternalObject { get; set; }
       public string ID { get; set; }
       public string ProjectName { get; set; }
+      public PSObject InternalObject { get; set; }
 
       /// <summary>
       /// I want the mode to resemble that of

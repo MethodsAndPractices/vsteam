@@ -10,7 +10,7 @@ Describe "PS Drive Full exercise" {
 
    Context 'PS Drive full exercise' {
       BeforeAll {
-         New-PSDrive -Name int -PSProvider SHiPS -Root 'VSTeam#VSTeamAccount'
+         New-PSDrive -Name int -PSProvider SHiPS -Root 'VSTeam#vsteam_lib.Provider.Account'
          $actual = Set-Location int: -PassThru
       }
 
@@ -29,15 +29,14 @@ Describe "PS Drive Full exercise" {
          Start-Sleep -Seconds 2
          $projectChildren | Should -Not -Be $null
       }
-      
-      # Have to do some more research
-      # It 'Should list Teams' {
-      #    Start-Sleep -Seconds 2
-      #    Set-Location 'Teams'
-      #    Start-Sleep -Seconds 2
-      #    $teamsChildren = Get-ChildItem
-      #    $teamsChildren | Should -Not -Be $null
-      # }
+
+      It 'Should list Teams' {
+         Start-Sleep -Seconds 2
+         Set-Location 'Teams'
+         Start-Sleep -Seconds 2
+         $teamsChildren = Get-ChildItem
+         $teamsChildren | Should -Not -Be $null
+      }
    }
 
    AfterAll {

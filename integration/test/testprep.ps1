@@ -1,27 +1,32 @@
 function Set-TestPrep {
-   if ($null -eq $env:ACCT -or
-      $null -eq $env:API_VERSION -or
-      $null -eq $env:PAT -or
-      $null -eq $env:EMAIL) {
-      throw "You must set all environment variables that are needed first to run integration tests. Please see https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#running-integration-tests for details."
-   }
-   
+   [CmdletBinding()]
+   param(
+      [switch] $skipEnvCheck
+   )
    # Module must be loaded
    if (-not (Get-Module VSTeam)) {
       Write-Host "         Importing: module"
       Import-Module "$PSScriptRoot\..\..\dist\VSTeam.psd1"
    }
 
-   Write-Host "            Target: $($env:ACCT)"
-   Write-Host "           Version: $($env:API_VERSION)"
+   if (-not $skipEnvCheck.IsPresent) {
+      if ($null -eq $env:ACCT -or
+         $null -eq $env:API_VERSION -or
+         $null -eq $env:PAT -or
+         $null -eq $env:EMAIL) {
+         throw "You must set all environment variables that are needed first to run integration tests. Please see https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#running-integration-tests for details."
+      }
 
-   Set-VSTeamAccount -Account $env:ACCT -PersonalAccessToken $env:PAT -Version $env:API_VERSION
+      Write-Host "            Target: $($env:ACCT)"
+      Write-Host "           Version: $($env:API_VERSION)"
+
+      Set-VSTeamAccount -Account $env:ACCT -PersonalAccessToken $env:PAT -Version $env:API_VERSION
+   }
 }
-
-$projectDescription = 'Project for VSTeam integration testing.'
 
 function Set-Project {
    $projectName = 'TeamModuleIntegration-' + [guid]::NewGuid().toString().substring(0, 5)
+   $projectDescription = 'Project for VSTeam integration testing.'
    
    # This will search for a project with the description of our test projects
    # if it finds one it will reuse that project instead of creating a new project.
@@ -34,7 +39,7 @@ function Set-Project {
    }
    else {
       Write-Host "  Creating Project: $projectName"
-      Add-VSTeamProject -Name $projectName -Description $projectDescription | Should -Not -Be $null
+      Add-VSTeamProject -Name $projectName -Description $projectDescription -Verbose | Should -Not -Be $null
       Start-Sleep -Seconds 5
    }
 

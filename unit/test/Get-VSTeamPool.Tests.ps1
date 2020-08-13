@@ -7,11 +7,7 @@ Describe 'VSTeamPool' {
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-      . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
@@ -30,8 +26,8 @@ Describe 'VSTeamPool' {
             id          = '1'
             uniqueName  = 'test@email.com'
          }
-         id        = 1
-         size      = 1
+         id        = [long]1
+         size      = [long]1
          isHosted  = $true
          Name      = 'Hosted'
       }
@@ -47,8 +43,8 @@ Describe 'VSTeamPool' {
             id          = '1'
             uniqueName  = 'test@email.com'
          }
-         id        = 1
-         size      = 1
+         id        = [long]1
+         size      = [long]1
          isHosted  = $false
          Name      = 'Default'
       }

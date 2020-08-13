@@ -57,7 +57,7 @@ class VSTeamProject : VSTeamDirectory {
          [VSTeamReleaseDefinitions]::new('Release Definitions', $this.Name),
          [VSTeamReleases]::new('Releases', $this.Name),
          [VSTeamRepositories]::new('Repositories', $this.Name),
-         [VSTeamTeams]::new('Teams', $this.Name)
+         [vsteam_lib.Provider.Directory]::new('Teams', 'Get-VSTeam', 'Team.Provider.Team', $this.Name)
       )
    }
 }

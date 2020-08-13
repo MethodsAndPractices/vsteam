@@ -8,7 +8,18 @@ namespace vsteam_lib
 {
    public class JobRequest : Leaf
    {
-      public JobRequest(PSObject obj) : base(obj, obj.GetValue<string>("owner.Name"), obj.GetValue<string>("requestId"), null)
+      public string Type { get; }
+      public string Result { get; }
+      public string Pipeline { get; }
+      public TimeSpan Duration { get; }
+      public DateTime QueueTime { get; }
+      public DateTime? StartTime { get; }
+      public DateTime? FinishTime { get; }
+      public DateTime? AssignedTime { get; }
+      public IEnumerable<string> Demands { get; }
+
+      public JobRequest(PSObject obj) : 
+         base(obj, obj.GetValue<string>("owner.Name"), obj.GetValue<string>("requestId"), null)
       {
          this.Type = obj.GetValue<string>("planType");
          this.QueueTime = obj.GetValue<DateTime>("queueTime");
@@ -36,15 +47,5 @@ namespace vsteam_lib
             this.Duration = this.FinishTime.Value - this.StartTime.Value;
          }
       }
-
-      public string Type { get; }
-      public IEnumerable<string> Demands { get; }
-      public DateTime? AssignedTime { get; }
-      public DateTime? StartTime { get; }
-      public string Pipeline { get; }
-      public DateTime? FinishTime { get; }
-      public DateTime QueueTime { get; }
-      public TimeSpan Duration { get; }
-      public string Result { get; }
    }
 }

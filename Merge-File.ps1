@@ -53,7 +53,13 @@ PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
       $files = $()
 
       foreach ($file in $fileOrder.files) {
-         foreach ($item in $(Get-ChildItem -Filter $file)) {
+         $children = $(Get-ChildItem -Filter $file)
+
+         if ($children.Length -eq 0) {
+            Write-Warning "Could not find $file"
+         }
+
+         foreach ($item in $children) {
             $files += , (Resolve-Path $item.FullName)
          }
       }

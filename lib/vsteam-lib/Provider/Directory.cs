@@ -24,7 +24,7 @@ namespace vsteam_lib.Provider
       /// l - Reparse point, symlink, etc.
       /// </summary>
       public string DisplayMode { get; set; } = "d-----";
-      
+
       /// <summary>
       /// The name of the command to execute to get the list of 
       /// child items.
@@ -37,26 +37,53 @@ namespace vsteam_lib.Provider
       /// </summary>
       public string TypeName { get; }
 
-      public Directory(string name, string command, string typeName, IPowerShell powerShell, string projectName) : base(name)
+      public Directory(PSObject obj, string name, string command, string typeName, IPowerShell powerShell, string projectName) :
+         base(name)
       {
          this.Command = command;
          this.TypeName = typeName;
+         this.InternalObject = obj;
          this.PowerShell = powerShell;
          this.ProjectName = projectName;
+      }
+
+      /// <summary>
+      /// This version is for use in classes still in PowerShell
+      /// </summary>
+      /// <param name="name"></param>
+      /// <param name="command"></param>
+      /// <param name="typeName"></param>
+      public Directory(string name, string command, string typeName, string projectName) :
+        this(null, name, command, typeName, new PowerShellWrapper(RunspaceMode.CurrentRunspace), projectName)
+      {
+      }
+
+      public Directory(string name, string command, string typeName, IPowerShell powerShell) :
+         this(null, name, command, typeName, powerShell, null)
+      {
+         DisplayMode = "d-r-s-";
       }
 
       public override object[] GetChildItem() => this.GetChildren();
 
       protected virtual object[] GetChildren()
       {
-         
+
          this.PowerShell.Commands.Clear();
 
-         var children = this.PowerShell.Create(RunspaceMode.CurrentRunspace)
-                                       .AddCommand(this.Command)
-                                       .AddCommand("Sort-Object")
-                                       .AddArgument("name")
-                                       .Invoke();
+         var cmd = this.PowerShell.Create(RunspaceMode.CurrentRunspace)
+                       .AddCommand(this.Command);
+
+         if (!string.IsNullOrEmpty(this.ProjectName))
+         {
+            cmd = cmd.AddParameter("ProjectName", this.ProjectName);
+         }
+
+         var children = cmd.AddCommand("Sort-Object")
+                           .AddArgument("name")
+                           .Invoke();
+
+         PowerShellWrapper.LogPowerShellError(cmd, children);
 
          foreach (var child in children)
          {

@@ -7,11 +7,13 @@ namespace vsteam_lib
 {
    public class AgentPool : Directory
    {
-      public AgentPool(string name, IPowerShell powerShell) : base(name, null, null, powerShell, null)
+      public AgentPool(string name, IPowerShell powerShell) :
+         base(name, null, null, powerShell)
       {
       }
 
-      public AgentPool(PSObject obj) : this(obj.GetValue<string>("name"), new PowerShellWrapper(RunspaceMode.CurrentRunspace))
+      public AgentPool(PSObject obj) :
+         this(obj.GetValue<string>("name"), new PowerShellWrapper(RunspaceMode.CurrentRunspace))
       {
          this.Id = obj.GetValue<long>("id");
          this.Count = obj.GetValue<long>("size");
@@ -20,7 +22,7 @@ namespace vsteam_lib
          if (this.IsHosted)
          {
             this.DisplayMode = "d-r-s-";
-         }
+         };
       }
 
       /// <summary>

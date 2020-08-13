@@ -4,11 +4,13 @@
     "\\lib",
     "\\lib\\vsteam-lib",
     "\\lib\\vsteam-lib.Test",
-    "\\lib\\vsteam-lib.Test\\sampleFiles",
+    "\\lib\\vsteam-lib\\Provider",
     "\\Source",
+    "\\Source\\Classes",
+    "\\Source\\formats",
     "\\Source\\Public",
-    "\\unit",
-    "\\unit\\test\\sampleFiles"
+    "\\unit"
   ],
+  "SelectedNode": "\\lib\\vsteam-lib\\Provider\\Directory.cs",
   "PreviewInSolutionExplorer": false
 }

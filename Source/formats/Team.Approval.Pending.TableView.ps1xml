@@ -9,13 +9,10 @@
          <TableControl>
             <TableHeaders>
                <TableColumnHeader>
-                  <Label>ID</Label>
+                  <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Status</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
-                  <Label>Release Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Environment</Label>
@@ -29,18 +26,18 @@
                <TableColumnHeader>
                   <Label>Release Definition</Label>
                </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ID</Label>
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
                   <TableColumnItems>
                      <TableColumnItem>
-                        <PropertyName>id</PropertyName>
+                        <PropertyName>releaseName</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>status</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
-                        <PropertyName>releaseName</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>releaseEnvironmentName</PropertyName>
@@ -54,10 +51,13 @@
                      <TableColumnItem>
                         <PropertyName>releaseDefinitionName</PropertyName>
                      </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>id</PropertyName>
+                     </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>
             </TableRowEntries>
          </TableControl>
-      </View>      
+      </View>
    </ViewDefinitions>
 </Configuration>
