@@ -39,7 +39,7 @@ namespace vsteam_lib.Provider
       /// </summary>
       public string TypeName
       {
-         get => this._typeName.IndexOf("Provider") > -1 ? this._typeName : $"Team.Provider.{this._typeName}";
+         get => $"Team.Provider.{this._typeName}";
 
          set => this._typeName = value;
       }

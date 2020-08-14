@@ -16,14 +16,14 @@ namespace vsteam_lib
       public PSObject SystemCapabilities { get; }
 
       public Agent(PSObject obj, long poolId, IPowerShell powerShell) :
-         base(obj, obj.GetValue<string>("name"), "JobRequest", powerShell, null)
+         base(obj, obj.GetValue("name"), "JobRequest", powerShell, null)
       {
          this.PoolId = poolId;
+         this.Status = obj.GetValue("status");
+         this.Version = obj.GetValue("version");
+         this.OS = obj.GetValue("osDescription");
          this.AgentId = obj.GetValue<long>("Id");
-         this.Status = obj.GetValue<string>("status");
          this.Enabled = obj.GetValue<bool>("enabled");
-         this.Version = obj.GetValue<string>("version");
-         this.OS = obj.GetValue<string>("osDescription");
          this.SystemCapabilities = obj.GetValue<PSObject>("systemCapabilities");
       }
 
