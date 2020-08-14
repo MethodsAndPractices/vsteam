@@ -7,7 +7,26 @@ namespace vsteam_lib.Provider
 
       public static string GetValue(this PSObject obj, string name)
       {
-         return obj.Properties[name]?.Value.ToString();
+         // See if the name contains a period. If so you have to 
+         // drill down to the object. Everything before the final
+         // object treat as a PSObject
+         var parts = name.Split('.');
+
+         if (parts.Length > 1)
+         {
+            var nextObj = new PSObject();
+
+            for (var i = 0; i < parts.Length - 1; i++)
+            {
+               nextObj = obj.GetValue<PSObject>(parts[i]);
+            }
+
+            return nextObj.Properties[parts[parts.GetUpperBound(0)]]?.Value.ToString();
+         }
+         else
+         {
+            return obj.Properties[name]?.Value.ToString();
+         }
       }
 
       /// <summary>
