@@ -48,7 +48,7 @@ function Update-VSTeamVariableGroup {
             variables   = $Variables
          }
 
-         if ([VSTeamVersions]::Version -ne "TFS2017") {
+         if ([vsteam_lib.Versions]::Version -ne "TFS2017") {
             $Type = $PSBoundParameters['Type']
             $bodyAsHashtable.Add("type", $Type)
 

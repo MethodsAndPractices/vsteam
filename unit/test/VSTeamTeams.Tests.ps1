@@ -9,7 +9,7 @@ Describe "VSTeamTeams" {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeam.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"

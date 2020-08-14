@@ -6,7 +6,7 @@ Describe "VSTeamMember" {
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Set-VSTeamAPIVersion.ps1"
@@ -98,12 +98,12 @@ Describe "VSTeamMember" {
       }
    }
 
-   # Must be last because it sets [VSTeamVersions]::Account to $null
+   # Must be last because it sets [vsteam_lib.Versions]::Account to $null
    Context '_buildURL handles exception' {
       BeforeAll {
 
          # Arrange
-         [VSTeamVersions]::Account = $null
+         [vsteam_lib.Versions]::Account = $null
       }
 
       It 'should return approvals' {

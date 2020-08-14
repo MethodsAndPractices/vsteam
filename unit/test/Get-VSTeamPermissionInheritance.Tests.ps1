@@ -7,7 +7,7 @@ Describe 'VSTeamPermissionInheritance' {
    
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamPermissionInheritance.ps1"

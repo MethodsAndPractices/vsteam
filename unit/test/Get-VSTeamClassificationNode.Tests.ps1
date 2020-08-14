@@ -9,7 +9,7 @@ Describe 'VSTeamClassificationNode' {
    
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    

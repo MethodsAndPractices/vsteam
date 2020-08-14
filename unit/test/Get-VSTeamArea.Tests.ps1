@@ -8,7 +8,7 @@ Describe 'Get-VSTeamArea' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamClassificationNode"
       . "$PSScriptRoot/../../Source/Private/common.ps1"

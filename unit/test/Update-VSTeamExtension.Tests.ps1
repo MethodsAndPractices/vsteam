@@ -7,7 +7,7 @@ Describe 'VSTeamExtension' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamInstallState.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamExtension.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -50,7 +50,7 @@ Describe 'VSTeamExtension' {
          Should -Invoke _callAPI -Exactly 1 -Scope It -ParameterFilter {
             $Method -eq 'Post' -and
             $subDomain -eq 'extmgmt' -and
-            $version -eq [VSTeamVersions]::ExtensionsManagement
+            $version -eq [vsteam_lib.Versions]::ExtensionsManagement
             $Url -like "*https://extmgmt.dev.azure.com/test/_apis/_apis/extensionmanagement/installedextensionsbyname/test/test*"
          }
       }

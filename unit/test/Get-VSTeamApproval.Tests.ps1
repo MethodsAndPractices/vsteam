@@ -9,7 +9,7 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -52,8 +52,8 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
             count = 1
             value = @(
                @{
-                  id       = 1
-                  revision = 1
+                  id       = [long]1
+                  revision = [long]1
                   approver = @{
                      id          = 'c1f4b9a6-aee1-41f9-a2e0-070a79973ae9'
                      displayName = 'Test User'

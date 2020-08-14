@@ -8,7 +8,7 @@ Describe "VSTeamGitRef" {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRef.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"

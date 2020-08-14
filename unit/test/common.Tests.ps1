@@ -6,7 +6,7 @@ Describe 'Common' {
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/$sut"
 
@@ -36,7 +36,7 @@ Describe 'Common' {
    Context '_getUserAgent on Mac' {
       BeforeAll {
          Mock Get-OperatingSystem { return 'macOS' }
-         [VSTeamVersions]::ModuleVersion = '0.0.0'
+         [vsteam_lib.Versions]::ModuleVersion = '0.0.0'
 
          $actual = _getUserAgent
       }
@@ -57,7 +57,7 @@ Describe 'Common' {
    Context '_getUserAgent on Linux' {
       BeforeAll {
          Mock Get-OperatingSystem { return 'Linux' }
-         [VSTeamVersions]::ModuleVersion = '0.0.0'
+         [vsteam_lib.Versions]::ModuleVersion = '0.0.0'
 
          $actual = _getUserAgent
       }

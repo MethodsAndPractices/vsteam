@@ -8,7 +8,7 @@ Describe 'VSTeamProject' -Tag 'Classes', 'Unit' {
       
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
@@ -31,11 +31,11 @@ Describe 'VSTeamProject' -Tag 'Classes', 'Unit' {
       BeforeAll {
          $obj = @{
             name        = 'Test Project'
-            id          = 1
+            id          = '123-5464-dee43'
             description = ''
             url         = ''
             state       = ''
-            revision    = ''
+            revision    = [long]0
             visibility  = ''
          }
 

@@ -8,7 +8,7 @@ Describe 'VSTeamUser' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -46,7 +46,7 @@ Describe 'VSTeamUser' {
             # using the Set-VSTeamAccount function.
             Mock _getInstance { return 'https://dev.azure.com/test' }
 
-            # You have to set the version or the api-version will not be added when [VSTeamVersions]::Graph = ''
+            # You have to set the version or the api-version will not be added when [vsteam_lib.Versions]::Graph = ''
             Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
          }
 

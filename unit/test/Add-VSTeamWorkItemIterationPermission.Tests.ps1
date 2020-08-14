@@ -9,7 +9,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -28,7 +28,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGroup.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
@@ -49,7 +49,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          id          = '010d06f0-00d5-472a-bb47-58947c230876'
          state       = ''
          visibility  = ''
-         revision    = 0
+         revision    = [long]0
          defaultTeam = [PSCustomObject]@{ }
          _links      = [PSCustomObject]@{ }
       }

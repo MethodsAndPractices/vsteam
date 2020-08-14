@@ -6,7 +6,7 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
@@ -23,8 +23,8 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
    Context 'Set-VSTeamApproval' {
       BeforeAll {
          Mock Invoke-RestMethod { return @{
-               id       = 1
-               revision = 1
+               id       = [long]1
+               revision = [long]1
                approver = @{
                   id          = 'c1f4b9a6-aee1-41f9-a2e0-070a79973ae9'
                   displayName = 'Test User'
@@ -63,8 +63,8 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
       BeforeAll {
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod { return @{
-               id       = 1
-               revision = 1
+               id       = [long]1
+               revision = [long]1
                approver = @{
                   id          = 'c1f4b9a6-aee1-41f9-a2e0-070a79973ae9'
                   displayName = 'Test User'

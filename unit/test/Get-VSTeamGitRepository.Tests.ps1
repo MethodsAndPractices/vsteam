@@ -9,7 +9,7 @@ Describe "VSTeamGitRepository" {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -55,15 +55,15 @@ Describe "VSTeamGitRepository" {
             sshUrl        = ''
             remoteUrl     = ''
             defaultBranch = ''
-            size          = 0
+            size          = [long]0
             name          = ''
             project       = [PSCustomObject]@{
                name        = 'Project'
-               id          = 1
+               id          = '123-5464-dee43'
                description = ''
                url         = ''
                state       = ''
-               revision    = ''
+               revision    = [long]0
                visibility  = ''
             }
          }
@@ -75,15 +75,15 @@ Describe "VSTeamGitRepository" {
          sshUrl        = ''
          remoteUrl     = ''
          defaultBranch = ''
-         size          = 0
+         size          = [long]0
          name          = ''
          project       = [PSCustomObject]@{
             name        = 'Project'
-            id          = 1
+            id          = '123-5464-dee43'
             description = ''
             url         = ''
             state       = ''
-            revision    = ''
+            revision    = [long]0
             visibility  = ''
          }
       }

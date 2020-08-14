@@ -6,7 +6,7 @@ Describe "VSTeamUserEntitlement" {
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamUserEntitlement.ps1"
@@ -15,7 +15,7 @@ Describe "VSTeamUserEntitlement" {
 
    Context 'Add-VSTeamUserEntitlement' {
       BeforeAll {
-         [VSTeamVersions]::ModuleVersion = '0.0.0'
+         [vsteam_lib.Versions]::ModuleVersion = '0.0.0'
          Mock _getApiVersion { return 'VSTS' }
          Mock _getInstance { return 'https://dev.azure.com/test' }
 

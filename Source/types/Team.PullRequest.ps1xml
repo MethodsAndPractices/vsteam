@@ -40,7 +40,7 @@ REMAINS WITH THE USER.
          <ScriptProperty>
             <Name>browseUrl</Name>
             <GetScriptBlock>
-                $organization = [VSTeamVersions]::Account
+                $organization = [vsteam_lib.Versions]::Account
                 $project = $this.repository.project.name
                 $repositoryId = $this.repository.name
                 $pullRequestId = $this.pullRequestId

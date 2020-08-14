@@ -6,7 +6,7 @@ Describe 'VSTeamInfo' {
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
    }
@@ -17,7 +17,7 @@ Describe 'VSTeamInfo' {
       }
 
       It 'should return account and default project' {
-         [VSTeamVersions]::Account = "mydemos"
+         [vsteam_lib.Versions]::Account = "mydemos"
          $Global:PSDefaultParameterValues['*-vsteam*:projectName'] = 'TestProject'
 
          ## Act

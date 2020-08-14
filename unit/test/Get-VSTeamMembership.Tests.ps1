@@ -6,14 +6,14 @@ Describe 'VSTeamMembership' {
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/callMembershipAPI.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
       
       ## Arrange
-      # You have to set the version or the api-version will not be added when [VSTeamVersions]::Graph = ''
+      # You have to set the version or the api-version will not be added when [vsteam_lib.Versions]::Graph = ''
       Mock _supportsGraph
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
 

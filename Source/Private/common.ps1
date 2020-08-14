@@ -123,7 +123,7 @@ function _testGraphSupport {
 
 function _supportsSecurityNamespace {
    _hasAccount
-   if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
+   if (([vsteam_lib.Versions]::Version -ne "VSTS") -and ([vsteam_lib.Versions]::Version -ne "AzD")) {
       throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
    }
 }
@@ -161,15 +161,15 @@ function _getApiVersion {
    )
 
    if ($Target.IsPresent) {
-      return [VSTeamVersions]::Version
+      return [vsteam_lib.Versions]::GetApiVersion("Version")
    }
    else {
-      return [VSTeamVersions]::$Service
+      return [vsteam_lib.Versions]::GetApiVersion($Service)
    }
 }
 
 function _getInstance {
-   return [VSTeamVersions]::Account
+   return [vsteam_lib.Versions]::Account
 }
 
 function _getDefaultTimeout {
@@ -380,7 +380,7 @@ function _getUserAgent {
 
    $os = Get-OperatingSystem
 
-   $result = "Team Module/$([VSTeamVersions]::ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
+   $result = "Team Module/$([vsteam_lib.Versions]::ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
 
    Write-Verbose $result
 
@@ -771,7 +771,7 @@ function _setEnvironmentVariables {
    $env:TEAM_VERSION = $Version
    $env:TEAM_TOKEN = $BearerToken
 
-   [VSTeamVersions]::Account = $Acct
+   [vsteam_lib.Versions]::Account = $Acct
 
    # This is so it can be loaded by default in the next session
    if ($Level -ne "Process") {
@@ -790,8 +790,8 @@ function _clearEnvironmentVariables {
 
    $env:TEAM_PROJECT = $null
    $env:TEAM_TIMEOUT = $null
-   [VSTeamVersions]::DefaultProject = ''
-   [VSTeamVersions]::DefaultTimeout = ''
+   [vsteam_lib.Versions]::DefaultProject = ''
+   [vsteam_lib.Versions]::DefaultTimeout = ''
    $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
    $Global:PSDefaultParameterValues.Remove("*-vsteam*:vsteamApiTimeout")
 

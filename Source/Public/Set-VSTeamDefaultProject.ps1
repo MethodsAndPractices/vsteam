@@ -57,7 +57,7 @@ function Set-VSTeamDefaultProject {
             # You always have to set at the process level or they will Not
             # be seen in your current session.
             $env:TEAM_PROJECT = $Project
-            [VSTeamVersions]::DefaultProject = $Project
+            [vsteam_lib.Versions]::DefaultProject = $Project
 
             [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
          }

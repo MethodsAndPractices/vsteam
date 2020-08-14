@@ -2,8 +2,58 @@
 
 namespace vsteam_lib
 {
+   public enum APIs
+   {
+      Build, Release, Core, Git, DistributedTask, DistributedTaskReleased,
+      VariableGroups, Tfvc, Packaging, MemberEntitlementManagement,
+      ExtensionsManagement, ServiceEndpoints, Graph, TaskGroups, Policy,
+      Processes, Version
+   }
+
    public static class Versions
    {
+      public static string GetApiVersion(APIs service)
+      {
+         switch (service)
+         {
+            case APIs.Build:
+               return Build;
+            case APIs.Release:
+               return Release;
+            case APIs.Core:
+               return Core;
+            case APIs.Git:
+               return Git;
+            case APIs.DistributedTask:
+               return DistributedTask;
+            case APIs.DistributedTaskReleased:
+               return DistributedTaskReleased;
+            case APIs.VariableGroups:
+               return VariableGroups;
+            case APIs.Tfvc:
+               return Tfvc;
+            case APIs.Packaging:
+               return Packaging;
+            case APIs.MemberEntitlementManagement:
+               return MemberEntitlementManagement;
+            case APIs.ExtensionsManagement:
+               return ExtensionsManagement;
+            case APIs.ServiceEndpoints:
+               return ServiceEndpoints;
+            case APIs.Graph:
+               return Graph;
+            case APIs.TaskGroups:
+               return TaskGroups;
+            case APIs.Policy:
+               return Policy;
+            case APIs.Processes:
+               return Processes;
+            default:
+               return Version;
+         }
+      }
+
+
       public static string Account { get; set; } = Environment.GetEnvironmentVariable("TEAM_ACCT");
       public static string DefaultTimeout { get; set; } = Environment.GetEnvironmentVariable("TEAM_TIMEOUT");
       public static string DefaultProject { get; set; } = Environment.GetEnvironmentVariable("TEAM_PROJECT");

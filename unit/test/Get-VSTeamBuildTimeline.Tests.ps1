@@ -6,7 +6,7 @@ Describe 'VSTeamBuildTimeline' {
    
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
-      . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
+      
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
@@ -18,7 +18,7 @@ Describe 'VSTeamBuildTimeline' {
       [vsteam_lib.ProjectCache]::Update([string[]]@())
       
       ## Arrnage
-      [VSTeamVersions]::Build = '1.0-unitTest'
+      [vsteam_lib.Versions]::Build = '1.0-unitTest'
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
       $buildTimeline = Get-Content "$PSScriptRoot\sampleFiles\buildTimeline.json" -Raw | ConvertFrom-Json
       $buildTimelineEmptyRecords = Get-Content "$PSScriptRoot\sampleFiles\buildTimelineEmptyRecords.json" -Raw | ConvertFrom-Json
@@ -36,7 +36,7 @@ Describe 'VSTeamBuildTimeline' {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/*" -and
             ($Uri -like "*builds/1/*" -or $Uri -like "*builds/2/*")
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+            $Uri -like "*api-version=$([vsteam_lib.Versions]::Build)*"
          }
       }
 
@@ -48,7 +48,7 @@ Describe 'VSTeamBuildTimeline' {
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
             $Uri -like "*planId=00000000-0000-0000-0000-000000000000*" -and
             $Uri -like "*changeId=4*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+            $Uri -like "*api-version=$([vsteam_lib.Versions]::Build)*"
          }
       }
 
@@ -59,7 +59,7 @@ Describe 'VSTeamBuildTimeline' {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
             $Uri -like "*planId=00000000-0000-0000-0000-000000000000*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+            $Uri -like "*api-version=$([vsteam_lib.Versions]::Build)*"
          }
       }
 
@@ -70,7 +70,7 @@ Describe 'VSTeamBuildTimeline' {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
             $Uri -like "*changeId=4*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+            $Uri -like "*api-version=$([vsteam_lib.Versions]::Build)*"
          }
       }
 
@@ -80,7 +80,7 @@ Describe 'VSTeamBuildTimeline' {
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
             $Uri -like "*timeline/00000000-0000-0000-0000-000000000000*" -and
-            $Uri -like "*api-version=$([VSTeamVersions]::Build)*"
+            $Uri -like "*api-version=$([vsteam_lib.Versions]::Build)*"
          }
       }
 

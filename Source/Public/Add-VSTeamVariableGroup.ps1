@@ -20,7 +20,7 @@ function Add-VSTeamVariableGroup {
    DynamicParam {
       $dp = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
-      if ([VSTeamVersions]::Version -ne "TFS2017" -and $PSCmdlet.ParameterSetName -eq "ByHashtable") {
+      if ([vsteam_lib.Versions]::Version -ne "TFS2017" -and $PSCmdlet.ParameterSetName -eq "ByHashtable") {
          $ParameterName = 'Type'
          $rp = _buildDynamicParam -ParameterName $ParameterName -arrSet ('Vsts', 'AzureKeyVault') -Mandatory $true
          $dp.Add($ParameterName, $rp)
@@ -40,7 +40,7 @@ function Add-VSTeamVariableGroup {
             description = $Description
             variables   = $Variables
          }
-         if ([VSTeamVersions]::Version -ne "TFS2017") {
+         if ([vsteam_lib.Versions]::Version -ne "TFS2017") {
             $Type = $PSBoundParameters['Type']
             $bodyAsHashtable.Add("type", $Type)
 

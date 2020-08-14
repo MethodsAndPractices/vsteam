@@ -26,7 +26,7 @@ function Get-VSTeamWiql {
          ProjectName = $ProjectName
          Area        = 'wit'
          Resource    = 'wiql'
-         Version     = [VSTeamVersions]::Core
+         Version     = [vsteam_lib.Versions]::Core
          QueryString = @{
             '$top'        = $Top
             timePrecision = $TimePrecision

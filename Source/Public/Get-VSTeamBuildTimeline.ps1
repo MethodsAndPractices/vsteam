@@ -33,7 +33,7 @@ function Get-VSTeamBuildTimeline {
          }
 
          $resp = _callAPI -ProjectName $projectName -Area 'build' -Resource $resource `
-            -Version $([VSTeamVersions]::Build) `
+            -Version $([vsteam_lib.Versions]::Build) `
             -Querystring @{
                'changeId'                 = $ChangeId
                'planId'                   = $PlanId              

@@ -55,7 +55,7 @@ function Set-VSTeamDefaultAPITimeout {
             # You always have to set at the process level or they will Not
             # be seen in your current session.
             $env:TEAM_TIMEOUT = $TimeoutSec
-            [VSTeamVersions]::DefaultTimeout = $TimeoutSec
+            [vsteam_lib.Versions]::DefaultTimeout = $TimeoutSec
 
             [System.Environment]::SetEnvironmentVariable("TEAM_TIMEOUT", $TimeoutSec, $Level)
          }
