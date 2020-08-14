@@ -149,7 +149,11 @@ function _getApiVersion {
    [CmdletBinding(DefaultParameterSetName = 'Service')]
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'DistributedTaskReleased', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy', 'Processes')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 
+                   'DistributedTaskReleased', 'VariableGroups', 'Tfvc', 
+                   'Packaging', 'MemberEntitlementManagement', 
+                   'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 
+                   'TaskGroups', 'Policy', 'Processes')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]

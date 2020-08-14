@@ -33,6 +33,9 @@
       <Reference Include="CodeOwls.PowerShell.Paths">
          <HintPath>..\packages\SHiPS\CodeOwls.PowerShell.Paths.dll</HintPath>
       </Reference>
+      <Reference Include="Microsoft.PowerShell.SHiPS">
+        <HintPath>..\packages\ships\Microsoft.PowerShell.SHiPS.dll</HintPath>
+      </Reference>
    </ItemGroup>
 
 </Project>
