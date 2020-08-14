@@ -10,6 +10,11 @@ Describe 'VSTeamProject' {
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
+      # Prime the project cache with an empty list. This will make sure
+      # any project name used will pass validation and Get-VSTeamProject 
+      # will not need to be called.
+      [vsteam_lib.ProjectCache]::Update([string[]]@())
+
       Mock _getInstance { return 'https://dev.azure.com/test' }
 
       Mock Show-Browser

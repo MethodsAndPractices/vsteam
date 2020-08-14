@@ -18,6 +18,10 @@ Describe "PS Drive Full exercise" {
          $actual | Should -Not -Be $null
       }
 
+      It "ItName" {
+         $actual = Get-ChildItem | Out-string
+      }
+
       It 'Should list projects' {
          $projects = Get-ChildItem
          $projects | Should -Not -Be $null

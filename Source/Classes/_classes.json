@@ -39,8 +39,6 @@
       "VSTeamGroup.ps1",
       "VSTeamDescriptor.ps1",
       "VSTeamSecurityNamespace.ps1",
-      "VSTeamAccessControlEntry.ps1",
-      "VSTeamAccessControlList.ps1",
       "VSTeamUser.ps1",
       "VSTeamClassificationNode.ps1",
       "VSTeamReleaseDefinition.ps1",

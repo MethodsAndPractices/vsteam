@@ -59,7 +59,7 @@ function Get-VSTeamAccessControlList {
          $objs = @()
 
          foreach ($item in $resp.value) {
-            $objs += [VSTeamAccessControlList]::new($item)
+            $objs += [vsteam_lib.AccessControlList]::new($item)
          }
 
          Write-Output $objs

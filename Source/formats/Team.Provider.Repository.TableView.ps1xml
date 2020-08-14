@@ -21,9 +21,6 @@
 					<TableColumnHeader>
 						<Label>Default Branch</Label>
 					</TableColumnHeader>
-					<TableColumnHeader>
-						<Label>Project Name</Label>
-					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
 					<TableRowEntry>
@@ -39,9 +36,6 @@
 							</TableColumnItem>
 							<TableColumnItem>
 								<PropertyName>defaultBranch</PropertyName>
-							</TableColumnItem>
-							<TableColumnItem>
-								<PropertyName>projectName</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

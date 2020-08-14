@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.AccessControlList</Name>
+      <Name>vsteam_lib.AccessControlList</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>

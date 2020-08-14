@@ -6,7 +6,7 @@ namespace vsteam_lib.Provider
    internal class Permissions : Directory
    {
       public Permissions(string name, IPowerShell powerShell) : 
-         base(name, null, null, powerShell)
+         base(name, null, powerShell)
       {
       }
 
@@ -19,8 +19,8 @@ namespace vsteam_lib.Provider
       {
          return new object[]
          {
-            new Directory("Groups", "Get-VSTeamGroup", "Team.Provider.Group", this.PowerShell),
-            new Directory("Users", "Get-VSTeamUser", "Team.Provider.User", this.PowerShell),
+            new Directory("Groups", "Group", this.PowerShell),
+            new Directory("Users", "User", this.PowerShell),
          };
       }
    }

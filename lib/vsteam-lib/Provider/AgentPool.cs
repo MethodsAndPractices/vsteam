@@ -8,7 +8,7 @@ namespace vsteam_lib
    public class AgentPool : Directory
    {
       public AgentPool(string name, IPowerShell powerShell) :
-         base(name, null, null, powerShell)
+         base(name, "Agent", powerShell)
       {
       }
 
@@ -45,14 +45,14 @@ namespace vsteam_lib
       {
          this.PowerShell.Commands.Clear();
 
-         var children = this.PowerShell.AddCommand("Get-VSTeamAgent")
+         var children = this.PowerShell.AddCommand(this.Command)
                                        .AddParameter("PoolId", this.Id)
                                        .Invoke();
 
          // This is important so the correct formatting is applied
          foreach (var child in children)
          {
-            child.AddTypeName("Team.Provider.Agent");
+            child.AddTypeName(this.TypeName);
          }
 
          return children.ToArray();

@@ -10,8 +10,6 @@ Describe 'VSTeamAccessControlList' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamVersions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamAccessControlEntry.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamAccessControlList.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Set-VSTeamDefaultProject.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamSecurityNamespace.ps1"

@@ -7,7 +7,7 @@ namespace vsteam_lib.Provider
    public class Account : Directory
    {
       public Account(string name, IPowerShell powerShell) :
-         base(name, "Get-VSTeamProject", "Team.Provider.Project", powerShell)
+         base(name, "Project", powerShell)
       {
          // Invalidate any cache of projects
          ProjectCache.Invalidate();
@@ -26,9 +26,9 @@ namespace vsteam_lib.Provider
       {
          var menus = new List<object>()
          {
-            new Directory("Agent Pools", "Get-VSTeamPool", "Team.Provider.Pool", this.PowerShell),
-            new Directory("Extensions", "Get-VSTeamExtension", "Team.Provider.Extension", this.PowerShell),
-            new Directory("Feeds", "Get-VSTeamFeed", "Team.Provider.Feed", this.PowerShell)
+            new Directory("Agent Pools", "Pool", this.PowerShell),
+            new Directory("Extensions", "Extension", this.PowerShell),
+            new Directory("Feeds", "Feed", this.PowerShell)
          };
 
          // TODO: Only show on supported servers

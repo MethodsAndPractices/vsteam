@@ -23,4 +23,16 @@
     <ProjectReference Include="..\vsteam-lib\vsteam-lib.csproj" />
   </ItemGroup>
 
+   <ItemGroup>
+      <Reference Include="CodeOwls.PowerShell.Provider">
+         <HintPath>..\packages\SHiPS\CodeOwls.PowerShell.Provider.dll</HintPath>
+      </Reference>
+   </ItemGroup>
+   
+   <ItemGroup>
+      <Reference Include="CodeOwls.PowerShell.Paths">
+         <HintPath>..\packages\SHiPS\CodeOwls.PowerShell.Paths.dll</HintPath>
+      </Reference>
+   </ItemGroup>
+
 </Project>

@@ -16,7 +16,7 @@ namespace vsteam_lib
       public PSObject SystemCapabilities { get; }
 
       public Agent(PSObject obj, long poolId, IPowerShell powerShell) :
-         base(obj, obj.GetValue<string>("name"), null, null, powerShell, null)
+         base(obj, obj.GetValue<string>("name"), "JobRequest", powerShell, null)
       {
          this.PoolId = poolId;
          this.AgentId = obj.GetValue<long>("Id");
@@ -36,7 +36,7 @@ namespace vsteam_lib
       {
          this.PowerShell.Commands.Clear();
 
-         var children = this.PowerShell.AddCommand("Get-VSTeamJobRequest")
+         var children = this.PowerShell.AddCommand(this.Command)
                                        .AddParameter("PoolId", this.PoolId)
                                        .AddParameter("AgentId", this.AgentId)
                                        .Invoke();
@@ -45,7 +45,7 @@ namespace vsteam_lib
 
          foreach (var child in children)
          {
-            child.AddTypeName("Team.Provider.JobRequest");
+            child.AddTypeName(this.TypeName);
          }
 
          return children.ToArray();

@@ -19,7 +19,7 @@ namespace vsteam_lib
       public IEnumerable<string> Demands { get; }
 
       public JobRequest(PSObject obj) : 
-         base(obj, obj.GetValue<string>("owner.Name"), obj.GetValue<string>("requestId"), null)
+         base(obj, obj.GetValue("owner.Name"), obj.GetValue("requestId"), null)
       {
          this.Type = obj.GetValue<string>("planType");
          this.QueueTime = obj.GetValue<DateTime>("queueTime");

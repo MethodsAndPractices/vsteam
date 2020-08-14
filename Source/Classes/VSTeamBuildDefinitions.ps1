@@ -18,7 +18,7 @@ class VSTeamBuildDefinitions : VSTeamDirectory {
       foreach ($item in $items) {
          $item.AddTypeName('Team.Provider.BuildDefinition')
 
-         # This has to be done here becuase this is the only point
+         # This has to be done here because this is the only point
          # we know if the object graph is for the provider or not.
          if ($item._internalObj.PSObject.Properties.Match('process').count -gt 0) {
             if ($item.Process.type -eq 1) {

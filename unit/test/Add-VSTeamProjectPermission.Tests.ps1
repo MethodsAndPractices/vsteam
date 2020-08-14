@@ -28,7 +28,6 @@ Describe 'VSTeamProjectPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProjectPermissions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamAccessControlEntry.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Add-VSTeamAccessControlEntry.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"

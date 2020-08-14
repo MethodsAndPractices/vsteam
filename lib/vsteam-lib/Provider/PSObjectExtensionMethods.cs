@@ -4,6 +4,12 @@ namespace vsteam_lib.Provider
 {
    public static class PSObjectExtensionMethods
    {
+
+      public static string GetValue(this PSObject obj, string name)
+      {
+         return obj.Properties[name]?.Value.ToString();
+      }
+
       /// <summary>
       /// Depending on what version of an API you call not all properties are returned.
       /// This method does all the testing to if the property is there and if so returns
