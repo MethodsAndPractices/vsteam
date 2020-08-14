@@ -32,7 +32,9 @@ function Add-VSTeamWorkItem {
 
    Process {
       # The type has to start with a $
-      $WorkItemType = '$' + $WorkItemType
+      # We can't reasign to $WorkItemType because the validate attribute
+      # above will fire again and throw exception.
+      $fullWorkItemType = '$' + $WorkItemType
 
       # Constructing the contents to be send.
       # Empty parameters will be skipped when converting to json.
@@ -99,7 +101,7 @@ function Add-VSTeamWorkItem {
 
       # Call the REST API
       $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' `
-         -Version $(_getApiVersion Core) -id $WorkItemType -Method Post `
+         -Version $(_getApiVersion Core) -id $fullWorkItemType -Method Post `
          -ContentType 'application/json-patch+json' -Body $json
 
       _applyTypesToWorkItem -item $resp

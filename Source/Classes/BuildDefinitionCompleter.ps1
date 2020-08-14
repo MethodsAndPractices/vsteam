@@ -16,7 +16,7 @@ class BuildDefinitionCompleter : IArgumentCompleter {
 
       $results = [List[CompletionResult]]::new()
 
-      # If the user has explictly added the -ProjectName parameter
+      # If the user has explicitly added the -ProjectName parameter
       # to the command use that instead of the default project.
       $projectName = $FakeBoundParameters['ProjectName']
 

@@ -44,6 +44,16 @@ New functionality
         new file:   Source/formats/Team.Workitemstate.TableView.ps1xml | Layout  for the workitem states
         modified:   unit/test/Get-VSTeamAgent.Tests.ps1                | Updated to add the new layout 
 ```
+
+## 6.5.1
+
+Fixed bug [337](https://github.com/MethodsAndPractices/vsteam/issues/337)
+Fixed bug [345](https://github.com/MethodsAndPractices/vsteam/issues/345)
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/335) from [Sebastian Schütze](https://github.com/SebastianSchuetze) which included the following:
+
+- Fixed bug [326](https://github.com/MethodsAndPractices/vsteam/issues/326)
+
 ## 6.5.0
 
 Added a default 60 second timeout on _callAPI. You can override the value with Set-VSTeamDefaultAPITimeout and clear with Clear-VSTeamDefaultAPITimeout.
