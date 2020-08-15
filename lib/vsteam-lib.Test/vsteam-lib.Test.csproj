@@ -39,10 +39,6 @@
    </ItemGroup>
    
    <ItemGroup>
-     <Folder Include="SampleFiles\" />
-   </ItemGroup>
-   
-   <ItemGroup>
      <None Update="SampleFiles\Get-VSTeamAgent-PoolId1.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
@@ -50,6 +46,9 @@
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
      <None Update="SampleFiles\Get-VSTeamPool.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamProject.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
    </ItemGroup>

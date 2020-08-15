@@ -10,9 +10,9 @@ namespace vsteam_lib
       public string Id { get; }
       public string Url { get; }
       public string State { get; }
+      public long Revision { get; }
       public string Visibility { get; }
       public string Description { get; }
-      public long Revision { get; }
 
       /// <summary>
       /// This is required so we can pipe this object to functions

@@ -19,7 +19,7 @@ namespace vsteam_lib.Provider
       /// s - System
       /// l - Reparse point, symlink, etc.
       /// </summary>
-      public string DisplayMode { get; set; } = "------";
+      public string DisplayMode { get; } = "------";
 
       public Leaf(PSObject obj, string name, string id, string projectName) : base(name)
       {
