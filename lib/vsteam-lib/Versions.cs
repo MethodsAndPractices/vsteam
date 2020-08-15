@@ -54,7 +54,6 @@ namespace vsteam_lib
       }
 
       public static bool TestGraphSupport() => !string.IsNullOrEmpty(Versions.GetApiVersion(APIs.Graph));
-
       public static string Account { get; set; } = Environment.GetEnvironmentVariable("TEAM_ACCT");
       public static string DefaultTimeout { get; set; } = Environment.GetEnvironmentVariable("TEAM_TIMEOUT");
       public static string DefaultProject { get; set; } = Environment.GetEnvironmentVariable("TEAM_PROJECT");

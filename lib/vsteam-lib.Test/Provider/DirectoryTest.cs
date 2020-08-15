@@ -29,5 +29,18 @@ namespace vsteam_lib.Test.Provider
          ps.Received().AddCommand("Get-VSTeamPool");
          ps.DidNotReceive().AddParameter("ProjectName");
       }
+
+      [TestMethod]
+      public void Get_VSTeam()
+      {
+         // Arrange
+         var ps = BaseTests.PrepPowerShell();
+
+         // Act
+         var target = new Directory("Teams", "Team", ps);
+
+         // Assert
+         Assert.AreEqual("Get-VSTeam", target.Command);
+      }
    }
 }

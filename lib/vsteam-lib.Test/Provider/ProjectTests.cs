@@ -22,6 +22,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual(159, target.Revision, "Revision");
          Assert.AreEqual("Voting-App", target.Name, "Name");
          Assert.AreEqual("wellFormed", target.State, "State");
+         Assert.IsNotNull(target.InternalObject, "InternalObject");
          Assert.AreEqual("private", target.Visibility, "Visibility");
          Assert.AreEqual("Voting-App", target.ToString(), "ToString()");
          Assert.AreEqual("Vote App", target.Description, "Description");
