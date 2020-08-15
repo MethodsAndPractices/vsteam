@@ -1,0 +1,201 @@
+{
+  "count": 3,
+  "value": [
+    {
+      "requestId": 3123,
+      "queueTime": "2019-11-14T00:56:12.53Z",
+      "assignTime": "2019-11-14T00:56:12.57Z",
+      "receiveTime": "2019-11-14T00:56:15.029774Z",
+      "finishTime": "2019-11-14T01:07:13.6836315Z",
+      "result": "failed",
+      "serviceOwner": "0000000d-0000-8888-8000-000000000000",
+      "hostId": "8a3198df-368a-45e1-a19f-342ba2db31a0",
+      "scopeId": "15af52f7-47f1-40a7-817a-7661062cea76",
+      "planType": "Release",
+      "planId": "de4123ec-74a1-4f08-96a3-a8850ed15150",
+      "jobId": "05c10af5-64d3-51b9-7a2c-1c8d37020562",
+      "demands": [
+        "Agent.Version -gtVersion 2.115.0"
+      ],
+      "reservedAgent": {
+        "_links": {
+          "self": {
+            "href": "https://dev.azure.com/BlackShirt/_apis/distributedtask/pools/1/agents/111"
+          },
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/_admin/_AgentPool#_a=agents&poolId=1&agentId=111"
+          }
+        },
+        "id": 111,
+        "name": "WinBldBox-3_Service2",
+        "version": "2.155.1",
+        "osDescription": "Microsoft Windows 6.3.9600 ",
+        "enabled": true,
+        "status": "offline",
+        "provisioningState": "Provisioned",
+        "accessPoint": "CodexAccessMapping"
+      },
+      "definition": {
+        "_links": {
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_release?definitionId=2"
+          },
+          "self": {
+            "href": "https://vsrm.dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_apis/Release/definitions/2"
+          }
+        },
+        "id": 2,
+        "name": "PTracker-CD"
+      },
+      "owner": {
+        "_links": {
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_release?releaseId=259&_a=release-summary"
+          },
+          "self": {
+            "href": "https://vsrm.dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_apis/Release/releases/259"
+          }
+        },
+        "id": 3602,
+        "name": "Release-194 / Dev Infra"
+      },
+      "data": {
+        "ParallelismTag": "Private"
+      },
+      "poolId": 1,
+      "agentDelays": [],
+      "orchestrationId": "de4123ec-74a1-4f08-96a3-a8850ed15150.stage_15af52f747f140a7817a7661062cea76_2_1.phase_1.__default",
+      "matchesAllAgentsInPool": true
+    },
+    {
+      "requestId": 3119,
+      "queueTime": "2019-11-14T00:49:36.32Z",
+      "receiveTime": "2019-11-14T00:49:38.3279018Z",
+      "finishTime": "2019-11-14T00:50:50.4033333Z",
+      "serviceOwner": "00025394-6065-48ca-87d9-7f5672854ef7",
+      "hostId": "8a3198df-368a-45e1-a19f-342ba2db31a0",
+      "scopeId": "15af52f7-47f1-40a7-817a-7661062cea76",
+      "planType": "Build",
+      "planId": "7cd80108-3642-489b-a15e-b2f7759ff890",
+      "jobId": "0b109914-fd3b-548c-e58c-f9d47cb04f5f",
+      "demands": [
+        "Agent.Version -gtVersion 2.144.0"
+      ],
+      "reservedAgent": {
+        "_links": {
+          "self": {
+            "href": "https://dev.azure.com/BlackShirt/_apis/distributedtask/pools/1/agents/111"
+          },
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/_admin/_AgentPool#_a=agents&poolId=1&agentId=111"
+          }
+        },
+        "id": 111,
+        "name": "WinBldBox-3_Service2",
+        "version": "2.155.1",
+        "osDescription": "Microsoft Windows 6.3.9600 ",
+        "enabled": true,
+        "status": "offline",
+        "provisioningState": "Provisioned",
+        "accessPoint": "CodexAccessMapping"
+      },
+      "definition": {
+        "_links": {
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_build/definition?definitionId=23"
+          },
+          "self": {
+            "href": "https://dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_apis/build/Definitions/23"
+          }
+        },
+        "id": 23,
+        "name": "PTracker-CI"
+      },
+      "owner": {
+        "_links": {
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_build/results?buildId=568"
+          },
+          "self": {
+            "href": "https://dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_apis/build/Builds/568"
+          }
+        },
+        "id": 568,
+        "name": "568"
+      },
+      "data": {
+        "ParallelismTag": "Private",
+        "IsScheduledKey": "False"
+      },
+      "poolId": 1,
+      "agentDelays": [],
+      "orchestrationId": "7cd80108-3642-489b-a15e-b2f7759ff890.job_4.__default",
+      "matchesAllAgentsInPool": true
+    },
+    {
+      "requestId": 3117,
+      "queueTime": "2019-11-13T23:01:59.1733333Z",
+      "assignTime": "2019-11-13T23:01:59.2266667Z",
+      "receiveTime": "2019-11-13T23:02:01.4405864Z",
+      "finishTime": "2019-11-13T23:09:34.22949Z",
+      "serviceOwner": "0000000d-0000-8888-8000-000000000000",
+      "hostId": "8a3198df-368a-45e1-a19f-342ba2db31a0",
+      "scopeId": "15af52f7-47f1-40a7-817a-7661062cea76",
+      "planType": "Release",
+      "planId": "e65a0a3f-2e61-4d6a-9bbe-5234cb4a4040",
+      "jobId": "f7ccbfc1-6dad-551c-db4b-194c43b2b3cf",
+      "demands": [
+        "Agent.Version -gtVersion 2.115.0"
+      ],
+      "reservedAgent": {
+        "_links": {
+          "self": {
+            "href": "https://dev.azure.com/BlackShirt/_apis/distributedtask/pools/1/agents/111"
+          },
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/_admin/_AgentPool#_a=agents&poolId=1&agentId=111"
+          }
+        },
+        "id": 111,
+        "name": "WinBldBox-3_Service2",
+        "version": "2.155.1",
+        "osDescription": "Microsoft Windows 6.3.9600 ",
+        "enabled": true,
+        "status": "offline",
+        "provisioningState": "Provisioned",
+        "accessPoint": "CodexAccessMapping"
+      },
+      "definition": {
+        "_links": {
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_release?definitionId=7"
+          },
+          "self": {
+            "href": "https://vsrm.dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_apis/Release/definitions/7"
+          }
+        },
+        "id": 7,
+        "name": "PTracker-CD - NoMobile"
+      },
+      "owner": {
+        "_links": {
+          "web": {
+            "href": "https://dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_release?releaseId=258&_a=release-summary"
+          },
+          "self": {
+            "href": "https://vsrm.dev.azure.com/BlackShirt/15af52f7-47f1-40a7-817a-7661062cea76/_apis/Release/releases/258"
+          }
+        },
+        "id": 3585,
+        "name": "Release-17 / Dev Common Infra"
+      },
+      "data": {
+        "ParallelismTag": "Private"
+      },
+      "poolId": 1,
+      "agentDelays": [],
+      "orchestrationId": "e65a0a3f-2e61-4d6a-9bbe-5234cb4a4040.stage_15af52f747f140a7817a7661062cea76_30_1.phase_1.__default",
+      "matchesAllAgentsInPool": true
+    }
+  ]
+}

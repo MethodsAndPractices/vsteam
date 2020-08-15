@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.Diagnostics.CodeAnalysis;
-using System.Management.Automation;
 
 namespace vsteam_lib.Test.Provider
 {
@@ -14,14 +13,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var contents = System.IO.File.ReadAllText("./SampleFiles/Get-VSTeamPool.json");
-
-         var obj = PowerShell.Create().AddCommand("ConvertFrom-Json")
-                                      .AddParameter("InputObject", contents)
-                                      .AddParameter("Depth", 100)
-                                      .AddCommand("Select-Object")
-                                      .AddParameter("ExpandProperty", "value")
-                                      .Invoke();
+         var obj = BaseTests.LoadJson("./SampleFiles/Get-VSTeamPool.json");
 
          // Act
          var target = new AgentPool(obj[0], ps);
@@ -38,14 +30,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var contents = System.IO.File.ReadAllText("./SampleFiles/Get-VSTeamPool.json");
-
-         var obj = PowerShell.Create().AddCommand("ConvertFrom-Json")
-                                      .AddParameter("InputObject", contents)
-                                      .AddParameter("Depth", 100)
-                                      .AddCommand("Select-Object")
-                                      .AddParameter("ExpandProperty", "value")
-                                      .Invoke();
+         var obj = BaseTests.LoadJson("./SampleFiles/Get-VSTeamPool.json");
 
          // Act
          var target = new AgentPool(obj[1], ps);
@@ -58,27 +43,12 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void GetChildItem()
+      public void Get_ChildItem()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var contents = System.IO.File.ReadAllText("./SampleFiles/Get-VSTeamPool.json");
-
-         var pools = PowerShell.Create().AddCommand("ConvertFrom-Json")
-                                      .AddParameter("InputObject", contents)
-                                      .AddParameter("Depth", 100)
-                                      .AddCommand("Select-Object")
-                                      .AddParameter("ExpandProperty", "value")
-                                      .Invoke();
-
-         contents = System.IO.File.ReadAllText("./SampleFiles/Get-VSTeamAgent-PoolId1.json");
-
-         var agents = PowerShell.Create().AddCommand("ConvertFrom-Json")
-                                      .AddParameter("InputObject", contents)
-                                      .AddParameter("Depth", 100)
-                                      .AddCommand("Select-Object")
-                                      .AddParameter("ExpandProperty", "value")
-                                      .Invoke();
+         var pools = BaseTests.LoadJson("./SampleFiles/Get-VSTeamPool.json");
+         var agents = BaseTests.LoadJson("./SampleFiles/Get-VSTeamAgent-PoolId1.json");
 
          ps.Invoke().Returns(agents);
 

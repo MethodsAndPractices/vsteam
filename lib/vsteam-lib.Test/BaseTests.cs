@@ -1,5 +1,6 @@
 ﻿using NSubstitute;
 using NSubstitute.Extensions;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
@@ -16,5 +17,18 @@ namespace vsteam_lib.Test
          ps.Commands.Returns(new PSCommand());
          return ps;
       }
+
+      internal static Collection<PSObject> LoadJson(string file)
+      {
+         var contents = System.IO.File.ReadAllText(file);
+
+         return PowerShell.Create().AddCommand("ConvertFrom-Json")
+                                   .AddParameter("InputObject", contents)
+                                   .AddParameter("Depth", 100)
+                                   .AddCommand("Select-Object")
+                                   .AddParameter("ExpandProperty", "value")
+                                   .Invoke();
+      }
+
    }
 }

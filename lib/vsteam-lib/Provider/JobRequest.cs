@@ -42,7 +42,7 @@ namespace vsteam_lib
             this.Result = obj.GetValue("result");
          }
 
-         if (this.FinishTime.HasValue && this.StartTime.HasValue)
+         if (this.FinishTime.HasValue)
          {
             this.Duration = this.FinishTime.Value - this.StartTime.Value;
          }

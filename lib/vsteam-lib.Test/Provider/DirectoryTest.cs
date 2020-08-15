@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System.Diagnostics.CodeAnalysis;
-using System.Management.Automation;
 using vsteam_lib.Provider;
 
 namespace vsteam_lib.Test.Provider
@@ -15,14 +14,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var contents = System.IO.File.ReadAllText("./SampleFiles/Get-VSTeamPool.json");
-
-         var obj = PowerShell.Create().AddCommand("ConvertFrom-Json")
-                                      .AddParameter("InputObject", contents)
-                                      .AddParameter("Depth", 100)
-                                      .AddCommand("Select-Object")
-                                      .AddParameter("ExpandProperty", "value")
-                                      .Invoke();
+         var obj = BaseTests.LoadJson("./SampleFiles/Get-VSTeamPool.json");
 
          ps.Invoke().Returns(obj);
 
