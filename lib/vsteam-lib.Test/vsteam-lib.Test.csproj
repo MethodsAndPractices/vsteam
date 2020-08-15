@@ -39,6 +39,9 @@
    </ItemGroup>
    
    <ItemGroup>
+     <None Update="SampleFiles\Get-VSTeamAccessControlList.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
      <None Update="SampleFiles\Get-VSTeamAgent-PoolId1.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
