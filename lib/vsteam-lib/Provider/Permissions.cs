@@ -1,11 +1,10 @@
-﻿using System.Management.Automation;
-using System.Management.Automation.Abstractions;
+﻿using System.Management.Automation.Abstractions;
 
 namespace vsteam_lib.Provider
 {
    internal class Permissions : Directory
    {
-      public Permissions(string name, IPowerShell powerShell) : 
+      public Permissions(string name, IPowerShell powerShell) :
          base(name, null, powerShell)
       {
       }
