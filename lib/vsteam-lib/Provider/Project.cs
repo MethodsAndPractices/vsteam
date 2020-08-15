@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using vsteam_lib.Provider;
 
@@ -29,8 +30,11 @@ namespace vsteam_lib
       /// </summary>
       public new string ProjectName => base.ProjectName;
 
-      public Project(PSObject obj) :
-         base(obj, obj.GetValue("name"), null, new PowerShellWrapper(RunspaceMode.CurrentRunspace), obj.GetValue("name"))
+      /// <summary>
+      /// Used for testing 
+      /// </summary>
+      public Project(PSObject obj, IPowerShell powerShell) :
+         base(obj, obj.GetValue("name"), null, powerShell, obj.GetValue("name"))
       {
          this.Id = obj.GetValue("id");
          this.Url = obj.GetValue("url");
@@ -38,6 +42,15 @@ namespace vsteam_lib
          this.Visibility = obj.GetValue("visibility");
          this.Description = obj.GetValue("description");
          this.Revision = obj.GetValue<long>("revision");
+      }
+
+      /// <summary>
+      /// Used by PowerShell
+      /// </summary>
+      [ExcludeFromCodeCoverage]
+      public Project(PSObject obj) :
+         this(obj, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
+      {
       }
 
       public override string ToString() => base.Name;

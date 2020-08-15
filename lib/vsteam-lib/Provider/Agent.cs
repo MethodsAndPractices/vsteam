@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using vsteam_lib.Provider;
@@ -27,6 +28,7 @@ namespace vsteam_lib
          this.SystemCapabilities = obj.GetValue<PSObject>("systemCapabilities");
       }
 
+      [ExcludeFromCodeCoverage]
       public Agent(PSObject obj, long poolId) :
          this(obj, poolId, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
       {

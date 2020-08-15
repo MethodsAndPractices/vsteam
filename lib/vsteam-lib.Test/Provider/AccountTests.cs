@@ -18,6 +18,7 @@ namespace vsteam_lib.Test.Provider
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke().Returns(new Collection<PSObject>());
          var target = new Account("Accounts", ps);
+         Versions.Graph = string.Empty;
 
          // Act
          var actual = target.GetChildItem();
@@ -33,6 +34,7 @@ namespace vsteam_lib.Test.Provider
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke().Returns(new Collection<PSObject>());
          var target = new Account("Accounts", ps);
+         Versions.Graph = "6.0-preview";
 
          // Act
          var actual = target.GetChildItem();

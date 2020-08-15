@@ -21,11 +21,11 @@ namespace vsteam_lib
       public JobRequest(PSObject obj) : 
          base(obj, obj.GetValue("owner.Name"), obj.GetValue("requestId"), null)
       {
-         this.Type = obj.GetValue<string>("planType");
+         this.Type = obj.GetValue("planType");
+         this.Pipeline = obj.GetValue("definition.name");
          this.QueueTime = obj.GetValue<DateTime>("queueTime");
          this.FinishTime = obj.GetValue<DateTime?>("finishTime");
          this.StartTime = obj.GetValue<DateTime?>("receiveTime");
-         this.Pipeline = obj.GetValue<string>("definition.name");
          this.AssignedTime = obj.GetValue<DateTime?>("assignTime");
          this.Demands = obj.GetValue<object[]>("demands").Select(o => o.ToString()).ToArray();
 
@@ -39,7 +39,7 @@ namespace vsteam_lib
          }
          else
          {
-            this.Result = obj.GetValue<string>("result");
+            this.Result = obj.GetValue("result");
          }
 
          if (this.FinishTime.HasValue && this.StartTime.HasValue)

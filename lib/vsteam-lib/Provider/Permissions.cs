@@ -10,11 +10,6 @@ namespace vsteam_lib.Provider
       {
       }
 
-      public Permissions(string name) : 
-         this(name, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
-      {
-      }
-
       protected override object[] GetChildren()
       {
          return new object[]

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 
@@ -6,6 +7,11 @@ namespace vsteam_lib.Provider
 {
    public class Account : Directory
    {
+      /// <summary>
+      /// This is called by unit testing framework and other constructors
+      /// </summary>
+      /// <param name="name"></param>
+      /// <param name="powerShell"></param>
       public Account(string name, IPowerShell powerShell) :
          base(name, "Project", powerShell)
       {
@@ -17,6 +23,7 @@ namespace vsteam_lib.Provider
       /// This will be called by SHiPS when a new drive is added.
       /// </summary>
       /// <param name="name"></param>
+      [ExcludeFromCodeCoverage]
       public Account(string name) :
          this(name, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
       {
@@ -31,8 +38,10 @@ namespace vsteam_lib.Provider
             new Directory("Feeds", "Feed", this.PowerShell)
          };
 
-         // TODO: Only show on supported servers
-         menus.Add(new Permissions("Permissions", this.PowerShell));
+         if (Versions.TestGraphSupport())
+         {
+            menus.Add(new Permissions("Permissions", this.PowerShell));
+         }
 
          // This will add any projects
          menus.AddRange(base.GetChildren());

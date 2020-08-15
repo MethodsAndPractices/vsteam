@@ -8,8 +8,7 @@ Describe 'VSTeamProject' {
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      
+      . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"      
       . "$PSScriptRoot/../../Source/Classes/VSTeamProcess.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
@@ -97,6 +96,8 @@ Describe 'VSTeamProject' {
 
          # Track Progress
          Mock Invoke-RestMethod {
+            Write-Host "i = $i"
+            
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {

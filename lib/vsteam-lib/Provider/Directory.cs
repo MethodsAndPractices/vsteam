@@ -1,4 +1,5 @@
 ﻿using Microsoft.PowerShell.SHiPS;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
@@ -40,7 +41,6 @@ namespace vsteam_lib.Provider
       public string TypeName
       {
          get => $"Team.Provider.{this._typeName}";
-
          set => this._typeName = value;
       }
 
@@ -58,6 +58,7 @@ namespace vsteam_lib.Provider
       /// </summary>
       /// <param name="name"></param>
       /// <param name="typeName"></param>
+      [ExcludeFromCodeCoverage]
       public Directory(string name, string typeName, string projectName) :
         this(null, name, typeName, new PowerShellWrapper(RunspaceMode.CurrentRunspace), projectName)
       {

@@ -2,11 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Project.ListView</Name>
+			<Name>vsteam_lib.Project.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Project</TypeName>
-				<TypeName>Team.Provider.Project</TypeName>
-				<TypeName>VSTeamProject</TypeName>
+				<TypeName>vsteam_lib.Project</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

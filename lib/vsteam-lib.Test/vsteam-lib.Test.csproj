@@ -37,5 +37,18 @@
         <HintPath>..\packages\ships\Microsoft.PowerShell.SHiPS.dll</HintPath>
       </Reference>
    </ItemGroup>
+   
+   <ItemGroup>
+     <Folder Include="SampleFiles\" />
+   </ItemGroup>
+   
+   <ItemGroup>
+     <None Update="SampleFiles\Get-VSTeamAgent-PoolId1.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamPool.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+   </ItemGroup>
 
 </Project>
