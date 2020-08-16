@@ -2,31 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
+using System.Xml.Serialization;
 using vsteam_lib.Provider;
 
 namespace vsteam_lib
 {
    public class JobRequest : Leaf
    {
-      public string Type { get; }
-      public string Result { get; }
-      public string Pipeline { get; }
+      [XmlAttribute("planType")]
+      public string Type { get; set; }
+      public string Result { get; set; }
+      [XmlAttribute("definition.name")]
+      public string Pipeline { get; set; }
       public TimeSpan Duration { get; }
-      public DateTime QueueTime { get; }
-      public DateTime? StartTime { get; }
-      public DateTime? FinishTime { get; }
-      public DateTime? AssignedTime { get; }
+      public DateTime QueueTime { get; set; }
+      [XmlAttribute("receiveTime")]
+      public DateTime? StartTime { get; set; }
+      public DateTime? FinishTime { get; set; }
+      [XmlAttribute("assignTime")]
+      public DateTime? AssignedTime { get; set; }
       public IEnumerable<string> Demands { get; }
 
-      public JobRequest(PSObject obj) : 
+      public JobRequest(PSObject obj) :
          base(obj, obj.GetValue("owner.Name"), obj.GetValue("requestId"), null)
       {
-         this.Type = obj.GetValue("planType");
-         this.Pipeline = obj.GetValue("definition.name");
-         this.QueueTime = obj.GetValue<DateTime>("queueTime");
-         this.FinishTime = obj.GetValue<DateTime?>("finishTime");
-         this.StartTime = obj.GetValue<DateTime?>("receiveTime");
-         this.AssignedTime = obj.GetValue<DateTime?>("assignTime");
+         Common.MoveProperties(this, obj);
+
          this.Demands = obj.GetValue<object[]>("demands").Select(o => o.ToString()).ToArray();
 
          if (!obj.HasValue("result") && !obj.HasValue("assignTime"))
@@ -36,10 +37,6 @@ namespace vsteam_lib
          else if (!obj.HasValue("result") && obj.HasValue("assignTime"))
          {
             this.Result = "running";
-         }
-         else
-         {
-            this.Result = obj.GetValue("result");
          }
 
          if (this.FinishTime.HasValue)

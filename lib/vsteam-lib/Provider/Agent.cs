@@ -2,30 +2,29 @@
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
+using System.Xml.Serialization;
 using vsteam_lib.Provider;
 
 namespace vsteam_lib
 {
    public class Agent : Directory
    {
-      public string OS { get; }
-      public long PoolId { get; }
-      public bool Enabled { get; }
-      public long AgentId { get; }
-      public string Status { get; }
-      public string Version { get; }
-      public PSObject SystemCapabilities { get; }
+      [XmlAttribute("osDescription")]
+      public string OS { get; set; }
+      public long PoolId { get; set; }
+      public bool Enabled { get; set; }
+      [XmlAttribute("id")]
+      public long AgentId { get; set; }
+      public string Status { get; set; }
+      public string Version { get; set; }
+      public PSObject SystemCapabilities { get; set; }
 
       public Agent(PSObject obj, long poolId, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), "JobRequest", powerShell, null)
       {
          this.PoolId = poolId;
-         this.Status = obj.GetValue("status");
-         this.Version = obj.GetValue("version");
-         this.OS = obj.GetValue("osDescription");
-         this.AgentId = obj.GetValue<long>("Id");
-         this.Enabled = obj.GetValue<bool>("enabled");
-         this.SystemCapabilities = obj.GetValue<PSObject>("systemCapabilities");
+
+         Common.MoveProperties(this, obj);
       }
 
       [ExcludeFromCodeCoverage]

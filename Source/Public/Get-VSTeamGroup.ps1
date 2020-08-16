@@ -38,7 +38,7 @@ function Get-VSTeamGroup {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $group = [VSTeamGroup]::new($resp)
+         $group = [vsteam_lib.Group]::new($resp)
 
          Write-Output $group
       }
@@ -64,7 +64,7 @@ function Get-VSTeamGroup {
             $objs = @()
 
             foreach ($item in $resp.value) {
-               $objs += [VSTeamGroup]::new($item)
+               $objs += [vsteam_lib.Group]::new($item)
             }
 
             Write-Output $objs

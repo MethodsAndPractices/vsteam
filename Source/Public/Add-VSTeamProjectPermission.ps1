@@ -10,7 +10,7 @@ function Add-VSTeamProjectPermission {
       [string]$Descriptor,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndGroup")]
-      [VSTeamGroup]$Group,
+      [vsteam_lib.Group]$Group,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndUser")]
       [VSTeamUser]$User,

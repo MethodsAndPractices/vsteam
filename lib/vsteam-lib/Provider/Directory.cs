@@ -9,12 +9,9 @@ namespace vsteam_lib.Provider
    public class Directory : SHiPSDirectory, IInternalObject
    {
       private string _typeName;
-
-      protected IPowerShell PowerShell { get; }
-
       protected string ProjectName { get; }
-
-      public PSObject InternalObject { get; set; }
+      public PSObject InternalObject { get; }
+      protected IPowerShell PowerShell { get; }
 
       /// <summary>
       /// I want the mode to resemble that of

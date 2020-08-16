@@ -6,17 +6,15 @@ namespace vsteam_lib
 {
    public class Feed : Leaf
    {
-      public string Url { get; }
-      public string Description { get; }
-      public bool? UpstreamEnabled { get; }
+      public string Url { get; set; }
+      public string Description { get; set; }
+      public bool? UpstreamEnabled { get; set; }
       public IList<UpstreamSource> UpstreamSources { get; }
 
       public Feed(PSObject obj) :
          base(obj, obj.GetValue("name"), obj.GetValue("id"), null)
       {
-         this.Url = obj.GetValue("url");
-         this.Description = obj.GetValue("description");
-         this.UpstreamEnabled = obj.GetValue<bool?>("upstreamEnabled");
+         Common.MoveProperties(this, obj);
 
          var sources = new List<UpstreamSource>();
          foreach (PSObject item in ((object[])obj.Properties["upstreamSources"].Value))

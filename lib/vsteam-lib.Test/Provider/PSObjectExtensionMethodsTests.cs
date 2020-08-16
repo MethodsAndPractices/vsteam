@@ -38,13 +38,39 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Missing_Property_As_String()
+      public void Missing_Nested_Property_As_String()
       {
          // Arrange
          var target = PSObject.AsPSObject(new { revision = PSObject.AsPSObject(new { value = 0 }) });
 
          // Act
          var actual = target.GetValue("revision.test");
+
+         // Assert
+         Assert.AreEqual(null, actual);
+      }
+
+      [TestMethod]
+      public void Missing_Property_As_String()
+      {
+         // Arrange
+         var target = PSObject.AsPSObject(new { revision = PSObject.AsPSObject(new { value = 0 }) });
+
+         // Act
+         var actual = target.GetValue("test");
+
+         // Assert
+         Assert.AreEqual(null, actual);
+      }
+
+      [TestMethod]
+      public void Null_Property_As_String()
+      {
+         // Arrange
+         var target = PSObject.AsPSObject(new { test = (string)null });
+
+         // Act
+         var actual = target.GetValue("test");
 
          // Assert
          Assert.AreEqual(null, actual);

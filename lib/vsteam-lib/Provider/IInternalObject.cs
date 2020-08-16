@@ -4,6 +4,6 @@ namespace vsteam_lib.Provider
 {
    public interface IInternalObject
    {
-      PSObject InternalObject { get; set; }
+      PSObject InternalObject { get; }
    }
 }

@@ -31,7 +31,7 @@ Describe 'VSTeamExtension' {
             scopes          = [PSCustomObject]@{ }
             installState    = [PSCustomObject]@{
                flags       = 'none'
-               lastUpdated = '2018-10-09T11:26:47.187Z'
+               lastUpdated = [datetime]'2018-10-09T11:26:47.187Z'
             }
          }
 

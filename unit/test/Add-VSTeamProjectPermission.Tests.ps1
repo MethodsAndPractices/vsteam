@@ -9,8 +9,6 @@ Describe 'VSTeamProjectPermission' {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      
-      . "$PSScriptRoot/../../Source/Classes/VSTeamGroup.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -40,7 +38,7 @@ Describe 'VSTeamProjectPermission' {
       $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
 
       $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
-      $groupSingleResultObject = [VSTeamGroup]::new($groupSingleResult)
+      $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)
 
       $projectResult = [PSCustomObject]@{
          name        = 'Test Project Public'

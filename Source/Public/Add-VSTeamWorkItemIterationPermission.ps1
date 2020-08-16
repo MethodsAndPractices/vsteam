@@ -25,7 +25,7 @@ function Add-VSTeamWorkItemIterationPermission {
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationIdAndGroup")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationPathAndGroup")]
-      [VSTeamGroup]$Group,
+      [vsteam_lib.Group]$Group,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationPathAndUser")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationIdAndUser")]

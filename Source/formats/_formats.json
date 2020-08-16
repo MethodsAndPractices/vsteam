@@ -78,7 +78,7 @@
       "Team.Process.ListView.ps1xml",
       "vsteam_lib.AgentPool.TableView.ps1xml",
       "Team.Provider.AgentPool.TableView.ps1xml",
-      "Team.Extension.TableView.ps1xml",
+      "vsteam_lib.Extension.TableView.ps1xml",
       "Team.Provider.Extension.TableView.ps1xml",
       "Team.PSDrive.Default.TableView.ps1xml",
       "Team.Provider.Build.TableView.ps1xml",

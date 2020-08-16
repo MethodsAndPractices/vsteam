@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
+using System.Xml.Serialization;
 using vsteam_lib.Provider;
 
 namespace vsteam_lib
@@ -12,24 +13,23 @@ namespace vsteam_lib
       /// The id of the agent pool. This can be used to find and return
       /// this item.
       /// </summary>
-      public long Id { get; }
+      public long Id { get; set; }
 
       /// <summary>
       ///  The number of agents in the pool
       /// </summary>
-      public long Count { get; }
+      [XmlAttribute("size")]
+      public long Count { get; set; }
 
       /// <summary>
       /// True when this is a hosted pool managed by Azure DevOps
       /// </summary>
-      public bool IsHosted { get; }
+      public bool IsHosted { get; set; }
 
       public AgentPool(PSObject obj, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), "Agent", powerShell, null)
       {
-         this.Id = obj.GetValue<long>("id");
-         this.Count = obj.GetValue<long>("size");
-         this.IsHosted = obj.GetValue<bool>("isHosted");
+         Common.MoveProperties(this, obj);
 
          if (this.IsHosted)
          {

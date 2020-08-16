@@ -7,12 +7,12 @@ namespace vsteam_lib
 {
    public class Project : Directory
    {
-      public string Id { get; }
-      public string Url { get; }
-      public string State { get; }
-      public long Revision { get; }
-      public string Visibility { get; }
-      public string Description { get; }
+      public string Id { get; set; }
+      public string Url { get; set; }
+      public string State { get; set; }
+      public long Revision { get; set; }
+      public string Visibility { get; set; }
+      public string Description { get; set; }
 
       /// <summary>
       /// This is required so we can pipe this object to functions
@@ -36,12 +36,7 @@ namespace vsteam_lib
       public Project(PSObject obj, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), null, powerShell, obj.GetValue("name"))
       {
-         this.Id = obj.GetValue("id");
-         this.Url = obj.GetValue("url");
-         this.State = obj.GetValue("state");
-         this.Visibility = obj.GetValue("visibility");
-         this.Description = obj.GetValue("description");
-         this.Revision = obj.GetValue<long>("revision");
+         Common.MoveProperties(this, obj);
       }
 
       /// <summary>

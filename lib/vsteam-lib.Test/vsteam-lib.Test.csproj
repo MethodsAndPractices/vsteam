@@ -51,6 +51,9 @@
      <None Update="SampleFiles\Get-VSTeamFeed.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
+     <None Update="SampleFiles\Get-VSTeamGroup.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
      <None Update="SampleFiles\Get-VSTeamJobRequest-PoolId1-AgentID111.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>

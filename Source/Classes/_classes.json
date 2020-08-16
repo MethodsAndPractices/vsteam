@@ -32,7 +32,6 @@
       "VSTeamProjectPermissions.ps1",
       "VSTeamWorkItemAreaPermissions.ps1",
       "VSTeamWorkItemIterationPermissions.ps1",
-      "VSTeamGroup.ps1",
       "VSTeamDescriptor.ps1",
       "VSTeamSecurityNamespace.ps1",
       "VSTeamUser.ps1",

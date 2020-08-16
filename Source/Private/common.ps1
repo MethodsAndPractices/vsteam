@@ -844,7 +844,7 @@ function _getDescriptorForACL {
       [VSTeamUser]$User,
 
       [parameter(MAndatory = $true, ParameterSetName = "ByGroup")]
-      [VSTeamGroup]$Group
+      [vsteam_lib.Group]$Group
    )
 
    if ($User) {

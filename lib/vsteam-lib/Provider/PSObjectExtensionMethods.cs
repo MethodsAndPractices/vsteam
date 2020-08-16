@@ -5,7 +5,6 @@ namespace vsteam_lib.Provider
 {
    public static class PSObjectExtensionMethods
    {
-
       public static string GetValue(this PSObject obj, string name)
       {
          // See if the name contains a period. If so you have to 
@@ -15,11 +14,11 @@ namespace vsteam_lib.Provider
 
          if (parts.Length > 1)
          {
-            var nextObj = new PSObject();
+            var nextObj = obj;
 
             for (var i = 0; i < parts.Length - 1; i++)
             {
-               nextObj = obj.GetValue<PSObject>(parts[i]);
+               nextObj = nextObj.GetValue<PSObject>(parts[i]);
             }
 
             return nextObj.Properties[parts[parts.GetUpperBound(0)]]?.Value.ToString();
@@ -55,11 +54,11 @@ namespace vsteam_lib.Provider
 
          if (parts.Length > 1)
          {
-            var nextObj = new PSObject();
+            var nextObj = obj;
 
             for (var i = 0; i < parts.Length - 1; i++)
             {
-               nextObj = obj.GetValue<PSObject>(parts[i]);
+               nextObj = nextObj.GetValue<PSObject>(parts[i]);
             }
 
             result = nextObj.GetValue<T>(parts[parts.GetUpperBound(0)]);

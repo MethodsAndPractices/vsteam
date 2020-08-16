@@ -5,19 +5,17 @@ namespace vsteam_lib
 {
    public class Extension : Leaf
    {
-      public string Version { get; }
-      public string ExtensionId { get; }
-      public string PublisherId { get; }
-      public string PublisherName { get; }
+      public string Version { get; set; }
+      public string ExtensionId { get; set; }
+      public string PublisherId { get; set; }
+      public string PublisherName { get; set; }
       public InstallState InstallState { get; }
 
       public Extension(PSObject obj) :
          base(obj, obj.GetValue("extensionName"), obj.GetValue("extensionId"), null)
       {
-         this.Version = obj.GetValue("version");
-         this.ExtensionId = obj.GetValue("extensionId");
-         this.PublisherId = obj.GetValue("publisherId");
-         this.PublisherName = obj.GetValue("publisherName");
+         Common.MoveProperties(this, obj);
+
          this.InstallState = new InstallState(obj.GetValue<PSObject>("installState"));
       }
    }

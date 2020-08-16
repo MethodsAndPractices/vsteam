@@ -8,13 +8,12 @@ namespace vsteam_lib
    {
       public string Token { get; set; }
       public bool InheritPermissions { get; set; }
-      public Hashtable Aces { get; set; }
+      public Hashtable Aces { get; }
 
       public AccessControlList(PSObject obj) :
          base(obj, obj.GetValue("token"), obj.GetValue("token"), null)
       {
-         this.Token = obj.GetValue("token");
-         this.InheritPermissions = obj.GetValue<bool>("inheritPermissions");
+         Common.MoveProperties(this, obj);
 
          this.Aces = new Hashtable();
 

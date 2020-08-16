@@ -5,14 +5,13 @@ namespace vsteam_lib
 {
    public class UserEntitlement : Leaf
    {
-      public string UniqueName { get; }
-      public string DisplayName { get; }
+      public string UniqueName { get; set; }
+      public string DisplayName { get; set; }
 
       public UserEntitlement(PSObject obj, string projectName) : 
          base(obj, null, null, projectName)
       {
-         this.UniqueName = obj.GetValue<string>("uniqueName");
-         this.DisplayName = obj.GetValue<string>("displayName");
+         Common.MoveProperties(this, obj);
       }
 
       public override string ToString() => this.DisplayName;
