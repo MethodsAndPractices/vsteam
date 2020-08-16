@@ -36,5 +36,44 @@ namespace vsteam_lib.Test.Provider
          // Assert
          Assert.AreEqual(8, actual);
       }
+
+      [TestMethod]
+      public void Missing_Property_As_String()
+      {
+         // Arrange
+         var target = PSObject.AsPSObject(new { revision = PSObject.AsPSObject(new { value = 0 }) });
+
+         // Act
+         var actual = target.GetValue("revision.test");
+
+         // Assert
+         Assert.AreEqual(null, actual);
+      }
+
+      [TestMethod]
+      public void Nested_Property_As_Long()
+      {
+         // Arrange
+         var target = PSObject.AsPSObject(new { revision = PSObject.AsPSObject(new { value = 1 }) });
+
+         // Act
+         var actual = target.GetValue<long>("revision.value");
+
+         // Assert
+         Assert.AreEqual(1, actual);
+      }
+
+      [TestMethod]
+      public void Long_Property_As_String()
+      {
+         // Arrange
+         var target = PSObject.AsPSObject(new { value = 1 });
+
+         // Act
+         var actual = target.GetValue<string>("value");
+
+         // Assert
+         Assert.AreEqual("1", actual);
+      }
    }
 }

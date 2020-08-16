@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Management.Automation;
-using System.Runtime.CompilerServices;
 
 namespace vsteam_lib.Provider
 {
@@ -42,6 +41,7 @@ namespace vsteam_lib.Provider
       /// <returns>The value if present or the default value of T</returns>
       public static T GetValue<T>(this PSObject obj, string name)
       {
+         var result = default(T);
          var typeofT = typeof(T);
          var baseType = Nullable.GetUnderlyingType(typeofT);
          var isNullable = baseType != null;
@@ -60,7 +60,7 @@ namespace vsteam_lib.Provider
                nextObj = obj.GetValue<PSObject>(parts[i]);
             }
 
-            return nextObj.GetValue<T>(parts[parts.GetUpperBound(0)]);
+            result = nextObj.GetValue<T>(parts[parts.GetUpperBound(0)]);
          }
          else
          {
@@ -71,7 +71,7 @@ namespace vsteam_lib.Provider
                   object temp = obj.Properties[name].Value.ToString();
 
                   // This allows any type to be returned as a string
-                  return (T)System.Convert.ChangeType(temp, typeofT);
+                  result = (T)System.Convert.ChangeType(temp, typeofT);
                }
                else
                {
@@ -87,7 +87,7 @@ namespace vsteam_lib.Provider
                   var temp = obj.Properties[name].Value;
                   try
                   {
-                     return (T)temp;
+                     result = (T)temp;
                   }
                   catch (System.InvalidCastException ivce)
                   {
@@ -101,19 +101,20 @@ namespace vsteam_lib.Provider
                         {
                            case "DateTime":
                               object tempDate = DateTime.Parse(temp.ToString());
-                              return (T)tempDate;
+                              result = (T)tempDate;
+                              break;
                         }
                      }
                      else
                      {
-                        return (T)System.Convert.ChangeType(temp, typeofT);
+                        result = (T)System.Convert.ChangeType(temp, typeofT);
                      }
                   }
                }
             }
          }
 
-         return default;
+         return result;
       }
 
       public static bool HasValue(this PSObject obj, string name) => obj.Properties.Match(name).Count > 0;
