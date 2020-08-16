@@ -31,7 +31,7 @@ function Update-VSTeamExtension {
          -Body $body `
          -Version $(_getApiVersion ExtensionsManagement)
 
-      $item = [VSTeamExtension]::new($resp)
+      $item = [vsteam_lib.Extension]::new($resp)
 
       Write-Output $item
    }

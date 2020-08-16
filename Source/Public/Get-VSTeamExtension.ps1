@@ -27,7 +27,7 @@ function Get-VSTeamExtension {
             -Id $id `
             -Version $(_getApiVersion ExtensionsManagement)
 
-         $item = [VSTeamExtension]::new($resp)
+         $item = [vsteam_lib.Extension]::new($resp)
 
          Write-Output $item
       }
@@ -54,7 +54,7 @@ function Get-VSTeamExtension {
          $objs = @()
 
          foreach ($item in $resp.value) {
-            $objs += [VSTeamExtension]::new($item)
+            $objs += [vsteam_lib.Extension]::new($item)
          }
 
          Write-Output $objs

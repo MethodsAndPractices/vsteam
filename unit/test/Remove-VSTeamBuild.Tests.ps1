@@ -5,13 +5,12 @@ Describe 'Remove-VSTeamBuild' {
       Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-   
-      
+
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
-   
+
       # Prime the project cache with an empty list. This will make sure
-      # any project name used will pass validation and Get-VSTeamProject 
+      # any project name used will pass validation and Get-VSTeamProject
       # will not need to be called.
       [vsteam_lib.ProjectCache]::Update([string[]]@())
    }

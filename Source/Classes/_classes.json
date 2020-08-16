@@ -24,7 +24,6 @@
       "VSTeamBuildDefinitionProcessPhase.ps1",
       "VSTeamBuildDefinitionProcess.ps1",
       "VSTeamBuildDefinition.ps1",
-      "VSTeamExtension.ps1",
       "VSTeamFeed.ps1",
       "VSTeamProcess.ps1",
       "VSTeamRef.ps1",

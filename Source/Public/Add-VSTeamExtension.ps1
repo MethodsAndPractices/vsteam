@@ -22,7 +22,7 @@ function Add-VSTeamExtension {
          -Id $id `
          -Version $(_getApiVersion ExtensionsManagement)
 
-      $item = [VSTeamExtension]::new($resp)
+      $item = [vsteam_lib.Extension]::new($resp)
 
       Write-Output $item
    }
