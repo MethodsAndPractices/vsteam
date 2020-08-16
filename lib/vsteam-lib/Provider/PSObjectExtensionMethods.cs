@@ -26,7 +26,9 @@ namespace vsteam_lib.Provider
          }
          else
          {
-            return obj.Properties[name]?.Value.ToString();
+            // The property might be null and the value of the property might 
+            // be null. Protect for both with two ?. below.
+            return obj.Properties[name]?.Value?.ToString();
          }
       }
 

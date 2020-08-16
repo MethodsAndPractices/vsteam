@@ -20,7 +20,7 @@ function Get-VSTeamFeed {
             $resp = _callAPI @commonArgs -Id $item
 
             Write-Verbose $resp
-            $item = [VSTeamFeed]::new($resp)
+            $item = [vsteam_lib.Feed]::new($resp)
 
             Write-Output $item
          }
@@ -32,7 +32,7 @@ function Get-VSTeamFeed {
 
          foreach ($item in $resp.value) {
             Write-Verbose $item
-            $objs += [VSTeamFeed]::new($item)
+            $objs += [vsteam_lib.Feed]::new($item)
          }
 
          Write-Output $objs

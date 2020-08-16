@@ -52,6 +52,6 @@ function Add-VSTeamFeed {
          -body $bodyAsJson `
          -Version $(_getApiVersion Packaging)
 
-      return [VSTeamFeed]::new($resp)
+      return [vsteam_lib.Feed]::new($resp)
    }
 }
