@@ -95,9 +95,7 @@ Describe 'VSTeamProject' {
          }
 
          # Track Progress
-         Mock Invoke-RestMethod {
-            Write-Host "i = $i"
-            
+         Mock Invoke-RestMethod {            
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {

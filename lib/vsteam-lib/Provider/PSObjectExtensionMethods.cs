@@ -1,4 +1,6 @@
-﻿using System.Management.Automation;
+﻿using System;
+using System.Management.Automation;
+using System.Runtime.CompilerServices;
 
 namespace vsteam_lib.Provider
 {
@@ -40,6 +42,10 @@ namespace vsteam_lib.Provider
       /// <returns>The value if present or the default value of T</returns>
       public static T GetValue<T>(this PSObject obj, string name)
       {
+         var typeofT = typeof(T);
+         var baseType = Nullable.GetUnderlyingType(typeofT);
+         var isNullable = baseType != null;
+
          // See if the name contains a period. If so you have to 
          // drill down to the object. Everything before the final
          // object treat as a PSObject
@@ -60,16 +66,49 @@ namespace vsteam_lib.Provider
          {
             if (obj.Properties.Match(name).Count > 0)
             {
-               if (typeof(T) == typeof(string))
+               if (typeofT == typeof(string))
                {
                   object temp = obj.Properties[name].Value.ToString();
 
                   // This allows any type to be returned as a string
-                  return (T)temp;
+                  return (T)System.Convert.ChangeType(temp, typeofT);
                }
                else
                {
-                  return (T)obj.Properties[name].Value;
+                  // I am using Change Type as a backup because depending on 
+                  // the version of PowerShell you are using some items are 
+                  // returned as an int32 or int64 for the same property. This 
+                  // should catch any invalid cast exceptions and still convert.
+                  // I can't use Change Type for everything because it is 
+                  // invalid to cast from a DateTime to a null-able DateTime but 
+                  // a direct cast works. So try a direct cast and if that fails.
+                  // I also noticed DateTimes coming across as string in 
+                  // PowerShell 5 but DateTimes in PowerShell 7. 
+                  var temp = obj.Properties[name].Value;
+                  try
+                  {
+                     return (T)temp;
+                  }
+                  catch (System.InvalidCastException ivce)
+                  {
+                     System.Diagnostics.Debug.WriteLine(ivce.Message);
+
+                     // Change Type cannot change to a null-able Type. So see if
+                     // this is a null-able type.
+                     if (isNullable)
+                     {
+                        switch (baseType.Name)
+                        {
+                           case "DateTime":
+                              object tempDate = DateTime.Parse(temp.ToString());
+                              return (T)tempDate;
+                        }
+                     }
+                     else
+                     {
+                        return (T)System.Convert.ChangeType(temp, typeofT);
+                     }
+                  }
                }
             }
          }
