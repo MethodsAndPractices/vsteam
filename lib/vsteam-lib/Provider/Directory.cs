@@ -6,7 +6,7 @@ using System.Management.Automation.Abstractions;
 
 namespace vsteam_lib.Provider
 {
-   public class Directory : SHiPSDirectory
+   public class Directory : SHiPSDirectory, IInternalObject
    {
       private string _typeName;
 

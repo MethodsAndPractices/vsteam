@@ -3,12 +3,11 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamExtension' {
    BeforeAll {
       Import-Module SHiPS
+      Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
 
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
-      
-      . "$PSScriptRoot/../../Source/Classes/VSTeamInstallState.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamExtension.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"

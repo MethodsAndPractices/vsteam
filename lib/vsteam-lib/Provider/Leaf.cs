@@ -3,7 +3,7 @@ using System.Management.Automation;
 
 namespace vsteam_lib.Provider
 {
-   public class Leaf : SHiPSLeaf
+   public class Leaf : SHiPSLeaf, IInternalObject
    {
       public string ID { get; set; }
       public string ProjectName { get; set; }

@@ -3,7 +3,7 @@ class VSTeamExtension : VSTeamLeaf {
    [string]$extensionId
    [string]$publisherName
    [string]$version
-   [VSTeamInstallState]$installState
+   [vsteam_lib.InstallState]$installState
 
    VSTeamExtension (
       [object]$obj
@@ -13,7 +13,7 @@ class VSTeamExtension : VSTeamLeaf {
       $this.publisherId = $obj.publisherId
       $this.publisherName = $obj.publisherName
       $this.version = $obj.version
-      $this.installState = [VSTeamInstallState]::new($obj.installState)
+      $this.installState = [vsteam_lib.InstallState]::new($obj.installState)
 
       $this._internalObj = $obj
 

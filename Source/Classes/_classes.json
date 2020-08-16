@@ -4,7 +4,6 @@
    "files": [
       "VSTeamDirectory.ps1",
       "VSTeamLeaf.ps1",
-      "VSTeamInstallState.ps1",
       "VSTeamTask.ps1",
       "VSTeamAttempt.ps1",
       "VSTeamUserEntitlement.ps1",
