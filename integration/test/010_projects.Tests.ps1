@@ -49,7 +49,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
-   Context 'Git full exercise' {
+   Context 'Git full exercise' -Tag "Git" {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
          # This is fine if you are running all the tests but not if you just

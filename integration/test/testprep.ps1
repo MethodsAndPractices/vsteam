@@ -39,7 +39,7 @@ function Set-Project {
    }
    else {
       Write-Host "  Creating Project: $projectName"
-      Add-VSTeamProject -Name $projectName -Description $projectDescription -Verbose | Should -Not -Be $null
+      Add-VSTeamProject -Name $projectName -Description $projectDescription | Should -Not -Be $null
       Start-Sleep -Seconds 5
    }
 
@@ -62,5 +62,7 @@ function Get-ProjectName {
    # want to run these. So if the newProjectName can't be found in the 
    # target system change newProjectName to equal the name of the project
    # found with the correct description.
+   $projectDescription = 'Project for VSTeam integration testing.'
+
    return ($(Get-VSTeamProject | Where-Object Description -eq $projectDescription)).Name
 }
