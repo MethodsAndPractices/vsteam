@@ -33,7 +33,7 @@ function Get-VSTeam {
             # Call the REST API
             $resp = _callAPI @commonArgs -id $item               
 
-            $team = [VSTeamTeam]::new($resp, $ProjectName)
+            $team = [vsteam_lib.Team]::new($resp, $ProjectName)
 
             Write-Output $team
          }
@@ -43,7 +43,7 @@ function Get-VSTeam {
             # Call the REST API
             $resp = _callAPI @commonArgs -id $item
 
-            $team = [VSTeamTeam]::new($resp, $ProjectName)
+            $team = [vsteam_lib.Team]::new($resp, $ProjectName)
 
             Write-Output $team
          }
@@ -60,7 +60,7 @@ function Get-VSTeam {
 
          # Create an instance for each one
          foreach ($item in $resp.value) {
-            $obj += [VSTeamTeam]::new($item, $ProjectName)
+            $obj += [vsteam_lib.Team]::new($item, $ProjectName)
          }
 
          Write-Output $obj

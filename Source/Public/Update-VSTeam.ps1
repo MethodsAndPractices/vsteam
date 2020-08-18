@@ -45,7 +45,7 @@ function Update-VSTeam {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $team = [VSTeamTeam]::new($resp, $ProjectName)
+         $team = [vsteam_lib.Team]::new($resp, $ProjectName)
 
          Write-Output $team
       }

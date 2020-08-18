@@ -28,7 +28,7 @@ function Add-VSTeam {
          -Body $body `
          -Version $(_getApiVersion Core)
 
-      $team = [VSTeamTeam]::new($resp, $ProjectName)
+      $team = [vsteam_lib.Team]::new($resp, $ProjectName)
 
       Write-Output $team
    }

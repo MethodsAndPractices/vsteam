@@ -17,7 +17,6 @@ Describe 'VSTeamGitRepositoryPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamReleases.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
