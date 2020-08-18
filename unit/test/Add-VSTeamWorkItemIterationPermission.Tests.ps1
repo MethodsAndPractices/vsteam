@@ -26,7 +26,6 @@ Describe 'VSTeamWorkItemIterationPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamWorkItemIterationPermissions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
@@ -35,7 +34,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       . "$PSScriptRoot/../../Source/Public/$sut"
 
       $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
-      $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
+      $userSingleResultObject = [vsteam_lib.User2]::new($userSingleResult)
 
       $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
       $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)

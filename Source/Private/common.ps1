@@ -841,7 +841,7 @@ function _getDescriptorForACL {
    [cmdletbinding()]
    param(
       [parameter(Mandatory = $true, ParameterSetName = "ByUser")]
-      [VSTeamUser]$User,
+      [vsteam_lib.User2]$User,
 
       [parameter(MAndatory = $true, ParameterSetName = "ByGroup")]
       [vsteam_lib.Group]$Group

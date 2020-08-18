@@ -31,12 +31,12 @@ namespace vsteam_lib
       {
          get
          {
-            if (this._powerShell == null)
+            if (this._powerShell != null)
             {
-               this._powerShell = new PowerShellWrapper(RunspaceMode.CurrentRunspace);
+               return this._powerShell;
             }
 
-            return this._powerShell;
+            return new PowerShellWrapper(RunspaceMode.CurrentRunspace);
          }
 
          set => this._powerShell = value;

@@ -18,6 +18,9 @@ namespace vsteam_lib
       [XmlAttribute("_links.storageKey.href")]
       public string StorageKey { get; set; }
 
+      [XmlAttribute("_links.avatar.href")]
+      public string Avatar { get; set; }
+
       public PSObject InternalObject { get; }
 
       public Link(PSObject obj)

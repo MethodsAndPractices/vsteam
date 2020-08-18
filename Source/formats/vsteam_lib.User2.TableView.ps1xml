@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.User2.TableView</Name>
+			<Name>vsteam_lib.User2.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.User2</TypeName>
+				<TypeName>vsteam_lib.User2</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

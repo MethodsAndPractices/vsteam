@@ -24,7 +24,6 @@ Describe 'VSTeamGitRepositoryPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepositoryPermissions.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -36,7 +35,7 @@ Describe 'VSTeamGitRepositoryPermission' {
       ## Arrange
       BeforeAll {
          $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
-         $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
+         $userSingleResultObject = [vsteam_lib.User2]::new($userSingleResult)
 
          $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
          $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)

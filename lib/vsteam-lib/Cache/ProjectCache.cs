@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Management.Automation;
 
 namespace vsteam_lib
 {
@@ -8,13 +9,10 @@ namespace vsteam_lib
    /// </summary>
    public static class ProjectCache
    {
-      internal static InternalCache Cache { get; } = new InternalCache("Get-VSTeamProject", "Name", false);
-      
-      internal static bool HasCacheExpired => Cache.HasCacheExpired;
-
       public static void Invalidate() => Cache.Invalidate();
-
+      internal static bool HasCacheExpired => Cache.HasCacheExpired;
       public static void Update(IEnumerable<string> list) => Cache.Update(list);
+      internal static InternalCache Cache { get; } = new InternalCache("Get-VSTeamProject", "Name", false);
 
       /// <summary>
       /// There are times we need to force an update of the cache
@@ -27,7 +25,14 @@ namespace vsteam_lib
       {
          if (HasCacheExpired || forceUpdate)
          {
-            Update(null);
+            try
+            {
+               Update(null);
+            }
+            catch (PSInvalidOperationException ex)
+            {
+               System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
          }
 
          return Cache.Values;

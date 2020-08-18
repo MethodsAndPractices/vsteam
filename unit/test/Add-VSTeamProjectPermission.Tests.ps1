@@ -9,7 +9,6 @@ Describe 'VSTeamProjectPermission' {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamUser.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
@@ -35,7 +34,7 @@ Describe 'VSTeamProjectPermission' {
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       $userSingleResult = Get-Content "$PSScriptRoot\sampleFiles\users.single.json" -Raw | ConvertFrom-Json
-      $userSingleResultObject = [VSTeamUser]::new($userSingleResult)
+      $userSingleResultObject = [vsteam_lib.User2]::new($userSingleResult)
 
       $groupSingleResult = Get-Content "$PSScriptRoot\sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
       $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)

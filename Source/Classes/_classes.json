@@ -34,7 +34,6 @@
       "VSTeamWorkItemIterationPermissions.ps1",
       "VSTeamDescriptor.ps1",
       "VSTeamSecurityNamespace.ps1",
-      "VSTeamUser.ps1",
       "VSTeamClassificationNode.ps1",
       "VSTeamReleaseDefinition.ps1",
       "VSTeamReleaseDefinitions.ps1",

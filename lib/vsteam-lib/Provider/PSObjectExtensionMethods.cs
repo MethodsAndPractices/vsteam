@@ -61,7 +61,11 @@ namespace vsteam_lib.Provider
                nextObj = nextObj.GetValue<PSObject>(parts[i]);
             }
 
-            result = nextObj.GetValue<T>(parts[parts.GetUpperBound(0)]);
+            // nextObj could be null if the property is not found
+            if (nextObj != null)
+            {
+               result = nextObj.GetValue<T>(parts[parts.GetUpperBound(0)]);
+            }
          }
          else
          {

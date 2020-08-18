@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.User2.ListView</Name>
+			<Name>vsteam_lib.User2.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.User2</TypeName>
+				<TypeName>vsteam_lib.User2</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

@@ -29,7 +29,7 @@ function Get-VSTeamUser {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $user = [VSTeamUser]::new($resp)
+         $user = [vsteam_lib.User2]::new($resp)
 
          Write-Output $user
       }
@@ -46,7 +46,7 @@ function Get-VSTeamUser {
             $objs = @()
 
             foreach ($item in $resp.value) {
-               $objs += [VSTeamUser]::new($item)
+               $objs += [vsteam_lib.User2]::new($item)
             }
 
             Write-Output $objs

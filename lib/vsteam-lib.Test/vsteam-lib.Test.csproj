@@ -63,6 +63,9 @@
      <None Update="SampleFiles\Get-VSTeamProject.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
+     <None Update="SampleFiles\Get-VSTeamUser.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
    </ItemGroup>
 
 </Project>
