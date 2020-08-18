@@ -9,7 +9,7 @@ class VSTeamGitRepository : VSTeamDirectory {
    [string]$sshURL = $null
    [string]$RemoteURL = $null
    [string]$DefaultBranch = $null
-   [VSTeamProject]$Project = $null
+   [vsteam_lib.Project]$Project = $null
 
    VSTeamGitRepository(
       [object]$obj,
@@ -36,7 +36,7 @@ class VSTeamGitRepository : VSTeamDirectory {
       }
 
       if ($obj.PSObject.Properties.Match('project').count -gt 0) {
-         $this.Project = [VSTeamProject]::new($obj.project)
+         $this.Project = [vsteam_lib.Project]::new($obj.project)
       }
 
       $this._internalObj = $obj

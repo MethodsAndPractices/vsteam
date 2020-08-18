@@ -6,11 +6,10 @@ Describe 'VSTeamPullRequest' {
       Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-
       
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
+      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable

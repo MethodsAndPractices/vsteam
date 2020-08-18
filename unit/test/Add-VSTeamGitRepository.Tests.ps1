@@ -9,7 +9,6 @@ Describe "VSTeamGitRepository" {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamTeams.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
@@ -23,7 +22,6 @@ Describe "VSTeamGitRepository" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
@@ -36,10 +34,8 @@ Describe "VSTeamGitRepository" {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Public/Remove-VSTeamAccount.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamBuildDefinition.ps1"
-      . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
-      # . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 
       # Prime the project cache with an empty list. This will make sure
@@ -61,7 +57,7 @@ Describe "VSTeamGitRepository" {
             name          = 'testRepo'
             project       = [PSCustomObject]@{
                name        = 'Project'
-               id          = 1
+               id          = '00000000-0000-0000-0000-000000000001'
                description = ''
                url         = ''
                state       = ''

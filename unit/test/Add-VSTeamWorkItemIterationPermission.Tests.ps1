@@ -23,7 +23,6 @@ Describe 'VSTeamWorkItemIterationPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamWorkItemIterationPermissions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
@@ -51,7 +50,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          _links      = [PSCustomObject]@{ }
       }
 
-      $projectResultObject = [VSTeamProject]::new($projectResult)
+      $projectResultObject = [vsteam_lib.Project]::new($projectResult)
 
       $accessControlEntryResult =
       @"

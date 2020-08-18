@@ -23,7 +23,6 @@ Describe 'VSTeamGitRepositoryPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepositoryPermissions.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
@@ -41,7 +40,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)
 
          $projectResult = Get-Content "$PSScriptRoot\sampleFiles\projectResult.json" -Raw | ConvertFrom-Json
-         $projectResultObject = [VSTeamProject]::new($projectResult)
+         $projectResultObject = [vsteam_lib.Project]::new($projectResult)
 
          $accessControlEntryResult = Get-Content "$PSScriptRoot\sampleFiles\accessControlEntryResult.json" -Raw | ConvertFrom-Json
 

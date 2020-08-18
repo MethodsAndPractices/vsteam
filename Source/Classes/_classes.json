@@ -18,7 +18,6 @@
       "VSTeamQueues.ps1",
       "VSTeamRepositories.ps1",
       "VSTeamTeams.ps1",
-      "VSTeamProject.ps1",
       "VSTeamGitRepository.ps1",
       "VSTeamBuildDefinitionProcessPhaseStep.ps1",
       "VSTeamBuildDefinitionProcessPhase.ps1",

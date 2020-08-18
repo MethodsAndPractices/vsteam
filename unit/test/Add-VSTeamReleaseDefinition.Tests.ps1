@@ -5,7 +5,6 @@ Describe 'VSTeamReleaseDefinition' {
       Add-Type -Path "$PSScriptRoot/../../dist/bin/vsteam-lib.dll"
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
-
       
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"

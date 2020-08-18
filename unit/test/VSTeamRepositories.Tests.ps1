@@ -30,7 +30,6 @@ Describe "VSTeamRepositories" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamReleases.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"

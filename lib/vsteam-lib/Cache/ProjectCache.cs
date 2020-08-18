@@ -25,14 +25,7 @@ namespace vsteam_lib
       {
          if (HasCacheExpired || forceUpdate)
          {
-            try
-            {
-               Update(null);
-            }
-            catch (PSInvalidOperationException ex)
-            {
-               System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
+            Update(null);
          }
 
          return Cache.Values;

@@ -23,7 +23,6 @@ Describe 'VSTeamProjectPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProjectPermissions.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Add-VSTeamAccessControlEntry.ps1"
@@ -51,7 +50,7 @@ Describe 'VSTeamProjectPermission' {
          _links      = [PSCustomObject]@{ }
       }
 
-      $projectResultObject = [VSTeamProject]::new($projectResult)
+      $projectResultObject = [vsteam_lib.Project]::new($projectResult)
 
       $accessControlEntryResult =
       @"

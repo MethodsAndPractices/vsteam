@@ -30,7 +30,6 @@ Describe 'VSTeamPermissionInheritance' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcess.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinition.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"

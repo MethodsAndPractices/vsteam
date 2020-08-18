@@ -7,7 +7,7 @@ function Add-VSTeamWorkItemAreaPermission {
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndAreaPathAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndAreaPathAndUser")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndAreaPathAndGroup")]
-      [VSTeamProject]$Project,
+      [vsteam_lib.Project]$Project,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndAreaIdAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndAreaIdAndGroup")]
