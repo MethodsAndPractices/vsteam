@@ -20,7 +20,6 @@ Describe 'VSTeamProjectPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamQueues.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamProjectPermissions.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"

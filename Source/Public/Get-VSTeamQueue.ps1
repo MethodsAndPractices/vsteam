@@ -29,7 +29,7 @@ function Get-VSTeamQueue {
       if ($id) {
          $resp = _callAPI @commonArgs -Id $id
 
-         $item = [VSTeamQueue]::new($resp, $ProjectName)
+         $item = [vsteam_lib.Queue]::new($resp, $ProjectName)
 
          Write-Output $item
       }
@@ -39,7 +39,7 @@ function Get-VSTeamQueue {
          $objs = @()
 
          foreach ($item in $resp.value) {
-            $objs += [VSTeamQueue]::new($item, $ProjectName)
+            $objs += [vsteam_lib.Queue]::new($item, $ProjectName)
          }
 
          Write-Output $objs

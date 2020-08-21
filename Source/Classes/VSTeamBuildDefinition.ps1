@@ -12,7 +12,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [object]$Triggers = $null
    [object]$Variables = $null
    [object]$Repository = $null
-   [VSTeamQueue]$Queue = $null
+   [vsteam_lib.Queue]$Queue = $null
    [object]$RetentionRules = $null
    [VSTeamUserEntitlement]$AuthoredBy = $null
    [string]$BuildNumberFormat = $null
@@ -41,7 +41,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
 
       # These might not be returned
       if ($obj.PSObject.Properties.Match('queue').count -gt 0) {
-         $this.Queue = [VSTeamQueue]::new($obj.queue, $Projectname)
+         $this.Queue = [vsteam_lib.Queue]::new($obj.queue, $Projectname)
       }
 
       # As of version 5.0 of the REST API this has moved to the Build Def from the phases

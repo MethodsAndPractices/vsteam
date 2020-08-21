@@ -42,7 +42,14 @@ namespace vsteam_lib
             // If this is a nested property (contains a .) let it through
             if (source.HasValue(propertyName) || propertyName.IndexOf(".") != -1)
             {
-               prop.SetValue(target, source.GetValue<object>(propertyName));
+               if(prop.PropertyType.Name == "String")
+               {
+                  prop.SetValue(target, source.GetValue<object>(propertyName)?.ToString());
+               }
+               else
+               {
+                  prop.SetValue(target, source.GetValue<object>(propertyName));
+               }
             }
          }
       }

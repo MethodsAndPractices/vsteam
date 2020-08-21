@@ -9,10 +9,7 @@ Describe 'VSTeamQueue' {
 
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamPool.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
@@ -27,8 +24,8 @@ Describe 'VSTeamQueue' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
 
-      Mock Invoke-RestMethod { return @{ value = @{ id = 3; name = 'Hosted'; pool = @{ } } } }
-      Mock Invoke-RestMethod { return @{ id = 101; name = 'Hosted'; pool = @{ } } } -ParameterFilter { $Uri -like "*101*" }
+      Mock Invoke-RestMethod { return [PSCustomObject]@{ value = [PSCustomObject]@{ id = 3; name = 'Hosted'; pool = [PSCustomObject]@{ name = "Default" } } } }
+      Mock Invoke-RestMethod { return [PSCustomObject]@{ id = 101; name = 'Hosted'; pool = [PSCustomObject]@{ name = "Default" } } } -ParameterFilter { $Uri -like "*101*" }
    }
 
    Context 'Get-VSTeamQueue' {
