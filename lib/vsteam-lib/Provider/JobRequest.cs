@@ -26,8 +26,6 @@ namespace vsteam_lib
       public JobRequest(PSObject obj) :
          base(obj, obj.GetValue("owner.Name"), obj.GetValue("requestId"), null)
       {
-         Common.MoveProperties(this, obj);
-
          this.Demands = obj.GetValue<object[]>("demands").Select(o => o.ToString()).ToArray();
 
          if (!obj.HasValue("result") && !obj.HasValue("assignTime"))

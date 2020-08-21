@@ -13,7 +13,6 @@ namespace vsteam_lib
       public AccessControlEntry(PSObject obj) :
          base(obj, obj.GetValue("descriptor"), obj.GetValue("descriptor"), null)
       {
-         Common.MoveProperties(this, obj);
       }
 
       public override string ToString() => $"{this.Descriptor}: Allow={this.Allow}, Deny={this.Deny}";

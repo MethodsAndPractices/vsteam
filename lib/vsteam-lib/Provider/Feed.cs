@@ -14,8 +14,6 @@ namespace vsteam_lib
       public Feed(PSObject obj) :
          base(obj, obj.GetValue("name"), obj.GetValue("id"), null)
       {
-         Common.MoveProperties(this, obj);
-
          var sources = new List<UpstreamSource>();
          foreach (PSObject item in ((object[])obj.Properties["upstreamSources"].Value))
          {

@@ -34,7 +34,7 @@ function Get-VSTeamGitRef {
          $obj = @()
 
          foreach ($item in $resp.value) {
-            $obj += [VSTeamRef]::new($item, $ProjectName)
+            $obj += [vsteam_lib.GitRef]::new($item, $ProjectName)
          }
 
          Write-Output $obj

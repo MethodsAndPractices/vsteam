@@ -23,8 +23,6 @@ namespace vsteam_lib
          base(obj, obj.GetValue("name"), "JobRequest", powerShell, null)
       {
          this.PoolId = poolId;
-
-         Common.MoveProperties(this, obj);
       }
 
       [ExcludeFromCodeCoverage]

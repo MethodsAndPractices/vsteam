@@ -29,8 +29,6 @@ namespace vsteam_lib
       public AgentPool(PSObject obj, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), "Agent", powerShell, null)
       {
-         Common.MoveProperties(this, obj);
-
          if (this.IsHosted)
          {
             this.DisplayMode = "d-r-s-";

@@ -14,8 +14,6 @@ namespace vsteam_lib
       public Extension(PSObject obj) :
          base(obj, obj.GetValue("extensionName"), obj.GetValue("extensionId"), null)
       {
-         Common.MoveProperties(this, obj);
-
          this.InstallState = new InstallState(obj.GetValue<PSObject>("installState"));
       }
    }

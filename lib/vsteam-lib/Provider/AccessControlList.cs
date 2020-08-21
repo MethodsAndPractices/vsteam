@@ -13,8 +13,6 @@ namespace vsteam_lib
       public AccessControlList(PSObject obj) :
          base(obj, obj.GetValue("token"), obj.GetValue("token"), null)
       {
-         Common.MoveProperties(this, obj);
-
          this.Aces = new Hashtable();
 
          var props = ((PSObject)obj.Members["acesDictionary"].Value).Properties;

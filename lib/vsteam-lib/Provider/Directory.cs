@@ -44,6 +44,8 @@ namespace vsteam_lib.Provider
       public Directory(PSObject obj, string name, string typeName, IPowerShell powerShell, string projectName) :
          base(name)
       {
+         Common.MoveProperties(this, obj);
+
          this.TypeName = typeName;
          this.InternalObject = obj;
          this.PowerShell = powerShell;

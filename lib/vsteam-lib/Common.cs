@@ -22,6 +22,11 @@ namespace vsteam_lib
 
       public static void MoveProperties(object target, PSObject source)
       {
+         if(source == null)
+         {
+            return;
+         }
+
          foreach (var prop in target.GetType().GetProperties())
          {
             if (prop.GetSetMethod() == null)
