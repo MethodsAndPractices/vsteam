@@ -20,7 +20,6 @@ Describe "VSTeamGitRepository" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcess.ps1"
@@ -30,7 +29,6 @@ Describe "VSTeamGitRepository" {
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamQueue.ps1"
       . "$PSScriptRoot/../../Source/Public/Remove-VSTeamAccount.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamBuildDefinition.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 

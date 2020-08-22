@@ -57,6 +57,9 @@
      <None Update="SampleFiles\Get-VSTeamGitRef.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
+     <None Update="SampleFiles\Get-VSTeamGitRepository.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
      <None Update="SampleFiles\Get-VSTeamGroup.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>

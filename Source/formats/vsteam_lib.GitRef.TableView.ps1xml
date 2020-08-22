@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.GitRef.TableView</Name>
+			<Name>vsteam_lib.GitRef.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.GitRef</TypeName>
+				<TypeName>vsteam_lib.GitRef</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

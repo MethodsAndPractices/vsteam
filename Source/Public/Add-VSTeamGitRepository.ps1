@@ -20,7 +20,7 @@ function Add-VSTeamGitRepository {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $repo = [VSTeamGitRepository]::new($resp, $ProjectName)
+         $repo = [vsteam_lib.GitRepository]::new($resp, $ProjectName)
 
          Write-Output $repo
       }

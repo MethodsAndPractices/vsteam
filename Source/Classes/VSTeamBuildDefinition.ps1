@@ -18,7 +18,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [string]$BuildNumberFormat = $null
    [int]$JobCancelTimeoutInMinutes = -1
    [string]$JobAuthorizationScope = $null
-   [VSTeamGitRepository]$GitRepository = $null
+   [vsteam_lib.GitRepository]$GitRepository = $null
    [datetime]$CreatedOn = [datetime]::MinValue
    [VSTeamBuildDefinitionProcess]$Process = $null
    [VSTeamBuildDefinitionProcessPhaseStep[]]$Steps = $null
@@ -71,7 +71,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
 
       if ($obj.PSObject.Properties.Match('repository').count -gt 0) {
          if($obj.repository.type -eq "TfsGit") {
-            $this.GitRepository = [VSTeamGitRepository]::new($obj.repository, $Projectname)
+            $this.GitRepository = [vsteam_lib.GitRepository]::new($obj.repository, $Projectname)
          } else {
             $this.Repository = $obj.repository
          }

@@ -44,7 +44,7 @@
       "Team.Provider.Feed.TableView.ps1xml",
       "Team.Feed.TableView.ps1xml",
       "Team.Provider.GitRef.TableView.ps1xml",
-      "Team.GitRef.TableView.ps1xml",
+      "vsteam_lib.GitRef.TableView.ps1xml",
       "vsteam_lib.Agent.TableView.ps1xml",
       "Team.Provider.Agent.TableView.ps1xml",
       "Team.Provider.Team.TableView.ps1xml",

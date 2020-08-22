@@ -23,7 +23,6 @@ Describe "VSTeamBuildDefinitions" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamReleases.ps1"
       . "$PSScriptRoot/../../Source/Classes/$sut"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinition.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"

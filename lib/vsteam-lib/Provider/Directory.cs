@@ -41,6 +41,15 @@ namespace vsteam_lib.Provider
          set => this._typeName = value;
       }
 
+      /// <summary>
+      /// This version is for use with Unit tests and called by all other
+      /// constructors
+      /// </summary>
+      /// <param name="obj">PowerShell object returned by REST Call</param>
+      /// <param name="name">The name displayed by provider</param>
+      /// <param name="typeName">The noun of the type to be applied to the child items</param>
+      /// <param name="powerShell">The PowerShell to use when calling other cmdlets</param>
+      /// <param name="projectName">The name of the project used to query the child items</param>
       public Directory(PSObject obj, string name, string typeName, IPowerShell powerShell, string projectName) :
          base(name)
       {
@@ -55,14 +64,20 @@ namespace vsteam_lib.Provider
       /// <summary>
       /// This version is for use in classes still in PowerShell
       /// </summary>
-      /// <param name="name"></param>
-      /// <param name="typeName"></param>
+      /// <param name="name">The name displayed by provider</param>
+      /// <param name="typeName">The noun of the type to be applied to the child items</param>
       [ExcludeFromCodeCoverage]
       public Directory(string name, string typeName, string projectName) :
         this(null, name, typeName, new PowerShellWrapper(RunspaceMode.CurrentRunspace), projectName)
       {
       }
 
+      /// <summary>
+      /// This version is for use when no Proeject name is required
+      /// </summary>
+      /// <param name="name">The name displayed by provider</param>
+      /// <param name="typeName">The noun of the type to be applied to the child items</param>
+      /// <param name="powerShell">The PowerShell to use when calling other cmdlets</param>
       public Directory(string name, string typeName, IPowerShell powerShell) :
          this(null, name, typeName, powerShell, null)
       {

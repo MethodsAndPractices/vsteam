@@ -9,7 +9,6 @@ Describe 'VSTeamBuildDefinition' {
    
       . "$PSScriptRoot/../../Source/Classes/VSTeamLeaf.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDirectory.ps1"
-      
       . "$PSScriptRoot/../../Source/Classes/VSTeamUserEntitlement.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRepositories.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamReleaseDefinitions.ps1"
@@ -21,7 +20,6 @@ Describe 'VSTeamBuildDefinition' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcess.ps1"

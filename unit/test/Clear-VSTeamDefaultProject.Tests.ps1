@@ -21,7 +21,6 @@ Describe 'VSTeamDefaultProject' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuild.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuilds.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitions.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamGitRepository.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcess.ps1"
