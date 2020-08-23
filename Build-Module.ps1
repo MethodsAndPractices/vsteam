@@ -109,7 +109,7 @@ Merge-File -inputFile ./Source/formats/_formats.json -outputDir $output
 
 # Build the help
 if ($buildHelp.IsPresent) {
-   Write-Output 'Creating help files'
+   Write-Output 'Processing: External help file'
    Push-Location
    Set-Location ./.docs
    Try {
@@ -122,6 +122,8 @@ if ($buildHelp.IsPresent) {
 
 Write-Output 'Publishing: About help files'
 Copy-Item -Path ./Source/en-US -Destination "$output/" -Recurse -Force
+
+Write-Output 'Publishing: Manifest file'
 Copy-Item -Path ./Source/VSTeam.psm1 -Destination "$output/VSTeam.psm1" -Force
 
 Write-Output '  Updating: Functions To Export'
@@ -132,7 +134,12 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 if (-not $skipLibBuild.IsPresent) {
    Write-Output '  Building: C# project'
-   dotnet build --nologo --verbosity quiet --configuration $configuration --output $output\bin lib
+   $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration --output $output\bin lib | Out-String
+
+   if(-not ($buildOutput | Select-String -Pattern 'succeeded'))
+   {
+      Write-Output $buildOutput
+   }
 }
 
 Write-Output "Publishing: Complete to $output"
