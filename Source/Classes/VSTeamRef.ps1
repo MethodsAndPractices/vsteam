@@ -1,5 +1,5 @@
 class VSTeamRef : VSTeamLeaf {
-   [VSTeamUserEntitlement]$Creator = $null
+   [vsteam_lib.UserEntitlement]$Creator = $null
 
    # The name passed to the base class is changed. For example if you pass
    # refs/heads/appcenter as the name it is converted into refs-heads-appcenter.
@@ -12,7 +12,7 @@ class VSTeamRef : VSTeamLeaf {
    ) : base($obj.name, $obj.objectId, $ProjectName) {
 
       $this.RefName = $obj.name
-      $this.Creator = [VSTeamUserEntitlement]::new($obj.creator, $ProjectName)
+      $this.Creator = [vsteam_lib.UserEntitlement]::new($obj.creator, $ProjectName)
 
       $this._internalObj = $obj
 

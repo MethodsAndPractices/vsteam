@@ -13,10 +13,10 @@ class VSTeamReleaseDefinition : VSTeamLeaf {
    [object]$Environments = $null
    [object]$VariableGroups = $null
    [string]$ReleaseNameFormat = ''
-   [VSTeamUserEntitlement]$CreatedBy = $null
-   [VSTeamUserEntitlement]$ModifiedBy = $null
    [datetime]$CreatedOn = [datetime]::MinValue
    [datetime]$ModifiedOn = [datetime]::MinValue
+   [vsteam_lib.UserEntitlement]$CreatedBy = $null
+   [vsteam_lib.UserEntitlement]$ModifiedBy = $null
 
    # Before this class was added to the provider there
    # was a type file to expose createdByUser. The type
@@ -41,8 +41,8 @@ class VSTeamReleaseDefinition : VSTeamLeaf {
       $this.Description = $obj.Description
       $this.VariableGroups = $obj.VariableGroups
       $this.ReleaseNameFormat = $obj.releaseNameFormat
-      $this.CreatedBy = [VSTeamUserEntitlement]::new($obj.createdBy, $null)
-      $this.ModifiedBy = [VSTeamUserEntitlement]::new($obj.modifiedBy, $null)
+      $this.CreatedBy = [vsteam_lib.UserEntitlement]::new($obj.createdBy, $null)
+      $this.ModifiedBy = [vsteam_lib.UserEntitlement]::new($obj.modifiedBy, $null)
 
       $this.createdByUser = $this.CreatedBy.DisplayName
 

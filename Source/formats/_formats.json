@@ -11,7 +11,7 @@
       "Team.AccessControlEntry.ListView.ps1xml",
       "vsteam_lib.AccessControlList.TableView.ps1xml",
       "vsteam_lib.AccessControlList.ListView.ps1xml",
-      "Team.Build.TableView.ps1xml",
+      "vsteam_lib.Build.TableView.ps1xml",
       "Team.Build.Artifact.TableView.ps1xml",
       "Team.Build.Artifact.WideView.ps1xml",
       "Team.Build.Artifact.ListView.ps1xml",
@@ -96,8 +96,8 @@
       "Team.GitUserDate.TableView.ps1xml",
       "Team.BuildTimeline.TableView.ps1xml",
       "Team.YamlPipelineResult.TableView.ps1xml",
-      "Team.Build.WideView.ps1xml",
-      "Team.Build.ListView.ps1xml",
+      "vsteam_lib.Build.WideView.ps1xml",
+      "vsteam_lib.Build.ListView.ps1xml",
       "Team.ResourceArea.TableView.ps1xml"
    ]
 }

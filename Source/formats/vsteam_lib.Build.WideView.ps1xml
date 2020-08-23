@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Build.WideView</Name>
+			<Name>vsteam_lib.Build.WideView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Build</TypeName>
+				<TypeName>vsteam_lib.Build</TypeName>
 			</ViewSelectedBy>
 			<WideControl>
 				<WideEntries>

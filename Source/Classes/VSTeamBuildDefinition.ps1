@@ -12,15 +12,15 @@ class VSTeamBuildDefinition : VSTeamDirectory {
    [object]$Triggers = $null
    [object]$Variables = $null
    [object]$Repository = $null
-   [vsteam_lib.Queue]$Queue = $null
    [object]$RetentionRules = $null
-   [VSTeamUserEntitlement]$AuthoredBy = $null
+   [vsteam_lib.Queue]$Queue = $null
    [string]$BuildNumberFormat = $null
    [int]$JobCancelTimeoutInMinutes = -1
    [string]$JobAuthorizationScope = $null
-   [vsteam_lib.GitRepository]$GitRepository = $null
    [datetime]$CreatedOn = [datetime]::MinValue
    [VSTeamBuildDefinitionProcess]$Process = $null
+   [vsteam_lib.UserEntitlement]$AuthoredBy = $null
+   [vsteam_lib.GitRepository]$GitRepository = $null
    [VSTeamBuildDefinitionProcessPhaseStep[]]$Steps = $null
    [string[]]$Demands = $null
 
@@ -37,7 +37,7 @@ class VSTeamBuildDefinition : VSTeamDirectory {
       }
       $this.CreatedOn = $obj.createdDate
       $this.JobAuthorizationScope = $obj.jobAuthorizationScope
-      $this.AuthoredBy = [VSTeamUserEntitlement]::new($obj.authoredBy, $Projectname)
+      $this.AuthoredBy = [vsteam_lib.UserEntitlement]::new($obj.authoredBy, $Projectname)
 
       # These might not be returned
       if ($obj.PSObject.Properties.Match('queue').count -gt 0) {

@@ -71,7 +71,7 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
 
       # This is the formatter when returned from a function
       It 'Team.Build should have name' {
-         $cols = Get-Columns -TypeName Team.Build
+         $cols = Get-Columns -TypeName vsteam_lib.Build
 
          $cols[0] | Should -Be 'Name'
          $cols[1] | Should -Be 'Result'

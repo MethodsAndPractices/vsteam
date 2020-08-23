@@ -48,6 +48,9 @@
      <None Update="SampleFiles\Get-VSTeamAgent-PoolId1.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
+     <None Update="SampleFiles\Get-VSTeamBuild.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
      <None Update="SampleFiles\Get-VSTeamExtension.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
