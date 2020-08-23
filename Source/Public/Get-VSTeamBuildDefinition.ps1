@@ -19,7 +19,6 @@ function Get-VSTeamBuildDefinition {
       [Parameter(ParameterSetName = 'ByIdJson')]
       [int] $Revision,
 
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
       [switch] $JSON,
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
@@ -68,13 +67,18 @@ function Get-VSTeamBuildDefinition {
             -Version $(_getApiVersion Build) `
             -QueryString @{type = $type; name = $filter; includeAllProperties = $true }
 
-         $objs = @()
-
-         foreach ($item in $resp.value) {
-            $objs += [VSTeamBuildDefinition]::new($item, $ProjectName)
+         if ($JSON.IsPresent) {
+            $resp | ConvertTo-Json -Depth 99
          }
+         else {
+            $objs = @()
 
-         Write-Output $objs
+            foreach ($item in $resp.value) {
+               $objs += [VSTeamBuildDefinition]::new($item, $ProjectName)
+            }
+
+            Write-Output $objs
+         }
       }
    }
 }
