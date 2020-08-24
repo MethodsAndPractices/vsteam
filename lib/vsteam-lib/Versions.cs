@@ -12,6 +12,61 @@ namespace vsteam_lib
 
    public static class Versions
    {
+      public static void SetApiVersion(APIs service, string version)
+      {
+         switch (service)
+         {
+            case APIs.Build:
+               Build = version;
+               break;
+            case APIs.Release:
+               Release = version;
+               break;
+            case APIs.Core:
+               Core = version;
+               break;
+            case APIs.Git:
+               Git = version;
+               break;
+            case APIs.DistributedTask:
+               DistributedTask = version;
+               break;
+            case APIs.DistributedTaskReleased:
+               DistributedTaskReleased = version;
+               break;
+            case APIs.VariableGroups:
+               VariableGroups = version;
+               break;
+            case APIs.Tfvc:
+               Tfvc = version;
+               break;
+            case APIs.Packaging:
+               Packaging = version;
+               break;
+            case APIs.MemberEntitlementManagement:
+               MemberEntitlementManagement = version;
+               break;
+            case APIs.ExtensionsManagement:
+               ExtensionsManagement = version;
+               break;
+            case APIs.ServiceEndpoints:
+               ServiceEndpoints = version;
+               break;
+            case APIs.Graph:
+               Graph = version;
+               break;
+            case APIs.TaskGroups:
+               TaskGroups = version;
+               break;
+            case APIs.Policy:
+               Policy = version;
+               break;
+            case APIs.Processes:
+               Processes = version;
+               break;
+         }
+      }
+
       public static string GetApiVersion(APIs service)
       {
          switch (service)

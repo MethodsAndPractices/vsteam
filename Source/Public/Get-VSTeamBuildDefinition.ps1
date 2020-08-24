@@ -10,13 +10,11 @@ function Get-VSTeamBuildDefinition {
 
       [Alias('BuildDefinitionID')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdJson')]
       [Parameter(Position = 0, ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
       [Parameter(ParameterSetName = 'ByID')]
       [Parameter(ParameterSetName = 'ByIdRaw')]
-      [Parameter(ParameterSetName = 'ByIdJson')]
       [int] $Revision,
 
       [switch] $JSON,
@@ -50,7 +48,7 @@ function Get-VSTeamBuildDefinition {
             }
             else {
                if (-not $raw.IsPresent) {
-                  $item = [VSTeamBuildDefinition]::new($resp, $ProjectName)
+                  $item = [vsteam_lib.BuildDefinition]::new($resp, $ProjectName)
                   
                   Write-Output $item
                }
@@ -74,7 +72,7 @@ function Get-VSTeamBuildDefinition {
             $objs = @()
 
             foreach ($item in $resp.value) {
-               $objs += [VSTeamBuildDefinition]::new($item, $ProjectName)
+               $objs += [vsteam_lib.BuildDefinition]::new($item, $ProjectName)
             }
 
             Write-Output $objs

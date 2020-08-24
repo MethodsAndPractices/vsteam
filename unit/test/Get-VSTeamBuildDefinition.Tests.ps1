@@ -13,10 +13,6 @@ Describe 'VSTeamBuildDefinition' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamAttempt.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamEnvironment.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhaseStep.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcessPhase.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinitionProcess.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamBuildDefinition.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/Get-VSTeamProject.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
@@ -184,7 +180,7 @@ Describe 'VSTeamBuildDefinition' {
             $b = Get-VSTeamBuildDefinition -projectName project -id 101
 
             ## Assert
-            $b | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'Team.BuildDefinition'
+            $b | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'vsteam_lib.BuildDefinition'
 
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/build/definitions/101?api-version=$(_getApiVersion Build)"

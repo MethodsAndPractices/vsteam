@@ -1,10 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace vsteam_lib.Provider
 {
    public static class PSObjectExtensionMethods
    {
+      public static IList<string> GetStringArray(this PSObject obj, string name)
+      {
+         if (obj.HasValue(name))
+         {
+            var values = new List<string>();
+            foreach (var item in ((object[])obj.Properties[name].Value))
+            {
+               values.Add(item.ToString());
+            }
+
+            return values;
+         }
+
+         return null;
+      }
+
       public static string GetValue(this PSObject obj, string name)
       {
          // See if the name contains a period. If so you have to 

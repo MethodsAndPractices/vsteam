@@ -6,7 +6,6 @@ Describe 'VSTeamBuildDefinition' {
       
       $sut = (Split-Path -Leaf $PSCommandPath).Replace(".Tests.", ".")
       
-      
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Public/$sut"
 

@@ -23,53 +23,7 @@ function Set-VSTeamAPIVersion {
 
    if ($Force -or $pscmdlet.ShouldProcess($Target, "Set-VSTeamAPIVersion")) {
       if ($PSCmdlet.ParameterSetName -eq 'Service') {
-         switch ($Service) {
-            'Build' {
-               [vsteam_lib.Versions]::Build = $Version
-            }
-            'Release' {
-               [vsteam_lib.Versions]::Release = $Version
-            }
-            'Core' {
-               [vsteam_lib.Versions]::Core = $Version
-            }
-            'Git' {
-               [vsteam_lib.Versions]::Git = $Version
-            }
-            'DistributedTask' {
-               [vsteam_lib.Versions]::DistributedTask = $Version
-            }
-            'DistributedTaskReleased' {
-               [vsteam_lib.Versions]::DistributedTaskReleased = $Version
-            }
-            'VariableGroups' {
-               [vsteam_lib.Versions]::VariableGroups = $Version
-            }
-            'Tfvc' {
-               [vsteam_lib.Versions]::Tfvc = $Version
-            }
-            'Packaging' {
-               [vsteam_lib.Versions]::Packaging = $Version
-            }
-            'MemberEntitlementManagement' {
-               [vsteam_lib.Versions]::MemberEntitlementManagement = $Version
-            }
-            'ExtensionsManagement' {
-               [vsteam_lib.Versions]::ExtensionsManagement = $Version
-            }
-            'ServiceEndpoints' {
-               [vsteam_lib.Versions]::ServiceEndpoints = $Version
-            }
-            'Graph' {
-               [vsteam_lib.Versions]::Graph = $Version
-            }
-            'TaskGroups' {
-               [vsteam_lib.Versions]::TaskGroups = $Version
-            }
-            'Policy' {
-               [vsteam_lib.Versions]::Policy = $Version
-            }
-         }
+         [vsteam_lib.Versions]::SetApiVersion($Service, $Version);
       }
       else {
          # https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-5.1#api-and-tfs-version-mapping
