@@ -36,7 +36,6 @@ namespace vsteam_lib
       public Project(PSObject obj, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), null, powerShell, obj.GetValue("name"))
       {
-         Common.MoveProperties(this, obj);
       }
 
       /// <summary>
@@ -54,7 +53,7 @@ namespace vsteam_lib
       {
          return new object[]
          {
-            new Directory(null, "Build Definitions", "BuildDefinition", this.PowerShell, this.Name),
+            new BuildDefinitions(this.PowerShell, this.Name),
             new Directory(null, "Builds", "Build", this.PowerShell, this.Name),
             new Directory(null, "Queues", "Queue", this.PowerShell, this.Name),
             new Directory(null, "Release Definitions", "ReleaseDefinition", this.PowerShell, this.Name),

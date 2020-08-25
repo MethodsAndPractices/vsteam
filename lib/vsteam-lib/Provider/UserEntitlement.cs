@@ -11,7 +11,6 @@ namespace vsteam_lib
       public UserEntitlement(PSObject obj, string projectName) : 
          base(obj, null, null, projectName)
       {
-         Common.MoveProperties(this, obj);
       }
 
       public override string ToString() => this.DisplayName;

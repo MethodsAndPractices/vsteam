@@ -12,7 +12,7 @@
             <TypeName>Team.Provider.Pool</TypeName>
             <TypeName>Team.Provider.Pools</TypeName>
             <TypeName>Team.Builds</TypeName>
-            <TypeName>Team.BuildDefinitions</TypeName>
+            <TypeName>vsteam_lib.Provider.BuildDefinitions</TypeName>
             <TypeName>Team.Releases</TypeName>
             <TypeName>Team.ReleaseDefinitions</TypeName>
             <TypeName>Team.Repositories</TypeName>

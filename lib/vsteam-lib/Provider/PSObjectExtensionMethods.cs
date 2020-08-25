@@ -154,6 +154,12 @@ namespace vsteam_lib.Provider
       /// </summary>
       /// <param name="obj"></param>
       /// <param name="typeName"></param>
-      public static void AddTypeName(this PSObject obj, string typeName) => obj.TypeNames.Insert(0, typeName);
+      public static void AddTypeName(this PSObject obj, string typeName)
+      {
+         if (!obj.TypeNames.Contains(typeName))
+         {
+            obj.TypeNames.Insert(0, typeName);
+         }
+      }
    }
 }

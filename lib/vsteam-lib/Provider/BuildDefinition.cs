@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using System.Xml.Serialization;
@@ -74,6 +75,38 @@ namespace vsteam_lib
       public BuildDefinition(PSObject obj, string projectName) :
          this(obj, projectName, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
       {
+      }
+
+      protected override object[] GetChildren()
+      {
+         if (this.Steps != null)
+         {
+            var steps = this.Steps.Select(s => PSObject.AsPSObject(s)).ToArray();
+            Array.ForEach(steps, s => s.AddTypeName("Team.Provider.BuildDefinitionProcessPhaseStep"));
+            return steps;
+         }
+
+         if (this.Process.Type == 1)
+         {
+            // Wrap in a PSObject so a type can be applied so the correct 
+            // formatter is selected
+            var phases = this.Process.Phases.Select(p => PSObject.AsPSObject(p)).ToArray();
+            Array.ForEach(phases, i => i.AddTypeName("Team.Provider.BuildDefinitionProcessPhase"));
+            return phases;
+         }
+
+         var process = PSObject.AsPSObject(this.Process);
+
+         if(this.Process.Type == 1)
+         {
+            process.AddTypeName("Team.Provider.BuildDefinitionProcess");
+         }
+         else
+         {
+            process.AddTypeName("Team.Provider.BuildDefinitionYamlProcess");
+         }
+
+         return new object[] { process };
       }
    }
 }

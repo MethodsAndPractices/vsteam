@@ -16,7 +16,6 @@ namespace vsteam_lib
       public BuildDefinitionProcessPhaseStep(PSObject obj, int stepNumber, string projectName) :
          base(obj, obj.GetValue("displayName"), stepNumber.ToString(), projectName)
       {
-         Common.MoveProperties(this, obj);
       }
    }
 }

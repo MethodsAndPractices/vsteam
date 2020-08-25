@@ -2,18 +2,21 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.BuildDefinitionProcessPhase.TableView</Name>
+			<Name>vsteam_lib.BuildDefinitionProcessPhaseStep.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.BuildDefinitionProcessPhase</TypeName>
+				<TypeName>vsteam_lib.BuildDefinitionProcessPhaseStep</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />
 				<TableHeaders>
 					<TableColumnHeader>
+						<Label>ID</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
 						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Steps</Label>
+						<Label>Enabled</Label>
 					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
@@ -21,10 +24,13 @@
 						<Wrap />
 						<TableColumnItems>
 							<TableColumnItem>
+								<PropertyName>ID</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
 								<PropertyName>Name</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>StepCount</PropertyName>
+								<PropertyName>Enabled</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

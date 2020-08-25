@@ -16,8 +16,6 @@ namespace vsteam_lib
       public Queue(PSObject obj, string projectName, IPowerShell powerShell) : 
          base(obj, obj.GetValue("name"), obj.GetValue("id"), projectName)
       {
-         Common.MoveProperties(this, obj);
-
          this.Pool = new AgentPool(obj.GetValue<PSObject>("pool"), powerShell);
       }
 
@@ -25,7 +23,6 @@ namespace vsteam_lib
       public Queue(PSObject obj, string projectName) : 
          this(obj, projectName, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
       {
-
       }
    }
 }

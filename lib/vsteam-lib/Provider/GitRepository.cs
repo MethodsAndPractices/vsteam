@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using vsteam_lib.Provider;
@@ -18,8 +19,6 @@ namespace vsteam_lib
       public GitRepository(PSObject obj, string projectName, IPowerShell powerShell) :
          base(obj, obj.GetValue("Name"), "GitRef", powerShell, projectName)
       {
-         Common.MoveProperties(this, obj);
-
          if (obj.HasValue("project"))
          {
             this.Project = new Project(obj.GetValue<PSObject>("project"), powerShell);
@@ -30,6 +29,30 @@ namespace vsteam_lib
       public GitRepository(PSObject obj, string projectName) :
          this(obj, projectName, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
       {
+      }
+
+      protected override object[] GetChildren()
+      {
+         this.PowerShell.Commands.Clear();
+
+         var cmd = this.PowerShell.Create(RunspaceMode.CurrentRunspace)
+                       .AddCommand(this.Command)
+                       .AddParameter("ProjectName", this.ProjectName)
+                       .AddParameter("RepositoryId", this.Id);
+
+         var children = cmd.AddCommand("Sort-Object")
+                           .AddArgument("name")
+                           .Invoke();
+
+         PowerShellWrapper.LogPowerShellError(cmd, children);
+
+         // This applies types to select correct formatter.
+         foreach (var child in children)
+         {
+            child.AddTypeName(this.TypeName);
+         }
+
+         return children.ToArray();
       }
    }
 }

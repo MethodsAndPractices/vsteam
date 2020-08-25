@@ -106,6 +106,14 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
       }
    }
 
+   Context 'Build Definitions' {
+      It 'vsteam_lib.Provider.BuildDefinitions should have mode' {
+         $cols = Get-Columns -TypeName vsteam_lib.Provider.BuildDefinitions
+
+         $cols[0] | Should -Be 'Mode'
+      }
+   }
+
    Context 'Release Definitions' {
       # This is the formatter when returned from the provider
       It 'Team.Provider.JobRequest should have mode' {

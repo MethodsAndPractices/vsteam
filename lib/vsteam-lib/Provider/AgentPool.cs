@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
+using System.Net.Sockets;
 using System.Xml.Serialization;
 using vsteam_lib.Provider;
 
@@ -14,6 +15,13 @@ namespace vsteam_lib
       /// this item.
       /// </summary>
       public long Id { get; set; }
+
+      /// <summary>
+      /// Used so this object can be piped to functions
+      /// that require a poolId like Get-VSTeamAgent
+      /// </summary>
+      [XmlAttribute("id")]
+      public long PoolId { get; set; }
 
       /// <summary>
       ///  The number of agents in the pool

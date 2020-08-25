@@ -18,8 +18,6 @@ namespace vsteam_lib
       public BuildDefinitionProcess(PSObject obj, string projectName, IPowerShell powerShell) :
          base(obj, "Process", string.Empty, powerShell, projectName)
       {
-         Common.MoveProperties(this, obj);
-
          if (this.Type == 1)
          {
             this.TypeName = "BuildDefinitionPhasedProcess";

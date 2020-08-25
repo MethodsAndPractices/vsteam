@@ -18,8 +18,6 @@ namespace vsteam_lib
 
       protected SecurityLeaf(PSObject obj) : base(obj, obj.GetValue("displayName"), obj.GetValue("descriptor"), null)
       {
-         Common.MoveProperties(this, obj);
-
          this.Links = new Link(obj);
       }
    }

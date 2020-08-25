@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using vsteam_lib.Provider;
@@ -17,8 +19,6 @@ namespace vsteam_lib
       public BuildDefinitionProcessPhase(PSObject obj, string projectName, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), "BuildDefinitionProcessPhase", powerShell, projectName)
       {
-         Common.MoveProperties(this, obj);
-
          if (obj.HasValue("steps"))
          {
             var i = 1;
@@ -31,6 +31,15 @@ namespace vsteam_lib
             this.Steps = steps;
             this.StepCount = steps.Count;
          }
+      }
+
+      protected override object[] GetChildren()
+      {
+         // Wrap in a PSObject so a type can be applied so the correct 
+         // formatter is selected
+         var items = this.Steps.Select(p => PSObject.AsPSObject(p)).ToArray();
+         Array.ForEach(items, i => i.AddTypeName("Team.Provider.BuildDefinitionProcessPhaseStep"));
+         return items;
       }
    }
 }

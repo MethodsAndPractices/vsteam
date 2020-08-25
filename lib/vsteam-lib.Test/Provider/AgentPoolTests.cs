@@ -21,6 +21,7 @@ namespace vsteam_lib.Test.Provider
          // Assert
          Assert.AreEqual(1, target.Id, "Id");
          Assert.AreEqual(4, target.Count, "Count");
+         Assert.AreEqual(1, target.PoolId, "PoolId");
          Assert.AreEqual(false, target.IsHosted, "IsHosted");
          Assert.AreEqual("d-----", target.DisplayMode, "DisplayMode");
       }

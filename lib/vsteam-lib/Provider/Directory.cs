@@ -73,7 +73,7 @@ namespace vsteam_lib.Provider
       }
 
       /// <summary>
-      /// This version is for use when no Proeject name is required
+      /// This version is for use when no Project name is required
       /// </summary>
       /// <param name="name">The name displayed by provider</param>
       /// <param name="typeName">The noun of the type to be applied to the child items</param>
@@ -104,9 +104,10 @@ namespace vsteam_lib.Provider
 
          PowerShellWrapper.LogPowerShellError(cmd, children);
 
+         // This applies types to select correct formatter.
          foreach (var child in children)
          {
-            child.TypeNames.Insert(0, this.TypeName);
+            child.AddTypeName(this.TypeName);
          }
 
          return children.ToArray();

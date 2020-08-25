@@ -20,8 +20,6 @@ namespace vsteam_lib
       public Build(PSObject obj, string projectName) :
          base(obj, obj.GetValue("buildNumber"), obj.GetValue("Id"), projectName)
       {
-         Common.MoveProperties(this, obj);
-
          this.RequestedBy = new UserEntitlement(obj.GetValue<PSObject>("requestedBy"), projectName);
          this.RequestedFor = new UserEntitlement(obj.GetValue<PSObject>("requestedFor"), projectName);
          this.LastChangedBy = new UserEntitlement(obj.GetValue<PSObject>("lastChangedBy"), projectName);

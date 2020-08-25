@@ -58,9 +58,9 @@ function Get-VSTeamBuild {
                   -id $item `
                   -Version $(_getApiVersion Build)
 
-               _applyTypesToBuild -item $resp
+               $build = [vsteam_lib.Build]::new($resp, $ProjectName)
 
-               Write-Output $resp
+               Write-Output $build
             }
          }
          else {
@@ -84,12 +84,13 @@ function Get-VSTeamBuild {
                -Querystring $queryString `
                -Version $(_getApiVersion Build)
 
-            # Apply a Type Name so we can use custom format view and custom type extensions
+            $objs = @()
+
             foreach ($item in $resp.value) {
-               _applyTypesToBuild -item $item
+               $objs += [vsteam_lib.Build]::new($item, $ProjectName)
             }
 
-            Write-Output $resp.value
+            Write-Output $objs
          }
       }
       catch {

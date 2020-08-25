@@ -17,6 +17,7 @@ namespace vsteam_lib.Test.Provider
          var actual = new GitRef(obj[0], "TestProject");
 
          // Assert
+         Assert.IsNotNull(actual.Creator, "Creator");
          Assert.AreEqual("refs/heads/master", actual.RefName, "RefName");
       }
    }

@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.BuildDefinitionProcessPhase.ListView</Name>
+			<Name>vsteam_lib.BuildDefinitionProcessPhase.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.BuildDefinitionProcessPhase</TypeName>
+				<TypeName>vsteam_lib.BuildDefinitionProcessPhase</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

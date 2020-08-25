@@ -9,7 +9,6 @@ namespace vsteam_lib
 
       public Team(PSObject obj, string projectName) : base(obj, obj.GetValue("name"), obj.GetValue("id"), projectName)
       {
-         Common.MoveProperties(this, obj);
       }
    }
 }
