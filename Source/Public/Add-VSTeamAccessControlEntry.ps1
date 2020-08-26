@@ -72,7 +72,7 @@ function Add-VSTeamAccessControlEntry {
       # Storing the object before you return it cleaned up the pipeline.
       # When I just write the object from the constructor each property
       # seemed to be written
-      $acl = [vsteam_lib.AccessControlEntry]::new($resp.value)
+      $acl = [vsteam_lib.AccessControlEntry]::new($resp.value[0])
 
       Write-Output $acl
    }

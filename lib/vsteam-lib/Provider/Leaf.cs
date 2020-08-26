@@ -23,8 +23,6 @@ namespace vsteam_lib.Provider
 
       public Leaf(PSObject obj, string name, string id, string projectName) : base(name)
       {
-         System.Diagnostics.Debug.Assert(!string.IsNullOrEmpty(name));
-
          Common.MoveProperties(this, obj);
 
          this.ID = id;

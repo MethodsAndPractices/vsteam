@@ -14,8 +14,6 @@ Describe "VSTeam" {
       # any project name used will pass validation and Get-VSTeamProject 
       # will not need to be called.
       [vsteam_lib.ProjectCache]::Update([string[]]@())
-      
-      Write-Host "         PSVersion: $($PSVersionTable.PSVersion)"
    }
 
    Context "Add-VSTeam" {

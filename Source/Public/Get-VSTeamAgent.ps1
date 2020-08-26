@@ -1,7 +1,7 @@
 function Get-VSTeamAgent {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
-      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [int] $PoolId,
 
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, Position = 1)]

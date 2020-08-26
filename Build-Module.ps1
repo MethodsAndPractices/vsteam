@@ -49,7 +49,10 @@ param(
    [Parameter(ParameterSetName = "All")]
    [switch]$skipLibBuild,
     
-   [string]$configuration = "LibOnly"
+   [string]$configuration = "LibOnly",
+
+   [ValidateSet('Diagnostic', 'Detailed', 'Normal', 'Minimal', 'None', 'ErrorsOnly')]
+   [string]$UnitTestOutput = "ErrorsOnly"
 )
 
 function Import-Pester {
@@ -136,16 +139,24 @@ if (-not $skipLibBuild.IsPresent) {
    Write-Output '  Building: C# project'
    $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration --output $output\bin lib | Out-String
 
-   if(-not ($buildOutput | Select-String -Pattern 'succeeded'))
-   {
+   if (-not ($buildOutput | Select-String -Pattern 'succeeded')) {
       Write-Output $buildOutput
    }
 }
 
 Write-Output "Publishing: Complete to $output"
-
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
+   if (-not $skipLibBuild.IsPresent) {
+      Write-Output '   Testing: C# project (unit)'
+      $testOutput = dotnet test --nologo --configuration $configuration lib | Out-String
+      
+      if (-not ($testOutput | Select-String -Pattern 'Test Run Successful')) {
+         Write-Output $testOutput
+      }
+   }
+   
+   Write-Output '   Testing: Functions (unit)'
    Import-Pester
 
    $pesterArgs = [PesterConfiguration]::Default
@@ -167,10 +178,15 @@ if ($runTests.IsPresent) {
       $pesterArgs.Filter.FullName = $testName
    }
 
-   Invoke-Pester -Configuration $pesterArgs
-
-   if (-not $skipLibBuild.IsPresent) {
-      dotnet test --nologo --configuration $configuration lib 
+   if ('ErrorsOnly' -eq $UnitTestOutput) {
+      $pesterArgs.Output.Verbosity = 'none'
+      $pesterArgs.Run.PassThru = $true
+      $unitTestResults = Invoke-Pester -Configuration $pesterArgs
+      $unitTestResults.Failed | Select-Object -ExpandProperty ErrorRecord
+   }
+   else {
+      $pesterArgs.Output.Verbosity = $UnitTestOutput
+      Invoke-Pester -Configuration $pesterArgs
    }
 }
 
