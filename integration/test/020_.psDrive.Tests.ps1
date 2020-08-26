@@ -1,6 +1,10 @@
+$global:skippedOnTFS = ($env:ACCT -like "http://*")
+
 Describe "PS Drive Full exercise" {
    BeforeAll {
       . "$PSScriptRoot/testprep.ps1"
+
+      Write-Verbose "      SkippedOnTFS: $($global:skippedOnTFS)"
 
       Set-TestPrep
       $target = Set-Project
@@ -44,7 +48,7 @@ Describe "PS Drive Full exercise" {
 
       # The point of this tests is to make sure no exceptions
       # are thrown when calling Get-ChildItem
-      It 'Should list Feeds' {
+      It 'Should list Feeds' -Skip:$skippedOnTFS {
          Push-Location         
          Set-Location 'Feeds'
          $items = Get-ChildItem

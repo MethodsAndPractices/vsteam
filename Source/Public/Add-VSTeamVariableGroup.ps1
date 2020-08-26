@@ -34,6 +34,9 @@ function Add-VSTeamVariableGroup {
    }
 
    Process {
+      # This will throw if this account does not support the variable groups
+      _supportVariableGroups
+
       if ([string]::IsNullOrWhiteSpace($Body)) {
          $bodyAsHashtable = @{
             name        = $Name

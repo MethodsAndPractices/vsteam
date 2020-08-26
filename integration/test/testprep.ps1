@@ -5,7 +5,7 @@ function Set-TestPrep {
    )
    # Module must be loaded
    if (-not (Get-Module VSTeam)) {
-      Write-Host "         Importing: module"
+      Write-Verbose "         Importing: module"
       Import-Module "$PSScriptRoot\..\..\dist\VSTeam.psd1"
    }
 
@@ -17,8 +17,8 @@ function Set-TestPrep {
          throw "You must set all environment variables that are needed first to run integration tests. Please see https://github.com/DarqueWarrior/vsteam/blob/master/.github/CONTRIBUTING.md#running-integration-tests for details."
       }
 
-      Write-Host "            Target: $($env:ACCT)"
-      Write-Host "           Version: $($env:API_VERSION)"
+      Write-Verbose "            Target: $($env:ACCT)"
+      Write-Verbose "           Version: $($env:API_VERSION)"
 
       Set-VSTeamAccount -Account $env:ACCT -PersonalAccessToken $env:PAT -Version $env:API_VERSION
    }
@@ -34,11 +34,11 @@ function Set-Project {
    $existingProject = $(Get-VSTeamProject | Where-Object Description -eq $projectDescription)
 
    if ($existingProject) {
-      Write-Host "     Found Project: $($existingProject.Name)"
+      Write-Verbose "     Found Project: $($existingProject.Name)"
       $projectName = $existingProject.Name
    }
    else {
-      Write-Host "  Creating Project: $projectName"
+      Write-Verbose "  Creating Project: $projectName"
       Add-VSTeamProject -Name $projectName -Description $projectDescription | Should -Not -Be $null
       Start-Sleep -Seconds 5
    }
@@ -49,9 +49,9 @@ function Set-Project {
       NewName     = $projectName + [guid]::NewGuid().toString().substring(0, 5) + '1'
    }
    
-   Write-Host "      Project Name: $($target.Name)"
-   Write-Host "      Project Desc: $($target.Description)"
-   Write-Host "   Project NewName: $($target.NewName)"
+   Write-Verbose "      Project Name: $($target.Name)"
+   Write-Verbose "      Project Desc: $($target.Description)"
+   Write-Verbose "   Project NewName: $($target.NewName)"
 
    return $target   
 }

@@ -48,11 +48,12 @@ param(
    [Parameter(ParameterSetName = "UnitTest")]
    [Parameter(ParameterSetName = "All")]
    [switch]$skipLibBuild,
-    
+   
+   [ValidateSet('LibOnly', 'Debug', 'Release')]
    [string]$configuration = "LibOnly",
 
    [ValidateSet('Diagnostic', 'Detailed', 'Normal', 'Minimal', 'None', 'ErrorsOnly')]
-   [string]$UnitTestOutput = "ErrorsOnly"
+   [string]$testOutputLevel = "ErrorsOnly"
 )
 
 function Import-Pester {
@@ -70,17 +71,27 @@ function Start-IntegrationTests {
    param()
 
    process {
+      Write-Output '   Testing: Functions (integration)'
+
       Import-Pester
 
       $pesterArgs = [PesterConfiguration]::Default
       $pesterArgs.Run.Path = '.\integration'
       $pesterArgs.Run.Exit = $true
-      $pesterArgs.Output.Verbosity = "Detailed"
       $pesterArgs.TestResult.Enabled = $true
       $pesterArgs.TestResult.OutputPath = 'integrationTest-results.xml'
       $pesterArgs.Run.PassThru = $false
 
-      Invoke-Pester -Configuration $pesterArgs
+      if ('ErrorsOnly' -eq $testOutputLevel) {
+         $pesterArgs.Output.Verbosity = 'none'
+         $pesterArgs.Run.PassThru = $true
+         $intTestResults = Invoke-Pester -Configuration $pesterArgs
+         $intTestResults.Failed | Select-Object -ExpandProperty ErrorRecord
+      }
+      else {
+         $pesterArgs.Output.Verbosity = $testOutputLevel
+         Invoke-Pester -Configuration $pesterArgs
+      }
    }
 }
 
@@ -178,14 +189,14 @@ if ($runTests.IsPresent) {
       $pesterArgs.Filter.FullName = $testName
    }
 
-   if ('ErrorsOnly' -eq $UnitTestOutput) {
+   if ('ErrorsOnly' -eq $testOutputLevel) {
       $pesterArgs.Output.Verbosity = 'none'
       $pesterArgs.Run.PassThru = $true
       $unitTestResults = Invoke-Pester -Configuration $pesterArgs
       $unitTestResults.Failed | Select-Object -ExpandProperty ErrorRecord
    }
    else {
-      $pesterArgs.Output.Verbosity = $UnitTestOutput
+      $pesterArgs.Output.Verbosity = $testOutputLevel
       Invoke-Pester -Configuration $pesterArgs
    }
 }

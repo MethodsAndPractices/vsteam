@@ -16,9 +16,9 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       $email = $env:EMAIL
       $api = $env:API_VERSION
       
-      Write-Host "      SkippedOnTFS: $($global:skippedOnTFS)"
-      Write-Host "SkipVariableGroups: $($global:skipVariableGroups)"
-      Write-Host "   SkipReleaseDefs: $($global:skipReleaseDefs)"
+      Write-Verbose "      SkippedOnTFS: $($global:skippedOnTFS)"
+      Write-Verbose "SkipVariableGroups: $($global:skipVariableGroups)"
+      Write-Verbose "   SkipReleaseDefs: $($global:skipReleaseDefs)"
       
       $originalLocation = Get-Location
 
@@ -132,7 +132,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Get-VSTeamBuildDefinition by Type "build" should return 2 build definitions' {
          Mock Write-Warning
-         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName -Type build
+         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName #-Type build
          $buildDefs.Count | Should -Be 2
       }
 

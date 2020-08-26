@@ -121,6 +121,17 @@ function _testGraphSupport {
    (_getApiVersion Graph) -as [boolean]
 }
 
+function _supportVariableGroups {
+   _hasAccount
+   if ($false -eq $(_testVariableGroupsSupport)) {
+      throw 'This account does not support the variable groups.'
+   }
+}
+
+function _testVariableGroupsSupport {
+   (_getApiVersion VariableGroups) -as [boolean]
+}
+
 function _supportsSecurityNamespace {
    _hasAccount
    if (([vsteam_lib.Versions]::Version -ne "VSTS") -and ([vsteam_lib.Versions]::Version -ne "AzD")) {
@@ -150,10 +161,10 @@ function _getApiVersion {
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
       [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 
-                   'DistributedTaskReleased', 'VariableGroups', 'Tfvc', 
-                   'Packaging', 'MemberEntitlementManagement', 
-                   'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 
-                   'TaskGroups', 'Policy', 'Processes')]
+         'DistributedTaskReleased', 'VariableGroups', 'Tfvc', 
+         'Packaging', 'MemberEntitlementManagement', 
+         'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 
+         'TaskGroups', 'Policy', 'Processes')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
