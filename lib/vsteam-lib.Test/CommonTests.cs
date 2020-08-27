@@ -32,7 +32,7 @@ namespace vsteam_lib.Test
          Common.MoveProperties(target, source);
 
          // Assert
-         Assert.AreEqual("8/27/2020 5:37:32 AM", target.CreatedOn.ToString());
+         Assert.AreEqual("8/27/2020 10:37:32 AM", target.CreatedOn.ToUniversalTime());
       }
    }
 }
