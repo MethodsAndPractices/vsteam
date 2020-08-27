@@ -142,6 +142,9 @@ stages:
       runOnce:
         deploy:
           steps:
+          - download: current
+            artifact: module
+
           - task: NuGetToolInstaller@0
             displayName: 'Install NuGet 5.2.0'
             inputs:
@@ -254,6 +257,9 @@ stages:
       runOnce:
         deploy:
           steps:
+          - download: current
+            artifact: module
+            
           - task: NuGetToolInstaller@0
             displayName: 'Install NuGet 5.2.0'
             inputs:

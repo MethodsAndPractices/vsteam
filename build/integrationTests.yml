@@ -24,6 +24,9 @@ jobs:
       runOnce:
         deploy:
           steps:
+            - download: current
+              artifact: test
+
             - task: AzureResourceGroupDeployment@2
               displayName: 'Start TFS 2017'
               inputs:
