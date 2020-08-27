@@ -15,7 +15,7 @@ namespace vsteam_lib.Test.Provider
          var actual = new Build(obj[0], "Project Name");
 
          // Assert
-         Assert.IsNotNull(actual.RequestedBy, "RequestedBy");
+         Assert.IsNull(actual.RequestedBy, "RequestedBy");
          Assert.IsNotNull(actual.RequestedFor, "RequestedFor");
          Assert.AreEqual("completed", actual.Status, "Status");
          Assert.AreEqual("succeeded", actual.Result, "Result");

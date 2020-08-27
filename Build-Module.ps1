@@ -158,7 +158,7 @@ if (-not $skipLibBuild.IsPresent) {
 Write-Output "Publishing: Complete to $output"
 # run the unit tests with Pester
 if ($runTests.IsPresent) {
-   if (-not $skipLibBuild.IsPresent) {
+   if (-not $skipLibBuild.IsPresent -and $configuration -ne 'LibOnly') {
       Write-Output '   Testing: C# project (unit)'
       $testOutput = dotnet test --nologo --configuration $configuration lib | Out-String
       

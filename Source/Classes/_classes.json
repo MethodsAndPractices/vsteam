@@ -9,7 +9,6 @@
       "VSTeamEnvironment.ps1",
       "VSTeamRelease.ps1",
       "VSTeamProcess.ps1",
-      "VSTeamRef.ps1",
       "VSTeamGitRepositoryPermissions.ps1",
       "VSTeamIdentityPermissions.ps1",
       "VSTeamProjectPermissions.ps1",
