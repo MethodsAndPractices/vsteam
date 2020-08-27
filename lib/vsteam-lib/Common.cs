@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using System.Xml.Serialization;
@@ -47,13 +48,19 @@ namespace vsteam_lib
             // If this is a nested property (contains a .) let it through
             if (source.HasValue(propertyName) || propertyName.IndexOf(".") != -1)
             {
-               if(prop.PropertyType.Name == "String")
+               var value = source.GetValue<object>(propertyName);
+
+               if (prop.PropertyType.Name == "String")
                {
-                  prop.SetValue(target, source.GetValue<object>(propertyName)?.ToString());
+                  prop.SetValue(target, value?.ToString());
+               }
+               else if(prop.PropertyType.Name == "DateTime")
+               {
+                  prop.SetValue(target, DateTime.Parse(value.ToString()));
                }
                else
                {
-                  prop.SetValue(target, source.GetValue<object>(propertyName));
+                  prop.SetValue(target, value);
                }
             }
          }
