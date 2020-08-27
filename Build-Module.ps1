@@ -147,7 +147,7 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 (Get-Content "./Source/VSTeam.psd1") -Replace ("FunctionsToExport.+", "FunctionsToExport = ($newValue)") | Set-Content "$output/VSTeam.psd1"
 
 if (-not $skipLibBuild.IsPresent) {
-   Write-Output '  Building: C# project'
+   Write-Output "  Building: C# project ($configuration config)"
    $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration --output $output\bin lib | Out-String
 
    if (-not ($buildOutput | Select-String -Pattern 'succeeded')) {

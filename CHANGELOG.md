@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.0.0
+
+All classes are moved to a new C# class library.
+
 ## 6.5.1
 
 Fixed bug [337](https://github.com/MethodsAndPractices/vsteam/issues/337)
