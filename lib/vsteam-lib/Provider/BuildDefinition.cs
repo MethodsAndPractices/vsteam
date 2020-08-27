@@ -97,11 +97,7 @@ namespace vsteam_lib
 
          var process = PSObject.AsPSObject(this.Process);
 
-         if(this.Process.Type == 1)
-         {
-            process.AddTypeName("Team.Provider.BuildDefinitionProcess");
-         }
-         else
+         if(this.Process.Type == 2)
          {
             process.AddTypeName("Team.Provider.BuildDefinitionYamlProcess");
          }

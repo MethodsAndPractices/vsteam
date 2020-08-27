@@ -14,6 +14,12 @@ steps:
     ${{ if eq(parameters.buildHelp, 'true') }}:
       script: '.\Build-Module.ps1 -installDep -buildHelp -configuration Release'
 
+- task: DotNetCoreCLI@2
+  displayName: 'Run C# Unit Tests'
+  inputs:
+    command: 'test'
+    projects: 'lib'
+
 - task: PowerShell@2
   displayName: 'Install Pester'
   inputs:
@@ -23,7 +29,7 @@ steps:
 
 - ${{ if eq(parameters.CodeCoverage, 'false') }}:
   - task: PowerShell@2
-    displayName: 'Run Unit Tests'
+    displayName: 'Run PowerShell Unit Tests'
     inputs:
       pwsh: true
       targetType: 'inline'
@@ -44,7 +50,7 @@ steps:
 
 - ${{ if eq(parameters.CodeCoverage, 'true') }}:
   - task: PowerShell@2
-    displayName: 'Run Unit Tests'
+    displayName: 'Run PowerShell Unit Tests'
     inputs:
       pwsh: true
       targetType: 'inline'

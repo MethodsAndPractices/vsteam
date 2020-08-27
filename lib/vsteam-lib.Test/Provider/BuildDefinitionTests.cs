@@ -61,6 +61,22 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
+      public void GetChildItem_2017_Git()
+      {
+         // Arrange
+         var ps = BaseTests.PrepPowerShell();
+         var obj = BaseTests.LoadJson("./SampleFiles/Get-BuildDefinition_2017.json");
+         var target = new BuildDefinition(obj[0], "Project Name", ps);
+
+         // Act
+         var actual = target.GetChildItem();
+
+         // Assert
+         Assert.IsNotNull(actual);
+         Assert.AreEqual(5, actual.Length);
+      }
+
+      [TestMethod]
       public void Constructor_2017_Tfvc()
       {
          // Arrange
@@ -155,6 +171,22 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
+      public void GetChildItem_2018()
+      {
+         // Arrange
+         var ps = BaseTests.PrepPowerShell();
+         var obj = BaseTests.LoadJson("./SampleFiles/Get-BuildDefinition_2018.json");
+         var target = new BuildDefinition(obj[0], "Project Name", ps);
+
+         // Act
+         var actual = target.GetChildItem();
+
+         // Assert
+         Assert.IsNotNull(actual, "actual");
+      }
+
+
+      [TestMethod]
       public void Constructor_AzD_Classic()
       {
          // Arrange
@@ -200,6 +232,22 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
+      public void GetChildItem_AzD_Classic()
+      {
+         // Arrange
+         var ps = BaseTests.PrepPowerShell();
+         var obj = BaseTests.LoadJson("./SampleFiles/Get-BuildDefinition_AzD.json");
+         var target = new BuildDefinition(obj[0], "Project Name", ps);
+
+         // Act
+         var actual = target.GetChildItem();
+
+         // Assert
+         Assert.IsNotNull(actual, "actual");
+         Assert.AreEqual(4, actual.Length);
+      }
+
+      [TestMethod]
       public void Constructor_AzD_YAML()
       {
          // Arrange
@@ -242,6 +290,22 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(actual.Process, "Process");
          Assert.IsNull(actual.Process.Phases, "Process.Phases");
          Assert.AreEqual("/azure-pipelines.yml", actual.Process.ToString(), "Process.ToString()");
+      }
+
+      [TestMethod]
+      public void GetChildItem_AzD_YAML()
+      {
+         // Arrange
+         var ps = BaseTests.PrepPowerShell();
+         var obj = BaseTests.LoadJson("./SampleFiles/Get-BuildDefinition_AzD.json");
+         var target = new BuildDefinition(obj[7], "Project Name", ps);
+
+         // Act
+         var actual = target.GetChildItem();
+
+         // Assert
+         Assert.IsNotNull(actual, "actual");
+         Assert.AreEqual(1, actual.Length, "actual.Length");
       }
    }
 }
