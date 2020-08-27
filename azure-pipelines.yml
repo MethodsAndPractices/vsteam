@@ -16,34 +16,16 @@ stages:
   displayName: Build Stage
 
   jobs:
-  - job: macOS_Linux_Phase
-    displayName: 'Build'
-    strategy:
-      matrix:
-        macOS:
-          OS: 'macOS'
-          vmImageName: 'macOS-latest'
-        Linux:
-          OS: 'Linux'
-          vmImageName: 'ubuntu-16.04'
-      maxParallel: 2
+  - job: Linux_Phase
+    displayName: Build Linux
     pool:
-      vmImage: $(vmImageName)
-    steps:
-    - template: build/unitTests.yml
-      parameters:
-        os: '$(OS)'
-
-  - job: Windows_Phase
-    displayName: Build Windows
-    pool:
-      vmImage: 'windows-latest'
+      vmImage: 'ubuntu-16.04'
 
     steps:
     - template: build/unitTests.yml
       parameters:
-        os: 'Windows'
-        buildHelp: 'true'
+        os: 'Linux'
+        buildHelp: 'false'
 
     - task: PowerShell@2
       displayName: 'Install PSScriptAnalyzer'
@@ -73,6 +55,17 @@ stages:
             Write-Host "##vso[task.complete result=Failed;]Static Code Analysis with error count = $count"
           }
 
+  - job: macOS_Phase
+    displayName: Build macOS
+    pool:
+      vmImage: 'macOS-latest'
+
+    steps:
+    - template: build/unitTests.yml
+      parameters:
+        os: 'macOS'
+        buildHelp: 'false'
+
     - task: CredScan@2
       displayName: 'Run CredScan'
       inputs:
@@ -93,6 +86,17 @@ stages:
       inputs:
         AllTools: false
         CredScan: true
+
+  - job: Windows_Phase
+    displayName: Build Windows
+    pool:
+      vmImage: 'windows-latest'
+
+    steps:
+    - template: build/unitTests.yml
+      parameters:
+        os: 'Windows'
+        buildHelp: 'true'
 
     - task: CopyFiles@2
       displayName: 'Copy Module to Artifacts Folder'
