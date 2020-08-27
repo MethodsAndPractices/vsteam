@@ -25,13 +25,13 @@
 
    <ItemGroup>
       <Reference Include="CodeOwls.PowerShell.Provider">
-         <HintPath>..\packages\SHiPS\CodeOwls.PowerShell.Provider.dll</HintPath>
+         <HintPath>..\packages\ships\CodeOwls.PowerShell.Provider.dll</HintPath>
       </Reference>
    </ItemGroup>
    
    <ItemGroup>
       <Reference Include="CodeOwls.PowerShell.Paths">
-         <HintPath>..\packages\SHiPS\CodeOwls.PowerShell.Paths.dll</HintPath>
+         <HintPath>..\packages\ships\CodeOwls.PowerShell.Paths.dll</HintPath>
       </Reference>
       <Reference Include="Microsoft.PowerShell.SHiPS">
         <HintPath>..\packages\ships\Microsoft.PowerShell.SHiPS.dll</HintPath>
