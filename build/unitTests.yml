@@ -9,12 +9,10 @@ steps:
   inputs:
     pwsh: true
     targetType: 'inline'
-    ${{ if eq(parameters.os, 'Linux') }}:
+    ${{ if eq(parameters.buildHelp, 'false') }}:
       script: '.\Build-Module.ps1 -installDep -configuration Release'
-    ${{ if eq(parameters.os, 'macOS') }}:
-      script: '.\Build-Module.ps1 -buildHelp -configuration Release'
-    ${{ if eq(parameters.os, 'Windows') }}:
-      script: '.\Build-Module.ps1 -configuration Release'
+    ${{ if eq(parameters.buildHelp, 'true') }}:
+      script: '.\Build-Module.ps1 -installDep -buildHelp -configuration Release'
 
 - task: PowerShell@2
   displayName: 'Install Pester'
