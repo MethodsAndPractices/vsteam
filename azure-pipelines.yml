@@ -72,7 +72,7 @@ stages:
         Contents: |
           README.md
           .gitignore
-          dist\**
+          dist/**
         TargetFolder: '$(build.artifactstagingdirectory)/VSTeam'
         flattenFolders: false
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
@@ -88,8 +88,8 @@ stages:
       displayName: 'Copy Integration Tests Artifacts Folder'
       inputs:
         Contents: |
-          dist\*.psd1
-          integration\**
+          dist/*.psd1
+          integration/**
         TargetFolder: '$(build.artifactstagingdirectory)/Tests'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
