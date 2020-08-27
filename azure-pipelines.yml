@@ -143,6 +143,7 @@ stages:
         deploy:
           steps:
           - download: current
+            displayName: 'Download module'
             artifact: module
 
           - task: NuGetToolInstaller@0
@@ -161,7 +162,7 @@ stages:
 
                 # Install each module
                 $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -Force -Scope CurrentUser -Verbose }
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: PowerShell@2
             displayName: 'Compute Version Number'
@@ -175,7 +176,7 @@ stages:
                 Write-Host "Package Version Number: $($manifest.ModuleVersion).$(Build.BuildId)"
 
                 Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion).$(Build.BuildId)"
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: PowerShell@2
             displayName: 'Create NuSpec from PSD1'
@@ -188,14 +189,14 @@ stages:
                 Write-Host "Convert psd1 into a NuSpec"
 
                 ConvertTo-NuSpec -Path ./$(Folder)/VSTeam.psd1 -Verbose
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: NuGetCommand@2
             displayName: 'Pack Module'
             inputs:
               command: pack
-              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
-              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
+              packagesToPack: '$(Pipeline.Workspace)/module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/module/$(Folder)'
               versioningScheme: byEnvVar
               versionEnvVar: 'PACKAGE_VERSION'
 
@@ -203,7 +204,7 @@ stages:
             displayName: 'Push Module'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/module/$(Folder)/*.nupkg'
               publishVstsFeed: 'vsteam'
               allowPackageConflicts: true
 
@@ -259,7 +260,7 @@ stages:
           steps:
           - download: current
             artifact: module
-            
+
           - task: NuGetToolInstaller@0
             displayName: 'Install NuGet 5.2.0'
             inputs:
@@ -276,7 +277,7 @@ stages:
 
                 # Install each module
                 $manifest.RequiredModules | ForEach-Object { Install-Module -Name $_ -Repository PSGallery -F -Scope CurrentUser }
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: PowerShell@2
             displayName: 'Create NuSpec from PSD1'
@@ -291,19 +292,19 @@ stages:
                 $manifest = Import-PowerShellDataFile ./$(Folder)/VSTeam.psd1
 
                 Write-Host "##vso[task.setvariable variable=PACKAGE_VERSION;isOutput=false]$($manifest.ModuleVersion)"
-              workingDirectory: '$(Pipeline.Workspace)/Module'
+              workingDirectory: '$(Pipeline.Workspace)/module'
 
           - task: NuGetCommand@2
             displayName: 'Pack Module'
             inputs:
               command: pack
-              packagesToPack: '$(Pipeline.Workspace)/Module/$(Folder)/VSTeam.nuspec'
-              packDestination: '$(Pipeline.Workspace)/Module/$(Folder)'
+              packagesToPack: '$(Pipeline.Workspace)/module/$(Folder)/VSTeam.nuspec'
+              packDestination: '$(Pipeline.Workspace)/module/$(Folder)'
 
           - task: PublishPipelineArtifact@1
             displayName: 'Publish nupkg Artifact'
             inputs:
-              targetPath: '$(Pipeline.Workspace)/Module/$(Folder)'
+              targetPath: '$(Pipeline.Workspace)/module/$(Folder)'
               artifact: 'Package'
               publishLocation: 'pipeline'
 
@@ -311,7 +312,7 @@ stages:
             displayName: 'Push Module'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/Module/$(Folder)/*.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/module/$(Folder)/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'PowerShell Gallery'
 
@@ -325,4 +326,4 @@ stages:
               addChangeLog: true
               compareWith: 'lastFullRelease'
               assets: |
-                $(Pipeline.Workspace)/Module/$(Folder)/*.nupkg
+                $(Pipeline.Workspace)/module/$(Folder)/*.nupkg

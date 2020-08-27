@@ -25,6 +25,7 @@ jobs:
         deploy:
           steps:
             - download: current
+              displayName: 'Download tests'
               artifact: test
 
             - task: AzureResourceGroupDeployment@2
@@ -78,7 +79,7 @@ jobs:
                   Get-PSRepository
 
                   Install-Module -Name VSTeam -Repository $n -Credential $creds -MaximumVersion $b -MinimumVersion $b -Force -Scope CurrentUser -Verbose
-                workingDirectory: '$(Pipeline.Workspace)/Test'
+                workingDirectory: '$(Pipeline.Workspace)/test'
 
             - task: PowerShell@2
               displayName: 'Install Pester'
@@ -110,14 +111,14 @@ jobs:
             
                   Invoke-Pester -Configuration $pesterArgs
                 failOnStderr: true
-                workingDirectory: '$(Pipeline.Workspace)/Test/integration'
+                workingDirectory: '$(Pipeline.Workspace)/test/integration'
 
             - task: PublishTestResults@2
               displayName: 'Publish Test Results'
               inputs:
                 testResultsFormat: NUnit
                 testResultsFiles: '**/test-results.xml'
-                searchFolder: '$(Pipeline.Workspace)/Test/integration'
+                searchFolder: '$(Pipeline.Workspace)/test/integration'
                 testRunTitle: '${{ parameters.os }} Tests'
               continueOnError: true
               condition: succeededOrFailed()
