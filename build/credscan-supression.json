@@ -28,6 +28,10 @@
       {
          "file": "buildDefyaml.json",
          "_justification": "Fake credentials only used for unit tests."
+      },
+      {
+         "file": "Get-BuildDefinition_AzD.json",
+         "_justification": "Redacted credentials only used for unit tests."
       }
    ]
 }
