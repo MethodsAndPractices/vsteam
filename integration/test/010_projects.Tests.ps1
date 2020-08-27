@@ -120,7 +120,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Add-VSTeamBuildDefinition should add a build definition' {
          Add-VSTeamBuildDefinition -ProjectName $newProjectName -InFile $tmpBuildDef1
-         Write-Host $(Get-VSTeamBuildDefinition -ProjectName $newProjectName -JSON)
          $buildDef = Get-VSTeamBuildDefinition -ProjectName $newProjectName
          $buildDef | Should -Not -Be $null
       }
