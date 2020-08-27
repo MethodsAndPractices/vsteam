@@ -185,7 +185,6 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(actual, "actual");
       }
 
-
       [TestMethod]
       public void Constructor_AzD_Classic()
       {

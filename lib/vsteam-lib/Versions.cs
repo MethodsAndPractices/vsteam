@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace vsteam_lib
 {
@@ -108,11 +109,19 @@ namespace vsteam_lib
          }
       }
 
+      [ExcludeFromCodeCoverage]
       public static bool TestGraphSupport() => !string.IsNullOrEmpty(Versions.GetApiVersion(APIs.Graph));
+      [ExcludeFromCodeCoverage]
       public static string Account { get; set; } = Environment.GetEnvironmentVariable("TEAM_ACCT");
+      [ExcludeFromCodeCoverage]
       public static string DefaultTimeout { get; set; } = Environment.GetEnvironmentVariable("TEAM_TIMEOUT");
+      [ExcludeFromCodeCoverage]
       public static string DefaultProject { get; set; } = Environment.GetEnvironmentVariable("TEAM_PROJECT");
+      [ExcludeFromCodeCoverage]
       public static string Version { get; set; } = Environment.GetEnvironmentVariable("TEAM_VERSION") ?? "TFS2017";
+      [ExcludeFromCodeCoverage]
+      public static string ModuleVersion { get; set; } = null;
+
       public static string Git { get; set; } = "3.0";
       public static string Core { get; set; } = "3.0";
       public static string Build { get; set; } = "3.0";
@@ -126,7 +135,6 @@ namespace vsteam_lib
       public static string MemberEntitlementManagement { get; set; } = "";
       public static string ExtensionsManagement { get; set; } = "";
       public static string ServiceEndpoints { get; set; } = "3.0-preview";
-      public static string ModuleVersion { get; set; } = null;
       public static string Graph { get; set; } = "";
       public static string Policy { get; set; } = "3.0";
       public static string Processes { get; set; } = "";
