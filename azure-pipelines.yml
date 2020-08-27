@@ -64,38 +64,6 @@ stages:
     - template: build/unitTests.yml
       parameters:
         os: 'macOS'
-        buildHelp: 'false'
-
-    - task: CredScan@2
-      displayName: 'Run CredScan'
-      inputs:
-        toolMajorVersion: 'V2'
-        suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
-
-    - task: SdtReport@1
-      displayName: 'Create Security Analysis Report'
-      inputs:
-        AllTools: false
-        CredScan: true
-
-    - task: PublishSecurityAnalysisLogs@2
-      displayName: 'Publish Security Analysis Logs'
-
-    - task: PostAnalysis@1
-      displayName: 'Post Analysis'
-      inputs:
-        AllTools: false
-        CredScan: true
-
-  - job: Windows_Phase
-    displayName: Build Windows
-    pool:
-      vmImage: 'windows-latest'
-
-    steps:
-    - template: build/unitTests.yml
-      parameters:
-        os: 'Windows'
         buildHelp: 'true'
 
     - task: CopyFiles@2
@@ -131,6 +99,29 @@ stages:
         targetPath: '$(Build.ArtifactStagingDirectory)/Tests'
         artifact: 'test'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
+
+  - job: Windows_Phase
+    displayName: Build Windows
+    pool:
+      vmImage: 'windows-latest'
+
+    steps:
+    - template: build/unitTests.yml
+      parameters:
+        os: 'Windows'
+        buildHelp: 'false'
+
+    - task: CredScan@2
+      displayName: 'Run CredScan'
+      inputs:
+        toolMajorVersion: 'V2'
+        suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
+  
+    - task: PostAnalysis@1
+      displayName: 'Post Analysis'
+      inputs:
+        AllTools: false
+        CredScan: true
 
 - stage: Package
   displayName: Package Management
