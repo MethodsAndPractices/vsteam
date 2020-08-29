@@ -22,7 +22,7 @@ stages:
       vmImage: 'ubuntu-16.04'
 
     steps:
-    - template: build/unitTests.yml
+    - template: .build/unitTests.yml
       parameters:
         os: 'Linux'
         buildHelp: 'false'
@@ -61,7 +61,7 @@ stages:
       vmImage: 'macOS-latest'
 
     steps:
-    - template: build/unitTests.yml
+    - template: .build/unitTests.yml
       parameters:
         os: 'macOS'
         buildHelp: 'true'
@@ -106,7 +106,7 @@ stages:
       vmImage: 'windows-latest'
 
     steps:
-    - template: build/unitTests.yml
+    - template: .build/unitTests.yml
       parameters:
         os: 'Windows'
         buildHelp: 'false'
@@ -115,7 +115,7 @@ stages:
       displayName: 'Run CredScan'
       inputs:
         toolMajorVersion: 'V2'
-        suppressionsFile: '$(Build.SourcesDirectory)/build/credscan-supression.json'
+        suppressionsFile: '$(Build.SourcesDirectory)/.build/credscan-supression.json'
   
     - task: PostAnalysis@1
       displayName: 'Post Analysis'
@@ -208,7 +208,7 @@ stages:
   dependsOn: Package
   jobs:
 
-  - template: build/integrationTests.yml
+  - template: .build/integrationTests.yml
     parameters:
       displayName: 'Linux TFS 2018'
       os: 'Linux'
@@ -219,7 +219,7 @@ stages:
       apiVersion: 'TFS2018'
       account: 'http://winbldbox3.centralus.cloudapp.azure.com:8080/tfs/defaultcollection'
 
-  - template: build/integrationTests.yml
+  - template: .build/integrationTests.yml
     parameters:
       displayName: 'Windows AzD'
       os: 'Windows'
@@ -228,7 +228,7 @@ stages:
       apiVersion: 'VSTS'
       account: 'tooltester'
 
-  - template: build/integrationTests.yml
+  - template: .build/integrationTests.yml
     parameters:
       displayName: 'macOS TFS 2017'
       os: 'macOS'

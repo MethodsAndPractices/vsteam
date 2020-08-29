@@ -342,9 +342,9 @@ $null = Start-DockerVSTeamTests `
    -Wait `
    -FollowLogs:$ShowLogs
 
-$linux = Find-Numbers -fileToRead "$rootDir/vsteam_Linux_ps7_tests_result.xml"
-$winP5 = Find-Numbers -fileToRead "$rootDir/vsteam_wcore1903_ps5_tests_result.xml"
-$winP7 = Find-Numbers -fileToRead "$rootDir/vsteam_wcore1903_ps7_tests_result.xml"
+$linux = Find-Numbers -fileToRead "$rootDir/TestResults/vsteam_Linux_ps7_tests_result.xml"
+$winP5 = Find-Numbers -fileToRead "$rootDir/TestResults/vsteam_wcore1903_ps5_tests_result.xml"
+$winP7 = Find-Numbers -fileToRead "$rootDir/TestResults/vsteam_wcore1903_ps7_tests_result.xml"
    
 $totalPassed = $winP5.Passed + $linux.Passed + $winP7.Passed
 $totalFailed = $winP5.Failed + $linux.Failed + $winP7.Failed

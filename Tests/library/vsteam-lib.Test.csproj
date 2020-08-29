@@ -1,0 +1,107 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>vsteam_lib.Test</RootNamespace>
+
+    <IsPackable>false</IsPackable>
+
+    <Configurations>Debug;Release;VS;LibOnly</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.3" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="Trackyon.System.Management.Automation.Abstractions" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Classes\vsteam-lib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CodeOwls.PowerShell.Paths">
+      <HintPath>..\..\packages\ships\CodeOwls.PowerShell.Paths.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeOwls.PowerShell.Provider">
+      <HintPath>..\..\packages\ships\CodeOwls.PowerShell.Provider.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.PowerShell.SHiPS">
+      <HintPath>..\..\packages\ships\Microsoft.PowerShell.SHiPS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+   
+   <ItemGroup>
+     <None Update="SampleFiles\Get-BuildDefinition_2017.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-BuildDefinition_2018.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-BuildDefinition_2019.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-BuildDefinition_AzD.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeam.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamAccessControlList.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamAgent-PoolId1.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamBuild.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamExtension.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamFeed.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamGitRef.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamGitRepository.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamGroup.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamJobRequest-PoolId1-AgentID111.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamPool.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamProject.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamQueue.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamRelease-id178-expandEnvironments.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamRelease.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamReleaseDefinition-ReleaseId40.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamReleaseDefinition.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamUser.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+   </ItemGroup>
+
+</Project>

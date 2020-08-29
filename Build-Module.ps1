@@ -76,10 +76,10 @@ function Start-IntegrationTests {
       Import-Pester
 
       $pesterArgs = [PesterConfiguration]::Default
-      $pesterArgs.Run.Path = '.\integration'
+      $pesterArgs.Run.Path = './Tests/integration'
       $pesterArgs.Run.Exit = $true
       $pesterArgs.TestResult.Enabled = $true
-      $pesterArgs.TestResult.OutputPath = 'integrationTest-results.xml'
+      $pesterArgs.TestResult.OutputPath = './TestResults/integrationTest-results.xml'
       $pesterArgs.Run.PassThru = $false
 
       if ('ErrorsOnly' -eq $testOutputLevel) {
@@ -148,7 +148,7 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 if (-not $skipLibBuild.IsPresent) {
    Write-Output "  Building: C# project ($configuration config)"
-   $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration --output $output\bin lib | Out-String
+   $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration --output $output\bin | Out-String
 
    if (-not ($buildOutput | Select-String -Pattern 'succeeded')) {
       Write-Output $buildOutput
@@ -160,7 +160,7 @@ Write-Output "Publishing: Complete to $output"
 if ($runTests.IsPresent) {
    if (-not $skipLibBuild.IsPresent -and $configuration -ne 'LibOnly') {
       Write-Output '   Testing: C# project (unit)'
-      $testOutput = dotnet test --nologo --configuration $configuration lib | Out-String
+      $testOutput = dotnet test --nologo --configuration $configuration | Out-String
       
       if (-not ($testOutput | Select-String -Pattern 'Test Run Successful')) {
          Write-Output $testOutput
@@ -171,9 +171,9 @@ if ($runTests.IsPresent) {
    Import-Pester
 
    $pesterArgs = [PesterConfiguration]::Default
-   $pesterArgs.Run.Path = '.\unit'
+   $pesterArgs.Run.Path = './Tests/function'
    $pesterArgs.TestResult.Enabled = $true
-   $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+   $pesterArgs.TestResult.OutputPath = './TestResults/test-results.xml'
 
    if ($codeCoverage.IsPresent) {
       $pesterArgs.CodeCoverage.Enabled = $true
