@@ -4,9 +4,9 @@
 		<View>
 			<Name>Team.Environment.Status.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>VSTeamEnvironment</TypeName>
-				<TypeName>VSTeamAttempt</TypeName>
-				<TypeName>VSTeamTask</TypeName>
+				<TypeName>Team.Provider.Environment</TypeName>
+				<TypeName>Team.Provider.Attempt</TypeName>
+				<TypeName>Team.Provider.Task</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

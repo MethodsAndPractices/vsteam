@@ -44,7 +44,7 @@ This command returns the raw object returned from the server.
 PS C:\> Get-VSTeamRelease -ProjectName demo -Id 10 -Json
 ```
 
-This command returns the raw object returned from the server formated as JSON.
+This command returns the raw object returned from the server formatted as JSON.
 
 ## PARAMETERS
 
@@ -133,7 +133,7 @@ To find the ID of a release definition, type Get-VSTeamRelease.
 
 ```yaml
 Type: Int32[]
-Parameter Sets: ByID, ByIDJson, ByIDRaw
+Parameter Sets: ByID, ByIDRaw
 Aliases: ReleaseID
 Required: True
 Accept pipeline input: true (ByPropertyName)
@@ -146,7 +146,6 @@ Converts the raw response into JSON and displays in the console. This is require
 ```yaml
 Type: Switch
 Required: True
-Parameter Sets: ByIDJson
 ```
 
 ### -Raw

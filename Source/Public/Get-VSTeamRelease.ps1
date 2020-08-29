@@ -2,7 +2,6 @@ function Get-VSTeamRelease {
    [CmdletBinding(DefaultParameterSetName = 'List')]
    param(
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdJson')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseID')]
       [int[]] $id,
@@ -34,16 +33,14 @@ function Get-VSTeamRelease {
 
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('ascending', 'descending')]
-
       [string] $queryOrder,
-      [Parameter(ParameterSetName = 'List')]
 
+      [Parameter(ParameterSetName = 'List')]
       [string] $continuationToken,
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
 
       [switch] $JSON,
+      
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-
       [switch] $raw,
 
       [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
@@ -69,11 +66,11 @@ function Get-VSTeamRelease {
             }
             else {
                if (-not $raw.IsPresent) {
-                  # Apply a Type Name so we can use custom format view and custom type extensions
-                  _applyTypesToRelease -item $resp
+                  Write-Output $([vsteam_lib.Release]::new($resp, $ProjectName))
                }
-
-               Write-Output $resp
+               else {
+                  Write-Output $resp
+               }
             }
          }
       }
@@ -100,13 +97,19 @@ function Get-VSTeamRelease {
 
          # Call the REST API
          $resp = _callAPI -url $listurl -QueryString $queryString
-         
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypesToRelease -item $item
+
+         if ($JSON.IsPresent) {
+            $resp | ConvertTo-Json -Depth 99
          }
-         
-         Write-Output $resp.value
+         else {         
+            $objs = @()
+
+            foreach ($item in $resp.value) {
+               $objs += [vsteam_lib.Release]::new($item, $ProjectName)
+            }
+
+            Write-Output $objs
+         }
       }
    }
 }

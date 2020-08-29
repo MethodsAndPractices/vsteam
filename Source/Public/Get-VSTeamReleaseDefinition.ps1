@@ -7,11 +7,9 @@ function Get-VSTeamReleaseDefinition {
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw', ValueFromPipelineByPropertyName = $true)]
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseDefinitionID')]
       [int[]] $Id,
 
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
       [switch]$JSON,
 
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
@@ -59,14 +57,19 @@ function Get-VSTeamReleaseDefinition {
          
          # Call the REST API
          $resp = _callAPI -url $listurl
-         
-         $objs = @()
-         
-         foreach ($item in $resp.value) {
-            $objs += [VSTeamReleaseDefinition]::new($item, $ProjectName)
+
+         if ($JSON.IsPresent) {
+            $resp | ConvertTo-Json -Depth 99
          }
-         
-         Write-Output $objs
+         else {
+            $objs = @()
+            
+            foreach ($item in $resp.value) {
+               $objs += [VSTeamReleaseDefinition]::new($item, $ProjectName)
+            }
+            
+            Write-Output $objs
+         }
       }
    }
 }

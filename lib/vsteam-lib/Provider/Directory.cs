@@ -1,4 +1,5 @@
 ﻿using Microsoft.PowerShell.SHiPS;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Management.Automation;
@@ -86,7 +87,9 @@ namespace vsteam_lib.Provider
 
       public override object[] GetChildItem() => this.GetChildren();
 
-      protected virtual object[] GetChildren()
+      protected virtual object[] GetChildren() => this.GetPSObjects().ToArray();
+
+      protected virtual IEnumerable<PSObject> GetPSObjects()
       {
          this.PowerShell.Commands.Clear();
 
@@ -105,12 +108,7 @@ namespace vsteam_lib.Provider
          PowerShellWrapper.LogPowerShellError(cmd, children);
 
          // This applies types to select correct formatter.
-         foreach (var child in children)
-         {
-            child.AddTypeName(this.TypeName);
-         }
-
-         return children.ToArray();
+         return children.AddTypeName(this.TypeName);
       }
    }
 }

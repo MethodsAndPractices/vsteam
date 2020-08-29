@@ -21,6 +21,9 @@ namespace vsteam_lib
       [XmlAttribute("_links.avatar.href")]
       public string Avatar { get; set; }
 
+      [XmlAttribute("_links.web.href")]
+      public string Web { get; set; }
+
       public PSObject InternalObject { get; }
 
       public Link(PSObject obj)

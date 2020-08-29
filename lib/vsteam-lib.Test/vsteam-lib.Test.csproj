@@ -90,6 +90,18 @@
      <None Update="SampleFiles\Get-VSTeamQueue.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
+     <None Update="SampleFiles\Get-VSTeamRelease-id178-expandEnvironments.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamRelease.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamReleaseDefinition-ReleaseId40.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamReleaseDefinition.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
      <None Update="SampleFiles\Get-VSTeamUser.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>

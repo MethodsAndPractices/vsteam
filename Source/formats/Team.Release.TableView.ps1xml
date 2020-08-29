@@ -4,31 +4,31 @@
 		<View>
 			<Name>Team.Release.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>VSTeamRelease</TypeName>
+				<TypeName>vsteam_lib.Release</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>
-					<TableColumnHeader>
-						<Label>Mode</Label>
-					</TableColumnHeader>
 					<TableColumnHeader>
 						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
 						<Label>Status</Label>
 					</TableColumnHeader>
+               <TableColumnHeader>
+						<Label>Id</Label>
+					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
 					<TableRowEntry>
 						<TableColumnItems>
 							<TableColumnItem>
-								<PropertyName>DisplayMode</PropertyName>
-							</TableColumnItem>
-							<TableColumnItem>
 								<PropertyName>Name</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
 								<PropertyName>status</PropertyName>
+							</TableColumnItem>
+                     <TableColumnItem>
+								<PropertyName>id</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

@@ -112,13 +112,13 @@ namespace vsteam_lib
       [ExcludeFromCodeCoverage]
       public static bool TestGraphSupport() => !string.IsNullOrEmpty(Versions.GetApiVersion(APIs.Graph));
       [ExcludeFromCodeCoverage]
-      public static string Account { get; set; } = Environment.GetEnvironmentVariable("TEAM_ACCT");
+      public static string Account { get; set; } = System.Environment.GetEnvironmentVariable("TEAM_ACCT");
       [ExcludeFromCodeCoverage]
-      public static string DefaultTimeout { get; set; } = Environment.GetEnvironmentVariable("TEAM_TIMEOUT");
+      public static string DefaultTimeout { get; set; } = System.Environment.GetEnvironmentVariable("TEAM_TIMEOUT");
       [ExcludeFromCodeCoverage]
-      public static string DefaultProject { get; set; } = Environment.GetEnvironmentVariable("TEAM_PROJECT");
+      public static string DefaultProject { get; set; } = System.Environment.GetEnvironmentVariable("TEAM_PROJECT");
       [ExcludeFromCodeCoverage]
-      public static string Version { get; set; } = Environment.GetEnvironmentVariable("TEAM_VERSION") ?? "TFS2017";
+      public static string Version { get; set; } = System.Environment.GetEnvironmentVariable("TEAM_VERSION") ?? "TFS2017";
       [ExcludeFromCodeCoverage]
       public static string ModuleVersion { get; set; } = null;
 

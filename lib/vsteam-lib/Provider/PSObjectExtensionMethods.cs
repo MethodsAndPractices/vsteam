@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Management.Automation;
 
 namespace vsteam_lib.Provider
@@ -160,6 +161,15 @@ namespace vsteam_lib.Provider
          {
             obj.TypeNames.Insert(0, typeName);
          }
+      }
+
+      public static PSObject[] AddTypeName(this IEnumerable<object> list, string typeName)
+      {
+         var items = list.Select(s => PSObject.AsPSObject(s)).ToArray();
+
+         Array.ForEach(items, s => s.AddTypeName(typeName));
+
+         return items;
       }
    }
 }

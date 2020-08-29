@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using System.Xml.Serialization;
@@ -79,25 +78,21 @@ namespace vsteam_lib
 
       protected override object[] GetChildren()
       {
+         // Wrap in a PSObject so a type can be applied so the correct 
+         // formatter is selected
          if (this.Steps != null)
          {
-            var steps = this.Steps.Select(s => PSObject.AsPSObject(s)).ToArray();
-            Array.ForEach(steps, s => s.AddTypeName("Team.Provider.BuildDefinitionProcessPhaseStep"));
-            return steps;
+            return this.Steps.AddTypeName("Team.Provider.BuildDefinitionProcessPhaseStep");
          }
 
          if (this.Process.Type == 1)
          {
-            // Wrap in a PSObject so a type can be applied so the correct 
-            // formatter is selected
-            var phases = this.Process.Phases.Select(p => PSObject.AsPSObject(p)).ToArray();
-            Array.ForEach(phases, i => i.AddTypeName("Team.Provider.BuildDefinitionProcessPhase"));
-            return phases;
+            return this.Process.Phases.AddTypeName("Team.Provider.BuildDefinitionProcessPhase");
          }
 
          var process = PSObject.AsPSObject(this.Process);
 
-         if(this.Process.Type == 2)
+         if (this.Process.Type == 2)
          {
             process.AddTypeName("Team.Provider.BuildDefinitionYamlProcess");
          }

@@ -7,7 +7,6 @@
       "VSTeamTask.ps1",
       "VSTeamAttempt.ps1",
       "VSTeamEnvironment.ps1",
-      "VSTeamRelease.ps1",
       "VSTeamProcess.ps1",
       "VSTeamGitRepositoryPermissions.ps1",
       "VSTeamIdentityPermissions.ps1",
@@ -17,7 +16,6 @@
       "VSTeamDescriptor.ps1",
       "VSTeamSecurityNamespace.ps1",
       "VSTeamClassificationNode.ps1",
-      "VSTeamReleaseDefinition.ps1",
       "VSTeamPermissionInheritance.ps1",
       "VSTeamGitCommitRef.ps1",
       "VSTeamGitUserDate.ps1"

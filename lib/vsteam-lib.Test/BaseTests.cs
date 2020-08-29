@@ -18,17 +18,21 @@ namespace vsteam_lib.Test
          return ps;
       }
 
-      internal static Collection<PSObject> LoadJson(string file)
+      internal static Collection<PSObject> LoadJson(string file, bool selectValue = true)
       {
          var contents = System.IO.File.ReadAllText(file);
 
-         return PowerShell.Create().AddCommand("ConvertFrom-Json")
-                                   .AddParameter("InputObject", contents)
-                                   .AddParameter("Depth", 100)
-                                   .AddCommand("Select-Object")
-                                   .AddParameter("ExpandProperty", "value")
-                                   .Invoke();
-      }
+         var cmdlet = PowerShell.Create().AddCommand("ConvertFrom-Json")
+                                         .AddParameter("InputObject", contents)
+                                         .AddParameter("Depth", 100);
 
+         if (selectValue)
+         {
+            cmdlet.AddCommand("Select-Object")
+                  .AddParameter("ExpandProperty", "value");
+         }
+
+         return cmdlet.Invoke();
+      }
    }
 }
