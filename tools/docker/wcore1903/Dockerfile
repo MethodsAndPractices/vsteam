@@ -1,5 +1,5 @@
 # escape=`
-ARG fromTag=7.0.1-windowsservercore-1903
+ARG fromTag=7.0.3-windowsservercore-1903
 ARG pesterMinVer=5.0.2
 
 FROM mcr.microsoft.com/powershell:${fromTag}
@@ -24,11 +24,11 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 RUN powershell `
    -NoLogo `
    -Command " `
-   `Write-host 'Installing nuget and PowerShellGet...'; `
+   `Write-host 'Installing nuget, .net core SDK and PowerShellGet...'; `
    Set-ExecutionPolicy Bypass -Scope Process -Force; `
    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
    iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); `
-   choco install nuget.commandline -y; `
+   choco install nuget.commandline dotnetcore-sdk -y; `
    Install-PackageProvider -Name NuGet -Force; `
    Install-Module -Name PowerShellGet -Force; `
    Update-Module -Name PowerShellGet; `

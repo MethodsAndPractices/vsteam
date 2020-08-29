@@ -4,7 +4,7 @@ Describe "VSTeam" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
-      $singleResult = Get-Content "$sampleFiles/get-vsteam.json" -Raw | ConvertFrom-Json
+      $singleResult = Get-Content "$sampleFiles/Get-VSTeam.json" -Raw | ConvertFrom-Json
 
       Mock _callAPI { return $singleResult }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }

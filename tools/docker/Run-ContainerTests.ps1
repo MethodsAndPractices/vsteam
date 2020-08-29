@@ -157,21 +157,20 @@ function Start-DockerVSTeamTests {
          # I delete from the container so that all the correct permissions
          # are granted to delete. When I tried this from outside the container
          # I did not have permissions to delete it.
-         if (Test-Path '#Container#_result.xml') {
-            Write-Verbose 'Deleting old results file #Container#_result.xml'
-            Remove-Item '#Container#_result.xml'
+         if (Test-Path './TestResults/#Container#_result.xml') {
+            Write-Verbose 'Deleting old results file ./TestResults/#Container#_result.xml'
+            Remove-Item './TestResults/#Container#_result.xml'
          }
 
-         .\Build-Module.ps1 -installDep
+         .\Build-Module.ps1 -installDep -skipLibBuild
          $null = Import-Module Pester
 
          $pesterArgs = [PesterConfiguration]::Default
          $pesterArgs.Run.Exit = $true
-         $pesterArgs.Run.Path = '.\unit'
+         $pesterArgs.Run.Path = './Tests/function'
          $pesterArgs.Run.PassThru = $false
-         $pesterArgs.Output.Verbosity = 'Detailed'
          $pesterArgs.TestResult.Enabled = $true
-         $pesterArgs.TestResult.OutputPath = '#Container#_result.xml'
+         $pesterArgs.TestResult.OutputPath = './TestResults/#Container#_result.xml'
 
          Invoke-Pester -Configuration $pesterArgs
 
@@ -198,7 +197,7 @@ function Start-DockerVSTeamTests {
 
       docker run `
          -dit `
-         --name  $Container `
+         --name $Container `
          --volume $Volume `
          -w $DefaultWorkDir `
          $Image `
@@ -289,6 +288,8 @@ $scriptPath = $PSScriptRoot
 $rootDir = (Resolve-Path -Path "$scriptPath\..\..\").ToString().trim('\')
 $containerFolder = "c:/vsteam"
 $containerFilePath = "$rootDir/tools/docker"
+
+Write-Verbose "Root Dir: $rootDir"
 
 $dockerRepository = "vsteam"
 
