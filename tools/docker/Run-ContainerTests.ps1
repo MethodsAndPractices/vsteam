@@ -157,9 +157,9 @@ function Start-DockerVSTeamTests {
          # I delete from the container so that all the correct permissions
          # are granted to delete. When I tried this from outside the container
          # I did not have permissions to delete it.
-         if (Test-Path './TestResults/#Container#_result.xml') {
-            Write-Verbose 'Deleting old results file ./TestResults/#Container#_result.xml'
-            Remove-Item './TestResults/#Container#_result.xml'
+         if (Test-Path './Tests/TestResults/#Container#_result.xml') {
+            Write-Verbose 'Deleting old results file ./Tests/TestResults/#Container#_result.xml'
+            Remove-Item './Tests/TestResults/#Container#_result.xml'
          }
 
          .\Build-Module.ps1 -installDep -skipLibBuild
@@ -170,7 +170,7 @@ function Start-DockerVSTeamTests {
          $pesterArgs.Run.Path = './Tests/function'
          $pesterArgs.Run.PassThru = $false
          $pesterArgs.TestResult.Enabled = $true
-         $pesterArgs.TestResult.OutputPath = './TestResults/#Container#_result.xml'
+         $pesterArgs.TestResult.OutputPath = './Tests/TestResults/#Container#_result.xml'
 
          Invoke-Pester -Configuration $pesterArgs
 
@@ -343,9 +343,9 @@ $null = Start-DockerVSTeamTests `
    -Wait `
    -FollowLogs:$ShowLogs
 
-$linux = Find-Numbers -fileToRead "$rootDir/TestResults/vsteam_Linux_ps7_tests_result.xml"
-$winP5 = Find-Numbers -fileToRead "$rootDir/TestResults/vsteam_wcore1903_ps5_tests_result.xml"
-$winP7 = Find-Numbers -fileToRead "$rootDir/TestResults/vsteam_wcore1903_ps7_tests_result.xml"
+$linux = Find-Numbers -fileToRead "$rootDir/Tests/TestResults/vsteam_Linux_ps7_tests_result.xml"
+$winP5 = Find-Numbers -fileToRead "$rootDir/Tests/TestResults/vsteam_wcore1903_ps5_tests_result.xml"
+$winP7 = Find-Numbers -fileToRead "$rootDir/Tests/TestResults/vsteam_wcore1903_ps7_tests_result.xml"
    
 $totalPassed = $winP5.Passed + $linux.Passed + $winP7.Passed
 $totalFailed = $winP5.Failed + $linux.Failed + $winP7.Failed

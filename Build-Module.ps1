@@ -79,7 +79,7 @@ function Start-IntegrationTests {
       $pesterArgs.Run.Path = './Tests/integration'
       $pesterArgs.Run.Exit = $true
       $pesterArgs.TestResult.Enabled = $true
-      $pesterArgs.TestResult.OutputPath = './TestResults/integrationTest-results.xml'
+      $pesterArgs.TestResult.OutputPath = './Tests/TestResults/integrationTest-results.xml'
       $pesterArgs.Run.PassThru = $false
 
       if ('ErrorsOnly' -eq $testOutputLevel) {
@@ -173,7 +173,7 @@ if ($runTests.IsPresent) {
    $pesterArgs = [PesterConfiguration]::Default
    $pesterArgs.Run.Path = './Tests/function'
    $pesterArgs.TestResult.Enabled = $true
-   $pesterArgs.TestResult.OutputPath = './TestResults/test-results.xml'
+   $pesterArgs.TestResult.OutputPath = './Tests/TestResults/test-results.xml'
 
    if ($codeCoverage.IsPresent) {
       $pesterArgs.CodeCoverage.Enabled = $true
