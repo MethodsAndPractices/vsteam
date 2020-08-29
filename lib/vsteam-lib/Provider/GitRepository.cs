@@ -35,24 +35,17 @@ namespace vsteam_lib
       {
          this.PowerShell.Commands.Clear();
 
-         var cmd = this.PowerShell.Create(RunspaceMode.CurrentRunspace)
-                       .AddCommand(this.Command)
-                       .AddParameter("ProjectName", this.ProjectName)
-                       .AddParameter("RepositoryId", this.Id);
+         var children = this.PowerShell.AddCommand(this.Command)
+                                       .AddParameter("ProjectName", this.ProjectName)
+                                       .AddParameter("RepositoryId", this.Id)
+                                       .AddCommand("Sort-Object")
+                                       .AddArgument("name")
+                                       .Invoke();
 
-         var children = cmd.AddCommand("Sort-Object")
-                           .AddArgument("name")
-                           .Invoke();
-
-         PowerShellWrapper.LogPowerShellError(cmd, children);
+         PowerShellWrapper.LogPowerShellError(this.PowerShell, children);
 
          // This applies types to select correct formatter.
-         foreach (var child in children)
-         {
-            child.AddTypeName(this.TypeName);
-         }
-
-         return children.ToArray();
+         return children.AddTypeName(this.TypeName);
       }
    }
 }

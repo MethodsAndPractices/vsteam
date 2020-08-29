@@ -93,8 +93,7 @@ namespace vsteam_lib.Provider
       {
          this.PowerShell.Commands.Clear();
 
-         var cmd = this.PowerShell.Create(RunspaceMode.CurrentRunspace)
-                       .AddCommand(this.Command);
+         var cmd = this.PowerShell.AddCommand(this.Command);
 
          if (!string.IsNullOrEmpty(this.ProjectName))
          {
@@ -105,7 +104,7 @@ namespace vsteam_lib.Provider
                            .AddArgument("name")
                            .Invoke();
 
-         PowerShellWrapper.LogPowerShellError(cmd, children);
+         PowerShellWrapper.LogPowerShellError(this.PowerShell, children);
 
          // This applies types to select correct formatter.
          return children.AddTypeName(this.TypeName);

@@ -57,13 +57,10 @@ namespace vsteam_lib
                                        .AddParameter("PoolId", this.Id)
                                        .Invoke();
 
-         // This is important so the correct formatting is applied
-         foreach (var child in children)
-         {
-            child.AddTypeName(this.TypeName);
-         }
+         PowerShellWrapper.LogPowerShellError(this.PowerShell, children);
 
-         return children.ToArray();
+         // This is important so the correct formatting is applied
+         return children.AddTypeName(this.TypeName);
       }
    }
 }

@@ -42,12 +42,7 @@ namespace vsteam_lib
 
          PowerShellWrapper.LogPowerShellError(this.PowerShell, children);
 
-         foreach (var child in children)
-         {
-            child.AddTypeName(this.TypeName);
-         }
-
-         return children.ToArray();
+         return children.AddTypeName(this.TypeName);
       }
    }
 }

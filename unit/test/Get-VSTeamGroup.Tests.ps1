@@ -12,7 +12,6 @@ Describe "VSTeamGroup" {
       . "$PSScriptRoot/../../Source/Classes/VSTeamTask.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamAttempt.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamEnvironment.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamDescriptor.ps1"
       . "$PSScriptRoot/../../Source/Private/common.ps1"
       . "$PSScriptRoot/../../Source/Private/applyTypes.ps1"

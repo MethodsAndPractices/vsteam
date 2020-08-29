@@ -22,6 +22,7 @@ namespace vsteam_lib
       public ReleaseDefinition ReleaseDefinition { get; }
       //public IList<Environment> Environments { get; }
       public object Environments { get; set; }
+      public object Variables { get; set; }
 
       public Release(PSObject obj, IPowerShell powerShell, string projectName) :
          base(obj, obj.GetValue("name"), "Release", powerShell, projectName)
@@ -42,10 +43,10 @@ namespace vsteam_lib
       protected override object[] GetChildren()
       {
          var children = this.GetPSObjects().Select(c => new Environment(c.GetValue("name"),
-                                           c.GetValue("status"),
-                                           this.ProjectName,
-                                           this.Id,
-                                           c.GetValue<long>("id")));
+                                                                        c.GetValue("status"),
+                                                                        this.ProjectName,
+                                                                        this.Id,
+                                                                        c.GetValue<long>("id")));
 
          // This applies types to select correct formatter.
          return children.AddTypeName("Team.Provider.Environment");
@@ -55,8 +56,7 @@ namespace vsteam_lib
       {
          this.PowerShell.Commands.Clear();
 
-         var children = this.PowerShell.Create(RunspaceMode.CurrentRunspace)
-                                       .AddCommand(this.Command)
+         var children = this.PowerShell.AddCommand(this.Command)
                                        .AddParameter("ProjectName", this.ProjectName)
                                        .AddParameter("Id", this.Id)
                                        .AddParameter("Expand", "Environments")

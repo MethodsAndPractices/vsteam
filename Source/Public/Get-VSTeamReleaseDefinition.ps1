@@ -38,7 +38,7 @@ function Get-VSTeamReleaseDefinition {
             }
             else {
                if (-not $raw.IsPresent) {
-                  $item = [VSTeamReleaseDefinition]::new($resp, $ProjectName)
+                  $item = [vsteam_lib.ReleaseDefinition]::new($resp, $ProjectName)
 
                   Write-Output $item
                }
@@ -65,7 +65,7 @@ function Get-VSTeamReleaseDefinition {
             $objs = @()
             
             foreach ($item in $resp.value) {
-               $objs += [VSTeamReleaseDefinition]::new($item, $ProjectName)
+               $objs += [vsteam_lib.ReleaseDefinition]::new($item, $ProjectName)
             }
             
             Write-Output $objs

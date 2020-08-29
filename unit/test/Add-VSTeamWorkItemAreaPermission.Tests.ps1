@@ -12,7 +12,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
       . "$PSScriptRoot/../../Source/Classes/VSTeamTask.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamAttempt.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamEnvironment.ps1"
-      . "$PSScriptRoot/../../Source/Classes/VSTeamRelease.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamWorkItemAreaPermissions.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamClassificationNode.ps1"
       . "$PSScriptRoot/../../Source/Classes/VSTeamSecurityNamespace.ps1"

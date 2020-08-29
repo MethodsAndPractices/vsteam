@@ -23,8 +23,9 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("active", target.Status, "Status");
          Assert.AreEqual("PTracker-CD", target.DefinitionName, "DefinitionName");
 
+         Assert.IsNotNull(target.Variables, "Variables");
          Assert.IsNotNull(target.ReleaseDefinition, "ReleaseDefinition");
-         
+
          Assert.AreEqual(null, target.RequestedFor.DisplayName, "RequestedFor.DisplayName");
          Assert.AreEqual("Test@Test.com", target.ModifiedBy.UniqueName, "ModifiedBy.UniqueName");
          Assert.AreEqual("Donovan Brown", target.CreatedBy.DisplayName, "CreatedBy.DisplayName");
