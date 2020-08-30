@@ -68,7 +68,7 @@ jobs:
                 targetType: 'inline'
                 script: |
                   # Load the psd1 file so you can read the version
-                  $manifest = Import-PowerShellDataFile .\$(Folder)\*.psd1
+                  $manifest = Import-PowerShellDataFile .\*.psd1
 
                   $n = 'LoECDA'
                   $e = "$(EMAIL)"
