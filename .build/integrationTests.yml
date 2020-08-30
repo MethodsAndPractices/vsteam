@@ -111,14 +111,14 @@ jobs:
             
                   Invoke-Pester -Configuration $pesterArgs
                 failOnStderr: true
-                workingDirectory: '$(Pipeline.Workspace)/test/integration'
+                workingDirectory: '$(Pipeline.Workspace)/test'
 
             - task: PublishTestResults@2
               displayName: 'Publish Test Results'
               inputs:
                 testResultsFormat: NUnit
                 testResultsFiles: '**/test-results.xml'
-                searchFolder: '$(Pipeline.Workspace)/test/integration'
+                searchFolder: '$(Pipeline.Workspace)/test'
                 testRunTitle: '${{ parameters.os }} Tests'
               continueOnError: true
               condition: succeededOrFailed()
