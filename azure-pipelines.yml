@@ -61,10 +61,10 @@ stages:
       vmImage: 'macOS-latest'
 
     steps:
-    # - template: .build/unitTests.yml
-    #   parameters:
-    #     os: 'macOS'
-    #     buildHelp: 'true'
+    - template: .build/unitTests.yml
+      parameters:
+        os: 'macOS'
+        buildHelp: 'true'
 
     - task: CopyFiles@2
       displayName: 'Copy Module to Artifacts Folder'
