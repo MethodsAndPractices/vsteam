@@ -89,7 +89,7 @@ stages:
       inputs:
         Contents: |
           dist/*.psd1
-          Tests/integration/**
+          Tests/integration/tests/**
         TargetFolder: '$(build.artifactstagingdirectory)/Tests'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
