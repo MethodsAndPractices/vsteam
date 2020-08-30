@@ -111,7 +111,7 @@ jobs:
             
                   Invoke-Pester -Configuration $pesterArgs
                 failOnStderr: true
-                workingDirectory: '$(Pipeline.Workspace)/test'
+                workingDirectory: '$(Pipeline.Workspace)/test/Tests'
 
             - task: PublishTestResults@2
               displayName: 'Publish Test Results'
