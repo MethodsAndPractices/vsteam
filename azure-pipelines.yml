@@ -16,44 +16,44 @@ stages:
   displayName: Build Stage
 
   jobs:
-  # - job: Linux_Phase
-  #   displayName: Build Linux
-  #   pool:
-  #     vmImage: 'ubuntu-16.04'
+  - job: Linux_Phase
+    displayName: Build Linux
+    pool:
+      vmImage: 'ubuntu-16.04'
 
-  #   steps:
-  #   - template: .build/unitTests.yml
-  #     parameters:
-  #       os: 'Linux'
-  #       buildHelp: 'false'
+    steps:
+    - template: .build/unitTests.yml
+      parameters:
+        os: 'Linux'
+        buildHelp: 'false'
 
-  #   - task: PowerShell@2
-  #     displayName: 'Install PSScriptAnalyzer'
-  #     inputs:
-  #       pwsh: true
-  #       targetType: 'inline'
-  #       script: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
+    - task: PowerShell@2
+      displayName: 'Install PSScriptAnalyzer'
+      inputs:
+        pwsh: true
+        targetType: 'inline'
+        script: 'Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -Verbose'
 
-  #   - task: PowerShell@2
-  #     displayName: 'Run Static Code Analysis'
-  #     inputs:
-  #       pwsh: true
-  #       targetType: 'inline'
-  #       script: |
-  #         # Has to happen in this task for it to take effect
-  #         # Load the psd1 file so you can read the required modules and import them
-  #         $manifest = Import-PowerShellDataFile .\dist\*.psd1
+    - task: PowerShell@2
+      displayName: 'Run Static Code Analysis'
+      inputs:
+        pwsh: true
+        targetType: 'inline'
+        script: |
+          # Has to happen in this task for it to take effect
+          # Load the psd1 file so you can read the required modules and import them
+          $manifest = Import-PowerShellDataFile .\dist\*.psd1
 
-  #         # Import each module
-  #         $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
+          # Import each module
+          $manifest.RequiredModules | ForEach-Object { Import-Module -Name $_ }
 
-  #         $count = 0
-  #         $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
-  #         $r | ForEach-Object {Write-Host "##vso[task.logissue type=error;sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"; $count++}
+          $count = 0
+          $r = Invoke-ScriptAnalyzer –Path ./dist –Recurse | Where-Object severity -ne "Information"
+          $r | ForEach-Object {Write-Host "##vso[task.logissue type=error;sourcepath=$($_.ScriptPath);linenumber=$($_.Line);columnnumber=$($_.Column);]$($_.Message)"; $count++}
 
-  #         if($count -ne 0) {
-  #           Write-Host "##vso[task.complete result=Failed;]Static Code Analysis with error count = $count"
-  #         }
+          if($count -ne 0) {
+            Write-Host "##vso[task.complete result=Failed;]Static Code Analysis with error count = $count"
+          }
 
   - job: macOS_Phase
     displayName: Build macOS
@@ -108,28 +108,28 @@ stages:
         artifact: 'test'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
-  # - job: Windows_Phase
-  #   displayName: Build Windows
-  #   pool:
-  #     vmImage: 'windows-latest'
+  - job: Windows_Phase
+    displayName: Build Windows
+    pool:
+      vmImage: 'windows-latest'
 
-  #   steps:
-  #   - template: .build/unitTests.yml
-  #     parameters:
-  #       os: 'Windows'
-  #       buildHelp: 'false'
+    steps:
+    - template: .build/unitTests.yml
+      parameters:
+        os: 'Windows'
+        buildHelp: 'false'
 
-  #   - task: CredScan@2
-  #     displayName: 'Run CredScan'
-  #     inputs:
-  #       toolMajorVersion: 'V2'
-  #       suppressionsFile: '$(Build.SourcesDirectory)/.build/credscan-supression.json'
+    - task: CredScan@2
+      displayName: 'Run CredScan'
+      inputs:
+        toolMajorVersion: 'V2'
+        suppressionsFile: '$(Build.SourcesDirectory)/.build/credscan-supression.json'
   
-  #   - task: PostAnalysis@1
-  #     displayName: 'Post Analysis'
-  #     inputs:
-  #       AllTools: false
-  #       CredScan: true
+    - task: PostAnalysis@1
+      displayName: 'Post Analysis'
+      inputs:
+        AllTools: false
+        CredScan: true
 
 - stage: Package
   displayName: Package Management
