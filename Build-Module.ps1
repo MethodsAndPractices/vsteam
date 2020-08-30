@@ -148,7 +148,15 @@ $newValue = ((Get-ChildItem -Path "./Source/Public" -Filter '*.ps1').BaseName |
 
 if (-not $skipLibBuild.IsPresent) {
    Write-Output "  Building: C# project ($configuration config)"
-   $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration --output $output\bin | Out-String
+
+   if (-not $(Test-Path -Path $output\bin)) {
+      New-Item -Path $output\bin -ItemType Directory | Out-Null
+   }
+
+   $buildOutput = dotnet build --nologo --verbosity quiet --configuration $configuration | Out-String
+
+   Copy-Item -Destination "$output\bin\vsteam-lib.dll" -Path ".\Source\Classes\bin\$configuration\netstandard2.0\vsteam-lib.dll" -Force
+   Copy-Item -Destination "$output\bin\Trackyon.System.Management.Automation.Abstractions.dll" -Path ".\Source\Classes\bin\$configuration\netstandard2.0\Trackyon.System.Management.Automation.Abstractions.dll" -Force
 
    if (-not ($buildOutput | Select-String -Pattern 'succeeded')) {
       Write-Output $buildOutput

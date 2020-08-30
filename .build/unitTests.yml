@@ -18,7 +18,6 @@ steps:
   displayName: 'Run C# Unit Tests'
   inputs:
     command: 'test'
-    projects: 'lib'
 
 - task: PowerShell@2
   displayName: 'Install Pester'
