@@ -7,7 +7,7 @@ test/sample.txt
 /node_modules
 /docs/files.md
 /docs/index.md
-integration/prime.ps1
+Tests/integration/prime.ps1
 integration/test/test-results.xml
 /Debugscript.txt
 .docs/files.md
@@ -264,3 +264,4 @@ project.lock.json
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
+Tests/integration/prime.ps1
