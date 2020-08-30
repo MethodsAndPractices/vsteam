@@ -88,10 +88,17 @@ stages:
       displayName: 'Copy Integration Tests Artifacts Folder'
       inputs:
         Contents: |
-          dist/*.psd1
-          Tests/integration/tests/**
+          Tests/SampleFiles/**
+          Tests/integration/**
         TargetFolder: '$(build.artifactstagingdirectory)/Tests'
-        flattenFolders: true
+      condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
+
+    - task: CopyFiles@2
+      displayName: 'Copy psd1 to Integration Tests Artifacts Folder'
+      inputs:
+        Contents: |
+          dist/*.psd1
+        TargetFolder: '$(build.artifactstagingdirectory)/Tests'
       condition: and(succeeded(), eq(variables['System.PullRequest.IsFork'], false))
 
     - task: PublishPipelineArtifact@1
