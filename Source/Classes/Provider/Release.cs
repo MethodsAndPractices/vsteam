@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using System.Xml.Serialization;
@@ -20,7 +19,7 @@ namespace vsteam_lib
       public UserEntitlement RequestedFor { get; }
       public DateTime CreatedOn { get; set; }
       public ReleaseDefinition ReleaseDefinition { get; }
-      public IEnumerable<PSObject> Environments { get; private set; }
+      public List<PSObject> Environments { get; private set; }
       public object Variables { get; set; }
 
       public Release(PSObject obj, IPowerShell powerShell, string projectName) :
@@ -48,14 +47,14 @@ namespace vsteam_lib
          {
             foreach (var item in obj.GetValue<object[]>("environments"))
             {
-               ((List<PSObject>)this.Environments).Add(PSObject.AsPSObject(new Environment((PSObject)item, this.Id, this.ProjectName)));
+               this.Environments.Add(PSObject.AsPSObject(new Environment((PSObject)item, this.Id, this.ProjectName)));
             }
          }
       }
 
       protected override object[] GetChildren()
       {
-         this.Environments = this.GetPSObjects();
+         this.Environments = new List<PSObject>(this.GetPSObjects());
 
          return this.Environments.ToArray();
       }
