@@ -4,9 +4,8 @@
 		<View>
 			<Name>Team.Repository.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Repository</TypeName>
-				<TypeName>Team.Provider.Repository</TypeName>
-				<TypeName>VSTeamGitRepository</TypeName>
+				<TypeName>Team.Provider.GitRepository</TypeName>
+				<TypeName>vsteam_lib.GitRepository</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

@@ -10,16 +10,17 @@ namespace vsteam_lib.Test.Provider
       public void Constructor()
       {
          // Arrange
-         var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamGitRepository.json");
+         System.Management.Automation.Abstractions.IPowerShell ps = BaseTests.PrepPowerShell();
+         System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> obj = BaseTests.LoadJson("Get-VSTeamGitRepository.json");
 
          // Act
-         var actual = new GitRepository(obj[0], "Project Name", ps);
+         GitRepository actual = new GitRepository(obj[0], null, ps);
 
          // Assert
          Assert.IsNotNull(actual.Project, "Project");
          Assert.AreEqual(1939413, actual.Size, "Size");
          Assert.AreEqual("Bakeoff", actual.Name, "Name");
+         Assert.AreEqual("PeopleTracker", actual.ProjectName, "ProjectName");
          Assert.AreEqual("00000000-0000-0000-0000-000000000001", actual.Id, "Id");
          Assert.AreEqual("refs/heads/master", actual.DefaultBranch, "DefaultBranch");
          Assert.AreEqual("https://dev.azure.com/Test/0/_apis/git/repositories/0", actual.Url, "Url");
@@ -31,15 +32,15 @@ namespace vsteam_lib.Test.Provider
       public void Get_ChildItem()
       {
          // Arrange
-         var ps = BaseTests.PrepPowerShell();
-         var gitRefs = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamGitRef.json");
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamGitRepository.json");
-         var target = new GitRepository(obj[0], "Project Name", ps);
+         System.Management.Automation.Abstractions.IPowerShell ps = BaseTests.PrepPowerShell();
+         System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> gitRefs = BaseTests.LoadJson("Get-VSTeamGitRef.json");
+         System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> obj = BaseTests.LoadJson("Get-VSTeamGitRepository.json");
+         GitRepository target = new GitRepository(obj[0], "Project Name", ps);
 
          ps.Invoke().Returns(gitRefs);
 
          // Act
-         var actual = target.GetChildItem();
+         object[] actual = target.GetChildItem();
 
          // Assert
          Assert.AreEqual(1, actual.Length);

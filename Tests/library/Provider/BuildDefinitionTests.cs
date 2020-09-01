@@ -12,7 +12,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_2017.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_2017.json");
 
          // Act
          var actual = new BuildDefinition(obj[0], "Project Name", ps);
@@ -65,7 +65,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_2017.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_2017.json");
          var target = new BuildDefinition(obj[0], "Project Name", ps);
 
          // Act
@@ -81,7 +81,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_2017.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_2017.json");
 
          // Act
          var actual = new BuildDefinition(obj[1], "Project Name", ps);
@@ -123,7 +123,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_2018.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_2018.json");
 
          // Act
          var actual = new BuildDefinition(obj[0], "Project Name", ps);
@@ -175,7 +175,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_2018.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_2018.json");
          var target = new BuildDefinition(obj[0], "Project Name", ps);
 
          // Act
@@ -190,7 +190,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_AzD.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_AzD.json");
 
          // Act
          var actual = new BuildDefinition(obj[0], "Project Name", ps);
@@ -235,7 +235,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_AzD.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_AzD.json");
          var target = new BuildDefinition(obj[0], "Project Name", ps);
 
          // Act
@@ -251,7 +251,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_AzD.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_AzD.json");
 
          // Act
          var actual = new BuildDefinition(obj[7], "Project Name", ps);
@@ -296,7 +296,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_AzD.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_AzD.json");
          var target = new BuildDefinition(obj[7], "Project Name", ps);
 
          // Act

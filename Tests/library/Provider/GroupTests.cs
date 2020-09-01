@@ -11,7 +11,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamGroup.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamGroup.json");
 
          // Act
          var target = new Group(obj[0]);

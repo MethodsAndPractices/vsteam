@@ -11,7 +11,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamAccessControlList.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamAccessControlList.json");
 
          // Act
          var target = new AccessControlList(obj[0]);

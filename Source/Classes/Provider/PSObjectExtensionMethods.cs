@@ -9,9 +9,10 @@ namespace vsteam_lib.Provider
    {
       public static IList<string> GetStringArray(this PSObject obj, string name)
       {
+         var values = new List<string>();
+
          if (obj.HasValue(name))
          {
-            var values = new List<string>();
             foreach (var item in ((object[])obj.Properties[name].Value))
             {
                values.Add(item.ToString());
@@ -139,7 +140,7 @@ namespace vsteam_lib.Provider
 
          return result;
       }
-
+      
       public static bool HasValue(this PSObject obj, string name) => obj.Properties.Match(name).Count > 0;
 
       /// <summary>

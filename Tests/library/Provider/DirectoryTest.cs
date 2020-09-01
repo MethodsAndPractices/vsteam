@@ -14,7 +14,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamPool.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamPool.json");
 
          ps.Invoke().Returns(obj);
 
@@ -35,7 +35,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamPool.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamPool.json");
 
          ps.Invoke().Returns(obj);
 

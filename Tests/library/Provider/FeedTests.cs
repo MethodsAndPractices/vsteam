@@ -12,7 +12,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamFeed.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamFeed.json");
 
          // Act
          var actual = new Feed(obj[0]);

@@ -11,7 +11,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamReleaseDefinition-ReleaseId40.json", false);
+         var obj = BaseTests.LoadJson("Get-VSTeamReleaseDefinition-ReleaseId40.json", false);
 
          // Act
          var actual = new ReleaseDefinition(obj[0], "Project Name");
@@ -50,7 +50,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor_NoEnvs()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamReleaseDefinition.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamReleaseDefinition.json");
 
          // Act
          var actual = new ReleaseDefinition(obj[0], "Project Name");

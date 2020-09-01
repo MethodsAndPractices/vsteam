@@ -7,7 +7,8 @@ namespace vsteam_lib
    {
       public string Description { get; set; }
 
-      public Team(PSObject obj, string projectName) : base(obj, obj.GetValue("name"), obj.GetValue("id"), projectName)
+      public Team(PSObject obj, string projectName) :
+         base(obj, obj.GetValue("name"), obj.GetValue("id"), projectName)
       {
       }
    }

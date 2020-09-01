@@ -12,7 +12,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor_Completed()
       {
          // Arrange
-         var jobRequests = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamJobRequest-PoolId1-AgentID111.json");
+         var jobRequests = BaseTests.LoadJson("Get-VSTeamJobRequest-PoolId1-AgentID111.json");
 
          // Act
          var target = new JobRequest(jobRequests[0]);
@@ -37,7 +37,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor_Running()
       {
          // Arrange
-         var jobRequests = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamJobRequest-PoolId1-AgentID111.json");
+         var jobRequests = BaseTests.LoadJson("Get-VSTeamJobRequest-PoolId1-AgentID111.json");
 
          // Act
          var target = new JobRequest(jobRequests[2]);
@@ -50,7 +50,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor_Queued()
       {
          // Arrange
-         var jobRequests = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamJobRequest-PoolId1-AgentID111.json");
+         var jobRequests = BaseTests.LoadJson("Get-VSTeamJobRequest-PoolId1-AgentID111.json");
 
          // Act
          var target = new JobRequest(jobRequests[1]);

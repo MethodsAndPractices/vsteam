@@ -19,17 +19,17 @@ namespace vsteam_lib
       public BuildDefinitionProcessPhase(PSObject obj, string projectName, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), "BuildDefinitionProcessPhase", powerShell, projectName)
       {
+         this.Steps = new List<BuildDefinitionProcessPhaseStep>();
+
          if (obj.HasValue("steps"))
          {
             var i = 1;
-            var steps = new List<BuildDefinitionProcessPhaseStep>();
             foreach (var item in obj.GetValue<object[]>("steps"))
             {
-               steps.Add(new BuildDefinitionProcessPhaseStep((PSObject)item, i++, projectName));
+               this.Steps.Add(new BuildDefinitionProcessPhaseStep((PSObject)item, i++, projectName));
             }
 
-            this.Steps = steps;
-            this.StepCount = steps.Count;
+            this.StepCount = this.Steps.Count;
          }
       }
 

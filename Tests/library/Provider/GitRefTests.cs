@@ -11,7 +11,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamGitRef.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamGitRef.json");
 
          // Act
          var actual = new GitRef(obj[0], "TestProject");

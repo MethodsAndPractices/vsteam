@@ -11,7 +11,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamExtension.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamExtension.json");
 
          // Act
          var actual = new Extension(obj[0]);

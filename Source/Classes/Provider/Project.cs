@@ -57,7 +57,7 @@ namespace vsteam_lib
             new Directory(null, "Builds", "Build", this.PowerShell, this.Name),
             new Directory(null, "Queues", "Queue", this.PowerShell, this.Name),
             new Directory(null, "Release Definitions", "ReleaseDefinition", this.PowerShell, this.Name),
-            new Directory(null, "Releases", "Release", this.PowerShell, this.Name),
+            new Releases(this.PowerShell, this.Name),
             new Directory(null, "Repositories", "GitRepository", this.PowerShell, this.Name),
             new Directory(null, "Teams", "Team", this.PowerShell, this.Name),
          };

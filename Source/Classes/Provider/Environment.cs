@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using vsteam_lib.Provider;
@@ -7,24 +8,32 @@ namespace vsteam_lib
 {
    public class Environment : Directory
    {
-      public string Status { get; }
+      public long Id { get; set; }
       public long ReleaseId { get; }
-      public long EnvironmentId { get; }
+      public string Status { get; set; }
+      public long EnvironmentId => this.Id;
+      public List<Attempt> Attempts { get; }
 
-      public Environment(string name, string status, string projectName, long releaseId, long environmentId, IPowerShell powerShell) :
-         base(null, name, "Attempt", powerShell, projectName)
+      public Environment(PSObject obj, long releaseId, string projectName, IPowerShell powerShell) :
+         base(obj, obj.GetValue("name"), "Attempt", powerShell, projectName)
       {
-         this.Status = status;
          this.ReleaseId = releaseId;
-         this.EnvironmentId = environmentId;
+
+         this.Attempts = new List<Attempt>();
+         foreach (var item in obj.GetValue<object[]>("deploySteps"))
+         {
+            this.Attempts.Add(new Attempt((PSObject)item, this.ProjectName));
+         }
       }
 
       [ExcludeFromCodeCoverage]
-      public Environment(string name, string status, string projectName, long releaseId, long environmentId) :
-         this(name, status, projectName, releaseId, environmentId, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
+      public Environment(PSObject obj, long releaseId, string projectName) :
+         this(obj, releaseId, projectName, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
       {
       }
 
+      protected override object[] GetChildren() => this.Attempts.AddTypeName(this.TypeName);
 
+      protected override IEnumerable<PSObject> GetPSObjects() => null;
    }
 }

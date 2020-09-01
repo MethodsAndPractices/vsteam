@@ -12,7 +12,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamQueue.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamQueue.json");
 
          // Act
          var target = new Queue(obj[0], "Project Name", ps);

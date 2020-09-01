@@ -20,7 +20,8 @@ namespace vsteam_lib.Test
 
       internal static Collection<PSObject> LoadJson(string file, bool selectValue = true)
       {
-         var contents = System.IO.File.ReadAllText(file);
+         var fullPath = $"../../../../SampleFiles/{file}";
+         var contents = System.IO.File.ReadAllText(fullPath);
 
          var cmdlet = PowerShell.Create().AddCommand("ConvertFrom-Json")
                                          .AddParameter("InputObject", contents)

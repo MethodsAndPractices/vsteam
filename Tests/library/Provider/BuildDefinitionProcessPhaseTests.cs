@@ -11,7 +11,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-BuildDefinition_AzD.json");
+         var obj = BaseTests.LoadJson("Get-BuildDefinition_AzD.json");
          var buildDef = new BuildDefinition(obj[0], "Project Name", ps);
          var target = (PSObject)buildDef.GetChildItem()[0];
 

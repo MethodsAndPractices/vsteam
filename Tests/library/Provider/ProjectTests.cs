@@ -13,7 +13,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamProject.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamProject.json");
 
          // Act
          var target = new Project(obj[0], ps);
@@ -36,7 +36,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamProject.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamProject.json");
          var target = new Project(obj[0], ps);
 
          // Act

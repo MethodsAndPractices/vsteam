@@ -12,7 +12,7 @@ namespace vsteam_lib.Test.Provider
       public void Contructor()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamAccessControlList.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamAccessControlList.json");
          var en = ((PSObject)obj[0].Properties["acesDictionary"].Value).Properties.GetEnumerator();
          en.MoveNext();
          var ace = (PSObject)en.Current.Value;

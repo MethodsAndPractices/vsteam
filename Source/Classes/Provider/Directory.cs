@@ -10,7 +10,7 @@ namespace vsteam_lib.Provider
    public class Directory : SHiPSDirectory, IInternalObject
    {
       private string _typeName;
-      protected string ProjectName { get; }
+      public string ProjectName { get; protected set; }
       public PSObject InternalObject { get; }
       protected IPowerShell PowerShell { get; }
 

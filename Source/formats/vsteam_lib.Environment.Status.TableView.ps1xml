@@ -2,9 +2,11 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Release.TableView</Name>
+			<Name>vsteam_lib.Environment.Status.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>vsteam_lib.Release</TypeName>
+				<TypeName>vsteam_lib.Environment</TypeName>
+            <TypeName>vsteam_lib.Attempt</TypeName>
+				<TypeName>vsteam_lib.Task</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>
@@ -13,9 +15,6 @@
 					</TableColumnHeader>
 					<TableColumnHeader>
 						<Label>Status</Label>
-					</TableColumnHeader>
-               <TableColumnHeader>
-						<Label>Definition Name</Label>
 					</TableColumnHeader>
                <TableColumnHeader>
 						<Label>Id</Label>
@@ -29,9 +28,6 @@
 							</TableColumnItem>
 							<TableColumnItem>
 								<PropertyName>status</PropertyName>
-							</TableColumnItem>
-                     <TableColumnItem>
-								<PropertyName>DefinitionName</PropertyName>
 							</TableColumnItem>
                      <TableColumnItem>
 								<PropertyName>id</PropertyName>

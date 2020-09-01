@@ -20,8 +20,7 @@ namespace vsteam_lib
       public UserEntitlement RequestedFor { get; }
       public DateTime CreatedOn { get; set; }
       public ReleaseDefinition ReleaseDefinition { get; }
-      //public IList<Environment> Environments { get; }
-      public object Environments { get; set; }
+      public IEnumerable<PSObject> Environments { get; private set; }
       public object Variables { get; set; }
 
       public Release(PSObject obj, IPowerShell powerShell, string projectName) :
@@ -30,6 +29,8 @@ namespace vsteam_lib
          this.CreatedBy = new UserEntitlement(obj.GetValue<PSObject>("createdBy"), projectName);
          this.ModifiedBy = new UserEntitlement(obj.GetValue<PSObject>("modifiedBy"), projectName);
          this.RequestedFor = new UserEntitlement(obj.GetValue<PSObject>("RequestedFor"), projectName);
+
+         this.PopulateEnvironments(obj);
 
          this.ReleaseDefinition = new ReleaseDefinition(obj.GetValue<PSObject>("releaseDefinition"), projectName);
       }
@@ -40,25 +41,34 @@ namespace vsteam_lib
       {
       }
 
+      private void PopulateEnvironments(PSObject obj)
+      {
+         this.Environments = new List<PSObject>();
+         if (obj.HasValue("environments"))
+         {
+            foreach (var item in obj.GetValue<object[]>("environments"))
+            {
+               ((List<PSObject>)this.Environments).Add(PSObject.AsPSObject(new Environment((PSObject)item, this.Id, this.ProjectName)));
+            }
+         }
+      }
+
       protected override object[] GetChildren()
       {
-         var children = this.GetPSObjects().Select(c => new Environment(c.GetValue("name"),
-                                                                        c.GetValue("status"),
-                                                                        this.ProjectName,
-                                                                        this.Id,
-                                                                        c.GetValue<long>("id")));
+         this.Environments = this.GetPSObjects();
 
-         // This applies types to select correct formatter.
-         return children.AddTypeName("Team.Provider.Environment");
+         return this.Environments.ToArray();
       }
 
       protected override IEnumerable<PSObject> GetPSObjects()
       {
          this.PowerShell.Commands.Clear();
 
+         // We have to call this again because the amount of data you get back when you pass in the
+         // Id must greater than when you don't. 
          var children = this.PowerShell.AddCommand(this.Command)
                                        .AddParameter("ProjectName", this.ProjectName)
-                                       .AddParameter("Id", this.Id)
+                                       .AddParameter("id", this.Id)
                                        .AddParameter("Expand", "Environments")
                                        .AddCommand("Select-Object")
                                        .AddParameter("ExpandProperty", "Environments")
@@ -66,7 +76,8 @@ namespace vsteam_lib
 
          PowerShellWrapper.LogPowerShellError(this.PowerShell, children);
 
-         return children;
+         // This applies types to select correct formatter.
+         return children.AddTypeName("Team.Provider.Environment");
       }
    }
 }

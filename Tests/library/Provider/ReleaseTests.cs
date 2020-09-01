@@ -12,15 +12,15 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamRelease.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamRelease.json");
 
          // Act
          var target = new Release(obj[0], ps, "Project Name");
 
          // Assert
          Assert.AreEqual(259, target.Id, "Id");
-         Assert.IsNull(target.Environments, "Environments");
          Assert.AreEqual("active", target.Status, "Status");
+         Assert.IsNotNull(target.Environments, "Environments");
          Assert.AreEqual("PTracker-CD", target.DefinitionName, "DefinitionName");
 
          Assert.IsNotNull(target.Variables, "Variables");

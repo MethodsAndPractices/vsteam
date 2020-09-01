@@ -13,7 +13,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamPool.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamPool.json");
 
          // Act
          var target = new AgentPool(obj[0], ps);
@@ -31,7 +31,7 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamPool.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamPool.json");
 
          // Act
          var target = new AgentPool(obj[1], ps);
@@ -48,8 +48,8 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
-         var pools = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamPool.json");
-         var agents = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamAgent-PoolId1.json");
+         var pools = BaseTests.LoadJson("Get-VSTeamPool.json");
+         var agents = BaseTests.LoadJson("Get-VSTeamAgent-PoolId1.json");
 
          ps.Invoke().Returns(agents);
 

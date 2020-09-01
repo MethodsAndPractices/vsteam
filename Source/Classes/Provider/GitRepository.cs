@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using vsteam_lib.Provider;
@@ -17,11 +16,12 @@ namespace vsteam_lib
       public Project Project { get; }
 
       public GitRepository(PSObject obj, string projectName, IPowerShell powerShell) :
-         base(obj, obj.GetValue("Name"), "GitRef", powerShell, projectName)
+       base(obj, obj.GetValue("Name"), "GitRef", powerShell, projectName)
       {
          if (obj.HasValue("project"))
          {
             this.Project = new Project(obj.GetValue<PSObject>("project"), powerShell);
+            this.ProjectName = this.Project?.Name;
          }
       }
 

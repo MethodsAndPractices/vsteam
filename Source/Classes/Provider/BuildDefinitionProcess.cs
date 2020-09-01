@@ -22,13 +22,11 @@ namespace vsteam_lib
          {
             this.TypeName = "BuildDefinitionPhasedProcess";
 
-            var phases = new List<BuildDefinitionProcessPhase>();
+            this.Phases = new List<BuildDefinitionProcessPhase>();
             foreach (var item in obj.GetValue<object[]>("phases"))
             {
-               phases.Add(new BuildDefinitionProcessPhase((PSObject)item, projectName, powerShell));
+               this.Phases.Add(new BuildDefinitionProcessPhase((PSObject)item, projectName, powerShell));
             }
-
-            this.Phases = phases;
          }
          else
          {

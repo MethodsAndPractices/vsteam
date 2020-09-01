@@ -7,7 +7,6 @@ namespace vsteam_lib.Provider
       public BuildDefinitions(IPowerShell powerShell, string projectName) :
          base(null, "Build Definitions", "BuildDefinition", powerShell, projectName)
       {
-
       }
    }
 }

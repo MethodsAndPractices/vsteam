@@ -11,7 +11,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor_Without_MetaType()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamUser.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamUser.json");
 
          // Act
          var target = new User2(obj[0]);
@@ -43,7 +43,7 @@ namespace vsteam_lib.Test.Provider
       public void Constructor_With_MetaType()
       {
          // Arrange
-         var obj = BaseTests.LoadJson("../../../../SampleFiles/Get-VSTeamUser.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamUser.json");
 
          // Act
          var target = new User2(obj[3]);

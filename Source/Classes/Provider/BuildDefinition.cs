@@ -45,13 +45,11 @@ namespace vsteam_lib
          if (obj.HasValue("build"))
          {
             var i = 1;
-            var steps = new List<BuildDefinitionProcessPhaseStep>();
+            this.Steps = new List<BuildDefinitionProcessPhaseStep>();
             foreach (var item in obj.GetValue<object[]>("build"))
             {
-               steps.Add(new BuildDefinitionProcessPhaseStep((PSObject)item, i++, projectName));
+               this.Steps.Add(new BuildDefinitionProcessPhaseStep((PSObject)item, i++, projectName));
             }
-
-            this.Steps = steps;
          }
 
          if (obj.HasValue("process"))

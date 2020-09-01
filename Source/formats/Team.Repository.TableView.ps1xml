@@ -4,8 +4,7 @@
 		<View>
 			<Name>Team.Repository.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Repository</TypeName>
-				<TypeName>VSTeamGitRepository</TypeName>
+				<TypeName>vsteam_lib.GitRepository</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>
