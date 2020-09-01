@@ -21,6 +21,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual(259, target.Id, "Id");
          Assert.AreEqual("active", target.Status, "Status");
          Assert.IsNotNull(target.Environments, "Environments");
+         Assert.AreEqual(0, target.Environments.Count, "Environments.Count");
          Assert.AreEqual("PTracker-CD", target.DefinitionName, "DefinitionName");
 
          Assert.IsNotNull(target.Variables, "Variables");
