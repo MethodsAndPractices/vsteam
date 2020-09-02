@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class GitRefTests
    {
       [TestMethod]
-      public void Constructor()
+      public void GitRef_Constructor()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamGitRef.json");

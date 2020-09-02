@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class AccessControlListTests
    {
       [TestMethod]
-      public void Constructor()
+      public void AccessControlList_Constructor()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamAccessControlList.json");

@@ -33,7 +33,5 @@ namespace vsteam_lib
       }
 
       protected override object[] GetChildren() => this.Attempts.AddTypeName(this.TypeName);
-
-      protected override IEnumerable<PSObject> GetPSObjects() => null;
    }
 }

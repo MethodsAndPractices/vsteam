@@ -26,7 +26,7 @@ namespace vsteam_lib.Test
       [DataRow("PolicyV1", APIs.Policy)]
       [DataRow("ProcessesV1", APIs.Processes)]
       [DataRow("TFS2017", APIs.Version)]
-      public void ChangeServiceVersions(string expected, APIs version)
+      public void Versions_ChangeServiceVersions(string expected, APIs version)
       {
          // Arrange
          Versions.SetApiVersion(version, expected);

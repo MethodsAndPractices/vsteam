@@ -16,7 +16,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _workItemTypes = new Collection<string>() { "Bug", "Task", "Issue", "Feature", "User Story" };
 
       [TestMethod]
-      public void HasCacheExpired()
+      public void WorkItemTypeCache_HasCacheExpired()
       {
          // Arrange
          var expected = true;
@@ -35,7 +35,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_With_Null_List()
+      public void WorkItemTypeCache_Update_With_Null_List()
       {
          // Arrange
          var expected = 5;
@@ -51,7 +51,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void GetCurrent()
+      public void WorkItemTypeCache_GetCurrent()
       {
          // Arrange
          var expected = 5;
@@ -67,7 +67,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_Returns_Null()
+      public void WorkItemTypeCache_Update_Returns_Null()
       {
          // Arrange
          var expected = 0;
@@ -83,7 +83,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_With_Empty_List()
+      public void WorkItemTypeCache_Update_With_Empty_List()
       {
          // Arrange
          var expected = 0;

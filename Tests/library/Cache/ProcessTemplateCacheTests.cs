@@ -14,7 +14,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _items = new Collection<string>() { "Agile", "Basic", "CMMI", "Scrum", "Scrum with spaces" };
 
       [TestMethod]
-      public void HasCacheExpired()
+      public void ProcessTemplateCache_HasCacheExpired()
       {
          // Arrange
          var expected = true;
@@ -33,7 +33,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_With_Null_List()
+      public void ProcessTemplateCache_Update_With_Null_List()
       {
          // Arrange
          var expected = 5;
@@ -49,13 +49,14 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void GetCurrent()
+      public void ProcessTemplateCache_GetCurrent()
       {
          // Arrange
          var expected = 5;
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke<string>().Returns(this._items);
          ProcessTemplateCache.Cache.Shell = ps;
+         ProcessTemplateCache.Invalidate();
 
          // Act
          var actual = ProcessTemplateCache.GetCurrent();
@@ -65,7 +66,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_Returns_Null()
+      public void ProcessTemplateCache_Update_Returns_Null()
       {
          // Arrange
          var expected = 0;
@@ -80,7 +81,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_With_Empty_List()
+      public void ProcessTemplateCache_Update_With_Empty_List()
       {
          // Arrange
          var expected = 0;

@@ -53,7 +53,7 @@ namespace vsteam_lib
       {
          return new object[]
          {
-            new BuildDefinitions(this.PowerShell, this.Name),
+            new Directory(null, "Build Definitions", "BuildDefinition", this.PowerShell, this.Name),
             new Directory(null, "Builds", "Build", this.PowerShell, this.Name),
             new Directory(null, "Queues", "Queue", this.PowerShell, this.Name),
             new Directory(null, "Release Definitions", "ReleaseDefinition", this.PowerShell, this.Name),

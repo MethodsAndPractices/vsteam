@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class ExtensionTests
    {
       [TestMethod]
-      public void Constructor()
+      public void Extension_Constructor()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamExtension.json");

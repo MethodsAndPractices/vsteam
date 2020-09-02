@@ -18,7 +18,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _templates = new Collection<string>() { "Agile", "Basic", "CMMI", "Scrum", "Scrum with spaces" };
 
       [TestMethod]
-      public void Invalid_Value_Throws()
+      public void ProcessTemplateValidateAttribute_Invalid_Value_Throws()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -32,7 +32,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Valid_Value_Does_Not_Throw()
+      public void ProcessTemplateValidateAttribute_Valid_Value_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -47,7 +47,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Null_Value_Does_Not_Throw()
+      public void ProcessTemplateValidateAttribute_Null_Value_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -62,7 +62,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Empty_Cache_Does_Not_Throw()
+      public void ProcessTemplateValidateAttribute_Empty_Cache_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

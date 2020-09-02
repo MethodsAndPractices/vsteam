@@ -7,7 +7,7 @@ namespace vsteam_lib.Test.Provider
    public class BuildDefinitionProcessPhaseTests
    {
       [TestMethod]
-      public void GetChildren()
+      public void BuildDefinitionProcessPhase_GetChildren()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

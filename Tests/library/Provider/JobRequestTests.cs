@@ -9,7 +9,7 @@ namespace vsteam_lib.Test.Provider
    public class JobRequestTests
    {
       [TestMethod]
-      public void Constructor_Completed()
+      public void JobRequest_Constructor_Completed()
       {
          // Arrange
          var jobRequests = BaseTests.LoadJson("Get-VSTeamJobRequest-PoolId1-AgentID111.json");
@@ -34,7 +34,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_Running()
+      public void JobRequest_Constructor_Running()
       {
          // Arrange
          var jobRequests = BaseTests.LoadJson("Get-VSTeamJobRequest-PoolId1-AgentID111.json");
@@ -47,7 +47,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_Queued()
+      public void JobRequest_Constructor_Queued()
       {
          // Arrange
          var jobRequests = BaseTests.LoadJson("Get-VSTeamJobRequest-PoolId1-AgentID111.json");

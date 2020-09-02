@@ -15,7 +15,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _areas = new Collection<string>() { "approval", "release" };
 
       [TestMethod]
-      public void Get_Areas_With_SubDomain_And_Area()
+      public void InvokeCompleter_Get_Areas_With_SubDomain_And_Area()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -32,7 +32,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Get_Resources_With_SubDomain_And_Area()
+      public void InvokeCompleter_Get_Resources_With_SubDomain_And_Area()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

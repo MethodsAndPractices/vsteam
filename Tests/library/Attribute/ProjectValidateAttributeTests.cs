@@ -23,7 +23,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _values = new Collection<string>() { "Project1", "Project2", "Project3", "Project4", "Project 5" };
 
       [TestMethod]
-      public void Invalid_Value_Throws()
+      public void ProjectValidateAttribute_Invalid_Value_Throws()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -37,7 +37,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Valid_Value_Does_Not_Throw()
+      public void ProjectValidateAttribute_Valid_Value_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -52,7 +52,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Null_Value_Does_Not_Throw()
+      public void ProjectValidateAttribute_Null_Value_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -67,7 +67,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Empty_Cache_Does_Not_Throw()
+      public void ProjectValidateAttribute_Empty_Cache_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

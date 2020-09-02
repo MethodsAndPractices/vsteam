@@ -9,7 +9,7 @@ namespace vsteam_lib.Test.Provider
    public class ProjectTests
    {
       [TestMethod]
-      public void Constructor()
+      public void Project_Constructor()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -32,7 +32,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Get_ChildItem()
+      public void Project_GetChildItem()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -48,7 +48,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("Builds", ((Directory)actual[1]).Name);
          Assert.AreEqual("Queues", ((Directory)actual[2]).Name);
          Assert.AreEqual("Release Definitions", ((Directory)actual[3]).Name);
-         Assert.AreEqual("Releases", ((Directory)actual[4]).Name);
+         Assert.AreEqual("Releases", ((Releases)actual[4]).Name);
          Assert.AreEqual("Repositories", ((Directory)actual[5]).Name);
          Assert.AreEqual("Teams", ((Directory)actual[6]).Name);
       }

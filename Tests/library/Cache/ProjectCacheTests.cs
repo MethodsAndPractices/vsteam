@@ -14,7 +14,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _templates = new Collection<string>() { "Project1", "Project 2" };
 
       [TestMethod]
-      public void HasCacheExpired()
+      public void ProjectCache_HasCacheExpired()
       {
          // Arrange
          var expected = true;
@@ -33,7 +33,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_With_Null_List()
+      public void ProjectCache_Update_With_Null_List()
       {
          // Arrange
          var expected = 2;
@@ -49,7 +49,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void GetCurrent()
+      public void ProjectCache_GetCurrent()
       {
          // Arrange
          var expected = 2;
@@ -66,7 +66,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_Returns_Null()
+      public void ProjectCache_Update_Returns_Null()
       {
          // Arrange
          var expected = 0;
@@ -81,7 +81,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_With_Empty_List()
+      public void ProjectCache_Update_With_Empty_List()
       {
          // Arrange
          var expected = 0;

@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class ReleaseDefinitionTests
    {
       [TestMethod]
-      public void Constructor()
+      public void ReleaseDefinition_Constructor()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamReleaseDefinition-ReleaseId40.json", false);
@@ -47,7 +47,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_NoEnvs()
+      public void ReleaseDefinition_Constructor_NoEnvs()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamReleaseDefinition.json");

@@ -20,7 +20,7 @@ namespace vsteam_lib.Test
                                                                                     PSObject.AsPSObject(new { Name = "My Queries", Id = "20000000-2000-2000-2000-200000000000" })};
 
       [TestMethod]
-      public void HasCacheExpired()
+      public void QueryCache_HasCacheExpired()
       {
          // Arrange
          var expected = true;
@@ -39,7 +39,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_With_Null_List()
+      public void QueryCache_Update_With_Null_List()
       {
          // Arrange
          var expected = 2;
@@ -56,7 +56,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void GetCurrent()
+      public void QueryCache_GetCurrent()
       {
          // Arrange
          var expected = 2;
@@ -74,7 +74,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_Returns_Null()
+      public void QueryCache_Update_Returns_Null()
       {
          // Arrange
          var expected = 0;
@@ -91,7 +91,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Update_With_Empty_List()
+      public void QueryCache_Update_With_Empty_List()
       {
          // Arrange
          var expected = 0;
@@ -106,7 +106,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Get_Query_ID()
+      public void QueryCache_Get_Query_ID()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -127,7 +127,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Get_Query_ID_Returns_Name_When_Not_Found()
+      public void QueryCache_Get_Query_ID_Returns_Name_When_Not_Found()
       {
          // Arrange
          var expected = "My Queries";

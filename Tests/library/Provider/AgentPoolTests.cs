@@ -9,7 +9,7 @@ namespace vsteam_lib.Test.Provider
    public class AgentPoolTests
    {
       [TestMethod]
-      public void Constructor_NotHosted()
+      public void AgentPool_Constructor_NotHosted()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -27,7 +27,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_Hosted()
+      public void AgentPool_Constructor_Hosted()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -44,7 +44,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Get_ChildItem()
+      public void AgentPool_GetChildItem()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

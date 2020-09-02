@@ -22,7 +22,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void StringToDateTime()
+      public void MoveProperties_StringToDateTime()
       {
          // Arrange
          var target = new HasDateTime();

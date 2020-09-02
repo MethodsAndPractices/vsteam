@@ -33,8 +33,10 @@ namespace vsteam_lib
          }
       }
 
+      /// <summary>
+      /// Return the list with the correct type applied for formatting. 
+      /// </summary>
+      /// <returns></returns>
       protected override object[] GetChildren() => this.Tasks.AddTypeName(this.TypeName);
-
-      protected override IEnumerable<PSObject> GetPSObjects() => null;
    }
 }

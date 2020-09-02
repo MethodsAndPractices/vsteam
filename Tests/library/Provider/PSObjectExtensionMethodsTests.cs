@@ -11,7 +11,7 @@ namespace vsteam_lib.Test.Provider
    public class PSObjectExtensionMethodsTests
    {
       [TestMethod]
-      public void String_To_Nullable_DateTime()
+      public void GetValue_String_To_Nullable_DateTime()
       {
          // Arrange
          var target = PSObject.AsPSObject(new { finishTime = "2019-06-04T13:32:30.17Z" });
@@ -25,7 +25,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Int32_To_Long()
+      public void GetValue_Int32_To_Long()
       {
          // Arrange
          var target = PSObject.AsPSObject(new { revision = 8 });
@@ -38,7 +38,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Missing_Nested_Property_As_String()
+      public void GetValue_Missing_Nested_Property_As_String()
       {
          // Arrange
          var target = PSObject.AsPSObject(new { revision = PSObject.AsPSObject(new { value = 0 }) });
@@ -51,7 +51,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Missing_Property_As_String()
+      public void GetValue_Missing_Property_As_String()
       {
          // Arrange
          var target = PSObject.AsPSObject(new { revision = PSObject.AsPSObject(new { value = 0 }) });
@@ -64,7 +64,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Null_Property_As_String()
+      public void GetValue_Null_Property_As_String()
       {
          // Arrange
          var target = PSObject.AsPSObject(new { test = (string)null });
@@ -77,7 +77,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Nested_Property_As_Long()
+      public void GetValue_Nested_Property_As_Long()
       {
          // Arrange
          var target = PSObject.AsPSObject(new { revision = PSObject.AsPSObject(new { value = 1 }) });
@@ -90,7 +90,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Long_Property_As_String()
+      public void GetValue_Long_Property_As_String()
       {
          // Arrange
          var target = PSObject.AsPSObject(new { value = 1 });

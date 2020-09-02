@@ -12,7 +12,7 @@ namespace vsteam_lib.Test.Provider
    public class AccountTests
    {
       [TestMethod]
-      public void Get_ChildItem_Should_Not_Return_Permissions()
+      public void Account_Get_ChildItem_Should_Not_Return_Permissions()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -28,7 +28,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Get_ChildItem_Should_Return_Permissions()
+      public void Account_Get_ChildItem_Should_Return_Permissions()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

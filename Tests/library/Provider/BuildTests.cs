@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class BuildTests
    {
       [TestMethod]
-      public void Constructor()
+      public void Build_Constructor()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamBuild.json");

@@ -10,10 +10,10 @@ namespace vsteam_lib
       public long Size { get; set; }
       public string Id { get; set; }
       public string Url { get; set; }
+      public Project Project { get; }
       public string SSHUrl { get; set; }
       public string RemoteUrl { get; set; }
       public string DefaultBranch { get; set; }
-      public Project Project { get; }
 
       public GitRepository(PSObject obj, string projectName, IPowerShell powerShell) :
        base(obj, obj.GetValue("Name"), "GitRef", powerShell, projectName)
@@ -21,7 +21,7 @@ namespace vsteam_lib
          if (obj.HasValue("project"))
          {
             this.Project = new Project(obj.GetValue<PSObject>("project"), powerShell);
-            this.ProjectName = this.Project?.Name;
+            this.ProjectName = this.Project.Name;
          }
       }
 

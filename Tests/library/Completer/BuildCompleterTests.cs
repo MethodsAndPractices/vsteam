@@ -16,7 +16,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _nullDefaultProject = new Collection<string>() { null };
 
       [TestMethod]
-      public void NoDefaultProject()
+      public void BuildCompleter_NoDefaultProject()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -33,7 +33,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void NoBuilds()
+      public void BuildCompleter_NoBuilds()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -55,7 +55,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void HasBuilds()
+      public void BuildCompleter_HasBuilds()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -76,7 +76,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Build602()
+      public void BuildCompleter_Build602()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -97,7 +97,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Build800()
+      public void BuildCompleter_Build800()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

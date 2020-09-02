@@ -7,7 +7,7 @@ namespace vsteam_lib.Test.Provider
    public class GitRepositoryTests
    {
       [TestMethod]
-      public void Constructor()
+      public void GitRepository_Constructor()
       {
          // Arrange
          System.Management.Automation.Abstractions.IPowerShell ps = BaseTests.PrepPowerShell();
@@ -29,7 +29,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Get_ChildItem()
+      public void GitRepository_GetChildItem()
       {
          // Arrange
          System.Management.Automation.Abstractions.IPowerShell ps = BaseTests.PrepPowerShell();

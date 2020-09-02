@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class BuildDefinitionTests
    {
       [TestMethod]
-      public void Constructor_2017_Git()
+      public void BuildDefinition_Constructor_2017_Git()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -61,7 +61,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void GetChildItem_2017_Git()
+      public void BuildDefinition_GetChildItem_2017_Git()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -77,7 +77,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_2017_Tfvc()
+      public void BuildDefinition_Constructor_2017_Tfvc()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -119,7 +119,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_2018()
+      public void BuildDefinition_Constructor_2018()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -171,7 +171,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void GetChildItem_2018()
+      public void BuildDefinition_GetChildItem_2018()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -186,7 +186,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_AzD_Classic()
+      public void BuildDefinition_Constructor_AzD_Classic()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -231,7 +231,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void GetChildItem_AzD_Classic()
+      public void BuildDefinition_GetChildItem_AzD_Classic()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -247,7 +247,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_AzD_YAML()
+      public void BuildDefinition_Constructor_AzD_YAML()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -292,7 +292,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void GetChildItem_AzD_YAML()
+      public void BuildDefinition_GetChildItem_AzD_YAML()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

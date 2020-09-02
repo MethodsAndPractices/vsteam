@@ -10,7 +10,7 @@ namespace vsteam_lib.Test.Provider
    public class DirectoryTest
    {
       [TestMethod]
-      public void Get_VSTeamPool()
+      public void Directory_Get_VSTeamPool()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -31,7 +31,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Has_ProjectName()
+      public void Directory_Has_ProjectName()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -52,7 +52,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Get_VSTeam()
+      public void Directory_Get_VSTeam()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

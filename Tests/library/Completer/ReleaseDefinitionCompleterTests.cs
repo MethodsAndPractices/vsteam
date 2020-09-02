@@ -14,7 +14,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _releases = new Collection<string>() { "Item1", "Item 2" };
 
       [TestMethod]
-      public void GetValues()
+      public void ReleaseDefinitionCompleter_GetValues()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

@@ -9,7 +9,7 @@ namespace vsteam_lib.Test.Provider
    public class FeedTests
    {
       [TestMethod]
-      public void Constructor()
+      public void Feed_Constructor()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamFeed.json");

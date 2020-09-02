@@ -8,7 +8,7 @@ namespace vsteam_lib.Test
    public class QueryTransformToIDAttributeTests
    {
       [TestMethod]
-      public void Null()
+      public void QueryTransformToIDAttribute_Null()
       {
          // Arrange
          string expected = null;
@@ -22,7 +22,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void ID_Not_Found()
+      public void QueryTransformToIDAttribute_ID_Not_Found()
       {
          // Arrange
          string expected = "UnitTest";
@@ -36,7 +36,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void GUID_Passed_In()
+      public void QueryTransformToIDAttribute_GUID_Passed_In()
       {
          // Arrange
          string expected = "24a9d798-5ad3-4130-840d-1368f2103cdb";

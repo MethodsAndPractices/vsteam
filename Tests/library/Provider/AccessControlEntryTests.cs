@@ -9,7 +9,7 @@ namespace vsteam_lib.Test.Provider
    public class AccessControlEntryTests
    {
       [TestMethod]
-      public void Contructor()
+      public void AccessControlEntry_Contructor()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamAccessControlList.json");

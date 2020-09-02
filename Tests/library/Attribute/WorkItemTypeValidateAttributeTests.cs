@@ -19,7 +19,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _workItemTypes = new Collection<string>() { "Bug", "Task", "Issue", "Feature", "User Story" };
 
       [TestMethod]
-      public void Invalid_Value_Throws()
+      public void WorkItemTypeValidateAttribute_Invalid_Value_Throws()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -33,7 +33,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Valid_Value_Does_Not_Throw()
+      public void WorkItemTypeValidateAttribute_Valid_Value_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -48,7 +48,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Null_Value_Does_Not_Throw()
+      public void WorkItemTypeValidateAttribute_Null_Value_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -63,7 +63,7 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
-      public void Empty_Cache_Does_Not_Throw()
+      public void WorkItemTypeValidateAttribute_Empty_Cache_Does_Not_Throw()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

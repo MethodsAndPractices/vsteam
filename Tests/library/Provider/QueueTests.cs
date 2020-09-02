@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class QueueTests
    {
       [TestMethod]
-      public void Constructor()
+      public void Queue_Constructor()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

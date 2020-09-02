@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class User2Tests
    {
       [TestMethod]
-      public void Constructor_Without_MetaType()
+      public void User2_Constructor_Without_MetaType()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamUser.json");
@@ -40,7 +40,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Constructor_With_MetaType()
+      public void User2_Constructor_With_MetaType()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamUser.json");

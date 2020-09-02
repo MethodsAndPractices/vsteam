@@ -9,7 +9,7 @@ namespace vsteam_lib.Test.Provider
    public class PermissionsTests
    {
       [TestMethod]
-      public void Get_ChildItem()
+      public void Permissions_GetChildItem()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

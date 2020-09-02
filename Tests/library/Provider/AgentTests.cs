@@ -9,7 +9,7 @@ namespace vsteam_lib.Test.Provider
    public class AgentTests
    {
       [TestMethod]
-      public void Constructor()
+      public void Agent_Constructor()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();
@@ -30,7 +30,7 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void Get_ChildItem()
+      public void Agent_GetChildItem()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

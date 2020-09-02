@@ -8,7 +8,7 @@ namespace vsteam_lib.Test.Provider
    public class GroupTests
    {
       [TestMethod]
-      public void Constructor()
+      public void Group_Constructor()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamGroup.json");

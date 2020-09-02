@@ -14,7 +14,7 @@ namespace vsteam_lib.Test
       private readonly Collection<string> _empty = new Collection<string>();
 
       [TestMethod]
-      public void GetValues()
+      public void BuildDefinitionCompleter_GetValues()
       {
          // Arrange
          var ps = BaseTests.PrepPowerShell();

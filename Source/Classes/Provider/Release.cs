@@ -47,7 +47,7 @@ namespace vsteam_lib
          {
             foreach (var item in obj.GetValue<object[]>("environments"))
             {
-               this.Environments.Add(PSObject.AsPSObject(new Environment((PSObject)item, this.Id, this.ProjectName)));
+               this.Environments.Add(PSObject.AsPSObject(new Environment((PSObject)item, this.Id, this.ProjectName, this.PowerShell)));
             }
          }
       }
