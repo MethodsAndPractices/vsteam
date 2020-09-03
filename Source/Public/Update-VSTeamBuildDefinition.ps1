@@ -23,10 +23,10 @@ function Update-VSTeamBuildDefinition {
          # Call the REST API
 
          if ($InFile) {
-            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -InFile $InFile -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -InFile $InFile | Out-Null
          }
          else {
-            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -Body $BuildDefinition -ContentType 'application/json' | Out-Null
+            _callAPI -Method Put -ProjectName $ProjectName -Area build -Resource definitions -Id $Id -Version $(_getApiVersion Build) -Body $BuildDefinition | Out-Null
          }
       }
    }

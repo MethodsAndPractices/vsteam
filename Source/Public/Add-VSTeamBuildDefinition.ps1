@@ -11,6 +11,6 @@ function Add-VSTeamBuildDefinition {
    )
 
    process {
-      return _callAPI -Method Post -ProjectName $ProjectName -Area build -Resource definitions -Version $(_getApiVersion Build) -infile $InFile -ContentType 'application/json'
+      return _callAPI -Method Post -ProjectName $ProjectName -Area build -Resource definitions -Version $(_getApiVersion Build) -infile $InFile
    }
 }

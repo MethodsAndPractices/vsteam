@@ -20,9 +20,9 @@
 
 <!-- #include "./params/BuildIds.md" -->
 
-<!-- #include "./params/buildTags.md" -->
+<!-- #include "./params/BuildTags.md" -->
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/Force.md" -->
 
 <!-- #include "./params/confirm.md" -->
 

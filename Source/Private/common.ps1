@@ -31,9 +31,9 @@ function _callAPI {
       # call.
       [switch]$UseProjectId,
       # This flag makes sure that even if a default project is set that it is
-      # not used to build the URI for the API call. Not all API require or 
+      # not used to build the URI for the API call. Not all API require or
       # allow the project to be used. Setting a default project would cause
-      # that project name to be used in building the URI that would lead to 
+      # that project name to be used in building the URI that would lead to
       # 404 because the URI would not be correct.
       [Alias('IgnoreDefaultProject')]
       [switch]$NoProject
@@ -64,6 +64,11 @@ function _callAPI {
       $params.Add('UserAgent', (_getUserAgent))
       $params.Add('TimeoutSec', (_getDefaultTimeout))
 
+      #always use utf8 and json as default content type instead of xml
+      if ($false -eq $PSBoundParameters.ContainsKey("ContentType")) {
+         $params.Add('ContentType', 'application/json; charset=utf-8')
+      }
+
       if (_useWindowsAuthenticationOnPremise) {
          $params.Add('UseDefaultCredentials', $true)
          $params.Add('Headers', @{ })
@@ -80,7 +85,7 @@ function _callAPI {
             $params['Headers'].Add($key, $AdditionalHeaders[$key])
          }
       }
-   
+
       # We have to remove any extra parameters not used by Invoke-RestMethod
       $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
       foreach ($e in $extra) { $params.Remove($e) | Out-Null }
@@ -136,7 +141,7 @@ function _testAdministrator {
 }
 
 # When you mock this in tests be sure to add a Parameter Filter that matches
-# the Service that should be used. 
+# the Service that should be used.
 # Mock _getApiVersion { return '1.0-gitUnitTests' } -ParameterFilter { $Service -eq 'Git' }
 # Also test in the Assert-MockCalled that the correct version was used in the URL that was
 # built for the API call.
@@ -152,9 +157,10 @@ function _getApiVersion {
    )
 
    if ($Target.IsPresent) {
-         return [VSTeamVersions]::Version
+      return [VSTeamVersions]::Version
    }
    else {
+
       switch ($Service) {
          'Build' {
             return [VSTeamVersions]::Build
@@ -246,7 +252,7 @@ function _buildRequestURI {
 
    process {
       _hasAccount
-      
+
       $sb = New-Object System.Text.StringBuilder
 
       $sb.Append($(_addSubDomain -subDomain $subDomain -instance $(_getInstance))) | Out-Null
@@ -429,22 +435,33 @@ function _useBearerToken {
    return (!$env:TEAM_PAT) -and ($env:TEAM_TOKEN)
 }
 
-
 function _getWorkItemTypes {
    param(
-      [string]$ProjectName = (_getDefaultProject)
+      [Parameter(Mandatory = $true)]
+      [string] $ProjectName
    )
-   $types = @()   
+
+   if (-not $(_getInstance)) {
+      Write-Output @()
+      return
+   }
+
    # Call the REST API
    try {
-      $resp   = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypecategories' -version $(_getApiVersion Core)
-      $hidden = $resp.value.where({$_.referencename -eq "Microsoft.HiddenCategory"}).workitemtypes.name
-      $types += $resp.value.where(          {$_.referencename -ne "Microsoft.HiddenCategory"}).workitemtypes.name.where({$_ -notin $hidden})
+      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
+
+      # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
+      # To replace all the "": with "_end":
+      $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json
+
+      if ($resp.count -gt 0) {
+         Write-Output ($resp.value).name
+      }
    }
    catch {
       Write-Verbose $_
+      Write-Output @()
    }
-   return $types
 }
 
 # When writing unit tests mock this and return false.
@@ -581,7 +598,7 @@ function _getProcesses {
       $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
 
       if ($resp.count -gt 0) {
-         Write-Output $resp.value
+         Write-Output ($resp.value).name
       }
    }
    catch {
