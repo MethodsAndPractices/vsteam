@@ -4,9 +4,6 @@
    "files": [
       "VSTeamDirectory.ps1",
       "VSTeamLeaf.ps1",
-      "VSTeamTask.ps1",
-      "VSTeamAttempt.ps1",
-      "VSTeamEnvironment.ps1",
       "VSTeamProcess.ps1",
       "VSTeamGitRepositoryPermissions.ps1",
       "VSTeamIdentityPermissions.ps1",

@@ -6,9 +6,6 @@ Describe 'VSTeamProjectPermission' {
 
       . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
-      . "$baseFolder/Source/Classes/VSTeamTask.ps1"
-      . "$baseFolder/Source/Classes/VSTeamAttempt.ps1"
-      . "$baseFolder/Source/Classes/VSTeamEnvironment.ps1"
       . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Classes/VSTeamProjectPermissions.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamAccessControlEntry.ps1"
