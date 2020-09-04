@@ -18,6 +18,7 @@ steps:
   displayName: 'Run C# Unit Tests'
   inputs:
     command: 'test'
+    arguments: '--collect:"Code Coverage"'
 
 - task: PowerShell@2
   displayName: 'Install Pester'
