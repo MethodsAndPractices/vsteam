@@ -43,8 +43,6 @@ function Add-VSTeamIteration {
          -StructureGroup iterations `
          -Path $Path
 
-      $resp = [VSTeamClassificationNode]::new($resp, $ProjectName)
-
       Write-Output $resp
    }
 }

@@ -7,7 +7,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
       . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
       . "$baseFolder/Source/Classes/VSTeamWorkItemAreaPermissions.ps1"
-      . "$baseFolder/Source/Classes/VSTeamClassificationNode.ps1"
       . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode.ps1"
@@ -74,7 +73,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
  }
 "@ | ConvertFrom-Json | Select-Object -ExpandProperty value
 
-      $classificationNodeByIdObject = [VSTeamClassificationNode]::new($classificationNodeById, "test")
+      $classificationNodeByIdObject = [vsteam_lib.ClassificationNode]::new($classificationNodeById, "test")
 
       $parentClassificationNode =
       @"
@@ -102,7 +101,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
  }
 "@ | ConvertFrom-Json | Select-Object -ExpandProperty value
 
-      $parentClassificationNodeObject = [VSTeamClassificationNode]::new($parentClassificationNode, "test")
+      $parentClassificationNodeObject = [vsteam_lib.ClassificationNode]::new($parentClassificationNode, "test")
 
       $areaRootNode =
       @"
@@ -122,7 +121,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
  }
 "@ | ConvertFrom-Json
 
-      $areaRootNodeObject = [VSTeamClassificationNode]::new($areaRootNode, "test")
+      $areaRootNodeObject = [vsteam_lib.ClassificationNode]::new($areaRootNode, "test")
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.

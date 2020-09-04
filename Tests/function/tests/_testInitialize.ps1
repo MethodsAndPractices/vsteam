@@ -32,4 +32,4 @@ if ($doNotPrimeCache.IsPresent) {
 # Prime the project cache with an empty list. This will make sure
 # any project name used will pass validation and Get-VSTeamProject 
 # will not need to be called.
-[vsteam_lib.ProjectCache]::Update([string[]]@())
+[vsteam_lib.ProjectCache]::Update([string[]]@(), 120)

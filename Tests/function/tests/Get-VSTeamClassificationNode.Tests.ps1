@@ -4,9 +4,6 @@ Describe 'VSTeamClassificationNode' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"      
-      . "$baseFolder/Source/Classes/VSTeamClassificationNode.ps1"
-
       ## Arrange
       $withoutChildNode = Get-Content "$sampleFiles\withoutChildNode.json" -Raw | ConvertFrom-Json
       $classificationNodeResult = Get-Content "$sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json

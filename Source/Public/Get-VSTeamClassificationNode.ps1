@@ -64,7 +64,7 @@ function Get-VSTeamClassificationNode {
             $objs = @()
    
             foreach ($item in $resp.value) {
-               $objs += [VSTeamClassificationNode]::new($item, $ProjectName)
+               $objs += [vsteam_lib.ClassificationNode]::new($item, $ProjectName)
             }
    
             Write-Output $objs
@@ -80,7 +80,7 @@ function Get-VSTeamClassificationNode {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $classificationNode = [VSTeamClassificationNode]::new($resp, $ProjectName)
+         $classificationNode = [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
 
          Write-Output $classificationNode
       }

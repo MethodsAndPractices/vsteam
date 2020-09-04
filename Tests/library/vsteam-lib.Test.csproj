@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SampleFiles\Get-VSTeamClassificationNode-depth3-ids82.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="..\SampleFiles\010_builddef_1.json" Link="SampleFiles\010_builddef_1.json" />
     <Content Include="..\SampleFiles\010_builddef_2.json" Link="SampleFiles\010_builddef_2.json" />
     <Content Include="..\SampleFiles\010_releasedef_1.json" Link="SampleFiles\010_releasedef_1.json" />
@@ -41,6 +45,9 @@
     <Content Include="..\SampleFiles\Get-VSTeamAccessControlList.json" Link="SampleFiles\Get-VSTeamAccessControlList.json" />
     <Content Include="..\SampleFiles\Get-VSTeamAgent-PoolId1.json" Link="SampleFiles\Get-VSTeamAgent-PoolId1.json" />
     <Content Include="..\SampleFiles\Get-VSTeamBuild.json" Link="SampleFiles\Get-VSTeamBuild.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamClassificationNode-depth3-ids82.json" Link="SampleFiles\Get-VSTeamClassificationNode-depth3-ids82.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamClassificationNode-depth4-ids84.json" Link="SampleFiles\Get-VSTeamClassificationNode-depth4-ids84.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamClassificationNode.json" Link="SampleFiles\Get-VSTeamClassificationNode.json" />
     <Content Include="..\SampleFiles\Get-VSTeamExtension.json" Link="SampleFiles\Get-VSTeamExtension.json" />
     <Content Include="..\SampleFiles\Get-VSTeamFeed.json" Link="SampleFiles\Get-VSTeamFeed.json" />
     <Content Include="..\SampleFiles\Get-VSTeamGitRef.json" Link="SampleFiles\Get-VSTeamGitRef.json" />
@@ -182,10 +189,6 @@
      <None Update="SampleFiles\Get-VSTeamUser.json">
        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
      </None>
-   </ItemGroup>
-   
-   <ItemGroup>
-     <Folder Include="SampleFiles\" />
    </ItemGroup>
    
    <ItemGroup>

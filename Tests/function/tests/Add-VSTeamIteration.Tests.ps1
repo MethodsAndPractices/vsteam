@@ -2,22 +2,18 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamIteration' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"      
-      . "$baseFolder/Source/Classes/VSTeamClassificationNode.ps1"
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Public/Add-VSTeamClassificationNode"
 
+      ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+
+      $classificationNodeResult = Get-Content "$sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
+      Mock Invoke-RestMethod { return $classificationNodeResult }
    }
 
    Context 'Add-VSTeamIteration' {
-      BeforeAll {
-         $classificationNodeResult = Get-Content "$sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
-         Mock Invoke-RestMethod { return $classificationNodeResult }
-      }
-
       It 'iteration should return Nodes' {
          ## Act
          Add-VSTeamIteration -ProjectName "Public Demo" -Name "MyClassificationNodeName"

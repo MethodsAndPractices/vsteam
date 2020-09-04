@@ -4,8 +4,6 @@ Describe 'VSTeamIteration' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"      
-      . "$baseFolder/Source/Classes/VSTeamClassificationNode.ps1"
       . "$baseFolder/Source/Public/Remove-VSTeamClassificationNode.ps1"
 
       Mock _getInstance { return 'https://dev.azure.com/test' }

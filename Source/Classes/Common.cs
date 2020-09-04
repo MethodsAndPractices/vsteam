@@ -58,6 +58,10 @@ namespace vsteam_lib
                {
                   prop.SetValue(target, DateTime.Parse(value.ToString()));
                }
+               else if(prop.PropertyType.Name == "Guid")
+               {
+                  prop.SetValue(target, Guid.Parse(value.ToString()));
+               }
                else
                {
                   prop.SetValue(target, value);

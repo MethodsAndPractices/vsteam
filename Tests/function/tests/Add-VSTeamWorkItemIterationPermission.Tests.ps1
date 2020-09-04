@@ -7,7 +7,6 @@ Describe 'VSTeamWorkItemIterationPermission' {
       . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
       . "$baseFolder/Source/Classes/VSTeamWorkItemIterationPermissions.ps1"
-      . "$baseFolder/Source/Classes/VSTeamClassificationNode.ps1"
       . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode.ps1"
@@ -74,7 +73,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
  }
 "@ | ConvertFrom-Json | Select-Object -ExpandProperty value
 
-      $classificationNodeIterationIdObject = [VSTeamClassificationNode]::new($classificationNodeIterationId, "test")
+      $classificationNodeIterationIdObject = [vsteam_lib.ClassificationNode]::new($classificationNodeIterationId, "test")
 
       $iterationRootNode =
       @"
@@ -94,7 +93,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
  }
 "@ | ConvertFrom-Json
 
-      $iterationRootNodeObject = [VSTeamClassificationNode]::new($iterationRootNode, "test")
+      $iterationRootNodeObject = [vsteam_lib.ClassificationNode]::new($iterationRootNode, "test")
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.

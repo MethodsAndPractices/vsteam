@@ -71,7 +71,7 @@ function Add-VSTeamClassificationNode {
          -body $bodyAsJson `
          -Version $(_getApiVersion Core)
       
-      $resp = [VSTeamClassificationNode]::new($resp, $ProjectName)
+      $resp = [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
 
       Write-Output $resp
    }

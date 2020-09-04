@@ -9,6 +9,9 @@ namespace vsteam_lib
       [XmlAttribute("_links.self.href")]
       public string Self { get; set; }
 
+      [XmlAttribute("_links.parent.href")]
+      public string Parent { get; set; }
+
       [XmlAttribute("_links.memberships.href")]
       public string Memberships { get; set; }
 

@@ -10,6 +10,7 @@ namespace vsteam_lib
    {
       private double _timeStamp = -1;
       public List<string> Values { get; } = new List<string>();
+      public int MinutesToExpire { get; set; } = 1;
 
       /// <summary>
       /// Used for unit testing
@@ -42,8 +43,10 @@ namespace vsteam_lib
          set => this._powerShell = value;
       }
 
-      internal void Update(IEnumerable<string> list)
+      internal void Update(IEnumerable<string> list, int minutesToExpire = 1)
       {
+         this.MinutesToExpire = minutesToExpire;
+
          // If a list is passed in use it. If not call Get-VSTeamProcess
          if (null == list)
          {
@@ -71,7 +74,7 @@ namespace vsteam_lib
                                 .AddCommand("Select-Object")
                                 .AddParameter("ExpandProperty", this._property)
                                 .AddCommand("Sort-Object")
-                                .Invoke<string>();            
+                                .Invoke<string>();
             }
          }
 
@@ -95,15 +98,26 @@ namespace vsteam_lib
 
       internal IEnumerable<string> GetCurrent()
       {
-         if(HasCacheExpired)
+         if (this.HasCacheExpired)
          {
-            Update(null);
+            this.Update(null);
          }
 
-         return Values;
+         return this.Values;
       }
 
       internal void Invalidate() => this._timeStamp = -1;
-      internal bool HasCacheExpired => !this._timeStamp.Equals(Math.Round(DateTime.UtcNow.TimeOfDay.TotalMinutes));
+      internal bool HasCacheExpired
+      {
+         get
+         {
+            if (this._timeStamp == -1)
+            {
+               return true;
+            }
+
+            return Math.Round(DateTime.UtcNow.TimeOfDay.TotalMinutes) - this._timeStamp > this.MinutesToExpire;
+         }
+      }
    }
 }
