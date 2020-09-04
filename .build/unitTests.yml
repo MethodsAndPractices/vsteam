@@ -18,13 +18,15 @@ steps:
   displayName: 'Run C# Unit Tests'
   inputs:
     command: 'test'
+  ${{ if eq(parameters.os, 'Windows') }}:
     arguments: '--collect:"Code Coverage"'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish C# Code Coverage'
-  inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '**/*.coverage'    
+- ${{ if eq(parameters.os, 'Windows') }}:
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish C# Code Coverage'
+    inputs:
+      codeCoverageTool: 'JaCoCo'
+      summaryFileLocation: '**/*.coverage'    
 
 - task: PowerShell@2
   displayName: 'Install Pester'
