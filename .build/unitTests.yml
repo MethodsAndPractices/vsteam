@@ -20,6 +20,12 @@ steps:
     command: 'test'
     arguments: '--collect:"Code Coverage"'
 
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish C# Code Coverage'
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '**/*.coverage'    
+
 - task: PowerShell@2
   displayName: 'Install Pester'
   inputs:
