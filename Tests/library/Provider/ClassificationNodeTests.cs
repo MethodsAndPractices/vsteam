@@ -1,9 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace vsteam_lib.Test.Provider
 {
-   [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
+   [TestClass]
+   [ExcludeFromCodeCoverage]
    public class ClassificationNodeTests
    {
       [TestMethod]

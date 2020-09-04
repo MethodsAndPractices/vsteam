@@ -19,7 +19,7 @@ function Get-VSTeamDescriptor {
       # Storing the object before you return it cleaned up the pipeline.
       # When I just write the object from the constructor each property
       # seemed to be written
-      $descriptor = [VSTeamDescriptor]::new($resp)
+      $descriptor = [vsteam_lib.Descriptor]::new($resp)
 
       Write-Output $descriptor
    }

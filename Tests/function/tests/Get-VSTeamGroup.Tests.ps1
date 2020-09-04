@@ -6,7 +6,6 @@ Describe "VSTeamGroup" {
    
       . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
-      . "$baseFolder/Source/Classes/VSTeamDescriptor.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamDescriptor.ps1"
@@ -43,7 +42,7 @@ Describe "VSTeamGroup" {
          }
 
          It 'by project should return groups' {            
-            Mock Get-VSTeamDescriptor { return  [VSTeamDescriptor]::new($scopeResult) } -Verifiable
+            Mock Get-VSTeamDescriptor { return [vsteam_lib.Descriptor]::new($scopeResult) } -Verifiable
 
             Get-VSTeamGroup -ProjectName "Test Project Public"
 

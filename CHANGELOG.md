@@ -4,6 +4,9 @@
 
 All classes are moved to a new C# class library.
 
+**Breaking changes**:
+VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.
+
 ## 6.5.1
 
 Fixed bug [337](https://github.com/MethodsAndPractices/vsteam/issues/337)

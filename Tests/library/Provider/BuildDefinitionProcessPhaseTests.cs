@@ -1,9 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 
 namespace vsteam_lib.Test.Provider
 {
-   [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
+   [TestClass]
+   [ExcludeFromCodeCoverage]
    public class BuildDefinitionProcessPhaseTests
    {
       [TestMethod]

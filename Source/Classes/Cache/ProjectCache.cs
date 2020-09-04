@@ -11,8 +11,8 @@ namespace vsteam_lib
    {
       public static void Invalidate() => Cache.Invalidate();
       internal static bool HasCacheExpired => Cache.HasCacheExpired;
-      public static void Update(IEnumerable<string> list, int minutesToExpire = 1) => Cache.Update(list, minutesToExpire);
       internal static InternalCache Cache { get; } = new InternalCache("Get-VSTeamProject", "Name", false);
+      public static void Update(IEnumerable<string> list, int minutesToExpire = 1) => Cache.Update(list, minutesToExpire);
 
       /// <summary>
       /// There are times we need to force an update of the cache

@@ -27,6 +27,9 @@ namespace vsteam_lib
       [XmlAttribute("_links.web.href")]
       public string Web { get; set; }
 
+      [XmlAttribute("_links.subject.href")]
+      public string Subject { get; set; }
+
       public PSObject InternalObject { get; }
 
       public Link(PSObject obj)
