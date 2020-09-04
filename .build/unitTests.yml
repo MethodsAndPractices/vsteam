@@ -18,7 +18,7 @@ steps:
   displayName: 'Run C# Unit Tests'
   inputs:
     command: 'test'
-  ${{ if eq(parameters.os, 'Windows') }}:
+    ${{ if eq(parameters.os, 'Windows') }}:
     arguments: '--collect:"Code Coverage"'
 
 - ${{ if eq(parameters.os, 'Windows') }}:
