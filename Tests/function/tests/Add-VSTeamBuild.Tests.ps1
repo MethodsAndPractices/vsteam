@@ -12,8 +12,8 @@ Describe 'VSTeamBuild' {
    Context 'Add-VSTeamBuild' -Tag "Add" {
       ## Arrange
       BeforeAll {
-         $resultsVSTS = Get-Content "$sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
-         $singleResult = Get-Content "$sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json
+         $resultsVSTS = Open-SampleFile buildDefvsts.json
+         $singleResult = Open-SampleFile buildSingleResult.json
 
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
       }

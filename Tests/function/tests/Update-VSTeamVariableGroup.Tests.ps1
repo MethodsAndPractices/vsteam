@@ -15,7 +15,7 @@ Describe 'VSTeamVariableGroup' {
    Context 'Update-VSTeamVariableGroup' {
       Context 'Services' {
          BeforeAll {
-            $sampleFileVSTS = $(Get-Content "$sampleFiles\variableGroupSamples.json" | ConvertFrom-Json)
+            $sampleFileVSTS = Open-SampleFile variableGroupSamples.json
 
             Mock _getApiVersion { return 'VSTS' }
             Mock _getApiVersion { return '5.0-preview.1-unitTests' } -ParameterFilter { $Service -eq 'VariableGroups' }
@@ -70,7 +70,7 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          BeforeAll {
-            $sampleFile2017 = $(Get-Content "$sampleFiles\variableGroupSamples2017.json" | ConvertFrom-Json)
+            $sampleFile2017 = Open-SampleFile variableGroupSamples2017.json
 
             Mock _getApiVersion { return 'TFS2017' }
             Mock _getApiVersion { return '3.2-preview.1-unitTests' }

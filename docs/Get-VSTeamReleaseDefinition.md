@@ -96,7 +96,6 @@ Converts the raw response into JSON and displays in the console. This is require
 ```yaml
 Type: Switch
 Required: True
-Parameter Sets: ByIDJson
 ```
 
 ### -Raw

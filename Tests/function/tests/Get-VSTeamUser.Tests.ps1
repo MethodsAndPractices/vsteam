@@ -9,8 +9,8 @@ Describe 'VSTeamUser' {
    
    Context "Get-VSTeamUser" {
       BeforeAll {
-         $userListResult = Get-Content "$sampleFiles\users.json" -Raw | ConvertFrom-Json
-         $userSingleResult = Get-Content "$sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+         $userListResult = Open-SampleFile users.json
+         $userSingleResult = Open-SampleFile users.single.json
       }
 
       Context "Server" {

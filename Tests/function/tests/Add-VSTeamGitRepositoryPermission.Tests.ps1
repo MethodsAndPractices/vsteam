@@ -9,16 +9,16 @@ Describe 'VSTeamGitRepositoryPermission' {
    Context 'Add-VSTeamGitRepositoryPermission' {
       ## Arrange
       BeforeAll {
-         $userSingleResult = Get-Content "$sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+         $userSingleResult = Open-SampleFile users.single.json
          $userSingleResultObject = [vsteam_lib.User2]::new($userSingleResult)
 
-         $groupSingleResult = Get-Content "$sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
+         $groupSingleResult = Open-SampleFile groupsSingle.json
          $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)
 
-         $projectResult = Get-Content "$sampleFiles\projectResult.json" -Raw | ConvertFrom-Json
+         $projectResult = Open-SampleFile projectResult.json
          $projectResultObject = [vsteam_lib.Project]::new($projectResult)
 
-         $accessControlEntryResult = Get-Content "$sampleFiles\accessControlEntryResult.json" -Raw | ConvertFrom-Json
+         $accessControlEntryResult = Open-SampleFile accessControlEntryResult.json
 
          # Set the account to use for testing. A normal user would do this
          # using the Set-VSTeamAccount function.

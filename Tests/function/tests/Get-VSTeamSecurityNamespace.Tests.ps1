@@ -15,8 +15,8 @@ Describe "VSTeamSecurityNamespace" {
             Mock _getInstance { return 'https://dev.azure.com/test' }
             Mock _supportsSecurityNamespace { return $true }
 
-            $securityNamespaceListResult = Get-Content "$sampleFiles\securityNamespaces.json" -Raw | ConvertFrom-Json
-            $securityNamespaceSingleResult = Get-Content "$sampleFiles\securityNamespace.single.json" -Raw | ConvertFrom-Json
+            $securityNamespaceListResult = Open-SampleFile securityNamespaces.json
+            $securityNamespaceSingleResult = Open-SampleFile securityNamespace.single.json
 
             # You have to set the version or the api-version will not be added when versions = ''
             Mock _getApiVersion { return 'AzD' }

@@ -1,4 +1,12 @@
-﻿function Set-VSTeamPermissionInheritance {
+﻿# Sets the permission inheritance to true or false.
+# Get-VSTeamOption -area Contribution -resource HierarchyQuery
+# id              : 3353e165-a11e-43aa-9d88-14f2bb09b6d9
+# area            : Contribution
+# resourceName    : HierarchyQuery
+# routeTemplate   : _apis/{area}/{resource}/{scopeName}/{scopeValue}
+# This is an undocumented API
+
+function Set-VSTeamPermissionInheritance {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
    [OutputType([System.String])]
    param(
@@ -54,7 +62,8 @@
          $resp = _callAPI -method POST -NoProject `
             -area Contribution `
             -resource HierarchyQuery `
-            -id $projectID -Body $body `
+            -id $projectID `
+            -Body $body `
             -Version $version 
       }
 

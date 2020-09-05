@@ -12914,11 +12914,11 @@ ID Title          Status
       <command:verb>Get</command:verb>
       <command:noun>VSTeamPermissionInheritance</command:noun>
       <maml:description>
-        <maml:para>Returns true or false.</maml:para>
+        <maml:para>Undocumented API Returns true or false.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Returns true or false.</maml:para>
+      <maml:para>Undocumented API Returns true or false.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -14793,36 +14793,16 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-VSTeamRelease</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
-          <maml:name>ProjectName</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>JSON</maml:name>
           <maml:Description>
-            <maml:para>Specifies the team project for which this function operates.</maml:para>
-            <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
+            <maml:para>Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
-            <maml:name>String</maml:name>
+            <maml:name>SwitchParameter</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="named" aliases="ReleaseID">
-          <maml:name>Id</maml:name>
-          <maml:Description>
-            <maml:para>Specifies one or more releases by ID.</maml:para>
-            <maml:para>To specify multiple IDs, use commas to separate the IDs.</maml:para>
-            <maml:para>To find the ID of a release definition, type Get-VSTeamRelease.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Int32[]</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32[]</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -14896,6 +14876,17 @@ ID Title          Status
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>JSON</maml:name>
+          <maml:Description>
+            <maml:para>Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Raw</maml:name>
@@ -15111,7 +15102,7 @@ ID Title          Status
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamRelease -ProjectName demo -Id 10 -Json</dev:code>
         <dev:remarks>
-          <maml:para>This command returns the raw object returned from the server formated as JSON.</maml:para>
+          <maml:para>This command returns the raw object returned from the server formatted as JSON.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -15178,6 +15169,17 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>JSON</maml:name>
+          <maml:Description>
+            <maml:para>Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-VSTeamReleaseDefinition</maml:name>
@@ -15209,23 +15211,6 @@ ID Title          Status
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-VSTeamReleaseDefinition</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true (ByPropertyName)" position="0" aliases="none">
-          <maml:name>ProjectName</maml:name>
-          <maml:Description>
-            <maml:para>Specifies the team project for which this function operates.</maml:para>
-            <maml:para>You can tab complete from a list of available projects.</maml:para>
-            <maml:para>You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.</maml:para>
-          </maml:Description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>JSON</maml:name>
           <maml:Description>
@@ -15253,6 +15238,17 @@ ID Title          Status
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>JSON</maml:name>
+          <maml:Description>
+            <maml:para>Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Raw</maml:name>
@@ -22678,11 +22674,11 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:verb>Set</command:verb>
       <command:noun>VSTeamPermissionInheritance</command:noun>
       <maml:description>
-        <maml:para>Sets the permission inheritance to true or false.</maml:para>
+        <maml:para>Undocumented API Sets the permission inheritance to true or false.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Sets the permission inheritance to true or false.</maml:para>
+      <maml:para>Undocumented API Sets the permission inheritance to true or false.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -22839,7 +22835,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force</dev:code>
         <dev:remarks>
-          <maml:para>ThisThis command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.</maml:para>
+          <maml:para>This command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

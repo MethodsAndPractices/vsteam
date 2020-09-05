@@ -11,7 +11,7 @@ Describe 'VSTeamRequest' {
          Mock Invoke-RestMethod
          Mock _getInstance { return 'https://dev.azure.com/test' }
 
-         $projectResult = $(Get-Content "$sampleFiles\projectResult.json" | ConvertFrom-Json)
+         $projectResult = Open-SampleFile projectResult.json
 
          Mock _callAPI { return $projectResult } -ParameterFilter {
             $Resource -eq 'projects' -and

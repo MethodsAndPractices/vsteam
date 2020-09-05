@@ -10,14 +10,6 @@ Describe 'VSTeamPermissionInheritance' {
       . "$baseFolder/Source/Public/Get-VSTeamGitRepository.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamAccessControlList.ps1"
       
-      $gitRepoResult = Get-Content "$sampleFiles\singleGitRepo.json" -Raw | ConvertFrom-Json
-      $buildDefresults = Get-Content "$sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
-      $releaseDefresults = Get-Content "$sampleFiles\releaseDefAzD.json" -Raw | ConvertFrom-Json
-      $accesscontrollistsResult = Get-Content "$sampleFiles\repoAccesscontrollists.json" -Raw | ConvertFrom-Json
-      $gitRepoHierarchyUpdateResults = Get-Content "$sampleFiles\gitReopHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
-      $buildDefHierarchyUpdateResults = Get-Content "$sampleFiles\buildDefHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
-      $releaseDefHierarchyUpdateResults = Get-Content "$sampleFiles\releaseDefHierarchyQuery_Update.json" -Raw | ConvertFrom-Json
-
       $singleResult = [PSCustomObject]@{
          name        = 'Project'
          description = ''
@@ -45,19 +37,13 @@ Describe 'VSTeamPermissionInheritance' {
 
    Context 'Set-VSTeamPermissionInheritance buildDef' {
       BeforeAll {
-         Mock _callAPI { return $buildDefresults } -ParameterFilter {
+         Mock _callAPI { Open-SampleFile buildDefAzD.json } -ParameterFilter {
             $Area -eq 'build' -and
             $Resource -eq 'definitions' -and
             $Version -eq "$(_getApiVersion Build)"
          }
 
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            # Write-Host $args
-            # Write-Host $(_getApiVersion Build)
-
-            return $buildDefHierarchyUpdateResults
-         }
+         Mock Invoke-RestMethod { Open-SampleFile buildDefHierarchyQuery_Update.json }
       }
 
       It 'should return true' {
@@ -75,14 +61,8 @@ Describe 'VSTeamPermissionInheritance' {
 
    Context 'Set-VSTeamPermissionInheritance releaseDef' {
       BeforeAll {
-         Mock Get-VSTeamReleaseDefinition { return $releaseDefresults.value }
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            # Write-Host $args
-            # Write-Host $(_getApiVersion Release)
-
-            return $releaseDefHierarchyUpdateResults
-         }
+         Mock Invoke-RestMethod { Open-SampleFile releaseDefHierarchyQuery_Update.json }
+         Mock Get-VSTeamReleaseDefinition { Open-SampleFile releaseDefAzD.json -ReturnValue }
       }
 
       It 'should return true' {
@@ -100,16 +80,9 @@ Describe 'VSTeamPermissionInheritance' {
 
    Context 'Set-VSTeamPermissionInheritance repository' {
       BeforeAll {
-         Mock Get-VSTeamGitRepository { return $gitRepoResult }
-         Mock Get-VSTeamAccessControlList { return $accesscontrollistsResult.value }
-
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
-            #Write-Host $(_getApiVersion Git)
-
-            return $gitRepoHierarchyUpdateResults
-         }
+         Mock Get-VSTeamGitRepository { Open-SampleFile singleGitRepo.json }
+         Mock Invoke-RestMethod { Open-SampleFile gitReopHierarchyQuery_Update.json }
+         Mock Get-VSTeamAccessControlList { Open-SampleFile repoAccesscontrollists.json }
       }
 
       It 'should return true' {

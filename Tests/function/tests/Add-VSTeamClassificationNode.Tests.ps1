@@ -11,7 +11,7 @@ Describe 'VSTeamClassificationNode' {
    Context 'Add-VSTeamClassificationNode' {
       ## Arrange
       BeforeAll {
-         $classificationNodeResult = Get-Content "$sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
+         $classificationNodeResult = Open-SampleFile classificationNodeResult.json
 
          Mock Invoke-RestMethod { return $classificationNodeResult }
       }

@@ -7,10 +7,10 @@ Describe 'VSTeamWorkItemIterationPermission' {
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamAccessControlEntry.ps1"
 
-      $userSingleResult = Get-Content "$sampleFiles\users.single.json" -Raw | ConvertFrom-Json
+      $userSingleResult = Open-SampleFile users.single.json
       $userSingleResultObject = [vsteam_lib.User2]::new($userSingleResult)
 
-      $groupSingleResult = Get-Content "$sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
+      $groupSingleResult = Open-SampleFile groupsSingle.json
       $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)
 
       $projectResult = [PSCustomObject]@{

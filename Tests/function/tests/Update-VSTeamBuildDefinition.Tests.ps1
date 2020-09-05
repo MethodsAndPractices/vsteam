@@ -6,7 +6,7 @@ Describe "VSTeamBuildDefinition" {
       
       . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
       
-      $resultsAzD = Get-Content "$sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+      $resultsAzD = Open-SampleFile buildDefvsts.json
    }
 
    Context "Update-VSTeamBuildDefinition" {

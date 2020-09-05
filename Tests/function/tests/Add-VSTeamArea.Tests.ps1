@@ -8,7 +8,7 @@ Describe 'VSTeamArea' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
-      $classificationNodeResult = Get-Content "$sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
+      $classificationNodeResult = Open-SampleFile classificationNodeResult.json
 
       Mock Invoke-RestMethod { return $classificationNodeResult }
    }

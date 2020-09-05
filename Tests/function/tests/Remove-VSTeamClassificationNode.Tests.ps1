@@ -4,7 +4,7 @@ Describe 'VSTeamClassificationNode' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
-      $classificationNodeResult = Get-Content "$sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
+      $classificationNodeResult = Open-SampleFile classificationNodeResult.json
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }

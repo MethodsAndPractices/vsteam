@@ -33,3 +33,19 @@ if ($doNotPrimeCache.IsPresent) {
 # any project name used will pass validation and Get-VSTeamProject 
 # will not need to be called.
 [vsteam_lib.ProjectCache]::Update([string[]]@(), 120)
+
+
+function Open-SampleFile {
+   param(
+      [Parameter(Mandatory = $true, Position = 0)]
+      [string] $file,
+      [switch] $ReturnValue
+   )
+   
+   if ($ReturnValue.IsPresent) {
+      return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json).value
+   }
+   else {
+      return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json)
+   }
+}

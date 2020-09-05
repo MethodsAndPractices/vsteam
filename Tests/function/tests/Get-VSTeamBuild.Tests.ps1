@@ -21,10 +21,10 @@ Describe 'VSTeamBuild' {
       }
 
       # Sample result of a single build
-      $singleResult = Get-Content "$sampleFiles\buildSingleResult.json" -Raw | ConvertFrom-Json
+      $singleResult = Open-SampleFile buildSingleResult.json
 
       # Sample result for list of builds
-      $results = Get-Content "$sampleFiles\buildResults.json" -Raw | ConvertFrom-Json
+      $results = Open-SampleFile buildResults.json
 
       Mock Invoke-RestMethod { return $results }
       Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*101*" }

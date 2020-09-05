@@ -5,8 +5,8 @@ Describe 'VSTeamClassificationNode' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       ## Arrange
-      $withoutChildNode = Get-Content "$sampleFiles\withoutChildNode.json" -Raw | ConvertFrom-Json
-      $classificationNodeResult = Get-Content "$sampleFiles\classificationNodeResult.json" -Raw | ConvertFrom-Json
+      $withoutChildNode = Open-SampleFile withoutChildNode.json
+      $classificationNodeResult = Open-SampleFile classificationNodeResult.json
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.

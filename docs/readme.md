@@ -279,6 +279,8 @@ Returns all the versions of supported APIs of your TFS or AzD.
 
 ### [Get-VSTeamPermissionInheritance](Get-VSTeamPermissionInheritance.md)
 
+**Undocumented API**
+
 Returns true or false.
 
 ### [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
@@ -516,6 +518,8 @@ Sets the default project to be used with other calls in the module.
 Sets the status of a environment to canceled, inProgress, notStarted, partiallySucceeded, queued, rejected, scheduled, succeeded or undefined.
 
 ### [Set-VSTeamPermissionInheritance](Set-VSTeamPermissionInheritance.md)
+
+**Undocumented API**
 
 Sets the permission inheritance to true or false.
 

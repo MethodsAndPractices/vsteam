@@ -8,7 +8,7 @@ Describe 'VSTeamFeed' {
    Context 'Add-VSTeamFeed' {
       ## Arrange
       BeforeAll {
-         $results = Get-Content "$sampleFiles\feeds.json" -Raw | ConvertFrom-Json
+         $results = Open-SampleFile feeds.json
          Mock Invoke-RestMethod { return $results.value[0] }
          Mock _getInstance { return 'https://dev.azure.com/test' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Packaging' }

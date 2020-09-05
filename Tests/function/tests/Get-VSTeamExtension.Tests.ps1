@@ -8,8 +8,8 @@ Describe 'VSTeamExtension' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ExtensionsManagement' }
 
-      $results = Get-Content "$sampleFiles\extensionResults.json" -Raw | ConvertFrom-Json
-      $singleResult = Get-Content "$sampleFiles\singleExtensionResult.json" -Raw | ConvertFrom-Json
+      $results = Open-SampleFile extensionResults.json
+      $singleResult = Open-SampleFile singleExtensionResult.json
    }
 
    Context 'Get-VSTeamExtension' {

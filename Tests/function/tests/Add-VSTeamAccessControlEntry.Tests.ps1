@@ -8,8 +8,8 @@ Describe 'VSTeamAccessControlEntry' {
       
       ## Arrange
       # Load sample files you need for mocks below
-      $securityNamespace = Get-Content "$sampleFiles\securityNamespace.json" -Raw | ConvertFrom-Json
-      $accessControlEntryResult = Get-Content "$sampleFiles\accessControlEntryResult.json" -Raw | ConvertFrom-Json
+      $securityNamespace = Open-SampleFile securityNamespace.json
+      $accessControlEntryResult = Open-SampleFile accessControlEntryResult.json
 
       # Some of the functions return VSTeam classes so turn the PSCustomeObject
       # into the correct type.

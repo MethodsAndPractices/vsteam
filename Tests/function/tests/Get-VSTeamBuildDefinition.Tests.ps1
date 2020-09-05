@@ -8,10 +8,10 @@ Describe 'VSTeamBuildDefinition' {
 
    Context 'Get-VSTeamBuildDefinition' {
       BeforeAll {
-         $resultsAzD = Get-Content "$sampleFiles\buildDefAzD.json" -Raw | ConvertFrom-Json
-         $resultsVSTS = Get-Content "$sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
-         $results2017 = Get-Content "$sampleFiles\buildDef2017.json" -Raw | ConvertFrom-Json
-         $results2018 = Get-Content "$sampleFiles\buildDef2018.json" -Raw | ConvertFrom-Json
+         $resultsAzD = Open-SampleFile buildDefAzD.json
+         $resultsVSTS = Open-SampleFile buildDefvsts.json
+         $results2017 = Open-SampleFile buildDef2017.json
+         $results2018 = Open-SampleFile buildDef2018.json
 
          # Make sure the project name is valid. By returning an empty array
          # all project names are valid. Otherwise, you name you pass for the

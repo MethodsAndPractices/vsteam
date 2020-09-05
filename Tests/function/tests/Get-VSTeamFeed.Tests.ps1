@@ -9,7 +9,7 @@ Describe 'VSTeamFeed' {
       BeforeAll {
          ## Arrange
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Packaging' }
-         $results = Get-Content "$sampleFiles\feeds.json" -Raw | ConvertFrom-Json
+         $results = Open-SampleFile feeds.json
 
          Mock Invoke-RestMethod { return $results }
          Mock _getInstance { return 'https://dev.azure.com/test' }

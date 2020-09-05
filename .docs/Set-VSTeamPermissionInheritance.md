@@ -28,7 +28,7 @@ This command sets the permission inheritance to true.
 PS C:\> Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force
 ```
 
-ThisThis command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.
+This command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.
 
 ## PARAMETERS
 

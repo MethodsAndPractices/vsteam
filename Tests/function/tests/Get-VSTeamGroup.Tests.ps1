@@ -12,10 +12,10 @@ Describe "VSTeamGroup" {
    Context 'Get-VSTeamGroup' {
       Context 'Services' {
          BeforeAll {
-            $groupListResult = Get-Content "$sampleFiles\groups.json" -Raw | ConvertFrom-Json
-            $projectResult = Get-Content "$sampleFiles\projectResult.json" -Raw | ConvertFrom-Json
-            $groupSingleResult = Get-Content "$sampleFiles\groupsSingle.json" -Raw | ConvertFrom-Json
-            $scopeResult = Get-Content "$sampleFiles\descriptor.scope.TestProject.json" -Raw | ConvertFrom-Json
+            $groupListResult = Open-SampleFile groups.json
+            $projectResult = Open-SampleFile projectResult.json
+            $groupSingleResult = Open-SampleFile groupsSingle.json
+            $scopeResult = Open-SampleFile descriptor.scope.TestProject.json
 
             # You have to set the version or the api-version will not be added when versions = ''
             Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }

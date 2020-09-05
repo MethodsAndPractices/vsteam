@@ -8,8 +8,8 @@ Describe 'VSTeamBuildTimeline' {
       ## Arrnage
       [vsteam_lib.Versions]::Build = '1.0-unitTest'
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      $buildTimeline = Get-Content "$sampleFiles\buildTimeline.json" -Raw | ConvertFrom-Json
-      $buildTimelineEmptyRecords = Get-Content "$sampleFiles\buildTimelineEmptyRecords.json" -Raw | ConvertFrom-Json
+      $buildTimeline = Open-SampleFile buildTimeline.json
+      $buildTimelineEmptyRecords = Open-SampleFile buildTimelineEmptyRecords.json
    }
 
    Context 'Get-VSTeamBuildTimeline by ID' {

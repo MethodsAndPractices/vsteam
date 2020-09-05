@@ -5,11 +5,15 @@
 
 ## SYNOPSIS
 
+**Undocumented API**
+
 Returns true or false.
 
 ## SYNTAX
 
 ## DESCRIPTION
+
+**Undocumented API**
 
 Returns true or false.
 

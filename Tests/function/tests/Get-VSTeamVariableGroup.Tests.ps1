@@ -13,7 +13,7 @@ Describe 'VSTeamVariableGroup' {
    Context 'Get-VSTeamVariableGroup' {
       Context 'Services' {
          BeforeAll {
-            $sampleFileVSTS = $(Get-Content "$sampleFiles\variableGroupSamples.json" | ConvertFrom-Json)
+            $sampleFileVSTS = Open-SampleFile variableGroupSamples.json
 
             Mock _getApiVersion { return 'VSTS' }
             Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -43,7 +43,7 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          BeforeAll {
-            $sampleFile2017 = $(Get-Content "$sampleFiles\variableGroupSamples2017.json" | ConvertFrom-Json)
+            $sampleFile2017 = Open-SampleFile variableGroupSamples2017.json
 
             Mock _getApiVersion { return 'TFS2017' }
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable

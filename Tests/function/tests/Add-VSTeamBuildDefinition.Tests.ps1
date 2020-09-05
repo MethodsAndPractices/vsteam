@@ -8,7 +8,7 @@ Describe 'VSTeamBuildDefinition' {
    Context 'Add-VSTeamBuildDefinition' {
       ## Arrange
       BeforeAll {
-         $resultsVSTS = Get-Content "$sampleFiles\buildDefvsts.json" -Raw | ConvertFrom-Json
+         $resultsVSTS = Open-SampleFile buildDefvsts.json
 
          Mock Invoke-RestMethod { return $resultsVSTS }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }

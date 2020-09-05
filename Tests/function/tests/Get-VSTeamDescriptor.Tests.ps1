@@ -8,7 +8,7 @@ Describe "VSTeamDescriptor" {
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
    
       ## Arrange
-      $result = Get-Content "$sampleFiles\descriptor.scope.TestProject.json" -Raw | ConvertFrom-Json
+      $result = Open-SampleFile descriptor.scope.TestProject.json
    }
 
    Context 'Get-VSTeamDescriptor' {

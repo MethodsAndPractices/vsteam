@@ -1,4 +1,12 @@
-﻿function Get-VSTeamPermissionInheritance {
+﻿# Returns true or false.
+# Get-VSTeamOption -area Contribution -resource HierarchyQuery
+# id              : 3353e165-a11e-43aa-9d88-14f2bb09b6d9
+# area            : Contribution
+# resourceName    : HierarchyQuery
+# routeTemplate   : _apis/{area}/{resource}/{scopeName}/{scopeValue}
+# This is an undocumented API
+
+function Get-VSTeamPermissionInheritance {
    [OutputType([System.String])]
    [CmdletBinding()]
    param(
@@ -46,7 +54,12 @@
 }
 "@
 
-         $resp = _callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json" -Body $body
+         $resp = _callAPI -method POST `
+            -area Contribution `
+            -resource HierarchyQuery `
+            -id "project/$projectID" `
+            -Body $body `
+            -Version $version
 
          Write-Verbose $($resp | ConvertTo-Json -Depth 99)         
 

@@ -97,7 +97,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object { $_.poolName -eq "Hosted" }
          }
 
-         $srcBuildDef = Get-Content "$sampleFiles\010_builddef_1.json" -Raw | ConvertFrom-Json
+         $srcBuildDef = Open-SampleFile 010_builddef_1.json
          $srcBuildDef.project.id = $project.Id
          $srcBuildDef.queue.id = $defaultQueue.Id
          $srcBuildDef.repository.id = $repo.Id
@@ -105,7 +105,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $tmpBuildDef1 = (New-TemporaryFile).FullName
          $srcBuildDef | ConvertTo-Json -Depth 10 | Set-Content -Path $tmpBuildDef1
 
-         $srcBuildDef = Get-Content "$sampleFiles\010_builddef_2.json" -Raw | ConvertFrom-Json
+         $srcBuildDef = Open-SampleFile 010_builddef_2.json
          $srcBuildDef.project.id = $project.Id
          $srcBuildDef.queue.id = $defaultQueue.Id
          $srcBuildDef.repository.id = $repo.Id
@@ -176,7 +176,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             $defaultQueue = Get-VSTeamQueue -ProjectName $newProjectName | Where-Object { $_.poolName -eq "Hosted" }
          }
 
-         $srcReleaseDef = Get-Content "$sampleFiles\010_releasedef_1.json" -Raw | ConvertFrom-Json
+         $srcReleaseDef = Open-SampleFile 010_releasedef_1.json
          $srcReleaseDef.name = "$newProjectName-CD1"
          $srcReleaseDef.environments[0].deployPhases[0].deploymentInput.queueId = $defaultQueue.Id
          $tmpReleaseDef1 = (New-TemporaryFile).FullName
@@ -184,7 +184,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
          Add-VSTeamReleaseDefinition -ProjectName $newProjectName -InFile $tmpReleaseDef1
 
-         $srcReleaseDef = Get-Content "$sampleFiles\010_releasedef_2.json" -Raw | ConvertFrom-Json
+         $srcReleaseDef = Open-SampleFile 010_releasedef_2.json
          $srcReleaseDef.name = "$newProjectName-CD2"
          $srcReleaseDef.environments[0].deployPhases[0].deploymentInput.queueId = $defaultQueue.Id
          $tmpReleaseDef2 = (New-TemporaryFile).FullName

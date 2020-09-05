@@ -9,7 +9,7 @@ Describe "VSTeam" {
 
    Context "Get-VSTeamQuery" {
       BeforeAll {
-         $results = Get-Content "$sampleFiles\Get-VSTeamQuery.json" -Raw | ConvertFrom-Json
+         $results = Open-SampleFile Get-VSTeamQuery.json
 
          Mock _callAPI { return $results }
 

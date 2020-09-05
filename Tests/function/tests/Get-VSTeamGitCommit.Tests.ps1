@@ -5,7 +5,7 @@ Describe "VSTeamGitCommit" {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
       ## Arrange
-      $results = Get-Content "$sampleFiles\gitCommitResults.json" -Raw | ConvertFrom-Json
+      $results = Open-SampleFile gitCommitResults.json
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
