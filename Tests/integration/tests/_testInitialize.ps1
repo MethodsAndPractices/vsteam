@@ -68,3 +68,18 @@ function Get-ProjectName {
 
    return ($(Get-VSTeamProject | Where-Object Description -eq $projectDescription)).Name
 }
+
+function Open-SampleFile {
+   param(
+      [Parameter(Mandatory = $true, Position = 0)]
+      [string] $file,
+      [switch] $ReturnValue
+   )
+   
+   if ($ReturnValue.IsPresent) {
+      return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json).value
+   }
+   else {
+      return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json)
+   }
+}

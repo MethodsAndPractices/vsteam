@@ -34,7 +34,6 @@ if ($doNotPrimeCache.IsPresent) {
 # will not need to be called.
 [vsteam_lib.ProjectCache]::Update([string[]]@(), 120)
 
-
 function Open-SampleFile {
    param(
       [Parameter(Mandatory = $true, Position = 0)]
