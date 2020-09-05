@@ -7,7 +7,6 @@ Describe 'VSTeamGitRepositoryPermission' {
       . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
       . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
-      . "$baseFolder/Source/Classes/VSTeamGitRepositoryPermissions.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamAccessControlEntry.ps1"
    }
 
@@ -42,7 +41,7 @@ Describe 'VSTeamGitRepositoryPermission' {
 
       It 'by ProjectUser should return ACEs' {
          ## Act
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -User $userSingleResultObject -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -User $userSingleResultObject -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -58,7 +57,7 @@ Describe 'VSTeamGitRepositoryPermission' {
 
       It 'by ProjectGroup should return ACEs' {
          ## Act
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -Group $groupSingleResultObject -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -Group $groupSingleResultObject -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -77,7 +76,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          # The S-1-9 number is on digit off from the calls above so the same mock can be used
          # as above with the exactly 1 parameter. If you don't use different S-1-9 the count
          # of calls will be off.
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-2551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-2551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -93,7 +92,7 @@ Describe 'VSTeamGitRepositoryPermission' {
 
       It 'by RepositoryUser should return ACEs' {
          ## Act
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789012" -User $userSingleResultObject -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789012" -User $userSingleResultObject -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -109,7 +108,7 @@ Describe 'VSTeamGitRepositoryPermission' {
 
       It 'by RepositoryGroup should return ACEs' {
          ## Act
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789012" -Group $groupSingleResultObject -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789012" -Group $groupSingleResultObject -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -125,7 +124,7 @@ Describe 'VSTeamGitRepositoryPermission' {
 
       It 'by RepositoryDescriptor should return ACEs' {
          ## Act
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789013" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789013" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -141,7 +140,7 @@ Describe 'VSTeamGitRepositoryPermission' {
 
       It 'by RepositoryBranchUser should return ACEs' {
          ## Act
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789012" -BranchName "master" -User $userSingleResultObject -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789012" -BranchName "master" -User $userSingleResultObject -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -157,7 +156,7 @@ Describe 'VSTeamGitRepositoryPermission' {
 
       It 'by RepositoryBranchGroup should return ACEs' {
          ## Act
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789012" -BranchName "master" -Group $groupSingleResultObject -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789012" -BranchName "master" -Group $groupSingleResultObject -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -173,7 +172,7 @@ Describe 'VSTeamGitRepositoryPermission' {
 
       It 'by RepositoryBranchDescriptor should return ACEs' {
          ## Act
-         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789015" -BranchName "master" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamGitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([VSTeamGitRepositoryPermissions]'EditPolicies,ForcePush')
+         Add-VSTeamGitRepositoryPermission -Project $projectResultObject -RepositoryId "12345678-1234-1234-1234-123456789015" -BranchName "master" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

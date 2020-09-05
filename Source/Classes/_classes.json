@@ -5,7 +5,6 @@
       "VSTeamDirectory.ps1",
       "VSTeamLeaf.ps1",
       "VSTeamProcess.ps1",
-      "VSTeamGitRepositoryPermissions.ps1",
       "VSTeamIdentityPermissions.ps1",
       "VSTeamProjectPermissions.ps1",
       "VSTeamWorkItemAreaPermissions.ps1",
