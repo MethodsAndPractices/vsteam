@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamPullRequest' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Classes/VSTeamProcess.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       

@@ -2,7 +2,7 @@ function Get-VSTeamAccessControlList {
    [CmdletBinding(DefaultParameterSetName = 'ByNamespace')]
    param(
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
-      [VSTeamSecurityNamespace] $SecurityNamespace,
+      [vsteam_lib.SecurityNamespace] $SecurityNamespace,
 
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('ID')]

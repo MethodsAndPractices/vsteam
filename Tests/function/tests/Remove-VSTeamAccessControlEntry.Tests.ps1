@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamSecurityNamespace' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"      
-      . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamSecurityNamespace.ps1"
 
       $securityNamespace =
@@ -93,7 +90,7 @@ Describe 'VSTeamSecurityNamespace' {
         {
             "DisplayName":  "Contribute to pull requests",
             "Name":  "PullRequestContribute",
-            "Bit":"16384"
+            "Bit": 16384
         },
         {
             "DisplayName":  "Bypass policies when completing pull requests",

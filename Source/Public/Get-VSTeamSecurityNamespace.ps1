@@ -44,7 +44,7 @@ function Get-VSTeamSecurityNamespace {
          if ($Name) {
             $selected = $resp.value | Where-Object { $_.name -eq $Name }
             if ($selected) {
-               return [VSTeamSecurityNamespace]::new($selected)
+               return [vsteam_lib.SecurityNamespace]::new($selected)
             }
             else {
                return $null
@@ -54,7 +54,7 @@ function Get-VSTeamSecurityNamespace {
          try {
             $objs = @()
             foreach ($item in $resp.value) {
-               $objs += [VSTeamSecurityNamespace]::new($item)
+               $objs += [vsteam_lib.SecurityNamespace]::new($item)
             }
 
             Write-Output $objs
@@ -70,7 +70,7 @@ function Get-VSTeamSecurityNamespace {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $acl = [VSTeamSecurityNamespace]::new($resp.value)
+         $acl = [vsteam_lib.SecurityNamespace]::new($resp.value[0])
 
          Write-Output $acl
       }

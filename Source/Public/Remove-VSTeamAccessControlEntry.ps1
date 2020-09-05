@@ -3,7 +3,7 @@ function Remove-VSTeamAccessControlEntry {
    [OutputType([System.String])]
    param(
       [Parameter(ParameterSetName = 'byNamespace', Mandatory = $true, ValueFromPipeline = $true)]
-      [VSTeamSecurityNamespace] $securityNamespace,
+      [vsteam_lib.SecurityNamespace] $securityNamespace,
  
       [Parameter(ParameterSetName = 'byNamespaceId', Mandatory = $true)]
       [guid] $securityNamespaceId,

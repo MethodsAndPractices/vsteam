@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamAccessControlList' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"      
-      . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamDefaultProject.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamSecurityNamespace.ps1"
 
@@ -16,7 +13,7 @@ Describe 'VSTeamAccessControlList' {
       $accessControlListResult = Get-Content "$sampleFiles\accessControlListResult.json" -Raw | ConvertFrom-Json
 
       $securityNamespace = Get-Content "$sampleFiles\securityNamespace.json" -Raw | ConvertFrom-Json
-      $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value[0])
+      $securityNamespaceObject = [vsteam_lib.SecurityNamespace]::new($securityNamespace.value[0])
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.

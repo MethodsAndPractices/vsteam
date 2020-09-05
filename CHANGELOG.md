@@ -3,6 +3,7 @@
 ## 7.0.0
 
 All classes are moved to a new C# class library.
+All classes names changed i.e. VSTeamSecurityNamespace is now vsteam_lib.SecurityNamespace
 
 **Breaking changes**:
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.

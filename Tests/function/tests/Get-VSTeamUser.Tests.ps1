@@ -3,8 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamUser' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-   
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
    }

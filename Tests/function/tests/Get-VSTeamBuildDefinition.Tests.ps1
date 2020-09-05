@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamBuildDefinition' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-   
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
-      . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
    }
 

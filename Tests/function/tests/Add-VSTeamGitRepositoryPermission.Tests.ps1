@@ -3,10 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamGitRepositoryPermission' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
-      . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
-      . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamAccessControlEntry.ps1"
    }
 

@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamAccessControlEntry' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"      
-      . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamDefaultProject.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamSecurityNamespace.ps1"
       
@@ -16,7 +13,7 @@ Describe 'VSTeamAccessControlEntry' {
 
       # Some of the functions return VSTeam classes so turn the PSCustomeObject
       # into the correct type.
-      $securityNamespaceObject = [VSTeamSecurityNamespace]::new($securityNamespace.value[0])
+      $securityNamespaceObject = [vsteam_lib.SecurityNamespace]::new($securityNamespace.value[0])
 
       ## Arrange
       Mock _getDefaultProject { return "Testing" }

@@ -3,8 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamArea' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamClassificationNode"
 
       Mock _getInstance { return 'https://dev.azure.com/test' }

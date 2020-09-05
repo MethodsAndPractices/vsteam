@@ -4,8 +4,6 @@ Describe 'VSTeamClassificationNode' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
-      # . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
-
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
    }

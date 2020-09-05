@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe "VSTeamSecurityNamespace" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"      
-      . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
    }

@@ -3,8 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamRelease' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       
       $results = Get-Content "$sampleFiles/Get-VSTeamRelease.json" -Raw | ConvertFrom-Json
