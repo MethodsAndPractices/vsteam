@@ -153,7 +153,7 @@ function Get-VSTeamGitCommit {
          $obj = @()
 
          foreach ($item in $resp.value) {
-            $obj += [VSTeamGitCommitRef]::new($item, $ProjectName)
+            $obj += [vsteam_lib.GitCommitRef]::new($item, $ProjectName)
          }
 
          Write-Output $obj

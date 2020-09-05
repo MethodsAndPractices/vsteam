@@ -3,10 +3,6 @@ Set-StrictMode -Version Latest
 Describe "VSTeamGitCommit" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"      
-      . "$baseFolder/Source/Classes/VSTeamGitUserDate.ps1"
-      . "$baseFolder/Source/Classes/VSTeamGitCommitRef.ps1"
       
       ## Arrange
       $results = Get-Content "$sampleFiles\gitCommitResults.json" -Raw | ConvertFrom-Json

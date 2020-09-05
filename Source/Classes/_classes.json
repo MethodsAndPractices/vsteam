@@ -11,8 +11,6 @@
       "VSTeamWorkItemAreaPermissions.ps1",
       "VSTeamWorkItemIterationPermissions.ps1",
       "VSTeamSecurityNamespace.ps1",
-      "VSTeamPermissionInheritance.ps1",
-      "VSTeamGitCommitRef.ps1",
-      "VSTeamGitUserDate.ps1"
+      "VSTeamPermissionInheritance.ps1"
    ]
 }
