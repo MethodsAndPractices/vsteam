@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamPermissionInheritance' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Classes/VSTeamPermissionInheritance.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamBuildDefinition.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"

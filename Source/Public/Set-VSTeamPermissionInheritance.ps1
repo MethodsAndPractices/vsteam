@@ -10,14 +10,14 @@ function Set-VSTeamPermissionInheritance {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
    [OutputType([System.String])]
    param(
-      [Parameter(Mandatory, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]
       [string] $Name,
 
-      [Parameter(Mandatory)]
+      [Parameter(Mandatory = $true)]
       [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
       [string] $ResourceType,
 
-      [Parameter(Mandatory)]
+      [Parameter(Mandatory = $true)]
       [bool] $NewState,
 
       [switch] $Force,
@@ -30,7 +30,7 @@ function Set-VSTeamPermissionInheritance {
 
    process {
       Write-Verbose "Creating VSTeamPermissionInheritance"
-      $item = [VSTeamPermissionInheritance]::new($ProjectName, $Name, $ResourceType)
+      $item = _getPermissionInheritanceInfo -projectName $ProjectName -resourceName $Name -resourceType $resourceType
       $token = $item.Token
       $version = $item.Version
       $projectID = $item.ProjectID

@@ -2,7 +2,6 @@
    "outputFile": "vsteam.classes.ps1",
    "fileType": "classes",
    "files": [
-      "VSTeamProcess.ps1",
-      "VSTeamPermissionInheritance.ps1"
+      "VSTeamProcess.ps1"
    ]
 }

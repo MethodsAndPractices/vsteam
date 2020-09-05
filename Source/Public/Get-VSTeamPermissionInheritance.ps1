@@ -25,7 +25,7 @@ function Get-VSTeamPermissionInheritance {
 
    process {
       Write-Verbose "Creating VSTeamPermissionInheritance"
-      $item = [VSTeamPermissionInheritance]::new($ProjectName, $Name, $resourceType)
+      $item = _getPermissionInheritanceInfo -projectName $ProjectName -resourceName $Name -resourceType $resourceType
       $token = $item.Token
       $version = $item.Version
       $projectID = $item.ProjectID

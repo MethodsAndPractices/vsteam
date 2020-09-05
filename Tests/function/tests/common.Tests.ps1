@@ -3,6 +3,46 @@ Set-StrictMode -Version Latest
 Describe 'Common' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath -private
+      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
+      . "$baseFolder/Source/Public/Get-VSTeamGitRepository.ps1"
+      . "$baseFolder/Source/Public/Get-VSTeamBuildDefinition.ps1"
+      . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
+   }
+
+   Context '_getPermissionInheritanceInfo' {
+      BeforeAll {
+         Mock Get-VSTeamBuildDefinition { Open-SampleFile Get-BuildDefinition_AzD.json -ReturnValue }
+         Mock Get-VSTeamProject { Open-SampleFile Get-VSTeamProject-NamePeopleTracker.json }
+         Mock Get-VSTeamReleaseDefinition { Open-SampleFile Get-VSTeamReleaseDefinition.json -ReturnValue }
+         Mock Get-VSTeamGitRepository { Open-SampleFile Get-VSTeamGitRepository-ProjectNamePeopleTracker-NamePeopleTracker.json }
+      }
+
+      It 'Should return an object with build def details' {
+         $actual = _getPermissionInheritanceInfo -ProjectName 'PeopleTracker' -ResourceName 'PTracker-CI' -ResourceType 'BuildDefinition'
+
+         $actual | Should -not -Be $null
+         $actual.Version | Should -Be "$(_getApiVersion Build)"
+         $actual.Token | Should -Be "00000000-0000-0000-0000-000000000000/23"
+         $actual.SecurityNamespaceID | Should -Be "33344d9c-fc72-4d6f-aba5-fa317101a7e9"
+      }
+
+      It 'Should return an object with release def details' {
+         $actual = _getPermissionInheritanceInfo -ProjectName 'PeopleTracker' -ResourceName 'PTracker-CD' -ResourceType 'ReleaseDefinition'
+
+         $actual | Should -not -Be $null
+         $actual.Version | Should -Be "$(_getApiVersion Release)"
+         $actual.SecurityNamespaceID | Should -Be "c788c23e-1b46-4162-8f5e-d7585343b5de"
+         $actual.Token | Should -Be "00000000-0000-0000-0000-000000000000//2"
+      }
+
+      It 'Should return an object with repository details' {
+         $actual = _getPermissionInheritanceInfo -ProjectName 'PeopleTracker' -ResourceName 'PeopleTracker' -ResourceType 'Repository'
+
+         $actual | Should -not -Be $null
+         $actual.Version | Should -Be "$(_getApiVersion Git)"
+         $actual.SecurityNamespaceID | Should -Be "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
+         $actual.Token | Should -Be "repoV2/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000"
+      }
    }
 
    Context '_convertSecureStringTo_PlainText' {

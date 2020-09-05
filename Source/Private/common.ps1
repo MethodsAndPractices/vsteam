@@ -848,6 +848,82 @@ function _getVSTeamIdFromDescriptor {
    return [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($Padded))
 }
 
+function _getPermissionInheritanceInfo {
+   [cmdletbinding()]
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $projectName,
+
+      [parameter(Mandatory = $true)]
+      [string] $resourceName,
+      [Parameter(Mandatory = $true)]
+
+      [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
+      [string] $resourceType
+   )
+
+   $projectId = (Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty id)
+
+   Switch ($resourceType) {
+      "Repository" {
+         $securityNamespaceID = "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
+
+         $repositoryId = (Get-VSTeamGitRepository -Name "$resourceName" -projectName $projectName | Select-Object -ExpandProperty id )
+
+         if ($null -eq $repositoryId) {
+            Write-Error "Unable to retrieve repository information. Ensure that the resourceName provided matches a repository name exactly."
+            return
+         }
+
+         $token = "repoV2/$($projectId)/$repositoryId"
+
+         $version = "$(_getApiVersion Git)"
+      }
+
+      "BuildDefinition" {
+         $securityNamespaceID = "33344d9c-fc72-4d6f-aba5-fa317101a7e9"
+
+         $buildDefinitionId = (Get-VSTeamBuildDefinition -projectName $projectName | Where-Object name -eq "$resourceName" | Select-Object -ExpandProperty id)
+
+         if ($null -eq $buildDefinitionId) {
+            Write-Error "Unable to retrieve build definition information. Ensure that the resourceName provided matches a build definition name exactly."
+            return
+         }
+
+         $token = "$($projectId)/$buildDefinitionId"
+
+         $version = "$(_getApiVersion Build)"
+      }
+
+      "ReleaseDefinition" {
+         $securityNamespaceID = "c788c23e-1b46-4162-8f5e-d7585343b5de"
+
+         $releaseDefinition = (Get-VSTeamReleaseDefinition -projectName $projectName | Where-Object -Property name -eq "$resourceName")
+
+         if ($null -eq $releaseDefinition) {
+            Write-Error "Unable to retrieve release definition information. Ensure that the resourceName provided matches a release definition name exactly."
+            return
+         }
+
+         if (($releaseDefinition).path -eq "/") {
+            $token = "$($projectId)/$($releaseDefinition.id)"
+         }
+         else {
+            $token = "$($projectId)" + "$($releaseDefinition.path -replace "\\","/")" + "/$($releaseDefinition.id)"
+         }
+
+         $version = "$(_getApiVersion Release)"
+      }
+   }
+
+   return @{
+      Token = $token
+      Version = $version
+      ProjectID = $projectId
+      SecurityNamespaceID = $securityNamespaceID
+   }
+}
+
 function _getDescriptorForACL {
    [cmdletbinding()]
    param(
