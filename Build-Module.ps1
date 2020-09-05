@@ -118,7 +118,6 @@ $output = [System.IO.Path]::GetFullPath($output)
 
 Merge-File -inputFile ./Source/_functions.json -outputDir $output
 Merge-File -inputFile ./Source/types/_types.json -outputDir $output
-Merge-File -inputFile ./Source/Classes/_classes.json -outputDir $output
 Merge-File -inputFile ./Source/formats/_formats.json -outputDir $output
 
 # Build the help

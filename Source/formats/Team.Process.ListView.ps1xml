@@ -6,7 +6,7 @@
 			<ViewSelectedBy>
 				<TypeName>Team.Process</TypeName>
 				<TypeName>Team.Provider.Process</TypeName>
-				<TypeName>VSTeamProcess</TypeName>
+				<TypeName>vsteam_lib.Process</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

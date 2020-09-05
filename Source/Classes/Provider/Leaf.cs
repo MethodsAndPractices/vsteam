@@ -5,7 +5,7 @@ namespace vsteam_lib.Provider
 {
    public class Leaf : SHiPSLeaf, IInternalObject
    {
-      public string Id { get; }
+      public string Id { get; protected set; }
       public string ProjectName { get; protected set; }
       public PSObject InternalObject { get; }
 

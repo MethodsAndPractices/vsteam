@@ -62,7 +62,7 @@ function Get-VSTeamProcess {
          # Call the REST API with an ID
          $resp = _callAPI @commonArgs -id $id
 
-         $process = [VSTeamProcess]::new($resp)
+         $process = [vsteam_lib.Process]::new($resp)
 
          Write-Output $process
       }
@@ -75,7 +75,7 @@ function Get-VSTeamProcess {
             [vsteam_lib.ProcessTemplateCache]::Update([string[]]$($resp.value | Select-Object -ExpandProperty Name | Sort-Object))
 
             $resp.value | ForEach-Object {
-               [VSTeamProcess]::new($_)
+               [vsteam_lib.Process]::new($_)
             } | Where-Object { $_.name -like $Name } | Sort-Object -Property Name
          }
          catch {

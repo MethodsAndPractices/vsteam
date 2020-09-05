@@ -5,6 +5,7 @@
 			<Name>Team.Process.TableView</Name>
 			<ViewSelectedBy>
 				<TypeName>Team.Process</TypeName>
+            <TypeName>vsteam_lib.Process</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

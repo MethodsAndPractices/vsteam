@@ -7,7 +7,6 @@
 # and alias so you only have to name the files correctly.
 
 # Files are built using a script in the root folder
-. "$PSScriptRoot\vsteam.classes.ps1"
 . "$PSScriptRoot\vsteam.functions.ps1"
 
 # Set the module version
