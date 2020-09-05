@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamProcess' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
-      . "$baseFolder/Source/Classes/VSTeamProcess.ps1"
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
@@ -16,7 +15,7 @@ Describe 'VSTeamProcess' {
                description = ''
                url         = ''
                typeid      = '123-5464-dee43'
-               isDefault   = 'false'
+               isDefault   = $false
                type        = 'Agile'
             }
             [PSCustomObject]@{
@@ -24,7 +23,7 @@ Describe 'VSTeamProcess' {
                description = ''
                url         = ''
                typeid      = '234-6575-eff54'
-               isDefault   = 'false'
+               isDefault   = $false
                type        = 'Agile'
             }
          )
@@ -35,7 +34,7 @@ Describe 'VSTeamProcess' {
          description = ''
          url         = ''
          typeid      = '123-5464-dee43'
-         isDefault   = 'false'
+         isDefault   = $false
          type        = 'Agile'
       }
 
@@ -53,7 +52,7 @@ Describe 'VSTeamProcess' {
 
          ## Assert
          $p.count             | should -Be 2 
-         $p[0].gettype().name | should -Be VSTeamProcess  # don't use BeOfType it's not in this scope/
+         $p[0].gettype().name | should -Be 'Process'  # don't use BeOfType it's not in this scope/
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/process/processes*"
@@ -66,7 +65,7 @@ Describe 'VSTeamProcess' {
 
          ## Assert
          $p.count             | should -Be 2 
-         $p[0].gettype().name | should -Be VSTeamProcess  # don't use BeOfType it's not in this scope/
+         $p[0].gettype().name | should -Be 'Process'  # don't use BeOfType it's not in this scope/
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and

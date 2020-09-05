@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamProject' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Classes/VSTeamProcess.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamQueue.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
