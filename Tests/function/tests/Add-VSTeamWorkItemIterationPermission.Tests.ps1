@@ -6,7 +6,6 @@ Describe 'VSTeamWorkItemIterationPermission' {
 
       . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
-      . "$baseFolder/Source/Classes/VSTeamWorkItemIterationPermissions.ps1"
       . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode.ps1"
@@ -116,7 +115,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       }
 
       It 'by IterationID and User should return ACEs' {
-         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -User $userSingleResultObject -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
+         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -User $userSingleResultObject -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -129,7 +128,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       }
 
       It 'by IterationID and Group should return ACEs' {
-         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -Group $groupSingleResultObject -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
+         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -Group $groupSingleResultObject -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -142,7 +141,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       }
 
       It 'by IterationID and Descriptor should return ACEs' {
-         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
+         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationID 44 -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -155,7 +154,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       }
 
       It 'by IterationPath and User should return ACEs' {
-         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -User $userSingleResultObject -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
+         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -User $userSingleResultObject -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -168,7 +167,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       }
 
       It 'by IterationPath and Group should return ACEs' {
-         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -Group $groupSingleResultObject -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
+         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -Group $groupSingleResultObject -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -181,7 +180,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       }
 
       It 'by IterationPath and Descriptor should return ACEs' {
-         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamWorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([VSTeamWorkItemIterationPermissions]'DELETE')
+         Add-VSTeamWorkItemIterationPermission -Project $projectResultObject -IterationPath "Sprint 1" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and

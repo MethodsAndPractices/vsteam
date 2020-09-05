@@ -6,7 +6,6 @@ Describe 'VSTeamWorkItemAreaPermission' {
 
       . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
-      . "$baseFolder/Source/Classes/VSTeamWorkItemAreaPermissions.ps1"
       . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode.ps1"
@@ -145,7 +144,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
       }
 
       It 'by AreaID and User should return ACEs' {
-         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaID 44 -User $userSingleResultObject -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
+         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaID 44 -User $userSingleResultObject -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
 
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
@@ -159,7 +158,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
       }
 
       It 'by AreaID and Group should return ACEs' {
-         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaID 44 -Group $groupSingleResultObject -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
+         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaID 44 -Group $groupSingleResultObject -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -172,7 +171,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
       }
 
       It 'by AreaID and Descriptor should return ACEs' {
-         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaID 44 -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
+         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaID 44 -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -185,7 +184,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
       }
 
       It 'by AreaPath and User should return ACEs' {
-         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaPath "Child 1 Level 1/Child 1 Level 2" -User $userSingleResultObject -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
+         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaPath "Child 1 Level 1/Child 1 Level 2" -User $userSingleResultObject -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -198,7 +197,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
       }
 
       It 'by AreaPath and Group should return ACEs' {
-         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaPath "Child 1 Level 1/Child 1 Level 2" -Group $groupSingleResultObject -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
+         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaPath "Child 1 Level 1/Child 1 Level 2" -Group $groupSingleResultObject -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
@@ -211,7 +210,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
       }
 
       It 'by AreaPath and Descriptor should return ACEs' {
-         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaPath "Child 1 Level 1/Child 1 Level 2" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamWorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([VSTeamWorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
+         Add-VSTeamWorkItemAreaPermission -Project $projectResultObject -AreaPath "Child 1 Level 1/Child 1 Level 2" -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
 
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and

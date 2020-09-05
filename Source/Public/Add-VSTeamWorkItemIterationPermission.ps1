@@ -37,7 +37,7 @@ function Add-VSTeamWorkItemIterationPermission {
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationPathAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationPathAndUser")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationPathAndGroup")]
-      [VSTeamWorkItemIterationPermissions]$Allow,
+      [vsteam_lib.WorkItemIterationPermissions]$Allow,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationIdAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationIdAndGroup")]
@@ -45,7 +45,7 @@ function Add-VSTeamWorkItemIterationPermission {
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationPathAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationPathAndUser")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndIterationPathAndGroup")]
-      [VSTeamWorkItemIterationPermissions]$Deny
+      [vsteam_lib.WorkItemIterationPermissions]$Deny
    )
 
    process {
