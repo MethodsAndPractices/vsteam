@@ -6,7 +6,6 @@
       "VSTeamLeaf.ps1",
       "VSTeamProcess.ps1",
       "VSTeamIdentityPermissions.ps1",
-      "VSTeamProjectPermissions.ps1",
       "VSTeamWorkItemAreaPermissions.ps1",
       "VSTeamWorkItemIterationPermissions.ps1",
       "VSTeamSecurityNamespace.ps1",

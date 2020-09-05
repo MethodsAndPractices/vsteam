@@ -7,7 +7,6 @@ Describe 'VSTeamProjectPermission' {
       . "$baseFolder/Source/Classes/VSTeamLeaf.ps1"
       . "$baseFolder/Source/Classes/VSTeamDirectory.ps1"
       . "$baseFolder/Source/Classes/VSTeamSecurityNamespace.ps1"
-      . "$baseFolder/Source/Classes/VSTeamProjectPermissions.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamAccessControlEntry.ps1"
 
       # Set the account to use for testing. A normal user would do this
@@ -64,7 +63,7 @@ Describe 'VSTeamProjectPermission' {
       }
 
       It 'by ProjectUser should return ACEs' {
-         Add-VSTeamProjectPermission -Project $projectResultObject -User $userSingleResultObject -Allow ([VSTeamProjectPermissions]'GENERIC_READ,GENERIC_WRITE,WORK_ITEM_DELETE,RENAME') -Deny ([VSTeamProjectPermissions]'CHANGE_PROCESS,VIEW_TEST_RESULTS')
+         Add-VSTeamProjectPermission -Project $projectResultObject -User $userSingleResultObject -Allow ([vsteam_lib.ProjectPermissions]'GENERIC_READ,GENERIC_WRITE,WORK_ITEM_DELETE,RENAME') -Deny ([vsteam_lib.ProjectPermissions]'CHANGE_PROCESS,VIEW_TEST_RESULTS')
 
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/52d39943-cb85-4d7f-8fa8-c6baac873819*" -and
@@ -78,7 +77,7 @@ Describe 'VSTeamProjectPermission' {
       }
 
       It 'by ProjectGroup should return ACEs' {
-         Add-VSTeamProjectPermission -Project $projectResultObject -Group $groupSingleResultObject -Allow ([VSTeamProjectPermissions]'GENERIC_READ,GENERIC_WRITE,WORK_ITEM_DELETE,RENAME') -Deny ([VSTeamProjectPermissions]'CHANGE_PROCESS,VIEW_TEST_RESULTS')
+         Add-VSTeamProjectPermission -Project $projectResultObject -Group $groupSingleResultObject -Allow ([vsteam_lib.ProjectPermissions]'GENERIC_READ,GENERIC_WRITE,WORK_ITEM_DELETE,RENAME') -Deny ([vsteam_lib.ProjectPermissions]'CHANGE_PROCESS,VIEW_TEST_RESULTS')
 
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/52d39943-cb85-4d7f-8fa8-c6baac873819*" -and
@@ -92,7 +91,7 @@ Describe 'VSTeamProjectPermission' {
       }
 
       It 'by ProjectDescriptor should return ACEs' {
-         Add-VSTeamProjectPermission -Project $projectResultObject -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([VSTeamProjectPermissions]'GENERIC_READ,GENERIC_WRITE,WORK_ITEM_DELETE,RENAME') -Deny ([VSTeamProjectPermissions]'CHANGE_PROCESS,VIEW_TEST_RESULTS')
+         Add-VSTeamProjectPermission -Project $projectResultObject -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" -Allow ([vsteam_lib.ProjectPermissions]'GENERIC_READ,GENERIC_WRITE,WORK_ITEM_DELETE,RENAME') -Deny ([vsteam_lib.ProjectPermissions]'CHANGE_PROCESS,VIEW_TEST_RESULTS')
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/52d39943-cb85-4d7f-8fa8-c6baac873819*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and

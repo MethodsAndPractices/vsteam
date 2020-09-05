@@ -18,12 +18,12 @@ function Add-VSTeamProjectPermission {
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndGroup")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndUser")]
-      [VSTeamProjectPermissions]$Allow,
+      [vsteam_lib.ProjectPermissions]$Allow,
 
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndDescriptor")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndGroup")]
       [parameter(Mandatory=$true,ParameterSetName="ByProjectAndUser")]
-      [VSTeamProjectPermissions]$Deny
+      [vsteam_lib.ProjectPermissions]$Deny
    )
 
    process {
