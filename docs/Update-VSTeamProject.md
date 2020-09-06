@@ -15,7 +15,7 @@ Updates the project name, description or both.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Update-VSTeamProject -Name Demo -NewName aspDemo

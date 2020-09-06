@@ -14,7 +14,7 @@ the Add-TeamAccount function in this module.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Add-VSTeamProfile
@@ -22,7 +22,7 @@ PS C:\> Add-VSTeamProfile
 
 You will be prompted for the account name and personal access token.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version TFS2018
@@ -30,7 +30,7 @@ PS C:\> Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlr
 
 Allows you to provide all the information on the command line.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Add-VSTeamProfile -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication

@@ -15,7 +15,7 @@ Allows you to update release variables for future stages to read.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
@@ -26,7 +26,7 @@ PS C:\> Update-VSTeamRelease -ProjectName project -Id 76 -release $r
 
 Changes the variable temp on the release. This can be done in one stage and read in another stage.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken

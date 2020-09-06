@@ -15,7 +15,7 @@ Opens the pull request in the default browser.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Show-VSTeamPullRequest 3
@@ -23,7 +23,7 @@ PS C:\> Show-VSTeamPullRequest 3
 
 This command will open a web browser with the pull request id of 3.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Show-VSTeamPullRequest -Id 3

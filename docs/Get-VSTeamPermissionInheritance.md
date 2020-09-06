@@ -19,7 +19,7 @@ Returns true or false.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition
@@ -27,7 +27,7 @@ PS C:\> Get-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -Resourc
 
 This command returns true or false.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Get-VSTeamBuildDefinition | Get-VSTeamPermissionInheritance -ResourceType BuildDefinition

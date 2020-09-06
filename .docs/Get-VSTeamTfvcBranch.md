@@ -14,7 +14,7 @@ Get-VSTeamTfvcBranch gets a branch for a given path from TFVC source control.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch
@@ -22,7 +22,7 @@ PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch
 
 This command returns the branch object for the path $/MyProject/MyBranch
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren
@@ -30,7 +30,7 @@ PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren
 
 This command returns the branch object for the path $/MyProject/MyBranch and its child branches.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent
@@ -38,7 +38,7 @@ PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent
 
 This command returns the branch object for the path $/MyProject/MyBranch and its parent.
 
-### -------------------------- EXAMPLE 4 --------------------------
+### Example 4
 
 ```PowerShell
 PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted
@@ -46,7 +46,7 @@ PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted
 
 This command returns the branch object for the path $/MyProject/MyBranch, even if it's marked as deleted.
 
-### -------------------------- EXAMPLE 5 --------------------------
+### Example 5
 
 ```PowerShell
 PS C:\> '$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvcBranch

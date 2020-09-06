@@ -20,7 +20,7 @@ You can also specify a particular release definition by ID.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamRelease -ProjectName demo | Format-List *
@@ -30,7 +30,7 @@ This command gets a list of all releases in the demo project.
 
 The pipeline operator (|) passes the data to the Format-List cmdlet, which displays all available properties (*) of the release definition objects.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Get-VSTeamRelease -ProjectName demo -Id 10 -Raw
@@ -38,7 +38,7 @@ PS C:\> Get-VSTeamRelease -ProjectName demo -Id 10 -Raw
 
 This command returns the raw object returned from the server.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Get-VSTeamRelease -ProjectName demo -Id 10 -Json

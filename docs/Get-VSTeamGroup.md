@@ -15,7 +15,7 @@ Returns a Group or List of Groups.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'

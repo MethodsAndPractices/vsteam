@@ -18,7 +18,7 @@ Calling Set-VSTeamAccount will clear any default project.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount
@@ -26,7 +26,7 @@ PS C:\> Set-VSTeamAccount
 
 You will be prompted for the account name and personal access token.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrthisisnotreal4uhlh5vgbmgap3mziwnga
@@ -34,7 +34,7 @@ PS C:\> Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlr
 
 Allows you to provide all the information on the command line.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
@@ -42,7 +42,7 @@ PS C:\> Set-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -U
 
 On Windows, allows you use to use Windows authentication against a local TFS server.
 
-### -------------------------- EXAMPLE 4 --------------------------
+### Example 4
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Profile demonstrations
@@ -50,7 +50,7 @@ PS C:\> Set-VSTeamAccount -Profile demonstrations
 
 Will add the account from the profile provided.
 
-### -------------------------- EXAMPLE 5 --------------------------
+### Example 5
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Profile demonstrations -Drive demo | Invoke-Expression
@@ -60,7 +60,7 @@ PS demo:\> Get-ChildItem
 
 Will add the account from the profile provided and mount a drive named demo that you can navigate like a file system. If you do not pipe to Invoke-Expression you can simply copy and paste the output and execute it.
 
-### -------------------------- EXAMPLE 6 --------------------------
+### Example 6
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Profile demonstrations -Level Machine
@@ -70,7 +70,7 @@ Will add the account from the profile provided and store the information at the 
 
 Note: You must run PowerShell as an Administrator to store at the Machine level.
 
-### -------------------------- EXAMPLE 7 --------------------------
+### Example 7
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken

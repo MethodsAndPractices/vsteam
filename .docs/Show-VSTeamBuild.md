@@ -14,7 +14,7 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Show-VSTeamBuild -ProjectName Demo -Id 3

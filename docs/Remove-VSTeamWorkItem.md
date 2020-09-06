@@ -15,7 +15,7 @@ Deletes the specified work item and sends it to the Recycle Bin, so that it can 
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Remove-VSTeamWorkItem -Id 47,48 -Force
@@ -23,7 +23,7 @@ PS C:\> Remove-VSTeamWorkItem -Id 47,48 -Force
 
 This command deletes work items with IDs 47 and 48 by using the IDs parameter.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Remove-VSTeamWorkItem -Id 47
@@ -31,7 +31,7 @@ PS C:\> Remove-VSTeamWorkItem -Id 47
 
 This command deletes the work item with ID 47 by using the ID parameter.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Remove-VSTeamWorkItem -Id 47 -Destroy -Force

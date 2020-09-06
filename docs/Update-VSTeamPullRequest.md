@@ -15,7 +15,7 @@ Update a pull request
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
@@ -25,7 +25,7 @@ PS C:\> Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Draft
 
 Set the pull request to be a draft
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken

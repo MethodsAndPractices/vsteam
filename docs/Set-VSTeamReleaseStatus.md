@@ -15,7 +15,7 @@ Sets the status of a release to Active or Abandoned.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamReleaseStatus -Id 5 -status Abandoned

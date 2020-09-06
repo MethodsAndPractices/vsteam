@@ -15,7 +15,7 @@ Invoke-VSTeamRequest allows you to call a TFS/AzD REST API much easier than usin
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Invoke-VSTeamRequest -resource projectHistory -version '4.1-preview' -Verbose
@@ -23,7 +23,7 @@ PS C:\> Invoke-VSTeamRequest -resource projectHistory -version '4.1-preview' -Ve
 
 This command will return the project history.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> ivr -area release -resource releases -version '4.1-preview' -subDomain vsrm -Verbose

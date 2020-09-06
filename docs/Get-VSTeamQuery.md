@@ -15,7 +15,7 @@ Gets the root queries and their children.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamQuery MyProject

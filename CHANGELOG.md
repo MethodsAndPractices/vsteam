@@ -7,6 +7,12 @@ All classes names changed i.e. VSTeamSecurityNamespace is now vsteam_lib.Securit
 
 Build-Module script builds the class lib project as well.
 
+The folder structure has changed. All the tests and sample files are under the Tests folder.
+There is a new packages folder that contains required libs to build the C# project that do not live in NuGet.
+The Build folder is now the .build folder.
+
+The C# solution files is in the root of the project vsteam_lib.sln. The lib is in the classes folder under source and the tests are under the library folder under Tests.
+
 **Breaking changes**:
 You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.

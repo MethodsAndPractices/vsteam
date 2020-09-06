@@ -14,7 +14,7 @@ Add-VSTeamGitRepository adds a Git repository to your Azure DevOps or Team Found
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Add-VSTeamGitRepository -ProjectName Demo -Name Temp

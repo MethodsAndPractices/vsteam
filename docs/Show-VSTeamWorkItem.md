@@ -15,7 +15,7 @@ Opens the work item in the default browser.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Show-VSTeamWorkItem -ProjectName Demo -Id 3

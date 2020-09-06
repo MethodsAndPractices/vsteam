@@ -15,7 +15,7 @@ Updates an existing task group
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
 

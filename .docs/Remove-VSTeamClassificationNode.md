@@ -14,7 +14,7 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Remove-VSTeamClassificationNode -ProjectName Demo -StructureGroup "iterations" -Path "\MyIteration\Path"
@@ -22,7 +22,7 @@ PS C:\> Remove-VSTeamClassificationNode -ProjectName Demo -StructureGroup "itera
 
 This command removes an existing iteration with the path MyIteration/Path to the Demo project. Any work items that are assigned to that path get reassigned to the root iteration, since no reclassification id has been given.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Remove-VSTeamClassificationNode -ProjectName "Demo" -StructureGroup "areas" -Path "\MyIteration\Path" -ReClassifyId 19

@@ -14,7 +14,7 @@ Remove-VSTeamPolicy removes the policy from the specified project.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Remove-VSTeamPolicy -ProjectName Demo -Id 1

@@ -17,7 +17,7 @@ Removes an existing area from the project
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Remove-VSTeamArea -ProjectName Demo -Path "\MyIteration\Path"
@@ -25,7 +25,7 @@ PS C:\> Remove-VSTeamArea -ProjectName Demo -Path "\MyIteration\Path"
 
 This command removes an existing area with the path MyIteration/Path to the Demo project. Any work items that are assigned to that path get reassigned to the root area, since no reclassification id has been given.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Remove-VSTeamArea -ProjectName "Demo" -Path "\MyIteration\Path" -ReClassifyId 19

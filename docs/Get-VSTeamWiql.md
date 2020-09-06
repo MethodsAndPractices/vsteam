@@ -15,7 +15,7 @@ Returns work items from the given WIQL query or a saved query by ID from your pr
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject" -Expand
@@ -23,7 +23,7 @@ PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State
 
 This command gets work items via a WIQL query and expands the return work items with only the selected fields System.Id, System.Title and System.State.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject"

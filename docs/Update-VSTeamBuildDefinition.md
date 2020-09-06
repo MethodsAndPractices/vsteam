@@ -17,7 +17,7 @@ You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json
@@ -26,7 +26,7 @@ PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.jso
 This command reads build.json and updates existing build definition with
 id 123 from it on the demo team project.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> $b = Get-VSTeamBuildDefinition -ProjectName Demo -Id 23 -Raw

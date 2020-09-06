@@ -15,7 +15,7 @@ Sets the status of a environment to canceled, inProgress, notStarted, partiallyS
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamEnvironmentStatus -ReleaseId 54 -Id 5 -status inProgress

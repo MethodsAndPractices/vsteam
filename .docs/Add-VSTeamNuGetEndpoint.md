@@ -16,7 +16,7 @@ This is only used when using the NuGet tasks.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> $apikey = Read-Host -Prompt 'ApiKey' -AsSecureString

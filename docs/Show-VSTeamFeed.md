@@ -15,7 +15,7 @@ Opens the feed in the default browser.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Show-VSTeamFeed -Name Demo

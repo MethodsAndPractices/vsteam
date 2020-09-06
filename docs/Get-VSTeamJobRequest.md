@@ -15,7 +15,7 @@ Returns all the job requests of an agent.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamJobRequest 1 111

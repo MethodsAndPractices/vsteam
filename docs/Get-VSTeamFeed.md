@@ -15,7 +15,7 @@ Get-VSTeamFeed gets all the feeds for the account
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamFeed

@@ -15,7 +15,7 @@ Returns one or more a work items from your project.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamWorkItem -Id 47,48

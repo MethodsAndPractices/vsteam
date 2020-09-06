@@ -15,7 +15,7 @@ Opens the release associated with the waiting approval in the default browser.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamApproval -ProjectName Demo | Show-VSTeamApproval

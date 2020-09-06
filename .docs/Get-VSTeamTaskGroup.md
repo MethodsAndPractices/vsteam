@@ -14,7 +14,7 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
 
@@ -27,7 +27,7 @@ Get-VSTeamTaskGroup @methodParameters
 
 Get all the task groups for the some_project_name project.  Here we are splatting the parameter, but it may also be directly specified.  See a non-splatting example below.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```powershell
 Get-VSTeamTaskGroup -ProjectName "some_project_name" -Id "Task_group_id"
@@ -35,7 +35,7 @@ Get-VSTeamTaskGroup -ProjectName "some_project_name" -Id "Task_group_id"
 
 Get a task group when the ID is already known.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```powershell
 

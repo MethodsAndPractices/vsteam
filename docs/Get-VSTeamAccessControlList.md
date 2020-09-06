@@ -15,7 +15,7 @@ Return a list of access control lists for the specified security namespace and t
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList

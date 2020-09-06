@@ -16,7 +16,7 @@ You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Update-VSTeamReleaseDefinition -ProjectName Demo -Id 123 -InFile release.json
@@ -25,7 +25,7 @@ PS C:\> Update-VSTeamReleaseDefinition -ProjectName Demo -Id 123 -InFile release
 This command reads release.json and updates existing release definition with
 id 123 from it on the demo team project.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> $b = Get-VSTeamReleaseDefinition -ProjectName Demo -Id 23 -Raw

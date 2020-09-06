@@ -12,7 +12,7 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Update-VSTeamProfile -Name ProfileName
@@ -20,7 +20,7 @@ PS C:\> Update-VSTeamProfile -Name ProfileName
 
 You will be prompted for the account name and personal access token.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Update-VSTeamProfile -Name mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga
@@ -28,7 +28,7 @@ PS C:\> Update-VSTeamProfile -Name mydemos -PersonalAccessToken 7a8ilh6db4aforlr
 
 Allows you to provide all the information on the command line.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Get-VSTeamProfile | Where-Object version -eq vsts | Select-Object -skip 1 | Update-VSTeamProfile -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Force

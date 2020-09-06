@@ -15,7 +15,7 @@ The cmdlet adds a new Service Fabric service endpoint to an existing project.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "NoAuthTest" -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false
@@ -23,7 +23,7 @@ PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpoint
 
 Adds a Service Fabric Endpoint for a non-secure cluster
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
@@ -32,7 +32,7 @@ PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpoint
 
 Adds a Service Fabric Endpoint for an Azure AD secured cluster.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force

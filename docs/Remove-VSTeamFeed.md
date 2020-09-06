@@ -15,7 +15,7 @@ Removes a package feed from the account.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'

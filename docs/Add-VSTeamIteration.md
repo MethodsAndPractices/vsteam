@@ -11,7 +11,7 @@ Adds a new iteration to the project
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Add-VSTeamIteration -ProjectName Demo -Name "NewIteration" -Path "MyIteration/Path"
@@ -19,7 +19,7 @@ PS C:\> Add-VSTeamIteration -ProjectName Demo -Name "NewIteration" -Path "MyIter
 
 This command adds a new iteration named NewIteration to the Demo project under the iteration path MyIteration/Path.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Add-VSTeamIteration -ProjectName "Demo" -FinishDate (Get-Date "31.01.2020") -StartDate (Get-Date "01.01.2020") -Name "NewIteration"

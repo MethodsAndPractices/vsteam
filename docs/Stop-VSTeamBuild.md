@@ -15,7 +15,7 @@ Stop-VSTeamBuild will cancel a build using the build id.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo
@@ -24,7 +24,7 @@ PS C:\> Stop-VSTeamBuild -id 1
 
 This example cancels the build with build id 1.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo

@@ -19,7 +19,7 @@ Sets the permission inheritance to true or false.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true -Force
@@ -27,7 +27,7 @@ PS C:\> Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -Resourc
 
 This command sets the permission inheritance to true.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force

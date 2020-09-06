@@ -15,7 +15,7 @@ Adds a new feed to package management.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Add-VSTeamFeed -Name test -Description 'Test Description'

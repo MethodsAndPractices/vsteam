@@ -15,7 +15,7 @@ Add-VSTeamWorkItem will add a new work item to your project.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo
@@ -26,7 +26,7 @@ ID Title          Status
 6  New Work Item  To Do
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo
@@ -37,7 +37,7 @@ ID Title          Status
 6  New Work Item  To Do
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo

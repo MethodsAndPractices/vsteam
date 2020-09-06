@@ -15,7 +15,7 @@ Opens the release definitions for a team project in the default browser.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Show-VSTeamReleaseDefinition -ProjectName Demo

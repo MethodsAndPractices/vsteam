@@ -18,7 +18,7 @@ To have the BuildDefinition and QueueNames tab complete you must set a default p
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo
@@ -31,7 +31,7 @@ Demo-CI           Demo-CI-45   notStarted
 
 This example sets the default project so you can tab complete the BuildDefinition parameter.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo
@@ -44,7 +44,7 @@ Demo-CI           Demo-CI-45   notStarted
 
 This example queues the build for the 'develop' branch, overriding the default branch in the build definition.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```PowerShell
 PS C:\> Set-VSTeamDefaultProject Demo

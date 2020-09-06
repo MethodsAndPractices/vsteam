@@ -15,7 +15,7 @@ Opens the release summary in the default browser.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Show-VSTeamRelease -ProjectName Demo -Id 3

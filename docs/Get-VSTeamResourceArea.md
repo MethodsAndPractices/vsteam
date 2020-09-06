@@ -15,7 +15,7 @@ List all the areas supported by this instance of TFS/VSTS.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```PowerShell
 PS C:\> Get-VSTeamResourceArea

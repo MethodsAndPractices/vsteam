@@ -15,7 +15,7 @@ Gets a variable group
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
 
@@ -26,7 +26,7 @@ $methodParameters = @{
 Get-VSTeamVariableGroup @methodParameters
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```powershell
 
@@ -38,7 +38,7 @@ $methodParameters = @{
 Get-VSTeamVariableGroup @methodParameters
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```powershell
 

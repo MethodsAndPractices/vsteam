@@ -15,7 +15,7 @@ Removes a variable group
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
 

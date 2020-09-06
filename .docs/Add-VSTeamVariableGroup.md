@@ -14,7 +14,7 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
 
@@ -37,7 +37,7 @@ $methodParameters = @{
 Add-VSTeamVariableGroup @methodParameters
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
 ```powershell
 
@@ -63,7 +63,7 @@ $methodParameters = @{
 Add-VSTeamVariableGroup @methodParameters
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
 ```powershell
 # Copy variable group varGroupName from project sourceProjectName to project targetProjectName.  If varGroupName already exists, we'll update it; else, we'll add it.
