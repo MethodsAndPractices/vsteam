@@ -1,3 +1,12 @@
+# Queues a new release.
+#
+# Get-VSTeamOption 'release' 'releases' -subDomain 'vsrm'
+# id              : a166fde7-27ad-408e-ba75-703c2cc9d500
+# area            : Release
+# resourceName    : releases
+# routeTemplate   : {project}/_apis/{area}/{resource}/{releaseId}
+# http://bit.ly/Add-VSTeamRelease
+
 function Add-VSTeamRelease {
    [CmdletBinding(DefaultParameterSetName = 'ById', SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
    param(
@@ -55,9 +64,9 @@ function Add-VSTeamRelease {
       if ($force -or $pscmdlet.ShouldProcess($description, "Add Release")) {
          try {
             Write-Debug 'Add-VSTeamRelease Call the REST API'
-            $resp = _callAPI -Method POST -SubDomain vsrm -ProjectName $ProjectName `
-               -Area release `
-               -Resource releases `
+            $resp = _callAPI -Method POST -SubDomain "vsrm" -ProjectName $ProjectName `
+               -Area "release" `
+               -Resource "releases" `
                -Body $body `
                -Version $(_getApiVersion Release)
             

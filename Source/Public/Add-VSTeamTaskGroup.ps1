@@ -1,3 +1,12 @@
+# Adds a task group.
+#
+# Get-VSTeamOption 'distributedtask' 'taskgroups'
+# id              : 6c08ffbf-dbf1-4f9a-94e5-a1cbd47005e7
+# area            : distributedtask
+# resourceName    : taskgroups
+# routeTemplate   : {project}/_apis/{area}/{resource}/{taskGroupId}
+# http://bit.ly/Add-VSTeamTaskGroup
+
 function Add-VSTeamTaskGroup {
    [CmdletBinding()]
    param(

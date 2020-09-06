@@ -1,3 +1,12 @@
+# Adds a Git repository to your Azure DevOps or Team Foundation Server account.
+#
+# Get-VSTeamOption 'git' 'repositories'
+# id              : 225f7195-f9c7-4d14-ab28-a83f7ff77e1f
+# area            : git
+# resourceName    : repositories
+# routeTemplate   : {project}/_apis/{area}/{resource}/{repositoryId}
+# http://bit.ly/Add-VSTeamGitRepository
+
 function Add-VSTeamGitRepository {
    [CmdletBinding()]
    param(
@@ -14,8 +23,11 @@ function Add-VSTeamGitRepository {
 
       try {
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' `
-            -Method POST -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
+         $resp = _callAPI -Method POST -ProjectName $ProjectName `
+            -Area "git" `
+            -Resource "repositories" `
+            -Body $body `
+            -Version $(_getApiVersion Git)
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property

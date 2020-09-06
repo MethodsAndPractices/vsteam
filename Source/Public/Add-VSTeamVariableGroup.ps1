@@ -1,3 +1,12 @@
+# Adds a variable group.
+#
+# Get-VSTeamOption 'distributedtask' 'variablegroups'
+# id              : f5b09dd5-9d54-45a1-8b5a-1c8287d634cc
+# area            : distributedtask
+# resourceName    : variablegroups
+# routeTemplate   : {project}/_apis/{area}/{resource}/{groupId}
+# http://bit.ly/Add-VSTeamVariableGroup
+
 function Add-VSTeamVariableGroup {
    param(
       [Parameter(ParameterSetName = 'ByHashtable', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -58,8 +67,8 @@ function Add-VSTeamVariableGroup {
 
       # Call the REST API
       $resp = _callAPI -Method POST -ProjectName $projectName `
-         -Area distributedtask `
-         -Resource variablegroups `
+         -Area "distributedtask" `
+         -Resource "variablegroups" `
          -body $body `
          -Version $(_getApiVersion VariableGroups)
 

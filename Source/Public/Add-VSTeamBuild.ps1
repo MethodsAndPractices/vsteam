@@ -1,4 +1,5 @@
-# Queues a build
+# Queues a build.
+#
 # Get-VSTeamOption 'build' 'Builds'
 # id              : 0cd358e1-9217-4d94-8269-1c1ee6f93dcf
 # area            : Build
@@ -76,8 +77,8 @@ function Add-VSTeamBuild {
       }
       
       $resp = _callAPI -Method POST -ProjectName $ProjectName `
-         -Area build `
-         -Resource builds `
+         -Area "build" `
+         -Resource "builds" `
          -Body ($body | ConvertTo-Json -Compress -Depth 100) `
          -Version $(_getApiVersion Build)
 

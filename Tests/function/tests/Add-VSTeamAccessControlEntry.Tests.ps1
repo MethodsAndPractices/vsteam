@@ -15,7 +15,6 @@ Describe 'VSTeamAccessControlEntry' {
       # into the correct type.
       $securityNamespaceObject = [vsteam_lib.SecurityNamespace]::new($securityNamespace.value[0])
 
-      ## Arrange
       Mock _getDefaultProject { return "Testing" }
 
       # Set the account to use for testing. A normal user would do this using the

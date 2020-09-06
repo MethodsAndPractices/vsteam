@@ -1,3 +1,11 @@
+# Adds a Team Project to your account.
+#
+# id              : 603fe2ac-9723-48b9-88ad-09305aa6c6e1
+# area            : core
+# resourceName    : projects
+# routeTemplate   : _apis/{resource}/{*projectId}
+# http://bit.ly/Add-VSTeamProject
+
 function Add-VSTeamProject {
    param(
       [parameter(Mandatory = $true)]
@@ -31,7 +39,6 @@ function Add-VSTeamProject {
          $templateTypeId = '6b724908-ef14-45cf-84f8-768b5384da45'
       }
 
-      # $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
       $body = @{ 
          name         = $ProjectName
          description  = $Description
@@ -48,7 +55,7 @@ function Add-VSTeamProject {
       try {
          # Call the REST API
          $resp = _callAPI -Method POST `
-            -Resource projects `
+            -Resource "projects" `
             -Body ($body | ConvertTo-Json -Compress -Depth 100) `
             -Version $(_getApiVersion Core)
 

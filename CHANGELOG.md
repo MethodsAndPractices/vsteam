@@ -5,7 +5,10 @@
 All classes are moved to a new C# class library.
 All classes names changed i.e. VSTeamSecurityNamespace is now vsteam_lib.SecurityNamespace
 
+Build-Module script builds the class lib project as well.
+
 **Breaking changes**:
+You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.
 
 ## 6.5.1

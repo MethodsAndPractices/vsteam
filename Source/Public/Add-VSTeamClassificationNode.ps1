@@ -1,4 +1,5 @@
 # Create new or update an existing classification node.
+#
 # Get-VSTeamOption 'wit' 'classificationNodes'
 # id              : 5a172953-1b41-49d3-840a-33f79c3ce89f
 # area            : wit
@@ -65,8 +66,8 @@ function Add-VSTeamClassificationNode {
 
       # Call the REST API
       $resp = _callAPI -Method POST -ProjectName $ProjectName `
-         -Area wit `
-         -Resource classificationnodes `
+         -Area "wit" `
+         -Resource "classificationnodes" `
          -id $id `
          -body $bodyAsJson `
          -Version $(_getApiVersion Core)

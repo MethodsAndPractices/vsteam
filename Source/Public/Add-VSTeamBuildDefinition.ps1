@@ -1,4 +1,5 @@
 # Creates a new definition.
+#
 # Get-VSTeamOption 'build' 'Definitions'
 # id              : dbeaf647-6167-421a-bda9-c9327b25e2e6
 # area            : Build
@@ -19,8 +20,8 @@ function Add-VSTeamBuildDefinition {
    )
    process {
       return _callAPI -Method POST -ProjectName $ProjectName `
-         -Area build `
-         -Resource definitions `
+         -Area "build" `
+         -Resource "definitions" `
          -infile $InFile `
          -Version $(_getApiVersion Build)
    }

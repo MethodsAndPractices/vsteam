@@ -1,3 +1,12 @@
+# Creates a new release definition from a JSON file.
+#
+# Get-VSTeamOption 'release' 'definitions' -subDomain vsrm
+# id              : d8f96f24-8ea7-4cb6-baab-2df8fc515665
+# area            : Release
+# resourceName    : definitions
+# routeTemplate   : {project}/_apis/{area}/{resource}/{definitionId}
+# http://bit.ly/Add-VSTeamReleaseDefinition
+
 function Add-VSTeamReleaseDefinition {
    [CmdletBinding()]
    param(
@@ -11,9 +20,9 @@ function Add-VSTeamReleaseDefinition {
    )
 
    process {
-      $resp = _callAPI -Method POST -ProjectName $ProjectName -subDomain vsrm `
-         -Area release `
-         -Resource definitions `
+      $resp = _callAPI -Method POST -subDomain "vsrm" -ProjectName $ProjectName `
+         -Area "release" `
+         -Resource "definitions" `
          -inFile $inFile `
          -Version $(_getApiVersion Release)
 

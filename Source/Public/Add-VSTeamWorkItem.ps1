@@ -1,3 +1,12 @@
+# Adds a work item to your project.
+#
+# Get-VSTeamOption 'wit' 'workItems'
+# id              : 62d3d110-0047-428c-ad3c-4fe872c91c74
+# area            : wit
+# resourceName    : workItems
+# routeTemplate   : {project}/_apis/{area}/{resource}/${type}
+# http://bit.ly/Add-VSTeamWorkItem
+
 function Add-VSTeamWorkItem {
    [CmdletBinding()]
    param(
@@ -101,8 +110,8 @@ function Add-VSTeamWorkItem {
 
       # Call the REST API
       $resp = _callAPI -Method POST -ProjectName $ProjectName `
-         -Area wit `
-         -Resource workitems `
+         -Area "wit" `
+         -Resource "workitems" `
          -id $fullWorkItemType `
          -Body $json `
          -ContentType 'application/json-patch+json' `

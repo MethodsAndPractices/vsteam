@@ -1,3 +1,12 @@
+# Adds a new policy to the specified project.
+#
+# Get-VSTeamOption 'policy' 'configurations'
+# id              : dad91cbe-d183-45f8-9c6e-9c1164472121
+# area            : policy
+# resourceName    : configurations
+# routeTemplate   : {project}/_apis/{area}/{resource}/{configurationId}
+# http://bit.ly/Add-VSTeamPolicy
+
 function Add-VSTeamPolicy {
    [CmdletBinding()]
    param(
@@ -29,8 +38,8 @@ function Add-VSTeamPolicy {
       try {
          # Call the REST API
          $resp = _callAPI -Method POST -ProjectName $ProjectName `
-            -Area policy `
-            -Resource configurations `
+            -Area "policy" `
+            -Resource "configurations" `
             -Body $body `
             -Version $(_getApiVersion Policy)
 
