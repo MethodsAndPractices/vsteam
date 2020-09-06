@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject" -Expand
 ```
 
@@ -24,7 +24,7 @@ This command gets work items via a WIQL query and expands the return work items 
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject"
 ```
 

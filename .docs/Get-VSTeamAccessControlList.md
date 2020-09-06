@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList
 ```
 

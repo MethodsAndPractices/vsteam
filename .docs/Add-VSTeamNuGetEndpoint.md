@@ -18,7 +18,7 @@ This is only used when using the NuGet tasks.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> $apikey = Read-Host -Prompt 'ApiKey' -AsSecureString
 ApiKey: ************************************
 PS C:\> Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -SecureApiKey $apikey

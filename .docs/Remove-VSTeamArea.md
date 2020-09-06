@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamArea -ProjectName Demo -Path "\MyIteration\Path"
 ```
 
@@ -24,7 +24,7 @@ This command removes an existing area with the path MyIteration/Path to the Demo
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamArea -ProjectName "Demo" -Path "\MyIteration\Path" -ReClassifyId 19
 ```
 

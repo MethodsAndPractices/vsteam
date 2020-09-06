@@ -1,6 +1,6 @@
 ### -Force
 
-Forces the function without confirmation
+Forces the function without confirmation.
 
 ```yaml
 Type: SwitchParameter

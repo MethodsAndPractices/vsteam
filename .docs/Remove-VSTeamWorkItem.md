@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamWorkItem -Id 47,48 -Force
 ```
 
@@ -24,7 +24,7 @@ This command deletes work items with IDs 47 and 48 by using the IDs parameter.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamWorkItem -Id 47
 ```
 
@@ -32,7 +32,7 @@ This command deletes the work item with ID 47 by using the ID parameter.
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamWorkItem -Id 47 -Destroy -Force
 ```
 

@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Show-VSTeamWorkItem -ProjectName Demo -Id 3
 ```
 

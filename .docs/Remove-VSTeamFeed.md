@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'
 ```
 

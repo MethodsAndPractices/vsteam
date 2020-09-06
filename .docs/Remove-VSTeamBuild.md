@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuild | Remove-VSTeamBuild -Force
 ```
 

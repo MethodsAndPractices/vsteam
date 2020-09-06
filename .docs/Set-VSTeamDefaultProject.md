@@ -18,7 +18,7 @@ By setting a default project you can omit that parameter from your function call
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamDefaultProject Demo
 ```
 

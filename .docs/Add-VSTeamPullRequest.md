@@ -16,7 +16,7 @@ Create a new Pull Request
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
 PS C:\> Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.RepositoryId -SourceRefName "refs/heads/mybranch" -TargetRefName "refs/heads/master" -Title "My PR" -Description "My Description" -Draft

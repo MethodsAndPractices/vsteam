@@ -20,7 +20,7 @@ Calling Set-VSTeamAccount will clear any default project.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount
 ```
 
@@ -28,7 +28,7 @@ You will be prompted for the account name and personal access token.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrthisisnotreal4uhlh5vgbmgap3mziwnga
 ```
 
@@ -36,7 +36,7 @@ Allows you to provide all the information on the command line.
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
 ```
 
@@ -44,7 +44,7 @@ On Windows, allows you use to use Windows authentication against a local TFS ser
 
 ### Example 4
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Profile demonstrations
 ```
 
@@ -52,7 +52,7 @@ Will add the account from the profile provided.
 
 ### Example 5
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Profile demonstrations -Drive demo | Invoke-Expression
 PS C:\> Set-Location demo:
 PS demo:\> Get-ChildItem
@@ -62,7 +62,7 @@ Will add the account from the profile provided and mount a drive named demo that
 
 ### Example 6
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Profile demonstrations -Level Machine
 ```
 
@@ -72,7 +72,7 @@ Note: You must run PowerShell as an Administrator to store at the Machine level.
 
 ### Example 7
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 ```
 

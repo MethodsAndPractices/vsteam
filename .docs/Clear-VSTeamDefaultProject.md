@@ -16,7 +16,7 @@ Clears the value stored in the default project parameter value.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Clear-VSTeamDefaultProject
 ```
 

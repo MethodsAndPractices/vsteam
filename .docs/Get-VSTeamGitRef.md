@@ -16,7 +16,7 @@ Get-VSTeamGitRef gets all the refs for the provided repository.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamGitRepository -ProjectName Demo -Name Demo | Get-VSTeamGitRef
 ```
 

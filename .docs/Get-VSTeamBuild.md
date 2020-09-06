@@ -20,7 +20,7 @@ You can also specify a particular build by ID.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuild -ProjectName demo | Format-List *
 ```
 
@@ -31,7 +31,7 @@ displays all available properties (*) of the build objects.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuild -ProjectName demo -top 5 -resultFilter failed
 ```
 
@@ -39,7 +39,7 @@ This command gets a list of 5 failed builds in the demo project.
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> 1203,1204 | Get-VSTeamBuild -ProjectName demo
 ```
 
@@ -47,7 +47,7 @@ This command gets builds with IDs 1203 and 1204 by using the pipeline.
 
 ### Example 4
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuild -ProjectName demo -ID 1203,1204
 ```
 
@@ -55,7 +55,7 @@ This command gets builds with IDs 1203 and 1204 by using the ID parameter.
 
 ### Example 5
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuild -ProjectName demo -ID 1203 -Raw
 ```
 

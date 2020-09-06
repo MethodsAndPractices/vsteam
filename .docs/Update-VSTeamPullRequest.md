@@ -16,7 +16,7 @@ Update a pull request
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
 PS C:\> Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Draft
@@ -26,7 +26,7 @@ Set the pull request to be a draft
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
 PS C:\> Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abandoned

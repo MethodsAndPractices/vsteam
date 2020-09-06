@@ -16,7 +16,7 @@ The Get-VSTeamCloudSubscription function gets the Azure subscriptions associated
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamCloudSubscription
 ```
 

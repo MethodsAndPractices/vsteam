@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamProfile
 ```
 
@@ -24,7 +24,7 @@ Return the list of saved profiles
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamProfile -Name mydemos
 ```
 

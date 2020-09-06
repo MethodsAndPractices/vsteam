@@ -22,7 +22,7 @@ Version view contains Name, Area, Min Version, Max Version, Released Version and
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamOption
 ```
 
@@ -30,7 +30,7 @@ This will display all the versions of supported APIs for your account using the 
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamOption | Format-Table -View Versions
 ```
 
@@ -38,7 +38,7 @@ This will display all the versions of supported APIs for your account using the 
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamOption -SubDomain vsrm
 ```
 
@@ -46,7 +46,7 @@ This will display all the versions of supported APIs for the release management 
 
 ### Example 4
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamOption -Area core
 ```
 
@@ -54,7 +54,7 @@ This will display all the versions of supported APIs for the area core.
 
 ### Example 5
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamOption -Area core -Resource teams
 ```
 

@@ -20,7 +20,7 @@ To have the BuildDefinition and QueueNames tab complete you must set a default p
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamDefaultProject Demo
 PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI
 
@@ -33,7 +33,7 @@ This example sets the default project so you can tab complete the BuildDefinitio
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamDefaultProject Demo
 PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch refs/heads/develop
 
@@ -46,7 +46,7 @@ This example queues the build for the 'develop' branch, overriding the default b
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamDefaultProject Demo
 PS C:\> Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
 

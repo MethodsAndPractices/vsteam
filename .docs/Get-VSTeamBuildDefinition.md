@@ -22,7 +22,7 @@ You can also specify a particular build definition by ID.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo | Format-List *
 ```
 
@@ -32,7 +32,7 @@ The pipeline operator (|) passes the data to the Format-List cmdlet, which displ
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo -id 2 -Json
 ```
 
@@ -40,7 +40,7 @@ This command returns the raw object returned from the server formatted as a JSON
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo -id 2 -Raw
 ```
 

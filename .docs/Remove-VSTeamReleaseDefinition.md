@@ -18,7 +18,7 @@ The project name is a Dynamic Parameter which may not be displayed in the syntax
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamReleaseDefinition -ProjectName demo | Remove-VSTeamReleaseDefinition
 ```
 

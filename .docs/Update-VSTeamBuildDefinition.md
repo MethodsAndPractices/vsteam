@@ -18,7 +18,7 @@ You must call Set-VSTeamAccount before calling this function.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json
 ```
 
@@ -27,7 +27,7 @@ id 123 from it on the demo team project.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> $b = Get-VSTeamBuildDefinition -ProjectName Demo -Id 23 -Raw
 PS C:\> $b.variables.subscriptionId.value = 'Some New Value'
 PS C:\> $body = $b | ConvertTo-Json -Depth 100

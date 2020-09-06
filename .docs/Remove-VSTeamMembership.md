@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
 PS C:\> $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
 PS C:\> Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor

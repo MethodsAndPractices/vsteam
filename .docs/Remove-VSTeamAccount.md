@@ -18,7 +18,7 @@ To remove from the Machine level you must be running PowerShell as administrator
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamAccount
 ```
 

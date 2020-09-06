@@ -16,7 +16,7 @@ This will create a new Team Project in your Team Foundation Server or Team Servi
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Add-VSTeamProject 'MyProject'
 ```
 
@@ -25,7 +25,7 @@ template and Git source control.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Add-VSTeamProject 'MyProject' -TFVC -ProcessTemplate Agile
 ```
 

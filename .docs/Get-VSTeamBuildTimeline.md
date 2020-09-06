@@ -20,7 +20,7 @@ You can also specify a particular timeline by ID to get .
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 | Format-List *
 ```
 
@@ -31,7 +31,7 @@ displays all available properties (*) of the timeline objects.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -Id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382
 ```
 
@@ -39,7 +39,7 @@ This command gets the timelines with ID 1 and timeline id 595dac0c-0f1a-4bfd-a35
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -ID @(1,2)
 ```
 

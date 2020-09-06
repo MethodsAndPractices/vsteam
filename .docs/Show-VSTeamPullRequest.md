@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Show-VSTeamPullRequest 3
 ```
 
@@ -24,7 +24,7 @@ This command will open a web browser with the pull request id of 3.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Show-VSTeamPullRequest -Id 3
 ```
 

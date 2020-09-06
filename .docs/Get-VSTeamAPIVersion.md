@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamAPIVersion
 ```
 
@@ -24,7 +24,7 @@ This command gets the API versions currently in use.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamAPIVersion -Service Release
 ```
 

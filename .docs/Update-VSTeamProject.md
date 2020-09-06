@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Update-VSTeamProject -Name Demo -NewName aspDemo
 ```
 

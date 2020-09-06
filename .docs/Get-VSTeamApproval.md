@@ -28,7 +28,7 @@ The Team.Approval type has three custom table formats:
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamApproval -ProjectName Demo
 ```
 
@@ -36,7 +36,7 @@ This command gets a list of all pending approvals.
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
 ```
 
@@ -44,7 +44,7 @@ This command gets a list of all approved approvals using a custom table format.
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
 ```
 

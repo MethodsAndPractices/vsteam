@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Add-VSTeamFeed -Name test -Description 'Test Description'
 ```
 

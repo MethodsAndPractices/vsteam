@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamClassificationNode -ProjectName Demo -StructureGroup "iterations" -Path "\MyIteration\Path"
 ```
 
@@ -24,7 +24,7 @@ This command removes an existing iteration with the path MyIteration/Path to the
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Remove-VSTeamClassificationNode -ProjectName "Demo" -StructureGroup "areas" -Path "\MyIteration\Path" -ReClassifyId 19
 ```
 

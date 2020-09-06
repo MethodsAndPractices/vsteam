@@ -22,7 +22,7 @@ You can also specify a particular build definition by ID.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Show-VSTeamBuildDefinition -ProjectName Demo
 ```
 

@@ -20,7 +20,7 @@ You must call Set-VSTeamAccount before calling this function.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamBuild | ft id,name
 
 id name
@@ -40,7 +40,7 @@ This example shows how to find the Build ID, Artifact Alias, and Release definit
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
 ```
 

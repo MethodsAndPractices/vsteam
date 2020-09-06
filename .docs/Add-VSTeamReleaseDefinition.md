@@ -18,7 +18,7 @@ You must call Set-VSTeamAccount before calling this function.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Add-VSTeamReleaseDefinition -ProjectName demo -inFile release.json
 ```
 

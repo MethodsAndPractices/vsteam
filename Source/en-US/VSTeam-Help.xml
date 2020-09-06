@@ -607,14 +607,14 @@
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamArea -ProjectName Demo -Name "NewArea" -Path "MyArea/Path"</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new area named NewArea to the Demo project under the area path MyArea/Path.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamArea -ProjectName Demo -Name "NewArea"</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new area named NewArea to the Demo project.</maml:para>
@@ -1115,7 +1115,7 @@
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-VSTeamBuild -BuildDefinition Demo-CI
 
@@ -1127,7 +1127,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-VSTeamBuild -BuildDefinition Demo-CI -SourceBranch refs/heads/develop
 
@@ -1139,7 +1139,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-VSTeamBuild -BuildDefinition Demo-CI -BuildParameters @{msg="hello world!"; 'system.debug'='true'}
 
@@ -1245,7 +1245,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamBuildDefinition -ProjectName Demo -InFile build.json</dev:code>
         <dev:remarks>
           <maml:para>This command reads build.json and creates a new build definition from it on the demo team project.</maml:para>
@@ -1323,7 +1323,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1400,7 +1400,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1630,14 +1630,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamClassificationNode -ProjectName Demo -Name "NewIteration" -StructureGroup "iteration" -Path "MyIteration/Path"</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new iteration named NewIteration to the Demo project under the iteration path MyIteration/Path.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamClassificationNode -ProjectName "Demo" -FinishDate (Get-Date "31.01.2020") -StartDate (Get-Date "01.01.2020") -Name "NewIteration" -StructureGroup "iterations"</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new iteration named NewIteration to the Demo project with the start date 01.01.2020 and finish date 31.01.2020.</maml:para>
@@ -1895,7 +1895,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamFeed -Name test -Description 'Test Description'</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new package feed to the account.</maml:para>
@@ -1984,7 +1984,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamGitRepository -ProjectName Demo -Name Temp</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new repository named Temp to the Demo project.</maml:para>
@@ -2412,14 +2412,14 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamIteration -ProjectName Demo -Name "NewIteration" -Path "MyIteration/Path"</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new iteration named NewIteration to the Demo project under the iteration path MyIteration/Path.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamIteration -ProjectName "Demo" -FinishDate (Get-Date "31.01.2020") -StartDate (Get-Date "01.01.2020") -Name "NewIteration"</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new iteration named NewIteration to the Demo project with the start date 01.01.2020 and finish date 31.01.2020.</maml:para>
@@ -2710,7 +2710,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
           <maml:name>MemberDescriptor</maml:name>
           <maml:Description>
-            <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+            <maml:para>A member descriptor retrieved by Get-VsTeamUser.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2722,7 +2722,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>ContainerDescriptor</maml:name>
           <maml:Description>
-            <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+            <maml:para>A container descriptor retrieved by Get-VsTeamGroup.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2737,7 +2737,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
         <maml:name>MemberDescriptor</maml:name>
         <maml:Description>
-          <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+          <maml:para>A member descriptor retrieved by Get-VsTeamUser.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2749,7 +2749,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
         <maml:name>ContainerDescriptor</maml:name>
         <maml:Description>
-          <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+          <maml:para>A container descriptor retrieved by Get-VsTeamGroup.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2768,7 +2768,7 @@ Demo-CI           Demo-CI-45   notStarted</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
 PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
 PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor</dev:code>
@@ -3219,7 +3219,7 @@ PS C:\&gt; Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDes
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $apikey = Read-Host -Prompt 'ApiKey' -AsSecureString
 ApiKey: ************************************
 PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -SecureApiKey $apikey</dev:code>
@@ -3395,7 +3395,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamPolicy -ProjectName Demo -type 687c53f8-1a82-4e89-9a86-13d51bc4a8d5 -enabled -blocking -settings @{MinimumApproverCount = 1;Scope=@(@{repositoryId=b87c5af8-1a82-4e59-9a86-13d5cbc4a8d5; matchKind="Exact"; refName="refs/heads/master"})}</dev:code>
         <dev:remarks>
           <maml:para>This command adds a new policy to the Demo project's repository specified. The policy added requires a minimum number of reviewers and applies to the master branch. Specifying `-blocking` will block pushes to master directly.</maml:para>
@@ -3462,12 +3462,19 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:Description>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2017U1</maml:para>
+            <maml:para>- TFS2017U2</maml:para>
+            <maml:para>- TFS2017U3</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- TFS2018U1</maml:para>
+            <maml:para>- TFS2018U2</maml:para>
+            <maml:para>- TFS2018U3</maml:para>
             <maml:para>- AzD2019</maml:para>
+            <maml:para>- AzD2019U1</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3546,12 +3553,19 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:Description>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2017U1</maml:para>
+            <maml:para>- TFS2017U2</maml:para>
+            <maml:para>- TFS2017U3</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- TFS2018U1</maml:para>
+            <maml:para>- TFS2018U2</maml:para>
+            <maml:para>- TFS2018U3</maml:para>
             <maml:para>- AzD2019</maml:para>
+            <maml:para>- AzD2019U1</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3604,12 +3618,19 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
           <maml:Description>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2017U1</maml:para>
+            <maml:para>- TFS2017U2</maml:para>
+            <maml:para>- TFS2017U3</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- TFS2018U1</maml:para>
+            <maml:para>- TFS2018U2</maml:para>
+            <maml:para>- TFS2018U3</maml:para>
             <maml:para>- AzD2019</maml:para>
+            <maml:para>- AzD2019U1</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3712,12 +3733,19 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <maml:Description>
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
+          <maml:para>- TFS2017U1</maml:para>
+          <maml:para>- TFS2017U2</maml:para>
+          <maml:para>- TFS2017U3</maml:para>
           <maml:para>- TFS2018</maml:para>
+          <maml:para>- TFS2018U1</maml:para>
+          <maml:para>- TFS2018U2</maml:para>
+          <maml:para>- TFS2018U3</maml:para>
           <maml:para>- AzD2019</maml:para>
+          <maml:para>- AzD2019U1</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
           <maml:para></maml:para>
-          <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+          <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3736,21 +3764,21 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamProfile</dev:code>
         <dev:remarks>
           <maml:para>You will be prompted for the account name and personal access token.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version TFS2018</dev:code>
         <dev:remarks>
           <maml:para>Allows you to provide all the information on the command line.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamProfile -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
         <dev:remarks>
           <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
@@ -3893,14 +3921,14 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamProject 'MyProject'</dev:code>
         <dev:remarks>
           <maml:para>This will add a project name MyProject with no description using the Scrum process template and Git source control.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamProject 'MyProject' -TFVC -ProcessTemplate Agile</dev:code>
         <dev:remarks>
           <maml:para>This will add a project name MyProject with no description using the Agile process template and TFVC source control.</maml:para>
@@ -4114,7 +4142,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:verb>Add</command:verb>
       <command:noun>VSTeamPullRequest</command:noun>
       <maml:description>
-        <maml:para>Create a new Pull Request</maml:para>
+        <maml:para>Creates a new Pull Request.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -4222,7 +4250,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4345,7 +4373,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -4385,7 +4413,7 @@ PS C:\&gt; Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\&gt; $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
 PS C:\&gt; Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.RepositoryId -SourceRefName "refs/heads/mybranch" -TargetRefName "refs/heads/master" -Title "My PR" -Description "My Description" -Draft</dev:code>
@@ -4402,7 +4430,7 @@ PS C:\&gt; Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.Repositor
       <command:verb>Add</command:verb>
       <command:noun>VSTeamRelease</command:noun>
       <maml:description>
-        <maml:para>Queues a new release</maml:para>
+        <maml:para>Queues a new release.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -4502,7 +4530,7 @@ PS C:\&gt; Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.Repositor
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4590,7 +4618,7 @@ PS C:\&gt; Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.Repositor
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -4714,7 +4742,7 @@ PS C:\&gt; Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.Repositor
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -4735,7 +4763,7 @@ PS C:\&gt; Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.Repositor
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuild | ft id,name
 
 id name
@@ -4754,7 +4782,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44</dev:code>
         <dev:remarks>
           <maml:para>This command starts a new release using the Demo-CD release definition and the build with build number Demo-CI-44.</maml:para>
@@ -4856,7 +4884,7 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamReleaseDefinition -ProjectName demo -inFile release.json</dev:code>
         <dev:remarks>
           <maml:para>This command reads release.json and creates a new release definition from it on the demo team project.</maml:para>
@@ -5374,14 +5402,14 @@ PS C:\&gt; Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias De
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "NoAuthTest" -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false</dev:code>
         <dev:remarks>
           <maml:para>Adds a Service Fabric Endpoint for a non-secure cluster</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
 PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someUser@someplace.com" -password $password</dev:code>
         <dev:remarks>
@@ -5389,7 +5417,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
 PS C:\&gt; $pathToPFX = "C:\someFolder\theCertificateFile.pfx"
 PS C:\&gt; $base64Cert = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($pathToPFX))
@@ -5812,7 +5840,7 @@ PS C:\&gt; Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpo
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>$taskGroup = Get-VSTeamTaskGroup -Name "taskGroupName" -ProjectName "sourceProjectName"
 
 # Set the ID and revision to null, so AzD is happy.
@@ -6293,7 +6321,7 @@ Add-VSTeamTaskGroup -Body $taskGroupJson -ProjectName "destinationProjectName"</
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
    Name        = "new_variable_group"
@@ -6316,7 +6344,7 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
    Name        = "new_variable_group"
@@ -6342,7 +6370,7 @@ Add-VSTeamVariableGroup @methodParameters</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code># Copy variable group varGroupName from project sourceProjectName to project targetProjectName.  If varGroupName already exists, we'll update it; else, we'll add it.
 
 $Name = "varGroupName"
@@ -6618,7 +6646,7 @@ else {
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task
 
@@ -6630,7 +6658,7 @@ ID Title          Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description"
 
@@ -6642,7 +6670,7 @@ ID Title          Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
 PS C:\&gt; Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
@@ -7177,7 +7205,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Clear-VSTeamDefaultAPITimeout</dev:code>
         <dev:remarks>
           <maml:para>This will clear the default timeout parameter value.</maml:para>
@@ -7247,7 +7275,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Clear-VSTeamDefaultProject</dev:code>
         <dev:remarks>
           <maml:para>This will clear the default project parameter value. You will now have to provide a project for any functions that require a project.</maml:para>
@@ -7812,7 +7840,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -7989,14 +8017,14 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamAPIVersion</dev:code>
         <dev:remarks>
           <maml:para>This command gets the API versions currently in use.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamAPIVersion -Service Release</dev:code>
         <dev:remarks>
           <maml:para>This command gets the version of the Release API currently in use.</maml:para>
@@ -8156,21 +8184,21 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all pending approvals.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all approved approvals using a custom table format.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all approvals rejected by Administrator using a custom table format.</maml:para>
@@ -8793,7 +8821,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuild -ProjectName demo | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all builds in the demo project.</maml:para>
@@ -8801,28 +8829,28 @@ ID Title          Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuild -ProjectName demo -top 5 -resultFilter failed</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of 5 failed builds in the demo project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; 1203,1204 | Get-VSTeamBuild -ProjectName demo</dev:code>
         <dev:remarks>
           <maml:para>This command gets builds with IDs 1203 and 1204 by using the pipeline.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuild -ProjectName demo -ID 1203,1204</dev:code>
         <dev:remarks>
           <maml:para>This command gets builds with IDs 1203 and 1204 by using the ID parameter.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 5 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuild -ProjectName demo -ID 1203 -Raw</dev:code>
         <dev:remarks>
           <maml:para>This command returns the raw object returned from the server.</maml:para>
@@ -9214,7 +9242,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition -ProjectName Demo | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all build definitions in the demo project.</maml:para>
@@ -9222,14 +9250,14 @@ ID Title          Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition -ProjectName Demo -id 2 -Json</dev:code>
         <dev:remarks>
           <maml:para>This command returns the raw object returned from the server formatted as a JSON string.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition -ProjectName Demo -id 2 -Raw</dev:code>
         <dev:remarks>
           <maml:para>This command returns the raw object returned from the server.</maml:para>
@@ -9372,7 +9400,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuild -Top 1 | Get-VSTeamBuildLog</dev:code>
         <dev:remarks>
           <maml:para>This command displays the logs of the first build.</maml:para>
@@ -9666,7 +9694,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all timelines of thr build with Id 1 in the demo project.</maml:para>
@@ -9674,14 +9702,14 @@ ID Title          Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -Id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382</dev:code>
         <dev:remarks>
           <maml:para>This command gets the timelines with ID 1 and timeline id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7. It is filtered with the change ID and plan ID.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -ID @(1,2)</dev:code>
         <dev:remarks>
           <maml:para>This command gets timelines with IDs 1 and 2 by using the ID parameter.</maml:para>
@@ -9919,7 +9947,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamCloudSubscription</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all Azure subscriptions associated with the Team Services account.</maml:para>
@@ -10204,7 +10232,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamFeed</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the package feeds for the account.</maml:para>
@@ -11438,7 +11466,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamGitCommit -ProjectName demo -RepositoryId 118C262F-0D4C-4B76-BD9B-7DD8CA12F196</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all commits in the demo project for a specific repository.</maml:para>
@@ -11623,7 +11651,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamGitRepository -ProjectName Demo -Name Demo | Get-VSTeamGitRef</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the Git refs for the Demo team project.</maml:para>
@@ -11761,21 +11789,21 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamGitRepository</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the Git repositories for your TFS or Team Services account.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamGitRepository -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the Git repositories for the Demo team project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteUrl)</dev:code>
         <dev:remarks>
           <maml:para>This command gets the remote URL and passes it to git clone command.</maml:para>
@@ -11972,21 +12000,21 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the Git stats for the entire repository</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the Git stats for a specific branch</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamGitStat -ProjectName Demo -RepositoryId 011E421A-2A54-4491-B370-9256AD8A1BDD -BranchName develop -VersionType branch -Version 67cae2b029dff7eb3dc062b49403aaedca5bad8d</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the Git stats for a specific commit</maml:para>
@@ -12175,7 +12203,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'</dev:code>
         <dev:remarks>
           <maml:para>Assigns Endpoint Administrators group to $group variable.</maml:para>
@@ -12211,7 +12239,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamInfo</dev:code>
         <dev:remarks>
           <maml:para>This will display your current account and default project</maml:para>
@@ -12490,7 +12518,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamJobRequest 1 111</dev:code>
         <dev:remarks>
           <maml:para>This will display all the job request of agent with id 111 under the pool with id 1.</maml:para>
@@ -12716,14 +12744,14 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>(Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerDescriptor }</dev:code>
         <dev:remarks>
           <maml:para>Get all the groups for a user</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>(Get-VSTeamMembership -ContainerDescriptor $group.id).value | % {Get-VSTeamUser -Descriptor $_.memberDescriptor }</dev:code>
         <dev:remarks>
           <maml:para>Get all the members for a group</maml:para>
@@ -12866,35 +12894,35 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamOption</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for your account using the 'Default' table format.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamOption | Format-Table -View Versions</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for your account using the 'Versions' custom table format.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamOption -SubDomain vsrm</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for the release management service.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamOption -Area core</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for the area core.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 5 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamOption -Area core -Resource teams</dev:code>
         <dev:remarks>
           <maml:para>This will display all the versions of supported APIs for resources teams under the area core.</maml:para>
@@ -13018,14 +13046,14 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition</dev:code>
         <dev:remarks>
           <maml:para>This command returns true or false.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition | Get-VSTeamPermissionInheritance -ResourceType BuildDefinition</dev:code>
         <dev:remarks>
           <maml:para>This command returns true or false for every build definition returned from Get-VSTeamBuildDefinition.</maml:para>
@@ -13129,14 +13157,14 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPolicy -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the policies for the Demo project in your TFS or Team Services account.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPolicy -ProjectName Demo -Id 1</dev:code>
         <dev:remarks>
           <maml:para>This command gets the policy with an id of 1 within the Demo project.</maml:para>
@@ -13238,14 +13266,14 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPolicyType -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the policy types for the Demo project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPolicyType -ProjectName Demo -Id 73da726a-8ff9-44d7-8caa-cbb581eac991</dev:code>
         <dev:remarks>
           <maml:para>This command gets the policy type by the specified id within the Demo project.</maml:para>
@@ -13481,21 +13509,21 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProcess</dev:code>
         <dev:remarks>
           <maml:para>This will return all the Process Templates</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProcess | Format-Wide</dev:code>
         <dev:remarks>
           <maml:para>This will return the Process Templates only showing their name</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProcess *scrum*</dev:code>
         <dev:remarks>
           <maml:para>This will return an process templates with names containing scrum, in other words, the default "Scrum" template and custom ones with names like "Custom Scrum", "Scrum for Contoso" will all be returned.</maml:para>
@@ -13565,14 +13593,14 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProfile</dev:code>
         <dev:remarks>
           <maml:para>Return the list of saved profiles</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProfile -Name mydemos</dev:code>
         <dev:remarks>
           <maml:para>Will return details of the profile provided</maml:para>
@@ -13794,14 +13822,14 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProject</dev:code>
         <dev:remarks>
           <maml:para>This will return all the WellFormed team projects.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProject -top 5 | Format-Wide</dev:code>
         <dev:remarks>
           <maml:para>This will return the top five WellFormed team projects only showing their name</maml:para>
@@ -14286,42 +14314,42 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the open pull requests for your TFS or Team Services account.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command returns all the open pull requests for the Demo team project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest -ProjectName Demo -All</dev:code>
         <dev:remarks>
           <maml:para>This command returns all pull requests for the Demo team project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest -ProjectName Demo -TargetBranchRef "refs/heads/mybranch"</dev:code>
         <dev:remarks>
           <maml:para>This command returns all open pull requests for a specific branch</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 5 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest -Id 123</dev:code>
         <dev:remarks>
           <maml:para>This command gets the pull request with an Id of 123.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 6 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamPullRequest -Id 123 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits</dev:code>
         <dev:remarks>
           <maml:para>This command gets the pull request with an Id of 123 and includes the commits that are part of the pull request.</maml:para>
@@ -14489,7 +14517,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamQuery MyProject</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -15084,7 +15112,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamRelease -ProjectName demo | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all releases in the demo project.</maml:para>
@@ -15092,14 +15120,14 @@ ID Title          Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamRelease -ProjectName demo -Id 10 -Raw</dev:code>
         <dev:remarks>
           <maml:para>This command returns the raw object returned from the server.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamRelease -ProjectName demo -Id 10 -Json</dev:code>
         <dev:remarks>
           <maml:para>This command returns the raw object returned from the server formatted as JSON.</maml:para>
@@ -15356,7 +15384,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamReleaseDefinition -ProjectName demo | Format-List *</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all release definitions in the demo project.</maml:para>
@@ -15364,14 +15392,14 @@ ID Title          Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamReleaseDefinition -ProjectName Demo -id 2 -Json</dev:code>
         <dev:remarks>
           <maml:para>This command returns the raw object returned from the server formatted as a JSON string.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamReleaseDefinition -ProjectName Demo -id 2 -Raw</dev:code>
         <dev:remarks>
           <maml:para>This command returns the raw object returned from the server.</maml:para>
@@ -15424,7 +15452,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamResourceArea</dev:code>
         <dev:remarks>
           <maml:para>This will display all the areas of supported APIs for your account.</maml:para>
@@ -15902,7 +15930,7 @@ ID Title          Status
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName = "some_project_name"
 }
@@ -15913,14 +15941,14 @@ Get-VSTeamTaskGroup @methodParameters</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>Get-VSTeamTaskGroup -ProjectName "some_project_name" -Id "Task_group_id"</dev:code>
         <dev:remarks>
           <maml:para>Get a task group when the ID is already known.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName = "some_project_name"
    Name        = "Task_group_name"
@@ -16068,35 +16096,35 @@ Get-VSTeamTaskGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch</dev:code>
         <dev:remarks>
           <maml:para>This command returns the branch object for the path $/MyProject/MyBranch</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren</dev:code>
         <dev:remarks>
           <maml:para>This command returns the branch object for the path $/MyProject/MyBranch and its child branches.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent</dev:code>
         <dev:remarks>
           <maml:para>This command returns the branch object for the path $/MyProject/MyBranch and its parent.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted</dev:code>
         <dev:remarks>
           <maml:para>This command returns the branch object for the path $/MyProject/MyBranch, even if it's marked as deleted.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 5 --------------------------</maml:title>
         <dev:code>PS C:\&gt; '$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvcBranch</dev:code>
         <dev:remarks>
           <maml:para>This command returns the branch objects for the paths $/MyProject/MyBranch and $/AnotherProject/AnotherBranch by using the pipeline.</maml:para>
@@ -16179,21 +16207,21 @@ Get-VSTeamTaskGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranch</dev:code>
         <dev:remarks>
           <maml:para>This command returns root branches for all projects.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranch -IncludeChildren</dev:code>
         <dev:remarks>
           <maml:para>This command returns root branches for all projects and their respective child branches.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamTfvcRootBranch -IncludeDeleted</dev:code>
         <dev:remarks>
           <maml:para>This command returns root branches for all projects, also those marked as deleted.</maml:para>
@@ -16548,7 +16576,7 @@ Get-VSTeamTaskGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName = "some_project_name"
 }
@@ -16559,7 +16587,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName = "some_project_name"
    Id          = "variable_group_id"
@@ -16571,7 +16599,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName = "some_project_name"
    Name        = "variable_group_name"
@@ -16790,14 +16818,14 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject" -Expand</dev:code>
         <dev:remarks>
           <maml:para>This command gets work items via a WIQL query and expands the return work items with only the selected fields System.Id, System.Title and System.State.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject"</dev:code>
         <dev:remarks>
           <maml:para>This command gets work items via a WIQL query and returns the WIQL query result with only work item IDs.</maml:para>
@@ -16955,7 +16983,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamWorkItem -Id 47,48</dev:code>
         <dev:remarks>
           <maml:para>This command gets work items with IDs 47 and 48 by using the IDs parameter.</maml:para>
@@ -17062,7 +17090,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS R:\repos\vsteam&gt; Get-VSTeamWorkItemType -ProjectName test -WorkItemType 'Code Review Response'</dev:code>
         <dev:remarks>
           <maml:para>This command gets a single work item type.</maml:para>
@@ -17490,14 +17518,14 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Invoke-VSTeamRequest -resource projectHistory -version '4.1-preview' -Verbose</dev:code>
         <dev:remarks>
           <maml:para>This command will return the project history.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; ivr -area release -resource releases -version '4.1-preview' -subDomain vsrm -Verbose</dev:code>
         <dev:remarks>
           <maml:para>This command will return the releases for a project.</maml:para>
@@ -17561,7 +17589,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -17624,7 +17652,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -17950,42 +17978,42 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")</dev:code>
         <dev:remarks>
           <maml:para>This will remove the specified descriptor from the specified repository, using the security namespace id, while confirming for the remove action.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -confirm:$false</dev:code>
         <dev:remarks>
           <maml:para>This will remove the specified descriptor from the specified repository, using the security namespace id, with no confirmation for the remove action.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")</dev:code>
         <dev:remarks>
           <maml:para>This will remove multiple descriptors from the specified repository, using the security namespace id, while confirming for the remove action.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")</dev:code>
         <dev:remarks>
           <maml:para>This will remove the specified descriptor from the specified repository, using a security namespace object, while confirming for the remove action.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 5 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -confirm:$false</dev:code>
         <dev:remarks>
           <maml:para>This will remove the specified descriptor from the specified repository, using a security namespace object, with no confirmation for the remove action.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 6 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")</dev:code>
         <dev:remarks>
           <maml:para>This will remove multiple descriptors from the specified repository, using a security namespace object, while confirming for the remove action.</maml:para>
@@ -18158,7 +18186,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18184,7 +18212,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18203,7 +18231,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamAccount</dev:code>
         <dev:remarks>
           <maml:para>This will clear your account name and personal access token.</maml:para>
@@ -18259,7 +18287,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18297,7 +18325,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18382,7 +18410,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18434,7 +18462,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18462,14 +18490,14 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamArea -ProjectName Demo -Path "\MyIteration\Path"</dev:code>
         <dev:remarks>
           <maml:para>This command removes an existing area with the path MyIteration/Path to the Demo project. Any work items that are assigned to that path get reassigned to the root area, since no reclassification id has been given.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamArea -ProjectName "Demo" -Path "\MyIteration\Path" -ReClassifyId 19</dev:code>
         <dev:remarks>
           <maml:para>This command removes an existing area with the path \MyIteration\Path to the Demo project. Any work items that are assigned to that path get reassigned to the area with the id 19.</maml:para>
@@ -18533,7 +18561,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18575,7 +18603,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18603,7 +18631,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuild | Remove-VSTeamBuild -Force</dev:code>
         <dev:remarks>
           <maml:para>This command will delete all builds that are not marked retain indefinitely.</maml:para>
@@ -18659,7 +18687,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18701,7 +18729,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18732,7 +18760,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition -ProjectName Demo | Remove-VSTeamBuildDefinition</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all build definitions in the demo project.</maml:para>
@@ -18817,7 +18845,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -18893,7 +18921,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19009,7 +19037,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19073,7 +19101,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19101,14 +19129,14 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamClassificationNode -ProjectName Demo -StructureGroup "iterations" -Path "\MyIteration\Path"</dev:code>
         <dev:remarks>
           <maml:para>This command removes an existing iteration with the path MyIteration/Path to the Demo project. Any work items that are assigned to that path get reassigned to the root iteration, since no reclassification id has been given.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamClassificationNode -ProjectName "Demo" -StructureGroup "areas" -Path "\MyIteration\Path" -ReClassifyId 19</dev:code>
         <dev:remarks>
           <maml:para>This command removes an existing area with the path \MyIteration\Path to the Demo project. Any work items that are assigned to that path get reassigned to the area with the id 19.</maml:para>
@@ -19168,7 +19196,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19206,7 +19234,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19295,7 +19323,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'</dev:code>
         <dev:remarks>
           <maml:para>This command remove the package feed from the account.</maml:para>
@@ -19336,7 +19364,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19364,7 +19392,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19383,7 +19411,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamGitRepository -Id 687c53f8-1a82-4e89-9a86-13d51bc4a8d5</dev:code>
         <dev:remarks>
           <maml:para>This command removes all the Git repositories for your TFS or Team Services account.</maml:para>
@@ -19448,7 +19476,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19500,7 +19528,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19528,14 +19556,14 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamIteration -ProjectName Demo -Path "\MyIteration\Path"</dev:code>
         <dev:remarks>
           <maml:para>This command removes an existing iteration with the path MyIteration/Path to the Demo project. Any work items that are assigned to that path get reassigned to the root iteration, since no reclassification id has been given.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamIteration -ProjectName "Demo" -Path "\MyIteration\Path" -ReClassifyId 19</dev:code>
         <dev:remarks>
           <maml:para>This command removes an existing iteration with the path \MyIteration\Path to the Demo project. Any work items that are assigned to that path get reassigned to the iteration with the id 19.</maml:para>
@@ -19571,7 +19599,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
           <maml:name>MemberDescriptor</maml:name>
           <maml:Description>
-            <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+            <maml:para>A member descriptor retrieved by Get-VsTeamUser.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -19583,7 +19611,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>ContainerDescriptor</maml:name>
           <maml:Description>
-            <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+            <maml:para>A container descriptor retrieved by Get-VsTeamGroup.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -19598,7 +19626,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
         <maml:name>MemberDescriptor</maml:name>
         <maml:Description>
-          <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+          <maml:para>A member descriptor retrieved by Get-VsTeamUser.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -19610,7 +19638,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
         <maml:name>ContainerDescriptor</maml:name>
         <maml:Description>
-          <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+          <maml:para>A container descriptor retrieved by Get-VsTeamGroup.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -19629,7 +19657,7 @@ Get-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
 PS C:\&gt; $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
 PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor</dev:code>
@@ -19706,7 +19734,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19747,7 +19775,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19766,7 +19794,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamPolicy -ProjectName Demo -Id 1</dev:code>
         <dev:remarks>
           <maml:para>This command removes the policy with ID of 1 from the Demo project.</maml:para>
@@ -19818,7 +19846,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19844,7 +19872,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19863,7 +19891,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProfile | Remove-VSTeamProfile -Force</dev:code>
         <dev:remarks>
           <maml:para>This will remove all the profiles on your system.</maml:para>
@@ -19910,7 +19938,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -19938,7 +19966,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -19957,21 +19985,21 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamProject 'MyProject'</dev:code>
         <dev:remarks>
           <maml:para>You will be prompted for confirmation and the project will be deleted.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamProject 'MyProject' -Force</dev:code>
         <dev:remarks>
           <maml:para>You will NOT be prompted for confirmation and the project will be deleted.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProject | Remove-VSTeamProject -Force</dev:code>
         <dev:remarks>
           <maml:para>This will remove all projects</maml:para>
@@ -20036,7 +20064,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -20078,7 +20106,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -20109,7 +20137,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamRelease -ProjectName demo | Remove-VSTeamRelease</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all releases in the demo project.</maml:para>
@@ -20183,7 +20211,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -20225,7 +20253,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -20256,7 +20284,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamReleaseDefinition -ProjectName demo | Remove-VSTeamReleaseDefinition</dev:code>
         <dev:remarks>
           <maml:para>This command gets a list of all release definitions in the demo project.</maml:para>
@@ -20327,7 +20355,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -20367,7 +20395,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -20566,7 +20594,7 @@ PS C:\&gt; Remove-VSTeamMembership -MemberDescriptor $user.Descriptor -Container
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>$projectName = "some_project_name"
 $taskGroup = Get-VSTeamTaskGroup -Name "taskName" -ProjectName $projectName
 
@@ -20640,7 +20668,7 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -20688,7 +20716,7 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -20725,7 +20753,7 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -20831,7 +20859,7 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -20893,7 +20921,7 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -20966,7 +20994,7 @@ Remove-VSTeamTaskGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
    Name        = "new_variable_group"
@@ -21050,7 +21078,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -21110,7 +21138,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -21162,21 +21190,21 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Id 47,48 -Force</dev:code>
         <dev:remarks>
           <maml:para>This command deletes work items with IDs 47 and 48 by using the IDs parameter.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Id 47</dev:code>
         <dev:remarks>
           <maml:para>This command deletes the work item with ID 47 by using the ID parameter.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Remove-VSTeamWorkItem -Id 47 -Destroy -Force</dev:code>
         <dev:remarks>
           <maml:para>This command deletes work item with IDs 47 permanently by using the Destroy parameter.</maml:para>
@@ -21220,12 +21248,19 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2017U1</maml:para>
+            <maml:para>- TFS2017U2</maml:para>
+            <maml:para>- TFS2017U3</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- TFS2018U1</maml:para>
+            <maml:para>- TFS2018U2</maml:para>
+            <maml:para>- TFS2018U3</maml:para>
             <maml:para>- AzD2019</maml:para>
+            <maml:para>- AzD2019U1</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -21287,7 +21322,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -21328,12 +21363,19 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2017U1</maml:para>
+            <maml:para>- TFS2017U2</maml:para>
+            <maml:para>- TFS2017U3</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- TFS2018U1</maml:para>
+            <maml:para>- TFS2018U2</maml:para>
+            <maml:para>- TFS2018U3</maml:para>
             <maml:para>- AzD2019</maml:para>
+            <maml:para>- AzD2019U1</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -21381,7 +21423,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -21410,12 +21452,19 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
           <maml:Description>
             <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
             <maml:para>- TFS2017</maml:para>
+            <maml:para>- TFS2017U1</maml:para>
+            <maml:para>- TFS2017U2</maml:para>
+            <maml:para>- TFS2017U3</maml:para>
             <maml:para>- TFS2018</maml:para>
+            <maml:para>- TFS2018U1</maml:para>
+            <maml:para>- TFS2018U2</maml:para>
+            <maml:para>- TFS2018U3</maml:para>
             <maml:para>- AzD2019</maml:para>
+            <maml:para>- AzD2019U1</maml:para>
             <maml:para>- VSTS</maml:para>
             <maml:para>- AzD</maml:para>
             <maml:para></maml:para>
-            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+            <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -21463,7 +21512,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -21501,7 +21550,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -21605,12 +21654,19 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
         <maml:Description>
           <maml:para>Specifies the version to use. The acceptable values for this parameter are:</maml:para>
           <maml:para>- TFS2017</maml:para>
+          <maml:para>- TFS2017U1</maml:para>
+          <maml:para>- TFS2017U2</maml:para>
+          <maml:para>- TFS2017U3</maml:para>
           <maml:para>- TFS2018</maml:para>
+          <maml:para>- TFS2018U1</maml:para>
+          <maml:para>- TFS2018U2</maml:para>
+          <maml:para>- TFS2018U3</maml:para>
           <maml:para>- AzD2019</maml:para>
+          <maml:para>- AzD2019U1</maml:para>
           <maml:para>- VSTS</maml:para>
           <maml:para>- AzD</maml:para>
           <maml:para></maml:para>
-          <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017</maml:para>
+          <maml:para>If you are on AzD it will default to Azd otherwise it will default to TFS2017.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -21634,7 +21690,7 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -21653,35 +21709,35 @@ Remove-VSTeamVariableGroup @methodParameters</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount</dev:code>
         <dev:remarks>
           <maml:para>You will be prompted for the account name and personal access token.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrthisisnotreal4uhlh5vgbmgap3mziwnga</dev:code>
         <dev:remarks>
           <maml:para>Allows you to provide all the information on the command line.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication</dev:code>
         <dev:remarks>
           <maml:para>On Windows, allows you use to use Windows authentication against a local TFS server.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Profile demonstrations</dev:code>
         <dev:remarks>
           <maml:para>Will add the account from the profile provided.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 5 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Profile demonstrations -Drive demo | Invoke-Expression
 PS C:\&gt; Set-Location demo:
 PS demo:\&gt; Get-ChildItem</dev:code>
@@ -21690,7 +21746,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 6 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Profile demonstrations -Level Machine</dev:code>
         <dev:remarks>
           <maml:para>Will add the account from the profile provided and store the information at the Machine level. Now any new PowerShell sessions will auto load this account.</maml:para>
@@ -21698,7 +21754,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 7 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken</dev:code>
         <dev:remarks>
           <maml:para>Will add the account and use the OAuth Token provided by AzD when you check the Allow scripts to access OAuth token checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alias for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.</maml:para>
@@ -21742,7 +21798,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -21756,7 +21812,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -21836,7 +21892,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -21884,7 +21940,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -21956,7 +22012,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -21975,14 +22031,14 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAPIVersion AzD</dev:code>
         <dev:remarks>
           <maml:para>This command sets the API versions to support AzD.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAPIVersion -Service Release -Version '5.0'</dev:code>
         <dev:remarks>
           <maml:para>This command sets the version of the Release calls to 5.0.</maml:para>
@@ -22075,7 +22131,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -22155,7 +22211,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -22174,14 +22230,14 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamApproval | Set-VSTeamApproval</dev:code>
         <dev:remarks>
           <maml:para>This command sets all pending approvals to approved.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamApproval -Id 1 -Status Rejected</dev:code>
         <dev:remarks>
           <maml:para>This command rejects approval with Id of 1.</maml:para>
@@ -22233,7 +22289,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -22247,7 +22303,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -22309,7 +22365,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultAPITimeout 30</dev:code>
         <dev:remarks>
           <maml:para>This command sets 30 seconds as the default timeout.</maml:para>
@@ -22364,7 +22420,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -22378,7 +22434,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -22442,7 +22498,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo</dev:code>
         <dev:remarks>
           <maml:para>This command sets Demo as the default project.</maml:para>
@@ -22547,7 +22603,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -22638,7 +22694,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -22659,7 +22715,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamEnvironmentStatus -ReleaseId 54 -Id 5 -status inProgress</dev:code>
         <dev:remarks>
           <maml:para>This command will set the status of environment with id 5 of release 54 to inProgress. You can use this call to redeploy an environment.</maml:para>
@@ -22739,7 +22795,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -22806,7 +22862,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -22825,14 +22881,14 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true -Force</dev:code>
         <dev:remarks>
           <maml:para>This command sets the permission inheritance to true.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force</dev:code>
         <dev:remarks>
           <maml:para>This command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.</maml:para>
@@ -22912,7 +22968,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -22966,7 +23022,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -22985,7 +23041,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamReleaseStatus -Id 5 -status Abandoned</dev:code>
         <dev:remarks>
           <maml:para>This command will set the status of release with id 5 to Abandoned.</maml:para>
@@ -23021,7 +23077,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeam</dev:code>
         <dev:remarks>
           <maml:para>This will open a browser to the TFS or AzD site</maml:para>
@@ -23127,7 +23183,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamApproval -ProjectName Demo | Show-VSTeamApproval</dev:code>
         <dev:remarks>
           <maml:para>This command opens a web browser showing the release requiring approval.</maml:para>
@@ -23214,7 +23270,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamBuild -ProjectName Demo -Id 3</dev:code>
         <dev:remarks>
           <maml:para>This command will open a web browser with the summary of build 3.</maml:para>
@@ -23409,7 +23465,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamBuildDefinition -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command will open a web browser with All Definitions for this project showing.</maml:para>
@@ -23484,7 +23540,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamFeed -Name Demo</dev:code>
         <dev:remarks>
           <maml:para>This command will open a web browser with this feed showing.</maml:para>
@@ -23582,7 +23638,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamGitRepository -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command opens the Git repository in a browser.</maml:para>
@@ -23672,7 +23728,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamProject TestProject</dev:code>
         <dev:remarks>
           <maml:para>This will open a browser to the TestProject site</maml:para>
@@ -23755,14 +23811,14 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamPullRequest 3</dev:code>
         <dev:remarks>
           <maml:para>This command will open a web browser with the pull request id of 3.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamPullRequest -Id 3</dev:code>
         <dev:remarks>
           <maml:para>This command will open a web browser with the pull request id of 3.</maml:para>
@@ -23837,7 +23893,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamRelease -ProjectName Demo -Id 3</dev:code>
         <dev:remarks>
           <maml:para>This command will open a web browser with the summary of release 3.</maml:para>
@@ -23952,7 +24008,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamReleaseDefinition -ProjectName Demo</dev:code>
         <dev:remarks>
           <maml:para>This command will open a web browser with All Release Definitions for this project showing.</maml:para>
@@ -24039,7 +24095,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Show-VSTeamWorkItem -ProjectName Demo -Id 3</dev:code>
         <dev:remarks>
           <maml:para>This command will open a web browser with the summary of work item 3.</maml:para>
@@ -24208,7 +24264,7 @@ PS demo:\&gt; Get-ChildItem</dev:code>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Stop-VSTeamBuild -id 1</dev:code>
         <dev:remarks>
@@ -24216,7 +24272,7 @@ PS C:\&gt; Stop-VSTeamBuild -id 1</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; $buildsToCancel = Get-VSTeamBuild -StatusFilter "inProgress" | where-object definitionName -eq Build-Defenition-Name
 PS C:\&gt; ForEach($build in $buildsToCancel) { Stop-VSTeamBuild -id $build.id }</dev:code>
@@ -24245,7 +24301,7 @@ PS C:\&gt; ForEach($build in $buildsToCancel) { Stop-VSTeamBuild -id $build.id }
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
           <maml:name>MemberDescriptor</maml:name>
           <maml:Description>
-            <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+            <maml:para>A member descriptor retrieved by Get-VsTeamUser.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -24257,7 +24313,7 @@ PS C:\&gt; ForEach($build in $buildsToCancel) { Stop-VSTeamBuild -id $build.id }
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
           <maml:name>ContainerDescriptor</maml:name>
           <maml:Description>
-            <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+            <maml:para>A container descriptor retrieved by Get-VsTeamGroup.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -24272,7 +24328,7 @@ PS C:\&gt; ForEach($build in $buildsToCancel) { Stop-VSTeamBuild -id $build.id }
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="0" aliases="none">
         <maml:name>MemberDescriptor</maml:name>
         <maml:Description>
-          <maml:para>A member descriptor retrieved by Get-VsTeamUser</maml:para>
+          <maml:para>A member descriptor retrieved by Get-VsTeamUser.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -24284,7 +24340,7 @@ PS C:\&gt; ForEach($build in $buildsToCancel) { Stop-VSTeamBuild -id $build.id }
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
         <maml:name>ContainerDescriptor</maml:name>
         <maml:Description>
-          <maml:para>A container descriptor retrieved by Get-VsTeamGroup</maml:para>
+          <maml:para>A container descriptor retrieved by Get-VsTeamGroup.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -24465,7 +24521,7 @@ PS C:\&gt; ForEach($build in $buildsToCancel) { Stop-VSTeamBuild -id $build.id }
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -FilePath './azure-pipelines.yml'
 
 Name Id url                                                                                           state
@@ -24476,7 +24532,7 @@ Name Id url                                                                     
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $yamlOverride = [string](Get-Content -raw $FilePath)
 PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -YamlOverride $yamlOverride</dev:code>
         <dev:remarks>
@@ -24484,7 +24540,7 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -YamlOver
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $yamlOverride = [string](Get-Content -raw $FilePath)
 PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code>
         <dev:remarks>
@@ -24578,7 +24634,7 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -24665,7 +24721,7 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -24770,7 +24826,7 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -24831,7 +24887,7 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -24951,7 +25007,7 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -25038,7 +25094,7 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -25078,7 +25134,7 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamBuild | Update-VSTeamBuild -KeepForever $false</dev:code>
         <dev:remarks>
           <maml:para>Sets the keep forever property of every build to false.</maml:para>
@@ -25259,14 +25315,14 @@ PS C:\&gt; Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24</dev:code
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json</dev:code>
         <dev:remarks>
           <maml:para>This command reads build.json and updates existing build definition with id 123 from it on the demo team project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $b = Get-VSTeamBuildDefinition -ProjectName Demo -Id 23 -Raw
 PS C:\&gt; $b.variables.subscriptionId.value = 'Some New Value'
 PS C:\&gt; $body = $b | ConvertTo-Json -Depth 100
@@ -25334,7 +25390,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -25386,7 +25442,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -25599,7 +25655,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Update-VSTeamPolicy -ProjectName Demo -id 1 -type 687c53f8-1a82-4e89-9a86-13d51bc4a8d5 -enabled -blocking -settings @{MinimumApproverCount = 1;Scope=@(@{repositoryId=b87c5af8-1a82-4e59-9a86-13d5cbc4a8d5; matchKind="Exact"; refName="refs/heads/master"})}</dev:code>
         <dev:remarks>
           <maml:para>This command updates an existing policy in the Demo project.</maml:para>
@@ -25665,7 +25721,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -25703,7 +25759,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -25755,7 +25811,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -25774,21 +25830,21 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Update-VSTeamProfile -Name ProfileName</dev:code>
         <dev:remarks>
           <maml:para>You will be prompted for the account name and personal access token.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Update-VSTeamProfile -Name mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga</dev:code>
         <dev:remarks>
           <maml:para>Allows you to provide all the information on the command line.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-VSTeamProfile | Where-Object version -eq vsts | Select-Object -skip 1 | Update-VSTeamProfile -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Force</dev:code>
         <dev:remarks>
           <maml:para>This will update all but the first AzD profile</maml:para>
@@ -25874,7 +25930,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -25938,7 +25994,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -25975,7 +26031,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Update-VSTeamProject -Name Demo -NewName aspDemo</dev:code>
         <dev:remarks>
           <maml:para>This command changes the name of your project from Demo to aspDemo.</maml:para>
@@ -26048,7 +26104,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26108,7 +26164,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26184,7 +26240,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26267,7 +26323,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26338,7 +26394,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26463,7 +26519,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -26503,7 +26559,7 @@ PS C:\&gt; Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinitio
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\&gt; $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
 PS C:\&gt; Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Draft</dev:code>
@@ -26512,7 +26568,7 @@ PS C:\&gt; Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Draft</dev:co
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\&gt; $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
 PS C:\&gt; Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abandoned</dev:code>
@@ -26590,7 +26646,7 @@ PS C:\&gt; Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abando
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26665,7 +26721,7 @@ PS C:\&gt; Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abando
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -26705,7 +26761,7 @@ PS C:\&gt; Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abando
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\&gt; $r = Get-VSTeamRelease -ProjectName project -Id 76 -Raw
 PS C:\&gt; $r.variables.temp.value='temp'
@@ -26715,7 +26771,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\&gt; $r = Get-VSTeamRelease -ProjectName project -Id 76 -Raw
 PS C:\&gt; $r.variables | Add-Member NoteProperty temp([PSCustomObject]@{value='test'})
@@ -26783,7 +26839,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26845,7 +26901,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -26920,7 +26976,7 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -26962,14 +27018,14 @@ PS C:\&gt; Update-VSTeamRelease -ProjectName project -Id 76 -release $r</dev:cod
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -Id 123 -InFile release.json</dev:code>
         <dev:remarks>
           <maml:para>This command reads release.json and updates existing release definition with id 123 from it on the demo team project.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; $b = Get-VSTeamReleaseDefinition -ProjectName Demo -Id 23 -Raw
 PS C:\&gt; $b.variables.subscriptionId.value = 'Some New Value'
 PS C:\&gt; $body = $b | ConvertTo-Json -Depth 100
@@ -27037,7 +27093,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -27089,7 +27145,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -27440,7 +27496,7 @@ PS C:\&gt; Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>$projectName = "projectName"
 
 $taskGroup = Get-VSTeamTaskGroup -Name "taskGroupName" -ProjectName $projectName
@@ -27519,7 +27575,7 @@ Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGr
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -27563,7 +27619,7 @@ Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGr
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -27619,7 +27675,7 @@ Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGr
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -28033,7 +28089,7 @@ Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGr
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>$methodParameters = @{
    ProjectName              = "some_project_name"
    Name        = "new_variable_group"
@@ -28075,7 +28131,7 @@ Update-VSTeamVariableGroup @methodParameters</dev:code>
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code># Copy variable group varGroupName from project sourceProjectName to project targetProjectName.  If varGroupName already exists, we'll update it; else, we'll add it.
 
 $Name = "varGroupName"
@@ -28201,7 +28257,7 @@ else {
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
           <maml:name>Force</maml:name>
           <maml:Description>
-            <maml:para>Forces the function without confirmation</maml:para>
+            <maml:para>Forces the function without confirmation.</maml:para>
           </maml:Description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -28287,7 +28343,7 @@ else {
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
         <maml:name>Force</maml:name>
         <maml:Description>
-          <maml:para>Forces the function without confirmation</maml:para>
+          <maml:para>Forces the function without confirmation.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -28318,7 +28374,7 @@ else {
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Update-VSTeamWorkItem -WorkItemId 1 -Title "Updated Work Item"
 
@@ -28330,7 +28386,7 @@ ID Title              Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description"
 
@@ -28342,7 +28398,7 @@ ID Title              Status
         </dev:remarks>
       </command:example>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Set-VSTeamDefaultProject Demo
 PS C:\&gt; $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
 PS C:\&gt; Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields

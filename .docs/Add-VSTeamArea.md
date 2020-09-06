@@ -12,7 +12,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Add-VSTeamArea -ProjectName Demo -Name "NewArea" -Path "MyArea/Path"
 ```
 
@@ -20,7 +20,7 @@ This command adds a new area named NewArea to the Demo project under the area pa
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Add-VSTeamArea -ProjectName Demo -Name "NewArea"
 ```
 

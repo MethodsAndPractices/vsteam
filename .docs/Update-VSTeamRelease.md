@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\> $r = Get-VSTeamRelease -ProjectName project -Id 76 -Raw
 PS C:\> $r.variables.temp.value='temp'
@@ -27,7 +27,7 @@ Changes the variable temp on the release. This can be done in one stage and read
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 PS C:\> $r = Get-VSTeamRelease -ProjectName project -Id 76 -Raw
 PS C:\> $r.variables | Add-Member NoteProperty temp([PSCustomObject]@{value='test'})

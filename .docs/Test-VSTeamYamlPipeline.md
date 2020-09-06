@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -FilePath './azure-pipelines.yml'
 
 Name Id url                                                                                           state
@@ -28,7 +28,7 @@ This example checks the YAML pipeline with ID 24 and the file './azure-pipelines
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> $yamlOverride = [string](Get-Content -raw $FilePath)
 PS C:\> Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -YamlOverride $yamlOverride
 ```
@@ -37,7 +37,7 @@ This example checks the YAML pipeline with ID 24 and the content of a yaml file 
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> $yamlOverride = [string](Get-Content -raw $FilePath)
 PS C:\> Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24
 ```

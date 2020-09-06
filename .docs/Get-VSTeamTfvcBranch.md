@@ -16,7 +16,7 @@ Get-VSTeamTfvcBranch gets a branch for a given path from TFVC source control.
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch
 ```
 
@@ -24,7 +24,7 @@ This command returns the branch object for the path $/MyProject/MyBranch
 
 ### Example 2
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren
 ```
 
@@ -32,7 +32,7 @@ This command returns the branch object for the path $/MyProject/MyBranch and its
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent
 ```
 
@@ -40,7 +40,7 @@ This command returns the branch object for the path $/MyProject/MyBranch and its
 
 ### Example 4
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted
 ```
 
@@ -48,7 +48,7 @@ This command returns the branch object for the path $/MyProject/MyBranch, even i
 
 ### Example 5
 
-```PowerShell
+```powershell
 PS C:\> '$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvcBranch
 ```
 

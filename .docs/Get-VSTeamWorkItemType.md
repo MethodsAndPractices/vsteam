@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS R:\repos\vsteam> Get-VSTeamWorkItemType -ProjectName test -WorkItemType 'Code Review Response'
 ```
 

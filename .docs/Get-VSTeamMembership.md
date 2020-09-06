@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 (Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerDescriptor }
 ```
 
@@ -24,7 +24,7 @@ Get all the groups for a user
 
 ### Example 2
 
-```PowerShell
+```powershell
 (Get-VSTeamMembership -ContainerDescriptor $group.id).value | % {Get-VSTeamUser -Descriptor $_.memberDescriptor }
 ```
 

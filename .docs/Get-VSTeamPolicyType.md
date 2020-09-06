@@ -16,7 +16,7 @@
 
 ### Example 1
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamPolicyType -ProjectName Demo
 ```
 
@@ -24,7 +24,7 @@ This command returns all the policy types for the Demo project.
 
 ### Example 3
 
-```PowerShell
+```powershell
 PS C:\> Get-VSTeamPolicyType -ProjectName Demo -Id 73da726a-8ff9-44d7-8caa-cbb581eac991
 ```
 
