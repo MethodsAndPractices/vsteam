@@ -38,13 +38,20 @@ function Open-SampleFile {
    param(
       [Parameter(Mandatory = $true, Position = 0)]
       [string] $file,
-      [switch] $ReturnValue
+      [switch] $ReturnValue,
+      # The index of the value array to return
+      [int] $index = -1
    )
    
    if ($ReturnValue.IsPresent) {
       return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json).value
    }
    else {
-      return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json)
+      if ($index -eq -1) {
+         return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json)
+      }
+      else {
+         return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json).value[$index]
+      }
    }
 }

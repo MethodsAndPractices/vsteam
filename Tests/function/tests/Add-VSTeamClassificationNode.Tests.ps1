@@ -11,18 +11,18 @@ Describe 'VSTeamClassificationNode' {
    Context 'Add-VSTeamClassificationNode' {
       ## Arrange
       BeforeAll {
-         $classificationNodeResult = Open-SampleFile classificationNodeResult.json
-
-         Mock Invoke-RestMethod { return $classificationNodeResult }
+         Mock Invoke-RestMethod { Open-SampleFile 'classificationNodeResult.json' }
       }
 
-      It 'with StructureGroup "<StructureGroup>" should return Nodes' -TestCases @(
-         @{StructureGroup = "areas" }
-         @{StructureGroup = "iterations" }
+      It 'should return Nodes with StructureGroup "<StructureGroup>"' -TestCases @(
+         @{ StructureGroup = "areas" }
+         @{ StructureGroup = "iterations" }
       ) {
          param ($StructureGroup)
          ## Act
-         Add-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Name "MyClassificationNodeName"
+         Add-VSTeamClassificationNode -ProjectName "Public Demo" `
+            -StructureGroup $StructureGroup `
+            -Name "MyClassificationNodeName"
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -32,15 +32,18 @@ Describe 'VSTeamClassificationNode' {
          }
       }
 
-      It 'with StructureGroup "<StructureGroup>" by Path "<Path>" should return Nodes' -TestCases @(
-         @{StructureGroup = "areas"; Path = "SubPath" }
-         @{StructureGroup = "areas"; Path = "Path/SubPath" }
-         @{StructureGroup = "iterations"; Path = "SubPath" }
-         @{StructureGroup = "iterations"; Path = "Path/SubPath" }
+      It 'should return Nodes with StructureGroup "<StructureGroup>" by Path "<Path>"' -TestCases @(
+         @{ StructureGroup = "areas"; Path = "SubPath" }
+         @{ StructureGroup = "areas"; Path = "Path/SubPath" }
+         @{ StructureGroup = "iterations"; Path = "SubPath" }
+         @{ StructureGroup = "iterations"; Path = "Path/SubPath" }
       ) {
          param ($StructureGroup, $Path)
          ## Act
-         Add-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Name "MyClassificationNodeName" -Path $Path
+         Add-VSTeamClassificationNode -ProjectName "Public Demo" `
+            -StructureGroup $StructureGroup `
+            -Name "MyClassificationNodeName" `
+            -Path $Path
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -50,15 +53,18 @@ Describe 'VSTeamClassificationNode' {
          }
       }
 
-      It 'with StructureGroup "<StructureGroup>" by empty Path "<Path>" should return Nodes' -TestCases @(
-         @{StructureGroup = "areas"; Path = "" }
-         @{StructureGroup = "areas"; Path = $null }
-         @{StructureGroup = "iterations"; Path = "" }
-         @{StructureGroup = "iterations"; Path = $null }
+      It 'should return Nodes with StructureGroup "<StructureGroup>" by empty Path "<Path>"' -TestCases @(
+         @{ StructureGroup = "areas"; Path = "" }
+         @{ StructureGroup = "areas"; Path = $null }
+         @{ StructureGroup = "iterations"; Path = "" }
+         @{ StructureGroup = "iterations"; Path = $null }
       ) {
          param ($StructureGroup, $Path)
          ## Act
-         Add-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup $StructureGroup -Name "MyClassificationNodeName" -Path $Path
+         Add-VSTeamClassificationNode -ProjectName "Public Demo" `
+            -StructureGroup $StructureGroup `
+            -Name "MyClassificationNodeName" `
+            -Path $Path
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

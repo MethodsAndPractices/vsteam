@@ -9,10 +9,10 @@ Describe 'VSTeamProjectPermission' {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-      $userSingleResult = Open-SampleFile users.single.json
+      $userSingleResult = Open-SampleFile 'users.single.json'
       $userSingleResultObject = [vsteam_lib.User2]::new($userSingleResult)
 
-      $groupSingleResult = Open-SampleFile groupsSingle.json
+      $groupSingleResult = Open-SampleFile 'groupsSingle.json'
       $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)
 
       $projectResult = [PSCustomObject]@{

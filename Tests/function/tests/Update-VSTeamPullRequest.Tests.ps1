@@ -12,8 +12,8 @@ Describe 'VSTeamPullRequest' {
       # You have to set the version or the api-version will not be added when versions = ''
       Mock _getApiVersion { return '1.0-unitTest' } -ParameterFilter { $Service -eq 'Git' -or $Service -eq 'Graph' }
 
-      $result = Open-SampleFile updatePullRequestResponse.json
-      $userSingleResult = Open-SampleFile users.single.json
+      $result = Open-SampleFile 'updatePullRequestResponse.json'
+      $userSingleResult = Open-SampleFile 'users.single.json'
    }
 
    Context 'Update-VSTeamPullRequest' {

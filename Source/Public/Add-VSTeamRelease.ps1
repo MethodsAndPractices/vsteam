@@ -70,9 +70,7 @@ function Add-VSTeamRelease {
                -Body $body `
                -Version $(_getApiVersion Release)
             
-            _applyTypesToRelease $resp
-            
-            Write-Output $resp
+            Write-Output $([vsteam_lib.Release]::new($resp, $ProjectName))
          }
          catch {
             _handleException $_

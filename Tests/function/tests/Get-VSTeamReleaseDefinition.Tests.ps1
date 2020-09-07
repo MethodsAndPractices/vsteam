@@ -4,7 +4,7 @@ Describe 'VSTeamReleaseDefinition' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
-      $results = Open-SampleFile releaseDefAzD.json
+      $results = Open-SampleFile 'releaseDefAzD.json'
 
       Mock Invoke-RestMethod { return $results }
       Mock Invoke-RestMethod { return $results.value[0] } -ParameterFilter { $Uri -like "*15*" }

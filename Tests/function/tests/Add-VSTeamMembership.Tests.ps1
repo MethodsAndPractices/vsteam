@@ -3,8 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamMembership' {
    ## Arrange
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/callMembershipAPI.ps1"
       
       # You have to set the version or the api-version will not be added when [vsteam_lib.Versions]::Graph = ''
@@ -16,13 +15,14 @@ Describe 'VSTeamMembership' {
       
       Mock Invoke-RestMethod
       Mock _supportsGraph
-      
-      $UserDescriptor = 'aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj'
-      $GroupDescriptor = 'vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x'
    }
 
    Context 'Add-VSTeamMembership' {
       It 'Should add membership' {
+         ## Arrange
+         $UserDescriptor = 'aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj'
+         $GroupDescriptor = 'vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x'
+      
          ## Act
          $null = Add-VSTeamMembership -MemberDescriptor $UserDescriptor -ContainerDescriptor $GroupDescriptor
 

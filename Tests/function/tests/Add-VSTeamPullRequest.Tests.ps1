@@ -21,7 +21,7 @@ Describe 'VSTeamPullRequest' {
          $Uri -like "*stateFilter=WellFormed*"
       }
 
-      $result = Open-SampleFile updatePullRequestResponse.json
+      $result = Open-SampleFile 'updatePullRequestResponse.json'
    }
 
    Context 'Add-VSTeamPullRequest' {

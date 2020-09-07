@@ -6,17 +6,15 @@ Describe 'VSTeamArea' {
       . "$baseFolder/Source/Public/Add-VSTeamClassificationNode"
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
-      Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-      $classificationNodeResult = Open-SampleFile classificationNodeResult.json
-
-      Mock Invoke-RestMethod { return $classificationNodeResult }
+      Mock Invoke-RestMethod { Open-SampleFile 'classificationNodeResult.json' }
+      Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }      
    }
 
    Context 'Add-VSTeamArea' -Tag "Add" {
       It 'area should return Nodes' {
          ## Act
-         Add-VSTeamArea -ProjectName "Public Demo" -Name "MyClassificationNodeName"
+         Add-VSTeamArea -ProjectName "Public Demo" `
+            -Name "MyClassificationNodeName"
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -32,7 +30,9 @@ Describe 'VSTeamArea' {
       ) {
          param ($Path)
          ## Act
-         Add-VSTeamArea -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
+         Add-VSTeamArea -ProjectName "Public Demo" `
+            -Name "MyClassificationNodeName" `
+            -Path $Path
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -43,12 +43,14 @@ Describe 'VSTeamArea' {
       }
 
       It 'with empty Path "<Path>" should return Nodes' -TestCases @(
-         @{Path = "" }
-         @{Path = $null }
+         @{ Path = "" }
+         @{ Path = $null }
       ) {
          param ($Path)
          ## Act
-         Add-VSTeamArea -ProjectName "Public Demo" -Name "MyClassificationNodeName" -Path $Path
+         Add-VSTeamArea -ProjectName "Public Demo" `
+            -Name "MyClassificationNodeName" `
+            -Path $Path
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

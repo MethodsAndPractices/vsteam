@@ -21,10 +21,10 @@ Describe 'VSTeamBuild' {
       }
 
       # Sample result of a single build
-      $singleResult = Open-SampleFile buildSingleResult.json
+      $singleResult = Open-SampleFile 'buildSingleResult.json'
 
       # Sample result for list of builds
-      $results = Open-SampleFile buildResults.json
+      $results = Open-SampleFile 'buildResults.json'
 
       Mock Invoke-RestMethod { return $results }
       Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*101*" }

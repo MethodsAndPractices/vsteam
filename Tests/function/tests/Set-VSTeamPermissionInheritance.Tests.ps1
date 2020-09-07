@@ -36,13 +36,13 @@ Describe 'VSTeamPermissionInheritance' {
 
    Context 'Set-VSTeamPermissionInheritance buildDef' {
       BeforeAll {
-         Mock _callAPI { Open-SampleFile buildDefAzD.json } -ParameterFilter {
+         Mock _callAPI { Open-SampleFile 'buildDefAzD.json' } -ParameterFilter {
             $Area -eq 'build' -and
             $Resource -eq 'definitions' -and
             $Version -eq "$(_getApiVersion Build)"
          }
 
-         Mock Invoke-RestMethod { Open-SampleFile buildDefHierarchyQuery_Update.json }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildDefHierarchyQuery_Update.json' }
       }
 
       It 'should return true' {
@@ -60,8 +60,8 @@ Describe 'VSTeamPermissionInheritance' {
 
    Context 'Set-VSTeamPermissionInheritance releaseDef' {
       BeforeAll {
-         Mock Invoke-RestMethod { Open-SampleFile releaseDefHierarchyQuery_Update.json }
-         Mock Get-VSTeamReleaseDefinition { Open-SampleFile releaseDefAzD.json -ReturnValue }
+         Mock Invoke-RestMethod { Open-SampleFile 'releaseDefHierarchyQuery_Update.json' }
+         Mock Get-VSTeamReleaseDefinition { Open-SampleFile 'releaseDefAzD.json' -ReturnValue }
       }
 
       It 'should return true' {
@@ -79,9 +79,9 @@ Describe 'VSTeamPermissionInheritance' {
 
    Context 'Set-VSTeamPermissionInheritance repository' {
       BeforeAll {
-         Mock Get-VSTeamGitRepository { Open-SampleFile singleGitRepo.json }
-         Mock Invoke-RestMethod { Open-SampleFile gitReopHierarchyQuery_Update.json }
-         Mock Get-VSTeamAccessControlList { Open-SampleFile repoAccesscontrollists.json }
+         Mock Get-VSTeamGitRepository { Open-SampleFile 'singleGitRepo.json' }
+         Mock Invoke-RestMethod { Open-SampleFile 'gitReopHierarchyQuery_Update.json' }
+         Mock Get-VSTeamAccessControlList { Open-SampleFile 'repoAccesscontrollists.json' }
       }
 
       It 'should return true' {

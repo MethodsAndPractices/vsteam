@@ -4,7 +4,7 @@ Describe 'VSTeamExtension' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
-      $singleResult = Open-SampleFile singleExtensionResult.json
+      $singleResult = Open-SampleFile 'singleExtensionResult.json'
 
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    }

@@ -4,26 +4,12 @@ Describe 'VSTeamRelease' {
    ## Arrange
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamBuild.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
 
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      $singleResult = [PSCustomObject]@{
-         environments = [PSCustomObject]@{ }
-         variables    = [PSCustomObject]@{
-            BrowserToUse = [PSCustomObject]@{
-               value = "phantomjs"
-            }
-         }
-         _links       = [PSCustomObject]@{
-            self = [PSCustomObject]@{ }
-            web  = [PSCustomObject]@{ }
-         }
-      }
    }
 
    Context 'Add-VSTeamRelease' {
@@ -31,25 +17,20 @@ Describe 'VSTeamRelease' {
       BeforeAll {
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'project'
 
-
          Mock Get-VSTeamReleaseDefinition {
-            $def1 = New-Object -TypeName PSObject -Prop @{name = 'Test1'; id = 1; artifacts = @(@{alias = 'drop' }) }
-            $def2 = New-Object -TypeName PSObject -Prop @{name = 'Tests'; id = 2; artifacts = @(@{alias = 'drop' }) }
-            return @(
-               $def1,
-               $def2
-            )
+            $def1 = New-Object -TypeName PSObject -Prop @{ name = 'Test1'; id = 1; artifacts = @(@{ alias = 'drop' }) }
+            $def2 = New-Object -TypeName PSObject -Prop @{ name = 'Tests'; id = 2; artifacts = @(@{ alias = 'drop' }) }
+            
+            return @($def1, $def2)
          }
 
          Mock Get-VSTeamBuild {
             $bld1 = New-Object -TypeName PSObject -Prop @{name = "Bld1"; id = 1 }
 
-            return @(
-               $bld1
-            )
+            return @($bld1)
          }
 
-         Mock Invoke-RestMethod { return $singleResult }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamRelease-id178-expandEnvironments.json' }
          Mock Invoke-RestMethod { throw 'error' } -ParameterFilter { $Body -like "*101*" }
 
          Mock _buildDynamicParam {

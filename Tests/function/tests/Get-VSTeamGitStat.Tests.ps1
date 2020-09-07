@@ -6,7 +6,7 @@ Describe "TeamGitStat" {
       
       . "$baseFolder/Source/Private/applyTypes.ps1"
 
-      $singleResult = Open-SampleFile gitStatSingleResult.json
+      $singleResult = Open-SampleFile 'gitStatSingleResult.json'
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.

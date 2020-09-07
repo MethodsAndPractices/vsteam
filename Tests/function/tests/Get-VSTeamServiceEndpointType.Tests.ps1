@@ -7,7 +7,7 @@ Describe 'VSTeamServiceEndpointType' {
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
 
-      $sampleFile = Open-SampleFile serviceEndpointTypeSample.json
+      $sampleFile = Open-SampleFile 'serviceEndpointTypeSample.json'
 
       Mock Invoke-RestMethod { return $sampleFile }
 

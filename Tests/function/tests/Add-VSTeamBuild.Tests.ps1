@@ -5,15 +5,13 @@ Describe 'VSTeamBuild' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamQueue.ps1"
-      . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamBuildDefinition.ps1"
    }
 
    Context 'Add-VSTeamBuild' -Tag "Add" {
       ## Arrange
       BeforeAll {
-         $resultsVSTS = Open-SampleFile buildDefvsts.json
-         $singleResult = Open-SampleFile buildSingleResult.json
+         $singleResult = Open-SampleFile 'buildSingleResult.json'
 
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
       }
@@ -22,15 +20,16 @@ Describe 'VSTeamBuild' {
          BeforeAll {
             # Set the account to use for testing. A normal user would do this
             # using the Set-VSTeamAccount function.
-            Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+            Mock _getInstance { return 'https://dev.azure.com/test' }
 
             Mock Invoke-RestMethod { return $singleResult }
-            Mock Get-VSTeamBuildDefinition { return $resultsVSTS.value }
+            Mock Get-VSTeamBuildDefinition { Open-SampleFile 'buildDefvsts.json' -ReturnValue }
          }
 
-         It 'by name should add build' {
+         It 'should add build by name' {
             ## Act
-            Add-VSTeamBuild -ProjectName project -BuildDefinitionName 'aspdemo-CI'
+            Add-VSTeamBuild -ProjectName project `
+               -BuildDefinitionName 'aspdemo-CI'
 
             ## Assert
             # Call to queue build.
@@ -40,9 +39,10 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'by id should add build' {
+         It 'should add build by id' {
             ## Act
-            Add-VSTeamBuild -ProjectName project -BuildDefinitionId 2
+            Add-VSTeamBuild -ProjectName project `
+               -BuildDefinitionId 2
 
             ## Assert
             # Call to queue build.
@@ -52,9 +52,11 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'with source branch should add build' {
+         It 'should add build with source branch' {
             ## Act
-            Add-VSTeamBuild -ProjectName project -BuildDefinitionId 2 -SourceBranch 'refs/heads/dev'
+            Add-VSTeamBuild -ProjectName project `
+               -BuildDefinitionId 2 `
+               -SourceBranch 'refs/heads/dev'
 
             ## Assert
             # Call to queue build.
@@ -65,9 +67,11 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'with parameters should add build' {
+         It 'should add build with parameters' {
             ## Act
-            Add-VSTeamBuild -ProjectName project -BuildDefinitionId 2 -BuildParameters @{'system.debug' = 'true' }
+            Add-VSTeamBuild -ProjectName project `
+               -BuildDefinitionId 2 `
+               -BuildParameters @{'system.debug' = 'true' }
 
             ## Assert
             # Call to queue build.
@@ -83,12 +87,9 @@ Describe 'VSTeamBuild' {
          BeforeAll {
             ## Arrange
             Mock _useWindowsAuthenticationOnPremise { return $true }
-            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
-            Mock Invoke-RestMethod {
-               # Write-Host $args
-               return $singleResult
-            }
+            Mock Invoke-RestMethod { return $singleResult }
 
             Mock Get-VSTeamQueue { return [PSCustomObject]@{
                   name = "MyQueue"
@@ -99,9 +100,11 @@ Describe 'VSTeamBuild' {
             Mock Get-VSTeamBuildDefinition { return @{ name = "MyBuildDef" } }
          }
 
-         It 'by id on TFS local Auth should add build' {
+         It 'should add build by id on TFS local auth' {
             ## Act
-            Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue
+            Add-VSTeamBuild -projectName project `
+               -BuildDefinitionId 2 `
+               -QueueName MyQueue
 
             ## Assert
             # Call to queue build.
@@ -112,9 +115,12 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'with parameters on TFS local Auth should add build' {
+         It 'should add build with parameters on TFS local auth' {
             ## Act
-            Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -BuildParameters @{'system.debug' = 'true' }
+            Add-VSTeamBuild -projectName project `
+               -BuildDefinitionId 2 `
+               -QueueName MyQueue `
+               -BuildParameters @{'system.debug' = 'true' }
 
             ## Assert
             # Call to queue build.
@@ -126,9 +132,12 @@ Describe 'VSTeamBuild' {
             }
          }
 
-         It 'with source branch on TFS local auth should add build' {
+         It 'should add build with source branch on TFS local auth' {
             ## Act
-            Add-VSTeamBuild -projectName project -BuildDefinitionId 2 -QueueName MyQueue -SourceBranch refs/heads/dev
+            Add-VSTeamBuild -projectName project `
+               -BuildDefinitionId 2 `
+               -QueueName MyQueue `
+               -SourceBranch refs/heads/dev
 
             ## Assert
             # Call to queue build.

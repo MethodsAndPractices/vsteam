@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamNuGetEndpoint' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamServiceEndpoint.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamServiceEndpoint.ps1"
@@ -39,7 +38,11 @@ Describe 'VSTeamNuGetEndpoint' {
       }
 
       It 'with ApiKey should create a new NuGet Serviceendpoint' {
-         Add-VSTeamNuGetEndpoint -ProjectName 'project' -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -ApiKey '00000000-0000-0000-0000-000000000000'
+         Add-VSTeamNuGetEndpoint -ProjectName 'project' `
+            -EndpointName 'PowerShell Gallery' `
+            -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' `
+            -ApiKey '00000000-0000-0000-0000-000000000000'
+         
          Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$(_getApiVersion DistributedTask)" -and
             $Method -eq 'POST' -and
@@ -50,7 +53,11 @@ Describe 'VSTeamNuGetEndpoint' {
 
       It 'with Username and Password should create a new NuGet Serviceendpoint' {
          $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
-         Add-VSTeamNuGetEndpoint -ProjectName 'project' -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -Username 'testUser' -SecurePassword $password
+         Add-VSTeamNuGetEndpoint -ProjectName 'project' `
+            -EndpointName 'PowerShell Gallery' `
+            -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' `
+            -Username 'testUser' `
+            -SecurePassword $password
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$(_getApiVersion DistributedTask)" -and
@@ -62,7 +69,11 @@ Describe 'VSTeamNuGetEndpoint' {
       }
 
       It 'with Token should create a new NuGet Serviceendpoint' {
-         Add-VSTeamNuGetEndpoint -ProjectName 'project' -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -PersonalAccessToken '00000000-0000-0000-0000-000000000000'
+         Add-VSTeamNuGetEndpoint -ProjectName 'project' `
+            -EndpointName 'PowerShell Gallery' `
+            -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' `
+            -PersonalAccessToken '00000000-0000-0000-0000-000000000000'
+            
          Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/serviceendpoints?api-version=$(_getApiVersion DistributedTask)" -and
             $Method -eq 'POST' -and

@@ -6,8 +6,8 @@ Describe 'VSTeamIteration' {
    
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode"
       
-      $withoutChildNode = Open-SampleFile withoutChildNode.json
-      $classificationNodeResult = Open-SampleFile classificationNodeResult.json
+      $withoutChildNode = Open-SampleFile 'withoutChildNode.json'
+      $classificationNodeResult = Open-SampleFile 'classificationNodeResult.json'
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.

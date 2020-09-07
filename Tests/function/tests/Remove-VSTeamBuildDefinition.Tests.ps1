@@ -4,7 +4,7 @@ Describe 'Remove-VSTeamBuildDefinition' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
-      $resultsVSTS = Open-SampleFile buildDefvsts.json
+      $resultsVSTS = Open-SampleFile 'buildDefvsts.json'
 
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    }

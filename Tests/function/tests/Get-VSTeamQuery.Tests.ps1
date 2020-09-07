@@ -9,7 +9,7 @@ Describe "VSTeam" {
 
    Context "Get-VSTeamQuery" {
       BeforeAll {
-         $results = Open-SampleFile Get-VSTeamQuery.json
+         $results = Open-SampleFile 'Get-VSTeamQuery.json'
 
          Mock _callAPI { return $results }
 

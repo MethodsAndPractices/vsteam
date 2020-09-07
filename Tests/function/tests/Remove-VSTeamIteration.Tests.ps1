@@ -18,8 +18,7 @@ Describe 'VSTeamIteration' {
          }
       }
 
-      It 'should delete iteration' -TestCases @(
-      ) {
+      It 'should delete iteration' {
          ## Act
          Remove-VSTeamIteration -ProjectName "Public Demo" -Force
 
@@ -31,12 +30,9 @@ Describe 'VSTeamIteration' {
          }
       }
 
-      It 'should delete iteration with reclassification id <ReClassifyId>' -TestCases @(
-         @{ReClassifyId = 4 }
-      ) {
-         param ($ReClassifyId)
+      It 'should delete iteration with reclassification id <ReClassifyId>' {
          ## Act
-         Remove-VSTeamIteration -ProjectName "Public Demo" -ReClassifyId $ReClassifyId -Force
+         Remove-VSTeamIteration -ProjectName "Public Demo" -ReClassifyId 4 -Force
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -47,8 +43,8 @@ Describe 'VSTeamIteration' {
       }
 
       It 'with Path "<Path>" should delete iteration' -TestCases @(
-         @{Path = "SubPath" }
-         @{Path = "Path/SubPath" }
+         @{ Path = "SubPath" }
+         @{ Path = "Path/SubPath" }
       ) {
          param ($Path)
          ## Act
@@ -63,8 +59,8 @@ Describe 'VSTeamIteration' {
       }
 
       It 'with empty Path "<Path>" should delete iteration' -TestCases @(
-         @{Path = "" }
-         @{Path = $null }
+         @{ Path = "" }
+         @{ Path = $null }
       ) {
          param ($Path)
          ## Act

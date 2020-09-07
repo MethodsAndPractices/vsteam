@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamKubernetesEndpoint' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamServiceEndpoint.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamServiceEndpoint.ps1"
@@ -36,9 +35,12 @@ Describe 'VSTeamKubernetesEndpoint' {
       }
 
       It 'not accepting untrusted certs and not generating a pfx should create a new Kubernetes Serviceendpoint' {
-         Add-VSTeamKubernetesEndpoint -projectName 'project' -endpointName 'KubTest' `
-            -kubernetesUrl 'http://myK8s.local' -clientKeyData '00000000-0000-0000-0000-000000000000' `
-            -kubeconfig '{name: "myConfig"}' -clientCertificateData 'someClientCertData'
+         Add-VSTeamKubernetesEndpoint -projectName 'project' `
+            -endpointName 'KubTest' `
+            -kubernetesUrl 'http://myK8s.local' `
+            -clientKeyData '00000000-0000-0000-0000-000000000000' `
+            -kubeconfig '{name: "myConfig"}' `
+            -clientCertificateData 'someClientCertData'
 
          # On PowerShell 5 the JSON has two spaces but on PowerShell 6 it only has one so
          # test for both.

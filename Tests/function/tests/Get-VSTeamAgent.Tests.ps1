@@ -10,7 +10,7 @@ Describe 'VSTeamAgent' {
       ## Arrange
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
 
-      $testAgent = Open-SampleFile agentSingleResult.json
+      $testAgent = Open-SampleFile 'agentSingleResult.json'
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
 

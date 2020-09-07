@@ -24,7 +24,9 @@ Describe 'VSTeamBuildTag' {
          $inputTags = "Test1", "Test2", "Test3"
 
          ## Act
-         Add-VSTeamBuildTag -ProjectName project -id 2 -Tags $inputTags
+         Add-VSTeamBuildTag -ProjectName project `
+            -id 2 `
+            -Tags $inputTags
 
          ## Assert
          foreach ($inputTag in $inputTags) {

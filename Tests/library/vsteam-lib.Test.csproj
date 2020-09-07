@@ -207,7 +207,6 @@
     <Content Include="..\SampleFiles\classificationNodeResult.json" Link="SampleFiles\classificationNodeResult.json" />
     <Content Include="..\SampleFiles\descriptor.scope.TestProject.json" Link="SampleFiles\descriptor.scope.TestProject.json" />
     <Content Include="..\SampleFiles\extensionResults.json" Link="SampleFiles\extensionResults.json" />
-    <Content Include="..\SampleFiles\feeds.json" Link="SampleFiles\feeds.json" />
     <Content Include="..\SampleFiles\Get-BuildDefinition_2017.json" Link="SampleFiles\Get-BuildDefinition_2017.json" />
     <Content Include="..\SampleFiles\Get-BuildDefinition_2018.json" Link="SampleFiles\Get-BuildDefinition_2018.json" />
     <Content Include="..\SampleFiles\Get-BuildDefinition_2019.json" Link="SampleFiles\Get-BuildDefinition_2019.json" />

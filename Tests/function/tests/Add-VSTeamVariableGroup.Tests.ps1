@@ -14,7 +14,7 @@ Describe 'VSTeamVariableGroup' {
    Context 'Add-VSTeamVariableGroup' {
       Context 'Services' {
          BeforeAll {
-            $sampleFileVSTS = Open-SampleFile variableGroupSamples.json
+            $sampleFileVSTS = Open-SampleFile 'variableGroupSamples.json'
 
             Mock _getInstance { return 'https://dev.azure.com/test' }
 
@@ -62,7 +62,7 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          BeforeAll {
-            $sampleFile2017 = Open-SampleFile variableGroupSamples2017.json
+            $sampleFile2017 = Open-SampleFile 'variableGroupSamples2017.json'
 
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 

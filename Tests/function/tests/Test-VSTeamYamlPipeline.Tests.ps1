@@ -6,7 +6,7 @@ Describe 'VSTeamYamlPipeline' {
       
       . "$baseFolder/Source/Private/applyTypes.ps1"
       
-      $resultsAzD = Open-SampleFile pipelineDefYamlResult.json
+      $resultsAzD = Open-SampleFile 'pipelineDefYamlResult.json'
       
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 

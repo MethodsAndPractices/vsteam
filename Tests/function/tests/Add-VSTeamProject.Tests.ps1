@@ -3,46 +3,18 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamProject' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamQueue.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
-      . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamBuildDefinition.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProcess.ps1"
 
-      $singleResult = [PSCustomObject]@{
-         name        = 'Test'
-         description = ''
-         url         = ''
-         id          = '123-5464-dee43'
-         state       = ''
-         visibility  = ''
-         revision    = [long]0
-         defaultTeam = [PSCustomObject]@{ }
-         _links      = [PSCustomObject]@{ }
+      # Get-VSTeamProject to return project after creation
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json' } -ParameterFilter {
+         $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)"
       }
 
       Mock Start-Sleep
-
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' }
-      Mock _callApi -ParameterFilter { $area -eq 'work' -and $resource -eq 'processes' } -MockWith {
-         return [PSCustomObject]@{value = @(
-               [PSCustomObject]@{
-                  name   = 'Agile'
-                  Typeid = '00000000-0000-0000-0000-000000000001'
-               },
-               [PSCustomObject]@{
-                  name   = 'CMMI'
-                  Typeid = '00000000-0000-0000-0000-000000000002'
-               },
-               [PSCustomObject]@{
-                  name   = 'Scrum'
-                  Typeid = '00000000-0000-0000-0000-000000000003'
-               }
-            )
-         }
-      }
+      Mock _callApi { Open-SampleFile 'Get-VSTeamProcess.json' } -ParameterFilter { $area -eq 'work' -and $resource -eq 'processes' }
 
       # Get-VSTeamProject for cache 
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
@@ -73,11 +45,6 @@ Describe 'VSTeamProject' {
          } -ParameterFilter {
             $Uri -eq 'https://someplace.com'
          }
-
-         # Get-VSTeamProject to return project after creation
-         Mock Invoke-RestMethod { return $singleResult } -ParameterFilter {
-            $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)"
-         }
       }
 
       It 'with tfvc should create project with tfvc' {
@@ -101,7 +68,6 @@ Describe 'VSTeamProject' {
       BeforeAll {
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
          Mock _trackProjectProgress
-         Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
       }
 
       It 'Should create project with Agile' {
@@ -116,7 +82,6 @@ Describe 'VSTeamProject' {
       BeforeAll {
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
          Mock _trackProjectProgress
-         Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
          Mock Get-VSTeamProcess { return [PSCustomObject]@{
                name   = 'CMMI'
                id     = 1
@@ -138,7 +103,6 @@ Describe 'VSTeamProject' {
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
          Mock Write-Error
          Mock _trackProjectProgress { throw 'Test error' }
-         Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -eq "https://dev.azure.com/test/_apis/projects/Test?api-version=$(_getApiVersion Core)" }
       }
 
       It '_trackProjectProgress errors should throw' {

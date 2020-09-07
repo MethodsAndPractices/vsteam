@@ -18,8 +18,7 @@ Describe 'VSTeamArea' {
          }
       }
 
-      It 'should delete area' -TestCases @(
-      ) {
+      It 'should delete area' {
          ## Act
          Remove-VSTeamArea -ProjectName "Public Demo" -Force
 
@@ -31,12 +30,9 @@ Describe 'VSTeamArea' {
          }
       }
 
-      It 'should delete area with reclassification id <ReClassifyId>' -TestCases @(
-         @{ReClassifyId = 4 }
-      ) {
-         param ($ReClassifyId)
+      It 'should delete area with reclassification id <ReClassifyId>' {
          ## Act
-         Remove-VSTeamArea -ProjectName "Public Demo" -ReClassifyId $ReClassifyId -Force
+         Remove-VSTeamArea -ProjectName "Public Demo" -ReClassifyId 4 -Force
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -47,8 +43,8 @@ Describe 'VSTeamArea' {
       }
 
       It 'with Path "<Path>" should delete area' -TestCases @(
-         @{Path = "SubPath" }
-         @{Path = "Path/SubPath" }
+         @{ Path = "SubPath" }
+         @{ Path = "Path/SubPath" }
       ) {
          param ($Path)
          ## Act
@@ -63,8 +59,8 @@ Describe 'VSTeamArea' {
       }
 
       It 'with empty Path "<Path>" should delete area' -TestCases @(
-         @{Path = "" }
-         @{Path = $null }
+         @{ Path = "" }
+         @{ Path = $null }
       ) {
          param ($Path)
          ## Act

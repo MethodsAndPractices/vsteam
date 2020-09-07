@@ -3,34 +3,36 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamAgent' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
+
+      ## Arrange      
+      Mock _callAPI
+      Mock _handleException
+      Mock _callAPI { throw 'boom' } -ParameterFilter { $id -eq "101" }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
    }
 
    Context 'Disable-VSTeamAgent' {
-      ## Arrange
-      BeforeAll {
-         Mock _getInstance { return 'https://dev.azure.com/test' }
-         Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
-
-         # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-         Mock Invoke-RestMethod -ParameterFilter { $Uri -like "*950*" }
-         Mock Invoke-RestMethod { throw 'boom' } -ParameterFilter { $Uri -like "*101*" }
-      }
-
-      It 'should throw' {
-         ## Act / Assert
-         { Disable-VSTeamAgent -Pool 36 -Id 101 } | Should -Throw
-      }
-
-      It 'by Id should disable the agent with passed in Id' {
+      It 'should handle exception' {
          ## Act
-         Disable-VSTeamAgent -Pool 36 -Id 950
+         Disable-VSTeamAgent -Pool 36 -Id 101 -Force
+
+         ##Assert
+         Should -Invoke _handleException -Exactly -Times 1 -Scope It
+      }
+
+      It 'should disable the agent with passed in Id' {
+         ## Act
+         Disable-VSTeamAgent -Pool 36 -Id 950 -Force
 
          ## Assert
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            # The write-host below is great for seeing how many ways the mock is called.
-            # Write-Host "Assert Mock $Uri"
-            $Method -eq 'Patch' -and
-            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTaskReleased)"
+         Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
+            $method -eq 'PATCH' -and
+            $NoProject -eq $true -and
+            $area -eq 'distributedtask/pools/36' -and
+            $resource -eq 'agents' -and
+            $id -eq '950' -and
+            $body -eq "{'enabled':false,'id':950,'maxParallelism':1}" -and
+            $version -eq '1.0-unitTests'
          }
       }
    }

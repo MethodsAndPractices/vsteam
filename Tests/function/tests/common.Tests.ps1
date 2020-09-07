@@ -9,12 +9,42 @@ Describe 'Common' {
       . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
    }
 
+   context '_callAPI' {
+      BeforeAll {
+         Mock Invoke-RestMethod {
+            # Write-Host $args
+         }
+         Mock _getApiVersion { return '1.0-unitTests' }
+         Mock _getInstance { return 'https://dev.azure.com/test' }
+      }
+
+      It 'Disable-VSTeamAgent' {
+         $item = 950
+         $PoolId = 36
+
+         _callAPI -Method PATCH -NoProject `
+            -Area "distributedtask/pools/$PoolId" `
+            -Resource "agents" `
+            -Id $item `
+            -Body "{'enabled':false,'id':$item,'maxParallelism':1}" `
+            -Version $(_getApiVersion DistributedTaskReleased)
+
+         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+            # The write-host below is great for seeing how many ways the mock is called.
+            # Write-Host "Assert Mock $Uri"
+            $Method -eq 'Patch' -and
+            $Body -eq "{'enabled':false,'id':950,'maxParallelism':1}" -and
+            $Uri -eq "https://dev.azure.com/test/_apis/distributedtask/pools/36/agents/950?api-version=$(_getApiVersion DistributedTaskReleased)"
+         }
+      }
+   }
+   
    Context '_getPermissionInheritanceInfo' {
       BeforeAll {
-         Mock Get-VSTeamBuildDefinition { Open-SampleFile Get-BuildDefinition_AzD.json -ReturnValue }
-         Mock Get-VSTeamProject { Open-SampleFile Get-VSTeamProject-NamePeopleTracker.json }
-         Mock Get-VSTeamReleaseDefinition { Open-SampleFile Get-VSTeamReleaseDefinition.json -ReturnValue }
-         Mock Get-VSTeamGitRepository { Open-SampleFile Get-VSTeamGitRepository-ProjectNamePeopleTracker-NamePeopleTracker.json }
+         Mock Get-VSTeamBuildDefinition { Open-SampleFile 'Get-BuildDefinition_AzD.json' -ReturnValue }
+         Mock Get-VSTeamProject { Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json' }
+         Mock Get-VSTeamReleaseDefinition { Open-SampleFile 'Get-VSTeamReleaseDefinition.json' -ReturnValue }
+         Mock Get-VSTeamGitRepository { Open-SampleFile 'Get-VSTeamGitRepository-ProjectNamePeopleTracker-NamePeopleTracker.json' }
       }
 
       It 'Should return an object with build def details' {

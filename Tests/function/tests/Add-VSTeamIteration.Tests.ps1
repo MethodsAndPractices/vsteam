@@ -7,10 +7,8 @@ Describe 'VSTeamIteration' {
 
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock Invoke-RestMethod { Open-SampleFile 'classificationNodeResult.json' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-      $classificationNodeResult = Open-SampleFile classificationNodeResult.json
-      Mock Invoke-RestMethod { return $classificationNodeResult }
    }
 
    Context 'Add-VSTeamIteration' {
@@ -43,8 +41,8 @@ Describe 'VSTeamIteration' {
       }
 
       It 'with empty Path "<Path>" should return Nodes' -TestCases @(
-         @{Path = "" }
-         @{Path = $null }
+         @{ Path = "" }
+         @{ Path = $null }
       ) {
          param ($Path)
          ## Act

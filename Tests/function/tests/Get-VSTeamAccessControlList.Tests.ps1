@@ -10,9 +10,9 @@ Describe 'VSTeamAccessControlList' {
       # You have to set the version or the api-version will not be added when versions = ''
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
-      $accessControlListResult = Open-SampleFile accessControlListResult.json
+      $accessControlListResult = Open-SampleFile 'accessControlListResult.json'
 
-      $securityNamespace = Open-SampleFile securityNamespace.json
+      $securityNamespace = Open-SampleFile 'securityNamespace.json'
       $securityNamespaceObject = [vsteam_lib.SecurityNamespace]::new($securityNamespace.value[0])
 
       # Set the account to use for testing. A normal user would do this

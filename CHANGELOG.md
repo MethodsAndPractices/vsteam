@@ -16,6 +16,7 @@ The C# solution files is in the root of the project vsteam_lib.sln. The lib is i
 **Breaking changes**:
 You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.
+Disable-VSTeamAgent now requires -Force
 
 ## 6.5.1
 

@@ -7,7 +7,7 @@ Describe 'Get-VSTeamArea' {
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode"
       . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       
-      $classificationNodeResult = Open-SampleFile classificationNodeResult.json
+      $classificationNodeResult = Open-SampleFile 'classificationNodeResult.json'
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }

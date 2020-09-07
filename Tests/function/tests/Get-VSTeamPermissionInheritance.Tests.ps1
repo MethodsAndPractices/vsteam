@@ -11,11 +11,11 @@ Describe 'VSTeamPermissionInheritance' {
       . "$baseFolder/Source/Public/Get-VSTeamAccessControlList.ps1"
    
       ## Arrange
-      $gitRepoResult = Open-SampleFile singleGitRepo.json
-      $releaseDefresults = Open-SampleFile releaseDefAzD.json
-      $buildDefHierarchyResults = Open-SampleFile buildDefHierarchyQuery.json
-      $accesscontrollistsResult = Open-SampleFile repoAccesscontrollists.json
-      $releaseDefHierarchyResults = Open-SampleFile releaseDefHierarchyQuery.json
+      $gitRepoResult = Open-SampleFile 'singleGitRepo.json'
+      $releaseDefresults = Open-SampleFile 'releaseDefAzD.json'
+      $buildDefHierarchyResults = Open-SampleFile 'buildDefHierarchyQuery.json'
+      $accesscontrollistsResult = Open-SampleFile 'repoAccesscontrollists.json'
+      $releaseDefHierarchyResults = Open-SampleFile 'releaseDefHierarchyQuery.json'
    }
 
    Context 'Get-VSTeamPermissionInheritance' {
@@ -33,11 +33,11 @@ Describe 'VSTeamPermissionInheritance' {
             $Uri -like "*stateFilter=WellFormed*"
          }
 
-         Mock Get-VSTeamProject { Open-SampleFile projectResult.json } -ParameterFilter {
+         Mock Get-VSTeamProject { Open-SampleFile 'projectResult.json' } -ParameterFilter {
             $Name -like 'project'
          }
          Mock Get-VSTeamGitRepository { return $gitRepoResult }
-         Mock Get-VSTeamBuildDefinition { Open-SampleFile buildDefAzD.json -ReturnValue }
+         Mock Get-VSTeamBuildDefinition { Open-SampleFile 'buildDefAzD.json' -ReturnValue }
          Mock Get-VSTeamReleaseDefinition { return $releaseDefresults.value }
          Mock Get-VSTeamAccessControlList { return $accesscontrollistsResult.value }
          Mock Invoke-RestMethod { return $releaseDefHierarchyResults } -ParameterFilter {

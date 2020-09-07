@@ -8,9 +8,7 @@ Describe 'VSTeamBuildDefinition' {
    Context 'Add-VSTeamBuildDefinition' {
       ## Arrange
       BeforeAll {
-         $resultsVSTS = Open-SampleFile buildDefvsts.json
-
-         Mock Invoke-RestMethod { return $resultsVSTS }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildDefvsts.json' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
       }
 
@@ -22,7 +20,8 @@ Describe 'VSTeamBuildDefinition' {
 
          it 'Should add build' {
             ## Act
-            Add-VSTeamBuildDefinition -projectName project -inFile 'sampleFiles/builddef.json'
+            Add-VSTeamBuildDefinition -projectName project `
+               -inFile 'sampleFiles/builddef.json'
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -42,7 +41,8 @@ Describe 'VSTeamBuildDefinition' {
 
          it 'Should add build' {
             ## Act
-            Add-VSTeamBuildDefinition -projectName project -inFile 'sampleFiles/builddef.json'
+            Add-VSTeamBuildDefinition -projectName project `
+               -inFile 'sampleFiles/builddef.json'
 
             ## Assert
             Assert-MockCalled Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

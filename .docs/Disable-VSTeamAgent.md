@@ -37,6 +37,10 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/force.md" -->
+
+<!-- #include "./params/whatif.md" -->
+
 ## INPUTS
 
 ### System.String

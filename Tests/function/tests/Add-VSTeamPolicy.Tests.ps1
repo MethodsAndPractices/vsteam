@@ -18,7 +18,11 @@ Describe 'VSTeamPolicy' {
    Context 'Add-VSTeamPolicy' {
       It 'should add the policy' {
          ## Act
-         Add-VSTeamPolicy -ProjectName Demo -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
+         Add-VSTeamPolicy -ProjectName Demo `
+            -type babcf51f-d853-43a2-9b05-4a64ca577be0 `
+            -enabled `
+            -blocking `
+            -settings @{
             MinimumApproverCount = 1
             scope                = @(
                @{
@@ -52,7 +56,11 @@ Describe 'VSTeamPolicy' {
 
       It 'should throw' {
          ## Act / Assert
-         { Add-VSTeamPolicy -ProjectName boom -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
+         { Add-VSTeamPolicy -ProjectName boom `
+               -type babcf51f-d853-43a2-9b05-4a64ca577be0 `
+               -enabled `
+               -blocking `
+               -settings @{
                MinimumApproverCount = 1
                scope                = @(
                   @{
@@ -61,7 +69,8 @@ Describe 'VSTeamPolicy' {
                      repositoryId = '10000000-0000-0000-0000-0000000000001'
                   })
             }
-         } | Should -Throw
+         } 
+         | Should -Throw
       }
    }
 }

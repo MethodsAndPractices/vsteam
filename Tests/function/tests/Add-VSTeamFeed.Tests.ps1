@@ -8,15 +8,15 @@ Describe 'VSTeamFeed' {
    Context 'Add-VSTeamFeed' {
       ## Arrange
       BeforeAll {
-         $results = Open-SampleFile feeds.json
-         Mock Invoke-RestMethod { return $results.value[0] }
          Mock _getInstance { return 'https://dev.azure.com/test' }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamFeed.json' -Index 0 }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Packaging' }
       }
 
-      it 'with description should add feed' {
+      it 'should add feed with description' {
          ## Act
-         Add-VSTeamFeed -Name 'module' -Description 'Test Module'
+         Add-VSTeamFeed -Name 'module' `
+            -Description 'Test Module'
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -26,9 +26,11 @@ Describe 'VSTeamFeed' {
          }
       }
 
-      it 'with upstream sources should add feed' {
+      it 'should add feed with upstream sources' {
          ## Act
-         Add-VSTeamFeed -Name 'module' -EnableUpstreamSources -showDeletedPackageVersions
+         Add-VSTeamFeed -Name 'module' `
+            -EnableUpstreamSources `
+            -showDeletedPackageVersions
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
