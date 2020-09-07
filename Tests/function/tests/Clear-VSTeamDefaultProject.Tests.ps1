@@ -3,12 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamDefaultProject' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamQueue.ps1"
-      . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamBuildDefinition.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProcess.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
    }

@@ -3,27 +3,22 @@ Set-StrictMode -Version Latest
 Describe "VSTeamDescriptor" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-   
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
-   
-      ## Arrange
-      $result = Open-SampleFile 'descriptor.scope.TestProject.json'
    }
 
    Context 'Get-VSTeamDescriptor' {
       Context 'Services' {
          BeforeAll {
             ## Arrange
-            # You have to set the version or the api-version will not be added when versions = ''
-            Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
+            Mock _supportsGraph
 
             # Set the account to use for testing. A normal user would do this
             # using the Set-VSTeamAccount function.
             Mock _getInstance { return 'https://dev.azure.com/test' }
-            Mock _supportsGraph
-
-            Mock Invoke-RestMethod { return $result }
+            
+            Mock Invoke-RestMethod { Open-SampleFile 'descriptor.scope.TestProject.json' }
+            
+            # You have to set the version or the api-version will not be added when versions = ''
+            Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
          }
 
          It 'by StorageKey Should return groups' {
@@ -53,7 +48,7 @@ Describe "VSTeamDescriptor" {
             { Get-VSTeamDescriptor -StorageKey '010d06f0-00d5-472a-bb47-58947c230876' } | Should -Throw
          }
 
-         It '_callAPI should not be called' {
+         It 'should not call _callAPI' {
             Should -Invoke _callAPI -Exactly 0
          }
       }

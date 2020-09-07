@@ -1,0 +1,101 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "id": 5171,
+      "revision": 1,
+      "approver": {
+        "displayName": "Test User",
+        "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "id": "00000000-0000-0000-0000-000000000000",
+        "uniqueName": "Test@test.com",
+        "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+        "descriptor": "aad.redacted"
+      },
+      "approvalType": "preDeploy",
+      "createdOn": "2020-09-07T17:28:27.34Z",
+      "modifiedOn": "2020-09-07T17:28:27.34Z",
+      "status": "pending",
+      "comments": "",
+      "isAutomated": false,
+      "isNotificationOn": true,
+      "trialNumber": 1,
+      "attempt": 1,
+      "rank": 1,
+      "release": {
+        "id": 260,
+        "name": "Release-18",
+        "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/releases/260",
+        "_links": {}
+      },
+      "releaseDefinition": {
+        "id": 7,
+        "name": "PTracker-CD - NoMobile",
+        "path": "\\",
+        "projectReference": null,
+        "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/7",
+        "_links": {}
+      },
+      "releaseEnvironment": {
+        "id": 3620,
+        "name": "Dev Common Infra",
+        "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/releases/260/environments/3620",
+        "_links": {}
+      },
+      "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/approvals/5171"
+    },
+    {
+      "id": 5170,
+      "revision": 1,
+      "approver": {
+        "displayName": "Test User",
+        "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "id": "00000000-0000-0000-0000-000000000000",
+        "uniqueName": "Test@test.com",
+        "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+        "descriptor": "aad.redacted"
+      },
+      "approvalType": "preDeploy",
+      "createdOn": "2020-09-07T17:28:27.303Z",
+      "modifiedOn": "2020-09-07T17:28:27.303Z",
+      "status": "pending",
+      "comments": "",
+      "isAutomated": false,
+      "isNotificationOn": true,
+      "trialNumber": 1,
+      "attempt": 1,
+      "rank": 1,
+      "release": {
+        "id": 260,
+        "name": "Release-18",
+        "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/releases/260",
+        "_links": {}
+      },
+      "releaseDefinition": {
+        "id": 7,
+        "name": "PTracker-CD - NoMobile",
+        "path": "\\",
+        "projectReference": null,
+        "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/7",
+        "_links": {}
+      },
+      "releaseEnvironment": {
+        "id": 3621,
+        "name": "Dev Infra",
+        "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/releases/260/environments/3621",
+        "_links": {}
+      },
+      "url": "https://vsrm.dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/Release/approvals/5170"
+    }
+  ]
+}

@@ -1,23 +1,16 @@
 Set-StrictMode -Version Latest
 
-Describe 'Get-VSTeamArea' {
+Describe 'VSTeamArea' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       
-      $classificationNodeResult = Open-SampleFile 'classificationNodeResult.json'
-
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamClassificationNode.json' -Index 0 }
    }
 
-   Context 'simplest call' {
-      BeforeAll {
-         Mock Invoke-RestMethod { return $classificationNodeResult }
-      }
-
+   Context 'Get-VSTeamArea' {
       It 'by path and depth should return areas' {
          ## Act
          Get-VSTeamArea -ProjectName "Public Demo" -Depth 5 -Path "test/test/test"

@@ -8,17 +8,17 @@ Describe 'VSTeamBuildTimeline' {
       ## Arrnage
       [vsteam_lib.Versions]::Build = '1.0-unitTest'
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-      $buildTimeline = Open-SampleFile 'buildTimeline.json'
-      $buildTimelineEmptyRecords = Open-SampleFile 'buildTimelineEmptyRecords.json'
    }
 
    Context 'Get-VSTeamBuildTimeline by ID' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $buildTimeline }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildTimeline.json' }
       }
 
       It 'should get timeline with multiple build IDs' {
-         Get-VSTeamBuildTimeline -BuildID @(1, 2) -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject"
+         Get-VSTeamBuildTimeline -BuildID @(1, 2) `
+            -Id 00000000-0000-0000-0000-000000000000 `
+            -ProjectName "MyProject"
 
          Should -Invoke Invoke-RestMethod -Scope It -Times 2 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/*" -and
@@ -29,7 +29,11 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline with changeId and PlanId' {
-         Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -ChangeId 4 -PlanId 00000000-0000-0000-0000-000000000000
+         Get-VSTeamBuildTimeline -BuildID 1 `
+            -Id 00000000-0000-0000-0000-000000000000 `
+            -ProjectName "MyProject" `
+            -ChangeId 4 `
+            -PlanId 00000000-0000-0000-0000-000000000000
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
@@ -41,7 +45,10 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline without changeId' {
-         Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -PlanId 00000000-0000-0000-0000-000000000000
+         Get-VSTeamBuildTimeline -BuildID 1 `
+            -Id 00000000-0000-0000-0000-000000000000 `
+            -ProjectName "MyProject" `
+            -PlanId 00000000-0000-0000-0000-000000000000
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
@@ -52,7 +59,10 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline without planId' {
-         Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -ChangeId 4
+         Get-VSTeamBuildTimeline -BuildID 1 `
+            -Id 00000000-0000-0000-0000-000000000000 `
+            -ProjectName "MyProject" `
+            -ChangeId 4
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
@@ -63,7 +73,9 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline without planId and changeID' {
-         Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject"
+         Get-VSTeamBuildTimeline -BuildID 1 `
+            -Id 00000000-0000-0000-0000-000000000000 `
+            -ProjectName "MyProject"
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/MyProject/_apis/build/builds/1/*" -and
@@ -73,11 +85,17 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline without records and no exception' {
-         Mock Invoke-RestMethod { return $buildTimelineEmptyRecords }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildTimelineEmptyRecords.json' }
 
-         $null = Get-VSTeamBuildTimeline -BuildID 1 -Id 00000000-0000-0000-0000-000000000000 -ProjectName "MyProject" -ChangeId 4 -PlanId 00000000-0000-0000-0000-000000000000
+         $null = Get-VSTeamBuildTimeline -BuildID 1 `
+            -Id 00000000-0000-0000-0000-000000000000 `
+            -ProjectName "MyProject" `
+            -ChangeId 4 `
+            -PlanId 00000000-0000-0000-0000-000000000000
 
-         { Get-VSTeamBuildTimeline -BuildID 1 -ProjectName "MyProject" } | Should -Not -Throw
+         { Get-VSTeamBuildTimeline -BuildID 1 `
+               -ProjectName "MyProject" } 
+         | Should -Not -Throw
       }
    }
 }

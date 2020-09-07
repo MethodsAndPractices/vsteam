@@ -191,7 +191,6 @@
     <Content Include="..\SampleFiles\010_releasedef_2.json" Link="SampleFiles\010_releasedef_2.json" />
     <Content Include="..\SampleFiles\accessControlEntryResult.json" Link="SampleFiles\accessControlEntryResult.json" />
     <Content Include="..\SampleFiles\accessControlListResult.json" Link="SampleFiles\accessControlListResult.json" />
-    <Content Include="..\SampleFiles\agentSingleResult.json" Link="SampleFiles\agentSingleResult.json" />
     <Content Include="..\SampleFiles\buildDef.json" Link="SampleFiles\buildDef.json" />
     <Content Include="..\SampleFiles\buildDef2017.json" Link="SampleFiles\buildDef2017.json" />
     <Content Include="..\SampleFiles\buildDef2018.json" Link="SampleFiles\buildDef2018.json" />

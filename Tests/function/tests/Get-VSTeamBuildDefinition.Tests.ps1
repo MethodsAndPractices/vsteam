@@ -3,32 +3,16 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamBuildDefinition' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
    }
 
    Context 'Get-VSTeamBuildDefinition' {
       BeforeAll {
-         $resultsAzD = Open-SampleFile 'buildDefAzD.json'
-         $resultsVSTS = Open-SampleFile 'buildDefvsts.json'
-         $results2017 = Open-SampleFile 'buildDef2017.json'
-         $results2018 = Open-SampleFile 'buildDef2018.json'
-
-         # Make sure the project name is valid. By returning an empty array
-         # all project names are valid. Otherwise, you name you pass for the
-         # project in your commands must appear in the list.
-         # Get-VSTeamProject for cache
-         Mock Invoke-RestMethod { return @() } -ParameterFilter {
-            $Uri -like "*`$top=100*" -and
-            $Uri -like "*stateFilter=WellFormed*"
-         }
-
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
-
-         Mock Invoke-RestMethod { return $results2017 } -ParameterFilter { $Uri -like "*2017Project*" }
-         Mock Invoke-RestMethod { return $results2018 } -ParameterFilter { $Uri -like "*2018Project*" }
-         Mock Invoke-RestMethod { return $resultsAzD } -ParameterFilter { $Uri -like "*azd*" }
-         Mock Invoke-RestMethod { return $resultsVSTS } -ParameterFilter { $Uri -like "*vsts*" }
-         Mock Invoke-RestMethod { return $resultsVSTS.value } -ParameterFilter { $Uri -like "*101*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildDefAzD.json' } -ParameterFilter { $Uri -like "*azd*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildDefvsts.json' } -ParameterFilter { $Uri -like "*vsts*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildDef2017.json' } -ParameterFilter { $Uri -like "*2017Project*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildDef2018.json' } -ParameterFilter { $Uri -like "*2018Project*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'buildDefvsts.json' -ReturnValue } -ParameterFilter { $Uri -like "*101*" }
       }
 
       Context 'Server' {
@@ -125,8 +109,10 @@ Describe 'VSTeamBuildDefinition' {
             # no longer support. https://github.com/DarqueWarrior/vsteam/issues/87
             Mock Write-Warning
    
+            ## Act
             Get-VSTeamBuildDefinition -ProjectName vsts -Type xaml
             
+            ## Assert
             Should -Invoke Write-Warning -Exactly -Times 1 -Scope It -ParameterFilter {
                $Message -eq "You specified -Type xaml. This parameters is ignored and will be removed in future"
             }

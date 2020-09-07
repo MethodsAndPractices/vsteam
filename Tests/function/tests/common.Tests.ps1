@@ -11,9 +11,7 @@ Describe 'Common' {
 
    context '_callAPI' {
       BeforeAll {
-         Mock Invoke-RestMethod {
-            # Write-Host $args
-         }
+         Mock Invoke-RestMethod
          Mock _getApiVersion { return '1.0-unitTests' }
          Mock _getInstance { return 'https://dev.azure.com/test' }
       }

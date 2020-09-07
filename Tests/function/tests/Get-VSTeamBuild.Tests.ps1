@@ -3,32 +3,10 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamBuild' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
-      . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
-   
-      ## Arrange
-      # Make sure the project name is valid. By returning an empty array
-      # all project names are valid. Otherwise, you name you pass for the
-      # project in your commands must appear in the list.
-      # Get-VSTeamProject for cache
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
-         $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-         $Uri -like "*`$top=100*" -and
-         $Uri -like "*stateFilter=WellFormed*"
-      }
 
-      # Sample result of a single build
-      $singleResult = Open-SampleFile 'buildSingleResult.json'
-
-      # Sample result for list of builds
-      $results = Open-SampleFile 'buildResults.json'
-
-      Mock Invoke-RestMethod { return $results }
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*101*" }
+      Mock Invoke-RestMethod { Open-SampleFile 'buildResults.json' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
+      Mock Invoke-RestMethod { Open-SampleFile 'buildSingleResult.json' } -ParameterFilter { $Uri -like "*101*" }
    }
 
    Context 'Get-VSTeamBuild' {
@@ -93,7 +71,9 @@ Describe 'VSTeamBuild' {
             Get-VSTeamBuild -projectName project -id 101
 
             ## Assert
-            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/101?api-version=$(_getApiVersion Build)" }
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/101?api-version=$(_getApiVersion Build)" 
+            }
          }
       }
    }

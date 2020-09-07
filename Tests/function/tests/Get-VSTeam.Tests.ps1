@@ -4,33 +4,11 @@ Describe "VSTeam" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
    
-      $results = [PSCustomObject]@{
-         value = [PSCustomObject]@{
-            id          = '6f365a7143e492e911c341451a734401bcacadfd'
-            name        = 'refs/heads/master'
-            description = 'team description'
-         }
-      }
-
-      $singleResult = [PSCustomObject]@{
-         id          = '6f365a7143e492e911c341451a734401bcacadfd'
-         name        = 'refs/heads/master'
-         description = 'team description'
-      }
+      $results = Open-SampleFile 'Get-VSTeam.json'
+      $singleResult = Open-SampleFile 'Get-VSTeam.json' -Index 0
    }
 
    Context "Get-VSTeam" {
-      BeforeAll {
-         # Make sure the project name is valid. By returning an empty array
-         # all project names are valid. Otherwise, you name you pass for the
-         # project in your commands must appear in the list.
-         # Get-VSTeamProject for cache
-         Mock Invoke-RestMethod { return @() } -ParameterFilter {
-            $Uri -like "*`$top=100*" -and
-            $Uri -like "*stateFilter=WellFormed*"
-         }
-      }
-
       Context "services" {
          BeforeAll {
             Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -43,7 +21,9 @@ Describe "VSTeam" {
             }
 
             It 'Should return teams' {
-               Get-VSTeam -ProjectName Test
+               $team = Get-VSTeam -ProjectName Test
+
+               $team.Name | Should -Be 'Test Team' -Because 'Name should be set'
 
                # Make sure it was called with the correct URI
                Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
@@ -144,7 +124,6 @@ Describe "VSTeam" {
       Context "Server" {
          BeforeAll {
             Mock _useWindowsAuthenticationOnPremise { return $true }
-
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
          }
 

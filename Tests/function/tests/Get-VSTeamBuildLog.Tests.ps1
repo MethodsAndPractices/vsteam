@@ -8,20 +8,7 @@ Describe 'VSTeamBuildLog' {
    Context 'Get-VSTeamBuildLog' {
       BeforeAll {
          ## Arrange
-         Mock Invoke-RestMethod { return @{
-               count = 4
-               value = @{ }
-            }
-         }
-
-         # Make sure the project name is valid. By returning an empty array
-         # all project names are valid. Otherwise, you name you pass for the
-         # project in your commands must appear in the list.
-         Mock Invoke-RestMethod { return @() } -ParameterFilter {
-            $Uri -like "*`$top=100*" -and
-            $Uri -like "*stateFilter=WellFormed*"
-         }
-
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamBuildLog-Id568.json' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
       }
 
@@ -43,7 +30,7 @@ Describe 'VSTeamBuildLog' {
             }
 
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/3?api-version=$(_getApiVersion Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/60?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -85,7 +72,7 @@ Describe 'VSTeamBuildLog' {
             }
 
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/3?api-version=$(_getApiVersion Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/60?api-version=$(_getApiVersion Build)"
             }
          }
       }

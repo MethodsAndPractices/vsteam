@@ -10,10 +10,8 @@ Describe 'VSTeamBuildTag' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Build' }
 
-      $tags = 'Tag1', 'Tag2'
-      Mock Invoke-RestMethod {
-         return @{ value = $tags }
-      }
+      $tags = Open-SampleFile 'Get-VSTeamBuildTag-Id568.json' -ReturnValue
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamBuildTag-Id568.json' }
    }
 
    Context 'Get-VSTeamBuildTag' {
@@ -29,7 +27,7 @@ Describe 'VSTeamBuildTag' {
          }
 
          It 'should return correct data.' {
-            Compare-Object $tags  $returndata | Should -Be $null
+            Compare-Object $tags $returndata | Should -Be $null
          }
       }
 

@@ -4,16 +4,12 @@ Describe 'VSTeamAccessControlList' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Set-VSTeamDefaultProject.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamSecurityNamespace.ps1"
 
       ## Arrange
       # You have to set the version or the api-version will not be added when versions = ''
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
 
-      $accessControlListResult = Open-SampleFile 'accessControlListResult.json'
-
-      $securityNamespace = Open-SampleFile 'securityNamespace.json'
-      $securityNamespaceObject = [vsteam_lib.SecurityNamespace]::new($securityNamespace.value[0])
+      $securityNamespaceObject = [vsteam_lib.SecurityNamespace]::new($(Open-SampleFile 'securityNamespace.json' -Index 0))
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
@@ -22,7 +18,7 @@ Describe 'VSTeamAccessControlList' {
    
    Context 'Get-VSTeamAccessControlList' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $accessControlListResult }
+         Mock Invoke-RestMethod { Open-SampleFile 'accessControlListResult.json' }
          Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*token=boom*" }
       }
       
@@ -32,7 +28,11 @@ Describe 'VSTeamAccessControlList' {
          Set-VSTeamDefaultProject -Project Testing
 
          ## Act
-         Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "SomeToken" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse
+         Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 `
+            -Token "SomeToken" `
+            -Descriptors "SomeDescriptor" `
+            -IncludeExtendedInfo `
+            -Recurse
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -47,8 +47,9 @@ Describe 'VSTeamAccessControlList' {
 
       It 'by SecurityNamespace should return ACLs' {
          ## Act
-         # I use $securityNamespace.value[0] here because using securityNamespaceObject was leading to issues
-         Get-VSTeamAccessControlList -SecurityNamespace $($securityNamespace.value[0]) -Token "SomeToken" -Descriptors "SomeDescriptor"
+         Get-VSTeamAccessControlList -SecurityNamespace $securityNamespaceObject `
+            -Token "SomeToken" `
+            -Descriptors "SomeDescriptor"
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -75,12 +76,22 @@ Describe 'VSTeamAccessControlList' {
 
       It 'by SecurityNamespaceId should throw' {
          ## Act / Assert
-         { Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 -Token "boom" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should -Throw
+         { Get-VSTeamAccessControlList -SecurityNamespaceId 5a27515b-ccd7-42c9-84f1-54c998f03866 `
+               -Token "boom" `
+               -Descriptors "SomeDescriptor" `
+               -IncludeExtendedInfo `
+               -Recurse }
+         | Should -Throw
       }
 
       It 'by SecurityNamespace should throw' {
          ## Act / Assert
-         { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamespaceObject -Token "boom" -Descriptors "SomeDescriptor" -IncludeExtendedInfo -Recurse } | Should -Throw
+         { Get-VSTeamAccessControlList  -SecurityNamespace $securityNamespaceObject `
+               -Token "boom" `
+               -Descriptors "SomeDescriptor" `
+               -IncludeExtendedInfo `
+               -Recurse } 
+         | Should -Throw
       }
    }
 }

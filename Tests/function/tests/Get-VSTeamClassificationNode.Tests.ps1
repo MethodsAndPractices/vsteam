@@ -5,20 +5,18 @@ Describe 'VSTeamClassificationNode' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       ## Arrange
-      $withoutChildNode = Open-SampleFile 'withoutChildNode.json'
-      $classificationNodeResult = Open-SampleFile 'classificationNodeResult.json'
-
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
    }
 
    Context 'Get-VSTeamClassificationNode' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $classificationNodeResult }
-         Mock Invoke-RestMethod { return $withoutChildNode } -ParameterFilter { $Uri -like "*Ids=43,44*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'classificationNodeResult.json' }
+         Mock Invoke-RestMethod { Open-SampleFile 'withoutChildNode.json' } -ParameterFilter {
+            $Uri -like "*Ids=43,44*" 
+         }
       }
 
       It 'with StructureGroup should return Nodes' {
@@ -46,7 +44,9 @@ Describe 'VSTeamClassificationNode' {
 
       It 'by Path should return Nodes' {
          ## Act
-         Get-VSTeamClassificationNode -ProjectName "Public Demo" -StructureGroup "Iterations" -Path "test/test/test"
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" `
+            -StructureGroup "Iterations" `
+            -Path "test/test/test"
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

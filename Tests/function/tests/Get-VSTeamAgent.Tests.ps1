@@ -2,15 +2,11 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamAgent' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Public/Set-VSTeamDefaultProject.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       
       ## Arrange
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
-
-      $testAgent = Open-SampleFile 'agentSingleResult.json'
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
 
@@ -20,13 +16,8 @@ Describe 'VSTeamAgent' {
 
    Context 'Get-VSTeamAgent' {
       BeforeAll {
-         Mock Invoke-RestMethod { return [PSCustomObject]@{
-               count = 1
-               value = $testAgent
-            }
-         }
-
-         Mock Invoke-RestMethod { return $testAgent } -ParameterFilter { $Uri -like "*101*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamAgent-PoolId1.json' }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamAgent-PoolId1.json' -Index 0 } -ParameterFilter { $Uri -like "*101*" }
       }
 
       it 'by pool id should return all the agents' {
