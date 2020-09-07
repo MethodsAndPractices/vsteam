@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.ClassificationNode.ListView</Name>
+			<Name>vsteam_lib.ClassificationNode.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.ClassificationNode</TypeName>
+				<TypeName>vsteam_lib.ClassificationNode</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

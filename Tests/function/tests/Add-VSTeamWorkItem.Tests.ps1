@@ -2,32 +2,23 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamWorkItem' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
       
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItem-Id16.json' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-      $obj = @{
-         id  = 47
-         rev = 1
-         url = "https://dev.azure.com/test/_apis/wit/workItems/47"
-      }
-
-      Mock Invoke-RestMethod {
-         # If this test fails uncomment the line below to see how the mock was called.
-         # Write-Host $args
-
-         return $obj
-      }
    }
 
    Context 'Add-VSTeamWorkItem' {
       It 'Without Default Project should add work item' {
+         ## Arrange
          $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+
+         ## Act
          Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Post' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -38,9 +29,13 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should add work item' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
+
+         ## Act
          Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Post' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -55,9 +50,13 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should add work item with parent' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
+         
+         ## Act
          Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Post' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -75,11 +74,14 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should add work item only with additional properties and parent id' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
+
+         ## Act
          Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25 -AdditionalFields $additionalFields
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Post' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -98,11 +100,14 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should add work item only with additional properties' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
+
+         ## Act
          Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -AdditionalFields $additionalFields
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Post' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -117,10 +122,18 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should throw exception when adding existing parameters to additional properties and parent id' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-
          $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
-         { Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25 -AdditionalFields $additionalFields } | Should -Throw
+
+         ## Act / Assert
+         { Add-VSTeamWorkItem -ProjectName test `
+               -WorkItemType Task `
+               -Title Test1 `
+               -Description Testing `
+               -ParentId 25 `
+               -AdditionalFields $additionalFields } 
+         | Should -Throw
       }
    }
 }

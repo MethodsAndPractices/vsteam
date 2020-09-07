@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamTaskGroup' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
 
       $taskGroupJson = "$sampleFiles\taskGroup.json"
       $taskGroupJsonAsString = Get-Content $taskGroupJson -Raw
@@ -14,16 +11,11 @@ Describe 'VSTeamTaskGroup' {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'TaskGroups' }
-
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/project*" }
    }
 
    Context 'Add-VSTeamTaskGroup' {
       BeforeAll {
-         Mock Invoke-RestMethod {
-            return Get-Content $taskGroupJson | ConvertFrom-Json
-         }
+         Mock Invoke-RestMethod { Open-SampleFile 'taskGroup.json' }
       }
 
       It 'should create a task group using body param' {

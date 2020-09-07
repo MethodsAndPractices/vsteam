@@ -7,9 +7,8 @@ Describe 'VSTeamRelease' {
       . "$baseFolder/Source/Public/Get-VSTeamBuild.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
 
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
-
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
    }
 
    Context 'Add-VSTeamRelease' {
@@ -20,7 +19,7 @@ Describe 'VSTeamRelease' {
          Mock Get-VSTeamReleaseDefinition {
             $def1 = New-Object -TypeName PSObject -Prop @{ name = 'Test1'; id = 1; artifacts = @(@{ alias = 'drop' }) }
             $def2 = New-Object -TypeName PSObject -Prop @{ name = 'Tests'; id = 2; artifacts = @(@{ alias = 'drop' }) }
-            
+
             return @($def1, $def2)
          }
 
@@ -75,7 +74,9 @@ Describe 'VSTeamRelease' {
 
       It 'by name should add a release' {
          ## Act
-         Add-VSTeamRelease -ProjectName project -BuildNumber 'Bld1' -DefinitionName 'Test1'
+         Add-VSTeamRelease -ProjectName project `
+            -BuildNumber 'Bld1' `
+            -DefinitionName 'Test1'
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -91,7 +92,10 @@ Describe 'VSTeamRelease' {
 
       It 'by Id should add a release' {
          ## Act
-         Add-VSTeamRelease -ProjectName project -DefinitionId 1 -ArtifactAlias drop -BuildId 2
+         Add-VSTeamRelease -ProjectName project `
+            -DefinitionId 1 `
+            -ArtifactAlias drop `
+            -BuildId 2
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -107,7 +111,11 @@ Describe 'VSTeamRelease' {
 
       It 'should throw' {
          ## Act / Assert
-         { Add-VSTeamRelease -ProjectName project -DefinitionId 101 -ArtifactAlias drop -BuildId 101 } | Should -Throw
+         { Add-VSTeamRelease -ProjectName project `
+               -DefinitionId 101 `
+               -ArtifactAlias drop `
+               -BuildId 101 } 
+         | Should -Throw
       }
    }
 }

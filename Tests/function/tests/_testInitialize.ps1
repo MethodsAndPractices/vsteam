@@ -55,3 +55,20 @@ function Open-SampleFile {
       }
    }
 }
+
+function _trackProcess {
+   if ($iTracking -gt 9) {
+      return [PSCustomObject]@{
+         isReady         = $true
+         operationStatus = [PSCustomObject]@{ state = 'Ready' }
+      }
+   }
+
+   return [PSCustomObject]@{
+      isReady         = $false
+      createdBy       = [PSCustomObject]@{ }
+      authorization   = [PSCustomObject]@{ }
+      data            = [PSCustomObject]@{ }
+      operationStatus = [PSCustomObject]@{ state = 'InProgress' }
+   }
+}

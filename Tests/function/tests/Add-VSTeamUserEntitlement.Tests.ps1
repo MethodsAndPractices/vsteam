@@ -3,22 +3,22 @@ Set-StrictMode -Version Latest
 Describe "VSTeamUserEntitlement" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamUserEntitlement.ps1"
    }
 
    Context 'Add-VSTeamUserEntitlement' {
       BeforeAll {
          [vsteam_lib.Versions]::ModuleVersion = '0.0.0'
-         Mock _getApiVersion { return 'VSTS' }
-         Mock _getInstance { return 'https://dev.azure.com/test' }
 
          Mock _callAPI
+         Mock _getApiVersion { return 'VSTS' }
+         Mock _getInstance { return 'https://dev.azure.com/test' }
       }
 
       It 'Should add a user' {
-         Add-VSTeamUserEntitlement -License earlyAdopter -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com'
+         Add-VSTeamUserEntitlement -License earlyAdopter `
+            -LicensingSource msdn `
+            -MSDNLicenseType enterprise `
+            -Email 'test@user.com'
 
          Should -Invoke _callAPI -ParameterFilter {
             $Method -eq 'Post' -and

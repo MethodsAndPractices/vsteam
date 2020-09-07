@@ -5,26 +5,11 @@ Describe 'VSTeamReleaseDefinition' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
-
-      $results = [PSCustomObject]@{
-         value = [PSCustomObject]@{
-            queue           = [PSCustomObject]@{ name = 'Default' }
-            _links          = [PSCustomObject]@{
-               self = [PSCustomObject]@{ }
-               web  = [PSCustomObject]@{ }
-            }
-            retentionPolicy = [PSCustomObject]@{ }
-            lastRelease     = [PSCustomObject]@{ }
-            artifacts       = [PSCustomObject]@{ }
-            modifiedBy      = [PSCustomObject]@{ name = 'project' }
-            createdBy       = [PSCustomObject]@{ name = 'test' }
-         }
-      }
    }
 
    Context 'Add-VSTeamReleaseDefinition' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamReleaseDefinition.json' }
       }
 
       Context 'Services' {

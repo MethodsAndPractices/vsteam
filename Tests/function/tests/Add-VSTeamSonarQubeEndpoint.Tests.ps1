@@ -2,12 +2,12 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamSonarQubeEndpoint' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamServiceEndpoint.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamServiceEndpoint.ps1"
    }
+   
    Context 'Add-VSTeamSonarQubeEndpoint' {
       BeforeAll {
          Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -35,7 +35,10 @@ Describe 'VSTeamSonarQubeEndpoint' {
       }
 
       It 'should not create SonarQube Serviceendpoint' {
-         Add-VSTeamSonarQubeEndpoint -projectName 'project' -endpointName 'PM_DonovanBrown' -sonarqubeUrl 'http://mysonarserver.local' -personalAccessToken '00000000-0000-0000-0000-000000000000'
+         Add-VSTeamSonarQubeEndpoint -projectName 'project' `
+            -endpointName 'PM_DonovanBrown' `
+            -sonarqubeUrl 'http://mysonarserver.local' `
+            -personalAccessToken '00000000-0000-0000-0000-000000000000'
 
          ## Verify that Write-Error was called
          Should -InvokeVerifiable

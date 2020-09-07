@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.BuildDefinition.ListView</Name>
+			<Name>vsteam_lib.BuildDefinition.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.BuildDefinition</TypeName>
+				<TypeName>vsteam_lib.BuildDefinition</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

@@ -16,25 +16,8 @@ Describe 'VSTeamNuGetEndpoint' {
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
 
          Mock Write-Progress
+         Mock Invoke-RestMethod { _trackProcess }
          Mock Invoke-RestMethod { return @{id = '23233-2342' } } -ParameterFilter { $Method -eq 'Post' }
-         Mock Invoke-RestMethod {
-            # This $i is in the module. Because we use InModuleScope
-            # we can see it
-            if ($iTracking -gt 9) {
-               return [PSCustomObject]@{
-                  isReady         = $true
-                  operationStatus = [PSCustomObject]@{state = 'Ready' }
-               }
-            }
-
-            return [PSCustomObject]@{
-               isReady         = $false
-               createdBy       = [PSCustomObject]@{ }
-               authorization   = [PSCustomObject]@{ }
-               data            = [PSCustomObject]@{ }
-               operationStatus = [PSCustomObject]@{state = 'InProgress' }
-            }
-         }
       }
 
       It 'with ApiKey should create a new NuGet Serviceendpoint' {

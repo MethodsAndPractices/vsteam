@@ -1,0 +1,19 @@
+{
+   "count": 1,
+   "value": [
+      {
+         "id": 24,
+         "identifier": "b33b12d7-6abb-4b7a-b9d6-2092d0933c99",
+         "name": "Demo Public",
+         "structureType": "area",
+         "hasChildren": true,
+         "path": "\\Demo Public\\Area",
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas"
+            }
+         },
+         "url": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Areas"
+      }
+   ]
+}

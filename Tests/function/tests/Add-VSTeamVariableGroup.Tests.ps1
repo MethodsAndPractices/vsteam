@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamVariableGroup' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamVariableGroup.ps1"
@@ -45,12 +44,15 @@ Describe 'VSTeamVariableGroup' {
 
             Add-VSTeamVariableGroup @testParameters
 
-            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+               $Method -eq 'Post' 
+            }
          }
 
          It "should create a new var group when passing the json as the body" {
             $body = $sampleFileVSTS
             $projName = "project"
+
             Add-VSTeamVariableGroup -Body $body -ProjectName $projName
 
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -85,7 +87,9 @@ Describe 'VSTeamVariableGroup' {
 
             Add-VSTeamVariableGroup @testParameters
 
-            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { $Method -eq 'Post' }
+            Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter { 
+               $Method -eq 'Post' 
+            }
          }
       }
    }

@@ -14,24 +14,8 @@ Describe 'VSTeamKubernetesEndpoint' {
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ServiceEndpoints' }
 
          Mock Write-Progress
+         Mock Invoke-RestMethod { _trackProcess }
          Mock Invoke-RestMethod { return @{id = '23233-2342' } } -ParameterFilter { $Method -eq 'Post' }
-
-         Mock Invoke-RestMethod {
-            if ($iTracking -gt 9) {
-               return [PSCustomObject]@{
-                  isReady         = $true
-                  operationStatus = [PSCustomObject]@{state = 'Ready' }
-               }
-            }
-
-            return [PSCustomObject]@{
-               isReady         = $false
-               createdBy       = [PSCustomObject]@{ }
-               authorization   = [PSCustomObject]@{ }
-               data            = [PSCustomObject]@{ }
-               operationStatus = [PSCustomObject]@{state = 'InProgress' }
-            }
-         }
       }
 
       It 'not accepting untrusted certs and not generating a pfx should create a new Kubernetes Serviceendpoint' {

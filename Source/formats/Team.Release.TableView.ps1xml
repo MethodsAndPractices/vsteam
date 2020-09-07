@@ -2,7 +2,7 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Release.TableView</Name>
+			<Name>vsteam_lib.Release.TableView</Name>
 			<ViewSelectedBy>
 				<TypeName>vsteam_lib.Release</TypeName>
 			</ViewSelectedBy>
