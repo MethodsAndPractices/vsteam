@@ -6,41 +6,11 @@ Describe 'VSTeamProcess' {
       
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
-
-      # Note: if the call is to ...work/processes... the identity field is "TypeID". calling to ...Process/processes... it is "ID"
-      $results = [PSCustomObject]@{
-         value = @(
-            [PSCustomObject]@{
-               name        = 'Agile'
-               description = ''
-               url         = ''
-               typeid      = '123-5464-dee43'
-               isDefault   = $false
-               type        = 'Agile'
-            }
-            [PSCustomObject]@{
-               name        = 'Scrum'
-               description = ''
-               url         = ''
-               typeid      = '234-6575-eff54'
-               isDefault   = $false
-               type        = 'Agile'
-            }
-         )
-      }
-
-      $singleResult = [PSCustomObject]@{
-         name        = 'Agile'
-         description = ''
-         url         = ''
-         typeid      = '123-5464-dee43'
-         isDefault   = $false
-         type        = 'Agile'
-      }
-
       Mock Write-Warning
-      Mock Invoke-RestMethod { return $results }
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*123-5464-dee43*" }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamProcess.json' }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamProcess.json' -Index 1 } -ParameterFilter {
+         $Uri -like "*123-5464-dee43*" 
+      }
    }
 
    Context 'Get-VSTeamProcess' {
@@ -51,7 +21,7 @@ Describe 'VSTeamProcess' {
          $p = Get-VSTeamProcess
 
          ## Assert
-         $p.count             | should -Be 2 
+         $p.count             | should -Be 5
          $p[0].gettype().name | should -Be 'Process'  # don't use BeOfType it's not in this scope/
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -64,7 +34,7 @@ Describe 'VSTeamProcess' {
          $p = Get-VSTeamProcess
 
          ## Assert
-         $p.count             | should -Be 2 
+         $p.count             | should -Be 5
          $p[0].gettype().name | should -Be 'Process'  # don't use BeOfType it's not in this scope/
          # Make sure it was called with the correct URI
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

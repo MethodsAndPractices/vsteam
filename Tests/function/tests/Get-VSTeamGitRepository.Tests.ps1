@@ -3,54 +3,7 @@ Set-StrictMode -Version Latest
 Describe "VSTeamGitRepository" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/common.ps1"
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamQueue.ps1"
-      . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamBuildDefinition.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       . "$baseFolder/Source/Public/Clear-VSTeamDefaultProject.ps1"
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-
-      $results = [PSCustomObject]@{
-         value = [PSCustomObject]@{
-            id            = ''
-            url           = ''
-            sshUrl        = ''
-            remoteUrl     = ''
-            defaultBranch = ''
-            size          = [long]0
-            name          = ''
-            project       = [PSCustomObject]@{
-               name        = 'Project'
-               id          = '123-5464-dee43'
-               description = ''
-               url         = ''
-               state       = ''
-               revision    = [long]0
-               visibility  = ''
-            }
-         }
-      }
-
-      $singleResult = [PSCustomObject]@{
-         id            = ''
-         url           = ''
-         sshUrl        = ''
-         remoteUrl     = ''
-         defaultBranch = ''
-         size          = [long]0
-         name          = ''
-         project       = [PSCustomObject]@{
-            name        = 'Project'
-            id          = '123-5464-dee43'
-            description = ''
-            url         = ''
-            state       = ''
-            revision    = [long]0
-            visibility  = ''
-         }
-      }
 
       ## Arrange
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
@@ -60,18 +13,12 @@ Describe "VSTeamGitRepository" {
       ## a project and these tests are written to test without one.
       Clear-VSTeamDefaultProject
 
-      Mock Invoke-RestMethod {
-         # Write-Host "results $Uri"
-         return $results }
-      Mock Invoke-RestMethod {
-         # Write-Host "Single $Uri"
-         return $singleResult } -ParameterFilter {
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamGitRepository.json' }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamGitRepository-ProjectNamePeopleTracker-NamePeopleTracker.json' } -ParameterFilter {
          $Uri -like "*00000000-0000-0000-0000-000000000000*" -or
          $Uri -like "*testRepo*"
       }
-      Mock Invoke-RestMethod {
-         # Write-Host "boom $Uri"
-         throw [System.Net.WebException] } -ParameterFilter {
+      Mock Invoke-RestMethod { throw [System.Net.WebException] } -ParameterFilter {
          $Uri -like "*00000000-0000-0000-0000-000000000101*" -or
          $Uri -like "*boom*"
       }

@@ -3,20 +3,17 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamMembership' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
       . "$baseFolder/Source/Private/callMembershipAPI.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       
       ## Arrange
       # You have to set the version or the api-version will not be added when [vsteam_lib.Versions]::Graph = ''
       Mock _supportsGraph
+      Mock Invoke-RestMethod
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      Mock Invoke-RestMethod
 
       $UserDescriptor = 'aad.OTcyOTJkNzYtMjc3Yi03OTgxLWIzNDMtNTkzYmM3ODZkYjlj'
       $GroupDescriptor = 'vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x'

@@ -7,9 +7,6 @@ Describe 'VSTeamExtension' {
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'ExtensionsManagement' }
-
-      $results = Open-SampleFile 'extensionResults.json'
-      $singleResult = Open-SampleFile 'singleExtensionResult.json'
    }
 
    Context 'Get-VSTeamExtension' {
@@ -17,8 +14,8 @@ Describe 'VSTeamExtension' {
          ## Arrange
          $env:Team_TOKEN = '1234'
 
-         Mock _callAPI { return $results }
-         Mock _callAPI { return $singleResult } -ParameterFilter { $id -eq "test/test" }
+         Mock _callAPI { Open-SampleFile 'extensionResults.json' }
+         Mock _callAPI { Open-SampleFile 'singleExtensionResult.json' } -ParameterFilter { $id -eq "test/test" }
       }
 
       AfterAll {

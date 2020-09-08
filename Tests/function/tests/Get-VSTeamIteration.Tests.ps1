@@ -2,27 +2,26 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamIteration' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-   
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath   
       . "$baseFolder/Source/Public/Get-VSTeamClassificationNode"
       
-      $withoutChildNode = Open-SampleFile 'withoutChildNode.json'
-      $classificationNodeResult = Open-SampleFile 'classificationNodeResult.json'
-
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
+      Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { 
+         $Service -eq 'Core' 
+      }
    }
 
    Context 'Get-VSTeamIteration' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $classificationNodeResult }
-         Mock Invoke-RestMethod { return $withoutChildNode } -ParameterFilter { $Uri -like "*Ids=43,44*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'classificationNodeResult.json' }
+         Mock Invoke-RestMethod { Open-SampleFile 'withoutChildNode.json' } -ParameterFilter { 
+            $Uri -like "*Ids=43,44*" 
+         }
       }
 
-      It 'by path and depth should return iterations' {
+      It 'should return iterations by path and depth' {
          ## Act
          Get-VSTeamIteration -ProjectName "Public Demo" -Depth 5 -Path "test/test/test"
 
@@ -34,7 +33,7 @@ Describe 'VSTeamIteration' {
          }
       }
 
-      It 'by ids and depth should return iterations' {
+      It 'should return iterations by ids and depth' {
          ## Act
          Get-VSTeamIteration -ProjectName "Public Demo" -Ids @(1, 2, 3, 4) -Depth 5
 

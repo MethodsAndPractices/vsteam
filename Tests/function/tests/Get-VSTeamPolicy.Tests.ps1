@@ -4,18 +4,12 @@ Describe 'VSTeamPolicy' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       
       ## Arrange
-      $results = [PSCustomObject]@{
-         value = [PSCustomObject]@{ }
-      }
-
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      Mock Invoke-RestMethod { return $results }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamPolicy.json' }
       Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*boom*" }
    }
 

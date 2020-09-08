@@ -2,17 +2,13 @@ Set-StrictMode -Version Latest
 
 Describe "TeamGitStat" {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
-
-      $singleResult = Open-SampleFile 'gitStatSingleResult.json'
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      Mock Invoke-RestMethod { return $singleResult }
+      Mock Invoke-RestMethod { Open-SampleFile 'gitStatSingleResult.json' }
    }
 
    Context 'Get-VSTeamGitStat' {

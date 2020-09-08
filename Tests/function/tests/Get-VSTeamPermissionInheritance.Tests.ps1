@@ -9,13 +9,6 @@ Describe 'VSTeamPermissionInheritance' {
       . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamGitRepository.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamAccessControlList.ps1"
-   
-      ## Arrange
-      $gitRepoResult = Open-SampleFile 'singleGitRepo.json'
-      $releaseDefresults = Open-SampleFile 'releaseDefAzD.json'
-      $buildDefHierarchyResults = Open-SampleFile 'buildDefHierarchyQuery.json'
-      $accesscontrollistsResult = Open-SampleFile 'repoAccesscontrollists.json'
-      $releaseDefHierarchyResults = Open-SampleFile 'releaseDefHierarchyQuery.json'
    }
 
    Context 'Get-VSTeamPermissionInheritance' {
@@ -28,27 +21,22 @@ Describe 'VSTeamPermissionInheritance' {
             $Service -eq 'Git'
          }
          
-         Mock Invoke-RestMethod { return @() } -ParameterFilter {
-            $Uri -like "*`$top=100*" -and
-            $Uri -like "*stateFilter=WellFormed*"
-         }
-
          Mock Get-VSTeamProject { Open-SampleFile 'projectResult.json' } -ParameterFilter {
             $Name -like 'project'
          }
-         Mock Get-VSTeamGitRepository { return $gitRepoResult }
+         Mock Get-VSTeamGitRepository { Open-SampleFile 'singleGitRepo.json' }
          Mock Get-VSTeamBuildDefinition { Open-SampleFile 'buildDefAzD.json' -ReturnValue }
-         Mock Get-VSTeamReleaseDefinition { return $releaseDefresults.value }
-         Mock Get-VSTeamAccessControlList { return $accesscontrollistsResult.value }
-         Mock Invoke-RestMethod { return $releaseDefHierarchyResults } -ParameterFilter {
+         Mock Get-VSTeamReleaseDefinition { Open-SampleFile 'releaseDefAzD.json' -ReturnValue }
+         Mock Get-VSTeamAccessControlList { Open-SampleFile 'repoAccesscontrollists.json' -ReturnValue }
+         Mock Invoke-RestMethod { Open-SampleFile 'releaseDefHierarchyQuery.json' } -ParameterFilter {
             $Body -like '*c788c23e-1b46-4162-8f5e-d7585343b5de*'
          }
-         Mock Invoke-RestMethod { return $buildDefHierarchyResults } -ParameterFilter {
+         Mock Invoke-RestMethod { Open-SampleFile 'buildDefHierarchyQuery.json' } -ParameterFilter {
             $Body -like '*010d06f0-00d5-472a-bb47-58947c230876/1432*'
          }
       }
 
-      It 'buildDef should return true' {
+      It 'should return true buildDef' {
          ## Act
          $actual = Get-VSTeamPermissionInheritance -projectName Project -Name dynamTest-Docker-CI -resourceType BuildDefinition
 
@@ -63,7 +51,7 @@ Describe 'VSTeamPermissionInheritance' {
          }
       }
 
-      It 'releaseDef should return true' {
+      It 'should return true releaseDef' {
          ## Act
          Get-VSTeamPermissionInheritance -projectName project -Name PTracker-CD -resourceType ReleaseDefinition | Should -Be $true
 
@@ -77,7 +65,7 @@ Describe 'VSTeamPermissionInheritance' {
          }
       }
 
-      It 'repository should return true' {
+      It 'should return true repository' {
          ## Act
          Get-VSTeamPermissionInheritance -projectName project -Name project -resourceType Repository | Should -Be $true
 

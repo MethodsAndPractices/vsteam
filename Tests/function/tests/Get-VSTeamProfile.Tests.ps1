@@ -3,32 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamProfile' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-   
-      $contents = @"
-      [
-         {
-            "Name": "http://localhost:8080/tfs/defaultcollection",
-            "URL": "http://localhost:8080/tfs/defaultcollection",
-            "Pat": "",
-            "Type": "OnPremise",
-            "Version": "TFS2017"
-         },
-         {
-            "Name": "http://192.168.1.3:8080/tfs/defaultcollection",
-            "URL": "http://192.168.1.3:8080/tfs/defaultcollection",
-            "Pat": "OnE2cXpseHk0YXp3dHpz",
-            "Type": "Pat",
-            "Version": "TFS2017"
-         },
-         {
-            "Name": "test",
-            "URL": "https://dev.azure.com/test",
-            "Pat": "OndrejR0ZHpwbDM3bXUycGt5c3hm",
-            "Type": "Pat",
-            "Version": "VSTS"
-         }
-      ]
-"@
    }
 
    Context 'Get-VSTeamProfile' {
@@ -72,7 +46,7 @@ Describe 'VSTeamProfile' {
    Context 'Get-VSTeamProfile by name' {
       BeforeAll {
          Mock Test-Path { return $true }
-         Mock Get-Content { return $contents }
+         Mock Get-Content { Open-SampleFile 'Get-VSTeamProfile.json' }
          
          $actual = Get-VSTeamProfile test
       }
@@ -96,7 +70,7 @@ Describe 'VSTeamProfile' {
    Context 'Get-VSTeamProfile' {
       BeforeAll {
          Mock Test-Path { return $true }
-         Mock Get-Content { return $contents }
+         Mock Get-Content { Open-SampleFile 'Get-VSTeamProfile.json' }
 
          $actual = Get-VSTeamProfile
       }

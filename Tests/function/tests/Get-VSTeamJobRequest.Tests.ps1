@@ -5,20 +5,19 @@ Describe "Get-VSTeamJobRequest" {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       ## Arrange
-      $resultsAzD = Get-Content "$sampleFiles/jobrequestsAzD.json" -Raw | ConvertFrom-Json
-      $results2017 = Get-Content "$sampleFiles/jobrequests2017.json" -Raw | ConvertFrom-Json
-
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter {
+         $Service -eq 'DistributedTaskReleased' 
+      }
    }
 
    Context "Server" {
       BeforeAll {
          ## Arrnage
-         Mock Invoke-RestMethod { return $results2017 }
+         Mock Invoke-RestMethod { Open-SampleFile 'jobrequests2017.json' }
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
       }
 
-      It "return all jobs" {
+      It "should return all jobs" {
          ## Act
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
@@ -30,7 +29,7 @@ Describe "Get-VSTeamJobRequest" {
          }
       }
 
-      It "return 2 jobs" {
+      It "should return 2 jobs" {
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -44,11 +43,11 @@ Describe "Get-VSTeamJobRequest" {
 
    Context "Services" {
       BeforeAll {
-         Mock Invoke-RestMethod { return $resultsAzD }
+         Mock Invoke-RestMethod { Open-SampleFile 'jobrequestsAzD.json' }
          Mock _getInstance { return 'https://dev.azure.com/test' }
       }
 
-      It "return all jobs" {
+      It "should return all jobs" {
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -58,7 +57,7 @@ Describe "Get-VSTeamJobRequest" {
          }
       }
 
-      It "return 2 jobs" {
+      It "should return 2 jobs" {
          Get-VSTeamJobRequest -PoolId 5 -AgentID 4 -completedRequestCount 2
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

@@ -3,33 +3,13 @@ Set-StrictMode -Version Latest
 Describe "VSTeamGitRef" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-   
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-   
-      # Prime the project cache with an empty list. This will make sure
-      # any project name used will pass validation and Get-VSTeamProject 
-      # will not need to be called.
-      [vsteam_lib.ProjectCache]::Update([string[]]@())
 
       ## Arrange      
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamGitRef.json' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
-
-      $results = [PSCustomObject]@{
-         value = [PSCustomObject]@{
-            objectId = '6f365a7143e492e911c341451a734401bcacadfd'
-            name     = 'refs/heads/master'
-            creator  = [PSCustomObject]@{
-               displayName = 'Microsoft.VisualStudio.Services.TFS'
-               id          = '1'
-               uniqueName  = 'some@email.com'
-            }
-         }
-      }
-
-      Mock Invoke-RestMethod { return $results }
       Mock Invoke-RestMethod { throw [System.Net.WebException] "Test Exception." } -ParameterFilter {
          $Uri -like "*00000000-0000-0000-0000-000000000001*"
       } 

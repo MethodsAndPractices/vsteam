@@ -5,8 +5,6 @@ Describe "VSTeamGitCommit" {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
       ## Arrange
-      $results = Open-SampleFile 'gitCommitResults.json'
-
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -15,26 +13,39 @@ Describe "VSTeamGitCommit" {
 
    Context 'Get-VSTeamGitCommit' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $results }
+         Mock Invoke-RestMethod { Open-SampleFile 'gitCommitResults.json' }
       }
 
       It 'should return all commits for the repo' {
+         ## Act
          Get-VSTeamGitCommit -ProjectName Test -RepositoryId 06E176BE-D3D2-41C2-AB34-5F4D79AEC86B
+
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*"
          }
       }
 
-      It 'with many Parameters should return all commits for the repo' {
-         Get-VSTeamGitCommit -ProjectName Test -RepositoryId '06E176BE-D3D2-41C2-AB34-5F4D79AEC86B' `
-            -FromDate '2020-01-01' -ToDate '2020-03-01' `
-            -ItemVersionVersionType 'commit' -ItemVersionVersion 'abcdef1234567890abcdef1234567890' -ItemVersionVersionOptions 'previousChange' `
-            -CompareVersionVersionType 'commit' -CompareVersionVersion 'abcdef1234567890abcdef1234567890' -CompareVersionVersionOptions 'previousChange' `
-            -FromCommitId 'abcdef' -ToCommitId 'fedcba' `
+      It 'should return all commits for the repo with many Parameters' {
+         ## Act
+         Get-VSTeamGitCommit -ProjectName Test `
+            -RepositoryId '06E176BE-D3D2-41C2-AB34-5F4D79AEC86B' `
+            -FromDate '2020-01-01' `
+            -ToDate '2020-03-01' `
+            -ItemVersionVersionType 'commit' `
+            -ItemVersionVersion 'abcdef1234567890abcdef1234567890' `
+            -ItemVersionVersionOptions 'previousChange' `
+            -CompareVersionVersionType 'commit' `
+            -CompareVersionVersion 'abcdef1234567890abcdef1234567890' `
+            -CompareVersionVersionOptions 'previousChange' `
+            -FromCommitId 'abcdef' `
+            -ToCommitId 'fedcba' `
             -Author "Test" `
-            -Top 100 -Skip 50 `
+            -Top 100 `
+            -Skip 50 `
             -User "Test"
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*" -and
             $Uri -like "*searchCriteria.fromDate=2020-01-01T00:00:00Z*" -and
@@ -54,14 +65,17 @@ Describe "VSTeamGitCommit" {
          }
       }
 
-      It 'with ItemPath parameters should return all commits for the repo' {
-         Get-VSTeamGitCommit -ProjectName Test -RepositoryId '06E176BE-D3D2-41C2-AB34-5F4D79AEC86B' `
+      It 'should return all commits for the repo with ItemPath parameters' {
+         ## Act
+         Get-VSTeamGitCommit -ProjectName Test `
+            -RepositoryId '06E176BE-D3D2-41C2-AB34-5F4D79AEC86B' `
             -ItemPath 'test' `
             -ExcludeDeletes `
             -HistoryMode 'fullHistory' `
             -Top 100 -Skip 50 `
             -User "Test"
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*repositories/06E176BE-D3D2-41C2-AB34-5F4D79AEC86B/commits*" -and
             $Uri -like "*searchCriteria.itemPath=test*" -and

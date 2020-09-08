@@ -3,43 +3,29 @@ Set-StrictMode -Version Latest
 Describe "VSTeamGroup" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamDescriptor.ps1"
-      . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
    }
    
    Context 'Get-VSTeamGroup' {
       Context 'Services' {
          BeforeAll {
-            $groupListResult = Open-SampleFile 'groups.json'
-            $projectResult = Open-SampleFile 'projectResult.json'
-            $groupSingleResult = Open-SampleFile 'groupsSingle.json'
-            $scopeResult = Open-SampleFile 'descriptor.scope.TestProject.json'
-
             # You have to set the version or the api-version will not be added when versions = ''
             Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
 
             # Set the account to use for testing. A normal user would do this
             # using the Set-VSTeamAccount function.
-            Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
+            Mock _getInstance { return 'https://dev.azure.com/test' }
 
             Mock _supportsGraph
-
-            Mock Invoke-RestMethod { return $groupListResult }
-
-            Mock Get-VSTeamProject { return $projectResult } -ParameterFilter {
+            Mock Invoke-RestMethod { Open-SampleFile 'groups.json' }
+            Mock Get-VSTeamProject { Open-SampleFile 'projectResult.json' } -ParameterFilter {
                $Name -like "Test Project Public"
-            }
-
-            Mock Invoke-RestMethod { return @() } -ParameterFilter {
-               $Uri -like "*`$top=100*" -and
-               $Uri -like "*stateFilter=WellFormed*"
             }
          }
 
-         It 'by project should return groups' {            
-            Mock Get-VSTeamDescriptor { return [vsteam_lib.Descriptor]::new($scopeResult) } -Verifiable
+         It 'should return groups by project' {            
+            Mock Get-VSTeamDescriptor { return [vsteam_lib.Descriptor]::new($(Open-SampleFile 'descriptor.scope.TestProject.json')) }
 
             Get-VSTeamGroup -ProjectName "Test Project Public"
 
@@ -56,7 +42,7 @@ Describe "VSTeamGroup" {
             }
          }
 
-         It 'by scopeDescriptor should return groups' {
+         It 'should return groups by scopeDescriptor' {
             Get-VSTeamGroup -ScopeDescriptor scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2
 
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -66,7 +52,7 @@ Describe "VSTeamGroup" {
             }
          }
 
-         It 'by subjectTypes should return groups' {
+         It 'should return groups by subjectTypes' {
             Get-VSTeamGroup -SubjectTypes vssgp, aadgp
 
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -76,7 +62,7 @@ Describe "VSTeamGroup" {
             }
          }
 
-         It 'by subjectTypes and scopeDescriptor should return groups' {
+         It 'should return groups by subjectTypes and scopeDescriptor' {
             Get-VSTeamGroup -ScopeDescriptor scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2 -SubjectTypes vssgp, aadgp
 
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -87,8 +73,8 @@ Describe "VSTeamGroup" {
             }
          }
 
-         It 'by descriptor should return the group' {
-            Mock Invoke-RestMethod { return $groupSingleResult } -Verifiable
+         It 'should return the group by descriptor' {
+            Mock Invoke-RestMethod { Open-SampleFile 'groupsSingle.json' }
 
             Get-VSTeamGroup -GroupDescriptor 'vssgp.Uy0xLTktMTU1MTM3NDI0NS04NTYwMDk3MjYtNDE5MzQ0MjExNy0yMzkwNzU2MTEwLTI3NDAxNjE4MjEtMC0wLTAtMC0x'
 
@@ -128,7 +114,7 @@ Describe "VSTeamGroup" {
          { Get-VSTeamGroup } | Should -Throw
       }
 
-      It '_callAPI should not be called' {
+      It 'should not call _callAPI' {
          Should -Invoke _callAPI -Exactly -Times 0 -Scope Context
       }
    }

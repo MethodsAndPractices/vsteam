@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamOption' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
       . "$baseFolder/Source/Private/applyTypes.ps1"
    }
 
@@ -14,17 +13,7 @@ Describe 'VSTeamOption' {
          # using the Set-VSTeamAccount function.
          Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
-         Mock Invoke-RestMethod { return @{
-               count = 1
-               value = @(
-                  @{
-                     id           = '5e8a8081-3851-4626-b677-9891cc04102e'
-                     area         = 'git'
-                     resourceName = 'annotatedTags'
-                  }
-               )
-            }
-         }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamOption-Area_git-Resource_annotatedTags.json' }
       }
 
       It 'Should return all options' {

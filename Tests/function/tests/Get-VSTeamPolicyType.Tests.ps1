@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe "VSTeamPolicyType" {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
 
       ## Arrnage
@@ -11,16 +10,11 @@ Describe "VSTeamPolicyType" {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Policy' }
-
-      $results = [PSCustomObject]@{
-         value = [PSCustomObject]@{ }
-      }
-
-      $singleResult = [PSCustomObject]@{ }
-
-      Mock Invoke-RestMethod { return $results }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamPolicyType.json' }
       Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*boom*" }
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*90a51335-0c53-4a5f-b6ce-d9aff3ea60e0*" }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamPolicyType.json' -Index 0 } -ParameterFilter {
+         $Uri -like "*90a51335-0c53-4a5f-b6ce-d9aff3ea60e0*" 
+      }
    }
 
    Context 'Get-VSTeamPolicyType' {

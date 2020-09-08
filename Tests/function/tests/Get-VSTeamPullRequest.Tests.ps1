@@ -12,30 +12,18 @@ Describe 'VSTeamPullRequest' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
 
-      $singleResult = @{
-         pullRequestId  = 1
-         repositoryName = "testreponame"
-         repository     = @{
-            project = @{
-               name = "testproject"
-            }
-         }
-         reviewers      = @{
-            vote = 0
-         }
-      }
-
-      $collection = @{
-         value = @($singleResult)
-      }
+      $singleResult = Open-SampleFile 'Get-VSTeamPullRequest-Id_17.json'
    }
 
    Context 'Get-VSTeamPullRequest' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $collection }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamPullRequest.json' }
          Mock Invoke-RestMethod {
             $result = $singleResult
-            $result.reviewers.vote = 0
+            $result.reviewers[0].vote = 10
+            $result.reviewers[1].vote = 10
+            $result.reviewers[2].vote = -10
+            $result.reviewers[3].vote = 0
             return $result
          } -ParameterFilter {
             $Uri -like "*101*"
@@ -43,7 +31,10 @@ Describe 'VSTeamPullRequest' {
 
          Mock Invoke-RestMethod {
             $result = $singleResult
-            $result.reviewers.vote = 10
+            $result.reviewers[0].vote = 10
+            $result.reviewers[1].vote = 10
+            $result.reviewers[2].vote = 10
+            $result.reviewers[3].vote = 10
             return $result
          } -ParameterFilter {
             $Uri -like "*110*"
@@ -51,7 +42,10 @@ Describe 'VSTeamPullRequest' {
 
          Mock Invoke-RestMethod {
             $result = $singleResult
-            $result.reviewers.vote = -10
+            $result.reviewers[0].vote = 10
+            $result.reviewers[1].vote = 10
+            $result.reviewers[2].vote = -10
+            $result.reviewers[3].vote = 10
             return $result
          } -ParameterFilter {
             $Uri -like "*100*"
@@ -187,12 +181,13 @@ Describe 'VSTeamPullRequest' {
 
       It 'Negative Votes should be Rejected Status' {
          $pr = Get-VSTeamPullRequest -Id 100
-
+         
          $pr.reviewStatus | Should -Be "Rejected"
       }
 
       It 'with RepositoryId and IncludeCommits' {
          Get-VSTeamPullRequest -Id 101 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits
+
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*test/_apis/git/repositories*" -and
             $Uri -like "*includeCommits=True" -and
