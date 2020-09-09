@@ -40,8 +40,12 @@ function Open-SampleFile {
       [string] $file,
       [switch] $ReturnValue,
       # The index of the value array to return
-      [int] $index = -1
+      [int] $index = -1, 
+      [switch] $Json
    )
+   if ($Json.IsPresent) {
+      return $(Get-Content "$sampleFiles\$file" -Raw | ConvertTo-Json)
+   }
    
    if ($ReturnValue.IsPresent) {
       return $(Get-Content "$sampleFiles\$file" -Raw | ConvertFrom-Json).value

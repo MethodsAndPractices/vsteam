@@ -1,0 +1,74 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "user": {
+    "subjectKind": "user",
+    "metaType": "member",
+    "directoryAlias": "dbrown",
+    "domain": "00000000-0000-0000-0000-000000000000",
+    "principalName": "test@test.com",
+    "mailAddress": "test@test.com",
+    "origin": "aad",
+    "originId": "00000000-0000-0000-0000-000000000000",
+    "displayName": "Donovan Brown",
+    "_links": {
+      "self": {
+        "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted"
+      },
+      "memberships": {
+        "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Memberships/aad.redacted"
+      },
+      "membershipState": {
+        "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/MembershipStates/aad.redacted"
+      },
+      "storageKey": {
+        "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/StorageKeys/aad.redacted"
+      },
+      "avatar": {
+        "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/aad.redacted"
+      }
+    },
+    "url": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted",
+    "descriptor": "aad.redacted"
+  },
+  "accessLevel": {
+    "licensingSource": "account",
+    "accountLicenseType": "earlyAdopter",
+    "msdnLicenseType": "none",
+    "licenseDisplayName": "Early Adopter",
+    "status": "active",
+    "statusMessage": "",
+    "assignmentSource": "unknown"
+  },
+  "lastAccessedDate": "2020-09-09T15:38:08.1632123Z",
+  "dateCreated": "2017-12-24T16:41:16.743Z",
+  "projectEntitlements": [
+    {
+      "projectRef": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "iStay"
+      },
+      "group": {
+        "groupType": "custom",
+        "displayName": "Custom"
+      },
+      "projectPermissionInherited": "notInherited",
+      "teamRefs": [],
+      "assignmentSource": "unknown"
+    },
+    {
+      "projectRef": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Scrum"
+      },
+      "group": {
+        "groupType": "projectAdministrator",
+        "displayName": "Project Administrators"
+      },
+      "projectPermissionInherited": "notInherited",
+      "teamRefs": [],
+      "assignmentSource": "unknown"
+    }
+  ],
+  "extensions": [],
+  "groupAssignments": []
+}

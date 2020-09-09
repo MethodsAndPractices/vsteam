@@ -54,7 +54,32 @@ PS C:\> '$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvc
 
 This command returns the branch objects for the paths $/MyProject/MyBranch and $/AnotherProject/AnotherBranch by using the pipeline.
 
+### Example 6
+
+```powershell
+PS C:\> Get-VSTeamTfvcBranch -ProjectName TestProject
+```
+
+This command returns all the branches under a project.
+
 ## PARAMETERS
+
+### -ProjectName
+
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
+
+```yaml
+Type: String
+Position: 0
+Required: True
+Parameter Sets: List
+Accept pipeline input: true (ByPropertyName)
+```
 
 ### -Path
 
@@ -62,6 +87,7 @@ Full path to the branch.
 
 ```yaml
 Type: String[]
+Parameter Sets: ByPath
 Accept pipeline input: true
 ```
 

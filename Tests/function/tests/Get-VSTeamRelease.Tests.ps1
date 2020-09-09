@@ -3,16 +3,14 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamRelease' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       
-      $results = Get-Content "$sampleFiles/Get-VSTeamRelease.json" -Raw | ConvertFrom-Json
-      $singleResult = Get-Content "$sampleFiles/Get-VSTeamRelease-id178-expandEnvironments.json" -Raw | ConvertFrom-Json
-
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
 
-      Mock Invoke-RestMethod { return $results }
-      Mock Invoke-RestMethod { return $singleResult } -ParameterFilter { $Uri -like "*178*" }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamRelease.json' }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamRelease-id178-expandEnvironments.json' } -ParameterFilter { 
+         $Uri -like "*178*" 
+      }
    }
 
    Context 'Get-VSTeamRelease' {

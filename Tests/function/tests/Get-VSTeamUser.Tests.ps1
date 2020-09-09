@@ -3,16 +3,9 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamUser' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
    }
    
    Context "Get-VSTeamUser" {
-      BeforeAll {
-         $userListResult = Open-SampleFile 'users.json'
-         $userSingleResult = Open-SampleFile 'users.single.json'
-      }
-
       Context "Server" {
          BeforeAll {
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
@@ -20,8 +13,8 @@ Describe 'VSTeamUser' {
 
          Context 'Get-VSTeamUser' {
             BeforeAll {
-               Mock _callAPI { throw 'Should not be called' }
                Mock _getApiVersion { return 'TFS2017' }
+               Mock _callAPI { throw 'Should not be called' }
                Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'Graph' }
             }
 
@@ -41,19 +34,14 @@ Describe 'VSTeamUser' {
             Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Graph' }
          }
 
-         Context 'Get-VSTeamUser list' {
+         Context 'Get-VSTeamUser' {
             BeforeAll {
-               Mock Invoke-RestMethod {
-                  # If this test fails uncomment the line below to see how the mock was called.
-                  # Write-Host $args
-
-                  return $userListResult
-               }
-
-               Get-VSTeamUser
+               Mock Invoke-RestMethod { Open-SampleFile 'users.json' }
             }
+            
+            It 'Should list users' {
+               Get-VSTeamUser
 
-            It 'Should return users' {
                # With PowerShell core the order of the query string is not the
                # same from run to run!  So instead of testing the entire string
                # matches I have to search for the portions I expect but can't
@@ -65,16 +53,10 @@ Describe 'VSTeamUser' {
                   $Uri -like "*api-version=$(_getApiVersion Graph)*"
                }
             }
-         }
-
-         Context 'Get-VSTeamUser by subjectTypes' {
-            BeforeAll {
-               Mock Invoke-RestMethod { return $userListResult } -Verifiable
-
+            
+            It 'Should return users by subjectTypes' {
                Get-VSTeamUser -SubjectTypes vss, aad
-            }
 
-            It 'Should return users' {
                Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope Context -ParameterFilter {
                   $Uri -like "https://vssps.dev.azure.com/test/_apis/graph/users*" -and
                   $Uri -like "*api-version=$(_getApiVersion Graph)*" -and
@@ -85,11 +67,7 @@ Describe 'VSTeamUser' {
 
          Context 'Get-VSTeamUser by descriptor' {
             BeforeAll {
-               Mock Invoke-RestMethod {
-                  # If this test fails uncomment the line below to see how the mock was called.
-                  # Write-Host $args
-                  return $userSingleResult
-               }
+               Mock Invoke-RestMethod { Open-SampleFile 'users.single.json' }
             }
 
             It 'Should return the user' {

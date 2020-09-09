@@ -2,17 +2,20 @@ Set-StrictMode -Version Latest
 
 Describe "VSTeamUserEntitlement" {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
+
+      # You have to manually load the type file so the property reviewStatus
+      # can be tested.
+      Update-TypeData -AppendPath "$baseFolder/Source/types/Team.UserEntitlement.ps1xml" -ErrorAction Ignore
    }
 
    Context "Get-VSTeamUserEntitlement" {
       Context "Server" {
          BeforeAll {
             Mock _getApiVersion { return 'TFS2017' }
-            Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
+            Mock _getApiVersion { return '' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
          }
 
          Context 'Get-VSTeamUserEntitlement' {
@@ -33,44 +36,40 @@ Describe "VSTeamUserEntitlement" {
       Context "Services" {
          BeforeAll {
             Mock _getApiVersion { return 'VSTS' }
-            Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
             Mock _getInstance { return 'https://dev.azure.com/test' }
+            Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'MemberEntitlementManagement' }
+
+            Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement.json' }
+            Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamUserEntitlement-Id.json' } -ParameterFilter {
+               $Uri -like "*00000000-0000-0000-0000-000000000000*"
+            }
          }
 
-         Context 'Get-VSTeamUserEntitlement' {
-            BeforeAll {
-               Mock Invoke-RestMethod { return [PSCustomObject]@{ members = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ } } } }
-               Mock Invoke-RestMethod { return [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ }; email = 'fake@email.com' } } -ParameterFilter {
-                  $Uri -like "*00000000-0000-0000-0000-000000000000*"
-               }
-               Mock Invoke-RestMethod { return [PSCustomObject]@{ members = [PSCustomObject]@{ accessLevel = [PSCustomObject]@{ }; email = 'fake@email.com' } } } -ParameterFilter {
-                  $Uri -like "*select=Projects*"
-               }
+         It 'no parameters should return users' {
+            Get-VSTeamUserEntitlement
+
+            # Make sure it was called with the correct URI
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&top=100&skip=0"
             }
+         }
 
-            It 'no parameters should return users' {
-               Get-VSTeamUserEntitlement
+         It 'by Id should return users with projects' {
+            $user = Get-VSTeamUserEntitlement -Id '00000000-0000-0000-0000-000000000000'
 
-               # Make sure it was called with the correct URI
-               Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&top=100&skip=0"
-               }
+            $user.Email | Should -Be 'test@test.com' -Because 'email is from type'
+            $user.userName | Should -Be 'Donovan Brown' -Because 'userName is from type'
+
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion MemberEntitlementManagement)"
             }
+         }
 
-            It 'by Id should return users with projects' {
-               Get-VSTeamUserEntitlement -Id '00000000-0000-0000-0000-000000000000'
+         It 'with select for projects should return users with projects' {
+            Get-VSTeamUserEntitlement -Select Projects
 
-               Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements/00000000-0000-0000-0000-000000000000?api-version=$(_getApiVersion MemberEntitlementManagement)"
-               }
-            }
-
-            It 'with select for projects should return users with projects' {
-               Get-VSTeamUserEntitlement -Select Projects
-
-               Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-                  $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&top=100&skip=0&select=Projects"
-               }
+            Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
+               $Uri -eq "https://vsaex.dev.azure.com/test/_apis/userentitlements?api-version=$(_getApiVersion MemberEntitlementManagement)&top=100&skip=0&select=Projects"
             }
          }
       }

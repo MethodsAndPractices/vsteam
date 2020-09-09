@@ -1,0 +1,34 @@
+{
+   "count": 2,
+   "value": [
+      {
+         "path": "$/iStay/Trunk",
+         "owner": {
+            "displayName": "Test User",
+            "url": "https://spsprodwus21.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@test.com",
+            "imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000"
+         },
+         "createdDate": "2020-09-08T23:59:27.933Z",
+         "url": "https://dev.azure.com/Test/iStay/_apis/tfvc/branches/$/iStay/Trunk",
+         "relatedBranches": [],
+         "mappings": []
+      },
+      {
+         "path": "$/iStay/Feature1",
+         "description": "Branched from $/iStay/Trunk",
+         "owner": {
+            "displayName": "Test User",
+            "url": "https://spsprodwus21.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@test.com",
+            "imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000"
+         },
+         "createdDate": "2020-09-09T00:00:31.273Z",
+         "url": "https://dev.azure.com/Test/iStay/_apis/tfvc/branches/$/iStay/Feature1",
+         "relatedBranches": [],
+         "mappings": []
+      }
+   ]
+}

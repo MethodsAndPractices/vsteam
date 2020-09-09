@@ -68,7 +68,7 @@ function Get-VSTeamWiql {
                Get-VSTeamWorkItem -Id $Ids[$beginRange..$endRange]
             }
             else {
-               Get-VSTeamWorkItem  -Id $Ids[$beginRange..$endRange] -Fields $resp.columns.referenceName
+               Get-VSTeamWorkItem -Id $Ids[$beginRange..$endRange] -Fields $resp.columns.referenceName
             }
          }
       }

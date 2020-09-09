@@ -147,7 +147,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          ## Act
          Add-VSTeamGitRepositoryPermission -Project $projectResultObject `
             -RepositoryId "12345678-1234-1234-1234-123456789012" `
-            -BranchName "master" `
+            -BranchName "trunk" `
             -User $userSingleResultObject `
             -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') `
             -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
@@ -156,7 +156,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Body -like "*`"token`": `"repoV2/010d06f0-00d5-472a-bb47-58947c230876/12345678-1234-1234-1234-123456789012/refs/heads/6d0061007300740065007200`",*" -and
+            $Body -like "*`"token`": `"repoV2/010d06f0-00d5-472a-bb47-58947c230876/12345678-1234-1234-1234-123456789012/refs/heads/7400720075006e006b00`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.IdentityModel.Claims.ClaimsIdentity;788df857-dcd8-444d-885e-bff359bc1982\\test@testuser.com`",*" -and
             $Body -like "*`"allow`": 34048,*" -and
             $Body -like "*`"deny`": 2056,*" -and
@@ -168,7 +168,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          ## Act
          Add-VSTeamGitRepositoryPermission -Project $projectResultObject `
             -RepositoryId "12345678-1234-1234-1234-123456789012" `
-            -BranchName "master" `
+            -BranchName "trunk" `
             -Group $groupSingleResultObject `
             -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') `
             -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
@@ -177,7 +177,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Body -like "*`"token`": `"repoV2/010d06f0-00d5-472a-bb47-58947c230876/12345678-1234-1234-1234-123456789012/refs/heads/6d0061007300740065007200`",*" -and
+            $Body -like "*`"token`": `"repoV2/010d06f0-00d5-472a-bb47-58947c230876/12345678-1234-1234-1234-123456789012/refs/heads/7400720075006e006b00`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 34048,*" -and
             $Body -like "*`"deny`": 2056,*" -and
@@ -189,7 +189,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          ## Act
          Add-VSTeamGitRepositoryPermission -Project $projectResultObject `
             -RepositoryId "12345678-1234-1234-1234-123456789015" `
-            -BranchName "master" `
+            -BranchName "trunk" `
             -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" `
             -Allow ([vsteam_lib.GitRepositoryPermissions]'CreateRepository,RenameRepository,PullRequestBypassPolicy') `
             -Deny ([vsteam_lib.GitRepositoryPermissions]'EditPolicies,ForcePush')
@@ -198,7 +198,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Body -like "*`"token`": `"repoV2/010d06f0-00d5-472a-bb47-58947c230876/12345678-1234-1234-1234-123456789015/refs/heads/6d0061007300740065007200`",*" -and
+            $Body -like "*`"token`": `"repoV2/010d06f0-00d5-472a-bb47-58947c230876/12345678-1234-1234-1234-123456789015/refs/heads/7400720075006e006b00`",*" -and
             $Body -like "*`"descriptor`": `"Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1`",*" -and
             $Body -like "*`"allow`": 34048,*" -and
             $Body -like "*`"deny`": 2056,*" -and

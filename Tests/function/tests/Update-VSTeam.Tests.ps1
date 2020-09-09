@@ -9,7 +9,7 @@ Describe "VSTeam" {
 
       $singleResult = [PSCustomObject]@{
          id          = '6f365a7143e492e911c341451a734401bcacadfd'
-         name        = 'refs/heads/master'
+         name        = 'refs/heads/trunk'
          description = 'team description'
       }
    }

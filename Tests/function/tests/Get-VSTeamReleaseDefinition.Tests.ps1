@@ -4,11 +4,11 @@ Describe 'VSTeamReleaseDefinition' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
-      $results = Open-SampleFile 'releaseDefAzD.json'
-
-      Mock Invoke-RestMethod { return $results }
-      Mock Invoke-RestMethod { return $results.value[0] } -ParameterFilter { $Uri -like "*15*" }
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock Invoke-RestMethod { Open-SampleFile 'releaseDefAzD.json' }
+      Mock Invoke-RestMethod { Open-SampleFile 'releaseDefAzD.json' -Index 0 } -ParameterFilter { 
+         $Uri -like "*15*" 
+      }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Release' }
    }
 

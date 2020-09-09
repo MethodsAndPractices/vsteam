@@ -33,7 +33,7 @@ Describe 'VSTeamPullRequest' {
          ## Act
          Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
             -Title "PR Title" -Description "PR Description" `
-            -SourceRefName "refs/heads/test" -TargetRefName "refs/heads/master" `
+            -SourceRefName "refs/heads/test" -TargetRefName "refs/heads/trunk" `
             -Draft -Force
 
          ## Assert
@@ -41,7 +41,7 @@ Describe 'VSTeamPullRequest' {
             $Method -eq 'Post' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests*" -and
-            $Body -eq '{"sourceRefName": "refs/heads/test", "targetRefName": "refs/heads/master", "title": "PR Title", "description": "PR Description", "isDraft": true}'
+            $Body -eq '{"sourceRefName": "refs/heads/test", "targetRefName": "refs/heads/trunk", "title": "PR Title", "description": "PR Description", "isDraft": true}'
          }
       }
 
@@ -49,7 +49,7 @@ Describe 'VSTeamPullRequest' {
          ## Act
          Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
             -Title "PR Title" -Description "PR Description" `
-            -SourceRefName "refs/heads/test" -TargetRefName "refs/heads/master" `
+            -SourceRefName "refs/heads/test" -TargetRefName "refs/heads/trunk" `
             -Force
 
          ## Assert
@@ -57,7 +57,7 @@ Describe 'VSTeamPullRequest' {
             $Method -eq 'Post' -and
             $Uri -like "*repositories/45df2d67-e709-4557-a7f9-c6812b449277/*" -and
             $Uri -like "*pullrequests*" -and
-            $Body -eq '{"sourceRefName": "refs/heads/test", "targetRefName": "refs/heads/master", "title": "PR Title", "description": "PR Description", "isDraft": false}'
+            $Body -eq '{"sourceRefName": "refs/heads/test", "targetRefName": "refs/heads/trunk", "title": "PR Title", "description": "PR Description", "isDraft": false}'
          }
       }
 
@@ -66,7 +66,7 @@ Describe 'VSTeamPullRequest' {
          {
             Add-VSTeamPullRequest -RepositoryId "45df2d67-e709-4557-a7f9-c6812b449277" -ProjectName "Sandbox" `
                -Title "PR Title" -Description "PR Description" `
-               -SourceRefName "garbage" -TargetRefName "refs/heads/master" `
+               -SourceRefName "garbage" -TargetRefName "refs/heads/trunk" `
                -Draft -Force
          } | Should -Throw
       }

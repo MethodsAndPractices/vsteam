@@ -2,29 +2,17 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamWorkItem' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-      
-      $obj = @{
-         id  = 47
-         rev = 1
-         url = "https://dev.azure.com/test/_apis/wit/workItems/47"
-      }
-
-      $collection = @{
-         count = 1
-         value = @($obj)
-      }
    }
 
    Context 'Get-VSTeamWorkItem' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $obj }
-         Mock Invoke-RestMethod { return $collection } -ParameterFilter { $Uri -like "*ids=47,48*" }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItem-Id16.json' }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItem-Id.json' } -ParameterFilter { $Uri -like "*ids=47,48*" }
       }
 
       It 'by id should return work items' {

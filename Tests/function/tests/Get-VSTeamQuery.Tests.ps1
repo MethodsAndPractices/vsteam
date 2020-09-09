@@ -3,22 +3,21 @@ Set-StrictMode -Version Latest
 Describe "VSTeam" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
       . "$baseFolder/Source/Private/applyTypes.ps1"
    }
 
    Context "Get-VSTeamQuery" {
       BeforeAll {
-         $results = Open-SampleFile 'Get-VSTeamQuery.json'
-
-         Mock _callAPI { return $results }
-
+         ## Arrange
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamQuery.json' }
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
       }
 
       It 'with project name only should return queries' {
+         ## Act
          Get-VSTeamQuery -ProjectName Test
 
+         ## Assert
          Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $ProjectName -eq 'Test' -and
             $Area -eq 'wit' -and
@@ -31,8 +30,10 @@ Describe "VSTeam" {
       }
 
       It 'with project name and options should create a team' {
+         ## Act
          Get-VSTeamQuery -ProjectName Test -Depth 2 -IncludeDeleted -Expand all
 
+         ## Assert
          Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $ProjectName -eq 'Test' -and
             $Area -eq 'wit' -and

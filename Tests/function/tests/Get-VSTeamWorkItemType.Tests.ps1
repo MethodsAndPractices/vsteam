@@ -5,10 +5,6 @@ Describe 'VSTeamWorkItemType' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Private/applyTypes.ps1"
 
-      # Prime the cache with an empty list. This will make sure
-      # Get-VSTeamWorkItemType will not need to be called.
-      [vsteam_lib.WorkItemTypeCache]::Update([string[]]@())
-
       $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
       ## Arrange
@@ -16,21 +12,14 @@ Describe 'VSTeamWorkItemType' {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-      $sampleFile = $(Get-Content "$sampleFiles\get-vsteamworkitemtype.json" -Raw)
    }
 
    Context 'Get-VSTeamWorkItemType' {
       BeforeAll {
-         $bug = @{
-            name          = "Bug"
-            referenceName = "Microsoft.VSTS.WorkItemTypes.Bug"
-            description   = "Describes a divergence between required and actual behavior, and tracks the work done to correct the defect and verify the correction."
-            color         = "CC293D"
+         Mock Invoke-RestMethod { Open-SampleFile 'get-vsteamworkitemtype.json' -Json }
+         Mock Invoke-RestMethod { Open-SampleFile 'bug.json' -Json } -ParameterFilter {
+            $Uri -like "*bug*" 
          }
-
-         Mock Invoke-RestMethod { return ConvertTo-Json $sampleFile }
-         Mock Invoke-RestMethod { return ConvertTo-Json $bug } -ParameterFilter { $Uri -like "*bug*" }
       }
 
       It 'with project only should return all work item types' {

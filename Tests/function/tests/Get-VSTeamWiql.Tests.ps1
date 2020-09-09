@@ -2,67 +2,26 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamWiql' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamWorkItem.ps1"
       
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      $workItem = @{
-         id  = 47
-         url = "https://dev.azure.com/test/_apis/wit/workItems/47"
-      }
-
-      $column = @{
-         referenceName = "System.Id"
-         name          = "ID"
-         url           = "https://dev.azure.com/razorspoint-test/_apis/wit/fields/System.Id"
-      }
-
-      $sortColumn = @{
-         field      = $column
-         descending = $false
-      }
-
-      $expandedWorkItems = @{
-         count = 1
-         value = @($workItem, $workItem)
-      }
    }
 
    Context 'Get-VSTeamWiql' {
       BeforeAll {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            # Write-Host $args
-
-            # result is returned and -Expand is specified, the work items field is overwritten
-            # If $wiqlResult is defined once (like column, and work item) the second expand has a problem
-            $wiqlResult = @{
-               querytype       = "flat"
-               queryTypeResult = "workItem"
-               asOf            = "2019-10-03T18:35:09.117Z"
-               columns         = @($column)
-               sortColumns     = @($sortColumn)
-               workItems       = @($workItem, $workItem)
-            }
-            return $wiqlResult
-         }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWiql.json' }
 
          # function is mocked because it is used when switch 'Expanded' is being used.
-         Mock Get-VSTeamWorkItem {
-            # If this test fails uncomment the line below to see how the mock was called.
-            # Write-Host $args
-
-            return $expandedWorkItems
-         }
+         Mock Get-VSTeamWorkItem { Open-SampleFile 'Get-VSTeamWorkItem-Id.json' }
 
          $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+
+         $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
       }
 
       It 'Get work items with custom WIQL query' {
-         $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -78,7 +37,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with -Top 250' {
-         $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 250
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -94,7 +52,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with -Top 0' {
-         $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Top 0
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -110,7 +67,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with expanded work items' {
-         $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -Expand
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -126,7 +82,6 @@ Describe 'VSTeamWiql' {
       }
 
       It 'Get work items with custom WIQL query with time precision' {
-         $wiqlQuery = "Select [System.Id], [System.Title], [System.State] From WorkItems"
          Get-VSTeamWiql -ProjectName "test" -Team "test team" -Query $wiqlQuery -TimePrecision
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {

@@ -8,23 +8,24 @@ Describe 'VSTeamQueue' {
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
-
-      Mock Invoke-RestMethod { return [PSCustomObject]@{ value = [PSCustomObject]@{ id = 3; name = 'Hosted'; pool = [PSCustomObject]@{ name = "Default" } } } }
-      Mock Invoke-RestMethod { return [PSCustomObject]@{ id = 101; name = 'Hosted'; pool = [PSCustomObject]@{ name = "Default" } } } -ParameterFilter { $Uri -like "*101*" }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamQueue.json' }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamQueue.json' -Index 0 } -ParameterFilter { $Uri -like "*101*" }
    }
 
    Context 'Get-VSTeamQueue' {
       It 'should return requested queue' {
          ## Act
-         Get-VSTeamQueue -projectName project -queueId 101
+         $queue = Get-VSTeamQueue -projectName project -queueId 101
 
          ## Assert
+         $queue.Name | Should -Be 'Default' -Because 'Name should be set'
+
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues/101?api-version=$(_getApiVersion DistributedTask)"
          }
       }
 
-      it 'with actionFilter & queueName parameter should return all the queues' {
+      it 'should return all the queues with actionFilter & queueName parameter' {
          ## Act
          Get-VSTeamQueue -projectName project -actionFilter 'None' -queueName 'Hosted'
 
@@ -32,8 +33,6 @@ Describe 'VSTeamQueue' {
          # same from run to run!  So instead of testing the entire string
          # matches I have to search for the portions I expect but can't
          # assume the order.
-         # The general string should look like this:
-         # "https://dev.azure.com/test/project/_apis/distributedtask/queues/?api-version=$(_getApiVersion DistributedTask)&actionFilter=None&queueName=Hosted"
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/project/_apis/distributedtask/queues*" -and
@@ -43,17 +42,19 @@ Describe 'VSTeamQueue' {
          }
       }
 
-      it 'with no parameters should return all the queues' {
+      it 'should return all the queues with no parameters' {
          ## Act
-         Get-VSTeamQueue -ProjectName project
+         $queues = Get-VSTeamQueue -ProjectName project
 
          ## Assert
+         $queues.Count | Should -Be 11
+
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/queues?api-version=$(_getApiVersion DistributedTask)"
          }
       }
 
-      it 'with queueName parameter should return all the queues' {
+      it 'should return all the queues with queueName parameter' {
          ## Act
          Get-VSTeamQueue -projectName project -queueName 'Hosted'
 
@@ -63,7 +64,7 @@ Describe 'VSTeamQueue' {
          }
       }
 
-      it 'with actionFilter parameter should return all the queues' {
+      it 'should return all the queues with actionFilter parameter' {
          ## Act
          Get-VSTeamQueue -projectName project -actionFilter 'None'
 

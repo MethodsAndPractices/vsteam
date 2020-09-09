@@ -3,6 +3,10 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamProfile' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
+
+      # We have to do this here because you can't mock Get-Content then
+      # try and call it to load a file.
+      $contents = Get-Content "$sampleFiles/Get-VSTeamProfile.json" -Raw
    }
 
    Context 'Get-VSTeamProfile' {
@@ -46,7 +50,7 @@ Describe 'VSTeamProfile' {
    Context 'Get-VSTeamProfile by name' {
       BeforeAll {
          Mock Test-Path { return $true }
-         Mock Get-Content { Open-SampleFile 'Get-VSTeamProfile.json' }
+         Mock Get-Content { return $contents }
          
          $actual = Get-VSTeamProfile test
       }
@@ -70,7 +74,7 @@ Describe 'VSTeamProfile' {
    Context 'Get-VSTeamProfile' {
       BeforeAll {
          Mock Test-Path { return $true }
-         Mock Get-Content { Open-SampleFile 'Get-VSTeamProfile.json' }
+         Mock Get-Content { return $contents }
 
          $actual = Get-VSTeamProfile
       }

@@ -2,10 +2,8 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamVariableGroup' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
 
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'VariableGroups' }
    }
@@ -13,13 +11,11 @@ Describe 'VSTeamVariableGroup' {
    Context 'Get-VSTeamVariableGroup' {
       Context 'Services' {
          BeforeAll {
-            $sampleFileVSTS = Open-SampleFile 'variableGroupSamples.json'
-
             Mock _getApiVersion { return 'VSTS' }
             Mock _getInstance { return 'https://dev.azure.com/test' }
 
-            Mock Invoke-RestMethod { return $sampleFileVSTS }
-            Mock Invoke-RestMethod { return $sampleFileVSTS.value[0] } -ParameterFilter { $Uri -like "*101*" }
+            Mock Invoke-RestMethod { Open-SampleFile 'variableGroupSamples.json' }
+            Mock Invoke-RestMethod { Open-SampleFile 'variableGroupSamples.json' -Index 0 } -ParameterFilter { $Uri -like "*101*" }
          }
 
          It 'list should return all variable groups' {
@@ -43,13 +39,11 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          BeforeAll {
-            $sampleFile2017 = Open-SampleFile 'variableGroupSamples2017.json'
-
             Mock _getApiVersion { return 'TFS2017' }
-            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
+            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
 
-            Mock Invoke-RestMethod { return $sampleFile2017 }
-            Mock Invoke-RestMethod { return $sampleFile2017.value[0] } -ParameterFilter { $Uri -like "*101*" }
+            Mock Invoke-RestMethod { Open-SampleFile 'variableGroupSamples2017.json' }
+            Mock Invoke-RestMethod { Open-SampleFile 'variableGroupSamples2017.json' -Index 0 } -ParameterFilter { $Uri -like "*101*" }
          }
 
          It 'list should return all variable groups' {
