@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamMembership' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/callMembershipAPI.ps1"
       
       ## Arrange

@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamArea' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Public/Remove-VSTeamClassificationNode.ps1"
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -12,10 +11,7 @@ Describe 'VSTeamArea' {
 
    Context 'Remove-VSTeamArea' {
       BeforeAll {
-         Mock Invoke-RestMethod {
-            #Write-Host $args
-            return $null
-         }
+         Mock Invoke-RestMethod { return $null }
       }
 
       It 'should delete area' {

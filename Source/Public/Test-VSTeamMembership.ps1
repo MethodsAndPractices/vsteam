@@ -14,19 +14,21 @@ function Test-VSTeamMembership {
          $WarningPreference = "SilentlyContinue" # avoid 404 warning, since that indicates it doesn't exist
          $null = _callMembershipAPI -Id "$MemberDescriptor/$ContainerDescriptor" -Method HEAD
          return $true
-      } catch {
+      }
+      catch {
          $WarningPreference = $PrevWarningPreference
          $e = $_
          try {
-            if ($e.Exception -and $e.Exception.Response -and $e.Exception.Response.StatusCode -eq [System.Net.HttpStatusCode]::NotFound)
-            {
+            if ($e.Exception -and $e.Exception.Response -and $e.Exception.Response.StatusCode -eq [System.Net.HttpStatusCode]::NotFound) {
                return $false
             }
-         } catch {
+         }
+         catch {
             Write-Warning "Nested exception $_"
          }
          throw $e
-      } finally {
+      }
+      finally {
          $WarningPreference = $PrevWarningPreference
       }
    }

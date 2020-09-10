@@ -4,16 +4,12 @@ Describe 'Remove-VSTeamBuildDefinition' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
-      $resultsVSTS = Open-SampleFile 'buildDefvsts.json'
+      Mock Invoke-RestMethod { Open-SampleFile 'buildDefvsts.json' }
 
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    }
 
    Context 'Succeeds' {
-      BeforeAll {
-         Mock Invoke-RestMethod { return $resultsVSTS }
-      }
-
       It 'should delete build definition' {
          Remove-VSTeamBuildDefinition -projectName project -id 2 -Force
 
@@ -26,7 +22,6 @@ Describe 'Remove-VSTeamBuildDefinition' {
 
    Context 'Succeeds on TFS local Auth' {
       BeforeAll {
-         Mock Invoke-RestMethod { return $resultsVSTS }
          Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
 

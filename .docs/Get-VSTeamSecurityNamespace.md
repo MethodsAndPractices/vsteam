@@ -50,7 +50,7 @@ Parameter Sets: List
 
 ## OUTPUTS
 
-### VSTeamSecurityNamespace
+### vsteam_lib.SecurityNamespace
 
 ## NOTES
 

@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamReleaseStatus' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamBuild.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
 
       ## Arrange
       Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
@@ -16,8 +13,8 @@ Describe 'VSTeamReleaseStatus' {
    Context 'Set-VSTeamReleaseStatus' {
       BeforeAll {
          ## Arrange
-         Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod
+         Mock _useWindowsAuthenticationOnPremise { return $true }
          Mock Invoke-RestMethod { throw 'error' } -ParameterFilter { $Uri -like "*101*" }
       }
 

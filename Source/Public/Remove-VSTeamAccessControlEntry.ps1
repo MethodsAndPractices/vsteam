@@ -1,3 +1,15 @@
+# Removes specified ACEs in the ACL for the provided token. The request URI 
+# contains the namespace ID, the target token, and a single or list of 
+# descriptors that should be removed. Only supports removing AzD based 
+# users/groups.
+#
+# Get-VSTeamOption 'Security' 'AccessControlEntries'
+# id              : ac08c8ff-4323-4b08-af90-bcd018d380ce
+# area            : Security
+# resourceName    : AccessControlEntries
+# routeTemplate   : _apis/{resource}/{securityNamespaceId}
+# https://bit.ly/Add-VSTeamAccessControlEntry
+
 function Remove-VSTeamAccessControlEntry {
    [CmdletBinding(DefaultParameterSetName = 'byNamespace', SupportsShouldProcess = $true, ConfirmImpact = 'High')]
    [OutputType([System.String])]
@@ -8,18 +20,16 @@ function Remove-VSTeamAccessControlEntry {
       [Parameter(ParameterSetName = 'byNamespaceId', Mandatory = $true)]
       [guid] $securityNamespaceId,
  
-      [Parameter(ParameterSetName = 'byNamespace', Mandatory = $true)]
-      [Parameter(ParameterSetName = 'byNamespaceId', Mandatory = $true)]
       [string] $token,
  
-      [Parameter(ParameterSetName = 'byNamespace', Mandatory = $true)]
-      [Parameter(ParameterSetName = 'byNamespaceId', Mandatory = $true)]
-      [System.Array] $descriptor
+      [System.Array] $descriptor,
+
+      [switch] $force
    )
  
    process {
       if ($securityNamespace) {
-         $securityNamespaceId = ($securityNamespace | Select-Object -ExpandProperty id -ErrorAction SilentlyContinue)
+         $securityNamespaceId = ($securityNamespace | Select-Object -ExpandProperty id)
       }
 
       if (($descriptor).count -gt 1) {
@@ -27,6 +37,7 @@ function Remove-VSTeamAccessControlEntry {
 
          foreach ($uniqueDescriptor in $descriptor) {
             $uniqueDescriptor = ($uniqueDescriptor).split(".")[1]
+            
             try {
                     
                $uniqueDescriptor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("$uniqueDescriptor"))
@@ -35,6 +46,7 @@ function Remove-VSTeamAccessControlEntry {
                Write-Error "Could not convert base64 string to string."
                continue
             }
+
             $uniqueDescriptor = "Microsoft.TeamFoundation.Identity;" + "$uniqueDescriptor"
 
             $descriptor += $uniqueDescriptor
@@ -62,12 +74,12 @@ function Remove-VSTeamAccessControlEntry {
          $descriptor = "Microsoft.TeamFoundation.Identity;" + "$descriptor"
       }
         
-      if ($PSCmdlet.ShouldProcess("$token")) {
+      if ($Force -or $pscmdlet.ShouldProcess($token, "Remove ACE from ACL")) {
          # Call the REST API
-         $resp = _callAPI -method DELETE `
-            -Resource accesscontrolentries `
+         $resp = _callAPI -Method DELETE `
+            -Resource "accesscontrolentries" `
             -id $securityNamespaceId `
-            -QueryString @{token = $token; descriptors = $descriptor } `
+            -QueryString @{ token = $token; descriptors = $descriptor } `
             -Version $(_getApiVersion Core) 
       }
 
@@ -80,6 +92,7 @@ function Remove-VSTeamAccessControlEntry {
             Write-Error "Removal of ACE from ACL failed. Ensure descriptor and token are correct."
             return
          }
+
          { ($resp -ne $true) -and ($resp -ne $false) } {
             Write-Error "Unexpected response from REST API."
             return

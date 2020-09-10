@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamReleaseStatus' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamBuild.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
       
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -18,7 +15,7 @@ Describe 'VSTeamReleaseStatus' {
          Mock Invoke-RestMethod
          Mock Invoke-RestMethod { throw 'error' } -ParameterFilter { $Uri -like "*101*" }
 
-         $expectedBody = ConvertTo-Json ([PSCustomObject]@{status = 'inProgress'; comment = ''; scheduledDeploymentTime = $null })
+         $expectedBody = ConvertTo-Json ([PSCustomObject]@{ status = 'inProgress'; comment = ''; scheduledDeploymentTime = $null })
       }
 
       It 'should set environments' {

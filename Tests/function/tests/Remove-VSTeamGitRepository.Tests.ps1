@@ -3,44 +3,14 @@ Set-StrictMode -Version Latest
 Describe "VSTeamGitRepository" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/common.ps1"
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamQueue.ps1"
-      . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamBuildDefinition.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
-      . "$baseFolder/Source/Private/applyTypes.ps1"
 
       ## Arrange
-      $singleResult = [PSCustomObject]@{
-         id            = ''
-         url           = ''
-         sshUrl        = ''
-         remoteUrl     = ''
-         defaultBranch = ''
-         size          = 0
-         name          = ''
-         project       = [PSCustomObject]@{
-            name        = 'Project'
-            id          = '123-5464-dee43'
-            description = ''
-            url         = ''
-            state       = ''
-            revision    = [long]0
-            visibility  = ''
-         }
-      }
-
-      Mock Invoke-RestMethod {
-         # Write-Host "Single $Uri"
-         return $singleResult } -ParameterFilter {
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamGitRepository-ProjectNamePeopleTracker-NamePeopleTracker.json' } -ParameterFilter {
          $Uri -like "*00000000-0000-0000-0000-000000000000*" -or
          $Uri -like "*testRepo*"
       }
       
-      Mock Invoke-RestMethod {
-         # Write-Host "boom $Uri"
-         throw [System.Net.WebException] } -ParameterFilter {
+      Mock Invoke-RestMethod { throw [System.Net.WebException] } -ParameterFilter {
          $Uri -like "*00000000-0000-0000-0000-000000000101*" -or
          $Uri -like "*boom*"
       }

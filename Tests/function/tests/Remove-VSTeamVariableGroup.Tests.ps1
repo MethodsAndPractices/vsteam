@@ -3,23 +3,17 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamVariableGroup' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
+      
+      Mock Invoke-RestMethod
    }
 
    Context 'Remove-VSTeamVariableGroup' {
       Context 'Services' {
          BeforeAll {
-            Mock _getApiVersion { return '5.0-preview.1' } -ParameterFilter { $Service -eq 'VariableGroups' }
-
+            Set-VSTeamAPIVersion -Target VSTS
             Mock _getInstance { return 'https://dev.azure.com/test' }
-
-            BeforeAll {
-               Set-VSTeamAPIVersion -Target VSTS
-            }
-
-            Mock Invoke-RestMethod
+            Mock _getApiVersion { return '5.0-preview.1' } -ParameterFilter { $Service -eq 'VariableGroups' }
          }
 
          It 'should delete variable group' {
@@ -35,15 +29,9 @@ Describe 'VSTeamVariableGroup' {
 
       Context 'Server' {
          BeforeAll {
-            Mock _getApiVersion { return '3.2-preview.1' } -ParameterFilter { $Service -eq 'VariableGroups' }
-
+            Set-VSTeamAPIVersion -Target TFS2017
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' } -Verifiable
-
-            BeforeAll {
-               Set-VSTeamAPIVersion -Target TFS2017
-            }
-
-            Mock Invoke-RestMethod
+            Mock _getApiVersion { return '3.2-preview.1' } -ParameterFilter { $Service -eq 'VariableGroups' }
          }
 
          It 'should delete variable group' {

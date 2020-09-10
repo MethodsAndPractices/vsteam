@@ -2,15 +2,14 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamProfile' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Public/Get-VSTeamProfile.ps1"
       
       ## Arrange
       $expectedPath = "$HOME/vsteam_profiles.json"
 
-      Mock Set-Content { }
-      Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+      Mock Set-Content      
+      Mock Get-VSTeamProfile { return Open-SampleFile 'Get-VSTeamProfile.json' | ForEach-Object { $_ } }
    }
 
    Context 'Remove-VSTeamProfile' {
@@ -20,7 +19,8 @@ Describe 'VSTeamProfile' {
 
          ## Assert
          Should -Invoke Set-Content -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Path -eq $expectedPath -and ([string]$Value -eq '')
+            $Path -eq $expectedPath -and 
+            $Value -Notlike "*test*"
          }
       }
 

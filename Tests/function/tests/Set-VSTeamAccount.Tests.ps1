@@ -3,41 +3,10 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamAccount' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Clear-VSTeamDefaultProject.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProfile.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
-      
-      $contents = @"
-      [
-         {
-            "Name": "http://localhost:8080/tfs/defaultcollection",
-            "URL": "http://localhost:8080/tfs/defaultcollection",
-            "Pat": "",
-            "Type": "OnPremise",
-            "Version": "TFS2017",
-            "Token": ""
-         },
-         {
-            "Name": "mydemos",
-            "URL": "https://dev.azure.com/mydemos",
-            "Pat": "OjEyMzQ1",
-            "Type": "Pat",
-            "Token": "",
-            "Version": "VSTS"
-         },
-         {
-            "Name": "demonstrations",
-            "URL": "https://dev.azure.com/demonstrations",
-            "Pat": "dzY2a2x5am13YWtkcXVwYmg0emE=",
-            "Type": "Pat",
-            "Token": "",
-            "Version": "VSTS"
-         }
-      ]
-"@
    }
 
    AfterAll {
@@ -84,11 +53,11 @@ Describe 'VSTeamAccount' {
          Mock _isOnWindows { return $false }
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
-         Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return Open-SampleFile 'Get-VSTeamProfile.json' | ForEach-Object { $_ } }
       }
 
       It 'should set env at process level' {
-         Set-VSTeamAccount -Profile mydemos
+         Set-VSTeamAccount -Profile test
 
          Should -Invoke Set-VSTeamAPIVersion -Exactly -Scope It -Times 1 -ParameterFilter {
             $Target -eq 'VSTS'
@@ -96,7 +65,9 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
+            $Level -eq 'Process' -and 
+            $Pat -eq 'OndrejR0ZHpwbDM3bXUycGt5c3hm' -and 
+            $Acct -eq 'https://dev.azure.com/test'
          }
       }
    }
@@ -107,11 +78,11 @@ Describe 'VSTeamAccount' {
          Mock _setEnvironmentVariables
          Mock Set-VSTeamAPIVersion
          Mock Write-Output -Verifiable
-         Mock Get-VSTeamProfile { return $contents | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return Open-SampleFile 'Get-VSTeamProfile.json' | ForEach-Object { $_ } }
       }
 
       It 'should set env at process level' {
-         Set-VSTeamAccount -Profile mydemos -Drive mydemos
+         Set-VSTeamAccount -Profile test -Drive test
 
          Should -InvokeVerifiable
 
@@ -121,7 +92,9 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
+            $Level -eq 'Process' -and 
+            $Pat -eq 'OndrejR0ZHpwbDM3bXUycGt5c3hm' -and 
+            $Acct -eq 'https://dev.azure.com/test'
          }
       }
    }
@@ -142,7 +115,9 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
+            $Level -eq 'Process' -and
+            $Pat -eq 'OjEyMzQ1' -and
+            $Acct -eq 'https://dev.azure.com/mydemos'
          }
       }
    }
@@ -163,7 +138,9 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
+            $Level -eq 'Process' -and 
+            $Pat -eq 'OjEyMzQ1' -and 
+            $Acct -eq 'https://dev.azure.com/mydemos'
          }
       }
    }
@@ -184,7 +161,10 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and $Pat -eq '' -and $BearerToken -eq 12345 -and $Acct -eq 'https://dev.azure.com/mydemos'
+            $Level -eq 'Process' -and 
+            $Pat -eq '' -and 
+            $BearerToken -eq 12345 -and
+            $Acct -eq 'https://dev.azure.com/mydemos'
          }
       }
    }
@@ -207,7 +187,9 @@ Describe 'VSTeamAccount' {
 
          # Make sure set env vars was called with the correct parameters
          Should -Invoke _setEnvironmentVariables -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Level -eq 'Process' -and $Pat -eq 'OjEyMzQ1' -and $Acct -eq 'https://dev.azure.com/mydemos'
+            $Level -eq 'Process' -and 
+            $Pat -eq 'OjEyMzQ1' -and 
+            $Acct -eq 'https://dev.azure.com/mydemos'
          }
       }
    }

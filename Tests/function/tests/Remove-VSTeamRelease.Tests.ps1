@@ -3,14 +3,10 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamRelease' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamBuild.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
 
       ## Arrange
-      Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
-
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock _getApiVersion { return '1.0-unittest' } -ParameterFilter { $Service -eq 'Release' }
    }
 
    Context 'Remove-VSTeamRelease' {

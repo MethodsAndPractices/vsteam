@@ -3,17 +3,13 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamExtension' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      $singleResult = Open-SampleFile 'singleExtensionResult.json'
-
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
    }
-
+   
    Context 'Remove-VSTeamExtension' {
       BeforeAll {
          $env:Team_TOKEN = '1234'
-
-         Mock _callAPI { return $singleResult }
+         Mock _callAPI { Open-SampleFile 'singleExtensionResult.json' }
+         Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
       }
 
       AfterAll {

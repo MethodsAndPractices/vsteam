@@ -3,8 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamClassificationNode' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      $classificationNodeResult = Open-SampleFile 'classificationNodeResult.json'
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '5.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
@@ -12,10 +10,7 @@ Describe 'VSTeamClassificationNode' {
 
    Context 'Remove-VSTeamClassificationNode' {
       BeforeAll {
-         Mock Invoke-RestMethod {
-            #Write-Host $args
-            return $classificationNodeResult
-         }
+         Mock Invoke-RestMethod { Open-SampleFile 'classificationNodeResult.json' }
       }
 
       It 'with StructureGroup "<StructureGroup>" should delete Nodes' -TestCases @(

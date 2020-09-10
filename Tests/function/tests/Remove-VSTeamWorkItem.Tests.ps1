@@ -3,45 +3,14 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamWorkItem' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
 
+      Mock Invoke-RestMethod
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-
-      $obj = @{
-         id  = 47
-         rev = 1
-         url = "https://dev.azure.com/test/_apis/wit/workItems/47"
-      }
-
-      $objDeleted = @{
-         id          = 47
-         name        = "Test Work Item 47"
-         deletedBy   = "Theobald Test <theobald.test@contoso.com>"
-         deletedDate = "10/19/2019 9:08:48 PM"
-         code        = 200
-         resource    = $obj
-      }
-
-      $collectionDeleted = @(
-         $objDeleted
-      )
    }
 
-   Context 'Remove-WorkItem' {
-      BeforeAll {
-      }
-
+   Context 'Remove-VSTeamWorkItem' {
       It 'Should delete single work item' {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
-
-            return $collectionDeleted
-         }
-
          Remove-VSTeamWorkItem -Id 47 -Force
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -56,13 +25,6 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'Should delete multipe work items' {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
-
-            return $collectionDeleted
-         }
-
          Remove-VSTeamWorkItem -Id 47, 48 -Force
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {
@@ -73,13 +35,6 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'Single Work Item Should be deleted permanently' {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            #Write-Host $args
-
-            return $collectionDeleted
-         }
-
          Remove-VSTeamWorkItem -Id 47, 48 -Destroy -Force
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 2 -ParameterFilter {

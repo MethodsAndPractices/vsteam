@@ -15,8 +15,8 @@ function Remove-VSTeamWorkItem {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Work Item")) {
             try {
                _callAPI -Method DELETE `
-                  -Area wit `
-                  -Resource workitems `
+                  -Area "wit" `
+                  -Resource "workitems" `
                   -id $item `
                   -Querystring @{ destroy = $Destroy } `
                   -Version $(_getApiVersion Core) | Out-Null

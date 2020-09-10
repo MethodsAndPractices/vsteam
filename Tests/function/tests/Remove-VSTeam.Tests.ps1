@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe "VSTeam" {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Public/Get-VSTeam.ps1"
 
       Mock _callAPI

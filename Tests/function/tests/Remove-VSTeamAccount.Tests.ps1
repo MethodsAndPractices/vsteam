@@ -3,13 +3,13 @@ Set-StrictMode -Version Latest
 Describe 'Remove-VSTeamAccount' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
+      Mock _clearEnvironmentVariables
    }
 
    Context 'Remove-VSTeamAccount run as administrator' {
       BeforeAll {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $true }
-         Mock _clearEnvironmentVariables
       }
 
       It 'should clear env at process level' {
@@ -27,7 +27,6 @@ Describe 'Remove-VSTeamAccount' {
       BeforeAll {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $false }
-         Mock _clearEnvironmentVariables
       }
 
       It 'should clear env at process level' {
@@ -45,7 +44,6 @@ Describe 'Remove-VSTeamAccount' {
    Context 'Remove-VSTeamAccount with no arguments' {
       BeforeAll {
          Mock _isOnWindows { return $false }
-         Mock _clearEnvironmentVariables
       }
 
       It 'should clear env at process level' {
@@ -64,7 +62,6 @@ Describe 'Remove-VSTeamAccount' {
       BeforeAll {
          Mock _isOnWindows { return $true }
          Mock _testAdministrator { return $false }
-         Mock _clearEnvironmentVariables
       }
 
       It 'should clear env at user level' {
@@ -81,9 +78,8 @@ Describe 'Remove-VSTeamAccount' {
 
    Context 'Remove-VSTeamAccount at all levels as administrator' {
       BeforeAll {
-         Mock _testAdministrator { return $true }
          Mock _isOnWindows { return $true }
-         Mock _clearEnvironmentVariables
+         Mock _testAdministrator { return $true }
       }
 
       It 'should clear env at all levels' {
@@ -107,10 +103,9 @@ Describe 'Remove-VSTeamAccount' {
 
    Context 'Remove-VSTeamAccount at all levels as normal user' {
       BeforeAll {
-         Mock _testAdministrator { return $false }
-         Mock _isOnWindows { return $true }
          Mock Write-Warning
-         Mock _clearEnvironmentVariables
+         Mock _isOnWindows { return $true }
+         Mock _testAdministrator { return $false }
       }
 
       It 'should clear env at all levels' {

@@ -18,10 +18,11 @@
 
 ### -SecurityNamespace
 
-Security namespace identifier.
+Security namespace object.
 
 ```yaml
-Type: VSTeamSecurityNamespace
+Type: vsteam_lib.SecurityNamespace
+Parameter Sets: ByNamespace
 Required: True
 ```
 
@@ -31,6 +32,7 @@ Security namespace identifier.
 
 ```yaml
 Type: String
+Parameter Sets: ByNamespaceId
 Required: True
 ```
 

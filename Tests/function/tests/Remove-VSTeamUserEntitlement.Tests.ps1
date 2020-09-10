@@ -2,10 +2,13 @@ Set-StrictMode -Version Latest
 
 Describe "VSTeamUserEntitlement" {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
       . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamUserEntitlement.ps1"
+
+      # You have to manually load the type file so the property reviewStatus
+      # can be tested.
+      Update-TypeData -AppendPath "$baseFolder/Source/types/Team.UserEntitlement.ps1xml" -ErrorAction Ignore
    }
 
    Context "Remove-VSTeamUserEntitlement" {
@@ -18,26 +21,12 @@ Describe "VSTeamUserEntitlement" {
       Context 'Remove-VSTeamUserEntitlement' {
          BeforeAll {
             # Get-VSTeamUserEntitlement by Id
-            Mock _callAPI {
-               return [PSCustomObject]@{
-                  accessLevel = [PSCustomObject]@{ }
-                  email       = 'test@user.com'
-                  userName    = 'Test User'
-                  id          = '00000000-0000-0000-0000-000000000000'
-               }
-            } -ParameterFilter { $Id -eq '00000000-0000-0000-0000-000000000000' }
+            Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement-Id.json' } -ParameterFilter {
+               $Id -eq '00000000-0000-0000-0000-000000000000' 
+            }
 
             # Get-VSTeamUserEntitlement by email
-            Mock _callAPI {
-               return [PSCustomObject]@{
-                  members = [PSCustomObject]@{
-                     accessLevel = [PSCustomObject]@{ }
-                     email       = 'test@user.com'
-                     userName    = 'Test User'
-                     id          = '00000000-0000-0000-0000-000000000000'
-                  }
-               }
-            }
+            Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement.json' }
 
             # Remove Call
             Mock _callAPI -ParameterFilter { $Method -eq 'Delete' }
@@ -55,7 +44,8 @@ Describe "VSTeamUserEntitlement" {
          }
 
          It 'bye email should remove user' {
-            Remove-VSTeamUserEntitlement -Email 'test@user.com' -Force
+            Remove-VSTeamUserEntitlement -Email 'dlbm3@test.com' -Force
+
             Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
                $Method -eq 'Delete' -and
                $subDomain -eq 'vsaex' -and

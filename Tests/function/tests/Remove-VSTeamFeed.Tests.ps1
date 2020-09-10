@@ -4,10 +4,9 @@ Describe 'VSTeamFeed' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
+      Mock Invoke-RestMethod
       Mock _getApiVersion { return '1.0-unitTests' }
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      Mock Invoke-RestMethod
    }
 
    Context 'Remove-VSTeamFeed' {

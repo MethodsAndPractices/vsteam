@@ -8,20 +8,12 @@ function Get-VSTeamAccessControlList {
       [Alias('ID')]
       [guid] $SecurityNamespaceId,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
       [string] $Token,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
       [string[]] $Descriptors,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
       [switch] $IncludeExtendedInfo,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $false)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $false)]
       [switch] $Recurse
    )
 
