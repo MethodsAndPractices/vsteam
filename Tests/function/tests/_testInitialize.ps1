@@ -17,6 +17,7 @@ Add-Type -Path "$baseFolder/dist/bin/vsteam-lib.dll"
 $sut = (Split-Path -Leaf $testPath).Replace(".Tests.", ".")
 
 . "$baseFolder/Source/Private/common.ps1"
+. "$baseFolder/Source/Private/applyTypes.ps1"
 
 if ($private.IsPresent) {
    . "$baseFolder/Source/Private/$sut"

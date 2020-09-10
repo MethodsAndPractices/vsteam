@@ -3,9 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamRelease' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamBuild.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
       
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -25,8 +22,8 @@ Describe 'VSTeamRelease' {
          }
       }
 
-      ## Act / Assert
       it 'with invalid Id should throw' {
+         ## Act / Assert
          { Show-VSTeamRelease -projectName project -Id 0 } | Should -Throw
       }
    }
