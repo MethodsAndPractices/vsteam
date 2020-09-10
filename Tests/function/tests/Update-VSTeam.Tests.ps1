@@ -3,15 +3,7 @@ Set-StrictMode -Version Latest
 Describe "VSTeam" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeam.ps1"
-
-      $singleResult = [PSCustomObject]@{
-         id          = '6f365a7143e492e911c341451a734401bcacadfd'
-         name        = 'refs/heads/trunk'
-         description = 'team description'
-      }
    }
 
    Context "Update-VSTeam" {
@@ -19,110 +11,97 @@ Describe "VSTeam" {
          BeforeAll {
             Mock _getInstance { return 'https://dev.azure.com/test' }
             Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
-         }
-
-         Context 'Update-VSTeam without name or description' {
-            It 'Should throw' {
-               { Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" } | Should -Throw
+            Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeam.json' -Index 0 }
+            Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{ 
+                  projectname = "TestProject"
+                  name        = "OldTeamName" 
+               } 
             }
          }
 
-         Context 'Update-VSTeam with new team name' {
-            BeforeAll {
-               Mock Invoke-RestMethod { return $singleResult }
-            }
+         It 'Should throw when updated without name or description' {
+            { Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" } | Should -Throw
+         }
 
-            It 'Should update the team' {
-               Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
+         It 'Should update the team with new team name' {
+            ## Arrange
+            $expectedBody = '{ "name": "NewTeamName" }'
+          
+            ## Act
+            $team = Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
 
-               $expectedBody = '{ "name": "NewTeamName" }'
+            ## Assert
+            $team.Name | Should -Be 'Test Team' -Because 'Name should be set'
 
-               Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                  $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
-                  $Method -eq "Patch" -and
-                  $Body -eq $expectedBody
-               }
+            Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
+               $Method -eq "Patch" -and
+               $Body -eq $expectedBody
             }
          }
 
-         Context 'Update-VSTeam with new description' {
-            BeforeAll {
-               Mock Invoke-RestMethod { return $singleResult }
-            }
+         It 'Should update the team with new description' {
+            Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -Description "New Description"
 
-            It 'Should update the team' {
-               Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -Description "New Description"
+            $expectedBody = '{"description": "New Description" }'
 
-               $expectedBody = '{"description": "New Description" }'
-
-               Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                  $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
-                  $Method -eq "Patch" -and
-                  $Body -eq $expectedBody
-               }
+            Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
+               $Method -eq "Patch" -and
+               $Body -eq $expectedBody
             }
          }
 
-         Context 'Update-VSTeam with new team name and description' {
-            BeforeAll {
-               Mock Invoke-RestMethod { return $singleResult }
-            }
+         It 'Should update the team with new team name and description' {
+            ## Arrange
+            $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
 
-            It 'Should update the team' {
-               Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName" -Description "New Description"
+            ## Act
+            Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName" -Description "New Description"
 
-               $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
-
-               Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                  $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
-                  $Method -eq "Patch" -and
-                  $Body -eq $expectedBody
-               }
+            ## Assert
+            Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/Test/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
+               $Method -eq "Patch" -and
+               $Body -eq $expectedBody
             }
          }
 
-         Context 'Update-VSTeam, fed through pipeline' {
-            BeforeAll {
-               Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{projectname = "TestProject"; name = "OldTeamName" } }
-               Mock Invoke-RestMethod { return $singleResult }
+         It 'Should update the team fed through pipeline' {
+            ## Arrange
+            $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
+
+            ## Act
+            Get-VSTeam -ProjectName TestProject -TeamId "OldTeamName" | Update-VSTeam -NewTeamName "NewTeamName" -Description "New Description"
+
+            ## Assert
+            Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -eq "https://dev.azure.com/test/_apis/projects/TestProject/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
+               $Method -eq "Patch" -and
+               $Body -eq $expectedBody
             }
-
-            It 'Should update the team' {
-               Get-VSTeam -ProjectName TestProject -TeamId "OldTeamName" | Update-VSTeam -NewTeamName "NewTeamName" -Description "New Description"
-
-               $expectedBody = '{ "name": "NewTeamName", "description": "New Description" }'
-
-               Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                  $Uri -eq "https://dev.azure.com/test/_apis/projects/TestProject/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
-                  $Method -eq "Patch" -and
-                  $Body -eq $expectedBody
-               }
-            }
-         }
+         }         
       }
 
       Context "Server" {
          BeforeAll {
             Mock _useWindowsAuthenticationOnPremise { return $true }
-
+            Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeam.json' -Index 0 }
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
          }
+         
+         It 'Should update the team with new team name on TFS local Auth' {
+            ## Arrange
+            $expectedBody = '{ "name": "NewTeamName" }'
 
-         Context 'Update-VSTeam with new team name on TFS local Auth' {
-            BeforeAll {
-               Mock Invoke-RestMethod { return $singleResult }
-            }
+            ## Act
+            Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
 
-            It 'Should update the team' {
-               Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
-
-               $expectedBody = '{ "name": "NewTeamName" }'
-
-               Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
-                  $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
-                  $Method -eq "Patch" -and
-                  $Body -eq $expectedBody
-               }
+            ## Assert
+            Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/_apis/projects/Test/teams/OldTeamName?api-version=$(_getApiVersion Core)" -and
+               $Method -eq "Patch" -and
+               $Body -eq $expectedBody
             }
          }
       }

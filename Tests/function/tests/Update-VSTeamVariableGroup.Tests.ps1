@@ -3,8 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamVariableGroup' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamVariableGroup.ps1"
       

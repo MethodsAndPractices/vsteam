@@ -4,15 +4,9 @@ Describe 'VSTeamYamlPipeline' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
-      . "$baseFolder/Source/Private/applyTypes.ps1"
-      
-      $resultsAzD = Open-SampleFile 'pipelineDefYamlResult.json'
-      
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-
       $testYamlPath = "$sampleFiles\azure-pipelines.test.yml"
-
-      Mock Invoke-RestMethod { return $resultsAzD }
+      Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock Invoke-RestMethod { Open-SampleFile 'pipelineDefYamlResult.json' }
    }
 
    Context 'Test-VSTeamYamlPipeline' {

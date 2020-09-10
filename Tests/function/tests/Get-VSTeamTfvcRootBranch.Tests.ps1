@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamTfvcRootBranch'  -Tag 'unit', 'tfvc', 'get' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
 
       $multipleResults = Open-SampleFile 'Get-VSTeamTfvcBranch-ProjectName.json'
       $singleResult = Open-SampleFile 'Get-VSTeamTfvcBranch-ProjectName.json' -Index 0

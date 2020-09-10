@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe "VSTeamUserEntitlement" {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       # You have to manually load the type file so the property reviewStatus
       # can be tested.

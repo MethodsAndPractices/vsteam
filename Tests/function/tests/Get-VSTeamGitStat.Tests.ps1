@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe "TeamGitStat" {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.

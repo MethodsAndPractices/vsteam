@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamPolicy' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       
       ## Arrange
       # Set the account to use for testing. A normal user would do this

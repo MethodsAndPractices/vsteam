@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamWorkItem' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItem-Id16.json' }

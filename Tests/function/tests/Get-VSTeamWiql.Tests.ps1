@@ -2,8 +2,7 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamWiql' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Get-VSTeamWorkItem.ps1"
       
       Mock _getInstance { return 'https://dev.azure.com/test' }

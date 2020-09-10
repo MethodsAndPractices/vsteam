@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamNuGetEndpoint' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Add-VSTeamServiceEndpoint.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamServiceEndpoint.ps1"
    }

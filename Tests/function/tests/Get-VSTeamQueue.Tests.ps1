@@ -3,7 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamQueue' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Private/applyTypes.ps1"
 
       ## Arrange
       Mock _getInstance { return 'https://dev.azure.com/test' }

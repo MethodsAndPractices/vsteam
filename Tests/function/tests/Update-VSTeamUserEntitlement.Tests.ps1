@@ -3,8 +3,6 @@ Set-StrictMode -Version Latest
 Describe "VSTeamUserEntitlement" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamUserEntitlement.ps1"
    }
 

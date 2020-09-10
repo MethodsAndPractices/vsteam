@@ -4,8 +4,6 @@ Describe 'VSTeamPullRequest' {
    ## Arrange
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
-      . "$baseFolder/Source/Private/applyTypes.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamProject"
 
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
