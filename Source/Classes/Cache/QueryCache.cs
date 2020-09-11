@@ -44,7 +44,7 @@ namespace vsteam_lib
             }
          }
 
-         Cache.Prime(list);
+         Cache.PreFill(list);
       }
 
       public static IEnumerable<string> GetCurrent()

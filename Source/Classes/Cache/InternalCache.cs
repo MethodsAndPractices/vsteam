@@ -78,10 +78,10 @@ namespace vsteam_lib
             }
          }
 
-         this.Prime(list);
+         this.PreFill(list);
       }
 
-      internal void Prime(IEnumerable<string> list)
+      internal void PreFill(IEnumerable<string> list)
       {
          this.Values.Clear();
 

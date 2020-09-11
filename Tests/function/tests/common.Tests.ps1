@@ -134,7 +134,7 @@ Describe 'Common' {
 
    Context '_buildProjectNameDynamicParam' {
       BeforeAll {
-         # Prime the project cache with desired list. This will make sure
+         # PreFill the project cache with desired list. This will make sure
          # the project name used will pass validation and Get-VSTeamProject 
          # will not need to be called.
          [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))
@@ -147,7 +147,7 @@ Describe 'Common' {
 
    Context '_buildDynamicParam no defaults' {
       BeforeAll {
-         # Prime the project cache with desired list. This will make sure
+         # PreFill the project cache with desired list. This will make sure
          # the project name used will pass validation and Get-VSTeamProject 
          # will not need to be called.
          [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))
@@ -197,7 +197,7 @@ Describe 'Common' {
 
    Context '_buildDynamicParam defaults' {
       BeforeAll {
-         # Prime the project cache with desired list. This will make sure
+         # PreFill the project cache with desired list. This will make sure
          # the project name used will pass validation and Get-VSTeamProject 
          # will not need to be called.
          [vsteam_lib.ProjectCache]::Update([string[]]@("Demo", "Universal"))

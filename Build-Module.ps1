@@ -73,6 +73,10 @@ function Start-IntegrationTests {
    process {
       Write-Output '   Testing: Functions (integration)'
 
+      if (-not $(Test-Path -Path './Tests/TestResults')) {
+         New-Item -Path './Tests/TestResults' -ItemType Directory | Out-Null
+      }
+
       Import-Pester
 
       $pesterArgs = [PesterConfiguration]::Default
@@ -175,6 +179,11 @@ if ($runTests.IsPresent) {
    }
    
    Write-Output '   Testing: Functions (unit)'
+
+   if (-not $(Test-Path -Path './Tests/TestResults')) {
+      New-Item -Path './Tests/TestResults' -ItemType Directory | Out-Null
+   }
+   
    Import-Pester
 
    $pesterArgs = [PesterConfiguration]::Default

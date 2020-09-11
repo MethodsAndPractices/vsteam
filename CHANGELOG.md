@@ -4,6 +4,7 @@
 
 All classes are moved to a new C# class library.
 All classes names changed i.e. VSTeamSecurityNamespace is now vsteam_lib.SecurityNamespace
+All unit tests were reviewed and all now use sample files where possible instead of inline objects.
 
 Build-Module script builds the class lib project as well.
 
