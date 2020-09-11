@@ -14,6 +14,10 @@ LONG DESCRIPTION
     -ProjectName parameter is dynamic and you can use tab completion to cycle
     through all the projects.
 
+    There ae many dynamic parameters either call Set-VSTeamDefaultProject or pass
+    in -ProjectName as the first parameter to the function. Either will enable 
+    the rest of the dynamic parameters to query their values.
+
     All the calls have a default 60 second timeout. Use Set-VSTeamDefaultAPITimeout
     to adjust the timeout.
 
@@ -65,3 +69,5 @@ KEYWORDS
 SEE ALSO
     Set-VSTeamAccount
     Get-VSTeamProject
+    about_vsteam_profiles
+    about_vsteam_provider

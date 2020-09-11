@@ -131,12 +131,14 @@ WorkItemType
 
 ## NOTES
 
-WorkItemType is a dynamic parameter and use the default
-project value to query their validate set.
+WorkItemType is a dynamic parameter and uses the project value to query their validate set.
 
-If you do not set the default project by called Set-VSTeamDefaultProject before
-calling Add-VSTeamWorkItem you will have to type in the names.
+If you do not set the default project by calling Set-VSTeamDefaultProject before calling Add-VSTeamWorkItem you need to provide the -ProjectName before -WorkItemType or will have to type in the names.
 
-Any of the basic work item parameters defined in this method, will cause an exception if also added to the parameter AdditionalFields, since it is redundant. Either only use the parameter OR define them in the AdditionalFields parameter.
+Any of the basic work item parameters defined in this method, will cause an exception if also added to the parameter AdditionalFields, since it is redundant. Either only use the parameter or define them in the AdditionalFields parameter.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

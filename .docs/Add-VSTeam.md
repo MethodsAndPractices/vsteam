@@ -44,7 +44,11 @@ Position: 1
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeam](Get-VSTeam.md)
 
@@ -52,4 +56,4 @@ Position: 1
 
 [Show-VSTeam](Show-VSTeam.md)
 
-[Update-VSTeam](pda-VSTeam.md)
+[Update-VSTeam](Update-VSTeam.md)

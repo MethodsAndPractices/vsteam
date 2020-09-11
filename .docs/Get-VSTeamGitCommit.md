@@ -226,12 +226,10 @@ Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets commits.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
-
 You can pipe a repository ID to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

@@ -60,9 +60,13 @@ Type: int
 
 ## NOTES
 
-This function is a wrapper of the base function Remove-VSTeamClassificationNode.md.
+This function is a wrapper of the base function Remove-VSTeamClassificationNode.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Remove-VSTeamArea](Add-VSTeamArea.md)
 

@@ -76,7 +76,11 @@ Type: datetime
 
 This function is a wrapper of the base function Add-VSTeamClassificationNode.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamArea](Add-VSTeamArea.md)
 

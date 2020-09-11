@@ -30,6 +30,8 @@ This will open a browser to the TFS or AzD site
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

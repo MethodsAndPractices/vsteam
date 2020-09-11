@@ -60,7 +60,11 @@ Type: string
 
 This function is a wrapper of the base function Add-VSTeamClassificationNode.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamClassificationNode](Add-VSTeamClassificationNode.md)
 

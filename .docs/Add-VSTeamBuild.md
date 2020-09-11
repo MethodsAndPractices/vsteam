@@ -136,6 +136,10 @@ Build Parameters
 
 BuildDefinition and QueueName are dynamic parameters and use the default project value to query their validate set.
 
-If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamBuild you will have to type in the names.
+If you do not set the default project by called Set-VSTeamDefaultProject you must pass in -ProjectName or you will have to type in the names.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

@@ -48,11 +48,11 @@ Accept pipeline input: true (ByPropertyName)
 
 You can pipe the release definition ID to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
 

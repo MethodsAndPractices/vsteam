@@ -123,4 +123,8 @@ Type: SwitchParameter
 
 You can pipe paths to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

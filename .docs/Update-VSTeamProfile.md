@@ -82,7 +82,11 @@ Position: 3
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Update-VSTeamAccount](Set-VSTeamAccount.md)
 

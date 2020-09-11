@@ -36,7 +36,11 @@ Adds Test User to the Endpoint Administrators group.
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VsTeamUser](Get-VsTeamUser.md)
 

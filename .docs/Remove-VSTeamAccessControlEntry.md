@@ -209,4 +209,8 @@ Required: True
 
 This function outputs a non-terminating error if the ACE removal from the ACL returns $False. This can be due to the wrong descriptor being provided, or the descriptor already not being on the ACL.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

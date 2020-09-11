@@ -71,7 +71,11 @@ Type: int
 
 This function is the base function for Remove-VSTeamArea and Remove-VSTeamIteration.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Remove-VSTeamArea](Remove-VSTeamArea.md)
 

@@ -1,6 +1,6 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VSTeamWiqlItem
+# Get-VSTeamWiql
 
 ## SYNOPSIS
 
@@ -88,6 +88,10 @@ ProjectName
 
 ## NOTES
 
-If you do not set the default project by called Set-VSTeamDefaultProject before calling Get-VSTeamWiql you will have to type in the names.
+If you do not set the default project by called Set-VSTeamDefaultProject you must pass in -ProjectName for the tab completion of names to work.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

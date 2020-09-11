@@ -144,7 +144,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamTaskGroup](Add-VSTeamTaskGroup.md)
 

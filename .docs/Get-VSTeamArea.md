@@ -50,7 +50,11 @@ Type: int32[]
 
 This is a wrapper function for Get-VSTeamClassificationNode
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamClassificationNode](Get-VSTeamClassificationNode.md)
 

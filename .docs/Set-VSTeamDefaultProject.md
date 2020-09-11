@@ -64,6 +64,8 @@ Type: String
 
 ## NOTES
 
-Setting a default project also enables tab completion of dynamic parameters when you call Add-VSTeamBuild.
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

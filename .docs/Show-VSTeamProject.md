@@ -44,9 +44,11 @@ Aliases: ProjectID
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamProject](Add-VSTeamProject.md)
 

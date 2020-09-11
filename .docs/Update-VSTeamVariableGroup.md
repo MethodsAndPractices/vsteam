@@ -258,7 +258,11 @@ System.Collections.Hashtable
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamVariableGroup](Add-VSTeamVariableGroup.md)
 

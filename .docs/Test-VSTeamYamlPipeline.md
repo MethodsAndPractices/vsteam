@@ -81,10 +81,12 @@ PipelineId
 
 ## NOTES
 
-If you do not set the default project by called Set-VSTeamDefaultProject before calling Add-VSTeamBuild you will have to type in the names.
-
 Currently the API that is used by this cmdlet is only supporting YAML pipelines without template references. This will be supported soon. see the issue in GitHub: [https://github.com/microsoft/azure-pipelines-yaml/issues/34#issuecomment-591092498](https://github.com/microsoft/azure-pipelines-yaml/issues/34#issuecomment-591092498)
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamBuildDefinition](Get-VSTeamBuildDefinition.md)

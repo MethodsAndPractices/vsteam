@@ -202,7 +202,11 @@ System.Collections.Hashtable
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Update-VSTeamVariableGroup](Update-VSTeamVariableGroup.md)
 

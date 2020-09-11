@@ -85,10 +85,8 @@ Type: DateTime
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

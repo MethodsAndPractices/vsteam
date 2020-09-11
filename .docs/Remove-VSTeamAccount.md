@@ -42,6 +42,8 @@ Type: String
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

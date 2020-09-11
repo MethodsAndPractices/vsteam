@@ -81,11 +81,11 @@ Accept pipeline input: true (ByPropertyName)
 
 You can pipe build definition IDs to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 

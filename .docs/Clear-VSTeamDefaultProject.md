@@ -38,8 +38,8 @@ Type: String
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
-
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

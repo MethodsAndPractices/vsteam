@@ -96,18 +96,12 @@ Parameter Sets: ByID
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets builds.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
-
 You can pipe build IDs to this function.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamBuild](Get-VSTeamBuild.md)

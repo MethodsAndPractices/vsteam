@@ -36,6 +36,8 @@ This command gets a list of all Azure subscriptions associated with the Team Ser
 
 This function currently is not supported in TFS.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

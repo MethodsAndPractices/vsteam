@@ -44,12 +44,10 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-## RELATED LINKS
-
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.
+<!-- #include "./common/prerequisites.md" -->
 
-You can tab complete from a list of available projects.
+## RELATED LINKS
 
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
+<!-- #include "./common/related.md" -->

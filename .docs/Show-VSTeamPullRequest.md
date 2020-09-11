@@ -53,6 +53,10 @@ Accept pipeline input: true (ByPropertyName)
 
 You can pipe the pull request ID to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamPullRequest](Get-VSTeamPullRequest.md)
