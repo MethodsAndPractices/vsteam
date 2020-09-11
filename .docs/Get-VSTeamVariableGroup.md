@@ -51,13 +51,16 @@ Get-VSTeamVariableGroup @methodParameters
 
 ## PARAMETERS
 
-### -ProjectName
-
 <!-- #include "./params/projectName.md" -->
 
 ### -Id
 
 ID of the existing variable group
+
+```yaml
+Type: String
+Required: false
+```
 
 ### -Name
 

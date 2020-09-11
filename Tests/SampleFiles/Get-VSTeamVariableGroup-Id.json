@@ -1,0 +1,38 @@
+{
+   "variables": {
+      "key1": {
+         "value": "value"
+      },
+      "key2": {
+         "value": null,
+         "isSecret": true
+      }
+   },
+   "id": 270,
+   "type": "Vsts",
+   "name": "Testing",
+   "description": "Used for unit tests",
+   "createdBy": {
+      "displayName": "Test User",
+      "id": "00000000-0000-0000-0000-000000000000",
+      "uniqueName": "Test@test.com"
+   },
+   "createdOn": "2020-09-10T22:05:50.38Z",
+   "modifiedBy": {
+      "displayName": "Test User",
+      "id": "00000000-0000-0000-0000-000000000000",
+      "uniqueName": "Test@test.com"
+   },
+   "modifiedOn": "2020-09-10T22:05:50.38Z",
+   "isShared": false,
+   "variableGroupProjectReferences": [
+      {
+         "projectReference": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "iStay"
+         },
+         "name": "Testing",
+         "description": "Used for unit tests"
+      }
+   ]
+}

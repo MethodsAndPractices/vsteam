@@ -18,7 +18,12 @@ Describe 'VSTeamPolicy' {
    Context 'Update-VSTeamPolicy' {
       It 'with type should add the policy' {
          ## Act
-         Update-VSTeamPolicy -ProjectName Demo -id 1 -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
+         Update-VSTeamPolicy -ProjectName Demo `
+            -id 1 `
+            -type babcf51f-d853-43a2-9b05-4a64ca577be0 `
+            -enabled `
+            -blocking `
+            -settings @{
             MinimumApproverCount = 1
             scope                = @(
                @{
@@ -33,8 +38,6 @@ Describe 'VSTeamPolicy' {
          # same from run to run!  So instead of testing the entire string
          # matches I have to search for the portions I expect but can't
          # assume the order.
-         # The general string should look like this:
-         #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Put' -and
             $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/1?api-version=$(_getApiVersion Policy)" -and
@@ -53,7 +56,11 @@ Describe 'VSTeamPolicy' {
 
       It 'without type should add the policy' {
          ## Act
-         Update-VSTeamPolicy -ProjectName Demo -id 1 -enabled -blocking -settings @{
+         Update-VSTeamPolicy -ProjectName Demo `
+            -id 1 `
+            -enabled `
+            -blocking `
+            -settings @{
             MinimumApproverCount = 1
             scope                = @(
                @{
@@ -68,8 +75,6 @@ Describe 'VSTeamPolicy' {
          # same from run to run!  So instead of testing the entire string
          # matches I have to search for the portions I expect but can't
          # assume the order.
-         # The general string should look like this:
-         #'{"isBlocking":true,"isEnabled":true,"type":{"id":"babcf51f-d853-43a2-9b05-4a64ca577be0"},"settings":{"scope":[{"repositoryId":"20000000-0000-0000-0000-0000000000002","matchKind":"Exact","refName":"refs/heads/release"}],"MinimumApproverCount":1}}'
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Put' -and
             $Uri -eq "https://dev.azure.com/test/Demo/_apis/policy/configurations/1?api-version=$(_getApiVersion Policy)" -and
@@ -88,7 +93,12 @@ Describe 'VSTeamPolicy' {
 
       It 'should throw' {
          ## Act / Assert
-         { Update-VSTeamPolicy -ProjectName boom -id 1 -type babcf51f-d853-43a2-9b05-4a64ca577be0 -enabled -blocking -settings @{
+         { Update-VSTeamPolicy -ProjectName boom `
+               -id 1 `
+               -type babcf51f-d853-43a2-9b05-4a64ca577be0 `
+               -enabled `
+               -blocking `
+               -settings @{
                MinimumApproverCount = 1
                scope                = @(
                   @{

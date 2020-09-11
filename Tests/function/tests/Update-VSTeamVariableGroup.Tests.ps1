@@ -3,24 +3,16 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamVariableGroup' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$baseFolder/Source/Public/Set-VSTeamAPIVersion.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamVariableGroup.ps1"
-      
-      # Mock the call to Get-Projects by the dynamic parameter for ProjectName
-      Mock Invoke-RestMethod { return @() } -ParameterFilter { $Uri -like "*_apis/project*" }
    }
 
    Context 'Update-VSTeamVariableGroup' {
       Context 'Services' {
          BeforeAll {
-            $sampleFileVSTS = Open-SampleFile 'variableGroupSamples.json'
-
             Mock _getApiVersion { return 'VSTS' }
-            Mock _getApiVersion { return '5.0-preview.1-unitTests' } -ParameterFilter { $Service -eq 'VariableGroups' }
-
             Mock _getInstance { return 'https://dev.azure.com/test' }
-
-            Mock Invoke-RestMethod { return $sampleFileVSTS.value[0] }
+            Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamVariableGroup.json' -Index 0 }
+            Mock _getApiVersion { return '5.0-preview.1-unitTests' } -ParameterFilter { $Service -eq 'VariableGroups' }
          }
 
          It 'should update an exisiting Variable Group' {
@@ -45,8 +37,10 @@ Describe 'VSTeamVariableGroup' {
                }
             }
 
+            ## Act
             Update-VSTeamVariableGroup @testParameters
 
+            ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/project/_apis/distributedtask/variablegroups/$($testParameters.id)?api-version=$(_getApiVersion VariableGroups)" -and
                $Method -eq 'Put'
@@ -54,11 +48,15 @@ Describe 'VSTeamVariableGroup' {
          }
 
          It "should update an existing var group when passing the json as the body" {
-            $body = $sampleFileVSTS
-            $projName = "project"
+            ## Arrange
             $id = "1"
+            $projName = "project"
+            $body = Open-SampleFile 'Get-VSTeamVariableGroup.json'
+
+            ## Act
             Update-VSTeamVariableGroup -Body $body -ProjectName $projName -Id $id
 
+            ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -eq "https://dev.azure.com/test/$projName/_apis/distributedtask/variablegroups/$($id)?api-version=$(_getApiVersion VariableGroups)" -and
                $Method -eq 'Put'

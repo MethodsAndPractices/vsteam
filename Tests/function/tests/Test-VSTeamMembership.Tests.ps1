@@ -3,9 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamMembership' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
       . "$baseFolder/Source/Private/callMembershipAPI.ps1"
-      . "$baseFolder/Source/Public/Get-VSTeamProject.ps1"
 
       ## Arrange
       Mock _supportsGraph

@@ -13,8 +13,8 @@ Describe 'VSTeamVariableGroup' {
             Mock _getApiVersion { return 'VSTS' }
             Mock _getInstance { return 'https://dev.azure.com/test' }
 
-            Mock Invoke-RestMethod { Open-SampleFile 'variableGroupSamples.json' }
-            Mock Invoke-RestMethod { Open-SampleFile 'variableGroupSamples.json' -Index 0 } -ParameterFilter { $Uri -like "*101*" }
+            Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamVariableGroup.json' }
+            Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamVariableGroup.json' -Index 0 } -ParameterFilter { $Uri -like "*101*" }
          }
 
          It 'list should return all variable groups' {

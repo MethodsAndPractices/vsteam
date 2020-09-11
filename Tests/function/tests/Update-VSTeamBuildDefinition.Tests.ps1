@@ -3,10 +3,7 @@ Set-StrictMode -Version Latest
 Describe "VSTeamBuildDefinition" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
       . "$baseFolder/Source/Public/Remove-VSTeamAccount.ps1"
-      
-      $resultsAzD = Open-SampleFile 'buildDefvsts.json'
    }
 
    Context "Update-VSTeamBuildDefinition" {
@@ -15,13 +12,7 @@ Describe "VSTeamBuildDefinition" {
             # Set the account to use for testing. A normal user would do this
             # using the Set-VSTeamAccount function.
             Mock _getInstance { return 'https://dev.azure.com/test' }
-
-            Mock Invoke-RestMethod {
-               # If this test fails uncomment the line below to see how the mock was called.
-               # Write-Host $args
-
-               return $resultsAzD
-            }
+            Mock Invoke-RestMethod { Open-SampleFile 'buildDefvsts.json' }
          }
 
          It "should update build definition from json" {
@@ -50,21 +41,14 @@ Describe "VSTeamBuildDefinition" {
             # Set the account to use for testing. A normal user would do this
             # using the Set-VSTeamAccount function.
             Remove-VSTeamAccount
-            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
-
             Mock _useWindowsAuthenticationOnPremise { return $true }
-
-            Mock Invoke-RestMethod {
-               # If this test fails uncomment the line below to see how the mock was called.
-               # Write-Host $args
-
-               return $resultsAzD
-            }
-
-            Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
+            Mock Invoke-RestMethod { Open-SampleFile 'buildDefvsts.json' }
+            Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
          }
-
+         
          It 'should update build definition' {
+            Update-VSTeamBuildDefinition -projectName project -id 2 -inFile 'sampleFiles/builddef.json' -Force
+
             Should -Invoke Invoke-RestMethod -Exactly -Scope Context -Times 1 -ParameterFilter {
                $Method -eq 'Put' -and
                $InFile -eq 'sampleFiles/builddef.json' -and

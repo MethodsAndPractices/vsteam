@@ -262,7 +262,6 @@
     <Content Include="..\SampleFiles\updatePullRequestResponse.json" Link="SampleFiles\updatePullRequestResponse.json" />
     <Content Include="..\SampleFiles\users.json" Link="SampleFiles\users.json" />
     <Content Include="..\SampleFiles\users.single.json" Link="SampleFiles\users.single.json" />
-    <Content Include="..\SampleFiles\variableGroupSamples.json" Link="SampleFiles\variableGroupSamples.json" />
     <Content Include="..\SampleFiles\variableGroupSamples2017.json" Link="SampleFiles\variableGroupSamples2017.json" />
     <Content Include="..\SampleFiles\withoutChildNode.json" Link="SampleFiles\withoutChildNode.json" />
   </ItemGroup>

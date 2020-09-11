@@ -12,7 +12,7 @@ Describe 'VSTeamVariableGroup' {
    Context 'Add-VSTeamVariableGroup' {
       Context 'Services' {
          BeforeAll {
-            $sampleFileVSTS = Open-SampleFile 'variableGroupSamples.json'
+            $sampleFileVSTS = Open-SampleFile 'Get-VSTeamVariableGroup.json'
 
             Mock _getInstance { return 'https://dev.azure.com/test' }
 

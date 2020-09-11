@@ -3,19 +3,15 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamProfile' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
       . "$baseFolder/Source/Public/Get-VSTeamProfile.ps1"
 
+      Mock Test-Path { return $true }
       $expectedPath = "$HOME/vsteam_profiles.json"
-
-      Mock Get-Content { return '' }
-      # Waiting for bug fix in Pester5
-      # Mock Test-Path { return $true }
    }
 
    Context 'Update-VSTeamProfile entry does not exist' {
       BeforeAll {
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return Open-SampleFile 'Get-VSTeamProfile.json' | ForEach-Object { $_ } }
       }
 
       It 'Should throw' {
@@ -40,7 +36,7 @@ Describe 'VSTeamProfile' {
    Context 'Update-VSTeamProfile with securePersonalAccessToken' {
       BeforeAll {
          Mock Set-Content
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return Open-SampleFile 'Get-VSTeamProfile.json' | ForEach-Object { $_ } }
       }
 
       It 'Should update profile' {
@@ -60,7 +56,7 @@ Describe 'VSTeamProfile' {
    Context 'Update-VSTeamProfile with PAT' {
       BeforeAll {
          Mock Set-Content
-         Mock Get-VSTeamProfile { return '[{"Name":"test","URL":"https://dev.azure.com/test/","Type":"Pat","Pat":"12345","Version":"VSTS"}]' | ConvertFrom-Json | ForEach-Object { $_ } }
+         Mock Get-VSTeamProfile { return Open-SampleFile 'Get-VSTeamProfile.json' | ForEach-Object { $_ } }
       }
 
       It 'Should update profile' {
@@ -76,9 +72,9 @@ Describe 'VSTeamProfile' {
 
    Context 'Update-VSTeamProfile with old URL' {
       BeforeAll {
-         Mock Test-Path { return $true }
-         Mock Get-Content { return '[{"Name":"test","URL":"https://test.visualstudio.com","Type":"Pat","Pat":"12345","Version":"VSTS"}]' }
          Mock Set-Content
+         Mock Test-Path { return $true }
+         Mock Get-VSTeamProfile { return Open-SampleFile 'Get-VSTeamProfile.json' | ForEach-Object { $_ } }
       }
 
       It 'Should update profile with new URL' {

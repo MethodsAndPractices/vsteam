@@ -4,6 +4,10 @@ Describe "VSTeamUserEntitlement" {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Get-VSTeamUserEntitlement.ps1"
+
+      # You have to manually load the type file so the property reviewStatus
+      # can be tested.
+      Update-TypeData -AppendPath "$baseFolder/Source/types/Team.UserEntitlement.ps1xml" -ErrorAction Ignore
    }
 
    Context 'Update-VSTeamUserEntitlement' {
@@ -16,38 +20,16 @@ Describe "VSTeamUserEntitlement" {
          Mock _callAPI -ParameterFilter { $Method -eq 'Patch' }
 
          # Get-VSTeamUserEntitlement by email
-         Mock _callAPI {
-            return [PSCustomObject]@{
-               members = [PSCustomObject]@{
-                  accessLevel = [PSCustomObject]@{
-                     accountLicenseType = "Stakeholder"
-                     licensingSource    = "msdn"
-                     msdnLicenseType    = "enterprise"
-                  }
-                  email       = 'test@user.com'
-                  userName    = 'Test User'
-                  id          = '00000000-0000-0000-0000-000000000000'
-               }
-            }
-         }
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement.json' }
 
          # Get-VSTeamUserEntitlement by id
-         Mock _callAPI {
-            return [PSCustomObject]@{
-               accessLevel = [PSCustomObject]@{
-                  accountLicenseType = "Stakeholder"
-                  licensingSource    = "msdn"
-                  msdnLicenseType    = "enterprise"
-               }
-               email       = 'test@user.com'
-               userName    = 'Test User'
-               id          = '00000000-0000-0000-0000-000000000000'
-            }
-         } -ParameterFilter { $id -eq '00000000-0000-0000-0000-000000000000' }
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement-Id.json' } -ParameterFilter { 
+            $id -eq '00000000-0000-0000-0000-000000000000' 
+         }
       }
 
       It 'by email should update a user' {
-         Update-VSTeamUserEntitlement -License 'Stakeholder' -LicensingSource msdn -MSDNLicenseType enterprise -Email 'test@user.com' -Force
+         Update-VSTeamUserEntitlement -License 'Stakeholder' -LicensingSource msdn -MSDNLicenseType enterprise -Email 'dlbm3@test.com' -Force
 
          Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and
@@ -75,7 +57,7 @@ Describe "VSTeamUserEntitlement" {
       }
 
       It 'with invalid id should update user with invalid id should throw' {
-         { Update-VSTeamUserEntitlement -Id '11111111-0000-0000-0000-000000000000'  -License 'Express' -Force } | Should -Throw
+         { Update-VSTeamUserEntitlement -Id '11111111-0000-0000-0000-000000000000' -License 'Express' -Force } | Should -Throw
       }
    }
 }

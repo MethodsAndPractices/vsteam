@@ -5,28 +5,21 @@ Describe 'VSTeamWorkItem' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
-
-      $obj = @{
-         id  = 47
-         rev = 1
-         url = "https://dev.azure.com/test/_apis/wit/workItems/47"
-      }
    }
 
    Context 'Update-VSTeamWorkItem' {
       BeforeAll {
-         Mock Invoke-RestMethod {
-            # If this test fails uncomment the line below to see how the mock was called.
-            # Write-Host $args
-
-            return $obj
-         }
+         Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItem-Id16.json' }
       }
 
       It 'Without Default Project should update work item' {
+         ## Arrange
          $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
+
+         ## Act
          Update-VSTeamWorkItem -Id 1 -Title Test -Force
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -37,9 +30,13 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should update work item' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
+         
+         ## Act
          Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -Force
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -54,11 +51,14 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should update work item with 2 parameters and additional properties' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
+         
+         ## Act
          Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -75,11 +75,14 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should update work item only with 1 parameter and additional properties' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
+
+         ## Act
          Update-VSTeamWorkItem 1 -Title Test1 -AdditionalFields $additionalFields
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -94,11 +97,14 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should update work item only with additional properties' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-
          $additionalFields = @{"System.Tags" = "TestTag"; "System.AreaPath" = "Project\\MyPath" }
+
+         ## Act
          Update-VSTeamWorkItem 1 -AdditionalFields $additionalFields
 
+         ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Method -eq 'Patch' -and
             $Body -like '`[*' -and # Make sure the body is an array
@@ -111,9 +117,11 @@ Describe 'VSTeamWorkItem' {
       }
 
       It 'With Default Project should throw exception when adding existing parameters to additional properties' {
+         ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-
          $additionalFields = @{"System.Title" = "Test1"; "System.AreaPath" = "Project\\TestPath" }
+
+         ## Act / Assert
          { Update-VSTeamWorkItem 1 -Title Test1 -Description Testing -AdditionalFields $additionalFields } | Should -Throw
       }
    }

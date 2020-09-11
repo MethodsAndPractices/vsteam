@@ -12,8 +12,10 @@ Describe "VSTeamReleaseDefinition" {
       }
 
       It "with infile should update release" {
+         ## Act
          Update-VSTeamReleaseDefinition -ProjectName Test -InFile "releaseDef.json" -Force
 
+         ## Assert
          Should -Invoke _callApi -Scope It -Exactly -Times 1 -ParameterFilter {
             $Method -eq "Put" -and
             $SubDomain -eq 'vsrm' -and
@@ -25,8 +27,10 @@ Describe "VSTeamReleaseDefinition" {
       }
 
       It "with release definition should update release" {
+         ## Act
          Update-VSTeamReleaseDefinition -ProjectName Test -ReleaseDefinition "{}" -Force
 
+         ## Assert
          Should -Invoke _callApi -Scope It -Exactly -Times 1 -ParameterFilter {
             $Method -eq "Put" -and
             $SubDomain -eq 'vsrm' -and

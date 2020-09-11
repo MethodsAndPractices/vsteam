@@ -4,31 +4,13 @@ Describe 'VSTeamExtension' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
-      Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
-
-      $singleResult = [PSCustomObject]@{
-         extensionId     = 'test'
-         extensionName   = 'test'
-         publisherId     = 'test'
-         publisherName   = 'test'
-         version         = '1.0.0'
-         registrationId  = '12345678-9012-3456-7890-123456789012'
-         manifestVersion = 1
-         baseUri         = ''
-         fallbackBaseUri = ''
-         scopes          = [PSCustomObject]@{ }
-         installState    = [PSCustomObject]@{
-            flags       = 'none'
-            lastUpdated = [datetime]'2018-10-09T11:26:47.187Z'
-         }
-      }
+      Mock _getInstance { return 'https://dev.azure.com/test' }
    }
 
    Context 'Update-VSTeamExtension' {
       BeforeAll {
          $env:Team_TOKEN = '1234'
-
-         Mock _callAPI { return $singleResult }
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamExtension.json' -Index 0 }
       }
 
       AfterAll {
