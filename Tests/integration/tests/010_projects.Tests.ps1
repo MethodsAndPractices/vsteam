@@ -117,7 +117,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Get-VSTeamAgent Should return agents' {
          ## Act
-         $actual = Get-VSTeamAgent -PoolId $pool.Id
+         $actual = (Get-VSTeamAgent -PoolId $pool.Id)[0]
 
          $actual | Should -Not -Be $null
          $actual.Enabled | Should -Be $true
