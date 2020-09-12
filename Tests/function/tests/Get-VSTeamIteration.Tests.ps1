@@ -35,7 +35,7 @@ Describe 'VSTeamIteration' {
 
       It 'should return iterations by ids and depth' {
          ## Act
-         Get-VSTeamIteration -ProjectName "Public Demo" -Ids @(1, 2, 3, 4) -Depth 5
+         Get-VSTeamIteration -ProjectName "Public Demo" -Id @(1, 2, 3, 4) -Depth 5
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

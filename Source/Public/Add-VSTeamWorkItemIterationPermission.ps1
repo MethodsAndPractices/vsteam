@@ -70,7 +70,7 @@ function Add-VSTeamWorkItemIterationPermission {
       $securityNamespaceId = "bf7bfa03-b2b7-47db-8113-fa2e002cc5b1"
 
       if ($IterationID) {
-         $iteration = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Ids $IterationID
+         $iteration = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Id $IterationID
       }
 
       if ($IterationPath) {

@@ -152,7 +152,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -Ids
+### -Id
 
 If provided, specifies the exact commit ids of the commits to fetch. May not be combined with other parameters.
 

@@ -6,7 +6,6 @@ function Get-VSTeamGitCommit {
       [Parameter(ParameterSetName = 'CompareVersion', ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Parameter(ParameterSetName = 'ByIds', ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Parameter(ParameterSetName = 'ItemPath', ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
-      [Alias('Id')]
       [Guid] $RepositoryID,
 
       [Parameter(ParameterSetName = 'All', HelpMessage = "FromDate, in UTC")]
@@ -80,7 +79,7 @@ function Get-VSTeamGitCommit {
       [string] $Author,
       
       [Parameter(ParameterSetName = "ByIds")]
-      [string[]] $Ids,
+      [string[]] $Id,
       
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemPath', Mandatory = $true)]
@@ -139,7 +138,7 @@ function Get-VSTeamGitCommit {
             'searchCriteria.fromCommitId'                  = $FromCommitId
             'searchCriteria.toCommitId'                    = $ToCommitId
             'searchCriteria.author'                        = $Author
-            'searchCriteria.ids'                           = $Ids
+            'searchCriteria.ids'                           = $Id
             'searchCriteria.itemPath'                      = $ItemPath
             'searchCriteria.excludeDeletes'                = $ExcludeDeletes
             'searchCriteria.historyMode'                   = $HistoryMode

@@ -25,7 +25,7 @@ Describe 'VSTeamArea' {
 
       It 'by Ids and depth should return areas' {
          ## Act
-         Get-VSTeamArea -ProjectName "Public Demo" -Ids @(1, 2, 3, 4) -Depth 5
+         Get-VSTeamArea -ProjectName "Public Demo" -Id @(1, 2, 3, 4) -Depth 5
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

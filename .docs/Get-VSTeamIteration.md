@@ -32,7 +32,7 @@ Path of the classification node.
 Type: string
 ```
 
-### -Ids
+### -Id
 
 Integer classification nodes ids.
 

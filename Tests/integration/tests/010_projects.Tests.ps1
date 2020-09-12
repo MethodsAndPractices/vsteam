@@ -102,6 +102,45 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       }
    }
 
+   Context 'VSTeamAgent' {
+      BeforeAll {
+         if ($acct -like "http://*") {
+            $pool = (Get-VSTeamPool)[0]
+         }
+         else {
+            # Grabbing the first hosted pool on VSTS. Skipping index 0 which is
+            # default and is empty on some accounts
+            $pool = (Get-VSTeamPool)[1]
+         }
+
+         $agent = (Get-VSTeamAgent -PoolId $pool.Id)[0]
+      }
+
+      It 'Get-VSTeamAgent Should return agents' {
+         ## Act
+         $actual = Get-VSTeamAgent -PoolId $pool.Id
+
+         $actual | Should -Not -Be $null
+         $actual.Enabled | Should -Be $true
+      }
+
+      It 'Disable-VSTeamAgent Should disable agent' {
+         ## Act
+         Disable-VSTeamAgent -PoolId $pool.Id -Id $agent.AgentId -Force
+
+         ## Assert
+         (Get-VSTeamAgent -PoolId $pool.Id)[0].Enabled | Should -Be $false
+      }
+
+      It 'Enable-VSTeamAgent Should enable agent' {
+         ## Act
+         Enable-VSTeamAgent -PoolId $pool.Id -Id $agent.AgentId
+
+         ## Assert
+         (Get-VSTeamAgent -PoolId $pool.Id)[0].Enabled | Should -Be $true
+      }
+   }
+
    Context 'VSTeamArea' {
       BeforeAll {
          # Everytime you run the test a new "$newProjectName" is generated.
@@ -145,81 +184,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
             -Force
          
          $(Get-VSTeamArea -ProjectName $newProjectName -Depth 1).Children | Should -Be $null
-      }
-   }
-
-   Context 'VSTeamIteration' {
-      BeforeAll {
-         # Everytime you run the test a new "$newProjectName" is generated.
-         # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
-         # target system change newProjectName to equal the name of the project
-         # found with the correct description.
-         $newProjectName = Get-ProjectName
-            
-         $global:reClassifyId = (Get-VSTeamIteration -ProjectName $newProjectName).Id
-      }
-
-      It 'Add-VSTeamIteration Should return add iteration' {
-         $actual = Add-VSTeamIteration -ProjectName $newProjectName -Name 'UnitTest'
-         
-         $actual | Should -Not -Be $null
-         $global:iterationId = $actual.Id
-      }
-
-      It 'Get-VSTeamIteration Should return one iteration' {
-         $actual = Get-VSTeamIteration -ProjectName $newProjectName -Depth 1
-         
-         $actual | Should -Not -Be $null
-         $actual.count | Should -Be 1 -Because 'Count: Only top should be returned'
-         $actual.Children | Should -Not -Be $null
-         $($(Get-VSTeamIteration -ProjectName $newProjectName -Depth 1).Children | Measure-Object).Count | Should -Be 7
-      }
-
-      # There is a bug in TFS 2017 where this will return all classification nodes
-      # if you pass in ids
-      It 'Get-VSTeamIteration by id Should return one iteration' -Skip:$skip2017Bugs {
-         $actual = Get-VSTeamIteration -ProjectName $newProjectName -Id $global:iterationId
-         
-         $actual | Should -Not -Be $null
-         $actual.count | Should -Be 1
-      }
-
-      It 'Remove-VSTeamIteration should remove iteration' -Skip:$skip2017Bugs {
-         Remove-VSTeamIteration -ProjectName $newProjectName `
-            -ReClassifyId $global:reClassifyId `
-            -Path 'UnitTest' `
-            -Force
-         
-         $($(Get-VSTeamIteration -ProjectName $newProjectName -Depth 1).Children | Measure-Object).Count | Should -Be 6
-      }
-   }
-
-   Context 'VSTeamGitRepository' -Tag "Git" {
-      BeforeAll {
-         # Everytime you run the test a new "$newProjectName" is generated.
-         # This is fine if you are running all the tests but not if you just
-         # want to run these. So if the newProjectName can't be found in the 
-         # target system change newProjectName to equal the name of the project
-         # found with the correct description.
-         $newProjectName = Get-ProjectName
-      }
-
-      It 'Get-VSTeamGitRepository Should return repository' {
-         Get-VSTeamGitRepository -ProjectName $newProjectName | Select-Object -ExpandProperty Name | Should -Be $newProjectName
-      }
-
-      It 'Add-VSTeamGitRepository Should create repository' {
-         Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing'
-
-         (Get-VSTeamGitRepository -ProjectName $newProjectName).Count | Should -Be 2
-         Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing' | Select-Object -ExpandProperty Name | Should -Be 'testing'
-      }
-
-      It 'Remove-VSTeamGitRepository Should delete repository' {
-         Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing' | Select-Object -ExpandProperty Id | Remove-VSTeamGitRepository -Force
-
-         Get-VSTeamGitRepository -ProjectName $newProjectName | Where-Object { $_.Name -eq 'testing' } | Should -Be $null
       }
    }
 
@@ -303,6 +267,81 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
       It 'Remove-VSTeamBuildDefinition should delete build definition' {
          Get-VSTeamBuildDefinition -ProjectName $newProjectName | Remove-VSTeamBuildDefinition -ProjectName $newProjectName -Force
          Get-VSTeamBuildDefinition -ProjectName $newProjectName | Should -Be $null
+      }
+   }
+
+   Context 'VSTeamIteration' {
+      BeforeAll {
+         # Everytime you run the test a new "$newProjectName" is generated.
+         # This is fine if you are running all the tests but not if you just
+         # want to run these. So if the newProjectName can't be found in the 
+         # target system change newProjectName to equal the name of the project
+         # found with the correct description.
+         $newProjectName = Get-ProjectName
+            
+         $global:reClassifyId = (Get-VSTeamIteration -ProjectName $newProjectName).Id
+      }
+
+      It 'Add-VSTeamIteration Should return add iteration' {
+         $actual = Add-VSTeamIteration -ProjectName $newProjectName -Name 'UnitTest'
+         
+         $actual | Should -Not -Be $null
+         $global:iterationId = $actual.Id
+      }
+
+      It 'Get-VSTeamIteration Should return one iteration' {
+         $actual = Get-VSTeamIteration -ProjectName $newProjectName -Depth 1
+         
+         $actual | Should -Not -Be $null
+         $actual.count | Should -Be 1 -Because 'Count: Only top should be returned'
+         $actual.Children | Should -Not -Be $null
+         $($(Get-VSTeamIteration -ProjectName $newProjectName -Depth 1).Children | Measure-Object).Count | Should -Be 7
+      }
+
+      # There is a bug in TFS 2017 where this will return all classification nodes
+      # if you pass in ids
+      It 'Get-VSTeamIteration by id Should return one iteration' -Skip:$skip2017Bugs {
+         $actual = Get-VSTeamIteration -ProjectName $newProjectName -Id $global:iterationId
+         
+         $actual | Should -Not -Be $null
+         $actual.count | Should -Be 1
+      }
+
+      It 'Remove-VSTeamIteration should remove iteration' -Skip:$skip2017Bugs {
+         Remove-VSTeamIteration -ProjectName $newProjectName `
+            -ReClassifyId $global:reClassifyId `
+            -Path 'UnitTest' `
+            -Force
+         
+         $($(Get-VSTeamIteration -ProjectName $newProjectName -Depth 1).Children | Measure-Object).Count | Should -Be 6
+      }
+   }
+
+   Context 'VSTeamGitRepository' -Tag "Git" {
+      BeforeAll {
+         # Everytime you run the test a new "$newProjectName" is generated.
+         # This is fine if you are running all the tests but not if you just
+         # want to run these. So if the newProjectName can't be found in the 
+         # target system change newProjectName to equal the name of the project
+         # found with the correct description.
+         $newProjectName = Get-ProjectName
+      }
+
+      It 'Get-VSTeamGitRepository Should return repository' {
+         Get-VSTeamGitRepository -ProjectName $newProjectName | Select-Object -ExpandProperty Name | Should -Be $newProjectName
+      }
+
+      It 'Add-VSTeamGitRepository Should create repository' {
+         Add-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing'
+
+         (Get-VSTeamGitRepository -ProjectName $newProjectName).Count | Should -Be 2
+         Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing' | Select-Object -ExpandProperty Name | Should -Be 'testing'
+      }
+
+      It 'Remove-VSTeamGitRepository Should delete repository' {
+         Get-VSTeamGitRepository -ProjectName $newProjectName -Name 'testing' | Select-Object -ExpandProperty Id | Remove-VSTeamGitRepository -Force
+
+         Get-VSTeamGitRepository -ProjectName $newProjectName | Where-Object { $_.Name -eq 'testing' } | Should -Be $null
       }
    }
 
@@ -410,22 +449,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          else {
             $actual.Count | Should -Not -Be 0
          }
-      }
-   }
-
-   Context 'VSTeamAgent' {
-      It 'Get-VSTeamAgent Should return agents' {
-         if ($acct -like "http://*") {
-            $pool = (Get-VSTeamPool)[0]
-         }
-         else {
-            # Grabbing the first hosted pool on VSTS. Skipping index 0 which is
-            # default and is empty on some accounts
-            $pool = (Get-VSTeamPool)[1]
-         }
-         $actual = Get-VSTeamAgent -PoolId $pool.Id
-
-         $actual | Should -Not -Be $null
       }
    }
 

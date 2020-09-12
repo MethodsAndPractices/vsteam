@@ -26,7 +26,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
          $iterationRootNode = Open-SampleFile 'Get-VSTeamClassificationNode-depth3-ids16.json'
 
          Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($iterationRootNode, "test") }
-         Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($classificationNodeIterationId, "test") } -ParameterFilter { $Ids -eq 44 -or $Path -eq "Sprint 1" }
+         Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($classificationNodeIterationId, "test") } -ParameterFilter { $Id -eq 44 -or $Path -eq "Sprint 1" }
 
          Mock Invoke-RestMethod { Open-SampleFile 'accessControlEntryResult.json' }
       }

@@ -8,7 +8,7 @@ Describe 'VSTeamAgent' {
       Mock _callAPI
       Mock _handleException
       Mock _callAPI { throw 'boom' } -ParameterFilter { $id -eq "101" }
-      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTask' }
    }
 
    Context 'Disable-VSTeamAgent' {
@@ -30,7 +30,7 @@ Describe 'VSTeamAgent' {
             $NoProject -eq $true -and
             $area -eq 'distributedtask/pools/36' -and
             $resource -eq 'agents' -and
-            $id -eq '950' -and
+            $id -eq 950 -and
             $body -eq "{'enabled':false,'id':950,'maxParallelism':1}" -and
             $version -eq '1.0-unitTests'
          }

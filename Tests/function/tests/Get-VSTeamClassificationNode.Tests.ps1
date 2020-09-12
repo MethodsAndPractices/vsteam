@@ -57,7 +57,7 @@ Describe 'VSTeamClassificationNode' {
 
       It 'by ids should return Nodes' {
          ## Act
-         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(1, 2, 3, 4)
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Id @(1, 2, 3, 4)
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
@@ -69,7 +69,7 @@ Describe 'VSTeamClassificationNode' {
 
       It 'should handle when there is no child nodes' {
          ## Act
-         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Ids @(43, 44)
+         Get-VSTeamClassificationNode -ProjectName "Public Demo" -Id @(43, 44)
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly 1 -ParameterFilter {

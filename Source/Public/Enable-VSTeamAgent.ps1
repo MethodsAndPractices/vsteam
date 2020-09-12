@@ -16,7 +16,7 @@ function Enable-VSTeamAgent {
                -Resource agents `
                -Id $item `
                -Body "{'enabled':true,'id':$item,'maxParallelism':1}" `
-               -Version $(_getApiVersion DistributedTaskReleased) | Out-Null
+               -Version $(_getApiVersion DistributedTask) | Out-Null
 
             Write-Output "Enabled agent $item"
          }

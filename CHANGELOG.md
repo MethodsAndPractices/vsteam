@@ -20,16 +20,21 @@ Added -force to Remove-VSTeamAccessControlEntry so you don't have to use -confir
 
 **Breaking changes**:
 You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
+
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.
+
 Disable-VSTeamAgent now requires -Force
 
 Changed Ids parameter to Id on the following functions to be consistent with other functions:
 
 - Get-VSTeamArea
 - Get-VSTeamIteration
+- Get-VSTeamGitCommit
 - Get-VSTeamClassificationNode
 
 ReClassifyId and Path are now required on Remove-VSTeamArea.
+
+Get-VSTeamGitCommit removed Id alias on RepositoryId parameter
 
 
 ## 6.5.1

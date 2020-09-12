@@ -28,7 +28,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
          
          Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($areaRootNode, "test") }
          Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($parentClassificationNode, "test") } -ParameterFilter { $Path -eq "Child%201%20Level%201" }
-         Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($classificationNodeById, "test") } -ParameterFilter { $Ids -eq 85 -or $Path -eq "Child 1 Level 1/Child 1 Level 2" }
+         Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($classificationNodeById, "test") } -ParameterFilter { $Id -eq 85 -or $Path -eq "Child 1 Level 1/Child 1 Level 2" }
 
          Mock Invoke-RestMethod { Open-SampleFile 'accessControlEntryResult.json' }
       }

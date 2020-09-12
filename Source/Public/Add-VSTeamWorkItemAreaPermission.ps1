@@ -70,7 +70,7 @@ function Add-VSTeamWorkItemAreaPermission {
       $securityNamespaceId = "83e28ad4-2d72-4ceb-97b0-c7726d5502c3"
 
       if ($AreaID) {
-         $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Ids $AreaID
+         $area = Get-VSTeamClassificationNode -ProjectName $Project.Name -Depth 0 -Id $AreaID
       }
 
       if ($AreaPath) {
