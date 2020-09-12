@@ -40,6 +40,7 @@ Name of the new classification node.
 
 ```yaml
 Type: string
+Required: True
 ```
 
 ### -StructureGroup
@@ -48,6 +49,7 @@ Structure group of the classification node.
 
 ```yaml
 Type: string
+Required: True
 Accepted values: iterations, areas
 ```
 
@@ -57,22 +59,25 @@ Path of the classification node.
 
 ```yaml
 Type: string
+Required: False
 ```
 
 ### -StartDate
 
-Start date of the classification node.
+Start date of the iteration.
 
 ```yaml
 Type: datetime
+Required: False
 ```
 
 ### -FinishDate
 
-Finish date of the classification node.
+Finish date of the iteration.
 
 ```yaml
 Type: datetime
+Required: False
 ```
 
 ## INPUTS

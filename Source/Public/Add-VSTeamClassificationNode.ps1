@@ -10,19 +10,13 @@
 function Add-VSTeamClassificationNode {
    [CmdletBinding()]
    param(
-      [CmdletBinding(DefaultParameterSetName = 'ByArea')]
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]
       [Parameter(Mandatory = $true)]
       [string] $Name,
 
-      [CmdletBinding(DefaultParameterSetName = 'ByArea')]
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
       [ValidateSet("areas", "iterations")]
       [Parameter(Mandatory = $true)]
       [string] $StructureGroup,
 
-      [CmdletBinding(DefaultParameterSetName = 'ByArea')]
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
       [Parameter(Mandatory = $false)]
       [string] $Path = $null,
 

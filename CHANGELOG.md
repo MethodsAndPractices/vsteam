@@ -23,6 +23,15 @@ You must have [.netCore](dot.net) installed to build the class lib on macOS, Lin
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.
 Disable-VSTeamAgent now requires -Force
 
+Changed Ids parameter to Id on the following functions to be consistent with other functions:
+
+- Get-VSTeamArea
+- Get-VSTeamIteration
+- Get-VSTeamClassificationNode
+
+ReClassifyId and Path are now required on Remove-VSTeamArea.
+
+
 ## 6.5.1
 
 Fixed bug [337](https://github.com/MethodsAndPractices/vsteam/issues/337)

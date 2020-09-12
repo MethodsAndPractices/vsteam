@@ -21,7 +21,7 @@ This command adds a new iteration named NewIteration to the Demo project under t
 ### Example 2
 
 ```powershell
-PS C:\> Add-VSTeamIteration -ProjectName "Demo" -FinishDate (Get-Date "31.01.2020") -StartDate (Get-Date "01.01.2020") -Name "NewIteration"
+PS C:\> Add-VSTeamIteration -ProjectName "Demo" -FinishDate "31.01.2020" -StartDate "01.01.2020" -Name "NewIteration"
 ```
 
 This command adds a new iteration named NewIteration to the Demo project with the start date 01.01.2020 and finish date 31.01.2020.
@@ -40,6 +40,7 @@ Name of the new iteration.
 
 ```yaml
 Type: string
+Required: True
 ```
 
 ### -Path
@@ -48,6 +49,7 @@ Path of the existing iteration under where the new one will be created.
 
 ```yaml
 Type: string
+Required: True
 ```
 
 ### -StartDate

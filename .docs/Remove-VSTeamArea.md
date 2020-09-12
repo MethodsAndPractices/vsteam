@@ -40,6 +40,7 @@ Path of the area node.
 
 ```yaml
 Type: string
+Required: True
 ```
 
 ### -ReClassifyId
@@ -48,6 +49,7 @@ Id of an area where work items should be reassigned to if they are currently ass
 
 ```yaml
 Type: int
+Required: True
 ```
 
 <!-- #include "./params/force.md" -->

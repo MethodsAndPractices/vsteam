@@ -1,10 +1,10 @@
 function Remove-VSTeamArea {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
    param(
-      [Parameter(Mandatory = $false)]
+      [Parameter(Mandatory = $true)]
       [int] $ReClassifyId,
      
-      [Parameter(Mandatory = $false)]
+      [Parameter(Mandatory = $true)]
       [string] $Path,
       
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -17,7 +17,11 @@ function Remove-VSTeamArea {
 
    process {
       if ($force -or $pscmdlet.ShouldProcess($Path, "Delete area")) {
-         $null = Remove-VSTeamClassificationNode -StructureGroup 'areas' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId -Force
+         $null = Remove-VSTeamClassificationNode -ProjectName $ProjectName `
+            -StructureGroup 'areas' `
+            -Path $Path `
+            -ReClassifyId $ReClassifyId `
+            -Force
       }
    }
 }

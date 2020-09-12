@@ -40,6 +40,7 @@ Path of the iteration node.
 
 ```yaml
 Type: string
+Required: True
 ```
 
 ### -ReClassifyId
@@ -48,6 +49,7 @@ Id of an iteration where work items should be reassigned to if they are currentl
 
 ```yaml
 Type: int
+Required: True
 ```
 
 <!-- #include "./params/force.md" -->

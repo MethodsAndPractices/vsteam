@@ -1,5 +1,5 @@
 function Get-VSTeamClassificationNode {
-   [CmdletBinding(DefaultParameterSetName = 'ByIds')]
+   [CmdletBinding(DefaultParameterSetName = 'ById')]
    param(
       [ValidateSet("areas", "iterations")]
       [Parameter(Mandatory = $true, ParameterSetName = "ByPath")]
@@ -8,11 +8,9 @@ function Get-VSTeamClassificationNode {
       [Parameter(Mandatory = $false, ParameterSetName = "ByPath")]
       [string] $Path,
 
-      [Parameter(Mandatory = $false, ParameterSetName = "ByIds")]
-      [int[]] $Ids,
+      [Parameter(Mandatory = $true, ParameterSetName = "ById")]
+      [int[]] $Id,
 
-      [Parameter(Mandatory = $false, ParameterSetName = "ByPath")]
-      [Parameter(Mandatory = $false, ParameterSetName = "ByIds")]
       [int] $Depth,
 
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -22,14 +20,14 @@ function Get-VSTeamClassificationNode {
    )
 
    process {
-      $id = $StructureGroup
+      $idArg = $StructureGroup
 
       $Path = [uri]::UnescapeDataString($Path)
 
       if ($Path) {
          $Path = [uri]::EscapeUriString($Path)
          $Path = $Path.TrimStart("/")
-         $id += "/$Path"
+         $idArg += "/$Path"
       }
 
       $queryString = @{ }
@@ -38,15 +36,15 @@ function Get-VSTeamClassificationNode {
          $queryString.Add("`$Depth", $Depth)
       }
 
-      if ($Ids) {
-         $queryString.Add("Ids", $Ids -join ",")
+      if ($Id) {
+         $queryString.Add("ids", $Id -join ",")
       }
 
       $commonArgs = @{
          ProjectName = $ProjectName 
          Area        = 'wit' 
          Resource    = "classificationnodes" 
-         id          = $id
+         id          = $idArg
          Version     = $(_getApiVersion Core)
       }
 
