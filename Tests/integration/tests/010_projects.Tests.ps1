@@ -64,8 +64,7 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
 
       It 'Get-VSTeam ByName Should return Teams' {
          Get-VSTeam -ProjectName $newProjectName `
-            -Name "$newProjectName Team"
-         | Should -Not -Be $null
+            -Name "$newProjectName Team" | Should -Not -Be $null
       }
 
       It 'Get-VSTeam ById Should return Teams' {
