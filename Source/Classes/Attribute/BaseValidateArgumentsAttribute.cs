@@ -17,7 +17,7 @@ namespace vsteam_lib
 
          var cache = this.GetValues();
 
-         if (cache.Count() > 0 && cache.All(s => string.Compare(arguments.ToString(), s) != 0))
+         if (cache.Count() > 0 && cache.All(s => string.Compare(arguments.ToString(), s, true) != 0))
          {
             throw new ValidationMetadataException($"'{arguments}' is invalid");
          }

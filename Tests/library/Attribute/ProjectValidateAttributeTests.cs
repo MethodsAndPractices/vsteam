@@ -52,6 +52,21 @@ namespace vsteam_lib.Test
       }
 
       [TestMethod]
+      public void ProjectValidateAttribute_Valid_Value_Wrong_Case_Does_Not_Throw()
+      {
+         // Arrange
+         var ps = BaseTests.PrepPowerShell();
+         ps.Invoke<string>().Returns(this._values);
+         ProjectCache.Cache.Shell = ps;
+         ProjectCache.Invalidate();
+
+         // Act
+         this.Validate("project2", null);
+
+         // Assert
+      }
+
+      [TestMethod]
       public void ProjectValidateAttribute_Null_Value_Does_Not_Throw()
       {
          // Arrange
