@@ -15,8 +15,8 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline with multiple build IDs' {
-         Get-VSTeamBuildTimeline -BuildID @(1, 2) `
-            -Id 00000000-0000-0000-0000-000000000000 `
+         Get-VSTeamBuildTimeline -Id @(1, 2) `
+            -TimelineId 00000000-0000-0000-0000-000000000000 `
             -ProjectName "MyProject"
 
          Should -Invoke Invoke-RestMethod -Scope It -Times 2 -ParameterFilter {
@@ -28,8 +28,8 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline with changeId and PlanId' {
-         Get-VSTeamBuildTimeline -BuildID 1 `
-            -Id 00000000-0000-0000-0000-000000000000 `
+         Get-VSTeamBuildTimeline -Id 1 `
+            -TimelineId 00000000-0000-0000-0000-000000000000 `
             -ProjectName "MyProject" `
             -ChangeId 4 `
             -PlanId 00000000-0000-0000-0000-000000000000
@@ -44,8 +44,8 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline without changeId' {
-         Get-VSTeamBuildTimeline -BuildID 1 `
-            -Id 00000000-0000-0000-0000-000000000000 `
+         Get-VSTeamBuildTimeline -Id 1 `
+            -TimelineId 00000000-0000-0000-0000-000000000000 `
             -ProjectName "MyProject" `
             -PlanId 00000000-0000-0000-0000-000000000000
 
@@ -58,8 +58,8 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline without planId' {
-         Get-VSTeamBuildTimeline -BuildID 1 `
-            -Id 00000000-0000-0000-0000-000000000000 `
+         Get-VSTeamBuildTimeline -Id 1 `
+            -TimelineId 00000000-0000-0000-0000-000000000000 `
             -ProjectName "MyProject" `
             -ChangeId 4
 
@@ -72,8 +72,8 @@ Describe 'VSTeamBuildTimeline' {
       }
 
       It 'should get timeline without planId and changeID' {
-         Get-VSTeamBuildTimeline -BuildID 1 `
-            -Id 00000000-0000-0000-0000-000000000000 `
+         Get-VSTeamBuildTimeline -Id 1 `
+            -TimelineId 00000000-0000-0000-0000-000000000000 `
             -ProjectName "MyProject"
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -86,13 +86,13 @@ Describe 'VSTeamBuildTimeline' {
       It 'should get timeline without records and no exception' {
          Mock Invoke-RestMethod { Open-SampleFile 'buildTimelineEmptyRecords.json' }
 
-         $null = Get-VSTeamBuildTimeline -BuildID 1 `
-            -Id 00000000-0000-0000-0000-000000000000 `
+         $null = Get-VSTeamBuildTimeline -Id 1 `
+            -TimelineId 00000000-0000-0000-0000-000000000000 `
             -ProjectName "MyProject" `
             -ChangeId 4 `
             -PlanId 00000000-0000-0000-0000-000000000000
 
-         { Get-VSTeamBuildTimeline -BuildID 1 `
+         { Get-VSTeamBuildTimeline -Id 1 `
                -ProjectName "MyProject" } 
          | Should -Not -Throw
       }

@@ -24,22 +24,11 @@ function Get-VSTeamProcess {
       [Alias('ProcessName', 'ProcessTemplate')]
       $Name = '*',
 
-      [Parameter(DontShow = $true, ParameterSetName = 'List')]
-      [int] $Top = 100,
-
-      [Parameter(DontShow = $true, ParameterSetName = 'List')]
-      [int] $Skip = 0,
-
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProcessTemplateID')]
       [string] $Id
    )
    process {
-      # The REST API ignores Top and Skip but allows them to be specified & the function does the same. 
-      if ($PSBoundParameters['Top', 'Skip'] -gt 0) {
-         Write-Warning "You specified -Top $Top , -Skip $Skip These parameters are ignored and will be removed in future"
-      }
-
       $commonArgs = @{
          # In later APIs you can get the process templates from the 'work' 
          # area. For older APIs the process templates are in the 'processes'

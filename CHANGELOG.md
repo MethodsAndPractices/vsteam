@@ -36,6 +36,12 @@ ReClassifyId and Path are now required on Remove-VSTeamArea.
 
 Get-VSTeamGitCommit removed Id alias on RepositoryId parameter
 
+Renamed parameters on Get-VSTeamBuildTimeline to make it easier to pipe results of Get-VSTeamBuild into Get-VSTeamBuildTimeline. $Id of type Guid is now $TimelineId.
+$BuildId of type int[] is now $Id.
+
+Removed Type parameter from Get-VSTeamBuildDefinition.
+
+Removed the Top and Skip parameters from Get-VSTeamProcess.
 
 ## 6.5.1
 

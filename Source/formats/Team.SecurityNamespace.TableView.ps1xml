@@ -2,33 +2,33 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.SecurityNamespace.TableView</Name>
+			<Name>vsteam_lib.SecurityNamespace.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.SecurityNamespace</TypeName>
+				<TypeName>vsteam_lib.SecurityNamespace</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>
-					<TableColumnHeader>
-						<Label>ID</Label>
-					</TableColumnHeader>
 					<TableColumnHeader>
 						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
 						<Label>IsRemotable</Label>
 					</TableColumnHeader>
+               <TableColumnHeader>
+						<Label>ID</Label>
+					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
 					<TableRowEntry>
 						<TableColumnItems>
 							<TableColumnItem>
-								<PropertyName>ID</PropertyName>
-							</TableColumnItem>
-							<TableColumnItem>
 								<PropertyName>Name</PropertyName>
 							</TableColumnItem>
-							<TableColumnItem>
+                     <TableColumnItem>
 								<PropertyName>IsRemotable</PropertyName>
+							</TableColumnItem>
+                     <TableColumnItem>
+								<PropertyName>ID</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

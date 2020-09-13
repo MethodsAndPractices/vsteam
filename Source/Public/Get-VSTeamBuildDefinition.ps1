@@ -4,10 +4,6 @@ function Get-VSTeamBuildDefinition {
       [Parameter(ParameterSetName = 'List')]
       [string] $Filter,
 
-      [ValidateSet('build', 'xaml', 'All')]
-      [Parameter(ParameterSetName = 'List')]
-      [string] $Type = 'All',
-
       [Alias('BuildDefinitionID')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [Parameter(Position = 0, ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -29,11 +25,6 @@ function Get-VSTeamBuildDefinition {
    )
    
    process {
-      # The REST API ignores Top and Skip but allows them to be specified & the function does the same. 
-      if ($PSBoundParameters['Type'] -gt 0) {
-         Write-Warning "You specified -Type $type. This parameters is ignored and will be removed in future"
-      }
-
       if ($id) {
          foreach ($item in $id) {
             $resp = _callAPI -ProjectName $ProjectName `
@@ -63,7 +54,7 @@ function Get-VSTeamBuildDefinition {
             -Area build `
             -Resource definitions `
             -Version $(_getApiVersion Build) `
-            -QueryString @{type = $type; name = $filter; includeAllProperties = $true }
+            -QueryString @{name = $filter; includeAllProperties = $true }
 
          if ($JSON.IsPresent) {
             $resp | ConvertTo-Json -Depth 99

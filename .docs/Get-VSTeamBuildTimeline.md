@@ -21,10 +21,10 @@ You can also specify a particular timeline by ID to get .
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 | Format-List *
+PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -Id 1 | Format-List *
 ```
 
-This command gets a list of all timelines of thr build with Id 1 in the demo project.
+This command gets a list of all timelines of the build with Id 1 in the demo project.
 
 The pipeline operator (|) passes the data to the Format-List cmdlet, which
 displays all available properties (*) of the timeline objects.
@@ -32,33 +32,34 @@ displays all available properties (*) of the timeline objects.
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -Id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382
+PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -Id 1 -TimelineId 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382
 ```
 
-This command gets the timelines with ID 1 and timeline id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7. It is filtered with the change ID and plan ID.
+This command gets the timelines with build Id 1 and timeline Id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7. It is filtered with the change ID and plan ID.
 
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -BuildId 1 -ID @(1,2)
+PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -Id 1 -TimelineId @(1,2)
 ```
 
 This command gets timelines with IDs 1 and 2 by using the ID parameter.
+
+### Example 4
+
+```powershell
+PS C:\> Get-VSTeamBuild | Get-VSTeamBuildTimeline -ProjectName demo
+```
+
+This command gets timelines with build Ids from the pipeline.
 
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->
 
-### -BuildId
+<!-- #include "./params/BuildIds.md" -->
 
-Build id where you get the time line from
-
-```yaml
-Type: int[]
-Parameter Sets: ByID
-```
-
-### -Id
+### -TimelineId
 
 Returns the timelines with the given timeline id.
 
@@ -85,8 +86,6 @@ Returns the timelines with the given plan id.
 Type: Guid
 Parameter Sets: ByID
 ```
-
-<!-- #include "./params/BuildIds.md" -->
 
 ## INPUTS
 

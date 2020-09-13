@@ -42,38 +42,6 @@ Describe 'VSTeamProcess' {
             $Uri -like "*api-version=$(_getApiVersion Processes)*" 
          }
       }
-      
-      It 'with top should return warning' {
-         ## Act
-         Get-VSTeamProcess -top 10
-
-         ## Assert
-         # Make sure you warn the user
-         Should -Invoke Write-Warning -Exactly -Times 1 -Scope It
-
-         # Make sure it was called with the correct URI
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
-            $Uri -NotLike "*`$top=10*"
-         }
-      }
-
-      It 'with skip should return warning' {
-         ## Act
-         Get-VSTeamProcess -skip 1
-
-         ## Assert
-         # Make sure you warn the user
-         Should -Invoke Write-Warning -Exactly -Times 1 -Scope It
-
-         # Make sure it was called with the correct URI
-         Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Uri -like "*https://dev.azure.com/test/_apis/work/processes*" -and
-            $Uri -like "*api-version=$(_getApiVersion Processes)*" -and
-            $Uri -NotLike "*`$skip=1*" -and
-            $Uri -NotLike "*`$top=100*"
-         }
-      }
 
       It 'by Name should return Process by Name' {
          [vsteam_lib.ProcessTemplateCache]::Invalidate()

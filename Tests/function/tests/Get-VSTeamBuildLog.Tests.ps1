@@ -30,7 +30,7 @@ Describe 'VSTeamBuildLog' {
             }
 
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/60?api-version=$(_getApiVersion Build)"
+               $Uri -eq "https://dev.azure.com/test/project/_apis/build/builds/1/logs/61?api-version=$(_getApiVersion Build)"
             }
          }
 
@@ -72,7 +72,7 @@ Describe 'VSTeamBuildLog' {
             }
 
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/60?api-version=$(_getApiVersion Build)"
+               $Uri -eq "http://localhost:8080/tfs/defaultcollection/project/_apis/build/builds/1/logs/61?api-version=$(_getApiVersion Build)"
             }
          }
       }

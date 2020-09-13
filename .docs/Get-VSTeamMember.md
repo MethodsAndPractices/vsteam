@@ -50,7 +50,7 @@ Type: Int32
 
 ## OUTPUTS
 
-### Team.Team
+### Team.TeamMember
 
 ## NOTES
 

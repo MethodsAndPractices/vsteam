@@ -10,10 +10,16 @@
             <AutoSize />
             <TableHeaders>
                <TableColumnHeader>
-                  <Label>Name</Label>
+                  <Label>Definition</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Build Number</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Result</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>ID</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
@@ -21,10 +27,16 @@
                   <Wrap />
                   <TableColumnItems>
                      <TableColumnItem>
-                        <PropertyName>Name</PropertyName>
+                        <PropertyName>BuildDefinition</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>BuildNumber</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Result</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Id</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

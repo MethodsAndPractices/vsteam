@@ -23,7 +23,7 @@ function Get-VSTeamBuildLog {
                -Id "$item/logs" `
                -Version $(_getApiVersion Build)
 
-            $fullLogIndex = $($resp.count - 1)
+            $fullLogIndex = $($resp.count)
          }
          else {
             $fullLogIndex = $Index

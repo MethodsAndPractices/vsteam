@@ -40,7 +40,7 @@ function Add-VSTeamBuild {
       }
       elseif ($BuildDefinitionName) {
          # Find the BuildDefinition id from the name
-         $id = (Get-VSTeamBuildDefinition -ProjectName "$ProjectName" -Filter $BuildDefinitionName -Type All).id
+         $id = (Get-VSTeamBuildDefinition -ProjectName "$ProjectName" -Filter $BuildDefinitionName).id
          if (-not $id) {
             throw "'$BuildDefinitionName' is not a valid build definition. Use Get-VSTeamBuildDefinition to get a list of build names"
             return

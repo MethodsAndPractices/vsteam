@@ -73,8 +73,9 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
       It 'Team.Build should have name' {
          $cols = Get-Columns -TypeName vsteam_lib.Build
 
-         $cols[0] | Should -Be 'Name'
-         $cols[1] | Should -Be 'Result'
+         $cols[0] | Should -Be 'Definition'
+         $cols[1] | Should -Be 'Build Number'
+         $cols[2] | Should -Be 'Result'
       }
    }
 

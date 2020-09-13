@@ -60,20 +60,6 @@ Type: String
 Parameter Sets: List
 ```
 
-### -Type
-
-The type of the build definitions to retrieve. The acceptable values for this parameter are:
-
-- build
-- xaml
-- All
-
-```yaml
-Type: String
-Parameter Sets: List
-Default value: All
-```
-
 ### -Id
 
 Specifies one or more build definitions by ID.

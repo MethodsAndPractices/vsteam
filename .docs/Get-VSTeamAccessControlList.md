@@ -82,7 +82,7 @@ Required: True
 
 ## OUTPUTS
 
-### VSTeamAccessControlList
+### vsteam_lib.AccessControlList
 
 ## NOTES
 

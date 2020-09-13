@@ -239,12 +239,6 @@ Describe 'VSTeam Integration Tests' -Tag 'integration' {
          $buildDefs.Count | Should -Be 2
       }
 
-      It 'Get-VSTeamBuildDefinition by Type "build" should return 2 build definitions' {
-         Mock Write-Warning
-         $buildDefs = Get-VSTeamBuildDefinition -ProjectName $newProjectName #-Type build
-         $buildDefs.Count | Should -Be 2
-      }
-
       It 'Get-VSTeamBuildDefinition by Id should return intended attribute values for 1st build definition' -Skip:$skippedOnTFS {
          $buildDefId = (Get-VSTeamBuildDefinition -ProjectName $newProjectName | Where-Object { $_.Name -eq $($newProjectName + "-CI1") }).Id
          $buildDefId | Should -Not -Be $null

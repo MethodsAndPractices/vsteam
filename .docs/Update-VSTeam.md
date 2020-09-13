@@ -64,7 +64,7 @@ NewTeamName
 
 ## OUTPUTS
 
-### Team.Team
+### vsteam_lib.Team
 
 ## NOTES
 

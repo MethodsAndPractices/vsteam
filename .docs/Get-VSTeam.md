@@ -58,7 +58,7 @@ Parameter Sets: ByName
 
 ## OUTPUTS
 
-### Team.Team
+### vsteam_lib.Team
 
 ## NOTES
 

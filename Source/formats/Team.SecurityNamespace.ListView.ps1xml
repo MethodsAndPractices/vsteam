@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.SecurityNamespace.ListView</Name>
+			<Name>vsteam_lib.SecurityNamespace.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.SecurityNamespace</TypeName>
+				<TypeName>vsteam_lib.SecurityNamespace</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

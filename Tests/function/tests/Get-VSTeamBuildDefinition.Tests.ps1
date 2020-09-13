@@ -28,8 +28,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "*http://localhost:8080/tfs/defaultcollection/2017Project/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
-               $Uri -like "*type=All*"
+               $Uri -like "*api-version=$(_getApiVersion Build)*"
             }
          }
 
@@ -40,8 +39,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "*http://localhost:8080/tfs/defaultcollection/2018Project/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
-               $Uri -like "*type=All*"
+               $Uri -like "*api-version=$(_getApiVersion Build)*"
             }
          }
 
@@ -69,8 +67,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/azd/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
-               $Uri -like "*type=All*"
+               $Uri -like "*api-version=$(_getApiVersion Build)*"
             }
          }
 
@@ -81,8 +78,7 @@ Describe 'VSTeamBuildDefinition' {
             ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
-               $Uri -like "*type=All*"
+               $Uri -like "*api-version=$(_getApiVersion Build)*"
             }
          }
 
@@ -93,28 +89,12 @@ Describe 'VSTeamBuildDefinition' {
             Mock Write-Warning
 
             ## Act
-            Get-VSTeamBuildDefinition -projectName vsts -type build
+            Get-VSTeamBuildDefinition -projectName vsts
 
             ## Assert
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
-               $Uri -like "*api-version=$(_getApiVersion Build)*" -and
-               $Uri -like "*type=build*"
-            }
-         }
-
-         It 'with type parameter "xaml" should return removal warning' {
-            ## Arrange
-            # This has not been supported since version 2.0 of the API which we 
-            # no longer support. https://github.com/DarqueWarrior/vsteam/issues/87
-            Mock Write-Warning
-   
-            ## Act
-            Get-VSTeamBuildDefinition -ProjectName vsts -Type xaml
-            
-            ## Assert
-            Should -Invoke Write-Warning -Exactly -Times 1 -Scope It -ParameterFilter {
-               $Message -eq "You specified -Type xaml. This parameters is ignored and will be removed in future"
+               $Uri -like "*api-version=$(_getApiVersion Build)*"
             }
          }
 
@@ -126,8 +106,7 @@ Describe 'VSTeamBuildDefinition' {
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
                $Uri -like "*api-version=$(_getApiVersion Build)*" -and
-               $Uri -like "*name=click*" -and
-               $Uri -like "*type=All*"
+               $Uri -like "*name=click*"
             }
          }
 
@@ -138,14 +117,13 @@ Describe 'VSTeamBuildDefinition' {
             Mock Write-Warning
             
             ## Act
-            Get-VSTeamBuildDefinition -projectName vsts -filter 'click*' -type build
+            Get-VSTeamBuildDefinition -projectName vsts -filter 'click*'
 
             ## Asset
             Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
                $Uri -like "*https://dev.azure.com/test/vsts/_apis/build/definitions*" -and
                $Uri -like "*api-version=$(_getApiVersion Build)*" -and
-               $Uri -like "*name=click*" -and
-               $Uri -like "*type=build*"
+               $Uri -like "*name=click*"
             }
          }
 
