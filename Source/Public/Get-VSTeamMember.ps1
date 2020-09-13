@@ -21,7 +21,7 @@ function Get-VSTeamMember {
       $resp = _callAPI -Resource "projects/$ProjectName/teams" `
          -Id "$TeamId/members" `
          -QueryString @{ '$top' = $top; '$skip' = $skip } `
-         -Version $(_getApiVersion Core) 
+         -Version $(_getApiVersion Core)
 
       # Apply a Type Name so we can use custom format view and custom type extensions
       foreach ($item in $resp.value) {

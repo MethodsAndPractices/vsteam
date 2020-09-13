@@ -12,13 +12,13 @@ function Add-VSTeamBuildTag {
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [string[]] $Tags,
-      
+
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]
       [int[]] $Id,
 
       [switch] $Force,
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]

@@ -41,7 +41,7 @@ function Add-VSTeamPullRequest {
 
    process {
       Write-Verbose "Add-VSTeamPullRequest"
-      
+
       $body = '{"sourceRefName": "' + $SourceRefName + '", "targetRefName": "' + $TargetRefName + '", "title": "' + $Title + '", "description": "' + $Description + '", "isDraft": ' + $Draft.ToString().ToLower() + '}'
 
       Write-Verbose $body

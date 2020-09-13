@@ -23,7 +23,7 @@ function Get-VSTeamBuildDefinition {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       if ($id) {
          foreach ($item in $id) {
@@ -40,7 +40,7 @@ function Get-VSTeamBuildDefinition {
             else {
                if (-not $raw.IsPresent) {
                   $item = [vsteam_lib.BuildDefinition]::new($resp, $ProjectName)
-                  
+
                   Write-Output $item
                }
                else {

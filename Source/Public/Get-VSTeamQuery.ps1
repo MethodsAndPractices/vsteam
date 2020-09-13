@@ -6,7 +6,7 @@ function Get-VSTeamQuery {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
 
-      [int] $Depth = 1, 
+      [int] $Depth = 1,
 
       [switch] $IncludeDeleted,
 
@@ -18,8 +18,8 @@ function Get-VSTeamQuery {
       $resp = _callAPI -ProjectName $projectName `
          -Area wit `
          -Resource queries `
-         -QueryString @{ 
-         '$depth'          = $Depth 
+         -QueryString @{
+         '$depth'          = $Depth
          '$expand'         = $Expand
          '$includeDeleted' = $IncludeDeleted.IsPresent
       } `

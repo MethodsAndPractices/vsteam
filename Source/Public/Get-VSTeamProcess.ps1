@@ -18,6 +18,7 @@
 
 function Get-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName = 'List')]
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
    param(
       [Parameter(ParameterSetName = 'ByName', Position = 0)]
       [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
@@ -30,7 +31,7 @@ function Get-VSTeamProcess {
    )
    process {
       $commonArgs = @{
-         # In later APIs you can get the process templates from the 'work' 
+         # In later APIs you can get the process templates from the 'work'
          # area. For older APIs the process templates are in the 'processes'
          # area. Default to the newer way of accessing process templates.
          # Get-VSTeamOption -area 'work' -resource 'processes' returns nothing

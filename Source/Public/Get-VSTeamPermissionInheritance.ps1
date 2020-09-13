@@ -61,7 +61,7 @@ function Get-VSTeamPermissionInheritance {
             -Body $body `
             -Version $version
 
-         Write-Verbose $($resp | ConvertTo-Json -Depth 99)         
+         Write-Verbose $($resp | ConvertTo-Json -Depth 99)
 
          Write-Output ($resp |
             Select-Object -ExpandProperty dataProviders |

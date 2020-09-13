@@ -13,103 +13,103 @@ function Get-VSTeamGitCommit {
       [Parameter(ParameterSetName = 'CompareVersion', HelpMessage = "FromDate, in UTC")]
       [Parameter(ParameterSetName = 'ItemPath', HelpMessage = "FromDate, in UTC")]
       [DateTime] $FromDate,
-      
+
       [Parameter(ParameterSetName = 'All', HelpMessage = "ToDate, in UTC")]
       [Parameter(ParameterSetName = 'ItemVersion', HelpMessage = "ToDate, in UTC")]
       [Parameter(ParameterSetName = 'CompareVersion', HelpMessage = "ToDate, in UTC")]
       [Parameter(ParameterSetName = 'ItemPath', HelpMessage = "ToDate, in UTC")]
       [DateTime] $ToDate,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion', Mandatory = $true)]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [ValidateSet('branch', 'commit', 'tag')]
       [string] $ItemVersionVersionType,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion', Mandatory = $true)]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [string] $ItemVersionVersion,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion', Mandatory = $false)]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [ValidateSet('firstParent', 'none', 'previousChange')]
       [string] $ItemVersionVersionOptions,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'CompareVersion', Mandatory = $true)]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [ValidateSet('branch', 'commit', 'tag')]
       [string] $CompareVersionVersionType,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'CompareVersion', Mandatory = $true)]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [string] $CompareVersionVersion,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'CompareVersion', Mandatory = $false)]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [ValidateSet('firstParent', 'none', 'previousChange')]
       [string] $CompareVersionVersionOptions,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [string] $FromCommitId,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [string] $ToCommitId,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [string] $Author,
-      
+
       [Parameter(ParameterSetName = "ByIds")]
       [string[]] $Id,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemPath', Mandatory = $true)]
       [string] $ItemPath,
-      
+
       [Parameter(ParameterSetName = 'ItemPath')]
       [switch] $ExcludeDeletes,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [int] $Top,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [int] $Skip,
-      
+
       [Parameter(ParameterSetName = 'ItemPath')]
       [ValidateSet('firstParent', 'fullHistory', 'fullHistorySimplifyMerges', 'simplifiedHistory')]
       [string] $HistoryMode,
-      
+
       [Parameter(ParameterSetName = 'All')]
       [Parameter(ParameterSetName = 'ItemVersion')]
       [Parameter(ParameterSetName = 'CompareVersion')]
       [Parameter(ParameterSetName = 'ItemPath')]
       [string] $User,
-      
+
       [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]

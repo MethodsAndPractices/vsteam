@@ -44,19 +44,19 @@ function Get-VSTeamTfvcBranch {
          foreach ($item in $resp.value) {
             _applyTypesToTfvcBranch -item $item
          }
-      
+
          Write-Output $resp.value
       }
-      else {         
+      else {
          foreach ($item in $Path) {
             $resp = _callAPI -Area "tfvc" `
                -Resource "branches" `
                -Id $item `
                -QueryString $queryString `
                -Version $(_getApiVersion Tfvc)
-            
+
             _applyTypesToTfvcBranch -item $resp
-            
+
             Write-Output $resp
          }
       }

@@ -12,7 +12,7 @@ function Add-VSTeamMembership {
    param(
       [Parameter(Mandatory = $true)]
       [string] $MemberDescriptor,
-      
+
       [Parameter(Mandatory = $true)]
       [string] $ContainerDescriptor
    )

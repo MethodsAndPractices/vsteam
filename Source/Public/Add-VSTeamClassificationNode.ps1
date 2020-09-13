@@ -20,14 +20,14 @@ function Add-VSTeamClassificationNode {
       [Parameter(Mandatory = $false)]
       [string] $Path = $null,
 
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
+      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]
       [Parameter(Mandatory = $false)]
       [datetime] $StartDate,
 
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]      
+      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]
       [Parameter(Mandatory = $false)]
       [datetime] $FinishDate,
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
@@ -65,7 +65,7 @@ function Add-VSTeamClassificationNode {
          -id $id `
          -body $bodyAsJson `
          -Version $(_getApiVersion Core)
-      
+
       $resp = [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
 
       Write-Output $resp

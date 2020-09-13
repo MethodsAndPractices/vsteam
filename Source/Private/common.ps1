@@ -158,12 +158,13 @@ function _testAdministrator {
 # built for the API call.
 function _getApiVersion {
    [CmdletBinding(DefaultParameterSetName = 'Service')]
+   [OutputType([string])]
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 
-         'DistributedTaskReleased', 'VariableGroups', 'Tfvc', 
-         'Packaging', 'MemberEntitlementManagement', 
-         'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask',
+         'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
+         'Packaging', 'MemberEntitlementManagement',
+         'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
          'TaskGroups', 'Policy', 'Processes')]
       [string] $Service,
 
@@ -186,7 +187,7 @@ function _getInstance {
 function _getDefaultTimeout {
    if ($Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]) {
       return $Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]
-   } 
+   }
    else {
       return 60
    }
@@ -212,11 +213,11 @@ function _buildRequestURI {
       [string]$version,
       [string]$subDomain,
       [object]$queryString,
-      
+
       [Parameter(Mandatory = $false)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       $ProjectName,
-      
+
       [switch]$UseProjectId,
       [switch]$NoProject
    )
@@ -474,7 +475,7 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   $arrSet = [vsteam_lib.ProjectCache]::GetCurrent($false)      
+   $arrSet = [vsteam_lib.ProjectCache]::GetCurrent($false)
 
    if ($arrSet) {
       Write-Verbose "arrSet = $arrSet"
@@ -850,6 +851,7 @@ function _getVSTeamIdFromDescriptor {
 
 function _getPermissionInheritanceInfo {
    [cmdletbinding()]
+   [OutputType([System.Collections.Hashtable])]
    param(
       [parameter(Mandatory = $true)]
       [string] $projectName,

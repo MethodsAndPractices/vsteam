@@ -9,7 +9,7 @@ function Remove-VSTeamProject {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $Name
    )
-   
+
    Process {
       # Bind the parameter to a friendly variable
       $ProjectName = $PSBoundParameters["Name"]

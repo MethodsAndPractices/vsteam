@@ -7,7 +7,7 @@ function _callMembershipAPI {
 
       [ValidateSet('GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS', 'PUT', 'DEFAULT', 'HEAD', 'MERGE', 'TRACE')]
       [string] $Method = 'GET',
-      
+
       [ValidateSet('', 'Up', 'Down')]
       [string] $Direction
    )

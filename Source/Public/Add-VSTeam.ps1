@@ -15,7 +15,7 @@ function Add-VSTeam {
       [string] $Name,
 
       [string] $Description = '',
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]

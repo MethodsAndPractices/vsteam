@@ -15,7 +15,7 @@ function Add-VSTeamArea {
 
       [Parameter(Mandatory = $false)]
       [string] $Path,
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
@@ -25,7 +25,7 @@ function Add-VSTeamArea {
       $resp = Add-VSTeamClassificationNode -ProjectName $ProjectName `
          -Name $Name `
          -StructureGroup areas `
-         -Path $Path 
+         -Path $Path
 
       Write-Output $resp
    }

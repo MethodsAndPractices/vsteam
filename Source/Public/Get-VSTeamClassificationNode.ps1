@@ -31,7 +31,7 @@ function Get-VSTeamClassificationNode {
       }
 
       $queryString = @{ }
-      
+
       if ($Depth) {
          $queryString.Add("`$Depth", $Depth)
       }
@@ -41,9 +41,9 @@ function Get-VSTeamClassificationNode {
       }
 
       $commonArgs = @{
-         ProjectName = $ProjectName 
-         Area        = 'wit' 
-         Resource    = "classificationnodes" 
+         ProjectName = $ProjectName
+         Area        = 'wit'
+         Resource    = "classificationnodes"
          id          = $idArg
          Version     = $(_getApiVersion Core)
       }
@@ -54,17 +54,17 @@ function Get-VSTeamClassificationNode {
       }
       else {
          # Call the REST API
-         $resp = _callAPI @commonArgs      
+         $resp = _callAPI @commonArgs
       }
 
       if ([bool]($resp.PSobject.Properties.name -match "value")) {
          try {
             $objs = @()
-   
+
             foreach ($item in $resp.value) {
                $objs += [vsteam_lib.ClassificationNode]::new($item, $ProjectName)
             }
-   
+
             Write-Output $objs
          }
          catch {

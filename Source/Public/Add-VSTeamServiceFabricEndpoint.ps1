@@ -13,7 +13,7 @@ function Add-VSTeamServiceFabricEndpoint {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]
       [string] $endpointName,
-        
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $url,
 
@@ -44,7 +44,7 @@ function Add-VSTeamServiceFabricEndpoint {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       switch ($PSCmdlet.ParameterSetName) {
          "Certificate" {

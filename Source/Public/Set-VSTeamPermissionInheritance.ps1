@@ -64,7 +64,7 @@ function Set-VSTeamPermissionInheritance {
             -resource HierarchyQuery `
             -id $projectID `
             -Body $body `
-            -Version $version 
+            -Version $version
       }
 
       Write-Verbose "Result: $(ConvertTo-Json -InputObject $resp -Depth 100)"

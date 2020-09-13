@@ -28,7 +28,7 @@ function Get-VSTeamTaskGroup {
       }
       else {
          $resp = _callAPI @commonArgs
-         
+
          if ($Name) {
             if ($resp.value) {
                foreach ($item in $resp.value) {

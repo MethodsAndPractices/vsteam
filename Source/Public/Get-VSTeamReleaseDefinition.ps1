@@ -50,11 +50,11 @@ function Get-VSTeamReleaseDefinition {
       }
       else {
          $listurl = _buildRequestURI @commonArgs
-         
+
          if ($expand -ne 'none') {
             $listurl += "&`$expand=$($expand)"
          }
-         
+
          # Call the REST API
          $resp = _callAPI -url $listurl
 
@@ -63,11 +63,11 @@ function Get-VSTeamReleaseDefinition {
          }
          else {
             $objs = @()
-            
+
             foreach ($item in $resp.value) {
                $objs += [vsteam_lib.ReleaseDefinition]::new($item, $ProjectName)
             }
-            
+
             Write-Output $objs
          }
       }

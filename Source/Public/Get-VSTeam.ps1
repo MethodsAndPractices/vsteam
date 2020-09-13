@@ -23,15 +23,15 @@ function Get-VSTeam {
 
    process {
       $commonArgs = @{
-         Area     = 'projects' 
+         Area     = 'projects'
          Resource = "$ProjectName/teams"
          Version  = $(_getApiVersion Core)
       }
-      
+
       if ($Id) {
          foreach ($item in $Id) {
             # Call the REST API
-            $resp = _callAPI @commonArgs -id $item               
+            $resp = _callAPI @commonArgs -id $item
 
             $team = [vsteam_lib.Team]::new($resp, $ProjectName)
 

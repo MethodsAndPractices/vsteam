@@ -20,7 +20,7 @@ function Update-VSTeamAgent {
                   -Resource messages `
                   -QueryString @{agentId = $item } `
                   -Version $(_getApiVersion DistributedTaskReleased) | Out-Null
-               
+
                Write-Output "Update agent $item"
             }
          }

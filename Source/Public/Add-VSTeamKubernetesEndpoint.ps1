@@ -15,27 +15,27 @@ function Add-VSTeamKubernetesEndpoint {
 
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $kubeconfig,
-        
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $kubernetesUrl,
-        
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $clientCertificateData,
-        
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $clientKeyData,
-        
+
       [switch] $acceptUntrustedCerts,
-        
+
       [switch] $generatePfx,
-        
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
-   process {        
+
+   process {
       # Process switch parameters
       $untrustedCerts = $false
       if ($acceptUntrustedCerts.IsPresent) {

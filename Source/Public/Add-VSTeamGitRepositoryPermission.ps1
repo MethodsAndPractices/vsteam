@@ -1,7 +1,7 @@
-# Add or update ACEs in the ACL for the provided token. The request body 
+# Add or update ACEs in the ACL for the provided token. The request body
 # contains the target token, a list of ACEs and a optional merge parameter.
 # In the case of a collision (by identity descriptor) with an existing ACE
-# in the ACL, the "merge" parameter determines the behavior. If set, the 
+# in the ACL, the "merge" parameter determines the behavior. If set, the
 # existing ACE has its allow and deny merged with the incoming ACE's allow
 # and deny. If unset, the existing ACE is displaced.
 #
@@ -104,14 +104,14 @@ function Add-VSTeamGitRepositoryPermission {
       if ($Group) {
          $Descriptor = _getDescriptorForACL -Group $Group
       }
- 
+
       # Resolve User to Descriptor
       if ($User) {
          $Descriptor = _getDescriptorForACL -User $User
       }
 
       $token = "repoV2/$($Project.ID)"
-      
+
       if ($RepositoryId) {
          $token += "/$($RepositoryId)"
       }

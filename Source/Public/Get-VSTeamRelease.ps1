@@ -39,7 +39,7 @@ function Get-VSTeamRelease {
       [string] $continuationToken,
 
       [switch] $JSON,
-      
+
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [switch] $raw,
 
@@ -56,7 +56,7 @@ function Get-VSTeamRelease {
          resource  = 'releases'
          version   = $(_getApiVersion Release)
       }
-      
+
       if ($id) {
          foreach ($item in $id) {
             $resp = _callAPI @commonArgs -ProjectName $ProjectName -id $item
@@ -101,7 +101,7 @@ function Get-VSTeamRelease {
          if ($JSON.IsPresent) {
             $resp | ConvertTo-Json -Depth 99
          }
-         else {         
+         else {
             $objs = @()
 
             foreach ($item in $resp.value) {

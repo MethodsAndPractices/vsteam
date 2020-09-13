@@ -12,16 +12,16 @@ function Add-VSTeamIteration {
    param(
       [Parameter(Mandatory = $true)]
       [string] $Name,
-   
+
       [Parameter(Mandatory = $false)]
       [string] $Path,
-  
+
       [Parameter(Mandatory = $false)]
       [datetime] $StartDate,
 
       [Parameter(Mandatory = $false)]
       [datetime] $FinishDate,
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]

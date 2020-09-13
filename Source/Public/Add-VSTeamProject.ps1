@@ -20,7 +20,7 @@ function Add-VSTeamProject {
       [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
       [string] $ProcessTemplate
    )
-   
+
    process {
       if ($TFVC.IsPresent) {
          $srcCtrl = "Tfvc"
@@ -39,15 +39,15 @@ function Add-VSTeamProject {
          $templateTypeId = '6b724908-ef14-45cf-84f8-768b5384da45'
       }
 
-      $body = @{ 
+      $body = @{
          name         = $ProjectName
          description  = $Description
          capabilities = @{
             versioncontrol  = @{
-               sourceControlType = $srcCtrl 
+               sourceControlType = $srcCtrl
             }
             processTemplate = @{
-               templateTypeId = $templateTypeId 
+               templateTypeId = $templateTypeId
             }
          }
       }

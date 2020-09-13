@@ -53,17 +53,17 @@ function Add-VSTeamBuild {
       }
       else {
          throw "'No build definition was given. Use Get-VSTeamBuildDefinition to get a list of builds"
-         return 
+         return
       }
-      
+
       if ($QueueName) {
          $queueId = (Get-VSTeamQueue -ProjectName "$ProjectName" -queueName "$QueueName").id
          if (-not $queueId) {
             throw "'$QueueName' is not a valid Queue. Use Get-VSTeamQueue to get a list of queues"
             return
          }
-         else { 
-            $body["queue"] = @{id = $queueId } 
+         else {
+            $body["queue"] = @{id = $queueId }
          }
       }
    }
@@ -75,7 +75,7 @@ function Add-VSTeamBuild {
       if ($BuildParameters) {
          $body.Add('parameters', ($BuildParameters | ConvertTo-Json -Compress))
       }
-      
+
       $resp = _callAPI -Method POST -ProjectName $ProjectName `
          -Area "build" `
          -Resource "builds" `

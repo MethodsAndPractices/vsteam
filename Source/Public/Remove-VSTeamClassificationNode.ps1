@@ -3,11 +3,11 @@ function Remove-VSTeamClassificationNode {
    param(
       [Parameter(Mandatory = $false)]
       [int] $ReClassifyId,
-    
+
       [ValidateSet("areas", "iterations")]
       [Parameter(Mandatory = $true)]
       [string] $StructureGroup,
-     
+
       [Parameter(Mandatory = $false)]
       [string] $Path,
 

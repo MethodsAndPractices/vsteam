@@ -13,34 +13,34 @@ function Add-VSTeamNuGetEndpoint {
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $EndpointName,
-      
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $NuGetUrl,
-      
+
       [Parameter(ParameterSetName = 'ClearToken', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [string] $PersonalAccessToken,
-      
+
       [Parameter(ParameterSetName = 'ClearApiKey', Mandatory = $true, HelpMessage = 'ApiKey')]
       [string] $ApiKey,
-      
+
       [Parameter(ParameterSetName = 'SecurePassword', Mandatory = $true, HelpMessage = 'Username')]
       [string] $Username,
-      
+
       [Parameter(ParameterSetName = 'SecureToken', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
-      
+
       [Parameter(ParameterSetName = 'SecureApiKey', Mandatory = $true, HelpMessage = 'ApiKey')]
       [securestring] $SecureApiKey,
-      
+
       [Parameter(ParameterSetName = 'SecurePassword', Mandatory = $true, HelpMessage = 'Password')]
       [securestring] $SecurePassword,
-        
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       if ($PersonalAccessToken) {
          $Authentication = 'Token'

@@ -15,7 +15,7 @@ function Remove-VSTeamBuildTag {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Remove-VSTeamBuildTag")) {

@@ -32,7 +32,7 @@ function Add-VSTeamWorkItem {
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
-      
+
       [Parameter(Mandatory = $true)]
       [vsteam_lib.WorkItemTypeValidateAttribute()]
       [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]

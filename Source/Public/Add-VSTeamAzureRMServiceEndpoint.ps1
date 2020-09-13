@@ -13,7 +13,7 @@ function Add-VSTeamAzureRMServiceEndpoint {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]
       [string] $subscriptionName,
-        
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $subscriptionId,
 

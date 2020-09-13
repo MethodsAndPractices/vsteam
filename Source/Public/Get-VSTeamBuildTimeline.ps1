@@ -16,7 +16,7 @@ function Get-VSTeamBuildTimeline {
       [string] $ProjectName
    )
 
-   Process {  
+   Process {
       foreach ($item in $Id) {
          # Build the url to return the single build
 
@@ -32,12 +32,12 @@ function Get-VSTeamBuildTimeline {
             -Version $([vsteam_lib.Versions]::Build) `
             -Querystring @{
             'changeId' = $ChangeId
-            'planId'   = $PlanId              
+            'planId'   = $PlanId
          }
 
          _applyTypesToBuildTimelineResultType -item $resp
 
          Write-Output $resp
-      }   
+      }
    }
 }

@@ -3,14 +3,14 @@ function Set-VSTeamAPIVersion {
    param(
       [parameter(ParameterSetName = 'Target', Mandatory = $false, Position = 0)]
       [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1',
-                   'TFS2017U2', 'TFS2017U3', 'TFS2018U1', 'TFS2018U2', 
+                   'TFS2017U2', 'TFS2017U3', 'TFS2018U1', 'TFS2018U2',
                    'TFS2018U3', 'AzD2019U1')]
       [string] $Target = 'TFS2017',
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask',
                    'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
-                   'Packaging', 'MemberEntitlementManagement', 
+                   'Packaging', 'MemberEntitlementManagement',
                    'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
                    'TaskGroups', 'Policy')]
       [string] $Service,
@@ -197,7 +197,7 @@ function Set-VSTeamAPIVersion {
    # new version. For example the calls for Service Endpoints
    # used to use DistributedTask until they were no longer the
    # same and the ServiceEndpoints version was added.
-   
+
    # Get-VSTeamOption -area 'git' -resource 'repositories'
    # Get-VSTeamOption -area 'git' -resource 'pullRequests'
    Write-Verbose "Git: $([vsteam_lib.Versions]::Git)"
@@ -229,7 +229,7 @@ function Set-VSTeamAPIVersion {
    # Get-VSTeamOption -area 'distributedtask' -resource 'messages'
    # Get-VSTeamOption -area 'distributedtask' -resource 'jobrequests'
    Write-Verbose "DistributedTask: $([vsteam_lib.Versions]::DistributedTaskReleased)"
-   
+
    # These are distributed task, resources that are in preview
    # Get-VSTeamOption -area 'distributedtask' -resource 'queues'
    # Get-VSTeamOption -area 'distributedtask' -resource 'serviceendpoints'
@@ -238,26 +238,26 @@ function Set-VSTeamAPIVersion {
 
    # Get-VSTeamOption -area 'distributedtask' -resource 'variablegroups'
    Write-Verbose "VariableGroups: $([vsteam_lib.Versions]::VariableGroups)"
-   
+
    # Get-VSTeamOption -area 'tfvc' -resource 'branches'
    Write-Verbose "Tfvc: $([vsteam_lib.Versions]::Tfvc)"
-   
+
    # Get-VSTeamOption -subDomain feeds -area 'Packaging' -resource 'Feeds'
    Write-Verbose "Packaging: $([vsteam_lib.Versions]::Packaging)"
-   
+
    # Get-VSTeamOption -area 'distributedtask' -resource 'taskgroups'
    Write-Verbose "TaskGroups: $([vsteam_lib.Versions]::TaskGroups)"
-   
+
    # Get-VSTeamOption -subDomain vsaex -area 'MemberEntitlementManagement' -resource 'UserEntitlements'
    Write-Verbose "MemberEntitlementManagement: $([vsteam_lib.Versions]::MemberEntitlementManagement)"
 
-   # Get-VSTeamOption -area 'distributedtask' -resource 'serviceendpoints'   
+   # Get-VSTeamOption -area 'distributedtask' -resource 'serviceendpoints'
    Write-Verbose "ServiceEndpoints: $([vsteam_lib.Versions]::ServiceEndpoints)"
 
    # Get-VSTeamOption -subDomain 'extmgmt' -area 'ExtensionManagement' -resource 'InstalledExtensions'
    # Get-VSTeamOption -subDomain 'extmgmt' -area 'ExtensionManagement' -resource 'InstalledExtensionsByName'
    Write-Verbose "ExtensionsManagement: $([vsteam_lib.Versions]::ExtensionsManagement)"
- 
+
    # Get-VSTeamOption -subDomain vssps -area 'Graph' -resource 'Users'
    # Get-VSTeamOption -subDomain vssps -area 'Graph' -resource 'Groups'
    # Get-VSTeamOption -subDomain vssps -area 'Graph' -resource 'Memberships'
@@ -266,7 +266,7 @@ function Set-VSTeamAPIVersion {
 
    # Get-VSTeamOption -area 'policy' -resource 'configurations'
    Write-Verbose "Policy: $([vsteam_lib.Versions]::Policy)"
-   
+
    # Get-VSTeamOption -area 'processes' -resource 'processes'
    Write-Verbose "Processes: $([vsteam_lib.Versions]::Processes)"
 }

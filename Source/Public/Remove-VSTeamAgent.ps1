@@ -20,7 +20,7 @@ function Remove-VSTeamAgent {
                   -Resource agents `
                   -Id $item `
                   -Version $(_getApiVersion DistributedTaskReleased) | Out-Null
-               
+
                Write-Output "Deleted agent $item"
             }
             catch {

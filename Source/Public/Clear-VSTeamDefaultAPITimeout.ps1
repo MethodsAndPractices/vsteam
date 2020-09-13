@@ -2,7 +2,7 @@ function Clear-VSTeamDefaultAPITimeout {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding()]
    param()
-   
+
    DynamicParam {
       # # Only add these options on Windows Machines
       if (_isOnWindows) {

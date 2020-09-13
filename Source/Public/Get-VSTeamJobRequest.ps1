@@ -7,7 +7,7 @@ function Get-VSTeamJobRequest {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true, Position = 1)]
       [Alias('ID')]
       [int] $AgentID,
-      
+
       [int] $completedRequestCount
    )
 
@@ -21,7 +21,7 @@ function Get-VSTeamJobRequest {
       }
       else {
          $body = @{agentid = $AgentID }
-      }      
+      }
 
       $resp = _callAPI -Area "distributedtask/pools/$PoolId" `
          -Resource jobrequests `

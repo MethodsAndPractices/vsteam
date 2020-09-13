@@ -8,7 +8,7 @@ function Get-VSTeamArea {
       [int[]] $Id,
 
       [int] $Depth,
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]

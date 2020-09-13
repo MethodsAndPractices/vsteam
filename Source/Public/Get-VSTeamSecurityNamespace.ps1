@@ -22,7 +22,7 @@ function Get-VSTeamSecurityNamespace {
 
       if ($Id) {
          # Call the REST API
-         $resp = _callAPI @commonArgs -id $Id      
+         $resp = _callAPI @commonArgs -id $Id
       }
       else {
          $queryString = @{ }
@@ -44,10 +44,10 @@ function Get-VSTeamSecurityNamespace {
          if ($Name) {
             $selected = $resp.value | Where-Object { $_.name -eq $Name }
             if ($selected) {
-               return [vsteam_lib.SecurityNamespace]::new($selected)
+               Write-Output [vsteam_lib.SecurityNamespace]::new($selected)
             }
             else {
-               return $null
+               Write-Output $null
             }
          }
 

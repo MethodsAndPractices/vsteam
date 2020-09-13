@@ -3,7 +3,7 @@ function Get-VSTeamServiceEndpoint {
    param(
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $id,
-      
+
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
@@ -16,7 +16,7 @@ function Get-VSTeamServiceEndpoint {
             -Area 'distributedtask' `
             -Resource 'serviceendpoints' `
             -Id $id `
-            -Version $(_getApiVersion ServiceEndpoints) 
+            -Version $(_getApiVersion ServiceEndpoints)
 
          _applyTypesToServiceEndpoint -item $resp
 

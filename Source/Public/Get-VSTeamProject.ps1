@@ -14,7 +14,7 @@ function Get-VSTeamProject {
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id,
-      
+
       [switch] $IncludeCapabilities,
 
       [Parameter(ParameterSetName = 'ByName', Mandatory = $true, Position = 0)]
@@ -65,11 +65,11 @@ function Get-VSTeamProject {
             }
 
             $objs = @()
-            
+
             foreach ($item in $resp.value) {
                $objs += [vsteam_lib.Project]::new($item)
             }
-            
+
             Write-Output $objs
          }
          catch {

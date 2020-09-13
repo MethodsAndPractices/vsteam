@@ -12,7 +12,7 @@ function Remove-VSTeam {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API

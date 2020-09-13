@@ -14,7 +14,7 @@ function Get-VSTeamDescriptor {
          -Area graph `
          -Resource descriptors `
          -id $StorageKey `
-         -Version $(_getApiVersion Graph)         
+         -Version $(_getApiVersion Graph)
 
       # Storing the object before you return it cleaned up the pipeline.
       # When I just write the object from the constructor each property
