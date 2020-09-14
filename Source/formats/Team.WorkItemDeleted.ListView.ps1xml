@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.WorkItemDeleted.ListView</Name>
+         <Name>vsteam_lib.WorkItemDeleted.ListView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.WorkItemDeleted</TypeName>
+            <TypeName>vsteam_lib.WorkItemDeleted</TypeName>
          </ViewSelectedBy>
          <ListControl>
             <ListEntries>

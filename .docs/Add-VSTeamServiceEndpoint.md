@@ -50,7 +50,7 @@ Position: 3
 
 ## OUTPUTS
 
-### Team.ServiceEndpoint
+### vsteam_lib.ServiceEndpoint
 
 ## NOTES
 

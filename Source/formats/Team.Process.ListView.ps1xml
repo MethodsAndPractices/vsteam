@@ -2,10 +2,10 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Process.ListView</Name>
+			<Name>vsteam_lib.Process.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Process</TypeName>
-				<TypeName>Team.Provider.Process</TypeName>
+				<TypeName>vsteam_lib.Process</TypeName>
+				<TypeName>vsteam_lib.Provider.Process</TypeName>
 				<TypeName>vsteam_lib.Process</TypeName>
 			</ViewSelectedBy>
 			<ListControl>

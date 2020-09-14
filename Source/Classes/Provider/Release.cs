@@ -64,7 +64,7 @@ namespace vsteam_lib
          this.PowerShell.Commands.Clear();
 
          // We have to call this again because the amount of data you get back when you pass in the
-         // Id must greater than when you don't. 
+         // Id must greater than when you don't.
          var children = this.PowerShell.AddCommand(this.Command)
                                        .AddParameter("ProjectName", this.ProjectName)
                                        .AddParameter("id", this.Id)
@@ -76,7 +76,7 @@ namespace vsteam_lib
          PowerShellWrapper.LogPowerShellError(this.PowerShell, children);
 
          // This applies types to select correct formatter.
-         return children.AddTypeName("Team.Provider.Environment");
+         return children.AddTypeName("vsteam_lib.Provider.Environment");
       }
    }
 }

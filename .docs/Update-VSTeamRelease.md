@@ -69,7 +69,7 @@ Required: True
 
 ## OUTPUTS
 
-### Team.Release
+### vsteam_lib.Release
 
 ## NOTES
 

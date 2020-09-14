@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.UserEntitlement.ListView</Name>
+			<Name>vsteam_lib.UserEntitlement.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.UserEntitlement</TypeName>
+				<TypeName>vsteam_lib.UserEntitlement</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

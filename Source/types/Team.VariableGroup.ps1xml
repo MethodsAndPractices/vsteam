@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.VariableGroup</Name>
+      <Name>vsteam_lib.VariableGroup</Name>
       <Members>
          <ScriptProperty>
             <Name>createdByUser</Name>
@@ -12,5 +12,5 @@
             <GetScriptBlock>$this.modifiedBy.displayName</GetScriptBlock>
          </ScriptProperty>
       </Members>
-   </Type> 
+   </Type>
 </Types>

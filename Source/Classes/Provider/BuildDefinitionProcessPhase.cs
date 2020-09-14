@@ -35,10 +35,10 @@ namespace vsteam_lib
 
       protected override object[] GetChildren()
       {
-         // Wrap in a PSObject so a type can be applied so the correct 
+         // Wrap in a PSObject so a type can be applied so the correct
          // formatter is selected
          var items = this.Steps.Select(p => PSObject.AsPSObject(p)).ToArray();
-         Array.ForEach(items, i => i.AddTypeName("Team.Provider.BuildDefinitionProcessPhaseStep"));
+         Array.ForEach(items, i => i.AddTypeName("vsteam_lib.Provider.BuildDefinitionProcessPhaseStep"));
          return items;
       }
    }

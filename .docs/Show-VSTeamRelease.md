@@ -40,7 +40,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### Team.Release
+### vsteam_lib.Release
 
 ## NOTES
 

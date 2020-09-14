@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.Approval.Pending.TableView</Name>
+         <Name>vsteam_lib.Approval.Pending.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.Approval</TypeName>
+            <TypeName>vsteam_lib.Approval</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>

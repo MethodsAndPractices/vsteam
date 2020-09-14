@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.BuildTimeline.ListView</Name>
+			<Name>vsteam_lib.BuildTimeline.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.BuildTimeline</TypeName>
+				<TypeName>vsteam_lib.BuildTimeline</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>
@@ -21,7 +21,7 @@
 							</ListItem>
 							<ListItem>
 								<PropertyName>records</PropertyName>
-							</ListItem>                    
+							</ListItem>
 						</ListItems>
 					</ListEntry>
 				</ListEntries>

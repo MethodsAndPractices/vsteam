@@ -2,7 +2,7 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Repository.TableView</Name>
+			<Name>vsteam_lib.Repository.TableView</Name>
 			<ViewSelectedBy>
 				<TypeName>vsteam_lib.GitRepository</TypeName>
 			</ViewSelectedBy>

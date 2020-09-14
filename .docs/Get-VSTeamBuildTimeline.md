@@ -91,7 +91,7 @@ Parameter Sets: ByID
 
 ## OUTPUTS
 
-### Team.Build
+### vsteam_lib.Build
 
 ## NOTES
 

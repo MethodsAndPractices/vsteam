@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.BuildDefinitionProcessPhaseStep.TableView</Name>
+			<Name>vsteam_lib.Provider.BuildDefinitionProcessPhaseStep.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.BuildDefinitionProcessPhaseStep</TypeName>
+				<TypeName>vsteam_lib.Provider.BuildDefinitionProcessPhaseStep</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

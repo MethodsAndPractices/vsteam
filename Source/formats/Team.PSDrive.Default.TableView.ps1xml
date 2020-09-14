@@ -2,26 +2,26 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.PSDrive.Default.TableView</Name>
+         <Name>vsteam_lib.PSDrive.Default.TableView</Name>
          <ViewSelectedBy>
             <TypeName>Microsoft.PowerShell.SHiPS.SHiPSLeaf</TypeName>
             <TypeName>Microsoft.PowerShell.SHiPS.SHiPSDirectory</TypeName>
             <TypeName>vsteam_lib.Provider.Directory</TypeName>
-            <TypeName>Team.Queues</TypeName>
-            <TypeName>Team.Provider.Queue</TypeName>
-            <TypeName>Team.Provider.Pool</TypeName>
-            <TypeName>Team.Provider.Pools</TypeName>
-            <TypeName>Team.Builds</TypeName>
+            <TypeName>vsteam_lib.Queues</TypeName>
+            <TypeName>vsteam_lib.Provider.Queue</TypeName>
+            <TypeName>vsteam_lib.Provider.Pool</TypeName>
+            <TypeName>vsteam_lib.Provider.Pools</TypeName>
+            <TypeName>vsteam_lib.Builds</TypeName>
             <TypeName>vsteam_lib.Provider.BuildDefinitions</TypeName>
-            <TypeName>Team.Releases</TypeName>
-            <TypeName>Team.ReleaseDefinitions</TypeName>
-            <TypeName>Team.Repositories</TypeName>
-            <TypeName>Team.Teams</TypeName>
-            <TypeName>Team.Permissions</TypeName>
-            <TypeName>Team.Groups</TypeName>
-            <TypeName>Team.Users</TypeName>
-            <TypeName>Team.Provider.Group</TypeName>
-            <TypeName>Team.Provider.User</TypeName>
+            <TypeName>vsteam_lib.Releases</TypeName>
+            <TypeName>vsteam_lib.ReleaseDefinitions</TypeName>
+            <TypeName>vsteam_lib.Repositories</TypeName>
+            <TypeName>vsteam_lib.Teams</TypeName>
+            <TypeName>vsteam_lib.Permissions</TypeName>
+            <TypeName>vsteam_lib.Groups</TypeName>
+            <TypeName>vsteam_lib.Users</TypeName>
+            <TypeName>vsteam_lib.Provider.Group</TypeName>
+            <TypeName>vsteam_lib.Provider.User</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize />

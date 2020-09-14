@@ -118,7 +118,7 @@ Parameter Sets: Draft
 
 ## OUTPUTS
 
-### Team.PullRequest
+### vsteam_lib.PullRequest
 
 ## NOTES
 

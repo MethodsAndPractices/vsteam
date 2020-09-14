@@ -95,7 +95,7 @@ Type: Switch
 
 ## OUTPUTS
 
-### Team.PullRequest
+### vsteam_lib.PullRequest
 
 ## NOTES
 

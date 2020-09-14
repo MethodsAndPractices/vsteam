@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Profile.TableView</Name>
+			<Name>vsteam_lib.Profile.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Profile</TypeName>
+				<TypeName>vsteam_lib.Profile</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

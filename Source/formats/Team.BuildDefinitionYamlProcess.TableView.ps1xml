@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.BuildDefinitionYamlProcess.TableView</Name>
+			<Name>vsteam_lib.BuildDefinitionYamlProcess.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.BuildDefinitionYamlProcess</TypeName>
+				<TypeName>vsteam_lib.BuildDefinitionYamlProcess</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

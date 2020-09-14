@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.VariableGroup.TableView</Name>
+			<Name>vsteam_lib.VariableGroup.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.VariableGroup</TypeName>
+				<TypeName>vsteam_lib.VariableGroup</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

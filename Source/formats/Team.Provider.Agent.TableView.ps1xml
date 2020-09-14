@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.Agent.TableView</Name>
+			<Name>vsteam_lib.Provider.Agent.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.Agent</TypeName>
+				<TypeName>vsteam_lib.Provider.Agent</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

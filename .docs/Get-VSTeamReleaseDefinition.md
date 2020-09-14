@@ -99,7 +99,7 @@ Parameter Sets: ByIDRaw
 
 ## OUTPUTS
 
-### Team.ReleaseDefinition
+### vsteam_lib.ReleaseDefinition
 
 ## NOTES
 

@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Build.Artifact.ListView</Name>
+			<Name>vsteam_lib.Build.Artifact.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Build.Artifact</TypeName>
+				<TypeName>vsteam_lib.Build.Artifact</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

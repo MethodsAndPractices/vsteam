@@ -30,7 +30,7 @@ This command gets a list of all Azure subscriptions associated with the Team Ser
 
 ## OUTPUTS
 
-### Team.AzureSubscription
+### vsteam_lib.AzureSubscription
 
 ## NOTES
 

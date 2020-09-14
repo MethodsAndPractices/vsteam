@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.Feed.TableView</Name>
+			<Name>vsteam_lib.Provider.Feed.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.Feed</TypeName>
+				<TypeName>vsteam_lib.Provider.Feed</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

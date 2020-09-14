@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.Build</Name>
+      <Name>vsteam_lib.Build</Name>
       <Members>
          <AliasProperty>
             <Name>name</Name>

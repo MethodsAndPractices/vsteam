@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.ServiceEndpoint.ListView</Name>
+			<Name>vsteam_lib.ServiceEndpoint.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.ServiceEndpoint</TypeName>
+				<TypeName>vsteam_lib.ServiceEndpoint</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

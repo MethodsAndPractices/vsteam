@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.ResourceArea.TableView</Name>
+			<Name>vsteam_lib.ResourceArea.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.ResourceArea</TypeName>
+				<TypeName>vsteam_lib.ResourceArea</TypeName>
 				<TypeName>VSTeamResourceArea</TypeName>
 			</ViewSelectedBy>
 			<TableControl>

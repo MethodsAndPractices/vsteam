@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.Provider.JobRequest.TableView</Name>
+         <Name>vsteam_lib.Provider.JobRequest.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.Provider.JobRequest</TypeName>
+            <TypeName>vsteam_lib.Provider.JobRequest</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize />

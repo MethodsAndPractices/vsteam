@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.Release.TableView</Name>
+			<Name>vsteam_lib.Provider.Release.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.Release</TypeName>
+				<TypeName>vsteam_lib.Provider.Release</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

@@ -77,7 +77,7 @@ PipelineId
 
 ## OUTPUTS
 
-### Team.YamlPipelineResult
+### vsteam_lib.YamlPipelineResult
 
 ## NOTES
 

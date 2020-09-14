@@ -27,7 +27,7 @@ namespace vsteam_lib.Provider
       public string DisplayMode { get; set; } = "d-----";
 
       /// <summary>
-      /// The name of the command to execute to get the list of 
+      /// The name of the command to execute to get the list of
       /// child items.
       /// </summary>
       public string Command => ("Team" == this._typeName) ? "Get-VSTeam" : $"Get-VSTeam{this._typeName}";
@@ -38,7 +38,7 @@ namespace vsteam_lib.Provider
       /// </summary>
       public string TypeName
       {
-         get => $"Team.Provider.{this._typeName}";
+         get => $"vsteam_lib.Provider.{this._typeName}";
          set => this._typeName = value;
       }
 

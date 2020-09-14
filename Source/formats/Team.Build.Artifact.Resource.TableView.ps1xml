@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Build.Artifact.Resource.TableView</Name>
+			<Name>vsteam_lib.Build.Artifact.Resource.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Build.Artifact.Resource</TypeName>
+				<TypeName>vsteam_lib.Build.Artifact.Resource</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

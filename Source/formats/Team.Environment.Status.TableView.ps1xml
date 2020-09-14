@@ -2,11 +2,11 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Environment.Status.TableView</Name>
+			<Name>vsteam_lib.Environment.Status.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.Environment</TypeName>
-				<TypeName>Team.Provider.Attempt</TypeName>
-				<TypeName>Team.Provider.Task</TypeName>
+				<TypeName>vsteam_lib.Provider.Environment</TypeName>
+				<TypeName>vsteam_lib.Provider.Attempt</TypeName>
+				<TypeName>vsteam_lib.Provider.Task</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

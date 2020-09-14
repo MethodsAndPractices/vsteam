@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.WorkItem.TableView</Name>
+         <Name>vsteam_lib.WorkItem.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.WorkItem</TypeName>
+            <TypeName>vsteam_lib.WorkItem</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>
@@ -13,10 +13,10 @@
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Title</Label>
-               </TableColumnHeader>      
+               </TableColumnHeader>
                <TableColumnHeader>
                   <Label>State</Label>
-               </TableColumnHeader>             
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>

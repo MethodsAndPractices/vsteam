@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.YamlPipelineResult.TableView</Name>
+         <Name>vsteam_lib.YamlPipelineResult.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.YamlPipelineResult</TypeName>
+            <TypeName>vsteam_lib.YamlPipelineResult</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>

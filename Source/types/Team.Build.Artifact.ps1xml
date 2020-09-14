@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Types>   
+<Types>
    <Type>
-      <Name>Team.Build.Artifact</Name>
+      <Name>vsteam_lib.Build.Artifact</Name>
       <Members>
          <ScriptProperty>
             <Name>type</Name>

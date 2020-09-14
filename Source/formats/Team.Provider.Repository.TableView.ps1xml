@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.Repository.TableView</Name>
+			<Name>vsteam_lib.Provider.Repository.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.GitRepository</TypeName>
+				<TypeName>vsteam_lib.Provider.GitRepository</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

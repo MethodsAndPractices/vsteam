@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.GitRepository</Name>
+      <Name>vsteam_lib.GitRepository</Name>
       <Members>
          <ScriptProperty>
             <Name>projectName</Name>

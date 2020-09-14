@@ -2,12 +2,12 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Option.TableView</Name>
+			<Name>vsteam_lib.Option.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Option</TypeName>
+				<TypeName>vsteam_lib.Option</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
-				<TableHeaders>					
+				<TableHeaders>
 					<TableColumnHeader>
 						<Label>Area</Label>
 					</TableColumnHeader>

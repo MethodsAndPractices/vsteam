@@ -4,7 +4,7 @@
       <View>
          <Name>Versions</Name>
          <ViewSelectedBy>
-            <TypeName>Team.Option</TypeName>
+            <TypeName>vsteam_lib.Option</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.User2</Name>
+      <Name>vsteam_lib.User2</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>

@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.PolicyType.TableView</Name>
+			<Name>vsteam_lib.PolicyType.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.PolicyType</TypeName>
+				<TypeName>vsteam_lib.PolicyType</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

@@ -18,7 +18,7 @@ When using with AzD "IncludeMyGroupApprovals" will be added to the request when 
 
 When using with TFS "IncludeMyGroupApprovals" will be added to the request when Assigned To Filter, Release Id Filter are not empty and Status Filter equals Pending.
 
-The Team.Approval type has three custom table formats:
+The vsteam_lib.Approval type has three custom table formats:
 
 - Pending: ID, Status, Release Name, Environment, Type, Approver Name, Release Definitions
 - Approved: Release Name, Environment, Is Automated, Approval Type, Approver Name, Release Definitions, Comments
@@ -87,7 +87,7 @@ Type: String
 
 ## OUTPUTS
 
-### Team.BuildDefinition
+### vsteam_lib.BuildDefinition
 
 ## NOTES
 

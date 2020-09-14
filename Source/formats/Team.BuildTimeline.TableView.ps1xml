@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.BuildTimeline.TableView</Name>
+			<Name>vsteam_lib.BuildTimeline.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.BuildTimeline</TypeName>
+				<TypeName>vsteam_lib.BuildTimeline</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

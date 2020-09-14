@@ -130,7 +130,7 @@ Build Parameters
 
 ## OUTPUTS
 
-### Team.Build
+### vsteam_lib.Build
 
 ## NOTES
 

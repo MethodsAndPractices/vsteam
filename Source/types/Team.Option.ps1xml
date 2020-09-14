@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.Option</Name>
+      <Name>vsteam_lib.Option</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>

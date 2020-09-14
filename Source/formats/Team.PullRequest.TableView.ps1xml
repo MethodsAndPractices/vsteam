@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.PullRequest.TableView</Name>
+			<Name>vsteam_lib.PullRequest.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.PullRequest</TypeName>
+				<TypeName>vsteam_lib.PullRequest</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

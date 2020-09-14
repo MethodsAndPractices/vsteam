@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Build.Artifact.Resource.ListView</Name>
+			<Name>vsteam_lib.Build.Artifact.Resource.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Build.Artifact.Resource</TypeName>
+				<TypeName>vsteam_lib.Build.Artifact.Resource</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.BuildDefinitionPhasedProcess.TableView</Name>
+			<Name>vsteam_lib.BuildDefinitionPhasedProcess.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.BuildDefinitionPhasedProcess</TypeName>
+				<TypeName>vsteam_lib.BuildDefinitionPhasedProcess</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

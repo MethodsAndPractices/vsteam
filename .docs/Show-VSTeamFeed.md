@@ -40,7 +40,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### Team.Feed
+### vsteam_lib.Feed
 
 ## NOTES
 

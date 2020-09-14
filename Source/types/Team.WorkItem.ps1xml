@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.WorkItem</Name>
+      <Name>vsteam_lib.WorkItem</Name>
       <Members>
          <ScriptProperty>
             <Name>Title</Name>
@@ -28,7 +28,7 @@
             <GetScriptBlock>$this.fields.PSObject.Properties['System.AssignedTo'].Value</GetScriptBlock>
          </ScriptProperty>
          <ScriptProperty>
-            <Name>TeamProject</Name>
+            <Name>vsteam_lib.roject</Name>
             <GetScriptBlock>$this.fields.PSObject.Properties['System.TeamProject'].Value</GetScriptBlock>
          </ScriptProperty>
          <ScriptProperty>

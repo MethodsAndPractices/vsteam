@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.ServiceEndpointType.TableView</Name>
+			<Name>vsteam_lib.ServiceEndpointType.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.ServiceEndpointType</TypeName>
+				<TypeName>vsteam_lib.ServiceEndpointType</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

@@ -146,7 +146,7 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### Team.ServiceEndpoint
+### vsteam_lib.ServiceEndpoint
 
 ## NOTES
 

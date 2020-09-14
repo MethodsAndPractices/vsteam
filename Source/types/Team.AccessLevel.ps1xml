@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.AccessLevel</Name>
+      <Name>vsteam_lib.AccessLevel</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>

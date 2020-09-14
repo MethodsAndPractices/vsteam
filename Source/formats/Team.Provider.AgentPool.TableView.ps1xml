@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.AgentPool.TableView</Name>
+			<Name>vsteam_lib.Provider.AgentPool.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.AgentPool</TypeName>
+				<TypeName>vsteam_lib.Provider.AgentPool</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

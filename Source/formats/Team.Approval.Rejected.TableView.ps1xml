@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.Approval.Rejected.TableView</Name>
+         <Name>vsteam_lib.Approval.Rejected.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.Approval</TypeName>
+            <TypeName>vsteam_lib.Approval</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>

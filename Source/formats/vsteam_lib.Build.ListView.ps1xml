@@ -4,7 +4,7 @@
 		<View>
 			<Name>vsteam_lib.Build.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.Build</TypeName>
+				<TypeName>vsteam_lib.Provider.Build</TypeName>
 				<TypeName>vsteam_lib.Build</TypeName>
 			</ViewSelectedBy>
 			<ListControl>

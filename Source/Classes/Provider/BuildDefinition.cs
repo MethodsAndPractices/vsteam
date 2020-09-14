@@ -76,23 +76,23 @@ namespace vsteam_lib
 
       protected override object[] GetChildren()
       {
-         // Wrap in a PSObject so a type can be applied so the correct 
+         // Wrap in a PSObject so a type can be applied so the correct
          // formatter is selected
          if (this.Steps != null)
          {
-            return this.Steps.AddTypeName("Team.Provider.BuildDefinitionProcessPhaseStep");
+            return this.Steps.AddTypeName("vsteam_lib.Provider.BuildDefinitionProcessPhaseStep");
          }
 
          if (this.Process.Type == 1)
          {
-            return this.Process.Phases.AddTypeName("Team.Provider.BuildDefinitionProcessPhase");
+            return this.Process.Phases.AddTypeName("vsteam_lib.Provider.BuildDefinitionProcessPhase");
          }
 
          var process = PSObject.AsPSObject(this.Process);
 
          if (this.Process.Type == 2)
          {
-            process.AddTypeName("Team.Provider.BuildDefinitionYamlProcess");
+            process.AddTypeName("vsteam_lib.Provider.BuildDefinitionYamlProcess");
          }
 
          return new object[] { process };

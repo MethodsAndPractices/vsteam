@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.Extension.TableView</Name>
+			<Name>vsteam_lib.Provider.Extension.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.Extension</TypeName>
+				<TypeName>vsteam_lib.Provider.Extension</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

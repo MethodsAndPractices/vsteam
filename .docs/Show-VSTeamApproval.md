@@ -42,7 +42,7 @@ Accept pipeline input: true (ByPropertyName, ByValue)
 
 ## OUTPUTS
 
-### Team.BuildDefinition
+### vsteam_lib.BuildDefinition
 
 ## NOTES
 

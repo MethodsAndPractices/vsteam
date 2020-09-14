@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.Provider.ReleaseDefinition.TableView</Name>
+         <Name>vsteam_lib.Provider.ReleaseDefinition.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.Provider.ReleaseDefinition</TypeName>
+            <TypeName>vsteam_lib.Provider.ReleaseDefinition</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize />

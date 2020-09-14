@@ -16,7 +16,7 @@ REMAINS WITH THE USER.
 ******************************************************************** -->
 <Types>
    <Type>
-      <Name>Team.PullRequest</Name>
+      <Name>vsteam_lib.PullRequest</Name>
       <Members>
          <ScriptProperty>
             <Name>repositoryName</Name>

@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.WorkItemDeleted.TableView</Name>
+         <Name>vsteam_lib.WorkItemDeleted.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.WorkItemDeleted</TypeName>
+            <TypeName>vsteam_lib.WorkItemDeleted</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>
@@ -13,16 +13,16 @@
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Name</Label>
-               </TableColumnHeader>      
+               </TableColumnHeader>
                <TableColumnHeader>
                   <Label>DeletedBy</Label>
-               </TableColumnHeader> 
+               </TableColumnHeader>
                <TableColumnHeader>
                   <Label>DeletedDate</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Code</Label>
-               </TableColumnHeader>            
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>

@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Query.TableView</Name>
+			<Name>vsteam_lib.Query.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Query</TypeName>
+				<TypeName>vsteam_lib.Query</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>

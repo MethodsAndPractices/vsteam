@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.WorkItem.ListView</Name>
+         <Name>vsteam_lib.WorkItem.ListView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.WorkItem</TypeName>
+            <TypeName>vsteam_lib.WorkItem</TypeName>
          </ViewSelectedBy>
          <ListControl>
             <ListEntries>

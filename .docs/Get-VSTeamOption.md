@@ -12,7 +12,7 @@
 
 <!-- #include "./synopsis/Get-VSTeamOption.md" -->
 
-There are two table formats defined for the Team.Option type, Default and Versions.
+There are two table formats defined for the vsteam_lib.Option type, Default and Versions.
 
 Default view contains Name, Area, Max Version and URI Template.
 

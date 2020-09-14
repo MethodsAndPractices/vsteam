@@ -63,7 +63,7 @@ Accept pipeline input: false
 
 ## OUTPUTS
 
-### Team.Query
+### vsteam_lib.Query
 
 ## NOTES
 

@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.AccessControlEntry.ListView</Name>
+         <Name>vsteam_lib.AccessControlEntry.ListView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.AccessControlEntry</TypeName>
+            <TypeName>vsteam_lib.AccessControlEntry</TypeName>
          </ViewSelectedBy>
          <ListControl>
             <ListEntries>

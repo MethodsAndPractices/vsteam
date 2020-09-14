@@ -2,14 +2,14 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.PSDrive.Default.ListView</Name>
+			<Name>vsteam_lib.PSDrive.Default.ListView</Name>
 			<ViewSelectedBy>
 				<TypeName>vsteam_lib.AgentPool</TypeName>
 				<TypeName>vsteam_lib.Queue</TypeName>
-				<TypeName>Team.Builds</TypeName>
-				<TypeName>Team.Releases</TypeName>
-				<TypeName>Team.Repositories</TypeName>
-				<TypeName>Team.Teams</TypeName>
+				<TypeName>vsteam_lib.Builds</TypeName>
+				<TypeName>vsteam_lib.Releases</TypeName>
+				<TypeName>vsteam_lib.Repositories</TypeName>
+				<TypeName>vsteam_lib.Teams</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

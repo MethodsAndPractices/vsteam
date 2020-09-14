@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.VariableGroup.ListView</Name>
+			<Name>vsteam_lib.VariableGroup.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.VariableGroup</TypeName>
+				<TypeName>vsteam_lib.VariableGroup</TypeName>
 			</ViewSelectedBy>
 			<ListControl>
 				<ListEntries>

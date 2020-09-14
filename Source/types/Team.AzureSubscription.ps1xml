@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.AzureSubscription</Name>
+      <Name>vsteam_lib.AzureSubscription</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -17,5 +17,5 @@
             </Members>
          </MemberSet>
       </Members>
-   </Type>  
+   </Type>
 </Types>

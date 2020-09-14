@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.AzureSubscription.TableView</Name>
+         <Name>vsteam_lib.AzureSubscription.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.AzureSubscription</TypeName>
+            <TypeName>vsteam_lib.AzureSubscription</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>
@@ -26,10 +26,10 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>subscriptionId</PropertyName>
-                     </TableColumnItem>  
+                     </TableColumnItem>
                       <TableColumnItem>
                         <PropertyName>subscriptionTenantId</PropertyName>
-                     </TableColumnItem>  
+                     </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>
             </TableRowEntries>

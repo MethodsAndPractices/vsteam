@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Repository.ListView</Name>
+			<Name>vsteam_lib.Repository.ListView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.GitRepository</TypeName>
+				<TypeName>vsteam_lib.Provider.GitRepository</TypeName>
 				<TypeName>vsteam_lib.GitRepository</TypeName>
 			</ViewSelectedBy>
 			<ListControl>

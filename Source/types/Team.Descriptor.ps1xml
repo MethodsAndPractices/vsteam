@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.Descriptor</Name>
+      <Name>vsteam_lib.Descriptor</Name>
       <Members>
          <MemberSet>
             <Name>PSStandardMembers</Name>

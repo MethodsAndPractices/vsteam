@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.BuildTimelineRecord</Name>
+      <Name>vsteam_lib.BuildTimelineRecord</Name>
       <Members>
          <ScriptProperty>
             <Name>LastModified</Name>
@@ -22,7 +22,7 @@
                      <Name>ErrorCount</Name>
                      <Name>WarningCount</Name>
                   </ReferencedProperties>
-               </PropertySet>               
+               </PropertySet>
             </Members>
          </MemberSet>
       </Members>

@@ -188,7 +188,7 @@ Parameter Sets: ByIDRaw
 
 ## OUTPUTS
 
-### Team.Build
+### vsteam_lib.Build
 
 ## NOTES
 

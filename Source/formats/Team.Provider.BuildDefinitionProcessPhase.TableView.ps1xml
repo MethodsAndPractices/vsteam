@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Provider.BuildDefinitionProcessPhase.TableView</Name>
+			<Name>vsteam_lib.Provider.BuildDefinitionProcessPhase.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Provider.BuildDefinitionProcessPhase</TypeName>
+				<TypeName>vsteam_lib.Provider.BuildDefinitionProcessPhase</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<AutoSize />

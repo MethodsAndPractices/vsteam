@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.AccessControlEntry.TableView</Name>
+         <Name>vsteam_lib.AccessControlEntry.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.AccessControlEntry</TypeName>
+            <TypeName>vsteam_lib.AccessControlEntry</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>
@@ -26,10 +26,10 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Allow</PropertyName>
-                     </TableColumnItem>  
+                     </TableColumnItem>
                       <TableColumnItem>
                         <PropertyName>Deny</PropertyName>
-                     </TableColumnItem>  
+                     </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>
             </TableRowEntries>
