@@ -21,7 +21,7 @@ namespace vsteam_lib.Test.Provider
          var target = new Releases(ps, "Project Name");
 
          // Assert
-         Assert.AreEqual("Team.Provider.Release", target.TypeName, "TypeName");
+         Assert.AreEqual("vsteam_lib.Provider.Release", target.TypeName, "TypeName");
       }
 
       [TestMethod]
