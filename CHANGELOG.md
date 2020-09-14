@@ -23,6 +23,8 @@ Get-VSTeamUser and Get-VSTeamGroup can now take Descriptor from pipeline.
 **Breaking changes**:
 You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
 
+All types were changed from Team. to vsteam_lib. this will make it easy for moving types from PowerShell to C#.
+
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.
 
 Disable-VSTeamAgent now requires -Force
