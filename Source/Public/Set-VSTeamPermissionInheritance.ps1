@@ -32,12 +32,10 @@ function Set-VSTeamPermissionInheritance {
       Write-Verbose "Creating VSTeamPermissionInheritance"
       $item = _getPermissionInheritanceInfo -projectName $ProjectName -resourceName $Name -resourceType $resourceType
       $token = $item.Token
-      $version = $item.Version
       $projectID = $item.ProjectID
       $securityNamespaceID = $item.SecurityNamespaceID
 
       Write-Verbose "Token = $token"
-      Write-Verbose "Version = $Version"
       Write-Verbose "ProjectID = $ProjectID"
       Write-Verbose "SecurityNamespaceID = $SecurityNamespaceID"
 
@@ -64,7 +62,7 @@ function Set-VSTeamPermissionInheritance {
             -resource HierarchyQuery `
             -id $projectID `
             -Body $body `
-            -Version $version
+            -Version $(_getApiVersion HierarchyQuery)
       }
 
       Write-Verbose "Result: $(ConvertTo-Json -InputObject $resp -Depth 100)"

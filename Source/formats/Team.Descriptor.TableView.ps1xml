@@ -2,9 +2,9 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>Team.Descriptor.TableView</Name>
+			<Name>vsteam_lib.Descriptor.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>Team.Descriptor</TypeName>
+				<TypeName>vsteam_lib.Descriptor</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>
@@ -19,7 +19,7 @@
 					<TableRowEntry>
 						<TableColumnItems>
 							<TableColumnItem>
-								<PropertyName>Descriptor</PropertyName>
+								<PropertyName>Name</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
 								<PropertyName>Links</PropertyName>

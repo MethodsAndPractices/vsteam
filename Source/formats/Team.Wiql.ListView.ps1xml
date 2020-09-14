@@ -2,9 +2,9 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>Team.Wiql.ListView</Name>
+         <Name>vsteam_lib.Wiql.ListView</Name>
          <ViewSelectedBy>
-            <TypeName>Team.Wiql</TypeName>
+            <TypeName>vsteam_lib.Wiql</TypeName>
          </ViewSelectedBy>
          <ListControl>
             <ListEntries>

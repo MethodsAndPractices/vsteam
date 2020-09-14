@@ -17,18 +17,18 @@
 ### Example 1
 
 ```powershell
-(Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerDescriptor }
+PS C:\> Get-VSTeamUser | Select-Object -Last 1 | Get-VSTeamMembership | Get-VSTeamGroup
 ```
 
-Get all the groups for a user
+Get all the groups for the last user
 
 ### Example 2
 
 ```powershell
-(Get-VSTeamMembership -ContainerDescriptor $group.id).value | % {Get-VSTeamUser -Descriptor $_.memberDescriptor }
+PS C:\> Get-VSTeamGroup | Select-Object -First 1 -Skip 2 | Get-VSTeamMembership | Get-VSTeamUser
 ```
 
-Get all the members for a group
+Get all the members for the third group
 
 ## PARAMETERS
 

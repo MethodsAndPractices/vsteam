@@ -28,7 +28,7 @@ function _applyTypesToWorkItem {
 function _applyTypesToWiql {
    param($item)
    if ($item) {
-      $item.PSObject.TypeNames.Insert(0, 'Team.Wiql')
+      $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Wiql')
    }
 }
 
@@ -61,7 +61,7 @@ function _applyTypesToTeamMember {
    # Add the team name as a NoteProperty so we can use it further down the pipeline (it's not returned from the REST call)
    $item | Add-Member -MemberType NoteProperty -Name Team -Value $team
    $item | Add-Member -MemberType NoteProperty -Name ProjectName -Value $ProjectName
-   $item.PSObject.TypeNames.Insert(0, 'Team.TeamMember')
+   $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.TeamMember')
 }
 
 function _applyTypesToApproval {
@@ -110,7 +110,7 @@ function _applyTypesToAzureSubscription {
 function _applyTypesToPolicy {
    param($item)
 
-   $item.PSObject.TypeNames.Insert(0, 'Team.Policy')
+   $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Policy')
 }
 
 function _applyTypesToPolicyType {

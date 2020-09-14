@@ -24,10 +24,12 @@ function Get-VSTeamPermissionInheritance {
    )
 
    process {
+      # This will throw if this account does not support the HierarchyQuery API
+      _supportsHierarchyQuery
+
       Write-Verbose "Creating VSTeamPermissionInheritance"
       $item = _getPermissionInheritanceInfo -projectName $ProjectName -resourceName $Name -resourceType $resourceType
       $token = $item.Token
-      $version = $item.Version
       $projectID = $item.ProjectID
       $securityNamespaceID = $item.SecurityNamespaceID
 
@@ -59,7 +61,7 @@ function Get-VSTeamPermissionInheritance {
             -resource HierarchyQuery `
             -id "project/$projectID" `
             -Body $body `
-            -Version $version
+            -Version $(_getApiVersion HierarchyQuery)
 
          Write-Verbose $($resp | ConvertTo-Json -Depth 99)
 

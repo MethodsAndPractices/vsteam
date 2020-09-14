@@ -2,42 +2,39 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>vsteam_lib.GitCommitRef.TableView</Name>
+			<Name>vsteam_lib.Policy.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>vsteam_lib.GitCommitRef</TypeName>
-				<TypeName>vsteam_lib.GitUserDate</TypeName>
+				<TypeName>vsteam_lib.Policy</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
-				<AutoSize />
 				<TableHeaders>
 					<TableColumnHeader>
-						<Label>Date</Label>
+						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Committer</Label>
-					</TableColumnHeader>
-					<TableColumnHeader>
-						<Label>Comment</Label>
+						<Label>Created By</Label>
 					</TableColumnHeader>
                <TableColumnHeader>
-						<Label>CommitId</Label>
+						<Label>Enabled</Label>
+					</TableColumnHeader>
+               <TableColumnHeader>
+						<Label>Id</Label>
 					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
 					<TableRowEntry>
-						<Wrap />
 						<TableColumnItems>
 							<TableColumnItem>
-								<ScriptBlock>$_.Committer.Date</ScriptBlock>
-							</TableColumnItem>
-                     <TableColumnItem>
-								<ScriptBlock>$_.Committer.Name</ScriptBlock>
+								<PropertyName>policyType</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>Comment</PropertyName>
+								<PropertyName>createdByUser</PropertyName>
 							</TableColumnItem>
                      <TableColumnItem>
-								<PropertyName>CommitId</PropertyName>
+								<PropertyName>isEnabled</PropertyName>
+							</TableColumnItem>
+                     <TableColumnItem>
+								<PropertyName>Id</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

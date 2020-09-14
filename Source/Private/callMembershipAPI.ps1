@@ -17,17 +17,18 @@ function _callMembershipAPI {
    Write-Verbose "Getting members for $Id"
 
    $query = @{}
+
    if ($Direction) {
       $query['direction'] = $Direction
    }
 
    # Call the REST API
    $resp = _callAPI -Method $Method -SubDomain vssps `
-      -Area graph `
-      -Resource memberships `
+      -Area 'graph' `
+      -Resource 'memberships' `
       -Id $Id `
       -QueryString $query `
       -Version $(_getApiVersion Graph)
 
-   return $resp
+   return $resp.value
 }

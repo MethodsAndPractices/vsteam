@@ -6,6 +6,11 @@ namespace vsteam_lib
    {
       public string MetaType { get; set; }
 
+      /// <summary>
+      /// Used to pass down pipelines
+      /// </summary>
+      public string MemberDescriptor => this.Descriptor;
+
       public User2(PSObject obj) : base(obj)
       {
       }

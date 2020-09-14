@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace vsteam_lib
 {
@@ -8,7 +7,7 @@ namespace vsteam_lib
       Build, Release, Core, Git, DistributedTask, DistributedTaskReleased,
       VariableGroups, Tfvc, Packaging, MemberEntitlementManagement,
       ExtensionsManagement, ServiceEndpoints, Graph, TaskGroups, Policy,
-      Processes, Version
+      Processes, Version, HierarchyQuery
    }
 
    public static class Versions
@@ -17,6 +16,9 @@ namespace vsteam_lib
       {
          switch (service)
          {
+            case APIs.HierarchyQuery:
+               HierarchyQuery = version;
+               break;
             case APIs.Build:
                Build = version;
                break;
@@ -72,6 +74,8 @@ namespace vsteam_lib
       {
          switch (service)
          {
+            case APIs.HierarchyQuery:
+               return HierarchyQuery;
             case APIs.Build:
                return Build;
             case APIs.Release:
@@ -125,6 +129,7 @@ namespace vsteam_lib
       public static string Git { get; set; } = "3.0";
       public static string Core { get; set; } = "3.0";
       public static string Build { get; set; } = "3.0";
+      public static string HierarchyQuery { get; set; } = "";
       public static string Release { get; set; } = "3.0-preview";
       public static string DistributedTask { get; set; } = "3.0-preview";
       public static string DistributedTaskReleased { get; set; } = "";

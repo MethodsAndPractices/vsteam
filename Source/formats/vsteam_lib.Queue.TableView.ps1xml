@@ -2,33 +2,27 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>vsteam_lib.User2.TableView</Name>
+			<Name>vsteam_lib.Queue.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>vsteam_lib.User2</TypeName>
+				<TypeName>vsteam_lib.Queue</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<TableHeaders>
 					<TableColumnHeader>
-						<Label>DisplayName</Label>
+						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Origin</Label>
-					</TableColumnHeader>
-               <TableColumnHeader>
-						<Label>PrincipalName</Label>
+						<Label>Pool</Label>
 					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
 					<TableRowEntry>
 						<TableColumnItems>
 							<TableColumnItem>
-								<PropertyName>DisplayName</PropertyName>
+								<PropertyName>Name</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>Origin</PropertyName>
-							</TableColumnItem>
-                     <TableColumnItem>
-								<PropertyName>PrincipalName</PropertyName>
+								<PropertyName>PoolName</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

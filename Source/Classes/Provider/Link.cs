@@ -1,4 +1,5 @@
 ﻿using System.Management.Automation;
+using System.Text;
 using System.Xml.Serialization;
 using vsteam_lib.Provider;
 
@@ -37,6 +38,29 @@ namespace vsteam_lib
          this.InternalObject = obj;
 
          Common.MoveProperties(this, obj);
+      }
+
+      public override string ToString()
+      {
+         var sb = new StringBuilder();
+
+         AddLink(sb, nameof(this.Self), this.Self);
+         AddLink(sb, nameof(this.Parent), this.Parent);
+         AddLink(sb, nameof(this.MembershipState), this.MembershipState);
+         AddLink(sb, nameof(this.StorageKey), this.StorageKey);
+         AddLink(sb, nameof(this.Avatar), this.Avatar);
+         AddLink(sb, nameof(this.Web), this.Web);
+         AddLink(sb, nameof(this.Subject), this.Subject);
+
+         return sb.ToString();
+      }
+
+      private void AddLink(StringBuilder sb, string name, string value)
+      {
+         if(!string.IsNullOrEmpty(value))
+         {
+            sb.AppendLine($"{name}: {value}");
+         }
       }
    }
 }

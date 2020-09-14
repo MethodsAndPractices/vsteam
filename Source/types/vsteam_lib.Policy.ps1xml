@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.Policy</Name>
+      <Name>vsteam_lib.Policy</Name>
       <Members>
          <ScriptProperty>
             <Name>policyType</Name>
             <GetScriptBlock>$this.type.displayName</GetScriptBlock>
+         </ScriptProperty>
+         <ScriptProperty>
+            <Name>createdByUser</Name>
+            <GetScriptBlock>$this.createdBy.displayName</GetScriptBlock>
          </ScriptProperty>
          <MemberSet>
             <Name>PSStandardMembers</Name>
@@ -14,7 +18,9 @@
                   <Name>DefaultDisplayPropertySet</Name>
                   <ReferencedProperties>
                      <Name>policyType</Name>
-                     <Name>settings</Name>
+                     <Name>createdByUser</Name>
+                     <Name>isEnabled</Name>
+                     <Name>id</Name>
                   </ReferencedProperties>
                </PropertySet>
             </Members>

@@ -8,12 +8,11 @@ Describe 'VSTeamPermissionInheritance' {
       . "$baseFolder/Source/Public/Get-VSTeamReleaseDefinition.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamGitRepository.ps1"
       . "$baseFolder/Source/Public/Get-VSTeamAccessControlList.ps1"
-      
+
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter {
-         $Service -eq 'Build' -or
-         $Service -eq 'Release' -or
-         $Service -eq 'Git' }
+         $Service -eq 'HierarchyQuery'
+      }
 
       Mock _callAPI { Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json' } -ParameterFilter {
          $Resource -eq 'projects' -and
@@ -48,7 +47,7 @@ Describe 'VSTeamPermissionInheritance' {
             $Body -like '*00000000-0000-0000-0000-000000000000/1432*' -and
             $Body -like '*33344d9c-fc72-4d6f-aba5-fa317101a7e9*' -and
             $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/00000000-0000-0000-0000-000000000000*" -and
-            $Uri -like "*api-version=$(_getApiVersion Build)*"
+            $Uri -like "*api-version=$(_getApiVersion HierarchyQuery)*"
          }
       }
    }
@@ -67,7 +66,7 @@ Describe 'VSTeamPermissionInheritance' {
             $Body -like '*c788c23e-1b46-4162-8f5e-d7585343b5de*' -and
             $Body -like '*00000000-0000-0000-0000-000000000000//2*' -and
             $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/00000000-0000-0000-0000-000000000000*" -and
-            $Uri -like "*api-version=$(_getApiVersion Release)*"
+            $Uri -like "*api-version=$(_getApiVersion HierarchyQuery)*"
          }
       }
    }
@@ -87,7 +86,7 @@ Describe 'VSTeamPermissionInheritance' {
             $Body -like '*2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87*' -and
             $Body -like '*repoV2/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000001*' -and
             $Uri -like "*https://dev.azure.com/test/_apis/Contribution/HierarchyQuery/00000000-0000-0000-0000-000000000000*" -and
-            $Uri -like "*api-version=$(_getApiVersion Git)*"
+            $Uri -like "*api-version=$(_getApiVersion HierarchyQuery)*"
          }
       }
    }

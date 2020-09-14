@@ -33,25 +33,9 @@ This example is useful for when one wants to copy an existing task group in one 
 
 ## PARAMETERS
 
-### -ProjectName
-
 <!-- #include "./params/projectName.md" -->
 
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+<!-- #include "./params/whatif.md" -->
 
 ### -InFile
 

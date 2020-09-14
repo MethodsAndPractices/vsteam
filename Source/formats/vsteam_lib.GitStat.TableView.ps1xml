@@ -2,42 +2,33 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>vsteam_lib.GitCommitRef.TableView</Name>
+			<Name>vsteam_lib.GitStat.TableView</Name>
 			<ViewSelectedBy>
-				<TypeName>vsteam_lib.GitCommitRef</TypeName>
-				<TypeName>vsteam_lib.GitUserDate</TypeName>
+				<TypeName>vsteam_lib.GitStat</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
-				<AutoSize />
 				<TableHeaders>
 					<TableColumnHeader>
-						<Label>Date</Label>
+						<Label>Name</Label>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Committer</Label>
-					</TableColumnHeader>
-					<TableColumnHeader>
-						<Label>Comment</Label>
+						<Label>Ahead</Label>
 					</TableColumnHeader>
                <TableColumnHeader>
-						<Label>CommitId</Label>
+						<Label>Behind</Label>
 					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
 					<TableRowEntry>
-						<Wrap />
 						<TableColumnItems>
 							<TableColumnItem>
-								<ScriptBlock>$_.Committer.Date</ScriptBlock>
-							</TableColumnItem>
-                     <TableColumnItem>
-								<ScriptBlock>$_.Committer.Name</ScriptBlock>
+								<PropertyName>Name</PropertyName>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>Comment</PropertyName>
+								<PropertyName>aheadCount</PropertyName>
 							</TableColumnItem>
                      <TableColumnItem>
-								<PropertyName>CommitId</PropertyName>
+								<PropertyName>behindCount</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

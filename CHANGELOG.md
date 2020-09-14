@@ -18,6 +18,8 @@ You can now call Get-VSTeamTfvcBranch with no parameters.
 
 Added -force to Remove-VSTeamAccessControlEntry so you don't have to use -confirm:$false. This make it consistent with the rest of the functions
 
+Get-VSTeamUser and Get-VSTeamGroup can now take Descriptor from pipeline.
+
 **Breaking changes**:
 You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
 
@@ -42,6 +44,8 @@ $BuildId of type int[] is now $Id.
 Removed Type parameter from Get-VSTeamBuildDefinition.
 
 Removed the Top and Skip parameters from Get-VSTeamProcess.
+
+Get-VSTeamMembership now returns a collection. There is no need to .value with results.
 
 ## 6.5.1
 

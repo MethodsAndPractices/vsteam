@@ -9,8 +9,9 @@ function Get-VSTeamGroup {
       [Parameter(ParameterSetName = 'List')]
       [string] $ScopeDescriptor,
 
-      [Parameter(ParameterSetName = 'ByGroupDescriptor', Mandatory = $true)]
+      [Parameter(ParameterSetName = 'ByGroupDescriptor', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('GroupDescriptor')]
+      [Alias('containerDescriptor')]
       [string] $Descriptor,
 
       [Parameter(ParameterSetName = 'ListByProjectName', Mandatory = $true)]

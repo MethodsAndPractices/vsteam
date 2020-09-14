@@ -2,34 +2,34 @@
 <Configuration>
    <ViewDefinitions>
       <View>
-         <Name>vsteam_lib.Wiql.TableView</Name>
+         <Name>Team.AzureSubscription.TableView</Name>
          <ViewSelectedBy>
-            <TypeName>vsteam_lib.Wiql</TypeName>
+            <TypeName>Team.AzureSubscription</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <TableHeaders>
                <TableColumnHeader>
-                  <Label>QueryType</Label>
+                  <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>WorkItemIDs</Label>
+                  <Label>Id</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>WorkItems</Label>
+                  <Label>Tenant Id</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
                   <TableColumnItems>
                      <TableColumnItem>
-                        <PropertyName>queryType</PropertyName>
+                        <PropertyName>displayName</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>WorkItemIDs</PropertyName>
-                     </TableColumnItem>
+                        <PropertyName>subscriptionId</PropertyName>
+                     </TableColumnItem>  
                       <TableColumnItem>
-                        <PropertyName>workItems</PropertyName>
-                     </TableColumnItem>
+                        <PropertyName>subscriptionTenantId</PropertyName>
+                     </TableColumnItem>  
                   </TableColumnItems>
                </TableRowEntry>
             </TableRowEntries>

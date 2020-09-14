@@ -49,7 +49,12 @@ Describe "TeamGitStat" {
 
       It 'by tag with options should return multiple results' {
          ## Act
-         Get-VSTeamGitStat -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -BranchName "develop" -VersionType "tag" -Version "test" -VersionOptions previousChange
+         Get-VSTeamGitStat -ProjectName Test `
+            -RepositoryId 00000000-0000-0000-0000-000000000000 `
+            -BranchName "develop" `
+            -VersionType "tag" `
+            -Version "test" `
+            -VersionOptions previousChange
 
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
@@ -63,7 +68,11 @@ Describe "TeamGitStat" {
 
       It 'by commit should throw because of invalid parameters' {
          ## Act / Assert
-         { Get-VSTeamGitStat -ProjectName Test -RepositoryId 00000000-0000-0000-0000-000000000000 -VersionType commit -Version '' } | Should -Throw
+         { Get-VSTeamGitStat -ProjectName Test `
+               -RepositoryId 00000000-0000-0000-0000-000000000000 `
+               -VersionType commit `
+               -Version '' }
+         | Should -Throw
       }
    }
 }

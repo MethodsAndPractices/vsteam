@@ -45,13 +45,13 @@ function Get-VSTeamGitStat {
          $hasValueProp = $resp.PSObject.Properties.Match('value')
 
          if (0 -eq $hasValueProp.count) {
-            _applyTypes $resp "VSTeam.GitStat"
+            _applyTypes $resp "vsteam_lib.GitStat"
             Write-Output $resp
          }
          else {
             $obj = @()
             foreach ($item in $resp.value) {
-               _applyTypes $item "Team.GitStat"
+               _applyTypes $item "vsteam_lib.GitStat"
                $obj += $item
             }
 

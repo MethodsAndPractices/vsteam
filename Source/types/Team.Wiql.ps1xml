@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
    <Type>
-      <Name>Team.Wiql</Name>
+      <Name>vsteam_lib.Wiql</Name>
       <Members>
          <ScriptProperty>
             <Name>QueryType</Name>
@@ -26,11 +26,11 @@
          <ScriptProperty>
             <Name>WorkItemIDs</Name>
             <GetScriptBlock>[int[]]$this.PSObject.Properties['workItems'].Value.id</GetScriptBlock>
-         </ScriptProperty>  
+         </ScriptProperty>
          <ScriptProperty>
             <Name>WorkItems</Name>
             <GetScriptBlock>$this.PSObject.Properties['workItems'].Value</GetScriptBlock>
-         </ScriptProperty>         
+         </ScriptProperty>
          <MemberSet>
             <Name>PSStandardMembers</Name>
             <Members>

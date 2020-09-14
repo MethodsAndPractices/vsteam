@@ -2,6 +2,9 @@
    "outputFile": "vsteam.format.ps1xml",
    "fileType": "formats",
    "files": [
+      "vsteam_lib.TaskGroup.TableView.ps1xml",
+      "vsteam_lib.GitStat.TableView.ps1xml",
+      "Team.AzureSubscription.TableView.ps1xml",
       "vsteam_lib.Environment.Status.TableView.ps1xml",
       "Team.Query.TableView.ps1xml",
       "Team.Provider.JobRequest.TableView.ps1xml",
@@ -83,6 +86,7 @@
       "Team.Provider.Extension.TableView.ps1xml",
       "Team.PSDrive.Default.TableView.ps1xml",
       "Team.Provider.Build.TableView.ps1xml",
+      "vsteam_lib.Queue.TableView.ps1xml",
       "Team.PSDrive.Default.ListView.ps1xml",
       "Team.WorkItemType.TableView.ps1xml",
       "Team.WorkItemType.ListView.ps1xml",
@@ -99,6 +103,8 @@
       "Team.YamlPipelineResult.TableView.ps1xml",
       "vsteam_lib.Build.WideView.ps1xml",
       "vsteam_lib.Build.ListView.ps1xml",
-      "Team.ResourceArea.TableView.ps1xml"
+      "Team.ResourceArea.TableView.ps1xml",
+      "Team.PullRequest.TableView.ps1xml",
+      "vsteam_lib.Policy.TableView.ps1xml"
    ]
 }

@@ -24,6 +24,8 @@ function Get-VSTeamTaskGroup {
       if ($Id) {
          $resp = _callAPI @commonArgs -Id $Id
 
+         _applyTypes -item $($resp.value) -type 'vsteam_lib.TaskGroup'
+
          Write-Output $resp.value
       }
       else {
@@ -34,18 +36,18 @@ function Get-VSTeamTaskGroup {
                foreach ($item in $resp.value) {
                   if ($item.PSObject.Properties.name -contains "name") {
                      if ($Name -eq $item.name) {
+                        _applyTypes -item $item -type 'vsteam_lib.TaskGroup'
+
                         return $item
                      }
                   }
                }
-               return $null
-            }
-            else {
-               return $null
             }
          }
          else {
             foreach ($item in $resp.value) {
+               _applyTypes -item $item -type 'vsteam_lib.TaskGroup'
+
                Write-Output $item
             }
          }

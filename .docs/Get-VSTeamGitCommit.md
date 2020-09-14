@@ -22,6 +22,14 @@ PS C:\> Get-VSTeamGitCommit -ProjectName demo -RepositoryId 118C262F-0D4C-4B76-B
 
 This command gets a list of all commits in the demo project for a specific repository.
 
+### Example 2
+
+```powershell
+PS C:\> Get-VSTeamGitRepository | Select-Object -First 1 | Get-VSTeamGitCommit
+```
+
+This command gets the Repository Id from the pipeline and the project name from the default project.
+
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->

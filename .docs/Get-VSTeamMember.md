@@ -50,7 +50,7 @@ Type: Int32
 
 ## OUTPUTS
 
-### Team.TeamMember
+### vsteam_lib.TeamMember
 
 ## NOTES
 

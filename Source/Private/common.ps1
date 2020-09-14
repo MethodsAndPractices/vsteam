@@ -121,6 +121,17 @@ function _testGraphSupport {
    (_getApiVersion Graph) -as [boolean]
 }
 
+function _supportsHierarchyQuery {
+   _hasAccount
+   if ($false -eq $(_testHierarchyQuerySupport)) {
+      throw 'This account does not support the graph API.'
+   }
+}
+
+function _testHierarchyQuerySupport {
+   (_getApiVersion HierarchyQuery) -as [boolean]
+}
+
 function _supportVariableGroups {
    _hasAccount
    if ($false -eq $(_testVariableGroupsSupport)) {
@@ -165,7 +176,7 @@ function _getApiVersion {
          'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
          'Packaging', 'MemberEntitlementManagement',
          'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
-         'TaskGroups', 'Policy', 'Processes')]
+         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -878,8 +889,6 @@ function _getPermissionInheritanceInfo {
          }
 
          $token = "repoV2/$($projectId)/$repositoryId"
-
-         $version = "$(_getApiVersion Git)"
       }
 
       "BuildDefinition" {
@@ -893,8 +902,6 @@ function _getPermissionInheritanceInfo {
          }
 
          $token = "$($projectId)/$buildDefinitionId"
-
-         $version = "$(_getApiVersion Build)"
       }
 
       "ReleaseDefinition" {
@@ -913,15 +920,12 @@ function _getPermissionInheritanceInfo {
          else {
             $token = "$($projectId)" + "$($releaseDefinition.path -replace "\\","/")" + "/$($releaseDefinition.id)"
          }
-
-         $version = "$(_getApiVersion Release)"
       }
    }
 
    return @{
-      Token = $token
-      Version = $version
-      ProjectID = $projectId
+      Token               = $token
+      ProjectID           = $projectId
       SecurityNamespaceID = $securityNamespaceID
    }
 }

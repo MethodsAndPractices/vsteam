@@ -3,16 +3,21 @@ function Get-VSTeamMembership {
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline, ValueFromPipelineByPropertyName, ParameterSetName = "ByContainerId")]
       [string] $ContainerDescriptor,
+
       [Parameter(Mandatory = $true, ValueFromPipeline, ValueFromPipelineByPropertyName, ParameterSetName = "ByMemberId")]
       [string] $MemberDescriptor
    )
 
    process {
       if ($MemberDescriptor) {
-         return _callMembershipAPI -Id $MemberDescriptor -Direction Up
+         Write-Verbose 'Up with MemberDescriptor'
+
+         Write-Output $(_callMembershipAPI -Id $MemberDescriptor -Direction Up)
       }
       else {
-         return _callMembershipAPI -Id $ContainerDescriptor -Direction Down
+         Write-Verbose 'Down with ContainerDescriptor'
+
+         Write-Output $(_callMembershipAPI -Id $ContainerDescriptor -Direction Down)
       }
    }
 }

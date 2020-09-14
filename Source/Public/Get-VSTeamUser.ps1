@@ -5,8 +5,9 @@ function Get-VSTeamUser {
       [ValidateSet('msa', 'aad', 'svc', 'imp', 'vss')]
       [string[]] $SubjectTypes,
 
-      [Parameter(ParameterSetName = 'ByUserDescriptor', Mandatory = $true)]
+      [Parameter(ParameterSetName = 'ByUserDescriptor', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('UserDescriptor')]
+      [Alias('memberDescriptor')]
       [string] $Descriptor
    )
 

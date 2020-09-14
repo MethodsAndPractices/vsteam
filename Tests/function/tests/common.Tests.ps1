@@ -49,7 +49,6 @@ Describe 'Common' {
          $actual = _getPermissionInheritanceInfo -ProjectName 'PeopleTracker' -ResourceName 'PTracker-CI' -ResourceType 'BuildDefinition'
 
          $actual | Should -not -Be $null
-         $actual.Version | Should -Be "$(_getApiVersion Build)"
          $actual.Token | Should -Be "00000000-0000-0000-0000-000000000000/23"
          $actual.SecurityNamespaceID | Should -Be "33344d9c-fc72-4d6f-aba5-fa317101a7e9"
       }
@@ -58,7 +57,6 @@ Describe 'Common' {
          $actual = _getPermissionInheritanceInfo -ProjectName 'PeopleTracker' -ResourceName 'PTracker-CD' -ResourceType 'ReleaseDefinition'
 
          $actual | Should -not -Be $null
-         $actual.Version | Should -Be "$(_getApiVersion Release)"
          $actual.SecurityNamespaceID | Should -Be "c788c23e-1b46-4162-8f5e-d7585343b5de"
          $actual.Token | Should -Be "00000000-0000-0000-0000-000000000000//2"
       }
@@ -67,7 +65,6 @@ Describe 'Common' {
          $actual = _getPermissionInheritanceInfo -ProjectName 'PeopleTracker' -ResourceName 'PeopleTracker' -ResourceType 'Repository'
 
          $actual | Should -not -Be $null
-         $actual.Version | Should -Be "$(_getApiVersion Git)"
          $actual.SecurityNamespaceID | Should -Be "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
          $actual.Token | Should -Be "repoV2/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000"
       }

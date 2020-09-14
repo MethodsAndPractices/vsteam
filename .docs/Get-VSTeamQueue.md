@@ -50,7 +50,7 @@ Aliases: QueueID
 
 ## OUTPUTS
 
-### Team.Queue
+### vsteam_lib.Queue
 
 ## NOTES
 

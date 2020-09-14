@@ -24,6 +24,7 @@ namespace vsteam_lib.Test
       [DataRow("GraphV1", APIs.Graph)]
       [DataRow("TaskGroupsV1", APIs.TaskGroups)]
       [DataRow("PolicyV1", APIs.Policy)]
+      [DataRow("HierarchyQuery", APIs.HierarchyQuery)]
       [DataRow("ProcessesV1", APIs.Processes)]
       [DataRow("TFS2017", APIs.Version)]
       public void Versions_ChangeServiceVersions(string expected, APIs version)

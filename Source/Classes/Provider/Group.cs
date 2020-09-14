@@ -6,6 +6,11 @@ namespace vsteam_lib
    {
       public string Description { get; set; }
 
+      /// <summary>
+      /// Used to pass down pipelines
+      /// </summary>
+      public string ContainerDescriptor => this.Descriptor;
+
       public Group(PSObject obj) :
          base(obj)
       {
