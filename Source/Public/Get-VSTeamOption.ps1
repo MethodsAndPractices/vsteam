@@ -33,7 +33,7 @@ function Get-VSTeamOption {
 
    # Apply a Type Name so we can use custom format view and custom type extensions
    foreach ($item in $resp.value) {
-      _applyTypes -item $item -type 'Team.Option'
+      _applyTypes -item $item -type 'vsteam_lib.Option'
    }
 
    Write-Output $resp.value

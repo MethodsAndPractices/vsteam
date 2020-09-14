@@ -15,13 +15,16 @@ namespace vsteam_lib
       public string SSHUrl { get; set; }
       public string RemoteUrl { get; set; }
       public string DefaultBranch { get; set; }
-      
       /// <summary>
-      /// This is used for passing the id down the pipeline into 
+      /// Used to pass on pipeline to Get-VSTeamPermissionInheritance
+      /// </summary>
+      public string ResourceType => "Repository";
+      /// <summary>
+      /// This is used for passing the id down the pipeline into
       /// functions like Get-VSTeamGitCommit
       /// </summary>
       public string RepositoryID => this.Id;
-      
+
       public GitRepository(PSObject obj, string projectName, IPowerShell powerShell) :
        base(obj, obj.GetValue("Name"), "GitRef", powerShell, projectName)
       {

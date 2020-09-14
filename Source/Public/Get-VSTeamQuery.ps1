@@ -28,7 +28,7 @@ function Get-VSTeamQuery {
       $obj = @()
 
       foreach ($item in $resp.value) {
-         _applyTypes $item "Team.Query"
+         _applyTypes $item "vsteam_lib.Query"
          $obj += $item
       }
 

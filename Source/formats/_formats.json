@@ -1,5 +1,5 @@
 {
-   "outputFile": "vsvsteam_lib.format.ps1xml",
+   "outputFile": "vsteam.format.ps1xml",
    "fileType": "formats",
    "files": [
       "vsteam_lib.TaskGroup.TableView.ps1xml",

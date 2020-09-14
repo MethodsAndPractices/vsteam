@@ -32,6 +32,10 @@ namespace vsteam_lib
       public UserEntitlement AuthoredBy { get; }
       public IList<BuildDefinitionProcessPhaseStep> Steps { get; }
       public BuildDefinitionProcess Process { get; }
+      /// <summary>
+      /// Used to pass on pipeline to Get-VSTeamPermissionInheritance
+      /// </summary>
+      public string ResourceType => "BuildDefinition";
 
       public BuildDefinition(PSObject obj, string projectName, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), "BuildDefinition", powerShell, projectName)

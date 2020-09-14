@@ -26,11 +26,14 @@ namespace vsteam_lib
       public UserEntitlement CreatedBy { get; }
       public UserEntitlement ModifiedBy { get; }
       public Link Links { get; }
-
+      /// <summary>
+      /// Used to pass on pipeline to Get-VSTeamPermissionInheritance
+      /// </summary>
+      public string ResourceType => "ReleaseDefinition";
       /// <summary>
       /// Before this class was added to the provider there
       /// was a type file to expose createdByUser. The type
-      /// was deleted when this class was added. So this 
+      /// was deleted when this class was added. So this
       /// property is for backwards compatibility.
       /// </summary>
       public string CreatedByUser { get { return this.CreatedBy.DisplayName; } }

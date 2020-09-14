@@ -4,7 +4,7 @@
 # by a function or a Get-ChildItem call to the provider. All the types returned from a provider
 # should have 'Provider' in the type name. For example Get-VSTeamJobRequest returns a type of
 # vsteam_lib.JobRequest. However, when executed via the provider the type returned is
-# Team.Provider.JobRequest. The type name is how the formats are selected.
+# vsteam_lib.Provider.JobRequest. The type name is how the formats are selected.
 Set-StrictMode -Version Latest
 
 Describe 'Table Formats for Provider classes' -Tag 'integration' {
@@ -29,8 +29,8 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
 
    Context 'Agent' {
       # This is the formatter when returned from the provider
-      It 'Team.Provider.Agent should have mode' {
-         $cols = Get-Columns -TypeName Team.Provider.Agent
+      It 'vsteam_lib.Provider.Agent should have mode' {
+         $cols = Get-Columns -TypeName vsteam_lib.Provider.Agent
 
          $cols[0] | Should -Be 'Mode'
       }
@@ -45,8 +45,8 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
 
    Context 'AgentPool' {
       # This is the formatter when returned from the provider
-      It 'Team.Provider.AgentPool should have mode' {
-         $cols = Get-Columns -TypeName Team.Provider.AgentPool
+      It 'vsteam_lib.Provider.AgentPool should have mode' {
+         $cols = Get-Columns -TypeName vsteam_lib.Provider.AgentPool
 
          $cols[0] | Should -Be 'Mode'
       }
@@ -61,8 +61,8 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
 
    Context 'Build' {
       # This is the formatter when returned from the provider
-      It 'Team.Provider.Build should have mode' {
-         $cols = Get-Columns -TypeName Team.Provider.Build
+      It 'vsteam_lib.Provider.Build should have mode' {
+         $cols = Get-Columns -TypeName vsteam_lib.Provider.Build
 
          $cols[0] | Should -Be 'Mode'
          $cols[1] | Should -Be 'Name'
@@ -70,7 +70,7 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
       }
 
       # This is the formatter when returned from a function
-      It 'Team.Build should have name' {
+      It 'vsteam_lib.Build should have name' {
          $cols = Get-Columns -TypeName vsteam_lib.Build
 
          $cols[0] | Should -Be 'Definition'
@@ -79,7 +79,7 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
       }
    }
 
-   # Defined in Team.PSDrive.Default.TableView.ps1xml
+   # Defined in vsteam_lib.PSDrive.Default.TableView.ps1xml
    # Covers Feeds, Extensions, Agent Pools and other top level
    # nodes that don't map to Azure DevOps types.
    Context 'Directory' {
@@ -90,11 +90,11 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
          $cols[0] | Should -Be 'Mode'
       }
    }
-   
+
    Context 'JobRequest' {
       # This is the formatter when returned from the provider
-      It 'Team.Provider.JobRequest should have mode' {
-         $cols = Get-Columns -TypeName Team.Provider.JobRequest
+      It 'vsteam_lib.Provider.JobRequest should have mode' {
+         $cols = Get-Columns -TypeName vsteam_lib.Provider.JobRequest
 
          $cols[0] | Should -Be 'Mode'
       }
@@ -117,8 +117,8 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
 
    Context 'Release Definitions' {
       # This is the formatter when returned from the provider
-      It 'Team.Provider.JobRequest should have mode' {
-         $cols = Get-Columns -TypeName Team.Provider.JobRequest
+      It 'vsteam_lib.Provider.JobRequest should have mode' {
+         $cols = Get-Columns -TypeName vsteam_lib.Provider.JobRequest
 
          $cols[0] | Should -Be 'Mode'
       }

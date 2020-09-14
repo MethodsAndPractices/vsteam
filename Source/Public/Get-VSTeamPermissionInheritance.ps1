@@ -13,7 +13,7 @@ function Get-VSTeamPermissionInheritance {
       [Parameter(Mandatory, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]
       [string] $Name,
 
-      [Parameter(Mandatory)]
+      [Parameter(Mandatory, ValueFromPipelineByPropertyName = $true)]
       [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
       [string] $resourceType,
 
