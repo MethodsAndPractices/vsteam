@@ -2,7 +2,7 @@
 <Configuration>
 	<ViewDefinitions>
 		<View>
-			<Name>vsteam_lib.Environment.Status.TableView</Name>
+			<Name>vsteam_lib.Provider.Environment.Status.TableView</Name>
 			<ViewSelectedBy>
 				<TypeName>vsteam_lib.Provider.Environment</TypeName>
 				<TypeName>vsteam_lib.Provider.Attempt</TypeName>
