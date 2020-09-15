@@ -102,7 +102,6 @@ function _applyTypesToBuild {
 }
 
 function _applyArtifactTypes {
-   [CmdletBinding()]
    $item.PSObject.TypeNames.Insert(0, "vsteam_lib.Build.Artifact")
 
    if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource -and $item.resource.PSObject.Properties.Match('propeties').count -gt 0) {
