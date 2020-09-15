@@ -1,5 +1,5 @@
 function Get-VSTeamMembership {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamMembership')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline, ValueFromPipelineByPropertyName, ParameterSetName = "ByContainerId")]
       [string] $ContainerDescriptor,

@@ -1,5 +1,5 @@
 function Get-VSTeamProfile {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamProfile')]
    param(
       # Name is an array so I can pass an array after -Name
       # I can also use pipe

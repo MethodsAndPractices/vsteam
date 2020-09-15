@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamMembership
 
 function Add-VSTeamMembership {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamMembership')]
    param(
       [Parameter(Mandatory = $true)]
       [string] $MemberDescriptor,

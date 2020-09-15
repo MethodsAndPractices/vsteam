@@ -1,5 +1,6 @@
 function Get-VSTeamProject {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamProject')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('WellFormed', 'CreatePending', 'Deleting', 'New', 'All')]

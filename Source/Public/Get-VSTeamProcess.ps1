@@ -17,7 +17,8 @@
 # releasedVersion : 0.0
 
 function Get-VSTeamProcess {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamProcess')]
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
    param(
       [Parameter(ParameterSetName = 'ByName', Position = 0)]

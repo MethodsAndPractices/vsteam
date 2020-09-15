@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamPolicy
 
 function Add-VSTeamPolicy {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamPolicy')]
    param(
       [Parameter(Mandatory = $true)]
       [guid] $type,

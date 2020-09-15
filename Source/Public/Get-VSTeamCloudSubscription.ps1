@@ -1,5 +1,5 @@
 function Get-VSTeamCloudSubscription {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamCloudSubscription')]
    param()
 
    # Call the REST API

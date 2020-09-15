@@ -1,5 +1,5 @@
 function Get-VSTeamResourceArea {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamResourceArea')]
    param()
 
    # Call the REST API

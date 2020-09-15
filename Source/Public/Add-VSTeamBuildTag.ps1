@@ -8,7 +8,8 @@
 # http://bit.ly/Add-VSTeamBuildTag
 
 function Add-VSTeamBuildTag {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamBuildTag')]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [string[]] $Tags,

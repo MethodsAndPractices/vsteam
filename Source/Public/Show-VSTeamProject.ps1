@@ -1,5 +1,6 @@
 function Show-VSTeamProject {
-   [CmdletBinding(DefaultParameterSetName = 'ByName')]
+   [CmdletBinding(DefaultParameterSetName = 'ByName',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Show-VSTeamProject')]
    param(
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]

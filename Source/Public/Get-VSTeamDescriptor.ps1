@@ -1,5 +1,6 @@
 function Get-VSTeamDescriptor {
-   [CmdletBinding(DefaultParameterSetName = 'ByStorageKey')]
+   [CmdletBinding(DefaultParameterSetName = 'ByStorageKey',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamDescriptor')]
    param(
       [Parameter(ParameterSetName = 'ByStorageKey', Mandatory = $true, Position = 0)]
       [string] $StorageKey

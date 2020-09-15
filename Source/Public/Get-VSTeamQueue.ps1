@@ -1,5 +1,6 @@
 function Get-VSTeamQueue {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamQueue')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [string] $queueName,

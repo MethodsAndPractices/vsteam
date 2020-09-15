@@ -13,7 +13,8 @@
 # https://bit.ly/Add-VSTeamAccessControlEntry
 
 function Add-VSTeamWorkItemIterationPermission {
-   [CmdletBinding(DefaultParameterSetName = 'ByProjectAndIterationIdAndUser')]
+   [CmdletBinding(DefaultParameterSetName = 'ByProjectAndIterationIdAndUser',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamWorkItemIterationPermission')]
    param(
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndDescriptor")]
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndGroup")]

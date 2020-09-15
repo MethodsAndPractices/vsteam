@@ -1,5 +1,6 @@
 function Update-VSTeamUserEntitlement {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmailLicenseOnly')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmailLicenseOnly',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Update-VSTeamUserEntitlement')]
    param (
       [Parameter(ParameterSetName = 'ByIdLicenseOnly', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Parameter(ParameterSetName = 'ByIdWithSource', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]

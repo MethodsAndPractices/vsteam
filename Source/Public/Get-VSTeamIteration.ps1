@@ -1,5 +1,6 @@
 function Get-VSTeamIteration {
-   [CmdletBinding(DefaultParameterSetName = 'ByPath')]
+   [CmdletBinding(DefaultParameterSetName = 'ByPath',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamIteration')]
    param(
       [Parameter(Mandatory = $false, ParameterSetName = "ByPath")]
       [string] $Path,

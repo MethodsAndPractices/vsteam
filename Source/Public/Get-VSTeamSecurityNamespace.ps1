@@ -1,5 +1,6 @@
 function Get-VSTeamSecurityNamespace {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamSecurityNamespace')]
    param(
       [Parameter(ParameterSetName = 'ByNamespaceName', Mandatory = $true)]
       [string] $Name,

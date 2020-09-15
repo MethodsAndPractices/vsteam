@@ -1,5 +1,6 @@
 function Update-VSTeamExtension {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Update-VSTeamExtension')]
    param (
       [parameter(Mandatory = $true)]
       [string] $PublisherId,

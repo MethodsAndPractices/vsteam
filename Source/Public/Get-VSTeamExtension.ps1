@@ -1,5 +1,5 @@
 function Get-VSTeamExtension {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamExtension')]
    param (
       [Parameter(ParameterSetName = 'List', Mandatory = $false)]
       [switch] $IncludeInstallationIssues,

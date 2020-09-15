@@ -1,5 +1,6 @@
 function Set-VSTeamAPIVersion {
-   [CmdletBinding(DefaultParameterSetName = 'Target', SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   [CmdletBinding(DefaultParameterSetName = 'Target', SupportsShouldProcess = $true, ConfirmImpact = "Low",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Set-VSTeamAPIVersion')]
    param(
       [parameter(ParameterSetName = 'Target', Mandatory = $false, Position = 0)]
       [ValidateSet('TFS2017', 'TFS2018', 'AzD2019', 'VSTS', 'AzD', 'TFS2017U1',

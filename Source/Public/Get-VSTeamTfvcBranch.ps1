@@ -7,7 +7,8 @@
 # http://bit.ly/Get-VSTeamTfvcBranch
 
 function Get-VSTeamTfvcBranch {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamTfvcBranch')]
    param(
       [parameter(ParameterSetName = 'ByPath', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $Path,

@@ -8,7 +8,8 @@
 # https://bit.ly/Add-VSTeamServiceEndpoint
 
 function Add-VSTeamAzureRMServiceEndpoint {
-   [CmdletBinding(DefaultParameterSetName = 'Automatic')]
+   [CmdletBinding(DefaultParameterSetName = 'Automatic',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamAzureRMServiceEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]

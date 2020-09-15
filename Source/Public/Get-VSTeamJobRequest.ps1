@@ -1,5 +1,5 @@
 function Get-VSTeamJobRequest {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamJobRequest')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [int] $PoolId,

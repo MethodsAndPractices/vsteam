@@ -8,7 +8,8 @@
 # http://bit.ly/Disable-VSTeamAgent
 
 function Disable-VSTeamAgent {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Disable-VSTeamAgent')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int] $PoolId,

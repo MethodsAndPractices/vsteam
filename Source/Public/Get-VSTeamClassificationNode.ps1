@@ -1,5 +1,6 @@
 function Get-VSTeamClassificationNode {
-   [CmdletBinding(DefaultParameterSetName = 'ById')]
+   [CmdletBinding(DefaultParameterSetName = 'ById',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamClassificationNode')]
    param(
       [ValidateSet("areas", "iterations")]
       [Parameter(Mandatory = $true, ParameterSetName = "ByPath")]

@@ -1,5 +1,6 @@
 function Get-VSTeamGitStat {
-   [CmdletBinding(DefaultParameterSetName = "ByOptionalName")]
+   [CmdletBinding(DefaultParameterSetName = "ByOptionalName",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamGitStat')]
    param (
       [Parameter(ParameterSetName = "ByVersion", ValueFromPipelineByPropertyName = $true, Mandatory = $true)]
       [Parameter(ParameterSetName = "ByOptionalName", ValueFromPipelineByPropertyName = $true, Mandatory = $true)]

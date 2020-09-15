@@ -1,5 +1,6 @@
 function Show-VSTeamBuild {
-   [CmdletBinding(DefaultParameterSetName = 'ByID')]
+   [CmdletBinding(DefaultParameterSetName = 'ByID',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Show-VSTeamBuild')]
    param (
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]

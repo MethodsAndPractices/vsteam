@@ -1,5 +1,6 @@
 function Get-VSTeamUser {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamUser')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('msa', 'aad', 'svc', 'imp', 'vss')]

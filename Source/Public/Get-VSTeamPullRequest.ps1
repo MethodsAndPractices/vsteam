@@ -1,5 +1,6 @@
 function Get-VSTeamPullRequest {
-   [CmdletBinding(DefaultParameterSetName = "SearchCriteriaWithStatus")]
+   [CmdletBinding(DefaultParameterSetName = "SearchCriteriaWithStatus",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamPullRequest')]
    param (
       [Alias('PullRequestId')]
       [Parameter(ParameterSetName = "ById")]
@@ -112,4 +113,3 @@ function Get-VSTeamPullRequest {
       }
    }
 }
-

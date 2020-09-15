@@ -1,5 +1,6 @@
 function Remove-VSTeam {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Remove-VSTeam')]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Alias('Name', 'TeamId', 'TeamName')]

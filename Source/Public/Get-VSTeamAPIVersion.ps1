@@ -1,5 +1,5 @@
 function Get-VSTeamAPIVersion {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamAPIVersion')]
    [OutputType([System.Collections.Hashtable])]
    param(
       [Parameter(Mandatory = $false, Position = 0)]

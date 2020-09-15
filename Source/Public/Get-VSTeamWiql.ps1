@@ -1,5 +1,6 @@
 function Get-VSTeamWiql {
-   [CmdletBinding(DefaultParameterSetName = 'ByID')]
+   [CmdletBinding(DefaultParameterSetName = 'ByID',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamWiql')]
    param(
       [vsteam_lib.QueryTransformToIDAttribute()]
       [ArgumentCompleter([vsteam_lib.QueryCompleter])]

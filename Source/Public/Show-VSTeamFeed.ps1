@@ -1,5 +1,5 @@
 function Show-VSTeamFeed {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Show-VSTeamFeed')]
    param(
       [Parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [Alias('ID')]

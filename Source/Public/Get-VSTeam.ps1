@@ -1,5 +1,6 @@
 function Get-VSTeam {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeam')]
    param (
       [Parameter(ParameterSetName = 'List')]
       [int] $Top,

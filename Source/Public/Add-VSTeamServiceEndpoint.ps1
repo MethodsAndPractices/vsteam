@@ -8,7 +8,8 @@
 # https://bit.ly/Add-VSTeamServiceEndpoint
 
 function Add-VSTeamServiceEndpoint {
-   [CmdletBinding(DefaultParameterSetName = 'Secure')]
+   [CmdletBinding(DefaultParameterSetName = 'Secure',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamServiceEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $endpointName,

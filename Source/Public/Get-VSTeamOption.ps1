@@ -1,5 +1,5 @@
 function Get-VSTeamOption {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamOption')]
    param(
       [string] $subDomain,
 

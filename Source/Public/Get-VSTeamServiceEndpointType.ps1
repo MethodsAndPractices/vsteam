@@ -1,5 +1,5 @@
 function Get-VSTeamServiceEndpointType {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamServiceEndpointType')]
    param(
       [Parameter(ParameterSetName = 'ByType')]
       [string] $Type,

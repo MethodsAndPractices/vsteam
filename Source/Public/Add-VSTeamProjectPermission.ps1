@@ -13,7 +13,8 @@
 # https://bit.ly/Add-VSTeamAccessControlEntry
 
 function Add-VSTeamProjectPermission {
-   [CmdletBinding(DefaultParameterSetName = 'ByProjectAndUser')]
+   [CmdletBinding(DefaultParameterSetName = 'ByProjectAndUser',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamProjectPermission')]
    param(
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndDescriptor")]
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndGroup")]

@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamGitRepository
 
 function Add-VSTeamGitRepository {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamGitRepository')]
    param(
       [parameter(Mandatory = $true)]
       [string] $Name,

@@ -1,5 +1,6 @@
 function Get-VSTeamGitCommit {
-   [CmdletBinding(DefaultParameterSetName = 'All')]
+   [CmdletBinding(DefaultParameterSetName = 'All',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamGitCommit')]
    param (
       [Parameter(ParameterSetName = 'All', ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Parameter(ParameterSetName = 'ItemVersion', ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]

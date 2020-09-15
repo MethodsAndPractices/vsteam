@@ -1,5 +1,6 @@
 function Get-VSTeamReleaseDefinition {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamReleaseDefinition')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('environments', 'artifacts', 'none')]
