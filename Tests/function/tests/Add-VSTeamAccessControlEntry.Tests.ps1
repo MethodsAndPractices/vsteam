@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamAccessControlEntry' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+
       ## Arrange
       # Some of the functions return VSTeam classes so turn the PSCustomeObject
       # into the correct type.
@@ -24,8 +24,7 @@ Describe 'VSTeamAccessControlEntry' {
    Context 'Add-VSTeamAccessControlEntry' -Tag 'Add' {
       It 'should return ACEs by SecurityNamespace (pipeline)' {
          ## Act
-         $securityNamespaceObject
-         | Add-VSTeamAccessControlEntry -Descriptor abc `
+         $securityNamespaceObject | Add-VSTeamAccessControlEntry -Descriptor abc `
             -Token xyz `
             -AllowMask 12 `
             -DenyMask 15
@@ -94,8 +93,7 @@ Describe 'VSTeamAccessControlEntry' {
                -Descriptor boom `
                -Token xyz `
                -AllowMask 12 `
-               -DenyMask 15 }
-         | Should -Throw
+               -DenyMask 15 } | Should -Throw
       }
 
       It 'by SecurityNamespace should throw' -Tag "Throws" {
@@ -104,8 +102,7 @@ Describe 'VSTeamAccessControlEntry' {
                -Descriptor boom `
                -Token xyz `
                -AllowMask 12 `
-               -DenyMask 15 }
-         | Should -Throw
+               -DenyMask 15 } | Should -Throw
       }
    }
 }

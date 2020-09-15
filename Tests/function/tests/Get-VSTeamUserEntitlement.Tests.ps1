@@ -6,7 +6,7 @@ Describe "VSTeamUserEntitlement" {
 
       # You have to manually load the type file so the property reviewStatus
       # can be tested.
-      Update-TypeData -AppendPath "$baseFolder/Source/types/Team.UserEntitlement.ps1xml" -ErrorAction Ignore
+      Update-TypeData -AppendPath "$baseFolder/Source/types/vsteam_lib.UserEntitlement.ps1xml" -ErrorAction Ignore
    }
 
    Context "Get-VSTeamUserEntitlement" {

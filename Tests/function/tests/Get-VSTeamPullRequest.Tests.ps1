@@ -3,10 +3,10 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamPullRequest' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+
       # You have to manually load the type file so the property reviewStatus
       # can be tested.
-      Update-TypeData -AppendPath "$baseFolder/Source/types/Team.PullRequest.ps1xml" -ErrorAction Ignore
+      Update-TypeData -AppendPath "$baseFolder/Source/types/vsteam_lib.PullRequest.ps1xml" -ErrorAction Ignore
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Git' }
@@ -180,7 +180,7 @@ Describe 'VSTeamPullRequest' {
 
       It 'Negative Votes should be Rejected Status' {
          $pr = Get-VSTeamPullRequest -Id 100
-         
+
          $pr.reviewStatus | Should -Be "Rejected"
       }
 
@@ -196,4 +196,3 @@ Describe 'VSTeamPullRequest' {
       }
    }
 }
-

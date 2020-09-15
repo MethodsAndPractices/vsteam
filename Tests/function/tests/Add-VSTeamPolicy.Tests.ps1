@@ -69,8 +69,7 @@ Describe 'VSTeamPolicy' {
                      repositoryId = '10000000-0000-0000-0000-0000000000001'
                   })
             }
-         } 
-         | Should -Throw
+         } | Should -Throw
       }
    }
 }

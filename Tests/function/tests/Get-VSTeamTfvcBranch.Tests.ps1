@@ -34,7 +34,7 @@ Describe 'VSTeamTfvcBranch'  -Tag 'unit', 'tfvc' {
       It 'should return branches under this path' {
          $actual = '$/iStay/Feature1' | Get-VSTeamTfvcBranch -IncludeDeleted
 
-         $actual.count | Should -Be 1
+         $actual | Should -Not -Be $null
 
          Should -Invoke _callApi -Scope It -Exactly -Times 1 -ParameterFilter {
             $ProjectName -eq $null -and

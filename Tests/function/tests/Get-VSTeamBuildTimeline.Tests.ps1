@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamBuildTimeline' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+
       ## Arrnage
       [vsteam_lib.Versions]::Build = '1.0-unitTest'
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
@@ -93,8 +93,7 @@ Describe 'VSTeamBuildTimeline' {
             -PlanId 00000000-0000-0000-0000-000000000000
 
          { Get-VSTeamBuildTimeline -Id 1 `
-               -ProjectName "MyProject" } 
-         | Should -Not -Throw
+               -ProjectName "MyProject" } | Should -Not -Throw
       }
    }
 }

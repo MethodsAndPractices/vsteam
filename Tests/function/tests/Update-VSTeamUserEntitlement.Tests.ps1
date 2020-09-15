@@ -7,7 +7,7 @@ Describe "VSTeamUserEntitlement" {
 
       # You have to manually load the type file so the property reviewStatus
       # can be tested.
-      Update-TypeData -AppendPath "$baseFolder/Source/types/Team.UserEntitlement.ps1xml" -ErrorAction Ignore
+      Update-TypeData -AppendPath "$baseFolder/Source/types/vsteam_lib.UserEntitlement.ps1xml" -ErrorAction Ignore
    }
 
    Context 'Update-VSTeamUserEntitlement' {
@@ -23,13 +23,17 @@ Describe "VSTeamUserEntitlement" {
          Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement.json' }
 
          # Get-VSTeamUserEntitlement by id
-         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement-Id.json' } -ParameterFilter { 
-            $id -eq '00000000-0000-0000-0000-000000000000' 
+         Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement-Id.json' } -ParameterFilter {
+            $id -eq '00000000-0000-0000-0000-000000000000'
          }
       }
 
       It 'by email should update a user' {
-         Update-VSTeamUserEntitlement -License 'Stakeholder' -LicensingSource msdn -MSDNLicenseType enterprise -Email 'dlbm3@test.com' -Force
+         Update-VSTeamUserEntitlement -License 'Stakeholder' `
+            -LicensingSource msdn `
+            -MSDNLicenseType enterprise `
+            -Email 'dlbm3@test.com' `
+            -Force
 
          Should -Invoke _callAPI -Exactly -Times 1 -Scope It -ParameterFilter {
             $Method -eq 'Patch' -and

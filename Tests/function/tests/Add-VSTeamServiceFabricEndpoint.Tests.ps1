@@ -31,7 +31,7 @@ Describe 'VSTeamServiceFabricEndpoint' {
             $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
             $username = "Test User"
             $serverCertThumbprint = "0000000000000000000000000000000000000000"
-            
+
             Add-VSTeamServiceFabricEndpoint -projectName 'project' `
                -endpointName 'PM_DonovanBrown' `
                -url "tcp://0.0.0.0:19000" `
@@ -46,7 +46,7 @@ Describe 'VSTeamServiceFabricEndpoint' {
             $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
             $base64Cert = "0000000000000000000000000000000000000000"
             $serverCertThumbprint = "0000000000000000000000000000000000000000"
-            
+
             Add-VSTeamServiceFabricEndpoint -projectName 'project' `
                -endpointName 'PM_DonovanBrown' `
                -url "tcp://0.0.0.0:19000" `
@@ -77,8 +77,7 @@ Describe 'VSTeamServiceFabricEndpoint' {
                { Add-VSTeamServiceFabricEndpoint -projectName 'project' `
                      -endpointName 'PM_DonovanBrown' `
                      -url "tcp://0.0.0.0:19000" `
-                     -useWindowsSecurity $false } 
-               | Should -Not -Throw
+                     -useWindowsSecurity $false } | Should -Not -Throw
             }
 
             It 'Add-VSTeamServiceEndpoint should be called' {

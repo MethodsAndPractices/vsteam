@@ -15,13 +15,13 @@ Describe 'VSTeamAccessControlList' {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
    }
-   
+
    Context 'Get-VSTeamAccessControlList' {
       BeforeAll {
          Mock Invoke-RestMethod { Open-SampleFile 'accessControlListResult.json' }
          Mock Invoke-RestMethod { throw 'Error' } -ParameterFilter { $Uri -like "*token=boom*" }
       }
-      
+
       It 'by SecurityNamespaceId should return ACLs' {
          ## Arrange
          # Even with a default set this URI should not have the project added.
@@ -80,8 +80,7 @@ Describe 'VSTeamAccessControlList' {
                -Token "boom" `
                -Descriptors "SomeDescriptor" `
                -IncludeExtendedInfo `
-               -Recurse }
-         | Should -Throw
+               -Recurse } | Should -Throw
       }
 
       It 'by SecurityNamespace should throw' {
@@ -90,10 +89,7 @@ Describe 'VSTeamAccessControlList' {
                -Token "boom" `
                -Descriptors "SomeDescriptor" `
                -IncludeExtendedInfo `
-               -Recurse } 
-         | Should -Throw
+               -Recurse } | Should -Throw
       }
    }
 }
-
-

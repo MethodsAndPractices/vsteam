@@ -7,7 +7,7 @@ Describe 'VSTeamPullRequest' {
 
       # You have to manually load the type file so the property reviewStatus
       # can be tested.
-      Update-TypeData -AppendPath "$baseFolder/Source/types/Team.PullRequest.ps1xml" -ErrorAction Ignore
+      Update-TypeData -AppendPath "$baseFolder/Source/types/vsteam_lib.PullRequest.ps1xml" -ErrorAction Ignore
 
       ## Arrange
       Mock Show-Browser

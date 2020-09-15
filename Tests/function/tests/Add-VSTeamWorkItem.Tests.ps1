@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamWorkItem' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamWorkItem-Id16.json' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
@@ -51,7 +51,7 @@ Describe 'VSTeamWorkItem' {
       It 'With Default Project should add work item with parent' {
          ## Arrange
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = 'test'
-         
+
          ## Act
          Add-VSTeamWorkItem -ProjectName test -WorkItemType Task -Title Test1 -Description Testing -ParentId 25
 
@@ -131,8 +131,7 @@ Describe 'VSTeamWorkItem' {
                -Title Test1 `
                -Description Testing `
                -ParentId 25 `
-               -AdditionalFields $additionalFields } 
-         | Should -Throw
+               -AdditionalFields $additionalFields } | Should -Throw
       }
    }
 }

@@ -114,8 +114,7 @@ Describe 'VSTeamRelease' {
          { Add-VSTeamRelease -ProjectName project `
                -DefinitionId 101 `
                -ArtifactAlias drop `
-               -BuildId 101 } 
-         | Should -Throw
+               -BuildId 101 } | Should -Throw
       }
    }
 }

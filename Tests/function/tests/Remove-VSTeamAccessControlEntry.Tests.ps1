@@ -21,12 +21,11 @@ Describe 'VSTeamSecurityNamespace' {
    Context 'Remove-VSTeamAccessControlEntry by SecurityNamespaceId' {
       It 'Should succeed with a properly formatted descriptor if descriptor is on ACL' {
          Mock _callAPI { return $true }
-         
+
          Remove-VSTeamAccessControlEntry -SecurityNamespaceId $secNamespaceId `
             -Descriptor $testDescriptor `
             -Token xyz `
-            -force
-         | Should -Be "Removal of ACE from ACL succeeded."
+            -force | Should -Be "Removal of ACE from ACL succeeded."
       }
 
       It 'Should fail with a properly formatted descriptor if descriptor is not on ACL already' {
@@ -51,21 +50,21 @@ Describe 'VSTeamSecurityNamespace' {
             -force `
             -ErrorVariable err `
             -ErrorAction SilentlyContinue
-         
+
          $err.count | Should -Be 2
          $err[1].Exception.Message | Should -Be "Could not convert base64 string to string."
       }
 
       It 'Should fail if the REST API gives a non true/false response' {
          Mock _callAPI { return "Not a valid return" }
-      
+
          Remove-VSTeamAccessControlEntry -SecurityNamespaceId $secNamespaceId `
             -Descriptor $testDescriptor `
             -Token xyz `
             -force `
             -ErrorVariable err `
             -ErrorAction SilentlyContinue
-         
+
          $err.count | Should -Be 1
          $err[0].Exception.Message | Should -Be "Unexpected response from REST API."
       }
@@ -74,20 +73,19 @@ Describe 'VSTeamSecurityNamespace' {
    Context 'Remove-VSTeamAccessControlEntry by SecurityNamespace' {
       It 'Should succeed with a properly formatted descriptor if descriptor is on ACL' {
          Mock _callAPI { return $true }
- 
+
          $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
-         
+
          Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace `
             -Descriptor $testDescriptor `
             -Token xyz `
-            -force 
-         | Should -Be "Removal of ACE from ACL succeeded."
+            -force | Should -Be "Removal of ACE from ACL succeeded."
       }
       It 'Should fail with a properly formatted descriptor if descriptor is not on ACL already' {
          Mock _callAPI { return $false }
-         
+
          $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
- 
+
          Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace `
             -Descriptor $testDescriptor `
             -Token xyz `
@@ -100,7 +98,7 @@ Describe 'VSTeamSecurityNamespace' {
       }
       It 'Should fail with an improperly formatted descriptor' {
          $securityNamespace = Get-VSTeamSecurityNamespace -Id "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
- 
+
          Remove-VSTeamAccessControlEntry -SecurityNamespace $securityNamespace `
             -Descriptor @("vssgp.NotARealDescriptor") `
             -Token xyz `
@@ -113,14 +111,14 @@ Describe 'VSTeamSecurityNamespace' {
       }
       It 'Should fail if the REST API gives a non true/false response' {
          Mock _callAPI { return "Not a valid return" }
- 
+
          Remove-VSTeamAccessControlEntry -SecurityNamespaceId $secNamespaceId `
             -Descriptor $testDescriptor `
             -Token xyz `
             -force `
             -ErrorVariable err `
             -ErrorAction SilentlyContinue
-         
+
          $err.count | Should -Be 1
          $err[0].Exception.Message | Should -Be "Unexpected response from REST API."
       }

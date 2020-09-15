@@ -7,7 +7,7 @@ Describe "VSTeamUserEntitlement" {
 
       # You have to manually load the type file so the property reviewStatus
       # can be tested.
-      Update-TypeData -AppendPath "$baseFolder/Source/types/Team.UserEntitlement.ps1xml" -ErrorAction Ignore
+      Update-TypeData -AppendPath "$baseFolder/Source/types/vsteam_lib.UserEntitlement.ps1xml" -ErrorAction Ignore
    }
 
    Context "Remove-VSTeamUserEntitlement" {
@@ -21,7 +21,7 @@ Describe "VSTeamUserEntitlement" {
          BeforeAll {
             # Get-VSTeamUserEntitlement by Id
             Mock _callAPI { Open-SampleFile 'Get-VSTeamUserEntitlement-Id.json' } -ParameterFilter {
-               $Id -eq '00000000-0000-0000-0000-000000000000' 
+               $Id -eq '00000000-0000-0000-0000-000000000000'
             }
 
             # Get-VSTeamUserEntitlement by email
