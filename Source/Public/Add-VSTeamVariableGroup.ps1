@@ -8,6 +8,7 @@
 # http://bit.ly/Add-VSTeamVariableGroup
 
 function Add-VSTeamVariableGroup {
+   [CmdletBinding()]
    param(
       [Parameter(ParameterSetName = 'ByHashtable', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Name,

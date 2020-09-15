@@ -1,4 +1,5 @@
 function Get-VSTeamExtension {
+   [CmdletBinding()]
    param (
       [Parameter(ParameterSetName = 'List', Mandatory = $false)]
       [switch] $IncludeInstallationIssues,

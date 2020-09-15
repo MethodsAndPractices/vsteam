@@ -157,15 +157,29 @@ function Merge-Function {
    process {
       $contents = New-Object System.Text.StringBuilder
 
-      ForEach ($file in $files) {
+      foreach ($file in $files) {
          Write-Verbose -Message "Merging from $file"
          $fileContents = Get-Content $file
 
+         $foundCmdletBinding = $false
+
+         if($null -ne $($fileContents | Select-String -Pattern 'CmdletBinding')){
+            $foundCmdletBinding = $true
+         }
+
          foreach ($line in $fileContents) {
+
+
+
+
             $line = ($line -replace ' +$', '')
             if ($null -ne $line.Trim() -and '' -ne $line.Trim()) {
                $contents.AppendLine($line) | Out-Null
             }
+         }
+
+         if(-not $foundCmdletBinding) {
+            Write-Warning -Message "CmdletBinding not found in $file"
          }
       }
 
@@ -209,7 +223,7 @@ function Merge-Class {
 
          # Remove all trailing whitespace
          $newFileContents = ($newFileContents -replace ' +$', '')
-         
+
          # This not only removes the comment but any whitespace before it.
          $newFileContents = ($newFileContents -replace ' +#.+', '')
          foreach ($line in $newFileContents) {

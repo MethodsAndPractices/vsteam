@@ -1,4 +1,6 @@
 function Get-VSTeamInfo {
+   [CmdletBinding()]
+   param ()
    return @{
       Account        = _getInstance
       Version        = $(_getApiVersion -Target)

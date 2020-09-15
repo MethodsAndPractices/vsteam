@@ -1,4 +1,5 @@
 function Get-VSTeamBuildTag {
+   [CmdletBinding()]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]

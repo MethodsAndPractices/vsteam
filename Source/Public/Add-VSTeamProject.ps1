@@ -7,6 +7,7 @@
 # http://bit.ly/Add-VSTeamProject
 
 function Add-VSTeamProject {
+   [CmdletBinding()]
    param(
       [parameter(Mandatory = $true)]
       [Alias('Name')]

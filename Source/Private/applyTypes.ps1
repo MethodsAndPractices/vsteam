@@ -1,6 +1,7 @@
 # Apply types to the returned objects so format and type files can
 # identify the object and act on it.
 function _applyTypes {
+   [CmdletBinding()]
    param(
       $item,
       $type
@@ -10,12 +11,14 @@ function _applyTypes {
 }
 
 function _applyTypesWorkItemType {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.WorkItemType')
 }
 
 function _applyTypesToWorkItem {
+   [CmdletBinding()]
    param($item)
 
    # If there are ids in the list that don't map to a work item and empty
@@ -26,6 +29,7 @@ function _applyTypesToWorkItem {
 }
 
 function _applyTypesToWiql {
+   [CmdletBinding()]
    param($item)
    if ($item) {
       $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Wiql')
@@ -33,6 +37,7 @@ function _applyTypesToWiql {
 }
 
 function _applyTypesToUser {
+   [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true)]
       $item
@@ -43,12 +48,14 @@ function _applyTypesToUser {
 }
 
 function _applyTypesToTfvcBranch {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.TfvcBranch')
 }
 
 function _applyTypesToTeamMember {
+   [CmdletBinding()]
    param(
       [Parameter(Mandatory = $true)]
       $item,
@@ -65,12 +72,14 @@ function _applyTypesToTeamMember {
 }
 
 function _applyTypesToApproval {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Approval')
 }
 
 function _applyTypesToBuild {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Build')
@@ -93,6 +102,7 @@ function _applyTypesToBuild {
 }
 
 function _applyArtifactTypes {
+   [CmdletBinding()]
    $item.PSObject.TypeNames.Insert(0, "vsteam_lib.Build.Artifact")
 
    if ($item.PSObject.Properties.Match('resource').count -gt 0 -and $null -ne $item.resource -and $item.resource.PSObject.Properties.Match('propeties').count -gt 0) {
@@ -102,30 +112,35 @@ function _applyArtifactTypes {
 }
 
 function _applyTypesToAzureSubscription {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.AzureSubscription')
 }
 
 function _applyTypesToPolicy {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Policy')
 }
 
 function _applyTypesToPolicyType {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.PolicyType')
 }
 
 function _applyTypesToPullRequests {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.PullRequest')
 }
 
 function _applyTypesToRelease {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Release')
@@ -142,6 +157,7 @@ function _applyTypesToRelease {
 }
 
 function _applyTypesToServiceEndpoint {
+
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.ServiceEndpoint')
@@ -157,6 +173,7 @@ function _applyTypesToServiceEndpoint {
 }
 
 function _applyTypesToServiceEndpointType {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.ServiceEndpointType')
@@ -183,6 +200,7 @@ function _applyTypesToServiceEndpointType {
 }
 
 function _applyTypesToVariableGroup {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.VariableGroup')
@@ -196,12 +214,14 @@ function _applyTypesToVariableGroup {
 }
 
 function _applyTypesToYamlPipelineResultType {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.YamlPipelineResult')
 }
 
 function _applyTypesToBuildTimelineResultType {
+   [CmdletBinding()]
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.BuildTimeline')

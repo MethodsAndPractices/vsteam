@@ -8,6 +8,7 @@
 # http://bit.ly/Add-VSTeamExtension
 
 function Add-VSTeamExtension {
+   [CmdletBinding()]
    param(
       [parameter(Mandatory = $true)]
       [string] $PublisherId,

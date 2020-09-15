@@ -6,6 +6,7 @@ $profilesPath = "$HOME/vsteam_profiles.json"
 # This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
 # If you need to call TFS or VSTS this is the function to use.
 function _callAPI {
+   [CmdletBinding()]
    param(
       [string]$resource,
       [string]$area,
