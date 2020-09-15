@@ -20,11 +20,9 @@ function Add-VSTeamClassificationNode {
       [Parameter(Mandatory = $false)]
       [string] $Path = $null,
 
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]
       [Parameter(Mandatory = $false)]
       [datetime] $StartDate,
 
-      [CmdletBinding(DefaultParameterSetName = 'ByIteration')]
       [Parameter(Mandatory = $false)]
       [datetime] $FinishDate,
 
