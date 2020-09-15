@@ -54,7 +54,9 @@ namespace vsteam_lib
                {
                   prop.SetValue(target, value?.ToString());
                }
-               else if(prop.PropertyType.Name == "DateTime")
+               // In PowerShell 5 the name is nullable1 with DateTime as part of FullName
+               else if(prop.PropertyType.Name == "DateTime" ||
+                       prop.PropertyType.FullName.Contains("DateTime"))
                {
                   prop.SetValue(target, DateTime.Parse(value.ToString()));
                }
