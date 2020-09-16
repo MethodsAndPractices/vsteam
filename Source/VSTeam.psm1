@@ -27,5 +27,5 @@ if ($null -ne $env:TEAM_PROJECT) {
 $latestMod = Find-Module -Name VSTeam
 
 if($latestMod.Version -ge [vsteam_lib.Versions]::ModuleVersion) {
-   Write-Host "There is a new version of VSTeam available ($($latestMod.Version)). Run 'Update-Module -Name VSTeam' to update."
+   Write-Information "There is a new version of VSTeam available ($($latestMod.Version)). Run 'Update-Module -Name VSTeam' to update." -InformationAction Continue
 }
