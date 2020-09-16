@@ -24,7 +24,7 @@ if ($null -ne $env:TEAM_PROJECT) {
 }
 
 # Check to see if there is a newwer version of the module
-$latestMod = Find-Module -Name VSTeam
+$latestMod = Find-Module -Name 'VSTeam' -Repository 'PSGallery'
 
 if($latestMod.Version -ge [vsteam_lib.Versions]::ModuleVersion) {
    Write-Information "There is a new version of VSTeam available ($($latestMod.Version)). Run 'Update-Module -Name VSTeam' to update." -InformationAction Continue
