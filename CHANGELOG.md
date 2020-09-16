@@ -6,6 +6,12 @@ All classes are moved to a new C# class library.
 All classes names changed i.e. VSTeamSecurityNamespace is now vsteam_lib.SecurityNamespace
 All unit tests were reviewed and all now use sample files where possible instead of inline objects.
 
+Added notification when a new version is released.
+
+```powershell
+There is a new version of VSTeam available (7.0.1). Run 'Update-Module -Name VSTeam' to update.
+```
+
 Build-Module script builds the class lib project as well.
 
 The folder structure has changed. All the tests and sample files are under the Tests folder.

@@ -22,3 +22,10 @@ if ($null -ne $env:TEAM_PROJECT) {
       Set-VSTeamDefaultProject -Project $env:TEAM_PROJECT
    }
 }
+
+# Check to see if there is a newwer version of the module
+$latestMod = Find-Module -Name VSTeam
+
+if($latestMod.Version -ge [vsteam_lib.Versions]::ModuleVersion) {
+   Write-Host "There is a new version of VSTeam available ($($latestMod.Version)). Run 'Update-Module -Name VSTeam' to update."
+}
