@@ -9,7 +9,7 @@
 
 function Add-VSTeamRelease {
    [CmdletBinding(DefaultParameterSetName = 'ById', SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamRelease')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamRelease')]
    param(
       [Parameter(ParameterSetName = 'ById', Mandatory = $true)]
       [int] $DefinitionId,

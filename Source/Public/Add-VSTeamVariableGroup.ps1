@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamVariableGroup
 
 function Add-VSTeamVariableGroup {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamVariableGroup')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamVariableGroup')]
    param(
       [Parameter(ParameterSetName = 'ByHashtable', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Name,

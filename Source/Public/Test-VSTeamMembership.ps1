@@ -1,5 +1,5 @@
 function Test-VSTeamMembership {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Test-VSTeamMembership')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Test-VSTeamMembership')]
    [OutputType([System.Boolean])]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = "MemberDescriptor")]

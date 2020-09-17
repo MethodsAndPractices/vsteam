@@ -1,6 +1,6 @@
 function Update-VSTeamPolicy {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Update-VSTeamPolicy')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Update-VSTeamPolicy')]
    param(
       [Parameter(Mandatory = $true)]
       [int] $id,

@@ -14,7 +14,7 @@
 
 function Add-VSTeamWorkItemIterationPermission {
    [CmdletBinding(DefaultParameterSetName = 'ByProjectAndIterationIdAndUser',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamWorkItemIterationPermission')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamWorkItemIterationPermission')]
    param(
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndDescriptor")]
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndGroup")]

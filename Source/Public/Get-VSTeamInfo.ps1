@@ -1,5 +1,5 @@
 function Get-VSTeamInfo {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamInfo')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamInfo')]
    param ()
    return @{
       Account        = _getInstance

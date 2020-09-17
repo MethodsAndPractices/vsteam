@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamTaskGroup
 
 function Add-VSTeamTaskGroup {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamTaskGroup')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamTaskGroup')]
    param(
       [Parameter(ParameterSetName = 'ByFile', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $InFile,

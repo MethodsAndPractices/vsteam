@@ -1,5 +1,5 @@
 function Get-VSTeamTfvcRootBranch {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamTfvcRootBranch')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamTfvcRootBranch')]
    param(
       [parameter(Mandatory = $false)]
       [switch] $IncludeChildren = $false,

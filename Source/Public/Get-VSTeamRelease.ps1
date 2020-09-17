@@ -1,6 +1,6 @@
 function Get-VSTeamRelease {
    [CmdletBinding(DefaultParameterSetName = 'List',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamRelease')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamRelease')]
    param(
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]

@@ -8,7 +8,7 @@
 # https://bit.ly/Add-VSTeam
 
 function Add-VSTeam {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeam')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeam')]
    param(
       [Parameter(Mandatory = $true, Position = 1)]
       [Alias('TeamName')]

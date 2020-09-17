@@ -8,7 +8,7 @@
 # https://bit.ly/Add-VSTeamBuildDefinition
 
 function Add-VSTeamBuildDefinition {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamBuildDefinition')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamBuildDefinition')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $InFile,

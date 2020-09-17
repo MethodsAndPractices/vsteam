@@ -1,6 +1,6 @@
 function Update-VSTeam {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Update-VSTeam')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Update-VSTeam')]
    param(
       [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Alias('TeamName', 'TeamId', 'TeamToUpdate', 'Id')]

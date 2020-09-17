@@ -1,6 +1,6 @@
 function Get-VSTeamWorkItem {
    [CmdletBinding(DefaultParameterSetName = 'ByID',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamWorkItem')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamWorkItem')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int[]] $Id,

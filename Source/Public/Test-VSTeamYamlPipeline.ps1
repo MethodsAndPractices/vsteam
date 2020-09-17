@@ -1,6 +1,6 @@
 function Test-VSTeamYamlPipeline {
    [CmdletBinding(DefaultParameterSetName = 'WithFilePath',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Test-VSTeamYamlPipeline')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Test-VSTeamYamlPipeline')]
    param(
       [Parameter(ParameterSetName = 'WithFilePath', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Parameter(ParameterSetName = 'WithYamlOverride', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]

@@ -14,7 +14,7 @@
 
 function Add-VSTeamWorkItemAreaPermission {
    [CmdletBinding(DefaultParameterSetName = 'ByProjectAndAreaIdAndUser',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamWorkItemAreaPermission')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamWorkItemAreaPermission')]
    param(
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndDescriptor")]
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndGroup")]

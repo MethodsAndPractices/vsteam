@@ -1,5 +1,5 @@
 function Show-VSTeamGitRepository {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Show-VSTeamGitRepository')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Show-VSTeamGitRepository')]
    param (
       [Parameter(ValueFromPipelineByPropertyName = $true)]
       [string] $RemoteUrl,

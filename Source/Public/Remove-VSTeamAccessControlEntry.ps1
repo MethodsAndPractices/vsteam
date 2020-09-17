@@ -12,7 +12,7 @@
 
 function Remove-VSTeamAccessControlEntry {
    [CmdletBinding(DefaultParameterSetName = 'byNamespace', SupportsShouldProcess = $true, ConfirmImpact = 'High',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Remove-VSTeamAccessControlEntry')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamAccessControlEntry')]
    [OutputType([System.String])]
    param(
       [Parameter(ParameterSetName = 'byNamespace', Mandatory = $true, ValueFromPipeline = $true)]

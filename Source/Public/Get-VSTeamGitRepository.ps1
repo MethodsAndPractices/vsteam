@@ -1,6 +1,6 @@
 function Get-VSTeamGitRepository {
    [CmdletBinding(DefaultParameterSetName = 'ByID',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamGitRepository')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamGitRepository')]
    param (
       [Parameter(ParameterSetName = 'ByID', ValueFromPipeline = $true)]
       [Alias('RepositoryID')]

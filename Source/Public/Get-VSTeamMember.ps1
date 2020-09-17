@@ -1,5 +1,5 @@
 function Get-VSTeamMember {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamMember')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamMember')]
    param (
       [Parameter()]
       [int] $Top,

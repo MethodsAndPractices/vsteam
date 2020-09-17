@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamExtension
 
 function Add-VSTeamExtension {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamExtension')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamExtension')]
    param(
       [parameter(Mandatory = $true)]
       [string] $PublisherId,

@@ -14,7 +14,7 @@
 
 function Add-VSTeamAccessControlEntry {
    [CmdletBinding(DefaultParameterSetName = 'ByNamespace',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamAccessControlEntry')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamAccessControlEntry')]
    param(
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
       [vsteam_lib.SecurityNamespace] $SecurityNamespace,

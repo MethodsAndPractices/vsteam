@@ -1,6 +1,6 @@
 function Get-VSTeamUserEntitlement {
    [CmdletBinding(DefaultParameterSetName = 'List',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamUserEntitlement')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamUserEntitlement')]
    param (
       [Parameter(ParameterSetName = 'List')]
       [int] $Top = 100,

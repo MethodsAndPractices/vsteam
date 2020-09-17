@@ -1,6 +1,6 @@
 function Get-VSTeamBuildDefinition {
    [CmdletBinding(DefaultParameterSetName = 'List',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Get-VSTeamBuildDefinition')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamBuildDefinition')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [string] $Filter,

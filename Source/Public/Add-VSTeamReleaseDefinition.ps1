@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamReleaseDefinition
 
 function Add-VSTeamReleaseDefinition {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamReleaseDefinition')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamReleaseDefinition')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $inFile,

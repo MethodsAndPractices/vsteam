@@ -9,7 +9,7 @@
 # http://bit.ly/Add-VSTeamUserEntitlement
 
 function Add-VSTeamUserEntitlement {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamUserEntitlement')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamUserEntitlement')]
    param(
       [Parameter(Mandatory = $true)]
       [Alias('UserEmail')]

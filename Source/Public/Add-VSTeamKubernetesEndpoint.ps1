@@ -8,7 +8,7 @@
 # https://bit.ly/Add-VSTeamServiceEndpoint
 
 function Add-VSTeamKubernetesEndpoint {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Add-VSTeamKubernetesEndpoint')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamKubernetesEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $endpointName,

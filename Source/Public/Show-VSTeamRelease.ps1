@@ -1,6 +1,6 @@
 function Show-VSTeamRelease {
    [CmdletBinding(DefaultParameterSetName = 'ById',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Show-VSTeamRelease')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Show-VSTeamRelease')]
    param(
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 1)]
       [Alias('ReleaseID')]

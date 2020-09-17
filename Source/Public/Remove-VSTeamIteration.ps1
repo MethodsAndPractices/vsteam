@@ -1,6 +1,6 @@
 function Remove-VSTeamIteration {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/modules/vsteam/Remove-VSTeamIteration')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamIteration')]
    param(
       [Parameter(Mandatory = $true)]
       [int] $ReClassifyId,
