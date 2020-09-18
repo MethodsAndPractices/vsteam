@@ -23,6 +23,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("Test", target.ProjectName, "ProjectName");
          Assert.AreEqual("group", target.SubjectKind, "SubjectKind");
          Assert.AreEqual("redacted", target.Descriptor, "Descriptor");
+         Assert.AreEqual("redacted",  target.ContainerDescriptor, "ContainerDescriptor");
          Assert.AreEqual("00000000-0000-0000-0000-000000000000", target.OriginId, "OriginId");
          Assert.AreEqual("Project Collection Build Administrators", target.DisplayName, "DisplayName");
          Assert.AreEqual("https://vssps.dev.azure.com/Test/_apis/Graph/Groups/redacted", target.Url, "Url");
@@ -30,7 +31,10 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("vstfs:///Framework/IdentityDomain/00000000-0000-0000-0000-000000000000", target.Domain, "Domain");
          Assert.AreEqual("Members of this group should include accounts for people who should be able to administer the build resources.", target.Description, "Description");
 
-         Assert.IsNotNull(target.Links, "Links");
+
+
+
+      Assert.IsNotNull(target.Links, "Links");
          Assert.IsNotNull(target.Links.InternalObject, "Links.InternalObject");
          Assert.AreEqual("https://vssps.dev.azure.com/Test/_apis/Graph/Groups/redacted", target.Links.Self, "Links.Self");
          Assert.AreEqual("https://vssps.dev.azure.com/Test/_apis/Graph/Memberships/redacted", target.Links.Memberships, "Links.Memberships");

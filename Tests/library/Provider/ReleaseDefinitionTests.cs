@@ -28,6 +28,7 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(actual.ModifiedBy, "ModifiedBy");
          Assert.IsNotNull(actual.Properties, "Properties");
 
+
          Assert.IsFalse(actual.IsDeleted, "IsDeleted");
 
          Assert.IsNotNull(actual.Links, "Links");
@@ -39,9 +40,10 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual(1, actual.Revision, "Revision");
          Assert.AreEqual("Fabrikam-web", actual.Name, "Name");
          Assert.AreEqual(null, actual.Description, "Description");
-         Assert.AreEqual("Chuck Reinhart", actual.CreatedByUser, "CreatedByUser");
-         Assert.AreEqual("12/11/2018 4:48:42 AM", actual.CreatedOn.ToString(), "CreatedOn");
          Assert.AreEqual("", actual.ReleaseNameFormat, "ReleaseNameFormat");
+         Assert.AreEqual("Chuck Reinhart", actual.CreatedByUser, "CreatedByUser");
+         Assert.AreEqual("ReleaseDefinition", actual.ResourceType, "ResourceType");
+         Assert.AreEqual("12/11/2018 4:48:42 AM", actual.CreatedOn.ToString(), "CreatedOn");
          Assert.AreEqual("12/11/2018 4:48:42 AM", actual.ModifiedOn.ToString(), "ModifiedOn");
          Assert.AreEqual("https://vsrm.dev.azure.com/fabrikam/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/40", actual.Url, "Url");
       }

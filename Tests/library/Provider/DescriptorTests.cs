@@ -12,12 +12,14 @@ namespace vsteam_lib.Test.Provider
       {
          // Arrange
          var obj = BaseTests.LoadJson("descriptor.scope.TestProject.json", false);
+         var expectedLinks = "Self: https://vssps.dev.azure.com/test/_apis/Graph/Descriptors/010d06f0-00d5-472a-bb47-58947c230876\r\nStorageKey: https://vssps.dev.azure.com/test/_apis/Graph/StorageKeys/scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2\r\nSubject: https://vssps.dev.azure.com/test/_apis/Graph/Scopes/scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2\r\n";
 
          // Act
          var target = new Descriptor(obj[0]);
 
          // Assert
          Assert.IsNotNull(target.Links, "Links");
+         Assert.AreEqual(expectedLinks, target.Links.ToString(), "ToString");
          Assert.AreEqual("scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2", target.ToString(), "ToString");
          Assert.AreEqual("https://vssps.dev.azure.com/test/_apis/Graph/Scopes/scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2", target.Links.Subject, "Links.Subject");
       }

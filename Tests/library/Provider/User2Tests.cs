@@ -56,6 +56,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("user", target.SubjectKind, "SubjectKind");
          Assert.AreEqual("Redacted", target.Descriptor, "Descriptor");
          Assert.AreEqual("Donovan Brown", target.DisplayName, "DisplayName");
+         Assert.AreEqual("Redacted", target.MemberDescriptor, "MemberDescriptor");
          Assert.AreEqual("test@microsoft.com", target.MailAddress, "MailAddress");
          Assert.AreEqual("test@microsoft.com", target.PrincipalName, "PrincipalName");
          Assert.AreEqual("00000000-0000-0000-0000-000000000088", target.Domain, "Domain");

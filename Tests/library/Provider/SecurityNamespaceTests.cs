@@ -1,9 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace vsteam_lib.Test.Provider
 {
-   [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
+   [TestClass]
+   [ExcludeFromCodeCoverage]
    public class SecurityNamespaceTests
    {
       [TestMethod]
@@ -28,7 +30,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("Analytics", target.DisplayName, "DisplayName");
          Assert.AreEqual(false, target.UseTokenTranslator, "UseTokenTranslator");
          Assert.AreEqual("Default", target.DataspaceCategory, "DataspaceCategory");
-         
+
          Assert.AreEqual("Analytics", target.ToString(), "ToString()");
 
          Assert.IsNotNull(target.Actions, "Actions");

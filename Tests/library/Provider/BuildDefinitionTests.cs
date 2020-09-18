@@ -28,6 +28,8 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(actual.GitRepository, "GitRepository");
          Assert.IsNotNull(actual.RetentionRules, "RetentionRules");
 
+         Assert.AreEqual("BuildDefinition", actual.ResourceType, "ResourceType");
+
          Assert.AreEqual(5, actual.JobCancelTimeoutInMinutes, "JobCancelTimeoutInMinutes");
          Assert.AreEqual("projectCollection", actual.JobAuthorizationScope, "JobAuthorizationScope");
          Assert.AreEqual("$(date:yyyyMMdd)$(rev:.r)", actual.BuildNumberFormat, "BuildNumberFormat");
