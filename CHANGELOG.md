@@ -2,38 +2,17 @@
 
 ## 7.0.0
 
+## Breaking changes
+
 All classes are moved to a new C# class library.
-All classes names changed i.e. VSTeamSecurityNamespace is now vsteam_lib.SecurityNamespace
-All unit tests were reviewed and all now use sample files where possible instead of inline objects.
 
-Added notification when a new version is released.
-
-```powershell
-There is a new version of VSTeam available (7.0.1). Run 'Update-Module -Name VSTeam' to update.
-```
-
-Build-Module script builds the class lib project as well.
-
-The folder structure has changed. All the tests and sample files are under the Tests folder.
-There is a new packages folder that contains required libs to build the C# project that do not live in NuGet.
-The Build folder is now the .build folder.
-
-The C# solution files is in the root of the project vsteam_lib.sln. The lib is in the classes folder under source and the tests are under the library folder under Tests.
-
-You can now call Get-VSTeamTfvcBranch with no parameters.
-
-Added -force to Remove-VSTeamAccessControlEntry so you don't have to use -confirm:$false. This make it consistent with the rest of the functions
-
-Get-VSTeamUser and Get-VSTeamGroup can now take Descriptor from pipeline.
-
-**Breaking changes**:
 You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
 
-All types were changed from Team. to vsteam_lib. this will make it easy for moving types from PowerShell to C#.
+All types were changed from 'Team.' to 'vsteam_lib.' this will make it easy when moving types from PowerShell to C#.
 
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.
 
-Disable-VSTeamAgent now requires -Force
+Disable-VSTeamAgent now requires -Force.
 
 Changed Ids parameter to Id on the following functions to be consistent with other functions:
 
@@ -44,16 +23,47 @@ Changed Ids parameter to Id on the following functions to be consistent with oth
 
 ReClassifyId and Path are now required on Remove-VSTeamArea.
 
-Get-VSTeamGitCommit removed Id alias on RepositoryId parameter
+Get-VSTeamGitCommit removed Id alias on RepositoryId parameter.
 
-Renamed parameters on Get-VSTeamBuildTimeline to make it easier to pipe results of Get-VSTeamBuild into Get-VSTeamBuildTimeline. $Id of type Guid is now $TimelineId.
-$BuildId of type int[] is now $Id.
+Renamed parameters on Get-VSTeamBuildTimeline to make it easier to pipe results of Get-VSTeamBuild into Get-VSTeamBuildTimeline. $Id of type Guid is now $TimelineId. $BuildId of type int[] is now $Id.
 
 Removed Type parameter from Get-VSTeamBuildDefinition.
 
 Removed the Top and Skip parameters from Get-VSTeamProcess.
 
 Get-VSTeamMembership now returns a collection. There is no need to .value with results.
+
+### Core changes
+
+The folder structure of the project was changed to support the new C# class library.
+
+All the tests and sample files are under the Tests folder.
+
+There is a new packages folder that contains required libs to build the C# project that do not live in NuGet.
+
+The Build folder is now the .build folder.
+
+Build-Module script builds the class lib project as well.
+
+The C# solution files is in the root of the project vsteam_lib.sln.
+
+The lib is in the classes folder under source and the tests are under the library folder under Tests.
+
+You can now call Get-VSTeamTfvcBranch with no parameters.
+
+Added -force to Remove-VSTeamAccessControlEntry so you don't have to use -confirm:$false. This make it consistent with the rest of the functions
+
+Get-VSTeamUser and Get-VSTeamGroup can now take Descriptor from pipeline.
+
+All unit tests were reviewed and all now use sample files where possible instead of inline objects.
+
+### Docs changes
+
+Added HelpUri to all public functions
+
+Deleted the docs folder because all docs are now available [here](https://methodsandpractices.github.io/vsteam-docs/)
+
+Added examples to all the help files.
 
 ## 6.5.1
 

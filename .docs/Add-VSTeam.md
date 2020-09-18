@@ -14,18 +14,25 @@
 
 ## EXAMPLES
 
+### Example 1: Add a team
+
+```powershell
+Add-VSTeam -ProjectName Scrum -Name 'Testing'
+```
+
+This command adds a team named 'Testing' to the project named 'Scrum'.
+
+### Example 2: Add a team with description
+
+```powershell
+Add-VSTeam 'Scrum' 'Testing2' 'Test team'
+```
+
+This command adds a team named 'Testing2' with description 'Test team' to the project named 'Scrum'.
+
 ## PARAMETERS
 
 <!-- #include "./params/projectName.md" -->
-
-### -Description
-
-The description of the team.
-
-```yaml
-Type: String
-Position: 1
-```
 
 ### -Name
 
@@ -36,6 +43,15 @@ Type: String
 Aliases: TeamName
 Required: True
 Position: 1
+```
+
+### -Description
+
+The description of the team.
+
+```yaml
+Type: String
+Position: 2
 ```
 
 ## INPUTS

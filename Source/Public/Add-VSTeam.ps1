@@ -14,6 +14,7 @@ function Add-VSTeam {
       [Alias('TeamName')]
       [string] $Name,
 
+      [Parameter(Position = 2)]
       [string] $Description = '',
 
       [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]

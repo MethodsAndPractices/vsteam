@@ -48,7 +48,7 @@ param(
    [Parameter(ParameterSetName = "UnitTest")]
    [Parameter(ParameterSetName = "All")]
    [switch]$skipLibBuild,
-   
+
    [ValidateSet('LibOnly', 'Debug', 'Release')]
    [string]$configuration = "LibOnly",
 
@@ -120,9 +120,9 @@ else {
 
 $output = [System.IO.Path]::GetFullPath($output)
 
-Merge-File -inputFile ./Source/_functions.json -outputDir $output
 Merge-File -inputFile ./Source/types/_types.json -outputDir $output
 Merge-File -inputFile ./Source/formats/_formats.json -outputDir $output
+Merge-File -inputFile ./Source/_functions.json -outputDir $output
 
 # Build the help
 if ($buildHelp.IsPresent) {
@@ -172,18 +172,18 @@ if ($runTests.IsPresent) {
    if (-not $skipLibBuild.IsPresent -and $configuration -ne 'LibOnly') {
       Write-Output '   Testing: C# project (unit)'
       $testOutput = dotnet test --nologo --configuration $configuration | Out-String
-      
+
       if (-not ($testOutput | Select-String -Pattern 'Test Run Successful')) {
          Write-Output $testOutput
       }
    }
-   
+
    Write-Output '   Testing: Functions (unit)'
 
    if (-not $(Test-Path -Path './Tests/TestResults')) {
       New-Item -Path './Tests/TestResults' -ItemType Directory | Out-Null
    }
-   
+
    Import-Pester
 
    $pesterArgs = [PesterConfiguration]::Default

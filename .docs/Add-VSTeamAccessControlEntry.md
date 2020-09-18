@@ -71,9 +71,11 @@ Required: True
 
 ## OUTPUTS
 
-### VSTeamAccessControlEntry
+### vsteam_lib.AccessControlEntry
 
 ## NOTES
+
+This is a low-level function. You should really use a high level function (Add-VSTeam...Permission / Set-VSTeam...Permission / Get-VSTeam...Permission) unless you know what you are doing.
 
 <!-- #include "./common/prerequisites.md" -->
 
