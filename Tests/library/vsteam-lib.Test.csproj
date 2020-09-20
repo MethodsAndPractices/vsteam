@@ -236,6 +236,8 @@
     <Content Include="..\SampleFiles\Get-VSTeamReleaseDefinition.json" Link="SampleFiles\Get-VSTeamReleaseDefinition.json" />
     <Content Include="..\SampleFiles\Get-VSTeamSecurityNamespace.json" Link="SampleFiles\Get-VSTeamSecurityNamespace.json" />
     <Content Include="..\SampleFiles\Get-VSTeamUser.json" Link="SampleFiles\Get-VSTeamUser.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamUserEntitlement-Id.json" Link="SampleFiles\Get-VSTeamUserEntitlement-Id.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamUserEntitlement.json" Link="SampleFiles\Get-VSTeamUserEntitlement.json" />
     <Content Include="..\SampleFiles\get-vsteamworkitemtype.json" Link="SampleFiles\get-vsteamworkitemtype.json" />
     <Content Include="..\SampleFiles\gitCommitResults.json" Link="SampleFiles\gitCommitResults.json" />
     <Content Include="..\SampleFiles\gitReopHierarchyQuery_Update.json" Link="SampleFiles\gitReopHierarchyQuery_Update.json" />

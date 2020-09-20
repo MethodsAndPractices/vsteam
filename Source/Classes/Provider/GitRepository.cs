@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
 using vsteam_lib.Provider;

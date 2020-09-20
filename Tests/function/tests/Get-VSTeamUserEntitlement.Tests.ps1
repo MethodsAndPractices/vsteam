@@ -1,12 +1,8 @@
 Set-StrictMode -Version Latest
 
-Describe "VSTeamUserEntitlement" {
+Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      # You have to manually load the type file so the property reviewStatus
-      # can be tested.
-      Update-TypeData -AppendPath "$baseFolder/Source/types/vsteam_lib.UserEntitlement.ps1xml" -ErrorAction Ignore
    }
 
    Context "Get-VSTeamUserEntitlement" {
@@ -45,7 +41,10 @@ Describe "VSTeamUserEntitlement" {
          }
 
          It 'no parameters should return users' {
-            Get-VSTeamUserEntitlement
+            $users = Get-VSTeamUserEntitlement
+
+            $users.count | Should -Be 3
+            $users[0].UserName | Should -Be 'Math lastName'
 
             # Make sure it was called with the correct URI
             Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {

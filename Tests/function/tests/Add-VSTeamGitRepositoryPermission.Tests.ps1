@@ -10,7 +10,7 @@ Describe 'VSTeamGitRepositoryPermission' {
       ## Arrange
       BeforeAll {
          $projectResultObject = [vsteam_lib.Project]::new($(Open-SampleFile 'projectResult.json'))
-         $userSingleResultObject = [vsteam_lib.User2]::new($(Open-SampleFile 'users.single.json'))
+         $userSingleResultObject = [vsteam_lib.User]::new($(Open-SampleFile 'users.single.json'))
          $groupSingleResultObject = [vsteam_lib.Group]::new($(Open-SampleFile 'groupsSingle.json'))
 
          # Set the account to use for testing. A normal user would do this
@@ -18,7 +18,7 @@ Describe 'VSTeamGitRepositoryPermission' {
          Mock _getInstance { return 'https://dev.azure.com/test' }
 
          Mock Invoke-RestMethod { Open-SampleFile 'accessControlEntryResult.json' }
-         
+
          # You have to set the version or the api-version will not be added when versions = ''
          Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
       }

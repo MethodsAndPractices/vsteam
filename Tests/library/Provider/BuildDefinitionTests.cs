@@ -46,6 +46,8 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("\\", actual.Path, "Path");
          Assert.AreEqual(1, actual.Revision, "Revision");
 
+         Assert.AreEqual("CI", actual.ToString(), "ToString()");
+
          Assert.IsNull(actual.Process, "Process");
 
          Assert.IsNotNull(actual.Steps, "Steps");

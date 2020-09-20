@@ -7,10 +7,10 @@ Describe 'VSTeamWorkItemAreaPermission' {
       . "$baseFolder/Source/Public/Add-VSTeamAccessControlEntry.ps1"
 
       ## Arrange
-      $userSingleResultObject = [vsteam_lib.User2]::new($(Open-SampleFile 'users.single.json'))
+      $userSingleResultObject = [vsteam_lib.User]::new($(Open-SampleFile 'users.single.json'))
       $groupSingleResultObject = [vsteam_lib.Group]::new($(Open-SampleFile 'groupsSingle.json'))
       $projectResultObject = [vsteam_lib.Project]::new($(Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json'))
-      
+
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
@@ -25,7 +25,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
          $areaRootNode = Open-SampleFile 'Get-VSTeamClassificationNode-Depth0-Ids24.json' -Index 0
          $classificationNodeById = Open-SampleFile 'Get-VSTeamClassificationNode-Depth0-Ids85.json' -ReturnValue
          $parentClassificationNode = Open-SampleFile 'Get-VSTeamClassificationNode-Depth0-Ids43.json' -ReturnValue
-         
+
          Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($areaRootNode, "test") }
          Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($parentClassificationNode, "test") } -ParameterFilter { $Path -eq "Child%201%20Level%201" }
          Mock Get-VSTeamClassificationNode { return [vsteam_lib.ClassificationNode]::new($classificationNodeById, "test") } -ParameterFilter { $Id -eq 85 -or $Path -eq "Child 1 Level 1/Child 1 Level 2" }
@@ -60,7 +60,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
             -Group $groupSingleResultObject `
             -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') `
             -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
-         
+
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
@@ -80,7 +80,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
             -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" `
             -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') `
             -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
-         
+
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and
@@ -100,7 +100,7 @@ Describe 'VSTeamWorkItemAreaPermission' {
             -User $userSingleResultObject `
             -Allow ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_READ,MANAGE_TEST_PLANS') `
             -Deny ([vsteam_lib.WorkItemAreaPermissions]'GENERIC_WRITE,DELETE')
-         
+
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/83e28ad4-2d72-4ceb-97b0-c7726d5502c3*" -and

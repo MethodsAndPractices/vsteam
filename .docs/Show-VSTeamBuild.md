@@ -30,8 +30,24 @@ Specifies build by ID.
 
 ```yaml
 Type: Int32
-Parameter Sets: ByID
+Position: 0
 Aliases: BuildID
+Required: True
+Accept pipeline input: true (ByPropertyName)
+```
+
+### -ProjectName
+
+Specifies the team project for which this function operates.
+
+You can tab complete from a list of available projects.
+
+You can use Set-VSTeamDefaultProject to set a default project so
+you do not have to pass the ProjectName with each call.
+
+```yaml
+Type: String
+Position: 1
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```

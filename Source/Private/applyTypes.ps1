@@ -36,17 +36,6 @@ function _applyTypesToWiql {
    }
 }
 
-function _applyTypesToUser {
-   [CmdletBinding()]
-   param(
-      [Parameter(Mandatory = $true)]
-      $item
-   )
-
-   $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.UserEntitlement')
-   $item.accessLevel.PSObject.TypeNames.Insert(0, 'vsteam_lib.AccessLevel')
-}
-
 function _applyTypesToTfvcBranch {
    [CmdletBinding()]
    param($item)
@@ -76,29 +65,6 @@ function _applyTypesToApproval {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Approval')
-}
-
-function _applyTypesToBuild {
-   [CmdletBinding()]
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Build')
-   $item.logs.PSObject.TypeNames.Insert(0, 'vsteam_lib.Logs')
-   $item._links.PSObject.TypeNames.Insert(0, 'vsteam_lib.Links')
-   $item.project.PSObject.TypeNames.Insert(0, 'vsteam_lib.Project')
-   $item.requestedBy.PSObject.TypeNames.Insert(0, 'vsteam_lib.User')
-   $item.requestedFor.PSObject.TypeNames.Insert(0, 'vsteam_lib.User')
-   $item.lastChangedBy.PSObject.TypeNames.Insert(0, 'vsteam_lib.User')
-   $item.repository.PSObject.TypeNames.Insert(0, 'vsteam_lib.Repository')
-   $item.definition.PSObject.TypeNames.Insert(0, 'vsteam_lib.BuildDefinition')
-
-   if ($item.PSObject.Properties.Match('queue').count -gt 0 -and $null -ne $item.queue) {
-      $item.queue.PSObject.TypeNames.Insert(0, 'vsteam_lib.Queue')
-   }
-
-   if ($item.PSObject.Properties.Match('orchestrationPlan').count -gt 0 -and $null -ne $item.orchestrationPlan) {
-      $item.orchestrationPlan.PSObject.TypeNames.Insert(0, 'vsteam_lib.OrchestrationPlan')
-   }
 }
 
 function _applyArtifactTypes {
@@ -136,23 +102,6 @@ function _applyTypesToPullRequests {
    param($item)
 
    $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.PullRequest')
-}
-
-function _applyTypesToRelease {
-   [CmdletBinding()]
-   param($item)
-
-   $item.PSObject.TypeNames.Insert(0, 'vsteam_lib.Release')
-
-   if ($item.PSObject.Properties.Match('environments').count -gt 0 -and $null -ne $item.environments) {
-      foreach ($e in $item.environments) {
-         $e.PSObject.TypeNames.Insert(0, 'vsteam_lib.Environment')
-      }
-   }
-
-   $item._links.PSObject.TypeNames.Insert(0, 'vsteam_lib.Links')
-   $item._links.self.PSObject.TypeNames.Insert(0, 'vsteam_lib.Link')
-   $item._links.web.PSObject.TypeNames.Insert(0, 'vsteam_lib.Link')
 }
 
 function _applyTypesToServiceEndpoint {

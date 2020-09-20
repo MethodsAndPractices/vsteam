@@ -17,7 +17,7 @@ function Update-VSTeamPullRequest {
       [Switch] $EnableAutoComplete,
 
       [Parameter(ParameterSetName = "EnableAutoComplete", Mandatory = $true)]
-      [vsteam_lib.User2] $AutoCompleteIdentity,
+      [vsteam_lib.User] $AutoCompleteIdentity,
 
       [Parameter(ParameterSetName = "DisableAutoComplete", Mandatory = $true)]
       [Switch] $DisableAutoComplete,

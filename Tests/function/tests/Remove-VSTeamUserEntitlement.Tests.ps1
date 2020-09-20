@@ -1,13 +1,9 @@
 Set-StrictMode -Version Latest
 
-Describe "VSTeamUserEntitlement" {
+Describe "VSTeamUserEntitlement" -Tag 'VSTeamUserEntitlement' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$baseFolder/Source/Public/Get-VSTeamUserEntitlement.ps1"
-
-      # You have to manually load the type file so the property reviewStatus
-      # can be tested.
-      Update-TypeData -AppendPath "$baseFolder/Source/types/vsteam_lib.UserEntitlement.ps1xml" -ErrorAction Ignore
    }
 
    Context "Remove-VSTeamUserEntitlement" {

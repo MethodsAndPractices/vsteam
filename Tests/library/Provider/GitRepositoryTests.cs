@@ -12,11 +12,11 @@ namespace vsteam_lib.Test.Provider
       public void GitRepository_Constructor()
       {
          // Arrange
-         System.Management.Automation.Abstractions.IPowerShell ps = BaseTests.PrepPowerShell();
-         System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> obj = BaseTests.LoadJson("Get-VSTeamGitRepository.json");
+         var ps = BaseTests.PrepPowerShell();
+         var obj = BaseTests.LoadJson("Get-VSTeamGitRepository.json");
 
          // Act
-         GitRepository actual = new GitRepository(obj[0], null, ps);
+         var actual = new GitRepository(obj[0], null, ps);
 
          // Assert
          Assert.IsNotNull(actual.Project, "Project");
@@ -36,15 +36,15 @@ namespace vsteam_lib.Test.Provider
       public void GitRepository_GetChildItem()
       {
          // Arrange
-         System.Management.Automation.Abstractions.IPowerShell ps = BaseTests.PrepPowerShell();
-         System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> gitRefs = BaseTests.LoadJson("Get-VSTeamGitRef.json");
-         System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> obj = BaseTests.LoadJson("Get-VSTeamGitRepository.json");
-         GitRepository target = new GitRepository(obj[0], "Project Name", ps);
+         var ps = BaseTests.PrepPowerShell();
+         var gitRefs = BaseTests.LoadJson("Get-VSTeamGitRef.json");
+         var obj = BaseTests.LoadJson("Get-VSTeamGitRepository.json");
+         var target = new GitRepository(obj[0], "Project Name", ps);
 
          ps.Invoke().Returns(gitRefs);
 
          // Act
-         object[] actual = target.GetChildItem();
+         var actual = target.GetChildItem();
 
          // Assert
          Assert.AreEqual(1, actual.Length);

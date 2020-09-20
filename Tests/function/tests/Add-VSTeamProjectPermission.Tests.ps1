@@ -10,7 +10,7 @@ Describe 'VSTeamProjectPermission' {
       Mock _getInstance { return 'https://dev.azure.com/test' } -Verifiable
 
       $userSingleResult = Open-SampleFile 'users.single.json'
-      $userSingleResultObject = [vsteam_lib.User2]::new($userSingleResult)
+      $userSingleResultObject = [vsteam_lib.User]::new($userSingleResult)
 
       $groupSingleResult = Open-SampleFile 'groupsSingle.json'
       $groupSingleResultObject = [vsteam_lib.Group]::new($groupSingleResult)

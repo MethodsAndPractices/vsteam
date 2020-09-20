@@ -10,7 +10,11 @@ You must have [.netCore](dot.net) installed to build the class lib on macOS, Lin
 
 All types were changed from 'Team.' to 'vsteam_lib.' this will make it easy when moving types from PowerShell to C#.
 
-VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Name property in its place.
+VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Id, Name or ToString() property in its place.
+
+User2 is now vsteam_lib.User
+
+Removed CUID from vsteam_lib.User.
 
 Disable-VSTeamAgent now requires -Force.
 

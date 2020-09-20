@@ -21,6 +21,7 @@ namespace vsteam_lib.Test.Provider
          // Assert
          Assert.IsNotNull(target.Links, "Links");
          Assert.AreEqual(expectedLinks, target.Links.ToString(), "ToString");
+         Assert.AreEqual("scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2", target.Name, "Name");
          Assert.AreEqual("scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2", target.ToString(), "ToString");
          Assert.AreEqual("https://vssps.dev.azure.com/test/_apis/Graph/Scopes/scp.ZGU5ODYwOWEtZjRiMC00YWEzLTgzOTEtODI4ZDU2MDI0MjU2", target.Links.Subject, "Links.Subject");
       }

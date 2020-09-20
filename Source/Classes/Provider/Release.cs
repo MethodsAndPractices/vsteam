@@ -12,8 +12,6 @@ namespace vsteam_lib
    {
       public long Id { get; set; }
       public string Status { get; set; }
-      [XmlAttribute("releaseDefinition.name")]
-      public string DefinitionName { get; set; }
       public UserEntitlement CreatedBy { get; }
       public UserEntitlement ModifiedBy { get; }
       public UserEntitlement RequestedFor { get; }
@@ -21,6 +19,18 @@ namespace vsteam_lib
       public ReleaseDefinition ReleaseDefinition { get; }
       public List<PSObject> Environments { get; private set; }
       public object Variables { get; set; }
+      public Project Project { get; }
+
+      // Properties below were in the old type file and are
+      // here to break as little as possible for those that
+      // upgrade.
+      public long ReleaseId => this.Id;
+      public string ProjectId => this.Project.Id;
+      public string DefinitionId => this.ReleaseDefinition.Id;
+      public string CreatedByUser => this.CreatedBy.DisplayName;
+      public string DefinitionName => this.ReleaseDefinition.Name;
+      public string ModifiedByUser => this.ModifiedBy.DisplayName;
+      public string RequestedForUser => this.RequestedFor.DisplayName;
 
       public Release(PSObject obj, IPowerShell powerShell, string projectName) :
          base(obj, obj.GetValue("name"), "Release", powerShell, projectName)
@@ -28,6 +38,8 @@ namespace vsteam_lib
          this.CreatedBy = new UserEntitlement(obj.GetValue<PSObject>("createdBy"), projectName);
          this.ModifiedBy = new UserEntitlement(obj.GetValue<PSObject>("modifiedBy"), projectName);
          this.RequestedFor = new UserEntitlement(obj.GetValue<PSObject>("RequestedFor"), projectName);
+
+         this.Project = new Project(obj.GetValue<PSObject>("projectReference"), powerShell);
 
          this.PopulateEnvironments(obj);
 

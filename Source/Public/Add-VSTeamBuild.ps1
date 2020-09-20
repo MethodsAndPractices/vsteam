@@ -9,7 +9,7 @@
 
 function Add-VSTeamBuild {
    [CmdletBinding(DefaultParameterSetName = 'ByName',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamBuild')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamBuild')]
    param(
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Int32] $BuildDefinitionId,
@@ -83,8 +83,8 @@ function Add-VSTeamBuild {
          -Body ($body | ConvertTo-Json -Compress -Depth 100) `
          -Version $(_getApiVersion Build)
 
-      _applyTypesToBuild -item $resp
+      $build = [vsteam_lib.Build]::new($resp, $ProjectName)
 
-      return $resp
+      Write-Output $build
    }
 }

@@ -5,16 +5,16 @@ namespace vsteam_lib.Test.Provider
 {
    [TestClass]
    [ExcludeFromCodeCoverage]
-   public class User2Tests
+   public class UserTests
    {
       [TestMethod]
-      public void User2_Constructor_Without_MetaType()
+      public void User_Constructor_Without_MetaType()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamUser.json");
 
          // Act
-         var target = new User2(obj[0]);
+         var target = new User(obj[0]);
 
          // Assert
          Assert.AreEqual("vsts", target.Origin, "Origin");
@@ -40,13 +40,13 @@ namespace vsteam_lib.Test.Provider
       }
 
       [TestMethod]
-      public void User2_Constructor_With_MetaType()
+      public void User_Constructor_With_MetaType()
       {
          // Arrange
          var obj = BaseTests.LoadJson("Get-VSTeamUser.json");
 
          // Act
-         var target = new User2(obj[3]);
+         var target = new User(obj[3]);
 
          // Assert
          Assert.AreEqual("aad", target.Origin, "Origin");

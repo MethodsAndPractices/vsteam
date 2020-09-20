@@ -78,6 +78,8 @@ namespace vsteam_lib
       {
       }
 
+      public override string ToString() => this.Name;
+
       protected override object[] GetChildren()
       {
          // Wrap in a PSObject so a type can be applied so the correct

@@ -40,8 +40,6 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### vsteam_lib.Release
-
 ## NOTES
 
 You can pipe the release ID to this function.

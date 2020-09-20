@@ -25,9 +25,12 @@ namespace vsteam_lib.Test.Provider
          // Assert
          Assert.AreEqual(259, target.Id, "Id");
          Assert.AreEqual("active", target.Status, "Status");
+         Assert.AreEqual(259, target.ReleaseId, "ReleaseId");
          Assert.IsNotNull(target.Environments, "Environments");
+         Assert.AreEqual("2", target.DefinitionId, "DefinitionId");
          Assert.AreEqual(0, target.Environments.Count, "Environments.Count");
          Assert.AreEqual("PTracker-CD", target.DefinitionName, "DefinitionName");
+         Assert.AreEqual("00000000-0000-0000-0000-000000000000", target.ProjectId, "ProjectId");
 
          Assert.IsNotNull(target.Variables, "Variables");
          Assert.IsNotNull(target.ReleaseDefinition, "ReleaseDefinition");
@@ -36,6 +39,11 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("Test@Test.com", target.ModifiedBy.UniqueName, "ModifiedBy.UniqueName");
          Assert.AreEqual("Donovan Brown", target.CreatedBy.DisplayName, "CreatedBy.DisplayName");
          Assert.AreEqual("11/14/2019 12:56:09 AM", target.CreatedOn.ToString(), "CreatedOn.ToString()");
+
+
+         Assert.AreEqual(null, target.RequestedForUser, "RequestedForUser");
+         Assert.AreEqual("Donovan Brown", target.CreatedByUser, "CreatedByUser");
+         Assert.AreEqual("Donovan Brown", target.ModifiedByUser, "ModifiedByUser");
       }
 
       [TestMethod]

@@ -7,7 +7,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
       . "$baseFolder/Source/Public/Add-VSTeamAccessControlEntry.ps1"
 
       ## Arrange
-      $userSingleResultObject = [vsteam_lib.User2]::new($(Open-SampleFile 'users.single.json'))
+      $userSingleResultObject = [vsteam_lib.User]::new($(Open-SampleFile 'users.single.json'))
       $groupSingleResultObject = [vsteam_lib.Group]::new($(Open-SampleFile 'groupsSingle.json'))
       $projectResultObject = [vsteam_lib.Project]::new($(Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json'))
 
@@ -38,7 +38,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
             -User $userSingleResultObject `
             -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') `
             -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
-         
+
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
@@ -58,7 +58,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
             -Group $groupSingleResultObject `
             -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') `
             -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
-         
+
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
@@ -138,7 +138,7 @@ Describe 'VSTeamWorkItemIterationPermission' {
             -Descriptor "Microsoft.TeamFoundation.Identity;S-1-9-1551374245-856009726-4193442117-2390756110-2740161821-0-0-0-0-1" `
             -Allow ([vsteam_lib.WorkItemIterationPermissions]'GENERIC_READ,CREATE_CHILDREN') `
             -Deny ([vsteam_lib.WorkItemIterationPermissions]'DELETE')
-         
+
          ## Assert
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "https://dev.azure.com/test/_apis/accesscontrolentries/bf7bfa03-b2b7-47db-8113-fa2e002cc5b1*" -and
