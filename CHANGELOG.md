@@ -16,6 +16,8 @@ User2 is now vsteam_lib.User
 
 Removed CUID from vsteam_lib.User.
 
+Removed RequestedFor from vsteam_lib.Release
+
 Disable-VSTeamAgent now requires -Force.
 
 Changed Ids parameter to Id on the following functions to be consistent with other functions:

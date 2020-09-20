@@ -18,7 +18,10 @@ namespace vsteam_lib
 
       protected SecurityLeaf(PSObject obj) : base(obj, obj.GetValue("displayName"), obj.GetValue("descriptor"), null)
       {
-         this.Links = new Link(obj);
+         if (obj.HasValue("_links"))
+         {
+            this.Links = new Link(obj);
+         }
       }
    }
 }

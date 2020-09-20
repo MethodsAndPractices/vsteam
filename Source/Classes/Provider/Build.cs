@@ -14,9 +14,9 @@ namespace vsteam_lib
       public string Result { get; set; }
       public string BuildNumber { get; set; }
       public DateTime? StartTime { get; set; }
-      public UserEntitlement RequestedBy { get; }
-      public UserEntitlement RequestedFor { get; }
-      public UserEntitlement LastChangedBy { get; }
+      public User RequestedBy { get; }
+      public User RequestedFor { get; }
+      public User LastChangedBy { get; }
       public BuildDefinition BuildDefinition { get; }
       public Project Project { get; }
 
@@ -39,9 +39,9 @@ namespace vsteam_lib
          base(obj, obj.GetValue("buildNumber"), obj.GetValue("Id"), projectName)
 
       {
-         this.RequestedBy = new UserEntitlement(obj.GetValue<PSObject>("requestedBy"), projectName);
-         this.RequestedFor = new UserEntitlement(obj.GetValue<PSObject>("requestedFor"), projectName);
-         this.LastChangedBy = new UserEntitlement(obj.GetValue<PSObject>("lastChangedBy"), projectName);
+         this.RequestedBy = new User(obj.GetValue<PSObject>("requestedBy"));
+         this.RequestedFor = new User(obj.GetValue<PSObject>("requestedFor"));
+         this.LastChangedBy = new User(obj.GetValue<PSObject>("lastChangedBy"));
 
          this.Project = new Project(obj.GetValue<PSObject>("project"), powerShell);
          this.Queue = new Queue(obj.GetValue<PSObject>("queue"), projectName, powerShell);

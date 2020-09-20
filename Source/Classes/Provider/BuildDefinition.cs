@@ -29,7 +29,7 @@ namespace vsteam_lib
       public string JobAuthorizationScope { get; set; }
       [XmlAttribute("createdDate")]
       public DateTime CreatedOn { get; set; }
-      public UserEntitlement AuthoredBy { get; }
+      public User AuthoredBy { get; }
       public IList<BuildDefinitionProcessPhaseStep> Steps { get; }
       public BuildDefinitionProcess Process { get; }
       /// <summary>
@@ -42,7 +42,11 @@ namespace vsteam_lib
       {
          this.Tags = obj.GetStringArray("tags");
          this.Demands = obj.GetStringArray("demands");
-         this.AuthoredBy = new UserEntitlement(obj.GetValue<PSObject>("authoredBy"), projectName);
+
+         if (obj.HasValue("authoredBy"))
+         {
+            this.AuthoredBy = new User(obj.GetValue<PSObject>("authoredBy"));
+         }
 
          // Depending on the build definition you might have a build or
          // process element.

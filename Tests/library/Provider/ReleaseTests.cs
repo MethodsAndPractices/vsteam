@@ -35,13 +35,10 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(target.Variables, "Variables");
          Assert.IsNotNull(target.ReleaseDefinition, "ReleaseDefinition");
 
-         Assert.AreEqual(null, target.RequestedFor.DisplayName, "RequestedFor.DisplayName");
          Assert.AreEqual("Test@Test.com", target.ModifiedBy.UniqueName, "ModifiedBy.UniqueName");
          Assert.AreEqual("Donovan Brown", target.CreatedBy.DisplayName, "CreatedBy.DisplayName");
          Assert.AreEqual("11/14/2019 12:56:09 AM", target.CreatedOn.ToString(), "CreatedOn.ToString()");
 
-
-         Assert.AreEqual(null, target.RequestedForUser, "RequestedForUser");
          Assert.AreEqual("Donovan Brown", target.CreatedByUser, "CreatedByUser");
          Assert.AreEqual("Donovan Brown", target.ModifiedByUser, "ModifiedByUser");
       }
@@ -67,7 +64,6 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(target.Variables, "Variables");
          Assert.IsNotNull(target.ReleaseDefinition, "ReleaseDefinition");
 
-         Assert.AreEqual(null, target.RequestedFor.DisplayName, "RequestedFor.DisplayName");
          Assert.AreEqual("test@test.com", target.ModifiedBy.UniqueName, "ModifiedBy.UniqueName");
          Assert.AreEqual("Donovan Brown", target.CreatedBy.DisplayName, "CreatedBy.DisplayName");
          Assert.AreEqual("7/13/2019 3:49:31 PM", target.CreatedOn.ToString(), "CreatedOn.ToString()");

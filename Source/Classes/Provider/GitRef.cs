@@ -11,12 +11,12 @@ namespace vsteam_lib
       /// So I store it twice so I have the original value as well.
       [XmlAttribute("name")]
       public string RefName { get; set; }
-      public UserEntitlement Creator { get; }
+      public User Creator { get; }
 
       public GitRef(PSObject obj, string projectName) :
          base(obj, obj.GetValue("name"), obj.GetValue("objectId"), projectName)
       {
-         this.Creator = new UserEntitlement(obj.GetValue<PSObject>("creator"), projectName);
+         this.Creator = new User(obj.GetValue<PSObject>("creator"));
       }
    }
 }

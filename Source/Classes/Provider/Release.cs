@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using System.Management.Automation.Abstractions;
-using System.Xml.Serialization;
 using vsteam_lib.Provider;
 
 namespace vsteam_lib
@@ -12,9 +11,8 @@ namespace vsteam_lib
    {
       public long Id { get; set; }
       public string Status { get; set; }
-      public UserEntitlement CreatedBy { get; }
-      public UserEntitlement ModifiedBy { get; }
-      public UserEntitlement RequestedFor { get; }
+      public User CreatedBy { get; }
+      public User ModifiedBy { get; }
       public DateTime CreatedOn { get; set; }
       public ReleaseDefinition ReleaseDefinition { get; }
       public List<PSObject> Environments { get; private set; }
@@ -30,14 +28,12 @@ namespace vsteam_lib
       public string CreatedByUser => this.CreatedBy.DisplayName;
       public string DefinitionName => this.ReleaseDefinition.Name;
       public string ModifiedByUser => this.ModifiedBy.DisplayName;
-      public string RequestedForUser => this.RequestedFor.DisplayName;
 
       public Release(PSObject obj, IPowerShell powerShell, string projectName) :
          base(obj, obj.GetValue("name"), "Release", powerShell, projectName)
       {
-         this.CreatedBy = new UserEntitlement(obj.GetValue<PSObject>("createdBy"), projectName);
-         this.ModifiedBy = new UserEntitlement(obj.GetValue<PSObject>("modifiedBy"), projectName);
-         this.RequestedFor = new UserEntitlement(obj.GetValue<PSObject>("RequestedFor"), projectName);
+         this.CreatedBy = new User(obj.GetValue<PSObject>("createdBy"));
+         this.ModifiedBy = new User(obj.GetValue<PSObject>("modifiedBy"));
 
          this.Project = new Project(obj.GetValue<PSObject>("projectReference"), powerShell);
 

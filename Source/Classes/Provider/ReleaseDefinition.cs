@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Management.Automation;
-using System.Management.Automation.Abstractions;
 using vsteam_lib.Provider;
 
 namespace vsteam_lib
@@ -23,8 +22,8 @@ namespace vsteam_lib
       public string ReleaseNameFormat { get; set; }
       public DateTime CreatedOn { get; set; }
       public DateTime ModifiedOn { get; set; }
-      public UserEntitlement CreatedBy { get; }
-      public UserEntitlement ModifiedBy { get; }
+      public User CreatedBy { get; }
+      public User ModifiedBy { get; }
       public Link Links { get; }
       /// <summary>
       /// Used to pass on pipeline to Get-VSTeamPermissionInheritance
@@ -36,15 +35,24 @@ namespace vsteam_lib
       /// was deleted when this class was added. So this
       /// property is for backwards compatibility.
       /// </summary>
-      public string CreatedByUser { get { return this.CreatedBy.DisplayName; } }
+      public string CreatedByUser => this.CreatedBy.DisplayName;
 
       public ReleaseDefinition(PSObject obj, string projectName) :
          base(obj, obj.GetValue("name"), obj.GetValue("id"), projectName)
       {
          this.Links = new Link(obj);
          this.Tags = obj.GetStringArray("tags");
-         this.CreatedBy = new UserEntitlement(obj.GetValue<PSObject>("createdBy"), projectName);
-         this.ModifiedBy = new UserEntitlement(obj.GetValue<PSObject>("modifiedBy"), projectName);
+
+         // These may not be present when nested in a release
+         if (obj.HasValue("createdBy"))
+         {
+            this.CreatedBy = new User(obj.GetValue<PSObject>("createdBy"));
+         }
+
+         if (obj.HasValue("modifiedBy"))
+         {
+            this.ModifiedBy = new User(obj.GetValue<PSObject>("modifiedBy"));
+         }
       }
    }
 }

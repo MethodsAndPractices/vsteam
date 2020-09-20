@@ -21,11 +21,13 @@ namespace vsteam_lib.Test.Provider
          var target = new UserEntitlement((PSObject)members[0]);
 
          // Assert
-         Assert.AreEqual("mlastName@test.com", target.UniqueName, "UniqueName");
-         Assert.AreEqual("mlastName@test.com", target.DisplayName, "DisplayName");
          Assert.AreEqual("mlastName@test.com", target.Email, "Email");
          Assert.AreEqual("Math lastName", target.UserName, "UserName");
+         Assert.AreEqual("Math lastName", target.ToString(), "ToString()");
+         Assert.AreEqual("Math lastName", target.DisplayName, "DisplayName");
+         Assert.AreEqual("mlastName@test.com", target.UniqueName, "UniqueName");
          Assert.AreEqual("Early Adopter", target.AccessLevelName, "AccessLevelName");
+         Assert.AreEqual("9/9/2020 6:43:29 AM", target.LastAccessedDate.ToString(), "LastAccessedDate");
       }
 
       [TestMethod]
