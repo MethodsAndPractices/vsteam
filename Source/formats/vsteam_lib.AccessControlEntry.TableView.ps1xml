@@ -27,7 +27,7 @@
                      <TableColumnItem>
                         <PropertyName>Allow</PropertyName>
                      </TableColumnItem>
-                      <TableColumnItem>
+                     <TableColumnItem>
                         <PropertyName>Deny</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>

@@ -15,7 +15,7 @@
 						<Label>IsRemotable</Label>
 					</TableColumnHeader>
                <TableColumnHeader>
-						<Label>ID</Label>
+						<Label>Id</Label>
 					</TableColumnHeader>
 				</TableHeaders>
 				<TableRowEntries>
@@ -28,7 +28,7 @@
 								<PropertyName>IsRemotable</PropertyName>
 							</TableColumnItem>
                      <TableColumnItem>
-								<PropertyName>ID</PropertyName>
+								<PropertyName>Id</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

@@ -12,10 +12,10 @@
                   <Label>QueryType</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>WorkItemIDs</Label>
+                  <Label>WorkItems</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>WorkItems</Label>
+                  <Label>WorkItemIDs</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
@@ -25,10 +25,10 @@
                         <PropertyName>queryType</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>WorkItemIDs</PropertyName>
-                     </TableColumnItem>
-                      <TableColumnItem>
                         <PropertyName>workItems</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>WorkItemIDs</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

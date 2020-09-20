@@ -13,7 +13,7 @@
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>ID</Label>
+                  <Label>Id</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
@@ -24,7 +24,7 @@
                         <PropertyName>Name</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>ID</PropertyName>
+                        <PropertyName>Id</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

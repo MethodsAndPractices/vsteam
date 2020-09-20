@@ -27,7 +27,7 @@
                   <Label>Release Definition</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>ID</Label>
+                  <Label>Id</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
@@ -52,7 +52,7 @@
                         <PropertyName>releaseDefinitionName</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>id</PropertyName>
+                        <PropertyName>Id</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

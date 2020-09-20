@@ -19,7 +19,7 @@
                   <Label>Result</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>ID</Label>
+                  <Label>Id</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>

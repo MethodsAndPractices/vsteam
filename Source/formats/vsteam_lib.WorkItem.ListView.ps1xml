@@ -11,13 +11,13 @@
                <ListEntry>
                   <ListItems>
                      <ListItem>
-                        <PropertyName>id</PropertyName>
-                     </ListItem>
-                     <ListItem>
                         <PropertyName>title</PropertyName>
                      </ListItem>
                      <ListItem>
                         <PropertyName>state</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Id</PropertyName>
                      </ListItem>
                   </ListItems>
                </ListEntry>

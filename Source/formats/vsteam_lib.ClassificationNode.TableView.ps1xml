@@ -21,7 +21,7 @@
                   <Label>HasChildren</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>ID</Label>
+                  <Label>Id</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
@@ -40,7 +40,7 @@
                         <PropertyName>HasChildren</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>ID</PropertyName>
+                        <PropertyName>Id</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

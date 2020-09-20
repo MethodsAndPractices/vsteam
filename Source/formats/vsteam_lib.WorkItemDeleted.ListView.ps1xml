@@ -11,19 +11,19 @@
                <ListEntry>
                   <ListItems>
                      <ListItem>
-                        <PropertyName>id</PropertyName>
-                     </ListItem>
-                     <ListItem>
-                       <PropertyName>name</PropertyName>
+                        <PropertyName>name</PropertyName>
                      </ListItem>
                      <ListItem>
                         <PropertyName>deletedBy</PropertyName>
                      </ListItem>
-                      <ListItem>
+                     <ListItem>
                         <PropertyName>deletedDate</PropertyName>
                      </ListItem>
-                      <ListItem>
+                     <ListItem>
                         <PropertyName>code</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Id</PropertyName>
                      </ListItem>
                   </ListItems>
                </ListEntry>

@@ -12,10 +12,10 @@
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>Id</Label>
+                  <Label>Tenant Id</Label>
                </TableColumnHeader>
                <TableColumnHeader>
-                  <Label>Tenant Id</Label>
+                  <Label>Id</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
@@ -25,10 +25,10 @@
                         <PropertyName>displayName</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
-                        <PropertyName>subscriptionId</PropertyName>
-                     </TableColumnItem>
-                      <TableColumnItem>
                         <PropertyName>subscriptionTenantId</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>subscriptionId</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

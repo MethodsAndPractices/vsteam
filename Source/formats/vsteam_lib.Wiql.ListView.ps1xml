@@ -14,10 +14,10 @@
                         <PropertyName>queryType</PropertyName>
                      </ListItem>
                      <ListItem>
-                        <PropertyName>WorkItemIDs</PropertyName>
+                        <PropertyName>workItems</PropertyName>
                      </ListItem>
                      <ListItem>
-                        <PropertyName>workItems</PropertyName>
+                        <PropertyName>WorkItemIDs</PropertyName>
                      </ListItem>
                   </ListItems>
                </ListEntry>

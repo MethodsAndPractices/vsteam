@@ -9,9 +9,6 @@
          <TableControl>
             <TableHeaders>
                <TableColumnHeader>
-                  <Label>ID</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
@@ -23,17 +20,17 @@
                <TableColumnHeader>
                   <Label>Code</Label>
                </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Id</Label>
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
                   <TableColumnItems>
                      <TableColumnItem>
-                        <PropertyName>id</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
                         <PropertyName>name</PropertyName>
                      </TableColumnItem>
-                      <TableColumnItem>
+                     <TableColumnItem>
                         <PropertyName>deletedBy</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
@@ -41,6 +38,9 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>code</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Id</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>

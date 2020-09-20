@@ -13,10 +13,10 @@
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>InheritPermissions</Label>
-               </TableColumnHeader>       
+               </TableColumnHeader>
                <TableColumnHeader>
                   <Label>Access Control Entries</Label>
-               </TableColumnHeader>            
+               </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
@@ -26,15 +26,15 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>InheritPermissions</PropertyName>
-                     </TableColumnItem>  
+                     </TableColumnItem>
                      <TableColumnItem>
                         <Alignment>Left</Alignment>
-                        <ScriptBlock>$_.Aces.Values | % { $_.ToString() }</ScriptBlock> 
-                     </TableColumnItem>  
+                        <ScriptBlock>$_.Aces.Values | % { $_.ToString() }</ScriptBlock>
+                     </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>
             </TableRowEntries>
          </TableControl>
-      </View>     
+      </View>
    </ViewDefinitions>
 </Configuration>

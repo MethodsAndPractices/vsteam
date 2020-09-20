@@ -34,7 +34,7 @@
 								<PropertyName>DefinitionName</PropertyName>
 							</TableColumnItem>
                      <TableColumnItem>
-								<PropertyName>id</PropertyName>
+								<PropertyName>Id</PropertyName>
 							</TableColumnItem>
 						</TableColumnItems>
 					</TableRowEntry>

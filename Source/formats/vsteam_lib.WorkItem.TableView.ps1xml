@@ -9,26 +9,26 @@
          <TableControl>
             <TableHeaders>
                <TableColumnHeader>
-                  <Label>ID</Label>
-               </TableColumnHeader>
-               <TableColumnHeader>
                   <Label>Title</Label>
                </TableColumnHeader>
                <TableColumnHeader>
                   <Label>State</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Id</Label>
                </TableColumnHeader>
             </TableHeaders>
             <TableRowEntries>
                <TableRowEntry>
                   <TableColumnItems>
                      <TableColumnItem>
-                        <PropertyName>id</PropertyName>
-                     </TableColumnItem>
-                     <TableColumnItem>
                         <PropertyName>title</PropertyName>
                      </TableColumnItem>
-                      <TableColumnItem>
+                     <TableColumnItem>
                         <PropertyName>state</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Id</PropertyName>
                      </TableColumnItem>
                   </TableColumnItems>
                </TableRowEntry>
