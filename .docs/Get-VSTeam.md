@@ -14,9 +14,15 @@
 
 ## EXAMPLES
 
-## PARAMETERS
+### Example 1: Get team by name
 
-<!-- #include "./params/projectName.md" -->
+```powershell
+Get-VSTeamProject | Get-VSTeam 'Test Team'
+```
+
+This command pipes the project name to Get-VSTeam and returns the team with the name 'Test Team'
+
+## PARAMETERS
 
 ### -Skip
 
@@ -25,15 +31,6 @@ The number of items to skip.
 ```yaml
 Type: Int32
 Parameter Sets: List
-```
-
-### -TeamId
-
-The id of the team to retrieve.
-
-```yaml
-Type: String[]
-Parameter Sets: ByID
 ```
 
 ### -Top
@@ -52,7 +49,19 @@ The name of the team to retrieve.
 ```yaml
 Type: String[]
 Parameter Sets: ByName
+Position: 0
 ```
+
+### -TeamId
+
+The id of the team to retrieve.
+
+```yaml
+Type: String[]
+Parameter Sets: ByID
+```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

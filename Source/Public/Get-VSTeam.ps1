@@ -8,15 +8,15 @@ function Get-VSTeam {
       [Parameter(ParameterSetName = 'List')]
       [int] $Skip,
 
+      [Parameter(ParameterSetName = 'ByName', Position = 0)]
+      [Alias('TeamName')]
+      [string[]] $Name,
+
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('TeamId')]
       [string[]] $Id,
 
-      [Parameter(ParameterSetName = 'ByName')]
-      [Alias('TeamName')]
-      [string[]] $Name,
-
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName

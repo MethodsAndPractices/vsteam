@@ -16,12 +16,7 @@ function Add-VSTeamWorkItemAreaPermission {
    [CmdletBinding(DefaultParameterSetName = 'ByProjectAndAreaIdAndUser',
     HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamWorkItemAreaPermission')]
    param(
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndGroup")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndGroup")]
+      [parameter(Mandatory = $true)]
       [vsteam_lib.Project]$Project,
 
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndDescriptor")]
@@ -46,20 +41,10 @@ function Add-VSTeamWorkItemAreaPermission {
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndUser")]
       [vsteam_lib.User]$User,
 
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndGroup")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndGroup")]
+      [parameter(Mandatory = $true)]
       [vsteam_lib.WorkItemAreaPermissions]$Allow,
 
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndGroup")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaIdAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndAreaPathAndGroup")]
+      [parameter(Mandatory = $true)]
       [vsteam_lib.WorkItemAreaPermissions]$Deny
    )
 

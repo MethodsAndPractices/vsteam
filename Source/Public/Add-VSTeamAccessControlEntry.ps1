@@ -22,21 +22,17 @@ function Add-VSTeamAccessControlEntry {
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
       [guid] $SecurityNamespaceId,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
+      [Parameter(Mandatory = $true)]
       [string] $Token,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
+      [Parameter(Mandatory = $true)]
       [string] $Descriptor,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
+      [Parameter(Mandatory = $true)]
       [ValidateRange(0, [int]::MaxValue)]
       [int] $AllowMask,
 
-      [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true)]
-      [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
+      [Parameter(Mandatory = $true)]
       [ValidateRange(0, [int]::MaxValue)]
       [int] $DenyMask
    )

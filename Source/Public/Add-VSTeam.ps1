@@ -10,14 +10,14 @@
 function Add-VSTeam {
    [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeam')]
    param(
-      [Parameter(Mandatory = $true, Position = 1)]
+      [Parameter(Mandatory = $true, Position = 0)]
       [Alias('TeamName')]
       [string] $Name,
 
-      [Parameter(Position = 2)]
+      [Parameter(Position = 1)]
       [string] $Description = '',
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName

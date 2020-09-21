@@ -16,12 +16,7 @@ function Add-VSTeamWorkItemIterationPermission {
    [CmdletBinding(DefaultParameterSetName = 'ByProjectAndIterationIdAndUser',
     HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamWorkItemIterationPermission')]
    param(
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndGroup")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndGroup")]
+      [parameter(Mandatory = $true)]
       [vsteam_lib.Project]$Project,
 
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndDescriptor")]
@@ -46,20 +41,10 @@ function Add-VSTeamWorkItemIterationPermission {
       [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndUser")]
       [vsteam_lib.User]$User,
 
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndGroup")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndGroup")]
+      [parameter(Mandatory = $true)]
       [vsteam_lib.WorkItemIterationPermissions]$Allow,
 
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndGroup")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationIdAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndDescriptor")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndUser")]
-      [parameter(Mandatory = $true, ParameterSetName = "ByProjectAndIterationPathAndGroup")]
+      [parameter(Mandatory = $true)]
       [vsteam_lib.WorkItemIterationPermissions]$Deny
    )
 

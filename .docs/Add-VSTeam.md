@@ -42,7 +42,7 @@ The name of the team
 Type: String
 Aliases: TeamName
 Required: True
-Position: 1
+Position: 0
 ```
 
 ### -Description
@@ -51,7 +51,7 @@ The description of the team.
 
 ```yaml
 Type: String
-Position: 2
+Position: 1
 ```
 
 ## INPUTS
