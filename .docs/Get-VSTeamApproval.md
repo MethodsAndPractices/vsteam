@@ -66,13 +66,12 @@ There is a custom table view for each status.
 Type: String
 ```
 
-### -ReleaseIdsFilter
+### -ReleaseId
 
 Only approvals for the release ids provided will be returned.
 
 ```yaml
 Type: Int32[]
-Aliases: ReleaseIdFilter
 ```
 
 ### -AssignedToFilter

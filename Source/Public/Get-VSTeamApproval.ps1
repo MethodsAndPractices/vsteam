@@ -4,8 +4,8 @@ function Get-VSTeamApproval {
       [ValidateSet('Approved', 'ReAssigned', 'Rejected', 'Canceled', 'Pending', 'Rejected', 'Skipped', 'Undefined')]
       [string] $StatusFilter,
 
-      [Alias('ReleaseIdFilter')]
-      [int[]] $ReleaseIdsFilter,
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [int[]] $ReleaseId,
 
       [string] $AssignedToFilter,
 
@@ -18,7 +18,7 @@ function Get-VSTeamApproval {
    process {
       try {
          # Build query string and determine if the includeMyGroupApprovals should be added.
-         $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseIdsFilter -join ',') }
+         $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseId -join ',') }
 
          # The support in TFS and VSTS are not the same.
          $instance = $(_getInstance)
@@ -31,7 +31,7 @@ function Get-VSTeamApproval {
             # For TFS all three parameters must be set before you can add
             # includeMyGroupApprovals.
             if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false -and
-               [string]::IsNullOrEmpty($ReleaseIdsFilter) -eq $false -and
+               [string]::IsNullOrEmpty($ReleaseId) -eq $false -and
                $StatusFilter -eq 'Pending') {
                $queryString.includeMyGroupApprovals = 'true';
             }

@@ -23,7 +23,7 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
                $Uri -eq "https://vsrm.dev.azure.com/test/TestProject/_apis/release/approvals?api-version=$(_getApiVersion Release)"
             }
          }
-         
+
          It 'should pass exception to _handleException' {
             # Arrange
             Mock _handleException -Verifiable
@@ -66,7 +66,7 @@ Describe 'VSTeamApproval' -Tag 'unit', 'approvals' {
          It 'should return approvals' {
             ## Act
             Get-VSTeamApproval -projectName project `
-               -ReleaseIdsFilter 1 `
+               -ReleaseId 1 `
                -AssignedToFilter 'Test User' `
                -StatusFilter Pending
 

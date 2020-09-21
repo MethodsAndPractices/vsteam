@@ -20,6 +20,8 @@ Removed RequestedFor from vsteam_lib.Release
 
 Disable-VSTeamAgent now requires -Force.
 
+ReleaseIdsFilter changed to ReleaseId on Get-VSTeamApproval
+
 Changed Ids parameter to Id on the following functions to be consistent with other functions:
 
 - Get-VSTeamArea
