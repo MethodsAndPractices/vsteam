@@ -26,7 +26,7 @@ Create a new pull request as a draft
 
 ## PARAMETERS
 
-### -RepositoryId
+### RepositoryId
 
 Specifies the ID of the repository
 
@@ -37,7 +37,7 @@ Aliases: Id
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -SourceRefName
+### SourceRefName
 
 A source reference, like a branch or commit
 Needs to be in ref format like refs/heads/MyBranch
@@ -47,7 +47,7 @@ Type: String
 Required: True
 ```
 
-### -TargetRefName
+### TargetRefName
 
 A target reference, like a branch or commit
 Needs to be in ref format like refs/heads/MyBranch
@@ -57,7 +57,7 @@ Type: String
 Required: True
 ```
 
-### -Title
+### Title
 
 The title of the pull request
 
@@ -66,7 +66,7 @@ Type: String
 Required: True
 ```
 
-### -Description
+### Description
 
 The description of the pull request
 
@@ -75,7 +75,7 @@ Type: String
 Required: True
 ```
 
-### -Draft
+### Draft
 
 Mark the new pull request as a draft
 

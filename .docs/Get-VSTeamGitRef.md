@@ -24,7 +24,7 @@ This command returns all the Git refs for the Demo team project.
 
 ## PARAMETERS
 
-### -RepositoryId
+### RepositoryId
 
 Specifies the ID of the repository.
 
@@ -34,7 +34,7 @@ Aliases: ID
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Filter
+### Filter
 
 A filter to apply to the refs (starts with).
 
@@ -42,7 +42,7 @@ A filter to apply to the refs (starts with).
 Type: string
 ```
 
-### -FilterContains
+### FilterContains
 
 A filter to apply to the refs (contains). (Azure DevOps Service and Azure DevOps Server 2019+ only)
 
@@ -50,7 +50,7 @@ A filter to apply to the refs (contains). (Azure DevOps Service and Azure DevOps
 Type: string
 ```
 
-### -Top
+### Top
 
 Maximum number of refs to return. It cannot be bigger than 1000. If it is not provided but continuationToken is, top will default to 100. (Azure DevOps Service and Azure DevOps Server 2019+ only)
 
@@ -58,7 +58,7 @@ Maximum number of refs to return. It cannot be bigger than 1000. If it is not pr
 Type: int
 ```
 
-### -ContinuationToken
+### ContinuationToken
 
 The continuation token used for pagination. (Azure DevOps Service and Azure DevOps Server 2019+ only)
 

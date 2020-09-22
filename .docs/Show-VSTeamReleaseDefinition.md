@@ -24,7 +24,7 @@ This command will open a web browser with All Release Definitions for this proje
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies release definition by ID.
 

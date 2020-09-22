@@ -24,7 +24,7 @@ This command opens the Git repository in a browser.
 
 ## PARAMETERS
 
-### -RemoteUrl
+### RemoteUrl
 
 The RemoteUrl of the Git repository to open.
 

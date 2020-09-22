@@ -50,7 +50,7 @@ ID Title          Status
 
 ## PARAMETERS
 
-### -Title
+### Title
 
 The title of the work item
 
@@ -59,7 +59,7 @@ Type: String
 Required: True
 ```
 
-### -Description
+### Description
 
 The Description of the work item
 
@@ -68,7 +68,7 @@ Type: String
 Required: False
 ```
 
-### -IterationPath
+### IterationPath
 
 The IterationPath of the work item
 
@@ -77,7 +77,7 @@ Type: String
 Required: False
 ```
 
-### -AssignedTo
+### AssignedTo
 
 The email address of the user this work item will be assigned to.
 
@@ -86,7 +86,7 @@ Type: String
 Required: False
 ```
 
-### -WorkItemType
+### WorkItemType
 
 The type of work item to add.
 
@@ -99,7 +99,7 @@ Type: String
 Required: True
 ```
 
-### -ParentId
+### ParentId
 
 The Id of the parent work item that this work item will be related to.
 
@@ -108,7 +108,7 @@ Type: Int
 Required: False
 ```
 
-### -AdditionalFields
+### AdditionalFields
 
 Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.
 

@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -SubjectTypes
+### SubjectTypes
 
 A comma separated list of user subject subtypes to reduce the retrieved results.
 Valid subject types:
@@ -33,7 +33,7 @@ Required: False
 Parameter Sets: List
 ```
 
-### -Descriptor
+### Descriptor
 
 The descriptor of the desired graph user.
 

@@ -39,7 +39,7 @@ This command removes the team with id 30246aee-95f8-45cc-9552-bceff1921a40.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of the team to remove.
 

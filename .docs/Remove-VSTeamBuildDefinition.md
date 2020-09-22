@@ -28,7 +28,7 @@ The pipeline operator (|) passes the data to the Remove-VSTeamBuildDefinition fu
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies one or more build definitions by ID.
 

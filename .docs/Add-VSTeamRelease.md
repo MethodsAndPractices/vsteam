@@ -50,7 +50,7 @@ You must set a default project to tab complete DefinitionName and BuildNumber.
 
 ## PARAMETERS
 
-### -DefinitionId
+### DefinitionId
 
 The id of the release definition to use.
 
@@ -60,7 +60,7 @@ Parameter Sets: ById
 Required: True
 ```
 
-### -Description
+### Description
 
 The description to use on the release.
 
@@ -69,7 +69,7 @@ Type: String
 Required: True
 ```
 
-### -ArtifactAlias
+### ArtifactAlias
 
 The alias of the artifact to use with this release.
 
@@ -79,7 +79,7 @@ Parameter Sets: ById
 Required: True
 ```
 
-### -Name
+### Name
 
 The name of this release.
 
@@ -87,7 +87,7 @@ The name of this release.
 Type: String
 ```
 
-### -BuildId
+### BuildId
 
 The id of the build to use with this release.
 
@@ -97,7 +97,7 @@ Parameter Sets: ById
 Required: True
 ```
 
-### -DefinitionName
+### DefinitionName
 
 The name of the release definition to use.
 
@@ -107,7 +107,7 @@ Parameter Sets: ByName
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -SourceBranch
+### SourceBranch
 
 The branch of the artifact
 
@@ -115,7 +115,7 @@ The branch of the artifact
 Type: String
 ```
 
-### -BuildNumber
+### BuildNumber
 
 The number of the build to use.
 

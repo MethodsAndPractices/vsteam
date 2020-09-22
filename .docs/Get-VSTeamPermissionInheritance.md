@@ -32,7 +32,7 @@ This command returns true or false for every build definition returned from Get-
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Specifies the name of the resource.
 
@@ -42,7 +42,7 @@ Accept pipeline input: true (ByPropertyName)
 Required: True
 ```
 
-### -ResourceType
+### ResourceType
 
 Specifies the type of resource. The acceptable values for this parameter are:
 

@@ -1,4 +1,4 @@
-### -MemberDescriptor
+### MemberDescriptor
 
 A member descriptor retrieved by Get-VsTeamUser.
 

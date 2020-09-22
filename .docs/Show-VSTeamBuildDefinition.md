@@ -30,7 +30,7 @@ This command will open a web browser with All Definitions for this project showi
 
 ## PARAMETERS
 
-### -Type
+### Type
 
 The type of the build definitions to retrieve.  The acceptable values for this parameter are:
 
@@ -47,7 +47,7 @@ Parameter Sets: List
 Default value: All
 ```
 
-### -Path
+### Path
 
 The folder of the build definitions to retrieve.
 
@@ -57,7 +57,7 @@ Parameter Sets: List
 Default value: \
 ```
 
-### -Id
+### Id
 
 Specifies build definition by ID.
 

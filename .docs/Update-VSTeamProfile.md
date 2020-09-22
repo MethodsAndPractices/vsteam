@@ -38,7 +38,7 @@ This will update all but the first AzD profile
 
 ## PARAMETERS
 
-### -PAT
+### PAT
 
 A secured string to capture your personal access token.
 
@@ -53,7 +53,7 @@ Parameter Sets: Secure
 Required: True
 ```
 
-### -PersonalAccessToken
+### PersonalAccessToken
 
 The personal access token from AzD/TFS to use to access this account.
 
@@ -64,7 +64,7 @@ Required: True
 Position: 2
 ```
 
-### -Name
+### Name
 
 Name of the profile to be updated
 

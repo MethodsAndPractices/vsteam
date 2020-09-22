@@ -16,56 +16,56 @@
 
 ## PARAMETERS
 
-### -RepositoryId
+### RepositoryId
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -RepositoryName
+### RepositoryName
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -BranchName
+### BranchName
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -Descriptor
+### Descriptor
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -User
+### User
 
 ```yaml
 Type: VSTeamUser
 Required: True
 ```
 
-### -Group
+### Group
 
 ```yaml
 Type: VSTeamGroup
 Required: True
 ```
 
-### -Allow
+### Allow
 
 ```yaml
 Type: VSTeamGitRepositoryPermissions
 Required: True
 ```
 
-### -Deny
+### Deny
 
 ```yaml
 Type: VSTeamGitRepositoryPermissions

@@ -1,4 +1,4 @@
-### -ProjectName
+### ProjectName
 
 Specifies the team project for which this function operates.
 

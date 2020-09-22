@@ -38,7 +38,7 @@ This commands update the variables of the release definition.
 
 ## PARAMETERS
 
-### -InFile
+### InFile
 
 Path and file name to the JSON file that contains the definition to be updated. If the path is omitted, the default is the current location.
 
@@ -50,7 +50,7 @@ Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -ReleaseDefinition
+### ReleaseDefinition
 
 JSON string of release definition.
 

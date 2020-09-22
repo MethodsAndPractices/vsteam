@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -UserId
+### UserId
 
 The id of the user to remove.
 
@@ -28,7 +28,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Email
+### Email
 
 The email of the user to remove.
 

@@ -18,7 +18,7 @@ This is only used when using the Kubernetes tasks.
 
 ## PARAMETERS
 
-### -Kubeconfig
+### Kubeconfig
 
 kubeconfig as JSON string
 
@@ -28,7 +28,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -KubernetesUrl
+### KubernetesUrl
 
 URL of Kubernetes cluster
 
@@ -38,7 +38,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -EndpointName
+### EndpointName
 
 The name displayed on the services page.
 In AzD this is the Connection Name.
@@ -48,7 +48,7 @@ Type: String
 Position: 3
 ```
 
-### -ClientCertificateData
+### ClientCertificateData
 
 Client certificate from Kubeconfig
 
@@ -57,7 +57,7 @@ Type: String
 Required: True
 ```
 
-### -ClientKeyData
+### ClientKeyData
 
 Client private key from Kubeconfig
 
@@ -67,7 +67,7 @@ Parameter Sets: Plain
 Required: True
 ```
 
-### -AcceptUntrustedCerts
+### AcceptUntrustedCerts
 
 Accept untrusted certificates for cluster
 
@@ -75,7 +75,7 @@ Accept untrusted certificates for cluster
 Type: Switch
 ```
 
-### -GeneratePfx
+### GeneratePfx
 
 Generate pfx file
 

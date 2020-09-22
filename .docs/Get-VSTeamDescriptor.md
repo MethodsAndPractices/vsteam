@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -StorageKey
+### StorageKey
 
 Storage key of the subject (user, group, scope, etc.) to resolve
 

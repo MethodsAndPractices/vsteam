@@ -24,7 +24,7 @@ This command will open a web browser with the summary of build 3.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies build by ID.
 
@@ -36,7 +36,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -ProjectName
+### ProjectName
 
 Specifies the team project for which this function operates.
 

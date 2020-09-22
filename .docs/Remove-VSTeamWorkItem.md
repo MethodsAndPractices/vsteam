@@ -40,7 +40,7 @@ This command deletes work item with IDs 47 **permanently** by using the Destroy 
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of one or more work items.
 
@@ -51,7 +51,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
-### -Destroy
+### Destroy
 
 Optional parameter, if set to true, the work item is deleted permanently. **Please note: the destroy action is PERMANENT and cannot be undone.**
 

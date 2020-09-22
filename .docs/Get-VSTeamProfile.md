@@ -32,7 +32,7 @@ Will return details of the profile provided
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Optional name for the profile.
 

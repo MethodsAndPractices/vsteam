@@ -46,7 +46,7 @@ names like "Custom Scrum", "Scrum for Contoso" will all be returned.
 
 <!-- #include "./params/ProcessName.md" -->
 
-### -Id
+### Id
 
 The id of the Process Template to return.
 

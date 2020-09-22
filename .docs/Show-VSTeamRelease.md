@@ -24,7 +24,7 @@ This command will open a web browser with the summary of release 3.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies release by ID.
 

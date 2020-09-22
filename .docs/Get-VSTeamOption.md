@@ -62,7 +62,7 @@ This will display all the versions of supported APIs for resources teams under t
 
 ## PARAMETERS
 
-### -SubDomain
+### SubDomain
 
 Returns options for that sub domain APIs. Some examples include:
 
@@ -77,7 +77,7 @@ Type: String
 Required: false
 ```
 
-### -Area
+### Area
 
 Returns options for that area's APIs.
 
@@ -86,7 +86,7 @@ Type: String
 Required: false
 ```
 
-### -Resource
+### Resource
 
 Returns options for that resource's APIs.
 

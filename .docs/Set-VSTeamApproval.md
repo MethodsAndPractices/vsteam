@@ -32,7 +32,7 @@ This command rejects approval with Id of 1.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies the approval IDs of the approvals to set.
 
@@ -42,7 +42,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Status
+### Status
 
 Specifies the status to set for the approval. The acceptable values for this parameter are:
 
@@ -57,7 +57,7 @@ Required: True
 Default value: Approved
 ```
 
-### -Approver
+### Approver
 
 Specifies the user to whom the approval has been re-assigned to Alias of the user chuckreinhart@outlook.com, for example.
 
@@ -65,7 +65,7 @@ Specifies the user to whom the approval has been re-assigned to Alias of the use
 Type: String
 ```
 
-### -Comment
+### Comment
 
 Specifies the comment to be stored with this approval.
 

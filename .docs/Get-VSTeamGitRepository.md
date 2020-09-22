@@ -40,7 +40,7 @@ This command gets the remote URL and passes it to git clone command.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies one or more repositories by ID.
 
@@ -55,7 +55,7 @@ Aliases: RepositoryID
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Name
+### Name
 
 Specifies one or more repositories by name.
 

@@ -24,7 +24,7 @@ Assigns Endpoint Administrators group to $group variable.
 
 ## PARAMETERS
 
-### -SubjectTypes
+### SubjectTypes
 
 A comma separated list of user subject subtypes to reduce the retrieved results.
 Valid subject types:
@@ -38,7 +38,7 @@ Required: False
 Parameter Sets: List, ListByProjectName
 ```
 
-### -ScopeDescriptor
+### ScopeDescriptor
 
 Specify a non-default scope (collection, project) to search for groups.
 
@@ -48,7 +48,7 @@ Required: False
 Parameter Sets: List
 ```
 
-### -Descriptor
+### Descriptor
 
 The descriptor of the desired graph group.
 

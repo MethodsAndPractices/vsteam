@@ -34,7 +34,7 @@ This example is useful for when one wants to copy an existing task group in one 
 ## PARAMETERS
 
 
-### -InFile
+### InFile
 
 The path to the json file that represents the task group
 
@@ -50,7 +50,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Body
+### Body
 
 The json that represents the task group as a string
 

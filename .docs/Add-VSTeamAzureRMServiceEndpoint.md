@@ -16,7 +16,7 @@ The cmdlet adds a new connection between TFS/AzD and Azure using the Azure Resou
 
 ## PARAMETERS
 
-### -SubscriptionName
+### SubscriptionName
 
 The name of the Azure Subscription.
 
@@ -28,7 +28,7 @@ Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -SubscriptionId
+### SubscriptionId
 
 The id of the Azure subscription to use.
 
@@ -39,7 +39,7 @@ Position: 2
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -SubscriptionTenantId
+### SubscriptionTenantId
 
 The id of the Azure tenant to use.
 
@@ -50,7 +50,7 @@ Position: 3
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -ServicePrincipalId
+### ServicePrincipalId
 
 The ID of the Azure Service Principal to use with this service endpoint.
 
@@ -61,7 +61,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -ServicePrincipalKey
+### ServicePrincipalKey
 
 The key of the Azure Service Principal to use with this service endpoint.
 
@@ -72,7 +72,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -EndpointName
+### EndpointName
 
 The name displayed on the services page.
 In AzD this is the Connection Name.

@@ -28,7 +28,7 @@ The pipeline operator (|) passes the data to the Remove-VSTeamReleaseDefinition 
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies one or more release definitions by ID.
 

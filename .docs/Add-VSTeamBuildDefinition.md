@@ -27,7 +27,7 @@ on the demo team project.
 
 ## PARAMETERS
 
-### -InFile
+### InFile
 
 Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.
 

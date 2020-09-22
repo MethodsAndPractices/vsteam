@@ -32,7 +32,7 @@ This command adds a team named 'Testing2' with description 'Test team' to the pr
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 The name of the team
 
@@ -43,7 +43,7 @@ Required: True
 Position: 0
 ```
 
-### -Description
+### Description
 
 The description of the team.
 

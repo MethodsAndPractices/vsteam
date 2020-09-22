@@ -44,7 +44,7 @@ Adds a Service Fabric Endpoint for a certificate secured cluster.
 
 ## PARAMETERS
 
-### -url
+### url
 
 The url of the Service Fabric management endpoint.
 
@@ -55,7 +55,7 @@ Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -useWindowsSecurity
+### useWindowsSecurity
 
 If windows integrated authentication should be enabled. If set to false, all authentication is disabled.
 
@@ -65,7 +65,7 @@ Position: 2
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -clusterSpn
+### clusterSpn
 
 Specify the cluster service principal name, for use with windows integrated authentication.
 
@@ -74,7 +74,7 @@ Type: String
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -serverCertThumbprint
+### serverCertThumbprint
 
 The server certificate thumbprint, used for communicating with the Service Fabric cluster.
 
@@ -85,7 +85,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -username
+### username
 
 The Azure AD Username, used for communicating with the Service Fabric cluster.
 
@@ -96,7 +96,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -password
+### password
 
 The Password for the Azure AD User, used for communicating with the Service Fabric cluster.
 
@@ -107,7 +107,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -certificate
+### certificate
 
 The certificate used for communicating with the Service Fabric cluster.
 
@@ -118,7 +118,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -certificatePassword
+### certificatePassword
 
 The Password for the certificate used for communicating with the Service Fabric cluster.
 
@@ -129,7 +129,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -endpointName
+### endpointName
 
 The name displayed on the services page. In AzD this is the Connection Name.
 

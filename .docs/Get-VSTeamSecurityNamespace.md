@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Security namespace identifier.
 
@@ -26,7 +26,7 @@ Required: False
 Parameter Sets: ByNamespaceId
 ```
 
-### -Name
+### Name
 
 Security namespace name.
 
@@ -36,7 +36,7 @@ Required: False
 Parameter Sets: ByNamespaceName
 ```
 
-### -LocalOnly
+### LocalOnly
 
 If true, retrieve only local security namespaces.
 

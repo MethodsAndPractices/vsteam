@@ -32,7 +32,7 @@ This command will open a web browser with the pull request id of 3.
 
 ## PARAMETERS
 
-### -PullRequestId
+### PullRequestId
 
 Specifies pull request by ID.
 

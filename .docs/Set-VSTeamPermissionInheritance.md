@@ -32,7 +32,7 @@ This command sets the permission inheritance to true for every build definition 
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Specifies the name of the resource.
 
@@ -42,7 +42,7 @@ Accept pipeline input: true (ByPropertyName)
 Required: True
 ```
 
-### -ResourceType
+### ResourceType
 
 Specifies the type of resource. The acceptable values for this parameter are:
 
@@ -55,7 +55,7 @@ Type: String
 Required: True
 ```
 
-### -NewState
+### NewState
 
 The new state to set
 

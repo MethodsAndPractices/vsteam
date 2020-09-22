@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 UUID of existing services endpoint from AzD
 
@@ -25,7 +25,7 @@ Type: String
 Position: 1
 ```
 
-### -Object
+### Object
 
 Hashtable of payload for REST call
 

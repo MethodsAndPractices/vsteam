@@ -24,7 +24,7 @@ This command opens a web browser showing the release requiring approval.
 
 ## PARAMETERS
 
-### -ReleaseDefinitionId
+### ReleaseDefinitionId
 
 Only approvals for the release id provided will be returned.
 

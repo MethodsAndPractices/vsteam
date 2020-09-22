@@ -24,7 +24,7 @@ This command returns all the package feeds for the account.
 
 ## PARAMETERS
 
-### -FeedId
+### FeedId
 
 Specifies the ID of the feed.
 

@@ -46,7 +46,7 @@ This example checks the YAML pipeline with ID 24 for consistency on Azure DevOps
 
 ## PARAMETERS
 
-### -PipelineId
+### PipelineId
 
 Id of the YAML pipeline to be checked
 
@@ -55,7 +55,7 @@ Type: Int32
 Position: 1
 ```
 
-### -FilePath
+### FilePath
 
 Path to the file that should be checked
 

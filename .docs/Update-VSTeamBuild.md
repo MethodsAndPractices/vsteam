@@ -24,7 +24,7 @@ Sets the keep forever property of every build to false.
 
 ## PARAMETERS
 
-### -BuildNumber
+### BuildNumber
 
 The value you want to set as the build number.
 
@@ -35,7 +35,7 @@ Accept pipeline input: true (ByPropertyName, ByValue)
 
 <!-- #include "./params/BuildId.md" -->
 
-### -KeepForever
+### KeepForever
 
 $True or $False to set the keep forever property of the build.
 

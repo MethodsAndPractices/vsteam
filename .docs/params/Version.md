@@ -1,4 +1,4 @@
-### -Version
+### Version
 
 Specifies the version to use. The acceptable values for this parameter are:
 

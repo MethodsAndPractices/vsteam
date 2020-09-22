@@ -64,7 +64,7 @@ This command gets the pull request with an Id of 123 and includes the commits th
 
 ## PARAMETERS
 
-### -ProjectName
+### ProjectName
 
 Specifies the team project for which this function operates.
 
@@ -80,7 +80,7 @@ Position: 0
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Id
+### Id
 
 Specifies the pull request by ID.
 
@@ -91,7 +91,7 @@ Accept pipeline input: true (ByPropertyName)
 Parameter Sets: ById, IncludeCommits
 ```
 
-### -RepositoryId
+### RepositoryId
 
 The repository ID of the pull request's target branch.
 
@@ -100,7 +100,7 @@ Type: Guid
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll, ById, IncludeCommits
 ```
 
-### -SourceRepositoryId
+### SourceRepositoryId
 
 If set, search for pull requests whose source branch is in this repository.
 
@@ -109,7 +109,7 @@ Type: Guid
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -SourceBranchRef
+### SourceBranchRef
 
 If set, search for pull requests from this branch.
 
@@ -118,7 +118,7 @@ Type: String
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -TargetBranchRef
+### TargetBranchRef
 
 If set, search for pull requests into this branch.
 
@@ -127,7 +127,7 @@ Type: String
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -Status
+### Status
 
 If set, search for pull requests that are in this state. Defaults to Active if unset. Valid values for this parameter are:
 
@@ -142,14 +142,14 @@ Type: String
 Parameter Sets: SearchCriteriaWithStatus
 ```
 
-### -All
+### All
 
 ```yaml
 Type: Switch
 Parameter Sets: SearchCriteriaWithAll
 ```
 
-### -Top
+### Top
 
 The number of pull requests to retrieve.
 
@@ -158,7 +158,7 @@ Type: Int32
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -Skip
+### Skip
 
 The number of pull requests to ignore. For example, to retrieve results 101-150, set top to 50 and skip to 100.
 
@@ -167,7 +167,7 @@ Type: Int32
 Parameter Sets: SearchCriteriaWithStatus, SearchCriteriaWithAll
 ```
 
-### -IncludeCommits
+### IncludeCommits
 
 If set, includes the commits that are part of the pull request. Requires the RepositoryId to be set.
 

@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Type
+### Type
 
 Name of service endpoint type to return.
 
@@ -26,7 +26,7 @@ Parameter Sets: ByType
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Scheme
+### Scheme
 
 Scheme of service endpoint
 

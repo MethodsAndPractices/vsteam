@@ -40,7 +40,7 @@ This command adds a new area named NewArea to the default project.
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Name of the new area.
 
@@ -49,7 +49,7 @@ Type: string
 Position: 0
 ```
 
-### -Path
+### Path
 
 Path of the existing area under where the new one will be created.
 

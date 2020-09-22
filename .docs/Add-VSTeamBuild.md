@@ -59,7 +59,7 @@ This example queues the build and sets the system.debug variable to true and msg
 
 ## PARAMETERS
 
-### -BuildDefinitionName
+### BuildDefinitionName
 
 The name of the build definition to use to queue to build.
 
@@ -70,7 +70,7 @@ Aliases: BuildDefinition
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -QueueName
+### QueueName
 
 The name of the queue to use for this build.
 
@@ -79,7 +79,7 @@ Type: String
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -BuildDefinitionId
+### BuildDefinitionId
 
 The Id of the build definition to use to queue to build.
 
@@ -90,7 +90,7 @@ Aliases: Id
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -SourceBranch
+### SourceBranch
 
 Which source branch to use for this build. Overrides default branch in build definition.
 
@@ -98,7 +98,7 @@ Which source branch to use for this build. Overrides default branch in build def
 Type: String
 ```
 
-### -BuildParameters
+### BuildParameters
 
 A hashtable with build parameters.
 

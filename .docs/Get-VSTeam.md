@@ -24,7 +24,7 @@ This command pipes the project name to Get-VSTeam and returns the team with the 
 
 ## PARAMETERS
 
-### -Skip
+### Skip
 
 The number of items to skip.
 
@@ -33,7 +33,7 @@ Type: Int32
 Parameter Sets: List
 ```
 
-### -Top
+### Top
 
 Specifies the maximum number to return.
 
@@ -42,7 +42,7 @@ Type: Int32
 Parameter Sets: List
 ```
 
-### -Name
+### Name
 
 The name of the team to retrieve.
 
@@ -52,7 +52,7 @@ Parameter Sets: ByName
 Position: 0
 ```
 
-### -TeamId
+### TeamId
 
 The id of the team to retrieve.
 

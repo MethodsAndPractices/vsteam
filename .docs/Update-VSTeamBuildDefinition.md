@@ -36,7 +36,7 @@ Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition $body
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies the build definition to update by ID.
 
@@ -48,7 +48,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -InFile
+### InFile
 
 Path and file name to the JSON file that contains the definition to be updated. If the path is omitted, the default is the current location.
 
@@ -60,7 +60,7 @@ Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -BuildDefinition
+### BuildDefinition
 
 JSON string of build definition.
 

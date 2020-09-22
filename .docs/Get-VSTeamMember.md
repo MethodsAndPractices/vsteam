@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Skip
+### Skip
 
 The number of items to skip.
 
@@ -24,7 +24,7 @@ The number of items to skip.
 Type: Int32
 ```
 
-### -TeamId
+### TeamId
 
 The id of the team to search.
 
@@ -36,7 +36,7 @@ Position: 2
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Top
+### Top
 
 Specifies the maximum number to return.
 

@@ -24,7 +24,7 @@ This command will set the status of release with id 5 to Abandoned.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies one or more releases by ID.
 
@@ -38,7 +38,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Status
+### Status
 
 The status to set for the release Active or Abandoned.
 

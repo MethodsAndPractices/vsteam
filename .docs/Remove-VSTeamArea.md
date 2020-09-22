@@ -32,7 +32,7 @@ This command removes an existing area with the path "A1" to the default project.
 
 ## PARAMETERS
 
-### -Path
+### Path
 
 Path of the area node.
 
@@ -42,7 +42,7 @@ Required: True
 Position: 0
 ```
 
-### -ReClassifyId
+### ReClassifyId
 
 Id of an area where work items should be reassigned to if they are currently assigned to the area being deleted.
 

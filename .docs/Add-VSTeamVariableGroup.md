@@ -84,7 +84,7 @@ else {
 
 ## PARAMETERS
 
-### -Description
+### Description
 
 The variable group description
 
@@ -100,7 +100,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Name
+### Name
 
 The variable group name
 
@@ -116,7 +116,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProviderData
+### ProviderData
 
 The variable group ProviderData.  This parameter is not available in TFS2017. This should be $null for Vsts types.
 
@@ -132,7 +132,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Type
+### Type
 
 The variable group type.  This parameter is not available in TFS2017; all variable groups are type Vsts in this case.
 
@@ -149,7 +149,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Variables
+### Variables
 
 The variable group variables.
 
@@ -165,7 +165,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Body
+### Body
 
 The json that represents the variable group as a string
 

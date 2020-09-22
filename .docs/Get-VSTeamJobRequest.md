@@ -24,7 +24,7 @@ This will display all the job request of agent with id 111 under the pool with i
 
 ## PARAMETERS
 
-### -PoolId
+### PoolId
 
 Id of the pool.
 
@@ -34,7 +34,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -AgentId
+### AgentId
 
 Id of the agent to return.
 
@@ -44,7 +44,7 @@ Required: True
 Accept pipeline input: true (ByValue)
 ```
 
-### -CompletedRequestCount
+### CompletedRequestCount
 
 The number of requests to return.
 

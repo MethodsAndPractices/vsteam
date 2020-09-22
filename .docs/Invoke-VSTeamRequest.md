@@ -32,7 +32,7 @@ This command will return the releases for a project.
 
 ## PARAMETERS
 
-### -ContentType
+### ContentType
 
 Specifies the content type of the request.
 
@@ -45,7 +45,7 @@ Type: String
 Default value: application/json
 ```
 
-### -Method
+### Method
 
 Specifies the method used for the request. The acceptable values for this parameter are:
 
@@ -65,7 +65,7 @@ Type: String
 Default value: Get
 ```
 
-### -Body
+### Body
 
 Specifies the body of the request. The body is the content of the request that follows the headers.
 
@@ -80,7 +80,7 @@ Type: Object
 Accept pipeline input: true (ByValue)
 ```
 
-### -InFile
+### InFile
 
 Path and file name to the file that contains the contents of the request. If the path is omitted, the default is the current location.
 
@@ -88,7 +88,7 @@ Path and file name to the file that contains the contents of the request. If the
 Type: String
 ```
 
-### -OutFile
+### OutFile
 
 Specifies the output file for which this function saves the response body. Enter a path and file name. If you omit the path, the default is the current location.
 
@@ -96,7 +96,7 @@ Specifies the output file for which this function saves the response body. Enter
 Type: String
 ```
 
-### -Area
+### Area
 
 The area to find the resource. You can tab complete this value. It can be filtered by passing -subDomain first.
 
@@ -104,7 +104,7 @@ The area to find the resource. You can tab complete this value. It can be filter
 Type: String
 ```
 
-### -Resource
+### Resource
 
 The name of the feature you want to manipulate. You can tab complete this value if you pass -Area before this parameter.
 
@@ -112,7 +112,7 @@ The name of the feature you want to manipulate. You can tab complete this value 
 Type: String
 ```
 
-### -Id
+### Id
 
 The unique value of the item you want to work with.
 
@@ -120,7 +120,7 @@ The unique value of the item you want to work with.
 Type: String
 ```
 
-### -Version
+### Version
 
 The version of the API you wish to target.
 
@@ -128,7 +128,7 @@ The version of the API you wish to target.
 Type: String
 ```
 
-### -SubDomain
+### SubDomain
 
 The SubDomain before .dev.azure.com. For example, to target Release Management you must use the SubDomain vsrm.
 
@@ -136,7 +136,7 @@ The SubDomain before .dev.azure.com. For example, to target Release Management y
 Type: String
 ```
 
-### -JSON
+### JSON
 
 Converts the PowerShell object into JSON and displays in the console.
 
@@ -144,7 +144,7 @@ Converts the PowerShell object into JSON and displays in the console.
 Type: Switch
 ```
 
-### -AdditionalHeaders
+### AdditionalHeaders
 
 Adds additional headers to the request
 

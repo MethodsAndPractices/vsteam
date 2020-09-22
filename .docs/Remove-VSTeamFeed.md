@@ -24,7 +24,7 @@ This command remove the package feed from the account.
 
 ## PARAMETERS
 
-### -FeedId
+### FeedId
 
 Specifies the ID of the feed.
 

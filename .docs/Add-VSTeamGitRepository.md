@@ -24,7 +24,7 @@ This command adds a new repository named Temp to the Demo project.
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Specifies the name of the repository.
 

@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -PoolId
+### PoolId
 
 Id of the pool.
 
@@ -26,7 +26,7 @@ Required: True
 Accept pipeline input: true (ByValue)
 ```
 
-### -Id
+### Id
 
 Id of the agent to enable.
 

@@ -63,7 +63,7 @@ This command returns the raw object returned from the server.
 
 ## PARAMETERS
 
-### -Top
+### Top
 
 Specifies the maximum number to return.
 
@@ -73,7 +73,7 @@ Parameter Sets: List
 Default value: 0
 ```
 
-### -ResultFilter
+### ResultFilter
 
 Specifies the result of the builds to return Succeeded, PartiallySucceeded, Failed, or Canceled.
 
@@ -82,7 +82,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -ReasonFilter
+### ReasonFilter
 
 Specifies the reason the build was created of the builds to return Manual, IndividualCI, BatchedCI, Schedule, UserCreated, ValidateShelveSet, CheckInShelveSet, Triggered, or All.
 
@@ -91,7 +91,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -StatusFilter
+### StatusFilter
 
 Specifies the status of the builds to return InProgress, Completed, Cancelling, Postponed, NotStarted, or All.
 
@@ -100,7 +100,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -Queues
+### Queues
 
 A comma-delimited list of queue IDs that specifies the builds to return.
 
@@ -109,7 +109,7 @@ Type: Int32[]
 Parameter Sets: List
 ```
 
-### -Definitions
+### Definitions
 
 A comma-delimited list of build definition IDs that specifies the builds to return.
 
@@ -118,7 +118,7 @@ Type: Int32[]
 Parameter Sets: List
 ```
 
-### -BuildNumber
+### BuildNumber
 
 Returns the build with this build number.
 
@@ -131,7 +131,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -Type
+### Type
 
 The type of builds to retrieve.
 
@@ -140,7 +140,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -MaxBuildsPerDefinition
+### MaxBuildsPerDefinition
 
 The maximum number of builds to retrieve for each definition.
 
@@ -151,7 +151,7 @@ Type: Int32
 Parameter Sets: List
 ```
 
-### -Properties
+### Properties
 
 A comma-delimited list of extended properties to retrieve.
 
@@ -162,7 +162,7 @@ Parameter Sets: List
 
 <!-- #include "./params/BuildIds.md" -->
 
-### -JSON
+### JSON
 
 Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.
 
@@ -172,7 +172,7 @@ Required: True
 Parameter Sets: ByIDJson
 ```
 
-### -Raw
+### Raw
 
 Returns the raw response. This is required when you need to use the object to send back.  Without this switch the object produced from the returned object will not match the expected shape of the JSON for sending back to server.
 

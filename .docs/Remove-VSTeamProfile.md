@@ -24,7 +24,7 @@ This will remove all the profiles on your system.
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Name of profile to remove.
 

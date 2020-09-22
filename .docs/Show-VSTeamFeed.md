@@ -24,7 +24,7 @@ This command will open a web browser with this feed showing.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies feed by ID or Name.
 

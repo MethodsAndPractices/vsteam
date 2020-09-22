@@ -24,7 +24,7 @@ This command adds a new package feed to the account.
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Name of the feed
 
@@ -33,7 +33,7 @@ Type: string
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Description
+### Description
 
 Description of the feed
 
@@ -41,7 +41,7 @@ Description of the feed
 Type: string
 ```
 
-### -EnableUpstreamSources
+### EnableUpstreamSources
 
 Enables npm and nuget upstream sources for the feed
 
@@ -49,7 +49,7 @@ Enables npm and nuget upstream sources for the feed
 Type: SwitchParameter
 ```
 
-### -showDeletedPackageVersions
+### showDeletedPackageVersions
 
 The feed will show deleted version in the feed
 

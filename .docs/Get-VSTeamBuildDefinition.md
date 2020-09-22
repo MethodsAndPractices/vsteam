@@ -48,7 +48,7 @@ This command returns the raw object returned from the server.
 
 ## PARAMETERS
 
-### -Filter
+### Filter
 
 Filters to definitions whose names equal this value. Append a * to filter to definitions whose names start with this value.
 For example: MS*
@@ -58,7 +58,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -Id
+### Id
 
 Specifies one or more build definitions by ID.
 
@@ -74,7 +74,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Revision
+### Revision
 
 Specifies the specific revision number of the definition to retrieve.
 
@@ -84,7 +84,7 @@ Parameter Sets: ByID
 Default value: -1
 ```
 
-### -JSON
+### JSON
 
 Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.
 
@@ -93,7 +93,7 @@ Type: Switch
 Required: True
 ```
 
-### -Raw
+### Raw
 
 Returns the raw response. This is required when you need to use the object to send back.  Without this switch the object produced from the returned object will not match the expected shape of the JSON for sending back to server.
 

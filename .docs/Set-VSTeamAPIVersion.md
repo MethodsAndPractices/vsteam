@@ -32,7 +32,7 @@ This command sets the version of the Release calls to 5.0.
 
 ## PARAMETERS
 
-### -Target
+### Target
 
 Specifies the version to use. The acceptable values for this parameter are:
 
@@ -57,7 +57,7 @@ Parameter Sets: Target
 Default value: TFS2017
 ```
 
-### -Service
+### Service
 
 Specifies the service to change. The acceptable values for this parameter are:
 
@@ -78,7 +78,7 @@ Required: True
 Parameter Sets: Service
 ```
 
-### -Version
+### Version
 
 Specifies the version to use.
 

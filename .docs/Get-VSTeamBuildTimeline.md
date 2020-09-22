@@ -57,7 +57,7 @@ This command gets timelines with build Ids from the pipeline.
 
 <!-- #include "./params/BuildIds.md" -->
 
-### -TimelineId
+### TimelineId
 
 Returns the timelines with the given timeline id.
 
@@ -67,7 +67,7 @@ Aliases: TimelineId
 Parameter Sets: ByID
 ```
 
-### -ChangeId
+### ChangeId
 
 Returns the timelines with the given change id.
 
@@ -76,7 +76,7 @@ Type: Int32
 Parameter Sets: ByID
 ```
 
-### -PlanId
+### PlanId
 
 Returns the timelines with the given plan id.
 

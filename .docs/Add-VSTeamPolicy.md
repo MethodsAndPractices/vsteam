@@ -24,7 +24,7 @@ This command adds a new policy to the Demo project's repository specified. The p
 
 ## PARAMETERS
 
-### -type
+### type
 
 Specifies the id of the type of policy to be created.
 
@@ -33,7 +33,7 @@ Type: Guid
 Required: True
 ```
 
-### -enabled
+### enabled
 
 Enables the policy
 
@@ -41,7 +41,7 @@ Enables the policy
 Type: Switch
 ```
 
-### -blocking
+### blocking
 
 Determines if the policy will block pushes to the branch if the policy is not adhered to.
 
@@ -49,7 +49,7 @@ Determines if the policy will block pushes to the branch if the policy is not ad
 Type: Switch
 ```
 
-### -settings
+### settings
 
 The settings for the policy.
 

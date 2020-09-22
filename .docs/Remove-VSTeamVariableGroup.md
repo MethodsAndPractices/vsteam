@@ -43,7 +43,7 @@ Remove-VSTeamVariableGroup @methodParameters
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 ID of the existing variable group
 

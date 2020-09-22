@@ -24,7 +24,7 @@ This command removes all the Git repositories for your TFS or Team Services acco
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies one or more repositories by ID.
 

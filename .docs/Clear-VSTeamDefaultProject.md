@@ -24,7 +24,7 @@ This will clear the default project parameter value. You will now have to provid
 
 ## PARAMETERS
 
-### -Level
+### Level
 
 On Windows allows you to clear your default project at the Process, User or Machine levels.
 

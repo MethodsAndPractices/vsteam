@@ -26,7 +26,7 @@ This will clear your account name and personal access token.
 
 ## PARAMETERS
 
-### -Level
+### Level
 
 On Windows allows you to clear your account information at the Process, User or Machine levels.
 

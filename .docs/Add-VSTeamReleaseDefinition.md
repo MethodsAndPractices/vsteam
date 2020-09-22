@@ -26,7 +26,7 @@ This command reads release.json and creates a new release definition from it on 
 
 ## PARAMETERS
 
-### -InFile
+### InFile
 
 Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.
 

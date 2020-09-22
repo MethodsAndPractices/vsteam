@@ -24,7 +24,7 @@ This command will open a web browser with the summary of work item 3.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies work item by ID.
 

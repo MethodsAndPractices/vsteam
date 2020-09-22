@@ -38,7 +38,7 @@ On Windows, allows you use to use Windows authentication against a local TFS ser
 
 ## PARAMETERS
 
-### -Account
+### Account
 
 The Azure DevOps (AzD) account name to use.
 DO NOT enter the entire URL.
@@ -57,7 +57,7 @@ Required: True
 Position: 1
 ```
 
-### -PAT
+### PAT
 
 A secured string to capture your personal access token.
 
@@ -72,7 +72,7 @@ Parameter Sets: Secure
 Required: True
 ```
 
-### -PersonalAccessToken
+### PersonalAccessToken
 
 The personal access token from AzD/TFS to use to access this account.
 
@@ -83,7 +83,7 @@ Required: True
 Position: 2
 ```
 
-### -UseWindowsAuthentication
+### UseWindowsAuthentication
 
 Allows the use of the current user's Windows credentials to authenticate against a local TFS.
 
@@ -92,7 +92,7 @@ Type: SwitchParameter
 Parameter Sets: Windows
 ```
 
-### -UseBearerToken
+### UseBearerToken
 
 Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
 
@@ -101,7 +101,7 @@ Type: SwitchParameter
 Parameter Sets: Secure, Plain
 ```
 
-### -Name
+### Name
 
 Optional name for the profile. If this parameter is not provided the account will also serve as the name.
 

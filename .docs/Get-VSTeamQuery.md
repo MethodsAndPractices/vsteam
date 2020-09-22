@@ -22,7 +22,7 @@ Get-VSTeamQuery MyProject
 
 ## PARAMETERS
 
-### -Depth
+### Depth
 
 In the folder of queries, return child queries and folders to this depth.
 
@@ -31,7 +31,7 @@ Type: Int
 Default value: 1
 ```
 
-### -Target
+### Target
 
 Specifies the version to use. The acceptable values for this parameter are:
 
@@ -46,7 +46,7 @@ Type: String
 Default value: none
 ```
 
-### -IncludeDeleted
+### IncludeDeleted
 
 Include deleted queries and folders
 

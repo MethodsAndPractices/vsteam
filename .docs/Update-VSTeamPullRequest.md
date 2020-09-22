@@ -36,7 +36,7 @@ Abandon a pull request
 
 ## PARAMETERS
 
-### -RepositoryId
+### RepositoryId
 
 The id of the repository
 
@@ -48,7 +48,7 @@ Accept pipeline input: true (ByPropertyName)
 Parameter Sets: Draft, Publish, Status, EnableAutoComplete, DisableAutoComplete
 ```
 
-### -PullRequestId
+### PullRequestId
 
 The id of the pull request
 
@@ -58,7 +58,7 @@ Required: True
 Parameter Sets: Draft, Publish, Status, EnableAutoComplete, DisableAutoComplete
 ```
 
-### -Status
+### Status
 
 The status to set the pull request to. Valid values for this are:
 
@@ -72,7 +72,7 @@ Type: String
 Parameter Sets: Status
 ```
 
-### -EnableAutoComplete
+### EnableAutoComplete
 
 Set the pull requests auto complete status
 
@@ -81,7 +81,7 @@ Type: Switch
 Parameter Sets: EnableAutoComplete
 ```
 
-### -AutoCompleteIdentity
+### AutoCompleteIdentity
 
 The identity that enabled autocomplete. This is mandatory if -AutoComplete is set to $true
 
@@ -90,7 +90,7 @@ Type: VSTeamUser
 Parameter Sets: EnableAutoComplete
 ```
 
-### -DisableAutoComplete
+### DisableAutoComplete
 
 Unset the pull requests auto complete status
 
@@ -99,7 +99,7 @@ Type: Switch
 Parameter Sets: DisableAutoComplete
 ```
 
-### -Draft
+### Draft
 
 Set the pull request as a draft
 

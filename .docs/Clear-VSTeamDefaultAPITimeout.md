@@ -24,7 +24,7 @@ This will clear the default timeout parameter value.
 
 ## PARAMETERS
 
-### -Level
+### Level
 
 On Windows allows you to clear your default timeout at the Process, User or Machine levels.
 

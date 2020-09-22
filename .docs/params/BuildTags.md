@@ -1,4 +1,4 @@
-### -Tags
+### Tags
 
 One or more tags. To specify multiple, use commas to separate.
 

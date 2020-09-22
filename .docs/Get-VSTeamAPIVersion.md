@@ -32,7 +32,7 @@ This command gets the version of the Release API currently in use.
 
 ## PARAMETERS
 
-### -Service
+### Service
 
 Specifies the service to change. The acceptable values for this parameter are:
 

@@ -48,7 +48,7 @@ This command returns the raw object returned from the server formatted as JSON.
 
 ## PARAMETERS
 
-### -Expand
+### Expand
 
 Specifies which property should be expanded in the list of Release (environments, artifacts, none).
 
@@ -57,7 +57,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -StatusFilter
+### StatusFilter
 
 Draft, Active or Abandoned.
 
@@ -66,7 +66,7 @@ Type: String
 Parameter Sets: List
 ```
 
-### -DefinitionId
+### DefinitionId
 
 Id of the release definition
 
@@ -76,7 +76,7 @@ Parameter Sets: List
 Default value: 0
 ```
 
-### -Top
+### Top
 
 Specifies the maximum number to return.
 
@@ -86,42 +86,42 @@ Parameter Sets: List
 Default value: 0
 ```
 
-### -CreatedBy
+### CreatedBy
 
 ```yaml
 Type: String
 Parameter Sets: List
 ```
 
-### -MinCreatedTime
+### MinCreatedTime
 
 ```yaml
 Type: DateTime
 Parameter Sets: List
 ```
 
-### -MaxCreatedTime
+### MaxCreatedTime
 
 ```yaml
 Type: DateTime
 Parameter Sets: List
 ```
 
-### -QueryOrder
+### QueryOrder
 
 ```yaml
 Type: String
 Parameter Sets: List
 ```
 
-### -ContinuationToken
+### ContinuationToken
 
 ```yaml
 Type: String
 Parameter Sets: List
 ```
 
-### -Id
+### Id
 
 Specifies one or more releases by ID.
 
@@ -137,7 +137,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -JSON
+### JSON
 
 Converts the raw response into JSON and displays in the console. This is required when you need to use the object to send back.  Without this switch the JSON produced from the returned object will not match the expected shape of the JSON for sending back to server.
 
@@ -146,7 +146,7 @@ Type: Switch
 Required: True
 ```
 
-### -Raw
+### Raw
 
 Returns the raw response. This is required when you need to use the object to send back.  Without this switch the object produced from the returned object will not match the expected shape of the JSON for sending back to server.
 

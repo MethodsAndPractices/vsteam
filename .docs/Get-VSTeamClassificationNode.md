@@ -14,7 +14,7 @@
 
 ## PARAMETERS
 
-### -StructureGroup
+### StructureGroup
 
 Structure group of the classification node, area or iteration.
 
@@ -22,7 +22,7 @@ Structure group of the classification node, area or iteration.
 Type: string
 ```
 
-### -Depth
+### Depth
 
 Depth of children to fetch.
 
@@ -30,7 +30,7 @@ Depth of children to fetch.
 Type: int32
 ```
 
-### -Path
+### Path
 
 Path of the classification node.
 
@@ -38,7 +38,7 @@ Path of the classification node.
 Type: string
 ```
 
-### -Id
+### Id
 
 Integer classification nodes ids.
 

@@ -52,7 +52,7 @@ This command gets a list of all approvals rejected by Administrator using a cust
 
 ## PARAMETERS
 
-### -StatusFilter
+### StatusFilter
 
 By default the function returns Pending approvals.
 
@@ -64,7 +64,7 @@ There is a custom table view for each status.
 Type: String
 ```
 
-### -ReleaseId
+### ReleaseId
 
 Only approvals for the release ids provided will be returned.
 
@@ -72,7 +72,7 @@ Only approvals for the release ids provided will be returned.
 Type: Int32[]
 ```
 
-### -AssignedToFilter
+### AssignedToFilter
 
 Approvals are filtered to only those assigned to this user.
 

@@ -32,7 +32,7 @@ This command removes an existing area with the path \MyIteration\Path to the Dem
 
 ## PARAMETERS
 
-### -StructureGroup
+### StructureGroup
 
 Structure group of the classification node.
 
@@ -41,7 +41,7 @@ Type: string
 Accepted values: iterations, areas
 ```
 
-### -Path
+### Path
 
 Path of the classification node.
 
@@ -49,7 +49,7 @@ Path of the classification node.
 Type: string
 ```
 
-### -ReClassifyId
+### ReClassifyId
 
 Id of a classification node where work items should be reassigned to if they are currently assigned to the node being deleted.
 

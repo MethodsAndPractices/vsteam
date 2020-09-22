@@ -32,7 +32,7 @@ This command gets the Repository Id from the pipeline and the project name from 
 
 ## PARAMETERS
 
-### -RepositoryId
+### RepositoryId
 
 The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
 
@@ -43,7 +43,7 @@ Accept pipeline input: true (ByPropertyName)
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath, ByIds
 ```
 
-### -FromDate
+### FromDate
 
 If provided, only include history entries created after this date (string)
 
@@ -52,7 +52,7 @@ Type: DateTime
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -ToDate
+### ToDate
 
 If provided, only include history entries created before this date (string)
 
@@ -61,7 +61,7 @@ Type: DateTime
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -ItemVersionVersionType
+### ItemVersionVersionType
 
 Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:
 
@@ -74,7 +74,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -ItemVersionVersion
+### ItemVersionVersion
 
 Version string identifier (name of tag/branch, SHA1 of commit)
 
@@ -83,7 +83,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -ItemVersionVersionOptions
+### ItemVersionVersionOptions
 
 Version options - Specify additional modifiers to version (e.g Previous). The acceptable values for this parameter are:
 
@@ -96,7 +96,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -CompareVersionVersionType
+### CompareVersionVersionType
 
 Version type (branch, tag, or commit). Determines how Id is interpreted. The acceptable values for this parameter are:
 
@@ -109,7 +109,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -CompareVersionVersion
+### CompareVersionVersion
 
 Version string identifier (name of tag/branch, SHA1 of commit). The acceptable values for this parameter are:
 
@@ -122,7 +122,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -CompareVersionVersionOptions
+### CompareVersionVersionOptions
 
 Version options - Specify additional modifiers to version (e.g Previous)
 
@@ -131,7 +131,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -FromCommitId
+### FromCommitId
 
 If provided, a lower bound for filtering commits alphabetically
 
@@ -140,7 +140,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -ToCommitId
+### ToCommitId
 
 If provided, an upper bound for filtering commits alphabetically
 
@@ -149,7 +149,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -Author
+### Author
 
 Alias or display name of the author
 
@@ -158,7 +158,7 @@ Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -Id
+### Id
 
 If provided, specifies the exact commit ids of the commits to fetch. May not be combined with other parameters.
 
@@ -167,7 +167,7 @@ Type: String
 Parameter Sets: ByIds
 ```
 
-### -ItemPath
+### ItemPath
 
 Path of item to search under
 
@@ -176,7 +176,7 @@ Type: String
 Parameter Sets: All, ItemPath
 ```
 
-### -ExcludeDeletes
+### ExcludeDeletes
 
 Only applies when an itemPath is specified. This determines whether to exclude delete entries of the specified path.
 
@@ -185,7 +185,7 @@ Type: Switch
 Parameter Sets: All, ItemPath
 ```
 
-### -Top
+### Top
 
 Maximum number of entries to retrieve
 
@@ -194,7 +194,7 @@ Type: Int32
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -Skip
+### Skip
 
 Number of entries to skip
 
@@ -203,7 +203,7 @@ Type: Int32
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
 
-### -HistoryMode
+### HistoryMode
 
 What Git history mode should be used. This only applies to the search criteria when Ids = null and an itemPath is specified. The acceptable values for this parameter are:
 
@@ -217,7 +217,7 @@ Type: String
 Parameter Sets: ItemPath
 ```
 
-### -User
+### User
 
 Alias or display name of the committer
 

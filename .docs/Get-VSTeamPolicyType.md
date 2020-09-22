@@ -32,7 +32,7 @@ This command gets the policy type by the specified id within the Demo project.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies one policy type by id.
 

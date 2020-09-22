@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -PublisherId
+### PublisherId
 
 The id of the publisher.
 
@@ -25,7 +25,7 @@ Type: String
 Required: True
 ```
 
-### -ExtensionId
+### ExtensionId
 
 The id of the extension.
 
@@ -34,7 +34,7 @@ Type: String
 Required: True
 ```
 
-### -Version
+### Version
 
 The version of the extension. Example: "0.1.35".
 

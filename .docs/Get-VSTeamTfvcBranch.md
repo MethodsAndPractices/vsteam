@@ -64,7 +64,7 @@ This command returns all the branches under a project.
 
 ## PARAMETERS
 
-### -ProjectName
+### ProjectName
 
 Specifies the team project for which this function operates.
 
@@ -81,7 +81,7 @@ Parameter Sets: List
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Path
+### Path
 
 Full path to the branch.
 
@@ -91,7 +91,7 @@ Parameter Sets: ByPath
 Accept pipeline input: true
 ```
 
-### -IncludeChildren
+### IncludeChildren
 
 Return child branches, if there are any.
 
@@ -99,7 +99,7 @@ Return child branches, if there are any.
 Type: SwitchParameter
 ```
 
-### -IncludeParent
+### IncludeParent
 
 Return the parent branch, if there is one.
 
@@ -107,7 +107,7 @@ Return the parent branch, if there is one.
 Type: SwitchParameter
 ```
 
-### -IncludeDeleted
+### IncludeDeleted
 
 Return branches marked as deleted.
 

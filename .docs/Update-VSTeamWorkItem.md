@@ -50,7 +50,7 @@ ID Title          Status
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of the work item.
 
@@ -61,7 +61,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
-### -Title
+### Title
 
 The title of the work item
 
@@ -70,7 +70,7 @@ Type: String
 Required: False
 ```
 
-### -Description
+### Description
 
 The Description of the work item
 
@@ -79,7 +79,7 @@ Type: String
 Required: False
 ```
 
-### -IterationPath
+### IterationPath
 
 The IterationPath of the work item
 
@@ -88,7 +88,7 @@ Type: String
 Required: False
 ```
 
-### -AssignedTo
+### AssignedTo
 
 The email address of the user this work item will be assigned to.
 
@@ -97,7 +97,7 @@ Type: String
 Required: False
 ```
 
-### -AdditionalFields
+### AdditionalFields
 
 Hashtable which contains a key value pair of any field that should be filled with values. Key is the internal name of the field and the value is the content of the field being filled. E.g. the internal name for the area path is 'System.AreaPath'.
 

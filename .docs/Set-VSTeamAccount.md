@@ -80,7 +80,7 @@ Will add the account and use the OAuth Token provided by AzD when you check the 
 
 ## PARAMETERS
 
-### -Account
+### Account
 
 The Azure DevOps (AzD) account name to use.
 DO NOT enter the entire URL.
@@ -99,7 +99,7 @@ Required: True
 Position: 1
 ```
 
-### -SecurePersonalAccessToken
+### SecurePersonalAccessToken
 
 A secured string to capture your personal access token.
 
@@ -114,7 +114,7 @@ Parameter Sets: Secure
 Required: True
 ```
 
-### -Level
+### Level
 
 On Windows allows you to store your account information at the Process, User or Machine levels.
 When saved at the User or Machine level your account information will be in any future PowerShell processes.
@@ -126,7 +126,7 @@ Type: String
 Parameter Sets: Secure, Plain, Windows
 ```
 
-### -PersonalAccessToken
+### PersonalAccessToken
 
 The personal access token from AzD/TFS to use to access this account.
 
@@ -138,7 +138,7 @@ Required: True
 Position: 2
 ```
 
-### -UseWindowsAuthentication
+### UseWindowsAuthentication
 
 Allows the use of the current user's Windows credentials to authenticate against a local Team Foundation Server or Azure DevOps Server. This cannot be used to connect to Azure DevOps Services.
 
@@ -147,7 +147,7 @@ Type: SwitchParameter
 Parameter Sets: Windows
 ```
 
-### -UseBearerToken
+### UseBearerToken
 
 Switches the authorization from Basic to Bearer.  You still use the PAT for PersonalAccessToken parameters to store the token.
 
@@ -156,7 +156,7 @@ Type: SwitchParameter
 Parameter Sets: Secure, Plain
 ```
 
-### -Profile
+### Profile
 
 The profile name stored using Add-VSTeamProfile function. You can tab complete through existing profile names.
 
@@ -168,7 +168,7 @@ Required: True
 
 <!-- #include "./params/version.md" -->
 
-### -Drive
+### Drive
 
 The name of the drive you want to mount to this account. The command you need to run will be presented. Simply copy and paste the command to mount the drive. To use the drive run Set-Location [driveName]:
 

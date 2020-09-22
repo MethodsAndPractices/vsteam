@@ -40,7 +40,7 @@ This command returns root branches for all projects, also those marked as delete
 
 ## PARAMETERS
 
-### -IncludeChildren
+### IncludeChildren
 
 Return the child branches for each root branch.
 
@@ -48,7 +48,7 @@ Return the child branches for each root branch.
 Type: SwitchParameter
 ```
 
-### -IncludeDeleted
+### IncludeDeleted
 
 Return deleted branches.
 

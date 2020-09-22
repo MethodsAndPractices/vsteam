@@ -32,7 +32,7 @@ This command removes an existing iteration with the path \MyIteration\Path to th
 
 ## PARAMETERS
 
-### -Path
+### Path
 
 Path of the iteration node.
 
@@ -41,7 +41,7 @@ Type: string
 Required: True
 ```
 
-### -ReClassifyId
+### ReClassifyId
 
 Id of an iteration where work items should be reassigned to if they are currently assigned to the iteration being deleted.
 

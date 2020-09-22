@@ -38,7 +38,7 @@ Adds a variable temp to the release with a value of test.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of the release to update
 
@@ -48,7 +48,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Release
+### Release
 
 The updated release to save in AzD
 

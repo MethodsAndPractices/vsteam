@@ -32,7 +32,7 @@ This command adds a new iteration named NewIteration to the Demo project with th
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Name of the new classification node.
 
@@ -41,7 +41,7 @@ Type: string
 Required: True
 ```
 
-### -StructureGroup
+### StructureGroup
 
 Structure group of the classification node.
 
@@ -51,7 +51,7 @@ Required: True
 Accepted values: iterations, areas
 ```
 
-### -Path
+### Path
 
 Path of the classification node.
 
@@ -60,7 +60,7 @@ Type: string
 Required: False
 ```
 
-### -StartDate
+### StartDate
 
 Start date of the iteration.
 
@@ -69,7 +69,7 @@ Type: datetime
 Required: False
 ```
 
-### -FinishDate
+### FinishDate
 
 Finish date of the iteration.
 

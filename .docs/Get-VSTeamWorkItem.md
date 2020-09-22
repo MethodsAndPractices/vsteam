@@ -24,7 +24,7 @@ This command gets work items with IDs 47 and 48 by using the IDs parameter.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of one or more work items.
 
@@ -35,7 +35,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
-### -ErrorPolicy
+### ErrorPolicy
 
 The flag to control error policy in a bulk get work items request.  The acceptable values for this parameter are:
 
@@ -49,7 +49,7 @@ Required: True
 Default value: omit
 ```
 
-### -Fields
+### Fields
 
 Comma-separated list of requested fields.
 
@@ -57,7 +57,7 @@ Comma-separated list of requested fields.
 Type: String[]
 ```
 
-### -Expand
+### Expand
 
 Comma-separated list of requested fields.  The acceptable values for this parameter are:
 

@@ -29,7 +29,7 @@ displays the logs.
 
 <!-- #include "./params/BuildIds.md" -->
 
-### -Index
+### Index
 
 Each task stores its logs in an array. If you know the index of a specific task you can return just its logs. If you do not provide a value all the logs are displayed.
 

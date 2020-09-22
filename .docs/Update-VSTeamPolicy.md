@@ -24,7 +24,7 @@ This command updates an existing policy in the Demo project.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies the policy to update.
 
@@ -32,7 +32,7 @@ Specifies the policy to update.
 Type: Int
 ```
 
-### -type
+### type
 
 Specifies the id of the type of policy to be update. This must match the original policy, it cannot be changed via this call.
 
@@ -41,7 +41,7 @@ Type: Guid
 Required: True
 ```
 
-### -enabled
+### enabled
 
 Enables the policy
 
@@ -49,7 +49,7 @@ Enables the policy
 Type: Switch
 ```
 
-### -blocking
+### blocking
 
 Determines if the policy will block pushes to the branch if the policy is not adhered to.
 
@@ -57,7 +57,7 @@ Determines if the policy will block pushes to the branch if the policy is not ad
 Type: Switch
 ```
 
-### -settings
+### settings
 
 The settings for the policy.
 

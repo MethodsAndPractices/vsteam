@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 The name of the team to update
 
@@ -28,7 +28,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -NewTeamName
+### NewTeamName
 
 The new name of the team
 
@@ -36,7 +36,7 @@ The new name of the team
 Type: String
 ```
 
-### -Description
+### Description
 
 The new description of the team
 

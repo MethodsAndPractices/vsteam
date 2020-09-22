@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -License
+### License
 
 Type of Account License. The acceptable values for this parameter are:
 
@@ -33,7 +33,7 @@ Required: True
 Default value: EarlyAdopter
 ```
 
-### -Group
+### Group
 
 The acceptable values for this parameter are:
 
@@ -49,7 +49,7 @@ Required: True
 Default value: ProjectContributor
 ```
 
-### -LicensingSource
+### LicensingSource
 
 Licensing Source (e.g. Account. MSDN etc.). The acceptable values for this parameter are:
 
@@ -65,7 +65,7 @@ Type: String
 Default value: account
 ```
 
-### -MSDNLicenseType
+### MSDNLicenseType
 
 Type of MSDN License (e.g. Visual Studio Professional, Visual Studio Enterprise etc.). The acceptable values for this parameter are:
 

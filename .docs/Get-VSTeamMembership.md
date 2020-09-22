@@ -32,7 +32,7 @@ Get all the members for the third group
 
 ## PARAMETERS
 
-### -ContainerDescriptor
+### ContainerDescriptor
 
 A container descriptor retrieved by Get-VsTeamGroup
 
@@ -43,7 +43,7 @@ Parameter Sets: ByContainerId
 Position: 0
 ```
 
-### -MemberDescriptor
+### MemberDescriptor
 
 A member descriptor retrieved by Get-VsTeamUser
 

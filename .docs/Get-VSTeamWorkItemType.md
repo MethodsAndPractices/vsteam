@@ -24,7 +24,7 @@ This command gets a single work item type.
 
 ## PARAMETERS
 
-### -WorkItemType
+### WorkItemType
 
 The type of work item to retrieve.
 

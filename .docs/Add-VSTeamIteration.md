@@ -32,7 +32,7 @@ This command adds a new iteration named NewIteration to the Demo project with th
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Name of the new iteration.
 
@@ -41,7 +41,7 @@ Type: string
 Required: True
 ```
 
-### -Path
+### Path
 
 Path of the existing iteration under where the new one will be created.
 
@@ -50,7 +50,7 @@ Type: string
 Required: True
 ```
 
-### -StartDate
+### StartDate
 
 Start date of the iteration.
 
@@ -58,7 +58,7 @@ Start date of the iteration.
 Type: datetime
 ```
 
-### -FinishDate
+### FinishDate
 
 Finish date of the iteration.
 

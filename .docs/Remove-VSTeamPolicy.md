@@ -24,7 +24,7 @@ This command removes the policy with ID of 1 from the Demo project.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies one or more policies by ID.
 

@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -SecurityNamespace
+### SecurityNamespace
 
 Security namespace object.
 
@@ -26,7 +26,7 @@ Parameter Sets: ByNamespace
 Required: True
 ```
 
-### -SecurityNamespaceId
+### SecurityNamespaceId
 
 Security namespace identifier.
 
@@ -123,7 +123,7 @@ Parameter Sets: ByNamespaceId
 Required: True
 ```
 
-### -Token
+### Token
 
 The security Token
 
@@ -132,7 +132,7 @@ Type: String
 Required: True
 ```
 
-### -AllowMask
+### AllowMask
 
 Bitmask for Allow Permissions
 
@@ -141,7 +141,7 @@ Type: Int
 Required: True
 ```
 
-### -DenyMask
+### DenyMask
 
 Bitmask for Deny Permissions
 

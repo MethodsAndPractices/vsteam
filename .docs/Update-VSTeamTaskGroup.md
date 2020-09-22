@@ -31,7 +31,7 @@ Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGr
 
 ## PARAMETERS
 
-### -Confirm
+### Confirm
 
 Prompts you for confirmation before running the cmdlet.
 
@@ -46,7 +46,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
+### Force
 
 Does not prompt
 
@@ -61,7 +61,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
+### WhatIf
 
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -77,7 +77,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Id
+### Id
 
 ID of the existing task group
 
@@ -92,7 +92,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -InFile
+### InFile
 
 The path to the json file that represents the task group
 
@@ -108,7 +108,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Body
+### Body
 
 The json that represents the task group as a string
 

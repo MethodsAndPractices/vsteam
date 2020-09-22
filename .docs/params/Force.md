@@ -1,4 +1,4 @@
-### -Force
+### Force
 
 Forces the function without confirmation.
 

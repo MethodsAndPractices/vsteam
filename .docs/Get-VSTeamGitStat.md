@@ -40,7 +40,7 @@ This command returns all the Git stats for a specific commit
 
 ## PARAMETERS
 
-### -RepositoryId
+### RepositoryId
 
 Specifies the ID of the repository.
 
@@ -51,7 +51,7 @@ Required: true
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -BranchName
+### BranchName
 
 Name of the branch.
 
@@ -60,7 +60,7 @@ Type: String
 Required: true
 ```
 
-### -VersionOptions
+### VersionOptions
 
 Version options - Specify additional modifiers to version (e.g Previous). Valid options for this parameter are:
 
@@ -73,7 +73,7 @@ Type: String
 Parameter Sets: ByVersion
 ```
 
-### -Version
+### Version
 
 Version string identifier (name of tag/branch, SHA1 of commit)
 
@@ -82,7 +82,7 @@ Type: String
 Parameter Sets: ByVersion
 ```
 
-### -VersionType
+### VersionType
 
 Version type (branch, tag, or commit). Determines how Id is interpreted. Valid options for this parameter are:
 

@@ -24,7 +24,7 @@ This command changes the name of your project from Demo to aspDemo.
 
 ## PARAMETERS
 
-### -NewName
+### NewName
 
 The new name for the project.
 
@@ -32,7 +32,7 @@ The new name for the project.
 Type: String
 ```
 
-### -NewDescription
+### NewDescription
 
 The new description for the project.
 
@@ -40,7 +40,7 @@ The new description for the project.
 Type: String
 ```
 
-### -Id
+### Id
 
 The id of the project to update.
 

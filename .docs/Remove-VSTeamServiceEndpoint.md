@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Id of the service endpoint
 

@@ -31,7 +31,7 @@ Remove-VSTeamTaskGroup @methodParameters
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 ID of the existing task group
 

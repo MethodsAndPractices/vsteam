@@ -32,7 +32,7 @@ This command gets the policy with an id of 1 within the Demo project.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies one code policy by id.
 

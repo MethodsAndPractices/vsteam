@@ -48,7 +48,7 @@ Get-VSTeamVariableGroup @methodParameters
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 ID of the existing variable group
 
@@ -57,7 +57,7 @@ Type: String
 Required: false
 ```
 
-### -Name
+### Name
 
 Name of the existing variable group
 

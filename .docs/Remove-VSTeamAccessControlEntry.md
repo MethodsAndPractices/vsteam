@@ -64,7 +64,7 @@ This will remove multiple descriptors from the specified repository, using a sec
 
 ## PARAMETERS
 
-### -SecurityNamespace
+### SecurityNamespace
 
 Security namespace object.
 
@@ -74,7 +74,7 @@ Parameter Sets: ByNamespace
 Required: True
 ```
 
-### -SecurityNamespaceId
+### SecurityNamespaceId
 
 Security namespace identifier.
 
@@ -171,7 +171,7 @@ Parameter Sets: ByNamespaceId
 Required: True
 ```
 
-### -Token
+### Token
 
 The security Token
 
@@ -186,7 +186,7 @@ Type: String
 Required: True
 ```
 
-### -Descriptor
+### Descriptor
 
 An array of descriptors of users/groups to be removed
 

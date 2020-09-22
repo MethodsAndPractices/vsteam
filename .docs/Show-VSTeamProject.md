@@ -26,7 +26,7 @@ This will open a browser to the TestProject site
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of the project to return.
 

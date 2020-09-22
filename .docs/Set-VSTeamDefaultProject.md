@@ -28,7 +28,7 @@ You can now call other functions that require a project name without passing the
 
 ## PARAMETERS
 
-### -Project
+### Project
 
 Specifies the team project for which this function operates.
 
@@ -40,7 +40,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Level
+### Level
 
 On Windows allows you to store your default project at the Process, User or Machine levels.
 
