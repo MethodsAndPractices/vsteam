@@ -16,9 +16,9 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 <!-- #include "./params/buildId.md" -->
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

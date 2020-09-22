@@ -55,8 +55,6 @@ This command gets timelines with build Ids from the pipeline.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 <!-- #include "./params/BuildIds.md" -->
 
 ### -TimelineId
@@ -86,6 +84,8 @@ Returns the timelines with the given plan id.
 Type: Guid
 Parameter Sets: ByID
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

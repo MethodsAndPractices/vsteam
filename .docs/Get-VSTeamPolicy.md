@@ -32,8 +32,6 @@ This command gets the policy with an id of 1 within the Demo project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies one code policy by id.
@@ -45,6 +43,8 @@ Type: Int
 Parameter Sets: ByID
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

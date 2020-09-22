@@ -52,8 +52,6 @@ Get a task group by name, when the ID is not known.  Here we are splatting the p
 
 ### -ProjectName
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 ID of the existing task group
@@ -86,10 +84,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorTask, -InformationAction, -InformationTask, -OutTask, -OutBuffer, -PipelineTask, -Verbose, -WarningAction, and -WarningTask.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

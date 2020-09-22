@@ -44,8 +44,6 @@ Adds a Service Fabric Endpoint for a certificate secured cluster.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -url
 
 The url of the Service Fabric management endpoint.
@@ -141,6 +139,8 @@ Aliases: displayName
 Position: 3
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

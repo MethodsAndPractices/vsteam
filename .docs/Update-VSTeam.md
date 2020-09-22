@@ -16,14 +16,6 @@
 
 ## PARAMETERS
 
-### -Description
-
-The new description of the team
-
-```yaml
-Type: String
-```
-
 ### -Name
 
 The name of the team to update
@@ -44,13 +36,17 @@ The new name of the team
 Type: String
 ```
 
+### -Description
+
+The new description of the team
+
+```yaml
+Type: String
+```
+
 <!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

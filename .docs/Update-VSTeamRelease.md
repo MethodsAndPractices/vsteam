@@ -38,8 +38,6 @@ Adds a variable temp to the release with a value of test.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 The id of the release to update
@@ -59,11 +57,9 @@ Type: PSCustomObject
 Required: True
 ```
 
-<!-- #include "./params/confirm.md" -->
+<!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

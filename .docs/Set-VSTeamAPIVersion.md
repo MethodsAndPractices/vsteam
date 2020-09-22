@@ -88,7 +88,7 @@ Required: True
 Parameter Sets: Service
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

@@ -16,7 +16,7 @@ function Get-VSTeamReleaseDefinition {
       [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [switch]$raw,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName

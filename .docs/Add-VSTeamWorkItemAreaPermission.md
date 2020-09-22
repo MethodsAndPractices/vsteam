@@ -16,8 +16,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -AreaID
 
 ```yaml
@@ -66,6 +64,8 @@ Required: True
 Type: VSTeamWorkItemAreaPermissions
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

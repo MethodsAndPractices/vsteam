@@ -16,10 +16,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/force.md" -->
-
 ### -UserId
 
 The id of the user to remove.
@@ -44,7 +40,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

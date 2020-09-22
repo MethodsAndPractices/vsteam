@@ -16,8 +16,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 UUID of existing services endpoint from AzD
@@ -37,7 +35,9 @@ Required: true
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

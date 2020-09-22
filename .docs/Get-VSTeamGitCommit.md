@@ -32,8 +32,6 @@ This command gets the Repository Id from the pipeline and the project name from 
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -RepositoryId
 
 The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
@@ -227,6 +225,8 @@ Alias or display name of the committer
 Type: String
 Parameter Sets: All, ItemVersion, CompareVersion, ItemPath
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

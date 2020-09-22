@@ -48,8 +48,6 @@ This command returns the raw object returned from the server formatted as JSON.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Expand
 
 Specifies which property should be expanded in the list of Release (environments, artifacts, none).
@@ -157,6 +155,8 @@ Type: Switch
 Required: True
 Parameter Sets: ByIDRaw
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

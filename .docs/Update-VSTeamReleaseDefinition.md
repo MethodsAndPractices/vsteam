@@ -38,8 +38,6 @@ This commands update the variables of the release definition.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -InFile
 
 Path and file name to the JSON file that contains the definition to be updated. If the path is omitted, the default is the current location.
@@ -64,11 +62,7 @@ Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

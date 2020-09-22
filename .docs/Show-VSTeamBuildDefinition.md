@@ -30,8 +30,6 @@ This command will open a web browser with All Definitions for this project showi
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Type
 
 The type of the build definitions to retrieve.  The acceptable values for this parameter are:
@@ -70,6 +68,8 @@ Aliases: BuildDefinitionID
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

@@ -24,8 +24,6 @@ This command changes the name of your project from Demo to aspDemo.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -NewName
 
 The new name for the project.
@@ -53,7 +51,9 @@ Aliases: ProjectId
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

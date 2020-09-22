@@ -16,8 +16,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -License
 
 Type of Account License. The acceptable values for this parameter are:
@@ -84,6 +82,8 @@ Type of MSDN License (e.g. Visual Studio Professional, Visual Studio Enterprise 
 Type: String
 Default value: none
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

@@ -24,8 +24,6 @@ This command opens the Git repository in a browser.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -RemoteUrl
 
 The RemoteUrl of the Git repository to open.
@@ -35,6 +33,8 @@ Type: String
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

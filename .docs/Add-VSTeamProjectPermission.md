@@ -16,8 +16,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Descriptor
 
 ```yaml
@@ -52,6 +50,8 @@ Required: True
 Type: VSTeamProjectPermissions
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

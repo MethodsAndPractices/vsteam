@@ -59,11 +59,7 @@ Optional parameter, if set to true, the work item is deleted permanently. **Plea
 Type: Switch
 ```
 
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/whatif.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

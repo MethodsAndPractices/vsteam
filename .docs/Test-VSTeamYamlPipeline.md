@@ -46,8 +46,6 @@ This example checks the YAML pipeline with ID 24 for consistency on Azure DevOps
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -PipelineId
 
 Id of the YAML pipeline to be checked
@@ -64,6 +62,8 @@ Path to the file that should be checked
 ```yaml
 Type: String
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

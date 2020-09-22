@@ -27,7 +27,7 @@ function Add-VSTeamUserEntitlement {
       [ValidateSet('eligible', 'enterprise', 'none', 'platforms', 'premium', 'professional', 'testProfessional', 'ultimate')]
       [string]$MSDNLicenseType = "none",
 
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName

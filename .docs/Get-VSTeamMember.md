@@ -16,8 +16,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Skip
 
 The number of items to skip.
@@ -45,6 +43,8 @@ Specifies the maximum number to return.
 ```yaml
 Type: Int32
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

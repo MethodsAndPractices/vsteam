@@ -4,7 +4,7 @@ function Show-VSTeamGitRepository {
       [Parameter(ValueFromPipelineByPropertyName = $true)]
       [string] $RemoteUrl,
 
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName

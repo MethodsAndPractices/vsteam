@@ -16,8 +16,6 @@ The cmdlet adds a new generic connection between TFS/AzD and a third party servi
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Object
 
 Hashtable of Payload for REST call
@@ -45,6 +43,8 @@ Type of endpoint (eg. `kubernetes`, `sonarqube`). See AzD service page for suppo
 Type: String
 Position: 3
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

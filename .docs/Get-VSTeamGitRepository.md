@@ -40,8 +40,6 @@ This command gets the remote URL and passes it to git clone command.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies one or more repositories by ID.
@@ -70,6 +68,8 @@ Type: String[]
 Parameter Sets: ByName
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

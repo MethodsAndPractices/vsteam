@@ -16,8 +16,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -RepositoryId
 
 ```yaml
@@ -73,6 +71,8 @@ Required: True
 Type: VSTeamGitRepositoryPermissions
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

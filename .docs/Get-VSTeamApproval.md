@@ -52,8 +52,6 @@ This command gets a list of all approvals rejected by Administrator using a cust
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -StatusFilter
 
 By default the function returns Pending approvals.
@@ -81,6 +79,8 @@ Approvals are filtered to only those assigned to this user.
 ```yaml
 Type: String
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

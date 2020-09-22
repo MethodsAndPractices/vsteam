@@ -24,8 +24,6 @@ This command adds a new policy to the Demo project's repository specified. The p
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -type
 
 Specifies the id of the type of policy to be created.
@@ -61,6 +59,8 @@ Each policy type has it's own settings that will need to be set.
 Type: Hashtable
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

@@ -22,7 +22,7 @@ function Get-VSTeamTfvcBranch {
       [parameter(Mandatory = $false)]
       [switch] $IncludeDeleted = $false,
 
-      [Parameter(ParameterSetName = 'List', Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(ParameterSetName = 'List', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName

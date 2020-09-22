@@ -36,8 +36,6 @@ This will return the top five WellFormed team projects only showing their name
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -StateFilter
 
 Returns team projects in a specific team project state.  The acceptable values for this parameter are:
@@ -92,6 +90,8 @@ Will return additional information about the project.
 Type: SwitchParameter
 Parameter Sets: ByID
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

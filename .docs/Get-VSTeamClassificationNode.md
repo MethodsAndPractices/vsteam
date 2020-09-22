@@ -14,8 +14,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -StructureGroup
 
 Structure group of the classification node, area or iteration.
@@ -47,6 +45,8 @@ Integer classification nodes ids.
 ```yaml
 Type: int32[]
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

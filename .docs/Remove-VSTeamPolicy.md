@@ -24,8 +24,6 @@ This command removes the policy with ID of 1 from the Demo project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies one or more policies by ID.
@@ -38,7 +36,9 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

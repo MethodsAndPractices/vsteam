@@ -24,8 +24,6 @@ This command sets 30 seconds as the default timeout.
 
 ## PARAMETERS
 
-<!-- #include "./params/force.md" -->
-
 ### -TimeoutSec
 
 Specifies the timeout for all function calls.
@@ -45,6 +43,8 @@ When saved at the User or Machine level your default timeout will be in any futu
 ```yaml
 Type: String
 ```
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

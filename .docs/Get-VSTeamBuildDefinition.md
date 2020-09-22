@@ -48,8 +48,6 @@ This command returns the raw object returned from the server.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Filter
 
 Filters to definitions whose names equal this value. Append a * to filter to definitions whose names start with this value.
@@ -104,6 +102,8 @@ Type: Switch
 Required: True
 Parameter Sets: ByIDRaw
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

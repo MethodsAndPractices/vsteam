@@ -59,8 +59,6 @@ This example queues the build and sets the system.debug variable to true and msg
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -BuildDefinitionName
 
 The name of the build definition to use to queue to build.
@@ -107,6 +105,8 @@ A hashtable with build parameters.
 ```yaml
 Type: System.Collection.Hashtable
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

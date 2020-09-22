@@ -26,8 +26,6 @@ This command reads release.json and creates a new release definition from it on 
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -InFile
 
 Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.
@@ -37,6 +35,8 @@ Type: String
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

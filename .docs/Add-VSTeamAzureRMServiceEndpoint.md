@@ -16,8 +16,6 @@ The cmdlet adds a new connection between TFS/AzD and Azure using the Azure Resou
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -SubscriptionName
 
 The name of the Azure Subscription.
@@ -83,6 +81,8 @@ In AzD this is the Connection Name.
 Type: String
 Position: 4
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

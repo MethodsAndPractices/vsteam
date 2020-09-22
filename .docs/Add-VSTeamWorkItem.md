@@ -50,8 +50,6 @@ ID Title          Status
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Title
 
 The title of the work item
@@ -118,6 +116,8 @@ Hashtable which contains a key value pair of any field that should be filled wit
 Type: Hashtable
 Required: False
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

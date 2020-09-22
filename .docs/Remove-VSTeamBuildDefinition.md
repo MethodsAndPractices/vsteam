@@ -28,8 +28,6 @@ The pipeline operator (|) passes the data to the Remove-VSTeamBuildDefinition fu
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies one or more build definitions by ID.
@@ -44,7 +42,9 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

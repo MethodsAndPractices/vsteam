@@ -26,8 +26,6 @@ Create a new pull request as a draft
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -RepositoryId
 
 Specifies the ID of the repository
@@ -85,11 +83,9 @@ Mark the new pull request as a draft
 Type: Switch
 ```
 
-<!-- #include "./params/confirm.md" -->
+<!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

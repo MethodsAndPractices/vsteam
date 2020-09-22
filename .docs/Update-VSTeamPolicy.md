@@ -24,8 +24,6 @@ This command updates an existing policy in the Demo project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies the policy to update.
@@ -69,6 +67,8 @@ Each policy type has it's own settings that will need to be set.
 Type: Hashtable
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

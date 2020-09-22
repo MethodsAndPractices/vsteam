@@ -11,16 +11,13 @@ function Update-VSTeamProject {
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [string] $Id,
 
-      [Alias('ProjectName')]
       [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter]) ]
-      [string] $Name
+      [Alias('Name')]
+      [string] $ProjectName
    )
    process {
-      # Bind the parameter to a friendly variable
-      $ProjectName = $PSBoundParameters["Name"]
-
       if ($id) {
          $ProjectName = $id
       }

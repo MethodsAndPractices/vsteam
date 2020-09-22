@@ -32,8 +32,6 @@ This command adds a new iteration named NewIteration to the Demo project with th
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Name
 
 Name of the new classification node.
@@ -79,6 +77,8 @@ Finish date of the iteration.
 Type: datetime
 Required: False
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

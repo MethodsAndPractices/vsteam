@@ -32,8 +32,6 @@ This command adds a new iteration named NewIteration to the Demo project with th
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Name
 
 Name of the new iteration.
@@ -67,6 +65,8 @@ Finish date of the iteration.
 ```yaml
 Type: datetime
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

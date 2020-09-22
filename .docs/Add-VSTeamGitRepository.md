@@ -24,8 +24,6 @@ This command adds a new repository named Temp to the Demo project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Name
 
 Specifies the name of the repository.
@@ -35,6 +33,8 @@ Type: System.String
 Aliases: RepositoryID
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

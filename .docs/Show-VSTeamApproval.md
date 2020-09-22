@@ -24,8 +24,6 @@ This command opens a web browser showing the release requiring approval.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -ReleaseDefinitionId
 
 Only approvals for the release id provided will be returned.
@@ -37,6 +35,8 @@ Required: True
 Position: 1
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

@@ -24,8 +24,6 @@ This command will open a web browser with All Release Definitions for this proje
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies release definition by ID.
@@ -37,6 +35,8 @@ Aliases: ReleaseDefinitionID
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

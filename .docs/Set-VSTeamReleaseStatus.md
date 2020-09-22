@@ -24,8 +24,6 @@ This command will set the status of release with id 5 to Abandoned.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies one or more releases by ID.
@@ -48,7 +46,9 @@ The status to set for the release Active or Abandoned.
 Type: String
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

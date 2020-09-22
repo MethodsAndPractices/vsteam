@@ -14,8 +14,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Depth
 
 Depth of children to fetch.
@@ -39,6 +37,8 @@ Integer classification nodes ids.
 ```yaml
 Type: int32[]
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

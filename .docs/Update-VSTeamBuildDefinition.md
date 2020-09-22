@@ -36,8 +36,6 @@ Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition $body
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies the build definition to update by ID.
@@ -73,6 +71,8 @@ Parameter Sets: JSON
 Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

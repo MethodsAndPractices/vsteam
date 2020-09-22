@@ -18,7 +18,7 @@ function Get-VSTeamProject {
 
       [switch] $IncludeCapabilities,
 
-      [Parameter(ParameterSetName = 'ByName', Mandatory = $true, Position = 0)]
+      [Parameter(ParameterSetName = 'ByName', Position = 0, Mandatory = $true)]
       [vsteam_lib.ProjectValidateAttribute($true)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $Name

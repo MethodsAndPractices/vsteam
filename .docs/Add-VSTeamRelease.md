@@ -50,8 +50,6 @@ You must set a default project to tab complete DefinitionName and BuildNumber.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -DefinitionId
 
 The id of the release definition to use.
@@ -127,7 +125,9 @@ Parameter Sets: ByName
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

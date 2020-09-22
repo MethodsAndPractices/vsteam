@@ -24,8 +24,6 @@ This command will set the status of environment with id 5 of release 54 to inPro
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -EnvironmentId
 
 Specifies one or more environments by ID you wish to deploy.
@@ -77,7 +75,9 @@ The date and time to schedule when setting the status to scheduled.
 Type: DateTime
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

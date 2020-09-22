@@ -40,8 +40,6 @@ This command returns all the Git stats for a specific commit
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -RepositoryId
 
 Specifies the ID of the repository.
@@ -96,6 +94,8 @@ Version type (branch, tag, or commit). Determines how Id is interpreted. Valid o
 Type: String
 Parameter Sets: ByVersion
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

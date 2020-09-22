@@ -32,8 +32,6 @@ This command returns true or false for every build definition returned from Get-
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Name
 
 Specifies the name of the resource.
@@ -56,6 +54,8 @@ Specifies the type of resource. The acceptable values for this parameter are:
 Type: String
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

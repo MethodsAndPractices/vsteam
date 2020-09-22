@@ -32,8 +32,6 @@ This command rejects approval with Id of 1.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies the approval IDs of the approvals to set.
@@ -75,7 +73,9 @@ Specifies the comment to be stored with this approval.
 Type: String
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

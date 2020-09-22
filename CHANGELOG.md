@@ -12,6 +12,8 @@ All types were changed from 'Team.' to 'vsteam_lib.' this will make it easy when
 
 VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Id, Name or ToString() property in its place.
 
+ProjectName is now a named parameter for most functions. This freed position 0 for other parameters to make functions easier to use.
+
 User2 is now vsteam_lib.User
 
 Removed CUID from vsteam_lib.User.
@@ -64,6 +66,8 @@ Added -force to Remove-VSTeamAccessControlEntry so you don't have to use -confir
 Get-VSTeamUser and Get-VSTeamGroup can now take Descriptor from pipeline.
 
 All unit tests were reviewed and all now use sample files where possible instead of inline objects.
+
+Added -Force to Stop-VSTeamBuild
 
 ### Docs changes
 

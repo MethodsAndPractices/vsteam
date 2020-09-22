@@ -74,7 +74,7 @@ Required: True
 Position: 3
 ```
 
-<!-- #include "./params/Force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

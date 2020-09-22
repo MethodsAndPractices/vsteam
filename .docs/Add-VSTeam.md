@@ -32,8 +32,6 @@ This command adds a team named 'Testing2' with description 'Test team' to the pr
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Name
 
 The name of the team
@@ -53,6 +51,8 @@ The description of the team.
 Type: String
 Position: 1
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

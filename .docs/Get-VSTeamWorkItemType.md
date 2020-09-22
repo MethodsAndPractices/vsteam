@@ -24,8 +24,6 @@ This command gets a single work item type.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -WorkItemType
 
 The type of work item to retrieve.
@@ -34,6 +32,8 @@ The type of work item to retrieve.
 Type: String
 Parameter Sets: ByType
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

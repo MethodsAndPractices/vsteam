@@ -6,17 +6,17 @@ function Stop-VSTeamBuild {
       [Alias('BuildID')]
       [Int] $Id,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [switch] $Force,
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    process {
-      if ($pscmdlet.ShouldProcess($Id, "Stop-VSTeamBuild")) {
-
+      if ($Force -or $pscmdlet.ShouldProcess($Id, "Stop-VSTeamBuild")) {
          try {
-
             $body = @{
                "status" = "Cancelling"
             }

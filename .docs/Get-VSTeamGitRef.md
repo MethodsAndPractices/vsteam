@@ -24,8 +24,6 @@ This command returns all the Git refs for the Demo team project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -RepositoryId
 
 Specifies the ID of the repository.
@@ -67,6 +65,8 @@ The continuation token used for pagination. (Azure DevOps Service and Azure DevO
 ```yaml
 Type: string
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

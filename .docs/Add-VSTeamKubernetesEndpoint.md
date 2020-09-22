@@ -18,8 +18,6 @@ This is only used when using the Kubernetes tasks.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Kubeconfig
 
 kubeconfig as JSON string
@@ -84,6 +82,8 @@ Generate pfx file
 ```yaml
 Type: Switch
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

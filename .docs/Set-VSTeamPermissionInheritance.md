@@ -32,8 +32,6 @@ This command sets the permission inheritance to true for every build definition 
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Name
 
 Specifies the name of the resource.
@@ -66,7 +64,9 @@ Type: Boolean
 Required: True
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

@@ -29,8 +29,6 @@ template and Git source control.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -NuGetUrl
 
 URL of the NuGet server.
@@ -121,6 +119,8 @@ Type: SecureString
 Parameter Sets: SecurePassword
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

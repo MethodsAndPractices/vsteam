@@ -16,8 +16,6 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -QueueName
 
 Name of the queue to return.
@@ -45,6 +43,8 @@ Type: String
 Parameter Sets: ByID
 Aliases: QueueID
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

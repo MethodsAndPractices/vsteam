@@ -44,7 +44,7 @@ This will remove all projects
 
 <!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

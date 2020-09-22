@@ -33,9 +33,6 @@ This example is useful for when one wants to copy an existing task group in one 
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-<!-- #include "./params/whatif.md" -->
 
 ### -InFile
 
@@ -69,10 +66,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorTask, -InformationAction, -InformationTask, -OutTask, -OutBuffer, -PipelineTask, -Verbose, -WarningAction, and -WarningTask.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

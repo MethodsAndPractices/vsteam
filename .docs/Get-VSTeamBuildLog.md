@@ -27,8 +27,6 @@ displays the logs.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 <!-- #include "./params/BuildIds.md" -->
 
 ### -Index
@@ -38,6 +36,8 @@ Each task stores its logs in an array. If you know the index of a specific task 
 ```yaml
 Type: Int32
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

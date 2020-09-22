@@ -24,8 +24,6 @@ Sets the keep forever property of every build to false.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -BuildNumber
 
 The value you want to set as the build number.
@@ -46,11 +44,9 @@ Type: Boolean
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
-<!-- #include "./params/confirm.md" -->
+<!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

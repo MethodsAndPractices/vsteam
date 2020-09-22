@@ -34,7 +34,7 @@ On Windows allows you to clear your account information at the Process, User or 
 Type: String
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

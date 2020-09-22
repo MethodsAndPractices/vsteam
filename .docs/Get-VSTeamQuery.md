@@ -22,8 +22,6 @@ Get-VSTeamQuery MyProject
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Depth
 
 In the folder of queries, return child queries and folders to this depth.
@@ -58,6 +56,8 @@ Required: false
 Position: Named
 Accept pipeline input: false
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

@@ -20,8 +20,6 @@ Using SonarQube with the Maven tasks uses a Generic Connection type.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -SonarQubeUrl
 
 URL of the sonarqube server.
@@ -68,6 +66,8 @@ Type: SecureString
 Parameter Sets: Secure
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

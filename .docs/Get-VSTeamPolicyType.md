@@ -32,8 +32,6 @@ This command gets the policy type by the specified id within the Demo project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 Specifies one policy type by id.
@@ -42,6 +40,8 @@ Specifies one policy type by id.
 Type: Guid[]
 Parameter Sets: ByID
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

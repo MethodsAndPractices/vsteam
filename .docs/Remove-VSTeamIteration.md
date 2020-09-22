@@ -32,8 +32,6 @@ This command removes an existing iteration with the path \MyIteration\Path to th
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Path
 
 Path of the iteration node.
@@ -52,7 +50,9 @@ Type: int
 Required: True
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

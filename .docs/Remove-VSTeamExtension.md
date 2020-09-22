@@ -34,7 +34,7 @@ Type: String
 Required: True
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

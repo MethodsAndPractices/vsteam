@@ -24,8 +24,6 @@ Assigns Endpoint Administrators group to $group variable.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -SubjectTypes
 
 A comma separated list of user subject subtypes to reduce the retrieved results.
@@ -59,6 +57,8 @@ Type: String
 Required: False
 Parameter Sets: ByGroupDescriptor
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

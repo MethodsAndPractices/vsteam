@@ -106,7 +106,7 @@ Type: Hashtable
 Required: False
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

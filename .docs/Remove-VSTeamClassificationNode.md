@@ -32,8 +32,6 @@ This command removes an existing area with the path \MyIteration\Path to the Dem
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -StructureGroup
 
 Structure group of the classification node.
@@ -59,7 +57,9 @@ Id of a classification node where work items should be reassigned to if they are
 Type: int
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 

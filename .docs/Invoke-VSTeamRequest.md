@@ -32,8 +32,6 @@ This command will return the releases for a project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -ContentType
 
 Specifies the content type of the request.
@@ -155,6 +153,8 @@ Type: Hashtable
 ```
 
 <!-- #include "./params/useProjectId.md" -->
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

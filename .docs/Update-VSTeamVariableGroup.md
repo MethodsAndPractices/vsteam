@@ -108,10 +108,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProjectName
-
-<!-- #include "./params/projectName.md" -->
-
 ### -WhatIf
 
 Shows what would happen if the cmdlet runs.
@@ -240,10 +236,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

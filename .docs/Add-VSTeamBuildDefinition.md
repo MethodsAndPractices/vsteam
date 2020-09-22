@@ -27,8 +27,6 @@ on the demo team project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -InFile
 
 Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.
@@ -39,6 +37,8 @@ Required: True
 Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

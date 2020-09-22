@@ -26,8 +26,6 @@ This will open a browser to the TestProject site
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Id
 
 The id of the project to return.
@@ -37,6 +35,8 @@ Type: String
 Parameter Sets: ByID
 Aliases: ProjectID
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
