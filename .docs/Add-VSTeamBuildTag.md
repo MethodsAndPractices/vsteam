@@ -18,7 +18,7 @@ Adds a tag to a build.
 
 <!-- #include "./params/BuildIds.md" -->
 
-<!-- #include "./params/buildTags.md" -->
+<!-- #include "./params/BuildTags.md" -->
 
 <!-- #include "./params/projectName.md" -->
 
