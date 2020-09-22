@@ -1,6 +1,6 @@
 function Stop-VSTeamBuild {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Stop-VSTeamBuild')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Stop-VSTeamBuild')]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]

@@ -8,7 +8,7 @@
 # https://bit.ly/Add-VSTeamClassificationNode
 
 function Add-VSTeamArea {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamArea')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamArea')]
    param(
       [Parameter(Mandatory = $true, Position = 0)]
       [string] $Name,

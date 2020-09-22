@@ -1,6 +1,6 @@
 function Update-VSTeamBuild {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Update-VSTeamBuild')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamBuild')]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('BuildID')]

@@ -1,6 +1,6 @@
 function Remove-VSTeamExtension {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamExtension')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamExtension')]
    param (
       [parameter(Mandatory = $true)]
       [string] $PublisherId,

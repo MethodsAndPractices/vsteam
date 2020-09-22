@@ -1,6 +1,6 @@
 function Remove-VSTeamBuildDefinition {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamBuildDefinition')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamBuildDefinition')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,

@@ -1,6 +1,6 @@
 function Remove-VSTeamPolicy {
    [CmdletBinding(SupportsShouldProcess = $true,
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamPolicy')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamPolicy')]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,

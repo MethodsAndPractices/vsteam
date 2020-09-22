@@ -1,6 +1,6 @@
 function Update-VSTeamTaskGroup {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Update-VSTeamTaskGroup')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamTaskGroup')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $Id,

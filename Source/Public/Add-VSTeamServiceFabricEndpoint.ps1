@@ -9,7 +9,7 @@
 
 function Add-VSTeamServiceFabricEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Certificate',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamServiceFabricEndpoint')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamServiceFabricEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('displayName')]

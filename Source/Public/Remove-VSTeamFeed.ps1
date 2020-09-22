@@ -1,6 +1,6 @@
 function Remove-VSTeamFeed {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamFeed')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamFeed')]
    param (
       [Parameter(ParameterSetName = 'ByID', Position = 0, Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [Alias('FeedId')]

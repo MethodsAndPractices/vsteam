@@ -8,7 +8,7 @@
 
 function Add-VSTeamPullRequest {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamPullRequest')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamPullRequest')]
    param(
       [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Alias('Id')]

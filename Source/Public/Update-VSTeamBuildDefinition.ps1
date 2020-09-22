@@ -1,6 +1,6 @@
 function Update-VSTeamBuildDefinition {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium", DefaultParameterSetName = 'JSON',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Update-VSTeamBuildDefinition')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamBuildDefinition')]
    Param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int] $Id,

@@ -1,6 +1,6 @@
 function Update-VSTeamServiceEndpoint {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Update-VSTeamServiceEndpoint')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamServiceEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $id,

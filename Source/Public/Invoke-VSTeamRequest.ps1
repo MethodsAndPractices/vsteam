@@ -1,5 +1,5 @@
 function Invoke-VSTeamRequest {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Invoke-VSTeamRequest')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Invoke-VSTeamRequest')]
    param(
       [ArgumentCompleter([vsteam_lib.InvokeCompleter])]
       [string] $resource,

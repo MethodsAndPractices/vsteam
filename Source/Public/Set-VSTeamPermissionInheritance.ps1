@@ -8,7 +8,7 @@
 
 function Set-VSTeamPermissionInheritance {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Set-VSTeamPermissionInheritance')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamPermissionInheritance')]
    [OutputType([System.String])]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]

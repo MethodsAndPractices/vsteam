@@ -1,6 +1,6 @@
 function Remove-VSTeamBuildTag {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamBuildTag')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamBuildTag')]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [string[]] $Tags,

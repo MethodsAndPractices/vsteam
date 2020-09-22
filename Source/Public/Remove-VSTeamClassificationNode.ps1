@@ -1,6 +1,6 @@
 function Remove-VSTeamClassificationNode {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamClassificationNode')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamClassificationNode')]
    param(
       [Parameter(Mandatory = $false)]
       [int] $ReClassifyId,

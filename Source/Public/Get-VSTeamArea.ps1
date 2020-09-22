@@ -1,6 +1,6 @@
 function Get-VSTeamArea {
    [CmdletBinding(DefaultParameterSetName = 'ByPath',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamArea')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamArea')]
    param(
       [Parameter(Mandatory = $false, ParameterSetName = "ByPath")]
       [string] $Path,

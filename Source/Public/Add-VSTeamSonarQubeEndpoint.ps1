@@ -9,7 +9,7 @@
 
 function Add-VSTeamSonarQubeEndpoint {
    [CmdletBinding(DefaultParameterSetName = 'Secure',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamSonarQubeEndpoint')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamSonarQubeEndpoint')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $endpointName,

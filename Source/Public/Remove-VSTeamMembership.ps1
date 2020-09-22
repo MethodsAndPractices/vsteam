@@ -1,6 +1,6 @@
 function Remove-VSTeamMembership {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamMembership')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamMembership')]
    param(
       [Parameter(Mandatory = $true)]
       [string] $MemberDescriptor,

@@ -1,5 +1,5 @@
 function Enable-VSTeamAgent {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Enable-VSTeamAgent')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Enable-VSTeamAgent')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int] $PoolId,

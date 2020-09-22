@@ -1,6 +1,6 @@
 function Remove-VSTeamTaskGroup {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamTaskGroup')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamTaskGroup')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string[]] $Id,

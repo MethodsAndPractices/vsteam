@@ -1,6 +1,6 @@
 function Get-VSTeamFeed {
    [CmdletBinding(DefaultParameterSetName = 'List',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamFeed')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamFeed')]
    param (
       [Parameter(ParameterSetName = 'ByID', Position = 0)]
       [Alias('FeedId')]

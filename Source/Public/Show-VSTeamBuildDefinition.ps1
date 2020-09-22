@@ -1,6 +1,6 @@
 function Show-VSTeamBuildDefinition {
    [CmdletBinding(DefaultParameterSetName = 'List',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Show-VSTeamBuildDefinition')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Show-VSTeamBuildDefinition')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('Mine', 'All', 'Queued', 'XAML')]

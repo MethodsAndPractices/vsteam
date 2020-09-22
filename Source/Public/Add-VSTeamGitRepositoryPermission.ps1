@@ -14,7 +14,7 @@
 
 function Add-VSTeamGitRepositoryPermission {
    [CmdletBinding(DefaultParameterSetName = 'ByProjectAndUser',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamGitRepositoryPermission')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamGitRepositoryPermission')]
    param(
       [parameter(Mandatory = $true)]
       [vsteam_lib.Project]$Project,

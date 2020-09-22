@@ -9,7 +9,7 @@
 
 function Add-VSTeamBuild {
    [CmdletBinding(DefaultParameterSetName = 'ByName',
-      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamBuild')]
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamBuild')]
    param(
       [Parameter(ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Int32] $BuildDefinitionId,

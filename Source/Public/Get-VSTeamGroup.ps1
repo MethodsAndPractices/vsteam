@@ -1,6 +1,6 @@
 function Get-VSTeamGroup {
    [CmdletBinding(DefaultParameterSetName = 'List',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamGroup')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamGroup')]
    param(
       [Parameter(ParameterSetName = 'List')]
       [Parameter(ParameterSetName = 'ListByProjectName')]

@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamWorkItem
 
 function Add-VSTeamWorkItem {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamWorkItem')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamWorkItem')]
    param(
       [Parameter(Mandatory = $true)]
       [string] $Title,

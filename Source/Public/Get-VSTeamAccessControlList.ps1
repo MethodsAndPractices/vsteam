@@ -1,6 +1,6 @@
 function Get-VSTeamAccessControlList {
    [CmdletBinding(DefaultParameterSetName = 'ByNamespace',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamAccessControlList')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAccessControlList')]
    param(
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
       [vsteam_lib.SecurityNamespace] $SecurityNamespace,

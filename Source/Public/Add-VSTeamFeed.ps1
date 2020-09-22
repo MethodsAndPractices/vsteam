@@ -8,7 +8,7 @@
 # http://bit.ly/Add-VSTeamFeed
 
 function Add-VSTeamFeed {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamFeed')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamFeed')]
    param (
       [Parameter(Position = 0, Mandatory = $true)]
       [string] $Name,

@@ -1,6 +1,6 @@
 function Set-VSTeamAccount {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low", DefaultParameterSetName = 'Secure',
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Set-VSTeamAccount')]
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamAccount')]
    param(
       [parameter(ParameterSetName = 'Windows', Mandatory = $true, Position = 1)]
       [parameter(ParameterSetName = 'Secure', Mandatory = $true, Position = 1)]

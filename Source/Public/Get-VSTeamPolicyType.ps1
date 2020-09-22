@@ -1,5 +1,5 @@
 function Get-VSTeamPolicyType {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Get-VSTeamPolicyType')]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamPolicyType')]
    param (
       [Parameter(ValueFromPipeline = $true)]
       [guid[]] $Id,
