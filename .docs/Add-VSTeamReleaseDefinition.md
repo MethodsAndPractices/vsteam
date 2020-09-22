@@ -19,7 +19,7 @@ You must call Set-VSTeamAccount before calling this function.
 ### Example 1
 
 ```powershell
-PS C:\> Add-VSTeamReleaseDefinition -ProjectName demo -inFile release.json
+Add-VSTeamReleaseDefinition -ProjectName demo -inFile release.json
 ```
 
 This command reads release.json and creates a new release definition from it on the demo team project.

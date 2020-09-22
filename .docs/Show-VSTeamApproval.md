@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamApproval -ProjectName Demo | Show-VSTeamApproval
+Get-VSTeamApproval -ProjectName Demo | Show-VSTeamApproval
 ```
 
 This command opens a web browser showing the release requiring approval.

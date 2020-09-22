@@ -17,7 +17,7 @@ Set-VSTeamAPIVersion sets the versions of APIs used.
 ### Example 1
 
 ```powershell
-PS C:\> Set-VSTeamAPIVersion AzD
+Set-VSTeamAPIVersion AzD
 ```
 
 This command sets the API versions to support AzD.
@@ -25,7 +25,7 @@ This command sets the API versions to support AzD.
 ### Example 2
 
 ```powershell
-PS C:\> Set-VSTeamAPIVersion -Service Release -Version '5.0'
+Set-VSTeamAPIVersion -Service Release -Version '5.0'
 ```
 
 This command sets the version of the Release calls to 5.0.

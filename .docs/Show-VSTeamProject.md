@@ -19,7 +19,7 @@ You must call Set-VSTeamAccount before calling this function.
 ### Example 1
 
 ```powershell
-PS C:\> Show-VSTeamProject TestProject
+Show-VSTeamProject TestProject
 ```
 
 This will open a browser to the TestProject site

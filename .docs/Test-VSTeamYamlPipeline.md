@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -FilePath './azure-pipelines.yml'
+Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -FilePath './azure-pipelines.yml'
 
 Name Id url                                                                                           state
 ---- -- ---                                                                                           -----
@@ -29,8 +29,8 @@ This example checks the YAML pipeline with ID 24 and the file './azure-pipelines
 ### Example 2
 
 ```powershell
-PS C:\> $yamlOverride = [string](Get-Content -raw $FilePath)
-PS C:\> Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -YamlOverride $yamlOverride
+$yamlOverride = [string](Get-Content -raw $FilePath)
+Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24 -YamlOverride $yamlOverride
 ```
 
 This example checks the YAML pipeline with ID 24 and the content of a yaml file in the variable $yamlOverride for consistency on Azure DevOps to see if the changes still work.
@@ -38,8 +38,8 @@ This example checks the YAML pipeline with ID 24 and the content of a yaml file 
 ### Example 3
 
 ```powershell
-PS C:\> $yamlOverride = [string](Get-Content -raw $FilePath)
-PS C:\> Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24
+$yamlOverride = [string](Get-Content -raw $FilePath)
+Test-VSTeamYamlPipeline -Project DemoProject -PipelineId 24
 ```
 
 This example checks the YAML pipeline with ID 24 for consistency on Azure DevOps to see if the existing YAML of the pipeline works.

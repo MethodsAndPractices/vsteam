@@ -17,7 +17,7 @@ The Get-VSTeamCloudSubscription function gets the Azure subscriptions associated
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamCloudSubscription
+Get-VSTeamCloudSubscription
 ```
 
 This command gets a list of all Azure subscriptions associated with the Team Services account.

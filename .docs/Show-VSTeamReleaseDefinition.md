@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Show-VSTeamReleaseDefinition -ProjectName Demo
+Show-VSTeamReleaseDefinition -ProjectName Demo
 ```
 
 This command will open a web browser with All Release Definitions for this project showing.

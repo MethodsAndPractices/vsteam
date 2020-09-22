@@ -17,7 +17,7 @@ Get-VSTeamTfvcBranch gets a branch for a given path from TFVC source control.
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch
+Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch
 ```
 
 This command returns the branch object for the path $/MyProject/MyBranch
@@ -25,7 +25,7 @@ This command returns the branch object for the path $/MyProject/MyBranch
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren
+Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeChildren
 ```
 
 This command returns the branch object for the path $/MyProject/MyBranch and its child branches.
@@ -33,7 +33,7 @@ This command returns the branch object for the path $/MyProject/MyBranch and its
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent
+Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeParent
 ```
 
 This command returns the branch object for the path $/MyProject/MyBranch and its parent.
@@ -41,7 +41,7 @@ This command returns the branch object for the path $/MyProject/MyBranch and its
 ### Example 4
 
 ```powershell
-PS C:\> Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted
+Get-VSTeamTfvcBranch -Path $/MyProject/MyBranch -IncludeDeleted
 ```
 
 This command returns the branch object for the path $/MyProject/MyBranch, even if it's marked as deleted.
@@ -49,7 +49,7 @@ This command returns the branch object for the path $/MyProject/MyBranch, even i
 ### Example 5
 
 ```powershell
-PS C:\> '$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvcBranch
+'$/MyProject/MyBranch','$/AnotherProject/AnotherBranch' | Get-VSTeamTfvcBranch
 ```
 
 This command returns the branch objects for the paths $/MyProject/MyBranch and $/AnotherProject/AnotherBranch by using the pipeline.
@@ -57,7 +57,7 @@ This command returns the branch objects for the paths $/MyProject/MyBranch and $
 ### Example 6
 
 ```powershell
-PS C:\> Get-VSTeamTfvcBranch -ProjectName TestProject
+Get-VSTeamTfvcBranch -ProjectName TestProject
 ```
 
 This command returns all the branches under a project.

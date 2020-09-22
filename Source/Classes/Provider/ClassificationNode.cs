@@ -15,6 +15,7 @@ namespace vsteam_lib
       public string StructureType { get; set; }
       public string ParentUrl => this.Links?.Parent;
       public IList<ClassificationNode> Children { get; }
+      public int NodeId => int.Parse(this.Id);
 
       public ClassificationNode(PSObject obj, string projectName) :
          base(obj, obj.GetValue("name"), obj.GetValue("id"), projectName)

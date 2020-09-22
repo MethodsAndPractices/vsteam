@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamProfile | Remove-VSTeamProfile -Force
+Get-VSTeamProfile | Remove-VSTeamProfile -Force
 ```
 
 This will remove all the profiles on your system.

@@ -17,7 +17,7 @@ Allows you to set the keep forever flag and build number.
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamBuild | Update-VSTeamBuild -KeepForever $false
+Get-VSTeamBuild | Update-VSTeamBuild -KeepForever $false
 ```
 
 Sets the keep forever property of every build to false.

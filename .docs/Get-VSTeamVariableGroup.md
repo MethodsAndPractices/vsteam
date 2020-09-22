@@ -17,7 +17,6 @@
 ### Example 1
 
 ```powershell
-
 $methodParameters = @{
    ProjectName = "some_project_name"
 }
@@ -28,7 +27,6 @@ Get-VSTeamVariableGroup @methodParameters
 ### Example 2
 
 ```powershell
-
 $methodParameters = @{
    ProjectName = "some_project_name"
    Id          = "variable_group_id"
@@ -40,7 +38,6 @@ Get-VSTeamVariableGroup @methodParameters
 ### Example 3
 
 ```powershell
-
 $methodParameters = @{
    ProjectName = "some_project_name"
    Name        = "variable_group_name"

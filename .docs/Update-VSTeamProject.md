@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Update-VSTeamProject -Name Demo -NewName aspDemo
+Update-VSTeamProject -Name Demo -NewName aspDemo
 ```
 
 This command changes the name of your project from Demo to aspDemo.

@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamQuery MyProject
+Get-VSTeamQuery MyProject
 ```
 
 ## PARAMETERS

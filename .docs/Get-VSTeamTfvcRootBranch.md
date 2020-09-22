@@ -17,7 +17,7 @@ Get-VSTeamTfvcRootBranch gets root branches for all projects with TFVC source co
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamTfvcRootBranch
+Get-VSTeamTfvcRootBranch
 ```
 
 This command returns root branches for all projects.
@@ -25,7 +25,7 @@ This command returns root branches for all projects.
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamTfvcRootBranch -IncludeChildren
+Get-VSTeamTfvcRootBranch -IncludeChildren
 ```
 
 This command returns root branches for all projects and their respective child branches.
@@ -33,7 +33,7 @@ This command returns root branches for all projects and their respective child b
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamTfvcRootBranch -IncludeDeleted
+Get-VSTeamTfvcRootBranch -IncludeDeleted
 ```
 
 This command returns root branches for all projects, also those marked as deleted.

@@ -19,7 +19,7 @@ The project name is a Dynamic Parameter which may not be displayed in the syntax
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo | Remove-VSTeamBuildDefinition
+Get-VSTeamBuildDefinition -ProjectName Demo | Remove-VSTeamBuildDefinition
 ```
 
 This command gets a list of all build definitions in the demo project.

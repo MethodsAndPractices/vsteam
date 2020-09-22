@@ -13,7 +13,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Add-VSTeamArea -ProjectName Demo -Name "NewArea" -Path "MyArea/Path"
+Add-VSTeamArea -ProjectName Demo -Name "NewArea" -Path "MyArea/Path"
 ```
 
 This command adds a new area named NewArea to the Demo project under the area path MyArea/Path.
@@ -21,7 +21,7 @@ This command adds a new area named NewArea to the Demo project under the area pa
 ### Example 2
 
 ```powershell
-PS C:\> Add-VSTeamArea -ProjectName Demo -Name "NewArea"
+Add-VSTeamArea -ProjectName Demo -Name "NewArea"
 ```
 
 This command adds a new area named NewArea to the Demo project.
@@ -29,7 +29,7 @@ This command adds a new area named NewArea to the Demo project.
 ### Example 3
 
 ```powershell
-PS C:\> Add-VSTeamArea "NewArea"
+Add-VSTeamArea "NewArea"
 ```
 
 This command adds a new area named NewArea to the default project.

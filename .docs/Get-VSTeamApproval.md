@@ -29,7 +29,7 @@ The vsteam_lib.Approval type has three custom table formats:
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamApproval -ProjectName Demo
+Get-VSTeamApproval -ProjectName Demo
 ```
 
 This command gets a list of all pending approvals.
@@ -37,7 +37,7 @@ This command gets a list of all pending approvals.
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
+Get-VSTeamApproval -ProjectName Demo -StatusFilter Approved | Format-Table -View Approved
 ```
 
 This command gets a list of all approved approvals using a custom table format.
@@ -45,7 +45,7 @@ This command gets a list of all approved approvals using a custom table format.
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
+Get-VSTeamApproval -ProjectName Demo -AssignedToFilter Administrator -StatusFilter Rejected | FT -View Rejected
 ```
 
 This command gets a list of all approvals rejected by Administrator using a custom table format.

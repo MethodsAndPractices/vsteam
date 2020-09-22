@@ -17,7 +17,7 @@ The Get-VSTeamGitCommit function gets the commits for a git repository.
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamGitCommit -ProjectName demo -RepositoryId 118C262F-0D4C-4B76-BD9B-7DD8CA12F196
+Get-VSTeamGitCommit -ProjectName demo -RepositoryId 118C262F-0D4C-4B76-BD9B-7DD8CA12F196
 ```
 
 This command gets a list of all commits in the demo project for a specific repository.
@@ -25,7 +25,7 @@ This command gets a list of all commits in the demo project for a specific repos
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamGitRepository | Select-Object -First 1 | Get-VSTeamGitCommit
+Get-VSTeamGitRepository | Select-Object -First 1 | Get-VSTeamGitCommit
 ```
 
 This command gets the Repository Id from the pipeline and the project name from the default project.

@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'
+Remove-VSTeamFeed -id '00000000-0000-0000-0000-000000000000'
 ```
 
 This command remove the package feed from the account.

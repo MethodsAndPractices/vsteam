@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Set-VSTeamEnvironmentStatus -ReleaseId 54 -Id 5 -status inProgress
+Set-VSTeamEnvironmentStatus -ReleaseId 54 -Id 5 -status inProgress
 ```
 
 This command will set the status of environment with id 5 of release 54 to inProgress. You can use this call to redeploy an environment.

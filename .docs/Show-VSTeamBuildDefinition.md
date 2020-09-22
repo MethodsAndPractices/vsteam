@@ -23,7 +23,7 @@ You can also specify a particular build definition by ID.
 ### Example 1
 
 ```powershell
-PS C:\> Show-VSTeamBuildDefinition -ProjectName Demo
+Show-VSTeamBuildDefinition -ProjectName Demo
 ```
 
 This command will open a web browser with All Definitions for this project showing.

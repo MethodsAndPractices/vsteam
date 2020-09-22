@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamBuild -Top 1 | Get-VSTeamBuildLog
+Get-VSTeamBuild -Top 1 | Get-VSTeamBuildLog
 ```
 
 This command displays the logs of the first build.

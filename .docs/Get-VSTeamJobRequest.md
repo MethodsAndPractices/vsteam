@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamJobRequest 1 111
+Get-VSTeamJobRequest 1 111
 ```
 
 This will display all the job request of agent with id 111 under the pool with id 1.

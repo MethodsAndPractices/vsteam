@@ -21,7 +21,7 @@ You must call Set-VSTeamAccount before calling this function.
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamProject
+Get-VSTeamProject
 ```
 
 This will return all the WellFormed team projects.
@@ -29,7 +29,7 @@ This will return all the WellFormed team projects.
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamProject -top 5 | Format-Wide
+Get-VSTeamProject -top 5 | Format-Wide
 ```
 
 This will return the top five WellFormed team projects only showing their name

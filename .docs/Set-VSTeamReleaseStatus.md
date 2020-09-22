@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Set-VSTeamReleaseStatus -Id 5 -status Abandoned
+Set-VSTeamReleaseStatus -Id 5 -status Abandoned
 ```
 
 This command will set the status of release with id 5 to Abandoned.

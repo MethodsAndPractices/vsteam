@@ -15,7 +15,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Add-VSTeamProfile
+Add-VSTeamProfile
 ```
 
 You will be prompted for the account name and personal access token.
@@ -23,7 +23,7 @@ You will be prompted for the account name and personal access token.
 ### Example 2
 
 ```powershell
-PS C:\> Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version TFS2018
+Add-VSTeamProfile -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Version TFS2018
 ```
 
 Allows you to provide all the information on the command line.
@@ -31,7 +31,7 @@ Allows you to provide all the information on the command line.
 ### Example 3
 
 ```powershell
-PS C:\> Add-VSTeamProfile -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
+Add-VSTeamProfile -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
 ```
 
 On Windows, allows you use to use Windows authentication against a local TFS server.

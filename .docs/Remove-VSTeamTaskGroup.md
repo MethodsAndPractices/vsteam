@@ -17,7 +17,6 @@
 ### Example 1
 
 ```powershell
-
 $projectName = "some_project_name"
 $taskGroup = Get-VSTeamTaskGroup -Name "taskName" -ProjectName $projectName
 

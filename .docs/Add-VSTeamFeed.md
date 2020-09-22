@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Add-VSTeamFeed -Name test -Description 'Test Description'
+Add-VSTeamFeed -Name test -Description 'Test Description'
 ```
 
 This command adds a new package feed to the account.

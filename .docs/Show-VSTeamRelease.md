@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Show-VSTeamRelease -ProjectName Demo -Id 3
+Show-VSTeamRelease -ProjectName Demo -Id 3
 ```
 
 This command will open a web browser with the summary of release 3.

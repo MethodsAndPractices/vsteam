@@ -17,7 +17,7 @@ Removes specified ACEs in the ACL for the provided token. The request URI contai
 ### Example 1
 
 ```powershell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
+Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
 ```
 
 This will remove the specified descriptor from the specified repository, using the security namespace id, while confirming for the remove action.
@@ -25,7 +25,7 @@ This will remove the specified descriptor from the specified repository, using t
 ### Example 2
 
 ```powershell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -force
+Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -force
 ```
 
 This will remove the specified descriptor from the specified repository, using the security namespace id, with no confirmation for the remove action.
@@ -33,7 +33,7 @@ This will remove the specified descriptor from the specified repository, using t
 ### Example 3
 
 ```powershell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
+Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
 ```
 
 This will remove multiple descriptors from the specified repository, using the security namespace id, while confirming for the remove action.
@@ -41,7 +41,7 @@ This will remove multiple descriptors from the specified repository, using the s
 ### Example 4
 
 ```powershell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
+Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
 ```
 
 This will remove the specified descriptor from the specified repository, using a security namespace object, while confirming for the remove action.
@@ -49,7 +49,7 @@ This will remove the specified descriptor from the specified repository, using a
 ### Example 5
 
 ```powershell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -force
+Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -force
 ```
 
 This will remove the specified descriptor from the specified repository, using a security namespace object, with no confirmation for the remove action.
@@ -57,7 +57,7 @@ This will remove the specified descriptor from the specified repository, using a
 ### Example 6
 
 ```powershell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
+Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
 ```
 
 This will remove multiple descriptors from the specified repository, using a security namespace object, while confirming for the remove action.

@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamResourceArea
+Get-VSTeamResourceArea
 ```
 
 This will display all the areas of supported APIs for your account.

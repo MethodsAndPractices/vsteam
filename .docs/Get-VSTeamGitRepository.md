@@ -17,7 +17,7 @@ Get-VSTeamGitRepository gets all the repositories in your Azure DevOps or Team F
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamGitRepository
+Get-VSTeamGitRepository
 ```
 
 This command returns all the Git repositories for your TFS or Team Services account.
@@ -25,7 +25,7 @@ This command returns all the Git repositories for your TFS or Team Services acco
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamGitRepository -ProjectName Demo
+Get-VSTeamGitRepository -ProjectName Demo
 ```
 
 This command returns all the Git repositories for the Demo team project.
@@ -33,7 +33,7 @@ This command returns all the Git repositories for the Demo team project.
 ### Example 3
 
 ```powershell
-PS C:\> git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteUrl)
+git clone (Get-VSTeamGitRepository | select -ExpandProperty remoteUrl)
 ```
 
 This command gets the remote URL and passes it to git clone command.

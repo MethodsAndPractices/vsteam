@@ -19,7 +19,7 @@ The project name is a Dynamic Parameter which may not be displayed in the syntax
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamRelease -ProjectName demo | Remove-VSTeamRelease
+Get-VSTeamRelease -ProjectName demo | Remove-VSTeamRelease
 ```
 
 This command gets a list of all releases in the demo project.

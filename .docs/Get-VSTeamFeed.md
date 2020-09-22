@@ -17,7 +17,7 @@ Get-VSTeamFeed gets all the feeds for the account
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamFeed
+Get-VSTeamFeed
 ```
 
 This command returns all the package feeds for the account.

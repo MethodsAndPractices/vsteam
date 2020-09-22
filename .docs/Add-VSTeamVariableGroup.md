@@ -17,7 +17,6 @@
 ### Example 1
 
 ```powershell
-
 $methodParameters = @{
    ProjectName              = "some_project_name"
    Name        = "new_variable_group"
@@ -40,7 +39,6 @@ Add-VSTeamVariableGroup @methodParameters
 ### Example 2
 
 ```powershell
-
 $methodParameters = @{
    ProjectName              = "some_project_name"
    Name        = "new_variable_group"

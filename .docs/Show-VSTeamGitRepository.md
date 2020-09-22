@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Show-VSTeamGitRepository -ProjectName Demo
+Show-VSTeamGitRepository -ProjectName Demo
 ```
 
 This command opens the Git repository in a browser.

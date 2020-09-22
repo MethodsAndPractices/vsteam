@@ -17,7 +17,7 @@ By setting a default timeout you can adjust the value for your needs
 ### Example 1
 
 ```powershell
-PS C:\> Set-VSTeamDefaultAPITimeout 30
+Set-VSTeamDefaultAPITimeout 30
 ```
 
 This command sets 30 seconds as the default timeout.

@@ -17,7 +17,7 @@ The cmdlet adds a new Service Fabric service endpoint to an existing project.
 ### Example 1
 
 ```powershell
-PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "NoAuthTest" -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false
+Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "NoAuthTest" -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false
 ```
 
 Adds a Service Fabric Endpoint for a non-secure cluster
@@ -25,8 +25,8 @@ Adds a Service Fabric Endpoint for a non-secure cluster
 ### Example 2
 
 ```powershell
-PS C:\> $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
-PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someUser@someplace.com" -password $password
+$password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
+Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someUser@someplace.com" -password $password
 ```
 
 Adds a Service Fabric Endpoint for an Azure AD secured cluster.
@@ -34,10 +34,10 @@ Adds a Service Fabric Endpoint for an Azure AD secured cluster.
 ### Example 3
 
 ```powershell
-PS C:\> $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
-PS C:\> $pathToPFX = "C:\someFolder\theCertificateFile.pfx"
-PS C:\> $base64Cert = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($pathToPFX))
-PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "CertificateAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -certificate $base64Cert -certificatePassword $password
+$password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
+$pathToPFX = "C:\someFolder\theCertificateFile.pfx"
+$base64Cert = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($pathToPFX))
+Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "CertificateAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -certificate $base64Cert -certificatePassword $password
 ```
 
 Adds a Service Fabric Endpoint for a certificate secured cluster.

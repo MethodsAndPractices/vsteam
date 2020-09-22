@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamPolicy -ProjectName Demo
+Get-VSTeamPolicy -ProjectName Demo
 ```
 
 This command returns all the policies for the Demo project in your TFS or Team Services account.
@@ -25,7 +25,7 @@ This command returns all the policies for the Demo project in your TFS or Team S
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamPolicy -ProjectName Demo -Id 1
+Get-VSTeamPolicy -ProjectName Demo -Id 1
 ```
 
 This command gets the policy with an id of 1 within the Demo project.

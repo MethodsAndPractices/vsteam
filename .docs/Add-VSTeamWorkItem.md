@@ -17,8 +17,8 @@ Add-VSTeamWorkItem will add a new work item to your project.
 ### Example 1
 
 ```powershell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task
+Set-VSTeamDefaultProject Demo
+Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task
 
 ID Title          Status
 -- -----          ------
@@ -28,8 +28,8 @@ ID Title          Status
 ### Example 2
 
 ```powershell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description"
+Set-VSTeamDefaultProject Demo
+Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description"
 
 ID Title          Status
 -- -----          ------
@@ -39,9 +39,9 @@ ID Title          Status
 ### Example 3
 
 ```powershell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
-PS C:\> Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
+Set-VSTeamDefaultProject Demo
+$additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+Add-VSTeamWorkItem -Title "New Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
 
 ID Title          Status
 -- -----          ------

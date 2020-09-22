@@ -21,7 +21,7 @@ Calling Set-VSTeamAccount will clear any default project.
 ### Example 1
 
 ```powershell
-PS C:\> Set-VSTeamAccount
+Set-VSTeamAccount
 ```
 
 You will be prompted for the account name and personal access token.
@@ -29,7 +29,7 @@ You will be prompted for the account name and personal access token.
 ### Example 2
 
 ```powershell
-PS C:\> Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrthisisnotreal4uhlh5vgbmgap3mziwnga
+Set-VSTeamAccount -Account mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrthisisnotreal4uhlh5vgbmgap3mziwnga
 ```
 
 Allows you to provide all the information on the command line.
@@ -37,7 +37,7 @@ Allows you to provide all the information on the command line.
 ### Example 3
 
 ```powershell
-PS C:\> Set-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
+Set-VSTeamAccount -Account http://localtfs:8080/tfs/DefaultCollection -UseWindowsAuthentication
 ```
 
 On Windows, allows you use to use Windows authentication against a local TFS server.
@@ -45,7 +45,7 @@ On Windows, allows you use to use Windows authentication against a local TFS ser
 ### Example 4
 
 ```powershell
-PS C:\> Set-VSTeamAccount -Profile demonstrations
+Set-VSTeamAccount -Profile demonstrations
 ```
 
 Will add the account from the profile provided.
@@ -53,8 +53,8 @@ Will add the account from the profile provided.
 ### Example 5
 
 ```powershell
-PS C:\> Set-VSTeamAccount -Profile demonstrations -Drive demo | Invoke-Expression
-PS C:\> Set-Location demo:
+Set-VSTeamAccount -Profile demonstrations -Drive demo | Invoke-Expression
+Set-Location demo:
 PS demo:\> Get-ChildItem
 ```
 
@@ -63,7 +63,7 @@ Will add the account from the profile provided and mount a drive named demo that
 ### Example 6
 
 ```powershell
-PS C:\> Set-VSTeamAccount -Profile demonstrations -Level Machine
+Set-VSTeamAccount -Profile demonstrations -Level Machine
 ```
 
 Will add the account from the profile provided and store the information at the Machine level. Now any new PowerShell sessions will auto load this account.
@@ -73,7 +73,7 @@ Note: You must run PowerShell as an Administrator to store at the Machine level.
 ### Example 7
 
 ```powershell
-PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
 ```
 
 Will add the account and use the OAuth Token provided by AzD when you check the *Allow scripts to access OAuth token* checkbox on the phase. Using this method removes the need to create a Personal Access Token. Note -Token is just an alias for -PersonalAccessToken.  The token is scoped to only allow access to the account running the build or release. To access other accounts you will have to use a personal access token.

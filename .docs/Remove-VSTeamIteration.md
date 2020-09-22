@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Remove-VSTeamIteration -ProjectName Demo -Path "\MyIteration\Path"
+Remove-VSTeamIteration -ProjectName Demo -Path "\MyIteration\Path"
 ```
 
 This command removes an existing iteration with the path MyIteration/Path to the Demo project. Any work items that are assigned to that path get reassigned to the root iteration, since no reclassification id has been given.
@@ -25,7 +25,7 @@ This command removes an existing iteration with the path MyIteration/Path to the
 ### Example 2
 
 ```powershell
-PS C:\> Remove-VSTeamIteration -ProjectName "Demo" -Path "\MyIteration\Path" -ReClassifyId 19
+Remove-VSTeamIteration -ProjectName "Demo" -Path "\MyIteration\Path" -ReClassifyId 19
 ```
 
 This command removes an existing iteration with the path \MyIteration\Path to the Demo project. Any work items that are assigned to that path get reassigned to the iteration with the id 19.

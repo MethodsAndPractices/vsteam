@@ -17,7 +17,7 @@ Clears the value stored in the default timeout parameter value.
 ### Example 1
 
 ```powershell
-PS C:\> Clear-VSTeamDefaultAPITimeout
+Clear-VSTeamDefaultAPITimeout
 ```
 
 This will clear the default timeout parameter value.

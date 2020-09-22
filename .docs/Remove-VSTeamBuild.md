@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamBuild | Remove-VSTeamBuild -Force
+Get-VSTeamBuild | Remove-VSTeamBuild -Force
 ```
 
 This command will delete all builds that are not marked retain indefinitely.

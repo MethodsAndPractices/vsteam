@@ -21,7 +21,7 @@ You can also specify a particular timeline by ID to get .
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -Id 1 | Format-List *
+Get-VSTeamBuildTimeline -ProjectName demo -Id 1 | Format-List *
 ```
 
 This command gets a list of all timelines of the build with Id 1 in the demo project.
@@ -32,7 +32,7 @@ displays all available properties (*) of the timeline objects.
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -Id 1 -TimelineId 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382
+Get-VSTeamBuildTimeline -ProjectName demo -Id 1 -TimelineId 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7 -ChangeId 2 -PlanId 356de525-47a9-4251-80c6-d3849a9d6382
 ```
 
 This command gets the timelines with build Id 1 and timeline Id 595dac0c-0f1a-4bfd-a35f-e5a838ac71d7. It is filtered with the change ID and plan ID.
@@ -40,7 +40,7 @@ This command gets the timelines with build Id 1 and timeline Id 595dac0c-0f1a-4b
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamBuildTimeline -ProjectName demo -Id 1 -TimelineId @(1,2)
+Get-VSTeamBuildTimeline -ProjectName demo -Id 1 -TimelineId @(1,2)
 ```
 
 This command gets timelines with IDs 1 and 2 by using the ID parameter.
@@ -48,7 +48,7 @@ This command gets timelines with IDs 1 and 2 by using the ID parameter.
 ### Example 4
 
 ```powershell
-PS C:\> Get-VSTeamBuild | Get-VSTeamBuildTimeline -ProjectName demo
+Get-VSTeamBuild | Get-VSTeamBuildTimeline -ProjectName demo
 ```
 
 This command gets timelines with build Ids from the pipeline.

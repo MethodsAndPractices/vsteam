@@ -2,13 +2,14 @@ function Remove-VSTeamArea {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
     HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeamArea')]
    param(
-      [Parameter(Mandatory = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [Alias('NodeId')]
       [int] $ReClassifyId,
 
-      [Parameter(Mandatory = $true)]
+      [Parameter(Mandatory = $true, Position = 0)]
       [string] $Path,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,

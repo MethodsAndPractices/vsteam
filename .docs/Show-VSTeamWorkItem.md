@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Show-VSTeamWorkItem -ProjectName Demo -Id 3
+Show-VSTeamWorkItem -ProjectName Demo -Id 3
 ```
 
 This command will open a web browser with the summary of work item 3.

@@ -19,7 +19,7 @@ This function takes a DynamicParam for ProjectName that can be read from the Pip
 ### Example 1
 
 ```powershell
-PS C:\> Remove-VSTeamProject 'MyProject'
+Remove-VSTeamProject 'MyProject'
 ```
 
 You will be prompted for confirmation and the project will be deleted.
@@ -27,7 +27,7 @@ You will be prompted for confirmation and the project will be deleted.
 ### Example 2
 
 ```powershell
-PS C:\> Remove-VSTeamProject 'MyProject' -Force
+Remove-VSTeamProject 'MyProject' -Force
 ```
 
 You will NOT be prompted for confirmation and the project will be deleted.
@@ -35,7 +35,7 @@ You will NOT be prompted for confirmation and the project will be deleted.
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamProject | Remove-VSTeamProject -Force
+Get-VSTeamProject | Remove-VSTeamProject -Force
 ```
 
 This will remove all projects

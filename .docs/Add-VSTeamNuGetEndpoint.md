@@ -19,9 +19,9 @@ This is only used when using the NuGet tasks.
 ### Example 1
 
 ```powershell
-PS C:\> $apikey = Read-Host -Prompt 'ApiKey' -AsSecureString
+$apikey = Read-Host -Prompt 'ApiKey' -AsSecureString
 ApiKey: ************************************
-PS C:\> Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -SecureApiKey $apikey
+Add-NuGetEndpoint -EndpointName 'PowerShell Gallery' -NuGetUrl 'https://www.powershellgallery.com/api/v2/package' -SecureApiKey $apikey
 ```
 
 This will add a project name MyProject with no description using the Scrum process

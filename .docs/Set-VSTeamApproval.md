@@ -17,7 +17,7 @@ Set-VSTeamApproval sets the status of approval to Approved, Rejected, Pending, o
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamApproval | Set-VSTeamApproval
+Get-VSTeamApproval | Set-VSTeamApproval
 ```
 
 This command sets all pending approvals to approved.
@@ -25,7 +25,7 @@ This command sets all pending approvals to approved.
 ### Example 2
 
 ```powershell
-PS C:\> Set-VSTeamApproval -Id 1 -Status Rejected
+Set-VSTeamApproval -Id 1 -Status Rejected
 ```
 
 This command rejects approval with Id of 1.

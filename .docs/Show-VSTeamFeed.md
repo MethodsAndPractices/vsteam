@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Show-VSTeamFeed -Name Demo
+Show-VSTeamFeed -Name Demo
 ```
 
 This command will open a web browser with this feed showing.

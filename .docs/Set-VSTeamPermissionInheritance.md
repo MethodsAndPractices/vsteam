@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true -Force
+Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true -Force
 ```
 
 This command sets the permission inheritance to true.
@@ -25,7 +25,7 @@ This command sets the permission inheritance to true.
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force
+Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force
 ```
 
 This command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.

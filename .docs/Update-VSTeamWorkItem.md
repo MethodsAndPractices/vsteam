@@ -17,8 +17,8 @@ Update-VSTeamWorkItem will update a new work item in your project.
 ### Example 1
 
 ```powershell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Update-VSTeamWorkItem -WorkItemId 1 -Title "Updated Work Item"
+Set-VSTeamDefaultProject Demo
+Update-VSTeamWorkItem -WorkItemId 1 -Title "Updated Work Item"
 
 ID Title              Status
 -- -----              ------
@@ -28,8 +28,8 @@ ID Title              Status
 ### Example 2
 
 ```powershell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description"
+Set-VSTeamDefaultProject Demo
+Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description"
 
 ID Title              Status
 -- -----              ------
@@ -39,9 +39,9 @@ ID Title              Status
 ### Example 3
 
 ```powershell
-PS C:\> Set-VSTeamDefaultProject Demo
-PS C:\> $additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
-PS C:\> Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
+Set-VSTeamDefaultProject Demo
+$additionalFields = @{"System.Tags"= "TestTag"; "System.AreaPath" = "Project\\MyPath"}
+Update-VSTeamWorkItem -Title "Updated Work Item" -WorkItemType Task -Description "This is a description" -AdditionalFields $additionalFields
 
 ID Title          Status
 -- -----          ------

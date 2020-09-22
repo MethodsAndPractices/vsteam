@@ -19,7 +19,7 @@ You must call Set-VSTeamAccount before calling this function.
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamProcess
+Get-VSTeamProcess
 ```
 
 This will return all the Process Templates
@@ -27,7 +27,7 @@ This will return all the Process Templates
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamProcess | Format-Wide
+Get-VSTeamProcess | Format-Wide
 ```
 
 This will return the Process Templates only showing their name
@@ -35,7 +35,7 @@ This will return the Process Templates only showing their name
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamProcess *scrum*
+Get-VSTeamProcess *scrum*
 ```
 
 This will return an process templates with names containing scrum,

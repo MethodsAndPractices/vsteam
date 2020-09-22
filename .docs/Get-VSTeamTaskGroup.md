@@ -17,7 +17,6 @@
 ### Example 1
 
 ```powershell
-
 $methodParameters = @{
    ProjectName = "some_project_name"
 }

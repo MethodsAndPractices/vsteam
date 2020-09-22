@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject" -Expand
+Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject" -Expand
 ```
 
 This command gets work items via a WIQL query and expands the return work items with only the selected fields System.Id, System.Title and System.State.
@@ -25,7 +25,7 @@ This command gets work items via a WIQL query and expands the return work items 
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject"
+Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject"
 ```
 
 This command gets work items via a WIQL query and returns the WIQL query result with only work item IDs.

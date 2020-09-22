@@ -19,7 +19,7 @@ You must call Set-VSTeamAccount before calling this function.
 ### Example 1
 
 ```powershell
-PS C:\> Update-VSTeamReleaseDefinition -ProjectName Demo -Id 123 -InFile release.json
+Update-VSTeamReleaseDefinition -ProjectName Demo -Id 123 -InFile release.json
 ```
 
 This command reads release.json and updates existing release definition with
@@ -28,10 +28,10 @@ id 123 from it on the demo team project.
 ### Example 2
 
 ```powershell
-PS C:\> $b = Get-VSTeamReleaseDefinition -ProjectName Demo -Id 23 -Raw
-PS C:\> $b.variables.subscriptionId.value = 'Some New Value'
-PS C:\> $body = $b | ConvertTo-Json -Depth 100
-PS C:\> Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $body
+$b = Get-VSTeamReleaseDefinition -ProjectName Demo -Id 23 -Raw
+$b.variables.subscriptionId.value = 'Some New Value'
+$body = $b | ConvertTo-Json -Depth 100
+Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $body
 ```
 
 This commands update the variables of the release definition.
@@ -58,7 +58,7 @@ JSON string of release definition.
 
 ```yaml
 Type: String
-Required: true 
+Required: true
 Parameter Sets: JSON
 Position: 1
 Accept pipeline input: true (ByPropertyName)

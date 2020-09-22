@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamWorkItem -Id 47,48
+Get-VSTeamWorkItem -Id 47,48
 ```
 
 This command gets work items with IDs 47 and 48 by using the IDs parameter.

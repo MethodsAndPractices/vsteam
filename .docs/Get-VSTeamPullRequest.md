@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamPullRequest
+Get-VSTeamPullRequest
 ```
 
 This command returns all the open pull requests for your TFS or Team Services account.
@@ -25,7 +25,7 @@ This command returns all the open pull requests for your TFS or Team Services ac
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamPullRequest -ProjectName Demo
+Get-VSTeamPullRequest -ProjectName Demo
 ```
 
 This command returns all the open pull requests for the Demo team project.
@@ -33,7 +33,7 @@ This command returns all the open pull requests for the Demo team project.
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamPullRequest -ProjectName Demo -All
+Get-VSTeamPullRequest -ProjectName Demo -All
 ```
 
 This command returns all pull requests for the Demo team project.
@@ -41,7 +41,7 @@ This command returns all pull requests for the Demo team project.
 ### Example 4
 
 ```powershell
-PS C:\> Get-VSTeamPullRequest -ProjectName Demo -TargetBranchRef "refs/heads/mybranch"
+Get-VSTeamPullRequest -ProjectName Demo -TargetBranchRef "refs/heads/mybranch"
 ```
 
 This command returns all open pull requests for a specific branch
@@ -49,7 +49,7 @@ This command returns all open pull requests for a specific branch
 ### Example 5
 
 ```powershell
-PS C:\> Get-VSTeamPullRequest -Id 123
+Get-VSTeamPullRequest -Id 123
 ```
 
 This command gets the pull request with an Id of 123.
@@ -57,7 +57,7 @@ This command gets the pull request with an Id of 123.
 ### Example 6
 
 ```powershell
-PS C:\> Get-VSTeamPullRequest -Id 123 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits
+Get-VSTeamPullRequest -Id 123 -RepositoryId "93BBA613-2729-4158-9217-751E952AB4AF" -IncludeCommits
 ```
 
 This command gets the pull request with an Id of 123 and includes the commits that are part of the pull request.

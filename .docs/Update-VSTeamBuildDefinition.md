@@ -19,7 +19,7 @@ You must call Set-VSTeamAccount before calling this function.
 ### Example 1
 
 ```powershell
-PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json
+Update-VSTeamBuildDefinition -ProjectName Demo -Id 123 -InFile build.json
 ```
 
 This command reads build.json and updates existing build definition with
@@ -28,10 +28,10 @@ id 123 from it on the demo team project.
 ### Example 2
 
 ```powershell
-PS C:\> $b = Get-VSTeamBuildDefinition -ProjectName Demo -Id 23 -Raw
-PS C:\> $b.variables.subscriptionId.value = 'Some New Value'
-PS C:\> $body = $b | ConvertTo-Json -Depth 100
-PS C:\> Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition $body
+$b = Get-VSTeamBuildDefinition -ProjectName Demo -Id 23 -Raw
+$b.variables.subscriptionId.value = 'Some New Value'
+$body = $b | ConvertTo-Json -Depth 100
+Update-VSTeamBuildDefinition -ProjectName Demo -Id 23 -BuildDefinition $body
 ```
 
 ## PARAMETERS

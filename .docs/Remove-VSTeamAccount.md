@@ -19,7 +19,7 @@ To remove from the Machine level you must be running PowerShell as administrator
 ### Example 1
 
 ```powershell
-PS C:\> Remove-VSTeamAccount
+Remove-VSTeamAccount
 ```
 
 This will clear your account name and personal access token.

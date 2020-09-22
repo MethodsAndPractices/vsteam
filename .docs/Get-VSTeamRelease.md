@@ -23,7 +23,7 @@ You can also specify a particular release definition by ID.
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamRelease -ProjectName demo | Format-List *
+Get-VSTeamRelease -ProjectName demo | Format-List *
 ```
 
 This command gets a list of all releases in the demo project.
@@ -33,7 +33,7 @@ The pipeline operator (|) passes the data to the Format-List cmdlet, which displ
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamRelease -ProjectName demo -Id 10 -Raw
+Get-VSTeamRelease -ProjectName demo -Id 10 -Raw
 ```
 
 This command returns the raw object returned from the server.
@@ -41,7 +41,7 @@ This command returns the raw object returned from the server.
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamRelease -ProjectName demo -Id 10 -Json
+Get-VSTeamRelease -ProjectName demo -Id 10 -Json
 ```
 
 This command returns the raw object returned from the server formatted as JSON.

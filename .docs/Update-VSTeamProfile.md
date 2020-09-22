@@ -15,7 +15,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Update-VSTeamProfile -Name ProfileName
+Update-VSTeamProfile -Name ProfileName
 ```
 
 You will be prompted for the account name and personal access token.
@@ -23,7 +23,7 @@ You will be prompted for the account name and personal access token.
 ### Example 2
 
 ```powershell
-PS C:\> Update-VSTeamProfile -Name mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga
+Update-VSTeamProfile -Name mydemos -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga
 ```
 
 Allows you to provide all the information on the command line.
@@ -31,7 +31,7 @@ Allows you to provide all the information on the command line.
 ### Example 3
 
 ```powershell
-PS C:\> Get-VSTeamProfile | Where-Object version -eq vsts | Select-Object -skip 1 | Update-VSTeamProfile -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Force
+Get-VSTeamProfile | Where-Object version -eq vsts | Select-Object -skip 1 | Update-VSTeamProfile -PersonalAccessToken 7a8ilh6db4aforlrnrqmdrxdztkjvcc4uhlh5vgbteserp3mziwnga -Force
 ```
 
 This will update all but the first AzD profile

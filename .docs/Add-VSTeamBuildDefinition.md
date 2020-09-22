@@ -19,7 +19,7 @@ You must call Set-VSTeamAccount before calling this function.
 ### Example 1
 
 ```powershell
-PS C:\> Add-VSTeamBuildDefinition -ProjectName Demo -InFile build.json
+Add-VSTeamBuildDefinition -ProjectName Demo -InFile build.json
 ```
 
 This command reads build.json and creates a new build definition from it

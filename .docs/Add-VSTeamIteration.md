@@ -13,7 +13,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Add-VSTeamIteration -ProjectName Demo -Name "NewIteration" -Path "MyIteration/Path"
+Add-VSTeamIteration -ProjectName Demo -Name "NewIteration" -Path "MyIteration/Path"
 ```
 
 This command adds a new iteration named NewIteration to the Demo project under the iteration path MyIteration/Path.
@@ -21,7 +21,7 @@ This command adds a new iteration named NewIteration to the Demo project under t
 ### Example 2
 
 ```powershell
-PS C:\> Add-VSTeamIteration -ProjectName "Demo" -FinishDate "31.01.2020" -StartDate "01.01.2020" -Name "NewIteration"
+Add-VSTeamIteration -ProjectName "Demo" -FinishDate "31.01.2020" -StartDate "01.01.2020" -Name "NewIteration"
 ```
 
 This command adds a new iteration named NewIteration to the Demo project with the start date 01.01.2020 and finish date 31.01.2020.

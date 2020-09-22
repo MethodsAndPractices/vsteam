@@ -17,9 +17,9 @@
 ### Example 1
 
 ```powershell
-PS C:\> $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
-PS C:\> $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
-PS C:\> Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor
+$user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
+$group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor
 ```
 
 Adds Test User to the Endpoint Administrators group.

@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamUser | Select-Object -Last 1 | Get-VSTeamMembership | Get-VSTeamGroup
+Get-VSTeamUser | Select-Object -Last 1 | Get-VSTeamMembership | Get-VSTeamGroup
 ```
 
 Get all the groups for the last user
@@ -25,7 +25,7 @@ Get all the groups for the last user
 ### Example 2
 
 ```powershell
-PS C:\> Get-VSTeamGroup | Select-Object -First 1 -Skip 2 | Get-VSTeamMembership | Get-VSTeamUser
+Get-VSTeamGroup | Select-Object -First 1 -Skip 2 | Get-VSTeamMembership | Get-VSTeamUser
 ```
 
 Get all the members for the third group

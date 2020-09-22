@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Show-VSTeam
+Show-VSTeam
 ```
 
 This will open a browser to the TFS or AzD site

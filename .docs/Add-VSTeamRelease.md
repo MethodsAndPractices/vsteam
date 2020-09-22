@@ -21,19 +21,19 @@ You must call Set-VSTeamAccount before calling this function.
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamBuild | ft id,name
+Get-VSTeamBuild | ft id,name
 
 id name
 -- ----
 44 Demo-CI-44
 
-PS C:\> Get-VSTeamReleaseDefinition -Expand artifacts | ft id,name,@{l='Alias';e={$_.artifacts[0].alias}}
+Get-VSTeamReleaseDefinition -Expand artifacts | ft id,name,@{l='Alias';e={$_.artifacts[0].alias}}
 
 id name    Alias
 -- ----    -----
  1 Demo-CD Demo-CI
 
-PS C:\> Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
+Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
 ```
 
 This example shows how to find the Build ID, Artifact Alias, and Release definition ID required to start a release. If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.
@@ -41,7 +41,7 @@ This example shows how to find the Build ID, Artifact Alias, and Release definit
 ### Example 2
 
 ```powershell
-PS C:\> Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
+Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
 ```
 
 This command starts a new release using the Demo-CD release definition and the build with build number Demo-CI-44.

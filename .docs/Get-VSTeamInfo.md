@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-PS C:\> Get-VSTeamInfo
+Get-VSTeamInfo
 ```
 
 This will display your current account and default project

@@ -17,7 +17,7 @@ This will create a new Team Project in your Team Foundation Server or Team Servi
 ### Example 1
 
 ```powershell
-PS C:\> Add-VSTeamProject 'MyProject'
+Add-VSTeamProject 'MyProject'
 ```
 
 This will add a project name MyProject with no description using the Scrum process
@@ -26,7 +26,7 @@ template and Git source control.
 ### Example 2
 
 ```powershell
-PS C:\> Add-VSTeamProject 'MyProject' -TFVC -ProcessTemplate Agile
+Add-VSTeamProject 'MyProject' -TFVC -ProcessTemplate Agile
 ```
 
 This will add a project name MyProject with no description using the Agile process
