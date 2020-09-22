@@ -2,13 +2,13 @@ function Remove-VSTeam {
    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
     HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Remove-VSTeam')]
    param(
-      [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [Alias('Name', 'TeamId', 'TeamName')]
       [string]$Id,
 
       [switch]$Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName

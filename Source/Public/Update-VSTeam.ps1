@@ -1,28 +1,28 @@
 function Update-VSTeam {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
-    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Update-VSTeam')]
+   [CmdletBinding(DefaultParameterSetName = 'UpdateDescription',
+      SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Update-VSTeam')]
    param(
-      [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [Alias('TeamName', 'TeamId', 'TeamToUpdate', 'Id')]
-      [string]$Name,
+      [string] $Name,
 
-      [string]$NewTeamName,
+      [Parameter(ParameterSetName = 'UpdateName', Mandatory = $true)]
+      [string] $NewTeamName,
 
-      [string]$Description,
+      [Parameter(ParameterSetName = 'UpdateName', Mandatory = $false)]
+      [Parameter(ParameterSetName = 'UpdateDescription', Mandatory = $true)]
+      [string] $Description,
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    process {
-      if (-not $NewTeamName -and -not $Description) {
-         throw 'You must provide a new team name or description, or both.'
-      }
-
       if ($Force -or $pscmdlet.ShouldProcess($Name, "Update-VSTeam")) {
          if (-not $NewTeamName) {
             $body = '{"description": "' + $Description + '" }'

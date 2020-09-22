@@ -16,15 +16,12 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 ### -Description
 
 The new description of the team
 
 ```yaml
 Type: String
-Position: 2
 ```
 
 ### -Name
@@ -33,6 +30,7 @@ The name of the team to update
 
 ```yaml
 Type: String
+Position: 0
 Aliases: Id, TeamToUpdate, TeamId, TeamName
 Required: True
 Accept pipeline input: true (ByPropertyName)
@@ -45,6 +43,8 @@ The new name of the team
 ```yaml
 Type: String
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 <!-- #include "./params/confirm.md" -->
 

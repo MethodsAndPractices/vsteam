@@ -10,13 +10,13 @@
 function Add-VSTeamArea {
    [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/Add-VSTeamArea')]
    param(
-      [Parameter(Mandatory = $true)]
+      [Parameter(Mandatory = $true, Position = 0)]
       [string] $Name,
 
       [Parameter(Mandatory = $false)]
       [string] $Path,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProjectValidateAttribute($false)]
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName

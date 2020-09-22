@@ -26,13 +26,19 @@ PS C:\> Add-VSTeamArea -ProjectName Demo -Name "NewArea"
 
 This command adds a new area named NewArea to the Demo project.
 
+### Example 3
+
+```powershell
+PS C:\> Add-VSTeamArea "NewArea"
+```
+
+This command adds a new area named NewArea to the default project.
+
 ## DESCRIPTION
 
 <!-- #include "./synopsis/Add-VSTeamArea.md" -->
 
 ## PARAMETERS
-
-<!-- #include "./params/projectName.md" -->
 
 ### -Name
 
@@ -40,6 +46,7 @@ Name of the new area.
 
 ```yaml
 Type: string
+Position: 0
 ```
 
 ### -Path
@@ -49,6 +56,8 @@ Path of the existing area under where the new one will be created.
 ```yaml
 Type: string
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 

@@ -12,21 +12,17 @@ Describe "VSTeam" {
             Mock _getInstance { return 'https://dev.azure.com/test' }
             Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
             Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeam.json' -Index 0 }
-            Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{ 
+            Mock Get-VSTeam { return New-Object -TypeName PSObject -Prop @{
                   projectname = "TestProject"
-                  name        = "OldTeamName" 
-               } 
+                  name        = "OldTeamName"
+               }
             }
-         }
-
-         It 'Should throw when updated without name or description' {
-            { Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" } | Should -Throw
          }
 
          It 'Should update the team with new team name' {
             ## Arrange
             $expectedBody = '{ "name": "NewTeamName" }'
-          
+
             ## Act
             $team = Update-VSTeam -ProjectName Test -TeamToUpdate "OldTeamName" -NewTeamName "NewTeamName"
 
@@ -80,7 +76,7 @@ Describe "VSTeam" {
                $Method -eq "Patch" -and
                $Body -eq $expectedBody
             }
-         }         
+         }
       }
 
       Context "Server" {
@@ -89,7 +85,7 @@ Describe "VSTeam" {
             Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeam.json' -Index 0 }
             Mock _getInstance { return 'http://localhost:8080/tfs/defaultcollection' }
          }
-         
+
          It 'Should update the team with new team name on TFS local Auth' {
             ## Arrange
             $expectedBody = '{ "name": "NewTeamName" }'
