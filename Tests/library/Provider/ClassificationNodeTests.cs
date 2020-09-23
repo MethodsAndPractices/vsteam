@@ -20,9 +20,9 @@ namespace vsteam_lib.Test.Provider
          // Assert
          Assert.IsNull(target.ParentUrl, "ParentUrl");
          Assert.IsNotNull(target.Children, "Children");
-         Assert.AreEqual(target.Id, target.NodeId, "NodeId");
          Assert.AreEqual(true, target.HasChildren, "HasChildren");
          Assert.AreEqual(Guid.Empty, target.Identifier, "Identifier");
+         Assert.AreEqual(target.Id, target.NodeId.ToString(), "NodeId");
          Assert.AreEqual("\\PeopleTracker\\Iteration", target.Path, "Path");
          Assert.AreEqual("iteration", target.StructureType, "StructureType");
          Assert.AreEqual("https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/classificationNodes/Iterations", target.Url, "Url");
