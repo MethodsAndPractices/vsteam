@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+   <Type>
+      <Name>vsteam_lib.AccessLevel</Name>
+      <Members>
+         <MemberSet>
+            <Name>PSStandardMembers</Name>
+            <Members>
+               <PropertySet>
+                  <Name>DefaultDisplayPropertySet</Name>
+                  <ReferencedProperties>
+                     <Name>accountLicenseType</Name>
+                     <Name>assignmentSource</Name>
+                     <Name>licenseDisplayName</Name>
+                     <Name>licensingSource</Name>
+                     <Name>msdnLicenseType</Name>
+                     <Name>status</Name>
+                     <Name>statusMessage</Name>
+                  </ReferencedProperties>
+               </PropertySet>
+            </Members>
+         </MemberSet>
+      </Members>
+   </Type>
+</Types>

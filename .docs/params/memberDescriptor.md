@@ -1,6 +1,6 @@
-### -MemberDescriptor
+### MemberDescriptor
 
-A member descriptor retrieved by Get-VsTeamUser
+A member descriptor retrieved by Get-VsTeamUser.
 
 ```yaml
 Type: String

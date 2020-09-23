@@ -2,7 +2,7 @@ function Clear-VSTeamDefaultAPITimeout {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding()]
    param()
-   
+
    DynamicParam {
       # # Only add these options on Windows Machines
       if (_isOnWindows) {
@@ -67,7 +67,7 @@ function Clear-VSTeamDefaultAPITimeout {
          [System.Environment]::SetEnvironmentVariable("TEAM_TIMEOUT", $null, $Level)
       }
 
-      [VSTeamVersions]::DefaultTimeout = ''
+      [vsteam_lib.Versions]::DefaultTimeout = ''
       $Global:PSDefaultParameterValues.Remove("*-vsteam*:vsteamApiTimeout")
 
       Write-Output "Removed default timeout"

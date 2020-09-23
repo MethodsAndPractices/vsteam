@@ -14,10 +14,9 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
 ```powershell
-
 $projectName = "projectName"
 
 $taskGroup = Get-VSTeamTaskGroup -Name "taskGroupName" -ProjectName $projectName
@@ -32,7 +31,7 @@ Update-VSTeamTaskGroup -ProjectName $projectName -Id $taskGroup.id -Body $taskGr
 
 ## PARAMETERS
 
-### -Confirm
+### Confirm
 
 Prompts you for confirmation before running the cmdlet.
 
@@ -47,7 +46,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Force
+### Force
 
 Does not prompt
 
@@ -62,11 +61,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProjectName
-
-<!-- #include "./params/projectName.md" -->
-
-### -WhatIf
+### WhatIf
 
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -82,7 +77,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Id
+### Id
 
 ID of the existing task group
 
@@ -97,7 +92,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -InFile
+### InFile
 
 The path to the json file that represents the task group
 
@@ -113,7 +108,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Body
+### Body
 
 The json that represents the task group as a string
 
@@ -129,10 +124,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorTask, -InformationAction, -InformationTask, -OutTask, -OutBuffer, -PipelineTask, -Verbose, -WarningAction, and -WarningTask.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -144,7 +136,11 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamTaskGroup](Add-VSTeamTaskGroup.md)
 

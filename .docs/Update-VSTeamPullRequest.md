@@ -14,29 +14,29 @@ Update a pull request
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
-PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
-PS C:\> Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Draft
+```powershell
+Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+$r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
+Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Draft
 ```
 
 Set the pull request to be a draft
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
-PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
-PS C:\> Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abandoned
+```powershell
+Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+$r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
+Update-VSTeamPullRequest -RepositoryId $r.RepositoryId -Status abandoned
 ```
 
 Abandon a pull request
 
 ## PARAMETERS
 
-### -RepositoryId
+### RepositoryId
 
 The id of the repository
 
@@ -48,7 +48,7 @@ Accept pipeline input: true (ByPropertyName)
 Parameter Sets: Draft, Publish, Status, EnableAutoComplete, DisableAutoComplete
 ```
 
-### -PullRequestId
+### PullRequestId
 
 The id of the pull request
 
@@ -58,7 +58,7 @@ Required: True
 Parameter Sets: Draft, Publish, Status, EnableAutoComplete, DisableAutoComplete
 ```
 
-### -Status
+### Status
 
 The status to set the pull request to. Valid values for this are:
 
@@ -72,7 +72,7 @@ Type: String
 Parameter Sets: Status
 ```
 
-### -EnableAutoComplete
+### EnableAutoComplete
 
 Set the pull requests auto complete status
 
@@ -81,7 +81,7 @@ Type: Switch
 Parameter Sets: EnableAutoComplete
 ```
 
-### -AutoCompleteIdentity
+### AutoCompleteIdentity
 
 The identity that enabled autocomplete. This is mandatory if -AutoComplete is set to $true
 
@@ -90,7 +90,7 @@ Type: VSTeamUser
 Parameter Sets: EnableAutoComplete
 ```
 
-### -DisableAutoComplete
+### DisableAutoComplete
 
 Unset the pull requests auto complete status
 
@@ -99,7 +99,7 @@ Type: Switch
 Parameter Sets: DisableAutoComplete
 ```
 
-### -Draft
+### Draft
 
 Set the pull request as a draft
 
@@ -108,18 +108,18 @@ Type: Switch
 Parameter Sets: Draft
 ```
 
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.PullRequest
+### vsteam_lib.PullRequest
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

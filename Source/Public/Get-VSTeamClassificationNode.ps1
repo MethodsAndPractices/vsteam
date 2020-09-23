@@ -1,5 +1,6 @@
 function Get-VSTeamClassificationNode {
-   [CmdletBinding(DefaultParameterSetName = 'ByIds')]
+   [CmdletBinding(DefaultParameterSetName = 'ById',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamClassificationNode')]
    param(
       [ValidateSet("areas", "iterations")]
       [Parameter(Mandatory = $true, ParameterSetName = "ByPath")]
@@ -8,61 +9,63 @@ function Get-VSTeamClassificationNode {
       [Parameter(Mandatory = $false, ParameterSetName = "ByPath")]
       [string] $Path,
 
-      [Parameter(Mandatory = $false, ParameterSetName = "ByIds")]
-      [int[]] $Ids,
+      [Parameter(Mandatory = $true, ParameterSetName = "ById")]
+      [int[]] $Id,
 
-      [Parameter(Mandatory = $false, ParameterSetName = "ByPath")]
-      [Parameter(Mandatory = $false, ParameterSetName = "ByIds")]
       [int] $Depth,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    process {
-      $id = $StructureGroup
+      $idArg = $StructureGroup
 
       $Path = [uri]::UnescapeDataString($Path)
 
       if ($Path) {
          $Path = [uri]::EscapeUriString($Path)
          $Path = $Path.TrimStart("/")
-         $id += "/$Path"
+         $idArg += "/$Path"
       }
 
       $queryString = @{ }
-      
+
       if ($Depth) {
          $queryString.Add("`$Depth", $Depth)
       }
 
-      if ($Ids) {
-         $queryString.Add("Ids", $Ids -join ",")
+      if ($Id) {
+         $queryString.Add("ids", $Id -join ",")
+      }
+
+      $commonArgs = @{
+         ProjectName = $ProjectName
+         Area        = 'wit'
+         Resource    = "classificationnodes"
+         id          = $idArg
+         Version     = $(_getApiVersion Core)
       }
 
       if ($queryString.Count -gt 0) {
          # Call the REST API
-         $resp = _callAPI -Method "Get" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-            -Version $(_getApiVersion Core) `
-            -QueryString $queryString
+         $resp = _callAPI @commonArgs -QueryString $queryString
       }
       else {
          # Call the REST API
-         $resp = _callAPI -Method "Get" -ProjectName $ProjectName -Area 'wit' -Resource "classificationnodes" -id $id `
-            -Version $(_getApiVersion Core) `
-      
+         $resp = _callAPI @commonArgs
       }
 
       if ([bool]($resp.PSobject.Properties.name -match "value")) {
          try {
             $objs = @()
-   
+
             foreach ($item in $resp.value) {
-               $objs += [VSTeamClassificationNode]::new($item, $ProjectName)
+               $objs += [vsteam_lib.ClassificationNode]::new($item, $ProjectName)
             }
-   
+
             Write-Output $objs
          }
          catch {
@@ -76,7 +79,7 @@ function Get-VSTeamClassificationNode {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $classificationNode = [VSTeamClassificationNode]::new($resp, $ProjectName)
+         $classificationNode = [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
 
          Write-Output $classificationNode
       }

@@ -1,14 +1,15 @@
 function Remove-VSTeamPolicy {
-   [CmdletBinding(SupportsShouldProcess = $true)]
+   [CmdletBinding(SupportsShouldProcess = $true,
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamPolicy')]
    param(
       [parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -16,7 +17,11 @@ function Remove-VSTeamPolicy {
       foreach ($item in $id) {
          if ($Force -or $pscmdlet.ShouldProcess($item, "Delete Policy")) {
             try {
-               _callAPI -ProjectName $ProjectName -Method Delete -Id $item -Area policy -Resource configurations -Version  $(_getApiVersion Git) | Out-Null
+               _callAPI -Method DELETE -ProjectName $ProjectName `
+                  -Area policy `
+                  -Resource configurations `
+                  -Id $item `
+                  -Version $(_getApiVersion Policy) | Out-Null
 
                Write-Output "Deleted policy $item"
             }

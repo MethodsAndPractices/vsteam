@@ -1,0 +1,3239 @@
+{
+   "count": 8,
+   "value": [
+      {
+         "options": [
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "branchFilters": "[\"+refs/heads/*\"]",
+                  "additionalFields": "{}"
+               }
+            },
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "workItemType": "Issue",
+                  "assignToRequestor": "true",
+                  "additionalFields": "{}"
+               }
+            }
+         ],
+         "triggers": [
+            {
+               "branchFilters": [
+                  "+refs/heads/master"
+               ],
+               "pathFilters": [],
+               "batchChanges": false,
+               "maxConcurrentBuildsPerBranch": 1,
+               "pollingInterval": 0,
+               "triggerType": "continuousIntegration"
+            }
+         ],
+         "variables": {
+            "aquaPass": {
+               "value": null,
+               "isSecret": true
+            },
+            "aquaRegPass": {
+               "value": null,
+               "isSecret": true
+            },
+            "aquaRegUser": {
+               "value": "jessde@microsoft.com"
+            },
+            "baseName": {
+               "value": "ptracker"
+            },
+            "BuildConfiguration": {
+               "value": "release"
+            },
+            "BuildPlatform": {
+               "value": "any cpu"
+            },
+            "certPassword": {
+               "value": "redacted"
+            },
+            "clientSecret": {
+               "value": null,
+               "isSecret": true
+            },
+            "iosPassword": {
+               "value": null,
+               "isSecret": true
+            },
+            "location": {
+               "value": "eastus2"
+            },
+            "output": {
+               "value": "table"
+            },
+            "resourceGroupName": {
+               "value": "PTracker-Common"
+            },
+            "servicePrincipal": {
+               "value": "00000000-0000-0000-0000-000000000000"
+            },
+            "skipComponentGovernanceDetection": {
+               "value": "true"
+            },
+            "subscriptionId": {
+               "value": "00000000-0000-0000-0000-000000000000",
+               "allowOverride": true
+            },
+            "system.debug": {
+               "value": "false",
+               "allowOverride": true
+            },
+            "tenantId": {
+               "value": "00000000-0000-0000-0000-000000000000"
+            }
+         },
+         "retentionRules": [
+            {
+               "branches": [
+                  "+refs/heads/*"
+               ],
+               "artifacts": [],
+               "artifactTypesToDelete": [
+                  "FilePath",
+                  "SymbolStore"
+               ],
+               "daysToKeep": 10,
+               "minimumToKeep": 1,
+               "deleteBuildRecord": true,
+               "deleteTestResults": true
+            }
+         ],
+         "properties": {},
+         "tags": [],
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=163"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/definition?definitionId=23"
+            },
+            "editor": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/designer?id=23&_a=edit-build-definition"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/23"
+            }
+         },
+         "jobAuthorizationScope": "projectCollection",
+         "jobTimeoutInMinutes": 60,
+         "jobCancelTimeoutInMinutes": 5,
+         "process": {
+            "phases": [
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Use .NET Core sdk 2.2.203",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "packageType": "sdk",
+                           "useGlobalJson": "false",
+                           "workingDirectory": "",
+                           "version": "2.2.203",
+                           "includePreviewVersions": "false",
+                           "installationPath": "$(Agent.ToolsDirectory)/dotnet",
+                           "performMultiLevelLookup": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Restore, Build & Test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "test",
+                           "publishWebProjects": "true",
+                           "projects": "src/PeopleTracker.BerService.Tests/PeopleTracker.BerService.Tests.csproj",
+                           "custom": "",
+                           "arguments": "--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude=\"[xunit*]*\" /p:CoverletOutput=src/PeopleTracker.BerService.Tests/TestResults/Coverage/",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "true",
+                           "modifyOutputPath": "true",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "publish",
+                           "publishWebProjects": "false",
+                           "projects": "src/PeopleTracker.BerService/*.csproj",
+                           "custom": "",
+                           "arguments": "-c $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "true",
+                           "modifyOutputPath": "false",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": "src/PeopleTracker.BerService"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Artifact: ber",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(Build.ArtifactStagingDirectory)",
+                           "ArtifactName": "ber",
+                           "ArtifactType": "Container",
+                           "TargetPath": "",
+                           "Parallel": "false",
+                           "ParallelCount": "8",
+                           "FileCopyOptions": ""
+                        }
+                     }
+                  ],
+                  "name": "BER on Windows",
+                  "refName": "Job_4",
+                  "condition": "succeeded()",
+                  "target": {
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               },
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Use .NET Core sdk 2.2.203",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "packageType": "sdk",
+                           "useGlobalJson": "false",
+                           "workingDirectory": "",
+                           "version": "2.2.203",
+                           "includePreviewVersions": "false",
+                           "installationPath": "$(Agent.ToolsDirectory)/dotnet",
+                           "performMultiLevelLookup": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Restore, Build & Test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "test",
+                           "publishWebProjects": "true",
+                           "projects": "src/PeopleTracker.Web.Tests/PeopleTracker.Web.Tests.csproj",
+                           "custom": "",
+                           "arguments": "--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude=\"[xunit*]*\" /p:CoverletOutput=$(Build.SourcesDirectory)/src/PeopleTracker.Web.Tests/TestResults/Coverage/",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "true",
+                           "modifyOutputPath": "true",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish code coverage",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "codeCoverageTool": "Cobertura",
+                           "summaryFileLocation": "$(Build.SourcesDirectory)/src/PeopleTracker.Web.Tests/TestResults/Coverage/coverage.cobertura.xml",
+                           "pathToSources": "",
+                           "reportDirectory": "",
+                           "additionalCodeCoverageFiles": "",
+                           "failIfCoverageEmpty": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "publish",
+                           "publishWebProjects": "false",
+                           "projects": "src/PeopleTracker.Web/*.csproj",
+                           "custom": "",
+                           "arguments": "-c $(BuildConfiguration) -o $(Build.StagingDirectory)",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "false",
+                           "modifyOutputPath": "true",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Copy infrastructure files",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "SourceFolder": "src/PeopleTracker.IaC",
+                           "Contents": "**/deploy*\n**/ber.ps1\n**/updatedns.ps1\n**/appCenter.ps1\n**/rbac.yaml\n**/peopletracker/**",
+                           "TargetFolder": "$(Build.ArtifactStagingDirectory)/IaC",
+                           "CleanTargetFolder": "false",
+                           "OverWrite": "false",
+                           "flattenFolders": "false",
+                           "preserveTimestamp": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Artifact: iac",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(Build.ArtifactStagingDirectory)/IaC",
+                           "ArtifactName": "iac",
+                           "ArtifactType": "Container",
+                           "TargetPath": "",
+                           "Parallel": "false",
+                           "ParallelCount": "8",
+                           "FileCopyOptions": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Create ACR, Build & Push image",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "targetType": "filePath",
+                           "filePath": "src/PeopleTracker.IaC/common.ps1",
+                           "arguments": "-tag $(Build.BuildId) -baseName $(baseName) -resourceGroupName $(resourceGroupName) -location $(location) -servicePrincipal $(servicePrincipal) -clientSecret $(clientSecret) -output $(output) -subscriptionid $(subscriptionid) -tenantId $(tenantId) -aquaRegUser $(aquaRegUser) -aquaRegPass $(aquaRegPass)  -Verbose",
+                           "script": "# Write your powershell commands here.\n\nWrite-Host \"Hello World\"\n\n# Use the environment variables input below to pass secret variables to this script.",
+                           "errorActionPreference": "stop",
+                           "failOnStderr": "false",
+                           "ignoreLASTEXITCODE": "false",
+                           "pwsh": "false",
+                           "workingDirectory": "src/PeopleTracker.Web"
+                        }
+                     }
+                  ],
+                  "name": "Docker on Linux",
+                  "refName": "Job_1",
+                  "condition": "succeeded()",
+                  "target": {
+                     "queue": {
+                        "_links": {
+                           "self": {
+                              "href": "https://dev.azure.com/Test/_apis/build/Queues/86"
+                           }
+                        },
+                        "id": 86,
+                        "url": "https://dev.azure.com/Test/_apis/build/Queues/86",
+                        "pool": null
+                     },
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               },
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Use NuGet 4.7.x",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "versionSpec": "4.7.x",
+                           "checkLatest": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "NuGet restore",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "restore",
+                           "solution": "PeopleTracker.WebService.sln",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "disableParallelProcessing": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "allowPackageConflicts": "false",
+                           "externalEndpoint": "",
+                           "verbosityPush": "Detailed",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "versioningScheme": "off",
+                           "includeReferencedProjects": "false",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "packTimezone": "utc",
+                           "includeSymbols": "false",
+                           "toolPackage": "false",
+                           "buildProperties": "",
+                           "basePath": "",
+                           "verbosityPack": "Detailed",
+                           "arguments": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Build solution",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "solution": "PeopleTracker.WebService.sln",
+                           "vsVersion": "latest",
+                           "msbuildArgs": "/p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DeployOnBuild=true",
+                           "platform": "$(BuildPlatform)",
+                           "configuration": "$(BuildConfiguration)",
+                           "clean": "false",
+                           "maximumCpuCount": "false",
+                           "restoreNugetPackages": "false",
+                           "msbuildArchitecture": "x86",
+                           "logProjectEvents": "true",
+                           "createLogFile": "false",
+                           "logFileVerbosity": "normal"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Run Unit Test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "testSelector": "testAssemblies",
+                           "testAssemblyVer2": "**\\*Tests.dll\n!**\\obj\\**",
+                           "testPlan": "",
+                           "testSuite": "",
+                           "testConfiguration": "",
+                           "tcmTestRun": "$(test.RunId)",
+                           "searchFolder": "$(System.DefaultWorkingDirectory)",
+                           "testFiltercriteria": "TestCategory=Unit",
+                           "runOnlyImpactedTests": "False",
+                           "runAllTestsAfterXBuilds": "50",
+                           "uiTests": "false",
+                           "vstestLocationMethod": "version",
+                           "vsTestVersion": "latest",
+                           "vstestLocation": "",
+                           "runSettingsFile": "",
+                           "overrideTestrunParameters": "",
+                           "pathtoCustomTestAdapters": "",
+                           "runInParallel": "true",
+                           "runTestsInIsolation": "False",
+                           "codeCoverageEnabled": "false",
+                           "otherConsoleOptions": "",
+                           "distributionBatchType": "basedOnTestCases",
+                           "batchingBasedOnAgentsOption": "autoBatchSize",
+                           "customBatchSizeValue": "10",
+                           "batchingBasedOnExecutionTimeOption": "autoBatchSize",
+                           "customRunTimePerBatchValue": "60",
+                           "dontDistribute": "False",
+                           "testRunTitle": "Services",
+                           "platform": "$(BuildPlatform)",
+                           "configuration": "$(BuildConfiguration)",
+                           "publishRunAttachments": "true",
+                           "diagnosticsEnabled": "True",
+                           "collectDumpOn": "onAbortOnly",
+                           "rerunFailedTests": "False",
+                           "rerunType": "basedOnTestFailurePercentage",
+                           "rerunFailedThreshold": "30",
+                           "rerunFailedTestCasesMaxLimit": "5",
+                           "rerunMaxAttempts": "3"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Copy Files",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "SourceFolder": "src",
+                           "Contents": "**\\PeopleTracker.NetService.zip\n**\\PeopleTracker.Database.dacpac\n**\\PeopleTracker.UITests\\bin\\$(BuildConfiguration)\\**",
+                           "TargetFolder": "$(build.artifactstagingdirectory)",
+                           "CleanTargetFolder": "true",
+                           "OverWrite": "true",
+                           "flattenFolders": "true",
+                           "preserveTimestamp": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Artifact: win",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(Build.ArtifactStagingDirectory)",
+                           "ArtifactName": "win",
+                           "ArtifactType": "Container",
+                           "TargetPath": "",
+                           "Parallel": "false",
+                           "ParallelCount": "8",
+                           "FileCopyOptions": ""
+                        }
+                     }
+                  ],
+                  "name": "Web on Windows",
+                  "refName": "Job_2",
+                  "condition": "succeeded()",
+                  "target": {
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               },
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Use NuGet 4.7.x",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "versionSpec": "4.7.x",
+                           "checkLatest": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "NuGet restore",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "restore",
+                           "solution": "PeopleTracker.Mobile.sln",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "disableParallelProcessing": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "allowPackageConflicts": "false",
+                           "externalEndpoint": "",
+                           "verbosityPush": "Detailed",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "versioningScheme": "off",
+                           "includeReferencedProjects": "false",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "packTimezone": "utc",
+                           "includeSymbols": "false",
+                           "toolPackage": "false",
+                           "buildProperties": "",
+                           "basePath": "",
+                           "verbosityPack": "Detailed",
+                           "arguments": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Install an Apple certificate",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "certSecureFile": "00000000-0000-0000-0000-000000000000",
+                           "certPwd": "$(iosPassword)",
+                           "keychain": "temp",
+                           "keychainPassword": "",
+                           "customKeychainPath": "",
+                           "deleteCert": "false",
+                           "deleteCustomKeychain": "false",
+                           "signingIdentity": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Install an Apple provisioning profile",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "provisioningProfileLocation": "secureFiles",
+                           "provProfileSecureFile": "00000000-0000-0000-0000-000000000000",
+                           "provProfileSourceRepository": "",
+                           "removeProfile": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Replace tokens for iOS",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "sourcePath": "src/PeopleTracker.Mobile.iOS",
+                           "filePattern": "**/*.plist",
+                           "warningsAsErrors": "false",
+                           "tokenRegex": "__([a-zA-Z0-9\\.]+)__",
+                           "secretTokens": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Replace tokens for Android",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "sourcePath": "src/PeopleTracker.Mobile.Droid",
+                           "filePattern": "**/*.xml",
+                           "warningsAsErrors": "false",
+                           "tokenRegex": "__([a-zA-Z0-9\\.]+)__",
+                           "secretTokens": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Version Assemblies using **/PeopleTracker.Mobile.csproj",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "sourcePath": "src/PeopleTracker.Mobile",
+                           "filePattern": "**/PeopleTracker.Mobile.csproj",
+                           "versionSource": "buildNumber",
+                           "customNumberVariable": "myBuildNumber",
+                           "versionFormat": "custom",
+                           "customBuildRegex": "\\d+",
+                           "replaceVersionFormat": "threeParts",
+                           "customReplaceRegex": "",
+                           "buildRegexIndex": "0",
+                           "replacePrefix": "2.0.0.",
+                           "replacePostfix": "",
+                           "failIfNoMatchFound": "true"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Get Version for BER",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "targetType": "inline",
+                           "filePath": "",
+                           "arguments": "",
+                           "script": "$m = Select-String -Pattern '>([0-9\\.]+)<' -Path .\\PeopleTracker.Mobile.csproj\n$m.Matches.Groups[1].Value | Set-Content -Path $(Build.ArtifactStagingDirectory)\\version.txt",
+                           "errorActionPreference": "stop",
+                           "failOnStderr": "false",
+                           "ignoreLASTEXITCODE": "false",
+                           "pwsh": "false",
+                           "workingDirectory": "src/PeopleTracker.Mobile"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Build Xamarin.iOS",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "solution": "PeopleTracker.Mobile.sln",
+                           "configuration": "$(BuildConfiguration)",
+                           "clean": "true",
+                           "packageApp": "true",
+                           "forSimulator": "false",
+                           "runNugetRestore": "false",
+                           "args": "",
+                           "cwd": "",
+                           "buildToolLocation": "",
+                           "iosSigningIdentity": "",
+                           "provProfileUuid": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Build Xamarin.Android",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "project": "**/*Droid*.csproj",
+                           "target": "",
+                           "outputDir": "$(build.binariesdirectory/$(BuildConfiguration)",
+                           "configuration": "$(BuildConfiguration)",
+                           "createAppPackage": "true",
+                           "clean": "false",
+                           "msbuildLocationMethod": "version",
+                           "msbuildVersion": "latest",
+                           "msbuildLocation": "",
+                           "msbuildArchitecture": "x86",
+                           "msbuildArguments": "",
+                           "jdkSelection": "JDKVersion",
+                           "jdkVersion": "default",
+                           "jdkUserInputPath": "",
+                           "jdkArchitecture": "x64"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "WhiteSource Bolt",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "19.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "cwd": "",
+                           "advance": "false",
+                           "exclude": "",
+                           "extraFolders": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Signing and align APK",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "3.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "files": "**/bin/*.apk",
+                           "apksign": "true",
+                           "keystoreFile": "00000000-0000-0000-0000-000000000000",
+                           "keystorePass": "$(certPassword)",
+                           "keystoreAlias": "peopletracker",
+                           "keyPass": "$(certPassword)",
+                           "apksignerArguments": "--verbose",
+                           "apksignerLocation": "",
+                           "zipalign": "true",
+                           "zipalignLocation": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Copy Files",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "SourceFolder": "",
+                           "Contents": "**/*.ipa\n**/*.apk\n**/*.app.dSYM\n**/PeopleTracker.Mobile.Tests/bin/**/*.dll\nsrc/ReleaseNotes.txt\n**/test-cloud.exe",
+                           "TargetFolder": "$(Build.ArtifactStagingDirectory)",
+                           "CleanTargetFolder": "false",
+                           "OverWrite": "false",
+                           "flattenFolders": "true",
+                           "preserveTimestamp": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Mobile Artifact",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(Build.ArtifactStagingDirectory)",
+                           "ArtifactName": "mobile",
+                           "ArtifactType": "Container",
+                           "TargetPath": "",
+                           "Parallel": "false",
+                           "ParallelCount": "8",
+                           "FileCopyOptions": ""
+                        }
+                     }
+                  ],
+                  "name": "Mobile on macOS",
+                  "refName": "Job_3",
+                  "condition": "succeeded()",
+                  "target": {
+                     "queue": {
+                        "_links": {
+                           "self": {
+                              "href": "https://dev.azure.com/Test/_apis/build/Queues/95"
+                           }
+                        },
+                        "id": 95,
+                        "url": "https://dev.azure.com/Test/_apis/build/Queues/95",
+                        "pool": null
+                     },
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               }
+            ],
+            "type": 1
+         },
+         "repository": {
+            "properties": {
+               "cleanOptions": "3",
+               "labelSources": "0",
+               "labelSourcesFormat": "$(build.buildNumber)",
+               "reportBuildStatus": "true",
+               "gitLfsSupport": "false",
+               "skipSyncSource": "false",
+               "checkoutNestedSubmodules": "false",
+               "fetchDepth": "0"
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "defaultBranch": "refs/heads/master",
+            "clean": "true",
+            "checkoutSubmodules": false
+         },
+         "processParameters": {},
+         "quality": "definition",
+         "authoredBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "drafts": [],
+         "queue": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/build/Queues/81"
+               }
+            },
+            "id": 81,
+            "name": "Default",
+            "url": "https://dev.azure.com/Test/_apis/build/Queues/81",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "id": 23,
+         "name": "PTracker-CI",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/23?revision=163",
+         "uri": "vstfs:///Build/Definition/23",
+         "path": "\\",
+         "type": "build",
+         "queueStatus": "enabled",
+         "revision": 163,
+         "createdDate": "2019-09-16T02:34:16.947Z",
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         }
+      },
+      {
+         "options": [
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "branchFilters": "[\"+refs/heads/*\"]",
+                  "additionalFields": "{}"
+               }
+            },
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "workItemType": "Issue",
+                  "assignToRequestor": "true",
+                  "additionalFields": "{}"
+               }
+            }
+         ],
+         "variables": {
+            "aquaPass": {
+               "value": null,
+               "isSecret": true
+            },
+            "aquaRegPass": {
+               "value": null,
+               "isSecret": true
+            },
+            "aquaRegUser": {
+               "value": "jessde@microsoft.com"
+            },
+            "baseName": {
+               "value": "ptracker"
+            },
+            "BuildConfiguration": {
+               "value": "release"
+            },
+            "BuildPlatform": {
+               "value": "any cpu"
+            },
+            "certPassword": {
+               "value": "redacted"
+            },
+            "clientSecret": {
+               "value": null,
+               "isSecret": true
+            },
+            "iosPassword": {
+               "value": null,
+               "isSecret": true
+            },
+            "location": {
+               "value": "eastus2"
+            },
+            "output": {
+               "value": "table"
+            },
+            "resourceGroupName": {
+               "value": "PTracker-Common"
+            },
+            "servicePrincipal": {
+               "value": "00000000-0000-0000-0000-000000000000"
+            },
+            "skipComponentGovernanceDetection": {
+               "value": "true"
+            },
+            "subscriptionId": {
+               "value": "00000000-0000-0000-0000-000000000000",
+               "allowOverride": true
+            },
+            "system.debug": {
+               "value": "false",
+               "allowOverride": true
+            },
+            "tenantId": {
+               "value": "00000000-0000-0000-0000-000000000000"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/35?revision=7"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/definition?definitionId=35"
+            },
+            "editor": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/designer?id=35&_a=edit-build-definition"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/35"
+            }
+         },
+         "jobAuthorizationScope": "projectCollection",
+         "jobTimeoutInMinutes": 60,
+         "jobCancelTimeoutInMinutes": 5,
+         "process": {
+            "phases": [
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Use .NET Core sdk 2.2.203",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "0.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "packageType": "sdk",
+                           "version": "2.2.203"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Restore, Build & Test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "test",
+                           "publishWebProjects": "true",
+                           "projects": "src/PeopleTracker.BerService.Tests/PeopleTracker.BerService.Tests.csproj",
+                           "custom": "",
+                           "arguments": "--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude=\"[xunit*]*\" /p:CoverletOutput=src/PeopleTracker.BerService.Tests/TestResults/Coverage/",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "true",
+                           "modifyOutputPath": "true",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "publish",
+                           "publishWebProjects": "false",
+                           "projects": "src/PeopleTracker.BerService/*.csproj",
+                           "custom": "",
+                           "arguments": "-c $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "true",
+                           "modifyOutputPath": "false",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": "src/PeopleTracker.BerService"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Artifact: ber",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(Build.ArtifactStagingDirectory)",
+                           "ArtifactName": "ber",
+                           "ArtifactType": "Container",
+                           "TargetPath": "",
+                           "Parallel": "false",
+                           "ParallelCount": "8",
+                           "FileCopyOptions": ""
+                        }
+                     }
+                  ],
+                  "name": "BER on Windows",
+                  "refName": "Job_4",
+                  "condition": "succeeded()",
+                  "target": {
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               },
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Use .NET Core sdk 2.2.203",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "0.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "packageType": "sdk",
+                           "version": "2.2.203"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Restore, Build & Test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "test",
+                           "publishWebProjects": "true",
+                           "projects": "src/PeopleTracker.Web.Tests/PeopleTracker.Web.Tests.csproj",
+                           "custom": "",
+                           "arguments": "--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude=\"[xunit*]*\" /p:CoverletOutput=$(Build.SourcesDirectory)/src/PeopleTracker.Web.Tests/TestResults/Coverage/",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "true",
+                           "modifyOutputPath": "true",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish code coverage",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "codeCoverageTool": "Cobertura",
+                           "summaryFileLocation": "$(Build.SourcesDirectory)/src/PeopleTracker.Web.Tests/TestResults/Coverage/coverage.cobertura.xml",
+                           "pathToSources": "",
+                           "reportDirectory": "",
+                           "additionalCodeCoverageFiles": "",
+                           "failIfCoverageEmpty": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "publish",
+                           "publishWebProjects": "false",
+                           "projects": "src/PeopleTracker.Web/*.csproj",
+                           "custom": "",
+                           "arguments": "-c $(BuildConfiguration) -o $(Build.StagingDirectory)",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "false",
+                           "modifyOutputPath": "true",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Copy infrastructure files",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "SourceFolder": "src/PeopleTracker.IaC",
+                           "Contents": "**/deploy*\n**/ber.ps1\n**/updatedns.ps1\n**/appCenter.ps1\n**/rbac.yaml\n**/peopletracker/**",
+                           "TargetFolder": "$(Build.ArtifactStagingDirectory)/IaC",
+                           "CleanTargetFolder": "false",
+                           "OverWrite": "false",
+                           "flattenFolders": "false",
+                           "preserveTimestamp": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Artifact: iac",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(Build.ArtifactStagingDirectory)/IaC",
+                           "ArtifactName": "iac",
+                           "ArtifactType": "Container",
+                           "TargetPath": "",
+                           "Parallel": "false",
+                           "ParallelCount": "8",
+                           "FileCopyOptions": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Create ACR, Build & Push image",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "targetType": "filePath",
+                           "filePath": "src/PeopleTracker.IaC/common.ps1",
+                           "arguments": "-tag $(Build.BuildId) -baseName $(baseName) -resourceGroupName $(resourceGroupName) -location $(location) -servicePrincipal $(servicePrincipal) -clientSecret $(clientSecret) -output $(output) -subscriptionid $(subscriptionid) -tenantId $(tenantId) -aquaRegUser $(aquaRegUser) -aquaRegPass $(aquaRegPass)  -Verbose",
+                           "script": "# Write your powershell commands here.\n\nWrite-Host \"Hello World\"\n\n# Use the environment variables input below to pass secret variables to this script.",
+                           "errorActionPreference": "stop",
+                           "failOnStderr": "false",
+                           "ignoreLASTEXITCODE": "false",
+                           "pwsh": "false",
+                           "workingDirectory": "src/PeopleTracker.Web"
+                        }
+                     }
+                  ],
+                  "name": "Docker on Linux",
+                  "refName": "Job_1",
+                  "condition": "succeeded()",
+                  "target": {
+                     "queue": {
+                        "_links": {
+                           "self": {
+                              "href": "https://dev.azure.com/Test/_apis/build/Queues/86"
+                           }
+                        },
+                        "id": 86,
+                        "url": "https://dev.azure.com/Test/_apis/build/Queues/86",
+                        "pool": null
+                     },
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               },
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Use NuGet 4.7.x",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "versionSpec": "4.7.x",
+                           "checkLatest": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "NuGet restore",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "restore",
+                           "solution": "PeopleTracker.WebService.sln",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "disableParallelProcessing": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "allowPackageConflicts": "false",
+                           "externalEndpoint": "",
+                           "verbosityPush": "Detailed",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "versioningScheme": "off",
+                           "includeReferencedProjects": "false",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "packTimezone": "utc",
+                           "includeSymbols": "false",
+                           "toolPackage": "false",
+                           "buildProperties": "",
+                           "basePath": "",
+                           "verbosityPack": "Detailed",
+                           "arguments": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Build solution",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "solution": "PeopleTracker.WebService.sln",
+                           "vsVersion": "latest",
+                           "msbuildArgs": "/p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DeployOnBuild=true",
+                           "platform": "$(BuildPlatform)",
+                           "configuration": "$(BuildConfiguration)",
+                           "clean": "false",
+                           "maximumCpuCount": "false",
+                           "restoreNugetPackages": "false",
+                           "msbuildArchitecture": "x86",
+                           "logProjectEvents": "true",
+                           "createLogFile": "false",
+                           "logFileVerbosity": "normal"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "WhiteSource Bolt",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "19.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "cwd": "",
+                           "advance": "false",
+                           "exclude": "",
+                           "extraFolders": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Run Unit Test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "testSelector": "testAssemblies",
+                           "testAssemblyVer2": "**\\*Tests.dll\n!**\\obj\\**",
+                           "testPlan": "",
+                           "testSuite": "",
+                           "testConfiguration": "",
+                           "tcmTestRun": "$(test.RunId)",
+                           "searchFolder": "$(System.DefaultWorkingDirectory)",
+                           "testFiltercriteria": "TestCategory=Unit",
+                           "runOnlyImpactedTests": "False",
+                           "runAllTestsAfterXBuilds": "50",
+                           "uiTests": "false",
+                           "vstestLocationMethod": "version",
+                           "vsTestVersion": "latest",
+                           "vstestLocation": "",
+                           "runSettingsFile": "",
+                           "overrideTestrunParameters": "",
+                           "pathtoCustomTestAdapters": "",
+                           "runInParallel": "true",
+                           "runTestsInIsolation": "False",
+                           "codeCoverageEnabled": "false",
+                           "otherConsoleOptions": "",
+                           "distributionBatchType": "basedOnTestCases",
+                           "batchingBasedOnAgentsOption": "autoBatchSize",
+                           "customBatchSizeValue": "10",
+                           "batchingBasedOnExecutionTimeOption": "autoBatchSize",
+                           "customRunTimePerBatchValue": "60",
+                           "dontDistribute": "False",
+                           "testRunTitle": "Services",
+                           "platform": "$(BuildPlatform)",
+                           "configuration": "$(BuildConfiguration)",
+                           "publishRunAttachments": "true",
+                           "diagnosticsEnabled": "True",
+                           "collectDumpOn": "onAbortOnly",
+                           "rerunFailedTests": "False",
+                           "rerunType": "basedOnTestFailurePercentage",
+                           "rerunFailedThreshold": "30",
+                           "rerunFailedTestCasesMaxLimit": "5",
+                           "rerunMaxAttempts": "3"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Copy Files",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "SourceFolder": "src",
+                           "Contents": "**\\PeopleTracker.NetService.zip\n**\\PeopleTracker.Database.dacpac\n**\\PeopleTracker.UITests\\bin\\$(BuildConfiguration)\\**",
+                           "TargetFolder": "$(build.artifactstagingdirectory)",
+                           "CleanTargetFolder": "true",
+                           "OverWrite": "true",
+                           "flattenFolders": "true",
+                           "preserveTimestamp": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish Artifact: win",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(Build.ArtifactStagingDirectory)",
+                           "ArtifactName": "win",
+                           "ArtifactType": "Container",
+                           "TargetPath": "",
+                           "Parallel": "false",
+                           "ParallelCount": "8",
+                           "FileCopyOptions": ""
+                        }
+                     }
+                  ],
+                  "name": "Web on Windows",
+                  "refName": "Job_2",
+                  "condition": "succeeded()",
+                  "target": {
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               }
+            ],
+            "type": 1
+         },
+         "repository": {
+            "properties": {
+               "cleanOptions": "3",
+               "labelSources": "0",
+               "labelSourcesFormat": "$(build.buildNumber)",
+               "reportBuildStatus": "true",
+               "gitLfsSupport": "false",
+               "skipSyncSource": "false",
+               "checkoutNestedSubmodules": "false",
+               "fetchDepth": "0"
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/PeopleTracker",
+            "defaultBranch": "refs/heads/master",
+            "clean": "true",
+            "checkoutSubmodules": false
+         },
+         "processParameters": {},
+         "quality": "definition",
+         "authoredBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "drafts": [],
+         "queue": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/build/Queues/81"
+               }
+            },
+            "id": 81,
+            "name": "Default",
+            "url": "https://dev.azure.com/Test/_apis/build/Queues/81",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "id": 35,
+         "name": "PTracker-CI-NoMobile",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/35?revision=7",
+         "uri": "vstfs:///Build/Definition/35",
+         "path": "\\",
+         "type": "build",
+         "queueStatus": "enabled",
+         "revision": 7,
+         "createdDate": "2019-11-13T22:56:10.77Z",
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         }
+      },
+      {
+         "options": [
+            {
+               "enabled": true,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "branchFilters": "[\"+refs/heads/*\"]",
+                  "additionalFields": "{}"
+               }
+            },
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "workItemType": "Bug",
+                  "assignToRequestor": "true",
+                  "additionalFields": "{}"
+               }
+            }
+         ],
+         "variables": {
+            "BuildConfiguration": {
+               "value": "release",
+               "allowOverride": true
+            },
+            "BuildPlatform": {
+               "value": "any cpu",
+               "allowOverride": true
+            },
+            "system.debug": {
+               "value": "false",
+               "allowOverride": true
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/39?revision=1"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/definition?definitionId=39"
+            },
+            "editor": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/designer?id=39&_a=edit-build-definition"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/39"
+            }
+         },
+         "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+         "jobAuthorizationScope": "projectCollection",
+         "jobTimeoutInMinutes": 60,
+         "jobCancelTimeoutInMinutes": 5,
+         "process": {
+            "phases": [
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Use NuGet 4.4.1",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "0.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "versionSpec": "4.4.1",
+                           "checkLatest": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "NuGet restore",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "restore",
+                           "solution": "$(Parameters.solution)",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "disableParallelProcessing": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "allowPackageConflicts": "false",
+                           "externalEndpoint": "",
+                           "verbosityPush": "Detailed",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "versioningScheme": "off",
+                           "includeReferencedProjects": "false",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "packTimezone": "utc",
+                           "includeSymbols": "false",
+                           "toolPackage": "false",
+                           "buildProperties": "",
+                           "basePath": "",
+                           "verbosityPack": "Detailed",
+                           "arguments": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Build solution",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "solution": "$(Parameters.solution)",
+                           "vsVersion": "latest",
+                           "msbuildArgs": "/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation=\"$(build.artifactstagingdirectory)\\\\\"",
+                           "platform": "$(BuildPlatform)",
+                           "configuration": "$(BuildConfiguration)",
+                           "clean": "false",
+                           "maximumCpuCount": "false",
+                           "restoreNugetPackages": "false",
+                           "msbuildArchitecture": "x86",
+                           "logProjectEvents": "true",
+                           "createLogFile": "false",
+                           "logFileVerbosity": "normal"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "WhiteSource Bolt",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "19.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "cwd": "",
+                           "advance": "false",
+                           "exclude": "",
+                           "extraFolders": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Test Assemblies",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "testSelector": "testAssemblies",
+                           "testAssemblyVer2": "**\\$(BuildConfiguration)\\*test*.dll\n!**\\obj\\**",
+                           "testPlan": "",
+                           "testSuite": "",
+                           "testConfiguration": "",
+                           "tcmTestRun": "$(test.RunId)",
+                           "searchFolder": "$(System.DefaultWorkingDirectory)",
+                           "testFiltercriteria": "testCategory=Unit",
+                           "runOnlyImpactedTests": "False",
+                           "runAllTestsAfterXBuilds": "50",
+                           "uiTests": "false",
+                           "vstestLocationMethod": "version",
+                           "vsTestVersion": "latest",
+                           "vstestLocation": "",
+                           "runSettingsFile": "",
+                           "overrideTestrunParameters": "",
+                           "pathtoCustomTestAdapters": "",
+                           "runInParallel": "False",
+                           "runTestsInIsolation": "False",
+                           "codeCoverageEnabled": "False",
+                           "otherConsoleOptions": "",
+                           "distributionBatchType": "basedOnTestCases",
+                           "batchingBasedOnAgentsOption": "autoBatchSize",
+                           "customBatchSizeValue": "10",
+                           "batchingBasedOnExecutionTimeOption": "autoBatchSize",
+                           "customRunTimePerBatchValue": "60",
+                           "dontDistribute": "False",
+                           "testRunTitle": "",
+                           "platform": "$(BuildPlatform)",
+                           "configuration": "$(BuildConfiguration)",
+                           "publishRunAttachments": "true",
+                           "diagnosticsEnabled": "false",
+                           "collectDumpOn": "onAbortOnly",
+                           "rerunFailedTests": "False",
+                           "rerunType": "basedOnTestFailurePercentage",
+                           "rerunFailedThreshold": "30",
+                           "rerunFailedTestCasesMaxLimit": "5",
+                           "rerunMaxAttempts": "3"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": true,
+                        "alwaysRun": false,
+                        "displayName": "Publish symbols path",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "SymbolsFolder": "$(Build.SourcesDirectory)",
+                           "SearchPattern": "**\\bin\\**\\*.pdb",
+                           "IndexSources": "true",
+                           "PublishSymbols": "false",
+                           "SymbolServerType": "TeamServices",
+                           "SymbolsPath": "",
+                           "CompressSymbols": "false",
+                           "DetailedLog": "true",
+                           "TreatNotIndexedAsWarning": "false",
+                           "SymbolsMaximumWaitTime": "",
+                           "SymbolsProduct": "",
+                           "SymbolsVersion": "",
+                           "SymbolsArtifactName": "Symbols_$(BuildConfiguration)"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": true,
+                        "displayName": "Publish Artifact",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeededOrFailed()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(build.artifactstagingdirectory)",
+                           "ArtifactName": "$(Parameters.ArtifactName)",
+                           "ArtifactType": "Container",
+                           "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)",
+                           "Parallel": "false",
+                           "ParallelCount": "8"
+                        }
+                     }
+                  ],
+                  "name": "Agent job 1",
+                  "refName": "Job_1",
+                  "condition": "succeeded()",
+                  "target": {
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               }
+            ],
+            "type": 1
+         },
+         "repository": {
+            "properties": {
+               "cleanOptions": "0",
+               "labelSources": "0",
+               "labelSourcesFormat": "$(build.buildNumber)",
+               "reportBuildStatus": "true",
+               "gitLfsSupport": "false",
+               "skipSyncSource": "false",
+               "checkoutNestedSubmodules": "false",
+               "fetchDepth": "0"
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "Bakeoff",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/Bakeoff",
+            "defaultBranch": "refs/heads/master",
+            "clean": "false",
+            "checkoutSubmodules": false
+         },
+         "processParameters": {
+            "inputs": [
+               {
+                  "aliases": [],
+                  "options": {},
+                  "properties": {},
+                  "name": "solution",
+                  "label": "Path to solution or packages.config",
+                  "defaultValue": "**\\*.sln",
+                  "required": true,
+                  "type": "filePath",
+                  "helpMarkDown": "The path to the Visual Studio solution file or NuGet packages.config",
+                  "visibleRule": "",
+                  "groupName": ""
+               },
+               {
+                  "aliases": [],
+                  "options": {},
+                  "properties": {},
+                  "name": "ArtifactName",
+                  "label": "Artifact Name",
+                  "defaultValue": "drop",
+                  "required": true,
+                  "type": "string",
+                  "helpMarkDown": "The name of the artifact to create.",
+                  "visibleRule": "",
+                  "groupName": ""
+               }
+            ]
+         },
+         "quality": "definition",
+         "authoredBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "drafts": [],
+         "queue": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/build/Queues/81"
+               }
+            },
+            "id": 81,
+            "name": "Default",
+            "url": "https://dev.azure.com/Test/_apis/build/Queues/81",
+            "pool": {
+               "id": 1,
+               "name": "Default"
+            }
+         },
+         "id": 39,
+         "name": "PeopleTracker-ASP.NET-CI",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/39?revision=1",
+         "uri": "vstfs:///Build/Definition/39",
+         "path": "\\",
+         "type": "build",
+         "queueStatus": "enabled",
+         "revision": 1,
+         "createdDate": "2019-08-11T21:50:42.353Z",
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         }
+      },
+      {
+         "options": [
+            {
+               "enabled": true,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "branchFilters": "[\"+refs/heads/*\"]",
+                  "additionalFields": "{}"
+               }
+            },
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "workItemType": "Bug",
+                  "assignToRequestor": "true",
+                  "additionalFields": "{}"
+               }
+            }
+         ],
+         "variables": {
+            "administratorLoginPassword": {
+               "value": null,
+               "isSecret": true
+            },
+            "BuildConfiguration": {
+               "value": "Release",
+               "allowOverride": true
+            },
+            "BuildPlatform": {
+               "value": "any cpu",
+               "allowOverride": true
+            },
+            "system.debug": {
+               "value": "false",
+               "allowOverride": true
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/40?revision=5"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/definition?definitionId=40"
+            },
+            "editor": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/designer?id=40&_a=edit-build-definition"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/40"
+            }
+         },
+         "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+         "jobAuthorizationScope": "projectCollection",
+         "jobTimeoutInMinutes": 60,
+         "jobCancelTimeoutInMinutes": 5,
+         "process": {
+            "phases": [
+               {
+                  "steps": [
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Azure Deployment:Create Or Update Resource Group action on berblog",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "ConnectedServiceName": "00000000-0000-0000-0000-000000000000",
+                           "action": "Create Or Update Resource Group",
+                           "resourceGroupName": "berblog",
+                           "location": "East US 2",
+                           "templateLocation": "Linked artifact",
+                           "csmFileLink": "",
+                           "csmParametersFileLink": "",
+                           "csmFile": "src/BerService.IaC/WebSiteSQLDatabase.json",
+                           "csmParametersFile": "src/BerService.IaC/WebSiteSQLDatabase.parameters.json",
+                           "overrideParameters": "-hostingPlanName berblog -skuName F1 -skuCapacity 1 -administratorLogin berblog -administratorLoginPassword $(administratorLoginPassword) -databaseName berblog -collation \"SQL_Latin1_General_CP1_CI_AS\" -edition \"Basic\" -maxSizeBytes \"1073741824\" -requestedServiceObjectiveName \"Basic\"",
+                           "deploymentMode": "Incremental",
+                           "enableDeploymentPrerequisites": "None",
+                           "deploymentGroupEndpoint": "",
+                           "project": "",
+                           "deploymentGroupName": "",
+                           "copyAzureVMTags": "true",
+                           "runAgentServiceAsUser": "false",
+                           "userName": "",
+                           "password": "",
+                           "outputVariable": "",
+                           "deploymentName": "",
+                           "deploymentOutputs": "",
+                           "addSpnToEnvironment": "false"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Test",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "test",
+                           "publishWebProjects": "true",
+                           "projects": "$(Parameters.TestProjects)",
+                           "custom": "",
+                           "arguments": "--configuration $(BuildConfiguration)",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "true",
+                           "modifyOutputPath": "true",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Publish",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "2.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "command": "publish",
+                           "publishWebProjects": "True",
+                           "projects": "$(Parameters.RestoreBuildProjects)",
+                           "custom": "",
+                           "arguments": "--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)",
+                           "publishTestResults": "true",
+                           "testRunTitle": "",
+                           "zipAfterPublish": "True",
+                           "modifyOutputPath": "true",
+                           "selectOrConfig": "select",
+                           "feedRestore": "",
+                           "includeNuGetOrg": "true",
+                           "nugetConfigPath": "",
+                           "externalEndpoints": "",
+                           "noCache": "false",
+                           "packagesDirectory": "",
+                           "verbosityRestore": "Detailed",
+                           "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                           "nuGetFeedType": "internal",
+                           "feedPublish": "",
+                           "publishPackageMetadata": "true",
+                           "externalEndpoint": "",
+                           "searchPatternPack": "**/*.csproj",
+                           "configurationToPack": "$(BuildConfiguration)",
+                           "outputDir": "$(Build.ArtifactStagingDirectory)",
+                           "nobuild": "false",
+                           "includesymbols": "false",
+                           "includesource": "false",
+                           "versioningScheme": "off",
+                           "versionEnvVar": "",
+                           "requestedMajorVersion": "1",
+                           "requestedMinorVersion": "0",
+                           "requestedPatchVersion": "0",
+                           "buildProperties": "",
+                           "verbosityPack": "Detailed",
+                           "workingDirectory": ""
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": false,
+                        "displayName": "Azure Web App Deploy: webSite3e3dz42ajqbea",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeeded()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "azureSubscription": "00000000-0000-0000-0000-000000000000",
+                           "appType": "webApp",
+                           "appName": "webSite3e3dz42ajqbea",
+                           "deployToSlotOrASE": "false",
+                           "resourceGroupName": "",
+                           "slotName": "production",
+                           "package": "$(build.artifactstagingdirectory)/*.zip",
+                           "runtimeStack": "",
+                           "startUpCommand": "",
+                           "customWebConfig": "",
+                           "appSettings": "-Tokens__Key SECRET_THAT_SHOULD_BE_SET_IN_ENVIORNMENT_VAR -Tokens__Issuer http://ber.YOURDOMAIN.com -Tokens__Audience http://ber.YOURDOMAIN.com -Tokens__Web string -Tokens__Mobile string",
+                           "configurationStrings": "",
+                           "deploymentMethod": "auto"
+                        }
+                     },
+                     {
+                        "environment": {},
+                        "enabled": true,
+                        "continueOnError": false,
+                        "alwaysRun": true,
+                        "displayName": "Publish Artifact",
+                        "timeoutInMinutes": 0,
+                        "condition": "succeededOrFailed()",
+                        "task": {
+                           "id": "00000000-0000-0000-0000-000000000000",
+                           "versionSpec": "1.*",
+                           "definitionType": "task"
+                        },
+                        "inputs": {
+                           "PathtoPublish": "$(build.artifactstagingdirectory)",
+                           "ArtifactName": "drop",
+                           "ArtifactType": "Container",
+                           "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)",
+                           "Parallel": "false",
+                           "ParallelCount": "8"
+                        }
+                     }
+                  ],
+                  "name": "Agent job 1",
+                  "refName": "Job_1",
+                  "condition": "succeeded()",
+                  "target": {
+                     "executionOptions": {
+                        "type": 0
+                     },
+                     "allowScriptsAuthAccessOption": false,
+                     "type": 1
+                  },
+                  "jobAuthorizationScope": "projectCollection"
+               }
+            ],
+            "target": {
+               "agentSpecification": {
+                  "identifier": "ubuntu-16.04"
+               }
+            },
+            "type": 1
+         },
+         "repository": {
+            "properties": {
+               "cleanOptions": "0",
+               "labelSources": "0",
+               "labelSourcesFormat": "$(build.buildNumber)",
+               "reportBuildStatus": "true",
+               "gitLfsSupport": "false",
+               "skipSyncSource": "false",
+               "checkoutNestedSubmodules": "false",
+               "fetchDepth": "0"
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "ber",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/ber",
+            "defaultBranch": "refs/heads/master",
+            "clean": "false",
+            "checkoutSubmodules": false
+         },
+         "processParameters": {
+            "inputs": [
+               {
+                  "aliases": [],
+                  "options": {},
+                  "properties": {},
+                  "name": "RestoreBuildProjects",
+                  "label": "Project(s) to restore and build",
+                  "defaultValue": "src/BerService/BerService.csproj",
+                  "type": "multiline",
+                  "helpMarkDown": "Relative path of the .csproj file(s) from repo root. Wildcards can be used. For example, **/*.csproj for all .csproj files in all the subfolders.",
+                  "visibleRule": "",
+                  "groupName": ""
+               },
+               {
+                  "aliases": [],
+                  "options": {},
+                  "properties": {},
+                  "name": "TestProjects",
+                  "label": "Project(s) to test",
+                  "defaultValue": "src/BerService.Tests/BerService.Tests.csproj",
+                  "type": "multiline",
+                  "helpMarkDown": "Relative path of the .csproj file(s) from repo root. Wildcards can be used. For example, **/*.csproj for all .csproj files in all the subfolders.",
+                  "visibleRule": "",
+                  "groupName": ""
+               }
+            ]
+         },
+         "quality": "definition",
+         "authoredBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "drafts": [],
+         "queue": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/build/Queues/98"
+               }
+            },
+            "id": 98,
+            "name": "Azure Pipelines",
+            "url": "https://dev.azure.com/Test/_apis/build/Queues/98",
+            "pool": {
+               "id": 14,
+               "name": "Azure Pipelines",
+               "isHosted": true
+            }
+         },
+         "id": 40,
+         "name": "PeopleTracker-ASP.NET Core-CI",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/40?revision=5",
+         "uri": "vstfs:///Build/Definition/40",
+         "path": "\\",
+         "type": "build",
+         "queueStatus": "enabled",
+         "revision": 5,
+         "createdDate": "2019-08-24T14:52:48.403Z",
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         }
+      },
+      {
+         "options": [
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "branchFilters": "[\"+refs/heads/*\"]",
+                  "additionalFields": "{}"
+               }
+            },
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {
+                  "workItemType": "Bug",
+                  "assignToRequestor": "true",
+                  "additionalFields": "{}"
+               }
+            },
+            {
+               "enabled": false,
+               "definition": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+               },
+               "inputs": {}
+            }
+         ],
+         "variables": {
+            "administratorLoginPassword": {
+               "value": null,
+               "isSecret": true
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/43?revision=4"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/definition?definitionId=43"
+            },
+            "editor": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/designer?id=43&_a=edit-build-definition"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/43"
+            }
+         },
+         "jobAuthorizationScope": "projectCollection",
+         "jobTimeoutInMinutes": 60,
+         "jobCancelTimeoutInMinutes": 5,
+         "process": {
+            "yamlFilename": "/azure-pipelines.yml",
+            "type": 2
+         },
+         "repository": {
+            "properties": {
+               "cloneUrl": "https://Test@dev.azure.com/Test/PeopleTracker/_git/ber",
+               "fullName": "ber",
+               "defaultBranch": "refs/heads/master",
+               "isFork": "False",
+               "safeRepository": "00000000-0000-0000-0000-000000000000",
+               "reportBuildStatus": "true",
+               "cleanOptions": "0",
+               "fetchDepth": "0",
+               "gitLfsSupport": "false",
+               "skipSyncSource": "false",
+               "checkoutNestedSubmodules": "false",
+               "labelSources": "0",
+               "labelSourcesFormat": "$(build.buildNumber)"
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "ber",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/ber",
+            "defaultBranch": "refs/heads/master",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "quality": "definition",
+         "authoredBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "drafts": [],
+         "queue": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/build/Queues/86"
+               }
+            },
+            "id": 86,
+            "name": "Hosted Ubuntu 1604",
+            "url": "https://dev.azure.com/Test/_apis/build/Queues/86",
+            "pool": {
+               "id": 7,
+               "name": "Hosted Ubuntu 1604",
+               "isHosted": true
+            }
+         },
+         "id": 43,
+         "name": "ber website",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/43?revision=4",
+         "uri": "vstfs:///Build/Definition/43",
+         "path": "\\",
+         "type": "build",
+         "queueStatus": "enabled",
+         "revision": 4,
+         "createdDate": "2019-08-31T20:51:20.63Z",
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         }
+      },
+      {
+         "triggers": [
+            {
+               "branchFilters": [],
+               "pathFilters": [],
+               "settingsSourceType": 2,
+               "batchChanges": false,
+               "maxConcurrentBuildsPerBranch": 1,
+               "triggerType": "continuousIntegration"
+            }
+         ],
+         "properties": {},
+         "tags": [],
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/44?revision=2"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/definition?definitionId=44"
+            },
+            "editor": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/designer?id=44&_a=edit-build-definition"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/44"
+            }
+         },
+         "jobAuthorizationScope": "projectCollection",
+         "jobTimeoutInMinutes": 60,
+         "jobCancelTimeoutInMinutes": 5,
+         "process": {
+            "yamlFilename": "/azure-pipelines-function.yml",
+            "type": 2
+         },
+         "repository": {
+            "properties": {
+               "cloneUrl": "https://Test@dev.azure.com/Test/PeopleTracker/_git/ber",
+               "fullName": "ber",
+               "defaultBranch": "refs/heads/master",
+               "isFork": "False",
+               "safeRepository": "00000000-0000-0000-0000-000000000000",
+               "reportBuildStatus": "true"
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "ber",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/ber",
+            "defaultBranch": "refs/heads/master",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "quality": "definition",
+         "authoredBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "drafts": [],
+         "queue": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/build/Queues/86"
+               }
+            },
+            "id": 86,
+            "name": "Hosted Ubuntu 1604",
+            "url": "https://dev.azure.com/Test/_apis/build/Queues/86",
+            "pool": {
+               "id": 7,
+               "name": "Hosted Ubuntu 1604",
+               "isHosted": true
+            }
+         },
+         "id": 44,
+         "name": "ber function",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/44?revision=2",
+         "uri": "vstfs:///Build/Definition/44",
+         "path": "\\",
+         "type": "build",
+         "queueStatus": "enabled",
+         "revision": 2,
+         "createdDate": "2019-08-31T20:26:59.413Z",
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         }
+      },
+      {
+         "triggers": [
+            {
+               "branchFilters": [],
+               "pathFilters": [],
+               "settingsSourceType": 2,
+               "batchChanges": false,
+               "maxConcurrentBuildsPerBranch": 1,
+               "triggerType": "continuousIntegration"
+            }
+         ],
+         "variables": {
+            "EMAIL": {
+               "value": "dlbm3@hotmail.com"
+            },
+            "PKG_PAT": {
+               "value": null,
+               "isSecret": true
+            },
+            "REPO_URL": {
+               "value": "https://pkgs.dev.azure.com/Test/_packaging/ber/nuget/v2"
+            }
+         },
+         "properties": {},
+         "tags": [],
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/45?revision=5"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/definition?definitionId=45"
+            },
+            "editor": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/designer?id=45&_a=edit-build-definition"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/45"
+            }
+         },
+         "comment": "Update variables",
+         "jobAuthorizationScope": "projectCollection",
+         "jobTimeoutInMinutes": 60,
+         "jobCancelTimeoutInMinutes": 5,
+         "process": {
+            "yamlFilename": "/src/BerService.Pwsh/azure-pipelines.yml",
+            "type": 2
+         },
+         "repository": {
+            "properties": {
+               "cloneUrl": "https://Test@dev.azure.com/Test/PeopleTracker/_git/ber",
+               "fullName": "ber",
+               "defaultBranch": "refs/heads/master",
+               "isFork": "False",
+               "safeRepository": "00000000-0000-0000-0000-000000000000",
+               "reportBuildStatus": "true"
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "ber",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/ber",
+            "defaultBranch": "refs/heads/master",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "quality": "definition",
+         "authoredBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "drafts": [],
+         "queue": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/build/Queues/86"
+               }
+            },
+            "id": 86,
+            "name": "Hosted Ubuntu 1604",
+            "url": "https://dev.azure.com/Test/_apis/build/Queues/86",
+            "pool": {
+               "id": 7,
+               "name": "Hosted Ubuntu 1604",
+               "isHosted": true
+            }
+         },
+         "id": 45,
+         "name": "PowerShell",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/45?revision=5",
+         "uri": "vstfs:///Build/Definition/45",
+         "path": "\\",
+         "type": "build",
+         "queueStatus": "enabled",
+         "revision": 5,
+         "createdDate": "2019-09-15T22:45:32.647Z",
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         }
+      },
+      {
+         "triggers": [
+            {
+               "branchFilters": [],
+               "pathFilters": [],
+               "settingsSourceType": 2,
+               "batchChanges": false,
+               "maxConcurrentBuildsPerBranch": 1,
+               "triggerType": "continuousIntegration"
+            }
+         ],
+         "variables": {
+            "system.debug": {
+               "value": "false",
+               "allowOverride": true
+            }
+         },
+         "properties": {},
+         "tags": [
+            "Testing",
+            "VSTeamSample"
+         ],
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/46?revision=1"
+            },
+            "web": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/definition?definitionId=46"
+            },
+            "editor": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_build/designer?id=46&_a=edit-build-definition"
+            },
+            "badge": {
+               "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/status/46"
+            }
+         },
+         "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+         "jobAuthorizationScope": "projectCollection",
+         "process": {
+            "yamlFilename": "/azure-pipelines.yml",
+            "type": 2
+         },
+         "repository": {
+            "properties": {
+               "reportBuildStatus": "true"
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "type": "TfsGit",
+            "name": "Vars",
+            "url": "https://dev.azure.com/Test/PeopleTracker/_git/Vars",
+            "defaultBranch": "refs/heads/master",
+            "clean": null,
+            "checkoutSubmodules": false
+         },
+         "quality": "definition",
+         "authoredBy": {
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "Test@Test.com",
+            "imageUrl": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted",
+            "descriptor": "aad.redacted"
+         },
+         "drafts": [],
+         "queue": {
+            "_links": {
+               "self": {
+                  "href": "https://dev.azure.com/Test/_apis/build/Queues/86"
+               }
+            },
+            "id": 86,
+            "name": "Hosted Ubuntu 1604",
+            "url": "https://dev.azure.com/Test/_apis/build/Queues/86",
+            "pool": {
+               "id": 7,
+               "name": "Hosted Ubuntu 1604",
+               "isHosted": true
+            }
+         },
+         "id": 46,
+         "name": "Vars CI",
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/build/Definitions/46?revision=1",
+         "uri": "vstfs:///Build/Definition/46",
+         "path": "\\Vars",
+         "type": "build",
+         "queueStatus": "enabled",
+         "revision": 1,
+         "createdDate": "2019-09-25T20:55:54.983Z",
+         "project": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+            "state": "wellFormed",
+            "revision": 150,
+            "visibility": "private",
+            "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+         }
+      }
+   ]
+}

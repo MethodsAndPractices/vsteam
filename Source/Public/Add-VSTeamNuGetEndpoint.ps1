@@ -1,37 +1,46 @@
+# Create a service endpoint.
+#
+# Get-VSTeamOption 'distributedtask' 'serviceendpoints'
+# id              : dca61d2f-3444-410a-b5ec-db2fc4efb4c5
+# area            : distributedtask
+# resourceName    : serviceendpoints
+# routeTemplate   : {project}/_apis/{area}/{resource}/{endpointId}
+# https://bit.ly/Add-VSTeamServiceEndpoint
+
 function Add-VSTeamNuGetEndpoint {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "")]
    [CmdletBinding(DefaultParameterSetName = 'SecureApiKey')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $EndpointName,
-      
+
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [string] $NuGetUrl,
-      
+
       [Parameter(ParameterSetName = 'ClearToken', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [string] $PersonalAccessToken,
-      
+
       [Parameter(ParameterSetName = 'ClearApiKey', Mandatory = $true, HelpMessage = 'ApiKey')]
       [string] $ApiKey,
-      
+
       [Parameter(ParameterSetName = 'SecurePassword', Mandatory = $true, HelpMessage = 'Username')]
       [string] $Username,
-      
+
       [Parameter(ParameterSetName = 'SecureToken', Mandatory = $true, HelpMessage = 'Personal Access Token')]
       [securestring] $SecurePersonalAccessToken,
-      
+
       [Parameter(ParameterSetName = 'SecureApiKey', Mandatory = $true, HelpMessage = 'ApiKey')]
       [securestring] $SecureApiKey,
-      
+
       [Parameter(ParameterSetName = 'SecurePassword', Mandatory = $true, HelpMessage = 'Password')]
       [securestring] $SecurePassword,
-        
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       if ($PersonalAccessToken) {
          $Authentication = 'Token'
@@ -88,10 +97,9 @@ function Add-VSTeamNuGetEndpoint {
          }
       }
 
-      return Add-VSTeamServiceEndpoint `
-         -ProjectName $ProjectName `
+      return Add-VSTeamServiceEndpoint -ProjectName $ProjectName `
          -endpointName $endpointName `
-         -endpointType 'externalnugetfeed' `
+         -endpointType externalnugetfeed `
          -object $obj
    }
 }

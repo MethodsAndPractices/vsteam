@@ -1,0 +1,288 @@
+{
+  "members": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "user": {
+        "subjectKind": "user",
+        "metaType": "member",
+        "domain": "00000000-0000-0000-0000-000000000000",
+        "principalName": "mlastName@test.com",
+        "mailAddress": "mlastName@test.com",
+        "origin": "aad",
+        "originId": "00000000-0000-0000-0000-000000000000",
+        "displayName": "Math lastName",
+        "_links": {
+          "self": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted"
+          },
+          "memberships": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Memberships/aad.redacted"
+          },
+          "membershipState": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/MembershipStates/aad.redacted"
+          },
+          "storageKey": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/StorageKeys/aad.redacted"
+          },
+          "avatar": {
+            "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "url": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted",
+        "descriptor": "aad.redacted"
+      },
+      "accessLevel": {
+        "licensingSource": "account",
+        "accountLicenseType": "earlyAdopter",
+        "msdnLicenseType": "none",
+        "licenseDisplayName": "Early Adopter",
+        "status": "active",
+        "statusMessage": "",
+        "assignmentSource": "unknown"
+      },
+      "lastAccessedDate": "2020-09-09T06:43:29.0769722Z",
+      "dateCreated": "2020-02-25T05:27:12.1277176Z",
+      "projectEntitlements": [],
+      "extensions": [],
+      "groupAssignments": []
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "user": {
+        "subjectKind": "user",
+        "metaType": "guest",
+        "directoryAlias": "dlbm3_test.com#EXT#",
+        "domain": "00000000-0000-0000-0000-000000000000",
+        "principalName": "dlbm3@test.com",
+        "mailAddress": "dlbm3@test.com",
+        "origin": "aad",
+        "originId": "00000000-0000-0000-0000-000000000000",
+        "displayName": "Donovan Brown",
+        "_links": {
+          "self": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted"
+          },
+          "memberships": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Memberships/aad.redacted"
+          },
+          "membershipState": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/MembershipStates/aad.redacted"
+          },
+          "storageKey": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/StorageKeys/aad.redacted"
+          },
+          "avatar": {
+            "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "url": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted",
+        "descriptor": "aad.redacted"
+      },
+      "accessLevel": {
+        "licensingSource": "account",
+        "accountLicenseType": "earlyAdopter",
+        "msdnLicenseType": "none",
+        "licenseDisplayName": "Early Adopter",
+        "status": "pending",
+        "statusMessage": "",
+        "assignmentSource": "unknown"
+      },
+      "lastAccessedDate": "0001-01-01T00:00:00Z",
+      "dateCreated": "2020-09-07T18:29:19.290717Z",
+      "projectEntitlements": [],
+      "extensions": [],
+      "groupAssignments": []
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "user": {
+        "subjectKind": "user",
+        "metaType": "member",
+        "directoryAlias": "test",
+        "domain": "00000000-0000-0000-0000-000000000000",
+        "principalName": "test@test.com",
+        "mailAddress": "test@test.com",
+        "origin": "aad",
+        "originId": "00000000-0000-0000-0000-000000000000",
+        "displayName": "Donovan Brown",
+        "_links": {
+          "self": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted"
+          },
+          "memberships": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Memberships/aad.redacted"
+          },
+          "membershipState": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/MembershipStates/aad.redacted"
+          },
+          "storageKey": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/StorageKeys/aad.redacted"
+          },
+          "avatar": {
+            "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "url": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted",
+        "descriptor": "aad.redacted"
+      },
+      "accessLevel": {
+        "licensingSource": "account",
+        "accountLicenseType": "earlyAdopter",
+        "msdnLicenseType": "none",
+        "licenseDisplayName": "Early Adopter",
+        "status": "active",
+        "statusMessage": "",
+        "assignmentSource": "unknown"
+      },
+      "lastAccessedDate": "2020-09-09T15:38:08.1632123Z",
+      "dateCreated": "2017-12-24T16:41:16.743Z",
+      "projectEntitlements": [],
+      "extensions": [],
+      "groupAssignments": []
+    }
+  ],
+  "continuationToken": null,
+  "totalCount": 0,
+  "items": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "user": {
+        "subjectKind": "user",
+        "metaType": "member",
+        "domain": "00000000-0000-0000-0000-000000000000",
+        "principalName": "mlastName@test.com",
+        "mailAddress": "mlastName@test.com",
+        "origin": "aad",
+        "originId": "00000000-0000-0000-0000-000000000000",
+        "displayName": "Math lastName",
+        "_links": {
+          "self": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted"
+          },
+          "memberships": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Memberships/aad.redacted"
+          },
+          "membershipState": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/MembershipStates/aad.redacted"
+          },
+          "storageKey": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/StorageKeys/aad.redacted"
+          },
+          "avatar": {
+            "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "url": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted",
+        "descriptor": "aad.redacted"
+      },
+      "accessLevel": {
+        "licensingSource": "account",
+        "accountLicenseType": "earlyAdopter",
+        "msdnLicenseType": "none",
+        "licenseDisplayName": "Early Adopter",
+        "status": "active",
+        "statusMessage": "",
+        "assignmentSource": "unknown"
+      },
+      "lastAccessedDate": "2020-09-09T06:43:29.0769722Z",
+      "dateCreated": "2020-02-25T05:27:12.1277176Z",
+      "projectEntitlements": [],
+      "extensions": [],
+      "groupAssignments": []
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "user": {
+        "subjectKind": "user",
+        "metaType": "guest",
+        "directoryAlias": "dlbm3_test.com#EXT#",
+        "domain": "00000000-0000-0000-0000-000000000000",
+        "principalName": "dlbm3@test.com",
+        "mailAddress": "dlbm3@test.com",
+        "origin": "aad",
+        "originId": "00000000-0000-0000-0000-000000000000",
+        "displayName": "Donovan Brown",
+        "_links": {
+          "self": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted"
+          },
+          "memberships": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Memberships/aad.redacted"
+          },
+          "membershipState": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/MembershipStates/aad.redacted"
+          },
+          "storageKey": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/StorageKeys/aad.redacted"
+          },
+          "avatar": {
+            "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "url": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted",
+        "descriptor": "aad.redacted"
+      },
+      "accessLevel": {
+        "licensingSource": "account",
+        "accountLicenseType": "earlyAdopter",
+        "msdnLicenseType": "none",
+        "licenseDisplayName": "Early Adopter",
+        "status": "pending",
+        "statusMessage": "",
+        "assignmentSource": "unknown"
+      },
+      "lastAccessedDate": "0001-01-01T00:00:00Z",
+      "dateCreated": "2020-09-07T18:29:19.290717Z",
+      "projectEntitlements": [],
+      "extensions": [],
+      "groupAssignments": []
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "user": {
+        "subjectKind": "user",
+        "metaType": "member",
+        "directoryAlias": "test",
+        "domain": "00000000-0000-0000-0000-000000000000",
+        "principalName": "test@test.com",
+        "mailAddress": "test@test.com",
+        "origin": "aad",
+        "originId": "00000000-0000-0000-0000-000000000000",
+        "displayName": "Donovan Brown",
+        "_links": {
+          "self": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted"
+          },
+          "memberships": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Memberships/aad.redacted"
+          },
+          "membershipState": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/MembershipStates/aad.redacted"
+          },
+          "storageKey": {
+            "href": "https://vssps.dev.azure.com/toolTester/_apis/Graph/StorageKeys/aad.redacted"
+          },
+          "avatar": {
+            "href": "https://dev.azure.com/toolTester/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "url": "https://vssps.dev.azure.com/toolTester/_apis/Graph/Users/aad.redacted",
+        "descriptor": "aad.redacted"
+      },
+      "accessLevel": {
+        "licensingSource": "account",
+        "accountLicenseType": "earlyAdopter",
+        "msdnLicenseType": "none",
+        "licenseDisplayName": "Early Adopter",
+        "status": "active",
+        "statusMessage": "",
+        "assignmentSource": "unknown"
+      },
+      "lastAccessedDate": "2020-09-09T15:38:08.1632123Z",
+      "dateCreated": "2017-12-24T16:41:16.743Z",
+      "projectEntitlements": [],
+      "extensions": [],
+      "groupAssignments": []
+    }
+  ]
+}

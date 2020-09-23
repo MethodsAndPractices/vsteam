@@ -14,19 +14,17 @@ Remove-VSTeamPolicy removes the policy from the specified project.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Remove-VSTeamPolicy -ProjectName Demo -Id 1
+```powershell
+Remove-VSTeamPolicy -ProjectName Demo -Id 1
 ```
 
 This command removes the policy with ID of 1 from the Demo project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Id
+### Id
 
 Specifies one or more policies by ID.
 
@@ -38,7 +36,9 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -46,7 +46,11 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamPolicy](Add-VSTeamPolicy.md)
 

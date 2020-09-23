@@ -10,21 +10,29 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Add-VSTeamArea -ProjectName Demo -Name "NewArea" -Path "MyArea/Path"
+```powershell
+Add-VSTeamArea -ProjectName Demo -Name "NewArea" -Path "MyArea/Path"
 ```
 
 This command adds a new area named NewArea to the Demo project under the area path MyArea/Path.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Add-VSTeamArea -ProjectName Demo -Name "NewArea"
+```powershell
+Add-VSTeamArea -ProjectName Demo -Name "NewArea"
 ```
 
 This command adds a new area named NewArea to the Demo project.
+
+### Example 3
+
+```powershell
+Add-VSTeamArea "NewArea"
+```
+
+This command adds a new area named NewArea to the default project.
 
 ## DESCRIPTION
 
@@ -32,23 +40,24 @@ This command adds a new area named NewArea to the Demo project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Name
+### Name
 
 Name of the new area.
 
 ```yaml
 Type: string
+Position: 0
 ```
 
-### -Path
+### Path
 
 Path of the existing area under where the new one will be created.
 
 ```yaml
 Type: string
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -60,7 +69,11 @@ Type: string
 
 This function is a wrapper of the base function Add-VSTeamClassificationNode.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamClassificationNode](Add-VSTeamClassificationNode.md)
 

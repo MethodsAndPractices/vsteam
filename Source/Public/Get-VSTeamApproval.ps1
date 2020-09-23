@@ -1,24 +1,24 @@
 function Get-VSTeamApproval {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamApproval')]
    param(
       [ValidateSet('Approved', 'ReAssigned', 'Rejected', 'Canceled', 'Pending', 'Rejected', 'Skipped', 'Undefined')]
       [string] $StatusFilter,
 
-      [Alias('ReleaseIdFilter')]
-      [int[]] $ReleaseIdsFilter,
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [int[]] $ReleaseId,
 
       [string] $AssignedToFilter,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    process {
       try {
          # Build query string and determine if the includeMyGroupApprovals should be added.
-         $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseIdsFilter -join ',') }
+         $queryString = @{statusFilter = $StatusFilter; assignedtoFilter = $AssignedToFilter; releaseIdsFilter = ($ReleaseId -join ',') }
 
          # The support in TFS and VSTS are not the same.
          $instance = $(_getInstance)
@@ -31,14 +31,18 @@ function Get-VSTeamApproval {
             # For TFS all three parameters must be set before you can add
             # includeMyGroupApprovals.
             if ([string]::IsNullOrEmpty($AssignedToFilter) -eq $false -and
-               [string]::IsNullOrEmpty($ReleaseIdsFilter) -eq $false -and
+               [string]::IsNullOrEmpty($ReleaseId) -eq $false -and
                $StatusFilter -eq 'Pending') {
                $queryString.includeMyGroupApprovals = 'true';
             }
          }
 
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area release -Resource approvals -SubDomain vsrm -Version $(_getApiVersion Release) -QueryString $queryString
+         $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName `
+            -Area release `
+            -Resource approvals `
+            -QueryString $queryString `
+            -Version $(_getApiVersion Release)
 
          # Apply a Type Name so we can use custom format view and custom type extensions
          foreach ($item in $resp.value) {

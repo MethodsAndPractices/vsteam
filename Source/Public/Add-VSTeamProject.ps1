@@ -1,4 +1,13 @@
+# Adds a Team Project to your account.
+#
+# id              : 603fe2ac-9723-48b9-88ad-09305aa6c6e1
+# area            : core
+# resourceName    : projects
+# routeTemplate   : _apis/{resource}/{*projectId}
+# http://bit.ly/Add-VSTeamProject
+
 function Add-VSTeamProject {
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamProject')]
    param(
       [parameter(Mandatory = $true)]
       [Alias('Name')]
@@ -8,11 +17,11 @@ function Add-VSTeamProject {
 
       [switch] $TFVC,
 
-      [ProcessValidateAttribute()]
-      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [vsteam_lib.ProcessTemplateValidateAttribute()]
+      [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
       [string] $ProcessTemplate
    )
-   
+
    process {
       if ($TFVC.IsPresent) {
          $srcCtrl = "Tfvc"
@@ -31,17 +40,31 @@ function Add-VSTeamProject {
          $templateTypeId = '6b724908-ef14-45cf-84f8-768b5384da45'
       }
 
-      $body = '{"name": "' + $ProjectName + '", "description": "' + $Description + '", "capabilities": {"versioncontrol": { "sourceControlType": "' + $srcCtrl + '"}, "processTemplate":{"templateTypeId": "' + $templateTypeId + '"}}}'
+      $body = @{
+         name         = $ProjectName
+         description  = $Description
+         capabilities = @{
+            versioncontrol  = @{
+               sourceControlType = $srcCtrl
+            }
+            processTemplate = @{
+               templateTypeId = $templateTypeId
+            }
+         }
+      }
 
       try {
          # Call the REST API
-         $resp = _callAPI -Area 'projects' `
-            -Method Post -ContentType 'application/json' -body $body -Version $(_getApiVersion Core)
+         $resp = _callAPI -Method POST `
+            -Resource "projects" `
+            -Body ($body | ConvertTo-Json -Compress -Depth 100) `
+            -Version $(_getApiVersion Core)
 
          _trackProjectProgress -resp $resp -title 'Creating team project' -msg "Name: $($ProjectName), Template: $($processTemplate), Src: $($srcCtrl)"
 
          # Invalidate any cache of projects.
-         [VSTeamProjectCache]::Invalidate()
+         [vsteam_lib.ProjectCache]::Invalidate()
+         Start-Sleep -Seconds 5
 
          return Get-VSTeamProject $ProjectName
       }

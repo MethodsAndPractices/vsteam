@@ -16,31 +16,29 @@ You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Update-VSTeamReleaseDefinition -ProjectName Demo -Id 123 -InFile release.json
+```powershell
+Update-VSTeamReleaseDefinition -ProjectName Demo -Id 123 -InFile release.json
 ```
 
 This command reads release.json and updates existing release definition with
 id 123 from it on the demo team project.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> $b = Get-VSTeamReleaseDefinition -ProjectName Demo -Id 23 -Raw
-PS C:\> $b.variables.subscriptionId.value = 'Some New Value'
-PS C:\> $body = $b | ConvertTo-Json -Depth 100
-PS C:\> Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $body
+```powershell
+$b = Get-VSTeamReleaseDefinition -ProjectName Demo -Id 23 -Raw
+$b.variables.subscriptionId.value = 'Some New Value'
+$body = $b | ConvertTo-Json -Depth 100
+Update-VSTeamReleaseDefinition -ProjectName Demo -ReleaseDefinition $body
 ```
 
 This commands update the variables of the release definition.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -InFile
+### InFile
 
 Path and file name to the JSON file that contains the definition to be updated. If the path is omitted, the default is the current location.
 
@@ -52,23 +50,19 @@ Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -ReleaseDefinition
+### ReleaseDefinition
 
 JSON string of release definition.
 
 ```yaml
 Type: String
-Required: true 
+Required: true
 Parameter Sets: JSON
 Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -78,10 +72,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

@@ -12,7 +12,7 @@
    RootModule           = 'VSTeam.psm1'
 
    # Version number of this module.
-   ModuleVersion        = '6.5.1'
+   ModuleVersion        = '7.0.0'
 
    # Supported PSEditions
    CompatiblePSEditions = @('Core', 'Desktop')
@@ -66,7 +66,7 @@
    FormatsToProcess     = @('.\vsteam.format.ps1xml')
 
    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-   # NestedModules     = @()
+   NestedModules     = @('.\bin\vsteam-lib.dll')
 
    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
    # This wildcard will be replaced during the build process in AzD

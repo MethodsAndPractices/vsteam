@@ -1,5 +1,82 @@
 # Changelog
 
+## 7.0.0
+
+## Breaking changes
+
+All classes are moved to a new C# class library.
+
+You must have [.netCore](dot.net) installed to build the class lib on macOS, Linux and Windows.
+
+All types were changed from 'Team.' to 'vsteam_lib.' this will make it easy when moving types from PowerShell to C#.
+
+VSTeamDescriptor is now vsteam_lib.Descriptor and no longer has a Descriptor property. Use the Id, Name or ToString() property in its place.
+
+ProjectName is now a named parameter for most functions. This freed position 0 for other parameters to make functions easier to use.
+
+User2 is now vsteam_lib.User
+
+Removed CUID from vsteam_lib.User.
+
+Removed RequestedFor from vsteam_lib.Release
+
+Disable-VSTeamAgent now requires -Force.
+
+ReleaseIdsFilter changed to ReleaseId on Get-VSTeamApproval
+
+Changed Ids parameter to Id on the following functions to be consistent with other functions:
+
+- Get-VSTeamArea
+- Get-VSTeamIteration
+- Get-VSTeamGitCommit
+- Get-VSTeamClassificationNode
+
+ReClassifyId and Path are now required on Remove-VSTeamArea.
+
+Get-VSTeamGitCommit removed Id alias on RepositoryId parameter.
+
+Renamed parameters on Get-VSTeamBuildTimeline to make it easier to pipe results of Get-VSTeamBuild into Get-VSTeamBuildTimeline. $Id of type Guid is now $TimelineId. $BuildId of type int[] is now $Id.
+
+Removed Type parameter from Get-VSTeamBuildDefinition.
+
+Removed the Top and Skip parameters from Get-VSTeamProcess.
+
+Get-VSTeamMembership now returns a collection. There is no need to .value with results.
+
+### Core changes
+
+The folder structure of the project was changed to support the new C# class library.
+
+All the tests and sample files are under the Tests folder.
+
+There is a new packages folder that contains required libs to build the C# project that do not live in NuGet.
+
+The Build folder is now the .build folder.
+
+Build-Module script builds the class lib project as well.
+
+The C# solution files is in the root of the project vsteam_lib.sln.
+
+The lib is in the classes folder under source and the tests are under the library folder under Tests.
+
+You can now call Get-VSTeamTfvcBranch with no parameters.
+
+Added -force to Remove-VSTeamAccessControlEntry so you don't have to use -confirm:$false. This make it consistent with the rest of the functions
+
+Get-VSTeamUser and Get-VSTeamGroup can now take Descriptor from pipeline.
+
+All unit tests were reviewed and all now use sample files where possible instead of inline objects.
+
+Added -Force to Stop-VSTeamBuild
+
+### Docs changes
+
+Added HelpUri to all public functions
+
+Deleted the docs folder because all docs are now available [here](https://methodsandpractices.github.io/vsteam-docs/)
+
+Added examples to all the help files.
+
 ## 6.5.1
 
 Fixed bug [337](https://github.com/MethodsAndPractices/vsteam/issues/337)

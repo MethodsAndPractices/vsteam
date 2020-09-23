@@ -1,0 +1,464 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "triggers": [
+        {
+          "branchFilters": [],
+          "pathFilters": [],
+          "settingsSourceType": 2,
+          "batchChanges": false,
+          "maxConcurrentBuildsPerBranch": 1,
+          "triggerType": "continuousIntegration"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_apis/build/Definitions/81?revision=1"
+        },
+        "web": {
+          "href": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_build/definition?definitionId=81"
+        },
+        "editor": {
+          "href": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_build/designer?id=81&_a=edit-build-definition"
+        },
+        "badge": {
+          "href": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_apis/build/status/81"
+        }
+      },
+      "jobAuthorizationScope": "projectCollection",
+      "jobTimeoutInMinutes": 60,
+      "jobCancelTimeoutInMinutes": 5,
+      "repository": {
+        "properties": {
+          "cloneUrl": "http://tfs2019:8080/DefaultCollection/Test/_git/Test",
+          "fullName": "Test",
+          "defaultBranch": "refs/heads/master",
+          "isFork": "False",
+          "safeRepository": "3ffe3712-46ce-49e5-8202-df131c2d52a1",
+          "reportBuildStatus": "true"
+        },
+        "id": "3ffe3712-46ce-49e5-8202-df131c2d52a1",
+        "type": "TfsGit",
+        "name": "Test",
+        "url": "http://tfs2019:8080/DefaultCollection/Test/_git/Test",
+        "defaultBranch": "refs/heads/master",
+        "clean": null,
+        "checkoutSubmodules": false
+      },
+      "quality": "definition",
+      "authoredBy": {
+        "displayName": "Administrator",
+        "url": "http://tfs2019:8080/DefaultCollection/_apis/Identities/85aa0256-232e-4417-8ec6-c761d36925b9",
+        "_links": {
+          "avatar": {
+            "href": "http://tfs2019:8080/DefaultCollection/_apis/GraphProfile/MemberAvatars/win.Uy0xLTUtMjEtMTc5MTA4NDQwNi0xOTM2NDIwMjI2LTI1MzcxNDQxMjUtNTAw"
+          }
+        },
+        "id": "85aa0256-232e-4417-8ec6-c761d36925b9",
+        "uniqueName": "TFS2019\\Administrator",
+        "imageUrl": "http://tfs2019:8080/DefaultCollection/_apis/GraphProfile/MemberAvatars/win.Uy0xLTUtMjEtMTc5MTA4NDQwNi0xOTM2NDIwMjI2LTI1MzcxNDQxMjUtNTAw",
+        "descriptor": "win.Uy0xLTUtMjEtMTc5MTA4NDQwNi0xOTM2NDIwMjI2LTI1MzcxNDQxMjUtNTAw"
+      },
+      "drafts": [],
+      "queue": {
+        "_links": {
+          "self": {
+            "href": "http://tfs2019:8080/DefaultCollection/_apis/build/Queues/41"
+          }
+        },
+        "id": 41,
+        "name": "Default",
+        "url": "http://tfs2019:8080/DefaultCollection/_apis/build/Queues/41",
+        "pool": {
+          "id": 1,
+          "name": "Default"
+        }
+      },
+      "id": 81,
+      "name": "Test",
+      "url": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_apis/build/Definitions/81?revision=1",
+      "uri": "vstfs:///Build/Definition/81",
+      "path": "\\",
+      "type": "build",
+      "queueStatus": "enabled",
+      "revision": 1,
+      "createdDate": "2020-08-23T15:19:29.897Z",
+      "project": {
+        "id": "9e0e3db0-56b3-4b7a-b64e-63f575079e13",
+        "name": "Test",
+        "url": "http://tfs2019:8080/DefaultCollection/_apis/projects/9e0e3db0-56b3-4b7a-b64e-63f575079e13",
+        "state": "wellFormed",
+        "revision": 685,
+        "visibility": "private",
+        "lastUpdateTime": "2020-08-23T15:18:16.563Z"
+      }
+    },
+    {
+      "build": [
+        {
+          "environment": {},
+          "enabled": true,
+          "continueOnError": false,
+          "alwaysRun": false,
+          "displayName": "Use NuGet 4.4.1",
+          "timeoutInMinutes": 0,
+          "task": {
+            "id": "2c65196a-54fd-4a02-9be8-d9d1837b7c5d",
+            "versionSpec": "0.*",
+            "definitionType": "task"
+          },
+          "inputs": {
+            "versionSpec": "4.4.1",
+            "checkLatest": "false"
+          }
+        },
+        {
+          "environment": {},
+          "enabled": true,
+          "continueOnError": false,
+          "alwaysRun": false,
+          "displayName": "NuGet restore",
+          "timeoutInMinutes": 0,
+          "task": {
+            "id": "333b11bd-d341-40d9-afcf-b32d5ce6f23b",
+            "versionSpec": "2.*",
+            "definitionType": "task"
+          },
+          "inputs": {
+            "command": "restore",
+            "solution": "$(Parameters.solution)",
+            "selectOrConfig": "select",
+            "feedRestore": "",
+            "includeNuGetOrg": "true",
+            "nugetConfigPath": "",
+            "externalEndpoints": "",
+            "noCache": "false",
+            "disableParallelProcessing": "false",
+            "packagesDirectory": "",
+            "verbosityRestore": "Detailed",
+            "searchPatternPush": "$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg",
+            "nuGetFeedType": "internal",
+            "feedPublish": "",
+            "publishPackageMetadata": "true",
+            "allowPackageConflicts": "false",
+            "externalEndpoint": "",
+            "verbosityPush": "Detailed",
+            "searchPatternPack": "**/*.csproj",
+            "configurationToPack": "$(BuildConfiguration)",
+            "outputDir": "$(Build.ArtifactStagingDirectory)",
+            "versioningScheme": "off",
+            "includeReferencedProjects": "false",
+            "versionEnvVar": "",
+            "requestedMajorVersion": "1",
+            "requestedMinorVersion": "0",
+            "requestedPatchVersion": "0",
+            "packTimezone": "utc",
+            "includeSymbols": "false",
+            "toolPackage": "false",
+            "buildProperties": "",
+            "basePath": "",
+            "verbosityPack": "Detailed",
+            "arguments": ""
+          }
+        },
+        {
+          "environment": {},
+          "enabled": true,
+          "continueOnError": false,
+          "alwaysRun": false,
+          "displayName": "Build solution",
+          "timeoutInMinutes": 0,
+          "task": {
+            "id": "71a9a2d3-a98a-4caa-96ab-affca411ecda",
+            "versionSpec": "1.*",
+            "definitionType": "task"
+          },
+          "inputs": {
+            "solution": "$(Parameters.solution)",
+            "vsVersion": "latest",
+            "msbuildArgs": "/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation=\"$(build.artifactstagingdirectory)\\WebApp.zip\" /p:DeployIisAppPath=\"Default Web Site\"",
+            "platform": "$(BuildPlatform)",
+            "configuration": "$(BuildConfiguration)",
+            "clean": "false",
+            "maximumCpuCount": "false",
+            "restoreNugetPackages": "false",
+            "msbuildArchitecture": "x86",
+            "logProjectEvents": "true",
+            "createLogFile": "false",
+            "logFileVerbosity": "normal"
+          }
+        },
+        {
+          "environment": {},
+          "enabled": true,
+          "continueOnError": false,
+          "alwaysRun": false,
+          "displayName": "Test Assemblies",
+          "timeoutInMinutes": 0,
+          "task": {
+            "id": "ef087383-ee5e-42c7-9a53-ab56c98420f9",
+            "versionSpec": "2.*",
+            "definitionType": "task"
+          },
+          "inputs": {
+            "testSelector": "testAssemblies",
+            "testAssemblyVer2": "**\\$(BuildConfiguration)\\*test*.dll\n!**\\obj\\**",
+            "testPlan": "",
+            "testSuite": "",
+            "testConfiguration": "",
+            "tcmTestRun": "$(test.RunId)",
+            "searchFolder": "$(System.DefaultWorkingDirectory)",
+            "testFiltercriteria": "",
+            "runOnlyImpactedTests": "False",
+            "runAllTestsAfterXBuilds": "50",
+            "uiTests": "false",
+            "vstestLocationMethod": "version",
+            "vsTestVersion": "latest",
+            "vstestLocation": "",
+            "runSettingsFile": "",
+            "overrideTestrunParameters": "",
+            "pathtoCustomTestAdapters": "",
+            "runInParallel": "False",
+            "runTestsInIsolation": "False",
+            "codeCoverageEnabled": "False",
+            "otherConsoleOptions": "",
+            "distributionBatchType": "basedOnTestCases",
+            "batchingBasedOnAgentsOption": "autoBatchSize",
+            "customBatchSizeValue": "10",
+            "batchingBasedOnExecutionTimeOption": "autoBatchSize",
+            "customRunTimePerBatchValue": "60",
+            "dontDistribute": "False",
+            "testRunTitle": "",
+            "platform": "$(BuildPlatform)",
+            "configuration": "$(BuildConfiguration)",
+            "publishRunAttachments": "true",
+            "diagnosticsEnabled": "false",
+            "collectDumpOn": "onAbortOnly",
+            "rerunFailedTests": "False",
+            "rerunType": "basedOnTestFailurePercentage",
+            "rerunFailedThreshold": "30",
+            "rerunFailedTestCasesMaxLimit": "5",
+            "rerunMaxAttempts": "3"
+          }
+        },
+        {
+          "environment": {},
+          "enabled": true,
+          "continueOnError": true,
+          "alwaysRun": false,
+          "displayName": "Publish symbols path",
+          "timeoutInMinutes": 0,
+          "task": {
+            "id": "0675668a-7bba-4ccb-901d-5ad6554ca653",
+            "versionSpec": "2.*",
+            "definitionType": "task"
+          },
+          "inputs": {
+            "SymbolsFolder": "$(Build.SourcesDirectory)",
+            "SearchPattern": "**\\bin\\**\\*.pdb",
+            "IndexSources": "true",
+            "PublishSymbols": "false",
+            "SymbolServerType": "TeamServices",
+            "SymbolsPath": "",
+            "CompressSymbols": "false",
+            "DetailedLog": "true",
+            "TreatNotIndexedAsWarning": "false",
+            "SymbolsMaximumWaitTime": "",
+            "SymbolsProduct": "",
+            "SymbolsVersion": "",
+            "SymbolsArtifactName": "Symbols_$(BuildConfiguration)"
+          }
+        },
+        {
+          "environment": {},
+          "enabled": true,
+          "continueOnError": false,
+          "alwaysRun": true,
+          "displayName": "Publish Artifact",
+          "timeoutInMinutes": 0,
+          "task": {
+            "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+            "versionSpec": "1.*",
+            "definitionType": "task"
+          },
+          "inputs": {
+            "PathtoPublish": "$(build.artifactstagingdirectory)",
+            "ArtifactName": "$(Parameters.ArtifactName)",
+            "ArtifactType": "Container",
+            "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)",
+            "Parallel": "false",
+            "ParallelCount": "8"
+          }
+        }
+      ],
+      "options": [
+        {
+          "enabled": true,
+          "definition": {
+            "id": "5d58cc01-7c75-450c-be18-a388ddb129ec"
+          },
+          "inputs": {
+            "branchFilters": "[\"+refs/heads/*\"]",
+            "additionalFields": "{}"
+          }
+        },
+        {
+          "enabled": false,
+          "definition": {
+            "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
+          },
+          "inputs": {
+            "workItemType": "Task",
+            "assignToRequestor": "true",
+            "additionalFields": "{}"
+          }
+        }
+      ],
+      "variables": {
+        "BuildConfiguration": {
+          "value": "release",
+          "allowOverride": true
+        },
+        "BuildPlatform": {
+          "value": "any cpu",
+          "allowOverride": true
+        },
+        "system.debug": {
+          "value": "false",
+          "allowOverride": true
+        }
+      },
+      "retentionRules": [
+        {
+          "branches": [
+            "+refs/heads/*"
+          ],
+          "artifacts": [],
+          "artifactTypesToDelete": [
+            "FilePath",
+            "SymbolStore"
+          ],
+          "daysToKeep": 10,
+          "minimumToKeep": 1,
+          "deleteBuildRecord": true,
+          "deleteTestResults": true
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_apis/build/Definitions/82?revision=1"
+        },
+        "web": {
+          "href": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_build/definition?definitionId=82"
+        },
+        "editor": {
+          "href": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_build/designer?id=82&_a=edit-build-definition"
+        },
+        "badge": {
+          "href": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_apis/build/status/82"
+        }
+      },
+      "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+      "jobAuthorizationScope": "projectCollection",
+      "jobTimeoutInMinutes": 60,
+      "jobCancelTimeoutInMinutes": 5,
+      "repository": {
+        "properties": {
+          "cleanOptions": "0",
+          "labelSources": "0",
+          "labelSourcesFormat": "$(build.buildNumber)",
+          "reportBuildStatus": "true",
+          "gitLfsSupport": "false",
+          "skipSyncSource": "false",
+          "checkoutNestedSubmodules": "false",
+          "fetchDepth": "0"
+        },
+        "id": "3ffe3712-46ce-49e5-8202-df131c2d52a1",
+        "type": "TfsGit",
+        "name": "Test",
+        "url": "http://tfs2019:8080/DefaultCollection/Test/_git/Test",
+        "defaultBranch": "refs/heads/master",
+        "clean": "false",
+        "checkoutSubmodules": false
+      },
+      "processParameters": {
+        "inputs": [
+          {
+            "aliases": [],
+            "options": {},
+            "properties": {},
+            "name": "solution",
+            "label": "Path to solution or packages.config",
+            "defaultValue": "**\\*.sln",
+            "required": true,
+            "type": "filePath",
+            "helpMarkDown": "The path to the Visual Studio solution file or NuGet packages.config",
+            "visibleRule": "",
+            "groupName": ""
+          },
+          {
+            "aliases": [],
+            "options": {},
+            "properties": {},
+            "name": "ArtifactName",
+            "label": "Artifact Name",
+            "defaultValue": "drop",
+            "required": true,
+            "type": "string",
+            "helpMarkDown": "The name of the artifact to create.",
+            "visibleRule": "",
+            "groupName": ""
+          }
+        ]
+      },
+      "quality": "definition",
+      "authoredBy": {
+        "displayName": "Administrator",
+        "url": "http://tfs2019:8080/DefaultCollection/_apis/Identities/85aa0256-232e-4417-8ec6-c761d36925b9",
+        "_links": {
+          "avatar": {
+            "href": "http://tfs2019:8080/DefaultCollection/_apis/GraphProfile/MemberAvatars/win.Uy0xLTUtMjEtMTc5MTA4NDQwNi0xOTM2NDIwMjI2LTI1MzcxNDQxMjUtNTAw"
+          }
+        },
+        "id": "85aa0256-232e-4417-8ec6-c761d36925b9",
+        "uniqueName": "TFS2019\\Administrator",
+        "imageUrl": "http://tfs2019:8080/DefaultCollection/_apis/GraphProfile/MemberAvatars/win.Uy0xLTUtMjEtMTc5MTA4NDQwNi0xOTM2NDIwMjI2LTI1MzcxNDQxMjUtNTAw",
+        "descriptor": "win.Uy0xLTUtMjEtMTc5MTA4NDQwNi0xOTM2NDIwMjI2LTI1MzcxNDQxMjUtNTAw"
+      },
+      "drafts": [],
+      "queue": {
+        "_links": {
+          "self": {
+            "href": "http://tfs2019:8080/DefaultCollection/_apis/build/Queues/41"
+          }
+        },
+        "id": 41,
+        "name": "Default",
+        "url": "http://tfs2019:8080/DefaultCollection/_apis/build/Queues/41",
+        "pool": {
+          "id": 1,
+          "name": "Default"
+        }
+      },
+      "id": 82,
+      "name": "CI",
+      "url": "http://tfs2019:8080/DefaultCollection/9e0e3db0-56b3-4b7a-b64e-63f575079e13/_apis/build/Definitions/82?revision=1",
+      "uri": "vstfs:///Build/Definition/82",
+      "path": "\\",
+      "type": "build",
+      "queueStatus": "enabled",
+      "revision": 1,
+      "createdDate": "2020-08-23T15:21:57.13Z",
+      "project": {
+        "id": "9e0e3db0-56b3-4b7a-b64e-63f575079e13",
+        "name": "Test",
+        "url": "http://tfs2019:8080/DefaultCollection/_apis/projects/9e0e3db0-56b3-4b7a-b64e-63f575079e13",
+        "state": "wellFormed",
+        "revision": 685,
+        "visibility": "private",
+        "lastUpdateTime": "2020-08-23T15:18:16.563Z"
+      }
+    }
+  ]
+}

@@ -20,19 +20,17 @@ You can also specify a particular build definition by ID.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Show-VSTeamBuildDefinition -ProjectName Demo
+```powershell
+Show-VSTeamBuildDefinition -ProjectName Demo
 ```
 
 This command will open a web browser with All Definitions for this project showing.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Type
+### Type
 
 The type of the build definitions to retrieve.  The acceptable values for this parameter are:
 
@@ -49,7 +47,7 @@ Parameter Sets: List
 Default value: All
 ```
 
-### -Path
+### Path
 
 The folder of the build definitions to retrieve.
 
@@ -59,7 +57,7 @@ Parameter Sets: List
 Default value: \
 ```
 
-### -Id
+### Id
 
 Specifies build definition by ID.
 
@@ -71,21 +69,23 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.BuildDefinition
+### vsteam_lib.BuildDefinition
 
 ## NOTES
 
 You can pipe build definition IDs to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 

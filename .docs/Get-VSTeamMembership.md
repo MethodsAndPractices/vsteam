@@ -14,25 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-(Get-VSTeamMembership -MemberDescriptor $user.ID).value | % { Get-VSTeamGroup -Descriptor $_.containerDescriptor }
+```powershell
+Get-VSTeamUser | Select-Object -Last 1 | Get-VSTeamMembership | Get-VSTeamGroup
 ```
 
-Get all the groups for a user
+Get all the groups for the last user
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-(Get-VSTeamMembership -ContainerDescriptor $group.id).value | % {Get-VSTeamUser -Descriptor $_.memberDescriptor }
+```powershell
+Get-VSTeamGroup | Select-Object -First 1 -Skip 2 | Get-VSTeamMembership | Get-VSTeamUser
 ```
 
-Get all the members for a group
+Get all the members for the third group
 
 ## PARAMETERS
 
-### -ContainerDescriptor
+### ContainerDescriptor
 
 A container descriptor retrieved by Get-VsTeamGroup
 
@@ -43,7 +43,7 @@ Parameter Sets: ByContainerId
 Position: 0
 ```
 
-### -MemberDescriptor
+### MemberDescriptor
 
 A member descriptor retrieved by Get-VsTeamUser
 
@@ -60,7 +60,11 @@ Position: 0
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VsTeamUser](Get-VsTeamUser.md)
 

@@ -1,0 +1,323 @@
+{
+  "count": 6,
+  "value": [
+    {
+      "namespaceId": "00000000-0000-0000-0000-000000000000",
+      "name": "Analytics",
+      "displayName": "Analytics",
+      "separatorValue": "/",
+      "elementLength": -1,
+      "writePermission": 2,
+      "readPermission": 1,
+      "dataspaceCategory": "Default",
+      "actions": [
+        {
+          "bit": 1,
+          "name": "Read",
+          "displayName": "View analytics",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 2,
+          "name": "Administer",
+          "displayName": "Manage analytics permissions",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 4,
+          "name": "Stage",
+          "displayName": "Push the data to staging area",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 8,
+          "name": "ExecuteUnrestrictedQuery",
+          "displayName": "Execute query without any restrictions on the query form",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 16,
+          "name": "ReadEuii",
+          "displayName": "Read EUII data",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "structureValue": 1,
+      "extensionType": null,
+      "isRemotable": false,
+      "useTokenTranslator": false,
+      "systemBitMask": 30
+    },
+    {
+      "namespaceId": "00000000-0000-0000-0000-000000000000",
+      "name": "AnalyticsViews",
+      "displayName": "AnalyticsViews",
+      "separatorValue": "/",
+      "elementLength": -1,
+      "writePermission": 1024,
+      "readPermission": 1,
+      "dataspaceCategory": "Default",
+      "actions": [
+        {
+          "bit": 1,
+          "name": "Read",
+          "displayName": "View shared Analytics views",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 2,
+          "name": "Edit",
+          "displayName": "Edit shared Analytics views",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 4,
+          "name": "Delete",
+          "displayName": "Delete shared Analytics views",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 8,
+          "name": "Execute",
+          "displayName": "Execute Analytics views",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 1024,
+          "name": "ManagePermissions",
+          "displayName": "Manage",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "structureValue": 1,
+      "extensionType": "Microsoft.VisualStudio.Services.Analytics.AnalyticsViewsSecurityExtension",
+      "isRemotable": false,
+      "useTokenTranslator": false,
+      "systemBitMask": 8
+    },
+    {
+      "namespaceId": "00000000-0000-0000-0000-000000000000",
+      "name": "PipelineCachePrivileges",
+      "displayName": null,
+      "separatorValue": "/",
+      "elementLength": -1,
+      "writePermission": 2,
+      "readPermission": 1,
+      "dataspaceCategory": "Default",
+      "actions": [
+        {
+          "bit": 1,
+          "name": "Read",
+          "displayName": "Read pipeline cache entries",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 2,
+          "name": "Write",
+          "displayName": "Write pipeline cache entries",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "structureValue": 1,
+      "extensionType": null,
+      "isRemotable": false,
+      "useTokenTranslator": false,
+      "systemBitMask": 0
+    },
+    {
+      "namespaceId": "00000000-0000-0000-0000-000000000000",
+      "name": "ReleaseManagement",
+      "displayName": "ReleaseManagement",
+      "separatorValue": "/",
+      "elementLength": -1,
+      "writePermission": 0,
+      "readPermission": 0,
+      "dataspaceCategory": "ReleaseManagement",
+      "actions": [
+        {
+          "bit": 1,
+          "name": "ViewTaskEditor",
+          "displayName": "View task editor",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 2,
+          "name": "ViewCDWorkflowEditor",
+          "displayName": "View CD workflow editor",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 4,
+          "name": "ExportReleaseDefinition",
+          "displayName": "Export release pipeline",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 8,
+          "name": "ViewLegacyUI",
+          "displayName": "View legacy UI",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 16,
+          "name": "DeploymentSummaryAcrossProjects",
+          "displayName": "Deployment summary across projects",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 32,
+          "name": "ViewExternalArtifactCommitsAndWorkItems",
+          "displayName": "View external artifact commits and work items",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "structureValue": 1,
+      "extensionType": null,
+      "isRemotable": false,
+      "useTokenTranslator": false,
+      "systemBitMask": 0
+    },
+    {
+      "namespaceId": "00000000-0000-0000-0000-000000000000",
+      "name": "ReleaseManagement",
+      "displayName": "ReleaseManagement",
+      "separatorValue": "/",
+      "elementLength": -1,
+      "writePermission": 512,
+      "readPermission": 0,
+      "dataspaceCategory": "ReleaseManagement",
+      "actions": [
+        {
+          "bit": 1,
+          "name": "ViewReleaseDefinition",
+          "displayName": "View release pipeline",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 2,
+          "name": "EditReleaseDefinition",
+          "displayName": "Edit release pipeline",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 4,
+          "name": "DeleteReleaseDefinition",
+          "displayName": "Delete release pipeline",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 8,
+          "name": "ManageReleaseApprovers",
+          "displayName": "Manage release approvers",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 16,
+          "name": "ManageReleases",
+          "displayName": "Manage releases",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 32,
+          "name": "ViewReleases",
+          "displayName": "View releases",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 64,
+          "name": "CreateReleases",
+          "displayName": "Create releases",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 128,
+          "name": "EditReleaseEnvironment",
+          "displayName": "Edit release stage",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 256,
+          "name": "DeleteReleaseEnvironment",
+          "displayName": "Delete release stage",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 512,
+          "name": "AdministerReleasePermissions",
+          "displayName": "Administer release permissions",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 1024,
+          "name": "DeleteReleases",
+          "displayName": "Delete releases",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 2048,
+          "name": "ManageDeployments",
+          "displayName": "Manage deployments",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 4096,
+          "name": "ManageReleaseSettings",
+          "displayName": "Manage release settings",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 8192,
+          "name": "ManageTaskHubExtension",
+          "displayName": "Manage TaskHub Extension",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "structureValue": 1,
+      "extensionType": null,
+      "isRemotable": false,
+      "useTokenTranslator": false,
+      "systemBitMask": 0
+    },
+    {
+      "namespaceId": "00000000-0000-0000-0000-000000000000",
+      "name": "AuditLog",
+      "displayName": "AuditLog",
+      "separatorValue": "\u0000",
+      "elementLength": -1,
+      "writePermission": 2,
+      "readPermission": 1,
+      "dataspaceCategory": "Default",
+      "actions": [
+        {
+          "bit": 1,
+          "name": "Read",
+          "displayName": "View audit log",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 2,
+          "name": "Write",
+          "displayName": "Write to the audit log",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 4,
+          "name": "Manage_Streams",
+          "displayName": "Manage audit streams",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "bit": 8,
+          "name": "Delete_Streams",
+          "displayName": "Delete audit streams",
+          "namespaceId": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "structureValue": 0,
+      "extensionType": "Microsoft.TeamFoundation.Framework.Server.FrameworkSecurityNamespaceExtension",
+      "isRemotable": false,
+      "useTokenTranslator": false,
+      "systemBitMask": 2
+    }
+  ]
+}

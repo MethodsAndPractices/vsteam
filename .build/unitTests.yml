@@ -1,0 +1,118 @@
+parameters:
+  os: ''
+  buildHelp: 'false'
+  CodeCoverage: 'false'
+
+steps:
+- task: PowerShell@2
+  displayName: 'Build Module'
+  inputs:
+    pwsh: true
+    targetType: 'inline'
+    ${{ if eq(parameters.buildHelp, 'false') }}:
+      script: '.\Build-Module.ps1 -installDep -configuration Release'
+    ${{ if eq(parameters.buildHelp, 'true') }}:
+      script: '.\Build-Module.ps1 -installDep -buildHelp -configuration Release'
+
+- ${{ if eq(parameters.os, 'Windows') }}:
+  - task: DotNetCoreCLI@2
+    displayName: 'Run C# Unit Tests with code coverage'
+    inputs:
+      command: 'test'
+      arguments: '--collect:"Code Coverage"'
+
+- ${{ if ne(parameters.os, 'Windows') }}:
+  - task: DotNetCoreCLI@2
+    displayName: 'Run C# Unit Tests'
+    inputs:
+      command: 'test'
+
+- task: PowerShell@2
+  displayName: 'Install Pester'
+  inputs:
+    pwsh: true
+    targetType: 'inline'
+    script: 'Install-Module -Name Pester -Repository PSGallery -Force -AllowPrerelease -MinimumVersion "$(PESTER_VERSION)" -Scope CurrentUser -AllowClobber -SkipPublisherCheck'
+
+- ${{ if eq(parameters.CodeCoverage, 'false') }}:
+  - task: PowerShell@2
+    displayName: 'Run PowerShell Unit Tests'
+    inputs:
+      pwsh: true
+      targetType: 'inline'
+      script: |
+        Import-Module .\dist\*.psd1
+        # This loads [PesterConfiguration] into scope
+        Import-Module Pester
+        $pesterArgs = [PesterConfiguration]::Default
+        $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.Path = './Tests/function'
+        $pesterArgs.Run.PassThru = $false
+        $pesterArgs.Output.Verbosity = "Normal"
+        $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+   
+        Invoke-Pester -Configuration $pesterArgs
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+- ${{ if eq(parameters.CodeCoverage, 'true') }}:
+  - task: PowerShell@2
+    displayName: 'Run PowerShell Unit Tests'
+    inputs:
+      pwsh: true
+      targetType: 'inline'
+      script: |
+        Import-Module .\dist\*.psd1
+        # This loads [PesterConfiguration] into scope
+        Import-Module Pester
+        $pesterArgs = [PesterConfiguration]::Default
+        $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.Path = './Tests/function'
+        $pesterArgs.Run.PassThru = $false
+        $pesterArgs.Output.Verbosity = "Normal"
+        $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+   
+        Invoke-Pester -Configuration $pesterArgs
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], true))
+
+  - task: PowerShell@2
+    displayName: 'Run Unit Tests with Code Coverage'
+    inputs:
+      targetType: 'inline'
+      pwsh: true
+      script: |
+        Import-Module .\dist\*.psd1
+        # This loads [PesterConfiguration] into scope
+        Import-Module Pester
+        $pesterArgs = [PesterConfiguration]::Default
+        $pesterArgs.Run.Exit = $true
+        $pesterArgs.Run.Path = './Tests/function'
+        $pesterArgs.Run.PassThru = $false
+        $pesterArgs.Output.Verbosity = "Normal"
+        $pesterArgs.TestResult.Enabled = $true
+        $pesterArgs.TestResult.OutputPath = 'test-results.xml'
+        $pesterArgs.CodeCoverage.Enabled = $true
+        $pesterArgs.CodeCoverage.OutputFormat = 'JaCoCo'
+        $pesterArgs.CodeCoverage.OutputPath = "coverage.xml"
+        $pesterArgs.CodeCoverage.Path = ".\dist\*.ps*1"
+   
+        Invoke-Pester -Configuration $pesterArgs
+      workingDirectory: '$(System.DefaultWorkingDirectory)'
+    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], false))
+
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage'
+    inputs:
+      summaryFileLocation: '**\coverage.xml'
+      failIfCoverageEmpty: false
+    condition: and(succeededOrFailed(), eq(variables['System.PullRequest.IsFork'], false))
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '**\test-results.xml'
+    testRunTitle: '${{ parameters.os }} Unit Tests'
+  condition: succeededOrFailed()

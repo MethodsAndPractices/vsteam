@@ -14,19 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Show-VSTeamReleaseDefinition -ProjectName Demo
+```powershell
+Show-VSTeamReleaseDefinition -ProjectName Demo
 ```
 
 This command will open a web browser with All Release Definitions for this project showing.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Id
+### Id
 
 Specifies release definition by ID.
 
@@ -38,21 +36,23 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.ReleaseDefinition
+### vsteam_lib.ReleaseDefinition
 
 ## NOTES
 
 You can pipe the release definition ID to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamReleaseDefinition](Add-VSTeamReleaseDefinition.md)
 

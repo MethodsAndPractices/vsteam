@@ -1,25 +1,35 @@
-﻿function Get-VSTeamPermissionInheritance {
+﻿# Returns true or false.
+# Get-VSTeamOption -area Contribution -resource HierarchyQuery
+# id              : 3353e165-a11e-43aa-9d88-14f2bb09b6d9
+# area            : Contribution
+# resourceName    : HierarchyQuery
+# routeTemplate   : _apis/{area}/{resource}/{scopeName}/{scopeValue}
+# This is an undocumented API
+
+function Get-VSTeamPermissionInheritance {
    [OutputType([System.String])]
    [CmdletBinding()]
    param(
       [Parameter(Mandatory, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]
       [string] $Name,
 
-      [Parameter(Mandatory)]
+      [Parameter(Mandatory, ValueFromPipelineByPropertyName = $true)]
       [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
       [string] $resourceType,
 
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    process {
+      # This will throw if this account does not support the HierarchyQuery API
+      _supportsHierarchyQuery
+
       Write-Verbose "Creating VSTeamPermissionInheritance"
-      $item = [VSTeamPermissionInheritance]::new($ProjectName, $Name, $resourceType)
+      $item = _getPermissionInheritanceInfo -projectName $ProjectName -resourceName $Name -resourceType $resourceType
       $token = $item.Token
-      $version = $item.Version
       $projectID = $item.ProjectID
       $securityNamespaceID = $item.SecurityNamespaceID
 
@@ -46,9 +56,14 @@
 }
 "@
 
-         $resp = _callAPI -method POST -area "Contribution" -resource "HierarchyQuery/project" -id $projectID -Version $version -ContentType "application/json" -Body $body
+         $resp = _callAPI -method POST `
+            -area Contribution `
+            -resource HierarchyQuery `
+            -id "project/$projectID" `
+            -Body $body `
+            -Version $(_getApiVersion HierarchyQuery)
 
-         Write-Verbose $($resp | ConvertTo-Json -Depth 99)         
+         Write-Verbose $($resp | ConvertTo-Json -Depth 99)
 
          Write-Output ($resp |
             Select-Object -ExpandProperty dataProviders |

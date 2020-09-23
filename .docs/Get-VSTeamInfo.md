@@ -14,10 +14,10 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamInfo
+```powershell
+Get-VSTeamInfo
 ```
 
 This will display your current account and default project
@@ -30,6 +30,8 @@ This will display your current account and default project
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

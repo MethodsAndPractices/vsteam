@@ -1,5 +1,6 @@
 function Get-VSTeamSecurityNamespace {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamSecurityNamespace')]
    param(
       [Parameter(ParameterSetName = 'ByNamespaceName', Mandatory = $true)]
       [string] $Name,
@@ -14,11 +15,15 @@ function Get-VSTeamSecurityNamespace {
    process {
       _supportsSecurityNamespace
 
+      $commonArgs = @{
+         Resource  = 'securitynamespaces'
+         NoProject = $true
+         Version   = $(_getApiVersion Core)
+      }
+
       if ($Id) {
          # Call the REST API
-         $resp = _callAPI -Area 'securitynamespaces' -id $Id `
-            -Version $(_getApiVersion Core) -NoProject `
-      
+         $resp = _callAPI @commonArgs -id $Id
       }
       else {
          $queryString = @{ }
@@ -26,9 +31,7 @@ function Get-VSTeamSecurityNamespace {
             $queryString.localOnly = $true
          }
 
-         $resp = _callAPI -Area 'securitynamespaces' `
-            -Version $(_getApiVersion Core) -NoProject `
-            -QueryString $queryString
+         $resp = _callAPI @commonArgs -QueryString $queryString
       }
 
       Write-Verbose $resp | Select-Object -ExpandProperty value
@@ -42,17 +45,17 @@ function Get-VSTeamSecurityNamespace {
          if ($Name) {
             $selected = $resp.value | Where-Object { $_.name -eq $Name }
             if ($selected) {
-               return [VSTeamSecurityNamespace]::new($selected)
+               Write-Output [vsteam_lib.SecurityNamespace]::new($selected)
             }
             else {
-               return $null
+               Write-Output $null
             }
          }
 
          try {
             $objs = @()
             foreach ($item in $resp.value) {
-               $objs += [VSTeamSecurityNamespace]::new($item)
+               $objs += [vsteam_lib.SecurityNamespace]::new($item)
             }
 
             Write-Output $objs
@@ -68,7 +71,7 @@ function Get-VSTeamSecurityNamespace {
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $acl = [VSTeamSecurityNamespace]::new($resp.value)
+         $acl = [vsteam_lib.SecurityNamespace]::new($resp.value[0])
 
          Write-Output $acl
       }

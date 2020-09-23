@@ -1,5 +1,6 @@
 function Set-VSTeamReleaseStatus {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamReleaseStatus')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
@@ -9,9 +10,9 @@ function Set-VSTeamReleaseStatus {
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -23,8 +24,12 @@ function Set-VSTeamReleaseStatus {
 
             try {
                # Call the REST API
-               _callAPI -Method Patch -SubDomain vsrm -Area release -Resource releases -projectName $ProjectName -id $item `
-                  -body $body -ContentType 'application/json' -Version $(_getApiVersion Release) | Out-Null
+               _callAPI -Method PATCH -SubDomain vsrm -ProjectName $ProjectName `
+                  -Area release `
+                  -Resource releases `
+                  -id $item `
+                  -body $body `
+                  -Version $(_getApiVersion Release) | Out-Null
 
                Write-Output "Release $item status changed to $status"
             }

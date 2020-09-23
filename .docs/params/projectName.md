@@ -1,4 +1,4 @@
-### -ProjectName
+### ProjectName
 
 Specifies the team project for which this function operates.
 
@@ -9,7 +9,7 @@ you do not have to pass the ProjectName with each call.
 
 ```yaml
 Type: String
-Position: 0
+Position: Named
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```

@@ -1,4 +1,3 @@
-
 <!-- #include "./common/header.md" -->
 
 # Remove-VSTeamAccessControlEntry
@@ -14,72 +13,75 @@
 Removes specified ACEs in the ACL for the provided token. The request URI contains the namespace ID, the target token, and a single or list of descriptors that should be removed. Only supports removing AzD based users/groups.
 
 ## EXAMPLES
-### -------------------------- EXAMPLE 1 --------------------------
 
-```PowerShell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
+### Example 1
+
+```powershell
+Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
 ```
 
 This will remove the specified descriptor from the specified repository, using the security namespace id, while confirming for the remove action.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -confirm:$false
+```powershell
+Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -force
 ```
 
 This will remove the specified descriptor from the specified repository, using the security namespace id, with no confirmation for the remove action.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
+```powershell
+Remove-VSTeamAccessControlEntry -securityNamespaceId "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87" -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
 ```
 
 This will remove multiple descriptors from the specified repository, using the security namespace id, while confirming for the remove action.
 
-### -------------------------- EXAMPLE 4 --------------------------
+### Example 4
 
-```PowerShell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
+```powershell
+Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy")
 ```
 
 This will remove the specified descriptor from the specified repository, using a security namespace object, while confirming for the remove action.
 
-### -------------------------- EXAMPLE 5 --------------------------
+### Example 5
 
-```PowerShell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -confirm:$false
+```powershell
+Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("vssgp.Uy0xLTktMTU1MTM3NDI0NS0xMzk4ODc2NjMwLTEwMTQ0ODQ4MTMtMzE5MDA4NTI4Ny0xNDU4NTkwODY1LTEtMzE1MjE3NTkwMy03NjE1NjY3OTMtMjgwMTUwMjI2Ny0zMjU5Mjg5MTIy") -force
 ```
 
 This will remove the specified descriptor from the specified repository, using a security namespace object, with no confirmation for the remove action.
 
-### -------------------------- EXAMPLE 6 --------------------------
+### Example 6
 
-```PowerShell
-PS C:\> Remove-VSTeamAccessControlEntry -securityNamespace [VSTeamSecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
+```powershell
+Remove-VSTeamAccessControlEntry -securityNamespace [vsteam_lib.SecurityNamespace]$securityNamespace -token "repov2/$projectid/$repoid" -descriptor @("descriptor1","descriptor2")
 ```
 
 This will remove multiple descriptors from the specified repository, using a security namespace object, while confirming for the remove action.
 
 ## PARAMETERS
 
-### -SecurityNamespace
+### SecurityNamespace
 
-VSTeamSecurityNamespace object.
+Security namespace object.
 
 ```yaml
-Type: VSTeamSecurityNamespace
+Type: vsteam_lib.SecurityNamespace
+Parameter Sets: ByNamespace
 Required: True
 ```
 
-### -SecurityNamespaceId
+### SecurityNamespaceId
 
 Security namespace identifier.
 
 Valid IDs are:
 
 AzD:
+
 - Analytics (58450c49-b02d-465a-ab12-59ae512d6531)
 - AnalyticsViews (d34d3680-dfe5-4cc6-a949-7d9c68f73cba)
 - ReleaseManagement (7c7d32f7-0e86-4cd6-892e-b35dbba870bd)
@@ -142,6 +144,7 @@ AzD:
 - VersionControlItems (a39371cf-0841-4c16-bbd3-276e341bc052)
 
 VSSPS:
+
 - EventSubscriber (2bf24a2b-70ba-43d3-ad97-3d9e1f75622f) (VSSPS)
 - EventSubscription (58b176e7-3411-457a-89d0-c6d0ccb3c52b) (VSSPS)
 - Registry (4ae0db5d-8437-4ee8-a18b-1f6fb38bd34c) (VSSPS)
@@ -164,10 +167,11 @@ VSSPS:
 
 ```yaml
 Type: String
+Parameter Sets: ByNamespaceId
 Required: True
 ```
 
-### -Token
+### Token
 
 The security Token
 
@@ -182,7 +186,7 @@ Type: String
 Required: True
 ```
 
-### -Descriptor
+### Descriptor
 
 An array of descriptors of users/groups to be removed
 
@@ -190,6 +194,8 @@ An array of descriptors of users/groups to be removed
 Type: System.Array
 Required: True
 ```
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -199,4 +205,8 @@ Required: True
 
 This function outputs a non-terminating error if the ACE removal from the ACL returns $False. This can be due to the wrong descriptor being provided, or the descriptor already not being on the ACL.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

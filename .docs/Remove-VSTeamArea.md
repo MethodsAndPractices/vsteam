@@ -14,43 +14,48 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Remove-VSTeamArea -ProjectName Demo -Path "\MyIteration\Path"
+```powershell
+Remove-VSTeamArea -ProjectName "Demo" -Path "\MyArea\Path" -ReClassifyId 19
 ```
 
-This command removes an existing area with the path MyIteration/Path to the Demo project. Any work items that are assigned to that path get reassigned to the root area, since no reclassification id has been given.
+This command removes an existing area with the path \MyArea\Path to the Demo project. Any work items that are assigned to that path get reassigned to the area with the id 19.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Remove-VSTeamArea -ProjectName "Demo" -Path "\MyIteration\Path" -ReClassifyId 19
+```powershell
+Get-VSTeamArea | Remove-VSTeamArea "A1" -Force
 ```
 
-This command removes an existing area with the path \MyIteration\Path to the Demo project. Any work items that are assigned to that path get reassigned to the area with the id 19.
+This command removes an existing area with the path "A1" to the default project. Any work items that are assigned to that path get reassigned to the area with the returned by Get-VSTeamArea.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Path
+### Path
 
 Path of the area node.
 
 ```yaml
 Type: string
+Required: True
+Position: 0
 ```
 
-### -ReClassifyId
+### ReClassifyId
 
 Id of an area where work items should be reassigned to if they are currently assigned to the area being deleted.
 
 ```yaml
 Type: int
+Required: True
+Aliases: NodeId
+Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -60,9 +65,13 @@ Type: int
 
 ## NOTES
 
-This function is a wrapper of the base function Remove-VSTeamClassificationNode.md.
+This function is a wrapper of the base function Remove-VSTeamClassificationNode.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Remove-VSTeamClassificationNode](Remove-VSTeamClassificationNode.md)
 

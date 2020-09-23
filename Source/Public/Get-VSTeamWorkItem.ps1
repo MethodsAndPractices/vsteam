@@ -1,5 +1,6 @@
 function Get-VSTeamWorkItem {
-   [CmdletBinding(DefaultParameterSetName = 'ByID')]
+   [CmdletBinding(DefaultParameterSetName = 'ByID',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamWorkItem')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int[]] $Id,
@@ -16,9 +17,14 @@ function Get-VSTeamWorkItem {
 
    Process {
       # Call the REST API
+      $commonArgs = @{
+         NoProject = $true
+         Area      = 'wit'
+         Resource  = 'workitems'
+         Version   = $(_getApiVersion Core)
+      }
       if ($Id.Length -gt 1) {
-         $resp = _callAPI -NoProject -Area 'wit' -Resource 'workitems'  `
-            -Version $(_getApiVersion Core) `
+         $resp = _callAPI @commonArgs `
             -Querystring @{
             '$Expand'   = $Expand
             fields      = ($Fields -join ',')
@@ -34,8 +40,7 @@ function Get-VSTeamWorkItem {
       }
       else {
          $a = $Id[0]
-         $resp = _callAPI -NoProject -Area 'wit' -Resource 'workitems'  `
-            -Version $(_getApiVersion Core) -id "$a" `
+         $resp = _callAPI @commonArgs -id "$a" `
             -Querystring @{
             '$Expand' = $Expand
             fields    = ($Fields -join ',')

@@ -1,5 +1,5 @@
 function Get-VSTeamJobRequest {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamJobRequest')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 0)]
       [int] $PoolId,
@@ -7,7 +7,7 @@ function Get-VSTeamJobRequest {
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true, Position = 1)]
       [Alias('ID')]
       [int] $AgentID,
-      
+
       [int] $completedRequestCount
    )
 
@@ -21,15 +21,17 @@ function Get-VSTeamJobRequest {
       }
       else {
          $body = @{agentid = $AgentID }
-      }      
+      }
 
-      $resp = _callAPI -Area "distributedtask/pools/$PoolId" -Resource "jobrequests" `
-         -QueryString $body -Version $(_getApiVersion DistributedTask)
+      $resp = _callAPI -Area "distributedtask/pools/$PoolId" `
+         -Resource jobrequests `
+         -QueryString $body `
+         -Version $(_getApiVersion DistributedTaskReleased)
 
       $objs = @()
 
       foreach ($item in $resp.value) {
-         $objs += [VSTeamJobRequest]::new($item)
+         $objs += [vsteam_lib.JobRequest]::new($item)
       }
 
       Write-Output $objs

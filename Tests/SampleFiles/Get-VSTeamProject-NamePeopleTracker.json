@@ -1,0 +1,25 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "name": "PeopleTracker",
+  "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000",
+  "state": "wellFormed",
+  "revision": 150,
+  "_links": {
+    "self": {
+      "href": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000"
+    },
+    "collection": {
+      "href": "https://dev.azure.com/Test/_apis/projectCollections/00000000-0000-0000-0000-000000000000"
+    },
+    "web": {
+      "href": "https://dev.azure.com/Test/PeopleTracker"
+    }
+  },
+  "visibility": "private",
+  "defaultTeam": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "PeopleTracker Team",
+    "url": "https://dev.azure.com/Test/_apis/projects/00000000-0000-0000-0000-000000000000/teams/00000000-0000-0000-0000-000000000000"
+  },
+  "lastUpdateTime": "2019-09-25T20:47:14.247Z"
+}

@@ -1,14 +1,15 @@
 function Remove-VSTeamRelease {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamRelease')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int[]] $Id,
 
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {
@@ -16,7 +17,11 @@ function Remove-VSTeamRelease {
          if ($force -or $pscmdlet.ShouldProcess($item, "Delete Release")) {
             try {
                # Call the REST API
-               _callAPI -Method Delete -SubDomain vsrm -Area release -Resource releases -ProjectName $ProjectName -id $item -Version $(_getApiVersion Release) | Out-Null
+               _callAPI -Method DELETE -SubDomain vsrm -ProjectName $ProjectName `
+                  -Area release `
+                  -Resource releases `
+                  -id $item `
+                  -Version $(_getApiVersion Release) | Out-Null
 
                Write-Output "Deleted release $item"
             }

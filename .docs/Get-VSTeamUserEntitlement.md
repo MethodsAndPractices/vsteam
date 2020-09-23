@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Skip
+### Skip
 
 The number of items to skip.
 
@@ -25,7 +25,7 @@ Type: Int32
 Parameter Sets: List
 ```
 
-### -UserId
+### UserId
 
 The id of the user to retrieve.
 
@@ -34,7 +34,7 @@ Type: String[]
 Parameter Sets: ByID
 ```
 
-### -Top
+### Top
 
 Specifies the maximum number to return.
 
@@ -43,7 +43,7 @@ Type: Int32
 Parameter Sets: List
 ```
 
-### -Select
+### Select
 
 Comma (",") separated list of properties to select in the result entitlements.  The acceptable values for this parameter are:
 
@@ -64,4 +64,8 @@ Default value: None
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

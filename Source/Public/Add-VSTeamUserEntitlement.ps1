@@ -1,5 +1,15 @@
+# Add a user, assign license and extensions and make them a member of a
+# project group in an account.
+#
+# Get-VSTeamOption 'MemberEntitlementManagement' 'UserEntitlements' -subDomain 'vsaex'
+# id              : 387f832c-dbf2-4643-88e9-c1aa94dbb737
+# area            : MemberEntitlementManagement
+# resourceName    : UserEntitlements
+# routeTemplate   : _apis/{resource}/{userDescriptor}
+# http://bit.ly/Add-VSTeamUserEntitlement
+
 function Add-VSTeamUserEntitlement {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamUserEntitlement')]
    param(
       [Parameter(Mandatory = $true)]
       [Alias('UserEmail')]
@@ -17,9 +27,9 @@ function Add-VSTeamUserEntitlement {
       [ValidateSet('eligible', 'enterprise', 'none', 'platforms', 'premium', 'professional', 'testProfessional', 'ultimate')]
       [string]$MSDNLicenseType = "none",
 
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {
@@ -49,6 +59,9 @@ function Add-VSTeamUserEntitlement {
       $body = $obj | ConvertTo-Json
 
       # Call the REST API
-      _callAPI -Method Post -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Version $(_getApiVersion MemberEntitlementManagement) -ContentType "application/json"
+      _callAPI -Method POST -SubDomain "vsaex" `
+         -Resource "userentitlements" `
+         -Body $body `
+         -Version $(_getApiVersion MemberEntitlementManagement)
    }
 }

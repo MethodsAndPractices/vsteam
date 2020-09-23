@@ -1,5 +1,14 @@
+# Adds a work item to your project.
+#
+# Get-VSTeamOption 'wit' 'workItems'
+# id              : 62d3d110-0047-428c-ad3c-4fe872c91c74
+# area            : wit
+# resourceName    : workItems
+# routeTemplate   : {project}/_apis/{area}/{resource}/${type}
+# http://bit.ly/Add-VSTeamWorkItem
+
 function Add-VSTeamWorkItem {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamWorkItem')]
    param(
       [Parameter(Mandatory = $true)]
       [string] $Title,
@@ -19,14 +28,14 @@ function Add-VSTeamWorkItem {
       [Parameter(Mandatory = $false)]
       [hashtable] $AdditionalFields,
 
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
-      
+
       [Parameter(Mandatory = $true)]
-      [WorkItemTypeValidateAttribute()]
-      [ArgumentCompleter([WorkItemTypeCompleter])]
+      [vsteam_lib.WorkItemTypeValidateAttribute()]
+      [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]
       [string] $WorkItemType
    )
 
@@ -100,9 +109,13 @@ function Add-VSTeamWorkItem {
       $json = ConvertTo-Json @($body) -Compress
 
       # Call the REST API
-      $resp = _callAPI -ProjectName $ProjectName -Area 'wit' -Resource 'workitems' `
-         -Version $(_getApiVersion Core) -id $fullWorkItemType -Method Post `
-         -ContentType 'application/json-patch+json' -Body $json
+      $resp = _callAPI -Method POST -ProjectName $ProjectName `
+         -Area "wit" `
+         -Resource "workitems" `
+         -id $fullWorkItemType `
+         -Body $json `
+         -ContentType 'application/json-patch+json' `
+         -Version $(_getApiVersion Core)
 
       _applyTypesToWorkItem -item $resp
 

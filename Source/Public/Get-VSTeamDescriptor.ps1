@@ -1,7 +1,8 @@
 function Get-VSTeamDescriptor {
-   [CmdletBinding(DefaultParameterSetName = 'ByStorageKey')]
+   [CmdletBinding(DefaultParameterSetName = 'ByStorageKey',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamDescriptor')]
    param(
-      [Parameter(ParameterSetName = 'ByStorageKey', Mandatory = $true)]
+      [Parameter(ParameterSetName = 'ByStorageKey', Mandatory = $true, Position = 0)]
       [string] $StorageKey
    )
 
@@ -10,14 +11,16 @@ function Get-VSTeamDescriptor {
       _supportsGraph
 
       # Call the REST API
-      $resp = _callAPI -Area 'graph' -Resource 'descriptors' -id $StorageKey `
-         -Version $(_getApiVersion Graph) `
-         -SubDomain 'vssps' -NoProject
+      $resp = _callAPI -SubDomain vssps -NoProject `
+         -Area graph `
+         -Resource descriptors `
+         -id $StorageKey `
+         -Version $(_getApiVersion Graph)
 
       # Storing the object before you return it cleaned up the pipeline.
       # When I just write the object from the constructor each property
       # seemed to be written
-      $descriptor = [VSTeamDescriptor]::new($resp)
+      $descriptor = [vsteam_lib.Descriptor]::new($resp)
 
       Write-Output $descriptor
    }

@@ -14,17 +14,17 @@ Get-VSTeamFeed gets all the feeds for the account
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamFeed
+```powershell
+Get-VSTeamFeed
 ```
 
 This command returns all the package feeds for the account.
 
 ## PARAMETERS
 
-### -FeedId
+### FeedId
 
 Specifies the ID of the feed.
 
@@ -40,4 +40,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

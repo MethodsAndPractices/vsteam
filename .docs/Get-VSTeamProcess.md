@@ -16,26 +16,26 @@ You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamProcess
+```powershell
+Get-VSTeamProcess
 ```
 
 This will return all the Process Templates
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamProcess | Format-Wide
+```powershell
+Get-VSTeamProcess | Format-Wide
 ```
 
 This will return the Process Templates only showing their name
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamProcess *scrum*
+```powershell
+Get-VSTeamProcess *scrum*
 ```
 
 This will return an process templates with names containing scrum,
@@ -46,31 +46,7 @@ names like "Custom Scrum", "Scrum for Contoso" will all be returned.
 
 <!-- #include "./params/ProcessName.md" -->
 
-### -Top
-
-Specifies the maximum number to return.
-If -Skip is specified and -Top is omitted the next 100 will be returned.
-If neither Skip nor -Top is specified, all process templates will be returned.
-
-```yaml
-Type: Int32
-Parameter Sets: List
-Default value: 100
-```
-
-### -Skip
-
-Defines the number of Process Templates to skip.
-If -Top is specified and -Skip is omitted none will be skipped.
-If neither Skip nor -Top is specified, all process templates will be returned.
-
-```yaml
-Type: Int32
-Parameter Sets: List
-Default value: 0
-```
-
-### -Id
+### Id
 
 The id of the Process Template to return.
 
@@ -86,8 +62,10 @@ Aliases: ProcessID
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamProject](Add-VSTeamProject.md)

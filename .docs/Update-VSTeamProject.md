@@ -14,19 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Update-VSTeamProject -Name Demo -NewName aspDemo
+```powershell
+Update-VSTeamProject -Name Demo -NewName aspDemo
 ```
 
 This command changes the name of your project from Demo to aspDemo.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -NewName
+### NewName
 
 The new name for the project.
 
@@ -34,7 +32,7 @@ The new name for the project.
 Type: String
 ```
 
-### -NewDescription
+### NewDescription
 
 The new description for the project.
 
@@ -42,7 +40,7 @@ The new description for the project.
 Type: String
 ```
 
-### -Id
+### Id
 
 The id of the project to update.
 
@@ -53,7 +51,9 @@ Aliases: ProjectId
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -65,4 +65,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

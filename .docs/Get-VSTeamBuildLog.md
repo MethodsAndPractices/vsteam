@@ -14,10 +14,10 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamBuild -Top 1 | Get-VSTeamBuildLog
+```powershell
+Get-VSTeamBuild -Top 1 | Get-VSTeamBuildLog
 ```
 
 This command displays the logs of the first build.
@@ -27,17 +27,17 @@ displays the logs.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 <!-- #include "./params/BuildIds.md" -->
 
-### -Index
+### Index
 
 Each task stores its logs in an array. If you know the index of a specific task you can return just its logs. If you do not provide a value all the logs are displayed.
 
 ```yaml
 Type: Int32
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -47,4 +47,8 @@ Type: Int32
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

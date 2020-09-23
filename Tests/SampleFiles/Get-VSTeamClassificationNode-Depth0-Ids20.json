@@ -1,0 +1,22 @@
+{
+   "count": 1,
+   "value": [
+      {
+         "id": 20,
+         "identifier": "18e7998d-d0c5-4c01-b547-d7d4eb4c97c5",
+         "name": "Sprint 3",
+         "structureType": "iteration",
+         "hasChildren": false,
+         "path": "\\Demo Public\\Iteration\\Sprint 3",
+         "_links": {
+            "self": {
+               "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Iterations/Sprint%203"
+            },
+            "parent": {
+               "href": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Iterations"
+            }
+         },
+         "url": "https://dev.azure.com/vsteampsmoduletest/53e2997d-3723-4c1c-aa62-a0194cb65a29/_apis/wit/classificationNodes/Iterations/Sprint%203"
+      }
+   ]
+}

@@ -14,9 +14,7 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -StructureGroup
+### StructureGroup
 
 Structure group of the classification node, area or iteration.
 
@@ -24,7 +22,7 @@ Structure group of the classification node, area or iteration.
 Type: string
 ```
 
-### -Depth
+### Depth
 
 Depth of children to fetch.
 
@@ -32,7 +30,7 @@ Depth of children to fetch.
 Type: int32
 ```
 
-### -Path
+### Path
 
 Path of the classification node.
 
@@ -40,13 +38,15 @@ Path of the classification node.
 Type: string
 ```
 
-### -Ids
+### Id
 
 Integer classification nodes ids.
 
 ```yaml
 Type: int32[]
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -58,7 +58,11 @@ Type: int32[]
 
 This function is the base function for Get-VSTeamArea and Get-VSTeamIteration.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamArea](Get-VSTeamArea.md)
 

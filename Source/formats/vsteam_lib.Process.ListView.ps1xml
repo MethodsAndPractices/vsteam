@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>vsteam_lib.Process.ListView</Name>
+         <ViewSelectedBy>
+            <TypeName>vsteam_lib.Process</TypeName>
+            <TypeName>vsteam_lib.Provider.Process</TypeName>
+            <TypeName>vsteam_lib.Process</TypeName>
+         </ViewSelectedBy>
+         <ListControl>
+            <ListEntries>
+               <ListEntry>
+                  <ListItems>
+                     <ListItem>
+                        <PropertyName>Name</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Description</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>IsEnabled</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>IsDefault</PropertyName>
+                     </ListItem>
+                     <ListItem>
+                        <PropertyName>Id</PropertyName>
+                     </ListItem>
+                  </ListItems>
+               </ListEntry>
+            </ListEntries>
+         </ListControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

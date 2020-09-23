@@ -1,4 +1,5 @@
 function Get-VSTeamExtension {
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamExtension')]
    param (
       [Parameter(ParameterSetName = 'List', Mandatory = $false)]
       [switch] $IncludeInstallationIssues,
@@ -15,7 +16,7 @@ function Get-VSTeamExtension {
       [Parameter(ParameterSetName = 'GetById', Mandatory = $true)]
       [string] $ExtensionId
    )
-   
+
    Process {
 
       if ($PublisherId -and $ExtensionId) {
@@ -27,7 +28,7 @@ function Get-VSTeamExtension {
             -Id $id `
             -Version $(_getApiVersion ExtensionsManagement)
 
-         $item = [VSTeamExtension]::new($resp)
+         $item = [vsteam_lib.Extension]::new($resp)
 
          Write-Output $item
       }
@@ -46,15 +47,15 @@ function Get-VSTeamExtension {
          }
 
          $resp = _callAPI -SubDomain 'extmgmt' `
-            -Area 'extensionmanagement' `
-            -Resource 'installedextensions' `
+            -Area extensionmanagement `
+            -Resource installedextensions `
             -QueryString $queryString `
             -Version $(_getApiVersion ExtensionsManagement)
 
          $objs = @()
 
          foreach ($item in $resp.value) {
-            $objs += [VSTeamExtension]::new($item)
+            $objs += [vsteam_lib.Extension]::new($item)
          }
 
          Write-Output $objs

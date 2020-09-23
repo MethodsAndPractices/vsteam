@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id of the user to be updated.
 
@@ -26,7 +26,7 @@ Parameter Sets: ById
 Required: True
 ```
 
-### -Email
+### Email
 
 The email address of the user to update. For organizations with over 100 users this can be very slow and resource intensive.
 
@@ -36,7 +36,7 @@ Parameter Sets: ByEmail
 Required: True
 ```
 
-### -License
+### License
 
 Type of Account License you want to change to. The acceptable values for this parameter are:
 
@@ -52,7 +52,7 @@ Type: String
 Required: True
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -60,6 +60,10 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamUserEntitlement](Get-VSTeamUserEntitlement.md)

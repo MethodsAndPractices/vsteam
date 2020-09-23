@@ -16,9 +16,7 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Id
+### Id
 
 Id of the service endpoint
 
@@ -28,6 +26,8 @@ Parameter Sets: ByID
 Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -39,4 +39,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

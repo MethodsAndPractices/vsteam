@@ -1,5 +1,6 @@
 function Get-VSTeamPool {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamPool')]
    param(
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 1)]
       [Alias('PoolID')]
@@ -7,24 +8,30 @@ function Get-VSTeamPool {
    )
 
    process {
+      $commonArgs = @{
+         NoProject = $true
+         Area      = 'distributedtask'
+         Resource  = 'pools'
+         Version   = $(_getApiVersion DistributedTaskReleased)
+      }
 
       if ($id) {
-         $resp = _callAPI -NoProject -Area distributedtask -Resource pools -Id $id -Version $(_getApiVersion DistributedTask)
+         $resp = _callAPI @commonArgs -Id $id
 
          # Storing the object before you return it cleaned up the pipeline.
          # When I just write the object from the constructor each property
          # seemed to be written
-         $item = [VSTeamPool]::new($resp)
+         $item = [vsteam_lib.AgentPool]::new($resp)
 
          Write-Output $item
       }
       else {
-         $resp = _callAPI -NoProject -Area distributedtask -Resource pools -Version $(_getApiVersion DistributedTask)
+         $resp = _callAPI @commonArgs
 
          $objs = @()
 
          foreach ($item in $resp.value) {
-            $objs += [VSTeamPool]::new($item)
+            $objs += [vsteam_lib.AgentPool]::new($item)
          }
 
          Write-Output $objs

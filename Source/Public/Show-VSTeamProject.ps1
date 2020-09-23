@@ -1,13 +1,14 @@
 function Show-VSTeamProject {
-   [CmdletBinding(DefaultParameterSetName = 'ByName')]
+   [CmdletBinding(DefaultParameterSetName = 'ByName',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Show-VSTeamProject')]
    param(
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
       [string] $Id,
 
       [Parameter(ParameterSetName = 'ByName', Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter]) ]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter]) ]
       [Alias('ProjectName')]
       [string] $Name
    )

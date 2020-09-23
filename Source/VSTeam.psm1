@@ -7,14 +7,13 @@
 # and alias so you only have to name the files correctly.
 
 # Files are built using a script in the root folder
-. "$PSScriptRoot\vsteam.classes.ps1"
 . "$PSScriptRoot\vsteam.functions.ps1"
 
 # Set the module version
-[VSTeamVersions]::ModuleVersion = _getModuleVersion
+[vsteam_lib.Versions]::ModuleVersion = _getModuleVersion
 
 # Load the correct version of the environment variable
-Set-VSTeamAPIVersion -Target $([VSTeamVersions]::Version)
+Set-VSTeamAPIVersion -Target $([vsteam_lib.Versions]::Version)
 
 # Check to see if the user stored the default project in an environment variable
 if ($null -ne $env:TEAM_PROJECT) {

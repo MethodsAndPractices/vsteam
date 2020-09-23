@@ -27,7 +27,7 @@ Also be aware that we cannot know all prerequisites as there often many differen
 1. Install Docker: [https://docs.docker.com/engine/install](https://docs.docker.com/engine/install)
 2. Run [Run-ContainerTests.ps1](Run-ContainerTests.ps1) located under ./tools/docker
 
-   ```PowerShell
+   ```powershell
    #Example
    Run-ContainerTests.ps1
    ```

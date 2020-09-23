@@ -14,27 +14,25 @@ Set-VSTeamApproval sets the status of approval to Approved, Rejected, Pending, o
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamApproval | Set-VSTeamApproval
+```powershell
+Get-VSTeamApproval | Set-VSTeamApproval
 ```
 
 This command sets all pending approvals to approved.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Set-VSTeamApproval -Id 1 -Status Rejected
+```powershell
+Set-VSTeamApproval -Id 1 -Status Rejected
 ```
 
 This command rejects approval with Id of 1.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Id
+### Id
 
 Specifies the approval IDs of the approvals to set.
 
@@ -44,7 +42,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Status
+### Status
 
 Specifies the status to set for the approval. The acceptable values for this parameter are:
 
@@ -59,7 +57,7 @@ Required: True
 Default value: Approved
 ```
 
-### -Approver
+### Approver
 
 Specifies the user to whom the approval has been re-assigned to Alias of the user chuckreinhart@outlook.com, for example.
 
@@ -67,7 +65,7 @@ Specifies the user to whom the approval has been re-assigned to Alias of the use
 Type: String
 ```
 
-### -Comment
+### Comment
 
 Specifies the comment to be stored with this approval.
 
@@ -75,7 +73,9 @@ Specifies the comment to be stored with this approval.
 Type: String
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -83,4 +83,8 @@ Type: String
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

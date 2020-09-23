@@ -16,25 +16,27 @@
 
 ## PARAMETERS
 
-### -SecurityNamespace
+### SecurityNamespace
 
-Security namespace identifier.
+Security namespace object.
 
 ```yaml
-Type: VSTeamSecurityNamespace
+Type: vsteam_lib.SecurityNamespace
+Parameter Sets: ByNamespace
 Required: True
 ```
 
-### -SecurityNamespaceId
+### SecurityNamespaceId
 
 Security namespace identifier.
 
 ```yaml
 Type: String
+Parameter Sets: ByNamespaceId
 Required: True
 ```
 
-### -Tokens
+### Tokens
 
 One or more comma-separated security tokens
 
@@ -43,7 +45,7 @@ Type: String
 Required: True
 ```
 
-### -Recurse
+### Recurse
 
 If true and this is a hierarchical namespace, also remove child ACLs of the specified tokens.
 
@@ -60,4 +62,8 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

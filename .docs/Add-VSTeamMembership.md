@@ -14,12 +14,12 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> $user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
-PS C:\> $group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
-PS C:\> Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor
+```powershell
+$user = Get-VSTeamUser | ? DisplayName -eq 'Test User'
+$group = Get-VSTeamGroup | ? DisplayName -eq 'Endpoint Administrators'
+Add-VSTeamMembership -MemberDescriptor $user.Descriptor -ContainerDescriptor $group.Descriptor
 ```
 
 Adds Test User to the Endpoint Administrators group.
@@ -36,7 +36,11 @@ Adds Test User to the Endpoint Administrators group.
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VsTeamUser](Get-VsTeamUser.md)
 

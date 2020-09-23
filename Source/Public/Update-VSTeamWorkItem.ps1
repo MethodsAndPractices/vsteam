@@ -1,5 +1,6 @@
 function Update-VSTeamWorkItem {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamWorkItem')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int] $Id,
@@ -77,9 +78,13 @@ function Update-VSTeamWorkItem {
 
       # Call the REST API
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update-WorkItem")) {
-         $resp = _callAPI -Area 'wit' -Resource 'workitems' `
-            -Version $(_getApiVersion Core) -id $Id -Method Patch `
-            -ContentType 'application/json-patch+json' -Body $json -NoProject
+         $resp = _callAPI -Method PATCH -NoProject `
+            -Area wit `
+            -Resource workitems `
+            -id $Id `
+            -ContentType 'application/json-patch+json' `
+            -Body $json `
+            -Version $(_getApiVersion Core)
 
          _applyTypesToWorkItem -item $resp
 

@@ -16,26 +16,26 @@ This function takes a DynamicParam for ProjectName that can be read from the Pip
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Remove-VSTeamProject 'MyProject'
+```powershell
+Remove-VSTeamProject 'MyProject'
 ```
 
 You will be prompted for confirmation and the project will be deleted.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Remove-VSTeamProject 'MyProject' -Force
+```powershell
+Remove-VSTeamProject 'MyProject' -Force
 ```
 
 You will NOT be prompted for confirmation and the project will be deleted.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> Get-VSTeamProject | Remove-VSTeamProject -Force
+```powershell
+Get-VSTeamProject | Remove-VSTeamProject -Force
 ```
 
 This will remove all projects
@@ -44,7 +44,7 @@ This will remove all projects
 
 <!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -52,8 +52,10 @@ This will remove all projects
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamProject](Add-VSTeamProject.md)

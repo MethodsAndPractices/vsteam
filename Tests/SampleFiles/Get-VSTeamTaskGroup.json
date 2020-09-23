@@ -1,0 +1,192 @@
+{
+   "count": 1,
+   "value": [
+      {
+         "tasks": [
+            {
+               "environment": {},
+               "displayName": "Use .NET Core sdk 2.2.203",
+               "alwaysRun": false,
+               "continueOnError": false,
+               "condition": "succeeded()",
+               "enabled": true,
+               "timeoutInMinutes": 0,
+               "inputs": {
+                  "packageType": "sdk",
+                  "useGlobalJson": "false",
+                  "workingDirectory": "",
+                  "version": "2.2.203",
+                  "vsVersion": "",
+                  "includePreviewVersions": "false",
+                  "installationPath": "$(Agent.ToolsDirectory)/dotnet",
+                  "performMultiLevelLookup": "false"
+               },
+               "task": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "versionSpec": "2.*",
+                  "definitionType": "task"
+               }
+            },
+            {
+               "environment": {},
+               "displayName": "Restore, Build & Test",
+               "alwaysRun": false,
+               "continueOnError": false,
+               "condition": "succeeded()",
+               "enabled": true,
+               "timeoutInMinutes": 0,
+               "inputs": {
+                  "command": "test",
+                  "publishWebProjects": "true",
+                  "projects": "src/PeopleTracker.BerService.Tests/PeopleTracker.BerService.Tests.csproj",
+                  "custom": "",
+                  "arguments": "--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude=\"[xunit*]*\" /p:CoverletOutput=src/PeopleTracker.BerService.Tests/TestResults/Coverage/",
+                  "restoreArguments": "",
+                  "publishTestResults": "true",
+                  "testRunTitle": "",
+                  "zipAfterPublish": "true",
+                  "modifyOutputPath": "true",
+                  "selectOrConfig": "select",
+                  "feedRestore": "",
+                  "includeNuGetOrg": "true",
+                  "nugetConfigPath": "",
+                  "externalEndpoints": "",
+                  "noCache": "false",
+                  "packagesDirectory": "",
+                  "verbosityRestore": "Detailed",
+                  "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                  "nuGetFeedType": "internal",
+                  "feedPublish": "",
+                  "publishPackageMetadata": "true",
+                  "externalEndpoint": "",
+                  "searchPatternPack": "**/*.csproj",
+                  "configurationToPack": "$(BuildConfiguration)",
+                  "outputDir": "$(Build.ArtifactStagingDirectory)",
+                  "nobuild": "false",
+                  "includesymbols": "false",
+                  "includesource": "false",
+                  "versioningScheme": "off",
+                  "versionEnvVar": "",
+                  "requestedMajorVersion": "1",
+                  "requestedMinorVersion": "0",
+                  "requestedPatchVersion": "0",
+                  "buildProperties": "",
+                  "verbosityPack": "Detailed",
+                  "workingDirectory": ""
+               },
+               "task": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "versionSpec": "2.*",
+                  "definitionType": "task"
+               }
+            },
+            {
+               "environment": {},
+               "displayName": "Publish",
+               "alwaysRun": false,
+               "continueOnError": false,
+               "condition": "succeeded()",
+               "enabled": true,
+               "timeoutInMinutes": 0,
+               "inputs": {
+                  "command": "publish",
+                  "publishWebProjects": "false",
+                  "projects": "src/PeopleTracker.BerService/*.csproj",
+                  "custom": "",
+                  "arguments": "-c $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)",
+                  "restoreArguments": "",
+                  "publishTestResults": "true",
+                  "testRunTitle": "",
+                  "zipAfterPublish": "true",
+                  "modifyOutputPath": "false",
+                  "selectOrConfig": "select",
+                  "feedRestore": "",
+                  "includeNuGetOrg": "true",
+                  "nugetConfigPath": "",
+                  "externalEndpoints": "",
+                  "noCache": "false",
+                  "packagesDirectory": "",
+                  "verbosityRestore": "Detailed",
+                  "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+                  "nuGetFeedType": "internal",
+                  "feedPublish": "",
+                  "publishPackageMetadata": "true",
+                  "externalEndpoint": "",
+                  "searchPatternPack": "**/*.csproj",
+                  "configurationToPack": "$(BuildConfiguration)",
+                  "outputDir": "$(Build.ArtifactStagingDirectory)",
+                  "nobuild": "false",
+                  "includesymbols": "false",
+                  "includesource": "false",
+                  "versioningScheme": "off",
+                  "versionEnvVar": "",
+                  "requestedMajorVersion": "1",
+                  "requestedMinorVersion": "0",
+                  "requestedPatchVersion": "0",
+                  "buildProperties": "",
+                  "verbosityPack": "Detailed",
+                  "workingDirectory": "src/PeopleTracker.BerService"
+               },
+               "task": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "versionSpec": "2.*",
+                  "definitionType": "task"
+               }
+            }
+         ],
+         "runsOn": [
+            "Agent"
+         ],
+         "revision": 1,
+         "createdBy": {
+            "displayName": "Donovan Brown",
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com"
+         },
+         "createdOn": "2020-09-14T00:39:45.73Z",
+         "modifiedBy": {
+            "displayName": "Donovan Brown",
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com"
+         },
+         "modifiedOn": "2020-09-14T00:39:45.73Z",
+         "id": "00000000-0000-0000-0000-000000000000",
+         "name": "dotnet",
+         "version": {
+            "major": 1,
+            "minor": 0,
+            "patch": 0,
+            "isTest": false
+         },
+         "iconUrl": "https://cdn.vsassets.io/v/M174_20200910.4/_content/icon-meta-task.png",
+         "friendlyName": "dotnet",
+         "description": "Installs dotnet, builds, tests, and published the project.",
+         "category": "Build",
+         "definitionType": "metaTask",
+         "author": "Donovan Brown",
+         "demands": [],
+         "groups": [],
+         "inputs": [
+            {
+               "aliases": [],
+               "options": {},
+               "properties": {},
+               "name": "BuildConfiguration",
+               "label": "BuildConfiguration",
+               "defaultValue": "release",
+               "required": true,
+               "type": "string",
+               "helpMarkDown": "",
+               "groupName": ""
+            }
+         ],
+         "satisfies": [],
+         "sourceDefinitions": [],
+         "dataSourceBindings": [],
+         "instanceNameFormat": "Task group: dotnet $(BuildConfiguration)",
+         "preJobExecution": {},
+         "execution": {},
+         "postJobExecution": {}
+      }
+   ]
+}

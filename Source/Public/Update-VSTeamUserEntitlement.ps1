@@ -1,6 +1,6 @@
-function Update-VSTeamUserEntitlement
-{
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmailLicenseOnly')]
+function Update-VSTeamUserEntitlement {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByEmailLicenseOnly',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamUserEntitlement')]
    param (
       [Parameter(ParameterSetName = 'ByIdLicenseOnly', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
       [Parameter(ParameterSetName = 'ByIdWithSource', Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
@@ -36,20 +36,17 @@ function Update-VSTeamUserEntitlement
       # This will throw if this account does not support MemberEntitlementManagement
       _supportsMemberEntitlementManagement
 
-      if ($email)
-      {
+      if ($email) {
          # We have to go find the id
          $user = Get-VSTeamUserEntitlement -Top 10000 | Where-Object email -eq $email
 
-         if (-not $user)
-         {
+         if (-not $user) {
             throw "Could not find user with an email equal to $email"
          }
 
          $id = $user.id
       }
-      else
-      {
+      else {
          $user = Get-VSTeamUserEntitlement -Id $id
       }
 
@@ -62,13 +59,13 @@ function Update-VSTeamUserEntitlement
       $newMSDNLicenseType = if ($MSDNLicenseType) { $MSDNLicenseType } else { $msdnLicenseTypeOriginal }
 
       $obj = @{
-         from = ""
-         op = "replace"
-         path = "/accessLevel"
+         from  = ""
+         op    = "replace"
+         path  = "/accessLevel"
          value = @{
             accountLicenseType = $newLicenseType
-            licensingSource = $newLicenseSource
-            msdnLicenseType = $newMSDNLicenseType
+            licensingSource    = $newLicenseSource
+            msdnLicenseType    = $newMSDNLicenseType
          }
       }
 
@@ -76,10 +73,14 @@ function Update-VSTeamUserEntitlement
 
       $msg = "$( $user.userName ) ($( $user.email ))"
 
-      if ($Force -or $PSCmdlet.ShouldProcess($msg, "Update user"))
-      {
+      if ($Force -or $PSCmdlet.ShouldProcess($msg, "Update user")) {
          # Call the REST API
-         _callAPI -Method Patch -NoProject -Body $body -SubDomain 'vsaex' -Resource 'userentitlements' -Id $id -Version $(_getApiVersion MemberEntitlementManagement) -ContentType 'application/json-patch+json' | Out-Null
+         _callAPI -Method PATCH -SubDomain vsaex -NoProject `
+            -Resource userentitlements `
+            -Id $id `
+            -ContentType 'application/json-patch+json' `
+            -Body $body `
+            -Version $(_getApiVersion MemberEntitlementManagement) | Out-Null
 
          Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseType: ($licenseTypeOriginal) to ($newLicenseType)"
          Write-Output "Updated user license for $( $user.userName ) ($( $user.email )) from LicenseSource: ($licenseSourceOriginal) to ($newLicenseSource)"

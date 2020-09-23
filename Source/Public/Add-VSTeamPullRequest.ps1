@@ -1,5 +1,14 @@
+# Creates a new Pull Request.
+#
+# id              : 88aea7e8-9501-45dd-ac58-b069aa73b926
+# area            : git
+# resourceName    : repositories
+# routeTemplate   : _apis/{area}/{projectId}/{resource}/{repositoryId}
+# http://bit.ly/Add-VSTeamPullRequest
+
 function Add-VSTeamPullRequest {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamPullRequest')]
    param(
       [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Alias('Id')]
@@ -25,15 +34,15 @@ function Add-VSTeamPullRequest {
       [Parameter()]
       [switch] $Force,
 
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    process {
       Write-Verbose "Add-VSTeamPullRequest"
-      
+
       $body = '{"sourceRefName": "' + $SourceRefName + '", "targetRefName": "' + $TargetRefName + '", "title": "' + $Title + '", "description": "' + $Description + '", "isDraft": ' + $Draft.ToString().ToLower() + '}'
 
       Write-Verbose $body
@@ -43,8 +52,12 @@ function Add-VSTeamPullRequest {
 
          try {
             Write-Debug 'Add-VSTeamPullRequest Call the REST API'
-            $resp = _callAPI -ProjectName $ProjectName -Area 'git' -Resource 'repositories' -Id "$RepositoryId/pullrequests" `
-               -Method Post -ContentType 'application/json;charset=utf-8' -Body $body -Version $(_getApiVersion Git)
+            $resp = _callAPI -Method POST -ProjectName $ProjectName `
+               -Area "git" `
+               -Resource "repositories" `
+               -Id "$RepositoryId/pullrequests" `
+               -Body $body `
+               -Version $(_getApiVersion Git)
 
             _applyTypesToPullRequests -item $resp
 

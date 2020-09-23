@@ -14,39 +14,37 @@ The cmdlet adds a new Service Fabric service endpoint to an existing project.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "NoAuthTest" -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false
+```powershell
+Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "NoAuthTest" -url "tcp://10.0.0.1:19000" -useWindowsSecurity $false
 ```
 
 Adds a Service Fabric Endpoint for a non-secure cluster
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
-PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someUser@someplace.com" -password $password
+```powershell
+$password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
+Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "AzureAdAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -username "someUser@someplace.com" -password $password
 ```
 
 Adds a Service Fabric Endpoint for an Azure AD secured cluster.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### Example 3
 
-```PowerShell
-PS C:\> $password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
-PS C:\> $pathToPFX = "C:\someFolder\theCertificateFile.pfx"
-PS C:\> $base64Cert = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($pathToPFX))
-PS C:\> Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "CertificateAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -certificate $base64Cert -certificatePassword $password
+```powershell
+$password = '00000000-0000-0000-0000-000000000000' | ConvertTo-SecureString -AsPlainText -Force
+$pathToPFX = "C:\someFolder\theCertificateFile.pfx"
+$base64Cert = [System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($pathToPFX))
+Add-VSTeamServiceFabricEndpoint -ProjectName "SomeProjectName" -endpointName "CertificateAuthTest" -url "tcp://10.0.0.1:19000" -serverCertThumbprint "SOMECERTTHUMBPRINT" -certificate $base64Cert -certificatePassword $password
 ```
 
 Adds a Service Fabric Endpoint for a certificate secured cluster.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -url
+### url
 
 The url of the Service Fabric management endpoint.
 
@@ -57,7 +55,7 @@ Position: 1
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -useWindowsSecurity
+### useWindowsSecurity
 
 If windows integrated authentication should be enabled. If set to false, all authentication is disabled.
 
@@ -67,7 +65,7 @@ Position: 2
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -clusterSpn
+### clusterSpn
 
 Specify the cluster service principal name, for use with windows integrated authentication.
 
@@ -76,7 +74,7 @@ Type: String
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -serverCertThumbprint
+### serverCertThumbprint
 
 The server certificate thumbprint, used for communicating with the Service Fabric cluster.
 
@@ -87,7 +85,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -username
+### username
 
 The Azure AD Username, used for communicating with the Service Fabric cluster.
 
@@ -98,7 +96,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -password
+### password
 
 The Password for the Azure AD User, used for communicating with the Service Fabric cluster.
 
@@ -109,7 +107,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -certificate
+### certificate
 
 The certificate used for communicating with the Service Fabric cluster.
 
@@ -120,7 +118,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -certificatePassword
+### certificatePassword
 
 The Password for the certificate used for communicating with the Service Fabric cluster.
 
@@ -131,7 +129,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -endpointName
+### endpointName
 
 The name displayed on the services page. In AzD this is the Connection Name.
 
@@ -142,15 +140,21 @@ Position: 3
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.ServiceEndpoint
+### vsteam_lib.ServiceEndpoint
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamServiceEndpoint](Get-VSTeamServiceEndpoint.md)
 

@@ -16,9 +16,9 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
 <!-- #include "./params/BuildId.md" -->
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -28,4 +28,8 @@
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

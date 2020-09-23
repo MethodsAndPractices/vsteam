@@ -1,4 +1,4 @@
-### -WhatIf
+### WhatIf
 
 Shows what would happen if the function runs.
 The function is not run.

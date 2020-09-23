@@ -14,10 +14,10 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamResourceArea
+```powershell
+Get-VSTeamResourceArea
 ```
 
 This will display all the areas of supported APIs for your account.
@@ -30,8 +30,8 @@ This will display all the areas of supported APIs for your account.
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Add-VSTeamOption](Add-VSTeamOption.md)
+<!-- #include "./common/related.md" -->

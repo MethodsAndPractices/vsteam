@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-### -PoolId
+### PoolId
 
 Id of the pool.
 
@@ -26,7 +26,7 @@ Required: True
 Accept pipeline input: true (ByValue)
 ```
 
-### -Id
+### Id
 
 Id of the agent to Update.
 
@@ -37,11 +37,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -51,4 +47,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

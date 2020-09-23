@@ -14,19 +14,17 @@ Allows you to set the keep forever flag and build number.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamBuild | Update-VSTeamBuild -KeepForever $false
+```powershell
+Get-VSTeamBuild | Update-VSTeamBuild -KeepForever $false
 ```
 
 Sets the keep forever property of every build to false.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -BuildNumber
+### BuildNumber
 
 The value you want to set as the build number.
 
@@ -37,7 +35,7 @@ Accept pipeline input: true (ByPropertyName, ByValue)
 
 <!-- #include "./params/BuildId.md" -->
 
-### -KeepForever
+### KeepForever
 
 $True or $False to set the keep forever property of the build.
 
@@ -46,18 +44,20 @@ Type: Boolean
 Accept pipeline input: true (ByPropertyName, ByValue)
 ```
 
-<!-- #include "./params/confirm.md" -->
+<!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.Build
+### vsteam_lib.Build
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

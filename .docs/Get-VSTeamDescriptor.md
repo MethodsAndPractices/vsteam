@@ -16,13 +16,14 @@
 
 ## PARAMETERS
 
-### -StorageKey
+### StorageKey
 
 Storage key of the subject (user, group, scope, etc.) to resolve
 
 ```yaml
 Type: String
 Required: True
+Position: 0
 Parameter Sets: ByStorageKey
 ```
 
@@ -32,4 +33,8 @@ Parameter Sets: ByStorageKey
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>vsteam_lib.User.TableView</Name>
+         <ViewSelectedBy>
+            <TypeName>vsteam_lib.User</TypeName>
+         </ViewSelectedBy>
+         <TableControl>
+            <TableHeaders>
+               <TableColumnHeader>
+                  <Label>DisplayName</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>Origin</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
+                  <Label>PrincipalName</Label>
+               </TableColumnHeader>
+            </TableHeaders>
+            <TableRowEntries>
+               <TableRowEntry>
+                  <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>DisplayName</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>Origin</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>PrincipalName</PropertyName>
+                     </TableColumnItem>
+                  </TableColumnItems>
+               </TableRowEntry>
+            </TableRowEntries>
+         </TableControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

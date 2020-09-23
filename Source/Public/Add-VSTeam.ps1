@@ -1,25 +1,36 @@
+# Create a team in a team project.
+#
+# Get-VSTeamOption 'core' 'teams'
+# id              : d30a3dd1-f8ba-442a-b86a-bd0c0c383e59
+# area            : core
+# resourceName    : teams
+# routeTemplate   : _apis/projects/{projectId}/{resource}/{*teamId}
+# https://bit.ly/Add-VSTeam
+
 function Add-VSTeam {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeam')]
    param(
-      [Parameter(Mandatory = $true, Position = 1)]
+      [Parameter(Mandatory = $true, Position = 0)]
       [Alias('TeamName')]
       [string] $Name,
 
+      [Parameter(Position = 1)]
       [string] $Description = '',
-      
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {
       $body = '{ "name": "' + $Name + '", "description": "' + $Description + '" }'
 
-      # Call the REST API
-      $resp = _callAPI -Area 'projects' -Resource "$ProjectName/teams" -NoProject `
-         -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Core)
+      $resp = _callAPI -Method POST -NoProject `
+         -Resource "projects/$ProjectName/teams" `
+         -Body $body `
+         -Version $(_getApiVersion Core)
 
-      $team = [VSTeamTeam]::new($resp, $ProjectName)
+      $team = [vsteam_lib.Team]::new($resp, $ProjectName)
 
       Write-Output $team
    }

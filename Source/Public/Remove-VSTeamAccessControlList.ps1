@@ -1,8 +1,9 @@
 function Remove-VSTeamAccessControlList {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByNamespace')]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High", DefaultParameterSetName = 'ByNamespace',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamAccessControlList')]
    param(
       [Parameter(ParameterSetName = 'ByNamespace', Mandatory = $true, ValueFromPipeline = $true)]
-      [VSTeamSecurityNamespace] $SecurityNamespace,
+      [vsteam_lib.SecurityNamespace] $SecurityNamespace,
 
       [Parameter(ParameterSetName = 'ByNamespaceId', Mandatory = $true)]
       [guid] $SecurityNamespaceId,
@@ -35,9 +36,11 @@ function Remove-VSTeamAccessControlList {
 
       if ($Force -or $pscmdlet.ShouldProcess($queryString.tokens, "Delete ACL")) {
          # Call the REST API
-         $resp = _callAPI -Area 'accesscontrollists' -id $SecurityNamespaceId -method DELETE `
-            -Version $(_getApiVersion Core) `
-            -QueryString $queryString
+         $resp = _callAPI -Method DELETE `
+            -Resource accesscontrollists `
+            -id $SecurityNamespaceId  `
+            -QueryString $queryString `
+            -Version $(_getApiVersion Core)
 
          Write-Output $resp
       }

@@ -14,33 +14,35 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
+```powershell
 Get-VSTeamSecurityNamespace | Select-Object -First 1 | Get-VSTeamAccessControlList
 ```
 
 ## PARAMETERS
 
-### -SecurityNamespace
+### SecurityNamespace
 
-Security namespace identifier.
+Security namespace object.
 
 ```yaml
-Type: VSTeamSecurityNamespace
+Type: vsteam_lib.SecurityNamespace
+Parameter Sets: ByNamespace
 Required: True
 ```
 
-### -SecurityNamespaceId
+### SecurityNamespaceId
 
 Security namespace identifier.
 
 ```yaml
 Type: String
+Parameter Sets: ByNamespaceId
 Required: True
 ```
 
-### -Token
+### Token
 
 Security token
 
@@ -49,7 +51,7 @@ Type: String
 Required: True
 ```
 
-### -Descriptors
+### Descriptors
 
 An optional filter string containing a list of identity descriptors whose ACEs should be retrieved. If this is not set entire ACLs will be returned.
 
@@ -58,7 +60,7 @@ Type: String
 Required: True
 ```
 
-### -IncludeExtendedInfo
+### IncludeExtendedInfo
 
 If set, populate the extended information properties for the access control entries contained in the returned lists.
 
@@ -67,7 +69,7 @@ Type: Switch
 Required: True
 ```
 
-### -Recurse
+### Recurse
 
 If true and this is a hierarchical namespace, return child ACLs of the specified token.
 
@@ -80,8 +82,12 @@ Required: True
 
 ## OUTPUTS
 
-### VSTeamAccessControlList
+### vsteam_lib.AccessControlList
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

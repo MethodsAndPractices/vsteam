@@ -1,5 +1,6 @@
 function Update-VSTeamRelease {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Medium",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamRelease')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
       [int] $Id,
@@ -9,9 +10,9 @@ function Update-VSTeamRelease {
 
       [switch] $Force,
 
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
@@ -20,8 +21,12 @@ function Update-VSTeamRelease {
 
       if ($Force -or $pscmdlet.ShouldProcess($Id, "Update Release")) {
          # Call the REST API
-         $resp = _callAPI -ProjectName $projectName -SubDomain vsrm -Area release -Resource releases -Id $id  `
-            -Method Put -body $body -Version $(_getApiVersion Release)
+         $resp = _callAPI -Method PUT -SubDomain vsrm -ProjectName $projectName `
+            -Area release `
+            -Resource releases `
+            -Id $id `
+            -body $body `
+            -Version $(_getApiVersion Release)
 
          Write-Output $resp
       }

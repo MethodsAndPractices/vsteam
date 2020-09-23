@@ -14,19 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Set-VSTeamReleaseStatus -Id 5 -status Abandoned
+```powershell
+Set-VSTeamReleaseStatus -Id 5 -status Abandoned
 ```
 
 This command will set the status of release with id 5 to Abandoned.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Id
+### Id
 
 Specifies one or more releases by ID.
 
@@ -40,7 +38,7 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -Status
+### Status
 
 The status to set for the release Active or Abandoned.
 
@@ -48,7 +46,9 @@ The status to set for the release Active or Abandoned.
 Type: String
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -56,4 +56,8 @@ Type: String
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

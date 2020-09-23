@@ -16,42 +16,42 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Descriptor
+### Descriptor
 
 ```yaml
 Type: String
 Required: True
 ```
 
-### -User
+### User
 
 ```yaml
 Type: VSTeamUser
 Required: True
 ```
 
-### -Group
+### Group
 
 ```yaml
 Type: VSTeamGroup
 Required: True
 ```
 
-### -Allow
+### Allow
 
 ```yaml
 Type: VSTeamProjectPermissions
 Required: True
 ```
 
-### -Deny
+### Deny
 
 ```yaml
 Type: VSTeamProjectPermissions
 Required: True
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -61,4 +61,8 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

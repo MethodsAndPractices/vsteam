@@ -1,5 +1,14 @@
+# Adds a new policy to the specified project.
+#
+# Get-VSTeamOption 'policy' 'configurations'
+# id              : dad91cbe-d183-45f8-9c6e-9c1164472121
+# area            : policy
+# resourceName    : configurations
+# routeTemplate   : {project}/_apis/{area}/{resource}/{configurationId}
+# http://bit.ly/Add-VSTeamPolicy
+
 function Add-VSTeamPolicy {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Add-VSTeamPolicy')]
    param(
       [Parameter(Mandatory = $true)]
       [guid] $type,
@@ -11,9 +20,9 @@ function Add-VSTeamPolicy {
       [Parameter(Mandatory = $true)]
       [hashtable] $settings,
 
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {
@@ -28,8 +37,11 @@ function Add-VSTeamPolicy {
 
       try {
          # Call the REST API
-         $resp = _callAPI -ProjectName $ProjectName -Area 'policy' -Resource 'configurations' `
-            -Method Post -ContentType 'application/json' -Body $body -Version $(_getApiVersion Git)
+         $resp = _callAPI -Method POST -ProjectName $ProjectName `
+            -Area "policy" `
+            -Resource "configurations" `
+            -Body $body `
+            -Version $(_getApiVersion Policy)
 
          Write-Output $resp
       }

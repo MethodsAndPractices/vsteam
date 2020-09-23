@@ -4,9 +4,9 @@ function Set-VSTeamDefaultProject {
    param(
       [switch] $Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $Project
    )
    DynamicParam {
@@ -57,7 +57,7 @@ function Set-VSTeamDefaultProject {
             # You always have to set at the process level or they will Not
             # be seen in your current session.
             $env:TEAM_PROJECT = $Project
-            [VSTeamVersions]::DefaultProject = $Project
+            [vsteam_lib.Versions]::DefaultProject = $Project
 
             [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project, $Level)
          }

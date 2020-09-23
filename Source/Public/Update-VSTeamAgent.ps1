@@ -1,5 +1,6 @@
 function Update-VSTeamAgent {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Update-VSTeamAgent')]
    param(
       [Parameter(Mandatory = $true, ValueFromPipeline = $true, Position = 0)]
       [int] $PoolId,
@@ -15,7 +16,12 @@ function Update-VSTeamAgent {
       foreach ($item in $Id) {
          try {
             if ($Force -or $pscmdlet.ShouldProcess($item, "Update-VSTeamAgent")) {
-               _callAPI -Method Post -Area "distributedtask/pools/$PoolId" -Resource messages -QueryString @{agentId = $item} -Version $(_getApiVersion DistributedTask) -ContentType "application/json" | Out-Null
+               _callAPI -Method POST `
+                  -Area "distributedtask/pools/$PoolId" `
+                  -Resource messages `
+                  -QueryString @{agentId = $item } `
+                  -Version $(_getApiVersion DistributedTaskReleased) | Out-Null
+
                Write-Output "Update agent $item"
             }
          }

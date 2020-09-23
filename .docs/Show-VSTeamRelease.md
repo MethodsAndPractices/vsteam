@@ -14,17 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Show-VSTeamRelease -ProjectName Demo -Id 3
+```powershell
+Show-VSTeamRelease -ProjectName Demo -Id 3
 ```
 
 This command will open a web browser with the summary of release 3.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 Specifies release by ID.
 
@@ -40,17 +40,15 @@ Accept pipeline input: true (ByPropertyName)
 
 ## OUTPUTS
 
-### Team.Release
-
 ## NOTES
 
 You can pipe the release ID to this function.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamRelease](Add-VSTeamRelease.md)
 

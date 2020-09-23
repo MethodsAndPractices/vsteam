@@ -6,6 +6,7 @@ $profilesPath = "$HOME/vsteam_profiles.json"
 # This is the main function for calling TFS and VSTS. It handels the auth and format of the route.
 # If you need to call TFS or VSTS this is the function to use.
 function _callAPI {
+   [CmdletBinding()]
    param(
       [string]$resource,
       [string]$area,
@@ -121,9 +122,31 @@ function _testGraphSupport {
    (_getApiVersion Graph) -as [boolean]
 }
 
+function _supportsHierarchyQuery {
+   _hasAccount
+   if ($false -eq $(_testHierarchyQuerySupport)) {
+      throw 'This account does not support the graph API.'
+   }
+}
+
+function _testHierarchyQuerySupport {
+   (_getApiVersion HierarchyQuery) -as [boolean]
+}
+
+function _supportVariableGroups {
+   _hasAccount
+   if ($false -eq $(_testVariableGroupsSupport)) {
+      throw 'This account does not support the variable groups.'
+   }
+}
+
+function _testVariableGroupsSupport {
+   (_getApiVersion VariableGroups) -as [boolean]
+}
+
 function _supportsSecurityNamespace {
    _hasAccount
-   if (([VSTeamVersions]::Version -ne "VSTS") -and ([VSTeamVersions]::Version -ne "AzD")) {
+   if (([vsteam_lib.Versions]::Version -ne "VSTS") -and ([vsteam_lib.Versions]::Version -ne "AzD")) {
       throw 'Security Namespaces are currently only supported in Azure DevOps Service (Online)'
    }
 }
@@ -147,9 +170,14 @@ function _testAdministrator {
 # built for the API call.
 function _getApiVersion {
    [CmdletBinding(DefaultParameterSetName = 'Service')]
+   [OutputType([string])]
    param (
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy', 'Processes')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask',
+         'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
+         'Packaging', 'MemberEntitlementManagement',
+         'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
+         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
@@ -157,68 +185,21 @@ function _getApiVersion {
    )
 
    if ($Target.IsPresent) {
-      return [VSTeamVersions]::Version
+      return [vsteam_lib.Versions]::GetApiVersion("Version")
    }
    else {
-
-      switch ($Service) {
-         'Build' {
-            return [VSTeamVersions]::Build
-         }
-         'Release' {
-            return [VSTeamVersions]::Release
-         }
-         'Core' {
-            return [VSTeamVersions]::Core
-         }
-         'Git' {
-            return [VSTeamVersions]::Git
-         }
-         'DistributedTask' {
-            return [VSTeamVersions]::DistributedTask
-         }
-         'VariableGroups' {
-            return [VSTeamVersions]::VariableGroups
-         }
-         'Tfvc' {
-            return [VSTeamVersions]::Tfvc
-         }
-         'Packaging' {
-            return [VSTeamVersions]::Packaging
-         }
-         'MemberEntitlementManagement' {
-            return [VSTeamVersions]::MemberEntitlementManagement
-         }
-         'ExtensionsManagement' {
-            return [VSTeamVersions]::ExtensionsManagement
-         }
-         'ServiceEndpoints' {
-            return [VSTeamVersions]::ServiceEndpoints
-         }
-         'Graph' {
-            return [VSTeamVersions]::Graph
-         }
-         'TaskGroups' {
-            return [VSTeamVersions]::TaskGroups
-         }
-         'Policy' {
-            return [VSTeamVersions]::Policy
-         } 
-         'Processes' {
-            return [VSTeamVersions]::Processes
-         } 
-      }
+      return [vsteam_lib.Versions]::GetApiVersion($Service)
    }
 }
 
 function _getInstance {
-   return [VSTeamVersions]::Account
+   return [vsteam_lib.Versions]::Account
 }
 
 function _getDefaultTimeout {
    if ($Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]) {
       return $Global:PSDefaultParameterValues["*-vsteam*:vsteamApiTimeout"]
-   } 
+   }
    else {
       return 60
    }
@@ -244,8 +225,11 @@ function _buildRequestURI {
       [string]$version,
       [string]$subDomain,
       [object]$queryString,
-      [ProjectValidateAttribute()]
+
+      [Parameter(Mandatory = $false)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
       $ProjectName,
+
       [switch]$UseProjectId,
       [switch]$NoProject
    )
@@ -420,7 +404,7 @@ function _getUserAgent {
 
    $os = Get-OperatingSystem
 
-   $result = "Team Module/$([VSTeamVersions]::ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
+   $result = "Team Module/$([vsteam_lib.Versions]::ModuleVersion) ($os) PowerShell/$($PSVersionTable.PSVersion.ToString())"
 
    Write-Verbose $result
 
@@ -448,7 +432,10 @@ function _getWorkItemTypes {
 
    # Call the REST API
    try {
-      $resp = _callAPI -ProjectName $ProjectName -area 'wit' -resource 'workitemtypes' -version $(_getApiVersion Core)
+      $resp = _callAPI -ProjectName $ProjectName `
+         -area wit `
+         -resource workitemtypes `
+         -version $(_getApiVersion Core)
 
       # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
       # To replace all the "": with "_end":
@@ -460,50 +447,6 @@ function _getWorkItemTypes {
    }
    catch {
       Write-Verbose $_
-      Write-Output @()
-   }
-}
-
-# When writing unit tests mock this and return false.
-# This will prevent the dynamic project name parameter
-# from trying to call the getProject function.
-# Mock _hasProjectCacheExpired { return $false }
-function _hasProjectCacheExpired {
-   return $([VSTeamProjectCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
-}
-
-function _hasProcessTemplateCacheExpired {
-   return $([VSTeamProcessCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
-}
-
-function _hasQueryCacheExpired {
-   return $([VSTeamQueryCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes
-}
-
-function _getProjects {
-   if (-not $(_getInstance)) {
-      Write-Output @()
-      return
-   }
-
-   $resource = "/projects"
-   $instance = $(_getInstance)
-   $version = $(_getApiVersion Core)
-
-   # Build the url to list the projects
-   # You CANNOT use _buildRequestURI here or you will end up
-   # in an infinite loop.
-   $listurl = $instance + '/_apis' + $resource + '?api-version=' + $version + '&stateFilter=All&$top=9999'
-
-   # Call the REST API
-   try {
-      $resp = _callAPI -url $listurl
-
-      if ($resp.count -gt 0) {
-         Write-Output ($resp.value).name
-      }
-   }
-   catch {
       Write-Output @()
    }
 }
@@ -544,7 +487,7 @@ function _buildProjectNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   $arrSet = [VSTeamProjectCache]::GetCurrent($false)      
+   $arrSet = [vsteam_lib.ProjectCache]::GetCurrent($false)
 
    if ($arrSet) {
       Write-Verbose "arrSet = $arrSet"
@@ -584,27 +527,6 @@ function _buildProjectNameDynamicParam {
    #>
 }
 
-function _getProcesses {
-   if (-not $(_getInstance)) {
-      Write-Output @()
-      return
-   }
-
-   # Call the REST API
-   try {
-      $query = @{ }
-      $query['stateFilter'] = 'All'
-      $query['$top'] = '9999'
-      $resp = _callAPI -area 'process' -resource 'processes' -Version $(_getApiVersion Core) -QueryString $query -NoProject
-
-      if ($resp.count -gt 0) {
-         Write-Output ($resp.value).name
-      }
-   }
-   catch {
-      Write-Output @()
-   }
-}
 function _buildProcessNameDynamicParam {
    param(
       [string] $ParameterName = 'ProcessName',
@@ -641,14 +563,7 @@ function _buildProcessNameDynamicParam {
    }
 
    # Generate and set the ValidateSet
-   if ($([VSTeamProcessCache]::timestamp) -ne (Get-Date).TimeOfDay.TotalMinutes) {
-      $arrSet = _getProcesses
-      [VSTeamProcessCache]::processes = $arrSet
-      [VSTeamProcessCache]::timestamp = (Get-Date).TimeOfDay.TotalMinutes
-   }
-   else {
-      $arrSet = [VSTeamProcessCache]::processes
-   }
+   $arrSet = [vsteam_lib.ProcessTemplateCache]::GetCurrent()
 
    if ($arrSet) {
       Write-Verbose "arrSet = $arrSet"
@@ -880,7 +795,7 @@ function _setEnvironmentVariables {
    $env:TEAM_VERSION = $Version
    $env:TEAM_TOKEN = $BearerToken
 
-   [VSTeamVersions]::Account = $Acct
+   [vsteam_lib.Versions]::Account = $Acct
 
    # This is so it can be loaded by default in the next session
    if ($Level -ne "Process") {
@@ -899,8 +814,8 @@ function _clearEnvironmentVariables {
 
    $env:TEAM_PROJECT = $null
    $env:TEAM_TIMEOUT = $null
-   [VSTeamVersions]::DefaultProject = ''
-   [VSTeamVersions]::DefaultTimeout = ''
+   [vsteam_lib.Versions]::DefaultProject = ''
+   [vsteam_lib.Versions]::DefaultTimeout = ''
    $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
    $Global:PSDefaultParameterValues.Remove("*-vsteam*:vsteamApiTimeout")
 
@@ -946,14 +861,84 @@ function _getVSTeamIdFromDescriptor {
    return [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($Padded))
 }
 
+function _getPermissionInheritanceInfo {
+   [cmdletbinding()]
+   [OutputType([System.Collections.Hashtable])]
+   param(
+      [parameter(Mandatory = $true)]
+      [string] $projectName,
+
+      [parameter(Mandatory = $true)]
+      [string] $resourceName,
+      [Parameter(Mandatory = $true)]
+
+      [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
+      [string] $resourceType
+   )
+
+   $projectId = (Get-VSTeamProject -Name $projectName | Select-Object -ExpandProperty id)
+
+   Switch ($resourceType) {
+      "Repository" {
+         $securityNamespaceID = "2e9eb7ed-3c0a-47d4-87c1-0ffdd275fd87"
+
+         $repositoryId = (Get-VSTeamGitRepository -Name "$resourceName" -projectName $projectName | Select-Object -ExpandProperty id )
+
+         if ($null -eq $repositoryId) {
+            Write-Error "Unable to retrieve repository information. Ensure that the resourceName provided matches a repository name exactly."
+            return
+         }
+
+         $token = "repoV2/$($projectId)/$repositoryId"
+      }
+
+      "BuildDefinition" {
+         $securityNamespaceID = "33344d9c-fc72-4d6f-aba5-fa317101a7e9"
+
+         $buildDefinitionId = (Get-VSTeamBuildDefinition -projectName $projectName | Where-Object name -eq "$resourceName" | Select-Object -ExpandProperty id)
+
+         if ($null -eq $buildDefinitionId) {
+            Write-Error "Unable to retrieve build definition information. Ensure that the resourceName provided matches a build definition name exactly."
+            return
+         }
+
+         $token = "$($projectId)/$buildDefinitionId"
+      }
+
+      "ReleaseDefinition" {
+         $securityNamespaceID = "c788c23e-1b46-4162-8f5e-d7585343b5de"
+
+         $releaseDefinition = (Get-VSTeamReleaseDefinition -projectName $projectName | Where-Object -Property name -eq "$resourceName")
+
+         if ($null -eq $releaseDefinition) {
+            Write-Error "Unable to retrieve release definition information. Ensure that the resourceName provided matches a release definition name exactly."
+            return
+         }
+
+         if (($releaseDefinition).path -eq "/") {
+            $token = "$($projectId)/$($releaseDefinition.id)"
+         }
+         else {
+            $token = "$($projectId)" + "$($releaseDefinition.path -replace "\\","/")" + "/$($releaseDefinition.id)"
+         }
+      }
+   }
+
+   return @{
+      Token               = $token
+      ProjectID           = $projectId
+      SecurityNamespaceID = $securityNamespaceID
+   }
+}
+
 function _getDescriptorForACL {
    [cmdletbinding()]
    param(
       [parameter(Mandatory = $true, ParameterSetName = "ByUser")]
-      [VSTeamUser]$User,
+      [vsteam_lib.User]$User,
 
       [parameter(MAndatory = $true, ParameterSetName = "ByGroup")]
-      [VSTeamGroup]$Group
+      [vsteam_lib.Group]$Group
    )
 
    if ($User) {

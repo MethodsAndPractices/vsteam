@@ -1,0 +1,370 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>vsteam_lib.Test</RootNamespace>
+
+    <IsPackable>false</IsPackable>
+
+    <Configurations>Debug;Release;VS;LibOnly</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestResults\**" />
+    <EmbeddedResource Remove="TestResults\**" />
+    <None Remove="TestResults\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\Microsoft.CSharp.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\Microsoft.VisualBasic.Core.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\Microsoft.VisualBasic.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\Microsoft.Win32.Primitives.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\mscorlib.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\netstandard.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.AppContext.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Buffers.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Collections.Concurrent.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Collections.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Collections.Immutable.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Collections.NonGeneric.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Collections.Specialized.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ComponentModel.Annotations.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ComponentModel.DataAnnotations.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ComponentModel.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ComponentModel.EventBasedAsync.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ComponentModel.Primitives.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ComponentModel.TypeConverter.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Configuration.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Console.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Core.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Data.Common.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Data.DataSetExtensions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Data.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.Contracts.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.Debug.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.DiagnosticSource.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.FileVersionInfo.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.Process.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.StackTrace.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.TextWriterTraceListener.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.Tools.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.TraceSource.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Diagnostics.Tracing.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Drawing.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Drawing.Primitives.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Dynamic.Runtime.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Globalization.Calendars.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Globalization.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Globalization.Extensions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.Compression.Brotli.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.Compression.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.Compression.FileSystem.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.Compression.ZipFile.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.FileSystem.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.FileSystem.DriveInfo.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.FileSystem.Primitives.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.FileSystem.Watcher.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.IsolatedStorage.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.MemoryMappedFiles.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.Pipes.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.IO.UnmanagedMemoryStream.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Linq.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Linq.Expressions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Linq.Parallel.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Linq.Queryable.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Memory.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.Http.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.HttpListener.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.Mail.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.NameResolution.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.NetworkInformation.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.Ping.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.Primitives.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.Requests.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.Security.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.ServicePoint.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.Sockets.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.WebClient.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.WebHeaderCollection.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.WebProxy.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.WebSockets.Client.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Net.WebSockets.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Numerics.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Numerics.Vectors.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ObjectModel.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.DispatchProxy.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.Emit.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.Emit.ILGeneration.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.Emit.Lightweight.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.Extensions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.Metadata.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.Primitives.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Reflection.TypeExtensions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Resources.Reader.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Resources.ResourceManager.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Resources.Writer.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.CompilerServices.VisualC.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Extensions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Handles.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.InteropServices.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.InteropServices.WindowsRuntime.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Intrinsics.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Loader.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Numerics.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Serialization.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Serialization.Formatters.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Serialization.Json.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Serialization.Primitives.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Runtime.Serialization.Xml.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.Claims.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.Cryptography.Algorithms.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.Cryptography.Csp.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.Cryptography.Encoding.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.Cryptography.Primitives.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.Cryptography.X509Certificates.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.Principal.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Security.SecureString.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ServiceModel.Web.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ServiceProcess.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Text.Encoding.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Text.Encoding.Extensions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Text.Json.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Text.RegularExpressions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.Channels.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.Overlapped.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.Tasks.Dataflow.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.Tasks.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.Tasks.Extensions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.Tasks.Parallel.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.Thread.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.ThreadPool.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Threading.Timer.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Transactions.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Transactions.Local.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.ValueTuple.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Web.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Web.HttpUtility.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Windows.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.Linq.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.ReaderWriter.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.Serialization.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.XDocument.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.XmlDocument.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.XmlSerializer.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.XPath.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\System.Xml.XPath.XDocument.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\ref\WindowsBase.dll" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\unix\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Host\Microsoft.PowerShell.Host.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\unix\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Management\Microsoft.PowerShell.Management.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\unix\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Security\Microsoft.PowerShell.Security.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\unix\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\CimCmdlets\CimCmdlets.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Diagnostics\Diagnostics.format.ps1xml" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Diagnostics\Event.format.ps1xml" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Diagnostics\GetEvent.types.ps1xml" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Diagnostics\Microsoft.PowerShell.Diagnostics.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Host\Microsoft.PowerShell.Host.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Management\Microsoft.PowerShell.Management.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Security\Microsoft.PowerShell.Security.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.WSMan.Management\Microsoft.WSMan.Management.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\Microsoft.WSMan.Management\WSMan.format.ps1xml" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\PSDiagnostics\PSDiagnostics.psd1" />
+    <None Remove="C:\Users\dlbm3\.nuget\packages\microsoft.powershell.sdk\7.0.3\contentFiles\any\any\runtimes\win\lib\netcoreapp3.1\Modules\PSDiagnostics\PSDiagnostics.psm1" />
+    <None Remove="SampleFiles\Get-VSTeamClassificationNode-depth3-ids82.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\SampleFiles\010_builddef_1.json" Link="SampleFiles\010_builddef_1.json" />
+    <Content Include="..\SampleFiles\010_builddef_2.json" Link="SampleFiles\010_builddef_2.json" />
+    <Content Include="..\SampleFiles\010_releasedef_1.json" Link="SampleFiles\010_releasedef_1.json" />
+    <Content Include="..\SampleFiles\010_releasedef_2.json" Link="SampleFiles\010_releasedef_2.json" />
+    <Content Include="..\SampleFiles\accessControlEntryResult.json" Link="SampleFiles\accessControlEntryResult.json" />
+    <Content Include="..\SampleFiles\accessControlListResult.json" Link="SampleFiles\accessControlListResult.json" />
+    <Content Include="..\SampleFiles\buildDef.json" Link="SampleFiles\buildDef.json" />
+    <Content Include="..\SampleFiles\buildDef2017.json" Link="SampleFiles\buildDef2017.json" />
+    <Content Include="..\SampleFiles\buildDef2018.json" Link="SampleFiles\buildDef2018.json" />
+    <Content Include="..\SampleFiles\buildDefAzD.json" Link="SampleFiles\buildDefAzD.json" />
+    <Content Include="..\SampleFiles\buildDefHierarchyQuery.json" Link="SampleFiles\buildDefHierarchyQuery.json" />
+    <Content Include="..\SampleFiles\buildDefHierarchyQuery_Update.json" Link="SampleFiles\buildDefHierarchyQuery_Update.json" />
+    <Content Include="..\SampleFiles\buildDefvsts.json" Link="SampleFiles\buildDefvsts.json" />
+    <Content Include="..\SampleFiles\buildDefyaml.json" Link="SampleFiles\buildDefyaml.json" />
+    <Content Include="..\SampleFiles\buildResults.json" Link="SampleFiles\buildResults.json" />
+    <Content Include="..\SampleFiles\buildSingleResult.json" Link="SampleFiles\buildSingleResult.json" />
+    <Content Include="..\SampleFiles\buildTimeline.json" Link="SampleFiles\buildTimeline.json" />
+    <Content Include="..\SampleFiles\buildTimelineEmptyRecords.json" Link="SampleFiles\buildTimelineEmptyRecords.json" />
+    <Content Include="..\SampleFiles\classificationNodeResult.json" Link="SampleFiles\classificationNodeResult.json" />
+    <Content Include="..\SampleFiles\descriptor.scope.TestProject.json" Link="SampleFiles\descriptor.scope.TestProject.json" />
+    <Content Include="..\SampleFiles\extensionResults.json" Link="SampleFiles\extensionResults.json" />
+    <Content Include="..\SampleFiles\Get-BuildDefinition_2017.json" Link="SampleFiles\Get-BuildDefinition_2017.json" />
+    <Content Include="..\SampleFiles\Get-BuildDefinition_2018.json" Link="SampleFiles\Get-BuildDefinition_2018.json" />
+    <Content Include="..\SampleFiles\Get-BuildDefinition_2019.json" Link="SampleFiles\Get-BuildDefinition_2019.json" />
+    <Content Include="..\SampleFiles\Get-BuildDefinition_AzD.json" Link="SampleFiles\Get-BuildDefinition_AzD.json" />
+    <Content Include="..\SampleFiles\Get-VSTeam.json" Link="SampleFiles\Get-VSTeam.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamAccessControlList.json" Link="SampleFiles\Get-VSTeamAccessControlList.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamAgent-PoolId1.json" Link="SampleFiles\Get-VSTeamAgent-PoolId1.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamBuild.json" Link="SampleFiles\Get-VSTeamBuild.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamClassificationNode-depth3-ids82.json" Link="SampleFiles\Get-VSTeamClassificationNode-depth3-ids82.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamClassificationNode-depth4-ids84.json" Link="SampleFiles\Get-VSTeamClassificationNode-depth4-ids84.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamClassificationNode.json" Link="SampleFiles\Get-VSTeamClassificationNode.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamExtension.json" Link="SampleFiles\Get-VSTeamExtension.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamFeed.json" Link="SampleFiles\Get-VSTeamFeed.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamGitCommit.json" Link="SampleFiles\Get-VSTeamGitCommit.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamGitRef.json" Link="SampleFiles\Get-VSTeamGitRef.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamGitRepository.json" Link="SampleFiles\Get-VSTeamGitRepository.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamGroup.json" Link="SampleFiles\Get-VSTeamGroup.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamJobRequest-PoolId1-AgentID111.json" Link="SampleFiles\Get-VSTeamJobRequest-PoolId1-AgentID111.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamOption.json" Link="SampleFiles\Get-VSTeamOption.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamOption_vsrm.json" Link="SampleFiles\Get-VSTeamOption_vsrm.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamPool.json" Link="SampleFiles\Get-VSTeamPool.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamProject.json" Link="SampleFiles\Get-VSTeamProject.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamQuery.json" Link="SampleFiles\Get-VSTeamQuery.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamQueue.json" Link="SampleFiles\Get-VSTeamQueue.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamRelease-id178-expandEnvironments.json" Link="SampleFiles\Get-VSTeamRelease-id178-expandEnvironments.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamRelease.json" Link="SampleFiles\Get-VSTeamRelease.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamReleaseDefinition-ReleaseId40.json" Link="SampleFiles\Get-VSTeamReleaseDefinition-ReleaseId40.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamReleaseDefinition.json" Link="SampleFiles\Get-VSTeamReleaseDefinition.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamSecurityNamespace.json" Link="SampleFiles\Get-VSTeamSecurityNamespace.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamUser.json" Link="SampleFiles\Get-VSTeamUser.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamUserEntitlement-Id.json" Link="SampleFiles\Get-VSTeamUserEntitlement-Id.json" />
+    <Content Include="..\SampleFiles\Get-VSTeamUserEntitlement.json" Link="SampleFiles\Get-VSTeamUserEntitlement.json" />
+    <Content Include="..\SampleFiles\get-vsteamworkitemtype.json" Link="SampleFiles\get-vsteamworkitemtype.json" />
+    <Content Include="..\SampleFiles\gitCommitResults.json" Link="SampleFiles\gitCommitResults.json" />
+    <Content Include="..\SampleFiles\gitReopHierarchyQuery_Update.json" Link="SampleFiles\gitReopHierarchyQuery_Update.json" />
+    <Content Include="..\SampleFiles\gitStatMultipleResults.json" Link="SampleFiles\gitStatMultipleResults.json" />
+    <Content Include="..\SampleFiles\gitStatSingleResult.json" Link="SampleFiles\gitStatSingleResult.json" />
+    <Content Include="..\SampleFiles\groups.json" Link="SampleFiles\groups.json" />
+    <Content Include="..\SampleFiles\groupsSingle.json" Link="SampleFiles\groupsSingle.json" />
+    <Content Include="..\SampleFiles\jobrequests2017.json" Link="SampleFiles\jobrequests2017.json" />
+    <Content Include="..\SampleFiles\jobrequestsAzD.json" Link="SampleFiles\jobrequestsAzD.json" />
+    <Content Include="..\SampleFiles\pipelineDefYamlResult.json" Link="SampleFiles\pipelineDefYamlResult.json" />
+    <Content Include="..\SampleFiles\projectResult.json" Link="SampleFiles\projectResult.json" />
+    <Content Include="..\SampleFiles\releaseDefAzD.json" Link="SampleFiles\releaseDefAzD.json" />
+    <Content Include="..\SampleFiles\releaseDefHierarchyQuery.json" Link="SampleFiles\releaseDefHierarchyQuery.json" />
+    <Content Include="..\SampleFiles\releaseDefHierarchyQuery_Update.json" Link="SampleFiles\releaseDefHierarchyQuery_Update.json" />
+    <Content Include="..\SampleFiles\repoAccesscontrollists.json" Link="SampleFiles\repoAccesscontrollists.json" />
+    <Content Include="..\SampleFiles\securityNamespace.json" Link="SampleFiles\securityNamespace.json" />
+    <Content Include="..\SampleFiles\securityNamespace.single.json" Link="SampleFiles\securityNamespace.single.json" />
+    <Content Include="..\SampleFiles\securityNamespaces.json" Link="SampleFiles\securityNamespaces.json" />
+    <Content Include="..\SampleFiles\serviceEndpointTypeSample.json" Link="SampleFiles\serviceEndpointTypeSample.json" />
+    <Content Include="..\SampleFiles\singleExtensionResult.json" Link="SampleFiles\singleExtensionResult.json" />
+    <Content Include="..\SampleFiles\singleGitRepo.json" Link="SampleFiles\singleGitRepo.json" />
+    <Content Include="..\SampleFiles\taskGroup.json" Link="SampleFiles\taskGroup.json" />
+    <Content Include="..\SampleFiles\taskGroups.json" Link="SampleFiles\taskGroups.json" />
+    <Content Include="..\SampleFiles\updatePullRequestResponse.json" Link="SampleFiles\updatePullRequestResponse.json" />
+    <Content Include="..\SampleFiles\users.json" Link="SampleFiles\users.json" />
+    <Content Include="..\SampleFiles\users.single.json" Link="SampleFiles\users.single.json" />
+    <Content Include="..\SampleFiles\variableGroupSamples2017.json" Link="SampleFiles\variableGroupSamples2017.json" />
+    <Content Include="..\SampleFiles\withoutChildNode.json" Link="SampleFiles\withoutChildNode.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.3" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="Trackyon.System.Management.Automation.Abstractions" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Classes\vsteam-lib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CodeOwls.PowerShell.Paths">
+      <HintPath>..\..\packages\ships\CodeOwls.PowerShell.Paths.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeOwls.PowerShell.Provider">
+      <HintPath>..\..\packages\ships\CodeOwls.PowerShell.Provider.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.PowerShell.SHiPS">
+      <HintPath>..\..\packages\ships\Microsoft.PowerShell.SHiPS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+   
+   <ItemGroup>
+     <None Update="SampleFiles\Get-BuildDefinition_2017.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-BuildDefinition_2018.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-BuildDefinition_2019.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-BuildDefinition_AzD.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeam.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamAccessControlList.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamAgent-PoolId1.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamBuild.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamExtension.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamFeed.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamGitRef.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamGitRepository.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamGroup.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamJobRequest-PoolId1-AgentID111.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamPool.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamProject.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamQueue.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamRelease-id178-expandEnvironments.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamRelease.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamReleaseDefinition-ReleaseId40.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamReleaseDefinition.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+     <None Update="SampleFiles\Get-VSTeamUser.json">
+       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+     </None>
+   </ItemGroup>
+   
+   <ItemGroup>
+     <None Include="..\SampleFiles\azure-pipelines.test.yml" Link="SampleFiles\azure-pipelines.test.yml" />
+   </ItemGroup>
+
+</Project>

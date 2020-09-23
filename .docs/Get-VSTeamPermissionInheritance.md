@@ -14,27 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition
+```powershell
+Get-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition
 ```
 
 This command returns true or false.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamBuildDefinition | Get-VSTeamPermissionInheritance -ResourceType BuildDefinition
+```powershell
+Get-VSTeamBuildDefinition | Get-VSTeamPermissionInheritance
 ```
 
 This command returns true or false for every build definition returned from Get-VSTeamBuildDefinition.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Name
+### Name
 
 Specifies the name of the resource.
 
@@ -44,7 +42,7 @@ Accept pipeline input: true (ByPropertyName)
 Required: True
 ```
 
-### -ResourceType
+### ResourceType
 
 Specifies the type of resource. The acceptable values for this parameter are:
 
@@ -57,13 +55,19 @@ Type: String
 Required: True
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamPolicy](Add-VSTeamPolicy.md)
 

@@ -1,0 +1,48 @@
+{
+  "count": 1,
+  "value": [
+    {
+      "createdBy": {
+        "displayName": "Test User",
+        "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+          }
+        },
+        "id": "00000000-0000-0000-0000-000000000000",
+        "uniqueName": "test@test.com",
+        "imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+        "descriptor": "aad.redacted"
+      },
+      "createdDate": "2020-09-07T23:19:33.8376081Z",
+      "isEnabled": true,
+      "isBlocking": true,
+      "isDeleted": false,
+      "settings": {
+        "scope": [
+          {
+            "repositoryId": null
+          }
+        ]
+      },
+      "isEnterpriseManaged": false,
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/configurations/11"
+        },
+        "policyType": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "revision": 1,
+      "id": 11,
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/configurations/11",
+      "type": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/policy/types/00000000-0000-0000-0000-000000000000",
+        "displayName": "Reserved names restriction"
+      }
+    }
+  ]
+}

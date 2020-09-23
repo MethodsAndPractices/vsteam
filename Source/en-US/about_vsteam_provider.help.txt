@@ -70,3 +70,5 @@ KEYWORDS
 SEE ALSO
     Set-VSTeamAccount
     Set-VSTeamAPIVersion
+    about_vsteam
+    about_vsteam_profiles

@@ -14,17 +14,17 @@ Clears the value stored in the default timeout parameter value.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Clear-VSTeamDefaultAPITimeout
+```powershell
+Clear-VSTeamDefaultAPITimeout
 ```
 
 This will clear the default timeout parameter value.
 
 ## PARAMETERS
 
-### -Level
+### Level
 
 On Windows allows you to clear your default timeout at the Process, User or Machine levels.
 
@@ -38,8 +38,8 @@ Type: String
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamDefaultAPITimeout](Set-VSTeamDefaultAPITimeout.md)
-
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->

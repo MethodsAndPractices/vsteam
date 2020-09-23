@@ -1,35 +1,42 @@
-﻿function Set-VSTeamPermissionInheritance {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
+﻿# Sets the permission inheritance to true or false.
+# Get-VSTeamOption -area Contribution -resource HierarchyQuery
+# id              : 3353e165-a11e-43aa-9d88-14f2bb09b6d9
+# area            : Contribution
+# resourceName    : HierarchyQuery
+# routeTemplate   : _apis/{area}/{resource}/{scopeName}/{scopeValue}
+# This is an undocumented API
+
+function Set-VSTeamPermissionInheritance {
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Set-VSTeamPermissionInheritance')]
    [OutputType([System.String])]
    param(
-      [Parameter(Mandatory, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ValueFromPipeline = $true)]
       [string] $Name,
 
-      [Parameter(Mandatory)]
+      [Parameter(Mandatory = $true)]
       [ValidateSet('Repository', 'BuildDefinition', 'ReleaseDefinition')]
       [string] $ResourceType,
 
-      [Parameter(Mandatory)]
+      [Parameter(Mandatory = $true)]
       [bool] $NewState,
 
       [switch] $Force,
 
-      [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    process {
       Write-Verbose "Creating VSTeamPermissionInheritance"
-      $item = [VSTeamPermissionInheritance]::new($ProjectName, $Name, $ResourceType)
+      $item = _getPermissionInheritanceInfo -projectName $ProjectName -resourceName $Name -resourceType $resourceType
       $token = $item.Token
-      $version = $item.Version
       $projectID = $item.ProjectID
       $securityNamespaceID = $item.SecurityNamespaceID
 
       Write-Verbose "Token = $token"
-      Write-Verbose "Version = $Version"
       Write-Verbose "ProjectID = $ProjectID"
       Write-Verbose "SecurityNamespaceID = $SecurityNamespaceID"
 
@@ -51,7 +58,12 @@
 }
 "@
          # Call the REST API to change the inheritance state
-         $resp = _callAPI -NoProject -method POST -area "Contribution" -resource "HierarchyQuery" -id $projectID -Version $version -ContentType "application/json" -Body $body
+         $resp = _callAPI -method POST -NoProject `
+            -area Contribution `
+            -resource HierarchyQuery `
+            -id $projectID `
+            -Body $body `
+            -Version $(_getApiVersion HierarchyQuery)
       }
 
       Write-Verbose "Result: $(ConvertTo-Json -InputObject $resp -Depth 100)"

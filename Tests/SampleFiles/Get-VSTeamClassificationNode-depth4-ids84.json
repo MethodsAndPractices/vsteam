@@ -1,0 +1,22 @@
+{
+  "count": 1,
+  "value": [
+    {
+      "id": 84,
+      "identifier": "00000000-0000-0000-0000-000000000000",
+      "name": "Sprint 1",
+      "structureType": "iteration",
+      "hasChildren": false,
+      "path": "\\PeopleTracker\\Iteration\\Sprint 1",
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/classificationNodes/Iterations/Sprint%201"
+        },
+        "parent": {
+          "href": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/classificationNodes/Iterations"
+        }
+      },
+      "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/wit/classificationNodes/Iterations/Sprint%201"
+    }
+  ]
+}

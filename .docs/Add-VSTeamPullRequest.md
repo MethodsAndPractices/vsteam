@@ -14,21 +14,19 @@ Create a new Pull Request
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
-PS C:\> $r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
-PS C:\> Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.RepositoryId -SourceRefName "refs/heads/mybranch" -TargetRefName "refs/heads/master" -Title "My PR" -Description "My Description" -Draft
+```powershell
+Set-VSTeamAccount -Account mydemos -Token $(System.AccessToken) -UseBearerToken
+$r = Get-VSTeamGitRepository -ProjectName project -Name demorepo
+Add-VSTeamPullRequest -ProjectName project -RepositoryId $r.RepositoryId -SourceRefName "refs/heads/mybranch" -TargetRefName "refs/heads/master" -Title "My PR" -Description "My Description" -Draft
 ```
 
 Create a new pull request as a draft
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -RepositoryId
+### RepositoryId
 
 Specifies the ID of the repository
 
@@ -39,7 +37,7 @@ Aliases: Id
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -SourceRefName
+### SourceRefName
 
 A source reference, like a branch or commit
 Needs to be in ref format like refs/heads/MyBranch
@@ -49,7 +47,7 @@ Type: String
 Required: True
 ```
 
-### -TargetRefName
+### TargetRefName
 
 A target reference, like a branch or commit
 Needs to be in ref format like refs/heads/MyBranch
@@ -59,7 +57,7 @@ Type: String
 Required: True
 ```
 
-### -Title
+### Title
 
 The title of the pull request
 
@@ -68,7 +66,7 @@ Type: String
 Required: True
 ```
 
-### -Description
+### Description
 
 The description of the pull request
 
@@ -77,7 +75,7 @@ Type: String
 Required: True
 ```
 
-### -Draft
+### Draft
 
 Mark the new pull request as a draft
 
@@ -85,18 +83,20 @@ Mark the new pull request as a draft
 Type: Switch
 ```
 
-<!-- #include "./params/confirm.md" -->
+<!-- #include "./params/projectName.md" -->
 
-<!-- #include "./params/force.md" -->
-
-<!-- #include "./params/whatIf.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
 ## OUTPUTS
 
-### Team.PullRequest
+### vsteam_lib.PullRequest
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

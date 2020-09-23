@@ -14,25 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamProfile
+```powershell
+Get-VSTeamProfile
 ```
 
 Return the list of saved profiles
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamProfile -Name mydemos
+```powershell
+Get-VSTeamProfile -Name mydemos
 ```
 
 Will return details of the profile provided
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Optional name for the profile.
 
@@ -48,8 +48,10 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamProfile](Add-VSTeamProfile.md)

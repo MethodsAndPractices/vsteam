@@ -16,10 +16,10 @@ The project name is a Dynamic Parameter which may not be displayed in the syntax
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamBuildDefinition -ProjectName Demo | Remove-VSTeamBuildDefinition
+```powershell
+Get-VSTeamBuildDefinition -ProjectName Demo | Remove-VSTeamBuildDefinition
 ```
 
 This command gets a list of all build definitions in the demo project.
@@ -28,9 +28,7 @@ The pipeline operator (|) passes the data to the Remove-VSTeamBuildDefinition fu
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Id
+### Id
 
 Specifies one or more build definitions by ID.
 
@@ -44,7 +42,9 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -54,19 +54,13 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets build definitions.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
-
 You can pipe build definition IDs to this function.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-[Set-VSTeamAccount](Set-VSTeamAccount.md)
-
-[Set-VSTeamDefaultProject](Set-VSTeamDefaultProject.md)
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamBuildDefinition](Add-VSTeamBuildDefinition.md)
 

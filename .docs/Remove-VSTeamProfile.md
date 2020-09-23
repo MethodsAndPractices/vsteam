@@ -14,17 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamProfile | Remove-VSTeamProfile -Force
+```powershell
+Get-VSTeamProfile | Remove-VSTeamProfile -Force
 ```
 
 This will remove all the profiles on your system.
 
 ## PARAMETERS
 
-### -Name
+### Name
 
 Name of profile to remove.
 
@@ -33,7 +33,7 @@ Type: String
 Required: True
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -41,6 +41,10 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamProfile](Add-VSTeamProfile.md)

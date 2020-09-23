@@ -14,19 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Add-VSTeamPolicy -ProjectName Demo -type 687c53f8-1a82-4e89-9a86-13d51bc4a8d5 -enabled -blocking -settings @{MinimumApproverCount = 1;Scope=@(@{repositoryId=b87c5af8-1a82-4e59-9a86-13d5cbc4a8d5; matchKind="Exact"; refName="refs/heads/master"})}
+```powershell
+Add-VSTeamPolicy -ProjectName Demo -type 687c53f8-1a82-4e89-9a86-13d51bc4a8d5 -enabled -blocking -settings @{MinimumApproverCount = 1;Scope=@(@{repositoryId=b87c5af8-1a82-4e59-9a86-13d5cbc4a8d5; matchKind="Exact"; refName="refs/heads/master"})}
 ```
 
 This command adds a new policy to the Demo project's repository specified. The policy added requires a minimum number of reviewers and applies to the master branch. Specifying `-blocking` will block pushes to master directly.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -type
+### type
 
 Specifies the id of the type of policy to be created.
 
@@ -35,7 +33,7 @@ Type: Guid
 Required: True
 ```
 
-### -enabled
+### enabled
 
 Enables the policy
 
@@ -43,7 +41,7 @@ Enables the policy
 Type: Switch
 ```
 
-### -blocking
+### blocking
 
 Determines if the policy will block pushes to the branch if the policy is not adhered to.
 
@@ -51,7 +49,7 @@ Determines if the policy will block pushes to the branch if the policy is not ad
 Type: Switch
 ```
 
-### -settings
+### settings
 
 The settings for the policy.
 
@@ -62,13 +60,19 @@ Type: Hashtable
 Required: True
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Get-VSTeamPolicy](Get-VSTeamPolicy.md)
 

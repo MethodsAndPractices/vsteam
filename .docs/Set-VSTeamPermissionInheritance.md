@@ -14,27 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true -Force
+```powershell
+Set-VSTeamPermissionInheritance -ProjectName Demo -Name Demo-CI -ResourceType BuildDefinition -NewState $true -Force
 ```
 
 This command sets the permission inheritance to true.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force
+```powershell
+Get-VSTeamBuildDefinition | Set-VSTeamPermissionInheritance -ResourceType BuildDefinition -NewState $true -Force
 ```
 
-ThisThis command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.
+This command sets the permission inheritance to true for every build definition returned from Get-VSTeamBuildDefinition.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Name
+### Name
 
 Specifies the name of the resource.
 
@@ -44,7 +42,7 @@ Accept pipeline input: true (ByPropertyName)
 Required: True
 ```
 
-### -ResourceType
+### ResourceType
 
 Specifies the type of resource. The acceptable values for this parameter are:
 
@@ -57,7 +55,7 @@ Type: String
 Required: True
 ```
 
-### -NewState
+### NewState
 
 The new state to set
 
@@ -66,7 +64,9 @@ Type: Boolean
 Required: True
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -74,7 +74,11 @@ Required: True
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamPolicy](Add-VSTeamPolicy.md)
 

@@ -1,0 +1,186 @@
+{
+   "source": "restApi",
+   "revision": 1,
+   "description": null,
+   "createdBy": {
+      "displayName": "Chuck Reinhart",
+      "url": "https://vssps.dev.azure.com/fabrikam/_apis/Identities/00000000-0000-0000-0000-000000000000",
+      "_links": {
+         "avatar": {
+            "href": "https://dev.azure.com/fabrikam/_apis/GraphProfile/MemberAvatars/aad.redacted"
+         }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "uniqueName": "fabfiber@outlook.com",
+      "imageUrl": "https://dev.azure.com/fabrikam/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+      "descriptor": "aad.redacted"
+   },
+   "createdOn": "2018-12-11T04:48:42.657Z",
+   "modifiedBy": {
+      "displayName": "Chuck Reinhart",
+      "url": "https://vssps.dev.azure.com/fabrikam/_apis/Identities/00000000-0000-0000-0000-000000000000",
+      "_links": {
+         "avatar": {
+            "href": "https://dev.azure.com/fabrikam/_apis/GraphProfile/MemberAvatars/aad.redacted"
+         }
+      },
+      "id": "00000000-0000-0000-0000-000000000000",
+      "uniqueName": "fabfiber@outlook.com",
+      "imageUrl": "https://dev.azure.com/fabrikam/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+      "descriptor": "aad.redacted"
+   },
+   "modifiedOn": "2018-12-11T04:48:42.657Z",
+   "isDeleted": false,
+   "variables": {},
+   "variableGroups": [],
+   "environments": [
+      {
+         "id": 40,
+         "name": "PROD",
+         "rank": 1,
+         "owner": {
+            "displayName": "Chuck Reinhart",
+            "url": "https://vssps.dev.azure.com/fabrikam/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/fabrikam/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "fabfiber@outlook.com",
+            "imageUrl": "https://dev.azure.com/fabrikam/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+            "descriptor": "aad.redacted"
+         },
+         "variables": {},
+         "variableGroups": [],
+         "preDeployApprovals": {
+            "approvals": [
+               {
+                  "rank": 1,
+                  "isAutomated": false,
+                  "isNotificationOn": false,
+                  "approver": {
+                     "displayName": "Chuck Reinhart",
+                     "url": "https://vssps.dev.azure.com/fabrikam/_apis/Identities/00000000-0000-0000-0000-000000000000",
+                     "_links": {
+                        "avatar": {
+                           "href": "https://dev.azure.com/fabrikam/_apis/GraphProfile/MemberAvatars/aad.redacted"
+                        }
+                     },
+                     "id": "00000000-0000-0000-0000-000000000000",
+                     "uniqueName": "fabfiber@outlook.com",
+                     "imageUrl": "https://dev.azure.com/fabrikam/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+                     "descriptor": "aad.redacted"
+                  },
+                  "id": 118
+               }
+            ],
+            "approvalOptions": {
+               "requiredApproverCount": 0,
+               "releaseCreatorCanBeApprover": true,
+               "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+               "enforceIdentityRevalidation": false,
+               "timeoutInMinutes": 0,
+               "executionOrder": "beforeGates"
+            }
+         },
+         "deployStep": {
+            "id": 119
+         },
+         "postDeployApprovals": {
+            "approvals": [
+               {
+                  "rank": 1,
+                  "isAutomated": true,
+                  "isNotificationOn": false,
+                  "id": 120
+               }
+            ]
+         },
+         "deployPhases": [
+            {
+               "deploymentInput": {
+                  "parallelExecution": {
+                     "parallelExecutionType": "none"
+                  },
+                  "skipArtifactsDownload": false,
+                  "artifactsDownloadInput": {
+                     "downloadInputs": []
+                  },
+                  "queueId": 15,
+                  "demands": [],
+                  "enableAccessToken": false,
+                  "timeoutInMinutes": 0,
+                  "jobCancelTimeoutInMinutes": 1,
+                  "condition": "succeeded()",
+                  "overrideInputs": {}
+               },
+               "rank": 1,
+               "phaseType": "agentBasedDeployment",
+               "name": "Run on agent",
+               "refName": null,
+               "workflowTasks": []
+            }
+         ],
+         "environmentOptions": {
+            "emailNotificationType": "OnlyOnFailure",
+            "emailRecipients": "release.environment.owner;release.creator",
+            "skipArtifactsDownload": false,
+            "timeoutInMinutes": 0,
+            "enableAccessToken": false,
+            "publishDeploymentStatus": false,
+            "badgeEnabled": false,
+            "autoLinkWorkItems": false,
+            "pullRequestDeploymentEnabled": false
+         },
+         "demands": [],
+         "conditions": [],
+         "executionPolicy": {
+            "concurrencyCount": 0,
+            "queueDepthCount": 0
+         },
+         "schedules": [],
+         "currentRelease": {
+            "id": 0,
+            "url": "https://vsrm.dev.azure.com/fabrikam/00000000-0000-0000-0000-000000000000/_apis/Release/releases/0",
+            "_links": {}
+         },
+         "retentionPolicy": {
+            "daysToKeep": 30,
+            "releasesToKeep": 3,
+            "retainBuild": true
+         },
+         "properties": {},
+         "preDeploymentGates": {
+            "id": 0,
+            "gatesOptions": null,
+            "gates": []
+         },
+         "postDeploymentGates": {
+            "id": 0,
+            "gatesOptions": null,
+            "gates": []
+         },
+         "environmentTriggers": [],
+         "badgeUrl": "https://vsrm.dev.azure.com/fabrikam/_apis/public/Release/badge/00000000-0000-0000-0000-000000000000/40/40"
+      }
+   ],
+   "artifacts": [],
+   "triggers": [],
+   "releaseNameFormat": "",
+   "tags": [],
+   "properties": {},
+   "id": 40,
+   "name": "Fabrikam-web",
+   "path": "\\",
+   "projectReference": null,
+   "url": "https://vsrm.dev.azure.com/fabrikam/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/40",
+   "_links": {
+      "self": {
+         "href": "https://vsrm.dev.azure.com/fabrikam/00000000-0000-0000-0000-000000000000/_apis/Release/definitions/40"
+      },
+      "web": {
+         "href": "https://dev.azure.com/fabrikam/00000000-0000-0000-0000-000000000000/_release?definitionId=40"
+      }
+   }
+}

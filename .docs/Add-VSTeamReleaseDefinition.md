@@ -16,19 +16,17 @@ You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Add-VSTeamReleaseDefinition -ProjectName demo -inFile release.json
+```powershell
+Add-VSTeamReleaseDefinition -ProjectName demo -inFile release.json
 ```
 
 This command reads release.json and creates a new release definition from it on the demo team project.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -InFile
+### InFile
 
 Path and file name to the JSON file that contains the definition to be created. If the path is omitted, the default is the current location.
 
@@ -38,18 +36,18 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ### System.String
 
 ## OUTPUTS
 
-## RELATED LINKS
-
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets release definitions.
+<!-- #include "./common/prerequisites.md" -->
 
-You can tab complete from a list of available projects.
+## RELATED LINKS
 
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
+<!-- #include "./common/related.md" -->

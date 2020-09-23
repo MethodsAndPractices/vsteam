@@ -18,30 +18,30 @@ You must call Set-VSTeamAccount before calling this function.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamBuild | ft id,name
+```powershell
+Get-VSTeamBuild | ft id,name
 
 id name
 -- ----
 44 Demo-CI-44
 
-PS C:\> Get-VSTeamReleaseDefinition -Expand artifacts | ft id,name,@{l='Alias';e={$_.artifacts[0].alias}}
+Get-VSTeamReleaseDefinition -Expand artifacts | ft id,name,@{l='Alias';e={$_.artifacts[0].alias}}
 
 id name    Alias
 -- ----    -----
  1 Demo-CD Demo-CI
 
-PS C:\> Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
+Add-VSTeamRelease -DefinitionId 1 -Description Test -ArtifactAlias Demo-CI -BuildId 44
 ```
 
 This example shows how to find the Build ID, Artifact Alias, and Release definition ID required to start a release. If you call Set-VSTeamDefaultProject you can use Example 2 which is much easier.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
+```powershell
+Add-VSTeamRelease -DefinitionName Demo-CD -Description Test -BuildNumber Demo-CI-44
 ```
 
 This command starts a new release using the Demo-CD release definition and the build with build number Demo-CI-44.
@@ -50,9 +50,7 @@ You must set a default project to tab complete DefinitionName and BuildNumber.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -DefinitionId
+### DefinitionId
 
 The id of the release definition to use.
 
@@ -62,7 +60,7 @@ Parameter Sets: ById
 Required: True
 ```
 
-### -Description
+### Description
 
 The description to use on the release.
 
@@ -71,7 +69,7 @@ Type: String
 Required: True
 ```
 
-### -ArtifactAlias
+### ArtifactAlias
 
 The alias of the artifact to use with this release.
 
@@ -81,7 +79,7 @@ Parameter Sets: ById
 Required: True
 ```
 
-### -Name
+### Name
 
 The name of this release.
 
@@ -89,7 +87,7 @@ The name of this release.
 Type: String
 ```
 
-### -BuildId
+### BuildId
 
 The id of the build to use with this release.
 
@@ -99,7 +97,7 @@ Parameter Sets: ById
 Required: True
 ```
 
-### -DefinitionName
+### DefinitionName
 
 The name of the release definition to use.
 
@@ -109,7 +107,7 @@ Parameter Sets: ByName
 Accept pipeline input: true (ByPropertyName)
 ```
 
-### -SourceBranch
+### SourceBranch
 
 The branch of the artifact
 
@@ -117,7 +115,7 @@ The branch of the artifact
 Type: String
 ```
 
-### -BuildNumber
+### BuildNumber
 
 The number of the build to use.
 
@@ -127,7 +125,9 @@ Parameter Sets: ByName
 Accept pipeline input: true (ByPropertyName)
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/projectName.md" -->
+
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -135,10 +135,8 @@ Accept pipeline input: true (ByPropertyName)
 
 ## NOTES
 
-This function has a Dynamic Parameter for ProjectName that specifies the project for which this function gets releases.
-
-You can tab complete from a list of available projects.
-
-You can use Set-VSTeamDefaultProject to set a default project so you do not have to pass the ProjectName with each call.
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

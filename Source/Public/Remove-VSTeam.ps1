@@ -1,23 +1,26 @@
 function Remove-VSTeam {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeam')]
    param(
-      [Parameter(Mandatory = $True, ValueFromPipelineByPropertyName = $true)]
+      [Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $true)]
       [Alias('Name', 'TeamId', 'TeamName')]
       [string]$Id,
 
       [switch]$Force,
 
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
-   
+
    process {
       if ($Force -or $PSCmdlet.ShouldProcess($Id, "Delete team")) {
          # Call the REST API
-         _callAPI -Area 'projects' -Resource "$ProjectName/teams" -Id $Id `
-            -Method Delete -Version $(_getApiVersion Core) | Out-Null
+         _callAPI -Method DELETE `
+            -Resource "projects/$ProjectName/teams" `
+            -Id $Id `
+            -Version $(_getApiVersion Core) | Out-Null
 
          Write-Output "Deleted team $Id"
       }

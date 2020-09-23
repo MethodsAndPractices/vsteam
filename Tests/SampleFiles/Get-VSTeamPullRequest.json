@@ -1,0 +1,166 @@
+{
+   "value": [
+      {
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000",
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "state": "unchanged",
+               "visibility": "unchanged",
+               "lastUpdateTime": "0001-01-01T00:00:00"
+            }
+         },
+         "pullRequestId": 17,
+         "codeReviewId": 17,
+         "status": "active",
+         "createdBy": {
+            "displayName": "Test User",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com",
+            "imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+            "descriptor": "aad.redacted"
+         },
+         "creationDate": "2020-09-07T23:40:35.9822431Z",
+         "title": "Updated README.md",
+         "description": "Updated README.md",
+         "sourceRefName": "refs/heads/patch",
+         "targetRefName": "refs/heads/master",
+         "mergeStatus": "succeeded",
+         "isDraft": false,
+         "mergeId": "00000000-0000-0000-0000-000000000000",
+         "lastMergeSourceCommit": {
+            "commitId": "c8262543095d0d443b5bcaff27201ef01314d4ff",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/c8262543095d0d443b5bcaff27201ef01314d4ff"
+         },
+         "lastMergeTargetCommit": {
+            "commitId": "4aed57b05fb1840a916ed7aca0d2b81784b916be",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/4aed57b05fb1840a916ed7aca0d2b81784b916be"
+         },
+         "lastMergeCommit": {
+            "commitId": "6421952a41c5d7273b73e8d867b52e9f36cd32fd",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/6421952a41c5d7273b73e8d867b52e9f36cd32fd"
+         },
+         "reviewers": [
+            {
+               "vote": 0
+            }
+         ],
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/pullRequests/17",
+         "supportsIterations": true
+      },
+      {
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000",
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "state": "unchanged",
+               "visibility": "unchanged",
+               "lastUpdateTime": "0001-01-01T00:00:00"
+            }
+         },
+         "pullRequestId": 15,
+         "codeReviewId": 15,
+         "status": "active",
+         "createdBy": {
+            "displayName": "Test User",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com",
+            "imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+            "descriptor": "aad.redacted"
+         },
+         "creationDate": "2019-05-17T15:41:23.2051842Z",
+         "title": "Set up CI with Azure Pipelines",
+         "sourceRefName": "refs/heads/azure-pipelines1",
+         "targetRefName": "refs/heads/master",
+         "mergeStatus": "succeeded",
+         "isDraft": false,
+         "mergeId": "00000000-0000-0000-0000-000000000000",
+         "lastMergeSourceCommit": {
+            "commitId": "8001e2d24173b4dc7362144c15595b9d339faa08",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/8001e2d24173b4dc7362144c15595b9d339faa08"
+         },
+         "lastMergeTargetCommit": {
+            "commitId": "7b368f65c8e4762d3a4841b1b6914fba7c78acab",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/7b368f65c8e4762d3a4841b1b6914fba7c78acab"
+         },
+         "lastMergeCommit": {
+            "commitId": "1b7df84651e9b3e554e395b3e43ef1212b9560cf",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/1b7df84651e9b3e554e395b3e43ef1212b9560cf"
+         },
+         "reviewers": [],
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/pullRequests/15",
+         "supportsIterations": true
+      },
+      {
+         "repository": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "PeopleTracker",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000",
+            "project": {
+               "id": "00000000-0000-0000-0000-000000000000",
+               "name": "PeopleTracker",
+               "state": "unchanged",
+               "visibility": "unchanged",
+               "lastUpdateTime": "0001-01-01T00:00:00"
+            }
+         },
+         "pullRequestId": 14,
+         "codeReviewId": 14,
+         "status": "active",
+         "createdBy": {
+            "displayName": "Test User",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+               "avatar": {
+                  "href": "https://dev.azure.com/Test/_apis/GraphProfile/MemberAvatars/aad.redacted"
+               }
+            },
+            "id": "00000000-0000-0000-0000-000000000000",
+            "uniqueName": "test@test.com",
+            "imageUrl": "https://dev.azure.com/Test/_api/_common/identityImage?id=00000000-0000-0000-0000-000000000000",
+            "descriptor": "aad.redacted"
+         },
+         "creationDate": "2019-05-17T14:44:07.8713427Z",
+         "title": "Set up CI with Azure Pipelines",
+         "sourceRefName": "refs/heads/azure-pipelines",
+         "targetRefName": "refs/heads/master",
+         "mergeStatus": "succeeded",
+         "isDraft": false,
+         "mergeId": "00000000-0000-0000-0000-000000000000",
+         "lastMergeSourceCommit": {
+            "commitId": "bc99ff1767f4fe6226fc55858d14a23d36a25ebc",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/bc99ff1767f4fe6226fc55858d14a23d36a25ebc"
+         },
+         "lastMergeTargetCommit": {
+            "commitId": "7b368f65c8e4762d3a4841b1b6914fba7c78acab",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/7b368f65c8e4762d3a4841b1b6914fba7c78acab"
+         },
+         "lastMergeCommit": {
+            "commitId": "963499bbd664b44d29e2a3f6377faa0a4cd474c7",
+            "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/commits/963499bbd664b44d29e2a3f6377faa0a4cd474c7"
+         },
+         "reviewers": [],
+         "url": "https://dev.azure.com/Test/00000000-0000-0000-0000-000000000000/_apis/git/repositories/00000000-0000-0000-0000-000000000000/pullRequests/14",
+         "supportsIterations": true
+      }
+   ],
+   "count": 3
+}

@@ -1,8 +1,9 @@
 function Get-VSTeamWiql {
-   [CmdletBinding(DefaultParameterSetName = 'ByID')]
+   [CmdletBinding(DefaultParameterSetName = 'ByID',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamWiql')]
    param(
-      [QueryTransformToIDAttribute()]
-      [ArgumentCompleter([QueryCompleter])]
+      [vsteam_lib.QueryTransformToIDAttribute()]
+      [ArgumentCompleter([vsteam_lib.QueryCompleter])]
       [Parameter(ParameterSetName = 'ByID', Mandatory = $true, Position = 0)]
       [string] $Id,
 
@@ -11,9 +12,9 @@ function Get-VSTeamWiql {
 
       [string] $Team,
 
-      [Parameter(Position = 2)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [Parameter(Mandatory = $false, Position = 2)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       $ProjectName,
 
       [int] $Top = 100,
@@ -26,7 +27,7 @@ function Get-VSTeamWiql {
          ProjectName = $ProjectName
          Area        = 'wit'
          Resource    = 'wiql'
-         Version     = [VSTeamVersions]::Core
+         Version     = [vsteam_lib.Versions]::Core
          QueryString = @{
             '$top'        = $Top
             timePrecision = $TimePrecision
@@ -68,7 +69,7 @@ function Get-VSTeamWiql {
                Get-VSTeamWorkItem -Id $Ids[$beginRange..$endRange]
             }
             else {
-               Get-VSTeamWorkItem  -Id $Ids[$beginRange..$endRange] -Fields $resp.columns.referenceName
+               Get-VSTeamWorkItem -Id $Ids[$beginRange..$endRange] -Fields $resp.columns.referenceName
             }
          }
       }

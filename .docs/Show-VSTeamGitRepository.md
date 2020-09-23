@@ -14,19 +14,17 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Show-VSTeamGitRepository -ProjectName Demo
+```powershell
+Show-VSTeamGitRepository -ProjectName Demo
 ```
 
 This command opens the Git repository in a browser.
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -RemoteUrl
+### RemoteUrl
 
 The RemoteUrl of the Git repository to open.
 
@@ -36,10 +34,16 @@ Required: True
 Accept pipeline input: true (ByPropertyName)
 ```
 
+<!-- #include "./params/projectName.md" -->
+
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

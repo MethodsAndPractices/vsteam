@@ -1,5 +1,5 @@
 function Get-VSTeamTfvcRootBranch {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamTfvcRootBranch')]
    param(
       [parameter(Mandatory = $false)]
       [switch] $IncludeChildren = $false,
@@ -11,10 +11,13 @@ function Get-VSTeamTfvcRootBranch {
    process {
       $queryString = [ordered]@{
          includeChildren = $IncludeChildren;
-         includeDeleted = $IncludeDeleted;
+         includeDeleted  = $IncludeDeleted;
       }
 
-      $resp = _callAPI -Area tfvc -Resource branches -QueryString $queryString -Version $(_getApiVersion Tfvc)
+      $resp = _callAPI -Area tfvc `
+         -Resource branches `
+         -QueryString $queryString `
+         -Version $(_getApiVersion Tfvc)
 
       if ($resp | Get-Member -Name value -MemberType Properties) {
          foreach ($item in $resp.value) {

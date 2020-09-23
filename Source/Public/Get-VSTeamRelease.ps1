@@ -1,8 +1,8 @@
 function Get-VSTeamRelease {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamRelease')]
    param(
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdRaw')]
-      [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByIdJson')]
       [Parameter(Position = 0, Mandatory = $true, ParameterSetName = 'ByID', ValueFromPipelineByPropertyName = $true)]
       [Alias('ReleaseID')]
       [int[]] $id,
@@ -34,51 +34,56 @@ function Get-VSTeamRelease {
 
       [Parameter(ParameterSetName = 'List')]
       [ValidateSet('ascending', 'descending')]
-
       [string] $queryOrder,
-      [Parameter(ParameterSetName = 'List')]
 
+      [Parameter(ParameterSetName = 'List')]
       [string] $continuationToken,
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdJson')]
 
       [switch] $JSON,
-      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
 
+      [Parameter(Mandatory = $true, ParameterSetName = 'ByIdRaw')]
       [switch] $raw,
 
       [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
 
    process {
+      $commonArgs = @{
+         subDomain = 'vsrm'
+         area      = 'release'
+         resource  = 'releases'
+         version   = $(_getApiVersion Release)
+      }
+
       if ($id) {
          foreach ($item in $id) {
-            $resp = _callAPI -SubDomain vsrm -ProjectName $ProjectName -Area release -id $item -Resource releases -Version $(_getApiVersion Release)
+            $resp = _callAPI @commonArgs -ProjectName $ProjectName -id $item
 
             if ($JSON.IsPresent) {
                $resp | ConvertTo-Json -Depth 99
             }
             else {
                if (-not $raw.IsPresent) {
-                  # Apply a Type Name so we can use custom format view and custom type extensions
-                  _applyTypesToRelease -item $resp
+                  Write-Output $([vsteam_lib.Release]::new($resp, $ProjectName))
                }
-
-               Write-Output $resp
+               else {
+                  Write-Output $resp
+               }
             }
          }
       }
       else {
          if ($ProjectName) {
-            $listurl = _buildRequestURI -SubDomain vsrm -ProjectName $ProjectName -Area release -Resource releases -Version $(_getApiVersion Release)
+            $listurl = _buildRequestURI @commonArgs -ProjectName $ProjectName
          }
          else {
-            $listurl = _buildRequestURI -SubDomain vsrm -Area release -Resource releases -Version $(_getApiVersion Release)
+            $listurl = _buildRequestURI @commonArgs
          }
 
-         $QueryString = @{
+         $queryString = @{
             '$top'              = $top
             '$expand'           = $expand
             'createdBy'         = $createdBy
@@ -89,18 +94,23 @@ function Get-VSTeamRelease {
             'minCreatedTime'    = $minCreatedTime
             'maxCreatedTime'    = $maxCreatedTime
             'continuationToken' = $continuationToken
-
          }
 
          # Call the REST API
-         $resp = _callAPI -url $listurl -QueryString $QueryString
-         
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         foreach ($item in $resp.value) {
-            _applyTypesToRelease -item $item
+         $resp = _callAPI -url $listurl -QueryString $queryString
+
+         if ($JSON.IsPresent) {
+            $resp | ConvertTo-Json -Depth 99
          }
-         
-         Write-Output $resp.value
+         else {
+            $objs = @()
+
+            foreach ($item in $resp.value) {
+               $objs += [vsteam_lib.Release]::new($item, $ProjectName)
+            }
+
+            Write-Output $objs
+         }
       }
    }
 }

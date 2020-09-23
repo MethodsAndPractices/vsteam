@@ -1,0 +1,221 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "id": "10000000-1000-1000-1000-100000000000",
+      "name": "Shared Queries",
+      "path": "Shared Queries",
+      "createdDate": "2019-04-19T23:29:53.37Z",
+      "lastModifiedBy": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+        "displayName": "Donovan Brown",
+        "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+          }
+        },
+        "uniqueName": "fabrikamfiber3@hotmail.com",
+        "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+        "descriptor": "redacted"
+      },
+      "lastModifiedDate": "2019-04-19T23:29:53.37Z",
+      "isFolder": true,
+      "hasChildren": false,
+      "isPublic": true,
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+        },
+        "html": {
+          "href": "https://dev.azure.com/BlackShirt/web/qr.aspx?pguid=00000000-0000-0000-0000-000000000000&qid=00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "url": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "20000000-2000-2000-2000-200000000000",
+      "name": "My Queries",
+      "path": "My Queries",
+      "createdBy": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+        "displayName": "Donovan Brown",
+        "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+          }
+        },
+        "uniqueName": "fabrikamfiber3@hotmail.com",
+        "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+        "descriptor": "redacted"
+      },
+      "createdDate": "2019-04-19T23:29:53.55Z",
+      "lastModifiedBy": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+        "displayName": "Donovan Brown",
+        "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+          }
+        },
+        "uniqueName": "fabrikamfiber3@hotmail.com",
+        "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+        "descriptor": "redacted"
+      },
+      "lastModifiedDate": "2019-04-19T23:29:53.55Z",
+      "isFolder": true,
+      "hasChildren": true,
+      "children": [
+        {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "name": "Followed work items",
+          "path": "My Queries/Followed work items",
+          "createdBy": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+              "avatar": {
+                "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+              }
+            },
+            "uniqueName": "fabrikamfiber3@hotmail.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+          },
+          "createdDate": "2019-04-19T23:29:53.77Z",
+          "lastModifiedBy": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+              "avatar": {
+                "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+              }
+            },
+            "uniqueName": "fabrikamfiber3@hotmail.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+          },
+          "lastModifiedDate": "2019-04-19T23:29:53.77Z",
+          "queryType": "flat",
+          "isPublic": false,
+          "lastExecutedBy": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+              "avatar": {
+                "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+              }
+            },
+            "uniqueName": "fabrikamfiber3@hotmail.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+          },
+          "lastExecutedDate": "2020-05-24T01:10:28.893Z",
+          "_links": {
+            "self": {
+              "href": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+            },
+            "html": {
+              "href": "https://dev.azure.com/BlackShirt/web/qr.aspx?pguid=00000000-0000-0000-0000-000000000000&qid=00000000-0000-0000-0000-000000000000"
+            },
+            "parent": {
+              "href": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+            },
+            "wiql": {
+              "href": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/wiql/00000000-0000-0000-0000-000000000000"
+            }
+          },
+          "url": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "name": "Assigned to me",
+          "path": "My Queries/Assigned to me",
+          "createdBy": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+              "avatar": {
+                "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+              }
+            },
+            "uniqueName": "fabrikamfiber3@hotmail.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+          },
+          "createdDate": "2019-04-19T23:29:53.58Z",
+          "lastModifiedBy": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+              "avatar": {
+                "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+              }
+            },
+            "uniqueName": "fabrikamfiber3@hotmail.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+          },
+          "lastModifiedDate": "2019-04-19T23:29:53.58Z",
+          "queryType": "flat",
+          "isPublic": false,
+          "lastExecutedBy": {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "name": "Donovan Brown <fabrikamfiber3@hotmail.com>",
+            "displayName": "Donovan Brown",
+            "url": "https://spsprodcus3.vssps.visualstudio.com/00000000-0000-0000-0000-000000000000/_apis/Identities/00000000-0000-0000-0000-000000000000",
+            "_links": {
+              "avatar": {
+                "href": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted"
+              }
+            },
+            "uniqueName": "fabrikamfiber3@hotmail.com",
+            "imageUrl": "https://dev.azure.com/BlackShirt/_apis/GraphProfile/MemberAvatars/redacted",
+            "descriptor": "redacted"
+          },
+          "lastExecutedDate": "2020-05-24T01:10:38.863Z",
+          "_links": {
+            "self": {
+              "href": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+            },
+            "html": {
+              "href": "https://dev.azure.com/BlackShirt/web/qr.aspx?pguid=00000000-0000-0000-0000-000000000000&qid=00000000-0000-0000-0000-000000000000"
+            },
+            "parent": {
+              "href": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+            },
+            "wiql": {
+              "href": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/wiql/00000000-0000-0000-0000-000000000000"
+            }
+          },
+          "url": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+        }
+      ],
+      "isPublic": false,
+      "_links": {
+        "self": {
+          "href": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+        },
+        "html": {
+          "href": "https://dev.azure.com/BlackShirt/web/qr.aspx?pguid=00000000-0000-0000-0000-000000000000&qid=00000000-0000-0000-0000-000000000000"
+        }
+      },
+      "url": "https://dev.azure.com/BlackShirt/00000000-0000-0000-0000-000000000000/_apis/wit/queries/00000000-0000-0000-0000-000000000000"
+    }
+  ]
+}

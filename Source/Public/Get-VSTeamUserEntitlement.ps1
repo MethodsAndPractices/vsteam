@@ -1,5 +1,6 @@
 function Get-VSTeamUserEntitlement {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamUserEntitlement')]
    param (
       [Parameter(ParameterSetName = 'List')]
       [int] $Top = 100,
@@ -20,22 +21,24 @@ function Get-VSTeamUserEntitlement {
       # This will throw if this account does not support MemberEntitlementManagement
       _supportsMemberEntitlementManagement
 
+      $commonArgs = @{
+         subDomain = 'vsaex'
+         resource  = 'userentitlements'
+         version   = $(_getApiVersion MemberEntitlementManagement)
+      }
+
       if ($Id) {
          foreach ($item in $Id) {
             # Build the url to return the single build
             # Call the REST API
-            $resp = _callAPI -SubDomain 'vsaex' -Version $(_getApiVersion MemberEntitlementManagement) -Resource 'userentitlements' -id $item
+            $resp = _callAPI @commonArgs -id $item
 
-            _applyTypesToUser -item $resp
-
-            Write-Output $resp
+            Write-Output $([vsteam_lib.UserEntitlement]::new($resp))
          }
       }
       else {
          # Build the url to list the teams
-         # $listurl = _buildUserURL
-         $listurl = _buildRequestURI -SubDomain 'vsaex' -Resource 'userentitlements' `
-            -Version $(_getApiVersion MemberEntitlementManagement)
+         $listurl = _buildRequestURI @commonArgs
 
          $listurl += _appendQueryString -name "top" -value $top -retainZero
          $listurl += _appendQueryString -name "skip" -value $skip -retainZero
@@ -44,12 +47,13 @@ function Get-VSTeamUserEntitlement {
          # Call the REST API
          $resp = _callAPI -url $listurl
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
+         $objs = @()
+
          foreach ($item in $resp.members) {
-            _applyTypesToUser -item $item
+            $objs += [vsteam_lib.UserEntitlement]::new($item)
          }
 
-         Write-Output $resp.members
+         Write-Output $objs
       }
    }
 }

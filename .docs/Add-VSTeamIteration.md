@@ -10,18 +10,18 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Add-VSTeamIteration -ProjectName Demo -Name "NewIteration" -Path "MyIteration/Path"
+```powershell
+Add-VSTeamIteration -ProjectName Demo -Name "NewIteration" -Path "MyIteration/Path"
 ```
 
 This command adds a new iteration named NewIteration to the Demo project under the iteration path MyIteration/Path.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Add-VSTeamIteration -ProjectName "Demo" -FinishDate (Get-Date "31.01.2020") -StartDate (Get-Date "01.01.2020") -Name "NewIteration"
+```powershell
+Add-VSTeamIteration -ProjectName "Demo" -FinishDate "31.01.2020" -StartDate "01.01.2020" -Name "NewIteration"
 ```
 
 This command adds a new iteration named NewIteration to the Demo project with the start date 01.01.2020 and finish date 31.01.2020.
@@ -32,25 +32,25 @@ This command adds a new iteration named NewIteration to the Demo project with th
 
 ## PARAMETERS
 
-<!-- #include "./params/projectName.md" -->
-
-### -Name
+### Name
 
 Name of the new iteration.
 
 ```yaml
 Type: string
+Required: True
 ```
 
-### -Path
+### Path
 
 Path of the existing iteration under where the new one will be created.
 
 ```yaml
 Type: string
+Required: True
 ```
 
-### -StartDate
+### StartDate
 
 Start date of the iteration.
 
@@ -58,13 +58,15 @@ Start date of the iteration.
 Type: datetime
 ```
 
-### -FinishDate
+### FinishDate
 
 Finish date of the iteration.
 
 ```yaml
 Type: datetime
 ```
+
+<!-- #include "./params/projectName.md" -->
 
 ## INPUTS
 
@@ -76,7 +78,11 @@ Type: datetime
 
 This function is a wrapper of the base function Add-VSTeamClassificationNode.
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
 
 [Add-VSTeamArea](Add-VSTeamArea.md)
 

@@ -2,7 +2,7 @@ function Clear-VSTeamDefaultProject {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding()]
    param()
-   
+
    DynamicParam {
       # # Only add these options on Windows Machines
       if (_isOnWindows) {
@@ -67,7 +67,7 @@ function Clear-VSTeamDefaultProject {
          [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
       }
 
-      [VSTeamVersions]::DefaultProject = ''
+      [vsteam_lib.Versions]::DefaultProject = ''
       $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
       Write-Output "Removed default project"

@@ -1,15 +1,16 @@
 function Remove-VSTeamIteration {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High")]
+   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Remove-VSTeamIteration')]
    param(
-      [Parameter(Mandatory = $false)]
+      [Parameter(Mandatory = $true)]
       [int] $ReClassifyId,
-     
-      [Parameter(Mandatory = $false)]
+
+      [Parameter(Mandatory = $true)]
       [string] $Path,
-      
-      [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+
+      [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
 
       [switch] $Force
@@ -17,7 +18,11 @@ function Remove-VSTeamIteration {
 
    process {
       if ($force -or $pscmdlet.ShouldProcess($Path, "Delete iteration")) {
-         $null = Remove-VSTeamClassificationNode -StructureGroup 'iterations' -ProjectName $ProjectName -Path $Path -ReClassifyId $ReClassifyId -Force
+         $null = Remove-VSTeamClassificationNode -ProjectName $ProjectName `
+            -StructureGroup 'iterations' `
+            -Path $Path `
+            -ReClassifyId $ReClassifyId `
+            -Force
       }
    }
 }

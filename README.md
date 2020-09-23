@@ -68,19 +68,19 @@ To run build the script Build-Module.ps1. The script has the following parameter
 Below are some examples on how to build the module locally. It is expected that your working directory is at the root of the repository.
 
 Builds the module, installs needed dependencies, loads the module into the session and also builds the help.
-```PowerShell
+```powershell
 .\Build-Module.ps1 -installDep -ipmo -buildHelp
 ```
 
 #### Run Tests Locally
 
 Runs all unit tests and executes the static code analysis.
-```PowerShell
+```powershell
 .\Build-Module.ps1 -runTests -codeCoverage -analyzeScript
 ```
 
 Runs the tests, but executes only the unit tests that have the description "workitems" for the logical grouped unit tests. This can be used if you only want to test a portion of your unit tests.
-```PowerShell
+```powershell
 .\Build-Module.ps1 -runTests -testName workitems
 ```
 

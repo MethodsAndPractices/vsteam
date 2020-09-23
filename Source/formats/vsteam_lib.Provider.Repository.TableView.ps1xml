@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+	<ViewDefinitions>
+		<View>
+			<Name>vsteam_lib.Provider.Repository.TableView</Name>
+			<ViewSelectedBy>
+				<TypeName>vsteam_lib.Provider.GitRepository</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Mode</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Name</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Remote URL</Label>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Default Branch</Label>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>DisplayMode</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Name</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>remoteUrl</PropertyName>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>defaultBranch</PropertyName>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+	</ViewDefinitions>
+</Configuration>

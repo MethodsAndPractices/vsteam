@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+   <ViewDefinitions>
+      <View>
+         <Name>vsteam_lib.Build.Artifact.WideView</Name>
+         <ViewSelectedBy>
+            <TypeName>vsteam_lib.Build.Artifact</TypeName>
+         </ViewSelectedBy>
+         <WideControl>
+            <WideEntries>
+               <WideEntry>
+                  <WideItem>
+                     <PropertyName>downloadUrl</PropertyName>
+                  </WideItem>
+               </WideEntry>
+            </WideEntries>
+         </WideControl>
+      </View>
+   </ViewDefinitions>
+</Configuration>

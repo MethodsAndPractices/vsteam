@@ -16,7 +16,7 @@
 
 ## PARAMETERS
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -28,4 +28,8 @@
 
 ## NOTES
 
+<!-- #include "./common/prerequisites.md" -->
+
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

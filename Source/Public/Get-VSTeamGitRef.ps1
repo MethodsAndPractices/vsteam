@@ -1,5 +1,5 @@
 function Get-VSTeamGitRef {
-   [CmdletBinding()]
+   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamGitRef')]
    param (
       [Parameter(ValueFromPipelineByPropertyName = $true, Mandatory = $true, Position = 0)]
       [Alias('Id')]
@@ -14,8 +14,8 @@ function Get-VSTeamGitRef {
       [string] $ContinuationToken,
 
       [Parameter(Mandatory = $true, Position = 1, ValueFromPipelineByPropertyName = $true)]
-      [ProjectValidateAttribute()]
-      [ArgumentCompleter([ProjectCompleter])]
+      [vsteam_lib.ProjectValidateAttribute($false)]
+      [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName
    )
    process {
@@ -34,7 +34,7 @@ function Get-VSTeamGitRef {
          $obj = @()
 
          foreach ($item in $resp.value) {
-            $obj += [VSTeamRef]::new($item, $ProjectName)
+            $obj += [vsteam_lib.GitRef]::new($item, $ProjectName)
          }
 
          Write-Output $obj

@@ -1,6 +1,6 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VSTeamWiqlItem
+# Get-VSTeamWiql
 
 ## SYNOPSIS
 
@@ -14,25 +14,25 @@
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### Example 1
 
-```PowerShell
-PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject" -Expand
+```powershell
+Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject" -Expand
 ```
 
 This command gets work items via a WIQL query and expands the return work items with only the selected fields System.Id, System.Title and System.State.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### Example 2
 
-```PowerShell
-PS C:\> Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject"
+```powershell
+Get-VSTeamWiql -Query "Select [System.Id], [System.Title], [System.State] From WorkItems" -Team "MyProject Team" -Project "MyProject"
 ```
 
 This command gets work items via a WIQL query and returns the WIQL query result with only work item IDs.
 
 ## PARAMETERS
 
-### -Id
+### Id
 
 The id query to return work items for. This is the ID of any saved query within a team in a project
 
@@ -42,7 +42,7 @@ Parameter Sets: ByID
 Required: True
 ```
 
-### -Query
+### Query
 
 The WIQL query. For the syntax check [the official documentation](https://docs.microsoft.com/en-us/azure/devops/boards/queries/wiql-syntax?view=azure-devops).
 
@@ -52,7 +52,7 @@ Parameter Sets: ByQuery
 Required: True
 ```
 
-### -Top
+### Top
 
 The max number of results to return.
 
@@ -62,7 +62,7 @@ Required: False
 Default value: 100
 ```
 
-### -TimePrecision
+### TimePrecision
 
 Whether or not to use time precision.
 
@@ -70,7 +70,7 @@ Whether or not to use time precision.
 Type: Switch
 ```
 
-### -Expand
+### Expand
 
 The expand the work items with the selected attributes in the WIQL query.
 
@@ -88,6 +88,10 @@ ProjectName
 
 ## NOTES
 
-If you do not set the default project by called Set-VSTeamDefaultProject before calling Get-VSTeamWiql you will have to type in the names.
+If you do not set the default project by called Set-VSTeamDefaultProject you must pass in -ProjectName for the tab completion of names to work.
+
+<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
+
+<!-- #include "./common/related.md" -->

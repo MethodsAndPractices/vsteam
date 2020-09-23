@@ -17,58 +17,56 @@
 # releasedVersion : 0.0
 
 function Get-VSTeamProcess {
-   [CmdletBinding(DefaultParameterSetName = 'List')]
+   [CmdletBinding(DefaultParameterSetName = 'List',
+    HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamProcess')]
+   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
    param(
       [Parameter(ParameterSetName = 'ByName', Position = 0)]
-      [ArgumentCompleter([ProcessTemplateCompleter])]
+      [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
       [Alias('ProcessName', 'ProcessTemplate')]
       $Name = '*',
-
-      [Parameter(DontShow = $true, ParameterSetName = 'List')]
-      [int] $Top = 100,
-
-      [Parameter(DontShow = $true, ParameterSetName = 'List')]
-      [int] $Skip = 0,
 
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProcessTemplateID')]
       [string] $Id
    )
    process {
-      # The REST API ignores Top and Skip but allows them to be specified & the function does the same. 
-      if ($PSBoundParameters['Top', 'Skip'] -gt 0) {
-         Write-Warning "You specified -Top $Top , -Skip $Skip These parameters are ignored and will be removed in future"
+      $commonArgs = @{
+         # In later APIs you can get the process templates from the 'work'
+         # area. For older APIs the process templates are in the 'processes'
+         # area. Default to the newer way of accessing process templates.
+         # Get-VSTeamOption -area 'work' -resource 'processes' returns nothing
+         # this is odd but the call works.
+         area      = 'work'
+         resource  = 'processes'
+         NoProject = $true
+         version   = $(_getApiVersion Processes)
       }
 
-      # In later APIs you can get the process templates from the 'work' area. For older APIs the process templates are 
-      # in the 'process' area.
-      # Default to the newer way of accessing process templates
-      $area = 'work'
-
       # If this returns an empty string use the old area of 'process'
-      if (-not $(_getApiVersion Processes)) {
-         $area = 'process'
+      if (-not $commonArgs.version) {
+         $commonArgs.area = 'process'
       }
 
       # Return either a single process by ID or a list of processes
       if ($id) {
          # Call the REST API with an ID
-         $resp = _callAPI -NoProject -Area $area -resource 'processes' -id $id -Version $(_getApiVersion Processes)
+         $resp = _callAPI @commonArgs -id $id
 
-         $process = [VSTeamProcess]::new($resp)
+         $process = [vsteam_lib.Process]::new($resp)
 
          Write-Output $process
       }
       else {
          try {
             # Call the REST API
-            $resp = _callAPI -NoProject -Area $area -resource 'processes' -Version (_getApiVersion Processes)  
+            $resp = _callAPI @commonArgs
 
             # We just fetched all the processes so let's update the cache. Also, cache the URLS for processes
-            [VSTeamProcessCache]::Update($resp.value)
+            [vsteam_lib.ProcessTemplateCache]::Update([string[]]$($resp.value | Select-Object -ExpandProperty Name | Sort-Object))
 
             $resp.value | ForEach-Object {
-               [VSTeamProcess]::new($_)
+               [vsteam_lib.Process]::new($_)
             } | Where-Object { $_.name -like $Name } | Sort-Object -Property Name
          }
          catch {
