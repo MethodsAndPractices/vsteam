@@ -84,8 +84,8 @@ Describe 'VSTeamBuildDefinition' {
 
          It 'with type parameter "build" should return build definitions by type' {
             ## Arrange
-            # This has not been supported since version 2.0 of the API which we 
-            # no longer support. https://github.com/DarqueWarrior/vsteam/issues/87
+            # This has not been supported since version 2.0 of the API which we
+            # no longer support. https://github.com/MethodsAndPractices/vsteam/issues/87
             Mock Write-Warning
 
             ## Act
@@ -112,10 +112,10 @@ Describe 'VSTeamBuildDefinition' {
 
          It 'with both parameters should return build definitions by filter' {
             ## Arrange
-            # This has not been supported since version 2.0 of the API which we 
-            # no longer support. https://github.com/DarqueWarrior/vsteam/issues/87
+            # This has not been supported since version 2.0 of the API which we
+            # no longer support. https://github.com/MethodsAndPractices/vsteam/issues/87
             Mock Write-Warning
-            
+
             ## Act
             Get-VSTeamBuildDefinition -projectName vsts -filter 'click*'
 

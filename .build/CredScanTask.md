@@ -1,6 +1,6 @@
 # Credential Scanner (CredScan) in the Build
 
-This repository uses the so called [CredScan created by Microsoft](https://secdevtools.azurewebsites.net/helpcredscan.html#collapseOne) to prevent passwords being added to the master branch.
+This repository uses the so called [CredScan created by Microsoft](https://secdevtools.azurewebsites.net/helpcredscan.html#collapseOne) to prevent passwords being added to the trunk branch.
 
 To not even commit credentials to the repository you can download and install a [Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=VSIDEDevOpsMSFT.ContinuousDeliveryToolsforVisualStudio&ssr=false#overview). Unfortunately, no VS Code extension is available yet.
 

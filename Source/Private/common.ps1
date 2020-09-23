@@ -950,7 +950,7 @@ function _getDescriptorForACL {
          "aad" {
             $descriptor = "Microsoft.IdentityModel.Claims.ClaimsIdentity;$($User.Domain)\\$($User.PrincipalName)"
          }
-         default { throw "User type not handled yet for ACL. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues" }
+         default { throw "User type not handled yet for ACL. Please report this as an issue on the VSTeam Repository: https://github.com/MethodsAndPractices/vsteam/issues" }
       }
    }
 
@@ -960,7 +960,7 @@ function _getDescriptorForACL {
             $sid = _getVSTeamIdFromDescriptor -Descriptor $Group.Descriptor
             $descriptor = "Microsoft.TeamFoundation.Identity;$sid"
          }
-         default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/DarqueWarrior/vsteam/issues" }
+         default { throw "Group type not handled yet for Add-VSTeamGitRepositoryPermission. Please report this as an issue on the VSTeam Repository: https://github.com/MethodsAndPractices/vsteam/issues" }
       }
    }
 

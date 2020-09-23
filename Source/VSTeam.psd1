@@ -104,16 +104,16 @@
          # ExternalModuleDependencies = @('SHiPS')
 
          # A URL to the license for this module.
-         LicenseUri   = 'https://github.com/DarqueWarrior/vsteam/blob/master/LICENSE'
+         LicenseUri   = 'https://github.com/MethodsAndPractices/vsteam/blob/trunk/LICENSE'
 
          # A URL to the main website for this project.
-         ProjectUri   = 'https://github.com/DarqueWarrior/vsteam'
+         ProjectUri   = 'https://github.com/MethodsAndPractices/vsteam'
 
          # A URL to an icon representing this module.
          # IconUri = ''
 
          # ReleaseNotes of this module
-         ReleaseNotes = 'https://github.com/DarqueWarrior/vsteam/blob/master/CHANGELOG.md'
+         ReleaseNotes = 'https://github.com/MethodsAndPractices/vsteam/blob/trunk/CHANGELOG.md'
 
       } # End of PSData hashtable
 

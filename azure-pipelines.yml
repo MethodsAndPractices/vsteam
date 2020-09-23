@@ -1,7 +1,7 @@
 name: $(Build.BuildID)
 
 trigger:
-- master
+- trunk
 
 resources:
 - repo: self
@@ -124,7 +124,7 @@ stages:
       inputs:
         toolMajorVersion: 'V2'
         suppressionsFile: '$(Build.SourcesDirectory)/.build/credscan-supression.json'
-  
+
     - task: PostAnalysis@1
       displayName: 'Post Analysis'
       inputs:
@@ -250,7 +250,7 @@ stages:
 - stage: Production
   displayName: PowerShell Gallery / GitHub Release
   dependsOn: Testing
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/trunk'))
   jobs:
   - deployment: Deploy
     displayName: PowerShell Gallery / GitHub Release

@@ -17,7 +17,7 @@
 ### Example 1
 
 ```powershell
-Update-VSTeamPolicy -ProjectName Demo -id 1 -type 687c53f8-1a82-4e89-9a86-13d51bc4a8d5 -enabled -blocking -settings @{MinimumApproverCount = 1;Scope=@(@{repositoryId=b87c5af8-1a82-4e59-9a86-13d5cbc4a8d5; matchKind="Exact"; refName="refs/heads/master"})}
+Update-VSTeamPolicy -ProjectName Demo -id 1 -type 687c53f8-1a82-4e89-9a86-13d51bc4a8d5 -enabled -blocking -settings @{MinimumApproverCount = 1;Scope=@(@{repositoryId=b87c5af8-1a82-4e59-9a86-13d5cbc4a8d5; matchKind="Exact"; refName="refs/heads/trunk"})}
 ```
 
 This command updates an existing policy in the Demo project.
