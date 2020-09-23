@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.0.1
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/354)
+
+- Fixed bug [353](https://github.com/MethodsAndPractices/vsteam/issues/353)
+- Added TriggerInfo to vsteam_lib.Build class
+
 ## 7.0.0
 
 ## Breaking changes
