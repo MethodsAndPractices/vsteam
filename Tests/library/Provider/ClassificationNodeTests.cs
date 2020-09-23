@@ -20,6 +20,7 @@ namespace vsteam_lib.Test.Provider
          // Assert
          Assert.IsNull(target.ParentUrl, "ParentUrl");
          Assert.IsNotNull(target.Children, "Children");
+         Assert.AreEqual(target.Id, target.NodeId, "NodeId");
          Assert.AreEqual(true, target.HasChildren, "HasChildren");
          Assert.AreEqual(Guid.Empty, target.Identifier, "Identifier");
          Assert.AreEqual("\\PeopleTracker\\Iteration", target.Path, "Path");
