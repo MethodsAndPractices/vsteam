@@ -44,14 +44,21 @@ namespace vsteam_lib
          this.LastChangedBy = new User(obj.GetValue<PSObject>("lastChangedBy"));
 
          this.Project = new Project(obj.GetValue<PSObject>("project"), powerShell);
-         this.Queue = new Queue(obj.GetValue<PSObject>("queue"), projectName, powerShell);
+
+         // When you try to use Get-VSTeamBuild on the build that is running sometimes
+         // the queue is not present yet
+         if (obj.HasValue("queue"))
+         {
+            this.Queue = new Queue(obj.GetValue<PSObject>("queue"), projectName, powerShell);
+         }
+
          this.BuildDefinition = new BuildDefinition(obj.GetValue<PSObject>("definition"), projectName, powerShell);
       }
 
       [ExcludeFromCodeCoverage]
       public Build(PSObject obj, string projectName) :
          this(obj, projectName, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
-      {         
+      {
       }
    }
 }
