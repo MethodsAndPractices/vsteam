@@ -33,6 +33,8 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("11/14/2019 12:49:37 AM", actual.StartTime.ToString(), "startTime");
          Assert.AreEqual("Microsoft.VisualStudio.Services.ReleaseManagement", actual.LastChangedByUser, "LastChangedByUser");
 
+         Assert.IsNotNull(actual.TriggerInfo, "TriggerInfo");
+
          Assert.IsNotNull(actual.Queue, "Queue");
          Assert.IsNotNull(actual.Queue.Pool, "Queue.Pool");
          Assert.AreEqual("81", actual.Queue.Id, "Queue.Id");
@@ -84,6 +86,8 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("Donovan Brown", actual.RequestedForUser, "RequestedForUser");
          Assert.AreEqual("9/23/2020 3:44:45 PM", actual.StartTime.ToString(), "startTime");
          Assert.AreEqual("Microsoft.VisualStudio.Services.TFS", actual.LastChangedByUser, "LastChangedByUser");
+
+         Assert.IsNotNull(actual.TriggerInfo, "TriggerInfo");
 
          Assert.IsNotNull(actual.BuildDefinition, "BuildDefinition");
          Assert.AreEqual(65, actual.BuildDefinition.Id, "BuildDefinition.Id");

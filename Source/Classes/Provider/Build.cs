@@ -34,11 +34,14 @@ namespace vsteam_lib
       public string RequestedByUser => this.RequestedBy.DisplayName;
       public string RequestedForUser => this.RequestedFor.DisplayName;
       public string LastChangedByUser => this.LastChangedBy.DisplayName;
+      public PSObject TriggerInfo { get; }
 
       public Build(PSObject obj, string projectName, IPowerShell powerShell) :
          base(obj, obj.GetValue("buildNumber"), obj.GetValue("Id"), projectName)
 
       {
+         this.TriggerInfo = obj.GetValue<PSObject>("TriggerInfo");
+
          this.RequestedBy = new User(obj.GetValue<PSObject>("requestedBy"));
          this.RequestedFor = new User(obj.GetValue<PSObject>("requestedFor"));
          this.LastChangedBy = new User(obj.GetValue<PSObject>("lastChangedBy"));
