@@ -6,14 +6,22 @@ function Get-VSTeamPackage {
 
       [Parameter(Position = 1)]
       [Alias("id")]
-      [guid] $packageId
+      [guid] $packageId,
+
+      [switch] $includeAllVersions
    )
    process {
+      # Build query string
+      $qs = @{}
+
+      $qs.includeAllVersions = $includeAllVersions.IsPresent
+
       # Call the REST API
       $resp = _callAPI -Subdomain 'feeds' `
          -Area 'Packaging' `
          -Resource 'Feeds' `
-         -Id "$feedId/Packages/$packageId"
+         -Id "$feedId/Packages/$packageId" `
+         -QueryString $qs
 
       if ($null -ne $packageId) {
          return [vsteam_lib.Package]::new($resp)
