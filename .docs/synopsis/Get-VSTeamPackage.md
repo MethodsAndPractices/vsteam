@@ -1,1 +1,1 @@
-Returns a list of packages for the account.
+Returns a list of packages for a feed.
