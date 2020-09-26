@@ -1,0 +1,153 @@
+{
+  "count": 4,
+  "value": [
+    {
+      "id": "b8b066d8-b272-0000-adf2-e4557f67cd98",
+      "normalizedName": "ships",
+      "name": "ships",
+      "protocolType": "NuGet",
+      "url": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/b8b066d8-b272-0000-adf2-e4557f67cd98",
+      "versions": [
+        {
+          "id": "01ab5d22-2ae1-0000-9557-7c080aca6e6e",
+          "normalizedVersion": "0.7.5",
+          "version": "0.7.5",
+          "isLatest": true,
+          "isListed": true,
+          "storageId": "redacted",
+          "views": [
+            {
+              "id": "bc893e8d-51b3-0000-9ece-72d018f3d216",
+              "name": "Local",
+              "url": null,
+              "type": "implicit"
+            }
+          ],
+          "publishDate": "2018-07-10T22:52:52.0130793Z"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/b8b066d8-b272-0000-adf2-e4557f67cd98"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3"
+        },
+        "versions": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/b8b066d8-b272-0000-adf2-e4557f67cd98/Versions"
+        }
+      }
+    },
+    {
+      "id": "a66581fc-6cbc-0000-abb1-9b0957a2753a",
+      "normalizedName": "trackyon.utils",
+      "name": "Trackyon.Utils",
+      "protocolType": "NuGet",
+      "url": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/a66581fc-6cbc-0000-abb1-9b0957a2753a",
+      "versions": [
+        {
+          "id": "209c44f2-6ef0-0000-a062-9d6dccd979ee",
+          "normalizedVersion": "0.0.2",
+          "version": "0.0.2",
+          "isLatest": true,
+          "isListed": true,
+          "storageId": "redacted",
+          "views": [
+            {
+              "id": "bc893e8d-51b3-0000-9ece-72d018f3d216",
+              "name": "Local",
+              "url": null,
+              "type": "implicit"
+            }
+          ],
+          "publishDate": "2018-08-09T09:10:43.8106804Z"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/a66581fc-6cbc-0000-abb1-9b0957a2753a"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3"
+        },
+        "versions": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/a66581fc-6cbc-0000-abb1-9b0957a2753a/Versions"
+        }
+      }
+    },
+    {
+      "id": "6c163345-4ec5-0000-84a9-2693e6f066d0",
+      "normalizedName": "vsteam",
+      "name": "VSTeam",
+      "protocolType": "NuGet",
+      "url": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a9-2693e6f066d0",
+      "versions": [
+        {
+          "id": "998abe34-23de-0000-9668-b73891e2dada",
+          "normalizedVersion": "1137.0.0",
+          "version": "1137.0.0",
+          "isLatest": true,
+          "isListed": true,
+          "storageId": "redacted",
+          "views": [
+            {
+              "id": "bc893e8d-51b3-0000-9ece-72d018f3d216",
+              "name": "Local",
+              "url": null,
+              "type": "implicit"
+            }
+          ],
+          "publishDate": "2018-09-07T13:33:39.7955324Z"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a9-2693e6f066d0"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3"
+        },
+        "versions": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/6c163345-4ec5-0000-84a9-2693e6f066d0/Versions"
+        }
+      }
+    },
+    {
+      "id": "f83303ea-ac6e-0000-8893-66a363e243d2",
+      "normalizedName": "vsteam-plus",
+      "name": "vsteam-plus",
+      "protocolType": "NuGet",
+      "url": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/f83303ea-ac6e-0000-8893-66a363e243d2",
+      "versions": [
+        {
+          "id": "b7539fe2-28f9-0000-a085-01fde3582078",
+          "normalizedVersion": "0.0.1.2137",
+          "version": "0.0.1.2137",
+          "isLatest": true,
+          "isListed": true,
+          "storageId": "redacted",
+          "views": [
+            {
+              "id": "bc893e8d-51b3-0000-9ece-72d018f3d216",
+              "name": "Local",
+              "url": null,
+              "type": "implicit"
+            }
+          ],
+          "publishDate": "2020-07-15T15:54:33.1461727Z"
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/f83303ea-ac6e-0000-8893-66a363e243d2"
+        },
+        "feed": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3"
+        },
+        "versions": {
+          "href": "https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/76045f1e-5b7c-0000-9ea5-df04e6b6c3f3/Packages/f83303ea-ac6e-0000-8893-66a363e243d2/Versions"
+        }
+      }
+    }
+  ]
+}

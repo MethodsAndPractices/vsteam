@@ -7,6 +7,7 @@ namespace vsteam_lib
    public class Feed : Leaf
    {
       public string Url { get; set; }
+      public string FeedId => this.Id;
       public string Description { get; set; }
       public bool? UpstreamEnabled { get; set; }
       public IList<UpstreamSource> UpstreamSources { get; }
