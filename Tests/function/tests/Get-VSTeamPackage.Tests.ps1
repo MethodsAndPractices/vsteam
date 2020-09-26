@@ -14,7 +14,7 @@ Describe 'VSTeamPackage' {
    Context 'Get-VSTeamPackage' {
       It 'should return all packages' {
          ## Act
-         $actual = Get-VSTeamPackage -FeedId '00000000-0000-0000-0000-000000000001'
+         $actual = Get-VSTeamPackage -FeedId '00000000-0000-0000-0000-000000000001' -protocolType NuGet
 
          ## Assert
          $actual.count | Should -Be 4
@@ -23,6 +23,8 @@ Describe 'VSTeamPackage' {
             $Subdomain -eq 'feeds' -and
             $Area -eq 'Packaging' -and
             $Resource -eq 'Feeds' -and
+            $QueryString['protocolType'] -eq 'NuGet' -and
+            $QueryString['includeAllVersions'] -eq $false -and
             $Id -eq '00000000-0000-0000-0000-000000000001/Packages/' -and
             $Version -eq $(_getApiVersion packaging)
          }
@@ -31,7 +33,7 @@ Describe 'VSTeamPackage' {
       It 'should return package by id' {
          ## Act
          $actual = Get-VSTeamPackage -FeedId '00000000-0000-0000-0000-000000000001' `
-            -PackageId 'b8b066d8-b272-0000-adf2-e4557f67cd98'
+            -PackageId 'b8b066d8-b272-0000-adf2-e4557f67cd98' -includeAllVersions
 
          ## Assert
          $actual | Should -Not -Be $null
@@ -41,6 +43,8 @@ Describe 'VSTeamPackage' {
             $Subdomain -eq 'feeds' -and
             $Area -eq 'Packaging' -and
             $Resource -eq 'Feeds' -and
+            $QueryString['protocolType'] -eq '' -and
+            $QueryString['includeAllVersions'] -eq $true -and
             $Id -eq '00000000-0000-0000-0000-000000000001/Packages/b8b066d8-b272-0000-adf2-e4557f67cd98'
          }
       }
@@ -52,7 +56,7 @@ Describe 'VSTeamPackage' {
          }
 
          ## Act
-         $actual = $($feed | Get-VSTeamPackage)
+         $actual = $($feed | Get-VSTeamPackage -hideUrls)
 
          ## Assert
          $actual.count | Should -Be 4
@@ -61,6 +65,7 @@ Describe 'VSTeamPackage' {
             $Subdomain -eq 'feeds' -and
             $Area -eq 'Packaging' -and
             $Resource -eq 'Feeds' -and
+            $QueryString['includeUrls'] -eq 'false' -and
             $Id -eq '00000000-0000-0000-0000-000000000001/Packages/'
          }
       }
