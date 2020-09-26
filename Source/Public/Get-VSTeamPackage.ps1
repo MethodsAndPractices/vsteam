@@ -10,10 +10,11 @@ function Get-VSTeamPackage {
    )
    process {
       # Call the REST API
-      $resp = _callAPI -Subdomain 'feeds' `
+      $resp = _callAPI -Subdomain 'feeds' -NoProject `
          -Area 'Packaging' `
          -Resource 'Feeds' `
-         -Id "$feedId/Packages/$packageId"
+         -Id "$feedId/Packages/$packageId" `
+         -Version $(_getApiVersion packaging)
 
       if ($null -ne $packageId) {
          return [vsteam_lib.Package]::new($resp)

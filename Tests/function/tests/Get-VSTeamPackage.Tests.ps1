@@ -8,6 +8,7 @@ Describe 'VSTeamPackage' {
       Mock _callApi { Open-SampleFile 'Get-VSTeamPackage.json' -Index 0 } -ParameterFilter {
          $PackageId -eq 'b8b066d8-b272-0000-adf2-e4557f67cd98'
       }
+      Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Packaging' }
    }
 
    Context 'Get-VSTeamPackage' {
@@ -22,7 +23,8 @@ Describe 'VSTeamPackage' {
             $Subdomain -eq 'feeds' -and
             $Area -eq 'Packaging' -and
             $Resource -eq 'Feeds' -and
-            $Id -eq '00000000-0000-0000-0000-000000000001/Packages/'
+            $Id -eq '00000000-0000-0000-0000-000000000001/Packages/' -and
+            $Version -eq $(_getApiVersion packaging)
          }
       }
 
