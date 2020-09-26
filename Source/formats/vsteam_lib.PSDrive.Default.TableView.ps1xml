@@ -22,6 +22,7 @@
             <TypeName>vsteam_lib.Users</TypeName>
             <TypeName>vsteam_lib.Provider.Group</TypeName>
             <TypeName>vsteam_lib.Provider.User</TypeName>
+            <TypeName>vsteam_lib.Provider.Package</TypeName>
          </ViewSelectedBy>
          <TableControl>
             <AutoSize />

@@ -130,4 +130,20 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
          $cols[0] | Should -Be 'Name'
       }
    }
+
+   Context 'Package' {
+      # This is the formatter when returned from the provider
+      It 'vsteam_lib.Provider.Package should have mode' {
+         $cols = Get-Columns -TypeName vsteam_lib.Provider.Package
+
+         $cols[0] | Should -Be 'Mode'
+      }
+
+      # This is the formatter when returned from a function
+      It 'vsteam_lib.Package should have name' {
+         $cols = Get-Columns -TypeName vsteam_lib.Package
+
+         $cols[0] | Should -Be 'Name'
+      }
+   }
 }

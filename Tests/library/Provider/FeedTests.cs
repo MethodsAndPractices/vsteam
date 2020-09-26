@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace vsteam_lib.Test.Provider
 {
@@ -22,8 +21,9 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual(null, actual.Description, "Description");
          Assert.AreEqual(true, actual.UpstreamEnabled, "UpstreamEnaabled");
          Assert.AreEqual("00000000-0000-0000-0000-000000000001", actual.Id, "Id");
+         Assert.AreEqual("00000000-0000-0000-0000-000000000001", actual.FeedId, "FeedId");
          Assert.AreEqual("https://feeds.dev.azure.com/Test/_apis/Packaging/Feeds/00000000-0000-0000-0000-000000000000", actual.Url, "Url");
-         
+
          Assert.IsNotNull(actual.UpstreamSources, "UpstreamSources");
          Assert.AreEqual(4, actual.UpstreamSources.Count, "UpstreamSources.Count");
 

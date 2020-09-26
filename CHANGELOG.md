@@ -1,5 +1,9 @@
 # Changelog
 
+## Next
+
+Added Get-VSTeamPackage to return packages of a feed.
+
 ## 7.0.1
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/354)

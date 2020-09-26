@@ -31,6 +31,12 @@ namespace vsteam_lib
       [XmlAttribute("_links.subject.href")]
       public string Subject { get; set; }
 
+      [XmlAttribute("_links.versions.href")]
+      public string Versions { get; set; }
+
+      [XmlAttribute("_links.feed.href")]
+      public string Feed { get; set; }
+
       public PSObject InternalObject { get; }
 
       public Link(PSObject obj)
@@ -51,6 +57,8 @@ namespace vsteam_lib
          AddLink(sb, nameof(this.Avatar), this.Avatar);
          AddLink(sb, nameof(this.Web), this.Web);
          AddLink(sb, nameof(this.Subject), this.Subject);
+         AddLink(sb, nameof(this.Feed), this.Feed);
+         AddLink(sb, nameof(this.Versions), this.Versions);
 
          return sb.ToString();
       }
