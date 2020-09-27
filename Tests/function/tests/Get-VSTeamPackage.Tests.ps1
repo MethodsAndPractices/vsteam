@@ -18,6 +18,7 @@ Describe 'VSTeamPackage' {
 
          ## Assert
          $actual.count | Should -Be 4
+         $actual[0].FeedId | Should -Be '00000000-0000-0000-0000-000000000001'
 
          Should -Invoke _callApi -Exactly -Times 1 -Scope It -ParameterFilter {
             $Subdomain -eq 'feeds' -and

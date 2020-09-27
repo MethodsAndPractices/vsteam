@@ -1,0 +1,1 @@
+Opens the package in the default browser.

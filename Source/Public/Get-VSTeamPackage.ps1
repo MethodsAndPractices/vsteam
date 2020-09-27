@@ -59,13 +59,13 @@ function Get-VSTeamPackage {
          -Version $(_getApiVersion packaging)
 
       if ($null -ne $packageId) {
-         return [vsteam_lib.Package]::new($resp)
+         return [vsteam_lib.Package]::new($resp, $feedId)
       }
 
       $objs = @()
 
       foreach ($item in $resp.value) {
-         $objs += [vsteam_lib.Package]::new($item, $ProjectName)
+         $objs += [vsteam_lib.Package]::new($item, $feedId)
       }
 
       Write-Output $objs
