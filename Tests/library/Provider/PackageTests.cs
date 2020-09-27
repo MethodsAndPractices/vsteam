@@ -16,10 +16,11 @@ namespace vsteam_lib.Test.Provider
          var obj = BaseTests.LoadJson("Get-VSTeamPackage.json");
 
          // Act
-         var actual = new Package(obj[2], ps);
+         var actual = new Package(obj[2], "MyFeed", ps);
 
          // Assert
          Assert.AreEqual("VSTeam", actual.Name, "Name");
+         Assert.AreEqual("MyFeed", actual.FeedId, "FeedId");
          Assert.AreEqual("NuGet", actual.ProtocolType, "ProtocolType");
          Assert.AreEqual("vsteam", actual.NormalizedName, "NormalizedName");
          Assert.AreEqual(Guid.Parse("6c163345-4ec5-0000-84a9-2693e6f066d0"), actual.Id, "Id");

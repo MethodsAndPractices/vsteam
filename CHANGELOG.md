@@ -3,6 +3,7 @@
 ## Next
 
 Added Get-VSTeamPackage to return packages of a feed.
+Added Show-VSTeamPackage to open package in default browser.
 
 ## 7.0.1
 

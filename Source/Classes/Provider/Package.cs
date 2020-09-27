@@ -15,12 +15,16 @@ namespace vsteam_lib
       public object Versions { get; set; }
       public Link Links { get; }
 
+      public string FeedId { get; }
+
       /// <summary>
       /// Used for testing
       /// </summary>
-      public Package(PSObject obj, IPowerShell powerShell) :
+      public Package(PSObject obj, string feedId, IPowerShell powerShell) :
          base(obj, obj.GetValue("name"), "Version", powerShell, null)
       {
+         this.FeedId = feedId;
+
          if (obj.HasValue("_links"))
          {
             this.Links = new Link(obj);
@@ -31,8 +35,8 @@ namespace vsteam_lib
       /// Used by PowerShell
       /// </summary>
       [ExcludeFromCodeCoverage]
-      public Package(PSObject obj) :
-         this(obj, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
+      public Package(PSObject obj, string feedId) :
+         this(obj, feedId, new PowerShellWrapper(RunspaceMode.CurrentRunspace))
       {
       }
    }
