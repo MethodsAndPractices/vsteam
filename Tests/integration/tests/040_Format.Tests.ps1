@@ -146,4 +146,21 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
          $cols[0] | Should -Be 'Name'
       }
    }
+
+   Context 'PackageVersion' {
+      # This is the formatter when returned from the provider
+      It 'vsteam_lib.Provider.PackageVersion should have mode' {
+         $cols = Get-Columns -TypeName vsteam_lib.Provider.PackageVersion
+
+         $cols[0] | Should -Be 'Mode'
+      }
+
+      # This is the formatter when returned from a function
+      It 'vsteam_lib.PackageVersion should have name' {
+         $cols = Get-Columns -TypeName vsteam_lib.PackageVersion
+
+         $cols[0] | Should -Be 'Version'
+         $cols[1] | Should -Be 'Publish Date'
+      }
+   }
 }

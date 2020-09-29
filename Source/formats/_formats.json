@@ -87,6 +87,7 @@
       "vsteam_lib.Provider.Extension.TableView.ps1xml",
       "vsteam_lib.PSDrive.Default.TableView.ps1xml",
       "vsteam_lib.Package.TableView.ps1xml",
+      "vsteam_lib.PackageVersion.TableView.ps1xml",
       "vsteam_lib.Provider.Build.TableView.ps1xml",
       "vsteam_lib.Queue.TableView.ps1xml",
       "vsteam_lib.PSDrive.Default.ListView.ps1xml",
