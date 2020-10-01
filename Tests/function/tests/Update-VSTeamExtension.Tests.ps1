@@ -3,8 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamExtension' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
-      Mock _getInstance { return 'https://dev.azure.com/test' }
    }
 
    Context 'Update-VSTeamExtension' {
