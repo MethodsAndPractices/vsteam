@@ -1,12 +1,13 @@
 # Changelog
 
-## Next
+## 7.1.0
 
 Added:
 
 - Get-VSTeamPackage to return packages of a feed.
 - Show-VSTeamPackage to open package in default browser.
 - Get-VSTeamPackageVersion to return all the versions of a package.
+- Update-VSTeamNuGetPackageVersion to list and un-list versions.
 
 ## 7.0.1
 
