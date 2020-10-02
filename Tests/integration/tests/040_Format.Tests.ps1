@@ -160,7 +160,8 @@ Describe 'Table Formats for Provider classes' -Tag 'integration' {
          $cols = Get-Columns -TypeName vsteam_lib.PackageVersion
 
          $cols[0] | Should -Be 'Version'
-         $cols[1] | Should -Be 'Publish Date'
+         $cols[1] | Should -Be 'Listed'
+         $cols[2] | Should -Be 'Publish Date'
       }
    }
 }
