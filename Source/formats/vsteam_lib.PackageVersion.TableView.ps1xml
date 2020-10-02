@@ -13,6 +13,9 @@
                   <Label>Version</Label>
                </TableColumnHeader>
                <TableColumnHeader>
+                  <Label>Listed</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
                   <Label>Publish Date</Label>
                </TableColumnHeader>
                <TableColumnHeader>
@@ -25,6 +28,9 @@
                   <TableColumnItems>
                      <TableColumnItem>
                         <PropertyName>Version</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>IsListed</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>PublishDate</PropertyName>
