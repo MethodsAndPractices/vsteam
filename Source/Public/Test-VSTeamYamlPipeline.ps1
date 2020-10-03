@@ -35,7 +35,7 @@ function Test-VSTeamYamlPipeline {
             -Area pipelines `
             -id "$PipelineId/runs" `
             -Body ($body | ConvertTo-Json -Compress -Depth 100) `
-            -Version $(_getApiVersion Build)
+            -Version $(_getApiVersion Pipelines)
       }
       catch {
          if ($PSItem -match 'PipelineValidationException') {
