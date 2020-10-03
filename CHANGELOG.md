@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1.1
+
+Fixed bug in Test-VSTeamYamlPipeline by adding a Pipelines version value.
+
 ## 7.1.0
 
 Added:
