@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamYamlPipeline' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      
+
       $testYamlPath = "$sampleFiles\azure-pipelines.test.yml"
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock Invoke-RestMethod { Open-SampleFile 'pipelineDefYamlResult.json' }
@@ -16,7 +16,7 @@ Describe 'VSTeamYamlPipeline' {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
-            $Uri -like "*api-version=$(_getApiVersion Build)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Pipelines)*" -and
             $Body -like '*"PreviewRun":*true*' -and
             $Body -notlike '*YamlOverride*'
          }
@@ -27,7 +27,7 @@ Describe 'VSTeamYamlPipeline' {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
-            $Uri -like "*api-version=$(_getApiVersion Build)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Pipelines)*" -and
             $Body -like '*"PreviewRun":*true*' -and
             $Body -like '*YamlOverride*'
          }
@@ -40,12 +40,12 @@ Describe 'VSTeamYamlPipeline' {
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/project/_apis/pipelines/24/runs*" -and
-            $Uri -like "*api-version=$(_getApiVersion Build)*" -and
+            $Uri -like "*api-version=$(_getApiVersion Pipelines)*" -and
             $Body -like '*"PreviewRun":*true*' -and
             $Body -like '*YamlOverride*'
          }
       }
-      
+
       It 'Should create Yaml result' {
          $yamlResult = Test-VSTeamYamlPipeline -projectName project -PipelineId 24 -FilePath $testYamlPath
 
