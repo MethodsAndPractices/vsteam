@@ -19,6 +19,6 @@ if(-not (Get-Module platyPS -ListAvailable)) {
    Install-Module platyPS -Scope CurrentUser -Force
 }
 
-$helpOutput = New-ExternalHelp ..\docs -OutputPath ..\Source\en-US -AlphabeticParamsOrder -Force | Out-String
+$helpOutput = New-ExternalHelp ..\docs -OutputPath ..\Source\en-US -Force | Out-String
 
 Write-Verbose $helpOutput
