@@ -1,9 +1,14 @@
 function Get-VSTeamAPIVersion {
-   [CmdletBinding(HelpUri='https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAPIVersion')]
+   [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAPIVersion')]
    [OutputType([System.Collections.Hashtable])]
    param(
       [Parameter(Mandatory = $false, Position = 0)]
-      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask', 'DistributedTaskReleased', 'VariableGroups', 'Tfvc', 'Packaging', 'MemberEntitlementManagement', 'ExtensionsManagement', 'ServiceEndpoints', 'Graph', 'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery')]
+      [ValidateSet('Build', 'Release', 'Core', 'Git', 'DistributedTask',
+                   'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
+                   'Packaging', 'MemberEntitlementManagement',
+                   'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
+                   'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery',
+                   'Pipelines')]
       [string] $Service
    )
 
@@ -30,6 +35,7 @@ function Get-VSTeamAPIVersion {
          Policy                      = $(_getApiVersion Policy)
          Processes                   = $(_getApiVersion Processes)
          HierarchyQuery              = $(_getApiVersion HierarchyQuery)
+         Pipelines                   = $(_getApiVersion Pipelines)
       }
    }
 }

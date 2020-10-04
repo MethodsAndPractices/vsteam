@@ -13,7 +13,8 @@ function Set-VSTeamAPIVersion {
                    'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
                    'Packaging', 'MemberEntitlementManagement',
                    'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
-                   'TaskGroups', 'Policy', 'HierarchyQuery')]
+                   'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery',
+                   'Pipelines')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Service', Mandatory = $true, Position = 1)]
@@ -37,6 +38,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Release = '5.0'
                [vsteam_lib.Versions]::DistributedTask = '5.0-preview'
                [vsteam_lib.Versions]::DistributedTaskReleased = ''
+               [vsteam_lib.Versions]::Pipelines = ''
                [vsteam_lib.Versions]::HierarchyQuery = '5.0-preview'
                [vsteam_lib.Versions]::VariableGroups = '5.0-preview'
                [vsteam_lib.Versions]::Tfvc = '5.0'
@@ -57,6 +59,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Release = '5.1'
                [vsteam_lib.Versions]::DistributedTask = '5.1-preview'
                [vsteam_lib.Versions]::DistributedTaskReleased = ''
+               [vsteam_lib.Versions]::Pipelines = '5.1-preview'
                [vsteam_lib.Versions]::HierarchyQuery = '5.1-preview'
                [vsteam_lib.Versions]::VariableGroups = '5.1-preview'
                [vsteam_lib.Versions]::Tfvc = '5.1'
@@ -77,6 +80,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Release = '4.0-preview'
                [vsteam_lib.Versions]::DistributedTask = '4.0-preview'
                [vsteam_lib.Versions]::DistributedTaskReleased = ''
+               [vsteam_lib.Versions]::Pipelines = ''
                [vsteam_lib.Versions]::HierarchyQuery = ''
                [vsteam_lib.Versions]::VariableGroups = '4.0-preview'
                [vsteam_lib.Versions]::Tfvc = '4.0'
@@ -97,6 +101,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Release = '4.1-preview'
                [vsteam_lib.Versions]::DistributedTask = '4.1-preview'
                [vsteam_lib.Versions]::DistributedTaskReleased = ''
+               [vsteam_lib.Versions]::Pipelines = ''
                [vsteam_lib.Versions]::HierarchyQuery = ''
                [vsteam_lib.Versions]::VariableGroups = '4.1-preview'
                [vsteam_lib.Versions]::Tfvc = '4.1'
@@ -117,6 +122,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Release = '3.0-preview'
                [vsteam_lib.Versions]::DistributedTask = '3.0-preview'
                [vsteam_lib.Versions]::DistributedTaskReleased = ''
+               [vsteam_lib.Versions]::Pipelines = ''
                [vsteam_lib.Versions]::HierarchyQuery = ''
                [vsteam_lib.Versions]::VariableGroups = '' # Was introduced in Update 1
                [vsteam_lib.Versions]::TaskGroups = '3.0-preview'
@@ -137,6 +143,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Release = '3.1-preview'
                [vsteam_lib.Versions]::DistributedTask = '3.1-preview'
                [vsteam_lib.Versions]::DistributedTaskReleased = ''
+               [vsteam_lib.Versions]::Pipelines = ''
                [vsteam_lib.Versions]::HierarchyQuery = ''
                [vsteam_lib.Versions]::VariableGroups = '3.1-preview' # Resource of DistributedTask area
                [vsteam_lib.Versions]::TaskGroups = '3.1-preview' # Resource of DistributedTask area
@@ -158,6 +165,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Release = '3.2-preview'
                [vsteam_lib.Versions]::DistributedTask = '3.2-preview'
                [vsteam_lib.Versions]::DistributedTaskReleased = ''
+               [vsteam_lib.Versions]::Pipelines = ''
                [vsteam_lib.Versions]::HierarchyQuery = ''
                [vsteam_lib.Versions]::VariableGroups = '3.2-preview' # Resource of DistributedTask area
                [vsteam_lib.Versions]::TaskGroups = '3.2-preview' # Resource of DistributedTask area
@@ -179,6 +187,7 @@ function Set-VSTeamAPIVersion {
                [vsteam_lib.Versions]::Release = '5.1'
                [vsteam_lib.Versions]::DistributedTask = '6.0-preview'
                [vsteam_lib.Versions]::DistributedTaskReleased = '5.1'
+               [vsteam_lib.Versions]::Pipelines = '5.1-preview'
                [vsteam_lib.Versions]::HierarchyQuery = '5.1-preview'
                [vsteam_lib.Versions]::VariableGroups = '5.1-preview.1'
                [vsteam_lib.Versions]::TaskGroups = '6.0-preview'
@@ -238,6 +247,10 @@ function Set-VSTeamAPIVersion {
    # Get-VSTeamOption -area 'distributedtask' -resource 'messages'
    # Get-VSTeamOption -area 'distributedtask' -resource 'jobrequests'
    Write-Verbose "DistributedTaskReleased: $([vsteam_lib.Versions]::DistributedTaskReleased)"
+
+   # Testing pipelines
+   #  Get-VSTeamOption -area 'pipelines' -resource 'runs'
+   Write-Verbose "Pipelines: $([vsteam_lib.Versions]::Pipelines)"
 
    # Get-VSTeamOption -area 'Contribution' -resource 'HierarchyQuery'
    Write-Verbose "HierarchyQuery: $([vsteam_lib.Versions]::HierarchyQuery)"

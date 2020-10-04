@@ -177,7 +177,7 @@ function _getApiVersion {
          'DistributedTaskReleased', 'VariableGroups', 'Tfvc',
          'Packaging', 'MemberEntitlementManagement',
          'ExtensionsManagement', 'ServiceEndpoints', 'Graph',
-         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery')]
+         'TaskGroups', 'Policy', 'Processes', 'HierarchyQuery', 'Pipelines')]
       [string] $Service,
 
       [parameter(ParameterSetName = 'Target')]
