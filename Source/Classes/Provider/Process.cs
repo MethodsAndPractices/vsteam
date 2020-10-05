@@ -8,6 +8,7 @@ namespace vsteam_lib
    {
       public string TypeId { get; set; }
       public string Description { get; set; }
+      public string ReferenceName { get; set; }
       public bool IsEnabled { get; set; }
       public bool IsDefault { get; set; }
       [XmlAttribute("customizationType")]

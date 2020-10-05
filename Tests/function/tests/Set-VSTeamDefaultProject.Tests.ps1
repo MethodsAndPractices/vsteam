@@ -5,6 +5,7 @@ Describe 'VSTeamDefaultProject' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       Mock _getInstance { return 'https://dev.azure.com/test' }
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {$Uri -like "*_apis/work/processes*" }
    }
 
    Context 'Set-VSTeamDefaultProject' {

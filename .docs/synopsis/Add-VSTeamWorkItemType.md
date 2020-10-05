@@ -1,0 +1,1 @@
+Adds a new work item type to a custom process template.

@@ -7,7 +7,7 @@ Describe 'VSTeamAgent' {
       
       ## Arrange
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'DistributedTaskReleased' }
-
+      Mock Invoke-RestMethod { return @() } -ParameterFilter {$Uri -like "*_apis/work/processes*" }
       Mock _getInstance { return 'https://dev.azure.com/test' }
 
       # Even with a default set this URI should not have the project added.
