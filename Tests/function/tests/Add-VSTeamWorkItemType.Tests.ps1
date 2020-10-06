@@ -1,10 +1,10 @@
 Set-StrictMode -Version Latest
 
-Describe 'VSTeamWorkItemType' {
+Describe 'AddVSTeamWorkItemType' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSteamProcess.ps1"
-      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemIconList"
+      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcess.ps1"
+      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemIconList.ps1"
 
       $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
