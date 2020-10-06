@@ -1,5 +1,17 @@
 # Changelog
 
+## J.H. O'Neill @ 6th October 2020
+1. Ensured cache is cleared in Set- and Remove- -VSTeamWorkItemType.Tests
+2.  To Support workitem *states*, Added 5 new functions each with its PS1 help and test. 
+   *  Get-VsteamWorkItemState
+   *  Add-VSTeamWorkItemState
+   *  Remove-VsteamWorkItemState
+   *  Hide-VsteamWorkItemState
+   *  Show-VsteamWorkItemState
+
+Each WorkItem type in each process template has a set of possible states e.g. "To Do", "In Progress" and "Done". Some are system states which cannot be removed but can be hidden (and shown). Other states are custom/user-added and can be removed (but not hidden). This provides tools for listing the states, hiding and showing system ones, and adding and removing user ones. 
+
+
 ## J.H. O'Neill @ 3rd October 2020
 1.  To support tab completion for (e.g.) icon color  in `Add-VSTeamWorkItemType`:  **added class** `ColorCompleter` in file `Source\Classes\Completer\ColorCompleter.cs`. 
     I can't find way to use the conventional `KnownColor` class in single new C# class which will build for both Windows PowerShell 5 and PowerShell Core, so I've worked round it by getting the static properties of `System.Drawing.Color`.

@@ -1,0 +1,142 @@
+<!-- #include "./common/header.md" -->
+
+# Add-VSTeamWorkItemState
+
+## SYNOPSIS
+
+<!-- #include "./synopsis/Add-VSTeamWorkItemState.md" -->
+
+## SYNTAX
+
+## Description
+
+Each WorkItem type in each process template has a set of possible states.  Items may have system-defined states and/or custom (user-defined) states. This command adds custom states. Note that unlike system states, custom ones can only be removed not hidden.
+
+## EXAMPLES
+
+### Example 1
+
+```powershell
+Add-VSTeamWorkItemState -WorkItemType Bug -Color Blue -Name Postponed -ProcessTemplate Scrum2 -Force
+
+Order Name      Category   Color  Customization Hidden
+----- ----      --------   -----  ------------- ------
+4     Postponed InProgress 0000ff custom
+```
+
+This adds a state "postponed", shown in blue, as a custom state to the "Bug" WorkItem type in the "scrum2" process-template in the"in-progress" category. By default "Committed" is at position 3 in the list of states, as an "in-progress" state, and "Done" is at position 4 as a "completed" state, the new state is inserted between them, shifting "Done", and any state(s) below it, down by one position.
+
+## PARAMETERS
+
+
+### -Color
+
+The color for the state either as a name, or as a hex RGB value like "ff0000" for Red. Color names should tab complete.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+
+Name for the new state.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Order
+
+Positions the new state in the selection list. The first position in the list is 1, and if no order is specified the new state will be added at the end of the list.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProcessTemplate
+
+Specifies the process template where the WorkItem Type to be modified is found; by default this will be the template for the current project. Note that although some WorkItem types like "bug" or "task" are found in multiple templates, a change to the available states only applies to one template, and the built-in process templates cannot be modified. Values for this parameter should tab-complete.
+
+
+```yaml
+Type: String
+Parameter Sets: Process
+```
+### -StateCategory
+
+Each state fits into one of five categories: Proposed, InProgress, Resolved, Completed, or Removed. If no category is given the new state is considered to be a form of "in progress".
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: Proposed, InProgress, Resolved, Completed, Removed
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WorkItemType
+
+The name of the WorkItem type whose state list is to be extended. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually. 
+
+
+```yaml
+Type: String
+Parameter Sets: ByType
+```
+<!-- #include "./params/confirm.md" -->
+
+<!-- #include "./params/Force.md" -->
+
+<!-- #include "./params/whatif.md" -->
+
+## INPUTS
+
+### System.String
+
+## OUTPUTS
+
+### System.Object
+
+## NOTES
+
+<!-- #include "./common/prerequisites.md" -->
+
+## RELATED LINKS
+
+<!-- #include "./common/related.md" -->
+[Get-VsteamWorkItemState](Get-VsteamWorkItemState.md)
+
+[Hide-VsteamWorkItemState](Hide-VsteamWorkItemState.md)
+
+[Show-VsteamWorkItemState](Show-VsteamWorkItemState.md)
+
+[Remove-VsteamWorkItemState](Remove-VsteamWorkItemState.md)

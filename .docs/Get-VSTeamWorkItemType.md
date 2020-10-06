@@ -54,7 +54,7 @@ shows a table of Type-name and the process-template which has that type.
 
 ### -ProcessTemplate
 
-The Process holding the WorkItems of interest.
+The Process holding the WorkItem types of interest.
 
 ```yaml
 Type: String
