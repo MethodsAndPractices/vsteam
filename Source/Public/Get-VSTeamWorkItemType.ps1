@@ -8,25 +8,30 @@ function Get-VSTeamWorkItemType {
       [ArgumentCompleter([vsteam_lib.ProjectCompleter])]
       [string] $ProjectName,
 
-      [parameter(ParameterSetName='Process', Mandatory = $true , ValueFromPipelineByPropertyName = $true)]
+      [parameter(ParameterSetName='Process' , ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProcessTemplateValidateAttribute()]
       [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
-      $ProcessTemplate,
+      $ProcessTemplate = $env:TEAM_PROCESS,
 
-      [Parameter()]
+      [Parameter(Position=0)]
       [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]
       [string] $WorkItemType = '*',
 
       [parameter(ParameterSetName='Process',ValueFromPipelineByPropertyName=$true)]
       [ValidateSet('behaviors','layout','states')]
-      [string[]]$Expand
+      [string[]]$Expand,
+
+      [Parameter(ParameterSetName = 'List')]
+      [switch]$NotHidden
    )
 
    process {
       <# Call the REST API in one of 2 ways; 
-        if process template is given, then call as work/processes/workitemtypes (this API doesn't take a workitem ID, and so always returns multiple values)
-        otherwise call as wit/workitemtypes  (JSON needs special conversion and contains mutliple  values)
-        DON'T validate $workitem type and call with wit/workitemtypes/name - instead allow wildcards and filter down  the workitem(s) will be in $resp after the IF / ELSE 
+        if processTemplate  was passed as a parameter (not populated as a default), 
+        then call as work/processes/workitemtypes (this API doesn't take a workitem ID & returns multiple values)
+        otherwise call as wit/workitemtypes  (JSON needs special conversion & contains mutliple  values)
+        DON'T validate the $workitemType and call with wit/workitemtypes/WorkItemTypeName -
+        instead allow wildcards and filter down the results. The workitem(s) will be in $resp after the IF / ELSE 
       #>
       $commonArgs = @{
          ProjectName = $ProjectName
@@ -34,7 +39,7 @@ function Get-VSTeamWorkItemType {
          Resource    = 'workitemtypes'
          Version     = $(_getApiVersion Core)
       }
-      if (-not $ProcessTemplate) {
+      if (-not $PSBoundParameters.ContainsKey("ProcessTemplate") -and -not $Expand) {
          $resp = _callAPI @commonArgs
 
          # This call returns JSON with "": which causes the ConvertFrom-Json to fail.
@@ -52,7 +57,9 @@ function Get-VSTeamWorkItemType {
          foreach ($item in $resp) {
             Add-Member -InputObject $item  -MemberType NoteProperty -Name "Hidden" -Value ($item.name -in $hidden)
          }
-
+         if ($NotHidden.IsPresent) {
+            $resp = $resp | Where-Object -not Hidden
+         }
          if ($ProjectName -eq $env:TEAM_PROJECT -and $env:TEAM_PROCESS) {$ProcessTemplate = $env:TEAM_PROCESS}
       }
       else {  

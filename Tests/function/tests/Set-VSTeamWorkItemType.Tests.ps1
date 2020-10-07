@@ -64,6 +64,7 @@ Describe 'VSTeamWorkItemType' {
          else               { return $wits }  
       } 
       [vsteam_lib.IconCache]::Invalidate()
+      [vsteam_lib.ProcessTemplateCache]::Invalidate()
    }
 
    Context 'Update WorkItem Types' {

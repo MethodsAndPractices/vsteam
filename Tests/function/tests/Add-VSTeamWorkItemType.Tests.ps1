@@ -36,6 +36,7 @@ Describe 'AddVSTeamWorkItemType' {
       Mock _callApi -ParameterFilter { $Method -eq 'Post' } -MockWith {
          return ([psCustomObject]@{name = 'Dummy' })
       }
+      [vsteam_lib.ProcessTemplateCache]::Invalidate()
    }
 
    Context 'Add-VSTeamWorkItemType' {

@@ -52,6 +52,7 @@ Describe 'RemoveVSTeamWorkItemType' {
          else               { return $wits }  
       } 
       [vsteam_lib.IconCache]::Invalidate()
+      [vsteam_lib.ProcessTemplateCache]::Invalidate()
    }
 
    Context 'Delete workItem Type' {

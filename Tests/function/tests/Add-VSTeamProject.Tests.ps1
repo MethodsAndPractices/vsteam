@@ -88,6 +88,7 @@ Describe 'VSTeamProject' {
                Typeid = '00000000-0000-0000-0000-000000000002'
             }
          }
+         [vsteam_lib.ProcessTemplateCache]::Invalidate()
       }
 
       It 'Should create project with CMMI' {

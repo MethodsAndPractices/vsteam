@@ -23,6 +23,7 @@ Describe 'VSTeamWorkItemType' {
          if ($name) { return $processes.where( { $_.name -like $name }) }
          else { return $processes }  
       }
+      [vsteam_lib.ProcessTemplateCache]::Invalidate()
    }
 
    Context 'Get-VSTeamWorkItemType' {

@@ -16,15 +16,18 @@
     * *Updated tests* `Set-VSTeamDefaultProject.Tests.ps1` and `Get-VSTeamAgent.Tests.ps1` to mock the additional API call used to look-up the project's template.  
 9.  To support changes to Process Templates themselves **changed class** `vsteam_lib.Process` **added property** `ReferenceName` 
 10. **Changed function** `Get-VSTeamWorkItemType`. 
-    * Fixed a BUG: Only WorkitemTypes for the current project are cached and for validation, so requesting a workitem from a different project will fail if that type is not in the current project. As a by product now support wildcards for selecting workitem types, entering an invalid name runs the command without any output instead of causing an error. 
-    * Added support for getting the workitem-types from a Process-template as well as from a project. When getting from a process-template, or from the default project whose template is know, add a property named `ProcessTemplate` to the objects so that piping into another function with that name as a `ValueFromPipelineByPropertyName` parameter can use it. 
+    * Fixed a BUG: Only WorkItemTypes for the current project are cached and for validation, so requesting a WorkItem from a different project will fail if that type is not in the current project. As a by product now support wildcards for selecting WorkItem types, entering an invalid name runs the command without any output instead of causing an error. 
+    * Added support for getting the WorkItem types from a Process-template as well as from a project. When getting from a process-template, or from the default project whose template is known, add a property named `ProcessTemplate` to the objects so that piping into another function with that name as a `ValueFromPipelineByPropertyName` parameter can use it. 
     * Added an alias property named `WorkItemType` as an alias for `Name`, also for `ValueFromPipelineByPropertyName` support
-    * Added a property named "hidden" when getting a list of workitem types for a project so picklists can remove hidden types.
-    * Fixed test which was breaking workitem-type sample data by converting it to JSON when it is known to fail to convert, it now just reads the text file and leaves the section at the comment `# This call returns JSON with "": which causes the ConvertFrom-Json to fail`  to do its thing!
+    * Added a property named "hidden" when getting a list of WorkItem types for a project so picklists can remove hidden types.
+    * Added a switch parameter -NotHidden to return only visible WorkItem Types
+    * Added an expand parameter to get state, behavior and/or layout information
+    * Fixed test which was breaking WorkItem type sample data by converting it to JSON when it is known to fail to convert, it now just reads the text file and leaves the section at the comment `# This call returns JSON with "": which causes the ConvertFrom-Json to fail`  to do its thing!
     * Added functional test for -Process Template option. 
     * Added examples and parameter description to help. 
 11.  For WorkItemType operations, **added function** a private/helper `_getProcessTemplateUrl` in file `common.ps1` to get/set the urls of templates in a script level hash table (to reduce API calls to get ID from a name.) In a previous version I set a URL property on the processs object - this has been dropped. 
 12. **Added functions**  `Add-VSTeamWorkItemType`, `Set-VSTeamWorkItemType`, `Remove-VSTeamWorkItemType` with associated help and tests.
+13.  Ensured tests which mock Get-VSTeamProcess clear the process cache (otherwise the processes they return will not be used to validate the Process parameter during the test,)
 
 ## 7.1.1
 
