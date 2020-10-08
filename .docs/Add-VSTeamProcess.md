@@ -4,7 +4,7 @@
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Add-VSTeamProcess" -->
+<!-- #include "./synopsis/Add-VSTeamProcess.md" -->
 
 ## SYNTAX
 

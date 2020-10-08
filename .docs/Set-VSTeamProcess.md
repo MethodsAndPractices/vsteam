@@ -4,13 +4,13 @@
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Set-VSTeamProcess" -->
+<!-- #include "./synopsis/Set-VSTeamProcess.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Set-VSTeamProcess" -->
+<!-- #include "./synopsis/Set-VSTeamProcess.md" -->
 
 ## EXAMPLES
 
