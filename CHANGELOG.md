@@ -1,6 +1,8 @@
 # Changelog
 ## J.H. O'Neill @ 7rd October 2020
-1.  Added Commands Add- and Set- -VSTeamProcess. Add- creates a process template based on a pre-existing one, Set- enables/disables, sets as the default for new projects and changes the name / description. 
+1.  Added Commands Add- and Set- -VSTeamProcess. Add- creates a process template based on a pre-existing one, Set- enables/disables, sets  the default for new projects and changes the name / description. 
+2. Added Commands Get- Set- Add- Remove -VSTeamProcessBehavior and a format XML file for process behaviors.
+3. Added Commands Get- Set- -VSTeamWorkItemBehavior and a format XML file  for WorkItem behaviors.
 
 ## J.H. O'Neill @ 3rd October 2020
 1.  To support tab completion for (e.g.) icon color  in `Add-VSTeamWorkItemType`:  **added class** `ColorCompleter` in file `Source\Classes\Completer\ColorCompleter.cs`. 

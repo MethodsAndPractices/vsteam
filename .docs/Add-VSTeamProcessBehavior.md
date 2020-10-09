@@ -10,8 +10,9 @@
 
 ## Description
 
-Adds a new work portfolio backlog (a.k.a behavior) to a Process Template. Note that the built-in Process templates (Scrum, Agile etc.) do not allow their backlogs to be customized, this is only allowed for custom processes. 
-Note that System behaviors include a description, but this cannot be changed or set for custom behaviors.
+Adds a new portfolio backlog (a.k.a behavior) to a Process Template. 
+Note (1) the built-in Process templates (Scrum, Agile etc.) do not allow their backlogs to be customized, this is only allowed for custom processes. 
+Note (2) System behaviors include a description, but this cannot be changed or set for custom behaviors.
 
 ## EXAMPLES
 

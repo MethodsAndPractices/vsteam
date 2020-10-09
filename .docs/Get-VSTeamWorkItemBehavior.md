@@ -1,10 +1,10 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VSTeamProcessBehavior
+# Get-VSTeamWorkItemBehavior
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VSTeamProcessBehavior.md" -->
+<!-- #include "./synopsis/Get-VSTeamWorkItemBehavior.md" -->
 
 ## SYNTAX
 
@@ -25,31 +25,60 @@ Get-VSTeamProcessBehavior lists the boards available in the process template. An
 ### Example 1
 
 ```powershell
-Get-VSTeamProcessBehavior -ProcessTemplate Scrum
-Rank Name          Workitem types       Inherits                        color  Description
----- ----          --------------       --------                        -----  -----------
-40   Epics         Epic                 System.PortfolioBacklogBehavior FF7B00 Epic level ...
-30   Features      Feature              System.PortfolioBacklogBehavior 773B93 Feature level... 
-20   Backlog items Product Backlog Item System.OrderedBehavior          009CCC Requirement level...
-10   Tasks         Task                 System.OrderedBehavior          F2CB1D Task level ...
-0    Portfolio                          System.OrderedBehavior                 Portfolio ...
-0    Ordered                                                                   Enables work items...
+Get-VSTeamWorkItemBehavior -WorkItemType Epic
+
+
+WorkItem Type Behavior ID                              Is Default
+------------- -----------                              ----------
+Epic          Microsoft.VSTS.Scrum.EpicBacklogBehavior True
 ```
 
-This shows the Backlogs for the the built-in Process template, "Scrum"
+This shows the epic type has the "Scrum.EpicBacklogBehavior" - in other words it is on the Epics board of the scrum process, because the current project's process temp is, or is derived from, "Scrum" 
 
+
+### Example 2
+
+```powershell
+Get-VSTeamWorkItemBehavior -ProcessTemplate Scrum5 *
+
+
+WARNING: Bug has no behaviors.
+WARNING: Impediment has no behaviors.
+WARNING: Test Case has no behaviors.
+WARNING: Test Plan has no behaviors.
+WARNING: Test Suite has no behaviors.
+WorkItem Type        Behavior ID                                 Is Default
+-------------        -----------                                 ----------
+Product Backlog Item System.RequirementBacklogBehavior           True
+Feature              Microsoft.VSTS.Scrum.FeatureBacklogBehavior True
+Task                 System.TaskBacklogBehavior                  True
+Epic                 Microsoft.VSTS.Scrum.EpicBacklogBehavior    True
+```
+
+This shows the all the workitem types in the template named scrum 5. Bug, Impediment and the three "Test" types have no associated behavior (of these only Impediment can be assigned to one). Task and Product backlog Item are assigned to system types for the iteration and reqirements backlogs. And Feature and Epic are assigned to portfolio backlogs inherited from the Scrum Process Template. 
 
 ## PARAMETERS
 
 
 ### -ProcessTemplate
 
-The Process template of interest; if not template is specified the template for the current project will be used.
+The Process template of interest; if not template is specified the template for the current project will be used. The value of this parameter will tab complete
 
 ```yaml
 Type: String
 Parameter Sets: Process
 ```
+
+### -
+
+The type of WorkItem type whose details should be retrieved (wild cards are supported).
+
+```yaml
+Type: String
+Parameter Sets: Process
+```
+
+
 
 ## INPUTS
 
