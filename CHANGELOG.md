@@ -29,6 +29,7 @@
 12.  For WorkItemType operations, **added function** a private/helper `_getProcessTemplateUrl` in file `common.ps1` to get/set the urls of templates in a script level hash table (to reduce API calls to get ID from a name.) In a previous version I set a URL property on the processs object - this has been dropped.
 13. **Added functions**  `Add-VSTeamWorkItemType`, `Set-VSTeamWorkItemType`, `Remove-VSTeamWorkItemType` with associated help and tests.
 14.  Ensured tests which mock Get-VSTeamProcess clear the process cache (otherwise the processes they return will not be used to validate the Process parameter during the test,)
+15.  Ensured tests which call Set-VSTeamProject load and mock Get-VSTeamProcess.
 
 ## 7.1.1
 
