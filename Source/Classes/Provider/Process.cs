@@ -15,6 +15,7 @@ namespace vsteam_lib
       public string Type { get; set; }
       public string ProcessTemplate => this.Name;
       public string ParentProcessTypeId { get; set; }
+      public string[] Projects { get; set; }
 
       public Process(PSObject obj) :
          base(obj, obj.GetValue("name"), obj.GetValue("id"), null)

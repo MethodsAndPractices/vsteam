@@ -3,9 +3,9 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamDefaultProject' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-
+      . "$PSScriptRoot\_testInitialize.ps1" Get-VSTeamProcess
       Mock _getInstance { return 'https://dev.azure.com/test' }
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {$Uri -like "*_apis/work/processes*" }
+      Mock Get-VSTeamProcess { return @() }
    }
 
    Context 'Set-VSTeamDefaultProject' {

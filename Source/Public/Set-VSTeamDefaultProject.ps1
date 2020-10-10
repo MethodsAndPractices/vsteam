@@ -53,17 +53,14 @@ function Set-VSTeamDefaultProject {
          $env:TEAM_PROJECT = $Project
          [vsteam_lib.Versions]::DefaultProject = $Project
 
-         $env:TEAM_PROCESS = [vsteam_lib.Versions]::DefaultProcess =
-                _callapi -NoProject -area 'work' -resource 'processes' -QueryString @{'$expand'='projects'}  -version (_getAPIVersion Processes) |
-                   Select-Object -ExpandProperty Value  | 
-                     Where-Object {$_.psobject.properties['projects'] -and $_.projects.name -eq $ProjectName} |
-                        Select-Object -ExpandProperty Name 
+         $env:TEAM_PROCESS = [vsteam_lib.Versions]::DefaultProcess = Get-VSTeamProcess  -ExpandProjects |
+               Where-Object Projects -Contains $Project | Select-Object -ExpandProperty Name
 
          if  ((_isOnWindows) -and $Level -and $level -ne "Process") {
             [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project,           $Level)
             [System.Environment]::SetEnvironmentVariable("TEAM_PROCESS", $env:TEAM_PROCESS , $Level)
          }
-         
+
          # Note: ProjectName Parameters should be given a default value of [vsteam_lib.Versions]::DefaultProject instead of globally forcing it this way.
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = $Project
       }
