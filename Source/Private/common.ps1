@@ -37,7 +37,10 @@ function _callAPI {
       # that project name to be used in building the URI that would lead to
       # 404 because the URI would not be correct.
       [Alias('IgnoreDefaultProject')]
-      [switch]$NoProject
+      [switch]$NoProject,
+      # this makes sure that you can use your own bearer token on the request if needed
+      # some undocumented internal IPs use their own token based on the PAT
+      [switch]$CustomBearer
    )
 
    process {
@@ -70,15 +73,20 @@ function _callAPI {
          $params.Add('ContentType', 'application/json; charset=utf-8')
       }
 
-      if (_useWindowsAuthenticationOnPremise) {
-         $params.Add('UseDefaultCredentials', $true)
-         $params.Add('Headers', @{ })
-      }
-      elseif (_useBearerToken) {
-         $params.Add('Headers', @{Authorization = "Bearer $env:TEAM_TOKEN" })
-      }
-      else {
-         $params.Add('Headers', @{Authorization = "Basic $env:TEAM_PAT" })
+      #dont use header when requested. Then bearer must be provided with additional headers
+      $params.Add('Headers', @{ })
+      if(!$CustomBearer)
+      {
+         if (_useWindowsAuthenticationOnPremise)
+         {
+            $params.Add('UseDefaultCredentials', $true)
+         } elseif (_useBearerToken)
+         {
+            $params['Headers'].Add("Authorization","Bearer $env:TEAM_TOKEN")
+         } else
+         {
+            $params['Headers'].Add("Authorization","Basic $env:TEAM_PAT")
+         }
       }
 
       if ($AdditionalHeaders -and $AdditionalHeaders.PSObject.Properties.name -match "Keys") {
@@ -88,7 +96,7 @@ function _callAPI {
       }
 
       # We have to remove any extra parameters not used by Invoke-RestMethod
-      $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders'
+      $extra = 'NoProject', 'UseProjectId', 'Area', 'Resource', 'SubDomain', 'Id', 'Version', 'JSON', 'ProjectName', 'Team', 'Url', 'QueryString', 'AdditionalHeaders','CustomBearer'
       foreach ($e in $extra) { $params.Remove($e) | Out-Null }
 
       try {
