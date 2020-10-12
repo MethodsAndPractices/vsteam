@@ -19,7 +19,7 @@ Describe 'VSTeamSetting' {
 
       It 'should get make the correct api call to get settings' {
          ## Act
-         $settings = Set-VSTeamSetting -project "MockProject" -WorkingDays saturday -BugsBehavior asTasks
+         $settings = Set-VSTeamSetting -project "MockProject" -WorkingDays saturday -BugsBehavior asTasks -force
 
          ## Assert
          Should -Invoke _callapi -Scope It -ParameterFilter {
