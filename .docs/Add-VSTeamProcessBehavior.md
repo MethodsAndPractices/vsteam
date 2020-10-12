@@ -10,23 +10,24 @@
 
 ## Description
 
-Adds a new portfolio backlog (a.k.a behavior) to a Process Template. 
-Note (1) the built-in Process templates (Scrum, Agile etc.) do not allow their backlogs to be customized, this is only allowed for custom processes. 
+Adds a new portfolio backlog (a.k.a behavior) to a Process Template.
+Note (1) the built-in Process templates (Scrum, Agile etc.) do not allow their backlogs to be customized, this is only allowed for custom processes.
 Note (2) System behaviors include a description, but this cannot be changed or set for custom behaviors.
+Note (3) The user interface hides any backlog which does not have any WorkItem type(s) assocuated with it.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-Add-VSTeamProcessBehavior -ProcessTemplate Scrum5 -Name "Change Requests" -Color AliceBlue         
+Add-VSTeamProcessBehavior -ProcessTemplate Scrum5 -Name "Change Requests" -Color AliceBlue
 
 
 Rank Name            Workitem types Inherits                        color  Description
 ---- ----            -------------- --------                        -----  -----------
 50   Change Requests                System.PortfolioBacklogBehavior f0f8ff
 ```
-This adds a new portfolio backlog to the scrum5 processs template (note that the built-in templates, like "Scrum" cannot be changed, only user-defined ones - like scrum5 in this case - can have new backlogs). Initially no work item types are attached to the new backlog. 
+This adds a new portfolio backlog to the scrum5 processs template (note that the built-in templates, like "Scrum" cannot be changed, only user-defined ones - like scrum5 in this case - can have new backlogs). Initially no work item types are attached to the new backlog.
 
 ## PARAMETERS
 

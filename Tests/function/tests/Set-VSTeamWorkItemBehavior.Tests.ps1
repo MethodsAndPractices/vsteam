@@ -5,7 +5,7 @@ Describe 'VSTeamWorkItemBehavior' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcess.ps1"
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemType.ps1"
-      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcessBehavior"
+      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcessBehavior.ps1"
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
@@ -22,10 +22,10 @@ Describe 'VSTeamWorkItemBehavior' {
                      url = 'http://dummy.none'
          }}}
          Mock Write-Warning {}
-         Mock Get-VSTeamWorkItemType  -ParameterFilter { $WorkItemType -eq 'Custom' } { 
+         Mock Get-VSTeamWorkItemType  -ParameterFilter { $WorkItemType -eq 'Custom' } {
             [PSCustomObject]@{name = 'Custom'; url = 'http://dummy.none/workItemTypes/Microsoft.VSTS.WorkItemTypes.Custom/'; behaviors = @()}
          }
-         Mock Get-VSTeamWorkItemType  -ParameterFilter { $WorkItemType -eq 'Epic' } { 
+         Mock Get-VSTeamWorkItemType  -ParameterFilter { $WorkItemType -eq 'Epic' } {
             [PSCustomObject]@{name = 'Epic';   url = 'http://dummy.none/workItemTypes/Microsoft.VSTS.WorkItemTypes.Epic';  behaviors = @(
                [PSCustomObject]@{isdefault = $true; behavior = [PSCustomObject]@{
                      id  = 'Microsoft.VSTS.Scrum.EpicBacklogBehavior'
@@ -44,8 +44,8 @@ Describe 'VSTeamWorkItemBehavior' {
                   name          = 'Epics'
                   referenceName = 'Microsoft.VSTS.Scrum.EpicBacklogBehavior'
                   rank          = 40
-         }} 
-         
+         }}
+
          [vsteam_lib.ProcessTemplateCache]::Invalidate()
       }
 
@@ -55,8 +55,8 @@ Describe 'VSTeamWorkItemBehavior' {
 
          ## Assert
          Should -Invoke Get-VSTeamWorkItemType    -Scope It -Exactly -Times 1  -ParameterFilter {$Expand -eq 'Behaviors'}
-         Should -Invoke Get-VSTeamProcessBehavior -Scope It -Exactly -Times 0 #not called on remove 
-         Should -Invoke Write-Warning             -Scope It -Exactly -Times 1 
+         Should -Invoke Get-VSTeamProcessBehavior -Scope It -Exactly -Times 0 #not called on remove
+         Should -Invoke Write-Warning             -Scope It -Exactly -Times 1
       }
       It 'should call the correct api to clear a behavior' {
          ## Act
@@ -78,7 +78,7 @@ Describe 'VSTeamWorkItemBehavior' {
          Should -Invoke Get-VSTeamWorkItemType    -Scope It -Exactly -Times 1  -ParameterFilter {$Expand -eq 'Behaviors'}
          Should -Invoke Get-VSTeamProcessBehavior -Scope It -Exactly -Times 1  #called on add
          Should -Invoke Write-Warning             -Scope It -Exactly -Times 1 # warning that it can't change default
-         
+
       }
       It 'should call the correct api to add a behavior and return the correct object' {
          ## Act

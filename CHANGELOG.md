@@ -1,8 +1,10 @@
 # Changelog
-## J.H. O'Neill @ 7rd October 2020
-1.  Added Commands Add- and Set- -VSTeamProcess. Add- creates a process template based on a pre-existing one, Set- enables/disables, sets  the default for new projects and changes the name / description. 
-2. Added Commands Get- Set- Add- Remove -VSTeamProcessBehavior and a format XML file for process behaviors.
-3. Added Commands Get- Set- -VSTeamWorkItemBehavior and a format XML file  for WorkItem behaviors.
+## J.H. O'Neill @ 12th October 2020
+1.  Added Commands Add- and Set- -VSTeamProcess. Add- creates a process template based on a pre-existing one, Set- enables/disables, sets  the default for new projects and changes the name / description.
+2.  Added Commands Get- Set- Add- Remove -VSTeamProcessBehavior and a format XML file for process behaviors. (a.k.a boards)
+3.  Added Commands Get- Set- -VSTeamWorkItemBehavior and a format XML file  for WorkItem behaviors - which link WorkItemTypes to boards.
+4.  Changed command `Get-VSTeamIteration` adding a switch -Expand to return all the iterations returned by the -Depth option, rather than one with a children node where each element may have children.
+5.  Added Commmands Get- and Set- -VSTeamSetting - to allow bug behavior and visibile boards (and things set with them) to be set.
 
 ## J.H. O'Neill @ 3rd October 2020
 1.  To support tab completion for (e.g.) icon color  in `Add-VSTeamWorkItemType`:  **added class** `ColorCompleter` in file `Source\Classes\Completer\ColorCompleter.cs`.

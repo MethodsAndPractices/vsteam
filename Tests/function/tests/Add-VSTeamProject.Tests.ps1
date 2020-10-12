@@ -16,7 +16,7 @@ Describe 'VSTeamProject' {
       Mock _getApiVersion { return '1.0-unitTests' }
       Mock _callApi { Open-SampleFile 'Get-VSTeamProcess.json' } -ParameterFilter { $area -eq 'work' -and $resource -eq 'processes' }
 
-      # Get-VSTeamProject for cache 
+      # Get-VSTeamProject for cache
       Mock Invoke-RestMethod { return @() } -ParameterFilter {
          $Uri -like "*`$top=100*" -and
          $Uri -like "*stateFilter=WellFormed*"
@@ -34,7 +34,7 @@ Describe 'VSTeamProject' {
          }
 
          # Track Progress
-         Mock Invoke-RestMethod {            
+         Mock Invoke-RestMethod {
             # This $i is in the module. Because we use InModuleScope
             # we can see it
             if ($i -gt 9) {
@@ -68,6 +68,8 @@ Describe 'VSTeamProject' {
       BeforeAll {
          Mock Invoke-RestMethod { return @{status = 'inProgress'; id = 1; url = 'https://someplace.com' } } -ParameterFilter { $Method -eq 'Post' -and $Uri -eq "https://dev.azure.com/test/_apis/projects?api-version=$(_getApiVersion Core)" }
          Mock _trackProjectProgress
+
+         [vsteam_lib.ProcessTemplateCache]::Invalidate()
       }
 
       It 'Should create project with Agile' {

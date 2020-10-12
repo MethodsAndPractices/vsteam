@@ -10,7 +10,9 @@
 
 ## Description
 
-Modifies a the Portfolio backlog (a.k.a behavior) associated with a WorkItem type in a custom Process Template. This allows an item to be added to board (as its default item or not), or removed from the board. 
+Modifies a the Portfolio backlog (a.k.a behavior) associated with a WorkItem type in a custom Process Template. This allows an item to be added to board (as its default item or not), or removed from the board.
+Note (1) System-defined backlogs have WorkItem types associated with them which cannot be removed.
+Note (2) The first item added to a custom backlog from the UI will be set as the default, this needs to be specified explicitly when adding items from the commandline.
 
 ## EXAMPLES
 
@@ -113,7 +115,7 @@ Accept wildcard characters: False
 ```
 
 ### -WorkItemType
-The name of the WorkItem type to modify. Behaviors cannot be set for Bug, or for pre-exisitng Test types, and the WorkItem types bound to the system-created boards cannot removed from them; although other items can be added as the default and the system-created types can be be set to disabled.  
+The name of the WorkItem type to modify. Behaviors cannot be set for Bug, or for pre-exisitng Test types, and the WorkItem types bound to the system-created boards cannot removed from them; although other items can be added as the default and the system-created types can be be set to disabled.
 
 ```yaml
 Type: String

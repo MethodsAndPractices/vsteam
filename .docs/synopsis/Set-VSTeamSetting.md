@@ -1,0 +1,1 @@
+Modifies the settings for Bug behavior, visible boards, iterations displayname and description for a project team.
