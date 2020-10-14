@@ -1,4 +1,4 @@
-function Add-VsteamWorkItemField {
+function Add-VSTeamWorkItemField {
    [CmdletBinding(SupportsShouldProcess=$True,ConfirmImpact='High')]
    param(
       [parameter(ValueFromPipelineByPropertyName=$true)]

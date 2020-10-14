@@ -6,11 +6,11 @@ function Add-VSTeamField {
       
       [string]$ReferenceName,
       
-      [ValidateSet('boolean','dateTime','double','history','html','identity','integer','string')]
+      [ValidateSet('boolean','dateTime','double', 'html','identity','integer','string')]
       [string]$Type = 'string',
       
       [ValidateSet('workItem','workItemLink','workItemTypeExtension','tree','none')]
-      $Usage='workitem',
+      $Usage='workItem',
       
       [string]$Description,
 

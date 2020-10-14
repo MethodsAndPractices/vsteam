@@ -7,7 +7,7 @@ function Add-VSTeamPickList  {
       [Parameter(Mandatory=$true,Position=1)]
       [object[]]$Items,
 
-      [ValidateSet('double','integer','string')]
+      [ValidateSet('integer','string')]
       [string]$Type = 'string',
 
       [switch]$IsSuggested,
