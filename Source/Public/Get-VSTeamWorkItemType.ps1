@@ -15,7 +15,7 @@ function Get-VSTeamWorkItemType {
 
       [Parameter(Position=0)]
       [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]
-      [string] $WorkItemType = '*',
+      [string[]] $WorkItemType = '*',
 
       [parameter(ParameterSetName='Process',ValueFromPipelineByPropertyName=$true)]
       [ValidateSet('behaviors','layout','states')]
@@ -85,7 +85,8 @@ function Get-VSTeamWorkItemType {
             Add-Member -InputObject $item -MemberType NoteProperty  -Name "ProcessTemplate" -Value $ProcessTemplate
          }
       }
-
-      return ($resp | Where-Object -Property Name -like $WorkItemType)
+      #Allow the $WorkItemType to contain wild cards and multiple items, by converting to regex
+      $regex = "^" + ($WorkItemType -replace '\*','.*' -replace '\?','.' -join '$|^') + '$'
+      return ($resp | Where-Object -Property Name -match $regex)
    }
 }
