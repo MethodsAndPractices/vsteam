@@ -36,11 +36,10 @@ namespace vsteam_lib
                }
 
                // This will return just the names
-               list = Cache.Shell.AddArgument(queries)
-                                 .AddCommand("Select-Object")
+               list = Cache.Shell.AddCommand("Select-Object")
                                  .AddParameter("ExpandProperty", "Name")
                                  .AddCommand("Sort-Object")
-                                 .Invoke<string>();
+                                 .Invoke<string>(queries);
             }
          }
 

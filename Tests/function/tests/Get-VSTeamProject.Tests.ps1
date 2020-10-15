@@ -2,18 +2,18 @@ Set-StrictMode -Version Latest
 
 Describe 'VSTeamProject' {
    BeforeAll {
-      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath   
+      . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Core' }
    }
 
    Context 'Get-VSTeamProject' {
       BeforeAll {
-         $env:TEAM_TOKEN = '1234'         
+         $env:TEAM_TOKEN = '1234'
 
          Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamProject.json' }
          Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamProject-NamePeopleTracker.json' } -ParameterFilter {
-            $Uri -like "*PeopleTracker*" 
+            $Uri -like "*PeopleTracker*"
          }
       }
 
@@ -28,7 +28,6 @@ Describe 'VSTeamProject' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Uri -like "*`$top=100*" -and
             $Uri -like "*stateFilter=WellFormed*"
          }
       }
@@ -52,7 +51,6 @@ Describe 'VSTeamProject' {
             $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
             $Uri -like "*`$skip=1*" -and
-            $Uri -like "*`$top=100*" -and
             $Uri -like "*stateFilter=WellFormed*"
          }
       }
@@ -64,7 +62,6 @@ Describe 'VSTeamProject' {
          Should -Invoke Invoke-RestMethod -Exactly -Times 1 -Scope It -ParameterFilter {
             $Uri -like "*https://dev.azure.com/test/_apis/projects*" -and
             $Uri -like "*api-version=$(_getApiVersion Core)*" -and
-            $Uri -like "*`$top=100*" -and
             $Uri -like "*stateFilter=All*"
          }
       }

@@ -34,7 +34,7 @@ namespace vsteam_lib.Test.Provider
          Assert.AreEqual("projectCollection", actual.JobAuthorizationScope, "JobAuthorizationScope");
          Assert.AreEqual("$(date:yyyyMMdd)$(rev:.r)", actual.BuildNumberFormat, "BuildNumberFormat");
 
-         Assert.AreEqual("8/23/2020 3:12:41 PM", actual.CreatedOn.ToString(), "CreatedOn");
+         Assert.AreEqual("8/23/2020 3:12:41 pm", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "CreatedOn");
 
          Assert.IsNotNull(actual.Options, "Options");
          Assert.AreEqual(4, actual.Options.Count, "Options.Count");
@@ -103,7 +103,7 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNull(actual.GitRepository, "GitRepository");
          Assert.IsNotNull(actual.RetentionRules, "RetentionRules");
 
-         Assert.AreEqual("8/23/2020 10:30:31 PM", actual.CreatedOn.ToString(), "CreatedOn");
+         Assert.AreEqual("8/23/2020 10:30:31 pm", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "CreatedOn");
 
          Assert.AreEqual(5, actual.JobCancelTimeoutInMinutes, "JobCancelTimeoutInMinutes");
          Assert.AreEqual("projectCollection", actual.JobAuthorizationScope, "JobAuthorizationScope");
@@ -145,7 +145,7 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(actual.GitRepository, "GitRepository");
          Assert.IsNotNull(actual.RetentionRules, "RetentionRules");
 
-         Assert.AreEqual("8/23/2020 3:16:22 PM", actual.CreatedOn.ToString(), "CreatedOn");
+         Assert.AreEqual("8/23/2020 3:16:22 pm", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "CreatedOn");
 
          Assert.AreEqual(5, actual.JobCancelTimeoutInMinutes, "JobCancelTimeoutInMinutes");
          Assert.AreEqual("projectCollection", actual.JobAuthorizationScope, "JobAuthorizationScope"); 
@@ -205,7 +205,7 @@ namespace vsteam_lib.Test.Provider
 
          Assert.IsNull(actual.Demands, "Demands");
 
-         Assert.AreEqual("9/16/2019 2:34:16 AM", actual.CreatedOn.ToString(), "CreatedOn");
+         Assert.AreEqual("9/16/2019 2:34:16 am", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "CreatedOn");
 
          // Not on this build def
          Assert.AreEqual(null, actual.BuildNumberFormat, "BuildNumberFormat");
@@ -266,7 +266,7 @@ namespace vsteam_lib.Test.Provider
 
          Assert.IsNull(actual.Demands, "Demands");
 
-         Assert.AreEqual("9/25/2019 8:55:54 PM", actual.CreatedOn.ToString(), "CreatedOn");
+         Assert.AreEqual("9/25/2019 8:55:54 pm", actual.CreatedOn.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "CreatedOn");
 
          // Not on this build def
          Assert.AreEqual(0, actual.JobCancelTimeoutInMinutes, "JobCancelTimeoutInMinutes");
