@@ -10,28 +10,29 @@
 
 ## DESCRIPTION
 
-The definition of every WorkItem type in every process definition uses a set of datafields from a shared set of fields available across the organization. Each field is defined with a name, a description, a datatype, and optionally a picklist of values. This command defines new fields. Note that the API only allows fields to be disabled after they have been created, not to be modified or deleted. 
+Every WorkItem has multiple data-fields. The definition of a Workitem type includes that type's Fields, which are selected from a set of Fields shared across all Process Templates in the Organization. Each Field has a name, a description, a datatype, and optionally a PickList of values. This command defines new Fields. Note that the API only allows Fields to be disabled after they have been created, not to be modified or deleted.
 
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-Add-VSTeamField -Name Office -Type string -PicklistID Offices -Description "Business Location"  -force 
+Add-VSTeamField -Name Office -Type string -PicklistID Offices -Description "Business Location"  -force
 
 Name    Reference Name   Usage    Type   Read Only Description
 ----    --------------   -----    ----   --------- -----------
 Office   Custom.Office   workItem string False    Business Location
 
 ```
-Creates a new field, with a name, description and the optional picklist option filled in. Normally the command will pause for confirmation but here -Force has been specified.  
+Creates a new Field, with a Name, Description and PickList option. Normally the command will pause for confirmation but here -Force has been specified.
 
 ## PARAMETERS
 
 <!-- #include "./params/forcegroup.md" -->
 
 ### -Description
-A description for the data field
+A description for the data-field.
+
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -75,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoSort
-If specified the field will not be configured to allow sorting.
+If specified, the field will be configured to not allow sorting.
 
 ```yaml
 Type: SwitchParameter
@@ -90,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -NotQueryable
-If specified the field cannot be the basis of a query.
+If specified, the field cannot be the basis of a query.
 
 ```yaml
 Type: SwitchParameter
@@ -105,7 +106,7 @@ Accept wildcard characters: False
 ```
 
 ### -PicklistID
-Specifies a pre-existing picklist. Depending on the value of -IsPickListSuggested, selecting from the Picklist can be mandatory or optional,
+Specifies a pre-existing picklist. Depending on the value of -IsPickListSuggested, selecting from the Picklist can be mandatory or optional.
 
 ```yaml
 Type: Object
@@ -120,7 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReadOnly
-If specified does not allow user input.
+If specified, user input to the field is not allowed.
 
 ```yaml
 Type: SwitchParameter
@@ -135,7 +136,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReferenceName
-Every field has a qualified reference name in addition to its short name. If this field is not provided it will be set to "Custom.Shortname" 
+Every field has a qualified reference name, in addition to its short name. If this field is not provided the reference name will be set to "Custom.Shortname"
 
 ```yaml
 Type: String
@@ -166,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### -Usage
-Fields may be defined for use in WorkItems, WorkItem links, WorkItem-type extensions, trees or none of the these. The default value is workitem and this should not need to be changed. 
+Fields may be defined for use in WorkItems, WorkItem links, WorkItem-type extensions, trees or none of the these. The default value is workitem and this should not need to be changed.
 
 ```yaml
 Type: Object
@@ -181,9 +182,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ## OUTPUTS
@@ -197,3 +195,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Add-VSTeamWorkItemField](Add-VSTeamWorkItemField.md)
 
 [Get-VSTeamPickList](Get-VSTeamPickList.md)
+

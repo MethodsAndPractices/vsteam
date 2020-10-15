@@ -10,7 +10,7 @@ function Add-VSTeamWorkItemField {
       [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]
       $WorkItemType,
 
-      [parameter(Mandatory = $true)]      
+      [parameter(Mandatory = $true)]
       [ArgumentCompleter([vsteam_lib.FieldCompleter])]
       [vsteam_lib.FieldTransformAttribute()]
       [Alias('Name','FieldName')]
@@ -25,40 +25,39 @@ function Add-VSTeamWorkItemField {
    process {
       #Get the workitem type we are updating. If it is a system one, make it an inherited one first.
       $wit = Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType $WorkItemType
-      
-      #$wit = [VSTeamWorkItemTypeCache]::GetByProcess($ProcessTemplate) | Where-Object name -eq $WorkItemType
-      if ($wit.customization -eq 'system') {
-         $url = ($wit.url -replace '/workItemTypes/.*$', '/workItemTypes?api-version=') +  (_getApiVersion Processes)
-         $body = @{
-               color         = $wit.color
-               description   = $wit.description
-               icon          = $wit.icon
-               inheritsFrom  = $wit.referenceName
-               isDisabled    = $wit.isDisabled
-               name          = $wit.name
+      foreach ($w in $wit) {
+         if ($w.customization -eq 'system') {
+            $url = ($w.url -replace '/workItemTypes/.*$', '/workItemTypes?api-version=') +  (_getApiVersion Processes)
+            $body = @{
+                  color         = $w.color
+                  description   = $w.description
+                  icon          = $w.icon
+                  inheritsFrom  = $w.referenceName
+                  isDisabled    = $w.isDisabled
+                  name          = $w.name
+            }
+            $w = _callAPI -Url $url -method Post -body (ConvertTo-Json $body)
          }
-         $wit = _callAPI -Url $url -method Post -ContentType   "application/json" -body (ConvertTo-Json $body)
-      }
-      $url     = $wit.url +"/fields?api-version=" + (_getApiVersion Processes)
-      foreach ($r in $ReferenceName) {
-         if ($r.referenceName) {$r = $r.referenceName}
-         $body    =  @{ 
-               referenceName = $r
-               defaultValue  = $DefaultValue;
-               allowGroups   = $AllowGroups -as [bool]
-               required      = $Required    -as [bool]
-               readOnly      = $ReadOnly    -as [bool]
-         }
+         $url = $w.url +"/fields?api-version=" + (_getApiVersion Processes)
+         foreach ($r in $ReferenceName) {
+            if ($r.psobject.Properties["referenceName"]) {$r = $r.referenceName}
+            $body    =  @{
+                  referenceName = $r
+                  defaultValue  = $DefaultValue;
+                  allowGroups   = $AllowGroups -as [bool]
+                  required      = $Required    -as [bool]
+                  readOnly      = $ReadOnly    -as [bool]
+            }
 
-         if ($Force -or $PSCmdlet.ShouldProcess($WorkItemType, "Add field '$r' to WorkItem type" )) {
-            $resp = _callAPI -Url $url -method Post -ContentType "application/json" -body (ConvertTo-Json $body)
-            
-            $resp.psobject.TypeNames.Insert(0,'vsteam_lib.WorkitemField')
-            Add-Member -InputObject $resp -MemberType AliasProperty -Name WorkItemType    -Value $WorkItemType
-            Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
+            if ($Force -or $PSCmdlet.ShouldProcess($WorkItemType, "Add field '$r' to WorkItem type" )) {
+               $resp = _callAPI -Url $url -method Post -body (ConvertTo-Json $body)
 
-            return $resp 
+               $resp.psobject.TypeNames.Insert(0,'vsteam_lib.WorkitemField')
+               Add-Member -InputObject $resp -MemberType NoteProperty  -Name WorkItemType    -Value $w.name
+               Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
+
+               return $resp
+            }
          }
-      }
-   }
+   }}
 }

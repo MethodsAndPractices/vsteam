@@ -1,9 +1,15 @@
 # Changelog
 ## J.H. O'Neill @ 15th October 2020
-1.  To support tab completion of Feilds and Picklists (e.g. in Add-VSTeamField and Add-VSTeamWorkItemField) **addeded Classes** `FieldTransformAttribute` in file Source/Classes/Attribute/FieldTransformAttribute.cs, `PickListTransformAttribute` in source/Classes/Attribute/PickListTransformAttribute.cs, in `FieldCompleter` in Source/Classes/Completer/FieldCompleter.cs, `PickListCompleter` in Source/Classes/Completer/PickListCompleter.cs, `FieldCache` in Source/Classes/Cache/FieldCache.cs and PicklistCache `Source/Classes/Cache/PicklistCache.cs`
-2.  **Added functions** `Get-VSTeamWorkItemField` and `Add-VSTeamWorkItemField` to list and add to the defined fields which are members of a given WorkItemType,
-3.  **Added functions** `Get-VSTeamField` and `Add-VSTeamField` to list and define fields which can be used in (2)
-4.  **Added functions** `Get-VSTeamPickList` and `Add-VSTeamPickList` `Set-VSTeamPickList` to list define and modify picklists used in the fields in (3)
+1.   ** Added classes** to support tab completion of Fields and Picklists in the following functions. Classes are:
+     *  `FieldTransformAttribute` in file Source/Classes/Attribute/FieldTransformAttribute.cs,
+     *  `PickListTransformAttribute` in   Source/Classes/Attribute/PickListTransformAttribute.cs,
+     *  `FieldCompleter`             in   Source/Classes/Completer/FieldCompleter.cs,
+     *  `PickListCompleter`          in   Source/Classes/Completer/PickListCompleter.cs,
+     *  `FieldCache`                 in   Source/Classes/Cache/FieldCache.cs and
+     *  `PicklistCache`              in  Source/Classes/Cache/PicklistCache.cs
+2.  **Added functions** `Get-VSTeamWorkItemField` and `Add-VSTeamWorkItemField` to list the fields in and add fields to a given WorkItem Type,
+3.  **Added functions** `Get-VSTeamField`         and `Add-VSTeamField`         to list global fields which can be used in (2) and define new ones.
+4.  **Added functions** `Get-VSTeamPickList`,         `Add-VSTeamPickList` and `Set-VSTeamPickList` to list and modify picklists used in the fields in (3) and define new ones
 
 
 ## J.H. O'Neill @ 3rd October 2020

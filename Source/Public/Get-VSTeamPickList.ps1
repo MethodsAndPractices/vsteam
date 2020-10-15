@@ -6,8 +6,8 @@ function Get-VSTeamPickList{
       [Alias('Name','ID')]
       $PicklistID = "*"
    )
-   begin   { 
-      $resp = @() 
+   begin   {
+      $resp = @()
       #we can't use the transformer if we get an array of names so use it the body
       $transformer = New-Object -TypeName vsteam_lib.PickListTransformAttribute
    }
@@ -20,14 +20,14 @@ function Get-VSTeamPickList{
          if ($p -notmatch "\?|\*") {
             try {
                $p =  $transformer.Transform($null,$P)
-               $resp += _callAPI -NoProject -area "work" -resource '/processes/lists' -id $P
+               $resp += _callAPI -NoProject -area "work" -resource 'processes/lists' -id $P
             }
             catch {
                Write-Warning "$p is not a valid picklist name."
             }
          }
         else {
-            $resp += (_callAPI -NoProject -area "work" -resource '/processes/lists').value | 
+            $resp += (_callAPI -NoProject -area "work" -resource 'processes/lists').value |
                         Where-Object Name -like $p
          }
       }
@@ -37,6 +37,6 @@ function Get-VSTeamPickList{
          $r.psobject.TypeNames.Insert(0,'vsteam_lib.PickList')
       }
 
-      return $resp 
+      return $resp
    }
 }

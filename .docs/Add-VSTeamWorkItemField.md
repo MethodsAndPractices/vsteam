@@ -9,13 +9,13 @@
 ## SYNTAX
 
 ## DESCRIPTION
-The definition of every WorkItem type in every process definition uses a set of datafields from a shared set of fields available across the organization. This command adds a field from this shared set to a the definition of a WorkItem type. Note that the WorkItem types in the built in process defintions cannot be modified, and changing the defintion of a WorkItem type in one processs template does not affect copies of the WorkItem type in other templates. 
+Every WorkItem has multiple data-fields. The definition of a Workitem type includes that type's fields, which are selected from a set of Fields shared across all Process Templates in the Organization. This command adds one of these Fields to the definition of a WorkItem type. Note that the WorkItem types in the built-in Process Templates cannot be modified, and changing the defintion of a WorkItem type in one Processs Template does not affect copies of the WorkItem type in other templates.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-Add-VSTeamWorkItemField -ProcessTemplate Scrum5 -WorkItemType Change -ReferenceName Office 
+Add-VSTeamWorkItemField -ProcessTemplate Scrum5 -WorkItemType Change -ReferenceName Office
 
 Confirm
 Are you sure you want to perform this action?
@@ -28,12 +28,12 @@ Office Custom.Office             string custom
 
 ```
 
-In this example a custom field named "Office" has been created, and is added to a custom WorkItem type named "Change"; no default value is given and the field is not optional. Note that the command is able to resolve "Office" to its reference name of custom.office. Because -Force is not used the command prompts for confirmation before adding the field.
+In this example, a custom field named "Office" has been created, and is added to a custom WorkItem type named "Change"; no default value is given and the field is not requred. Note that the command is able to resolve "Office" to its reference-name of "custom.office". Because -Force is not used the command prompts for confirmation before adding the field.
 
 
 ### Example 2
 ```powershell
-Get-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType Test* | Add-VsteamWorkItemField -ReferenceName Custom.Office -DefaultValue London -Required -force      
+Get-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType Test* | Add-VsteamWorkItemField -ReferenceName Custom.Office -DefaultValue London -Required -force
 
 Name   Reference Name Required Type   customization
 ----   -------------- -------- ----   -------------
@@ -43,12 +43,12 @@ Office Custom.Office  True     string inherited
 
 ```
 
-Here the first command in the pipeline gets the WorkItem types "Test Case", "Test Plan" and "Test Suite" and passes them Add-VsteamWorkItemField. This time the command uses the full reference name "Custom.Office" sets a default value and marks the field as a required value. To avoid the confirmation prompt, -Force is used. 
+Here the first command in the pipeline gets the WorkItem types "Test Case", "Test Plan" and "Test Suite" and passes them to Add-VsteamWorkItemField. This time the command uses the full reference name "Custom.Office" sets a default value and marks the field as a required value. To avoid the confirmation prompt, -Force is used.
 
 ## PARAMETERS
 
 ### -AllowGroups
-Allows an identity field to be set to a group identity. Does not apply to other field types. 
+Allows an identity field to be set to a group identity. Does not apply to other field types.
 
 ```yaml
 Type: SwitchParameter
@@ -79,9 +79,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-
 ### -ProcessTemplate
-Specifies the process template holding the WorkItem type to be extended. Note that the built in templates do not allow their WorkItem types to be modified so this must be a custom template. This will default to the process of the current project if not specified.
+Specifies the Process Template holding the WorkItem type to be extended. Note that the built-in Templates do not allow their WorkItem types to be modified so this must be a custom Template. If no Template is specified, the Process of the current Project is used as a default.
 
 ```yaml
 Type: Object
@@ -126,7 +125,7 @@ Accept wildcard characters: False
 ```
 
 ### -Required
-Unless -Required is specified adding a value for the field is optional. 
+Unless -Required is specified adding a value for the field is optional.
 
 ```yaml
 Type: SwitchParameter
@@ -141,8 +140,7 @@ Accept wildcard characters: False
 ```
 
 ### -WorkItemType
-The WorkItem type to which the field should be added. These may be custom types, or system defined types inherited by a custom process template. 
-
+The WorkItem type(s) to which the Field should be added. These may be custom Types, or system-defined Types inherited by a custom Process Template.
 
 ```yaml
 Type: Object
@@ -153,19 +151,13 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.Object
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

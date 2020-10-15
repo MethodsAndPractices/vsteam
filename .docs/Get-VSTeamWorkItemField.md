@@ -18,7 +18,7 @@
 Get-VSTeamWorkItemfield bug
 ```
 
-Returns the fields in "Bug" WorkItems in the current project's process template. 
+Returns the fields for "Bug" WorkItems in the current Project's Process Template.
 
 
 ### Example 2
@@ -26,19 +26,19 @@ Returns the fields in "Bug" WorkItems in the current project's process template.
 Get-VSTeamWorkItemfield -ProcessTemplate Scrum5 --WorkItemType  Change
 ```
 
-Returns the fields in "Change" WorkItems in the custom process templated named "Scrum5" 
+Returns the fields in "Change" WorkItems in the custom Process Template named "Scrum5"
 
 ### Example 3
 ```powershell
 Get-VSTeamWorkItemfield * | Group-Object -property Name  -NoElement  | Sort-Object count
 ```
 
-Gets the fields for all WorkItem types in the current project's template and produces count show how frequently they are used. 
+Gets the fields for all WorkItem types in the current Project's template and produces a count to show how frequently they are used.
 
 ## PARAMETERS
 
 ### -ProcessTemplate
-The name of the process template holding the WorkItem type(s) of interest
+The name of the Process Template holding the WorkItem type(s) of interest
 
 ```yaml
 Type: Object
@@ -53,7 +53,7 @@ Accept wildcard characters: False
 ```
 
 ### -WorkItemType
-The name of the WorkItem type(s) of interest (wildcards are allowed.) 
+The name(s) of the WorkItem type(s) of interest (wildcards are allowed.)
 
 ```yaml
 Type: Object
@@ -64,19 +64,13 @@ Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.Object
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

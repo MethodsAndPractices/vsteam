@@ -9,7 +9,7 @@
 ## SYNTAX
 
 ## DESCRIPTION
-Modifies an existing picklist, so that fields can be offered different selections. The list can either be cleared or added to 
+Modifies an existing PickList, so that fields can be offered different selections. The list can either be cleared or items added to the existing ones.
 
 ## EXAMPLES
 
@@ -23,12 +23,12 @@ Offices String False     New York, London, Munich
 
 ```
 
-In this example the existing list of offices is reset to the three listed. Note the items only need to be enclosed in quotes where they contain spaces or punctuation
+In this example, the existing list of Offices is reset to the three listed. Note that items only need to be enclosed in quotes when they contain spaces or punctuation
 
 
 ### Example 2
 ```powershell
-Set-VSTeamPickList -PicklistID Office   -NewItems  "Tokyo"  -Force  
+Set-VSTeamPickList -PicklistID Office   -NewItems  "Tokyo"  -Force
 
 Name   Type   Suggested Items
 ----   ----   --------- -----
@@ -43,7 +43,7 @@ In this example the "Tokyo" is added to the existing list.
 <!-- #include "./params/forcegroup.md" -->
 
 ### -IsSuggested
-Changes the "Options are suggestions" / "Selection from the list is mandatory" setting for the picklist. To remove the "Is Suggested" flag when it has been set use -IsSuggested:$false
+Changes the "Options are suggestions" / "Selection from the list is mandatory" setting for the picklist. To remove the "Is Suggested" flag when it has been set, use -IsSuggested:$false
 
 ```yaml
 Type: SwitchParameter
@@ -73,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -PicklistID
-The name or guid of the picklist Name can be used as an alias. 
+The name or guid of the picklist. Name can be used as an alias for "PicklistID"
 
 ```yaml
 Type: Object
@@ -88,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemoveOldItems
-Unless specified new items will be added to the existing ones; if specified the existing items will be removed and the list will only contain the new items.  
+If specified, the list will only contain new items - by default new items are added to those already in the list;
 
 ```yaml
 Type: SwitchParameter
@@ -103,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-Changes the type of the picklist. Only used if the list was orginally numbers and needs to contain strings, or if type was not specified when the list was created and so it is treating numbers as a strings  
+Changes the type of the picklist. Only used if the list was orginally numbers and needs to contain strings, or if type was not specified when the list was created and so it is treating numbers as strings.
 
 ```yaml
 Type: String
@@ -118,16 +118,10 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
-
-### System.Object
 
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

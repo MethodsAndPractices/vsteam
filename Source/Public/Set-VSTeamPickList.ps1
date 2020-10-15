@@ -20,10 +20,10 @@ function Set-VSTeamPickList  {
    )
    $Picklist = Get-VSTeamPickList -PicklistID $PicklistID
    if (-not $Picklist) {
-      Write-warning "'$PicklistID' does not appear to be the name of a picklist." ; return 
+      Write-warning "'$PicklistID' does not appear to be the name of a picklist." ; return
    }
    elseif ($Picklist.count -gt 1) {
-      Write-warning "'$PicklistID' gives more than one picklist." ; return 
+      Write-warning "'$PicklistID' gives more than one picklist." ; return
    }
    $url = "$($Picklist.url)?api-version=" + (_getApiVersion Processes)
 
@@ -38,16 +38,16 @@ function Set-VSTeamPickList  {
       $body['items'] =  $NewItems
    }
    elseif( $NewItems) {
-      $body['items'] =  @() + $Picklist.items  
-      foreach ($i in $NewItems.Where({$_ -notin $Picklist.items})) { 
+      $body['items'] =  @() + $Picklist.items
+      foreach ($i in $NewItems.Where({$_ -notin $Picklist.items})) {
          $body['items'] += $i
       }
    }
    if ($force -or $PSCmdlet.ShouldProcess($Picklist.Name,'Update Picklist')){
       #Call the REST API
-      $resp = _callAPI -Url $url -method PUT -ContentType "application/json" -body (ConvertTo-Json $body)  
+      $resp = _callAPI -Url $url -method PUT -body (ConvertTo-Json $body)
       $resp.psobject.TypeNames.Insert(0,'vsteam_lib.PickList')
-   
+
       return $resp
    }
 }

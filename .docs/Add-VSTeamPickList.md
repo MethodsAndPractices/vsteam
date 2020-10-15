@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-String and integer fields used in the definition of types of WorkItems can use picklists to supply values. The user may be limited to only the items in the list or the list may be suggestions allowing the user to enter a different value. This command adds a list which may then be used in multiple fields if required.  
+Fields in WorkItems can be populated using picklists to supply string or integer values. The user may be constrained to selecting from the list or the list may be "suggestions" allowing other valies to be entered. This command creates a new picklist which may then be used in multiple fields if required.
 
 ## EXAMPLES
 
@@ -23,14 +23,14 @@ Name    Type   Suggested Items
 Offices String False     New York, London, Paris, Munich
 ```
 
-Creates a Picklist to suggest locations. Note the items only need to be enclosed in quotes where they contain spaces or punctuation. In this case the type has been left as string, and the choice is manadatory (not suggested).
+Creates a Picklist to suggest locations. Note the items only need to be enclosed in quotes where they contain spaces or punctuation. In this case the type has been left as string, and list is not suggestions but the only allowed choices.
 
 ## PARAMETERS
 
 <!-- #include "./params/forcegroup.md" -->
 
 ### -IsSuggested
-By default the selection for a control using a picklist must be a value from the list. If IsSuggested is set then other values my be entered.
+By default the selection for a control using a PickList must be a value from the list. If IsSuggested is set then other values may be entered.
 
 ```yaml
 Type: SwitchParameter
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Items
-A comma seperated list of items, or variable containing the items to offer on the list.
+A comma seperated list of items, or variable containing the items to offer in the list.
 
 ```yaml
 Type: Object[]
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-A name for the Picklist, this name will only be used to link the list to one or more fields - the user interface only shows the field names.
+A name for the Picklist, this name will only be used to link the list to one or more Fields - the user interface only shows the Field-names.
 
 ```yaml
 Type: String
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-String by default, or integer if the values are for integer fields.
+String by default, Integer may be specified if the values intended to populate Fields which are Integers.
 
 ```yaml
 Type: String
@@ -90,16 +90,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
-
 
 ## RELATED LINKS
 

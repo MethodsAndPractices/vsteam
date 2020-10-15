@@ -9,7 +9,10 @@ namespace vsteam_lib
 
       internal static bool HasCacheExpired => Cache.HasCacheExpired;
       internal static Dictionary<string, string> IDs { get; } = new Dictionary<string, string>();
-      public static void Invalidate() => Cache.Invalidate();
+      public static void Invalidate() {
+         Cache.Invalidate();
+         IDs.Clear();
+      }
 
       public static void Update(IEnumerable<string> list)
       {
@@ -18,9 +21,7 @@ namespace vsteam_lib
          if (null == list)
          {
             // this to test we are logged on, not because we need the project
-            var projectName = Common.GetDefaultProject(Cache.Shell);
-
-            if (!string.IsNullOrEmpty(projectName))
+            if (!string.IsNullOrEmpty(Versions.DefaultProject))
             {
                Cache.Shell.Commands.Clear();
 
@@ -56,7 +57,7 @@ namespace vsteam_lib
 
       public static string GetID(string name)
       {
-         if (IDs.Count == 0) 
+         if (IDs.Count == 0)
          {
             Update(null);
          }
@@ -66,7 +67,7 @@ namespace vsteam_lib
          }
 
          return name;
-         
+
       }
    }
 }

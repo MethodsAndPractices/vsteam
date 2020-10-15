@@ -11,8 +11,11 @@ namespace vsteam_lib
       internal static bool HasCacheExpired => Cache.HasCacheExpired;
       internal static Dictionary<string, string> ShortNames { get; } = new Dictionary<string, string>();
       internal static Dictionary<string, string> RefNames { get; } = new Dictionary<string, string>();
-      public static void Invalidate() => Cache.Invalidate();
-
+      public static void Invalidate() {
+         Cache.Invalidate();
+         RefNames.Clear();
+         ShortNames.Clear();
+      }
       public static void Update(IEnumerable<string> list)
       {
          RefNames.Clear();
@@ -20,17 +23,15 @@ namespace vsteam_lib
          // If a list is passed in use it. If not call Get-VSTeamField
          if (null == list)
          {
-            // this to test we are logged on, not because we need the project
-            var projectName = Common.GetDefaultProject(Cache.Shell);
-
-            if (!string.IsNullOrEmpty(projectName))
+            // this to test we are logged on, not because we need the project - unit tests can set the value
+            if (!string.IsNullOrEmpty(Versions.DefaultProject))
             {
                Cache.Shell.Commands.Clear();
 
                var fields = Cache.Shell.AddCommand("Get-VSTeamField")
                                         .Invoke();
 
-               // Setup RefNames so we can do a case insensitive Lookup of a short name to the reference name. 
+               // Setup RefNames so we can do a case insensitive Lookup of a short name to the reference name.
                Regex afterLastDot = new Regex(@"^.*\.(.+)$");
                foreach (var field in fields)
                {
@@ -62,7 +63,7 @@ namespace vsteam_lib
 
       public static string GetRefName(string name)
       {
-         if (RefNames.Count == 0) 
+         if (RefNames.Count == 0)
          {
             Update(null);
          }
@@ -76,7 +77,7 @@ namespace vsteam_lib
          }
 
          return name;
-         
+
       }
    }
 }
