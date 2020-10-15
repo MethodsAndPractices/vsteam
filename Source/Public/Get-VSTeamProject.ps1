@@ -7,10 +7,10 @@ function Get-VSTeamProject {
       [string] $StateFilter = 'WellFormed',
 
       [Parameter(ParameterSetName = 'List')]
-      [int] $Top = 100,
+      [int] $Top,
 
       [Parameter(ParameterSetName = 'List')]
-      [int] $Skip = 0,
+      [int] $Skip,
 
       [Parameter(ParameterSetName = 'ByID')]
       [Alias('ProjectID')]
