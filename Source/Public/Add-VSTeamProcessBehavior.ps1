@@ -12,11 +12,12 @@ function Add-VSTeamProcessBehavior {
 
       [ArgumentCompleter([vsteam_lib.ColorCompleter])]
       [vsteam_lib.ColorTransformToHexAttribute()]
-      [String]$Color = "808080"
+      [String]$Color = "808080",
 
+      [switch]$Force
    )
    Process {
-      $url = _getProcessTemplateUrl $ProcessTemplate 
+      $url = _getProcessTemplateUrl $ProcessTemplate
       if (-not $url) {Write-Warning "Could not convert '$ProcessTemplate' into a process template"; return}
       else           {$Params = @{url = "$url/behaviors?api-version=" + (_getApiVersion Processes) } }
 
@@ -30,16 +31,16 @@ function Add-VSTeamProcessBehavior {
          referenceName = "Custom.$Name"  #or you can have a custom.guid
       }
 
-      if ($PSCmdlet.ShouldProcess($ProcessTemplate,"Add behavior named '$Name' to process")) {
+      if ($Force -or  $PSCmdlet.ShouldProcess($ProcessTemplate,"Add behavior named '$Name' to process")) {
          #Call the Rest API
-         $resp = _callAPI @params -method Post  -ContentType "application/json" 
-         
+         $resp = _callAPI @params -method 'Post'
+
          # Apply a Type Name so we can use custom format view and custom type extensions
          # and add the processTemplate name so it can become a parameter when the object is piped into other functions
          $resp.psobject.TypeNames.Insert(0,'vsteam_lib.Processbehavior')
          Add-Member -InputObject $resp -MemberType NoteProperty -Name ProcessTemplate -Value $ProcessTemplate
 
-         return $resp 
+         return $resp
       }
    }
 }

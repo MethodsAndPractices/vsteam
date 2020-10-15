@@ -35,19 +35,27 @@ Function Get-VSTeamSetting {
 
       $settings = _callapi @params
       switch ($true) {
-         $BacklogIteration   {if ($settings.backlogIteration.psobject.properties.name -contains "url"){
-                                 $resp = _callAPI -url $settings.backlogIteration.url
-                                 return [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
-                           }}
-         $DefaultIteration   {if ($settings.defaultIteration.psobject.properties.name -contains "url"){
-                                 $resp = _callAPI -url $settings.defaultIteration.url
-                                 return [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
-                           }}
-         $BackLogVisibilites { $settings.backlogVisibilities.psobject.properties | Select-Object name, value   |
-                              Write-Output}
-         $BugsBehavior       { return $settings.bugsBehavior }
-         $WorkingDays        { return $settings.workingDays  }
-         Default             { return $settings }
+         $BacklogIteration   {
+                           if ($settings.backlogIteration.psobject.properties.name -contains "url"){
+                              $resp = _callAPI -url $settings.backlogIteration.url
+
+                              return [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
+                           }
+         }
+         $DefaultIteration   {
+                           if ($settings.defaultIteration.psobject.properties.name -contains "url"){
+                              $resp = _callAPI -url $settings.defaultIteration.url
+
+                              return [vsteam_lib.ClassificationNode]::new($resp, $ProjectName)
+                            }
+         }
+         $BackLogVisibilites {
+                              $settings.backlogVisibilities.psobject.properties | Select-Object name, value   |
+                              Write-Output
+         }
+         $BugsBehavior       {return $settings.bugsBehavior }
+         $WorkingDays        {return $settings.workingDays  }
+         default             {return $settings }
       }
    }
 }

@@ -10,10 +10,8 @@
 
 ## Description
 
-Modifies a Portfolio backlog (a.k.a behavior) in a Process Template. 
-
-Note (1) the built-in Process templates (Scrum, Agile etc.) do not allow their backlogs to be customized, this is only allowed for custom processes. 
-
+Modifies a Portfolio backlog (a.k.a behavior) in a Process Template.
+Note (1) the built-in Process templates (Scrum, Agile etc.) do not allow their backlogs to be customized, this is only allowed for custom processes.
 Note (2) System behaviors include a description, but this cannot be changed or set for custom behaviors.
 
 ## EXAMPLES
@@ -28,13 +26,13 @@ Rank Name            Workitem types Inherits                        color  Descr
 ---- ----            -------------- --------                        -----  -----------
 50   Change Requests                System.PortfolioBacklogBehavior 0000ff
 ```
-Changes a portfolio backlog in the scrum5 processs template (note that the built-in templates, like "Scrum" cannot be changed, only user-defined ones - like scrum5 in this case - can have new backlogs). 
+Changes a portfolio backlog in the scrum5 processs template (note that the built-in templates, like "Scrum" cannot be changed, only user-defined ones - like scrum5 in this case - can have new backlogs).
 
 ## PARAMETERS
 
 ### -Color
 
-Sets the the icon color for the backlog. The input value can be the name of a color name like "Red" or "Aqua" or a hex value for red, green and blue parts. Color names should tab complete. If no Color is provided, mid gray is used.
+Sets the the icon color for the backlog. The input value can be the name of a color like "Red" or "Aqua" or a hex value for red, green and blue parts. Color names should tab complete. If no color is provided, mid gray is used.
 
 ```yaml
 Type: Object
@@ -71,7 +69,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-
 ### -NewName
 
 Replacement name for the behavior / backlog
@@ -88,10 +85,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-
 ### -ProcessTemplate
 
-The process template to modify. Note that the built-in templates ("Scrum", "Agile" etc.) cannot be modified, only custom templates (derived from the built-in ones) can be changed.
+The Process Template to modify. Note that the built-in Templates ("Scrum", "Agile" etc.) cannot be modified, only custom templates (derived from the built-in ones) can be changed.
 
 ```yaml
 Type: Object
@@ -107,25 +103,14 @@ Accept wildcard characters: False
 
 <!-- #include "./params/whatIf.md" -->
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
-
-### System.String
 
 ## OUTPUTS
 
-### System.Object
-
 ## NOTES
-
-<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
 [Add-VSTeamProcessBehavior](Add-VSTeamProcessBehavior.md)
 
 [Get-VSTeamProcessBehavior](Get-VSTeamProcessBehavior.md)

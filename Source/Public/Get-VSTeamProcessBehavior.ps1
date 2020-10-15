@@ -12,15 +12,15 @@ function Get-VSTeamProcessBehavior {
       if (-not $wit) {
          Write-Warning "Could not get WorkItem types for Process '$ProcessTemplate'." ; return
       }
-      # could use $url = _getProcessTemplateUrl $ProcessTemplate, but quicker to get use the URL on a workitem type
+      # could use $url = _getProcessTemplateUrl $ProcessTemplate, but quicker to use the URL from any WorkItem type object
       else { $url = $wit[0].url -replace '/workitemTypes/.*$', ''}
-      
+
       $url = $url +'/behaviors?$expand=combinedFields&api-version=' + (_getApiVersion Processes)
       $resp =$resp = _callApi -url $url
 
       $resp = $resp.value | Sort-Object -Property @{e="Rank"; Descending=$true},
                         @{e={$_.inherits.behaviorRefName};Descending=$true}
-      
+
       foreach ($r in $resp) {
             # Apply a Type Name so we can use custom format view and custom type extensions
             # and add the processTemplate name so it can become a parameter when the object is piped into other functions

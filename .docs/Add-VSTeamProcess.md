@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-Add-VSTeamProcess will add a new Process template to your organization. Processes define the available WorkItem Types and the behaviours (backlog levels) for projects. Existing projects can be switched to a new process, and any enabled process can be used for creating new projects.
+Add-VSTeamProcess will add a new Process template to your organization. Processes define the available WorkItem Types and the Behaviors (backlog levels) for Projects. Existing Projects can be switched to a new Process, and any enabled Process can be used for creating new Projects.
 
 ## EXAMPLES
 
@@ -24,7 +24,7 @@ Name    Enabled Default Description
 Basic J True    False  New Basic Process
 ```
 
-Creates a new process derived from the built-in process named "Basic". 
+Creates a new Process template derived from the built-in Process named "Basic".
 
 ## PARAMETERS
 
@@ -32,7 +32,7 @@ Creates a new process derived from the built-in process named "Basic".
 
 ### -Description
 
-The Description of the new process.
+The description of the new Process.
 
 ```yaml
 Type: String
@@ -43,7 +43,7 @@ Required: False
 
 ### -ParentProcess
 
-New processes must be base on an existing process. This can be one of the built in processes names or the namea user defined process. The names should tab-complete.  
+New Processes must be based on an existing {rocess. This can be one of the built in Processes names or the name of a user defined process. The names should tab-complete.
 
 ```yaml
 Type: String
@@ -51,7 +51,7 @@ Required: True
 ```
 ### -ProcessName
 
-The display-name for the new process. 
+The display-name for the new Process.
 
 ```yaml
 Type: String
@@ -61,7 +61,7 @@ Required: True
 
 ### -ReferenceName
 
-If not specified the a system-generated name will be assigned using the new process's GUID.
+If not specified the a system-generated name will be assigned using the new Process's GUID.
 
 ```yaml
 Type: String
@@ -74,10 +74,8 @@ Required: False
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+[Set-VSTeamProcess](Set-VSTeamProcess.md)
 
-[Set-VSTeamWorkItemType](Set-VSTeamWorkItemType.md)
+[Get-VSTeamProcess](Get-VSTeamProcess.md)

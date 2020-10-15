@@ -42,7 +42,7 @@ Name  Enabled Default Description
 Basic False   False   This template is flexible for any process...
 ```
 
-The first command in the pipeline gets built-in process "Basic", and the second disables it without waiting for confirmation. 
+The first command in the pipeline gets built-in process "Basic", and the second disables it without waiting for confirmation.
 The Get- command could take a wildcard and return multiple matching processes, which would cause all to be disabled.
 
 ### Example 3
@@ -77,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -Confirm
-Prompts you for confirmation before running the cmdlet. By default this command requires confirmation so this parameter is only needed if $ConfirmPreference has been changed. 
+Prompts you for confirmation before running the cmdlet. By default this command requires confirmation so this parameter is only needed if $ConfirmPreference has been changed.
 
 ```yaml
 Type: SwitchParameter
@@ -157,7 +157,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProcessTemplate
-The current name of the process template which is to be modified. 
+The current name of the process template which is to be modified.
 
 ```yaml
 Type: Object
@@ -179,10 +179,8 @@ Accept wildcard characters: False
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
+[Add-VSTeamProcess](Add-VSTeamProcess.md)
 
-[Set-VSTeamWorkItemType](Set-VSTeamWorkItemType.md)
+[Get-VSTeamProcess](Get-VSTeamProcess.md)

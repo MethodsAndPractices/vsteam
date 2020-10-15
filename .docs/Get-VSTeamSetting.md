@@ -10,7 +10,7 @@
 
 ## Description
 
-Returns the settings either for the default team in a project, or for a named team if one is specified. The command can either return all settings as a single object or return the value individually.
+Returns the settings either for the default team in a project, or for a named team if one is specified. The command can either return all settings as a single object or return a single setting.
 
 ## EXAMPLES
 
@@ -33,7 +33,6 @@ _links                : @{self=; project=; team=; teamIterations=; teamFieldValu
 
 Geting the settings for the default team in the current project returns a single object with all the information.
 
-
 ### Example 2
 
 ```powershell
@@ -47,7 +46,7 @@ Microsoft.FeatureCategory      True
 Microsoft.RequirementCategory  True
 ```
 
-This version of the command species the project and team and gets the BackLog Visibilites, including any that have been added to the process as behaviors.
+This version of the command specifies the Project and Team and gets the BackLog Visibilites, including any that have been added to the Process Template as custom Behaviors.
 
 ### Example 2
 
@@ -58,7 +57,7 @@ Name Path                    StructureType HasChildren Id
 ---- ----                    ------------- ----------- --
 I3   \MyProject\Iteration\I3 iteration     True        16
 ```
-In this case only the Backlog iteration
+In this case only the Backlog iteration is returned.
 
 ## PARAMETERS
 
@@ -78,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -BackLogVisibilites
-If specified only a list of the Backlogs (system defined, and added as custom process behaviors) will be returned with "true" or "false" for their visibility state. Note that it is possible to set a custom backlog as visible without any WorkItem type being associated with it, and it will be filtered out of the GUI interface while in that state.
+If specified, only a list of the Backlogs (system-defined, and added as custom Process Behaviors) will be returned with "true" or "false" for their visibility state. Note that it is possible to set a custom Backlog as visible without any WorkItem type being associated with it, and it will be filtered out of the GUI interface while in that state.
 
 ```yaml
 Type: SwitchParameter
@@ -93,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -BugsBehavior
-If specified the command will return a value of 'asRequirements' , 'asTasks' or 'off' for "Bugs are managed with requirements", "Bugs are managed with tasks" or "Bugs are not managed on backlogs and boards" respectively.
+If specified, the command will return a value of 'asRequirements' , 'asTasks' or 'off' for "Bugs are managed with requirements", "Bugs are managed with tasks" or "Bugs are not managed on backlogs and boards" respectively.
 
 ```yaml
 Type: SwitchParameter
@@ -122,7 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectName
-The name of the project whose team settings are required.
+The name of the Project whose Team settings are required.
 
 ```yaml
 Type: Object
@@ -137,7 +136,7 @@ Accept wildcard characters: False
 ```
 
 ### -Team
-The name of the whose settings should be returned, if no team is specified the project's default team is used.
+The name of the Team whose settings should be returned, if no Team is specified the Project's default Team is used.
 
 ```yaml
 Type: String
@@ -152,7 +151,7 @@ Accept wildcard characters: False
 ```
 
 ### -WorkingDays
-If specified returns only the list of working days for the team.
+If specified returns only the list of working-days for the Team.
 
 ```yaml
 Type: SwitchParameter
@@ -166,25 +165,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
-
-### System.String
 
 ## OUTPUTS
 
-### System.Object
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->
 
 [Set-VSTeamSetting](Set-VSTeamSetting.md)
 

@@ -10,10 +10,9 @@
 
 ## Description
 
-Modifies the settings either for the default team in a project, or for a named team if one is specified. Teams can be piped into the command.  Depending on parameters passed it can set the Default and Backlog iterations, the bug behavior (handled as tasks, handled as requirements, or not handled through boards) working days, the team name and the team description
+Modifies the settings either for the default team in a project, or for a named team, if one is specified. Teams can be piped into the command.  Depending on parameters passed, it can set the Default and Backlog Iterations, the Bug Behavior (handled as tasks, handled as requirements, or not handled through boards) Working Days, the Team Name and the Team Description.
 
 ## EXAMPLES
-
 
 ### Example 1
 
@@ -31,7 +30,8 @@ Working Days                  monday, tuesday, wednesday, thursday, friday
 Default Iteration             Muddy
 Backlog Iteration             CY2020
 ```
-This command modifies the team named "Planning Team" in named project, setting  the iteration for Calendar Year 2020, half 2 which is the parent for short sprints over 6 months, sets bugs to be handled as tasks and reveals the Epics backlog using its display name.
+
+This command modifies the team named "Planning Team" in a named project, setting the iteration for Calendar Year 2020, half 2 which is the parent for short sprints, sets Bugs to be handled-as-tasks and reveals the Epics Backlog (using its display name).
 
 ### Example 2
 
@@ -40,14 +40,14 @@ $it = Get-VSTeamIteration
 $settings = Get-VSTeam -Name "planning team" | Set-VSTeamSetting -BacklogIteration $it -BackLogVisibilites @{'Microsoft.EpicCategory'=$false} -raw
 
 ```
-The first line finds defaukt iteration for the current project.
-The second line has a pipeline of two commands - the first finds the team named "Planning Team" in the current project, and the second sets the iteration which was found as the backlog iteration and hides the epics category using its reference name and retuns the updated settings as a single object.
+The first line finds default iteration for the current project.
+The second line has a pipeline of two commands - the first finds the team named "Planning Team" in the current project, and the second sets the iteration which was found in the previous line to be the backlog iteration and hides the Epics Backlog (using its reference name). Instead of return as set of key/value pairs, this version retuns the updated settings as a single object.
 
 
 ## PARAMETERS
 
 ### -BackLogIteration
-The new BackLog Iteration, this can be given the iteration's Path, ID, GUID identifier or an object returned by Get-VSTeamIteration.
+The new BackLog Iteration for the Team, this can be given the as iteration's Path, ID, GUID-identifier or as an object returned by Get-VSTeamIteration.
 
 ```yaml
 Type: Object
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -BackLogVisibilites
-A hash table where the keys are Backlogs - either by display name like "Epics" or the refernce name like "Microsoft.EpicCategory" - and the values are true or false. The backlogs listed will be hidden or revealed based on the value. If text is used instead of a boolean "False" or "No" will be treated as false (hide) and all other non-empty values will be treated as true (show). Any backlogs not included will be left unchanged
+A hash-table where the keys are Backlogs - either by display name like "Epics" or the refernce name like "Microsoft.EpicCategory" - and the values are true or false. The backlogs listed will be hidden or revealed based on the value. If text is used instead of a boolean, "False" or "No" will be treated as false (hide) and all other non-empty values will be treated as true (show). Any backlogs not included in the hash-table will be left unchanged.
 
 ```yaml
 Type: Hashtable
@@ -75,7 +75,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
 
 ### -BugsBehavior
 Set to 'asRequirements' , 'asTasks' or 'off' for "Bugs are managed with requirements", "Bugs are managed with tasks" or "Bugs are not managed on backlogs and boards" respectively.
@@ -93,9 +92,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-
 ### -DefaultIteration
-The new Default Iteration  , this can be given the iteration's Path, ID, GUID identifier or an object returned by Get-VSTeamIteration
+The new Default Iteration for the Team , this can be given the iteration's Path, ID, GUID-identifier, or as an object returned by Get-VSTeamIteration
 ```yaml
 Type: Object
 Parameter Sets: (All)
@@ -108,9 +106,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-
 ### -Description
-A new description for the team
+A new description for the Team.
 
 ```yaml
 Type: String
@@ -125,7 +122,7 @@ Accept wildcard characters: False
 ```
 
 ### -NewName
-A replacement name for the team
+A replacement name for the team.
 
 ```yaml
 Type: String
@@ -140,7 +137,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectName
-The project containing the team to modified.
+The Project containing the team to modified.
 
 ```yaml
 Type: Object
@@ -155,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -RawOutput
-If specied returns the object sent back in response to the set request. If not specified as series of name/value pairs a returned for each setting.
+If specied, returns the object sent back from the server in response to the set request. If not specified, settings are returned as a series of name/value pairs.
 
 ```yaml
 Type: SwitchParameter
@@ -170,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### -Team
-The name of the whose settings should be modified, if no team is specified the project's default team is used. The team can be piped into the command, and doing so will override an value set for projectname.
+The name of the Team whose settings should be modified. If not specified, the project's default team is used. The Team can be piped into the command, and doing so will override any value set for Projectname.
 
 ```yaml
 Type: Object
@@ -184,9 +181,8 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-
 ### -WorkingDays
-An undated list of the list of working days for the team. Note the full list must be given, "saturday" alone removes the other days.
+An updated list of the list of working-days for the team. Note the full list must be given, "saturday" alone removes the other days.
 
 ```yaml
 Type: String[]
@@ -201,24 +197,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
-
-### System.String
 
 ## OUTPUTS
 
-### System.Object
-
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->
 
 [Get-VSTeamSetting](Get-VSTeamSetting.md)

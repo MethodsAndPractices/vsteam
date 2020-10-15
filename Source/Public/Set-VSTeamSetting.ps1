@@ -42,8 +42,7 @@ Function Set-VSTeamSetting {
       if ($Team.psobject.properties.name -contains 'ProjectName') {$ProjectName = $Team.ProjectName}
       if ($Team.psobject.properties.name -contains 'Name')        {$Team        = $Team.Name}
 
-      $params = @{contentType = 'application/json'
-                  method      = 'Patch'
+      $params = @{method      = 'Patch'
                   version     = _getApiVersion Processes
       }
 
@@ -73,30 +72,30 @@ Function Set-VSTeamSetting {
       #If they were or just came back as an obkect with an identifier GUID, use it.
       #if we haven't got a GUID yet treat what we have as a path and try to get that
       if ($DefaultIteration -match "^\d+$" ) {
-         $DefaultIteration = Get-VSTeamIteration -projectname $ProjectName -id $DefaultIteration
+          $DefaultIteration = Get-VSTeamIteration -projectname $ProjectName -id $DefaultIteration
       }
       if ($DefaultIteration -and 'identifier' -in $DefaultIteration.psobject.Properties.name) {
-         $DefaultIteration = $DefaultIteration.Identifier.Guid
+          $DefaultIteration = $DefaultIteration.Identifier.Guid
       }
       if ($DefaultIteration -and $DefaultIteration -notmatch "[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}") {
-            $i = Get-VSTeamIteration -Path $DefaultIteration -ProjectName $ProjectName
-            if (-not $i) {Write-Warning "$DefaultIteration not found" ; return }
-            else {$DefaultIteration = $i.Identifier.Guid}
+         $i = Get-VSTeamIteration -Path $DefaultIteration -ProjectName $ProjectName
+         if (-not $i) {Write-Warning "$DefaultIteration not found" ; return }
+         else {$DefaultIteration = $i.Identifier.Guid}
       }
       if ($BacklogIteration -match "^\d+$" ) {
-         $BacklogIteration = Get-VSTeamIteration -projectname $ProjectName -id $BacklogIteration
+          $BacklogIteration = Get-VSTeamIteration -projectname $ProjectName -id $BacklogIteration
       }
       if ($BacklogIteration -and 'identifier' -in $BacklogIteration.psobject.Properties.name) {
-         $BacklogIteration = $BacklogIteration.Identifier.Guid
+          $BacklogIteration = $BacklogIteration.Identifier.Guid
       }
       if ($BacklogIteration -and $BacklogIteration -notmatch "[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}") {
-            $i = Get-VSTeamIteration -Path $BacklogIteration -ProjectName $ProjectName
-            if (-not $i) {Write-Warning "$BacklogIteration not found" ; return }
-            else {$BacklogIteration = $i.Identifier.Guid}
+         $i = Get-VSTeamIteration -Path $BacklogIteration -ProjectName $ProjectName
+         if (-not $i) {Write-Warning "$BacklogIteration not found" ; return }
+         else {$BacklogIteration = $i.Identifier.Guid}
       }
       if ($BackLogVisibilites) {
          $visibilites  = @{}
-         # Validate Names & translate from "Backlog items" 'Microsoft.RequirementCategory' etc. Ensure values are boolean.
+         # Validate Names & translate from "Backlog items" to 'Microsoft.RequirementCategory' etc. Ensure values are boolean.
          $bhash = @{}
          $backlogConfig =  _callapi -ProjectName $ProjectName -area work -resource 'backlogconfiguration'
          @($backlogConfig.portfolioBacklogs) + $backlogConfig.requirementBacklog |
@@ -135,7 +134,7 @@ Function Set-VSTeamSetting {
             $resp.backlogVisibilities.psobject.properties | Select-Object Name, @{n='Value';e={if($_.value) {'Visible'} else{'Hidden'}} }  |
                Write-Output
             [PSCustomObject]@{Name = 'Bug display mode';  Value =  $resp.bugsBehavior}
-            [PSCustomObject]@{Name = 'Working Days';   ;  Value =  ($resp.workingDays -join ', ')}
+            [PSCustomObject]@{Name = 'Working Days';   ;  Value = ($resp.workingDays -join ', ')}
             [PSCustomObject]@{Name = 'Default Iteration'; Value =  $resp.defaultIteration.name}
             [PSCustomObject]@{Name = 'Backlog Iteration'; Value =  $resp.BacklogIteration.name}
          }

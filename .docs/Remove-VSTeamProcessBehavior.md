@@ -17,9 +17,9 @@
 ### Example 1
 
 ```powershell
-Set-VSTeamProcessBehavior -ProcessTemplate Scrum5 -Name "Change Requests" 
+Set-VSTeamProcessBehavior -ProcessTemplate Scrum5 -Name "Change Requests"
 ```
-Removes a portfolio backlog from the scrum5 processs template (note that the only custom behaviors on custom templates can be removed). 
+Removes a Portfolio Backlog from the "scrum5" Processs Template (note that the only custom Behaviors on custom Templates can be removed).
 
 ## PARAMETERS
 
@@ -45,29 +45,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-
-
 <!-- #include "./params/whatIf.md" -->
-
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.String
-
 ## OUTPUTS
-
-### System.Object
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
-
-<!-- #include "./common/related.md" -->
 [Add-VSTeamProcessBehavior](Add-VSTeamProcessBehavior.md)
 
 [Get-VSTeamProcessBehavior](Get-VSTeamProcessBehavior.md)

@@ -19,7 +19,7 @@ function Add-VSTeamProcess {
 
    $parentProcess = Get-VSTeamProcess -Name $ParentProcessName
    if (-not $parentProcess) { Write-Warning "Couldn't turn '$ParentProcessName' into a process GUID."; return   }
- 
+
    $body          =  @{ 'parentProcessTypeId'  = $parentProcess.id
                         'name'                 = $ProcessName
    }
@@ -32,10 +32,9 @@ function Add-VSTeamProcess {
       Area        = 'work'
       Resource    = 'processes'
       Version     = _getApiVersion Processes
-      ContentType = "application/json" 
       Body        = ConvertTo-Json  $body
    }
-    if ($Force -or $PSCmdlet.ShouldProcess($ProcessName,'Create New Process')) {
+   if ($Force -or $PSCmdlet.ShouldProcess($ProcessName,'Create New Process')) {
       # Call the REST API
       $resp = _callAPI @commonArgs
 
@@ -44,9 +43,9 @@ function Add-VSTeamProcess {
       }
       else {
          [vsteam_lib.ProcessTemplateCache]::Invalidate()
-         
+
          return [vsteam_lib.Process]::new($resp)
       }
-      
+
    }
 }

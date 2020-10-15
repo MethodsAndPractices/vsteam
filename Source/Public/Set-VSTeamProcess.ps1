@@ -29,7 +29,7 @@ function Set-VSTeamProcess {
       }
       $url =  _getProcessTemplateUrl $ProcessTemplate
       if (-not $url) {Write-Warning "Could not find the Process for '$ProcessTemplate" ; return}
-      
+
       $body = @{}
       if ($Description) {$body['description'] = $Description}
       if ($NewName    ) {$body['name']        = $NewName}
@@ -40,14 +40,13 @@ function Set-VSTeamProcess {
       $commonArgs = @{
          Method      = "Patch"
          URL         =  $url + "?api-version=" + (_getApiVersion Processes)
-         ContentType = "application/json" 
          Body        = ConvertTo-Json  $body
       }
 
       if ($Force -or $PSCmdlet.ShouldProcess($ProcessTemplate,'Update Devops Process template')) {
          # Call the REST API
          $resp = _callAPI @commonArgs
-         if ($resp.psobject.Properties.name -Notcontains 'typeid') { 
+         if ($resp.psobject.Properties.name -Notcontains 'typeid') {
             Write-Warning 'The server did not return an ID for a modified process. '
          }
          else {

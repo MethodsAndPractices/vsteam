@@ -8,7 +8,7 @@ Describe 'VSTeamProcessBehavior' {
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance       { return 'https://dev.azure.com/test' }
-      Mock _getApiVersion     { return '1.0-unitTests' } 
+      Mock _getApiVersion     { return '1.0-unitTests' }
       Mock _getDefaultProject { return "MockProject"}
    }
 
@@ -16,7 +16,7 @@ Describe 'VSTeamProcessBehavior' {
       BeforeAll {
          ## Arrange
          Mock _callAPi {return [pscustomobject]@{name="Dummy"}} -ParameterFilter {$method -eq "post"}
-         Mock _callAPi {return @{value=@{name="Dummy"}}} 
+         Mock _callAPi {return @{value=@{name="Dummy"}}}
          Mock Get-VSTeamProcess { return @(
               [PSCustomObject]@{
                   Name = "Scrum"
@@ -30,12 +30,12 @@ Describe 'VSTeamProcessBehavior' {
 
       It 'Calls the right API to add a process behavior' {
          ## Act
-         $behavior = Add-VSTeamProcessBehavior -ProcessTemplate Scrum -Name "Test" -Color Green 
+         $behavior = Add-VSTeamProcessBehavior -ProcessTemplate Scrum -Name "Test" -Color Green
 
          ## Assert
          Should -Invoke _callapi -Scope It -ParameterFilter {
                 $method -eq 'Post' -and
-                $url     -match "https://dummy.none/_apis/work/processes/6b724908-ef14-45cf-84f8-768b5384da45/behaviors" -and 
+                $url     -match "https://dummy.none/_apis/work/processes/6b724908-ef14-45cf-84f8-768b5384da45/behaviors" -and
                 $body   -match '"inherits":\s*"System.PortfolioBacklogBehavior"' -and
                 $body   -match '"name":\s*"Test"' -and
                 $body   -match '"color":\s*"008000"' #Green translated
