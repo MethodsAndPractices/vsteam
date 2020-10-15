@@ -59,7 +59,6 @@ Specifies the maximum number to return.
 ```yaml
 Type: Int32
 Parameter Sets: List
-Default value: 100
 ```
 
 ### Skip
@@ -69,7 +68,6 @@ Defines the number of team projects to skip. The default value is 0
 ```yaml
 Type: Int32
 Parameter Sets: List
-Default value: 0
 ```
 
 ### Id
@@ -98,6 +96,12 @@ Parameter Sets: ByID
 ## OUTPUTS
 
 ## NOTES
+
+You can use PowerShell default values to set top to any value you like.
+
+$Global:PSDefaultParameterValues["*-vsteam*:top"] = 500
+
+However, this function is called by the Project cache which is used by the project validation code. If the value of top is not high enough validation may fail. By default this function returns all projects.
 
 <!-- #include "./common/prerequisites.md" -->
 
