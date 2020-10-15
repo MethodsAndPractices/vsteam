@@ -10,7 +10,7 @@
 
 ## Description
 
-Removes a custom work item type, or reverts an inherited work item type back to the built-in Type. 
+Removes a custom work item type, or reverts an inherited work item type back to the built-in Type.
 
 If the type is a system type (as all work item types in built-in Process templates are) then an error will be thrown.
 
@@ -103,10 +103,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### CommonParameters
-
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
