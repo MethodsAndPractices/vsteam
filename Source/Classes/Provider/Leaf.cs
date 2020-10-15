@@ -24,7 +24,6 @@ namespace vsteam_lib.Provider
       public Leaf(PSObject obj, string name, string id, string projectName) : base(name)
       {
          Common.MoveProperties(this, obj);
-
          this.Id = id;
          this.InternalObject = obj;
          this.ProjectName = projectName;

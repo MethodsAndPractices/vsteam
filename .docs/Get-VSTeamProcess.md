@@ -42,6 +42,20 @@ This will return an process templates with names containing scrum,
 in other words, the default "Scrum" template and custom ones with
 names like "Custom Scrum", "Scrum for Contoso" will all be returned.
 
+### Example 4
+
+```powershell
+Get-VSTeamProcess  -ExpandProjects | where Projects -Contains "MyProject"
+
+Name  Enabled Default Description
+----  ------- ------- -----------
+Scrum True    False   This template is for teams who follow the Scrum framework.
+```
+
+This gets the projects associated with each process template,
+and filters the list down to the one which contains a particular project,
+the "Scrum" template in this example.
+
 ## PARAMETERS
 
 <!-- #include "./params/ProcessName.md" -->
@@ -55,6 +69,19 @@ Type: String
 Parameter Sets: ByID
 Aliases: ProcessID
 ```
+
+### ExpandProjects
+
+Gets the projects associated with the process, and sets the the .Projects property of the Process item to be a list of project-names.
+
+```yaml
+Type: SwitchParameter
+Required: false
+Position: Named
+Accept pipeline input: false
+Parameter Sets: (All)
+```
+
 
 ## INPUTS
 
