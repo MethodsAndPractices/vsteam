@@ -20,7 +20,6 @@ Each WorkItem type in each process template has a set of possible states.  Items
 Show-VSTeamWorkItemState -WorkItemType Bug -Name Approved -ProcessTemplate Scrum2 -Force
 ```
 
-
 This un-hides the "Approved" state for bug in the custom process template "Scrum2", without the confirmation prompt.
 If the state is not hidden a warning message will appear and the state will not be changed.
 
@@ -46,17 +45,14 @@ Accept wildcard characters: False
 
 Specifies the process template where the WorkItem Type to be modified is found; by default this will be the template for the current project. Note that although some WorkItem types like "bug" or "task" are found in multiple templates, a change to the available states only applies to one template, and the built-in process templates cannot be modified. Values for this parameter should tab-complete.
 
-
 ```yaml
 Type: String
 Parameter Sets: Process
 ```
 
-
 ### -WorkItemType
 
-The name of the WorkItem type whose state list is to be modified. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually. 
-
+The name of the WorkItem type whose state list is to be modified. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually.
 
 ```yaml
 Type: String
@@ -78,15 +74,12 @@ Parameter Sets: ByType
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
-[Add-VsteamWorkItemState](Add-VsteamWorkItemState.md)
+[Add-VSTeamWorkItemState](Add-VSTeamWorkItemState.md)
 
-[Get-VsteamWorkItemState](Get-VsteamWorkItemState.md)
+[Get-VSTeamWorkItemState](Get-VSTeamWorkItemState.md)
 
-[Hide-VsteamWorkItemState](Hide-VsteamWorkItemState.md)
+[Hide-VSTeamWorkItemState](Hide-VSTeamWorkItemState.md)
 
-[Remove-VsteamWorkItemState](Remove-VsteamWorkItemState.md)
+[Remove-VSTeamWorkItemState](Remove-VSTeamWorkItemState.md)

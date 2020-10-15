@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VsteamWorkItemState
+# Get-VSTeamWorkItemState
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Get-VsteamWorkItemState.md" -->
+<!-- #include "./synopsis/Get-VSTeamWorkItemState.md" -->
 
 ## SYNTAX
 
 ## Description
 
-Each WorkItem type in each process template has a set of possible states, each belongs to a category which represents a stage in the item's lifecycle (Proposed, In-Progress, Completed, Resolved, Removed) and each has a color. Items may have system-defined states and/or custom (user-defined) states. Get-VsteamWorkItemState lists the available states.
+Each WorkItem type in each process template has a set of possible states, each belongs to a category which represents a stage in the item's lifecycle (Proposed, In-Progress, Completed, Resolved, Removed) and each has a color. Items may have system-defined states and/or custom (user-defined) states. Get-VSTeamWorkItemState lists the available states.
 
 
 ## EXAMPLES
@@ -18,7 +18,7 @@ Each WorkItem type in each process template has a set of possible states, each b
 ### Example 1
 
 ```powershell
-Get-VsteamWorkItemState  -WorkItemType Bug
+Get-VSTeamWorkItemState  -WorkItemType Bug
 
 Order Name      Category   Color  Customization Hidden
 ----- ----      --------   -----  ------------- ------
@@ -35,7 +35,7 @@ Notice that the states all have a customization of system; these states can be h
 ### Example 2
 
 ```powershell
-Get-VsteamWorkItemState -ProcessTemplate Scrum4 -WorkItemType 'Update'
+Get-VSTeamWorkItemState -ProcessTemplate Scrum4 -WorkItemType 'Update'
 
 
 Order Name      Category   Color  Customization Hidden
@@ -52,7 +52,7 @@ Notice that the states all have a customization of custom; these states can be r
 ### Example 3
 
 ```powershell
-Get-VSTeamProcess | Get-VSTeamWorkItemType -WorkItemType bug | Get-VsteamWorkItemState | Sort-object name,processtemplate|  Format-table ProcessTemplate,WorkItemType,Order,name,Color -AutoSize
+Get-VSTeamProcess | Get-VSTeamWorkItemType -WorkItemType bug | Get-VSTeamWorkItemState | Sort-object name,processtemplate|  Format-table ProcessTemplate,WorkItemType,Order,name,Color -AutoSize
 
 
 ProcessTemplate WorkItemType order name      color
@@ -97,15 +97,14 @@ Parameter Sets: ByType
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
-[Add-VsteamWorkItemState](Add-VsteamWorkItemState.md)
+[Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)
 
-[Hide-VsteamWorkItemState](Hide-VsteamWorkItemState.md)
+[Add-VSTeamWorkItemState](Add-VSTeamWorkItemState.md)
 
-[Show-VsteamWorkItemState](Show-VsteamWorkItemState.md)
+[Hide-VSTeamWorkItemState](Hide-VSTeamWorkItemState.md)
 
-[Remove-VsteamWorkItemState](Remove-VsteamWorkItemState.md)
+[Show-VSTeamWorkItemState](Show-VSTeamWorkItemState.md)
+
+[Remove-VSTeamWorkItemState](Remove-VSTeamWorkItemState.md)

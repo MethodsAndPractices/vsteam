@@ -74,18 +74,14 @@ Parameter Sets: Process
 
 ### -WorkItemType
 
-The name of the WorkItem type whose state list is to be modified. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually. 
+The name of the WorkItem type whose state list is to be modified. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually.
 
 
 ```yaml
 Type: String
 Parameter Sets: ByType
 ```
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/Force.md" -->
-
-<!-- #include "./params/whatif.md" -->
+<!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS
 
@@ -97,15 +93,12 @@ Parameter Sets: ByType
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
-[Add-VsteamWorkItemState](Add-VsteamWorkItemState.md)
+[Add-VSTeamWorkItemState](Add-VSTeamWorkItemState.md)
 
-[Get-VsteamWorkItemState](Get-VsteamWorkItemState.md)
+[Get-VSTeamWorkItemState](Get-VSTeamWorkItemState.md)
 
-[Show-VsteamWorkItemState](Show-VsteamWorkItemState.md)
+[Show-VSTeamWorkItemState](Show-VSTeamWorkItemState.md)
 
-[Remove-VsteamWorkItemState](Remove-VsteamWorkItemState.md)
+[Remove-VSTeamWorkItemState](Remove-VSTeamWorkItemState.md)

@@ -105,7 +105,7 @@ Accept wildcard characters: False
 
 ### -WorkItemType
 
-The name of the WorkItem type whose state list is to be extended. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually. 
+The name of the WorkItem type whose state list is to be extended. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually.
 
 
 ```yaml
@@ -128,11 +128,8 @@ Parameter Sets: ByType
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
 [Get-VsteamWorkItemState](Get-VsteamWorkItemState.md)
 
 [Hide-VsteamWorkItemState](Hide-VsteamWorkItemState.md)

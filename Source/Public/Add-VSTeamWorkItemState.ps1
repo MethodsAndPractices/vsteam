@@ -29,7 +29,7 @@ function Add-VSTeamWorkItemState {
       foreach ($result in (Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType $WorkItemType)) {
          if ($Force -or $PSCmdlet.ShouldProcess("$($result.name) in process template '$ProcessTemplate'", "Add new state '$name' to WorkItem type")) {
             # if it  is a system one we need to make it an inherited one
-            
+
             if ($result.customization -eq 'system') {
                $url = ($result.url -replace '/workItemTypes/.*$', '/workItemTypes?api-version=') + (_getApiVersion Processes)
                $body = @{
@@ -40,24 +40,25 @@ function Add-VSTeamWorkItemState {
                   isDisabled   = $result.isDisabled
                   name         = $result.name
                }
-               $result = _callAPI -Url $url -method Post -ContentType   "application/json" -body (ConvertTo-Json $body)
+               $result = _callAPI -method Post -Url $url -body (ConvertTo-Json $body)
             }
             $url = $result.url + '/states?api-version=' + (_getApiVersion Processes)
-         
-            $body = @{'stateCategory' = $StateCategory
-               'name'                 = $Name
-               'color'                = $Color
+
+            $body = @{
+               'stateCategory' = $StateCategory
+               'name'          = $Name
+               'color'         = $Color
             }
-         
+
             if ($PSBoundParameters.ContainsKey('Order')) {
-               $body['order'] = $Order 
+               $body['order']  = $Order
             }
-         
+
             $resp = _callAPI -Url $url -method Post -ContentType "application/json" -body (ConvertTo-Json $body)
-         
+
             $resp.psobject.TypeNames.Insert(0, 'vsteam_lib.WorkItemState')
             Add-Member -InputObject $resp -MemberType NoteProperty -Name ProcessTemplate -Value $ProcessTemplate
-            Add-Member -InputObject $resp -MemberType NoteProperty -Name WorkItemType    -Value $result.name 
+            Add-Member -InputObject $resp -MemberType NoteProperty -Name WorkItemType    -Value $result.name
 
             Write-Output $resp
          }
