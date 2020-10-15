@@ -32,7 +32,7 @@ function Add-VSTeamWorkItemType {
    if ($Description)  {$body['description'] =$Description }
 
    if ($PSCmdlet.ShouldProcess($ProcessTemplate, "Add workitem '$WorkItemType' to process template"))  {
-      $resp = _callapi -Url $url -method  Post  -ContentType "application/json" -body (ConvertTo-Json $body) -erroraction stop
+      $resp = _callapi -Url $url -method  Post -body (ConvertTo-Json $body) -ErrorAction Stop
       if ($resp) {
          if ($ProcessTemplate -eq $env:TEAM_PROCESS) {[vsteam_lib.WorkItemTypeCache]::Invalidate()}
 

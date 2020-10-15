@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Management.Automation;
 
 namespace vsteam_lib
 {
    /// <summary>
-   /// Cache project names to reduce the number of
+   /// Cache Icons for work items to reduce the number of
    /// rest APIs calls needed for parameter completion / validation 
    /// </summary>
    public static class IconCache
@@ -16,8 +15,7 @@ namespace vsteam_lib
 
       /// <summary>
       /// There are times we need to force an update of the cache
-      /// even if it has not expired yet. This will be true when we
-      /// add a new project.
+      /// even if it has not expired yet. 
       /// </summary>
       /// <param name="forceUpdate"></param>
       /// <returns></returns>
