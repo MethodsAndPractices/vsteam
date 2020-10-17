@@ -60,6 +60,9 @@ function Set-VSTeamDefaultProject {
             [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $Project,           $Level)
             [System.Environment]::SetEnvironmentVariable("TEAM_PROCESS", $env:TEAM_PROCESS , $Level)
          }
+         #Reset project-related caches when setting project.
+         [vsteam_lib.QueryCache]::Invalidate()
+         [vsteam_lib.WorkItemTypeCache]::Invalidate()
 
          # Note: ProjectName Parameters should be given a default value of [vsteam_lib.Versions]::DefaultProject instead of globally forcing it this way.
          $Global:PSDefaultParameterValues["*-vsteam*:projectName"] = $Project

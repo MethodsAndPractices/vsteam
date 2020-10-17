@@ -11,7 +11,7 @@ Describe 'VSTeamField' {
       Mock _getApiVersion { return '1.0-unitTests' }
 
       #Set the project to fool Field cache that we are logged on and it can call Get-VsTeamFeild.
-      [vsteam_lib.Versions]::DefaultProject='test'
+      [vsteam_lib.Versions]::Account='test'
       [vsteam_lib.FieldCache]::Invalidate()
 
       Mock _callApi {

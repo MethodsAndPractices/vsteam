@@ -29,7 +29,7 @@ namespace vsteam_lib
       {
          var values = new List<CompletionResult>();
 
-         IEnumerable<string> words = FieldCache.GetCurrent();
+         IEnumerable<string> words = FieldCache.GetCurrent(false);
 
          ///for Fields match anywhere - not just at the start - so user doesn't need to know namespaces
          foreach (string word in words)

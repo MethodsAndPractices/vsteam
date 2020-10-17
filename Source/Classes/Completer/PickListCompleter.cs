@@ -29,7 +29,7 @@ namespace vsteam_lib
       {
          var values = new List<CompletionResult>();
 
-         SelectValues(wordToComplete, PickListCache.GetCurrent(), values);
+         SelectValues(wordToComplete, PickListCache.GetCurrent(false), values);
 
          return values;
       }

@@ -10,7 +10,7 @@
 2.  **Added functions** `Get-VSTeamWorkItemField` and `Add-VSTeamWorkItemField` to list the fields in and add fields to a given WorkItem Type,
 3.  **Added functions** `Get-VSTeamField`         and `Add-VSTeamField`         to list global fields which can be used in (2) and define new ones.
 4.  **Added functions** `Get-VSTeamPickList`,         `Add-VSTeamPickList` and `Set-VSTeamPickList` to list and modify picklists used in the fields in (3) and define new ones
-
+5.  **Changed functions** `Set-VSTeamAccount` and `Set-VSTeamDefaultProject` to clear caches when connecting.
 
 ## J.H. O'Neill @ 3rd October 2020
 1.  To support tab completion for (e.g.) icon color  in `Add-VSTeamWorkItemType`:  **added class** `ColorCompleter` in file `Source\Classes\Completer\ColorCompleter.cs`.

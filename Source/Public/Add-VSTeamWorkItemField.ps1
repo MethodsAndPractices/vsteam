@@ -23,21 +23,10 @@ function Add-VSTeamWorkItemField {
       [switch]$Force
    )
    process {
-      #Get the workitem type we are updating. If it is a system one, make it an inherited one first.
+      #Get the workitem type(s) we are updating. We get a system one, make it an inherited one
       $wit = Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType $WorkItemType
+      $wit = $wit | Unlock-VsteamWorkItemType -Force:$Force
       foreach ($w in $wit) {
-         if ($w.customization -eq 'system') {
-            $url = ($w.url -replace '/workItemTypes/.*$', '/workItemTypes?api-version=') +  (_getApiVersion Processes)
-            $body = @{
-                  color         = $w.color
-                  description   = $w.description
-                  icon          = $w.icon
-                  inheritsFrom  = $w.referenceName
-                  isDisabled    = $w.isDisabled
-                  name          = $w.name
-            }
-            $w = _callAPI -Url $url -method Post -body (ConvertTo-Json $body)
-         }
          $url = $w.url +"/fields?api-version=" + (_getApiVersion Processes)
          foreach ($r in $ReferenceName) {
             if ($r.psobject.Properties["referenceName"]) {$r = $r.referenceName}
@@ -50,8 +39,11 @@ function Add-VSTeamWorkItemField {
             }
 
             if ($Force -or $PSCmdlet.ShouldProcess($WorkItemType, "Add field '$r' to WorkItem type" )) {
+               #Call the REST API
                $resp = _callAPI -Url $url -method Post -body (ConvertTo-Json $body)
 
+               # Apply a Type Name so we can use custom format view and/or custom type extensions
+               # and add members to make it easier if piped into something which takes values by property name
                $resp.psobject.TypeNames.Insert(0,'vsteam_lib.WorkitemField')
                Add-Member -InputObject $resp -MemberType NoteProperty  -Name WorkItemType    -Value $w.name
                Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
@@ -59,5 +51,6 @@ function Add-VSTeamWorkItemField {
                return $resp
             }
          }
-   }}
+      }
+   }
 }

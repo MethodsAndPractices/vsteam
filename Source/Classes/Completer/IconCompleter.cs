@@ -30,7 +30,7 @@ namespace vsteam_lib
       {
          var values = new List<CompletionResult>();
 
-         SelectValues(wordToComplete, IconCache.GetCurrent(false), values);
+         SelectValues(wordToComplete, IconCache.GetCurrent(), values);
 
          return values;
       }

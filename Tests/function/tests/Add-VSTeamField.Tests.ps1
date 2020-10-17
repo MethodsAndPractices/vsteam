@@ -11,7 +11,7 @@ Describe 'VSTeamField' {
       Mock _getApiVersion { return '1.0-unitTests' }
 
       #Set the project to fool picklist cache that we are logged on and it can call Get-VsTeamPicklist
-      [vsteam_lib.Versions]::DefaultProject='test'
+      [vsteam_lib.Versions]::Account='test'
 
 
       Mock Get-VSTeamPickList{return [PSCustomObject]@{ Name = 'Offices';id='b34dd44a-954e-433d-b8a8-c3e8c72698a7'}}

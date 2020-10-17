@@ -17,22 +17,24 @@ function Add-VSTeamPickList  {
 
 $apiParams = @{
   method     = 'Post'
-  area       = 'Work' 
-  resource   = 'processes/lists' 
+  area       = 'Work'
+  resource   = 'processes/lists'
   version    = _getApiVersion Processes
-  ContentType =  "application/json" 
+  ContentType =  "application/json"
   body        = ConvertTo-Json @{
-                  name        = $Name  
+                  name        = $Name
                   isSuggested = ($IsSuggested -as [bool])
                   type        = $Type.ToLower()
-                  items       = $items 
+                  items       = $items
    }
 }
    if ($force -or $PSCmdlet.ShouldProcess($Name,'Create new Picklist')) {
+      #Call the REST API
       $resp = _callAPI @apiParams
       [vsteam_lib.PicklistCache]::Invalidate()
+      # Apply a Type Name so we can use custom format view and/or custom type extensions
       $resp.psobject.TypeNames.Insert(0,'vsteam_lib.PickList')
-      
+
       return $resp
    }
 }

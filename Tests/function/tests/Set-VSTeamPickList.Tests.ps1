@@ -10,7 +10,7 @@ Describe 'VSTeamPickList' {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' }
-      [vsteam_lib.Versions]::DefaultProject='test'
+      [vsteam_lib.Versions]::Account='test'
       Mock _callApi {
          if ($id -or $method -eq 'put') {
                    return [pscustomobject]@{name='Office';id='693feca0-3123-41ba-8501-52d4882949c8';url='https://dev.azure.com/test/_apis/work/processes/lists/693feca0-3123-41ba-8501-52d4882949c8'}

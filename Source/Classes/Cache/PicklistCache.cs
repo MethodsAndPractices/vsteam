@@ -20,8 +20,8 @@ namespace vsteam_lib
          // If a list is passed in use it. If not call Get-VSTeamPickList
          if (null == list)
          {
-            // this to test we are logged on, not because we need the project
-            if (!string.IsNullOrEmpty(Versions.DefaultProject))
+            // To test we are logged on
+            if (!string.IsNullOrEmpty(Versions.Account))
             {
                Cache.Shell.Commands.Clear();
 
@@ -43,11 +43,17 @@ namespace vsteam_lib
             }
          }
          Cache.PreFill(list);
+         Cache.MinutesToExpire = 60;
       }
-
-      public static IEnumerable<string> GetCurrent()
+      /// <summary>
+      /// There are times we need to force an update of the cache
+      /// even if it has not expired yet.
+      /// </summary>
+      /// <param name="forceUpdate"></param>
+      /// <returns></returns>
+      public static IEnumerable<string> GetCurrent(bool forceUpdate)
       {
-         if (HasCacheExpired)
+         if (HasCacheExpired || forceUpdate)
          {
             Update(null);
          }
