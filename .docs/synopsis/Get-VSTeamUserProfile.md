@@ -1,0 +1,1 @@
+Gets the user profile of an account.

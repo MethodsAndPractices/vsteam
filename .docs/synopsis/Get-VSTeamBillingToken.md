@@ -1,0 +1,1 @@
+Gets a token for doing billing operations on ogranization level.

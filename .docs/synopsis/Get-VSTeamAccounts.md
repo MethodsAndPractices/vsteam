@@ -1,0 +1,1 @@
+Gets the organizations where the user has access. Either as member or as owner.
