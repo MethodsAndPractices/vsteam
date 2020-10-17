@@ -1,6 +1,5 @@
 function Get-VSTeamAccounts {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
-      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAccounts')]
+   [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamAccounts')]
    param(
       [Parameter(Mandatory = $true, ParameterSetName = "MemberId")]
       [string] $MemberId,

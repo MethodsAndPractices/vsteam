@@ -1,6 +1,5 @@
 function Get-VSTeamUserProfile {
-   [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "High",
-      HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamUserProfile')]
+   [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamUserProfile')]
    param(
       [Parameter(Mandatory = $true, ParameterSetName = "Id")]
       [string] $Id,
@@ -18,6 +17,7 @@ function Get-VSTeamUserProfile {
 
          # Call the REST API
          $resp = _callAPI `
+            -NoProject `
             -Method GET `
             -subDomain 'vssps' `
             -area 'profile' `
