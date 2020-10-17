@@ -160,7 +160,7 @@ Type: String[]
 Parameter Sets: List
 ```
 
-<!-- #include "./params/BuildIds.md" -->
+<!-- #include "./params/buildIds.md" -->
 
 ### JSON
 

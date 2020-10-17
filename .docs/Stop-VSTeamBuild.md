@@ -35,7 +35,7 @@ This example will find all builds with a status of "inProgress" and a defenition
 
 ## PARAMETERS
 
-<!-- #include "./params/BuildId.md" -->
+<!-- #include "./params/buildId.md" -->
 
 <!-- #include "./params/projectName.md" -->
 
