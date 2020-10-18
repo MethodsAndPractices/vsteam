@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 
-Describe 'VSTeamUserPRofile' -Tag 'unit', 'billing' {
+Describe 'VSTeamUserPRofile' -Tag 'unit', 'profile' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
@@ -8,7 +8,7 @@ Describe 'VSTeamUserPRofile' -Tag 'unit', 'billing' {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com' }
 
-      Mock Invoke-RestMethod { Write-Host $args }
+      Mock Invoke-RestMethod { return $null }
    }
 
    Context 'Get-VSTeamUserProfile' {
