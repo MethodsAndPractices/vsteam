@@ -18,7 +18,7 @@ Describe 'VSTeamAccounts' -Tag 'unit', 'billing' {
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 `
             -ParameterFilter {
             $Method -eq 'Get' -and
-            $Uri -eq "https://vssps.dev.azure.com/_apis/accounts?api-version=3.0&memberId=569a3107-0cd3-4817-83f1-4d91b0e3d7cb"
+            $Uri -eq "https://vssps.dev.azure.com/_apis/accounts?api-version=3.0&ownerId=569a3107-0cd3-4817-83f1-4d91b0e3d7cb"
          }
       }
 
