@@ -1,6 +1,6 @@
 <!-- #include "./common/header.md" -->
 
-# Get-VSTeamBilling
+# Get-VSTeamAccounts
 
 ## SYNOPSIS
 
@@ -14,14 +14,14 @@
 
 ## EXAMPLES
 
-### Example 1: Get organizations as owner
+### Example 1: Get organizations where the user is owner
 
 ```powershell
 $myProfile = Get-VSTeamUserProfile -MyProfile
 $orgs = Get-VSTeamAccounts -MemberId $myProfile.id
 ```
 
-### Example 2: Get organizations as member
+### Example 2: Get organizations where the user is member
 
 ```powershell
 $myProfile = Get-VSTeamUserProfile -MyProfile

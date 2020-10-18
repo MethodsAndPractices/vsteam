@@ -8,7 +8,7 @@ Describe 'VSTeamBilling' -Tag 'unit', 'billing' {
       # using the Set-VSTeamAccount function.
       Mock _getInstance { return 'https://dev.azure.com/test' }
 
-      Mock Invoke-RestMethod { Write-Host $args; Open-SampleFile 'Get-VSTeamBillingToken.json' }
+      Mock Invoke-RestMethod { Open-SampleFile 'Get-VSTeamBillingToken.json' }
    }
 
    Context 'Get-VSTeamBillingToken' {

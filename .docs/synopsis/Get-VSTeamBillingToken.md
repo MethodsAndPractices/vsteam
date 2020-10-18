@@ -1,1 +1,1 @@
-Gets a token for doing billing operations on ogranization level.
+Gets a token for triggering billing operations on the organization level.

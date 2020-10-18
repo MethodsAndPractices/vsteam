@@ -1,1 +1,1 @@
-Sets billing operations on organization level.
+Sets billing operations on the organization level.
