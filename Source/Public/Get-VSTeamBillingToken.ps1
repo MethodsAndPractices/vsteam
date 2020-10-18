@@ -1,13 +1,12 @@
-function Get-VSTeamBillingToken
-{
+function Get-VSTeamBillingToken {
    [CmdletBinding(HelpUri = 'https://methodsandpractices.github.io/vsteam-docs/docs/modules/vsteam/commands/Get-VSTeamBillingToken')]
    param ()
 
    $sessionToken = @{
-      appId=00000000-0000-0000-0000-000000000000
-      force=false
-      tokenType=0
-      namedTokenId ="CommerceDeploymentProfile"
+      appId        = 00000000 - 0000 - 0000 - 0000 - 000000000000
+      force        = $false
+      tokenType    = 0
+      namedTokenId = "CommerceDeploymentProfile"
    }
 
    $billingToken = _callAPI `
