@@ -60,7 +60,7 @@ function Set-VSTeamBilling
                -Method POST `
                -Url 'https://commerceprodwus21.vscommerce.visualstudio.com/_apis/OfferSubscription/OfferSubscription?api-version=5.1-preview.1' `
                -QueryString $queryString `
-               -body ($body| ConvertTo-Json -Depth 50) `
+               -body ($body| ConvertTo-Json -Depth 50 -Compress) `
                -CustomBearer `
                -AdditionalHeaders @{ Authorization = "Bearer $($billingToken.token)"} | Out-Null
          } catch
