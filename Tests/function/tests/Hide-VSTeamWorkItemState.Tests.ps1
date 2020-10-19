@@ -5,12 +5,13 @@ Describe 'VSTeamWorkItemState' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcess.ps1"
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemType.ps1"
+      . "$PSScriptRoot\..\..\..\Source\Public\Unlock-VSTeamWorkItemType.ps1"
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance   { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
-     
+
       Mock _callAPI       -ParameterFilter { $Url -match 'states' } {
          return [PSCustomObject]@{
                   id                 = '7b7e3e8c-e500-40b6-ad56-d59b8d64d757'
@@ -24,21 +25,24 @@ Describe 'VSTeamWorkItemState' {
                }
       }
       Mock _callAPI       { return $null}
+
+      Mock Unlock-VSTeamWorkItemType {return $WorkItemType }
    }
 
    Context 'Hide-VsteamWorkItemState' {
       BeforeAll {
          #Different version of bug with states set for this test
          $bug = @{
-            name          = 'Bug'
-            customization = 'System'
-            color         = 'CC293D'
-            description   = 'Describes a divergence between required and actual behavior, and tracks the work done to correct the defect and verify the correction.'
-            icon          = 'Icon_Insect'
-            isDisabled    =  $false
-            referenceName = 'Microsoft.VSTS.WorkItemTypes.Bug'
-            url           = 'https://dummy.none/workItemTypes/Microsoft.VSTS.WorkItemTypes.Bug'
-            states        = @( 
+            name            = 'Bug'
+            customization   = 'System'
+            color           = 'CC293D'
+            description     = 'Describes a divergence between required and actual behavior, and tracks the work done to correct the defect and verify the correction.'
+            icon            = 'Icon_Insect'
+            isDisabled      =  $false
+            referenceName   = 'Microsoft.VSTS.WorkItemTypes.Bug'
+            url             = 'https://dummy.none/workItemTypes/Microsoft.VSTS.WorkItemTypes.Bug'
+            ProcessTemplate = 'Scrum2'
+            states          = @(
                [PSCustomObject]@{
                   id                 = '7b7e3e8c-e500-40b6-ad56-d59b8d64d757'
                   name               = 'New'
@@ -94,7 +98,7 @@ Describe 'VSTeamWorkItemState' {
                   customizationType  = 'system'
                }
             )
-         }  
+         }
          Mock Get-VSTeamWorkItemType {return $bug }
          Mock Get-VSTeamProcess { return @(
                [PSCustomObject]@{
@@ -109,32 +113,32 @@ Describe 'VSTeamWorkItemState' {
 
       It 'should warn for states which have already been hidden' {
          ## Act
-         $state = Hide-VsteamWorkItemState -WorkItemType bug -Name Resolved -ProcessTemplate Scrum2 -Force 
+         $state = Hide-VsteamWorkItemState -WorkItemType bug -Name Resolved -ProcessTemplate Scrum2 -Force
 
          ## Assert
          Should -Invoke Get-VSTeamWorkItemType   -ParameterFilter {
-            $Expand       -eq "States" -and 
+            $Expand       -eq "States" -and
             $WorkItemType -eq "Bug"
          }  -Scope It                 -Times 1 -Exactly
          Should -Invoke Write-Warning -Times 1 -Exactly
          Should -invoke _callAPI      -Times 0 -Exactly
-          $State | Should -BeNullOrEmpty
+         $State | Should -BeNullOrEmpty
       }
       It 'should call the REST API with the PUT method and the correct URL to hide a system WorkItem state' {
          ## Act
-         $state = Hide-VsteamWorkItemState -WorkItemType bug -Name New -ProcessTemplate Scrum2 -Force 
-         
+         $state = Hide-VsteamWorkItemState -WorkItemType bug -Name New -ProcessTemplate Scrum2 -Force
+
          ## Assert
 
          Should -Invoke Get-VSTeamWorkItemType -ParameterFilter {
-            $Expand       -eq "States" -and 
+            $Expand       -eq "States" -and
             $WorkItemType -eq "Bug"
          } -Scope It                   -Times 1 -Exactly
          Should -Invoke _callAPI               -ParameterFilter {
-               $method -eq  'PUT' -and 
+               $method -eq  'PUT' -and
                $url -match "WorkItemTypes\.Bug/states/7b7e3e8c-e500-40b6-ad56-d59b8d64d757\?api-version=" -and
                $body -match '"hidden"\s*:\s*true'
-         } -Scope It                    -Times 1 -Exactly 
+         } -Scope It                    -Times 1 -Exactly
          Should -Invoke Write-Warning -Times 0 -Exactly
          $state.Psobject.typenames  | Should -Contain 'vsteam_lib.WorkItemState'
          $state.ProcessTemplate     | should -be      'Scrum2'

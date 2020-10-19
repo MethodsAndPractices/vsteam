@@ -24,7 +24,7 @@ Describe 'VSTeamWorkItemState' {
             isDisabled    =  $false
             referenceName = 'Microsoft.VSTS.WorkItemTypes.Bug'
             url           = 'https://dummy.none/workItemTypes/Microsoft.VSTS.WorkItemTypes.Bug'
-            states        = @( 
+            states        = @(
                [PSCustomObject]@{
                   id                 = '7b7e3e8c-e500-40b6-ad56-d59b8d64d757'
                   name               = 'New'
@@ -42,6 +42,15 @@ Describe 'VSTeamWorkItemState' {
                   order              = 2
                   url                = 'https://dummy.none/workItemTypes/Microsoft.VSTS.WorkItemTypes.Bug/states/02cca570-0896-4a30-aff1-87ccffc68ce0'
                   customizationType  = 'inherited'
+               }
+               [PSCustomObject]@{
+                  id                 = '02cca570-0896-4a30-aff1-87ccffc68ce0'
+                  name               = 'Approved'
+                  color              = 'b2b2b2'
+                  stateCategory      = 'Proposed'
+                  order              = 2
+                  url                = 'https://dummy.none/workItemTypes/Microsoft.VSTS.WorkItemTypes.Bug/states/02cca570-0896-4a30-aff1-87ccffc68ce0'
+                  customizationType  = 'system'
                }
                [PSCustomObject]@{
                   id                 = 'abb54c86-d03a-44fe-8216-309d3c712296'
@@ -80,7 +89,7 @@ Describe 'VSTeamWorkItemState' {
                   customizationType  = 'system'
                }
             )
-         }  
+         }
          Mock Get-VSTeamWorkItemType {return $bug }
          Mock Get-VSTeamProcess { return @(
                [PSCustomObject]@{
@@ -95,30 +104,30 @@ Describe 'VSTeamWorkItemState' {
 
       It 'should warn for states which have not been hidden' {
          ## Act
-         Show-VsteamWorkItemState -WorkItemType bug -Name postponed -ProcessTemplate Scrum2 -Force 
+         Show-VsteamWorkItemState -WorkItemType bug -Name postponed -ProcessTemplate Scrum2 -Force
 
          ## Assert
          Should -Invoke Get-VSTeamWorkItemType   -ParameterFilter {
-            $Expand       -eq "States" -and 
+            $Expand       -eq "States" -and
             $WorkItemType -eq "Bug"
          }  -Scope It                 -Times 1 -Exactly
          Should -Invoke Write-Warning -Times 1 -Exactly
          Should -invoke _callAPI      -Times 0 -Exactly
-       
+
       }
       It 'should call the REST API with the Delete method and the correct URL to stop hiding a system WorkItem state' {
          ## Act
-         Show-VsteamWorkItemState -WorkItemType bug -Name Approved -ProcessTemplate Scrum2 -Force 
-         
+         Show-VsteamWorkItemState -WorkItemType bug -Name Approved -ProcessTemplate Scrum2 -Force
+
          ## Assert
          Should -Invoke Get-VSTeamWorkItemType -ParameterFilter {
-            $Expand       -eq "States" -and 
+            $Expand       -eq "States" -and
             $WorkItemType -eq "Bug"
          } -Scope It                   -Times 1 -Exactly
          Should -Invoke _callAPI               -ParameterFilter {
-               $method -eq  'Delete' -and 
+               $method -eq  'Delete' -and
                $url -match "WorkItemTypes\.Bug/states/02cca570-0896-4a30-aff1-87ccffc68ce0\?api-version="
-         } -Scope It                    -Times 1 -Exactly 
+         } -Scope It                    -Times 1 -Exactly
          Should -Invoke Write-Warning -Times 0 -Exactly
       }
    }

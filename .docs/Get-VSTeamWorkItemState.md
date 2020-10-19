@@ -80,7 +80,7 @@ Parameter Sets: Process
 
 ### WorkItemType
 
-The type of work item to retrieve.
+The WorkItem type whose states should be retrieved.
 
 ```yaml
 Type: String
@@ -89,11 +89,7 @@ Parameter Sets: ByType
 
 ## INPUTS
 
-### System.String
-
 ## OUTPUTS
-
-### System.Object
 
 ## NOTES
 

@@ -77,15 +77,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProcessTemplate
-
-Specifies the process template where the WorkItem Type to be modified is found; by default this will be the template for the current project. Note that although some WorkItem types like "bug" or "task" are found in multiple templates, a change to the available states only applies to one template, and the built-in process templates cannot be modified. Values for this parameter should tab-complete.
-
-
-```yaml
-Type: String
-Parameter Sets: Process
-```
 ### -StateCategory
 
 Each state fits into one of five categories: Proposed, InProgress, Resolved, Completed, or Removed. If no category is given the new state is considered to be a form of "in progress".
@@ -103,28 +94,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WorkItemType
+<!-- #include "./params/forcegroup.md" -->
 
-The name of the WorkItem type whose state list is to be extended. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually.
+<!-- #include "./params/processTemplate.md" -->
 
-
-```yaml
-Type: String
-Parameter Sets: ByType
-```
-<!-- #include "./params/confirm.md" -->
-
-<!-- #include "./params/Force.md" -->
-
-<!-- #include "./params/whatif.md" -->
+<!-- #include "./params/workItemType.md" -->
 
 ## INPUTS
 
-### System.String
-
 ## OUTPUTS
 
-### System.Object
 
 ## NOTES
 

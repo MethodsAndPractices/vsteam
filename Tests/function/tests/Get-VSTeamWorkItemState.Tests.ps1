@@ -16,7 +16,7 @@ Describe 'VSTeamWorkItemState' {
    Context 'Get-VSTeamWorkItemState' {
       BeforeAll {
          ## Arrange
-         Mock Get-VSTeamWorkItemType { Open-SampleFile 'bug.json'   }
+         Mock Get-VSTeamWorkItemType { Open-SampleFile 'bug.json'| add-member -NotePropertyName "ProcessTemplate" -NotePropertyValue "Scrum" -PassThru}
          Mock Get-VSTeamProcess { return @(
               [PSCustomObject]@{
                   Name = "Scrum"
@@ -29,7 +29,7 @@ Describe 'VSTeamWorkItemState' {
 
       It 'should get states and add WorkItem type and ProcessTemplate to them' {
          ## Act
-         $states = Get-VSTeamWorkItemState -WorkItemType bug -ProcessTemplate Scrum  
+         $states = Get-VSTeamWorkItemState -WorkItemType bug -ProcessTemplate Scrum
 
          ## Assert
          Should -Invoke Get-VSTeamWorkItemType -Scope It -ParameterFilter {$Expand -eq 'States'} -Times 1 -Exactly

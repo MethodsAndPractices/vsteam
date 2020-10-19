@@ -54,24 +54,10 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProcessTemplate
+<!-- #include "./params/processTemplate.md" -->
 
-Specifies the process template where the WorkItem Type to be modified is found; by default this will be the template for the current project. Note that although some WorkItem types like "bug" or "task" are found in multiple templates, a change to the available states only applies to one template, and the built-in process templates cannot be modified. Values for this parameter should tab-complete.
+<!-- #include "./params/workItemType.md" -->
 
-```yaml
-Type: String
-Parameter Sets: Process
-```
-
-### -WorkItemType
-
-The name of the WorkItem type whose state list is to be modified. Values for this parameter should tab-complete with types in the current project's process-template; types found only in other templates may need to be entered manually.
-
-
-```yaml
-Type: String
-Parameter Sets: ByType
-```
 <!-- #include "./params/forcegroup.md" -->
 
 ## INPUTS

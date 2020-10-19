@@ -25,24 +25,21 @@ function Add-VSTeamWorkItemState {
       [switch]$Force
    )
    process {
-      #Allow the -workitemType parameter to be a wild card -for each workItem type to be updated...
-      foreach ($result in (Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType $WorkItemType)) {
-         if ($Force -or $PSCmdlet.ShouldProcess("$($result.name) in process template '$ProcessTemplate'", "Add new state '$name' to WorkItem type")) {
-            # if it  is a system one we need to make it an inherited one
 
-            if ($result.customization -eq 'system') {
-               $url = ($result.url -replace '/workItemTypes/.*$', '/workItemTypes?api-version=') + (_getApiVersion Processes)
-               $body = @{
-                  color        = $result.color
-                  description  = $result.description
-                  icon         = $result.icon
-                  inheritsFrom = $result.referenceName
-                  isDisabled   = $result.isDisabled
-                  name         = $result.name
-               }
-               $result = _callAPI -method Post -Url $url -body (ConvertTo-Json $body)
-            }
-            $url = $result.url + '/states?api-version=' + (_getApiVersion Processes)
+      $wit = $null
+      #If $workItemtype contains an object, use it to avoid calling the API again
+      if ($WorkItemType.psobject.TypeNames.Contains('vsteam_lib.WorkItemType')) {
+         $wit = $WorkItemType
+      }
+      if (-not $wit) {$wit = Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType  $WorkItemType}
+      $wit = $wit | Unlock-VSTeamWorkItemType -Force:$Force
+      if (-not $wit) {
+            Write-Warning "There were no suitable WorkItem types to update"; return
+      }
+      foreach ($w in $wit) {
+         if ($Force -or $PSCmdlet.ShouldProcess("$($w.name) in process template '$($w.ProcessTemplate)'", "Add new state '$name' to WorkItem type")) {
+
+            $url = $w.url + '/states?api-version=' + (_getApiVersion Processes)
 
             $body = @{
                'stateCategory' = $StateCategory
@@ -57,8 +54,8 @@ function Add-VSTeamWorkItemState {
             $resp = _callAPI -Url $url -method Post -ContentType "application/json" -body (ConvertTo-Json $body)
 
             $resp.psobject.TypeNames.Insert(0, 'vsteam_lib.WorkItemState')
-            Add-Member -InputObject $resp -MemberType NoteProperty -Name ProcessTemplate -Value $ProcessTemplate
-            Add-Member -InputObject $resp -MemberType NoteProperty -Name WorkItemType    -Value $result.name
+            Add-Member -InputObject $resp -MemberType NoteProperty -Name ProcessTemplate -Value $w.ProcessTemplate
+            Add-Member -InputObject $resp -MemberType NoteProperty -Name WorkItemType    -Value $w.name
 
             Write-Output $resp
          }

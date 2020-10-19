@@ -5,20 +5,22 @@ Describe 'VSTeamWorkItemState' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcess.ps1"
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemType.ps1"
+      . "$PSScriptRoot\..\..\..\Source\Public\Unlock-VSTeamWorkItemType.ps1"
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
       Mock _getInstance   { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
       $bug = @{
-         name          = 'Bug'
-         customization = 'System'
-         color         = 'CC293D'
-         description   = 'Describes a divergence between required and actual behavior, and tracks the work done to correct the defect and verify the correction.'
-         icon          = 'Icon_Insect'
-         isDisabled    =  $false
-         referenceName = 'Microsoft.VSTS.WorkItemTypes.Bug'
-         states        = @( 
+         name            = 'Bug'
+         customization   = 'System'
+         color           = 'CC293D'
+         description     = 'Describes a divergence between required and actual behavior, and tracks the work done to correct the defect and verify the correction.'
+         icon            = 'Icon_Insect'
+         isDisabled      =  $false
+         referenceName   = 'Microsoft.VSTS.WorkItemTypes.Bug'
+         ProcessTemplate = 'Scrum2'
+         states          = @(
             [PSCustomObject]@{
                id                 = '7b7e3e8c-e500-40b6-ad56-d59b8d64d757'
                name               = 'New'
@@ -65,7 +67,7 @@ Describe 'VSTeamWorkItemState' {
                customizationType  = 'system'
             }
          )
-      }  
+      }
       Mock Get-VSTeamProcess { return @(
                [PSCustomObject]@{
                   Name = 'Scrum2'
@@ -74,7 +76,7 @@ Describe 'VSTeamWorkItemState' {
             )
          }
       Mock Get-VSTeamWorkItemType {return $bug }
-      Mock _callAPI       -ParameterFilter {$body -match    'inheritsFrom' } {return $bug }
+
       Mock _callAPI       -ParameterFilter { $Url -match    'states' } {
          return [PSCustomObject]@{
                   id                 = '00000'
@@ -87,6 +89,9 @@ Describe 'VSTeamWorkItemState' {
                }
       }
       Mock _callAPI       -ParameterFilter { $Url -NotMatch 'states' -and $body -notmatch  'inheritsFrom' } {return $null}
+
+      # replaced by unlock Mock _callAPI       -ParameterFilter {$body -match    'inheritsFrom' } {return $bug }
+      Mock Unlock-VSTeamWorkItemType {return $WorkItemType }
       [vsteam_lib.ProcessTemplateCache]::Invalidate()
    }
 
@@ -95,21 +100,16 @@ Describe 'VSTeamWorkItemState' {
 
       It 'should call the REST API to add a state, updating system types as needed' {
          ## Act
-         $state =  Add-VsteamWorkItemState -WorkItemType bug -Color Blue -Name postponed -ProcessTemplate Scrum2 -order 4 -Force 
+         $state =  Add-VsteamWorkItemState -WorkItemType bug -Color Blue -Name postponed -ProcessTemplate Scrum2 -order 4 -Force
 
          ## Assert
          Should -Invoke _callAPI -Scope It  -Times 1 -Exactly -ParameterFilter {
                $Body -match  '"stateCategory"\s*:\s*"InProgress"' -and
                $Body -match  '"name"\s*:\s*"postponed"'           -and
-               $Body -match  '"color"\s*:\s*"0+ff"'               -and 
+               $Body -match  '"color"\s*:\s*"0+ff"'               -and
                $Body -match  '"order"\s*:\s*4'
          }
-         Should -Invoke _callAPI -Scope It  -Times 1 -Exactly -ParameterFilter {
-               $Body -match  '"icon"\s*:\s*"Icon_Insect"'   -and
-               $Body -match  '"name"\s*:\s*"Bug"'           -and
-               $Body -match  '"color"\s*:\s*"CC293D"'       -and 
-               $Body -match  '"inheritsFrom"\s*:\s*"Microsoft.VSTS.WorkItemTypes.Bug"' #>
-         }
+
          $state.psobject.Typenames | Should -Contain 'vsteam_lib.WorkItemState'
          $state.ProcessTemplate    | Should -Be      'Scrum2'
          $state.WorkItemType       | Should -Be      'Bug'
