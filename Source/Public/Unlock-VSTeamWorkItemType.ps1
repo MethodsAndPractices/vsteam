@@ -25,9 +25,18 @@ function Unlock-VSTeamWorkItemType {
             name         = $WorkItemType.name
          }
          if ($force -or $PSCmdlet.ShouldProcess($WorkItemType.name,"Update WorkItemType")) {
-            $null = _callAPI -Url $url -method Post -body (ConvertTo-Json $body)
+            $resp = _callAPI -Url $url -method Post -body (ConvertTo-Json $body)
             if ($expand) {Get-VSTeamWorkItemType -ProcessTemplate $WorkItemType.ProcessTemplate -WorkItemType $WorkItemType.name -Expand $Expand}
-            else         {Get-VSTeamWorkItemType -ProcessTemplate $WorkItemType.ProcessTemplate -WorkItemType $WorkItemType.name }
+            else         {
+               # Apply a Type Name so we can use custom format view and/or custom type extensions
+               #  add members to help piping into other functions
+               _applyTypesWorkItemType -item $resp
+               Add-Member -InputObject $resp -MemberType AliasProperty -Name "WorkItemType"    -Value "name"
+               if ($WorkItemType.psobject.properties["ProcessTemplate"]) {
+                  Add-Member -InputObject $resp -MemberType NoteProperty  -Name "ProcessTemplate" -Value $WorkItemType.ProcessTemplate
+               }
+               return $resp
+            }
          }
       }
    }
