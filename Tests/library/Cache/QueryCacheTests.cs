@@ -45,6 +45,7 @@ namespace vsteam_lib.Test
          var expected = 2;
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke().Returns(this._queries);
+         ps.Invoke<string>(this._queries).Returns(this._queryNames);
          ps.Invoke<string>().Returns(this._defaultProject, this._queryNames);
          QueryCache.Cache.Shell = ps;
 
@@ -62,6 +63,8 @@ namespace vsteam_lib.Test
          var expected = 2;
          var ps = BaseTests.PrepPowerShell();
          ps.Invoke().Returns(this._queries);
+         ps.Invoke<string>(this._queries).Returns(this._queryNames);
+
          ps.Invoke<string>().Returns(this._defaultProject, this._queryNames);
          QueryCache.Invalidate();
          QueryCache.Cache.Shell = ps;

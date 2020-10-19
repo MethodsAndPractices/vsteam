@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 Describe 'RemoveVSTeamWorkItemType' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcess.ps1" 
+      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcess.ps1"
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemType.ps1"
 
       $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
@@ -23,7 +23,7 @@ Describe 'RemoveVSTeamWorkItemType' {
             [PSCustomObject]@{Name = "Scrum With Space"; url = 'http://bogus.none/5'; ID = "12345678-0000-0000-0000-000000000000" }
          )
          if ($name) { return $processes.where( { $_.name -like $name }) }
-         else { return $processes }  
+         else { return $processes }
       }
       Mock _callApi -ParameterFilter {$Method -eq 'Delete'} {
             return $null
@@ -36,7 +36,7 @@ Describe 'RemoveVSTeamWorkItemType' {
                                     icon          = 'icon_insect'
                                     color         = 'cc293d'
                                     isDisabled    =  $false
-                                    description   = 'A divergence...' 
+                                    description   = 'A divergence...'
                                     url           = 'http://bogus.none/98'
                   }
                   [psCustomObject]@{name          = 'Gub'
@@ -44,13 +44,13 @@ Describe 'RemoveVSTeamWorkItemType' {
                                     icon          = 'icon_book'
                                     color         = 'ff0000'
                                     isDisabled    =  $false
-                                    description   = 'Test Item' 
+                                    description   = 'Test Item'
                                     url           = 'http://bogus.none/99';
                   }
                )
          if ($WorkItemType) { return $wits.where( { $_.name -like $WorkItemType }) }
-         else               { return $wits }  
-      } 
+         else               { return $wits }
+      }
       [vsteam_lib.IconCache]::Invalidate()
       [vsteam_lib.ProcessTemplateCache]::Invalidate()
    }
@@ -59,9 +59,9 @@ Describe 'RemoveVSTeamWorkItemType' {
 
       It 'Catches invalid WorkItem type names.' {
          Remove-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType NewWit -WarningVariable "Warn" -warningAction SilentlyContinue
-         # Should not call the rest API from the function body, but may populate the work-item icons cache 
-         Should -Invoke _callApi -Exactly -Times 0 -Scope It {-not ($resource -eq "workitemicons")} 
-         $warn | Should -Be "'NewWit' does not appear to be a valid Workitem type."
+         # Should not call the rest API from the function body, but may populate the work-item icons cache
+         Should -Invoke _callApi -Exactly -Times 0 -Scope It {-not ($resource -eq "workitemicons")}
+         $warn | Should -Match "'NewWit'.*Workitem type."
       }
       It 'Deletes custom WorkItem types.' {
          Remove-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType Gub -Force
@@ -71,7 +71,10 @@ Describe 'RemoveVSTeamWorkItemType' {
          }
       }
        It 'Rejects deletion for system WorkItem Types' {
-         {Remove-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType Bug } | should -Throw
+         Remove-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType Bug -WarningVariable "Warn" -warningAction SilentlyContinue
+         Should -Invoke _callApi -Exactly -Times 0  -Scope It {-not ($resource -eq "workitemicons")}
+         $warn | Should -Match "'Bug'.*Workitem type."
+
       }
    }
 }
