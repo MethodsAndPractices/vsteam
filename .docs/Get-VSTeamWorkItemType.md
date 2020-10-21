@@ -106,11 +106,9 @@ The JSON returned has empty named items i.e.
 "": "To Do"
 This causes issues with the ConvertFrom-Json CmdLet.  Therefore, all "": are replaced with "_end":
 
-<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
 [Add-VSTeamWorkItemType](Add-VSTeamWorkItemType.md)
 
 [Set-VSTeamWorkItemType](Set-VSTeamWorkItemType.md)

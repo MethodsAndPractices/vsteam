@@ -24,6 +24,10 @@ Modifies the custom process "Scrum5", creating a user-defined work item type "Ch
 
 ## PARAMETERS
 
+<!-- #include "./params/forcegroup.md" -->
+
+<!-- #include "./params/processTemplate.md" -->
+
 ### -Color
 
 Sets the the icon color. The input value can be the name of a color name like "Red" or "Aqua" or a hex value for red, green and blue parts. Color names should tab complete.
@@ -35,22 +39,6 @@ Aliases:
 
 Required: False
 Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-
-Prompts you for confirmation before running the cmdlet. (By default new types are added without confirmation)
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -89,42 +77,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProcessTemplate
-
-The process template to modify. Note that the built-in templates ("Scrum", "Agile" etc.) cannot be modified, only custom templates (derived from the built-in ones) can be changed.
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WorkItemType
 
-The name for the new work item type.
+The name for the new work item type. (Alias "Name")
 
 ```yaml
 Type: String
@@ -140,19 +95,12 @@ Accept wildcard characters: False
 
 ## INPUTS
 
-### System.String
-
 ## OUTPUTS
-
-### System.Object
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
 [Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)
 
 [Set-VSTeamWorkItemType](Set-VSTeamWorkItemType.md)

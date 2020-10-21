@@ -6,7 +6,7 @@ function Remove-VSTeamWorkItemType {
       [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
       $ProcessTemplate,
 
-      [parameter(Mandatory = $true,ValueFromPipelineByPropertyName=$true)]
+      [parameter(Mandatory = $true,ValueFromPipelineByPropertyName=$true,Position=0)]
       [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]
       [Alias('Name')]
       $WorkItemType,
