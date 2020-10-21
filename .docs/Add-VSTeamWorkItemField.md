@@ -9,7 +9,7 @@
 ## SYNTAX
 
 ## DESCRIPTION
-Every WorkItem has multiple data-fields. The definition of a Workitem type includes that type's fields, which are selected from a set of Fields shared across all Process Templates in the Organization. This command adds one of these Fields to the definition of a WorkItem type. Note that the WorkItem types in the built-in Process Templates cannot be modified, and changing the defintion of a WorkItem type in one Processs Template does not affect copies of the WorkItem type in other templates.
+Every WorkItem has multiple data-fields, and Fields are part of the definition of a Workitem type. They are selected from a set of Fields shared across all Process Templates in the Organization. This command is used Fields to definitions of WorkItem typse. Note that the WorkItem types in the built-in Process Templates cannot be modified, and changing the defintion of a WorkItem type in one Processs Template does not affect copies of the WorkItem type in other templates.
 
 ## EXAMPLES
 
@@ -64,6 +64,10 @@ Accept wildcard characters: False
 
 <!-- #include "./params/forcegroup.md" -->
 
+<!-- #include "./params/processTemplate.md" -->
+
+<!-- #include "./params/workItemType.md" -->
+
 ### -DefaultValue
 Sets a default value for the field.
 
@@ -76,21 +80,6 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProcessTemplate
-Specifies the Process Template holding the WorkItem type to be extended. Note that the built-in Templates do not allow their WorkItem types to be modified so this must be a custom Template. If no Template is specified, the Process of the current Project is used as a default.
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -137,21 +126,6 @@ Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
-```
-
-### -WorkItemType
-The WorkItem type(s) to which the Field should be added. These may be custom Types, or system-defined Types inherited by a custom Process Template.
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: True
 ```
 
 ## INPUTS
