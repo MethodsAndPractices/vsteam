@@ -49,7 +49,7 @@ Describe 'VSTeamWorkItemType' {
                                     color         = 'cc293d'
                                     isDisabled    =  $false
                                     description   = 'A divergence...'
-                                    url           = 'http://bogus.none/98'
+                                    url           = 'http://bogus.none/workitemTypes/98'
                   }
                   [psCustomObject]@{name          = 'Gub'
                                     customization = 'custom'
@@ -57,7 +57,7 @@ Describe 'VSTeamWorkItemType' {
                                     color         = 'ff0000'
                                     isDisabled    =  $false
                                     description   = 'Test Item'
-                                    url           = 'http://bogus.none/99';
+                                    url           = 'http://bogus.none/workitemTypes/99';
                   }
                )
          if ($WorkItemType) { return $wits.where( { $_.name -like $WorkItemType }) }
@@ -89,7 +89,7 @@ Describe 'VSTeamWorkItemType' {
        It 'Posts changes for system WorkItem Types' {
          Set-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType Bug -Disabled -Force
          Should -Invoke _callApi -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Url    -like     '*98?api-version=*'           -and  #found expected item
+            $Url    -like     '*workitemTypes?api-version=*'           -and  #found expected item
             $Body   -match    '"isDisabled":\s+true'        -and
             $Body   -match    '"inheritsFrom":\s+"Microsoft.VSTS.WorkItemTypes.Bug"' -and
             $Method -eq       'Post'

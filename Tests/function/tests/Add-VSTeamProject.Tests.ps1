@@ -17,8 +17,7 @@ Describe 'VSTeamProject' {
       Mock _callApi { Open-SampleFile 'Get-VSTeamProcess.json' } -ParameterFilter { $area -eq 'work' -and $resource -eq 'processes' }
 
       # Get-VSTeamProject for cache
-      Mock Invoke-RestMethod { return @() } -ParameterFilter {
-         $Uri -like "*`$top=100*" -and
+      Mock Invoke-RestMethod { return [pscustomobject]@{value=@()} } -ParameterFilter {
          $Uri -like "*stateFilter=WellFormed*"
       }
    }

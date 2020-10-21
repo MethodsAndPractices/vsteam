@@ -13,7 +13,7 @@ function Get-VSTeamWorkItemType {
       [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
       $ProcessTemplate = $env:TEAM_PROCESS,
 
-      [Parameter(Position=0)]
+      [Parameter(Position=0, ValueFromPipelineByPropertyName = $true)]
       [ArgumentCompleter([vsteam_lib.WorkItemTypeCompleter])]
       [string[]] $WorkItemType = '*',
 
@@ -26,12 +26,12 @@ function Get-VSTeamWorkItemType {
    )
 
    process {
-      <# Call the REST API in one of 2 ways; 
-        if processTemplate  was passed as a parameter (not populated as a default), 
+      <# Call the REST API in one of 2 ways;
+        if processTemplate  was passed as a parameter (not populated as a default),
         then call as work/processes/workitemtypes (this API doesn't take a workitem ID & returns multiple values)
         otherwise call as wit/workitemtypes  (JSON needs special conversion & contains mutliple  values)
         DON'T validate the $workitemType and call with wit/workitemtypes/WorkItemTypeName -
-        instead allow wildcards and filter down the results. The workitem(s) will be in $resp after the IF / ELSE 
+        instead allow wildcards and filter down the results. The workitem(s) will be in $resp after the IF / ELSE
       #>
       $commonArgs = @{
          ProjectName = $ProjectName
@@ -46,7 +46,7 @@ function Get-VSTeamWorkItemType {
          # To replace all the "": with "_end":
          $resp = $resp.Replace('"":', '"_end":') | ConvertFrom-Json | Select-Object -ExpandProperty Value
 
-         #Find Workitem-Types that are hidden in this project 
+         #Find Workitem-Types that are hidden in this project
          #(they may be visible in others using the same process template)
          $commonArgs.Resource = 'workitemtypecategories'
          $resp2  = _callAPI @commonArgs
@@ -62,20 +62,20 @@ function Get-VSTeamWorkItemType {
          }
          if ($ProjectName -eq $env:TEAM_PROJECT -and $env:TEAM_PROCESS) {$ProcessTemplate = $env:TEAM_PROCESS}
       }
-      else {  
+      else {
          $url = _getProcessTemplateUrl $ProcessTemplate
          if (-not $url) {Write-Warning "Could not find the Process for '$ProcessTemplate" ; return}
          else           { $url += "/workitemtypes?api-version=" + (_getApiVersion Processes)}
-         
+
          if ($Expand) { $resp = _callAPI -Url $url -QueryString @{'$expand' = ($Expand -Join ',').ToLower() }    }
          else         { $resp = _callapi -Url $url }
 
-         $resp = $resp.value 
+         $resp = $resp.value
       }
 
       <# Apply a Type Name so we can use custom format view and custom type extensions
          add an alias so that workitemType can become a parameter when the object is piped into other functions
-         and the processTemplate name (if there is one) for the same reason. 
+         and the processTemplate name (if there is one) for the same reason.
          And finally return the items, filtered to any name we given
       #>
       foreach ($item in $resp) {
