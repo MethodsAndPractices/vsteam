@@ -34,7 +34,6 @@ Modifies the custom process "Scrum5", changing a user-defined work item type "Ch
 a blue parachute icon and update its description..
 ## PARAMETERS
 
-
 ### -Confirm
 
 Prompts you for confirmation before running the cmdlet. Normally the command will prompt for confirmation and -Confirm is only needed if \$ConfirmPreference has been changed.
@@ -51,40 +50,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-<!-- #include "./params/force.md" -->
+<!-- #include "./params/Force.md" -->
 
-### -ProcessTemplate
+<!-- #include "./params/whatif.md" -->
 
-The process template to modify. Note that the built-in templates ("Scrum", "Agile" etc.) cannot be modified, only custom templates (derived from the built-in ones) can be changed.
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+<!-- #include "./params/processTemplate.md" -->
 
 ### -WorkItemType
 
@@ -106,19 +76,12 @@ Accept wildcard characters: False
 
 ## INPUTS
 
-### System.String
-
 ## OUTPUTS
-
-### System.Object
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
 [Add-VSTeamWorkItemType](Add-VSTeamWorkItemType.md)
 
 [Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)

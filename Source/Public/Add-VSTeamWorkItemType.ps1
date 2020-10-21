@@ -1,11 +1,12 @@
 function Add-VSTeamWorkItemType {
    [cmdletbinding(SupportsShouldProcess=$true)]
    param(
+      [Parameter(Position=0, ValueFromPipelineByPropertyName = $true)]
       [vsteam_lib.ProcessTemplateValidateAttribute()]
       [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
       $ProcessTemplate = $env:TEAM_PROCESS,
 
-      [parameter(Mandatory = $true)]
+      [parameter(Mandatory = $true,Position=1)]
       [Alias('Name')]
       [string] $WorkItemType,
 

@@ -19,7 +19,7 @@ If it is a (locked) system type, creates a inherted type based on it, and return
 
 If specified, the WorkItem type information returned after unlocking will have behavior, layout and/or state information attached, depending on the value of the parameter.
 If not specified the WorkItemType returned after unlocking will be simply be the result of the API call to create an inherited item.
-Has no effect if the item is already unlocked
+Has no effect if the item is already unlocked.
 
 ```yaml
 Type: String[]
@@ -45,7 +45,6 @@ Accept pipeline input: True
 Accept wildcard characters: False
 ```
 
-
 ## INPUTS
 
 ### System.String
@@ -56,11 +55,8 @@ Accept wildcard characters: False
 
 ## NOTES
 
-<!-- #include "./common/prerequisites.md" -->
-
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
 [Add-VSTeamWorkItemType](Add-VSTeamWorkItemType.md)
 
 [Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)

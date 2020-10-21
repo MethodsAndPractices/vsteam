@@ -66,10 +66,17 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+<!-- #include "./params/Force.md" -->
+
+<!-- #include "./params/whatif.md" -->
+
+<!-- #include "./params/processTemplate.md" -->
+
+<!-- #include "./params/workItemType.md" -->
 
 ### -Description
 
-Long text description of the the work item type.
+Long text description of the WorkItem type.
 
 ```yaml
 Type: String
@@ -85,7 +92,7 @@ Accept wildcard characters: False
 
 ### -Disabled
 
-If specified, disables the work item so that it can not be selected for new items.
+If specified, disables the WorkItem type so that it can not be selected for new items.
 
 ```yaml
 Type: SwitchParameter
@@ -101,7 +108,7 @@ Accept wildcard characters: False
 
 ### -Enabled
 
-If specified, enables a work item which was previously disabled.
+If specified, enables a WorkItem type which was previously disabled.
 
 ```yaml
 Type: SwitchParameter
@@ -114,8 +121,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-<!-- #include "./params/force.md" -->
 
 ### -Icon
 
@@ -134,70 +139,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProcessTemplate
-
-The process template to modify. Note that the built-in templates ("Scrum", "Agile" etc.) cannot be modified, only custom templates (derived from the built-in ones) can be changed.
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WorkItemType
-
-The name of the work item type to be modified.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: Name
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ## INPUTS
-
-### System.String
 
 ## OUTPUTS
 
-### System.Object
-
 ## NOTES
-
-<!-- #include "./common/prerequisites.md" -->
 
 ## RELATED LINKS
 
-<!-- #include "./common/related.md" -->
 [Add-VSTeamWorkItemType](Add-VSTeamWorkItemType.md)
 
 [Get-VSTeamWorkItemType](Get-VSTeamWorkItemType.md)
