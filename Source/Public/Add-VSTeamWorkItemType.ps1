@@ -33,16 +33,24 @@ function Add-VSTeamWorkItemType {
       if ($Description)  {$body['description'] =$Description }
 
       if ($PSCmdlet.ShouldProcess($ProcessTemplate, "Add workitem '$WorkItemType' to process template"))  {
-         $resp = _callapi -Url $url -method  Post -body (ConvertTo-Json $body) -ErrorAction Stop
-         if ($resp) {
-            if ($ProcessTemplate -eq $env:TEAM_PROCESS) {[vsteam_lib.WorkItemTypeCache]::Invalidate()}
-
-            $resp.PSObject.TypeNames.Insert(0, 'vsteam_lib.WorkItemType')
-            Add-Member -InputObject $resp -MemberType AliasProperty -Name WorkItemType    -Value "name"
-            Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
-
-            return $resp
+         # Call the Rest API. _callAPi displays errors for the user and throws,
+         # if this happens half way through adding to mulitple process templates
+         # don't stop with some done and some not.
+         try {
+            $resp = _callapi -Url $url -method  Post -body (ConvertTo-Json $body) -ErrorAction Stop
          }
+         catch {
+            Write-Warning "An error occured trying to add a workitem type to Process template '$ProcessTemplate'"
+            return
+         }
+         if ($ProcessTemplate -eq $env:TEAM_PROCESS) {[vsteam_lib.WorkItemTypeCache]::Invalidate()}
+
+         $resp.PSObject.TypeNames.Insert(0, 'vsteam_lib.WorkItemType')
+         Add-Member -InputObject $resp -MemberType AliasProperty -Name WorkItemType    -Value "name"
+         Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
+
+         return $resp
+
       }
    }
 }
