@@ -55,6 +55,7 @@ Describe 'VSTeamWorkItemField' {
       }
       [vsteam_lib.FieldCache]::Invalidate()
       Mock _callApi { return ([pscustomobject]@{name='Bug';url = 'http://bogus.none/workItemTypes/98'})}
+
    }
 
    Context 'Get-VSTeamWorkItemField' {

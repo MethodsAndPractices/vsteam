@@ -52,6 +52,23 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+
+### -ReferenceName
+The reference name of a field. The command will attempt to resolve a partial name like "ClosedDate" to its full reference name, like "Microsoft.VSTS.Common.ClosedDate". It will also search for wildcards in the field's Name and ReferenceName
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases: Name, FieldName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+
 ### -WorkItemType
 The name(s) of the WorkItem type(s) of interest (wildcards are allowed.)
 

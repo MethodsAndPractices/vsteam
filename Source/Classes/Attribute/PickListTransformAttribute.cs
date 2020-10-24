@@ -1,13 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace vsteam_lib
 {
    public class PickListTransformAttribute : ArgumentTransformationAttribute {
       [ExcludeFromCodeCoverage]
       public override object Transform(EngineIntrinsics engineIntrinsics, object InputData) {
-          if ((InputData is string) )
+         if ((InputData is string) )
          {
             string s = (InputData as string);
             if (!(string.IsNullOrEmpty(s)) && (s != "*"))
@@ -22,8 +23,18 @@ namespace vsteam_lib
                   return s;
                }
             }
-          }  
-          return InputData;
+          }
+         else if (InputData is object[])
+         {
+            ArrayList transformed = new ArrayList();
+            IEnumerable enumerable = InputData as IEnumerable;
+            foreach (var item in enumerable)
+            {
+                transformed.Add( Transform(engineIntrinsics,item) );
+            }
+            return transformed;
+         }
+         return InputData;
       }
    }
 }

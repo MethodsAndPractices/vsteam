@@ -9,7 +9,7 @@
 ## SYNTAX
 
 ## DESCRIPTION
-Every WorkItem has multiple data-fields, and Fields are part of the definition of a Workitem type. They are selected from a set of Fields shared across all Process Templates in the Organization. This command is used Fields to definitions of WorkItem typse. Note that the WorkItem types in the built-in Process Templates cannot be modified, and changing the defintion of a WorkItem type in one Processs Template does not affect copies of the WorkItem type in other templates.
+Every WorkItem has multiple data-fields, and Fields are part of the definition of a Workitem type. They are selected from a set of Fields shared across all Process Templates in the Organization. This command is used to add Fields to definitions of WorkItem types. Note that the WorkItem types in the built-in Process Templates cannot be modified. Adding a field to a system WorkItem-type in a custom Template changes it to an inherited one, and a change only applies to a single Processs Template without affecting copies of the WorkItem type in other templates.
 
 ## EXAMPLES
 
@@ -22,9 +22,9 @@ Are you sure you want to perform this action?
 Performing the operation "Add field 'Custom.Office' to WorkItem type" on target "Change".
 [Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"): y
 
-Name   Reference Name Required Type   customization
-----   -------------- -------- ----   -------------
-Office Custom.Office             string custom
+WorkItemType Name   Reference Name Required Type   customization
+------------ ----   -------------- -------- ----   -------------
+Change       Office Custom.Office           string custom
 
 ```
 
@@ -35,15 +35,15 @@ In this example, a custom field named "Office" has been created, and is added to
 ```powershell
 Get-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType Test* | Add-VsteamWorkItemField -ReferenceName Custom.Office -DefaultValue London -Required -force
 
-Name   Reference Name Required Type   customization
-----   -------------- -------- ----   -------------
-Office Custom.Office  True     string inherited
-Office Custom.Office  True     string inherited
-Office Custom.Office  True     string inherited
+WorkItemType Name   Reference Name Required Type   customization
+------------ ----   -------------- -------- ----   -------------
+Test Vae     Office Custom.Office  True     string inherited
+Test Plam    Office Custom.Office  True     string inherited
+Test Suite   Office Custom.Office  True     string inherited
 
 ```
 
-Here the first command in the pipeline gets the WorkItem types "Test Case", "Test Plan" and "Test Suite" and passes them to Add-VsteamWorkItemField. This time the command uses the full reference name "Custom.Office" sets a default value and marks the field as a required value. To avoid the confirmation prompt, -Force is used.
+Here the first command in the pipeline gets the WorkItem types "Test Case", "Test Plan" and "Test Suite" and passes them to Add-VsteamWorkItemField. This time the command uses the full reference name "Custom.Office", sets a default value and marks the field as a required value. To avoid the confirmation prompt, -Force is used.
 
 ## PARAMETERS
 

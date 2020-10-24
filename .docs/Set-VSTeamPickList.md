@@ -73,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -PicklistID
-The name or guid of the picklist. Name can be used as an alias for "PicklistID"
+The name or guid of the picklist. "Name" or "ID" can be used as an alias for "PicklistID"
 
 ```yaml
 Type: Object
@@ -129,3 +129,5 @@ Accept wildcard characters: False
 [Add-VSTeamPickList](Add-VSTeamPickList.md)
 
 [Get-VSTeamPickList](Get-VSTeamPickList.md)
+
+[Remove-VSTeamPickList](Remove-VSTeamPickList.md)

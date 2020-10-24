@@ -2,14 +2,13 @@ function Get-VSTeamPickList{
    [CmdletBinding()]
    param (
       [ArgumentCompleter([vsteam_lib.PicklistCompleter])]
+      [vsteam_lib.PickListTransformAttribute()]
       [Parameter(ValueFromPipeline=$true, position=0)]
       [Alias('Name','ID')]
       $PicklistID = "*"
    )
    begin   {
       $resp = @()
-      #we can't use the transformer if we get an array of names so use it the body
-      $transformer = New-Object -TypeName vsteam_lib.PickListTransformAttribute
    }
    process {
       foreach ($p in $PicklistID) {
@@ -19,16 +18,15 @@ function Get-VSTeamPickList{
          }
          if ($p -notmatch "\?|\*") {
             try {
-               $p =  $transformer.Transform($null,$P)
                $resp += _callAPI -NoProject -area "work" -resource 'processes/lists' -id $P
             }
             catch {
-               Write-Warning "$p is not a valid picklist name."
+               Write-error -Activity Get-VSTeamPickList -Category InvalidResult -Message "failure deleting picklist with ID $p."
             }
          }
         else {
             $resp += (_callAPI -NoProject -area "work" -resource 'processes/lists').value |
-                        Where-Object Name -like $p
+                  Where-Object Name -like $p
          }
       }
    }

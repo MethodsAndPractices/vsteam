@@ -102,4 +102,6 @@ Accept wildcard characters: False
 
 [Set-VSTeamPickList](Set-VSTeamPickList.md)
 
+[Remove-VSTeamPickList](Remove-VSTeamPickList.md)
+
 [Add-VSTeamField](Add-VSTeamField.md)

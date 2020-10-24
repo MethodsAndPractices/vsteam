@@ -60,7 +60,7 @@ Describe 'VSTeamWorkItemField' {
 
          ## Assert
          Should -Invoke _callApi -Exactly -Scope It -Times 1 -ParameterFilter {
-            $url -match '^http://bogus.none/98/fields\?api-version'
+            $url -match '^http://bogus.none/98/fields\?\$expand=1&api-version'
          }
          $wif.count | should -BeGreaterThan 1
          $wif[0].psobject.TypeNames| should -contain 'vsteam_lib.WorkitemField'

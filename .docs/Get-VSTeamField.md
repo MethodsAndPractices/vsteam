@@ -20,12 +20,39 @@ Get-VSTeamField
 
 Returns a complete list of Fields defined for the Organization.
 
-### Example 1
+### Example 2
 ```powershell
-Get-VSTeamField -Name tags
+Get-VSTeamField -Name priority
+
+Name     Reference Name                 Usage    Type    IsPicklist Read Only Description
+----     --------------                 -----    ----    ---------- --------- -----------
+Priority Microsoft.VSTS.Common.Priority workItem integer False      False     Business importance. 1=must fix; 4=unimportant.
 ```
 
-Returns the System.Tags Field. Note the commands which work with Fields will resolve short names like Tags, to their reference names (System.Tags in this case) but do not support wildcards (System.Ta* will result in an error).
+Returns the a single matching field. Note the commands which work with Fields will transform short names without wildcards like 'priority', to a matching reference name (Microsoft.VSTS.Common.Priority in this case), but this is not a wildcard search. (See the next example. )
+
+### Example 3
+```powershell
+Get-VSTeamField *priority
+
+Name             Reference Name                        Usage    Type    IsPicklist Read Only Description
+----             --------------                        -----    ----    ---------- --------- -----------
+Backlog Priority Microsoft.VSTS.Common.BacklogPriority workItem double  False      False
+Priority         Microsoft.VSTS.Common.Priority        workItem integer False      False     Business importance. 1=must fix; 4=unimportant.
+```
+
+Returns all fields where either the name or the Reference name end with priority. 
+ 
+### Example 3
+```powershell
+Get-VSTeamField  priority,Backlog*
+
+Name             Reference Name                        Usage    Type    IsPicklist Read Only Description
+----             --------------                        -----    ----    ---------- --------- -----------
+Priority         Microsoft.VSTS.Common.Priority        workItem integer False      False     Business importance. 1=must fix; 4=unimportant.
+Backlog Priority Microsoft.VSTS.Common.BacklogPriority workItem double  False      False
+```
+This time two search terms are used, one transforms to the priority field, and the other is a wildcard search for anything starting with backlog, which matches on the Name "Backlog Priority". 
 
 ## PARAMETERS
 
@@ -41,7 +68,7 @@ Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
+Accept wildcard characters: true
 ```
 
 ## INPUTS

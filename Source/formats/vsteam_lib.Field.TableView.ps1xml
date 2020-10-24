@@ -22,6 +22,9 @@
                   <Label>Type</Label>
                </TableColumnHeader>
                <TableColumnHeader>
+                  <Label>IsPicklist</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
                   <Label>Read Only</Label>
                </TableColumnHeader>
                <TableColumnHeader>
@@ -43,6 +46,9 @@
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>type</PropertyName>
+                     </TableColumnItem>
+                     <TableColumnItem>
+                        <PropertyName>isPicklist</PropertyName>
                      </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>readOnly</PropertyName>

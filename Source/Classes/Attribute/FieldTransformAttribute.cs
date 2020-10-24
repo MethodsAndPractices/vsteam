@@ -10,7 +10,7 @@ namespace vsteam_lib
          if (InputData is string)
          {
             string s = (InputData as string);
-            if (! string.IsNullOrEmpty(s))
+            if (! string.IsNullOrEmpty(s) && ! s.Contains("*") && ! s.Contains("?") )
             {
                s = FieldCache.GetRefName(s);
                var fieldList = FieldCache.GetCurrent(false);

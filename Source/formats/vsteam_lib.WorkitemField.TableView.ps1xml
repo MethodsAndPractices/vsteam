@@ -10,6 +10,9 @@
             <AutoSize />
             <TableHeaders>
                <TableColumnHeader>
+                  <Label>WorkItemType</Label>
+               </TableColumnHeader>
+               <TableColumnHeader>
                   <Label>Name</Label>
                </TableColumnHeader>
                <TableColumnHeader>
@@ -29,6 +32,9 @@
                <TableRowEntry>
                   <Wrap />
                   <TableColumnItems>
+                     <TableColumnItem>
+                        <PropertyName>WorkItemType</PropertyName>
+                     </TableColumnItem>
                      <TableColumnItem>
                         <PropertyName>Name</PropertyName>
                      </TableColumnItem>

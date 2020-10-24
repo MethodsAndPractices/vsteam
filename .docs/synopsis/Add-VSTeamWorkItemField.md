@@ -1,1 +1,1 @@
-Adds a new organization-wide field for use in definitions of WorkItem types.
+Adds organization-wide data fields to the definitions of WorkItem types.

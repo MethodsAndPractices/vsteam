@@ -66,12 +66,14 @@ function Add-VSTeamField {
             resource    = 'fields'
             version     = _getApiVersion Processes
             body        = ConvertTo-Json $body
-            ContentType = 'application/json'
       }
       if ($Force -or $PSCmdlet.ShouldProcess($Name,'Add field') ) {
          #call the REST API
          $resp = _callAPI @apiParams
+
          $resp.psobject.TypeNames.Insert(0,'vsteam_lib.Field')
+         [vsteam_lib.FieldCache]::Invalidate()
+
          return $resp
       }
    }
