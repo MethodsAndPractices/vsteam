@@ -18,13 +18,30 @@ Add-VSTeamProcess will add a new Process template to your organization. Processe
 
 ```powershell
 Add-VSTeamProcess -ParentProcess Basic -ProcessName "Basic J" -Description "New Basic Process"
-
+Confirm
+Are you sure you want to perform this action?
+Performing the operation "Create New Process" on target "Basic J".
+[Y] Yes [A] Yes to All [N] No [L] No to All [S] Suspend [?] Help (default is "Yes"):y
 Name    Enabled Default Description
 ----    ------- ------- -----------
 Basic J True    False  New Basic Process
 ```
+Creates a new Process template derived from the built-in Process named "Basic", and sets its description. The -Force switch was not specified, so the command prompts for confirmation
 
-Creates a new Process template derived from the built-in Process named "Basic".
+### Example 2
+
+```powershell
+$s = Get-VSTeamProcess Scrum
+'Scrum4', 'Scrum5' | Add-VSTeamProcess -Parent $s -Force -OutVariable Processes 
+
+
+Name   Enabled Default Description
+----   ------- ------- -----------
+Scrum4 True    False
+Scrum5 True    False   
+```
+Here the parent template is an object representing an existing process, and multiple names for different variations of the "Scrum" template are created. Note that in addition to being output, the proceses are stored in a variable, $Processes, for later use by using the OutVariable common parameter. 
+
 
 ## PARAMETERS
 
@@ -51,17 +68,18 @@ Required: True
 ```
 ### -ProcessName
 
-The display-name for the new Process.
+The display-name for the new Process(es).
 
 ```yaml
-Type: String
+Type: String[]
 Aliases: Name
 Required: True
+Accept pipeline input: true (ByValue)
 ```
 
 ### -ReferenceName
 
-If not specified the a system-generated name will be assigned using the new Process's GUID.
+Allows the a system-generated name based on the new Process's assigned GUID to be overriden. This parameter can usually be omitted, and should be omitted when piping multiple names into the command.  
 
 ```yaml
 Type: String
@@ -76,6 +94,8 @@ Required: False
 
 ## RELATED LINKS
 
+[Get-VSTeamProcess](Get-VSTeamProcess.md)
+
 [Set-VSTeamProcess](Set-VSTeamProcess.md)
 
-[Get-VSTeamProcess](Get-VSTeamProcess.md)
+[Remove-VSTeamProcess](Remove-VSTeamProcess.md)

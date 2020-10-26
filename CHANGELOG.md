@@ -1,10 +1,11 @@
 # Changelog
 ## J.H. O'Neill @ 12th October 2020
-1.  Added Commands Add- and Set- -VSTeamProcess. Add- creates a process template based on a pre-existing one, Set- enables/disables, sets  the default for new projects and changes the name / description.
-2.  Added Commands Get- Set- Add- Remove -VSTeamProcessBehavior and a format XML file for process behaviors. (a.k.a boards)
-3.  Added Commands Get- Set- -VSTeamWorkItemBehavior and a format XML file  for WorkItem behaviors - which link WorkItemTypes to boards.
-4.  Changed command `Get-VSTeamIteration` adding a switch -Expand to return all the iterations returned by the -Depth option, rather than one with a children node where each element may have children.
-5.  Added Commmands Get- and Set- -VSTeamSetting - to allow bug behavior and visibile boards (and things set with them) to be set.
+1.  Added Commands Add-, Remove- and Set- -VSTeamProcess. Add- creates a process template based on a pre-existing one, Set- enables/disables, sets  the default for new projects and changes the name / description. Remove deletes custom ones (system ones can't be deleted.)
+1. Changed command `Get-VSTeamProcess` to allow multiple names to be passed.
+1.  Added Commands Get- Set- Add- Remove -VSTeamProcessBehavior and a format XML file for process behaviors. (a.k.a boards)
+1.  Added Commands Get- Set- -VSTeamWorkItemBehavior and a format XML file  for WorkItem behaviors - which link WorkItemTypes to boards.
+1.  Changed command `Get-VSTeamIteration` adding a switch -Expand to return all the iterations returned by the -Depth option, rather than one with a children node where each element may have children.
+1.  Added Commmands Get- and Set- -VSTeamSetting - to allow bug behavior and visibile boards (and things set with them) to be set.
 
 ## 7.2.0
 

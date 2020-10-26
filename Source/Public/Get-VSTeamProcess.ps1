@@ -74,7 +74,7 @@ function Get-VSTeamProcess {
             # We just fetched all the processes so let's update the cache.
             [vsteam_lib.ProcessTemplateCache]::Update([string[]]$($resp | Select-Object -ExpandProperty Name ))
 
-            foreach ($process in $resp.where({ $_.name -like $Name })) {
+            foreach ($process in $resp.where({foreach($n in $Name) {if($_.name -like $n){$true}}})) {
                if   ($process.psobject.Members.name -contains "projects") {
                      $process.projects = [string[]]($process.projects.name)
                }

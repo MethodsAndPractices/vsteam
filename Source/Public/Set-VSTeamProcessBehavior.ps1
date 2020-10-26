@@ -31,25 +31,27 @@ function Set-VSTeamProcessBehavior {
          if ($NewName) {$body['name'] = $NewName}
          else          {$body['name'] = $Name}
       }
-      $behavior = Get-VSTeamProcessBehavior -ProcessTemplate $ProcessTemplate |
-                     Where-Object -Property name -eq $Name
+      foreach($p in $ProcessTemplate) {
+         $behavior = Get-VSTeamProcessBehavior -ProcessTemplate $p |
+                        Where-Object -Property name -eq $Name
 
-      if (-not $behavior) {Write-Warning "'$Name' is not a process behavior in $ProcessTemplate" ; return}
-      $Params= @{
-         url         = $behavior.url + "?api-version=" + (_getApiVersion Processes)
-         method      = 'Put'
-         body        = ConvertTo-Json $body
-      }
-      if ($Force -or $PSCmdlet.ShouldProcess($ProcessTemplate,"Modify behavior named '$Name' to process")) {
-         #Call the Rest API
-         $resp = _callAPI @params
+         if (-not $behavior) {Write-Warning "'$Name' is not a process behavior in $p" ; continue}
+         $Params= @{
+            url         = $behavior.url + "?api-version=" + (_getApiVersion Processes)
+            method      = 'Put'
+            body        = ConvertTo-Json $body
+         }
+         if ($Force -or $PSCmdlet.ShouldProcess($p,"Modify behavior named '$Name' to process")) {
+            #Call the Rest API
+            $resp = _callAPI @params
 
-         # Apply a Type Name so we can use custom format view and custom type extensions
-         # and add the processTemplate name so it can become a parameter when the object is piped into other functions
-         $resp.psobject.TypeNames.Insert(0,'vsteam_lib.Processbehavior')
-         Add-Member -InputObject $resp -MemberType NoteProperty -Name ProcessTemplate -Value $ProcessTemplate
+            # Apply a Type Name so we can use custom format view and custom type extensions
+            # and add the processTemplate name so it can become a parameter when the object is piped into other functions
+            $resp.psobject.TypeNames.Insert(0,'vsteam_lib.Processbehavior')
+            Add-Member -InputObject $resp -MemberType NoteProperty -Name ProcessTemplate -Value $p
 
-         return $resp
+            return $resp
+         }
       }
    }
 }

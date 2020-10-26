@@ -14,18 +14,19 @@ function Remove-VSTeamProcessBehavior {
       $Force
    )
    Process {
+      foreach ($p in $ProcessTemplate) {
+         $behavior = Get-VSTeamProcessBehavior -ProcessTemplate $p |
+                        Where-Object -Property name -eq $Name
 
-      $behavior = Get-VSTeamProcessBehavior -ProcessTemplate $ProcessTemplate |
-                     Where-Object -Property name -eq $Name
-
-      if (-not $behavior) {Write-Warning "'$Name' is not a process behavior in $ProcessTemplate" ; return}
-      $Params= @{
-         url         = $behavior.url + "?api-version=" + (_getApiVersion Processes)
-         method      = 'Delete'
-      }
-      if ($Force -or $PSCmdlet.ShouldProcess($ProcessTemplate,"Remove behavior named '$Name' from process")) {
-         #Call the Rest API
-         $null = _callAPI @params
+         if (-not $behavior) {Write-Warning "'$Name' is not a process behavior in $p" ; return}
+         $Params= @{
+            url         = $behavior.url + "?api-version=" + (_getApiVersion Processes)
+            method      = 'Delete'
+         }
+         if ($Force -or $PSCmdlet.ShouldProcess($p,"Remove behavior named '$Name' from process")) {
+            #Call the Rest API
+            $null = _callAPI @params
+         }
       }
    }
 }

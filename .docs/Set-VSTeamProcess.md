@@ -184,3 +184,5 @@ Accept wildcard characters: False
 [Add-VSTeamProcess](Add-VSTeamProcess.md)
 
 [Get-VSTeamProcess](Get-VSTeamProcess.md)
+
+[Remove-VSTeamProcess](Remove-VSTeamProcess.md)

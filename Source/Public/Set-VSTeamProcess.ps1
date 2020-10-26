@@ -1,5 +1,6 @@
 function Set-VSTeamProcess {
    [CmdletBinding(DefaultParameterSetName='LeaveAlone',SupportsShouldProcess=$true,ConfirmImpact='High')]
+   [OutputType([vsteam_lib.Process])]
    param (
       [parameter(Mandatory = $true,ValueFromPipelineByPropertyName=$true,Position=1)]
       [vsteam_lib.ProcessTemplateValidateAttribute()]
@@ -43,7 +44,7 @@ function Set-VSTeamProcess {
          Body        = ConvertTo-Json  $body
       }
 
-      if ($Force -or $PSCmdlet.ShouldProcess($ProcessTemplate,'Update Devops Process template')) {
+      if ($Force -or $PSCmdlet.ShouldProcess($ProcessTemplate,'Update Process template')) {
          # Call the REST API
          $resp = _callAPI @commonArgs
          if ($resp.psobject.Properties.name -Notcontains 'typeid') {

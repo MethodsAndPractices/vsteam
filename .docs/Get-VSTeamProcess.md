@@ -95,4 +95,8 @@ Parameter Sets: (All)
 
 <!-- #include "./common/related.md" -->
 
-[Add-VSTeamProject](Add-VSTeamProject.md)
+[Add-VSTeamProcess](Add-VSTeamProcess.md)
+
+[Set-VSTeamProcess](Add-VSTeamProcess.md)
+
+[Remove-VSTeamProcess](Remove-VSTeamProcess.md)
