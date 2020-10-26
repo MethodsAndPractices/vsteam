@@ -1,6 +1,10 @@
 function Unlock-VSTeamWorkItemType {
    [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='High')]
    param(
+      [vsteam_lib.ProcessTemplateValidateAttribute()]
+      [ArgumentCompleter([vsteam_lib.ProcessTemplateCompleter])]
+      $ProcessTemplate = $env:TEAM_PROCESS,
+
       [Parameter(Position=0,ValueFromPipeline=$true,Mandatory=$true)]
       $WorkItemType,
 
@@ -11,7 +15,18 @@ function Unlock-VSTeamWorkItemType {
       [switch]$Force
    )
    process {
-      if (-not ($WorkItemType.psobject.properties["customization"] -and $WorkItemType.customization -eq 'system')) {
+      if ($WorkItemType -is [string]) {
+         if ($expand) {
+            Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType $WorkItemType |
+               Unlock-VSTeamWorkItemType -Expand $Expand -Force:Force
+         }
+         else {
+            Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType $WorkItemType |
+               Unlock-VSTeamWorkItemType -Force:Force
+         }
+         return
+      }
+      elseif (-not ($WorkItemType.psobject.properties["customization"] -and $WorkItemType.customization -eq 'system')) {
          return $WorkItemType
       }
       else {
@@ -52,4 +67,3 @@ function Unlock-VSTeamWorkItemType {
       }
    }
 }
-
