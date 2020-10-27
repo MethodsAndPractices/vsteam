@@ -38,6 +38,7 @@
 1. **Added functions**  `Add-VSTeamWorkItemType`, `Set-VSTeamWorkItemType`, `Remove-VSTeamWorkItemType`, `Unlock-VSTeamWorkItemType` with associated help and tests.
 1. Ensured tests which mock Get-VSTeamProcess clear the process cache (otherwise the processes they return will not be used to validate the Process parameter during the test,)
 1. Ensured tests which call Set-VSTeamProject load and mock Get-VSTeamProcess.
+1. Modified validator for process templates to allow multiple template names to be validated (where function can't support multiple names count should be validated.)
 
 ## 7.1.2
 

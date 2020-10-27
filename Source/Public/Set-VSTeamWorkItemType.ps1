@@ -23,17 +23,23 @@ function Set-VSTeamWorkItemType {
 
       [parameter(ParameterSetName='Hide', Mandatory = $true)]
       [switch]$Disabled,
-
       [parameter(ParameterSetName='Show', Mandatory = $true)]
       [switch]$Enabled,
 
       [switch]$Force
    )
    process {
-      #Get the existing workitem-type definition. Drop out if can't be found
-      $wit  = Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType $WorkItemType
-      if (-not $wit) {Write-Warning "'$workitemType' does not match a Workitem type." ; return}
-
+      $wit = $null
+      #If $workItemtype contains an object, use it. Otherwise get matching ones.
+      if ($WorkItemType.psobject.TypeNames.Contains('vsteam_lib.WorkItemType')) {
+         $wit = $WorkItemType
+      }
+      else {
+         $wit = Get-VSTeamWorkItemType -ProcessTemplate $ProcessTemplate -WorkItemType $WorkItemType
+      }
+      #Bail out if we found no type, or we can't change system types to inherited ones.
+      $wit = $wit | Unlock-VSTeamWorkItemType -Force:$Force
+      if (-not $wit) {Write-Warning "There are no suitable Workitem types to update." ; return}
       foreach ($w in $wit)   {
          $url  = $w.url + "?api-version=" + (_getApiVersion Processes)
 
@@ -63,27 +69,17 @@ function Set-VSTeamWorkItemType {
          #endregion
 
          if ($Force -or $PSCmdlet.ShouldProcess($w.Name,"Modify $ProcessTemplate, to update definition of workitem type") ) {
-            <# Call the REST API -
-               if this is a *system* definition then POST a new definition inheriting from the existing one
-               if it is a custom or inherited defintion then use PATCH to make chanages.
-            #>
+            #Call the REST API - don't stop if one item in a long list fails.
             try   {
-                  if ($w.customization -ne 'system') {
-                     $resp = _callapi -Url $url -method  Patch  -ContentType "application/json" -body (ConvertTo-Json $body) -ErrorAction stop
-                  }
-                  else {
-                     $body['inheritsFrom'] = $w.referenceName
-                     $url    = ($url -replace 'workItemTypes/.*$' , 'workItemTypes?api-version=')  + (_getApiVersion Processes)
-                     $resp = _callapi -Url $url -method  POST  -ContentType "application/json" -body (ConvertTo-Json $body) -ErrorAction stop
-                  }
+               $resp = _callapi -Url $url -method  Patch  -ContentType "application/json" -body (ConvertTo-Json $body) -ErrorAction stop
             }
-            catch { Write-Warning "$workitemType exists, but failed to update. It may not be possible to change this type." ; continue}
+            catch { Write-Warning "Failed to update $($w.name) in $($w.processTemplate). It may not be possible to change this type." ; continue}
 
-            # Apply a Type Name so we can use custom format view and custom type extensions and add workitemType
-            # and processTemplate properties to become a parameters when the object is piped into other functions
+            # Apply a Type Name so we can use custom format view and/or custom type extensions and
+            # add workitemType & processTemplate properties (which become a parameters when the object is piped into other functions).
             _applyTypesWorkItemType -item $resp
             Add-Member -InputObject $resp -MemberType AliasProperty -Name WorkItemType    -Value "name"
-            Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
+            Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -Value $w.ProcessTemplate
 
             Write-Output $resp
          }
