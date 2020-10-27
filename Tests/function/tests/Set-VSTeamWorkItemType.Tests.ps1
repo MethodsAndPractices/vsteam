@@ -6,7 +6,7 @@ Describe 'VSTeamWorkItemType' {
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcess.ps1"
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemIconList.ps1"
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemType.ps1"
-
+      . "$PSScriptRoot\..\..\..\Source\Public\Unlock-VSTeamWorkItemType.ps1"
       $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
 
       ## Arrange
@@ -65,18 +65,26 @@ Describe 'VSTeamWorkItemType' {
       }
       [vsteam_lib.IconCache]::Invalidate()
       [vsteam_lib.ProcessTemplateCache]::Invalidate()
+
+       Mock Write-Warning {
+         return
+      }
+
+       Mock Unlock-VSTeamWorkItemType {
+         return $WorkItemType
+      }
    }
 
    Context 'Update WorkItem Types' {
 
       It 'Catches invalid WorkItem Type names.' {
-         Set-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType NewWit -Description "New Work item Type" -Color ff0000  -Icon icon_asterisk  -WarningVariable "Warn" -warningAction SilentlyContinue
+         Set-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType NewWit -Description "New Work item Type" -Color ff0000  -Icon icon_asterisk -warningAction SilentlyContinue
          # Should not call the rest API from the function body, but may populate the work-item icons cache
          Should -Invoke _callApi -Exactly -Times 0 -Scope It {-not ($resource -eq "workitemicons")}
-         $warn | Should -Match "'NewWit'"
+         Should -Invoke Write-Warning -Exactly -Times 1 -Scope It
       }
       It 'Patches custom WorkItem Types.' {
-         Set-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType Gub -Description 'New Text' -Color Green  -Icon icon_book    -Force
+         Set-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType Gub -Description 'New Text' -Color Green  -Icon icon_book  -Force
          Should -Invoke _callApi -Exactly -Times 1 -Scope It -ParameterFilter {
             $Url    -like     '*99?api-version=*'           -and  #found expected item
             $Body   -match    '"isDisabled":\s+false'       -and  #Should expressly set
@@ -86,13 +94,13 @@ Describe 'VSTeamWorkItemType' {
             $Method -eq       'Patch'
          }
       }
-       It 'Posts changes for system WorkItem Types' {
+       It 'Unlocks system WorkItem Types' {
          Set-VSTeamWorkItemType -ProcessTemplate "Scrum With Space" -WorkItemType Bug -Disabled -Force
+         Should -Invoke Unlock-VSTeamWorkItemType -Exactly -Times 1
          Should -Invoke _callApi -Exactly -Times 1 -Scope It -ParameterFilter {
-            $Url    -like     '*workitemTypes?api-version=*'           -and  #found expected item
+            $Url    -like     '*workitemTypes/98?api-version=*'           -and  #found expected item
             $Body   -match    '"isDisabled":\s+true'        -and
-            $Body   -match    '"inheritsFrom":\s+"Microsoft.VSTS.WorkItemTypes.Bug"' -and
-            $Method -eq       'Post'
+            $Method -eq       'Patch'
          }
       }
    }
