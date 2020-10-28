@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-Lists the picklists avaialable to populate String and Integer Fields used by WorkItems.
+Lists the PickList avaialable to populate String and Integer fields used by WorkItems.
 
 ## EXAMPLES
 
@@ -26,7 +26,7 @@ Continents String False
 
 ```
 
-With no parameters, all the picklists are returned: note that the API can't show the values in each list when getting the list-of-lists.
+With no parameters, all the PickList are returned: note that the API can't show the values in each list when getting the list-of-lists.
 
 ### Example 2
 ```powershell
@@ -38,7 +38,7 @@ Offices String False     New York, London, Paris, Munich
 Regions String False     North, South, East, West, Central
 ```
 
-When specifying one or more PickLists by name or GUID, the values in the list are shown.
+When specifying one or more PickList by name or by GUID, the values in the list are shown.
 
 
 ### Example 3
@@ -57,7 +57,7 @@ We can call the command twice, once to get a list-of-lists, and then piping each
 ## PARAMETERS
 
 ### -PicklistID
-The name or ID of one or more PickLists. If a PickList object is passed, its ID will be used.
+The name or ID of one or more PickList. If a PickList object is passed, its ID will be used.
 
 ```yaml
 Type: Object

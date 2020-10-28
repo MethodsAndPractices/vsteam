@@ -9,7 +9,7 @@
 ## SYNTAX
 
 ## DESCRIPTION
-Every WorkItem has multiple data-fields, and Fields are part of the definition of a Workitem type. They are selected from a set of Fields shared across all Process Templates in the Organization. This command is used to add Fields to definitions of WorkItem types. Note that the WorkItem types in the built-in Process Templates cannot be modified. Adding a field to a system WorkItem-type in a custom Template changes it to an inherited one, and a change only applies to a single Processs Template without affecting copies of the WorkItem type in other templates.
+Every WorkItem has multiple data-fields,  and Fields are part of the definition of a WorkItem type and are selected from a set of fields shared across all process templates in the organization. This command is used to add fields to definitions of WorkItem types. Note that the WorkItem types in the built-in process templates cannot be modified. Adding a field to a system WorkItem-type in a custom process template changes it to an inherited one, and a change only applies to a single process template without affecting copies of the WorkItem type in other templates.
 
 ## EXAMPLES
 
@@ -28,7 +28,7 @@ Change       Office Custom.Office           string custom
 
 ```
 
-In this example, a custom field named "Office" has been created, and is added to a custom WorkItem type named "Change"; no default value is given and the field is not requred. Note that the command is able to resolve "Office" to its reference-name of "custom.office". Because -Force is not used the command prompts for confirmation before adding the field.
+In this example, a custom field named "Office" has already been created and it is added to a custom WorkItem type named "Change"; no default value is given and the field is not set as requred. Note that the command is able to resolve "Office" to its reference-name of "custom.office". Because -Force is not used the command prompts for confirmation before adding the field.
 
 
 ### Example 2
@@ -114,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -Required
-Unless -Required is specified adding a value for the field is optional.
+Unless -Required is specified, adding a value for the field is optional.
 
 ```yaml
 Type: SwitchParameter

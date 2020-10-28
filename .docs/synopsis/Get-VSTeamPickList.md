@@ -1,1 +1,1 @@
-Returns the list of Picklists available for use in fields.
+Returns the list of PickList available for use in fields.

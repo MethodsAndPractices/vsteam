@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-Every WorkItem has multiple data-fields. The definition of a Workitem type includes that type's Fields, which are selected from a set of Fields shared across all Process Templates in the Organization. Each Field has a name, a description, a datatype, and optionally a PickList of values. This command defines new Fields. Note that the API only allows Fields to be disabled after they have been created, not to be modified or deleted.
+Every WorkItem has multiple data-fields. The definition of a Workitem type includes that type's fields, which are selected from a set of fields shared across all process templates in the organization. Each field has a name, a description, a datatype, and optionally a PickList of values. This command defines new fields. Note that the API only allows fields to be disabled after they have been created, not to be modified or deleted.
 
 
 ## EXAMPLES
@@ -24,7 +24,7 @@ Name    Reference Name   Usage    Type   Read Only Description
 Office   Custom.Office   workItem string False    Business Location
 
 ```
-Creates a new Field, with a Name, Description and PickList option. Normally the command will pause for confirmation but here -Force has been specified.
+Creates a new field, with a Name, Description and PickList option. Normally the command will pause for confirmation but here -Force has been specified.
 
 ## PARAMETERS
 
@@ -61,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-Name for the the new field.
+Name for the  new field.
 
 ```yaml
 Type: String
@@ -151,7 +151,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-The datatype for the new field. This defaults to string, which is a single line of plain text in the user interface; multi-line rich text boxes are HTML, and as well as normal boolean, integer,double, and datetime values, indentity (a box to select a person, simililar to assigned-to) is supported.
+The datatype for the new field. This defaults to string, which is a single line of plain text in the user interface; multi-line rich text boxes are HTML, and as well as normal Boolean, integer, double, and datetime values, identity (a box to select a person, similar to the existing assigned-to one) is supported.
 
 ```yaml
 Type: String
@@ -167,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### -Usage
-Fields may be defined for use in WorkItems, WorkItem links, WorkItem-type extensions, trees or none of the these. The default value is workitem and this should not need to be changed.
+Fields may be defined for use in WorkItems, WorkItem links, WorkItem-type extensions, trees, or none of the these. The default value is workitem and this should not need to be changed.
 
 ```yaml
 Type: Object

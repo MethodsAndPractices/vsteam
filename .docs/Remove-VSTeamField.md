@@ -1,6 +1,6 @@
 <!-- #include "./common/header.md" -->
 
-# Add-VSTeamField
+# Remove-VSTeamField
 
 ## SYNOPSIS
 
@@ -19,6 +19,7 @@ The data fields used definition of a Workitem types are selected from a set of F
 Get-VSTeamField Custom.* | Remove-VSTeamField  -Forces
 ```
 Resets the system by deleting custom field types
+
 ## PARAMETERS
 
 <!-- #include "./params/forcegroup.md" -->

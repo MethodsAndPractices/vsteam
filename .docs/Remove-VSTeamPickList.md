@@ -24,7 +24,7 @@ Removes the offices pick lists
 ## PARAMETERS
 <!-- #include "./params/forcegroup.md" -->
 ### -PicklistID
-The name or guid of the picklist. "Name" or "ID" can be used as an alias for "PicklistID"
+The name or GUID of the picklist. "Name" or "ID" can be used as an alias for "PicklistID"
 
 ```yaml
 Type: Object

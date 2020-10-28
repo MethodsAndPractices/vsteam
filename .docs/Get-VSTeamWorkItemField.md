@@ -18,7 +18,7 @@
 Get-VSTeamWorkItemfield bug
 ```
 
-Returns the fields for "Bug" WorkItems in the current Project's Process Template.
+Returns the fields for "Bug" WorkItems in the current project's process template.
 
 
 ### Example 2
@@ -26,7 +26,7 @@ Returns the fields for "Bug" WorkItems in the current Project's Process Template
 Get-VSTeamWorkItemfield -ProcessTemplate Scrum5 --WorkItemType  Change
 ```
 
-Returns the fields in "Change" WorkItems in the custom Process Template named "Scrum5"
+Returns the fields in "Change" WorkItems in the custom process template named "Scrum5"
 
 ### Example 3
 ```powershell

@@ -9,7 +9,7 @@
 ## SYNTAX
 
 ## DESCRIPTION
-Every WorkItem has multiple data-fields. The definition of a Workitem type includes that type's Fields, which are selected from a set of Fields shared across all Process Templates in the Organization. This command returns those Fields, showing their name and other properties.
+Every WorkItem has multiple data-fields. The definition of a Workitem type includes that type's fields, which are selected from a set of Fields shared across all process templates in the organization. This command returns those Fields, showing their name and other properties.
 
 ## EXAMPLES
 
@@ -18,7 +18,7 @@ Every WorkItem has multiple data-fields. The definition of a Workitem type inclu
 Get-VSTeamField
 ```
 
-Returns a complete list of Fields defined for the Organization.
+Returns a complete list of fields defined for the organization.
 
 ### Example 2
 ```powershell
@@ -29,7 +29,7 @@ Name     Reference Name                 Usage    Type    IsPicklist Read Only De
 Priority Microsoft.VSTS.Common.Priority workItem integer False      False     Business importance. 1=must fix; 4=unimportant.
 ```
 
-Returns the a single matching field. Note the commands which work with Fields will transform short names without wildcards like 'priority', to a matching reference name (Microsoft.VSTS.Common.Priority in this case), but this is not a wildcard search. (See the next example. )
+Returns a single matching field. Note the commands which work with fields will transform short names without wildcards, like 'priority', to a matching reference name (Microsoft.VSTS.Common.Priority in this case), but this is not a wildcard search. (See the next example for wildcards.)
 
 ### Example 3
 ```powershell
@@ -41,9 +41,9 @@ Backlog Priority Microsoft.VSTS.Common.BacklogPriority workItem double  False   
 Priority         Microsoft.VSTS.Common.Priority        workItem integer False      False     Business importance. 1=must fix; 4=unimportant.
 ```
 
-Returns all fields where either the name or the Reference name end with priority. 
+Returns all fields where either the name or the ReferenceName end with "priority". 
  
-### Example 3
+### Example 4
 ```powershell
 Get-VSTeamField  priority,Backlog*
 
@@ -57,7 +57,7 @@ This time two search terms are used, one transforms to the priority field, and t
 ## PARAMETERS
 
 ### -ReferenceName
-The fully-qualified or partial reference name. Note that display names like "Target Date" which contain a space may have a reference name in the form "Microsoft.VSTS.Scheduling.TargetDate" the resolution of the partial name looks for the section after the final "." character, which is "TargetDate" with no space, and therefore does not match the display name.
+The fully-qualified or partial ReferenceName. Note that display names like "Target Date" which contain a space may have a reference name in the form "Microsoft.VSTS.Scheduling.TargetDate", and the resolution of the partial name looks for the section after the final "." character, which is "TargetDate" with no space, and therefore does not match the display name.
 
 ```yaml
 Type: Object

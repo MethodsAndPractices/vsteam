@@ -1,1 +1,1 @@
-Deletes a picklists from the list available for use in fields.
+Deletes a picklist from the list available for use in fields.

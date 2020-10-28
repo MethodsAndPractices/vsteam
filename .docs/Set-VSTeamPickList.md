@@ -9,7 +9,7 @@
 ## SYNTAX
 
 ## DESCRIPTION
-Modifies an existing PickList, so that fields can be offered different selections. The list can either be cleared or items added to the existing ones.
+Modifies an existing PickList, so different selections can be offered. The list can either be cleared or items added to the existing ones.
 
 ## EXAMPLES
 
@@ -36,7 +36,7 @@ Office String False     New York, London, Munich, Tokyo
 
 ```
 
-In this example the "Tokyo" is added to the existing list.
+In this example "Tokyo" is added to the existing list.
 
 
 ## PARAMETERS
@@ -73,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -PicklistID
-The name or guid of the picklist. "Name" or "ID" can be used as an alias for "PicklistID"
+The name or GUID of the picklist. "Name" or "ID" can be used as an alias for "PicklistID"
 
 ```yaml
 Type: Object
@@ -88,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemoveOldItems
-If specified, the list will only contain new items - by default new items are added to those already in the list;
+If specified, the list will only contain new items - by default new items are added to those already in the list.
 
 ```yaml
 Type: SwitchParameter
@@ -103,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-Changes the type of the picklist. Only used if the list was orginally numbers and needs to contain strings, or if type was not specified when the list was created and so it is treating numbers as strings.
+Changes the type of the picklist. Only used if the list was originally numbers and needs to contain strings, or if type was not specified when the list was created and so it is treating numbers as strings.
 
 ```yaml
 Type: String

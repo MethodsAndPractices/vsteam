@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-Fields in WorkItems can be populated using picklists to supply string or integer values. The user may be constrained to selecting from the list or the list may be "suggestions" allowing other valies to be entered. This command creates a new picklist which may then be used in multiple fields if required.
+Fields in WorkItems can be populated using PickLists to supply string or integer values. The user may be constrained to selecting from the list or the list may be "suggestions" allowing other values to be entered. This command creates a new PickList which may then be used in multiple fields if required.
 
 ## EXAMPLES
 
@@ -23,14 +23,14 @@ Name    Type   Suggested Items
 Offices String False     New York, London, Paris, Munich
 ```
 
-Creates a Picklist to suggest locations. Note the items only need to be enclosed in quotes where they contain spaces or punctuation. In this case the type has been left as string, and list is not suggestions but the only allowed choices.
+Creates a PickList to suggest locations. Note the items only need to be enclosed in quotes where they contain spaces or punctuation. In this case the type has been left as string, and list is not suggestions but the only allowed choices.
 
 ## PARAMETERS
 
 <!-- #include "./params/forcegroup.md" -->
 
 ### -IsSuggested
-By default the selection for a control using a PickList must be a value from the list. If IsSuggested is set then other values may be entered.
+By default, the selection for a control using a PickList must be a value from the list. If IsSuggested is set, then other values may be entered.
 
 ```yaml
 Type: SwitchParameter
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Items
-A comma seperated list of items, or variable containing the items to offer in the list.
+A comma separated  list of items, or variable containing the items to offer in the list.
 
 ```yaml
 Type: Object[]
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-A name for the Picklist, this name will only be used to link the list to one or more Fields - the user interface only shows the Field-names.
+A name for the PickList, this name will only be used to link the list to one or more fields - the user interface only shows the field-names.
 
 ```yaml
 Type: String
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-String by default, Integer may be specified if the values intended to populate Fields which are Integers.
+String by default, Integer may be specified if the values are all Integers.
 
 ```yaml
 Type: String

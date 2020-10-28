@@ -9,7 +9,7 @@
 ## SYNTAX
 
 ## DESCRIPTION
-Every WorkItem has multiple data-fields, and Fields are part of the definition of a Workitem type. They are selected from a set of Fields shared across all Process Templates in the Organization. This command is used to modifiy the Fields in the definitions of WorkItem typse. Note that the WorkItem types in the built-in Process Templates cannot be modified. Changing a field in a system WorkItem-type in a custom Template changes the WorkItem type to an inherited one, and changing a system field, creates an inherited version of the field. Deleting the inherited version reverts the field back to the system version. A change only applies to a single Processs Template without affecting copies of the WorkItem type in other templates.
+Every WorkItem has multiple data-fields, and the fields available form part of the definition of a WorkItem type. They are selected from a set of fields shared across all process templates in the organization. This command is used to modify the fields in the definitions of WorkItem types. Note that the WorkItem types in the built-in Process Templates cannot be modified. Changing a field in a system WorkItem-type in a custom Template changes the WorkItem type to an inherited one, and changing a system field, creates an inherited version of the field. Deleting the inherited version reverts the field back to the system version. A change only applies to a single process template without affecting copies of the WorkItem type in other templates.
 
 ## EXAMPLES
 
@@ -23,7 +23,7 @@ Impediment   Priority Microsoft.VSTS.Common.Priority          integer inherited
 
 ```
 
-Looks for the impediment WorkItem type using a Wildcard imp* , and finds the Microsoft.VSTS.Common.Priority field using its short name "Priority", and changes its allowed values to 1 and 2 only (the default is 1..4). Only some system-defined items have AllowedValues, custom items must use picklists, and changing the setting converts the field from a system field to an inherited one. 
+Looks for the "Impediment" WorkItem type using a Wildcard imp*, finds the Microsoft.VSTS.Common.Priority field using its short name "Priority", and changes its allowed values to 1 and 2 only (the default is 1..4). Only some system-defined fields have AllowedValues, custom fields must use PickLists, and changing the setting converts the field from a system field to an inherited one. 
 
 ## PARAMETERS
 
@@ -81,7 +81,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReadOnly
-Makes a Read/write field read only. To remove the readonly flag and make the field editable, use -Readonly:$false 
+Makes a read/write field read-only. To remove the ReadOnly flag and make the field editable, use -ReadOnly:$false 
 
 ```yaml
 Type: SwitchParameter
@@ -111,7 +111,7 @@ Accept wildcard characters: False
 ```
 
 ### -Required
-If specifed, changes a field from optional to required. To make a required field optional, use -Required:$false
+If specified, changes a field from optional to required. To remove the required flag, use -Required:$false
 
 ```yaml
 Type: SwitchParameter

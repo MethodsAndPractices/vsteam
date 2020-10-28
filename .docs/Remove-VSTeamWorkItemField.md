@@ -9,7 +9,7 @@
 ## SYNTAX
 
 ## DESCRIPTION
-Every WorkItem has multiple data-fields, and Fields are part of the definition of a Workitem type. This command is to remove custom and ineherited Fields from the definitions of WorkItem types, undoing a previous change by an Add- or Set- command. System fields cannot be removed, and removing an inherited field reverts the field back to its system definition
+Every WorkItem has multiple data-fields, and Fields are part of the definition of a WorkItem type. This command removes custom and inherited fields from the definitions of WorkItem types, undoing a previous change by an Add- or Set- command. System fields cannot be removed, and removing an inherited field reverts the field back to its system definition,
 
 ## EXAMPLES
 
@@ -19,7 +19,7 @@ Remove-VSTeamWorkItemField -WorkItemType Impediment -ReferenceName Microsoft.VST
 
 ```
 
-In the example for Set-VSTeamWorkItemField, the Priority field of the impediment WorkItem type was modified, here the inherited field is deleted taking the field back to its original definition.  Attempting to delete a system field does not return an error or make any change
+In the example for Set-VSTeamWorkItemField, the "Priority" field of the "Impediment" WorkItem type was modified, here the inherited field is deleted, taking the field back to its original definition. Running the command a second time, and attempting to delete the system field does not return an error or make any change.
 
 ## PARAMETERS
 
