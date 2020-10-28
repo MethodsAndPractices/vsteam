@@ -1,6 +1,5 @@
 ### -WorkItemType
-
-The name of the work item type to be modified.
+The name of the WorkItem type to be modified.
 
 ```yaml
 Type: Object

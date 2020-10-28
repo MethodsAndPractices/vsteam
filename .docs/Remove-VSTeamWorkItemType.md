@@ -10,9 +10,9 @@
 
 ## Description
 
-Removes a custom work item type, or reverts an inherited work item type back to the built-in Type.
+Removes a custom WorkItem type or reverts an inherited WorkItem type back to the built-in Type.
 
-If the type is a system type (as all work item types in built-in Process templates are) then an error will be thrown.
+If the type is a system type (as all WorkItem types in built-in Process templates are) then an error will be thrown.
 
 ## EXAMPLES
 
@@ -22,16 +22,8 @@ If the type is a system type (as all work item types in built-in Process templat
 Remove-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType ChangeRequest
 ```
 
-Remove-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType ChangeRequest.
+Removes the custom WorkItem type named "ChangeRequest" from the custom process template named "Scrum5"
 
-### Example 2
-
-```powershell
-Set-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType ChangeRequest -Icon icon_parachute -color Blue -Description "For requests from customers"
-```
-
-Modifies the custom process "Scrum5", changing a user-defined work item type "ChangeRequest" to use
-a blue parachute icon and update its description..
 ## PARAMETERS
 
 ### -Confirm
@@ -58,7 +50,7 @@ Accept wildcard characters: False
 
 ### -WorkItemType
 
-The name of the work item type to be removed or reverted. If the WorkItem type is a system type (for example if had been changed but has already been reverted), then an error will be thrown.
+The name of the WorkItem type to be removed or reverted. If the WorkItem type is a system type (for example if had been changed but has already been reverted), then an error will be thrown.
 
 The built-in system types cannot be deleted, but can be disabled with Set-VSTeamWorkItemType.
 
