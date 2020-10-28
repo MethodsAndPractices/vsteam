@@ -10,7 +10,7 @@
 
 ## Description
 
-Each WorkItem type in each process template has a set of possible states.  Items may have system-defined states and/or custom (user-defined) states. This command removes custom states. Note that system states, cannot be removed but can be hidden.
+Each WorkItem type in each process template has a set of possible states.  Items may have system-defined states and/or custom (user-defined) states. This command removes custom states. Note that system states cannot be removed but can be hidden.
 
 ## EXAMPLES
 
@@ -31,10 +31,9 @@ This removes the state "Postponed" from the WorkItem type "Bug" in the template 
 
 ```PowerShell
 Get-VSTeamWorkItemState -WorkItemType Bug  -ProcessTemplate Scrum2 | Where-Object customizationType -eq "custom" | Remove-VSTeamWorkItemState -Force
-
 ```
 
-As an alternative to the first example, this removes any and all custom types from the WorkItem type "Bug" in the template named "Scrum2", and -Force is use to remove any prompt which might appear.
+As an alternative to the first example, this removes any and all custom types from the WorkItem type "Bug" in the template named "Scrum2", and -Force is used to suppress any prompt which might appear.
 
 ## PARAMETERS
 

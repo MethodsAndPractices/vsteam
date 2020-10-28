@@ -10,8 +10,7 @@
 
 ## Description
 
-Each WorkItem type in each process template has a set of possible states, each belongs to a category which represents a stage in the item's lifecycle (Proposed, In-Progress, Completed, Resolved, Removed) and each has a color. Items may have system-defined states and/or custom (user-defined) states. Get-VSTeamWorkItemState lists the available states.
-
+Each WorkItem type in each process template has a set of possible states, each of which belongs to a category which represents a stage in the item's lifecycle (Proposed, In-Progress, Completed, Resolved, Removed) and each has a color. Items may have system-defined states and/or custom (user-defined) states. Get-VSTeamWorkItemState lists the available states.
 
 ## EXAMPLES
 
@@ -29,7 +28,7 @@ Order Name      Category   Color  Customization Hidden
 5     Removed   Removed    ffffff system
 ```
 
-This lists the states for the built in WorkItem type "bug" in the current project.
+This lists the states for the built in WorkItem type "Bug" in the current project.
 Notice that the states all have a customization of system; these states can be hidden but not removed.
 
 ### Example 2
@@ -63,7 +62,7 @@ Scrum           Bug              2 Approved  b2b2b2
 ...
 ```
 
-This pipeline gets all the process-templates in the first command; in the second it gets the "bug" WorkItem type in each one, and in the third it gets the states available for all the different versions of bug. It sorts the results to group the srates together - and finally formats the results as a table.
+This pipeline gets all the process-templates in the first command; in the second it gets the "Bug" WorkItem type in each one, and in the third it gets the states available for all the different versions of Bug. It sorts the results to group the states together - and finally formats the results as a table. (Only the first few rows are shown to save space.)
 This shows that in the default "Agile" and "CMMI" templates bugs have a state of "Active" but do not have "Approved", but the reverse is true in the "Scrum" template.
 
 
@@ -71,7 +70,7 @@ This shows that in the default "Agile" and "CMMI" templates bugs have a state of
 
 ### -ProcessTemplate
 
-The Process holding the WorkItem types of interest.
+The process holding the WorkItem types of interest.
 
 ```yaml
 Type: String

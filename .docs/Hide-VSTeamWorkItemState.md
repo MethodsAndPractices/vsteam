@@ -10,7 +10,7 @@
 
 ## Description
 
-Each WorkItem type in each process template has a set of possible states.  Items may have system-defined states and/or custom (user-defined) states. System states cannot be removed, but this command can hide them. Note that although some WorkItem types like "Bug" or "Ttask" are found in multiple templates, a change to the available states only applies to one template, and only custom templates can be modified, the built-in ones cannot.
+Each WorkItem type in each process template has a set of possible states.  Items may have system-defined states and/or custom (user-defined) states. System states cannot be removed, but this command can hide them. Note that although some WorkItem types like "Bug" or "Task" are found in multiple templates, a change to the available states only applies to one template, and only custom templates can be modified, the built-in ones cannot.
 
 ## EXAMPLES
 
@@ -27,7 +27,7 @@ WARNING: An error occurred: Response status code does not indicate success: 403 
 WARNING: VS402356: You do not have the permissions required to perform the attempted operation on this process.
 ```
 
-In this example the user has tried to hide the state "Approved" for bugs in the current project's template. -Force has not been specified and the confirmation prompt says that the process template to be modified is "Scrum". This is a built-in template, therefore WorkItem types and their states are read-only. The user continues and an error occurs (the full error is not shown) because changing the system process is forbidden.
+In this example the user has tried to hide the state "Approved" for Bugs in the current project's template. -Force has not been specified and the confirmation prompt says that the process template to be modified is "Scrum". This is a built-in template, therefore WorkItem types and their states are read-only. The user continues and an error occurs (the full error is not shown) because changing the system process is forbidden.
 
 ### Example 2
 
@@ -39,7 +39,7 @@ Order Name     Category Color  Customization Hidden
 6     Approved Proposed b2b2b2 inherited     True
 ```
 
-This version hides the state "Approved" for bugs in the custom template named "Scrum2". -Force has specified to skip the confirmation, and the command returns the modified state. Notice that the customization column changes from "system" to "inherited" when a state is hidden.
+This version hides the state "Approved" for Bugs in the custom template named "Scrum2". -Force has specified to skip the confirmation, and the command returns the modified state. Notice that the customization column changes from "system" to "inherited" when a state is hidden.
 
 If the state is already hidden a warning message will appear and the state will not be changed.
 

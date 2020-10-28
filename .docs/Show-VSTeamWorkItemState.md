@@ -10,7 +10,7 @@
 
 ## Description
 
-Each WorkItem type in each process template has a set of possible states.  Items may have system-defined states and/or custom (user-defined) states. This command is used to un-hide system states which have previously been hidden.  Note that although some WorkItem types like "Bug" or "Ttask" are found in multiple templates, a change to the available states only applies to one template, and only custom templates can be modified, the built-in ones cannot.
+Each WorkItem type in each process template has a set of possible states.  Items may have system-defined states and/or custom (user-defined) states. This command is used to un-hide system states which have previously been hidden.  Note that although some WorkItem types like "Bug" or "Task" are found in multiple templates, a change to the available states only applies to one template, and only custom templates can be modified, the built-in ones cannot.
 
 
 ## EXAMPLES
@@ -20,7 +20,7 @@ Each WorkItem type in each process template has a set of possible states.  Items
 ```PowerShell
 Show-VSTeamWorkItemState -WorkItemType Bug -Name Approved -ProcessTemplate Scrum2 -Force
 ```
-This un-hides the "Approved" state for bug in the custom process template "Scrum2", without the confirmation prompt.
+This un-hides the "Approved" state for Bugs in the custom process template "Scrum2", without the confirmation prompt.
 If the state is not hidden a warning message will appear and the state will not be changed.
 
 ## PARAMETERS

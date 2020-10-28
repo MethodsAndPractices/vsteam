@@ -24,10 +24,9 @@ Order Name      Category   Color  Customization Hidden
 4     Postponed InProgress 0000ff custom
 ```
 
-This adds a state "postponed", shown in blue, as a custom state to the "Bug" WorkItem type in the "scrum2" process-template in the"in-progress" category. By default "Committed" is at position 3 in the list of states, as an "in-progress" state, and "Done" is at position 4 as a "completed" state, the new state is inserted between them, shifting "Done", and any state(s) below it, down by one position.
+This adds a state "postponed", shown in blue, as a custom state to the "Bug" WorkItem type in the "scrum2" process-template in the "in-progress" category. By default "Committed" is at position 3 in the list of states, as an "in-progress" state, and "Done" is at position 4 as a "completed" state, the new state is inserted between them, shifting "Done", and any state(s) below it, down by one position.
 
 ## PARAMETERS
-
 
 ### -Color
 
@@ -63,7 +62,7 @@ Accept wildcard characters: False
 
 ### -Order
 
-Positions the new state in the selection list. The first position in the list is 1, and if no order is specified the new state will be added at the end of the list.
+Positions the new state in the selection list.  Items must flow in the order, Proposed, In Progress, Resolved, Completed. so it is not possible to create an item in the "Proposed" category with a high number or in the "Completed" category with a low one. The first position in the list is 1, and if no order is specified the new state will be added at the end of its category
 
 ```yaml
 Type: Int32
@@ -79,7 +78,7 @@ Accept wildcard characters: False
 
 ### -StateCategory
 
-Each state fits into one of five categories: Proposed, InProgress, Resolved, Completed, or Removed. If no category is given the new state is considered to be a form of "in progress".
+Each state fits into one of five categories: Proposed, InProgress, Resolved, Completed, or Removed. If no category is given the new state is assumed to be a form of "in progress".
 
 ```yaml
 Type: String
