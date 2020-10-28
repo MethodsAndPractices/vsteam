@@ -10,9 +10,9 @@
 
 ## Description
 
-Modifies an existing work item type in a custom process; where the work item type is a built-in type, like "Bug",
-the original item is preserved and a new inherited version is created.
-It is possible to change the Description, Icon, Icon Color, and to enable or disable the work item type
+Modifies an existing WorkItem type in a custom process; where the WorkItem type is a built-in type, like "Bug",
+the original item is preserved, and a new inherited version is created.
+It is possible to change the Description, Icon, Icon Color, and to enable or disable the WorkItem type
 
 ## EXAMPLES
 
@@ -22,7 +22,7 @@ It is possible to change the Description, Icon, Icon Color, and to enable or dis
 Set-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType Impediment -Disabled
 ```
 
-Modifies the custom process "Scrum5", disabling the built in work item type "Impediment".
+Modifies the custom process "Scrum5", disabling the built-in WorkItem type "Impediment".
 
 ### Example 2
 
@@ -30,13 +30,14 @@ Modifies the custom process "Scrum5", disabling the built in work item type "Imp
 Set-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType ChangeRequest -Icon icon_parachute -color Blue -Description "For requests from customers"
 ```
 
-Modifies the custom process "Scrum5", changing a user-defined work item type "ChangeRequest" to use
-a blue parachute icon and update its description..
+Modifies the custom process "Scrum5", changing a user-defined WorkItem type "ChangeRequest" to use
+a blue parachute icon and update its description.
+
 ## PARAMETERS
 
 ### -Color
 
-Changes the the icon color. The input value can be the name of a color name like "Red" or "Aqua" or
+Changes the  icon color. The input value can be the name of a color name like "Red" or "Aqua" or
 a hex value for red, green and blue parts. Color names should tab complete.
 
 ```yaml
@@ -92,7 +93,7 @@ Accept wildcard characters: False
 
 ### -Disabled
 
-If specified, disables the WorkItem type so that it can not be selected for new items.
+If specified, disables the WorkItem type so that it cannot be selected for new items.
 
 ```yaml
 Type: SwitchParameter
@@ -124,7 +125,7 @@ Accept wildcard characters: False
 
 ### -Icon
 
-One of the predefined icons for work item types. Possible values should tab complete and
+One of the predefined icons for WorkItem types. Possible values should tab complete and
 if the name omits the leading "Icon\_" it will be added automatically.
 
 ```yaml
