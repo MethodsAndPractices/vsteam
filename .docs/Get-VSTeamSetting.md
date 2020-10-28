@@ -31,7 +31,7 @@ url                   : https://dev.azure.com/MyOrg/00000000-0000-0000-0000-0000
 _links                : @{self=; project=; team=; teamIterations=; teamFieldValues=; classificationNode=System.Object[]}
 ```
 
-Geting the settings for the default team in the current project returns a single object with all the information.
+Getting the settings for the default team in the current project returns a single object with all the information.
 
 ### Example 2
 
@@ -46,9 +46,9 @@ Microsoft.FeatureCategory      True
 Microsoft.RequirementCategory  True
 ```
 
-This version of the command specifies the Project and Team and gets the BackLog Visibilites, including any that have been added to the Process Template as custom Behaviors.
+This version of the command specifies the project and team and gets the BackLog Visibilites, including any that have been added to the process template as custom behaviors.
 
-### Example 2
+### Example 3
 
 ```powershell
 Get-VSTeamSetting -ProjectName MyProject  -BackLogIteration
@@ -62,7 +62,7 @@ In this case only the Backlog iteration is returned.
 ## PARAMETERS
 
 ### -BackLogIteration
-If specified, only the BackLog Iteration information is returned.
+If specified, only the backlog-iteration information is returned.
 
 ```yaml
 Type: SwitchParameter
@@ -77,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -BackLogVisibilites
-If specified, only a list of the Backlogs (system-defined, and added as custom Process Behaviors) will be returned with "true" or "false" for their visibility state. Note that it is possible to set a custom Backlog as visible without any WorkItem type being associated with it, and it will be filtered out of the GUI interface while in that state.
+If specified, only a list of the Backlogs (system-defined and added as custom process-behaviors) will be returned with "true" or "false" for their visibility state. Note that it is possible to set a custom backlog as visible without any WorkItem type being associated with it, and it will be filtered out of the GUI interface while in that state.
 
 ```yaml
 Type: SwitchParameter
@@ -107,7 +107,7 @@ Accept wildcard characters: False
 ```
 
 ### -DefaultIteration
-If specified, only the Default Iteration information is returned.
+If specified, only the default-iteration information is returned.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: DefaultIteration
@@ -121,7 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectName
-The name of the Project whose Team settings are required.
+The name of the project whose team settings are required.
 
 ```yaml
 Type: Object
@@ -136,7 +136,7 @@ Accept wildcard characters: False
 ```
 
 ### -Team
-The name of the Team whose settings should be returned, if no Team is specified the Project's default Team is used.
+The name of the team whose settings should be returned, if no team is specified the project's default team is used.
 
 ```yaml
 Type: String
@@ -151,7 +151,7 @@ Accept wildcard characters: False
 ```
 
 ### -WorkingDays
-If specified returns only the list of working-days for the Team.
+If specified, returns only the list of working-days for the team.
 
 ```yaml
 Type: SwitchParameter
@@ -168,7 +168,6 @@ Accept wildcard characters: False
 ## INPUTS
 
 ## OUTPUTS
-
 
 ## NOTES
 

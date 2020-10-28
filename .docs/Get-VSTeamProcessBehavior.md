@@ -10,13 +10,13 @@
 
 ## Description
 
-In the user interface, WorkItems are shown on Boards. The API refers appearing on a board as a "Behavior".
+In the user interface, WorkItems are shown on boards. The API refers to them as WorkItem and process behaviours.
 
-In settings for a Project based on the "Scrum" process template, for example, under Team Configuration  "Epics", "Features" and/or "Backlog Items" can be selected as "Backlog Navigation Levels" to display, and a fourth board "Tasks" is always used for displaying Sprints.  Bugs can either be displayed either on the Tasks board (as part of the Iteration Backlog in a sprint) or on the Backlog-Items board (as part of the Requirement backlog). Iteration and Requirement are two categories of backlog which only have one board each. The third category of board, Portfolio backlogs, contains Epics, Features and user-defined boards/behaviors
+In settings for a project based on the "Scrum" process template, for example, under team configuration "Epics", "Features" and/or "Backlog items" can be selected as "Backlog Navigation Levels" to display, and a fourth board "Tasks" is always used for displaying Sprints.  Bugs can either be displayed either on the Tasks board (as part of the "Iteration backlog" in a sprint) or on the Backlog Items board (as part of the "requirement backlog"). Iteration and Requirement are two categories of backlog which only have one board. The third category, Portfolio backlogs contains Epics, Features and user-defined boards/behaviors
 
-As well as bugs, other built-in WorkItem types are tied to a particular Board, the Epic type is always on the Epics Board, the Feature type on Features, the Task type on Tasks and (in Scrum-based templates) the Product BackLog Item type on Backlog Items. (In Agile-based templates, the board for the requirement backlog is named "Stories" and the WorkItem type is "User Story", CMMI-Based ones call their requirements backlog "Requirements" and the WorkItem type a "Requirement" and templates based on Basic use a board named "Issues" and the "Issue" workItem type ).
+As well as bugs, other built-in WorkItem types are tied to a particular board, the Epic type is always on the Epics board, the Feature type on Features, the Task type on Tasks and the Product BackLog item Type on Backlog items. (In Agile-based templates, the board for the requirement backlog is named "Stories" and the WorkItems type is User Story, CMMI-Based ones call their requirements backlog "Requirements" and the WorkItem type a Requirement and templates based on Basic use a board named "Issues" and the Issue workItem type ).
 
-Other workitem types -in particular custom-defined ones - are available to add to any of these boards. So a new WorkItem type named "Change" might appear with tasks, with requirements, with features, or on a Portfolio Backlog board of its own. When two or more WorkItem types are available on the same Board, one type is selected as the default for new items added to the Board.
+Other WorkItem types -in particular, custom-defined ones - are available to add to any of these boards. So, a new WorkItem type named "Change" might appear with tasks, with requirements, with features, or on a portfolio board of its own. When two or more WorkItem types are available on the same board, one type is selected as the default for new items added to the board.
 
 Get-VSTeamProcessBehavior lists the boards available in a Process Template. And Get-VSTeamWorkItemBehavior shows the boards an items of a given WorkItem type can appear on and whether that type is the default for that board.
 
@@ -36,13 +36,13 @@ Rank Name          Workitem types       Inherits                        color  D
 0    Ordered                                                                   Enables work items...
 ```
 
-This shows the Backlogs for the the built-in Process Template, "Scrum"
+This shows the backlogs for the the built-in process template, "Scrum"
 
 ## PARAMETERS
 
 ### -ProcessTemplate
 
-The Process Template of interest; if no Template is specified the Template for the current Project will be used.
+The process template of interest; if no template is specified the tTemplate for the current project will be used.
 
 ```yaml
 Type: String

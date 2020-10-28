@@ -1,16 +1,16 @@
 <!-- #include "./common/header.md" -->
 
-# Set-VSTeamProcess
+# Remove-VSTeamProcess
 
 ## SYNOPSIS
 
-<!-- #include "./synopsis/Set-VSTeamProcess.md" -->
+<!-- #include "./synopsis/Remove-VSTeamProcess.md" -->
 
 ## SYNTAX
 
 ## DESCRIPTION
 
-<!-- #include "./synopsis/Set-VSTeamProcess.md" -->
+<!-- #include "./synopsis/Remove-VSTeamProcess.md" -->
 
 ## EXAMPLES
 
@@ -36,7 +36,7 @@ Prompts you for confirmation before running the cmdlet. By default this command 
 
 
 ### -ProcessTemplate
-The name of the process template which is to be deleted
+The name of the process template which is to be deleted.
 
 ```yaml
 Type: Object

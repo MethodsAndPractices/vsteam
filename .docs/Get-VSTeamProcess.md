@@ -38,7 +38,7 @@ This will return the Process Templates only showing their name
 Get-VSTeamProcess *scrum*
 ```
 
-This will return an process templates with names containing scrum,
+This will return all process templates with names containing scrum,
 in other words, the default "Scrum" template and custom ones with
 names like "Custom Scrum", "Scrum for Contoso" will all be returned.
 
@@ -52,8 +52,7 @@ Name  Enabled Default Description
 Scrum True    False   This template is for teams who follow the Scrum framework.
 ```
 
-This gets the projects associated with each process template,
-and filters the list down to the one which contains a particular project,
+This gets all process template with their associated  projects and filters the list to the one which contains a particular project,
 the "Scrum" template in this example.
 
 ## PARAMETERS

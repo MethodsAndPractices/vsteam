@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-Add-VSTeamProcess will add a new Process template to your organization. Processes define the available WorkItem Types and the Behaviors (backlog levels) for Projects. Existing Projects can be switched to a new Process, and any enabled Process can be used for creating new Projects.
+Add-VSTeamProcess will add a new process template to your organization. Processes define the available WorkItem types and the behaviors (backlog levels) for projects. Existing projects can be switched to a new process, and any enabled process can be used for creating new projects.
 
 ## EXAMPLES
 
@@ -26,7 +26,7 @@ Name    Enabled Default Description
 ----    ------- ------- -----------
 Basic J True    False  New Basic Process
 ```
-Creates a new Process template derived from the built-in Process named "Basic", and sets its description. The -Force switch was not specified, so the command prompts for confirmation
+Creates a new Process template, derived from the built-in Process named "Basic", and sets its description. The -Force switch was not specified, so the command prompts for confirmation.
 
 ### Example 2
 
@@ -40,7 +40,7 @@ Name   Enabled Default Description
 Scrum4 True    False
 Scrum5 True    False   
 ```
-Here the parent template is an object representing an existing process, and multiple names for different variations of the "Scrum" template are created. Note that in addition to being output, the proceses are stored in a variable, $Processes, for later use by using the OutVariable common parameter. 
+Here the parent template is an object representing an existing process, and multiple names for different variations of the "Scrum" template are created. Note that in addition to being output, the processes are stored in a variable, $Processes, for later use by using the OutVariable common parameter. 
 
 
 ## PARAMETERS
@@ -60,7 +60,7 @@ Required: False
 
 ### -ParentProcess
 
-New Processes must be based on an existing {rocess. This can be one of the built in Processes names or the name of a user defined process. The names should tab-complete.
+New Processes must be based on an existing process. This can be one of the built in process names or the name of a user defined process. The names should tab-complete.
 
 ```yaml
 Type: String
@@ -79,7 +79,7 @@ Accept pipeline input: true (ByValue)
 
 ### -ReferenceName
 
-Allows the a system-generated name based on the new Process's assigned GUID to be overriden. This parameter can usually be omitted, and should be omitted when piping multiple names into the command.  
+Allows the system-generated name based on the new process's assigned GUID to be overriden. This parameter can usually be omitted, and should be omitted when piping multiple names into the command.  
 
 ```yaml
 Type: String

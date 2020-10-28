@@ -30,7 +30,7 @@ Name  Enabled Default Description
 Agile True    True    This template is flexible and will work great for most teams...
 ```
 
-This commands sets the built-in process "Agile" as the default process, and prompts the user to confirm the action.
+This command sets the built-in process "Agile" as the default process, and prompts the user to confirm the action.
 
 ### Example 2
 
@@ -43,7 +43,7 @@ Basic False   False   This template is flexible for any process...
 ```
 
 The first command in the pipeline gets built-in process "Basic", and the second disables it without waiting for confirmation.
-The Get- command could take a wildcard and return multiple matching processes, which would cause all to be disabled.
+The Get- command could take a wildcard and return multiple matching processes, which would cause them all to be disabled.
 
 ### Example 3
 
@@ -62,7 +62,7 @@ This renames a project to remove the space from its name, and gives it a new des
 
 ### -AsDefault
 
-Makes a process the default for new projects in the Organization
+Makes a process the default for new projects in the organization
 
 ```yaml
 Type: SwitchParameter
@@ -92,7 +92,7 @@ Accept wildcard characters: False
 ```
 ### -Description
 
-A new description for the new process
+A new description for the new process.
 
 ```yaml
 Type: String
@@ -108,7 +108,7 @@ Accept wildcard characters: False
 
 ### -Disabled
 
-Disables a process; built-in processes cannot be deleted.
+Disables a process; built-in processes cannot be deleted but can be disabled.
 
 ```yaml
 Type: SwitchParameter
@@ -124,7 +124,7 @@ Accept wildcard characters: False
 
 ### -Enabled
 
-Re-enables a disabled Process
+Re-enables a disabled process.
 
 ```yaml
 Type: SwitchParameter
@@ -142,7 +142,7 @@ Accept wildcard characters: False
 
 ### -NewName
 
-Allows the Process to be renamed
+Allows the process to be renamed.
 
 ```yaml
 Type: String

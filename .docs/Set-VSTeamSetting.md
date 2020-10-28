@@ -41,13 +41,13 @@ $settings = Get-VSTeam -Name "planning team" | Set-VSTeamSetting -BacklogIterati
 
 ```
 The first line finds default iteration for the current project.
-The second line has a pipeline of two commands - the first finds the team named "Planning Team" in the current project, and the second sets the iteration which was found in the previous line to be the backlog iteration and hides the Epics Backlog (using its reference name). Instead of return as set of key/value pairs, this version retuns the updated settings as a single object.
+The second line has a pipeline of two commands - the first finds the team named "Planning Team" in the current project, and the second sets the iteration which was found in the previous line to be the team's backlog iteration and hides the Epics Backlog (using its reference name). Instead of returning a set of key/value pairs, this version returns the updated settings as a single object in $Settings for later use.
 
 
 ## PARAMETERS
 
 ### -BackLogIteration
-The new BackLog Iteration for the Team, this can be given the as iteration's Path, ID, GUID-identifier or as an object returned by Get-VSTeamIteration.
+The new backlog iteration for the team, this can be given the as iteration's Path, ID, GUID-identifier or as an object returned by Get-VSTeamIteration.
 
 ```yaml
 Type: Object
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -BackLogVisibilites
-A hash-table where the keys are Backlogs - either by display name like "Epics" or the refernce name like "Microsoft.EpicCategory" - and the values are true or false. The backlogs listed will be hidden or revealed based on the value. If text is used instead of a boolean, "False" or "No" will be treated as false (hide) and all other non-empty values will be treated as true (show). Any backlogs not included in the hash-table will be left unchanged.
+A hash-table where the keys are backlogs - either by display name like "Epics" or the reference name like "Microsoft.EpicCategory" - and the values are true or false depending on whether the the backlog should be visible or not.. If text is used instead of a Boolean, "False" or "No" will be treated as false (hide) and all other non-empty values will be treated as true (show). Any backlogs not included in the hash-table will be left unchanged.
 
 ```yaml
 Type: Hashtable
@@ -93,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -DefaultIteration
-The new Default Iteration for the Team , this can be given the iteration's Path, ID, GUID-identifier, or as an object returned by Get-VSTeamIteration
+The new default iteration for the team, this can be given the iteration's Path, ID, GUID-identifier, or as an object returned by Get-VSTeamIteration
 ```yaml
 Type: Object
 Parameter Sets: (All)
@@ -107,7 +107,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-A new description for the Team.
+A new description for the team.
 
 ```yaml
 Type: String
@@ -137,7 +137,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectName
-The Project containing the team to modified.
+The project containing the team to modified.
 
 ```yaml
 Type: Object
@@ -152,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -RawOutput
-If specied, returns the object sent back from the server in response to the set request. If not specified, settings are returned as a series of name/value pairs.
+If specified, returns the object sent back from the server in response to the set request. If not specified, settings are returned as a series of name/value pairs.
 
 ```yaml
 Type: SwitchParameter
@@ -167,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### -Team
-The name of the Team whose settings should be modified. If not specified, the project's default team is used. The Team can be piped into the command, and doing so will override any value set for Projectname.
+The name of the Team whose settings should be modified. If not specified, the project's default team is used. The Team can be piped into the command and doing so will override any value set for Projectname.
 
 ```yaml
 Type: Object
