@@ -12,7 +12,7 @@ Describe 'VSTeamProject' {
       }
 
       Mock Start-Sleep
-      Mock _getInstance { return 'https://dev.azure.com/test' }
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
       Mock _getApiVersion { return '1.0-unitTests' }
       Mock _callApi { Open-SampleFile 'Get-VSTeamProcess.json' } -ParameterFilter { $area -eq 'work' -and $resource -eq 'processes' }
 

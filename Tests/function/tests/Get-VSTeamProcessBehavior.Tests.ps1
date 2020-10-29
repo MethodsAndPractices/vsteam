@@ -8,7 +8,7 @@ Describe 'VSTeamProcessBehavior' {
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      Mock _getInstance       { return 'https://dev.azure.com/test' }
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
       Mock _getApiVersion     { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
       Mock _getDefaultProject { return "MockProject"}
    }
@@ -17,7 +17,7 @@ Describe 'VSTeamProcessBehavior' {
       BeforeAll {
          ## Arrange
          Mock Get-VSTeamWorkItemType { Open-SampleFile 'workitemsWithBehaviors.json'   }
-         Mock _callAPi {Open-SampleFile 'processesBehaviors.json'  } 
+         Mock _callAPi {Open-SampleFile 'processesBehaviors.json'  }
          Mock Get-VSTeamProcess { return @(
               [PSCustomObject]@{
                   Name = "Scrum"
@@ -30,7 +30,7 @@ Describe 'VSTeamProcessBehavior' {
 
       It 'should get behaviors and set their type correctly' {
          ## Act
-         $behaviors = Get-VSTeamProcessBehavior -ProcessTemplate Scrum  
+         $behaviors = Get-VSTeamProcessBehavior -ProcessTemplate Scrum
 
          ## Assert
          Should -Invoke Get-VSTeamWorkItemType -Scope It -ParameterFilter {$Expand -eq 'Behaviors'} -Times 1 -Exactly

@@ -8,7 +8,7 @@ Describe 'VSTeamWorkItemBehavior' {
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      Mock _getInstance       { return 'https://dev.azure.com/test' }
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
       Mock _getApiVersion     { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
       Mock _getDefaultProject { return "MockProject"}
    }
@@ -16,7 +16,7 @@ Describe 'VSTeamWorkItemBehavior' {
    Context 'Get-VSTeamWorkItemBehavior' {
       BeforeAll {
          ## Arrange
-         Mock Get-VSTeamWorkItemType { 
+         Mock Get-VSTeamWorkItemType {
             [PSCustomObject]@{name = "Epic"; behaviors = @(
                [PSCustomObject]@{isdefault = $true; behavior = [PSCustomObject]@{
                      id  = 'Microsoft.VSTS.Scrum.EpicBacklogBehavior'
@@ -40,8 +40,8 @@ Describe 'VSTeamWorkItemBehavior' {
 
          ## Assert
          Should -Invoke Get-VSTeamWorkItemType -Scope It -ParameterFilter {$Expand -eq 'Behaviors'} -Times 1 -Exactly
-         
-         
+
+
          $behavior.ProcessTemplate      | Should -Be      'Scrum'
          $behavior.WorkItemType         | Should -Be      'Epic'
       }

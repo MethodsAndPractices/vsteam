@@ -8,8 +8,8 @@ Describe 'VSTeamProcessBehavior' {
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      Mock _getInstance       { return 'https://dev.azure.com/test' }
-      Mock _getApiVersion     { return '1.0-unitTests' } 
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+      Mock _getApiVersion     { return '1.0-unitTests' }
       Mock _getDefaultProject { return "MockProject"}
    }
 
@@ -38,7 +38,7 @@ Describe 'VSTeamProcessBehavior' {
          ## Assert
          Should -Invoke _callapi -Scope It -ParameterFilter {
                 $method -eq 'delete' -and
-                $url     -match "https://dummy.none/_apis/work/processes/6b724908-ef14-45cf-84f8-768b5384da45/behaviors/TestReferenceName" -and 
+                $url     -match "https://dummy.none/_apis/work/processes/6b724908-ef14-45cf-84f8-768b5384da45/behaviors/TestReferenceName" -and
                 $body   -eq $null
          } -Times 1 -Exactly
       }

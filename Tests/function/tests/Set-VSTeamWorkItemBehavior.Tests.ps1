@@ -9,7 +9,7 @@ Describe 'VSTeamWorkItemBehavior' {
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      Mock _getInstance       { return 'https://dev.azure.com/test' }
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
       Mock _getApiVersion     { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
       Mock _getDefaultProject { return "MockProject"}
    }
