@@ -8,7 +8,7 @@ Describe 'VSTeamWorkItemState' {
       ## Arrange
       # Set the account to use for testing. A normal user would do this
       # using the Set-VSTeamAccount function.
-      Mock _getInstance   { return 'https://dev.azure.com/test' }
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
       Mock _callAPI       {return $null}
    }
@@ -24,7 +24,7 @@ Describe 'VSTeamWorkItemState' {
             isDisabled    =  $false
             referenceName = 'Microsoft.VSTS.WorkItemTypes.Bug'
             url           = 'https://dummy.none/workItemTypes/Microsoft.VSTS.WorkItemTypes.Bug'
-            states        = @( 
+            states        = @(
                [PSCustomObject]@{
                   id                 = '7b7e3e8c-e500-40b6-ad56-d59b8d64d757'
                   name               = 'New'
@@ -80,7 +80,7 @@ Describe 'VSTeamWorkItemState' {
                   customizationType  = 'system'
                }
             )
-         }  
+         }
          Mock Get-VSTeamWorkItemType {return $bug }
          Mock Get-VSTeamProcess { return @(
                [PSCustomObject]@{
@@ -94,14 +94,14 @@ Describe 'VSTeamWorkItemState' {
 
       It 'should call the REST API with the Delete method and the correct URL to remove a custom WorkItem state' {
          ## Act
-         Remove-VsteamWorkItemState -WorkItemType bug -Name postponed -ProcessTemplate Scrum2 -Force 
+         Remove-VsteamWorkItemState -WorkItemType bug -Name postponed -ProcessTemplate Scrum2 -Force
 
          ## Assert
          Should -Invoke _callAPI -Scope It  -Times 1 -Exactly -ParameterFilter {
-               $method -eq  'Delete' -and 
+               $method -eq  'Delete' -and
                $url -match "WorkItemTypes\.Bug/states/000000\?api-version="
          }
-         
+
       }
    }
 }
