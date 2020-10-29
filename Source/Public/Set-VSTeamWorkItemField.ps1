@@ -81,7 +81,7 @@ function Set-VSTeamWorkItemField {
                # and add members to make it easier if piped into something which takes values by property name
                $resp.psobject.TypeNames.Insert(0,'vsteam_lib.WorkitemField')
                Add-Member -InputObject $resp -MemberType NoteProperty  -Name WorkItemType    -Value $w.name
-               Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -Value $ProcessTemplate
+               Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -value $w.processTemplate
 
                Write-Output $resp
             }

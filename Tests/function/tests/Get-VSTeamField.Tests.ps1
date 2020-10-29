@@ -5,13 +5,10 @@ Describe 'VSTeamField' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       ## Arrange
-      # Set the account to use for testing. A normal user would do this
-      # using the Set-VSTeamAccount function.
-      Mock _getInstance { return 'https://dev.azure.com/test' }
+      # Set the account to use for testing. Field cache relies on versions.account
+      # A normal user would do this using the Set-VSTeamAccount function.
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
       Mock _getApiVersion { return '1.0-unitTests' }
-
-      #Set the project to fool Field cache that we are logged on and it can call Get-VsTeamFeild.
-      [vsteam_lib.Versions]::Account='test'
       [vsteam_lib.FieldCache]::Invalidate()
 
       Mock _callApi {

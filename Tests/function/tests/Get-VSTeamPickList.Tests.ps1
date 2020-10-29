@@ -5,11 +5,10 @@ Describe 'VSTeamPickList' {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
 
       ## Arrange
-      # Set the account to use for testing. A normal user would do this
-      # using the Set-VSTeamAccount function.
-      Mock _getInstance { return 'https://dev.azure.com/test' }
+      # Set the account to use for testing.
+      # A normal user would do this using the Set-VSTeamAccount function.
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
       Mock _getApiVersion { return '1.0-unitTests' }
-      [vsteam_lib.Versions]::Account='test'
       Mock _callApi {
          if ($id) {return [pscustomobject]@{name='Office';id='693feca0-3123-41ba-8501-52d4882949c8'}}
          else     {return ([pscustomobject]@{Value=@([pscustomobject]@{name='Office';id='693feca0-3123-41ba-8501-52d4882949c8'},[pscustomobject]@{name='State';id = '693feca0-3123-41ba-8501-52d4882949c8'})})}}
