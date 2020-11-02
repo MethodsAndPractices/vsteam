@@ -60,7 +60,7 @@ function Add-VSTeamWorkItemField {
                Add-Member -InputObject $resp -MemberType NoteProperty  -Name WorkItemType    -Value $w.name
                Add-Member -InputObject $resp -MemberType NoteProperty  -Name ProcessTemplate -value $w.processTemplate
 
-               return $resp
+               Write-Output $resp
             }
          }
       }

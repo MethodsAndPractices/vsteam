@@ -35,10 +35,15 @@ namespace vsteam_lib
                Regex afterLastDot = new Regex(@"^.*\.(.+)$");
                foreach (var field in fields)
                {
-                  string fieldRefName = field.Properties["referenceName"].Value.ToString();
-                  string shortname = afterLastDot.Replace(fieldRefName,"$1");
-                  RefNames.Add(fieldRefName.ToLower(), fieldRefName);
-                  ShortNames.Add(shortname.ToLower(), fieldRefName);
+                  string fieldreferenceName = field.Properties["referenceName"].Value.ToString();
+                  string fieldDisplayName = field.Properties["Name"].Value.ToString().ToLower();
+                  string fieldShortname = afterLastDot.Replace(fieldreferenceName,"$1").ToLower();
+                  RefNames.Add(fieldreferenceName.ToLower(), fieldreferenceName);
+                  ShortNames.Add(fieldShortname, fieldreferenceName);
+                  if (fieldDisplayName != fieldShortname)
+                  {
+                     ShortNames.Add(fieldDisplayName, fieldreferenceName);
+                  }
                }
 
                // This will return just the names

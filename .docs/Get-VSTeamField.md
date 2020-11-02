@@ -57,7 +57,8 @@ This time two search terms are used, one transforms to the priority field, and t
 ## PARAMETERS
 
 ### -ReferenceName
-The fully-qualified or partial ReferenceName. Note that display names like "Target Date" which contain a space may have a reference name in the form "Microsoft.VSTS.Scheduling.TargetDate", and the resolution of the partial name looks for the section after the final "." character, which is "TargetDate" with no space, and therefore does not match the display name.
+The ReferenceName, or the display name of the desired field(s). 
+Note the command tries to resolve names without wild cards to fully qualified Reference names; so "Backlog Priority" (including a space) resolves as the display name of Microsoft.VSTS.Common.BacklogPriority and "BacklogPriority" (without a space), resolves as its unqualified name. Wild card searches are done against display name and fully qualified name, so "Backlog P*" will resolve against the display name and "*backlogP*" will resolve against the reference name, but "backlogP*" (no space or leading *) doesn't match. 
 
 ```yaml
 Type: Object

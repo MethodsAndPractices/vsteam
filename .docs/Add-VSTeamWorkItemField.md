@@ -99,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReferenceName
-The reference name of the field. The command will attempt to resolve a partial name like "ClosedDate" to its full reference name, like "Microsoft.VSTS.Common.ClosedDate". Values for the field names should tab-complete.
+The reference name of the field. The command will attempt to resolve a display name liked "Closed Date" or partial name like "ClosedDate" to a full reference name, like "Microsoft.VSTS.Common.ClosedDate". Values for the field names should tab-complete.
 
 ```yaml
 Type: Object
