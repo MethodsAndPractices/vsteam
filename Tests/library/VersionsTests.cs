@@ -15,6 +15,7 @@ namespace vsteam_lib.Test
       [DataRow("GitV1", APIs.Git)]
       [DataRow("DistributedTaskV1", APIs.DistributedTask)]
       [DataRow("DistributedTaskReleasedV1", APIs.DistributedTaskReleased)]
+      [DataRow("Pipelines", APIs.Pipelines)]
       [DataRow("VariableGroupsV1", APIs.VariableGroups)]
       [DataRow("TfvcV1", APIs.Tfvc)]
       [DataRow("PackagingV1", APIs.Packaging)]

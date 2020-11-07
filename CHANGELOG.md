@@ -1,5 +1,23 @@
 # Changelog
 
+## 7.1.2
+
+Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/366) from [Jhoneill](https://github.com/jhoneill) which included the following:
+
+- Fix Query Cache [#365](https://github.com/DarqueWarrior/vsteam/issues/365)
+
+Changed Get-VSTeamProject to return all projects by default instead of just the top 100. This change was made to address issue #363. If your project name was not in the top 100 projects validation would fail. Returning all projects can have performance issues. You can set the value for top used by setting a PowerShell default value:
+
+```powershell
+$Global:PSDefaultParameterValues["*-vsteam*:top"] = 500
+```
+
+Fixed issue #360 but updating the way DateTimes are tested.
+
+## 7.1.1
+
+Fixed bug in Test-VSTeamYamlPipeline by adding a Pipelines version value.
+
 ## 7.1.0
 
 Added:

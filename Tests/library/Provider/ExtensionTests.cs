@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace vsteam_lib.Test.Provider
@@ -25,8 +26,8 @@ namespace vsteam_lib.Test.Provider
          Assert.IsNotNull(actual.InstallState, "InstallState");
          Assert.AreEqual("none", actual.InstallState.Flags, "InstallState.Flags");
          Assert.IsNotNull(actual.InstallState.InternalObject, "InstallState.InternalObject");
-         Assert.AreEqual("8/10/2020 8:31:07 PM", actual.InstallState.LastUpdated.ToString(), "InstallState.LastUpdated");
-         Assert.AreEqual("Flags: none, Last Updated: 8/10/2020 8:31:07 PM", actual.InstallState.ToString(), "InstallState.ToString()");
+         Assert.IsTrue(actual.InstallState.ToString().StartsWith("Flags: none, Last Updated: "), "InstallState.ToString()");
+         Assert.AreEqual("8/10/2020 8:31:07 pm", actual.InstallState.LastUpdated.ToString("M/d/yyyy h:mm:ss tt").ToLower(), "InstallState.LastUpdated");
       }
    }
 }
