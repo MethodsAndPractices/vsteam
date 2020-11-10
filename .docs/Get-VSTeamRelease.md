@@ -46,6 +46,14 @@ Get-VSTeamRelease -ProjectName demo -Id 10 -Json
 
 This command returns the raw object returned from the server formatted as JSON.
 
+### Example 4
+
+```powershell
+Get-VSTeamRelease -ProjectName demo -artifactVersionId 7
+```
+
+This command returns the associated release object for given build Id.
+
 ## PARAMETERS
 
 ### Expand
@@ -74,6 +82,15 @@ Id of the release definition
 Type: Int32
 Parameter Sets: List
 Default value: 0
+```
+
+### ArtifactVersionId
+
+Id of the artifact version. Returns the particular release pertaining to given artifact version Id.
+
+```yaml
+Type: String
+Parameter Sets: List
 ```
 
 ### Top
