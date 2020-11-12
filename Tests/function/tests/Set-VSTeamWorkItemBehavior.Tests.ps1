@@ -98,6 +98,11 @@ Describe 'VSTeamWorkItemBehavior' {
       }
 
    }
+
+   AfterAll {
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+   }
+
 }
 
 <#

@@ -27,4 +27,9 @@ Describe 'VSTeamSetting' {
 
       }
    }
+
+   AfterAll {
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+   }
+
 }

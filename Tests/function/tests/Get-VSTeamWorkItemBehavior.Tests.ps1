@@ -46,4 +46,9 @@ Describe 'VSTeamWorkItemBehavior' {
          $behavior.WorkItemType         | Should -Be      'Epic'
       }
    }
+
+   AfterAll {
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+   }
+
 }

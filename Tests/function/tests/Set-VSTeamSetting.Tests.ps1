@@ -19,7 +19,7 @@ Describe 'VSTeamSetting' {
 
       It 'should get make the correct api call to get settings' {
          ## Act
-         $settings = Set-VSTeamSetting -project "MockProject" -WorkingDays saturday -BugsBehavior asTasks -force
+         $null = Set-VSTeamSetting -project "MockProject" -WorkingDays saturday -BugsBehavior asTasks -force
 
          ## Assert
          Should -Invoke _callapi -Scope It -ParameterFilter {
@@ -27,4 +27,9 @@ Describe 'VSTeamSetting' {
 
       }
    }
+
+   AfterAll {
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+   }
+
 }

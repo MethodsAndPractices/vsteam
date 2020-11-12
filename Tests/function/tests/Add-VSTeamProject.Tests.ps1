@@ -111,4 +111,9 @@ Describe 'VSTeamProject' {
          { Add-VSTeamProject -projectName Test -processTemplate CMMI } | Should -Throw
       }
    }
+
+   AfterAll {
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+   }
+
 }

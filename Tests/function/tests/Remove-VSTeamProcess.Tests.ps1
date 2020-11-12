@@ -38,4 +38,9 @@ Describe 'VSTeamProcess' {
          }
       }
    }
+
+   AfterAll {
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+   }
+
 }

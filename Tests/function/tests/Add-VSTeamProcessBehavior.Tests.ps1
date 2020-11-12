@@ -45,4 +45,9 @@ Describe 'VSTeamProcessBehavior' {
          $behavior.ProcessTemplate      | Should -Be      'Scrum'
       }
    }
+
+   AfterAll {
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+   }
+
 }

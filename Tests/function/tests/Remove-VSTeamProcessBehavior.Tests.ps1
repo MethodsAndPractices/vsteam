@@ -43,4 +43,9 @@ Describe 'VSTeamProcessBehavior' {
          } -Times 1 -Exactly
       }
    }
+
+   AfterAll {
+      [vsteam_lib.Versions]::Account = 'https://dev.azure.com/test'
+   }
+
 }
