@@ -3,8 +3,6 @@ Set-StrictMode -Version Latest
 Describe 'VSTeamWorkItemType' {
    BeforeAll {
       . "$PSScriptRoot\_testInitialize.ps1" $PSCommandPath
-      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamProcess.ps1"
-      . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemIconList.ps1"
       . "$PSScriptRoot\..\..\..\Source\Public\Get-VSTeamWorkItemType.ps1"
       . "$PSScriptRoot\..\..\..\Source\Public\Unlock-VSTeamWorkItemType.ps1"
       $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
@@ -15,25 +13,6 @@ Describe 'VSTeamWorkItemType' {
       Mock _getInstance { return 'https://dev.azure.com/test' }
       Mock _getApiVersion { return '1.0-unitTests' } -ParameterFilter { $Service -eq 'Processes' }
 
-      Mock Get-VSTeamProcess {
-         $processes = @(
-            [PSCustomObject]@{Name = "Scrum"; url = 'http://bogus.none/1'; ID = "6b724908-ef14-45cf-84f8-768b5384da45" },
-            [PSCustomObject]@{Name = "Basic"; url = 'http://bogus.none/2'; ID = "b8a3a935-7e91-48b8-a94c-606d37c3e9f2" },
-            [PSCustomObject]@{Name = "CMMI"; url = 'http://bogus.none/3'; ID = "27450541-8e31-4150-9947-dc59f998fc01" },
-            [PSCustomObject]@{Name = "Agile"; url = 'http://bogus.none/4'; ID = "adcc42ab-9882-485e-a3ed-7678f01f66bc" },
-            [PSCustomObject]@{Name = "Scrum With Space"; url = 'http://bogus.none/5'; ID = "12345678-0000-0000-0000-000000000000" }
-         )
-         if ($name) { return $processes.where( { $_.name -like $name }) }
-         else { return $processes }
-      }
-      Mock _callApi -ParameterFilter { $resource -eq 'workitemicons' }  -MockWith {
-        return [pscustomobject]@{'Value' = @(
-               [pscustomobject]@{'ID' = 'icon_airplane' }
-               [pscustomobject]@{'ID' = 'icon_asterisk' }
-               [pscustomobject]@{'ID' = 'icon_book' }
-            )
-         }
-      }
       Mock _callApi -ParameterFilter { $Method -eq 'Post' } -MockWith {
          return ([psCustomObject]@{name = 'Dummy' })
       }
@@ -42,29 +21,30 @@ Describe 'VSTeamWorkItemType' {
       }
       Mock Get-VSTeamWorkItemType   {
             $wits = @(
-                  [psCustomObject]@{name          = 'Bug'
-                                    customization = 'system'
-                                    referenceName = 'Microsoft.VSTS.WorkItemTypes.Bug'
-                                    icon          = 'icon_insect'
-                                    color         = 'cc293d'
-                                    isDisabled    =  $false
-                                    description   = 'A divergence...'
-                                    url           = 'http://bogus.none/workitemTypes/98'
+                  [psCustomObject]@{name            = 'Bug'
+                                    customization   = 'system'
+                                    referenceName   = 'Microsoft.VSTS.WorkItemTypes.Bug'
+                                    icon            = 'icon_insect'
+                                    color           = 'cc293d'
+                                    isDisabled      =  $false
+                                    description     = 'A divergence...'
+                                    url             = 'http://bogus.none/workitemTypes/98'
+                                    processTemplate = 'scrum'
                   }
-                  [psCustomObject]@{name          = 'Gub'
-                                    customization = 'custom'
-                                    icon          = 'icon_book'
-                                    color         = 'ff0000'
-                                    isDisabled    =  $false
-                                    description   = 'Test Item'
-                                    url           = 'http://bogus.none/workitemTypes/99';
+                  [psCustomObject]@{name            = 'Gub'
+                                    customization   = 'custom'
+                                    icon            = 'icon_book'
+                                    color           = 'ff0000'
+                                    isDisabled      =  $false
+                                    description     = 'Test Item'
+                                    url             = 'http://bogus.none/workitemTypes/99'
+                                    processTemplate = 'scrum'
                   }
                )
          if ($WorkItemType) { return $wits.where( { $_.name -like $WorkItemType }) }
          else               { return $wits }
       }
-      [vsteam_lib.IconCache]::Invalidate()
-      [vsteam_lib.ProcessTemplateCache]::Invalidate()
+
 
        Mock Write-Warning {
          return

@@ -145,5 +145,10 @@ Describe 'VSTeamWorkItemState' {
          $state.WorkItemType        | should -be      'bug'
       }
    }
+
+   AfterAll {
+         [vsteam_lib.Versions]::Account = ""
+   }
+
 }
 

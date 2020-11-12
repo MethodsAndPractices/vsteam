@@ -131,5 +131,10 @@ Describe 'VSTeamWorkItemState' {
          Should -Invoke Write-Warning -Times 0 -Exactly
       }
    }
+
+   AfterAll {
+         [vsteam_lib.Versions]::Account = ""
+   }
+
 }
 

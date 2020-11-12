@@ -104,5 +104,10 @@ Describe 'VSTeamWorkItemState' {
 
       }
    }
+
+   AfterAll {
+         [vsteam_lib.Versions]::Account = ""
+   }
+
 }
 
