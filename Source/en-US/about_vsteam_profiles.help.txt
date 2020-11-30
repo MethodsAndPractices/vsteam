@@ -2,14 +2,14 @@ TOPIC
     VSTeam Profiles
 
 SHORT DESCRIPTION
-    Profiles allow you to store account information so you do not have to 
+    Profiles allow you to store account information so you do not have to
     remember your Personal Access Token (PAT). Simply create a profile for
     the desired account and use the profile name to switch to that account
-    using the Set-VSTeamAccount function. You can press tab after the 
+    using the Set-VSTeamAccount function. You can press tab after the
     -Profile parameter to cycle through your profile names.
 
 LONG DESCRIPTION
-   Using profiles makes it easier to switch from one account to another. 
+   Using profiles makes it easier to switch from one account to another.
    Profiles store the URL to the account and authentication information.
 
    To use a profile with the Set-VSTeamAccount function use the -Profile
@@ -23,7 +23,7 @@ EXAMPLES
 
     This will add a profile named demonstrations for use with Set-VSTeamAccount using the AzD API.
 
-    Get-VSTeamProfiles | Remove-VSTeamProfiles -Force
+    Get-VSTeamProfile | Remove-VSTeamProfile -Force
 
     This will delete all the profiles.
 
