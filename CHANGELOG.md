@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1.3
+
+Added Clear-VSTeamDefaultProjectCount and Set-VSTeamDefaultProjectCount to control the default number of projects returned for tab completion and validation. By default only 100 projects are returned and the 100 returned is nondeterministic. But calling Set-VSTeamDefaultProjectCount you can increase the number of projects returned.
+
 ## 7.1.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/366) from [Jhoneill](https://github.com/jhoneill) which included the following:
