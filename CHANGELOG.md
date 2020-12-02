@@ -12,7 +12,7 @@ Changed Get-VSTeamProject to return all projects by default instead of just the 
 $Global:PSDefaultParameterValues["*-vsteam*:top"] = 500
 ```
 
-Fixed issue #360 but updating the way DateTimes are tested.
+Fixed issue #360 by updating the way DateTimes are tested.
 
 ## 7.1.1
 
