@@ -10,7 +10,7 @@ function Clear-VSTeamDefaultProject {
    begin {
       if (_isOnWindows) {
          # Bind the parameter to a friendly variable
-         $Level = $PSBoundParameters[$ParameterName]
+         $Level = $PSBoundParameters['Level']
       }
    }
 

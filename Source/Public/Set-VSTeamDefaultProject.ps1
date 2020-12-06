@@ -15,7 +15,7 @@ function Set-VSTeamDefaultProject {
 
    begin {
       if (_isOnWindows) {
-         $Level = $PSBoundParameters[$ParameterName]
+         $Level = $PSBoundParameters['Level']
       }
    }
 

@@ -13,7 +13,7 @@ function Set-VSTeamDefaultProjectCount {
 
    begin {
       if (_isOnWindows) {
-         $Level = $PSBoundParameters[$ParameterName]
+         $Level = $PSBoundParameters['Level']
       }
    }
 
