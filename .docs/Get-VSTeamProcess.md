@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The list of Process Templates can be filtered by name  (which may include Wildcard). You can also get a single Process Template by id
+The list of Process Templates can be filtered by name (which may include Wildcard). You can also get a single Process Template by id
 
 You must call Set-VSTeamAccount before calling this function.
 
@@ -45,7 +45,7 @@ names like "Custom Scrum", "Scrum for Contoso" will all be returned.
 ### Example 4
 
 ```powershell
-Get-VSTeamProcess  -ExpandProjects | where Projects -Contains "MyProject"
+Get-VSTeamProcess -ExpandProjects | where Projects -Contains "MyProject"
 
 Name  Enabled Default Description
 ----  ------- ------- -----------
