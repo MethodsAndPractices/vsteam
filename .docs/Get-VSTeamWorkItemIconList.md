@@ -11,8 +11,17 @@
 
 <!-- #include "./synopsis/Get-VSTeamWorkItemIconList.md" -->
 
-## PARAMETERS
+## EXAMPLES
 
+### Example 1
+
+```powershell
+Get-VSTeamWorkItemIconList
+```
+
+This command returns the id and url of all work item icons
+
+## PARAMETERS
 
 ## INPUTS
 
@@ -21,6 +30,7 @@
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
