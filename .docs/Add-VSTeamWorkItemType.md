@@ -17,7 +17,7 @@ Adds a new WorkItem type to a custom process template. Note that the built-in pr
 ### Example 1
 
 ```powershell
-Add-VSTeamWorkItemType  -ProcessTemplate Scrum5 -WorkItemType ChangeRequest  -Description "New WorkItem Type" -Color Red  -Icon icon_asterisk
+Add-VSTeamWorkItemType -ProcessTemplate Scrum5 -WorkItemType ChangeRequest -Description "New WorkItem Type" -Color Red -Icon icon_asterisk
 ```
 
 Modifies the custom process "Scrum5", creating a user-defined WorkItem type "ChangeRequest" with a red asterisk as its icon and some simple text in the description.
