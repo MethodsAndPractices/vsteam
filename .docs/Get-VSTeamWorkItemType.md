@@ -47,7 +47,6 @@ these are "Scrum", "Scrum2" and "Scrum4". The second command finds WorkItem type
 which match "pro*", (each process has a "Product Backlog item" WorkItem type) and the third command
 shows a table of type-name and the process-template which has that type.
 
-
 ## PARAMETERS
 
 ### -Expand
@@ -85,6 +84,7 @@ Parameter Sets: Process
 ```
 
 ### WorkItemType
+
 The WorkItem type whose details should be retrieved (wild cards are supported).
 
 ```yaml
@@ -104,8 +104,7 @@ Parameter Sets: ByType
 
 The JSON returned has empty named items i.e.
 "": "To Do"
-This causes issues with the ConvertFrom-Json CmdLet.  Therefore, all "": are replaced with "_end":
-
+This causes issues with the ConvertFrom-Json CmdLet. Therefore, all "": are replaced with "_end":
 
 ## RELATED LINKS
 
