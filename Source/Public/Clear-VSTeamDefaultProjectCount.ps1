@@ -1,4 +1,4 @@
-function Clear-VSTeamDefaultProject {
+function Clear-VSTeamDefaultProjectCount {
    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "")]
    [CmdletBinding()]
    param()
@@ -26,15 +26,12 @@ function Clear-VSTeamDefaultProject {
 
       # You always have to set at the process level or they will Not
       # be seen in your current session.
-      $env:TEAM_PROJECT = $null
+      $env:TEAM_PROJECTCOUNT = $null
 
       if (_isOnWindows) {
-         [System.Environment]::SetEnvironmentVariable("TEAM_PROJECT", $null, $Level)
+         [System.Environment]::SetEnvironmentVariable("TEAM_PROJECTCOUNT", $null, $Level)
       }
 
-      [vsteam_lib.Versions]::DefaultProject = ''
-      $Global:PSDefaultParameterValues.Remove("*-vsteam*:projectName")
-
-      Write-Output "Removed default project"
+      Write-Output "Default project count cleared"
    }
 }
