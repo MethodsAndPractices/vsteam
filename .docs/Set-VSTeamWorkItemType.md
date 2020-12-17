@@ -37,7 +37,7 @@ a blue parachute icon and update its description.
 
 ### -Color
 
-Changes the  icon color. The input value can be the name of a color name like "Red" or "Aqua" or
+Changes the icon color. The input value can be the name of a color name like "Red" or "Aqua" or
 a hex value for red, green and blue parts. Color names should tab complete.
 
 ```yaml
