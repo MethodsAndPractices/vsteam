@@ -11,7 +11,7 @@
 ## Description
 
 Takes a WorkItem type and if its customization field implies a custom or inherited type, simply returns it.
-If it is a (locked) system type, creates a inherted type based on it, and returns the new type, optionally expanding the layout, states, or behaviors.
+If it is a (locked) system type, creates a inherited type based on it, and returns the new type, optionally expanding the layout, states, or behaviors.
 
 ## PARAMETERS
 
