@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
 
@@ -7,7 +6,6 @@ namespace vsteam_lib
 {
    public sealed class ColorTransformToHexAttribute : ArgumentTransformationAttribute
    {
-      [ExcludeFromCodeCoverage]
       public override object Transform(EngineIntrinsics engineIntrinsics, object InputData)
       {
          try
