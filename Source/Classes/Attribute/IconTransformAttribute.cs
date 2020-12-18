@@ -1,33 +1,35 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Linq;
 using System.Management.Automation;
 using System.Text.RegularExpressions;
-using System.Linq;
+
 namespace vsteam_lib
 {
-   public class IconTransformAttribute : ArgumentTransformationAttribute {
-      [ExcludeFromCodeCoverage]
-      public override object Transform(EngineIntrinsics engineIntrinsics, object InputData) {
-          
-            string s = (InputData as string).ToLower();
-            if (! string.IsNullOrEmpty(s))
+   public sealed class IconTransformAttribute : ArgumentTransformationAttribute
+   {
+      public override object Transform(EngineIntrinsics engineIntrinsics, object InputData)
+      {
+         var s = (InputData as string)?.ToLower();
+
+         if (!string.IsNullOrEmpty(s))
+         {
+            var iconSomething = new Regex(@"^icon_\w+");
+
+            if (!iconSomething.IsMatch(s))
             {
-               Regex iconSomething = new Regex(@"^icon_\w+");
-               if (!iconSomething.IsMatch(s)) 
-               { 
-                  s = "icon_" + s;
-               }
-               var iconList = IconCache.GetCurrent(false);
-            
-               if (iconList.Count() > 1 && ! iconList.Contains(s) ) 
-               {
-                  throw (new ValidationMetadataException(s + " is not a valid icon name.") );
-               }
-               else
-               {
-                  return s;
-               }
+               s = $"icon_{s}";
             }
-            return InputData;
+
+            var iconList = IconCache.GetCurrent(false);
+
+            if (iconList.Count() > 1 && !iconList.Contains(s))
+            {
+               throw new ValidationMetadataException($"{s} is not a valid icon name.");
+            }
+
+            return s;
+         }
+
+         return InputData;
       }
    }
 }
