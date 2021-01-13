@@ -44,9 +44,16 @@ function Update-VSTeamPullRequest {
          if ($DisableAutoComplete.IsPresent) {
             $body = '{"autoCompleteSetBy": null}'
          }
-
+         
          if ($Status) {
-            $body = '{"status": "' + $Status + '"}'
+            if($Status -eq "completed")
+            {
+               $lastMergeSourceCommit = Get-VSTeamPullRequest -RepositoryId $RepositoryId | Where-Object {$_.pullRequestId -eq $PullRequestId} | Select-Object -ExpandProperty lastMergeSourceCommit | ConvertTo-Json
+               $body = '{"status": "' + $Status + '", "lastMergeSourceCommit": ' + $lastMergeSourceCommit + '}'
+            }
+            else{
+               $body = '{"status": "' + $Status + '"}'
+            }
          }
 
          # Call the REST API
