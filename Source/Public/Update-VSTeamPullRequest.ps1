@@ -44,7 +44,7 @@ function Update-VSTeamPullRequest {
          if ($DisableAutoComplete.IsPresent) {
             $body = '{"autoCompleteSetBy": null}'
          }
-         
+
          if ($Status) {
             if($Status -eq "completed")
             {
