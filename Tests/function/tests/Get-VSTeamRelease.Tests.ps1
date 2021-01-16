@@ -88,7 +88,7 @@ Describe 'VSTeamRelease' {
          $r | Get-Member | Select-Object -First 1 -ExpandProperty TypeName | Should -Be 'vsteam_lib.Release'
 
          Should -Invoke Invoke-RestMethod -Exactly -Scope It -Times 1 -ParameterFilter {
-            $Uri -eq "https://vsrm.dev.azure.com/test/VSTeamRelease/_apis/release/releases/?api-version=$(_getApiVersion Release)&artifactVersionId=101"
+            $Uri -eq "https://vsrm.dev.azure.com/test/VSTeamRelease/_apis/release/releases?api-version=$(_getApiVersion Release)&artifactVersionId=101"
          }
       }
    }

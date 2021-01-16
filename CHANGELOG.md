@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.2.2
+
+Merged [Pull Request](https://github.com/MethodsAndPractices/vsteam/pull/374) from [hkarthik7](https://github.com/hkarthik7) which includes the following:
+
+- Added a new parameter artifactVersionId to Get-VSTeamRelease cmdlet. This will help to return the release for passed artifact Id. For instance the release details of a build can be retrieved by passing build Id to the cmdlet.
+
+```powershell
+$buildId = Get-VSTeamBuild -Top 1
+Get-VSTeamRelease -artifactVersionId $buildId.Id
+```
+
 ## 7.1.2
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/366) from [Jhoneill](https://github.com/jhoneill) which included the following:
