@@ -1,0 +1,1 @@
+Sets the default project count to be used with other calls in the module. This is important if you have more than 100 projects.
