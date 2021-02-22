@@ -37,18 +37,37 @@ Install this module from the [PowerShell Gallery](https://www.powershellgallery.
 
 ## Building Module
 
-In an effort to reduce the module size this repository contains two scripts `Build-Module.ps1` and `Merge-File.ps1` that merges similar files into a single file. The files in the formats folder are merged into `vsteam.format.ps1xml`. The files in the classes folder are merged into `vsteam.classes.ps1`. The functions from the Private and Public folders are merged into `vsteam.functions.ps1`. Finally all the files in the types folder are merged into `vsteam.types.ps1xml`. The order of the files being merged can be controlled by the `_*.json` files in the repository.
+In an effort to reduce the module size this repository contains two scripts `Build-Module.ps1` and `Merge-File.ps1` that merges similar files into a single file. The files in the formats folder are merged into `vsteam.format.ps1xml`. The files in the classes folder are merged into `vsteam.classes.ps1`. The functions from the Private and Public folders are merged into `vsteam.functions.ps1`. Finally all the files in the types folder are merged into `vsteam.types.ps1xml`. The order of the files being merged can be controlled by the `config.json` files in the repository.
 
-The JSON files must be in the following format:
+The JSON config file must be in the following format:
 
 ```JSON
 {
-   "outputFile": "vsteam.functions.ps1",
-   "fileType": "functions",
-   "files": [
-      "./Private/*.ps1",
-      "./Public/*.ps1"
-   ]
+   "types" : {
+      "outputFile": "vsteam.types.ps1xml",
+      "path": "./Source/types/",
+      "fileType": "types",
+      "files": [
+         "*.ps1xml"
+      ]
+   },
+   "functions" : {
+      "outputFile": "vsteam.functions.ps1",
+      "path": "./Source/",
+      "fileType": "functions",
+      "files": [
+         "./Private/*.ps1",
+         "./Public/*.ps1"
+      ]
+   },
+   "formats": {
+      "outputFile": "vsteam.format.ps1xml",
+      "path": "./Source/formats/",
+      "fileType": "formats",
+      "files": [
+         "vsteam_lib.TaskGroup.TableView.ps1xml"
+      ]
+   }
 }
 ```
 
