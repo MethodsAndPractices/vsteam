@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1.4
+
+Combined all the build json files (_types.json, _formats.json and _functions.json) into a single file called config.json in the root folder.
+
 ## 7.1.3
 
 Merged [Pull Request](https://github.com/DarqueWarrior/vsteam/pull/350) from [Daniel Silva](https://github.com/DanielSSilva) which included the following:
