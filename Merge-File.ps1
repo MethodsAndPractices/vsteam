@@ -6,8 +6,31 @@ Combines all the files in the provided inputFile into a single file.
 .DESCRIPTION
 The input file must be a JSON file in the following format:
 {
-   output: "outputFileName.ps1",
-   files: ["file1.ps1", "file2.ps1"]
+   "types" : {
+      "outputFile": "vsteam.types.ps1xml",
+      "path": "./Source/types/",
+      "fileType": "types",
+      "files": [
+         "*.ps1xml"
+      ]
+   },
+   "functions" : {
+      "outputFile": "vsteam.functions.ps1",
+      "path": "./Source/",
+      "fileType": "functions",
+      "files": [
+         "./Private/*.ps1",
+         "./Public/*.ps1"
+      ]
+   },
+   "formats": {
+      "outputFile": "vsteam.format.ps1xml",
+      "path": "./Source/formats/",
+      "fileType": "formats",
+      "files": [
+         "vsteam_lib.TaskGroup.TableView.ps1xml"
+      ]
+   }
 }
 
 All the files are read and any using statements removed. All the
@@ -21,7 +44,7 @@ The JSON file to process.
 The destination folder.
 
 .EXAMPLE
-PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
+PS C:\> Merge-File -InputFile .\config.json
 
 #>
    [CmdletBinding()]
@@ -38,7 +61,44 @@ PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
    $fullPath = $(Resolve-Path $inputFile)
    Write-Verbose "Full Path: $fullPath"
 
-   $fileOrder = Get-Content $fullPath -Raw | ConvertFrom-Json
+   $config = Get-Content $fullPath -Raw | ConvertFrom-Json
+
+   # There maybe up to four sections, classes, formats, types and functions
+   if ($config.types) {
+      Merge-Section $config.types $fullPath $outputDir
+   }
+
+   if ($config.formats) {
+      Merge-Section $config.formats $fullPath $outputDir
+   }
+
+   if ($config.classes) {
+      Merge-Section $config.classes $fullPath $outputDir
+   }
+
+   if ($config.functions) {
+      Merge-Section $config.functions $fullPath $outputDir
+   }
+}
+
+function Merge-Section {
+   param (
+      [Parameter(Mandatory = $True, Position = 0)]
+      $fileOrder,
+
+      [Parameter(Mandatory = $True, Position = 1)]
+      [string]
+      $fullPath,
+
+      [Parameter(Mandatory = $True, Position = 2)]
+      [string]
+      $outputDir
+   )
+
+   if ($null -eq $fileOrder) {
+      return
+   }
+
    Write-Output "Processing: $($fileOrder.fileType) => $($fileOrder.outputFile)"
 
    $workingDir = Split-Path $fullPath
@@ -47,7 +107,7 @@ PS C:\> Merge-File -InputFile .\Source\Classes\classes.json
    $output = Join-Path $outputDir $fileOrder.outputFile
 
    Push-Location
-   Set-Location $workingDir
+   Set-Location $fileOrder.path
 
    try {
       $files = $()
@@ -163,7 +223,7 @@ function Merge-Function {
 
          $foundCmdletBinding = $false
 
-         if($null -ne $($fileContents | Select-String -Pattern 'CmdletBinding')){
+         if ($null -ne $($fileContents | Select-String -Pattern 'CmdletBinding')) {
             $foundCmdletBinding = $true
          }
 
@@ -178,7 +238,7 @@ function Merge-Function {
             }
          }
 
-         if(-not $foundCmdletBinding) {
+         if (-not $foundCmdletBinding) {
             Write-Warning -Message "CmdletBinding not found in $file"
          }
       }

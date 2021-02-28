@@ -9,7 +9,7 @@ resources:
 variables:
   Folder: 'dist'
   TEAM_CIBUILD: 'true'
-  PESTER_VERSION: '5.0.2'
+  PESTER_VERSION: '5.1.1'
 
 stages:
 - stage: Build
