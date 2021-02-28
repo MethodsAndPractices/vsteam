@@ -28,7 +28,7 @@
             <GetScriptBlock>$this.fields.PSObject.Properties['System.AssignedTo'].Value</GetScriptBlock>
          </ScriptProperty>
          <ScriptProperty>
-            <Name>vsteam_lib.roject</Name>
+            <Name>TeamProject</Name>
             <GetScriptBlock>$this.fields.PSObject.Properties['System.TeamProject'].Value</GetScriptBlock>
          </ScriptProperty>
          <ScriptProperty>
